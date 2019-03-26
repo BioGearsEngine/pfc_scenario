@@ -31,7 +31,7 @@ endif()
 
 set(Boost_USE_STATIC_LIBS  OFF)
 find_package(Boost COMPONENTS system thread program_options signals log REQUIRED)
-find_package(Qt5Widgets CONFIG REQUIRED)
+find_package(Qt5 COMPONENTS Core Widgets Sql REQUIRED)
 ###############################################################################
 # Step 2: Project Includes are generally order dependent.  So manually maintain
 #         this list

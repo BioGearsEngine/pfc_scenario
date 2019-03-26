@@ -6,8 +6,10 @@ cmake_policy(VERSION 3.12.0)
 ###############################################################################
 # Options
 ###############################################################################
-option(${ROOT_PROJECT_NAME}_BUILD_NETWORKING "Toggle building of cmd_bio tools" ON)
-if(${ROOT_PROJECT_NAME}_BUILD_NETWORKING)
+option(${ROOT_PROJECT_NAME}_BUILD_SCENARIO_BUILDER "Toggle building of cmd_bio tools" ON)
+if(${ROOT_PROJECT_NAME}_BUILD_SCENARIO_BUILDER)
+ set(CMAKE_AUTOMOC ON)
+ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 ###############################################################################
 # Base Variables
 ###############################################################################
@@ -22,7 +24,7 @@ set(${PREFIX}_UNIT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/unit" PARENT_SCOPE)
 ###############################################################################
 # Requirments
 ###############################################################################
-find_package(nanomsg REQUIRED)
+
 ###############################################################################
 #Code Generation
 ###############################################################################
@@ -60,6 +62,8 @@ if (${PREFIX}_BUILD_STATIC)
 endif()
 
 add_executable(${PROJECT_NAME} ${${PREFIX}_SOURCES} ${${PREFIX}_HEADERS})
+qt5_use_modules(${PROJECT_NAME} Widgets Sql)
+
 set_target_properties(${PROJECT_NAME}
   PROPERTIES
   DEFINE_SYMBOL "SUSTAIN_FRAMEWORK_EXPORTS"
@@ -89,7 +93,6 @@ list(REMOVE_DUPLICATES ${PREFIX}_INCLUDES)
 set(${PREFIX}_LIBS
       ${CMAKE_THREAD_LIBS_INIT}
       ${CMAKE_DL_LIBS}
-      Qt5::Widgets
 )
 
 set(${PREFIX}_LIBS ${${PREFIX}_LIBS} PARENT_SCOPE)
