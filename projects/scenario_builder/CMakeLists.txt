@@ -89,11 +89,7 @@ list(REMOVE_DUPLICATES ${PREFIX}_INCLUDES)
 set(${PREFIX}_LIBS
       ${CMAKE_THREAD_LIBS_INIT}
       ${CMAKE_DL_LIBS}
-	  nanomsg
-	  Boost::disable_autolinking
-	  Boost::dynamic_linking
-	  Boost::system
-	  Boost::thread
+      Qt5::Widgets
 )
 
 set(${PREFIX}_LIBS ${${PREFIX}_LIBS} PARENT_SCOPE)
