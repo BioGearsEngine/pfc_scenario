@@ -30,8 +30,6 @@ set(${PREFIX}_UNIT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/unit" PARENT_SCOPE)
 ###############################################################################
 
 ###############################################################################
-#Sorce and Header Defines
-###############################################################################
 message(STATUS "")
 message(STATUS "Configuring ${PROJECT_NAME}")
 
@@ -41,10 +39,14 @@ add_source_files(HDRS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp
                  REGEX "*.h" "*.hpp" SOURCE_GROUP  "Headers\\Private")
 add_source_files(SRCS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp 
                 REGEX "*.c" "*.cpp" SOURCE_GROUP  "Sources")
-
+add_source_files(RESOURCES LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/qml 
+                REGEX "*.qrc" SOURCE_GROUP  "Resources")
 
 set(${PREFIX}_HEADERS ${HDRS} ${PUBLIC_HDRS} ${GEN_HDRS})
 set(${PREFIX}_SOURCES ${SRCS} ${GEN_SRCS})
+# add the qml.qrc file
+qt5_add_resources(qml_QRC ${RESOURCES})
+
 ###############################################################################
 #Define Logic
 ###############################################################################
@@ -61,8 +63,9 @@ if (${PREFIX}_BUILD_STATIC)
   add_definitions("-D${PREFIX}_BUILT_AS_STATIC")
 endif()
 
-add_executable(${PROJECT_NAME} ${${PREFIX}_SOURCES} ${${PREFIX}_HEADERS})
-qt5_use_modules(${PROJECT_NAME} Widgets Sql)
+
+add_executable(${PROJECT_NAME} ${${PREFIX}_SOURCES} ${${PREFIX}_HEADERS} ${qml_QRC})
+qt5_use_modules(${PROJECT_NAME} Widgets Quick Sql)
 
 set_target_properties(${PROJECT_NAME}
   PROPERTIES
@@ -75,9 +78,36 @@ set_target_properties(${PROJECT_NAME}
   CXX_STANDARD 14
   VS_DEBUGGER_WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
   )
-  target_compile_definitions(${PROJECT_NAME} PRIVATE ${${PREFIX}_CPPFLAGS} 	 )
-  target_compile_definitions(${PROJECT_NAME} PRIVATE $<$<PLATFORM_ID:Windows>:BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE> )
-  target_compile_options(${PROJECT_NAME} PRIVATE $<$<PLATFORM_ID:Windows>:/bigobj>  PRIVATE $<$<PLATFORM_ID:Windows>:/MP>)
+target_compile_definitions(${PROJECT_NAME} PRIVATE ${${PREFIX}_CPPFLAGS} 	 )
+target_compile_definitions(${PROJECT_NAME} PRIVATE $<$<PLATFORM_ID:Windows>:BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE> )
+target_compile_options(${PROJECT_NAME} PRIVATE $<$<PLATFORM_ID:Windows>:/bigobj>  PRIVATE $<$<PLATFORM_ID:Windows>:/MP>)
+
+###############################################################################
+# COMPILATION & LINKAGE MODIFICATIONS
+###############################################################################
+
+list(APPEND ${PREFIX}_INCLUDES
+      PUBLIC ${${PREFIX}_INCLUDE_DIR}
+      PRIVATE ${${PREFIX}_PRIVATE_INCLUDE_DIR}
+      PUBLIC ${${PREFIX}_GENERATED_INCLUDE_DIR}
+)
+list(REMOVE_DUPLICATES ${PREFIX}_INCLUDES)
+
+
+set(${PREFIX}_LIBS
+      ${CMAKE_THREAD_LIBS_INIT}
+      ${CMAKE_DL_LIBS}
+)
+
+set(${PREFIX}_LIBS ${${PREFIX}_LIBS} PARENT_SCOPE)
+target_link_libraries(${PROJECT_NAME}  ${${PREFIX}_LIBS} )
+target_include_directories( ${PROJECT_NAME} ${${PREFIX}_INCLUDES} )
+
+
+if(CMAKE_COMPILER_IS_GNUCXX)
+    set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS ${${PREFIX}_LDFLAGS})
+endif()
+
 ###############################################################################
 # COMPILATION & LINKAGE MODIFICATIONS
 ###############################################################################
@@ -110,5 +140,10 @@ endif()
      ARCHIVE DESTINATION lib
   )
 
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E echo "Generating Runtime")
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_PREFIX_PATH}\\bin $<TARGET_FILE_DIR:${PROJECT_NAME}>)
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_PREFIX_PATH}\\plugins $<TARGET_FILE_DIR:${PROJECT_NAME}>)
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_PREFIX_PATH}\\qml $<TARGET_FILE_DIR:${PROJECT_NAME}>)
+################################################################################
 message(STATUS "")
 endif()
