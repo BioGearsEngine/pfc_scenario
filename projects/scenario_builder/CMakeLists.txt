@@ -69,7 +69,7 @@ endif()
 
 
 add_executable(${PROJECT_NAME} ${${PREFIX}_SOURCES} ${${PREFIX}_HEADERS} ${qml_QRC})
-qt5_use_modules(${PROJECT_NAME} Core Widgets Gui Sql Quick Qml)
+qt5_use_modules(${PROJECT_NAME} Core Widgets Gui Sql Quick QuickControls2 Qml)
 
 set_target_properties(${PROJECT_NAME}
   PROPERTIES
