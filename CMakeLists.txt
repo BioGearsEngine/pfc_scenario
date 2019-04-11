@@ -37,6 +37,9 @@ include(cmake/UseGit.cmake)
 ###############################################################################
 create_cache_file()
 create_stage()
+add_custom_command(TARGET STAGE POST_BUILD COMMAND ${CMAKE_COMMAND} -E echo "Generating Runtime")
+add_custom_command(TARGET STAGE POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_PREFIX_PATH}\\plugins $<TARGET_FILE_DIR:scenario_builder>)
+add_custom_command(TARGET STAGE POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_PREFIX_PATH}\\qml $<TARGET_FILE_DIR:scenario_builder>)
 ###############################################################################
 # Step 3:
 # Infrastructure Installation for each library

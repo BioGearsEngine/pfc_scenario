@@ -10,6 +10,8 @@ option(${ROOT_PROJECT_NAME}_BUILD_SCENARIO_BUILDER "Toggle building of cmd_bio t
 if(${ROOT_PROJECT_NAME}_BUILD_SCENARIO_BUILDER)
  set(CMAKE_AUTOMOC ON)
  set(CMAKE_INCLUDE_CURRENT_DIR ON)
+ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+set_property(GLOBAL PROPERTY AUTOGEN_TARGETS_FOLDER AutoMoc)
 ###############################################################################
 # Base Variables
 ###############################################################################
@@ -38,12 +40,14 @@ message(STATUS "Configuring ${PROJECT_NAME}")
 add_source_files(HDRS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp 
                  REGEX "*.h" "*.hpp" SOURCE_GROUP  "Headers\\Private")
 add_source_files(SRCS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp 
-                REGEX "*.c" "*.cpp" SOURCE_GROUP  "Sources")
+                REGEX "*.c" "*.cpp" SOURCE_GROUP  "Source Files")
 add_source_files(RESOURCES LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/qml 
-                REGEX "*.qrc" SOURCE_GROUP  "Resources")
+                REGEX "*.qrc"  SOURCE_GROUP  "Resources")
+add_source_files(QML_FILES LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/qml 
+        REGEX "*.qml" SOURCE_GROUP  "Resources")
 
 set(${PREFIX}_HEADERS ${HDRS} ${PUBLIC_HDRS} ${GEN_HDRS})
-set(${PREFIX}_SOURCES ${SRCS} ${GEN_SRCS})
+set(${PREFIX}_SOURCES ${SRCS} ${GEN_SRCS} ${QML_FILES})
 # add the qml.qrc file
 qt5_add_resources(qml_QRC ${RESOURCES})
 
@@ -65,7 +69,7 @@ endif()
 
 
 add_executable(${PROJECT_NAME} ${${PREFIX}_SOURCES} ${${PREFIX}_HEADERS} ${qml_QRC})
-qt5_use_modules(${PROJECT_NAME} Widgets Quick Sql)
+qt5_use_modules(${PROJECT_NAME} Core Widgets Gui Sql Quick Qml)
 
 set_target_properties(${PROJECT_NAME}
   PROPERTIES
@@ -78,6 +82,7 @@ set_target_properties(${PROJECT_NAME}
   CXX_STANDARD 14
   VS_DEBUGGER_WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
   )
+  
 target_compile_definitions(${PROJECT_NAME} PRIVATE ${${PREFIX}_CPPFLAGS} 	 )
 target_compile_definitions(${PROJECT_NAME} PRIVATE $<$<PLATFORM_ID:Windows>:BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE> )
 target_compile_options(${PROJECT_NAME} PRIVATE $<$<PLATFORM_ID:Windows>:/bigobj>  PRIVATE $<$<PLATFORM_ID:Windows>:/MP>)
@@ -140,10 +145,7 @@ endif()
      ARCHIVE DESTINATION lib
   )
 
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E echo "Generating Runtime")
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_PREFIX_PATH}\\bin $<TARGET_FILE_DIR:${PROJECT_NAME}>)
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_PREFIX_PATH}\\plugins $<TARGET_FILE_DIR:${PROJECT_NAME}>)
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_PREFIX_PATH}\\qml $<TARGET_FILE_DIR:${PROJECT_NAME}>)
+
 ################################################################################
 message(STATUS "")
 endif()
