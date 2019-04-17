@@ -1,0 +1,4 @@
+
+Page {
+  property var stack
+}

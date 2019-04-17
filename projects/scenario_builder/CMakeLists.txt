@@ -11,7 +11,7 @@ if(${ROOT_PROJECT_NAME}_BUILD_SCENARIO_BUILDER)
  set(CMAKE_AUTOMOC ON)
  set(CMAKE_INCLUDE_CURRENT_DIR ON)
  set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-set_property(GLOBAL PROPERTY AUTOGEN_TARGETS_FOLDER AutoMoc)
+ set_property(GLOBAL PROPERTY AUTOGEN_TARGETS_FOLDER AutoMoc)
 ###############################################################################
 # Base Variables
 ###############################################################################
@@ -26,7 +26,7 @@ set(${PREFIX}_UNIT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/unit" PARENT_SCOPE)
 ###############################################################################
 # Requirments
 ###############################################################################
-
+find_package(Xerces-c REQUIRED)
 ###############################################################################
 #Code Generation
 ###############################################################################
@@ -41,6 +41,10 @@ add_source_files(HDRS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp
                  REGEX "*.h" "*.hpp" SOURCE_GROUP  "Headers\\Private")
 add_source_files(SRCS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp 
                 REGEX "*.c" "*.cpp" SOURCE_GROUP  "Source Files")
+add_source_files(HDRS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/xsd/cpp 
+                REGEX "*.hxx" SOURCE_GROUP  "Headers\\Private\\xsd")
+add_source_files(SRCS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/xsd/cpp 
+                REGEX "*.cxx" SOURCE_GROUP  "Source Files\\xsd")
 add_source_files(RESOURCES LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/qml 
                 REGEX "*.qrc"  SOURCE_GROUP  "Resources")
 add_source_files(QML_FILES LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/qml 
@@ -128,6 +132,7 @@ list(REMOVE_DUPLICATES ${PREFIX}_INCLUDES)
 set(${PREFIX}_LIBS
       ${CMAKE_THREAD_LIBS_INIT}
       ${CMAKE_DL_LIBS}
+	  Xerces::xerces
 )
 
 set(${PREFIX}_LIBS ${${PREFIX}_LIBS} PARENT_SCOPE)
