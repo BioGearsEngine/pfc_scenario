@@ -34,6 +34,10 @@
 #ifndef EXTERN_MODEL_ID_V2006_FINAL_HXX
 #define EXTERN_MODEL_ID_V2006_FINAL_HXX
 
+#ifndef XSD_CXX11
+#define XSD_CXX11
+#endif
+
 #ifndef XSD_USE_CHAR
 #define XSD_USE_CHAR
 #endif
@@ -239,7 +243,7 @@ namespace xml_schema
   {
     // Automatic pointer for DOMDocument.
     //
-    using ::xsd::cxx::xml::dom::auto_ptr;
+    using ::xsd::cxx::xml::dom::unique_ptr;
 
 #ifndef XSD_CXX_TREE_TREE_NODE_KEY__XML_SCHEMA
 #define XSD_CXX_TREE_TREE_NODE_KEY__XML_SCHEMA
@@ -290,9 +294,10 @@ namespace schemas
 }
 
 
-#include <memory>    // ::std::auto_ptr
+#include <memory>    // ::std::unique_ptr
 #include <limits>    // std::numeric_limits
 #include <algorithm> // std::binary_search
+#include <utility>   // std::move
 
 #include <xsd/cxx/xml/char-utf8.hxx>
 
@@ -329,7 +334,7 @@ namespace schemas
       notes (const notes_optional& x);
 
       void
-      notes (::std::auto_ptr< notes_type > p);
+      notes (::std::unique_ptr< notes_type > p);
 
       // idtag
       //
@@ -350,7 +355,7 @@ namespace schemas
       idtag (const idtag_optional& x);
 
       void
-      idtag (::std::auto_ptr< idtag_type > p);
+      idtag (::std::unique_ptr< idtag_type > p);
 
       // Constructors.
       //
@@ -421,7 +426,7 @@ namespace schemas
       notes (const notes_optional& x);
 
       void
-      notes (::std::auto_ptr< notes_type > p);
+      notes (::std::unique_ptr< notes_type > p);
 
       // idtag
       //
@@ -442,10 +447,12 @@ namespace schemas
       idtag (const idtag_optional& x);
 
       void
-      idtag (::std::auto_ptr< idtag_type > p);
+      idtag (::std::unique_ptr< idtag_type > p);
 
       // Constructors.
       //
+      IdentifierType ();
+
       IdentifierType (const char*);
 
       IdentifierType (const ::std::string&);
@@ -549,7 +556,7 @@ namespace schemas
       notes (const notes_optional& x);
 
       void
-      notes (::std::auto_ptr< notes_type > p);
+      notes (::std::unique_ptr< notes_type > p);
 
       // idtag
       //
@@ -570,7 +577,7 @@ namespace schemas
       idtag (const idtag_optional& x);
 
       void
-      idtag (::std::auto_ptr< idtag_type > p);
+      idtag (::std::unique_ptr< idtag_type > p);
 
       // Constructors.
       //
@@ -629,6 +636,8 @@ namespace schemas
         BOM
       };
 
+      OMTypeEnumerations ();
+
       OMTypeEnumerations (value v);
 
       OMTypeEnumerations (const char* v);
@@ -680,6 +689,8 @@ namespace schemas
     {
       public:
 
+      OMTypeUnion ();
+
       OMTypeUnion (const char* v);
 
       OMTypeUnion (const ::std::string& v);
@@ -717,6 +728,8 @@ namespace schemas
         PNG,
         TIFF
       };
+
+      glyphTypeEnumerations ();
 
       glyphTypeEnumerations (value v);
 
@@ -769,6 +782,8 @@ namespace schemas
     {
       public:
 
+      glyphTypeUnion ();
+
       glyphTypeUnion (const char* v);
 
       glyphTypeUnion (const ::std::string& v);
@@ -817,7 +832,7 @@ namespace schemas
       notes (const notes_optional& x);
 
       void
-      notes (::std::auto_ptr< notes_type > p);
+      notes (::std::unique_ptr< notes_type > p);
 
       // idtag
       //
@@ -838,7 +853,7 @@ namespace schemas
       idtag (const idtag_optional& x);
 
       void
-      idtag (::std::auto_ptr< idtag_type > p);
+      idtag (::std::unique_ptr< idtag_type > p);
 
       // type
       //
@@ -855,7 +870,7 @@ namespace schemas
       type (const type_type& x);
 
       void
-      type (::std::auto_ptr< type_type > p);
+      type (::std::unique_ptr< type_type > p);
 
       // height
       //
@@ -912,10 +927,12 @@ namespace schemas
       alt (const alt_optional& x);
 
       void
-      alt (::std::auto_ptr< alt_type > p);
+      alt (::std::unique_ptr< alt_type > p);
 
       // Constructors.
       //
+      glyphType ();
+
       glyphType (const type_type&);
 
       glyphType (const ::xml_schema::base64_binary&,
@@ -980,7 +997,7 @@ namespace schemas
       pocType1 (const pocType1_type& x);
 
       void
-      pocType1 (::std::auto_ptr< pocType1_type > p);
+      pocType1 (::std::unique_ptr< pocType1_type > p);
 
       // pocName
       //
@@ -1001,7 +1018,7 @@ namespace schemas
       pocName (const pocName_optional& x);
 
       void
-      pocName (::std::auto_ptr< pocName_type > p);
+      pocName (::std::unique_ptr< pocName_type > p);
 
       // pocOrg
       //
@@ -1022,7 +1039,7 @@ namespace schemas
       pocOrg (const pocOrg_optional& x);
 
       void
-      pocOrg (::std::auto_ptr< pocOrg_type > p);
+      pocOrg (::std::unique_ptr< pocOrg_type > p);
 
       // pocTelephone
       //
@@ -1060,9 +1077,11 @@ namespace schemas
 
       // Constructors.
       //
+      pocType ();
+
       pocType (const pocType1_type&);
 
-      pocType (::std::auto_ptr< pocType1_type >);
+      pocType (::std::unique_ptr< pocType1_type >);
 
       pocType (const ::xercesc::DOMElement& e,
                ::xml_schema::flags f = 0,
@@ -1115,6 +1134,8 @@ namespace schemas
         Top_Secret
       };
 
+      SecurityClassificationEnumeration ();
+
       SecurityClassificationEnumeration (value v);
 
       SecurityClassificationEnumeration (const char* v);
@@ -1166,6 +1187,8 @@ namespace schemas
     {
       public:
 
+      SecurityClassificationUnion ();
+
       SecurityClassificationUnion (const char* v);
 
       SecurityClassificationUnion (const ::std::string& v);
@@ -1214,7 +1237,7 @@ namespace schemas
       notes (const notes_optional& x);
 
       void
-      notes (::std::auto_ptr< notes_type > p);
+      notes (::std::unique_ptr< notes_type > p);
 
       // idtag
       //
@@ -1235,10 +1258,12 @@ namespace schemas
       idtag (const idtag_optional& x);
 
       void
-      idtag (::std::auto_ptr< idtag_type > p);
+      idtag (::std::unique_ptr< idtag_type > p);
 
       // Constructors.
       //
+      modelType ();
+
       modelType (const char*);
 
       modelType (const ::std::string&);
@@ -1304,7 +1329,7 @@ namespace schemas
       notes (const notes_optional& x);
 
       void
-      notes (::std::auto_ptr< notes_type > p);
+      notes (::std::unique_ptr< notes_type > p);
 
       // idtag
       //
@@ -1325,10 +1350,12 @@ namespace schemas
       idtag (const idtag_optional& x);
 
       void
-      idtag (::std::auto_ptr< idtag_type > p);
+      idtag (::std::unique_ptr< idtag_type > p);
 
       // Constructors.
       //
+      securityClassificationType ();
+
       securityClassificationType (const char*);
 
       securityClassificationType (const ::std::string&);
@@ -1384,6 +1411,8 @@ namespace schemas
         Acquisition
       };
 
+      ApplicationDomainEnumerations ();
+
       ApplicationDomainEnumerations (value v);
 
       ApplicationDomainEnumerations (const char* v);
@@ -1435,6 +1464,8 @@ namespace schemas
     {
       public:
 
+      ApplicationDomainUnion ();
+
       ApplicationDomainUnion (const char* v);
 
       ApplicationDomainUnion (const ::std::string& v);
@@ -1483,7 +1514,7 @@ namespace schemas
       notes (const notes_optional& x);
 
       void
-      notes (::std::auto_ptr< notes_type > p);
+      notes (::std::unique_ptr< notes_type > p);
 
       // idtag
       //
@@ -1504,10 +1535,12 @@ namespace schemas
       idtag (const idtag_optional& x);
 
       void
-      idtag (::std::auto_ptr< idtag_type > p);
+      idtag (::std::unique_ptr< idtag_type > p);
 
       // Constructors.
       //
+      applicationDomainType ();
+
       applicationDomainType (const char*);
 
       applicationDomainType (const ::std::string&);
@@ -1564,6 +1597,8 @@ namespace schemas
         Technical_POC
       };
 
+      POCTypeEnumeration ();
+
       POCTypeEnumeration (value v);
 
       POCTypeEnumeration (const char* v);
@@ -1615,6 +1650,8 @@ namespace schemas
     {
       public:
 
+      POCTypeUnion ();
+
       POCTypeUnion (const char* v);
 
       POCTypeUnion (const ::std::string& v);
@@ -1663,7 +1700,7 @@ namespace schemas
       notes (const notes_optional& x);
 
       void
-      notes (::std::auto_ptr< notes_type > p);
+      notes (::std::unique_ptr< notes_type > p);
 
       // idtag
       //
@@ -1684,10 +1721,12 @@ namespace schemas
       idtag (const idtag_optional& x);
 
       void
-      idtag (::std::auto_ptr< idtag_type > p);
+      idtag (::std::unique_ptr< idtag_type > p);
 
       // Constructors.
       //
+      pocTypeType ();
+
       pocTypeType (const char*);
 
       pocTypeType (const ::std::string&);
@@ -1741,6 +1780,8 @@ namespace schemas
         Related_BOM
       };
 
+      referenceTypeEnumerations ();
+
       referenceTypeEnumerations (value v);
 
       referenceTypeEnumerations (const char* v);
@@ -1792,6 +1833,8 @@ namespace schemas
     {
       public:
 
+      referenceTypeUnion ();
+
       referenceTypeUnion (const char* v);
 
       referenceTypeUnion (const ::std::string& v);
@@ -1836,7 +1879,7 @@ namespace schemas
       type (const type_type& x);
 
       void
-      type (::std::auto_ptr< type_type > p);
+      type (::std::unique_ptr< type_type > p);
 
       // identification
       //
@@ -1853,7 +1896,7 @@ namespace schemas
       identification (const identification_type& x);
 
       void
-      identification (::std::auto_ptr< identification_type > p);
+      identification (::std::unique_ptr< identification_type > p);
 
       // notes
       //
@@ -1874,7 +1917,7 @@ namespace schemas
       notes (const notes_optional& x);
 
       void
-      notes (::std::auto_ptr< notes_type > p);
+      notes (::std::unique_ptr< notes_type > p);
 
       // idtag
       //
@@ -1895,15 +1938,17 @@ namespace schemas
       idtag (const idtag_optional& x);
 
       void
-      idtag (::std::auto_ptr< idtag_type > p);
+      idtag (::std::unique_ptr< idtag_type > p);
 
       // Constructors.
       //
+      referenceType ();
+
       referenceType (const type_type&,
                      const identification_type&);
 
-      referenceType (::std::auto_ptr< type_type >,
-                     ::std::auto_ptr< identification_type >);
+      referenceType (::std::unique_ptr< type_type >,
+                     ::std::unique_ptr< identification_type >);
 
       referenceType (const ::xercesc::DOMElement& e,
                      ::xml_schema::flags f = 0,
@@ -1966,7 +2011,7 @@ namespace schemas
       taxonomy (const taxonomy_optional& x);
 
       void
-      taxonomy (::std::auto_ptr< taxonomy_type > p);
+      taxonomy (::std::unique_ptr< taxonomy_type > p);
 
       // keywordValue
       //
@@ -1983,7 +2028,7 @@ namespace schemas
       keywordValue (const keywordValue_type& x);
 
       void
-      keywordValue (::std::auto_ptr< keywordValue_type > p);
+      keywordValue (::std::unique_ptr< keywordValue_type > p);
 
       // notes
       //
@@ -2004,7 +2049,7 @@ namespace schemas
       notes (const notes_optional& x);
 
       void
-      notes (::std::auto_ptr< notes_type > p);
+      notes (::std::unique_ptr< notes_type > p);
 
       // idtag
       //
@@ -2025,13 +2070,15 @@ namespace schemas
       idtag (const idtag_optional& x);
 
       void
-      idtag (::std::auto_ptr< idtag_type > p);
+      idtag (::std::unique_ptr< idtag_type > p);
 
       // Constructors.
       //
+      keywordType ();
+
       keywordType (const keywordValue_type&);
 
-      keywordType (::std::auto_ptr< keywordValue_type >);
+      keywordType (::std::unique_ptr< keywordValue_type >);
 
       keywordType (const ::xercesc::DOMElement& e,
                    ::xml_schema::flags f = 0,
@@ -2090,7 +2137,7 @@ namespace schemas
       name (const name_type& x);
 
       void
-      name (::std::auto_ptr< name_type > p);
+      name (::std::unique_ptr< name_type > p);
 
       // type
       //
@@ -2107,7 +2154,7 @@ namespace schemas
       type (const type_type& x);
 
       void
-      type (::std::auto_ptr< type_type > p);
+      type (::std::unique_ptr< type_type > p);
 
       // version
       //
@@ -2124,7 +2171,7 @@ namespace schemas
       version (const version_type& x);
 
       void
-      version (::std::auto_ptr< version_type > p);
+      version (::std::unique_ptr< version_type > p);
 
       // modificationDate
       //
@@ -2141,7 +2188,7 @@ namespace schemas
       modificationDate (const modificationDate_type& x);
 
       void
-      modificationDate (::std::auto_ptr< modificationDate_type > p);
+      modificationDate (::std::unique_ptr< modificationDate_type > p);
 
       // securityClassification
       //
@@ -2158,7 +2205,7 @@ namespace schemas
       securityClassification (const securityClassification_type& x);
 
       void
-      securityClassification (::std::auto_ptr< securityClassification_type > p);
+      securityClassification (::std::unique_ptr< securityClassification_type > p);
 
       // releaseRestriction
       //
@@ -2196,7 +2243,7 @@ namespace schemas
       purpose (const purpose_optional& x);
 
       void
-      purpose (::std::auto_ptr< purpose_type > p);
+      purpose (::std::unique_ptr< purpose_type > p);
 
       // applicationDomain
       //
@@ -2217,7 +2264,7 @@ namespace schemas
       applicationDomain (const applicationDomain_optional& x);
 
       void
-      applicationDomain (::std::auto_ptr< applicationDomain_type > p);
+      applicationDomain (::std::unique_ptr< applicationDomain_type > p);
 
       // description
       //
@@ -2234,7 +2281,7 @@ namespace schemas
       description (const description_type& x);
 
       void
-      description (::std::auto_ptr< description_type > p);
+      description (::std::unique_ptr< description_type > p);
 
       // useLimitation
       //
@@ -2255,7 +2302,7 @@ namespace schemas
       useLimitation (const useLimitation_optional& x);
 
       void
-      useLimitation (::std::auto_ptr< useLimitation_type > p);
+      useLimitation (::std::unique_ptr< useLimitation_type > p);
 
       // useHistory
       //
@@ -2344,7 +2391,7 @@ namespace schemas
       other (const other_optional& x);
 
       void
-      other (::std::auto_ptr< other_type > p);
+      other (::std::unique_ptr< other_type > p);
 
       // glyph
       //
@@ -2365,7 +2412,7 @@ namespace schemas
       glyph (const glyph_optional& x);
 
       void
-      glyph (::std::auto_ptr< glyph_type > p);
+      glyph (::std::unique_ptr< glyph_type > p);
 
       // notes
       //
@@ -2386,7 +2433,7 @@ namespace schemas
       notes (const notes_optional& x);
 
       void
-      notes (::std::auto_ptr< notes_type > p);
+      notes (::std::unique_ptr< notes_type > p);
 
       // idtag
       //
@@ -2407,10 +2454,12 @@ namespace schemas
       idtag (const idtag_optional& x);
 
       void
-      idtag (::std::auto_ptr< idtag_type > p);
+      idtag (::std::unique_ptr< idtag_type > p);
 
       // Constructors.
       //
+      modelIdentificationType ();
+
       modelIdentificationType (const name_type&,
                                const type_type&,
                                const version_type&,
@@ -2418,12 +2467,12 @@ namespace schemas
                                const securityClassification_type&,
                                const description_type&);
 
-      modelIdentificationType (::std::auto_ptr< name_type >,
-                               ::std::auto_ptr< type_type >,
-                               ::std::auto_ptr< version_type >,
-                               ::std::auto_ptr< modificationDate_type >,
-                               ::std::auto_ptr< securityClassification_type >,
-                               ::std::auto_ptr< description_type >);
+      modelIdentificationType (::std::unique_ptr< name_type >,
+                               ::std::unique_ptr< type_type >,
+                               ::std::unique_ptr< version_type >,
+                               ::std::unique_ptr< modificationDate_type >,
+                               ::std::unique_ptr< securityClassification_type >,
+                               ::std::unique_ptr< description_type >);
 
       modelIdentificationType (const ::xercesc::DOMElement& e,
                                ::xml_schema::flags f = 0,
@@ -2500,7 +2549,7 @@ namespace schemas
       notes (const notes_optional& x);
 
       void
-      notes (::std::auto_ptr< notes_type > p);
+      notes (::std::unique_ptr< notes_type > p);
 
       // idtag
       //
@@ -2521,10 +2570,12 @@ namespace schemas
       idtag (const idtag_optional& x);
 
       void
-      idtag (::std::auto_ptr< idtag_type > p);
+      idtag (::std::unique_ptr< idtag_type > p);
 
       // Constructors.
       //
+      type ();
+
       type (const char*);
 
       type (const ::std::string&);
@@ -2590,7 +2641,7 @@ namespace schemas
       notes (const notes_optional& x);
 
       void
-      notes (::std::auto_ptr< notes_type > p);
+      notes (::std::unique_ptr< notes_type > p);
 
       // idtag
       //
@@ -2611,10 +2662,12 @@ namespace schemas
       idtag (const idtag_optional& x);
 
       void
-      idtag (::std::auto_ptr< idtag_type > p);
+      idtag (::std::unique_ptr< idtag_type > p);
 
       // Constructors.
       //
+      identification ();
+
       identification (const ::xml_schema::uri&);
 
       identification (const ::xercesc::DOMElement& e,
@@ -2676,7 +2729,7 @@ namespace schemas
       notes (const notes_optional& x);
 
       void
-      notes (::std::auto_ptr< notes_type > p);
+      notes (::std::unique_ptr< notes_type > p);
 
       // idtag
       //
@@ -2697,10 +2750,12 @@ namespace schemas
       idtag (const idtag_optional& x);
 
       void
-      idtag (::std::auto_ptr< idtag_type > p);
+      idtag (::std::unique_ptr< idtag_type > p);
 
       // Constructors.
       //
+      modificationDate ();
+
       modificationDate (const ::xml_schema::date&);
 
       modificationDate (const ::xercesc::DOMElement& e,
@@ -2762,7 +2817,7 @@ namespace schemas
       notes (const notes_optional& x);
 
       void
-      notes (::std::auto_ptr< notes_type > p);
+      notes (::std::unique_ptr< notes_type > p);
 
       // idtag
       //
@@ -2783,13 +2838,15 @@ namespace schemas
       idtag (const idtag_optional& x);
 
       void
-      idtag (::std::auto_ptr< idtag_type > p);
+      idtag (::std::unique_ptr< idtag_type > p);
 
       // Constructors.
       //
+      poc ();
+
       poc (const pocType1_type&);
 
-      poc (::std::auto_ptr< pocType1_type >);
+      poc (::std::unique_ptr< pocType1_type >);
 
       poc (const ::xercesc::DOMElement& e,
            ::xml_schema::flags f = 0,
@@ -2833,6 +2890,8 @@ namespace schemas
       public:
       // Constructors.
       //
+      glyph ();
+
       glyph (const type_type&);
 
       glyph (const ::xml_schema::base64_binary&,

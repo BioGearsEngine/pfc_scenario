@@ -72,9 +72,9 @@ namespace schemas
     }
 
     void String::
-    notes (::std::auto_ptr< notes_type > x)
+    notes (::std::unique_ptr< notes_type > x)
     {
-      this->notes_.set (x);
+      this->notes_.set (std::move (x));
     }
 
     const String::idtag_optional& String::
@@ -102,9 +102,9 @@ namespace schemas
     }
 
     void String::
-    idtag (::std::auto_ptr< idtag_type > x)
+    idtag (::std::unique_ptr< idtag_type > x)
     {
-      this->idtag_.set (x);
+      this->idtag_.set (std::move (x));
     }
 
 
@@ -136,9 +136,9 @@ namespace schemas
     }
 
     void IdentifierType::
-    notes (::std::auto_ptr< notes_type > x)
+    notes (::std::unique_ptr< notes_type > x)
     {
-      this->notes_.set (x);
+      this->notes_.set (std::move (x));
     }
 
     const IdentifierType::idtag_optional& IdentifierType::
@@ -166,9 +166,9 @@ namespace schemas
     }
 
     void IdentifierType::
-    idtag (::std::auto_ptr< idtag_type > x)
+    idtag (::std::unique_ptr< idtag_type > x)
     {
-      this->idtag_.set (x);
+      this->idtag_.set (std::move (x));
     }
 
 
@@ -204,9 +204,9 @@ namespace schemas
     }
 
     void NonEmptyString::
-    notes (::std::auto_ptr< notes_type > x)
+    notes (::std::unique_ptr< notes_type > x)
     {
-      this->notes_.set (x);
+      this->notes_.set (std::move (x));
     }
 
     const NonEmptyString::idtag_optional& NonEmptyString::
@@ -234,14 +234,20 @@ namespace schemas
     }
 
     void NonEmptyString::
-    idtag (::std::auto_ptr< idtag_type > x)
+    idtag (::std::unique_ptr< idtag_type > x)
     {
-      this->idtag_.set (x);
+      this->idtag_.set (std::move (x));
     }
 
 
     // OMTypeEnumerations
     // 
+
+    OMTypeEnumerations::
+    OMTypeEnumerations ()
+    : ::xml_schema::string ()
+    {
+    }
 
     OMTypeEnumerations::
     OMTypeEnumerations (value v)
@@ -289,6 +295,12 @@ namespace schemas
     //
 
     OMTypeUnion::
+    OMTypeUnion ()
+    : ::xml_schema::string ()
+    {
+    }
+
+    OMTypeUnion::
     OMTypeUnion (const char* s)
     : ::xml_schema::string (s)
     {
@@ -310,6 +322,12 @@ namespace schemas
 
     // glyphTypeEnumerations
     // 
+
+    glyphTypeEnumerations::
+    glyphTypeEnumerations ()
+    : ::xml_schema::string ()
+    {
+    }
 
     glyphTypeEnumerations::
     glyphTypeEnumerations (value v)
@@ -355,6 +373,12 @@ namespace schemas
 
     // glyphTypeUnion
     //
+
+    glyphTypeUnion::
+    glyphTypeUnion ()
+    : ::xml_schema::string ()
+    {
+    }
 
     glyphTypeUnion::
     glyphTypeUnion (const char* s)
@@ -404,9 +428,9 @@ namespace schemas
     }
 
     void glyphType::
-    notes (::std::auto_ptr< notes_type > x)
+    notes (::std::unique_ptr< notes_type > x)
     {
-      this->notes_.set (x);
+      this->notes_.set (std::move (x));
     }
 
     const glyphType::idtag_optional& glyphType::
@@ -434,9 +458,9 @@ namespace schemas
     }
 
     void glyphType::
-    idtag (::std::auto_ptr< idtag_type > x)
+    idtag (::std::unique_ptr< idtag_type > x)
     {
-      this->idtag_.set (x);
+      this->idtag_.set (std::move (x));
     }
 
     const glyphType::type_type& glyphType::
@@ -458,9 +482,9 @@ namespace schemas
     }
 
     void glyphType::
-    type (::std::auto_ptr< type_type > x)
+    type (::std::unique_ptr< type_type > x)
     {
-      this->type_.set (x);
+      this->type_.set (std::move (x));
     }
 
     const glyphType::height_optional& glyphType::
@@ -536,9 +560,9 @@ namespace schemas
     }
 
     void glyphType::
-    alt (::std::auto_ptr< alt_type > x)
+    alt (::std::unique_ptr< alt_type > x)
     {
-      this->alt_.set (x);
+      this->alt_.set (std::move (x));
     }
 
 
@@ -564,9 +588,9 @@ namespace schemas
     }
 
     void pocType::
-    pocType1 (::std::auto_ptr< pocType1_type > x)
+    pocType1 (::std::unique_ptr< pocType1_type > x)
     {
-      this->pocType1_.set (x);
+      this->pocType1_.set (std::move (x));
     }
 
     const pocType::pocName_optional& pocType::
@@ -594,9 +618,9 @@ namespace schemas
     }
 
     void pocType::
-    pocName (::std::auto_ptr< pocName_type > x)
+    pocName (::std::unique_ptr< pocName_type > x)
     {
-      this->pocName_.set (x);
+      this->pocName_.set (std::move (x));
     }
 
     const pocType::pocOrg_optional& pocType::
@@ -624,9 +648,9 @@ namespace schemas
     }
 
     void pocType::
-    pocOrg (::std::auto_ptr< pocOrg_type > x)
+    pocOrg (::std::unique_ptr< pocOrg_type > x)
     {
-      this->pocOrg_.set (x);
+      this->pocOrg_.set (std::move (x));
     }
 
     const pocType::pocTelephone_sequence& pocType::
@@ -668,6 +692,12 @@ namespace schemas
 
     // SecurityClassificationEnumeration
     // 
+
+    SecurityClassificationEnumeration::
+    SecurityClassificationEnumeration ()
+    : ::xml_schema::string ()
+    {
+    }
 
     SecurityClassificationEnumeration::
     SecurityClassificationEnumeration (value v)
@@ -713,6 +743,12 @@ namespace schemas
 
     // SecurityClassificationUnion
     //
+
+    SecurityClassificationUnion::
+    SecurityClassificationUnion ()
+    : ::xml_schema::string ()
+    {
+    }
 
     SecurityClassificationUnion::
     SecurityClassificationUnion (const char* s)
@@ -762,9 +798,9 @@ namespace schemas
     }
 
     void modelType::
-    notes (::std::auto_ptr< notes_type > x)
+    notes (::std::unique_ptr< notes_type > x)
     {
-      this->notes_.set (x);
+      this->notes_.set (std::move (x));
     }
 
     const modelType::idtag_optional& modelType::
@@ -792,9 +828,9 @@ namespace schemas
     }
 
     void modelType::
-    idtag (::std::auto_ptr< idtag_type > x)
+    idtag (::std::unique_ptr< idtag_type > x)
     {
-      this->idtag_.set (x);
+      this->idtag_.set (std::move (x));
     }
 
 
@@ -826,9 +862,9 @@ namespace schemas
     }
 
     void securityClassificationType::
-    notes (::std::auto_ptr< notes_type > x)
+    notes (::std::unique_ptr< notes_type > x)
     {
-      this->notes_.set (x);
+      this->notes_.set (std::move (x));
     }
 
     const securityClassificationType::idtag_optional& securityClassificationType::
@@ -856,14 +892,20 @@ namespace schemas
     }
 
     void securityClassificationType::
-    idtag (::std::auto_ptr< idtag_type > x)
+    idtag (::std::unique_ptr< idtag_type > x)
     {
-      this->idtag_.set (x);
+      this->idtag_.set (std::move (x));
     }
 
 
     // ApplicationDomainEnumerations
     // 
+
+    ApplicationDomainEnumerations::
+    ApplicationDomainEnumerations ()
+    : ::xml_schema::string ()
+    {
+    }
 
     ApplicationDomainEnumerations::
     ApplicationDomainEnumerations (value v)
@@ -909,6 +951,12 @@ namespace schemas
 
     // ApplicationDomainUnion
     //
+
+    ApplicationDomainUnion::
+    ApplicationDomainUnion ()
+    : ::xml_schema::string ()
+    {
+    }
 
     ApplicationDomainUnion::
     ApplicationDomainUnion (const char* s)
@@ -958,9 +1006,9 @@ namespace schemas
     }
 
     void applicationDomainType::
-    notes (::std::auto_ptr< notes_type > x)
+    notes (::std::unique_ptr< notes_type > x)
     {
-      this->notes_.set (x);
+      this->notes_.set (std::move (x));
     }
 
     const applicationDomainType::idtag_optional& applicationDomainType::
@@ -988,14 +1036,20 @@ namespace schemas
     }
 
     void applicationDomainType::
-    idtag (::std::auto_ptr< idtag_type > x)
+    idtag (::std::unique_ptr< idtag_type > x)
     {
-      this->idtag_.set (x);
+      this->idtag_.set (std::move (x));
     }
 
 
     // POCTypeEnumeration
     // 
+
+    POCTypeEnumeration::
+    POCTypeEnumeration ()
+    : ::xml_schema::string ()
+    {
+    }
 
     POCTypeEnumeration::
     POCTypeEnumeration (value v)
@@ -1041,6 +1095,12 @@ namespace schemas
 
     // POCTypeUnion
     //
+
+    POCTypeUnion::
+    POCTypeUnion ()
+    : ::xml_schema::string ()
+    {
+    }
 
     POCTypeUnion::
     POCTypeUnion (const char* s)
@@ -1090,9 +1150,9 @@ namespace schemas
     }
 
     void pocTypeType::
-    notes (::std::auto_ptr< notes_type > x)
+    notes (::std::unique_ptr< notes_type > x)
     {
-      this->notes_.set (x);
+      this->notes_.set (std::move (x));
     }
 
     const pocTypeType::idtag_optional& pocTypeType::
@@ -1120,14 +1180,20 @@ namespace schemas
     }
 
     void pocTypeType::
-    idtag (::std::auto_ptr< idtag_type > x)
+    idtag (::std::unique_ptr< idtag_type > x)
     {
-      this->idtag_.set (x);
+      this->idtag_.set (std::move (x));
     }
 
 
     // referenceTypeEnumerations
     // 
+
+    referenceTypeEnumerations::
+    referenceTypeEnumerations ()
+    : ::xml_schema::string ()
+    {
+    }
 
     referenceTypeEnumerations::
     referenceTypeEnumerations (value v)
@@ -1175,6 +1241,12 @@ namespace schemas
     //
 
     referenceTypeUnion::
+    referenceTypeUnion ()
+    : ::xml_schema::string ()
+    {
+    }
+
+    referenceTypeUnion::
     referenceTypeUnion (const char* s)
     : ::xml_schema::string (s)
     {
@@ -1216,9 +1288,9 @@ namespace schemas
     }
 
     void referenceType::
-    type (::std::auto_ptr< type_type > x)
+    type (::std::unique_ptr< type_type > x)
     {
-      this->type_.set (x);
+      this->type_.set (std::move (x));
     }
 
     const referenceType::identification_type& referenceType::
@@ -1240,9 +1312,9 @@ namespace schemas
     }
 
     void referenceType::
-    identification (::std::auto_ptr< identification_type > x)
+    identification (::std::unique_ptr< identification_type > x)
     {
-      this->identification_.set (x);
+      this->identification_.set (std::move (x));
     }
 
     const referenceType::notes_optional& referenceType::
@@ -1270,9 +1342,9 @@ namespace schemas
     }
 
     void referenceType::
-    notes (::std::auto_ptr< notes_type > x)
+    notes (::std::unique_ptr< notes_type > x)
     {
-      this->notes_.set (x);
+      this->notes_.set (std::move (x));
     }
 
     const referenceType::idtag_optional& referenceType::
@@ -1300,9 +1372,9 @@ namespace schemas
     }
 
     void referenceType::
-    idtag (::std::auto_ptr< idtag_type > x)
+    idtag (::std::unique_ptr< idtag_type > x)
     {
-      this->idtag_.set (x);
+      this->idtag_.set (std::move (x));
     }
 
 
@@ -1334,9 +1406,9 @@ namespace schemas
     }
 
     void keywordType::
-    taxonomy (::std::auto_ptr< taxonomy_type > x)
+    taxonomy (::std::unique_ptr< taxonomy_type > x)
     {
-      this->taxonomy_.set (x);
+      this->taxonomy_.set (std::move (x));
     }
 
     const keywordType::keywordValue_type& keywordType::
@@ -1358,9 +1430,9 @@ namespace schemas
     }
 
     void keywordType::
-    keywordValue (::std::auto_ptr< keywordValue_type > x)
+    keywordValue (::std::unique_ptr< keywordValue_type > x)
     {
-      this->keywordValue_.set (x);
+      this->keywordValue_.set (std::move (x));
     }
 
     const keywordType::notes_optional& keywordType::
@@ -1388,9 +1460,9 @@ namespace schemas
     }
 
     void keywordType::
-    notes (::std::auto_ptr< notes_type > x)
+    notes (::std::unique_ptr< notes_type > x)
     {
-      this->notes_.set (x);
+      this->notes_.set (std::move (x));
     }
 
     const keywordType::idtag_optional& keywordType::
@@ -1418,9 +1490,9 @@ namespace schemas
     }
 
     void keywordType::
-    idtag (::std::auto_ptr< idtag_type > x)
+    idtag (::std::unique_ptr< idtag_type > x)
     {
-      this->idtag_.set (x);
+      this->idtag_.set (std::move (x));
     }
 
 
@@ -1446,9 +1518,9 @@ namespace schemas
     }
 
     void modelIdentificationType::
-    name (::std::auto_ptr< name_type > x)
+    name (::std::unique_ptr< name_type > x)
     {
-      this->name_.set (x);
+      this->name_.set (std::move (x));
     }
 
     const modelIdentificationType::type_type& modelIdentificationType::
@@ -1470,9 +1542,9 @@ namespace schemas
     }
 
     void modelIdentificationType::
-    type (::std::auto_ptr< type_type > x)
+    type (::std::unique_ptr< type_type > x)
     {
-      this->type_.set (x);
+      this->type_.set (std::move (x));
     }
 
     const modelIdentificationType::version_type& modelIdentificationType::
@@ -1494,9 +1566,9 @@ namespace schemas
     }
 
     void modelIdentificationType::
-    version (::std::auto_ptr< version_type > x)
+    version (::std::unique_ptr< version_type > x)
     {
-      this->version_.set (x);
+      this->version_.set (std::move (x));
     }
 
     const modelIdentificationType::modificationDate_type& modelIdentificationType::
@@ -1518,9 +1590,9 @@ namespace schemas
     }
 
     void modelIdentificationType::
-    modificationDate (::std::auto_ptr< modificationDate_type > x)
+    modificationDate (::std::unique_ptr< modificationDate_type > x)
     {
-      this->modificationDate_.set (x);
+      this->modificationDate_.set (std::move (x));
     }
 
     const modelIdentificationType::securityClassification_type& modelIdentificationType::
@@ -1542,9 +1614,9 @@ namespace schemas
     }
 
     void modelIdentificationType::
-    securityClassification (::std::auto_ptr< securityClassification_type > x)
+    securityClassification (::std::unique_ptr< securityClassification_type > x)
     {
-      this->securityClassification_.set (x);
+      this->securityClassification_.set (std::move (x));
     }
 
     const modelIdentificationType::releaseRestriction_sequence& modelIdentificationType::
@@ -1590,9 +1662,9 @@ namespace schemas
     }
 
     void modelIdentificationType::
-    purpose (::std::auto_ptr< purpose_type > x)
+    purpose (::std::unique_ptr< purpose_type > x)
     {
-      this->purpose_.set (x);
+      this->purpose_.set (std::move (x));
     }
 
     const modelIdentificationType::applicationDomain_optional& modelIdentificationType::
@@ -1620,9 +1692,9 @@ namespace schemas
     }
 
     void modelIdentificationType::
-    applicationDomain (::std::auto_ptr< applicationDomain_type > x)
+    applicationDomain (::std::unique_ptr< applicationDomain_type > x)
     {
-      this->applicationDomain_.set (x);
+      this->applicationDomain_.set (std::move (x));
     }
 
     const modelIdentificationType::description_type& modelIdentificationType::
@@ -1644,9 +1716,9 @@ namespace schemas
     }
 
     void modelIdentificationType::
-    description (::std::auto_ptr< description_type > x)
+    description (::std::unique_ptr< description_type > x)
     {
-      this->description_.set (x);
+      this->description_.set (std::move (x));
     }
 
     const modelIdentificationType::useLimitation_optional& modelIdentificationType::
@@ -1674,9 +1746,9 @@ namespace schemas
     }
 
     void modelIdentificationType::
-    useLimitation (::std::auto_ptr< useLimitation_type > x)
+    useLimitation (::std::unique_ptr< useLimitation_type > x)
     {
-      this->useLimitation_.set (x);
+      this->useLimitation_.set (std::move (x));
     }
 
     const modelIdentificationType::useHistory_sequence& modelIdentificationType::
@@ -1776,9 +1848,9 @@ namespace schemas
     }
 
     void modelIdentificationType::
-    other (::std::auto_ptr< other_type > x)
+    other (::std::unique_ptr< other_type > x)
     {
-      this->other_.set (x);
+      this->other_.set (std::move (x));
     }
 
     const modelIdentificationType::glyph_optional& modelIdentificationType::
@@ -1806,9 +1878,9 @@ namespace schemas
     }
 
     void modelIdentificationType::
-    glyph (::std::auto_ptr< glyph_type > x)
+    glyph (::std::unique_ptr< glyph_type > x)
     {
-      this->glyph_.set (x);
+      this->glyph_.set (std::move (x));
     }
 
     const modelIdentificationType::notes_optional& modelIdentificationType::
@@ -1836,9 +1908,9 @@ namespace schemas
     }
 
     void modelIdentificationType::
-    notes (::std::auto_ptr< notes_type > x)
+    notes (::std::unique_ptr< notes_type > x)
     {
-      this->notes_.set (x);
+      this->notes_.set (std::move (x));
     }
 
     const modelIdentificationType::idtag_optional& modelIdentificationType::
@@ -1866,9 +1938,9 @@ namespace schemas
     }
 
     void modelIdentificationType::
-    idtag (::std::auto_ptr< idtag_type > x)
+    idtag (::std::unique_ptr< idtag_type > x)
     {
-      this->idtag_.set (x);
+      this->idtag_.set (std::move (x));
     }
 
 
@@ -1900,9 +1972,9 @@ namespace schemas
     }
 
     void type::
-    notes (::std::auto_ptr< notes_type > x)
+    notes (::std::unique_ptr< notes_type > x)
     {
-      this->notes_.set (x);
+      this->notes_.set (std::move (x));
     }
 
     const type::idtag_optional& type::
@@ -1930,9 +2002,9 @@ namespace schemas
     }
 
     void type::
-    idtag (::std::auto_ptr< idtag_type > x)
+    idtag (::std::unique_ptr< idtag_type > x)
     {
-      this->idtag_.set (x);
+      this->idtag_.set (std::move (x));
     }
 
 
@@ -1964,9 +2036,9 @@ namespace schemas
     }
 
     void identification::
-    notes (::std::auto_ptr< notes_type > x)
+    notes (::std::unique_ptr< notes_type > x)
     {
-      this->notes_.set (x);
+      this->notes_.set (std::move (x));
     }
 
     const identification::idtag_optional& identification::
@@ -1994,9 +2066,9 @@ namespace schemas
     }
 
     void identification::
-    idtag (::std::auto_ptr< idtag_type > x)
+    idtag (::std::unique_ptr< idtag_type > x)
     {
-      this->idtag_.set (x);
+      this->idtag_.set (std::move (x));
     }
 
 
@@ -2028,9 +2100,9 @@ namespace schemas
     }
 
     void modificationDate::
-    notes (::std::auto_ptr< notes_type > x)
+    notes (::std::unique_ptr< notes_type > x)
     {
-      this->notes_.set (x);
+      this->notes_.set (std::move (x));
     }
 
     const modificationDate::idtag_optional& modificationDate::
@@ -2058,9 +2130,9 @@ namespace schemas
     }
 
     void modificationDate::
-    idtag (::std::auto_ptr< idtag_type > x)
+    idtag (::std::unique_ptr< idtag_type > x)
     {
-      this->idtag_.set (x);
+      this->idtag_.set (std::move (x));
     }
 
 
@@ -2092,9 +2164,9 @@ namespace schemas
     }
 
     void poc::
-    notes (::std::auto_ptr< notes_type > x)
+    notes (::std::unique_ptr< notes_type > x)
     {
-      this->notes_.set (x);
+      this->notes_.set (std::move (x));
     }
 
     const poc::idtag_optional& poc::
@@ -2122,9 +2194,9 @@ namespace schemas
     }
 
     void poc::
-    idtag (::std::auto_ptr< idtag_type > x)
+    idtag (::std::unique_ptr< idtag_type > x)
     {
-      this->idtag_.set (x);
+      this->idtag_.set (std::move (x));
     }
 
 
@@ -2297,6 +2369,14 @@ namespace schemas
 
     // IdentifierType
     //
+
+    IdentifierType::
+    IdentifierType ()
+    : ::xml_schema::ncname (),
+      notes_ (this),
+      idtag_ (this)
+    {
+    }
 
     IdentifierType::
     IdentifierType (const char* _xsd_ncname_base)
@@ -2913,6 +2993,18 @@ namespace schemas
     //
 
     glyphType::
+    glyphType ()
+    : ::xml_schema::base64_binary (),
+      notes_ (this),
+      idtag_ (this),
+      type_ (this),
+      height_ (this),
+      width_ (this),
+      alt_ (this)
+    {
+    }
+
+    glyphType::
     glyphType (const type_type& type)
     : ::xml_schema::base64_binary (),
       notes_ (this),
@@ -3102,6 +3194,17 @@ namespace schemas
     //
 
     pocType::
+    pocType ()
+    : ::xml_schema::type (),
+      pocType1_ (this),
+      pocName_ (this),
+      pocOrg_ (this),
+      pocTelephone_ (this),
+      pocEmail_ (this)
+    {
+    }
+
+    pocType::
     pocType (const pocType1_type& pocType1)
     : ::xml_schema::type (),
       pocType1_ (pocType1, this),
@@ -3113,9 +3216,9 @@ namespace schemas
     }
 
     pocType::
-    pocType (::std::auto_ptr< pocType1_type > pocType1)
+    pocType (::std::unique_ptr< pocType1_type > pocType1)
     : ::xml_schema::type (),
-      pocType1_ (pocType1, this),
+      pocType1_ (std::move (pocType1), this),
       pocName_ (this),
       pocOrg_ (this),
       pocTelephone_ (this),
@@ -3167,7 +3270,7 @@ namespace schemas
         // pocType
         //
         {
-          ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
               "pocType",
               "http://www.sisostds.org/schemas/modelID",
@@ -3178,7 +3281,7 @@ namespace schemas
           {
             if (!pocType1_.present ())
             {
-              ::std::auto_ptr< pocType1_type > r (
+              ::std::unique_ptr< pocType1_type > r (
                 dynamic_cast< pocType1_type* > (tmp.get ()));
 
               if (r.get ())
@@ -3186,7 +3289,7 @@ namespace schemas
               else
                 throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->pocType1_.set (r);
+              this->pocType1_.set (::std::move (r));
               continue;
             }
           }
@@ -3195,7 +3298,7 @@ namespace schemas
         // pocName
         //
         {
-          ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
               "pocName",
               "http://www.sisostds.org/schemas/modelID",
@@ -3206,7 +3309,7 @@ namespace schemas
           {
             if (!this->pocName_)
             {
-              ::std::auto_ptr< pocName_type > r (
+              ::std::unique_ptr< pocName_type > r (
                 dynamic_cast< pocName_type* > (tmp.get ()));
 
               if (r.get ())
@@ -3214,7 +3317,7 @@ namespace schemas
               else
                 throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->pocName_.set (r);
+              this->pocName_.set (::std::move (r));
               continue;
             }
           }
@@ -3223,7 +3326,7 @@ namespace schemas
         // pocOrg
         //
         {
-          ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
               "pocOrg",
               "http://www.sisostds.org/schemas/modelID",
@@ -3234,7 +3337,7 @@ namespace schemas
           {
             if (!this->pocOrg_)
             {
-              ::std::auto_ptr< pocOrg_type > r (
+              ::std::unique_ptr< pocOrg_type > r (
                 dynamic_cast< pocOrg_type* > (tmp.get ()));
 
               if (r.get ())
@@ -3242,7 +3345,7 @@ namespace schemas
               else
                 throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->pocOrg_.set (r);
+              this->pocOrg_.set (::std::move (r));
               continue;
             }
           }
@@ -3251,7 +3354,7 @@ namespace schemas
         // pocTelephone
         //
         {
-          ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
               "pocTelephone",
               "http://www.sisostds.org/schemas/modelID",
@@ -3260,7 +3363,7 @@ namespace schemas
 
           if (tmp.get () != 0)
           {
-            ::std::auto_ptr< pocTelephone_type > r (
+            ::std::unique_ptr< pocTelephone_type > r (
               dynamic_cast< pocTelephone_type* > (tmp.get ()));
 
             if (r.get ())
@@ -3268,7 +3371,7 @@ namespace schemas
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->pocTelephone_.push_back (r);
+            this->pocTelephone_.push_back (::std::move (r));
             continue;
           }
         }
@@ -3276,7 +3379,7 @@ namespace schemas
         // pocEmail
         //
         {
-          ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
               "pocEmail",
               "http://www.sisostds.org/schemas/modelID",
@@ -3285,7 +3388,7 @@ namespace schemas
 
           if (tmp.get () != 0)
           {
-            ::std::auto_ptr< pocEmail_type > r (
+            ::std::unique_ptr< pocEmail_type > r (
               dynamic_cast< pocEmail_type* > (tmp.get ()));
 
             if (r.get ())
@@ -3293,7 +3396,7 @@ namespace schemas
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->pocEmail_.push_back (r);
+            this->pocEmail_.push_back (::std::move (r));
             continue;
           }
         }
@@ -3572,6 +3675,14 @@ namespace schemas
     //
 
     modelType::
+    modelType ()
+    : ::schemas::modelID::OMTypeUnion (),
+      notes_ (this),
+      idtag_ (this)
+    {
+    }
+
+    modelType::
     modelType (const char* _xsd_OMTypeUnion_base)
     : ::schemas::modelID::OMTypeUnion (_xsd_OMTypeUnion_base),
       notes_ (this),
@@ -3703,6 +3814,14 @@ namespace schemas
 
     // securityClassificationType
     //
+
+    securityClassificationType::
+    securityClassificationType ()
+    : ::schemas::modelID::SecurityClassificationUnion (),
+      notes_ (this),
+      idtag_ (this)
+    {
+    }
 
     securityClassificationType::
     securityClassificationType (const char* _xsd_SecurityClassificationUnion_base)
@@ -3967,6 +4086,14 @@ namespace schemas
 
     // applicationDomainType
     //
+
+    applicationDomainType::
+    applicationDomainType ()
+    : ::schemas::modelID::ApplicationDomainUnion (),
+      notes_ (this),
+      idtag_ (this)
+    {
+    }
 
     applicationDomainType::
     applicationDomainType (const char* _xsd_ApplicationDomainUnion_base)
@@ -4235,6 +4362,14 @@ namespace schemas
     //
 
     pocTypeType::
+    pocTypeType ()
+    : ::schemas::modelID::POCTypeUnion (),
+      notes_ (this),
+      idtag_ (this)
+    {
+    }
+
+    pocTypeType::
     pocTypeType (const char* _xsd_POCTypeUnion_base)
     : ::schemas::modelID::POCTypeUnion (_xsd_POCTypeUnion_base),
       notes_ (this),
@@ -4495,6 +4630,16 @@ namespace schemas
     //
 
     referenceType::
+    referenceType ()
+    : ::xml_schema::type (),
+      type_ (this),
+      identification_ (this),
+      notes_ (this),
+      idtag_ (this)
+    {
+    }
+
+    referenceType::
     referenceType (const type_type& type,
                    const identification_type& identification)
     : ::xml_schema::type (),
@@ -4506,11 +4651,11 @@ namespace schemas
     }
 
     referenceType::
-    referenceType (::std::auto_ptr< type_type > type,
-                   ::std::auto_ptr< identification_type > identification)
+    referenceType (::std::unique_ptr< type_type > type,
+                   ::std::unique_ptr< identification_type > identification)
     : ::xml_schema::type (),
-      type_ (type, this),
-      identification_ (identification, this),
+      type_ (std::move (type), this),
+      identification_ (std::move (identification), this),
       notes_ (this),
       idtag_ (this)
     {
@@ -4559,12 +4704,12 @@ namespace schemas
         //
         if (n.name () == "type" && n.namespace_ () == "http://www.sisostds.org/schemas/modelID")
         {
-          ::std::auto_ptr< type_type > r (
+          ::std::unique_ptr< type_type > r (
             type_traits::create (i, f, this));
 
           if (!type_.present ())
           {
-            this->type_.set (r);
+            this->type_.set (::std::move (r));
             continue;
           }
         }
@@ -4573,12 +4718,12 @@ namespace schemas
         //
         if (n.name () == "identification" && n.namespace_ () == "http://www.sisostds.org/schemas/modelID")
         {
-          ::std::auto_ptr< identification_type > r (
+          ::std::unique_ptr< identification_type > r (
             identification_traits::create (i, f, this));
 
           if (!identification_.present ())
           {
-            this->identification_.set (r);
+            this->identification_.set (::std::move (r));
             continue;
           }
         }
@@ -4685,6 +4830,16 @@ namespace schemas
     //
 
     keywordType::
+    keywordType ()
+    : ::xml_schema::type (),
+      taxonomy_ (this),
+      keywordValue_ (this),
+      notes_ (this),
+      idtag_ (this)
+    {
+    }
+
+    keywordType::
     keywordType (const keywordValue_type& keywordValue)
     : ::xml_schema::type (),
       taxonomy_ (this),
@@ -4695,10 +4850,10 @@ namespace schemas
     }
 
     keywordType::
-    keywordType (::std::auto_ptr< keywordValue_type > keywordValue)
+    keywordType (::std::unique_ptr< keywordValue_type > keywordValue)
     : ::xml_schema::type (),
       taxonomy_ (this),
-      keywordValue_ (keywordValue, this),
+      keywordValue_ (std::move (keywordValue), this),
       notes_ (this),
       idtag_ (this)
     {
@@ -4746,7 +4901,7 @@ namespace schemas
         // taxonomy
         //
         {
-          ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
               "taxonomy",
               "http://www.sisostds.org/schemas/modelID",
@@ -4757,7 +4912,7 @@ namespace schemas
           {
             if (!this->taxonomy_)
             {
-              ::std::auto_ptr< taxonomy_type > r (
+              ::std::unique_ptr< taxonomy_type > r (
                 dynamic_cast< taxonomy_type* > (tmp.get ()));
 
               if (r.get ())
@@ -4765,7 +4920,7 @@ namespace schemas
               else
                 throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->taxonomy_.set (r);
+              this->taxonomy_.set (::std::move (r));
               continue;
             }
           }
@@ -4774,7 +4929,7 @@ namespace schemas
         // keywordValue
         //
         {
-          ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
               "keywordValue",
               "http://www.sisostds.org/schemas/modelID",
@@ -4785,7 +4940,7 @@ namespace schemas
           {
             if (!keywordValue_.present ())
             {
-              ::std::auto_ptr< keywordValue_type > r (
+              ::std::unique_ptr< keywordValue_type > r (
                 dynamic_cast< keywordValue_type* > (tmp.get ()));
 
               if (r.get ())
@@ -4793,7 +4948,7 @@ namespace schemas
               else
                 throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->keywordValue_.set (r);
+              this->keywordValue_.set (::std::move (r));
               continue;
             }
           }
@@ -4914,6 +5069,30 @@ namespace schemas
     //
 
     modelIdentificationType::
+    modelIdentificationType ()
+    : ::xml_schema::type (),
+      name_ (this),
+      type_ (this),
+      version_ (this),
+      modificationDate_ (this),
+      securityClassification_ (this),
+      releaseRestriction_ (this),
+      purpose_ (this),
+      applicationDomain_ (this),
+      description_ (this),
+      useLimitation_ (this),
+      useHistory_ (this),
+      keyword_ (this),
+      poc_ (this),
+      reference_ (this),
+      other_ (this),
+      glyph_ (this),
+      notes_ (this),
+      idtag_ (this)
+    {
+    }
+
+    modelIdentificationType::
     modelIdentificationType (const name_type& name,
                              const type_type& type,
                              const version_type& version,
@@ -4943,22 +5122,22 @@ namespace schemas
     }
 
     modelIdentificationType::
-    modelIdentificationType (::std::auto_ptr< name_type > name,
-                             ::std::auto_ptr< type_type > type,
-                             ::std::auto_ptr< version_type > version,
-                             ::std::auto_ptr< modificationDate_type > modificationDate,
-                             ::std::auto_ptr< securityClassification_type > securityClassification,
-                             ::std::auto_ptr< description_type > description)
+    modelIdentificationType (::std::unique_ptr< name_type > name,
+                             ::std::unique_ptr< type_type > type,
+                             ::std::unique_ptr< version_type > version,
+                             ::std::unique_ptr< modificationDate_type > modificationDate,
+                             ::std::unique_ptr< securityClassification_type > securityClassification,
+                             ::std::unique_ptr< description_type > description)
     : ::xml_schema::type (),
-      name_ (name, this),
-      type_ (type, this),
-      version_ (version, this),
-      modificationDate_ (modificationDate, this),
-      securityClassification_ (securityClassification, this),
+      name_ (std::move (name), this),
+      type_ (std::move (type), this),
+      version_ (std::move (version), this),
+      modificationDate_ (std::move (modificationDate), this),
+      securityClassification_ (std::move (securityClassification), this),
       releaseRestriction_ (this),
       purpose_ (this),
       applicationDomain_ (this),
-      description_ (description, this),
+      description_ (std::move (description), this),
       useLimitation_ (this),
       useHistory_ (this),
       keyword_ (this),
@@ -5041,7 +5220,7 @@ namespace schemas
         // name
         //
         {
-          ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
               "name",
               "http://www.sisostds.org/schemas/modelID",
@@ -5052,7 +5231,7 @@ namespace schemas
           {
             if (!name_.present ())
             {
-              ::std::auto_ptr< name_type > r (
+              ::std::unique_ptr< name_type > r (
                 dynamic_cast< name_type* > (tmp.get ()));
 
               if (r.get ())
@@ -5060,7 +5239,7 @@ namespace schemas
               else
                 throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->name_.set (r);
+              this->name_.set (::std::move (r));
               continue;
             }
           }
@@ -5069,7 +5248,7 @@ namespace schemas
         // type
         //
         {
-          ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
               "type",
               "http://www.sisostds.org/schemas/modelID",
@@ -5080,7 +5259,7 @@ namespace schemas
           {
             if (!type_.present ())
             {
-              ::std::auto_ptr< type_type > r (
+              ::std::unique_ptr< type_type > r (
                 dynamic_cast< type_type* > (tmp.get ()));
 
               if (r.get ())
@@ -5088,7 +5267,7 @@ namespace schemas
               else
                 throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->type_.set (r);
+              this->type_.set (::std::move (r));
               continue;
             }
           }
@@ -5097,7 +5276,7 @@ namespace schemas
         // version
         //
         {
-          ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
               "version",
               "http://www.sisostds.org/schemas/modelID",
@@ -5108,7 +5287,7 @@ namespace schemas
           {
             if (!version_.present ())
             {
-              ::std::auto_ptr< version_type > r (
+              ::std::unique_ptr< version_type > r (
                 dynamic_cast< version_type* > (tmp.get ()));
 
               if (r.get ())
@@ -5116,7 +5295,7 @@ namespace schemas
               else
                 throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->version_.set (r);
+              this->version_.set (::std::move (r));
               continue;
             }
           }
@@ -5126,12 +5305,12 @@ namespace schemas
         //
         if (n.name () == "modificationDate" && n.namespace_ () == "http://www.sisostds.org/schemas/modelID")
         {
-          ::std::auto_ptr< modificationDate_type > r (
+          ::std::unique_ptr< modificationDate_type > r (
             modificationDate_traits::create (i, f, this));
 
           if (!modificationDate_.present ())
           {
-            this->modificationDate_.set (r);
+            this->modificationDate_.set (::std::move (r));
             continue;
           }
         }
@@ -5139,7 +5318,7 @@ namespace schemas
         // securityClassification
         //
         {
-          ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
               "securityClassification",
               "http://www.sisostds.org/schemas/modelID",
@@ -5150,7 +5329,7 @@ namespace schemas
           {
             if (!securityClassification_.present ())
             {
-              ::std::auto_ptr< securityClassification_type > r (
+              ::std::unique_ptr< securityClassification_type > r (
                 dynamic_cast< securityClassification_type* > (tmp.get ()));
 
               if (r.get ())
@@ -5158,7 +5337,7 @@ namespace schemas
               else
                 throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->securityClassification_.set (r);
+              this->securityClassification_.set (::std::move (r));
               continue;
             }
           }
@@ -5167,7 +5346,7 @@ namespace schemas
         // releaseRestriction
         //
         {
-          ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
               "releaseRestriction",
               "http://www.sisostds.org/schemas/modelID",
@@ -5176,7 +5355,7 @@ namespace schemas
 
           if (tmp.get () != 0)
           {
-            ::std::auto_ptr< releaseRestriction_type > r (
+            ::std::unique_ptr< releaseRestriction_type > r (
               dynamic_cast< releaseRestriction_type* > (tmp.get ()));
 
             if (r.get ())
@@ -5184,7 +5363,7 @@ namespace schemas
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->releaseRestriction_.push_back (r);
+            this->releaseRestriction_.push_back (::std::move (r));
             continue;
           }
         }
@@ -5192,7 +5371,7 @@ namespace schemas
         // purpose
         //
         {
-          ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
               "purpose",
               "http://www.sisostds.org/schemas/modelID",
@@ -5203,7 +5382,7 @@ namespace schemas
           {
             if (!this->purpose_)
             {
-              ::std::auto_ptr< purpose_type > r (
+              ::std::unique_ptr< purpose_type > r (
                 dynamic_cast< purpose_type* > (tmp.get ()));
 
               if (r.get ())
@@ -5211,7 +5390,7 @@ namespace schemas
               else
                 throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->purpose_.set (r);
+              this->purpose_.set (::std::move (r));
               continue;
             }
           }
@@ -5220,7 +5399,7 @@ namespace schemas
         // applicationDomain
         //
         {
-          ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
               "applicationDomain",
               "http://www.sisostds.org/schemas/modelID",
@@ -5231,7 +5410,7 @@ namespace schemas
           {
             if (!this->applicationDomain_)
             {
-              ::std::auto_ptr< applicationDomain_type > r (
+              ::std::unique_ptr< applicationDomain_type > r (
                 dynamic_cast< applicationDomain_type* > (tmp.get ()));
 
               if (r.get ())
@@ -5239,7 +5418,7 @@ namespace schemas
               else
                 throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->applicationDomain_.set (r);
+              this->applicationDomain_.set (::std::move (r));
               continue;
             }
           }
@@ -5248,7 +5427,7 @@ namespace schemas
         // description
         //
         {
-          ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
               "description",
               "http://www.sisostds.org/schemas/modelID",
@@ -5259,7 +5438,7 @@ namespace schemas
           {
             if (!description_.present ())
             {
-              ::std::auto_ptr< description_type > r (
+              ::std::unique_ptr< description_type > r (
                 dynamic_cast< description_type* > (tmp.get ()));
 
               if (r.get ())
@@ -5267,7 +5446,7 @@ namespace schemas
               else
                 throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->description_.set (r);
+              this->description_.set (::std::move (r));
               continue;
             }
           }
@@ -5276,7 +5455,7 @@ namespace schemas
         // useLimitation
         //
         {
-          ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
               "useLimitation",
               "http://www.sisostds.org/schemas/modelID",
@@ -5287,7 +5466,7 @@ namespace schemas
           {
             if (!this->useLimitation_)
             {
-              ::std::auto_ptr< useLimitation_type > r (
+              ::std::unique_ptr< useLimitation_type > r (
                 dynamic_cast< useLimitation_type* > (tmp.get ()));
 
               if (r.get ())
@@ -5295,7 +5474,7 @@ namespace schemas
               else
                 throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->useLimitation_.set (r);
+              this->useLimitation_.set (::std::move (r));
               continue;
             }
           }
@@ -5304,7 +5483,7 @@ namespace schemas
         // useHistory
         //
         {
-          ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
               "useHistory",
               "http://www.sisostds.org/schemas/modelID",
@@ -5313,7 +5492,7 @@ namespace schemas
 
           if (tmp.get () != 0)
           {
-            ::std::auto_ptr< useHistory_type > r (
+            ::std::unique_ptr< useHistory_type > r (
               dynamic_cast< useHistory_type* > (tmp.get ()));
 
             if (r.get ())
@@ -5321,7 +5500,7 @@ namespace schemas
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->useHistory_.push_back (r);
+            this->useHistory_.push_back (::std::move (r));
             continue;
           }
         }
@@ -5329,7 +5508,7 @@ namespace schemas
         // keyword
         //
         {
-          ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
               "keyword",
               "http://www.sisostds.org/schemas/modelID",
@@ -5338,7 +5517,7 @@ namespace schemas
 
           if (tmp.get () != 0)
           {
-            ::std::auto_ptr< keyword_type > r (
+            ::std::unique_ptr< keyword_type > r (
               dynamic_cast< keyword_type* > (tmp.get ()));
 
             if (r.get ())
@@ -5346,7 +5525,7 @@ namespace schemas
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->keyword_.push_back (r);
+            this->keyword_.push_back (::std::move (r));
             continue;
           }
         }
@@ -5355,17 +5534,17 @@ namespace schemas
         //
         if (n.name () == "poc" && n.namespace_ () == "http://www.sisostds.org/schemas/modelID")
         {
-          ::std::auto_ptr< poc_type > r (
+          ::std::unique_ptr< poc_type > r (
             poc_traits::create (i, f, this));
 
-          this->poc_.push_back (r);
+          this->poc_.push_back (::std::move (r));
           continue;
         }
 
         // reference
         //
         {
-          ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
               "reference",
               "http://www.sisostds.org/schemas/modelID",
@@ -5374,7 +5553,7 @@ namespace schemas
 
           if (tmp.get () != 0)
           {
-            ::std::auto_ptr< reference_type > r (
+            ::std::unique_ptr< reference_type > r (
               dynamic_cast< reference_type* > (tmp.get ()));
 
             if (r.get ())
@@ -5382,7 +5561,7 @@ namespace schemas
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->reference_.push_back (r);
+            this->reference_.push_back (::std::move (r));
             continue;
           }
         }
@@ -5390,7 +5569,7 @@ namespace schemas
         // other
         //
         {
-          ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
               "other",
               "http://www.sisostds.org/schemas/modelID",
@@ -5401,7 +5580,7 @@ namespace schemas
           {
             if (!this->other_)
             {
-              ::std::auto_ptr< other_type > r (
+              ::std::unique_ptr< other_type > r (
                 dynamic_cast< other_type* > (tmp.get ()));
 
               if (r.get ())
@@ -5409,7 +5588,7 @@ namespace schemas
               else
                 throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->other_.set (r);
+              this->other_.set (::std::move (r));
               continue;
             }
           }
@@ -5419,12 +5598,12 @@ namespace schemas
         //
         if (n.name () == "glyph" && n.namespace_ () == "http://www.sisostds.org/schemas/modelID")
         {
-          ::std::auto_ptr< glyph_type > r (
+          ::std::unique_ptr< glyph_type > r (
             glyph_traits::create (i, f, this));
 
           if (!this->glyph_)
           {
-            this->glyph_.set (r);
+            this->glyph_.set (::std::move (r));
             continue;
           }
         }
@@ -5760,6 +5939,14 @@ namespace schemas
     //
 
     type::
+    type ()
+    : ::schemas::modelID::referenceTypeUnion (),
+      notes_ (this),
+      idtag_ (this)
+    {
+    }
+
+    type::
     type (const char* _xsd_referenceTypeUnion_base)
     : ::schemas::modelID::referenceTypeUnion (_xsd_referenceTypeUnion_base),
       notes_ (this),
@@ -5883,6 +6070,14 @@ namespace schemas
     //
 
     identification::
+    identification ()
+    : ::xml_schema::uri (),
+      notes_ (this),
+      idtag_ (this)
+    {
+    }
+
+    identification::
     identification (const ::xml_schema::uri& _xsd_uri_base)
     : ::xml_schema::uri (_xsd_uri_base),
       notes_ (this),
@@ -5988,6 +6183,14 @@ namespace schemas
 
     // modificationDate
     //
+
+    modificationDate::
+    modificationDate ()
+    : ::xml_schema::date (),
+      notes_ (this),
+      idtag_ (this)
+    {
+    }
 
     modificationDate::
     modificationDate (const ::xml_schema::date& _xsd_date_base)
@@ -6097,6 +6300,14 @@ namespace schemas
     //
 
     poc::
+    poc ()
+    : ::schemas::modelID::pocType (),
+      notes_ (this),
+      idtag_ (this)
+    {
+    }
+
+    poc::
     poc (const pocType1_type& pocType1)
     : ::schemas::modelID::pocType (pocType1),
       notes_ (this),
@@ -6105,8 +6316,8 @@ namespace schemas
     }
 
     poc::
-    poc (::std::auto_ptr< pocType1_type > pocType1)
-    : ::schemas::modelID::pocType (pocType1),
+    poc (::std::unique_ptr< pocType1_type > pocType1)
+    : ::schemas::modelID::pocType (std::move (pocType1)),
       notes_ (this),
       idtag_ (this)
     {
@@ -6212,6 +6423,12 @@ namespace schemas
 
     // glyph
     //
+
+    glyph::
+    glyph ()
+    : ::schemas::modelID::glyphType ()
+    {
+    }
 
     glyph::
     glyph (const type_type& type)

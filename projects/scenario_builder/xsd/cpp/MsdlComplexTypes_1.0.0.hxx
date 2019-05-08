@@ -34,6 +34,10 @@
 #ifndef MSDL_COMPLEX_TYPES_1_0_0_HXX
 #define MSDL_COMPLEX_TYPES_1_0_0_HXX
 
+#ifndef XSD_CXX11
+#define XSD_CXX11
+#endif
+
 #ifndef XSD_USE_CHAR
 #define XSD_USE_CHAR
 #endif
@@ -239,7 +243,7 @@ namespace xml_schema
   {
     // Automatic pointer for DOMDocument.
     //
-    using ::xsd::cxx::xml::dom::auto_ptr;
+    using ::xsd::cxx::xml::dom::unique_ptr;
 
 #ifndef XSD_CXX_TREE_TREE_NODE_KEY__XML_SCHEMA
 #define XSD_CXX_TREE_TREE_NODE_KEY__XML_SCHEMA
@@ -336,9 +340,10 @@ namespace msdl_1
 }
 
 
-#include <memory>    // ::std::auto_ptr
+#include <memory>    // ::std::unique_ptr
 #include <limits>    // std::numeric_limits
 #include <algorithm> // std::binary_search
+#include <utility>   // std::move
 
 #include <xsd/cxx/xml/char-utf8.hxx>
 
@@ -377,7 +382,7 @@ namespace msdl_1
     AnchorChoice (const AnchorChoice_type& x);
 
     void
-    AnchorChoice (::std::auto_ptr< AnchorChoice_type > p);
+    AnchorChoice (::std::unique_ptr< AnchorChoice_type > p);
 
     // Anchor
     //
@@ -394,7 +399,7 @@ namespace msdl_1
     Anchor (const Anchor_type& x);
 
     void
-    Anchor (::std::auto_ptr< Anchor_type > p);
+    Anchor (::std::unique_ptr< Anchor_type > p);
 
     // Constructors.
     //
@@ -402,10 +407,10 @@ namespace msdl_1
                      const Anchor_type&);
 
     AnchorPointType (const AnchorChoice_type&,
-                     ::std::auto_ptr< Anchor_type >);
+                     ::std::unique_ptr< Anchor_type >);
 
-    AnchorPointType (::std::auto_ptr< AnchorChoice_type >,
-                     ::std::auto_ptr< Anchor_type >);
+    AnchorPointType (::std::unique_ptr< AnchorChoice_type >,
+                     ::std::unique_ptr< Anchor_type >);
 
     AnchorPointType (const ::xercesc::DOMElement& e,
                      ::xml_schema::flags f = 0,
@@ -526,7 +531,7 @@ namespace msdl_1
     Location (const Location_optional& x);
 
     void
-    Location (::std::auto_ptr< Location_type > p);
+    Location (::std::unique_ptr< Location_type > p);
 
     // PointSymbolHandle
     //
@@ -547,7 +552,7 @@ namespace msdl_1
     PointSymbolHandle (const PointSymbolHandle_optional& x);
 
     void
-    PointSymbolHandle (::std::auto_ptr< PointSymbolHandle_type > p);
+    PointSymbolHandle (::std::unique_ptr< PointSymbolHandle_type > p);
 
     // Constructors.
     //
@@ -612,7 +617,7 @@ namespace msdl_1
     Echelon (const Echelon_optional& x);
 
     void
-    Echelon (::std::auto_ptr< Echelon_type > p);
+    Echelon (::std::unique_ptr< Echelon_type > p);
 
     // AdditionalInfo
     //
@@ -633,7 +638,7 @@ namespace msdl_1
     AdditionalInfo (const AdditionalInfo_optional& x);
 
     void
-    AdditionalInfo (::std::auto_ptr< AdditionalInfo_type > p);
+    AdditionalInfo (::std::unique_ptr< AdditionalInfo_type > p);
 
     // AdditionalInfo1
     //
@@ -654,7 +659,7 @@ namespace msdl_1
     AdditionalInfo1 (const AdditionalInfo1_optional& x);
 
     void
-    AdditionalInfo1 (::std::auto_ptr< AdditionalInfo1_type > p);
+    AdditionalInfo1 (::std::unique_ptr< AdditionalInfo1_type > p);
 
     // AdditionalInfo2
     //
@@ -675,7 +680,7 @@ namespace msdl_1
     AdditionalInfo2 (const AdditionalInfo2_optional& x);
 
     void
-    AdditionalInfo2 (::std::auto_ptr< AdditionalInfo2_type > p);
+    AdditionalInfo2 (::std::unique_ptr< AdditionalInfo2_type > p);
 
     // UniqueDesignation
     //
@@ -696,7 +701,7 @@ namespace msdl_1
     UniqueDesignation (const UniqueDesignation_optional& x);
 
     void
-    UniqueDesignation (::std::auto_ptr< UniqueDesignation_type > p);
+    UniqueDesignation (::std::unique_ptr< UniqueDesignation_type > p);
 
     // DateTimeGroup
     //
@@ -717,7 +722,7 @@ namespace msdl_1
     DateTimeGroup (const DateTimeGroup_optional& x);
 
     void
-    DateTimeGroup (::std::auto_ptr< DateTimeGroup_type > p);
+    DateTimeGroup (::std::unique_ptr< DateTimeGroup_type > p);
 
     // DateTimeGroup1
     //
@@ -738,7 +743,7 @@ namespace msdl_1
     DateTimeGroup1 (const DateTimeGroup1_optional& x);
 
     void
-    DateTimeGroup1 (::std::auto_ptr< DateTimeGroup1_type > p);
+    DateTimeGroup1 (::std::unique_ptr< DateTimeGroup1_type > p);
 
     // Constructors.
     //
@@ -804,7 +809,7 @@ namespace msdl_1
     OverlayHandles (const OverlayHandles_type& x);
 
     void
-    OverlayHandles (::std::auto_ptr< OverlayHandles_type > p);
+    OverlayHandles (::std::unique_ptr< OverlayHandles_type > p);
 
     // SourceOverlayType
     //
@@ -825,13 +830,13 @@ namespace msdl_1
     SourceOverlayType (const SourceOverlayType_optional& x);
 
     void
-    SourceOverlayType (::std::auto_ptr< SourceOverlayType_type > p);
+    SourceOverlayType (::std::unique_ptr< SourceOverlayType_type > p);
 
     // Constructors.
     //
     AssociatedOverlaysType (const OverlayHandles_type&);
 
-    AssociatedOverlaysType (::std::auto_ptr< OverlayHandles_type >);
+    AssociatedOverlaysType (::std::unique_ptr< OverlayHandles_type >);
 
     AssociatedOverlaysType (const ::xercesc::DOMElement& e,
                             ::xml_schema::flags f = 0,
@@ -948,7 +953,7 @@ namespace msdl_1
     AffiliateHandle (const AffiliateHandle_type& x);
 
     void
-    AffiliateHandle (::std::auto_ptr< AffiliateHandle_type > p);
+    AffiliateHandle (::std::unique_ptr< AffiliateHandle_type > p);
 
     // Relationship
     //
@@ -965,15 +970,15 @@ namespace msdl_1
     Relationship (const Relationship_type& x);
 
     void
-    Relationship (::std::auto_ptr< Relationship_type > p);
+    Relationship (::std::unique_ptr< Relationship_type > p);
 
     // Constructors.
     //
     AssociationType (const AffiliateHandle_type&,
                      const Relationship_type&);
 
-    AssociationType (::std::auto_ptr< AffiliateHandle_type >,
-                     ::std::auto_ptr< Relationship_type >);
+    AssociationType (::std::unique_ptr< AffiliateHandle_type >,
+                     ::std::unique_ptr< Relationship_type >);
 
     AssociationType (const ::xercesc::DOMElement& e,
                      ::xml_schema::flags f = 0,
@@ -1034,7 +1039,7 @@ namespace msdl_1
     Echelon (const Echelon_optional& x);
 
     void
-    Echelon (::std::auto_ptr< Echelon_type > p);
+    Echelon (::std::unique_ptr< Echelon_type > p);
 
     // UniqueDesignation
     //
@@ -1055,7 +1060,7 @@ namespace msdl_1
     UniqueDesignation (const UniqueDesignation_optional& x);
 
     void
-    UniqueDesignation (::std::auto_ptr< UniqueDesignation_type > p);
+    UniqueDesignation (::std::unique_ptr< UniqueDesignation_type > p);
 
     // UniqueDesignation1
     //
@@ -1076,7 +1081,7 @@ namespace msdl_1
     UniqueDesignation1 (const UniqueDesignation1_optional& x);
 
     void
-    UniqueDesignation1 (::std::auto_ptr< UniqueDesignation1_type > p);
+    UniqueDesignation1 (::std::unique_ptr< UniqueDesignation1_type > p);
 
     // Constructors.
     //
@@ -1198,7 +1203,7 @@ namespace msdl_1
     CommandingSuperiorHandle (const CommandingSuperiorHandle_type& x);
 
     void
-    CommandingSuperiorHandle (::std::auto_ptr< CommandingSuperiorHandle_type > p);
+    CommandingSuperiorHandle (::std::unique_ptr< CommandingSuperiorHandle_type > p);
 
     // CommandRelationshipType
     //
@@ -1215,15 +1220,15 @@ namespace msdl_1
     CommandRelationshipType (const CommandRelationshipType_type& x);
 
     void
-    CommandRelationshipType (::std::auto_ptr< CommandRelationshipType_type > p);
+    CommandRelationshipType (::std::unique_ptr< CommandRelationshipType_type > p);
 
     // Constructors.
     //
     CommandRelationType (const CommandingSuperiorHandle_type&,
                          const CommandRelationshipType_type&);
 
-    CommandRelationType (::std::auto_ptr< CommandingSuperiorHandle_type >,
-                         ::std::auto_ptr< CommandRelationshipType_type >);
+    CommandRelationType (::std::unique_ptr< CommandingSuperiorHandle_type >,
+                         ::std::unique_ptr< CommandRelationshipType_type >);
 
     CommandRelationType (const ::xercesc::DOMElement& e,
                          ::xml_schema::flags f = 0,
@@ -1344,7 +1349,7 @@ namespace msdl_1
     CommunicationNetType (const CommunicationNetType_optional& x);
 
     void
-    CommunicationNetType (::std::auto_ptr< CommunicationNetType_type > p);
+    CommunicationNetType (::std::unique_ptr< CommunicationNetType_type > p);
 
     // CommunicationNetId
     //
@@ -1361,7 +1366,7 @@ namespace msdl_1
     CommunicationNetId (const CommunicationNetId_type& x);
 
     void
-    CommunicationNetId (::std::auto_ptr< CommunicationNetId_type > p);
+    CommunicationNetId (::std::unique_ptr< CommunicationNetId_type > p);
 
     // CommunicationService
     //
@@ -1378,15 +1383,15 @@ namespace msdl_1
     CommunicationService (const CommunicationService_type& x);
 
     void
-    CommunicationService (::std::auto_ptr< CommunicationService_type > p);
+    CommunicationService (::std::unique_ptr< CommunicationService_type > p);
 
     // Constructors.
     //
     CommunicationNetInstanceType (const CommunicationNetId_type&,
                                   const CommunicationService_type&);
 
-    CommunicationNetInstanceType (::std::auto_ptr< CommunicationNetId_type >,
-                                  ::std::auto_ptr< CommunicationService_type >);
+    CommunicationNetInstanceType (::std::unique_ptr< CommunicationNetId_type >,
+                                  ::std::unique_ptr< CommunicationService_type >);
 
     CommunicationNetInstanceType (const ::xercesc::DOMElement& e,
                                   ::xml_schema::flags f = 0,
@@ -1504,7 +1509,7 @@ namespace msdl_1
     CommunicationNetId (const CommunicationNetId_type& x);
 
     void
-    CommunicationNetId (::std::auto_ptr< CommunicationNetId_type > p);
+    CommunicationNetId (::std::unique_ptr< CommunicationNetId_type > p);
 
     // UnitOwnerHandle
     //
@@ -1521,15 +1526,15 @@ namespace msdl_1
     UnitOwnerHandle (const UnitOwnerHandle_type& x);
 
     void
-    UnitOwnerHandle (::std::auto_ptr< UnitOwnerHandle_type > p);
+    UnitOwnerHandle (::std::unique_ptr< UnitOwnerHandle_type > p);
 
     // Constructors.
     //
     CommunicationNetReferenceType (const CommunicationNetId_type&,
                                    const UnitOwnerHandle_type&);
 
-    CommunicationNetReferenceType (::std::auto_ptr< CommunicationNetId_type >,
-                                   ::std::auto_ptr< UnitOwnerHandle_type >);
+    CommunicationNetReferenceType (::std::unique_ptr< CommunicationNetId_type >,
+                                   ::std::unique_ptr< UnitOwnerHandle_type >);
 
     CommunicationNetReferenceType (const ::xercesc::DOMElement& e,
                                    ::xml_schema::flags f = 0,
@@ -1586,7 +1591,7 @@ namespace msdl_1
     CoordinateSystemType (const CoordinateSystemType_type& x);
 
     void
-    CoordinateSystemType (::std::auto_ptr< CoordinateSystemType_type > p);
+    CoordinateSystemType (::std::unique_ptr< CoordinateSystemType_type > p);
 
     // CoordinateSystemDatum
     //
@@ -1603,15 +1608,15 @@ namespace msdl_1
     CoordinateSystemDatum (const CoordinateSystemDatum_type& x);
 
     void
-    CoordinateSystemDatum (::std::auto_ptr< CoordinateSystemDatum_type > p);
+    CoordinateSystemDatum (::std::unique_ptr< CoordinateSystemDatum_type > p);
 
     // Constructors.
     //
     CoordinateDataStandardType (const CoordinateSystemType_type&,
                                 const CoordinateSystemDatum_type&);
 
-    CoordinateDataStandardType (::std::auto_ptr< CoordinateSystemType_type >,
-                                ::std::auto_ptr< CoordinateSystemDatum_type >);
+    CoordinateDataStandardType (::std::unique_ptr< CoordinateSystemType_type >,
+                                ::std::unique_ptr< CoordinateSystemDatum_type >);
 
     CoordinateDataStandardType (const ::xercesc::DOMElement& e,
                                 ::xml_schema::flags f = 0,
@@ -1668,7 +1673,7 @@ namespace msdl_1
     CoordinateChoice (const CoordinateChoice_type& x);
 
     void
-    CoordinateChoice (::std::auto_ptr< CoordinateChoice_type > p);
+    CoordinateChoice (::std::unique_ptr< CoordinateChoice_type > p);
 
     // CoordinateData
     //
@@ -1685,7 +1690,7 @@ namespace msdl_1
     CoordinateData (const CoordinateData_type& x);
 
     void
-    CoordinateData (::std::auto_ptr< CoordinateData_type > p);
+    CoordinateData (::std::unique_ptr< CoordinateData_type > p);
 
     // Constructors.
     //
@@ -1693,10 +1698,10 @@ namespace msdl_1
                      const CoordinateData_type&);
 
     CoordinatesType (const CoordinateChoice_type&,
-                     ::std::auto_ptr< CoordinateData_type >);
+                     ::std::unique_ptr< CoordinateData_type >);
 
-    CoordinatesType (::std::auto_ptr< CoordinateChoice_type >,
-                     ::std::auto_ptr< CoordinateData_type >);
+    CoordinatesType (::std::unique_ptr< CoordinateChoice_type >,
+                     ::std::unique_ptr< CoordinateData_type >);
 
     CoordinatesType (const ::xercesc::DOMElement& e,
                      ::xml_schema::flags f = 0,
@@ -1757,7 +1762,7 @@ namespace msdl_1
     MGRS (const MGRS_optional& x);
 
     void
-    MGRS (::std::auto_ptr< MGRS_type > p);
+    MGRS (::std::unique_ptr< MGRS_type > p);
 
     // UTM
     //
@@ -1778,7 +1783,7 @@ namespace msdl_1
     UTM (const UTM_optional& x);
 
     void
-    UTM (::std::auto_ptr< UTM_type > p);
+    UTM (::std::unique_ptr< UTM_type > p);
 
     // GDC
     //
@@ -1799,7 +1804,7 @@ namespace msdl_1
     GDC (const GDC_optional& x);
 
     void
-    GDC (::std::auto_ptr< GDC_type > p);
+    GDC (::std::unique_ptr< GDC_type > p);
 
     // GCC
     //
@@ -1820,7 +1825,7 @@ namespace msdl_1
     GCC (const GCC_optional& x);
 
     void
-    GCC (::std::auto_ptr< GCC_type > p);
+    GCC (::std::unique_ptr< GCC_type > p);
 
     // Constructors.
     //
@@ -1887,7 +1892,7 @@ namespace msdl_1
     ScenarioTime (const ScenarioTime_optional& x);
 
     void
-    ScenarioTime (::std::auto_ptr< ScenarioTime_type > p);
+    ScenarioTime (::std::unique_ptr< ScenarioTime_type > p);
 
     // AreaOfInterest
     //
@@ -1908,7 +1913,7 @@ namespace msdl_1
     AreaOfInterest (const AreaOfInterest_optional& x);
 
     void
-    AreaOfInterest (::std::auto_ptr< AreaOfInterest_type > p);
+    AreaOfInterest (::std::unique_ptr< AreaOfInterest_type > p);
 
     // ScenarioWeather
     //
@@ -1929,7 +1934,7 @@ namespace msdl_1
     ScenarioWeather (const ScenarioWeather_optional& x);
 
     void
-    ScenarioWeather (::std::auto_ptr< ScenarioWeather_type > p);
+    ScenarioWeather (::std::unique_ptr< ScenarioWeather_type > p);
 
     // METOC
     //
@@ -1950,7 +1955,7 @@ namespace msdl_1
     METOC (const METOC_optional& x);
 
     void
-    METOC (::std::auto_ptr< METOC_type > p);
+    METOC (::std::unique_ptr< METOC_type > p);
 
     // Constructors.
     //
@@ -2013,7 +2018,7 @@ namespace msdl_1
     Location (const Location_type& x);
 
     void
-    Location (::std::auto_ptr< Location_type > p);
+    Location (::std::unique_ptr< Location_type > p);
 
     // DirectionOfMovement
     //
@@ -2034,7 +2039,7 @@ namespace msdl_1
     DirectionOfMovement (const DirectionOfMovement_optional& x);
 
     void
-    DirectionOfMovement (::std::auto_ptr< DirectionOfMovement_type > p);
+    DirectionOfMovement (::std::unique_ptr< DirectionOfMovement_type > p);
 
     // Speed
     //
@@ -2055,7 +2060,7 @@ namespace msdl_1
     Speed (const Speed_optional& x);
 
     void
-    Speed (::std::auto_ptr< Speed_type > p);
+    Speed (::std::unique_ptr< Speed_type > p);
 
     // FormationPosition
     //
@@ -2076,13 +2081,13 @@ namespace msdl_1
     FormationPosition (const FormationPosition_optional& x);
 
     void
-    FormationPosition (::std::auto_ptr< FormationPosition_type > p);
+    FormationPosition (::std::unique_ptr< FormationPosition_type > p);
 
     // Constructors.
     //
     EquipmentDispositionType (const Location_type&);
 
-    EquipmentDispositionType (::std::auto_ptr< Location_type >);
+    EquipmentDispositionType (::std::unique_ptr< Location_type >);
 
     EquipmentDispositionType (const ::xercesc::DOMElement& e,
                               ::xml_schema::flags f = 0,
@@ -2141,7 +2146,7 @@ namespace msdl_1
     ObjectHandle (const ObjectHandle_type& x);
 
     void
-    ObjectHandle (::std::auto_ptr< ObjectHandle_type > p);
+    ObjectHandle (::std::unique_ptr< ObjectHandle_type > p);
 
     // SymbolIdentifier
     //
@@ -2158,7 +2163,7 @@ namespace msdl_1
     SymbolIdentifier (const SymbolIdentifier_type& x);
 
     void
-    SymbolIdentifier (::std::auto_ptr< SymbolIdentifier_type > p);
+    SymbolIdentifier (::std::unique_ptr< SymbolIdentifier_type > p);
 
     // Name
     //
@@ -2179,7 +2184,7 @@ namespace msdl_1
     Name (const Name_optional& x);
 
     void
-    Name (::std::auto_ptr< Name_type > p);
+    Name (::std::unique_ptr< Name_type > p);
 
     // EquipmentSymbolModifiers
     //
@@ -2200,7 +2205,7 @@ namespace msdl_1
     EquipmentSymbolModifiers (const EquipmentSymbolModifiers_optional& x);
 
     void
-    EquipmentSymbolModifiers (::std::auto_ptr< EquipmentSymbolModifiers_type > p);
+    EquipmentSymbolModifiers (::std::unique_ptr< EquipmentSymbolModifiers_type > p);
 
     // CommunicationNetReferences
     //
@@ -2221,7 +2226,7 @@ namespace msdl_1
     CommunicationNetReferences (const CommunicationNetReferences_optional& x);
 
     void
-    CommunicationNetReferences (::std::auto_ptr< CommunicationNetReferences_type > p);
+    CommunicationNetReferences (::std::unique_ptr< CommunicationNetReferences_type > p);
 
     // Disposition
     //
@@ -2238,7 +2243,7 @@ namespace msdl_1
     Disposition (const Disposition_type& x);
 
     void
-    Disposition (::std::auto_ptr< Disposition_type > p);
+    Disposition (::std::unique_ptr< Disposition_type > p);
 
     // Relations
     //
@@ -2255,7 +2260,7 @@ namespace msdl_1
     Relations (const Relations_type& x);
 
     void
-    Relations (::std::auto_ptr< Relations_type > p);
+    Relations (::std::unique_ptr< Relations_type > p);
 
     // Model
     //
@@ -2276,7 +2281,7 @@ namespace msdl_1
     Model (const Model_optional& x);
 
     void
-    Model (::std::auto_ptr< Model_type > p);
+    Model (::std::unique_ptr< Model_type > p);
 
     // Constructors.
     //
@@ -2287,13 +2292,13 @@ namespace msdl_1
 
     EquipmentItemType (const ObjectHandle_type&,
                        const SymbolIdentifier_type&,
-                       ::std::auto_ptr< Disposition_type >,
-                       ::std::auto_ptr< Relations_type >);
+                       ::std::unique_ptr< Disposition_type >,
+                       ::std::unique_ptr< Relations_type >);
 
-    EquipmentItemType (::std::auto_ptr< ObjectHandle_type >,
-                       ::std::auto_ptr< SymbolIdentifier_type >,
-                       ::std::auto_ptr< Disposition_type >,
-                       ::std::auto_ptr< Relations_type >);
+    EquipmentItemType (::std::unique_ptr< ObjectHandle_type >,
+                       ::std::unique_ptr< SymbolIdentifier_type >,
+                       ::std::unique_ptr< Disposition_type >,
+                       ::std::unique_ptr< Relations_type >);
 
     EquipmentItemType (const ::xercesc::DOMElement& e,
                        ::xml_schema::flags f = 0,
@@ -2356,13 +2361,13 @@ namespace msdl_1
     Resolution (const Resolution_type& x);
 
     void
-    Resolution (::std::auto_ptr< Resolution_type > p);
+    Resolution (::std::unique_ptr< Resolution_type > p);
 
     // Constructors.
     //
     EquipmentModelType (const Resolution_type&);
 
-    EquipmentModelType (::std::auto_ptr< Resolution_type >);
+    EquipmentModelType (::std::unique_ptr< Resolution_type >);
 
     EquipmentModelType (const ::xercesc::DOMElement& e,
                         ::xml_schema::flags f = 0,
@@ -2422,7 +2427,7 @@ namespace msdl_1
     OrganicSuperiorHandle (const OrganicSuperiorHandle_optional& x);
 
     void
-    OrganicSuperiorHandle (::std::auto_ptr< OrganicSuperiorHandle_type > p);
+    OrganicSuperiorHandle (::std::unique_ptr< OrganicSuperiorHandle_type > p);
 
     // HoldingOrganization
     //
@@ -2439,13 +2444,13 @@ namespace msdl_1
     HoldingOrganization (const HoldingOrganization_type& x);
 
     void
-    HoldingOrganization (::std::auto_ptr< HoldingOrganization_type > p);
+    HoldingOrganization (::std::unique_ptr< HoldingOrganization_type > p);
 
     // Constructors.
     //
     EquipmentRelationsType (const HoldingOrganization_type&);
 
-    EquipmentRelationsType (::std::auto_ptr< HoldingOrganization_type >);
+    EquipmentRelationsType (::std::unique_ptr< HoldingOrganization_type >);
 
     EquipmentRelationsType (const ::xercesc::DOMElement& e,
                             ::xml_schema::flags f = 0,
@@ -2506,7 +2511,7 @@ namespace msdl_1
     Quantity (const Quantity_optional& x);
 
     void
-    Quantity (::std::auto_ptr< Quantity_type > p);
+    Quantity (::std::unique_ptr< Quantity_type > p);
 
     // StaffComments
     //
@@ -2527,7 +2532,7 @@ namespace msdl_1
     StaffComments (const StaffComments_optional& x);
 
     void
-    StaffComments (::std::auto_ptr< StaffComments_type > p);
+    StaffComments (::std::unique_ptr< StaffComments_type > p);
 
     // AdditionalInfo
     //
@@ -2548,7 +2553,7 @@ namespace msdl_1
     AdditionalInfo (const AdditionalInfo_optional& x);
 
     void
-    AdditionalInfo (::std::auto_ptr< AdditionalInfo_type > p);
+    AdditionalInfo (::std::unique_ptr< AdditionalInfo_type > p);
 
     // CombatEffectiveness
     //
@@ -2569,7 +2574,7 @@ namespace msdl_1
     CombatEffectiveness (const CombatEffectiveness_optional& x);
 
     void
-    CombatEffectiveness (::std::auto_ptr< CombatEffectiveness_type > p);
+    CombatEffectiveness (::std::unique_ptr< CombatEffectiveness_type > p);
 
     // IFF
     //
@@ -2590,7 +2595,7 @@ namespace msdl_1
     IFF (const IFF_optional& x);
 
     void
-    IFF (::std::auto_ptr< IFF_type > p);
+    IFF (::std::unique_ptr< IFF_type > p);
 
     // UniqueDesignation
     //
@@ -2607,7 +2612,7 @@ namespace msdl_1
     UniqueDesignation (const UniqueDesignation_type& x);
 
     void
-    UniqueDesignation (::std::auto_ptr< UniqueDesignation_type > p);
+    UniqueDesignation (::std::unique_ptr< UniqueDesignation_type > p);
 
     // EquipmentType
     //
@@ -2628,7 +2633,7 @@ namespace msdl_1
     EquipmentType (const EquipmentType_optional& x);
 
     void
-    EquipmentType (::std::auto_ptr< EquipmentType_type > p);
+    EquipmentType (::std::unique_ptr< EquipmentType_type > p);
 
     // TowedSonarArray
     //
@@ -2649,13 +2654,13 @@ namespace msdl_1
     TowedSonarArray (const TowedSonarArray_optional& x);
 
     void
-    TowedSonarArray (::std::auto_ptr< TowedSonarArray_type > p);
+    TowedSonarArray (::std::unique_ptr< TowedSonarArray_type > p);
 
     // Constructors.
     //
     EquipmentSymbolModifiersType (const UniqueDesignation_type&);
 
-    EquipmentSymbolModifiersType (::std::auto_ptr< UniqueDesignation_type >);
+    EquipmentSymbolModifiersType (::std::unique_ptr< UniqueDesignation_type >);
 
     EquipmentSymbolModifiersType (const ::xercesc::DOMElement& e,
                                   ::xml_schema::flags f = 0,
@@ -2782,7 +2787,7 @@ namespace msdl_1
     CommandRelation (const CommandRelation_optional& x);
 
     void
-    CommandRelation (::std::auto_ptr< CommandRelation_type > p);
+    CommandRelation (::std::unique_ptr< CommandRelation_type > p);
 
     // ForceSideHandle
     //
@@ -2803,7 +2808,7 @@ namespace msdl_1
     ForceSideHandle (const ForceSideHandle_optional& x);
 
     void
-    ForceSideHandle (::std::auto_ptr< ForceSideHandle_type > p);
+    ForceSideHandle (::std::unique_ptr< ForceSideHandle_type > p);
 
     // Constructors.
     //
@@ -2864,7 +2869,7 @@ namespace msdl_1
     ForceRelationChoice (const ForceRelationChoice_type& x);
 
     void
-    ForceRelationChoice (::std::auto_ptr< ForceRelationChoice_type > p);
+    ForceRelationChoice (::std::unique_ptr< ForceRelationChoice_type > p);
 
     // ForceRelationData
     //
@@ -2881,7 +2886,7 @@ namespace msdl_1
     ForceRelationData (const ForceRelationData_type& x);
 
     void
-    ForceRelationData (::std::auto_ptr< ForceRelationData_type > p);
+    ForceRelationData (::std::unique_ptr< ForceRelationData_type > p);
 
     // Constructors.
     //
@@ -2889,10 +2894,10 @@ namespace msdl_1
                        const ForceRelationData_type&);
 
     ForceRelationType (const ForceRelationChoice_type&,
-                       ::std::auto_ptr< ForceRelationData_type >);
+                       ::std::unique_ptr< ForceRelationData_type >);
 
-    ForceRelationType (::std::auto_ptr< ForceRelationChoice_type >,
-                       ::std::auto_ptr< ForceRelationData_type >);
+    ForceRelationType (::std::unique_ptr< ForceRelationChoice_type >,
+                       ::std::unique_ptr< ForceRelationData_type >);
 
     ForceRelationType (const ::xercesc::DOMElement& e,
                        ::xml_schema::flags f = 0,
@@ -3009,7 +3014,7 @@ namespace msdl_1
     ObjectHandle (const ObjectHandle_type& x);
 
     void
-    ObjectHandle (::std::auto_ptr< ObjectHandle_type > p);
+    ObjectHandle (::std::unique_ptr< ObjectHandle_type > p);
 
     // ForceSideName
     //
@@ -3026,7 +3031,7 @@ namespace msdl_1
     ForceSideName (const ForceSideName_type& x);
 
     void
-    ForceSideName (::std::auto_ptr< ForceSideName_type > p);
+    ForceSideName (::std::unique_ptr< ForceSideName_type > p);
 
     // AllegianceHandle
     //
@@ -3047,7 +3052,7 @@ namespace msdl_1
     AllegianceHandle (const AllegianceHandle_optional& x);
 
     void
-    AllegianceHandle (::std::auto_ptr< AllegianceHandle_type > p);
+    AllegianceHandle (::std::unique_ptr< AllegianceHandle_type > p);
 
     // MilitaryService
     //
@@ -3068,7 +3073,7 @@ namespace msdl_1
     MilitaryService (const MilitaryService_optional& x);
 
     void
-    MilitaryService (::std::auto_ptr< MilitaryService_type > p);
+    MilitaryService (::std::unique_ptr< MilitaryService_type > p);
 
     // CountryCode
     //
@@ -3089,7 +3094,7 @@ namespace msdl_1
     CountryCode (const CountryCode_optional& x);
 
     void
-    CountryCode (::std::auto_ptr< CountryCode_type > p);
+    CountryCode (::std::unique_ptr< CountryCode_type > p);
 
     // Associations
     //
@@ -3110,15 +3115,15 @@ namespace msdl_1
     Associations (const Associations_optional& x);
 
     void
-    Associations (::std::auto_ptr< Associations_type > p);
+    Associations (::std::unique_ptr< Associations_type > p);
 
     // Constructors.
     //
     ForceSideType (const ObjectHandle_type&,
                    const ForceSideName_type&);
 
-    ForceSideType (::std::auto_ptr< ObjectHandle_type >,
-                   ::std::auto_ptr< ForceSideName_type >);
+    ForceSideType (::std::unique_ptr< ObjectHandle_type >,
+                   ::std::unique_ptr< ForceSideName_type >);
 
     ForceSideType (const ::xercesc::DOMElement& e,
                    ::xml_schema::flags f = 0,
@@ -3183,7 +3188,7 @@ namespace msdl_1
     GroundFormationType (const GroundFormationType_optional& x);
 
     void
-    GroundFormationType (::std::auto_ptr< GroundFormationType_type > p);
+    GroundFormationType (::std::unique_ptr< GroundFormationType_type > p);
 
     // AirFormationType
     //
@@ -3204,7 +3209,7 @@ namespace msdl_1
     AirFormationType (const AirFormationType_optional& x);
 
     void
-    AirFormationType (::std::auto_ptr< AirFormationType_type > p);
+    AirFormationType (::std::unique_ptr< AirFormationType_type > p);
 
     // SurfaceFomationType
     //
@@ -3225,7 +3230,7 @@ namespace msdl_1
     SurfaceFomationType (const SurfaceFomationType_optional& x);
 
     void
-    SurfaceFomationType (::std::auto_ptr< SurfaceFomationType_type > p);
+    SurfaceFomationType (::std::unique_ptr< SurfaceFomationType_type > p);
 
     // SubsurfaceFormationType
     //
@@ -3246,7 +3251,7 @@ namespace msdl_1
     SubsurfaceFormationType (const SubsurfaceFormationType_optional& x);
 
     void
-    SubsurfaceFormationType (::std::auto_ptr< SubsurfaceFormationType_type > p);
+    SubsurfaceFormationType (::std::unique_ptr< SubsurfaceFormationType_type > p);
 
     // Constructors.
     //
@@ -3313,7 +3318,7 @@ namespace msdl_1
     OutOfFormation (const OutOfFormation_optional& x);
 
     void
-    OutOfFormation (::std::auto_ptr< OutOfFormation_type > p);
+    OutOfFormation (::std::unique_ptr< OutOfFormation_type > p);
 
     // FormationOrder
     //
@@ -3334,7 +3339,7 @@ namespace msdl_1
     FormationOrder (const FormationOrder_optional& x);
 
     void
-    FormationOrder (::std::auto_ptr< FormationOrder_type > p);
+    FormationOrder (::std::unique_ptr< FormationOrder_type > p);
 
     // SensorOrientation
     //
@@ -3355,7 +3360,7 @@ namespace msdl_1
     SensorOrientation (const SensorOrientation_optional& x);
 
     void
-    SensorOrientation (::std::auto_ptr< SensorOrientation_type > p);
+    SensorOrientation (::std::unique_ptr< SensorOrientation_type > p);
 
     // Constructors.
     //
@@ -3417,7 +3422,7 @@ namespace msdl_1
     X (const X_type& x);
 
     void
-    X (::std::auto_ptr< X_type > p);
+    X (::std::unique_ptr< X_type > p);
 
     // Y
     //
@@ -3434,7 +3439,7 @@ namespace msdl_1
     Y (const Y_type& x);
 
     void
-    Y (::std::auto_ptr< Y_type > p);
+    Y (::std::unique_ptr< Y_type > p);
 
     // Z
     //
@@ -3451,7 +3456,7 @@ namespace msdl_1
     Z (const Z_type& x);
 
     void
-    Z (::std::auto_ptr< Z_type > p);
+    Z (::std::unique_ptr< Z_type > p);
 
     // Constructors.
     //
@@ -3459,9 +3464,9 @@ namespace msdl_1
              const Y_type&,
              const Z_type&);
 
-    GCCType (::std::auto_ptr< X_type >,
-             ::std::auto_ptr< Y_type >,
-             ::std::auto_ptr< Z_type >);
+    GCCType (::std::unique_ptr< X_type >,
+             ::std::unique_ptr< Y_type >,
+             ::std::unique_ptr< Z_type >);
 
     GCCType (const ::xercesc::DOMElement& e,
              ::xml_schema::flags f = 0,
@@ -3519,7 +3524,7 @@ namespace msdl_1
     Latitude (const Latitude_type& x);
 
     void
-    Latitude (::std::auto_ptr< Latitude_type > p);
+    Latitude (::std::unique_ptr< Latitude_type > p);
 
     // Longitude
     //
@@ -3536,7 +3541,7 @@ namespace msdl_1
     Longitude (const Longitude_type& x);
 
     void
-    Longitude (::std::auto_ptr< Longitude_type > p);
+    Longitude (::std::unique_ptr< Longitude_type > p);
 
     // ElevationAGL
     //
@@ -3553,7 +3558,7 @@ namespace msdl_1
     ElevationAGL (const ElevationAGL_type& x);
 
     void
-    ElevationAGL (::std::auto_ptr< ElevationAGL_type > p);
+    ElevationAGL (::std::unique_ptr< ElevationAGL_type > p);
 
     // Constructors.
     //
@@ -3561,9 +3566,9 @@ namespace msdl_1
              const Longitude_type&,
              const ElevationAGL_type&);
 
-    GDCType (::std::auto_ptr< Latitude_type >,
-             ::std::auto_ptr< Longitude_type >,
-             ::std::auto_ptr< ElevationAGL_type >);
+    GDCType (::std::unique_ptr< Latitude_type >,
+             ::std::unique_ptr< Longitude_type >,
+             ::std::unique_ptr< ElevationAGL_type >);
 
     GDCType (const ::xercesc::DOMElement& e,
              ::xml_schema::flags f = 0,
@@ -3685,7 +3690,7 @@ namespace msdl_1
     FrameShapeModifier (const FrameShapeModifier_optional& x);
 
     void
-    FrameShapeModifier (::std::auto_ptr< FrameShapeModifier_type > p);
+    FrameShapeModifier (::std::unique_ptr< FrameShapeModifier_type > p);
 
     // StaffComments
     //
@@ -3706,7 +3711,7 @@ namespace msdl_1
     StaffComments (const StaffComments_optional& x);
 
     void
-    StaffComments (::std::auto_ptr< StaffComments_type > p);
+    StaffComments (::std::unique_ptr< StaffComments_type > p);
 
     // AdditionalInfo
     //
@@ -3727,7 +3732,7 @@ namespace msdl_1
     AdditionalInfo (const AdditionalInfo_optional& x);
 
     void
-    AdditionalInfo (::std::auto_ptr< AdditionalInfo_type > p);
+    AdditionalInfo (::std::unique_ptr< AdditionalInfo_type > p);
 
     // CombatEffectiveness
     //
@@ -3748,7 +3753,7 @@ namespace msdl_1
     CombatEffectiveness (const CombatEffectiveness_optional& x);
 
     void
-    CombatEffectiveness (::std::auto_ptr< CombatEffectiveness_type > p);
+    CombatEffectiveness (::std::unique_ptr< CombatEffectiveness_type > p);
 
     // IFF
     //
@@ -3769,7 +3774,7 @@ namespace msdl_1
     IFF (const IFF_optional& x);
 
     void
-    IFF (::std::auto_ptr< IFF_type > p);
+    IFF (::std::unique_ptr< IFF_type > p);
 
     // UniqueDesignation
     //
@@ -3786,7 +3791,7 @@ namespace msdl_1
     UniqueDesignation (const UniqueDesignation_type& x);
 
     void
-    UniqueDesignation (::std::auto_ptr< UniqueDesignation_type > p);
+    UniqueDesignation (::std::unique_ptr< UniqueDesignation_type > p);
 
     // DateTimeGroup
     //
@@ -3807,13 +3812,13 @@ namespace msdl_1
     DateTimeGroup (const DateTimeGroup_optional& x);
 
     void
-    DateTimeGroup (::std::auto_ptr< DateTimeGroup_type > p);
+    DateTimeGroup (::std::unique_ptr< DateTimeGroup_type > p);
 
     // Constructors.
     //
     InstallationSymbolModifiersType (const UniqueDesignation_type&);
 
-    InstallationSymbolModifiersType (::std::auto_ptr< UniqueDesignation_type >);
+    InstallationSymbolModifiersType (::std::unique_ptr< UniqueDesignation_type >);
 
     InstallationSymbolModifiersType (const ::xercesc::DOMElement& e,
                                      ::xml_schema::flags f = 0,
@@ -3875,7 +3880,7 @@ namespace msdl_1
     ObjectHandle (const ObjectHandle_type& x);
 
     void
-    ObjectHandle (::std::auto_ptr< ObjectHandle_type > p);
+    ObjectHandle (::std::unique_ptr< ObjectHandle_type > p);
 
     // SymbolIdentifier
     //
@@ -3892,7 +3897,7 @@ namespace msdl_1
     SymbolIdentifier (const SymbolIdentifier_type& x);
 
     void
-    SymbolIdentifier (::std::auto_ptr< SymbolIdentifier_type > p);
+    SymbolIdentifier (::std::unique_ptr< SymbolIdentifier_type > p);
 
     // Affiliation
     //
@@ -3909,7 +3914,7 @@ namespace msdl_1
     Affiliation (const Affiliation_type& x);
 
     void
-    Affiliation (::std::auto_ptr< Affiliation_type > p);
+    Affiliation (::std::unique_ptr< Affiliation_type > p);
 
     // Owner
     //
@@ -3926,7 +3931,7 @@ namespace msdl_1
     Owner (const Owner_type& x);
 
     void
-    Owner (::std::auto_ptr< Owner_type > p);
+    Owner (::std::unique_ptr< Owner_type > p);
 
     // Location
     //
@@ -3943,7 +3948,7 @@ namespace msdl_1
     Location (const Location_type& x);
 
     void
-    Location (::std::auto_ptr< Location_type > p);
+    Location (::std::unique_ptr< Location_type > p);
 
     // Orientation
     //
@@ -3964,7 +3969,7 @@ namespace msdl_1
     Orientation (const Orientation_optional& x);
 
     void
-    Orientation (::std::auto_ptr< Orientation_type > p);
+    Orientation (::std::unique_ptr< Orientation_type > p);
 
     // Name
     //
@@ -3985,7 +3990,7 @@ namespace msdl_1
     Name (const Name_optional& x);
 
     void
-    Name (::std::auto_ptr< Name_type > p);
+    Name (::std::unique_ptr< Name_type > p);
 
     // InstallationSymbolModifiers
     //
@@ -4006,7 +4011,7 @@ namespace msdl_1
     InstallationSymbolModifiers (const InstallationSymbolModifiers_optional& x);
 
     void
-    InstallationSymbolModifiers (::std::auto_ptr< InstallationSymbolModifiers_type > p);
+    InstallationSymbolModifiers (::std::unique_ptr< InstallationSymbolModifiers_type > p);
 
     // AssociatedOverlays
     //
@@ -4027,7 +4032,7 @@ namespace msdl_1
     AssociatedOverlays (const AssociatedOverlays_optional& x);
 
     void
-    AssociatedOverlays (::std::auto_ptr< AssociatedOverlays_type > p);
+    AssociatedOverlays (::std::unique_ptr< AssociatedOverlays_type > p);
 
     // Constructors.
     //
@@ -4040,14 +4045,14 @@ namespace msdl_1
     InstallationType (const ObjectHandle_type&,
                       const SymbolIdentifier_type&,
                       const Affiliation_type&,
-                      ::std::auto_ptr< Owner_type >,
-                      ::std::auto_ptr< Location_type >);
+                      ::std::unique_ptr< Owner_type >,
+                      ::std::unique_ptr< Location_type >);
 
-    InstallationType (::std::auto_ptr< ObjectHandle_type >,
-                      ::std::auto_ptr< SymbolIdentifier_type >,
-                      ::std::auto_ptr< Affiliation_type >,
-                      ::std::auto_ptr< Owner_type >,
-                      ::std::auto_ptr< Location_type >);
+    InstallationType (::std::unique_ptr< ObjectHandle_type >,
+                      ::std::unique_ptr< SymbolIdentifier_type >,
+                      ::std::unique_ptr< Affiliation_type >,
+                      ::std::unique_ptr< Owner_type >,
+                      ::std::unique_ptr< Location_type >);
 
     InstallationType (const ::xercesc::DOMElement& e,
                       ::xml_schema::flags f = 0,
@@ -4175,7 +4180,7 @@ namespace msdl_1
     UniqueDesignation (const UniqueDesignation_optional& x);
 
     void
-    UniqueDesignation (::std::auto_ptr< UniqueDesignation_type > p);
+    UniqueDesignation (::std::unique_ptr< UniqueDesignation_type > p);
 
     // UniqueDesignation1
     //
@@ -4196,7 +4201,7 @@ namespace msdl_1
     UniqueDesignation1 (const UniqueDesignation1_optional& x);
 
     void
-    UniqueDesignation1 (::std::auto_ptr< UniqueDesignation1_type > p);
+    UniqueDesignation1 (::std::unique_ptr< UniqueDesignation1_type > p);
 
     // DateTimeGroup
     //
@@ -4217,7 +4222,7 @@ namespace msdl_1
     DateTimeGroup (const DateTimeGroup_optional& x);
 
     void
-    DateTimeGroup (::std::auto_ptr< DateTimeGroup_type > p);
+    DateTimeGroup (::std::unique_ptr< DateTimeGroup_type > p);
 
     // DateTimeGroup1
     //
@@ -4238,7 +4243,7 @@ namespace msdl_1
     DateTimeGroup1 (const DateTimeGroup1_optional& x);
 
     void
-    DateTimeGroup1 (::std::auto_ptr< DateTimeGroup1_type > p);
+    DateTimeGroup1 (::std::unique_ptr< DateTimeGroup1_type > p);
 
     // Constructors.
     //
@@ -4301,7 +4306,7 @@ namespace msdl_1
     AnchorPoints (const AnchorPoints_type& x);
 
     void
-    AnchorPoints (::std::auto_ptr< AnchorPoints_type > p);
+    AnchorPoints (::std::unique_ptr< AnchorPoints_type > p);
 
     // DirectionOfMovement
     //
@@ -4322,7 +4327,7 @@ namespace msdl_1
     DirectionOfMovement (const DirectionOfMovement_optional& x);
 
     void
-    DirectionOfMovement (::std::auto_ptr< DirectionOfMovement_type > p);
+    DirectionOfMovement (::std::unique_ptr< DirectionOfMovement_type > p);
 
     // Speed
     //
@@ -4343,13 +4348,13 @@ namespace msdl_1
     Speed (const Speed_optional& x);
 
     void
-    Speed (::std::auto_ptr< Speed_type > p);
+    Speed (::std::unique_ptr< Speed_type > p);
 
     // Constructors.
     //
     METOCDispositionType (const AnchorPoints_type&);
 
-    METOCDispositionType (::std::auto_ptr< AnchorPoints_type >);
+    METOCDispositionType (::std::unique_ptr< AnchorPoints_type >);
 
     METOCDispositionType (const ::xercesc::DOMElement& e,
                           ::xml_schema::flags f = 0,
@@ -4407,7 +4412,7 @@ namespace msdl_1
     ObjectHandle (const ObjectHandle_type& x);
 
     void
-    ObjectHandle (::std::auto_ptr< ObjectHandle_type > p);
+    ObjectHandle (::std::unique_ptr< ObjectHandle_type > p);
 
     // SymbolIdentifier
     //
@@ -4424,7 +4429,7 @@ namespace msdl_1
     SymbolIdentifier (const SymbolIdentifier_type& x);
 
     void
-    SymbolIdentifier (::std::auto_ptr< SymbolIdentifier_type > p);
+    SymbolIdentifier (::std::unique_ptr< SymbolIdentifier_type > p);
 
     // UniqueDesignation
     //
@@ -4441,7 +4446,7 @@ namespace msdl_1
     UniqueDesignation (const UniqueDesignation_type& x);
 
     void
-    UniqueDesignation (::std::auto_ptr< UniqueDesignation_type > p);
+    UniqueDesignation (::std::unique_ptr< UniqueDesignation_type > p);
 
     // DateTimeGroup
     //
@@ -4462,7 +4467,7 @@ namespace msdl_1
     DateTimeGroup (const DateTimeGroup_optional& x);
 
     void
-    DateTimeGroup (::std::auto_ptr< DateTimeGroup_type > p);
+    DateTimeGroup (::std::unique_ptr< DateTimeGroup_type > p);
 
     // DateTimeGroup1
     //
@@ -4483,7 +4488,7 @@ namespace msdl_1
     DateTimeGroup1 (const DateTimeGroup1_optional& x);
 
     void
-    DateTimeGroup1 (::std::auto_ptr< DateTimeGroup1_type > p);
+    DateTimeGroup1 (::std::unique_ptr< DateTimeGroup1_type > p);
 
     // Quantity
     //
@@ -4504,7 +4509,7 @@ namespace msdl_1
     Quantity (const Quantity_optional& x);
 
     void
-    Quantity (::std::auto_ptr< Quantity_type > p);
+    Quantity (::std::unique_ptr< Quantity_type > p);
 
     // AdditionalInfo
     //
@@ -4525,7 +4530,7 @@ namespace msdl_1
     AdditionalInfo (const AdditionalInfo_optional& x);
 
     void
-    AdditionalInfo (::std::auto_ptr< AdditionalInfo_type > p);
+    AdditionalInfo (::std::unique_ptr< AdditionalInfo_type > p);
 
     // Disposition
     //
@@ -4542,7 +4547,7 @@ namespace msdl_1
     Disposition (const Disposition_type& x);
 
     void
-    Disposition (::std::auto_ptr< Disposition_type > p);
+    Disposition (::std::unique_ptr< Disposition_type > p);
 
     // Constructors.
     //
@@ -4554,12 +4559,12 @@ namespace msdl_1
     METOCGraphicType (const ObjectHandle_type&,
                       const SymbolIdentifier_type&,
                       const UniqueDesignation_type&,
-                      ::std::auto_ptr< Disposition_type >);
+                      ::std::unique_ptr< Disposition_type >);
 
-    METOCGraphicType (::std::auto_ptr< ObjectHandle_type >,
-                      ::std::auto_ptr< SymbolIdentifier_type >,
-                      ::std::auto_ptr< UniqueDesignation_type >,
-                      ::std::auto_ptr< Disposition_type >);
+    METOCGraphicType (::std::unique_ptr< ObjectHandle_type >,
+                      ::std::unique_ptr< SymbolIdentifier_type >,
+                      ::std::unique_ptr< UniqueDesignation_type >,
+                      ::std::unique_ptr< Disposition_type >);
 
     METOCGraphicType (const ::xercesc::DOMElement& e,
                       ::xml_schema::flags f = 0,
@@ -4682,7 +4687,7 @@ namespace msdl_1
     ScenarioID (const ScenarioID_type& x);
 
     void
-    ScenarioID (::std::auto_ptr< ScenarioID_type > p);
+    ScenarioID (::std::unique_ptr< ScenarioID_type > p);
 
     // Options
     //
@@ -4699,7 +4704,7 @@ namespace msdl_1
     Options (const Options_type& x);
 
     void
-    Options (::std::auto_ptr< Options_type > p);
+    Options (::std::unique_ptr< Options_type > p);
 
     // Environment
     //
@@ -4720,7 +4725,7 @@ namespace msdl_1
     Environment (const Environment_optional& x);
 
     void
-    Environment (::std::auto_ptr< Environment_type > p);
+    Environment (::std::unique_ptr< Environment_type > p);
 
     // ForceSides
     //
@@ -4737,7 +4742,7 @@ namespace msdl_1
     ForceSides (const ForceSides_type& x);
 
     void
-    ForceSides (::std::auto_ptr< ForceSides_type > p);
+    ForceSides (::std::unique_ptr< ForceSides_type > p);
 
     // Organizations
     //
@@ -4758,7 +4763,7 @@ namespace msdl_1
     Organizations (const Organizations_optional& x);
 
     void
-    Organizations (::std::auto_ptr< Organizations_type > p);
+    Organizations (::std::unique_ptr< Organizations_type > p);
 
     // Overlays
     //
@@ -4779,7 +4784,7 @@ namespace msdl_1
     Overlays (const Overlays_optional& x);
 
     void
-    Overlays (::std::auto_ptr< Overlays_type > p);
+    Overlays (::std::unique_ptr< Overlays_type > p);
 
     // Installations
     //
@@ -4800,7 +4805,7 @@ namespace msdl_1
     Installations (const Installations_optional& x);
 
     void
-    Installations (::std::auto_ptr< Installations_type > p);
+    Installations (::std::unique_ptr< Installations_type > p);
 
     // TacticalGraphics
     //
@@ -4821,7 +4826,7 @@ namespace msdl_1
     TacticalGraphics (const TacticalGraphics_optional& x);
 
     void
-    TacticalGraphics (::std::auto_ptr< TacticalGraphics_type > p);
+    TacticalGraphics (::std::unique_ptr< TacticalGraphics_type > p);
 
     // MOOTWGraphics
     //
@@ -4842,7 +4847,7 @@ namespace msdl_1
     MOOTWGraphics (const MOOTWGraphics_optional& x);
 
     void
-    MOOTWGraphics (::std::auto_ptr< MOOTWGraphics_type > p);
+    MOOTWGraphics (::std::unique_ptr< MOOTWGraphics_type > p);
 
     // Constructors.
     //
@@ -4850,9 +4855,9 @@ namespace msdl_1
                           const Options_type&,
                           const ForceSides_type&);
 
-    MilitaryScenarioType (::std::auto_ptr< ScenarioID_type >,
-                          ::std::auto_ptr< Options_type >,
-                          ::std::auto_ptr< ForceSides_type >);
+    MilitaryScenarioType (::std::unique_ptr< ScenarioID_type >,
+                          ::std::unique_ptr< Options_type >,
+                          ::std::unique_ptr< ForceSides_type >);
 
     MilitaryScenarioType (const ::xercesc::DOMElement& e,
                           ::xml_schema::flags f = 0,
@@ -4916,7 +4921,7 @@ namespace msdl_1
     MGRSGridZone (const MGRSGridZone_type& x);
 
     void
-    MGRSGridZone (::std::auto_ptr< MGRSGridZone_type > p);
+    MGRSGridZone (::std::unique_ptr< MGRSGridZone_type > p);
 
     // MGRSGridSquare
     //
@@ -4933,7 +4938,7 @@ namespace msdl_1
     MGRSGridSquare (const MGRSGridSquare_type& x);
 
     void
-    MGRSGridSquare (::std::auto_ptr< MGRSGridSquare_type > p);
+    MGRSGridSquare (::std::unique_ptr< MGRSGridSquare_type > p);
 
     // MGRSPrecision
     //
@@ -4950,7 +4955,7 @@ namespace msdl_1
     MGRSPrecision (const MGRSPrecision_type& x);
 
     void
-    MGRSPrecision (::std::auto_ptr< MGRSPrecision_type > p);
+    MGRSPrecision (::std::unique_ptr< MGRSPrecision_type > p);
 
     // MGRSEasting
     //
@@ -4967,7 +4972,7 @@ namespace msdl_1
     MGRSEasting (const MGRSEasting_type& x);
 
     void
-    MGRSEasting (::std::auto_ptr< MGRSEasting_type > p);
+    MGRSEasting (::std::unique_ptr< MGRSEasting_type > p);
 
     // MGRSNorthing
     //
@@ -4984,7 +4989,7 @@ namespace msdl_1
     MGRSNorthing (const MGRSNorthing_type& x);
 
     void
-    MGRSNorthing (::std::auto_ptr< MGRSNorthing_type > p);
+    MGRSNorthing (::std::unique_ptr< MGRSNorthing_type > p);
 
     // ElevationAGL
     //
@@ -5005,7 +5010,7 @@ namespace msdl_1
     ElevationAGL (const ElevationAGL_optional& x);
 
     void
-    ElevationAGL (::std::auto_ptr< ElevationAGL_type > p);
+    ElevationAGL (::std::unique_ptr< ElevationAGL_type > p);
 
     // Constructors.
     //
@@ -5015,11 +5020,11 @@ namespace msdl_1
               const MGRSEasting_type&,
               const MGRSNorthing_type&);
 
-    MGRSType (::std::auto_ptr< MGRSGridZone_type >,
-              ::std::auto_ptr< MGRSGridSquare_type >,
-              ::std::auto_ptr< MGRSPrecision_type >,
-              ::std::auto_ptr< MGRSEasting_type >,
-              ::std::auto_ptr< MGRSNorthing_type >);
+    MGRSType (::std::unique_ptr< MGRSGridZone_type >,
+              ::std::unique_ptr< MGRSGridSquare_type >,
+              ::std::unique_ptr< MGRSPrecision_type >,
+              ::std::unique_ptr< MGRSEasting_type >,
+              ::std::unique_ptr< MGRSNorthing_type >);
 
     MGRSType (const ::xercesc::DOMElement& e,
               ::xml_schema::flags f = 0,
@@ -5080,7 +5085,7 @@ namespace msdl_1
     Location (const Location_type& x);
 
     void
-    Location (::std::auto_ptr< Location_type > p);
+    Location (::std::unique_ptr< Location_type > p);
 
     // DirectionOfMovement
     //
@@ -5101,7 +5106,7 @@ namespace msdl_1
     DirectionOfMovement (const DirectionOfMovement_optional& x);
 
     void
-    DirectionOfMovement (::std::auto_ptr< DirectionOfMovement_type > p);
+    DirectionOfMovement (::std::unique_ptr< DirectionOfMovement_type > p);
 
     // Speed
     //
@@ -5122,13 +5127,13 @@ namespace msdl_1
     Speed (const Speed_optional& x);
 
     void
-    Speed (::std::auto_ptr< Speed_type > p);
+    Speed (::std::unique_ptr< Speed_type > p);
 
     // Constructors.
     //
     MOOTWDispositionType (const Location_type&);
 
-    MOOTWDispositionType (::std::auto_ptr< Location_type >);
+    MOOTWDispositionType (::std::unique_ptr< Location_type >);
 
     MOOTWDispositionType (const ::xercesc::DOMElement& e,
                           ::xml_schema::flags f = 0,
@@ -5246,7 +5251,7 @@ namespace msdl_1
     ObjectHandle (const ObjectHandle_type& x);
 
     void
-    ObjectHandle (::std::auto_ptr< ObjectHandle_type > p);
+    ObjectHandle (::std::unique_ptr< ObjectHandle_type > p);
 
     // SymbolIdentifier
     //
@@ -5263,7 +5268,7 @@ namespace msdl_1
     SymbolIdentifier (const SymbolIdentifier_type& x);
 
     void
-    SymbolIdentifier (::std::auto_ptr< SymbolIdentifier_type > p);
+    SymbolIdentifier (::std::unique_ptr< SymbolIdentifier_type > p);
 
     // Affiliation
     //
@@ -5280,7 +5285,7 @@ namespace msdl_1
     Affiliation (const Affiliation_type& x);
 
     void
-    Affiliation (::std::auto_ptr< Affiliation_type > p);
+    Affiliation (::std::unique_ptr< Affiliation_type > p);
 
     // Owner
     //
@@ -5297,7 +5302,7 @@ namespace msdl_1
     Owner (const Owner_type& x);
 
     void
-    Owner (::std::auto_ptr< Owner_type > p);
+    Owner (::std::unique_ptr< Owner_type > p);
 
     // MOOTWSymbolModifiers
     //
@@ -5318,7 +5323,7 @@ namespace msdl_1
     MOOTWSymbolModifiers (const MOOTWSymbolModifiers_optional& x);
 
     void
-    MOOTWSymbolModifiers (::std::auto_ptr< MOOTWSymbolModifiers_type > p);
+    MOOTWSymbolModifiers (::std::unique_ptr< MOOTWSymbolModifiers_type > p);
 
     // AssociatedOverlays
     //
@@ -5339,7 +5344,7 @@ namespace msdl_1
     AssociatedOverlays (const AssociatedOverlays_optional& x);
 
     void
-    AssociatedOverlays (::std::auto_ptr< AssociatedOverlays_type > p);
+    AssociatedOverlays (::std::unique_ptr< AssociatedOverlays_type > p);
 
     // Disposition
     //
@@ -5356,7 +5361,7 @@ namespace msdl_1
     Disposition (const Disposition_type& x);
 
     void
-    Disposition (::std::auto_ptr< Disposition_type > p);
+    Disposition (::std::unique_ptr< Disposition_type > p);
 
     // Constructors.
     //
@@ -5369,14 +5374,14 @@ namespace msdl_1
     MOOTWGraphicType (const ObjectHandle_type&,
                       const SymbolIdentifier_type&,
                       const Affiliation_type&,
-                      ::std::auto_ptr< Owner_type >,
-                      ::std::auto_ptr< Disposition_type >);
+                      ::std::unique_ptr< Owner_type >,
+                      ::std::unique_ptr< Disposition_type >);
 
-    MOOTWGraphicType (::std::auto_ptr< ObjectHandle_type >,
-                      ::std::auto_ptr< SymbolIdentifier_type >,
-                      ::std::auto_ptr< Affiliation_type >,
-                      ::std::auto_ptr< Owner_type >,
-                      ::std::auto_ptr< Disposition_type >);
+    MOOTWGraphicType (::std::unique_ptr< ObjectHandle_type >,
+                      ::std::unique_ptr< SymbolIdentifier_type >,
+                      ::std::unique_ptr< Affiliation_type >,
+                      ::std::unique_ptr< Owner_type >,
+                      ::std::unique_ptr< Disposition_type >);
 
     MOOTWGraphicType (const ::xercesc::DOMElement& e,
                       ::xml_schema::flags f = 0,
@@ -5442,7 +5447,7 @@ namespace msdl_1
     Echelon (const Echelon_optional& x);
 
     void
-    Echelon (::std::auto_ptr< Echelon_type > p);
+    Echelon (::std::unique_ptr< Echelon_type > p);
 
     // ReinforcedReduced
     //
@@ -5463,7 +5468,7 @@ namespace msdl_1
     ReinforcedReduced (const ReinforcedReduced_optional& x);
 
     void
-    ReinforcedReduced (::std::auto_ptr< ReinforcedReduced_type > p);
+    ReinforcedReduced (::std::unique_ptr< ReinforcedReduced_type > p);
 
     // FrameShapeModifier
     //
@@ -5484,7 +5489,7 @@ namespace msdl_1
     FrameShapeModifier (const FrameShapeModifier_optional& x);
 
     void
-    FrameShapeModifier (::std::auto_ptr< FrameShapeModifier_type > p);
+    FrameShapeModifier (::std::unique_ptr< FrameShapeModifier_type > p);
 
     // StaffComments
     //
@@ -5505,7 +5510,7 @@ namespace msdl_1
     StaffComments (const StaffComments_optional& x);
 
     void
-    StaffComments (::std::auto_ptr< StaffComments_type > p);
+    StaffComments (::std::unique_ptr< StaffComments_type > p);
 
     // AdditionalInfo
     //
@@ -5526,7 +5531,7 @@ namespace msdl_1
     AdditionalInfo (const AdditionalInfo_optional& x);
 
     void
-    AdditionalInfo (::std::auto_ptr< AdditionalInfo_type > p);
+    AdditionalInfo (::std::unique_ptr< AdditionalInfo_type > p);
 
     // CombatEffectiveness
     //
@@ -5547,7 +5552,7 @@ namespace msdl_1
     CombatEffectiveness (const CombatEffectiveness_optional& x);
 
     void
-    CombatEffectiveness (::std::auto_ptr< CombatEffectiveness_type > p);
+    CombatEffectiveness (::std::unique_ptr< CombatEffectiveness_type > p);
 
     // IFF
     //
@@ -5568,7 +5573,7 @@ namespace msdl_1
     IFF (const IFF_optional& x);
 
     void
-    IFF (::std::auto_ptr< IFF_type > p);
+    IFF (::std::unique_ptr< IFF_type > p);
 
     // UniqueDesignation
     //
@@ -5585,7 +5590,7 @@ namespace msdl_1
     UniqueDesignation (const UniqueDesignation_type& x);
 
     void
-    UniqueDesignation (::std::auto_ptr< UniqueDesignation_type > p);
+    UniqueDesignation (::std::unique_ptr< UniqueDesignation_type > p);
 
     // DateTimeGroup
     //
@@ -5606,7 +5611,7 @@ namespace msdl_1
     DateTimeGroup (const DateTimeGroup_optional& x);
 
     void
-    DateTimeGroup (::std::auto_ptr< DateTimeGroup_type > p);
+    DateTimeGroup (::std::unique_ptr< DateTimeGroup_type > p);
 
     // SpecialC2HQ
     //
@@ -5627,13 +5632,13 @@ namespace msdl_1
     SpecialC2HQ (const SpecialC2HQ_optional& x);
 
     void
-    SpecialC2HQ (::std::auto_ptr< SpecialC2HQ_type > p);
+    SpecialC2HQ (::std::unique_ptr< SpecialC2HQ_type > p);
 
     // Constructors.
     //
     MOOTWSymbolModifiersType (const UniqueDesignation_type&);
 
-    MOOTWSymbolModifiersType (::std::auto_ptr< UniqueDesignation_type >);
+    MOOTWSymbolModifiersType (::std::unique_ptr< UniqueDesignation_type >);
 
     MOOTWSymbolModifiersType (const ::xercesc::DOMElement& e,
                               ::xml_schema::flags f = 0,
@@ -5702,7 +5707,7 @@ namespace msdl_1
     Quantity (const Quantity_optional& x);
 
     void
-    Quantity (::std::auto_ptr< Quantity_type > p);
+    Quantity (::std::unique_ptr< Quantity_type > p);
 
     // AdditionalInfo
     //
@@ -5723,7 +5728,7 @@ namespace msdl_1
     AdditionalInfo (const AdditionalInfo_optional& x);
 
     void
-    AdditionalInfo (::std::auto_ptr< AdditionalInfo_type > p);
+    AdditionalInfo (::std::unique_ptr< AdditionalInfo_type > p);
 
     // UniqueDesignation
     //
@@ -5744,7 +5749,7 @@ namespace msdl_1
     UniqueDesignation (const UniqueDesignation_optional& x);
 
     void
-    UniqueDesignation (::std::auto_ptr< UniqueDesignation_type > p);
+    UniqueDesignation (::std::unique_ptr< UniqueDesignation_type > p);
 
     // NBCType
     //
@@ -5765,7 +5770,7 @@ namespace msdl_1
     NBCType (const NBCType_optional& x);
 
     void
-    NBCType (::std::auto_ptr< NBCType_type > p);
+    NBCType (::std::unique_ptr< NBCType_type > p);
 
     // DateTimeGroup
     //
@@ -5786,7 +5791,7 @@ namespace msdl_1
     DateTimeGroup (const DateTimeGroup_optional& x);
 
     void
-    DateTimeGroup (::std::auto_ptr< DateTimeGroup_type > p);
+    DateTimeGroup (::std::unique_ptr< DateTimeGroup_type > p);
 
     // Speed
     //
@@ -5803,7 +5808,7 @@ namespace msdl_1
     Speed (const Speed_type& x);
 
     void
-    Speed (::std::auto_ptr< Speed_type > p);
+    Speed (::std::unique_ptr< Speed_type > p);
 
     // DirectionOfMovement
     //
@@ -5820,15 +5825,15 @@ namespace msdl_1
     DirectionOfMovement (const DirectionOfMovement_type& x);
 
     void
-    DirectionOfMovement (::std::auto_ptr< DirectionOfMovement_type > p);
+    DirectionOfMovement (::std::unique_ptr< DirectionOfMovement_type > p);
 
     // Constructors.
     //
     NBCEventSymbolModifiersType (const Speed_type&,
                                  const DirectionOfMovement_type&);
 
-    NBCEventSymbolModifiersType (::std::auto_ptr< Speed_type >,
-                                 ::std::auto_ptr< DirectionOfMovement_type >);
+    NBCEventSymbolModifiersType (::std::unique_ptr< Speed_type >,
+                                 ::std::unique_ptr< DirectionOfMovement_type >);
 
     NBCEventSymbolModifiersType (const ::xercesc::DOMElement& e,
                                  ::xml_schema::flags f = 0,
@@ -5890,7 +5895,7 @@ namespace msdl_1
     MSDLVersion (const MSDLVersion_type& x);
 
     void
-    MSDLVersion (::std::auto_ptr< MSDLVersion_type > p);
+    MSDLVersion (::std::unique_ptr< MSDLVersion_type > p);
 
     // OrganizationDetail
     //
@@ -5911,7 +5916,7 @@ namespace msdl_1
     OrganizationDetail (const OrganizationDetail_optional& x);
 
     void
-    OrganizationDetail (::std::auto_ptr< OrganizationDetail_type > p);
+    OrganizationDetail (::std::unique_ptr< OrganizationDetail_type > p);
 
     // ScenarioDataStandards
     //
@@ -5932,13 +5937,13 @@ namespace msdl_1
     ScenarioDataStandards (const ScenarioDataStandards_optional& x);
 
     void
-    ScenarioDataStandards (::std::auto_ptr< ScenarioDataStandards_type > p);
+    ScenarioDataStandards (::std::unique_ptr< ScenarioDataStandards_type > p);
 
     // Constructors.
     //
     OptionsType (const MSDLVersion_type&);
 
-    OptionsType (::std::auto_ptr< MSDLVersion_type >);
+    OptionsType (::std::unique_ptr< MSDLVersion_type >);
 
     OptionsType (const ::xercesc::DOMElement& e,
                  ::xml_schema::flags f = 0,
@@ -6000,7 +6005,7 @@ namespace msdl_1
     OrganicForceSideHandle (const OrganicForceSideHandle_optional& x);
 
     void
-    OrganicForceSideHandle (::std::auto_ptr< OrganicForceSideHandle_type > p);
+    OrganicForceSideHandle (::std::unique_ptr< OrganicForceSideHandle_type > p);
 
     // OrganicSuperiorHandle
     //
@@ -6021,7 +6026,7 @@ namespace msdl_1
     OrganicSuperiorHandle (const OrganicSuperiorHandle_optional& x);
 
     void
-    OrganicSuperiorHandle (::std::auto_ptr< OrganicSuperiorHandle_type > p);
+    OrganicSuperiorHandle (::std::unique_ptr< OrganicSuperiorHandle_type > p);
 
     // Constructors.
     //
@@ -6082,7 +6087,7 @@ namespace msdl_1
     OrganicRelationData (const OrganicRelationData_type& x);
 
     void
-    OrganicRelationData (::std::auto_ptr< OrganicRelationData_type > p);
+    OrganicRelationData (::std::unique_ptr< OrganicRelationData_type > p);
 
     // OrganicRelationChoice
     //
@@ -6099,18 +6104,18 @@ namespace msdl_1
     OrganicRelationChoice (const OrganicRelationChoice_type& x);
 
     void
-    OrganicRelationChoice (::std::auto_ptr< OrganicRelationChoice_type > p);
+    OrganicRelationChoice (::std::unique_ptr< OrganicRelationChoice_type > p);
 
     // Constructors.
     //
     OrganicRelationType (const OrganicRelationData_type&,
                          const OrganicRelationChoice_type&);
 
-    OrganicRelationType (::std::auto_ptr< OrganicRelationData_type >,
+    OrganicRelationType (::std::unique_ptr< OrganicRelationData_type >,
                          const OrganicRelationChoice_type&);
 
-    OrganicRelationType (::std::auto_ptr< OrganicRelationData_type >,
-                         ::std::auto_ptr< OrganicRelationChoice_type >);
+    OrganicRelationType (::std::unique_ptr< OrganicRelationData_type >,
+                         ::std::unique_ptr< OrganicRelationChoice_type >);
 
     OrganicRelationType (const ::xercesc::DOMElement& e,
                          ::xml_schema::flags f = 0,
@@ -6167,7 +6172,7 @@ namespace msdl_1
     AggregateBased (const AggregateBased_type& x);
 
     void
-    AggregateBased (::std::auto_ptr< AggregateBased_type > p);
+    AggregateBased (::std::unique_ptr< AggregateBased_type > p);
 
     // AggregateEchelon
     //
@@ -6188,13 +6193,13 @@ namespace msdl_1
     AggregateEchelon (const AggregateEchelon_optional& x);
 
     void
-    AggregateEchelon (::std::auto_ptr< AggregateEchelon_type > p);
+    AggregateEchelon (::std::unique_ptr< AggregateEchelon_type > p);
 
     // Constructors.
     //
     OrganizationDetailType (const AggregateBased_type&);
 
-    OrganizationDetailType (::std::auto_ptr< AggregateBased_type >);
+    OrganizationDetailType (::std::unique_ptr< AggregateBased_type >);
 
     OrganizationDetailType (const ::xercesc::DOMElement& e,
                             ::xml_schema::flags f = 0,
@@ -6251,7 +6256,7 @@ namespace msdl_1
     Units (const Units_type& x);
 
     void
-    Units (::std::auto_ptr< Units_type > p);
+    Units (::std::unique_ptr< Units_type > p);
 
     // Equipment
     //
@@ -6272,13 +6277,13 @@ namespace msdl_1
     Equipment (const Equipment_optional& x);
 
     void
-    Equipment (::std::auto_ptr< Equipment_type > p);
+    Equipment (::std::unique_ptr< Equipment_type > p);
 
     // Constructors.
     //
     OrganizationsType (const Units_type&);
 
-    OrganizationsType (::std::auto_ptr< Units_type >);
+    OrganizationsType (::std::unique_ptr< Units_type >);
 
     OrganizationsType (const ::xercesc::DOMElement& e,
                        ::xml_schema::flags f = 0,
@@ -6455,7 +6460,7 @@ namespace msdl_1
     ObjectHandle (const ObjectHandle_type& x);
 
     void
-    ObjectHandle (::std::auto_ptr< ObjectHandle_type > p);
+    ObjectHandle (::std::unique_ptr< ObjectHandle_type > p);
 
     // OverlayType
     //
@@ -6472,7 +6477,7 @@ namespace msdl_1
     OverlayType1 (const OverlayType1_type& x);
 
     void
-    OverlayType1 (::std::auto_ptr< OverlayType1_type > p);
+    OverlayType1 (::std::unique_ptr< OverlayType1_type > p);
 
     // OverlayName
     //
@@ -6489,7 +6494,7 @@ namespace msdl_1
     OverlayName (const OverlayName_type& x);
 
     void
-    OverlayName (::std::auto_ptr< OverlayName_type > p);
+    OverlayName (::std::unique_ptr< OverlayName_type > p);
 
     // Constructors.
     //
@@ -6497,9 +6502,9 @@ namespace msdl_1
                  const OverlayType1_type&,
                  const OverlayName_type&);
 
-    OverlayType (::std::auto_ptr< ObjectHandle_type >,
-                 ::std::auto_ptr< OverlayType1_type >,
-                 ::std::auto_ptr< OverlayName_type >);
+    OverlayType (::std::unique_ptr< ObjectHandle_type >,
+                 ::std::unique_ptr< OverlayType1_type >,
+                 ::std::unique_ptr< OverlayName_type >);
 
     OverlayType (const ::xercesc::DOMElement& e,
                  ::xml_schema::flags f = 0,
@@ -6557,7 +6562,7 @@ namespace msdl_1
     OwnerChoice (const OwnerChoice_type& x);
 
     void
-    OwnerChoice (::std::auto_ptr< OwnerChoice_type > p);
+    OwnerChoice (::std::unique_ptr< OwnerChoice_type > p);
 
     // OwnerData
     //
@@ -6574,7 +6579,7 @@ namespace msdl_1
     OwnerData (const OwnerData_type& x);
 
     void
-    OwnerData (::std::auto_ptr< OwnerData_type > p);
+    OwnerData (::std::unique_ptr< OwnerData_type > p);
 
     // Constructors.
     //
@@ -6582,10 +6587,10 @@ namespace msdl_1
                const OwnerData_type&);
 
     OwnerType (const OwnerChoice_type&,
-               ::std::auto_ptr< OwnerData_type >);
+               ::std::unique_ptr< OwnerData_type >);
 
-    OwnerType (::std::auto_ptr< OwnerChoice_type >,
-               ::std::auto_ptr< OwnerData_type >);
+    OwnerType (::std::unique_ptr< OwnerChoice_type >,
+               ::std::unique_ptr< OwnerData_type >);
 
     OwnerType (const ::xercesc::DOMElement& e,
                ::xml_schema::flags f = 0,
@@ -6646,7 +6651,7 @@ namespace msdl_1
     UnitOwnerHandle (const UnitOwnerHandle_optional& x);
 
     void
-    UnitOwnerHandle (::std::auto_ptr< UnitOwnerHandle_type > p);
+    UnitOwnerHandle (::std::unique_ptr< UnitOwnerHandle_type > p);
 
     // ForceOwnerHandle
     //
@@ -6667,7 +6672,7 @@ namespace msdl_1
     ForceOwnerHandle (const ForceOwnerHandle_optional& x);
 
     void
-    ForceOwnerHandle (::std::auto_ptr< ForceOwnerHandle_type > p);
+    ForceOwnerHandle (::std::unique_ptr< ForceOwnerHandle_type > p);
 
     // Constructors.
     //
@@ -6728,7 +6733,7 @@ namespace msdl_1
     FormationLocationType (const FormationLocationType_type& x);
 
     void
-    FormationLocationType (::std::auto_ptr< FormationLocationType_type > p);
+    FormationLocationType (::std::unique_ptr< FormationLocationType_type > p);
 
     // FormationSpacing
     //
@@ -6749,7 +6754,7 @@ namespace msdl_1
     FormationSpacing (const FormationSpacing_optional& x);
 
     void
-    FormationSpacing (::std::auto_ptr< FormationSpacing_type > p);
+    FormationSpacing (::std::unique_ptr< FormationSpacing_type > p);
 
     // FormationOrientation
     //
@@ -6770,7 +6775,7 @@ namespace msdl_1
     FormationOrientation (const FormationOrientation_optional& x);
 
     void
-    FormationOrientation (::std::auto_ptr< FormationOrientation_type > p);
+    FormationOrientation (::std::unique_ptr< FormationOrientation_type > p);
 
     // FormationChoice
     //
@@ -6787,7 +6792,7 @@ namespace msdl_1
     FormationChoice (const FormationChoice_type& x);
 
     void
-    FormationChoice (::std::auto_ptr< FormationChoice_type > p);
+    FormationChoice (::std::unique_ptr< FormationChoice_type > p);
 
     // FormationData
     //
@@ -6804,7 +6809,7 @@ namespace msdl_1
     FormationData (const FormationData_type& x);
 
     void
-    FormationData (::std::auto_ptr< FormationData_type > p);
+    FormationData (::std::unique_ptr< FormationData_type > p);
 
     // Constructors.
     //
@@ -6814,11 +6819,11 @@ namespace msdl_1
 
     OwnFormationType (const FormationLocationType_type&,
                       const FormationChoice_type&,
-                      ::std::auto_ptr< FormationData_type >);
+                      ::std::unique_ptr< FormationData_type >);
 
-    OwnFormationType (::std::auto_ptr< FormationLocationType_type >,
-                      ::std::auto_ptr< FormationChoice_type >,
-                      ::std::auto_ptr< FormationData_type >);
+    OwnFormationType (::std::unique_ptr< FormationLocationType_type >,
+                      ::std::unique_ptr< FormationChoice_type >,
+                      ::std::unique_ptr< FormationData_type >);
 
     OwnFormationType (const ::xercesc::DOMElement& e,
                       ::xml_schema::flags f = 0,
@@ -6882,7 +6887,7 @@ namespace msdl_1
     AdditionalInfo (const AdditionalInfo_optional& x);
 
     void
-    AdditionalInfo (::std::auto_ptr< AdditionalInfo_type > p);
+    AdditionalInfo (::std::unique_ptr< AdditionalInfo_type > p);
 
     // AdditionalInfo1
     //
@@ -6903,7 +6908,7 @@ namespace msdl_1
     AdditionalInfo1 (const AdditionalInfo1_optional& x);
 
     void
-    AdditionalInfo1 (::std::auto_ptr< AdditionalInfo1_type > p);
+    AdditionalInfo1 (::std::unique_ptr< AdditionalInfo1_type > p);
 
     // UniqueDesignation
     //
@@ -6920,7 +6925,7 @@ namespace msdl_1
     UniqueDesignation (const UniqueDesignation_type& x);
 
     void
-    UniqueDesignation (::std::auto_ptr< UniqueDesignation_type > p);
+    UniqueDesignation (::std::unique_ptr< UniqueDesignation_type > p);
 
     // DateTimeGroup
     //
@@ -6941,7 +6946,7 @@ namespace msdl_1
     DateTimeGroup (const DateTimeGroup_optional& x);
 
     void
-    DateTimeGroup (::std::auto_ptr< DateTimeGroup_type > p);
+    DateTimeGroup (::std::unique_ptr< DateTimeGroup_type > p);
 
     // DateTimeGroup1
     //
@@ -6962,7 +6967,7 @@ namespace msdl_1
     DateTimeGroup1 (const DateTimeGroup1_optional& x);
 
     void
-    DateTimeGroup1 (::std::auto_ptr< DateTimeGroup1_type > p);
+    DateTimeGroup1 (::std::unique_ptr< DateTimeGroup1_type > p);
 
     // Orientation
     //
@@ -6983,13 +6988,13 @@ namespace msdl_1
     Orientation (const Orientation_optional& x);
 
     void
-    Orientation (::std::auto_ptr< Orientation_type > p);
+    Orientation (::std::unique_ptr< Orientation_type > p);
 
     // Constructors.
     //
     PointSymbolModifiersType (const UniqueDesignation_type&);
 
-    PointSymbolModifiersType (::std::auto_ptr< UniqueDesignation_type >);
+    PointSymbolModifiersType (::std::unique_ptr< UniqueDesignation_type >);
 
     PointSymbolModifiersType (const ::xercesc::DOMElement& e,
                               ::xml_schema::flags f = 0,
@@ -7054,7 +7059,7 @@ namespace msdl_1
     Name (const Name_optional& x);
 
     void
-    Name (::std::auto_ptr< Name_type > p);
+    Name (::std::unique_ptr< Name_type > p);
 
     // UpperRight
     //
@@ -7071,7 +7076,7 @@ namespace msdl_1
     UpperRight (const UpperRight_type& x);
 
     void
-    UpperRight (::std::auto_ptr< UpperRight_type > p);
+    UpperRight (::std::unique_ptr< UpperRight_type > p);
 
     // LowerLeft
     //
@@ -7088,15 +7093,15 @@ namespace msdl_1
     LowerLeft (const LowerLeft_type& x);
 
     void
-    LowerLeft (::std::auto_ptr< LowerLeft_type > p);
+    LowerLeft (::std::unique_ptr< LowerLeft_type > p);
 
     // Constructors.
     //
     RectangleAreaType (const UpperRight_type&,
                        const LowerLeft_type&);
 
-    RectangleAreaType (::std::auto_ptr< UpperRight_type >,
-                       ::std::auto_ptr< LowerLeft_type >);
+    RectangleAreaType (::std::unique_ptr< UpperRight_type >,
+                       ::std::unique_ptr< LowerLeft_type >);
 
     RectangleAreaType (const ::xercesc::DOMElement& e,
                        ::xml_schema::flags f = 0,
@@ -7154,7 +7159,7 @@ namespace msdl_1
     SymbologyDataStandard (const SymbologyDataStandard_type& x);
 
     void
-    SymbologyDataStandard (::std::auto_ptr< SymbologyDataStandard_type > p);
+    SymbologyDataStandard (::std::unique_ptr< SymbologyDataStandard_type > p);
 
     // CoordinateDataStandard
     //
@@ -7171,15 +7176,15 @@ namespace msdl_1
     CoordinateDataStandard (const CoordinateDataStandard_type& x);
 
     void
-    CoordinateDataStandard (::std::auto_ptr< CoordinateDataStandard_type > p);
+    CoordinateDataStandard (::std::unique_ptr< CoordinateDataStandard_type > p);
 
     // Constructors.
     //
     ScenarioDataStandardsType (const SymbologyDataStandard_type&,
                                const CoordinateDataStandard_type&);
 
-    ScenarioDataStandardsType (::std::auto_ptr< SymbologyDataStandard_type >,
-                               ::std::auto_ptr< CoordinateDataStandard_type >);
+    ScenarioDataStandardsType (::std::unique_ptr< SymbologyDataStandard_type >,
+                               ::std::unique_ptr< CoordinateDataStandard_type >);
 
     ScenarioDataStandardsType (const ::xercesc::DOMElement& e,
                                ::xml_schema::flags f = 0,
@@ -7240,7 +7245,7 @@ namespace msdl_1
     Atmosphere (const Atmosphere_optional& x);
 
     void
-    Atmosphere (::std::auto_ptr< Atmosphere_type > p);
+    Atmosphere (::std::unique_ptr< Atmosphere_type > p);
 
     // CloudCoverItems
     //
@@ -7261,7 +7266,7 @@ namespace msdl_1
     CloudCoverItems (const CloudCoverItems_optional& x);
 
     void
-    CloudCoverItems (::std::auto_ptr< CloudCoverItems_type > p);
+    CloudCoverItems (::std::unique_ptr< CloudCoverItems_type > p);
 
     // Icing
     //
@@ -7282,7 +7287,7 @@ namespace msdl_1
     Icing (const Icing_optional& x);
 
     void
-    Icing (::std::auto_ptr< Icing_type > p);
+    Icing (::std::unique_ptr< Icing_type > p);
 
     // LightItems
     //
@@ -7303,7 +7308,7 @@ namespace msdl_1
     LightItems (const LightItems_optional& x);
 
     void
-    LightItems (::std::auto_ptr< LightItems_type > p);
+    LightItems (::std::unique_ptr< LightItems_type > p);
 
     // Precipitation
     //
@@ -7324,7 +7329,7 @@ namespace msdl_1
     Precipitation (const Precipitation_optional& x);
 
     void
-    Precipitation (::std::auto_ptr< Precipitation_type > p);
+    Precipitation (::std::unique_ptr< Precipitation_type > p);
 
     // VisibilityItems
     //
@@ -7345,7 +7350,7 @@ namespace msdl_1
     VisibilityItems (const VisibilityItems_optional& x);
 
     void
-    VisibilityItems (::std::auto_ptr< VisibilityItems_type > p);
+    VisibilityItems (::std::unique_ptr< VisibilityItems_type > p);
 
     // WindItems
     //
@@ -7366,7 +7371,7 @@ namespace msdl_1
     WindItems (const WindItems_optional& x);
 
     void
-    WindItems (::std::auto_ptr< WindItems_type > p);
+    WindItems (::std::unique_ptr< WindItems_type > p);
 
     // Constructors.
     //
@@ -7436,7 +7441,7 @@ namespace msdl_1
     MOPPLevel (const MOPPLevel_optional& x);
 
     void
-    MOPPLevel (::std::auto_ptr< MOPPLevel_type > p);
+    MOPPLevel (::std::unique_ptr< MOPPLevel_type > p);
 
     // WeaponControlStatus
     //
@@ -7457,7 +7462,7 @@ namespace msdl_1
     WeaponControlStatus (const WeaponControlStatus_optional& x);
 
     void
-    WeaponControlStatus (::std::auto_ptr< WeaponControlStatus_type > p);
+    WeaponControlStatus (::std::unique_ptr< WeaponControlStatus_type > p);
 
     // Constructors.
     //
@@ -7578,7 +7583,7 @@ namespace msdl_1
     SupportedUnitHandle (const SupportedUnitHandle_type& x);
 
     void
-    SupportedUnitHandle (::std::auto_ptr< SupportedUnitHandle_type > p);
+    SupportedUnitHandle (::std::unique_ptr< SupportedUnitHandle_type > p);
 
     // PriorityToSupport
     //
@@ -7599,7 +7604,7 @@ namespace msdl_1
     PriorityToSupport (const PriorityToSupport_optional& x);
 
     void
-    PriorityToSupport (::std::auto_ptr< PriorityToSupport_type > p);
+    PriorityToSupport (::std::unique_ptr< PriorityToSupport_type > p);
 
     // SupportType
     //
@@ -7616,7 +7621,7 @@ namespace msdl_1
     SupportType (const SupportType_type& x);
 
     void
-    SupportType (::std::auto_ptr< SupportType_type > p);
+    SupportType (::std::unique_ptr< SupportType_type > p);
 
     // SupportRoleType
     //
@@ -7637,15 +7642,15 @@ namespace msdl_1
     SupportRoleType (const SupportRoleType_optional& x);
 
     void
-    SupportRoleType (::std::auto_ptr< SupportRoleType_type > p);
+    SupportRoleType (::std::unique_ptr< SupportRoleType_type > p);
 
     // Constructors.
     //
     SupportRelationType (const SupportedUnitHandle_type&,
                          const SupportType_type&);
 
-    SupportRelationType (::std::auto_ptr< SupportedUnitHandle_type >,
-                         ::std::auto_ptr< SupportType_type >);
+    SupportRelationType (::std::unique_ptr< SupportedUnitHandle_type >,
+                         ::std::unique_ptr< SupportType_type >);
 
     SupportRelationType (const ::xercesc::DOMElement& e,
                          ::xml_schema::flags f = 0,
@@ -7708,7 +7713,7 @@ namespace msdl_1
     PointSymbolModifiers (const PointSymbolModifiers_optional& x);
 
     void
-    PointSymbolModifiers (::std::auto_ptr< PointSymbolModifiers_type > p);
+    PointSymbolModifiers (::std::unique_ptr< PointSymbolModifiers_type > p);
 
     // LineSymbolModifiers
     //
@@ -7729,7 +7734,7 @@ namespace msdl_1
     LineSymbolModifiers (const LineSymbolModifiers_optional& x);
 
     void
-    LineSymbolModifiers (::std::auto_ptr< LineSymbolModifiers_type > p);
+    LineSymbolModifiers (::std::unique_ptr< LineSymbolModifiers_type > p);
 
     // AreaSymbolModifiers
     //
@@ -7750,7 +7755,7 @@ namespace msdl_1
     AreaSymbolModifiers (const AreaSymbolModifiers_optional& x);
 
     void
-    AreaSymbolModifiers (::std::auto_ptr< AreaSymbolModifiers_type > p);
+    AreaSymbolModifiers (::std::unique_ptr< AreaSymbolModifiers_type > p);
 
     // BoundarySymbolModifiers
     //
@@ -7771,7 +7776,7 @@ namespace msdl_1
     BoundarySymbolModifiers (const BoundarySymbolModifiers_optional& x);
 
     void
-    BoundarySymbolModifiers (::std::auto_ptr< BoundarySymbolModifiers_type > p);
+    BoundarySymbolModifiers (::std::unique_ptr< BoundarySymbolModifiers_type > p);
 
     // NBCEventSymbolModifiers
     //
@@ -7792,7 +7797,7 @@ namespace msdl_1
     NBCEventSymbolModifiers (const NBCEventSymbolModifiers_optional& x);
 
     void
-    NBCEventSymbolModifiers (::std::auto_ptr< NBCEventSymbolModifiers_type > p);
+    NBCEventSymbolModifiers (::std::unique_ptr< NBCEventSymbolModifiers_type > p);
 
     // TaskSymbolModifiers
     //
@@ -7813,7 +7818,7 @@ namespace msdl_1
     TaskSymbolModifiers (const TaskSymbolModifiers_optional& x);
 
     void
-    TaskSymbolModifiers (::std::auto_ptr< TaskSymbolModifiers_type > p);
+    TaskSymbolModifiers (::std::unique_ptr< TaskSymbolModifiers_type > p);
 
     // Constructors.
     //
@@ -7878,7 +7883,7 @@ namespace msdl_1
     StandardName (const StandardName_type& x);
 
     void
-    StandardName (::std::auto_ptr< StandardName_type > p);
+    StandardName (::std::unique_ptr< StandardName_type > p);
 
     // MajorVersion
     //
@@ -7895,7 +7900,7 @@ namespace msdl_1
     MajorVersion (const MajorVersion_type& x);
 
     void
-    MajorVersion (::std::auto_ptr< MajorVersion_type > p);
+    MajorVersion (::std::unique_ptr< MajorVersion_type > p);
 
     // MinorVersion
     //
@@ -7912,7 +7917,7 @@ namespace msdl_1
     MinorVersion (const MinorVersion_type& x);
 
     void
-    MinorVersion (::std::auto_ptr< MinorVersion_type > p);
+    MinorVersion (::std::unique_ptr< MinorVersion_type > p);
 
     // Constructors.
     //
@@ -7920,9 +7925,9 @@ namespace msdl_1
                                const MajorVersion_type&,
                                const MinorVersion_type&);
 
-    SymbologyDataStandardType (::std::auto_ptr< StandardName_type >,
-                               ::std::auto_ptr< MajorVersion_type >,
-                               ::std::auto_ptr< MinorVersion_type >);
+    SymbologyDataStandardType (::std::unique_ptr< StandardName_type >,
+                               ::std::unique_ptr< MajorVersion_type >,
+                               ::std::unique_ptr< MinorVersion_type >);
 
     SymbologyDataStandardType (const ::xercesc::DOMElement& e,
                                ::xml_schema::flags f = 0,
@@ -8040,7 +8045,7 @@ namespace msdl_1
     ObjectHandle (const ObjectHandle_type& x);
 
     void
-    ObjectHandle (::std::auto_ptr< ObjectHandle_type > p);
+    ObjectHandle (::std::unique_ptr< ObjectHandle_type > p);
 
     // SymbolIdentifier
     //
@@ -8057,7 +8062,7 @@ namespace msdl_1
     SymbolIdentifier (const SymbolIdentifier_type& x);
 
     void
-    SymbolIdentifier (::std::auto_ptr< SymbolIdentifier_type > p);
+    SymbolIdentifier (::std::unique_ptr< SymbolIdentifier_type > p);
 
     // Affiliation
     //
@@ -8074,7 +8079,7 @@ namespace msdl_1
     Affiliation (const Affiliation_type& x);
 
     void
-    Affiliation (::std::auto_ptr< Affiliation_type > p);
+    Affiliation (::std::unique_ptr< Affiliation_type > p);
 
     // Owner
     //
@@ -8091,7 +8096,7 @@ namespace msdl_1
     Owner (const Owner_type& x);
 
     void
-    Owner (::std::auto_ptr< Owner_type > p);
+    Owner (::std::unique_ptr< Owner_type > p);
 
     // AnchorPoints
     //
@@ -8108,7 +8113,7 @@ namespace msdl_1
     AnchorPoints (const AnchorPoints_type& x);
 
     void
-    AnchorPoints (::std::auto_ptr< AnchorPoints_type > p);
+    AnchorPoints (::std::unique_ptr< AnchorPoints_type > p);
 
     // AssociatedOverlays
     //
@@ -8129,7 +8134,7 @@ namespace msdl_1
     AssociatedOverlays (const AssociatedOverlays_optional& x);
 
     void
-    AssociatedOverlays (::std::auto_ptr< AssociatedOverlays_type > p);
+    AssociatedOverlays (::std::unique_ptr< AssociatedOverlays_type > p);
 
     // SymbolClassData
     //
@@ -8150,7 +8155,7 @@ namespace msdl_1
     SymbolClassData (const SymbolClassData_optional& x);
 
     void
-    SymbolClassData (::std::auto_ptr< SymbolClassData_type > p);
+    SymbolClassData (::std::unique_ptr< SymbolClassData_type > p);
 
     // SymbolClassChoice
     //
@@ -8167,7 +8172,7 @@ namespace msdl_1
     SymbolClassChoice (const SymbolClassChoice_type& x);
 
     void
-    SymbolClassChoice (::std::auto_ptr< SymbolClassChoice_type > p);
+    SymbolClassChoice (::std::unique_ptr< SymbolClassChoice_type > p);
 
     // Constructors.
     //
@@ -8181,16 +8186,16 @@ namespace msdl_1
     TacticalGraphicType (const ObjectHandle_type&,
                          const SymbolIdentifier_type&,
                          const Affiliation_type&,
-                         ::std::auto_ptr< Owner_type >,
-                         ::std::auto_ptr< AnchorPoints_type >,
+                         ::std::unique_ptr< Owner_type >,
+                         ::std::unique_ptr< AnchorPoints_type >,
                          const SymbolClassChoice_type&);
 
-    TacticalGraphicType (::std::auto_ptr< ObjectHandle_type >,
-                         ::std::auto_ptr< SymbolIdentifier_type >,
-                         ::std::auto_ptr< Affiliation_type >,
-                         ::std::auto_ptr< Owner_type >,
-                         ::std::auto_ptr< AnchorPoints_type >,
-                         ::std::auto_ptr< SymbolClassChoice_type >);
+    TacticalGraphicType (::std::unique_ptr< ObjectHandle_type >,
+                         ::std::unique_ptr< SymbolIdentifier_type >,
+                         ::std::unique_ptr< Affiliation_type >,
+                         ::std::unique_ptr< Owner_type >,
+                         ::std::unique_ptr< AnchorPoints_type >,
+                         ::std::unique_ptr< SymbolClassChoice_type >);
 
     TacticalGraphicType (const ::xercesc::DOMElement& e,
                          ::xml_schema::flags f = 0,
@@ -8257,7 +8262,7 @@ namespace msdl_1
     UniqueDesignation (const UniqueDesignation_optional& x);
 
     void
-    UniqueDesignation (::std::auto_ptr< UniqueDesignation_type > p);
+    UniqueDesignation (::std::unique_ptr< UniqueDesignation_type > p);
 
     // DateTimeGroup
     //
@@ -8278,7 +8283,7 @@ namespace msdl_1
     DateTimeGroup (const DateTimeGroup_optional& x);
 
     void
-    DateTimeGroup (::std::auto_ptr< DateTimeGroup_type > p);
+    DateTimeGroup (::std::unique_ptr< DateTimeGroup_type > p);
 
     // Constructors.
     //
@@ -8343,7 +8348,7 @@ namespace msdl_1
     Location (const Location_optional& x);
 
     void
-    Location (::std::auto_ptr< Location_type > p);
+    Location (::std::unique_ptr< Location_type > p);
 
     // DirectionOfMovement
     //
@@ -8364,7 +8369,7 @@ namespace msdl_1
     DirectionOfMovement (const DirectionOfMovement_optional& x);
 
     void
-    DirectionOfMovement (::std::auto_ptr< DirectionOfMovement_type > p);
+    DirectionOfMovement (::std::unique_ptr< DirectionOfMovement_type > p);
 
     // Speed
     //
@@ -8385,7 +8390,7 @@ namespace msdl_1
     Speed (const Speed_optional& x);
 
     void
-    Speed (::std::auto_ptr< Speed_type > p);
+    Speed (::std::unique_ptr< Speed_type > p);
 
     // FormationPosition
     //
@@ -8406,7 +8411,7 @@ namespace msdl_1
     FormationPosition (const FormationPosition_optional& x);
 
     void
-    FormationPosition (::std::auto_ptr< FormationPosition_type > p);
+    FormationPosition (::std::unique_ptr< FormationPosition_type > p);
 
     // OwnFormation
     //
@@ -8427,7 +8432,7 @@ namespace msdl_1
     OwnFormation (const OwnFormation_optional& x);
 
     void
-    OwnFormation (::std::auto_ptr< OwnFormation_type > p);
+    OwnFormation (::std::unique_ptr< OwnFormation_type > p);
 
     // Constructors.
     //
@@ -8495,7 +8500,7 @@ namespace msdl_1
     Resolution (const Resolution_optional& x);
 
     void
-    Resolution (::std::auto_ptr< Resolution_type > p);
+    Resolution (::std::unique_ptr< Resolution_type > p);
 
     // AggregateBased
     //
@@ -8516,7 +8521,7 @@ namespace msdl_1
     AggregateBased (const AggregateBased_optional& x);
 
     void
-    AggregateBased (::std::auto_ptr< AggregateBased_type > p);
+    AggregateBased (::std::unique_ptr< AggregateBased_type > p);
 
     // Constructors.
     //
@@ -8577,7 +8582,7 @@ namespace msdl_1
     ForceRelation (const ForceRelation_type& x);
 
     void
-    ForceRelation (::std::auto_ptr< ForceRelation_type > p);
+    ForceRelation (::std::unique_ptr< ForceRelation_type > p);
 
     // SupportRelations
     //
@@ -8598,7 +8603,7 @@ namespace msdl_1
     SupportRelations (const SupportRelations_optional& x);
 
     void
-    SupportRelations (::std::auto_ptr< SupportRelations_type > p);
+    SupportRelations (::std::unique_ptr< SupportRelations_type > p);
 
     // OrganicRelation
     //
@@ -8619,13 +8624,13 @@ namespace msdl_1
     OrganicRelation (const OrganicRelation_optional& x);
 
     void
-    OrganicRelation (::std::auto_ptr< OrganicRelation_type > p);
+    OrganicRelation (::std::unique_ptr< OrganicRelation_type > p);
 
     // Constructors.
     //
     UnitRelationsType (const ForceRelation_type&);
 
-    UnitRelationsType (::std::auto_ptr< ForceRelation_type >);
+    UnitRelationsType (::std::unique_ptr< ForceRelation_type >);
 
     UnitRelationsType (const ::xercesc::DOMElement& e,
                        ::xml_schema::flags f = 0,
@@ -8747,7 +8752,7 @@ namespace msdl_1
     Echelon (const Echelon_optional& x);
 
     void
-    Echelon (::std::auto_ptr< Echelon_type > p);
+    Echelon (::std::unique_ptr< Echelon_type > p);
 
     // ReinforcedReduced
     //
@@ -8768,7 +8773,7 @@ namespace msdl_1
     ReinforcedReduced (const ReinforcedReduced_optional& x);
 
     void
-    ReinforcedReduced (::std::auto_ptr< ReinforcedReduced_type > p);
+    ReinforcedReduced (::std::unique_ptr< ReinforcedReduced_type > p);
 
     // StaffComments
     //
@@ -8789,7 +8794,7 @@ namespace msdl_1
     StaffComments (const StaffComments_optional& x);
 
     void
-    StaffComments (::std::auto_ptr< StaffComments_type > p);
+    StaffComments (::std::unique_ptr< StaffComments_type > p);
 
     // AdditionalInfo
     //
@@ -8810,7 +8815,7 @@ namespace msdl_1
     AdditionalInfo (const AdditionalInfo_optional& x);
 
     void
-    AdditionalInfo (::std::auto_ptr< AdditionalInfo_type > p);
+    AdditionalInfo (::std::unique_ptr< AdditionalInfo_type > p);
 
     // CombatEffectiveness
     //
@@ -8831,7 +8836,7 @@ namespace msdl_1
     CombatEffectiveness (const CombatEffectiveness_optional& x);
 
     void
-    CombatEffectiveness (::std::auto_ptr< CombatEffectiveness_type > p);
+    CombatEffectiveness (::std::unique_ptr< CombatEffectiveness_type > p);
 
     // HigherFormation
     //
@@ -8852,7 +8857,7 @@ namespace msdl_1
     HigherFormation (const HigherFormation_optional& x);
 
     void
-    HigherFormation (::std::auto_ptr< HigherFormation_type > p);
+    HigherFormation (::std::unique_ptr< HigherFormation_type > p);
 
     // IFF
     //
@@ -8873,7 +8878,7 @@ namespace msdl_1
     IFF (const IFF_optional& x);
 
     void
-    IFF (::std::auto_ptr< IFF_type > p);
+    IFF (::std::unique_ptr< IFF_type > p);
 
     // UniqueDesignation
     //
@@ -8890,7 +8895,7 @@ namespace msdl_1
     UniqueDesignation (const UniqueDesignation_type& x);
 
     void
-    UniqueDesignation (::std::auto_ptr< UniqueDesignation_type > p);
+    UniqueDesignation (::std::unique_ptr< UniqueDesignation_type > p);
 
     // SpecialC2HQ
     //
@@ -8911,13 +8916,13 @@ namespace msdl_1
     SpecialC2HQ (const SpecialC2HQ_optional& x);
 
     void
-    SpecialC2HQ (::std::auto_ptr< SpecialC2HQ_type > p);
+    SpecialC2HQ (::std::unique_ptr< SpecialC2HQ_type > p);
 
     // Constructors.
     //
     UnitSymbolModifiersType (const UniqueDesignation_type&);
 
-    UnitSymbolModifiersType (::std::auto_ptr< UniqueDesignation_type >);
+    UnitSymbolModifiersType (::std::unique_ptr< UniqueDesignation_type >);
 
     UnitSymbolModifiersType (const ::xercesc::DOMElement& e,
                              ::xml_schema::flags f = 0,
@@ -8981,7 +8986,7 @@ namespace msdl_1
     ObjectHandle (const ObjectHandle_type& x);
 
     void
-    ObjectHandle (::std::auto_ptr< ObjectHandle_type > p);
+    ObjectHandle (::std::unique_ptr< ObjectHandle_type > p);
 
     // SymbolIdentifier
     //
@@ -8998,7 +9003,7 @@ namespace msdl_1
     SymbolIdentifier (const SymbolIdentifier_type& x);
 
     void
-    SymbolIdentifier (::std::auto_ptr< SymbolIdentifier_type > p);
+    SymbolIdentifier (::std::unique_ptr< SymbolIdentifier_type > p);
 
     // Name
     //
@@ -9019,7 +9024,7 @@ namespace msdl_1
     Name (const Name_optional& x);
 
     void
-    Name (::std::auto_ptr< Name_type > p);
+    Name (::std::unique_ptr< Name_type > p);
 
     // UnitSymbolModifiers
     //
@@ -9040,7 +9045,7 @@ namespace msdl_1
     UnitSymbolModifiers (const UnitSymbolModifiers_optional& x);
 
     void
-    UnitSymbolModifiers (::std::auto_ptr< UnitSymbolModifiers_type > p);
+    UnitSymbolModifiers (::std::unique_ptr< UnitSymbolModifiers_type > p);
 
     // CommunicationNetInstances
     //
@@ -9061,7 +9066,7 @@ namespace msdl_1
     CommunicationNetInstances (const CommunicationNetInstances_optional& x);
 
     void
-    CommunicationNetInstances (::std::auto_ptr< CommunicationNetInstances_type > p);
+    CommunicationNetInstances (::std::unique_ptr< CommunicationNetInstances_type > p);
 
     // Status
     //
@@ -9082,7 +9087,7 @@ namespace msdl_1
     Status (const Status_optional& x);
 
     void
-    Status (::std::auto_ptr< Status_type > p);
+    Status (::std::unique_ptr< Status_type > p);
 
     // Disposition
     //
@@ -9103,7 +9108,7 @@ namespace msdl_1
     Disposition (const Disposition_optional& x);
 
     void
-    Disposition (::std::auto_ptr< Disposition_type > p);
+    Disposition (::std::unique_ptr< Disposition_type > p);
 
     // Relations
     //
@@ -9120,7 +9125,7 @@ namespace msdl_1
     Relations (const Relations_type& x);
 
     void
-    Relations (::std::auto_ptr< Relations_type > p);
+    Relations (::std::unique_ptr< Relations_type > p);
 
     // Model
     //
@@ -9141,7 +9146,7 @@ namespace msdl_1
     Model (const Model_optional& x);
 
     void
-    Model (::std::auto_ptr< Model_type > p);
+    Model (::std::unique_ptr< Model_type > p);
 
     // Constructors.
     //
@@ -9151,11 +9156,11 @@ namespace msdl_1
 
     UnitType (const ObjectHandle_type&,
               const SymbolIdentifier_type&,
-              ::std::auto_ptr< Relations_type >);
+              ::std::unique_ptr< Relations_type >);
 
-    UnitType (::std::auto_ptr< ObjectHandle_type >,
-              ::std::auto_ptr< SymbolIdentifier_type >,
-              ::std::auto_ptr< Relations_type >);
+    UnitType (::std::unique_ptr< ObjectHandle_type >,
+              ::std::unique_ptr< SymbolIdentifier_type >,
+              ::std::unique_ptr< Relations_type >);
 
     UnitType (const ::xercesc::DOMElement& e,
               ::xml_schema::flags f = 0,
@@ -9219,7 +9224,7 @@ namespace msdl_1
     UTMGridZone (const UTMGridZone_type& x);
 
     void
-    UTMGridZone (::std::auto_ptr< UTMGridZone_type > p);
+    UTMGridZone (::std::unique_ptr< UTMGridZone_type > p);
 
     // UTMEasting
     //
@@ -9236,7 +9241,7 @@ namespace msdl_1
     UTMEasting (const UTMEasting_type& x);
 
     void
-    UTMEasting (::std::auto_ptr< UTMEasting_type > p);
+    UTMEasting (::std::unique_ptr< UTMEasting_type > p);
 
     // UTMNorthing
     //
@@ -9253,7 +9258,7 @@ namespace msdl_1
     UTMNorthing (const UTMNorthing_type& x);
 
     void
-    UTMNorthing (::std::auto_ptr< UTMNorthing_type > p);
+    UTMNorthing (::std::unique_ptr< UTMNorthing_type > p);
 
     // ElevationAGL
     //
@@ -9274,7 +9279,7 @@ namespace msdl_1
     ElevationAGL (const ElevationAGL_optional& x);
 
     void
-    ElevationAGL (::std::auto_ptr< ElevationAGL_type > p);
+    ElevationAGL (::std::unique_ptr< ElevationAGL_type > p);
 
     // Constructors.
     //
@@ -9282,9 +9287,9 @@ namespace msdl_1
              const UTMEasting_type&,
              const UTMNorthing_type&);
 
-    UTMType (::std::auto_ptr< UTMGridZone_type >,
-             ::std::auto_ptr< UTMEasting_type >,
-             ::std::auto_ptr< UTMNorthing_type >);
+    UTMType (::std::unique_ptr< UTMGridZone_type >,
+             ::std::unique_ptr< UTMEasting_type >,
+             ::std::unique_ptr< UTMNorthing_type >);
 
     UTMType (const ::xercesc::DOMElement& e,
              ::xml_schema::flags f = 0,

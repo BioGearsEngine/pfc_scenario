@@ -34,6 +34,10 @@
 #ifndef EXTERN_JC3IEDMMETEOROLOGICAL_HXX
 #define EXTERN_JC3IEDMMETEOROLOGICAL_HXX
 
+#ifndef XSD_CXX11
+#define XSD_CXX11
+#endif
+
 #ifndef XSD_USE_CHAR
 #define XSD_USE_CHAR
 #endif
@@ -239,7 +243,7 @@ namespace xml_schema
   {
     // Automatic pointer for DOMDocument.
     //
-    using ::xsd::cxx::xml::dom::auto_ptr;
+    using ::xsd::cxx::xml::dom::unique_ptr;
 
 #ifndef XSD_CXX_TREE_TREE_NODE_KEY__XML_SCHEMA
 #define XSD_CXX_TREE_TREE_NODE_KEY__XML_SCHEMA
@@ -274,9 +278,10 @@ namespace oo_2_0
 }
 
 
-#include <memory>    // ::std::auto_ptr
+#include <memory>    // ::std::unique_ptr
 #include <limits>    // std::numeric_limits
 #include <algorithm> // std::binary_search
+#include <utility>   // std::move
 
 #include <xsd/cxx/xml/char-utf8.hxx>
 
@@ -296,6 +301,8 @@ namespace oo_2_0
     public:
     // Constructors.
     //
+    AngleOptionalTypeRangeAngle7_4 ();
+
     AngleOptionalTypeRangeAngle7_4 (const ::xml_schema::decimal&);
 
     AngleOptionalTypeRangeAngle7_4 (const ::xercesc::DOMElement& e,
@@ -366,6 +373,8 @@ namespace oo_2_0
     public:
     // Constructors.
     //
+    DimensionOptionalType12_3 ();
+
     DimensionOptionalType12_3 (const ::xml_schema::decimal&);
 
     DimensionOptionalType12_3 (const ::xercesc::DOMElement& e,
@@ -398,6 +407,8 @@ namespace oo_2_0
     public:
     // Constructors.
     //
+    DimensionMandatoryType12_3 ();
+
     DimensionMandatoryType12_3 (const ::xml_schema::decimal&);
 
     DimensionMandatoryType12_3 (const ::xercesc::DOMElement& e,
@@ -430,6 +441,8 @@ namespace oo_2_0
     public:
     // Constructors.
     //
+    QuantityOptionalType8_4 ();
+
     QuantityOptionalType8_4 (const ::xml_schema::decimal&);
 
     QuantityOptionalType8_4 (const ::xercesc::DOMElement& e,
@@ -462,6 +475,8 @@ namespace oo_2_0
     public:
     // Constructors.
     //
+    RateOptionalType4_1 ();
+
     RateOptionalType4_1 (const ::xml_schema::decimal&);
 
     RateOptionalType4_1 (const ::xercesc::DOMElement& e,
@@ -494,6 +509,8 @@ namespace oo_2_0
     public:
     // Constructors.
     //
+    RateOptionalType8_4 ();
+
     RateOptionalType8_4 (const ::xml_schema::decimal&);
 
     RateOptionalType8_4 (const ::xercesc::DOMElement& e,
@@ -526,6 +543,8 @@ namespace oo_2_0
     public:
     // Constructors.
     //
+    RatioOptionalTypeRangeRatio6_5 ();
+
     RatioOptionalTypeRangeRatio6_5 (const ::xml_schema::decimal&);
 
     RatioOptionalTypeRangeRatio6_5 (const ::xercesc::DOMElement& e,
@@ -558,6 +577,8 @@ namespace oo_2_0
     public:
     // Constructors.
     //
+    RatioOptionalTypeRangeRatio7_6 ();
+
     RatioOptionalTypeRangeRatio7_6 (const ::xml_schema::decimal&);
 
     RatioOptionalTypeRangeRatio7_6 (const ::xercesc::DOMElement& e,
@@ -590,6 +611,8 @@ namespace oo_2_0
     public:
     // Constructors.
     //
+    TemperatureTypeRangeTemperature5_1 ();
+
     TemperatureTypeRangeTemperature5_1 (const ::xml_schema::decimal&);
 
     TemperatureTypeRangeTemperature5_1 (const ::xercesc::DOMElement& e,
@@ -639,7 +662,7 @@ namespace oo_2_0
     HumidityRatio (const HumidityRatio_optional& x);
 
     void
-    HumidityRatio (::std::auto_ptr< HumidityRatio_type > p);
+    HumidityRatio (::std::unique_ptr< HumidityRatio_type > p);
 
     // InversionLayerCode
     //
@@ -660,7 +683,7 @@ namespace oo_2_0
     InversionLayerCode (const InversionLayerCode_optional& x);
 
     void
-    InversionLayerCode (::std::auto_ptr< InversionLayerCode_type > p);
+    InversionLayerCode (::std::unique_ptr< InversionLayerCode_type > p);
 
     // PressureQuantity
     //
@@ -681,7 +704,7 @@ namespace oo_2_0
     PressureQuantity (const PressureQuantity_optional& x);
 
     void
-    PressureQuantity (::std::auto_ptr< PressureQuantity_type > p);
+    PressureQuantity (::std::unique_ptr< PressureQuantity_type > p);
 
     // Temperature
     //
@@ -702,7 +725,7 @@ namespace oo_2_0
     Temperature (const Temperature_optional& x);
 
     void
-    Temperature (::std::auto_ptr< Temperature_type > p);
+    Temperature (::std::unique_ptr< Temperature_type > p);
 
     // TemperatureGradientCode
     //
@@ -723,7 +746,7 @@ namespace oo_2_0
     TemperatureGradientCode (const TemperatureGradientCode_optional& x);
 
     void
-    TemperatureGradientCode (::std::auto_ptr< TemperatureGradientCode_type > p);
+    TemperatureGradientCode (::std::unique_ptr< TemperatureGradientCode_type > p);
 
     // Constructors.
     //
@@ -787,7 +810,7 @@ namespace oo_2_0
     CategoryCode (const CategoryCode_type& x);
 
     void
-    CategoryCode (::std::auto_ptr< CategoryCode_type > p);
+    CategoryCode (::std::unique_ptr< CategoryCode_type > p);
 
     // BaseDimension
     //
@@ -808,7 +831,7 @@ namespace oo_2_0
     BaseDimension (const BaseDimension_optional& x);
 
     void
-    BaseDimension (::std::auto_ptr< BaseDimension_type > p);
+    BaseDimension (::std::unique_ptr< BaseDimension_type > p);
 
     // TopDimension
     //
@@ -829,7 +852,7 @@ namespace oo_2_0
     TopDimension (const TopDimension_optional& x);
 
     void
-    TopDimension (::std::auto_ptr< TopDimension_type > p);
+    TopDimension (::std::unique_ptr< TopDimension_type > p);
 
     // AverageCoverageCode
     //
@@ -850,7 +873,7 @@ namespace oo_2_0
     AverageCoverageCode (const AverageCoverageCode_optional& x);
 
     void
-    AverageCoverageCode (::std::auto_ptr< AverageCoverageCode_type > p);
+    AverageCoverageCode (::std::unique_ptr< AverageCoverageCode_type > p);
 
     // LightRefractionRatio
     //
@@ -871,13 +894,15 @@ namespace oo_2_0
     LightRefractionRatio (const LightRefractionRatio_optional& x);
 
     void
-    LightRefractionRatio (::std::auto_ptr< LightRefractionRatio_type > p);
+    LightRefractionRatio (::std::unique_ptr< LightRefractionRatio_type > p);
 
     // Constructors.
     //
+    CloudCover ();
+
     CloudCover (const CategoryCode_type&);
 
-    CloudCover (::std::auto_ptr< CategoryCode_type >);
+    CloudCover (::std::unique_ptr< CategoryCode_type >);
 
     CloudCover (const ::xercesc::DOMElement& e,
                 ::xml_schema::flags f = 0,
@@ -941,7 +966,7 @@ namespace oo_2_0
     CategoryCode (const CategoryCode_optional& x);
 
     void
-    CategoryCode (::std::auto_ptr< CategoryCode_type > p);
+    CategoryCode (::std::unique_ptr< CategoryCode_type > p);
 
     // SeverityQualifierCode
     //
@@ -962,7 +987,7 @@ namespace oo_2_0
     SeverityQualifierCode (const SeverityQualifierCode_optional& x);
 
     void
-    SeverityQualifierCode (::std::auto_ptr< SeverityQualifierCode_type > p);
+    SeverityQualifierCode (::std::unique_ptr< SeverityQualifierCode_type > p);
 
     // Constructors.
     //
@@ -1027,7 +1052,7 @@ namespace oo_2_0
     CategoryCode (const CategoryCode_optional& x);
 
     void
-    CategoryCode (::std::auto_ptr< CategoryCode_type > p);
+    CategoryCode (::std::unique_ptr< CategoryCode_type > p);
 
     // UpDatetime
     //
@@ -1048,7 +1073,7 @@ namespace oo_2_0
     UpDatetime (const UpDatetime_optional& x);
 
     void
-    UpDatetime (::std::auto_ptr< UpDatetime_type > p);
+    UpDatetime (::std::unique_ptr< UpDatetime_type > p);
 
     // DownDatetime
     //
@@ -1069,7 +1094,7 @@ namespace oo_2_0
     DownDatetime (const DownDatetime_optional& x);
 
     void
-    DownDatetime (::std::auto_ptr< DownDatetime_type > p);
+    DownDatetime (::std::unique_ptr< DownDatetime_type > p);
 
     // MoonPhaseCode
     //
@@ -1090,7 +1115,7 @@ namespace oo_2_0
     MoonPhaseCode (const MoonPhaseCode_optional& x);
 
     void
-    MoonPhaseCode (::std::auto_ptr< MoonPhaseCode_type > p);
+    MoonPhaseCode (::std::unique_ptr< MoonPhaseCode_type > p);
 
     // Constructors.
     //
@@ -1153,7 +1178,7 @@ namespace oo_2_0
     CategoryCode (const CategoryCode_type& x);
 
     void
-    CategoryCode (::std::auto_ptr< CategoryCode_type > p);
+    CategoryCode (::std::unique_ptr< CategoryCode_type > p);
 
     // Rate
     //
@@ -1174,13 +1199,15 @@ namespace oo_2_0
     Rate (const Rate_optional& x);
 
     void
-    Rate (::std::auto_ptr< Rate_type > p);
+    Rate (::std::unique_ptr< Rate_type > p);
 
     // Constructors.
     //
+    Precipitation ();
+
     Precipitation (const CategoryCode_type&);
 
-    Precipitation (::std::auto_ptr< CategoryCode_type >);
+    Precipitation (::std::unique_ptr< CategoryCode_type >);
 
     Precipitation (const ::xercesc::DOMElement& e,
                    ::xml_schema::flags f = 0,
@@ -1241,7 +1268,7 @@ namespace oo_2_0
     CategoryCode (const CategoryCode_optional& x);
 
     void
-    CategoryCode (::std::auto_ptr< CategoryCode_type > p);
+    CategoryCode (::std::unique_ptr< CategoryCode_type > p);
 
     // RangeDimension
     //
@@ -1258,13 +1285,15 @@ namespace oo_2_0
     RangeDimension (const RangeDimension_type& x);
 
     void
-    RangeDimension (::std::auto_ptr< RangeDimension_type > p);
+    RangeDimension (::std::unique_ptr< RangeDimension_type > p);
 
     // Constructors.
     //
+    Visibility ();
+
     Visibility (const RangeDimension_type&);
 
-    Visibility (::std::auto_ptr< RangeDimension_type >);
+    Visibility (::std::unique_ptr< RangeDimension_type >);
 
     Visibility (const ::xercesc::DOMElement& e,
                 ::xml_schema::flags f = 0,
@@ -1325,7 +1354,7 @@ namespace oo_2_0
     CategoryCode (const CategoryCode_optional& x);
 
     void
-    CategoryCode (::std::auto_ptr< CategoryCode_type > p);
+    CategoryCode (::std::unique_ptr< CategoryCode_type > p);
 
     // AirStabilityCategoryCode
     //
@@ -1346,7 +1375,7 @@ namespace oo_2_0
     AirStabilityCategoryCode (const AirStabilityCategoryCode_optional& x);
 
     void
-    AirStabilityCategoryCode (::std::auto_ptr< AirStabilityCategoryCode_type > p);
+    AirStabilityCategoryCode (::std::unique_ptr< AirStabilityCategoryCode_type > p);
 
     // AltitudeLayerCode
     //
@@ -1367,7 +1396,7 @@ namespace oo_2_0
     AltitudeLayerCode (const AltitudeLayerCode_optional& x);
 
     void
-    AltitudeLayerCode (::std::auto_ptr< AltitudeLayerCode_type > p);
+    AltitudeLayerCode (::std::unique_ptr< AltitudeLayerCode_type > p);
 
     // DirectionAngle
     //
@@ -1388,7 +1417,7 @@ namespace oo_2_0
     DirectionAngle (const DirectionAngle_optional& x);
 
     void
-    DirectionAngle (::std::auto_ptr< DirectionAngle_type > p);
+    DirectionAngle (::std::unique_ptr< DirectionAngle_type > p);
 
     // EffectiveDownwindDirectionAngle
     //
@@ -1409,7 +1438,7 @@ namespace oo_2_0
     EffectiveDownwindDirectionAngle (const EffectiveDownwindDirectionAngle_optional& x);
 
     void
-    EffectiveDownwindDirectionAngle (::std::auto_ptr< EffectiveDownwindDirectionAngle_type > p);
+    EffectiveDownwindDirectionAngle (::std::unique_ptr< EffectiveDownwindDirectionAngle_type > p);
 
     // SpeedRate
     //
@@ -1430,7 +1459,7 @@ namespace oo_2_0
     SpeedRate (const SpeedRate_optional& x);
 
     void
-    SpeedRate (::std::auto_ptr< SpeedRate_type > p);
+    SpeedRate (::std::unique_ptr< SpeedRate_type > p);
 
     // NuclearYieldQualifierCode
     //
@@ -1451,7 +1480,7 @@ namespace oo_2_0
     NuclearYieldQualifierCode (const NuclearYieldQualifierCode_optional& x);
 
     void
-    NuclearYieldQualifierCode (::std::auto_ptr< NuclearYieldQualifierCode_type > p);
+    NuclearYieldQualifierCode (::std::unique_ptr< NuclearYieldQualifierCode_type > p);
 
     // Constructors.
     //

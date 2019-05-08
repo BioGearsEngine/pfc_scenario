@@ -27,6 +27,7 @@ set(${PREFIX}_UNIT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/unit" PARENT_SCOPE)
 # Requirments
 ###############################################################################
 find_package(Xerces-c REQUIRED)
+find_package(GTest REQUIRED)
 ###############################################################################
 #Code Generation
 ###############################################################################
@@ -48,10 +49,16 @@ add_source_files(SRCS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/xsd/cpp
 add_source_files(RESOURCES LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/qml 
                 REGEX "*.qrc"  SOURCE_GROUP  "Resources")
 add_source_files(QML_FILES LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/qml 
-        REGEX "*.qml" SOURCE_GROUP  "Resources")
+                REGEX "*.qml" SOURCE_GROUP  "Resources")
+add_source_files(UNIT_TEST LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/unit_test
+                REGEX "*.cpp" SOURCE_GROUP  "Tests")
+
 
 set(${PREFIX}_HEADERS ${HDRS} ${PUBLIC_HDRS} ${GEN_HDRS})
-set(${PREFIX}_SOURCES ${SRCS} ${GEN_SRCS} ${QML_FILES})
+set(${PREFIX}_SOURCES ${SRCS} ${GEN_SRCS})
+
+list(FILTER ${PREFIX}_SOURCES  EXCLUDE  REGEX "main.cpp" )
+
 # add the qml.qrc file
 qt5_add_resources(qml_QRC ${RESOURCES})
 
@@ -71,10 +78,66 @@ if (${PREFIX}_BUILD_STATIC)
   add_definitions("-D${PREFIX}_BUILT_AS_STATIC")
 endif()
 
+###############################################################################
+# COMPILATION & LINKAGE MODIFICATIONS
+###############################################################################
 
-add_executable(${PROJECT_NAME} ${${PREFIX}_SOURCES} ${${PREFIX}_HEADERS} ${qml_QRC})
-qt5_use_modules(${PROJECT_NAME} Core Widgets Gui Sql Quick QuickControls2 Qml)
+list(APPEND ${PREFIX}_INCLUDES
+      PUBLIC ${${PREFIX}_INCLUDE_DIR}
+      PRIVATE ${${PREFIX}_PRIVATE_INCLUDE_DIR}
+      PUBLIC ${${PREFIX}_GENERATED_INCLUDE_DIR}
+	  "${CMAKE_CURRENT_SOURCE_DIR}/xsd/cpp"
+)
+list(REMOVE_DUPLICATES ${PREFIX}_INCLUDES)
 
+
+set(${PREFIX}_LIBS
+     ${CMAKE_THREAD_LIBS_INIT}
+     ${CMAKE_DL_LIBS}
+	 Xerces::xerces
+	 Qt5::Core 
+	 Qt5::Widgets 
+	 Qt5::Gui 
+	 Qt5::Sql 
+	 Qt5::Quick 
+	 Qt5::QuickControls2 
+	 Qt5::Qml
+)
+
+set(${PREFIX}_LIBS ${${PREFIX}_LIBS} PARENT_SCOPE)
+###############################################################################
+# TARGETS
+###############################################################################
+# LIBRARY
+###############################################################################
+add_library(lib${PROJECT_NAME} STATIC ${${PREFIX}_SOURCES} ${${PREFIX}_HEADERS})
+add_library( Builder::lib ALIAS lib${PROJECT_NAME} )
+target_link_libraries(lib${PROJECT_NAME} PUBLIC ${${PREFIX}_LIBS} )
+set_target_properties(lib${PROJECT_NAME}
+  PROPERTIES
+  DEFINE_SYMBOL "SUSTAIN_FRAMEWORK_EXPORTS"
+  FOLDER "Libraries"
+  OUTPUT_NAME "lib${PROJECT_NAME}"
+  COMPILE_PDB_NAME "lib${PROJECT_NAME}"
+  PROJECT_LABEL "lib${PROJECT_NAME}"
+  DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX}
+  CXX_STANDARD 14
+  VS_DEBUGGER_WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+  )
+target_compile_definitions(lib${PROJECT_NAME} PUBLIC ${${PREFIX}_CPPFLAGS} 	 )
+target_compile_definitions(lib${PROJECT_NAME} PUBLIC $<$<PLATFORM_ID:Windows>:BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE> )
+target_compile_options(lib${PROJECT_NAME} PUBLIC $<$<PLATFORM_ID:Windows>:/bigobj>  PUBLIC $<$<PLATFORM_ID:Windows>:/MP>)
+target_include_directories(lib${PROJECT_NAME} PUBLIC ${${PREFIX}_INCLUDES} )
+
+if(CMAKE_COMPILER_IS_GNUCXX)
+    set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS ${${PREFIX}_LDFLAGS})
+endif()
+
+###############################################################################
+# GUI
+###############################################################################
+add_executable(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/cpp/main.cpp  ${qml_QRC}  ${QML_FILES})
+target_link_libraries(${PROJECT_NAME} Builder::lib)
 set_target_properties(${PROJECT_NAME}
   PROPERTIES
   DEFINE_SYMBOL "SUSTAIN_FRAMEWORK_EXPORTS"
@@ -86,64 +149,32 @@ set_target_properties(${PROJECT_NAME}
   CXX_STANDARD 14
   VS_DEBUGGER_WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
   )
-  
 target_compile_definitions(${PROJECT_NAME} PRIVATE ${${PREFIX}_CPPFLAGS} 	 )
 target_compile_definitions(${PROJECT_NAME} PRIVATE $<$<PLATFORM_ID:Windows>:BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE> )
 target_compile_options(${PROJECT_NAME} PRIVATE $<$<PLATFORM_ID:Windows>:/bigobj>  PRIVATE $<$<PLATFORM_ID:Windows>:/MP>)
-
 ###############################################################################
-# COMPILATION & LINKAGE MODIFICATIONS
+# Unit Test
 ###############################################################################
+add_executable(unit_${PROJECT_NAME} ${UNIT_TEST})
+target_link_libraries(unit_${PROJECT_NAME} Builder::lib GTest::GTest GTest::Main)
+set_target_properties(unit_${PROJECT_NAME}
+  PROPERTIES
+  DEFINE_SYMBOL "SUSTAIN_FRAMEWORK_EXPORTS"
+  FOLDER "Tests"
+  OUTPUT_NAME "unit_${PROJECT_NAME}"
+  COMPILE_PDB_NAME "unit_${PROJECT_NAME}"
+  PROJECT_LABEL "unit_${PROJECT_NAME}"
+  DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX}
+  CXX_STANDARD 14
+  VS_DEBUGGER_WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+  )
+target_compile_definitions(unit_${PROJECT_NAME} PRIVATE ${${PREFIX}_CPPFLAGS} 	 )
+target_compile_definitions(unit_${PROJECT_NAME} PRIVATE $<$<PLATFORM_ID:Windows>:BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE> )
+target_compile_options(unit_${PROJECT_NAME} PRIVATE $<$<PLATFORM_ID:Windows>:/bigobj>  PRIVATE $<$<PLATFORM_ID:Windows>:/MP>)
 
-list(APPEND ${PREFIX}_INCLUDES
-      PUBLIC ${${PREFIX}_INCLUDE_DIR}
-      PRIVATE ${${PREFIX}_PRIVATE_INCLUDE_DIR}
-      PUBLIC ${${PREFIX}_GENERATED_INCLUDE_DIR}
-)
-list(REMOVE_DUPLICATES ${PREFIX}_INCLUDES)
-
-
-set(${PREFIX}_LIBS
-      ${CMAKE_THREAD_LIBS_INIT}
-      ${CMAKE_DL_LIBS}
-)
-
-set(${PREFIX}_LIBS ${${PREFIX}_LIBS} PARENT_SCOPE)
-target_link_libraries(${PROJECT_NAME}  ${${PREFIX}_LIBS} )
-target_include_directories( ${PROJECT_NAME} ${${PREFIX}_INCLUDES} )
-
-
-if(CMAKE_COMPILER_IS_GNUCXX)
-    set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS ${${PREFIX}_LDFLAGS})
-endif()
-
-###############################################################################
-# COMPILATION & LINKAGE MODIFICATIONS
-###############################################################################
-
-list(APPEND ${PREFIX}_INCLUDES
-      PUBLIC ${${PREFIX}_INCLUDE_DIR}
-      PRIVATE ${${PREFIX}_PRIVATE_INCLUDE_DIR}
-      PUBLIC ${${PREFIX}_GENERATED_INCLUDE_DIR}
-)
-list(REMOVE_DUPLICATES ${PREFIX}_INCLUDES)
-
-
-set(${PREFIX}_LIBS
-      ${CMAKE_THREAD_LIBS_INIT}
-      ${CMAKE_DL_LIBS}
-	  Xerces::xerces
-)
-
-set(${PREFIX}_LIBS ${${PREFIX}_LIBS} PARENT_SCOPE)
-target_link_libraries(${PROJECT_NAME}  ${${PREFIX}_LIBS} )
-target_include_directories( ${PROJECT_NAME} ${${PREFIX}_INCLUDES} )
-
-
-if(CMAKE_COMPILER_IS_GNUCXX)
-    set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS ${${PREFIX}_LDFLAGS})
-endif()
-
+################################################################################
+# Install
+################################################################################
  install(TARGETS ${PROJECT_NAME}
      RUNTIME DESTINATION bin
      LIBRARY DESTINATION ${LIBRARY_INSTALL_DIR}

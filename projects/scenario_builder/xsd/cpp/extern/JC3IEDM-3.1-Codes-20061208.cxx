@@ -46,6 +46,12 @@ namespace oo_2_0
   // 
 
   AbsolutePointCategoryCode::
+  AbsolutePointCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  AbsolutePointCategoryCode::
   AbsolutePointCategoryCode (value v)
   : ::xml_schema::token (_xsd_AbsolutePointCategoryCode_literals_[v])
   {
@@ -89,6 +95,12 @@ namespace oo_2_0
 
   // ActionAircraftEmploymentApproachOffsetCode
   // 
+
+  ActionAircraftEmploymentApproachOffsetCode::
+  ActionAircraftEmploymentApproachOffsetCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionAircraftEmploymentApproachOffsetCode::
   ActionAircraftEmploymentApproachOffsetCode (value v)
@@ -136,6 +148,12 @@ namespace oo_2_0
   // 
 
   ActionAircraftEmploymentCrewCompositionCode::
+  ActionAircraftEmploymentCrewCompositionCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionAircraftEmploymentCrewCompositionCode::
   ActionAircraftEmploymentCrewCompositionCode (value v)
   : ::xml_schema::token (_xsd_ActionAircraftEmploymentCrewCompositionCode_literals_[v])
   {
@@ -179,6 +197,12 @@ namespace oo_2_0
 
   // ActionAircraftEmploymentDeplanementMethodCode
   // 
+
+  ActionAircraftEmploymentDeplanementMethodCode::
+  ActionAircraftEmploymentDeplanementMethodCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionAircraftEmploymentDeplanementMethodCode::
   ActionAircraftEmploymentDeplanementMethodCode (value v)
@@ -226,6 +250,12 @@ namespace oo_2_0
   // 
 
   ActionAircraftEmploymentGeneralRoleCode::
+  ActionAircraftEmploymentGeneralRoleCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionAircraftEmploymentGeneralRoleCode::
   ActionAircraftEmploymentGeneralRoleCode (value v)
   : ::xml_schema::token (_xsd_ActionAircraftEmploymentGeneralRoleCode_literals_[v])
   {
@@ -269,6 +299,12 @@ namespace oo_2_0
 
   // ActionAircraftEmploymentInflightReportRequirementIndicatorCode
   // 
+
+  ActionAircraftEmploymentInflightReportRequirementIndicatorCode::
+  ActionAircraftEmploymentInflightReportRequirementIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionAircraftEmploymentInflightReportRequirementIndicatorCode::
   ActionAircraftEmploymentInflightReportRequirementIndicatorCode (value v)
@@ -316,6 +352,12 @@ namespace oo_2_0
   // 
 
   ActionCategoryCode::
+  ActionCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionCategoryCode::
   ActionCategoryCode (value v)
   : ::xml_schema::token (_xsd_ActionCategoryCode_literals_[v])
   {
@@ -359,6 +401,12 @@ namespace oo_2_0
 
   // ActionContextCategoryCode
   // 
+
+  ActionContextCategoryCode::
+  ActionContextCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionContextCategoryCode::
   ActionContextCategoryCode (value v)
@@ -406,6 +454,12 @@ namespace oo_2_0
   // 
 
   ActionEffectCategoryCode::
+  ActionEffectCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionEffectCategoryCode::
   ActionEffectCategoryCode (value v)
   : ::xml_schema::token (_xsd_ActionEffectCategoryCode_literals_[v])
   {
@@ -449,6 +503,12 @@ namespace oo_2_0
 
   // ActionEffectDescriptionCode
   // 
+
+  ActionEffectDescriptionCode::
+  ActionEffectDescriptionCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionEffectDescriptionCode::
   ActionEffectDescriptionCode (value v)
@@ -496,6 +556,12 @@ namespace oo_2_0
   // 
 
   ActionEffectSeverityCode::
+  ActionEffectSeverityCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionEffectSeverityCode::
   ActionEffectSeverityCode (value v)
   : ::xml_schema::token (_xsd_ActionEffectSeverityCode_literals_[v])
   {
@@ -539,6 +605,12 @@ namespace oo_2_0
 
   // ActionElectronicWarfareEmploymentCategoryCode
   // 
+
+  ActionElectronicWarfareEmploymentCategoryCode::
+  ActionElectronicWarfareEmploymentCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionElectronicWarfareEmploymentCategoryCode::
   ActionElectronicWarfareEmploymentCategoryCode (value v)
@@ -586,6 +658,12 @@ namespace oo_2_0
   // 
 
   ActionEventCategoryCode::
+  ActionEventCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionEventCategoryCode::
   ActionEventCategoryCode (value v)
   : ::xml_schema::token (_xsd_ActionEventCategoryCode_literals_[v])
   {
@@ -629,6 +707,12 @@ namespace oo_2_0
 
   // ActionEventDetailClassificationCode
   // 
+
+  ActionEventDetailClassificationCode::
+  ActionEventDetailClassificationCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionEventDetailClassificationCode::
   ActionEventDetailClassificationCode (value v)
@@ -676,6 +760,12 @@ namespace oo_2_0
   // 
 
   ActionEventDetailCrimeIndicatorCode::
+  ActionEventDetailCrimeIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionEventDetailCrimeIndicatorCode::
   ActionEventDetailCrimeIndicatorCode (value v)
   : ::xml_schema::token (_xsd_ActionEventDetailCrimeIndicatorCode_literals_[v])
   {
@@ -719,6 +809,12 @@ namespace oo_2_0
 
   // ActionFunctionalAssociationCategoryCode
   // 
+
+  ActionFunctionalAssociationCategoryCode::
+  ActionFunctionalAssociationCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionFunctionalAssociationCategoryCode::
   ActionFunctionalAssociationCategoryCode (value v)
@@ -766,6 +862,12 @@ namespace oo_2_0
   // 
 
   ActionMaritimeEmploymentCoordinatedAirSeaProcedureCode::
+  ActionMaritimeEmploymentCoordinatedAirSeaProcedureCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionMaritimeEmploymentCoordinatedAirSeaProcedureCode::
   ActionMaritimeEmploymentCoordinatedAirSeaProcedureCode (value v)
   : ::xml_schema::token (_xsd_ActionMaritimeEmploymentCoordinatedAirSeaProcedureCode_literals_[v])
   {
@@ -809,6 +911,12 @@ namespace oo_2_0
 
   // ActionMaritimeEmploymentVesselTransitInstructionCode
   // 
+
+  ActionMaritimeEmploymentVesselTransitInstructionCode::
+  ActionMaritimeEmploymentVesselTransitInstructionCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionMaritimeEmploymentVesselTransitInstructionCode::
   ActionMaritimeEmploymentVesselTransitInstructionCode (value v)
@@ -856,6 +964,12 @@ namespace oo_2_0
   // 
 
   ActionObjectiveCategoryCode::
+  ActionObjectiveCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionObjectiveCategoryCode::
   ActionObjectiveCategoryCode (value v)
   : ::xml_schema::token (_xsd_ActionObjectiveCategoryCode_literals_[v])
   {
@@ -899,6 +1013,12 @@ namespace oo_2_0
 
   // ActionObjectiveItemCategoryCode
   // 
+
+  ActionObjectiveItemCategoryCode::
+  ActionObjectiveItemCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionObjectiveItemCategoryCode::
   ActionObjectiveItemCategoryCode (value v)
@@ -946,6 +1066,12 @@ namespace oo_2_0
   // 
 
   ActionObjectiveItemMarkingMethodCode::
+  ActionObjectiveItemMarkingMethodCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionObjectiveItemMarkingMethodCode::
   ActionObjectiveItemMarkingMethodCode (value v)
   : ::xml_schema::token (_xsd_ActionObjectiveItemMarkingMethodCode_literals_[v])
   {
@@ -989,6 +1115,12 @@ namespace oo_2_0
 
   // ActionObjectiveItemMarkingPanelShapeCode
   // 
+
+  ActionObjectiveItemMarkingPanelShapeCode::
+  ActionObjectiveItemMarkingPanelShapeCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionObjectiveItemMarkingPanelShapeCode::
   ActionObjectiveItemMarkingPanelShapeCode (value v)
@@ -1036,6 +1168,12 @@ namespace oo_2_0
   // 
 
   ActionObjectiveItemMarkingRecognitionSignalColourCode::
+  ActionObjectiveItemMarkingRecognitionSignalColourCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionObjectiveItemMarkingRecognitionSignalColourCode::
   ActionObjectiveItemMarkingRecognitionSignalColourCode (value v)
   : ::xml_schema::token (_xsd_ActionObjectiveItemMarkingRecognitionSignalColourCode_literals_[v])
   {
@@ -1079,6 +1217,12 @@ namespace oo_2_0
 
   // ActionObjectiveItemPrimacyCode
   // 
+
+  ActionObjectiveItemPrimacyCode::
+  ActionObjectiveItemPrimacyCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionObjectiveItemPrimacyCode::
   ActionObjectiveItemPrimacyCode (value v)
@@ -1126,6 +1270,12 @@ namespace oo_2_0
   // 
 
   ActionObjectiveQualifierCode::
+  ActionObjectiveQualifierCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionObjectiveQualifierCode::
   ActionObjectiveQualifierCode (value v)
   : ::xml_schema::token (_xsd_ActionObjectiveQualifierCode_literals_[v])
   {
@@ -1169,6 +1319,12 @@ namespace oo_2_0
 
   // ActionObjectiveTypeCategoryCode
   // 
+
+  ActionObjectiveTypeCategoryCode::
+  ActionObjectiveTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionObjectiveTypeCategoryCode::
   ActionObjectiveTypeCategoryCode (value v)
@@ -1216,6 +1372,12 @@ namespace oo_2_0
   // 
 
   ActionObjectiveTypeImageryProductImageTypeCode::
+  ActionObjectiveTypeImageryProductImageTypeCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionObjectiveTypeImageryProductImageTypeCode::
   ActionObjectiveTypeImageryProductImageTypeCode (value v)
   : ::xml_schema::token (_xsd_ActionObjectiveTypeImageryProductImageTypeCode_literals_[v])
   {
@@ -1259,6 +1421,12 @@ namespace oo_2_0
 
   // ActionReconnaissanceEmploymentImageCoverageModeCode
   // 
+
+  ActionReconnaissanceEmploymentImageCoverageModeCode::
+  ActionReconnaissanceEmploymentImageCoverageModeCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionReconnaissanceEmploymentImageCoverageModeCode::
   ActionReconnaissanceEmploymentImageCoverageModeCode (value v)
@@ -1306,6 +1474,12 @@ namespace oo_2_0
   // 
 
   ActionReconnaissanceEmploymentImageViewQualifierCode::
+  ActionReconnaissanceEmploymentImageViewQualifierCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionReconnaissanceEmploymentImageViewQualifierCode::
   ActionReconnaissanceEmploymentImageViewQualifierCode (value v)
   : ::xml_schema::token (_xsd_ActionReconnaissanceEmploymentImageViewQualifierCode_literals_[v])
   {
@@ -1349,6 +1523,12 @@ namespace oo_2_0
 
   // ActionReconnaissanceEmploymentTypeOfCoverageCode
   // 
+
+  ActionReconnaissanceEmploymentTypeOfCoverageCode::
+  ActionReconnaissanceEmploymentTypeOfCoverageCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionReconnaissanceEmploymentTypeOfCoverageCode::
   ActionReconnaissanceEmploymentTypeOfCoverageCode (value v)
@@ -1396,6 +1576,12 @@ namespace oo_2_0
   // 
 
   ActionReferenceAssociationCategoryCode::
+  ActionReferenceAssociationCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionReferenceAssociationCategoryCode::
   ActionReferenceAssociationCategoryCode (value v)
   : ::xml_schema::token (_xsd_ActionReferenceAssociationCategoryCode_literals_[v])
   {
@@ -1439,6 +1625,12 @@ namespace oo_2_0
 
   // ActionResourceCategoryCode
   // 
+
+  ActionResourceCategoryCode::
+  ActionResourceCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionResourceCategoryCode::
   ActionResourceCategoryCode (value v)
@@ -1486,6 +1678,12 @@ namespace oo_2_0
   // 
 
   ActionResourceCriticalityIndicatorCode::
+  ActionResourceCriticalityIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionResourceCriticalityIndicatorCode::
   ActionResourceCriticalityIndicatorCode (value v)
   : ::xml_schema::token (_xsd_ActionResourceCriticalityIndicatorCode_literals_[v])
   {
@@ -1529,6 +1727,12 @@ namespace oo_2_0
 
   // ActionResourceEmploymentCategoryCode
   // 
+
+  ActionResourceEmploymentCategoryCode::
+  ActionResourceEmploymentCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionResourceEmploymentCategoryCode::
   ActionResourceEmploymentCategoryCode (value v)
@@ -1576,6 +1780,12 @@ namespace oo_2_0
   // 
 
   ActionResourceEmploymentMethodOfControlCode::
+  ActionResourceEmploymentMethodOfControlCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionResourceEmploymentMethodOfControlCode::
   ActionResourceEmploymentMethodOfControlCode (value v)
   : ::xml_schema::token (_xsd_ActionResourceEmploymentMethodOfControlCode_literals_[v])
   {
@@ -1619,6 +1829,12 @@ namespace oo_2_0
 
   // ActionResourceEmploymentTrajectoryFireCode
   // 
+
+  ActionResourceEmploymentTrajectoryFireCode::
+  ActionResourceEmploymentTrajectoryFireCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionResourceEmploymentTrajectoryFireCode::
   ActionResourceEmploymentTrajectoryFireCode (value v)
@@ -1666,6 +1882,12 @@ namespace oo_2_0
   // 
 
   ActionResourceQualifierCode::
+  ActionResourceQualifierCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionResourceQualifierCode::
   ActionResourceQualifierCode (value v)
   : ::xml_schema::token (_xsd_ActionResourceQualifierCode_literals_[v])
   {
@@ -1709,6 +1931,12 @@ namespace oo_2_0
 
   // ActionTaskActivityCode
   // 
+
+  ActionTaskActivityCode::
+  ActionTaskActivityCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionTaskActivityCode::
   ActionTaskActivityCode (value v)
@@ -1756,6 +1984,12 @@ namespace oo_2_0
   // 
 
   ActionTaskCategoryCode::
+  ActionTaskCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionTaskCategoryCode::
   ActionTaskCategoryCode (value v)
   : ::xml_schema::token (_xsd_ActionTaskCategoryCode_literals_[v])
   {
@@ -1799,6 +2033,12 @@ namespace oo_2_0
 
   // ActionTaskEndQualifierCode
   // 
+
+  ActionTaskEndQualifierCode::
+  ActionTaskEndQualifierCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionTaskEndQualifierCode::
   ActionTaskEndQualifierCode (value v)
@@ -1846,6 +2086,12 @@ namespace oo_2_0
   // 
 
   ActionTaskEntailedSafetyDegreeCode::
+  ActionTaskEntailedSafetyDegreeCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionTaskEntailedSafetyDegreeCode::
   ActionTaskEntailedSafetyDegreeCode (value v)
   : ::xml_schema::token (_xsd_ActionTaskEntailedSafetyDegreeCode_literals_[v])
   {
@@ -1889,6 +2135,12 @@ namespace oo_2_0
 
   // ActionTaskMeteorologicalImpactCode
   // 
+
+  ActionTaskMeteorologicalImpactCode::
+  ActionTaskMeteorologicalImpactCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionTaskMeteorologicalImpactCode::
   ActionTaskMeteorologicalImpactCode (value v)
@@ -1936,6 +2188,12 @@ namespace oo_2_0
   // 
 
   ActionTaskOperationalLevelCode::
+  ActionTaskOperationalLevelCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionTaskOperationalLevelCode::
   ActionTaskOperationalLevelCode (value v)
   : ::xml_schema::token (_xsd_ActionTaskOperationalLevelCode_literals_[v])
   {
@@ -1979,6 +2237,12 @@ namespace oo_2_0
 
   // ActionTaskOvertCovertCode
   // 
+
+  ActionTaskOvertCovertCode::
+  ActionTaskOvertCovertCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionTaskOvertCovertCode::
   ActionTaskOvertCovertCode (value v)
@@ -2026,6 +2290,12 @@ namespace oo_2_0
   // 
 
   ActionTaskPriorityCode::
+  ActionTaskPriorityCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionTaskPriorityCode::
   ActionTaskPriorityCode (value v)
   : ::xml_schema::token (_xsd_ActionTaskPriorityCode_literals_[v])
   {
@@ -2069,6 +2339,12 @@ namespace oo_2_0
 
   // ActionTaskStartQualifierCode
   // 
+
+  ActionTaskStartQualifierCode::
+  ActionTaskStartQualifierCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionTaskStartQualifierCode::
   ActionTaskStartQualifierCode (value v)
@@ -2116,6 +2392,12 @@ namespace oo_2_0
   // 
 
   ActionTaskStatusAmendTimingCode::
+  ActionTaskStatusAmendTimingCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionTaskStatusAmendTimingCode::
   ActionTaskStatusAmendTimingCode (value v)
   : ::xml_schema::token (_xsd_ActionTaskStatusAmendTimingCode_literals_[v])
   {
@@ -2159,6 +2441,12 @@ namespace oo_2_0
 
   // ActionTaskStatusApprovalIndicatorCode
   // 
+
+  ActionTaskStatusApprovalIndicatorCode::
+  ActionTaskStatusApprovalIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionTaskStatusApprovalIndicatorCode::
   ActionTaskStatusApprovalIndicatorCode (value v)
@@ -2206,6 +2494,12 @@ namespace oo_2_0
   // 
 
   ActionTaskStatusCategoryCode::
+  ActionTaskStatusCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionTaskStatusCategoryCode::
   ActionTaskStatusCategoryCode (value v)
   : ::xml_schema::token (_xsd_ActionTaskStatusCategoryCode_literals_[v])
   {
@@ -2249,6 +2543,12 @@ namespace oo_2_0
 
   // ActionTaskStatusPlanningIndicatorCode
   // 
+
+  ActionTaskStatusPlanningIndicatorCode::
+  ActionTaskStatusPlanningIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionTaskStatusPlanningIndicatorCode::
   ActionTaskStatusPlanningIndicatorCode (value v)
@@ -2296,6 +2596,12 @@ namespace oo_2_0
   // 
 
   ActionTaskStatusProgressCode::
+  ActionTaskStatusProgressCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionTaskStatusProgressCode::
   ActionTaskStatusProgressCode (value v)
   : ::xml_schema::token (_xsd_ActionTaskStatusProgressCode_literals_[v])
   {
@@ -2339,6 +2645,12 @@ namespace oo_2_0
 
   // ActionTaskTimingDayCode
   // 
+
+  ActionTaskTimingDayCode::
+  ActionTaskTimingDayCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionTaskTimingDayCode::
   ActionTaskTimingDayCode (value v)
@@ -2386,6 +2698,12 @@ namespace oo_2_0
   // 
 
   ActionTaskTimingHourCode::
+  ActionTaskTimingHourCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ActionTaskTimingHourCode::
   ActionTaskTimingHourCode (value v)
   : ::xml_schema::token (_xsd_ActionTaskTimingHourCode_literals_[v])
   {
@@ -2429,6 +2747,12 @@ namespace oo_2_0
 
   // ActionTemporalAssociationCategoryCode
   // 
+
+  ActionTemporalAssociationCategoryCode::
+  ActionTemporalAssociationCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ActionTemporalAssociationCategoryCode::
   ActionTemporalAssociationCategoryCode (value v)
@@ -2476,6 +2800,12 @@ namespace oo_2_0
   // 
 
   AddressCategoryCode::
+  AddressCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  AddressCategoryCode::
   AddressCategoryCode (value v)
   : ::xml_schema::token (_xsd_AddressCategoryCode_literals_[v])
   {
@@ -2519,6 +2849,12 @@ namespace oo_2_0
 
   // AffiliationCategoryCode
   // 
+
+  AffiliationCategoryCode::
+  AffiliationCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   AffiliationCategoryCode::
   AffiliationCategoryCode (value v)
@@ -2566,6 +2902,12 @@ namespace oo_2_0
   // 
 
   AffiliationEthnicGroupCode::
+  AffiliationEthnicGroupCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  AffiliationEthnicGroupCode::
   AffiliationEthnicGroupCode (value v)
   : ::xml_schema::token (_xsd_AffiliationEthnicGroupCode_literals_[v])
   {
@@ -2609,6 +2951,12 @@ namespace oo_2_0
 
   // AffiliationFunctionalGroupCode
   // 
+
+  AffiliationFunctionalGroupCode::
+  AffiliationFunctionalGroupCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   AffiliationFunctionalGroupCode::
   AffiliationFunctionalGroupCode (value v)
@@ -2656,6 +3004,12 @@ namespace oo_2_0
   // 
 
   AffiliationGeopoliticalCode::
+  AffiliationGeopoliticalCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  AffiliationGeopoliticalCode::
   AffiliationGeopoliticalCode (value v)
   : ::xml_schema::token (_xsd_AffiliationGeopoliticalCode_literals_[v])
   {
@@ -2699,6 +3053,12 @@ namespace oo_2_0
 
   // AffiliationReligionCode
   // 
+
+  AffiliationReligionCode::
+  AffiliationReligionCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   AffiliationReligionCode::
   AffiliationReligionCode (value v)
@@ -2746,6 +3106,12 @@ namespace oo_2_0
   // 
 
   AirRouteSegmentCivilMilitaryCode::
+  AirRouteSegmentCivilMilitaryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  AirRouteSegmentCivilMilitaryCode::
   AirRouteSegmentCivilMilitaryCode (value v)
   : ::xml_schema::token (_xsd_AirRouteSegmentCivilMilitaryCode_literals_[v])
   {
@@ -2789,6 +3155,12 @@ namespace oo_2_0
 
   // AirRouteSegmentInternationalRouteCode
   // 
+
+  AirRouteSegmentInternationalRouteCode::
+  AirRouteSegmentInternationalRouteCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   AirRouteSegmentInternationalRouteCode::
   AirRouteSegmentInternationalRouteCode (value v)
@@ -2836,6 +3208,12 @@ namespace oo_2_0
   // 
 
   AirRouteSegmentRequiredNavigationPerformanceCode::
+  AirRouteSegmentRequiredNavigationPerformanceCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  AirRouteSegmentRequiredNavigationPerformanceCode::
   AirRouteSegmentRequiredNavigationPerformanceCode (value v)
   : ::xml_schema::token (_xsd_AirRouteSegmentRequiredNavigationPerformanceCode_literals_[v])
   {
@@ -2879,6 +3257,12 @@ namespace oo_2_0
 
   // AircraftTypeAirframeDesignCode
   // 
+
+  AircraftTypeAirframeDesignCode::
+  AircraftTypeAirframeDesignCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   AircraftTypeAirframeDesignCode::
   AircraftTypeAirframeDesignCode (value v)
@@ -2926,6 +3310,12 @@ namespace oo_2_0
   // 
 
   AircraftTypeCategoryCode::
+  AircraftTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  AircraftTypeCategoryCode::
   AircraftTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_AircraftTypeCategoryCode_literals_[v])
   {
@@ -2969,6 +3359,12 @@ namespace oo_2_0
 
   // AircraftTypeDesignRangeCode
   // 
+
+  AircraftTypeDesignRangeCode::
+  AircraftTypeDesignRangeCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   AircraftTypeDesignRangeCode::
   AircraftTypeDesignRangeCode (value v)
@@ -3016,6 +3412,12 @@ namespace oo_2_0
   // 
 
   AircraftTypeDesignRoleCode::
+  AircraftTypeDesignRoleCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  AircraftTypeDesignRoleCode::
   AircraftTypeDesignRoleCode (value v)
   : ::xml_schema::token (_xsd_AircraftTypeDesignRoleCode_literals_[v])
   {
@@ -3059,6 +3461,12 @@ namespace oo_2_0
 
   // AircraftTypeLoadCategoryCode
   // 
+
+  AircraftTypeLoadCategoryCode::
+  AircraftTypeLoadCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   AircraftTypeLoadCategoryCode::
   AircraftTypeLoadCategoryCode (value v)
@@ -3106,6 +3514,12 @@ namespace oo_2_0
   // 
 
   AircraftTypeMainPurposeCode::
+  AircraftTypeMainPurposeCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  AircraftTypeMainPurposeCode::
   AircraftTypeMainPurposeCode (value v)
   : ::xml_schema::token (_xsd_AircraftTypeMainPurposeCode_literals_[v])
   {
@@ -3149,6 +3563,12 @@ namespace oo_2_0
 
   // AircraftTypeManningCode
   // 
+
+  AircraftTypeManningCode::
+  AircraftTypeManningCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   AircraftTypeManningCode::
   AircraftTypeManningCode (value v)
@@ -3196,6 +3616,12 @@ namespace oo_2_0
   // 
 
   AircraftTypeMilitaryCivilianCode::
+  AircraftTypeMilitaryCivilianCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  AircraftTypeMilitaryCivilianCode::
   AircraftTypeMilitaryCivilianCode (value v)
   : ::xml_schema::token (_xsd_AircraftTypeMilitaryCivilianCode_literals_[v])
   {
@@ -3239,6 +3665,12 @@ namespace oo_2_0
 
   // AircraftTypeModelCode
   // 
+
+  AircraftTypeModelCode::
+  AircraftTypeModelCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   AircraftTypeModelCode::
   AircraftTypeModelCode (value v)
@@ -3286,6 +3718,12 @@ namespace oo_2_0
   // 
 
   AircraftTypeTakeoffAndLandingCode::
+  AircraftTypeTakeoffAndLandingCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  AircraftTypeTakeoffAndLandingCode::
   AircraftTypeTakeoffAndLandingCode (value v)
   : ::xml_schema::token (_xsd_AircraftTypeTakeoffAndLandingCode_literals_[v])
   {
@@ -3329,6 +3767,12 @@ namespace oo_2_0
 
   // AircraftTypeTrainingCategoryCode
   // 
+
+  AircraftTypeTrainingCategoryCode::
+  AircraftTypeTrainingCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   AircraftTypeTrainingCategoryCode::
   AircraftTypeTrainingCategoryCode (value v)
@@ -3376,6 +3820,12 @@ namespace oo_2_0
   // 
 
   AircraftTypeWeatherQualifierCode::
+  AircraftTypeWeatherQualifierCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  AircraftTypeWeatherQualifierCode::
   AircraftTypeWeatherQualifierCode (value v)
   : ::xml_schema::token (_xsd_AircraftTypeWeatherQualifierCode_literals_[v])
   {
@@ -3419,6 +3869,12 @@ namespace oo_2_0
 
   // AirfieldAirTrafficControlPresenceIndicatorCode
   // 
+
+  AirfieldAirTrafficControlPresenceIndicatorCode::
+  AirfieldAirTrafficControlPresenceIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   AirfieldAirTrafficControlPresenceIndicatorCode::
   AirfieldAirTrafficControlPresenceIndicatorCode (value v)
@@ -3466,6 +3922,12 @@ namespace oo_2_0
   // 
 
   AirfieldInstrumentLandingSystemPresenceIndicatorCode::
+  AirfieldInstrumentLandingSystemPresenceIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  AirfieldInstrumentLandingSystemPresenceIndicatorCode::
   AirfieldInstrumentLandingSystemPresenceIndicatorCode (value v)
   : ::xml_schema::token (_xsd_AirfieldInstrumentLandingSystemPresenceIndicatorCode_literals_[v])
   {
@@ -3509,6 +3971,12 @@ namespace oo_2_0
 
   // AirfieldStatusDayOperationsCode
   // 
+
+  AirfieldStatusDayOperationsCode::
+  AirfieldStatusDayOperationsCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   AirfieldStatusDayOperationsCode::
   AirfieldStatusDayOperationsCode (value v)
@@ -3556,6 +4024,12 @@ namespace oo_2_0
   // 
 
   AirfieldStatusEvaluationIndicatorCode::
+  AirfieldStatusEvaluationIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  AirfieldStatusEvaluationIndicatorCode::
   AirfieldStatusEvaluationIndicatorCode (value v)
   : ::xml_schema::token (_xsd_AirfieldStatusEvaluationIndicatorCode_literals_[v])
   {
@@ -3599,6 +4073,12 @@ namespace oo_2_0
 
   // AirfieldStatusFlightSupportCategoryCode
   // 
+
+  AirfieldStatusFlightSupportCategoryCode::
+  AirfieldStatusFlightSupportCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   AirfieldStatusFlightSupportCategoryCode::
   AirfieldStatusFlightSupportCategoryCode (value v)
@@ -3646,6 +4126,12 @@ namespace oo_2_0
   // 
 
   AirfieldTypeUseCategoryCode::
+  AirfieldTypeUseCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  AirfieldTypeUseCategoryCode::
   AirfieldTypeUseCategoryCode (value v)
   : ::xml_schema::token (_xsd_AirfieldTypeUseCategoryCode_literals_[v])
   {
@@ -3689,6 +4175,12 @@ namespace oo_2_0
 
   // AirfieldVisualNavigationalAidIndicatorCode
   // 
+
+  AirfieldVisualNavigationalAidIndicatorCode::
+  AirfieldVisualNavigationalAidIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   AirfieldVisualNavigationalAidIndicatorCode::
   AirfieldVisualNavigationalAidIndicatorCode (value v)
@@ -3736,6 +4228,12 @@ namespace oo_2_0
   // 
 
   AmmunitionTypeCategoryCode::
+  AmmunitionTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  AmmunitionTypeCategoryCode::
   AmmunitionTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_AmmunitionTypeCategoryCode_literals_[v])
   {
@@ -3779,6 +4277,12 @@ namespace oo_2_0
 
   // AmmunitionTypeExerciseMineFlareColourCode
   // 
+
+  AmmunitionTypeExerciseMineFlareColourCode::
+  AmmunitionTypeExerciseMineFlareColourCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   AmmunitionTypeExerciseMineFlareColourCode::
   AmmunitionTypeExerciseMineFlareColourCode (value v)
@@ -3826,6 +4330,12 @@ namespace oo_2_0
   // 
 
   AmmunitionTypeMineMaritimeFiringCode::
+  AmmunitionTypeMineMaritimeFiringCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  AmmunitionTypeMineMaritimeFiringCode::
   AmmunitionTypeMineMaritimeFiringCode (value v)
   : ::xml_schema::token (_xsd_AmmunitionTypeMineMaritimeFiringCode_literals_[v])
   {
@@ -3869,6 +4379,12 @@ namespace oo_2_0
 
   // AnchorageBottomTypeCode
   // 
+
+  AnchorageBottomTypeCode::
+  AnchorageBottomTypeCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   AnchorageBottomTypeCode::
   AnchorageBottomTypeCode (value v)
@@ -3916,6 +4432,12 @@ namespace oo_2_0
   // 
 
   AnchorageMooringsTypeCode::
+  AnchorageMooringsTypeCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  AnchorageMooringsTypeCode::
   AnchorageMooringsTypeCode (value v)
   : ::xml_schema::token (_xsd_AnchorageMooringsTypeCode_literals_[v])
   {
@@ -3959,6 +4481,12 @@ namespace oo_2_0
 
   // AnglePrecisionCode
   // 
+
+  AnglePrecisionCode::
+  AnglePrecisionCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   AnglePrecisionCode::
   AnglePrecisionCode (value v)
@@ -4006,6 +4534,12 @@ namespace oo_2_0
   // 
 
   ApproachDirectionCategoryCode::
+  ApproachDirectionCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ApproachDirectionCategoryCode::
   ApproachDirectionCategoryCode (value v)
   : ::xml_schema::token (_xsd_ApproachDirectionCategoryCode_literals_[v])
   {
@@ -4049,6 +4583,12 @@ namespace oo_2_0
 
   // AssociationStatusCategoryCode
   // 
+
+  AssociationStatusCategoryCode::
+  AssociationStatusCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   AssociationStatusCategoryCode::
   AssociationStatusCategoryCode (value v)
@@ -4096,6 +4636,12 @@ namespace oo_2_0
   // 
 
   AtmosphereInversionLayerCode::
+  AtmosphereInversionLayerCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  AtmosphereInversionLayerCode::
   AtmosphereInversionLayerCode (value v)
   : ::xml_schema::token (_xsd_AtmosphereInversionLayerCode_literals_[v])
   {
@@ -4139,6 +4685,12 @@ namespace oo_2_0
 
   // AtmospherePressureSystemCategoryCode
   // 
+
+  AtmospherePressureSystemCategoryCode::
+  AtmospherePressureSystemCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   AtmospherePressureSystemCategoryCode::
   AtmospherePressureSystemCategoryCode (value v)
@@ -4186,6 +4738,12 @@ namespace oo_2_0
   // 
 
   AtmosphereTemperatureGradientCode::
+  AtmosphereTemperatureGradientCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  AtmosphereTemperatureGradientCode::
   AtmosphereTemperatureGradientCode (value v)
   : ::xml_schema::token (_xsd_AtmosphereTemperatureGradientCode_literals_[v])
   {
@@ -4229,6 +4787,12 @@ namespace oo_2_0
 
   // BerthMajorVesselClassCode
   // 
+
+  BerthMajorVesselClassCode::
+  BerthMajorVesselClassCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   BerthMajorVesselClassCode::
   BerthMajorVesselClassCode (value v)
@@ -4276,6 +4840,12 @@ namespace oo_2_0
   // 
 
   BerthRailAvailabilityIndicatorCode::
+  BerthRailAvailabilityIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  BerthRailAvailabilityIndicatorCode::
   BerthRailAvailabilityIndicatorCode (value v)
   : ::xml_schema::token (_xsd_BerthRailAvailabilityIndicatorCode_literals_[v])
   {
@@ -4319,6 +4889,12 @@ namespace oo_2_0
 
   // BerthRollOnRollOffIndicatorCode
   // 
+
+  BerthRollOnRollOffIndicatorCode::
+  BerthRollOnRollOffIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   BerthRollOnRollOffIndicatorCode::
   BerthRollOnRollOffIndicatorCode (value v)
@@ -4366,6 +4942,12 @@ namespace oo_2_0
   // 
 
   BiologicalMaterielTypeCategoryCode::
+  BiologicalMaterielTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  BiologicalMaterielTypeCategoryCode::
   BiologicalMaterielTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_BiologicalMaterielTypeCategoryCode_literals_[v])
   {
@@ -4409,6 +4991,12 @@ namespace oo_2_0
 
   // BiologicalMaterielTypeSubcategoryCode
   // 
+
+  BiologicalMaterielTypeSubcategoryCode::
+  BiologicalMaterielTypeSubcategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   BiologicalMaterielTypeSubcategoryCode::
   BiologicalMaterielTypeSubcategoryCode (value v)
@@ -4456,6 +5044,12 @@ namespace oo_2_0
   // 
 
   BridgeTypeDesignTypeCode::
+  BridgeTypeDesignTypeCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  BridgeTypeDesignTypeCode::
   BridgeTypeDesignTypeCode (value v)
   : ::xml_schema::token (_xsd_BridgeTypeDesignTypeCode_literals_[v])
   {
@@ -4499,6 +5093,12 @@ namespace oo_2_0
 
   // BridgeUsageCode
   // 
+
+  BridgeUsageCode::
+  BridgeUsageCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   BridgeUsageCode::
   BridgeUsageCode (value v)
@@ -4546,6 +5146,12 @@ namespace oo_2_0
   // 
 
   CandidateTargetDetailAssociationCategoryCode::
+  CandidateTargetDetailAssociationCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  CandidateTargetDetailAssociationCategoryCode::
   CandidateTargetDetailAssociationCategoryCode (value v)
   : ::xml_schema::token (_xsd_CandidateTargetDetailAssociationCategoryCode_literals_[v])
   {
@@ -4589,6 +5195,12 @@ namespace oo_2_0
 
   // CandidateTargetDetailAuthorisationApprovalCode
   // 
+
+  CandidateTargetDetailAuthorisationApprovalCode::
+  CandidateTargetDetailAuthorisationApprovalCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   CandidateTargetDetailAuthorisationApprovalCode::
   CandidateTargetDetailAuthorisationApprovalCode (value v)
@@ -4636,6 +5248,12 @@ namespace oo_2_0
   // 
 
   CandidateTargetDetailCategoryCode::
+  CandidateTargetDetailCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  CandidateTargetDetailCategoryCode::
   CandidateTargetDetailCategoryCode (value v)
   : ::xml_schema::token (_xsd_CandidateTargetDetailCategoryCode_literals_[v])
   {
@@ -4679,6 +5297,12 @@ namespace oo_2_0
 
   // CandidateTargetDetailFocusTypeCode
   // 
+
+  CandidateTargetDetailFocusTypeCode::
+  CandidateTargetDetailFocusTypeCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   CandidateTargetDetailFocusTypeCode::
   CandidateTargetDetailFocusTypeCode (value v)
@@ -4726,6 +5350,12 @@ namespace oo_2_0
   // 
 
   CandidateTargetDetailSchemeCode::
+  CandidateTargetDetailSchemeCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  CandidateTargetDetailSchemeCode::
   CandidateTargetDetailSchemeCode (value v)
   : ::xml_schema::token (_xsd_CandidateTargetDetailSchemeCode_literals_[v])
   {
@@ -4769,6 +5399,12 @@ namespace oo_2_0
 
   // CandidateTargetListAssociationCategoryCode
   // 
+
+  CandidateTargetListAssociationCategoryCode::
+  CandidateTargetListAssociationCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   CandidateTargetListAssociationCategoryCode::
   CandidateTargetListAssociationCategoryCode (value v)
@@ -4816,6 +5452,12 @@ namespace oo_2_0
   // 
 
   CandidateTargetListAuthorisationIndicatorCode::
+  CandidateTargetListAuthorisationIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  CandidateTargetListAuthorisationIndicatorCode::
   CandidateTargetListAuthorisationIndicatorCode (value v)
   : ::xml_schema::token (_xsd_CandidateTargetListAuthorisationIndicatorCode_literals_[v])
   {
@@ -4859,6 +5501,12 @@ namespace oo_2_0
 
   // CapabilityCategoryCode
   // 
+
+  CapabilityCategoryCode::
+  CapabilityCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   CapabilityCategoryCode::
   CapabilityCategoryCode (value v)
@@ -4906,6 +5554,12 @@ namespace oo_2_0
   // 
 
   CapabilityDayNightCode::
+  CapabilityDayNightCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  CapabilityDayNightCode::
   CapabilityDayNightCode (value v)
   : ::xml_schema::token (_xsd_CapabilityDayNightCode_literals_[v])
   {
@@ -4949,6 +5603,12 @@ namespace oo_2_0
 
   // CapabilityReferenceAssociationCategoryCode
   // 
+
+  CapabilityReferenceAssociationCategoryCode::
+  CapabilityReferenceAssociationCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   CapabilityReferenceAssociationCategoryCode::
   CapabilityReferenceAssociationCategoryCode (value v)
@@ -4996,6 +5656,12 @@ namespace oo_2_0
   // 
 
   CapabilityUnitOfMeasureCode::
+  CapabilityUnitOfMeasureCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  CapabilityUnitOfMeasureCode::
   CapabilityUnitOfMeasureCode (value v)
   : ::xml_schema::token (_xsd_CapabilityUnitOfMeasureCode_literals_[v])
   {
@@ -5039,6 +5705,12 @@ namespace oo_2_0
 
   // CargoCategoryCode
   // 
+
+  CargoCategoryCode::
+  CargoCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   CargoCategoryCode::
   CargoCategoryCode (value v)
@@ -5086,6 +5758,12 @@ namespace oo_2_0
   // 
 
   CasualtyGroupCode::
+  CasualtyGroupCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  CasualtyGroupCode::
   CasualtyGroupCode (value v)
   : ::xml_schema::token (_xsd_CasualtyGroupCode_literals_[v])
   {
@@ -5129,6 +5807,12 @@ namespace oo_2_0
 
   // CbrnEquipmentTypeCategoryCode
   // 
+
+  CbrnEquipmentTypeCategoryCode::
+  CbrnEquipmentTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   CbrnEquipmentTypeCategoryCode::
   CbrnEquipmentTypeCategoryCode (value v)
@@ -5176,6 +5860,12 @@ namespace oo_2_0
   // 
 
   CbrnEventAlarmResultIndicatorCode::
+  CbrnEventAlarmResultIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  CbrnEventAlarmResultIndicatorCode::
   CbrnEventAlarmResultIndicatorCode (value v)
   : ::xml_schema::token (_xsd_CbrnEventAlarmResultIndicatorCode_literals_[v])
   {
@@ -5219,6 +5909,12 @@ namespace oo_2_0
 
   // CbrnEventCategoryCode
   // 
+
+  CbrnEventCategoryCode::
+  CbrnEventCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   CbrnEventCategoryCode::
   CbrnEventCategoryCode (value v)
@@ -5266,6 +5962,12 @@ namespace oo_2_0
   // 
 
   CbrnEventConfirmationTestIndicatorCode::
+  CbrnEventConfirmationTestIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  CbrnEventConfirmationTestIndicatorCode::
   CbrnEventConfirmationTestIndicatorCode (value v)
   : ::xml_schema::token (_xsd_CbrnEventConfirmationTestIndicatorCode_literals_[v])
   {
@@ -5309,6 +6011,12 @@ namespace oo_2_0
 
   // CbrnEventMaterielContainerTypeCode
   // 
+
+  CbrnEventMaterielContainerTypeCode::
+  CbrnEventMaterielContainerTypeCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   CbrnEventMaterielContainerTypeCode::
   CbrnEventMaterielContainerTypeCode (value v)
@@ -5356,6 +6064,12 @@ namespace oo_2_0
   // 
 
   CbrnEventSubcategoryCode::
+  CbrnEventSubcategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  CbrnEventSubcategoryCode::
   CbrnEventSubcategoryCode (value v)
   : ::xml_schema::token (_xsd_CbrnEventSubcategoryCode_literals_[v])
   {
@@ -5399,6 +6113,12 @@ namespace oo_2_0
 
   // ChemicalBiologicalEventCategoryCode
   // 
+
+  ChemicalBiologicalEventCategoryCode::
+  ChemicalBiologicalEventCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ChemicalBiologicalEventCategoryCode::
   ChemicalBiologicalEventCategoryCode (value v)
@@ -5446,6 +6166,12 @@ namespace oo_2_0
   // 
 
   ChemicalBiologicalEventSpillSizeCode::
+  ChemicalBiologicalEventSpillSizeCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ChemicalBiologicalEventSpillSizeCode::
   ChemicalBiologicalEventSpillSizeCode (value v)
   : ::xml_schema::token (_xsd_ChemicalBiologicalEventSpillSizeCode_literals_[v])
   {
@@ -5489,6 +6215,12 @@ namespace oo_2_0
 
   // ChemicalMaterielTypeCategoryCode
   // 
+
+  ChemicalMaterielTypeCategoryCode::
+  ChemicalMaterielTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ChemicalMaterielTypeCategoryCode::
   ChemicalMaterielTypeCategoryCode (value v)
@@ -5536,6 +6268,12 @@ namespace oo_2_0
   // 
 
   ChemicalMaterielTypeSubcategoryCode::
+  ChemicalMaterielTypeSubcategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ChemicalMaterielTypeSubcategoryCode::
   ChemicalMaterielTypeSubcategoryCode (value v)
   : ::xml_schema::token (_xsd_ChemicalMaterielTypeSubcategoryCode_literals_[v])
   {
@@ -5579,6 +6317,12 @@ namespace oo_2_0
 
   // CivilianPostTypeCategoryCode
   // 
+
+  CivilianPostTypeCategoryCode::
+  CivilianPostTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   CivilianPostTypeCategoryCode::
   CivilianPostTypeCategoryCode (value v)
@@ -5626,6 +6370,12 @@ namespace oo_2_0
   // 
 
   CloudCoverAverageCoverageCode::
+  CloudCoverAverageCoverageCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  CloudCoverAverageCoverageCode::
   CloudCoverAverageCoverageCode (value v)
   : ::xml_schema::token (_xsd_CloudCoverAverageCoverageCode_literals_[v])
   {
@@ -5669,6 +6419,12 @@ namespace oo_2_0
 
   // CloudCoverCategoryCode
   // 
+
+  CloudCoverCategoryCode::
+  CloudCoverCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   CloudCoverCategoryCode::
   CloudCoverCategoryCode (value v)
@@ -5716,6 +6472,12 @@ namespace oo_2_0
   // 
 
   ConsumableMaterielTypeCategoryCode::
+  ConsumableMaterielTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ConsumableMaterielTypeCategoryCode::
   ConsumableMaterielTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_ConsumableMaterielTypeCategoryCode_literals_[v])
   {
@@ -5759,6 +6521,12 @@ namespace oo_2_0
 
   // ConsumableMaterielTypeHazardCode
   // 
+
+  ConsumableMaterielTypeHazardCode::
+  ConsumableMaterielTypeHazardCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ConsumableMaterielTypeHazardCode::
   ConsumableMaterielTypeHazardCode (value v)
@@ -5806,6 +6574,12 @@ namespace oo_2_0
   // 
 
   ConsumableMaterielTypeIssuingElementCode::
+  ConsumableMaterielTypeIssuingElementCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ConsumableMaterielTypeIssuingElementCode::
   ConsumableMaterielTypeIssuingElementCode (value v)
   : ::xml_schema::token (_xsd_ConsumableMaterielTypeIssuingElementCode_literals_[v])
   {
@@ -5849,6 +6623,12 @@ namespace oo_2_0
 
   // ConsumableMaterielTypeIssuingUnitOfMeasureCode
   // 
+
+  ConsumableMaterielTypeIssuingUnitOfMeasureCode::
+  ConsumableMaterielTypeIssuingUnitOfMeasureCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ConsumableMaterielTypeIssuingUnitOfMeasureCode::
   ConsumableMaterielTypeIssuingUnitOfMeasureCode (value v)
@@ -5896,6 +6676,12 @@ namespace oo_2_0
   // 
 
   ConsumableMaterielTypePerishabilityIndicatorCode::
+  ConsumableMaterielTypePerishabilityIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ConsumableMaterielTypePerishabilityIndicatorCode::
   ConsumableMaterielTypePerishabilityIndicatorCode (value v)
   : ::xml_schema::token (_xsd_ConsumableMaterielTypePerishabilityIndicatorCode_literals_[v])
   {
@@ -5939,6 +6725,12 @@ namespace oo_2_0
 
   // ConsumableMaterielTypeSubcategoryCode
   // 
+
+  ConsumableMaterielTypeSubcategoryCode::
+  ConsumableMaterielTypeSubcategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ConsumableMaterielTypeSubcategoryCode::
   ConsumableMaterielTypeSubcategoryCode (value v)
@@ -5986,6 +6778,12 @@ namespace oo_2_0
   // 
 
   ConsumableMaterielTypeUnitedNationsNumberCode::
+  ConsumableMaterielTypeUnitedNationsNumberCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ConsumableMaterielTypeUnitedNationsNumberCode::
   ConsumableMaterielTypeUnitedNationsNumberCode (value v)
   : ::xml_schema::token (_xsd_ConsumableMaterielTypeUnitedNationsNumberCode_literals_[v])
   {
@@ -6029,6 +6827,12 @@ namespace oo_2_0
 
   // ContextAssessmentLimitingFactorsCode
   // 
+
+  ContextAssessmentLimitingFactorsCode::
+  ContextAssessmentLimitingFactorsCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ContextAssessmentLimitingFactorsCode::
   ContextAssessmentLimitingFactorsCode (value v)
@@ -6076,6 +6880,12 @@ namespace oo_2_0
   // 
 
   ContextAssociationCategoryCode::
+  ContextAssociationCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ContextAssociationCategoryCode::
   ContextAssociationCategoryCode (value v)
   : ::xml_schema::token (_xsd_ContextAssociationCategoryCode_literals_[v])
   {
@@ -6119,6 +6929,12 @@ namespace oo_2_0
 
   // ContextCategoryCode
   // 
+
+  ContextCategoryCode::
+  ContextCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ContextCategoryCode::
   ContextCategoryCode (value v)
@@ -6166,6 +6982,12 @@ namespace oo_2_0
   // 
 
   ContextElementStatusCategoryCode::
+  ContextElementStatusCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ContextElementStatusCategoryCode::
   ContextElementStatusCategoryCode (value v)
   : ::xml_schema::token (_xsd_ContextElementStatusCategoryCode_literals_[v])
   {
@@ -6209,6 +7031,12 @@ namespace oo_2_0
 
   // ContextObjectItemAssociationCategoryCode
   // 
+
+  ContextObjectItemAssociationCategoryCode::
+  ContextObjectItemAssociationCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ContextObjectItemAssociationCategoryCode::
   ContextObjectItemAssociationCategoryCode (value v)
@@ -6256,6 +7084,12 @@ namespace oo_2_0
   // 
 
   ContextReportingDataAssociationCategoryCode::
+  ContextReportingDataAssociationCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ContextReportingDataAssociationCategoryCode::
   ContextReportingDataAssociationCategoryCode (value v)
   : ::xml_schema::token (_xsd_ContextReportingDataAssociationCategoryCode_literals_[v])
   {
@@ -6299,6 +7133,12 @@ namespace oo_2_0
 
   // ControlFeatureCategoryCode
   // 
+
+  ControlFeatureCategoryCode::
+  ControlFeatureCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ControlFeatureCategoryCode::
   ControlFeatureCategoryCode (value v)
@@ -6346,6 +7186,12 @@ namespace oo_2_0
   // 
 
   ControlFeatureStatusCbrnThreatLevelCode::
+  ControlFeatureStatusCbrnThreatLevelCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ControlFeatureStatusCbrnThreatLevelCode::
   ControlFeatureStatusCbrnThreatLevelCode (value v)
   : ::xml_schema::token (_xsd_ControlFeatureStatusCbrnThreatLevelCode_literals_[v])
   {
@@ -6389,6 +7235,12 @@ namespace oo_2_0
 
   // ControlFeatureStatusInvestigationStatusCode
   // 
+
+  ControlFeatureStatusInvestigationStatusCode::
+  ControlFeatureStatusInvestigationStatusCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ControlFeatureStatusInvestigationStatusCode::
   ControlFeatureStatusInvestigationStatusCode (value v)
@@ -6436,6 +7288,12 @@ namespace oo_2_0
   // 
 
   ControlFeatureStatusSecurityStatusCode::
+  ControlFeatureStatusSecurityStatusCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ControlFeatureStatusSecurityStatusCode::
   ControlFeatureStatusSecurityStatusCode (value v)
   : ::xml_schema::token (_xsd_ControlFeatureStatusSecurityStatusCode_literals_[v])
   {
@@ -6479,6 +7337,12 @@ namespace oo_2_0
 
   // ControlFeatureTypeCategoryCode
   // 
+
+  ControlFeatureTypeCategoryCode::
+  ControlFeatureTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ControlFeatureTypeCategoryCode::
   ControlFeatureTypeCategoryCode (value v)
@@ -6526,6 +7390,12 @@ namespace oo_2_0
   // 
 
   DemolitionStatusCode::
+  DemolitionStatusCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  DemolitionStatusCode::
   DemolitionStatusCode (value v)
   : ::xml_schema::token (_xsd_DemolitionStatusCode_literals_[v])
   {
@@ -6569,6 +7439,12 @@ namespace oo_2_0
 
   // DirectionCode
   // 
+
+  DirectionCode::
+  DirectionCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   DirectionCode::
   DirectionCode (value v)
@@ -6616,6 +7492,12 @@ namespace oo_2_0
   // 
 
   DistancePrecisionCode::
+  DistancePrecisionCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  DistancePrecisionCode::
   DistancePrecisionCode (value v)
   : ::xml_schema::token (_xsd_DistancePrecisionCode_literals_[v])
   {
@@ -6659,6 +7541,12 @@ namespace oo_2_0
 
   // DryDockMarineRailwaySizeCode
   // 
+
+  DryDockMarineRailwaySizeCode::
+  DryDockMarineRailwaySizeCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   DryDockMarineRailwaySizeCode::
   DryDockMarineRailwaySizeCode (value v)
@@ -6706,6 +7594,12 @@ namespace oo_2_0
   // 
 
   ElectronicEquipmentTypeCategoryCode::
+  ElectronicEquipmentTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ElectronicEquipmentTypeCategoryCode::
   ElectronicEquipmentTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_ElectronicEquipmentTypeCategoryCode_literals_[v])
   {
@@ -6749,6 +7643,12 @@ namespace oo_2_0
 
   // ElectronicEquipmentTypeSubcategoryCode
   // 
+
+  ElectronicEquipmentTypeSubcategoryCode::
+  ElectronicEquipmentTypeSubcategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ElectronicEquipmentTypeSubcategoryCode::
   ElectronicEquipmentTypeSubcategoryCode (value v)
@@ -6796,6 +7696,12 @@ namespace oo_2_0
   // 
 
   EngineeringCapabilityCategoryCode::
+  EngineeringCapabilityCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  EngineeringCapabilityCategoryCode::
   EngineeringCapabilityCategoryCode (value v)
   : ::xml_schema::token (_xsd_EngineeringCapabilityCategoryCode_literals_[v])
   {
@@ -6839,6 +7745,12 @@ namespace oo_2_0
 
   // EngineeringCapabilityDescriptorCode
   // 
+
+  EngineeringCapabilityDescriptorCode::
+  EngineeringCapabilityDescriptorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   EngineeringCapabilityDescriptorCode::
   EngineeringCapabilityDescriptorCode (value v)
@@ -6886,6 +7798,12 @@ namespace oo_2_0
   // 
 
   EngineeringEquipmentTypeCategoryCode::
+  EngineeringEquipmentTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  EngineeringEquipmentTypeCategoryCode::
   EngineeringEquipmentTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_EngineeringEquipmentTypeCategoryCode_literals_[v])
   {
@@ -6929,6 +7847,12 @@ namespace oo_2_0
 
   // EquipmentTypeCategoryCode
   // 
+
+  EquipmentTypeCategoryCode::
+  EquipmentTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   EquipmentTypeCategoryCode::
   EquipmentTypeCategoryCode (value v)
@@ -6976,6 +7900,12 @@ namespace oo_2_0
   // 
 
   EvacuationDestinationCode::
+  EvacuationDestinationCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  EvacuationDestinationCode::
   EvacuationDestinationCode (value v)
   : ::xml_schema::token (_xsd_EvacuationDestinationCode_literals_[v])
   {
@@ -7019,6 +7949,12 @@ namespace oo_2_0
 
   // ExecutiveMilitaryOrganisationTypeCategoryCode
   // 
+
+  ExecutiveMilitaryOrganisationTypeCategoryCode::
+  ExecutiveMilitaryOrganisationTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ExecutiveMilitaryOrganisationTypeCategoryCode::
   ExecutiveMilitaryOrganisationTypeCategoryCode (value v)
@@ -7066,6 +8002,12 @@ namespace oo_2_0
   // 
 
   FacilityCategoryCode::
+  FacilityCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  FacilityCategoryCode::
   FacilityCategoryCode (value v)
   : ::xml_schema::token (_xsd_FacilityCategoryCode_literals_[v])
   {
@@ -7109,6 +8051,12 @@ namespace oo_2_0
 
   // FacilityPrimaryConstructionMaterialCode
   // 
+
+  FacilityPrimaryConstructionMaterialCode::
+  FacilityPrimaryConstructionMaterialCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   FacilityPrimaryConstructionMaterialCode::
   FacilityPrimaryConstructionMaterialCode (value v)
@@ -7156,6 +8104,12 @@ namespace oo_2_0
   // 
 
   FacilityStatusCategoryCode::
+  FacilityStatusCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  FacilityStatusCategoryCode::
   FacilityStatusCategoryCode (value v)
   : ::xml_schema::token (_xsd_FacilityStatusCategoryCode_literals_[v])
   {
@@ -7199,6 +8153,12 @@ namespace oo_2_0
 
   // FacilityStatusEnemyActivityConditionCode
   // 
+
+  FacilityStatusEnemyActivityConditionCode::
+  FacilityStatusEnemyActivityConditionCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   FacilityStatusEnemyActivityConditionCode::
   FacilityStatusEnemyActivityConditionCode (value v)
@@ -7246,6 +8206,12 @@ namespace oo_2_0
   // 
 
   FacilityStatusOccupationProgramIndicatorCode::
+  FacilityStatusOccupationProgramIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  FacilityStatusOccupationProgramIndicatorCode::
   FacilityStatusOccupationProgramIndicatorCode (value v)
   : ::xml_schema::token (_xsd_FacilityStatusOccupationProgramIndicatorCode_literals_[v])
   {
@@ -7289,6 +8255,12 @@ namespace oo_2_0
 
   // FacilityStatusOperationalStatusCode
   // 
+
+  FacilityStatusOperationalStatusCode::
+  FacilityStatusOperationalStatusCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   FacilityStatusOperationalStatusCode::
   FacilityStatusOperationalStatusCode (value v)
@@ -7336,6 +8308,12 @@ namespace oo_2_0
   // 
 
   FacilityStatusOperationalStatusQualifierCode::
+  FacilityStatusOperationalStatusQualifierCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  FacilityStatusOperationalStatusQualifierCode::
   FacilityStatusOperationalStatusQualifierCode (value v)
   : ::xml_schema::token (_xsd_FacilityStatusOperationalStatusQualifierCode_literals_[v])
   {
@@ -7379,6 +8357,12 @@ namespace oo_2_0
 
   // FacilityStatusReserveIndicatorCode
   // 
+
+  FacilityStatusReserveIndicatorCode::
+  FacilityStatusReserveIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   FacilityStatusReserveIndicatorCode::
   FacilityStatusReserveIndicatorCode (value v)
@@ -7426,6 +8410,12 @@ namespace oo_2_0
   // 
 
   FacilityStatusSecurityStatusCode::
+  FacilityStatusSecurityStatusCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  FacilityStatusSecurityStatusCode::
   FacilityStatusSecurityStatusCode (value v)
   : ::xml_schema::token (_xsd_FacilityStatusSecurityStatusCode_literals_[v])
   {
@@ -7469,6 +8459,12 @@ namespace oo_2_0
 
   // FacilityTypeCategoryCode
   // 
+
+  FacilityTypeCategoryCode::
+  FacilityTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   FacilityTypeCategoryCode::
   FacilityTypeCategoryCode (value v)
@@ -7516,6 +8512,12 @@ namespace oo_2_0
   // 
 
   FeatureCategoryCode::
+  FeatureCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  FeatureCategoryCode::
   FeatureCategoryCode (value v)
   : ::xml_schema::token (_xsd_FeatureCategoryCode_literals_[v])
   {
@@ -7559,6 +8561,12 @@ namespace oo_2_0
 
   // FeatureTypeCategoryCode
   // 
+
+  FeatureTypeCategoryCode::
+  FeatureTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   FeatureTypeCategoryCode::
   FeatureTypeCategoryCode (value v)
@@ -7606,6 +8614,12 @@ namespace oo_2_0
   // 
 
   FeintIndicatorCode::
+  FeintIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  FeintIndicatorCode::
   FeintIndicatorCode (value v)
   : ::xml_schema::token (_xsd_FeintIndicatorCode_literals_[v])
   {
@@ -7649,6 +8663,12 @@ namespace oo_2_0
 
   // FireCapabilityCategoryCode
   // 
+
+  FireCapabilityCategoryCode::
+  FireCapabilityCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   FireCapabilityCategoryCode::
   FireCapabilityCategoryCode (value v)
@@ -7696,6 +8716,12 @@ namespace oo_2_0
   // 
 
   FireCapabilityDescriptorCode::
+  FireCapabilityDescriptorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  FireCapabilityDescriptorCode::
   FireCapabilityDescriptorCode (value v)
   : ::xml_schema::token (_xsd_FireCapabilityDescriptorCode_literals_[v])
   {
@@ -7739,6 +8765,12 @@ namespace oo_2_0
 
   // FireCapabilityWeaponTypeCode
   // 
+
+  FireCapabilityWeaponTypeCode::
+  FireCapabilityWeaponTypeCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   FireCapabilityWeaponTypeCode::
   FireCapabilityWeaponTypeCode (value v)
@@ -7786,6 +8818,12 @@ namespace oo_2_0
   // 
 
   GenderCode::
+  GenderCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  GenderCode::
   GenderCode (value v)
   : ::xml_schema::token (_xsd_GenderCode_literals_[v])
   {
@@ -7829,6 +8867,12 @@ namespace oo_2_0
 
   // GeographicFeatureBottomHardnessCode
   // 
+
+  GeographicFeatureBottomHardnessCode::
+  GeographicFeatureBottomHardnessCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   GeographicFeatureBottomHardnessCode::
   GeographicFeatureBottomHardnessCode (value v)
@@ -7876,6 +8920,12 @@ namespace oo_2_0
   // 
 
   GeographicFeatureSolidSurfaceCompositionCode::
+  GeographicFeatureSolidSurfaceCompositionCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  GeographicFeatureSolidSurfaceCompositionCode::
   GeographicFeatureSolidSurfaceCompositionCode (value v)
   : ::xml_schema::token (_xsd_GeographicFeatureSolidSurfaceCompositionCode_literals_[v])
   {
@@ -7919,6 +8969,12 @@ namespace oo_2_0
 
   // GeographicFeatureStatusCategoryCode
   // 
+
+  GeographicFeatureStatusCategoryCode::
+  GeographicFeatureStatusCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   GeographicFeatureStatusCategoryCode::
   GeographicFeatureStatusCategoryCode (value v)
@@ -7966,6 +9022,12 @@ namespace oo_2_0
   // 
 
   GeographicFeatureStatusSurfaceRecirculationIndicatorCode::
+  GeographicFeatureStatusSurfaceRecirculationIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  GeographicFeatureStatusSurfaceRecirculationIndicatorCode::
   GeographicFeatureStatusSurfaceRecirculationIndicatorCode (value v)
   : ::xml_schema::token (_xsd_GeographicFeatureStatusSurfaceRecirculationIndicatorCode_literals_[v])
   {
@@ -8009,6 +9071,12 @@ namespace oo_2_0
 
   // GeographicFeatureSurfaceCategoryCode
   // 
+
+  GeographicFeatureSurfaceCategoryCode::
+  GeographicFeatureSurfaceCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   GeographicFeatureSurfaceCategoryCode::
   GeographicFeatureSurfaceCategoryCode (value v)
@@ -8056,6 +9124,12 @@ namespace oo_2_0
   // 
 
   GeographicFeatureTerrainCode::
+  GeographicFeatureTerrainCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  GeographicFeatureTerrainCode::
   GeographicFeatureTerrainCode (value v)
   : ::xml_schema::token (_xsd_GeographicFeatureTerrainCode_literals_[v])
   {
@@ -8099,6 +9173,12 @@ namespace oo_2_0
 
   // GeographicFeatureTypeCategoryCode
   // 
+
+  GeographicFeatureTypeCategoryCode::
+  GeographicFeatureTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   GeographicFeatureTypeCategoryCode::
   GeographicFeatureTypeCategoryCode (value v)
@@ -8146,6 +9226,12 @@ namespace oo_2_0
   // 
 
   GeographicFeatureTypeSubcategoryCode::
+  GeographicFeatureTypeSubcategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  GeographicFeatureTypeSubcategoryCode::
   GeographicFeatureTypeSubcategoryCode (value v)
   : ::xml_schema::token (_xsd_GeographicFeatureTypeSubcategoryCode_literals_[v])
   {
@@ -8189,6 +9275,12 @@ namespace oo_2_0
 
   // GeometricVolumeCategoryCode
   // 
+
+  GeometricVolumeCategoryCode::
+  GeometricVolumeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   GeometricVolumeCategoryCode::
   GeometricVolumeCategoryCode (value v)
@@ -8236,6 +9328,12 @@ namespace oo_2_0
   // 
 
   GovernmentOrganisationTypeCategoryCode::
+  GovernmentOrganisationTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  GovernmentOrganisationTypeCategoryCode::
   GovernmentOrganisationTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_GovernmentOrganisationTypeCategoryCode_literals_[v])
   {
@@ -8279,6 +9377,12 @@ namespace oo_2_0
 
   // GroupCharacteristicAgeGroupCode
   // 
+
+  GroupCharacteristicAgeGroupCode::
+  GroupCharacteristicAgeGroupCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   GroupCharacteristicAgeGroupCode::
   GroupCharacteristicAgeGroupCode (value v)
@@ -8326,6 +9430,12 @@ namespace oo_2_0
   // 
 
   GroupCharacteristicMaladyCode::
+  GroupCharacteristicMaladyCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  GroupCharacteristicMaladyCode::
   GroupCharacteristicMaladyCode (value v)
   : ::xml_schema::token (_xsd_GroupCharacteristicMaladyCode_literals_[v])
   {
@@ -8369,6 +9479,12 @@ namespace oo_2_0
 
   // GroupCharacteristicMaladyTransmissibilityIndicatorCode
   // 
+
+  GroupCharacteristicMaladyTransmissibilityIndicatorCode::
+  GroupCharacteristicMaladyTransmissibilityIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   GroupCharacteristicMaladyTransmissibilityIndicatorCode::
   GroupCharacteristicMaladyTransmissibilityIndicatorCode (value v)
@@ -8416,6 +9532,12 @@ namespace oo_2_0
   // 
 
   GroupCharacteristicTriageCode::
+  GroupCharacteristicTriageCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  GroupCharacteristicTriageCode::
   GroupCharacteristicTriageCode (value v)
   : ::xml_schema::token (_xsd_GroupCharacteristicTriageCode_literals_[v])
   {
@@ -8459,6 +9581,12 @@ namespace oo_2_0
 
   // GroupOrganisationTypeCategoryCode
   // 
+
+  GroupOrganisationTypeCategoryCode::
+  GroupOrganisationTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   GroupOrganisationTypeCategoryCode::
   GroupOrganisationTypeCategoryCode (value v)
@@ -8506,6 +9634,12 @@ namespace oo_2_0
   // 
 
   HandlingCapabilityActionCode::
+  HandlingCapabilityActionCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  HandlingCapabilityActionCode::
   HandlingCapabilityActionCode (value v)
   : ::xml_schema::token (_xsd_HandlingCapabilityActionCode_literals_[v])
   {
@@ -8549,6 +9683,12 @@ namespace oo_2_0
 
   // HandlingCapabilityDescriptorCode
   // 
+
+  HandlingCapabilityDescriptorCode::
+  HandlingCapabilityDescriptorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   HandlingCapabilityDescriptorCode::
   HandlingCapabilityDescriptorCode (value v)
@@ -8596,6 +9736,12 @@ namespace oo_2_0
   // 
 
   HarbourAirportNearIndicatorCode::
+  HarbourAirportNearIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  HarbourAirportNearIndicatorCode::
   HarbourAirportNearIndicatorCode (value v)
   : ::xml_schema::token (_xsd_HarbourAirportNearIndicatorCode_literals_[v])
   {
@@ -8639,6 +9785,12 @@ namespace oo_2_0
 
   // HarbourBiologicallySecureAvailabilityIndicatorCode
   // 
+
+  HarbourBiologicallySecureAvailabilityIndicatorCode::
+  HarbourBiologicallySecureAvailabilityIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   HarbourBiologicallySecureAvailabilityIndicatorCode::
   HarbourBiologicallySecureAvailabilityIndicatorCode (value v)
@@ -8686,6 +9838,12 @@ namespace oo_2_0
   // 
 
   HarbourConvoyMarshallingIndicatorCode::
+  HarbourConvoyMarshallingIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  HarbourConvoyMarshallingIndicatorCode::
   HarbourConvoyMarshallingIndicatorCode (value v)
   : ::xml_schema::token (_xsd_HarbourConvoyMarshallingIndicatorCode_literals_[v])
   {
@@ -8729,6 +9887,12 @@ namespace oo_2_0
 
   // HarbourDegaussingIndicatorCode
   // 
+
+  HarbourDegaussingIndicatorCode::
+  HarbourDegaussingIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   HarbourDegaussingIndicatorCode::
   HarbourDegaussingIndicatorCode (value v)
@@ -8776,6 +9940,12 @@ namespace oo_2_0
   // 
 
   HarbourDirtyBallastIndicatorCode::
+  HarbourDirtyBallastIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  HarbourDirtyBallastIndicatorCode::
   HarbourDirtyBallastIndicatorCode (value v)
   : ::xml_schema::token (_xsd_HarbourDirtyBallastIndicatorCode_literals_[v])
   {
@@ -8819,6 +9989,12 @@ namespace oo_2_0
 
   // HarbourEntranceRestrictionsIceIndicatorCode
   // 
+
+  HarbourEntranceRestrictionsIceIndicatorCode::
+  HarbourEntranceRestrictionsIceIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   HarbourEntranceRestrictionsIceIndicatorCode::
   HarbourEntranceRestrictionsIceIndicatorCode (value v)
@@ -8866,6 +10042,12 @@ namespace oo_2_0
   // 
 
   HarbourEntranceRestrictionsSwellIndicatorCode::
+  HarbourEntranceRestrictionsSwellIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  HarbourEntranceRestrictionsSwellIndicatorCode::
   HarbourEntranceRestrictionsSwellIndicatorCode (value v)
   : ::xml_schema::token (_xsd_HarbourEntranceRestrictionsSwellIndicatorCode_literals_[v])
   {
@@ -8909,6 +10091,12 @@ namespace oo_2_0
 
   // HarbourEstimatedTimeOfArrivalIndicatorCode
   // 
+
+  HarbourEstimatedTimeOfArrivalIndicatorCode::
+  HarbourEstimatedTimeOfArrivalIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   HarbourEstimatedTimeOfArrivalIndicatorCode::
   HarbourEstimatedTimeOfArrivalIndicatorCode (value v)
@@ -8956,6 +10144,12 @@ namespace oo_2_0
   // 
 
   HarbourFireFightingCapabilityCode::
+  HarbourFireFightingCapabilityCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  HarbourFireFightingCapabilityCode::
   HarbourFireFightingCapabilityCode (value v)
   : ::xml_schema::token (_xsd_HarbourFireFightingCapabilityCode_literals_[v])
   {
@@ -8999,6 +10193,12 @@ namespace oo_2_0
 
   // HarbourFireFightingIndicatorCode
   // 
+
+  HarbourFireFightingIndicatorCode::
+  HarbourFireFightingIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   HarbourFireFightingIndicatorCode::
   HarbourFireFightingIndicatorCode (value v)
@@ -9046,6 +10246,12 @@ namespace oo_2_0
   // 
 
   HarbourFirstPortOfEntryIndicatorCode::
+  HarbourFirstPortOfEntryIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  HarbourFirstPortOfEntryIndicatorCode::
   HarbourFirstPortOfEntryIndicatorCode (value v)
   : ::xml_schema::token (_xsd_HarbourFirstPortOfEntryIndicatorCode_literals_[v])
   {
@@ -9089,6 +10295,12 @@ namespace oo_2_0
 
   // HarbourFreshWaterAvailabilityIndicatorCode
   // 
+
+  HarbourFreshWaterAvailabilityIndicatorCode::
+  HarbourFreshWaterAvailabilityIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   HarbourFreshWaterAvailabilityIndicatorCode::
   HarbourFreshWaterAvailabilityIndicatorCode (value v)
@@ -9136,6 +10348,12 @@ namespace oo_2_0
   // 
 
   HarbourLashIndicatorCode::
+  HarbourLashIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  HarbourLashIndicatorCode::
   HarbourLashIndicatorCode (value v)
   : ::xml_schema::token (_xsd_HarbourLashIndicatorCode_literals_[v])
   {
@@ -9179,6 +10397,12 @@ namespace oo_2_0
 
   // HarbourLighterageAvailabilityIndicatorCode
   // 
+
+  HarbourLighterageAvailabilityIndicatorCode::
+  HarbourLighterageAvailabilityIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   HarbourLighterageAvailabilityIndicatorCode::
   HarbourLighterageAvailabilityIndicatorCode (value v)
@@ -9226,6 +10450,12 @@ namespace oo_2_0
   // 
 
   HarbourOverheadLimitsIndicatorCode::
+  HarbourOverheadLimitsIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  HarbourOverheadLimitsIndicatorCode::
   HarbourOverheadLimitsIndicatorCode (value v)
   : ::xml_schema::token (_xsd_HarbourOverheadLimitsIndicatorCode_literals_[v])
   {
@@ -9269,6 +10499,12 @@ namespace oo_2_0
 
   // HarbourPassengerHandlingIndicatorCode
   // 
+
+  HarbourPassengerHandlingIndicatorCode::
+  HarbourPassengerHandlingIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   HarbourPassengerHandlingIndicatorCode::
   HarbourPassengerHandlingIndicatorCode (value v)
@@ -9316,6 +10552,12 @@ namespace oo_2_0
   // 
 
   HarbourPersistenceCode::
+  HarbourPersistenceCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  HarbourPersistenceCode::
   HarbourPersistenceCode (value v)
   : ::xml_schema::token (_xsd_HarbourPersistenceCode_literals_[v])
   {
@@ -9359,6 +10601,12 @@ namespace oo_2_0
 
   // HarbourPilotageAvailabilityIndicatorCode
   // 
+
+  HarbourPilotageAvailabilityIndicatorCode::
+  HarbourPilotageAvailabilityIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   HarbourPilotageAvailabilityIndicatorCode::
   HarbourPilotageAvailabilityIndicatorCode (value v)
@@ -9406,6 +10654,12 @@ namespace oo_2_0
   // 
 
   HarbourPilotageRequirementIndicatorCode::
+  HarbourPilotageRequirementIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  HarbourPilotageRequirementIndicatorCode::
   HarbourPilotageRequirementIndicatorCode (value v)
   : ::xml_schema::token (_xsd_HarbourPilotageRequirementIndicatorCode_literals_[v])
   {
@@ -9449,6 +10703,12 @@ namespace oo_2_0
 
   // HarbourRefuellingAvailabilityIndicatorCode
   // 
+
+  HarbourRefuellingAvailabilityIndicatorCode::
+  HarbourRefuellingAvailabilityIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   HarbourRefuellingAvailabilityIndicatorCode::
   HarbourRefuellingAvailabilityIndicatorCode (value v)
@@ -9496,6 +10756,12 @@ namespace oo_2_0
   // 
 
   HarbourRefuellingTypeCode::
+  HarbourRefuellingTypeCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  HarbourRefuellingTypeCode::
   HarbourRefuellingTypeCode (value v)
   : ::xml_schema::token (_xsd_HarbourRefuellingTypeCode_literals_[v])
   {
@@ -9539,6 +10805,12 @@ namespace oo_2_0
 
   // HarbourShelterQualityCode
   // 
+
+  HarbourShelterQualityCode::
+  HarbourShelterQualityCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   HarbourShelterQualityCode::
   HarbourShelterQualityCode (value v)
@@ -9586,6 +10858,12 @@ namespace oo_2_0
   // 
 
   HarbourTankerFacilitiesIndicatorCode::
+  HarbourTankerFacilitiesIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  HarbourTankerFacilitiesIndicatorCode::
   HarbourTankerFacilitiesIndicatorCode (value v)
   : ::xml_schema::token (_xsd_HarbourTankerFacilitiesIndicatorCode_literals_[v])
   {
@@ -9629,6 +10907,12 @@ namespace oo_2_0
 
   // HarbourTransitAccommodationIndicatorCode
   // 
+
+  HarbourTransitAccommodationIndicatorCode::
+  HarbourTransitAccommodationIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   HarbourTransitAccommodationIndicatorCode::
   HarbourTransitAccommodationIndicatorCode (value v)
@@ -9676,6 +10960,12 @@ namespace oo_2_0
   // 
 
   HarbourTugAvailabilityIndicatorCode::
+  HarbourTugAvailabilityIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  HarbourTugAvailabilityIndicatorCode::
   HarbourTugAvailabilityIndicatorCode (value v)
   : ::xml_schema::token (_xsd_HarbourTugAvailabilityIndicatorCode_literals_[v])
   {
@@ -9719,6 +11009,12 @@ namespace oo_2_0
 
   // HarbourTurningAreaIndicatorCode
   // 
+
+  HarbourTurningAreaIndicatorCode::
+  HarbourTurningAreaIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   HarbourTurningAreaIndicatorCode::
   HarbourTurningAreaIndicatorCode (value v)
@@ -9766,6 +11062,12 @@ namespace oo_2_0
   // 
 
   HarbourTypeCategoryCode::
+  HarbourTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  HarbourTypeCategoryCode::
   HarbourTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_HarbourTypeCategoryCode_literals_[v])
   {
@@ -9809,6 +11111,12 @@ namespace oo_2_0
 
   // HarbourVehicleHandlingTypeCode
   // 
+
+  HarbourVehicleHandlingTypeCode::
+  HarbourVehicleHandlingTypeCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   HarbourVehicleHandlingTypeCode::
   HarbourVehicleHandlingTypeCode (value v)
@@ -9856,6 +11164,12 @@ namespace oo_2_0
   // 
 
   HoldingRequiredCalculationMethodCode::
+  HoldingRequiredCalculationMethodCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  HoldingRequiredCalculationMethodCode::
   HoldingRequiredCalculationMethodCode (value v)
   : ::xml_schema::token (_xsd_HoldingRequiredCalculationMethodCode_literals_[v])
   {
@@ -9899,6 +11213,12 @@ namespace oo_2_0
 
   // HoldingTransferReasonCode
   // 
+
+  HoldingTransferReasonCode::
+  HoldingTransferReasonCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   HoldingTransferReasonCode::
   HoldingTransferReasonCode (value v)
@@ -9946,6 +11266,12 @@ namespace oo_2_0
   // 
 
   IcingCategoryCode::
+  IcingCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  IcingCategoryCode::
   IcingCategoryCode (value v)
   : ::xml_schema::token (_xsd_IcingCategoryCode_literals_[v])
   {
@@ -9989,6 +11315,12 @@ namespace oo_2_0
 
   // IcingSeverityQualifierCode
   // 
+
+  IcingSeverityQualifierCode::
+  IcingSeverityQualifierCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   IcingSeverityQualifierCode::
   IcingSeverityQualifierCode (value v)
@@ -10036,6 +11368,12 @@ namespace oo_2_0
   // 
 
   JettyRailServedIndicatorCode::
+  JettyRailServedIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  JettyRailServedIndicatorCode::
   JettyRailServedIndicatorCode (value v)
   : ::xml_schema::token (_xsd_JettyRailServedIndicatorCode_literals_[v])
   {
@@ -10079,6 +11417,12 @@ namespace oo_2_0
 
   // LanguageCategoryCode
   // 
+
+  LanguageCategoryCode::
+  LanguageCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   LanguageCategoryCode::
   LanguageCategoryCode (value v)
@@ -10126,6 +11470,12 @@ namespace oo_2_0
   // 
 
   LanguageSkillProficiencyCode::
+  LanguageSkillProficiencyCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  LanguageSkillProficiencyCode::
   LanguageSkillProficiencyCode (value v)
   : ::xml_schema::token (_xsd_LanguageSkillProficiencyCode_literals_[v])
   {
@@ -10169,6 +11519,12 @@ namespace oo_2_0
 
   // LightCategoryCode
   // 
+
+  LightCategoryCode::
+  LightCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   LightCategoryCode::
   LightCategoryCode (value v)
@@ -10216,6 +11572,12 @@ namespace oo_2_0
   // 
 
   LightMoonPhaseCode::
+  LightMoonPhaseCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  LightMoonPhaseCode::
   LightMoonPhaseCode (value v)
   : ::xml_schema::token (_xsd_LightMoonPhaseCode_literals_[v])
   {
@@ -10259,6 +11621,12 @@ namespace oo_2_0
 
   // LiquidSurfaceStatusSeaStateCode
   // 
+
+  LiquidSurfaceStatusSeaStateCode::
+  LiquidSurfaceStatusSeaStateCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   LiquidSurfaceStatusSeaStateCode::
   LiquidSurfaceStatusSeaStateCode (value v)
@@ -10306,6 +11674,12 @@ namespace oo_2_0
   // 
 
   LiquidSurfaceStatusSurfaceConditionCode::
+  LiquidSurfaceStatusSurfaceConditionCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  LiquidSurfaceStatusSurfaceConditionCode::
   LiquidSurfaceStatusSurfaceConditionCode (value v)
   : ::xml_schema::token (_xsd_LiquidSurfaceStatusSurfaceConditionCode_literals_[v])
   {
@@ -10349,6 +11723,12 @@ namespace oo_2_0
 
   // LocationCategoryCode
   // 
+
+  LocationCategoryCode::
+  LocationCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   LocationCategoryCode::
   LocationCategoryCode (value v)
@@ -10396,6 +11776,12 @@ namespace oo_2_0
   // 
 
   MainActivityCode::
+  MainActivityCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MainActivityCode::
   MainActivityCode (value v)
   : ::xml_schema::token (_xsd_MainActivityCode_literals_[v])
   {
@@ -10439,6 +11825,12 @@ namespace oo_2_0
 
   // MaintenanceCapabilityCategoryCode
   // 
+
+  MaintenanceCapabilityCategoryCode::
+  MaintenanceCapabilityCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MaintenanceCapabilityCategoryCode::
   MaintenanceCapabilityCategoryCode (value v)
@@ -10486,6 +11878,12 @@ namespace oo_2_0
   // 
 
   MaintenanceCapabilityLevelCode::
+  MaintenanceCapabilityLevelCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MaintenanceCapabilityLevelCode::
   MaintenanceCapabilityLevelCode (value v)
   : ::xml_schema::token (_xsd_MaintenanceCapabilityLevelCode_literals_[v])
   {
@@ -10529,6 +11927,12 @@ namespace oo_2_0
 
   // MaritimeEquipmentTypeCategoryCode
   // 
+
+  MaritimeEquipmentTypeCategoryCode::
+  MaritimeEquipmentTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MaritimeEquipmentTypeCategoryCode::
   MaritimeEquipmentTypeCategoryCode (value v)
@@ -10576,6 +11980,12 @@ namespace oo_2_0
   // 
 
   MaritimeEquipmentTypeSubcategoryCode::
+  MaritimeEquipmentTypeSubcategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MaritimeEquipmentTypeSubcategoryCode::
   MaritimeEquipmentTypeSubcategoryCode (value v)
   : ::xml_schema::token (_xsd_MaritimeEquipmentTypeSubcategoryCode_literals_[v])
   {
@@ -10619,6 +12029,12 @@ namespace oo_2_0
 
   // MaterielCategoryCode
   // 
+
+  MaterielCategoryCode::
+  MaterielCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MaterielCategoryCode::
   MaterielCategoryCode (value v)
@@ -10666,6 +12082,12 @@ namespace oo_2_0
   // 
 
   MaterielStatusBodyColourCode::
+  MaterielStatusBodyColourCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MaterielStatusBodyColourCode::
   MaterielStatusBodyColourCode (value v)
   : ::xml_schema::token (_xsd_MaterielStatusBodyColourCode_literals_[v])
   {
@@ -10709,6 +12131,12 @@ namespace oo_2_0
 
   // MaterielStatusBuoyMalfunctionCode
   // 
+
+  MaterielStatusBuoyMalfunctionCode::
+  MaterielStatusBuoyMalfunctionCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MaterielStatusBuoyMalfunctionCode::
   MaterielStatusBuoyMalfunctionCode (value v)
@@ -10756,6 +12184,12 @@ namespace oo_2_0
   // 
 
   MaterielStatusCategoryCode::
+  MaterielStatusCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MaterielStatusCategoryCode::
   MaterielStatusCategoryCode (value v)
   : ::xml_schema::token (_xsd_MaterielStatusCategoryCode_literals_[v])
   {
@@ -10799,6 +12233,12 @@ namespace oo_2_0
 
   // MaterielStatusImoCompliantIndicatorCode
   // 
+
+  MaterielStatusImoCompliantIndicatorCode::
+  MaterielStatusImoCompliantIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MaterielStatusImoCompliantIndicatorCode::
   MaterielStatusImoCompliantIndicatorCode (value v)
@@ -10846,6 +12286,12 @@ namespace oo_2_0
   // 
 
   MaterielStatusMarkingCode::
+  MaterielStatusMarkingCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MaterielStatusMarkingCode::
   MaterielStatusMarkingCode (value v)
   : ::xml_schema::token (_xsd_MaterielStatusMarkingCode_literals_[v])
   {
@@ -10889,6 +12335,12 @@ namespace oo_2_0
 
   // MaterielStatusMarkingColourCode
   // 
+
+  MaterielStatusMarkingColourCode::
+  MaterielStatusMarkingColourCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MaterielStatusMarkingColourCode::
   MaterielStatusMarkingColourCode (value v)
@@ -10936,6 +12388,12 @@ namespace oo_2_0
   // 
 
   MaterielStatusOperationalStatusCode::
+  MaterielStatusOperationalStatusCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MaterielStatusOperationalStatusCode::
   MaterielStatusOperationalStatusCode (value v)
   : ::xml_schema::token (_xsd_MaterielStatusOperationalStatusCode_literals_[v])
   {
@@ -10979,6 +12437,12 @@ namespace oo_2_0
 
   // MaterielStatusOperationalStatusModeCode
   // 
+
+  MaterielStatusOperationalStatusModeCode::
+  MaterielStatusOperationalStatusModeCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MaterielStatusOperationalStatusModeCode::
   MaterielStatusOperationalStatusModeCode (value v)
@@ -11026,6 +12490,12 @@ namespace oo_2_0
   // 
 
   MaterielStatusOperationalStatusQualifierCode::
+  MaterielStatusOperationalStatusQualifierCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MaterielStatusOperationalStatusQualifierCode::
   MaterielStatusOperationalStatusQualifierCode (value v)
   : ::xml_schema::token (_xsd_MaterielStatusOperationalStatusQualifierCode_literals_[v])
   {
@@ -11069,6 +12539,12 @@ namespace oo_2_0
 
   // MaterielStatusReserveIndicatorCode
   // 
+
+  MaterielStatusReserveIndicatorCode::
+  MaterielStatusReserveIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MaterielStatusReserveIndicatorCode::
   MaterielStatusReserveIndicatorCode (value v)
@@ -11116,6 +12592,12 @@ namespace oo_2_0
   // 
 
   MaterielStatusSafetyStatusCode::
+  MaterielStatusSafetyStatusCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MaterielStatusSafetyStatusCode::
   MaterielStatusSafetyStatusCode (value v)
   : ::xml_schema::token (_xsd_MaterielStatusSafetyStatusCode_literals_[v])
   {
@@ -11159,6 +12641,12 @@ namespace oo_2_0
 
   // MaterielTypeCategoryCode
   // 
+
+  MaterielTypeCategoryCode::
+  MaterielTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MaterielTypeCategoryCode::
   MaterielTypeCategoryCode (value v)
@@ -11206,6 +12694,12 @@ namespace oo_2_0
   // 
 
   MaterielTypeSupplyClassCode::
+  MaterielTypeSupplyClassCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MaterielTypeSupplyClassCode::
   MaterielTypeSupplyClassCode (value v)
   : ::xml_schema::token (_xsd_MaterielTypeSupplyClassCode_literals_[v])
   {
@@ -11249,6 +12743,12 @@ namespace oo_2_0
 
   // MedicalFacilityStatusIntervalCasualtyTypeCode
   // 
+
+  MedicalFacilityStatusIntervalCasualtyTypeCode::
+  MedicalFacilityStatusIntervalCasualtyTypeCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MedicalFacilityStatusIntervalCasualtyTypeCode::
   MedicalFacilityStatusIntervalCasualtyTypeCode (value v)
@@ -11296,6 +12796,12 @@ namespace oo_2_0
   // 
 
   MedicalFacilityStatusPendingSurgeryTriageCode::
+  MedicalFacilityStatusPendingSurgeryTriageCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MedicalFacilityStatusPendingSurgeryTriageCode::
   MedicalFacilityStatusPendingSurgeryTriageCode (value v)
   : ::xml_schema::token (_xsd_MedicalFacilityStatusPendingSurgeryTriageCode_literals_[v])
   {
@@ -11339,6 +12845,12 @@ namespace oo_2_0
 
   // MeteorologicFeatureCategoryCode
   // 
+
+  MeteorologicFeatureCategoryCode::
+  MeteorologicFeatureCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MeteorologicFeatureCategoryCode::
   MeteorologicFeatureCategoryCode (value v)
@@ -11386,6 +12898,12 @@ namespace oo_2_0
   // 
 
   MeteorologicFeatureInterpretationCode::
+  MeteorologicFeatureInterpretationCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MeteorologicFeatureInterpretationCode::
   MeteorologicFeatureInterpretationCode (value v)
   : ::xml_schema::token (_xsd_MeteorologicFeatureInterpretationCode_literals_[v])
   {
@@ -11429,6 +12947,12 @@ namespace oo_2_0
 
   // MeteorologicFeatureSourceCode
   // 
+
+  MeteorologicFeatureSourceCode::
+  MeteorologicFeatureSourceCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MeteorologicFeatureSourceCode::
   MeteorologicFeatureSourceCode (value v)
@@ -11476,6 +13000,12 @@ namespace oo_2_0
   // 
 
   MilitaryObstacleCategoryCode::
+  MilitaryObstacleCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MilitaryObstacleCategoryCode::
   MilitaryObstacleCategoryCode (value v)
   : ::xml_schema::token (_xsd_MilitaryObstacleCategoryCode_literals_[v])
   {
@@ -11519,6 +13049,12 @@ namespace oo_2_0
 
   // MilitaryObstacleTypeCategoryCode
   // 
+
+  MilitaryObstacleTypeCategoryCode::
+  MilitaryObstacleTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MilitaryObstacleTypeCategoryCode::
   MilitaryObstacleTypeCategoryCode (value v)
@@ -11566,6 +13102,12 @@ namespace oo_2_0
   // 
 
   MilitaryObstacleTypeSubcategoryCode::
+  MilitaryObstacleTypeSubcategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MilitaryObstacleTypeSubcategoryCode::
   MilitaryObstacleTypeSubcategoryCode (value v)
   : ::xml_schema::token (_xsd_MilitaryObstacleTypeSubcategoryCode_literals_[v])
   {
@@ -11609,6 +13151,12 @@ namespace oo_2_0
 
   // MilitaryOrganisationTypeCategoryCode
   // 
+
+  MilitaryOrganisationTypeCategoryCode::
+  MilitaryOrganisationTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MilitaryOrganisationTypeCategoryCode::
   MilitaryOrganisationTypeCategoryCode (value v)
@@ -11656,6 +13204,12 @@ namespace oo_2_0
   // 
 
   MilitaryOrganisationTypeServiceCode::
+  MilitaryOrganisationTypeServiceCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MilitaryOrganisationTypeServiceCode::
   MilitaryOrganisationTypeServiceCode (value v)
   : ::xml_schema::token (_xsd_MilitaryOrganisationTypeServiceCode_literals_[v])
   {
@@ -11699,6 +13253,12 @@ namespace oo_2_0
 
   // MilitaryPostTypeCategoryCode
   // 
+
+  MilitaryPostTypeCategoryCode::
+  MilitaryPostTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MilitaryPostTypeCategoryCode::
   MilitaryPostTypeCategoryCode (value v)
@@ -11746,6 +13306,12 @@ namespace oo_2_0
   // 
 
   MilitaryPostTypeRankCode::
+  MilitaryPostTypeRankCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MilitaryPostTypeRankCode::
   MilitaryPostTypeRankCode (value v)
   : ::xml_schema::token (_xsd_MilitaryPostTypeRankCode_literals_[v])
   {
@@ -11789,6 +13355,12 @@ namespace oo_2_0
 
   // MinePresenceCode
   // 
+
+  MinePresenceCode::
+  MinePresenceCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MinePresenceCode::
   MinePresenceCode (value v)
@@ -11836,6 +13408,12 @@ namespace oo_2_0
   // 
 
   MineStatusAirDropEffectCode::
+  MineStatusAirDropEffectCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MineStatusAirDropEffectCode::
   MineStatusAirDropEffectCode (value v)
   : ::xml_schema::token (_xsd_MineStatusAirDropEffectCode_literals_[v])
   {
@@ -11879,6 +13457,12 @@ namespace oo_2_0
 
   // MineStatusCode
   // 
+
+  MineStatusCode::
+  MineStatusCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MineStatusCode::
   MineStatusCode (value v)
@@ -11926,6 +13510,12 @@ namespace oo_2_0
   // 
 
   MineStatusMaritimeMineQualifierCode::
+  MineStatusMaritimeMineQualifierCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MineStatusMaritimeMineQualifierCode::
   MineStatusMaritimeMineQualifierCode (value v)
   : ::xml_schema::token (_xsd_MineStatusMaritimeMineQualifierCode_literals_[v])
   {
@@ -11969,6 +13559,12 @@ namespace oo_2_0
 
   // MinefieldCategoryCode
   // 
+
+  MinefieldCategoryCode::
+  MinefieldCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MinefieldCategoryCode::
   MinefieldCategoryCode (value v)
@@ -12016,6 +13612,12 @@ namespace oo_2_0
   // 
 
   MinefieldLandDepthPlacementCode::
+  MinefieldLandDepthPlacementCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MinefieldLandDepthPlacementCode::
   MinefieldLandDepthPlacementCode (value v)
   : ::xml_schema::token (_xsd_MinefieldLandDepthPlacementCode_literals_[v])
   {
@@ -12059,6 +13661,12 @@ namespace oo_2_0
 
   // MinefieldLandFunctionCode
   // 
+
+  MinefieldLandFunctionCode::
+  MinefieldLandFunctionCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MinefieldLandFunctionCode::
   MinefieldLandFunctionCode (value v)
@@ -12106,6 +13714,12 @@ namespace oo_2_0
   // 
 
   MinefieldLandPatternCode::
+  MinefieldLandPatternCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MinefieldLandPatternCode::
   MinefieldLandPatternCode (value v)
   : ::xml_schema::token (_xsd_MinefieldLandPatternCode_literals_[v])
   {
@@ -12149,6 +13763,12 @@ namespace oo_2_0
 
   // MinefieldLandPersistenceCode
   // 
+
+  MinefieldLandPersistenceCode::
+  MinefieldLandPersistenceCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MinefieldLandPersistenceCode::
   MinefieldLandPersistenceCode (value v)
@@ -12196,6 +13816,12 @@ namespace oo_2_0
   // 
 
   MinefieldLandStoppingPowerCode::
+  MinefieldLandStoppingPowerCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MinefieldLandStoppingPowerCode::
   MinefieldLandStoppingPowerCode (value v)
   : ::xml_schema::token (_xsd_MinefieldLandStoppingPowerCode_literals_[v])
   {
@@ -12239,6 +13865,12 @@ namespace oo_2_0
 
   // MinefieldMaritimeBottomNaturalCamouflageCode
   // 
+
+  MinefieldMaritimeBottomNaturalCamouflageCode::
+  MinefieldMaritimeBottomNaturalCamouflageCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MinefieldMaritimeBottomNaturalCamouflageCode::
   MinefieldMaritimeBottomNaturalCamouflageCode (value v)
@@ -12286,6 +13918,12 @@ namespace oo_2_0
   // 
 
   MinefieldMaritimeDepthPlacementCode::
+  MinefieldMaritimeDepthPlacementCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MinefieldMaritimeDepthPlacementCode::
   MinefieldMaritimeDepthPlacementCode (value v)
   : ::xml_schema::token (_xsd_MinefieldMaritimeDepthPlacementCode_literals_[v])
   {
@@ -12329,6 +13967,12 @@ namespace oo_2_0
 
   // MinefieldMaritimeFunctionCode
   // 
+
+  MinefieldMaritimeFunctionCode::
+  MinefieldMaritimeFunctionCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MinefieldMaritimeFunctionCode::
   MinefieldMaritimeFunctionCode (value v)
@@ -12376,6 +14020,12 @@ namespace oo_2_0
   // 
 
   MinefieldMaritimeStatusCode::
+  MinefieldMaritimeStatusCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MinefieldMaritimeStatusCode::
   MinefieldMaritimeStatusCode (value v)
   : ::xml_schema::token (_xsd_MinefieldMaritimeStatusCode_literals_[v])
   {
@@ -12419,6 +14069,12 @@ namespace oo_2_0
 
   // MinefieldMaritimeStatusColourCode
   // 
+
+  MinefieldMaritimeStatusColourCode::
+  MinefieldMaritimeStatusColourCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MinefieldMaritimeStatusColourCode::
   MinefieldMaritimeStatusColourCode (value v)
@@ -12466,6 +14122,12 @@ namespace oo_2_0
   // 
 
   MinefieldMaritimeStatusExpectedLevelMcmCode::
+  MinefieldMaritimeStatusExpectedLevelMcmCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MinefieldMaritimeStatusExpectedLevelMcmCode::
   MinefieldMaritimeStatusExpectedLevelMcmCode (value v)
   : ::xml_schema::token (_xsd_MinefieldMaritimeStatusExpectedLevelMcmCode_literals_[v])
   {
@@ -12509,6 +14171,12 @@ namespace oo_2_0
 
   // MinefieldMaritimeStatusMineDetectionCode
   // 
+
+  MinefieldMaritimeStatusMineDetectionCode::
+  MinefieldMaritimeStatusMineDetectionCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MinefieldMaritimeStatusMineDetectionCode::
   MinefieldMaritimeStatusMineDetectionCode (value v)
@@ -12556,6 +14224,12 @@ namespace oo_2_0
   // 
 
   MinefieldMaritimeStatusMineZoneRiskCode::
+  MinefieldMaritimeStatusMineZoneRiskCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MinefieldMaritimeStatusMineZoneRiskCode::
   MinefieldMaritimeStatusMineZoneRiskCode (value v)
   : ::xml_schema::token (_xsd_MinefieldMaritimeStatusMineZoneRiskCode_literals_[v])
   {
@@ -12599,6 +14273,12 @@ namespace oo_2_0
 
   // MinefieldMaritimeStatusSeedingCode
   // 
+
+  MinefieldMaritimeStatusSeedingCode::
+  MinefieldMaritimeStatusSeedingCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MinefieldMaritimeStatusSeedingCode::
   MinefieldMaritimeStatusSeedingCode (value v)
@@ -12646,6 +14326,12 @@ namespace oo_2_0
   // 
 
   MinefieldMaritimeSubfunctionCode::
+  MinefieldMaritimeSubfunctionCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MinefieldMaritimeSubfunctionCode::
   MinefieldMaritimeSubfunctionCode (value v)
   : ::xml_schema::token (_xsd_MinefieldMaritimeSubfunctionCode_literals_[v])
   {
@@ -12689,6 +14375,12 @@ namespace oo_2_0
 
   // MiscellaneousEquipmentTypeCategoryCode
   // 
+
+  MiscellaneousEquipmentTypeCategoryCode::
+  MiscellaneousEquipmentTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MiscellaneousEquipmentTypeCategoryCode::
   MiscellaneousEquipmentTypeCategoryCode (value v)
@@ -12736,6 +14428,12 @@ namespace oo_2_0
   // 
 
   MiscellaneousEquipmentTypeSubcategoryCode::
+  MiscellaneousEquipmentTypeSubcategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MiscellaneousEquipmentTypeSubcategoryCode::
   MiscellaneousEquipmentTypeSubcategoryCode (value v)
   : ::xml_schema::token (_xsd_MiscellaneousEquipmentTypeSubcategoryCode_literals_[v])
   {
@@ -12779,6 +14477,12 @@ namespace oo_2_0
 
   // MissionPrimacyCode
   // 
+
+  MissionPrimacyCode::
+  MissionPrimacyCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MissionPrimacyCode::
   MissionPrimacyCode (value v)
@@ -12826,6 +14530,12 @@ namespace oo_2_0
   // 
 
   MobilityCapabilityCategoryCode::
+  MobilityCapabilityCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MobilityCapabilityCategoryCode::
   MobilityCapabilityCategoryCode (value v)
   : ::xml_schema::token (_xsd_MobilityCapabilityCategoryCode_literals_[v])
   {
@@ -12869,6 +14579,12 @@ namespace oo_2_0
 
   // MobilityCapabilityDescriptorCode
   // 
+
+  MobilityCapabilityDescriptorCode::
+  MobilityCapabilityDescriptorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MobilityCapabilityDescriptorCode::
   MobilityCapabilityDescriptorCode (value v)
@@ -12916,6 +14632,12 @@ namespace oo_2_0
   // 
 
   MobilityCapabilityTerrainTypeCode::
+  MobilityCapabilityTerrainTypeCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  MobilityCapabilityTerrainTypeCode::
   MobilityCapabilityTerrainTypeCode (value v)
   : ::xml_schema::token (_xsd_MobilityCapabilityTerrainTypeCode_literals_[v])
   {
@@ -12959,6 +14681,12 @@ namespace oo_2_0
 
   // MobilityCode
   // 
+
+  MobilityCode::
+  MobilityCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   MobilityCode::
   MobilityCode (value v)
@@ -13006,6 +14734,12 @@ namespace oo_2_0
   // 
 
   ModeOfTransportationCode::
+  ModeOfTransportationCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ModeOfTransportationCode::
   ModeOfTransportationCode (value v)
   : ::xml_schema::token (_xsd_ModeOfTransportationCode_literals_[v])
   {
@@ -13049,6 +14783,12 @@ namespace oo_2_0
 
   // NetworkArchitectureCode
   // 
+
+  NetworkArchitectureCode::
+  NetworkArchitectureCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   NetworkArchitectureCode::
   NetworkArchitectureCode (value v)
@@ -13096,6 +14836,12 @@ namespace oo_2_0
   // 
 
   NetworkCapacityBandwidthCode::
+  NetworkCapacityBandwidthCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  NetworkCapacityBandwidthCode::
   NetworkCapacityBandwidthCode (value v)
   : ::xml_schema::token (_xsd_NetworkCapacityBandwidthCode_literals_[v])
   {
@@ -13139,6 +14885,12 @@ namespace oo_2_0
 
   // NetworkCapacityProtocolCode
   // 
+
+  NetworkCapacityProtocolCode::
+  NetworkCapacityProtocolCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   NetworkCapacityProtocolCode::
   NetworkCapacityProtocolCode (value v)
@@ -13186,6 +14938,12 @@ namespace oo_2_0
   // 
 
   NetworkCategoryCode::
+  NetworkCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  NetworkCategoryCode::
   NetworkCategoryCode (value v)
   : ::xml_schema::token (_xsd_NetworkCategoryCode_literals_[v])
   {
@@ -13229,6 +14987,12 @@ namespace oo_2_0
 
   // NetworkFrequencyBandCode
   // 
+
+  NetworkFrequencyBandCode::
+  NetworkFrequencyBandCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   NetworkFrequencyBandCode::
   NetworkFrequencyBandCode (value v)
@@ -13276,6 +15040,12 @@ namespace oo_2_0
   // 
 
   NetworkFrequencyModulationCode::
+  NetworkFrequencyModulationCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  NetworkFrequencyModulationCode::
   NetworkFrequencyModulationCode (value v)
   : ::xml_schema::token (_xsd_NetworkFrequencyModulationCode_literals_[v])
   {
@@ -13319,6 +15089,12 @@ namespace oo_2_0
 
   // NetworkMeansCode
   // 
+
+  NetworkMeansCode::
+  NetworkMeansCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   NetworkMeansCode::
   NetworkMeansCode (value v)
@@ -13366,6 +15142,12 @@ namespace oo_2_0
   // 
 
   NetworkServiceCategoryCode::
+  NetworkServiceCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  NetworkServiceCategoryCode::
   NetworkServiceCategoryCode (value v)
   : ::xml_schema::token (_xsd_NetworkServiceCategoryCode_literals_[v])
   {
@@ -13409,6 +15191,12 @@ namespace oo_2_0
 
   // NetworkServiceCryptographicIndicatorCode
   // 
+
+  NetworkServiceCryptographicIndicatorCode::
+  NetworkServiceCryptographicIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   NetworkServiceCryptographicIndicatorCode::
   NetworkServiceCryptographicIndicatorCode (value v)
@@ -13456,6 +15244,12 @@ namespace oo_2_0
   // 
 
   NetworkServiceStatusIndicatorCode::
+  NetworkServiceStatusIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  NetworkServiceStatusIndicatorCode::
   NetworkServiceStatusIndicatorCode (value v)
   : ::xml_schema::token (_xsd_NetworkServiceStatusIndicatorCode_literals_[v])
   {
@@ -13499,6 +15293,12 @@ namespace oo_2_0
 
   // NetworkServiceSubcategoryCode
   // 
+
+  NetworkServiceSubcategoryCode::
+  NetworkServiceSubcategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   NetworkServiceSubcategoryCode::
   NetworkServiceSubcategoryCode (value v)
@@ -13546,6 +15346,12 @@ namespace oo_2_0
   // 
 
   NetworkSubcategoryCode::
+  NetworkSubcategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  NetworkSubcategoryCode::
   NetworkSubcategoryCode (value v)
   : ::xml_schema::token (_xsd_NetworkSubcategoryCode_literals_[v])
   {
@@ -13589,6 +15395,12 @@ namespace oo_2_0
 
   // NuclearEventCategoryCode
   // 
+
+  NuclearEventCategoryCode::
+  NuclearEventCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   NuclearEventCategoryCode::
   NuclearEventCategoryCode (value v)
@@ -13636,6 +15448,12 @@ namespace oo_2_0
   // 
 
   NuclearWeaponEventCraterPresenceCode::
+  NuclearWeaponEventCraterPresenceCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  NuclearWeaponEventCraterPresenceCode::
   NuclearWeaponEventCraterPresenceCode (value v)
   : ::xml_schema::token (_xsd_NuclearWeaponEventCraterPresenceCode_literals_[v])
   {
@@ -13679,6 +15497,12 @@ namespace oo_2_0
 
   // NuclearYieldGroupCode
   // 
+
+  NuclearYieldGroupCode::
+  NuclearYieldGroupCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   NuclearYieldGroupCode::
   NuclearYieldGroupCode (value v)
@@ -13726,6 +15550,12 @@ namespace oo_2_0
   // 
 
   ObjectItemAddressAuthorisationIndicatorCode::
+  ObjectItemAddressAuthorisationIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ObjectItemAddressAuthorisationIndicatorCode::
   ObjectItemAddressAuthorisationIndicatorCode (value v)
   : ::xml_schema::token (_xsd_ObjectItemAddressAuthorisationIndicatorCode_literals_[v])
   {
@@ -13769,6 +15599,12 @@ namespace oo_2_0
 
   // ObjectItemAddressPrimacyCode
   // 
+
+  ObjectItemAddressPrimacyCode::
+  ObjectItemAddressPrimacyCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ObjectItemAddressPrimacyCode::
   ObjectItemAddressPrimacyCode (value v)
@@ -13816,6 +15652,12 @@ namespace oo_2_0
   // 
 
   ObjectItemAddressTransmitReceiveCode::
+  ObjectItemAddressTransmitReceiveCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ObjectItemAddressTransmitReceiveCode::
   ObjectItemAddressTransmitReceiveCode (value v)
   : ::xml_schema::token (_xsd_ObjectItemAddressTransmitReceiveCode_literals_[v])
   {
@@ -13859,6 +15701,12 @@ namespace oo_2_0
 
   // ObjectItemAliasCategoryCode
   // 
+
+  ObjectItemAliasCategoryCode::
+  ObjectItemAliasCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ObjectItemAliasCategoryCode::
   ObjectItemAliasCategoryCode (value v)
@@ -13906,6 +15754,12 @@ namespace oo_2_0
   // 
 
   ObjectItemAssociationCategoryCode::
+  ObjectItemAssociationCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ObjectItemAssociationCategoryCode::
   ObjectItemAssociationCategoryCode (value v)
   : ::xml_schema::token (_xsd_ObjectItemAssociationCategoryCode_literals_[v])
   {
@@ -13949,6 +15803,12 @@ namespace oo_2_0
 
   // ObjectItemAssociationSubcategoryCode
   // 
+
+  ObjectItemAssociationSubcategoryCode::
+  ObjectItemAssociationSubcategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ObjectItemAssociationSubcategoryCode::
   ObjectItemAssociationSubcategoryCode (value v)
@@ -13996,6 +15856,12 @@ namespace oo_2_0
   // 
 
   ObjectItemCategoryCode::
+  ObjectItemCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ObjectItemCategoryCode::
   ObjectItemCategoryCode (value v)
   : ::xml_schema::token (_xsd_ObjectItemCategoryCode_literals_[v])
   {
@@ -14039,6 +15905,12 @@ namespace oo_2_0
 
   // ObjectItemGroupAccountDetailQualifierCode
   // 
+
+  ObjectItemGroupAccountDetailQualifierCode::
+  ObjectItemGroupAccountDetailQualifierCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ObjectItemGroupAccountDetailQualifierCode::
   ObjectItemGroupAccountDetailQualifierCode (value v)
@@ -14086,6 +15958,12 @@ namespace oo_2_0
   // 
 
   ObjectItemHostilityStatusCode::
+  ObjectItemHostilityStatusCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ObjectItemHostilityStatusCode::
   ObjectItemHostilityStatusCode (value v)
   : ::xml_schema::token (_xsd_ObjectItemHostilityStatusCode_literals_[v])
   {
@@ -14129,6 +16007,12 @@ namespace oo_2_0
 
   // ObjectItemLocationMeaningCode
   // 
+
+  ObjectItemLocationMeaningCode::
+  ObjectItemLocationMeaningCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ObjectItemLocationMeaningCode::
   ObjectItemLocationMeaningCode (value v)
@@ -14176,6 +16060,12 @@ namespace oo_2_0
   // 
 
   ObjectItemLocationRelativeSpeedCode::
+  ObjectItemLocationRelativeSpeedCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ObjectItemLocationRelativeSpeedCode::
   ObjectItemLocationRelativeSpeedCode (value v)
   : ::xml_schema::token (_xsd_ObjectItemLocationRelativeSpeedCode_literals_[v])
   {
@@ -14219,6 +16109,12 @@ namespace oo_2_0
 
   // ObjectItemReferenceAssociationCategoryCode
   // 
+
+  ObjectItemReferenceAssociationCategoryCode::
+  ObjectItemReferenceAssociationCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ObjectItemReferenceAssociationCategoryCode::
   ObjectItemReferenceAssociationCategoryCode (value v)
@@ -14266,6 +16162,12 @@ namespace oo_2_0
   // 
 
   ObjectItemStatusBoobyTrapPresenceCode::
+  ObjectItemStatusBoobyTrapPresenceCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ObjectItemStatusBoobyTrapPresenceCode::
   ObjectItemStatusBoobyTrapPresenceCode (value v)
   : ::xml_schema::token (_xsd_ObjectItemStatusBoobyTrapPresenceCode_literals_[v])
   {
@@ -14309,6 +16211,12 @@ namespace oo_2_0
 
   // ObjectItemStatusCategoryCode
   // 
+
+  ObjectItemStatusCategoryCode::
+  ObjectItemStatusCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ObjectItemStatusCategoryCode::
   ObjectItemStatusCategoryCode (value v)
@@ -14356,6 +16264,12 @@ namespace oo_2_0
   // 
 
   ObjectItemStatusEmissionControlCode::
+  ObjectItemStatusEmissionControlCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ObjectItemStatusEmissionControlCode::
   ObjectItemStatusEmissionControlCode (value v)
   : ::xml_schema::token (_xsd_ObjectItemStatusEmissionControlCode_literals_[v])
   {
@@ -14399,6 +16313,12 @@ namespace oo_2_0
 
   // ObjectTypeCategoryCode
   // 
+
+  ObjectTypeCategoryCode::
+  ObjectTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ObjectTypeCategoryCode::
   ObjectTypeCategoryCode (value v)
@@ -14446,6 +16366,12 @@ namespace oo_2_0
   // 
 
   ObjectTypeDecoyIndicatorCode::
+  ObjectTypeDecoyIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ObjectTypeDecoyIndicatorCode::
   ObjectTypeDecoyIndicatorCode (value v)
   : ::xml_schema::token (_xsd_ObjectTypeDecoyIndicatorCode_literals_[v])
   {
@@ -14489,6 +16415,12 @@ namespace oo_2_0
 
   // ObjectTypeEstablishmentCategoryCode
   // 
+
+  ObjectTypeEstablishmentCategoryCode::
+  ObjectTypeEstablishmentCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ObjectTypeEstablishmentCategoryCode::
   ObjectTypeEstablishmentCategoryCode (value v)
@@ -14536,6 +16468,12 @@ namespace oo_2_0
   // 
 
   ObjectTypeEstablishmentEnvironmentConditionCode::
+  ObjectTypeEstablishmentEnvironmentConditionCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ObjectTypeEstablishmentEnvironmentConditionCode::
   ObjectTypeEstablishmentEnvironmentConditionCode (value v)
   : ::xml_schema::token (_xsd_ObjectTypeEstablishmentEnvironmentConditionCode_literals_[v])
   {
@@ -14579,6 +16517,12 @@ namespace oo_2_0
 
   // ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode
   // 
+
+  ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode::
+  ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode::
   ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode (value v)
@@ -14626,6 +16570,12 @@ namespace oo_2_0
   // 
 
   ObjectTypeEstablishmentOperationalModeCode::
+  ObjectTypeEstablishmentOperationalModeCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ObjectTypeEstablishmentOperationalModeCode::
   ObjectTypeEstablishmentOperationalModeCode (value v)
   : ::xml_schema::token (_xsd_ObjectTypeEstablishmentOperationalModeCode_literals_[v])
   {
@@ -14669,6 +16619,12 @@ namespace oo_2_0
 
   // ObjectTypeReferenceAssociationCategoryCode
   // 
+
+  ObjectTypeReferenceAssociationCategoryCode::
+  ObjectTypeReferenceAssociationCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ObjectTypeReferenceAssociationCategoryCode::
   ObjectTypeReferenceAssociationCategoryCode (value v)
@@ -14716,6 +16672,12 @@ namespace oo_2_0
   // 
 
   OperationalCapabilityCategoryCode::
+  OperationalCapabilityCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  OperationalCapabilityCategoryCode::
   OperationalCapabilityCategoryCode (value v)
   : ::xml_schema::token (_xsd_OperationalCapabilityCategoryCode_literals_[v])
   {
@@ -14759,6 +16721,12 @@ namespace oo_2_0
 
   // OperationalCapabilityLevelCode
   // 
+
+  OperationalCapabilityLevelCode::
+  OperationalCapabilityLevelCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   OperationalCapabilityLevelCode::
   OperationalCapabilityLevelCode (value v)
@@ -14806,6 +16774,12 @@ namespace oo_2_0
   // 
 
   OperationalCapabilityQualifierCode::
+  OperationalCapabilityQualifierCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  OperationalCapabilityQualifierCode::
   OperationalCapabilityQualifierCode (value v)
   : ::xml_schema::token (_xsd_OperationalCapabilityQualifierCode_literals_[v])
   {
@@ -14849,6 +16823,12 @@ namespace oo_2_0
 
   // OperationalInformationGroupCategoryCode
   // 
+
+  OperationalInformationGroupCategoryCode::
+  OperationalInformationGroupCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   OperationalInformationGroupCategoryCode::
   OperationalInformationGroupCategoryCode (value v)
@@ -14896,6 +16876,12 @@ namespace oo_2_0
   // 
 
   OperationalInformationGroupOrganisationAssociationCategoryCode::
+  OperationalInformationGroupOrganisationAssociationCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  OperationalInformationGroupOrganisationAssociationCategoryCode::
   OperationalInformationGroupOrganisationAssociationCategoryCode (value v)
   : ::xml_schema::token (_xsd_OperationalInformationGroupOrganisationAssociationCategoryCode_literals_[v])
   {
@@ -14939,6 +16925,12 @@ namespace oo_2_0
 
   // OrbitAreaAlignmentCode
   // 
+
+  OrbitAreaAlignmentCode::
+  OrbitAreaAlignmentCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   OrbitAreaAlignmentCode::
   OrbitAreaAlignmentCode (value v)
@@ -14986,6 +16978,12 @@ namespace oo_2_0
   // 
 
   OrderCategoryCode::
+  OrderCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  OrderCategoryCode::
   OrderCategoryCode (value v)
   : ::xml_schema::token (_xsd_OrderCategoryCode_literals_[v])
   {
@@ -15029,6 +17027,12 @@ namespace oo_2_0
 
   // OrderStatusExecutionStateCode
   // 
+
+  OrderStatusExecutionStateCode::
+  OrderStatusExecutionStateCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   OrderStatusExecutionStateCode::
   OrderStatusExecutionStateCode (value v)
@@ -15076,6 +17080,12 @@ namespace oo_2_0
   // 
 
   OrganisationActionAssociationCategoryCode::
+  OrganisationActionAssociationCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  OrganisationActionAssociationCategoryCode::
   OrganisationActionAssociationCategoryCode (value v)
   : ::xml_schema::token (_xsd_OrganisationActionAssociationCategoryCode_literals_[v])
   {
@@ -15119,6 +17129,12 @@ namespace oo_2_0
 
   // OrganisationActionTaskRuleOfEngagementStatusCategoryCode
   // 
+
+  OrganisationActionTaskRuleOfEngagementStatusCategoryCode::
+  OrganisationActionTaskRuleOfEngagementStatusCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   OrganisationActionTaskRuleOfEngagementStatusCategoryCode::
   OrganisationActionTaskRuleOfEngagementStatusCategoryCode (value v)
@@ -15166,6 +17182,12 @@ namespace oo_2_0
   // 
 
   OrganisationCategoryCode::
+  OrganisationCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  OrganisationCategoryCode::
   OrganisationCategoryCode (value v)
   : ::xml_schema::token (_xsd_OrganisationCategoryCode_literals_[v])
   {
@@ -15209,6 +17231,12 @@ namespace oo_2_0
 
   // OrganisationMaterielTypeAssociationReportableTypeCode
   // 
+
+  OrganisationMaterielTypeAssociationReportableTypeCode::
+  OrganisationMaterielTypeAssociationReportableTypeCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   OrganisationMaterielTypeAssociationReportableTypeCode::
   OrganisationMaterielTypeAssociationReportableTypeCode (value v)
@@ -15256,6 +17284,12 @@ namespace oo_2_0
   // 
 
   OrganisationPlanOrderAssociationCategoryCode::
+  OrganisationPlanOrderAssociationCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  OrganisationPlanOrderAssociationCategoryCode::
   OrganisationPlanOrderAssociationCategoryCode (value v)
   : ::xml_schema::token (_xsd_OrganisationPlanOrderAssociationCategoryCode_literals_[v])
   {
@@ -15299,6 +17333,12 @@ namespace oo_2_0
 
   // OrganisationReferenceAssociationCategoryCode
   // 
+
+  OrganisationReferenceAssociationCategoryCode::
+  OrganisationReferenceAssociationCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   OrganisationReferenceAssociationCategoryCode::
   OrganisationReferenceAssociationCategoryCode (value v)
@@ -15346,6 +17386,12 @@ namespace oo_2_0
   // 
 
   OrganisationStatusAvailabilityCode::
+  OrganisationStatusAvailabilityCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  OrganisationStatusAvailabilityCode::
   OrganisationStatusAvailabilityCode (value v)
   : ::xml_schema::token (_xsd_OrganisationStatusAvailabilityCode_literals_[v])
   {
@@ -15389,6 +17435,12 @@ namespace oo_2_0
 
   // OrganisationStatusCbrnDressStateCode
   // 
+
+  OrganisationStatusCbrnDressStateCode::
+  OrganisationStatusCbrnDressStateCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   OrganisationStatusCbrnDressStateCode::
   OrganisationStatusCbrnDressStateCode (value v)
@@ -15436,6 +17488,12 @@ namespace oo_2_0
   // 
 
   OrganisationStatusCommandAndControlRoleCode::
+  OrganisationStatusCommandAndControlRoleCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  OrganisationStatusCommandAndControlRoleCode::
   OrganisationStatusCommandAndControlRoleCode (value v)
   : ::xml_schema::token (_xsd_OrganisationStatusCommandAndControlRoleCode_literals_[v])
   {
@@ -15479,6 +17537,12 @@ namespace oo_2_0
 
   // OrganisationStatusCommitmentStatusCode
   // 
+
+  OrganisationStatusCommitmentStatusCode::
+  OrganisationStatusCommitmentStatusCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   OrganisationStatusCommitmentStatusCode::
   OrganisationStatusCommitmentStatusCode (value v)
@@ -15526,6 +17590,12 @@ namespace oo_2_0
   // 
 
   OrganisationStatusFireModeCode::
+  OrganisationStatusFireModeCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  OrganisationStatusFireModeCode::
   OrganisationStatusFireModeCode (value v)
   : ::xml_schema::token (_xsd_OrganisationStatusFireModeCode_literals_[v])
   {
@@ -15569,6 +17639,12 @@ namespace oo_2_0
 
   // OrganisationStatusOperationalStatusCode
   // 
+
+  OrganisationStatusOperationalStatusCode::
+  OrganisationStatusOperationalStatusCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   OrganisationStatusOperationalStatusCode::
   OrganisationStatusOperationalStatusCode (value v)
@@ -15616,6 +17692,12 @@ namespace oo_2_0
   // 
 
   OrganisationStatusOperationalStatusQualifierCode::
+  OrganisationStatusOperationalStatusQualifierCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  OrganisationStatusOperationalStatusQualifierCode::
   OrganisationStatusOperationalStatusQualifierCode (value v)
   : ::xml_schema::token (_xsd_OrganisationStatusOperationalStatusQualifierCode_literals_[v])
   {
@@ -15659,6 +17741,12 @@ namespace oo_2_0
 
   // OrganisationStatusReadinessCode
   // 
+
+  OrganisationStatusReadinessCode::
+  OrganisationStatusReadinessCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   OrganisationStatusReadinessCode::
   OrganisationStatusReadinessCode (value v)
@@ -15706,6 +17794,12 @@ namespace oo_2_0
   // 
 
   OrganisationStatusReinforcementCode::
+  OrganisationStatusReinforcementCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  OrganisationStatusReinforcementCode::
   OrganisationStatusReinforcementCode (value v)
   : ::xml_schema::token (_xsd_OrganisationStatusReinforcementCode_literals_[v])
   {
@@ -15749,6 +17843,12 @@ namespace oo_2_0
 
   // OrganisationStatusReserveIndicatorCode
   // 
+
+  OrganisationStatusReserveIndicatorCode::
+  OrganisationStatusReserveIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   OrganisationStatusReserveIndicatorCode::
   OrganisationStatusReserveIndicatorCode (value v)
@@ -15796,6 +17896,12 @@ namespace oo_2_0
   // 
 
   OrganisationStatusTrainingCode::
+  OrganisationStatusTrainingCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  OrganisationStatusTrainingCode::
   OrganisationStatusTrainingCode (value v)
   : ::xml_schema::token (_xsd_OrganisationStatusTrainingCode_literals_[v])
   {
@@ -15839,6 +17945,12 @@ namespace oo_2_0
 
   // OrganisationStatusUsageStatusCode
   // 
+
+  OrganisationStatusUsageStatusCode::
+  OrganisationStatusUsageStatusCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   OrganisationStatusUsageStatusCode::
   OrganisationStatusUsageStatusCode (value v)
@@ -15886,6 +17998,12 @@ namespace oo_2_0
   // 
 
   OrganisationTypeCategoryCode::
+  OrganisationTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  OrganisationTypeCategoryCode::
   OrganisationTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_OrganisationTypeCategoryCode_literals_[v])
   {
@@ -15929,6 +18047,12 @@ namespace oo_2_0
 
   // OrganisationTypeCommandAndControlCategoryCode
   // 
+
+  OrganisationTypeCommandAndControlCategoryCode::
+  OrganisationTypeCommandAndControlCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   OrganisationTypeCommandAndControlCategoryCode::
   OrganisationTypeCommandAndControlCategoryCode (value v)
@@ -15976,6 +18100,12 @@ namespace oo_2_0
   // 
 
   OrganisationTypeCommandFunctionIndicatorCode::
+  OrganisationTypeCommandFunctionIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  OrganisationTypeCommandFunctionIndicatorCode::
   OrganisationTypeCommandFunctionIndicatorCode (value v)
   : ::xml_schema::token (_xsd_OrganisationTypeCommandFunctionIndicatorCode_literals_[v])
   {
@@ -16019,6 +18149,12 @@ namespace oo_2_0
 
   // PersistencyCode
   // 
+
+  PersistencyCode::
+  PersistencyCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   PersistencyCode::
   PersistencyCode (value v)
@@ -16066,6 +18202,12 @@ namespace oo_2_0
   // 
 
   PersonBloodTypeCode::
+  PersonBloodTypeCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  PersonBloodTypeCode::
   PersonBloodTypeCode (value v)
   : ::xml_schema::token (_xsd_PersonBloodTypeCode_literals_[v])
   {
@@ -16109,6 +18251,12 @@ namespace oo_2_0
 
   // PersonIdentificationDocumentCode
   // 
+
+  PersonIdentificationDocumentCode::
+  PersonIdentificationDocumentCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   PersonIdentificationDocumentCode::
   PersonIdentificationDocumentCode (value v)
@@ -16156,6 +18304,12 @@ namespace oo_2_0
   // 
 
   PersonLanguageSkillGeneralProficiencyCode::
+  PersonLanguageSkillGeneralProficiencyCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  PersonLanguageSkillGeneralProficiencyCode::
   PersonLanguageSkillGeneralProficiencyCode (value v)
   : ::xml_schema::token (_xsd_PersonLanguageSkillGeneralProficiencyCode_literals_[v])
   {
@@ -16199,6 +18353,12 @@ namespace oo_2_0
 
   // PersonProfessingIndicatorCode
   // 
+
+  PersonProfessingIndicatorCode::
+  PersonProfessingIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   PersonProfessingIndicatorCode::
   PersonProfessingIndicatorCode (value v)
@@ -16246,6 +18406,12 @@ namespace oo_2_0
   // 
 
   PersonStatusDutyStatusCode::
+  PersonStatusDutyStatusCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  PersonStatusDutyStatusCode::
   PersonStatusDutyStatusCode (value v)
   : ::xml_schema::token (_xsd_PersonStatusDutyStatusCode_literals_[v])
   {
@@ -16289,6 +18455,12 @@ namespace oo_2_0
 
   // PersonStatusPhysicalStatusCode
   // 
+
+  PersonStatusPhysicalStatusCode::
+  PersonStatusPhysicalStatusCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   PersonStatusPhysicalStatusCode::
   PersonStatusPhysicalStatusCode (value v)
@@ -16336,6 +18508,12 @@ namespace oo_2_0
   // 
 
   PersonStatusPhysicalStatusQualifierCode::
+  PersonStatusPhysicalStatusQualifierCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  PersonStatusPhysicalStatusQualifierCode::
   PersonStatusPhysicalStatusQualifierCode (value v)
   : ::xml_schema::token (_xsd_PersonStatusPhysicalStatusQualifierCode_literals_[v])
   {
@@ -16379,6 +18557,12 @@ namespace oo_2_0
 
   // PersonStatusReserveIndicatorCode
   // 
+
+  PersonStatusReserveIndicatorCode::
+  PersonStatusReserveIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   PersonStatusReserveIndicatorCode::
   PersonStatusReserveIndicatorCode (value v)
@@ -16426,6 +18610,12 @@ namespace oo_2_0
   // 
 
   PersonTypeCategoryCode::
+  PersonTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  PersonTypeCategoryCode::
   PersonTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_PersonTypeCategoryCode_literals_[v])
   {
@@ -16469,6 +18659,12 @@ namespace oo_2_0
 
   // PersonTypeRankCode
   // 
+
+  PersonTypeRankCode::
+  PersonTypeRankCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   PersonTypeRankCode::
   PersonTypeRankCode (value v)
@@ -16516,6 +18712,12 @@ namespace oo_2_0
   // 
 
   PersonTypeSubcategoryCode::
+  PersonTypeSubcategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  PersonTypeSubcategoryCode::
   PersonTypeSubcategoryCode (value v)
   : ::xml_schema::token (_xsd_PersonTypeSubcategoryCode_literals_[v])
   {
@@ -16559,6 +18761,12 @@ namespace oo_2_0
 
   // PhysicalAddressCategoryCode
   // 
+
+  PhysicalAddressCategoryCode::
+  PhysicalAddressCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   PhysicalAddressCategoryCode::
   PhysicalAddressCategoryCode (value v)
@@ -16606,6 +18814,12 @@ namespace oo_2_0
   // 
 
   PlanCategoryCode::
+  PlanCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  PlanCategoryCode::
   PlanCategoryCode (value v)
   : ::xml_schema::token (_xsd_PlanCategoryCode_literals_[v])
   {
@@ -16649,6 +18863,12 @@ namespace oo_2_0
 
   // PlanOrderAssociationCategoryCode
   // 
+
+  PlanOrderAssociationCategoryCode::
+  PlanOrderAssociationCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   PlanOrderAssociationCategoryCode::
   PlanOrderAssociationCategoryCode (value v)
@@ -16696,6 +18916,12 @@ namespace oo_2_0
   // 
 
   PlanOrderCategoryCode::
+  PlanOrderCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  PlanOrderCategoryCode::
   PlanOrderCategoryCode (value v)
   : ::xml_schema::token (_xsd_PlanOrderCategoryCode_literals_[v])
   {
@@ -16739,6 +18965,12 @@ namespace oo_2_0
 
   // PlanOrderComponentContentReferenceCategoryCode
   // 
+
+  PlanOrderComponentContentReferenceCategoryCode::
+  PlanOrderComponentContentReferenceCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   PlanOrderComponentContentReferenceCategoryCode::
   PlanOrderComponentContentReferenceCategoryCode (value v)
@@ -16786,6 +19018,12 @@ namespace oo_2_0
   // 
 
   PlanOrderComponentStructureCategoryCode::
+  PlanOrderComponentStructureCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  PlanOrderComponentStructureCategoryCode::
   PlanOrderComponentStructureCategoryCode (value v)
   : ::xml_schema::token (_xsd_PlanOrderComponentStructureCategoryCode_literals_[v])
   {
@@ -16829,6 +19067,12 @@ namespace oo_2_0
 
   // PlanOrderDistributionAcknowledgementCode
   // 
+
+  PlanOrderDistributionAcknowledgementCode::
+  PlanOrderDistributionAcknowledgementCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   PlanOrderDistributionAcknowledgementCode::
   PlanOrderDistributionAcknowledgementCode (value v)
@@ -16876,6 +19120,12 @@ namespace oo_2_0
   // 
 
   PlanOrderDistributionCategoryCode::
+  PlanOrderDistributionCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  PlanOrderDistributionCategoryCode::
   PlanOrderDistributionCategoryCode (value v)
   : ::xml_schema::token (_xsd_PlanOrderDistributionCategoryCode_literals_[v])
   {
@@ -16919,6 +19169,12 @@ namespace oo_2_0
 
   // PlanOrderHeaderContentTimeZoneCode
   // 
+
+  PlanOrderHeaderContentTimeZoneCode::
+  PlanOrderHeaderContentTimeZoneCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   PlanOrderHeaderContentTimeZoneCode::
   PlanOrderHeaderContentTimeZoneCode (value v)
@@ -16966,6 +19222,12 @@ namespace oo_2_0
   // 
 
   PlanStatusDevelopmentStatusCode::
+  PlanStatusDevelopmentStatusCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  PlanStatusDevelopmentStatusCode::
   PlanStatusDevelopmentStatusCode (value v)
   : ::xml_schema::token (_xsd_PlanStatusDevelopmentStatusCode_literals_[v])
   {
@@ -17009,6 +19271,12 @@ namespace oo_2_0
 
   // PlanStatusStateCode
   // 
+
+  PlanStatusStateCode::
+  PlanStatusStateCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   PlanStatusStateCode::
   PlanStatusStateCode (value v)
@@ -17056,6 +19324,12 @@ namespace oo_2_0
   // 
 
   PointCategoryCode::
+  PointCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  PointCategoryCode::
   PointCategoryCode (value v)
   : ::xml_schema::token (_xsd_PointCategoryCode_literals_[v])
   {
@@ -17099,6 +19373,12 @@ namespace oo_2_0
 
   // PrecipitationCategoryCode
   // 
+
+  PrecipitationCategoryCode::
+  PrecipitationCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   PrecipitationCategoryCode::
   PrecipitationCategoryCode (value v)
@@ -17146,6 +19426,12 @@ namespace oo_2_0
   // 
 
   PrivateSectorOrganisationTypeCategoryCode::
+  PrivateSectorOrganisationTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  PrivateSectorOrganisationTypeCategoryCode::
   PrivateSectorOrganisationTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_PrivateSectorOrganisationTypeCategoryCode_literals_[v])
   {
@@ -17189,6 +19475,12 @@ namespace oo_2_0
 
   // QuayContainerHandlingTypeCode
   // 
+
+  QuayContainerHandlingTypeCode::
+  QuayContainerHandlingTypeCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   QuayContainerHandlingTypeCode::
   QuayContainerHandlingTypeCode (value v)
@@ -17236,6 +19528,12 @@ namespace oo_2_0
   // 
 
   QuayCraneOffloadingTypeCode::
+  QuayCraneOffloadingTypeCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  QuayCraneOffloadingTypeCode::
   QuayCraneOffloadingTypeCode (value v)
   : ::xml_schema::token (_xsd_QuayCraneOffloadingTypeCode_literals_[v])
   {
@@ -17279,6 +19577,12 @@ namespace oo_2_0
 
   // QuayRailServedIndicatorCode
   // 
+
+  QuayRailServedIndicatorCode::
+  QuayRailServedIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   QuayRailServedIndicatorCode::
   QuayRailServedIndicatorCode (value v)
@@ -17326,6 +19630,12 @@ namespace oo_2_0
   // 
 
   QuayStorageCode::
+  QuayStorageCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  QuayStorageCode::
   QuayStorageCode (value v)
   : ::xml_schema::token (_xsd_QuayStorageCode_literals_[v])
   {
@@ -17369,6 +19679,12 @@ namespace oo_2_0
 
   // RadioactiveEventCategoryCode
   // 
+
+  RadioactiveEventCategoryCode::
+  RadioactiveEventCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   RadioactiveEventCategoryCode::
   RadioactiveEventCategoryCode (value v)
@@ -17416,6 +19732,12 @@ namespace oo_2_0
   // 
 
   RadioactiveEventDoseRateTrendCode::
+  RadioactiveEventDoseRateTrendCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  RadioactiveEventDoseRateTrendCode::
   RadioactiveEventDoseRateTrendCode (value v)
   : ::xml_schema::token (_xsd_RadioactiveEventDoseRateTrendCode_literals_[v])
   {
@@ -17459,6 +19781,12 @@ namespace oo_2_0
 
   // RadioactiveEventRelativeDecayRateCode
   // 
+
+  RadioactiveEventRelativeDecayRateCode::
+  RadioactiveEventRelativeDecayRateCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   RadioactiveEventRelativeDecayRateCode::
   RadioactiveEventRelativeDecayRateCode (value v)
@@ -17506,6 +19834,12 @@ namespace oo_2_0
   // 
 
   RadioactiveMaterielTypeCategoryCode::
+  RadioactiveMaterielTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  RadioactiveMaterielTypeCategoryCode::
   RadioactiveMaterielTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_RadioactiveMaterielTypeCategoryCode_literals_[v])
   {
@@ -17549,6 +19883,12 @@ namespace oo_2_0
 
   // RadioactiveMaterielTypePrimaryRadiationCode
   // 
+
+  RadioactiveMaterielTypePrimaryRadiationCode::
+  RadioactiveMaterielTypePrimaryRadiationCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   RadioactiveMaterielTypePrimaryRadiationCode::
   RadioactiveMaterielTypePrimaryRadiationCode (value v)
@@ -17596,6 +19936,12 @@ namespace oo_2_0
   // 
 
   RailcarTypeCategoryCode::
+  RailcarTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  RailcarTypeCategoryCode::
   RailcarTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_RailcarTypeCategoryCode_literals_[v])
   {
@@ -17639,6 +19985,12 @@ namespace oo_2_0
 
   // RailcarTypeSubcategoryCode
   // 
+
+  RailcarTypeSubcategoryCode::
+  RailcarTypeSubcategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   RailcarTypeSubcategoryCode::
   RailcarTypeSubcategoryCode (value v)
@@ -17686,6 +20038,12 @@ namespace oo_2_0
   // 
 
   RailwaySignalSystemCode::
+  RailwaySignalSystemCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  RailwaySignalSystemCode::
   RailwaySignalSystemCode (value v)
   : ::xml_schema::token (_xsd_RailwaySignalSystemCode_literals_[v])
   {
@@ -17729,6 +20087,12 @@ namespace oo_2_0
 
   // RailwaySignalSystemEfficiencyCode
   // 
+
+  RailwaySignalSystemEfficiencyCode::
+  RailwaySignalSystemEfficiencyCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   RailwaySignalSystemEfficiencyCode::
   RailwaySignalSystemEfficiencyCode (value v)
@@ -17776,6 +20140,12 @@ namespace oo_2_0
   // 
 
   RailwayTrackGaugeCode::
+  RailwayTrackGaugeCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  RailwayTrackGaugeCode::
   RailwayTrackGaugeCode (value v)
   : ::xml_schema::token (_xsd_RailwayTrackGaugeCode_literals_[v])
   {
@@ -17819,6 +20189,12 @@ namespace oo_2_0
 
   // RailwayTractionSystemCode
   // 
+
+  RailwayTractionSystemCode::
+  RailwayTractionSystemCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   RailwayTractionSystemCode::
   RailwayTractionSystemCode (value v)
@@ -17866,6 +20242,12 @@ namespace oo_2_0
   // 
 
   ReferenceAssociationCategoryCode::
+  ReferenceAssociationCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ReferenceAssociationCategoryCode::
   ReferenceAssociationCategoryCode (value v)
   : ::xml_schema::token (_xsd_ReferenceAssociationCategoryCode_literals_[v])
   {
@@ -17909,6 +20291,12 @@ namespace oo_2_0
 
   // ReferenceContentCategoryCode
   // 
+
+  ReferenceContentCategoryCode::
+  ReferenceContentCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ReferenceContentCategoryCode::
   ReferenceContentCategoryCode (value v)
@@ -17956,6 +20344,12 @@ namespace oo_2_0
   // 
 
   ReferenceLifecycleCode::
+  ReferenceLifecycleCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ReferenceLifecycleCode::
   ReferenceLifecycleCode (value v)
   : ::xml_schema::token (_xsd_ReferenceLifecycleCode_literals_[v])
   {
@@ -17999,6 +20393,12 @@ namespace oo_2_0
 
   // ReferenceMediumTypeCode
   // 
+
+  ReferenceMediumTypeCode::
+  ReferenceMediumTypeCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ReferenceMediumTypeCode::
   ReferenceMediumTypeCode (value v)
@@ -18046,6 +20446,12 @@ namespace oo_2_0
   // 
 
   ReferenceTransmittalTypeCode::
+  ReferenceTransmittalTypeCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ReferenceTransmittalTypeCode::
   ReferenceTransmittalTypeCode (value v)
   : ::xml_schema::token (_xsd_ReferenceTransmittalTypeCode_literals_[v])
   {
@@ -18089,6 +20495,12 @@ namespace oo_2_0
 
   // ReferenceVerificationCode
   // 
+
+  ReferenceVerificationCode::
+  ReferenceVerificationCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ReferenceVerificationCode::
   ReferenceVerificationCode (value v)
@@ -18136,6 +20548,12 @@ namespace oo_2_0
   // 
 
   RelativeCoordinateSystemReferenceCategoryCode::
+  RelativeCoordinateSystemReferenceCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  RelativeCoordinateSystemReferenceCategoryCode::
   RelativeCoordinateSystemReferenceCategoryCode (value v)
   : ::xml_schema::token (_xsd_RelativeCoordinateSystemReferenceCategoryCode_literals_[v])
   {
@@ -18179,6 +20597,12 @@ namespace oo_2_0
 
   // ReleaseCategoryCode
   // 
+
+  ReleaseCategoryCode::
+  ReleaseCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ReleaseCategoryCode::
   ReleaseCategoryCode (value v)
@@ -18226,6 +20650,12 @@ namespace oo_2_0
   // 
 
   ReportingDataAccuracyCode::
+  ReportingDataAccuracyCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ReportingDataAccuracyCode::
   ReportingDataAccuracyCode (value v)
   : ::xml_schema::token (_xsd_ReportingDataAccuracyCode_literals_[v])
   {
@@ -18269,6 +20699,12 @@ namespace oo_2_0
 
   // ReportingDataCategoryCode
   // 
+
+  ReportingDataCategoryCode::
+  ReportingDataCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ReportingDataCategoryCode::
   ReportingDataCategoryCode (value v)
@@ -18316,6 +20752,12 @@ namespace oo_2_0
   // 
 
   ReportingDataCountingIndicatorCode::
+  ReportingDataCountingIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ReportingDataCountingIndicatorCode::
   ReportingDataCountingIndicatorCode (value v)
   : ::xml_schema::token (_xsd_ReportingDataCountingIndicatorCode_literals_[v])
   {
@@ -18359,6 +20801,12 @@ namespace oo_2_0
 
   // ReportingDataCredibilityCode
   // 
+
+  ReportingDataCredibilityCode::
+  ReportingDataCredibilityCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ReportingDataCredibilityCode::
   ReportingDataCredibilityCode (value v)
@@ -18406,6 +20854,12 @@ namespace oo_2_0
   // 
 
   ReportingDataEntityCategoryCode::
+  ReportingDataEntityCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ReportingDataEntityCategoryCode::
   ReportingDataEntityCategoryCode (value v)
   : ::xml_schema::token (_xsd_ReportingDataEntityCategoryCode_literals_[v])
   {
@@ -18449,6 +20903,12 @@ namespace oo_2_0
 
   // ReportingDataRealDataExerciseUseOnlyCode
   // 
+
+  ReportingDataRealDataExerciseUseOnlyCode::
+  ReportingDataRealDataExerciseUseOnlyCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ReportingDataRealDataExerciseUseOnlyCode::
   ReportingDataRealDataExerciseUseOnlyCode (value v)
@@ -18496,6 +20956,12 @@ namespace oo_2_0
   // 
 
   ReportingDataReliabilityCode::
+  ReportingDataReliabilityCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ReportingDataReliabilityCode::
   ReportingDataReliabilityCode (value v)
   : ::xml_schema::token (_xsd_ReportingDataReliabilityCode_literals_[v])
   {
@@ -18539,6 +21005,12 @@ namespace oo_2_0
 
   // ReportingDataSourceTypeCode
   // 
+
+  ReportingDataSourceTypeCode::
+  ReportingDataSourceTypeCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   ReportingDataSourceTypeCode::
   ReportingDataSourceTypeCode (value v)
@@ -18586,6 +21058,12 @@ namespace oo_2_0
   // 
 
   ReportingDataTimingCategoryCode::
+  ReportingDataTimingCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  ReportingDataTimingCategoryCode::
   ReportingDataTimingCategoryCode (value v)
   : ::xml_schema::token (_xsd_ReportingDataTimingCategoryCode_literals_[v])
   {
@@ -18629,6 +21107,12 @@ namespace oo_2_0
 
   // RequestAnswerCategoryCode
   // 
+
+  RequestAnswerCategoryCode::
+  RequestAnswerCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   RequestAnswerCategoryCode::
   RequestAnswerCategoryCode (value v)
@@ -18676,6 +21160,12 @@ namespace oo_2_0
   // 
 
   RequestCategoryCode::
+  RequestCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  RequestCategoryCode::
   RequestCategoryCode (value v)
   : ::xml_schema::token (_xsd_RequestCategoryCode_literals_[v])
   {
@@ -18719,6 +21209,12 @@ namespace oo_2_0
 
   // RequestImmediateInterestIndicatorCode
   // 
+
+  RequestImmediateInterestIndicatorCode::
+  RequestImmediateInterestIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   RequestImmediateInterestIndicatorCode::
   RequestImmediateInterestIndicatorCode (value v)
@@ -18766,6 +21262,12 @@ namespace oo_2_0
   // 
 
   RoadCategoryCode::
+  RoadCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  RoadCategoryCode::
   RoadCategoryCode (value v)
   : ::xml_schema::token (_xsd_RoadCategoryCode_literals_[v])
   {
@@ -18809,6 +21311,12 @@ namespace oo_2_0
 
   // RoadQualityCode
   // 
+
+  RoadQualityCode::
+  RoadQualityCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   RoadQualityCode::
   RoadQualityCode (value v)
@@ -18856,6 +21364,12 @@ namespace oo_2_0
   // 
 
   RoadShoulderWidthCode::
+  RoadShoulderWidthCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  RoadShoulderWidthCode::
   RoadShoulderWidthCode (value v)
   : ::xml_schema::token (_xsd_RoadShoulderWidthCode_literals_[v])
   {
@@ -18899,6 +21413,12 @@ namespace oo_2_0
 
   // RoadWeatherConditionCategoryCode
   // 
+
+  RoadWeatherConditionCategoryCode::
+  RoadWeatherConditionCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   RoadWeatherConditionCategoryCode::
   RoadWeatherConditionCategoryCode (value v)
@@ -18946,6 +21466,12 @@ namespace oo_2_0
   // 
 
   RouteDirectionUsageCode::
+  RouteDirectionUsageCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  RouteDirectionUsageCode::
   RouteDirectionUsageCode (value v)
   : ::xml_schema::token (_xsd_RouteDirectionUsageCode_literals_[v])
   {
@@ -18989,6 +21515,12 @@ namespace oo_2_0
 
   // RouteSegmentCategoryCode
   // 
+
+  RouteSegmentCategoryCode::
+  RouteSegmentCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   RouteSegmentCategoryCode::
   RouteSegmentCategoryCode (value v)
@@ -19036,6 +21568,12 @@ namespace oo_2_0
   // 
 
   RouteTypeCategoryCode::
+  RouteTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  RouteTypeCategoryCode::
   RouteTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_RouteTypeCategoryCode_literals_[v])
   {
@@ -19079,6 +21617,12 @@ namespace oo_2_0
 
   // RunwayLightingPresenceIndicatorCode
   // 
+
+  RunwayLightingPresenceIndicatorCode::
+  RunwayLightingPresenceIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   RunwayLightingPresenceIndicatorCode::
   RunwayLightingPresenceIndicatorCode (value v)
@@ -19126,6 +21670,12 @@ namespace oo_2_0
   // 
 
   RunwayPavementEvaluationMethodCode::
+  RunwayPavementEvaluationMethodCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  RunwayPavementEvaluationMethodCode::
   RunwayPavementEvaluationMethodCode (value v)
   : ::xml_schema::token (_xsd_RunwayPavementEvaluationMethodCode_literals_[v])
   {
@@ -19169,6 +21719,12 @@ namespace oo_2_0
 
   // RunwayPavementMaximumTyrePressureCode
   // 
+
+  RunwayPavementMaximumTyrePressureCode::
+  RunwayPavementMaximumTyrePressureCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   RunwayPavementMaximumTyrePressureCode::
   RunwayPavementMaximumTyrePressureCode (value v)
@@ -19216,6 +21772,12 @@ namespace oo_2_0
   // 
 
   RunwayPavementSubgradeCategoryCode::
+  RunwayPavementSubgradeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  RunwayPavementSubgradeCategoryCode::
   RunwayPavementSubgradeCategoryCode (value v)
   : ::xml_schema::token (_xsd_RunwayPavementSubgradeCategoryCode_literals_[v])
   {
@@ -19259,6 +21821,12 @@ namespace oo_2_0
 
   // RunwayPavementTypeCode
   // 
+
+  RunwayPavementTypeCode::
+  RunwayPavementTypeCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   RunwayPavementTypeCode::
   RunwayPavementTypeCode (value v)
@@ -19306,6 +21874,12 @@ namespace oo_2_0
   // 
 
   SecurityClassificationLevelCode::
+  SecurityClassificationLevelCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  SecurityClassificationLevelCode::
   SecurityClassificationLevelCode (value v)
   : ::xml_schema::token (_xsd_SecurityClassificationLevelCode_literals_[v])
   {
@@ -19349,6 +21923,12 @@ namespace oo_2_0
 
   // SolidSurfaceStatusCode
   // 
+
+  SolidSurfaceStatusCode::
+  SolidSurfaceStatusCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   SolidSurfaceStatusCode::
   SolidSurfaceStatusCode (value v)
@@ -19396,6 +21976,12 @@ namespace oo_2_0
   // 
 
   SolidSurfaceStatusSurfaceConditionCode::
+  SolidSurfaceStatusSurfaceConditionCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  SolidSurfaceStatusSurfaceConditionCode::
   SolidSurfaceStatusSurfaceConditionCode (value v)
   : ::xml_schema::token (_xsd_SolidSurfaceStatusSurfaceConditionCode_literals_[v])
   {
@@ -19439,6 +22025,12 @@ namespace oo_2_0
 
   // SolidSurfaceStatusSurfaceFirmnessCode
   // 
+
+  SolidSurfaceStatusSurfaceFirmnessCode::
+  SolidSurfaceStatusSurfaceFirmnessCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   SolidSurfaceStatusSurfaceFirmnessCode::
   SolidSurfaceStatusSurfaceFirmnessCode (value v)
@@ -19486,6 +22078,12 @@ namespace oo_2_0
   // 
 
   SpeedPrecisionCode::
+  SpeedPrecisionCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  SpeedPrecisionCode::
   SpeedPrecisionCode (value v)
   : ::xml_schema::token (_xsd_SpeedPrecisionCode_literals_[v])
   {
@@ -19529,6 +22127,12 @@ namespace oo_2_0
 
   // StorageCapabilityConditionCode
   // 
+
+  StorageCapabilityConditionCode::
+  StorageCapabilityConditionCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   StorageCapabilityConditionCode::
   StorageCapabilityConditionCode (value v)
@@ -19576,6 +22180,12 @@ namespace oo_2_0
   // 
 
   StorageCapabilityDescriptorCode::
+  StorageCapabilityDescriptorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  StorageCapabilityDescriptorCode::
   StorageCapabilityDescriptorCode (value v)
   : ::xml_schema::token (_xsd_StorageCapabilityDescriptorCode_literals_[v])
   {
@@ -19619,6 +22229,12 @@ namespace oo_2_0
 
   // SubsurfaceVesselTypeCategoryCode
   // 
+
+  SubsurfaceVesselTypeCategoryCode::
+  SubsurfaceVesselTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   SubsurfaceVesselTypeCategoryCode::
   SubsurfaceVesselTypeCategoryCode (value v)
@@ -19666,6 +22282,12 @@ namespace oo_2_0
   // 
 
   SubsurfaceVesselTypeTorpedoLoadingGearIndicatorCode::
+  SubsurfaceVesselTypeTorpedoLoadingGearIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  SubsurfaceVesselTypeTorpedoLoadingGearIndicatorCode::
   SubsurfaceVesselTypeTorpedoLoadingGearIndicatorCode (value v)
   : ::xml_schema::token (_xsd_SubsurfaceVesselTypeTorpedoLoadingGearIndicatorCode_literals_[v])
   {
@@ -19709,6 +22331,12 @@ namespace oo_2_0
 
   // SupportCapabilityCategoryCode
   // 
+
+  SupportCapabilityCategoryCode::
+  SupportCapabilityCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   SupportCapabilityCategoryCode::
   SupportCapabilityCategoryCode (value v)
@@ -19756,6 +22384,12 @@ namespace oo_2_0
   // 
 
   SupportCapabilityDescriptorCode::
+  SupportCapabilityDescriptorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  SupportCapabilityDescriptorCode::
   SupportCapabilityDescriptorCode (value v)
   : ::xml_schema::token (_xsd_SupportCapabilityDescriptorCode_literals_[v])
   {
@@ -19799,6 +22433,12 @@ namespace oo_2_0
 
   // SurfaceCategoryCode
   // 
+
+  SurfaceCategoryCode::
+  SurfaceCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   SurfaceCategoryCode::
   SurfaceCategoryCode (value v)
@@ -19846,6 +22486,12 @@ namespace oo_2_0
   // 
 
   SurfaceVesselTypeCategoryCode::
+  SurfaceVesselTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  SurfaceVesselTypeCategoryCode::
   SurfaceVesselTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_SurfaceVesselTypeCategoryCode_literals_[v])
   {
@@ -19889,6 +22535,12 @@ namespace oo_2_0
 
   // SurveillanceCapabilityCategoryCode
   // 
+
+  SurveillanceCapabilityCategoryCode::
+  SurveillanceCapabilityCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   SurveillanceCapabilityCategoryCode::
   SurveillanceCapabilityCategoryCode (value v)
@@ -19936,6 +22588,12 @@ namespace oo_2_0
   // 
 
   SurveillanceCapabilityDescriptorCode::
+  SurveillanceCapabilityDescriptorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  SurveillanceCapabilityDescriptorCode::
   SurveillanceCapabilityDescriptorCode (value v)
   : ::xml_schema::token (_xsd_SurveillanceCapabilityDescriptorCode_literals_[v])
   {
@@ -19979,6 +22637,12 @@ namespace oo_2_0
 
   // TargetEngagementAuthorityCode
   // 
+
+  TargetEngagementAuthorityCode::
+  TargetEngagementAuthorityCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   TargetEngagementAuthorityCode::
   TargetEngagementAuthorityCode (value v)
@@ -20026,6 +22690,12 @@ namespace oo_2_0
   // 
 
   TargetPersonnelProtectionCategoryCode::
+  TargetPersonnelProtectionCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  TargetPersonnelProtectionCategoryCode::
   TargetPersonnelProtectionCategoryCode (value v)
   : ::xml_schema::token (_xsd_TargetPersonnelProtectionCategoryCode_literals_[v])
   {
@@ -20069,6 +22739,12 @@ namespace oo_2_0
 
   // TaskFormationTypeCategoryCode
   // 
+
+  TaskFormationTypeCategoryCode::
+  TaskFormationTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   TaskFormationTypeCategoryCode::
   TaskFormationTypeCategoryCode (value v)
@@ -20116,6 +22792,12 @@ namespace oo_2_0
   // 
 
   TransmissionCapabilityCategoryCode::
+  TransmissionCapabilityCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  TransmissionCapabilityCategoryCode::
   TransmissionCapabilityCategoryCode (value v)
   : ::xml_schema::token (_xsd_TransmissionCapabilityCategoryCode_literals_[v])
   {
@@ -20159,6 +22841,12 @@ namespace oo_2_0
 
   // TransmissionCapabilityDescriptorCode
   // 
+
+  TransmissionCapabilityDescriptorCode::
+  TransmissionCapabilityDescriptorCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   TransmissionCapabilityDescriptorCode::
   TransmissionCapabilityDescriptorCode (value v)
@@ -20206,6 +22894,12 @@ namespace oo_2_0
   // 
 
   UnitTypeArmCategoryCode::
+  UnitTypeArmCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  UnitTypeArmCategoryCode::
   UnitTypeArmCategoryCode (value v)
   : ::xml_schema::token (_xsd_UnitTypeArmCategoryCode_literals_[v])
   {
@@ -20249,6 +22943,12 @@ namespace oo_2_0
 
   // UnitTypeArmSpecialisationCode
   // 
+
+  UnitTypeArmSpecialisationCode::
+  UnitTypeArmSpecialisationCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   UnitTypeArmSpecialisationCode::
   UnitTypeArmSpecialisationCode (value v)
@@ -20296,6 +22996,12 @@ namespace oo_2_0
   // 
 
   UnitTypeCategoryCode::
+  UnitTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  UnitTypeCategoryCode::
   UnitTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_UnitTypeCategoryCode_literals_[v])
   {
@@ -20339,6 +23045,12 @@ namespace oo_2_0
 
   // UnitTypeGeneralMobilityCode
   // 
+
+  UnitTypeGeneralMobilityCode::
+  UnitTypeGeneralMobilityCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   UnitTypeGeneralMobilityCode::
   UnitTypeGeneralMobilityCode (value v)
@@ -20386,6 +23098,12 @@ namespace oo_2_0
   // 
 
   UnitTypeQualifierCode::
+  UnitTypeQualifierCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  UnitTypeQualifierCode::
   UnitTypeQualifierCode (value v)
   : ::xml_schema::token (_xsd_UnitTypeQualifierCode_literals_[v])
   {
@@ -20429,6 +23147,12 @@ namespace oo_2_0
 
   // UnitTypeSizeCode
   // 
+
+  UnitTypeSizeCode::
+  UnitTypeSizeCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   UnitTypeSizeCode::
   UnitTypeSizeCode (value v)
@@ -20476,6 +23200,12 @@ namespace oo_2_0
   // 
 
   UnitTypeSupplementarySpecialisationCode::
+  UnitTypeSupplementarySpecialisationCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  UnitTypeSupplementarySpecialisationCode::
   UnitTypeSupplementarySpecialisationCode (value v)
   : ::xml_schema::token (_xsd_UnitTypeSupplementarySpecialisationCode_literals_[v])
   {
@@ -20519,6 +23249,12 @@ namespace oo_2_0
 
   // UsageStatusCode
   // 
+
+  UsageStatusCode::
+  UsageStatusCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   UsageStatusCode::
   UsageStatusCode (value v)
@@ -20566,6 +23302,12 @@ namespace oo_2_0
   // 
 
   UxoStatusExposureCode::
+  UxoStatusExposureCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  UxoStatusExposureCode::
   UxoStatusExposureCode (value v)
   : ::xml_schema::token (_xsd_UxoStatusExposureCode_literals_[v])
   {
@@ -20609,6 +23351,12 @@ namespace oo_2_0
 
   // UxoStatusQualifierCode
   // 
+
+  UxoStatusQualifierCode::
+  UxoStatusQualifierCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   UxoStatusQualifierCode::
   UxoStatusQualifierCode (value v)
@@ -20656,6 +23404,12 @@ namespace oo_2_0
   // 
 
   VegetationCategoryCode::
+  VegetationCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  VegetationCategoryCode::
   VegetationCategoryCode (value v)
   : ::xml_schema::token (_xsd_VegetationCategoryCode_literals_[v])
   {
@@ -20699,6 +23453,12 @@ namespace oo_2_0
 
   // VegetationSubcategoryCode
   // 
+
+  VegetationSubcategoryCode::
+  VegetationSubcategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   VegetationSubcategoryCode::
   VegetationSubcategoryCode (value v)
@@ -20746,6 +23506,12 @@ namespace oo_2_0
   // 
 
   VehicleTypeCategoryCode::
+  VehicleTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  VehicleTypeCategoryCode::
   VehicleTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_VehicleTypeCategoryCode_literals_[v])
   {
@@ -20789,6 +23555,12 @@ namespace oo_2_0
 
   // VerticalDistanceReferenceCode
   // 
+
+  VerticalDistanceReferenceCode::
+  VerticalDistanceReferenceCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   VerticalDistanceReferenceCode::
   VerticalDistanceReferenceCode (value v)
@@ -20836,6 +23608,12 @@ namespace oo_2_0
   // 
 
   VesselTypeCategoryCode::
+  VesselTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  VesselTypeCategoryCode::
   VesselTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_VesselTypeCategoryCode_literals_[v])
   {
@@ -20879,6 +23657,12 @@ namespace oo_2_0
 
   // VesselTypePropulsionTypeCode
   // 
+
+  VesselTypePropulsionTypeCode::
+  VesselTypePropulsionTypeCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   VesselTypePropulsionTypeCode::
   VesselTypePropulsionTypeCode (value v)
@@ -20926,6 +23710,12 @@ namespace oo_2_0
   // 
 
   VisibilityCategoryCode::
+  VisibilityCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  VisibilityCategoryCode::
   VisibilityCategoryCode (value v)
   : ::xml_schema::token (_xsd_VisibilityCategoryCode_literals_[v])
   {
@@ -20969,6 +23759,12 @@ namespace oo_2_0
 
   // WeaponTypeCategoryCode
   // 
+
+  WeaponTypeCategoryCode::
+  WeaponTypeCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   WeaponTypeCategoryCode::
   WeaponTypeCategoryCode (value v)
@@ -21016,6 +23812,12 @@ namespace oo_2_0
   // 
 
   WeaponTypeFireGuidanceIndicatorCode::
+  WeaponTypeFireGuidanceIndicatorCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  WeaponTypeFireGuidanceIndicatorCode::
   WeaponTypeFireGuidanceIndicatorCode (value v)
   : ::xml_schema::token (_xsd_WeaponTypeFireGuidanceIndicatorCode_literals_[v])
   {
@@ -21059,6 +23861,12 @@ namespace oo_2_0
 
   // WeaponTypeSubcategoryCode
   // 
+
+  WeaponTypeSubcategoryCode::
+  WeaponTypeSubcategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   WeaponTypeSubcategoryCode::
   WeaponTypeSubcategoryCode (value v)
@@ -21106,6 +23914,12 @@ namespace oo_2_0
   // 
 
   WindAirStabilityCategoryCode::
+  WindAirStabilityCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  WindAirStabilityCategoryCode::
   WindAirStabilityCategoryCode (value v)
   : ::xml_schema::token (_xsd_WindAirStabilityCategoryCode_literals_[v])
   {
@@ -21151,6 +23965,12 @@ namespace oo_2_0
   // 
 
   WindAltitudeLayerCode::
+  WindAltitudeLayerCode ()
+  : ::xml_schema::token ()
+  {
+  }
+
+  WindAltitudeLayerCode::
   WindAltitudeLayerCode (value v)
   : ::xml_schema::token (_xsd_WindAltitudeLayerCode_literals_[v])
   {
@@ -21194,6 +24014,12 @@ namespace oo_2_0
 
   // WindCategoryCode
   // 
+
+  WindCategoryCode::
+  WindCategoryCode ()
+  : ::xml_schema::token ()
+  {
+  }
 
   WindCategoryCode::
   WindCategoryCode (value v)

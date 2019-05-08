@@ -110,9 +110,9 @@ namespace oo_2_0
   }
 
   void Atmosphere::
-  HumidityRatio (::std::auto_ptr< HumidityRatio_type > x)
+  HumidityRatio (::std::unique_ptr< HumidityRatio_type > x)
   {
-    this->HumidityRatio_.set (x);
+    this->HumidityRatio_.set (std::move (x));
   }
 
   const Atmosphere::InversionLayerCode_optional& Atmosphere::
@@ -140,9 +140,9 @@ namespace oo_2_0
   }
 
   void Atmosphere::
-  InversionLayerCode (::std::auto_ptr< InversionLayerCode_type > x)
+  InversionLayerCode (::std::unique_ptr< InversionLayerCode_type > x)
   {
-    this->InversionLayerCode_.set (x);
+    this->InversionLayerCode_.set (std::move (x));
   }
 
   const Atmosphere::PressureQuantity_optional& Atmosphere::
@@ -170,9 +170,9 @@ namespace oo_2_0
   }
 
   void Atmosphere::
-  PressureQuantity (::std::auto_ptr< PressureQuantity_type > x)
+  PressureQuantity (::std::unique_ptr< PressureQuantity_type > x)
   {
-    this->PressureQuantity_.set (x);
+    this->PressureQuantity_.set (std::move (x));
   }
 
   const Atmosphere::Temperature_optional& Atmosphere::
@@ -200,9 +200,9 @@ namespace oo_2_0
   }
 
   void Atmosphere::
-  Temperature (::std::auto_ptr< Temperature_type > x)
+  Temperature (::std::unique_ptr< Temperature_type > x)
   {
-    this->Temperature_.set (x);
+    this->Temperature_.set (std::move (x));
   }
 
   const Atmosphere::TemperatureGradientCode_optional& Atmosphere::
@@ -230,9 +230,9 @@ namespace oo_2_0
   }
 
   void Atmosphere::
-  TemperatureGradientCode (::std::auto_ptr< TemperatureGradientCode_type > x)
+  TemperatureGradientCode (::std::unique_ptr< TemperatureGradientCode_type > x)
   {
-    this->TemperatureGradientCode_.set (x);
+    this->TemperatureGradientCode_.set (std::move (x));
   }
 
 
@@ -258,9 +258,9 @@ namespace oo_2_0
   }
 
   void CloudCover::
-  CategoryCode (::std::auto_ptr< CategoryCode_type > x)
+  CategoryCode (::std::unique_ptr< CategoryCode_type > x)
   {
-    this->CategoryCode_.set (x);
+    this->CategoryCode_.set (std::move (x));
   }
 
   const CloudCover::BaseDimension_optional& CloudCover::
@@ -288,9 +288,9 @@ namespace oo_2_0
   }
 
   void CloudCover::
-  BaseDimension (::std::auto_ptr< BaseDimension_type > x)
+  BaseDimension (::std::unique_ptr< BaseDimension_type > x)
   {
-    this->BaseDimension_.set (x);
+    this->BaseDimension_.set (std::move (x));
   }
 
   const CloudCover::TopDimension_optional& CloudCover::
@@ -318,9 +318,9 @@ namespace oo_2_0
   }
 
   void CloudCover::
-  TopDimension (::std::auto_ptr< TopDimension_type > x)
+  TopDimension (::std::unique_ptr< TopDimension_type > x)
   {
-    this->TopDimension_.set (x);
+    this->TopDimension_.set (std::move (x));
   }
 
   const CloudCover::AverageCoverageCode_optional& CloudCover::
@@ -348,9 +348,9 @@ namespace oo_2_0
   }
 
   void CloudCover::
-  AverageCoverageCode (::std::auto_ptr< AverageCoverageCode_type > x)
+  AverageCoverageCode (::std::unique_ptr< AverageCoverageCode_type > x)
   {
-    this->AverageCoverageCode_.set (x);
+    this->AverageCoverageCode_.set (std::move (x));
   }
 
   const CloudCover::LightRefractionRatio_optional& CloudCover::
@@ -378,9 +378,9 @@ namespace oo_2_0
   }
 
   void CloudCover::
-  LightRefractionRatio (::std::auto_ptr< LightRefractionRatio_type > x)
+  LightRefractionRatio (::std::unique_ptr< LightRefractionRatio_type > x)
   {
-    this->LightRefractionRatio_.set (x);
+    this->LightRefractionRatio_.set (std::move (x));
   }
 
 
@@ -412,9 +412,9 @@ namespace oo_2_0
   }
 
   void Icing::
-  CategoryCode (::std::auto_ptr< CategoryCode_type > x)
+  CategoryCode (::std::unique_ptr< CategoryCode_type > x)
   {
-    this->CategoryCode_.set (x);
+    this->CategoryCode_.set (std::move (x));
   }
 
   const Icing::SeverityQualifierCode_optional& Icing::
@@ -442,9 +442,9 @@ namespace oo_2_0
   }
 
   void Icing::
-  SeverityQualifierCode (::std::auto_ptr< SeverityQualifierCode_type > x)
+  SeverityQualifierCode (::std::unique_ptr< SeverityQualifierCode_type > x)
   {
-    this->SeverityQualifierCode_.set (x);
+    this->SeverityQualifierCode_.set (std::move (x));
   }
 
 
@@ -476,9 +476,9 @@ namespace oo_2_0
   }
 
   void Light::
-  CategoryCode (::std::auto_ptr< CategoryCode_type > x)
+  CategoryCode (::std::unique_ptr< CategoryCode_type > x)
   {
-    this->CategoryCode_.set (x);
+    this->CategoryCode_.set (std::move (x));
   }
 
   const Light::UpDatetime_optional& Light::
@@ -506,9 +506,9 @@ namespace oo_2_0
   }
 
   void Light::
-  UpDatetime (::std::auto_ptr< UpDatetime_type > x)
+  UpDatetime (::std::unique_ptr< UpDatetime_type > x)
   {
-    this->UpDatetime_.set (x);
+    this->UpDatetime_.set (std::move (x));
   }
 
   const Light::DownDatetime_optional& Light::
@@ -536,9 +536,9 @@ namespace oo_2_0
   }
 
   void Light::
-  DownDatetime (::std::auto_ptr< DownDatetime_type > x)
+  DownDatetime (::std::unique_ptr< DownDatetime_type > x)
   {
-    this->DownDatetime_.set (x);
+    this->DownDatetime_.set (std::move (x));
   }
 
   const Light::MoonPhaseCode_optional& Light::
@@ -566,9 +566,9 @@ namespace oo_2_0
   }
 
   void Light::
-  MoonPhaseCode (::std::auto_ptr< MoonPhaseCode_type > x)
+  MoonPhaseCode (::std::unique_ptr< MoonPhaseCode_type > x)
   {
-    this->MoonPhaseCode_.set (x);
+    this->MoonPhaseCode_.set (std::move (x));
   }
 
 
@@ -594,9 +594,9 @@ namespace oo_2_0
   }
 
   void Precipitation::
-  CategoryCode (::std::auto_ptr< CategoryCode_type > x)
+  CategoryCode (::std::unique_ptr< CategoryCode_type > x)
   {
-    this->CategoryCode_.set (x);
+    this->CategoryCode_.set (std::move (x));
   }
 
   const Precipitation::Rate_optional& Precipitation::
@@ -624,9 +624,9 @@ namespace oo_2_0
   }
 
   void Precipitation::
-  Rate (::std::auto_ptr< Rate_type > x)
+  Rate (::std::unique_ptr< Rate_type > x)
   {
-    this->Rate_.set (x);
+    this->Rate_.set (std::move (x));
   }
 
 
@@ -658,9 +658,9 @@ namespace oo_2_0
   }
 
   void Visibility::
-  CategoryCode (::std::auto_ptr< CategoryCode_type > x)
+  CategoryCode (::std::unique_ptr< CategoryCode_type > x)
   {
-    this->CategoryCode_.set (x);
+    this->CategoryCode_.set (std::move (x));
   }
 
   const Visibility::RangeDimension_type& Visibility::
@@ -682,9 +682,9 @@ namespace oo_2_0
   }
 
   void Visibility::
-  RangeDimension (::std::auto_ptr< RangeDimension_type > x)
+  RangeDimension (::std::unique_ptr< RangeDimension_type > x)
   {
-    this->RangeDimension_.set (x);
+    this->RangeDimension_.set (std::move (x));
   }
 
 
@@ -716,9 +716,9 @@ namespace oo_2_0
   }
 
   void Wind::
-  CategoryCode (::std::auto_ptr< CategoryCode_type > x)
+  CategoryCode (::std::unique_ptr< CategoryCode_type > x)
   {
-    this->CategoryCode_.set (x);
+    this->CategoryCode_.set (std::move (x));
   }
 
   const Wind::AirStabilityCategoryCode_optional& Wind::
@@ -746,9 +746,9 @@ namespace oo_2_0
   }
 
   void Wind::
-  AirStabilityCategoryCode (::std::auto_ptr< AirStabilityCategoryCode_type > x)
+  AirStabilityCategoryCode (::std::unique_ptr< AirStabilityCategoryCode_type > x)
   {
-    this->AirStabilityCategoryCode_.set (x);
+    this->AirStabilityCategoryCode_.set (std::move (x));
   }
 
   const Wind::AltitudeLayerCode_optional& Wind::
@@ -776,9 +776,9 @@ namespace oo_2_0
   }
 
   void Wind::
-  AltitudeLayerCode (::std::auto_ptr< AltitudeLayerCode_type > x)
+  AltitudeLayerCode (::std::unique_ptr< AltitudeLayerCode_type > x)
   {
-    this->AltitudeLayerCode_.set (x);
+    this->AltitudeLayerCode_.set (std::move (x));
   }
 
   const Wind::DirectionAngle_optional& Wind::
@@ -806,9 +806,9 @@ namespace oo_2_0
   }
 
   void Wind::
-  DirectionAngle (::std::auto_ptr< DirectionAngle_type > x)
+  DirectionAngle (::std::unique_ptr< DirectionAngle_type > x)
   {
-    this->DirectionAngle_.set (x);
+    this->DirectionAngle_.set (std::move (x));
   }
 
   const Wind::EffectiveDownwindDirectionAngle_optional& Wind::
@@ -836,9 +836,9 @@ namespace oo_2_0
   }
 
   void Wind::
-  EffectiveDownwindDirectionAngle (::std::auto_ptr< EffectiveDownwindDirectionAngle_type > x)
+  EffectiveDownwindDirectionAngle (::std::unique_ptr< EffectiveDownwindDirectionAngle_type > x)
   {
-    this->EffectiveDownwindDirectionAngle_.set (x);
+    this->EffectiveDownwindDirectionAngle_.set (std::move (x));
   }
 
   const Wind::SpeedRate_optional& Wind::
@@ -866,9 +866,9 @@ namespace oo_2_0
   }
 
   void Wind::
-  SpeedRate (::std::auto_ptr< SpeedRate_type > x)
+  SpeedRate (::std::unique_ptr< SpeedRate_type > x)
   {
-    this->SpeedRate_.set (x);
+    this->SpeedRate_.set (std::move (x));
   }
 
   const Wind::NuclearYieldQualifierCode_optional& Wind::
@@ -896,9 +896,9 @@ namespace oo_2_0
   }
 
   void Wind::
-  NuclearYieldQualifierCode (::std::auto_ptr< NuclearYieldQualifierCode_type > x)
+  NuclearYieldQualifierCode (::std::unique_ptr< NuclearYieldQualifierCode_type > x)
   {
-    this->NuclearYieldQualifierCode_.set (x);
+    this->NuclearYieldQualifierCode_.set (std::move (x));
   }
 }
 
@@ -938,6 +938,13 @@ namespace oo_2_0
       ::xsd::cxx::tree::facet::none, 0UL
     }
   };
+
+  AngleOptionalTypeRangeAngle7_4::
+  AngleOptionalTypeRangeAngle7_4 ()
+  : ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal > ()
+  {
+    this->_facet_table (_xsd_AngleOptionalTypeRangeAngle7_4_facet_table);
+  }
 
   AngleOptionalTypeRangeAngle7_4::
   AngleOptionalTypeRangeAngle7_4 (const ::xml_schema::decimal& _xsd_decimal_base)
@@ -1106,6 +1113,13 @@ namespace oo_2_0
   };
 
   DimensionOptionalType12_3::
+  DimensionOptionalType12_3 ()
+  : ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal > ()
+  {
+    this->_facet_table (_xsd_DimensionOptionalType12_3_facet_table);
+  }
+
+  DimensionOptionalType12_3::
   DimensionOptionalType12_3 (const ::xml_schema::decimal& _xsd_decimal_base)
   : ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal > (_xsd_decimal_base)
   {
@@ -1188,6 +1202,13 @@ namespace oo_2_0
       ::xsd::cxx::tree::facet::none, 0UL
     }
   };
+
+  DimensionMandatoryType12_3::
+  DimensionMandatoryType12_3 ()
+  : ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal > ()
+  {
+    this->_facet_table (_xsd_DimensionMandatoryType12_3_facet_table);
+  }
 
   DimensionMandatoryType12_3::
   DimensionMandatoryType12_3 (const ::xml_schema::decimal& _xsd_decimal_base)
@@ -1274,6 +1295,13 @@ namespace oo_2_0
   };
 
   QuantityOptionalType8_4::
+  QuantityOptionalType8_4 ()
+  : ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal > ()
+  {
+    this->_facet_table (_xsd_QuantityOptionalType8_4_facet_table);
+  }
+
+  QuantityOptionalType8_4::
   QuantityOptionalType8_4 (const ::xml_schema::decimal& _xsd_decimal_base)
   : ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal > (_xsd_decimal_base)
   {
@@ -1356,6 +1384,13 @@ namespace oo_2_0
       ::xsd::cxx::tree::facet::none, 0UL
     }
   };
+
+  RateOptionalType4_1::
+  RateOptionalType4_1 ()
+  : ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal > ()
+  {
+    this->_facet_table (_xsd_RateOptionalType4_1_facet_table);
+  }
 
   RateOptionalType4_1::
   RateOptionalType4_1 (const ::xml_schema::decimal& _xsd_decimal_base)
@@ -1442,6 +1477,13 @@ namespace oo_2_0
   };
 
   RateOptionalType8_4::
+  RateOptionalType8_4 ()
+  : ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal > ()
+  {
+    this->_facet_table (_xsd_RateOptionalType8_4_facet_table);
+  }
+
+  RateOptionalType8_4::
   RateOptionalType8_4 (const ::xml_schema::decimal& _xsd_decimal_base)
   : ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal > (_xsd_decimal_base)
   {
@@ -1524,6 +1566,13 @@ namespace oo_2_0
       ::xsd::cxx::tree::facet::none, 0UL
     }
   };
+
+  RatioOptionalTypeRangeRatio6_5::
+  RatioOptionalTypeRangeRatio6_5 ()
+  : ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal > ()
+  {
+    this->_facet_table (_xsd_RatioOptionalTypeRangeRatio6_5_facet_table);
+  }
 
   RatioOptionalTypeRangeRatio6_5::
   RatioOptionalTypeRangeRatio6_5 (const ::xml_schema::decimal& _xsd_decimal_base)
@@ -1610,6 +1659,13 @@ namespace oo_2_0
   };
 
   RatioOptionalTypeRangeRatio7_6::
+  RatioOptionalTypeRangeRatio7_6 ()
+  : ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal > ()
+  {
+    this->_facet_table (_xsd_RatioOptionalTypeRangeRatio7_6_facet_table);
+  }
+
+  RatioOptionalTypeRangeRatio7_6::
   RatioOptionalTypeRangeRatio7_6 (const ::xml_schema::decimal& _xsd_decimal_base)
   : ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal > (_xsd_decimal_base)
   {
@@ -1692,6 +1748,13 @@ namespace oo_2_0
       ::xsd::cxx::tree::facet::none, 0UL
     }
   };
+
+  TemperatureTypeRangeTemperature5_1::
+  TemperatureTypeRangeTemperature5_1 ()
+  : ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal > ()
+  {
+    this->_facet_table (_xsd_TemperatureTypeRangeTemperature5_1_facet_table);
+  }
 
   TemperatureTypeRangeTemperature5_1::
   TemperatureTypeRangeTemperature5_1 (const ::xml_schema::decimal& _xsd_decimal_base)
@@ -1817,7 +1880,7 @@ namespace oo_2_0
       // HumidityRatio
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "HumidityRatio",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -1828,7 +1891,7 @@ namespace oo_2_0
         {
           if (!this->HumidityRatio_)
           {
-            ::std::auto_ptr< HumidityRatio_type > r (
+            ::std::unique_ptr< HumidityRatio_type > r (
               dynamic_cast< HumidityRatio_type* > (tmp.get ()));
 
             if (r.get ())
@@ -1836,7 +1899,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->HumidityRatio_.set (r);
+            this->HumidityRatio_.set (::std::move (r));
             continue;
           }
         }
@@ -1845,7 +1908,7 @@ namespace oo_2_0
       // InversionLayerCode
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "InversionLayerCode",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -1856,7 +1919,7 @@ namespace oo_2_0
         {
           if (!this->InversionLayerCode_)
           {
-            ::std::auto_ptr< InversionLayerCode_type > r (
+            ::std::unique_ptr< InversionLayerCode_type > r (
               dynamic_cast< InversionLayerCode_type* > (tmp.get ()));
 
             if (r.get ())
@@ -1864,7 +1927,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->InversionLayerCode_.set (r);
+            this->InversionLayerCode_.set (::std::move (r));
             continue;
           }
         }
@@ -1873,7 +1936,7 @@ namespace oo_2_0
       // PressureQuantity
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "PressureQuantity",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -1884,7 +1947,7 @@ namespace oo_2_0
         {
           if (!this->PressureQuantity_)
           {
-            ::std::auto_ptr< PressureQuantity_type > r (
+            ::std::unique_ptr< PressureQuantity_type > r (
               dynamic_cast< PressureQuantity_type* > (tmp.get ()));
 
             if (r.get ())
@@ -1892,7 +1955,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->PressureQuantity_.set (r);
+            this->PressureQuantity_.set (::std::move (r));
             continue;
           }
         }
@@ -1901,7 +1964,7 @@ namespace oo_2_0
       // Temperature
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Temperature",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -1912,7 +1975,7 @@ namespace oo_2_0
         {
           if (!this->Temperature_)
           {
-            ::std::auto_ptr< Temperature_type > r (
+            ::std::unique_ptr< Temperature_type > r (
               dynamic_cast< Temperature_type* > (tmp.get ()));
 
             if (r.get ())
@@ -1920,7 +1983,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Temperature_.set (r);
+            this->Temperature_.set (::std::move (r));
             continue;
           }
         }
@@ -1929,7 +1992,7 @@ namespace oo_2_0
       // TemperatureGradientCode
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "TemperatureGradientCode",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -1940,7 +2003,7 @@ namespace oo_2_0
         {
           if (!this->TemperatureGradientCode_)
           {
-            ::std::auto_ptr< TemperatureGradientCode_type > r (
+            ::std::unique_ptr< TemperatureGradientCode_type > r (
               dynamic_cast< TemperatureGradientCode_type* > (tmp.get ()));
 
             if (r.get ())
@@ -1948,7 +2011,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->TemperatureGradientCode_.set (r);
+            this->TemperatureGradientCode_.set (::std::move (r));
             continue;
           }
         }
@@ -2102,6 +2165,17 @@ namespace oo_2_0
   //
 
   CloudCover::
+  CloudCover ()
+  : ::xml_schema::type (),
+    CategoryCode_ (this),
+    BaseDimension_ (this),
+    TopDimension_ (this),
+    AverageCoverageCode_ (this),
+    LightRefractionRatio_ (this)
+  {
+  }
+
+  CloudCover::
   CloudCover (const CategoryCode_type& CategoryCode)
   : ::xml_schema::type (),
     CategoryCode_ (CategoryCode, this),
@@ -2113,9 +2187,9 @@ namespace oo_2_0
   }
 
   CloudCover::
-  CloudCover (::std::auto_ptr< CategoryCode_type > CategoryCode)
+  CloudCover (::std::unique_ptr< CategoryCode_type > CategoryCode)
   : ::xml_schema::type (),
-    CategoryCode_ (CategoryCode, this),
+    CategoryCode_ (std::move (CategoryCode), this),
     BaseDimension_ (this),
     TopDimension_ (this),
     AverageCoverageCode_ (this),
@@ -2167,7 +2241,7 @@ namespace oo_2_0
       // CategoryCode
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CategoryCode",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -2178,7 +2252,7 @@ namespace oo_2_0
         {
           if (!CategoryCode_.present ())
           {
-            ::std::auto_ptr< CategoryCode_type > r (
+            ::std::unique_ptr< CategoryCode_type > r (
               dynamic_cast< CategoryCode_type* > (tmp.get ()));
 
             if (r.get ())
@@ -2186,7 +2260,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CategoryCode_.set (r);
+            this->CategoryCode_.set (::std::move (r));
             continue;
           }
         }
@@ -2195,7 +2269,7 @@ namespace oo_2_0
       // BaseDimension
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "BaseDimension",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -2206,7 +2280,7 @@ namespace oo_2_0
         {
           if (!this->BaseDimension_)
           {
-            ::std::auto_ptr< BaseDimension_type > r (
+            ::std::unique_ptr< BaseDimension_type > r (
               dynamic_cast< BaseDimension_type* > (tmp.get ()));
 
             if (r.get ())
@@ -2214,7 +2288,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->BaseDimension_.set (r);
+            this->BaseDimension_.set (::std::move (r));
             continue;
           }
         }
@@ -2223,7 +2297,7 @@ namespace oo_2_0
       // TopDimension
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "TopDimension",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -2234,7 +2308,7 @@ namespace oo_2_0
         {
           if (!this->TopDimension_)
           {
-            ::std::auto_ptr< TopDimension_type > r (
+            ::std::unique_ptr< TopDimension_type > r (
               dynamic_cast< TopDimension_type* > (tmp.get ()));
 
             if (r.get ())
@@ -2242,7 +2316,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->TopDimension_.set (r);
+            this->TopDimension_.set (::std::move (r));
             continue;
           }
         }
@@ -2251,7 +2325,7 @@ namespace oo_2_0
       // AverageCoverageCode
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AverageCoverageCode",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -2262,7 +2336,7 @@ namespace oo_2_0
         {
           if (!this->AverageCoverageCode_)
           {
-            ::std::auto_ptr< AverageCoverageCode_type > r (
+            ::std::unique_ptr< AverageCoverageCode_type > r (
               dynamic_cast< AverageCoverageCode_type* > (tmp.get ()));
 
             if (r.get ())
@@ -2270,7 +2344,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AverageCoverageCode_.set (r);
+            this->AverageCoverageCode_.set (::std::move (r));
             continue;
           }
         }
@@ -2279,7 +2353,7 @@ namespace oo_2_0
       // LightRefractionRatio
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "LightRefractionRatio",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -2290,7 +2364,7 @@ namespace oo_2_0
         {
           if (!this->LightRefractionRatio_)
           {
-            ::std::auto_ptr< LightRefractionRatio_type > r (
+            ::std::unique_ptr< LightRefractionRatio_type > r (
               dynamic_cast< LightRefractionRatio_type* > (tmp.get ()));
 
             if (r.get ())
@@ -2298,7 +2372,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->LightRefractionRatio_.set (r);
+            this->LightRefractionRatio_.set (::std::move (r));
             continue;
           }
         }
@@ -2494,7 +2568,7 @@ namespace oo_2_0
       // CategoryCode
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CategoryCode",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -2505,7 +2579,7 @@ namespace oo_2_0
         {
           if (!this->CategoryCode_)
           {
-            ::std::auto_ptr< CategoryCode_type > r (
+            ::std::unique_ptr< CategoryCode_type > r (
               dynamic_cast< CategoryCode_type* > (tmp.get ()));
 
             if (r.get ())
@@ -2513,7 +2587,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CategoryCode_.set (r);
+            this->CategoryCode_.set (::std::move (r));
             continue;
           }
         }
@@ -2522,7 +2596,7 @@ namespace oo_2_0
       // SeverityQualifierCode
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "SeverityQualifierCode",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -2533,7 +2607,7 @@ namespace oo_2_0
         {
           if (!this->SeverityQualifierCode_)
           {
-            ::std::auto_ptr< SeverityQualifierCode_type > r (
+            ::std::unique_ptr< SeverityQualifierCode_type > r (
               dynamic_cast< SeverityQualifierCode_type* > (tmp.get ()));
 
             if (r.get ())
@@ -2541,7 +2615,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->SeverityQualifierCode_.set (r);
+            this->SeverityQualifierCode_.set (::std::move (r));
             continue;
           }
         }
@@ -2689,7 +2763,7 @@ namespace oo_2_0
       // CategoryCode
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CategoryCode",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -2700,7 +2774,7 @@ namespace oo_2_0
         {
           if (!this->CategoryCode_)
           {
-            ::std::auto_ptr< CategoryCode_type > r (
+            ::std::unique_ptr< CategoryCode_type > r (
               dynamic_cast< CategoryCode_type* > (tmp.get ()));
 
             if (r.get ())
@@ -2708,7 +2782,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CategoryCode_.set (r);
+            this->CategoryCode_.set (::std::move (r));
             continue;
           }
         }
@@ -2717,7 +2791,7 @@ namespace oo_2_0
       // UpDatetime
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "UpDatetime",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -2728,7 +2802,7 @@ namespace oo_2_0
         {
           if (!this->UpDatetime_)
           {
-            ::std::auto_ptr< UpDatetime_type > r (
+            ::std::unique_ptr< UpDatetime_type > r (
               dynamic_cast< UpDatetime_type* > (tmp.get ()));
 
             if (r.get ())
@@ -2736,7 +2810,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->UpDatetime_.set (r);
+            this->UpDatetime_.set (::std::move (r));
             continue;
           }
         }
@@ -2745,7 +2819,7 @@ namespace oo_2_0
       // DownDatetime
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "DownDatetime",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -2756,7 +2830,7 @@ namespace oo_2_0
         {
           if (!this->DownDatetime_)
           {
-            ::std::auto_ptr< DownDatetime_type > r (
+            ::std::unique_ptr< DownDatetime_type > r (
               dynamic_cast< DownDatetime_type* > (tmp.get ()));
 
             if (r.get ())
@@ -2764,7 +2838,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->DownDatetime_.set (r);
+            this->DownDatetime_.set (::std::move (r));
             continue;
           }
         }
@@ -2773,7 +2847,7 @@ namespace oo_2_0
       // MoonPhaseCode
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "MoonPhaseCode",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -2784,7 +2858,7 @@ namespace oo_2_0
         {
           if (!this->MoonPhaseCode_)
           {
-            ::std::auto_ptr< MoonPhaseCode_type > r (
+            ::std::unique_ptr< MoonPhaseCode_type > r (
               dynamic_cast< MoonPhaseCode_type* > (tmp.get ()));
 
             if (r.get ())
@@ -2792,7 +2866,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->MoonPhaseCode_.set (r);
+            this->MoonPhaseCode_.set (::std::move (r));
             continue;
           }
         }
@@ -2927,6 +3001,14 @@ namespace oo_2_0
   //
 
   Precipitation::
+  Precipitation ()
+  : ::xml_schema::type (),
+    CategoryCode_ (this),
+    Rate_ (this)
+  {
+  }
+
+  Precipitation::
   Precipitation (const CategoryCode_type& CategoryCode)
   : ::xml_schema::type (),
     CategoryCode_ (CategoryCode, this),
@@ -2935,9 +3017,9 @@ namespace oo_2_0
   }
 
   Precipitation::
-  Precipitation (::std::auto_ptr< CategoryCode_type > CategoryCode)
+  Precipitation (::std::unique_ptr< CategoryCode_type > CategoryCode)
   : ::xml_schema::type (),
-    CategoryCode_ (CategoryCode, this),
+    CategoryCode_ (std::move (CategoryCode), this),
     Rate_ (this)
   {
   }
@@ -2980,7 +3062,7 @@ namespace oo_2_0
       // CategoryCode
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CategoryCode",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -2991,7 +3073,7 @@ namespace oo_2_0
         {
           if (!CategoryCode_.present ())
           {
-            ::std::auto_ptr< CategoryCode_type > r (
+            ::std::unique_ptr< CategoryCode_type > r (
               dynamic_cast< CategoryCode_type* > (tmp.get ()));
 
             if (r.get ())
@@ -2999,7 +3081,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CategoryCode_.set (r);
+            this->CategoryCode_.set (::std::move (r));
             continue;
           }
         }
@@ -3008,7 +3090,7 @@ namespace oo_2_0
       // Rate
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Rate",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -3019,7 +3101,7 @@ namespace oo_2_0
         {
           if (!this->Rate_)
           {
-            ::std::auto_ptr< Rate_type > r (
+            ::std::unique_ptr< Rate_type > r (
               dynamic_cast< Rate_type* > (tmp.get ()));
 
             if (r.get ())
@@ -3027,7 +3109,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Rate_.set (r);
+            this->Rate_.set (::std::move (r));
             continue;
           }
         }
@@ -3121,6 +3203,14 @@ namespace oo_2_0
   //
 
   Visibility::
+  Visibility ()
+  : ::xml_schema::type (),
+    CategoryCode_ (this),
+    RangeDimension_ (this)
+  {
+  }
+
+  Visibility::
   Visibility (const RangeDimension_type& RangeDimension)
   : ::xml_schema::type (),
     CategoryCode_ (this),
@@ -3129,10 +3219,10 @@ namespace oo_2_0
   }
 
   Visibility::
-  Visibility (::std::auto_ptr< RangeDimension_type > RangeDimension)
+  Visibility (::std::unique_ptr< RangeDimension_type > RangeDimension)
   : ::xml_schema::type (),
     CategoryCode_ (this),
-    RangeDimension_ (RangeDimension, this)
+    RangeDimension_ (std::move (RangeDimension), this)
   {
   }
 
@@ -3174,7 +3264,7 @@ namespace oo_2_0
       // CategoryCode
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CategoryCode",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -3185,7 +3275,7 @@ namespace oo_2_0
         {
           if (!this->CategoryCode_)
           {
-            ::std::auto_ptr< CategoryCode_type > r (
+            ::std::unique_ptr< CategoryCode_type > r (
               dynamic_cast< CategoryCode_type* > (tmp.get ()));
 
             if (r.get ())
@@ -3193,7 +3283,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CategoryCode_.set (r);
+            this->CategoryCode_.set (::std::move (r));
             continue;
           }
         }
@@ -3202,7 +3292,7 @@ namespace oo_2_0
       // RangeDimension
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "RangeDimension",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -3213,7 +3303,7 @@ namespace oo_2_0
         {
           if (!RangeDimension_.present ())
           {
-            ::std::auto_ptr< RangeDimension_type > r (
+            ::std::unique_ptr< RangeDimension_type > r (
               dynamic_cast< RangeDimension_type* > (tmp.get ()));
 
             if (r.get ())
@@ -3221,7 +3311,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->RangeDimension_.set (r);
+            this->RangeDimension_.set (::std::move (r));
             continue;
           }
         }
@@ -3375,7 +3465,7 @@ namespace oo_2_0
       // CategoryCode
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CategoryCode",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -3386,7 +3476,7 @@ namespace oo_2_0
         {
           if (!this->CategoryCode_)
           {
-            ::std::auto_ptr< CategoryCode_type > r (
+            ::std::unique_ptr< CategoryCode_type > r (
               dynamic_cast< CategoryCode_type* > (tmp.get ()));
 
             if (r.get ())
@@ -3394,7 +3484,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CategoryCode_.set (r);
+            this->CategoryCode_.set (::std::move (r));
             continue;
           }
         }
@@ -3403,7 +3493,7 @@ namespace oo_2_0
       // AirStabilityCategoryCode
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AirStabilityCategoryCode",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -3414,7 +3504,7 @@ namespace oo_2_0
         {
           if (!this->AirStabilityCategoryCode_)
           {
-            ::std::auto_ptr< AirStabilityCategoryCode_type > r (
+            ::std::unique_ptr< AirStabilityCategoryCode_type > r (
               dynamic_cast< AirStabilityCategoryCode_type* > (tmp.get ()));
 
             if (r.get ())
@@ -3422,7 +3512,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AirStabilityCategoryCode_.set (r);
+            this->AirStabilityCategoryCode_.set (::std::move (r));
             continue;
           }
         }
@@ -3431,7 +3521,7 @@ namespace oo_2_0
       // AltitudeLayerCode
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AltitudeLayerCode",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -3442,7 +3532,7 @@ namespace oo_2_0
         {
           if (!this->AltitudeLayerCode_)
           {
-            ::std::auto_ptr< AltitudeLayerCode_type > r (
+            ::std::unique_ptr< AltitudeLayerCode_type > r (
               dynamic_cast< AltitudeLayerCode_type* > (tmp.get ()));
 
             if (r.get ())
@@ -3450,7 +3540,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AltitudeLayerCode_.set (r);
+            this->AltitudeLayerCode_.set (::std::move (r));
             continue;
           }
         }
@@ -3459,7 +3549,7 @@ namespace oo_2_0
       // DirectionAngle
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "DirectionAngle",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -3470,7 +3560,7 @@ namespace oo_2_0
         {
           if (!this->DirectionAngle_)
           {
-            ::std::auto_ptr< DirectionAngle_type > r (
+            ::std::unique_ptr< DirectionAngle_type > r (
               dynamic_cast< DirectionAngle_type* > (tmp.get ()));
 
             if (r.get ())
@@ -3478,7 +3568,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->DirectionAngle_.set (r);
+            this->DirectionAngle_.set (::std::move (r));
             continue;
           }
         }
@@ -3487,7 +3577,7 @@ namespace oo_2_0
       // EffectiveDownwindDirectionAngle
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "EffectiveDownwindDirectionAngle",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -3498,7 +3588,7 @@ namespace oo_2_0
         {
           if (!this->EffectiveDownwindDirectionAngle_)
           {
-            ::std::auto_ptr< EffectiveDownwindDirectionAngle_type > r (
+            ::std::unique_ptr< EffectiveDownwindDirectionAngle_type > r (
               dynamic_cast< EffectiveDownwindDirectionAngle_type* > (tmp.get ()));
 
             if (r.get ())
@@ -3506,7 +3596,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->EffectiveDownwindDirectionAngle_.set (r);
+            this->EffectiveDownwindDirectionAngle_.set (::std::move (r));
             continue;
           }
         }
@@ -3515,7 +3605,7 @@ namespace oo_2_0
       // SpeedRate
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "SpeedRate",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -3526,7 +3616,7 @@ namespace oo_2_0
         {
           if (!this->SpeedRate_)
           {
-            ::std::auto_ptr< SpeedRate_type > r (
+            ::std::unique_ptr< SpeedRate_type > r (
               dynamic_cast< SpeedRate_type* > (tmp.get ()));
 
             if (r.get ())
@@ -3534,7 +3624,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->SpeedRate_.set (r);
+            this->SpeedRate_.set (::std::move (r));
             continue;
           }
         }
@@ -3543,7 +3633,7 @@ namespace oo_2_0
       // NuclearYieldQualifierCode
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "NuclearYieldQualifierCode",
             "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0",
@@ -3554,7 +3644,7 @@ namespace oo_2_0
         {
           if (!this->NuclearYieldQualifierCode_)
           {
-            ::std::auto_ptr< NuclearYieldQualifierCode_type > r (
+            ::std::unique_ptr< NuclearYieldQualifierCode_type > r (
               dynamic_cast< NuclearYieldQualifierCode_type* > (tmp.get ()));
 
             if (r.get ())
@@ -3562,7 +3652,7 @@ namespace oo_2_0
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->NuclearYieldQualifierCode_.set (r);
+            this->NuclearYieldQualifierCode_.set (::std::move (r));
             continue;
           }
         }

@@ -64,9 +64,9 @@ namespace msdl_1
   }
 
   void AnchorPointType::
-  AnchorChoice (::std::auto_ptr< AnchorChoice_type > x)
+  AnchorChoice (::std::unique_ptr< AnchorChoice_type > x)
   {
-    this->AnchorChoice_.set (x);
+    this->AnchorChoice_.set (std::move (x));
   }
 
   const AnchorPointType::Anchor_type& AnchorPointType::
@@ -88,9 +88,9 @@ namespace msdl_1
   }
 
   void AnchorPointType::
-  Anchor (::std::auto_ptr< Anchor_type > x)
+  Anchor (::std::unique_ptr< Anchor_type > x)
   {
-    this->Anchor_.set (x);
+    this->Anchor_.set (std::move (x));
   }
 
 
@@ -144,9 +144,9 @@ namespace msdl_1
   }
 
   void AnchorType::
-  Location (::std::auto_ptr< Location_type > x)
+  Location (::std::unique_ptr< Location_type > x)
   {
-    this->Location_.set (x);
+    this->Location_.set (std::move (x));
   }
 
   const AnchorType::PointSymbolHandle_optional& AnchorType::
@@ -174,9 +174,9 @@ namespace msdl_1
   }
 
   void AnchorType::
-  PointSymbolHandle (::std::auto_ptr< PointSymbolHandle_type > x)
+  PointSymbolHandle (::std::unique_ptr< PointSymbolHandle_type > x)
   {
-    this->PointSymbolHandle_.set (x);
+    this->PointSymbolHandle_.set (std::move (x));
   }
 
 
@@ -208,9 +208,9 @@ namespace msdl_1
   }
 
   void AreaSymbolModifiersType::
-  Echelon (::std::auto_ptr< Echelon_type > x)
+  Echelon (::std::unique_ptr< Echelon_type > x)
   {
-    this->Echelon_.set (x);
+    this->Echelon_.set (std::move (x));
   }
 
   const AreaSymbolModifiersType::AdditionalInfo_optional& AreaSymbolModifiersType::
@@ -238,9 +238,9 @@ namespace msdl_1
   }
 
   void AreaSymbolModifiersType::
-  AdditionalInfo (::std::auto_ptr< AdditionalInfo_type > x)
+  AdditionalInfo (::std::unique_ptr< AdditionalInfo_type > x)
   {
-    this->AdditionalInfo_.set (x);
+    this->AdditionalInfo_.set (std::move (x));
   }
 
   const AreaSymbolModifiersType::AdditionalInfo1_optional& AreaSymbolModifiersType::
@@ -268,9 +268,9 @@ namespace msdl_1
   }
 
   void AreaSymbolModifiersType::
-  AdditionalInfo1 (::std::auto_ptr< AdditionalInfo1_type > x)
+  AdditionalInfo1 (::std::unique_ptr< AdditionalInfo1_type > x)
   {
-    this->AdditionalInfo1_.set (x);
+    this->AdditionalInfo1_.set (std::move (x));
   }
 
   const AreaSymbolModifiersType::AdditionalInfo2_optional& AreaSymbolModifiersType::
@@ -298,9 +298,9 @@ namespace msdl_1
   }
 
   void AreaSymbolModifiersType::
-  AdditionalInfo2 (::std::auto_ptr< AdditionalInfo2_type > x)
+  AdditionalInfo2 (::std::unique_ptr< AdditionalInfo2_type > x)
   {
-    this->AdditionalInfo2_.set (x);
+    this->AdditionalInfo2_.set (std::move (x));
   }
 
   const AreaSymbolModifiersType::UniqueDesignation_optional& AreaSymbolModifiersType::
@@ -328,9 +328,9 @@ namespace msdl_1
   }
 
   void AreaSymbolModifiersType::
-  UniqueDesignation (::std::auto_ptr< UniqueDesignation_type > x)
+  UniqueDesignation (::std::unique_ptr< UniqueDesignation_type > x)
   {
-    this->UniqueDesignation_.set (x);
+    this->UniqueDesignation_.set (std::move (x));
   }
 
   const AreaSymbolModifiersType::DateTimeGroup_optional& AreaSymbolModifiersType::
@@ -358,9 +358,9 @@ namespace msdl_1
   }
 
   void AreaSymbolModifiersType::
-  DateTimeGroup (::std::auto_ptr< DateTimeGroup_type > x)
+  DateTimeGroup (::std::unique_ptr< DateTimeGroup_type > x)
   {
-    this->DateTimeGroup_.set (x);
+    this->DateTimeGroup_.set (std::move (x));
   }
 
   const AreaSymbolModifiersType::DateTimeGroup1_optional& AreaSymbolModifiersType::
@@ -388,9 +388,9 @@ namespace msdl_1
   }
 
   void AreaSymbolModifiersType::
-  DateTimeGroup1 (::std::auto_ptr< DateTimeGroup1_type > x)
+  DateTimeGroup1 (::std::unique_ptr< DateTimeGroup1_type > x)
   {
-    this->DateTimeGroup1_.set (x);
+    this->DateTimeGroup1_.set (std::move (x));
   }
 
 
@@ -416,9 +416,9 @@ namespace msdl_1
   }
 
   void AssociatedOverlaysType::
-  OverlayHandles (::std::auto_ptr< OverlayHandles_type > x)
+  OverlayHandles (::std::unique_ptr< OverlayHandles_type > x)
   {
-    this->OverlayHandles_.set (x);
+    this->OverlayHandles_.set (std::move (x));
   }
 
   const AssociatedOverlaysType::SourceOverlayType_optional& AssociatedOverlaysType::
@@ -446,9 +446,9 @@ namespace msdl_1
   }
 
   void AssociatedOverlaysType::
-  SourceOverlayType (::std::auto_ptr< SourceOverlayType_type > x)
+  SourceOverlayType (::std::unique_ptr< SourceOverlayType_type > x)
   {
-    this->SourceOverlayType_.set (x);
+    this->SourceOverlayType_.set (std::move (x));
   }
 
 
@@ -496,9 +496,9 @@ namespace msdl_1
   }
 
   void AssociationType::
-  AffiliateHandle (::std::auto_ptr< AffiliateHandle_type > x)
+  AffiliateHandle (::std::unique_ptr< AffiliateHandle_type > x)
   {
-    this->AffiliateHandle_.set (x);
+    this->AffiliateHandle_.set (std::move (x));
   }
 
   const AssociationType::Relationship_type& AssociationType::
@@ -520,9 +520,9 @@ namespace msdl_1
   }
 
   void AssociationType::
-  Relationship (::std::auto_ptr< Relationship_type > x)
+  Relationship (::std::unique_ptr< Relationship_type > x)
   {
-    this->Relationship_.set (x);
+    this->Relationship_.set (std::move (x));
   }
 
 
@@ -554,9 +554,9 @@ namespace msdl_1
   }
 
   void BoundarySymbolModifiersType::
-  Echelon (::std::auto_ptr< Echelon_type > x)
+  Echelon (::std::unique_ptr< Echelon_type > x)
   {
-    this->Echelon_.set (x);
+    this->Echelon_.set (std::move (x));
   }
 
   const BoundarySymbolModifiersType::UniqueDesignation_optional& BoundarySymbolModifiersType::
@@ -584,9 +584,9 @@ namespace msdl_1
   }
 
   void BoundarySymbolModifiersType::
-  UniqueDesignation (::std::auto_ptr< UniqueDesignation_type > x)
+  UniqueDesignation (::std::unique_ptr< UniqueDesignation_type > x)
   {
-    this->UniqueDesignation_.set (x);
+    this->UniqueDesignation_.set (std::move (x));
   }
 
   const BoundarySymbolModifiersType::UniqueDesignation1_optional& BoundarySymbolModifiersType::
@@ -614,9 +614,9 @@ namespace msdl_1
   }
 
   void BoundarySymbolModifiersType::
-  UniqueDesignation1 (::std::auto_ptr< UniqueDesignation1_type > x)
+  UniqueDesignation1 (::std::unique_ptr< UniqueDesignation1_type > x)
   {
-    this->UniqueDesignation1_.set (x);
+    this->UniqueDesignation1_.set (std::move (x));
   }
 
 
@@ -664,9 +664,9 @@ namespace msdl_1
   }
 
   void CommandRelationType::
-  CommandingSuperiorHandle (::std::auto_ptr< CommandingSuperiorHandle_type > x)
+  CommandingSuperiorHandle (::std::unique_ptr< CommandingSuperiorHandle_type > x)
   {
-    this->CommandingSuperiorHandle_.set (x);
+    this->CommandingSuperiorHandle_.set (std::move (x));
   }
 
   const CommandRelationType::CommandRelationshipType_type& CommandRelationType::
@@ -688,9 +688,9 @@ namespace msdl_1
   }
 
   void CommandRelationType::
-  CommandRelationshipType (::std::auto_ptr< CommandRelationshipType_type > x)
+  CommandRelationshipType (::std::unique_ptr< CommandRelationshipType_type > x)
   {
-    this->CommandRelationshipType_.set (x);
+    this->CommandRelationshipType_.set (std::move (x));
   }
 
 
@@ -744,9 +744,9 @@ namespace msdl_1
   }
 
   void CommunicationNetInstanceType::
-  CommunicationNetType (::std::auto_ptr< CommunicationNetType_type > x)
+  CommunicationNetType (::std::unique_ptr< CommunicationNetType_type > x)
   {
-    this->CommunicationNetType_.set (x);
+    this->CommunicationNetType_.set (std::move (x));
   }
 
   const CommunicationNetInstanceType::CommunicationNetId_type& CommunicationNetInstanceType::
@@ -768,9 +768,9 @@ namespace msdl_1
   }
 
   void CommunicationNetInstanceType::
-  CommunicationNetId (::std::auto_ptr< CommunicationNetId_type > x)
+  CommunicationNetId (::std::unique_ptr< CommunicationNetId_type > x)
   {
-    this->CommunicationNetId_.set (x);
+    this->CommunicationNetId_.set (std::move (x));
   }
 
   const CommunicationNetInstanceType::CommunicationService_type& CommunicationNetInstanceType::
@@ -792,9 +792,9 @@ namespace msdl_1
   }
 
   void CommunicationNetInstanceType::
-  CommunicationService (::std::auto_ptr< CommunicationService_type > x)
+  CommunicationService (::std::unique_ptr< CommunicationService_type > x)
   {
-    this->CommunicationService_.set (x);
+    this->CommunicationService_.set (std::move (x));
   }
 
 
@@ -842,9 +842,9 @@ namespace msdl_1
   }
 
   void CommunicationNetReferenceType::
-  CommunicationNetId (::std::auto_ptr< CommunicationNetId_type > x)
+  CommunicationNetId (::std::unique_ptr< CommunicationNetId_type > x)
   {
-    this->CommunicationNetId_.set (x);
+    this->CommunicationNetId_.set (std::move (x));
   }
 
   const CommunicationNetReferenceType::UnitOwnerHandle_type& CommunicationNetReferenceType::
@@ -866,9 +866,9 @@ namespace msdl_1
   }
 
   void CommunicationNetReferenceType::
-  UnitOwnerHandle (::std::auto_ptr< UnitOwnerHandle_type > x)
+  UnitOwnerHandle (::std::unique_ptr< UnitOwnerHandle_type > x)
   {
-    this->UnitOwnerHandle_.set (x);
+    this->UnitOwnerHandle_.set (std::move (x));
   }
 
 
@@ -894,9 +894,9 @@ namespace msdl_1
   }
 
   void CoordinateDataStandardType::
-  CoordinateSystemType (::std::auto_ptr< CoordinateSystemType_type > x)
+  CoordinateSystemType (::std::unique_ptr< CoordinateSystemType_type > x)
   {
-    this->CoordinateSystemType_.set (x);
+    this->CoordinateSystemType_.set (std::move (x));
   }
 
   const CoordinateDataStandardType::CoordinateSystemDatum_type& CoordinateDataStandardType::
@@ -918,9 +918,9 @@ namespace msdl_1
   }
 
   void CoordinateDataStandardType::
-  CoordinateSystemDatum (::std::auto_ptr< CoordinateSystemDatum_type > x)
+  CoordinateSystemDatum (::std::unique_ptr< CoordinateSystemDatum_type > x)
   {
-    this->CoordinateSystemDatum_.set (x);
+    this->CoordinateSystemDatum_.set (std::move (x));
   }
 
 
@@ -946,9 +946,9 @@ namespace msdl_1
   }
 
   void CoordinatesType::
-  CoordinateChoice (::std::auto_ptr< CoordinateChoice_type > x)
+  CoordinateChoice (::std::unique_ptr< CoordinateChoice_type > x)
   {
-    this->CoordinateChoice_.set (x);
+    this->CoordinateChoice_.set (std::move (x));
   }
 
   const CoordinatesType::CoordinateData_type& CoordinatesType::
@@ -970,9 +970,9 @@ namespace msdl_1
   }
 
   void CoordinatesType::
-  CoordinateData (::std::auto_ptr< CoordinateData_type > x)
+  CoordinateData (::std::unique_ptr< CoordinateData_type > x)
   {
-    this->CoordinateData_.set (x);
+    this->CoordinateData_.set (std::move (x));
   }
 
 
@@ -1004,9 +1004,9 @@ namespace msdl_1
   }
 
   void CoordinatePointType::
-  MGRS (::std::auto_ptr< MGRS_type > x)
+  MGRS (::std::unique_ptr< MGRS_type > x)
   {
-    this->MGRS_.set (x);
+    this->MGRS_.set (std::move (x));
   }
 
   const CoordinatePointType::UTM_optional& CoordinatePointType::
@@ -1034,9 +1034,9 @@ namespace msdl_1
   }
 
   void CoordinatePointType::
-  UTM (::std::auto_ptr< UTM_type > x)
+  UTM (::std::unique_ptr< UTM_type > x)
   {
-    this->UTM_.set (x);
+    this->UTM_.set (std::move (x));
   }
 
   const CoordinatePointType::GDC_optional& CoordinatePointType::
@@ -1064,9 +1064,9 @@ namespace msdl_1
   }
 
   void CoordinatePointType::
-  GDC (::std::auto_ptr< GDC_type > x)
+  GDC (::std::unique_ptr< GDC_type > x)
   {
-    this->GDC_.set (x);
+    this->GDC_.set (std::move (x));
   }
 
   const CoordinatePointType::GCC_optional& CoordinatePointType::
@@ -1094,9 +1094,9 @@ namespace msdl_1
   }
 
   void CoordinatePointType::
-  GCC (::std::auto_ptr< GCC_type > x)
+  GCC (::std::unique_ptr< GCC_type > x)
   {
-    this->GCC_.set (x);
+    this->GCC_.set (std::move (x));
   }
 
 
@@ -1128,9 +1128,9 @@ namespace msdl_1
   }
 
   void EnvironmentType::
-  ScenarioTime (::std::auto_ptr< ScenarioTime_type > x)
+  ScenarioTime (::std::unique_ptr< ScenarioTime_type > x)
   {
-    this->ScenarioTime_.set (x);
+    this->ScenarioTime_.set (std::move (x));
   }
 
   const EnvironmentType::AreaOfInterest_optional& EnvironmentType::
@@ -1158,9 +1158,9 @@ namespace msdl_1
   }
 
   void EnvironmentType::
-  AreaOfInterest (::std::auto_ptr< AreaOfInterest_type > x)
+  AreaOfInterest (::std::unique_ptr< AreaOfInterest_type > x)
   {
-    this->AreaOfInterest_.set (x);
+    this->AreaOfInterest_.set (std::move (x));
   }
 
   const EnvironmentType::ScenarioWeather_optional& EnvironmentType::
@@ -1188,9 +1188,9 @@ namespace msdl_1
   }
 
   void EnvironmentType::
-  ScenarioWeather (::std::auto_ptr< ScenarioWeather_type > x)
+  ScenarioWeather (::std::unique_ptr< ScenarioWeather_type > x)
   {
-    this->ScenarioWeather_.set (x);
+    this->ScenarioWeather_.set (std::move (x));
   }
 
   const EnvironmentType::METOC_optional& EnvironmentType::
@@ -1218,9 +1218,9 @@ namespace msdl_1
   }
 
   void EnvironmentType::
-  METOC (::std::auto_ptr< METOC_type > x)
+  METOC (::std::unique_ptr< METOC_type > x)
   {
-    this->METOC_.set (x);
+    this->METOC_.set (std::move (x));
   }
 
 
@@ -1246,9 +1246,9 @@ namespace msdl_1
   }
 
   void EquipmentDispositionType::
-  Location (::std::auto_ptr< Location_type > x)
+  Location (::std::unique_ptr< Location_type > x)
   {
-    this->Location_.set (x);
+    this->Location_.set (std::move (x));
   }
 
   const EquipmentDispositionType::DirectionOfMovement_optional& EquipmentDispositionType::
@@ -1276,9 +1276,9 @@ namespace msdl_1
   }
 
   void EquipmentDispositionType::
-  DirectionOfMovement (::std::auto_ptr< DirectionOfMovement_type > x)
+  DirectionOfMovement (::std::unique_ptr< DirectionOfMovement_type > x)
   {
-    this->DirectionOfMovement_.set (x);
+    this->DirectionOfMovement_.set (std::move (x));
   }
 
   const EquipmentDispositionType::Speed_optional& EquipmentDispositionType::
@@ -1306,9 +1306,9 @@ namespace msdl_1
   }
 
   void EquipmentDispositionType::
-  Speed (::std::auto_ptr< Speed_type > x)
+  Speed (::std::unique_ptr< Speed_type > x)
   {
-    this->Speed_.set (x);
+    this->Speed_.set (std::move (x));
   }
 
   const EquipmentDispositionType::FormationPosition_optional& EquipmentDispositionType::
@@ -1336,9 +1336,9 @@ namespace msdl_1
   }
 
   void EquipmentDispositionType::
-  FormationPosition (::std::auto_ptr< FormationPosition_type > x)
+  FormationPosition (::std::unique_ptr< FormationPosition_type > x)
   {
-    this->FormationPosition_.set (x);
+    this->FormationPosition_.set (std::move (x));
   }
 
 
@@ -1364,9 +1364,9 @@ namespace msdl_1
   }
 
   void EquipmentItemType::
-  ObjectHandle (::std::auto_ptr< ObjectHandle_type > x)
+  ObjectHandle (::std::unique_ptr< ObjectHandle_type > x)
   {
-    this->ObjectHandle_.set (x);
+    this->ObjectHandle_.set (std::move (x));
   }
 
   const EquipmentItemType::SymbolIdentifier_type& EquipmentItemType::
@@ -1388,9 +1388,9 @@ namespace msdl_1
   }
 
   void EquipmentItemType::
-  SymbolIdentifier (::std::auto_ptr< SymbolIdentifier_type > x)
+  SymbolIdentifier (::std::unique_ptr< SymbolIdentifier_type > x)
   {
-    this->SymbolIdentifier_.set (x);
+    this->SymbolIdentifier_.set (std::move (x));
   }
 
   const EquipmentItemType::Name_optional& EquipmentItemType::
@@ -1418,9 +1418,9 @@ namespace msdl_1
   }
 
   void EquipmentItemType::
-  Name (::std::auto_ptr< Name_type > x)
+  Name (::std::unique_ptr< Name_type > x)
   {
-    this->Name_.set (x);
+    this->Name_.set (std::move (x));
   }
 
   const EquipmentItemType::EquipmentSymbolModifiers_optional& EquipmentItemType::
@@ -1448,9 +1448,9 @@ namespace msdl_1
   }
 
   void EquipmentItemType::
-  EquipmentSymbolModifiers (::std::auto_ptr< EquipmentSymbolModifiers_type > x)
+  EquipmentSymbolModifiers (::std::unique_ptr< EquipmentSymbolModifiers_type > x)
   {
-    this->EquipmentSymbolModifiers_.set (x);
+    this->EquipmentSymbolModifiers_.set (std::move (x));
   }
 
   const EquipmentItemType::CommunicationNetReferences_optional& EquipmentItemType::
@@ -1478,9 +1478,9 @@ namespace msdl_1
   }
 
   void EquipmentItemType::
-  CommunicationNetReferences (::std::auto_ptr< CommunicationNetReferences_type > x)
+  CommunicationNetReferences (::std::unique_ptr< CommunicationNetReferences_type > x)
   {
-    this->CommunicationNetReferences_.set (x);
+    this->CommunicationNetReferences_.set (std::move (x));
   }
 
   const EquipmentItemType::Disposition_type& EquipmentItemType::
@@ -1502,9 +1502,9 @@ namespace msdl_1
   }
 
   void EquipmentItemType::
-  Disposition (::std::auto_ptr< Disposition_type > x)
+  Disposition (::std::unique_ptr< Disposition_type > x)
   {
-    this->Disposition_.set (x);
+    this->Disposition_.set (std::move (x));
   }
 
   const EquipmentItemType::Relations_type& EquipmentItemType::
@@ -1526,9 +1526,9 @@ namespace msdl_1
   }
 
   void EquipmentItemType::
-  Relations (::std::auto_ptr< Relations_type > x)
+  Relations (::std::unique_ptr< Relations_type > x)
   {
-    this->Relations_.set (x);
+    this->Relations_.set (std::move (x));
   }
 
   const EquipmentItemType::Model_optional& EquipmentItemType::
@@ -1556,9 +1556,9 @@ namespace msdl_1
   }
 
   void EquipmentItemType::
-  Model (::std::auto_ptr< Model_type > x)
+  Model (::std::unique_ptr< Model_type > x)
   {
-    this->Model_.set (x);
+    this->Model_.set (std::move (x));
   }
 
 
@@ -1584,9 +1584,9 @@ namespace msdl_1
   }
 
   void EquipmentModelType::
-  Resolution (::std::auto_ptr< Resolution_type > x)
+  Resolution (::std::unique_ptr< Resolution_type > x)
   {
-    this->Resolution_.set (x);
+    this->Resolution_.set (std::move (x));
   }
 
 
@@ -1618,9 +1618,9 @@ namespace msdl_1
   }
 
   void EquipmentRelationsType::
-  OrganicSuperiorHandle (::std::auto_ptr< OrganicSuperiorHandle_type > x)
+  OrganicSuperiorHandle (::std::unique_ptr< OrganicSuperiorHandle_type > x)
   {
-    this->OrganicSuperiorHandle_.set (x);
+    this->OrganicSuperiorHandle_.set (std::move (x));
   }
 
   const EquipmentRelationsType::HoldingOrganization_type& EquipmentRelationsType::
@@ -1642,9 +1642,9 @@ namespace msdl_1
   }
 
   void EquipmentRelationsType::
-  HoldingOrganization (::std::auto_ptr< HoldingOrganization_type > x)
+  HoldingOrganization (::std::unique_ptr< HoldingOrganization_type > x)
   {
-    this->HoldingOrganization_.set (x);
+    this->HoldingOrganization_.set (std::move (x));
   }
 
 
@@ -1676,9 +1676,9 @@ namespace msdl_1
   }
 
   void EquipmentSymbolModifiersType::
-  Quantity (::std::auto_ptr< Quantity_type > x)
+  Quantity (::std::unique_ptr< Quantity_type > x)
   {
-    this->Quantity_.set (x);
+    this->Quantity_.set (std::move (x));
   }
 
   const EquipmentSymbolModifiersType::StaffComments_optional& EquipmentSymbolModifiersType::
@@ -1706,9 +1706,9 @@ namespace msdl_1
   }
 
   void EquipmentSymbolModifiersType::
-  StaffComments (::std::auto_ptr< StaffComments_type > x)
+  StaffComments (::std::unique_ptr< StaffComments_type > x)
   {
-    this->StaffComments_.set (x);
+    this->StaffComments_.set (std::move (x));
   }
 
   const EquipmentSymbolModifiersType::AdditionalInfo_optional& EquipmentSymbolModifiersType::
@@ -1736,9 +1736,9 @@ namespace msdl_1
   }
 
   void EquipmentSymbolModifiersType::
-  AdditionalInfo (::std::auto_ptr< AdditionalInfo_type > x)
+  AdditionalInfo (::std::unique_ptr< AdditionalInfo_type > x)
   {
-    this->AdditionalInfo_.set (x);
+    this->AdditionalInfo_.set (std::move (x));
   }
 
   const EquipmentSymbolModifiersType::CombatEffectiveness_optional& EquipmentSymbolModifiersType::
@@ -1766,9 +1766,9 @@ namespace msdl_1
   }
 
   void EquipmentSymbolModifiersType::
-  CombatEffectiveness (::std::auto_ptr< CombatEffectiveness_type > x)
+  CombatEffectiveness (::std::unique_ptr< CombatEffectiveness_type > x)
   {
-    this->CombatEffectiveness_.set (x);
+    this->CombatEffectiveness_.set (std::move (x));
   }
 
   const EquipmentSymbolModifiersType::IFF_optional& EquipmentSymbolModifiersType::
@@ -1796,9 +1796,9 @@ namespace msdl_1
   }
 
   void EquipmentSymbolModifiersType::
-  IFF (::std::auto_ptr< IFF_type > x)
+  IFF (::std::unique_ptr< IFF_type > x)
   {
-    this->IFF_.set (x);
+    this->IFF_.set (std::move (x));
   }
 
   const EquipmentSymbolModifiersType::UniqueDesignation_type& EquipmentSymbolModifiersType::
@@ -1820,9 +1820,9 @@ namespace msdl_1
   }
 
   void EquipmentSymbolModifiersType::
-  UniqueDesignation (::std::auto_ptr< UniqueDesignation_type > x)
+  UniqueDesignation (::std::unique_ptr< UniqueDesignation_type > x)
   {
-    this->UniqueDesignation_.set (x);
+    this->UniqueDesignation_.set (std::move (x));
   }
 
   const EquipmentSymbolModifiersType::EquipmentType_optional& EquipmentSymbolModifiersType::
@@ -1850,9 +1850,9 @@ namespace msdl_1
   }
 
   void EquipmentSymbolModifiersType::
-  EquipmentType (::std::auto_ptr< EquipmentType_type > x)
+  EquipmentType (::std::unique_ptr< EquipmentType_type > x)
   {
-    this->EquipmentType_.set (x);
+    this->EquipmentType_.set (std::move (x));
   }
 
   const EquipmentSymbolModifiersType::TowedSonarArray_optional& EquipmentSymbolModifiersType::
@@ -1880,9 +1880,9 @@ namespace msdl_1
   }
 
   void EquipmentSymbolModifiersType::
-  TowedSonarArray (::std::auto_ptr< TowedSonarArray_type > x)
+  TowedSonarArray (::std::unique_ptr< TowedSonarArray_type > x)
   {
-    this->TowedSonarArray_.set (x);
+    this->TowedSonarArray_.set (std::move (x));
   }
 
 
@@ -1936,9 +1936,9 @@ namespace msdl_1
   }
 
   void ForceRelationDataType::
-  CommandRelation (::std::auto_ptr< CommandRelation_type > x)
+  CommandRelation (::std::unique_ptr< CommandRelation_type > x)
   {
-    this->CommandRelation_.set (x);
+    this->CommandRelation_.set (std::move (x));
   }
 
   const ForceRelationDataType::ForceSideHandle_optional& ForceRelationDataType::
@@ -1966,9 +1966,9 @@ namespace msdl_1
   }
 
   void ForceRelationDataType::
-  ForceSideHandle (::std::auto_ptr< ForceSideHandle_type > x)
+  ForceSideHandle (::std::unique_ptr< ForceSideHandle_type > x)
   {
-    this->ForceSideHandle_.set (x);
+    this->ForceSideHandle_.set (std::move (x));
   }
 
 
@@ -1994,9 +1994,9 @@ namespace msdl_1
   }
 
   void ForceRelationType::
-  ForceRelationChoice (::std::auto_ptr< ForceRelationChoice_type > x)
+  ForceRelationChoice (::std::unique_ptr< ForceRelationChoice_type > x)
   {
-    this->ForceRelationChoice_.set (x);
+    this->ForceRelationChoice_.set (std::move (x));
   }
 
   const ForceRelationType::ForceRelationData_type& ForceRelationType::
@@ -2018,9 +2018,9 @@ namespace msdl_1
   }
 
   void ForceRelationType::
-  ForceRelationData (::std::auto_ptr< ForceRelationData_type > x)
+  ForceRelationData (::std::unique_ptr< ForceRelationData_type > x)
   {
-    this->ForceRelationData_.set (x);
+    this->ForceRelationData_.set (std::move (x));
   }
 
 
@@ -2068,9 +2068,9 @@ namespace msdl_1
   }
 
   void ForceSideType::
-  ObjectHandle (::std::auto_ptr< ObjectHandle_type > x)
+  ObjectHandle (::std::unique_ptr< ObjectHandle_type > x)
   {
-    this->ObjectHandle_.set (x);
+    this->ObjectHandle_.set (std::move (x));
   }
 
   const ForceSideType::ForceSideName_type& ForceSideType::
@@ -2092,9 +2092,9 @@ namespace msdl_1
   }
 
   void ForceSideType::
-  ForceSideName (::std::auto_ptr< ForceSideName_type > x)
+  ForceSideName (::std::unique_ptr< ForceSideName_type > x)
   {
-    this->ForceSideName_.set (x);
+    this->ForceSideName_.set (std::move (x));
   }
 
   const ForceSideType::AllegianceHandle_optional& ForceSideType::
@@ -2122,9 +2122,9 @@ namespace msdl_1
   }
 
   void ForceSideType::
-  AllegianceHandle (::std::auto_ptr< AllegianceHandle_type > x)
+  AllegianceHandle (::std::unique_ptr< AllegianceHandle_type > x)
   {
-    this->AllegianceHandle_.set (x);
+    this->AllegianceHandle_.set (std::move (x));
   }
 
   const ForceSideType::MilitaryService_optional& ForceSideType::
@@ -2152,9 +2152,9 @@ namespace msdl_1
   }
 
   void ForceSideType::
-  MilitaryService (::std::auto_ptr< MilitaryService_type > x)
+  MilitaryService (::std::unique_ptr< MilitaryService_type > x)
   {
-    this->MilitaryService_.set (x);
+    this->MilitaryService_.set (std::move (x));
   }
 
   const ForceSideType::CountryCode_optional& ForceSideType::
@@ -2182,9 +2182,9 @@ namespace msdl_1
   }
 
   void ForceSideType::
-  CountryCode (::std::auto_ptr< CountryCode_type > x)
+  CountryCode (::std::unique_ptr< CountryCode_type > x)
   {
-    this->CountryCode_.set (x);
+    this->CountryCode_.set (std::move (x));
   }
 
   const ForceSideType::Associations_optional& ForceSideType::
@@ -2212,9 +2212,9 @@ namespace msdl_1
   }
 
   void ForceSideType::
-  Associations (::std::auto_ptr< Associations_type > x)
+  Associations (::std::unique_ptr< Associations_type > x)
   {
-    this->Associations_.set (x);
+    this->Associations_.set (std::move (x));
   }
 
 
@@ -2246,9 +2246,9 @@ namespace msdl_1
   }
 
   void FormationDataType::
-  GroundFormationType (::std::auto_ptr< GroundFormationType_type > x)
+  GroundFormationType (::std::unique_ptr< GroundFormationType_type > x)
   {
-    this->GroundFormationType_.set (x);
+    this->GroundFormationType_.set (std::move (x));
   }
 
   const FormationDataType::AirFormationType_optional& FormationDataType::
@@ -2276,9 +2276,9 @@ namespace msdl_1
   }
 
   void FormationDataType::
-  AirFormationType (::std::auto_ptr< AirFormationType_type > x)
+  AirFormationType (::std::unique_ptr< AirFormationType_type > x)
   {
-    this->AirFormationType_.set (x);
+    this->AirFormationType_.set (std::move (x));
   }
 
   const FormationDataType::SurfaceFomationType_optional& FormationDataType::
@@ -2306,9 +2306,9 @@ namespace msdl_1
   }
 
   void FormationDataType::
-  SurfaceFomationType (::std::auto_ptr< SurfaceFomationType_type > x)
+  SurfaceFomationType (::std::unique_ptr< SurfaceFomationType_type > x)
   {
-    this->SurfaceFomationType_.set (x);
+    this->SurfaceFomationType_.set (std::move (x));
   }
 
   const FormationDataType::SubsurfaceFormationType_optional& FormationDataType::
@@ -2336,9 +2336,9 @@ namespace msdl_1
   }
 
   void FormationDataType::
-  SubsurfaceFormationType (::std::auto_ptr< SubsurfaceFormationType_type > x)
+  SubsurfaceFormationType (::std::unique_ptr< SubsurfaceFormationType_type > x)
   {
-    this->SubsurfaceFormationType_.set (x);
+    this->SubsurfaceFormationType_.set (std::move (x));
   }
 
 
@@ -2370,9 +2370,9 @@ namespace msdl_1
   }
 
   void FormationPositionType::
-  OutOfFormation (::std::auto_ptr< OutOfFormation_type > x)
+  OutOfFormation (::std::unique_ptr< OutOfFormation_type > x)
   {
-    this->OutOfFormation_.set (x);
+    this->OutOfFormation_.set (std::move (x));
   }
 
   const FormationPositionType::FormationOrder_optional& FormationPositionType::
@@ -2400,9 +2400,9 @@ namespace msdl_1
   }
 
   void FormationPositionType::
-  FormationOrder (::std::auto_ptr< FormationOrder_type > x)
+  FormationOrder (::std::unique_ptr< FormationOrder_type > x)
   {
-    this->FormationOrder_.set (x);
+    this->FormationOrder_.set (std::move (x));
   }
 
   const FormationPositionType::SensorOrientation_optional& FormationPositionType::
@@ -2430,9 +2430,9 @@ namespace msdl_1
   }
 
   void FormationPositionType::
-  SensorOrientation (::std::auto_ptr< SensorOrientation_type > x)
+  SensorOrientation (::std::unique_ptr< SensorOrientation_type > x)
   {
-    this->SensorOrientation_.set (x);
+    this->SensorOrientation_.set (std::move (x));
   }
 
 
@@ -2458,9 +2458,9 @@ namespace msdl_1
   }
 
   void GCCType::
-  X (::std::auto_ptr< X_type > x)
+  X (::std::unique_ptr< X_type > x)
   {
-    this->X_.set (x);
+    this->X_.set (std::move (x));
   }
 
   const GCCType::Y_type& GCCType::
@@ -2482,9 +2482,9 @@ namespace msdl_1
   }
 
   void GCCType::
-  Y (::std::auto_ptr< Y_type > x)
+  Y (::std::unique_ptr< Y_type > x)
   {
-    this->Y_.set (x);
+    this->Y_.set (std::move (x));
   }
 
   const GCCType::Z_type& GCCType::
@@ -2506,9 +2506,9 @@ namespace msdl_1
   }
 
   void GCCType::
-  Z (::std::auto_ptr< Z_type > x)
+  Z (::std::unique_ptr< Z_type > x)
   {
-    this->Z_.set (x);
+    this->Z_.set (std::move (x));
   }
 
 
@@ -2534,9 +2534,9 @@ namespace msdl_1
   }
 
   void GDCType::
-  Latitude (::std::auto_ptr< Latitude_type > x)
+  Latitude (::std::unique_ptr< Latitude_type > x)
   {
-    this->Latitude_.set (x);
+    this->Latitude_.set (std::move (x));
   }
 
   const GDCType::Longitude_type& GDCType::
@@ -2558,9 +2558,9 @@ namespace msdl_1
   }
 
   void GDCType::
-  Longitude (::std::auto_ptr< Longitude_type > x)
+  Longitude (::std::unique_ptr< Longitude_type > x)
   {
-    this->Longitude_.set (x);
+    this->Longitude_.set (std::move (x));
   }
 
   const GDCType::ElevationAGL_type& GDCType::
@@ -2582,9 +2582,9 @@ namespace msdl_1
   }
 
   void GDCType::
-  ElevationAGL (::std::auto_ptr< ElevationAGL_type > x)
+  ElevationAGL (::std::unique_ptr< ElevationAGL_type > x)
   {
-    this->ElevationAGL_.set (x);
+    this->ElevationAGL_.set (std::move (x));
   }
 
 
@@ -2638,9 +2638,9 @@ namespace msdl_1
   }
 
   void InstallationSymbolModifiersType::
-  FrameShapeModifier (::std::auto_ptr< FrameShapeModifier_type > x)
+  FrameShapeModifier (::std::unique_ptr< FrameShapeModifier_type > x)
   {
-    this->FrameShapeModifier_.set (x);
+    this->FrameShapeModifier_.set (std::move (x));
   }
 
   const InstallationSymbolModifiersType::StaffComments_optional& InstallationSymbolModifiersType::
@@ -2668,9 +2668,9 @@ namespace msdl_1
   }
 
   void InstallationSymbolModifiersType::
-  StaffComments (::std::auto_ptr< StaffComments_type > x)
+  StaffComments (::std::unique_ptr< StaffComments_type > x)
   {
-    this->StaffComments_.set (x);
+    this->StaffComments_.set (std::move (x));
   }
 
   const InstallationSymbolModifiersType::AdditionalInfo_optional& InstallationSymbolModifiersType::
@@ -2698,9 +2698,9 @@ namespace msdl_1
   }
 
   void InstallationSymbolModifiersType::
-  AdditionalInfo (::std::auto_ptr< AdditionalInfo_type > x)
+  AdditionalInfo (::std::unique_ptr< AdditionalInfo_type > x)
   {
-    this->AdditionalInfo_.set (x);
+    this->AdditionalInfo_.set (std::move (x));
   }
 
   const InstallationSymbolModifiersType::CombatEffectiveness_optional& InstallationSymbolModifiersType::
@@ -2728,9 +2728,9 @@ namespace msdl_1
   }
 
   void InstallationSymbolModifiersType::
-  CombatEffectiveness (::std::auto_ptr< CombatEffectiveness_type > x)
+  CombatEffectiveness (::std::unique_ptr< CombatEffectiveness_type > x)
   {
-    this->CombatEffectiveness_.set (x);
+    this->CombatEffectiveness_.set (std::move (x));
   }
 
   const InstallationSymbolModifiersType::IFF_optional& InstallationSymbolModifiersType::
@@ -2758,9 +2758,9 @@ namespace msdl_1
   }
 
   void InstallationSymbolModifiersType::
-  IFF (::std::auto_ptr< IFF_type > x)
+  IFF (::std::unique_ptr< IFF_type > x)
   {
-    this->IFF_.set (x);
+    this->IFF_.set (std::move (x));
   }
 
   const InstallationSymbolModifiersType::UniqueDesignation_type& InstallationSymbolModifiersType::
@@ -2782,9 +2782,9 @@ namespace msdl_1
   }
 
   void InstallationSymbolModifiersType::
-  UniqueDesignation (::std::auto_ptr< UniqueDesignation_type > x)
+  UniqueDesignation (::std::unique_ptr< UniqueDesignation_type > x)
   {
-    this->UniqueDesignation_.set (x);
+    this->UniqueDesignation_.set (std::move (x));
   }
 
   const InstallationSymbolModifiersType::DateTimeGroup_optional& InstallationSymbolModifiersType::
@@ -2812,9 +2812,9 @@ namespace msdl_1
   }
 
   void InstallationSymbolModifiersType::
-  DateTimeGroup (::std::auto_ptr< DateTimeGroup_type > x)
+  DateTimeGroup (::std::unique_ptr< DateTimeGroup_type > x)
   {
-    this->DateTimeGroup_.set (x);
+    this->DateTimeGroup_.set (std::move (x));
   }
 
 
@@ -2840,9 +2840,9 @@ namespace msdl_1
   }
 
   void InstallationType::
-  ObjectHandle (::std::auto_ptr< ObjectHandle_type > x)
+  ObjectHandle (::std::unique_ptr< ObjectHandle_type > x)
   {
-    this->ObjectHandle_.set (x);
+    this->ObjectHandle_.set (std::move (x));
   }
 
   const InstallationType::SymbolIdentifier_type& InstallationType::
@@ -2864,9 +2864,9 @@ namespace msdl_1
   }
 
   void InstallationType::
-  SymbolIdentifier (::std::auto_ptr< SymbolIdentifier_type > x)
+  SymbolIdentifier (::std::unique_ptr< SymbolIdentifier_type > x)
   {
-    this->SymbolIdentifier_.set (x);
+    this->SymbolIdentifier_.set (std::move (x));
   }
 
   const InstallationType::Affiliation_type& InstallationType::
@@ -2888,9 +2888,9 @@ namespace msdl_1
   }
 
   void InstallationType::
-  Affiliation (::std::auto_ptr< Affiliation_type > x)
+  Affiliation (::std::unique_ptr< Affiliation_type > x)
   {
-    this->Affiliation_.set (x);
+    this->Affiliation_.set (std::move (x));
   }
 
   const InstallationType::Owner_type& InstallationType::
@@ -2912,9 +2912,9 @@ namespace msdl_1
   }
 
   void InstallationType::
-  Owner (::std::auto_ptr< Owner_type > x)
+  Owner (::std::unique_ptr< Owner_type > x)
   {
-    this->Owner_.set (x);
+    this->Owner_.set (std::move (x));
   }
 
   const InstallationType::Location_type& InstallationType::
@@ -2936,9 +2936,9 @@ namespace msdl_1
   }
 
   void InstallationType::
-  Location (::std::auto_ptr< Location_type > x)
+  Location (::std::unique_ptr< Location_type > x)
   {
-    this->Location_.set (x);
+    this->Location_.set (std::move (x));
   }
 
   const InstallationType::Orientation_optional& InstallationType::
@@ -2966,9 +2966,9 @@ namespace msdl_1
   }
 
   void InstallationType::
-  Orientation (::std::auto_ptr< Orientation_type > x)
+  Orientation (::std::unique_ptr< Orientation_type > x)
   {
-    this->Orientation_.set (x);
+    this->Orientation_.set (std::move (x));
   }
 
   const InstallationType::Name_optional& InstallationType::
@@ -2996,9 +2996,9 @@ namespace msdl_1
   }
 
   void InstallationType::
-  Name (::std::auto_ptr< Name_type > x)
+  Name (::std::unique_ptr< Name_type > x)
   {
-    this->Name_.set (x);
+    this->Name_.set (std::move (x));
   }
 
   const InstallationType::InstallationSymbolModifiers_optional& InstallationType::
@@ -3026,9 +3026,9 @@ namespace msdl_1
   }
 
   void InstallationType::
-  InstallationSymbolModifiers (::std::auto_ptr< InstallationSymbolModifiers_type > x)
+  InstallationSymbolModifiers (::std::unique_ptr< InstallationSymbolModifiers_type > x)
   {
-    this->InstallationSymbolModifiers_.set (x);
+    this->InstallationSymbolModifiers_.set (std::move (x));
   }
 
   const InstallationType::AssociatedOverlays_optional& InstallationType::
@@ -3056,9 +3056,9 @@ namespace msdl_1
   }
 
   void InstallationType::
-  AssociatedOverlays (::std::auto_ptr< AssociatedOverlays_type > x)
+  AssociatedOverlays (::std::unique_ptr< AssociatedOverlays_type > x)
   {
-    this->AssociatedOverlays_.set (x);
+    this->AssociatedOverlays_.set (std::move (x));
   }
 
 
@@ -3112,9 +3112,9 @@ namespace msdl_1
   }
 
   void LineSymbolModifiersType::
-  UniqueDesignation (::std::auto_ptr< UniqueDesignation_type > x)
+  UniqueDesignation (::std::unique_ptr< UniqueDesignation_type > x)
   {
-    this->UniqueDesignation_.set (x);
+    this->UniqueDesignation_.set (std::move (x));
   }
 
   const LineSymbolModifiersType::UniqueDesignation1_optional& LineSymbolModifiersType::
@@ -3142,9 +3142,9 @@ namespace msdl_1
   }
 
   void LineSymbolModifiersType::
-  UniqueDesignation1 (::std::auto_ptr< UniqueDesignation1_type > x)
+  UniqueDesignation1 (::std::unique_ptr< UniqueDesignation1_type > x)
   {
-    this->UniqueDesignation1_.set (x);
+    this->UniqueDesignation1_.set (std::move (x));
   }
 
   const LineSymbolModifiersType::DateTimeGroup_optional& LineSymbolModifiersType::
@@ -3172,9 +3172,9 @@ namespace msdl_1
   }
 
   void LineSymbolModifiersType::
-  DateTimeGroup (::std::auto_ptr< DateTimeGroup_type > x)
+  DateTimeGroup (::std::unique_ptr< DateTimeGroup_type > x)
   {
-    this->DateTimeGroup_.set (x);
+    this->DateTimeGroup_.set (std::move (x));
   }
 
   const LineSymbolModifiersType::DateTimeGroup1_optional& LineSymbolModifiersType::
@@ -3202,9 +3202,9 @@ namespace msdl_1
   }
 
   void LineSymbolModifiersType::
-  DateTimeGroup1 (::std::auto_ptr< DateTimeGroup1_type > x)
+  DateTimeGroup1 (::std::unique_ptr< DateTimeGroup1_type > x)
   {
-    this->DateTimeGroup1_.set (x);
+    this->DateTimeGroup1_.set (std::move (x));
   }
 
 
@@ -3230,9 +3230,9 @@ namespace msdl_1
   }
 
   void METOCDispositionType::
-  AnchorPoints (::std::auto_ptr< AnchorPoints_type > x)
+  AnchorPoints (::std::unique_ptr< AnchorPoints_type > x)
   {
-    this->AnchorPoints_.set (x);
+    this->AnchorPoints_.set (std::move (x));
   }
 
   const METOCDispositionType::DirectionOfMovement_optional& METOCDispositionType::
@@ -3260,9 +3260,9 @@ namespace msdl_1
   }
 
   void METOCDispositionType::
-  DirectionOfMovement (::std::auto_ptr< DirectionOfMovement_type > x)
+  DirectionOfMovement (::std::unique_ptr< DirectionOfMovement_type > x)
   {
-    this->DirectionOfMovement_.set (x);
+    this->DirectionOfMovement_.set (std::move (x));
   }
 
   const METOCDispositionType::Speed_optional& METOCDispositionType::
@@ -3290,9 +3290,9 @@ namespace msdl_1
   }
 
   void METOCDispositionType::
-  Speed (::std::auto_ptr< Speed_type > x)
+  Speed (::std::unique_ptr< Speed_type > x)
   {
-    this->Speed_.set (x);
+    this->Speed_.set (std::move (x));
   }
 
 
@@ -3318,9 +3318,9 @@ namespace msdl_1
   }
 
   void METOCGraphicType::
-  ObjectHandle (::std::auto_ptr< ObjectHandle_type > x)
+  ObjectHandle (::std::unique_ptr< ObjectHandle_type > x)
   {
-    this->ObjectHandle_.set (x);
+    this->ObjectHandle_.set (std::move (x));
   }
 
   const METOCGraphicType::SymbolIdentifier_type& METOCGraphicType::
@@ -3342,9 +3342,9 @@ namespace msdl_1
   }
 
   void METOCGraphicType::
-  SymbolIdentifier (::std::auto_ptr< SymbolIdentifier_type > x)
+  SymbolIdentifier (::std::unique_ptr< SymbolIdentifier_type > x)
   {
-    this->SymbolIdentifier_.set (x);
+    this->SymbolIdentifier_.set (std::move (x));
   }
 
   const METOCGraphicType::UniqueDesignation_type& METOCGraphicType::
@@ -3366,9 +3366,9 @@ namespace msdl_1
   }
 
   void METOCGraphicType::
-  UniqueDesignation (::std::auto_ptr< UniqueDesignation_type > x)
+  UniqueDesignation (::std::unique_ptr< UniqueDesignation_type > x)
   {
-    this->UniqueDesignation_.set (x);
+    this->UniqueDesignation_.set (std::move (x));
   }
 
   const METOCGraphicType::DateTimeGroup_optional& METOCGraphicType::
@@ -3396,9 +3396,9 @@ namespace msdl_1
   }
 
   void METOCGraphicType::
-  DateTimeGroup (::std::auto_ptr< DateTimeGroup_type > x)
+  DateTimeGroup (::std::unique_ptr< DateTimeGroup_type > x)
   {
-    this->DateTimeGroup_.set (x);
+    this->DateTimeGroup_.set (std::move (x));
   }
 
   const METOCGraphicType::DateTimeGroup1_optional& METOCGraphicType::
@@ -3426,9 +3426,9 @@ namespace msdl_1
   }
 
   void METOCGraphicType::
-  DateTimeGroup1 (::std::auto_ptr< DateTimeGroup1_type > x)
+  DateTimeGroup1 (::std::unique_ptr< DateTimeGroup1_type > x)
   {
-    this->DateTimeGroup1_.set (x);
+    this->DateTimeGroup1_.set (std::move (x));
   }
 
   const METOCGraphicType::Quantity_optional& METOCGraphicType::
@@ -3456,9 +3456,9 @@ namespace msdl_1
   }
 
   void METOCGraphicType::
-  Quantity (::std::auto_ptr< Quantity_type > x)
+  Quantity (::std::unique_ptr< Quantity_type > x)
   {
-    this->Quantity_.set (x);
+    this->Quantity_.set (std::move (x));
   }
 
   const METOCGraphicType::AdditionalInfo_optional& METOCGraphicType::
@@ -3486,9 +3486,9 @@ namespace msdl_1
   }
 
   void METOCGraphicType::
-  AdditionalInfo (::std::auto_ptr< AdditionalInfo_type > x)
+  AdditionalInfo (::std::unique_ptr< AdditionalInfo_type > x)
   {
-    this->AdditionalInfo_.set (x);
+    this->AdditionalInfo_.set (std::move (x));
   }
 
   const METOCGraphicType::Disposition_type& METOCGraphicType::
@@ -3510,9 +3510,9 @@ namespace msdl_1
   }
 
   void METOCGraphicType::
-  Disposition (::std::auto_ptr< Disposition_type > x)
+  Disposition (::std::unique_ptr< Disposition_type > x)
   {
-    this->Disposition_.set (x);
+    this->Disposition_.set (std::move (x));
   }
 
 
@@ -3560,9 +3560,9 @@ namespace msdl_1
   }
 
   void MilitaryScenarioType::
-  ScenarioID (::std::auto_ptr< ScenarioID_type > x)
+  ScenarioID (::std::unique_ptr< ScenarioID_type > x)
   {
-    this->ScenarioID_.set (x);
+    this->ScenarioID_.set (std::move (x));
   }
 
   const MilitaryScenarioType::Options_type& MilitaryScenarioType::
@@ -3584,9 +3584,9 @@ namespace msdl_1
   }
 
   void MilitaryScenarioType::
-  Options (::std::auto_ptr< Options_type > x)
+  Options (::std::unique_ptr< Options_type > x)
   {
-    this->Options_.set (x);
+    this->Options_.set (std::move (x));
   }
 
   const MilitaryScenarioType::Environment_optional& MilitaryScenarioType::
@@ -3614,9 +3614,9 @@ namespace msdl_1
   }
 
   void MilitaryScenarioType::
-  Environment (::std::auto_ptr< Environment_type > x)
+  Environment (::std::unique_ptr< Environment_type > x)
   {
-    this->Environment_.set (x);
+    this->Environment_.set (std::move (x));
   }
 
   const MilitaryScenarioType::ForceSides_type& MilitaryScenarioType::
@@ -3638,9 +3638,9 @@ namespace msdl_1
   }
 
   void MilitaryScenarioType::
-  ForceSides (::std::auto_ptr< ForceSides_type > x)
+  ForceSides (::std::unique_ptr< ForceSides_type > x)
   {
-    this->ForceSides_.set (x);
+    this->ForceSides_.set (std::move (x));
   }
 
   const MilitaryScenarioType::Organizations_optional& MilitaryScenarioType::
@@ -3668,9 +3668,9 @@ namespace msdl_1
   }
 
   void MilitaryScenarioType::
-  Organizations (::std::auto_ptr< Organizations_type > x)
+  Organizations (::std::unique_ptr< Organizations_type > x)
   {
-    this->Organizations_.set (x);
+    this->Organizations_.set (std::move (x));
   }
 
   const MilitaryScenarioType::Overlays_optional& MilitaryScenarioType::
@@ -3698,9 +3698,9 @@ namespace msdl_1
   }
 
   void MilitaryScenarioType::
-  Overlays (::std::auto_ptr< Overlays_type > x)
+  Overlays (::std::unique_ptr< Overlays_type > x)
   {
-    this->Overlays_.set (x);
+    this->Overlays_.set (std::move (x));
   }
 
   const MilitaryScenarioType::Installations_optional& MilitaryScenarioType::
@@ -3728,9 +3728,9 @@ namespace msdl_1
   }
 
   void MilitaryScenarioType::
-  Installations (::std::auto_ptr< Installations_type > x)
+  Installations (::std::unique_ptr< Installations_type > x)
   {
-    this->Installations_.set (x);
+    this->Installations_.set (std::move (x));
   }
 
   const MilitaryScenarioType::TacticalGraphics_optional& MilitaryScenarioType::
@@ -3758,9 +3758,9 @@ namespace msdl_1
   }
 
   void MilitaryScenarioType::
-  TacticalGraphics (::std::auto_ptr< TacticalGraphics_type > x)
+  TacticalGraphics (::std::unique_ptr< TacticalGraphics_type > x)
   {
-    this->TacticalGraphics_.set (x);
+    this->TacticalGraphics_.set (std::move (x));
   }
 
   const MilitaryScenarioType::MOOTWGraphics_optional& MilitaryScenarioType::
@@ -3788,9 +3788,9 @@ namespace msdl_1
   }
 
   void MilitaryScenarioType::
-  MOOTWGraphics (::std::auto_ptr< MOOTWGraphics_type > x)
+  MOOTWGraphics (::std::unique_ptr< MOOTWGraphics_type > x)
   {
-    this->MOOTWGraphics_.set (x);
+    this->MOOTWGraphics_.set (std::move (x));
   }
 
 
@@ -3816,9 +3816,9 @@ namespace msdl_1
   }
 
   void MGRSType::
-  MGRSGridZone (::std::auto_ptr< MGRSGridZone_type > x)
+  MGRSGridZone (::std::unique_ptr< MGRSGridZone_type > x)
   {
-    this->MGRSGridZone_.set (x);
+    this->MGRSGridZone_.set (std::move (x));
   }
 
   const MGRSType::MGRSGridSquare_type& MGRSType::
@@ -3840,9 +3840,9 @@ namespace msdl_1
   }
 
   void MGRSType::
-  MGRSGridSquare (::std::auto_ptr< MGRSGridSquare_type > x)
+  MGRSGridSquare (::std::unique_ptr< MGRSGridSquare_type > x)
   {
-    this->MGRSGridSquare_.set (x);
+    this->MGRSGridSquare_.set (std::move (x));
   }
 
   const MGRSType::MGRSPrecision_type& MGRSType::
@@ -3864,9 +3864,9 @@ namespace msdl_1
   }
 
   void MGRSType::
-  MGRSPrecision (::std::auto_ptr< MGRSPrecision_type > x)
+  MGRSPrecision (::std::unique_ptr< MGRSPrecision_type > x)
   {
-    this->MGRSPrecision_.set (x);
+    this->MGRSPrecision_.set (std::move (x));
   }
 
   const MGRSType::MGRSEasting_type& MGRSType::
@@ -3888,9 +3888,9 @@ namespace msdl_1
   }
 
   void MGRSType::
-  MGRSEasting (::std::auto_ptr< MGRSEasting_type > x)
+  MGRSEasting (::std::unique_ptr< MGRSEasting_type > x)
   {
-    this->MGRSEasting_.set (x);
+    this->MGRSEasting_.set (std::move (x));
   }
 
   const MGRSType::MGRSNorthing_type& MGRSType::
@@ -3912,9 +3912,9 @@ namespace msdl_1
   }
 
   void MGRSType::
-  MGRSNorthing (::std::auto_ptr< MGRSNorthing_type > x)
+  MGRSNorthing (::std::unique_ptr< MGRSNorthing_type > x)
   {
-    this->MGRSNorthing_.set (x);
+    this->MGRSNorthing_.set (std::move (x));
   }
 
   const MGRSType::ElevationAGL_optional& MGRSType::
@@ -3942,9 +3942,9 @@ namespace msdl_1
   }
 
   void MGRSType::
-  ElevationAGL (::std::auto_ptr< ElevationAGL_type > x)
+  ElevationAGL (::std::unique_ptr< ElevationAGL_type > x)
   {
-    this->ElevationAGL_.set (x);
+    this->ElevationAGL_.set (std::move (x));
   }
 
 
@@ -3970,9 +3970,9 @@ namespace msdl_1
   }
 
   void MOOTWDispositionType::
-  Location (::std::auto_ptr< Location_type > x)
+  Location (::std::unique_ptr< Location_type > x)
   {
-    this->Location_.set (x);
+    this->Location_.set (std::move (x));
   }
 
   const MOOTWDispositionType::DirectionOfMovement_optional& MOOTWDispositionType::
@@ -4000,9 +4000,9 @@ namespace msdl_1
   }
 
   void MOOTWDispositionType::
-  DirectionOfMovement (::std::auto_ptr< DirectionOfMovement_type > x)
+  DirectionOfMovement (::std::unique_ptr< DirectionOfMovement_type > x)
   {
-    this->DirectionOfMovement_.set (x);
+    this->DirectionOfMovement_.set (std::move (x));
   }
 
   const MOOTWDispositionType::Speed_optional& MOOTWDispositionType::
@@ -4030,9 +4030,9 @@ namespace msdl_1
   }
 
   void MOOTWDispositionType::
-  Speed (::std::auto_ptr< Speed_type > x)
+  Speed (::std::unique_ptr< Speed_type > x)
   {
-    this->Speed_.set (x);
+    this->Speed_.set (std::move (x));
   }
 
 
@@ -4080,9 +4080,9 @@ namespace msdl_1
   }
 
   void MOOTWGraphicType::
-  ObjectHandle (::std::auto_ptr< ObjectHandle_type > x)
+  ObjectHandle (::std::unique_ptr< ObjectHandle_type > x)
   {
-    this->ObjectHandle_.set (x);
+    this->ObjectHandle_.set (std::move (x));
   }
 
   const MOOTWGraphicType::SymbolIdentifier_type& MOOTWGraphicType::
@@ -4104,9 +4104,9 @@ namespace msdl_1
   }
 
   void MOOTWGraphicType::
-  SymbolIdentifier (::std::auto_ptr< SymbolIdentifier_type > x)
+  SymbolIdentifier (::std::unique_ptr< SymbolIdentifier_type > x)
   {
-    this->SymbolIdentifier_.set (x);
+    this->SymbolIdentifier_.set (std::move (x));
   }
 
   const MOOTWGraphicType::Affiliation_type& MOOTWGraphicType::
@@ -4128,9 +4128,9 @@ namespace msdl_1
   }
 
   void MOOTWGraphicType::
-  Affiliation (::std::auto_ptr< Affiliation_type > x)
+  Affiliation (::std::unique_ptr< Affiliation_type > x)
   {
-    this->Affiliation_.set (x);
+    this->Affiliation_.set (std::move (x));
   }
 
   const MOOTWGraphicType::Owner_type& MOOTWGraphicType::
@@ -4152,9 +4152,9 @@ namespace msdl_1
   }
 
   void MOOTWGraphicType::
-  Owner (::std::auto_ptr< Owner_type > x)
+  Owner (::std::unique_ptr< Owner_type > x)
   {
-    this->Owner_.set (x);
+    this->Owner_.set (std::move (x));
   }
 
   const MOOTWGraphicType::MOOTWSymbolModifiers_optional& MOOTWGraphicType::
@@ -4182,9 +4182,9 @@ namespace msdl_1
   }
 
   void MOOTWGraphicType::
-  MOOTWSymbolModifiers (::std::auto_ptr< MOOTWSymbolModifiers_type > x)
+  MOOTWSymbolModifiers (::std::unique_ptr< MOOTWSymbolModifiers_type > x)
   {
-    this->MOOTWSymbolModifiers_.set (x);
+    this->MOOTWSymbolModifiers_.set (std::move (x));
   }
 
   const MOOTWGraphicType::AssociatedOverlays_optional& MOOTWGraphicType::
@@ -4212,9 +4212,9 @@ namespace msdl_1
   }
 
   void MOOTWGraphicType::
-  AssociatedOverlays (::std::auto_ptr< AssociatedOverlays_type > x)
+  AssociatedOverlays (::std::unique_ptr< AssociatedOverlays_type > x)
   {
-    this->AssociatedOverlays_.set (x);
+    this->AssociatedOverlays_.set (std::move (x));
   }
 
   const MOOTWGraphicType::Disposition_type& MOOTWGraphicType::
@@ -4236,9 +4236,9 @@ namespace msdl_1
   }
 
   void MOOTWGraphicType::
-  Disposition (::std::auto_ptr< Disposition_type > x)
+  Disposition (::std::unique_ptr< Disposition_type > x)
   {
-    this->Disposition_.set (x);
+    this->Disposition_.set (std::move (x));
   }
 
 
@@ -4270,9 +4270,9 @@ namespace msdl_1
   }
 
   void MOOTWSymbolModifiersType::
-  Echelon (::std::auto_ptr< Echelon_type > x)
+  Echelon (::std::unique_ptr< Echelon_type > x)
   {
-    this->Echelon_.set (x);
+    this->Echelon_.set (std::move (x));
   }
 
   const MOOTWSymbolModifiersType::ReinforcedReduced_optional& MOOTWSymbolModifiersType::
@@ -4300,9 +4300,9 @@ namespace msdl_1
   }
 
   void MOOTWSymbolModifiersType::
-  ReinforcedReduced (::std::auto_ptr< ReinforcedReduced_type > x)
+  ReinforcedReduced (::std::unique_ptr< ReinforcedReduced_type > x)
   {
-    this->ReinforcedReduced_.set (x);
+    this->ReinforcedReduced_.set (std::move (x));
   }
 
   const MOOTWSymbolModifiersType::FrameShapeModifier_optional& MOOTWSymbolModifiersType::
@@ -4330,9 +4330,9 @@ namespace msdl_1
   }
 
   void MOOTWSymbolModifiersType::
-  FrameShapeModifier (::std::auto_ptr< FrameShapeModifier_type > x)
+  FrameShapeModifier (::std::unique_ptr< FrameShapeModifier_type > x)
   {
-    this->FrameShapeModifier_.set (x);
+    this->FrameShapeModifier_.set (std::move (x));
   }
 
   const MOOTWSymbolModifiersType::StaffComments_optional& MOOTWSymbolModifiersType::
@@ -4360,9 +4360,9 @@ namespace msdl_1
   }
 
   void MOOTWSymbolModifiersType::
-  StaffComments (::std::auto_ptr< StaffComments_type > x)
+  StaffComments (::std::unique_ptr< StaffComments_type > x)
   {
-    this->StaffComments_.set (x);
+    this->StaffComments_.set (std::move (x));
   }
 
   const MOOTWSymbolModifiersType::AdditionalInfo_optional& MOOTWSymbolModifiersType::
@@ -4390,9 +4390,9 @@ namespace msdl_1
   }
 
   void MOOTWSymbolModifiersType::
-  AdditionalInfo (::std::auto_ptr< AdditionalInfo_type > x)
+  AdditionalInfo (::std::unique_ptr< AdditionalInfo_type > x)
   {
-    this->AdditionalInfo_.set (x);
+    this->AdditionalInfo_.set (std::move (x));
   }
 
   const MOOTWSymbolModifiersType::CombatEffectiveness_optional& MOOTWSymbolModifiersType::
@@ -4420,9 +4420,9 @@ namespace msdl_1
   }
 
   void MOOTWSymbolModifiersType::
-  CombatEffectiveness (::std::auto_ptr< CombatEffectiveness_type > x)
+  CombatEffectiveness (::std::unique_ptr< CombatEffectiveness_type > x)
   {
-    this->CombatEffectiveness_.set (x);
+    this->CombatEffectiveness_.set (std::move (x));
   }
 
   const MOOTWSymbolModifiersType::IFF_optional& MOOTWSymbolModifiersType::
@@ -4450,9 +4450,9 @@ namespace msdl_1
   }
 
   void MOOTWSymbolModifiersType::
-  IFF (::std::auto_ptr< IFF_type > x)
+  IFF (::std::unique_ptr< IFF_type > x)
   {
-    this->IFF_.set (x);
+    this->IFF_.set (std::move (x));
   }
 
   const MOOTWSymbolModifiersType::UniqueDesignation_type& MOOTWSymbolModifiersType::
@@ -4474,9 +4474,9 @@ namespace msdl_1
   }
 
   void MOOTWSymbolModifiersType::
-  UniqueDesignation (::std::auto_ptr< UniqueDesignation_type > x)
+  UniqueDesignation (::std::unique_ptr< UniqueDesignation_type > x)
   {
-    this->UniqueDesignation_.set (x);
+    this->UniqueDesignation_.set (std::move (x));
   }
 
   const MOOTWSymbolModifiersType::DateTimeGroup_optional& MOOTWSymbolModifiersType::
@@ -4504,9 +4504,9 @@ namespace msdl_1
   }
 
   void MOOTWSymbolModifiersType::
-  DateTimeGroup (::std::auto_ptr< DateTimeGroup_type > x)
+  DateTimeGroup (::std::unique_ptr< DateTimeGroup_type > x)
   {
-    this->DateTimeGroup_.set (x);
+    this->DateTimeGroup_.set (std::move (x));
   }
 
   const MOOTWSymbolModifiersType::SpecialC2HQ_optional& MOOTWSymbolModifiersType::
@@ -4534,9 +4534,9 @@ namespace msdl_1
   }
 
   void MOOTWSymbolModifiersType::
-  SpecialC2HQ (::std::auto_ptr< SpecialC2HQ_type > x)
+  SpecialC2HQ (::std::unique_ptr< SpecialC2HQ_type > x)
   {
-    this->SpecialC2HQ_.set (x);
+    this->SpecialC2HQ_.set (std::move (x));
   }
 
 
@@ -4568,9 +4568,9 @@ namespace msdl_1
   }
 
   void NBCEventSymbolModifiersType::
-  Quantity (::std::auto_ptr< Quantity_type > x)
+  Quantity (::std::unique_ptr< Quantity_type > x)
   {
-    this->Quantity_.set (x);
+    this->Quantity_.set (std::move (x));
   }
 
   const NBCEventSymbolModifiersType::AdditionalInfo_optional& NBCEventSymbolModifiersType::
@@ -4598,9 +4598,9 @@ namespace msdl_1
   }
 
   void NBCEventSymbolModifiersType::
-  AdditionalInfo (::std::auto_ptr< AdditionalInfo_type > x)
+  AdditionalInfo (::std::unique_ptr< AdditionalInfo_type > x)
   {
-    this->AdditionalInfo_.set (x);
+    this->AdditionalInfo_.set (std::move (x));
   }
 
   const NBCEventSymbolModifiersType::UniqueDesignation_optional& NBCEventSymbolModifiersType::
@@ -4628,9 +4628,9 @@ namespace msdl_1
   }
 
   void NBCEventSymbolModifiersType::
-  UniqueDesignation (::std::auto_ptr< UniqueDesignation_type > x)
+  UniqueDesignation (::std::unique_ptr< UniqueDesignation_type > x)
   {
-    this->UniqueDesignation_.set (x);
+    this->UniqueDesignation_.set (std::move (x));
   }
 
   const NBCEventSymbolModifiersType::NBCType_optional& NBCEventSymbolModifiersType::
@@ -4658,9 +4658,9 @@ namespace msdl_1
   }
 
   void NBCEventSymbolModifiersType::
-  NBCType (::std::auto_ptr< NBCType_type > x)
+  NBCType (::std::unique_ptr< NBCType_type > x)
   {
-    this->NBCType_.set (x);
+    this->NBCType_.set (std::move (x));
   }
 
   const NBCEventSymbolModifiersType::DateTimeGroup_optional& NBCEventSymbolModifiersType::
@@ -4688,9 +4688,9 @@ namespace msdl_1
   }
 
   void NBCEventSymbolModifiersType::
-  DateTimeGroup (::std::auto_ptr< DateTimeGroup_type > x)
+  DateTimeGroup (::std::unique_ptr< DateTimeGroup_type > x)
   {
-    this->DateTimeGroup_.set (x);
+    this->DateTimeGroup_.set (std::move (x));
   }
 
   const NBCEventSymbolModifiersType::Speed_type& NBCEventSymbolModifiersType::
@@ -4712,9 +4712,9 @@ namespace msdl_1
   }
 
   void NBCEventSymbolModifiersType::
-  Speed (::std::auto_ptr< Speed_type > x)
+  Speed (::std::unique_ptr< Speed_type > x)
   {
-    this->Speed_.set (x);
+    this->Speed_.set (std::move (x));
   }
 
   const NBCEventSymbolModifiersType::DirectionOfMovement_type& NBCEventSymbolModifiersType::
@@ -4736,9 +4736,9 @@ namespace msdl_1
   }
 
   void NBCEventSymbolModifiersType::
-  DirectionOfMovement (::std::auto_ptr< DirectionOfMovement_type > x)
+  DirectionOfMovement (::std::unique_ptr< DirectionOfMovement_type > x)
   {
-    this->DirectionOfMovement_.set (x);
+    this->DirectionOfMovement_.set (std::move (x));
   }
 
 
@@ -4764,9 +4764,9 @@ namespace msdl_1
   }
 
   void OptionsType::
-  MSDLVersion (::std::auto_ptr< MSDLVersion_type > x)
+  MSDLVersion (::std::unique_ptr< MSDLVersion_type > x)
   {
-    this->MSDLVersion_.set (x);
+    this->MSDLVersion_.set (std::move (x));
   }
 
   const OptionsType::OrganizationDetail_optional& OptionsType::
@@ -4794,9 +4794,9 @@ namespace msdl_1
   }
 
   void OptionsType::
-  OrganizationDetail (::std::auto_ptr< OrganizationDetail_type > x)
+  OrganizationDetail (::std::unique_ptr< OrganizationDetail_type > x)
   {
-    this->OrganizationDetail_.set (x);
+    this->OrganizationDetail_.set (std::move (x));
   }
 
   const OptionsType::ScenarioDataStandards_optional& OptionsType::
@@ -4824,9 +4824,9 @@ namespace msdl_1
   }
 
   void OptionsType::
-  ScenarioDataStandards (::std::auto_ptr< ScenarioDataStandards_type > x)
+  ScenarioDataStandards (::std::unique_ptr< ScenarioDataStandards_type > x)
   {
-    this->ScenarioDataStandards_.set (x);
+    this->ScenarioDataStandards_.set (std::move (x));
   }
 
 
@@ -4858,9 +4858,9 @@ namespace msdl_1
   }
 
   void OrganicRelationDataType::
-  OrganicForceSideHandle (::std::auto_ptr< OrganicForceSideHandle_type > x)
+  OrganicForceSideHandle (::std::unique_ptr< OrganicForceSideHandle_type > x)
   {
-    this->OrganicForceSideHandle_.set (x);
+    this->OrganicForceSideHandle_.set (std::move (x));
   }
 
   const OrganicRelationDataType::OrganicSuperiorHandle_optional& OrganicRelationDataType::
@@ -4888,9 +4888,9 @@ namespace msdl_1
   }
 
   void OrganicRelationDataType::
-  OrganicSuperiorHandle (::std::auto_ptr< OrganicSuperiorHandle_type > x)
+  OrganicSuperiorHandle (::std::unique_ptr< OrganicSuperiorHandle_type > x)
   {
-    this->OrganicSuperiorHandle_.set (x);
+    this->OrganicSuperiorHandle_.set (std::move (x));
   }
 
 
@@ -4916,9 +4916,9 @@ namespace msdl_1
   }
 
   void OrganicRelationType::
-  OrganicRelationData (::std::auto_ptr< OrganicRelationData_type > x)
+  OrganicRelationData (::std::unique_ptr< OrganicRelationData_type > x)
   {
-    this->OrganicRelationData_.set (x);
+    this->OrganicRelationData_.set (std::move (x));
   }
 
   const OrganicRelationType::OrganicRelationChoice_type& OrganicRelationType::
@@ -4940,9 +4940,9 @@ namespace msdl_1
   }
 
   void OrganicRelationType::
-  OrganicRelationChoice (::std::auto_ptr< OrganicRelationChoice_type > x)
+  OrganicRelationChoice (::std::unique_ptr< OrganicRelationChoice_type > x)
   {
-    this->OrganicRelationChoice_.set (x);
+    this->OrganicRelationChoice_.set (std::move (x));
   }
 
 
@@ -4968,9 +4968,9 @@ namespace msdl_1
   }
 
   void OrganizationDetailType::
-  AggregateBased (::std::auto_ptr< AggregateBased_type > x)
+  AggregateBased (::std::unique_ptr< AggregateBased_type > x)
   {
-    this->AggregateBased_.set (x);
+    this->AggregateBased_.set (std::move (x));
   }
 
   const OrganizationDetailType::AggregateEchelon_optional& OrganizationDetailType::
@@ -4998,9 +4998,9 @@ namespace msdl_1
   }
 
   void OrganizationDetailType::
-  AggregateEchelon (::std::auto_ptr< AggregateEchelon_type > x)
+  AggregateEchelon (::std::unique_ptr< AggregateEchelon_type > x)
   {
-    this->AggregateEchelon_.set (x);
+    this->AggregateEchelon_.set (std::move (x));
   }
 
 
@@ -5026,9 +5026,9 @@ namespace msdl_1
   }
 
   void OrganizationsType::
-  Units (::std::auto_ptr< Units_type > x)
+  Units (::std::unique_ptr< Units_type > x)
   {
-    this->Units_.set (x);
+    this->Units_.set (std::move (x));
   }
 
   const OrganizationsType::Equipment_optional& OrganizationsType::
@@ -5056,9 +5056,9 @@ namespace msdl_1
   }
 
   void OrganizationsType::
-  Equipment (::std::auto_ptr< Equipment_type > x)
+  Equipment (::std::unique_ptr< Equipment_type > x)
   {
-    this->Equipment_.set (x);
+    this->Equipment_.set (std::move (x));
   }
 
 
@@ -5128,9 +5128,9 @@ namespace msdl_1
   }
 
   void OverlayType::
-  ObjectHandle (::std::auto_ptr< ObjectHandle_type > x)
+  ObjectHandle (::std::unique_ptr< ObjectHandle_type > x)
   {
-    this->ObjectHandle_.set (x);
+    this->ObjectHandle_.set (std::move (x));
   }
 
   const OverlayType::OverlayType1_type& OverlayType::
@@ -5152,9 +5152,9 @@ namespace msdl_1
   }
 
   void OverlayType::
-  OverlayType1 (::std::auto_ptr< OverlayType1_type > x)
+  OverlayType1 (::std::unique_ptr< OverlayType1_type > x)
   {
-    this->OverlayType1_.set (x);
+    this->OverlayType1_.set (std::move (x));
   }
 
   const OverlayType::OverlayName_type& OverlayType::
@@ -5176,9 +5176,9 @@ namespace msdl_1
   }
 
   void OverlayType::
-  OverlayName (::std::auto_ptr< OverlayName_type > x)
+  OverlayName (::std::unique_ptr< OverlayName_type > x)
   {
-    this->OverlayName_.set (x);
+    this->OverlayName_.set (std::move (x));
   }
 
 
@@ -5204,9 +5204,9 @@ namespace msdl_1
   }
 
   void OwnerType::
-  OwnerChoice (::std::auto_ptr< OwnerChoice_type > x)
+  OwnerChoice (::std::unique_ptr< OwnerChoice_type > x)
   {
-    this->OwnerChoice_.set (x);
+    this->OwnerChoice_.set (std::move (x));
   }
 
   const OwnerType::OwnerData_type& OwnerType::
@@ -5228,9 +5228,9 @@ namespace msdl_1
   }
 
   void OwnerType::
-  OwnerData (::std::auto_ptr< OwnerData_type > x)
+  OwnerData (::std::unique_ptr< OwnerData_type > x)
   {
-    this->OwnerData_.set (x);
+    this->OwnerData_.set (std::move (x));
   }
 
 
@@ -5262,9 +5262,9 @@ namespace msdl_1
   }
 
   void OwnerDataType::
-  UnitOwnerHandle (::std::auto_ptr< UnitOwnerHandle_type > x)
+  UnitOwnerHandle (::std::unique_ptr< UnitOwnerHandle_type > x)
   {
-    this->UnitOwnerHandle_.set (x);
+    this->UnitOwnerHandle_.set (std::move (x));
   }
 
   const OwnerDataType::ForceOwnerHandle_optional& OwnerDataType::
@@ -5292,9 +5292,9 @@ namespace msdl_1
   }
 
   void OwnerDataType::
-  ForceOwnerHandle (::std::auto_ptr< ForceOwnerHandle_type > x)
+  ForceOwnerHandle (::std::unique_ptr< ForceOwnerHandle_type > x)
   {
-    this->ForceOwnerHandle_.set (x);
+    this->ForceOwnerHandle_.set (std::move (x));
   }
 
 
@@ -5320,9 +5320,9 @@ namespace msdl_1
   }
 
   void OwnFormationType::
-  FormationLocationType (::std::auto_ptr< FormationLocationType_type > x)
+  FormationLocationType (::std::unique_ptr< FormationLocationType_type > x)
   {
-    this->FormationLocationType_.set (x);
+    this->FormationLocationType_.set (std::move (x));
   }
 
   const OwnFormationType::FormationSpacing_optional& OwnFormationType::
@@ -5350,9 +5350,9 @@ namespace msdl_1
   }
 
   void OwnFormationType::
-  FormationSpacing (::std::auto_ptr< FormationSpacing_type > x)
+  FormationSpacing (::std::unique_ptr< FormationSpacing_type > x)
   {
-    this->FormationSpacing_.set (x);
+    this->FormationSpacing_.set (std::move (x));
   }
 
   const OwnFormationType::FormationOrientation_optional& OwnFormationType::
@@ -5380,9 +5380,9 @@ namespace msdl_1
   }
 
   void OwnFormationType::
-  FormationOrientation (::std::auto_ptr< FormationOrientation_type > x)
+  FormationOrientation (::std::unique_ptr< FormationOrientation_type > x)
   {
-    this->FormationOrientation_.set (x);
+    this->FormationOrientation_.set (std::move (x));
   }
 
   const OwnFormationType::FormationChoice_type& OwnFormationType::
@@ -5404,9 +5404,9 @@ namespace msdl_1
   }
 
   void OwnFormationType::
-  FormationChoice (::std::auto_ptr< FormationChoice_type > x)
+  FormationChoice (::std::unique_ptr< FormationChoice_type > x)
   {
-    this->FormationChoice_.set (x);
+    this->FormationChoice_.set (std::move (x));
   }
 
   const OwnFormationType::FormationData_type& OwnFormationType::
@@ -5428,9 +5428,9 @@ namespace msdl_1
   }
 
   void OwnFormationType::
-  FormationData (::std::auto_ptr< FormationData_type > x)
+  FormationData (::std::unique_ptr< FormationData_type > x)
   {
-    this->FormationData_.set (x);
+    this->FormationData_.set (std::move (x));
   }
 
 
@@ -5462,9 +5462,9 @@ namespace msdl_1
   }
 
   void PointSymbolModifiersType::
-  AdditionalInfo (::std::auto_ptr< AdditionalInfo_type > x)
+  AdditionalInfo (::std::unique_ptr< AdditionalInfo_type > x)
   {
-    this->AdditionalInfo_.set (x);
+    this->AdditionalInfo_.set (std::move (x));
   }
 
   const PointSymbolModifiersType::AdditionalInfo1_optional& PointSymbolModifiersType::
@@ -5492,9 +5492,9 @@ namespace msdl_1
   }
 
   void PointSymbolModifiersType::
-  AdditionalInfo1 (::std::auto_ptr< AdditionalInfo1_type > x)
+  AdditionalInfo1 (::std::unique_ptr< AdditionalInfo1_type > x)
   {
-    this->AdditionalInfo1_.set (x);
+    this->AdditionalInfo1_.set (std::move (x));
   }
 
   const PointSymbolModifiersType::UniqueDesignation_type& PointSymbolModifiersType::
@@ -5516,9 +5516,9 @@ namespace msdl_1
   }
 
   void PointSymbolModifiersType::
-  UniqueDesignation (::std::auto_ptr< UniqueDesignation_type > x)
+  UniqueDesignation (::std::unique_ptr< UniqueDesignation_type > x)
   {
-    this->UniqueDesignation_.set (x);
+    this->UniqueDesignation_.set (std::move (x));
   }
 
   const PointSymbolModifiersType::DateTimeGroup_optional& PointSymbolModifiersType::
@@ -5546,9 +5546,9 @@ namespace msdl_1
   }
 
   void PointSymbolModifiersType::
-  DateTimeGroup (::std::auto_ptr< DateTimeGroup_type > x)
+  DateTimeGroup (::std::unique_ptr< DateTimeGroup_type > x)
   {
-    this->DateTimeGroup_.set (x);
+    this->DateTimeGroup_.set (std::move (x));
   }
 
   const PointSymbolModifiersType::DateTimeGroup1_optional& PointSymbolModifiersType::
@@ -5576,9 +5576,9 @@ namespace msdl_1
   }
 
   void PointSymbolModifiersType::
-  DateTimeGroup1 (::std::auto_ptr< DateTimeGroup1_type > x)
+  DateTimeGroup1 (::std::unique_ptr< DateTimeGroup1_type > x)
   {
-    this->DateTimeGroup1_.set (x);
+    this->DateTimeGroup1_.set (std::move (x));
   }
 
   const PointSymbolModifiersType::Orientation_optional& PointSymbolModifiersType::
@@ -5606,9 +5606,9 @@ namespace msdl_1
   }
 
   void PointSymbolModifiersType::
-  Orientation (::std::auto_ptr< Orientation_type > x)
+  Orientation (::std::unique_ptr< Orientation_type > x)
   {
-    this->Orientation_.set (x);
+    this->Orientation_.set (std::move (x));
   }
 
 
@@ -5640,9 +5640,9 @@ namespace msdl_1
   }
 
   void RectangleAreaType::
-  Name (::std::auto_ptr< Name_type > x)
+  Name (::std::unique_ptr< Name_type > x)
   {
-    this->Name_.set (x);
+    this->Name_.set (std::move (x));
   }
 
   const RectangleAreaType::UpperRight_type& RectangleAreaType::
@@ -5664,9 +5664,9 @@ namespace msdl_1
   }
 
   void RectangleAreaType::
-  UpperRight (::std::auto_ptr< UpperRight_type > x)
+  UpperRight (::std::unique_ptr< UpperRight_type > x)
   {
-    this->UpperRight_.set (x);
+    this->UpperRight_.set (std::move (x));
   }
 
   const RectangleAreaType::LowerLeft_type& RectangleAreaType::
@@ -5688,9 +5688,9 @@ namespace msdl_1
   }
 
   void RectangleAreaType::
-  LowerLeft (::std::auto_ptr< LowerLeft_type > x)
+  LowerLeft (::std::unique_ptr< LowerLeft_type > x)
   {
-    this->LowerLeft_.set (x);
+    this->LowerLeft_.set (std::move (x));
   }
 
 
@@ -5716,9 +5716,9 @@ namespace msdl_1
   }
 
   void ScenarioDataStandardsType::
-  SymbologyDataStandard (::std::auto_ptr< SymbologyDataStandard_type > x)
+  SymbologyDataStandard (::std::unique_ptr< SymbologyDataStandard_type > x)
   {
-    this->SymbologyDataStandard_.set (x);
+    this->SymbologyDataStandard_.set (std::move (x));
   }
 
   const ScenarioDataStandardsType::CoordinateDataStandard_type& ScenarioDataStandardsType::
@@ -5740,9 +5740,9 @@ namespace msdl_1
   }
 
   void ScenarioDataStandardsType::
-  CoordinateDataStandard (::std::auto_ptr< CoordinateDataStandard_type > x)
+  CoordinateDataStandard (::std::unique_ptr< CoordinateDataStandard_type > x)
   {
-    this->CoordinateDataStandard_.set (x);
+    this->CoordinateDataStandard_.set (std::move (x));
   }
 
 
@@ -5774,9 +5774,9 @@ namespace msdl_1
   }
 
   void ScenarioWeatherType::
-  Atmosphere (::std::auto_ptr< Atmosphere_type > x)
+  Atmosphere (::std::unique_ptr< Atmosphere_type > x)
   {
-    this->Atmosphere_.set (x);
+    this->Atmosphere_.set (std::move (x));
   }
 
   const ScenarioWeatherType::CloudCoverItems_optional& ScenarioWeatherType::
@@ -5804,9 +5804,9 @@ namespace msdl_1
   }
 
   void ScenarioWeatherType::
-  CloudCoverItems (::std::auto_ptr< CloudCoverItems_type > x)
+  CloudCoverItems (::std::unique_ptr< CloudCoverItems_type > x)
   {
-    this->CloudCoverItems_.set (x);
+    this->CloudCoverItems_.set (std::move (x));
   }
 
   const ScenarioWeatherType::Icing_optional& ScenarioWeatherType::
@@ -5834,9 +5834,9 @@ namespace msdl_1
   }
 
   void ScenarioWeatherType::
-  Icing (::std::auto_ptr< Icing_type > x)
+  Icing (::std::unique_ptr< Icing_type > x)
   {
-    this->Icing_.set (x);
+    this->Icing_.set (std::move (x));
   }
 
   const ScenarioWeatherType::LightItems_optional& ScenarioWeatherType::
@@ -5864,9 +5864,9 @@ namespace msdl_1
   }
 
   void ScenarioWeatherType::
-  LightItems (::std::auto_ptr< LightItems_type > x)
+  LightItems (::std::unique_ptr< LightItems_type > x)
   {
-    this->LightItems_.set (x);
+    this->LightItems_.set (std::move (x));
   }
 
   const ScenarioWeatherType::Precipitation_optional& ScenarioWeatherType::
@@ -5894,9 +5894,9 @@ namespace msdl_1
   }
 
   void ScenarioWeatherType::
-  Precipitation (::std::auto_ptr< Precipitation_type > x)
+  Precipitation (::std::unique_ptr< Precipitation_type > x)
   {
-    this->Precipitation_.set (x);
+    this->Precipitation_.set (std::move (x));
   }
 
   const ScenarioWeatherType::VisibilityItems_optional& ScenarioWeatherType::
@@ -5924,9 +5924,9 @@ namespace msdl_1
   }
 
   void ScenarioWeatherType::
-  VisibilityItems (::std::auto_ptr< VisibilityItems_type > x)
+  VisibilityItems (::std::unique_ptr< VisibilityItems_type > x)
   {
-    this->VisibilityItems_.set (x);
+    this->VisibilityItems_.set (std::move (x));
   }
 
   const ScenarioWeatherType::WindItems_optional& ScenarioWeatherType::
@@ -5954,9 +5954,9 @@ namespace msdl_1
   }
 
   void ScenarioWeatherType::
-  WindItems (::std::auto_ptr< WindItems_type > x)
+  WindItems (::std::unique_ptr< WindItems_type > x)
   {
-    this->WindItems_.set (x);
+    this->WindItems_.set (std::move (x));
   }
 
 
@@ -5988,9 +5988,9 @@ namespace msdl_1
   }
 
   void StatusType::
-  MOPPLevel (::std::auto_ptr< MOPPLevel_type > x)
+  MOPPLevel (::std::unique_ptr< MOPPLevel_type > x)
   {
-    this->MOPPLevel_.set (x);
+    this->MOPPLevel_.set (std::move (x));
   }
 
   const StatusType::WeaponControlStatus_optional& StatusType::
@@ -6018,9 +6018,9 @@ namespace msdl_1
   }
 
   void StatusType::
-  WeaponControlStatus (::std::auto_ptr< WeaponControlStatus_type > x)
+  WeaponControlStatus (::std::unique_ptr< WeaponControlStatus_type > x)
   {
-    this->WeaponControlStatus_.set (x);
+    this->WeaponControlStatus_.set (std::move (x));
   }
 
 
@@ -6068,9 +6068,9 @@ namespace msdl_1
   }
 
   void SupportRelationType::
-  SupportedUnitHandle (::std::auto_ptr< SupportedUnitHandle_type > x)
+  SupportedUnitHandle (::std::unique_ptr< SupportedUnitHandle_type > x)
   {
-    this->SupportedUnitHandle_.set (x);
+    this->SupportedUnitHandle_.set (std::move (x));
   }
 
   const SupportRelationType::PriorityToSupport_optional& SupportRelationType::
@@ -6098,9 +6098,9 @@ namespace msdl_1
   }
 
   void SupportRelationType::
-  PriorityToSupport (::std::auto_ptr< PriorityToSupport_type > x)
+  PriorityToSupport (::std::unique_ptr< PriorityToSupport_type > x)
   {
-    this->PriorityToSupport_.set (x);
+    this->PriorityToSupport_.set (std::move (x));
   }
 
   const SupportRelationType::SupportType_type& SupportRelationType::
@@ -6122,9 +6122,9 @@ namespace msdl_1
   }
 
   void SupportRelationType::
-  SupportType (::std::auto_ptr< SupportType_type > x)
+  SupportType (::std::unique_ptr< SupportType_type > x)
   {
-    this->SupportType_.set (x);
+    this->SupportType_.set (std::move (x));
   }
 
   const SupportRelationType::SupportRoleType_optional& SupportRelationType::
@@ -6152,9 +6152,9 @@ namespace msdl_1
   }
 
   void SupportRelationType::
-  SupportRoleType (::std::auto_ptr< SupportRoleType_type > x)
+  SupportRoleType (::std::unique_ptr< SupportRoleType_type > x)
   {
-    this->SupportRoleType_.set (x);
+    this->SupportRoleType_.set (std::move (x));
   }
 
 
@@ -6186,9 +6186,9 @@ namespace msdl_1
   }
 
   void SymbolClassModifiersType::
-  PointSymbolModifiers (::std::auto_ptr< PointSymbolModifiers_type > x)
+  PointSymbolModifiers (::std::unique_ptr< PointSymbolModifiers_type > x)
   {
-    this->PointSymbolModifiers_.set (x);
+    this->PointSymbolModifiers_.set (std::move (x));
   }
 
   const SymbolClassModifiersType::LineSymbolModifiers_optional& SymbolClassModifiersType::
@@ -6216,9 +6216,9 @@ namespace msdl_1
   }
 
   void SymbolClassModifiersType::
-  LineSymbolModifiers (::std::auto_ptr< LineSymbolModifiers_type > x)
+  LineSymbolModifiers (::std::unique_ptr< LineSymbolModifiers_type > x)
   {
-    this->LineSymbolModifiers_.set (x);
+    this->LineSymbolModifiers_.set (std::move (x));
   }
 
   const SymbolClassModifiersType::AreaSymbolModifiers_optional& SymbolClassModifiersType::
@@ -6246,9 +6246,9 @@ namespace msdl_1
   }
 
   void SymbolClassModifiersType::
-  AreaSymbolModifiers (::std::auto_ptr< AreaSymbolModifiers_type > x)
+  AreaSymbolModifiers (::std::unique_ptr< AreaSymbolModifiers_type > x)
   {
-    this->AreaSymbolModifiers_.set (x);
+    this->AreaSymbolModifiers_.set (std::move (x));
   }
 
   const SymbolClassModifiersType::BoundarySymbolModifiers_optional& SymbolClassModifiersType::
@@ -6276,9 +6276,9 @@ namespace msdl_1
   }
 
   void SymbolClassModifiersType::
-  BoundarySymbolModifiers (::std::auto_ptr< BoundarySymbolModifiers_type > x)
+  BoundarySymbolModifiers (::std::unique_ptr< BoundarySymbolModifiers_type > x)
   {
-    this->BoundarySymbolModifiers_.set (x);
+    this->BoundarySymbolModifiers_.set (std::move (x));
   }
 
   const SymbolClassModifiersType::NBCEventSymbolModifiers_optional& SymbolClassModifiersType::
@@ -6306,9 +6306,9 @@ namespace msdl_1
   }
 
   void SymbolClassModifiersType::
-  NBCEventSymbolModifiers (::std::auto_ptr< NBCEventSymbolModifiers_type > x)
+  NBCEventSymbolModifiers (::std::unique_ptr< NBCEventSymbolModifiers_type > x)
   {
-    this->NBCEventSymbolModifiers_.set (x);
+    this->NBCEventSymbolModifiers_.set (std::move (x));
   }
 
   const SymbolClassModifiersType::TaskSymbolModifiers_optional& SymbolClassModifiersType::
@@ -6336,9 +6336,9 @@ namespace msdl_1
   }
 
   void SymbolClassModifiersType::
-  TaskSymbolModifiers (::std::auto_ptr< TaskSymbolModifiers_type > x)
+  TaskSymbolModifiers (::std::unique_ptr< TaskSymbolModifiers_type > x)
   {
-    this->TaskSymbolModifiers_.set (x);
+    this->TaskSymbolModifiers_.set (std::move (x));
   }
 
 
@@ -6364,9 +6364,9 @@ namespace msdl_1
   }
 
   void SymbologyDataStandardType::
-  StandardName (::std::auto_ptr< StandardName_type > x)
+  StandardName (::std::unique_ptr< StandardName_type > x)
   {
-    this->StandardName_.set (x);
+    this->StandardName_.set (std::move (x));
   }
 
   const SymbologyDataStandardType::MajorVersion_type& SymbologyDataStandardType::
@@ -6388,9 +6388,9 @@ namespace msdl_1
   }
 
   void SymbologyDataStandardType::
-  MajorVersion (::std::auto_ptr< MajorVersion_type > x)
+  MajorVersion (::std::unique_ptr< MajorVersion_type > x)
   {
-    this->MajorVersion_.set (x);
+    this->MajorVersion_.set (std::move (x));
   }
 
   const SymbologyDataStandardType::MinorVersion_type& SymbologyDataStandardType::
@@ -6412,9 +6412,9 @@ namespace msdl_1
   }
 
   void SymbologyDataStandardType::
-  MinorVersion (::std::auto_ptr< MinorVersion_type > x)
+  MinorVersion (::std::unique_ptr< MinorVersion_type > x)
   {
-    this->MinorVersion_.set (x);
+    this->MinorVersion_.set (std::move (x));
   }
 
 
@@ -6462,9 +6462,9 @@ namespace msdl_1
   }
 
   void TacticalGraphicType::
-  ObjectHandle (::std::auto_ptr< ObjectHandle_type > x)
+  ObjectHandle (::std::unique_ptr< ObjectHandle_type > x)
   {
-    this->ObjectHandle_.set (x);
+    this->ObjectHandle_.set (std::move (x));
   }
 
   const TacticalGraphicType::SymbolIdentifier_type& TacticalGraphicType::
@@ -6486,9 +6486,9 @@ namespace msdl_1
   }
 
   void TacticalGraphicType::
-  SymbolIdentifier (::std::auto_ptr< SymbolIdentifier_type > x)
+  SymbolIdentifier (::std::unique_ptr< SymbolIdentifier_type > x)
   {
-    this->SymbolIdentifier_.set (x);
+    this->SymbolIdentifier_.set (std::move (x));
   }
 
   const TacticalGraphicType::Affiliation_type& TacticalGraphicType::
@@ -6510,9 +6510,9 @@ namespace msdl_1
   }
 
   void TacticalGraphicType::
-  Affiliation (::std::auto_ptr< Affiliation_type > x)
+  Affiliation (::std::unique_ptr< Affiliation_type > x)
   {
-    this->Affiliation_.set (x);
+    this->Affiliation_.set (std::move (x));
   }
 
   const TacticalGraphicType::Owner_type& TacticalGraphicType::
@@ -6534,9 +6534,9 @@ namespace msdl_1
   }
 
   void TacticalGraphicType::
-  Owner (::std::auto_ptr< Owner_type > x)
+  Owner (::std::unique_ptr< Owner_type > x)
   {
-    this->Owner_.set (x);
+    this->Owner_.set (std::move (x));
   }
 
   const TacticalGraphicType::AnchorPoints_type& TacticalGraphicType::
@@ -6558,9 +6558,9 @@ namespace msdl_1
   }
 
   void TacticalGraphicType::
-  AnchorPoints (::std::auto_ptr< AnchorPoints_type > x)
+  AnchorPoints (::std::unique_ptr< AnchorPoints_type > x)
   {
-    this->AnchorPoints_.set (x);
+    this->AnchorPoints_.set (std::move (x));
   }
 
   const TacticalGraphicType::AssociatedOverlays_optional& TacticalGraphicType::
@@ -6588,9 +6588,9 @@ namespace msdl_1
   }
 
   void TacticalGraphicType::
-  AssociatedOverlays (::std::auto_ptr< AssociatedOverlays_type > x)
+  AssociatedOverlays (::std::unique_ptr< AssociatedOverlays_type > x)
   {
-    this->AssociatedOverlays_.set (x);
+    this->AssociatedOverlays_.set (std::move (x));
   }
 
   const TacticalGraphicType::SymbolClassData_optional& TacticalGraphicType::
@@ -6618,9 +6618,9 @@ namespace msdl_1
   }
 
   void TacticalGraphicType::
-  SymbolClassData (::std::auto_ptr< SymbolClassData_type > x)
+  SymbolClassData (::std::unique_ptr< SymbolClassData_type > x)
   {
-    this->SymbolClassData_.set (x);
+    this->SymbolClassData_.set (std::move (x));
   }
 
   const TacticalGraphicType::SymbolClassChoice_type& TacticalGraphicType::
@@ -6642,9 +6642,9 @@ namespace msdl_1
   }
 
   void TacticalGraphicType::
-  SymbolClassChoice (::std::auto_ptr< SymbolClassChoice_type > x)
+  SymbolClassChoice (::std::unique_ptr< SymbolClassChoice_type > x)
   {
-    this->SymbolClassChoice_.set (x);
+    this->SymbolClassChoice_.set (std::move (x));
   }
 
 
@@ -6676,9 +6676,9 @@ namespace msdl_1
   }
 
   void TaskSymbolModifiersType::
-  UniqueDesignation (::std::auto_ptr< UniqueDesignation_type > x)
+  UniqueDesignation (::std::unique_ptr< UniqueDesignation_type > x)
   {
-    this->UniqueDesignation_.set (x);
+    this->UniqueDesignation_.set (std::move (x));
   }
 
   const TaskSymbolModifiersType::DateTimeGroup_optional& TaskSymbolModifiersType::
@@ -6706,9 +6706,9 @@ namespace msdl_1
   }
 
   void TaskSymbolModifiersType::
-  DateTimeGroup (::std::auto_ptr< DateTimeGroup_type > x)
+  DateTimeGroup (::std::unique_ptr< DateTimeGroup_type > x)
   {
-    this->DateTimeGroup_.set (x);
+    this->DateTimeGroup_.set (std::move (x));
   }
 
 
@@ -6740,9 +6740,9 @@ namespace msdl_1
   }
 
   void UnitDispositionType::
-  Location (::std::auto_ptr< Location_type > x)
+  Location (::std::unique_ptr< Location_type > x)
   {
-    this->Location_.set (x);
+    this->Location_.set (std::move (x));
   }
 
   const UnitDispositionType::DirectionOfMovement_optional& UnitDispositionType::
@@ -6770,9 +6770,9 @@ namespace msdl_1
   }
 
   void UnitDispositionType::
-  DirectionOfMovement (::std::auto_ptr< DirectionOfMovement_type > x)
+  DirectionOfMovement (::std::unique_ptr< DirectionOfMovement_type > x)
   {
-    this->DirectionOfMovement_.set (x);
+    this->DirectionOfMovement_.set (std::move (x));
   }
 
   const UnitDispositionType::Speed_optional& UnitDispositionType::
@@ -6800,9 +6800,9 @@ namespace msdl_1
   }
 
   void UnitDispositionType::
-  Speed (::std::auto_ptr< Speed_type > x)
+  Speed (::std::unique_ptr< Speed_type > x)
   {
-    this->Speed_.set (x);
+    this->Speed_.set (std::move (x));
   }
 
   const UnitDispositionType::FormationPosition_optional& UnitDispositionType::
@@ -6830,9 +6830,9 @@ namespace msdl_1
   }
 
   void UnitDispositionType::
-  FormationPosition (::std::auto_ptr< FormationPosition_type > x)
+  FormationPosition (::std::unique_ptr< FormationPosition_type > x)
   {
-    this->FormationPosition_.set (x);
+    this->FormationPosition_.set (std::move (x));
   }
 
   const UnitDispositionType::OwnFormation_optional& UnitDispositionType::
@@ -6860,9 +6860,9 @@ namespace msdl_1
   }
 
   void UnitDispositionType::
-  OwnFormation (::std::auto_ptr< OwnFormation_type > x)
+  OwnFormation (::std::unique_ptr< OwnFormation_type > x)
   {
-    this->OwnFormation_.set (x);
+    this->OwnFormation_.set (std::move (x));
   }
 
 
@@ -6894,9 +6894,9 @@ namespace msdl_1
   }
 
   void UnitModelType::
-  Resolution (::std::auto_ptr< Resolution_type > x)
+  Resolution (::std::unique_ptr< Resolution_type > x)
   {
-    this->Resolution_.set (x);
+    this->Resolution_.set (std::move (x));
   }
 
   const UnitModelType::AggregateBased_optional& UnitModelType::
@@ -6924,9 +6924,9 @@ namespace msdl_1
   }
 
   void UnitModelType::
-  AggregateBased (::std::auto_ptr< AggregateBased_type > x)
+  AggregateBased (::std::unique_ptr< AggregateBased_type > x)
   {
-    this->AggregateBased_.set (x);
+    this->AggregateBased_.set (std::move (x));
   }
 
 
@@ -6952,9 +6952,9 @@ namespace msdl_1
   }
 
   void UnitRelationsType::
-  ForceRelation (::std::auto_ptr< ForceRelation_type > x)
+  ForceRelation (::std::unique_ptr< ForceRelation_type > x)
   {
-    this->ForceRelation_.set (x);
+    this->ForceRelation_.set (std::move (x));
   }
 
   const UnitRelationsType::SupportRelations_optional& UnitRelationsType::
@@ -6982,9 +6982,9 @@ namespace msdl_1
   }
 
   void UnitRelationsType::
-  SupportRelations (::std::auto_ptr< SupportRelations_type > x)
+  SupportRelations (::std::unique_ptr< SupportRelations_type > x)
   {
-    this->SupportRelations_.set (x);
+    this->SupportRelations_.set (std::move (x));
   }
 
   const UnitRelationsType::OrganicRelation_optional& UnitRelationsType::
@@ -7012,9 +7012,9 @@ namespace msdl_1
   }
 
   void UnitRelationsType::
-  OrganicRelation (::std::auto_ptr< OrganicRelation_type > x)
+  OrganicRelation (::std::unique_ptr< OrganicRelation_type > x)
   {
-    this->OrganicRelation_.set (x);
+    this->OrganicRelation_.set (std::move (x));
   }
 
 
@@ -7068,9 +7068,9 @@ namespace msdl_1
   }
 
   void UnitSymbolModifiersType::
-  Echelon (::std::auto_ptr< Echelon_type > x)
+  Echelon (::std::unique_ptr< Echelon_type > x)
   {
-    this->Echelon_.set (x);
+    this->Echelon_.set (std::move (x));
   }
 
   const UnitSymbolModifiersType::ReinforcedReduced_optional& UnitSymbolModifiersType::
@@ -7098,9 +7098,9 @@ namespace msdl_1
   }
 
   void UnitSymbolModifiersType::
-  ReinforcedReduced (::std::auto_ptr< ReinforcedReduced_type > x)
+  ReinforcedReduced (::std::unique_ptr< ReinforcedReduced_type > x)
   {
-    this->ReinforcedReduced_.set (x);
+    this->ReinforcedReduced_.set (std::move (x));
   }
 
   const UnitSymbolModifiersType::StaffComments_optional& UnitSymbolModifiersType::
@@ -7128,9 +7128,9 @@ namespace msdl_1
   }
 
   void UnitSymbolModifiersType::
-  StaffComments (::std::auto_ptr< StaffComments_type > x)
+  StaffComments (::std::unique_ptr< StaffComments_type > x)
   {
-    this->StaffComments_.set (x);
+    this->StaffComments_.set (std::move (x));
   }
 
   const UnitSymbolModifiersType::AdditionalInfo_optional& UnitSymbolModifiersType::
@@ -7158,9 +7158,9 @@ namespace msdl_1
   }
 
   void UnitSymbolModifiersType::
-  AdditionalInfo (::std::auto_ptr< AdditionalInfo_type > x)
+  AdditionalInfo (::std::unique_ptr< AdditionalInfo_type > x)
   {
-    this->AdditionalInfo_.set (x);
+    this->AdditionalInfo_.set (std::move (x));
   }
 
   const UnitSymbolModifiersType::CombatEffectiveness_optional& UnitSymbolModifiersType::
@@ -7188,9 +7188,9 @@ namespace msdl_1
   }
 
   void UnitSymbolModifiersType::
-  CombatEffectiveness (::std::auto_ptr< CombatEffectiveness_type > x)
+  CombatEffectiveness (::std::unique_ptr< CombatEffectiveness_type > x)
   {
-    this->CombatEffectiveness_.set (x);
+    this->CombatEffectiveness_.set (std::move (x));
   }
 
   const UnitSymbolModifiersType::HigherFormation_optional& UnitSymbolModifiersType::
@@ -7218,9 +7218,9 @@ namespace msdl_1
   }
 
   void UnitSymbolModifiersType::
-  HigherFormation (::std::auto_ptr< HigherFormation_type > x)
+  HigherFormation (::std::unique_ptr< HigherFormation_type > x)
   {
-    this->HigherFormation_.set (x);
+    this->HigherFormation_.set (std::move (x));
   }
 
   const UnitSymbolModifiersType::IFF_optional& UnitSymbolModifiersType::
@@ -7248,9 +7248,9 @@ namespace msdl_1
   }
 
   void UnitSymbolModifiersType::
-  IFF (::std::auto_ptr< IFF_type > x)
+  IFF (::std::unique_ptr< IFF_type > x)
   {
-    this->IFF_.set (x);
+    this->IFF_.set (std::move (x));
   }
 
   const UnitSymbolModifiersType::UniqueDesignation_type& UnitSymbolModifiersType::
@@ -7272,9 +7272,9 @@ namespace msdl_1
   }
 
   void UnitSymbolModifiersType::
-  UniqueDesignation (::std::auto_ptr< UniqueDesignation_type > x)
+  UniqueDesignation (::std::unique_ptr< UniqueDesignation_type > x)
   {
-    this->UniqueDesignation_.set (x);
+    this->UniqueDesignation_.set (std::move (x));
   }
 
   const UnitSymbolModifiersType::SpecialC2HQ_optional& UnitSymbolModifiersType::
@@ -7302,9 +7302,9 @@ namespace msdl_1
   }
 
   void UnitSymbolModifiersType::
-  SpecialC2HQ (::std::auto_ptr< SpecialC2HQ_type > x)
+  SpecialC2HQ (::std::unique_ptr< SpecialC2HQ_type > x)
   {
-    this->SpecialC2HQ_.set (x);
+    this->SpecialC2HQ_.set (std::move (x));
   }
 
 
@@ -7330,9 +7330,9 @@ namespace msdl_1
   }
 
   void UnitType::
-  ObjectHandle (::std::auto_ptr< ObjectHandle_type > x)
+  ObjectHandle (::std::unique_ptr< ObjectHandle_type > x)
   {
-    this->ObjectHandle_.set (x);
+    this->ObjectHandle_.set (std::move (x));
   }
 
   const UnitType::SymbolIdentifier_type& UnitType::
@@ -7354,9 +7354,9 @@ namespace msdl_1
   }
 
   void UnitType::
-  SymbolIdentifier (::std::auto_ptr< SymbolIdentifier_type > x)
+  SymbolIdentifier (::std::unique_ptr< SymbolIdentifier_type > x)
   {
-    this->SymbolIdentifier_.set (x);
+    this->SymbolIdentifier_.set (std::move (x));
   }
 
   const UnitType::Name_optional& UnitType::
@@ -7384,9 +7384,9 @@ namespace msdl_1
   }
 
   void UnitType::
-  Name (::std::auto_ptr< Name_type > x)
+  Name (::std::unique_ptr< Name_type > x)
   {
-    this->Name_.set (x);
+    this->Name_.set (std::move (x));
   }
 
   const UnitType::UnitSymbolModifiers_optional& UnitType::
@@ -7414,9 +7414,9 @@ namespace msdl_1
   }
 
   void UnitType::
-  UnitSymbolModifiers (::std::auto_ptr< UnitSymbolModifiers_type > x)
+  UnitSymbolModifiers (::std::unique_ptr< UnitSymbolModifiers_type > x)
   {
-    this->UnitSymbolModifiers_.set (x);
+    this->UnitSymbolModifiers_.set (std::move (x));
   }
 
   const UnitType::CommunicationNetInstances_optional& UnitType::
@@ -7444,9 +7444,9 @@ namespace msdl_1
   }
 
   void UnitType::
-  CommunicationNetInstances (::std::auto_ptr< CommunicationNetInstances_type > x)
+  CommunicationNetInstances (::std::unique_ptr< CommunicationNetInstances_type > x)
   {
-    this->CommunicationNetInstances_.set (x);
+    this->CommunicationNetInstances_.set (std::move (x));
   }
 
   const UnitType::Status_optional& UnitType::
@@ -7474,9 +7474,9 @@ namespace msdl_1
   }
 
   void UnitType::
-  Status (::std::auto_ptr< Status_type > x)
+  Status (::std::unique_ptr< Status_type > x)
   {
-    this->Status_.set (x);
+    this->Status_.set (std::move (x));
   }
 
   const UnitType::Disposition_optional& UnitType::
@@ -7504,9 +7504,9 @@ namespace msdl_1
   }
 
   void UnitType::
-  Disposition (::std::auto_ptr< Disposition_type > x)
+  Disposition (::std::unique_ptr< Disposition_type > x)
   {
-    this->Disposition_.set (x);
+    this->Disposition_.set (std::move (x));
   }
 
   const UnitType::Relations_type& UnitType::
@@ -7528,9 +7528,9 @@ namespace msdl_1
   }
 
   void UnitType::
-  Relations (::std::auto_ptr< Relations_type > x)
+  Relations (::std::unique_ptr< Relations_type > x)
   {
-    this->Relations_.set (x);
+    this->Relations_.set (std::move (x));
   }
 
   const UnitType::Model_optional& UnitType::
@@ -7558,9 +7558,9 @@ namespace msdl_1
   }
 
   void UnitType::
-  Model (::std::auto_ptr< Model_type > x)
+  Model (::std::unique_ptr< Model_type > x)
   {
-    this->Model_.set (x);
+    this->Model_.set (std::move (x));
   }
 
 
@@ -7586,9 +7586,9 @@ namespace msdl_1
   }
 
   void UTMType::
-  UTMGridZone (::std::auto_ptr< UTMGridZone_type > x)
+  UTMGridZone (::std::unique_ptr< UTMGridZone_type > x)
   {
-    this->UTMGridZone_.set (x);
+    this->UTMGridZone_.set (std::move (x));
   }
 
   const UTMType::UTMEasting_type& UTMType::
@@ -7610,9 +7610,9 @@ namespace msdl_1
   }
 
   void UTMType::
-  UTMEasting (::std::auto_ptr< UTMEasting_type > x)
+  UTMEasting (::std::unique_ptr< UTMEasting_type > x)
   {
-    this->UTMEasting_.set (x);
+    this->UTMEasting_.set (std::move (x));
   }
 
   const UTMType::UTMNorthing_type& UTMType::
@@ -7634,9 +7634,9 @@ namespace msdl_1
   }
 
   void UTMType::
-  UTMNorthing (::std::auto_ptr< UTMNorthing_type > x)
+  UTMNorthing (::std::unique_ptr< UTMNorthing_type > x)
   {
-    this->UTMNorthing_.set (x);
+    this->UTMNorthing_.set (std::move (x));
   }
 
   const UTMType::ElevationAGL_optional& UTMType::
@@ -7664,9 +7664,9 @@ namespace msdl_1
   }
 
   void UTMType::
-  ElevationAGL (::std::auto_ptr< ElevationAGL_type > x)
+  ElevationAGL (::std::unique_ptr< ElevationAGL_type > x)
   {
-    this->ElevationAGL_.set (x);
+    this->ElevationAGL_.set (std::move (x));
   }
 
 
@@ -7747,19 +7747,19 @@ namespace msdl_1
 
   AnchorPointType::
   AnchorPointType (const AnchorChoice_type& AnchorChoice,
-                   ::std::auto_ptr< Anchor_type > Anchor)
+                   ::std::unique_ptr< Anchor_type > Anchor)
   : ::xml_schema::type (),
     AnchorChoice_ (AnchorChoice, this),
-    Anchor_ (Anchor, this)
+    Anchor_ (std::move (Anchor), this)
   {
   }
 
   AnchorPointType::
-  AnchorPointType (::std::auto_ptr< AnchorChoice_type > AnchorChoice,
-                   ::std::auto_ptr< Anchor_type > Anchor)
+  AnchorPointType (::std::unique_ptr< AnchorChoice_type > AnchorChoice,
+                   ::std::unique_ptr< Anchor_type > Anchor)
   : ::xml_schema::type (),
-    AnchorChoice_ (AnchorChoice, this),
-    Anchor_ (Anchor, this)
+    AnchorChoice_ (std::move (AnchorChoice), this),
+    Anchor_ (std::move (Anchor), this)
   {
   }
 
@@ -7801,7 +7801,7 @@ namespace msdl_1
       // AnchorChoice
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AnchorChoice",
             "",
@@ -7812,7 +7812,7 @@ namespace msdl_1
         {
           if (!AnchorChoice_.present ())
           {
-            ::std::auto_ptr< AnchorChoice_type > r (
+            ::std::unique_ptr< AnchorChoice_type > r (
               dynamic_cast< AnchorChoice_type* > (tmp.get ()));
 
             if (r.get ())
@@ -7820,7 +7820,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AnchorChoice_.set (r);
+            this->AnchorChoice_.set (::std::move (r));
             continue;
           }
         }
@@ -7829,7 +7829,7 @@ namespace msdl_1
       // Anchor
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Anchor",
             "",
@@ -7840,7 +7840,7 @@ namespace msdl_1
         {
           if (!Anchor_.present ())
           {
-            ::std::auto_ptr< Anchor_type > r (
+            ::std::unique_ptr< Anchor_type > r (
               dynamic_cast< Anchor_type* > (tmp.get ()));
 
             if (r.get ())
@@ -7848,7 +7848,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Anchor_.set (r);
+            this->Anchor_.set (::std::move (r));
             continue;
           }
         }
@@ -7981,7 +7981,7 @@ namespace msdl_1
       // AnchorPoint
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AnchorPoint",
             "",
@@ -7990,7 +7990,7 @@ namespace msdl_1
 
         if (tmp.get () != 0)
         {
-          ::std::auto_ptr< AnchorPoint_type > r (
+          ::std::unique_ptr< AnchorPoint_type > r (
             dynamic_cast< AnchorPoint_type* > (tmp.get ()));
 
           if (r.get ())
@@ -7998,7 +7998,7 @@ namespace msdl_1
           else
             throw ::xsd::cxx::tree::not_derived< char > ();
 
-          this->AnchorPoint_.push_back (r);
+          this->AnchorPoint_.push_back (::std::move (r));
           continue;
         }
       }
@@ -8120,7 +8120,7 @@ namespace msdl_1
       // Location
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Location",
             "",
@@ -8131,7 +8131,7 @@ namespace msdl_1
         {
           if (!this->Location_)
           {
-            ::std::auto_ptr< Location_type > r (
+            ::std::unique_ptr< Location_type > r (
               dynamic_cast< Location_type* > (tmp.get ()));
 
             if (r.get ())
@@ -8139,7 +8139,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Location_.set (r);
+            this->Location_.set (::std::move (r));
             continue;
           }
         }
@@ -8148,7 +8148,7 @@ namespace msdl_1
       // PointSymbolHandle
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "PointSymbolHandle",
             "",
@@ -8159,7 +8159,7 @@ namespace msdl_1
         {
           if (!this->PointSymbolHandle_)
           {
-            ::std::auto_ptr< PointSymbolHandle_type > r (
+            ::std::unique_ptr< PointSymbolHandle_type > r (
               dynamic_cast< PointSymbolHandle_type* > (tmp.get ()));
 
             if (r.get ())
@@ -8167,7 +8167,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->PointSymbolHandle_.set (r);
+            this->PointSymbolHandle_.set (::std::move (r));
             continue;
           }
         }
@@ -8324,7 +8324,7 @@ namespace msdl_1
       // Echelon
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Echelon",
             "",
@@ -8335,7 +8335,7 @@ namespace msdl_1
         {
           if (!this->Echelon_)
           {
-            ::std::auto_ptr< Echelon_type > r (
+            ::std::unique_ptr< Echelon_type > r (
               dynamic_cast< Echelon_type* > (tmp.get ()));
 
             if (r.get ())
@@ -8343,7 +8343,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Echelon_.set (r);
+            this->Echelon_.set (::std::move (r));
             continue;
           }
         }
@@ -8352,7 +8352,7 @@ namespace msdl_1
       // AdditionalInfo
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AdditionalInfo",
             "",
@@ -8363,7 +8363,7 @@ namespace msdl_1
         {
           if (!this->AdditionalInfo_)
           {
-            ::std::auto_ptr< AdditionalInfo_type > r (
+            ::std::unique_ptr< AdditionalInfo_type > r (
               dynamic_cast< AdditionalInfo_type* > (tmp.get ()));
 
             if (r.get ())
@@ -8371,7 +8371,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AdditionalInfo_.set (r);
+            this->AdditionalInfo_.set (::std::move (r));
             continue;
           }
         }
@@ -8380,7 +8380,7 @@ namespace msdl_1
       // AdditionalInfo1
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AdditionalInfo1",
             "",
@@ -8391,7 +8391,7 @@ namespace msdl_1
         {
           if (!this->AdditionalInfo1_)
           {
-            ::std::auto_ptr< AdditionalInfo1_type > r (
+            ::std::unique_ptr< AdditionalInfo1_type > r (
               dynamic_cast< AdditionalInfo1_type* > (tmp.get ()));
 
             if (r.get ())
@@ -8399,7 +8399,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AdditionalInfo1_.set (r);
+            this->AdditionalInfo1_.set (::std::move (r));
             continue;
           }
         }
@@ -8408,7 +8408,7 @@ namespace msdl_1
       // AdditionalInfo2
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AdditionalInfo2",
             "",
@@ -8419,7 +8419,7 @@ namespace msdl_1
         {
           if (!this->AdditionalInfo2_)
           {
-            ::std::auto_ptr< AdditionalInfo2_type > r (
+            ::std::unique_ptr< AdditionalInfo2_type > r (
               dynamic_cast< AdditionalInfo2_type* > (tmp.get ()));
 
             if (r.get ())
@@ -8427,7 +8427,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AdditionalInfo2_.set (r);
+            this->AdditionalInfo2_.set (::std::move (r));
             continue;
           }
         }
@@ -8436,7 +8436,7 @@ namespace msdl_1
       // UniqueDesignation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "UniqueDesignation",
             "",
@@ -8447,7 +8447,7 @@ namespace msdl_1
         {
           if (!this->UniqueDesignation_)
           {
-            ::std::auto_ptr< UniqueDesignation_type > r (
+            ::std::unique_ptr< UniqueDesignation_type > r (
               dynamic_cast< UniqueDesignation_type* > (tmp.get ()));
 
             if (r.get ())
@@ -8455,7 +8455,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->UniqueDesignation_.set (r);
+            this->UniqueDesignation_.set (::std::move (r));
             continue;
           }
         }
@@ -8464,7 +8464,7 @@ namespace msdl_1
       // DateTimeGroup
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "DateTimeGroup",
             "",
@@ -8475,7 +8475,7 @@ namespace msdl_1
         {
           if (!this->DateTimeGroup_)
           {
-            ::std::auto_ptr< DateTimeGroup_type > r (
+            ::std::unique_ptr< DateTimeGroup_type > r (
               dynamic_cast< DateTimeGroup_type* > (tmp.get ()));
 
             if (r.get ())
@@ -8483,7 +8483,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->DateTimeGroup_.set (r);
+            this->DateTimeGroup_.set (::std::move (r));
             continue;
           }
         }
@@ -8492,7 +8492,7 @@ namespace msdl_1
       // DateTimeGroup1
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "DateTimeGroup1",
             "",
@@ -8503,7 +8503,7 @@ namespace msdl_1
         {
           if (!this->DateTimeGroup1_)
           {
-            ::std::auto_ptr< DateTimeGroup1_type > r (
+            ::std::unique_ptr< DateTimeGroup1_type > r (
               dynamic_cast< DateTimeGroup1_type* > (tmp.get ()));
 
             if (r.get ())
@@ -8511,7 +8511,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->DateTimeGroup1_.set (r);
+            this->DateTimeGroup1_.set (::std::move (r));
             continue;
           }
         }
@@ -8711,9 +8711,9 @@ namespace msdl_1
   }
 
   AssociatedOverlaysType::
-  AssociatedOverlaysType (::std::auto_ptr< OverlayHandles_type > OverlayHandles)
+  AssociatedOverlaysType (::std::unique_ptr< OverlayHandles_type > OverlayHandles)
   : ::xml_schema::type (),
-    OverlayHandles_ (OverlayHandles, this),
+    OverlayHandles_ (std::move (OverlayHandles), this),
     SourceOverlayType_ (this)
   {
   }
@@ -8756,7 +8756,7 @@ namespace msdl_1
       // OverlayHandles
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "OverlayHandles",
             "",
@@ -8767,7 +8767,7 @@ namespace msdl_1
         {
           if (!OverlayHandles_.present ())
           {
-            ::std::auto_ptr< OverlayHandles_type > r (
+            ::std::unique_ptr< OverlayHandles_type > r (
               dynamic_cast< OverlayHandles_type* > (tmp.get ()));
 
             if (r.get ())
@@ -8775,7 +8775,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->OverlayHandles_.set (r);
+            this->OverlayHandles_.set (::std::move (r));
             continue;
           }
         }
@@ -8784,7 +8784,7 @@ namespace msdl_1
       // SourceOverlayType
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "SourceOverlayType",
             "",
@@ -8795,7 +8795,7 @@ namespace msdl_1
         {
           if (!this->SourceOverlayType_)
           {
-            ::std::auto_ptr< SourceOverlayType_type > r (
+            ::std::unique_ptr< SourceOverlayType_type > r (
               dynamic_cast< SourceOverlayType_type* > (tmp.get ()));
 
             if (r.get ())
@@ -8803,7 +8803,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->SourceOverlayType_.set (r);
+            this->SourceOverlayType_.set (::std::move (r));
             continue;
           }
         }
@@ -8939,7 +8939,7 @@ namespace msdl_1
       // Association
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Association",
             "",
@@ -8948,7 +8948,7 @@ namespace msdl_1
 
         if (tmp.get () != 0)
         {
-          ::std::auto_ptr< Association_type > r (
+          ::std::unique_ptr< Association_type > r (
             dynamic_cast< Association_type* > (tmp.get ()));
 
           if (r.get ())
@@ -8956,7 +8956,7 @@ namespace msdl_1
           else
             throw ::xsd::cxx::tree::not_derived< char > ();
 
-          this->Association_.push_back (r);
+          this->Association_.push_back (::std::move (r));
           continue;
         }
       }
@@ -9042,11 +9042,11 @@ namespace msdl_1
   }
 
   AssociationType::
-  AssociationType (::std::auto_ptr< AffiliateHandle_type > AffiliateHandle,
-                   ::std::auto_ptr< Relationship_type > Relationship)
+  AssociationType (::std::unique_ptr< AffiliateHandle_type > AffiliateHandle,
+                   ::std::unique_ptr< Relationship_type > Relationship)
   : ::xml_schema::type (),
-    AffiliateHandle_ (AffiliateHandle, this),
-    Relationship_ (Relationship, this)
+    AffiliateHandle_ (std::move (AffiliateHandle), this),
+    Relationship_ (std::move (Relationship), this)
   {
   }
 
@@ -9088,7 +9088,7 @@ namespace msdl_1
       // AffiliateHandle
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AffiliateHandle",
             "",
@@ -9099,7 +9099,7 @@ namespace msdl_1
         {
           if (!AffiliateHandle_.present ())
           {
-            ::std::auto_ptr< AffiliateHandle_type > r (
+            ::std::unique_ptr< AffiliateHandle_type > r (
               dynamic_cast< AffiliateHandle_type* > (tmp.get ()));
 
             if (r.get ())
@@ -9107,7 +9107,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AffiliateHandle_.set (r);
+            this->AffiliateHandle_.set (::std::move (r));
             continue;
           }
         }
@@ -9116,7 +9116,7 @@ namespace msdl_1
       // Relationship
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Relationship",
             "",
@@ -9127,7 +9127,7 @@ namespace msdl_1
         {
           if (!Relationship_.present ())
           {
-            ::std::auto_ptr< Relationship_type > r (
+            ::std::unique_ptr< Relationship_type > r (
               dynamic_cast< Relationship_type* > (tmp.get ()));
 
             if (r.get ())
@@ -9135,7 +9135,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Relationship_.set (r);
+            this->Relationship_.set (::std::move (r));
             continue;
           }
         }
@@ -9274,7 +9274,7 @@ namespace msdl_1
       // Echelon
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Echelon",
             "",
@@ -9285,7 +9285,7 @@ namespace msdl_1
         {
           if (!this->Echelon_)
           {
-            ::std::auto_ptr< Echelon_type > r (
+            ::std::unique_ptr< Echelon_type > r (
               dynamic_cast< Echelon_type* > (tmp.get ()));
 
             if (r.get ())
@@ -9293,7 +9293,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Echelon_.set (r);
+            this->Echelon_.set (::std::move (r));
             continue;
           }
         }
@@ -9302,7 +9302,7 @@ namespace msdl_1
       // UniqueDesignation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "UniqueDesignation",
             "",
@@ -9313,7 +9313,7 @@ namespace msdl_1
         {
           if (!this->UniqueDesignation_)
           {
-            ::std::auto_ptr< UniqueDesignation_type > r (
+            ::std::unique_ptr< UniqueDesignation_type > r (
               dynamic_cast< UniqueDesignation_type* > (tmp.get ()));
 
             if (r.get ())
@@ -9321,7 +9321,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->UniqueDesignation_.set (r);
+            this->UniqueDesignation_.set (::std::move (r));
             continue;
           }
         }
@@ -9330,7 +9330,7 @@ namespace msdl_1
       // UniqueDesignation1
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "UniqueDesignation1",
             "",
@@ -9341,7 +9341,7 @@ namespace msdl_1
         {
           if (!this->UniqueDesignation1_)
           {
-            ::std::auto_ptr< UniqueDesignation1_type > r (
+            ::std::unique_ptr< UniqueDesignation1_type > r (
               dynamic_cast< UniqueDesignation1_type* > (tmp.get ()));
 
             if (r.get ())
@@ -9349,7 +9349,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->UniqueDesignation1_.set (r);
+            this->UniqueDesignation1_.set (::std::move (r));
             continue;
           }
         }
@@ -9507,7 +9507,7 @@ namespace msdl_1
       // CloudCover
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CloudCover",
             "",
@@ -9516,7 +9516,7 @@ namespace msdl_1
 
         if (tmp.get () != 0)
         {
-          ::std::auto_ptr< CloudCover_type > r (
+          ::std::unique_ptr< CloudCover_type > r (
             dynamic_cast< CloudCover_type* > (tmp.get ()));
 
           if (r.get ())
@@ -9524,7 +9524,7 @@ namespace msdl_1
           else
             throw ::xsd::cxx::tree::not_derived< char > ();
 
-          this->CloudCover_.push_back (r);
+          this->CloudCover_.push_back (::std::move (r));
           continue;
         }
       }
@@ -9610,11 +9610,11 @@ namespace msdl_1
   }
 
   CommandRelationType::
-  CommandRelationType (::std::auto_ptr< CommandingSuperiorHandle_type > CommandingSuperiorHandle,
-                       ::std::auto_ptr< CommandRelationshipType_type > CommandRelationshipType)
+  CommandRelationType (::std::unique_ptr< CommandingSuperiorHandle_type > CommandingSuperiorHandle,
+                       ::std::unique_ptr< CommandRelationshipType_type > CommandRelationshipType)
   : ::xml_schema::type (),
-    CommandingSuperiorHandle_ (CommandingSuperiorHandle, this),
-    CommandRelationshipType_ (CommandRelationshipType, this)
+    CommandingSuperiorHandle_ (std::move (CommandingSuperiorHandle), this),
+    CommandRelationshipType_ (std::move (CommandRelationshipType), this)
   {
   }
 
@@ -9656,7 +9656,7 @@ namespace msdl_1
       // CommandingSuperiorHandle
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CommandingSuperiorHandle",
             "",
@@ -9667,7 +9667,7 @@ namespace msdl_1
         {
           if (!CommandingSuperiorHandle_.present ())
           {
-            ::std::auto_ptr< CommandingSuperiorHandle_type > r (
+            ::std::unique_ptr< CommandingSuperiorHandle_type > r (
               dynamic_cast< CommandingSuperiorHandle_type* > (tmp.get ()));
 
             if (r.get ())
@@ -9675,7 +9675,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CommandingSuperiorHandle_.set (r);
+            this->CommandingSuperiorHandle_.set (::std::move (r));
             continue;
           }
         }
@@ -9684,7 +9684,7 @@ namespace msdl_1
       // CommandRelationshipType
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CommandRelationshipType",
             "",
@@ -9695,7 +9695,7 @@ namespace msdl_1
         {
           if (!CommandRelationshipType_.present ())
           {
-            ::std::auto_ptr< CommandRelationshipType_type > r (
+            ::std::unique_ptr< CommandRelationshipType_type > r (
               dynamic_cast< CommandRelationshipType_type* > (tmp.get ()));
 
             if (r.get ())
@@ -9703,7 +9703,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CommandRelationshipType_.set (r);
+            this->CommandRelationshipType_.set (::std::move (r));
             continue;
           }
         }
@@ -9836,7 +9836,7 @@ namespace msdl_1
       // CommunicationNetInstance
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CommunicationNetInstance",
             "",
@@ -9845,7 +9845,7 @@ namespace msdl_1
 
         if (tmp.get () != 0)
         {
-          ::std::auto_ptr< CommunicationNetInstance_type > r (
+          ::std::unique_ptr< CommunicationNetInstance_type > r (
             dynamic_cast< CommunicationNetInstance_type* > (tmp.get ()));
 
           if (r.get ())
@@ -9853,7 +9853,7 @@ namespace msdl_1
           else
             throw ::xsd::cxx::tree::not_derived< char > ();
 
-          this->CommunicationNetInstance_.push_back (r);
+          this->CommunicationNetInstance_.push_back (::std::move (r));
           continue;
         }
       }
@@ -9940,12 +9940,12 @@ namespace msdl_1
   }
 
   CommunicationNetInstanceType::
-  CommunicationNetInstanceType (::std::auto_ptr< CommunicationNetId_type > CommunicationNetId,
-                                ::std::auto_ptr< CommunicationService_type > CommunicationService)
+  CommunicationNetInstanceType (::std::unique_ptr< CommunicationNetId_type > CommunicationNetId,
+                                ::std::unique_ptr< CommunicationService_type > CommunicationService)
   : ::xml_schema::type (),
     CommunicationNetType_ (this),
-    CommunicationNetId_ (CommunicationNetId, this),
-    CommunicationService_ (CommunicationService, this)
+    CommunicationNetId_ (std::move (CommunicationNetId), this),
+    CommunicationService_ (std::move (CommunicationService), this)
   {
   }
 
@@ -9989,7 +9989,7 @@ namespace msdl_1
       // CommunicationNetType
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CommunicationNetType",
             "",
@@ -10000,7 +10000,7 @@ namespace msdl_1
         {
           if (!this->CommunicationNetType_)
           {
-            ::std::auto_ptr< CommunicationNetType_type > r (
+            ::std::unique_ptr< CommunicationNetType_type > r (
               dynamic_cast< CommunicationNetType_type* > (tmp.get ()));
 
             if (r.get ())
@@ -10008,7 +10008,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CommunicationNetType_.set (r);
+            this->CommunicationNetType_.set (::std::move (r));
             continue;
           }
         }
@@ -10017,7 +10017,7 @@ namespace msdl_1
       // CommunicationNetId
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CommunicationNetId",
             "",
@@ -10028,7 +10028,7 @@ namespace msdl_1
         {
           if (!CommunicationNetId_.present ())
           {
-            ::std::auto_ptr< CommunicationNetId_type > r (
+            ::std::unique_ptr< CommunicationNetId_type > r (
               dynamic_cast< CommunicationNetId_type* > (tmp.get ()));
 
             if (r.get ())
@@ -10036,7 +10036,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CommunicationNetId_.set (r);
+            this->CommunicationNetId_.set (::std::move (r));
             continue;
           }
         }
@@ -10045,7 +10045,7 @@ namespace msdl_1
       // CommunicationService
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CommunicationService",
             "",
@@ -10056,7 +10056,7 @@ namespace msdl_1
         {
           if (!CommunicationService_.present ())
           {
-            ::std::auto_ptr< CommunicationService_type > r (
+            ::std::unique_ptr< CommunicationService_type > r (
               dynamic_cast< CommunicationService_type* > (tmp.get ()));
 
             if (r.get ())
@@ -10064,7 +10064,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CommunicationService_.set (r);
+            this->CommunicationService_.set (::std::move (r));
             continue;
           }
         }
@@ -10216,7 +10216,7 @@ namespace msdl_1
       // CommunicationNetReference
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CommunicationNetReference",
             "",
@@ -10225,7 +10225,7 @@ namespace msdl_1
 
         if (tmp.get () != 0)
         {
-          ::std::auto_ptr< CommunicationNetReference_type > r (
+          ::std::unique_ptr< CommunicationNetReference_type > r (
             dynamic_cast< CommunicationNetReference_type* > (tmp.get ()));
 
           if (r.get ())
@@ -10233,7 +10233,7 @@ namespace msdl_1
           else
             throw ::xsd::cxx::tree::not_derived< char > ();
 
-          this->CommunicationNetReference_.push_back (r);
+          this->CommunicationNetReference_.push_back (::std::move (r));
           continue;
         }
       }
@@ -10319,11 +10319,11 @@ namespace msdl_1
   }
 
   CommunicationNetReferenceType::
-  CommunicationNetReferenceType (::std::auto_ptr< CommunicationNetId_type > CommunicationNetId,
-                                 ::std::auto_ptr< UnitOwnerHandle_type > UnitOwnerHandle)
+  CommunicationNetReferenceType (::std::unique_ptr< CommunicationNetId_type > CommunicationNetId,
+                                 ::std::unique_ptr< UnitOwnerHandle_type > UnitOwnerHandle)
   : ::xml_schema::type (),
-    CommunicationNetId_ (CommunicationNetId, this),
-    UnitOwnerHandle_ (UnitOwnerHandle, this)
+    CommunicationNetId_ (std::move (CommunicationNetId), this),
+    UnitOwnerHandle_ (std::move (UnitOwnerHandle), this)
   {
   }
 
@@ -10365,7 +10365,7 @@ namespace msdl_1
       // CommunicationNetId
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CommunicationNetId",
             "",
@@ -10376,7 +10376,7 @@ namespace msdl_1
         {
           if (!CommunicationNetId_.present ())
           {
-            ::std::auto_ptr< CommunicationNetId_type > r (
+            ::std::unique_ptr< CommunicationNetId_type > r (
               dynamic_cast< CommunicationNetId_type* > (tmp.get ()));
 
             if (r.get ())
@@ -10384,7 +10384,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CommunicationNetId_.set (r);
+            this->CommunicationNetId_.set (::std::move (r));
             continue;
           }
         }
@@ -10393,7 +10393,7 @@ namespace msdl_1
       // UnitOwnerHandle
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "UnitOwnerHandle",
             "",
@@ -10404,7 +10404,7 @@ namespace msdl_1
         {
           if (!UnitOwnerHandle_.present ())
           {
-            ::std::auto_ptr< UnitOwnerHandle_type > r (
+            ::std::unique_ptr< UnitOwnerHandle_type > r (
               dynamic_cast< UnitOwnerHandle_type* > (tmp.get ()));
 
             if (r.get ())
@@ -10412,7 +10412,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->UnitOwnerHandle_.set (r);
+            this->UnitOwnerHandle_.set (::std::move (r));
             continue;
           }
         }
@@ -10512,11 +10512,11 @@ namespace msdl_1
   }
 
   CoordinateDataStandardType::
-  CoordinateDataStandardType (::std::auto_ptr< CoordinateSystemType_type > CoordinateSystemType,
-                              ::std::auto_ptr< CoordinateSystemDatum_type > CoordinateSystemDatum)
+  CoordinateDataStandardType (::std::unique_ptr< CoordinateSystemType_type > CoordinateSystemType,
+                              ::std::unique_ptr< CoordinateSystemDatum_type > CoordinateSystemDatum)
   : ::xml_schema::type (),
-    CoordinateSystemType_ (CoordinateSystemType, this),
-    CoordinateSystemDatum_ (CoordinateSystemDatum, this)
+    CoordinateSystemType_ (std::move (CoordinateSystemType), this),
+    CoordinateSystemDatum_ (std::move (CoordinateSystemDatum), this)
   {
   }
 
@@ -10558,7 +10558,7 @@ namespace msdl_1
       // CoordinateSystemType
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CoordinateSystemType",
             "",
@@ -10569,7 +10569,7 @@ namespace msdl_1
         {
           if (!CoordinateSystemType_.present ())
           {
-            ::std::auto_ptr< CoordinateSystemType_type > r (
+            ::std::unique_ptr< CoordinateSystemType_type > r (
               dynamic_cast< CoordinateSystemType_type* > (tmp.get ()));
 
             if (r.get ())
@@ -10577,7 +10577,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CoordinateSystemType_.set (r);
+            this->CoordinateSystemType_.set (::std::move (r));
             continue;
           }
         }
@@ -10586,7 +10586,7 @@ namespace msdl_1
       // CoordinateSystemDatum
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CoordinateSystemDatum",
             "",
@@ -10597,7 +10597,7 @@ namespace msdl_1
         {
           if (!CoordinateSystemDatum_.present ())
           {
-            ::std::auto_ptr< CoordinateSystemDatum_type > r (
+            ::std::unique_ptr< CoordinateSystemDatum_type > r (
               dynamic_cast< CoordinateSystemDatum_type* > (tmp.get ()));
 
             if (r.get ())
@@ -10605,7 +10605,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CoordinateSystemDatum_.set (r);
+            this->CoordinateSystemDatum_.set (::std::move (r));
             continue;
           }
         }
@@ -10706,19 +10706,19 @@ namespace msdl_1
 
   CoordinatesType::
   CoordinatesType (const CoordinateChoice_type& CoordinateChoice,
-                   ::std::auto_ptr< CoordinateData_type > CoordinateData)
+                   ::std::unique_ptr< CoordinateData_type > CoordinateData)
   : ::xml_schema::type (),
     CoordinateChoice_ (CoordinateChoice, this),
-    CoordinateData_ (CoordinateData, this)
+    CoordinateData_ (std::move (CoordinateData), this)
   {
   }
 
   CoordinatesType::
-  CoordinatesType (::std::auto_ptr< CoordinateChoice_type > CoordinateChoice,
-                   ::std::auto_ptr< CoordinateData_type > CoordinateData)
+  CoordinatesType (::std::unique_ptr< CoordinateChoice_type > CoordinateChoice,
+                   ::std::unique_ptr< CoordinateData_type > CoordinateData)
   : ::xml_schema::type (),
-    CoordinateChoice_ (CoordinateChoice, this),
-    CoordinateData_ (CoordinateData, this)
+    CoordinateChoice_ (std::move (CoordinateChoice), this),
+    CoordinateData_ (std::move (CoordinateData), this)
   {
   }
 
@@ -10760,7 +10760,7 @@ namespace msdl_1
       // CoordinateChoice
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CoordinateChoice",
             "",
@@ -10771,7 +10771,7 @@ namespace msdl_1
         {
           if (!CoordinateChoice_.present ())
           {
-            ::std::auto_ptr< CoordinateChoice_type > r (
+            ::std::unique_ptr< CoordinateChoice_type > r (
               dynamic_cast< CoordinateChoice_type* > (tmp.get ()));
 
             if (r.get ())
@@ -10779,7 +10779,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CoordinateChoice_.set (r);
+            this->CoordinateChoice_.set (::std::move (r));
             continue;
           }
         }
@@ -10788,7 +10788,7 @@ namespace msdl_1
       // CoordinateData
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CoordinateData",
             "",
@@ -10799,7 +10799,7 @@ namespace msdl_1
         {
           if (!CoordinateData_.present ())
           {
-            ::std::auto_ptr< CoordinateData_type > r (
+            ::std::unique_ptr< CoordinateData_type > r (
               dynamic_cast< CoordinateData_type* > (tmp.get ()));
 
             if (r.get ())
@@ -10807,7 +10807,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CoordinateData_.set (r);
+            this->CoordinateData_.set (::std::move (r));
             continue;
           }
         }
@@ -10949,7 +10949,7 @@ namespace msdl_1
       // MGRS
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "MGRS",
             "",
@@ -10960,7 +10960,7 @@ namespace msdl_1
         {
           if (!this->MGRS_)
           {
-            ::std::auto_ptr< MGRS_type > r (
+            ::std::unique_ptr< MGRS_type > r (
               dynamic_cast< MGRS_type* > (tmp.get ()));
 
             if (r.get ())
@@ -10968,7 +10968,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->MGRS_.set (r);
+            this->MGRS_.set (::std::move (r));
             continue;
           }
         }
@@ -10977,7 +10977,7 @@ namespace msdl_1
       // UTM
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "UTM",
             "",
@@ -10988,7 +10988,7 @@ namespace msdl_1
         {
           if (!this->UTM_)
           {
-            ::std::auto_ptr< UTM_type > r (
+            ::std::unique_ptr< UTM_type > r (
               dynamic_cast< UTM_type* > (tmp.get ()));
 
             if (r.get ())
@@ -10996,7 +10996,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->UTM_.set (r);
+            this->UTM_.set (::std::move (r));
             continue;
           }
         }
@@ -11005,7 +11005,7 @@ namespace msdl_1
       // GDC
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "GDC",
             "",
@@ -11016,7 +11016,7 @@ namespace msdl_1
         {
           if (!this->GDC_)
           {
-            ::std::auto_ptr< GDC_type > r (
+            ::std::unique_ptr< GDC_type > r (
               dynamic_cast< GDC_type* > (tmp.get ()));
 
             if (r.get ())
@@ -11024,7 +11024,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->GDC_.set (r);
+            this->GDC_.set (::std::move (r));
             continue;
           }
         }
@@ -11033,7 +11033,7 @@ namespace msdl_1
       // GCC
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "GCC",
             "",
@@ -11044,7 +11044,7 @@ namespace msdl_1
         {
           if (!this->GCC_)
           {
-            ::std::auto_ptr< GCC_type > r (
+            ::std::unique_ptr< GCC_type > r (
               dynamic_cast< GCC_type* > (tmp.get ()));
 
             if (r.get ())
@@ -11052,7 +11052,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->GCC_.set (r);
+            this->GCC_.set (::std::move (r));
             continue;
           }
         }
@@ -11238,7 +11238,7 @@ namespace msdl_1
       // ScenarioTime
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "ScenarioTime",
             "",
@@ -11249,7 +11249,7 @@ namespace msdl_1
         {
           if (!this->ScenarioTime_)
           {
-            ::std::auto_ptr< ScenarioTime_type > r (
+            ::std::unique_ptr< ScenarioTime_type > r (
               dynamic_cast< ScenarioTime_type* > (tmp.get ()));
 
             if (r.get ())
@@ -11257,7 +11257,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->ScenarioTime_.set (r);
+            this->ScenarioTime_.set (::std::move (r));
             continue;
           }
         }
@@ -11266,7 +11266,7 @@ namespace msdl_1
       // AreaOfInterest
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AreaOfInterest",
             "",
@@ -11277,7 +11277,7 @@ namespace msdl_1
         {
           if (!this->AreaOfInterest_)
           {
-            ::std::auto_ptr< AreaOfInterest_type > r (
+            ::std::unique_ptr< AreaOfInterest_type > r (
               dynamic_cast< AreaOfInterest_type* > (tmp.get ()));
 
             if (r.get ())
@@ -11285,7 +11285,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AreaOfInterest_.set (r);
+            this->AreaOfInterest_.set (::std::move (r));
             continue;
           }
         }
@@ -11294,7 +11294,7 @@ namespace msdl_1
       // ScenarioWeather
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "ScenarioWeather",
             "",
@@ -11305,7 +11305,7 @@ namespace msdl_1
         {
           if (!this->ScenarioWeather_)
           {
-            ::std::auto_ptr< ScenarioWeather_type > r (
+            ::std::unique_ptr< ScenarioWeather_type > r (
               dynamic_cast< ScenarioWeather_type* > (tmp.get ()));
 
             if (r.get ())
@@ -11313,7 +11313,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->ScenarioWeather_.set (r);
+            this->ScenarioWeather_.set (::std::move (r));
             continue;
           }
         }
@@ -11322,7 +11322,7 @@ namespace msdl_1
       // METOC
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "METOC",
             "",
@@ -11333,7 +11333,7 @@ namespace msdl_1
         {
           if (!this->METOC_)
           {
-            ::std::auto_ptr< METOC_type > r (
+            ::std::unique_ptr< METOC_type > r (
               dynamic_cast< METOC_type* > (tmp.get ()));
 
             if (r.get ())
@@ -11341,7 +11341,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->METOC_.set (r);
+            this->METOC_.set (::std::move (r));
             continue;
           }
         }
@@ -11486,9 +11486,9 @@ namespace msdl_1
   }
 
   EquipmentDispositionType::
-  EquipmentDispositionType (::std::auto_ptr< Location_type > Location)
+  EquipmentDispositionType (::std::unique_ptr< Location_type > Location)
   : ::xml_schema::type (),
-    Location_ (Location, this),
+    Location_ (std::move (Location), this),
     DirectionOfMovement_ (this),
     Speed_ (this),
     FormationPosition_ (this)
@@ -11537,7 +11537,7 @@ namespace msdl_1
       // Location
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Location",
             "",
@@ -11548,7 +11548,7 @@ namespace msdl_1
         {
           if (!Location_.present ())
           {
-            ::std::auto_ptr< Location_type > r (
+            ::std::unique_ptr< Location_type > r (
               dynamic_cast< Location_type* > (tmp.get ()));
 
             if (r.get ())
@@ -11556,7 +11556,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Location_.set (r);
+            this->Location_.set (::std::move (r));
             continue;
           }
         }
@@ -11565,7 +11565,7 @@ namespace msdl_1
       // DirectionOfMovement
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "DirectionOfMovement",
             "",
@@ -11576,7 +11576,7 @@ namespace msdl_1
         {
           if (!this->DirectionOfMovement_)
           {
-            ::std::auto_ptr< DirectionOfMovement_type > r (
+            ::std::unique_ptr< DirectionOfMovement_type > r (
               dynamic_cast< DirectionOfMovement_type* > (tmp.get ()));
 
             if (r.get ())
@@ -11584,7 +11584,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->DirectionOfMovement_.set (r);
+            this->DirectionOfMovement_.set (::std::move (r));
             continue;
           }
         }
@@ -11593,7 +11593,7 @@ namespace msdl_1
       // Speed
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Speed",
             "",
@@ -11604,7 +11604,7 @@ namespace msdl_1
         {
           if (!this->Speed_)
           {
-            ::std::auto_ptr< Speed_type > r (
+            ::std::unique_ptr< Speed_type > r (
               dynamic_cast< Speed_type* > (tmp.get ()));
 
             if (r.get ())
@@ -11612,7 +11612,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Speed_.set (r);
+            this->Speed_.set (::std::move (r));
             continue;
           }
         }
@@ -11621,7 +11621,7 @@ namespace msdl_1
       // FormationPosition
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "FormationPosition",
             "",
@@ -11632,7 +11632,7 @@ namespace msdl_1
         {
           if (!this->FormationPosition_)
           {
-            ::std::auto_ptr< FormationPosition_type > r (
+            ::std::unique_ptr< FormationPosition_type > r (
               dynamic_cast< FormationPosition_type* > (tmp.get ()));
 
             if (r.get ())
@@ -11640,7 +11640,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->FormationPosition_.set (r);
+            this->FormationPosition_.set (::std::move (r));
             continue;
           }
         }
@@ -11791,33 +11791,33 @@ namespace msdl_1
   EquipmentItemType::
   EquipmentItemType (const ObjectHandle_type& ObjectHandle,
                      const SymbolIdentifier_type& SymbolIdentifier,
-                     ::std::auto_ptr< Disposition_type > Disposition,
-                     ::std::auto_ptr< Relations_type > Relations)
+                     ::std::unique_ptr< Disposition_type > Disposition,
+                     ::std::unique_ptr< Relations_type > Relations)
   : ::xml_schema::type (),
     ObjectHandle_ (ObjectHandle, this),
     SymbolIdentifier_ (SymbolIdentifier, this),
     Name_ (this),
     EquipmentSymbolModifiers_ (this),
     CommunicationNetReferences_ (this),
-    Disposition_ (Disposition, this),
-    Relations_ (Relations, this),
+    Disposition_ (std::move (Disposition), this),
+    Relations_ (std::move (Relations), this),
     Model_ (this)
   {
   }
 
   EquipmentItemType::
-  EquipmentItemType (::std::auto_ptr< ObjectHandle_type > ObjectHandle,
-                     ::std::auto_ptr< SymbolIdentifier_type > SymbolIdentifier,
-                     ::std::auto_ptr< Disposition_type > Disposition,
-                     ::std::auto_ptr< Relations_type > Relations)
+  EquipmentItemType (::std::unique_ptr< ObjectHandle_type > ObjectHandle,
+                     ::std::unique_ptr< SymbolIdentifier_type > SymbolIdentifier,
+                     ::std::unique_ptr< Disposition_type > Disposition,
+                     ::std::unique_ptr< Relations_type > Relations)
   : ::xml_schema::type (),
-    ObjectHandle_ (ObjectHandle, this),
-    SymbolIdentifier_ (SymbolIdentifier, this),
+    ObjectHandle_ (std::move (ObjectHandle), this),
+    SymbolIdentifier_ (std::move (SymbolIdentifier), this),
     Name_ (this),
     EquipmentSymbolModifiers_ (this),
     CommunicationNetReferences_ (this),
-    Disposition_ (Disposition, this),
-    Relations_ (Relations, this),
+    Disposition_ (std::move (Disposition), this),
+    Relations_ (std::move (Relations), this),
     Model_ (this)
   {
   }
@@ -11872,7 +11872,7 @@ namespace msdl_1
       // ObjectHandle
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "ObjectHandle",
             "",
@@ -11883,7 +11883,7 @@ namespace msdl_1
         {
           if (!ObjectHandle_.present ())
           {
-            ::std::auto_ptr< ObjectHandle_type > r (
+            ::std::unique_ptr< ObjectHandle_type > r (
               dynamic_cast< ObjectHandle_type* > (tmp.get ()));
 
             if (r.get ())
@@ -11891,7 +11891,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->ObjectHandle_.set (r);
+            this->ObjectHandle_.set (::std::move (r));
             continue;
           }
         }
@@ -11900,7 +11900,7 @@ namespace msdl_1
       // SymbolIdentifier
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "SymbolIdentifier",
             "",
@@ -11911,7 +11911,7 @@ namespace msdl_1
         {
           if (!SymbolIdentifier_.present ())
           {
-            ::std::auto_ptr< SymbolIdentifier_type > r (
+            ::std::unique_ptr< SymbolIdentifier_type > r (
               dynamic_cast< SymbolIdentifier_type* > (tmp.get ()));
 
             if (r.get ())
@@ -11919,7 +11919,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->SymbolIdentifier_.set (r);
+            this->SymbolIdentifier_.set (::std::move (r));
             continue;
           }
         }
@@ -11928,7 +11928,7 @@ namespace msdl_1
       // Name
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Name",
             "",
@@ -11939,7 +11939,7 @@ namespace msdl_1
         {
           if (!this->Name_)
           {
-            ::std::auto_ptr< Name_type > r (
+            ::std::unique_ptr< Name_type > r (
               dynamic_cast< Name_type* > (tmp.get ()));
 
             if (r.get ())
@@ -11947,7 +11947,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Name_.set (r);
+            this->Name_.set (::std::move (r));
             continue;
           }
         }
@@ -11956,7 +11956,7 @@ namespace msdl_1
       // EquipmentSymbolModifiers
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "EquipmentSymbolModifiers",
             "",
@@ -11967,7 +11967,7 @@ namespace msdl_1
         {
           if (!this->EquipmentSymbolModifiers_)
           {
-            ::std::auto_ptr< EquipmentSymbolModifiers_type > r (
+            ::std::unique_ptr< EquipmentSymbolModifiers_type > r (
               dynamic_cast< EquipmentSymbolModifiers_type* > (tmp.get ()));
 
             if (r.get ())
@@ -11975,7 +11975,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->EquipmentSymbolModifiers_.set (r);
+            this->EquipmentSymbolModifiers_.set (::std::move (r));
             continue;
           }
         }
@@ -11984,7 +11984,7 @@ namespace msdl_1
       // CommunicationNetReferences
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CommunicationNetReferences",
             "",
@@ -11995,7 +11995,7 @@ namespace msdl_1
         {
           if (!this->CommunicationNetReferences_)
           {
-            ::std::auto_ptr< CommunicationNetReferences_type > r (
+            ::std::unique_ptr< CommunicationNetReferences_type > r (
               dynamic_cast< CommunicationNetReferences_type* > (tmp.get ()));
 
             if (r.get ())
@@ -12003,7 +12003,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CommunicationNetReferences_.set (r);
+            this->CommunicationNetReferences_.set (::std::move (r));
             continue;
           }
         }
@@ -12012,7 +12012,7 @@ namespace msdl_1
       // Disposition
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Disposition",
             "",
@@ -12023,7 +12023,7 @@ namespace msdl_1
         {
           if (!Disposition_.present ())
           {
-            ::std::auto_ptr< Disposition_type > r (
+            ::std::unique_ptr< Disposition_type > r (
               dynamic_cast< Disposition_type* > (tmp.get ()));
 
             if (r.get ())
@@ -12031,7 +12031,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Disposition_.set (r);
+            this->Disposition_.set (::std::move (r));
             continue;
           }
         }
@@ -12040,7 +12040,7 @@ namespace msdl_1
       // Relations
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Relations",
             "",
@@ -12051,7 +12051,7 @@ namespace msdl_1
         {
           if (!Relations_.present ())
           {
-            ::std::auto_ptr< Relations_type > r (
+            ::std::unique_ptr< Relations_type > r (
               dynamic_cast< Relations_type* > (tmp.get ()));
 
             if (r.get ())
@@ -12059,7 +12059,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Relations_.set (r);
+            this->Relations_.set (::std::move (r));
             continue;
           }
         }
@@ -12068,7 +12068,7 @@ namespace msdl_1
       // Model
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Model",
             "",
@@ -12079,7 +12079,7 @@ namespace msdl_1
         {
           if (!this->Model_)
           {
-            ::std::auto_ptr< Model_type > r (
+            ::std::unique_ptr< Model_type > r (
               dynamic_cast< Model_type* > (tmp.get ()));
 
             if (r.get ())
@@ -12087,7 +12087,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Model_.set (r);
+            this->Model_.set (::std::move (r));
             continue;
           }
         }
@@ -12293,9 +12293,9 @@ namespace msdl_1
   }
 
   EquipmentModelType::
-  EquipmentModelType (::std::auto_ptr< Resolution_type > Resolution)
+  EquipmentModelType (::std::unique_ptr< Resolution_type > Resolution)
   : ::xml_schema::type (),
-    Resolution_ (Resolution, this)
+    Resolution_ (std::move (Resolution), this)
   {
   }
 
@@ -12335,7 +12335,7 @@ namespace msdl_1
       // Resolution
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Resolution",
             "",
@@ -12346,7 +12346,7 @@ namespace msdl_1
         {
           if (!Resolution_.present ())
           {
-            ::std::auto_ptr< Resolution_type > r (
+            ::std::unique_ptr< Resolution_type > r (
               dynamic_cast< Resolution_type* > (tmp.get ()));
 
             if (r.get ())
@@ -12354,7 +12354,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Resolution_.set (r);
+            this->Resolution_.set (::std::move (r));
             continue;
           }
         }
@@ -12437,10 +12437,10 @@ namespace msdl_1
   }
 
   EquipmentRelationsType::
-  EquipmentRelationsType (::std::auto_ptr< HoldingOrganization_type > HoldingOrganization)
+  EquipmentRelationsType (::std::unique_ptr< HoldingOrganization_type > HoldingOrganization)
   : ::xml_schema::type (),
     OrganicSuperiorHandle_ (this),
-    HoldingOrganization_ (HoldingOrganization, this)
+    HoldingOrganization_ (std::move (HoldingOrganization), this)
   {
   }
 
@@ -12482,7 +12482,7 @@ namespace msdl_1
       // OrganicSuperiorHandle
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "OrganicSuperiorHandle",
             "",
@@ -12493,7 +12493,7 @@ namespace msdl_1
         {
           if (!this->OrganicSuperiorHandle_)
           {
-            ::std::auto_ptr< OrganicSuperiorHandle_type > r (
+            ::std::unique_ptr< OrganicSuperiorHandle_type > r (
               dynamic_cast< OrganicSuperiorHandle_type* > (tmp.get ()));
 
             if (r.get ())
@@ -12501,7 +12501,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->OrganicSuperiorHandle_.set (r);
+            this->OrganicSuperiorHandle_.set (::std::move (r));
             continue;
           }
         }
@@ -12510,7 +12510,7 @@ namespace msdl_1
       // HoldingOrganization
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "HoldingOrganization",
             "",
@@ -12521,7 +12521,7 @@ namespace msdl_1
         {
           if (!HoldingOrganization_.present ())
           {
-            ::std::auto_ptr< HoldingOrganization_type > r (
+            ::std::unique_ptr< HoldingOrganization_type > r (
               dynamic_cast< HoldingOrganization_type* > (tmp.get ()));
 
             if (r.get ())
@@ -12529,7 +12529,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->HoldingOrganization_.set (r);
+            this->HoldingOrganization_.set (::std::move (r));
             continue;
           }
         }
@@ -12637,14 +12637,14 @@ namespace msdl_1
   }
 
   EquipmentSymbolModifiersType::
-  EquipmentSymbolModifiersType (::std::auto_ptr< UniqueDesignation_type > UniqueDesignation)
+  EquipmentSymbolModifiersType (::std::unique_ptr< UniqueDesignation_type > UniqueDesignation)
   : ::xml_schema::type (),
     Quantity_ (this),
     StaffComments_ (this),
     AdditionalInfo_ (this),
     CombatEffectiveness_ (this),
     IFF_ (this),
-    UniqueDesignation_ (UniqueDesignation, this),
+    UniqueDesignation_ (std::move (UniqueDesignation), this),
     EquipmentType_ (this),
     TowedSonarArray_ (this)
   {
@@ -12700,7 +12700,7 @@ namespace msdl_1
       // Quantity
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Quantity",
             "",
@@ -12711,7 +12711,7 @@ namespace msdl_1
         {
           if (!this->Quantity_)
           {
-            ::std::auto_ptr< Quantity_type > r (
+            ::std::unique_ptr< Quantity_type > r (
               dynamic_cast< Quantity_type* > (tmp.get ()));
 
             if (r.get ())
@@ -12719,7 +12719,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Quantity_.set (r);
+            this->Quantity_.set (::std::move (r));
             continue;
           }
         }
@@ -12728,7 +12728,7 @@ namespace msdl_1
       // StaffComments
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "StaffComments",
             "",
@@ -12739,7 +12739,7 @@ namespace msdl_1
         {
           if (!this->StaffComments_)
           {
-            ::std::auto_ptr< StaffComments_type > r (
+            ::std::unique_ptr< StaffComments_type > r (
               dynamic_cast< StaffComments_type* > (tmp.get ()));
 
             if (r.get ())
@@ -12747,7 +12747,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->StaffComments_.set (r);
+            this->StaffComments_.set (::std::move (r));
             continue;
           }
         }
@@ -12756,7 +12756,7 @@ namespace msdl_1
       // AdditionalInfo
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AdditionalInfo",
             "",
@@ -12767,7 +12767,7 @@ namespace msdl_1
         {
           if (!this->AdditionalInfo_)
           {
-            ::std::auto_ptr< AdditionalInfo_type > r (
+            ::std::unique_ptr< AdditionalInfo_type > r (
               dynamic_cast< AdditionalInfo_type* > (tmp.get ()));
 
             if (r.get ())
@@ -12775,7 +12775,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AdditionalInfo_.set (r);
+            this->AdditionalInfo_.set (::std::move (r));
             continue;
           }
         }
@@ -12784,7 +12784,7 @@ namespace msdl_1
       // CombatEffectiveness
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CombatEffectiveness",
             "",
@@ -12795,7 +12795,7 @@ namespace msdl_1
         {
           if (!this->CombatEffectiveness_)
           {
-            ::std::auto_ptr< CombatEffectiveness_type > r (
+            ::std::unique_ptr< CombatEffectiveness_type > r (
               dynamic_cast< CombatEffectiveness_type* > (tmp.get ()));
 
             if (r.get ())
@@ -12803,7 +12803,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CombatEffectiveness_.set (r);
+            this->CombatEffectiveness_.set (::std::move (r));
             continue;
           }
         }
@@ -12812,7 +12812,7 @@ namespace msdl_1
       // IFF
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "IFF",
             "",
@@ -12823,7 +12823,7 @@ namespace msdl_1
         {
           if (!this->IFF_)
           {
-            ::std::auto_ptr< IFF_type > r (
+            ::std::unique_ptr< IFF_type > r (
               dynamic_cast< IFF_type* > (tmp.get ()));
 
             if (r.get ())
@@ -12831,7 +12831,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->IFF_.set (r);
+            this->IFF_.set (::std::move (r));
             continue;
           }
         }
@@ -12840,7 +12840,7 @@ namespace msdl_1
       // UniqueDesignation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "UniqueDesignation",
             "",
@@ -12851,7 +12851,7 @@ namespace msdl_1
         {
           if (!UniqueDesignation_.present ())
           {
-            ::std::auto_ptr< UniqueDesignation_type > r (
+            ::std::unique_ptr< UniqueDesignation_type > r (
               dynamic_cast< UniqueDesignation_type* > (tmp.get ()));
 
             if (r.get ())
@@ -12859,7 +12859,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->UniqueDesignation_.set (r);
+            this->UniqueDesignation_.set (::std::move (r));
             continue;
           }
         }
@@ -12868,7 +12868,7 @@ namespace msdl_1
       // EquipmentType
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "EquipmentType",
             "",
@@ -12879,7 +12879,7 @@ namespace msdl_1
         {
           if (!this->EquipmentType_)
           {
-            ::std::auto_ptr< EquipmentType_type > r (
+            ::std::unique_ptr< EquipmentType_type > r (
               dynamic_cast< EquipmentType_type* > (tmp.get ()));
 
             if (r.get ())
@@ -12887,7 +12887,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->EquipmentType_.set (r);
+            this->EquipmentType_.set (::std::move (r));
             continue;
           }
         }
@@ -12896,7 +12896,7 @@ namespace msdl_1
       // TowedSonarArray
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "TowedSonarArray",
             "",
@@ -12907,7 +12907,7 @@ namespace msdl_1
         {
           if (!this->TowedSonarArray_)
           {
-            ::std::auto_ptr< TowedSonarArray_type > r (
+            ::std::unique_ptr< TowedSonarArray_type > r (
               dynamic_cast< TowedSonarArray_type* > (tmp.get ()));
 
             if (r.get ())
@@ -12915,7 +12915,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->TowedSonarArray_.set (r);
+            this->TowedSonarArray_.set (::std::move (r));
             continue;
           }
         }
@@ -13165,7 +13165,7 @@ namespace msdl_1
       // EquipmentItem
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "EquipmentItem",
             "",
@@ -13174,7 +13174,7 @@ namespace msdl_1
 
         if (tmp.get () != 0)
         {
-          ::std::auto_ptr< EquipmentItem_type > r (
+          ::std::unique_ptr< EquipmentItem_type > r (
             dynamic_cast< EquipmentItem_type* > (tmp.get ()));
 
           if (r.get ())
@@ -13182,7 +13182,7 @@ namespace msdl_1
           else
             throw ::xsd::cxx::tree::not_derived< char > ();
 
-          this->EquipmentItem_.push_back (r);
+          this->EquipmentItem_.push_back (::std::move (r));
           continue;
         }
       }
@@ -13304,7 +13304,7 @@ namespace msdl_1
       // CommandRelation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CommandRelation",
             "",
@@ -13315,7 +13315,7 @@ namespace msdl_1
         {
           if (!this->CommandRelation_)
           {
-            ::std::auto_ptr< CommandRelation_type > r (
+            ::std::unique_ptr< CommandRelation_type > r (
               dynamic_cast< CommandRelation_type* > (tmp.get ()));
 
             if (r.get ())
@@ -13323,7 +13323,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CommandRelation_.set (r);
+            this->CommandRelation_.set (::std::move (r));
             continue;
           }
         }
@@ -13332,7 +13332,7 @@ namespace msdl_1
       // ForceSideHandle
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "ForceSideHandle",
             "",
@@ -13343,7 +13343,7 @@ namespace msdl_1
         {
           if (!this->ForceSideHandle_)
           {
-            ::std::auto_ptr< ForceSideHandle_type > r (
+            ::std::unique_ptr< ForceSideHandle_type > r (
               dynamic_cast< ForceSideHandle_type* > (tmp.get ()));
 
             if (r.get ())
@@ -13351,7 +13351,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->ForceSideHandle_.set (r);
+            this->ForceSideHandle_.set (::std::move (r));
             continue;
           }
         }
@@ -13458,19 +13458,19 @@ namespace msdl_1
 
   ForceRelationType::
   ForceRelationType (const ForceRelationChoice_type& ForceRelationChoice,
-                     ::std::auto_ptr< ForceRelationData_type > ForceRelationData)
+                     ::std::unique_ptr< ForceRelationData_type > ForceRelationData)
   : ::xml_schema::type (),
     ForceRelationChoice_ (ForceRelationChoice, this),
-    ForceRelationData_ (ForceRelationData, this)
+    ForceRelationData_ (std::move (ForceRelationData), this)
   {
   }
 
   ForceRelationType::
-  ForceRelationType (::std::auto_ptr< ForceRelationChoice_type > ForceRelationChoice,
-                     ::std::auto_ptr< ForceRelationData_type > ForceRelationData)
+  ForceRelationType (::std::unique_ptr< ForceRelationChoice_type > ForceRelationChoice,
+                     ::std::unique_ptr< ForceRelationData_type > ForceRelationData)
   : ::xml_schema::type (),
-    ForceRelationChoice_ (ForceRelationChoice, this),
-    ForceRelationData_ (ForceRelationData, this)
+    ForceRelationChoice_ (std::move (ForceRelationChoice), this),
+    ForceRelationData_ (std::move (ForceRelationData), this)
   {
   }
 
@@ -13512,7 +13512,7 @@ namespace msdl_1
       // ForceRelationChoice
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "ForceRelationChoice",
             "",
@@ -13523,7 +13523,7 @@ namespace msdl_1
         {
           if (!ForceRelationChoice_.present ())
           {
-            ::std::auto_ptr< ForceRelationChoice_type > r (
+            ::std::unique_ptr< ForceRelationChoice_type > r (
               dynamic_cast< ForceRelationChoice_type* > (tmp.get ()));
 
             if (r.get ())
@@ -13531,7 +13531,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->ForceRelationChoice_.set (r);
+            this->ForceRelationChoice_.set (::std::move (r));
             continue;
           }
         }
@@ -13540,7 +13540,7 @@ namespace msdl_1
       // ForceRelationData
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "ForceRelationData",
             "",
@@ -13551,7 +13551,7 @@ namespace msdl_1
         {
           if (!ForceRelationData_.present ())
           {
-            ::std::auto_ptr< ForceRelationData_type > r (
+            ::std::unique_ptr< ForceRelationData_type > r (
               dynamic_cast< ForceRelationData_type* > (tmp.get ()));
 
             if (r.get ())
@@ -13559,7 +13559,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->ForceRelationData_.set (r);
+            this->ForceRelationData_.set (::std::move (r));
             continue;
           }
         }
@@ -13692,7 +13692,7 @@ namespace msdl_1
       // ForceSide
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "ForceSide",
             "",
@@ -13701,7 +13701,7 @@ namespace msdl_1
 
         if (tmp.get () != 0)
         {
-          ::std::auto_ptr< ForceSide_type > r (
+          ::std::unique_ptr< ForceSide_type > r (
             dynamic_cast< ForceSide_type* > (tmp.get ()));
 
           if (r.get ())
@@ -13709,7 +13709,7 @@ namespace msdl_1
           else
             throw ::xsd::cxx::tree::not_derived< char > ();
 
-          this->ForceSide_.push_back (r);
+          this->ForceSide_.push_back (::std::move (r));
           continue;
         }
       }
@@ -13799,11 +13799,11 @@ namespace msdl_1
   }
 
   ForceSideType::
-  ForceSideType (::std::auto_ptr< ObjectHandle_type > ObjectHandle,
-                 ::std::auto_ptr< ForceSideName_type > ForceSideName)
+  ForceSideType (::std::unique_ptr< ObjectHandle_type > ObjectHandle,
+                 ::std::unique_ptr< ForceSideName_type > ForceSideName)
   : ::xml_schema::type (),
-    ObjectHandle_ (ObjectHandle, this),
-    ForceSideName_ (ForceSideName, this),
+    ObjectHandle_ (std::move (ObjectHandle), this),
+    ForceSideName_ (std::move (ForceSideName), this),
     AllegianceHandle_ (this),
     MilitaryService_ (this),
     CountryCode_ (this),
@@ -13857,7 +13857,7 @@ namespace msdl_1
       // ObjectHandle
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "ObjectHandle",
             "",
@@ -13868,7 +13868,7 @@ namespace msdl_1
         {
           if (!ObjectHandle_.present ())
           {
-            ::std::auto_ptr< ObjectHandle_type > r (
+            ::std::unique_ptr< ObjectHandle_type > r (
               dynamic_cast< ObjectHandle_type* > (tmp.get ()));
 
             if (r.get ())
@@ -13876,7 +13876,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->ObjectHandle_.set (r);
+            this->ObjectHandle_.set (::std::move (r));
             continue;
           }
         }
@@ -13885,7 +13885,7 @@ namespace msdl_1
       // ForceSideName
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "ForceSideName",
             "",
@@ -13896,7 +13896,7 @@ namespace msdl_1
         {
           if (!ForceSideName_.present ())
           {
-            ::std::auto_ptr< ForceSideName_type > r (
+            ::std::unique_ptr< ForceSideName_type > r (
               dynamic_cast< ForceSideName_type* > (tmp.get ()));
 
             if (r.get ())
@@ -13904,7 +13904,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->ForceSideName_.set (r);
+            this->ForceSideName_.set (::std::move (r));
             continue;
           }
         }
@@ -13913,7 +13913,7 @@ namespace msdl_1
       // AllegianceHandle
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AllegianceHandle",
             "",
@@ -13924,7 +13924,7 @@ namespace msdl_1
         {
           if (!this->AllegianceHandle_)
           {
-            ::std::auto_ptr< AllegianceHandle_type > r (
+            ::std::unique_ptr< AllegianceHandle_type > r (
               dynamic_cast< AllegianceHandle_type* > (tmp.get ()));
 
             if (r.get ())
@@ -13932,7 +13932,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AllegianceHandle_.set (r);
+            this->AllegianceHandle_.set (::std::move (r));
             continue;
           }
         }
@@ -13941,7 +13941,7 @@ namespace msdl_1
       // MilitaryService
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "MilitaryService",
             "",
@@ -13952,7 +13952,7 @@ namespace msdl_1
         {
           if (!this->MilitaryService_)
           {
-            ::std::auto_ptr< MilitaryService_type > r (
+            ::std::unique_ptr< MilitaryService_type > r (
               dynamic_cast< MilitaryService_type* > (tmp.get ()));
 
             if (r.get ())
@@ -13960,7 +13960,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->MilitaryService_.set (r);
+            this->MilitaryService_.set (::std::move (r));
             continue;
           }
         }
@@ -13969,7 +13969,7 @@ namespace msdl_1
       // CountryCode
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CountryCode",
             "",
@@ -13980,7 +13980,7 @@ namespace msdl_1
         {
           if (!this->CountryCode_)
           {
-            ::std::auto_ptr< CountryCode_type > r (
+            ::std::unique_ptr< CountryCode_type > r (
               dynamic_cast< CountryCode_type* > (tmp.get ()));
 
             if (r.get ())
@@ -13988,7 +13988,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CountryCode_.set (r);
+            this->CountryCode_.set (::std::move (r));
             continue;
           }
         }
@@ -13997,7 +13997,7 @@ namespace msdl_1
       // Associations
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Associations",
             "",
@@ -14008,7 +14008,7 @@ namespace msdl_1
         {
           if (!this->Associations_)
           {
-            ::std::auto_ptr< Associations_type > r (
+            ::std::unique_ptr< Associations_type > r (
               dynamic_cast< Associations_type* > (tmp.get ()));
 
             if (r.get ())
@@ -14016,7 +14016,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Associations_.set (r);
+            this->Associations_.set (::std::move (r));
             continue;
           }
         }
@@ -14234,7 +14234,7 @@ namespace msdl_1
       // GroundFormationType
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "GroundFormationType",
             "",
@@ -14245,7 +14245,7 @@ namespace msdl_1
         {
           if (!this->GroundFormationType_)
           {
-            ::std::auto_ptr< GroundFormationType_type > r (
+            ::std::unique_ptr< GroundFormationType_type > r (
               dynamic_cast< GroundFormationType_type* > (tmp.get ()));
 
             if (r.get ())
@@ -14253,7 +14253,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->GroundFormationType_.set (r);
+            this->GroundFormationType_.set (::std::move (r));
             continue;
           }
         }
@@ -14262,7 +14262,7 @@ namespace msdl_1
       // AirFormationType
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AirFormationType",
             "",
@@ -14273,7 +14273,7 @@ namespace msdl_1
         {
           if (!this->AirFormationType_)
           {
-            ::std::auto_ptr< AirFormationType_type > r (
+            ::std::unique_ptr< AirFormationType_type > r (
               dynamic_cast< AirFormationType_type* > (tmp.get ()));
 
             if (r.get ())
@@ -14281,7 +14281,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AirFormationType_.set (r);
+            this->AirFormationType_.set (::std::move (r));
             continue;
           }
         }
@@ -14290,7 +14290,7 @@ namespace msdl_1
       // SurfaceFomationType
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "SurfaceFomationType",
             "",
@@ -14301,7 +14301,7 @@ namespace msdl_1
         {
           if (!this->SurfaceFomationType_)
           {
-            ::std::auto_ptr< SurfaceFomationType_type > r (
+            ::std::unique_ptr< SurfaceFomationType_type > r (
               dynamic_cast< SurfaceFomationType_type* > (tmp.get ()));
 
             if (r.get ())
@@ -14309,7 +14309,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->SurfaceFomationType_.set (r);
+            this->SurfaceFomationType_.set (::std::move (r));
             continue;
           }
         }
@@ -14318,7 +14318,7 @@ namespace msdl_1
       // SubsurfaceFormationType
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "SubsurfaceFormationType",
             "",
@@ -14329,7 +14329,7 @@ namespace msdl_1
         {
           if (!this->SubsurfaceFormationType_)
           {
-            ::std::auto_ptr< SubsurfaceFormationType_type > r (
+            ::std::unique_ptr< SubsurfaceFormationType_type > r (
               dynamic_cast< SubsurfaceFormationType_type* > (tmp.get ()));
 
             if (r.get ())
@@ -14337,7 +14337,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->SubsurfaceFormationType_.set (r);
+            this->SubsurfaceFormationType_.set (::std::move (r));
             continue;
           }
         }
@@ -14520,7 +14520,7 @@ namespace msdl_1
       // OutOfFormation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "OutOfFormation",
             "",
@@ -14531,7 +14531,7 @@ namespace msdl_1
         {
           if (!this->OutOfFormation_)
           {
-            ::std::auto_ptr< OutOfFormation_type > r (
+            ::std::unique_ptr< OutOfFormation_type > r (
               dynamic_cast< OutOfFormation_type* > (tmp.get ()));
 
             if (r.get ())
@@ -14539,7 +14539,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->OutOfFormation_.set (r);
+            this->OutOfFormation_.set (::std::move (r));
             continue;
           }
         }
@@ -14548,7 +14548,7 @@ namespace msdl_1
       // FormationOrder
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "FormationOrder",
             "",
@@ -14559,7 +14559,7 @@ namespace msdl_1
         {
           if (!this->FormationOrder_)
           {
-            ::std::auto_ptr< FormationOrder_type > r (
+            ::std::unique_ptr< FormationOrder_type > r (
               dynamic_cast< FormationOrder_type* > (tmp.get ()));
 
             if (r.get ())
@@ -14567,7 +14567,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->FormationOrder_.set (r);
+            this->FormationOrder_.set (::std::move (r));
             continue;
           }
         }
@@ -14576,7 +14576,7 @@ namespace msdl_1
       // SensorOrientation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "SensorOrientation",
             "",
@@ -14587,7 +14587,7 @@ namespace msdl_1
         {
           if (!this->SensorOrientation_)
           {
-            ::std::auto_ptr< SensorOrientation_type > r (
+            ::std::unique_ptr< SensorOrientation_type > r (
               dynamic_cast< SensorOrientation_type* > (tmp.get ()));
 
             if (r.get ())
@@ -14595,7 +14595,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->SensorOrientation_.set (r);
+            this->SensorOrientation_.set (::std::move (r));
             continue;
           }
         }
@@ -14722,13 +14722,13 @@ namespace msdl_1
   }
 
   GCCType::
-  GCCType (::std::auto_ptr< X_type > X,
-           ::std::auto_ptr< Y_type > Y,
-           ::std::auto_ptr< Z_type > Z)
+  GCCType (::std::unique_ptr< X_type > X,
+           ::std::unique_ptr< Y_type > Y,
+           ::std::unique_ptr< Z_type > Z)
   : ::xml_schema::type (),
-    X_ (X, this),
-    Y_ (Y, this),
-    Z_ (Z, this)
+    X_ (std::move (X), this),
+    Y_ (std::move (Y), this),
+    Z_ (std::move (Z), this)
   {
   }
 
@@ -14772,7 +14772,7 @@ namespace msdl_1
       // X
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "X",
             "",
@@ -14783,7 +14783,7 @@ namespace msdl_1
         {
           if (!X_.present ())
           {
-            ::std::auto_ptr< X_type > r (
+            ::std::unique_ptr< X_type > r (
               dynamic_cast< X_type* > (tmp.get ()));
 
             if (r.get ())
@@ -14791,7 +14791,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->X_.set (r);
+            this->X_.set (::std::move (r));
             continue;
           }
         }
@@ -14800,7 +14800,7 @@ namespace msdl_1
       // Y
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Y",
             "",
@@ -14811,7 +14811,7 @@ namespace msdl_1
         {
           if (!Y_.present ())
           {
-            ::std::auto_ptr< Y_type > r (
+            ::std::unique_ptr< Y_type > r (
               dynamic_cast< Y_type* > (tmp.get ()));
 
             if (r.get ())
@@ -14819,7 +14819,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Y_.set (r);
+            this->Y_.set (::std::move (r));
             continue;
           }
         }
@@ -14828,7 +14828,7 @@ namespace msdl_1
       // Z
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Z",
             "",
@@ -14839,7 +14839,7 @@ namespace msdl_1
         {
           if (!Z_.present ())
           {
-            ::std::auto_ptr< Z_type > r (
+            ::std::unique_ptr< Z_type > r (
               dynamic_cast< Z_type* > (tmp.get ()));
 
             if (r.get ())
@@ -14847,7 +14847,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Z_.set (r);
+            this->Z_.set (::std::move (r));
             continue;
           }
         }
@@ -14965,13 +14965,13 @@ namespace msdl_1
   }
 
   GDCType::
-  GDCType (::std::auto_ptr< Latitude_type > Latitude,
-           ::std::auto_ptr< Longitude_type > Longitude,
-           ::std::auto_ptr< ElevationAGL_type > ElevationAGL)
+  GDCType (::std::unique_ptr< Latitude_type > Latitude,
+           ::std::unique_ptr< Longitude_type > Longitude,
+           ::std::unique_ptr< ElevationAGL_type > ElevationAGL)
   : ::xml_schema::type (),
-    Latitude_ (Latitude, this),
-    Longitude_ (Longitude, this),
-    ElevationAGL_ (ElevationAGL, this)
+    Latitude_ (std::move (Latitude), this),
+    Longitude_ (std::move (Longitude), this),
+    ElevationAGL_ (std::move (ElevationAGL), this)
   {
   }
 
@@ -15015,7 +15015,7 @@ namespace msdl_1
       // Latitude
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Latitude",
             "",
@@ -15026,7 +15026,7 @@ namespace msdl_1
         {
           if (!Latitude_.present ())
           {
-            ::std::auto_ptr< Latitude_type > r (
+            ::std::unique_ptr< Latitude_type > r (
               dynamic_cast< Latitude_type* > (tmp.get ()));
 
             if (r.get ())
@@ -15034,7 +15034,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Latitude_.set (r);
+            this->Latitude_.set (::std::move (r));
             continue;
           }
         }
@@ -15043,7 +15043,7 @@ namespace msdl_1
       // Longitude
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Longitude",
             "",
@@ -15054,7 +15054,7 @@ namespace msdl_1
         {
           if (!Longitude_.present ())
           {
-            ::std::auto_ptr< Longitude_type > r (
+            ::std::unique_ptr< Longitude_type > r (
               dynamic_cast< Longitude_type* > (tmp.get ()));
 
             if (r.get ())
@@ -15062,7 +15062,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Longitude_.set (r);
+            this->Longitude_.set (::std::move (r));
             continue;
           }
         }
@@ -15071,7 +15071,7 @@ namespace msdl_1
       // ElevationAGL
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "ElevationAGL",
             "",
@@ -15082,7 +15082,7 @@ namespace msdl_1
         {
           if (!ElevationAGL_.present ())
           {
-            ::std::auto_ptr< ElevationAGL_type > r (
+            ::std::unique_ptr< ElevationAGL_type > r (
               dynamic_cast< ElevationAGL_type* > (tmp.get ()));
 
             if (r.get ())
@@ -15090,7 +15090,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->ElevationAGL_.set (r);
+            this->ElevationAGL_.set (::std::move (r));
             continue;
           }
         }
@@ -15239,7 +15239,7 @@ namespace msdl_1
       // Installation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Installation",
             "",
@@ -15248,7 +15248,7 @@ namespace msdl_1
 
         if (tmp.get () != 0)
         {
-          ::std::auto_ptr< Installation_type > r (
+          ::std::unique_ptr< Installation_type > r (
             dynamic_cast< Installation_type* > (tmp.get ()));
 
           if (r.get ())
@@ -15256,7 +15256,7 @@ namespace msdl_1
           else
             throw ::xsd::cxx::tree::not_derived< char > ();
 
-          this->Installation_.push_back (r);
+          this->Installation_.push_back (::std::move (r));
           continue;
         }
       }
@@ -15346,14 +15346,14 @@ namespace msdl_1
   }
 
   InstallationSymbolModifiersType::
-  InstallationSymbolModifiersType (::std::auto_ptr< UniqueDesignation_type > UniqueDesignation)
+  InstallationSymbolModifiersType (::std::unique_ptr< UniqueDesignation_type > UniqueDesignation)
   : ::xml_schema::type (),
     FrameShapeModifier_ (this),
     StaffComments_ (this),
     AdditionalInfo_ (this),
     CombatEffectiveness_ (this),
     IFF_ (this),
-    UniqueDesignation_ (UniqueDesignation, this),
+    UniqueDesignation_ (std::move (UniqueDesignation), this),
     DateTimeGroup_ (this)
   {
   }
@@ -15406,7 +15406,7 @@ namespace msdl_1
       // FrameShapeModifier
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "FrameShapeModifier",
             "",
@@ -15417,7 +15417,7 @@ namespace msdl_1
         {
           if (!this->FrameShapeModifier_)
           {
-            ::std::auto_ptr< FrameShapeModifier_type > r (
+            ::std::unique_ptr< FrameShapeModifier_type > r (
               dynamic_cast< FrameShapeModifier_type* > (tmp.get ()));
 
             if (r.get ())
@@ -15425,7 +15425,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->FrameShapeModifier_.set (r);
+            this->FrameShapeModifier_.set (::std::move (r));
             continue;
           }
         }
@@ -15434,7 +15434,7 @@ namespace msdl_1
       // StaffComments
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "StaffComments",
             "",
@@ -15445,7 +15445,7 @@ namespace msdl_1
         {
           if (!this->StaffComments_)
           {
-            ::std::auto_ptr< StaffComments_type > r (
+            ::std::unique_ptr< StaffComments_type > r (
               dynamic_cast< StaffComments_type* > (tmp.get ()));
 
             if (r.get ())
@@ -15453,7 +15453,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->StaffComments_.set (r);
+            this->StaffComments_.set (::std::move (r));
             continue;
           }
         }
@@ -15462,7 +15462,7 @@ namespace msdl_1
       // AdditionalInfo
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AdditionalInfo",
             "",
@@ -15473,7 +15473,7 @@ namespace msdl_1
         {
           if (!this->AdditionalInfo_)
           {
-            ::std::auto_ptr< AdditionalInfo_type > r (
+            ::std::unique_ptr< AdditionalInfo_type > r (
               dynamic_cast< AdditionalInfo_type* > (tmp.get ()));
 
             if (r.get ())
@@ -15481,7 +15481,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AdditionalInfo_.set (r);
+            this->AdditionalInfo_.set (::std::move (r));
             continue;
           }
         }
@@ -15490,7 +15490,7 @@ namespace msdl_1
       // CombatEffectiveness
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CombatEffectiveness",
             "",
@@ -15501,7 +15501,7 @@ namespace msdl_1
         {
           if (!this->CombatEffectiveness_)
           {
-            ::std::auto_ptr< CombatEffectiveness_type > r (
+            ::std::unique_ptr< CombatEffectiveness_type > r (
               dynamic_cast< CombatEffectiveness_type* > (tmp.get ()));
 
             if (r.get ())
@@ -15509,7 +15509,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CombatEffectiveness_.set (r);
+            this->CombatEffectiveness_.set (::std::move (r));
             continue;
           }
         }
@@ -15518,7 +15518,7 @@ namespace msdl_1
       // IFF
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "IFF",
             "",
@@ -15529,7 +15529,7 @@ namespace msdl_1
         {
           if (!this->IFF_)
           {
-            ::std::auto_ptr< IFF_type > r (
+            ::std::unique_ptr< IFF_type > r (
               dynamic_cast< IFF_type* > (tmp.get ()));
 
             if (r.get ())
@@ -15537,7 +15537,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->IFF_.set (r);
+            this->IFF_.set (::std::move (r));
             continue;
           }
         }
@@ -15546,7 +15546,7 @@ namespace msdl_1
       // UniqueDesignation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "UniqueDesignation",
             "",
@@ -15557,7 +15557,7 @@ namespace msdl_1
         {
           if (!UniqueDesignation_.present ())
           {
-            ::std::auto_ptr< UniqueDesignation_type > r (
+            ::std::unique_ptr< UniqueDesignation_type > r (
               dynamic_cast< UniqueDesignation_type* > (tmp.get ()));
 
             if (r.get ())
@@ -15565,7 +15565,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->UniqueDesignation_.set (r);
+            this->UniqueDesignation_.set (::std::move (r));
             continue;
           }
         }
@@ -15574,7 +15574,7 @@ namespace msdl_1
       // DateTimeGroup
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "DateTimeGroup",
             "",
@@ -15585,7 +15585,7 @@ namespace msdl_1
         {
           if (!this->DateTimeGroup_)
           {
-            ::std::auto_ptr< DateTimeGroup_type > r (
+            ::std::unique_ptr< DateTimeGroup_type > r (
               dynamic_cast< DateTimeGroup_type* > (tmp.get ()));
 
             if (r.get ())
@@ -15593,7 +15593,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->DateTimeGroup_.set (r);
+            this->DateTimeGroup_.set (::std::move (r));
             continue;
           }
         }
@@ -15804,14 +15804,14 @@ namespace msdl_1
   InstallationType (const ObjectHandle_type& ObjectHandle,
                     const SymbolIdentifier_type& SymbolIdentifier,
                     const Affiliation_type& Affiliation,
-                    ::std::auto_ptr< Owner_type > Owner,
-                    ::std::auto_ptr< Location_type > Location)
+                    ::std::unique_ptr< Owner_type > Owner,
+                    ::std::unique_ptr< Location_type > Location)
   : ::xml_schema::type (),
     ObjectHandle_ (ObjectHandle, this),
     SymbolIdentifier_ (SymbolIdentifier, this),
     Affiliation_ (Affiliation, this),
-    Owner_ (Owner, this),
-    Location_ (Location, this),
+    Owner_ (std::move (Owner), this),
+    Location_ (std::move (Location), this),
     Orientation_ (this),
     Name_ (this),
     InstallationSymbolModifiers_ (this),
@@ -15820,17 +15820,17 @@ namespace msdl_1
   }
 
   InstallationType::
-  InstallationType (::std::auto_ptr< ObjectHandle_type > ObjectHandle,
-                    ::std::auto_ptr< SymbolIdentifier_type > SymbolIdentifier,
-                    ::std::auto_ptr< Affiliation_type > Affiliation,
-                    ::std::auto_ptr< Owner_type > Owner,
-                    ::std::auto_ptr< Location_type > Location)
+  InstallationType (::std::unique_ptr< ObjectHandle_type > ObjectHandle,
+                    ::std::unique_ptr< SymbolIdentifier_type > SymbolIdentifier,
+                    ::std::unique_ptr< Affiliation_type > Affiliation,
+                    ::std::unique_ptr< Owner_type > Owner,
+                    ::std::unique_ptr< Location_type > Location)
   : ::xml_schema::type (),
-    ObjectHandle_ (ObjectHandle, this),
-    SymbolIdentifier_ (SymbolIdentifier, this),
-    Affiliation_ (Affiliation, this),
-    Owner_ (Owner, this),
-    Location_ (Location, this),
+    ObjectHandle_ (std::move (ObjectHandle), this),
+    SymbolIdentifier_ (std::move (SymbolIdentifier), this),
+    Affiliation_ (std::move (Affiliation), this),
+    Owner_ (std::move (Owner), this),
+    Location_ (std::move (Location), this),
     Orientation_ (this),
     Name_ (this),
     InstallationSymbolModifiers_ (this),
@@ -15890,7 +15890,7 @@ namespace msdl_1
       // ObjectHandle
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "ObjectHandle",
             "",
@@ -15901,7 +15901,7 @@ namespace msdl_1
         {
           if (!ObjectHandle_.present ())
           {
-            ::std::auto_ptr< ObjectHandle_type > r (
+            ::std::unique_ptr< ObjectHandle_type > r (
               dynamic_cast< ObjectHandle_type* > (tmp.get ()));
 
             if (r.get ())
@@ -15909,7 +15909,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->ObjectHandle_.set (r);
+            this->ObjectHandle_.set (::std::move (r));
             continue;
           }
         }
@@ -15918,7 +15918,7 @@ namespace msdl_1
       // SymbolIdentifier
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "SymbolIdentifier",
             "",
@@ -15929,7 +15929,7 @@ namespace msdl_1
         {
           if (!SymbolIdentifier_.present ())
           {
-            ::std::auto_ptr< SymbolIdentifier_type > r (
+            ::std::unique_ptr< SymbolIdentifier_type > r (
               dynamic_cast< SymbolIdentifier_type* > (tmp.get ()));
 
             if (r.get ())
@@ -15937,7 +15937,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->SymbolIdentifier_.set (r);
+            this->SymbolIdentifier_.set (::std::move (r));
             continue;
           }
         }
@@ -15946,7 +15946,7 @@ namespace msdl_1
       // Affiliation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Affiliation",
             "",
@@ -15957,7 +15957,7 @@ namespace msdl_1
         {
           if (!Affiliation_.present ())
           {
-            ::std::auto_ptr< Affiliation_type > r (
+            ::std::unique_ptr< Affiliation_type > r (
               dynamic_cast< Affiliation_type* > (tmp.get ()));
 
             if (r.get ())
@@ -15965,7 +15965,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Affiliation_.set (r);
+            this->Affiliation_.set (::std::move (r));
             continue;
           }
         }
@@ -15974,7 +15974,7 @@ namespace msdl_1
       // Owner
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Owner",
             "",
@@ -15985,7 +15985,7 @@ namespace msdl_1
         {
           if (!Owner_.present ())
           {
-            ::std::auto_ptr< Owner_type > r (
+            ::std::unique_ptr< Owner_type > r (
               dynamic_cast< Owner_type* > (tmp.get ()));
 
             if (r.get ())
@@ -15993,7 +15993,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Owner_.set (r);
+            this->Owner_.set (::std::move (r));
             continue;
           }
         }
@@ -16002,7 +16002,7 @@ namespace msdl_1
       // Location
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Location",
             "",
@@ -16013,7 +16013,7 @@ namespace msdl_1
         {
           if (!Location_.present ())
           {
-            ::std::auto_ptr< Location_type > r (
+            ::std::unique_ptr< Location_type > r (
               dynamic_cast< Location_type* > (tmp.get ()));
 
             if (r.get ())
@@ -16021,7 +16021,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Location_.set (r);
+            this->Location_.set (::std::move (r));
             continue;
           }
         }
@@ -16030,7 +16030,7 @@ namespace msdl_1
       // Orientation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Orientation",
             "",
@@ -16041,7 +16041,7 @@ namespace msdl_1
         {
           if (!this->Orientation_)
           {
-            ::std::auto_ptr< Orientation_type > r (
+            ::std::unique_ptr< Orientation_type > r (
               dynamic_cast< Orientation_type* > (tmp.get ()));
 
             if (r.get ())
@@ -16049,7 +16049,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Orientation_.set (r);
+            this->Orientation_.set (::std::move (r));
             continue;
           }
         }
@@ -16058,7 +16058,7 @@ namespace msdl_1
       // Name
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Name",
             "",
@@ -16069,7 +16069,7 @@ namespace msdl_1
         {
           if (!this->Name_)
           {
-            ::std::auto_ptr< Name_type > r (
+            ::std::unique_ptr< Name_type > r (
               dynamic_cast< Name_type* > (tmp.get ()));
 
             if (r.get ())
@@ -16077,7 +16077,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Name_.set (r);
+            this->Name_.set (::std::move (r));
             continue;
           }
         }
@@ -16086,7 +16086,7 @@ namespace msdl_1
       // InstallationSymbolModifiers
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "InstallationSymbolModifiers",
             "",
@@ -16097,7 +16097,7 @@ namespace msdl_1
         {
           if (!this->InstallationSymbolModifiers_)
           {
-            ::std::auto_ptr< InstallationSymbolModifiers_type > r (
+            ::std::unique_ptr< InstallationSymbolModifiers_type > r (
               dynamic_cast< InstallationSymbolModifiers_type* > (tmp.get ()));
 
             if (r.get ())
@@ -16105,7 +16105,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->InstallationSymbolModifiers_.set (r);
+            this->InstallationSymbolModifiers_.set (::std::move (r));
             continue;
           }
         }
@@ -16114,7 +16114,7 @@ namespace msdl_1
       // AssociatedOverlays
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AssociatedOverlays",
             "",
@@ -16125,7 +16125,7 @@ namespace msdl_1
         {
           if (!this->AssociatedOverlays_)
           {
-            ::std::auto_ptr< AssociatedOverlays_type > r (
+            ::std::unique_ptr< AssociatedOverlays_type > r (
               dynamic_cast< AssociatedOverlays_type* > (tmp.get ()));
 
             if (r.get ())
@@ -16133,7 +16133,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AssociatedOverlays_.set (r);
+            this->AssociatedOverlays_.set (::std::move (r));
             continue;
           }
         }
@@ -16390,7 +16390,7 @@ namespace msdl_1
       // Light
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Light",
             "",
@@ -16399,7 +16399,7 @@ namespace msdl_1
 
         if (tmp.get () != 0)
         {
-          ::std::auto_ptr< Light_type > r (
+          ::std::unique_ptr< Light_type > r (
             dynamic_cast< Light_type* > (tmp.get ()));
 
           if (r.get ())
@@ -16407,7 +16407,7 @@ namespace msdl_1
           else
             throw ::xsd::cxx::tree::not_derived< char > ();
 
-          this->Light_.push_back (r);
+          this->Light_.push_back (::std::move (r));
           continue;
         }
       }
@@ -16535,7 +16535,7 @@ namespace msdl_1
       // UniqueDesignation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "UniqueDesignation",
             "",
@@ -16546,7 +16546,7 @@ namespace msdl_1
         {
           if (!this->UniqueDesignation_)
           {
-            ::std::auto_ptr< UniqueDesignation_type > r (
+            ::std::unique_ptr< UniqueDesignation_type > r (
               dynamic_cast< UniqueDesignation_type* > (tmp.get ()));
 
             if (r.get ())
@@ -16554,7 +16554,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->UniqueDesignation_.set (r);
+            this->UniqueDesignation_.set (::std::move (r));
             continue;
           }
         }
@@ -16563,7 +16563,7 @@ namespace msdl_1
       // UniqueDesignation1
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "UniqueDesignation1",
             "",
@@ -16574,7 +16574,7 @@ namespace msdl_1
         {
           if (!this->UniqueDesignation1_)
           {
-            ::std::auto_ptr< UniqueDesignation1_type > r (
+            ::std::unique_ptr< UniqueDesignation1_type > r (
               dynamic_cast< UniqueDesignation1_type* > (tmp.get ()));
 
             if (r.get ())
@@ -16582,7 +16582,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->UniqueDesignation1_.set (r);
+            this->UniqueDesignation1_.set (::std::move (r));
             continue;
           }
         }
@@ -16591,7 +16591,7 @@ namespace msdl_1
       // DateTimeGroup
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "DateTimeGroup",
             "",
@@ -16602,7 +16602,7 @@ namespace msdl_1
         {
           if (!this->DateTimeGroup_)
           {
-            ::std::auto_ptr< DateTimeGroup_type > r (
+            ::std::unique_ptr< DateTimeGroup_type > r (
               dynamic_cast< DateTimeGroup_type* > (tmp.get ()));
 
             if (r.get ())
@@ -16610,7 +16610,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->DateTimeGroup_.set (r);
+            this->DateTimeGroup_.set (::std::move (r));
             continue;
           }
         }
@@ -16619,7 +16619,7 @@ namespace msdl_1
       // DateTimeGroup1
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "DateTimeGroup1",
             "",
@@ -16630,7 +16630,7 @@ namespace msdl_1
         {
           if (!this->DateTimeGroup1_)
           {
-            ::std::auto_ptr< DateTimeGroup1_type > r (
+            ::std::unique_ptr< DateTimeGroup1_type > r (
               dynamic_cast< DateTimeGroup1_type* > (tmp.get ()));
 
             if (r.get ())
@@ -16638,7 +16638,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->DateTimeGroup1_.set (r);
+            this->DateTimeGroup1_.set (::std::move (r));
             continue;
           }
         }
@@ -16782,9 +16782,9 @@ namespace msdl_1
   }
 
   METOCDispositionType::
-  METOCDispositionType (::std::auto_ptr< AnchorPoints_type > AnchorPoints)
+  METOCDispositionType (::std::unique_ptr< AnchorPoints_type > AnchorPoints)
   : ::xml_schema::type (),
-    AnchorPoints_ (AnchorPoints, this),
+    AnchorPoints_ (std::move (AnchorPoints), this),
     DirectionOfMovement_ (this),
     Speed_ (this)
   {
@@ -16830,7 +16830,7 @@ namespace msdl_1
       // AnchorPoints
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AnchorPoints",
             "",
@@ -16841,7 +16841,7 @@ namespace msdl_1
         {
           if (!AnchorPoints_.present ())
           {
-            ::std::auto_ptr< AnchorPoints_type > r (
+            ::std::unique_ptr< AnchorPoints_type > r (
               dynamic_cast< AnchorPoints_type* > (tmp.get ()));
 
             if (r.get ())
@@ -16849,7 +16849,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AnchorPoints_.set (r);
+            this->AnchorPoints_.set (::std::move (r));
             continue;
           }
         }
@@ -16858,7 +16858,7 @@ namespace msdl_1
       // DirectionOfMovement
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "DirectionOfMovement",
             "",
@@ -16869,7 +16869,7 @@ namespace msdl_1
         {
           if (!this->DirectionOfMovement_)
           {
-            ::std::auto_ptr< DirectionOfMovement_type > r (
+            ::std::unique_ptr< DirectionOfMovement_type > r (
               dynamic_cast< DirectionOfMovement_type* > (tmp.get ()));
 
             if (r.get ())
@@ -16877,7 +16877,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->DirectionOfMovement_.set (r);
+            this->DirectionOfMovement_.set (::std::move (r));
             continue;
           }
         }
@@ -16886,7 +16886,7 @@ namespace msdl_1
       // Speed
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Speed",
             "",
@@ -16897,7 +16897,7 @@ namespace msdl_1
         {
           if (!this->Speed_)
           {
-            ::std::auto_ptr< Speed_type > r (
+            ::std::unique_ptr< Speed_type > r (
               dynamic_cast< Speed_type* > (tmp.get ()));
 
             if (r.get ())
@@ -16905,7 +16905,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Speed_.set (r);
+            this->Speed_.set (::std::move (r));
             continue;
           }
         }
@@ -17038,7 +17038,7 @@ namespace msdl_1
   METOCGraphicType (const ObjectHandle_type& ObjectHandle,
                     const SymbolIdentifier_type& SymbolIdentifier,
                     const UniqueDesignation_type& UniqueDesignation,
-                    ::std::auto_ptr< Disposition_type > Disposition)
+                    ::std::unique_ptr< Disposition_type > Disposition)
   : ::xml_schema::type (),
     ObjectHandle_ (ObjectHandle, this),
     SymbolIdentifier_ (SymbolIdentifier, this),
@@ -17047,24 +17047,24 @@ namespace msdl_1
     DateTimeGroup1_ (this),
     Quantity_ (this),
     AdditionalInfo_ (this),
-    Disposition_ (Disposition, this)
+    Disposition_ (std::move (Disposition), this)
   {
   }
 
   METOCGraphicType::
-  METOCGraphicType (::std::auto_ptr< ObjectHandle_type > ObjectHandle,
-                    ::std::auto_ptr< SymbolIdentifier_type > SymbolIdentifier,
-                    ::std::auto_ptr< UniqueDesignation_type > UniqueDesignation,
-                    ::std::auto_ptr< Disposition_type > Disposition)
+  METOCGraphicType (::std::unique_ptr< ObjectHandle_type > ObjectHandle,
+                    ::std::unique_ptr< SymbolIdentifier_type > SymbolIdentifier,
+                    ::std::unique_ptr< UniqueDesignation_type > UniqueDesignation,
+                    ::std::unique_ptr< Disposition_type > Disposition)
   : ::xml_schema::type (),
-    ObjectHandle_ (ObjectHandle, this),
-    SymbolIdentifier_ (SymbolIdentifier, this),
-    UniqueDesignation_ (UniqueDesignation, this),
+    ObjectHandle_ (std::move (ObjectHandle), this),
+    SymbolIdentifier_ (std::move (SymbolIdentifier), this),
+    UniqueDesignation_ (std::move (UniqueDesignation), this),
     DateTimeGroup_ (this),
     DateTimeGroup1_ (this),
     Quantity_ (this),
     AdditionalInfo_ (this),
-    Disposition_ (Disposition, this)
+    Disposition_ (std::move (Disposition), this)
   {
   }
 
@@ -17118,7 +17118,7 @@ namespace msdl_1
       // ObjectHandle
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "ObjectHandle",
             "",
@@ -17129,7 +17129,7 @@ namespace msdl_1
         {
           if (!ObjectHandle_.present ())
           {
-            ::std::auto_ptr< ObjectHandle_type > r (
+            ::std::unique_ptr< ObjectHandle_type > r (
               dynamic_cast< ObjectHandle_type* > (tmp.get ()));
 
             if (r.get ())
@@ -17137,7 +17137,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->ObjectHandle_.set (r);
+            this->ObjectHandle_.set (::std::move (r));
             continue;
           }
         }
@@ -17146,7 +17146,7 @@ namespace msdl_1
       // SymbolIdentifier
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "SymbolIdentifier",
             "",
@@ -17157,7 +17157,7 @@ namespace msdl_1
         {
           if (!SymbolIdentifier_.present ())
           {
-            ::std::auto_ptr< SymbolIdentifier_type > r (
+            ::std::unique_ptr< SymbolIdentifier_type > r (
               dynamic_cast< SymbolIdentifier_type* > (tmp.get ()));
 
             if (r.get ())
@@ -17165,7 +17165,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->SymbolIdentifier_.set (r);
+            this->SymbolIdentifier_.set (::std::move (r));
             continue;
           }
         }
@@ -17174,7 +17174,7 @@ namespace msdl_1
       // UniqueDesignation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "UniqueDesignation",
             "",
@@ -17185,7 +17185,7 @@ namespace msdl_1
         {
           if (!UniqueDesignation_.present ())
           {
-            ::std::auto_ptr< UniqueDesignation_type > r (
+            ::std::unique_ptr< UniqueDesignation_type > r (
               dynamic_cast< UniqueDesignation_type* > (tmp.get ()));
 
             if (r.get ())
@@ -17193,7 +17193,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->UniqueDesignation_.set (r);
+            this->UniqueDesignation_.set (::std::move (r));
             continue;
           }
         }
@@ -17202,7 +17202,7 @@ namespace msdl_1
       // DateTimeGroup
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "DateTimeGroup",
             "",
@@ -17213,7 +17213,7 @@ namespace msdl_1
         {
           if (!this->DateTimeGroup_)
           {
-            ::std::auto_ptr< DateTimeGroup_type > r (
+            ::std::unique_ptr< DateTimeGroup_type > r (
               dynamic_cast< DateTimeGroup_type* > (tmp.get ()));
 
             if (r.get ())
@@ -17221,7 +17221,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->DateTimeGroup_.set (r);
+            this->DateTimeGroup_.set (::std::move (r));
             continue;
           }
         }
@@ -17230,7 +17230,7 @@ namespace msdl_1
       // DateTimeGroup1
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "DateTimeGroup1",
             "",
@@ -17241,7 +17241,7 @@ namespace msdl_1
         {
           if (!this->DateTimeGroup1_)
           {
-            ::std::auto_ptr< DateTimeGroup1_type > r (
+            ::std::unique_ptr< DateTimeGroup1_type > r (
               dynamic_cast< DateTimeGroup1_type* > (tmp.get ()));
 
             if (r.get ())
@@ -17249,7 +17249,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->DateTimeGroup1_.set (r);
+            this->DateTimeGroup1_.set (::std::move (r));
             continue;
           }
         }
@@ -17258,7 +17258,7 @@ namespace msdl_1
       // Quantity
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Quantity",
             "",
@@ -17269,7 +17269,7 @@ namespace msdl_1
         {
           if (!this->Quantity_)
           {
-            ::std::auto_ptr< Quantity_type > r (
+            ::std::unique_ptr< Quantity_type > r (
               dynamic_cast< Quantity_type* > (tmp.get ()));
 
             if (r.get ())
@@ -17277,7 +17277,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Quantity_.set (r);
+            this->Quantity_.set (::std::move (r));
             continue;
           }
         }
@@ -17286,7 +17286,7 @@ namespace msdl_1
       // AdditionalInfo
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AdditionalInfo",
             "",
@@ -17297,7 +17297,7 @@ namespace msdl_1
         {
           if (!this->AdditionalInfo_)
           {
-            ::std::auto_ptr< AdditionalInfo_type > r (
+            ::std::unique_ptr< AdditionalInfo_type > r (
               dynamic_cast< AdditionalInfo_type* > (tmp.get ()));
 
             if (r.get ())
@@ -17305,7 +17305,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AdditionalInfo_.set (r);
+            this->AdditionalInfo_.set (::std::move (r));
             continue;
           }
         }
@@ -17314,7 +17314,7 @@ namespace msdl_1
       // Disposition
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Disposition",
             "",
@@ -17325,7 +17325,7 @@ namespace msdl_1
         {
           if (!Disposition_.present ())
           {
-            ::std::auto_ptr< Disposition_type > r (
+            ::std::unique_ptr< Disposition_type > r (
               dynamic_cast< Disposition_type* > (tmp.get ()));
 
             if (r.get ())
@@ -17333,7 +17333,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Disposition_.set (r);
+            this->Disposition_.set (::std::move (r));
             continue;
           }
         }
@@ -17574,7 +17574,7 @@ namespace msdl_1
       // METOCGraphic
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "METOCGraphic",
             "",
@@ -17583,7 +17583,7 @@ namespace msdl_1
 
         if (tmp.get () != 0)
         {
-          ::std::auto_ptr< METOCGraphic_type > r (
+          ::std::unique_ptr< METOCGraphic_type > r (
             dynamic_cast< METOCGraphic_type* > (tmp.get ()));
 
           if (r.get ())
@@ -17591,7 +17591,7 @@ namespace msdl_1
           else
             throw ::xsd::cxx::tree::not_derived< char > ();
 
-          this->METOCGraphic_.push_back (r);
+          this->METOCGraphic_.push_back (::std::move (r));
           continue;
         }
       }
@@ -17685,14 +17685,14 @@ namespace msdl_1
   }
 
   MilitaryScenarioType::
-  MilitaryScenarioType (::std::auto_ptr< ScenarioID_type > ScenarioID,
-                        ::std::auto_ptr< Options_type > Options,
-                        ::std::auto_ptr< ForceSides_type > ForceSides)
+  MilitaryScenarioType (::std::unique_ptr< ScenarioID_type > ScenarioID,
+                        ::std::unique_ptr< Options_type > Options,
+                        ::std::unique_ptr< ForceSides_type > ForceSides)
   : ::xml_schema::type (),
-    ScenarioID_ (ScenarioID, this),
-    Options_ (Options, this),
+    ScenarioID_ (std::move (ScenarioID), this),
+    Options_ (std::move (Options), this),
     Environment_ (this),
-    ForceSides_ (ForceSides, this),
+    ForceSides_ (std::move (ForceSides), this),
     Organizations_ (this),
     Overlays_ (this),
     Installations_ (this),
@@ -17753,7 +17753,7 @@ namespace msdl_1
       // ScenarioID
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "ScenarioID",
             "",
@@ -17764,7 +17764,7 @@ namespace msdl_1
         {
           if (!ScenarioID_.present ())
           {
-            ::std::auto_ptr< ScenarioID_type > r (
+            ::std::unique_ptr< ScenarioID_type > r (
               dynamic_cast< ScenarioID_type* > (tmp.get ()));
 
             if (r.get ())
@@ -17772,7 +17772,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->ScenarioID_.set (r);
+            this->ScenarioID_.set (::std::move (r));
             continue;
           }
         }
@@ -17781,7 +17781,7 @@ namespace msdl_1
       // Options
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Options",
             "",
@@ -17792,7 +17792,7 @@ namespace msdl_1
         {
           if (!Options_.present ())
           {
-            ::std::auto_ptr< Options_type > r (
+            ::std::unique_ptr< Options_type > r (
               dynamic_cast< Options_type* > (tmp.get ()));
 
             if (r.get ())
@@ -17800,7 +17800,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Options_.set (r);
+            this->Options_.set (::std::move (r));
             continue;
           }
         }
@@ -17809,7 +17809,7 @@ namespace msdl_1
       // Environment
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Environment",
             "",
@@ -17820,7 +17820,7 @@ namespace msdl_1
         {
           if (!this->Environment_)
           {
-            ::std::auto_ptr< Environment_type > r (
+            ::std::unique_ptr< Environment_type > r (
               dynamic_cast< Environment_type* > (tmp.get ()));
 
             if (r.get ())
@@ -17828,7 +17828,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Environment_.set (r);
+            this->Environment_.set (::std::move (r));
             continue;
           }
         }
@@ -17837,7 +17837,7 @@ namespace msdl_1
       // ForceSides
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "ForceSides",
             "",
@@ -17848,7 +17848,7 @@ namespace msdl_1
         {
           if (!ForceSides_.present ())
           {
-            ::std::auto_ptr< ForceSides_type > r (
+            ::std::unique_ptr< ForceSides_type > r (
               dynamic_cast< ForceSides_type* > (tmp.get ()));
 
             if (r.get ())
@@ -17856,7 +17856,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->ForceSides_.set (r);
+            this->ForceSides_.set (::std::move (r));
             continue;
           }
         }
@@ -17865,7 +17865,7 @@ namespace msdl_1
       // Organizations
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Organizations",
             "",
@@ -17876,7 +17876,7 @@ namespace msdl_1
         {
           if (!this->Organizations_)
           {
-            ::std::auto_ptr< Organizations_type > r (
+            ::std::unique_ptr< Organizations_type > r (
               dynamic_cast< Organizations_type* > (tmp.get ()));
 
             if (r.get ())
@@ -17884,7 +17884,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Organizations_.set (r);
+            this->Organizations_.set (::std::move (r));
             continue;
           }
         }
@@ -17893,7 +17893,7 @@ namespace msdl_1
       // Overlays
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Overlays",
             "",
@@ -17904,7 +17904,7 @@ namespace msdl_1
         {
           if (!this->Overlays_)
           {
-            ::std::auto_ptr< Overlays_type > r (
+            ::std::unique_ptr< Overlays_type > r (
               dynamic_cast< Overlays_type* > (tmp.get ()));
 
             if (r.get ())
@@ -17912,7 +17912,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Overlays_.set (r);
+            this->Overlays_.set (::std::move (r));
             continue;
           }
         }
@@ -17921,7 +17921,7 @@ namespace msdl_1
       // Installations
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Installations",
             "",
@@ -17932,7 +17932,7 @@ namespace msdl_1
         {
           if (!this->Installations_)
           {
-            ::std::auto_ptr< Installations_type > r (
+            ::std::unique_ptr< Installations_type > r (
               dynamic_cast< Installations_type* > (tmp.get ()));
 
             if (r.get ())
@@ -17940,7 +17940,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Installations_.set (r);
+            this->Installations_.set (::std::move (r));
             continue;
           }
         }
@@ -17949,7 +17949,7 @@ namespace msdl_1
       // TacticalGraphics
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "TacticalGraphics",
             "",
@@ -17960,7 +17960,7 @@ namespace msdl_1
         {
           if (!this->TacticalGraphics_)
           {
-            ::std::auto_ptr< TacticalGraphics_type > r (
+            ::std::unique_ptr< TacticalGraphics_type > r (
               dynamic_cast< TacticalGraphics_type* > (tmp.get ()));
 
             if (r.get ())
@@ -17968,7 +17968,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->TacticalGraphics_.set (r);
+            this->TacticalGraphics_.set (::std::move (r));
             continue;
           }
         }
@@ -17977,7 +17977,7 @@ namespace msdl_1
       // MOOTWGraphics
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "MOOTWGraphics",
             "",
@@ -17988,7 +17988,7 @@ namespace msdl_1
         {
           if (!this->MOOTWGraphics_)
           {
-            ::std::auto_ptr< MOOTWGraphics_type > r (
+            ::std::unique_ptr< MOOTWGraphics_type > r (
               dynamic_cast< MOOTWGraphics_type* > (tmp.get ()));
 
             if (r.get ())
@@ -17996,7 +17996,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->MOOTWGraphics_.set (r);
+            this->MOOTWGraphics_.set (::std::move (r));
             continue;
           }
         }
@@ -18233,17 +18233,17 @@ namespace msdl_1
   }
 
   MGRSType::
-  MGRSType (::std::auto_ptr< MGRSGridZone_type > MGRSGridZone,
-            ::std::auto_ptr< MGRSGridSquare_type > MGRSGridSquare,
-            ::std::auto_ptr< MGRSPrecision_type > MGRSPrecision,
-            ::std::auto_ptr< MGRSEasting_type > MGRSEasting,
-            ::std::auto_ptr< MGRSNorthing_type > MGRSNorthing)
+  MGRSType (::std::unique_ptr< MGRSGridZone_type > MGRSGridZone,
+            ::std::unique_ptr< MGRSGridSquare_type > MGRSGridSquare,
+            ::std::unique_ptr< MGRSPrecision_type > MGRSPrecision,
+            ::std::unique_ptr< MGRSEasting_type > MGRSEasting,
+            ::std::unique_ptr< MGRSNorthing_type > MGRSNorthing)
   : ::xml_schema::type (),
-    MGRSGridZone_ (MGRSGridZone, this),
-    MGRSGridSquare_ (MGRSGridSquare, this),
-    MGRSPrecision_ (MGRSPrecision, this),
-    MGRSEasting_ (MGRSEasting, this),
-    MGRSNorthing_ (MGRSNorthing, this),
+    MGRSGridZone_ (std::move (MGRSGridZone), this),
+    MGRSGridSquare_ (std::move (MGRSGridSquare), this),
+    MGRSPrecision_ (std::move (MGRSPrecision), this),
+    MGRSEasting_ (std::move (MGRSEasting), this),
+    MGRSNorthing_ (std::move (MGRSNorthing), this),
     ElevationAGL_ (this)
   {
   }
@@ -18294,7 +18294,7 @@ namespace msdl_1
       // MGRSGridZone
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "MGRSGridZone",
             "",
@@ -18305,7 +18305,7 @@ namespace msdl_1
         {
           if (!MGRSGridZone_.present ())
           {
-            ::std::auto_ptr< MGRSGridZone_type > r (
+            ::std::unique_ptr< MGRSGridZone_type > r (
               dynamic_cast< MGRSGridZone_type* > (tmp.get ()));
 
             if (r.get ())
@@ -18313,7 +18313,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->MGRSGridZone_.set (r);
+            this->MGRSGridZone_.set (::std::move (r));
             continue;
           }
         }
@@ -18322,7 +18322,7 @@ namespace msdl_1
       // MGRSGridSquare
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "MGRSGridSquare",
             "",
@@ -18333,7 +18333,7 @@ namespace msdl_1
         {
           if (!MGRSGridSquare_.present ())
           {
-            ::std::auto_ptr< MGRSGridSquare_type > r (
+            ::std::unique_ptr< MGRSGridSquare_type > r (
               dynamic_cast< MGRSGridSquare_type* > (tmp.get ()));
 
             if (r.get ())
@@ -18341,7 +18341,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->MGRSGridSquare_.set (r);
+            this->MGRSGridSquare_.set (::std::move (r));
             continue;
           }
         }
@@ -18350,7 +18350,7 @@ namespace msdl_1
       // MGRSPrecision
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "MGRSPrecision",
             "",
@@ -18361,7 +18361,7 @@ namespace msdl_1
         {
           if (!MGRSPrecision_.present ())
           {
-            ::std::auto_ptr< MGRSPrecision_type > r (
+            ::std::unique_ptr< MGRSPrecision_type > r (
               dynamic_cast< MGRSPrecision_type* > (tmp.get ()));
 
             if (r.get ())
@@ -18369,7 +18369,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->MGRSPrecision_.set (r);
+            this->MGRSPrecision_.set (::std::move (r));
             continue;
           }
         }
@@ -18378,7 +18378,7 @@ namespace msdl_1
       // MGRSEasting
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "MGRSEasting",
             "",
@@ -18389,7 +18389,7 @@ namespace msdl_1
         {
           if (!MGRSEasting_.present ())
           {
-            ::std::auto_ptr< MGRSEasting_type > r (
+            ::std::unique_ptr< MGRSEasting_type > r (
               dynamic_cast< MGRSEasting_type* > (tmp.get ()));
 
             if (r.get ())
@@ -18397,7 +18397,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->MGRSEasting_.set (r);
+            this->MGRSEasting_.set (::std::move (r));
             continue;
           }
         }
@@ -18406,7 +18406,7 @@ namespace msdl_1
       // MGRSNorthing
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "MGRSNorthing",
             "",
@@ -18417,7 +18417,7 @@ namespace msdl_1
         {
           if (!MGRSNorthing_.present ())
           {
-            ::std::auto_ptr< MGRSNorthing_type > r (
+            ::std::unique_ptr< MGRSNorthing_type > r (
               dynamic_cast< MGRSNorthing_type* > (tmp.get ()));
 
             if (r.get ())
@@ -18425,7 +18425,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->MGRSNorthing_.set (r);
+            this->MGRSNorthing_.set (::std::move (r));
             continue;
           }
         }
@@ -18434,7 +18434,7 @@ namespace msdl_1
       // ElevationAGL
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "ElevationAGL",
             "",
@@ -18445,7 +18445,7 @@ namespace msdl_1
         {
           if (!this->ElevationAGL_)
           {
-            ::std::auto_ptr< ElevationAGL_type > r (
+            ::std::unique_ptr< ElevationAGL_type > r (
               dynamic_cast< ElevationAGL_type* > (tmp.get ()));
 
             if (r.get ())
@@ -18453,7 +18453,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->ElevationAGL_.set (r);
+            this->ElevationAGL_.set (::std::move (r));
             continue;
           }
         }
@@ -18620,9 +18620,9 @@ namespace msdl_1
   }
 
   MOOTWDispositionType::
-  MOOTWDispositionType (::std::auto_ptr< Location_type > Location)
+  MOOTWDispositionType (::std::unique_ptr< Location_type > Location)
   : ::xml_schema::type (),
-    Location_ (Location, this),
+    Location_ (std::move (Location), this),
     DirectionOfMovement_ (this),
     Speed_ (this)
   {
@@ -18668,7 +18668,7 @@ namespace msdl_1
       // Location
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Location",
             "",
@@ -18679,7 +18679,7 @@ namespace msdl_1
         {
           if (!Location_.present ())
           {
-            ::std::auto_ptr< Location_type > r (
+            ::std::unique_ptr< Location_type > r (
               dynamic_cast< Location_type* > (tmp.get ()));
 
             if (r.get ())
@@ -18687,7 +18687,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Location_.set (r);
+            this->Location_.set (::std::move (r));
             continue;
           }
         }
@@ -18696,7 +18696,7 @@ namespace msdl_1
       // DirectionOfMovement
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "DirectionOfMovement",
             "",
@@ -18707,7 +18707,7 @@ namespace msdl_1
         {
           if (!this->DirectionOfMovement_)
           {
-            ::std::auto_ptr< DirectionOfMovement_type > r (
+            ::std::unique_ptr< DirectionOfMovement_type > r (
               dynamic_cast< DirectionOfMovement_type* > (tmp.get ()));
 
             if (r.get ())
@@ -18715,7 +18715,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->DirectionOfMovement_.set (r);
+            this->DirectionOfMovement_.set (::std::move (r));
             continue;
           }
         }
@@ -18724,7 +18724,7 @@ namespace msdl_1
       // Speed
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Speed",
             "",
@@ -18735,7 +18735,7 @@ namespace msdl_1
         {
           if (!this->Speed_)
           {
-            ::std::auto_ptr< Speed_type > r (
+            ::std::unique_ptr< Speed_type > r (
               dynamic_cast< Speed_type* > (tmp.get ()));
 
             if (r.get ())
@@ -18743,7 +18743,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Speed_.set (r);
+            this->Speed_.set (::std::move (r));
             continue;
           }
         }
@@ -18898,7 +18898,7 @@ namespace msdl_1
       // MOOTWGraphic
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "MOOTWGraphic",
             "",
@@ -18907,7 +18907,7 @@ namespace msdl_1
 
         if (tmp.get () != 0)
         {
-          ::std::auto_ptr< MOOTWGraphic_type > r (
+          ::std::unique_ptr< MOOTWGraphic_type > r (
             dynamic_cast< MOOTWGraphic_type* > (tmp.get ()));
 
           if (r.get ())
@@ -18915,7 +18915,7 @@ namespace msdl_1
           else
             throw ::xsd::cxx::tree::not_derived< char > ();
 
-          this->MOOTWGraphic_.push_back (r);
+          this->MOOTWGraphic_.push_back (::std::move (r));
           continue;
         }
       }
@@ -19012,33 +19012,33 @@ namespace msdl_1
   MOOTWGraphicType (const ObjectHandle_type& ObjectHandle,
                     const SymbolIdentifier_type& SymbolIdentifier,
                     const Affiliation_type& Affiliation,
-                    ::std::auto_ptr< Owner_type > Owner,
-                    ::std::auto_ptr< Disposition_type > Disposition)
+                    ::std::unique_ptr< Owner_type > Owner,
+                    ::std::unique_ptr< Disposition_type > Disposition)
   : ::xml_schema::type (),
     ObjectHandle_ (ObjectHandle, this),
     SymbolIdentifier_ (SymbolIdentifier, this),
     Affiliation_ (Affiliation, this),
-    Owner_ (Owner, this),
+    Owner_ (std::move (Owner), this),
     MOOTWSymbolModifiers_ (this),
     AssociatedOverlays_ (this),
-    Disposition_ (Disposition, this)
+    Disposition_ (std::move (Disposition), this)
   {
   }
 
   MOOTWGraphicType::
-  MOOTWGraphicType (::std::auto_ptr< ObjectHandle_type > ObjectHandle,
-                    ::std::auto_ptr< SymbolIdentifier_type > SymbolIdentifier,
-                    ::std::auto_ptr< Affiliation_type > Affiliation,
-                    ::std::auto_ptr< Owner_type > Owner,
-                    ::std::auto_ptr< Disposition_type > Disposition)
+  MOOTWGraphicType (::std::unique_ptr< ObjectHandle_type > ObjectHandle,
+                    ::std::unique_ptr< SymbolIdentifier_type > SymbolIdentifier,
+                    ::std::unique_ptr< Affiliation_type > Affiliation,
+                    ::std::unique_ptr< Owner_type > Owner,
+                    ::std::unique_ptr< Disposition_type > Disposition)
   : ::xml_schema::type (),
-    ObjectHandle_ (ObjectHandle, this),
-    SymbolIdentifier_ (SymbolIdentifier, this),
-    Affiliation_ (Affiliation, this),
-    Owner_ (Owner, this),
+    ObjectHandle_ (std::move (ObjectHandle), this),
+    SymbolIdentifier_ (std::move (SymbolIdentifier), this),
+    Affiliation_ (std::move (Affiliation), this),
+    Owner_ (std::move (Owner), this),
     MOOTWSymbolModifiers_ (this),
     AssociatedOverlays_ (this),
-    Disposition_ (Disposition, this)
+    Disposition_ (std::move (Disposition), this)
   {
   }
 
@@ -19090,7 +19090,7 @@ namespace msdl_1
       // ObjectHandle
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "ObjectHandle",
             "",
@@ -19101,7 +19101,7 @@ namespace msdl_1
         {
           if (!ObjectHandle_.present ())
           {
-            ::std::auto_ptr< ObjectHandle_type > r (
+            ::std::unique_ptr< ObjectHandle_type > r (
               dynamic_cast< ObjectHandle_type* > (tmp.get ()));
 
             if (r.get ())
@@ -19109,7 +19109,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->ObjectHandle_.set (r);
+            this->ObjectHandle_.set (::std::move (r));
             continue;
           }
         }
@@ -19118,7 +19118,7 @@ namespace msdl_1
       // SymbolIdentifier
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "SymbolIdentifier",
             "",
@@ -19129,7 +19129,7 @@ namespace msdl_1
         {
           if (!SymbolIdentifier_.present ())
           {
-            ::std::auto_ptr< SymbolIdentifier_type > r (
+            ::std::unique_ptr< SymbolIdentifier_type > r (
               dynamic_cast< SymbolIdentifier_type* > (tmp.get ()));
 
             if (r.get ())
@@ -19137,7 +19137,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->SymbolIdentifier_.set (r);
+            this->SymbolIdentifier_.set (::std::move (r));
             continue;
           }
         }
@@ -19146,7 +19146,7 @@ namespace msdl_1
       // Affiliation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Affiliation",
             "",
@@ -19157,7 +19157,7 @@ namespace msdl_1
         {
           if (!Affiliation_.present ())
           {
-            ::std::auto_ptr< Affiliation_type > r (
+            ::std::unique_ptr< Affiliation_type > r (
               dynamic_cast< Affiliation_type* > (tmp.get ()));
 
             if (r.get ())
@@ -19165,7 +19165,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Affiliation_.set (r);
+            this->Affiliation_.set (::std::move (r));
             continue;
           }
         }
@@ -19174,7 +19174,7 @@ namespace msdl_1
       // Owner
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Owner",
             "",
@@ -19185,7 +19185,7 @@ namespace msdl_1
         {
           if (!Owner_.present ())
           {
-            ::std::auto_ptr< Owner_type > r (
+            ::std::unique_ptr< Owner_type > r (
               dynamic_cast< Owner_type* > (tmp.get ()));
 
             if (r.get ())
@@ -19193,7 +19193,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Owner_.set (r);
+            this->Owner_.set (::std::move (r));
             continue;
           }
         }
@@ -19202,7 +19202,7 @@ namespace msdl_1
       // MOOTWSymbolModifiers
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "MOOTWSymbolModifiers",
             "",
@@ -19213,7 +19213,7 @@ namespace msdl_1
         {
           if (!this->MOOTWSymbolModifiers_)
           {
-            ::std::auto_ptr< MOOTWSymbolModifiers_type > r (
+            ::std::unique_ptr< MOOTWSymbolModifiers_type > r (
               dynamic_cast< MOOTWSymbolModifiers_type* > (tmp.get ()));
 
             if (r.get ())
@@ -19221,7 +19221,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->MOOTWSymbolModifiers_.set (r);
+            this->MOOTWSymbolModifiers_.set (::std::move (r));
             continue;
           }
         }
@@ -19230,7 +19230,7 @@ namespace msdl_1
       // AssociatedOverlays
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AssociatedOverlays",
             "",
@@ -19241,7 +19241,7 @@ namespace msdl_1
         {
           if (!this->AssociatedOverlays_)
           {
-            ::std::auto_ptr< AssociatedOverlays_type > r (
+            ::std::unique_ptr< AssociatedOverlays_type > r (
               dynamic_cast< AssociatedOverlays_type* > (tmp.get ()));
 
             if (r.get ())
@@ -19249,7 +19249,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AssociatedOverlays_.set (r);
+            this->AssociatedOverlays_.set (::std::move (r));
             continue;
           }
         }
@@ -19258,7 +19258,7 @@ namespace msdl_1
       // Disposition
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Disposition",
             "",
@@ -19269,7 +19269,7 @@ namespace msdl_1
         {
           if (!Disposition_.present ())
           {
-            ::std::auto_ptr< Disposition_type > r (
+            ::std::unique_ptr< Disposition_type > r (
               dynamic_cast< Disposition_type* > (tmp.get ()));
 
             if (r.get ())
@@ -19277,7 +19277,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Disposition_.set (r);
+            this->Disposition_.set (::std::move (r));
             continue;
           }
         }
@@ -19470,7 +19470,7 @@ namespace msdl_1
   }
 
   MOOTWSymbolModifiersType::
-  MOOTWSymbolModifiersType (::std::auto_ptr< UniqueDesignation_type > UniqueDesignation)
+  MOOTWSymbolModifiersType (::std::unique_ptr< UniqueDesignation_type > UniqueDesignation)
   : ::xml_schema::type (),
     Echelon_ (this),
     ReinforcedReduced_ (this),
@@ -19479,7 +19479,7 @@ namespace msdl_1
     AdditionalInfo_ (this),
     CombatEffectiveness_ (this),
     IFF_ (this),
-    UniqueDesignation_ (UniqueDesignation, this),
+    UniqueDesignation_ (std::move (UniqueDesignation), this),
     DateTimeGroup_ (this),
     SpecialC2HQ_ (this)
   {
@@ -19539,7 +19539,7 @@ namespace msdl_1
       // Echelon
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Echelon",
             "",
@@ -19550,7 +19550,7 @@ namespace msdl_1
         {
           if (!this->Echelon_)
           {
-            ::std::auto_ptr< Echelon_type > r (
+            ::std::unique_ptr< Echelon_type > r (
               dynamic_cast< Echelon_type* > (tmp.get ()));
 
             if (r.get ())
@@ -19558,7 +19558,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Echelon_.set (r);
+            this->Echelon_.set (::std::move (r));
             continue;
           }
         }
@@ -19567,7 +19567,7 @@ namespace msdl_1
       // ReinforcedReduced
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "ReinforcedReduced",
             "",
@@ -19578,7 +19578,7 @@ namespace msdl_1
         {
           if (!this->ReinforcedReduced_)
           {
-            ::std::auto_ptr< ReinforcedReduced_type > r (
+            ::std::unique_ptr< ReinforcedReduced_type > r (
               dynamic_cast< ReinforcedReduced_type* > (tmp.get ()));
 
             if (r.get ())
@@ -19586,7 +19586,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->ReinforcedReduced_.set (r);
+            this->ReinforcedReduced_.set (::std::move (r));
             continue;
           }
         }
@@ -19595,7 +19595,7 @@ namespace msdl_1
       // FrameShapeModifier
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "FrameShapeModifier",
             "",
@@ -19606,7 +19606,7 @@ namespace msdl_1
         {
           if (!this->FrameShapeModifier_)
           {
-            ::std::auto_ptr< FrameShapeModifier_type > r (
+            ::std::unique_ptr< FrameShapeModifier_type > r (
               dynamic_cast< FrameShapeModifier_type* > (tmp.get ()));
 
             if (r.get ())
@@ -19614,7 +19614,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->FrameShapeModifier_.set (r);
+            this->FrameShapeModifier_.set (::std::move (r));
             continue;
           }
         }
@@ -19623,7 +19623,7 @@ namespace msdl_1
       // StaffComments
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "StaffComments",
             "",
@@ -19634,7 +19634,7 @@ namespace msdl_1
         {
           if (!this->StaffComments_)
           {
-            ::std::auto_ptr< StaffComments_type > r (
+            ::std::unique_ptr< StaffComments_type > r (
               dynamic_cast< StaffComments_type* > (tmp.get ()));
 
             if (r.get ())
@@ -19642,7 +19642,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->StaffComments_.set (r);
+            this->StaffComments_.set (::std::move (r));
             continue;
           }
         }
@@ -19651,7 +19651,7 @@ namespace msdl_1
       // AdditionalInfo
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AdditionalInfo",
             "",
@@ -19662,7 +19662,7 @@ namespace msdl_1
         {
           if (!this->AdditionalInfo_)
           {
-            ::std::auto_ptr< AdditionalInfo_type > r (
+            ::std::unique_ptr< AdditionalInfo_type > r (
               dynamic_cast< AdditionalInfo_type* > (tmp.get ()));
 
             if (r.get ())
@@ -19670,7 +19670,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AdditionalInfo_.set (r);
+            this->AdditionalInfo_.set (::std::move (r));
             continue;
           }
         }
@@ -19679,7 +19679,7 @@ namespace msdl_1
       // CombatEffectiveness
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CombatEffectiveness",
             "",
@@ -19690,7 +19690,7 @@ namespace msdl_1
         {
           if (!this->CombatEffectiveness_)
           {
-            ::std::auto_ptr< CombatEffectiveness_type > r (
+            ::std::unique_ptr< CombatEffectiveness_type > r (
               dynamic_cast< CombatEffectiveness_type* > (tmp.get ()));
 
             if (r.get ())
@@ -19698,7 +19698,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CombatEffectiveness_.set (r);
+            this->CombatEffectiveness_.set (::std::move (r));
             continue;
           }
         }
@@ -19707,7 +19707,7 @@ namespace msdl_1
       // IFF
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "IFF",
             "",
@@ -19718,7 +19718,7 @@ namespace msdl_1
         {
           if (!this->IFF_)
           {
-            ::std::auto_ptr< IFF_type > r (
+            ::std::unique_ptr< IFF_type > r (
               dynamic_cast< IFF_type* > (tmp.get ()));
 
             if (r.get ())
@@ -19726,7 +19726,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->IFF_.set (r);
+            this->IFF_.set (::std::move (r));
             continue;
           }
         }
@@ -19735,7 +19735,7 @@ namespace msdl_1
       // UniqueDesignation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "UniqueDesignation",
             "",
@@ -19746,7 +19746,7 @@ namespace msdl_1
         {
           if (!UniqueDesignation_.present ())
           {
-            ::std::auto_ptr< UniqueDesignation_type > r (
+            ::std::unique_ptr< UniqueDesignation_type > r (
               dynamic_cast< UniqueDesignation_type* > (tmp.get ()));
 
             if (r.get ())
@@ -19754,7 +19754,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->UniqueDesignation_.set (r);
+            this->UniqueDesignation_.set (::std::move (r));
             continue;
           }
         }
@@ -19763,7 +19763,7 @@ namespace msdl_1
       // DateTimeGroup
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "DateTimeGroup",
             "",
@@ -19774,7 +19774,7 @@ namespace msdl_1
         {
           if (!this->DateTimeGroup_)
           {
-            ::std::auto_ptr< DateTimeGroup_type > r (
+            ::std::unique_ptr< DateTimeGroup_type > r (
               dynamic_cast< DateTimeGroup_type* > (tmp.get ()));
 
             if (r.get ())
@@ -19782,7 +19782,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->DateTimeGroup_.set (r);
+            this->DateTimeGroup_.set (::std::move (r));
             continue;
           }
         }
@@ -19791,7 +19791,7 @@ namespace msdl_1
       // SpecialC2HQ
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "SpecialC2HQ",
             "",
@@ -19802,7 +19802,7 @@ namespace msdl_1
         {
           if (!this->SpecialC2HQ_)
           {
-            ::std::auto_ptr< SpecialC2HQ_type > r (
+            ::std::unique_ptr< SpecialC2HQ_type > r (
               dynamic_cast< SpecialC2HQ_type* > (tmp.get ()));
 
             if (r.get ())
@@ -19810,7 +19810,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->SpecialC2HQ_.set (r);
+            this->SpecialC2HQ_.set (::std::move (r));
             continue;
           }
         }
@@ -20070,16 +20070,16 @@ namespace msdl_1
   }
 
   NBCEventSymbolModifiersType::
-  NBCEventSymbolModifiersType (::std::auto_ptr< Speed_type > Speed,
-                               ::std::auto_ptr< DirectionOfMovement_type > DirectionOfMovement)
+  NBCEventSymbolModifiersType (::std::unique_ptr< Speed_type > Speed,
+                               ::std::unique_ptr< DirectionOfMovement_type > DirectionOfMovement)
   : ::xml_schema::type (),
     Quantity_ (this),
     AdditionalInfo_ (this),
     UniqueDesignation_ (this),
     NBCType_ (this),
     DateTimeGroup_ (this),
-    Speed_ (Speed, this),
-    DirectionOfMovement_ (DirectionOfMovement, this)
+    Speed_ (std::move (Speed), this),
+    DirectionOfMovement_ (std::move (DirectionOfMovement), this)
   {
   }
 
@@ -20131,7 +20131,7 @@ namespace msdl_1
       // Quantity
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Quantity",
             "",
@@ -20142,7 +20142,7 @@ namespace msdl_1
         {
           if (!this->Quantity_)
           {
-            ::std::auto_ptr< Quantity_type > r (
+            ::std::unique_ptr< Quantity_type > r (
               dynamic_cast< Quantity_type* > (tmp.get ()));
 
             if (r.get ())
@@ -20150,7 +20150,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Quantity_.set (r);
+            this->Quantity_.set (::std::move (r));
             continue;
           }
         }
@@ -20159,7 +20159,7 @@ namespace msdl_1
       // AdditionalInfo
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AdditionalInfo",
             "",
@@ -20170,7 +20170,7 @@ namespace msdl_1
         {
           if (!this->AdditionalInfo_)
           {
-            ::std::auto_ptr< AdditionalInfo_type > r (
+            ::std::unique_ptr< AdditionalInfo_type > r (
               dynamic_cast< AdditionalInfo_type* > (tmp.get ()));
 
             if (r.get ())
@@ -20178,7 +20178,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AdditionalInfo_.set (r);
+            this->AdditionalInfo_.set (::std::move (r));
             continue;
           }
         }
@@ -20187,7 +20187,7 @@ namespace msdl_1
       // UniqueDesignation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "UniqueDesignation",
             "",
@@ -20198,7 +20198,7 @@ namespace msdl_1
         {
           if (!this->UniqueDesignation_)
           {
-            ::std::auto_ptr< UniqueDesignation_type > r (
+            ::std::unique_ptr< UniqueDesignation_type > r (
               dynamic_cast< UniqueDesignation_type* > (tmp.get ()));
 
             if (r.get ())
@@ -20206,7 +20206,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->UniqueDesignation_.set (r);
+            this->UniqueDesignation_.set (::std::move (r));
             continue;
           }
         }
@@ -20215,7 +20215,7 @@ namespace msdl_1
       // NBCType
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "NBCType",
             "",
@@ -20226,7 +20226,7 @@ namespace msdl_1
         {
           if (!this->NBCType_)
           {
-            ::std::auto_ptr< NBCType_type > r (
+            ::std::unique_ptr< NBCType_type > r (
               dynamic_cast< NBCType_type* > (tmp.get ()));
 
             if (r.get ())
@@ -20234,7 +20234,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->NBCType_.set (r);
+            this->NBCType_.set (::std::move (r));
             continue;
           }
         }
@@ -20243,7 +20243,7 @@ namespace msdl_1
       // DateTimeGroup
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "DateTimeGroup",
             "",
@@ -20254,7 +20254,7 @@ namespace msdl_1
         {
           if (!this->DateTimeGroup_)
           {
-            ::std::auto_ptr< DateTimeGroup_type > r (
+            ::std::unique_ptr< DateTimeGroup_type > r (
               dynamic_cast< DateTimeGroup_type* > (tmp.get ()));
 
             if (r.get ())
@@ -20262,7 +20262,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->DateTimeGroup_.set (r);
+            this->DateTimeGroup_.set (::std::move (r));
             continue;
           }
         }
@@ -20271,7 +20271,7 @@ namespace msdl_1
       // Speed
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Speed",
             "",
@@ -20282,7 +20282,7 @@ namespace msdl_1
         {
           if (!Speed_.present ())
           {
-            ::std::auto_ptr< Speed_type > r (
+            ::std::unique_ptr< Speed_type > r (
               dynamic_cast< Speed_type* > (tmp.get ()));
 
             if (r.get ())
@@ -20290,7 +20290,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Speed_.set (r);
+            this->Speed_.set (::std::move (r));
             continue;
           }
         }
@@ -20299,7 +20299,7 @@ namespace msdl_1
       // DirectionOfMovement
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "DirectionOfMovement",
             "",
@@ -20310,7 +20310,7 @@ namespace msdl_1
         {
           if (!DirectionOfMovement_.present ())
           {
-            ::std::auto_ptr< DirectionOfMovement_type > r (
+            ::std::unique_ptr< DirectionOfMovement_type > r (
               dynamic_cast< DirectionOfMovement_type* > (tmp.get ()));
 
             if (r.get ())
@@ -20318,7 +20318,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->DirectionOfMovement_.set (r);
+            this->DirectionOfMovement_.set (::std::move (r));
             continue;
           }
         }
@@ -20513,9 +20513,9 @@ namespace msdl_1
   }
 
   OptionsType::
-  OptionsType (::std::auto_ptr< MSDLVersion_type > MSDLVersion)
+  OptionsType (::std::unique_ptr< MSDLVersion_type > MSDLVersion)
   : ::xml_schema::type (),
-    MSDLVersion_ (MSDLVersion, this),
+    MSDLVersion_ (std::move (MSDLVersion), this),
     OrganizationDetail_ (this),
     ScenarioDataStandards_ (this)
   {
@@ -20561,7 +20561,7 @@ namespace msdl_1
       // MSDLVersion
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "MSDLVersion",
             "",
@@ -20572,7 +20572,7 @@ namespace msdl_1
         {
           if (!MSDLVersion_.present ())
           {
-            ::std::auto_ptr< MSDLVersion_type > r (
+            ::std::unique_ptr< MSDLVersion_type > r (
               dynamic_cast< MSDLVersion_type* > (tmp.get ()));
 
             if (r.get ())
@@ -20580,7 +20580,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->MSDLVersion_.set (r);
+            this->MSDLVersion_.set (::std::move (r));
             continue;
           }
         }
@@ -20589,7 +20589,7 @@ namespace msdl_1
       // OrganizationDetail
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "OrganizationDetail",
             "",
@@ -20600,7 +20600,7 @@ namespace msdl_1
         {
           if (!this->OrganizationDetail_)
           {
-            ::std::auto_ptr< OrganizationDetail_type > r (
+            ::std::unique_ptr< OrganizationDetail_type > r (
               dynamic_cast< OrganizationDetail_type* > (tmp.get ()));
 
             if (r.get ())
@@ -20608,7 +20608,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->OrganizationDetail_.set (r);
+            this->OrganizationDetail_.set (::std::move (r));
             continue;
           }
         }
@@ -20617,7 +20617,7 @@ namespace msdl_1
       // ScenarioDataStandards
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "ScenarioDataStandards",
             "",
@@ -20628,7 +20628,7 @@ namespace msdl_1
         {
           if (!this->ScenarioDataStandards_)
           {
-            ::std::auto_ptr< ScenarioDataStandards_type > r (
+            ::std::unique_ptr< ScenarioDataStandards_type > r (
               dynamic_cast< ScenarioDataStandards_type* > (tmp.get ()));
 
             if (r.get ())
@@ -20636,7 +20636,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->ScenarioDataStandards_.set (r);
+            this->ScenarioDataStandards_.set (::std::move (r));
             continue;
           }
         }
@@ -20794,7 +20794,7 @@ namespace msdl_1
       // OrganicForceSideHandle
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "OrganicForceSideHandle",
             "",
@@ -20805,7 +20805,7 @@ namespace msdl_1
         {
           if (!this->OrganicForceSideHandle_)
           {
-            ::std::auto_ptr< OrganicForceSideHandle_type > r (
+            ::std::unique_ptr< OrganicForceSideHandle_type > r (
               dynamic_cast< OrganicForceSideHandle_type* > (tmp.get ()));
 
             if (r.get ())
@@ -20813,7 +20813,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->OrganicForceSideHandle_.set (r);
+            this->OrganicForceSideHandle_.set (::std::move (r));
             continue;
           }
         }
@@ -20822,7 +20822,7 @@ namespace msdl_1
       // OrganicSuperiorHandle
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "OrganicSuperiorHandle",
             "",
@@ -20833,7 +20833,7 @@ namespace msdl_1
         {
           if (!this->OrganicSuperiorHandle_)
           {
-            ::std::auto_ptr< OrganicSuperiorHandle_type > r (
+            ::std::unique_ptr< OrganicSuperiorHandle_type > r (
               dynamic_cast< OrganicSuperiorHandle_type* > (tmp.get ()));
 
             if (r.get ())
@@ -20841,7 +20841,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->OrganicSuperiorHandle_.set (r);
+            this->OrganicSuperiorHandle_.set (::std::move (r));
             continue;
           }
         }
@@ -20947,20 +20947,20 @@ namespace msdl_1
   }
 
   OrganicRelationType::
-  OrganicRelationType (::std::auto_ptr< OrganicRelationData_type > OrganicRelationData,
+  OrganicRelationType (::std::unique_ptr< OrganicRelationData_type > OrganicRelationData,
                        const OrganicRelationChoice_type& OrganicRelationChoice)
   : ::xml_schema::type (),
-    OrganicRelationData_ (OrganicRelationData, this),
+    OrganicRelationData_ (std::move (OrganicRelationData), this),
     OrganicRelationChoice_ (OrganicRelationChoice, this)
   {
   }
 
   OrganicRelationType::
-  OrganicRelationType (::std::auto_ptr< OrganicRelationData_type > OrganicRelationData,
-                       ::std::auto_ptr< OrganicRelationChoice_type > OrganicRelationChoice)
+  OrganicRelationType (::std::unique_ptr< OrganicRelationData_type > OrganicRelationData,
+                       ::std::unique_ptr< OrganicRelationChoice_type > OrganicRelationChoice)
   : ::xml_schema::type (),
-    OrganicRelationData_ (OrganicRelationData, this),
-    OrganicRelationChoice_ (OrganicRelationChoice, this)
+    OrganicRelationData_ (std::move (OrganicRelationData), this),
+    OrganicRelationChoice_ (std::move (OrganicRelationChoice), this)
   {
   }
 
@@ -21002,7 +21002,7 @@ namespace msdl_1
       // OrganicRelationData
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "OrganicRelationData",
             "",
@@ -21013,7 +21013,7 @@ namespace msdl_1
         {
           if (!OrganicRelationData_.present ())
           {
-            ::std::auto_ptr< OrganicRelationData_type > r (
+            ::std::unique_ptr< OrganicRelationData_type > r (
               dynamic_cast< OrganicRelationData_type* > (tmp.get ()));
 
             if (r.get ())
@@ -21021,7 +21021,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->OrganicRelationData_.set (r);
+            this->OrganicRelationData_.set (::std::move (r));
             continue;
           }
         }
@@ -21030,7 +21030,7 @@ namespace msdl_1
       // OrganicRelationChoice
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "OrganicRelationChoice",
             "",
@@ -21041,7 +21041,7 @@ namespace msdl_1
         {
           if (!OrganicRelationChoice_.present ())
           {
-            ::std::auto_ptr< OrganicRelationChoice_type > r (
+            ::std::unique_ptr< OrganicRelationChoice_type > r (
               dynamic_cast< OrganicRelationChoice_type* > (tmp.get ()));
 
             if (r.get ())
@@ -21049,7 +21049,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->OrganicRelationChoice_.set (r);
+            this->OrganicRelationChoice_.set (::std::move (r));
             continue;
           }
         }
@@ -21148,9 +21148,9 @@ namespace msdl_1
   }
 
   OrganizationDetailType::
-  OrganizationDetailType (::std::auto_ptr< AggregateBased_type > AggregateBased)
+  OrganizationDetailType (::std::unique_ptr< AggregateBased_type > AggregateBased)
   : ::xml_schema::type (),
-    AggregateBased_ (AggregateBased, this),
+    AggregateBased_ (std::move (AggregateBased), this),
     AggregateEchelon_ (this)
   {
   }
@@ -21193,7 +21193,7 @@ namespace msdl_1
       // AggregateBased
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AggregateBased",
             "",
@@ -21204,7 +21204,7 @@ namespace msdl_1
         {
           if (!AggregateBased_.present ())
           {
-            ::std::auto_ptr< AggregateBased_type > r (
+            ::std::unique_ptr< AggregateBased_type > r (
               dynamic_cast< AggregateBased_type* > (tmp.get ()));
 
             if (r.get ())
@@ -21212,7 +21212,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AggregateBased_.set (r);
+            this->AggregateBased_.set (::std::move (r));
             continue;
           }
         }
@@ -21221,7 +21221,7 @@ namespace msdl_1
       // AggregateEchelon
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AggregateEchelon",
             "",
@@ -21232,7 +21232,7 @@ namespace msdl_1
         {
           if (!this->AggregateEchelon_)
           {
-            ::std::auto_ptr< AggregateEchelon_type > r (
+            ::std::unique_ptr< AggregateEchelon_type > r (
               dynamic_cast< AggregateEchelon_type* > (tmp.get ()));
 
             if (r.get ())
@@ -21240,7 +21240,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AggregateEchelon_.set (r);
+            this->AggregateEchelon_.set (::std::move (r));
             continue;
           }
         }
@@ -21342,9 +21342,9 @@ namespace msdl_1
   }
 
   OrganizationsType::
-  OrganizationsType (::std::auto_ptr< Units_type > Units)
+  OrganizationsType (::std::unique_ptr< Units_type > Units)
   : ::xml_schema::type (),
-    Units_ (Units, this),
+    Units_ (std::move (Units), this),
     Equipment_ (this)
   {
   }
@@ -21387,7 +21387,7 @@ namespace msdl_1
       // Units
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Units",
             "",
@@ -21398,7 +21398,7 @@ namespace msdl_1
         {
           if (!Units_.present ())
           {
-            ::std::auto_ptr< Units_type > r (
+            ::std::unique_ptr< Units_type > r (
               dynamic_cast< Units_type* > (tmp.get ()));
 
             if (r.get ())
@@ -21406,7 +21406,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Units_.set (r);
+            this->Units_.set (::std::move (r));
             continue;
           }
         }
@@ -21415,7 +21415,7 @@ namespace msdl_1
       // Equipment
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Equipment",
             "",
@@ -21426,7 +21426,7 @@ namespace msdl_1
         {
           if (!this->Equipment_)
           {
-            ::std::auto_ptr< Equipment_type > r (
+            ::std::unique_ptr< Equipment_type > r (
               dynamic_cast< Equipment_type* > (tmp.get ()));
 
             if (r.get ())
@@ -21434,7 +21434,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Equipment_.set (r);
+            this->Equipment_.set (::std::move (r));
             continue;
           }
         }
@@ -21570,7 +21570,7 @@ namespace msdl_1
       // OverlayHandle
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "OverlayHandle",
             "",
@@ -21579,7 +21579,7 @@ namespace msdl_1
 
         if (tmp.get () != 0)
         {
-          ::std::auto_ptr< OverlayHandle_type > r (
+          ::std::unique_ptr< OverlayHandle_type > r (
             dynamic_cast< OverlayHandle_type* > (tmp.get ()));
 
           if (r.get ())
@@ -21587,7 +21587,7 @@ namespace msdl_1
           else
             throw ::xsd::cxx::tree::not_derived< char > ();
 
-          this->OverlayHandle_.push_back (r);
+          this->OverlayHandle_.push_back (::std::move (r));
           continue;
         }
       }
@@ -21706,7 +21706,7 @@ namespace msdl_1
       // Overlay
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Overlay",
             "",
@@ -21715,7 +21715,7 @@ namespace msdl_1
 
         if (tmp.get () != 0)
         {
-          ::std::auto_ptr< Overlay_type > r (
+          ::std::unique_ptr< Overlay_type > r (
             dynamic_cast< Overlay_type* > (tmp.get ()));
 
           if (r.get ())
@@ -21723,7 +21723,7 @@ namespace msdl_1
           else
             throw ::xsd::cxx::tree::not_derived< char > ();
 
-          this->Overlay_.push_back (r);
+          this->Overlay_.push_back (::std::move (r));
           continue;
         }
       }
@@ -21811,13 +21811,13 @@ namespace msdl_1
   }
 
   OverlayType::
-  OverlayType (::std::auto_ptr< ObjectHandle_type > ObjectHandle,
-               ::std::auto_ptr< OverlayType1_type > OverlayType1,
-               ::std::auto_ptr< OverlayName_type > OverlayName)
+  OverlayType (::std::unique_ptr< ObjectHandle_type > ObjectHandle,
+               ::std::unique_ptr< OverlayType1_type > OverlayType1,
+               ::std::unique_ptr< OverlayName_type > OverlayName)
   : ::xml_schema::type (),
-    ObjectHandle_ (ObjectHandle, this),
-    OverlayType1_ (OverlayType1, this),
-    OverlayName_ (OverlayName, this)
+    ObjectHandle_ (std::move (ObjectHandle), this),
+    OverlayType1_ (std::move (OverlayType1), this),
+    OverlayName_ (std::move (OverlayName), this)
   {
   }
 
@@ -21861,7 +21861,7 @@ namespace msdl_1
       // ObjectHandle
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "ObjectHandle",
             "",
@@ -21872,7 +21872,7 @@ namespace msdl_1
         {
           if (!ObjectHandle_.present ())
           {
-            ::std::auto_ptr< ObjectHandle_type > r (
+            ::std::unique_ptr< ObjectHandle_type > r (
               dynamic_cast< ObjectHandle_type* > (tmp.get ()));
 
             if (r.get ())
@@ -21880,7 +21880,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->ObjectHandle_.set (r);
+            this->ObjectHandle_.set (::std::move (r));
             continue;
           }
         }
@@ -21889,7 +21889,7 @@ namespace msdl_1
       // OverlayType
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "OverlayType",
             "",
@@ -21900,7 +21900,7 @@ namespace msdl_1
         {
           if (!OverlayType1_.present ())
           {
-            ::std::auto_ptr< OverlayType1_type > r (
+            ::std::unique_ptr< OverlayType1_type > r (
               dynamic_cast< OverlayType1_type* > (tmp.get ()));
 
             if (r.get ())
@@ -21908,7 +21908,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->OverlayType1_.set (r);
+            this->OverlayType1_.set (::std::move (r));
             continue;
           }
         }
@@ -21917,7 +21917,7 @@ namespace msdl_1
       // OverlayName
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "OverlayName",
             "",
@@ -21928,7 +21928,7 @@ namespace msdl_1
         {
           if (!OverlayName_.present ())
           {
-            ::std::auto_ptr< OverlayName_type > r (
+            ::std::unique_ptr< OverlayName_type > r (
               dynamic_cast< OverlayName_type* > (tmp.get ()));
 
             if (r.get ())
@@ -21936,7 +21936,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->OverlayName_.set (r);
+            this->OverlayName_.set (::std::move (r));
             continue;
           }
         }
@@ -22053,19 +22053,19 @@ namespace msdl_1
 
   OwnerType::
   OwnerType (const OwnerChoice_type& OwnerChoice,
-             ::std::auto_ptr< OwnerData_type > OwnerData)
+             ::std::unique_ptr< OwnerData_type > OwnerData)
   : ::xml_schema::type (),
     OwnerChoice_ (OwnerChoice, this),
-    OwnerData_ (OwnerData, this)
+    OwnerData_ (std::move (OwnerData), this)
   {
   }
 
   OwnerType::
-  OwnerType (::std::auto_ptr< OwnerChoice_type > OwnerChoice,
-             ::std::auto_ptr< OwnerData_type > OwnerData)
+  OwnerType (::std::unique_ptr< OwnerChoice_type > OwnerChoice,
+             ::std::unique_ptr< OwnerData_type > OwnerData)
   : ::xml_schema::type (),
-    OwnerChoice_ (OwnerChoice, this),
-    OwnerData_ (OwnerData, this)
+    OwnerChoice_ (std::move (OwnerChoice), this),
+    OwnerData_ (std::move (OwnerData), this)
   {
   }
 
@@ -22107,7 +22107,7 @@ namespace msdl_1
       // OwnerChoice
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "OwnerChoice",
             "",
@@ -22118,7 +22118,7 @@ namespace msdl_1
         {
           if (!OwnerChoice_.present ())
           {
-            ::std::auto_ptr< OwnerChoice_type > r (
+            ::std::unique_ptr< OwnerChoice_type > r (
               dynamic_cast< OwnerChoice_type* > (tmp.get ()));
 
             if (r.get ())
@@ -22126,7 +22126,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->OwnerChoice_.set (r);
+            this->OwnerChoice_.set (::std::move (r));
             continue;
           }
         }
@@ -22135,7 +22135,7 @@ namespace msdl_1
       // OwnerData
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "OwnerData",
             "",
@@ -22146,7 +22146,7 @@ namespace msdl_1
         {
           if (!OwnerData_.present ())
           {
-            ::std::auto_ptr< OwnerData_type > r (
+            ::std::unique_ptr< OwnerData_type > r (
               dynamic_cast< OwnerData_type* > (tmp.get ()));
 
             if (r.get ())
@@ -22154,7 +22154,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->OwnerData_.set (r);
+            this->OwnerData_.set (::std::move (r));
             continue;
           }
         }
@@ -22290,7 +22290,7 @@ namespace msdl_1
       // UnitOwnerHandle
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "UnitOwnerHandle",
             "",
@@ -22301,7 +22301,7 @@ namespace msdl_1
         {
           if (!this->UnitOwnerHandle_)
           {
-            ::std::auto_ptr< UnitOwnerHandle_type > r (
+            ::std::unique_ptr< UnitOwnerHandle_type > r (
               dynamic_cast< UnitOwnerHandle_type* > (tmp.get ()));
 
             if (r.get ())
@@ -22309,7 +22309,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->UnitOwnerHandle_.set (r);
+            this->UnitOwnerHandle_.set (::std::move (r));
             continue;
           }
         }
@@ -22318,7 +22318,7 @@ namespace msdl_1
       // ForceOwnerHandle
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "ForceOwnerHandle",
             "",
@@ -22329,7 +22329,7 @@ namespace msdl_1
         {
           if (!this->ForceOwnerHandle_)
           {
-            ::std::auto_ptr< ForceOwnerHandle_type > r (
+            ::std::unique_ptr< ForceOwnerHandle_type > r (
               dynamic_cast< ForceOwnerHandle_type* > (tmp.get ()));
 
             if (r.get ())
@@ -22337,7 +22337,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->ForceOwnerHandle_.set (r);
+            this->ForceOwnerHandle_.set (::std::move (r));
             continue;
           }
         }
@@ -22449,26 +22449,26 @@ namespace msdl_1
   OwnFormationType::
   OwnFormationType (const FormationLocationType_type& FormationLocationType,
                     const FormationChoice_type& FormationChoice,
-                    ::std::auto_ptr< FormationData_type > FormationData)
+                    ::std::unique_ptr< FormationData_type > FormationData)
   : ::xml_schema::type (),
     FormationLocationType_ (FormationLocationType, this),
     FormationSpacing_ (this),
     FormationOrientation_ (this),
     FormationChoice_ (FormationChoice, this),
-    FormationData_ (FormationData, this)
+    FormationData_ (std::move (FormationData), this)
   {
   }
 
   OwnFormationType::
-  OwnFormationType (::std::auto_ptr< FormationLocationType_type > FormationLocationType,
-                    ::std::auto_ptr< FormationChoice_type > FormationChoice,
-                    ::std::auto_ptr< FormationData_type > FormationData)
+  OwnFormationType (::std::unique_ptr< FormationLocationType_type > FormationLocationType,
+                    ::std::unique_ptr< FormationChoice_type > FormationChoice,
+                    ::std::unique_ptr< FormationData_type > FormationData)
   : ::xml_schema::type (),
-    FormationLocationType_ (FormationLocationType, this),
+    FormationLocationType_ (std::move (FormationLocationType), this),
     FormationSpacing_ (this),
     FormationOrientation_ (this),
-    FormationChoice_ (FormationChoice, this),
-    FormationData_ (FormationData, this)
+    FormationChoice_ (std::move (FormationChoice), this),
+    FormationData_ (std::move (FormationData), this)
   {
   }
 
@@ -22516,7 +22516,7 @@ namespace msdl_1
       // FormationLocationType
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "FormationLocationType",
             "",
@@ -22527,7 +22527,7 @@ namespace msdl_1
         {
           if (!FormationLocationType_.present ())
           {
-            ::std::auto_ptr< FormationLocationType_type > r (
+            ::std::unique_ptr< FormationLocationType_type > r (
               dynamic_cast< FormationLocationType_type* > (tmp.get ()));
 
             if (r.get ())
@@ -22535,7 +22535,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->FormationLocationType_.set (r);
+            this->FormationLocationType_.set (::std::move (r));
             continue;
           }
         }
@@ -22544,7 +22544,7 @@ namespace msdl_1
       // FormationSpacing
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "FormationSpacing",
             "",
@@ -22555,7 +22555,7 @@ namespace msdl_1
         {
           if (!this->FormationSpacing_)
           {
-            ::std::auto_ptr< FormationSpacing_type > r (
+            ::std::unique_ptr< FormationSpacing_type > r (
               dynamic_cast< FormationSpacing_type* > (tmp.get ()));
 
             if (r.get ())
@@ -22563,7 +22563,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->FormationSpacing_.set (r);
+            this->FormationSpacing_.set (::std::move (r));
             continue;
           }
         }
@@ -22572,7 +22572,7 @@ namespace msdl_1
       // FormationOrientation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "FormationOrientation",
             "",
@@ -22583,7 +22583,7 @@ namespace msdl_1
         {
           if (!this->FormationOrientation_)
           {
-            ::std::auto_ptr< FormationOrientation_type > r (
+            ::std::unique_ptr< FormationOrientation_type > r (
               dynamic_cast< FormationOrientation_type* > (tmp.get ()));
 
             if (r.get ())
@@ -22591,7 +22591,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->FormationOrientation_.set (r);
+            this->FormationOrientation_.set (::std::move (r));
             continue;
           }
         }
@@ -22600,7 +22600,7 @@ namespace msdl_1
       // FormationChoice
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "FormationChoice",
             "",
@@ -22611,7 +22611,7 @@ namespace msdl_1
         {
           if (!FormationChoice_.present ())
           {
-            ::std::auto_ptr< FormationChoice_type > r (
+            ::std::unique_ptr< FormationChoice_type > r (
               dynamic_cast< FormationChoice_type* > (tmp.get ()));
 
             if (r.get ())
@@ -22619,7 +22619,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->FormationChoice_.set (r);
+            this->FormationChoice_.set (::std::move (r));
             continue;
           }
         }
@@ -22628,7 +22628,7 @@ namespace msdl_1
       // FormationData
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "FormationData",
             "",
@@ -22639,7 +22639,7 @@ namespace msdl_1
         {
           if (!FormationData_.present ())
           {
-            ::std::auto_ptr< FormationData_type > r (
+            ::std::unique_ptr< FormationData_type > r (
               dynamic_cast< FormationData_type* > (tmp.get ()));
 
             if (r.get ())
@@ -22647,7 +22647,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->FormationData_.set (r);
+            this->FormationData_.set (::std::move (r));
             continue;
           }
         }
@@ -22804,11 +22804,11 @@ namespace msdl_1
   }
 
   PointSymbolModifiersType::
-  PointSymbolModifiersType (::std::auto_ptr< UniqueDesignation_type > UniqueDesignation)
+  PointSymbolModifiersType (::std::unique_ptr< UniqueDesignation_type > UniqueDesignation)
   : ::xml_schema::type (),
     AdditionalInfo_ (this),
     AdditionalInfo1_ (this),
-    UniqueDesignation_ (UniqueDesignation, this),
+    UniqueDesignation_ (std::move (UniqueDesignation), this),
     DateTimeGroup_ (this),
     DateTimeGroup1_ (this),
     Orientation_ (this)
@@ -22861,7 +22861,7 @@ namespace msdl_1
       // AdditionalInfo
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AdditionalInfo",
             "",
@@ -22872,7 +22872,7 @@ namespace msdl_1
         {
           if (!this->AdditionalInfo_)
           {
-            ::std::auto_ptr< AdditionalInfo_type > r (
+            ::std::unique_ptr< AdditionalInfo_type > r (
               dynamic_cast< AdditionalInfo_type* > (tmp.get ()));
 
             if (r.get ())
@@ -22880,7 +22880,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AdditionalInfo_.set (r);
+            this->AdditionalInfo_.set (::std::move (r));
             continue;
           }
         }
@@ -22889,7 +22889,7 @@ namespace msdl_1
       // AdditionalInfo1
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AdditionalInfo1",
             "",
@@ -22900,7 +22900,7 @@ namespace msdl_1
         {
           if (!this->AdditionalInfo1_)
           {
-            ::std::auto_ptr< AdditionalInfo1_type > r (
+            ::std::unique_ptr< AdditionalInfo1_type > r (
               dynamic_cast< AdditionalInfo1_type* > (tmp.get ()));
 
             if (r.get ())
@@ -22908,7 +22908,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AdditionalInfo1_.set (r);
+            this->AdditionalInfo1_.set (::std::move (r));
             continue;
           }
         }
@@ -22917,7 +22917,7 @@ namespace msdl_1
       // UniqueDesignation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "UniqueDesignation",
             "",
@@ -22928,7 +22928,7 @@ namespace msdl_1
         {
           if (!UniqueDesignation_.present ())
           {
-            ::std::auto_ptr< UniqueDesignation_type > r (
+            ::std::unique_ptr< UniqueDesignation_type > r (
               dynamic_cast< UniqueDesignation_type* > (tmp.get ()));
 
             if (r.get ())
@@ -22936,7 +22936,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->UniqueDesignation_.set (r);
+            this->UniqueDesignation_.set (::std::move (r));
             continue;
           }
         }
@@ -22945,7 +22945,7 @@ namespace msdl_1
       // DateTimeGroup
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "DateTimeGroup",
             "",
@@ -22956,7 +22956,7 @@ namespace msdl_1
         {
           if (!this->DateTimeGroup_)
           {
-            ::std::auto_ptr< DateTimeGroup_type > r (
+            ::std::unique_ptr< DateTimeGroup_type > r (
               dynamic_cast< DateTimeGroup_type* > (tmp.get ()));
 
             if (r.get ())
@@ -22964,7 +22964,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->DateTimeGroup_.set (r);
+            this->DateTimeGroup_.set (::std::move (r));
             continue;
           }
         }
@@ -22973,7 +22973,7 @@ namespace msdl_1
       // DateTimeGroup1
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "DateTimeGroup1",
             "",
@@ -22984,7 +22984,7 @@ namespace msdl_1
         {
           if (!this->DateTimeGroup1_)
           {
-            ::std::auto_ptr< DateTimeGroup1_type > r (
+            ::std::unique_ptr< DateTimeGroup1_type > r (
               dynamic_cast< DateTimeGroup1_type* > (tmp.get ()));
 
             if (r.get ())
@@ -22992,7 +22992,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->DateTimeGroup1_.set (r);
+            this->DateTimeGroup1_.set (::std::move (r));
             continue;
           }
         }
@@ -23001,7 +23001,7 @@ namespace msdl_1
       // Orientation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Orientation",
             "",
@@ -23012,7 +23012,7 @@ namespace msdl_1
         {
           if (!this->Orientation_)
           {
-            ::std::auto_ptr< Orientation_type > r (
+            ::std::unique_ptr< Orientation_type > r (
               dynamic_cast< Orientation_type* > (tmp.get ()));
 
             if (r.get ())
@@ -23020,7 +23020,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Orientation_.set (r);
+            this->Orientation_.set (::std::move (r));
             continue;
           }
         }
@@ -23200,12 +23200,12 @@ namespace msdl_1
   }
 
   RectangleAreaType::
-  RectangleAreaType (::std::auto_ptr< UpperRight_type > UpperRight,
-                     ::std::auto_ptr< LowerLeft_type > LowerLeft)
+  RectangleAreaType (::std::unique_ptr< UpperRight_type > UpperRight,
+                     ::std::unique_ptr< LowerLeft_type > LowerLeft)
   : ::xml_schema::type (),
     Name_ (this),
-    UpperRight_ (UpperRight, this),
-    LowerLeft_ (LowerLeft, this)
+    UpperRight_ (std::move (UpperRight), this),
+    LowerLeft_ (std::move (LowerLeft), this)
   {
   }
 
@@ -23249,7 +23249,7 @@ namespace msdl_1
       // Name
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Name",
             "",
@@ -23260,7 +23260,7 @@ namespace msdl_1
         {
           if (!this->Name_)
           {
-            ::std::auto_ptr< Name_type > r (
+            ::std::unique_ptr< Name_type > r (
               dynamic_cast< Name_type* > (tmp.get ()));
 
             if (r.get ())
@@ -23268,7 +23268,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Name_.set (r);
+            this->Name_.set (::std::move (r));
             continue;
           }
         }
@@ -23277,7 +23277,7 @@ namespace msdl_1
       // UpperRight
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "UpperRight",
             "",
@@ -23288,7 +23288,7 @@ namespace msdl_1
         {
           if (!UpperRight_.present ())
           {
-            ::std::auto_ptr< UpperRight_type > r (
+            ::std::unique_ptr< UpperRight_type > r (
               dynamic_cast< UpperRight_type* > (tmp.get ()));
 
             if (r.get ())
@@ -23296,7 +23296,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->UpperRight_.set (r);
+            this->UpperRight_.set (::std::move (r));
             continue;
           }
         }
@@ -23305,7 +23305,7 @@ namespace msdl_1
       // LowerLeft
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "LowerLeft",
             "",
@@ -23316,7 +23316,7 @@ namespace msdl_1
         {
           if (!LowerLeft_.present ())
           {
-            ::std::auto_ptr< LowerLeft_type > r (
+            ::std::unique_ptr< LowerLeft_type > r (
               dynamic_cast< LowerLeft_type* > (tmp.get ()));
 
             if (r.get ())
@@ -23324,7 +23324,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->LowerLeft_.set (r);
+            this->LowerLeft_.set (::std::move (r));
             continue;
           }
         }
@@ -23443,11 +23443,11 @@ namespace msdl_1
   }
 
   ScenarioDataStandardsType::
-  ScenarioDataStandardsType (::std::auto_ptr< SymbologyDataStandard_type > SymbologyDataStandard,
-                             ::std::auto_ptr< CoordinateDataStandard_type > CoordinateDataStandard)
+  ScenarioDataStandardsType (::std::unique_ptr< SymbologyDataStandard_type > SymbologyDataStandard,
+                             ::std::unique_ptr< CoordinateDataStandard_type > CoordinateDataStandard)
   : ::xml_schema::type (),
-    SymbologyDataStandard_ (SymbologyDataStandard, this),
-    CoordinateDataStandard_ (CoordinateDataStandard, this)
+    SymbologyDataStandard_ (std::move (SymbologyDataStandard), this),
+    CoordinateDataStandard_ (std::move (CoordinateDataStandard), this)
   {
   }
 
@@ -23489,7 +23489,7 @@ namespace msdl_1
       // SymbologyDataStandard
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "SymbologyDataStandard",
             "",
@@ -23500,7 +23500,7 @@ namespace msdl_1
         {
           if (!SymbologyDataStandard_.present ())
           {
-            ::std::auto_ptr< SymbologyDataStandard_type > r (
+            ::std::unique_ptr< SymbologyDataStandard_type > r (
               dynamic_cast< SymbologyDataStandard_type* > (tmp.get ()));
 
             if (r.get ())
@@ -23508,7 +23508,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->SymbologyDataStandard_.set (r);
+            this->SymbologyDataStandard_.set (::std::move (r));
             continue;
           }
         }
@@ -23517,7 +23517,7 @@ namespace msdl_1
       // CoordinateDataStandard
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CoordinateDataStandard",
             "",
@@ -23528,7 +23528,7 @@ namespace msdl_1
         {
           if (!CoordinateDataStandard_.present ())
           {
-            ::std::auto_ptr< CoordinateDataStandard_type > r (
+            ::std::unique_ptr< CoordinateDataStandard_type > r (
               dynamic_cast< CoordinateDataStandard_type* > (tmp.get ()));
 
             if (r.get ())
@@ -23536,7 +23536,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CoordinateDataStandard_.set (r);
+            this->CoordinateDataStandard_.set (::std::move (r));
             continue;
           }
         }
@@ -23687,7 +23687,7 @@ namespace msdl_1
       // Atmosphere
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Atmosphere",
             "",
@@ -23698,7 +23698,7 @@ namespace msdl_1
         {
           if (!this->Atmosphere_)
           {
-            ::std::auto_ptr< Atmosphere_type > r (
+            ::std::unique_ptr< Atmosphere_type > r (
               dynamic_cast< Atmosphere_type* > (tmp.get ()));
 
             if (r.get ())
@@ -23706,7 +23706,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Atmosphere_.set (r);
+            this->Atmosphere_.set (::std::move (r));
             continue;
           }
         }
@@ -23715,7 +23715,7 @@ namespace msdl_1
       // CloudCoverItems
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CloudCoverItems",
             "",
@@ -23726,7 +23726,7 @@ namespace msdl_1
         {
           if (!this->CloudCoverItems_)
           {
-            ::std::auto_ptr< CloudCoverItems_type > r (
+            ::std::unique_ptr< CloudCoverItems_type > r (
               dynamic_cast< CloudCoverItems_type* > (tmp.get ()));
 
             if (r.get ())
@@ -23734,7 +23734,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CloudCoverItems_.set (r);
+            this->CloudCoverItems_.set (::std::move (r));
             continue;
           }
         }
@@ -23743,7 +23743,7 @@ namespace msdl_1
       // Icing
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Icing",
             "",
@@ -23754,7 +23754,7 @@ namespace msdl_1
         {
           if (!this->Icing_)
           {
-            ::std::auto_ptr< Icing_type > r (
+            ::std::unique_ptr< Icing_type > r (
               dynamic_cast< Icing_type* > (tmp.get ()));
 
             if (r.get ())
@@ -23762,7 +23762,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Icing_.set (r);
+            this->Icing_.set (::std::move (r));
             continue;
           }
         }
@@ -23771,7 +23771,7 @@ namespace msdl_1
       // LightItems
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "LightItems",
             "",
@@ -23782,7 +23782,7 @@ namespace msdl_1
         {
           if (!this->LightItems_)
           {
-            ::std::auto_ptr< LightItems_type > r (
+            ::std::unique_ptr< LightItems_type > r (
               dynamic_cast< LightItems_type* > (tmp.get ()));
 
             if (r.get ())
@@ -23790,7 +23790,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->LightItems_.set (r);
+            this->LightItems_.set (::std::move (r));
             continue;
           }
         }
@@ -23799,7 +23799,7 @@ namespace msdl_1
       // Precipitation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Precipitation",
             "",
@@ -23810,7 +23810,7 @@ namespace msdl_1
         {
           if (!this->Precipitation_)
           {
-            ::std::auto_ptr< Precipitation_type > r (
+            ::std::unique_ptr< Precipitation_type > r (
               dynamic_cast< Precipitation_type* > (tmp.get ()));
 
             if (r.get ())
@@ -23818,7 +23818,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Precipitation_.set (r);
+            this->Precipitation_.set (::std::move (r));
             continue;
           }
         }
@@ -23827,7 +23827,7 @@ namespace msdl_1
       // VisibilityItems
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "VisibilityItems",
             "",
@@ -23838,7 +23838,7 @@ namespace msdl_1
         {
           if (!this->VisibilityItems_)
           {
-            ::std::auto_ptr< VisibilityItems_type > r (
+            ::std::unique_ptr< VisibilityItems_type > r (
               dynamic_cast< VisibilityItems_type* > (tmp.get ()));
 
             if (r.get ())
@@ -23846,7 +23846,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->VisibilityItems_.set (r);
+            this->VisibilityItems_.set (::std::move (r));
             continue;
           }
         }
@@ -23855,7 +23855,7 @@ namespace msdl_1
       // WindItems
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "WindItems",
             "",
@@ -23866,7 +23866,7 @@ namespace msdl_1
         {
           if (!this->WindItems_)
           {
-            ::std::auto_ptr< WindItems_type > r (
+            ::std::unique_ptr< WindItems_type > r (
               dynamic_cast< WindItems_type* > (tmp.get ()));
 
             if (r.get ())
@@ -23874,7 +23874,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->WindItems_.set (r);
+            this->WindItems_.set (::std::move (r));
             continue;
           }
         }
@@ -24111,7 +24111,7 @@ namespace msdl_1
       // MOPPLevel
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "MOPPLevel",
             "",
@@ -24122,7 +24122,7 @@ namespace msdl_1
         {
           if (!this->MOPPLevel_)
           {
-            ::std::auto_ptr< MOPPLevel_type > r (
+            ::std::unique_ptr< MOPPLevel_type > r (
               dynamic_cast< MOPPLevel_type* > (tmp.get ()));
 
             if (r.get ())
@@ -24130,7 +24130,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->MOPPLevel_.set (r);
+            this->MOPPLevel_.set (::std::move (r));
             continue;
           }
         }
@@ -24139,7 +24139,7 @@ namespace msdl_1
       // WeaponControlStatus
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "WeaponControlStatus",
             "",
@@ -24150,7 +24150,7 @@ namespace msdl_1
         {
           if (!this->WeaponControlStatus_)
           {
-            ::std::auto_ptr< WeaponControlStatus_type > r (
+            ::std::unique_ptr< WeaponControlStatus_type > r (
               dynamic_cast< WeaponControlStatus_type* > (tmp.get ()));
 
             if (r.get ())
@@ -24158,7 +24158,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->WeaponControlStatus_.set (r);
+            this->WeaponControlStatus_.set (::std::move (r));
             continue;
           }
         }
@@ -24297,7 +24297,7 @@ namespace msdl_1
       // SupportRelation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "SupportRelation",
             "",
@@ -24306,7 +24306,7 @@ namespace msdl_1
 
         if (tmp.get () != 0)
         {
-          ::std::auto_ptr< SupportRelation_type > r (
+          ::std::unique_ptr< SupportRelation_type > r (
             dynamic_cast< SupportRelation_type* > (tmp.get ()));
 
           if (r.get ())
@@ -24314,7 +24314,7 @@ namespace msdl_1
           else
             throw ::xsd::cxx::tree::not_derived< char > ();
 
-          this->SupportRelation_.push_back (r);
+          this->SupportRelation_.push_back (::std::move (r));
           continue;
         }
       }
@@ -24402,12 +24402,12 @@ namespace msdl_1
   }
 
   SupportRelationType::
-  SupportRelationType (::std::auto_ptr< SupportedUnitHandle_type > SupportedUnitHandle,
-                       ::std::auto_ptr< SupportType_type > SupportType)
+  SupportRelationType (::std::unique_ptr< SupportedUnitHandle_type > SupportedUnitHandle,
+                       ::std::unique_ptr< SupportType_type > SupportType)
   : ::xml_schema::type (),
-    SupportedUnitHandle_ (SupportedUnitHandle, this),
+    SupportedUnitHandle_ (std::move (SupportedUnitHandle), this),
     PriorityToSupport_ (this),
-    SupportType_ (SupportType, this),
+    SupportType_ (std::move (SupportType), this),
     SupportRoleType_ (this)
   {
   }
@@ -24454,7 +24454,7 @@ namespace msdl_1
       // SupportedUnitHandle
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "SupportedUnitHandle",
             "",
@@ -24465,7 +24465,7 @@ namespace msdl_1
         {
           if (!SupportedUnitHandle_.present ())
           {
-            ::std::auto_ptr< SupportedUnitHandle_type > r (
+            ::std::unique_ptr< SupportedUnitHandle_type > r (
               dynamic_cast< SupportedUnitHandle_type* > (tmp.get ()));
 
             if (r.get ())
@@ -24473,7 +24473,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->SupportedUnitHandle_.set (r);
+            this->SupportedUnitHandle_.set (::std::move (r));
             continue;
           }
         }
@@ -24482,7 +24482,7 @@ namespace msdl_1
       // PriorityToSupport
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "PriorityToSupport",
             "",
@@ -24493,7 +24493,7 @@ namespace msdl_1
         {
           if (!this->PriorityToSupport_)
           {
-            ::std::auto_ptr< PriorityToSupport_type > r (
+            ::std::unique_ptr< PriorityToSupport_type > r (
               dynamic_cast< PriorityToSupport_type* > (tmp.get ()));
 
             if (r.get ())
@@ -24501,7 +24501,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->PriorityToSupport_.set (r);
+            this->PriorityToSupport_.set (::std::move (r));
             continue;
           }
         }
@@ -24510,7 +24510,7 @@ namespace msdl_1
       // SupportType
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "SupportType",
             "",
@@ -24521,7 +24521,7 @@ namespace msdl_1
         {
           if (!SupportType_.present ())
           {
-            ::std::auto_ptr< SupportType_type > r (
+            ::std::unique_ptr< SupportType_type > r (
               dynamic_cast< SupportType_type* > (tmp.get ()));
 
             if (r.get ())
@@ -24529,7 +24529,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->SupportType_.set (r);
+            this->SupportType_.set (::std::move (r));
             continue;
           }
         }
@@ -24538,7 +24538,7 @@ namespace msdl_1
       // SupportRoleType
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "SupportRoleType",
             "",
@@ -24549,7 +24549,7 @@ namespace msdl_1
         {
           if (!this->SupportRoleType_)
           {
-            ::std::auto_ptr< SupportRoleType_type > r (
+            ::std::unique_ptr< SupportRoleType_type > r (
               dynamic_cast< SupportRoleType_type* > (tmp.get ()));
 
             if (r.get ())
@@ -24557,7 +24557,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->SupportRoleType_.set (r);
+            this->SupportRoleType_.set (::std::move (r));
             continue;
           }
         }
@@ -24743,7 +24743,7 @@ namespace msdl_1
       // PointSymbolModifiers
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "PointSymbolModifiers",
             "",
@@ -24754,7 +24754,7 @@ namespace msdl_1
         {
           if (!this->PointSymbolModifiers_)
           {
-            ::std::auto_ptr< PointSymbolModifiers_type > r (
+            ::std::unique_ptr< PointSymbolModifiers_type > r (
               dynamic_cast< PointSymbolModifiers_type* > (tmp.get ()));
 
             if (r.get ())
@@ -24762,7 +24762,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->PointSymbolModifiers_.set (r);
+            this->PointSymbolModifiers_.set (::std::move (r));
             continue;
           }
         }
@@ -24771,7 +24771,7 @@ namespace msdl_1
       // LineSymbolModifiers
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "LineSymbolModifiers",
             "",
@@ -24782,7 +24782,7 @@ namespace msdl_1
         {
           if (!this->LineSymbolModifiers_)
           {
-            ::std::auto_ptr< LineSymbolModifiers_type > r (
+            ::std::unique_ptr< LineSymbolModifiers_type > r (
               dynamic_cast< LineSymbolModifiers_type* > (tmp.get ()));
 
             if (r.get ())
@@ -24790,7 +24790,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->LineSymbolModifiers_.set (r);
+            this->LineSymbolModifiers_.set (::std::move (r));
             continue;
           }
         }
@@ -24799,7 +24799,7 @@ namespace msdl_1
       // AreaSymbolModifiers
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AreaSymbolModifiers",
             "",
@@ -24810,7 +24810,7 @@ namespace msdl_1
         {
           if (!this->AreaSymbolModifiers_)
           {
-            ::std::auto_ptr< AreaSymbolModifiers_type > r (
+            ::std::unique_ptr< AreaSymbolModifiers_type > r (
               dynamic_cast< AreaSymbolModifiers_type* > (tmp.get ()));
 
             if (r.get ())
@@ -24818,7 +24818,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AreaSymbolModifiers_.set (r);
+            this->AreaSymbolModifiers_.set (::std::move (r));
             continue;
           }
         }
@@ -24827,7 +24827,7 @@ namespace msdl_1
       // BoundarySymbolModifiers
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "BoundarySymbolModifiers",
             "",
@@ -24838,7 +24838,7 @@ namespace msdl_1
         {
           if (!this->BoundarySymbolModifiers_)
           {
-            ::std::auto_ptr< BoundarySymbolModifiers_type > r (
+            ::std::unique_ptr< BoundarySymbolModifiers_type > r (
               dynamic_cast< BoundarySymbolModifiers_type* > (tmp.get ()));
 
             if (r.get ())
@@ -24846,7 +24846,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->BoundarySymbolModifiers_.set (r);
+            this->BoundarySymbolModifiers_.set (::std::move (r));
             continue;
           }
         }
@@ -24855,7 +24855,7 @@ namespace msdl_1
       // NBCEventSymbolModifiers
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "NBCEventSymbolModifiers",
             "",
@@ -24866,7 +24866,7 @@ namespace msdl_1
         {
           if (!this->NBCEventSymbolModifiers_)
           {
-            ::std::auto_ptr< NBCEventSymbolModifiers_type > r (
+            ::std::unique_ptr< NBCEventSymbolModifiers_type > r (
               dynamic_cast< NBCEventSymbolModifiers_type* > (tmp.get ()));
 
             if (r.get ())
@@ -24874,7 +24874,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->NBCEventSymbolModifiers_.set (r);
+            this->NBCEventSymbolModifiers_.set (::std::move (r));
             continue;
           }
         }
@@ -24883,7 +24883,7 @@ namespace msdl_1
       // TaskSymbolModifiers
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "TaskSymbolModifiers",
             "",
@@ -24894,7 +24894,7 @@ namespace msdl_1
         {
           if (!this->TaskSymbolModifiers_)
           {
-            ::std::auto_ptr< TaskSymbolModifiers_type > r (
+            ::std::unique_ptr< TaskSymbolModifiers_type > r (
               dynamic_cast< TaskSymbolModifiers_type* > (tmp.get ()));
 
             if (r.get ())
@@ -24902,7 +24902,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->TaskSymbolModifiers_.set (r);
+            this->TaskSymbolModifiers_.set (::std::move (r));
             continue;
           }
         }
@@ -25086,13 +25086,13 @@ namespace msdl_1
   }
 
   SymbologyDataStandardType::
-  SymbologyDataStandardType (::std::auto_ptr< StandardName_type > StandardName,
-                             ::std::auto_ptr< MajorVersion_type > MajorVersion,
-                             ::std::auto_ptr< MinorVersion_type > MinorVersion)
+  SymbologyDataStandardType (::std::unique_ptr< StandardName_type > StandardName,
+                             ::std::unique_ptr< MajorVersion_type > MajorVersion,
+                             ::std::unique_ptr< MinorVersion_type > MinorVersion)
   : ::xml_schema::type (),
-    StandardName_ (StandardName, this),
-    MajorVersion_ (MajorVersion, this),
-    MinorVersion_ (MinorVersion, this)
+    StandardName_ (std::move (StandardName), this),
+    MajorVersion_ (std::move (MajorVersion), this),
+    MinorVersion_ (std::move (MinorVersion), this)
   {
   }
 
@@ -25136,7 +25136,7 @@ namespace msdl_1
       // StandardName
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "StandardName",
             "",
@@ -25147,7 +25147,7 @@ namespace msdl_1
         {
           if (!StandardName_.present ())
           {
-            ::std::auto_ptr< StandardName_type > r (
+            ::std::unique_ptr< StandardName_type > r (
               dynamic_cast< StandardName_type* > (tmp.get ()));
 
             if (r.get ())
@@ -25155,7 +25155,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->StandardName_.set (r);
+            this->StandardName_.set (::std::move (r));
             continue;
           }
         }
@@ -25164,7 +25164,7 @@ namespace msdl_1
       // MajorVersion
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "MajorVersion",
             "",
@@ -25175,7 +25175,7 @@ namespace msdl_1
         {
           if (!MajorVersion_.present ())
           {
-            ::std::auto_ptr< MajorVersion_type > r (
+            ::std::unique_ptr< MajorVersion_type > r (
               dynamic_cast< MajorVersion_type* > (tmp.get ()));
 
             if (r.get ())
@@ -25183,7 +25183,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->MajorVersion_.set (r);
+            this->MajorVersion_.set (::std::move (r));
             continue;
           }
         }
@@ -25192,7 +25192,7 @@ namespace msdl_1
       // MinorVersion
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "MinorVersion",
             "",
@@ -25203,7 +25203,7 @@ namespace msdl_1
         {
           if (!MinorVersion_.present ())
           {
-            ::std::auto_ptr< MinorVersion_type > r (
+            ::std::unique_ptr< MinorVersion_type > r (
               dynamic_cast< MinorVersion_type* > (tmp.get ()));
 
             if (r.get ())
@@ -25211,7 +25211,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->MinorVersion_.set (r);
+            this->MinorVersion_.set (::std::move (r));
             continue;
           }
         }
@@ -25360,7 +25360,7 @@ namespace msdl_1
       // TacticalGraphic
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "TacticalGraphic",
             "",
@@ -25369,7 +25369,7 @@ namespace msdl_1
 
         if (tmp.get () != 0)
         {
-          ::std::auto_ptr< TacticalGraphic_type > r (
+          ::std::unique_ptr< TacticalGraphic_type > r (
             dynamic_cast< TacticalGraphic_type* > (tmp.get ()));
 
           if (r.get ())
@@ -25377,7 +25377,7 @@ namespace msdl_1
           else
             throw ::xsd::cxx::tree::not_derived< char > ();
 
-          this->TacticalGraphic_.push_back (r);
+          this->TacticalGraphic_.push_back (::std::move (r));
           continue;
         }
       }
@@ -25476,15 +25476,15 @@ namespace msdl_1
   TacticalGraphicType (const ObjectHandle_type& ObjectHandle,
                        const SymbolIdentifier_type& SymbolIdentifier,
                        const Affiliation_type& Affiliation,
-                       ::std::auto_ptr< Owner_type > Owner,
-                       ::std::auto_ptr< AnchorPoints_type > AnchorPoints,
+                       ::std::unique_ptr< Owner_type > Owner,
+                       ::std::unique_ptr< AnchorPoints_type > AnchorPoints,
                        const SymbolClassChoice_type& SymbolClassChoice)
   : ::xml_schema::type (),
     ObjectHandle_ (ObjectHandle, this),
     SymbolIdentifier_ (SymbolIdentifier, this),
     Affiliation_ (Affiliation, this),
-    Owner_ (Owner, this),
-    AnchorPoints_ (AnchorPoints, this),
+    Owner_ (std::move (Owner), this),
+    AnchorPoints_ (std::move (AnchorPoints), this),
     AssociatedOverlays_ (this),
     SymbolClassData_ (this),
     SymbolClassChoice_ (SymbolClassChoice, this)
@@ -25492,21 +25492,21 @@ namespace msdl_1
   }
 
   TacticalGraphicType::
-  TacticalGraphicType (::std::auto_ptr< ObjectHandle_type > ObjectHandle,
-                       ::std::auto_ptr< SymbolIdentifier_type > SymbolIdentifier,
-                       ::std::auto_ptr< Affiliation_type > Affiliation,
-                       ::std::auto_ptr< Owner_type > Owner,
-                       ::std::auto_ptr< AnchorPoints_type > AnchorPoints,
-                       ::std::auto_ptr< SymbolClassChoice_type > SymbolClassChoice)
+  TacticalGraphicType (::std::unique_ptr< ObjectHandle_type > ObjectHandle,
+                       ::std::unique_ptr< SymbolIdentifier_type > SymbolIdentifier,
+                       ::std::unique_ptr< Affiliation_type > Affiliation,
+                       ::std::unique_ptr< Owner_type > Owner,
+                       ::std::unique_ptr< AnchorPoints_type > AnchorPoints,
+                       ::std::unique_ptr< SymbolClassChoice_type > SymbolClassChoice)
   : ::xml_schema::type (),
-    ObjectHandle_ (ObjectHandle, this),
-    SymbolIdentifier_ (SymbolIdentifier, this),
-    Affiliation_ (Affiliation, this),
-    Owner_ (Owner, this),
-    AnchorPoints_ (AnchorPoints, this),
+    ObjectHandle_ (std::move (ObjectHandle), this),
+    SymbolIdentifier_ (std::move (SymbolIdentifier), this),
+    Affiliation_ (std::move (Affiliation), this),
+    Owner_ (std::move (Owner), this),
+    AnchorPoints_ (std::move (AnchorPoints), this),
     AssociatedOverlays_ (this),
     SymbolClassData_ (this),
-    SymbolClassChoice_ (SymbolClassChoice, this)
+    SymbolClassChoice_ (std::move (SymbolClassChoice), this)
   {
   }
 
@@ -25560,7 +25560,7 @@ namespace msdl_1
       // ObjectHandle
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "ObjectHandle",
             "",
@@ -25571,7 +25571,7 @@ namespace msdl_1
         {
           if (!ObjectHandle_.present ())
           {
-            ::std::auto_ptr< ObjectHandle_type > r (
+            ::std::unique_ptr< ObjectHandle_type > r (
               dynamic_cast< ObjectHandle_type* > (tmp.get ()));
 
             if (r.get ())
@@ -25579,7 +25579,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->ObjectHandle_.set (r);
+            this->ObjectHandle_.set (::std::move (r));
             continue;
           }
         }
@@ -25588,7 +25588,7 @@ namespace msdl_1
       // SymbolIdentifier
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "SymbolIdentifier",
             "",
@@ -25599,7 +25599,7 @@ namespace msdl_1
         {
           if (!SymbolIdentifier_.present ())
           {
-            ::std::auto_ptr< SymbolIdentifier_type > r (
+            ::std::unique_ptr< SymbolIdentifier_type > r (
               dynamic_cast< SymbolIdentifier_type* > (tmp.get ()));
 
             if (r.get ())
@@ -25607,7 +25607,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->SymbolIdentifier_.set (r);
+            this->SymbolIdentifier_.set (::std::move (r));
             continue;
           }
         }
@@ -25616,7 +25616,7 @@ namespace msdl_1
       // Affiliation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Affiliation",
             "",
@@ -25627,7 +25627,7 @@ namespace msdl_1
         {
           if (!Affiliation_.present ())
           {
-            ::std::auto_ptr< Affiliation_type > r (
+            ::std::unique_ptr< Affiliation_type > r (
               dynamic_cast< Affiliation_type* > (tmp.get ()));
 
             if (r.get ())
@@ -25635,7 +25635,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Affiliation_.set (r);
+            this->Affiliation_.set (::std::move (r));
             continue;
           }
         }
@@ -25644,7 +25644,7 @@ namespace msdl_1
       // Owner
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Owner",
             "",
@@ -25655,7 +25655,7 @@ namespace msdl_1
         {
           if (!Owner_.present ())
           {
-            ::std::auto_ptr< Owner_type > r (
+            ::std::unique_ptr< Owner_type > r (
               dynamic_cast< Owner_type* > (tmp.get ()));
 
             if (r.get ())
@@ -25663,7 +25663,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Owner_.set (r);
+            this->Owner_.set (::std::move (r));
             continue;
           }
         }
@@ -25672,7 +25672,7 @@ namespace msdl_1
       // AnchorPoints
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AnchorPoints",
             "",
@@ -25683,7 +25683,7 @@ namespace msdl_1
         {
           if (!AnchorPoints_.present ())
           {
-            ::std::auto_ptr< AnchorPoints_type > r (
+            ::std::unique_ptr< AnchorPoints_type > r (
               dynamic_cast< AnchorPoints_type* > (tmp.get ()));
 
             if (r.get ())
@@ -25691,7 +25691,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AnchorPoints_.set (r);
+            this->AnchorPoints_.set (::std::move (r));
             continue;
           }
         }
@@ -25700,7 +25700,7 @@ namespace msdl_1
       // AssociatedOverlays
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AssociatedOverlays",
             "",
@@ -25711,7 +25711,7 @@ namespace msdl_1
         {
           if (!this->AssociatedOverlays_)
           {
-            ::std::auto_ptr< AssociatedOverlays_type > r (
+            ::std::unique_ptr< AssociatedOverlays_type > r (
               dynamic_cast< AssociatedOverlays_type* > (tmp.get ()));
 
             if (r.get ())
@@ -25719,7 +25719,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AssociatedOverlays_.set (r);
+            this->AssociatedOverlays_.set (::std::move (r));
             continue;
           }
         }
@@ -25728,7 +25728,7 @@ namespace msdl_1
       // SymbolClassData
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "SymbolClassData",
             "",
@@ -25739,7 +25739,7 @@ namespace msdl_1
         {
           if (!this->SymbolClassData_)
           {
-            ::std::auto_ptr< SymbolClassData_type > r (
+            ::std::unique_ptr< SymbolClassData_type > r (
               dynamic_cast< SymbolClassData_type* > (tmp.get ()));
 
             if (r.get ())
@@ -25747,7 +25747,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->SymbolClassData_.set (r);
+            this->SymbolClassData_.set (::std::move (r));
             continue;
           }
         }
@@ -25756,7 +25756,7 @@ namespace msdl_1
       // SymbolClassChoice
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "SymbolClassChoice",
             "",
@@ -25767,7 +25767,7 @@ namespace msdl_1
         {
           if (!SymbolClassChoice_.present ())
           {
-            ::std::auto_ptr< SymbolClassChoice_type > r (
+            ::std::unique_ptr< SymbolClassChoice_type > r (
               dynamic_cast< SymbolClassChoice_type* > (tmp.get ()));
 
             if (r.get ())
@@ -25775,7 +25775,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->SymbolClassChoice_.set (r);
+            this->SymbolClassChoice_.set (::std::move (r));
             continue;
           }
         }
@@ -26013,7 +26013,7 @@ namespace msdl_1
       // UniqueDesignation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "UniqueDesignation",
             "",
@@ -26024,7 +26024,7 @@ namespace msdl_1
         {
           if (!this->UniqueDesignation_)
           {
-            ::std::auto_ptr< UniqueDesignation_type > r (
+            ::std::unique_ptr< UniqueDesignation_type > r (
               dynamic_cast< UniqueDesignation_type* > (tmp.get ()));
 
             if (r.get ())
@@ -26032,7 +26032,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->UniqueDesignation_.set (r);
+            this->UniqueDesignation_.set (::std::move (r));
             continue;
           }
         }
@@ -26041,7 +26041,7 @@ namespace msdl_1
       // DateTimeGroup
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "DateTimeGroup",
             "",
@@ -26052,7 +26052,7 @@ namespace msdl_1
         {
           if (!this->DateTimeGroup_)
           {
-            ::std::auto_ptr< DateTimeGroup_type > r (
+            ::std::unique_ptr< DateTimeGroup_type > r (
               dynamic_cast< DateTimeGroup_type* > (tmp.get ()));
 
             if (r.get ())
@@ -26060,7 +26060,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->DateTimeGroup_.set (r);
+            this->DateTimeGroup_.set (::std::move (r));
             continue;
           }
         }
@@ -26211,7 +26211,7 @@ namespace msdl_1
       // Location
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Location",
             "",
@@ -26222,7 +26222,7 @@ namespace msdl_1
         {
           if (!this->Location_)
           {
-            ::std::auto_ptr< Location_type > r (
+            ::std::unique_ptr< Location_type > r (
               dynamic_cast< Location_type* > (tmp.get ()));
 
             if (r.get ())
@@ -26230,7 +26230,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Location_.set (r);
+            this->Location_.set (::std::move (r));
             continue;
           }
         }
@@ -26239,7 +26239,7 @@ namespace msdl_1
       // DirectionOfMovement
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "DirectionOfMovement",
             "",
@@ -26250,7 +26250,7 @@ namespace msdl_1
         {
           if (!this->DirectionOfMovement_)
           {
-            ::std::auto_ptr< DirectionOfMovement_type > r (
+            ::std::unique_ptr< DirectionOfMovement_type > r (
               dynamic_cast< DirectionOfMovement_type* > (tmp.get ()));
 
             if (r.get ())
@@ -26258,7 +26258,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->DirectionOfMovement_.set (r);
+            this->DirectionOfMovement_.set (::std::move (r));
             continue;
           }
         }
@@ -26267,7 +26267,7 @@ namespace msdl_1
       // Speed
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Speed",
             "",
@@ -26278,7 +26278,7 @@ namespace msdl_1
         {
           if (!this->Speed_)
           {
-            ::std::auto_ptr< Speed_type > r (
+            ::std::unique_ptr< Speed_type > r (
               dynamic_cast< Speed_type* > (tmp.get ()));
 
             if (r.get ())
@@ -26286,7 +26286,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Speed_.set (r);
+            this->Speed_.set (::std::move (r));
             continue;
           }
         }
@@ -26295,7 +26295,7 @@ namespace msdl_1
       // FormationPosition
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "FormationPosition",
             "",
@@ -26306,7 +26306,7 @@ namespace msdl_1
         {
           if (!this->FormationPosition_)
           {
-            ::std::auto_ptr< FormationPosition_type > r (
+            ::std::unique_ptr< FormationPosition_type > r (
               dynamic_cast< FormationPosition_type* > (tmp.get ()));
 
             if (r.get ())
@@ -26314,7 +26314,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->FormationPosition_.set (r);
+            this->FormationPosition_.set (::std::move (r));
             continue;
           }
         }
@@ -26323,7 +26323,7 @@ namespace msdl_1
       // OwnFormation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "OwnFormation",
             "",
@@ -26334,7 +26334,7 @@ namespace msdl_1
         {
           if (!this->OwnFormation_)
           {
-            ::std::auto_ptr< OwnFormation_type > r (
+            ::std::unique_ptr< OwnFormation_type > r (
               dynamic_cast< OwnFormation_type* > (tmp.get ()));
 
             if (r.get ())
@@ -26342,7 +26342,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->OwnFormation_.set (r);
+            this->OwnFormation_.set (::std::move (r));
             continue;
           }
         }
@@ -26541,7 +26541,7 @@ namespace msdl_1
       // Resolution
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Resolution",
             "",
@@ -26552,7 +26552,7 @@ namespace msdl_1
         {
           if (!this->Resolution_)
           {
-            ::std::auto_ptr< Resolution_type > r (
+            ::std::unique_ptr< Resolution_type > r (
               dynamic_cast< Resolution_type* > (tmp.get ()));
 
             if (r.get ())
@@ -26560,7 +26560,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Resolution_.set (r);
+            this->Resolution_.set (::std::move (r));
             continue;
           }
         }
@@ -26569,7 +26569,7 @@ namespace msdl_1
       // AggregateBased
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AggregateBased",
             "",
@@ -26580,7 +26580,7 @@ namespace msdl_1
         {
           if (!this->AggregateBased_)
           {
-            ::std::auto_ptr< AggregateBased_type > r (
+            ::std::unique_ptr< AggregateBased_type > r (
               dynamic_cast< AggregateBased_type* > (tmp.get ()));
 
             if (r.get ())
@@ -26588,7 +26588,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AggregateBased_.set (r);
+            this->AggregateBased_.set (::std::move (r));
             continue;
           }
         }
@@ -26694,9 +26694,9 @@ namespace msdl_1
   }
 
   UnitRelationsType::
-  UnitRelationsType (::std::auto_ptr< ForceRelation_type > ForceRelation)
+  UnitRelationsType (::std::unique_ptr< ForceRelation_type > ForceRelation)
   : ::xml_schema::type (),
-    ForceRelation_ (ForceRelation, this),
+    ForceRelation_ (std::move (ForceRelation), this),
     SupportRelations_ (this),
     OrganicRelation_ (this)
   {
@@ -26742,7 +26742,7 @@ namespace msdl_1
       // ForceRelation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "ForceRelation",
             "",
@@ -26753,7 +26753,7 @@ namespace msdl_1
         {
           if (!ForceRelation_.present ())
           {
-            ::std::auto_ptr< ForceRelation_type > r (
+            ::std::unique_ptr< ForceRelation_type > r (
               dynamic_cast< ForceRelation_type* > (tmp.get ()));
 
             if (r.get ())
@@ -26761,7 +26761,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->ForceRelation_.set (r);
+            this->ForceRelation_.set (::std::move (r));
             continue;
           }
         }
@@ -26770,7 +26770,7 @@ namespace msdl_1
       // SupportRelations
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "SupportRelations",
             "",
@@ -26781,7 +26781,7 @@ namespace msdl_1
         {
           if (!this->SupportRelations_)
           {
-            ::std::auto_ptr< SupportRelations_type > r (
+            ::std::unique_ptr< SupportRelations_type > r (
               dynamic_cast< SupportRelations_type* > (tmp.get ()));
 
             if (r.get ())
@@ -26789,7 +26789,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->SupportRelations_.set (r);
+            this->SupportRelations_.set (::std::move (r));
             continue;
           }
         }
@@ -26798,7 +26798,7 @@ namespace msdl_1
       // OrganicRelation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "OrganicRelation",
             "",
@@ -26809,7 +26809,7 @@ namespace msdl_1
         {
           if (!this->OrganicRelation_)
           {
-            ::std::auto_ptr< OrganicRelation_type > r (
+            ::std::unique_ptr< OrganicRelation_type > r (
               dynamic_cast< OrganicRelation_type* > (tmp.get ()));
 
             if (r.get ())
@@ -26817,7 +26817,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->OrganicRelation_.set (r);
+            this->OrganicRelation_.set (::std::move (r));
             continue;
           }
         }
@@ -26972,7 +26972,7 @@ namespace msdl_1
       // Unit
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Unit",
             "",
@@ -26981,7 +26981,7 @@ namespace msdl_1
 
         if (tmp.get () != 0)
         {
-          ::std::auto_ptr< Unit_type > r (
+          ::std::unique_ptr< Unit_type > r (
             dynamic_cast< Unit_type* > (tmp.get ()));
 
           if (r.get ())
@@ -26989,7 +26989,7 @@ namespace msdl_1
           else
             throw ::xsd::cxx::tree::not_derived< char > ();
 
-          this->Unit_.push_back (r);
+          this->Unit_.push_back (::std::move (r));
           continue;
         }
       }
@@ -27081,7 +27081,7 @@ namespace msdl_1
   }
 
   UnitSymbolModifiersType::
-  UnitSymbolModifiersType (::std::auto_ptr< UniqueDesignation_type > UniqueDesignation)
+  UnitSymbolModifiersType (::std::unique_ptr< UniqueDesignation_type > UniqueDesignation)
   : ::xml_schema::type (),
     Echelon_ (this),
     ReinforcedReduced_ (this),
@@ -27090,7 +27090,7 @@ namespace msdl_1
     CombatEffectiveness_ (this),
     HigherFormation_ (this),
     IFF_ (this),
-    UniqueDesignation_ (UniqueDesignation, this),
+    UniqueDesignation_ (std::move (UniqueDesignation), this),
     SpecialC2HQ_ (this)
   {
   }
@@ -27147,7 +27147,7 @@ namespace msdl_1
       // Echelon
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Echelon",
             "",
@@ -27158,7 +27158,7 @@ namespace msdl_1
         {
           if (!this->Echelon_)
           {
-            ::std::auto_ptr< Echelon_type > r (
+            ::std::unique_ptr< Echelon_type > r (
               dynamic_cast< Echelon_type* > (tmp.get ()));
 
             if (r.get ())
@@ -27166,7 +27166,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Echelon_.set (r);
+            this->Echelon_.set (::std::move (r));
             continue;
           }
         }
@@ -27175,7 +27175,7 @@ namespace msdl_1
       // ReinforcedReduced
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "ReinforcedReduced",
             "",
@@ -27186,7 +27186,7 @@ namespace msdl_1
         {
           if (!this->ReinforcedReduced_)
           {
-            ::std::auto_ptr< ReinforcedReduced_type > r (
+            ::std::unique_ptr< ReinforcedReduced_type > r (
               dynamic_cast< ReinforcedReduced_type* > (tmp.get ()));
 
             if (r.get ())
@@ -27194,7 +27194,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->ReinforcedReduced_.set (r);
+            this->ReinforcedReduced_.set (::std::move (r));
             continue;
           }
         }
@@ -27203,7 +27203,7 @@ namespace msdl_1
       // StaffComments
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "StaffComments",
             "",
@@ -27214,7 +27214,7 @@ namespace msdl_1
         {
           if (!this->StaffComments_)
           {
-            ::std::auto_ptr< StaffComments_type > r (
+            ::std::unique_ptr< StaffComments_type > r (
               dynamic_cast< StaffComments_type* > (tmp.get ()));
 
             if (r.get ())
@@ -27222,7 +27222,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->StaffComments_.set (r);
+            this->StaffComments_.set (::std::move (r));
             continue;
           }
         }
@@ -27231,7 +27231,7 @@ namespace msdl_1
       // AdditionalInfo
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "AdditionalInfo",
             "",
@@ -27242,7 +27242,7 @@ namespace msdl_1
         {
           if (!this->AdditionalInfo_)
           {
-            ::std::auto_ptr< AdditionalInfo_type > r (
+            ::std::unique_ptr< AdditionalInfo_type > r (
               dynamic_cast< AdditionalInfo_type* > (tmp.get ()));
 
             if (r.get ())
@@ -27250,7 +27250,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->AdditionalInfo_.set (r);
+            this->AdditionalInfo_.set (::std::move (r));
             continue;
           }
         }
@@ -27259,7 +27259,7 @@ namespace msdl_1
       // CombatEffectiveness
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CombatEffectiveness",
             "",
@@ -27270,7 +27270,7 @@ namespace msdl_1
         {
           if (!this->CombatEffectiveness_)
           {
-            ::std::auto_ptr< CombatEffectiveness_type > r (
+            ::std::unique_ptr< CombatEffectiveness_type > r (
               dynamic_cast< CombatEffectiveness_type* > (tmp.get ()));
 
             if (r.get ())
@@ -27278,7 +27278,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CombatEffectiveness_.set (r);
+            this->CombatEffectiveness_.set (::std::move (r));
             continue;
           }
         }
@@ -27287,7 +27287,7 @@ namespace msdl_1
       // HigherFormation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "HigherFormation",
             "",
@@ -27298,7 +27298,7 @@ namespace msdl_1
         {
           if (!this->HigherFormation_)
           {
-            ::std::auto_ptr< HigherFormation_type > r (
+            ::std::unique_ptr< HigherFormation_type > r (
               dynamic_cast< HigherFormation_type* > (tmp.get ()));
 
             if (r.get ())
@@ -27306,7 +27306,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->HigherFormation_.set (r);
+            this->HigherFormation_.set (::std::move (r));
             continue;
           }
         }
@@ -27315,7 +27315,7 @@ namespace msdl_1
       // IFF
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "IFF",
             "",
@@ -27326,7 +27326,7 @@ namespace msdl_1
         {
           if (!this->IFF_)
           {
-            ::std::auto_ptr< IFF_type > r (
+            ::std::unique_ptr< IFF_type > r (
               dynamic_cast< IFF_type* > (tmp.get ()));
 
             if (r.get ())
@@ -27334,7 +27334,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->IFF_.set (r);
+            this->IFF_.set (::std::move (r));
             continue;
           }
         }
@@ -27343,7 +27343,7 @@ namespace msdl_1
       // UniqueDesignation
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "UniqueDesignation",
             "",
@@ -27354,7 +27354,7 @@ namespace msdl_1
         {
           if (!UniqueDesignation_.present ())
           {
-            ::std::auto_ptr< UniqueDesignation_type > r (
+            ::std::unique_ptr< UniqueDesignation_type > r (
               dynamic_cast< UniqueDesignation_type* > (tmp.get ()));
 
             if (r.get ())
@@ -27362,7 +27362,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->UniqueDesignation_.set (r);
+            this->UniqueDesignation_.set (::std::move (r));
             continue;
           }
         }
@@ -27371,7 +27371,7 @@ namespace msdl_1
       // SpecialC2HQ
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "SpecialC2HQ",
             "",
@@ -27382,7 +27382,7 @@ namespace msdl_1
         {
           if (!this->SpecialC2HQ_)
           {
-            ::std::auto_ptr< SpecialC2HQ_type > r (
+            ::std::unique_ptr< SpecialC2HQ_type > r (
               dynamic_cast< SpecialC2HQ_type* > (tmp.get ()));
 
             if (r.get ())
@@ -27390,7 +27390,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->SpecialC2HQ_.set (r);
+            this->SpecialC2HQ_.set (::std::move (r));
             continue;
           }
         }
@@ -27636,7 +27636,7 @@ namespace msdl_1
   UnitType::
   UnitType (const ObjectHandle_type& ObjectHandle,
             const SymbolIdentifier_type& SymbolIdentifier,
-            ::std::auto_ptr< Relations_type > Relations)
+            ::std::unique_ptr< Relations_type > Relations)
   : ::xml_schema::type (),
     ObjectHandle_ (ObjectHandle, this),
     SymbolIdentifier_ (SymbolIdentifier, this),
@@ -27645,24 +27645,24 @@ namespace msdl_1
     CommunicationNetInstances_ (this),
     Status_ (this),
     Disposition_ (this),
-    Relations_ (Relations, this),
+    Relations_ (std::move (Relations), this),
     Model_ (this)
   {
   }
 
   UnitType::
-  UnitType (::std::auto_ptr< ObjectHandle_type > ObjectHandle,
-            ::std::auto_ptr< SymbolIdentifier_type > SymbolIdentifier,
-            ::std::auto_ptr< Relations_type > Relations)
+  UnitType (::std::unique_ptr< ObjectHandle_type > ObjectHandle,
+            ::std::unique_ptr< SymbolIdentifier_type > SymbolIdentifier,
+            ::std::unique_ptr< Relations_type > Relations)
   : ::xml_schema::type (),
-    ObjectHandle_ (ObjectHandle, this),
-    SymbolIdentifier_ (SymbolIdentifier, this),
+    ObjectHandle_ (std::move (ObjectHandle), this),
+    SymbolIdentifier_ (std::move (SymbolIdentifier), this),
     Name_ (this),
     UnitSymbolModifiers_ (this),
     CommunicationNetInstances_ (this),
     Status_ (this),
     Disposition_ (this),
-    Relations_ (Relations, this),
+    Relations_ (std::move (Relations), this),
     Model_ (this)
   {
   }
@@ -27719,7 +27719,7 @@ namespace msdl_1
       // ObjectHandle
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "ObjectHandle",
             "",
@@ -27730,7 +27730,7 @@ namespace msdl_1
         {
           if (!ObjectHandle_.present ())
           {
-            ::std::auto_ptr< ObjectHandle_type > r (
+            ::std::unique_ptr< ObjectHandle_type > r (
               dynamic_cast< ObjectHandle_type* > (tmp.get ()));
 
             if (r.get ())
@@ -27738,7 +27738,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->ObjectHandle_.set (r);
+            this->ObjectHandle_.set (::std::move (r));
             continue;
           }
         }
@@ -27747,7 +27747,7 @@ namespace msdl_1
       // SymbolIdentifier
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "SymbolIdentifier",
             "",
@@ -27758,7 +27758,7 @@ namespace msdl_1
         {
           if (!SymbolIdentifier_.present ())
           {
-            ::std::auto_ptr< SymbolIdentifier_type > r (
+            ::std::unique_ptr< SymbolIdentifier_type > r (
               dynamic_cast< SymbolIdentifier_type* > (tmp.get ()));
 
             if (r.get ())
@@ -27766,7 +27766,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->SymbolIdentifier_.set (r);
+            this->SymbolIdentifier_.set (::std::move (r));
             continue;
           }
         }
@@ -27775,7 +27775,7 @@ namespace msdl_1
       // Name
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Name",
             "",
@@ -27786,7 +27786,7 @@ namespace msdl_1
         {
           if (!this->Name_)
           {
-            ::std::auto_ptr< Name_type > r (
+            ::std::unique_ptr< Name_type > r (
               dynamic_cast< Name_type* > (tmp.get ()));
 
             if (r.get ())
@@ -27794,7 +27794,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Name_.set (r);
+            this->Name_.set (::std::move (r));
             continue;
           }
         }
@@ -27803,7 +27803,7 @@ namespace msdl_1
       // UnitSymbolModifiers
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "UnitSymbolModifiers",
             "",
@@ -27814,7 +27814,7 @@ namespace msdl_1
         {
           if (!this->UnitSymbolModifiers_)
           {
-            ::std::auto_ptr< UnitSymbolModifiers_type > r (
+            ::std::unique_ptr< UnitSymbolModifiers_type > r (
               dynamic_cast< UnitSymbolModifiers_type* > (tmp.get ()));
 
             if (r.get ())
@@ -27822,7 +27822,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->UnitSymbolModifiers_.set (r);
+            this->UnitSymbolModifiers_.set (::std::move (r));
             continue;
           }
         }
@@ -27831,7 +27831,7 @@ namespace msdl_1
       // CommunicationNetInstances
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "CommunicationNetInstances",
             "",
@@ -27842,7 +27842,7 @@ namespace msdl_1
         {
           if (!this->CommunicationNetInstances_)
           {
-            ::std::auto_ptr< CommunicationNetInstances_type > r (
+            ::std::unique_ptr< CommunicationNetInstances_type > r (
               dynamic_cast< CommunicationNetInstances_type* > (tmp.get ()));
 
             if (r.get ())
@@ -27850,7 +27850,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CommunicationNetInstances_.set (r);
+            this->CommunicationNetInstances_.set (::std::move (r));
             continue;
           }
         }
@@ -27859,7 +27859,7 @@ namespace msdl_1
       // Status
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Status",
             "",
@@ -27870,7 +27870,7 @@ namespace msdl_1
         {
           if (!this->Status_)
           {
-            ::std::auto_ptr< Status_type > r (
+            ::std::unique_ptr< Status_type > r (
               dynamic_cast< Status_type* > (tmp.get ()));
 
             if (r.get ())
@@ -27878,7 +27878,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Status_.set (r);
+            this->Status_.set (::std::move (r));
             continue;
           }
         }
@@ -27887,7 +27887,7 @@ namespace msdl_1
       // Disposition
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Disposition",
             "",
@@ -27898,7 +27898,7 @@ namespace msdl_1
         {
           if (!this->Disposition_)
           {
-            ::std::auto_ptr< Disposition_type > r (
+            ::std::unique_ptr< Disposition_type > r (
               dynamic_cast< Disposition_type* > (tmp.get ()));
 
             if (r.get ())
@@ -27906,7 +27906,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Disposition_.set (r);
+            this->Disposition_.set (::std::move (r));
             continue;
           }
         }
@@ -27915,7 +27915,7 @@ namespace msdl_1
       // Relations
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Relations",
             "",
@@ -27926,7 +27926,7 @@ namespace msdl_1
         {
           if (!Relations_.present ())
           {
-            ::std::auto_ptr< Relations_type > r (
+            ::std::unique_ptr< Relations_type > r (
               dynamic_cast< Relations_type* > (tmp.get ()));
 
             if (r.get ())
@@ -27934,7 +27934,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Relations_.set (r);
+            this->Relations_.set (::std::move (r));
             continue;
           }
         }
@@ -27943,7 +27943,7 @@ namespace msdl_1
       // Model
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Model",
             "",
@@ -27954,7 +27954,7 @@ namespace msdl_1
         {
           if (!this->Model_)
           {
-            ::std::auto_ptr< Model_type > r (
+            ::std::unique_ptr< Model_type > r (
               dynamic_cast< Model_type* > (tmp.get ()));
 
             if (r.get ())
@@ -27962,7 +27962,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->Model_.set (r);
+            this->Model_.set (::std::move (r));
             continue;
           }
         }
@@ -28195,13 +28195,13 @@ namespace msdl_1
   }
 
   UTMType::
-  UTMType (::std::auto_ptr< UTMGridZone_type > UTMGridZone,
-           ::std::auto_ptr< UTMEasting_type > UTMEasting,
-           ::std::auto_ptr< UTMNorthing_type > UTMNorthing)
+  UTMType (::std::unique_ptr< UTMGridZone_type > UTMGridZone,
+           ::std::unique_ptr< UTMEasting_type > UTMEasting,
+           ::std::unique_ptr< UTMNorthing_type > UTMNorthing)
   : ::xml_schema::type (),
-    UTMGridZone_ (UTMGridZone, this),
-    UTMEasting_ (UTMEasting, this),
-    UTMNorthing_ (UTMNorthing, this),
+    UTMGridZone_ (std::move (UTMGridZone), this),
+    UTMEasting_ (std::move (UTMEasting), this),
+    UTMNorthing_ (std::move (UTMNorthing), this),
     ElevationAGL_ (this)
   {
   }
@@ -28248,7 +28248,7 @@ namespace msdl_1
       // UTMGridZone
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "UTMGridZone",
             "",
@@ -28259,7 +28259,7 @@ namespace msdl_1
         {
           if (!UTMGridZone_.present ())
           {
-            ::std::auto_ptr< UTMGridZone_type > r (
+            ::std::unique_ptr< UTMGridZone_type > r (
               dynamic_cast< UTMGridZone_type* > (tmp.get ()));
 
             if (r.get ())
@@ -28267,7 +28267,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->UTMGridZone_.set (r);
+            this->UTMGridZone_.set (::std::move (r));
             continue;
           }
         }
@@ -28276,7 +28276,7 @@ namespace msdl_1
       // UTMEasting
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "UTMEasting",
             "",
@@ -28287,7 +28287,7 @@ namespace msdl_1
         {
           if (!UTMEasting_.present ())
           {
-            ::std::auto_ptr< UTMEasting_type > r (
+            ::std::unique_ptr< UTMEasting_type > r (
               dynamic_cast< UTMEasting_type* > (tmp.get ()));
 
             if (r.get ())
@@ -28295,7 +28295,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->UTMEasting_.set (r);
+            this->UTMEasting_.set (::std::move (r));
             continue;
           }
         }
@@ -28304,7 +28304,7 @@ namespace msdl_1
       // UTMNorthing
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "UTMNorthing",
             "",
@@ -28315,7 +28315,7 @@ namespace msdl_1
         {
           if (!UTMNorthing_.present ())
           {
-            ::std::auto_ptr< UTMNorthing_type > r (
+            ::std::unique_ptr< UTMNorthing_type > r (
               dynamic_cast< UTMNorthing_type* > (tmp.get ()));
 
             if (r.get ())
@@ -28323,7 +28323,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->UTMNorthing_.set (r);
+            this->UTMNorthing_.set (::std::move (r));
             continue;
           }
         }
@@ -28332,7 +28332,7 @@ namespace msdl_1
       // ElevationAGL
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "ElevationAGL",
             "",
@@ -28343,7 +28343,7 @@ namespace msdl_1
         {
           if (!this->ElevationAGL_)
           {
-            ::std::auto_ptr< ElevationAGL_type > r (
+            ::std::unique_ptr< ElevationAGL_type > r (
               dynamic_cast< ElevationAGL_type* > (tmp.get ()));
 
             if (r.get ())
@@ -28351,7 +28351,7 @@ namespace msdl_1
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->ElevationAGL_.set (r);
+            this->ElevationAGL_.set (::std::move (r));
             continue;
           }
         }
@@ -28519,7 +28519,7 @@ namespace msdl_1
       // Visibility
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Visibility",
             "",
@@ -28528,7 +28528,7 @@ namespace msdl_1
 
         if (tmp.get () != 0)
         {
-          ::std::auto_ptr< Visibility_type > r (
+          ::std::unique_ptr< Visibility_type > r (
             dynamic_cast< Visibility_type* > (tmp.get ()));
 
           if (r.get ())
@@ -28536,7 +28536,7 @@ namespace msdl_1
           else
             throw ::xsd::cxx::tree::not_derived< char > ();
 
-          this->Visibility_.push_back (r);
+          this->Visibility_.push_back (::std::move (r));
           continue;
         }
       }
@@ -28655,7 +28655,7 @@ namespace msdl_1
       // Wind
       //
       {
-        ::std::auto_ptr< ::xsd::cxx::tree::type > tmp (
+        ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
             "Wind",
             "",
@@ -28664,7 +28664,7 @@ namespace msdl_1
 
         if (tmp.get () != 0)
         {
-          ::std::auto_ptr< Wind_type > r (
+          ::std::unique_ptr< Wind_type > r (
             dynamic_cast< Wind_type* > (tmp.get ()));
 
           if (r.get ())
@@ -28672,7 +28672,7 @@ namespace msdl_1
           else
             throw ::xsd::cxx::tree::not_derived< char > ();
 
-          this->Wind_.push_back (r);
+          this->Wind_.push_back (::std::move (r));
           continue;
         }
       }

@@ -34,6 +34,10 @@
 #ifndef MILITARY_SCENARIO_1_0_0_HXX
 #define MILITARY_SCENARIO_1_0_0_HXX
 
+#ifndef XSD_CXX11
+#define XSD_CXX11
+#endif
+
 #ifndef XSD_USE_CHAR
 #define XSD_USE_CHAR
 #endif
@@ -239,7 +243,7 @@ namespace xml_schema
   {
     // Automatic pointer for DOMDocument.
     //
-    using ::xsd::cxx::xml::dom::auto_ptr;
+    using ::xsd::cxx::xml::dom::unique_ptr;
 
 #ifndef XSD_CXX_TREE_TREE_NODE_KEY__XML_SCHEMA
 #define XSD_CXX_TREE_TREE_NODE_KEY__XML_SCHEMA
@@ -257,9 +261,10 @@ namespace msdl_1
 }
 
 
-#include <memory>    // ::std::auto_ptr
+#include <memory>    // ::std::unique_ptr
 #include <limits>    // std::numeric_limits
 #include <algorithm> // std::binary_search
+#include <utility>   // std::move
 
 #include <xsd/cxx/xml/char-utf8.hxx>
 
@@ -293,18 +298,18 @@ namespace msdl_1
   // Parse a URI or a local file.
   //
 
-  ::std::auto_ptr< ::msdl_1::MilitaryScenarioType >
+  ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (const ::std::string& uri,
                     ::xml_schema::flags f = 0,
                     const ::xml_schema::properties& p = ::xml_schema::properties ());
 
-  ::std::auto_ptr< ::msdl_1::MilitaryScenarioType >
+  ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (const ::std::string& uri,
                     ::xml_schema::error_handler& eh,
                     ::xml_schema::flags f = 0,
                     const ::xml_schema::properties& p = ::xml_schema::properties ());
 
-  ::std::auto_ptr< ::msdl_1::MilitaryScenarioType >
+  ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (const ::std::string& uri,
                     ::xercesc::DOMErrorHandler& eh,
                     ::xml_schema::flags f = 0,
@@ -313,37 +318,37 @@ namespace msdl_1
   // Parse std::istream.
   //
 
-  ::std::auto_ptr< ::msdl_1::MilitaryScenarioType >
+  ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (::std::istream& is,
                     ::xml_schema::flags f = 0,
                     const ::xml_schema::properties& p = ::xml_schema::properties ());
 
-  ::std::auto_ptr< ::msdl_1::MilitaryScenarioType >
+  ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (::std::istream& is,
                     ::xml_schema::error_handler& eh,
                     ::xml_schema::flags f = 0,
                     const ::xml_schema::properties& p = ::xml_schema::properties ());
 
-  ::std::auto_ptr< ::msdl_1::MilitaryScenarioType >
+  ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (::std::istream& is,
                     ::xercesc::DOMErrorHandler& eh,
                     ::xml_schema::flags f = 0,
                     const ::xml_schema::properties& p = ::xml_schema::properties ());
 
-  ::std::auto_ptr< ::msdl_1::MilitaryScenarioType >
+  ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (::std::istream& is,
                     const ::std::string& id,
                     ::xml_schema::flags f = 0,
                     const ::xml_schema::properties& p = ::xml_schema::properties ());
 
-  ::std::auto_ptr< ::msdl_1::MilitaryScenarioType >
+  ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (::std::istream& is,
                     const ::std::string& id,
                     ::xml_schema::error_handler& eh,
                     ::xml_schema::flags f = 0,
                     const ::xml_schema::properties& p = ::xml_schema::properties ());
 
-  ::std::auto_ptr< ::msdl_1::MilitaryScenarioType >
+  ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (::std::istream& is,
                     const ::std::string& id,
                     ::xercesc::DOMErrorHandler& eh,
@@ -353,18 +358,18 @@ namespace msdl_1
   // Parse xercesc::InputSource.
   //
 
-  ::std::auto_ptr< ::msdl_1::MilitaryScenarioType >
+  ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (::xercesc::InputSource& is,
                     ::xml_schema::flags f = 0,
                     const ::xml_schema::properties& p = ::xml_schema::properties ());
 
-  ::std::auto_ptr< ::msdl_1::MilitaryScenarioType >
+  ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (::xercesc::InputSource& is,
                     ::xml_schema::error_handler& eh,
                     ::xml_schema::flags f = 0,
                     const ::xml_schema::properties& p = ::xml_schema::properties ());
 
-  ::std::auto_ptr< ::msdl_1::MilitaryScenarioType >
+  ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (::xercesc::InputSource& is,
                     ::xercesc::DOMErrorHandler& eh,
                     ::xml_schema::flags f = 0,
@@ -373,13 +378,13 @@ namespace msdl_1
   // Parse xercesc::DOMDocument.
   //
 
-  ::std::auto_ptr< ::msdl_1::MilitaryScenarioType >
+  ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (const ::xercesc::DOMDocument& d,
                     ::xml_schema::flags f = 0,
                     const ::xml_schema::properties& p = ::xml_schema::properties ());
 
-  ::std::auto_ptr< ::msdl_1::MilitaryScenarioType >
-  MilitaryScenario (::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > d,
+  ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
+  MilitaryScenario (::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument > d,
                     ::xml_schema::flags f = 0,
                     const ::xml_schema::properties& p = ::xml_schema::properties ());
 }
@@ -457,7 +462,7 @@ namespace msdl_1
   // Serialize to a new xercesc::DOMDocument.
   //
 
-  ::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument >
+  ::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument >
   MilitaryScenario (const ::msdl_1::MilitaryScenarioType& x, 
                     const ::xml_schema::namespace_infomap& m = ::xml_schema::namespace_infomap (),
                     ::xml_schema::flags f = 0);
