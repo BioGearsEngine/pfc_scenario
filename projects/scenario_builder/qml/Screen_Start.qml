@@ -3,16 +3,12 @@ import QtQuick.Window 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0
 
-import com.ara.pfc.ScenarioModel 1.0
 // main window
 Page {
   id: root
   signal loadClicked
   signal createClicked
 
-  ScenarioModel {
-    id : scenario_model
-  }
   ColumnLayout {
       anchors.margins: 25
       anchors.fill: parent
@@ -27,7 +23,7 @@ Page {
           Layout.minimumWidth: Font.contentWidth + 10
           Text {
               anchors.centerIn: parent
-              text: "SUSTAIN Scenario Builder" + scenario_model.name
+              text: "SUSTAIN Scenario Builder"
               color: 'white'
               font.family: "Gotham"
               font.pixelSize: 25

@@ -5,8 +5,9 @@
 #include <QElapsedTimer>
 #include <QObject>
 #include <QString>
-#include <QTimer>
 #include <QVariant>
+#include <QDate>
+
 namespace pfc {
 
 class Scenario : public QObject {
@@ -16,12 +17,12 @@ class Scenario : public QObject {
   Q_PROPERTY(QString type READ Type WRITE Type NOTIFY typeChanged)
   Q_PROPERTY(QString version READ Version WRITE Version NOTIFY versionChanged)
   Q_PROPERTY(QString securityClassification READ SecurityClassification WRITE SecurityClassification NOTIFY securityClassificationChanged)
-  Q_PROPERTY(QString modificationDate READ ModificationDate WRITE ModificationDate NOTIFY modificationDateChanged)
+  Q_PROPERTY(QDate modificationDate READ ModificationDate WRITE ModificationDate NOTIFY modificationDateChanged)
   Q_PROPERTY(QString securityClassification READ SecurityClassification WRITE SecurityClassification NOTIFY securityClassificationChanged)
   Q_PROPERTY(QString releaseRestriction READ ReleaseRestriction WRITE ReleaseRestriction NOTIFY releaseRestrictionChanged)
   Q_PROPERTY(QString purpose READ Purpose WRITE Purpose NOTIFY purposeChanged)
   Q_PROPERTY(QString description READ Description WRITE Description NOTIFY descriptionChanged)
-  Q_PROPERTY(QString useLimitation READ UseLimitaiton WRITE UseLimitaiton NOTIFY useLimitaitonChanged)
+  Q_PROPERTY(QString useLimitation READ UseLimitation WRITE UseLimitation NOTIFY useLimitationChanged)
 
 public:
   Scenario();
@@ -37,26 +38,31 @@ public:
   QString Name() const;
   QString Type() const;
   QString Version() const;
-  QString ModificationDate() const;
+  QDate ModificationDate() const;
   QString SecurityClassification() const;
   QString ReleaseRestriction() const;
   QString Purpose() const;
   QString Description() const;
-  QString UseLimitaiton() const;
+  QString UseLimitation() const;
   
 public slots:
   void Name(QString);
   void Type(QString);
   void Version(QString);
-  void ModificationDate(QString);
+  bool ModificationDate(QDate);
+  bool ModificationDate(int, unsigned short, unsigned short);
   void SecurityClassification(QString);
   void ReleaseRestriction(QString);
   void Purpose(QString);
   void Description(QString);
-  void UseLimitaiton(QString);
+  void UseLimitation(QString);
 
+  bool marshal ( QDataStream& );
+  bool unmarshal( QDataStream& );
+  bool Load();
+  bool Load(QString);
   bool Save();
-  bool SaveAs(std::string filename);
+  bool SaveAs(QString filename);
  signals:
   void nameChanged();
   void typeChanged();
@@ -66,7 +72,7 @@ public slots:
   void releaseRestrictionChanged();
   void purposeChanged();
   void descriptionChanged();
-  void useLimitaitonChanged();
+  void useLimitationChanged();
  
 
 private:

@@ -4,6 +4,8 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.3
 import QtQuick.Dialogs 1.3
 
+import com.ara.pfc.ScenarioModel 1.0
+
 ApplicationWindow {
   id:object1
   width: 600; height: 800
@@ -11,6 +13,10 @@ ApplicationWindow {
   minimumHeight: 800 
   visible: true
   
+  ScenarioModel {
+    id : scenario_model
+  }
+
   StackView {
     id: mainView
     anchors.fill: parent
@@ -22,7 +28,7 @@ ApplicationWindow {
          loadScreen.open()
         }
        onCreateClicked: {
-         mainView.push( scenarioScreen )
+         mainView.push( scenarioScreen, { model : scenario_model} )
         }
     }
 
@@ -41,7 +47,9 @@ ApplicationWindow {
         folder: shortcuts.home
         onAccepted: {
           console.log("You chose: " + fileUrls)
-          mainView.push( scenarioScreen, { model : null} )
+          //TODO: Handle Failure
+          scenario_model.Load( loadScreen.fileUrls );
+          mainView.push( scenarioScreen, { model : scenario_model} )
         }
         onRejected: {
           console.log("Canceled")

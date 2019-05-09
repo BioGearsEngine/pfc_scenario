@@ -757,8 +757,6 @@ namespace oo_2_0
       GEOGPT
     };
 
-    AbsolutePointCategoryCode ();
-
     AbsolutePointCategoryCode (value v);
 
     AbsolutePointCategoryCode (const char* v);
@@ -816,8 +814,6 @@ namespace oo_2_0
       RL
     };
 
-    ActionAircraftEmploymentApproachOffsetCode ();
-
     ActionAircraftEmploymentApproachOffsetCode (value v);
 
     ActionAircraftEmploymentApproachOffsetCode (const char* v);
@@ -874,8 +870,6 @@ namespace oo_2_0
       BASIC,
       COMRCL
     };
-
-    ActionAircraftEmploymentCrewCompositionCode ();
 
     ActionAircraftEmploymentCrewCompositionCode (value v);
 
@@ -944,8 +938,6 @@ namespace oo_2_0
       WINCH
     };
 
-    ActionAircraftEmploymentDeplanementMethodCode ();
-
     ActionAircraftEmploymentDeplanementMethodCode (value v);
 
     ActionAircraftEmploymentDeplanementMethodCode (const char* v);
@@ -1006,8 +998,6 @@ namespace oo_2_0
       SWING
     };
 
-    ActionAircraftEmploymentGeneralRoleCode ();
-
     ActionAircraftEmploymentGeneralRoleCode (value v);
 
     ActionAircraftEmploymentGeneralRoleCode (const char* v);
@@ -1064,8 +1054,6 @@ namespace oo_2_0
       YES
     };
 
-    ActionAircraftEmploymentInflightReportRequirementIndicatorCode ();
-
     ActionAircraftEmploymentInflightReportRequirementIndicatorCode (value v);
 
     ActionAircraftEmploymentInflightReportRequirementIndicatorCode (const char* v);
@@ -1121,8 +1109,6 @@ namespace oo_2_0
       ACTEV,
       ACTTA
     };
-
-    ActionCategoryCode ();
 
     ActionCategoryCode (value v);
 
@@ -1188,8 +1174,6 @@ namespace oo_2_0
       MIN
     };
 
-    ActionContextCategoryCode ();
-
     ActionContextCategoryCode (value v);
 
     ActionContextCategoryCode (const char* v);
@@ -1245,8 +1229,6 @@ namespace oo_2_0
       AEITEM,
       AETYPE
     };
-
-    ActionEffectCategoryCode ();
 
     ActionEffectCategoryCode (value v);
 
@@ -1327,8 +1309,6 @@ namespace oo_2_0
       WNDD
     };
 
-    ActionEffectDescriptionCode ();
-
     ActionEffectDescriptionCode (value v);
 
     ActionEffectDescriptionCode (const char* v);
@@ -1387,8 +1367,6 @@ namespace oo_2_0
       SEVDSR,
       TOTDSR
     };
-
-    ActionEffectSeverityCode ();
 
     ActionEffectSeverityCode (value v);
 
@@ -1481,8 +1459,6 @@ namespace oo_2_0
       SIMTAC,
       SIMUNT
     };
-
-    ActionElectronicWarfareEmploymentCategoryCode ();
 
     ActionElectronicWarfareEmploymentCategoryCode (value v);
 
@@ -1885,8 +1861,6 @@ namespace oo_2_0
       WPNFIR
     };
 
-    ActionEventCategoryCode ();
-
     ActionEventCategoryCode (value v);
 
     ActionEventCategoryCode (const char* v);
@@ -1951,8 +1925,6 @@ namespace oo_2_0
       SOCIAL
     };
 
-    ActionEventDetailClassificationCode ();
-
     ActionEventDetailClassificationCode (value v);
 
     ActionEventDetailClassificationCode (const char* v);
@@ -2008,8 +1980,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    ActionEventDetailCrimeIndicatorCode ();
 
     ActionEventDetailCrimeIndicatorCode (value v);
 
@@ -2076,8 +2046,6 @@ namespace oo_2_0
       UAR
     };
 
-    ActionFunctionalAssociationCategoryCode ();
-
     ActionFunctionalAssociationCategoryCode (value v);
 
     ActionFunctionalAssociationCategoryCode (const char* v);
@@ -2136,8 +2104,6 @@ namespace oo_2_0
       CASP4
     };
 
-    ActionMaritimeEmploymentCoordinatedAirSeaProcedureCode ();
-
     ActionMaritimeEmploymentCoordinatedAirSeaProcedureCode (value v);
 
     ActionMaritimeEmploymentCoordinatedAirSeaProcedureCode (const char* v);
@@ -2194,8 +2160,6 @@ namespace oo_2_0
       LEAD,
       STOP
     };
-
-    ActionMaritimeEmploymentVesselTransitInstructionCode ();
 
     ActionMaritimeEmploymentVesselTransitInstructionCode (value v);
 
@@ -2254,8 +2218,6 @@ namespace oo_2_0
       OTASK
     };
 
-    ActionObjectiveCategoryCode ();
-
     ActionObjectiveCategoryCode (value v);
 
     ActionObjectiveCategoryCode (const char* v);
@@ -2311,8 +2273,6 @@ namespace oo_2_0
       NOS,
       TARGET
     };
-
-    ActionObjectiveItemCategoryCode ();
 
     ActionObjectiveItemCategoryCode (value v);
 
@@ -2382,8 +2342,6 @@ namespace oo_2_0
       VHCLLT
     };
 
-    ActionObjectiveItemMarkingMethodCode ();
-
     ActionObjectiveItemMarkingMethodCode (value v);
 
     ActionObjectiveItemMarkingMethodCode (const char* v);
@@ -2443,8 +2401,6 @@ namespace oo_2_0
       TSHAPE,
       XSHAPE
     };
-
-    ActionObjectiveItemMarkingPanelShapeCode ();
 
     ActionObjectiveItemMarkingPanelShapeCode (value v);
 
@@ -2509,8 +2465,6 @@ namespace oo_2_0
       YELLOW
     };
 
-    ActionObjectiveItemMarkingRecognitionSignalColourCode ();
-
     ActionObjectiveItemMarkingRecognitionSignalColourCode (value v);
 
     ActionObjectiveItemMarkingRecognitionSignalColourCode (const char* v);
@@ -2567,8 +2521,6 @@ namespace oo_2_0
       PRIME,
       SECOND
     };
-
-    ActionObjectiveItemPrimacyCode ();
 
     ActionObjectiveItemPrimacyCode (value v);
 
@@ -2635,8 +2587,6 @@ namespace oo_2_0
       STAYOT
     };
 
-    ActionObjectiveQualifierCode ();
-
     ActionObjectiveQualifierCode (value v);
 
     ActionObjectiveQualifierCode (const char* v);
@@ -2692,8 +2642,6 @@ namespace oo_2_0
       AOTIMG,
       NOS
     };
-
-    ActionObjectiveTypeCategoryCode ();
 
     ActionObjectiveTypeCategoryCode (value v);
 
@@ -2765,8 +2713,6 @@ namespace oo_2_0
       TGTGRP
     };
 
-    ActionObjectiveTypeImageryProductImageTypeCode ();
-
     ActionObjectiveTypeImageryProductImageTypeCode (value v);
 
     ActionObjectiveTypeImageryProductImageTypeCode (const char* v);
@@ -2826,8 +2772,6 @@ namespace oo_2_0
       STMCC,
       STMPC
     };
-
-    ActionReconnaissanceEmploymentImageCoverageModeCode ();
 
     ActionReconnaissanceEmploymentImageCoverageModeCode (value v);
 
@@ -2889,8 +2833,6 @@ namespace oo_2_0
       THRINF,
       VIDSFT
     };
-
-    ActionReconnaissanceEmploymentImageViewQualifierCode ();
 
     ActionReconnaissanceEmploymentImageViewQualifierCode (value v);
 
@@ -2971,8 +2913,6 @@ namespace oo_2_0
       STRIPV
     };
 
-    ActionReconnaissanceEmploymentTypeOfCoverageCode ();
-
     ActionReconnaissanceEmploymentTypeOfCoverageCode (value v);
 
     ActionReconnaissanceEmploymentTypeOfCoverageCode (const char* v);
@@ -3036,8 +2976,6 @@ namespace oo_2_0
       ISRPTD
     };
 
-    ActionReferenceAssociationCategoryCode ();
-
     ActionReferenceAssociationCategoryCode (value v);
 
     ActionReferenceAssociationCategoryCode (const char* v);
@@ -3094,8 +3032,6 @@ namespace oo_2_0
       RT
     };
 
-    ActionResourceCategoryCode ();
-
     ActionResourceCategoryCode (value v);
 
     ActionResourceCategoryCode (const char* v);
@@ -3151,8 +3087,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    ActionResourceCriticalityIndicatorCode ();
 
     ActionResourceCriticalityIndicatorCode (value v);
 
@@ -3213,8 +3147,6 @@ namespace oo_2_0
       RECEMP
     };
 
-    ActionResourceEmploymentCategoryCode ();
-
     ActionResourceEmploymentCategoryCode (value v);
 
     ActionResourceEmploymentCategoryCode (const char* v);
@@ -3271,8 +3203,6 @@ namespace oo_2_0
       ONORD
     };
 
-    ActionResourceEmploymentMethodOfControlCode ();
-
     ActionResourceEmploymentMethodOfControlCode (value v);
 
     ActionResourceEmploymentMethodOfControlCode (const char* v);
@@ -3328,8 +3258,6 @@ namespace oo_2_0
       HIGH,
       LOW
     };
-
-    ActionResourceEmploymentTrajectoryFireCode ();
 
     ActionResourceEmploymentTrajectoryFireCode (value v);
 
@@ -3396,8 +3324,6 @@ namespace oo_2_0
       STAYIN,
       STAYOT
     };
-
-    ActionResourceQualifierCode ();
 
     ActionResourceQualifierCode (value v);
 
@@ -3898,8 +3824,6 @@ namespace oo_2_0
       WLDWSL
     };
 
-    ActionTaskActivityCode ();
-
     ActionTaskActivityCode (value v);
 
     ActionTaskActivityCode (const char* v);
@@ -3957,8 +3881,6 @@ namespace oo_2_0
       RQT,
       TEM
     };
-
-    ActionTaskCategoryCode ();
 
     ActionTaskCategoryCode (value v);
 
@@ -4026,8 +3948,6 @@ namespace oo_2_0
       UNTFRN
     };
 
-    ActionTaskEndQualifierCode ();
-
     ActionTaskEndQualifierCode (value v);
 
     ActionTaskEndQualifierCode (const char* v);
@@ -4084,8 +4004,6 @@ namespace oo_2_0
       BRAVO,
       CHARLE
     };
-
-    ActionTaskEntailedSafetyDegreeCode ();
 
     ActionTaskEntailedSafetyDegreeCode (value v);
 
@@ -4144,8 +4062,6 @@ namespace oo_2_0
       UNACC
     };
 
-    ActionTaskMeteorologicalImpactCode ();
-
     ActionTaskMeteorologicalImpactCode (value v);
 
     ActionTaskMeteorologicalImpactCode (const char* v);
@@ -4202,8 +4118,6 @@ namespace oo_2_0
       TACTCL
     };
 
-    ActionTaskOperationalLevelCode ();
-
     ActionTaskOperationalLevelCode (value v);
 
     ActionTaskOperationalLevelCode (const char* v);
@@ -4259,8 +4173,6 @@ namespace oo_2_0
       COVERT,
       OVERT
     };
-
-    ActionTaskOvertCovertCode ();
 
     ActionTaskOvertCovertCode (value v);
 
@@ -4343,8 +4255,6 @@ namespace oo_2_0
       cxx_5
     };
 
-    ActionTaskPriorityCode ();
-
     ActionTaskPriorityCode (value v);
 
     ActionTaskPriorityCode (const char* v);
@@ -4411,8 +4321,6 @@ namespace oo_2_0
       UNK
     };
 
-    ActionTaskStartQualifierCode ();
-
     ActionTaskStartQualifierCode (value v);
 
     ActionTaskStartQualifierCode (const char* v);
@@ -4471,8 +4379,6 @@ namespace oo_2_0
       RQSSAT
     };
 
-    ActionTaskStatusAmendTimingCode ();
-
     ActionTaskStatusAmendTimingCode (value v);
 
     ActionTaskStatusAmendTimingCode (const char* v);
@@ -4528,8 +4434,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    ActionTaskStatusApprovalIndicatorCode ();
 
     ActionTaskStatusApprovalIndicatorCode (value v);
 
@@ -4587,8 +4491,6 @@ namespace oo_2_0
       PLAN
     };
 
-    ActionTaskStatusCategoryCode ();
-
     ActionTaskStatusCategoryCode (value v);
 
     ActionTaskStatusCategoryCode (const char* v);
@@ -4644,8 +4546,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    ActionTaskStatusPlanningIndicatorCode ();
 
     ActionTaskStatusPlanningIndicatorCode (value v);
 
@@ -4721,8 +4621,6 @@ namespace oo_2_0
       TRNMMW
     };
 
-    ActionTaskStatusProgressCode ();
-
     ActionTaskStatusProgressCode (value v);
 
     ActionTaskStatusProgressCode (const char* v);
@@ -4785,8 +4683,6 @@ namespace oo_2_0
       T
     };
 
-    ActionTaskTimingDayCode ();
-
     ActionTaskTimingDayCode (value v);
 
     ActionTaskTimingDayCode (const char* v);
@@ -4848,8 +4744,6 @@ namespace oo_2_0
       T,
       Y
     };
-
-    ActionTaskTimingHourCode ();
 
     ActionTaskTimingHourCode (value v);
 
@@ -4923,8 +4817,6 @@ namespace oo_2_0
       STRSTR
     };
 
-    ActionTemporalAssociationCategoryCode ();
-
     ActionTemporalAssociationCategoryCode (value v);
 
     ActionTemporalAssociationCategoryCode (const char* v);
@@ -4981,8 +4873,6 @@ namespace oo_2_0
       NOS,
       PHYADR
     };
-
-    AddressCategoryCode ();
 
     AddressCategoryCode (value v);
 
@@ -5042,8 +4932,6 @@ namespace oo_2_0
       AFLREL,
       NSP
     };
-
-    AffiliationCategoryCode ();
 
     AffiliationCategoryCode (value v);
 
@@ -5666,8 +5554,6 @@ namespace oo_2_0
       ZHUANG
     };
 
-    AffiliationEthnicGroupCode ();
-
     AffiliationEthnicGroupCode (value v);
 
     AffiliationEthnicGroupCode (const char* v);
@@ -5727,8 +5613,6 @@ namespace oo_2_0
       NOS,
       TERRST
     };
-
-    AffiliationFunctionalGroupCode ();
 
     AffiliationFunctionalGroupCode (value v);
 
@@ -6029,8 +5913,6 @@ namespace oo_2_0
       ZWE
     };
 
-    AffiliationGeopoliticalCode ();
-
     AffiliationGeopoliticalCode (value v);
 
     AffiliationGeopoliticalCode (const char* v);
@@ -6198,8 +6080,6 @@ namespace oo_2_0
       ZRSTRN
     };
 
-    AffiliationReligionCode ();
-
     AffiliationReligionCode (value v);
 
     AffiliationReligionCode (const char* v);
@@ -6257,8 +6137,6 @@ namespace oo_2_0
       MIL
     };
 
-    AirRouteSegmentCivilMilitaryCode ();
-
     AirRouteSegmentCivilMilitaryCode (value v);
 
     AirRouteSegmentCivilMilitaryCode (const char* v);
@@ -6314,8 +6192,6 @@ namespace oo_2_0
       DOMSTC,
       INTERN
     };
-
-    AirRouteSegmentInternationalRouteCode ();
 
     AirRouteSegmentInternationalRouteCode (value v);
 
@@ -6376,8 +6252,6 @@ namespace oo_2_0
       cxx_5NM,
       cxx_6NM
     };
-
-    AirRouteSegmentRequiredNavigationPerformanceCode ();
 
     AirRouteSegmentRequiredNavigationPerformanceCode (value v);
 
@@ -6444,8 +6318,6 @@ namespace oo_2_0
       SATEL
     };
 
-    AircraftTypeAirframeDesignCode ();
-
     AircraftTypeAirframeDesignCode (value v);
 
     AircraftTypeAirframeDesignCode (const char* v);
@@ -6506,8 +6378,6 @@ namespace oo_2_0
       SPACEM
     };
 
-    AircraftTypeCategoryCode ();
-
     AircraftTypeCategoryCode (value v);
 
     AircraftTypeCategoryCode (const char* v);
@@ -6565,8 +6435,6 @@ namespace oo_2_0
       NKN,
       SHORT
     };
-
-    AircraftTypeDesignRangeCode ();
 
     AircraftTypeDesignRangeCode (value v);
 
@@ -6628,8 +6496,6 @@ namespace oo_2_0
       SUPPRT
     };
 
-    AircraftTypeDesignRoleCode ();
-
     AircraftTypeDesignRoleCode (value v);
 
     AircraftTypeDesignRoleCode (const char* v);
@@ -6688,8 +6554,6 @@ namespace oo_2_0
       NKN,
       NOS
     };
-
-    AircraftTypeLoadCategoryCode ();
 
     AircraftTypeLoadCategoryCode (value v);
 
@@ -6806,8 +6670,6 @@ namespace oo_2_0
       UTILTY
     };
 
-    AircraftTypeMainPurposeCode ();
-
     AircraftTypeMainPurposeCode (value v);
 
     AircraftTypeMainPurposeCode (const char* v);
@@ -6867,8 +6729,6 @@ namespace oo_2_0
       UNMRP
     };
 
-    AircraftTypeManningCode ();
-
     AircraftTypeManningCode (value v);
 
     AircraftTypeManningCode (const char* v);
@@ -6925,8 +6785,6 @@ namespace oo_2_0
       MIL,
       NKN
     };
-
-    AircraftTypeMilitaryCivilianCode ();
 
     AircraftTypeMilitaryCivilianCode (value v);
 
@@ -11740,8 +11598,6 @@ namespace oo_2_0
       ZLNSOK
     };
 
-    AircraftTypeModelCode ();
-
     AircraftTypeModelCode (value v);
 
     AircraftTypeModelCode (const char* v);
@@ -11801,8 +11657,6 @@ namespace oo_2_0
       VTOL
     };
 
-    AircraftTypeTakeoffAndLandingCode ();
-
     AircraftTypeTakeoffAndLandingCode (value v);
 
     AircraftTypeTakeoffAndLandingCode (const char* v);
@@ -11859,8 +11713,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    AircraftTypeTrainingCategoryCode ();
 
     AircraftTypeTrainingCategoryCode (value v);
 
@@ -11919,8 +11771,6 @@ namespace oo_2_0
       NKN
     };
 
-    AircraftTypeWeatherQualifierCode ();
-
     AircraftTypeWeatherQualifierCode (value v);
 
     AircraftTypeWeatherQualifierCode (const char* v);
@@ -11977,8 +11827,6 @@ namespace oo_2_0
       YES
     };
 
-    AirfieldAirTrafficControlPresenceIndicatorCode ();
-
     AirfieldAirTrafficControlPresenceIndicatorCode (value v);
 
     AirfieldAirTrafficControlPresenceIndicatorCode (const char* v);
@@ -12034,8 +11882,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    AirfieldInstrumentLandingSystemPresenceIndicatorCode ();
 
     AirfieldInstrumentLandingSystemPresenceIndicatorCode (value v);
 
@@ -12095,8 +11941,6 @@ namespace oo_2_0
       NKN
     };
 
-    AirfieldStatusDayOperationsCode ();
-
     AirfieldStatusDayOperationsCode (value v);
 
     AirfieldStatusDayOperationsCode (const char* v);
@@ -12152,8 +11996,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    AirfieldStatusEvaluationIndicatorCode ();
 
     AirfieldStatusEvaluationIndicatorCode (value v);
 
@@ -12211,8 +12053,6 @@ namespace oo_2_0
       NKN,
       VFR
     };
-
-    AirfieldStatusFlightSupportCategoryCode ();
 
     AirfieldStatusFlightSupportCategoryCode (value v);
 
@@ -12272,8 +12112,6 @@ namespace oo_2_0
       D
     };
 
-    AirfieldTypeUseCategoryCode ();
-
     AirfieldTypeUseCategoryCode (value v);
 
     AirfieldTypeUseCategoryCode (const char* v);
@@ -12329,8 +12167,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    AirfieldVisualNavigationalAidIndicatorCode ();
 
     AirfieldVisualNavigationalAidIndicatorCode (value v);
 
@@ -12434,8 +12270,6 @@ namespace oo_2_0
       TRPEDO
     };
 
-    AmmunitionTypeCategoryCode ();
-
     AmmunitionTypeCategoryCode (value v);
 
     AmmunitionTypeCategoryCode (const char* v);
@@ -12494,8 +12328,6 @@ namespace oo_2_0
       WHITE,
       YELLOW
     };
-
-    AmmunitionTypeExerciseMineFlareColourCode ();
 
     AmmunitionTypeExerciseMineFlareColourCode (value v);
 
@@ -12576,8 +12408,6 @@ namespace oo_2_0
       VERSEN
     };
 
-    AmmunitionTypeMineMaritimeFiringCode ();
-
     AmmunitionTypeMineMaritimeFiringCode (value v);
 
     AmmunitionTypeMineMaritimeFiringCode (const char* v);
@@ -12653,8 +12483,6 @@ namespace oo_2_0
       STBLSM
     };
 
-    AnchorageBottomTypeCode ();
-
     AnchorageBottomTypeCode (value v);
 
     AnchorageBottomTypeCode (const char* v);
@@ -12712,8 +12540,6 @@ namespace oo_2_0
       FXDPST,
       NOS
     };
-
-    AnchorageMooringsTypeCode ();
 
     AnchorageMooringsTypeCode (value v);
 
@@ -12779,8 +12605,6 @@ namespace oo_2_0
       SECOND
     };
 
-    AnglePrecisionCode ();
-
     AnglePrecisionCode (value v);
 
     AnglePrecisionCode (const char* v);
@@ -12840,8 +12664,6 @@ namespace oo_2_0
       T
     };
 
-    ApproachDirectionCategoryCode ();
-
     ApproachDirectionCategoryCode (value v);
 
     ApproachDirectionCategoryCode (const char* v);
@@ -12897,8 +12719,6 @@ namespace oo_2_0
       END,
       START
     };
-
-    AssociationStatusCategoryCode ();
 
     AssociationStatusCategoryCode (value v);
 
@@ -12956,8 +12776,6 @@ namespace oo_2_0
       B,
       C
     };
-
-    AtmosphereInversionLayerCode ();
 
     AtmosphereInversionLayerCode (value v);
 
@@ -13024,8 +12842,6 @@ namespace oo_2_0
       WRMFRT
     };
 
-    AtmospherePressureSystemCategoryCode ();
-
     AtmospherePressureSystemCategoryCode (value v);
 
     AtmospherePressureSystemCategoryCode (const char* v);
@@ -13083,8 +12899,6 @@ namespace oo_2_0
       STABLE,
       UNSTAB
     };
-
-    AtmosphereTemperatureGradientCode ();
 
     AtmosphereTemperatureGradientCode (value v);
 
@@ -13145,8 +12959,6 @@ namespace oo_2_0
       RORO
     };
 
-    BerthMajorVesselClassCode ();
-
     BerthMajorVesselClassCode (value v);
 
     BerthMajorVesselClassCode (const char* v);
@@ -13203,8 +13015,6 @@ namespace oo_2_0
       YES
     };
 
-    BerthRailAvailabilityIndicatorCode ();
-
     BerthRailAvailabilityIndicatorCode (value v);
 
     BerthRailAvailabilityIndicatorCode (const char* v);
@@ -13260,8 +13070,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    BerthRollOnRollOffIndicatorCode ();
 
     BerthRollOnRollOffIndicatorCode (value v);
 
@@ -13323,8 +13131,6 @@ namespace oo_2_0
       VIRAL
     };
 
-    BiologicalMaterielTypeCategoryCode ();
-
     BiologicalMaterielTypeCategoryCode (value v);
 
     BiologicalMaterielTypeCategoryCode (const char* v);
@@ -13381,8 +13187,6 @@ namespace oo_2_0
       NOS,
       RCKETS
     };
-
-    BiologicalMaterielTypeSubcategoryCode ();
 
     BiologicalMaterielTypeSubcategoryCode (value v);
 
@@ -13456,8 +13260,6 @@ namespace oo_2_0
       TRUSS
     };
 
-    BridgeTypeDesignTypeCode ();
-
     BridgeTypeDesignTypeCode (value v);
 
     BridgeTypeDesignTypeCode (const char* v);
@@ -13519,8 +13321,6 @@ namespace oo_2_0
       VEHCLE
     };
 
-    BridgeUsageCode ();
-
     BridgeUsageCode (value v);
 
     BridgeUsageCode (const char* v);
@@ -13576,8 +13376,6 @@ namespace oo_2_0
       COLOC,
       COMPNT
     };
-
-    CandidateTargetDetailAssociationCategoryCode ();
 
     CandidateTargetDetailAssociationCategoryCode (value v);
 
@@ -13636,8 +13434,6 @@ namespace oo_2_0
       NOTAPP
     };
 
-    CandidateTargetDetailAuthorisationApprovalCode ();
-
     CandidateTargetDetailAuthorisationApprovalCode (value v);
 
     CandidateTargetDetailAuthorisationApprovalCode (const char* v);
@@ -13693,8 +13489,6 @@ namespace oo_2_0
       CTDITM,
       CTDTYP
     };
-
-    CandidateTargetDetailCategoryCode ();
 
     CandidateTargetDetailCategoryCode (value v);
 
@@ -13767,8 +13561,6 @@ namespace oo_2_0
       SUPPRS
     };
 
-    CandidateTargetDetailFocusTypeCode ();
-
     CandidateTargetDetailFocusTypeCode (value v);
 
     CandidateTargetDetailFocusTypeCode (const char* v);
@@ -13828,8 +13620,6 @@ namespace oo_2_0
       SITENR
     };
 
-    CandidateTargetDetailSchemeCode ();
-
     CandidateTargetDetailSchemeCode (value v);
 
     CandidateTargetDetailSchemeCode (const char* v);
@@ -13888,8 +13678,6 @@ namespace oo_2_0
       REPLAC
     };
 
-    CandidateTargetListAssociationCategoryCode ();
-
     CandidateTargetListAssociationCategoryCode (value v);
 
     CandidateTargetListAssociationCategoryCode (const char* v);
@@ -13945,8 +13733,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    CandidateTargetListAuthorisationIndicatorCode ();
 
     CandidateTargetListAuthorisationIndicatorCode (value v);
 
@@ -14012,8 +13798,6 @@ namespace oo_2_0
       TRANSM
     };
 
-    CapabilityCategoryCode ();
-
     CapabilityCategoryCode (value v);
 
     CapabilityCategoryCode (const char* v);
@@ -14071,8 +13855,6 @@ namespace oo_2_0
       N
     };
 
-    CapabilityDayNightCode ();
-
     CapabilityDayNightCode (value v);
 
     CapabilityDayNightCode (const char* v);
@@ -14129,8 +13911,6 @@ namespace oo_2_0
       ISDFND,
       ISDSCR
     };
-
-    CapabilityReferenceAssociationCategoryCode ();
 
     CapabilityReferenceAssociationCategoryCode (value v);
 
@@ -14220,8 +14000,6 @@ namespace oo_2_0
       UNTLS,
       WATT
     };
-
-    CapabilityUnitOfMeasureCode ();
 
     CapabilityUnitOfMeasureCode (value v);
 
@@ -14316,8 +14094,6 @@ namespace oo_2_0
       WOUND
     };
 
-    CargoCategoryCode ();
-
     CargoCategoryCode (value v);
 
     CargoCategoryCode (const char* v);
@@ -14374,8 +14150,6 @@ namespace oo_2_0
       LOCCIV,
       OPFOR
     };
-
-    CasualtyGroupCode ();
 
     CasualtyGroupCode (value v);
 
@@ -14445,8 +14219,6 @@ namespace oo_2_0
       RDSPTR
     };
 
-    CbrnEquipmentTypeCategoryCode ();
-
     CbrnEquipmentTypeCategoryCode (value v);
 
     CbrnEquipmentTypeCategoryCode (const char* v);
@@ -14502,8 +14274,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    CbrnEventAlarmResultIndicatorCode ();
 
     CbrnEventAlarmResultIndicatorCode (value v);
 
@@ -14563,8 +14333,6 @@ namespace oo_2_0
       UNROTA
     };
 
-    CbrnEventCategoryCode ();
-
     CbrnEventCategoryCode (value v);
 
     CbrnEventCategoryCode (const char* v);
@@ -14620,8 +14388,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    CbrnEventConfirmationTestIndicatorCode ();
 
     CbrnEventConfirmationTestIndicatorCode (value v);
 
@@ -14695,8 +14461,6 @@ namespace oo_2_0
       WST
     };
 
-    CbrnEventMaterielContainerTypeCode ();
-
     CbrnEventMaterielContainerTypeCode (value v);
 
     CbrnEventMaterielContainerTypeCode (const char* v);
@@ -14769,8 +14533,6 @@ namespace oo_2_0
       SURBUR
     };
 
-    CbrnEventSubcategoryCode ();
-
     CbrnEventSubcategoryCode (value v);
 
     CbrnEventSubcategoryCode (const char* v);
@@ -14835,8 +14597,6 @@ namespace oo_2_0
       NKN
     };
 
-    ChemicalBiologicalEventCategoryCode ();
-
     ChemicalBiologicalEventCategoryCode (value v);
 
     ChemicalBiologicalEventCategoryCode (const char* v);
@@ -14894,8 +14654,6 @@ namespace oo_2_0
       SML,
       XLG
     };
-
-    ChemicalBiologicalEventSpillSizeCode ();
 
     ChemicalBiologicalEventSpillSizeCode (value v);
 
@@ -14964,8 +14722,6 @@ namespace oo_2_0
       VAGENT,
       VOMTNG
     };
-
-    ChemicalMaterielTypeCategoryCode ();
 
     ChemicalMaterielTypeCategoryCode (value v);
 
@@ -15042,8 +14798,6 @@ namespace oo_2_0
       VX
     };
 
-    ChemicalMaterielTypeSubcategoryCode ();
-
     ChemicalMaterielTypeSubcategoryCode (value v);
 
     ChemicalMaterielTypeSubcategoryCode (const char* v);
@@ -15111,8 +14865,6 @@ namespace oo_2_0
       RELATH
     };
 
-    CivilianPostTypeCategoryCode ();
-
     CivilianPostTypeCategoryCode (value v);
 
     CivilianPostTypeCategoryCode (const char* v);
@@ -15177,8 +14929,6 @@ namespace oo_2_0
       cxx_8
     };
 
-    CloudCoverAverageCoverageCode ();
-
     CloudCoverAverageCoverageCode (value v);
 
     CloudCoverAverageCoverageCode (const char* v);
@@ -15235,8 +14985,6 @@ namespace oo_2_0
       RDACCL,
       SMOKE
     };
-
-    CloudCoverCategoryCode ();
 
     CloudCoverCategoryCode (value v);
 
@@ -15314,8 +15062,6 @@ namespace oo_2_0
       WAT
     };
 
-    ConsumableMaterielTypeCategoryCode ();
-
     ConsumableMaterielTypeCategoryCode (value v);
 
     ConsumableMaterielTypeCategoryCode (const char* v);
@@ -15378,8 +15124,6 @@ namespace oo_2_0
       RAD,
       TOX
     };
-
-    ConsumableMaterielTypeHazardCode ();
 
     ConsumableMaterielTypeHazardCode (value v);
 
@@ -15450,8 +15194,6 @@ namespace oo_2_0
       ROUND,
       UNT
     };
-
-    ConsumableMaterielTypeIssuingElementCode ();
 
     ConsumableMaterielTypeIssuingElementCode (value v);
 
@@ -15525,8 +15267,6 @@ namespace oo_2_0
       KG
     };
 
-    ConsumableMaterielTypeIssuingUnitOfMeasureCode ();
-
     ConsumableMaterielTypeIssuingUnitOfMeasureCode (value v);
 
     ConsumableMaterielTypeIssuingUnitOfMeasureCode (const char* v);
@@ -15582,8 +15322,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    ConsumableMaterielTypePerishabilityIndicatorCode ();
 
     ConsumableMaterielTypePerishabilityIndicatorCode (value v);
 
@@ -15712,8 +15450,6 @@ namespace oo_2_0
       WTRMED,
       WTROTH
     };
-
-    ConsumableMaterielTypeSubcategoryCode ();
 
     ConsumableMaterielTypeSubcategoryCode (value v);
 
@@ -15891,8 +15627,6 @@ namespace oo_2_0
       NOS
     };
 
-    ConsumableMaterielTypeUnitedNationsNumberCode ();
-
     ConsumableMaterielTypeUnitedNationsNumberCode (value v);
 
     ConsumableMaterielTypeUnitedNationsNumberCode (const char* v);
@@ -15960,8 +15694,6 @@ namespace oo_2_0
       RRRCAP
     };
 
-    ContextAssessmentLimitingFactorsCode ();
-
     ContextAssessmentLimitingFactorsCode (value v);
 
     ContextAssessmentLimitingFactorsCode (const char* v);
@@ -16019,8 +15751,6 @@ namespace oo_2_0
       SPPLMN,
       SPRCDS
     };
-
-    ContextAssociationCategoryCode ();
 
     ContextAssociationCategoryCode (value v);
 
@@ -16084,8 +15814,6 @@ namespace oo_2_0
       PREDCT
     };
 
-    ContextCategoryCode ();
-
     ContextCategoryCode (value v);
 
     ContextCategoryCode (const char* v);
@@ -16142,8 +15870,6 @@ namespace oo_2_0
       REMOVL
     };
 
-    ContextElementStatusCategoryCode ();
-
     ContextElementStatusCategoryCode (value v);
 
     ContextElementStatusCategoryCode (const char* v);
@@ -16199,8 +15925,6 @@ namespace oo_2_0
       INCLDE,
       ISRELV
     };
-
-    ContextObjectItemAssociationCategoryCode ();
 
     ContextObjectItemAssociationCategoryCode (value v);
 
@@ -16262,8 +15986,6 @@ namespace oo_2_0
       SUPR
     };
 
-    ContextReportingDataAssociationCategoryCode ();
-
     ContextReportingDataAssociationCategoryCode (value v);
 
     ContextReportingDataAssociationCategoryCode (const char* v);
@@ -16323,8 +16045,6 @@ namespace oo_2_0
       RTESEG
     };
 
-    ControlFeatureCategoryCode ();
-
     ControlFeatureCategoryCode (value v);
 
     ControlFeatureCategoryCode (const char* v);
@@ -16381,8 +16101,6 @@ namespace oo_2_0
       LOW,
       MEDIUM
     };
-
-    ControlFeatureStatusCbrnThreatLevelCode ();
 
     ControlFeatureStatusCbrnThreatLevelCode (value v);
 
@@ -16444,8 +16162,6 @@ namespace oo_2_0
       UNDINV
     };
 
-    ControlFeatureStatusInvestigationStatusCode ();
-
     ControlFeatureStatusInvestigationStatusCode (value v);
 
     ControlFeatureStatusInvestigationStatusCode (const char* v);
@@ -16503,8 +16219,6 @@ namespace oo_2_0
       NONE,
       SECURD
     };
-
-    ControlFeatureStatusSecurityStatusCode ();
 
     ControlFeatureStatusSecurityStatusCode (value v);
 
@@ -16847,8 +16561,6 @@ namespace oo_2_0
       ZONEII
     };
 
-    ControlFeatureTypeCategoryCode ();
-
     ControlFeatureTypeCategoryCode (value v);
 
     ControlFeatureTypeCategoryCode (const char* v);
@@ -16911,8 +16623,6 @@ namespace oo_2_0
       STATE1,
       STATE2
     };
-
-    DemolitionStatusCode ();
 
     DemolitionStatusCode (value v);
 
@@ -16985,8 +16695,6 @@ namespace oo_2_0
       WSW
     };
 
-    DirectionCode ();
-
     DirectionCode (value v);
 
     DirectionCode (const char* v);
@@ -17058,8 +16766,6 @@ namespace oo_2_0
       YARD
     };
 
-    DistancePrecisionCode ();
-
     DistancePrecisionCode (value v);
 
     DistancePrecisionCode (const char* v);
@@ -17116,8 +16822,6 @@ namespace oo_2_0
       M,
       S
     };
-
-    DryDockMarineRailwaySizeCode ();
 
     DryDockMarineRailwaySizeCode (value v);
 
@@ -17184,8 +16888,6 @@ namespace oo_2_0
       RADAR,
       SEN
     };
-
-    ElectronicEquipmentTypeCategoryCode ();
 
     ElectronicEquipmentTypeCategoryCode (value v);
 
@@ -17359,8 +17061,6 @@ namespace oo_2_0
       WCSAIR
     };
 
-    ElectronicEquipmentTypeSubcategoryCode ();
-
     ElectronicEquipmentTypeSubcategoryCode (value v);
 
     ElectronicEquipmentTypeSubcategoryCode (const char* v);
@@ -17418,8 +17118,6 @@ namespace oo_2_0
       DEMO
     };
 
-    EngineeringCapabilityCategoryCode ();
-
     EngineeringCapabilityCategoryCode (value v);
 
     EngineeringCapabilityCategoryCode (const char* v);
@@ -17475,8 +17173,6 @@ namespace oo_2_0
       RATE,
       TIME
     };
-
-    EngineeringCapabilityDescriptorCode ();
 
     EngineeringCapabilityDescriptorCode (value v);
 
@@ -17557,8 +17253,6 @@ namespace oo_2_0
       TFBRID
     };
 
-    EngineeringEquipmentTypeCategoryCode ();
-
     EngineeringEquipmentTypeCategoryCode (value v);
 
     EngineeringEquipmentTypeCategoryCode (const char* v);
@@ -17623,8 +17317,6 @@ namespace oo_2_0
       WEPTYP
     };
 
-    EquipmentTypeCategoryCode ();
-
     EquipmentTypeCategoryCode (value v);
 
     EquipmentTypeCategoryCode (const char* v);
@@ -17681,8 +17373,6 @@ namespace oo_2_0
       MEDTHT,
       RETDTY
     };
-
-    EvacuationDestinationCode ();
 
     EvacuationDestinationCode (value v);
 
@@ -17744,8 +17434,6 @@ namespace oo_2_0
       SUPPLY,
       TRNPTN
     };
-
-    ExecutiveMilitaryOrganisationTypeCategoryCode ();
 
     ExecutiveMilitaryOrganisationTypeCategoryCode (value v);
 
@@ -17817,8 +17505,6 @@ namespace oo_2_0
       RUNWAY,
       SLPWAY
     };
-
-    FacilityCategoryCode ();
 
     FacilityCategoryCode (value v);
 
@@ -17907,8 +17593,6 @@ namespace oo_2_0
       WOOD
     };
 
-    FacilityPrimaryConstructionMaterialCode ();
-
     FacilityPrimaryConstructionMaterialCode (value v);
 
     FacilityPrimaryConstructionMaterialCode (const char* v);
@@ -17967,8 +17651,6 @@ namespace oo_2_0
       NOS
     };
 
-    FacilityStatusCategoryCode ();
-
     FacilityStatusCategoryCode (value v);
 
     FacilityStatusCategoryCode (const char* v);
@@ -18025,8 +17707,6 @@ namespace oo_2_0
       HOT
     };
 
-    FacilityStatusEnemyActivityConditionCode ();
-
     FacilityStatusEnemyActivityConditionCode (value v);
 
     FacilityStatusEnemyActivityConditionCode (const char* v);
@@ -18082,8 +17762,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    FacilityStatusOccupationProgramIndicatorCode ();
 
     FacilityStatusOccupationProgramIndicatorCode (value v);
 
@@ -18144,8 +17822,6 @@ namespace oo_2_0
       SOPS,
       TNOPS
     };
-
-    FacilityStatusOperationalStatusCode ();
 
     FacilityStatusOperationalStatusCode (value v);
 
@@ -18220,8 +17896,6 @@ namespace oo_2_0
       UNCNST
     };
 
-    FacilityStatusOperationalStatusQualifierCode ();
-
     FacilityStatusOperationalStatusQualifierCode (value v);
 
     FacilityStatusOperationalStatusQualifierCode (const char* v);
@@ -18277,8 +17951,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    FacilityStatusReserveIndicatorCode ();
 
     FacilityStatusReserveIndicatorCode (value v);
 
@@ -18337,8 +18009,6 @@ namespace oo_2_0
       NONE,
       SECURD
     };
-
-    FacilityStatusSecurityStatusCode ();
 
     FacilityStatusSecurityStatusCode (value v);
 
@@ -18650,8 +18320,6 @@ namespace oo_2_0
       XRR
     };
 
-    FacilityTypeCategoryCode ();
-
     FacilityTypeCategoryCode (value v);
 
     FacilityTypeCategoryCode (const char* v);
@@ -18709,8 +18377,6 @@ namespace oo_2_0
       MF,
       NOS
     };
-
-    FeatureCategoryCode ();
 
     FeatureCategoryCode (value v);
 
@@ -18770,8 +18436,6 @@ namespace oo_2_0
       NOS
     };
 
-    FeatureTypeCategoryCode ();
-
     FeatureTypeCategoryCode (value v);
 
     FeatureTypeCategoryCode (const char* v);
@@ -18827,8 +18491,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    FeintIndicatorCode ();
 
     FeintIndicatorCode (value v);
 
@@ -18893,8 +18555,6 @@ namespace oo_2_0
       SEASEA
     };
 
-    FireCapabilityCategoryCode ();
-
     FireCapabilityCategoryCode (value v);
 
     FireCapabilityCategoryCode (const char* v);
@@ -18954,8 +18614,6 @@ namespace oo_2_0
       SFTDST,
       SSTRTF
     };
-
-    FireCapabilityDescriptorCode ();
 
     FireCapabilityDescriptorCode (value v);
 
@@ -19017,8 +18675,6 @@ namespace oo_2_0
       NUC
     };
 
-    FireCapabilityWeaponTypeCode ();
-
     FireCapabilityWeaponTypeCode (value v);
 
     FireCapabilityWeaponTypeCode (const char* v);
@@ -19075,8 +18731,6 @@ namespace oo_2_0
       MALE,
       NKN
     };
-
-    GenderCode ();
 
     GenderCode (value v);
 
@@ -19137,8 +18791,6 @@ namespace oo_2_0
       ARMWRS,
       NOPENT
     };
-
-    GeographicFeatureBottomHardnessCode ();
 
     GeographicFeatureBottomHardnessCode (value v);
 
@@ -19201,8 +18853,6 @@ namespace oo_2_0
       SNOW
     };
 
-    GeographicFeatureSolidSurfaceCompositionCode ();
-
     GeographicFeatureSolidSurfaceCompositionCode (value v);
 
     GeographicFeatureSolidSurfaceCompositionCode (const char* v);
@@ -19260,8 +18910,6 @@ namespace oo_2_0
       SLDSRF
     };
 
-    GeographicFeatureStatusCategoryCode ();
-
     GeographicFeatureStatusCategoryCode (value v);
 
     GeographicFeatureStatusCategoryCode (const char* v);
@@ -19317,8 +18965,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    GeographicFeatureStatusSurfaceRecirculationIndicatorCode ();
 
     GeographicFeatureStatusSurfaceRecirculationIndicatorCode (value v);
 
@@ -19376,8 +19022,6 @@ namespace oo_2_0
       NOS,
       SLDSRF
     };
-
-    GeographicFeatureSurfaceCategoryCode ();
 
     GeographicFeatureSurfaceCategoryCode (value v);
 
@@ -19440,8 +19084,6 @@ namespace oo_2_0
       URBAN
     };
 
-    GeographicFeatureTerrainCode ();
-
     GeographicFeatureTerrainCode (value v);
 
     GeographicFeatureTerrainCode (const char* v);
@@ -19503,8 +19145,6 @@ namespace oo_2_0
       SNOWIC,
       WETLND
     };
-
-    GeographicFeatureTypeCategoryCode ();
 
     GeographicFeatureTypeCategoryCode (value v);
 
@@ -19629,8 +19269,6 @@ namespace oo_2_0
       WATRFL
     };
 
-    GeographicFeatureTypeSubcategoryCode ();
-
     GeographicFeatureTypeSubcategoryCode (value v);
 
     GeographicFeatureTypeSubcategoryCode (const char* v);
@@ -19687,8 +19325,6 @@ namespace oo_2_0
       SPHVOL,
       SURVOL
     };
-
-    GeometricVolumeCategoryCode ();
 
     GeometricVolumeCategoryCode (value v);
 
@@ -19749,8 +19385,6 @@ namespace oo_2_0
       NOS
     };
 
-    GovernmentOrganisationTypeCategoryCode ();
-
     GovernmentOrganisationTypeCategoryCode (value v);
 
     GovernmentOrganisationTypeCategoryCode (const char* v);
@@ -19809,8 +19443,6 @@ namespace oo_2_0
       MIXED,
       NKN
     };
-
-    GroupCharacteristicAgeGroupCode ();
 
     GroupCharacteristicAgeGroupCode (value v);
 
@@ -19973,8 +19605,6 @@ namespace oo_2_0
       NOS
     };
 
-    GroupCharacteristicMaladyCode ();
-
     GroupCharacteristicMaladyCode (value v);
 
     GroupCharacteristicMaladyCode (const char* v);
@@ -20030,8 +19660,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    GroupCharacteristicMaladyTransmissibilityIndicatorCode ();
 
     GroupCharacteristicMaladyTransmissibilityIndicatorCode (value v);
 
@@ -20090,8 +19718,6 @@ namespace oo_2_0
       T3,
       T4
     };
-
-    GroupCharacteristicTriageCode ();
 
     GroupCharacteristicTriageCode (value v);
 
@@ -20168,8 +19794,6 @@ namespace oo_2_0
       WRITER
     };
 
-    GroupOrganisationTypeCategoryCode ();
-
     GroupOrganisationTypeCategoryCode (value v);
 
     GroupOrganisationTypeCategoryCode (const char* v);
@@ -20227,8 +19851,6 @@ namespace oo_2_0
       LOADUN,
       UNLOAD
     };
-
-    HandlingCapabilityActionCode ();
 
     HandlingCapabilityActionCode (value v);
 
@@ -20292,8 +19914,6 @@ namespace oo_2_0
       NEQLMT
     };
 
-    HandlingCapabilityDescriptorCode ();
-
     HandlingCapabilityDescriptorCode (value v);
 
     HandlingCapabilityDescriptorCode (const char* v);
@@ -20349,8 +19969,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    HarbourAirportNearIndicatorCode ();
 
     HarbourAirportNearIndicatorCode (value v);
 
@@ -20408,8 +20026,6 @@ namespace oo_2_0
       YES
     };
 
-    HarbourBiologicallySecureAvailabilityIndicatorCode ();
-
     HarbourBiologicallySecureAvailabilityIndicatorCode (value v);
 
     HarbourBiologicallySecureAvailabilityIndicatorCode (const char* v);
@@ -20465,8 +20081,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    HarbourConvoyMarshallingIndicatorCode ();
 
     HarbourConvoyMarshallingIndicatorCode (value v);
 
@@ -20524,8 +20138,6 @@ namespace oo_2_0
       YES
     };
 
-    HarbourDegaussingIndicatorCode ();
-
     HarbourDegaussingIndicatorCode (value v);
 
     HarbourDegaussingIndicatorCode (const char* v);
@@ -20581,8 +20193,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    HarbourDirtyBallastIndicatorCode ();
 
     HarbourDirtyBallastIndicatorCode (value v);
 
@@ -20640,8 +20250,6 @@ namespace oo_2_0
       YES
     };
 
-    HarbourEntranceRestrictionsIceIndicatorCode ();
-
     HarbourEntranceRestrictionsIceIndicatorCode (value v);
 
     HarbourEntranceRestrictionsIceIndicatorCode (const char* v);
@@ -20698,8 +20306,6 @@ namespace oo_2_0
       YES
     };
 
-    HarbourEntranceRestrictionsSwellIndicatorCode ();
-
     HarbourEntranceRestrictionsSwellIndicatorCode (value v);
 
     HarbourEntranceRestrictionsSwellIndicatorCode (const char* v);
@@ -20755,8 +20361,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    HarbourEstimatedTimeOfArrivalIndicatorCode ();
 
     HarbourEstimatedTimeOfArrivalIndicatorCode (value v);
 
@@ -20815,8 +20419,6 @@ namespace oo_2_0
       NOS
     };
 
-    HarbourFireFightingCapabilityCode ();
-
     HarbourFireFightingCapabilityCode (value v);
 
     HarbourFireFightingCapabilityCode (const char* v);
@@ -20872,8 +20474,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    HarbourFireFightingIndicatorCode ();
 
     HarbourFireFightingIndicatorCode (value v);
 
@@ -20931,8 +20531,6 @@ namespace oo_2_0
       YES
     };
 
-    HarbourFirstPortOfEntryIndicatorCode ();
-
     HarbourFirstPortOfEntryIndicatorCode (value v);
 
     HarbourFirstPortOfEntryIndicatorCode (const char* v);
@@ -20988,8 +20586,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    HarbourFreshWaterAvailabilityIndicatorCode ();
 
     HarbourFreshWaterAvailabilityIndicatorCode (value v);
 
@@ -21047,8 +20643,6 @@ namespace oo_2_0
       YES
     };
 
-    HarbourLashIndicatorCode ();
-
     HarbourLashIndicatorCode (value v);
 
     HarbourLashIndicatorCode (const char* v);
@@ -21104,8 +20698,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    HarbourLighterageAvailabilityIndicatorCode ();
 
     HarbourLighterageAvailabilityIndicatorCode (value v);
 
@@ -21163,8 +20755,6 @@ namespace oo_2_0
       YES
     };
 
-    HarbourOverheadLimitsIndicatorCode ();
-
     HarbourOverheadLimitsIndicatorCode (value v);
 
     HarbourOverheadLimitsIndicatorCode (const char* v);
@@ -21220,8 +20810,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    HarbourPassengerHandlingIndicatorCode ();
 
     HarbourPassengerHandlingIndicatorCode (value v);
 
@@ -21280,8 +20868,6 @@ namespace oo_2_0
       TEMPRY
     };
 
-    HarbourPersistenceCode ();
-
     HarbourPersistenceCode (value v);
 
     HarbourPersistenceCode (const char* v);
@@ -21337,8 +20923,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    HarbourPilotageAvailabilityIndicatorCode ();
 
     HarbourPilotageAvailabilityIndicatorCode (value v);
 
@@ -21396,8 +20980,6 @@ namespace oo_2_0
       YES
     };
 
-    HarbourPilotageRequirementIndicatorCode ();
-
     HarbourPilotageRequirementIndicatorCode (value v);
 
     HarbourPilotageRequirementIndicatorCode (const char* v);
@@ -21453,8 +21035,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    HarbourRefuellingAvailabilityIndicatorCode ();
 
     HarbourRefuellingAvailabilityIndicatorCode (value v);
 
@@ -21514,8 +21094,6 @@ namespace oo_2_0
       TNKRRD
     };
 
-    HarbourRefuellingTypeCode ();
-
     HarbourRefuellingTypeCode (value v);
 
     HarbourRefuellingTypeCode (const char* v);
@@ -21574,8 +21152,6 @@ namespace oo_2_0
       P
     };
 
-    HarbourShelterQualityCode ();
-
     HarbourShelterQualityCode (value v);
 
     HarbourShelterQualityCode (const char* v);
@@ -21631,8 +21207,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    HarbourTankerFacilitiesIndicatorCode ();
 
     HarbourTankerFacilitiesIndicatorCode (value v);
 
@@ -21690,8 +21264,6 @@ namespace oo_2_0
       YES
     };
 
-    HarbourTransitAccommodationIndicatorCode ();
-
     HarbourTransitAccommodationIndicatorCode (value v);
 
     HarbourTransitAccommodationIndicatorCode (const char* v);
@@ -21748,8 +21320,6 @@ namespace oo_2_0
       YES
     };
 
-    HarbourTugAvailabilityIndicatorCode ();
-
     HarbourTugAvailabilityIndicatorCode (value v);
 
     HarbourTugAvailabilityIndicatorCode (const char* v);
@@ -21805,8 +21375,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    HarbourTurningAreaIndicatorCode ();
 
     HarbourTurningAreaIndicatorCode (value v);
 
@@ -21871,8 +21439,6 @@ namespace oo_2_0
       RIVERT
     };
 
-    HarbourTypeCategoryCode ();
-
     HarbourTypeCategoryCode (value v);
 
     HarbourTypeCategoryCode (const char* v);
@@ -21932,8 +21498,6 @@ namespace oo_2_0
       ROROML
     };
 
-    HarbourVehicleHandlingTypeCode ();
-
     HarbourVehicleHandlingTypeCode (value v);
 
     HarbourVehicleHandlingTypeCode (const char* v);
@@ -21989,8 +21553,6 @@ namespace oo_2_0
       LVLOEF,
       TARGET
     };
-
-    HoldingRequiredCalculationMethodCode ();
 
     HoldingRequiredCalculationMethodCode (value v);
 
@@ -22059,8 +21621,6 @@ namespace oo_2_0
       TRFTRN
     };
 
-    HoldingTransferReasonCode ();
-
     HoldingTransferReasonCode (value v);
 
     HoldingTransferReasonCode (const char* v);
@@ -22117,8 +21677,6 @@ namespace oo_2_0
       MIXICE,
       RIMICE
     };
-
-    IcingCategoryCode ();
 
     IcingCategoryCode (value v);
 
@@ -22177,8 +21735,6 @@ namespace oo_2_0
       SEVERE
     };
 
-    IcingSeverityQualifierCode ();
-
     IcingSeverityQualifierCode (value v);
 
     IcingSeverityQualifierCode (const char* v);
@@ -22234,8 +21790,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    JettyRailServedIndicatorCode ();
 
     JettyRailServedIndicatorCode (value v);
 
@@ -22551,8 +22105,6 @@ namespace oo_2_0
       ZULU
     };
 
-    LanguageCategoryCode ();
-
     LanguageCategoryCode (value v);
 
     LanguageCategoryCode (const char* v);
@@ -22613,8 +22165,6 @@ namespace oo_2_0
       cxx_5
     };
 
-    LanguageSkillProficiencyCode ();
-
     LanguageSkillProficiencyCode (value v);
 
     LanguageSkillProficiencyCode (const char* v);
@@ -22674,8 +22224,6 @@ namespace oo_2_0
       NAUTIC
     };
 
-    LightCategoryCode ();
-
     LightCategoryCode (value v);
 
     LightCategoryCode (const char* v);
@@ -22733,8 +22281,6 @@ namespace oo_2_0
       WAN,
       WAX
     };
-
-    LightMoonPhaseCode ();
 
     LightMoonPhaseCode (value v);
 
@@ -22800,8 +22346,6 @@ namespace oo_2_0
       cxx_9
     };
 
-    LiquidSurfaceStatusSeaStateCode ();
-
     LiquidSurfaceStatusSeaStateCode (value v);
 
     LiquidSurfaceStatusSeaStateCode (const char* v);
@@ -22861,8 +22405,6 @@ namespace oo_2_0
       NKN
     };
 
-    LiquidSurfaceStatusSurfaceConditionCode ();
-
     LiquidSurfaceStatusSurfaceConditionCode (value v);
 
     LiquidSurfaceStatusSurfaceConditionCode (const char* v);
@@ -22921,8 +22463,6 @@ namespace oo_2_0
       UND,
       VL
     };
-
-    LocationCategoryCode ();
 
     LocationCategoryCode (value v);
 
@@ -22984,8 +22524,6 @@ namespace oo_2_0
       NOS,
       SOCLPR
     };
-
-    MainActivityCode ();
 
     MainActivityCode (value v);
 
@@ -23051,8 +22589,6 @@ namespace oo_2_0
       TNKCLN
     };
 
-    MaintenanceCapabilityCategoryCode ();
-
     MaintenanceCapabilityCategoryCode (value v);
 
     MaintenanceCapabilityCategoryCode (const char* v);
@@ -23110,8 +22646,6 @@ namespace oo_2_0
       C,
       D
     };
-
-    MaintenanceCapabilityLevelCode ();
 
     MaintenanceCapabilityLevelCode (value v);
 
@@ -23191,8 +22725,6 @@ namespace oo_2_0
       TTASVS,
       WEIGHT
     };
-
-    MaritimeEquipmentTypeCategoryCode ();
 
     MaritimeEquipmentTypeCategoryCode (value v);
 
@@ -23310,8 +22842,6 @@ namespace oo_2_0
       SWPPRT
     };
 
-    MaritimeEquipmentTypeSubcategoryCode ();
-
     MaritimeEquipmentTypeSubcategoryCode (value v);
 
     MaritimeEquipmentTypeSubcategoryCode (const char* v);
@@ -23367,8 +22897,6 @@ namespace oo_2_0
       ILS,
       NOS
     };
-
-    MaterielCategoryCode ();
 
     MaterielCategoryCode (value v);
 
@@ -23457,8 +22985,6 @@ namespace oo_2_0
       YELLOW
     };
 
-    MaterielStatusBodyColourCode ();
-
     MaterielStatusBodyColourCode (value v);
 
     MaterielStatusBodyColourCode (const char* v);
@@ -23518,8 +23044,6 @@ namespace oo_2_0
       SERVCE
     };
 
-    MaterielStatusBuoyMalfunctionCode ();
-
     MaterielStatusBuoyMalfunctionCode (value v);
 
     MaterielStatusBuoyMalfunctionCode (const char* v);
@@ -23577,8 +23101,6 @@ namespace oo_2_0
       UXOSTA
     };
 
-    MaterielStatusCategoryCode ();
-
     MaterielStatusCategoryCode (value v);
 
     MaterielStatusCategoryCode (const char* v);
@@ -23634,8 +23156,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    MaterielStatusImoCompliantIndicatorCode ();
 
     MaterielStatusImoCompliantIndicatorCode (value v);
 
@@ -23697,8 +23217,6 @@ namespace oo_2_0
       SYMBOL,
       WRITNG
     };
-
-    MaterielStatusMarkingCode ();
 
     MaterielStatusMarkingCode (value v);
 
@@ -23768,8 +23286,6 @@ namespace oo_2_0
       YELLOW
     };
 
-    MaterielStatusMarkingColourCode ();
-
     MaterielStatusMarkingColourCode (value v);
 
     MaterielStatusMarkingColourCode (const char* v);
@@ -23829,8 +23345,6 @@ namespace oo_2_0
       SOPS,
       TNOPS
     };
-
-    MaterielStatusOperationalStatusCode ();
 
     MaterielStatusOperationalStatusCode (value v);
 
@@ -23893,8 +23407,6 @@ namespace oo_2_0
       MO,
       NKN
     };
-
-    MaterielStatusOperationalStatusModeCode ();
 
     MaterielStatusOperationalStatusModeCode (value v);
 
@@ -23966,8 +23478,6 @@ namespace oo_2_0
       STERLZ
     };
 
-    MaterielStatusOperationalStatusQualifierCode ();
-
     MaterielStatusOperationalStatusQualifierCode (value v);
 
     MaterielStatusOperationalStatusQualifierCode (const char* v);
@@ -24023,8 +23533,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    MaterielStatusReserveIndicatorCode ();
 
     MaterielStatusReserveIndicatorCode (value v);
 
@@ -24085,8 +23593,6 @@ namespace oo_2_0
       UNASMB
     };
 
-    MaterielStatusSafetyStatusCode ();
-
     MaterielStatusSafetyStatusCode (value v);
 
     MaterielStatusSafetyStatusCode (const char* v);
@@ -24143,8 +23649,6 @@ namespace oo_2_0
       EQ,
       NOS
     };
-
-    MaterielTypeCategoryCode ();
 
     MaterielTypeCategoryCode (value v);
 
@@ -24206,8 +23710,6 @@ namespace oo_2_0
       CLS5
     };
 
-    MaterielTypeSupplyClassCode ();
-
     MaterielTypeSupplyClassCode (value v);
 
     MaterielTypeSupplyClassCode (const char* v);
@@ -24266,8 +23768,6 @@ namespace oo_2_0
       WOUND
     };
 
-    MedicalFacilityStatusIntervalCasualtyTypeCode ();
-
     MedicalFacilityStatusIntervalCasualtyTypeCode (value v);
 
     MedicalFacilityStatusIntervalCasualtyTypeCode (const char* v);
@@ -24324,8 +23824,6 @@ namespace oo_2_0
       T2,
       T3
     };
-
-    MedicalFacilityStatusPendingSurgeryTriageCode ();
 
     MedicalFacilityStatusPendingSurgeryTriageCode (value v);
 
@@ -24402,8 +23900,6 @@ namespace oo_2_0
       WTRSPT
     };
 
-    MeteorologicFeatureCategoryCode ();
-
     MeteorologicFeatureCategoryCode (value v);
 
     MeteorologicFeatureCategoryCode (const char* v);
@@ -24463,8 +23959,6 @@ namespace oo_2_0
       NOMIN
     };
 
-    MeteorologicFeatureInterpretationCode ();
-
     MeteorologicFeatureInterpretationCode (value v);
 
     MeteorologicFeatureInterpretationCode (const char* v);
@@ -24521,8 +24015,6 @@ namespace oo_2_0
       OBSRVD
     };
 
-    MeteorologicFeatureSourceCode ();
-
     MeteorologicFeatureSourceCode (value v);
 
     MeteorologicFeatureSourceCode (const char* v);
@@ -24578,8 +24070,6 @@ namespace oo_2_0
       MNFLD,
       NOS
     };
-
-    MilitaryObstacleCategoryCode ();
 
     MilitaryObstacleCategoryCode (value v);
 
@@ -24667,8 +24157,6 @@ namespace oo_2_0
       WIRTCN
     };
 
-    MilitaryObstacleTypeCategoryCode ();
-
     MilitaryObstacleTypeCategoryCode (value v);
 
     MilitaryObstacleTypeCategoryCode (const char* v);
@@ -24725,8 +24213,6 @@ namespace oo_2_0
       MOVABL,
       MOVAPR
     };
-
-    MilitaryObstacleTypeSubcategoryCode ();
 
     MilitaryObstacleTypeSubcategoryCode (value v);
 
@@ -24786,8 +24272,6 @@ namespace oo_2_0
       TASK,
       UNIT
     };
-
-    MilitaryOrganisationTypeCategoryCode ();
 
     MilitaryOrganisationTypeCategoryCode (value v);
 
@@ -24859,8 +24343,6 @@ namespace oo_2_0
       SPFRC,
       TERFRC
     };
-
-    MilitaryOrganisationTypeServiceCode ();
 
     MilitaryOrganisationTypeServiceCode (value v);
 
@@ -24954,8 +24436,6 @@ namespace oo_2_0
       TACAIR
     };
 
-    MilitaryPostTypeCategoryCode ();
-
     MilitaryPostTypeCategoryCode (value v);
 
     MilitaryPostTypeCategoryCode (const char* v);
@@ -25034,8 +24514,6 @@ namespace oo_2_0
       OTHR
     };
 
-    MilitaryPostTypeRankCode ();
-
     MilitaryPostTypeRankCode (value v);
 
     MilitaryPostTypeRankCode (const char* v);
@@ -25092,8 +24570,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    MinePresenceCode ();
 
     MinePresenceCode (value v);
 
@@ -25163,8 +24639,6 @@ namespace oo_2_0
       UNK
     };
 
-    MineStatusAirDropEffectCode ();
-
     MineStatusAirDropEffectCode (value v);
 
     MineStatusAirDropEffectCode (const char* v);
@@ -25229,8 +24703,6 @@ namespace oo_2_0
       RNDERD,
       SUNKMN
     };
-
-    MineStatusCode ();
 
     MineStatusCode (value v);
 
@@ -25298,8 +24770,6 @@ namespace oo_2_0
       SUNKEN
     };
 
-    MineStatusMaritimeMineQualifierCode ();
-
     MineStatusMaritimeMineQualifierCode (value v);
 
     MineStatusMaritimeMineQualifierCode (const char* v);
@@ -25355,8 +24825,6 @@ namespace oo_2_0
       MNFLND,
       MNFMRT
     };
-
-    MinefieldCategoryCode ();
 
     MinefieldCategoryCode (value v);
 
@@ -25415,8 +24883,6 @@ namespace oo_2_0
       SUBSRF,
       SURFCE
     };
-
-    MinefieldLandDepthPlacementCode ();
 
     MinefieldLandDepthPlacementCode (value v);
 
@@ -25478,8 +24944,6 @@ namespace oo_2_0
       PROTCT
     };
 
-    MinefieldLandFunctionCode ();
-
     MinefieldLandFunctionCode (value v);
 
     MinefieldLandFunctionCode (const char* v);
@@ -25537,8 +25001,6 @@ namespace oo_2_0
       REGTHK,
       SCATTR
     };
-
-    MinefieldLandPatternCode ();
 
     MinefieldLandPatternCode (value v);
 
@@ -25598,8 +25060,6 @@ namespace oo_2_0
       SLFDST
     };
 
-    MinefieldLandPersistenceCode ();
-
     MinefieldLandPersistenceCode (value v);
 
     MinefieldLandPersistenceCode (const char* v);
@@ -25656,8 +25116,6 @@ namespace oo_2_0
       LOW,
       MEDIUM
     };
-
-    MinefieldLandStoppingPowerCode ();
 
     MinefieldLandStoppingPowerCode (value v);
 
@@ -25721,8 +25179,6 @@ namespace oo_2_0
       STBSMT
     };
 
-    MinefieldMaritimeBottomNaturalCamouflageCode ();
-
     MinefieldMaritimeBottomNaturalCamouflageCode (value v);
 
     MinefieldMaritimeBottomNaturalCamouflageCode (const char* v);
@@ -25782,8 +25238,6 @@ namespace oo_2_0
       VOLUME
     };
 
-    MinefieldMaritimeDepthPlacementCode ();
-
     MinefieldMaritimeDepthPlacementCode (value v);
 
     MinefieldMaritimeDepthPlacementCode (const char* v);
@@ -25841,8 +25295,6 @@ namespace oo_2_0
       PROTCT
     };
 
-    MinefieldMaritimeFunctionCode ();
-
     MinefieldMaritimeFunctionCode (value v);
 
     MinefieldMaritimeFunctionCode (const char* v);
@@ -25898,8 +25350,6 @@ namespace oo_2_0
       CLOSED,
       OPEN
     };
-
-    MinefieldMaritimeStatusCode ();
 
     MinefieldMaritimeStatusCode (value v);
 
@@ -25958,8 +25408,6 @@ namespace oo_2_0
       YELLOW
     };
 
-    MinefieldMaritimeStatusColourCode ();
-
     MinefieldMaritimeStatusColourCode (value v);
 
     MinefieldMaritimeStatusColourCode (const char* v);
@@ -26017,8 +25465,6 @@ namespace oo_2_0
       MODMCM,
       NOMCM
     };
-
-    MinefieldMaritimeStatusExpectedLevelMcmCode ();
 
     MinefieldMaritimeStatusExpectedLevelMcmCode (value v);
 
@@ -26102,8 +25548,6 @@ namespace oo_2_0
       SWUNDS
     };
 
-    MinefieldMaritimeStatusMineDetectionCode ();
-
     MinefieldMaritimeStatusMineDetectionCode (value v);
 
     MinefieldMaritimeStatusMineDetectionCode (const char* v);
@@ -26160,8 +25604,6 @@ namespace oo_2_0
       SERIOS,
       VRYGRT
     };
-
-    MinefieldMaritimeStatusMineZoneRiskCode ();
 
     MinefieldMaritimeStatusMineZoneRiskCode (value v);
 
@@ -26227,8 +25669,6 @@ namespace oo_2_0
       THIRD
     };
 
-    MinefieldMaritimeStatusSeedingCode ();
-
     MinefieldMaritimeStatusSeedingCode (value v);
 
     MinefieldMaritimeStatusSeedingCode (const char* v);
@@ -26292,8 +25732,6 @@ namespace oo_2_0
       PRTCLS,
       STRCLS
     };
-
-    MinefieldMaritimeSubfunctionCode ();
 
     MinefieldMaritimeSubfunctionCode (value v);
 
@@ -26384,8 +25822,6 @@ namespace oo_2_0
       TANK
     };
 
-    MiscellaneousEquipmentTypeCategoryCode ();
-
     MiscellaneousEquipmentTypeCategoryCode (value v);
 
     MiscellaneousEquipmentTypeCategoryCode (const char* v);
@@ -26447,8 +25883,6 @@ namespace oo_2_0
       WD
     };
 
-    MiscellaneousEquipmentTypeSubcategoryCode ();
-
     MiscellaneousEquipmentTypeSubcategoryCode (value v);
 
     MiscellaneousEquipmentTypeSubcategoryCode (const char* v);
@@ -26505,8 +25939,6 @@ namespace oo_2_0
       SCNDRY,
       THIRD
     };
-
-    MissionPrimacyCode ();
 
     MissionPrimacyCode (value v);
 
@@ -26591,8 +26023,6 @@ namespace oo_2_0
       WATTDL
     };
 
-    MobilityCapabilityCategoryCode ();
-
     MobilityCapabilityCategoryCode (value v);
 
     MobilityCapabilityCategoryCode (const char* v);
@@ -26668,8 +26098,6 @@ namespace oo_2_0
       PSPEED
     };
 
-    MobilityCapabilityDescriptorCode ();
-
     MobilityCapabilityDescriptorCode (value v);
 
     MobilityCapabilityDescriptorCode (const char* v);
@@ -26730,8 +26158,6 @@ namespace oo_2_0
       TERIND
     };
 
-    MobilityCapabilityTerrainTypeCode ();
-
     MobilityCapabilityTerrainTypeCode (value v);
 
     MobilityCapabilityTerrainTypeCode (const char* v);
@@ -26791,8 +26217,6 @@ namespace oo_2_0
       WHLAWD,
       WHTR
     };
-
-    MobilityCode ();
 
     MobilityCode (value v);
 
@@ -26856,8 +26280,6 @@ namespace oo_2_0
       TERR
     };
 
-    ModeOfTransportationCode ();
-
     ModeOfTransportationCode (value v);
 
     ModeOfTransportationCode (const char* v);
@@ -26917,8 +26339,6 @@ namespace oo_2_0
       TKNRNG,
       WRLESS
     };
-
-    NetworkArchitectureCode ();
 
     NetworkArchitectureCode (value v);
 
@@ -26992,8 +26412,6 @@ namespace oo_2_0
       T3
     };
 
-    NetworkCapacityBandwidthCode ();
-
     NetworkCapacityBandwidthCode (value v);
 
     NetworkCapacityBandwidthCode (const char* v);
@@ -27064,8 +26482,6 @@ namespace oo_2_0
       X400
     };
 
-    NetworkCapacityProtocolCode ();
-
     NetworkCapacityProtocolCode (value v);
 
     NetworkCapacityProtocolCode (const char* v);
@@ -27124,8 +26540,6 @@ namespace oo_2_0
       NOS,
       PTTOPT
     };
-
-    NetworkCategoryCode ();
 
     NetworkCategoryCode (value v);
 
@@ -27189,8 +26603,6 @@ namespace oo_2_0
       VLF
     };
 
-    NetworkFrequencyBandCode ();
-
     NetworkFrequencyBandCode (value v);
 
     NetworkFrequencyBandCode (const char* v);
@@ -27250,8 +26662,6 @@ namespace oo_2_0
       PHSHKY,
       UPSBND
     };
-
-    NetworkFrequencyModulationCode ();
 
     NetworkFrequencyModulationCode (value v);
 
@@ -27325,8 +26735,6 @@ namespace oo_2_0
       TWTPRC
     };
 
-    NetworkMeansCode ();
-
     NetworkMeansCode (value v);
 
     NetworkMeansCode (const char* v);
@@ -27391,8 +26799,6 @@ namespace oo_2_0
       VOCSVC
     };
 
-    NetworkServiceCategoryCode ();
-
     NetworkServiceCategoryCode (value v);
 
     NetworkServiceCategoryCode (const char* v);
@@ -27449,8 +26855,6 @@ namespace oo_2_0
       YES
     };
 
-    NetworkServiceCryptographicIndicatorCode ();
-
     NetworkServiceCryptographicIndicatorCode (value v);
 
     NetworkServiceCryptographicIndicatorCode (const char* v);
@@ -27506,8 +26910,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    NetworkServiceStatusIndicatorCode ();
 
     NetworkServiceStatusIndicatorCode (value v);
 
@@ -27593,8 +26995,6 @@ namespace oo_2_0
       TELNET
     };
 
-    NetworkServiceSubcategoryCode ();
-
     NetworkServiceSubcategoryCode (value v);
 
     NetworkServiceSubcategoryCode (const char* v);
@@ -27653,8 +27053,6 @@ namespace oo_2_0
       NKN,
       NOS
     };
-
-    NetworkSubcategoryCode ();
 
     NetworkSubcategoryCode (value v);
 
@@ -27718,8 +27116,6 @@ namespace oo_2_0
       NUCWST
     };
 
-    NuclearEventCategoryCode ();
-
     NuclearEventCategoryCode (value v);
 
     NuclearEventCategoryCode (const char* v);
@@ -27776,8 +27172,6 @@ namespace oo_2_0
       NKN,
       NONE
     };
-
-    NuclearWeaponEventCraterPresenceCode ();
 
     NuclearWeaponEventCraterPresenceCode (value v);
 
@@ -27842,8 +27236,6 @@ namespace oo_2_0
       NOS
     };
 
-    NuclearYieldGroupCode ();
-
     NuclearYieldGroupCode (value v);
 
     NuclearYieldGroupCode (const char* v);
@@ -27899,8 +27291,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    ObjectItemAddressAuthorisationIndicatorCode ();
 
     ObjectItemAddressAuthorisationIndicatorCode (value v);
 
@@ -27959,8 +27349,6 @@ namespace oo_2_0
       THIRD
     };
 
-    ObjectItemAddressPrimacyCode ();
-
     ObjectItemAddressPrimacyCode (value v);
 
     ObjectItemAddressPrimacyCode (const char* v);
@@ -28017,8 +27405,6 @@ namespace oo_2_0
       TRNREC,
       TRNSMT
     };
-
-    ObjectItemAddressTransmitReceiveCode ();
 
     ObjectItemAddressTransmitReceiveCode (value v);
 
@@ -28079,8 +27465,6 @@ namespace oo_2_0
       TRACK,
       UNITDS
     };
-
-    ObjectItemAliasCategoryCode ();
 
     ObjectItemAliasCategoryCode (value v);
 
@@ -28235,8 +27619,6 @@ namespace oo_2_0
       USES
     };
 
-    ObjectItemAssociationCategoryCode ();
-
     ObjectItemAssociationCategoryCode (value v);
 
     ObjectItemAssociationCategoryCode (const char* v);
@@ -28329,8 +27711,6 @@ namespace oo_2_0
       TACCOM
     };
 
-    ObjectItemAssociationSubcategoryCode ();
-
     ObjectItemAssociationSubcategoryCode (value v);
 
     ObjectItemAssociationSubcategoryCode (const char* v);
@@ -28390,8 +27770,6 @@ namespace oo_2_0
       OR,
       PE
     };
-
-    ObjectItemCategoryCode ();
 
     ObjectItemCategoryCode (value v);
 
@@ -28469,8 +27847,6 @@ namespace oo_2_0
       UNK
     };
 
-    ObjectItemGroupAccountDetailQualifierCode ();
-
     ObjectItemGroupAccountDetailQualifierCode (value v);
 
     ObjectItemGroupAccountDetailQualifierCode (const char* v);
@@ -28537,8 +27913,6 @@ namespace oo_2_0
       SUSPCT,
       UNK
     };
-
-    ObjectItemHostilityStatusCode ();
 
     ObjectItemHostilityStatusCode (value v);
 
@@ -28608,8 +27982,6 @@ namespace oo_2_0
       STDPOS
     };
 
-    ObjectItemLocationMeaningCode ();
-
     ObjectItemLocationMeaningCode (value v);
 
     ObjectItemLocationMeaningCode (const char* v);
@@ -28667,8 +28039,6 @@ namespace oo_2_0
       SLOW,
       ZERO
     };
-
-    ObjectItemLocationRelativeSpeedCode ();
 
     ObjectItemLocationRelativeSpeedCode (value v);
 
@@ -28732,8 +28102,6 @@ namespace oo_2_0
       ISRPTD
     };
 
-    ObjectItemReferenceAssociationCategoryCode ();
-
     ObjectItemReferenceAssociationCategoryCode (value v);
 
     ObjectItemReferenceAssociationCategoryCode (const char* v);
@@ -28790,8 +28158,6 @@ namespace oo_2_0
       UNK,
       YES
     };
-
-    ObjectItemStatusBoobyTrapPresenceCode ();
 
     ObjectItemStatusBoobyTrapPresenceCode (value v);
 
@@ -28854,8 +28220,6 @@ namespace oo_2_0
       PE
     };
 
-    ObjectItemStatusCategoryCode ();
-
     ObjectItemStatusCategoryCode (value v);
 
     ObjectItemStatusCategoryCode (const char* v);
@@ -28912,8 +28276,6 @@ namespace oo_2_0
       EMCON2,
       EMCON3
     };
-
-    ObjectItemStatusEmissionControlCode ();
 
     ObjectItemStatusEmissionControlCode (value v);
 
@@ -28975,8 +28337,6 @@ namespace oo_2_0
       PE
     };
 
-    ObjectTypeCategoryCode ();
-
     ObjectTypeCategoryCode (value v);
 
     ObjectTypeCategoryCode (const char* v);
@@ -29033,8 +28393,6 @@ namespace oo_2_0
       YES
     };
 
-    ObjectTypeDecoyIndicatorCode ();
-
     ObjectTypeDecoyIndicatorCode (value v);
 
     ObjectTypeDecoyIndicatorCode (const char* v);
@@ -29090,8 +28448,6 @@ namespace oo_2_0
       CES,
       PCG
     };
-
-    ObjectTypeEstablishmentCategoryCode ();
 
     ObjectTypeEstablishmentCategoryCode (value v);
 
@@ -29155,8 +28511,6 @@ namespace oo_2_0
       TRP
     };
 
-    ObjectTypeEstablishmentEnvironmentConditionCode ();
-
     ObjectTypeEstablishmentEnvironmentConditionCode (value v);
 
     ObjectTypeEstablishmentEnvironmentConditionCode (const char* v);
@@ -29212,8 +28566,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode ();
 
     ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode (value v);
 
@@ -29276,8 +28628,6 @@ namespace oo_2_0
       WA
     };
 
-    ObjectTypeEstablishmentOperationalModeCode ();
-
     ObjectTypeEstablishmentOperationalModeCode (value v);
 
     ObjectTypeEstablishmentOperationalModeCode (const char* v);
@@ -29338,8 +28688,6 @@ namespace oo_2_0
       ISRFNC,
       ISSPCF
     };
-
-    ObjectTypeReferenceAssociationCategoryCode ();
 
     ObjectTypeReferenceAssociationCategoryCode (value v);
 
@@ -29494,8 +28842,6 @@ namespace oo_2_0
       WATER
     };
 
-    OperationalCapabilityCategoryCode ();
-
     OperationalCapabilityCategoryCode (value v);
 
     OperationalCapabilityCategoryCode (const char* v);
@@ -29557,8 +28903,6 @@ namespace oo_2_0
       THTRE
     };
 
-    OperationalCapabilityLevelCode ();
-
     OperationalCapabilityLevelCode (value v);
 
     OperationalCapabilityLevelCode (const char* v);
@@ -29615,8 +28959,6 @@ namespace oo_2_0
       LOW,
       MEDIUM
     };
-
-    OperationalCapabilityQualifierCode ();
 
     OperationalCapabilityQualifierCode (value v);
 
@@ -29678,8 +29020,6 @@ namespace oo_2_0
       PLNORD
     };
 
-    OperationalInformationGroupCategoryCode ();
-
     OperationalInformationGroupCategoryCode (value v);
 
     OperationalInformationGroupCategoryCode (const char* v);
@@ -29735,8 +29075,6 @@ namespace oo_2_0
       RESP,
       PROXY
     };
-
-    OperationalInformationGroupOrganisationAssociationCategoryCode ();
 
     OperationalInformationGroupOrganisationAssociationCategoryCode (value v);
 
@@ -29794,8 +29132,6 @@ namespace oo_2_0
       LEFT,
       RIGHT
     };
-
-    OrbitAreaAlignmentCode ();
 
     OrbitAreaAlignmentCode (value v);
 
@@ -29856,8 +29192,6 @@ namespace oo_2_0
       NOS
     };
 
-    OrderCategoryCode ();
-
     OrderCategoryCode (value v);
 
     OrderCategoryCode (const char* v);
@@ -29913,8 +29247,6 @@ namespace oo_2_0
       ISSUED,
       STOPPD
     };
-
-    OrderStatusExecutionStateCode ();
 
     OrderStatusExecutionStateCode (value v);
 
@@ -29984,8 +29316,6 @@ namespace oo_2_0
       SSPCTD
     };
 
-    OrganisationActionAssociationCategoryCode ();
-
     OrganisationActionAssociationCategoryCode (value v);
 
     OrganisationActionAssociationCategoryCode (const char* v);
@@ -30045,8 +29375,6 @@ namespace oo_2_0
       DENYRQ
     };
 
-    OrganisationActionTaskRuleOfEngagementStatusCategoryCode ();
-
     OrganisationActionTaskRuleOfEngagementStatusCategoryCode (value v);
 
     OrganisationActionTaskRuleOfEngagementStatusCategoryCode (const char* v);
@@ -30104,8 +29432,6 @@ namespace oo_2_0
       UN
     };
 
-    OrganisationCategoryCode ();
-
     OrganisationCategoryCode (value v);
 
     OrganisationCategoryCode (const char* v);
@@ -30161,8 +29487,6 @@ namespace oo_2_0
       LFRIL,
       RIC
     };
-
-    OrganisationMaterielTypeAssociationReportableTypeCode ();
 
     OrganisationMaterielTypeAssociationReportableTypeCode (value v);
 
@@ -30222,8 +29546,6 @@ namespace oo_2_0
       EXEC,
       ISSHQ
     };
-
-    OrganisationPlanOrderAssociationCategoryCode ();
 
     OrganisationPlanOrderAssociationCategoryCode (value v);
 
@@ -30285,8 +29607,6 @@ namespace oo_2_0
       ISRLSA
     };
 
-    OrganisationReferenceAssociationCategoryCode ();
-
     OrganisationReferenceAssociationCategoryCode (value v);
 
     OrganisationReferenceAssociationCategoryCode (const char* v);
@@ -30347,8 +29667,6 @@ namespace oo_2_0
       WTN48H
     };
 
-    OrganisationStatusAvailabilityCode ();
-
     OrganisationStatusAvailabilityCode (value v);
 
     OrganisationStatusAvailabilityCode (const char* v);
@@ -30407,8 +29725,6 @@ namespace oo_2_0
       MOPP3,
       MOPPRY
     };
-
-    OrganisationStatusCbrnDressStateCode ();
 
     OrganisationStatusCbrnDressStateCode (value v);
 
@@ -30484,8 +29800,6 @@ namespace oo_2_0
       TACTHQ
     };
 
-    OrganisationStatusCommandAndControlRoleCode ();
-
     OrganisationStatusCommandAndControlRoleCode (value v);
 
     OrganisationStatusCommandAndControlRoleCode (const char* v);
@@ -30541,8 +29855,6 @@ namespace oo_2_0
       COMM,
       UNCOMM
     };
-
-    OrganisationStatusCommitmentStatusCode ();
 
     OrganisationStatusCommitmentStatusCode (value v);
 
@@ -30601,8 +29913,6 @@ namespace oo_2_0
       WPNFRE,
       WPNTGT
     };
-
-    OrganisationStatusFireModeCode ();
 
     OrganisationStatusFireModeCode (value v);
 
@@ -30664,8 +29974,6 @@ namespace oo_2_0
       TNOPS
     };
 
-    OrganisationStatusOperationalStatusCode ();
-
     OrganisationStatusOperationalStatusCode (value v);
 
     OrganisationStatusOperationalStatusCode (const char* v);
@@ -30726,8 +30034,6 @@ namespace oo_2_0
       MODDAM,
       NKN
     };
-
-    OrganisationStatusOperationalStatusQualifierCode ();
 
     OrganisationStatusOperationalStatusQualifierCode (value v);
 
@@ -30822,8 +30128,6 @@ namespace oo_2_0
       YELLOW
     };
 
-    OrganisationStatusReadinessCode ();
-
     OrganisationStatusReadinessCode (value v);
 
     OrganisationStatusReadinessCode (const char* v);
@@ -30883,8 +30187,6 @@ namespace oo_2_0
       RIDT
     };
 
-    OrganisationStatusReinforcementCode ();
-
     OrganisationStatusReinforcementCode (value v);
 
     OrganisationStatusReinforcementCode (const char* v);
@@ -30940,8 +30242,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    OrganisationStatusReserveIndicatorCode ();
 
     OrganisationStatusReserveIndicatorCode (value v);
 
@@ -31001,8 +30301,6 @@ namespace oo_2_0
       RED
     };
 
-    OrganisationStatusTrainingCode ();
-
     OrganisationStatusTrainingCode (value v);
 
     OrganisationStatusTrainingCode (const char* v);
@@ -31059,8 +30357,6 @@ namespace oo_2_0
       NKN,
       OUTACT
     };
-
-    OrganisationStatusUsageStatusCode ();
 
     OrganisationStatusUsageStatusCode (value v);
 
@@ -31120,8 +30416,6 @@ namespace oo_2_0
       NOS,
       PVSORG
     };
-
-    OrganisationTypeCategoryCode ();
 
     OrganisationTypeCategoryCode (value v);
 
@@ -31204,8 +30498,6 @@ namespace oo_2_0
       WNGOPC
     };
 
-    OrganisationTypeCommandAndControlCategoryCode ();
-
     OrganisationTypeCommandAndControlCategoryCode (value v);
 
     OrganisationTypeCommandAndControlCategoryCode (const char* v);
@@ -31261,8 +30553,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    OrganisationTypeCommandFunctionIndicatorCode ();
 
     OrganisationTypeCommandFunctionIndicatorCode (value v);
 
@@ -31321,8 +30611,6 @@ namespace oo_2_0
       PRSTNT,
       THCKND
     };
-
-    PersistencyCode ();
 
     PersistencyCode (value v);
 
@@ -31387,8 +30675,6 @@ namespace oo_2_0
       OMNUS
     };
 
-    PersonBloodTypeCode ();
-
     PersonBloodTypeCode (value v);
 
     PersonBloodTypeCode (const char* v);
@@ -31447,8 +30733,6 @@ namespace oo_2_0
       NOS,
       PSSPRT
     };
-
-    PersonIdentificationDocumentCode ();
 
     PersonIdentificationDocumentCode (value v);
 
@@ -31510,8 +30794,6 @@ namespace oo_2_0
       VERY
     };
 
-    PersonLanguageSkillGeneralProficiencyCode ();
-
     PersonLanguageSkillGeneralProficiencyCode (value v);
 
     PersonLanguageSkillGeneralProficiencyCode (const char* v);
@@ -31567,8 +30849,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    PersonProfessingIndicatorCode ();
 
     PersonProfessingIndicatorCode (value v);
 
@@ -31636,8 +30916,6 @@ namespace oo_2_0
       POW
     };
 
-    PersonStatusDutyStatusCode ();
-
     PersonStatusDutyStatusCode (value v);
 
     PersonStatusDutyStatusCode (const char* v);
@@ -31696,8 +30974,6 @@ namespace oo_2_0
       NKN,
       SI
     };
-
-    PersonStatusPhysicalStatusCode ();
 
     PersonStatusPhysicalStatusCode (value v);
 
@@ -31760,8 +31036,6 @@ namespace oo_2_0
       WNDD
     };
 
-    PersonStatusPhysicalStatusQualifierCode ();
-
     PersonStatusPhysicalStatusQualifierCode (value v);
 
     PersonStatusPhysicalStatusQualifierCode (const char* v);
@@ -31817,8 +31091,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    PersonStatusReserveIndicatorCode ();
 
     PersonStatusReserveIndicatorCode (value v);
 
@@ -31878,8 +31150,6 @@ namespace oo_2_0
       NOS,
       PAR
     };
-
-    PersonTypeCategoryCode ();
 
     PersonTypeCategoryCode (value v);
 
@@ -31958,8 +31228,6 @@ namespace oo_2_0
       OR9,
       OTHR
     };
-
-    PersonTypeRankCode ();
 
     PersonTypeRankCode (value v);
 
@@ -32051,8 +31319,6 @@ namespace oo_2_0
       WRITER
     };
 
-    PersonTypeSubcategoryCode ();
-
     PersonTypeSubcategoryCode (value v);
 
     PersonTypeSubcategoryCode (const char* v);
@@ -32112,8 +31378,6 @@ namespace oo_2_0
       RTADDR
     };
 
-    PhysicalAddressCategoryCode ();
-
     PhysicalAddressCategoryCode (value v);
 
     PhysicalAddressCategoryCode (const char* v);
@@ -32169,8 +31433,6 @@ namespace oo_2_0
       OPLAN,
       NOS
     };
-
-    PlanCategoryCode ();
 
     PlanCategoryCode (value v);
 
@@ -32231,8 +31493,6 @@ namespace oo_2_0
       ISSUPP
     };
 
-    PlanOrderAssociationCategoryCode ();
-
     PlanOrderAssociationCategoryCode (value v);
 
     PlanOrderAssociationCategoryCode (const char* v);
@@ -32288,8 +31548,6 @@ namespace oo_2_0
       ORDER,
       PLAN
     };
-
-    PlanOrderCategoryCode ();
 
     PlanOrderCategoryCode (value v);
 
@@ -32352,8 +31610,6 @@ namespace oo_2_0
       ISSPPM
     };
 
-    PlanOrderComponentContentReferenceCategoryCode ();
-
     PlanOrderComponentContentReferenceCategoryCode (value v);
 
     PlanOrderComponentContentReferenceCategoryCode (const char* v);
@@ -32410,8 +31666,6 @@ namespace oo_2_0
       ISPRNT,
       ISREPL
     };
-
-    PlanOrderComponentStructureCategoryCode ();
 
     PlanOrderComponentStructureCategoryCode (value v);
 
@@ -32470,8 +31724,6 @@ namespace oo_2_0
       RCVD
     };
 
-    PlanOrderDistributionAcknowledgementCode ();
-
     PlanOrderDistributionAcknowledgementCode (value v);
 
     PlanOrderDistributionAcknowledgementCode (const char* v);
@@ -32527,8 +31779,6 @@ namespace oo_2_0
       DSTEXE,
       DSTINF
     };
-
-    PlanOrderDistributionCategoryCode ();
 
     PlanOrderDistributionCategoryCode (value v);
 
@@ -32609,8 +31859,6 @@ namespace oo_2_0
       N
     };
 
-    PlanOrderHeaderContentTimeZoneCode ();
-
     PlanOrderHeaderContentTimeZoneCode (value v);
 
     PlanOrderHeaderContentTimeZoneCode (const char* v);
@@ -32666,8 +31914,6 @@ namespace oo_2_0
       COMPL,
       NCOMPL
     };
-
-    PlanStatusDevelopmentStatusCode ();
 
     PlanStatusDevelopmentStatusCode (value v);
 
@@ -32726,8 +31972,6 @@ namespace oo_2_0
       WTHDRN
     };
 
-    PlanStatusStateCode ();
-
     PlanStatusStateCode (value v);
 
     PlanStatusStateCode (const char* v);
@@ -32783,8 +32027,6 @@ namespace oo_2_0
       ABS,
       REL
     };
-
-    PointCategoryCode ();
 
     PointCategoryCode (value v);
 
@@ -32853,8 +32095,6 @@ namespace oo_2_0
       SNWSHR
     };
 
-    PrecipitationCategoryCode ();
-
     PrecipitationCategoryCode (value v);
 
     PrecipitationCategoryCode (const char* v);
@@ -32919,8 +32159,6 @@ namespace oo_2_0
       TRADE
     };
 
-    PrivateSectorOrganisationTypeCategoryCode ();
-
     PrivateSectorOrganisationTypeCategoryCode (value v);
 
     PrivateSectorOrganisationTypeCategoryCode (const char* v);
@@ -32982,8 +32220,6 @@ namespace oo_2_0
       SHPTSH
     };
 
-    QuayContainerHandlingTypeCode ();
-
     QuayContainerHandlingTypeCode (value v);
 
     QuayContainerHandlingTypeCode (const char* v);
@@ -33044,8 +32280,6 @@ namespace oo_2_0
       WHLCRN
     };
 
-    QuayCraneOffloadingTypeCode ();
-
     QuayCraneOffloadingTypeCode (value v);
 
     QuayCraneOffloadingTypeCode (const char* v);
@@ -33101,8 +32335,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    QuayRailServedIndicatorCode ();
 
     QuayRailServedIndicatorCode (value v);
 
@@ -33168,8 +32400,6 @@ namespace oo_2_0
       WARHSE
     };
 
-    QuayStorageCode ();
-
     QuayStorageCode (value v);
 
     QuayStorageCode (const char* v);
@@ -33227,8 +32457,6 @@ namespace oo_2_0
       RADALM,
       RADEVT
     };
-
-    RadioactiveEventCategoryCode ();
 
     RadioactiveEventCategoryCode (value v);
 
@@ -33291,8 +32519,6 @@ namespace oo_2_0
       BACK
     };
 
-    RadioactiveEventDoseRateTrendCode ();
-
     RadioactiveEventDoseRateTrendCode (value v);
 
     RadioactiveEventDoseRateTrendCode (const char* v);
@@ -33349,8 +32575,6 @@ namespace oo_2_0
       DN,
       DS
     };
-
-    RadioactiveEventRelativeDecayRateCode ();
 
     RadioactiveEventRelativeDecayRateCode (value v);
 
@@ -33417,8 +32641,6 @@ namespace oo_2_0
       TOXMAT
     };
 
-    RadioactiveMaterielTypeCategoryCode ();
-
     RadioactiveMaterielTypeCategoryCode (value v);
 
     RadioactiveMaterielTypeCategoryCode (const char* v);
@@ -33477,8 +32699,6 @@ namespace oo_2_0
       NEUTRN,
       NKN
     };
-
-    RadioactiveMaterielTypePrimaryRadiationCode ();
 
     RadioactiveMaterielTypePrimaryRadiationCode (value v);
 
@@ -33540,8 +32760,6 @@ namespace oo_2_0
       TRAIN,
       TRAM
     };
-
-    RailcarTypeCategoryCode ();
 
     RailcarTypeCategoryCode (value v);
 
@@ -33623,8 +32841,6 @@ namespace oo_2_0
       WGNWFL
     };
 
-    RailcarTypeSubcategoryCode ();
-
     RailcarTypeSubcategoryCode (value v);
 
     RailcarTypeSubcategoryCode (const char* v);
@@ -33686,8 +32902,6 @@ namespace oo_2_0
       Z
     };
 
-    RailwaySignalSystemCode ();
-
     RailwaySignalSystemCode (value v);
 
     RailwaySignalSystemCode (const char* v);
@@ -33746,8 +32960,6 @@ namespace oo_2_0
       cxx_85
     };
 
-    RailwaySignalSystemEfficiencyCode ();
-
     RailwaySignalSystemEfficiencyCode (value v);
 
     RailwaySignalSystemEfficiencyCode (const char* v);
@@ -33804,8 +33016,6 @@ namespace oo_2_0
       STD
     };
 
-    RailwayTrackGaugeCode ();
-
     RailwayTrackGaugeCode (value v);
 
     RailwayTrackGaugeCode (const char* v);
@@ -33861,8 +33071,6 @@ namespace oo_2_0
       E,
       NE
     };
-
-    RailwayTractionSystemCode ();
 
     RailwayTractionSystemCode (value v);
 
@@ -33928,8 +33136,6 @@ namespace oo_2_0
       SUPLMN,
       SUPRCD
     };
-
-    ReferenceAssociationCategoryCode ();
 
     ReferenceAssociationCategoryCode (value v);
 
@@ -34005,8 +33211,6 @@ namespace oo_2_0
       TSTDOC
     };
 
-    ReferenceContentCategoryCode ();
-
     ReferenceContentCategoryCode (value v);
 
     ReferenceContentCategoryCode (const char* v);
@@ -34063,8 +33267,6 @@ namespace oo_2_0
       FINAL,
       OBSLTE
     };
-
-    ReferenceLifecycleCode ();
 
     ReferenceLifecycleCode (value v);
 
@@ -34126,8 +33328,6 @@ namespace oo_2_0
       NOS,
       PAPERB
     };
-
-    ReferenceMediumTypeCode ();
 
     ReferenceMediumTypeCode (value v);
 
@@ -34194,8 +33394,6 @@ namespace oo_2_0
       VIDEO
     };
 
-    ReferenceTransmittalTypeCode ();
-
     ReferenceTransmittalTypeCode (value v);
 
     ReferenceTransmittalTypeCode (const char* v);
@@ -34253,8 +33451,6 @@ namespace oo_2_0
       REFVNA
     };
 
-    ReferenceVerificationCode ();
-
     ReferenceVerificationCode (value v);
 
     ReferenceVerificationCode (const char* v);
@@ -34310,8 +33506,6 @@ namespace oo_2_0
       OBJREF,
       PNTREF
     };
-
-    RelativeCoordinateSystemReferenceCategoryCode ();
 
     RelativeCoordinateSystemReferenceCategoryCode (value v);
 
@@ -34371,8 +33565,6 @@ namespace oo_2_0
       PUFF,
       SPRAY
     };
-
-    ReleaseCategoryCode ();
 
     ReleaseCategoryCode (value v);
 
@@ -34434,8 +33626,6 @@ namespace oo_2_0
       cxx_6
     };
 
-    ReportingDataAccuracyCode ();
-
     ReportingDataAccuracyCode (value v);
 
     ReportingDataAccuracyCode (const char* v);
@@ -34496,8 +33686,6 @@ namespace oo_2_0
       REP
     };
 
-    ReportingDataCategoryCode ();
-
     ReportingDataCategoryCode (value v);
 
     ReportingDataCategoryCode (const char* v);
@@ -34553,8 +33741,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    ReportingDataCountingIndicatorCode ();
 
     ReportingDataCountingIndicatorCode (value v);
 
@@ -34613,8 +33799,6 @@ namespace oo_2_0
       RPTPLA,
       RPTUNC
     };
-
-    ReportingDataCredibilityCode ();
 
     ReportingDataCredibilityCode (value v);
 
@@ -34694,8 +33878,6 @@ namespace oo_2_0
       TPRSPR
     };
 
-    ReportingDataEntityCategoryCode ();
-
     ReportingDataEntityCategoryCode (value v);
 
     ReportingDataEntityCategoryCode (const char* v);
@@ -34750,8 +33932,6 @@ namespace oo_2_0
     {
       REAL
     };
-
-    ReportingDataRealDataExerciseUseOnlyCode ();
 
     ReportingDataRealDataExerciseUseOnlyCode (value v);
 
@@ -34812,8 +33992,6 @@ namespace oo_2_0
       E,
       F
     };
-
-    ReportingDataReliabilityCode ();
 
     ReportingDataReliabilityCode (value v);
 
@@ -34904,8 +34082,6 @@ namespace oo_2_0
       VARI
     };
 
-    ReportingDataSourceTypeCode ();
-
     ReportingDataSourceTypeCode (value v);
 
     ReportingDataSourceTypeCode (const char* v);
@@ -34962,8 +34138,6 @@ namespace oo_2_0
       RDRELT,
       TIMNA
     };
-
-    ReportingDataTimingCategoryCode ();
 
     ReportingDataTimingCategoryCode (value v);
 
@@ -35022,8 +34196,6 @@ namespace oo_2_0
       UNK,
       YES
     };
-
-    RequestAnswerCategoryCode ();
 
     RequestAnswerCategoryCode (value v);
 
@@ -35088,8 +34260,6 @@ namespace oo_2_0
       TYPE
     };
 
-    RequestCategoryCode ();
-
     RequestCategoryCode (value v);
 
     RequestCategoryCode (const char* v);
@@ -35145,8 +34315,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    RequestImmediateInterestIndicatorCode ();
 
     RequestImmediateInterestIndicatorCode (value v);
 
@@ -35210,8 +34378,6 @@ namespace oo_2_0
       R
     };
 
-    RoadCategoryCode ();
-
     RoadCategoryCode (value v);
 
     RoadCategoryCode (const char* v);
@@ -35270,8 +34436,6 @@ namespace oo_2_0
       P
     };
 
-    RoadQualityCode ();
-
     RoadQualityCode (value v);
 
     RoadQualityCode (const char* v);
@@ -35328,8 +34492,6 @@ namespace oo_2_0
       cxx_2,
       cxx_3
     };
-
-    RoadShoulderWidthCode ();
 
     RoadShoulderWidthCode (value v);
 
@@ -35388,8 +34550,6 @@ namespace oo_2_0
       LAWR
     };
 
-    RoadWeatherConditionCategoryCode ();
-
     RoadWeatherConditionCategoryCode (value v);
 
     RoadWeatherConditionCategoryCode (const char* v);
@@ -35447,8 +34607,6 @@ namespace oo_2_0
       TWOWAY
     };
 
-    RouteDirectionUsageCode ();
-
     RouteDirectionUsageCode (value v);
 
     RouteDirectionUsageCode (const char* v);
@@ -35504,8 +34662,6 @@ namespace oo_2_0
       AIRRTE,
       NOS
     };
-
-    RouteSegmentCategoryCode ();
 
     RouteSegmentCategoryCode (value v);
 
@@ -35601,8 +34757,6 @@ namespace oo_2_0
       VARTRA
     };
 
-    RouteTypeCategoryCode ();
-
     RouteTypeCategoryCode (value v);
 
     RouteTypeCategoryCode (const char* v);
@@ -35659,8 +34813,6 @@ namespace oo_2_0
       YES
     };
 
-    RunwayLightingPresenceIndicatorCode ();
-
     RunwayLightingPresenceIndicatorCode (value v);
 
     RunwayLightingPresenceIndicatorCode (const char* v);
@@ -35716,8 +34868,6 @@ namespace oo_2_0
       T,
       U
     };
-
-    RunwayPavementEvaluationMethodCode ();
 
     RunwayPavementEvaluationMethodCode (value v);
 
@@ -35777,8 +34927,6 @@ namespace oo_2_0
       Z
     };
 
-    RunwayPavementMaximumTyrePressureCode ();
-
     RunwayPavementMaximumTyrePressureCode (value v);
 
     RunwayPavementMaximumTyrePressureCode (const char* v);
@@ -35837,8 +34985,6 @@ namespace oo_2_0
       D
     };
 
-    RunwayPavementSubgradeCategoryCode ();
-
     RunwayPavementSubgradeCategoryCode (value v);
 
     RunwayPavementSubgradeCategoryCode (const char* v);
@@ -35894,8 +35040,6 @@ namespace oo_2_0
       F,
       R
     };
-
-    RunwayPavementTypeCode ();
 
     RunwayPavementTypeCode (value v);
 
@@ -35956,8 +35100,6 @@ namespace oo_2_0
       cxx_4,
       cxx_5
     };
-
-    SecurityClassificationLevelCode ();
 
     SecurityClassificationLevelCode (value v);
 
@@ -36021,8 +35163,6 @@ namespace oo_2_0
       OBSTRD
     };
 
-    SolidSurfaceStatusCode ();
-
     SolidSurfaceStatusCode (value v);
 
     SolidSurfaceStatusCode (const char* v);
@@ -36085,8 +35225,6 @@ namespace oo_2_0
       SNOW
     };
 
-    SolidSurfaceStatusSurfaceConditionCode ();
-
     SolidSurfaceStatusSurfaceConditionCode (value v);
 
     SolidSurfaceStatusSurfaceConditionCode (const char* v);
@@ -36145,8 +35283,6 @@ namespace oo_2_0
       VSOFT
     };
 
-    SolidSurfaceStatusSurfaceFirmnessCode ();
-
     SolidSurfaceStatusSurfaceFirmnessCode (value v);
 
     SolidSurfaceStatusSurfaceFirmnessCode (const char* v);
@@ -36203,8 +35339,6 @@ namespace oo_2_0
       KPH,
       MPS
     };
-
-    SpeedPrecisionCode ();
 
     SpeedPrecisionCode (value v);
 
@@ -36263,8 +35397,6 @@ namespace oo_2_0
       HS,
       OS
     };
-
-    StorageCapabilityConditionCode ();
 
     StorageCapabilityConditionCode (value v);
 
@@ -36330,8 +35462,6 @@ namespace oo_2_0
       MWGTBR,
       NEQLMT
     };
-
-    StorageCapabilityDescriptorCode ();
 
     StorageCapabilityDescriptorCode (value v);
 
@@ -36411,8 +35541,6 @@ namespace oo_2_0
       YSV
     };
 
-    SubsurfaceVesselTypeCategoryCode ();
-
     SubsurfaceVesselTypeCategoryCode (value v);
 
     SubsurfaceVesselTypeCategoryCode (const char* v);
@@ -36468,8 +35596,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    SubsurfaceVesselTypeTorpedoLoadingGearIndicatorCode ();
 
     SubsurfaceVesselTypeTorpedoLoadingGearIndicatorCode (value v);
 
@@ -36552,8 +35678,6 @@ namespace oo_2_0
       WATER
     };
 
-    SupportCapabilityCategoryCode ();
-
     SupportCapabilityCategoryCode (value v);
 
     SupportCapabilityCategoryCode (const char* v);
@@ -36612,8 +35736,6 @@ namespace oo_2_0
       MAXCNT,
       OPRCNT
     };
-
-    SupportCapabilityDescriptorCode ();
 
     SupportCapabilityDescriptorCode (value v);
 
@@ -36675,8 +35797,6 @@ namespace oo_2_0
       PLYGAR,
       TRCKAR
     };
-
-    SurfaceCategoryCode ();
 
     SurfaceCategoryCode (value v);
 
@@ -37156,8 +36276,6 @@ namespace oo_2_0
       ZYTR
     };
 
-    SurfaceVesselTypeCategoryCode ();
-
     SurfaceVesselTypeCategoryCode (value v);
 
     SurfaceVesselTypeCategoryCode (const char* v);
@@ -37219,8 +36337,6 @@ namespace oo_2_0
       SIG
     };
 
-    SurveillanceCapabilityCategoryCode ();
-
     SurveillanceCapabilityCategoryCode (value v);
 
     SurveillanceCapabilityCategoryCode (const char* v);
@@ -37276,8 +36392,6 @@ namespace oo_2_0
       MRANGE,
       NRANGE
     };
-
-    SurveillanceCapabilityDescriptorCode ();
 
     SurveillanceCapabilityDescriptorCode (value v);
 
@@ -37336,8 +36450,6 @@ namespace oo_2_0
       HPOTGT,
       NKN
     };
-
-    TargetEngagementAuthorityCode ();
 
     TargetEngagementAuthorityCode (value v);
 
@@ -37398,8 +36510,6 @@ namespace oo_2_0
       PROVER,
       PRUG
     };
-
-    TargetPersonnelProtectionCategoryCode ();
 
     TargetPersonnelProtectionCategoryCode (value v);
 
@@ -37476,8 +36586,6 @@ namespace oo_2_0
       WRKPTY
     };
 
-    TaskFormationTypeCategoryCode ();
-
     TaskFormationTypeCategoryCode (value v);
 
     TaskFormationTypeCategoryCode (const char* v);
@@ -37534,8 +36642,6 @@ namespace oo_2_0
       TRNSMT,
       TRNSRC
     };
-
-    TransmissionCapabilityCategoryCode ();
 
     TransmissionCapabilityCategoryCode (value v);
 
@@ -37595,8 +36701,6 @@ namespace oo_2_0
       MNMPRF,
       POWER
     };
-
-    TransmissionCapabilityDescriptorCode ();
 
     TransmissionCapabilityDescriptorCode (value v);
 
@@ -37689,8 +36793,6 @@ namespace oo_2_0
       TRNPTN,
       TRSSUP
     };
-
-    UnitTypeArmCategoryCode ();
 
     UnitTypeArmCategoryCode (value v);
 
@@ -37876,8 +36978,6 @@ namespace oo_2_0
       WATER
     };
 
-    UnitTypeArmSpecialisationCode ();
-
     UnitTypeArmSpecialisationCode (value v);
 
     UnitTypeArmSpecialisationCode (const char* v);
@@ -37936,8 +37036,6 @@ namespace oo_2_0
       NKN,
       SOF
     };
-
-    UnitTypeCategoryCode ();
 
     UnitTypeCategoryCode (value v);
 
@@ -38005,8 +37103,6 @@ namespace oo_2_0
       LNDTWD,
       LNDWHL
     };
-
-    UnitTypeGeneralMobilityCode ();
 
     UnitTypeGeneralMobilityCode (value v);
 
@@ -38076,8 +37172,6 @@ namespace oo_2_0
       TMD,
       VSR
     };
-
-    UnitTypeQualifierCode ();
 
     UnitTypeQualifierCode (value v);
 
@@ -38161,8 +37255,6 @@ namespace oo_2_0
       WING
     };
 
-    UnitTypeSizeCode ();
-
     UnitTypeSizeCode (value v);
 
     UnitTypeSizeCode (const char* v);
@@ -38230,8 +37322,6 @@ namespace oo_2_0
       NAVAL
     };
 
-    UnitTypeSupplementarySpecialisationCode ();
-
     UnitTypeSupplementarySpecialisationCode (value v);
 
     UnitTypeSupplementarySpecialisationCode (const char* v);
@@ -38288,8 +37378,6 @@ namespace oo_2_0
       DEACTV,
       NKN
     };
-
-    UsageStatusCode ();
 
     UsageStatusCode (value v);
 
@@ -38354,8 +37442,6 @@ namespace oo_2_0
       UNEXPD
     };
 
-    UxoStatusExposureCode ();
-
     UxoStatusExposureCode (value v);
 
     UxoStatusExposureCode (const char* v);
@@ -38418,8 +37504,6 @@ namespace oo_2_0
       RUSTED
     };
 
-    UxoStatusQualifierCode ();
-
     UxoStatusQualifierCode (value v);
 
     UxoStatusQualifierCode (const char* v);
@@ -38481,8 +37565,6 @@ namespace oo_2_0
       WETLND,
       WODLND
     };
-
-    VegetationCategoryCode ();
 
     VegetationCategoryCode (value v);
 
@@ -38560,8 +37642,6 @@ namespace oo_2_0
       TUNDRA,
       VNEYRD
     };
-
-    VegetationSubcategoryCode ();
 
     VegetationSubcategoryCode (value v);
 
@@ -38665,8 +37745,6 @@ namespace oo_2_0
       WRCKR
     };
 
-    VehicleTypeCategoryCode ();
-
     VehicleTypeCategoryCode (value v);
 
     VehicleTypeCategoryCode (const char* v);
@@ -38731,8 +37809,6 @@ namespace oo_2_0
       WGS84R
     };
 
-    VerticalDistanceReferenceCode ();
-
     VerticalDistanceReferenceCode (value v);
 
     VerticalDistanceReferenceCode (const char* v);
@@ -38790,8 +37866,6 @@ namespace oo_2_0
       SUBSRF,
       SURFAC
     };
-
-    VesselTypeCategoryCode ();
 
     VesselTypeCategoryCode (value v);
 
@@ -38868,8 +37942,6 @@ namespace oo_2_0
       WJ
     };
 
-    VesselTypePropulsionTypeCode ();
-
     VesselTypePropulsionTypeCode (value v);
 
     VesselTypePropulsionTypeCode (const char* v);
@@ -38934,8 +38006,6 @@ namespace oo_2_0
       SMOKE,
       SNDSTR
     };
-
-    VisibilityCategoryCode ();
 
     VisibilityCategoryCode (value v);
 
@@ -39003,8 +38073,6 @@ namespace oo_2_0
       TANK
     };
 
-    WeaponTypeCategoryCode ();
-
     WeaponTypeCategoryCode (value v);
 
     WeaponTypeCategoryCode (const char* v);
@@ -39060,8 +38128,6 @@ namespace oo_2_0
       NO,
       YES
     };
-
-    WeaponTypeFireGuidanceIndicatorCode ();
 
     WeaponTypeFireGuidanceIndicatorCode (value v);
 
@@ -39213,8 +38279,6 @@ namespace oo_2_0
       TKGUNM
     };
 
-    WeaponTypeSubcategoryCode ();
-
     WeaponTypeSubcategoryCode (value v);
 
     WeaponTypeSubcategoryCode (const char* v);
@@ -39278,8 +38342,6 @@ namespace oo_2_0
       S,
       U
     };
-
-    WindAirStabilityCategoryCode ();
 
     WindAirStabilityCategoryCode (value v);
 
@@ -39350,8 +38412,6 @@ namespace oo_2_0
       cxx_8
     };
 
-    WindAltitudeLayerCode ();
-
     WindAltitudeLayerCode (value v);
 
     WindAltitudeLayerCode (const char* v);
@@ -39415,8 +38475,6 @@ namespace oo_2_0
       VRB,
       WSHEAR
     };
-
-    WindCategoryCode ();
 
     WindCategoryCode (value v);
 

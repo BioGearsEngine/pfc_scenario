@@ -182,17 +182,11 @@ namespace msdl_1
 
 #include <xsd/cxx/tree/type-factory-map.hxx>
 
-#include <xsd/cxx/tree/comparison-map.hxx>
-
 namespace _xsd
 {
   static
   const ::xsd::cxx::tree::type_factory_plate< 0, char >
   type_factory_plate_init;
-
-  static
-  const ::xsd::cxx::tree::comparison_plate< 0, char >
-  comparison_plate_init;
 }
 
 namespace msdl_1
@@ -257,10 +251,6 @@ namespace msdl_1
     "boolean",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, boolean >
-  _xsd_boolean_comparison_init;
-
   // floatCartesianValue9_3
   //
 
@@ -320,10 +310,6 @@ namespace msdl_1
   _xsd_floatCartesianValue9_3_type_factory_init (
     "floatCartesianValue9_3",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, floatCartesianValue9_3 >
-  _xsd_floatCartesianValue9_3_comparison_init;
 
   // floatCompassDegrees3_3
   //
@@ -385,10 +371,6 @@ namespace msdl_1
     "floatCompassDegrees3_3",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, floatCompassDegrees3_3 >
-  _xsd_floatCompassDegrees3_3_comparison_init;
-
   // floatElevationAGL6_2
   //
 
@@ -448,10 +430,6 @@ namespace msdl_1
   _xsd_floatElevationAGL6_2_type_factory_init (
     "floatElevationAGL6_2",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, floatElevationAGL6_2 >
-  _xsd_floatElevationAGL6_2_comparison_init;
 
   // floatLatitudeLongitude3_3
   //
@@ -513,10 +491,6 @@ namespace msdl_1
     "floatLatitudeLongitude3_3",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, floatLatitudeLongitude3_3 >
-  _xsd_floatLatitudeLongitude3_3_comparison_init;
-
   // floatSpacing4_3
   //
 
@@ -576,10 +550,6 @@ namespace msdl_1
   _xsd_floatSpacing4_3_type_factory_init (
     "floatSpacing4_3",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, floatSpacing4_3 >
-  _xsd_floatSpacing4_3_comparison_init;
 
   // floatSpeed6_2
   //
@@ -641,10 +611,6 @@ namespace msdl_1
     "floatSpeed6_2",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, floatSpeed6_2 >
-  _xsd_floatSpeed6_2_comparison_init;
-
   // floatUTMEasting9_2
   //
 
@@ -704,10 +670,6 @@ namespace msdl_1
   _xsd_floatUTMEasting9_2_type_factory_init (
     "floatUTMEasting9_2",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, floatUTMEasting9_2 >
-  _xsd_floatUTMEasting9_2_comparison_init;
 
   // floatUTMNorthing9_2
   //
@@ -769,10 +731,6 @@ namespace msdl_1
     "floatUTMNorthing9_2",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, floatUTMNorthing9_2 >
-  _xsd_floatUTMNorthing9_2_comparison_init;
-
   // integerMGRSEasting5
   //
 
@@ -832,10 +790,6 @@ namespace msdl_1
   _xsd_integerMGRSEasting5_type_factory_init (
     "integerMGRSEasting5",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, integerMGRSEasting5 >
-  _xsd_integerMGRSEasting5_comparison_init;
 
   // integerMGRSNorthing5
   //
@@ -897,10 +851,6 @@ namespace msdl_1
     "integerMGRSNorthing5",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, integerMGRSNorthing5 >
-  _xsd_integerMGRSNorthing5_comparison_init;
-
   // integerMGRSPrecision1
   //
 
@@ -960,10 +910,6 @@ namespace msdl_1
   _xsd_integerMGRSPrecision1_type_factory_init (
     "integerMGRSPrecision1",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, integerMGRSPrecision1 >
-  _xsd_integerMGRSPrecision1_comparison_init;
 
   // integerPriorityToSupport1
   //
@@ -1025,10 +971,6 @@ namespace msdl_1
     "integerPriorityToSupport1",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, integerPriorityToSupport1 >
-  _xsd_integerPriorityToSupport1_comparison_init;
-
   // integerQuantity9
   //
 
@@ -1089,10 +1031,6 @@ namespace msdl_1
     "integerQuantity9",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, integerQuantity9 >
-  _xsd_integerQuantity9_comparison_init;
-
   // integerSequence6
   //
 
@@ -1152,10 +1090,6 @@ namespace msdl_1
   _xsd_integerSequence6_type_factory_init (
     "integerSequence6",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, integerSequence6 >
-  _xsd_integerSequence6_comparison_init;
 
   // patternForceSymbolID15
   //
@@ -1235,10 +1169,6 @@ namespace msdl_1
     "patternForceSymbolID15",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, patternForceSymbolID15 >
-  _xsd_patternForceSymbolID15_comparison_init;
-
   // patternInstallationSymbolID15
   //
 
@@ -1316,10 +1246,6 @@ namespace msdl_1
   _xsd_patternInstallationSymbolID15_type_factory_init (
     "patternInstallationSymbolID15",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, patternInstallationSymbolID15 >
-  _xsd_patternInstallationSymbolID15_comparison_init;
 
   // patternMETOCSymbolID15
   //
@@ -1399,10 +1325,6 @@ namespace msdl_1
     "patternMETOCSymbolID15",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, patternMETOCSymbolID15 >
-  _xsd_patternMETOCSymbolID15_comparison_init;
-
   // patternMGRSGridSquare2
   //
 
@@ -1480,10 +1402,6 @@ namespace msdl_1
   _xsd_patternMGRSGridSquare2_type_factory_init (
     "patternMGRSGridSquare2",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, patternMGRSGridSquare2 >
-  _xsd_patternMGRSGridSquare2_comparison_init;
 
   // patternMOOTWSymbolID15
   //
@@ -1563,10 +1481,6 @@ namespace msdl_1
     "patternMOOTWSymbolID15",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, patternMOOTWSymbolID15 >
-  _xsd_patternMOOTWSymbolID15_comparison_init;
-
   // patternTacticalGraphicSymbolID15
   //
 
@@ -1644,10 +1558,6 @@ namespace msdl_1
   _xsd_patternTacticalGraphicSymbolID15_type_factory_init (
     "patternTacticalGraphicSymbolID15",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, patternTacticalGraphicSymbolID15 >
-  _xsd_patternTacticalGraphicSymbolID15_comparison_init;
 
   // patternTimeDTG20
   //
@@ -1727,10 +1637,6 @@ namespace msdl_1
     "patternTimeDTG20",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, patternTimeDTG20 >
-  _xsd_patternTimeDTG20_comparison_init;
-
   // patternTimeDTGRelative20
   //
 
@@ -1808,10 +1714,6 @@ namespace msdl_1
   _xsd_patternTimeDTGRelative20_type_factory_init (
     "patternTimeDTGRelative20",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, patternTimeDTGRelative20 >
-  _xsd_patternTimeDTGRelative20_comparison_init;
 
   // patternUTMGridZone3
   //
@@ -1891,10 +1793,6 @@ namespace msdl_1
     "patternUTMGridZone3",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, patternUTMGridZone3 >
-  _xsd_patternUTMGridZone3_comparison_init;
-
   // patternUUID32
   //
 
@@ -1972,10 +1870,6 @@ namespace msdl_1
   _xsd_patternUUID32_type_factory_init (
     "patternUUID32",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, patternUUID32 >
-  _xsd_patternUUID32_comparison_init;
 
   // patternUUIDRef32
   //
@@ -2055,10 +1949,6 @@ namespace msdl_1
     "patternUUIDRef32",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, patternUUIDRef32 >
-  _xsd_patternUUIDRef32_comparison_init;
-
   // text20
   //
 
@@ -2136,10 +2026,6 @@ namespace msdl_1
   _xsd_text20_type_factory_init (
     "text20",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, text20 >
-  _xsd_text20_comparison_init;
 
   // text21
   //
@@ -2219,10 +2105,6 @@ namespace msdl_1
     "text21",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, text21 >
-  _xsd_text21_comparison_init;
-
   // textDatum8
   //
 
@@ -2300,10 +2182,6 @@ namespace msdl_1
   _xsd_textDatum8_type_factory_init (
     "textDatum8",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, textDatum8 >
-  _xsd_textDatum8_comparison_init;
 
   // textEquipmentType24
   //
@@ -2383,10 +2261,6 @@ namespace msdl_1
     "textEquipmentType24",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, textEquipmentType24 >
-  _xsd_textEquipmentType24_comparison_init;
-
   // textIdentifier64
   //
 
@@ -2464,10 +2338,6 @@ namespace msdl_1
   _xsd_textIdentifier64_type_factory_init (
     "textIdentifier64",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, textIdentifier64 >
-  _xsd_textIdentifier64_comparison_init;
 
   // textIFF5
   //
@@ -2547,10 +2417,6 @@ namespace msdl_1
     "textIFF5",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, textIFF5 >
-  _xsd_textIFF5_comparison_init;
-
   // textName255
   //
 
@@ -2629,10 +2495,6 @@ namespace msdl_1
     "textName255",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, textName255 >
-  _xsd_textName255_comparison_init;
-
   // textSpecialC2HQ9
   //
 
@@ -2710,10 +2572,6 @@ namespace msdl_1
   _xsd_textSpecialC2HQ9_type_factory_init (
     "textSpecialC2HQ9",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, textSpecialC2HQ9 >
-  _xsd_textSpecialC2HQ9_comparison_init;
 }
 
 #include <ostream>

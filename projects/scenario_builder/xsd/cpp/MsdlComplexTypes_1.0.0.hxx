@@ -442,13 +442,6 @@ namespace msdl_1
     ::xsd::cxx::tree::one< Anchor_type > Anchor_;
   };
 
-  bool
-  operator== (const AnchorPointType&, const AnchorPointType&);
-
-  bool
-  operator!= (const AnchorPointType&, const AnchorPointType&);
-
-
   class AnchorPointsType: public ::xml_schema::type
   {
     public:
@@ -501,13 +494,6 @@ namespace msdl_1
     protected:
     AnchorPoint_sequence AnchorPoint_;
   };
-
-  bool
-  operator== (const AnchorPointsType&, const AnchorPointsType&);
-
-  bool
-  operator!= (const AnchorPointsType&, const AnchorPointsType&);
-
 
   class AnchorType: public ::xml_schema::type
   {
@@ -587,13 +573,6 @@ namespace msdl_1
     Location_optional Location_;
     PointSymbolHandle_optional PointSymbolHandle_;
   };
-
-  bool
-  operator== (const AnchorType&, const AnchorType&);
-
-  bool
-  operator!= (const AnchorType&, const AnchorType&);
-
 
   class AreaSymbolModifiersType: public ::xml_schema::type
   {
@@ -784,13 +763,6 @@ namespace msdl_1
     DateTimeGroup1_optional DateTimeGroup1_;
   };
 
-  bool
-  operator== (const AreaSymbolModifiersType&, const AreaSymbolModifiersType&);
-
-  bool
-  operator!= (const AreaSymbolModifiersType&, const AreaSymbolModifiersType&);
-
-
   class AssociatedOverlaysType: public ::xml_schema::type
   {
     public:
@@ -868,13 +840,6 @@ namespace msdl_1
     SourceOverlayType_optional SourceOverlayType_;
   };
 
-  bool
-  operator== (const AssociatedOverlaysType&, const AssociatedOverlaysType&);
-
-  bool
-  operator!= (const AssociatedOverlaysType&, const AssociatedOverlaysType&);
-
-
   class AssociationsType: public ::xml_schema::type
   {
     public:
@@ -927,13 +892,6 @@ namespace msdl_1
     protected:
     Association_sequence Association_;
   };
-
-  bool
-  operator== (const AssociationsType&, const AssociationsType&);
-
-  bool
-  operator!= (const AssociationsType&, const AssociationsType&);
-
 
   class AssociationType: public ::xml_schema::type
   {
@@ -1009,13 +967,6 @@ namespace msdl_1
     ::xsd::cxx::tree::one< AffiliateHandle_type > AffiliateHandle_;
     ::xsd::cxx::tree::one< Relationship_type > Relationship_;
   };
-
-  bool
-  operator== (const AssociationType&, const AssociationType&);
-
-  bool
-  operator!= (const AssociationType&, const AssociationType&);
-
 
   class BoundarySymbolModifiersType: public ::xml_schema::type
   {
@@ -1118,13 +1069,6 @@ namespace msdl_1
     UniqueDesignation1_optional UniqueDesignation1_;
   };
 
-  bool
-  operator== (const BoundarySymbolModifiersType&, const BoundarySymbolModifiersType&);
-
-  bool
-  operator!= (const BoundarySymbolModifiersType&, const BoundarySymbolModifiersType&);
-
-
   class CloudCoverItemsType: public ::xml_schema::type
   {
     public:
@@ -1177,13 +1121,6 @@ namespace msdl_1
     protected:
     CloudCover_sequence CloudCover_;
   };
-
-  bool
-  operator== (const CloudCoverItemsType&, const CloudCoverItemsType&);
-
-  bool
-  operator!= (const CloudCoverItemsType&, const CloudCoverItemsType&);
-
 
   class CommandRelationType: public ::xml_schema::type
   {
@@ -1260,13 +1197,6 @@ namespace msdl_1
     ::xsd::cxx::tree::one< CommandRelationshipType_type > CommandRelationshipType_;
   };
 
-  bool
-  operator== (const CommandRelationType&, const CommandRelationType&);
-
-  bool
-  operator!= (const CommandRelationType&, const CommandRelationType&);
-
-
   class CommunicationNetInstancesType: public ::xml_schema::type
   {
     public:
@@ -1319,13 +1249,6 @@ namespace msdl_1
     protected:
     CommunicationNetInstance_sequence CommunicationNetInstance_;
   };
-
-  bool
-  operator== (const CommunicationNetInstancesType&, const CommunicationNetInstancesType&);
-
-  bool
-  operator!= (const CommunicationNetInstancesType&, const CommunicationNetInstancesType&);
-
 
   class CommunicationNetInstanceType: public ::xml_schema::type
   {
@@ -1424,13 +1347,6 @@ namespace msdl_1
     ::xsd::cxx::tree::one< CommunicationService_type > CommunicationService_;
   };
 
-  bool
-  operator== (const CommunicationNetInstanceType&, const CommunicationNetInstanceType&);
-
-  bool
-  operator!= (const CommunicationNetInstanceType&, const CommunicationNetInstanceType&);
-
-
   class CommunicationNetReferencesType: public ::xml_schema::type
   {
     public:
@@ -1483,13 +1399,6 @@ namespace msdl_1
     protected:
     CommunicationNetReference_sequence CommunicationNetReference_;
   };
-
-  bool
-  operator== (const CommunicationNetReferencesType&, const CommunicationNetReferencesType&);
-
-  bool
-  operator!= (const CommunicationNetReferencesType&, const CommunicationNetReferencesType&);
-
 
   class CommunicationNetReferenceType: public ::xml_schema::type
   {
@@ -1566,13 +1475,6 @@ namespace msdl_1
     ::xsd::cxx::tree::one< UnitOwnerHandle_type > UnitOwnerHandle_;
   };
 
-  bool
-  operator== (const CommunicationNetReferenceType&, const CommunicationNetReferenceType&);
-
-  bool
-  operator!= (const CommunicationNetReferenceType&, const CommunicationNetReferenceType&);
-
-
   class CoordinateDataStandardType: public ::xml_schema::type
   {
     public:
@@ -1647,13 +1549,6 @@ namespace msdl_1
     ::xsd::cxx::tree::one< CoordinateSystemType_type > CoordinateSystemType_;
     ::xsd::cxx::tree::one< CoordinateSystemDatum_type > CoordinateSystemDatum_;
   };
-
-  bool
-  operator== (const CoordinateDataStandardType&, const CoordinateDataStandardType&);
-
-  bool
-  operator!= (const CoordinateDataStandardType&, const CoordinateDataStandardType&);
-
 
   class CoordinatesType: public ::xml_schema::type
   {
@@ -1732,13 +1627,6 @@ namespace msdl_1
     ::xsd::cxx::tree::one< CoordinateChoice_type > CoordinateChoice_;
     ::xsd::cxx::tree::one< CoordinateData_type > CoordinateData_;
   };
-
-  bool
-  operator== (const CoordinatesType&, const CoordinatesType&);
-
-  bool
-  operator!= (const CoordinatesType&, const CoordinatesType&);
-
 
   class CoordinatePointType: public ::xml_schema::type
   {
@@ -1863,13 +1751,6 @@ namespace msdl_1
     GCC_optional GCC_;
   };
 
-  bool
-  operator== (const CoordinatePointType&, const CoordinatePointType&);
-
-  bool
-  operator!= (const CoordinatePointType&, const CoordinatePointType&);
-
-
   class EnvironmentType: public ::xml_schema::type
   {
     public:
@@ -1993,13 +1874,6 @@ namespace msdl_1
     METOC_optional METOC_;
   };
 
-  bool
-  operator== (const EnvironmentType&, const EnvironmentType&);
-
-  bool
-  operator!= (const EnvironmentType&, const EnvironmentType&);
-
-
   class EquipmentDispositionType: public ::xml_schema::type
   {
     public:
@@ -2120,13 +1994,6 @@ namespace msdl_1
     Speed_optional Speed_;
     FormationPosition_optional FormationPosition_;
   };
-
-  bool
-  operator== (const EquipmentDispositionType&, const EquipmentDispositionType&);
-
-  bool
-  operator!= (const EquipmentDispositionType&, const EquipmentDispositionType&);
-
 
   class EquipmentItemType: public ::xml_schema::type
   {
@@ -2336,13 +2203,6 @@ namespace msdl_1
     Model_optional Model_;
   };
 
-  bool
-  operator== (const EquipmentItemType&, const EquipmentItemType&);
-
-  bool
-  operator!= (const EquipmentItemType&, const EquipmentItemType&);
-
-
   class EquipmentModelType: public ::xml_schema::type
   {
     public:
@@ -2397,13 +2257,6 @@ namespace msdl_1
     protected:
     ::xsd::cxx::tree::one< Resolution_type > Resolution_;
   };
-
-  bool
-  operator== (const EquipmentModelType&, const EquipmentModelType&);
-
-  bool
-  operator!= (const EquipmentModelType&, const EquipmentModelType&);
-
 
   class EquipmentRelationsType: public ::xml_schema::type
   {
@@ -2481,13 +2334,6 @@ namespace msdl_1
     OrganicSuperiorHandle_optional OrganicSuperiorHandle_;
     ::xsd::cxx::tree::one< HoldingOrganization_type > HoldingOrganization_;
   };
-
-  bool
-  operator== (const EquipmentRelationsType&, const EquipmentRelationsType&);
-
-  bool
-  operator!= (const EquipmentRelationsType&, const EquipmentRelationsType&);
-
 
   class EquipmentSymbolModifiersType: public ::xml_schema::type
   {
@@ -2698,13 +2544,6 @@ namespace msdl_1
     TowedSonarArray_optional TowedSonarArray_;
   };
 
-  bool
-  operator== (const EquipmentSymbolModifiersType&, const EquipmentSymbolModifiersType&);
-
-  bool
-  operator!= (const EquipmentSymbolModifiersType&, const EquipmentSymbolModifiersType&);
-
-
   class EquipmentType: public ::xml_schema::type
   {
     public:
@@ -2757,13 +2596,6 @@ namespace msdl_1
     protected:
     EquipmentItem_sequence EquipmentItem_;
   };
-
-  bool
-  operator== (const EquipmentType&, const EquipmentType&);
-
-  bool
-  operator!= (const EquipmentType&, const EquipmentType&);
-
 
   class ForceRelationDataType: public ::xml_schema::type
   {
@@ -2844,13 +2676,6 @@ namespace msdl_1
     ForceSideHandle_optional ForceSideHandle_;
   };
 
-  bool
-  operator== (const ForceRelationDataType&, const ForceRelationDataType&);
-
-  bool
-  operator!= (const ForceRelationDataType&, const ForceRelationDataType&);
-
-
   class ForceRelationType: public ::xml_schema::type
   {
     public:
@@ -2929,13 +2754,6 @@ namespace msdl_1
     ::xsd::cxx::tree::one< ForceRelationData_type > ForceRelationData_;
   };
 
-  bool
-  operator== (const ForceRelationType&, const ForceRelationType&);
-
-  bool
-  operator!= (const ForceRelationType&, const ForceRelationType&);
-
-
   class ForceSidesType: public ::xml_schema::type
   {
     public:
@@ -2988,13 +2806,6 @@ namespace msdl_1
     protected:
     ForceSide_sequence ForceSide_;
   };
-
-  bool
-  operator== (const ForceSidesType&, const ForceSidesType&);
-
-  bool
-  operator!= (const ForceSidesType&, const ForceSidesType&);
-
 
   class ForceSideType: public ::xml_schema::type
   {
@@ -3159,13 +2970,6 @@ namespace msdl_1
     Associations_optional Associations_;
   };
 
-  bool
-  operator== (const ForceSideType&, const ForceSideType&);
-
-  bool
-  operator!= (const ForceSideType&, const ForceSideType&);
-
-
   class FormationDataType: public ::xml_schema::type
   {
     public:
@@ -3289,13 +3093,6 @@ namespace msdl_1
     SubsurfaceFormationType_optional SubsurfaceFormationType_;
   };
 
-  bool
-  operator== (const FormationDataType&, const FormationDataType&);
-
-  bool
-  operator!= (const FormationDataType&, const FormationDataType&);
-
-
   class FormationPositionType: public ::xml_schema::type
   {
     public:
@@ -3397,13 +3194,6 @@ namespace msdl_1
     SensorOrientation_optional SensorOrientation_;
   };
 
-  bool
-  operator== (const FormationPositionType&, const FormationPositionType&);
-
-  bool
-  operator!= (const FormationPositionType&, const FormationPositionType&);
-
-
   class GCCType: public ::xml_schema::type
   {
     public:
@@ -3498,13 +3288,6 @@ namespace msdl_1
     ::xsd::cxx::tree::one< Y_type > Y_;
     ::xsd::cxx::tree::one< Z_type > Z_;
   };
-
-  bool
-  operator== (const GCCType&, const GCCType&);
-
-  bool
-  operator!= (const GCCType&, const GCCType&);
-
 
   class GDCType: public ::xml_schema::type
   {
@@ -3601,13 +3384,6 @@ namespace msdl_1
     ::xsd::cxx::tree::one< ElevationAGL_type > ElevationAGL_;
   };
 
-  bool
-  operator== (const GDCType&, const GDCType&);
-
-  bool
-  operator!= (const GDCType&, const GDCType&);
-
-
   class InstallationsType: public ::xml_schema::type
   {
     public:
@@ -3660,13 +3436,6 @@ namespace msdl_1
     protected:
     Installation_sequence Installation_;
   };
-
-  bool
-  operator== (const InstallationsType&, const InstallationsType&);
-
-  bool
-  operator!= (const InstallationsType&, const InstallationsType&);
-
 
   class InstallationSymbolModifiersType: public ::xml_schema::type
   {
@@ -3854,13 +3623,6 @@ namespace msdl_1
     ::xsd::cxx::tree::one< UniqueDesignation_type > UniqueDesignation_;
     DateTimeGroup_optional DateTimeGroup_;
   };
-
-  bool
-  operator== (const InstallationSymbolModifiersType&, const InstallationSymbolModifiersType&);
-
-  bool
-  operator!= (const InstallationSymbolModifiersType&, const InstallationSymbolModifiersType&);
-
 
   class InstallationType: public ::xml_schema::type
   {
@@ -4091,13 +3853,6 @@ namespace msdl_1
     AssociatedOverlays_optional AssociatedOverlays_;
   };
 
-  bool
-  operator== (const InstallationType&, const InstallationType&);
-
-  bool
-  operator!= (const InstallationType&, const InstallationType&);
-
-
   class LightItemsType: public ::xml_schema::type
   {
     public:
@@ -4150,13 +3905,6 @@ namespace msdl_1
     protected:
     Light_sequence Light_;
   };
-
-  bool
-  operator== (const LightItemsType&, const LightItemsType&);
-
-  bool
-  operator!= (const LightItemsType&, const LightItemsType&);
-
 
   class LineSymbolModifiersType: public ::xml_schema::type
   {
@@ -4281,13 +4029,6 @@ namespace msdl_1
     DateTimeGroup1_optional DateTimeGroup1_;
   };
 
-  bool
-  operator== (const LineSymbolModifiersType&, const LineSymbolModifiersType&);
-
-  bool
-  operator!= (const LineSymbolModifiersType&, const LineSymbolModifiersType&);
-
-
   class METOCDispositionType: public ::xml_schema::type
   {
     public:
@@ -4386,13 +4127,6 @@ namespace msdl_1
     DirectionOfMovement_optional DirectionOfMovement_;
     Speed_optional Speed_;
   };
-
-  bool
-  operator== (const METOCDispositionType&, const METOCDispositionType&);
-
-  bool
-  operator!= (const METOCDispositionType&, const METOCDispositionType&);
-
 
   class METOCGraphicType: public ::xml_schema::type
   {
@@ -4602,13 +4336,6 @@ namespace msdl_1
     ::xsd::cxx::tree::one< Disposition_type > Disposition_;
   };
 
-  bool
-  operator== (const METOCGraphicType&, const METOCGraphicType&);
-
-  bool
-  operator!= (const METOCGraphicType&, const METOCGraphicType&);
-
-
   class METOCType: public ::xml_schema::type
   {
     public:
@@ -4661,13 +4388,6 @@ namespace msdl_1
     protected:
     METOCGraphic_sequence METOCGraphic_;
   };
-
-  bool
-  operator== (const METOCType&, const METOCType&);
-
-  bool
-  operator!= (const METOCType&, const METOCType&);
-
 
   class MilitaryScenarioType: public ::xml_schema::type
   {
@@ -4896,13 +4616,6 @@ namespace msdl_1
     MOOTWGraphics_optional MOOTWGraphics_;
   };
 
-  bool
-  operator== (const MilitaryScenarioType&, const MilitaryScenarioType&);
-
-  bool
-  operator!= (const MilitaryScenarioType&, const MilitaryScenarioType&);
-
-
   class MGRSType: public ::xml_schema::type
   {
     public:
@@ -5060,13 +4773,6 @@ namespace msdl_1
     ElevationAGL_optional ElevationAGL_;
   };
 
-  bool
-  operator== (const MGRSType&, const MGRSType&);
-
-  bool
-  operator!= (const MGRSType&, const MGRSType&);
-
-
   class MOOTWDispositionType: public ::xml_schema::type
   {
     public:
@@ -5166,13 +4872,6 @@ namespace msdl_1
     Speed_optional Speed_;
   };
 
-  bool
-  operator== (const MOOTWDispositionType&, const MOOTWDispositionType&);
-
-  bool
-  operator!= (const MOOTWDispositionType&, const MOOTWDispositionType&);
-
-
   class MOOTWGraphicsType: public ::xml_schema::type
   {
     public:
@@ -5225,13 +4924,6 @@ namespace msdl_1
     protected:
     MOOTWGraphic_sequence MOOTWGraphic_;
   };
-
-  bool
-  operator== (const MOOTWGraphicsType&, const MOOTWGraphicsType&);
-
-  bool
-  operator!= (const MOOTWGraphicsType&, const MOOTWGraphicsType&);
-
 
   class MOOTWGraphicType: public ::xml_schema::type
   {
@@ -5417,13 +5109,6 @@ namespace msdl_1
     AssociatedOverlays_optional AssociatedOverlays_;
     ::xsd::cxx::tree::one< Disposition_type > Disposition_;
   };
-
-  bool
-  operator== (const MOOTWGraphicType&, const MOOTWGraphicType&);
-
-  bool
-  operator!= (const MOOTWGraphicType&, const MOOTWGraphicType&);
-
 
   class MOOTWSymbolModifiersType: public ::xml_schema::type
   {
@@ -5678,13 +5363,6 @@ namespace msdl_1
     SpecialC2HQ_optional SpecialC2HQ_;
   };
 
-  bool
-  operator== (const MOOTWSymbolModifiersType&, const MOOTWSymbolModifiersType&);
-
-  bool
-  operator!= (const MOOTWSymbolModifiersType&, const MOOTWSymbolModifiersType&);
-
-
   class NBCEventSymbolModifiersType: public ::xml_schema::type
   {
     public:
@@ -5870,13 +5548,6 @@ namespace msdl_1
     ::xsd::cxx::tree::one< DirectionOfMovement_type > DirectionOfMovement_;
   };
 
-  bool
-  operator== (const NBCEventSymbolModifiersType&, const NBCEventSymbolModifiersType&);
-
-  bool
-  operator!= (const NBCEventSymbolModifiersType&, const NBCEventSymbolModifiersType&);
-
-
   class OptionsType: public ::xml_schema::type
   {
     public:
@@ -5976,13 +5647,6 @@ namespace msdl_1
     ScenarioDataStandards_optional ScenarioDataStandards_;
   };
 
-  bool
-  operator== (const OptionsType&, const OptionsType&);
-
-  bool
-  operator!= (const OptionsType&, const OptionsType&);
-
-
   class OrganicRelationDataType: public ::xml_schema::type
   {
     public:
@@ -6062,13 +5726,6 @@ namespace msdl_1
     OrganicSuperiorHandle_optional OrganicSuperiorHandle_;
   };
 
-  bool
-  operator== (const OrganicRelationDataType&, const OrganicRelationDataType&);
-
-  bool
-  operator!= (const OrganicRelationDataType&, const OrganicRelationDataType&);
-
-
   class OrganicRelationType: public ::xml_schema::type
   {
     public:
@@ -6147,13 +5804,6 @@ namespace msdl_1
     ::xsd::cxx::tree::one< OrganicRelationChoice_type > OrganicRelationChoice_;
   };
 
-  bool
-  operator== (const OrganicRelationType&, const OrganicRelationType&);
-
-  bool
-  operator!= (const OrganicRelationType&, const OrganicRelationType&);
-
-
   class OrganizationDetailType: public ::xml_schema::type
   {
     public:
@@ -6230,13 +5880,6 @@ namespace msdl_1
     ::xsd::cxx::tree::one< AggregateBased_type > AggregateBased_;
     AggregateEchelon_optional AggregateEchelon_;
   };
-
-  bool
-  operator== (const OrganizationDetailType&, const OrganizationDetailType&);
-
-  bool
-  operator!= (const OrganizationDetailType&, const OrganizationDetailType&);
-
 
   class OrganizationsType: public ::xml_schema::type
   {
@@ -6315,13 +5958,6 @@ namespace msdl_1
     Equipment_optional Equipment_;
   };
 
-  bool
-  operator== (const OrganizationsType&, const OrganizationsType&);
-
-  bool
-  operator!= (const OrganizationsType&, const OrganizationsType&);
-
-
   class OverlayHandlesType: public ::xml_schema::type
   {
     public:
@@ -6375,13 +6011,6 @@ namespace msdl_1
     OverlayHandle_sequence OverlayHandle_;
   };
 
-  bool
-  operator== (const OverlayHandlesType&, const OverlayHandlesType&);
-
-  bool
-  operator!= (const OverlayHandlesType&, const OverlayHandlesType&);
-
-
   class OverlaysType: public ::xml_schema::type
   {
     public:
@@ -6434,13 +6063,6 @@ namespace msdl_1
     protected:
     Overlay_sequence Overlay_;
   };
-
-  bool
-  operator== (const OverlaysType&, const OverlaysType&);
-
-  bool
-  operator!= (const OverlaysType&, const OverlaysType&);
-
 
   class OverlayType: public ::xml_schema::type
   {
@@ -6537,13 +6159,6 @@ namespace msdl_1
     ::xsd::cxx::tree::one< OverlayName_type > OverlayName_;
   };
 
-  bool
-  operator== (const OverlayType&, const OverlayType&);
-
-  bool
-  operator!= (const OverlayType&, const OverlayType&);
-
-
   class OwnerType: public ::xml_schema::type
   {
     public:
@@ -6621,13 +6236,6 @@ namespace msdl_1
     ::xsd::cxx::tree::one< OwnerChoice_type > OwnerChoice_;
     ::xsd::cxx::tree::one< OwnerData_type > OwnerData_;
   };
-
-  bool
-  operator== (const OwnerType&, const OwnerType&);
-
-  bool
-  operator!= (const OwnerType&, const OwnerType&);
-
 
   class OwnerDataType: public ::xml_schema::type
   {
@@ -6707,13 +6315,6 @@ namespace msdl_1
     UnitOwnerHandle_optional UnitOwnerHandle_;
     ForceOwnerHandle_optional ForceOwnerHandle_;
   };
-
-  bool
-  operator== (const OwnerDataType&, const OwnerDataType&);
-
-  bool
-  operator!= (const OwnerDataType&, const OwnerDataType&);
-
 
   class OwnFormationType: public ::xml_schema::type
   {
@@ -6857,13 +6458,6 @@ namespace msdl_1
     ::xsd::cxx::tree::one< FormationChoice_type > FormationChoice_;
     ::xsd::cxx::tree::one< FormationData_type > FormationData_;
   };
-
-  bool
-  operator== (const OwnFormationType&, const OwnFormationType&);
-
-  bool
-  operator!= (const OwnFormationType&, const OwnFormationType&);
-
 
   class PointSymbolModifiersType: public ::xml_schema::type
   {
@@ -7030,13 +6624,6 @@ namespace msdl_1
     Orientation_optional Orientation_;
   };
 
-  bool
-  operator== (const PointSymbolModifiersType&, const PointSymbolModifiersType&);
-
-  bool
-  operator!= (const PointSymbolModifiersType&, const PointSymbolModifiersType&);
-
-
   class RectangleAreaType: public ::xml_schema::type
   {
     public:
@@ -7134,13 +6721,6 @@ namespace msdl_1
     ::xsd::cxx::tree::one< LowerLeft_type > LowerLeft_;
   };
 
-  bool
-  operator== (const RectangleAreaType&, const RectangleAreaType&);
-
-  bool
-  operator!= (const RectangleAreaType&, const RectangleAreaType&);
-
-
   class ScenarioDataStandardsType: public ::xml_schema::type
   {
     public:
@@ -7215,13 +6795,6 @@ namespace msdl_1
     ::xsd::cxx::tree::one< SymbologyDataStandard_type > SymbologyDataStandard_;
     ::xsd::cxx::tree::one< CoordinateDataStandard_type > CoordinateDataStandard_;
   };
-
-  bool
-  operator== (const ScenarioDataStandardsType&, const ScenarioDataStandardsType&);
-
-  bool
-  operator!= (const ScenarioDataStandardsType&, const ScenarioDataStandardsType&);
-
 
   class ScenarioWeatherType: public ::xml_schema::type
   {
@@ -7412,13 +6985,6 @@ namespace msdl_1
     WindItems_optional WindItems_;
   };
 
-  bool
-  operator== (const ScenarioWeatherType&, const ScenarioWeatherType&);
-
-  bool
-  operator!= (const ScenarioWeatherType&, const ScenarioWeatherType&);
-
-
   class StatusType: public ::xml_schema::type
   {
     public:
@@ -7498,13 +7064,6 @@ namespace msdl_1
     WeaponControlStatus_optional WeaponControlStatus_;
   };
 
-  bool
-  operator== (const StatusType&, const StatusType&);
-
-  bool
-  operator!= (const StatusType&, const StatusType&);
-
-
   class SupportRelationsType: public ::xml_schema::type
   {
     public:
@@ -7557,13 +7116,6 @@ namespace msdl_1
     protected:
     SupportRelation_sequence SupportRelation_;
   };
-
-  bool
-  operator== (const SupportRelationsType&, const SupportRelationsType&);
-
-  bool
-  operator!= (const SupportRelationsType&, const SupportRelationsType&);
-
 
   class SupportRelationType: public ::xml_schema::type
   {
@@ -7683,13 +7235,6 @@ namespace msdl_1
     ::xsd::cxx::tree::one< SupportType_type > SupportType_;
     SupportRoleType_optional SupportRoleType_;
   };
-
-  bool
-  operator== (const SupportRelationType&, const SupportRelationType&);
-
-  bool
-  operator!= (const SupportRelationType&, const SupportRelationType&);
-
 
   class SymbolClassModifiersType: public ::xml_schema::type
   {
@@ -7858,13 +7403,6 @@ namespace msdl_1
     TaskSymbolModifiers_optional TaskSymbolModifiers_;
   };
 
-  bool
-  operator== (const SymbolClassModifiersType&, const SymbolClassModifiersType&);
-
-  bool
-  operator!= (const SymbolClassModifiersType&, const SymbolClassModifiersType&);
-
-
   class SymbologyDataStandardType: public ::xml_schema::type
   {
     public:
@@ -7960,13 +7498,6 @@ namespace msdl_1
     ::xsd::cxx::tree::one< MinorVersion_type > MinorVersion_;
   };
 
-  bool
-  operator== (const SymbologyDataStandardType&, const SymbologyDataStandardType&);
-
-  bool
-  operator!= (const SymbologyDataStandardType&, const SymbologyDataStandardType&);
-
-
   class TacticalGraphicsType: public ::xml_schema::type
   {
     public:
@@ -8019,13 +7550,6 @@ namespace msdl_1
     protected:
     TacticalGraphic_sequence TacticalGraphic_;
   };
-
-  bool
-  operator== (const TacticalGraphicsType&, const TacticalGraphicsType&);
-
-  bool
-  operator!= (const TacticalGraphicsType&, const TacticalGraphicsType&);
-
 
   class TacticalGraphicType: public ::xml_schema::type
   {
@@ -8233,13 +7757,6 @@ namespace msdl_1
     ::xsd::cxx::tree::one< SymbolClassChoice_type > SymbolClassChoice_;
   };
 
-  bool
-  operator== (const TacticalGraphicType&, const TacticalGraphicType&);
-
-  bool
-  operator!= (const TacticalGraphicType&, const TacticalGraphicType&);
-
-
   class TaskSymbolModifiersType: public ::xml_schema::type
   {
     public:
@@ -8318,13 +7835,6 @@ namespace msdl_1
     UniqueDesignation_optional UniqueDesignation_;
     DateTimeGroup_optional DateTimeGroup_;
   };
-
-  bool
-  operator== (const TaskSymbolModifiersType&, const TaskSymbolModifiersType&);
-
-  bool
-  operator!= (const TaskSymbolModifiersType&, const TaskSymbolModifiersType&);
-
 
   class UnitDispositionType: public ::xml_schema::type
   {
@@ -8471,13 +7981,6 @@ namespace msdl_1
     OwnFormation_optional OwnFormation_;
   };
 
-  bool
-  operator== (const UnitDispositionType&, const UnitDispositionType&);
-
-  bool
-  operator!= (const UnitDispositionType&, const UnitDispositionType&);
-
-
   class UnitModelType: public ::xml_schema::type
   {
     public:
@@ -8556,13 +8059,6 @@ namespace msdl_1
     Resolution_optional Resolution_;
     AggregateBased_optional AggregateBased_;
   };
-
-  bool
-  operator== (const UnitModelType&, const UnitModelType&);
-
-  bool
-  operator!= (const UnitModelType&, const UnitModelType&);
-
 
   class UnitRelationsType: public ::xml_schema::type
   {
@@ -8663,13 +8159,6 @@ namespace msdl_1
     OrganicRelation_optional OrganicRelation_;
   };
 
-  bool
-  operator== (const UnitRelationsType&, const UnitRelationsType&);
-
-  bool
-  operator!= (const UnitRelationsType&, const UnitRelationsType&);
-
-
   class UnitsType: public ::xml_schema::type
   {
     public:
@@ -8722,13 +8211,6 @@ namespace msdl_1
     protected:
     Unit_sequence Unit_;
   };
-
-  bool
-  operator== (const UnitsType&, const UnitsType&);
-
-  bool
-  operator!= (const UnitsType&, const UnitsType&);
-
 
   class UnitSymbolModifiersType: public ::xml_schema::type
   {
@@ -8961,13 +8443,6 @@ namespace msdl_1
     SpecialC2HQ_optional SpecialC2HQ_;
   };
 
-  bool
-  operator== (const UnitSymbolModifiersType&, const UnitSymbolModifiersType&);
-
-  bool
-  operator!= (const UnitSymbolModifiersType&, const UnitSymbolModifiersType&);
-
-
   class UnitType: public ::xml_schema::type
   {
     public:
@@ -9199,13 +8674,6 @@ namespace msdl_1
     Model_optional Model_;
   };
 
-  bool
-  operator== (const UnitType&, const UnitType&);
-
-  bool
-  operator!= (const UnitType&, const UnitType&);
-
-
   class UTMType: public ::xml_schema::type
   {
     public:
@@ -9323,13 +8791,6 @@ namespace msdl_1
     ElevationAGL_optional ElevationAGL_;
   };
 
-  bool
-  operator== (const UTMType&, const UTMType&);
-
-  bool
-  operator!= (const UTMType&, const UTMType&);
-
-
   class VisibilityItemsType: public ::xml_schema::type
   {
     public:
@@ -9383,13 +8844,6 @@ namespace msdl_1
     Visibility_sequence Visibility_;
   };
 
-  bool
-  operator== (const VisibilityItemsType&, const VisibilityItemsType&);
-
-  bool
-  operator!= (const VisibilityItemsType&, const VisibilityItemsType&);
-
-
   class WindItemsType: public ::xml_schema::type
   {
     public:
@@ -9442,12 +8896,6 @@ namespace msdl_1
     protected:
     Wind_sequence Wind_;
   };
-
-  bool
-  operator== (const WindItemsType&, const WindItemsType&);
-
-  bool
-  operator!= (const WindItemsType&, const WindItemsType&);
 }
 
 #include <iosfwd>

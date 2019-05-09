@@ -397,13 +397,6 @@ namespace schemas
       idtag_optional idtag_;
     };
 
-    bool
-    operator== (const String&, const String&);
-
-    bool
-    operator!= (const String&, const String&);
-
-
     class IdentifierType: public ::xml_schema::ncname
     {
       public:
@@ -451,8 +444,6 @@ namespace schemas
 
       // Constructors.
       //
-      IdentifierType ();
-
       IdentifierType (const char*);
 
       IdentifierType (const ::std::string&);
@@ -488,13 +479,6 @@ namespace schemas
       notes_optional notes_;
       idtag_optional idtag_;
     };
-
-    bool
-    operator== (const IdentifierType&, const IdentifierType&);
-
-    bool
-    operator!= (const IdentifierType&, const IdentifierType&);
-
 
     class nonEmptyString: public ::xml_schema::string
     {
@@ -619,13 +603,6 @@ namespace schemas
       idtag_optional idtag_;
     };
 
-    bool
-    operator== (const NonEmptyString&, const NonEmptyString&);
-
-    bool
-    operator!= (const NonEmptyString&, const NonEmptyString&);
-
-
     class OMTypeEnumerations: public ::xml_schema::string
     {
       public:
@@ -635,8 +612,6 @@ namespace schemas
         SOM,
         BOM
       };
-
-      OMTypeEnumerations ();
 
       OMTypeEnumerations (value v);
 
@@ -689,8 +664,6 @@ namespace schemas
     {
       public:
 
-      OMTypeUnion ();
-
       OMTypeUnion (const char* v);
 
       OMTypeUnion (const ::std::string& v);
@@ -728,8 +701,6 @@ namespace schemas
         PNG,
         TIFF
       };
-
-      glyphTypeEnumerations ();
 
       glyphTypeEnumerations (value v);
 
@@ -781,8 +752,6 @@ namespace schemas
     class glyphTypeUnion: public ::xml_schema::string
     {
       public:
-
-      glyphTypeUnion ();
 
       glyphTypeUnion (const char* v);
 
@@ -931,8 +900,6 @@ namespace schemas
 
       // Constructors.
       //
-      glyphType ();
-
       glyphType (const type_type&);
 
       glyphType (const ::xml_schema::base64_binary&,
@@ -971,13 +938,6 @@ namespace schemas
       width_optional width_;
       alt_optional alt_;
     };
-
-    bool
-    operator== (const glyphType&, const glyphType&);
-
-    bool
-    operator!= (const glyphType&, const glyphType&);
-
 
     class pocType: public ::xml_schema::type
     {
@@ -1077,8 +1037,6 @@ namespace schemas
 
       // Constructors.
       //
-      pocType ();
-
       pocType (const pocType1_type&);
 
       pocType (::std::unique_ptr< pocType1_type >);
@@ -1116,13 +1074,6 @@ namespace schemas
       pocEmail_sequence pocEmail_;
     };
 
-    bool
-    operator== (const pocType&, const pocType&);
-
-    bool
-    operator!= (const pocType&, const pocType&);
-
-
     class SecurityClassificationEnumeration: public ::xml_schema::string
     {
       public:
@@ -1133,8 +1084,6 @@ namespace schemas
         Secret,
         Top_Secret
       };
-
-      SecurityClassificationEnumeration ();
 
       SecurityClassificationEnumeration (value v);
 
@@ -1186,8 +1135,6 @@ namespace schemas
     class SecurityClassificationUnion: public ::xml_schema::string
     {
       public:
-
-      SecurityClassificationUnion ();
 
       SecurityClassificationUnion (const char* v);
 
@@ -1262,8 +1209,6 @@ namespace schemas
 
       // Constructors.
       //
-      modelType ();
-
       modelType (const char*);
 
       modelType (const ::std::string&);
@@ -1299,13 +1244,6 @@ namespace schemas
       notes_optional notes_;
       idtag_optional idtag_;
     };
-
-    bool
-    operator== (const modelType&, const modelType&);
-
-    bool
-    operator!= (const modelType&, const modelType&);
-
 
     class securityClassificationType: public ::schemas::modelID::SecurityClassificationUnion
     {
@@ -1354,8 +1292,6 @@ namespace schemas
 
       // Constructors.
       //
-      securityClassificationType ();
-
       securityClassificationType (const char*);
 
       securityClassificationType (const ::std::string&);
@@ -1392,13 +1328,6 @@ namespace schemas
       idtag_optional idtag_;
     };
 
-    bool
-    operator== (const securityClassificationType&, const securityClassificationType&);
-
-    bool
-    operator!= (const securityClassificationType&, const securityClassificationType&);
-
-
     class ApplicationDomainEnumerations: public ::xml_schema::string
     {
       public:
@@ -1410,8 +1339,6 @@ namespace schemas
         Engineering,
         Acquisition
       };
-
-      ApplicationDomainEnumerations ();
 
       ApplicationDomainEnumerations (value v);
 
@@ -1463,8 +1390,6 @@ namespace schemas
     class ApplicationDomainUnion: public ::xml_schema::string
     {
       public:
-
-      ApplicationDomainUnion ();
 
       ApplicationDomainUnion (const char* v);
 
@@ -1539,8 +1464,6 @@ namespace schemas
 
       // Constructors.
       //
-      applicationDomainType ();
-
       applicationDomainType (const char*);
 
       applicationDomainType (const ::std::string&);
@@ -1577,13 +1500,6 @@ namespace schemas
       idtag_optional idtag_;
     };
 
-    bool
-    operator== (const applicationDomainType&, const applicationDomainType&);
-
-    bool
-    operator!= (const applicationDomainType&, const applicationDomainType&);
-
-
     class POCTypeEnumeration: public ::xml_schema::string
     {
       public:
@@ -1596,8 +1512,6 @@ namespace schemas
         Release_authority,
         Technical_POC
       };
-
-      POCTypeEnumeration ();
 
       POCTypeEnumeration (value v);
 
@@ -1649,8 +1563,6 @@ namespace schemas
     class POCTypeUnion: public ::xml_schema::string
     {
       public:
-
-      POCTypeUnion ();
 
       POCTypeUnion (const char* v);
 
@@ -1725,8 +1637,6 @@ namespace schemas
 
       // Constructors.
       //
-      pocTypeType ();
-
       pocTypeType (const char*);
 
       pocTypeType (const ::std::string&);
@@ -1763,13 +1673,6 @@ namespace schemas
       idtag_optional idtag_;
     };
 
-    bool
-    operator== (const pocTypeType&, const pocTypeType&);
-
-    bool
-    operator!= (const pocTypeType&, const pocTypeType&);
-
-
     class referenceTypeEnumerations: public ::xml_schema::string
     {
       public:
@@ -1779,8 +1682,6 @@ namespace schemas
         Conceptual_Model,
         Related_BOM
       };
-
-      referenceTypeEnumerations ();
 
       referenceTypeEnumerations (value v);
 
@@ -1832,8 +1733,6 @@ namespace schemas
     class referenceTypeUnion: public ::xml_schema::string
     {
       public:
-
-      referenceTypeUnion ();
 
       referenceTypeUnion (const char* v);
 
@@ -1942,8 +1841,6 @@ namespace schemas
 
       // Constructors.
       //
-      referenceType ();
-
       referenceType (const type_type&,
                      const identification_type&);
 
@@ -1981,13 +1878,6 @@ namespace schemas
       notes_optional notes_;
       idtag_optional idtag_;
     };
-
-    bool
-    operator== (const referenceType&, const referenceType&);
-
-    bool
-    operator!= (const referenceType&, const referenceType&);
-
 
     class keywordType: public ::xml_schema::type
     {
@@ -2074,8 +1964,6 @@ namespace schemas
 
       // Constructors.
       //
-      keywordType ();
-
       keywordType (const keywordValue_type&);
 
       keywordType (::std::unique_ptr< keywordValue_type >);
@@ -2111,13 +1999,6 @@ namespace schemas
       notes_optional notes_;
       idtag_optional idtag_;
     };
-
-    bool
-    operator== (const keywordType&, const keywordType&);
-
-    bool
-    operator!= (const keywordType&, const keywordType&);
-
 
     class modelIdentificationType: public ::xml_schema::type
     {
@@ -2458,8 +2339,6 @@ namespace schemas
 
       // Constructors.
       //
-      modelIdentificationType ();
-
       modelIdentificationType (const name_type&,
                                const type_type&,
                                const version_type&,
@@ -2520,13 +2399,6 @@ namespace schemas
       idtag_optional idtag_;
     };
 
-    bool
-    operator== (const modelIdentificationType&, const modelIdentificationType&);
-
-    bool
-    operator!= (const modelIdentificationType&, const modelIdentificationType&);
-
-
     class type: public ::schemas::modelID::referenceTypeUnion
     {
       public:
@@ -2574,8 +2446,6 @@ namespace schemas
 
       // Constructors.
       //
-      type ();
-
       type (const char*);
 
       type (const ::std::string&);
@@ -2611,13 +2481,6 @@ namespace schemas
       notes_optional notes_;
       idtag_optional idtag_;
     };
-
-    bool
-    operator== (const type&, const type&);
-
-    bool
-    operator!= (const type&, const type&);
-
 
     class identification: public ::xml_schema::uri
     {
@@ -2666,8 +2529,6 @@ namespace schemas
 
       // Constructors.
       //
-      identification ();
-
       identification (const ::xml_schema::uri&);
 
       identification (const ::xercesc::DOMElement& e,
@@ -2699,13 +2560,6 @@ namespace schemas
       notes_optional notes_;
       idtag_optional idtag_;
     };
-
-    bool
-    operator== (const identification&, const identification&);
-
-    bool
-    operator!= (const identification&, const identification&);
-
 
     class modificationDate: public ::xml_schema::date
     {
@@ -2754,8 +2608,6 @@ namespace schemas
 
       // Constructors.
       //
-      modificationDate ();
-
       modificationDate (const ::xml_schema::date&);
 
       modificationDate (const ::xercesc::DOMElement& e,
@@ -2787,13 +2639,6 @@ namespace schemas
       notes_optional notes_;
       idtag_optional idtag_;
     };
-
-    bool
-    operator== (const modificationDate&, const modificationDate&);
-
-    bool
-    operator!= (const modificationDate&, const modificationDate&);
-
 
     class poc: public ::schemas::modelID::pocType
     {
@@ -2842,8 +2687,6 @@ namespace schemas
 
       // Constructors.
       //
-      poc ();
-
       poc (const pocType1_type&);
 
       poc (::std::unique_ptr< pocType1_type >);
@@ -2878,20 +2721,11 @@ namespace schemas
       idtag_optional idtag_;
     };
 
-    bool
-    operator== (const poc&, const poc&);
-
-    bool
-    operator!= (const poc&, const poc&);
-
-
     class glyph: public ::schemas::modelID::glyphType
     {
       public:
       // Constructors.
       //
-      glyph ();
-
       glyph (const type_type&);
 
       glyph (const ::xml_schema::base64_binary&,

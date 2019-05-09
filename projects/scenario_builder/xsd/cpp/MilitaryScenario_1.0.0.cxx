@@ -48,17 +48,11 @@ namespace msdl_1
 
 #include <xsd/cxx/tree/type-factory-map.hxx>
 
-#include <xsd/cxx/tree/comparison-map.hxx>
-
 namespace _xsd
 {
   static
   const ::xsd::cxx::tree::type_factory_plate< 0, char >
   type_factory_plate_init;
-
-  static
-  const ::xsd::cxx::tree::comparison_plate< 0, char >
-  comparison_plate_init;
 }
 
 namespace msdl_1

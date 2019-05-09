@@ -244,12 +244,6 @@ namespace schemas
     // 
 
     OMTypeEnumerations::
-    OMTypeEnumerations ()
-    : ::xml_schema::string ()
-    {
-    }
-
-    OMTypeEnumerations::
     OMTypeEnumerations (value v)
     : ::xml_schema::string (_xsd_OMTypeEnumerations_literals_[v])
     {
@@ -295,12 +289,6 @@ namespace schemas
     //
 
     OMTypeUnion::
-    OMTypeUnion ()
-    : ::xml_schema::string ()
-    {
-    }
-
-    OMTypeUnion::
     OMTypeUnion (const char* s)
     : ::xml_schema::string (s)
     {
@@ -322,12 +310,6 @@ namespace schemas
 
     // glyphTypeEnumerations
     // 
-
-    glyphTypeEnumerations::
-    glyphTypeEnumerations ()
-    : ::xml_schema::string ()
-    {
-    }
 
     glyphTypeEnumerations::
     glyphTypeEnumerations (value v)
@@ -373,12 +355,6 @@ namespace schemas
 
     // glyphTypeUnion
     //
-
-    glyphTypeUnion::
-    glyphTypeUnion ()
-    : ::xml_schema::string ()
-    {
-    }
 
     glyphTypeUnion::
     glyphTypeUnion (const char* s)
@@ -694,12 +670,6 @@ namespace schemas
     // 
 
     SecurityClassificationEnumeration::
-    SecurityClassificationEnumeration ()
-    : ::xml_schema::string ()
-    {
-    }
-
-    SecurityClassificationEnumeration::
     SecurityClassificationEnumeration (value v)
     : ::xml_schema::string (_xsd_SecurityClassificationEnumeration_literals_[v])
     {
@@ -743,12 +713,6 @@ namespace schemas
 
     // SecurityClassificationUnion
     //
-
-    SecurityClassificationUnion::
-    SecurityClassificationUnion ()
-    : ::xml_schema::string ()
-    {
-    }
 
     SecurityClassificationUnion::
     SecurityClassificationUnion (const char* s)
@@ -902,12 +866,6 @@ namespace schemas
     // 
 
     ApplicationDomainEnumerations::
-    ApplicationDomainEnumerations ()
-    : ::xml_schema::string ()
-    {
-    }
-
-    ApplicationDomainEnumerations::
     ApplicationDomainEnumerations (value v)
     : ::xml_schema::string (_xsd_ApplicationDomainEnumerations_literals_[v])
     {
@@ -951,12 +909,6 @@ namespace schemas
 
     // ApplicationDomainUnion
     //
-
-    ApplicationDomainUnion::
-    ApplicationDomainUnion ()
-    : ::xml_schema::string ()
-    {
-    }
 
     ApplicationDomainUnion::
     ApplicationDomainUnion (const char* s)
@@ -1046,12 +998,6 @@ namespace schemas
     // 
 
     POCTypeEnumeration::
-    POCTypeEnumeration ()
-    : ::xml_schema::string ()
-    {
-    }
-
-    POCTypeEnumeration::
     POCTypeEnumeration (value v)
     : ::xml_schema::string (_xsd_POCTypeEnumeration_literals_[v])
     {
@@ -1095,12 +1041,6 @@ namespace schemas
 
     // POCTypeUnion
     //
-
-    POCTypeUnion::
-    POCTypeUnion ()
-    : ::xml_schema::string ()
-    {
-    }
 
     POCTypeUnion::
     POCTypeUnion (const char* s)
@@ -1190,12 +1130,6 @@ namespace schemas
     // 
 
     referenceTypeEnumerations::
-    referenceTypeEnumerations ()
-    : ::xml_schema::string ()
-    {
-    }
-
-    referenceTypeEnumerations::
     referenceTypeEnumerations (value v)
     : ::xml_schema::string (_xsd_referenceTypeEnumerations_literals_[v])
     {
@@ -1239,12 +1173,6 @@ namespace schemas
 
     // referenceTypeUnion
     //
-
-    referenceTypeUnion::
-    referenceTypeUnion ()
-    : ::xml_schema::string ()
-    {
-    }
 
     referenceTypeUnion::
     referenceTypeUnion (const char* s)
@@ -2209,17 +2137,11 @@ namespace schemas
 
 #include <xsd/cxx/tree/type-factory-map.hxx>
 
-#include <xsd/cxx/tree/comparison-map.hxx>
-
 namespace _xsd
 {
   static
   const ::xsd::cxx::tree::type_factory_plate< 0, char >
   type_factory_plate_init;
-
-  static
-  const ::xsd::cxx::tree::comparison_plate< 0, char >
-  comparison_plate_init;
 }
 
 namespace schemas
@@ -2341,42 +2263,8 @@ namespace schemas
       "String",
       "http://www.sisostds.org/schemas/modelID");
 
-    static
-    const ::xsd::cxx::tree::comparison_initializer< 0, char, String >
-    _xsd_String_comparison_init;
-
-    bool
-    operator== (const String& x, const String& y)
-    {
-      if (!(static_cast< const ::xml_schema::string& > (x) ==
-            static_cast< const ::xml_schema::string& > (y)))
-        return false;
-
-      if (!(x.notes () == y.notes ()))
-        return false;
-
-      if (!(x.idtag () == y.idtag ()))
-        return false;
-
-      return true;
-    }
-
-    bool
-    operator!= (const String& x, const String& y)
-    {
-      return !(x == y);
-    }
-
     // IdentifierType
     //
-
-    IdentifierType::
-    IdentifierType ()
-    : ::xml_schema::ncname (),
-      notes_ (this),
-      idtag_ (this)
-    {
-    }
 
     IdentifierType::
     IdentifierType (const char* _xsd_ncname_base)
@@ -2482,32 +2370,6 @@ namespace schemas
       "IdentifierType",
       "http://www.sisostds.org/schemas/modelID");
 
-    static
-    const ::xsd::cxx::tree::comparison_initializer< 0, char, IdentifierType >
-    _xsd_IdentifierType_comparison_init;
-
-    bool
-    operator== (const IdentifierType& x, const IdentifierType& y)
-    {
-      if (!(static_cast< const ::xml_schema::ncname& > (x) ==
-            static_cast< const ::xml_schema::ncname& > (y)))
-        return false;
-
-      if (!(x.notes () == y.notes ()))
-        return false;
-
-      if (!(x.idtag () == y.idtag ()))
-        return false;
-
-      return true;
-    }
-
-    bool
-    operator!= (const IdentifierType& x, const IdentifierType& y)
-    {
-      return !(x == y);
-    }
-
     // nonEmptyString
     //
 
@@ -2585,10 +2447,6 @@ namespace schemas
     _xsd_nonEmptyString_type_factory_init (
       "nonEmptyString",
       "http://www.sisostds.org/schemas/modelID");
-
-    static
-    const ::xsd::cxx::tree::comparison_initializer< 0, char, nonEmptyString >
-    _xsd_nonEmptyString_comparison_init;
 
     // NonEmptyString
     //
@@ -2705,32 +2563,6 @@ namespace schemas
       "NonEmptyString",
       "http://www.sisostds.org/schemas/modelID");
 
-    static
-    const ::xsd::cxx::tree::comparison_initializer< 0, char, NonEmptyString >
-    _xsd_NonEmptyString_comparison_init;
-
-    bool
-    operator== (const NonEmptyString& x, const NonEmptyString& y)
-    {
-      if (!(static_cast< const ::schemas::modelID::nonEmptyString& > (x) ==
-            static_cast< const ::schemas::modelID::nonEmptyString& > (y)))
-        return false;
-
-      if (!(x.notes () == y.notes ()))
-        return false;
-
-      if (!(x.idtag () == y.idtag ()))
-        return false;
-
-      return true;
-    }
-
-    bool
-    operator!= (const NonEmptyString& x, const NonEmptyString& y)
-    {
-      return !(x == y);
-    }
-
     // OMTypeEnumerations
     //
 
@@ -2809,10 +2641,6 @@ namespace schemas
       "OMTypeEnumerations",
       "http://www.sisostds.org/schemas/modelID");
 
-    static
-    const ::xsd::cxx::tree::comparison_initializer< 0, char, OMTypeEnumerations >
-    _xsd_OMTypeEnumerations_comparison_init;
-
     // OMTypeUnion
     //
 
@@ -2853,10 +2681,6 @@ namespace schemas
     _xsd_OMTypeUnion_type_factory_init (
       "OMTypeUnion",
       "http://www.sisostds.org/schemas/modelID");
-
-    static
-    const ::xsd::cxx::tree::comparison_initializer< 0, char, OMTypeUnion >
-    _xsd_OMTypeUnion_comparison_init;
 
     // glyphTypeEnumerations
     //
@@ -2940,10 +2764,6 @@ namespace schemas
       "glyphTypeEnumerations",
       "http://www.sisostds.org/schemas/modelID");
 
-    static
-    const ::xsd::cxx::tree::comparison_initializer< 0, char, glyphTypeEnumerations >
-    _xsd_glyphTypeEnumerations_comparison_init;
-
     // glyphTypeUnion
     //
 
@@ -2985,24 +2805,8 @@ namespace schemas
       "glyphTypeUnion",
       "http://www.sisostds.org/schemas/modelID");
 
-    static
-    const ::xsd::cxx::tree::comparison_initializer< 0, char, glyphTypeUnion >
-    _xsd_glyphTypeUnion_comparison_init;
-
     // glyphType
     //
-
-    glyphType::
-    glyphType ()
-    : ::xml_schema::base64_binary (),
-      notes_ (this),
-      idtag_ (this),
-      type_ (this),
-      height_ (this),
-      width_ (this),
-      alt_ (this)
-    {
-    }
 
     glyphType::
     glyphType (const type_type& type)
@@ -3152,57 +2956,8 @@ namespace schemas
       "glyphType",
       "http://www.sisostds.org/schemas/modelID");
 
-    static
-    const ::xsd::cxx::tree::comparison_initializer< 0, char, glyphType >
-    _xsd_glyphType_comparison_init;
-
-    bool
-    operator== (const glyphType& x, const glyphType& y)
-    {
-      if (!(static_cast< const ::xml_schema::base64_binary& > (x) ==
-            static_cast< const ::xml_schema::base64_binary& > (y)))
-        return false;
-
-      if (!(x.notes () == y.notes ()))
-        return false;
-
-      if (!(x.idtag () == y.idtag ()))
-        return false;
-
-      if (!(x.type () == y.type ()))
-        return false;
-
-      if (!(x.height () == y.height ()))
-        return false;
-
-      if (!(x.width () == y.width ()))
-        return false;
-
-      if (!(x.alt () == y.alt ()))
-        return false;
-
-      return true;
-    }
-
-    bool
-    operator!= (const glyphType& x, const glyphType& y)
-    {
-      return !(x == y);
-    }
-
     // pocType
     //
-
-    pocType::
-    pocType ()
-    : ::xml_schema::type (),
-      pocType1_ (this),
-      pocName_ (this),
-      pocOrg_ (this),
-      pocTelephone_ (this),
-      pocEmail_ (this)
-    {
-    }
 
     pocType::
     pocType (const pocType1_type& pocType1)
@@ -3446,102 +3201,6 @@ namespace schemas
       "pocType",
       "http://www.sisostds.org/schemas/modelID");
 
-    static
-    const ::xsd::cxx::tree::comparison_initializer< 0, char, pocType >
-    _xsd_pocType_comparison_init;
-
-    bool
-    operator== (const pocType& x, const pocType& y)
-    {
-      {
-        ::xsd::cxx::tree::comparison_map< char >& cm (
-          ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-        if (!cm.compare (x.pocType1 (), y.pocType1 ()))
-          return false;
-      }
-
-      {
-        ::xsd::cxx::tree::comparison_map< char >& cm (
-          ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-        pocType::pocName_optional a (x.pocName ()), b (y.pocName ());
-
-        if (!a || !b)
-        {
-          if (a.present () != b.present ())
-            return false;
-        }
-        else
-        {
-          if (!cm.compare (*a, *b))
-            return false;
-        }
-      }
-
-      {
-        ::xsd::cxx::tree::comparison_map< char >& cm (
-          ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-        pocType::pocOrg_optional a (x.pocOrg ()), b (y.pocOrg ());
-
-        if (!a || !b)
-        {
-          if (a.present () != b.present ())
-            return false;
-        }
-        else
-        {
-          if (!cm.compare (*a, *b))
-            return false;
-        }
-      }
-
-      {
-        ::xsd::cxx::tree::comparison_map< char >& cm (
-          ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-        pocType::pocTelephone_sequence a (x.pocTelephone ()), b (y.pocTelephone ());
-
-        if (a.size () != b.size ())
-          return false;
-
-        for (pocType::pocTelephone_const_iterator
-             ai (a.begin ()), bi (b.begin ()), ae (a.end ()), be (b.end ());
-             ai != ae; ++ai, ++bi)
-        {
-          if (!cm.compare (*ai, *bi))
-            return false;
-        }
-      }
-
-      {
-        ::xsd::cxx::tree::comparison_map< char >& cm (
-          ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-        pocType::pocEmail_sequence a (x.pocEmail ()), b (y.pocEmail ());
-
-        if (a.size () != b.size ())
-          return false;
-
-        for (pocType::pocEmail_const_iterator
-             ai (a.begin ()), bi (b.begin ()), ae (a.end ()), be (b.end ());
-             ai != ae; ++ai, ++bi)
-        {
-          if (!cm.compare (*ai, *bi))
-            return false;
-        }
-      }
-
-      return true;
-    }
-
-    bool
-    operator!= (const pocType& x, const pocType& y)
-    {
-      return !(x == y);
-    }
-
     // SecurityClassificationEnumeration
     //
 
@@ -3622,10 +3281,6 @@ namespace schemas
       "SecurityClassificationEnumeration",
       "http://www.sisostds.org/schemas/modelID");
 
-    static
-    const ::xsd::cxx::tree::comparison_initializer< 0, char, SecurityClassificationEnumeration >
-    _xsd_SecurityClassificationEnumeration_comparison_init;
-
     // SecurityClassificationUnion
     //
 
@@ -3667,20 +3322,8 @@ namespace schemas
       "SecurityClassificationUnion",
       "http://www.sisostds.org/schemas/modelID");
 
-    static
-    const ::xsd::cxx::tree::comparison_initializer< 0, char, SecurityClassificationUnion >
-    _xsd_SecurityClassificationUnion_comparison_init;
-
     // modelType
     //
-
-    modelType::
-    modelType ()
-    : ::schemas::modelID::OMTypeUnion (),
-      notes_ (this),
-      idtag_ (this)
-    {
-    }
 
     modelType::
     modelType (const char* _xsd_OMTypeUnion_base)
@@ -3786,42 +3429,8 @@ namespace schemas
       "modelType",
       "http://www.sisostds.org/schemas/modelID");
 
-    static
-    const ::xsd::cxx::tree::comparison_initializer< 0, char, modelType >
-    _xsd_modelType_comparison_init;
-
-    bool
-    operator== (const modelType& x, const modelType& y)
-    {
-      if (!(static_cast< const ::schemas::modelID::OMTypeUnion& > (x) ==
-            static_cast< const ::schemas::modelID::OMTypeUnion& > (y)))
-        return false;
-
-      if (!(x.notes () == y.notes ()))
-        return false;
-
-      if (!(x.idtag () == y.idtag ()))
-        return false;
-
-      return true;
-    }
-
-    bool
-    operator!= (const modelType& x, const modelType& y)
-    {
-      return !(x == y);
-    }
-
     // securityClassificationType
     //
-
-    securityClassificationType::
-    securityClassificationType ()
-    : ::schemas::modelID::SecurityClassificationUnion (),
-      notes_ (this),
-      idtag_ (this)
-    {
-    }
 
     securityClassificationType::
     securityClassificationType (const char* _xsd_SecurityClassificationUnion_base)
@@ -3927,32 +3536,6 @@ namespace schemas
       "securityClassificationType",
       "http://www.sisostds.org/schemas/modelID");
 
-    static
-    const ::xsd::cxx::tree::comparison_initializer< 0, char, securityClassificationType >
-    _xsd_securityClassificationType_comparison_init;
-
-    bool
-    operator== (const securityClassificationType& x, const securityClassificationType& y)
-    {
-      if (!(static_cast< const ::schemas::modelID::SecurityClassificationUnion& > (x) ==
-            static_cast< const ::schemas::modelID::SecurityClassificationUnion& > (y)))
-        return false;
-
-      if (!(x.notes () == y.notes ()))
-        return false;
-
-      if (!(x.idtag () == y.idtag ()))
-        return false;
-
-      return true;
-    }
-
-    bool
-    operator!= (const securityClassificationType& x, const securityClassificationType& y)
-    {
-      return !(x == y);
-    }
-
     // ApplicationDomainEnumerations
     //
 
@@ -4035,10 +3618,6 @@ namespace schemas
       "ApplicationDomainEnumerations",
       "http://www.sisostds.org/schemas/modelID");
 
-    static
-    const ::xsd::cxx::tree::comparison_initializer< 0, char, ApplicationDomainEnumerations >
-    _xsd_ApplicationDomainEnumerations_comparison_init;
-
     // ApplicationDomainUnion
     //
 
@@ -4080,20 +3659,8 @@ namespace schemas
       "ApplicationDomainUnion",
       "http://www.sisostds.org/schemas/modelID");
 
-    static
-    const ::xsd::cxx::tree::comparison_initializer< 0, char, ApplicationDomainUnion >
-    _xsd_ApplicationDomainUnion_comparison_init;
-
     // applicationDomainType
     //
-
-    applicationDomainType::
-    applicationDomainType ()
-    : ::schemas::modelID::ApplicationDomainUnion (),
-      notes_ (this),
-      idtag_ (this)
-    {
-    }
 
     applicationDomainType::
     applicationDomainType (const char* _xsd_ApplicationDomainUnion_base)
@@ -4199,32 +3766,6 @@ namespace schemas
       "applicationDomainType",
       "http://www.sisostds.org/schemas/modelID");
 
-    static
-    const ::xsd::cxx::tree::comparison_initializer< 0, char, applicationDomainType >
-    _xsd_applicationDomainType_comparison_init;
-
-    bool
-    operator== (const applicationDomainType& x, const applicationDomainType& y)
-    {
-      if (!(static_cast< const ::schemas::modelID::ApplicationDomainUnion& > (x) ==
-            static_cast< const ::schemas::modelID::ApplicationDomainUnion& > (y)))
-        return false;
-
-      if (!(x.notes () == y.notes ()))
-        return false;
-
-      if (!(x.idtag () == y.idtag ()))
-        return false;
-
-      return true;
-    }
-
-    bool
-    operator!= (const applicationDomainType& x, const applicationDomainType& y)
-    {
-      return !(x == y);
-    }
-
     // POCTypeEnumeration
     //
 
@@ -4309,10 +3850,6 @@ namespace schemas
       "POCTypeEnumeration",
       "http://www.sisostds.org/schemas/modelID");
 
-    static
-    const ::xsd::cxx::tree::comparison_initializer< 0, char, POCTypeEnumeration >
-    _xsd_POCTypeEnumeration_comparison_init;
-
     // POCTypeUnion
     //
 
@@ -4354,20 +3891,8 @@ namespace schemas
       "POCTypeUnion",
       "http://www.sisostds.org/schemas/modelID");
 
-    static
-    const ::xsd::cxx::tree::comparison_initializer< 0, char, POCTypeUnion >
-    _xsd_POCTypeUnion_comparison_init;
-
     // pocTypeType
     //
-
-    pocTypeType::
-    pocTypeType ()
-    : ::schemas::modelID::POCTypeUnion (),
-      notes_ (this),
-      idtag_ (this)
-    {
-    }
 
     pocTypeType::
     pocTypeType (const char* _xsd_POCTypeUnion_base)
@@ -4473,32 +3998,6 @@ namespace schemas
       "pocTypeType",
       "http://www.sisostds.org/schemas/modelID");
 
-    static
-    const ::xsd::cxx::tree::comparison_initializer< 0, char, pocTypeType >
-    _xsd_pocTypeType_comparison_init;
-
-    bool
-    operator== (const pocTypeType& x, const pocTypeType& y)
-    {
-      if (!(static_cast< const ::schemas::modelID::POCTypeUnion& > (x) ==
-            static_cast< const ::schemas::modelID::POCTypeUnion& > (y)))
-        return false;
-
-      if (!(x.notes () == y.notes ()))
-        return false;
-
-      if (!(x.idtag () == y.idtag ()))
-        return false;
-
-      return true;
-    }
-
-    bool
-    operator!= (const pocTypeType& x, const pocTypeType& y)
-    {
-      return !(x == y);
-    }
-
     // referenceTypeEnumerations
     //
 
@@ -4577,10 +4076,6 @@ namespace schemas
       "referenceTypeEnumerations",
       "http://www.sisostds.org/schemas/modelID");
 
-    static
-    const ::xsd::cxx::tree::comparison_initializer< 0, char, referenceTypeEnumerations >
-    _xsd_referenceTypeEnumerations_comparison_init;
-
     // referenceTypeUnion
     //
 
@@ -4622,22 +4117,8 @@ namespace schemas
       "referenceTypeUnion",
       "http://www.sisostds.org/schemas/modelID");
 
-    static
-    const ::xsd::cxx::tree::comparison_initializer< 0, char, referenceTypeUnion >
-    _xsd_referenceTypeUnion_comparison_init;
-
     // referenceType
     //
-
-    referenceType::
-    referenceType ()
-    : ::xml_schema::type (),
-      type_ (this),
-      identification_ (this),
-      notes_ (this),
-      idtag_ (this)
-    {
-    }
 
     referenceType::
     referenceType (const type_type& type,
@@ -4798,46 +4279,8 @@ namespace schemas
       "referenceType",
       "http://www.sisostds.org/schemas/modelID");
 
-    static
-    const ::xsd::cxx::tree::comparison_initializer< 0, char, referenceType >
-    _xsd_referenceType_comparison_init;
-
-    bool
-    operator== (const referenceType& x, const referenceType& y)
-    {
-      if (!(x.type () == y.type ()))
-        return false;
-
-      if (!(x.identification () == y.identification ()))
-        return false;
-
-      if (!(x.notes () == y.notes ()))
-        return false;
-
-      if (!(x.idtag () == y.idtag ()))
-        return false;
-
-      return true;
-    }
-
-    bool
-    operator!= (const referenceType& x, const referenceType& y)
-    {
-      return !(x == y);
-    }
-
     // keywordType
     //
-
-    keywordType::
-    keywordType ()
-    : ::xml_schema::type (),
-      taxonomy_ (this),
-      keywordValue_ (this),
-      notes_ (this),
-      idtag_ (this)
-    {
-    }
 
     keywordType::
     keywordType (const keywordValue_type& keywordValue)
@@ -5017,80 +4460,8 @@ namespace schemas
       "keywordType",
       "http://www.sisostds.org/schemas/modelID");
 
-    static
-    const ::xsd::cxx::tree::comparison_initializer< 0, char, keywordType >
-    _xsd_keywordType_comparison_init;
-
-    bool
-    operator== (const keywordType& x, const keywordType& y)
-    {
-      {
-        ::xsd::cxx::tree::comparison_map< char >& cm (
-          ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-        keywordType::taxonomy_optional a (x.taxonomy ()), b (y.taxonomy ());
-
-        if (!a || !b)
-        {
-          if (a.present () != b.present ())
-            return false;
-        }
-        else
-        {
-          if (!cm.compare (*a, *b))
-            return false;
-        }
-      }
-
-      {
-        ::xsd::cxx::tree::comparison_map< char >& cm (
-          ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-        if (!cm.compare (x.keywordValue (), y.keywordValue ()))
-          return false;
-      }
-
-      if (!(x.notes () == y.notes ()))
-        return false;
-
-      if (!(x.idtag () == y.idtag ()))
-        return false;
-
-      return true;
-    }
-
-    bool
-    operator!= (const keywordType& x, const keywordType& y)
-    {
-      return !(x == y);
-    }
-
     // modelIdentificationType
     //
-
-    modelIdentificationType::
-    modelIdentificationType ()
-    : ::xml_schema::type (),
-      name_ (this),
-      type_ (this),
-      version_ (this),
-      modificationDate_ (this),
-      securityClassification_ (this),
-      releaseRestriction_ (this),
-      purpose_ (this),
-      applicationDomain_ (this),
-      description_ (this),
-      useLimitation_ (this),
-      useHistory_ (this),
-      keyword_ (this),
-      poc_ (this),
-      reference_ (this),
-      other_ (this),
-      glyph_ (this),
-      notes_ (this),
-      idtag_ (this)
-    {
-    }
 
     modelIdentificationType::
     modelIdentificationType (const name_type& name,
@@ -5720,231 +5091,8 @@ namespace schemas
       "modelIdentificationType",
       "http://www.sisostds.org/schemas/modelID");
 
-    static
-    const ::xsd::cxx::tree::comparison_initializer< 0, char, modelIdentificationType >
-    _xsd_modelIdentificationType_comparison_init;
-
-    bool
-    operator== (const modelIdentificationType& x, const modelIdentificationType& y)
-    {
-      {
-        ::xsd::cxx::tree::comparison_map< char >& cm (
-          ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-        if (!cm.compare (x.name (), y.name ()))
-          return false;
-      }
-
-      {
-        ::xsd::cxx::tree::comparison_map< char >& cm (
-          ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-        if (!cm.compare (x.type (), y.type ()))
-          return false;
-      }
-
-      {
-        ::xsd::cxx::tree::comparison_map< char >& cm (
-          ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-        if (!cm.compare (x.version (), y.version ()))
-          return false;
-      }
-
-      if (!(x.modificationDate () == y.modificationDate ()))
-        return false;
-
-      {
-        ::xsd::cxx::tree::comparison_map< char >& cm (
-          ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-        if (!cm.compare (x.securityClassification (), y.securityClassification ()))
-          return false;
-      }
-
-      {
-        ::xsd::cxx::tree::comparison_map< char >& cm (
-          ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-        modelIdentificationType::releaseRestriction_sequence a (x.releaseRestriction ()), b (y.releaseRestriction ());
-
-        if (a.size () != b.size ())
-          return false;
-
-        for (modelIdentificationType::releaseRestriction_const_iterator
-             ai (a.begin ()), bi (b.begin ()), ae (a.end ()), be (b.end ());
-             ai != ae; ++ai, ++bi)
-        {
-          if (!cm.compare (*ai, *bi))
-            return false;
-        }
-      }
-
-      {
-        ::xsd::cxx::tree::comparison_map< char >& cm (
-          ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-        modelIdentificationType::purpose_optional a (x.purpose ()), b (y.purpose ());
-
-        if (!a || !b)
-        {
-          if (a.present () != b.present ())
-            return false;
-        }
-        else
-        {
-          if (!cm.compare (*a, *b))
-            return false;
-        }
-      }
-
-      {
-        ::xsd::cxx::tree::comparison_map< char >& cm (
-          ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-        modelIdentificationType::applicationDomain_optional a (x.applicationDomain ()), b (y.applicationDomain ());
-
-        if (!a || !b)
-        {
-          if (a.present () != b.present ())
-            return false;
-        }
-        else
-        {
-          if (!cm.compare (*a, *b))
-            return false;
-        }
-      }
-
-      {
-        ::xsd::cxx::tree::comparison_map< char >& cm (
-          ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-        if (!cm.compare (x.description (), y.description ()))
-          return false;
-      }
-
-      {
-        ::xsd::cxx::tree::comparison_map< char >& cm (
-          ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-        modelIdentificationType::useLimitation_optional a (x.useLimitation ()), b (y.useLimitation ());
-
-        if (!a || !b)
-        {
-          if (a.present () != b.present ())
-            return false;
-        }
-        else
-        {
-          if (!cm.compare (*a, *b))
-            return false;
-        }
-      }
-
-      {
-        ::xsd::cxx::tree::comparison_map< char >& cm (
-          ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-        modelIdentificationType::useHistory_sequence a (x.useHistory ()), b (y.useHistory ());
-
-        if (a.size () != b.size ())
-          return false;
-
-        for (modelIdentificationType::useHistory_const_iterator
-             ai (a.begin ()), bi (b.begin ()), ae (a.end ()), be (b.end ());
-             ai != ae; ++ai, ++bi)
-        {
-          if (!cm.compare (*ai, *bi))
-            return false;
-        }
-      }
-
-      {
-        ::xsd::cxx::tree::comparison_map< char >& cm (
-          ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-        modelIdentificationType::keyword_sequence a (x.keyword ()), b (y.keyword ());
-
-        if (a.size () != b.size ())
-          return false;
-
-        for (modelIdentificationType::keyword_const_iterator
-             ai (a.begin ()), bi (b.begin ()), ae (a.end ()), be (b.end ());
-             ai != ae; ++ai, ++bi)
-        {
-          if (!cm.compare (*ai, *bi))
-            return false;
-        }
-      }
-
-      if (!(x.poc () == y.poc ()))
-        return false;
-
-      {
-        ::xsd::cxx::tree::comparison_map< char >& cm (
-          ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-        modelIdentificationType::reference_sequence a (x.reference ()), b (y.reference ());
-
-        if (a.size () != b.size ())
-          return false;
-
-        for (modelIdentificationType::reference_const_iterator
-             ai (a.begin ()), bi (b.begin ()), ae (a.end ()), be (b.end ());
-             ai != ae; ++ai, ++bi)
-        {
-          if (!cm.compare (*ai, *bi))
-            return false;
-        }
-      }
-
-      {
-        ::xsd::cxx::tree::comparison_map< char >& cm (
-          ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-        modelIdentificationType::other_optional a (x.other ()), b (y.other ());
-
-        if (!a || !b)
-        {
-          if (a.present () != b.present ())
-            return false;
-        }
-        else
-        {
-          if (!cm.compare (*a, *b))
-            return false;
-        }
-      }
-
-      if (!(x.glyph () == y.glyph ()))
-        return false;
-
-      if (!(x.notes () == y.notes ()))
-        return false;
-
-      if (!(x.idtag () == y.idtag ()))
-        return false;
-
-      return true;
-    }
-
-    bool
-    operator!= (const modelIdentificationType& x, const modelIdentificationType& y)
-    {
-      return !(x == y);
-    }
-
     // type
     //
-
-    type::
-    type ()
-    : ::schemas::modelID::referenceTypeUnion (),
-      notes_ (this),
-      idtag_ (this)
-    {
-    }
 
     type::
     type (const char* _xsd_referenceTypeUnion_base)
@@ -6044,38 +5192,8 @@ namespace schemas
     {
     }
 
-    bool
-    operator== (const type& x, const type& y)
-    {
-      if (!(static_cast< const ::schemas::modelID::referenceTypeUnion& > (x) ==
-            static_cast< const ::schemas::modelID::referenceTypeUnion& > (y)))
-        return false;
-
-      if (!(x.notes () == y.notes ()))
-        return false;
-
-      if (!(x.idtag () == y.idtag ()))
-        return false;
-
-      return true;
-    }
-
-    bool
-    operator!= (const type& x, const type& y)
-    {
-      return !(x == y);
-    }
-
     // identification
     //
-
-    identification::
-    identification ()
-    : ::xml_schema::uri (),
-      notes_ (this),
-      idtag_ (this)
-    {
-    }
 
     identification::
     identification (const ::xml_schema::uri& _xsd_uri_base)
@@ -6159,38 +5277,8 @@ namespace schemas
     {
     }
 
-    bool
-    operator== (const identification& x, const identification& y)
-    {
-      if (!(static_cast< const ::xml_schema::uri& > (x) ==
-            static_cast< const ::xml_schema::uri& > (y)))
-        return false;
-
-      if (!(x.notes () == y.notes ()))
-        return false;
-
-      if (!(x.idtag () == y.idtag ()))
-        return false;
-
-      return true;
-    }
-
-    bool
-    operator!= (const identification& x, const identification& y)
-    {
-      return !(x == y);
-    }
-
     // modificationDate
     //
-
-    modificationDate::
-    modificationDate ()
-    : ::xml_schema::date (),
-      notes_ (this),
-      idtag_ (this)
-    {
-    }
 
     modificationDate::
     modificationDate (const ::xml_schema::date& _xsd_date_base)
@@ -6274,38 +5362,8 @@ namespace schemas
     {
     }
 
-    bool
-    operator== (const modificationDate& x, const modificationDate& y)
-    {
-      if (!(static_cast< const ::xml_schema::date& > (x) ==
-            static_cast< const ::xml_schema::date& > (y)))
-        return false;
-
-      if (!(x.notes () == y.notes ()))
-        return false;
-
-      if (!(x.idtag () == y.idtag ()))
-        return false;
-
-      return true;
-    }
-
-    bool
-    operator!= (const modificationDate& x, const modificationDate& y)
-    {
-      return !(x == y);
-    }
-
     // poc
     //
-
-    poc::
-    poc ()
-    : ::schemas::modelID::pocType (),
-      notes_ (this),
-      idtag_ (this)
-    {
-    }
 
     poc::
     poc (const pocType1_type& pocType1)
@@ -6399,36 +5457,8 @@ namespace schemas
     {
     }
 
-    bool
-    operator== (const poc& x, const poc& y)
-    {
-      if (!(static_cast< const ::schemas::modelID::pocType& > (x) ==
-            static_cast< const ::schemas::modelID::pocType& > (y)))
-        return false;
-
-      if (!(x.notes () == y.notes ()))
-        return false;
-
-      if (!(x.idtag () == y.idtag ()))
-        return false;
-
-      return true;
-    }
-
-    bool
-    operator!= (const poc& x, const poc& y)
-    {
-      return !(x == y);
-    }
-
     // glyph
     //
-
-    glyph::
-    glyph ()
-    : ::schemas::modelID::glyphType ()
-    {
-    }
 
     glyph::
     glyph (const type_type& type)

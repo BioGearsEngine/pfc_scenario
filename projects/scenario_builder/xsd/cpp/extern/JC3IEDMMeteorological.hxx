@@ -301,8 +301,6 @@ namespace oo_2_0
     public:
     // Constructors.
     //
-    AngleOptionalTypeRangeAngle7_4 ();
-
     AngleOptionalTypeRangeAngle7_4 (const ::xml_schema::decimal&);
 
     AngleOptionalTypeRangeAngle7_4 (const ::xercesc::DOMElement& e,
@@ -373,8 +371,6 @@ namespace oo_2_0
     public:
     // Constructors.
     //
-    DimensionOptionalType12_3 ();
-
     DimensionOptionalType12_3 (const ::xml_schema::decimal&);
 
     DimensionOptionalType12_3 (const ::xercesc::DOMElement& e,
@@ -407,8 +403,6 @@ namespace oo_2_0
     public:
     // Constructors.
     //
-    DimensionMandatoryType12_3 ();
-
     DimensionMandatoryType12_3 (const ::xml_schema::decimal&);
 
     DimensionMandatoryType12_3 (const ::xercesc::DOMElement& e,
@@ -441,8 +435,6 @@ namespace oo_2_0
     public:
     // Constructors.
     //
-    QuantityOptionalType8_4 ();
-
     QuantityOptionalType8_4 (const ::xml_schema::decimal&);
 
     QuantityOptionalType8_4 (const ::xercesc::DOMElement& e,
@@ -475,8 +467,6 @@ namespace oo_2_0
     public:
     // Constructors.
     //
-    RateOptionalType4_1 ();
-
     RateOptionalType4_1 (const ::xml_schema::decimal&);
 
     RateOptionalType4_1 (const ::xercesc::DOMElement& e,
@@ -509,8 +499,6 @@ namespace oo_2_0
     public:
     // Constructors.
     //
-    RateOptionalType8_4 ();
-
     RateOptionalType8_4 (const ::xml_schema::decimal&);
 
     RateOptionalType8_4 (const ::xercesc::DOMElement& e,
@@ -543,8 +531,6 @@ namespace oo_2_0
     public:
     // Constructors.
     //
-    RatioOptionalTypeRangeRatio6_5 ();
-
     RatioOptionalTypeRangeRatio6_5 (const ::xml_schema::decimal&);
 
     RatioOptionalTypeRangeRatio6_5 (const ::xercesc::DOMElement& e,
@@ -577,8 +563,6 @@ namespace oo_2_0
     public:
     // Constructors.
     //
-    RatioOptionalTypeRangeRatio7_6 ();
-
     RatioOptionalTypeRangeRatio7_6 (const ::xml_schema::decimal&);
 
     RatioOptionalTypeRangeRatio7_6 (const ::xercesc::DOMElement& e,
@@ -611,8 +595,6 @@ namespace oo_2_0
     public:
     // Constructors.
     //
-    TemperatureTypeRangeTemperature5_1 ();
-
     TemperatureTypeRangeTemperature5_1 (const ::xml_schema::decimal&);
 
     TemperatureTypeRangeTemperature5_1 (const ::xercesc::DOMElement& e,
@@ -785,13 +767,6 @@ namespace oo_2_0
     TemperatureGradientCode_optional TemperatureGradientCode_;
   };
 
-  bool
-  operator== (const Atmosphere&, const Atmosphere&);
-
-  bool
-  operator!= (const Atmosphere&, const Atmosphere&);
-
-
   class CloudCover: public ::xml_schema::type
   {
     public:
@@ -898,8 +873,6 @@ namespace oo_2_0
 
     // Constructors.
     //
-    CloudCover ();
-
     CloudCover (const CategoryCode_type&);
 
     CloudCover (::std::unique_ptr< CategoryCode_type >);
@@ -936,13 +909,6 @@ namespace oo_2_0
     AverageCoverageCode_optional AverageCoverageCode_;
     LightRefractionRatio_optional LightRefractionRatio_;
   };
-
-  bool
-  operator== (const CloudCover&, const CloudCover&);
-
-  bool
-  operator!= (const CloudCover&, const CloudCover&);
-
 
   class Icing: public ::xml_schema::type
   {
@@ -1022,13 +988,6 @@ namespace oo_2_0
     CategoryCode_optional CategoryCode_;
     SeverityQualifierCode_optional SeverityQualifierCode_;
   };
-
-  bool
-  operator== (const Icing&, const Icing&);
-
-  bool
-  operator!= (const Icing&, const Icing&);
-
 
   class Light: public ::xml_schema::type
   {
@@ -1153,13 +1112,6 @@ namespace oo_2_0
     MoonPhaseCode_optional MoonPhaseCode_;
   };
 
-  bool
-  operator== (const Light&, const Light&);
-
-  bool
-  operator!= (const Light&, const Light&);
-
-
   class Precipitation: public ::xml_schema::type
   {
     public:
@@ -1203,8 +1155,6 @@ namespace oo_2_0
 
     // Constructors.
     //
-    Precipitation ();
-
     Precipitation (const CategoryCode_type&);
 
     Precipitation (::std::unique_ptr< CategoryCode_type >);
@@ -1238,13 +1188,6 @@ namespace oo_2_0
     ::xsd::cxx::tree::one< CategoryCode_type > CategoryCode_;
     Rate_optional Rate_;
   };
-
-  bool
-  operator== (const Precipitation&, const Precipitation&);
-
-  bool
-  operator!= (const Precipitation&, const Precipitation&);
-
 
   class Visibility: public ::xml_schema::type
   {
@@ -1289,8 +1232,6 @@ namespace oo_2_0
 
     // Constructors.
     //
-    Visibility ();
-
     Visibility (const RangeDimension_type&);
 
     Visibility (::std::unique_ptr< RangeDimension_type >);
@@ -1324,13 +1265,6 @@ namespace oo_2_0
     CategoryCode_optional CategoryCode_;
     ::xsd::cxx::tree::one< RangeDimension_type > RangeDimension_;
   };
-
-  bool
-  operator== (const Visibility&, const Visibility&);
-
-  bool
-  operator!= (const Visibility&, const Visibility&);
-
 
   class Wind: public ::xml_schema::type
   {
@@ -1520,12 +1454,6 @@ namespace oo_2_0
     SpeedRate_optional SpeedRate_;
     NuclearYieldQualifierCode_optional NuclearYieldQualifierCode_;
   };
-
-  bool
-  operator== (const Wind&, const Wind&);
-
-  bool
-  operator!= (const Wind&, const Wind&);
 }
 
 #include <iosfwd>

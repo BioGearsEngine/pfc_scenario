@@ -906,17 +906,11 @@ namespace oo_2_0
 
 #include <xsd/cxx/tree/type-factory-map.hxx>
 
-#include <xsd/cxx/tree/comparison-map.hxx>
-
 namespace _xsd
 {
   static
   const ::xsd::cxx::tree::type_factory_plate< 0, char >
   type_factory_plate_init;
-
-  static
-  const ::xsd::cxx::tree::comparison_plate< 0, char >
-  comparison_plate_init;
 }
 
 namespace oo_2_0
@@ -938,13 +932,6 @@ namespace oo_2_0
       ::xsd::cxx::tree::facet::none, 0UL
     }
   };
-
-  AngleOptionalTypeRangeAngle7_4::
-  AngleOptionalTypeRangeAngle7_4 ()
-  : ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal > ()
-  {
-    this->_facet_table (_xsd_AngleOptionalTypeRangeAngle7_4_facet_table);
-  }
 
   AngleOptionalTypeRangeAngle7_4::
   AngleOptionalTypeRangeAngle7_4 (const ::xml_schema::decimal& _xsd_decimal_base)
@@ -1007,10 +994,6 @@ namespace oo_2_0
   _xsd_AngleOptionalTypeRangeAngle7_4_type_factory_init (
     "AngleOptionalTypeRangeAngle7_4",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AngleOptionalTypeRangeAngle7_4 >
-  _xsd_AngleOptionalTypeRangeAngle7_4_comparison_init;
 
   // DatetimeOptionalTypeFix18
   //
@@ -1090,10 +1073,6 @@ namespace oo_2_0
     "DatetimeOptionalTypeFix18",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, DatetimeOptionalTypeFix18 >
-  _xsd_DatetimeOptionalTypeFix18_comparison_init;
-
   // DimensionOptionalType12_3
   //
 
@@ -1111,13 +1090,6 @@ namespace oo_2_0
       ::xsd::cxx::tree::facet::none, 0UL
     }
   };
-
-  DimensionOptionalType12_3::
-  DimensionOptionalType12_3 ()
-  : ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal > ()
-  {
-    this->_facet_table (_xsd_DimensionOptionalType12_3_facet_table);
-  }
 
   DimensionOptionalType12_3::
   DimensionOptionalType12_3 (const ::xml_schema::decimal& _xsd_decimal_base)
@@ -1181,10 +1153,6 @@ namespace oo_2_0
     "DimensionOptionalType12_3",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, DimensionOptionalType12_3 >
-  _xsd_DimensionOptionalType12_3_comparison_init;
-
   // DimensionMandatoryType12_3
   //
 
@@ -1202,13 +1170,6 @@ namespace oo_2_0
       ::xsd::cxx::tree::facet::none, 0UL
     }
   };
-
-  DimensionMandatoryType12_3::
-  DimensionMandatoryType12_3 ()
-  : ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal > ()
-  {
-    this->_facet_table (_xsd_DimensionMandatoryType12_3_facet_table);
-  }
 
   DimensionMandatoryType12_3::
   DimensionMandatoryType12_3 (const ::xml_schema::decimal& _xsd_decimal_base)
@@ -1272,10 +1233,6 @@ namespace oo_2_0
     "DimensionMandatoryType12_3",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, DimensionMandatoryType12_3 >
-  _xsd_DimensionMandatoryType12_3_comparison_init;
-
   // QuantityOptionalType8_4
   //
 
@@ -1293,13 +1250,6 @@ namespace oo_2_0
       ::xsd::cxx::tree::facet::none, 0UL
     }
   };
-
-  QuantityOptionalType8_4::
-  QuantityOptionalType8_4 ()
-  : ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal > ()
-  {
-    this->_facet_table (_xsd_QuantityOptionalType8_4_facet_table);
-  }
 
   QuantityOptionalType8_4::
   QuantityOptionalType8_4 (const ::xml_schema::decimal& _xsd_decimal_base)
@@ -1363,10 +1313,6 @@ namespace oo_2_0
     "QuantityOptionalType8_4",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, QuantityOptionalType8_4 >
-  _xsd_QuantityOptionalType8_4_comparison_init;
-
   // RateOptionalType4_1
   //
 
@@ -1384,13 +1330,6 @@ namespace oo_2_0
       ::xsd::cxx::tree::facet::none, 0UL
     }
   };
-
-  RateOptionalType4_1::
-  RateOptionalType4_1 ()
-  : ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal > ()
-  {
-    this->_facet_table (_xsd_RateOptionalType4_1_facet_table);
-  }
 
   RateOptionalType4_1::
   RateOptionalType4_1 (const ::xml_schema::decimal& _xsd_decimal_base)
@@ -1454,10 +1393,6 @@ namespace oo_2_0
     "RateOptionalType4_1",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RateOptionalType4_1 >
-  _xsd_RateOptionalType4_1_comparison_init;
-
   // RateOptionalType8_4
   //
 
@@ -1475,13 +1410,6 @@ namespace oo_2_0
       ::xsd::cxx::tree::facet::none, 0UL
     }
   };
-
-  RateOptionalType8_4::
-  RateOptionalType8_4 ()
-  : ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal > ()
-  {
-    this->_facet_table (_xsd_RateOptionalType8_4_facet_table);
-  }
 
   RateOptionalType8_4::
   RateOptionalType8_4 (const ::xml_schema::decimal& _xsd_decimal_base)
@@ -1545,10 +1473,6 @@ namespace oo_2_0
     "RateOptionalType8_4",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RateOptionalType8_4 >
-  _xsd_RateOptionalType8_4_comparison_init;
-
   // RatioOptionalTypeRangeRatio6_5
   //
 
@@ -1566,13 +1490,6 @@ namespace oo_2_0
       ::xsd::cxx::tree::facet::none, 0UL
     }
   };
-
-  RatioOptionalTypeRangeRatio6_5::
-  RatioOptionalTypeRangeRatio6_5 ()
-  : ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal > ()
-  {
-    this->_facet_table (_xsd_RatioOptionalTypeRangeRatio6_5_facet_table);
-  }
 
   RatioOptionalTypeRangeRatio6_5::
   RatioOptionalTypeRangeRatio6_5 (const ::xml_schema::decimal& _xsd_decimal_base)
@@ -1636,10 +1553,6 @@ namespace oo_2_0
     "RatioOptionalTypeRangeRatio6_5",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RatioOptionalTypeRangeRatio6_5 >
-  _xsd_RatioOptionalTypeRangeRatio6_5_comparison_init;
-
   // RatioOptionalTypeRangeRatio7_6
   //
 
@@ -1657,13 +1570,6 @@ namespace oo_2_0
       ::xsd::cxx::tree::facet::none, 0UL
     }
   };
-
-  RatioOptionalTypeRangeRatio7_6::
-  RatioOptionalTypeRangeRatio7_6 ()
-  : ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal > ()
-  {
-    this->_facet_table (_xsd_RatioOptionalTypeRangeRatio7_6_facet_table);
-  }
 
   RatioOptionalTypeRangeRatio7_6::
   RatioOptionalTypeRangeRatio7_6 (const ::xml_schema::decimal& _xsd_decimal_base)
@@ -1727,10 +1633,6 @@ namespace oo_2_0
     "RatioOptionalTypeRangeRatio7_6",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RatioOptionalTypeRangeRatio7_6 >
-  _xsd_RatioOptionalTypeRangeRatio7_6_comparison_init;
-
   // TemperatureTypeRangeTemperature5_1
   //
 
@@ -1748,13 +1650,6 @@ namespace oo_2_0
       ::xsd::cxx::tree::facet::none, 0UL
     }
   };
-
-  TemperatureTypeRangeTemperature5_1::
-  TemperatureTypeRangeTemperature5_1 ()
-  : ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal > ()
-  {
-    this->_facet_table (_xsd_TemperatureTypeRangeTemperature5_1_facet_table);
-  }
 
   TemperatureTypeRangeTemperature5_1::
   TemperatureTypeRangeTemperature5_1 (const ::xml_schema::decimal& _xsd_decimal_base)
@@ -1817,10 +1712,6 @@ namespace oo_2_0
   _xsd_TemperatureTypeRangeTemperature5_1_type_factory_init (
     "TemperatureTypeRangeTemperature5_1",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, TemperatureTypeRangeTemperature5_1 >
-  _xsd_TemperatureTypeRangeTemperature5_1_comparison_init;
 
   // Atmosphere
   //
@@ -2055,125 +1946,8 @@ namespace oo_2_0
     "Atmosphere",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, Atmosphere >
-  _xsd_Atmosphere_comparison_init;
-
-  bool
-  operator== (const Atmosphere& x, const Atmosphere& y)
-  {
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      Atmosphere::HumidityRatio_optional a (x.HumidityRatio ()), b (y.HumidityRatio ());
-
-      if (!a || !b)
-      {
-        if (a.present () != b.present ())
-          return false;
-      }
-      else
-      {
-        if (!cm.compare (*a, *b))
-          return false;
-      }
-    }
-
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      Atmosphere::InversionLayerCode_optional a (x.InversionLayerCode ()), b (y.InversionLayerCode ());
-
-      if (!a || !b)
-      {
-        if (a.present () != b.present ())
-          return false;
-      }
-      else
-      {
-        if (!cm.compare (*a, *b))
-          return false;
-      }
-    }
-
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      Atmosphere::PressureQuantity_optional a (x.PressureQuantity ()), b (y.PressureQuantity ());
-
-      if (!a || !b)
-      {
-        if (a.present () != b.present ())
-          return false;
-      }
-      else
-      {
-        if (!cm.compare (*a, *b))
-          return false;
-      }
-    }
-
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      Atmosphere::Temperature_optional a (x.Temperature ()), b (y.Temperature ());
-
-      if (!a || !b)
-      {
-        if (a.present () != b.present ())
-          return false;
-      }
-      else
-      {
-        if (!cm.compare (*a, *b))
-          return false;
-      }
-    }
-
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      Atmosphere::TemperatureGradientCode_optional a (x.TemperatureGradientCode ()), b (y.TemperatureGradientCode ());
-
-      if (!a || !b)
-      {
-        if (a.present () != b.present ())
-          return false;
-      }
-      else
-      {
-        if (!cm.compare (*a, *b))
-          return false;
-      }
-    }
-
-    return true;
-  }
-
-  bool
-  operator!= (const Atmosphere& x, const Atmosphere& y)
-  {
-    return !(x == y);
-  }
-
   // CloudCover
   //
-
-  CloudCover::
-  CloudCover ()
-  : ::xml_schema::type (),
-    CategoryCode_ (this),
-    BaseDimension_ (this),
-    TopDimension_ (this),
-    AverageCoverageCode_ (this),
-    LightRefractionRatio_ (this)
-  {
-  }
 
   CloudCover::
   CloudCover (const CategoryCode_type& CategoryCode)
@@ -2423,102 +2197,6 @@ namespace oo_2_0
     "CloudCover",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, CloudCover >
-  _xsd_CloudCover_comparison_init;
-
-  bool
-  operator== (const CloudCover& x, const CloudCover& y)
-  {
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      if (!cm.compare (x.CategoryCode (), y.CategoryCode ()))
-        return false;
-    }
-
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      CloudCover::BaseDimension_optional a (x.BaseDimension ()), b (y.BaseDimension ());
-
-      if (!a || !b)
-      {
-        if (a.present () != b.present ())
-          return false;
-      }
-      else
-      {
-        if (!cm.compare (*a, *b))
-          return false;
-      }
-    }
-
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      CloudCover::TopDimension_optional a (x.TopDimension ()), b (y.TopDimension ());
-
-      if (!a || !b)
-      {
-        if (a.present () != b.present ())
-          return false;
-      }
-      else
-      {
-        if (!cm.compare (*a, *b))
-          return false;
-      }
-    }
-
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      CloudCover::AverageCoverageCode_optional a (x.AverageCoverageCode ()), b (y.AverageCoverageCode ());
-
-      if (!a || !b)
-      {
-        if (a.present () != b.present ())
-          return false;
-      }
-      else
-      {
-        if (!cm.compare (*a, *b))
-          return false;
-      }
-    }
-
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      CloudCover::LightRefractionRatio_optional a (x.LightRefractionRatio ()), b (y.LightRefractionRatio ());
-
-      if (!a || !b)
-      {
-        if (a.present () != b.present ())
-          return false;
-      }
-      else
-      {
-        if (!cm.compare (*a, *b))
-          return false;
-      }
-    }
-
-    return true;
-  }
-
-  bool
-  operator!= (const CloudCover& x, const CloudCover& y)
-  {
-    return !(x == y);
-  }
-
   // Icing
   //
 
@@ -2655,58 +2333,6 @@ namespace oo_2_0
   _xsd_Icing_type_factory_init (
     "Icing",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, Icing >
-  _xsd_Icing_comparison_init;
-
-  bool
-  operator== (const Icing& x, const Icing& y)
-  {
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      Icing::CategoryCode_optional a (x.CategoryCode ()), b (y.CategoryCode ());
-
-      if (!a || !b)
-      {
-        if (a.present () != b.present ())
-          return false;
-      }
-      else
-      {
-        if (!cm.compare (*a, *b))
-          return false;
-      }
-    }
-
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      Icing::SeverityQualifierCode_optional a (x.SeverityQualifierCode ()), b (y.SeverityQualifierCode ());
-
-      if (!a || !b)
-      {
-        if (a.present () != b.present ())
-          return false;
-      }
-      else
-      {
-        if (!cm.compare (*a, *b))
-          return false;
-      }
-    }
-
-    return true;
-  }
-
-  bool
-  operator!= (const Icing& x, const Icing& y)
-  {
-    return !(x == y);
-  }
 
   // Light
   //
@@ -2909,104 +2535,8 @@ namespace oo_2_0
     "Light",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, Light >
-  _xsd_Light_comparison_init;
-
-  bool
-  operator== (const Light& x, const Light& y)
-  {
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      Light::CategoryCode_optional a (x.CategoryCode ()), b (y.CategoryCode ());
-
-      if (!a || !b)
-      {
-        if (a.present () != b.present ())
-          return false;
-      }
-      else
-      {
-        if (!cm.compare (*a, *b))
-          return false;
-      }
-    }
-
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      Light::UpDatetime_optional a (x.UpDatetime ()), b (y.UpDatetime ());
-
-      if (!a || !b)
-      {
-        if (a.present () != b.present ())
-          return false;
-      }
-      else
-      {
-        if (!cm.compare (*a, *b))
-          return false;
-      }
-    }
-
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      Light::DownDatetime_optional a (x.DownDatetime ()), b (y.DownDatetime ());
-
-      if (!a || !b)
-      {
-        if (a.present () != b.present ())
-          return false;
-      }
-      else
-      {
-        if (!cm.compare (*a, *b))
-          return false;
-      }
-    }
-
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      Light::MoonPhaseCode_optional a (x.MoonPhaseCode ()), b (y.MoonPhaseCode ());
-
-      if (!a || !b)
-      {
-        if (a.present () != b.present ())
-          return false;
-      }
-      else
-      {
-        if (!cm.compare (*a, *b))
-          return false;
-      }
-    }
-
-    return true;
-  }
-
-  bool
-  operator!= (const Light& x, const Light& y)
-  {
-    return !(x == y);
-  }
-
   // Precipitation
   //
-
-  Precipitation::
-  Precipitation ()
-  : ::xml_schema::type (),
-    CategoryCode_ (this),
-    Rate_ (this)
-  {
-  }
 
   Precipitation::
   Precipitation (const CategoryCode_type& CategoryCode)
@@ -3157,58 +2687,8 @@ namespace oo_2_0
     "Precipitation",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, Precipitation >
-  _xsd_Precipitation_comparison_init;
-
-  bool
-  operator== (const Precipitation& x, const Precipitation& y)
-  {
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      if (!cm.compare (x.CategoryCode (), y.CategoryCode ()))
-        return false;
-    }
-
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      Precipitation::Rate_optional a (x.Rate ()), b (y.Rate ());
-
-      if (!a || !b)
-      {
-        if (a.present () != b.present ())
-          return false;
-      }
-      else
-      {
-        if (!cm.compare (*a, *b))
-          return false;
-      }
-    }
-
-    return true;
-  }
-
-  bool
-  operator!= (const Precipitation& x, const Precipitation& y)
-  {
-    return !(x == y);
-  }
-
   // Visibility
   //
-
-  Visibility::
-  Visibility ()
-  : ::xml_schema::type (),
-    CategoryCode_ (this),
-    RangeDimension_ (this)
-  {
-  }
 
   Visibility::
   Visibility (const RangeDimension_type& RangeDimension)
@@ -3358,48 +2838,6 @@ namespace oo_2_0
   _xsd_Visibility_type_factory_init (
     "Visibility",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, Visibility >
-  _xsd_Visibility_comparison_init;
-
-  bool
-  operator== (const Visibility& x, const Visibility& y)
-  {
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      Visibility::CategoryCode_optional a (x.CategoryCode ()), b (y.CategoryCode ());
-
-      if (!a || !b)
-      {
-        if (a.present () != b.present ())
-          return false;
-      }
-      else
-      {
-        if (!cm.compare (*a, *b))
-          return false;
-      }
-    }
-
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      if (!cm.compare (x.RangeDimension (), y.RangeDimension ()))
-        return false;
-    }
-
-    return true;
-  }
-
-  bool
-  operator!= (const Visibility& x, const Visibility& y)
-  {
-    return !(x == y);
-  }
 
   // Wind
   //
@@ -3697,148 +3135,6 @@ namespace oo_2_0
   _xsd_Wind_type_factory_init (
     "Wind",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, Wind >
-  _xsd_Wind_comparison_init;
-
-  bool
-  operator== (const Wind& x, const Wind& y)
-  {
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      Wind::CategoryCode_optional a (x.CategoryCode ()), b (y.CategoryCode ());
-
-      if (!a || !b)
-      {
-        if (a.present () != b.present ())
-          return false;
-      }
-      else
-      {
-        if (!cm.compare (*a, *b))
-          return false;
-      }
-    }
-
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      Wind::AirStabilityCategoryCode_optional a (x.AirStabilityCategoryCode ()), b (y.AirStabilityCategoryCode ());
-
-      if (!a || !b)
-      {
-        if (a.present () != b.present ())
-          return false;
-      }
-      else
-      {
-        if (!cm.compare (*a, *b))
-          return false;
-      }
-    }
-
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      Wind::AltitudeLayerCode_optional a (x.AltitudeLayerCode ()), b (y.AltitudeLayerCode ());
-
-      if (!a || !b)
-      {
-        if (a.present () != b.present ())
-          return false;
-      }
-      else
-      {
-        if (!cm.compare (*a, *b))
-          return false;
-      }
-    }
-
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      Wind::DirectionAngle_optional a (x.DirectionAngle ()), b (y.DirectionAngle ());
-
-      if (!a || !b)
-      {
-        if (a.present () != b.present ())
-          return false;
-      }
-      else
-      {
-        if (!cm.compare (*a, *b))
-          return false;
-      }
-    }
-
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      Wind::EffectiveDownwindDirectionAngle_optional a (x.EffectiveDownwindDirectionAngle ()), b (y.EffectiveDownwindDirectionAngle ());
-
-      if (!a || !b)
-      {
-        if (a.present () != b.present ())
-          return false;
-      }
-      else
-      {
-        if (!cm.compare (*a, *b))
-          return false;
-      }
-    }
-
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      Wind::SpeedRate_optional a (x.SpeedRate ()), b (y.SpeedRate ());
-
-      if (!a || !b)
-      {
-        if (a.present () != b.present ())
-          return false;
-      }
-      else
-      {
-        if (!cm.compare (*a, *b))
-          return false;
-      }
-    }
-
-    {
-      ::xsd::cxx::tree::comparison_map< char >& cm (
-        ::xsd::cxx::tree::comparison_map_instance< 0, char > ());
-
-      Wind::NuclearYieldQualifierCode_optional a (x.NuclearYieldQualifierCode ()), b (y.NuclearYieldQualifierCode ());
-
-      if (!a || !b)
-      {
-        if (a.present () != b.present ())
-          return false;
-      }
-      else
-      {
-        if (!cm.compare (*a, *b))
-          return false;
-      }
-    }
-
-    return true;
-  }
-
-  bool
-  operator!= (const Wind& x, const Wind& y)
-  {
-    return !(x == y);
-  }
 }
 
 #include <ostream>

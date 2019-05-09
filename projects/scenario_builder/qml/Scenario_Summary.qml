@@ -2,10 +2,12 @@ import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 
+import com.ara.pfc.ScenarioModel 1.0
 //---------------------------------------------------------------------------
 Item {
   id:root
-  property var stack
+  property StackView stack : null
+  property ScenarioModel model : null
 ListModel {
     id: scenario_model
     ListElement {
@@ -62,7 +64,7 @@ camp to a semi-open tent environment. Within the tent environment, the casualty 
       Text {
         id: scenario_model_content
         font.pointSize: 10
-        text: content
+        text: content + ((root.model) ?  root.model.name : " No Model Found")
         wrapMode: Text.Wrap
         horizontalAlignment : Text.AlignJustify
 
@@ -93,10 +95,10 @@ camp to a semi-open tent environment. Within the tent environment, the casualty 
   Button {
     id: control
     anchors {
-      right : parent.right
-      top : parent.top
-      topMargin : 2
-      rightMargin : 8
+     right : parent.right
+       top : parent.top
+       topMargin : 2
+       rightMargin : 8
       
     }
 
@@ -115,6 +117,8 @@ camp to a semi-open tent environment. Within the tent environment, the casualty 
     }
     Layout.alignment: Qt.AlignTop
   }
+
+    
   ListView {
     id:summaryList
     anchors {

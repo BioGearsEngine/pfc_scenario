@@ -1216,17 +1216,11 @@ namespace msdl_1
 
 #include <xsd/cxx/tree/type-factory-map.hxx>
 
-#include <xsd/cxx/tree/comparison-map.hxx>
-
 namespace _xsd
 {
   static
   const ::xsd::cxx::tree::type_factory_plate< 0, char >
   type_factory_plate_init;
-
-  static
-  const ::xsd::cxx::tree::comparison_plate< 0, char >
-  comparison_plate_init;
 }
 
 namespace msdl_1
@@ -1307,10 +1301,6 @@ namespace msdl_1
     "enumAnchorPointType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumAnchorPointType >
-  _xsd_enumAnchorPointType_comparison_init;
-
   // enumAirFormationType
   //
 
@@ -1384,10 +1374,6 @@ namespace msdl_1
   _xsd_enumAirFormationType_type_factory_init (
     "enumAirFormationType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumAirFormationType >
-  _xsd_enumAirFormationType_comparison_init;
 
   // enumBaseAffiliation
   //
@@ -1468,10 +1454,6 @@ namespace msdl_1
   _xsd_enumBaseAffiliation_type_factory_init (
     "enumBaseAffiliation",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumBaseAffiliation >
-  _xsd_enumBaseAffiliation_comparison_init;
 
   // enumCombatEffectivenessType
   //
@@ -1554,10 +1536,6 @@ namespace msdl_1
   _xsd_enumCombatEffectivenessType_type_factory_init (
     "enumCombatEffectivenessType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumCombatEffectivenessType >
-  _xsd_enumCombatEffectivenessType_comparison_init;
 
   // enumCommandRelationshipType
   //
@@ -1643,10 +1621,6 @@ namespace msdl_1
     "enumCommandRelationshipType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumCommandRelationshipType >
-  _xsd_enumCommandRelationshipType_comparison_init;
-
   // enumCommunicationNetType
   //
 
@@ -1728,10 +1702,6 @@ namespace msdl_1
   _xsd_enumCommunicationNetType_type_factory_init (
     "enumCommunicationNetType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumCommunicationNetType >
-  _xsd_enumCommunicationNetType_comparison_init;
 
   // enumCommunicationServiceType
   //
@@ -1825,10 +1795,6 @@ namespace msdl_1
     "enumCommunicationServiceType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumCommunicationServiceType >
-  _xsd_enumCommunicationServiceType_comparison_init;
-
   // enumCoordinateSystemType
   //
 
@@ -1908,10 +1874,6 @@ namespace msdl_1
   _xsd_enumCoordinateSystemType_type_factory_init (
     "enumCoordinateSystemType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumCoordinateSystemType >
-  _xsd_enumCoordinateSystemType_comparison_init;
 
   // enumEchelon
   //
@@ -2027,10 +1989,6 @@ namespace msdl_1
     "enumEchelon",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumEchelon >
-  _xsd_enumEchelon_comparison_init;
-
   // enumForceOwnerType
   //
 
@@ -2107,10 +2065,6 @@ namespace msdl_1
     "enumForceOwnerType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumForceOwnerType >
-  _xsd_enumForceOwnerType_comparison_init;
-
   // enumFormationLocationType
   //
 
@@ -2186,10 +2140,6 @@ namespace msdl_1
   _xsd_enumFormationLocationType_type_factory_init (
     "enumFormationLocationType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumFormationLocationType >
-  _xsd_enumFormationLocationType_comparison_init;
 
   // enumFormationType
   //
@@ -2270,10 +2220,6 @@ namespace msdl_1
   _xsd_enumFormationType_type_factory_init (
     "enumFormationType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumFormationType >
-  _xsd_enumFormationType_comparison_init;
 
   // enumGroundFormationType
   //
@@ -2369,10 +2315,6 @@ namespace msdl_1
     "enumGroundFormationType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumGroundFormationType >
-  _xsd_enumGroundFormationType_comparison_init;
-
   // enumModelResolutionType
   //
 
@@ -2457,10 +2399,6 @@ namespace msdl_1
     "enumModelResolutionType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumModelResolutionType >
-  _xsd_enumModelResolutionType_comparison_init;
-
   // enumMOPPLevelType
   //
 
@@ -2543,10 +2481,6 @@ namespace msdl_1
     "enumMOPPLevelType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumMOPPLevelType >
-  _xsd_enumMOPPLevelType_comparison_init;
-
   // enumOrientationType
   //
 
@@ -2622,10 +2556,6 @@ namespace msdl_1
   _xsd_enumOrientationType_type_factory_init (
     "enumOrientationType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumOrientationType >
-  _xsd_enumOrientationType_comparison_init;
 
   // enumOverlayType
   //
@@ -2719,10 +2649,6 @@ namespace msdl_1
     "enumOverlayType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumOverlayType >
-  _xsd_enumOverlayType_comparison_init;
-
   // enumReinforcedReducedType
   //
 
@@ -2801,10 +2727,6 @@ namespace msdl_1
     "enumReinforcedReducedType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumReinforcedReducedType >
-  _xsd_enumReinforcedReducedType_comparison_init;
-
   // enumSubsurfaceFormationType
   //
 
@@ -2878,10 +2800,6 @@ namespace msdl_1
   _xsd_enumSubsurfaceFormationType_type_factory_init (
     "enumSubsurfaceFormationType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumSubsurfaceFormationType >
-  _xsd_enumSubsurfaceFormationType_comparison_init;
 
   // enumSupportRelationType
   //
@@ -2965,10 +2883,6 @@ namespace msdl_1
     "enumSupportRelationType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumSupportRelationType >
-  _xsd_enumSupportRelationType_comparison_init;
-
   // enumSupportRoleType
   //
 
@@ -3051,10 +2965,6 @@ namespace msdl_1
     "enumSupportRoleType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumSupportRoleType >
-  _xsd_enumSupportRoleType_comparison_init;
-
   // enumSurfaceFormationType
   //
 
@@ -3128,10 +3038,6 @@ namespace msdl_1
   _xsd_enumSurfaceFormationType_type_factory_init (
     "enumSurfaceFormationType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumSurfaceFormationType >
-  _xsd_enumSurfaceFormationType_comparison_init;
 
   // enumSymbolClassType
   //
@@ -3217,10 +3123,6 @@ namespace msdl_1
     "enumSymbolClassType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumSymbolClassType >
-  _xsd_enumSymbolClassType_comparison_init;
-
   // enumSymbologyStandardType
   //
 
@@ -3296,10 +3198,6 @@ namespace msdl_1
   _xsd_enumSymbologyStandardType_type_factory_init (
     "enumSymbologyStandardType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumSymbologyStandardType >
-  _xsd_enumSymbologyStandardType_comparison_init;
 
   // enumFrameShapeModifierType
   //
@@ -3393,10 +3291,6 @@ namespace msdl_1
     "enumFrameShapeModifierType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumFrameShapeModifierType >
-  _xsd_enumFrameShapeModifierType_comparison_init;
-
   // enumWeaponControlStatusType
   //
 
@@ -3474,10 +3368,6 @@ namespace msdl_1
   _xsd_enumWeaponControlStatusType_type_factory_init (
     "enumWeaponControlStatusType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, enumWeaponControlStatusType >
-  _xsd_enumWeaponControlStatusType_comparison_init;
 }
 
 #include <ostream>

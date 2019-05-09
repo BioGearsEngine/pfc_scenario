@@ -46,12 +46,6 @@ namespace oo_2_0
   // 
 
   AbsolutePointCategoryCode::
-  AbsolutePointCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  AbsolutePointCategoryCode::
   AbsolutePointCategoryCode (value v)
   : ::xml_schema::token (_xsd_AbsolutePointCategoryCode_literals_[v])
   {
@@ -95,12 +89,6 @@ namespace oo_2_0
 
   // ActionAircraftEmploymentApproachOffsetCode
   // 
-
-  ActionAircraftEmploymentApproachOffsetCode::
-  ActionAircraftEmploymentApproachOffsetCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionAircraftEmploymentApproachOffsetCode::
   ActionAircraftEmploymentApproachOffsetCode (value v)
@@ -148,12 +136,6 @@ namespace oo_2_0
   // 
 
   ActionAircraftEmploymentCrewCompositionCode::
-  ActionAircraftEmploymentCrewCompositionCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionAircraftEmploymentCrewCompositionCode::
   ActionAircraftEmploymentCrewCompositionCode (value v)
   : ::xml_schema::token (_xsd_ActionAircraftEmploymentCrewCompositionCode_literals_[v])
   {
@@ -197,12 +179,6 @@ namespace oo_2_0
 
   // ActionAircraftEmploymentDeplanementMethodCode
   // 
-
-  ActionAircraftEmploymentDeplanementMethodCode::
-  ActionAircraftEmploymentDeplanementMethodCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionAircraftEmploymentDeplanementMethodCode::
   ActionAircraftEmploymentDeplanementMethodCode (value v)
@@ -250,12 +226,6 @@ namespace oo_2_0
   // 
 
   ActionAircraftEmploymentGeneralRoleCode::
-  ActionAircraftEmploymentGeneralRoleCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionAircraftEmploymentGeneralRoleCode::
   ActionAircraftEmploymentGeneralRoleCode (value v)
   : ::xml_schema::token (_xsd_ActionAircraftEmploymentGeneralRoleCode_literals_[v])
   {
@@ -299,12 +269,6 @@ namespace oo_2_0
 
   // ActionAircraftEmploymentInflightReportRequirementIndicatorCode
   // 
-
-  ActionAircraftEmploymentInflightReportRequirementIndicatorCode::
-  ActionAircraftEmploymentInflightReportRequirementIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionAircraftEmploymentInflightReportRequirementIndicatorCode::
   ActionAircraftEmploymentInflightReportRequirementIndicatorCode (value v)
@@ -352,12 +316,6 @@ namespace oo_2_0
   // 
 
   ActionCategoryCode::
-  ActionCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionCategoryCode::
   ActionCategoryCode (value v)
   : ::xml_schema::token (_xsd_ActionCategoryCode_literals_[v])
   {
@@ -401,12 +359,6 @@ namespace oo_2_0
 
   // ActionContextCategoryCode
   // 
-
-  ActionContextCategoryCode::
-  ActionContextCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionContextCategoryCode::
   ActionContextCategoryCode (value v)
@@ -454,12 +406,6 @@ namespace oo_2_0
   // 
 
   ActionEffectCategoryCode::
-  ActionEffectCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionEffectCategoryCode::
   ActionEffectCategoryCode (value v)
   : ::xml_schema::token (_xsd_ActionEffectCategoryCode_literals_[v])
   {
@@ -503,12 +449,6 @@ namespace oo_2_0
 
   // ActionEffectDescriptionCode
   // 
-
-  ActionEffectDescriptionCode::
-  ActionEffectDescriptionCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionEffectDescriptionCode::
   ActionEffectDescriptionCode (value v)
@@ -556,12 +496,6 @@ namespace oo_2_0
   // 
 
   ActionEffectSeverityCode::
-  ActionEffectSeverityCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionEffectSeverityCode::
   ActionEffectSeverityCode (value v)
   : ::xml_schema::token (_xsd_ActionEffectSeverityCode_literals_[v])
   {
@@ -605,12 +539,6 @@ namespace oo_2_0
 
   // ActionElectronicWarfareEmploymentCategoryCode
   // 
-
-  ActionElectronicWarfareEmploymentCategoryCode::
-  ActionElectronicWarfareEmploymentCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionElectronicWarfareEmploymentCategoryCode::
   ActionElectronicWarfareEmploymentCategoryCode (value v)
@@ -658,12 +586,6 @@ namespace oo_2_0
   // 
 
   ActionEventCategoryCode::
-  ActionEventCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionEventCategoryCode::
   ActionEventCategoryCode (value v)
   : ::xml_schema::token (_xsd_ActionEventCategoryCode_literals_[v])
   {
@@ -707,12 +629,6 @@ namespace oo_2_0
 
   // ActionEventDetailClassificationCode
   // 
-
-  ActionEventDetailClassificationCode::
-  ActionEventDetailClassificationCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionEventDetailClassificationCode::
   ActionEventDetailClassificationCode (value v)
@@ -760,12 +676,6 @@ namespace oo_2_0
   // 
 
   ActionEventDetailCrimeIndicatorCode::
-  ActionEventDetailCrimeIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionEventDetailCrimeIndicatorCode::
   ActionEventDetailCrimeIndicatorCode (value v)
   : ::xml_schema::token (_xsd_ActionEventDetailCrimeIndicatorCode_literals_[v])
   {
@@ -809,12 +719,6 @@ namespace oo_2_0
 
   // ActionFunctionalAssociationCategoryCode
   // 
-
-  ActionFunctionalAssociationCategoryCode::
-  ActionFunctionalAssociationCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionFunctionalAssociationCategoryCode::
   ActionFunctionalAssociationCategoryCode (value v)
@@ -862,12 +766,6 @@ namespace oo_2_0
   // 
 
   ActionMaritimeEmploymentCoordinatedAirSeaProcedureCode::
-  ActionMaritimeEmploymentCoordinatedAirSeaProcedureCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionMaritimeEmploymentCoordinatedAirSeaProcedureCode::
   ActionMaritimeEmploymentCoordinatedAirSeaProcedureCode (value v)
   : ::xml_schema::token (_xsd_ActionMaritimeEmploymentCoordinatedAirSeaProcedureCode_literals_[v])
   {
@@ -911,12 +809,6 @@ namespace oo_2_0
 
   // ActionMaritimeEmploymentVesselTransitInstructionCode
   // 
-
-  ActionMaritimeEmploymentVesselTransitInstructionCode::
-  ActionMaritimeEmploymentVesselTransitInstructionCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionMaritimeEmploymentVesselTransitInstructionCode::
   ActionMaritimeEmploymentVesselTransitInstructionCode (value v)
@@ -964,12 +856,6 @@ namespace oo_2_0
   // 
 
   ActionObjectiveCategoryCode::
-  ActionObjectiveCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionObjectiveCategoryCode::
   ActionObjectiveCategoryCode (value v)
   : ::xml_schema::token (_xsd_ActionObjectiveCategoryCode_literals_[v])
   {
@@ -1013,12 +899,6 @@ namespace oo_2_0
 
   // ActionObjectiveItemCategoryCode
   // 
-
-  ActionObjectiveItemCategoryCode::
-  ActionObjectiveItemCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionObjectiveItemCategoryCode::
   ActionObjectiveItemCategoryCode (value v)
@@ -1066,12 +946,6 @@ namespace oo_2_0
   // 
 
   ActionObjectiveItemMarkingMethodCode::
-  ActionObjectiveItemMarkingMethodCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionObjectiveItemMarkingMethodCode::
   ActionObjectiveItemMarkingMethodCode (value v)
   : ::xml_schema::token (_xsd_ActionObjectiveItemMarkingMethodCode_literals_[v])
   {
@@ -1115,12 +989,6 @@ namespace oo_2_0
 
   // ActionObjectiveItemMarkingPanelShapeCode
   // 
-
-  ActionObjectiveItemMarkingPanelShapeCode::
-  ActionObjectiveItemMarkingPanelShapeCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionObjectiveItemMarkingPanelShapeCode::
   ActionObjectiveItemMarkingPanelShapeCode (value v)
@@ -1168,12 +1036,6 @@ namespace oo_2_0
   // 
 
   ActionObjectiveItemMarkingRecognitionSignalColourCode::
-  ActionObjectiveItemMarkingRecognitionSignalColourCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionObjectiveItemMarkingRecognitionSignalColourCode::
   ActionObjectiveItemMarkingRecognitionSignalColourCode (value v)
   : ::xml_schema::token (_xsd_ActionObjectiveItemMarkingRecognitionSignalColourCode_literals_[v])
   {
@@ -1217,12 +1079,6 @@ namespace oo_2_0
 
   // ActionObjectiveItemPrimacyCode
   // 
-
-  ActionObjectiveItemPrimacyCode::
-  ActionObjectiveItemPrimacyCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionObjectiveItemPrimacyCode::
   ActionObjectiveItemPrimacyCode (value v)
@@ -1270,12 +1126,6 @@ namespace oo_2_0
   // 
 
   ActionObjectiveQualifierCode::
-  ActionObjectiveQualifierCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionObjectiveQualifierCode::
   ActionObjectiveQualifierCode (value v)
   : ::xml_schema::token (_xsd_ActionObjectiveQualifierCode_literals_[v])
   {
@@ -1319,12 +1169,6 @@ namespace oo_2_0
 
   // ActionObjectiveTypeCategoryCode
   // 
-
-  ActionObjectiveTypeCategoryCode::
-  ActionObjectiveTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionObjectiveTypeCategoryCode::
   ActionObjectiveTypeCategoryCode (value v)
@@ -1372,12 +1216,6 @@ namespace oo_2_0
   // 
 
   ActionObjectiveTypeImageryProductImageTypeCode::
-  ActionObjectiveTypeImageryProductImageTypeCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionObjectiveTypeImageryProductImageTypeCode::
   ActionObjectiveTypeImageryProductImageTypeCode (value v)
   : ::xml_schema::token (_xsd_ActionObjectiveTypeImageryProductImageTypeCode_literals_[v])
   {
@@ -1421,12 +1259,6 @@ namespace oo_2_0
 
   // ActionReconnaissanceEmploymentImageCoverageModeCode
   // 
-
-  ActionReconnaissanceEmploymentImageCoverageModeCode::
-  ActionReconnaissanceEmploymentImageCoverageModeCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionReconnaissanceEmploymentImageCoverageModeCode::
   ActionReconnaissanceEmploymentImageCoverageModeCode (value v)
@@ -1474,12 +1306,6 @@ namespace oo_2_0
   // 
 
   ActionReconnaissanceEmploymentImageViewQualifierCode::
-  ActionReconnaissanceEmploymentImageViewQualifierCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionReconnaissanceEmploymentImageViewQualifierCode::
   ActionReconnaissanceEmploymentImageViewQualifierCode (value v)
   : ::xml_schema::token (_xsd_ActionReconnaissanceEmploymentImageViewQualifierCode_literals_[v])
   {
@@ -1523,12 +1349,6 @@ namespace oo_2_0
 
   // ActionReconnaissanceEmploymentTypeOfCoverageCode
   // 
-
-  ActionReconnaissanceEmploymentTypeOfCoverageCode::
-  ActionReconnaissanceEmploymentTypeOfCoverageCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionReconnaissanceEmploymentTypeOfCoverageCode::
   ActionReconnaissanceEmploymentTypeOfCoverageCode (value v)
@@ -1576,12 +1396,6 @@ namespace oo_2_0
   // 
 
   ActionReferenceAssociationCategoryCode::
-  ActionReferenceAssociationCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionReferenceAssociationCategoryCode::
   ActionReferenceAssociationCategoryCode (value v)
   : ::xml_schema::token (_xsd_ActionReferenceAssociationCategoryCode_literals_[v])
   {
@@ -1625,12 +1439,6 @@ namespace oo_2_0
 
   // ActionResourceCategoryCode
   // 
-
-  ActionResourceCategoryCode::
-  ActionResourceCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionResourceCategoryCode::
   ActionResourceCategoryCode (value v)
@@ -1678,12 +1486,6 @@ namespace oo_2_0
   // 
 
   ActionResourceCriticalityIndicatorCode::
-  ActionResourceCriticalityIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionResourceCriticalityIndicatorCode::
   ActionResourceCriticalityIndicatorCode (value v)
   : ::xml_schema::token (_xsd_ActionResourceCriticalityIndicatorCode_literals_[v])
   {
@@ -1727,12 +1529,6 @@ namespace oo_2_0
 
   // ActionResourceEmploymentCategoryCode
   // 
-
-  ActionResourceEmploymentCategoryCode::
-  ActionResourceEmploymentCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionResourceEmploymentCategoryCode::
   ActionResourceEmploymentCategoryCode (value v)
@@ -1780,12 +1576,6 @@ namespace oo_2_0
   // 
 
   ActionResourceEmploymentMethodOfControlCode::
-  ActionResourceEmploymentMethodOfControlCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionResourceEmploymentMethodOfControlCode::
   ActionResourceEmploymentMethodOfControlCode (value v)
   : ::xml_schema::token (_xsd_ActionResourceEmploymentMethodOfControlCode_literals_[v])
   {
@@ -1829,12 +1619,6 @@ namespace oo_2_0
 
   // ActionResourceEmploymentTrajectoryFireCode
   // 
-
-  ActionResourceEmploymentTrajectoryFireCode::
-  ActionResourceEmploymentTrajectoryFireCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionResourceEmploymentTrajectoryFireCode::
   ActionResourceEmploymentTrajectoryFireCode (value v)
@@ -1882,12 +1666,6 @@ namespace oo_2_0
   // 
 
   ActionResourceQualifierCode::
-  ActionResourceQualifierCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionResourceQualifierCode::
   ActionResourceQualifierCode (value v)
   : ::xml_schema::token (_xsd_ActionResourceQualifierCode_literals_[v])
   {
@@ -1931,12 +1709,6 @@ namespace oo_2_0
 
   // ActionTaskActivityCode
   // 
-
-  ActionTaskActivityCode::
-  ActionTaskActivityCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionTaskActivityCode::
   ActionTaskActivityCode (value v)
@@ -1984,12 +1756,6 @@ namespace oo_2_0
   // 
 
   ActionTaskCategoryCode::
-  ActionTaskCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionTaskCategoryCode::
   ActionTaskCategoryCode (value v)
   : ::xml_schema::token (_xsd_ActionTaskCategoryCode_literals_[v])
   {
@@ -2033,12 +1799,6 @@ namespace oo_2_0
 
   // ActionTaskEndQualifierCode
   // 
-
-  ActionTaskEndQualifierCode::
-  ActionTaskEndQualifierCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionTaskEndQualifierCode::
   ActionTaskEndQualifierCode (value v)
@@ -2086,12 +1846,6 @@ namespace oo_2_0
   // 
 
   ActionTaskEntailedSafetyDegreeCode::
-  ActionTaskEntailedSafetyDegreeCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionTaskEntailedSafetyDegreeCode::
   ActionTaskEntailedSafetyDegreeCode (value v)
   : ::xml_schema::token (_xsd_ActionTaskEntailedSafetyDegreeCode_literals_[v])
   {
@@ -2135,12 +1889,6 @@ namespace oo_2_0
 
   // ActionTaskMeteorologicalImpactCode
   // 
-
-  ActionTaskMeteorologicalImpactCode::
-  ActionTaskMeteorologicalImpactCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionTaskMeteorologicalImpactCode::
   ActionTaskMeteorologicalImpactCode (value v)
@@ -2188,12 +1936,6 @@ namespace oo_2_0
   // 
 
   ActionTaskOperationalLevelCode::
-  ActionTaskOperationalLevelCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionTaskOperationalLevelCode::
   ActionTaskOperationalLevelCode (value v)
   : ::xml_schema::token (_xsd_ActionTaskOperationalLevelCode_literals_[v])
   {
@@ -2237,12 +1979,6 @@ namespace oo_2_0
 
   // ActionTaskOvertCovertCode
   // 
-
-  ActionTaskOvertCovertCode::
-  ActionTaskOvertCovertCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionTaskOvertCovertCode::
   ActionTaskOvertCovertCode (value v)
@@ -2290,12 +2026,6 @@ namespace oo_2_0
   // 
 
   ActionTaskPriorityCode::
-  ActionTaskPriorityCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionTaskPriorityCode::
   ActionTaskPriorityCode (value v)
   : ::xml_schema::token (_xsd_ActionTaskPriorityCode_literals_[v])
   {
@@ -2339,12 +2069,6 @@ namespace oo_2_0
 
   // ActionTaskStartQualifierCode
   // 
-
-  ActionTaskStartQualifierCode::
-  ActionTaskStartQualifierCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionTaskStartQualifierCode::
   ActionTaskStartQualifierCode (value v)
@@ -2392,12 +2116,6 @@ namespace oo_2_0
   // 
 
   ActionTaskStatusAmendTimingCode::
-  ActionTaskStatusAmendTimingCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionTaskStatusAmendTimingCode::
   ActionTaskStatusAmendTimingCode (value v)
   : ::xml_schema::token (_xsd_ActionTaskStatusAmendTimingCode_literals_[v])
   {
@@ -2441,12 +2159,6 @@ namespace oo_2_0
 
   // ActionTaskStatusApprovalIndicatorCode
   // 
-
-  ActionTaskStatusApprovalIndicatorCode::
-  ActionTaskStatusApprovalIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionTaskStatusApprovalIndicatorCode::
   ActionTaskStatusApprovalIndicatorCode (value v)
@@ -2494,12 +2206,6 @@ namespace oo_2_0
   // 
 
   ActionTaskStatusCategoryCode::
-  ActionTaskStatusCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionTaskStatusCategoryCode::
   ActionTaskStatusCategoryCode (value v)
   : ::xml_schema::token (_xsd_ActionTaskStatusCategoryCode_literals_[v])
   {
@@ -2543,12 +2249,6 @@ namespace oo_2_0
 
   // ActionTaskStatusPlanningIndicatorCode
   // 
-
-  ActionTaskStatusPlanningIndicatorCode::
-  ActionTaskStatusPlanningIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionTaskStatusPlanningIndicatorCode::
   ActionTaskStatusPlanningIndicatorCode (value v)
@@ -2596,12 +2296,6 @@ namespace oo_2_0
   // 
 
   ActionTaskStatusProgressCode::
-  ActionTaskStatusProgressCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionTaskStatusProgressCode::
   ActionTaskStatusProgressCode (value v)
   : ::xml_schema::token (_xsd_ActionTaskStatusProgressCode_literals_[v])
   {
@@ -2645,12 +2339,6 @@ namespace oo_2_0
 
   // ActionTaskTimingDayCode
   // 
-
-  ActionTaskTimingDayCode::
-  ActionTaskTimingDayCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionTaskTimingDayCode::
   ActionTaskTimingDayCode (value v)
@@ -2698,12 +2386,6 @@ namespace oo_2_0
   // 
 
   ActionTaskTimingHourCode::
-  ActionTaskTimingHourCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ActionTaskTimingHourCode::
   ActionTaskTimingHourCode (value v)
   : ::xml_schema::token (_xsd_ActionTaskTimingHourCode_literals_[v])
   {
@@ -2747,12 +2429,6 @@ namespace oo_2_0
 
   // ActionTemporalAssociationCategoryCode
   // 
-
-  ActionTemporalAssociationCategoryCode::
-  ActionTemporalAssociationCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ActionTemporalAssociationCategoryCode::
   ActionTemporalAssociationCategoryCode (value v)
@@ -2800,12 +2476,6 @@ namespace oo_2_0
   // 
 
   AddressCategoryCode::
-  AddressCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  AddressCategoryCode::
   AddressCategoryCode (value v)
   : ::xml_schema::token (_xsd_AddressCategoryCode_literals_[v])
   {
@@ -2849,12 +2519,6 @@ namespace oo_2_0
 
   // AffiliationCategoryCode
   // 
-
-  AffiliationCategoryCode::
-  AffiliationCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   AffiliationCategoryCode::
   AffiliationCategoryCode (value v)
@@ -2902,12 +2566,6 @@ namespace oo_2_0
   // 
 
   AffiliationEthnicGroupCode::
-  AffiliationEthnicGroupCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  AffiliationEthnicGroupCode::
   AffiliationEthnicGroupCode (value v)
   : ::xml_schema::token (_xsd_AffiliationEthnicGroupCode_literals_[v])
   {
@@ -2951,12 +2609,6 @@ namespace oo_2_0
 
   // AffiliationFunctionalGroupCode
   // 
-
-  AffiliationFunctionalGroupCode::
-  AffiliationFunctionalGroupCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   AffiliationFunctionalGroupCode::
   AffiliationFunctionalGroupCode (value v)
@@ -3004,12 +2656,6 @@ namespace oo_2_0
   // 
 
   AffiliationGeopoliticalCode::
-  AffiliationGeopoliticalCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  AffiliationGeopoliticalCode::
   AffiliationGeopoliticalCode (value v)
   : ::xml_schema::token (_xsd_AffiliationGeopoliticalCode_literals_[v])
   {
@@ -3053,12 +2699,6 @@ namespace oo_2_0
 
   // AffiliationReligionCode
   // 
-
-  AffiliationReligionCode::
-  AffiliationReligionCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   AffiliationReligionCode::
   AffiliationReligionCode (value v)
@@ -3106,12 +2746,6 @@ namespace oo_2_0
   // 
 
   AirRouteSegmentCivilMilitaryCode::
-  AirRouteSegmentCivilMilitaryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  AirRouteSegmentCivilMilitaryCode::
   AirRouteSegmentCivilMilitaryCode (value v)
   : ::xml_schema::token (_xsd_AirRouteSegmentCivilMilitaryCode_literals_[v])
   {
@@ -3155,12 +2789,6 @@ namespace oo_2_0
 
   // AirRouteSegmentInternationalRouteCode
   // 
-
-  AirRouteSegmentInternationalRouteCode::
-  AirRouteSegmentInternationalRouteCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   AirRouteSegmentInternationalRouteCode::
   AirRouteSegmentInternationalRouteCode (value v)
@@ -3208,12 +2836,6 @@ namespace oo_2_0
   // 
 
   AirRouteSegmentRequiredNavigationPerformanceCode::
-  AirRouteSegmentRequiredNavigationPerformanceCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  AirRouteSegmentRequiredNavigationPerformanceCode::
   AirRouteSegmentRequiredNavigationPerformanceCode (value v)
   : ::xml_schema::token (_xsd_AirRouteSegmentRequiredNavigationPerformanceCode_literals_[v])
   {
@@ -3257,12 +2879,6 @@ namespace oo_2_0
 
   // AircraftTypeAirframeDesignCode
   // 
-
-  AircraftTypeAirframeDesignCode::
-  AircraftTypeAirframeDesignCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   AircraftTypeAirframeDesignCode::
   AircraftTypeAirframeDesignCode (value v)
@@ -3310,12 +2926,6 @@ namespace oo_2_0
   // 
 
   AircraftTypeCategoryCode::
-  AircraftTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  AircraftTypeCategoryCode::
   AircraftTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_AircraftTypeCategoryCode_literals_[v])
   {
@@ -3359,12 +2969,6 @@ namespace oo_2_0
 
   // AircraftTypeDesignRangeCode
   // 
-
-  AircraftTypeDesignRangeCode::
-  AircraftTypeDesignRangeCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   AircraftTypeDesignRangeCode::
   AircraftTypeDesignRangeCode (value v)
@@ -3412,12 +3016,6 @@ namespace oo_2_0
   // 
 
   AircraftTypeDesignRoleCode::
-  AircraftTypeDesignRoleCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  AircraftTypeDesignRoleCode::
   AircraftTypeDesignRoleCode (value v)
   : ::xml_schema::token (_xsd_AircraftTypeDesignRoleCode_literals_[v])
   {
@@ -3461,12 +3059,6 @@ namespace oo_2_0
 
   // AircraftTypeLoadCategoryCode
   // 
-
-  AircraftTypeLoadCategoryCode::
-  AircraftTypeLoadCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   AircraftTypeLoadCategoryCode::
   AircraftTypeLoadCategoryCode (value v)
@@ -3514,12 +3106,6 @@ namespace oo_2_0
   // 
 
   AircraftTypeMainPurposeCode::
-  AircraftTypeMainPurposeCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  AircraftTypeMainPurposeCode::
   AircraftTypeMainPurposeCode (value v)
   : ::xml_schema::token (_xsd_AircraftTypeMainPurposeCode_literals_[v])
   {
@@ -3563,12 +3149,6 @@ namespace oo_2_0
 
   // AircraftTypeManningCode
   // 
-
-  AircraftTypeManningCode::
-  AircraftTypeManningCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   AircraftTypeManningCode::
   AircraftTypeManningCode (value v)
@@ -3616,12 +3196,6 @@ namespace oo_2_0
   // 
 
   AircraftTypeMilitaryCivilianCode::
-  AircraftTypeMilitaryCivilianCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  AircraftTypeMilitaryCivilianCode::
   AircraftTypeMilitaryCivilianCode (value v)
   : ::xml_schema::token (_xsd_AircraftTypeMilitaryCivilianCode_literals_[v])
   {
@@ -3665,12 +3239,6 @@ namespace oo_2_0
 
   // AircraftTypeModelCode
   // 
-
-  AircraftTypeModelCode::
-  AircraftTypeModelCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   AircraftTypeModelCode::
   AircraftTypeModelCode (value v)
@@ -3718,12 +3286,6 @@ namespace oo_2_0
   // 
 
   AircraftTypeTakeoffAndLandingCode::
-  AircraftTypeTakeoffAndLandingCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  AircraftTypeTakeoffAndLandingCode::
   AircraftTypeTakeoffAndLandingCode (value v)
   : ::xml_schema::token (_xsd_AircraftTypeTakeoffAndLandingCode_literals_[v])
   {
@@ -3767,12 +3329,6 @@ namespace oo_2_0
 
   // AircraftTypeTrainingCategoryCode
   // 
-
-  AircraftTypeTrainingCategoryCode::
-  AircraftTypeTrainingCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   AircraftTypeTrainingCategoryCode::
   AircraftTypeTrainingCategoryCode (value v)
@@ -3820,12 +3376,6 @@ namespace oo_2_0
   // 
 
   AircraftTypeWeatherQualifierCode::
-  AircraftTypeWeatherQualifierCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  AircraftTypeWeatherQualifierCode::
   AircraftTypeWeatherQualifierCode (value v)
   : ::xml_schema::token (_xsd_AircraftTypeWeatherQualifierCode_literals_[v])
   {
@@ -3869,12 +3419,6 @@ namespace oo_2_0
 
   // AirfieldAirTrafficControlPresenceIndicatorCode
   // 
-
-  AirfieldAirTrafficControlPresenceIndicatorCode::
-  AirfieldAirTrafficControlPresenceIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   AirfieldAirTrafficControlPresenceIndicatorCode::
   AirfieldAirTrafficControlPresenceIndicatorCode (value v)
@@ -3922,12 +3466,6 @@ namespace oo_2_0
   // 
 
   AirfieldInstrumentLandingSystemPresenceIndicatorCode::
-  AirfieldInstrumentLandingSystemPresenceIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  AirfieldInstrumentLandingSystemPresenceIndicatorCode::
   AirfieldInstrumentLandingSystemPresenceIndicatorCode (value v)
   : ::xml_schema::token (_xsd_AirfieldInstrumentLandingSystemPresenceIndicatorCode_literals_[v])
   {
@@ -3971,12 +3509,6 @@ namespace oo_2_0
 
   // AirfieldStatusDayOperationsCode
   // 
-
-  AirfieldStatusDayOperationsCode::
-  AirfieldStatusDayOperationsCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   AirfieldStatusDayOperationsCode::
   AirfieldStatusDayOperationsCode (value v)
@@ -4024,12 +3556,6 @@ namespace oo_2_0
   // 
 
   AirfieldStatusEvaluationIndicatorCode::
-  AirfieldStatusEvaluationIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  AirfieldStatusEvaluationIndicatorCode::
   AirfieldStatusEvaluationIndicatorCode (value v)
   : ::xml_schema::token (_xsd_AirfieldStatusEvaluationIndicatorCode_literals_[v])
   {
@@ -4073,12 +3599,6 @@ namespace oo_2_0
 
   // AirfieldStatusFlightSupportCategoryCode
   // 
-
-  AirfieldStatusFlightSupportCategoryCode::
-  AirfieldStatusFlightSupportCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   AirfieldStatusFlightSupportCategoryCode::
   AirfieldStatusFlightSupportCategoryCode (value v)
@@ -4126,12 +3646,6 @@ namespace oo_2_0
   // 
 
   AirfieldTypeUseCategoryCode::
-  AirfieldTypeUseCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  AirfieldTypeUseCategoryCode::
   AirfieldTypeUseCategoryCode (value v)
   : ::xml_schema::token (_xsd_AirfieldTypeUseCategoryCode_literals_[v])
   {
@@ -4175,12 +3689,6 @@ namespace oo_2_0
 
   // AirfieldVisualNavigationalAidIndicatorCode
   // 
-
-  AirfieldVisualNavigationalAidIndicatorCode::
-  AirfieldVisualNavigationalAidIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   AirfieldVisualNavigationalAidIndicatorCode::
   AirfieldVisualNavigationalAidIndicatorCode (value v)
@@ -4228,12 +3736,6 @@ namespace oo_2_0
   // 
 
   AmmunitionTypeCategoryCode::
-  AmmunitionTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  AmmunitionTypeCategoryCode::
   AmmunitionTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_AmmunitionTypeCategoryCode_literals_[v])
   {
@@ -4277,12 +3779,6 @@ namespace oo_2_0
 
   // AmmunitionTypeExerciseMineFlareColourCode
   // 
-
-  AmmunitionTypeExerciseMineFlareColourCode::
-  AmmunitionTypeExerciseMineFlareColourCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   AmmunitionTypeExerciseMineFlareColourCode::
   AmmunitionTypeExerciseMineFlareColourCode (value v)
@@ -4330,12 +3826,6 @@ namespace oo_2_0
   // 
 
   AmmunitionTypeMineMaritimeFiringCode::
-  AmmunitionTypeMineMaritimeFiringCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  AmmunitionTypeMineMaritimeFiringCode::
   AmmunitionTypeMineMaritimeFiringCode (value v)
   : ::xml_schema::token (_xsd_AmmunitionTypeMineMaritimeFiringCode_literals_[v])
   {
@@ -4379,12 +3869,6 @@ namespace oo_2_0
 
   // AnchorageBottomTypeCode
   // 
-
-  AnchorageBottomTypeCode::
-  AnchorageBottomTypeCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   AnchorageBottomTypeCode::
   AnchorageBottomTypeCode (value v)
@@ -4432,12 +3916,6 @@ namespace oo_2_0
   // 
 
   AnchorageMooringsTypeCode::
-  AnchorageMooringsTypeCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  AnchorageMooringsTypeCode::
   AnchorageMooringsTypeCode (value v)
   : ::xml_schema::token (_xsd_AnchorageMooringsTypeCode_literals_[v])
   {
@@ -4481,12 +3959,6 @@ namespace oo_2_0
 
   // AnglePrecisionCode
   // 
-
-  AnglePrecisionCode::
-  AnglePrecisionCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   AnglePrecisionCode::
   AnglePrecisionCode (value v)
@@ -4534,12 +4006,6 @@ namespace oo_2_0
   // 
 
   ApproachDirectionCategoryCode::
-  ApproachDirectionCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ApproachDirectionCategoryCode::
   ApproachDirectionCategoryCode (value v)
   : ::xml_schema::token (_xsd_ApproachDirectionCategoryCode_literals_[v])
   {
@@ -4583,12 +4049,6 @@ namespace oo_2_0
 
   // AssociationStatusCategoryCode
   // 
-
-  AssociationStatusCategoryCode::
-  AssociationStatusCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   AssociationStatusCategoryCode::
   AssociationStatusCategoryCode (value v)
@@ -4636,12 +4096,6 @@ namespace oo_2_0
   // 
 
   AtmosphereInversionLayerCode::
-  AtmosphereInversionLayerCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  AtmosphereInversionLayerCode::
   AtmosphereInversionLayerCode (value v)
   : ::xml_schema::token (_xsd_AtmosphereInversionLayerCode_literals_[v])
   {
@@ -4685,12 +4139,6 @@ namespace oo_2_0
 
   // AtmospherePressureSystemCategoryCode
   // 
-
-  AtmospherePressureSystemCategoryCode::
-  AtmospherePressureSystemCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   AtmospherePressureSystemCategoryCode::
   AtmospherePressureSystemCategoryCode (value v)
@@ -4738,12 +4186,6 @@ namespace oo_2_0
   // 
 
   AtmosphereTemperatureGradientCode::
-  AtmosphereTemperatureGradientCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  AtmosphereTemperatureGradientCode::
   AtmosphereTemperatureGradientCode (value v)
   : ::xml_schema::token (_xsd_AtmosphereTemperatureGradientCode_literals_[v])
   {
@@ -4787,12 +4229,6 @@ namespace oo_2_0
 
   // BerthMajorVesselClassCode
   // 
-
-  BerthMajorVesselClassCode::
-  BerthMajorVesselClassCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   BerthMajorVesselClassCode::
   BerthMajorVesselClassCode (value v)
@@ -4840,12 +4276,6 @@ namespace oo_2_0
   // 
 
   BerthRailAvailabilityIndicatorCode::
-  BerthRailAvailabilityIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  BerthRailAvailabilityIndicatorCode::
   BerthRailAvailabilityIndicatorCode (value v)
   : ::xml_schema::token (_xsd_BerthRailAvailabilityIndicatorCode_literals_[v])
   {
@@ -4889,12 +4319,6 @@ namespace oo_2_0
 
   // BerthRollOnRollOffIndicatorCode
   // 
-
-  BerthRollOnRollOffIndicatorCode::
-  BerthRollOnRollOffIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   BerthRollOnRollOffIndicatorCode::
   BerthRollOnRollOffIndicatorCode (value v)
@@ -4942,12 +4366,6 @@ namespace oo_2_0
   // 
 
   BiologicalMaterielTypeCategoryCode::
-  BiologicalMaterielTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  BiologicalMaterielTypeCategoryCode::
   BiologicalMaterielTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_BiologicalMaterielTypeCategoryCode_literals_[v])
   {
@@ -4991,12 +4409,6 @@ namespace oo_2_0
 
   // BiologicalMaterielTypeSubcategoryCode
   // 
-
-  BiologicalMaterielTypeSubcategoryCode::
-  BiologicalMaterielTypeSubcategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   BiologicalMaterielTypeSubcategoryCode::
   BiologicalMaterielTypeSubcategoryCode (value v)
@@ -5044,12 +4456,6 @@ namespace oo_2_0
   // 
 
   BridgeTypeDesignTypeCode::
-  BridgeTypeDesignTypeCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  BridgeTypeDesignTypeCode::
   BridgeTypeDesignTypeCode (value v)
   : ::xml_schema::token (_xsd_BridgeTypeDesignTypeCode_literals_[v])
   {
@@ -5093,12 +4499,6 @@ namespace oo_2_0
 
   // BridgeUsageCode
   // 
-
-  BridgeUsageCode::
-  BridgeUsageCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   BridgeUsageCode::
   BridgeUsageCode (value v)
@@ -5146,12 +4546,6 @@ namespace oo_2_0
   // 
 
   CandidateTargetDetailAssociationCategoryCode::
-  CandidateTargetDetailAssociationCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  CandidateTargetDetailAssociationCategoryCode::
   CandidateTargetDetailAssociationCategoryCode (value v)
   : ::xml_schema::token (_xsd_CandidateTargetDetailAssociationCategoryCode_literals_[v])
   {
@@ -5195,12 +4589,6 @@ namespace oo_2_0
 
   // CandidateTargetDetailAuthorisationApprovalCode
   // 
-
-  CandidateTargetDetailAuthorisationApprovalCode::
-  CandidateTargetDetailAuthorisationApprovalCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   CandidateTargetDetailAuthorisationApprovalCode::
   CandidateTargetDetailAuthorisationApprovalCode (value v)
@@ -5248,12 +4636,6 @@ namespace oo_2_0
   // 
 
   CandidateTargetDetailCategoryCode::
-  CandidateTargetDetailCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  CandidateTargetDetailCategoryCode::
   CandidateTargetDetailCategoryCode (value v)
   : ::xml_schema::token (_xsd_CandidateTargetDetailCategoryCode_literals_[v])
   {
@@ -5297,12 +4679,6 @@ namespace oo_2_0
 
   // CandidateTargetDetailFocusTypeCode
   // 
-
-  CandidateTargetDetailFocusTypeCode::
-  CandidateTargetDetailFocusTypeCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   CandidateTargetDetailFocusTypeCode::
   CandidateTargetDetailFocusTypeCode (value v)
@@ -5350,12 +4726,6 @@ namespace oo_2_0
   // 
 
   CandidateTargetDetailSchemeCode::
-  CandidateTargetDetailSchemeCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  CandidateTargetDetailSchemeCode::
   CandidateTargetDetailSchemeCode (value v)
   : ::xml_schema::token (_xsd_CandidateTargetDetailSchemeCode_literals_[v])
   {
@@ -5399,12 +4769,6 @@ namespace oo_2_0
 
   // CandidateTargetListAssociationCategoryCode
   // 
-
-  CandidateTargetListAssociationCategoryCode::
-  CandidateTargetListAssociationCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   CandidateTargetListAssociationCategoryCode::
   CandidateTargetListAssociationCategoryCode (value v)
@@ -5452,12 +4816,6 @@ namespace oo_2_0
   // 
 
   CandidateTargetListAuthorisationIndicatorCode::
-  CandidateTargetListAuthorisationIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  CandidateTargetListAuthorisationIndicatorCode::
   CandidateTargetListAuthorisationIndicatorCode (value v)
   : ::xml_schema::token (_xsd_CandidateTargetListAuthorisationIndicatorCode_literals_[v])
   {
@@ -5501,12 +4859,6 @@ namespace oo_2_0
 
   // CapabilityCategoryCode
   // 
-
-  CapabilityCategoryCode::
-  CapabilityCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   CapabilityCategoryCode::
   CapabilityCategoryCode (value v)
@@ -5554,12 +4906,6 @@ namespace oo_2_0
   // 
 
   CapabilityDayNightCode::
-  CapabilityDayNightCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  CapabilityDayNightCode::
   CapabilityDayNightCode (value v)
   : ::xml_schema::token (_xsd_CapabilityDayNightCode_literals_[v])
   {
@@ -5603,12 +4949,6 @@ namespace oo_2_0
 
   // CapabilityReferenceAssociationCategoryCode
   // 
-
-  CapabilityReferenceAssociationCategoryCode::
-  CapabilityReferenceAssociationCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   CapabilityReferenceAssociationCategoryCode::
   CapabilityReferenceAssociationCategoryCode (value v)
@@ -5656,12 +4996,6 @@ namespace oo_2_0
   // 
 
   CapabilityUnitOfMeasureCode::
-  CapabilityUnitOfMeasureCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  CapabilityUnitOfMeasureCode::
   CapabilityUnitOfMeasureCode (value v)
   : ::xml_schema::token (_xsd_CapabilityUnitOfMeasureCode_literals_[v])
   {
@@ -5705,12 +5039,6 @@ namespace oo_2_0
 
   // CargoCategoryCode
   // 
-
-  CargoCategoryCode::
-  CargoCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   CargoCategoryCode::
   CargoCategoryCode (value v)
@@ -5758,12 +5086,6 @@ namespace oo_2_0
   // 
 
   CasualtyGroupCode::
-  CasualtyGroupCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  CasualtyGroupCode::
   CasualtyGroupCode (value v)
   : ::xml_schema::token (_xsd_CasualtyGroupCode_literals_[v])
   {
@@ -5807,12 +5129,6 @@ namespace oo_2_0
 
   // CbrnEquipmentTypeCategoryCode
   // 
-
-  CbrnEquipmentTypeCategoryCode::
-  CbrnEquipmentTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   CbrnEquipmentTypeCategoryCode::
   CbrnEquipmentTypeCategoryCode (value v)
@@ -5860,12 +5176,6 @@ namespace oo_2_0
   // 
 
   CbrnEventAlarmResultIndicatorCode::
-  CbrnEventAlarmResultIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  CbrnEventAlarmResultIndicatorCode::
   CbrnEventAlarmResultIndicatorCode (value v)
   : ::xml_schema::token (_xsd_CbrnEventAlarmResultIndicatorCode_literals_[v])
   {
@@ -5909,12 +5219,6 @@ namespace oo_2_0
 
   // CbrnEventCategoryCode
   // 
-
-  CbrnEventCategoryCode::
-  CbrnEventCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   CbrnEventCategoryCode::
   CbrnEventCategoryCode (value v)
@@ -5962,12 +5266,6 @@ namespace oo_2_0
   // 
 
   CbrnEventConfirmationTestIndicatorCode::
-  CbrnEventConfirmationTestIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  CbrnEventConfirmationTestIndicatorCode::
   CbrnEventConfirmationTestIndicatorCode (value v)
   : ::xml_schema::token (_xsd_CbrnEventConfirmationTestIndicatorCode_literals_[v])
   {
@@ -6011,12 +5309,6 @@ namespace oo_2_0
 
   // CbrnEventMaterielContainerTypeCode
   // 
-
-  CbrnEventMaterielContainerTypeCode::
-  CbrnEventMaterielContainerTypeCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   CbrnEventMaterielContainerTypeCode::
   CbrnEventMaterielContainerTypeCode (value v)
@@ -6064,12 +5356,6 @@ namespace oo_2_0
   // 
 
   CbrnEventSubcategoryCode::
-  CbrnEventSubcategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  CbrnEventSubcategoryCode::
   CbrnEventSubcategoryCode (value v)
   : ::xml_schema::token (_xsd_CbrnEventSubcategoryCode_literals_[v])
   {
@@ -6113,12 +5399,6 @@ namespace oo_2_0
 
   // ChemicalBiologicalEventCategoryCode
   // 
-
-  ChemicalBiologicalEventCategoryCode::
-  ChemicalBiologicalEventCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ChemicalBiologicalEventCategoryCode::
   ChemicalBiologicalEventCategoryCode (value v)
@@ -6166,12 +5446,6 @@ namespace oo_2_0
   // 
 
   ChemicalBiologicalEventSpillSizeCode::
-  ChemicalBiologicalEventSpillSizeCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ChemicalBiologicalEventSpillSizeCode::
   ChemicalBiologicalEventSpillSizeCode (value v)
   : ::xml_schema::token (_xsd_ChemicalBiologicalEventSpillSizeCode_literals_[v])
   {
@@ -6215,12 +5489,6 @@ namespace oo_2_0
 
   // ChemicalMaterielTypeCategoryCode
   // 
-
-  ChemicalMaterielTypeCategoryCode::
-  ChemicalMaterielTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ChemicalMaterielTypeCategoryCode::
   ChemicalMaterielTypeCategoryCode (value v)
@@ -6268,12 +5536,6 @@ namespace oo_2_0
   // 
 
   ChemicalMaterielTypeSubcategoryCode::
-  ChemicalMaterielTypeSubcategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ChemicalMaterielTypeSubcategoryCode::
   ChemicalMaterielTypeSubcategoryCode (value v)
   : ::xml_schema::token (_xsd_ChemicalMaterielTypeSubcategoryCode_literals_[v])
   {
@@ -6317,12 +5579,6 @@ namespace oo_2_0
 
   // CivilianPostTypeCategoryCode
   // 
-
-  CivilianPostTypeCategoryCode::
-  CivilianPostTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   CivilianPostTypeCategoryCode::
   CivilianPostTypeCategoryCode (value v)
@@ -6370,12 +5626,6 @@ namespace oo_2_0
   // 
 
   CloudCoverAverageCoverageCode::
-  CloudCoverAverageCoverageCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  CloudCoverAverageCoverageCode::
   CloudCoverAverageCoverageCode (value v)
   : ::xml_schema::token (_xsd_CloudCoverAverageCoverageCode_literals_[v])
   {
@@ -6419,12 +5669,6 @@ namespace oo_2_0
 
   // CloudCoverCategoryCode
   // 
-
-  CloudCoverCategoryCode::
-  CloudCoverCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   CloudCoverCategoryCode::
   CloudCoverCategoryCode (value v)
@@ -6472,12 +5716,6 @@ namespace oo_2_0
   // 
 
   ConsumableMaterielTypeCategoryCode::
-  ConsumableMaterielTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ConsumableMaterielTypeCategoryCode::
   ConsumableMaterielTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_ConsumableMaterielTypeCategoryCode_literals_[v])
   {
@@ -6521,12 +5759,6 @@ namespace oo_2_0
 
   // ConsumableMaterielTypeHazardCode
   // 
-
-  ConsumableMaterielTypeHazardCode::
-  ConsumableMaterielTypeHazardCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ConsumableMaterielTypeHazardCode::
   ConsumableMaterielTypeHazardCode (value v)
@@ -6574,12 +5806,6 @@ namespace oo_2_0
   // 
 
   ConsumableMaterielTypeIssuingElementCode::
-  ConsumableMaterielTypeIssuingElementCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ConsumableMaterielTypeIssuingElementCode::
   ConsumableMaterielTypeIssuingElementCode (value v)
   : ::xml_schema::token (_xsd_ConsumableMaterielTypeIssuingElementCode_literals_[v])
   {
@@ -6623,12 +5849,6 @@ namespace oo_2_0
 
   // ConsumableMaterielTypeIssuingUnitOfMeasureCode
   // 
-
-  ConsumableMaterielTypeIssuingUnitOfMeasureCode::
-  ConsumableMaterielTypeIssuingUnitOfMeasureCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ConsumableMaterielTypeIssuingUnitOfMeasureCode::
   ConsumableMaterielTypeIssuingUnitOfMeasureCode (value v)
@@ -6676,12 +5896,6 @@ namespace oo_2_0
   // 
 
   ConsumableMaterielTypePerishabilityIndicatorCode::
-  ConsumableMaterielTypePerishabilityIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ConsumableMaterielTypePerishabilityIndicatorCode::
   ConsumableMaterielTypePerishabilityIndicatorCode (value v)
   : ::xml_schema::token (_xsd_ConsumableMaterielTypePerishabilityIndicatorCode_literals_[v])
   {
@@ -6725,12 +5939,6 @@ namespace oo_2_0
 
   // ConsumableMaterielTypeSubcategoryCode
   // 
-
-  ConsumableMaterielTypeSubcategoryCode::
-  ConsumableMaterielTypeSubcategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ConsumableMaterielTypeSubcategoryCode::
   ConsumableMaterielTypeSubcategoryCode (value v)
@@ -6778,12 +5986,6 @@ namespace oo_2_0
   // 
 
   ConsumableMaterielTypeUnitedNationsNumberCode::
-  ConsumableMaterielTypeUnitedNationsNumberCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ConsumableMaterielTypeUnitedNationsNumberCode::
   ConsumableMaterielTypeUnitedNationsNumberCode (value v)
   : ::xml_schema::token (_xsd_ConsumableMaterielTypeUnitedNationsNumberCode_literals_[v])
   {
@@ -6827,12 +6029,6 @@ namespace oo_2_0
 
   // ContextAssessmentLimitingFactorsCode
   // 
-
-  ContextAssessmentLimitingFactorsCode::
-  ContextAssessmentLimitingFactorsCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ContextAssessmentLimitingFactorsCode::
   ContextAssessmentLimitingFactorsCode (value v)
@@ -6880,12 +6076,6 @@ namespace oo_2_0
   // 
 
   ContextAssociationCategoryCode::
-  ContextAssociationCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ContextAssociationCategoryCode::
   ContextAssociationCategoryCode (value v)
   : ::xml_schema::token (_xsd_ContextAssociationCategoryCode_literals_[v])
   {
@@ -6929,12 +6119,6 @@ namespace oo_2_0
 
   // ContextCategoryCode
   // 
-
-  ContextCategoryCode::
-  ContextCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ContextCategoryCode::
   ContextCategoryCode (value v)
@@ -6982,12 +6166,6 @@ namespace oo_2_0
   // 
 
   ContextElementStatusCategoryCode::
-  ContextElementStatusCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ContextElementStatusCategoryCode::
   ContextElementStatusCategoryCode (value v)
   : ::xml_schema::token (_xsd_ContextElementStatusCategoryCode_literals_[v])
   {
@@ -7031,12 +6209,6 @@ namespace oo_2_0
 
   // ContextObjectItemAssociationCategoryCode
   // 
-
-  ContextObjectItemAssociationCategoryCode::
-  ContextObjectItemAssociationCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ContextObjectItemAssociationCategoryCode::
   ContextObjectItemAssociationCategoryCode (value v)
@@ -7084,12 +6256,6 @@ namespace oo_2_0
   // 
 
   ContextReportingDataAssociationCategoryCode::
-  ContextReportingDataAssociationCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ContextReportingDataAssociationCategoryCode::
   ContextReportingDataAssociationCategoryCode (value v)
   : ::xml_schema::token (_xsd_ContextReportingDataAssociationCategoryCode_literals_[v])
   {
@@ -7133,12 +6299,6 @@ namespace oo_2_0
 
   // ControlFeatureCategoryCode
   // 
-
-  ControlFeatureCategoryCode::
-  ControlFeatureCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ControlFeatureCategoryCode::
   ControlFeatureCategoryCode (value v)
@@ -7186,12 +6346,6 @@ namespace oo_2_0
   // 
 
   ControlFeatureStatusCbrnThreatLevelCode::
-  ControlFeatureStatusCbrnThreatLevelCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ControlFeatureStatusCbrnThreatLevelCode::
   ControlFeatureStatusCbrnThreatLevelCode (value v)
   : ::xml_schema::token (_xsd_ControlFeatureStatusCbrnThreatLevelCode_literals_[v])
   {
@@ -7235,12 +6389,6 @@ namespace oo_2_0
 
   // ControlFeatureStatusInvestigationStatusCode
   // 
-
-  ControlFeatureStatusInvestigationStatusCode::
-  ControlFeatureStatusInvestigationStatusCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ControlFeatureStatusInvestigationStatusCode::
   ControlFeatureStatusInvestigationStatusCode (value v)
@@ -7288,12 +6436,6 @@ namespace oo_2_0
   // 
 
   ControlFeatureStatusSecurityStatusCode::
-  ControlFeatureStatusSecurityStatusCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ControlFeatureStatusSecurityStatusCode::
   ControlFeatureStatusSecurityStatusCode (value v)
   : ::xml_schema::token (_xsd_ControlFeatureStatusSecurityStatusCode_literals_[v])
   {
@@ -7337,12 +6479,6 @@ namespace oo_2_0
 
   // ControlFeatureTypeCategoryCode
   // 
-
-  ControlFeatureTypeCategoryCode::
-  ControlFeatureTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ControlFeatureTypeCategoryCode::
   ControlFeatureTypeCategoryCode (value v)
@@ -7390,12 +6526,6 @@ namespace oo_2_0
   // 
 
   DemolitionStatusCode::
-  DemolitionStatusCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  DemolitionStatusCode::
   DemolitionStatusCode (value v)
   : ::xml_schema::token (_xsd_DemolitionStatusCode_literals_[v])
   {
@@ -7439,12 +6569,6 @@ namespace oo_2_0
 
   // DirectionCode
   // 
-
-  DirectionCode::
-  DirectionCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   DirectionCode::
   DirectionCode (value v)
@@ -7492,12 +6616,6 @@ namespace oo_2_0
   // 
 
   DistancePrecisionCode::
-  DistancePrecisionCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  DistancePrecisionCode::
   DistancePrecisionCode (value v)
   : ::xml_schema::token (_xsd_DistancePrecisionCode_literals_[v])
   {
@@ -7541,12 +6659,6 @@ namespace oo_2_0
 
   // DryDockMarineRailwaySizeCode
   // 
-
-  DryDockMarineRailwaySizeCode::
-  DryDockMarineRailwaySizeCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   DryDockMarineRailwaySizeCode::
   DryDockMarineRailwaySizeCode (value v)
@@ -7594,12 +6706,6 @@ namespace oo_2_0
   // 
 
   ElectronicEquipmentTypeCategoryCode::
-  ElectronicEquipmentTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ElectronicEquipmentTypeCategoryCode::
   ElectronicEquipmentTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_ElectronicEquipmentTypeCategoryCode_literals_[v])
   {
@@ -7643,12 +6749,6 @@ namespace oo_2_0
 
   // ElectronicEquipmentTypeSubcategoryCode
   // 
-
-  ElectronicEquipmentTypeSubcategoryCode::
-  ElectronicEquipmentTypeSubcategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ElectronicEquipmentTypeSubcategoryCode::
   ElectronicEquipmentTypeSubcategoryCode (value v)
@@ -7696,12 +6796,6 @@ namespace oo_2_0
   // 
 
   EngineeringCapabilityCategoryCode::
-  EngineeringCapabilityCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  EngineeringCapabilityCategoryCode::
   EngineeringCapabilityCategoryCode (value v)
   : ::xml_schema::token (_xsd_EngineeringCapabilityCategoryCode_literals_[v])
   {
@@ -7745,12 +6839,6 @@ namespace oo_2_0
 
   // EngineeringCapabilityDescriptorCode
   // 
-
-  EngineeringCapabilityDescriptorCode::
-  EngineeringCapabilityDescriptorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   EngineeringCapabilityDescriptorCode::
   EngineeringCapabilityDescriptorCode (value v)
@@ -7798,12 +6886,6 @@ namespace oo_2_0
   // 
 
   EngineeringEquipmentTypeCategoryCode::
-  EngineeringEquipmentTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  EngineeringEquipmentTypeCategoryCode::
   EngineeringEquipmentTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_EngineeringEquipmentTypeCategoryCode_literals_[v])
   {
@@ -7847,12 +6929,6 @@ namespace oo_2_0
 
   // EquipmentTypeCategoryCode
   // 
-
-  EquipmentTypeCategoryCode::
-  EquipmentTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   EquipmentTypeCategoryCode::
   EquipmentTypeCategoryCode (value v)
@@ -7900,12 +6976,6 @@ namespace oo_2_0
   // 
 
   EvacuationDestinationCode::
-  EvacuationDestinationCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  EvacuationDestinationCode::
   EvacuationDestinationCode (value v)
   : ::xml_schema::token (_xsd_EvacuationDestinationCode_literals_[v])
   {
@@ -7949,12 +7019,6 @@ namespace oo_2_0
 
   // ExecutiveMilitaryOrganisationTypeCategoryCode
   // 
-
-  ExecutiveMilitaryOrganisationTypeCategoryCode::
-  ExecutiveMilitaryOrganisationTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ExecutiveMilitaryOrganisationTypeCategoryCode::
   ExecutiveMilitaryOrganisationTypeCategoryCode (value v)
@@ -8002,12 +7066,6 @@ namespace oo_2_0
   // 
 
   FacilityCategoryCode::
-  FacilityCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  FacilityCategoryCode::
   FacilityCategoryCode (value v)
   : ::xml_schema::token (_xsd_FacilityCategoryCode_literals_[v])
   {
@@ -8051,12 +7109,6 @@ namespace oo_2_0
 
   // FacilityPrimaryConstructionMaterialCode
   // 
-
-  FacilityPrimaryConstructionMaterialCode::
-  FacilityPrimaryConstructionMaterialCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   FacilityPrimaryConstructionMaterialCode::
   FacilityPrimaryConstructionMaterialCode (value v)
@@ -8104,12 +7156,6 @@ namespace oo_2_0
   // 
 
   FacilityStatusCategoryCode::
-  FacilityStatusCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  FacilityStatusCategoryCode::
   FacilityStatusCategoryCode (value v)
   : ::xml_schema::token (_xsd_FacilityStatusCategoryCode_literals_[v])
   {
@@ -8153,12 +7199,6 @@ namespace oo_2_0
 
   // FacilityStatusEnemyActivityConditionCode
   // 
-
-  FacilityStatusEnemyActivityConditionCode::
-  FacilityStatusEnemyActivityConditionCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   FacilityStatusEnemyActivityConditionCode::
   FacilityStatusEnemyActivityConditionCode (value v)
@@ -8206,12 +7246,6 @@ namespace oo_2_0
   // 
 
   FacilityStatusOccupationProgramIndicatorCode::
-  FacilityStatusOccupationProgramIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  FacilityStatusOccupationProgramIndicatorCode::
   FacilityStatusOccupationProgramIndicatorCode (value v)
   : ::xml_schema::token (_xsd_FacilityStatusOccupationProgramIndicatorCode_literals_[v])
   {
@@ -8255,12 +7289,6 @@ namespace oo_2_0
 
   // FacilityStatusOperationalStatusCode
   // 
-
-  FacilityStatusOperationalStatusCode::
-  FacilityStatusOperationalStatusCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   FacilityStatusOperationalStatusCode::
   FacilityStatusOperationalStatusCode (value v)
@@ -8308,12 +7336,6 @@ namespace oo_2_0
   // 
 
   FacilityStatusOperationalStatusQualifierCode::
-  FacilityStatusOperationalStatusQualifierCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  FacilityStatusOperationalStatusQualifierCode::
   FacilityStatusOperationalStatusQualifierCode (value v)
   : ::xml_schema::token (_xsd_FacilityStatusOperationalStatusQualifierCode_literals_[v])
   {
@@ -8357,12 +7379,6 @@ namespace oo_2_0
 
   // FacilityStatusReserveIndicatorCode
   // 
-
-  FacilityStatusReserveIndicatorCode::
-  FacilityStatusReserveIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   FacilityStatusReserveIndicatorCode::
   FacilityStatusReserveIndicatorCode (value v)
@@ -8410,12 +7426,6 @@ namespace oo_2_0
   // 
 
   FacilityStatusSecurityStatusCode::
-  FacilityStatusSecurityStatusCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  FacilityStatusSecurityStatusCode::
   FacilityStatusSecurityStatusCode (value v)
   : ::xml_schema::token (_xsd_FacilityStatusSecurityStatusCode_literals_[v])
   {
@@ -8459,12 +7469,6 @@ namespace oo_2_0
 
   // FacilityTypeCategoryCode
   // 
-
-  FacilityTypeCategoryCode::
-  FacilityTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   FacilityTypeCategoryCode::
   FacilityTypeCategoryCode (value v)
@@ -8512,12 +7516,6 @@ namespace oo_2_0
   // 
 
   FeatureCategoryCode::
-  FeatureCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  FeatureCategoryCode::
   FeatureCategoryCode (value v)
   : ::xml_schema::token (_xsd_FeatureCategoryCode_literals_[v])
   {
@@ -8561,12 +7559,6 @@ namespace oo_2_0
 
   // FeatureTypeCategoryCode
   // 
-
-  FeatureTypeCategoryCode::
-  FeatureTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   FeatureTypeCategoryCode::
   FeatureTypeCategoryCode (value v)
@@ -8614,12 +7606,6 @@ namespace oo_2_0
   // 
 
   FeintIndicatorCode::
-  FeintIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  FeintIndicatorCode::
   FeintIndicatorCode (value v)
   : ::xml_schema::token (_xsd_FeintIndicatorCode_literals_[v])
   {
@@ -8663,12 +7649,6 @@ namespace oo_2_0
 
   // FireCapabilityCategoryCode
   // 
-
-  FireCapabilityCategoryCode::
-  FireCapabilityCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   FireCapabilityCategoryCode::
   FireCapabilityCategoryCode (value v)
@@ -8716,12 +7696,6 @@ namespace oo_2_0
   // 
 
   FireCapabilityDescriptorCode::
-  FireCapabilityDescriptorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  FireCapabilityDescriptorCode::
   FireCapabilityDescriptorCode (value v)
   : ::xml_schema::token (_xsd_FireCapabilityDescriptorCode_literals_[v])
   {
@@ -8765,12 +7739,6 @@ namespace oo_2_0
 
   // FireCapabilityWeaponTypeCode
   // 
-
-  FireCapabilityWeaponTypeCode::
-  FireCapabilityWeaponTypeCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   FireCapabilityWeaponTypeCode::
   FireCapabilityWeaponTypeCode (value v)
@@ -8818,12 +7786,6 @@ namespace oo_2_0
   // 
 
   GenderCode::
-  GenderCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  GenderCode::
   GenderCode (value v)
   : ::xml_schema::token (_xsd_GenderCode_literals_[v])
   {
@@ -8867,12 +7829,6 @@ namespace oo_2_0
 
   // GeographicFeatureBottomHardnessCode
   // 
-
-  GeographicFeatureBottomHardnessCode::
-  GeographicFeatureBottomHardnessCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   GeographicFeatureBottomHardnessCode::
   GeographicFeatureBottomHardnessCode (value v)
@@ -8920,12 +7876,6 @@ namespace oo_2_0
   // 
 
   GeographicFeatureSolidSurfaceCompositionCode::
-  GeographicFeatureSolidSurfaceCompositionCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  GeographicFeatureSolidSurfaceCompositionCode::
   GeographicFeatureSolidSurfaceCompositionCode (value v)
   : ::xml_schema::token (_xsd_GeographicFeatureSolidSurfaceCompositionCode_literals_[v])
   {
@@ -8969,12 +7919,6 @@ namespace oo_2_0
 
   // GeographicFeatureStatusCategoryCode
   // 
-
-  GeographicFeatureStatusCategoryCode::
-  GeographicFeatureStatusCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   GeographicFeatureStatusCategoryCode::
   GeographicFeatureStatusCategoryCode (value v)
@@ -9022,12 +7966,6 @@ namespace oo_2_0
   // 
 
   GeographicFeatureStatusSurfaceRecirculationIndicatorCode::
-  GeographicFeatureStatusSurfaceRecirculationIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  GeographicFeatureStatusSurfaceRecirculationIndicatorCode::
   GeographicFeatureStatusSurfaceRecirculationIndicatorCode (value v)
   : ::xml_schema::token (_xsd_GeographicFeatureStatusSurfaceRecirculationIndicatorCode_literals_[v])
   {
@@ -9071,12 +8009,6 @@ namespace oo_2_0
 
   // GeographicFeatureSurfaceCategoryCode
   // 
-
-  GeographicFeatureSurfaceCategoryCode::
-  GeographicFeatureSurfaceCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   GeographicFeatureSurfaceCategoryCode::
   GeographicFeatureSurfaceCategoryCode (value v)
@@ -9124,12 +8056,6 @@ namespace oo_2_0
   // 
 
   GeographicFeatureTerrainCode::
-  GeographicFeatureTerrainCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  GeographicFeatureTerrainCode::
   GeographicFeatureTerrainCode (value v)
   : ::xml_schema::token (_xsd_GeographicFeatureTerrainCode_literals_[v])
   {
@@ -9173,12 +8099,6 @@ namespace oo_2_0
 
   // GeographicFeatureTypeCategoryCode
   // 
-
-  GeographicFeatureTypeCategoryCode::
-  GeographicFeatureTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   GeographicFeatureTypeCategoryCode::
   GeographicFeatureTypeCategoryCode (value v)
@@ -9226,12 +8146,6 @@ namespace oo_2_0
   // 
 
   GeographicFeatureTypeSubcategoryCode::
-  GeographicFeatureTypeSubcategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  GeographicFeatureTypeSubcategoryCode::
   GeographicFeatureTypeSubcategoryCode (value v)
   : ::xml_schema::token (_xsd_GeographicFeatureTypeSubcategoryCode_literals_[v])
   {
@@ -9275,12 +8189,6 @@ namespace oo_2_0
 
   // GeometricVolumeCategoryCode
   // 
-
-  GeometricVolumeCategoryCode::
-  GeometricVolumeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   GeometricVolumeCategoryCode::
   GeometricVolumeCategoryCode (value v)
@@ -9328,12 +8236,6 @@ namespace oo_2_0
   // 
 
   GovernmentOrganisationTypeCategoryCode::
-  GovernmentOrganisationTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  GovernmentOrganisationTypeCategoryCode::
   GovernmentOrganisationTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_GovernmentOrganisationTypeCategoryCode_literals_[v])
   {
@@ -9377,12 +8279,6 @@ namespace oo_2_0
 
   // GroupCharacteristicAgeGroupCode
   // 
-
-  GroupCharacteristicAgeGroupCode::
-  GroupCharacteristicAgeGroupCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   GroupCharacteristicAgeGroupCode::
   GroupCharacteristicAgeGroupCode (value v)
@@ -9430,12 +8326,6 @@ namespace oo_2_0
   // 
 
   GroupCharacteristicMaladyCode::
-  GroupCharacteristicMaladyCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  GroupCharacteristicMaladyCode::
   GroupCharacteristicMaladyCode (value v)
   : ::xml_schema::token (_xsd_GroupCharacteristicMaladyCode_literals_[v])
   {
@@ -9479,12 +8369,6 @@ namespace oo_2_0
 
   // GroupCharacteristicMaladyTransmissibilityIndicatorCode
   // 
-
-  GroupCharacteristicMaladyTransmissibilityIndicatorCode::
-  GroupCharacteristicMaladyTransmissibilityIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   GroupCharacteristicMaladyTransmissibilityIndicatorCode::
   GroupCharacteristicMaladyTransmissibilityIndicatorCode (value v)
@@ -9532,12 +8416,6 @@ namespace oo_2_0
   // 
 
   GroupCharacteristicTriageCode::
-  GroupCharacteristicTriageCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  GroupCharacteristicTriageCode::
   GroupCharacteristicTriageCode (value v)
   : ::xml_schema::token (_xsd_GroupCharacteristicTriageCode_literals_[v])
   {
@@ -9581,12 +8459,6 @@ namespace oo_2_0
 
   // GroupOrganisationTypeCategoryCode
   // 
-
-  GroupOrganisationTypeCategoryCode::
-  GroupOrganisationTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   GroupOrganisationTypeCategoryCode::
   GroupOrganisationTypeCategoryCode (value v)
@@ -9634,12 +8506,6 @@ namespace oo_2_0
   // 
 
   HandlingCapabilityActionCode::
-  HandlingCapabilityActionCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  HandlingCapabilityActionCode::
   HandlingCapabilityActionCode (value v)
   : ::xml_schema::token (_xsd_HandlingCapabilityActionCode_literals_[v])
   {
@@ -9683,12 +8549,6 @@ namespace oo_2_0
 
   // HandlingCapabilityDescriptorCode
   // 
-
-  HandlingCapabilityDescriptorCode::
-  HandlingCapabilityDescriptorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   HandlingCapabilityDescriptorCode::
   HandlingCapabilityDescriptorCode (value v)
@@ -9736,12 +8596,6 @@ namespace oo_2_0
   // 
 
   HarbourAirportNearIndicatorCode::
-  HarbourAirportNearIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  HarbourAirportNearIndicatorCode::
   HarbourAirportNearIndicatorCode (value v)
   : ::xml_schema::token (_xsd_HarbourAirportNearIndicatorCode_literals_[v])
   {
@@ -9785,12 +8639,6 @@ namespace oo_2_0
 
   // HarbourBiologicallySecureAvailabilityIndicatorCode
   // 
-
-  HarbourBiologicallySecureAvailabilityIndicatorCode::
-  HarbourBiologicallySecureAvailabilityIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   HarbourBiologicallySecureAvailabilityIndicatorCode::
   HarbourBiologicallySecureAvailabilityIndicatorCode (value v)
@@ -9838,12 +8686,6 @@ namespace oo_2_0
   // 
 
   HarbourConvoyMarshallingIndicatorCode::
-  HarbourConvoyMarshallingIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  HarbourConvoyMarshallingIndicatorCode::
   HarbourConvoyMarshallingIndicatorCode (value v)
   : ::xml_schema::token (_xsd_HarbourConvoyMarshallingIndicatorCode_literals_[v])
   {
@@ -9887,12 +8729,6 @@ namespace oo_2_0
 
   // HarbourDegaussingIndicatorCode
   // 
-
-  HarbourDegaussingIndicatorCode::
-  HarbourDegaussingIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   HarbourDegaussingIndicatorCode::
   HarbourDegaussingIndicatorCode (value v)
@@ -9940,12 +8776,6 @@ namespace oo_2_0
   // 
 
   HarbourDirtyBallastIndicatorCode::
-  HarbourDirtyBallastIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  HarbourDirtyBallastIndicatorCode::
   HarbourDirtyBallastIndicatorCode (value v)
   : ::xml_schema::token (_xsd_HarbourDirtyBallastIndicatorCode_literals_[v])
   {
@@ -9989,12 +8819,6 @@ namespace oo_2_0
 
   // HarbourEntranceRestrictionsIceIndicatorCode
   // 
-
-  HarbourEntranceRestrictionsIceIndicatorCode::
-  HarbourEntranceRestrictionsIceIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   HarbourEntranceRestrictionsIceIndicatorCode::
   HarbourEntranceRestrictionsIceIndicatorCode (value v)
@@ -10042,12 +8866,6 @@ namespace oo_2_0
   // 
 
   HarbourEntranceRestrictionsSwellIndicatorCode::
-  HarbourEntranceRestrictionsSwellIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  HarbourEntranceRestrictionsSwellIndicatorCode::
   HarbourEntranceRestrictionsSwellIndicatorCode (value v)
   : ::xml_schema::token (_xsd_HarbourEntranceRestrictionsSwellIndicatorCode_literals_[v])
   {
@@ -10091,12 +8909,6 @@ namespace oo_2_0
 
   // HarbourEstimatedTimeOfArrivalIndicatorCode
   // 
-
-  HarbourEstimatedTimeOfArrivalIndicatorCode::
-  HarbourEstimatedTimeOfArrivalIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   HarbourEstimatedTimeOfArrivalIndicatorCode::
   HarbourEstimatedTimeOfArrivalIndicatorCode (value v)
@@ -10144,12 +8956,6 @@ namespace oo_2_0
   // 
 
   HarbourFireFightingCapabilityCode::
-  HarbourFireFightingCapabilityCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  HarbourFireFightingCapabilityCode::
   HarbourFireFightingCapabilityCode (value v)
   : ::xml_schema::token (_xsd_HarbourFireFightingCapabilityCode_literals_[v])
   {
@@ -10193,12 +8999,6 @@ namespace oo_2_0
 
   // HarbourFireFightingIndicatorCode
   // 
-
-  HarbourFireFightingIndicatorCode::
-  HarbourFireFightingIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   HarbourFireFightingIndicatorCode::
   HarbourFireFightingIndicatorCode (value v)
@@ -10246,12 +9046,6 @@ namespace oo_2_0
   // 
 
   HarbourFirstPortOfEntryIndicatorCode::
-  HarbourFirstPortOfEntryIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  HarbourFirstPortOfEntryIndicatorCode::
   HarbourFirstPortOfEntryIndicatorCode (value v)
   : ::xml_schema::token (_xsd_HarbourFirstPortOfEntryIndicatorCode_literals_[v])
   {
@@ -10295,12 +9089,6 @@ namespace oo_2_0
 
   // HarbourFreshWaterAvailabilityIndicatorCode
   // 
-
-  HarbourFreshWaterAvailabilityIndicatorCode::
-  HarbourFreshWaterAvailabilityIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   HarbourFreshWaterAvailabilityIndicatorCode::
   HarbourFreshWaterAvailabilityIndicatorCode (value v)
@@ -10348,12 +9136,6 @@ namespace oo_2_0
   // 
 
   HarbourLashIndicatorCode::
-  HarbourLashIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  HarbourLashIndicatorCode::
   HarbourLashIndicatorCode (value v)
   : ::xml_schema::token (_xsd_HarbourLashIndicatorCode_literals_[v])
   {
@@ -10397,12 +9179,6 @@ namespace oo_2_0
 
   // HarbourLighterageAvailabilityIndicatorCode
   // 
-
-  HarbourLighterageAvailabilityIndicatorCode::
-  HarbourLighterageAvailabilityIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   HarbourLighterageAvailabilityIndicatorCode::
   HarbourLighterageAvailabilityIndicatorCode (value v)
@@ -10450,12 +9226,6 @@ namespace oo_2_0
   // 
 
   HarbourOverheadLimitsIndicatorCode::
-  HarbourOverheadLimitsIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  HarbourOverheadLimitsIndicatorCode::
   HarbourOverheadLimitsIndicatorCode (value v)
   : ::xml_schema::token (_xsd_HarbourOverheadLimitsIndicatorCode_literals_[v])
   {
@@ -10499,12 +9269,6 @@ namespace oo_2_0
 
   // HarbourPassengerHandlingIndicatorCode
   // 
-
-  HarbourPassengerHandlingIndicatorCode::
-  HarbourPassengerHandlingIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   HarbourPassengerHandlingIndicatorCode::
   HarbourPassengerHandlingIndicatorCode (value v)
@@ -10552,12 +9316,6 @@ namespace oo_2_0
   // 
 
   HarbourPersistenceCode::
-  HarbourPersistenceCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  HarbourPersistenceCode::
   HarbourPersistenceCode (value v)
   : ::xml_schema::token (_xsd_HarbourPersistenceCode_literals_[v])
   {
@@ -10601,12 +9359,6 @@ namespace oo_2_0
 
   // HarbourPilotageAvailabilityIndicatorCode
   // 
-
-  HarbourPilotageAvailabilityIndicatorCode::
-  HarbourPilotageAvailabilityIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   HarbourPilotageAvailabilityIndicatorCode::
   HarbourPilotageAvailabilityIndicatorCode (value v)
@@ -10654,12 +9406,6 @@ namespace oo_2_0
   // 
 
   HarbourPilotageRequirementIndicatorCode::
-  HarbourPilotageRequirementIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  HarbourPilotageRequirementIndicatorCode::
   HarbourPilotageRequirementIndicatorCode (value v)
   : ::xml_schema::token (_xsd_HarbourPilotageRequirementIndicatorCode_literals_[v])
   {
@@ -10703,12 +9449,6 @@ namespace oo_2_0
 
   // HarbourRefuellingAvailabilityIndicatorCode
   // 
-
-  HarbourRefuellingAvailabilityIndicatorCode::
-  HarbourRefuellingAvailabilityIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   HarbourRefuellingAvailabilityIndicatorCode::
   HarbourRefuellingAvailabilityIndicatorCode (value v)
@@ -10756,12 +9496,6 @@ namespace oo_2_0
   // 
 
   HarbourRefuellingTypeCode::
-  HarbourRefuellingTypeCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  HarbourRefuellingTypeCode::
   HarbourRefuellingTypeCode (value v)
   : ::xml_schema::token (_xsd_HarbourRefuellingTypeCode_literals_[v])
   {
@@ -10805,12 +9539,6 @@ namespace oo_2_0
 
   // HarbourShelterQualityCode
   // 
-
-  HarbourShelterQualityCode::
-  HarbourShelterQualityCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   HarbourShelterQualityCode::
   HarbourShelterQualityCode (value v)
@@ -10858,12 +9586,6 @@ namespace oo_2_0
   // 
 
   HarbourTankerFacilitiesIndicatorCode::
-  HarbourTankerFacilitiesIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  HarbourTankerFacilitiesIndicatorCode::
   HarbourTankerFacilitiesIndicatorCode (value v)
   : ::xml_schema::token (_xsd_HarbourTankerFacilitiesIndicatorCode_literals_[v])
   {
@@ -10907,12 +9629,6 @@ namespace oo_2_0
 
   // HarbourTransitAccommodationIndicatorCode
   // 
-
-  HarbourTransitAccommodationIndicatorCode::
-  HarbourTransitAccommodationIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   HarbourTransitAccommodationIndicatorCode::
   HarbourTransitAccommodationIndicatorCode (value v)
@@ -10960,12 +9676,6 @@ namespace oo_2_0
   // 
 
   HarbourTugAvailabilityIndicatorCode::
-  HarbourTugAvailabilityIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  HarbourTugAvailabilityIndicatorCode::
   HarbourTugAvailabilityIndicatorCode (value v)
   : ::xml_schema::token (_xsd_HarbourTugAvailabilityIndicatorCode_literals_[v])
   {
@@ -11009,12 +9719,6 @@ namespace oo_2_0
 
   // HarbourTurningAreaIndicatorCode
   // 
-
-  HarbourTurningAreaIndicatorCode::
-  HarbourTurningAreaIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   HarbourTurningAreaIndicatorCode::
   HarbourTurningAreaIndicatorCode (value v)
@@ -11062,12 +9766,6 @@ namespace oo_2_0
   // 
 
   HarbourTypeCategoryCode::
-  HarbourTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  HarbourTypeCategoryCode::
   HarbourTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_HarbourTypeCategoryCode_literals_[v])
   {
@@ -11111,12 +9809,6 @@ namespace oo_2_0
 
   // HarbourVehicleHandlingTypeCode
   // 
-
-  HarbourVehicleHandlingTypeCode::
-  HarbourVehicleHandlingTypeCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   HarbourVehicleHandlingTypeCode::
   HarbourVehicleHandlingTypeCode (value v)
@@ -11164,12 +9856,6 @@ namespace oo_2_0
   // 
 
   HoldingRequiredCalculationMethodCode::
-  HoldingRequiredCalculationMethodCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  HoldingRequiredCalculationMethodCode::
   HoldingRequiredCalculationMethodCode (value v)
   : ::xml_schema::token (_xsd_HoldingRequiredCalculationMethodCode_literals_[v])
   {
@@ -11213,12 +9899,6 @@ namespace oo_2_0
 
   // HoldingTransferReasonCode
   // 
-
-  HoldingTransferReasonCode::
-  HoldingTransferReasonCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   HoldingTransferReasonCode::
   HoldingTransferReasonCode (value v)
@@ -11266,12 +9946,6 @@ namespace oo_2_0
   // 
 
   IcingCategoryCode::
-  IcingCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  IcingCategoryCode::
   IcingCategoryCode (value v)
   : ::xml_schema::token (_xsd_IcingCategoryCode_literals_[v])
   {
@@ -11315,12 +9989,6 @@ namespace oo_2_0
 
   // IcingSeverityQualifierCode
   // 
-
-  IcingSeverityQualifierCode::
-  IcingSeverityQualifierCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   IcingSeverityQualifierCode::
   IcingSeverityQualifierCode (value v)
@@ -11368,12 +10036,6 @@ namespace oo_2_0
   // 
 
   JettyRailServedIndicatorCode::
-  JettyRailServedIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  JettyRailServedIndicatorCode::
   JettyRailServedIndicatorCode (value v)
   : ::xml_schema::token (_xsd_JettyRailServedIndicatorCode_literals_[v])
   {
@@ -11417,12 +10079,6 @@ namespace oo_2_0
 
   // LanguageCategoryCode
   // 
-
-  LanguageCategoryCode::
-  LanguageCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   LanguageCategoryCode::
   LanguageCategoryCode (value v)
@@ -11470,12 +10126,6 @@ namespace oo_2_0
   // 
 
   LanguageSkillProficiencyCode::
-  LanguageSkillProficiencyCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  LanguageSkillProficiencyCode::
   LanguageSkillProficiencyCode (value v)
   : ::xml_schema::token (_xsd_LanguageSkillProficiencyCode_literals_[v])
   {
@@ -11519,12 +10169,6 @@ namespace oo_2_0
 
   // LightCategoryCode
   // 
-
-  LightCategoryCode::
-  LightCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   LightCategoryCode::
   LightCategoryCode (value v)
@@ -11572,12 +10216,6 @@ namespace oo_2_0
   // 
 
   LightMoonPhaseCode::
-  LightMoonPhaseCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  LightMoonPhaseCode::
   LightMoonPhaseCode (value v)
   : ::xml_schema::token (_xsd_LightMoonPhaseCode_literals_[v])
   {
@@ -11621,12 +10259,6 @@ namespace oo_2_0
 
   // LiquidSurfaceStatusSeaStateCode
   // 
-
-  LiquidSurfaceStatusSeaStateCode::
-  LiquidSurfaceStatusSeaStateCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   LiquidSurfaceStatusSeaStateCode::
   LiquidSurfaceStatusSeaStateCode (value v)
@@ -11674,12 +10306,6 @@ namespace oo_2_0
   // 
 
   LiquidSurfaceStatusSurfaceConditionCode::
-  LiquidSurfaceStatusSurfaceConditionCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  LiquidSurfaceStatusSurfaceConditionCode::
   LiquidSurfaceStatusSurfaceConditionCode (value v)
   : ::xml_schema::token (_xsd_LiquidSurfaceStatusSurfaceConditionCode_literals_[v])
   {
@@ -11723,12 +10349,6 @@ namespace oo_2_0
 
   // LocationCategoryCode
   // 
-
-  LocationCategoryCode::
-  LocationCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   LocationCategoryCode::
   LocationCategoryCode (value v)
@@ -11776,12 +10396,6 @@ namespace oo_2_0
   // 
 
   MainActivityCode::
-  MainActivityCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MainActivityCode::
   MainActivityCode (value v)
   : ::xml_schema::token (_xsd_MainActivityCode_literals_[v])
   {
@@ -11825,12 +10439,6 @@ namespace oo_2_0
 
   // MaintenanceCapabilityCategoryCode
   // 
-
-  MaintenanceCapabilityCategoryCode::
-  MaintenanceCapabilityCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MaintenanceCapabilityCategoryCode::
   MaintenanceCapabilityCategoryCode (value v)
@@ -11878,12 +10486,6 @@ namespace oo_2_0
   // 
 
   MaintenanceCapabilityLevelCode::
-  MaintenanceCapabilityLevelCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MaintenanceCapabilityLevelCode::
   MaintenanceCapabilityLevelCode (value v)
   : ::xml_schema::token (_xsd_MaintenanceCapabilityLevelCode_literals_[v])
   {
@@ -11927,12 +10529,6 @@ namespace oo_2_0
 
   // MaritimeEquipmentTypeCategoryCode
   // 
-
-  MaritimeEquipmentTypeCategoryCode::
-  MaritimeEquipmentTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MaritimeEquipmentTypeCategoryCode::
   MaritimeEquipmentTypeCategoryCode (value v)
@@ -11980,12 +10576,6 @@ namespace oo_2_0
   // 
 
   MaritimeEquipmentTypeSubcategoryCode::
-  MaritimeEquipmentTypeSubcategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MaritimeEquipmentTypeSubcategoryCode::
   MaritimeEquipmentTypeSubcategoryCode (value v)
   : ::xml_schema::token (_xsd_MaritimeEquipmentTypeSubcategoryCode_literals_[v])
   {
@@ -12029,12 +10619,6 @@ namespace oo_2_0
 
   // MaterielCategoryCode
   // 
-
-  MaterielCategoryCode::
-  MaterielCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MaterielCategoryCode::
   MaterielCategoryCode (value v)
@@ -12082,12 +10666,6 @@ namespace oo_2_0
   // 
 
   MaterielStatusBodyColourCode::
-  MaterielStatusBodyColourCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MaterielStatusBodyColourCode::
   MaterielStatusBodyColourCode (value v)
   : ::xml_schema::token (_xsd_MaterielStatusBodyColourCode_literals_[v])
   {
@@ -12131,12 +10709,6 @@ namespace oo_2_0
 
   // MaterielStatusBuoyMalfunctionCode
   // 
-
-  MaterielStatusBuoyMalfunctionCode::
-  MaterielStatusBuoyMalfunctionCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MaterielStatusBuoyMalfunctionCode::
   MaterielStatusBuoyMalfunctionCode (value v)
@@ -12184,12 +10756,6 @@ namespace oo_2_0
   // 
 
   MaterielStatusCategoryCode::
-  MaterielStatusCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MaterielStatusCategoryCode::
   MaterielStatusCategoryCode (value v)
   : ::xml_schema::token (_xsd_MaterielStatusCategoryCode_literals_[v])
   {
@@ -12233,12 +10799,6 @@ namespace oo_2_0
 
   // MaterielStatusImoCompliantIndicatorCode
   // 
-
-  MaterielStatusImoCompliantIndicatorCode::
-  MaterielStatusImoCompliantIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MaterielStatusImoCompliantIndicatorCode::
   MaterielStatusImoCompliantIndicatorCode (value v)
@@ -12286,12 +10846,6 @@ namespace oo_2_0
   // 
 
   MaterielStatusMarkingCode::
-  MaterielStatusMarkingCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MaterielStatusMarkingCode::
   MaterielStatusMarkingCode (value v)
   : ::xml_schema::token (_xsd_MaterielStatusMarkingCode_literals_[v])
   {
@@ -12335,12 +10889,6 @@ namespace oo_2_0
 
   // MaterielStatusMarkingColourCode
   // 
-
-  MaterielStatusMarkingColourCode::
-  MaterielStatusMarkingColourCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MaterielStatusMarkingColourCode::
   MaterielStatusMarkingColourCode (value v)
@@ -12388,12 +10936,6 @@ namespace oo_2_0
   // 
 
   MaterielStatusOperationalStatusCode::
-  MaterielStatusOperationalStatusCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MaterielStatusOperationalStatusCode::
   MaterielStatusOperationalStatusCode (value v)
   : ::xml_schema::token (_xsd_MaterielStatusOperationalStatusCode_literals_[v])
   {
@@ -12437,12 +10979,6 @@ namespace oo_2_0
 
   // MaterielStatusOperationalStatusModeCode
   // 
-
-  MaterielStatusOperationalStatusModeCode::
-  MaterielStatusOperationalStatusModeCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MaterielStatusOperationalStatusModeCode::
   MaterielStatusOperationalStatusModeCode (value v)
@@ -12490,12 +11026,6 @@ namespace oo_2_0
   // 
 
   MaterielStatusOperationalStatusQualifierCode::
-  MaterielStatusOperationalStatusQualifierCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MaterielStatusOperationalStatusQualifierCode::
   MaterielStatusOperationalStatusQualifierCode (value v)
   : ::xml_schema::token (_xsd_MaterielStatusOperationalStatusQualifierCode_literals_[v])
   {
@@ -12539,12 +11069,6 @@ namespace oo_2_0
 
   // MaterielStatusReserveIndicatorCode
   // 
-
-  MaterielStatusReserveIndicatorCode::
-  MaterielStatusReserveIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MaterielStatusReserveIndicatorCode::
   MaterielStatusReserveIndicatorCode (value v)
@@ -12592,12 +11116,6 @@ namespace oo_2_0
   // 
 
   MaterielStatusSafetyStatusCode::
-  MaterielStatusSafetyStatusCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MaterielStatusSafetyStatusCode::
   MaterielStatusSafetyStatusCode (value v)
   : ::xml_schema::token (_xsd_MaterielStatusSafetyStatusCode_literals_[v])
   {
@@ -12641,12 +11159,6 @@ namespace oo_2_0
 
   // MaterielTypeCategoryCode
   // 
-
-  MaterielTypeCategoryCode::
-  MaterielTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MaterielTypeCategoryCode::
   MaterielTypeCategoryCode (value v)
@@ -12694,12 +11206,6 @@ namespace oo_2_0
   // 
 
   MaterielTypeSupplyClassCode::
-  MaterielTypeSupplyClassCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MaterielTypeSupplyClassCode::
   MaterielTypeSupplyClassCode (value v)
   : ::xml_schema::token (_xsd_MaterielTypeSupplyClassCode_literals_[v])
   {
@@ -12743,12 +11249,6 @@ namespace oo_2_0
 
   // MedicalFacilityStatusIntervalCasualtyTypeCode
   // 
-
-  MedicalFacilityStatusIntervalCasualtyTypeCode::
-  MedicalFacilityStatusIntervalCasualtyTypeCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MedicalFacilityStatusIntervalCasualtyTypeCode::
   MedicalFacilityStatusIntervalCasualtyTypeCode (value v)
@@ -12796,12 +11296,6 @@ namespace oo_2_0
   // 
 
   MedicalFacilityStatusPendingSurgeryTriageCode::
-  MedicalFacilityStatusPendingSurgeryTriageCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MedicalFacilityStatusPendingSurgeryTriageCode::
   MedicalFacilityStatusPendingSurgeryTriageCode (value v)
   : ::xml_schema::token (_xsd_MedicalFacilityStatusPendingSurgeryTriageCode_literals_[v])
   {
@@ -12845,12 +11339,6 @@ namespace oo_2_0
 
   // MeteorologicFeatureCategoryCode
   // 
-
-  MeteorologicFeatureCategoryCode::
-  MeteorologicFeatureCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MeteorologicFeatureCategoryCode::
   MeteorologicFeatureCategoryCode (value v)
@@ -12898,12 +11386,6 @@ namespace oo_2_0
   // 
 
   MeteorologicFeatureInterpretationCode::
-  MeteorologicFeatureInterpretationCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MeteorologicFeatureInterpretationCode::
   MeteorologicFeatureInterpretationCode (value v)
   : ::xml_schema::token (_xsd_MeteorologicFeatureInterpretationCode_literals_[v])
   {
@@ -12947,12 +11429,6 @@ namespace oo_2_0
 
   // MeteorologicFeatureSourceCode
   // 
-
-  MeteorologicFeatureSourceCode::
-  MeteorologicFeatureSourceCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MeteorologicFeatureSourceCode::
   MeteorologicFeatureSourceCode (value v)
@@ -13000,12 +11476,6 @@ namespace oo_2_0
   // 
 
   MilitaryObstacleCategoryCode::
-  MilitaryObstacleCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MilitaryObstacleCategoryCode::
   MilitaryObstacleCategoryCode (value v)
   : ::xml_schema::token (_xsd_MilitaryObstacleCategoryCode_literals_[v])
   {
@@ -13049,12 +11519,6 @@ namespace oo_2_0
 
   // MilitaryObstacleTypeCategoryCode
   // 
-
-  MilitaryObstacleTypeCategoryCode::
-  MilitaryObstacleTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MilitaryObstacleTypeCategoryCode::
   MilitaryObstacleTypeCategoryCode (value v)
@@ -13102,12 +11566,6 @@ namespace oo_2_0
   // 
 
   MilitaryObstacleTypeSubcategoryCode::
-  MilitaryObstacleTypeSubcategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MilitaryObstacleTypeSubcategoryCode::
   MilitaryObstacleTypeSubcategoryCode (value v)
   : ::xml_schema::token (_xsd_MilitaryObstacleTypeSubcategoryCode_literals_[v])
   {
@@ -13151,12 +11609,6 @@ namespace oo_2_0
 
   // MilitaryOrganisationTypeCategoryCode
   // 
-
-  MilitaryOrganisationTypeCategoryCode::
-  MilitaryOrganisationTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MilitaryOrganisationTypeCategoryCode::
   MilitaryOrganisationTypeCategoryCode (value v)
@@ -13204,12 +11656,6 @@ namespace oo_2_0
   // 
 
   MilitaryOrganisationTypeServiceCode::
-  MilitaryOrganisationTypeServiceCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MilitaryOrganisationTypeServiceCode::
   MilitaryOrganisationTypeServiceCode (value v)
   : ::xml_schema::token (_xsd_MilitaryOrganisationTypeServiceCode_literals_[v])
   {
@@ -13253,12 +11699,6 @@ namespace oo_2_0
 
   // MilitaryPostTypeCategoryCode
   // 
-
-  MilitaryPostTypeCategoryCode::
-  MilitaryPostTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MilitaryPostTypeCategoryCode::
   MilitaryPostTypeCategoryCode (value v)
@@ -13306,12 +11746,6 @@ namespace oo_2_0
   // 
 
   MilitaryPostTypeRankCode::
-  MilitaryPostTypeRankCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MilitaryPostTypeRankCode::
   MilitaryPostTypeRankCode (value v)
   : ::xml_schema::token (_xsd_MilitaryPostTypeRankCode_literals_[v])
   {
@@ -13355,12 +11789,6 @@ namespace oo_2_0
 
   // MinePresenceCode
   // 
-
-  MinePresenceCode::
-  MinePresenceCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MinePresenceCode::
   MinePresenceCode (value v)
@@ -13408,12 +11836,6 @@ namespace oo_2_0
   // 
 
   MineStatusAirDropEffectCode::
-  MineStatusAirDropEffectCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MineStatusAirDropEffectCode::
   MineStatusAirDropEffectCode (value v)
   : ::xml_schema::token (_xsd_MineStatusAirDropEffectCode_literals_[v])
   {
@@ -13457,12 +11879,6 @@ namespace oo_2_0
 
   // MineStatusCode
   // 
-
-  MineStatusCode::
-  MineStatusCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MineStatusCode::
   MineStatusCode (value v)
@@ -13510,12 +11926,6 @@ namespace oo_2_0
   // 
 
   MineStatusMaritimeMineQualifierCode::
-  MineStatusMaritimeMineQualifierCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MineStatusMaritimeMineQualifierCode::
   MineStatusMaritimeMineQualifierCode (value v)
   : ::xml_schema::token (_xsd_MineStatusMaritimeMineQualifierCode_literals_[v])
   {
@@ -13559,12 +11969,6 @@ namespace oo_2_0
 
   // MinefieldCategoryCode
   // 
-
-  MinefieldCategoryCode::
-  MinefieldCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MinefieldCategoryCode::
   MinefieldCategoryCode (value v)
@@ -13612,12 +12016,6 @@ namespace oo_2_0
   // 
 
   MinefieldLandDepthPlacementCode::
-  MinefieldLandDepthPlacementCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MinefieldLandDepthPlacementCode::
   MinefieldLandDepthPlacementCode (value v)
   : ::xml_schema::token (_xsd_MinefieldLandDepthPlacementCode_literals_[v])
   {
@@ -13661,12 +12059,6 @@ namespace oo_2_0
 
   // MinefieldLandFunctionCode
   // 
-
-  MinefieldLandFunctionCode::
-  MinefieldLandFunctionCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MinefieldLandFunctionCode::
   MinefieldLandFunctionCode (value v)
@@ -13714,12 +12106,6 @@ namespace oo_2_0
   // 
 
   MinefieldLandPatternCode::
-  MinefieldLandPatternCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MinefieldLandPatternCode::
   MinefieldLandPatternCode (value v)
   : ::xml_schema::token (_xsd_MinefieldLandPatternCode_literals_[v])
   {
@@ -13763,12 +12149,6 @@ namespace oo_2_0
 
   // MinefieldLandPersistenceCode
   // 
-
-  MinefieldLandPersistenceCode::
-  MinefieldLandPersistenceCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MinefieldLandPersistenceCode::
   MinefieldLandPersistenceCode (value v)
@@ -13816,12 +12196,6 @@ namespace oo_2_0
   // 
 
   MinefieldLandStoppingPowerCode::
-  MinefieldLandStoppingPowerCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MinefieldLandStoppingPowerCode::
   MinefieldLandStoppingPowerCode (value v)
   : ::xml_schema::token (_xsd_MinefieldLandStoppingPowerCode_literals_[v])
   {
@@ -13865,12 +12239,6 @@ namespace oo_2_0
 
   // MinefieldMaritimeBottomNaturalCamouflageCode
   // 
-
-  MinefieldMaritimeBottomNaturalCamouflageCode::
-  MinefieldMaritimeBottomNaturalCamouflageCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MinefieldMaritimeBottomNaturalCamouflageCode::
   MinefieldMaritimeBottomNaturalCamouflageCode (value v)
@@ -13918,12 +12286,6 @@ namespace oo_2_0
   // 
 
   MinefieldMaritimeDepthPlacementCode::
-  MinefieldMaritimeDepthPlacementCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MinefieldMaritimeDepthPlacementCode::
   MinefieldMaritimeDepthPlacementCode (value v)
   : ::xml_schema::token (_xsd_MinefieldMaritimeDepthPlacementCode_literals_[v])
   {
@@ -13967,12 +12329,6 @@ namespace oo_2_0
 
   // MinefieldMaritimeFunctionCode
   // 
-
-  MinefieldMaritimeFunctionCode::
-  MinefieldMaritimeFunctionCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MinefieldMaritimeFunctionCode::
   MinefieldMaritimeFunctionCode (value v)
@@ -14020,12 +12376,6 @@ namespace oo_2_0
   // 
 
   MinefieldMaritimeStatusCode::
-  MinefieldMaritimeStatusCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MinefieldMaritimeStatusCode::
   MinefieldMaritimeStatusCode (value v)
   : ::xml_schema::token (_xsd_MinefieldMaritimeStatusCode_literals_[v])
   {
@@ -14069,12 +12419,6 @@ namespace oo_2_0
 
   // MinefieldMaritimeStatusColourCode
   // 
-
-  MinefieldMaritimeStatusColourCode::
-  MinefieldMaritimeStatusColourCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MinefieldMaritimeStatusColourCode::
   MinefieldMaritimeStatusColourCode (value v)
@@ -14122,12 +12466,6 @@ namespace oo_2_0
   // 
 
   MinefieldMaritimeStatusExpectedLevelMcmCode::
-  MinefieldMaritimeStatusExpectedLevelMcmCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MinefieldMaritimeStatusExpectedLevelMcmCode::
   MinefieldMaritimeStatusExpectedLevelMcmCode (value v)
   : ::xml_schema::token (_xsd_MinefieldMaritimeStatusExpectedLevelMcmCode_literals_[v])
   {
@@ -14171,12 +12509,6 @@ namespace oo_2_0
 
   // MinefieldMaritimeStatusMineDetectionCode
   // 
-
-  MinefieldMaritimeStatusMineDetectionCode::
-  MinefieldMaritimeStatusMineDetectionCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MinefieldMaritimeStatusMineDetectionCode::
   MinefieldMaritimeStatusMineDetectionCode (value v)
@@ -14224,12 +12556,6 @@ namespace oo_2_0
   // 
 
   MinefieldMaritimeStatusMineZoneRiskCode::
-  MinefieldMaritimeStatusMineZoneRiskCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MinefieldMaritimeStatusMineZoneRiskCode::
   MinefieldMaritimeStatusMineZoneRiskCode (value v)
   : ::xml_schema::token (_xsd_MinefieldMaritimeStatusMineZoneRiskCode_literals_[v])
   {
@@ -14273,12 +12599,6 @@ namespace oo_2_0
 
   // MinefieldMaritimeStatusSeedingCode
   // 
-
-  MinefieldMaritimeStatusSeedingCode::
-  MinefieldMaritimeStatusSeedingCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MinefieldMaritimeStatusSeedingCode::
   MinefieldMaritimeStatusSeedingCode (value v)
@@ -14326,12 +12646,6 @@ namespace oo_2_0
   // 
 
   MinefieldMaritimeSubfunctionCode::
-  MinefieldMaritimeSubfunctionCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MinefieldMaritimeSubfunctionCode::
   MinefieldMaritimeSubfunctionCode (value v)
   : ::xml_schema::token (_xsd_MinefieldMaritimeSubfunctionCode_literals_[v])
   {
@@ -14375,12 +12689,6 @@ namespace oo_2_0
 
   // MiscellaneousEquipmentTypeCategoryCode
   // 
-
-  MiscellaneousEquipmentTypeCategoryCode::
-  MiscellaneousEquipmentTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MiscellaneousEquipmentTypeCategoryCode::
   MiscellaneousEquipmentTypeCategoryCode (value v)
@@ -14428,12 +12736,6 @@ namespace oo_2_0
   // 
 
   MiscellaneousEquipmentTypeSubcategoryCode::
-  MiscellaneousEquipmentTypeSubcategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MiscellaneousEquipmentTypeSubcategoryCode::
   MiscellaneousEquipmentTypeSubcategoryCode (value v)
   : ::xml_schema::token (_xsd_MiscellaneousEquipmentTypeSubcategoryCode_literals_[v])
   {
@@ -14477,12 +12779,6 @@ namespace oo_2_0
 
   // MissionPrimacyCode
   // 
-
-  MissionPrimacyCode::
-  MissionPrimacyCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MissionPrimacyCode::
   MissionPrimacyCode (value v)
@@ -14530,12 +12826,6 @@ namespace oo_2_0
   // 
 
   MobilityCapabilityCategoryCode::
-  MobilityCapabilityCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MobilityCapabilityCategoryCode::
   MobilityCapabilityCategoryCode (value v)
   : ::xml_schema::token (_xsd_MobilityCapabilityCategoryCode_literals_[v])
   {
@@ -14579,12 +12869,6 @@ namespace oo_2_0
 
   // MobilityCapabilityDescriptorCode
   // 
-
-  MobilityCapabilityDescriptorCode::
-  MobilityCapabilityDescriptorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MobilityCapabilityDescriptorCode::
   MobilityCapabilityDescriptorCode (value v)
@@ -14632,12 +12916,6 @@ namespace oo_2_0
   // 
 
   MobilityCapabilityTerrainTypeCode::
-  MobilityCapabilityTerrainTypeCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  MobilityCapabilityTerrainTypeCode::
   MobilityCapabilityTerrainTypeCode (value v)
   : ::xml_schema::token (_xsd_MobilityCapabilityTerrainTypeCode_literals_[v])
   {
@@ -14681,12 +12959,6 @@ namespace oo_2_0
 
   // MobilityCode
   // 
-
-  MobilityCode::
-  MobilityCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   MobilityCode::
   MobilityCode (value v)
@@ -14734,12 +13006,6 @@ namespace oo_2_0
   // 
 
   ModeOfTransportationCode::
-  ModeOfTransportationCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ModeOfTransportationCode::
   ModeOfTransportationCode (value v)
   : ::xml_schema::token (_xsd_ModeOfTransportationCode_literals_[v])
   {
@@ -14783,12 +13049,6 @@ namespace oo_2_0
 
   // NetworkArchitectureCode
   // 
-
-  NetworkArchitectureCode::
-  NetworkArchitectureCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   NetworkArchitectureCode::
   NetworkArchitectureCode (value v)
@@ -14836,12 +13096,6 @@ namespace oo_2_0
   // 
 
   NetworkCapacityBandwidthCode::
-  NetworkCapacityBandwidthCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  NetworkCapacityBandwidthCode::
   NetworkCapacityBandwidthCode (value v)
   : ::xml_schema::token (_xsd_NetworkCapacityBandwidthCode_literals_[v])
   {
@@ -14885,12 +13139,6 @@ namespace oo_2_0
 
   // NetworkCapacityProtocolCode
   // 
-
-  NetworkCapacityProtocolCode::
-  NetworkCapacityProtocolCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   NetworkCapacityProtocolCode::
   NetworkCapacityProtocolCode (value v)
@@ -14938,12 +13186,6 @@ namespace oo_2_0
   // 
 
   NetworkCategoryCode::
-  NetworkCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  NetworkCategoryCode::
   NetworkCategoryCode (value v)
   : ::xml_schema::token (_xsd_NetworkCategoryCode_literals_[v])
   {
@@ -14987,12 +13229,6 @@ namespace oo_2_0
 
   // NetworkFrequencyBandCode
   // 
-
-  NetworkFrequencyBandCode::
-  NetworkFrequencyBandCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   NetworkFrequencyBandCode::
   NetworkFrequencyBandCode (value v)
@@ -15040,12 +13276,6 @@ namespace oo_2_0
   // 
 
   NetworkFrequencyModulationCode::
-  NetworkFrequencyModulationCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  NetworkFrequencyModulationCode::
   NetworkFrequencyModulationCode (value v)
   : ::xml_schema::token (_xsd_NetworkFrequencyModulationCode_literals_[v])
   {
@@ -15089,12 +13319,6 @@ namespace oo_2_0
 
   // NetworkMeansCode
   // 
-
-  NetworkMeansCode::
-  NetworkMeansCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   NetworkMeansCode::
   NetworkMeansCode (value v)
@@ -15142,12 +13366,6 @@ namespace oo_2_0
   // 
 
   NetworkServiceCategoryCode::
-  NetworkServiceCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  NetworkServiceCategoryCode::
   NetworkServiceCategoryCode (value v)
   : ::xml_schema::token (_xsd_NetworkServiceCategoryCode_literals_[v])
   {
@@ -15191,12 +13409,6 @@ namespace oo_2_0
 
   // NetworkServiceCryptographicIndicatorCode
   // 
-
-  NetworkServiceCryptographicIndicatorCode::
-  NetworkServiceCryptographicIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   NetworkServiceCryptographicIndicatorCode::
   NetworkServiceCryptographicIndicatorCode (value v)
@@ -15244,12 +13456,6 @@ namespace oo_2_0
   // 
 
   NetworkServiceStatusIndicatorCode::
-  NetworkServiceStatusIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  NetworkServiceStatusIndicatorCode::
   NetworkServiceStatusIndicatorCode (value v)
   : ::xml_schema::token (_xsd_NetworkServiceStatusIndicatorCode_literals_[v])
   {
@@ -15293,12 +13499,6 @@ namespace oo_2_0
 
   // NetworkServiceSubcategoryCode
   // 
-
-  NetworkServiceSubcategoryCode::
-  NetworkServiceSubcategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   NetworkServiceSubcategoryCode::
   NetworkServiceSubcategoryCode (value v)
@@ -15346,12 +13546,6 @@ namespace oo_2_0
   // 
 
   NetworkSubcategoryCode::
-  NetworkSubcategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  NetworkSubcategoryCode::
   NetworkSubcategoryCode (value v)
   : ::xml_schema::token (_xsd_NetworkSubcategoryCode_literals_[v])
   {
@@ -15395,12 +13589,6 @@ namespace oo_2_0
 
   // NuclearEventCategoryCode
   // 
-
-  NuclearEventCategoryCode::
-  NuclearEventCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   NuclearEventCategoryCode::
   NuclearEventCategoryCode (value v)
@@ -15448,12 +13636,6 @@ namespace oo_2_0
   // 
 
   NuclearWeaponEventCraterPresenceCode::
-  NuclearWeaponEventCraterPresenceCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  NuclearWeaponEventCraterPresenceCode::
   NuclearWeaponEventCraterPresenceCode (value v)
   : ::xml_schema::token (_xsd_NuclearWeaponEventCraterPresenceCode_literals_[v])
   {
@@ -15497,12 +13679,6 @@ namespace oo_2_0
 
   // NuclearYieldGroupCode
   // 
-
-  NuclearYieldGroupCode::
-  NuclearYieldGroupCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   NuclearYieldGroupCode::
   NuclearYieldGroupCode (value v)
@@ -15550,12 +13726,6 @@ namespace oo_2_0
   // 
 
   ObjectItemAddressAuthorisationIndicatorCode::
-  ObjectItemAddressAuthorisationIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ObjectItemAddressAuthorisationIndicatorCode::
   ObjectItemAddressAuthorisationIndicatorCode (value v)
   : ::xml_schema::token (_xsd_ObjectItemAddressAuthorisationIndicatorCode_literals_[v])
   {
@@ -15599,12 +13769,6 @@ namespace oo_2_0
 
   // ObjectItemAddressPrimacyCode
   // 
-
-  ObjectItemAddressPrimacyCode::
-  ObjectItemAddressPrimacyCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ObjectItemAddressPrimacyCode::
   ObjectItemAddressPrimacyCode (value v)
@@ -15652,12 +13816,6 @@ namespace oo_2_0
   // 
 
   ObjectItemAddressTransmitReceiveCode::
-  ObjectItemAddressTransmitReceiveCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ObjectItemAddressTransmitReceiveCode::
   ObjectItemAddressTransmitReceiveCode (value v)
   : ::xml_schema::token (_xsd_ObjectItemAddressTransmitReceiveCode_literals_[v])
   {
@@ -15701,12 +13859,6 @@ namespace oo_2_0
 
   // ObjectItemAliasCategoryCode
   // 
-
-  ObjectItemAliasCategoryCode::
-  ObjectItemAliasCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ObjectItemAliasCategoryCode::
   ObjectItemAliasCategoryCode (value v)
@@ -15754,12 +13906,6 @@ namespace oo_2_0
   // 
 
   ObjectItemAssociationCategoryCode::
-  ObjectItemAssociationCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ObjectItemAssociationCategoryCode::
   ObjectItemAssociationCategoryCode (value v)
   : ::xml_schema::token (_xsd_ObjectItemAssociationCategoryCode_literals_[v])
   {
@@ -15803,12 +13949,6 @@ namespace oo_2_0
 
   // ObjectItemAssociationSubcategoryCode
   // 
-
-  ObjectItemAssociationSubcategoryCode::
-  ObjectItemAssociationSubcategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ObjectItemAssociationSubcategoryCode::
   ObjectItemAssociationSubcategoryCode (value v)
@@ -15856,12 +13996,6 @@ namespace oo_2_0
   // 
 
   ObjectItemCategoryCode::
-  ObjectItemCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ObjectItemCategoryCode::
   ObjectItemCategoryCode (value v)
   : ::xml_schema::token (_xsd_ObjectItemCategoryCode_literals_[v])
   {
@@ -15905,12 +14039,6 @@ namespace oo_2_0
 
   // ObjectItemGroupAccountDetailQualifierCode
   // 
-
-  ObjectItemGroupAccountDetailQualifierCode::
-  ObjectItemGroupAccountDetailQualifierCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ObjectItemGroupAccountDetailQualifierCode::
   ObjectItemGroupAccountDetailQualifierCode (value v)
@@ -15958,12 +14086,6 @@ namespace oo_2_0
   // 
 
   ObjectItemHostilityStatusCode::
-  ObjectItemHostilityStatusCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ObjectItemHostilityStatusCode::
   ObjectItemHostilityStatusCode (value v)
   : ::xml_schema::token (_xsd_ObjectItemHostilityStatusCode_literals_[v])
   {
@@ -16007,12 +14129,6 @@ namespace oo_2_0
 
   // ObjectItemLocationMeaningCode
   // 
-
-  ObjectItemLocationMeaningCode::
-  ObjectItemLocationMeaningCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ObjectItemLocationMeaningCode::
   ObjectItemLocationMeaningCode (value v)
@@ -16060,12 +14176,6 @@ namespace oo_2_0
   // 
 
   ObjectItemLocationRelativeSpeedCode::
-  ObjectItemLocationRelativeSpeedCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ObjectItemLocationRelativeSpeedCode::
   ObjectItemLocationRelativeSpeedCode (value v)
   : ::xml_schema::token (_xsd_ObjectItemLocationRelativeSpeedCode_literals_[v])
   {
@@ -16109,12 +14219,6 @@ namespace oo_2_0
 
   // ObjectItemReferenceAssociationCategoryCode
   // 
-
-  ObjectItemReferenceAssociationCategoryCode::
-  ObjectItemReferenceAssociationCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ObjectItemReferenceAssociationCategoryCode::
   ObjectItemReferenceAssociationCategoryCode (value v)
@@ -16162,12 +14266,6 @@ namespace oo_2_0
   // 
 
   ObjectItemStatusBoobyTrapPresenceCode::
-  ObjectItemStatusBoobyTrapPresenceCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ObjectItemStatusBoobyTrapPresenceCode::
   ObjectItemStatusBoobyTrapPresenceCode (value v)
   : ::xml_schema::token (_xsd_ObjectItemStatusBoobyTrapPresenceCode_literals_[v])
   {
@@ -16211,12 +14309,6 @@ namespace oo_2_0
 
   // ObjectItemStatusCategoryCode
   // 
-
-  ObjectItemStatusCategoryCode::
-  ObjectItemStatusCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ObjectItemStatusCategoryCode::
   ObjectItemStatusCategoryCode (value v)
@@ -16264,12 +14356,6 @@ namespace oo_2_0
   // 
 
   ObjectItemStatusEmissionControlCode::
-  ObjectItemStatusEmissionControlCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ObjectItemStatusEmissionControlCode::
   ObjectItemStatusEmissionControlCode (value v)
   : ::xml_schema::token (_xsd_ObjectItemStatusEmissionControlCode_literals_[v])
   {
@@ -16313,12 +14399,6 @@ namespace oo_2_0
 
   // ObjectTypeCategoryCode
   // 
-
-  ObjectTypeCategoryCode::
-  ObjectTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ObjectTypeCategoryCode::
   ObjectTypeCategoryCode (value v)
@@ -16366,12 +14446,6 @@ namespace oo_2_0
   // 
 
   ObjectTypeDecoyIndicatorCode::
-  ObjectTypeDecoyIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ObjectTypeDecoyIndicatorCode::
   ObjectTypeDecoyIndicatorCode (value v)
   : ::xml_schema::token (_xsd_ObjectTypeDecoyIndicatorCode_literals_[v])
   {
@@ -16415,12 +14489,6 @@ namespace oo_2_0
 
   // ObjectTypeEstablishmentCategoryCode
   // 
-
-  ObjectTypeEstablishmentCategoryCode::
-  ObjectTypeEstablishmentCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ObjectTypeEstablishmentCategoryCode::
   ObjectTypeEstablishmentCategoryCode (value v)
@@ -16468,12 +14536,6 @@ namespace oo_2_0
   // 
 
   ObjectTypeEstablishmentEnvironmentConditionCode::
-  ObjectTypeEstablishmentEnvironmentConditionCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ObjectTypeEstablishmentEnvironmentConditionCode::
   ObjectTypeEstablishmentEnvironmentConditionCode (value v)
   : ::xml_schema::token (_xsd_ObjectTypeEstablishmentEnvironmentConditionCode_literals_[v])
   {
@@ -16517,12 +14579,6 @@ namespace oo_2_0
 
   // ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode
   // 
-
-  ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode::
-  ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode::
   ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode (value v)
@@ -16570,12 +14626,6 @@ namespace oo_2_0
   // 
 
   ObjectTypeEstablishmentOperationalModeCode::
-  ObjectTypeEstablishmentOperationalModeCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ObjectTypeEstablishmentOperationalModeCode::
   ObjectTypeEstablishmentOperationalModeCode (value v)
   : ::xml_schema::token (_xsd_ObjectTypeEstablishmentOperationalModeCode_literals_[v])
   {
@@ -16619,12 +14669,6 @@ namespace oo_2_0
 
   // ObjectTypeReferenceAssociationCategoryCode
   // 
-
-  ObjectTypeReferenceAssociationCategoryCode::
-  ObjectTypeReferenceAssociationCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ObjectTypeReferenceAssociationCategoryCode::
   ObjectTypeReferenceAssociationCategoryCode (value v)
@@ -16672,12 +14716,6 @@ namespace oo_2_0
   // 
 
   OperationalCapabilityCategoryCode::
-  OperationalCapabilityCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  OperationalCapabilityCategoryCode::
   OperationalCapabilityCategoryCode (value v)
   : ::xml_schema::token (_xsd_OperationalCapabilityCategoryCode_literals_[v])
   {
@@ -16721,12 +14759,6 @@ namespace oo_2_0
 
   // OperationalCapabilityLevelCode
   // 
-
-  OperationalCapabilityLevelCode::
-  OperationalCapabilityLevelCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   OperationalCapabilityLevelCode::
   OperationalCapabilityLevelCode (value v)
@@ -16774,12 +14806,6 @@ namespace oo_2_0
   // 
 
   OperationalCapabilityQualifierCode::
-  OperationalCapabilityQualifierCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  OperationalCapabilityQualifierCode::
   OperationalCapabilityQualifierCode (value v)
   : ::xml_schema::token (_xsd_OperationalCapabilityQualifierCode_literals_[v])
   {
@@ -16823,12 +14849,6 @@ namespace oo_2_0
 
   // OperationalInformationGroupCategoryCode
   // 
-
-  OperationalInformationGroupCategoryCode::
-  OperationalInformationGroupCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   OperationalInformationGroupCategoryCode::
   OperationalInformationGroupCategoryCode (value v)
@@ -16876,12 +14896,6 @@ namespace oo_2_0
   // 
 
   OperationalInformationGroupOrganisationAssociationCategoryCode::
-  OperationalInformationGroupOrganisationAssociationCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  OperationalInformationGroupOrganisationAssociationCategoryCode::
   OperationalInformationGroupOrganisationAssociationCategoryCode (value v)
   : ::xml_schema::token (_xsd_OperationalInformationGroupOrganisationAssociationCategoryCode_literals_[v])
   {
@@ -16925,12 +14939,6 @@ namespace oo_2_0
 
   // OrbitAreaAlignmentCode
   // 
-
-  OrbitAreaAlignmentCode::
-  OrbitAreaAlignmentCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   OrbitAreaAlignmentCode::
   OrbitAreaAlignmentCode (value v)
@@ -16978,12 +14986,6 @@ namespace oo_2_0
   // 
 
   OrderCategoryCode::
-  OrderCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  OrderCategoryCode::
   OrderCategoryCode (value v)
   : ::xml_schema::token (_xsd_OrderCategoryCode_literals_[v])
   {
@@ -17027,12 +15029,6 @@ namespace oo_2_0
 
   // OrderStatusExecutionStateCode
   // 
-
-  OrderStatusExecutionStateCode::
-  OrderStatusExecutionStateCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   OrderStatusExecutionStateCode::
   OrderStatusExecutionStateCode (value v)
@@ -17080,12 +15076,6 @@ namespace oo_2_0
   // 
 
   OrganisationActionAssociationCategoryCode::
-  OrganisationActionAssociationCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  OrganisationActionAssociationCategoryCode::
   OrganisationActionAssociationCategoryCode (value v)
   : ::xml_schema::token (_xsd_OrganisationActionAssociationCategoryCode_literals_[v])
   {
@@ -17129,12 +15119,6 @@ namespace oo_2_0
 
   // OrganisationActionTaskRuleOfEngagementStatusCategoryCode
   // 
-
-  OrganisationActionTaskRuleOfEngagementStatusCategoryCode::
-  OrganisationActionTaskRuleOfEngagementStatusCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   OrganisationActionTaskRuleOfEngagementStatusCategoryCode::
   OrganisationActionTaskRuleOfEngagementStatusCategoryCode (value v)
@@ -17182,12 +15166,6 @@ namespace oo_2_0
   // 
 
   OrganisationCategoryCode::
-  OrganisationCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  OrganisationCategoryCode::
   OrganisationCategoryCode (value v)
   : ::xml_schema::token (_xsd_OrganisationCategoryCode_literals_[v])
   {
@@ -17231,12 +15209,6 @@ namespace oo_2_0
 
   // OrganisationMaterielTypeAssociationReportableTypeCode
   // 
-
-  OrganisationMaterielTypeAssociationReportableTypeCode::
-  OrganisationMaterielTypeAssociationReportableTypeCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   OrganisationMaterielTypeAssociationReportableTypeCode::
   OrganisationMaterielTypeAssociationReportableTypeCode (value v)
@@ -17284,12 +15256,6 @@ namespace oo_2_0
   // 
 
   OrganisationPlanOrderAssociationCategoryCode::
-  OrganisationPlanOrderAssociationCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  OrganisationPlanOrderAssociationCategoryCode::
   OrganisationPlanOrderAssociationCategoryCode (value v)
   : ::xml_schema::token (_xsd_OrganisationPlanOrderAssociationCategoryCode_literals_[v])
   {
@@ -17333,12 +15299,6 @@ namespace oo_2_0
 
   // OrganisationReferenceAssociationCategoryCode
   // 
-
-  OrganisationReferenceAssociationCategoryCode::
-  OrganisationReferenceAssociationCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   OrganisationReferenceAssociationCategoryCode::
   OrganisationReferenceAssociationCategoryCode (value v)
@@ -17386,12 +15346,6 @@ namespace oo_2_0
   // 
 
   OrganisationStatusAvailabilityCode::
-  OrganisationStatusAvailabilityCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  OrganisationStatusAvailabilityCode::
   OrganisationStatusAvailabilityCode (value v)
   : ::xml_schema::token (_xsd_OrganisationStatusAvailabilityCode_literals_[v])
   {
@@ -17435,12 +15389,6 @@ namespace oo_2_0
 
   // OrganisationStatusCbrnDressStateCode
   // 
-
-  OrganisationStatusCbrnDressStateCode::
-  OrganisationStatusCbrnDressStateCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   OrganisationStatusCbrnDressStateCode::
   OrganisationStatusCbrnDressStateCode (value v)
@@ -17488,12 +15436,6 @@ namespace oo_2_0
   // 
 
   OrganisationStatusCommandAndControlRoleCode::
-  OrganisationStatusCommandAndControlRoleCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  OrganisationStatusCommandAndControlRoleCode::
   OrganisationStatusCommandAndControlRoleCode (value v)
   : ::xml_schema::token (_xsd_OrganisationStatusCommandAndControlRoleCode_literals_[v])
   {
@@ -17537,12 +15479,6 @@ namespace oo_2_0
 
   // OrganisationStatusCommitmentStatusCode
   // 
-
-  OrganisationStatusCommitmentStatusCode::
-  OrganisationStatusCommitmentStatusCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   OrganisationStatusCommitmentStatusCode::
   OrganisationStatusCommitmentStatusCode (value v)
@@ -17590,12 +15526,6 @@ namespace oo_2_0
   // 
 
   OrganisationStatusFireModeCode::
-  OrganisationStatusFireModeCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  OrganisationStatusFireModeCode::
   OrganisationStatusFireModeCode (value v)
   : ::xml_schema::token (_xsd_OrganisationStatusFireModeCode_literals_[v])
   {
@@ -17639,12 +15569,6 @@ namespace oo_2_0
 
   // OrganisationStatusOperationalStatusCode
   // 
-
-  OrganisationStatusOperationalStatusCode::
-  OrganisationStatusOperationalStatusCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   OrganisationStatusOperationalStatusCode::
   OrganisationStatusOperationalStatusCode (value v)
@@ -17692,12 +15616,6 @@ namespace oo_2_0
   // 
 
   OrganisationStatusOperationalStatusQualifierCode::
-  OrganisationStatusOperationalStatusQualifierCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  OrganisationStatusOperationalStatusQualifierCode::
   OrganisationStatusOperationalStatusQualifierCode (value v)
   : ::xml_schema::token (_xsd_OrganisationStatusOperationalStatusQualifierCode_literals_[v])
   {
@@ -17741,12 +15659,6 @@ namespace oo_2_0
 
   // OrganisationStatusReadinessCode
   // 
-
-  OrganisationStatusReadinessCode::
-  OrganisationStatusReadinessCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   OrganisationStatusReadinessCode::
   OrganisationStatusReadinessCode (value v)
@@ -17794,12 +15706,6 @@ namespace oo_2_0
   // 
 
   OrganisationStatusReinforcementCode::
-  OrganisationStatusReinforcementCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  OrganisationStatusReinforcementCode::
   OrganisationStatusReinforcementCode (value v)
   : ::xml_schema::token (_xsd_OrganisationStatusReinforcementCode_literals_[v])
   {
@@ -17843,12 +15749,6 @@ namespace oo_2_0
 
   // OrganisationStatusReserveIndicatorCode
   // 
-
-  OrganisationStatusReserveIndicatorCode::
-  OrganisationStatusReserveIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   OrganisationStatusReserveIndicatorCode::
   OrganisationStatusReserveIndicatorCode (value v)
@@ -17896,12 +15796,6 @@ namespace oo_2_0
   // 
 
   OrganisationStatusTrainingCode::
-  OrganisationStatusTrainingCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  OrganisationStatusTrainingCode::
   OrganisationStatusTrainingCode (value v)
   : ::xml_schema::token (_xsd_OrganisationStatusTrainingCode_literals_[v])
   {
@@ -17945,12 +15839,6 @@ namespace oo_2_0
 
   // OrganisationStatusUsageStatusCode
   // 
-
-  OrganisationStatusUsageStatusCode::
-  OrganisationStatusUsageStatusCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   OrganisationStatusUsageStatusCode::
   OrganisationStatusUsageStatusCode (value v)
@@ -17998,12 +15886,6 @@ namespace oo_2_0
   // 
 
   OrganisationTypeCategoryCode::
-  OrganisationTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  OrganisationTypeCategoryCode::
   OrganisationTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_OrganisationTypeCategoryCode_literals_[v])
   {
@@ -18047,12 +15929,6 @@ namespace oo_2_0
 
   // OrganisationTypeCommandAndControlCategoryCode
   // 
-
-  OrganisationTypeCommandAndControlCategoryCode::
-  OrganisationTypeCommandAndControlCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   OrganisationTypeCommandAndControlCategoryCode::
   OrganisationTypeCommandAndControlCategoryCode (value v)
@@ -18100,12 +15976,6 @@ namespace oo_2_0
   // 
 
   OrganisationTypeCommandFunctionIndicatorCode::
-  OrganisationTypeCommandFunctionIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  OrganisationTypeCommandFunctionIndicatorCode::
   OrganisationTypeCommandFunctionIndicatorCode (value v)
   : ::xml_schema::token (_xsd_OrganisationTypeCommandFunctionIndicatorCode_literals_[v])
   {
@@ -18149,12 +16019,6 @@ namespace oo_2_0
 
   // PersistencyCode
   // 
-
-  PersistencyCode::
-  PersistencyCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   PersistencyCode::
   PersistencyCode (value v)
@@ -18202,12 +16066,6 @@ namespace oo_2_0
   // 
 
   PersonBloodTypeCode::
-  PersonBloodTypeCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  PersonBloodTypeCode::
   PersonBloodTypeCode (value v)
   : ::xml_schema::token (_xsd_PersonBloodTypeCode_literals_[v])
   {
@@ -18251,12 +16109,6 @@ namespace oo_2_0
 
   // PersonIdentificationDocumentCode
   // 
-
-  PersonIdentificationDocumentCode::
-  PersonIdentificationDocumentCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   PersonIdentificationDocumentCode::
   PersonIdentificationDocumentCode (value v)
@@ -18304,12 +16156,6 @@ namespace oo_2_0
   // 
 
   PersonLanguageSkillGeneralProficiencyCode::
-  PersonLanguageSkillGeneralProficiencyCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  PersonLanguageSkillGeneralProficiencyCode::
   PersonLanguageSkillGeneralProficiencyCode (value v)
   : ::xml_schema::token (_xsd_PersonLanguageSkillGeneralProficiencyCode_literals_[v])
   {
@@ -18353,12 +16199,6 @@ namespace oo_2_0
 
   // PersonProfessingIndicatorCode
   // 
-
-  PersonProfessingIndicatorCode::
-  PersonProfessingIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   PersonProfessingIndicatorCode::
   PersonProfessingIndicatorCode (value v)
@@ -18406,12 +16246,6 @@ namespace oo_2_0
   // 
 
   PersonStatusDutyStatusCode::
-  PersonStatusDutyStatusCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  PersonStatusDutyStatusCode::
   PersonStatusDutyStatusCode (value v)
   : ::xml_schema::token (_xsd_PersonStatusDutyStatusCode_literals_[v])
   {
@@ -18455,12 +16289,6 @@ namespace oo_2_0
 
   // PersonStatusPhysicalStatusCode
   // 
-
-  PersonStatusPhysicalStatusCode::
-  PersonStatusPhysicalStatusCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   PersonStatusPhysicalStatusCode::
   PersonStatusPhysicalStatusCode (value v)
@@ -18508,12 +16336,6 @@ namespace oo_2_0
   // 
 
   PersonStatusPhysicalStatusQualifierCode::
-  PersonStatusPhysicalStatusQualifierCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  PersonStatusPhysicalStatusQualifierCode::
   PersonStatusPhysicalStatusQualifierCode (value v)
   : ::xml_schema::token (_xsd_PersonStatusPhysicalStatusQualifierCode_literals_[v])
   {
@@ -18557,12 +16379,6 @@ namespace oo_2_0
 
   // PersonStatusReserveIndicatorCode
   // 
-
-  PersonStatusReserveIndicatorCode::
-  PersonStatusReserveIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   PersonStatusReserveIndicatorCode::
   PersonStatusReserveIndicatorCode (value v)
@@ -18610,12 +16426,6 @@ namespace oo_2_0
   // 
 
   PersonTypeCategoryCode::
-  PersonTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  PersonTypeCategoryCode::
   PersonTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_PersonTypeCategoryCode_literals_[v])
   {
@@ -18659,12 +16469,6 @@ namespace oo_2_0
 
   // PersonTypeRankCode
   // 
-
-  PersonTypeRankCode::
-  PersonTypeRankCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   PersonTypeRankCode::
   PersonTypeRankCode (value v)
@@ -18712,12 +16516,6 @@ namespace oo_2_0
   // 
 
   PersonTypeSubcategoryCode::
-  PersonTypeSubcategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  PersonTypeSubcategoryCode::
   PersonTypeSubcategoryCode (value v)
   : ::xml_schema::token (_xsd_PersonTypeSubcategoryCode_literals_[v])
   {
@@ -18761,12 +16559,6 @@ namespace oo_2_0
 
   // PhysicalAddressCategoryCode
   // 
-
-  PhysicalAddressCategoryCode::
-  PhysicalAddressCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   PhysicalAddressCategoryCode::
   PhysicalAddressCategoryCode (value v)
@@ -18814,12 +16606,6 @@ namespace oo_2_0
   // 
 
   PlanCategoryCode::
-  PlanCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  PlanCategoryCode::
   PlanCategoryCode (value v)
   : ::xml_schema::token (_xsd_PlanCategoryCode_literals_[v])
   {
@@ -18863,12 +16649,6 @@ namespace oo_2_0
 
   // PlanOrderAssociationCategoryCode
   // 
-
-  PlanOrderAssociationCategoryCode::
-  PlanOrderAssociationCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   PlanOrderAssociationCategoryCode::
   PlanOrderAssociationCategoryCode (value v)
@@ -18916,12 +16696,6 @@ namespace oo_2_0
   // 
 
   PlanOrderCategoryCode::
-  PlanOrderCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  PlanOrderCategoryCode::
   PlanOrderCategoryCode (value v)
   : ::xml_schema::token (_xsd_PlanOrderCategoryCode_literals_[v])
   {
@@ -18965,12 +16739,6 @@ namespace oo_2_0
 
   // PlanOrderComponentContentReferenceCategoryCode
   // 
-
-  PlanOrderComponentContentReferenceCategoryCode::
-  PlanOrderComponentContentReferenceCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   PlanOrderComponentContentReferenceCategoryCode::
   PlanOrderComponentContentReferenceCategoryCode (value v)
@@ -19018,12 +16786,6 @@ namespace oo_2_0
   // 
 
   PlanOrderComponentStructureCategoryCode::
-  PlanOrderComponentStructureCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  PlanOrderComponentStructureCategoryCode::
   PlanOrderComponentStructureCategoryCode (value v)
   : ::xml_schema::token (_xsd_PlanOrderComponentStructureCategoryCode_literals_[v])
   {
@@ -19067,12 +16829,6 @@ namespace oo_2_0
 
   // PlanOrderDistributionAcknowledgementCode
   // 
-
-  PlanOrderDistributionAcknowledgementCode::
-  PlanOrderDistributionAcknowledgementCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   PlanOrderDistributionAcknowledgementCode::
   PlanOrderDistributionAcknowledgementCode (value v)
@@ -19120,12 +16876,6 @@ namespace oo_2_0
   // 
 
   PlanOrderDistributionCategoryCode::
-  PlanOrderDistributionCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  PlanOrderDistributionCategoryCode::
   PlanOrderDistributionCategoryCode (value v)
   : ::xml_schema::token (_xsd_PlanOrderDistributionCategoryCode_literals_[v])
   {
@@ -19169,12 +16919,6 @@ namespace oo_2_0
 
   // PlanOrderHeaderContentTimeZoneCode
   // 
-
-  PlanOrderHeaderContentTimeZoneCode::
-  PlanOrderHeaderContentTimeZoneCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   PlanOrderHeaderContentTimeZoneCode::
   PlanOrderHeaderContentTimeZoneCode (value v)
@@ -19222,12 +16966,6 @@ namespace oo_2_0
   // 
 
   PlanStatusDevelopmentStatusCode::
-  PlanStatusDevelopmentStatusCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  PlanStatusDevelopmentStatusCode::
   PlanStatusDevelopmentStatusCode (value v)
   : ::xml_schema::token (_xsd_PlanStatusDevelopmentStatusCode_literals_[v])
   {
@@ -19271,12 +17009,6 @@ namespace oo_2_0
 
   // PlanStatusStateCode
   // 
-
-  PlanStatusStateCode::
-  PlanStatusStateCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   PlanStatusStateCode::
   PlanStatusStateCode (value v)
@@ -19324,12 +17056,6 @@ namespace oo_2_0
   // 
 
   PointCategoryCode::
-  PointCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  PointCategoryCode::
   PointCategoryCode (value v)
   : ::xml_schema::token (_xsd_PointCategoryCode_literals_[v])
   {
@@ -19373,12 +17099,6 @@ namespace oo_2_0
 
   // PrecipitationCategoryCode
   // 
-
-  PrecipitationCategoryCode::
-  PrecipitationCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   PrecipitationCategoryCode::
   PrecipitationCategoryCode (value v)
@@ -19426,12 +17146,6 @@ namespace oo_2_0
   // 
 
   PrivateSectorOrganisationTypeCategoryCode::
-  PrivateSectorOrganisationTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  PrivateSectorOrganisationTypeCategoryCode::
   PrivateSectorOrganisationTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_PrivateSectorOrganisationTypeCategoryCode_literals_[v])
   {
@@ -19475,12 +17189,6 @@ namespace oo_2_0
 
   // QuayContainerHandlingTypeCode
   // 
-
-  QuayContainerHandlingTypeCode::
-  QuayContainerHandlingTypeCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   QuayContainerHandlingTypeCode::
   QuayContainerHandlingTypeCode (value v)
@@ -19528,12 +17236,6 @@ namespace oo_2_0
   // 
 
   QuayCraneOffloadingTypeCode::
-  QuayCraneOffloadingTypeCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  QuayCraneOffloadingTypeCode::
   QuayCraneOffloadingTypeCode (value v)
   : ::xml_schema::token (_xsd_QuayCraneOffloadingTypeCode_literals_[v])
   {
@@ -19577,12 +17279,6 @@ namespace oo_2_0
 
   // QuayRailServedIndicatorCode
   // 
-
-  QuayRailServedIndicatorCode::
-  QuayRailServedIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   QuayRailServedIndicatorCode::
   QuayRailServedIndicatorCode (value v)
@@ -19630,12 +17326,6 @@ namespace oo_2_0
   // 
 
   QuayStorageCode::
-  QuayStorageCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  QuayStorageCode::
   QuayStorageCode (value v)
   : ::xml_schema::token (_xsd_QuayStorageCode_literals_[v])
   {
@@ -19679,12 +17369,6 @@ namespace oo_2_0
 
   // RadioactiveEventCategoryCode
   // 
-
-  RadioactiveEventCategoryCode::
-  RadioactiveEventCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   RadioactiveEventCategoryCode::
   RadioactiveEventCategoryCode (value v)
@@ -19732,12 +17416,6 @@ namespace oo_2_0
   // 
 
   RadioactiveEventDoseRateTrendCode::
-  RadioactiveEventDoseRateTrendCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  RadioactiveEventDoseRateTrendCode::
   RadioactiveEventDoseRateTrendCode (value v)
   : ::xml_schema::token (_xsd_RadioactiveEventDoseRateTrendCode_literals_[v])
   {
@@ -19781,12 +17459,6 @@ namespace oo_2_0
 
   // RadioactiveEventRelativeDecayRateCode
   // 
-
-  RadioactiveEventRelativeDecayRateCode::
-  RadioactiveEventRelativeDecayRateCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   RadioactiveEventRelativeDecayRateCode::
   RadioactiveEventRelativeDecayRateCode (value v)
@@ -19834,12 +17506,6 @@ namespace oo_2_0
   // 
 
   RadioactiveMaterielTypeCategoryCode::
-  RadioactiveMaterielTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  RadioactiveMaterielTypeCategoryCode::
   RadioactiveMaterielTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_RadioactiveMaterielTypeCategoryCode_literals_[v])
   {
@@ -19883,12 +17549,6 @@ namespace oo_2_0
 
   // RadioactiveMaterielTypePrimaryRadiationCode
   // 
-
-  RadioactiveMaterielTypePrimaryRadiationCode::
-  RadioactiveMaterielTypePrimaryRadiationCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   RadioactiveMaterielTypePrimaryRadiationCode::
   RadioactiveMaterielTypePrimaryRadiationCode (value v)
@@ -19936,12 +17596,6 @@ namespace oo_2_0
   // 
 
   RailcarTypeCategoryCode::
-  RailcarTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  RailcarTypeCategoryCode::
   RailcarTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_RailcarTypeCategoryCode_literals_[v])
   {
@@ -19985,12 +17639,6 @@ namespace oo_2_0
 
   // RailcarTypeSubcategoryCode
   // 
-
-  RailcarTypeSubcategoryCode::
-  RailcarTypeSubcategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   RailcarTypeSubcategoryCode::
   RailcarTypeSubcategoryCode (value v)
@@ -20038,12 +17686,6 @@ namespace oo_2_0
   // 
 
   RailwaySignalSystemCode::
-  RailwaySignalSystemCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  RailwaySignalSystemCode::
   RailwaySignalSystemCode (value v)
   : ::xml_schema::token (_xsd_RailwaySignalSystemCode_literals_[v])
   {
@@ -20087,12 +17729,6 @@ namespace oo_2_0
 
   // RailwaySignalSystemEfficiencyCode
   // 
-
-  RailwaySignalSystemEfficiencyCode::
-  RailwaySignalSystemEfficiencyCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   RailwaySignalSystemEfficiencyCode::
   RailwaySignalSystemEfficiencyCode (value v)
@@ -20140,12 +17776,6 @@ namespace oo_2_0
   // 
 
   RailwayTrackGaugeCode::
-  RailwayTrackGaugeCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  RailwayTrackGaugeCode::
   RailwayTrackGaugeCode (value v)
   : ::xml_schema::token (_xsd_RailwayTrackGaugeCode_literals_[v])
   {
@@ -20189,12 +17819,6 @@ namespace oo_2_0
 
   // RailwayTractionSystemCode
   // 
-
-  RailwayTractionSystemCode::
-  RailwayTractionSystemCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   RailwayTractionSystemCode::
   RailwayTractionSystemCode (value v)
@@ -20242,12 +17866,6 @@ namespace oo_2_0
   // 
 
   ReferenceAssociationCategoryCode::
-  ReferenceAssociationCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ReferenceAssociationCategoryCode::
   ReferenceAssociationCategoryCode (value v)
   : ::xml_schema::token (_xsd_ReferenceAssociationCategoryCode_literals_[v])
   {
@@ -20291,12 +17909,6 @@ namespace oo_2_0
 
   // ReferenceContentCategoryCode
   // 
-
-  ReferenceContentCategoryCode::
-  ReferenceContentCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ReferenceContentCategoryCode::
   ReferenceContentCategoryCode (value v)
@@ -20344,12 +17956,6 @@ namespace oo_2_0
   // 
 
   ReferenceLifecycleCode::
-  ReferenceLifecycleCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ReferenceLifecycleCode::
   ReferenceLifecycleCode (value v)
   : ::xml_schema::token (_xsd_ReferenceLifecycleCode_literals_[v])
   {
@@ -20393,12 +17999,6 @@ namespace oo_2_0
 
   // ReferenceMediumTypeCode
   // 
-
-  ReferenceMediumTypeCode::
-  ReferenceMediumTypeCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ReferenceMediumTypeCode::
   ReferenceMediumTypeCode (value v)
@@ -20446,12 +18046,6 @@ namespace oo_2_0
   // 
 
   ReferenceTransmittalTypeCode::
-  ReferenceTransmittalTypeCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ReferenceTransmittalTypeCode::
   ReferenceTransmittalTypeCode (value v)
   : ::xml_schema::token (_xsd_ReferenceTransmittalTypeCode_literals_[v])
   {
@@ -20495,12 +18089,6 @@ namespace oo_2_0
 
   // ReferenceVerificationCode
   // 
-
-  ReferenceVerificationCode::
-  ReferenceVerificationCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ReferenceVerificationCode::
   ReferenceVerificationCode (value v)
@@ -20548,12 +18136,6 @@ namespace oo_2_0
   // 
 
   RelativeCoordinateSystemReferenceCategoryCode::
-  RelativeCoordinateSystemReferenceCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  RelativeCoordinateSystemReferenceCategoryCode::
   RelativeCoordinateSystemReferenceCategoryCode (value v)
   : ::xml_schema::token (_xsd_RelativeCoordinateSystemReferenceCategoryCode_literals_[v])
   {
@@ -20597,12 +18179,6 @@ namespace oo_2_0
 
   // ReleaseCategoryCode
   // 
-
-  ReleaseCategoryCode::
-  ReleaseCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ReleaseCategoryCode::
   ReleaseCategoryCode (value v)
@@ -20650,12 +18226,6 @@ namespace oo_2_0
   // 
 
   ReportingDataAccuracyCode::
-  ReportingDataAccuracyCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ReportingDataAccuracyCode::
   ReportingDataAccuracyCode (value v)
   : ::xml_schema::token (_xsd_ReportingDataAccuracyCode_literals_[v])
   {
@@ -20699,12 +18269,6 @@ namespace oo_2_0
 
   // ReportingDataCategoryCode
   // 
-
-  ReportingDataCategoryCode::
-  ReportingDataCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ReportingDataCategoryCode::
   ReportingDataCategoryCode (value v)
@@ -20752,12 +18316,6 @@ namespace oo_2_0
   // 
 
   ReportingDataCountingIndicatorCode::
-  ReportingDataCountingIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ReportingDataCountingIndicatorCode::
   ReportingDataCountingIndicatorCode (value v)
   : ::xml_schema::token (_xsd_ReportingDataCountingIndicatorCode_literals_[v])
   {
@@ -20801,12 +18359,6 @@ namespace oo_2_0
 
   // ReportingDataCredibilityCode
   // 
-
-  ReportingDataCredibilityCode::
-  ReportingDataCredibilityCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ReportingDataCredibilityCode::
   ReportingDataCredibilityCode (value v)
@@ -20854,12 +18406,6 @@ namespace oo_2_0
   // 
 
   ReportingDataEntityCategoryCode::
-  ReportingDataEntityCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ReportingDataEntityCategoryCode::
   ReportingDataEntityCategoryCode (value v)
   : ::xml_schema::token (_xsd_ReportingDataEntityCategoryCode_literals_[v])
   {
@@ -20903,12 +18449,6 @@ namespace oo_2_0
 
   // ReportingDataRealDataExerciseUseOnlyCode
   // 
-
-  ReportingDataRealDataExerciseUseOnlyCode::
-  ReportingDataRealDataExerciseUseOnlyCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ReportingDataRealDataExerciseUseOnlyCode::
   ReportingDataRealDataExerciseUseOnlyCode (value v)
@@ -20956,12 +18496,6 @@ namespace oo_2_0
   // 
 
   ReportingDataReliabilityCode::
-  ReportingDataReliabilityCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ReportingDataReliabilityCode::
   ReportingDataReliabilityCode (value v)
   : ::xml_schema::token (_xsd_ReportingDataReliabilityCode_literals_[v])
   {
@@ -21005,12 +18539,6 @@ namespace oo_2_0
 
   // ReportingDataSourceTypeCode
   // 
-
-  ReportingDataSourceTypeCode::
-  ReportingDataSourceTypeCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   ReportingDataSourceTypeCode::
   ReportingDataSourceTypeCode (value v)
@@ -21058,12 +18586,6 @@ namespace oo_2_0
   // 
 
   ReportingDataTimingCategoryCode::
-  ReportingDataTimingCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  ReportingDataTimingCategoryCode::
   ReportingDataTimingCategoryCode (value v)
   : ::xml_schema::token (_xsd_ReportingDataTimingCategoryCode_literals_[v])
   {
@@ -21107,12 +18629,6 @@ namespace oo_2_0
 
   // RequestAnswerCategoryCode
   // 
-
-  RequestAnswerCategoryCode::
-  RequestAnswerCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   RequestAnswerCategoryCode::
   RequestAnswerCategoryCode (value v)
@@ -21160,12 +18676,6 @@ namespace oo_2_0
   // 
 
   RequestCategoryCode::
-  RequestCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  RequestCategoryCode::
   RequestCategoryCode (value v)
   : ::xml_schema::token (_xsd_RequestCategoryCode_literals_[v])
   {
@@ -21209,12 +18719,6 @@ namespace oo_2_0
 
   // RequestImmediateInterestIndicatorCode
   // 
-
-  RequestImmediateInterestIndicatorCode::
-  RequestImmediateInterestIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   RequestImmediateInterestIndicatorCode::
   RequestImmediateInterestIndicatorCode (value v)
@@ -21262,12 +18766,6 @@ namespace oo_2_0
   // 
 
   RoadCategoryCode::
-  RoadCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  RoadCategoryCode::
   RoadCategoryCode (value v)
   : ::xml_schema::token (_xsd_RoadCategoryCode_literals_[v])
   {
@@ -21311,12 +18809,6 @@ namespace oo_2_0
 
   // RoadQualityCode
   // 
-
-  RoadQualityCode::
-  RoadQualityCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   RoadQualityCode::
   RoadQualityCode (value v)
@@ -21364,12 +18856,6 @@ namespace oo_2_0
   // 
 
   RoadShoulderWidthCode::
-  RoadShoulderWidthCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  RoadShoulderWidthCode::
   RoadShoulderWidthCode (value v)
   : ::xml_schema::token (_xsd_RoadShoulderWidthCode_literals_[v])
   {
@@ -21413,12 +18899,6 @@ namespace oo_2_0
 
   // RoadWeatherConditionCategoryCode
   // 
-
-  RoadWeatherConditionCategoryCode::
-  RoadWeatherConditionCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   RoadWeatherConditionCategoryCode::
   RoadWeatherConditionCategoryCode (value v)
@@ -21466,12 +18946,6 @@ namespace oo_2_0
   // 
 
   RouteDirectionUsageCode::
-  RouteDirectionUsageCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  RouteDirectionUsageCode::
   RouteDirectionUsageCode (value v)
   : ::xml_schema::token (_xsd_RouteDirectionUsageCode_literals_[v])
   {
@@ -21515,12 +18989,6 @@ namespace oo_2_0
 
   // RouteSegmentCategoryCode
   // 
-
-  RouteSegmentCategoryCode::
-  RouteSegmentCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   RouteSegmentCategoryCode::
   RouteSegmentCategoryCode (value v)
@@ -21568,12 +19036,6 @@ namespace oo_2_0
   // 
 
   RouteTypeCategoryCode::
-  RouteTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  RouteTypeCategoryCode::
   RouteTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_RouteTypeCategoryCode_literals_[v])
   {
@@ -21617,12 +19079,6 @@ namespace oo_2_0
 
   // RunwayLightingPresenceIndicatorCode
   // 
-
-  RunwayLightingPresenceIndicatorCode::
-  RunwayLightingPresenceIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   RunwayLightingPresenceIndicatorCode::
   RunwayLightingPresenceIndicatorCode (value v)
@@ -21670,12 +19126,6 @@ namespace oo_2_0
   // 
 
   RunwayPavementEvaluationMethodCode::
-  RunwayPavementEvaluationMethodCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  RunwayPavementEvaluationMethodCode::
   RunwayPavementEvaluationMethodCode (value v)
   : ::xml_schema::token (_xsd_RunwayPavementEvaluationMethodCode_literals_[v])
   {
@@ -21719,12 +19169,6 @@ namespace oo_2_0
 
   // RunwayPavementMaximumTyrePressureCode
   // 
-
-  RunwayPavementMaximumTyrePressureCode::
-  RunwayPavementMaximumTyrePressureCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   RunwayPavementMaximumTyrePressureCode::
   RunwayPavementMaximumTyrePressureCode (value v)
@@ -21772,12 +19216,6 @@ namespace oo_2_0
   // 
 
   RunwayPavementSubgradeCategoryCode::
-  RunwayPavementSubgradeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  RunwayPavementSubgradeCategoryCode::
   RunwayPavementSubgradeCategoryCode (value v)
   : ::xml_schema::token (_xsd_RunwayPavementSubgradeCategoryCode_literals_[v])
   {
@@ -21821,12 +19259,6 @@ namespace oo_2_0
 
   // RunwayPavementTypeCode
   // 
-
-  RunwayPavementTypeCode::
-  RunwayPavementTypeCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   RunwayPavementTypeCode::
   RunwayPavementTypeCode (value v)
@@ -21874,12 +19306,6 @@ namespace oo_2_0
   // 
 
   SecurityClassificationLevelCode::
-  SecurityClassificationLevelCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  SecurityClassificationLevelCode::
   SecurityClassificationLevelCode (value v)
   : ::xml_schema::token (_xsd_SecurityClassificationLevelCode_literals_[v])
   {
@@ -21923,12 +19349,6 @@ namespace oo_2_0
 
   // SolidSurfaceStatusCode
   // 
-
-  SolidSurfaceStatusCode::
-  SolidSurfaceStatusCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   SolidSurfaceStatusCode::
   SolidSurfaceStatusCode (value v)
@@ -21976,12 +19396,6 @@ namespace oo_2_0
   // 
 
   SolidSurfaceStatusSurfaceConditionCode::
-  SolidSurfaceStatusSurfaceConditionCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  SolidSurfaceStatusSurfaceConditionCode::
   SolidSurfaceStatusSurfaceConditionCode (value v)
   : ::xml_schema::token (_xsd_SolidSurfaceStatusSurfaceConditionCode_literals_[v])
   {
@@ -22025,12 +19439,6 @@ namespace oo_2_0
 
   // SolidSurfaceStatusSurfaceFirmnessCode
   // 
-
-  SolidSurfaceStatusSurfaceFirmnessCode::
-  SolidSurfaceStatusSurfaceFirmnessCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   SolidSurfaceStatusSurfaceFirmnessCode::
   SolidSurfaceStatusSurfaceFirmnessCode (value v)
@@ -22078,12 +19486,6 @@ namespace oo_2_0
   // 
 
   SpeedPrecisionCode::
-  SpeedPrecisionCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  SpeedPrecisionCode::
   SpeedPrecisionCode (value v)
   : ::xml_schema::token (_xsd_SpeedPrecisionCode_literals_[v])
   {
@@ -22127,12 +19529,6 @@ namespace oo_2_0
 
   // StorageCapabilityConditionCode
   // 
-
-  StorageCapabilityConditionCode::
-  StorageCapabilityConditionCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   StorageCapabilityConditionCode::
   StorageCapabilityConditionCode (value v)
@@ -22180,12 +19576,6 @@ namespace oo_2_0
   // 
 
   StorageCapabilityDescriptorCode::
-  StorageCapabilityDescriptorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  StorageCapabilityDescriptorCode::
   StorageCapabilityDescriptorCode (value v)
   : ::xml_schema::token (_xsd_StorageCapabilityDescriptorCode_literals_[v])
   {
@@ -22229,12 +19619,6 @@ namespace oo_2_0
 
   // SubsurfaceVesselTypeCategoryCode
   // 
-
-  SubsurfaceVesselTypeCategoryCode::
-  SubsurfaceVesselTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   SubsurfaceVesselTypeCategoryCode::
   SubsurfaceVesselTypeCategoryCode (value v)
@@ -22282,12 +19666,6 @@ namespace oo_2_0
   // 
 
   SubsurfaceVesselTypeTorpedoLoadingGearIndicatorCode::
-  SubsurfaceVesselTypeTorpedoLoadingGearIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  SubsurfaceVesselTypeTorpedoLoadingGearIndicatorCode::
   SubsurfaceVesselTypeTorpedoLoadingGearIndicatorCode (value v)
   : ::xml_schema::token (_xsd_SubsurfaceVesselTypeTorpedoLoadingGearIndicatorCode_literals_[v])
   {
@@ -22331,12 +19709,6 @@ namespace oo_2_0
 
   // SupportCapabilityCategoryCode
   // 
-
-  SupportCapabilityCategoryCode::
-  SupportCapabilityCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   SupportCapabilityCategoryCode::
   SupportCapabilityCategoryCode (value v)
@@ -22384,12 +19756,6 @@ namespace oo_2_0
   // 
 
   SupportCapabilityDescriptorCode::
-  SupportCapabilityDescriptorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  SupportCapabilityDescriptorCode::
   SupportCapabilityDescriptorCode (value v)
   : ::xml_schema::token (_xsd_SupportCapabilityDescriptorCode_literals_[v])
   {
@@ -22433,12 +19799,6 @@ namespace oo_2_0
 
   // SurfaceCategoryCode
   // 
-
-  SurfaceCategoryCode::
-  SurfaceCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   SurfaceCategoryCode::
   SurfaceCategoryCode (value v)
@@ -22486,12 +19846,6 @@ namespace oo_2_0
   // 
 
   SurfaceVesselTypeCategoryCode::
-  SurfaceVesselTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  SurfaceVesselTypeCategoryCode::
   SurfaceVesselTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_SurfaceVesselTypeCategoryCode_literals_[v])
   {
@@ -22535,12 +19889,6 @@ namespace oo_2_0
 
   // SurveillanceCapabilityCategoryCode
   // 
-
-  SurveillanceCapabilityCategoryCode::
-  SurveillanceCapabilityCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   SurveillanceCapabilityCategoryCode::
   SurveillanceCapabilityCategoryCode (value v)
@@ -22588,12 +19936,6 @@ namespace oo_2_0
   // 
 
   SurveillanceCapabilityDescriptorCode::
-  SurveillanceCapabilityDescriptorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  SurveillanceCapabilityDescriptorCode::
   SurveillanceCapabilityDescriptorCode (value v)
   : ::xml_schema::token (_xsd_SurveillanceCapabilityDescriptorCode_literals_[v])
   {
@@ -22637,12 +19979,6 @@ namespace oo_2_0
 
   // TargetEngagementAuthorityCode
   // 
-
-  TargetEngagementAuthorityCode::
-  TargetEngagementAuthorityCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   TargetEngagementAuthorityCode::
   TargetEngagementAuthorityCode (value v)
@@ -22690,12 +20026,6 @@ namespace oo_2_0
   // 
 
   TargetPersonnelProtectionCategoryCode::
-  TargetPersonnelProtectionCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  TargetPersonnelProtectionCategoryCode::
   TargetPersonnelProtectionCategoryCode (value v)
   : ::xml_schema::token (_xsd_TargetPersonnelProtectionCategoryCode_literals_[v])
   {
@@ -22739,12 +20069,6 @@ namespace oo_2_0
 
   // TaskFormationTypeCategoryCode
   // 
-
-  TaskFormationTypeCategoryCode::
-  TaskFormationTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   TaskFormationTypeCategoryCode::
   TaskFormationTypeCategoryCode (value v)
@@ -22792,12 +20116,6 @@ namespace oo_2_0
   // 
 
   TransmissionCapabilityCategoryCode::
-  TransmissionCapabilityCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  TransmissionCapabilityCategoryCode::
   TransmissionCapabilityCategoryCode (value v)
   : ::xml_schema::token (_xsd_TransmissionCapabilityCategoryCode_literals_[v])
   {
@@ -22841,12 +20159,6 @@ namespace oo_2_0
 
   // TransmissionCapabilityDescriptorCode
   // 
-
-  TransmissionCapabilityDescriptorCode::
-  TransmissionCapabilityDescriptorCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   TransmissionCapabilityDescriptorCode::
   TransmissionCapabilityDescriptorCode (value v)
@@ -22894,12 +20206,6 @@ namespace oo_2_0
   // 
 
   UnitTypeArmCategoryCode::
-  UnitTypeArmCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  UnitTypeArmCategoryCode::
   UnitTypeArmCategoryCode (value v)
   : ::xml_schema::token (_xsd_UnitTypeArmCategoryCode_literals_[v])
   {
@@ -22943,12 +20249,6 @@ namespace oo_2_0
 
   // UnitTypeArmSpecialisationCode
   // 
-
-  UnitTypeArmSpecialisationCode::
-  UnitTypeArmSpecialisationCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   UnitTypeArmSpecialisationCode::
   UnitTypeArmSpecialisationCode (value v)
@@ -22996,12 +20296,6 @@ namespace oo_2_0
   // 
 
   UnitTypeCategoryCode::
-  UnitTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  UnitTypeCategoryCode::
   UnitTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_UnitTypeCategoryCode_literals_[v])
   {
@@ -23045,12 +20339,6 @@ namespace oo_2_0
 
   // UnitTypeGeneralMobilityCode
   // 
-
-  UnitTypeGeneralMobilityCode::
-  UnitTypeGeneralMobilityCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   UnitTypeGeneralMobilityCode::
   UnitTypeGeneralMobilityCode (value v)
@@ -23098,12 +20386,6 @@ namespace oo_2_0
   // 
 
   UnitTypeQualifierCode::
-  UnitTypeQualifierCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  UnitTypeQualifierCode::
   UnitTypeQualifierCode (value v)
   : ::xml_schema::token (_xsd_UnitTypeQualifierCode_literals_[v])
   {
@@ -23147,12 +20429,6 @@ namespace oo_2_0
 
   // UnitTypeSizeCode
   // 
-
-  UnitTypeSizeCode::
-  UnitTypeSizeCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   UnitTypeSizeCode::
   UnitTypeSizeCode (value v)
@@ -23200,12 +20476,6 @@ namespace oo_2_0
   // 
 
   UnitTypeSupplementarySpecialisationCode::
-  UnitTypeSupplementarySpecialisationCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  UnitTypeSupplementarySpecialisationCode::
   UnitTypeSupplementarySpecialisationCode (value v)
   : ::xml_schema::token (_xsd_UnitTypeSupplementarySpecialisationCode_literals_[v])
   {
@@ -23249,12 +20519,6 @@ namespace oo_2_0
 
   // UsageStatusCode
   // 
-
-  UsageStatusCode::
-  UsageStatusCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   UsageStatusCode::
   UsageStatusCode (value v)
@@ -23302,12 +20566,6 @@ namespace oo_2_0
   // 
 
   UxoStatusExposureCode::
-  UxoStatusExposureCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  UxoStatusExposureCode::
   UxoStatusExposureCode (value v)
   : ::xml_schema::token (_xsd_UxoStatusExposureCode_literals_[v])
   {
@@ -23351,12 +20609,6 @@ namespace oo_2_0
 
   // UxoStatusQualifierCode
   // 
-
-  UxoStatusQualifierCode::
-  UxoStatusQualifierCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   UxoStatusQualifierCode::
   UxoStatusQualifierCode (value v)
@@ -23404,12 +20656,6 @@ namespace oo_2_0
   // 
 
   VegetationCategoryCode::
-  VegetationCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  VegetationCategoryCode::
   VegetationCategoryCode (value v)
   : ::xml_schema::token (_xsd_VegetationCategoryCode_literals_[v])
   {
@@ -23453,12 +20699,6 @@ namespace oo_2_0
 
   // VegetationSubcategoryCode
   // 
-
-  VegetationSubcategoryCode::
-  VegetationSubcategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   VegetationSubcategoryCode::
   VegetationSubcategoryCode (value v)
@@ -23506,12 +20746,6 @@ namespace oo_2_0
   // 
 
   VehicleTypeCategoryCode::
-  VehicleTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  VehicleTypeCategoryCode::
   VehicleTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_VehicleTypeCategoryCode_literals_[v])
   {
@@ -23555,12 +20789,6 @@ namespace oo_2_0
 
   // VerticalDistanceReferenceCode
   // 
-
-  VerticalDistanceReferenceCode::
-  VerticalDistanceReferenceCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   VerticalDistanceReferenceCode::
   VerticalDistanceReferenceCode (value v)
@@ -23608,12 +20836,6 @@ namespace oo_2_0
   // 
 
   VesselTypeCategoryCode::
-  VesselTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  VesselTypeCategoryCode::
   VesselTypeCategoryCode (value v)
   : ::xml_schema::token (_xsd_VesselTypeCategoryCode_literals_[v])
   {
@@ -23657,12 +20879,6 @@ namespace oo_2_0
 
   // VesselTypePropulsionTypeCode
   // 
-
-  VesselTypePropulsionTypeCode::
-  VesselTypePropulsionTypeCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   VesselTypePropulsionTypeCode::
   VesselTypePropulsionTypeCode (value v)
@@ -23710,12 +20926,6 @@ namespace oo_2_0
   // 
 
   VisibilityCategoryCode::
-  VisibilityCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  VisibilityCategoryCode::
   VisibilityCategoryCode (value v)
   : ::xml_schema::token (_xsd_VisibilityCategoryCode_literals_[v])
   {
@@ -23759,12 +20969,6 @@ namespace oo_2_0
 
   // WeaponTypeCategoryCode
   // 
-
-  WeaponTypeCategoryCode::
-  WeaponTypeCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   WeaponTypeCategoryCode::
   WeaponTypeCategoryCode (value v)
@@ -23812,12 +21016,6 @@ namespace oo_2_0
   // 
 
   WeaponTypeFireGuidanceIndicatorCode::
-  WeaponTypeFireGuidanceIndicatorCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  WeaponTypeFireGuidanceIndicatorCode::
   WeaponTypeFireGuidanceIndicatorCode (value v)
   : ::xml_schema::token (_xsd_WeaponTypeFireGuidanceIndicatorCode_literals_[v])
   {
@@ -23861,12 +21059,6 @@ namespace oo_2_0
 
   // WeaponTypeSubcategoryCode
   // 
-
-  WeaponTypeSubcategoryCode::
-  WeaponTypeSubcategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   WeaponTypeSubcategoryCode::
   WeaponTypeSubcategoryCode (value v)
@@ -23914,12 +21106,6 @@ namespace oo_2_0
   // 
 
   WindAirStabilityCategoryCode::
-  WindAirStabilityCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  WindAirStabilityCategoryCode::
   WindAirStabilityCategoryCode (value v)
   : ::xml_schema::token (_xsd_WindAirStabilityCategoryCode_literals_[v])
   {
@@ -23963,12 +21149,6 @@ namespace oo_2_0
 
   // WindAltitudeLayerCode
   // 
-
-  WindAltitudeLayerCode::
-  WindAltitudeLayerCode ()
-  : ::xml_schema::token ()
-  {
-  }
 
   WindAltitudeLayerCode::
   WindAltitudeLayerCode (value v)
@@ -24016,12 +21196,6 @@ namespace oo_2_0
   // 
 
   WindCategoryCode::
-  WindCategoryCode ()
-  : ::xml_schema::token ()
-  {
-  }
-
-  WindCategoryCode::
   WindCategoryCode (value v)
   : ::xml_schema::token (_xsd_WindCategoryCode_literals_[v])
   {
@@ -24067,17 +21241,11 @@ namespace oo_2_0
 
 #include <xsd/cxx/tree/type-factory-map.hxx>
 
-#include <xsd/cxx/tree/comparison-map.hxx>
-
 namespace _xsd
 {
   static
   const ::xsd::cxx::tree::type_factory_plate< 0, char >
   type_factory_plate_init;
-
-  static
-  const ::xsd::cxx::tree::comparison_plate< 0, char >
-  comparison_plate_init;
 }
 
 namespace oo_2_0
@@ -24158,10 +21326,6 @@ namespace oo_2_0
     "AbsolutePointCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AbsolutePointCategoryCode >
-  _xsd_AbsolutePointCategoryCode_comparison_init;
-
   // ActionAircraftEmploymentApproachOffsetCode
   //
 
@@ -24240,10 +21404,6 @@ namespace oo_2_0
     "ActionAircraftEmploymentApproachOffsetCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionAircraftEmploymentApproachOffsetCode >
-  _xsd_ActionAircraftEmploymentApproachOffsetCode_comparison_init;
-
   // ActionAircraftEmploymentCrewCompositionCode
   //
 
@@ -24321,10 +21481,6 @@ namespace oo_2_0
   _xsd_ActionAircraftEmploymentCrewCompositionCode_type_factory_init (
     "ActionAircraftEmploymentCrewCompositionCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionAircraftEmploymentCrewCompositionCode >
-  _xsd_ActionAircraftEmploymentCrewCompositionCode_comparison_init;
 
   // ActionAircraftEmploymentDeplanementMethodCode
   //
@@ -24424,10 +21580,6 @@ namespace oo_2_0
     "ActionAircraftEmploymentDeplanementMethodCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionAircraftEmploymentDeplanementMethodCode >
-  _xsd_ActionAircraftEmploymentDeplanementMethodCode_comparison_init;
-
   // ActionAircraftEmploymentGeneralRoleCode
   //
 
@@ -24512,10 +21664,6 @@ namespace oo_2_0
     "ActionAircraftEmploymentGeneralRoleCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionAircraftEmploymentGeneralRoleCode >
-  _xsd_ActionAircraftEmploymentGeneralRoleCode_comparison_init;
-
   // ActionAircraftEmploymentInflightReportRequirementIndicatorCode
   //
 
@@ -24592,10 +21740,6 @@ namespace oo_2_0
     "ActionAircraftEmploymentInflightReportRequirementIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionAircraftEmploymentInflightReportRequirementIndicatorCode >
-  _xsd_ActionAircraftEmploymentInflightReportRequirementIndicatorCode_comparison_init;
-
   // ActionCategoryCode
   //
 
@@ -24671,10 +21815,6 @@ namespace oo_2_0
   _xsd_ActionCategoryCode_type_factory_init (
     "ActionCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionCategoryCode >
-  _xsd_ActionCategoryCode_comparison_init;
 
   // ActionContextCategoryCode
   //
@@ -24768,10 +21908,6 @@ namespace oo_2_0
     "ActionContextCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionContextCategoryCode >
-  _xsd_ActionContextCategoryCode_comparison_init;
-
   // ActionEffectCategoryCode
   //
 
@@ -24847,10 +21983,6 @@ namespace oo_2_0
   _xsd_ActionEffectCategoryCode_type_factory_init (
     "ActionEffectCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionEffectCategoryCode >
-  _xsd_ActionEffectCategoryCode_comparison_init;
 
   // ActionEffectDescriptionCode
   //
@@ -24974,10 +22106,6 @@ namespace oo_2_0
     "ActionEffectDescriptionCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionEffectDescriptionCode >
-  _xsd_ActionEffectDescriptionCode_comparison_init;
-
   // ActionEffectSeverityCode
   //
 
@@ -25059,10 +22187,6 @@ namespace oo_2_0
   _xsd_ActionEffectSeverityCode_type_factory_init (
     "ActionEffectSeverityCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionEffectSeverityCode >
-  _xsd_ActionEffectSeverityCode_comparison_init;
 
   // ActionElectronicWarfareEmploymentCategoryCode
   //
@@ -25211,10 +22335,6 @@ namespace oo_2_0
   _xsd_ActionElectronicWarfareEmploymentCategoryCode_type_factory_init (
     "ActionElectronicWarfareEmploymentCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionElectronicWarfareEmploymentCategoryCode >
-  _xsd_ActionElectronicWarfareEmploymentCategoryCode_comparison_init;
 
   // ActionEventCategoryCode
   //
@@ -25982,10 +23102,6 @@ namespace oo_2_0
     "ActionEventCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionEventCategoryCode >
-  _xsd_ActionEventCategoryCode_comparison_init;
-
   // ActionEventDetailClassificationCode
   //
 
@@ -26078,10 +23194,6 @@ namespace oo_2_0
     "ActionEventDetailClassificationCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionEventDetailClassificationCode >
-  _xsd_ActionEventDetailClassificationCode_comparison_init;
-
   // ActionEventDetailCrimeIndicatorCode
   //
 
@@ -26157,10 +23269,6 @@ namespace oo_2_0
   _xsd_ActionEventDetailCrimeIndicatorCode_type_factory_init (
     "ActionEventDetailCrimeIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionEventDetailCrimeIndicatorCode >
-  _xsd_ActionEventDetailCrimeIndicatorCode_comparison_init;
 
   // ActionFunctionalAssociationCategoryCode
   //
@@ -26256,10 +23364,6 @@ namespace oo_2_0
     "ActionFunctionalAssociationCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionFunctionalAssociationCategoryCode >
-  _xsd_ActionFunctionalAssociationCategoryCode_comparison_init;
-
   // ActionMaritimeEmploymentCoordinatedAirSeaProcedureCode
   //
 
@@ -26340,10 +23444,6 @@ namespace oo_2_0
     "ActionMaritimeEmploymentCoordinatedAirSeaProcedureCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionMaritimeEmploymentCoordinatedAirSeaProcedureCode >
-  _xsd_ActionMaritimeEmploymentCoordinatedAirSeaProcedureCode_comparison_init;
-
   // ActionMaritimeEmploymentVesselTransitInstructionCode
   //
 
@@ -26421,10 +23521,6 @@ namespace oo_2_0
   _xsd_ActionMaritimeEmploymentVesselTransitInstructionCode_type_factory_init (
     "ActionMaritimeEmploymentVesselTransitInstructionCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionMaritimeEmploymentVesselTransitInstructionCode >
-  _xsd_ActionMaritimeEmploymentVesselTransitInstructionCode_comparison_init;
 
   // ActionObjectiveCategoryCode
   //
@@ -26504,10 +23600,6 @@ namespace oo_2_0
     "ActionObjectiveCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionObjectiveCategoryCode >
-  _xsd_ActionObjectiveCategoryCode_comparison_init;
-
   // ActionObjectiveItemCategoryCode
   //
 
@@ -26583,10 +23675,6 @@ namespace oo_2_0
   _xsd_ActionObjectiveItemCategoryCode_type_factory_init (
     "ActionObjectiveItemCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionObjectiveItemCategoryCode >
-  _xsd_ActionObjectiveItemCategoryCode_comparison_init;
 
   // ActionObjectiveItemMarkingMethodCode
   //
@@ -26688,10 +23776,6 @@ namespace oo_2_0
     "ActionObjectiveItemMarkingMethodCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionObjectiveItemMarkingMethodCode >
-  _xsd_ActionObjectiveItemMarkingMethodCode_comparison_init;
-
   // ActionObjectiveItemMarkingPanelShapeCode
   //
 
@@ -26775,10 +23859,6 @@ namespace oo_2_0
   _xsd_ActionObjectiveItemMarkingPanelShapeCode_type_factory_init (
     "ActionObjectiveItemMarkingPanelShapeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionObjectiveItemMarkingPanelShapeCode >
-  _xsd_ActionObjectiveItemMarkingPanelShapeCode_comparison_init;
 
   // ActionObjectiveItemMarkingRecognitionSignalColourCode
   //
@@ -26870,10 +23950,6 @@ namespace oo_2_0
     "ActionObjectiveItemMarkingRecognitionSignalColourCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionObjectiveItemMarkingRecognitionSignalColourCode >
-  _xsd_ActionObjectiveItemMarkingRecognitionSignalColourCode_comparison_init;
-
   // ActionObjectiveItemPrimacyCode
   //
 
@@ -26951,10 +24027,6 @@ namespace oo_2_0
   _xsd_ActionObjectiveItemPrimacyCode_type_factory_init (
     "ActionObjectiveItemPrimacyCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionObjectiveItemPrimacyCode >
-  _xsd_ActionObjectiveItemPrimacyCode_comparison_init;
 
   // ActionObjectiveQualifierCode
   //
@@ -27050,10 +24122,6 @@ namespace oo_2_0
     "ActionObjectiveQualifierCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionObjectiveQualifierCode >
-  _xsd_ActionObjectiveQualifierCode_comparison_init;
-
   // ActionObjectiveTypeCategoryCode
   //
 
@@ -27129,10 +24197,6 @@ namespace oo_2_0
   _xsd_ActionObjectiveTypeCategoryCode_type_factory_init (
     "ActionObjectiveTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionObjectiveTypeCategoryCode >
-  _xsd_ActionObjectiveTypeCategoryCode_comparison_init;
 
   // ActionObjectiveTypeImageryProductImageTypeCode
   //
@@ -27238,10 +24302,6 @@ namespace oo_2_0
     "ActionObjectiveTypeImageryProductImageTypeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionObjectiveTypeImageryProductImageTypeCode >
-  _xsd_ActionObjectiveTypeImageryProductImageTypeCode_comparison_init;
-
   // ActionReconnaissanceEmploymentImageCoverageModeCode
   //
 
@@ -27325,10 +24385,6 @@ namespace oo_2_0
   _xsd_ActionReconnaissanceEmploymentImageCoverageModeCode_type_factory_init (
     "ActionReconnaissanceEmploymentImageCoverageModeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionReconnaissanceEmploymentImageCoverageModeCode >
-  _xsd_ActionReconnaissanceEmploymentImageCoverageModeCode_comparison_init;
 
   // ActionReconnaissanceEmploymentImageViewQualifierCode
   //
@@ -27415,10 +24471,6 @@ namespace oo_2_0
   _xsd_ActionReconnaissanceEmploymentImageViewQualifierCode_type_factory_init (
     "ActionReconnaissanceEmploymentImageViewQualifierCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionReconnaissanceEmploymentImageViewQualifierCode >
-  _xsd_ActionReconnaissanceEmploymentImageViewQualifierCode_comparison_init;
 
   // ActionReconnaissanceEmploymentTypeOfCoverageCode
   //
@@ -27542,10 +24594,6 @@ namespace oo_2_0
     "ActionReconnaissanceEmploymentTypeOfCoverageCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionReconnaissanceEmploymentTypeOfCoverageCode >
-  _xsd_ActionReconnaissanceEmploymentTypeOfCoverageCode_comparison_init;
-
   // ActionReferenceAssociationCategoryCode
   //
 
@@ -27636,10 +24684,6 @@ namespace oo_2_0
     "ActionReferenceAssociationCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionReferenceAssociationCategoryCode >
-  _xsd_ActionReferenceAssociationCategoryCode_comparison_init;
-
   // ActionResourceCategoryCode
   //
 
@@ -27716,10 +24760,6 @@ namespace oo_2_0
     "ActionResourceCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionResourceCategoryCode >
-  _xsd_ActionResourceCategoryCode_comparison_init;
-
   // ActionResourceCriticalityIndicatorCode
   //
 
@@ -27795,10 +24835,6 @@ namespace oo_2_0
   _xsd_ActionResourceCriticalityIndicatorCode_type_factory_init (
     "ActionResourceCriticalityIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionResourceCriticalityIndicatorCode >
-  _xsd_ActionResourceCriticalityIndicatorCode_comparison_init;
 
   // ActionResourceEmploymentCategoryCode
   //
@@ -27882,10 +24918,6 @@ namespace oo_2_0
     "ActionResourceEmploymentCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionResourceEmploymentCategoryCode >
-  _xsd_ActionResourceEmploymentCategoryCode_comparison_init;
-
   // ActionResourceEmploymentMethodOfControlCode
   //
 
@@ -27962,10 +24994,6 @@ namespace oo_2_0
     "ActionResourceEmploymentMethodOfControlCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionResourceEmploymentMethodOfControlCode >
-  _xsd_ActionResourceEmploymentMethodOfControlCode_comparison_init;
-
   // ActionResourceEmploymentTrajectoryFireCode
   //
 
@@ -28041,10 +25069,6 @@ namespace oo_2_0
   _xsd_ActionResourceEmploymentTrajectoryFireCode_type_factory_init (
     "ActionResourceEmploymentTrajectoryFireCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionResourceEmploymentTrajectoryFireCode >
-  _xsd_ActionResourceEmploymentTrajectoryFireCode_comparison_init;
 
   // ActionResourceQualifierCode
   //
@@ -28141,10 +25165,6 @@ namespace oo_2_0
   _xsd_ActionResourceQualifierCode_type_factory_init (
     "ActionResourceQualifierCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionResourceQualifierCode >
-  _xsd_ActionResourceQualifierCode_comparison_init;
 
   // ActionTaskActivityCode
   //
@@ -29108,10 +26128,6 @@ namespace oo_2_0
     "ActionTaskActivityCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionTaskActivityCode >
-  _xsd_ActionTaskActivityCode_comparison_init;
-
   // ActionTaskCategoryCode
   //
 
@@ -29191,10 +26207,6 @@ namespace oo_2_0
   _xsd_ActionTaskCategoryCode_type_factory_init (
     "ActionTaskCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionTaskCategoryCode >
-  _xsd_ActionTaskCategoryCode_comparison_init;
 
   // ActionTaskEndQualifierCode
   //
@@ -29292,10 +26304,6 @@ namespace oo_2_0
     "ActionTaskEndQualifierCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionTaskEndQualifierCode >
-  _xsd_ActionTaskEndQualifierCode_comparison_init;
-
   // ActionTaskEntailedSafetyDegreeCode
   //
 
@@ -29373,10 +26381,6 @@ namespace oo_2_0
   _xsd_ActionTaskEntailedSafetyDegreeCode_type_factory_init (
     "ActionTaskEntailedSafetyDegreeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionTaskEntailedSafetyDegreeCode >
-  _xsd_ActionTaskEntailedSafetyDegreeCode_comparison_init;
 
   // ActionTaskMeteorologicalImpactCode
   //
@@ -29456,10 +26460,6 @@ namespace oo_2_0
     "ActionTaskMeteorologicalImpactCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionTaskMeteorologicalImpactCode >
-  _xsd_ActionTaskMeteorologicalImpactCode_comparison_init;
-
   // ActionTaskOperationalLevelCode
   //
 
@@ -29536,10 +26536,6 @@ namespace oo_2_0
     "ActionTaskOperationalLevelCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionTaskOperationalLevelCode >
-  _xsd_ActionTaskOperationalLevelCode_comparison_init;
-
   // ActionTaskOvertCovertCode
   //
 
@@ -29615,10 +26611,6 @@ namespace oo_2_0
   _xsd_ActionTaskOvertCovertCode_type_factory_init (
     "ActionTaskOvertCovertCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionTaskOvertCovertCode >
-  _xsd_ActionTaskOvertCovertCode_comparison_init;
 
   // ActionTaskPriorityCode
   //
@@ -29746,10 +26738,6 @@ namespace oo_2_0
     "ActionTaskPriorityCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionTaskPriorityCode >
-  _xsd_ActionTaskPriorityCode_comparison_init;
-
   // ActionTaskStartQualifierCode
   //
 
@@ -29846,10 +26834,6 @@ namespace oo_2_0
     "ActionTaskStartQualifierCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionTaskStartQualifierCode >
-  _xsd_ActionTaskStartQualifierCode_comparison_init;
-
   // ActionTaskStatusAmendTimingCode
   //
 
@@ -29930,10 +26914,6 @@ namespace oo_2_0
     "ActionTaskStatusAmendTimingCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionTaskStatusAmendTimingCode >
-  _xsd_ActionTaskStatusAmendTimingCode_comparison_init;
-
   // ActionTaskStatusApprovalIndicatorCode
   //
 
@@ -30009,10 +26989,6 @@ namespace oo_2_0
   _xsd_ActionTaskStatusApprovalIndicatorCode_type_factory_init (
     "ActionTaskStatusApprovalIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionTaskStatusApprovalIndicatorCode >
-  _xsd_ActionTaskStatusApprovalIndicatorCode_comparison_init;
 
   // ActionTaskStatusCategoryCode
   //
@@ -30090,10 +27066,6 @@ namespace oo_2_0
     "ActionTaskStatusCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionTaskStatusCategoryCode >
-  _xsd_ActionTaskStatusCategoryCode_comparison_init;
-
   // ActionTaskStatusPlanningIndicatorCode
   //
 
@@ -30169,10 +27141,6 @@ namespace oo_2_0
   _xsd_ActionTaskStatusPlanningIndicatorCode_type_factory_init (
     "ActionTaskStatusPlanningIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionTaskStatusPlanningIndicatorCode >
-  _xsd_ActionTaskStatusPlanningIndicatorCode_comparison_init;
 
   // ActionTaskStatusProgressCode
   //
@@ -30286,10 +27254,6 @@ namespace oo_2_0
     "ActionTaskStatusProgressCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionTaskStatusProgressCode >
-  _xsd_ActionTaskStatusProgressCode_comparison_init;
-
   // ActionTaskTimingDayCode
   //
 
@@ -30378,10 +27342,6 @@ namespace oo_2_0
     "ActionTaskTimingDayCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionTaskTimingDayCode >
-  _xsd_ActionTaskTimingDayCode_comparison_init;
-
   // ActionTaskTimingHourCode
   //
 
@@ -30469,10 +27429,6 @@ namespace oo_2_0
   _xsd_ActionTaskTimingHourCode_type_factory_init (
     "ActionTaskTimingHourCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionTaskTimingHourCode >
-  _xsd_ActionTaskTimingHourCode_comparison_init;
 
   // ActionTemporalAssociationCategoryCode
   //
@@ -30582,10 +27538,6 @@ namespace oo_2_0
     "ActionTemporalAssociationCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ActionTemporalAssociationCategoryCode >
-  _xsd_ActionTemporalAssociationCategoryCode_comparison_init;
-
   // AddressCategoryCode
   //
 
@@ -30663,10 +27615,6 @@ namespace oo_2_0
   _xsd_AddressCategoryCode_type_factory_init (
     "AddressCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AddressCategoryCode >
-  _xsd_AddressCategoryCode_comparison_init;
 
   // AffiliationCategoryCode
   //
@@ -30749,10 +27697,6 @@ namespace oo_2_0
   _xsd_AffiliationCategoryCode_type_factory_init (
     "AffiliationCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AffiliationCategoryCode >
-  _xsd_AffiliationCategoryCode_comparison_init;
 
   // AffiliationEthnicGroupCode
   //
@@ -31960,10 +28904,6 @@ namespace oo_2_0
     "AffiliationEthnicGroupCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AffiliationEthnicGroupCode >
-  _xsd_AffiliationEthnicGroupCode_comparison_init;
-
   // AffiliationFunctionalGroupCode
   //
 
@@ -32047,10 +28987,6 @@ namespace oo_2_0
   _xsd_AffiliationFunctionalGroupCode_type_factory_init (
     "AffiliationFunctionalGroupCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AffiliationFunctionalGroupCode >
-  _xsd_AffiliationFunctionalGroupCode_comparison_init;
 
   // AffiliationGeopoliticalCode
   //
@@ -32614,10 +29550,6 @@ namespace oo_2_0
     "AffiliationGeopoliticalCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AffiliationGeopoliticalCode >
-  _xsd_AffiliationGeopoliticalCode_comparison_init;
-
   // AffiliationReligionCode
   //
 
@@ -32916,10 +29848,6 @@ namespace oo_2_0
     "AffiliationReligionCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AffiliationReligionCode >
-  _xsd_AffiliationReligionCode_comparison_init;
-
   // AirRouteSegmentCivilMilitaryCode
   //
 
@@ -32998,10 +29926,6 @@ namespace oo_2_0
     "AirRouteSegmentCivilMilitaryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AirRouteSegmentCivilMilitaryCode >
-  _xsd_AirRouteSegmentCivilMilitaryCode_comparison_init;
-
   // AirRouteSegmentInternationalRouteCode
   //
 
@@ -33077,10 +30001,6 @@ namespace oo_2_0
   _xsd_AirRouteSegmentInternationalRouteCode_type_factory_init (
     "AirRouteSegmentInternationalRouteCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AirRouteSegmentInternationalRouteCode >
-  _xsd_AirRouteSegmentInternationalRouteCode_comparison_init;
 
   // AirRouteSegmentRequiredNavigationPerformanceCode
   //
@@ -33165,10 +30085,6 @@ namespace oo_2_0
   _xsd_AirRouteSegmentRequiredNavigationPerformanceCode_type_factory_init (
     "AirRouteSegmentRequiredNavigationPerformanceCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AirRouteSegmentRequiredNavigationPerformanceCode >
-  _xsd_AirRouteSegmentRequiredNavigationPerformanceCode_comparison_init;
 
   // AircraftTypeAirframeDesignCode
   //
@@ -33264,10 +30180,6 @@ namespace oo_2_0
     "AircraftTypeAirframeDesignCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AircraftTypeAirframeDesignCode >
-  _xsd_AircraftTypeAirframeDesignCode_comparison_init;
-
   // AircraftTypeCategoryCode
   //
 
@@ -33352,10 +30264,6 @@ namespace oo_2_0
     "AircraftTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AircraftTypeCategoryCode >
-  _xsd_AircraftTypeCategoryCode_comparison_init;
-
   // AircraftTypeDesignRangeCode
   //
 
@@ -33435,10 +30343,6 @@ namespace oo_2_0
   _xsd_AircraftTypeDesignRangeCode_type_factory_init (
     "AircraftTypeDesignRangeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AircraftTypeDesignRangeCode >
-  _xsd_AircraftTypeDesignRangeCode_comparison_init;
 
   // AircraftTypeDesignRoleCode
   //
@@ -33524,10 +30428,6 @@ namespace oo_2_0
     "AircraftTypeDesignRoleCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AircraftTypeDesignRoleCode >
-  _xsd_AircraftTypeDesignRoleCode_comparison_init;
-
   // AircraftTypeLoadCategoryCode
   //
 
@@ -33609,10 +30509,6 @@ namespace oo_2_0
   _xsd_AircraftTypeLoadCategoryCode_type_factory_init (
     "AircraftTypeLoadCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AircraftTypeLoadCategoryCode >
-  _xsd_AircraftTypeLoadCategoryCode_comparison_init;
 
   // AircraftTypeMainPurposeCode
   //
@@ -33808,10 +30704,6 @@ namespace oo_2_0
     "AircraftTypeMainPurposeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AircraftTypeMainPurposeCode >
-  _xsd_AircraftTypeMainPurposeCode_comparison_init;
-
   // AircraftTypeManningCode
   //
 
@@ -33894,10 +30786,6 @@ namespace oo_2_0
     "AircraftTypeManningCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AircraftTypeManningCode >
-  _xsd_AircraftTypeManningCode_comparison_init;
-
   // AircraftTypeMilitaryCivilianCode
   //
 
@@ -33975,10 +30863,6 @@ namespace oo_2_0
   _xsd_AircraftTypeMilitaryCivilianCode_type_factory_init (
     "AircraftTypeMilitaryCivilianCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AircraftTypeMilitaryCivilianCode >
-  _xsd_AircraftTypeMilitaryCivilianCode_comparison_init;
 
   // AircraftTypeModelCode
   //
@@ -43568,10 +40452,6 @@ namespace oo_2_0
     "AircraftTypeModelCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AircraftTypeModelCode >
-  _xsd_AircraftTypeModelCode_comparison_init;
-
   // AircraftTypeTakeoffAndLandingCode
   //
 
@@ -43654,10 +40534,6 @@ namespace oo_2_0
     "AircraftTypeTakeoffAndLandingCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AircraftTypeTakeoffAndLandingCode >
-  _xsd_AircraftTypeTakeoffAndLandingCode_comparison_init;
-
   // AircraftTypeTrainingCategoryCode
   //
 
@@ -43735,10 +40611,6 @@ namespace oo_2_0
   _xsd_AircraftTypeTrainingCategoryCode_type_factory_init (
     "AircraftTypeTrainingCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AircraftTypeTrainingCategoryCode >
-  _xsd_AircraftTypeTrainingCategoryCode_comparison_init;
 
   // AircraftTypeWeatherQualifierCode
   //
@@ -43818,10 +40690,6 @@ namespace oo_2_0
     "AircraftTypeWeatherQualifierCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AircraftTypeWeatherQualifierCode >
-  _xsd_AircraftTypeWeatherQualifierCode_comparison_init;
-
   // AirfieldAirTrafficControlPresenceIndicatorCode
   //
 
@@ -43898,10 +40766,6 @@ namespace oo_2_0
     "AirfieldAirTrafficControlPresenceIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AirfieldAirTrafficControlPresenceIndicatorCode >
-  _xsd_AirfieldAirTrafficControlPresenceIndicatorCode_comparison_init;
-
   // AirfieldInstrumentLandingSystemPresenceIndicatorCode
   //
 
@@ -43977,10 +40841,6 @@ namespace oo_2_0
   _xsd_AirfieldInstrumentLandingSystemPresenceIndicatorCode_type_factory_init (
     "AirfieldInstrumentLandingSystemPresenceIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AirfieldInstrumentLandingSystemPresenceIndicatorCode >
-  _xsd_AirfieldInstrumentLandingSystemPresenceIndicatorCode_comparison_init;
 
   // AirfieldStatusDayOperationsCode
   //
@@ -44062,10 +40922,6 @@ namespace oo_2_0
     "AirfieldStatusDayOperationsCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AirfieldStatusDayOperationsCode >
-  _xsd_AirfieldStatusDayOperationsCode_comparison_init;
-
   // AirfieldStatusEvaluationIndicatorCode
   //
 
@@ -44141,10 +40997,6 @@ namespace oo_2_0
   _xsd_AirfieldStatusEvaluationIndicatorCode_type_factory_init (
     "AirfieldStatusEvaluationIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AirfieldStatusEvaluationIndicatorCode >
-  _xsd_AirfieldStatusEvaluationIndicatorCode_comparison_init;
 
   // AirfieldStatusFlightSupportCategoryCode
   //
@@ -44223,10 +41075,6 @@ namespace oo_2_0
   _xsd_AirfieldStatusFlightSupportCategoryCode_type_factory_init (
     "AirfieldStatusFlightSupportCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AirfieldStatusFlightSupportCategoryCode >
-  _xsd_AirfieldStatusFlightSupportCategoryCode_comparison_init;
 
   // AirfieldTypeUseCategoryCode
   //
@@ -44308,10 +41156,6 @@ namespace oo_2_0
     "AirfieldTypeUseCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AirfieldTypeUseCategoryCode >
-  _xsd_AirfieldTypeUseCategoryCode_comparison_init;
-
   // AirfieldVisualNavigationalAidIndicatorCode
   //
 
@@ -44387,10 +41231,6 @@ namespace oo_2_0
   _xsd_AirfieldVisualNavigationalAidIndicatorCode_type_factory_init (
     "AirfieldVisualNavigationalAidIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AirfieldVisualNavigationalAidIndicatorCode >
-  _xsd_AirfieldVisualNavigationalAidIndicatorCode_comparison_init;
 
   // AmmunitionTypeCategoryCode
   //
@@ -44560,10 +41400,6 @@ namespace oo_2_0
     "AmmunitionTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AmmunitionTypeCategoryCode >
-  _xsd_AmmunitionTypeCategoryCode_comparison_init;
-
   // AmmunitionTypeExerciseMineFlareColourCode
   //
 
@@ -44645,10 +41481,6 @@ namespace oo_2_0
   _xsd_AmmunitionTypeExerciseMineFlareColourCode_type_factory_init (
     "AmmunitionTypeExerciseMineFlareColourCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AmmunitionTypeExerciseMineFlareColourCode >
-  _xsd_AmmunitionTypeExerciseMineFlareColourCode_comparison_init;
 
   // AmmunitionTypeMineMaritimeFiringCode
   //
@@ -44772,10 +41604,6 @@ namespace oo_2_0
     "AmmunitionTypeMineMaritimeFiringCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AmmunitionTypeMineMaritimeFiringCode >
-  _xsd_AmmunitionTypeMineMaritimeFiringCode_comparison_init;
-
   // AnchorageBottomTypeCode
   //
 
@@ -44890,10 +41718,6 @@ namespace oo_2_0
     "AnchorageBottomTypeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AnchorageBottomTypeCode >
-  _xsd_AnchorageBottomTypeCode_comparison_init;
-
   // AnchorageMooringsTypeCode
   //
 
@@ -44973,10 +41797,6 @@ namespace oo_2_0
   _xsd_AnchorageMooringsTypeCode_type_factory_init (
     "AnchorageMooringsTypeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AnchorageMooringsTypeCode >
-  _xsd_AnchorageMooringsTypeCode_comparison_init;
 
   // AnglePrecisionCode
   //
@@ -45070,10 +41890,6 @@ namespace oo_2_0
     "AnglePrecisionCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AnglePrecisionCode >
-  _xsd_AnglePrecisionCode_comparison_init;
-
   // ApproachDirectionCategoryCode
   //
 
@@ -45156,10 +41972,6 @@ namespace oo_2_0
     "ApproachDirectionCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ApproachDirectionCategoryCode >
-  _xsd_ApproachDirectionCategoryCode_comparison_init;
-
   // AssociationStatusCategoryCode
   //
 
@@ -45235,10 +42047,6 @@ namespace oo_2_0
   _xsd_AssociationStatusCategoryCode_type_factory_init (
     "AssociationStatusCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AssociationStatusCategoryCode >
-  _xsd_AssociationStatusCategoryCode_comparison_init;
 
   // AtmosphereInversionLayerCode
   //
@@ -45317,10 +42125,6 @@ namespace oo_2_0
   _xsd_AtmosphereInversionLayerCode_type_factory_init (
     "AtmosphereInversionLayerCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AtmosphereInversionLayerCode >
-  _xsd_AtmosphereInversionLayerCode_comparison_init;
 
   // AtmospherePressureSystemCategoryCode
   //
@@ -45416,10 +42220,6 @@ namespace oo_2_0
     "AtmospherePressureSystemCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AtmospherePressureSystemCategoryCode >
-  _xsd_AtmospherePressureSystemCategoryCode_comparison_init;
-
   // AtmosphereTemperatureGradientCode
   //
 
@@ -45499,10 +42299,6 @@ namespace oo_2_0
   _xsd_AtmosphereTemperatureGradientCode_type_factory_init (
     "AtmosphereTemperatureGradientCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, AtmosphereTemperatureGradientCode >
-  _xsd_AtmosphereTemperatureGradientCode_comparison_init;
 
   // BerthMajorVesselClassCode
   //
@@ -45586,10 +42382,6 @@ namespace oo_2_0
     "BerthMajorVesselClassCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, BerthMajorVesselClassCode >
-  _xsd_BerthMajorVesselClassCode_comparison_init;
-
   // BerthRailAvailabilityIndicatorCode
   //
 
@@ -45666,10 +42458,6 @@ namespace oo_2_0
     "BerthRailAvailabilityIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, BerthRailAvailabilityIndicatorCode >
-  _xsd_BerthRailAvailabilityIndicatorCode_comparison_init;
-
   // BerthRollOnRollOffIndicatorCode
   //
 
@@ -45745,10 +42533,6 @@ namespace oo_2_0
   _xsd_BerthRollOnRollOffIndicatorCode_type_factory_init (
     "BerthRollOnRollOffIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, BerthRollOnRollOffIndicatorCode >
-  _xsd_BerthRollOnRollOffIndicatorCode_comparison_init;
 
   // BiologicalMaterielTypeCategoryCode
   //
@@ -45834,10 +42618,6 @@ namespace oo_2_0
     "BiologicalMaterielTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, BiologicalMaterielTypeCategoryCode >
-  _xsd_BiologicalMaterielTypeCategoryCode_comparison_init;
-
   // BiologicalMaterielTypeSubcategoryCode
   //
 
@@ -45915,10 +42695,6 @@ namespace oo_2_0
   _xsd_BiologicalMaterielTypeSubcategoryCode_type_factory_init (
     "BiologicalMaterielTypeSubcategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, BiologicalMaterielTypeSubcategoryCode >
-  _xsd_BiologicalMaterielTypeSubcategoryCode_comparison_init;
 
   // BridgeTypeDesignTypeCode
   //
@@ -46028,10 +42804,6 @@ namespace oo_2_0
     "BridgeTypeDesignTypeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, BridgeTypeDesignTypeCode >
-  _xsd_BridgeTypeDesignTypeCode_comparison_init;
-
   // BridgeUsageCode
   //
 
@@ -46118,10 +42890,6 @@ namespace oo_2_0
     "BridgeUsageCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, BridgeUsageCode >
-  _xsd_BridgeUsageCode_comparison_init;
-
   // CandidateTargetDetailAssociationCategoryCode
   //
 
@@ -46197,10 +42965,6 @@ namespace oo_2_0
   _xsd_CandidateTargetDetailAssociationCategoryCode_type_factory_init (
     "CandidateTargetDetailAssociationCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, CandidateTargetDetailAssociationCategoryCode >
-  _xsd_CandidateTargetDetailAssociationCategoryCode_comparison_init;
 
   // CandidateTargetDetailAuthorisationApprovalCode
   //
@@ -46280,10 +43044,6 @@ namespace oo_2_0
     "CandidateTargetDetailAuthorisationApprovalCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, CandidateTargetDetailAuthorisationApprovalCode >
-  _xsd_CandidateTargetDetailAuthorisationApprovalCode_comparison_init;
-
   // CandidateTargetDetailCategoryCode
   //
 
@@ -46359,10 +43119,6 @@ namespace oo_2_0
   _xsd_CandidateTargetDetailCategoryCode_type_factory_init (
     "CandidateTargetDetailCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, CandidateTargetDetailCategoryCode >
-  _xsd_CandidateTargetDetailCategoryCode_comparison_init;
 
   // CandidateTargetDetailFocusTypeCode
   //
@@ -46470,10 +43226,6 @@ namespace oo_2_0
     "CandidateTargetDetailFocusTypeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, CandidateTargetDetailFocusTypeCode >
-  _xsd_CandidateTargetDetailFocusTypeCode_comparison_init;
-
   // CandidateTargetDetailSchemeCode
   //
 
@@ -46556,10 +43308,6 @@ namespace oo_2_0
     "CandidateTargetDetailSchemeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, CandidateTargetDetailSchemeCode >
-  _xsd_CandidateTargetDetailSchemeCode_comparison_init;
-
   // CandidateTargetListAssociationCategoryCode
   //
 
@@ -46640,10 +43388,6 @@ namespace oo_2_0
     "CandidateTargetListAssociationCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, CandidateTargetListAssociationCategoryCode >
-  _xsd_CandidateTargetListAssociationCategoryCode_comparison_init;
-
   // CandidateTargetListAuthorisationIndicatorCode
   //
 
@@ -46719,10 +43463,6 @@ namespace oo_2_0
   _xsd_CandidateTargetListAuthorisationIndicatorCode_type_factory_init (
     "CandidateTargetListAuthorisationIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, CandidateTargetListAuthorisationIndicatorCode >
-  _xsd_CandidateTargetListAuthorisationIndicatorCode_comparison_init;
 
   // CapabilityCategoryCode
   //
@@ -46816,10 +43556,6 @@ namespace oo_2_0
     "CapabilityCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, CapabilityCategoryCode >
-  _xsd_CapabilityCategoryCode_comparison_init;
-
   // CapabilityDayNightCode
   //
 
@@ -46898,10 +43634,6 @@ namespace oo_2_0
     "CapabilityDayNightCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, CapabilityDayNightCode >
-  _xsd_CapabilityDayNightCode_comparison_init;
-
   // CapabilityReferenceAssociationCategoryCode
   //
 
@@ -46979,10 +43711,6 @@ namespace oo_2_0
   _xsd_CapabilityReferenceAssociationCategoryCode_type_factory_init (
     "CapabilityReferenceAssociationCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, CapabilityReferenceAssociationCategoryCode >
-  _xsd_CapabilityReferenceAssociationCategoryCode_comparison_init;
 
   // CapabilityUnitOfMeasureCode
   //
@@ -47125,10 +43853,6 @@ namespace oo_2_0
   _xsd_CapabilityUnitOfMeasureCode_type_factory_init (
     "CapabilityUnitOfMeasureCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, CapabilityUnitOfMeasureCode >
-  _xsd_CapabilityUnitOfMeasureCode_comparison_init;
 
   // CargoCategoryCode
   //
@@ -47280,10 +44004,6 @@ namespace oo_2_0
     "CargoCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, CargoCategoryCode >
-  _xsd_CargoCategoryCode_comparison_init;
-
   // CasualtyGroupCode
   //
 
@@ -47361,10 +44081,6 @@ namespace oo_2_0
   _xsd_CasualtyGroupCode_type_factory_init (
     "CasualtyGroupCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, CasualtyGroupCode >
-  _xsd_CasualtyGroupCode_comparison_init;
 
   // CbrnEquipmentTypeCategoryCode
   //
@@ -47466,10 +44182,6 @@ namespace oo_2_0
     "CbrnEquipmentTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, CbrnEquipmentTypeCategoryCode >
-  _xsd_CbrnEquipmentTypeCategoryCode_comparison_init;
-
   // CbrnEventAlarmResultIndicatorCode
   //
 
@@ -47545,10 +44257,6 @@ namespace oo_2_0
   _xsd_CbrnEventAlarmResultIndicatorCode_type_factory_init (
     "CbrnEventAlarmResultIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, CbrnEventAlarmResultIndicatorCode >
-  _xsd_CbrnEventAlarmResultIndicatorCode_comparison_init;
 
   // CbrnEventCategoryCode
   //
@@ -47630,10 +44338,6 @@ namespace oo_2_0
     "CbrnEventCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, CbrnEventCategoryCode >
-  _xsd_CbrnEventCategoryCode_comparison_init;
-
   // CbrnEventConfirmationTestIndicatorCode
   //
 
@@ -47709,10 +44413,6 @@ namespace oo_2_0
   _xsd_CbrnEventConfirmationTestIndicatorCode_type_factory_init (
     "CbrnEventConfirmationTestIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, CbrnEventConfirmationTestIndicatorCode >
-  _xsd_CbrnEventConfirmationTestIndicatorCode_comparison_init;
 
   // CbrnEventMaterielContainerTypeCode
   //
@@ -47822,10 +44522,6 @@ namespace oo_2_0
     "CbrnEventMaterielContainerTypeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, CbrnEventMaterielContainerTypeCode >
-  _xsd_CbrnEventMaterielContainerTypeCode_comparison_init;
-
   // CbrnEventSubcategoryCode
   //
 
@@ -47934,10 +44630,6 @@ namespace oo_2_0
     "CbrnEventSubcategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, CbrnEventSubcategoryCode >
-  _xsd_CbrnEventSubcategoryCode_comparison_init;
-
   // ChemicalBiologicalEventCategoryCode
   //
 
@@ -48030,10 +44722,6 @@ namespace oo_2_0
     "ChemicalBiologicalEventCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ChemicalBiologicalEventCategoryCode >
-  _xsd_ChemicalBiologicalEventCategoryCode_comparison_init;
-
   // ChemicalBiologicalEventSpillSizeCode
   //
 
@@ -48113,10 +44801,6 @@ namespace oo_2_0
   _xsd_ChemicalBiologicalEventSpillSizeCode_type_factory_init (
     "ChemicalBiologicalEventSpillSizeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ChemicalBiologicalEventSpillSizeCode >
-  _xsd_ChemicalBiologicalEventSpillSizeCode_comparison_init;
 
   // ChemicalMaterielTypeCategoryCode
   //
@@ -48217,10 +44901,6 @@ namespace oo_2_0
   _xsd_ChemicalMaterielTypeCategoryCode_type_factory_init (
     "ChemicalMaterielTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ChemicalMaterielTypeCategoryCode >
-  _xsd_ChemicalMaterielTypeCategoryCode_comparison_init;
 
   // ChemicalMaterielTypeSubcategoryCode
   //
@@ -48336,10 +45016,6 @@ namespace oo_2_0
     "ChemicalMaterielTypeSubcategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ChemicalMaterielTypeSubcategoryCode >
-  _xsd_ChemicalMaterielTypeSubcategoryCode_comparison_init;
-
   // CivilianPostTypeCategoryCode
   //
 
@@ -48438,10 +45114,6 @@ namespace oo_2_0
     "CivilianPostTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, CivilianPostTypeCategoryCode >
-  _xsd_CivilianPostTypeCategoryCode_comparison_init;
-
   // CloudCoverAverageCoverageCode
   //
 
@@ -48534,10 +45206,6 @@ namespace oo_2_0
     "CloudCoverAverageCoverageCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, CloudCoverAverageCoverageCode >
-  _xsd_CloudCoverAverageCoverageCode_comparison_init;
-
   // CloudCoverCategoryCode
   //
 
@@ -48615,10 +45283,6 @@ namespace oo_2_0
   _xsd_CloudCoverCategoryCode_type_factory_init (
     "CloudCoverCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, CloudCoverCategoryCode >
-  _xsd_CloudCoverCategoryCode_comparison_init;
 
   // ConsumableMaterielTypeCategoryCode
   //
@@ -48736,10 +45400,6 @@ namespace oo_2_0
     "ConsumableMaterielTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ConsumableMaterielTypeCategoryCode >
-  _xsd_ConsumableMaterielTypeCategoryCode_comparison_init;
-
   // ConsumableMaterielTypeHazardCode
   //
 
@@ -48829,10 +45489,6 @@ namespace oo_2_0
   _xsd_ConsumableMaterielTypeHazardCode_type_factory_init (
     "ConsumableMaterielTypeHazardCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ConsumableMaterielTypeHazardCode >
-  _xsd_ConsumableMaterielTypeHazardCode_comparison_init;
 
   // ConsumableMaterielTypeIssuingElementCode
   //
@@ -48937,10 +45593,6 @@ namespace oo_2_0
   _xsd_ConsumableMaterielTypeIssuingElementCode_type_factory_init (
     "ConsumableMaterielTypeIssuingElementCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ConsumableMaterielTypeIssuingElementCode >
-  _xsd_ConsumableMaterielTypeIssuingElementCode_comparison_init;
 
   // ConsumableMaterielTypeIssuingUnitOfMeasureCode
   //
@@ -49050,10 +45702,6 @@ namespace oo_2_0
     "ConsumableMaterielTypeIssuingUnitOfMeasureCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ConsumableMaterielTypeIssuingUnitOfMeasureCode >
-  _xsd_ConsumableMaterielTypeIssuingUnitOfMeasureCode_comparison_init;
-
   // ConsumableMaterielTypePerishabilityIndicatorCode
   //
 
@@ -49129,10 +45777,6 @@ namespace oo_2_0
   _xsd_ConsumableMaterielTypePerishabilityIndicatorCode_type_factory_init (
     "ConsumableMaterielTypePerishabilityIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ConsumableMaterielTypePerishabilityIndicatorCode >
-  _xsd_ConsumableMaterielTypePerishabilityIndicatorCode_comparison_init;
 
   // ConsumableMaterielTypeSubcategoryCode
   //
@@ -49353,10 +45997,6 @@ namespace oo_2_0
   _xsd_ConsumableMaterielTypeSubcategoryCode_type_factory_init (
     "ConsumableMaterielTypeSubcategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ConsumableMaterielTypeSubcategoryCode >
-  _xsd_ConsumableMaterielTypeSubcategoryCode_comparison_init;
 
   // ConsumableMaterielTypeUnitedNationsNumberCode
   //
@@ -49674,10 +46314,6 @@ namespace oo_2_0
     "ConsumableMaterielTypeUnitedNationsNumberCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ConsumableMaterielTypeUnitedNationsNumberCode >
-  _xsd_ConsumableMaterielTypeUnitedNationsNumberCode_comparison_init;
-
   // ContextAssessmentLimitingFactorsCode
   //
 
@@ -49776,10 +46412,6 @@ namespace oo_2_0
     "ContextAssessmentLimitingFactorsCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ContextAssessmentLimitingFactorsCode >
-  _xsd_ContextAssessmentLimitingFactorsCode_comparison_init;
-
   // ContextAssociationCategoryCode
   //
 
@@ -49859,10 +46491,6 @@ namespace oo_2_0
   _xsd_ContextAssociationCategoryCode_type_factory_init (
     "ContextAssociationCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ContextAssociationCategoryCode >
-  _xsd_ContextAssociationCategoryCode_comparison_init;
 
   // ContextCategoryCode
   //
@@ -49952,10 +46580,6 @@ namespace oo_2_0
     "ContextCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ContextCategoryCode >
-  _xsd_ContextCategoryCode_comparison_init;
-
   // ContextElementStatusCategoryCode
   //
 
@@ -50032,10 +46656,6 @@ namespace oo_2_0
     "ContextElementStatusCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ContextElementStatusCategoryCode >
-  _xsd_ContextElementStatusCategoryCode_comparison_init;
-
   // ContextObjectItemAssociationCategoryCode
   //
 
@@ -50111,10 +46731,6 @@ namespace oo_2_0
   _xsd_ContextObjectItemAssociationCategoryCode_type_factory_init (
     "ContextObjectItemAssociationCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ContextObjectItemAssociationCategoryCode >
-  _xsd_ContextObjectItemAssociationCategoryCode_comparison_init;
 
   // ContextReportingDataAssociationCategoryCode
   //
@@ -50200,10 +46816,6 @@ namespace oo_2_0
     "ContextReportingDataAssociationCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ContextReportingDataAssociationCategoryCode >
-  _xsd_ContextReportingDataAssociationCategoryCode_comparison_init;
-
   // ControlFeatureCategoryCode
   //
 
@@ -50286,10 +46898,6 @@ namespace oo_2_0
     "ControlFeatureCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ControlFeatureCategoryCode >
-  _xsd_ControlFeatureCategoryCode_comparison_init;
-
   // ControlFeatureStatusCbrnThreatLevelCode
   //
 
@@ -50367,10 +46975,6 @@ namespace oo_2_0
   _xsd_ControlFeatureStatusCbrnThreatLevelCode_type_factory_init (
     "ControlFeatureStatusCbrnThreatLevelCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ControlFeatureStatusCbrnThreatLevelCode >
-  _xsd_ControlFeatureStatusCbrnThreatLevelCode_comparison_init;
 
   // ControlFeatureStatusInvestigationStatusCode
   //
@@ -50456,10 +47060,6 @@ namespace oo_2_0
     "ControlFeatureStatusInvestigationStatusCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ControlFeatureStatusInvestigationStatusCode >
-  _xsd_ControlFeatureStatusInvestigationStatusCode_comparison_init;
-
   // ControlFeatureStatusSecurityStatusCode
   //
 
@@ -50539,10 +47139,6 @@ namespace oo_2_0
   _xsd_ControlFeatureStatusSecurityStatusCode_type_factory_init (
     "ControlFeatureStatusSecurityStatusCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ControlFeatureStatusSecurityStatusCode >
-  _xsd_ControlFeatureStatusSecurityStatusCode_comparison_init;
 
   // ControlFeatureTypeCategoryCode
   //
@@ -51190,10 +47786,6 @@ namespace oo_2_0
     "ControlFeatureTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ControlFeatureTypeCategoryCode >
-  _xsd_ControlFeatureTypeCategoryCode_comparison_init;
-
   // DemolitionStatusCode
   //
 
@@ -51283,10 +47875,6 @@ namespace oo_2_0
   _xsd_DemolitionStatusCode_type_factory_init (
     "DemolitionStatusCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, DemolitionStatusCode >
-  _xsd_DemolitionStatusCode_comparison_init;
 
   // DirectionCode
   //
@@ -51394,10 +47982,6 @@ namespace oo_2_0
     "DirectionCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, DirectionCode >
-  _xsd_DirectionCode_comparison_init;
-
   // DistancePrecisionCode
   //
 
@@ -51504,10 +48088,6 @@ namespace oo_2_0
     "DistancePrecisionCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, DistancePrecisionCode >
-  _xsd_DistancePrecisionCode_comparison_init;
-
   // DryDockMarineRailwaySizeCode
   //
 
@@ -51585,10 +48165,6 @@ namespace oo_2_0
   _xsd_DryDockMarineRailwaySizeCode_type_factory_init (
     "DryDockMarineRailwaySizeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, DryDockMarineRailwaySizeCode >
-  _xsd_DryDockMarineRailwaySizeCode_comparison_init;
 
   // ElectronicEquipmentTypeCategoryCode
   //
@@ -51685,10 +48261,6 @@ namespace oo_2_0
   _xsd_ElectronicEquipmentTypeCategoryCode_type_factory_init (
     "ElectronicEquipmentTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ElectronicEquipmentTypeCategoryCode >
-  _xsd_ElectronicEquipmentTypeCategoryCode_comparison_init;
 
   // ElectronicEquipmentTypeSubcategoryCode
   //
@@ -51998,10 +48570,6 @@ namespace oo_2_0
     "ElectronicEquipmentTypeSubcategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ElectronicEquipmentTypeSubcategoryCode >
-  _xsd_ElectronicEquipmentTypeSubcategoryCode_comparison_init;
-
   // EngineeringCapabilityCategoryCode
   //
 
@@ -52080,10 +48648,6 @@ namespace oo_2_0
     "EngineeringCapabilityCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, EngineeringCapabilityCategoryCode >
-  _xsd_EngineeringCapabilityCategoryCode_comparison_init;
-
   // EngineeringCapabilityDescriptorCode
   //
 
@@ -52159,10 +48723,6 @@ namespace oo_2_0
   _xsd_EngineeringCapabilityDescriptorCode_type_factory_init (
     "EngineeringCapabilityDescriptorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, EngineeringCapabilityDescriptorCode >
-  _xsd_EngineeringCapabilityDescriptorCode_comparison_init;
 
   // EngineeringEquipmentTypeCategoryCode
   //
@@ -52286,10 +48846,6 @@ namespace oo_2_0
     "EngineeringEquipmentTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, EngineeringEquipmentTypeCategoryCode >
-  _xsd_EngineeringEquipmentTypeCategoryCode_comparison_init;
-
   // EquipmentTypeCategoryCode
   //
 
@@ -52382,10 +48938,6 @@ namespace oo_2_0
     "EquipmentTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, EquipmentTypeCategoryCode >
-  _xsd_EquipmentTypeCategoryCode_comparison_init;
-
   // EvacuationDestinationCode
   //
 
@@ -52463,10 +49015,6 @@ namespace oo_2_0
   _xsd_EvacuationDestinationCode_type_factory_init (
     "EvacuationDestinationCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, EvacuationDestinationCode >
-  _xsd_EvacuationDestinationCode_comparison_init;
 
   // ExecutiveMilitaryOrganisationTypeCategoryCode
   //
@@ -52553,10 +49101,6 @@ namespace oo_2_0
   _xsd_ExecutiveMilitaryOrganisationTypeCategoryCode_type_factory_init (
     "ExecutiveMilitaryOrganisationTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ExecutiveMilitaryOrganisationTypeCategoryCode >
-  _xsd_ExecutiveMilitaryOrganisationTypeCategoryCode_comparison_init;
 
   // FacilityCategoryCode
   //
@@ -52663,10 +49207,6 @@ namespace oo_2_0
   _xsd_FacilityCategoryCode_type_factory_init (
     "FacilityCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, FacilityCategoryCode >
-  _xsd_FacilityCategoryCode_comparison_init;
 
   // FacilityPrimaryConstructionMaterialCode
   //
@@ -52806,10 +49346,6 @@ namespace oo_2_0
     "FacilityPrimaryConstructionMaterialCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, FacilityPrimaryConstructionMaterialCode >
-  _xsd_FacilityPrimaryConstructionMaterialCode_comparison_init;
-
   // FacilityStatusCategoryCode
   //
 
@@ -52890,10 +49426,6 @@ namespace oo_2_0
     "FacilityStatusCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, FacilityStatusCategoryCode >
-  _xsd_FacilityStatusCategoryCode_comparison_init;
-
   // FacilityStatusEnemyActivityConditionCode
   //
 
@@ -52970,10 +49502,6 @@ namespace oo_2_0
     "FacilityStatusEnemyActivityConditionCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, FacilityStatusEnemyActivityConditionCode >
-  _xsd_FacilityStatusEnemyActivityConditionCode_comparison_init;
-
   // FacilityStatusOccupationProgramIndicatorCode
   //
 
@@ -53049,10 +49577,6 @@ namespace oo_2_0
   _xsd_FacilityStatusOccupationProgramIndicatorCode_type_factory_init (
     "FacilityStatusOccupationProgramIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, FacilityStatusOccupationProgramIndicatorCode >
-  _xsd_FacilityStatusOccupationProgramIndicatorCode_comparison_init;
 
   // FacilityStatusOperationalStatusCode
   //
@@ -53137,10 +49661,6 @@ namespace oo_2_0
   _xsd_FacilityStatusOperationalStatusCode_type_factory_init (
     "FacilityStatusOperationalStatusCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, FacilityStatusOperationalStatusCode >
-  _xsd_FacilityStatusOperationalStatusCode_comparison_init;
 
   // FacilityStatusOperationalStatusQualifierCode
   //
@@ -53252,10 +49772,6 @@ namespace oo_2_0
     "FacilityStatusOperationalStatusQualifierCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, FacilityStatusOperationalStatusQualifierCode >
-  _xsd_FacilityStatusOperationalStatusQualifierCode_comparison_init;
-
   // FacilityStatusReserveIndicatorCode
   //
 
@@ -53331,10 +49847,6 @@ namespace oo_2_0
   _xsd_FacilityStatusReserveIndicatorCode_type_factory_init (
     "FacilityStatusReserveIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, FacilityStatusReserveIndicatorCode >
-  _xsd_FacilityStatusReserveIndicatorCode_comparison_init;
 
   // FacilityStatusSecurityStatusCode
   //
@@ -53415,10 +49927,6 @@ namespace oo_2_0
   _xsd_FacilityStatusSecurityStatusCode_type_factory_init (
     "FacilityStatusSecurityStatusCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, FacilityStatusSecurityStatusCode >
-  _xsd_FacilityStatusSecurityStatusCode_comparison_init;
 
   // FacilityTypeCategoryCode
   //
@@ -54004,10 +50512,6 @@ namespace oo_2_0
     "FacilityTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, FacilityTypeCategoryCode >
-  _xsd_FacilityTypeCategoryCode_comparison_init;
-
   // FeatureCategoryCode
   //
 
@@ -54087,10 +50591,6 @@ namespace oo_2_0
   _xsd_FeatureCategoryCode_type_factory_init (
     "FeatureCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, FeatureCategoryCode >
-  _xsd_FeatureCategoryCode_comparison_init;
 
   // FeatureTypeCategoryCode
   //
@@ -54172,10 +50672,6 @@ namespace oo_2_0
     "FeatureTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, FeatureTypeCategoryCode >
-  _xsd_FeatureTypeCategoryCode_comparison_init;
-
   // FeintIndicatorCode
   //
 
@@ -54251,10 +50747,6 @@ namespace oo_2_0
   _xsd_FeintIndicatorCode_type_factory_init (
     "FeintIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, FeintIndicatorCode >
-  _xsd_FeintIndicatorCode_comparison_init;
 
   // FireCapabilityCategoryCode
   //
@@ -54346,10 +50838,6 @@ namespace oo_2_0
     "FireCapabilityCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, FireCapabilityCategoryCode >
-  _xsd_FireCapabilityCategoryCode_comparison_init;
-
   // FireCapabilityDescriptorCode
   //
 
@@ -54433,10 +50921,6 @@ namespace oo_2_0
   _xsd_FireCapabilityDescriptorCode_type_factory_init (
     "FireCapabilityDescriptorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, FireCapabilityDescriptorCode >
-  _xsd_FireCapabilityDescriptorCode_comparison_init;
 
   // FireCapabilityWeaponTypeCode
   //
@@ -54522,10 +51006,6 @@ namespace oo_2_0
     "FireCapabilityWeaponTypeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, FireCapabilityWeaponTypeCode >
-  _xsd_FireCapabilityWeaponTypeCode_comparison_init;
-
   // GenderCode
   //
 
@@ -54603,10 +51083,6 @@ namespace oo_2_0
   _xsd_GenderCode_type_factory_init (
     "GenderCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, GenderCode >
-  _xsd_GenderCode_comparison_init;
 
   // GeographicFeatureBottomHardnessCode
   //
@@ -54691,10 +51167,6 @@ namespace oo_2_0
   _xsd_GeographicFeatureBottomHardnessCode_type_factory_init (
     "GeographicFeatureBottomHardnessCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, GeographicFeatureBottomHardnessCode >
-  _xsd_GeographicFeatureBottomHardnessCode_comparison_init;
 
   // GeographicFeatureSolidSurfaceCompositionCode
   //
@@ -54782,10 +51254,6 @@ namespace oo_2_0
     "GeographicFeatureSolidSurfaceCompositionCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, GeographicFeatureSolidSurfaceCompositionCode >
-  _xsd_GeographicFeatureSolidSurfaceCompositionCode_comparison_init;
-
   // GeographicFeatureStatusCategoryCode
   //
 
@@ -54864,10 +51332,6 @@ namespace oo_2_0
     "GeographicFeatureStatusCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, GeographicFeatureStatusCategoryCode >
-  _xsd_GeographicFeatureStatusCategoryCode_comparison_init;
-
   // GeographicFeatureStatusSurfaceRecirculationIndicatorCode
   //
 
@@ -54943,10 +51407,6 @@ namespace oo_2_0
   _xsd_GeographicFeatureStatusSurfaceRecirculationIndicatorCode_type_factory_init (
     "GeographicFeatureStatusSurfaceRecirculationIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, GeographicFeatureStatusSurfaceRecirculationIndicatorCode >
-  _xsd_GeographicFeatureStatusSurfaceRecirculationIndicatorCode_comparison_init;
 
   // GeographicFeatureSurfaceCategoryCode
   //
@@ -55025,10 +51485,6 @@ namespace oo_2_0
   _xsd_GeographicFeatureSurfaceCategoryCode_type_factory_init (
     "GeographicFeatureSurfaceCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, GeographicFeatureSurfaceCategoryCode >
-  _xsd_GeographicFeatureSurfaceCategoryCode_comparison_init;
 
   // GeographicFeatureTerrainCode
   //
@@ -55115,10 +51571,6 @@ namespace oo_2_0
   _xsd_GeographicFeatureTerrainCode_type_factory_init (
     "GeographicFeatureTerrainCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, GeographicFeatureTerrainCode >
-  _xsd_GeographicFeatureTerrainCode_comparison_init;
 
   // GeographicFeatureTypeCategoryCode
   //
@@ -55207,10 +51659,6 @@ namespace oo_2_0
   _xsd_GeographicFeatureTypeCategoryCode_type_factory_init (
     "GeographicFeatureTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, GeographicFeatureTypeCategoryCode >
-  _xsd_GeographicFeatureTypeCategoryCode_comparison_init;
 
   // GeographicFeatureTypeSubcategoryCode
   //
@@ -55422,10 +51870,6 @@ namespace oo_2_0
     "GeographicFeatureTypeSubcategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, GeographicFeatureTypeSubcategoryCode >
-  _xsd_GeographicFeatureTypeSubcategoryCode_comparison_init;
-
   // GeometricVolumeCategoryCode
   //
 
@@ -55503,10 +51947,6 @@ namespace oo_2_0
   _xsd_GeometricVolumeCategoryCode_type_factory_init (
     "GeometricVolumeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, GeometricVolumeCategoryCode >
-  _xsd_GeometricVolumeCategoryCode_comparison_init;
 
   // GovernmentOrganisationTypeCategoryCode
   //
@@ -55590,10 +52030,6 @@ namespace oo_2_0
     "GovernmentOrganisationTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, GovernmentOrganisationTypeCategoryCode >
-  _xsd_GovernmentOrganisationTypeCategoryCode_comparison_init;
-
   // GroupCharacteristicAgeGroupCode
   //
 
@@ -55675,10 +52111,6 @@ namespace oo_2_0
   _xsd_GroupCharacteristicAgeGroupCode_type_factory_init (
     "GroupCharacteristicAgeGroupCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, GroupCharacteristicAgeGroupCode >
-  _xsd_GroupCharacteristicAgeGroupCode_comparison_init;
 
   // GroupCharacteristicMaladyCode
   //
@@ -55966,10 +52398,6 @@ namespace oo_2_0
     "GroupCharacteristicMaladyCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, GroupCharacteristicMaladyCode >
-  _xsd_GroupCharacteristicMaladyCode_comparison_init;
-
   // GroupCharacteristicMaladyTransmissibilityIndicatorCode
   //
 
@@ -56045,10 +52473,6 @@ namespace oo_2_0
   _xsd_GroupCharacteristicMaladyTransmissibilityIndicatorCode_type_factory_init (
     "GroupCharacteristicMaladyTransmissibilityIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, GroupCharacteristicMaladyTransmissibilityIndicatorCode >
-  _xsd_GroupCharacteristicMaladyTransmissibilityIndicatorCode_comparison_init;
 
   // GroupCharacteristicTriageCode
   //
@@ -56129,10 +52553,6 @@ namespace oo_2_0
   _xsd_GroupCharacteristicTriageCode_type_factory_init (
     "GroupCharacteristicTriageCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, GroupCharacteristicTriageCode >
-  _xsd_GroupCharacteristicTriageCode_comparison_init;
 
   // GroupOrganisationTypeCategoryCode
   //
@@ -56248,10 +52668,6 @@ namespace oo_2_0
     "GroupOrganisationTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, GroupOrganisationTypeCategoryCode >
-  _xsd_GroupOrganisationTypeCategoryCode_comparison_init;
-
   // HandlingCapabilityActionCode
   //
 
@@ -56331,10 +52747,6 @@ namespace oo_2_0
   _xsd_HandlingCapabilityActionCode_type_factory_init (
     "HandlingCapabilityActionCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HandlingCapabilityActionCode >
-  _xsd_HandlingCapabilityActionCode_comparison_init;
 
   // HandlingCapabilityDescriptorCode
   //
@@ -56424,10 +52836,6 @@ namespace oo_2_0
     "HandlingCapabilityDescriptorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HandlingCapabilityDescriptorCode >
-  _xsd_HandlingCapabilityDescriptorCode_comparison_init;
-
   // HarbourAirportNearIndicatorCode
   //
 
@@ -56503,10 +52911,6 @@ namespace oo_2_0
   _xsd_HarbourAirportNearIndicatorCode_type_factory_init (
     "HarbourAirportNearIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourAirportNearIndicatorCode >
-  _xsd_HarbourAirportNearIndicatorCode_comparison_init;
 
   // HarbourBiologicallySecureAvailabilityIndicatorCode
   //
@@ -56584,10 +52988,6 @@ namespace oo_2_0
     "HarbourBiologicallySecureAvailabilityIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourBiologicallySecureAvailabilityIndicatorCode >
-  _xsd_HarbourBiologicallySecureAvailabilityIndicatorCode_comparison_init;
-
   // HarbourConvoyMarshallingIndicatorCode
   //
 
@@ -56663,10 +53063,6 @@ namespace oo_2_0
   _xsd_HarbourConvoyMarshallingIndicatorCode_type_factory_init (
     "HarbourConvoyMarshallingIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourConvoyMarshallingIndicatorCode >
-  _xsd_HarbourConvoyMarshallingIndicatorCode_comparison_init;
 
   // HarbourDegaussingIndicatorCode
   //
@@ -56744,10 +53140,6 @@ namespace oo_2_0
     "HarbourDegaussingIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourDegaussingIndicatorCode >
-  _xsd_HarbourDegaussingIndicatorCode_comparison_init;
-
   // HarbourDirtyBallastIndicatorCode
   //
 
@@ -56823,10 +53215,6 @@ namespace oo_2_0
   _xsd_HarbourDirtyBallastIndicatorCode_type_factory_init (
     "HarbourDirtyBallastIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourDirtyBallastIndicatorCode >
-  _xsd_HarbourDirtyBallastIndicatorCode_comparison_init;
 
   // HarbourEntranceRestrictionsIceIndicatorCode
   //
@@ -56904,10 +53292,6 @@ namespace oo_2_0
     "HarbourEntranceRestrictionsIceIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourEntranceRestrictionsIceIndicatorCode >
-  _xsd_HarbourEntranceRestrictionsIceIndicatorCode_comparison_init;
-
   // HarbourEntranceRestrictionsSwellIndicatorCode
   //
 
@@ -56984,10 +53368,6 @@ namespace oo_2_0
     "HarbourEntranceRestrictionsSwellIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourEntranceRestrictionsSwellIndicatorCode >
-  _xsd_HarbourEntranceRestrictionsSwellIndicatorCode_comparison_init;
-
   // HarbourEstimatedTimeOfArrivalIndicatorCode
   //
 
@@ -57063,10 +53443,6 @@ namespace oo_2_0
   _xsd_HarbourEstimatedTimeOfArrivalIndicatorCode_type_factory_init (
     "HarbourEstimatedTimeOfArrivalIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourEstimatedTimeOfArrivalIndicatorCode >
-  _xsd_HarbourEstimatedTimeOfArrivalIndicatorCode_comparison_init;
 
   // HarbourFireFightingCapabilityCode
   //
@@ -57146,10 +53522,6 @@ namespace oo_2_0
     "HarbourFireFightingCapabilityCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourFireFightingCapabilityCode >
-  _xsd_HarbourFireFightingCapabilityCode_comparison_init;
-
   // HarbourFireFightingIndicatorCode
   //
 
@@ -57225,10 +53597,6 @@ namespace oo_2_0
   _xsd_HarbourFireFightingIndicatorCode_type_factory_init (
     "HarbourFireFightingIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourFireFightingIndicatorCode >
-  _xsd_HarbourFireFightingIndicatorCode_comparison_init;
 
   // HarbourFirstPortOfEntryIndicatorCode
   //
@@ -57306,10 +53674,6 @@ namespace oo_2_0
     "HarbourFirstPortOfEntryIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourFirstPortOfEntryIndicatorCode >
-  _xsd_HarbourFirstPortOfEntryIndicatorCode_comparison_init;
-
   // HarbourFreshWaterAvailabilityIndicatorCode
   //
 
@@ -57385,10 +53749,6 @@ namespace oo_2_0
   _xsd_HarbourFreshWaterAvailabilityIndicatorCode_type_factory_init (
     "HarbourFreshWaterAvailabilityIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourFreshWaterAvailabilityIndicatorCode >
-  _xsd_HarbourFreshWaterAvailabilityIndicatorCode_comparison_init;
 
   // HarbourLashIndicatorCode
   //
@@ -57466,10 +53826,6 @@ namespace oo_2_0
     "HarbourLashIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourLashIndicatorCode >
-  _xsd_HarbourLashIndicatorCode_comparison_init;
-
   // HarbourLighterageAvailabilityIndicatorCode
   //
 
@@ -57545,10 +53901,6 @@ namespace oo_2_0
   _xsd_HarbourLighterageAvailabilityIndicatorCode_type_factory_init (
     "HarbourLighterageAvailabilityIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourLighterageAvailabilityIndicatorCode >
-  _xsd_HarbourLighterageAvailabilityIndicatorCode_comparison_init;
 
   // HarbourOverheadLimitsIndicatorCode
   //
@@ -57626,10 +53978,6 @@ namespace oo_2_0
     "HarbourOverheadLimitsIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourOverheadLimitsIndicatorCode >
-  _xsd_HarbourOverheadLimitsIndicatorCode_comparison_init;
-
   // HarbourPassengerHandlingIndicatorCode
   //
 
@@ -57705,10 +54053,6 @@ namespace oo_2_0
   _xsd_HarbourPassengerHandlingIndicatorCode_type_factory_init (
     "HarbourPassengerHandlingIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourPassengerHandlingIndicatorCode >
-  _xsd_HarbourPassengerHandlingIndicatorCode_comparison_init;
 
   // HarbourPersistenceCode
   //
@@ -57788,10 +54132,6 @@ namespace oo_2_0
     "HarbourPersistenceCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourPersistenceCode >
-  _xsd_HarbourPersistenceCode_comparison_init;
-
   // HarbourPilotageAvailabilityIndicatorCode
   //
 
@@ -57867,10 +54207,6 @@ namespace oo_2_0
   _xsd_HarbourPilotageAvailabilityIndicatorCode_type_factory_init (
     "HarbourPilotageAvailabilityIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourPilotageAvailabilityIndicatorCode >
-  _xsd_HarbourPilotageAvailabilityIndicatorCode_comparison_init;
 
   // HarbourPilotageRequirementIndicatorCode
   //
@@ -57948,10 +54284,6 @@ namespace oo_2_0
     "HarbourPilotageRequirementIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourPilotageRequirementIndicatorCode >
-  _xsd_HarbourPilotageRequirementIndicatorCode_comparison_init;
-
   // HarbourRefuellingAvailabilityIndicatorCode
   //
 
@@ -58027,10 +54359,6 @@ namespace oo_2_0
   _xsd_HarbourRefuellingAvailabilityIndicatorCode_type_factory_init (
     "HarbourRefuellingAvailabilityIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourRefuellingAvailabilityIndicatorCode >
-  _xsd_HarbourRefuellingAvailabilityIndicatorCode_comparison_init;
 
   // HarbourRefuellingTypeCode
   //
@@ -58112,10 +54440,6 @@ namespace oo_2_0
     "HarbourRefuellingTypeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourRefuellingTypeCode >
-  _xsd_HarbourRefuellingTypeCode_comparison_init;
-
   // HarbourShelterQualityCode
   //
 
@@ -58196,10 +54520,6 @@ namespace oo_2_0
     "HarbourShelterQualityCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourShelterQualityCode >
-  _xsd_HarbourShelterQualityCode_comparison_init;
-
   // HarbourTankerFacilitiesIndicatorCode
   //
 
@@ -58275,10 +54595,6 @@ namespace oo_2_0
   _xsd_HarbourTankerFacilitiesIndicatorCode_type_factory_init (
     "HarbourTankerFacilitiesIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourTankerFacilitiesIndicatorCode >
-  _xsd_HarbourTankerFacilitiesIndicatorCode_comparison_init;
 
   // HarbourTransitAccommodationIndicatorCode
   //
@@ -58356,10 +54672,6 @@ namespace oo_2_0
     "HarbourTransitAccommodationIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourTransitAccommodationIndicatorCode >
-  _xsd_HarbourTransitAccommodationIndicatorCode_comparison_init;
-
   // HarbourTugAvailabilityIndicatorCode
   //
 
@@ -58436,10 +54748,6 @@ namespace oo_2_0
     "HarbourTugAvailabilityIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourTugAvailabilityIndicatorCode >
-  _xsd_HarbourTugAvailabilityIndicatorCode_comparison_init;
-
   // HarbourTurningAreaIndicatorCode
   //
 
@@ -58515,10 +54823,6 @@ namespace oo_2_0
   _xsd_HarbourTurningAreaIndicatorCode_type_factory_init (
     "HarbourTurningAreaIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourTurningAreaIndicatorCode >
-  _xsd_HarbourTurningAreaIndicatorCode_comparison_init;
 
   // HarbourTypeCategoryCode
   //
@@ -58610,10 +54914,6 @@ namespace oo_2_0
     "HarbourTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourTypeCategoryCode >
-  _xsd_HarbourTypeCategoryCode_comparison_init;
-
   // HarbourVehicleHandlingTypeCode
   //
 
@@ -58696,10 +54996,6 @@ namespace oo_2_0
     "HarbourVehicleHandlingTypeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HarbourVehicleHandlingTypeCode >
-  _xsd_HarbourVehicleHandlingTypeCode_comparison_init;
-
   // HoldingRequiredCalculationMethodCode
   //
 
@@ -58775,10 +55071,6 @@ namespace oo_2_0
   _xsd_HoldingRequiredCalculationMethodCode_type_factory_init (
     "HoldingRequiredCalculationMethodCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HoldingRequiredCalculationMethodCode >
-  _xsd_HoldingRequiredCalculationMethodCode_comparison_init;
 
   // HoldingTransferReasonCode
   //
@@ -58878,10 +55170,6 @@ namespace oo_2_0
     "HoldingTransferReasonCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, HoldingTransferReasonCode >
-  _xsd_HoldingTransferReasonCode_comparison_init;
-
   // IcingCategoryCode
   //
 
@@ -58959,10 +55247,6 @@ namespace oo_2_0
   _xsd_IcingCategoryCode_type_factory_init (
     "IcingCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, IcingCategoryCode >
-  _xsd_IcingCategoryCode_comparison_init;
 
   // IcingSeverityQualifierCode
   //
@@ -59042,10 +55326,6 @@ namespace oo_2_0
     "IcingSeverityQualifierCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, IcingSeverityQualifierCode >
-  _xsd_IcingSeverityQualifierCode_comparison_init;
-
   // JettyRailServedIndicatorCode
   //
 
@@ -59121,10 +55401,6 @@ namespace oo_2_0
   _xsd_JettyRailServedIndicatorCode_type_factory_init (
     "JettyRailServedIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, JettyRailServedIndicatorCode >
-  _xsd_JettyRailServedIndicatorCode_comparison_init;
 
   // LanguageCategoryCode
   //
@@ -59718,10 +55994,6 @@ namespace oo_2_0
     "LanguageCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, LanguageCategoryCode >
-  _xsd_LanguageCategoryCode_comparison_init;
-
   // LanguageSkillProficiencyCode
   //
 
@@ -59806,10 +56078,6 @@ namespace oo_2_0
     "LanguageSkillProficiencyCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, LanguageSkillProficiencyCode >
-  _xsd_LanguageSkillProficiencyCode_comparison_init;
-
   // LightCategoryCode
   //
 
@@ -59892,10 +56160,6 @@ namespace oo_2_0
     "LightCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, LightCategoryCode >
-  _xsd_LightCategoryCode_comparison_init;
-
   // LightMoonPhaseCode
   //
 
@@ -59975,10 +56239,6 @@ namespace oo_2_0
   _xsd_LightMoonPhaseCode_type_factory_init (
     "LightMoonPhaseCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, LightMoonPhaseCode >
-  _xsd_LightMoonPhaseCode_comparison_init;
 
   // LiquidSurfaceStatusSeaStateCode
   //
@@ -60072,10 +56332,6 @@ namespace oo_2_0
     "LiquidSurfaceStatusSeaStateCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, LiquidSurfaceStatusSeaStateCode >
-  _xsd_LiquidSurfaceStatusSeaStateCode_comparison_init;
-
   // LiquidSurfaceStatusSurfaceConditionCode
   //
 
@@ -60158,10 +56414,6 @@ namespace oo_2_0
     "LiquidSurfaceStatusSurfaceConditionCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, LiquidSurfaceStatusSurfaceConditionCode >
-  _xsd_LiquidSurfaceStatusSurfaceConditionCode_comparison_init;
-
   // LocationCategoryCode
   //
 
@@ -60243,10 +56495,6 @@ namespace oo_2_0
   _xsd_LocationCategoryCode_type_factory_init (
     "LocationCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, LocationCategoryCode >
-  _xsd_LocationCategoryCode_comparison_init;
 
   // MainActivityCode
   //
@@ -60333,10 +56581,6 @@ namespace oo_2_0
   _xsd_MainActivityCode_type_factory_init (
     "MainActivityCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MainActivityCode >
-  _xsd_MainActivityCode_comparison_init;
 
   // MaintenanceCapabilityCategoryCode
   //
@@ -60430,10 +56674,6 @@ namespace oo_2_0
     "MaintenanceCapabilityCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MaintenanceCapabilityCategoryCode >
-  _xsd_MaintenanceCapabilityCategoryCode_comparison_init;
-
   // MaintenanceCapabilityLevelCode
   //
 
@@ -60513,10 +56753,6 @@ namespace oo_2_0
   _xsd_MaintenanceCapabilityLevelCode_type_factory_init (
     "MaintenanceCapabilityLevelCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MaintenanceCapabilityLevelCode >
-  _xsd_MaintenanceCapabilityLevelCode_comparison_init;
 
   // MaritimeEquipmentTypeCategoryCode
   //
@@ -60639,10 +56875,6 @@ namespace oo_2_0
   _xsd_MaritimeEquipmentTypeCategoryCode_type_factory_init (
     "MaritimeEquipmentTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MaritimeEquipmentTypeCategoryCode >
-  _xsd_MaritimeEquipmentTypeCategoryCode_comparison_init;
 
   // MaritimeEquipmentTypeSubcategoryCode
   //
@@ -60840,10 +57072,6 @@ namespace oo_2_0
     "MaritimeEquipmentTypeSubcategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MaritimeEquipmentTypeSubcategoryCode >
-  _xsd_MaritimeEquipmentTypeSubcategoryCode_comparison_init;
-
   // MaterielCategoryCode
   //
 
@@ -60919,10 +57147,6 @@ namespace oo_2_0
   _xsd_MaterielCategoryCode_type_factory_init (
     "MaterielCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MaterielCategoryCode >
-  _xsd_MaterielCategoryCode_comparison_init;
 
   // MaterielStatusBodyColourCode
   //
@@ -61062,10 +57286,6 @@ namespace oo_2_0
     "MaterielStatusBodyColourCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MaterielStatusBodyColourCode >
-  _xsd_MaterielStatusBodyColourCode_comparison_init;
-
   // MaterielStatusBuoyMalfunctionCode
   //
 
@@ -61148,10 +57368,6 @@ namespace oo_2_0
     "MaterielStatusBuoyMalfunctionCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MaterielStatusBuoyMalfunctionCode >
-  _xsd_MaterielStatusBuoyMalfunctionCode_comparison_init;
-
   // MaterielStatusCategoryCode
   //
 
@@ -61230,10 +57446,6 @@ namespace oo_2_0
     "MaterielStatusCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MaterielStatusCategoryCode >
-  _xsd_MaterielStatusCategoryCode_comparison_init;
-
   // MaterielStatusImoCompliantIndicatorCode
   //
 
@@ -61309,10 +57521,6 @@ namespace oo_2_0
   _xsd_MaterielStatusImoCompliantIndicatorCode_type_factory_init (
     "MaterielStatusImoCompliantIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MaterielStatusImoCompliantIndicatorCode >
-  _xsd_MaterielStatusImoCompliantIndicatorCode_comparison_init;
 
   // MaterielStatusMarkingCode
   //
@@ -61399,10 +57607,6 @@ namespace oo_2_0
   _xsd_MaterielStatusMarkingCode_type_factory_init (
     "MaterielStatusMarkingCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MaterielStatusMarkingCode >
-  _xsd_MaterielStatusMarkingCode_comparison_init;
 
   // MaterielStatusMarkingColourCode
   //
@@ -61504,10 +57708,6 @@ namespace oo_2_0
     "MaterielStatusMarkingColourCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MaterielStatusMarkingColourCode >
-  _xsd_MaterielStatusMarkingColourCode_comparison_init;
-
   // MaterielStatusOperationalStatusCode
   //
 
@@ -61591,10 +57791,6 @@ namespace oo_2_0
   _xsd_MaterielStatusOperationalStatusCode_type_factory_init (
     "MaterielStatusOperationalStatusCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MaterielStatusOperationalStatusCode >
-  _xsd_MaterielStatusOperationalStatusCode_comparison_init;
 
   // MaterielStatusOperationalStatusModeCode
   //
@@ -61683,10 +57879,6 @@ namespace oo_2_0
   _xsd_MaterielStatusOperationalStatusModeCode_type_factory_init (
     "MaterielStatusOperationalStatusModeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MaterielStatusOperationalStatusModeCode >
-  _xsd_MaterielStatusOperationalStatusModeCode_comparison_init;
 
   // MaterielStatusOperationalStatusQualifierCode
   //
@@ -61792,10 +57984,6 @@ namespace oo_2_0
     "MaterielStatusOperationalStatusQualifierCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MaterielStatusOperationalStatusQualifierCode >
-  _xsd_MaterielStatusOperationalStatusQualifierCode_comparison_init;
-
   // MaterielStatusReserveIndicatorCode
   //
 
@@ -61871,10 +58059,6 @@ namespace oo_2_0
   _xsd_MaterielStatusReserveIndicatorCode_type_factory_init (
     "MaterielStatusReserveIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MaterielStatusReserveIndicatorCode >
-  _xsd_MaterielStatusReserveIndicatorCode_comparison_init;
 
   // MaterielStatusSafetyStatusCode
   //
@@ -61958,10 +58142,6 @@ namespace oo_2_0
     "MaterielStatusSafetyStatusCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MaterielStatusSafetyStatusCode >
-  _xsd_MaterielStatusSafetyStatusCode_comparison_init;
-
   // MaterielTypeCategoryCode
   //
 
@@ -62039,10 +58219,6 @@ namespace oo_2_0
   _xsd_MaterielTypeCategoryCode_type_factory_init (
     "MaterielTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MaterielTypeCategoryCode >
-  _xsd_MaterielTypeCategoryCode_comparison_init;
 
   // MaterielTypeSupplyClassCode
   //
@@ -62128,10 +58304,6 @@ namespace oo_2_0
     "MaterielTypeSupplyClassCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MaterielTypeSupplyClassCode >
-  _xsd_MaterielTypeSupplyClassCode_comparison_init;
-
   // MedicalFacilityStatusIntervalCasualtyTypeCode
   //
 
@@ -62212,10 +58384,6 @@ namespace oo_2_0
     "MedicalFacilityStatusIntervalCasualtyTypeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MedicalFacilityStatusIntervalCasualtyTypeCode >
-  _xsd_MedicalFacilityStatusIntervalCasualtyTypeCode_comparison_init;
-
   // MedicalFacilityStatusPendingSurgeryTriageCode
   //
 
@@ -62293,10 +58461,6 @@ namespace oo_2_0
   _xsd_MedicalFacilityStatusPendingSurgeryTriageCode_type_factory_init (
     "MedicalFacilityStatusPendingSurgeryTriageCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MedicalFacilityStatusPendingSurgeryTriageCode >
-  _xsd_MedicalFacilityStatusPendingSurgeryTriageCode_comparison_init;
 
   // MeteorologicFeatureCategoryCode
   //
@@ -62412,10 +58576,6 @@ namespace oo_2_0
     "MeteorologicFeatureCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MeteorologicFeatureCategoryCode >
-  _xsd_MeteorologicFeatureCategoryCode_comparison_init;
-
   // MeteorologicFeatureInterpretationCode
   //
 
@@ -62498,10 +58658,6 @@ namespace oo_2_0
     "MeteorologicFeatureInterpretationCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MeteorologicFeatureInterpretationCode >
-  _xsd_MeteorologicFeatureInterpretationCode_comparison_init;
-
   // MeteorologicFeatureSourceCode
   //
 
@@ -62578,10 +58734,6 @@ namespace oo_2_0
     "MeteorologicFeatureSourceCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MeteorologicFeatureSourceCode >
-  _xsd_MeteorologicFeatureSourceCode_comparison_init;
-
   // MilitaryObstacleCategoryCode
   //
 
@@ -62657,10 +58809,6 @@ namespace oo_2_0
   _xsd_MilitaryObstacleCategoryCode_type_factory_init (
     "MilitaryObstacleCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MilitaryObstacleCategoryCode >
-  _xsd_MilitaryObstacleCategoryCode_comparison_init;
 
   // MilitaryObstacleTypeCategoryCode
   //
@@ -62798,10 +58946,6 @@ namespace oo_2_0
     "MilitaryObstacleTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MilitaryObstacleTypeCategoryCode >
-  _xsd_MilitaryObstacleTypeCategoryCode_comparison_init;
-
   // MilitaryObstacleTypeSubcategoryCode
   //
 
@@ -62879,10 +59023,6 @@ namespace oo_2_0
   _xsd_MilitaryObstacleTypeSubcategoryCode_type_factory_init (
     "MilitaryObstacleTypeSubcategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MilitaryObstacleTypeSubcategoryCode >
-  _xsd_MilitaryObstacleTypeSubcategoryCode_comparison_init;
 
   // MilitaryOrganisationTypeCategoryCode
   //
@@ -62965,10 +59105,6 @@ namespace oo_2_0
   _xsd_MilitaryOrganisationTypeCategoryCode_type_factory_init (
     "MilitaryOrganisationTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MilitaryOrganisationTypeCategoryCode >
-  _xsd_MilitaryOrganisationTypeCategoryCode_comparison_init;
 
   // MilitaryOrganisationTypeServiceCode
   //
@@ -63075,10 +59211,6 @@ namespace oo_2_0
   _xsd_MilitaryOrganisationTypeServiceCode_type_factory_init (
     "MilitaryOrganisationTypeServiceCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MilitaryOrganisationTypeServiceCode >
-  _xsd_MilitaryOrganisationTypeServiceCode_comparison_init;
 
   // MilitaryPostTypeCategoryCode
   //
@@ -63228,10 +59360,6 @@ namespace oo_2_0
     "MilitaryPostTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MilitaryPostTypeCategoryCode >
-  _xsd_MilitaryPostTypeCategoryCode_comparison_init;
-
   // MilitaryPostTypeRankCode
   //
 
@@ -63352,10 +59480,6 @@ namespace oo_2_0
     "MilitaryPostTypeRankCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MilitaryPostTypeRankCode >
-  _xsd_MilitaryPostTypeRankCode_comparison_init;
-
   // MinePresenceCode
   //
 
@@ -63433,10 +59557,6 @@ namespace oo_2_0
   _xsd_MinePresenceCode_type_factory_init (
     "MinePresenceCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MinePresenceCode >
-  _xsd_MinePresenceCode_comparison_init;
 
   // MineStatusAirDropEffectCode
   //
@@ -63538,10 +59658,6 @@ namespace oo_2_0
     "MineStatusAirDropEffectCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MineStatusAirDropEffectCode >
-  _xsd_MineStatusAirDropEffectCode_comparison_init;
-
   // MineStatusCode
   //
 
@@ -63635,10 +59751,6 @@ namespace oo_2_0
   _xsd_MineStatusCode_type_factory_init (
     "MineStatusCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MineStatusCode >
-  _xsd_MineStatusCode_comparison_init;
 
   // MineStatusMaritimeMineQualifierCode
   //
@@ -63736,10 +59848,6 @@ namespace oo_2_0
     "MineStatusMaritimeMineQualifierCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MineStatusMaritimeMineQualifierCode >
-  _xsd_MineStatusMaritimeMineQualifierCode_comparison_init;
-
   // MinefieldCategoryCode
   //
 
@@ -63815,10 +59923,6 @@ namespace oo_2_0
   _xsd_MinefieldCategoryCode_type_factory_init (
     "MinefieldCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MinefieldCategoryCode >
-  _xsd_MinefieldCategoryCode_comparison_init;
 
   // MinefieldLandDepthPlacementCode
   //
@@ -63899,10 +60003,6 @@ namespace oo_2_0
   _xsd_MinefieldLandDepthPlacementCode_type_factory_init (
     "MinefieldLandDepthPlacementCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MinefieldLandDepthPlacementCode >
-  _xsd_MinefieldLandDepthPlacementCode_comparison_init;
 
   // MinefieldLandFunctionCode
   //
@@ -63988,10 +60088,6 @@ namespace oo_2_0
     "MinefieldLandFunctionCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MinefieldLandFunctionCode >
-  _xsd_MinefieldLandFunctionCode_comparison_init;
-
   // MinefieldLandPatternCode
   //
 
@@ -64071,10 +60167,6 @@ namespace oo_2_0
   _xsd_MinefieldLandPatternCode_type_factory_init (
     "MinefieldLandPatternCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MinefieldLandPatternCode >
-  _xsd_MinefieldLandPatternCode_comparison_init;
 
   // MinefieldLandPersistenceCode
   //
@@ -64156,10 +60248,6 @@ namespace oo_2_0
     "MinefieldLandPersistenceCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MinefieldLandPersistenceCode >
-  _xsd_MinefieldLandPersistenceCode_comparison_init;
-
   // MinefieldLandStoppingPowerCode
   //
 
@@ -64237,10 +60325,6 @@ namespace oo_2_0
   _xsd_MinefieldLandStoppingPowerCode_type_factory_init (
     "MinefieldLandStoppingPowerCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MinefieldLandStoppingPowerCode >
-  _xsd_MinefieldLandStoppingPowerCode_comparison_init;
 
   // MinefieldMaritimeBottomNaturalCamouflageCode
   //
@@ -64330,10 +60414,6 @@ namespace oo_2_0
     "MinefieldMaritimeBottomNaturalCamouflageCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MinefieldMaritimeBottomNaturalCamouflageCode >
-  _xsd_MinefieldMaritimeBottomNaturalCamouflageCode_comparison_init;
-
   // MinefieldMaritimeDepthPlacementCode
   //
 
@@ -64416,10 +60496,6 @@ namespace oo_2_0
     "MinefieldMaritimeDepthPlacementCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MinefieldMaritimeDepthPlacementCode >
-  _xsd_MinefieldMaritimeDepthPlacementCode_comparison_init;
-
   // MinefieldMaritimeFunctionCode
   //
 
@@ -64498,10 +60574,6 @@ namespace oo_2_0
     "MinefieldMaritimeFunctionCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MinefieldMaritimeFunctionCode >
-  _xsd_MinefieldMaritimeFunctionCode_comparison_init;
-
   // MinefieldMaritimeStatusCode
   //
 
@@ -64577,10 +60649,6 @@ namespace oo_2_0
   _xsd_MinefieldMaritimeStatusCode_type_factory_init (
     "MinefieldMaritimeStatusCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MinefieldMaritimeStatusCode >
-  _xsd_MinefieldMaritimeStatusCode_comparison_init;
 
   // MinefieldMaritimeStatusColourCode
   //
@@ -64659,10 +60727,6 @@ namespace oo_2_0
   _xsd_MinefieldMaritimeStatusColourCode_type_factory_init (
     "MinefieldMaritimeStatusColourCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MinefieldMaritimeStatusColourCode >
-  _xsd_MinefieldMaritimeStatusColourCode_comparison_init;
 
   // MinefieldMaritimeStatusExpectedLevelMcmCode
   //
@@ -64743,10 +60807,6 @@ namespace oo_2_0
   _xsd_MinefieldMaritimeStatusExpectedLevelMcmCode_type_factory_init (
     "MinefieldMaritimeStatusExpectedLevelMcmCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MinefieldMaritimeStatusExpectedLevelMcmCode >
-  _xsd_MinefieldMaritimeStatusExpectedLevelMcmCode_comparison_init;
 
   // MinefieldMaritimeStatusMineDetectionCode
   //
@@ -64876,10 +60936,6 @@ namespace oo_2_0
     "MinefieldMaritimeStatusMineDetectionCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MinefieldMaritimeStatusMineDetectionCode >
-  _xsd_MinefieldMaritimeStatusMineDetectionCode_comparison_init;
-
   // MinefieldMaritimeStatusMineZoneRiskCode
   //
 
@@ -64957,10 +61013,6 @@ namespace oo_2_0
   _xsd_MinefieldMaritimeStatusMineZoneRiskCode_type_factory_init (
     "MinefieldMaritimeStatusMineZoneRiskCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MinefieldMaritimeStatusMineZoneRiskCode >
-  _xsd_MinefieldMaritimeStatusMineZoneRiskCode_comparison_init;
 
   // MinefieldMaritimeStatusSeedingCode
   //
@@ -65054,10 +61106,6 @@ namespace oo_2_0
     "MinefieldMaritimeStatusSeedingCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MinefieldMaritimeStatusSeedingCode >
-  _xsd_MinefieldMaritimeStatusSeedingCode_comparison_init;
-
   // MinefieldMaritimeSubfunctionCode
   //
 
@@ -65149,10 +61197,6 @@ namespace oo_2_0
   _xsd_MinefieldMaritimeSubfunctionCode_type_factory_init (
     "MinefieldMaritimeSubfunctionCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MinefieldMaritimeSubfunctionCode >
-  _xsd_MinefieldMaritimeSubfunctionCode_comparison_init;
 
   // MiscellaneousEquipmentTypeCategoryCode
   //
@@ -65296,10 +61340,6 @@ namespace oo_2_0
     "MiscellaneousEquipmentTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MiscellaneousEquipmentTypeCategoryCode >
-  _xsd_MiscellaneousEquipmentTypeCategoryCode_comparison_init;
-
   // MiscellaneousEquipmentTypeSubcategoryCode
   //
 
@@ -65386,10 +61426,6 @@ namespace oo_2_0
     "MiscellaneousEquipmentTypeSubcategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MiscellaneousEquipmentTypeSubcategoryCode >
-  _xsd_MiscellaneousEquipmentTypeSubcategoryCode_comparison_init;
-
   // MissionPrimacyCode
   //
 
@@ -65467,10 +61503,6 @@ namespace oo_2_0
   _xsd_MissionPrimacyCode_type_factory_init (
     "MissionPrimacyCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MissionPrimacyCode >
-  _xsd_MissionPrimacyCode_comparison_init;
 
   // MobilityCapabilityCategoryCode
   //
@@ -65602,10 +61634,6 @@ namespace oo_2_0
     "MobilityCapabilityCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MobilityCapabilityCategoryCode >
-  _xsd_MobilityCapabilityCategoryCode_comparison_init;
-
   // MobilityCapabilityDescriptorCode
   //
 
@@ -65720,10 +61748,6 @@ namespace oo_2_0
     "MobilityCapabilityDescriptorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MobilityCapabilityDescriptorCode >
-  _xsd_MobilityCapabilityDescriptorCode_comparison_init;
-
   // MobilityCapabilityTerrainTypeCode
   //
 
@@ -65808,10 +61832,6 @@ namespace oo_2_0
     "MobilityCapabilityTerrainTypeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MobilityCapabilityTerrainTypeCode >
-  _xsd_MobilityCapabilityTerrainTypeCode_comparison_init;
-
   // MobilityCode
   //
 
@@ -65895,10 +61915,6 @@ namespace oo_2_0
   _xsd_MobilityCode_type_factory_init (
     "MobilityCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, MobilityCode >
-  _xsd_MobilityCode_comparison_init;
 
   // ModeOfTransportationCode
   //
@@ -65988,10 +62004,6 @@ namespace oo_2_0
     "ModeOfTransportationCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ModeOfTransportationCode >
-  _xsd_ModeOfTransportationCode_comparison_init;
-
   // NetworkArchitectureCode
   //
 
@@ -66075,10 +62087,6 @@ namespace oo_2_0
   _xsd_NetworkArchitectureCode_type_factory_init (
     "NetworkArchitectureCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, NetworkArchitectureCode >
-  _xsd_NetworkArchitectureCode_comparison_init;
 
   // NetworkCapacityBandwidthCode
   //
@@ -66188,10 +62196,6 @@ namespace oo_2_0
     "NetworkCapacityBandwidthCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, NetworkCapacityBandwidthCode >
-  _xsd_NetworkCapacityBandwidthCode_comparison_init;
-
   // NetworkCapacityProtocolCode
   //
 
@@ -66296,10 +62300,6 @@ namespace oo_2_0
     "NetworkCapacityProtocolCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, NetworkCapacityProtocolCode >
-  _xsd_NetworkCapacityProtocolCode_comparison_init;
-
   // NetworkCategoryCode
   //
 
@@ -66381,10 +62381,6 @@ namespace oo_2_0
   _xsd_NetworkCategoryCode_type_factory_init (
     "NetworkCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, NetworkCategoryCode >
-  _xsd_NetworkCategoryCode_comparison_init;
 
   // NetworkFrequencyBandCode
   //
@@ -66474,10 +62470,6 @@ namespace oo_2_0
     "NetworkFrequencyBandCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, NetworkFrequencyBandCode >
-  _xsd_NetworkFrequencyBandCode_comparison_init;
-
   // NetworkFrequencyModulationCode
   //
 
@@ -66561,10 +62553,6 @@ namespace oo_2_0
   _xsd_NetworkFrequencyModulationCode_type_factory_init (
     "NetworkFrequencyModulationCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, NetworkFrequencyModulationCode >
-  _xsd_NetworkFrequencyModulationCode_comparison_init;
 
   // NetworkMeansCode
   //
@@ -66674,10 +62662,6 @@ namespace oo_2_0
     "NetworkMeansCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, NetworkMeansCode >
-  _xsd_NetworkMeansCode_comparison_init;
-
   // NetworkServiceCategoryCode
   //
 
@@ -66770,10 +62754,6 @@ namespace oo_2_0
     "NetworkServiceCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, NetworkServiceCategoryCode >
-  _xsd_NetworkServiceCategoryCode_comparison_init;
-
   // NetworkServiceCryptographicIndicatorCode
   //
 
@@ -66850,10 +62830,6 @@ namespace oo_2_0
     "NetworkServiceCryptographicIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, NetworkServiceCryptographicIndicatorCode >
-  _xsd_NetworkServiceCryptographicIndicatorCode_comparison_init;
-
   // NetworkServiceStatusIndicatorCode
   //
 
@@ -66929,10 +62905,6 @@ namespace oo_2_0
   _xsd_NetworkServiceStatusIndicatorCode_type_factory_init (
     "NetworkServiceStatusIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, NetworkServiceStatusIndicatorCode >
-  _xsd_NetworkServiceStatusIndicatorCode_comparison_init;
 
   // NetworkServiceSubcategoryCode
   //
@@ -67066,10 +63038,6 @@ namespace oo_2_0
     "NetworkServiceSubcategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, NetworkServiceSubcategoryCode >
-  _xsd_NetworkServiceSubcategoryCode_comparison_init;
-
   // NetworkSubcategoryCode
   //
 
@@ -67151,10 +63119,6 @@ namespace oo_2_0
   _xsd_NetworkSubcategoryCode_type_factory_init (
     "NetworkSubcategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, NetworkSubcategoryCode >
-  _xsd_NetworkSubcategoryCode_comparison_init;
 
   // NuclearEventCategoryCode
   //
@@ -67244,10 +63208,6 @@ namespace oo_2_0
     "NuclearEventCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, NuclearEventCategoryCode >
-  _xsd_NuclearEventCategoryCode_comparison_init;
-
   // NuclearWeaponEventCraterPresenceCode
   //
 
@@ -67325,10 +63285,6 @@ namespace oo_2_0
   _xsd_NuclearWeaponEventCraterPresenceCode_type_factory_init (
     "NuclearWeaponEventCraterPresenceCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, NuclearWeaponEventCraterPresenceCode >
-  _xsd_NuclearWeaponEventCraterPresenceCode_comparison_init;
 
   // NuclearYieldGroupCode
   //
@@ -67420,10 +63376,6 @@ namespace oo_2_0
     "NuclearYieldGroupCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, NuclearYieldGroupCode >
-  _xsd_NuclearYieldGroupCode_comparison_init;
-
   // ObjectItemAddressAuthorisationIndicatorCode
   //
 
@@ -67499,10 +63451,6 @@ namespace oo_2_0
   _xsd_ObjectItemAddressAuthorisationIndicatorCode_type_factory_init (
     "ObjectItemAddressAuthorisationIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ObjectItemAddressAuthorisationIndicatorCode >
-  _xsd_ObjectItemAddressAuthorisationIndicatorCode_comparison_init;
 
   // ObjectItemAddressPrimacyCode
   //
@@ -67582,10 +63530,6 @@ namespace oo_2_0
     "ObjectItemAddressPrimacyCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ObjectItemAddressPrimacyCode >
-  _xsd_ObjectItemAddressPrimacyCode_comparison_init;
-
   // ObjectItemAddressTransmitReceiveCode
   //
 
@@ -67663,10 +63607,6 @@ namespace oo_2_0
   _xsd_ObjectItemAddressTransmitReceiveCode_type_factory_init (
     "ObjectItemAddressTransmitReceiveCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ObjectItemAddressTransmitReceiveCode >
-  _xsd_ObjectItemAddressTransmitReceiveCode_comparison_init;
 
   // ObjectItemAliasCategoryCode
   //
@@ -67751,10 +63691,6 @@ namespace oo_2_0
   _xsd_ObjectItemAliasCategoryCode_type_factory_init (
     "ObjectItemAliasCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ObjectItemAliasCategoryCode >
-  _xsd_ObjectItemAliasCategoryCode_comparison_init;
 
   // ObjectItemAssociationCategoryCode
   //
@@ -68026,10 +63962,6 @@ namespace oo_2_0
     "ObjectItemAssociationCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ObjectItemAssociationCategoryCode >
-  _xsd_ObjectItemAssociationCategoryCode_comparison_init;
-
   // ObjectItemAssociationSubcategoryCode
   //
 
@@ -68178,10 +64110,6 @@ namespace oo_2_0
     "ObjectItemAssociationSubcategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ObjectItemAssociationSubcategoryCode >
-  _xsd_ObjectItemAssociationSubcategoryCode_comparison_init;
-
   // ObjectItemCategoryCode
   //
 
@@ -68265,10 +64193,6 @@ namespace oo_2_0
   _xsd_ObjectItemCategoryCode_type_factory_init (
     "ObjectItemCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ObjectItemCategoryCode >
-  _xsd_ObjectItemCategoryCode_comparison_init;
 
   // ObjectItemGroupAccountDetailQualifierCode
   //
@@ -68386,10 +64310,6 @@ namespace oo_2_0
     "ObjectItemGroupAccountDetailQualifierCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ObjectItemGroupAccountDetailQualifierCode >
-  _xsd_ObjectItemGroupAccountDetailQualifierCode_comparison_init;
-
   // ObjectItemHostilityStatusCode
   //
 
@@ -68487,10 +64407,6 @@ namespace oo_2_0
   _xsd_ObjectItemHostilityStatusCode_type_factory_init (
     "ObjectItemHostilityStatusCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ObjectItemHostilityStatusCode >
-  _xsd_ObjectItemHostilityStatusCode_comparison_init;
 
   // ObjectItemLocationMeaningCode
   //
@@ -68592,10 +64508,6 @@ namespace oo_2_0
     "ObjectItemLocationMeaningCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ObjectItemLocationMeaningCode >
-  _xsd_ObjectItemLocationMeaningCode_comparison_init;
-
   // ObjectItemLocationRelativeSpeedCode
   //
 
@@ -68675,10 +64587,6 @@ namespace oo_2_0
   _xsd_ObjectItemLocationRelativeSpeedCode_type_factory_init (
     "ObjectItemLocationRelativeSpeedCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ObjectItemLocationRelativeSpeedCode >
-  _xsd_ObjectItemLocationRelativeSpeedCode_comparison_init;
 
   // ObjectItemReferenceAssociationCategoryCode
   //
@@ -68768,10 +64676,6 @@ namespace oo_2_0
     "ObjectItemReferenceAssociationCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ObjectItemReferenceAssociationCategoryCode >
-  _xsd_ObjectItemReferenceAssociationCategoryCode_comparison_init;
-
   // ObjectItemStatusBoobyTrapPresenceCode
   //
 
@@ -68849,10 +64753,6 @@ namespace oo_2_0
   _xsd_ObjectItemStatusBoobyTrapPresenceCode_type_factory_init (
     "ObjectItemStatusBoobyTrapPresenceCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ObjectItemStatusBoobyTrapPresenceCode >
-  _xsd_ObjectItemStatusBoobyTrapPresenceCode_comparison_init;
 
   // ObjectItemStatusCategoryCode
   //
@@ -68940,10 +64840,6 @@ namespace oo_2_0
     "ObjectItemStatusCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ObjectItemStatusCategoryCode >
-  _xsd_ObjectItemStatusCategoryCode_comparison_init;
-
   // ObjectItemStatusEmissionControlCode
   //
 
@@ -69021,10 +64917,6 @@ namespace oo_2_0
   _xsd_ObjectItemStatusEmissionControlCode_type_factory_init (
     "ObjectItemStatusEmissionControlCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ObjectItemStatusEmissionControlCode >
-  _xsd_ObjectItemStatusEmissionControlCode_comparison_init;
 
   // ObjectTypeCategoryCode
   //
@@ -69110,10 +65002,6 @@ namespace oo_2_0
     "ObjectTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ObjectTypeCategoryCode >
-  _xsd_ObjectTypeCategoryCode_comparison_init;
-
   // ObjectTypeDecoyIndicatorCode
   //
 
@@ -69190,10 +65078,6 @@ namespace oo_2_0
     "ObjectTypeDecoyIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ObjectTypeDecoyIndicatorCode >
-  _xsd_ObjectTypeDecoyIndicatorCode_comparison_init;
-
   // ObjectTypeEstablishmentCategoryCode
   //
 
@@ -69269,10 +65153,6 @@ namespace oo_2_0
   _xsd_ObjectTypeEstablishmentCategoryCode_type_factory_init (
     "ObjectTypeEstablishmentCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ObjectTypeEstablishmentCategoryCode >
-  _xsd_ObjectTypeEstablishmentCategoryCode_comparison_init;
 
   // ObjectTypeEstablishmentEnvironmentConditionCode
   //
@@ -69362,10 +65242,6 @@ namespace oo_2_0
     "ObjectTypeEstablishmentEnvironmentConditionCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ObjectTypeEstablishmentEnvironmentConditionCode >
-  _xsd_ObjectTypeEstablishmentEnvironmentConditionCode_comparison_init;
-
   // ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode
   //
 
@@ -69441,10 +65317,6 @@ namespace oo_2_0
   _xsd_ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode_type_factory_init (
     "ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode >
-  _xsd_ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode_comparison_init;
 
   // ObjectTypeEstablishmentOperationalModeCode
   //
@@ -69532,10 +65404,6 @@ namespace oo_2_0
     "ObjectTypeEstablishmentOperationalModeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ObjectTypeEstablishmentOperationalModeCode >
-  _xsd_ObjectTypeEstablishmentOperationalModeCode_comparison_init;
-
   // ObjectTypeReferenceAssociationCategoryCode
   //
 
@@ -69621,10 +65489,6 @@ namespace oo_2_0
   _xsd_ObjectTypeReferenceAssociationCategoryCode_type_factory_init (
     "ObjectTypeReferenceAssociationCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ObjectTypeReferenceAssociationCategoryCode >
-  _xsd_ObjectTypeReferenceAssociationCategoryCode_comparison_init;
 
   // OperationalCapabilityCategoryCode
   //
@@ -69896,10 +65760,6 @@ namespace oo_2_0
     "OperationalCapabilityCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OperationalCapabilityCategoryCode >
-  _xsd_OperationalCapabilityCategoryCode_comparison_init;
-
   // OperationalCapabilityLevelCode
   //
 
@@ -69986,10 +65846,6 @@ namespace oo_2_0
     "OperationalCapabilityLevelCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OperationalCapabilityLevelCode >
-  _xsd_OperationalCapabilityLevelCode_comparison_init;
-
   // OperationalCapabilityQualifierCode
   //
 
@@ -70067,10 +65923,6 @@ namespace oo_2_0
   _xsd_OperationalCapabilityQualifierCode_type_factory_init (
     "OperationalCapabilityQualifierCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OperationalCapabilityQualifierCode >
-  _xsd_OperationalCapabilityQualifierCode_comparison_init;
 
   // OperationalInformationGroupCategoryCode
   //
@@ -70156,10 +66008,6 @@ namespace oo_2_0
     "OperationalInformationGroupCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OperationalInformationGroupCategoryCode >
-  _xsd_OperationalInformationGroupCategoryCode_comparison_init;
-
   // OperationalInformationGroupOrganisationAssociationCategoryCode
   //
 
@@ -70235,10 +66083,6 @@ namespace oo_2_0
   _xsd_OperationalInformationGroupOrganisationAssociationCategoryCode_type_factory_init (
     "OperationalInformationGroupOrganisationAssociationCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OperationalInformationGroupOrganisationAssociationCategoryCode >
-  _xsd_OperationalInformationGroupOrganisationAssociationCategoryCode_comparison_init;
 
   // OrbitAreaAlignmentCode
   //
@@ -70317,10 +66161,6 @@ namespace oo_2_0
   _xsd_OrbitAreaAlignmentCode_type_factory_init (
     "OrbitAreaAlignmentCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OrbitAreaAlignmentCode >
-  _xsd_OrbitAreaAlignmentCode_comparison_init;
 
   // OrderCategoryCode
   //
@@ -70404,10 +66244,6 @@ namespace oo_2_0
     "OrderCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OrderCategoryCode >
-  _xsd_OrderCategoryCode_comparison_init;
-
   // OrderStatusExecutionStateCode
   //
 
@@ -70483,10 +66319,6 @@ namespace oo_2_0
   _xsd_OrderStatusExecutionStateCode_type_factory_init (
     "OrderStatusExecutionStateCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OrderStatusExecutionStateCode >
-  _xsd_OrderStatusExecutionStateCode_comparison_init;
 
   // OrganisationActionAssociationCategoryCode
   //
@@ -70588,10 +66420,6 @@ namespace oo_2_0
     "OrganisationActionAssociationCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OrganisationActionAssociationCategoryCode >
-  _xsd_OrganisationActionAssociationCategoryCode_comparison_init;
-
   // OrganisationActionTaskRuleOfEngagementStatusCategoryCode
   //
 
@@ -70674,10 +66502,6 @@ namespace oo_2_0
     "OrganisationActionTaskRuleOfEngagementStatusCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OrganisationActionTaskRuleOfEngagementStatusCategoryCode >
-  _xsd_OrganisationActionTaskRuleOfEngagementStatusCategoryCode_comparison_init;
-
   // OrganisationCategoryCode
   //
 
@@ -70756,10 +66580,6 @@ namespace oo_2_0
     "OrganisationCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OrganisationCategoryCode >
-  _xsd_OrganisationCategoryCode_comparison_init;
-
   // OrganisationMaterielTypeAssociationReportableTypeCode
   //
 
@@ -70835,10 +66655,6 @@ namespace oo_2_0
   _xsd_OrganisationMaterielTypeAssociationReportableTypeCode_type_factory_init (
     "OrganisationMaterielTypeAssociationReportableTypeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OrganisationMaterielTypeAssociationReportableTypeCode >
-  _xsd_OrganisationMaterielTypeAssociationReportableTypeCode_comparison_init;
 
   // OrganisationPlanOrderAssociationCategoryCode
   //
@@ -70921,10 +66737,6 @@ namespace oo_2_0
   _xsd_OrganisationPlanOrderAssociationCategoryCode_type_factory_init (
     "OrganisationPlanOrderAssociationCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OrganisationPlanOrderAssociationCategoryCode >
-  _xsd_OrganisationPlanOrderAssociationCategoryCode_comparison_init;
 
   // OrganisationReferenceAssociationCategoryCode
   //
@@ -71010,10 +66822,6 @@ namespace oo_2_0
     "OrganisationReferenceAssociationCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OrganisationReferenceAssociationCategoryCode >
-  _xsd_OrganisationReferenceAssociationCategoryCode_comparison_init;
-
   // OrganisationStatusAvailabilityCode
   //
 
@@ -71098,10 +66906,6 @@ namespace oo_2_0
     "OrganisationStatusAvailabilityCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OrganisationStatusAvailabilityCode >
-  _xsd_OrganisationStatusAvailabilityCode_comparison_init;
-
   // OrganisationStatusCbrnDressStateCode
   //
 
@@ -71183,10 +66987,6 @@ namespace oo_2_0
   _xsd_OrganisationStatusCbrnDressStateCode_type_factory_init (
     "OrganisationStatusCbrnDressStateCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OrganisationStatusCbrnDressStateCode >
-  _xsd_OrganisationStatusCbrnDressStateCode_comparison_init;
 
   // OrganisationStatusCommandAndControlRoleCode
   //
@@ -71300,10 +67100,6 @@ namespace oo_2_0
     "OrganisationStatusCommandAndControlRoleCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OrganisationStatusCommandAndControlRoleCode >
-  _xsd_OrganisationStatusCommandAndControlRoleCode_comparison_init;
-
   // OrganisationStatusCommitmentStatusCode
   //
 
@@ -71379,10 +67175,6 @@ namespace oo_2_0
   _xsd_OrganisationStatusCommitmentStatusCode_type_factory_init (
     "OrganisationStatusCommitmentStatusCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OrganisationStatusCommitmentStatusCode >
-  _xsd_OrganisationStatusCommitmentStatusCode_comparison_init;
 
   // OrganisationStatusFireModeCode
   //
@@ -71463,10 +67255,6 @@ namespace oo_2_0
   _xsd_OrganisationStatusFireModeCode_type_factory_init (
     "OrganisationStatusFireModeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OrganisationStatusFireModeCode >
-  _xsd_OrganisationStatusFireModeCode_comparison_init;
 
   // OrganisationStatusOperationalStatusCode
   //
@@ -71551,10 +67339,6 @@ namespace oo_2_0
   _xsd_OrganisationStatusOperationalStatusCode_type_factory_init (
     "OrganisationStatusOperationalStatusCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OrganisationStatusOperationalStatusCode >
-  _xsd_OrganisationStatusOperationalStatusCode_comparison_init;
 
   // OrganisationStatusOperationalStatusQualifierCode
   //
@@ -71641,10 +67425,6 @@ namespace oo_2_0
   _xsd_OrganisationStatusOperationalStatusQualifierCode_type_factory_init (
     "OrganisationStatusOperationalStatusQualifierCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OrganisationStatusOperationalStatusQualifierCode >
-  _xsd_OrganisationStatusOperationalStatusQualifierCode_comparison_init;
 
   // OrganisationStatusReadinessCode
   //
@@ -71796,10 +67576,6 @@ namespace oo_2_0
     "OrganisationStatusReadinessCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OrganisationStatusReadinessCode >
-  _xsd_OrganisationStatusReadinessCode_comparison_init;
-
   // OrganisationStatusReinforcementCode
   //
 
@@ -71882,10 +67658,6 @@ namespace oo_2_0
     "OrganisationStatusReinforcementCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OrganisationStatusReinforcementCode >
-  _xsd_OrganisationStatusReinforcementCode_comparison_init;
-
   // OrganisationStatusReserveIndicatorCode
   //
 
@@ -71961,10 +67733,6 @@ namespace oo_2_0
   _xsd_OrganisationStatusReserveIndicatorCode_type_factory_init (
     "OrganisationStatusReserveIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OrganisationStatusReserveIndicatorCode >
-  _xsd_OrganisationStatusReserveIndicatorCode_comparison_init;
 
   // OrganisationStatusTrainingCode
   //
@@ -72046,10 +67814,6 @@ namespace oo_2_0
     "OrganisationStatusTrainingCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OrganisationStatusTrainingCode >
-  _xsd_OrganisationStatusTrainingCode_comparison_init;
-
   // OrganisationStatusUsageStatusCode
   //
 
@@ -72127,10 +67891,6 @@ namespace oo_2_0
   _xsd_OrganisationStatusUsageStatusCode_type_factory_init (
     "OrganisationStatusUsageStatusCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OrganisationStatusUsageStatusCode >
-  _xsd_OrganisationStatusUsageStatusCode_comparison_init;
 
   // OrganisationTypeCategoryCode
   //
@@ -72213,10 +67973,6 @@ namespace oo_2_0
   _xsd_OrganisationTypeCategoryCode_type_factory_init (
     "OrganisationTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OrganisationTypeCategoryCode >
-  _xsd_OrganisationTypeCategoryCode_comparison_init;
 
   // OrganisationTypeCommandAndControlCategoryCode
   //
@@ -72344,10 +68100,6 @@ namespace oo_2_0
     "OrganisationTypeCommandAndControlCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OrganisationTypeCommandAndControlCategoryCode >
-  _xsd_OrganisationTypeCommandAndControlCategoryCode_comparison_init;
-
   // OrganisationTypeCommandFunctionIndicatorCode
   //
 
@@ -72423,10 +68175,6 @@ namespace oo_2_0
   _xsd_OrganisationTypeCommandFunctionIndicatorCode_type_factory_init (
     "OrganisationTypeCommandFunctionIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, OrganisationTypeCommandFunctionIndicatorCode >
-  _xsd_OrganisationTypeCommandFunctionIndicatorCode_comparison_init;
 
   // PersistencyCode
   //
@@ -72507,10 +68255,6 @@ namespace oo_2_0
   _xsd_PersistencyCode_type_factory_init (
     "PersistencyCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PersistencyCode >
-  _xsd_PersistencyCode_comparison_init;
 
   // PersonBloodTypeCode
   //
@@ -72602,10 +68346,6 @@ namespace oo_2_0
     "PersonBloodTypeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PersonBloodTypeCode >
-  _xsd_PersonBloodTypeCode_comparison_init;
-
   // PersonIdentificationDocumentCode
   //
 
@@ -72687,10 +68427,6 @@ namespace oo_2_0
   _xsd_PersonIdentificationDocumentCode_type_factory_init (
     "PersonIdentificationDocumentCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PersonIdentificationDocumentCode >
-  _xsd_PersonIdentificationDocumentCode_comparison_init;
 
   // PersonLanguageSkillGeneralProficiencyCode
   //
@@ -72776,10 +68512,6 @@ namespace oo_2_0
     "PersonLanguageSkillGeneralProficiencyCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PersonLanguageSkillGeneralProficiencyCode >
-  _xsd_PersonLanguageSkillGeneralProficiencyCode_comparison_init;
-
   // PersonProfessingIndicatorCode
   //
 
@@ -72855,10 +68587,6 @@ namespace oo_2_0
   _xsd_PersonProfessingIndicatorCode_type_factory_init (
     "PersonProfessingIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PersonProfessingIndicatorCode >
-  _xsd_PersonProfessingIndicatorCode_comparison_init;
 
   // PersonStatusDutyStatusCode
   //
@@ -72956,10 +68684,6 @@ namespace oo_2_0
     "PersonStatusDutyStatusCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PersonStatusDutyStatusCode >
-  _xsd_PersonStatusDutyStatusCode_comparison_init;
-
   // PersonStatusPhysicalStatusCode
   //
 
@@ -73041,10 +68765,6 @@ namespace oo_2_0
   _xsd_PersonStatusPhysicalStatusCode_type_factory_init (
     "PersonStatusPhysicalStatusCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PersonStatusPhysicalStatusCode >
-  _xsd_PersonStatusPhysicalStatusCode_comparison_init;
 
   // PersonStatusPhysicalStatusQualifierCode
   //
@@ -73132,10 +68852,6 @@ namespace oo_2_0
     "PersonStatusPhysicalStatusQualifierCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PersonStatusPhysicalStatusQualifierCode >
-  _xsd_PersonStatusPhysicalStatusQualifierCode_comparison_init;
-
   // PersonStatusReserveIndicatorCode
   //
 
@@ -73211,10 +68927,6 @@ namespace oo_2_0
   _xsd_PersonStatusReserveIndicatorCode_type_factory_init (
     "PersonStatusReserveIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PersonStatusReserveIndicatorCode >
-  _xsd_PersonStatusReserveIndicatorCode_comparison_init;
 
   // PersonTypeCategoryCode
   //
@@ -73297,10 +69009,6 @@ namespace oo_2_0
   _xsd_PersonTypeCategoryCode_type_factory_init (
     "PersonTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PersonTypeCategoryCode >
-  _xsd_PersonTypeCategoryCode_comparison_init;
 
   // PersonTypeRankCode
   //
@@ -73421,10 +69129,6 @@ namespace oo_2_0
   _xsd_PersonTypeRankCode_type_factory_init (
     "PersonTypeRankCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PersonTypeRankCode >
-  _xsd_PersonTypeRankCode_comparison_init;
 
   // PersonTypeSubcategoryCode
   //
@@ -73570,10 +69274,6 @@ namespace oo_2_0
     "PersonTypeSubcategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PersonTypeSubcategoryCode >
-  _xsd_PersonTypeSubcategoryCode_comparison_init;
-
   // PhysicalAddressCategoryCode
   //
 
@@ -73656,10 +69356,6 @@ namespace oo_2_0
     "PhysicalAddressCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PhysicalAddressCategoryCode >
-  _xsd_PhysicalAddressCategoryCode_comparison_init;
-
   // PlanCategoryCode
   //
 
@@ -73735,10 +69431,6 @@ namespace oo_2_0
   _xsd_PlanCategoryCode_type_factory_init (
     "PlanCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PlanCategoryCode >
-  _xsd_PlanCategoryCode_comparison_init;
 
   // PlanOrderAssociationCategoryCode
   //
@@ -73822,10 +69514,6 @@ namespace oo_2_0
     "PlanOrderAssociationCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PlanOrderAssociationCategoryCode >
-  _xsd_PlanOrderAssociationCategoryCode_comparison_init;
-
   // PlanOrderCategoryCode
   //
 
@@ -73901,10 +69589,6 @@ namespace oo_2_0
   _xsd_PlanOrderCategoryCode_type_factory_init (
     "PlanOrderCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PlanOrderCategoryCode >
-  _xsd_PlanOrderCategoryCode_comparison_init;
 
   // PlanOrderComponentContentReferenceCategoryCode
   //
@@ -73992,10 +69676,6 @@ namespace oo_2_0
     "PlanOrderComponentContentReferenceCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PlanOrderComponentContentReferenceCategoryCode >
-  _xsd_PlanOrderComponentContentReferenceCategoryCode_comparison_init;
-
   // PlanOrderComponentStructureCategoryCode
   //
 
@@ -74073,10 +69753,6 @@ namespace oo_2_0
   _xsd_PlanOrderComponentStructureCategoryCode_type_factory_init (
     "PlanOrderComponentStructureCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PlanOrderComponentStructureCategoryCode >
-  _xsd_PlanOrderComponentStructureCategoryCode_comparison_init;
 
   // PlanOrderDistributionAcknowledgementCode
   //
@@ -74156,10 +69832,6 @@ namespace oo_2_0
     "PlanOrderDistributionAcknowledgementCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PlanOrderDistributionAcknowledgementCode >
-  _xsd_PlanOrderDistributionAcknowledgementCode_comparison_init;
-
   // PlanOrderDistributionCategoryCode
   //
 
@@ -74235,10 +69907,6 @@ namespace oo_2_0
   _xsd_PlanOrderDistributionCategoryCode_type_factory_init (
     "PlanOrderDistributionCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PlanOrderDistributionCategoryCode >
-  _xsd_PlanOrderDistributionCategoryCode_comparison_init;
 
   // PlanOrderHeaderContentTimeZoneCode
   //
@@ -74362,10 +70030,6 @@ namespace oo_2_0
     "PlanOrderHeaderContentTimeZoneCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PlanOrderHeaderContentTimeZoneCode >
-  _xsd_PlanOrderHeaderContentTimeZoneCode_comparison_init;
-
   // PlanStatusDevelopmentStatusCode
   //
 
@@ -74441,10 +70105,6 @@ namespace oo_2_0
   _xsd_PlanStatusDevelopmentStatusCode_type_factory_init (
     "PlanStatusDevelopmentStatusCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PlanStatusDevelopmentStatusCode >
-  _xsd_PlanStatusDevelopmentStatusCode_comparison_init;
 
   // PlanStatusStateCode
   //
@@ -74524,10 +70184,6 @@ namespace oo_2_0
     "PlanStatusStateCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PlanStatusStateCode >
-  _xsd_PlanStatusStateCode_comparison_init;
-
   // PointCategoryCode
   //
 
@@ -74603,10 +70259,6 @@ namespace oo_2_0
   _xsd_PointCategoryCode_type_factory_init (
     "PointCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PointCategoryCode >
-  _xsd_PointCategoryCode_comparison_init;
 
   // PrecipitationCategoryCode
   //
@@ -74706,10 +70358,6 @@ namespace oo_2_0
     "PrecipitationCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PrecipitationCategoryCode >
-  _xsd_PrecipitationCategoryCode_comparison_init;
-
   // PrivateSectorOrganisationTypeCategoryCode
   //
 
@@ -74802,10 +70450,6 @@ namespace oo_2_0
     "PrivateSectorOrganisationTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, PrivateSectorOrganisationTypeCategoryCode >
-  _xsd_PrivateSectorOrganisationTypeCategoryCode_comparison_init;
-
   // QuayContainerHandlingTypeCode
   //
 
@@ -74892,10 +70536,6 @@ namespace oo_2_0
     "QuayContainerHandlingTypeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, QuayContainerHandlingTypeCode >
-  _xsd_QuayContainerHandlingTypeCode_comparison_init;
-
   // QuayCraneOffloadingTypeCode
   //
 
@@ -74980,10 +70620,6 @@ namespace oo_2_0
     "QuayCraneOffloadingTypeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, QuayCraneOffloadingTypeCode >
-  _xsd_QuayCraneOffloadingTypeCode_comparison_init;
-
   // QuayRailServedIndicatorCode
   //
 
@@ -75059,10 +70695,6 @@ namespace oo_2_0
   _xsd_QuayRailServedIndicatorCode_type_factory_init (
     "QuayRailServedIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, QuayRailServedIndicatorCode >
-  _xsd_QuayRailServedIndicatorCode_comparison_init;
 
   // QuayStorageCode
   //
@@ -75156,10 +70788,6 @@ namespace oo_2_0
     "QuayStorageCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, QuayStorageCode >
-  _xsd_QuayStorageCode_comparison_init;
-
   // RadioactiveEventCategoryCode
   //
 
@@ -75239,10 +70867,6 @@ namespace oo_2_0
   _xsd_RadioactiveEventCategoryCode_type_factory_init (
     "RadioactiveEventCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RadioactiveEventCategoryCode >
-  _xsd_RadioactiveEventCategoryCode_comparison_init;
 
   // RadioactiveEventDoseRateTrendCode
   //
@@ -75330,10 +70954,6 @@ namespace oo_2_0
     "RadioactiveEventDoseRateTrendCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RadioactiveEventDoseRateTrendCode >
-  _xsd_RadioactiveEventDoseRateTrendCode_comparison_init;
-
   // RadioactiveEventRelativeDecayRateCode
   //
 
@@ -75411,10 +71031,6 @@ namespace oo_2_0
   _xsd_RadioactiveEventRelativeDecayRateCode_type_factory_init (
     "RadioactiveEventRelativeDecayRateCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RadioactiveEventRelativeDecayRateCode >
-  _xsd_RadioactiveEventRelativeDecayRateCode_comparison_init;
 
   // RadioactiveMaterielTypeCategoryCode
   //
@@ -75510,10 +71126,6 @@ namespace oo_2_0
     "RadioactiveMaterielTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RadioactiveMaterielTypeCategoryCode >
-  _xsd_RadioactiveMaterielTypeCategoryCode_comparison_init;
-
   // RadioactiveMaterielTypePrimaryRadiationCode
   //
 
@@ -75595,10 +71207,6 @@ namespace oo_2_0
   _xsd_RadioactiveMaterielTypePrimaryRadiationCode_type_factory_init (
     "RadioactiveMaterielTypePrimaryRadiationCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RadioactiveMaterielTypePrimaryRadiationCode >
-  _xsd_RadioactiveMaterielTypePrimaryRadiationCode_comparison_init;
 
   // RailcarTypeCategoryCode
   //
@@ -75685,10 +71293,6 @@ namespace oo_2_0
   _xsd_RailcarTypeCategoryCode_type_factory_init (
     "RailcarTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RailcarTypeCategoryCode >
-  _xsd_RailcarTypeCategoryCode_comparison_init;
 
   // RailcarTypeSubcategoryCode
   //
@@ -75814,10 +71418,6 @@ namespace oo_2_0
     "RailcarTypeSubcategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RailcarTypeSubcategoryCode >
-  _xsd_RailcarTypeSubcategoryCode_comparison_init;
-
   // RailwaySignalSystemCode
   //
 
@@ -75904,10 +71504,6 @@ namespace oo_2_0
     "RailwaySignalSystemCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RailwaySignalSystemCode >
-  _xsd_RailwaySignalSystemCode_comparison_init;
-
   // RailwaySignalSystemEfficiencyCode
   //
 
@@ -75988,10 +71584,6 @@ namespace oo_2_0
     "RailwaySignalSystemEfficiencyCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RailwaySignalSystemEfficiencyCode >
-  _xsd_RailwaySignalSystemEfficiencyCode_comparison_init;
-
   // RailwayTrackGaugeCode
   //
 
@@ -76068,10 +71660,6 @@ namespace oo_2_0
     "RailwayTrackGaugeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RailwayTrackGaugeCode >
-  _xsd_RailwayTrackGaugeCode_comparison_init;
-
   // RailwayTractionSystemCode
   //
 
@@ -76147,10 +71735,6 @@ namespace oo_2_0
   _xsd_RailwayTractionSystemCode_type_factory_init (
     "RailwayTractionSystemCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RailwayTractionSystemCode >
-  _xsd_RailwayTractionSystemCode_comparison_init;
 
   // ReferenceAssociationCategoryCode
   //
@@ -76245,10 +71829,6 @@ namespace oo_2_0
   _xsd_ReferenceAssociationCategoryCode_type_factory_init (
     "ReferenceAssociationCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ReferenceAssociationCategoryCode >
-  _xsd_ReferenceAssociationCategoryCode_comparison_init;
 
   // ReferenceContentCategoryCode
   //
@@ -76362,10 +71942,6 @@ namespace oo_2_0
     "ReferenceContentCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ReferenceContentCategoryCode >
-  _xsd_ReferenceContentCategoryCode_comparison_init;
-
   // ReferenceLifecycleCode
   //
 
@@ -76443,10 +72019,6 @@ namespace oo_2_0
   _xsd_ReferenceLifecycleCode_type_factory_init (
     "ReferenceLifecycleCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ReferenceLifecycleCode >
-  _xsd_ReferenceLifecycleCode_comparison_init;
 
   // ReferenceMediumTypeCode
   //
@@ -76533,10 +72105,6 @@ namespace oo_2_0
   _xsd_ReferenceMediumTypeCode_type_factory_init (
     "ReferenceMediumTypeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ReferenceMediumTypeCode >
-  _xsd_ReferenceMediumTypeCode_comparison_init;
 
   // ReferenceTransmittalTypeCode
   //
@@ -76632,10 +72200,6 @@ namespace oo_2_0
     "ReferenceTransmittalTypeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ReferenceTransmittalTypeCode >
-  _xsd_ReferenceTransmittalTypeCode_comparison_init;
-
   // ReferenceVerificationCode
   //
 
@@ -76714,10 +72278,6 @@ namespace oo_2_0
     "ReferenceVerificationCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ReferenceVerificationCode >
-  _xsd_ReferenceVerificationCode_comparison_init;
-
   // RelativeCoordinateSystemReferenceCategoryCode
   //
 
@@ -76793,10 +72353,6 @@ namespace oo_2_0
   _xsd_RelativeCoordinateSystemReferenceCategoryCode_type_factory_init (
     "RelativeCoordinateSystemReferenceCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RelativeCoordinateSystemReferenceCategoryCode >
-  _xsd_RelativeCoordinateSystemReferenceCategoryCode_comparison_init;
 
   // ReleaseCategoryCode
   //
@@ -76879,10 +72435,6 @@ namespace oo_2_0
   _xsd_ReleaseCategoryCode_type_factory_init (
     "ReleaseCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ReleaseCategoryCode >
-  _xsd_ReleaseCategoryCode_comparison_init;
 
   // ReportingDataAccuracyCode
   //
@@ -76968,10 +72520,6 @@ namespace oo_2_0
     "ReportingDataAccuracyCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ReportingDataAccuracyCode >
-  _xsd_ReportingDataAccuracyCode_comparison_init;
-
   // ReportingDataCategoryCode
   //
 
@@ -77056,10 +72604,6 @@ namespace oo_2_0
     "ReportingDataCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ReportingDataCategoryCode >
-  _xsd_ReportingDataCategoryCode_comparison_init;
-
   // ReportingDataCountingIndicatorCode
   //
 
@@ -77135,10 +72679,6 @@ namespace oo_2_0
   _xsd_ReportingDataCountingIndicatorCode_type_factory_init (
     "ReportingDataCountingIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ReportingDataCountingIndicatorCode >
-  _xsd_ReportingDataCountingIndicatorCode_comparison_init;
 
   // ReportingDataCredibilityCode
   //
@@ -77219,10 +72759,6 @@ namespace oo_2_0
   _xsd_ReportingDataCredibilityCode_type_factory_init (
     "ReportingDataCredibilityCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ReportingDataCredibilityCode >
-  _xsd_ReportingDataCredibilityCode_comparison_init;
 
   // ReportingDataEntityCategoryCode
   //
@@ -77344,10 +72880,6 @@ namespace oo_2_0
     "ReportingDataEntityCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ReportingDataEntityCategoryCode >
-  _xsd_ReportingDataEntityCategoryCode_comparison_init;
-
   // ReportingDataRealDataExerciseUseOnlyCode
   //
 
@@ -77421,10 +72953,6 @@ namespace oo_2_0
   _xsd_ReportingDataRealDataExerciseUseOnlyCode_type_factory_init (
     "ReportingDataRealDataExerciseUseOnlyCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ReportingDataRealDataExerciseUseOnlyCode >
-  _xsd_ReportingDataRealDataExerciseUseOnlyCode_comparison_init;
 
   // ReportingDataReliabilityCode
   //
@@ -77509,10 +73037,6 @@ namespace oo_2_0
   _xsd_ReportingDataReliabilityCode_type_factory_init (
     "ReportingDataReliabilityCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ReportingDataReliabilityCode >
-  _xsd_ReportingDataReliabilityCode_comparison_init;
 
   // ReportingDataSourceTypeCode
   //
@@ -77656,10 +73180,6 @@ namespace oo_2_0
     "ReportingDataSourceTypeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ReportingDataSourceTypeCode >
-  _xsd_ReportingDataSourceTypeCode_comparison_init;
-
   // ReportingDataTimingCategoryCode
   //
 
@@ -77737,10 +73257,6 @@ namespace oo_2_0
   _xsd_ReportingDataTimingCategoryCode_type_factory_init (
     "ReportingDataTimingCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, ReportingDataTimingCategoryCode >
-  _xsd_ReportingDataTimingCategoryCode_comparison_init;
 
   // RequestAnswerCategoryCode
   //
@@ -77821,10 +73337,6 @@ namespace oo_2_0
   _xsd_RequestAnswerCategoryCode_type_factory_init (
     "RequestAnswerCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RequestAnswerCategoryCode >
-  _xsd_RequestAnswerCategoryCode_comparison_init;
 
   // RequestCategoryCode
   //
@@ -77916,10 +73428,6 @@ namespace oo_2_0
     "RequestCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RequestCategoryCode >
-  _xsd_RequestCategoryCode_comparison_init;
-
   // RequestImmediateInterestIndicatorCode
   //
 
@@ -77995,10 +73503,6 @@ namespace oo_2_0
   _xsd_RequestImmediateInterestIndicatorCode_type_factory_init (
     "RequestImmediateInterestIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RequestImmediateInterestIndicatorCode >
-  _xsd_RequestImmediateInterestIndicatorCode_comparison_init;
 
   // RoadCategoryCode
   //
@@ -78088,10 +73592,6 @@ namespace oo_2_0
     "RoadCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RoadCategoryCode >
-  _xsd_RoadCategoryCode_comparison_init;
-
   // RoadQualityCode
   //
 
@@ -78172,10 +73672,6 @@ namespace oo_2_0
     "RoadQualityCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RoadQualityCode >
-  _xsd_RoadQualityCode_comparison_init;
-
   // RoadShoulderWidthCode
   //
 
@@ -78253,10 +73749,6 @@ namespace oo_2_0
   _xsd_RoadShoulderWidthCode_type_factory_init (
     "RoadShoulderWidthCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RoadShoulderWidthCode >
-  _xsd_RoadShoulderWidthCode_comparison_init;
 
   // RoadWeatherConditionCategoryCode
   //
@@ -78336,10 +73828,6 @@ namespace oo_2_0
     "RoadWeatherConditionCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RoadWeatherConditionCategoryCode >
-  _xsd_RoadWeatherConditionCategoryCode_comparison_init;
-
   // RouteDirectionUsageCode
   //
 
@@ -78418,10 +73906,6 @@ namespace oo_2_0
     "RouteDirectionUsageCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RouteDirectionUsageCode >
-  _xsd_RouteDirectionUsageCode_comparison_init;
-
   // RouteSegmentCategoryCode
   //
 
@@ -78497,10 +73981,6 @@ namespace oo_2_0
   _xsd_RouteSegmentCategoryCode_type_factory_init (
     "RouteSegmentCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RouteSegmentCategoryCode >
-  _xsd_RouteSegmentCategoryCode_comparison_init;
 
   // RouteTypeCategoryCode
   //
@@ -78654,10 +74134,6 @@ namespace oo_2_0
     "RouteTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RouteTypeCategoryCode >
-  _xsd_RouteTypeCategoryCode_comparison_init;
-
   // RunwayLightingPresenceIndicatorCode
   //
 
@@ -78734,10 +74210,6 @@ namespace oo_2_0
     "RunwayLightingPresenceIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RunwayLightingPresenceIndicatorCode >
-  _xsd_RunwayLightingPresenceIndicatorCode_comparison_init;
-
   // RunwayPavementEvaluationMethodCode
   //
 
@@ -78813,10 +74285,6 @@ namespace oo_2_0
   _xsd_RunwayPavementEvaluationMethodCode_type_factory_init (
     "RunwayPavementEvaluationMethodCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RunwayPavementEvaluationMethodCode >
-  _xsd_RunwayPavementEvaluationMethodCode_comparison_init;
 
   // RunwayPavementMaximumTyrePressureCode
   //
@@ -78898,10 +74366,6 @@ namespace oo_2_0
     "RunwayPavementMaximumTyrePressureCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RunwayPavementMaximumTyrePressureCode >
-  _xsd_RunwayPavementMaximumTyrePressureCode_comparison_init;
-
   // RunwayPavementSubgradeCategoryCode
   //
 
@@ -78982,10 +74446,6 @@ namespace oo_2_0
     "RunwayPavementSubgradeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RunwayPavementSubgradeCategoryCode >
-  _xsd_RunwayPavementSubgradeCategoryCode_comparison_init;
-
   // RunwayPavementTypeCode
   //
 
@@ -79061,10 +74521,6 @@ namespace oo_2_0
   _xsd_RunwayPavementTypeCode_type_factory_init (
     "RunwayPavementTypeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, RunwayPavementTypeCode >
-  _xsd_RunwayPavementTypeCode_comparison_init;
 
   // SecurityClassificationLevelCode
   //
@@ -79149,10 +74605,6 @@ namespace oo_2_0
   _xsd_SecurityClassificationLevelCode_type_factory_init (
     "SecurityClassificationLevelCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, SecurityClassificationLevelCode >
-  _xsd_SecurityClassificationLevelCode_comparison_init;
 
   // SolidSurfaceStatusCode
   //
@@ -79242,10 +74694,6 @@ namespace oo_2_0
     "SolidSurfaceStatusCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, SolidSurfaceStatusCode >
-  _xsd_SolidSurfaceStatusCode_comparison_init;
-
   // SolidSurfaceStatusSurfaceConditionCode
   //
 
@@ -79334,10 +74782,6 @@ namespace oo_2_0
     "SolidSurfaceStatusSurfaceConditionCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, SolidSurfaceStatusSurfaceConditionCode >
-  _xsd_SolidSurfaceStatusSurfaceConditionCode_comparison_init;
-
   // SolidSurfaceStatusSurfaceFirmnessCode
   //
 
@@ -79418,10 +74862,6 @@ namespace oo_2_0
     "SolidSurfaceStatusSurfaceFirmnessCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, SolidSurfaceStatusSurfaceFirmnessCode >
-  _xsd_SolidSurfaceStatusSurfaceFirmnessCode_comparison_init;
-
   // SpeedPrecisionCode
   //
 
@@ -79499,10 +74939,6 @@ namespace oo_2_0
   _xsd_SpeedPrecisionCode_type_factory_init (
     "SpeedPrecisionCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, SpeedPrecisionCode >
-  _xsd_SpeedPrecisionCode_comparison_init;
 
   // StorageCapabilityConditionCode
   //
@@ -79583,10 +75019,6 @@ namespace oo_2_0
   _xsd_StorageCapabilityConditionCode_type_factory_init (
     "StorageCapabilityConditionCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, StorageCapabilityConditionCode >
-  _xsd_StorageCapabilityConditionCode_comparison_init;
 
   // StorageCapabilityDescriptorCode
   //
@@ -79681,10 +75113,6 @@ namespace oo_2_0
   _xsd_StorageCapabilityDescriptorCode_type_factory_init (
     "StorageCapabilityDescriptorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, StorageCapabilityDescriptorCode >
-  _xsd_StorageCapabilityDescriptorCode_comparison_init;
 
   // SubsurfaceVesselTypeCategoryCode
   //
@@ -79806,10 +75234,6 @@ namespace oo_2_0
     "SubsurfaceVesselTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, SubsurfaceVesselTypeCategoryCode >
-  _xsd_SubsurfaceVesselTypeCategoryCode_comparison_init;
-
   // SubsurfaceVesselTypeTorpedoLoadingGearIndicatorCode
   //
 
@@ -79885,10 +75309,6 @@ namespace oo_2_0
   _xsd_SubsurfaceVesselTypeTorpedoLoadingGearIndicatorCode_type_factory_init (
     "SubsurfaceVesselTypeTorpedoLoadingGearIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, SubsurfaceVesselTypeTorpedoLoadingGearIndicatorCode >
-  _xsd_SubsurfaceVesselTypeTorpedoLoadingGearIndicatorCode_comparison_init;
 
   // SupportCapabilityCategoryCode
   //
@@ -80016,10 +75436,6 @@ namespace oo_2_0
     "SupportCapabilityCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, SupportCapabilityCategoryCode >
-  _xsd_SupportCapabilityCategoryCode_comparison_init;
-
   // SupportCapabilityDescriptorCode
   //
 
@@ -80101,10 +75517,6 @@ namespace oo_2_0
   _xsd_SupportCapabilityDescriptorCode_type_factory_init (
     "SupportCapabilityDescriptorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, SupportCapabilityDescriptorCode >
-  _xsd_SupportCapabilityDescriptorCode_comparison_init;
 
   // SurfaceCategoryCode
   //
@@ -80191,10 +75603,6 @@ namespace oo_2_0
   _xsd_SurfaceCategoryCode_type_factory_init (
     "SurfaceCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, SurfaceCategoryCode >
-  _xsd_SurfaceCategoryCode_comparison_init;
 
   // SurfaceVesselTypeCategoryCode
   //
@@ -81116,10 +76524,6 @@ namespace oo_2_0
     "SurfaceVesselTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, SurfaceVesselTypeCategoryCode >
-  _xsd_SurfaceVesselTypeCategoryCode_comparison_init;
-
   // SurveillanceCapabilityCategoryCode
   //
 
@@ -81206,10 +76610,6 @@ namespace oo_2_0
     "SurveillanceCapabilityCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, SurveillanceCapabilityCategoryCode >
-  _xsd_SurveillanceCapabilityCategoryCode_comparison_init;
-
   // SurveillanceCapabilityDescriptorCode
   //
 
@@ -81285,10 +76685,6 @@ namespace oo_2_0
   _xsd_SurveillanceCapabilityDescriptorCode_type_factory_init (
     "SurveillanceCapabilityDescriptorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, SurveillanceCapabilityDescriptorCode >
-  _xsd_SurveillanceCapabilityDescriptorCode_comparison_init;
 
   // TargetEngagementAuthorityCode
   //
@@ -81369,10 +76765,6 @@ namespace oo_2_0
   _xsd_TargetEngagementAuthorityCode_type_factory_init (
     "TargetEngagementAuthorityCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, TargetEngagementAuthorityCode >
-  _xsd_TargetEngagementAuthorityCode_comparison_init;
 
   // TargetPersonnelProtectionCategoryCode
   //
@@ -81457,10 +76849,6 @@ namespace oo_2_0
   _xsd_TargetPersonnelProtectionCategoryCode_type_factory_init (
     "TargetPersonnelProtectionCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, TargetPersonnelProtectionCategoryCode >
-  _xsd_TargetPersonnelProtectionCategoryCode_comparison_init;
 
   // TaskFormationTypeCategoryCode
   //
@@ -81576,10 +76964,6 @@ namespace oo_2_0
     "TaskFormationTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, TaskFormationTypeCategoryCode >
-  _xsd_TaskFormationTypeCategoryCode_comparison_init;
-
   // TransmissionCapabilityCategoryCode
   //
 
@@ -81657,10 +77041,6 @@ namespace oo_2_0
   _xsd_TransmissionCapabilityCategoryCode_type_factory_init (
     "TransmissionCapabilityCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, TransmissionCapabilityCategoryCode >
-  _xsd_TransmissionCapabilityCategoryCode_comparison_init;
 
   // TransmissionCapabilityDescriptorCode
   //
@@ -81743,10 +77123,6 @@ namespace oo_2_0
   _xsd_TransmissionCapabilityDescriptorCode_type_factory_init (
     "TransmissionCapabilityDescriptorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, TransmissionCapabilityDescriptorCode >
-  _xsd_TransmissionCapabilityDescriptorCode_comparison_init;
 
   // UnitTypeArmCategoryCode
   //
@@ -81895,10 +77271,6 @@ namespace oo_2_0
   _xsd_UnitTypeArmCategoryCode_type_factory_init (
     "UnitTypeArmCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, UnitTypeArmCategoryCode >
-  _xsd_UnitTypeArmCategoryCode_comparison_init;
 
   // UnitTypeArmSpecialisationCode
   //
@@ -82232,10 +77604,6 @@ namespace oo_2_0
     "UnitTypeArmSpecialisationCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, UnitTypeArmSpecialisationCode >
-  _xsd_UnitTypeArmSpecialisationCode_comparison_init;
-
   // UnitTypeCategoryCode
   //
 
@@ -82317,10 +77685,6 @@ namespace oo_2_0
   _xsd_UnitTypeCategoryCode_type_factory_init (
     "UnitTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, UnitTypeCategoryCode >
-  _xsd_UnitTypeCategoryCode_comparison_init;
 
   // UnitTypeGeneralMobilityCode
   //
@@ -82419,10 +77783,6 @@ namespace oo_2_0
   _xsd_UnitTypeGeneralMobilityCode_type_factory_init (
     "UnitTypeGeneralMobilityCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, UnitTypeGeneralMobilityCode >
-  _xsd_UnitTypeGeneralMobilityCode_comparison_init;
 
   // UnitTypeQualifierCode
   //
@@ -82525,10 +77885,6 @@ namespace oo_2_0
   _xsd_UnitTypeQualifierCode_type_factory_init (
     "UnitTypeQualifierCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, UnitTypeQualifierCode >
-  _xsd_UnitTypeQualifierCode_comparison_init;
 
   // UnitTypeSizeCode
   //
@@ -82658,10 +78014,6 @@ namespace oo_2_0
     "UnitTypeSizeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, UnitTypeSizeCode >
-  _xsd_UnitTypeSizeCode_comparison_init;
-
   // UnitTypeSupplementarySpecialisationCode
   //
 
@@ -82760,10 +78112,6 @@ namespace oo_2_0
     "UnitTypeSupplementarySpecialisationCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, UnitTypeSupplementarySpecialisationCode >
-  _xsd_UnitTypeSupplementarySpecialisationCode_comparison_init;
-
   // UsageStatusCode
   //
 
@@ -82841,10 +78189,6 @@ namespace oo_2_0
   _xsd_UsageStatusCode_type_factory_init (
     "UsageStatusCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, UsageStatusCode >
-  _xsd_UsageStatusCode_comparison_init;
 
   // UxoStatusExposureCode
   //
@@ -82936,10 +78280,6 @@ namespace oo_2_0
     "UxoStatusExposureCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, UxoStatusExposureCode >
-  _xsd_UxoStatusExposureCode_comparison_init;
-
   // UxoStatusQualifierCode
   //
 
@@ -83028,10 +78368,6 @@ namespace oo_2_0
     "UxoStatusQualifierCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, UxoStatusQualifierCode >
-  _xsd_UxoStatusQualifierCode_comparison_init;
-
   // VegetationCategoryCode
   //
 
@@ -83119,10 +78455,6 @@ namespace oo_2_0
   _xsd_VegetationCategoryCode_type_factory_init (
     "VegetationCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, VegetationCategoryCode >
-  _xsd_VegetationCategoryCode_comparison_init;
 
   // VegetationSubcategoryCode
   //
@@ -83241,10 +78573,6 @@ namespace oo_2_0
   _xsd_VegetationSubcategoryCode_type_factory_init (
     "VegetationSubcategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, VegetationSubcategoryCode >
-  _xsd_VegetationSubcategoryCode_comparison_init;
 
   // VehicleTypeCategoryCode
   //
@@ -83414,10 +78742,6 @@ namespace oo_2_0
     "VehicleTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, VehicleTypeCategoryCode >
-  _xsd_VehicleTypeCategoryCode_comparison_init;
-
   // VerticalDistanceReferenceCode
   //
 
@@ -83510,10 +78834,6 @@ namespace oo_2_0
     "VerticalDistanceReferenceCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, VerticalDistanceReferenceCode >
-  _xsd_VerticalDistanceReferenceCode_comparison_init;
-
   // VesselTypeCategoryCode
   //
 
@@ -83593,10 +78913,6 @@ namespace oo_2_0
   _xsd_VesselTypeCategoryCode_type_factory_init (
     "VesselTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, VesselTypeCategoryCode >
-  _xsd_VesselTypeCategoryCode_comparison_init;
 
   // VesselTypePropulsionTypeCode
   //
@@ -83712,10 +79028,6 @@ namespace oo_2_0
     "VesselTypePropulsionTypeCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, VesselTypePropulsionTypeCode >
-  _xsd_VesselTypePropulsionTypeCode_comparison_init;
-
   // VisibilityCategoryCode
   //
 
@@ -83809,10 +79121,6 @@ namespace oo_2_0
   _xsd_VisibilityCategoryCode_type_factory_init (
     "VisibilityCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, VisibilityCategoryCode >
-  _xsd_VisibilityCategoryCode_comparison_init;
 
   // WeaponTypeCategoryCode
   //
@@ -83910,10 +79218,6 @@ namespace oo_2_0
     "WeaponTypeCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, WeaponTypeCategoryCode >
-  _xsd_WeaponTypeCategoryCode_comparison_init;
-
   // WeaponTypeFireGuidanceIndicatorCode
   //
 
@@ -83989,10 +79293,6 @@ namespace oo_2_0
   _xsd_WeaponTypeFireGuidanceIndicatorCode_type_factory_init (
     "WeaponTypeFireGuidanceIndicatorCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, WeaponTypeFireGuidanceIndicatorCode >
-  _xsd_WeaponTypeFireGuidanceIndicatorCode_comparison_init;
 
   // WeaponTypeSubcategoryCode
   //
@@ -84258,10 +79558,6 @@ namespace oo_2_0
     "WeaponTypeSubcategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, WeaponTypeSubcategoryCode >
-  _xsd_WeaponTypeSubcategoryCode_comparison_init;
-
   // WindAirStabilityCategoryCode
   //
 
@@ -84353,10 +79649,6 @@ namespace oo_2_0
   _xsd_WindAirStabilityCategoryCode_type_factory_init (
     "WindAirStabilityCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, WindAirStabilityCategoryCode >
-  _xsd_WindAirStabilityCategoryCode_comparison_init;
 
   // WindAltitudeLayerCode
   //
@@ -84460,10 +79752,6 @@ namespace oo_2_0
     "WindAltitudeLayerCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
 
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, WindAltitudeLayerCode >
-  _xsd_WindAltitudeLayerCode_comparison_init;
-
   // WindCategoryCode
   //
 
@@ -84555,10 +79843,6 @@ namespace oo_2_0
   _xsd_WindCategoryCode_type_factory_init (
     "WindCategoryCode",
     "urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0");
-
-  static
-  const ::xsd::cxx::tree::comparison_initializer< 0, char, WindCategoryCode >
-  _xsd_WindCategoryCode_comparison_init;
 }
 
 #include <ostream>
