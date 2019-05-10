@@ -1,22 +1,21 @@
 #ifndef PFC_SCENARIO_BUILDER_SCENARIO_H
 #define PFC_SCENARIO_BUILDER_SCENARIO_H
 
+#include <QAbstractItemModel>
+#include <QDate>
 #include <QDebug>
 #include <QElapsedTimer>
-#include <QObject>
 #include <QString>
 #include <QVariant>
-#include <QDate>
 
 namespace pfc {
 
-class Scenario : public QObject {
+class Scenario : public QAbstractItemModel {
   Q_OBJECT
 
   Q_PROPERTY(QString name READ Name WRITE Name NOTIFY nameChanged)
   Q_PROPERTY(QString type READ Type WRITE Type NOTIFY typeChanged)
   Q_PROPERTY(QString version READ Version WRITE Version NOTIFY versionChanged)
-  Q_PROPERTY(QString securityClassification READ SecurityClassification WRITE SecurityClassification NOTIFY securityClassificationChanged)
   Q_PROPERTY(QDate modificationDate READ ModificationDate WRITE ModificationDate NOTIFY modificationDateChanged)
   Q_PROPERTY(QString securityClassification READ SecurityClassification WRITE SecurityClassification NOTIFY securityClassificationChanged)
   Q_PROPERTY(QString releaseRestriction READ ReleaseRestriction WRITE ReleaseRestriction NOTIFY releaseRestrictionChanged)
@@ -25,16 +24,16 @@ class Scenario : public QObject {
   Q_PROPERTY(QString useLimitation READ UseLimitation WRITE UseLimitation NOTIFY useLimitationChanged)
 
 public:
-  Scenario();
- ~Scenario();
-  Scenario(std::string filename);
-  Scenario(std::string path, std::string filename);
+  Scenario(QObject* parent = nullptr);
+  virtual ~Scenario();
+  Scenario(std::string filename, QObject* parent = nullptr);
+  Scenario(std::string path, std::string filename, QObject* parent = nullptr);
   Scenario(const Scenario&) = delete;
   Scenario(Scenario&&) = default;
   Scenario& operator=(const Scenario&) = delete;
   Scenario& operator=(Scenario&&) = default;
 
-  public:
+public:
   QString Name() const;
   QString Type() const;
   QString Version() const;
@@ -44,7 +43,35 @@ public:
   QString Purpose() const;
   QString Description() const;
   QString UseLimitation() const;
-  
+
+  enum ScenarioRoles {
+    IdentityRole = Qt::UserRole + 1,
+
+  };
+  QModelIndex index(int row, int column, const QModelIndex& parent = QModelIndex()) const override;
+  QModelIndex parent(const QModelIndex& index) const override;
+  int columnCount(const QModelIndex& parent = QModelIndex()) const override;
+  int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+  QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
+
+ Qt::ItemFlags flags(const QModelIndex& index) const override;
+ bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) override;
+
+ protected:
+  QHash<int, QByteArray> roleNames() const
+  {
+    QHash<int, QByteArray> roles;
+    roles[Qt::DisplayRole] = "content";
+    roles[Qt::DecorationRole] = "decoration";
+    roles[Qt::EditRole]      = "edit";
+    roles[Qt::ToolTipRole]   = "toolTip";
+    roles[Qt::StatusTipRole] = "statusTip";
+    roles[Qt::WhatsThisRole] = "whatsThis";
+    roles[IdentityRole] = "label";
+
+    return roles;
+  }
+
 public slots:
   void Name(QString);
   void Type(QString);
@@ -57,13 +84,13 @@ public slots:
   void Description(QString);
   void UseLimitation(QString);
 
-  bool marshal ( QDataStream& );
-  bool unmarshal( QDataStream& );
+  bool marshal(QDataStream&);
+  bool unmarshal(QDataStream&);
   bool Load();
   bool Load(QString);
   bool Save();
   bool SaveAs(QString filename);
- signals:
+signals:
   void nameChanged();
   void typeChanged();
   void versionChanged();
@@ -73,14 +100,11 @@ public slots:
   void purposeChanged();
   void descriptionChanged();
   void useLimitationChanged();
- 
 
 private:
   struct Implementation;
   std::unique_ptr<Implementation> _impl;
-
-  
 };
-}//namespace pfc
+} //namespace pfc
 
 #endif //PFC_SCENARIO_BUILDER_SCENARIO_H

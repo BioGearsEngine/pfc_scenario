@@ -50,7 +50,7 @@ camp to a semi-open tent environment. Within the tent environment, the casualty 
       Text {
         id: scenario_model_label
         font.pointSize: 10
-        text: label + ":"
+        text: label + ":  "
         font.weight: Font.Bold
         verticalAlignment : Text.AlignTop
         anchors {
@@ -64,7 +64,7 @@ camp to a semi-open tent environment. Within the tent environment, the casualty 
       Text {
         id: scenario_model_content
         font.pointSize: 10
-        text: content + ((root.model) ?  root.model.name : " No Model Found")
+        text: content
         wrapMode: Text.Wrap
         horizontalAlignment : Text.AlignJustify
 
@@ -112,7 +112,7 @@ camp to a semi-open tent environment. Within the tent environment, the casualty 
     }
     onClicked: {
       root.stack.push(
-        dialog, { data_model : scenario_model}
+        dialog, { data_model : root.model}
       )
     }
     Layout.alignment: Qt.AlignTop
@@ -129,13 +129,13 @@ camp to a semi-open tent environment. Within the tent environment, the casualty 
     spacing: 6
     clip:true
     orientation:ListView.Vertical
-    model: scenario_model
+    model: root.model
     delegate: delegateComp
     onContentHeightChanged: {
       if ( height < contentHeight) {
         height = contentHeight
       }
-      root.height =root.height = childrenRect.height+ header.height;
+      root.height =root.height = childrenRect.height+ header.height + 30;
     }
     onHeightChanged: {
       if ( height < contentHeight) {

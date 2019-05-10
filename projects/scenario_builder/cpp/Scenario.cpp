@@ -3,9 +3,9 @@
 #include <fstream>
 #include <iostream>
 
+#include <QDebug>
 #include <QDir>
 #include <QRegularExpression>
-#include<QDebug>
 
 #include "MilitaryScenario_1.0.0.hxx"
 #include "MsdlComplexTypes_1.0.0.hxx"
@@ -20,22 +20,20 @@ struct Scenario::Implementation {
   QString filepath;
 }; //End Struct Implementation
 
-Scenario::Scenario()
-  : _impl(std::make_unique<Implementation>())
+Scenario::Scenario(QObject* parent)
+  : QAbstractItemModel(parent)
+  , _impl(std::make_unique<Implementation>())
 {
   using namespace msdl_1;
   _impl->scenario = std::make_unique<msdl_1::MilitaryScenarioType>(
-    std::make_unique<MilitaryScenarioType::ScenarioID_type>( schemas::modelID::modelIdentificationType
-    (
+    std::make_unique<MilitaryScenarioType::ScenarioID_type>(schemas::modelID::modelIdentificationType(
       schemas::modelID::modelIdentificationType::name_type("New Scenario"),
       schemas::modelID::modelIdentificationType::type_type("Military Scenario"),
       schemas::modelID::modelIdentificationType::version_type("0.0.0"),
       schemas::modelID::modelIdentificationType::modificationDate_type(schemas::modelID::modificationDate(xml_schema::date(QDate::currentDate().year(), QDate::currentDate().month(), QDate::currentDate().day()))),
       schemas::modelID::modelIdentificationType::securityClassification_type("Unclassified"),
-      schemas::modelID::modelIdentificationType::description_type()
-    ))
-    , std::make_unique<MilitaryScenarioType::Options_type>(std::make_unique<OptionsType::MSDLVersion_type>())
-    , std::make_unique<MilitaryScenarioType::ForceSides_type>()
+      schemas::modelID::modelIdentificationType::description_type())),
+    std::make_unique<MilitaryScenarioType::Options_type>(std::make_unique<OptionsType::MSDLVersion_type>()), std::make_unique<MilitaryScenarioType::ForceSides_type>()
     //TODO:Assign Defaults
   );
 }
@@ -45,14 +43,16 @@ Scenario::~Scenario()
   _impl = nullptr;
 }
 //-----------------------------------------------------------------------------
-Scenario::Scenario(std::string filename)
-  : _impl(std::make_unique<Implementation>())
+Scenario::Scenario(std::string filename, QObject* parent)
+  : QAbstractItemModel(parent)
+  , _impl(std::make_unique<Implementation>())
 {
   using namespace msdl_1;
   _impl->scenario = MilitaryScenario(filename);
 }
 //-----------------------------------------------------------------------------
-Scenario::Scenario(std::string path, std::string filename)
+Scenario::Scenario(std::string path, std::string filename, QObject* parent)
+  : QAbstractItemModel(parent)
 {
   using namespace msdl_1;
   _impl->scenario = MilitaryScenario(path + "/" + filename);
@@ -76,9 +76,7 @@ QString Scenario::Version() const
 QDate Scenario::ModificationDate() const
 {
 
-  return QDate(_impl->scenario->ScenarioID().modificationDate().year()
-    , _impl->scenario->ScenarioID().modificationDate().month()
-    , _impl->scenario->ScenarioID().modificationDate().day());
+  return QDate(_impl->scenario->ScenarioID().modificationDate().year(), _impl->scenario->ScenarioID().modificationDate().month(), _impl->scenario->ScenarioID().modificationDate().day());
 }
 //-----------------------------------------------------------------------------
 QString Scenario::SecurityClassification() const
@@ -189,25 +187,25 @@ void Scenario::UseLimitation(QString limitation)
   _impl->scenario->ScenarioID().useLimitation(limitation.toStdString());
 }
 //-----------------------------------------------------------------------------
-bool Scenario::marshal ( QDataStream& )
-{ 
+bool Scenario::marshal(QDataStream&)
+{
   return false;
 }
-  //-----------------------------------------------------------------------------
-bool Scenario::unmarshal( QDataStream& )
-{ 
+//-----------------------------------------------------------------------------
+bool Scenario::unmarshal(QDataStream&)
+{
   return false;
 }
-  //-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 bool Scenario::Load()
-{ 
+{
   return false;
 }
-  //-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 bool Scenario::Load(QString uri)
-{ 
-  qInfo() << uri ;
-  
+{
+  qInfo() << uri;
+
   return false;
 }
 //-----------------------------------------------------------------------------
@@ -245,6 +243,144 @@ bool Scenario::SaveAs(QString filename)
     return true;
   }
   return false;
+}
+//-----------------------------------------------------------------------------
+QModelIndex Scenario::index(int row, int column, const QModelIndex& parent) const
+{
+  if (0 <= row && row < 9) {
+    return createIndex(row, column, const_cast<Scenario*>(this));
+  } else {
+    return QModelIndex();
+  }
+}
+//-----------------------------------------------------------------------------
+QModelIndex Scenario::parent(const QModelIndex& index) const
+{
+  if ( !index.isValid() )
+    return QModelIndex();
+  return QModelIndex();
+
+  //TODO: In order to actually track children we need to move beyond a model of a flat model
+  //ModelItem *childItem = static_cast<ModelItem*>( index.internalPointer() );
+  //ModelItem *parentItem = childItem->parent();
+ 
+  //if ( parentItem == rootItem )
+  //    return QModelIndex();
+ 
+  //return createIndex( parentItem->row(), 0, parentItem );
+}
+//-----------------------------------------------------------------------------
+int Scenario::columnCount(const QModelIndex& parent) const
+{
+  Q_UNUSED(parent)
+  return 1;
+}
+//-----------------------------------------------------------------------------
+int Scenario::rowCount(const QModelIndex& parent) const
+{
+  Q_UNUSED(parent)
+  return 9;
+}
+//-----------------------------------------------------------------------------
+QVariant Scenario::data(const QModelIndex& index, int role) const
+{
+  if (index.row() < 0 || index.row() > 9)
+    return QVariant();
+
+  if (index.row() == 0) {
+    return (role == Qt::DisplayRole) ? Name() : QVariant("Name");
+  } else if (index.row() == 1) {
+    return (role == Qt::DisplayRole) ? Type() : QVariant("Type");
+  } else if (index.row() == 2) {
+    return (role == Qt::DisplayRole) ? Version() : QVariant("Version");
+  } else if (index.row() == 3) {
+    return (role == Qt::DisplayRole) ? ModificationDate() : QVariant("Modification Date");
+  } else if (index.row() == 4) {
+    return (role == Qt::DisplayRole) ? SecurityClassification() : QVariant("Security Classification");
+  } else if (index.row() == 5) {
+    return (role == Qt::DisplayRole) ? ReleaseRestriction() : QVariant("Release Restriction");
+  } else if (index.row() == 6) {
+    return (role == Qt::DisplayRole) ? Purpose() : QVariant("Purpose");
+  } else if (index.row() == 7) {
+    return (role == Qt::DisplayRole) ? Description() : QVariant("Description");
+  } else if (index.row() == 8) {
+    return (role == Qt::DisplayRole) ? UseLimitation() : QVariant("Use Limitation");
+  }
+     
+  return QVariant();
+}
+//-----------------------------------------------------------------------------
+Qt::ItemFlags Scenario::flags(const QModelIndex& index) const
+{
+  if (!index.isValid())
+    return Qt::ItemIsEnabled;
+
+  return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
+}
+//-----------------------------------------------------------------------------
+bool Scenario::setData(const QModelIndex& index, const QVariant& value, int role)
+{
+  bool dataAccepted = false;
+  if (index.row() < 0 || index.row() > 9)
+    return false;
+
+  if (index.row() == 0) {
+    if (role == Qt::DisplayRole) {
+      Name(value.toString());
+      emit(dataChanged(index, index, { Qt::EditRole, Qt::DisplayRole }));
+    }
+    dataAccepted = true;
+  } else if (index.row() == 1) {
+    if (role == Qt::DisplayRole) {
+      Type(value.toString());
+      emit(dataChanged(index, index, { Qt::EditRole, Qt::DisplayRole }));
+    }
+    dataAccepted = true;
+  } else if (index.row() == 2) {
+    if (role == Qt::DisplayRole) {
+      Version(value.toString());
+      emit(dataChanged(index, index, { Qt::EditRole, Qt::DisplayRole }));
+    }
+    dataAccepted = true;
+  } else if (index.row() == 3) {
+    if (role == Qt::DisplayRole) {
+      ModificationDate(value.toDate());
+      emit(dataChanged(index, index, { Qt::EditRole, Qt::DisplayRole }));
+    }
+    dataAccepted = true;
+  } else if (index.row() == 4) {
+    if (role == Qt::DisplayRole) {
+      SecurityClassification(value.toString());
+      emit(dataChanged(index, index, { Qt::EditRole, Qt::DisplayRole }));
+    }
+    dataAccepted = true;
+  } else if (index.row() == 5) {
+    if (role == Qt::DisplayRole) {
+      ReleaseRestriction(value.toString());
+      emit(dataChanged(index, index, { Qt::EditRole, Qt::DisplayRole }));
+    }
+    dataAccepted = true;
+  } else if (index.row() == 6) {
+    if (role == Qt::DisplayRole) {
+      Purpose(value.toString());
+      emit(dataChanged(index, index, { Qt::EditRole, Qt::DisplayRole }));
+    }
+    dataAccepted = true;
+  } else if (index.row() == 7) {
+    if (role == Qt::DisplayRole) {
+      Description(value.toString());
+      emit(dataChanged(index, index, { Qt::EditRole, Qt::DisplayRole }));
+    }
+    dataAccepted = true;
+  } else if (index.row() == 8) {
+    if (role == Qt::DisplayRole) {
+      UseLimitation(value.toString());
+      emit(dataChanged(index, index, { Qt::EditRole, Qt::DisplayRole }));
+    }
+    dataAccepted = true;
+  }
+
+  return dataAccepted;
 }
 //-----------------------------------------------------------------------------
 }

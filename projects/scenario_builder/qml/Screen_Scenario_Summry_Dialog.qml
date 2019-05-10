@@ -2,10 +2,12 @@ import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 
+import com.ara.pfc.ScenarioModel 1.0
+
 Page {
   id : root
   focus: true
-  property var data_model
+  property ScenarioModel  data_model
 
   //anchors.fill : parent
 
@@ -45,7 +47,7 @@ Flickable {
                   Label {
                     id: label_id
                     text : label + ": "
-                    Layout.preferredWidth : 100
+                    Layout.preferredWidth : 150
                     anchors { 
                       verticalCenter : parent.verticalCenter
                     }
@@ -69,18 +71,24 @@ Flickable {
                         cursorShape: Qt.IBeamCursor
                         acceptedButtons: Qt.NoButton
                     }
+                    function save() { content = text }
                   }
                   Layout.fillWidth: true
                 }
+      function save () {
+        for ( var i = 0 ; i < count; ++i){
+          console.log(i)
+          itemAt(i).children[1].save();
+        }
+      }
     }
     Button {
       text : "Save"
       anchors.right : parent.right
       anchors.rightMargin : 10
       onClicked : {
-        for ( var i = 0 ; i < root.data_model.count; ++i){
-          root.data_model.get(i).content = model_repeater.itemAt(i).children[1].text
-        }
+        console.log("clicked")
+        model_repeater.save()
         closed();
       }
     }
