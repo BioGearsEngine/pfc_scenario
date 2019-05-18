@@ -3,59 +3,13 @@ import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 
 import com.ara.pfc.ScenarioModel 1.0
+import com.ara.pfc.ScenarioModel.Locations 1.0
 Item {
   id:root
   anchors.fill : parent.fill
 
   property StackView stack
-  property ScenarioModel model
-ListModel {
-    id: scenario_model
-    ListElement {
-        name: "Base Camp"
-        lat : "0.0"
-        lon : "0.0"
-        alt : "1000"
-        //Bounding Box 
-        ul_corner_x : -1
-        ul_corner_y : 1
-        lr_corner_x : 1
-        lr_corner_y : -1
-    }
-    ListElement {
-        name: "Infermary Tent"
-        lat : "0.0"
-        lon : "0.0"
-        alt : "1000"
-        //Bounding Box 
-        ul_corner_x : -1
-        ul_corner_y : 1
-        lr_corner_x : 1
-        lr_corner_y : -1
-    }
-    ListElement {
-        name: "Bunk Tent"
-        lat : "0.0"
-        lon : "0.0"
-        alt : "1000"
-        //Bounding Box 
-        ul_corner_x : -1
-        ul_corner_y : 1
-        lr_corner_x : 1
-        lr_corner_y : -1
-    }
-    ListElement {
-        name: "Helopad"
-        lat : "0.0"
-        lon : "0.0"
-        alt : "1000"
-        //Bounding Box 
-        ul_corner_x : -1
-        ul_corner_y : 1
-        lr_corner_x : 1
-        lr_corner_y : -1
-    }
-  }
+  property LocationSequence model
 
   Component {
     id: delegateComp
@@ -78,7 +32,7 @@ ListModel {
       Text {
         id: scenario_model_lat
         font.pointSize: 10
-        text: "<i>  lat: </i>" + lat + "<i>  lon: </i>" + lat
+        text: "<i>  lat: </i>" + lat + "<i>  lon: </i>" + lon + "<i>  alt: </i>" + alt
         wrapMode: Text.Wrap
         horizontalAlignment : Text.AlignJustify
 
@@ -137,7 +91,7 @@ ListModel {
     spacing: 2
     clip:true
     orientation:ListView.Vertical
-    model: scenario_model
+    model: root.model
     delegate: delegateComp
     onContentHeightChanged: {
       if ( height < contentHeight) {
@@ -162,17 +116,9 @@ ListModel {
     text: "New Location"
 
     onClicked: {
-      scenario_model.append({ name: " Odan is a friendly African nation whose democratic government is being threatened by a warlord who has built a large militia. \
-The militia has invaded several cities, is terrorizing locals and is stopping humanitarian aid from getting to the populous to \
-feed their militia. To support the host nation, US forces send several small groups to train host nation military operators who will \
-lead the campaign against the militia. To stay out of notice from the militia, US military meet host nation personnel in a far forward \
-location. They are dropped off by helicopter and assume a 3-day training. The host nation and US military personnel set up a makeshift \
-base camp. There are ~20 host nation soldiers and 5 US personnel. During training, a US military person is shot in the inner thigh with \
-a AK47 (7.62x39) rifle. The medic was on a short recon mission to ensure perimeter security and make sure no militia were present in the \
-area. When they arrive back at the point of injury, a buddy had applied pressure and a tourniquet to the person. At POI, the medic \
-assesses the wound, makes sure the tourniquet is secure, gives the person a phentnyl lollipop, and then transports them to the base \
-camp to a semi-open tent environment. Within the tent environment, the casualty will be treated and stabilized by the medic." })
+      root.model.new_location()
     }
+
   }
   height : childrenRect.height
 }

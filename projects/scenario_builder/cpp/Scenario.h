@@ -7,6 +7,7 @@
 #include <QElapsedTimer>
 #include <QString>
 #include <QVariant>
+#include "Locations.h"
 
 namespace pfc {
 
@@ -23,6 +24,8 @@ class Scenario : public QAbstractItemModel {
   Q_PROPERTY(QString description READ Description WRITE Description NOTIFY descriptionChanged)
   Q_PROPERTY(QString useLimitation READ UseLimitation WRITE UseLimitation NOTIFY useLimitationChanged)
 
+
+  Q_PROPERTY(LocationSequence* locations READ Locations NOTIFY locationEvent)
 public:
   Scenario(QObject* parent = nullptr);
   virtual ~Scenario();
@@ -43,6 +46,8 @@ public:
   QString Purpose() const;
   QString Description() const;
   QString UseLimitation() const;
+
+  LocationSequence* Locations();
 
   enum ScenarioRoles {
     IdentityRole = Qt::UserRole + 1,
@@ -100,8 +105,10 @@ signals:
   void purposeChanged();
   void descriptionChanged();
   void useLimitationChanged();
+  
+  void locationEvent();
 
-private:
+  private:
   struct Implementation;
   std::unique_ptr<Implementation> _impl;
 };

@@ -11,10 +11,14 @@
 #include "MsdlComplexTypes_1.0.0.hxx"
 #include <xsd/cxx/tree/date-time.hxx>
 
+#include <Locations.h>
+
 namespace pfc {
 
 struct Scenario::Implementation {
   std::unique_ptr<msdl_1::MilitaryScenarioType> scenario;
+
+  LocationSequence locations;
 
   QString path;
   QString filepath;
@@ -33,9 +37,12 @@ Scenario::Scenario(QObject* parent)
       schemas::modelID::modelIdentificationType::modificationDate_type(schemas::modelID::modificationDate(xml_schema::date(QDate::currentDate().year(), QDate::currentDate().month(), QDate::currentDate().day()))),
       schemas::modelID::modelIdentificationType::securityClassification_type("Unclassified"),
       schemas::modelID::modelIdentificationType::description_type())),
-    std::make_unique<MilitaryScenarioType::Options_type>(std::make_unique<OptionsType::MSDLVersion_type>()), std::make_unique<MilitaryScenarioType::ForceSides_type>()
-    //TODO:Assign Defaults
-  );
+    std::make_unique<MilitaryScenarioType::Options_type>(std::make_unique<OptionsType::MSDLVersion_type>()),
+    std::make_unique<MilitaryScenarioType::ForceSides_type>());
+  //TODO:Assign Defaults
+
+    _impl->scenario->Installations(std::make_unique<msdl_1::InstallationsType>());
+    _impl->locations = LocationSequence(_impl->scenario->Installations()->Installation());
 }
 //-----------------------------------------------------------------------------
 Scenario::~Scenario()
@@ -256,17 +263,17 @@ QModelIndex Scenario::index(int row, int column, const QModelIndex& parent) cons
 //-----------------------------------------------------------------------------
 QModelIndex Scenario::parent(const QModelIndex& index) const
 {
-  if ( !index.isValid() )
+  if (!index.isValid())
     return QModelIndex();
   return QModelIndex();
 
   //TODO: In order to actually track children we need to move beyond a model of a flat model
   //ModelItem *childItem = static_cast<ModelItem*>( index.internalPointer() );
   //ModelItem *parentItem = childItem->parent();
- 
+
   //if ( parentItem == rootItem )
   //    return QModelIndex();
- 
+
   //return createIndex( parentItem->row(), 0, parentItem );
 }
 //-----------------------------------------------------------------------------
@@ -306,7 +313,7 @@ QVariant Scenario::data(const QModelIndex& index, int role) const
   } else if (index.row() == 8) {
     return (role == Qt::DisplayRole) ? UseLimitation() : QVariant("Use Limitation");
   }
-     
+
   return QVariant();
 }
 //-----------------------------------------------------------------------------
@@ -381,6 +388,12 @@ bool Scenario::setData(const QModelIndex& index, const QVariant& value, int role
   }
 
   return dataAccepted;
+}
+
+//-----------------------------------------------------------------------------
+LocationSequence* Scenario::Locations()
+{
+  return &_impl->locations;
 }
 //-----------------------------------------------------------------------------
 }

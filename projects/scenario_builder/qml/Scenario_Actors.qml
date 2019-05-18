@@ -10,13 +10,13 @@ id:root
 ListModel {
     id: scenario_model
     ListElement {
-        name: "Joe"
+        name: "Austin Baird"
     }
     ListElement {
-        name: "Jill"
+        name: "Steven White"
     }
     ListElement {
-        name: "ManDoog"
+        name: "Lucas Marin"
     }
   }
 

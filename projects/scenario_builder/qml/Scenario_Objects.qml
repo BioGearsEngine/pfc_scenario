@@ -10,13 +10,13 @@ Item {
 ListModel {
     id: scenario_model
     ListElement {
-        name: "jar"
+        name: "Medical Blood Bag"
     }
     ListElement {
-        name: "difibulator"
+        name: "Patient Monitor"
     }
     ListElement {
-        name: "sucker"
+        name: "Fentenal  lozenge"
     }
   }
 

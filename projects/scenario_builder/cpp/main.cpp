@@ -18,10 +18,10 @@ int main(int argc, char* argv[])
   QQmlApplicationEngine engine;
 
   qmlRegisterType<pfc::Scenario>("com.ara.pfc.ScenarioModel", 1,0, "ScenarioModel");
-  qmlRegisterType<pfc::Scenario>("com.ara.pfc.ScenarioModel.Locations", 1,0, "ScenarioLocations");
-  qmlRegisterType<pfc::Scenario>("com.ara.pfc.ScenarioModel.Objects"  , 1,0, "ScenarioObjects");
-  qmlRegisterType<pfc::Scenario>("com.ara.pfc.ScenarioModel.Scenes"   , 1,0, "ScenarioScenes");
-  qmlRegisterType<pfc::Scenario>("com.ara.pfc.ScenarioModel.Actors"   , 1,0, "ScenarioActors");
+  qmlRegisterType<pfc::LocationSequence>("com.ara.pfc.ScenarioModel.Locations", 1,0, "LocationSequence");
+  //qmlRegisterType<pfc::ObjectSequence>("com.ara.pfc.ScenarioModel.Objects"  , 1,0, "ScenarioObjects");
+  //qmlRegisterType<pfc::ActorSequence>("com.ara.pfc.ScenarioModel.Actors"   , 1,0, "ScenarioActors");
+  //qmlRegisterType<pfc::NarativeSequence>("com.ara.pfc.ScenarioModel.Narative"   , 1,0, "ScenarioNaratives");
 
   engine.load(QUrl(QLatin1String("qrc:/Main.qml")));
   if (engine.rootObjects().isEmpty())

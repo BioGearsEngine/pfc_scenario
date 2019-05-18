@@ -3,6 +3,7 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
 
 import com.ara.pfc.ScenarioModel 1.0
+import com.ara.pfc.ScenarioModel.Locations 1.0
 Page {
   id: root
   focus: true
@@ -58,7 +59,7 @@ Page {
       Scenario_Locations{ 
         id:locations
         stack : root.stack
-        model : root.model
+        model : root.model.locations
         anchors {
           top : summary.bottom
           left : parent.left

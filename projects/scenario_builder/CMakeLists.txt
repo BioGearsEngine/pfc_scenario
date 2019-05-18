@@ -86,9 +86,9 @@ list(APPEND ${PREFIX}_INCLUDES
       PUBLIC ${${PREFIX}_INCLUDE_DIR}
       PRIVATE ${${PREFIX}_PRIVATE_INCLUDE_DIR}
       PUBLIC ${${PREFIX}_GENERATED_INCLUDE_DIR}
-	  "${CMAKE_CURRENT_SOURCE_DIR}/xsd/cpp"
+      PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/xsd/cpp"
 )
-list(REMOVE_DUPLICATES ${PREFIX}_INCLUDES)
+
 
 
 set(${PREFIX}_LIBS
@@ -127,7 +127,12 @@ set_target_properties(lib${PROJECT_NAME}
 target_compile_definitions(lib${PROJECT_NAME} PUBLIC ${${PREFIX}_CPPFLAGS} 	 )
 target_compile_definitions(lib${PROJECT_NAME} PUBLIC $<$<PLATFORM_ID:Windows>:BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE> )
 target_compile_options(lib${PROJECT_NAME} PUBLIC $<$<PLATFORM_ID:Windows>:/bigobj>  PUBLIC $<$<PLATFORM_ID:Windows>:/MP>)
-target_include_directories(lib${PROJECT_NAME} PUBLIC ${${PREFIX}_INCLUDES} )
+target_include_directories(lib${PROJECT_NAME}
+      PUBLIC ${${PREFIX}_INCLUDE_DIR}
+      PRIVATE ${${PREFIX}_PRIVATE_INCLUDE_DIR}
+      PUBLIC ${${PREFIX}_GENERATED_INCLUDE_DIR}
+      PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/xsd/cpp"
+)
 
 if(CMAKE_COMPILER_IS_GNUCXX)
     set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS ${${PREFIX}_LDFLAGS})

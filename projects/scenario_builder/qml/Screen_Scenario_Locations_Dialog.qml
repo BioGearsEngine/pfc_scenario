@@ -49,7 +49,29 @@ Page {
           Layout.fillWidth: false
         }
         TextField {
+          id : nameField
           text : data_model.name
+          Layout.fillWidth: true
+          Layout.rightMargin : 100
+          function save() {
+            data_model.name = text
+          }
+        }
+      }
+      RowLayout {
+        Label {
+          text: 'ID:'
+          Layout.preferredWidth : 100
+        }
+        TextField {
+          id : idField
+          text : data_model.id
+          Layout.fillWidth: true
+          Layout.rightMargin : 100
+          readOnly : true
+          function save() {
+            data_model.id = text
+          }
         }
       }
       RowLayout {
@@ -58,7 +80,13 @@ Page {
           Layout.preferredWidth : 100
         }
         TextField {
+          id : latField
           text : data_model.lat
+          Layout.fillWidth: true
+          Layout.rightMargin : 100
+          function save() {
+            data_model.lat = parseFloat(text.replace(",", ""))
+          }
         }
       }
       RowLayout {
@@ -67,7 +95,14 @@ Page {
           Layout.preferredWidth : 100
         }
         TextField {
+          id : lonField
           text : data_model.lon
+          Layout.fillWidth: true
+          Layout.rightMargin : 100
+          inputMethodHints: Qt.ImhDigitsOnly
+          function save() {
+            data_model.lon = text
+          }
         }
       }
       RowLayout {
@@ -76,45 +111,76 @@ Page {
           Layout.preferredWidth : 100
         }
         TextField {
+          id : altField
           text : data_model.alt
+          Layout.fillWidth: true
+          Layout.rightMargin : 100
+          function save() {
+            data_model.alt = text
+          }
         }
       }
       RowLayout {
         Label {
-          text: 'UL Corner'
+          text: 'Symbol:'
           Layout.preferredWidth : 100
         }
         TextField {
-          anchors {
-            leftMargin:10
+          id : symbolField
+          text : data_model.symbol
+          Layout.fillWidth: true
+          Layout.rightMargin : 100
+          function save() {
+            data_model.symbol = text
           }
-          text : data_model.ul_corner_x
-        }
-        TextField {
-          anchors {
-            leftMargin:10
-          }
-          text : data_model.ul_corner_y
         }
       }
       RowLayout {
         Label {
-          text: 'LR Corner'
+          text: 'Owner:'
           Layout.preferredWidth : 100
         }
         TextField {
-          anchors {
-            leftMargin:10
+          id : ownerField
+          text : data_model.owner
+          Layout.fillWidth: true
+          Layout.rightMargin : 100
+          function save() {
+            data_model.owner = text
           }
-          text : data_model.lr_corner_x
-        }
-        TextField {
-          anchors {
-            leftMargin:10
-          }
-          text : data_model.lr_corner_y
         }
       }
+      RowLayout {
+        Label {
+          text: 'Affiliation:'
+          Layout.preferredWidth : 100
+        }
+        TextField {
+          id : affiliationField
+          text : data_model.affiliation
+          Layout.fillWidth: true
+          Layout.rightMargin : 100
+          function save() {
+            data_model.affiliation   = text
+          }
+        }
+      }
+      RowLayout {
+        Label {
+          text: 'Description:'
+          Layout.preferredWidth : 100
+        }
+        TextArea {
+          id :  descField
+          text : data_model.description
+          Layout.fillWidth: true
+          Layout.rightMargin : 100
+          function save() {
+            data_model.description = text
+          }
+        }
+      }
+      
     }
 
     Button {
@@ -122,6 +188,14 @@ Page {
       anchors.right : parent.right
       anchors.rightMargin : 10
       onClicked : {
+        nameField.save()
+        latField.save()
+        lonField.save()
+        altField.save()
+        symbolField.save()
+        ownerField.save()
+        affiliationField.save()
+        descField.save()
         closed();
       }
     }
