@@ -74,7 +74,7 @@ Page {
        Scenario_Actors{ 
         id:actors
         stack : root.stack
-        model : root.model
+        model : root.model.actors
         anchors {
           top : locations.bottom
           left : parent.left
@@ -88,7 +88,7 @@ Page {
       Scenario_Objects{ 
         id:objects
         stack : root.stack
-        model : root.model
+        model : root.model.objects
         anchors {
           top : actors.bottom
           left : parent.left

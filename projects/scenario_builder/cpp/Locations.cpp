@@ -119,7 +119,9 @@ QVariant LocationSequence::data(const QModelIndex& index, int role) const
     result = QString(location.Name().get().c_str());
     break;
   case OwnerRole:
-    result = (location.Owner().OwnerChoice() == msdl_1::enumForceOwnerType::FORCE_SIDE) ? QString(location.Owner().OwnerData().ForceOwnerHandle().get().c_str()) : QString(location.Owner().OwnerData().UnitOwnerHandle().get().c_str());
+    result = (location.Owner().OwnerChoice() == msdl_1::enumForceOwnerType::FORCE_SIDE) ? 
+      QString(location.Owner().OwnerData().ForceOwnerHandle().get().c_str()) : 
+      QString(location.Owner().OwnerData().UnitOwnerHandle().get().c_str());
     break;
   case AffiliationRole:
     result = QString(location.Affiliation().c_str());

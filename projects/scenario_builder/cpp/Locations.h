@@ -13,69 +13,6 @@
 
 namespace pfc {
 
-//! \class Location
-//!
-//! \brief Setting up this class as a possible way to ahndl
-//class Location : public QObject {
-//  Q_OBJECT
-//
-//  Q_PROPERTY(QString id READ ID WRITE ID NOTIFY idChanged)
-//  Q_PROPERTY(QString name READ Name WRITE Name NOTIFY nameChanged)
-//  Q_PROPERTY(QDate date READ Date WRITE Date NOTIFY dateChanged)
-//  Q_PROPERTY(QString owner READ Owner WRITE Owner NOTIFY ownerChanged)
-//  Q_PROPERTY(QString affiliation READ Affiliation WRITE Affiliation NOTIFY affiliationChanged)
-//  Q_PROPERTY(double latitude READ Latitude WRITE Latitude NOTIFY latitudeChanged)
-//  Q_PROPERTY(double longitude READ Longitude WRITE Longitude NOTIFY longitudeChanged)
-//  Q_PROPERTY(double altitude READ Altitude WRITE Altitude NOTIFY altitudeChanged)
-//public:
-//  Location(QObject* parent = nullptr);
-//  virtual ~Location();
-//  Location(const Location&) = default;
-//  Location(Location&&) = default;
-//  Location& operator=(const Location&) = default;
-//  Location& operator=(Location&&) = default;
-//
-//public:
-//  QString ID() const;
-//  QString Name() const;
-//  QDate Date() const;
-//  QString Owner() const;
-//  QString Affiliation() const;
-//  double Latitude() const;
-//  double Longitude() const;
-//  double Altitude() const;
-//
-//public slots:
-//  void ID(QString) const;
-//  void Name(QString) const;
-//  void Date(QDate) const;
-//  void Owner(QString) const;
-//  void Affiliation(QString) const;
-//  void Latitude(double) const;
-//  void Longitude(double) const;
-//  void Altitude(double) const;
-//
-// singals:
-//  void idChanged();
-//  void nameChanged();
-//  void dateChanged();
-//  void ownerChanged();
-//  void affiliationChanged();
-//  void latitudeChanged();
-//  void longitudeChanged();
-//  void altitudeChanged();
-//
-//private:
-//  QString _id;
-//  QString _name;
-//  QDate _date;
-//  QString _owner;
-//  QString _affiliation;
-//  double _latitude;
-//  double _longitude;
-//  double _altitude;
-//};
-
 class LocationSequence : public QAbstractItemModel {
   Q_OBJECT
 

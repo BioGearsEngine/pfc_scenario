@@ -11,7 +11,10 @@
 #include "MsdlComplexTypes_1.0.0.hxx"
 #include <xsd/cxx/tree/date-time.hxx>
 
-#include <Locations.h>
+#include "Actors.h"
+#include "Locations.h"
+#include "Objects.h"
+#include "Scenes.h"
 
 namespace pfc {
 
@@ -19,6 +22,9 @@ struct Scenario::Implementation {
   std::unique_ptr<msdl_1::MilitaryScenarioType> scenario;
 
   LocationSequence locations;
+  ActorSequence actors;
+  ObjectSequence objects;
+  NarativeSequence scenes;
 
   QString path;
   QString filepath;
@@ -41,8 +47,21 @@ Scenario::Scenario(QObject* parent)
     std::make_unique<MilitaryScenarioType::ForceSides_type>());
   //TODO:Assign Defaults
 
-    _impl->scenario->Installations(std::make_unique<msdl_1::InstallationsType>());
-    _impl->locations = LocationSequence(_impl->scenario->Installations()->Installation());
+  _impl->scenario->Installations(std::make_unique<msdl_1::InstallationsType>());
+  _impl->scenario->Organizations(std::make_unique<msdl_1::OrganizationsType>(std::make_unique<msdl_1::UnitsType>()));
+  _impl->scenario->Organizations()->Equipment(std::make_unique<msdl_1::EquipmentType>());
+
+  //TODO: Refactor Sequence Storage
+  //For testing the Sqeuence class use the underlying XML as a database, but this is going to be problimatic eventually
+  //One day these groups will use sub fields to determine if they should be viewed or editable and so I feel we need to 
+  //Duplicate represnetation in either a sqlite database or a series of structs and allow cross-refernece
+  //I'm leaning towards sqlite because it allows us to do forign key look up and simplify tables
+  //Then on Marshall UnMarshall operations we simply mapp our SQL schema to the XML schema.
+
+  _impl->locations = LocationSequence(_impl->scenario->Installations()->Installation());
+  _impl->actors = ActorSequence(_impl->scenario->Organizations()->Units().Unit());
+  _impl->objects = ObjectSequence(_impl->scenario->Organizations()->Equipment()->EquipmentItem());
+  _impl->scenes = NarativeSequence(_impl->scenario->Installations()->Installation());
 }
 //-----------------------------------------------------------------------------
 Scenario::~Scenario()
@@ -394,6 +413,21 @@ bool Scenario::setData(const QModelIndex& index, const QVariant& value, int role
 LocationSequence* Scenario::Locations()
 {
   return &_impl->locations;
+}
+//-----------------------------------------------------------------------------
+ActorSequence* Scenario::Actors()
+{
+  return &_impl->actors;
+}
+//-----------------------------------------------------------------------------
+ObjectSequence* Scenario::Objects()
+{
+  return &_impl->objects;
+}
+//-----------------------------------------------------------------------------
+NarativeSequence* Scenario::Naratives()
+{
+  return &_impl->scenes;
 }
 //-----------------------------------------------------------------------------
 }

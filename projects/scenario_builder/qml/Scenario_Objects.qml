@@ -3,22 +3,11 @@ import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 
 import com.ara.pfc.ScenarioModel 1.0
+import com.ara.pfc.ScenarioModel.Objects 1.0
 Item {
   id:root
   property StackView stack
-  property ScenarioModel model
-ListModel {
-    id: scenario_model
-    ListElement {
-        name: "Medical Blood Bag"
-    }
-    ListElement {
-        name: "Patient Monitor"
-    }
-    ListElement {
-        name: "Fentenal  lozenge"
-    }
-  }
+  property Objects model
 
   Component {
     id: object_delegate
@@ -42,7 +31,7 @@ ListModel {
       Text {
         id: scenario_model_content
         font.pointSize: 10
-        text: name
+        text: (0 == description.length) ? name : name + " - <i>" + description + "</i>"
         wrapMode: Text.Wrap
         horizontalAlignment : Text.AlignJustify
 
@@ -53,6 +42,8 @@ ListModel {
         Layout.fillWidth: true
         Layout.alignment: Qt.AlignTop
       }
+
+
       RoundButton {
         id: control
         text: qsTr("Edit")
@@ -77,7 +68,7 @@ ListModel {
   Label {
     id: header
     text: "Objects"
-    font.pixelSize: 22
+    font.pointSize  : 14
     font.italic: true
     color: "steelblue"
 
@@ -86,6 +77,7 @@ ListModel {
       horizontalCenter : parent.horizontalCenter
     }
     Layout.alignment: Qt.AlignVCenter
+    height : 50
   }
 
   ListView {
@@ -98,14 +90,14 @@ ListModel {
     spacing: 2
     clip:true
     orientation:ListView.Vertical
-    model: scenario_model
+    model: root.model
     delegate: object_delegate
 
     onContentHeightChanged: {
       if ( height < contentHeight) {
         height = contentHeight
       }
-      root.height =root.height = childrenRect.height+ header.height+button.height;
+      root.height =root.height = childrenRect.height+ header.height;
     }
     onHeightChanged: {
       if ( height < contentHeight) {
@@ -117,25 +109,15 @@ ListModel {
   Button {
     id: button
     anchors {
-      //top : objectList.bottom
-      bottom: parent.bottom
-      horizontalCenter: parent.horizontalCenter
+      right : parent.right
+      verticalCenter: header.verticalCenter
     }
    
     text: "New Object"
-
+    font.pointSize  : 10
     onClicked: {
-      scenario_model.append({ name: " Odan is a friendly African nation whose democratic government is being threatened by a warlord who has built a large militia. \
-The militia has invaded several cities, is terrorizing locals and is stopping humanitarian aid from getting to the populous to \
-feed their militia. To support the host nation, US forces send several small groups to train host nation military operators who will \
-lead the campaign against the militia. To stay out of notice from the militia, US military meet host nation personnel in a far forward \
-location. They are dropped off by helicopter and assume a 3-day training. The host nation and US military personnel set up a makeshift \
-base camp. There are ~20 host nation soldiers and 5 US personnel. During training, a US military person is shot in the inner thigh with \
-a AK47 (7.62x39) rifle. The medic was on a short recon mission to ensure perimeter security and make sure no militia were present in the \
-area. When they arrive back at the point of injury, a buddy had applied pressure and a tourniquet to the person. At POI, the medic \
-assesses the wound, makes sure the tourniquet is secure, gives the person a phentnyl lollipop, and then transports them to the base \
-camp to a semi-open tent environment. Within the tent environment, the casualty will be treated and stabilized by the medic." })
+      root.model.new_object()
     }
   }
-  height : objectList.height + header.height + button.height
+  height : objectList.height + header.height
 }

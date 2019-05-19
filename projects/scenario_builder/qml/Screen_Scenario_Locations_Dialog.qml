@@ -6,7 +6,6 @@ Page {
   id : root
   focus: true
   property var data_model
-  //anchors.fill : parent
 
   header: ToolBar {
     RowLayout {

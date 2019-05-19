@@ -6,7 +6,6 @@ Page {
   id : root
   focus: true
   property var data_model
-  //anchors.fill : parent
 
   header: ToolBar {
     RowLayout {
@@ -49,9 +48,123 @@ Page {
           Layout.fillWidth: false
         }
         TextField {
+          id : nameField
           text : data_model.name
+          Layout.fillWidth: true
+          Layout.rightMargin : 100
+          function save() {
+            data_model.name = text
+          }
         }
       }
+      RowLayout {
+        Label {
+          text: 'ID:'
+          Layout.preferredWidth : 100
+        }
+        TextField {
+          id : idField
+          text : data_model.id
+          Layout.fillWidth: true
+          Layout.rightMargin : 100
+          readOnly : true
+          function save() {
+            data_model.id = text
+          }
+        }
+      }
+      RowLayout {
+        Label {
+          text: 'Symbol ID:'
+          Layout.preferredWidth : 100
+        }
+        TextField {
+          id : symbolField
+          text : data_model.symbol
+          Layout.fillWidth: true
+          Layout.rightMargin : 100
+          function save() {
+            data_model.symbol = text
+          }
+        }
+      }
+      RowLayout {
+        Label {
+          text: 'Latitude:'
+          Layout.preferredWidth : 100
+        }
+        TextField {
+          id : latField
+          text : data_model.lat
+          Layout.fillWidth: true
+          Layout.rightMargin : 100
+          function save() {
+            data_model.lat = parseFloat(text.replace(",", ""))
+          }
+        }
+      }
+      RowLayout {
+        Label {
+          text: 'Longitude:'
+          Layout.preferredWidth : 100
+        }
+        TextField {
+          id : lonField
+          text : data_model.lon
+          Layout.fillWidth: true
+          Layout.rightMargin : 100
+          inputMethodHints: Qt.ImhDigitsOnly
+          function save() {
+            data_model.lon = text
+          }
+        }
+      }
+      RowLayout {
+        Label {
+          text: 'Altitude:'
+          Layout.preferredWidth : 100
+        }
+        TextField {
+          id : altField
+          text : data_model.alt
+          Layout.fillWidth: true
+          Layout.rightMargin : 100
+          function save() {
+            data_model.alt = text
+          }
+        }
+      }
+      RowLayout {
+        Label {
+          text: 'Organic Relation ID:'
+          Layout.preferredWidth : 130
+        }
+        TextField {
+          id : organicRelationField
+          text : data_model.origin
+          Layout.fillWidth: true
+          Layout.rightMargin : 100
+          function save() {
+            data_model.origin   = text
+          }
+        }
+      }
+      RowLayout {
+        Label {
+          text: 'Description:'
+          Layout.preferredWidth : 100
+        }
+        TextArea {
+          id :  descField
+          text : data_model.description
+          Layout.fillWidth: true
+          Layout.rightMargin : 100
+          function save() {
+            data_model.description = text
+          }
+        }
+      }
+      
     }
 
     Button {
@@ -59,6 +172,14 @@ Page {
       anchors.right : parent.right
       anchors.rightMargin : 10
       onClicked : {
+        console.log("Saving " + root.data_model.id)
+        nameField.save()
+        symbolField.save()
+        latField.save()
+        lonField.save()
+        altField.save()
+        organicRelationField.save()
+        descField.save()
         closed();
       }
     }

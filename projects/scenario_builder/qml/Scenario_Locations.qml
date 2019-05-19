@@ -9,7 +9,7 @@ Item {
   anchors.fill : parent.fill
 
   property StackView stack
-  property LocationSequence model
+  property Locations model
 
   Component {
     id: delegateComp
@@ -70,7 +70,7 @@ Item {
   Label {
     id: header
     text: "Locations"
-    font.pixelSize: 22
+    font.pointSize  : 14
     font.italic: true
     color: "steelblue"
 
@@ -79,6 +79,7 @@ Item {
       horizontalCenter : parent.horizontalCenter
     }
     Layout.alignment: Qt.AlignVCenter
+    height : 50;
   }
 
   ListView {
@@ -97,28 +98,29 @@ Item {
       if ( height < contentHeight) {
         height = contentHeight
       }
-      root.height = childrenRect.height + header.height + button.height;
+      root.height = childrenRect.height + header.height;
+      console.log("onContentHeightChanged("+root.height+")")
     }
     onHeightChanged: {
       if ( height < contentHeight) {
             height = contentHeight
       }
+      console.log("onHeightChanged("+height+")")
     }
   }
 
   Button {
     id: button
     anchors {
-      bottom : parent.bottom
-      horizontalCenter: parent.horizontalCenter
+      right : parent.right
+      verticalCenter: header.verticalCenter
     }
-   
     text: "New Location"
-
+    font.pointSize  : 10
     onClicked: {
       root.model.new_location()
     }
 
   }
-  height : childrenRect.height
+  height : header.childrenRect.height
 }

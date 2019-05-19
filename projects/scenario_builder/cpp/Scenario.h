@@ -7,7 +7,11 @@
 #include <QElapsedTimer>
 #include <QString>
 #include <QVariant>
+
+#include "Actors.h"
 #include "Locations.h"
+#include "Objects.h"
+#include "Scenes.h"
 
 namespace pfc {
 
@@ -24,8 +28,10 @@ class Scenario : public QAbstractItemModel {
   Q_PROPERTY(QString description READ Description WRITE Description NOTIFY descriptionChanged)
   Q_PROPERTY(QString useLimitation READ UseLimitation WRITE UseLimitation NOTIFY useLimitationChanged)
 
-
   Q_PROPERTY(LocationSequence* locations READ Locations NOTIFY locationEvent)
+  Q_PROPERTY(ActorSequence* actors READ Actors NOTIFY actorEvent)
+  Q_PROPERTY(ObjectSequence* objects READ Objects NOTIFY objectEvent)
+  Q_PROPERTY(NarativeSequence* naratives READ Naratives NOTIFY narativeEvent)
 public:
   Scenario(QObject* parent = nullptr);
   virtual ~Scenario();
@@ -48,6 +54,9 @@ public:
   QString UseLimitation() const;
 
   LocationSequence* Locations();
+  ActorSequence* Actors();
+  ObjectSequence* Objects();
+  NarativeSequence* Naratives();
 
   enum ScenarioRoles {
     IdentityRole = Qt::UserRole + 1,
@@ -59,17 +68,17 @@ public:
   int rowCount(const QModelIndex& parent = QModelIndex()) const override;
   QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
 
- Qt::ItemFlags flags(const QModelIndex& index) const override;
- bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) override;
+  Qt::ItemFlags flags(const QModelIndex& index) const override;
+  bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) override;
 
- protected:
+protected:
   QHash<int, QByteArray> roleNames() const
   {
     QHash<int, QByteArray> roles;
     roles[Qt::DisplayRole] = "content";
     roles[Qt::DecorationRole] = "decoration";
-    roles[Qt::EditRole]      = "edit";
-    roles[Qt::ToolTipRole]   = "toolTip";
+    roles[Qt::EditRole] = "edit";
+    roles[Qt::ToolTipRole] = "toolTip";
     roles[Qt::StatusTipRole] = "statusTip";
     roles[Qt::WhatsThisRole] = "whatsThis";
     roles[IdentityRole] = "label";
@@ -105,10 +114,13 @@ signals:
   void purposeChanged();
   void descriptionChanged();
   void useLimitationChanged();
-  
-  void locationEvent();
 
-  private:
+  void locationEvent();
+  void actorEvent();
+  void objectEvent();
+  void narativeEvent();
+
+private:
   struct Implementation;
   std::unique_ptr<Implementation> _impl;
 };
