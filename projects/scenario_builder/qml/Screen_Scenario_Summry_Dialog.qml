@@ -19,15 +19,11 @@ Page {
             onClicked: closed();
         }
         Label {
-            text: "Title"
+            text: "Edit: " + data_model.symbol
             elide: Label.ElideRight
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter
             Layout.fillWidth: true
-        }
-        ToolButton {
-            text: qsTr("⋮")
-            onClicked: menu.open()
         }
     }
     
@@ -58,9 +54,9 @@ Flickable {
                   TextField   {
                     id: content_id
                     text : content
+                    selectByMouse : true
                     wrapMode: Text.Wrap
                     horizontalAlignment : Text.AlignJustify
-                    selectByMouse : true
                     anchors { 
                       left : label_id.right
                       verticalCenter : parent.verticalCenter

@@ -1,6 +1,7 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
+import Qt.labs.platform 1.0
 
 import com.ara.pfc.ScenarioModel 1.0
 import com.ara.pfc.ScenarioModel.Locations 1.0
@@ -15,22 +16,84 @@ Page {
 
   header: ToolBar {
     RowLayout {
-        anchors.fill: parent
-        ToolButton {
-            text: qsTr("‹")
-            onClicked: root.closed();
+      anchors.fill: parent
+      ToolButton {
+          text: qsTr("‹")
+          onClicked: root.closed();
+      }
+      Label {
+          text: "PFC: Scenario Builder"
+          elide: Label.ElideRight
+          horizontalAlignment: Qt.AlignHCenter
+          verticalAlignment: Qt.AlignVCenter
+          Layout.fillWidth: true
+      }
+      ToolButton {
+        text: qsTr("⋮")
+
+        FileDialog {
+          id: dialog
+            title: "Please choose a file"
+            folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
+            property bool saveMode : false
+            nameFilters: ["MSDL Files(*.xml)"]
+            onAccepted: {
+              console.log("You chose: " + file)
+              //TODO: Handle Failure
+              if(saveMode)
+                root.model.SaveAs( file );
+              else
+                root.model.Load( file );
+            }
+            onRejected: {
+              console.log("Canceled")
+            }
         }
-        Label {
-            text: "Title"
-            elide: Label.ElideRight
-            horizontalAlignment: Qt.AlignHCenter
-            verticalAlignment: Qt.AlignVCenter
-            Layout.fillWidth: true
+        Menu {
+          id: contextMenu
+          MenuItem { 
+           text: "New"  ; 
+           font.pointSize: 8; 
+           onTriggered : { 
+             console.log("New Clicked") ; 
+             root.model.reset() 
+           }
+          }
+          MenuItem { 
+           text: "Load" ; 
+           font.pointSize: 8; 
+           onTriggered : { 
+             console.log("Load Clicked");
+             if(root.model.onDisk) {
+               root.model.load()
+             } else {
+               dialog.saveMode = false; 
+               dialog.folder = StandardPaths.writableLocation(StandardPaths.DesktopLocation)
+               dialog.currentFile = "";
+               dialog.fileMode = FileDialog.OpenFile;
+               dialog.open();
+             }
+           }
+          }
+          MenuItem { 
+           text: "Save" ; 
+           font.pointSize: 8; 
+           onTriggered : { 
+             console.log("Save Clicked"); 
+             if(root.model.onDisk) {
+               root.model.save()
+             } else {
+               dialog.saveMode = true; 
+               dialog.fileMode = FileDialog.SaveFile;
+               dialog.folder = StandardPaths.writableLocation(StandardPaths.DesktopLocation)
+               dialog.currentFile = "./Scenario.xml";
+               dialog.open();
+             }
+           }
+          }
         }
-        ToolButton {
-            text: qsTr("⋮")
-            onClicked: menu.open()
-        }
+        onClicked: contextMenu.open()
+      }
     }
   }
   Flickable{

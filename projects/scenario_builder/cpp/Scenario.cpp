@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QDir>
 #include <QRegularExpression>
+#include <QUrl>
 
 #include "MilitaryScenario_1.0.0.hxx"
 #include "MsdlComplexTypes_1.0.0.hxx"
@@ -34,34 +35,7 @@ Scenario::Scenario(QObject* parent)
   : QAbstractItemModel(parent)
   , _impl(std::make_unique<Implementation>())
 {
-  using namespace msdl_1;
-  _impl->scenario = std::make_unique<msdl_1::MilitaryScenarioType>(
-    std::make_unique<MilitaryScenarioType::ScenarioID_type>(schemas::modelID::modelIdentificationType(
-      schemas::modelID::modelIdentificationType::name_type("New Scenario"),
-      schemas::modelID::modelIdentificationType::type_type("Military Scenario"),
-      schemas::modelID::modelIdentificationType::version_type("0.0.0"),
-      schemas::modelID::modelIdentificationType::modificationDate_type(schemas::modelID::modificationDate(xml_schema::date(QDate::currentDate().year(), QDate::currentDate().month(), QDate::currentDate().day()))),
-      schemas::modelID::modelIdentificationType::securityClassification_type("Unclassified"),
-      schemas::modelID::modelIdentificationType::description_type())),
-    std::make_unique<MilitaryScenarioType::Options_type>(std::make_unique<OptionsType::MSDLVersion_type>()),
-    std::make_unique<MilitaryScenarioType::ForceSides_type>());
-  //TODO:Assign Defaults
-
-  _impl->scenario->Installations(std::make_unique<msdl_1::InstallationsType>());
-  _impl->scenario->Organizations(std::make_unique<msdl_1::OrganizationsType>(std::make_unique<msdl_1::UnitsType>()));
-  _impl->scenario->Organizations()->Equipment(std::make_unique<msdl_1::EquipmentType>());
-
-  //TODO: Refactor Sequence Storage
-  //For testing the Sqeuence class use the underlying XML as a database, but this is going to be problimatic eventually
-  //One day these groups will use sub fields to determine if they should be viewed or editable and so I feel we need to 
-  //Duplicate represnetation in either a sqlite database or a series of structs and allow cross-refernece
-  //I'm leaning towards sqlite because it allows us to do forign key look up and simplify tables
-  //Then on Marshall UnMarshall operations we simply mapp our SQL schema to the XML schema.
-
-  _impl->locations = LocationSequence(_impl->scenario->Installations()->Installation());
-  _impl->actors = ActorSequence(_impl->scenario->Organizations()->Units().Unit());
-  _impl->objects = ObjectSequence(_impl->scenario->Organizations()->Equipment()->EquipmentItem());
-  _impl->scenes = NarativeSequence(_impl->scenario->Installations()->Installation());
+  reset();
 }
 //-----------------------------------------------------------------------------
 Scenario::~Scenario()
@@ -213,25 +187,64 @@ void Scenario::UseLimitation(QString limitation)
   _impl->scenario->ScenarioID().useLimitation(limitation.toStdString());
 }
 //-----------------------------------------------------------------------------
+//!
+//!  Conversts Data String to Valid Class Implemetnation Through XSD
+//!
 bool Scenario::marshal(QDataStream&)
 {
+
+  //TODO: XSD Map QDataStream to an StringStream then pass to XSD
   return false;
 }
 //-----------------------------------------------------------------------------
+//!
+//!  Conversts Class Implemetnation to Data Stream
+//!
 bool Scenario::unmarshal(QDataStream&)
 {
+  //TODO: XSD Map QDataStream to an StringStream then pass to XSD
   return false;
 }
 //-----------------------------------------------------------------------------
 bool Scenario::Load()
 {
+  using namespace msdl_1;
+  auto load_directory = QDir(_impl->path);
+  auto load_path = load_directory.filePath(_impl->filepath);
+  auto input = std::ifstream(load_path.toStdString());
+  if (input.is_open()) {
+    try {
+    auto temp_scenario= msdl_1::MilitaryScenario(input);
+      _impl->scenario = std::move(temp_scenario);
+      //TODO: Refactor Sequence Storage
+      //For testing the Sqeuence class use the underlying XML as a database, but this is going to be problimatic eventually
+      //One day these groups will use sub fields to determine if they should be viewed or editable and so I feel we need to
+      //Duplicate represnetation in either a sqlite database or a series of structs and allow cross-refernece
+      //I'm leaning towards sqlite because it allows us to do forign key look up and simplify tables
+      //Then on Marshall UnMarshall operations we simply mapp our SQL schema to the XML schema.
+
+      _impl->locations = LocationSequence(_impl->scenario->Installations()->Installation());
+      _impl->actors = ActorSequence(_impl->scenario->Organizations()->Units().Unit());
+      _impl->objects = ObjectSequence(_impl->scenario->Organizations()->Equipment()->EquipmentItem());
+      _impl->scenes = NarativeSequence(_impl->scenario->Installations()->Installation());
+      return true;
+    } catch (::xsd::cxx::tree::parsing<char> e) {
+      std::cout << e;
+    } catch (std::exception e) {
+      std::cout << e.what();
+      return false;
+    }
+  }
   return false;
+ 
 }
 //-----------------------------------------------------------------------------
-bool Scenario::Load(QString uri)
+bool Scenario::Load(QUrl uri)
 {
-  qInfo() << uri;
-
+  auto file = QFileInfo(uri.toLocalFile());
+  _impl->path = file.dir().path();
+  _impl->filepath = file.fileName();
+  Load();
   return false;
 }
 //-----------------------------------------------------------------------------
@@ -241,6 +254,7 @@ bool Scenario::Save()
   auto save_path = save_directory.filePath(_impl->filepath);
   if (QDir(save_path).exists()) {
     xml_schema::namespace_infomap map;
+
 
     map["lib"].name = "urn:sisostds:scenario:military:data:draft:msdl:1";
     map["lib"].schema = "MilitaryScenario_1.0.0.xsd";
@@ -254,23 +268,58 @@ bool Scenario::Save()
   return false;
 }
 //-----------------------------------------------------------------------------
-bool Scenario::SaveAs(QString filename)
+bool Scenario::SaveAs(QUrl filename)
 {
-  if (QDir(filename).exists()) {
+  auto file = QFileInfo(filename.toLocalFile());
+  QFileInfo path = file.path();
+  if ( path.exists() && path.isDir() ) {
     xml_schema::namespace_infomap map;
 
     map["lib"].name = "urn:sisostds:scenario:military:data:draft:msdl:1";
     map["lib"].schema = "MilitaryScenario_1.0.0.xsd";
 
-    auto out = std::ofstream(filename.toStdString());
-
-    std::string e;
-    msdl_1::MilitaryScenario(out, *_impl->scenario, map);
-    return true;
+    auto out = std::ofstream(filename.toLocalFile().toStdString());
+    if (out.is_open()) {
+      std::string e;
+      msdl_1::MilitaryScenario(out, *_impl->scenario, map);
+      return true;
+    }
   }
   return false;
 }
 //-----------------------------------------------------------------------------
+void Scenario::reset()
+{
+  using namespace msdl_1;
+  _impl->scenario = std::make_unique<msdl_1::MilitaryScenarioType>(
+    std::make_unique<MilitaryScenarioType::ScenarioID_type>(schemas::modelID::modelIdentificationType(
+      schemas::modelID::modelIdentificationType::name_type("New Scenario"),
+      schemas::modelID::modelIdentificationType::type_type("Military Scenario"),
+      schemas::modelID::modelIdentificationType::version_type("0.0.0"),
+      schemas::modelID::modelIdentificationType::modificationDate_type(schemas::modelID::modificationDate(xml_schema::date(QDate::currentDate().year(), QDate::currentDate().month(), QDate::currentDate().day()))),
+      schemas::modelID::modelIdentificationType::securityClassification_type("Unclassified"),
+      schemas::modelID::modelIdentificationType::description_type())),
+    std::make_unique<MilitaryScenarioType::Options_type>(std::make_unique<OptionsType::MSDLVersion_type>()),
+    std::make_unique<MilitaryScenarioType::ForceSides_type>());
+  //TODO:Assign Defaults
+
+  _impl->scenario->Installations(std::make_unique<msdl_1::InstallationsType>());
+  _impl->scenario->Organizations(std::make_unique<msdl_1::OrganizationsType>(std::make_unique<msdl_1::UnitsType>()));
+  _impl->scenario->Organizations()->Equipment(std::make_unique<msdl_1::EquipmentType>());
+
+  //TODO: Refactor Sequence Storage
+  //For testing the Sqeuence class use the underlying XML as a database, but this is going to be problimatic eventually
+  //One day these groups will use sub fields to determine if they should be viewed or editable and so I feel we need to
+  //Duplicate represnetation in either a sqlite database or a series of structs and allow cross-refernece
+  //I'm leaning towards sqlite because it allows us to do forign key look up and simplify tables
+  //Then on Marshall UnMarshall operations we simply mapp our SQL schema to the XML schema.
+
+  _impl->locations = LocationSequence(_impl->scenario->Installations()->Installation());
+  _impl->actors = ActorSequence(_impl->scenario->Organizations()->Units().Unit());
+  _impl->objects = ObjectSequence(_impl->scenario->Organizations()->Equipment()->EquipmentItem());
+  _impl->scenes = NarativeSequence(_impl->scenario->Installations()->Installation());
+}
+  //-----------------------------------------------------------------------------
 QModelIndex Scenario::index(int row, int column, const QModelIndex& parent) const
 {
   if (0 <= row && row < 9) {
@@ -428,6 +477,21 @@ ObjectSequence* Scenario::Objects()
 NarativeSequence* Scenario::Naratives()
 {
   return &_impl->scenes;
+}
+//-----------------------------------------------------------------------------
+QString Scenario::Filepath()
+{
+  return _impl->filepath;
+}
+//-----------------------------------------------------------------------------
+void Scenario::Filepath(QString path)
+{
+  _impl->filepath = path;
+}
+//-----------------------------------------------------------------------------
+bool Scenario::onDisk()
+{
+  return !_impl->filepath.isEmpty();
 }
 //-----------------------------------------------------------------------------
 }

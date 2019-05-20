@@ -8,38 +8,6 @@ Item {
   id:root
   property StackView stack : null
   property ScenarioModel model : null
-ListModel {
-    id: scenario_model
-    ListElement {
-        label: "Name"
-        content: "Sustain PFC"
-    }
-    ListElement {
-        label: "Location"
-        content: "Odan - Latitude: -33.87486, Longitude: 22.37631, Distortion: 1.45"
-    }
-    ListElement {
-        label: "Brief"
-        content: "Friendly Fire insicdent leads to a 72 hour prolonged field care excersice."
-    }
-    ListElement {
-        label: "Synopsis"
-        content: " Odan is a friendly African nation whose democratic government is being threatened by a warlord who has built a large militia. \
-The militia has invaded several cities, is terrorizing locals and is stopping humanitarian aid from getting to the populous to \
-feed their militia. To support the host nation, US forces send several small groups to train host nation military operators who will \
-lead the campaign against the militia. To stay out of notice from the militia, US military meet host nation personnel in a far forward \
-location. They are dropped off by helicopter and assume a 3-day training. The host nation and US military personnel set up a makeshift \
-base camp. There are ~20 host nation soldiers and 5 US personnel. During training, a US military person is shot in the inner thigh with \
-a AK47 (7.62x39) rifle. The medic was on a short recon mission to ensure perimeter security and make sure no militia were present in the \
-area. When they arrive back at the point of injury, a buddy had applied pressure and a tourniquet to the person. At POI, the medic \
-assesses the wound, makes sure the tourniquet is secure, gives the person a phentnyl lollipop, and then transports them to the base \
-camp to a semi-open tent environment. Within the tent environment, the casualty will be treated and stabilized by the medic."
-    }
-    ListElement {
-        label: "Goals"
-        content: "CPG-1337"
-    }
-  } // Summary Model
 
   Component {
     id: delegateComp

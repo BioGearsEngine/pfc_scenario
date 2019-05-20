@@ -7,6 +7,7 @@
 #include <QElapsedTimer>
 #include <QString>
 #include <QVariant>
+#include <QUrl>
 
 #include "Actors.h"
 #include "Locations.h"
@@ -32,6 +33,9 @@ class Scenario : public QAbstractItemModel {
   Q_PROPERTY(ActorSequence* actors READ Actors NOTIFY actorEvent)
   Q_PROPERTY(ObjectSequence* objects READ Objects NOTIFY objectEvent)
   Q_PROPERTY(NarativeSequence* naratives READ Naratives NOTIFY narativeEvent)
+
+  Q_PROPERTY(QString filepath READ Filepath WRITE Filepath NOTIFY filepathEvent)
+  Q_PROPERTY(bool onDisk READ onDisk)
 public:
   Scenario(QObject* parent = nullptr);
   virtual ~Scenario();
@@ -57,6 +61,9 @@ public:
   ActorSequence* Actors();
   ObjectSequence* Objects();
   NarativeSequence* Naratives();
+
+  QString Filepath();
+  bool onDisk();
 
   enum ScenarioRoles {
     IdentityRole = Qt::UserRole + 1,
@@ -98,13 +105,16 @@ public slots:
   void Description(QString);
   void UseLimitation(QString);
 
+  void Filepath(QString);
+
   bool marshal(QDataStream&);
   bool unmarshal(QDataStream&);
   bool Load();
-  bool Load(QString);
+  bool Load(QUrl);
   bool Save();
-  bool SaveAs(QString filename);
-signals:
+  bool SaveAs(QUrl filename);
+  void reset();
+    signals:
   void nameChanged();
   void typeChanged();
   void versionChanged();
@@ -119,6 +129,7 @@ signals:
   void actorEvent();
   void objectEvent();
   void narativeEvent();
+  void filepathEvent();
 
 private:
   struct Implementation;

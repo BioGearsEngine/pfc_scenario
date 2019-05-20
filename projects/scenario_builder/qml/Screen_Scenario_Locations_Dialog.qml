@@ -15,15 +15,11 @@ Page {
             onClicked: closed();
         }
        Label {
-            text: "Title"
+            text: "Edit: " + data_model.symbol
             elide: Label.ElideRight
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter
             Layout.fillWidth: true
-        }
-        ToolButton {
-            text: qsTr("⋮")
-            onClicked: menu.open()
         }
     }
     
@@ -50,6 +46,7 @@ Page {
         TextField {
           id : nameField
           text : data_model.name
+          selectByMouse : true
           Layout.fillWidth: true
           Layout.rightMargin : 100
           function save() {
@@ -65,6 +62,7 @@ Page {
         TextField {
           id : idField
           text : data_model.id
+          selectByMouse : true
           Layout.fillWidth: true
           Layout.rightMargin : 100
           readOnly : true
@@ -81,6 +79,7 @@ Page {
         TextField {
           id : latField
           text : data_model.lat
+          selectByMouse : true
           Layout.fillWidth: true
           Layout.rightMargin : 100
           function save() {
@@ -96,6 +95,7 @@ Page {
         TextField {
           id : lonField
           text : data_model.lon
+          selectByMouse : true
           Layout.fillWidth: true
           Layout.rightMargin : 100
           inputMethodHints: Qt.ImhDigitsOnly
@@ -112,6 +112,7 @@ Page {
         TextField {
           id : altField
           text : data_model.alt
+          selectByMouse : true
           Layout.fillWidth: true
           Layout.rightMargin : 100
           function save() {
@@ -127,6 +128,7 @@ Page {
         TextField {
           id : symbolField
           text : data_model.symbol
+          selectByMouse : true
           Layout.fillWidth: true
           Layout.rightMargin : 100
           function save() {
@@ -142,6 +144,7 @@ Page {
         TextField {
           id : ownerField
           text : data_model.owner
+          selectByMouse : true
           Layout.fillWidth: true
           Layout.rightMargin : 100
           function save() {
@@ -157,6 +160,7 @@ Page {
         TextField {
           id : affiliationField
           text : data_model.affiliation
+          selectByMouse : true
           Layout.fillWidth: true
           Layout.rightMargin : 100
           function save() {
@@ -172,6 +176,9 @@ Page {
         TextArea {
           id :  descField
           text : data_model.description
+          wrapMode: Text.Wrap
+          horizontalAlignment : Text.AlignJustify
+          selectByMouse : true
           Layout.fillWidth: true
           Layout.rightMargin : 100
           function save() {

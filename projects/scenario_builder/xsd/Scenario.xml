@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<lib:MilitaryScenario xmlns:lib="urn:sisostds:scenario:military:data:draft:msdl:1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:sisostds:scenario:military:data:draft:msdl:1 D:/remotes/sed-stash/biogears/pfc/scenario/projects/scenario_builder/xsd/MilitaryScenario_1.0.0.xsd">
+  <ScenarioID xmlns:p1="http://www.sisostds.org/schemas/modelID">
+    <p1:name>String: Name of Scenario</p1:name>
+    <p1:type>String: General Descritpion of the Scenario Type (i.e Medical,Combat,Existential)</p1:type>
+    <p1:version>Generic File Verison String. Generally Semantic in nature</p1:version>
+    <p1:modificationDate>2019-05-20</p1:modificationDate>
+    <p1:securityClassification idtag="String representation of DoD classification levels">Unclassified</p1:securityClassification>
+    <p1:releaseRestriction>List of release restrictions like ITAR. </p1:releaseRestriction>
+    <p1:purpose>An abstract of the Scenario.  Generally less then a paragraph, but more complex scenarios may require additional information.  This information to highlight core corriculum guidelines like TCCC.</p1:purpose>
+    <p1:description>Provides a brief discussion for the purpose of the entire simulation. This information should represnet a synoposis level overview of the entire scenario and intended for human consumption.  Something more detailed then the back of a book jacket, but less detailed then cliff notes.</p1:description>
+    <p1:useLimitation>Provides a general overview of education corriculums for which this scenario has provide uneffective.</p1:useLimitation>
+  </ScenarioID>
+  <Options>
+    <MSDLVersion/>
+  </Options>
+  <ForceSides/>
+  <Organizations>
+    <Units>
+      <Unit>
+        <ObjectHandle>7f4e921c-810e-4e1e-b154-e77ebb6131d6</ObjectHandle>
+        <SymbolIdentifier>MIL2525 - ID for representaiton on map screens</SymbolIdentifier>
+        <Name>String: Charactors name</Name>
+        <UnitSymbolModifiers>
+          <AdditionalInfo>Symopsis of the Characters history,purtpose, anad apparance</AdditionalInfo>
+          <UniqueDesignation/>
+        </UnitSymbolModifiers>
+        <Disposition>
+          <Location>
+            <CoordinateChoice>GDC</CoordinateChoice>
+            <CoordinateData>
+              <GDC>
+                <Latitude>1.1</Latitude>
+                <Longitude>1.2</Longitude>
+                <ElevationAGL>1.3</ElevationAGL>
+              </GDC>
+            </CoordinateData>
+          </Location>
+        </Disposition>
+        <Relations>
+          <ForceRelation>
+            <ForceRelationChoice>FORCE_SIDE</ForceRelationChoice>
+            <ForceRelationData>
+              <ForceSideHandle>ID: For a Force_SIDE that the actor is affliated with</ForceSideHandle>
+            </ForceRelationData>
+          </ForceRelation>
+          <SupportRelations/>
+          <OrganicRelation>
+            <OrganicRelationData>
+              <OrganicForceSideHandle>ID: For a Force_SIDE the actors original allegance </OrganicForceSideHandle>
+              <OrganicSuperiorHandle/>
+            </OrganicRelationData>
+            <OrganicRelationChoice>FORCE_SIDE</OrganicRelationChoice>
+          </OrganicRelation>
+        </Relations>
+      </Unit>
+      <Unit>
+        <ObjectHandle>ef7496b4-e1f5-4a8f-8ac8-12e295a74e16</ObjectHandle>
+        <SymbolIdentifier/>
+        <Name>New Actor 1</Name>
+        <UnitSymbolModifiers>
+          <AdditionalInfo/>
+          <UniqueDesignation/>
+        </UnitSymbolModifiers>
+        <Disposition>
+          <Location>
+            <CoordinateChoice>GDC</CoordinateChoice>
+            <CoordinateData>
+              <GDC>
+                <Latitude>0</Latitude>
+                <Longitude>0</Longitude>
+                <ElevationAGL>0</ElevationAGL>
+              </GDC>
+            </CoordinateData>
+          </Location>
+        </Disposition>
+        <Relations>
+          <ForceRelation>
+            <ForceRelationChoice>FORCE_SIDE</ForceRelationChoice>
+            <ForceRelationData>
+              <ForceSideHandle/>
+            </ForceRelationData>
+          </ForceRelation>
+          <SupportRelations/>
+          <OrganicRelation>
+            <OrganicRelationData>
+              <OrganicForceSideHandle/>
+              <OrganicSuperiorHandle/>
+            </OrganicRelationData>
+            <OrganicRelationChoice>FORCE_SIDE</OrganicRelationChoice>
+          </OrganicRelation>
+        </Relations>
+      </Unit>
+      <Unit>
+        <ObjectHandle>5e164f29-5577-4666-8de3-87df4d07c261</ObjectHandle>
+        <SymbolIdentifier/>
+        <Name>New Actor 2</Name>
+        <UnitSymbolModifiers>
+          <AdditionalInfo/>
+          <UniqueDesignation/>
+        </UnitSymbolModifiers>
+        <Disposition>
+          <Location>
+            <CoordinateChoice>GDC</CoordinateChoice>
+            <CoordinateData>
+              <GDC>
+                <Latitude>0</Latitude>
+                <Longitude>0</Longitude>
+                <ElevationAGL>0</ElevationAGL>
+              </GDC>
+            </CoordinateData>
+          </Location>
+        </Disposition>
+        <Relations>
+          <ForceRelation>
+            <ForceRelationChoice>FORCE_SIDE</ForceRelationChoice>
+            <ForceRelationData>
+              <ForceSideHandle/>
+            </ForceRelationData>
+          </ForceRelation>
+          <SupportRelations/>
+          <OrganicRelation>
+            <OrganicRelationData>
+              <OrganicForceSideHandle/>
+              <OrganicSuperiorHandle/>
+            </OrganicRelationData>
+            <OrganicRelationChoice>FORCE_SIDE</OrganicRelationChoice>
+          </OrganicRelation>
+        </Relations>
+      </Unit>
+    </Units>
+    <Equipment>
+      <EquipmentItem>
+        <ObjectHandle>529f4c5d-b537-45f2-8913-a9f1d9f31ad9</ObjectHandle>
+        <SymbolIdentifier>MIL2525 Symbol for use on map screens</SymbolIdentifier>
+        <Name>String: Object Name</Name>
+        <EquipmentSymbolModifiers>
+          <AdditionalInfo>Symposis: Appearance and Description fo the equipment. HIstory of control if any exist. Objects are equiipment,items, and interactables which can be placed in a scene or used by an actor but are not autonomus and must be controled by an actor.</AdditionalInfo>
+          <UniqueDesignation/>
+        </EquipmentSymbolModifiers>
+        <Disposition>
+          <Location>
+            <CoordinateChoice>GCC</CoordinateChoice>
+            <CoordinateData>
+              <GDC>
+                <Latitude>1</Latitude>
+                <Longitude>2</Longitude>
+                <ElevationAGL>3</ElevationAGL>
+              </GDC>
+            </CoordinateData>
+          </Location>
+        </Disposition>
+        <Relations>
+          <OrganicSuperiorHandle>Force_Side which created the object</OrganicSuperiorHandle>
+          <HoldingOrganization>
+            <OwnerChoice/>
+            <OwnerData/>
+          </HoldingOrganization>
+        </Relations>
+      </EquipmentItem>
+      <EquipmentItem>
+        <ObjectHandle>59af20a1-5dce-4935-b47e-e8ae8e208cb5</ObjectHandle>
+        <SymbolIdentifier/>
+        <Name>New Object 1</Name>
+        <EquipmentSymbolModifiers>
+          <AdditionalInfo/>
+          <UniqueDesignation/>
+        </EquipmentSymbolModifiers>
+        <Disposition>
+          <Location>
+            <CoordinateChoice>GCC</CoordinateChoice>
+            <CoordinateData>
+              <GDC>
+                <Latitude>1</Latitude>
+                <Longitude>2</Longitude>
+                <ElevationAGL>3</ElevationAGL>
+              </GDC>
+            </CoordinateData>
+          </Location>
+        </Disposition>
+        <Relations>
+          <OrganicSuperiorHandle/>
+          <HoldingOrganization>
+            <OwnerChoice/>
+            <OwnerData/>
+          </HoldingOrganization>
+        </Relations>
+      </EquipmentItem>
+      <EquipmentItem>
+        <ObjectHandle>8dcdd30e-0d52-41d3-a8dc-9ff90eb3c519</ObjectHandle>
+        <SymbolIdentifier/>
+        <Name>New Object 2</Name>
+        <EquipmentSymbolModifiers>
+          <AdditionalInfo/>
+          <UniqueDesignation/>
+        </EquipmentSymbolModifiers>
+        <Disposition>
+          <Location>
+            <CoordinateChoice>GCC</CoordinateChoice>
+            <CoordinateData>
+              <GDC>
+                <Latitude>1</Latitude>
+                <Longitude>2</Longitude>
+                <ElevationAGL>3</ElevationAGL>
+              </GDC>
+            </CoordinateData>
+          </Location>
+        </Disposition>
+        <Relations>
+          <OrganicSuperiorHandle/>
+          <HoldingOrganization>
+            <OwnerChoice/>
+            <OwnerData/>
+          </HoldingOrganization>
+        </Relations>
+      </EquipmentItem>
+    </Equipment>
+  </Organizations>
+  <Installations>
+    <Installation>
+      <ObjectHandle>74c31c3c-73f9-4bb0-8a82-f8259d1d0e45</ObjectHandle>
+      <SymbolIdentifier>MIL2525 Symbol To Represent location on Map Screens</SymbolIdentifier>
+      <Affiliation>List of UUIDs which the location is affiliated; </Affiliation>
+      <Owner>
+        <OwnerChoice>FORCE_SIDE</OwnerChoice>
+        <OwnerData>
+          <UnitOwnerHandle/>
+          <ForceOwnerHandle>UUID for a force side - Scenario Builder currently does not support force sides</ForceOwnerHandle>
+        </OwnerData>
+      </Owner>
+      <Location>
+        <CoordinateChoice>GCC</CoordinateChoice>
+        <CoordinateData>
+          <GDC>
+            <Latitude>1.1</Latitude>
+            <Longitude>2.2</Longitude>
+            <ElevationAGL>3.3</ElevationAGL>
+          </GDC>
+        </CoordinateData>
+      </Location>
+      <Name>String: Location Name</Name>
+      <InstallationSymbolModifiers>
+        <AdditionalInfo>Synopsis including appearance and history. 
+Can be an abritary length.</AdditionalInfo>
+        <UniqueDesignation/>
+      </InstallationSymbolModifiers>
+    </Installation>
+    <Installation>
+      <ObjectHandle>2fc1f3d3-781c-4044-9ba3-4f10b82b6cf0</ObjectHandle>
+      <SymbolIdentifier/>
+      <Affiliation>Unknown</Affiliation>
+      <Owner>
+        <OwnerChoice>FORCE_SIDE</OwnerChoice>
+        <OwnerData>
+          <UnitOwnerHandle/>
+          <ForceOwnerHandle/>
+        </OwnerData>
+      </Owner>
+      <Location>
+        <CoordinateChoice>GCC</CoordinateChoice>
+        <CoordinateData>
+          <GDC>
+            <Latitude>1.3</Latitude>
+            <Longitude>2</Longitude>
+            <ElevationAGL>3</ElevationAGL>
+          </GDC>
+        </CoordinateData>
+      </Location>
+      <Name>Medical Tent</Name>
+      <InstallationSymbolModifiers>
+        <AdditionalInfo>Currently Loc is stored in Lat/Long/Alt - The spec supports multiple formats. </AdditionalInfo>
+        <UniqueDesignation/>
+      </InstallationSymbolModifiers>
+    </Installation>
+    <Installation>
+      <ObjectHandle>aa3e510e-6449-45e4-b303-93ffadbbc126</ObjectHandle>
+      <SymbolIdentifier/>
+      <Affiliation>Unknown</Affiliation>
+      <Owner>
+        <OwnerChoice>FORCE_SIDE</OwnerChoice>
+        <OwnerData>
+          <UnitOwnerHandle/>
+          <ForceOwnerHandle/>
+        </OwnerData>
+      </Owner>
+      <Location>
+        <CoordinateChoice>GCC</CoordinateChoice>
+        <CoordinateData>
+          <GDC>
+            <Latitude>1</Latitude>
+            <Longitude>2</Longitude>
+            <ElevationAGL>3</ElevationAGL>
+          </GDC>
+        </CoordinateData>
+      </Location>
+      <Name>New Location 2</Name>
+      <InstallationSymbolModifiers>
+        <AdditionalInfo/>
+        <UniqueDesignation/>
+      </InstallationSymbolModifiers>
+    </Installation>
+    <Installation>
+      <ObjectHandle>2e0b0388-360b-4b92-8384-77169c430afc</ObjectHandle>
+      <SymbolIdentifier/>
+      <Affiliation>Unknown</Affiliation>
+      <Owner>
+        <OwnerChoice>FORCE_SIDE</OwnerChoice>
+        <OwnerData>
+          <UnitOwnerHandle/>
+          <ForceOwnerHandle/>
+        </OwnerData>
+      </Owner>
+      <Location>
+        <CoordinateChoice>GCC</CoordinateChoice>
+        <CoordinateData>
+          <GDC>
+            <Latitude>1</Latitude>
+            <Longitude>2</Longitude>
+            <ElevationAGL>3</ElevationAGL>
+          </GDC>
+        </CoordinateData>
+      </Location>
+      <Name>New Location 3</Name>
+      <InstallationSymbolModifiers>
+        <AdditionalInfo/>
+        <UniqueDesignation/>
+      </InstallationSymbolModifiers>
+    </Installation>
+  </Installations>
+</lib:MilitaryScenario>
