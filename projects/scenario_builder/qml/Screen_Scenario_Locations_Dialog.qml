@@ -15,7 +15,7 @@ Page {
             onClicked: closed();
         }
        Label {
-            text: "Edit: " + data_model.symbol
+            text: "Edit: " + data_model.id
             elide: Label.ElideRight
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter

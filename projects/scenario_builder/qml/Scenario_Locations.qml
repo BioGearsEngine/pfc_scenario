@@ -32,7 +32,7 @@ Item {
       Text {
         id: scenario_model_lat
         font.pointSize: 10
-        text: "<i>  lat: </i>" + lat + "<i>  lon: </i>" + lon + "<i>  alt: </i>" + alt
+        text: "<i>  lat: </i>" + lat + "<i>  lon: </i>" + lon + "<i>  affiliation: </i>" + lat
         wrapMode: Text.Wrap
         horizontalAlignment : Text.AlignJustify
 

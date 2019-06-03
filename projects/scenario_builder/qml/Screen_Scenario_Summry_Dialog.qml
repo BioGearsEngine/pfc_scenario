@@ -19,7 +19,7 @@ Page {
             onClicked: closed();
         }
         Label {
-            text: "Edit: " + data_model.symbol
+            text: "Edit: " + ((0 == data_model.filename.length) ? "New Scenario" : data_model.filename) + "Summary"
             elide: Label.ElideRight
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter

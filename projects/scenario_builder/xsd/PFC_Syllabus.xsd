@@ -1,0 +1,131 @@
+<injury-list>
+	<injury>
+		<id></id>
+		<commomn-name>Common Terms for Medical Condition</common-name>
+		<medical-name>Full Medical Terminology (required) </medical-name>
+		<references>List of References for the injury (CPG, Textbook...)</references>
+		<desciption>Detailed description of the type of injury</desciption>
+		<SeverityRange>
+			<!--Range of values which can represent the seveiry of the wound -->
+			<Min></Min>
+			<Max></Max>
+		</SeverityRange>
+	</injury>
+	...
+</injury-list>
+
+<treatment-plan-list>
+	<treatment-plan>
+		<commomn-name>Common Terms for Medical Condition</common-name>
+		<medical-name>Full Medical Terminology (required)</medical-name>
+		<medical-equipment-list>
+			<medical-equipment>UUID of MSDL EquipmentType</medical-equipment>
+		</medical-equipment-list>
+		<realtions>
+			<lesson>UUID of lessons taught by treatment</lesson>
+		</realtions>
+		<CPG>
+			<Name></Name>
+			<reference-list>
+				Citations of non CPG related material used to build this treatment plan
+				...
+			</referencel-list>
+			<cpg-list>Citations for each CPG the following treatman plan is based on</cpg-list>
+		<step-list>
+			<step>Instructions on how to compelte the step.</step>
+		</step-list>
+		</CPG>
+	</treatment-plan>
+</treatment-plan-list>
+
+<injury-profile-list>
+	<injury-profile>
+		<actor-id></actor-id>
+		<injury-list>
+			<injury>
+				<injury-id>UUID referecing the injury definition</injury-id>
+				<location>Location the injury occured</location>
+				<occurance-description>Historical description of how the injury occured</occurance-description>
+				<severity>Severity of this occurance</severity>
+				<pysiology-state>Optional BioGears Physiology File</pysiology-state>
+			</injury>
+		</injury-list>
+	</injury-profile>
+</injury-profile-list>
+
+<syllabus>
+	<learning-objective-list>
+		<learning-objective>
+			<id>UUID for referecing the lesson in other sections of the schema</id>
+			<name>Human Readable Name for the Lesson</name>
+			<references>List of References for the lesson (CPG, Textbook...)</references>
+			<description>Detailed description of the lesson and its purpose.</description>
+			<relations>
+				<treatment-id></treatment-id>
+				<injury-ids>UUIDs to injuries that is related to the lesson</injury-ids>
+				<injury-profile-id></injury-profile-id>
+			</relations>
+			<treatment-plan-list>
+				<treatment-plan-id>UUID of a Treatment Plan that is relevant to this learning objective. Each treatment plan maps to CPGs which were used to develop it.</treatment-plan-id>
+				...
+			</treatment-plan-list>
+		</learning-objective>
+		...
+	</learning-objective-list>
+
+	<assessment-criteria-list>
+		<total-points>Total Points avaliabe for the entire syllabus</total-points>
+		<assessment>
+			<id>1</id>
+			<lesson-id>UUID of the lesson this critera maps to</lesson-id>
+			<points-avaliable>maximum points avaliable for this assessment. summation of  points-avaliable should add up to total-points value</points-avaliable>
+			<criteria>
+			Some assessment guideline definition of verying granularity. We will have to accomidate both what our SMEs would expect and what VH might think would be useufle. Concider a Ternincate lesson.
+			  Criteria: Applies Ternincate before X seconds
+			            Ternicate stops blood flow
+			            Follow up Lesson might be ternacate removal whith its own criteria 
+			</criteria>
+		</assessment>
+		...
+	</assessment-criteria-list>
+</syllabus>
+
+<medical-scenario>
+	<id>UUID</id>
+	<cast-list>
+		<actor>
+			<actor-id>UUID of a MSDL Unit Entry</actor-id>
+			<injury-profile>UUID of a injury-profile. This allows multiple characters to have the same set of injuries and reduces complexity in the schema.</injury-profile>
+			<treatment-list>
+				<treatment-id>UUID to a medical treatment for treating the wounds</treatment-id>
+			</treatment-list>
+		</actor>
+	</cast-list>
+	<prop-list>
+		<prop>UUID of a MSDL Equipment Entry</prop>
+	</prop-list>
+	<timeline>
+		<scene>
+			<location>The Location of the event</location>
+			<time-of-day>What is the time of day in the scene</time-of-day>
+			<time-in-simulation>Monotonic passage of time since the start of the simulation timeline</time-in-simulation>
+			<weather>
+				MSDL Weather Block 
+			</weather>
+			<event-list>
+				Document Training Event used to describe each step in the training narrative. In my mind these will be labeled with a fedelity level that decides how in the weeds the event is. Virtual simulations would be interested in very low fedelity entriies while medical simulations cripts would be interested in high level events. In addition we could divide events in to Dialog,Movment,Action,Accoustics,Enviromental.  This part still needs some fleshing out and is a little wavey. 
+
+				Example
+					Action : Low Fedility : Cast members X Y Z appear at location X
+					Sound  : Medium Fedelity : Gun Shot Noise
+					Action : Low Fedility : Cast member X is shot and sustains Hemmorage Injury in his shoulder
+					Dialog : Low Fedeility: : X Says " Aww Crap"
+					Movment: High Fedelity :Y and Z converge on X
+					Dialog : Medium Fedeility: : Y Says " You got Shot"
+					Dialog : Medium Fedeility: : X Says " I got Shot"
+					Action : Low Fedeility: : Y and Z take X to Base Camp
+					End Scene:
+			</event-list>
+		</scene>
+	</timeline>
+</medical-scenario>

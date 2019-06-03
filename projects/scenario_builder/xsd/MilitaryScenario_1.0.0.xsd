@@ -10,7 +10,11 @@ SISO hereby grants a general, royalty-free license to copy, distribute, display,
 SISO Inc. Board of Directors
 P.O. Box 781238
 Orlando, FL 32878-1238, USA"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jc3iedm="urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0" xmlns:modelID="http://www.sisostds.org/schemas/modelID" xmlns:msdl="urn:sisostds:scenario:military:data:draft:msdl:1" targetNamespace="urn:sisostds:scenario:military:data:draft:msdl:1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0.0" id="MSDL">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:jc3iedm="urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0" 
+	xmlns:modelID="http://www.sisostds.org/schemas/modelID" 
+	xmlns:msdl="urn:sisostds:scenario:military:data:draft:msdl:1" 
+	targetNamespace="urn:sisostds:scenario:military:data:draft:msdl:1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0.0" id="MSDL">
 	<xs:include schemaLocation="MsdlComplexTypes_1.0.0.xsd"/>
 	<xs:element name="MilitaryScenario" type="msdl:MilitaryScenarioType">
 		<xs:annotation>
