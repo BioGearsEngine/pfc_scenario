@@ -3,7 +3,7 @@
         <file>Main.qml</file>
         <file>Screen_Start.qml</file>
         <file>Screen_Scenario.qml</file>
-         <file>Scenario_Summary.qml</file>
+        <file>Scenario_Summary.qml</file>
         <file>Scenario_Locations.qml</file>
         <file>Scenario_Actors.qml</file>
         <file>Scenario_Objects.qml</file>
@@ -11,5 +11,6 @@
         <file>Screen_Scenario_Locations_Dialog.qml</file>
         <file>Screen_Scenario_Objects_Dialog.qml</file>
         <file>Screen_Scenario_Actors_Dialog.qml</file>
+        <file>img/sustain_splash.png</file>
     </qresource>
 </RCC>

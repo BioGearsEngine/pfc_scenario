@@ -26,7 +26,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			<xs:documentation>
 				A PFC representation of a simple injury. Injuries are associated to a Injury-Profile where severity and injury-site are applied.
 				An injury must have a medical-name, but can also have a common-name for use in documentation. It is good to provide a list of citations 
-				which describe the injury in more traditioanl terms in the references section, but is not required.
+				which describe the injury in more traditional terms in the references section, but is not required.
 			</xs:documentation>
 		</xs:annotation>
 		<xs:all>
@@ -422,3 +422,4 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>
+N
