@@ -1,22 +1,47 @@
 import QtQuick 2.10
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.3
-import Qt.labs.platform 1.0
+import QtQuick.Controls 2.5
+import QtQuick.Controls.Styles 1.3
+import QtQuick.Dialogs 1.3
 
-import com.ara.pfc.ScenarioModel 1.0
+import com.ara.pfc.ScenarioModel 1.0 
+//This is importing C++ code
+
 
 ApplicationWindow {
-  id:object1
-  width: 600; height: 800
-  minimumWidth:  600
-  minimumHeight: 800 
+  title: qsTr("Test")
+  width: 1280; height: 768
   visible: true
+
+  menuBar: MenuBar {
+    visible: true
+    Menu {
+      title: "File"
+        MenuItem { text: "New Scenario" }
+        MenuItem { text: "Save Scenario" }
+        MenuItem { text: "Save Scenario As" }
+        MenuItem { text: "Load Scenario" }
+    }
+    Menu {
+      title: "Edit"
+        MenuItem { text: "Authorship" }
+    }
+    Menu {
+      title: "View"
+        MenuItem { text: "Narrative"}
+        MenuItem { text: "Syllabus"}
+    }
+    Menu {
+      title: "About"
+        MenuItem { text: "Help"}
+        MenuItem { text: "About"}
+    }
+  }
   
   ScenarioModel {
     id : scenario_model
   }
-
   StackView {
     id: mainView
     anchors.fill: parent
@@ -26,12 +51,23 @@ ApplicationWindow {
        id: startScreen
        onLoadClicked: {
          loadDialog.open()
-        }
+       }
        onCreateClicked: {
          mainView.push( scenarioScreen, { model : scenario_model} )
         }
     }
-
+    FileDialog {
+      id: loadDialog
+      title: "Please Choose a File:"
+      visible: false
+      folder: StandardPaths.writableLocation(StandardPaths.DesktopLocation)
+      onAccepted: {
+        console.log("You chose: " + fileDialog.fileUrls)
+      }
+      onRejected: {
+        console.log("Canceled")
+      }
+    }
     Component {
       id: scenarioScreen
       Screen_Scenario {
@@ -39,26 +75,6 @@ ApplicationWindow {
         stack: mainView
         onClosed : mainView.pop()
       }
-    }
-
-        FileDialog {
-          id: loadDialog
-            title: "Please choose a file"
-            folder: StandardPaths.writableLocation(StandardPaths.DesktopLocation)
-            fileMode: FileDialog.OpenFile;
-            nameFilters: ["MSDL Files(*.xml)"]
-            onAccepted: {
-              console.log("You chose: " + file)
-              scenario_model.Load( file );
-              mainView.push( scenarioScreen, { model : scenario_model} )
-            }
-            onRejected: {
-              console.log("Canceled")
-            }
-        }
-
-    onCurrentItemChanged: {
-        currentItem.forceActiveFocus()
     }
   }
 }

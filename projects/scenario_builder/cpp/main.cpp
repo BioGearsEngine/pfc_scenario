@@ -24,7 +24,7 @@ specific language governing permissions and limitations under the License.
 
 int main(int argc, char* argv[])
 {
-  /* Commenti
+  /* Commenti 
   g the following line resolves the issue but then UI elements looks small */
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
   QApplication app(argc, argv);
@@ -38,8 +38,8 @@ int main(int argc, char* argv[])
   qmlRegisterType<pfc::NarativeSequence>("com.ara.pfc.ScenarioModel.Narative", 1, 0, "Naratives");
 
 
-  QPixmap pixmap("D:/remotes/sed-stash/biogears/pfc/scenario/build-msvc/img/sustain_splash.png");
-  qDebug() << QString("%1,%2").arg(pixmap.height()).arg(pixmap.width());
+  QPixmap pixmap("D:/biogears/pfc/scenario/build/img/sustain_splash.png");
+  qDebug() << QString("%1,%2").arg(pixmap.height()).arg(pixmap.width()); //1280x768
   QSplashScreen splash(pixmap);
   splash.show();
   engine.load(QUrl(QLatin1String("qrc:/Main.qml")));

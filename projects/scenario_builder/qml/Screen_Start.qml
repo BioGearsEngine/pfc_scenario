@@ -16,6 +16,7 @@ Page {
       Layout.margins: 100
 
       Rectangle {
+          id: sustainScenarioBuilder
           color: 'red'
           radius: 10
           Layout.fillWidth: true
@@ -30,10 +31,28 @@ Page {
               font.weight: Font.Bold
           }
       } 
-  
+      Rectangle {
+        id: recentScenarios
+        color: 'plum'
+        radius: 100
+        anchors.top: sustainScenarioBuilder.bottom
+        anchors.topMargin: 10
+        Layout.fillWidth: true
+        Layout.minimumHeight: 50
+        Layout.minimumWidth: Font.contentWidth + 10
+          Text {
+              anchors.centerIn: parent
+              text: "Recent Scenarios"
+              color: 'black'
+              font.family: "Gotham"
+              font.pixelSize: 25
+              font.weight: Font.Bold
+          }
+      }
       Row {
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
+        anchors.top: recentScenarios.bottom
+        anchors.horizontalCenter: recentScenarios.horizontalCenter
+        anchors.topMargin: 10
         spacing: 20
         Rectangle {
           id : loadScenarioButton
