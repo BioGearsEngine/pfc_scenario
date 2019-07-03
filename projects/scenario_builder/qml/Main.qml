@@ -60,7 +60,7 @@ ApplicationWindow {
       id: loadDialog
       title: "Please Choose a File:"
       visible: false
-      folder: StandardPaths.writableLocation(StandardPaths.DesktopLocation)
+      //folder: StandardPaths.writableLocation(StandardPaths.DesktopLocation)
       onAccepted: {
         console.log("You chose: " + fileDialog.fileUrls)
       }

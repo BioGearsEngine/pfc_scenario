@@ -1,7 +1,7 @@
 import QtQuick 2.10
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.12
 
 // main window
 Page {
@@ -19,6 +19,7 @@ Page {
           id: sustainScenarioBuilder
           color: 'red'
           radius: 10
+          Layout.alignment: Qt.AlignHCenter
           Layout.fillWidth: true
           Layout.minimumHeight: 50
           Layout.minimumWidth: Font.contentWidth + 10
@@ -34,11 +35,13 @@ Page {
       Rectangle {
         id: recentScenarios
         color: 'plum'
-        radius: 100
-        anchors.top: sustainScenarioBuilder.bottom
-        anchors.topMargin: 10
+        radius: 10
+        //anchors.top: sustainScenarioBuilder.bottom
+        Layout.alignment: Qt.AlignHCenter
+        //anchors.topMargin: 10
+        Layout.topMargin: 10
         Layout.fillWidth: true
-        Layout.minimumHeight: 50
+        Layout.minimumHeight: 100
         Layout.minimumWidth: Font.contentWidth + 10
           Text {
               anchors.centerIn: parent
@@ -50,9 +53,11 @@ Page {
           }
       }
       Row {
-        anchors.top: recentScenarios.bottom
-        anchors.horizontalCenter: recentScenarios.horizontalCenter
-        anchors.topMargin: 10
+        //anchors.top: recentScenarios.bottom
+        Layout.alignment: Qt.AlignHCenter
+        //anchors.horizontalCenter: recentScenarios.horizontalCenter
+        //anchors.topMargin: 10
+        Layout.topMargin: 10
         spacing: 20
         Rectangle {
           id : loadScenarioButton

@@ -17,7 +17,7 @@ specific language governing permissions and limitations under the License.
 #include <QSplashScreen>
 
 #include "Actors.h"
-#include "Locations.h"
+#include "Locations.h"  
 #include "Objects.h"
 #include "Scenario.h"
 #include "Scenes.h"
