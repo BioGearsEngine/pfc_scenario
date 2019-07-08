@@ -79,12 +79,12 @@ if (${PREFIX}_BUILD_STATIC)
 endif()
 
 ###############################################################################
-# COMPILATION & LINKAGE MODIFICATIONS
+# COMPILATION & LINKLINKAGE MODIFICATIONS
 ###############################################################################
 
 list(APPEND ${PREFIX}_INCLUDES
       PUBLIC ${${PREFIX}_INCLUDE_DIR}
-      PRIVATE ${${PREFIX}_PRIVATE_INCLUDE_DIR}
+      PUBLIC ${${PREFIX}_PRIVATE_INCLUDE_DIR}
       PUBLIC ${${PREFIX}_GENERATED_INCLUDE_DIR}
       PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/xsd/cpp"
 )
@@ -129,9 +129,10 @@ target_compile_definitions(lib${PROJECT_NAME} PUBLIC $<$<PLATFORM_ID:Windows>:BO
 target_compile_options(lib${PROJECT_NAME} PUBLIC $<$<PLATFORM_ID:Windows>:/bigobj>  PUBLIC $<$<PLATFORM_ID:Windows>:/MP>)
 target_include_directories(lib${PROJECT_NAME}
       PUBLIC ${${PREFIX}_INCLUDE_DIR}
-      PRIVATE ${${PREFIX}_PRIVATE_INCLUDE_DIR}
+      PUBLIC ${${PREFIX}_PRIVATE_INCLUDE_DIR}
       PUBLIC ${${PREFIX}_GENERATED_INCLUDE_DIR}
-      PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/xsd/cpp"
+      PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/xsd/cpp
+	  "
 )
 
 if(CMAKE_COMPILER_IS_GNUCXX)

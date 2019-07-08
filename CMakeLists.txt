@@ -13,7 +13,7 @@ set(${ROOT_PROJECT_NAME}_CMAKE_MIN_VERSION 3.11.0)
 set(${ROOT_PROJECT_NAME}_CMAKE_POLICY 3.11.0)
 
 cmake_minimum_required(VERSION ${${ROOT_PROJECT_NAME}_CMAKE_MIN_VERSION})
-project(${ROOT_PROJECT_NAME} CXX)
+project(${ROOT_PROJECT_NAME} C CXX)
 
 include(cmake/cmake-common_logic.cmake)
 include(cmake/UseGit.cmake)
