@@ -13,14 +13,11 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License.
 **************************************************************************************/
 
-#include "sqlite3.h"
-
 #include <QList>
 #include <QObject>
+#include <QSqlDatabase>
+#include <QSqlError>
 #include <QString>
-#include <qobjectdefs.h>
-
-struct sqlite3;
 
 namespace pfc {
 
@@ -31,28 +28,28 @@ enum Sqlite3Table {
 };
 
 struct Author {
-  int32_t id;
-  QString frist;
-  QString last;
-  QString email;
-  QString zip;
-  QString plus_4;
-  QString state;
-  QString country;
-  QString phone;
-  QString organization;
+  int32_t id = -1;
+  QString first = "";
+  QString last = "";
+  QString email = "";
+  QString zip = "";
+  QString plus_4 = "";
+  QString state = "";
+  QString country = "";
+  QString phone = "";
+  QString organization = "";
 };
 
 struct Property {
-  int32_t id;
-  QString name;
-  QString value;
+  int32_t id = -1;
+  QString name = "";
+  QString value = "";
 };
 
 struct Restriction {
-  int32_t id;
-  QString name;
-  QString value;
+  int32_t id = -1;
+  QString name = "";
+  QString value = "";
 };
 
 class SQLite3Driver : public QObject {
@@ -69,10 +66,10 @@ public:
   SQLite3Driver(SQLite3Driver&&) = default;
   SQLite3Driver& operator=(const SQLite3Driver&) = default;
   SQLite3Driver& operator=(SQLite3Driver&&) = default;
-  ~SQLite3Driver() = default;
+  ~SQLite3Driver();
 
   Q_INVOKABLE bool open(QString db_name);
-  Q_INVOKABLE bool close();
+  Q_INVOKABLE void close();
 
   Q_INVOKABLE bool initialize_db();
 
@@ -95,11 +92,11 @@ public:
   Q_INVOKABLE bool remove(Property&);
   Q_INVOKABLE bool remove(Restriction&);
 
-  Q_INVOKABLE int raw_error() const { return _error_code; };
-  Q_INVOKABLE QString error_message() const { return QString(_error_msg); }
-  
-  Q_INVOKABLE bool success() const { return 0 == _error_code; };
-  Q_INVOKABLE bool open() const { return nullptr == _db; };
+  Q_INVOKABLE int raw_error() const { return _db.lastError().type(); };
+  Q_INVOKABLE QString error_message() const { return _db.lastError().text(); }
+  Q_INVOKABLE bool success() const { return !error(); }
+  Q_INVOKABLE bool error() const { return _db.lastError().isValid(); };
+  Q_INVOKABLE bool open() const { return _db.isOpen(); };
 
   QString Path() const { return _db_path; };
   QString Name() const { return _db_name; };
@@ -113,13 +110,12 @@ signals:
 
 private:
   bool open();
+
 private:
   QString _db_name = "";
   QString _db_path = "./";
-  ::sqlite3* _db = nullptr;
+  QSqlDatabase _db;
   mutable int _error_code = 0;
-  char* _error_msg = 0;
-  char _error_msg_buffer[512];
 };
 }
 #endif //PFC_SCENARIO_BUILDER_SQL_SQLLITE3_DRVER_H

@@ -11,24 +11,30 @@ specific language governing permissions and limitations under the License.
 **************************************************************************************/
 #include "SqlLite3Driver.h"
 
+#include <QDebug>
+#include <QMessageLogger>
 #include <QRegularExpression>
+#include <QSqlQuery>
+#include <QSqlRecord>
+#include <QtGlobal>
 
 #include "SqlLite3_Statments.h"
-#include "sqlite3.h"
+#include "sqlite3ext.h"
 
 namespace pfc {
-inline void assign_author(sqlite3_stmt* stmt, Author& author)
+inline void assign_author(const QSqlRecord& record, Author& author)
 {
-  author.id = sqlite3_column_int(stmt, AUTHOR_ID);
-  author.frist = QString(reinterpret_cast<char const*>(sqlite3_column_text(stmt, AUTHOR_FIRST_NAME)));
-  author.last = QString(reinterpret_cast<char const*>(sqlite3_column_text(stmt, AUTHOR_LAST_NAME)));
-  author.email = QString(reinterpret_cast<char const*>(sqlite3_column_text(stmt, AUTHOR_EMAIL)));
+  author.id = record.value(AUTHOR_ID).toInt();
+  author.first = record.value(AUTHOR_FIRST_NAME).toString();
+  author.last = record.value(AUTHOR_LAST_NAME).toString();
+  author.email = record.value(AUTHOR_EMAIL).toString();
 
-  auto zip_qstr = QString(reinterpret_cast<char const*>(sqlite3_column_text(stmt, AUTHOR_ZIPCODE)));
+  auto zip_qstr = record.value(AUTHOR_ZIPCODE).toString();
+
   QRegularExpression zip(R"((\d{5})-(\d{4}))");
   QRegularExpression zip_plus4(R"((\d{5}))");
-
   QRegularExpressionMatch match = zip_plus4.match(zip_qstr);
+
   if (match.hasMatch()) {
     author.zip = match.captured(0);
     author.plus_4 = match.captured(1);
@@ -38,152 +44,155 @@ inline void assign_author(sqlite3_stmt* stmt, Author& author)
       author.zip = match.captured(0);
     }
   }
+  author.state = record.value(AUTHOR_STATE).toString();
+  author.country = record.value(AUTHOR_COUNTRY).toString();
+  author.phone = record.value(AUTHOR_PHONE).toString();
+  author.organization = record.value(AUTHOR_ORGANIZATION).toString();
+}
 
-  author.state = QString(reinterpret_cast<char const*>(sqlite3_column_text(stmt, AUTHOR_STATE)));
-  author.country = QString(reinterpret_cast<char const*>(sqlite3_column_text(stmt, AUTHOR_COUNTRY)));
-  author.phone = QString(reinterpret_cast<char const*>(sqlite3_column_text(stmt, AUTHOR_PHONE)));
-  author.organization = QString(reinterpret_cast<char const*>(sqlite3_column_text(stmt, AUTHOR_ORGANIZATION)));
-}
-inline void assign_property(sqlite3_stmt* stmt, Property& property)
+inline void assign_property(const QSqlRecord& record, Property& property)
 {
-  property.id = sqlite3_column_int(stmt, PROPERTY_ID);
-  property.name = QString(reinterpret_cast<char const*>(sqlite3_column_text(stmt, PROPERTY_NAME)));
-  property.value = QString(reinterpret_cast<char const*>(sqlite3_column_text(stmt, PROPERTY_VALUE)));
+  property.id = record.value(PROPERTY_ID).toInt();
+  property.name = record.value(PROPERTY_NAME).toString();
+  property.value = record.value(PROPERTY_VALUE).toString();
 }
-inline void assign_restriction(sqlite3_stmt* stmt, Restriction& restriction)
+inline void assign_restriction(const QSqlRecord& record, Restriction& restriction)
 {
-  restriction.id = sqlite3_column_int(stmt, RESTRICTION_ID);
-  restriction.name = QString(reinterpret_cast<char const*>(sqlite3_column_text(stmt, RESTRICTION_NAME)));
-  restriction.value = QString(reinterpret_cast<char const*>(sqlite3_column_text(stmt, RESTRICTION_VALUE)));
+  restriction.id = record.value(RESTRICTION_ID).toInt();
+  restriction.name = record.value(RESTRICTION_NAME).toString();
+  restriction.value = record.value(RESTRICTION_VALUE).toString();
 }
 //------------------------------------------------------------------------------
 SQLite3Driver::SQLite3Driver()
+  : _db(QSqlDatabase::database())
 {
-  
 }
-  //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 SQLite3Driver::SQLite3Driver(const std::string& dbName, const std::string& path)
   : _db_name(dbName.c_str())
   , _db_path(path.c_str())
+  , _db(QSqlDatabase::database())
 {
   if (!open()) {
     throw std::runtime_error("Database Creation Failure");
   }
+  //TODO: Add Logic for detecting if this is required
+  initialize_db();
+}
+//------------------------------------------------------------------------------
+SQLite3Driver::~SQLite3Driver()
+{
+  _db.close();
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::open(QString name)
 {
-  _db_path = name;
+  _db.close();
+  _db_name = name;
   return open();
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::open()
 {
-  _error_code = sqlite3_open_v2(QString(_db_path+"/"+_db_name).toStdString().c_str(), &_db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nullptr);
+  if (!_db.isValid()) {
+    _db = QSqlDatabase::addDatabase("QSQLITE");
+  }
+  _db.setDatabaseName(_db_path + "/" + _db_name);
 
-  if (_error_code) {
-    sprintf(_error_msg_buffer, "Can't open database: %s\n", sqlite3_errmsg(_db));
-    _error_msg = _error_msg_buffer;
-    return (0);
-  } 
-  return SQLITE_OK == _error_code;
+  if (!_db.open()) {
+    qDebug() << _db.lastError();
+    return false;
+  }
+  return true;
 }
 //------------------------------------------------------------------------------
-bool SQLite3Driver::close()
+void SQLite3Driver::close()
 {
-  _error_code = sqlite3_close_v2(_db);
-  return SQLITE_OK == _error_code;
+  _db.close();
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::initialize_db()
 {
-  if (_db) {
+  QSqlQuery query(_db);
+  if (_db.isOpen()) {
 
-    if (SQLITE_OK != (_error_code = sqlite3_exec(_db, /* An open database */
-                                                 sqlite3::create_properties_table, /* SQL to be evaluated */
-                                                 nullptr, /* Callback function */
-                                                 nullptr, /* 1st argument to callback */
-                                                 &_error_msg /* Error msg written here */
-                                                 ))) {
+    query.prepare(sqlite3::create_properties_table);
+    if (!query.exec()) {
+      qCritical() << query.lastError();
       return false;
     }
-    if (SQLITE_OK != (_error_code = sqlite3_exec(_db, /* An open database */
-                                                 sqlite3::create_authors_table, /* SQL to be evaluated */
-                                                 nullptr, /* Callback function */
-                                                 nullptr, /* 1st argument to callback */
-                                                 &_error_msg /* Error msg written here */
-                                                 ))) {
+
+    query.prepare(sqlite3::create_authors_table);
+    if (!query.exec()) {
+      qCritical() << query.lastError();
       return false;
     }
-    if (SQLITE_OK != (_error_code = sqlite3_exec(_db, /* An open database */
-                                                 sqlite3::create_restrictions_table, /* SQL to be evaluated */
-                                                 nullptr, /* Callback function */
-                                                 nullptr, /* 1st argument to callback */
-                                                 &_error_msg /* Error msg written here */
-                                                 ))) {
+
+    query.prepare(sqlite3::create_restrictions_table);
+    if (!query.exec()) {
+      qCritical() << query.lastError();
       return false;
     }
+    return true;
   }
-  return SQLITE_OK == _error_code;
+  return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::clear_db()
 {
-  sqlite3_stmt* stmt = 0;
-  if (_db) {
-    _error_code = sqlite3_prepare_v2(_db, sqlite3::drop_table, -1, &stmt, 0);
-    _error_code = sqlite3_bind_text(stmt, 1, tables[AUTHORS], sizeof(tables[AUTHORS]), nullptr);
-    _error_code = sqlite3_step(stmt);
-    _error_code = sqlite3_bind_text(stmt, 1, tables[PROPERTIES], sizeof(tables[PROPERTIES]), nullptr);
-    _error_code = sqlite3_step(stmt);
-    _error_code = sqlite3_bind_text(stmt, 1, tables[RESTRICTIONS], sizeof(tables[RESTRICTIONS]), nullptr);
-    _error_code = sqlite3_step(stmt);
-    _error_code = sqlite3_finalize(stmt);
+  QSqlQuery query(_db);
+  if (_db.isOpen()) {
+    query.prepare(sqlite3::drop_table);
+    query.bindValue(":table", tables[AUTHORS]);
+    bool iResult = query.exec();
+    query.bindValue(":table", tables[PROPERTIES]);
+    iResult &= query.exec();
+    query.bindValue(":table", tables[RESTRICTIONS]);
+    return query.exec() && iResult;
   }
-  return SQLITE_OK == _error_code;
+  return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::clear_table(enum Sqlite3Table t)
 {
-  sqlite3_stmt* stmt = 0;
-  if (_db) {
+
+  QSqlQuery query{ _db };
+  query.prepare(sqlite3::drop_table);
+  if (_db.isOpen()) {
     switch (t) {
     case AUTHORS:
-      _error_code = sqlite3_prepare_v2(_db, sqlite3::drop_table, -1, &stmt, 0);
-      _error_code = sqlite3_bind_text(stmt, 1, tables[AUTHORS], sizeof(tables[AUTHORS]), nullptr);
+      query.bindValue(":table", tables[AUTHORS]);
       break;
     case PROPERTIES:
-      _error_code = sqlite3_prepare_v2(_db, sqlite3::drop_table, -1, &stmt, 0);
-      _error_code = sqlite3_bind_text(stmt, 1, tables[PROPERTIES], sizeof(tables[PROPERTIES]), nullptr);
+      query.bindValue(":table", tables[PROPERTIES]);
       break;
     case RESTRICTIONS:
-      _error_code = sqlite3_prepare_v2(_db, sqlite3::drop_table, -1, &stmt, 0);
-      _error_code = sqlite3_bind_text(stmt, 1, tables[RESTRICTIONS], sizeof(tables[RESTRICTIONS]), nullptr);
+      query.bindValue(":table", tables[RESTRICTIONS]);
       break;
     default:
       return false;
     }
-
-    _error_code = sqlite3_step(stmt);
-    _error_code = sqlite3_finalize(stmt);
+    return query.exec();
   }
-  return SQLITE_OK == _error_code;
+  return false;
 }
 //------------------------------------------------------------------------------
 auto SQLite3Driver::authors() const -> QList<Author>
 {
   QList<Author> results;
-  sqlite3_stmt* stmt = 0;
-  if (_db) {
 
-    _error_code = sqlite3_prepare(_db, sqlite3::select_all_authors, sizeof(sqlite3::select_all_authors), &stmt, nullptr);
-    while (sqlite3_step(stmt) == SQLITE_ROW) {
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_authors);
+    query.exec();
+    while (query.next()) {
       Author author;
-      assert(sqlite3_column_count(stmt) == 11);
-      assign_author(stmt, author);
+      auto record = query.record();
+      assert(record.count() == 9);
+      assign_author(record, author);
       results.push_back(author);
     }
-    sqlite3_finalize(stmt);
   }
   return results;
 }
@@ -191,14 +200,18 @@ auto SQLite3Driver::authors() const -> QList<Author>
 auto SQLite3Driver::properties() const -> QList<Property>
 {
   QList<Property> results;
-  sqlite3_stmt* stmt = 0;
-  if (_db) {
 
-    _error_code = sqlite3_prepare(_db, sqlite3::select_all_properties, sizeof(sqlite3::select_all_properties), &stmt, nullptr);
-    while (sqlite3_step(stmt) == SQLITE_ROW) {
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_properties);
+    query.exec();
+    while (query.next()) {
       Property property;
-      assert(sqlite3_column_count(stmt) == 5);
-      assign_property(stmt, property);
+      auto record = query.record();
+      assert(record.count() == 9);
+      assign_property(record, property);
+      results.push_back(property);
     }
   }
   return results;
@@ -207,220 +220,246 @@ auto SQLite3Driver::properties() const -> QList<Property>
 auto SQLite3Driver::restrictions() const -> QList<Restriction>
 {
   QList<Restriction> results;
-  sqlite3_stmt* stmt = 0;
-  if (_db) {
-    _error_code = sqlite3_prepare(_db, sqlite3::select_all_restrictions, sizeof(sqlite3::select_all_restrictions), &stmt, nullptr);
-    while (sqlite3_step(stmt) == SQLITE_ROW) {
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_restrictions);
+    query.exec();
+    while (query.next()) {
       Restriction restriction;
-      assert(sqlite3_column_count(stmt) == 5);
-      assign_restriction(stmt, restriction);
+      auto record = query.record();
+      assert(record.count() == 9);
+      assign_restriction(record, restriction);
+      results.push_back(restriction);
     }
-    sqlite3_finalize(stmt);
   }
   return results;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::select(Author& author) const
 {
-  sqlite3_stmt* stmt = 0;
-  if (_db) {
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    QSqlRecord record;
     if (author.id != -1) {
-      _error_code = sqlite3_prepare(_db, sqlite3::select_author_by_id, sizeof(sqlite3::select_author_by_id), &stmt, nullptr);
-      _error_code = sqlite3_bind_int(stmt, 1, author.id);
+      query.prepare(sqlite3::select_author_by_id);
+      query.bindValue(":id", author.id);
     } else if (!author.email.isEmpty()) {
-      _error_code = sqlite3_prepare(_db, sqlite3::select_author_by_email, sizeof(sqlite3::select_author_by_email), &stmt, nullptr);
-      _error_code = sqlite3_bind_text(stmt, 1, author.email.toLatin1().data(), -1, SQLITE_STATIC);
+      query.prepare(sqlite3::select_author_by_id);
+      query.bindValue(":email", author.email);
     } else {
+      qWarning() << "Provided Author has no id or email one is required";
       return false;
     }
-    while (sqlite3_step(stmt) == SQLITE_ROW) {
-      assert(sqlite3_column_count(stmt) == 5);
-      assign_author(stmt, author);
+    query.exec();
+    while (query.next()) {
+      record = query.record();
+      assign_author(record, author);
     }
-    sqlite3_finalize(stmt);
     return true;
   }
+  qWarning() << "No Databsae connection";
   return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::select(Property& property) const
 {
-  sqlite3_stmt* stmt = 0;
-  if (_db) {
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    QSqlRecord record;
     if (property.id != -1) {
-      _error_code = sqlite3_prepare(_db, sqlite3::select_property_by_id, sizeof(sqlite3::select_property_by_id), &stmt, nullptr);
-      _error_code = sqlite3_bind_int(stmt, 1, property.id);
+      query.prepare(sqlite3::select_property_by_id);
+      query.bindValue(":id", property.id);
     } else if (!property.name.isEmpty()) {
-      _error_code = sqlite3_prepare(_db, sqlite3::select_property_by_name, sizeof(sqlite3::select_property_by_name), &stmt, nullptr);
-      _error_code = sqlite3_bind_text(stmt, 1, property.name.toLatin1().data(), -1, SQLITE_STATIC);
+      query.prepare(sqlite3::select_property_by_name);
+      query.bindValue(":name", property.name);
     } else {
+      qWarning() << "Provided Propertiy has no id or name one is required";
       return false;
     }
-    while (sqlite3_step(stmt) == SQLITE_ROW) {
-      assert(sqlite3_column_count(stmt) == 5);
-      assign_property(stmt, property);
+    query.exec();
+    while (query.next()) {
+      record = query.record();
+      assign_property(record, property);
     }
-    sqlite3_finalize(stmt);
     return true;
   }
+  qWarning() << "No Databsae connection";
   return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::select(Restriction& restriction) const
 {
-  sqlite3_stmt* stmt = 0;
-  if (_db) {
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    QSqlRecord record;
     if (restriction.id != -1) {
-      _error_code = sqlite3_prepare(_db, sqlite3::select_restriction_by_id, sizeof(sqlite3::select_restriction_by_id), &stmt, nullptr);
-      _error_code = sqlite3_bind_int(stmt, 1, restriction.id);
+      query.prepare(sqlite3::select_restriction_by_id);
+      query.bindValue(":id", restriction.id);
     } else if (!restriction.name.isEmpty()) {
-      _error_code = sqlite3_prepare(_db, sqlite3::select_restriction_by_name, sizeof(sqlite3::select_restriction_by_name), &stmt, nullptr);
-      _error_code = sqlite3_bind_text(stmt, 1, restriction.name.toLatin1().data(), -1, SQLITE_STATIC);
+      query.prepare(sqlite3::select_property_by_name);
+      query.bindValue(":name", restriction.name);
     } else {
+      qWarning() << "Provided Propertiy has no id or name one is required";
       return false;
     }
-    while (sqlite3_step(stmt) == SQLITE_ROW) {
-      assert(sqlite3_column_count(stmt) == 5);
-      assign_restriction(stmt, restriction);
+    query.exec();
+    while (query.next()) {
+      record = query.record();
+      assign_restriction(record, restriction);
     }
-    sqlite3_finalize(stmt);
     return true;
   }
+  qWarning() << "No Databsae connection";
   return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::insert(Author& author)
 {
-  sqlite3_stmt* stmt = 0;
-  if (_db) {
+
+  if (_db.isOpen()) {
     if (!author.email.isEmpty()) {
-      _error_code = sqlite3_prepare(_db, sqlite3::insert_into_authors, sizeof(sqlite3::insert_into_authors), &stmt, nullptr);
-      _error_code = sqlite3_bind_text(stmt, 1, author.frist.toLatin1().data(), -1, SQLITE_STATIC);
-      _error_code = sqlite3_bind_text(stmt, 1, author.last.toLatin1().data(), -1, SQLITE_STATIC);
-      _error_code = sqlite3_bind_text(stmt, 1, author.email.toLatin1().data(), -1, SQLITE_STATIC);
+      QSqlQuery query{ _db };
+      query.prepare(sqlite3::insert_into_authors);
+      query.bindValue(":name_first", author.first);
+      query.bindValue(":name_last", author.last);
+      query.bindValue(":email", author.email);
 
-      auto zipcode = (author.plus_4 != 0) ? QString("%1-%2").arg(author.zip).arg(author.plus_4) : QString("%1").arg(author.zip);
-      _error_code = sqlite3_bind_text(stmt, 1, zipcode.toLatin1().data(), -1, SQLITE_STATIC);
+      const auto zipcode = (author.plus_4 != 0) ? QString("%1-%2").arg(author.zip).arg(author.plus_4) : QString("%1").arg(author.zip);
+      query.bindValue(":zipcode", zipcode);
 
-      _error_code = sqlite3_bind_text(stmt, 1, author.state.toLatin1().data(), -1, SQLITE_STATIC);
-      _error_code = sqlite3_bind_text(stmt, 1, author.country.toLatin1().data(), -1, SQLITE_STATIC);
-      _error_code = sqlite3_bind_text(stmt, 1, author.phone.toLatin1().data(), -1, SQLITE_STATIC);
-      _error_code = sqlite3_bind_text(stmt, 1, author.organization.toLatin1().data(), -1, SQLITE_STATIC);
+      query.bindValue(":state", author.state);
+      query.bindValue(":country", author.country);
+      query.bindValue(":phone", author.phone);
+      query.bindValue(":organization", author.organization);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      return true;
     }
-    if (SQLITE_DONE != sqlite3_step(stmt)) {
-      sqlite3_finalize(stmt);
-      return false;
-    }
-    sqlite3_finalize(stmt);
-    return true;
   }
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::insert(Property& property)
 {
-  sqlite3_stmt* stmt = 0;
-  if (_db) {
+
+  if (_db.isOpen()) {
     if (!property.name.isEmpty()) {
-      _error_code = sqlite3_prepare(_db, sqlite3::insert_into_properties, sizeof(sqlite3::insert_into_properties), &stmt, nullptr);
-      _error_code = sqlite3_bind_text(stmt, 1, property.name.toLatin1().data(), -1, SQLITE_STATIC);
-      _error_code = sqlite3_bind_text(stmt, 1, property.value .toLatin1().data(), -1, SQLITE_STATIC);
+      QSqlQuery query{ _db };
+      query.prepare(sqlite3::insert_into_properties);
+      query.bindValue(":name", property.name);
+      query.bindValue(":value:", property.value);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+
+      return true;
     }
-    if (SQLITE_DONE != sqlite3_step(stmt)) {
-      sqlite3_finalize(stmt);
-      return false;
-    }
-    sqlite3_finalize(stmt);
-    return true;
   }
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::insert(Restriction& restriction)
 {
-  sqlite3_stmt* stmt = 0;
-  if (_db) {
+
+  if (_db.isOpen()) {
     if (!restriction.name.isEmpty()) {
-      _error_code = sqlite3_prepare(_db, sqlite3::insert_into_restrictions, sizeof(sqlite3::insert_into_restrictions), &stmt, nullptr);
-      _error_code = sqlite3_bind_text(stmt, 1, restriction.name.toLatin1().data(), -1, SQLITE_STATIC);
-      _error_code = sqlite3_bind_text(stmt, 1, restriction.value.toLatin1().data(), -1, SQLITE_STATIC);
+      QSqlQuery query{ _db };
+      query.prepare(sqlite3::insert_into_restrictions);
+      query.bindValue(":name", restriction.name);
+      query.bindValue(":value:", restriction.value);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+
+      return true;
     }
-    if (SQLITE_DONE != sqlite3_step(stmt)) {
-      sqlite3_finalize(stmt);
-      return false;
-    }
-    sqlite3_finalize(stmt);
-    return true;
   }
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::remove(Author& author)
 {
-  sqlite3_stmt* stmt = 0;
-  if (_db) {
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
     if (author.id != -1) {
-      _error_code = sqlite3_prepare(_db, sqlite3::delete_author_by_id, sizeof(sqlite3::delete_author_by_id), &stmt, nullptr);
-      _error_code = sqlite3_bind_int(stmt, 1, author.id);
+      query.prepare(sqlite3::delete_author_by_id);
+      query.bindValue(":id", author.id);
     } else if (!author.email.isEmpty()) {
-      _error_code = sqlite3_prepare(_db, sqlite3::delete_author_by_email, sizeof(sqlite3::delete_author_by_email), &stmt, nullptr);
-      _error_code = sqlite3_bind_text(stmt, 1, author.email.toLatin1().data(), -1, SQLITE_STATIC);
+      query.prepare(sqlite3::delete_author_by_email);
+      query.bindValue(":email", author.email);
     } else {
+      qWarning() << "Provided Author has no id or email one is required";
       return false;
     }
-    if  (SQLITE_DONE != sqlite3_step(stmt)) {
-      sqlite3_finalize(stmt);
-      return false; 
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
     }
-    sqlite3_finalize(stmt);
     return true;
   }
+  qWarning() << "No Database connection";
   return false;
 }
+
 //------------------------------------------------------------------------------
 bool SQLite3Driver::remove(Property& property)
 {
-  sqlite3_stmt* stmt = 0;
-  if (_db) {
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
     if (property.id != -1) {
-      _error_code = sqlite3_prepare(_db, sqlite3::delete_property_by_id, sizeof(sqlite3::delete_property_by_id), &stmt, nullptr);
-      _error_code = sqlite3_bind_int(stmt, 1, property.id);
+      query.prepare(sqlite3::delete_property_by_id);
+      query.bindValue(":id", property.id);
     } else if (!property.name.isEmpty()) {
-      _error_code = sqlite3_prepare(_db, sqlite3::delete_property_by_name, sizeof(sqlite3::delete_property_by_name), &stmt, nullptr);
-      _error_code = sqlite3_bind_text(stmt, 1, property.name.toLatin1().data(), -1, SQLITE_STATIC);
+      query.prepare(sqlite3::delete_property_by_name);
+      query.bindValue(":name", property.name);
     } else {
+      qWarning() << "Provided Property has no id or name one is required";
       return false;
     }
-    if (SQLITE_DONE != sqlite3_step(stmt)) {
-      sqlite3_finalize(stmt);
+    if (!query.exec()) {
+      qWarning() << query.lastError();
       return false;
     }
-    sqlite3_finalize(stmt);
     return true;
   }
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::remove(Restriction& restriction)
 {
-  sqlite3_stmt* stmt = 0;
-  if (_db) {
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
     if (restriction.id != -1) {
-      _error_code = sqlite3_prepare(_db, sqlite3::delete_restriction_by_id, sizeof(sqlite3::delete_restriction_by_id), &stmt, nullptr);
-      _error_code = sqlite3_bind_int(stmt, 1, restriction.id);
+      query.prepare(sqlite3::delete_restriction_by_id);
+      query.bindValue(":id", restriction.id);
     } else if (!restriction.name.isEmpty()) {
-      _error_code = sqlite3_prepare(_db, sqlite3::delete_restriction_by_name, sizeof(sqlite3::delete_restriction_by_name), &stmt, nullptr);
-      _error_code = sqlite3_bind_text(stmt, 1, restriction.name.toLatin1().data(), -1, SQLITE_STATIC);
+      query.prepare(sqlite3::delete_restriction_by_name);
+      query.bindValue(":name", restriction.name);
     } else {
+      qWarning() << "Provided Restriction has no id or name one is required";
       return false;
     }
-    if (SQLITE_DONE != sqlite3_step(stmt)) {
-      sqlite3_finalize(stmt);
+    if (!query.exec()) {
+      qWarning() << query.lastError();
       return false;
     }
-    sqlite3_finalize(stmt);
     return true;
   }
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------

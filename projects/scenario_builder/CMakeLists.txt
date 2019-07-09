@@ -112,7 +112,7 @@ set(${PREFIX}_LIBS ${${PREFIX}_LIBS} PARENT_SCOPE)
 ###############################################################################
 add_library(lib${PROJECT_NAME} STATIC ${${PREFIX}_SOURCES} ${${PREFIX}_HEADERS})
 add_library( Builder::lib ALIAS lib${PROJECT_NAME} )
-target_link_libraries(lib${PROJECT_NAME} PUBLIC ${${PREFIX}_LIBS} )
+target_link_libraries(lib${PROJECT_NAME} PUBLIC ${${PREFIX}_LIBS} Boost::filesystem Boost::disable_autolinking )
 set_target_properties(lib${PROJECT_NAME}
   PROPERTIES
   DEFINE_SYMBOL "SUSTAIN_FRAMEWORK_EXPORTS"
@@ -143,7 +143,7 @@ endif()
 # GUI
 ###############################################################################
 add_executable(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/cpp/main.cpp  ${qml_QRC}  ${QML_FILES})
-target_link_libraries(${PROJECT_NAME} Builder::lib)
+target_link_libraries(${PROJECT_NAME} Builder::lib Boost::disable_autolinking )
 set_target_properties(${PROJECT_NAME}
   PROPERTIES
   DEFINE_SYMBOL "SUSTAIN_FRAMEWORK_EXPORTS"
@@ -162,7 +162,7 @@ target_compile_options(${PROJECT_NAME} PRIVATE $<$<PLATFORM_ID:Windows>:/bigobj>
 # Unit Test
 ###############################################################################
 add_executable(unit_${PROJECT_NAME} ${UNIT_TEST})
-target_link_libraries(unit_${PROJECT_NAME} Builder::lib GTest::GTest GTest::Main)
+target_link_libraries(unit_${PROJECT_NAME} Builder::lib GTest::GTest GTest::Main Boost::disable_autolinking )
 set_target_properties(unit_${PROJECT_NAME}
   PROPERTIES
   DEFINE_SYMBOL "SUSTAIN_FRAMEWORK_EXPORTS"

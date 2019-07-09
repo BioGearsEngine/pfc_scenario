@@ -23,7 +23,7 @@ inline namespace sqlite3 {
   };
 
   constexpr auto list_tables = "SELECT * FROM sqlite_master WHERE type='table';";
-  constexpr auto drop_table = "DROP TABLE IF EXISTS ?;";
+  constexpr auto drop_table = "DROP TABLE IF EXISTS :table;";
 
   enum PROPERTY_COLUMNS {
     PROPERTY_ID,
@@ -32,12 +32,10 @@ inline namespace sqlite3 {
   };
 
   constexpr auto create_properties_table = R"(
-  CREATE TABLE properties (
-    property_id Int,
+  CREATE TABLE IF NOT EXISTS properties(
+    property_id INTEGER PRIMARY KEY,
     name Varchar(64) NOT NULL UNIQUE,
-    value Varchar(255),
-    created DATETIME,
-    modified DATETIME, 
+    value Varchar(255)
   );
   )";
 
@@ -53,8 +51,8 @@ inline namespace sqlite3 {
     AUTHOR_ORGANIZATION,
   };
   constexpr auto create_authors_table = R"(
-  CREATE TABLE authors (
-    authors_id Int,
+  CREATE TABLE IF NOT EXISTS authors(
+    authors_id INTEGER PRIMARY KEY,
     name_first Varchar(25),
     name_last Varchar(25) NOT NULL ,
     email VarChar(45) NOT NULL UNIQUE,
@@ -62,9 +60,7 @@ inline namespace sqlite3 {
     state Varchar(64),
     country Varchar(64),
     phone Varchar(16),
-    organization Varchar(128),    
-    created DATETIME,
-    modified DATETIME
+    organization Varchar(128)
   );
   )";
 
@@ -75,66 +71,65 @@ inline namespace sqlite3 {
   };
 
   constexpr auto create_restrictions_table = R"(
-  CREATE TABLE restrictions (
-    restriction_id Int,
+  CREATE TABLE IF NOT EXISTS restrictions (
+    restriction_id INTEGER PRIMARY KEY,
     name Varchar(64) NOT NULL UNIQUE,
     value Varchar(255)
-    created DATETIME,s
-    modified DATETIME
   );
   )";
 
-  constexpr auto drop_all_properties = R"( DELETE FROM Properties; )";
-  constexpr auto drop_all_authors = R"( DELETE FROM Authors; )";
-  constexpr auto drop_all_restrictions = R"( DELETE FROM Restrictions; )";
+  constexpr auto drop_all_properties = R"( DELETE FROM properties; )";
+  constexpr auto drop_all_authors = R"( DELETE FROM authors; )";
+  constexpr auto drop_all_restrictions = R"( DELETE FROM restrictions; )";
 
-  constexpr auto select_all_properties = R"( SELECT FROM Properties; )";
-  constexpr auto select_all_authors = R"( SELECT FROM Authors; )";
-  constexpr auto select_all_restrictions = R"( SELECT FROM Restrictions; )";
+  constexpr auto select_all_properties = R"( SELECT * FROM properties; )";
+  constexpr auto select_all_authors = R"( SELECT * FROM authors; )";
+  constexpr auto select_all_restrictions = R"( SELECT * FROM restrictions; )";
 
   constexpr auto select_property_by_id
-    = R"( SELECT FROM Properties WHERE id = ?; )";
+    = R"( SELECT * FROM properties WHERE id = :id; )";
   constexpr auto select_author_by_id
-    = R"( SELECT FROM Authors WHERE id = ?; )";
+    = R"( SELECT * FROM authors WHERE id = :id; )";
   constexpr auto select_restriction_by_id
-    = R"( SELECT FROM Restrictions WHERE id = ?; )";
+    = R"( SELECT * FROM restrictions WHERE id = :id; )";
 
   constexpr auto select_property_by_name
-    = R"( SELECT FROM Properties WHERE name = ?; )";
+    = R"( SELECT * FROM properties WHERE name = :name; )";
   constexpr auto select_author_by_email
-    = R"( SELECT FROM Authors WHERE email = ?; )";
+    = R"( SELECT * FROM authors WHERE email = :email; )";
   constexpr auto select_restriction_by_name
-    = R"( SELECT FROM Restrictions WHERE name = ?; )";
+    = R"( SELECT * FROM restrictions WHERE name = :name; )";
 
-  constexpr auto insert_into_properties
-    = R"( INSERT  OR REPLACE INTO Properties 
-          ( name_first, name_last,email ,zipcode ,state ,country ,phone ,organization )
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?); 
-        )";
   constexpr auto insert_into_authors
-    = R"( INSERT  OR REPLACE INTO Authors  
+    = R"( INSERT  OR REPLACE INTO authors
+                 (  name_first,  name_last,  email,  zipcode,  state,  country,  phone,  organization)
+          VALUES ( :name_first, :name_last, :email, :zipcode, :state, :country, :phone, :organization); 
+        )"
+  ;
+  constexpr auto insert_into_properties
+    = R"( INSERT  OR REPLACE INTO properties
           (name,value)
-          VALUES (?, ?) ;
+          VALUES (:name, :value) ;
         )";
   constexpr auto insert_into_restrictions
-    = R"( INSERT  OR REPLACE INTO Restrictions 
+    = R"( INSERT  OR REPLACE INTO restrictions 
           (name,value)
-          VALUES (?, ?);
+          VALUES (:name, :value);
          )";
 
   constexpr auto delete_property_by_id
-    = R"( DELETE FROM Properties WHERE id = ?; )";
+    = R"( DELETE FROM properties WHERE id = :id; )";
   constexpr auto delete_author_by_id
-    = R"( DELETE FROM Authors WHERE id = ?; )";
+    = R"( DELETE FROM authors WHERE id = :id; )";
   constexpr auto delete_restriction_by_id
-    = R"( DELETE FROM Restrictions WHERE id = ?; )";
+    = R"( DELETE FROM restrictions WHERE id = :id; )";
 
   constexpr auto delete_property_by_name
-    = R"( DELETE FROM Properties WHERE name = ?; )";
+    = R"( DELETE FROM properties WHERE name = :name; )";
   constexpr auto delete_author_by_email
-    = R"( DELETE FROM Authors WHERE email = ?; )";
+    = R"( DELETE FROM authors WHERE email = :email; )";
   constexpr auto delete_restriction_by_name
-    = R"( DELETE FROM Restrictions WHERE name = ?; )";
+    = R"( DELETE FROM restrictions WHERE name = :name; )";
 }
 }
 
