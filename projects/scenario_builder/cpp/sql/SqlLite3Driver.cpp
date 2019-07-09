@@ -31,17 +31,18 @@ inline void assign_author(const QSqlRecord& record, Author& author)
 
   auto zip_qstr = record.value(AUTHOR_ZIPCODE).toString();
 
-  QRegularExpression zip(R"((\d{5})-(\d{4}))");
-  QRegularExpression zip_plus4(R"((\d{5}))");
+  QRegularExpression zip(R"((\d{5}))");
+  QRegularExpression zip_plus4(R"((\d{5})-(\d{4}))"
+                               );
   QRegularExpressionMatch match = zip_plus4.match(zip_qstr);
 
   if (match.hasMatch()) {
-    author.zip = match.captured(0);
-    author.plus_4 = match.captured(1);
+    author.zip = match.captured(1);
+    author.plus_4 = match.captured(2);
   } else {
     match = zip.match(zip_qstr);
     if (match.hasMatch()) {
-      author.zip = match.captured(0);
+      author.zip = match.captured(1);
     }
   }
   author.state = record.value(AUTHOR_STATE).toString();
@@ -209,7 +210,7 @@ auto SQLite3Driver::properties() const -> QList<Property>
     while (query.next()) {
       Property property;
       auto record = query.record();
-      assert(record.count() == 9);
+      assert(record.count() == 3);
       assign_property(record, property);
       results.push_back(property);
     }
@@ -229,7 +230,7 @@ auto SQLite3Driver::restrictions() const -> QList<Restriction>
     while (query.next()) {
       Restriction restriction;
       auto record = query.record();
-      assert(record.count() == 9);
+      assert(record.count() == 3);
       assign_restriction(record, restriction);
       results.push_back(restriction);
     }
@@ -246,7 +247,7 @@ bool SQLite3Driver::select(Author& author) const
       query.prepare(sqlite3::select_author_by_id);
       query.bindValue(":id", author.id);
     } else if (!author.email.isEmpty()) {
-      query.prepare(sqlite3::select_author_by_id);
+      query.prepare(sqlite3::select_author_by_email);
       query.bindValue(":email", author.email);
     } else {
       qWarning() << "Provided Author has no id or email one is required";
@@ -300,18 +301,20 @@ bool SQLite3Driver::select(Restriction& restriction) const
       query.prepare(sqlite3::select_restriction_by_id);
       query.bindValue(":id", restriction.id);
     } else if (!restriction.name.isEmpty()) {
-      query.prepare(sqlite3::select_property_by_name);
+      query.prepare(sqlite3::select_restriction_by_name);
       query.bindValue(":name", restriction.name);
     } else {
       qWarning() << "Provided Propertiy has no id or name one is required";
       return false;
     }
-    query.exec();
-    while (query.next()) {
-      record = query.record();
-      assign_restriction(record, restriction);
+    if (query.exec()) {
+      while (query.next()) {
+        record = query.record();
+        assign_restriction(record, restriction);
+      }
+      return true;
     }
-    return true;
+    qWarning() << query.lastError();
   }
   qWarning() << "No Databsae connection";
   return false;
@@ -328,7 +331,7 @@ bool SQLite3Driver::insert(Author& author)
       query.bindValue(":name_last", author.last);
       query.bindValue(":email", author.email);
 
-      const auto zipcode = (author.plus_4 != 0) ? QString("%1-%2").arg(author.zip).arg(author.plus_4) : QString("%1").arg(author.zip);
+      const auto zipcode = (author.plus_4.isEmpty()) ? QString("%1").arg(author.zip) : QString("%1-%2").arg(author.zip).arg(author.plus_4);
       query.bindValue(":zipcode", zipcode);
 
       query.bindValue(":state", author.state);
@@ -354,7 +357,7 @@ bool SQLite3Driver::insert(Property& property)
       QSqlQuery query{ _db };
       query.prepare(sqlite3::insert_into_properties);
       query.bindValue(":name", property.name);
-      query.bindValue(":value:", property.value);
+      query.bindValue(":value", property.value);
       if (!query.exec()) {
         qWarning() << query.lastError();
         return false;
@@ -375,7 +378,7 @@ bool SQLite3Driver::insert(Restriction& restriction)
       QSqlQuery query{ _db };
       query.prepare(sqlite3::insert_into_restrictions);
       query.bindValue(":name", restriction.name);
-      query.bindValue(":value:", restriction.value);
+      query.bindValue(":value", restriction.value);
       if (!query.exec()) {
         qWarning() << query.lastError();
         return false;

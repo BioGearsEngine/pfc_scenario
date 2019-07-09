@@ -52,7 +52,7 @@ inline namespace sqlite3 {
   };
   constexpr auto create_authors_table = R"(
   CREATE TABLE IF NOT EXISTS authors(
-    authors_id INTEGER PRIMARY KEY,
+    author_id INTEGER PRIMARY KEY,
     name_first Varchar(25),
     name_last Varchar(25) NOT NULL ,
     email VarChar(45) NOT NULL UNIQUE,
@@ -87,11 +87,11 @@ inline namespace sqlite3 {
   constexpr auto select_all_restrictions = R"( SELECT * FROM restrictions; )";
 
   constexpr auto select_property_by_id
-    = R"( SELECT * FROM properties WHERE id = :id; )";
+    = R"( SELECT * FROM properties WHERE property_id = :id ; )";
   constexpr auto select_author_by_id
-    = R"( SELECT * FROM authors WHERE id = :id; )";
+    = R"( SELECT * FROM authors WHERE author_id = :id ; )";
   constexpr auto select_restriction_by_id
-    = R"( SELECT * FROM restrictions WHERE id = :id; )";
+    = R"( SELECT * FROM restrictions WHERE restriction_id = :id ; )";
 
   constexpr auto select_property_by_name
     = R"( SELECT * FROM properties WHERE name = :name; )";
@@ -118,11 +118,11 @@ inline namespace sqlite3 {
          )";
 
   constexpr auto delete_property_by_id
-    = R"( DELETE FROM properties WHERE id = :id; )";
+    = R"( DELETE FROM properties WHERE property_id = :id; )";
   constexpr auto delete_author_by_id
-    = R"( DELETE FROM authors WHERE id = :id; )";
+    = R"( DELETE FROM authors WHERE author_id = :id; )";
   constexpr auto delete_restriction_by_id
-    = R"( DELETE FROM restrictions WHERE id = :id; )";
+    = R"( DELETE FROM restrictions WHERE restriction_id = :id; )";
 
   constexpr auto delete_property_by_name
     = R"( DELETE FROM properties WHERE name = :name; )";

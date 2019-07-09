@@ -28,6 +28,8 @@ enum Sqlite3Table {
 };
 
 struct Author {
+  Q_GADGET
+public:
   int32_t id = -1;
   QString first = "";
   QString last = "";
@@ -38,18 +40,96 @@ struct Author {
   QString country = "";
   QString phone = "";
   QString organization = "";
+  Q_PROPERTY(int id MEMBER id)
+  Q_PROPERTY(QString first MEMBER first)
+  Q_PROPERTY(QString last MEMBER last)
+  Q_PROPERTY(QString email MEMBER email)
+  Q_PROPERTY(QString zip MEMBER zip)
+  Q_PROPERTY(QString plus_4 MEMBER plus_4)
+  Q_PROPERTY(QString state MEMBER state)
+  Q_PROPERTY(QString country MEMBER country)
+  Q_PROPERTY(QString phone MEMBER phone)
+  Q_PROPERTY(QString organization MEMBER organization)
+
+  Author() = default;
+  Author(const Author&) = default;
+  Author(Author&&) = default;
+  Author& operator=(const Author&) = default;
+  Author& operator=(Author&&) = default;
+
+  bool operator==(const Author& rhs) const
+  {
+    return id == rhs.id
+      && first == rhs.first
+      && last == rhs.last
+      && email == rhs.email
+      && zip == rhs.zip
+      && plus_4 == rhs.plus_4
+      && state == rhs.state
+      && country == rhs.country
+      && phone == rhs.phone
+      && organization == rhs.organization;
+  }
+  bool operator!=(const Author& rhs) const
+  {
+    return !(*this == rhs);
+  }
 };
 
 struct Property {
+  Q_GADGET
+public:
   int32_t id = -1;
   QString name = "";
   QString value = "";
+  Q_PROPERTY(int id MEMBER id)
+  Q_PROPERTY(QString name MEMBER name)
+  Q_PROPERTY(QString value MEMBER value)
+
+  Property() = default;
+  Property(const Property&) = default;
+  Property(Property&&) = default;
+  Property& operator=(const Property&) = default;
+  Property& operator=(Property&&) = default;
+
+  bool operator==(const Property& rhs) const
+  {
+    return id == rhs.id
+      && name == rhs.name
+      && value == rhs.value;
+  }
+  bool operator!=(const Property& rhs) const
+  {
+    return !(*this == rhs);
+  }
 };
 
 struct Restriction {
+  Q_GADGET
+public:
   int32_t id = -1;
   QString name = "";
   QString value = "";
+  Q_PROPERTY(int id MEMBER id)
+  Q_PROPERTY(QString name MEMBER name)
+  Q_PROPERTY(QString value MEMBER value)
+
+  Restriction() = default;
+  Restriction(const Restriction&) = default;
+  Restriction(Restriction&&) = default;
+  Restriction& operator=(const Restriction&) = default;
+  Restriction& operator=(Restriction&&) = default;
+
+  bool operator==(const Restriction& rhs) const
+  {
+    return id == rhs.id
+      && name == rhs.name
+      && value == rhs.value;
+  }
+  bool operator!=(const Restriction& rhs) const
+  {
+    return !(*this == rhs);
+  }
 };
 
 class SQLite3Driver : public QObject {
