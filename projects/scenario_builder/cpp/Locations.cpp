@@ -1,4 +1,4 @@
-
+ 
 /**************************************************************************************
 Copyright 2019 Applied Research Associates, Inc.
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
@@ -24,7 +24,7 @@ specific language governing permissions and limitations under the License.
 #include <boost/uuid/uuid_io.hpp> // streaming operators etc.
 
 #include "MilitaryScenario_1.0.0.hxx"
-#include "MsdlComplexTypes_1.0.0.hxx"
+#include "MsdlComplexTypes_1.0.0.hxx" 
 #include <xsd/cxx/tree/date-time.hxx>
 
 constexpr char default_affiliation_value[] = "Unknown";

@@ -70,7 +70,7 @@ ApplicationWindow {
     }
     Component {
       id: scenarioScreen
-      Screen_Scenario {
+      Screen_Build {
         visible:false
         stack: mainView
         onClosed : mainView.pop()

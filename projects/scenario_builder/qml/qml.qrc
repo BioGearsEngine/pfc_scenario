@@ -12,6 +12,7 @@
         <file>Screen_Scenario_Objects_Dialog.qml</file>
         <file>Screen_Scenario_Actors_Dialog.qml</file>
         <file>Welcome_Screen.qml</file>
+        <file>Screen_Build.qml</file>
         <file>img/sustain_splash.png</file>
     </qresource>
 </RCC>
