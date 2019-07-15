@@ -57,6 +57,7 @@ Page {
 				width: parent.width
 				height: parent.height - 10
 				Row {
+//TAB:SUMMARY
 					id: summary
 					Layout.alignment: Qt.AlignHCenter
 					Layout.fillHeight: true
@@ -68,6 +69,7 @@ Page {
 					width: parent.width
 					height: parent.height
 					Rectangle {
+//TAB:SUMMARY//LEFTWINDOW 
 						id: summary_leftWindow
 						width: (parent.width / 2) - 10
 						height: parent.height
@@ -349,6 +351,7 @@ Page {
 						}
 					}
 					Rectangle {
+//TAB:SUMMARY//RIGHTWINDOW
 						id: summary_rightWindow
 						clip: true
 						width: (parent.width / 2) - 10
@@ -602,6 +605,7 @@ Page {
 					}
 				}
 				Row {
+//TAB:SYLLABUS
 					id: syllabus
 					Layout.alignment: Qt.AlignHCenter
 					Layout.fillHeight: true
@@ -714,10 +718,567 @@ Page {
 							}
 							StackLayout {
 								id: syllabus_stack_left
+								width: parent.width
+								height: parent.height
 								currentIndex: syllabus_tabs.currentIndex
-								///////////////////////////////////////////////////////////////////////////
-
-								///////////////////////////////////////////////////////////////////////////
+								Rectangle {
+//TAB:SYLLABUS//TAB:OBJECTIVES//LEFTWINDOW
+									color: 'red'
+									width: parent.width
+									height: parent.height
+									Layout.alignment: Qt.AlignHCenter
+									Row {
+										width: parent.width
+										height: parent.height
+										Rectangle {
+											color: 'pink'
+											width: parent.width
+											height: parent.height
+											Row {
+												id: syllabus_objectives_leftWindow_buttons
+												width: parent.width
+												height: 25
+												Rectangle {
+													width: parent.width / 2 - 20
+													height: parent.height
+													anchors.left: parent.left
+													color: 'lightblue'
+													Text {
+														text: 'Add'
+														anchors.centerIn: parent
+													}
+													MouseArea {
+														anchors.fill: parent
+														onClicked: {
+															objectives_model.insert(1,{objective : objective_text.text})
+															objective_text.text = 'String Field'
+														}
+													}
+												}
+												Rectangle {
+													width: parent.width / 2 - 20
+													height: parent.height
+													anchors.right: parent.right
+													color: 'orange'
+													Text {
+														text: 'Remove'
+														anchors.centerIn: parent
+													}
+													MouseArea {
+														anchors.fill: parent
+														onClicked: {
+															objectives_model.remove(1)
+														}
+													}
+												}
+											}
+											Rectangle {
+												color: 'lightgreen'
+												width: parent.width
+												height: 25
+												anchors.top: syllabus_objectives_leftWindow_buttons.bottom
+												TextInput {
+													id: objective_text
+													text: 'String Field (64 Characters)'
+													maximumLength: 64
+													cursorVisible: false
+													anchors.centerIn: parent
+												}
+											}
+											ListModel {
+												id: objectives_model
+												ListElement { objective: '' }
+											}
+											Component {
+												id: objective_list_entry
+												Item {
+													width: parent.width
+													height: 25
+													Label {
+														text: objective
+													} 
+												}
+											}
+											ListView {
+												id: objectives_list
+												height: parent.height - syllabus_objectives_leftWindow_buttons.height
+												model: objectives_model
+												delegate: objective_list_entry
+												anchors.top: syllabus_objectives_leftWindow_buttons.bottom
+											}
+										}
+									}
+								}
+								Rectangle {
+//TAB:SYLLABUS//TAB:ASSESSMENTS//LEFTWINDOW
+									color: 'red'
+									width: parent.width
+									height: parent.height
+									Layout.alignment: Qt.AlignHCenter
+									Row {
+										width: parent.width
+										height: parent.height
+										Rectangle {
+											color: 'pink'
+											width: parent.width
+											height: parent.height
+											Row {
+												id: syllabus_assessments_leftWindow_buttons
+												width: parent.width
+												height: 25
+												Rectangle {
+													width: parent.width / 2 - 20
+													height: parent.height
+													anchors.left: parent.left
+													color: 'lightblue'
+													Text {
+														text: 'Add'
+														anchors.centerIn: parent
+													}
+													MouseArea {
+														anchors.fill: parent
+														onClicked: {
+															assessments_model.insert(1,{assessment : assessment_text.text})
+															assessment_text.text = 'String Field'
+														}
+													}
+												}
+												Rectangle {
+													width: parent.width / 2 - 20
+													height: parent.height
+													anchors.right: parent.right
+													color: 'orange'
+													Text {
+														text: 'Remove'
+														anchors.centerIn: parent
+													}
+													MouseArea {
+														anchors.fill: parent
+														onClicked: {
+															assessments_model.remove(1)
+														}
+													}
+												}
+											}
+											Rectangle {
+												color: 'lightgreen'
+												width: parent.width
+												height: 25
+												anchors.top: syllabus_assessments_leftWindow_buttons.bottom
+												TextInput {
+													id: assessment_text
+													text: 'String Field (64 Characters)'
+													maximumLength: 64
+													cursorVisible: false
+													anchors.centerIn: parent
+												}
+											}
+											ListModel {
+												id: assessments_model
+												ListElement { assessment: '' }
+											}
+											Component {
+												id: assessment_list_entry
+												Item {
+													width: parent.width
+													height: 25
+													Label {
+														text: assessment
+													} 
+												}
+											}
+											ListView {
+												id: assessments_list
+												height: parent.height - syllabus_assessments_leftWindow_buttons.height
+												model: assessments_model
+												delegate: assessment_list_entry
+												anchors.top: syllabus_assessments_leftWindow_buttons.bottom
+											}
+										}
+									}
+								}
+								Rectangle {
+//TAB:SYLLABUS//TAB:INJURIES//LEFTWINDOW
+									width: parent.width
+									height: parent.height
+									TabBar {
+										id: syllabus_injuries_tabs
+										width: parent.width
+										Layout.alignment: Qt.AlignHCenter | Qt.AlignLeft
+										TabButton {
+											text: "Definitions"
+											width: implicitWidth
+										}
+										TabButton {
+											text: "Injury-Sets"
+											width: implicitWidth
+										}
+									}
+									Rectangle {
+										width: parent.width
+										height: parent.height - syllabus_injuries_tabs.height
+										anchors.top: syllabus_injuries_tabs.bottom
+										StackLayout {
+											width: parent.width
+											height: parent.height
+											currentIndex:  syllabus_injuries_tabs.currentIndex
+											Layout.alignment: Qt.AlignHCenter
+											Rectangle {
+//TAB:SYLLABUS//TAB:INJURIES//TAB:DEFINITIONS//LEFTWINDOW
+												color: 'red'
+												height: parent.height
+												width: parent.width
+												Layout.alignment: Qt.AlignHCenter
+												Row {
+													width: parent.width
+													height: parent.height
+													anchors.top: parent.top
+													Rectangle {
+														color: 'pink'
+														width: parent.width
+														height: parent.height
+														Row {
+															id: syllabus_injuries_definition_leftWindow_buttons
+															width: parent.width
+															height: 25
+															Rectangle {
+																width: parent.width / 2 - 20
+																height: parent.height
+																anchors.left: parent.left
+																color: 'lightblue'
+																Text {
+																	text: 'Add'
+																	anchors.centerIn: parent
+																}
+																MouseArea {
+																	anchors.fill: parent
+																	onClicked: {
+																		injuries_definition_model.insert(1,{injury_definition : injury_definition_text.text})
+																		injury_definition_text.text = 'String Field'
+																	}
+																}
+															}
+															Rectangle {
+																width: parent.width / 2 - 20
+																height: parent.height
+																anchors.right: parent.right
+																color: 'orange'
+																Text {
+																	text: 'Remove'
+																	anchors.centerIn: parent
+																}
+																MouseArea {
+																	anchors.fill: parent
+																	onClicked: {
+																		injuries_definition_model.remove(1)
+																	}
+																}
+															}
+														}
+														Rectangle {
+															color: 'lightgreen'
+															width: parent.width
+															height: 25
+															anchors.top: syllabus_injuries_definition_leftWindow_buttons.bottom
+															TextInput {
+																id: injury_definition_text
+																text: 'String Field (64 Characters)'
+																maximumLength: 64
+																cursorVisible: false
+																anchors.centerIn: parent
+															}
+														}
+														ListModel {
+															id: injuries_definition_model
+															ListElement { injury_definition: '' }
+														}
+														Component {
+															id: injury_definition_list_entry
+															Item {
+																width: parent.width
+																height: 25
+																Label {
+																	text: injury_definition
+																} 
+															}
+														}
+														ListView {
+															id: injuries_definition_list
+															height: parent.height - syllabus_injuries_definition_leftWindow_buttons.height
+															model: injuries_definition_model
+															delegate: injury_definition_list_entry
+															anchors.top: syllabus_injuries_definition_leftWindow_buttons.bottom
+														}
+													}
+												}
+											}
+											Rectangle {
+//TAB:SYLLABUS//TAB:INJURIES//TAB:INJURY-SETS//LEFTWINDOW
+												color: 'red'
+												height: parent.height
+												width: parent.width
+												Row {
+													width: parent.width
+													height: parent.height
+													anchors.top: parent.top
+													Rectangle {
+														color: 'pink'
+														width: parent.width
+														height: parent.height
+														Row {
+															id: syllabus_injuries_injurySet_leftWindow_buttons
+															width: parent.width
+															height: 25
+															Rectangle {
+																width: parent.width / 2 - 20
+																height: parent.height
+																anchors.left: parent.left
+																color: 'lightblue'
+																Text {
+																	text: 'Add'
+																	anchors.centerIn: parent
+																}
+																MouseArea {
+																	anchors.fill: parent
+																	onClicked: {
+																		injuries_injurySet_model.insert(1,{injury_injurySet : injury_injurySet_text.text})
+																		injury_injurySet_text.text = 'String Field'
+																	}
+																}
+															}
+															Rectangle {
+																width: parent.width / 2 - 20
+																height: parent.height
+																anchors.right: parent.right
+																color: 'orange'
+																Text {
+																	text: 'Remove'
+																	anchors.centerIn: parent
+																}
+																MouseArea {
+																	anchors.fill: parent
+																	onClicked: {
+																		injuries_injurySet_model.remove(1)
+																	}
+																}
+															}
+														}
+														Rectangle {
+															color: 'lightgreen'
+															width: parent.width
+															height: 25
+															anchors.top: syllabus_injuries_injurySet_leftWindow_buttons.bottom
+															TextInput {
+																id: injury_injurySet_text
+																text: 'String Field (64 Characters)'
+																maximumLength: 64
+																cursorVisible: false
+																anchors.centerIn: parent
+															}
+														}
+														ListModel {
+															id: injuries_injurySet_model
+															ListElement { injury_injurySet: '' }
+														}
+														Component {
+															id: injury_injurySet_list_entry
+															Item {
+																width: parent.width
+																height: 25
+																Label {
+																	text: injury_injurySet
+																} 
+															}
+														}
+														ListView {
+															id: injuries_injurySet_list
+															height: parent.height - syllabus_injuries_injurySet_leftWindow_buttons.height
+															model: injuries_injurySet_model
+															delegate: injury_injurySet_list_entry
+															anchors.top: syllabus_injuries_injurySet_leftWindow_buttons.bottom
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+								Rectangle {
+//TAB:SYLLABUS//TAB:TREATMENTS//LEFTWINDOW
+									color: 'red'
+									width: parent.width
+									height: parent.height
+									Row {
+										width: parent.width
+										height: parent.height
+										anchors.top: parent.top
+										Rectangle {
+											color: 'pink'
+											width: parent.width
+											height: parent.height
+											Row {
+												id: syllabus_treatments_leftWindow_buttons
+												width: parent.width
+												height: 25
+												Rectangle {
+													width: parent.width / 2 - 20
+													height: parent.height
+													anchors.left: parent.left
+													color: 'lightblue'
+													Text {
+														text: 'Add'
+														anchors.centerIn: parent
+													}
+													MouseArea {
+														anchors.fill: parent
+														onClicked: {
+															treatments_model.insert(1,{treatment : treatment_text.text})
+															treatment_text.text = 'String Field'
+														}
+													}
+												}
+												Rectangle {
+													width: parent.width / 2 - 20
+													height: parent.height
+													anchors.right: parent.right
+													color: 'orange'
+													Text {
+														text: 'Remove'
+														anchors.centerIn: parent
+													}
+													MouseArea {
+														anchors.fill: parent
+														onClicked: {
+															treatments_model.remove(1)
+														}
+													}
+												}
+											}
+											Rectangle {
+												color: 'lightgreen'
+												width: parent.width
+												height: 25
+												anchors.top: syllabus_treatments_leftWindow_buttons.bottom
+												TextInput {
+													id: treatment_text
+													text: 'String Field (64 Characters)'
+													maximumLength: 64
+													cursorVisible: false
+													anchors.centerIn: parent
+												}
+											}
+											ListModel {
+												id: treatments_model
+												ListElement { treatment: '' }
+											}
+											Component {
+												id: treatment_list_entry
+												Item {
+													width: parent.width
+													height: 25
+													Label {
+														text: treatment
+													} 
+												}
+											}
+											ListView {
+												id: treatments_list
+												height: parent.height - syllabus_treatments_leftWindow_buttons.height
+												model: treatments_model
+												delegate: treatment_list_entry
+												anchors.top: syllabus_treatments_leftWindow_buttons.bottom
+											}
+										}
+									}
+								}
+								Rectangle {
+//TAB:SYLLABUS//TAB:EQUIPMENT//LEFTWINDOW
+									color: 'red'
+									width: parent.width
+									height: parent.height
+									Row {
+										width: parent.width
+										height: parent.height
+										anchors.top: parent.top
+										Rectangle {
+											color: 'pink'
+											width: parent.width
+											height: parent.height
+											Row {
+												id: syllabus_equipment_leftWindow_buttons
+												width: parent.width
+												height: 25
+												Rectangle {
+													width: parent.width / 2 - 20
+													height: parent.height
+													anchors.left: parent.left
+													color: 'lightblue'
+													Text {
+														text: 'Add'
+														anchors.centerIn: parent
+													}
+													MouseArea {
+														anchors.fill: parent
+														onClicked: {
+															equipment_model.insert(1,{equipment : equipment_text.text})
+															equipment_text.text = 'String Field'
+														}
+													}
+												}
+												Rectangle {
+													width: parent.width / 2 - 20
+													height: parent.height
+													anchors.right: parent.right
+													color: 'orange'
+													Text {
+														text: 'Remove'
+														anchors.centerIn: parent
+													}
+													MouseArea {
+														anchors.fill: parent
+														onClicked: {
+															equipment_model.remove(1)
+														}
+													}
+												}
+											}
+											Rectangle {
+												color: 'lightgreen'
+												width: parent.width
+												height: 25
+												anchors.top: syllabus_equipment_leftWindow_buttons.bottom
+												TextInput {
+													id: equipment_text
+													text: 'String Field (64 Characters)'
+													maximumLength: 64
+													cursorVisible: false
+													anchors.centerIn: parent
+												}
+											}
+											ListModel {
+												id: equipment_model
+												ListElement { equipment: '' }
+											}
+											Component {
+												id: equipment_list_entry
+												Item {
+													width: parent.width
+													height: 25
+													Label {
+														text: equipment
+													} 
+												}
+											}
+											ListView {
+												id: equipment_list
+												height: parent.height - syllabus_equipment_leftWindow_buttons.height
+												model: equipment_model
+												delegate: equipment_list_entry
+												anchors.top: syllabus_equipment_leftWindow_buttons.bottom
+											}
+										}
+									}
+								}
 							}
 						}
 					}
@@ -734,10 +1295,11 @@ Page {
 							Layout.fillWidth: true
 							Layout.fillHeight: true
 							Rectangle {
+//TAB:SYLLABUS//TAB:OBJECTIVES//RIGHTWINDOW
 								id: syllabus_rightWindow_objectives
 								width: (syllabus_rightWindow.width / 2) - 10 
 								height: syllabus_rightWindow.height
-								anchors.centerIn: syllabus_rightWindow
+								Layout.alignment: Qt.AlignHCenter
 								clip: true
 								color: 'blue'
 								Row {
@@ -825,6 +1387,7 @@ Page {
 											width: parent.width
 											height: parent.height
 											Rectangle {
+												color: 'pink'
 												width: parent.width - 25
 												height: parent.height
 												Row {
@@ -982,6 +1545,7 @@ Page {
 								}
 							}
 							Rectangle {
+//TAB:SYLLABUS//TAB:ASSESSMENTS//RIGHTWINDOW
 								id: syllabus_rightWindow_assessments
 								width: (syllabus_rightWindow.width / 2) - 10
 								height: syllabus_rightWindow.height
@@ -998,24 +1562,49 @@ Page {
 									anchors.bottom: syllabus_rightWindow_assessments.bottom
 								}
 							}
-							Rectangle {
-								id: syllabus_rightWindow_injuries
+							StackLayout {
 								width: (syllabus_rightWindow.width / 2) - 10
 								height: syllabus_rightWindow.height
-								clip: true
-								color: 'blue'
-								ScrollBar {
-									id: syllabus_rightWindow_injuries_vbar
-									hoverEnabled: true
-									active: hovered || pressed
-									orientation: Qt.Vertical // the 25 is the sum of topPadding on title and restrictions
-									size: 0.5 //parent.height / (syllabus_leftWindow_title.height + syllabus_leftWindow_version.height + syllabus_leftWindow_security + syllabus_leftWindow_purpose + syllabus_leftWindow_restrictions)
-									anchors.top: syllabus_rightWindow_injuries.top
-									anchors.right: syllabus_rightWindow_injuries.right
-									anchors.bottom: syllabus_rightWindow_injuries.bottom
+								currentIndex: syllabus_injuries_tabs.currentIndex
+								Rectangle {
+//TAB:SYLLABUS//TAB:INJURIES//TAB:DEFINITIONS//RIGHTWINDOW
+									id: syllabus_rightWindow_injuries_definitions
+									width: parent.width
+									height: parent.height
+									clip: true
+									color: 'blue'
+									ScrollBar {
+										id: syllabus_rightWindow_injuries_definitions_vbar
+										hoverEnabled: true
+										active: hovered || pressed
+										orientation: Qt.Vertical // the 25 is the sum of topPadding on title and restrictions
+										size: 0.5 //parent.height / (syllabus_leftWindow_title.height + syllabus_leftWindow_version.height + syllabus_leftWindow_security + syllabus_leftWindow_purpose + syllabus_leftWindow_restrictions)
+										anchors.top: syllabus_rightWindow_injuries_definitions.top
+										anchors.right: syllabus_rightWindow_injuries_definitions.right
+										anchors.bottom: syllabus_rightWindow_injuries_definitions.bottom
+									}
+								}
+								Rectangle {
+//TAB:SYLLABUS//TAB:INJURIES//TAB:INJURY-SETS//RIGHTWINDOW
+									id: syllabus_rightWindow_injuries_injurySets
+									width: parent.width
+									height: parent.height
+									clip: true
+									color: 'blue'
+									ScrollBar {
+										id: syllabus_rightWindow_injuries_injurySets_vbar
+										hoverEnabled: true
+										active: hovered || pressed
+										orientation: Qt.Vertical // the 25 is the sum of topPadding on title and restrictions
+										size: 0.5 //parent.height / (syllabus_leftWindow_title.height + syllabus_leftWindow_version.height + syllabus_leftWindow_security + syllabus_leftWindow_purpose + syllabus_leftWindow_restrictions)
+										anchors.top: syllabus_rightWindow_injuries_injurySets.top
+										anchors.right: syllabus_rightWindow_injuries_injurySets.right
+										anchors.bottom: syllabus_rightWindow_injuries_injurySets.bottom
+									}
 								}
 							}
 							Rectangle {
+//TAB:SYLLABUS//TAB:TREATMENTS//RIGHTWINDOW
 								id: syllabus_rightWindow_treatments
 								width: (syllabus_rightWindow.width / 2) - 10
 								height: syllabus_rightWindow.height
@@ -1033,6 +1622,7 @@ Page {
 								}
 							}
 							Rectangle {
+//TAB:SYLLABUS//TAB:EQUIPMENT//RIGHTWINDOW
 								id: syllabus_rightWindow_equipment
 								width: (syllabus_rightWindow.width / 2) - 10
 								height: syllabus_rightWindow.height
@@ -1053,6 +1643,7 @@ Page {
 					}
 				}
 				Row {
+//TAB:NARRATIVE
 					id: narrative
 					Layout.alignment: Qt.AlignHCenter
 					Layout.fillHeight: true
