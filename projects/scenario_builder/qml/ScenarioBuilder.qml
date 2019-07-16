@@ -5,6 +5,8 @@ import QtQuick.Controls 2.5
 import QtQuick.Controls.Styles 1.3
 import QtQuick.Dialogs 1.3
 
+import "screens"
+
 import com.ara.pfc.ScenarioModel 1.0 
 //This is importing C++ code
 
@@ -18,10 +20,10 @@ ApplicationWindow {
     visible: true
     Menu {
       title: "File"
-        MenuItem { text: "New Scenario" }
-        MenuItem { text: "Save Scenario" }
-        MenuItem { text: "Save Scenario As" }
-        MenuItem { text: "Load Scenario" }
+        MenuItem { text: "New Scenario";     }
+        MenuItem { text: "Save Scenario";    }
+        MenuItem { text: "Save Scenario As"; }
+        MenuItem { text: "Load Scenario";    }
     }
     Menu {
       title: "Edit"
@@ -47,13 +49,14 @@ ApplicationWindow {
     anchors.fill: parent
 
     initialItem : startScreen
-    Screen_Start {
+    Welcome {
        id: startScreen
        onLoadClicked: {
          loadDialog.open()
        }
        onCreateClicked: {
-         mainView.push( scenarioScreen, { model : scenario_model} )
+         //mainView.push( scenarioScreen, { model : scenario_model} )
+         mainView.push( scenarioScreen )
         }
     }
     FileDialog {
@@ -70,7 +73,7 @@ ApplicationWindow {
     }
     Component {
       id: scenarioScreen
-      Screen_Build {
+      Main {
         visible:false
         stack: mainView
         onClosed : mainView.pop()

@@ -42,7 +42,7 @@ int main(int argc, char* argv[])
   qDebug() << QString("%1,%2").arg(pixmap.height()).arg(pixmap.width()); //1280x768
   QSplashScreen splash(pixmap);
   splash.show();
-  engine.load(QUrl(QLatin1String("qrc:/Main.qml")));
+  engine.load(QUrl(QLatin1String("qrc:/ScenarioBuilder.qml")));
   if (engine.rootObjects().isEmpty())
     return -1;
   splash.close();
