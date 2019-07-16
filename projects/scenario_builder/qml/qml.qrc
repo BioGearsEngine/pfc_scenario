@@ -6,6 +6,12 @@
         <file>screens/components/ScenarioSummary.qml</file>
         <file>screens/components/ScenarioSyllabus.qml</file>
         <file>screens/components/ScenarioNarrative.qml</file>
+        <file>screens/components/narrative/LeftPane.qml</file>
+        <file>screens/components/narrative/RightPane.qml</file>
+        <file>screens/components/summary/LeftPane.qml</file>
+        <file>screens/components/summary/RightPane.qml</file>
+        <file>screens/components/syllabus/LeftPane.qml</file>
+        <file>screens/components/syllabus/RightPane.qml</file>
         <file>img/sustain_splash.png</file>
     </qresource>
 </RCC>
