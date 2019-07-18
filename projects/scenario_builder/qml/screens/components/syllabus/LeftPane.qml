@@ -4,13 +4,14 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.12
 
 Rectangle {
-  width: parent.width / 2 - 10
-  height: parent.height
   id: syllabus_leftWindow
+  Layout.preferredWidth: parent.width / 2
+  Layout.fillHeight: true
+  clip: true
+
   TabBar {
     id: syllabus_tabs
-    width: parent.width
-    Layout.alignment: Qt.AlignHCenter | Qt.AlignLeft
+    height:20
     TabButton {
       text: "Objectives"
       width: implicitWidth
@@ -37,7 +38,7 @@ Rectangle {
     id: syllabus_leftWindow_buttons
     width: parent.width
     height: 25
-    anchors.top: syllabus_tabs.bottom
+    // anchors.top: syllabus_tabs.bottom
     Rectangle {
       color: 'green'
       width: parent.width / 4
@@ -90,7 +91,7 @@ Rectangle {
   Rectangle {
     width: parent.width
     height: parent.height  - syllabus_tabs.height - syllabus_leftWindow_buttons.height
-    anchors.top: syllabus_leftWindow_buttons.bottom
+    // anchors.top: syllabus_leftWindow_buttons.bottom
     clip: true
     color: 'red'
     ScrollBar {
@@ -128,7 +129,7 @@ Rectangle {
               Rectangle {
                 width: parent.width / 2 - 20
                 height: parent.height
-                anchors.left: parent.left
+                // anchors.left: parent.left
                 color: 'lightblue'
                 Text {
                   text: 'Add'
@@ -145,7 +146,7 @@ Rectangle {
               Rectangle {
                 width: parent.width / 2 - 20
                 height: parent.height
-                anchors.right: parent.right
+                // anchors.right: parent.right
                 color: 'orange'
                 Text {
                   text: 'Remove'
@@ -163,7 +164,7 @@ Rectangle {
               color: 'lightgreen'
               width: parent.width
               height: 25
-              anchors.top: syllabus_objectives_leftWindow_buttons.bottom
+              // anchors.top: syllabus_objectives_leftWindow_buttons.bottom
               TextInput {
                 id: objective_text
                 text: 'String Field (64 Characters)'
@@ -216,7 +217,7 @@ Rectangle {
               Rectangle {
                 width: parent.width / 2 - 20
                 height: parent.height
-                anchors.left: parent.left
+                // anchors.left: parent.left
                 color: 'lightblue'
                 Text {
                   text: 'Add'
@@ -233,7 +234,7 @@ Rectangle {
               Rectangle {
                 width: parent.width / 2 - 20
                 height: parent.height
-                anchors.right: parent.right
+                // anchors.right: parent.right
                 color: 'orange'
                 Text {
                   text: 'Remove'
@@ -251,7 +252,7 @@ Rectangle {
               color: 'lightgreen'
               width: parent.width
               height: 25
-              anchors.top: syllabus_assessments_leftWindow_buttons.bottom
+              // anchors.top: syllabus_assessments_leftWindow_buttons.bottom
               TextInput {
                 id: assessment_text
                 text: 'String Field (64 Characters)'
@@ -304,7 +305,7 @@ Rectangle {
         Rectangle {
           width: parent.width
           height: parent.height - syllabus_injuries_tabs.height
-          anchors.top: syllabus_injuries_tabs.bottom
+          // anchors.top: syllabus_injuries_tabs.bottom
           StackLayout {
             width: parent.width
             height: parent.height
@@ -331,7 +332,7 @@ Rectangle {
                     Rectangle {
                       width: parent.width / 2 - 20
                       height: parent.height
-                      anchors.left: parent.left
+                      // anchors.left: parent.left
                       color: 'lightblue'
                       Text {
                         text: 'Add'
@@ -348,7 +349,7 @@ Rectangle {
                     Rectangle {
                       width: parent.width / 2 - 20
                       height: parent.height
-                      anchors.right: parent.right
+                      // anchors.right: parent.right
                       color: 'orange'
                       Text {
                         text: 'Remove'
@@ -366,7 +367,7 @@ Rectangle {
                     color: 'lightgreen'
                     width: parent.width
                     height: 25
-                    anchors.top: syllabus_injuries_definition_leftWindow_buttons.bottom
+                    // anchors.top: syllabus_injuries_definition_leftWindow_buttons.bottom
                     TextInput {
                       id: injury_definition_text
                       text: 'String Field (64 Characters)'
@@ -407,7 +408,7 @@ Rectangle {
               Row {
                 width: parent.width
                 height: parent.height
-                anchors.top: parent.top
+                // anchors.top: parent.top
                 Rectangle {
                   color: 'pink'
                   width: parent.width
@@ -419,7 +420,7 @@ Rectangle {
                     Rectangle {
                       width: parent.width / 2 - 20
                       height: parent.height
-                      anchors.left: parent.left
+                      // anchors.left: parent.left
                       color: 'lightblue'
                       Text {
                         text: 'Add'
@@ -436,7 +437,7 @@ Rectangle {
                     Rectangle {
                       width: parent.width / 2 - 20
                       height: parent.height
-                      anchors.right: parent.right
+                      // anchors.right: parent.right
                       color: 'orange'
                       Text {
                         text: 'Remove'
@@ -454,7 +455,7 @@ Rectangle {
                     color: 'lightgreen'
                     width: parent.width
                     height: 25
-                    anchors.top: syllabus_injuries_injurySet_leftWindow_buttons.bottom
+                    // anchors.top: syllabus_injuries_injurySet_leftWindow_buttons.bottom
                     TextInput {
                       id: injury_injurySet_text
                       text: 'String Field (64 Characters)'
@@ -510,7 +511,7 @@ Rectangle {
               Rectangle {
                 width: parent.width / 2 - 20
                 height: parent.height
-                anchors.left: parent.left
+                // anchors.left: parent.left
                 color: 'lightblue'
                 Text {
                   text: 'Add'
@@ -527,7 +528,7 @@ Rectangle {
               Rectangle {
                 width: parent.width / 2 - 20
                 height: parent.height
-                anchors.right: parent.right
+                // anchors.right: parent.right
                 color: 'orange'
                 Text {
                   text: 'Remove'
@@ -598,7 +599,7 @@ Rectangle {
               Rectangle {
                 width: parent.width / 2 - 20
                 height: parent.height
-                anchors.left: parent.left
+                // anchors.left: parent.left
                 color: 'lightblue'
                 Text {
                   text: 'Add'
@@ -615,7 +616,7 @@ Rectangle {
               Rectangle {
                 width: parent.width / 2 - 20
                 height: parent.height
-                anchors.right: parent.right
+                // anchors.right: parent.right
                 color: 'orange'
                 Text {
                   text: 'Remove'
@@ -633,7 +634,7 @@ Rectangle {
               color: 'lightgreen'
               width: parent.width
               height: 25
-              anchors.top: syllabus_equipment_leftWindow_buttons.bottom
+              //anchors.top: syllabus_equipment_leftWindow_buttons.bottom
               TextInput {
                 id: equipment_text
                 text: 'String Field (64 Characters)'

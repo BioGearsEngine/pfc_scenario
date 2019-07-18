@@ -6,12 +6,13 @@ import QtQuick.Controls 2.12
 import "syllabus"
 
 RowLayout {
-  anchors.fill: parent
-  anchors.margins: 5
-  spacing: 5
+  id: root
+  property var backend
 
   width: parent.width
   height: parent.height
+  spacing: 5
+  
   LeftPane{
     id: syllabus_leftPane
   }

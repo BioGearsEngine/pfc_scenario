@@ -100,22 +100,52 @@ inline namespace sqlite3 {
   constexpr auto select_restriction_by_name
     = R"( SELECT * FROM restrictions WHERE name = :name; )";
 
-  constexpr auto insert_into_authors
+  constexpr auto insert_or_update_authors
     = R"( INSERT  OR REPLACE INTO authors
                  (  name_first,  name_last,  email,  zipcode,  state,  country,  phone,  organization)
-          VALUES ( :name_first, :name_last, :email, :zipcode, :state, :country, :phone, :organization); 
+          VALUES ( :name_first, :name_last, :email, :zipcode, :state, :country, :phone, :organization)
+          ON CONFLICT(email) 
+          DO UPDATE SET name_first = excluded.name_first
+                    ,name_last  = excluded.name_last
+                    ,zipcode    = excluded.zipcode
+                    ,state      = excluded.state
+                    ,country    = excluded.country
+                    ,phone      = excluded.phone
+                    ,organization = excluded.organization;
         )"
   ;
-  constexpr auto insert_into_properties
-    = R"( INSERT  OR REPLACE INTO properties
+  constexpr auto insert_or_update_restrictions
+    = R"( INSERT INTO restrictions 
           (name,value)
-          VALUES (:name, :value) ;
-        )";
-  constexpr auto insert_into_restrictions
-    = R"( INSERT  OR REPLACE INTO restrictions 
-          (name,value)
-          VALUES (:name, :value);
+          VALUES (:name, :value)
+          ON CONFLICT (name)
+          DO UPDATE SET value = excluded.value;
          )";
+
+  constexpr auto insert_or_update_properties
+    = R"( INSERT  INTO properties 
+          (name,value)
+          VALUES (:name, :value)
+          ON CONFLICT (name)
+          DO UPDATE SET value = excluded.value;
+         )";
+
+
+  //constexpr auto insert_into_authors
+  //  = R"( INSERT INTO authors 
+  //            (  name_first,  name_last,  email,  zipcode,  state,  country,  phone,  organization)
+  //     VALUES ( :name_first, :name_last, :email, :zipcode, :state, :country, :phone, :organization)
+  //     ON CONFLICT(email) 
+  //     DO UPDATE SET name_first = excluded.name_first
+  //                  ,name_last  = excluded.name_last
+  //                  ,zipcode    = excluded.zipcode
+  //                  ,state      = excluded.state
+  //                  ,country    = excluded.country
+  //                  ,phone      = excluded.phone
+  //                  ,organization = excluded.organization;
+  //;)";
+
+
 
   constexpr auto delete_property_by_id
     = R"( DELETE FROM properties WHERE property_id = :id; )";

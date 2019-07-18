@@ -7,7 +7,7 @@ import QtQuick.Dialogs 1.3
 
 import "screens"
 
-import com.ara.pfc.ScenarioModel 1.0 
+import com.ara.pfc.ScenarioModel.SQL 1.0 
 //This is importing C++ code
 
 
@@ -18,8 +18,10 @@ ApplicationWindow {
 
   menuBar: MenuBar {
     visible: true
+    font.pointSize : 8
     Menu {
       title: "File"
+      font.pointSize : 8
         MenuItem { text: "New Scenario";     }
         MenuItem { text: "Save Scenario";    }
         MenuItem { text: "Save Scenario As"; }
@@ -27,23 +29,28 @@ ApplicationWindow {
     }
     Menu {
       title: "Edit"
+      font.pointSize : 8
         MenuItem { text: "Authorship" }
     }
     Menu {
       title: "View"
+      font.pointSize : 8
         MenuItem { text: "Narrative"}
         MenuItem { text: "Syllabus"}
     }
     Menu {
       title: "About"
+      font.pointSize : 8
         MenuItem { text: "Help"}
         MenuItem { text: "About"}
     }
   }
   
-  ScenarioModel {
+  SQLBackend {
     id : scenario_model
+    name : "scenario.sqlite"
   }
+
   StackView {
     id: mainView
     anchors.fill: parent
@@ -55,9 +62,10 @@ ApplicationWindow {
          loadDialog.open()
        }
        onCreateClicked: {
-         //mainView.push( scenarioScreen, { model : scenario_model} )
-         mainView.push( scenarioScreen )
-        }
+        scenario_model.open();
+        scenario_model.initialize_db();
+         mainView.push( scenarioScreen, { backend : scenario_model} )
+       }
     }
     FileDialog {
       id: loadDialog

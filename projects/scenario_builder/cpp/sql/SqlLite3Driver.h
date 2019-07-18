@@ -21,14 +21,8 @@ specific language governing permissions and limitations under the License.
 
 namespace pfc {
 
-enum Sqlite3Table {
-  AUTHORS,
-  RESTRICTIONS,
-  PROPERTIES,
-};
-
-struct Author {
-  Q_GADGET
+struct Author : public QObject {
+  Q_OBJECT
 public:
   int32_t id = -1;
   QString first = "";
@@ -51,11 +45,15 @@ public:
   Q_PROPERTY(QString phone MEMBER phone)
   Q_PROPERTY(QString organization MEMBER organization)
 
-  Author() = default;
-  Author(const Author&) = default;
-  Author(Author&&) = default;
-  Author& operator=(const Author&) = default;
-  Author& operator=(Author&&) = default;
+  Author(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  Author(const Author&) = delete;
+  Author(Author&&) = delete;
+  Author& operator=(const Author&) = delete;
+  Author& operator=(Author&&) = delete;
+  virtual ~Author() = default;
 
   bool operator==(const Author& rhs) const
   {
@@ -76,21 +74,25 @@ public:
   }
 };
 
-struct Property {
-  Q_GADGET
+struct Property : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int id MEMBER id)
+  Q_PROPERTY(QString name MEMBER name)
+  Q_PROPERTY(QString value MEMBER value)
 public:
   int32_t id = -1;
   QString name = "";
   QString value = "";
-  Q_PROPERTY(int id MEMBER id)
-  Q_PROPERTY(QString name MEMBER name)
-  Q_PROPERTY(QString value MEMBER value)
 
-  Property() = default;
-  Property(const Property&) = default;
-  Property(Property&&) = default;
-  Property& operator=(const Property&) = default;
-  Property& operator=(Property&&) = default;
+  Property(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  Property(const Property&) = delete;
+  Property(Property&&) = delete;
+  Property& operator=(const Property&) = delete;
+  Property& operator=(Property&&) = delete;
+  virtual ~Property() = default;
 
   bool operator==(const Property& rhs) const
   {
@@ -104,21 +106,25 @@ public:
   }
 };
 
-struct Restriction {
-  Q_GADGET
+struct Restriction : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int id MEMBER id)
+  Q_PROPERTY(QString name MEMBER name)
+  Q_PROPERTY(QString value MEMBER value)
 public:
   int32_t id = -1;
   QString name = "";
   QString value = "";
-  Q_PROPERTY(int id MEMBER id)
-  Q_PROPERTY(QString name MEMBER name)
-  Q_PROPERTY(QString value MEMBER value)
 
-  Restriction() = default;
-  Restriction(const Restriction&) = default;
-  Restriction(Restriction&&) = default;
-  Restriction& operator=(const Restriction&) = default;
-  Restriction& operator=(Restriction&&) = default;
+  Restriction(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  Restriction(const Restriction&) = delete;
+  Restriction(Restriction&&) = delete;
+  Restriction& operator=(const Restriction&) = delete;
+  Restriction& operator=(Restriction&&) = delete;
+  virtual ~Restriction() = default;
 
   bool operator==(const Restriction& rhs) const
   {
@@ -140,12 +146,20 @@ public:
   Q_PROPERTY(QString path READ Path WRITE Path NOTIFY pathChanged)
 
 public:
-  explicit SQLite3Driver();
-  SQLite3Driver(const std::string& dbName, const std::string& path = "./");
-  SQLite3Driver(const SQLite3Driver&) = default;
-  SQLite3Driver(SQLite3Driver&&) = default;
-  SQLite3Driver& operator=(const SQLite3Driver&) = default;
-  SQLite3Driver& operator=(SQLite3Driver&&) = default;
+  enum Sqlite3Table {
+    AUTHORS,
+    RESTRICTIONS,
+    PROPERTIES,
+  };
+
+  Q_ENUM(Sqlite3Table)
+
+  explicit SQLite3Driver(QObject* parent = nullptr);
+  SQLite3Driver(const std::string& dbName, const std::string& path = "./", QObject* parent = nullptr);
+  SQLite3Driver(const SQLite3Driver&) = delete;
+  SQLite3Driver(SQLite3Driver&&) = delete;
+  SQLite3Driver& operator=(const SQLite3Driver&) = delete;
+  SQLite3Driver& operator=(SQLite3Driver&&) = delete;
   ~SQLite3Driver();
 
   Q_INVOKABLE bool open(QString db_name);
@@ -154,23 +168,23 @@ public:
   Q_INVOKABLE bool initialize_db();
 
   Q_INVOKABLE bool clear_db();
-  Q_INVOKABLE bool clear_table(enum Sqlite3Table);
+  Q_INVOKABLE bool clear_table(enum SQLite3Driver::Sqlite3Table);
 
-  Q_INVOKABLE QList<Author> authors() const;
-  Q_INVOKABLE QList<Property> properties() const;
-  Q_INVOKABLE QList<Restriction> restrictions() const;
+  Q_INVOKABLE QList<Author*> authors();
+  Q_INVOKABLE QList<Property*> properties();
+  Q_INVOKABLE QList<Restriction*> restrictions();
 
-  Q_INVOKABLE bool select(Author&) const;
-  Q_INVOKABLE bool select(Property&) const;
-  Q_INVOKABLE bool select(Restriction&) const;
+  Q_INVOKABLE bool select_author(Author*) const;
+  Q_INVOKABLE bool select_property(Property*) const;
+  Q_INVOKABLE bool select_restriction(Restriction*) const;
 
-  Q_INVOKABLE bool insert(Author&);
-  Q_INVOKABLE bool insert(Property&);
-  Q_INVOKABLE bool insert(Restriction&);
+  Q_INVOKABLE bool update_author(Author*);
+  Q_INVOKABLE bool update_property(Property*);
+  Q_INVOKABLE bool update_restriction(Restriction*);
 
-  Q_INVOKABLE bool remove(Author&);
-  Q_INVOKABLE bool remove(Property&);
-  Q_INVOKABLE bool remove(Restriction&);
+  Q_INVOKABLE bool remove_author(Author*);
+  Q_INVOKABLE bool remove_property(Property*);
+  Q_INVOKABLE bool remove_restriction(Restriction*);
 
   Q_INVOKABLE int raw_error() const { return _db.lastError().type(); };
   Q_INVOKABLE QString error_message() const { return _db.lastError().text(); }
@@ -187,6 +201,10 @@ public:
 signals:
   void nameChanged();
   void pathChanged();
+  
+  void authorsChanged();
+  void propertiesChanged();
+  void restictionsChanged();
 
 private:
   bool open();
@@ -196,6 +214,10 @@ private:
   QString _db_path = "./";
   QSqlDatabase _db;
   mutable int _error_code = 0;
+
+  QList<Author*> _authors;
+  QList<Property*> _properties;
+  QList<Restriction*> _restirctions;
 };
 }
 #endif //PFC_SCENARIO_BUILDER_SQL_SQLLITE3_DRVER_H

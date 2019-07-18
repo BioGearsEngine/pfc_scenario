@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.12
 
   Rectangle {
-  id: summary_leftWindow
+  id: narrative_leftWindow
   Layout.preferredWidth: parent.width / 2
   Layout.fillHeight: true
   clip: true

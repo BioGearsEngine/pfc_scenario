@@ -4,11 +4,13 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.12
 
 import "components"
+import com.ara.pfc.ScenarioModel.SQL 1.0
 
 Page {
   id: root
   signal closed
   property var stack
+  property SQLBackend backend
 
   ColumnLayout {
     id: columns
@@ -56,17 +58,20 @@ Page {
       //TAB:SUMMARY
 
       ScenarioSummary{
-      id: summary
+        id: summary
+        backend : root.backend
       }
 
-      //TAB:SYLLABUS
-      ScenarioSyllabus {
-        id: syllabus
-      }
-      //TAB:NARRATIVE
-      ScenarioNarrative{
-        id: narrative
-      }
+      // //TAB:SYLLABUS
+      // ScenarioSyllabus {
+      //   id: syllabus
+      //   backend : root.backend
+      // }
+      // //TAB:NARRATIVE
+      // ScenarioNarrative{
+      //   id: narrative
+      //   backend : root.backend
+      // }
     }
   }
 }

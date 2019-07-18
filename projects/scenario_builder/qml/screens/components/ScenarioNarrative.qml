@@ -6,11 +6,14 @@ import QtQuick.Controls 2.12
 import "narrative"
 
 RowLayout {
-  anchors.fill: parent
-  anchors.margins: 5
+  id: root
+  property var backend
+  
+  Layout.fillWidth : true
+  Layout.fillHeight: true
   spacing: 5
 
-    //TAB:SUMMARY_LEFTWINDOW 
+  //TAB:SUMMARY_LEFTWINDOW 
   LeftPane{
     id : narrative_left
   }
