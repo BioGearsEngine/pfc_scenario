@@ -12,6 +12,7 @@ Rectangle {
   signal editingFinished()
   
   Layout.preferredHeight : value.height 
+  Layout.rightMargin : 20
   
   Label {
   id: name
@@ -28,7 +29,7 @@ Rectangle {
     anchors { left : name.right ; right : parent.right}
     leftPadding : 5
     rightPadding: 5
-
+    selectByMouse : true
     onEditingFinished : {
       root.editingFinished();
     }

@@ -41,9 +41,36 @@ Rectangle {
       default_value : 'UnClassified'
     }
 
+    TextAreaEntry {
+      Property {
+        id : purpose
+        name : "scenario_purpose"
+      }
+      onEditingFinished : {
+        if ( text != purpose.value){
+          purpose.value = text
+          root.backend.update_property(purpose)
+        }
+      }
+
+      onCompleted : {
+        root.backend.select_property(purpose);
+        if(purpose.value === ""){
+          purpose.value = root.default_value;
+          if(required){
+            root.backend.update_property(purpose)
+            text = purpose.value;
+          }
+        } else {
+          text = purpose.value;
+        }
+      }
+    }
+
     Rectangle {
         Layout.fillHeight: true
         color : "Red"
+        border.color:"Red"
     }
   }
 }

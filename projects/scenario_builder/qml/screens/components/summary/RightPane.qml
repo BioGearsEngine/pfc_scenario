@@ -15,33 +15,16 @@ Rectangle {
     id: summary_leftWindow
     anchors.fill : parent
 
-    TextEntry {
-      Layout.fillWidth : true
-      Layout.alignment: Qt.AlignTop
-      label : "Author"
-      value : 'String Field (128 Characters)'
+    Author {
+      id: main_author
+      author_id : 1
     }
 
-    TextEntry {
+    AuthorEntry {
       Layout.fillWidth : true
       Layout.alignment: Qt.AlignTop
-      label : "Org"
-      value : 'String Field (128 Characters)'
-    }
-
-    TextEntry {
-      Layout.fillWidth : true
-      Layout.alignment: Qt.AlignTop
-      label : "Phone"
-      value : 'String Field (128 Characters)'
-    }
-
-
-    TextEntry {
-      Layout.fillWidth : true
-      Layout.alignment: Qt.AlignTop
-      label : "Email"
-      value : 'String Field (128 Characters)'
+      author : main_author
+      backend : root.backend
     }
 
     Rectangle {
@@ -56,9 +39,6 @@ Rectangle {
       name : "scenario_keywords"
       label : "Keywords"
       default_value : 'Comma Delimited List of Keywords'
-
-      label : "Keywords"
-      value : 'String Field (128 Characters)'
     }
 
     PropertyEntry {
@@ -66,10 +46,21 @@ Rectangle {
       Layout.alignment: Qt.AlignTop
       backend : root.backend
       name : "scenario_domain"
-      label : "Application Domain"
+      label : "Domain"
       default_value : 'Medical Prolonged Field Care'
+      required : true
     }
 
+    PropertyAreaEntry {
+      Layout.fillWidth : true
+      Layout.alignment: Qt.AlignTop
+      backend : root.backend
+      name : "scenario_limitations"
+      label : "Use Limitations"
+      default_value : 'Enter any Usage Limitations'
+      required : false 
+    }
+    
     Rectangle {
         Layout.fillHeight: true
         color : "Red"

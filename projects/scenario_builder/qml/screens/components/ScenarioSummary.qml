@@ -22,7 +22,7 @@ GridLayout {
   //TAB:SUMMARY_RIGHTWINDOW
   RightPane{
     id : summary_right
-    
+    backend : root.backend
 
     Layout.fillWidth: true
     Layout.fillHeight: true

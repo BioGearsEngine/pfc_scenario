@@ -35,7 +35,7 @@ inline namespace sqlite3 {
   CREATE TABLE IF NOT EXISTS properties(
     property_id INTEGER PRIMARY KEY,
     name Varchar(64) NOT NULL UNIQUE,
-    value Varchar(255)
+    value TEXT
   );
   )";
 
@@ -84,8 +84,7 @@ inline namespace sqlite3 {
 
   constexpr auto select_all_properties = R"( SELECT * FROM properties; )";
   constexpr auto select_all_authors = R"( SELECT * FROM authors; )";
-  constexpr auto select_all_restrictions = R"( SELECT * FROM restrictions; )";
-
+  constexpr auto select_all_restrictions = R"( SELECT * FROM restrictions; )"; 
   constexpr auto select_property_by_id
     = R"( SELECT * FROM properties WHERE property_id = :id ; )";
   constexpr auto select_author_by_id
@@ -100,20 +99,28 @@ inline namespace sqlite3 {
   constexpr auto select_restriction_by_name
     = R"( SELECT * FROM restrictions WHERE name = :name; )";
 
-  constexpr auto insert_or_update_authors
+  constexpr auto insert_or_update_first_author
     = R"( INSERT  OR REPLACE INTO authors
+                 (  author_id, name_first,  name_last,  email,  zipcode,  state,  country,  phone,  organization)
+          VALUES (1, :name_first, :name_last, :email, :zipcode, :state, :country, :phone, :organization)
+        )"
+  ;
+
+    constexpr auto insert_or_update_authors
+    = R"( INSERT  INTO authors
                  (  name_first,  name_last,  email,  zipcode,  state,  country,  phone,  organization)
-          VALUES ( :name_first, :name_last, :email, :zipcode, :state, :country, :phone, :organization)
+          VALUES ( :name_first, :name_last, :email, :zipcode, :state, :country, :p  hone, : organization)
           ON CONFLICT(email) 
-          DO UPDATE SET name_first = excluded.name_first
+          DO UPDATE SET 
+                     name_first = excluded.name_first
                     ,name_last  = excluded.name_last
                     ,zipcode    = excluded.zipcode
                     ,state      = excluded.state
                     ,country    = excluded.country
                     ,phone      = excluded.phone
                     ,organization = excluded.organization;
-        )"
-  ;
+        )";
+
   constexpr auto insert_or_update_restrictions
     = R"( INSERT INTO restrictions 
           (name,value)

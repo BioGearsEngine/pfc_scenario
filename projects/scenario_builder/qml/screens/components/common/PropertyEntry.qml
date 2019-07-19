@@ -13,11 +13,13 @@ Rectangle {
   property alias name: self.name
   property alias value: entryField.text
   property alias default_value: entryField.placeholderText
+  property bool required : false
 
   signal editingFinished()
   
   Layout.preferredHeight : entryField.height 
-  
+  Layout.rightMargin : 20
+      
   Property {
     id : self
     name  : "common_property"
@@ -40,6 +42,7 @@ Rectangle {
     anchors { left : label.right ; right : parent.right}
     leftPadding : 5
     rightPadding: 5
+    selectByMouse : true
 
     onEditingFinished : {
       if ( entryField.text != self.value){
@@ -53,6 +56,10 @@ Rectangle {
         root.backend.select_property(self);
         if(self.value === ""){
           self.value = root.default_value;
+          if(root.required){
+            root.backend.update_property(self)
+            entryField.text = self.value;
+          }
         } else {
           entryField.text = self.value;
         }

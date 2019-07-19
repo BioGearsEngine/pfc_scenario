@@ -26,6 +26,7 @@ struct Author : public QObject {
 public:
   int32_t id = -1;
   QString first = "";
+  QString middle = "";
   QString last = "";
   QString email = "";
   QString zip = "";
@@ -34,8 +35,9 @@ public:
   QString country = "";
   QString phone = "";
   QString organization = "";
-  Q_PROPERTY(int id MEMBER id)
+  Q_PROPERTY(int author_id MEMBER id)
   Q_PROPERTY(QString first MEMBER first)
+  Q_PROPERTY(QString middle MEMBER middle)
   Q_PROPERTY(QString last MEMBER last)
   Q_PROPERTY(QString email MEMBER email)
   Q_PROPERTY(QString zip MEMBER zip)
@@ -59,6 +61,7 @@ public:
   {
     return id == rhs.id
       && first == rhs.first
+      && middle == rhs.middle
       && last == rhs.last
       && email == rhs.email
       && zip == rhs.zip
@@ -76,14 +79,14 @@ public:
 
 struct Property : public QObject {
   Q_OBJECT
-  Q_PROPERTY(int id MEMBER id)
+  Q_PROPERTY(int property_id MEMBER id)
   Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString value MEMBER value)
 public:
   int32_t id = -1;
   QString name = "";
   QString value = "";
-
+    
   Property(QObject* parent = nullptr)
     : QObject(parent)
   {
@@ -99,7 +102,7 @@ public:
     return id == rhs.id
       && name == rhs.name
       && value == rhs.value;
-  }
+  } 
   bool operator!=(const Property& rhs) const
   {
     return !(*this == rhs);
@@ -108,7 +111,7 @@ public:
 
 struct Restriction : public QObject {
   Q_OBJECT
-  Q_PROPERTY(int id MEMBER id)
+  Q_PROPERTY(int restriction_id MEMBER id)
   Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString value MEMBER value)
 public:
@@ -179,6 +182,7 @@ public:
   Q_INVOKABLE bool select_restriction(Restriction*) const;
 
   Q_INVOKABLE bool update_author(Author*);
+  Q_INVOKABLE bool update_first_author(Author*);
   Q_INVOKABLE bool update_property(Property*);
   Q_INVOKABLE bool update_restriction(Restriction*);
 

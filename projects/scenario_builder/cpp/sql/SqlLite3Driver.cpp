@@ -356,6 +356,35 @@ bool SQLite3Driver::update_author(Author* author)
   return false;
 }
 //------------------------------------------------------------------------------
+bool SQLite3Driver::update_first_author(Author* author)
+{
+
+  if (_db.isOpen()) {
+    if (!author->email.isEmpty()) {
+      QSqlQuery query{ _db };
+      query.prepare(sqlite3::insert_or_update_first_author);
+      query.bindValue(":name_first", author->first);
+      query.bindValue(":name_last", author->last);
+      query.bindValue(":email", author->email);
+
+      const auto zipcode = (author->plus_4.isEmpty()) ? QString("%1").arg(author->zip) : QString("%1-%2").arg(author->zip).arg(author->plus_4);
+      query.bindValue(":zipcode", zipcode);
+
+      query.bindValue(":state", author->state);
+      query.bindValue(":country", author->country);
+      query.bindValue(":phone", author->phone);
+      query.bindValue(":organization", author->organization);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      return true;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+//------------------------------------------------------------------------------
 bool SQLite3Driver::update_property(Property* property)
 {
 
