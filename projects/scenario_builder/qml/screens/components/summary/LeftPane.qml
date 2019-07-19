@@ -52,8 +52,54 @@ Rectangle {
     }
 
     ListEntry {
+      id: restrictions
       Layout.fillWidth : true
       Layout.alignment: Qt.AlignTop
+
+      model : ListModel {
+        id: dataModel
+        ListElement {
+            name: "Export Control"
+            value: "US - 2010"
+        }
+        ListElement {
+            name: "Blue "
+            value: "US - 9982"
+        }
+      }
+      delegate : Rectangle {
+         id : delegateArea
+         anchors { left : parent.left; right: parent.right ; margins : 5 }
+
+         color : 'transparent'
+         border.color: "steelblue"
+         height : 30
+
+         Text {
+           id : restriction_title_text
+           anchors.left : delegateArea.left
+           anchors.leftMargin : 5
+           text : name + " " + value
+         }
+
+         MouseArea {
+           anchors.fill: parent
+           onClicked: {
+            restrictions.current = index
+           }
+         }
+      }
+
+      onAdded : {
+        console.log("Added Export Control " + index)
+        dataModel.insert(index, {name:"New Item", value : "%1".arg(index)})
+      }
+      onRemoved : {
+        console.log("Removed Export Control " + index)
+        dataModel.remove(index)
+        current = math.Max(0,index-1)
+      }
+
     }
     
     Rectangle {

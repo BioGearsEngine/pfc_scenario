@@ -114,7 +114,7 @@ inline namespace sqlite3 {
           DO UPDATE SET 
                      name_first = excluded.name_first
                     ,name_last  = excluded.name_last
-                    ,zipcode    = excluded.zipcode
+                    ,zipcode    = excluded.zipcode  
                     ,state      = excluded.state
                     ,country    = excluded.country
                     ,phone      = excluded.phone

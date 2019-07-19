@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
   g the following line resolves the issue but then UI elements looks small */
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
   QApplication app(argc, argv);
-  QQuickStyle::setStyle("Material");
+  QQuickStyle::setStyle("Material");  
   QQmlApplicationEngine engine;
 
   //UI 0.1 Types
