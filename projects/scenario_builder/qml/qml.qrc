@@ -17,7 +17,8 @@
         <file>screens/components/common/AuthorEntry.qml</file>
         <file>screens/components/common/TextAreaEntry.qml</file>
         <file>screens/components/common/PropertyAreaEntry.qml</file>
-        
+        <file>screens/components/common/ListEntry.qml</file>
+        <file>screens/components/common/RestrictionListEntry.qml</file>
         <file>img/sustain_splash.png</file>
     </qresource>
     <qresource prefix="/core">

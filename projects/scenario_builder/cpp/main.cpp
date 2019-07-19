@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
   //qmlRegisterType<pfc::ActorSequence>("com.ara.pfc.ScenarioModel.Actors", 1, 0, "Actors");
   //qmlRegisterType<pfc::NarativeSequence>("com.ara.pfc.ScenarioModel.Narative", 1, 0, "Naratives");
 
-  //UI 0.1 Types
+  //UI 0.1 Types    
   qmlRegisterType<pfc::SQLite3Driver>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "SQLBackend");
   qmlRegisterType<pfc::Author>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Author");
   qmlRegisterType<pfc::Property>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Property");

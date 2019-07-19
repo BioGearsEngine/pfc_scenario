@@ -21,16 +21,16 @@ TextAreaEntry {
   onEditingFinished : {
     if ( text != self.value){
       self.value = text
-      root.backend.update_property(purpose)
+      root.backend.update_property(self)
     }
   }
 
   onCompleted : {
-    root.backend.select_property(purpose);
+    root.backend.select_property(self);
     if(self.value === ""){
       self.value = root.placeholderText;
       if(required){
-        root.backend.update_property(purpose)
+        root.backend.update_property(self)
         text = self.value;
       }
     } else {

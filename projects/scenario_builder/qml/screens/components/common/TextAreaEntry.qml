@@ -12,11 +12,11 @@ Rectangle {
   property alias placeholderText : input_area.placeholderText
   property alias text : input_area.text
   property bool required : false
-  
+
   signal editingFinished()
   signal completed()
 
-  height : 300
+  Layout.preferredHeight : flickable.height
   Layout.fillWidth : true
   Layout.rightMargin : 20
 
@@ -43,7 +43,7 @@ Rectangle {
 
   Flickable {
     id: flickable
-    height : Math.min( Math.max(contentHeight,font_metrics.height * 5) ,font_metrics.height * 10)
+    height : Math.min( Math.max(contentHeight,font_metrics.height * 7) ,font_metrics.height * 12)
     rightMargin : 20
     contentWidth: width
     clip: true
@@ -51,10 +51,12 @@ Rectangle {
     anchors { left : label.right; right: parent.right}
     TextArea.flickable: TextArea {
       id : input_area
+      leftPadding: 5
+      font.pointSize : 10
       placeholderText: qsTr("Purpose Description")
-      wrapMode: TextArea.Wrap
-      selectByMouse:true
       background : Rectangle { color: "transparent"}
+      selectByMouse:true
+      wrapMode: TextArea.Wrap
       onEditingFinished :{
         root.editingFinished();
       }
