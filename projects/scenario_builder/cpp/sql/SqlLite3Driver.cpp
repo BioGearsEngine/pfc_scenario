@@ -32,8 +32,7 @@ inline void assign_author(const QSqlRecord& record, Author& author)
   auto zip_qstr = record.value(AUTHOR_ZIPCODE).toString();
 
   QRegularExpression zip(R"((\d{5}))");
-  QRegularExpression zip_plus4(R"((\d{5})-(\d{4}))"
-                               );
+  QRegularExpression zip_plus4(R"((\d{5})-(\d{4}))");
   QRegularExpressionMatch match = zip_plus4.match(zip_qstr);
 
   if (match.hasMatch()) {
@@ -68,7 +67,6 @@ SQLite3Driver::SQLite3Driver(QObject* parent)
   : QObject(parent)
   , _db(QSqlDatabase::database())
 {
-
 }
 //------------------------------------------------------------------------------
 SQLite3Driver::SQLite3Driver(const std::string& dbName, const std::string& path, QObject* parent)
@@ -181,7 +179,89 @@ bool SQLite3Driver::clear_table(enum SQLite3Driver::Sqlite3Table t)
   return false;
 }
 //------------------------------------------------------------------------------
-auto SQLite3Driver::authors() -> QList<pfc::Author*>
+int SQLite3Driver::author_count() const
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_authors);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
+//------------------------------------------------------------------------------
+int SQLite3Driver::restriction_count() const
+
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_restrictions);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
+
+//------------------------------------------------------------------------------
+int SQLite3Driver::property_count() const
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_properties);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::next_author(Author* author)
+{
+  if (_current_author == _authors.end() || _authors.empty()) {
+    return false;
+  }
+  author->assign( *(*_current_author) ); 
+  ++_current_author;
+  return true;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::next_property(Property* property)
+{
+  if (_current_property == _properties.end() || _properties.empty()) {
+    return false;
+  }
+  property->assign(*(*_current_property));
+  ++_current_property;
+  return true;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::next_restriction(Restriction* restriction)
+{
+  if (_current_restriction == _restirctions.end() || _restirctions.empty()) {
+    return false;
+  }
+  restriction->assign(*(*_current_restriction));
+    ++_current_restriction;
+
+  return true;
+}
+
+//------------------------------------------------------------------------------
+void SQLite3Driver::authors()
 {
   qDeleteAll(_authors);
   _authors.clear();
@@ -197,13 +277,12 @@ auto SQLite3Driver::authors() -> QList<pfc::Author*>
       assign_author(record, *author);
       _authors.push_back(author.release());
     }
+    _current_author = _authors.begin();
+    emit authorsChanged();
   }
-  emit authorsChanged();
-
-  return _authors;
 }
 //------------------------------------------------------------------------------
-auto SQLite3Driver::properties() -> QList<pfc::Property*>
+void SQLite3Driver::properties()
 {
   qDeleteAll(_properties);
   _properties.clear();
@@ -220,11 +299,12 @@ auto SQLite3Driver::properties() -> QList<pfc::Property*>
       assign_property(record, *property);
       _properties.push_back(property.release());
     }
+    _current_property = _properties.begin();
+    emit propertiesChanged();
   }
-  return _properties;
 }
 //------------------------------------------------------------------------------
-auto SQLite3Driver::restrictions() -> QList<pfc::Restriction*>
+void SQLite3Driver::restrictions()
 {
   qDeleteAll(_restirctions);
   _restirctions.clear();
@@ -235,14 +315,15 @@ auto SQLite3Driver::restrictions() -> QList<pfc::Restriction*>
     query.prepare(sqlite3::select_all_restrictions);
     query.exec();
     while (query.next()) {
-      auto restriction = std::unique_ptr<pfc::Restriction>();
+      auto restriction = std::make_unique<pfc::Restriction>();
       auto record = query.record();
       assert(record.count() == 3);
       assign_restriction(record, *restriction);
       _restirctions.push_back(restriction.release());
     }
+    _current_restriction = _restirctions.begin();
+    emit restictionsChanged();
   }
-  return _restirctions;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::select_author(Author* author) const

@@ -82,9 +82,15 @@ inline namespace sqlite3 {
   constexpr auto drop_all_authors = R"( DELETE FROM authors; )";
   constexpr auto drop_all_restrictions = R"( DELETE FROM restrictions; )";
 
+  
+  constexpr auto count_properties = R"( SELECT COUNT(author_id) FROM properties; )";
+  constexpr auto count_authors = R"( SELECT COUNT(property_id) FROM authors; )";
+  constexpr auto count_restrictions = R"( SELECT COUNT(restriction_id) FROM restrictions; )";
+
   constexpr auto select_all_properties = R"( SELECT * FROM properties; )";
   constexpr auto select_all_authors = R"( SELECT * FROM authors; )";
-  constexpr auto select_all_restrictions = R"( SELECT * FROM restrictions; )"; 
+  constexpr auto select_all_restrictions = R"( SELECT * FROM restrictions; )";
+
   constexpr auto select_property_by_id
     = R"( SELECT * FROM properties WHERE property_id = :id ; )";
   constexpr auto select_author_by_id
@@ -98,6 +104,7 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM authors WHERE email = :email; )";
   constexpr auto select_restriction_by_name
     = R"( SELECT * FROM restrictions WHERE name = :name; )";
+
 
   constexpr auto insert_or_update_first_author
     = R"( INSERT  OR REPLACE INTO authors

@@ -85,13 +85,13 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Author)
   author_3.last = "Kirk";
   author_3.email = "Captian@Entreprise.uss";
 
-  EXPECT_EQ(0, _db.authors().size());
+  EXPECT_EQ(0, _db.author_count());
   EXPECT_TRUE(_db.update_author(&author_1));
-  EXPECT_EQ(1, _db.authors().size());
+  EXPECT_EQ(1, _db.author_count());
   EXPECT_TRUE(_db.update_author(&author_2));
-  EXPECT_EQ(2, _db.authors().size());
+  EXPECT_EQ(2, _db.author_count());
   EXPECT_TRUE(_db.update_author(&author_3));
-  EXPECT_EQ(3, _db.authors().size());
+  EXPECT_EQ(3, _db.author_count());
 }
 
 TEST_F(TEST_FIXTURE_NAME, Insert_Property)
@@ -110,13 +110,13 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Property)
   property_3.name = "James";
   property_3.value = "Kirk";
 
-  EXPECT_EQ(0, _db.properties().size());
+  EXPECT_EQ(0, _db.property_count());
   EXPECT_TRUE(_db.update_property(&property_1));
-  EXPECT_EQ(1, _db.properties().size());
+  EXPECT_EQ(1, _db.property_count());
   EXPECT_TRUE(_db.update_property(&property_2));
-  EXPECT_EQ(2, _db.properties().size());
+  EXPECT_EQ(2, _db.property_count());
   EXPECT_TRUE(_db.update_property(&property_3));
-  EXPECT_EQ(3, _db.properties().size());
+  EXPECT_EQ(3, _db.property_count());
 }
 
 TEST_F(TEST_FIXTURE_NAME, Insert_Restriction)
@@ -135,13 +135,13 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Restriction)
   restriction_3.name = "James";
   restriction_3.value = "Kirk";
 
-  EXPECT_EQ(0, _db.restrictions().size());
+  EXPECT_EQ(0, _db.restriction_count());
   EXPECT_TRUE(_db.update_restriction(&restriction_1));
-  EXPECT_EQ(1, _db.restrictions().size());
+  EXPECT_EQ(1, _db.restriction_count());
   EXPECT_TRUE(_db.update_restriction(&restriction_2));
-  EXPECT_EQ(2, _db.restrictions().size());
+  EXPECT_EQ(2, _db.restriction_count());
   EXPECT_TRUE(_db.update_restriction(&restriction_3));
-  EXPECT_EQ(3, _db.restrictions().size());
+  EXPECT_EQ(3, _db.restriction_count());
 }
 
 TEST_F(TEST_FIXTURE_NAME, Select_Restriction)
@@ -270,10 +270,10 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Author)
   EXPECT_TRUE(_db.update_author(&author_1));
   EXPECT_TRUE(_db.update_author(&author_2));
   EXPECT_TRUE(_db.update_author(&author_3));
-  EXPECT_EQ(3, _db.authors().size());
+  EXPECT_EQ(3, _db.author_count());
   EXPECT_TRUE(_db.remove_author(&author_1));
   EXPECT_TRUE(_db.remove_author(&author_2));
-  EXPECT_EQ(1, _db.authors().size());
+  EXPECT_EQ(1, _db.author_count());
 }
 
 TEST_F(TEST_FIXTURE_NAME, Remove_Property)
@@ -295,10 +295,10 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Property)
   EXPECT_TRUE(_db.update_property(&property_1));
   EXPECT_TRUE(_db.update_property(&property_2));
   EXPECT_TRUE(_db.update_property(&property_3));
-  EXPECT_EQ(3, _db.properties().size());
+  EXPECT_EQ(3, _db.property_count());
   EXPECT_TRUE(_db.remove_property(&property_1));
   EXPECT_TRUE(_db.remove_property(&property_3));
-  EXPECT_EQ(1, _db.properties().size());
+  EXPECT_EQ(1, _db.property_count());
 }
 
 TEST_F(TEST_FIXTURE_NAME, Remove_Restriction)
@@ -320,8 +320,8 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Restriction)
   EXPECT_TRUE(_db.update_restriction(&restriction_1));
   EXPECT_TRUE(_db.update_restriction(&restriction_2));
   EXPECT_TRUE(_db.update_restriction(&restriction_3));
-  EXPECT_EQ(3, _db.restrictions().size());
+  EXPECT_EQ(3, _db.restriction_count());
   EXPECT_TRUE(_db.remove_restriction(&restriction_1));
   EXPECT_TRUE(_db.remove_restriction(&restriction_3));
-  EXPECT_EQ(1, _db.restrictions().size());
+  EXPECT_EQ(1, _db.restriction_count());
 }

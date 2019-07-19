@@ -75,6 +75,21 @@ public:
   {
     return !(*this == rhs);
   }
+
+  void assign(const Author& rhs)
+  {
+    id = rhs.id;
+    first = rhs.first;
+    middle = rhs.middle;
+    last = rhs.last;
+    email = rhs.email;
+    zip = rhs.zip;
+    plus_4 = rhs.plus_4;
+    state = rhs.state;
+    country = rhs.country;
+    phone = rhs.phone;
+    organization = rhs.organization;
+  }
 };
 
 struct Property : public QObject {
@@ -86,7 +101,7 @@ public:
   int32_t id = -1;
   QString name = "";
   QString value = "";
-    
+
   Property(QObject* parent = nullptr)
     : QObject(parent)
   {
@@ -102,10 +117,17 @@ public:
     return id == rhs.id
       && name == rhs.name
       && value == rhs.value;
-  } 
+  }
   bool operator!=(const Property& rhs) const
   {
     return !(*this == rhs);
+  }
+
+  void assign(const Property& rhs)
+  {
+    id = rhs.id;
+    name = rhs.name;
+    value = rhs.value;
   }
 };
 
@@ -138,6 +160,12 @@ public:
   bool operator!=(const Restriction& rhs) const
   {
     return !(*this == rhs);
+  }
+  void assign(const Restriction& rhs)
+  {
+    id = rhs.id;
+    name = rhs.name;
+    value = rhs.value;
   }
 };
 
@@ -173,9 +201,17 @@ public:
   Q_INVOKABLE bool clear_db();
   Q_INVOKABLE bool clear_table(enum SQLite3Driver::Sqlite3Table);
 
-  Q_INVOKABLE QList<Author*> authors();
-  Q_INVOKABLE QList<Property*> properties();
-  Q_INVOKABLE QList<Restriction*> restrictions();
+  Q_INVOKABLE int author_count() const;
+  Q_INVOKABLE int property_count() const;
+  Q_INVOKABLE int restriction_count() const;
+
+  Q_INVOKABLE void authors();
+  Q_INVOKABLE void properties();
+  Q_INVOKABLE void restrictions();
+
+  Q_INVOKABLE bool next_author(Author*);
+  Q_INVOKABLE bool next_property(Property*);
+  Q_INVOKABLE bool next_restriction(Restriction*);
 
   Q_INVOKABLE bool select_author(Author*) const;
   Q_INVOKABLE bool select_property(Property*) const;
@@ -205,7 +241,7 @@ public:
 signals:
   void nameChanged();
   void pathChanged();
-  
+
   void authorsChanged();
   void propertiesChanged();
   void restictionsChanged();
@@ -222,6 +258,11 @@ private:
   QList<Author*> _authors;
   QList<Property*> _properties;
   QList<Restriction*> _restirctions;
+
+  QList<Author*>::iterator _current_author;
+  QList<Property*>::iterator _current_property;
+  QList<Restriction*>::iterator _current_restriction;
 };
 }
+
 #endif //PFC_SCENARIO_BUILDER_SQL_SQLLITE3_DRVER_H

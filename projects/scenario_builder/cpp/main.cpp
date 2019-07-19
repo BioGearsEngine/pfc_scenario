@@ -12,11 +12,11 @@ specific language governing permissions and limitations under the License.
 **************************************************************************************/
 
 #include <QApplication>
+#include <QDebug>
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
 #include <QSplashScreen>
-#include <QDebug>
-
+#include <QList>
 #include "sql/SqlLite3Driver.h"
 
 int main(int argc, char* argv[])
@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
   g the following line resolves the issue but then UI elements looks small */
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
   QApplication app(argc, argv);
-  QQuickStyle::setStyle("Material");  
+  QQuickStyle::setStyle("Material");
   QQmlApplicationEngine engine;
 
   //UI 0.1 Types
@@ -35,12 +35,12 @@ int main(int argc, char* argv[])
   //qmlRegisterType<pfc::ActorSequence>("com.ara.pfc.ScenarioModel.Actors", 1, 0, "Actors");
   //qmlRegisterType<pfc::NarativeSequence>("com.ara.pfc.ScenarioModel.Narative", 1, 0, "Naratives");
 
-  //UI 0.1 Types    
+  //UI 0.1 Types
   qmlRegisterType<pfc::SQLite3Driver>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "SQLBackend");
   qmlRegisterType<pfc::Author>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Author");
   qmlRegisterType<pfc::Property>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Property");
   qmlRegisterType<pfc::Restriction>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Restirction");
-  
+
   QPixmap pixmap("D:/biogears/pfc/scenario/build/img/sustain_splash.png");
   qDebug() << QString("%1,%2").arg(pixmap.height()).arg(pixmap.width()); //1280x768
   QSplashScreen splash(pixmap);
@@ -52,4 +52,3 @@ int main(int argc, char* argv[])
 
   return app.exec();
 }
- 
