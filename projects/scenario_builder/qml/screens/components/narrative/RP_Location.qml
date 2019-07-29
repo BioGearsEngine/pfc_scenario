@@ -88,5 +88,11 @@ ColumnLayout  {
       label : "Time in Scenario"
       placeholderText: "Time Input Field (3H20M)"
     }
-    TextArea
+    TextAreaEntry {
+      Layout.fillWidth: true
+      id: environmentEntry
+      label : "Environments"
+      required: true
+      placeholderText: "Weather Input Area"
+    }
 }
