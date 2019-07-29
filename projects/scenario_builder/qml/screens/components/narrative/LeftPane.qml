@@ -1,12 +1,56 @@
-import QtQuick 2.10
+//import QtQuick 2.10
+//import QtQuick.Window 2.2
+//import QtQuick.Layouts 1.3
+//import QtQuick.Controls 2.12
+
+import QtQuick 2.4
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.12
 
+import "../common"
+
+import com.ara.pfc.ScenarioModel.SQL 1.0
+
   Rectangle {
-  id: narrative_leftWindow
-  Layout.preferredWidth: parent.width / 2
-  Layout.fillHeight: true
-  clip: true
-  color: 'blue'
+    id: listRectangle
+    Layout.preferredWidth: parent.width / 2
+    Layout.fillHeight: true
+    Layout.margins: 5
+
+    border.color : "black"
+      FourButtonRow {
+        id: controls
+        anchors.top : listRectangle.top
+        anchors.left : listRectangle.left
+        anchors.right : listRectangle.right
+        anchors.topMargin : 2
+        anchors.rightMargin  : 5
+        anchors.leftMargin  : 5
+
+        height: 120
+
+        leftText : "Add"
+        rightText : "Remove"
+
+        mLeftText : "Move Up"
+        mRightText : "Move Down"
+      }
+
+      ListView {
+        id : listArea
+        anchors.fill : parent
+        spacing : 5
+        clip: true
+        highlightFollowsCurrentItem : true
+
+        highlight: Rectangle {
+            color: '#1111110F'
+            anchors.left : parent.left
+            anchors.right : parent.right
+            anchors.margins: 5
+        }
+
+        ScrollBar.vertical: ScrollBar { }
+      }
   }

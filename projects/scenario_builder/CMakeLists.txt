@@ -86,7 +86,7 @@ list(APPEND ${PREFIX}_INCLUDES
       PUBLIC ${${PREFIX}_INCLUDE_DIR}
       PUBLIC ${${PREFIX}_PRIVATE_INCLUDE_DIR}
       PUBLIC ${${PREFIX}_GENERATED_INCLUDE_DIR}
-      PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/xsd/cpp"
+      PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/xsd/cpp
 )
 
 
@@ -94,14 +94,14 @@ list(APPEND ${PREFIX}_INCLUDES
 set(${PREFIX}_LIBS
      ${CMAKE_THREAD_LIBS_INIT}
      ${CMAKE_DL_LIBS}
-	 Xerces::xerces
-	 Qt5::Core 
-	 Qt5::Widgets 
-	 Qt5::Gui 
-	 Qt5::Sql 
-	 Qt5::Quick 
-	 Qt5::QuickControls2 
-	 Qt5::Qml
+   Xerces::xerces
+   Qt5::Core 
+   Qt5::Widgets 
+   Qt5::Gui 
+   Qt5::Sql 
+   Qt5::Quick 
+   Qt5::QuickControls2 
+   Qt5::Qml
 )
 
 set(${PREFIX}_LIBS ${${PREFIX}_LIBS} PARENT_SCOPE)
@@ -124,19 +124,18 @@ set_target_properties(lib${PROJECT_NAME}
   CXX_STANDARD 14
   VS_DEBUGGER_WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
   )
-target_compile_definitions(lib${PROJECT_NAME} PUBLIC ${${PREFIX}_CPPFLAGS} 	 )
+target_compile_definitions(lib${PROJECT_NAME} PUBLIC ${${PREFIX}_CPPFLAGS}    )
 target_compile_definitions(lib${PROJECT_NAME} PUBLIC $<$<PLATFORM_ID:Windows>:BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE> )
 target_compile_options(lib${PROJECT_NAME} PUBLIC $<$<PLATFORM_ID:Windows>:/bigobj>  PUBLIC $<$<PLATFORM_ID:Windows>:/MP>)
 target_include_directories(lib${PROJECT_NAME}
       PUBLIC ${${PREFIX}_INCLUDE_DIR}
       PUBLIC ${${PREFIX}_PRIVATE_INCLUDE_DIR}
       PUBLIC ${${PREFIX}_GENERATED_INCLUDE_DIR}
-      PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/xsd/cpp
-	  "
+      PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/xsd/cpp"
 )
 
 if(CMAKE_COMPILER_IS_GNUCXX)
-    set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS ${${PREFIX}_LDFLAGS})
+    set_target_properties(lib${PROJECT_NAME} PROPERTIES LINK_FLAGS ${${PREFIX}_LDFLAGS})
 endif()
 
 ###############################################################################
@@ -155,7 +154,7 @@ set_target_properties(${PROJECT_NAME}
   CXX_STANDARD 14
   VS_DEBUGGER_WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
   )
-target_compile_definitions(${PROJECT_NAME} PRIVATE ${${PREFIX}_CPPFLAGS} 	 )
+target_compile_definitions(${PROJECT_NAME} PRIVATE ${${PREFIX}_CPPFLAGS}    )
 target_compile_definitions(${PROJECT_NAME} PRIVATE $<$<PLATFORM_ID:Windows>:BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE> )
 target_compile_options(${PROJECT_NAME} PRIVATE $<$<PLATFORM_ID:Windows>:/bigobj>  PRIVATE $<$<PLATFORM_ID:Windows>:/MP>)
 ###############################################################################
@@ -174,7 +173,7 @@ set_target_properties(unit_${PROJECT_NAME}
   CXX_STANDARD 14
   VS_DEBUGGER_WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
   )
-target_compile_definitions(unit_${PROJECT_NAME} PRIVATE ${${PREFIX}_CPPFLAGS} 	 )
+target_compile_definitions(unit_${PROJECT_NAME} PRIVATE ${${PREFIX}_CPPFLAGS}    )
 target_compile_definitions(unit_${PROJECT_NAME} PRIVATE $<$<PLATFORM_ID:Windows>:BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE> )
 target_compile_options(unit_${PROJECT_NAME} PRIVATE $<$<PLATFORM_ID:Windows>:/bigobj>  PRIVATE $<$<PLATFORM_ID:Windows>:/MP>)
 

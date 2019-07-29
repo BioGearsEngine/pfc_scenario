@@ -24,7 +24,7 @@ Rectangle {
   Label {
   id: name
   Layout.alignment : Qt.AlignTop
-   text: 'Retrictions'
+   text: 'Label'
    font.pointSize : 10
    color: "steelblue"
    width: 100

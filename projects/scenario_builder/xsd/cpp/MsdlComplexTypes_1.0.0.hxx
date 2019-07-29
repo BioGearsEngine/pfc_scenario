@@ -354,13 +354,13 @@ namespace msdl_1
 
 #include <xsd/cxx/xml/dom/parsing-header.hxx>
 
-#include "msdlcodes_1.0.0.hxx"
+#include "MsdlCodes_1.0.0.hxx"
 
-#include "msdlsimpletypes_1.0.0.hxx"
+#include "MsdlSimpleTypes_1.0.0.hxx"
 
-#include "extern/modelid_v2006_final.hxx"
+#include "extern/ModelID_v2006_FINAL.hxx"
 
-#include "extern/jc3iedmmeteorological.hxx"
+#include "extern/JC3IEDMMeteorological.hxx"
 
 namespace msdl_1
 {

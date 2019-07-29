@@ -16,10 +16,10 @@ specific language governing permissions and limitations under the License.
 namespace pfc {
 inline namespace sqlite3 {
 
-  constexpr char* tables[] = {
-    { "properties" },
-    { "authors" },
-    { "restrictions" }
+  constexpr char const * tables[] = {
+     "properties",
+     "authors",
+     "restrictions" 
   };
 
   constexpr auto list_tables = "SELECT * FROM sqlite_master WHERE type='table';";

@@ -5,6 +5,7 @@ import QtQuick.Controls 2.12
 
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
+
 Rectangle {
   id: root
 
@@ -16,10 +17,10 @@ Rectangle {
   property bool required : false
 
   signal editingFinished()
-  
-  Layout.preferredHeight : entryField.height 
+
+  Layout.preferredHeight : entryField.height
   Layout.rightMargin : 20
-      
+
   Property {
     id : self
     name  : "common_property"
@@ -67,3 +68,9 @@ Rectangle {
   }
 
 }
+
+
+/*##^## Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+ ##^##*/

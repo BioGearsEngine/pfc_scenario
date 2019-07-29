@@ -4,19 +4,34 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.12
 
 import "syllabus"
+import "common"
 
-RowLayout {
+import com.ara.pfc.ScenarioModel.SQL 1.0
+
+GridLayout {
   id: root
-  property var backend
+  property SQLBackend backend
 
   width: parent.width
   height: parent.height
-  spacing: 5
+  columns: 2
   
   LeftPane{
     id: syllabus_leftPane
+    backend : root.backend
+    Layout.preferredWidth: parent.width / 2
+    Layout.fillHeight: true
   }
+
   RightPane{
     id: syllabus_rightPane
+    backend : root.backend
+
+    currentIndex : syllabus_leftPane.currentIndex
+
+    Layout.fillWidth: true
+    Layout.fillHeight: true
+    Layout.topMargin : 58
+
   }
 }

@@ -292,7 +292,7 @@ namespace oo_2_0
 
 #include <xsd/cxx/xml/dom/parsing-header.hxx>
 
-#include "jc3iedm-3.1-codes-20061208.hxx"
+#include "JC3IEDM-3.1-Codes-20061208.hxx"
 
 namespace oo_2_0
 {

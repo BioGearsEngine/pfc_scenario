@@ -275,7 +275,7 @@ namespace msdl_1
 
 #include <xsd/cxx/xml/dom/parsing-header.hxx>
 
-#include "msdlcomplextypes_1.0.0.hxx"
+#include "MsdlComplexTypes_1.0.0.hxx"
 
 namespace msdl_1
 {

@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.12
 
 import "narrative"
+import "common"
 
 RowLayout {
   id: root

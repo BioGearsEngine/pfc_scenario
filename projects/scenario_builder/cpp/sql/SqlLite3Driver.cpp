@@ -11,6 +11,8 @@ specific language governing permissions and limitations under the License.
 **************************************************************************************/
 #include "SqlLite3Driver.h"
 
+#include <memory>
+
 #include <QDebug>
 #include <QMessageLogger>
 #include <QRegularExpression>

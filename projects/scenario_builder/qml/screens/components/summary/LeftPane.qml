@@ -4,17 +4,19 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.12
 
 import "../common"
+
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
 Rectangle {
-  id: root
-  property SQLBackend backend
+    id: root
+    property SQLBackend backend
 
   ColumnLayout {
-    id: summary_leftWindow
-    anchors.fill : parent
+      id: summary_leftWindow
+      anchors.fill : parent
 
     PropertyEntry {
+        id: propertyEntry
       Layout.fillWidth : true
       Layout.alignment: Qt.AlignTop
       backend : root.backend
@@ -48,7 +50,7 @@ Rectangle {
       name : "scenario_purpose"
       label : "Purpose"
       default_value : 'Enter the scenarios purpose.'
-      required : false 
+      required : false
     }
 
     RestrictionListEntry {
@@ -57,7 +59,7 @@ Rectangle {
       backend : root.backend
       height :100
     }
-    
+
     Rectangle {
         Layout.fillHeight: true
         color : "Red"
@@ -65,3 +67,10 @@ Rectangle {
     }
   }
 }
+
+
+
+/*##^## Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+ ##^##*/

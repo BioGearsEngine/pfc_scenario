@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.12
 
 import "components"
+
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
 Page {
@@ -33,6 +34,7 @@ Page {
       id: tabs
       font.pointSize: 8
       height : 12
+
       TabButton {
         text: "Summary"
         width: implicitWidth
@@ -45,6 +47,8 @@ Page {
         text: "Narrative"
         width: implicitWidth
       }
+      currentIndex : 1
+
     }
 
     StackLayout {
@@ -62,16 +66,16 @@ Page {
         backend : root.backend
       }
 
-      // //TAB:SYLLABUS
-      // ScenarioSyllabus {
-      //   id: syllabus
-      //   backend : root.backend
-      // }
-      // //TAB:NARRATIVE
-      // ScenarioNarrative{
-      //   id: narrative
-      //   backend : root.backend
-      // }
+      //TAB:SYLLABUS
+      ScenarioSyllabus {
+         id: syllabus
+         backend : root.backend
+      }
+      //TAB:NARRATIVE
+      ScenarioNarrative{
+        id: narrative
+        backend : root.backend
+      }
     }
   }
 }

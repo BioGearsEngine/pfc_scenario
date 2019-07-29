@@ -8,6 +8,10 @@
         <file>screens/components/ScenarioNarrative.qml</file>
         <file>screens/components/narrative/LeftPane.qml</file>
         <file>screens/components/narrative/RightPane.qml</file>
+        <file>screens/components/narrative/RP_Location.qml</file>
+        <file>screens/components/narrative/RP_Roles.qml</file>
+        <file>screens/components/narrative/RP_Props.qml</file>
+        <file>screens/components/narrative/RP_Events.qml</file>
         <file>screens/components/summary/LeftPane.qml</file>
         <file>screens/components/summary/RightPane.qml</file>
         <file>screens/components/syllabus/LeftPane.qml</file>
@@ -20,8 +24,18 @@
         <file>screens/components/common/ListEntry.qml</file>
         <file>screens/components/common/RestrictionListEntry.qml</file>
         <file>img/sustain_splash.png</file>
+        <file>screens/components/syllabus/LP_Objectives.qml</file>
+        <file>screens/components/syllabus/LP_Assessments.qml</file>
+        <file>screens/components/syllabus/LP_Injuries.qml</file>
+        <file>screens/components/syllabus/LP_Treatments.qml</file>
+        <file>screens/components/syllabus/LP_Equipment.qml</file>
+        <file>screens/components/syllabus/RP_Objectives.qml</file>
+        <file>screens/components/syllabus/RP_Assessments.qml</file>
+        <file>screens/components/syllabus/RP_Injuries.qml</file>
+        <file>screens/components/syllabus/RP_Treatments.qml</file>
+        <file>screens/components/syllabus/RP_Equipment.qml</file>
+        <file>screens/components/common/FourButtonRow.qml</file>
+        <file>screens/components/common/PFCButton.qml</file>
     </qresource>
-    <qresource prefix="/core">
-
-    </qresource>
+    <qresource prefix="/core"/>
 </RCC>
