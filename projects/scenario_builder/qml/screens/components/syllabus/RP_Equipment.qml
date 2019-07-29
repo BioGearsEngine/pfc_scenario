@@ -30,6 +30,14 @@ ColumnLayout  {
       required: true
       placeholderText: "Text Area (5-15 Lines)"
     }
+    TextAreaEntry {
+      Layout.fillWidth: true
+
+      id: purposeEntry
+      label : "Purpose"
+      required: true
+      placeholderText: "Text Area (5-15 Lines)"
+    }
 
     ListEntry {
       Layout.fillWidth: true

@@ -78,6 +78,170 @@ inline namespace sqlite3 {
   );
   )";
 
+  enum REFERENCE_COLUMNS {
+    REFERENCE_ID,
+    REFERENCE_KEY,
+    REFERENCE_TITLE,
+    REFERENCE_AUTHORS,
+  };
+
+  constexpr auto create_references_table = R"(
+  CREATE TABLE IF NOT EXISTS references (
+    reference_id INTEGER PRIMARY KEY,
+    name Varchar(64) NOT NULL UNIQUE,
+    key Varchar(64) NOT NULL,
+    title TEXT,
+    authors TEXT,
+    value Varchar(255)
+  );
+  )";
+
+  enum TREATMENT_COLUMNS {
+    TREATMENT_ID,
+    TREATMENT_MEDICAL_NAME,
+    TREATMENT_COMMON_NAME,
+    TREATMENT_DESCRIPTION,
+    TREATMENT_EQUIPMENT_LIST,
+    TREATMENT_REFERENCE_LIST,
+  };
+
+  constexpr auto create_treatments_table = R"(
+  CREATE TABLE IF NOT EXISTS treatments (
+    treatment_id INTEGER PRIMARY KEY,
+    medical_name Varchar(64) NOT NULL UNIQUE,
+    common_name Varchar(64) NOT NULL UNIQUE,
+    description TEXT,
+    equipment_list TEXT,
+    reference_list TEXT
+  );
+  )";
+
+  enum EQUIPMENT_COLUMNS {
+    EQUIPMENT_ID,
+    EQUIPMENT_MEDICAL_NAME,
+    EQUIPMENT_COMMON_NAME,
+    EQUIPMENT_DESCRIPTION,
+    EQUIPMENT_EQUIPMENT_LIST,
+    EQUIPMENT_REFERENCE_LIST,
+  };
+
+  constexpr auto create_equipment_table = R"(
+  CREATE TABLE IF NOT EXISTS equipments (
+    equipment_id INTEGER PRIMARY KEY,
+    name Varchar(64) NOT NULL UNIQUE,
+    purpose Varchar(64) NOT NULL UNIQUE,
+    image TEXT
+  );
+  )";
+
+  enum INJURY_COLUMNS {
+    INJURY_ID,
+    INJURY_MEDICAL_NAME,
+    INJURY_COMMON_NAME,
+    INJURY_DESCRIPTION,
+    INJURY_EQUIPMENT_LIST,
+    INJURY_REFERENCE_LIST,
+  };
+
+  constexpr auto create_injuries_table = R"(
+  CREATE TABLE IF NOT EXISTS injuries ( 
+    injury_id INTEGER PRIMARY KEY,
+    medical_name Varchar(64) NOT NULL UNIQUE,
+    common_name Varchar(64) NOT NULL UNIQUE,
+    description TEXT,
+    severity TEXT,
+    reference_list TEXT
+  );
+  )";
+
+  enum ASSESSMENT_COLUMNS {
+    ASSESSMENT_ID,
+    ASSESSMENT_NAME,
+    ASSESSMENT_DESCRIPTION,
+    ASSESSMENT_TYPE,
+    ASSESSMENT_AVAILABLE_POINTS,
+    ASSESSMENT_CRITERIA
+  };
+
+  constexpr auto create_assessments_table = R"(
+  CREATE TABLE IF NOT EXISTS assessments (
+    assessment_id INTEGER PRIMARY KEY,
+    name Varchar(64) NOT NULL UNIQUE,
+    description TEXT,
+    type TEXT,
+    available_points INTEGER,
+    criteria TEXT
+  );
+  )";
+
+  enum OBJECTIVE_COLUMNS {
+    OBJECTIVE_ID,
+    OBJECTIVE_NAME,
+    OBJECTIVE_DESCRIPTION,
+    OBJECTIVE_REFERENCE_LIST,
+  };
+
+  constexpr auto create_objectives_table = R"(
+  CREATE TABLE IF NOT EXISTS objectives (
+    objective_id INTEGER PRIMARY KEY,
+    name Varchar(64) NOT NULL UNIQUE,
+    description TEXT,
+    reference_list TEXT
+  );
+  )";
+
+  enum LOCATION_COLUMNS {
+    LOCATION_ID,
+    LOCATION_NAME,
+    LOCATION_SCENE_NAME,
+    LOCATION_TIME_OF_DAY,
+    LOCATION_ENVIRONMENT,
+  };
+
+  constexpr auto create_locations_table = R"(
+  CREATE TABLE IF NOT EXISTS locations (
+    location_id INTEGER PRIMARY KEY,
+    name Varchar(64) NOT NULL UNIQUE,
+    scene_name Varchar(64) NOT NULL UNIQUE,
+    time_of_day TEXT,
+    environment TEXT
+  );
+  )";
+
+  enum ROLE_COLUMNS {
+    ROLE_ID,
+    ROLE_DESCRIPTION,
+  };
+
+  constexpr auto create_roles_table = R"(
+  CREATE TABLE IF NOT EXISTS roles (
+    role_id INTEGER PRIMARY KEY,
+    description TEXT
+  );
+  )";
+
+  enum PROP_COLUMNS {
+    PROP_ID,
+    PROP_EQUIPMENT,
+  };
+
+  constexpr auto create_props_table = R"(
+  CREATE TABLE IF NOT EXISTS props (
+    prop_id INTEGER PRIMARY KEY,
+    equipment TEXT
+  );
+  )";
+
+  enum EVENT_COLUMNS {
+    EVENT_ID,
+  };
+
+  constexpr auto create_events_table = R"(
+  CREATE TABLE IF NOT EXISTS props (
+    event_id INTEGER PRIMARY KEY,
+  );
+  )";
+
   constexpr auto drop_all_properties = R"( DELETE FROM properties; )";
   constexpr auto drop_all_authors = R"( DELETE FROM authors; )";
   constexpr auto drop_all_restrictions = R"( DELETE FROM restrictions; )";

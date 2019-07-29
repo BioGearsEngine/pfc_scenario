@@ -15,10 +15,16 @@ ColumnLayout  {
     Layout.fillHeight: true
 
     TextEntry {
-       Layout.fillWidth: true
+      Layout.fillWidth: true
+      id: medicalNameEntry
+      label : "Medical Name"
+      placeholderText: "String Field (128 Characters )"
+    }
 
-      id: nameEntry
-      label : "Name"
+    TextEntry {
+      Layout.fillWidth: true
+      id: commonNameEntry
+      label : "Common Name"
       placeholderText: "String Field (128 Characters )"
     }
 
@@ -30,7 +36,18 @@ ColumnLayout  {
       required: true
       placeholderText: "Text Area (5-15 Lines)"
     }
-
+    ListEntry {
+      Layout.fillWidth: true
+      Layout.fillHeight : true
+      label : "Equipment"
+      model : ListModel {}
+      delegate : Rectangle {
+        Layout.fillWidth : true
+        Layout.preferredHeight : 100
+        color : "red"
+      }
+    }
+    
     ListEntry {
       Layout.fillWidth: true
       Layout.fillHeight : true
