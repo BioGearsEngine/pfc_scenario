@@ -9,10 +9,23 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 
 Rectangle {
 	id: root
-	property SQLBackend backend
-	focus: true
-	Layout.fillWidth: true
-	Layout.fillHeight: true
-	Layout.margins: 5
+    Layout.preferredWidth: parent.width / 2
+    Layout.fillHeight: true
+    Layout.margins: 5
+    
 	border.color: 'black'
+    FourButtonRow {
+      id: controls
+      anchors.top : root.top
+      anchors.left : root.left
+      anchors.right : root.right
+      anchors.topMargin : 2
+      anchors.rightMargin  : 5
+      anchors.leftMargin  : 5
+      height: 120
+      leftText : "New"
+      rightText : "Up"
+      mLeftText : "Down"
+      mRightText : "Delete"
+    }
 }
