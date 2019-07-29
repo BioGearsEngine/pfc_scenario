@@ -84,8 +84,9 @@ ColumnLayout  {
     }
     TextEntry {
       Layout.fillWidth: true
-      id: locationNameEntry
+      id: timeScenarioEntry
       label : "Time in Scenario"
       placeholderText: "Time Input Field (3H20M)"
     }
+    TextArea
 }
