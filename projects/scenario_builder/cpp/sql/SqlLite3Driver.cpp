@@ -95,7 +95,9 @@ SQLite3Driver::SQLite3Driver(const std::string& dbName, const std::string& path,
     throw std::runtime_error("Database Creation Failure");
   }
   //TODO: Add Logic for detecting if this is required
-  initialize_db();
+  if (!initialize_db()) {
+    QSqlError("Unable to propertly initialize db!");
+  }
 }
 //------------------------------------------------------------------------------
 SQLite3Driver::~SQLite3Driver()
@@ -132,24 +134,20 @@ void SQLite3Driver::close()
 bool SQLite3Driver::initialize_db()
 {
   QSqlQuery query(_db);
-  if (_db.isOpen()) {
+  std::vector<char const*> create_statments = {
+    sqlite3::create_properties_table,
+    sqlite3::create_authors_table,
+    sqlite3::create_restrictions_table,
+    sqlite3::create_objectives_table
+  };
 
-    query.prepare(sqlite3::create_properties_table);
-    if (!query.exec()) {
-      qCritical() << query.lastError();
-      return false;
-    }
-
-    query.prepare(sqlite3::create_authors_table);
-    if (!query.exec()) {
-      qCritical() << query.lastError();
-      return false;
-    }
-
-    query.prepare(sqlite3::create_restrictions_table);
-    if (!query.exec()) {
-      qCritical() << query.lastError();
-      return false;
+  if (_db.open()) {
+    for (auto statment : create_statments) {
+      query.prepare(statment);
+      if (!query.exec()) {
+        qCritical() << query.lastError();
+        return false;
+      }
     }
     return true;
   }
@@ -355,7 +353,7 @@ bool SQLite3Driver::next_author(Author* author)
   if (_current_author == _authors.end() || _authors.empty()) {
     return false;
   }
-  author->assign( *(*_current_author) ); 
+  author->assign(*(*_current_author));
   ++_current_author;
   return true;
 }
@@ -376,7 +374,7 @@ bool SQLite3Driver::next_restriction(Restriction* restriction)
     return false;
   }
   restriction->assign(*(*_current_restriction));
-    ++_current_restriction;
+  ++_current_restriction;
 
   return true;
 }
@@ -481,10 +479,10 @@ bool SQLite3Driver::select_objective(Objective* objective) const
     QSqlQuery query(_db);
     QSqlRecord record;
     if (objective->id != -1) {
-      query.prepare(sqlite3::select_restriction_by_id);
+      query.prepare(sqlite3::select_objective_by_id);
       query.bindValue(":id", objective->id);
     } else if (!objective->name.isEmpty()) {
-      query.prepare(sqlite3::select_restriction_by_name);
+      query.prepare(sqlite3::select_objective_by_name);
       query.bindValue(":name", objective->name);
     } else {
       qWarning() << "Provided Propertiy has no id or name one is required";
@@ -494,7 +492,7 @@ bool SQLite3Driver::select_objective(Objective* objective) const
       while (query.next()) {
         record = query.record();
         assign_objective(record, *objective);
-      }
+      }      
       return true;
     }
     qWarning() << query.lastError();
@@ -509,6 +507,7 @@ bool SQLite3Driver::update_author(Author* author)
   if (_db.isOpen()) {
     if (!author->email.isEmpty()) {
       QSqlQuery query{ _db };
+
       query.prepare(sqlite3::insert_or_update_authors);
       query.bindValue(":name_first", author->first);
       query.bindValue(":name_last", author->last);
@@ -612,6 +611,7 @@ bool SQLite3Driver::update_objective(Objective* objective)
       query.prepare(sqlite3::insert_or_update_objectives);
       query.bindValue(":name", objective->name);
       query.bindValue(":description", objective->description);
+
       QString ref_list = "";
       for (auto& val : objective->references) {
         ref_list += QString::number(val) + ";";

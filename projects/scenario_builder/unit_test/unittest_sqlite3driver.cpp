@@ -44,7 +44,6 @@ void TEST_FIXTURE_NAME::SetUp()
 
 void TEST_FIXTURE_NAME::TearDown()
 {
-
 }
 
 TEST_F(TEST_FIXTURE_NAME, Constructor)
@@ -65,7 +64,7 @@ TEST_F(TEST_FIXTURE_NAME, Constructor)
   auto file2 = std::ofstream("Scenario.sqlite", std::ostream::in);
   EXPECT_FALSE(file2.is_open());
 }
-
+//--------------------INSERTS------------------------------------------
 TEST_F(TEST_FIXTURE_NAME, Insert_Author)
 {
   using namespace pfc;
@@ -128,10 +127,10 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Restriction)
 
   restriction_1.name = "Solid";
   restriction_1.value = "Snake";
-  
+
   restriction_2.name = "Rocky";
   restriction_2.value = "Balboa";
-  
+
   restriction_3.name = "James";
   restriction_3.value = "Kirk";
 
@@ -144,6 +143,34 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Restriction)
   EXPECT_EQ(3, _db.restriction_count());
 }
 
+TEST_F(TEST_FIXTURE_NAME, Insert_Objective)
+{
+  using namespace pfc;
+  Objective objective_1;
+  Objective objective_2;
+  Objective objective_3;
+
+  objective_1.name = "Kill the Troll";
+  objective_1.description = "There is a troll in the forest in a great big whole who has some gold. Kill it";
+  objective_1.references = { 1, 2, 3 };
+
+  objective_2.name = "Steal the Trolls Gold";
+  objective_2.description = "Gold is really dense. Its like crazy heavy bring a levetation spell.";
+  objective_2.references = { 4, 5, 6 };
+
+  objective_3.name = "Return the Gold to the Quest Giver. Kill the Quest Giver";
+  objective_3.description = "If we want to keep the gold we need to steal from the quest giver, but he will need to die before we can do that.";
+  objective_3.references = { 7, 8, 9 };
+
+  EXPECT_EQ(0, _db.objective_count());
+  EXPECT_TRUE(_db.update_objective(&objective_1));
+  EXPECT_EQ(1, _db.objective_count());
+  EXPECT_TRUE(_db.update_objective(&objective_2));
+  EXPECT_EQ(2, _db.objective_count());
+  EXPECT_TRUE(_db.update_objective(&objective_3));
+  EXPECT_EQ(3, _db.objective_count());
+}
+//--------------------SELECT------------------------------------------
 TEST_F(TEST_FIXTURE_NAME, Select_Restriction)
 {
   using namespace pfc;
@@ -172,7 +199,6 @@ TEST_F(TEST_FIXTURE_NAME, Select_Restriction)
   restriction_2.id = 2;
   EXPECT_EQ(restriction_2, name);
 }
-
 
 TEST_F(TEST_FIXTURE_NAME, Select_Property)
 {
@@ -229,7 +255,6 @@ TEST_F(TEST_FIXTURE_NAME, Select_Author)
   author_2.organization = "PFC";
   author_2.phone = "222-555-1111";
 
-
   EXPECT_TRUE(_db.update_author(&author_1));
   EXPECT_TRUE(_db.update_author(&author_2));
 
@@ -248,6 +273,48 @@ TEST_F(TEST_FIXTURE_NAME, Select_Author)
   EXPECT_EQ(author_2, email);
 }
 
+TEST_F(TEST_FIXTURE_NAME, Select_Objective)
+{
+  using namespace pfc;
+  Objective objective_1;
+  Objective objective_2;
+  Objective objective_3;
+
+  objective_1.name = "Kill the Troll";
+  objective_1.description = "There is a troll in the forest in a great big whole who has some gold. Kill it";
+  objective_1.references = { 1, 2, 3 };
+
+  objective_2.name = "Steal the Trolls Gold";
+  objective_2.description = "Gold is really dense. Its like crazy heavy bring a levetation spell.";
+  objective_2.references = { 4, 5, 6 };
+
+  objective_3.name = "Return the Gold to the Quest Giver. Kill the Quest Giver";
+  objective_3.description = "If we want to keep the gold we need to steal from the quest giver, but he will need to die before we can do that.";
+  objective_3.references = { 7, 8, 9 };
+
+  EXPECT_EQ(0, _db.objective_count());
+  EXPECT_TRUE(_db.update_objective(&objective_1));
+  EXPECT_EQ(1, _db.objective_count());
+  EXPECT_TRUE(_db.update_objective(&objective_2));
+  EXPECT_EQ(2, _db.objective_count());
+  EXPECT_TRUE(_db.update_objective(&objective_3));
+  EXPECT_EQ(3, _db.objective_count());
+
+  Objective id;
+  Objective name;
+
+  id.id = 1;
+  name.name = "Return the Gold to the Quest Giver. Kill the Quest Giver";
+
+  _db.select_objective(&id);
+  _db.select_objective(&name);
+
+  objective_1.id = 1;
+  EXPECT_EQ(objective_1, id);
+  objective_3.id = 3;
+  EXPECT_EQ(objective_3, name);
+}
+//--------------------REMOVE------------------------------------------
 TEST_F(TEST_FIXTURE_NAME, Remove_Author)
 {
   using namespace pfc;
@@ -324,4 +391,32 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Restriction)
   EXPECT_TRUE(_db.remove_restriction(&restriction_1));
   EXPECT_TRUE(_db.remove_restriction(&restriction_3));
   EXPECT_EQ(1, _db.restriction_count());
+}
+
+TEST_F(TEST_FIXTURE_NAME, Remove_Objective)
+{
+  using namespace pfc;
+  Objective objective_1;
+  Objective objective_2;
+  Objective objective_3;
+
+  objective_1.name = "Kill the Troll";
+  objective_1.description = "There is a troll in the forest in a great big whole who has some gold. Kill it";
+  objective_1.references = { 1, 2, 3 };
+
+  objective_2.name = "Steal the Trolls Gold";
+  objective_2.description = "Gold is really dense. Its like crazy heavy bring a levetation spell.";
+  objective_2.references = { 4, 5, 6 };
+
+  objective_3.name = "Return the Gold to the Quest Giver. Kill the Quest Giver";
+  objective_3.description = "If we want to keep the gold we need to steal from the quest giver, but he will need to die before we can do that.";
+  objective_3.references = { 7, 8, 9 };
+
+  EXPECT_TRUE(_db.update_objective(&objective_1));
+  EXPECT_TRUE(_db.update_objective(&objective_2));
+  EXPECT_TRUE(_db.update_objective(&objective_3));
+  EXPECT_EQ(3, _db.objective_count());
+  EXPECT_TRUE(_db.remove_objective(&objective_1));
+  EXPECT_TRUE(_db.remove_objective(&objective_3));
+  EXPECT_EQ(1, _db.objective_count());
 }

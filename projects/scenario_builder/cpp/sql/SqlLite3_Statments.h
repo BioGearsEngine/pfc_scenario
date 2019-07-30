@@ -258,8 +258,8 @@ inline namespace sqlite3 {
   constexpr auto drop_all_restrictions = R"( DELETE FROM restrictions; )";
   constexpr auto drop_all_objectives = R"( DELETE FROM objectives; )";
   
-  constexpr auto count_properties = R"( SELECT COUNT(author_id) FROM properties; )";
-  constexpr auto count_authors = R"( SELECT COUNT(property_id) FROM authors; )";
+  constexpr auto count_properties = R"( SELECT COUNT(property_id) FROM properties; )";
+  constexpr auto count_authors = R"( SELECT COUNT(author_id) FROM authors; )";
   constexpr auto count_restrictions = R"( SELECT COUNT(restriction_id) FROM restrictions; )";
   constexpr auto count_objectives = R"( SELECT COUNT(objective_id) FROM objectives; )";
 
@@ -275,7 +275,7 @@ inline namespace sqlite3 {
   constexpr auto select_restriction_by_id
     = R"( SELECT * FROM restrictions WHERE restriction_id = :id ; )";
   constexpr auto select_objective_by_id
-    = R"( SELECT * FROM restrictions WHERE restriction_id = :id ; )";
+    = R"( SELECT * FROM objectives WHERE objective_id = :id ; )";
 
   constexpr auto select_property_by_name
     = R"( SELECT * FROM properties WHERE name = :name; )";
@@ -284,7 +284,7 @@ inline namespace sqlite3 {
   constexpr auto select_restriction_by_name
     = R"( SELECT * FROM restrictions WHERE name = :name; )";
   constexpr auto select_objective_by_name
-    = R"( SELECT * FROM objective WHERE name = :name; )";
+    = R"( SELECT * FROM objectives WHERE name = :name; )";
 
 
   constexpr auto insert_or_update_first_author
@@ -297,7 +297,7 @@ inline namespace sqlite3 {
     constexpr auto insert_or_update_authors
     = R"( INSERT  INTO authors
                  (  name_first,  name_last,  email,  zipcode,  state,  country,  phone,  organization)
-          VALUES ( :name_first, :name_last, :email, :zipcode, :state, :country, :p  hone, : organization)
+          VALUES ( :name_first, :name_last, :email, :zipcode, :state, :country, :phone, :organization)
           ON CONFLICT(email) 
           DO UPDATE SET 
                      name_first = excluded.name_first
@@ -327,12 +327,12 @@ inline namespace sqlite3 {
 
     constexpr auto insert_or_update_objectives
     = R"( INSERT INTO objectives 
-          (name,description,references)
+          (name,description,reference_list)
           VALUES (:name, :description, :references)
           ON CONFLICT (name)
-          DO UPDATE SET value = excluded.value
+          DO UPDATE SET name = excluded.name
                        , description = excluded.description
-                       , references = excluded.references
+                       , reference_list = excluded.reference_list
          ;
          )";
 
