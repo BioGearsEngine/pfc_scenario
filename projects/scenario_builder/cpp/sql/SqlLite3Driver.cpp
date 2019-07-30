@@ -51,18 +51,32 @@ inline void assign_author(const QSqlRecord& record, Author& author)
   author.phone = record.value(AUTHOR_PHONE).toString();
   author.organization = record.value(AUTHOR_ORGANIZATION).toString();
 }
-
+//------------------------------------------------------------------------------
 inline void assign_property(const QSqlRecord& record, Property& property)
 {
   property.id = record.value(PROPERTY_ID).toInt();
   property.name = record.value(PROPERTY_NAME).toString();
   property.value = record.value(PROPERTY_VALUE).toString();
 }
+//------------------------------------------------------------------------------
 inline void assign_restriction(const QSqlRecord& record, Restriction& restriction)
 {
   restriction.id = record.value(RESTRICTION_ID).toInt();
   restriction.name = record.value(RESTRICTION_NAME).toString();
   restriction.value = record.value(RESTRICTION_VALUE).toString();
+}
+//------------------------------------------------------------------------------
+inline void assign_objective(const QSqlRecord& record, Objective& restriction)
+{
+  restriction.id = record.value(OBJECTIVE_ID).toInt();
+  restriction.name = record.value(OBJECTIVE_NAME).toString();
+  restriction.description = record.value(OBJECTIVE_DESCRIPTION).toString();
+  auto ref_list_s = record.value(OBJECTIVE_REFERENCE_LIST).toString();
+  auto ref_list = ref_list_s.split(";");
+  restriction.references.clear();
+  for (auto& val : ref_list) {
+    restriction.references.push_back(val.toInt());
+  }
 }
 //------------------------------------------------------------------------------
 SQLite3Driver::SQLite3Driver(QObject* parent)
@@ -152,6 +166,8 @@ bool SQLite3Driver::clear_db()
     query.bindValue(":table", tables[PROPERTIES]);
     iResult &= query.exec();
     query.bindValue(":table", tables[RESTRICTIONS]);
+    iResult &= query.exec();
+    query.bindValue(":table", tables[OBJECTIVES]);
     return query.exec() && iResult;
   }
   return false;
@@ -213,7 +229,23 @@ int SQLite3Driver::restriction_count() const
   }
   return -1;
 }
+//------------------------------------------------------------------------------
+int SQLite3Driver::objective_count() const
 
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_objectives);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
 //------------------------------------------------------------------------------
 int SQLite3Driver::property_count() const
 {
@@ -230,38 +262,6 @@ int SQLite3Driver::property_count() const
   }
   return -1;
 }
-//------------------------------------------------------------------------------
-bool SQLite3Driver::next_author(Author* author)
-{
-  if (_current_author == _authors.end() || _authors.empty()) {
-    return false;
-  }
-  author->assign( *(*_current_author) ); 
-  ++_current_author;
-  return true;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::next_property(Property* property)
-{
-  if (_current_property == _properties.end() || _properties.empty()) {
-    return false;
-  }
-  property->assign(*(*_current_property));
-  ++_current_property;
-  return true;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::next_restriction(Restriction* restriction)
-{
-  if (_current_restriction == _restirctions.end() || _restirctions.empty()) {
-    return false;
-  }
-  restriction->assign(*(*_current_restriction));
-    ++_current_restriction;
-
-  return true;
-}
-
 //------------------------------------------------------------------------------
 void SQLite3Driver::authors()
 {
@@ -326,6 +326,70 @@ void SQLite3Driver::restrictions()
     _current_restriction = _restirctions.begin();
     emit restictionsChanged();
   }
+}
+//------------------------------------------------------------------------------
+void SQLite3Driver::objectives()
+{
+  qDeleteAll(_objectives);
+  _objectives.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_restrictions);
+    query.exec();
+    while (query.next()) {
+      auto objective = std::make_unique<pfc::Objective>();
+      auto record = query.record();
+      assert(record.count() == 4);
+      assign_objective(record, *objective);
+      _objectives.push_back(objective.release());
+    }
+    _current_objective = _objectives.begin();
+    emit objectivesChanged();
+  }
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::next_author(Author* author)
+{
+  if (_current_author == _authors.end() || _authors.empty()) {
+    return false;
+  }
+  author->assign( *(*_current_author) ); 
+  ++_current_author;
+  return true;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::next_property(Property* property)
+{
+  if (_current_property == _properties.end() || _properties.empty()) {
+    return false;
+  }
+  property->assign(*(*_current_property));
+  ++_current_property;
+  return true;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::next_restriction(Restriction* restriction)
+{
+  if (_current_restriction == _restirctions.end() || _restirctions.empty()) {
+    return false;
+  }
+  restriction->assign(*(*_current_restriction));
+    ++_current_restriction;
+
+  return true;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::next_objective(Objective* objective)
+{
+  if (_current_objective == _objectives.end() || _objectives.empty()) {
+    return false;
+  }
+  objective->assign(*(*_current_objective));
+  ++_current_objective;
+
+  return true;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::select_author(Author* author) const
@@ -401,6 +465,35 @@ bool SQLite3Driver::select_restriction(Restriction* restriction) const
       while (query.next()) {
         record = query.record();
         assign_restriction(record, *restriction);
+      }
+      return true;
+    }
+    qWarning() << query.lastError();
+  }
+  qWarning() << "No Databsae connection";
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::select_objective(Objective* objective) const
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    QSqlRecord record;
+    if (objective->id != -1) {
+      query.prepare(sqlite3::select_restriction_by_id);
+      query.bindValue(":id", objective->id);
+    } else if (!objective->name.isEmpty()) {
+      query.prepare(sqlite3::select_restriction_by_name);
+      query.bindValue(":name", objective->name);
+    } else {
+      qWarning() << "Provided Propertiy has no id or name one is required";
+      return false;
+    }
+    if (query.exec()) {
+      while (query.next()) {
+        record = query.record();
+        assign_objective(record, *objective);
       }
       return true;
     }
@@ -510,6 +603,34 @@ bool SQLite3Driver::update_restriction(Restriction* restriction)
   return false;
 }
 //------------------------------------------------------------------------------
+bool SQLite3Driver::update_objective(Objective* objective)
+{
+
+  if (_db.isOpen()) {
+    if (!objective->name.isEmpty()) {
+      QSqlQuery query{ _db };
+      query.prepare(sqlite3::insert_or_update_objectives);
+      query.bindValue(":name", objective->name);
+      query.bindValue(":description", objective->description);
+      QString ref_list = "";
+      for (auto& val : objective->references) {
+        ref_list += QString::number(val) + ";";
+      }
+      ref_list.chop(1);
+
+      query.bindValue(":references", ref_list);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+
+      return true;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+//------------------------------------------------------------------------------
 bool SQLite3Driver::remove_author(Author* author)
 {
   if (_db.isOpen()) {
@@ -572,6 +693,31 @@ bool SQLite3Driver::remove_restriction(Restriction* restriction)
       query.bindValue(":name", restriction->name);
     } else {
       qWarning() << "Provided Restriction has no id or name one is required";
+      return false;
+    }
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    return true;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::remove_objective(Objective* objective)
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (objective->id != -1) {
+      query.prepare(sqlite3::delete_objective_by_id);
+      query.bindValue(":id", objective->id);
+    } else if (!objective->name.isEmpty()) {
+      query.prepare(sqlite3::delete_objective_by_name);
+      query.bindValue(":name", objective->name);
+    } else {
+      qWarning() << "Provided Objective has no id or name one is required";
       return false;
     }
     if (!query.exec()) {

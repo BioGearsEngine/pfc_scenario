@@ -91,7 +91,7 @@ public:
     organization = rhs.organization;
   }
 };
-
+//----End Author
 struct Property : public QObject {
   Q_OBJECT
   Q_PROPERTY(int property_id MEMBER id)
@@ -130,7 +130,7 @@ public:
     value = rhs.value;
   }
 };
-
+//----End Property
 struct Restriction : public QObject {
   Q_OBJECT
   Q_PROPERTY(int restriction_id MEMBER id)
@@ -168,6 +168,49 @@ public:
     value = rhs.value;
   }
 };
+//----End Restriction
+struct Objective : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int objective_id MEMBER id)
+  Q_PROPERTY(QString name MEMBER name)
+  Q_PROPERTY(QString description MEMBER description)
+  Q_PROPERTY(QList<int> references MEMBER references)
+public:
+  int32_t id = -1;
+  QString name = "";
+  QString description = "";
+  QList<int> references;
+
+  Objective(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  Objective(const Objective&) = delete;
+  Objective(Objective&&) = delete;
+  Objective& operator=(const Objective&) = delete;
+  Objective& operator=(Objective&&) = delete;
+  virtual ~Objective() = default;
+
+  bool operator==(const Objective& rhs) const
+  {
+    return id == rhs.id
+      && name == rhs.name
+      && description == rhs.description
+      && references == rhs.references;
+  }
+  bool operator!=(const Objective& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const Objective& rhs)
+  {
+    id = rhs.id;
+    name = rhs.name;
+    description = rhs.description;
+    references = rhs.references;
+  }
+};
+//----End Objective
 
 class SQLite3Driver : public QObject {
 public:
@@ -178,9 +221,19 @@ public:
 
 public:
   enum Sqlite3Table {
+    PROPERTIES,
     AUTHORS,
     RESTRICTIONS,
-    PROPERTIES,
+    REFERENCES,
+    TREATMENTS,
+    EQUIPMENTS,
+    INJURIES,
+    ASSESSMENTS,
+    OBJECTIVES,
+    LOCATIONS,
+    ROLES,
+    PROPS,
+    EVENTS
   };
 
   Q_ENUM(Sqlite3Table)
@@ -204,27 +257,33 @@ public:
   Q_INVOKABLE int author_count() const;
   Q_INVOKABLE int property_count() const;
   Q_INVOKABLE int restriction_count() const;
+  Q_INVOKABLE int objective_count() const;
 
   Q_INVOKABLE void authors();
   Q_INVOKABLE void properties();
   Q_INVOKABLE void restrictions();
+  Q_INVOKABLE void objectives();
 
   Q_INVOKABLE bool next_author(Author*);
   Q_INVOKABLE bool next_property(Property*);
   Q_INVOKABLE bool next_restriction(Restriction*);
+  Q_INVOKABLE bool next_objective(Objective*);
 
   Q_INVOKABLE bool select_author(Author*) const;
   Q_INVOKABLE bool select_property(Property*) const;
   Q_INVOKABLE bool select_restriction(Restriction*) const;
+  Q_INVOKABLE bool select_objective(Objective*) const;
 
   Q_INVOKABLE bool update_author(Author*);
   Q_INVOKABLE bool update_first_author(Author*);
   Q_INVOKABLE bool update_property(Property*);
   Q_INVOKABLE bool update_restriction(Restriction*);
+  Q_INVOKABLE bool update_objective(Objective*);
 
   Q_INVOKABLE bool remove_author(Author*);
   Q_INVOKABLE bool remove_property(Property*);
   Q_INVOKABLE bool remove_restriction(Restriction*);
+  Q_INVOKABLE bool remove_objective(Objective*);
 
   Q_INVOKABLE int raw_error() const { return _db.lastError().type(); };
   Q_INVOKABLE QString error_message() const { return _db.lastError().text(); }
@@ -245,6 +304,7 @@ signals:
   void authorsChanged();
   void propertiesChanged();
   void restictionsChanged();
+  void objectivesChanged();
 
 private:
   bool open();
@@ -258,10 +318,12 @@ private:
   QList<Author*> _authors;
   QList<Property*> _properties;
   QList<Restriction*> _restirctions;
+  QList<Objective*> _objectives;
 
   QList<Author*>::iterator _current_author;
   QList<Property*>::iterator _current_property;
   QList<Restriction*>::iterator _current_restriction;
+  QList<Objective*>::iterator _current_objective;
 };
 }
 

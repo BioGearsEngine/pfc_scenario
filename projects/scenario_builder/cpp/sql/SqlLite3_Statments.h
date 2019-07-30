@@ -256,21 +256,25 @@ inline namespace sqlite3 {
   constexpr auto drop_all_properties = R"( DELETE FROM properties; )";
   constexpr auto drop_all_authors = R"( DELETE FROM authors; )";
   constexpr auto drop_all_restrictions = R"( DELETE FROM restrictions; )";
-
+  constexpr auto drop_all_objectives = R"( DELETE FROM objectives; )";
   
   constexpr auto count_properties = R"( SELECT COUNT(author_id) FROM properties; )";
   constexpr auto count_authors = R"( SELECT COUNT(property_id) FROM authors; )";
   constexpr auto count_restrictions = R"( SELECT COUNT(restriction_id) FROM restrictions; )";
+  constexpr auto count_objectives = R"( SELECT COUNT(objective_id) FROM objectives; )";
 
   constexpr auto select_all_properties = R"( SELECT * FROM properties; )";
   constexpr auto select_all_authors = R"( SELECT * FROM authors; )";
   constexpr auto select_all_restrictions = R"( SELECT * FROM restrictions; )";
+  constexpr auto select_all_objectives = R"( SELECT * FROM objectives; )";
 
   constexpr auto select_property_by_id
     = R"( SELECT * FROM properties WHERE property_id = :id ; )";
   constexpr auto select_author_by_id
     = R"( SELECT * FROM authors WHERE author_id = :id ; )";
   constexpr auto select_restriction_by_id
+    = R"( SELECT * FROM restrictions WHERE restriction_id = :id ; )";
+  constexpr auto select_objective_by_id
     = R"( SELECT * FROM restrictions WHERE restriction_id = :id ; )";
 
   constexpr auto select_property_by_name
@@ -279,6 +283,8 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM authors WHERE email = :email; )";
   constexpr auto select_restriction_by_name
     = R"( SELECT * FROM restrictions WHERE name = :name; )";
+  constexpr auto select_objective_by_name
+    = R"( SELECT * FROM objective WHERE name = :name; )";
 
 
   constexpr auto insert_or_update_first_author
@@ -319,6 +325,16 @@ inline namespace sqlite3 {
           DO UPDATE SET value = excluded.value;
          )";
 
+    constexpr auto insert_or_update_objectives
+    = R"( INSERT INTO objectives 
+          (name,description,references)
+          VALUES (:name, :description, :references)
+          ON CONFLICT (name)
+          DO UPDATE SET value = excluded.value
+                       , description = excluded.description
+                       , references = excluded.references
+         ;
+         )";
 
   //constexpr auto insert_into_authors
   //  = R"( INSERT INTO authors 
@@ -342,6 +358,8 @@ inline namespace sqlite3 {
     = R"( DELETE FROM authors WHERE author_id = :id; )";
   constexpr auto delete_restriction_by_id
     = R"( DELETE FROM restrictions WHERE restriction_id = :id; )";
+  constexpr auto delete_objective_by_id
+    = R"( DELETE FROM objectives WHERE objective_id = :id; )";
 
   constexpr auto delete_property_by_name
     = R"( DELETE FROM properties WHERE name = :name; )";
@@ -349,6 +367,8 @@ inline namespace sqlite3 {
     = R"( DELETE FROM authors WHERE email = :email; )";
   constexpr auto delete_restriction_by_name
     = R"( DELETE FROM restrictions WHERE name = :name; )";
+  constexpr auto delete_objective_by_name
+    = R"( DELETE FROM objectives WHERE name = :name; )";
 }
 }
 
