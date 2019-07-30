@@ -4,13 +4,13 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.12
 
   Rectangle {
-  id: summary_rightWindow
+  id: narrative_rightWindow
   clip: true
   Layout.fillWidth: true
   Layout.fillHeight: true
-
+  Layout.margins: 5
   ColumnLayout {
-    anchors.fill: summary_rightWindow
+    anchors.fill: narrative_rightWindow
     width: parent.width
     height: parent.height
     TabBar {

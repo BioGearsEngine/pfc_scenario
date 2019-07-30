@@ -47,40 +47,45 @@ ColumnLayout  {
       placeholderText: "String Field (128 Characters)"
     }
 
-    Row {
-    	Layout.fillWidth: true
-    	id: timeOfDayEntry
-    	height: locationNameEntry.height
-    	Rectangle {
-    		width: 20 + hourTime.up.implicitIndicatorWidth
-    		height: parent.height
-    		Text {
-    			text: "Time of Day"
-    		}
-    	}
-    	SpinBox {
-    		id: hourTime
-    		width: parent.width / 3
-    		value: 23
-    		from: 0
-    		to: 23
-    		editable: true
-    	}
-    	Rectangle {
-    		width: 20
-    		height: parent.height
-    		Text {
-    			text: ":"
-    		}
-    	}
-    	SpinBox {
-    		id: minuteTime
-    		width: parent.width / 3
-    		from: 0
-    		to: 59
-    		value: 59
-    		editable: true
-    	}
+//    Row {
+//    	Layout.fillWidth: true
+//    	id: timeOfDayEntry
+//    	height: locationNameEntry.height
+//    	Rectangle {
+//    		width: 20 + hourTime.up.implicitIndicatorWidth
+//    		height: parent.height
+//    		Text {
+//    			text: "Time of Day"
+//    		}
+//    	}
+//    	SpinBox {
+//    		id: hourTime
+//    		width: parent.width / 3
+//    		value: 23
+//    		from: 0
+//    		to: 23
+//    		editable: true
+//    	}
+//    	Rectangle {
+//    		width: 20
+//    		height: parent.height
+//    		Text {
+//    			text: ":"
+//    		}
+//    	}
+//    	SpinBox {
+//    		id: minuteTime
+//    		width: parent.width / 3
+//    		from: 0
+//    		to: 59
+//    		value: 59
+//    		editable: true
+//    	}
+//    }
+    TimeEntry {
+      Layout.fillWidth: true
+      id: timeOfDayEntry
+      label : "Time of Day"
     }
     TextEntry {
       Layout.fillWidth: true
