@@ -10,7 +10,9 @@ ListEntry {
   id: root
   property SQLBackend backend
 
-  Restirction {
+  label: "Restriction"
+
+  Restriction {
     id: self
     restriction_id : -1
   }

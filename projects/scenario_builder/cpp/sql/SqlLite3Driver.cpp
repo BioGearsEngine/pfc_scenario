@@ -306,8 +306,8 @@ void SQLite3Driver::properties()
 //------------------------------------------------------------------------------
 void SQLite3Driver::restrictions()
 {
-  qDeleteAll(_restirctions);
-  _restirctions.clear();
+  qDeleteAll(_restrictions);
+  _restrictions.clear();
 
   if (_db.isOpen()) {
 
@@ -319,9 +319,9 @@ void SQLite3Driver::restrictions()
       auto record = query.record();
       assert(record.count() == 3);
       assign_restriction(record, *restriction);
-      _restirctions.push_back(restriction.release());
+      _restrictions.push_back(restriction.release());
     }
-    _current_restriction = _restirctions.begin();
+    _current_restriction = _restrictions.begin();
     emit restictionsChanged();
   }
 }
@@ -370,7 +370,7 @@ bool SQLite3Driver::next_property(Property* property)
 //------------------------------------------------------------------------------
 bool SQLite3Driver::next_restriction(Restriction* restriction)
 {
-  if (_current_restriction == _restirctions.end() || _restirctions.empty()) {
+  if (_current_restriction == _restrictions.end() || _restrictions.empty()) {
     return false;
   }
   restriction->assign(*(*_current_restriction));
@@ -412,7 +412,7 @@ bool SQLite3Driver::select_author(Author* author) const
     }
     return true;
   }
-  qWarning() << "No Databsae connection";
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
@@ -429,7 +429,7 @@ bool SQLite3Driver::select_property(Property* property) const
       query.prepare(sqlite3::select_property_by_name);
       query.bindValue(":name", property->name);
     } else {
-      qWarning() << "Provided Propertiy has no id or name one is required";
+      qWarning() << "Provided Property has no id or name one is required";
       return false;
     }
     query.exec();
@@ -439,7 +439,7 @@ bool SQLite3Driver::select_property(Property* property) const
     }
     return true;
   }
-  qWarning() << "No Databsae connection";
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
@@ -456,7 +456,7 @@ bool SQLite3Driver::select_restriction(Restriction* restriction) const
       query.prepare(sqlite3::select_restriction_by_name);
       query.bindValue(":name", restriction->name);
     } else {
-      qWarning() << "Provided Propertiy has no id or name one is required";
+      qWarning() << "Provided Property has no id or name one is required";
       return false;
     }
     if (query.exec()) {
@@ -468,7 +468,7 @@ bool SQLite3Driver::select_restriction(Restriction* restriction) const
     }
     qWarning() << query.lastError();
   }
-  qWarning() << "No Databsae connection";
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
@@ -485,7 +485,7 @@ bool SQLite3Driver::select_objective(Objective* objective) const
       query.prepare(sqlite3::select_objective_by_name);
       query.bindValue(":name", objective->name);
     } else {
-      qWarning() << "Provided Propertiy has no id or name one is required";
+      qWarning() << "Provided Property has no id or name one is required";
       return false;
     }
     if (query.exec()) {
@@ -497,7 +497,7 @@ bool SQLite3Driver::select_objective(Objective* objective) const
     }
     qWarning() << query.lastError();
   }
-  qWarning() << "No Databsae connection";
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------

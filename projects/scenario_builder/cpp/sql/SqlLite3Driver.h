@@ -317,7 +317,7 @@ private:
 
   QList<Author*> _authors;
   QList<Property*> _properties;
-  QList<Restriction*> _restirctions;
+  QList<Restriction*> _restrictions;
   QList<Objective*> _objectives;
 
   QList<Author*>::iterator _current_author;

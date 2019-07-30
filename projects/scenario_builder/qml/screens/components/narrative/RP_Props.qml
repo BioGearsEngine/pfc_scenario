@@ -22,7 +22,6 @@ Rectangle {
       anchors.topMargin : 2
       anchors.rightMargin  : 5
       anchors.leftMargin  : 5
-
       firstButtonText : "New"
       fourthButtonText : "Up"
       secondButtonText : "Down"

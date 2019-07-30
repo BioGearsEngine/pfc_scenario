@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
   qmlRegisterType<pfc::SQLite3Driver>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "SQLBackend");
   qmlRegisterType<pfc::Author>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Author");
   qmlRegisterType<pfc::Property>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Property");
-  qmlRegisterType<pfc::Restriction>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Restirction");
+  qmlRegisterType<pfc::Restriction>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Restriction");
   qmlRegisterType<pfc::Objective>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Objective");
 
   QPixmap pixmap("D:/biogears/pfc/scenario/build/img/sustain_splash.png");

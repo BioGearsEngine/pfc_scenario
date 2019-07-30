@@ -18,7 +18,7 @@ ColumnLayout  {
 
       id: medicalNameEntry
       label : "Medical Name"
-      placeholderText: "String Field (128 Characters )"
+      placeholderText: "String Field (128 Characters)"
     }
 
     TextEntry {
@@ -26,7 +26,7 @@ ColumnLayout  {
 
       id: commonNameEntry
       label : "Common Name"
-      placeholderText: "String Field (128 Characters )"
+      placeholderText: "String Field (128 Characters)"
     }
 
     ListEntry {
