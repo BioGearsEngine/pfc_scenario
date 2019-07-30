@@ -19,7 +19,18 @@ inline namespace sqlite3 {
   constexpr char const * tables[] = {
      "properties",
      "authors",
-     "restrictions" 
+     "restrictions",
+     "references",
+     "treatments",
+     "equipments",
+     "injuries",
+     "assessments",
+     "objectives",
+     "locations",
+     "roles",
+     "props",
+     "events"
+
   };
 
   constexpr auto list_tables = "SELECT * FROM sqlite_master WHERE type='table';";
