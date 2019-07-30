@@ -28,18 +28,13 @@ int main(int argc, char* argv[])
   QQuickStyle::setStyle("Material");
   QQmlApplicationEngine engine;
 
-  //UI 0.1 Types
-  //qmlRegisterType<pfc::Scenario>("com.ara.pfc.ScenarioModel", 1, 0, "ScenarioModel");
-  //qmlRegisterType<pfc::LocationSequence>("com.ara.pfc.ScenarioModel.Locations", 1, 0, "Locations");
-  //qmlRegisterType<pfc::ObjectSequence>("com.ara.pfc.ScenarioModel.Objects", 1, 0, "Objects");
-  //qmlRegisterType<pfc::ActorSequence>("com.ara.pfc.ScenarioModel.Actors", 1, 0, "Actors");
-  //qmlRegisterType<pfc::NarativeSequence>("com.ara.pfc.ScenarioModel.Narative", 1, 0, "Naratives");
 
   //UI 0.1 Types
   qmlRegisterType<pfc::SQLite3Driver>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "SQLBackend");
   qmlRegisterType<pfc::Author>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Author");
   qmlRegisterType<pfc::Property>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Property");
   qmlRegisterType<pfc::Restriction>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Restirction");
+  qmlRegisterType<pfc::Objective>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Objective");
 
   QPixmap pixmap("D:/biogears/pfc/scenario/build/img/sustain_splash.png");
   qDebug() << QString("%1,%2").arg(pixmap.height()).arg(pixmap.width()); //1280x768
@@ -52,3 +47,4 @@ int main(int argc, char* argv[])
 
   return app.exec();
 }
+ 

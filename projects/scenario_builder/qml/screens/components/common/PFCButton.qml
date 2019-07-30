@@ -6,8 +6,8 @@ import QtQuick.Controls.Material 2.0
 
 Button {
   id: root
-   focus : true
   signal clicked()
+  signal complete()
 
   text : "Button"
   font.pointSize : 10
@@ -27,17 +27,16 @@ Button {
 
   onHoveredChanged :{
      root.background.color = root.hovered  ? "#1111110F" : "transparent";
+     // console.log("PFCButton " + text + "Hovered")
   }
 
-  onClicked : {
-    root.clicked()
-  }
   onPressed : {
     root.contentItem.color = "#CC6633";
+    // console.log("PFCButton " + text + "Pressed")
   }
 
   onReleased : {
+    clicked()
     root.contentItem.color = "black";
   }
-
 }

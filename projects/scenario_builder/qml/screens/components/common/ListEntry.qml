@@ -38,76 +38,29 @@ Rectangle {
     height : 300
     anchors { left : name.right; right: parent.right ; }
 
-    Button {
+   PFCButton {
       id : addButton
       text : "Add " + name.text
-      font.pointSize : 10
       anchors.left : content.left
       anchors.leftMargin : 5
-      contentItem: Text {
-        id : addButton_text
-        text: addButton.text
-        font: addButton.font
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
-        elide: Text.ElideRight
-      }
-
-      background : Rectangle {
-          id : addButtonBackground
-          border.color: addButton.down ? "#FF9933" : "steelblue"
-      }
-
-      onHoveredChanged :{
-         addButtonBackground.color = addButton.hovered  ? "#1111110F" : "transparent";
-      }
-
+  
       onClicked : {
         root.added(root.model.count)
       }
-      onPressed : {
-        removeButton.contentItem.color = "#CC6633";
-      }
-
-      onReleased : {
-        removeButton.contentItem.color = "black";
-      }
+      onComplete: console.log("Add Button works")
     }
 
-    Button {
+    PFCButton {
       id: removeButton
       text : "Remove " + name.text
-      font.pointSize : 10
       anchors.right : content.right
       anchors.rightMargin : 5
 
-      contentItem: Text {
-        id : removeButton_text
-        text: removeButton.text
-        font: removeButton.font
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
-        elide: Text.ElideRight
-      }
-
-      background : Rectangle {
-          id : removeButtonBackground
-          border.color: removeButton.down ? "#FF9933" : "steelblue"
-      }
-
-      onHoveredChanged :{
-         removeButtonBackground.color = removeButton.hovered  ? "#1111110F" : "transparent";
-      }
-
+      
       onClicked : {
         root.removed(root.current )
       }
-      onPressed : {
-        removeButton.contentItem.color = "#CC6633";
-      }
-      onReleased : {
-        removeButton.contentItem.color = "black";
-      }
+      onComplete: console.log("Remove Button works") 
     }
 
     ListView {

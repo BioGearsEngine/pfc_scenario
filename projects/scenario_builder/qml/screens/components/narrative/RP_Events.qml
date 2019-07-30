@@ -23,9 +23,9 @@ Rectangle {
       anchors.rightMargin  : 5
       anchors.leftMargin  : 5
       height: 120
-      leftText : "New"
-      rightText : "Up"
-      mLeftText : "Down"
-      mRightText : "Delete"
+      firstButtonText : "New"
+      fourthButtonText : "Up"
+      secondButtonText : "Down"
+      thirdButtonText : "Delete"
     }
 }

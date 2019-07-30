@@ -14,6 +14,8 @@ Rectangle {
 
   ColumnLayout {
     anchors.fill : root
+
+
     TabBar {
       id: syllabus_tabs
       Layout.fillWidth: true
@@ -56,38 +58,38 @@ Rectangle {
       id: syllabus_stack_left
       Layout.fillHeight: true
       Layout.fillWidth: true
-
+      focus: true
       currentIndex: syllabus_tabs.currentIndex
 
       LP_Objectives{
         Layout.fillHeight : true
         Layout.fillWidth : true
-
+        focus : true
       }
       LP_Assessments{
           Layout.fillHeight : true
           Layout.fillWidth : true
-
+          focus : true
       }
       LP_Injuries {
           Layout.fillHeight : true
           Layout.fillWidth : true
-
+          focus : true
       }
       LP_Injuries {
           Layout.fillHeight : true
           Layout.fillWidth : true
-
+          focus : true
       }
       LP_Treatments {
           Layout.fillHeight : true
           Layout.fillWidth : true
-
+          focus : true
       }
       LP_Equipment {
           Layout.fillHeight : true
           Layout.fillWidth : true
-
+          focus : true
       }
     }
   }

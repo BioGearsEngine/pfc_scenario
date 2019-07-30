@@ -10,10 +10,9 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 ColumnLayout {
   id: root
   property SQLBackend backend
-  focus: true
-    //TAB:SYLLABUS_TAB:OBJECTIVES_LEFTWINDOW
-  Rectangle {
-      id : listRectangle
+  //TAB:SYLLABUS_TAB:OBJECTIVES_LEFTWINDOW
+   Rectangle {
+       id : listRectangle
       Layout.fillWidth : true
       Layout.fillHeight: true
       Layout.margins : 5
@@ -29,18 +28,22 @@ ColumnLayout {
         anchors.rightMargin  : 5
         anchors.leftMargin  : 5
 
-        height: 120
+        firstButtonText : "Add"
+        fourthButtonText : "Remove"
 
-        leftText : "Add"
-        rightText : "Remove"
+        secondButtonText : "Move Up"
+        thirdButtonText : "Move Down"
 
-        mLeftText : "Move Up"
-        mRightText : "Move Down"
+        onFirstButtonClicked : console.log("firstButtonClicked!")
+        onSecondButtonClicked : console.log("secondButtonClicked!")
+        onThirdButtonClicked : console.log("thirdButtonClicked!")
+        onFourthButtonClicked : console.log("fourthButtonClicked!")
       }
 
       ListView {
         id : listArea
-        anchors.fill : parent
+        anchors { top : controls.bottom ; bottom : parent.bottom; 
+                     left : parent.left ; right : parent.right }  
         spacing : 5
         clip: true
         highlightFollowsCurrentItem : true
@@ -51,6 +54,12 @@ ColumnLayout {
             anchors.right : parent.right
             anchors.margins: 5
         }
+
+        model : ListModel {
+          ListElement { name : "name"; value : "value"}
+        }
+
+        delegate : Text { text : model.value}
 
         ScrollBar.vertical: ScrollBar { }
       }

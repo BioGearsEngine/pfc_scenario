@@ -281,7 +281,7 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM properties WHERE name = :name; )";
   constexpr auto select_author_by_email
     = R"( SELECT * FROM authors WHERE email = :email; )";
-  constexpr auto select_restriction_by_name
+  constexpr auto select_restriction_by_name   
     = R"( SELECT * FROM restrictions WHERE name = :name; )";
   constexpr auto select_objective_by_name
     = R"( SELECT * FROM objectives WHERE name = :name; )";

@@ -10,8 +10,7 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 ColumnLayout {
   id: root
   property SQLBackend backend
-  focus: true
-    //TAB:SYLLABUS_TAB:OBJECTIVES_LEFTWINDOW
+  //TAB:SYLLABUS_TAB:OBJECTIVES_LEFTWINDOW
   Rectangle {
       id : listRectangle
       Layout.fillWidth : true
@@ -31,16 +30,17 @@ ColumnLayout {
 
         height: 120
 
-        leftText : "Add"
-        rightText : "Remove"
+        firstButtonText : "Add"
+        fourthButtonText : "Remove"
 
-        mLeftText : "Move Up"
-        mRightText : "Move Down"
+        secondButtonText : "Move Up"
+        thirdButtonText : "Move Down"
       }
 
       ListView {
         id : listArea
-        anchors.fill : parent
+        anchors { top : controls.bottom ; bottom : parent.bottom;
+                     left : parent.left ; right : parent.right }
         spacing : 5
         clip: true
         highlightFollowsCurrentItem : true

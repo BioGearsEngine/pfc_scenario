@@ -4,52 +4,75 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.12
 
 Rectangle {
+id: root
 Layout.preferredHeight : 30
+height : section_1.height
 
-property alias leftText : lButton.text
-property alias mLeftText : mLButton.text
-property alias mRightText : mRButton.text
-property alias rightText : rButton.text
+property alias firstButtonText : firstButton.text
+property alias secondButtonText : secondButton.text
+property alias thirdButtonText : thirdButton.text
+property alias fourthButtonText : fourthButton.text
+
+signal firstButtonClicked()
+signal secondButtonClicked()
+signal thirdButtonClicked()
+signal fourthButtonClicked();
 
 Rectangle{
   id: section_1
   width: parent.width /3
-  height : mLButton.height
+  height : secondButton.height
   color : "transparent"
   PFCButton {
-      id: lButton
+      id: firstButton
       anchors.left : section_1.left
       text : "LL Button"
+      onClicked : {
+        console.log("PFCButton 1 Clicked in FourButtonRow")
+        root.firstButtonClicked()
+      }
   }
 }
+
 Rectangle{
   id: section_2
   width: parent.width /3
-  height : mLButton.height
+  height : secondButton.height
   anchors.left : section_1.right
   color : "transparent"
   PFCButton {
-      id: mLButton
+      id: secondButton
       anchors.left : section_2.left
       text : "ML Button"
+
+      onClicked : {
+        root.secondButtonClicked()
+      }
   }
 
   PFCButton {
-      id: mRButton
+      id: thirdButton
       anchors.right : section_2.right
       text : "MR Button"
-  }
+      onClicked : {
+        root.thirdButtonClicked()
+      }
+  }  
 }
+
 Rectangle{
   id: section_3
   width: parent.width /3
-  height : mLButton.height
+  height : secondButton.height
   anchors.left : section_2.right
   color : "transparent"
   PFCButton {
-      id : rButton
+      id : fourthButton
       anchors.right : section_3.right
       text : "RR Button"
+      onClicked : {
+        root.fourthButtonClicked()
+      }
   }
 }
 }
