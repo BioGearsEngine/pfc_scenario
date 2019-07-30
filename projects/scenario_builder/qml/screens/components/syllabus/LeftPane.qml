@@ -36,6 +36,11 @@ Rectangle {
         width: implicitWidth
       }
       TabButton {
+          id: injury_set_tab
+        text: "Injury Sets"
+        width: implicitWidth
+      }
+      TabButton {
           id: treatment_tab
         text: "Treatments"
         width: implicitWidth
@@ -59,25 +64,26 @@ Rectangle {
         Layout.fillWidth : true
 
       }
-
       LP_Assessments{
           Layout.fillHeight : true
           Layout.fillWidth : true
 
       }
-
-      LP_Equipment {
+      LP_Injuries {
           Layout.fillHeight : true
           Layout.fillWidth : true
 
       }
+      LP_Injuries {
+          Layout.fillHeight : true
+          Layout.fillWidth : true
 
+      }
       LP_Treatments {
           Layout.fillHeight : true
           Layout.fillWidth : true
 
       }
-
       LP_Equipment {
           Layout.fillHeight : true
           Layout.fillWidth : true

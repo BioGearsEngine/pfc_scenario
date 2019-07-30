@@ -7,34 +7,47 @@ import "../common"
 
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
-StackLayout {
-    id: root
-    property alias currentIndex : root.currentIndex
-    property SQLBackend backend
+Flickable {
+  id: root  
+  property alias currentIndex : stack.currentIndex
+  property SQLBackend backend
 
-    RP_Objectives{
-      Layout.fillHeight: true
-      Layout.fillWidth: true
+  ScrollBar.vertical: ScrollBar { }
+  
+  StackLayout {
+      id : stack
+      anchors.fill : parent
+      anchors.bottomMargin : 5
 
-    }
+      RP_Objectives{
+        Layout.fillHeight: true
+        Layout.fillWidth: true
 
-    RP_Assessments{
-      Layout.fillHeight: true
-      Layout.fillWidth: true
-     }
+      }
 
-    RP_Injuries {
-      Layout.fillHeight: true
-      Layout.fillWidth: true
-     }
+      RP_Assessments{
+        Layout.fillHeight: true
+        Layout.fillWidth: true
+       }
 
-    RP_Treatments {
-      Layout.fillHeight: true
-      Layout.fillWidth: true
-     }
+      RP_Injuries {
+        Layout.fillHeight: true
+        Layout.fillWidth: true
+       }
 
-    RP_Equipment {
-      Layout.fillHeight: true
-      Layout.fillWidth: true
-    }
+      RP_Injuries {
+        Layout.fillHeight: true
+        Layout.fillWidth: true
+      }
+
+      RP_Treatments {
+        Layout.fillHeight: true
+        Layout.fillWidth: true
+       }
+
+      RP_Equipment {
+        Layout.fillHeight: true
+        Layout.fillWidth: true
+      }
+  }
 }

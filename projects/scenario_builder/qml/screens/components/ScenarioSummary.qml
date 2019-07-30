@@ -29,6 +29,7 @@ GridLayout {
 
     Layout.fillWidth: true
     Layout.fillHeight: true
+    Layout.topMargin : 58
   }
 }
 

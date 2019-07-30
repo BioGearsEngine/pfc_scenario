@@ -33,5 +33,8 @@ GridLayout {
     Layout.fillHeight: true
     Layout.topMargin : 58
 
+    Component.onCompleted: {
+      console.log("%1,%2".arg(width).arg(height))
+    }
   }
 }

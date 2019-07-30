@@ -51,6 +51,7 @@ ColumnLayout  {
     ListEntry {
       Layout.fillWidth: true
       Layout.fillHeight : true
+      Layout.bottomMargin : 5
       label : "References"
       model : ListModel {}
       delegate : Rectangle {
