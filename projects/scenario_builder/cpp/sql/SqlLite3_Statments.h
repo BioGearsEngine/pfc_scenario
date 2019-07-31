@@ -94,6 +94,7 @@ inline namespace sqlite3 {
     REFERENCE_KEY,
     REFERENCE_TITLE,
     REFERENCE_AUTHORS,
+    REFERENCE_VALUE
   };
 
   constexpr auto create_references_table = R"(
@@ -113,7 +114,7 @@ inline namespace sqlite3 {
     TREATMENT_COMMON_NAME,
     TREATMENT_DESCRIPTION,
     TREATMENT_EQUIPMENT_LIST,
-    TREATMENT_REFERENCE_LIST,
+    TREATMENT_REFERENCES,
   };
 
   constexpr auto create_treatments_table = R"(
@@ -123,7 +124,7 @@ inline namespace sqlite3 {
     common_name Varchar(64) NOT NULL UNIQUE,
     description TEXT,
     equipment_list TEXT,
-    reference_list TEXT
+    references TEXT
   );
   )";
 
@@ -133,7 +134,7 @@ inline namespace sqlite3 {
     EQUIPMENT_COMMON_NAME,
     EQUIPMENT_DESCRIPTION,
     EQUIPMENT_EQUIPMENT_LIST,
-    EQUIPMENT_REFERENCE_LIST,
+    EQUIPMENT_REFERENCES,
   };
 
   constexpr auto create_equipment_table = R"(
@@ -151,7 +152,7 @@ inline namespace sqlite3 {
     INJURY_COMMON_NAME,
     INJURY_DESCRIPTION,
     INJURY_EQUIPMENT_LIST,
-    INJURY_REFERENCE_LIST,
+    INJURY_REFERENCES,
   };
 
   constexpr auto create_injuries_table = R"(
@@ -161,7 +162,7 @@ inline namespace sqlite3 {
     common_name Varchar(64) NOT NULL UNIQUE,
     description TEXT,
     severity TEXT,
-    reference_list TEXT
+    references TEXT
   );
   )";
 
@@ -189,7 +190,7 @@ inline namespace sqlite3 {
     OBJECTIVE_ID,
     OBJECTIVE_NAME,
     OBJECTIVE_DESCRIPTION,
-    OBJECTIVE_REFERENCE_LIST,
+    OBJECTIVE_REFERENCES,
   };
 
   constexpr auto create_objectives_table = R"(
@@ -197,7 +198,7 @@ inline namespace sqlite3 {
     objective_id INTEGER PRIMARY KEY,
     name Varchar(64) NOT NULL UNIQUE,
     description TEXT,
-    reference_list TEXT
+    references TEXT
   );
   )";
 
@@ -327,12 +328,12 @@ inline namespace sqlite3 {
 
     constexpr auto insert_or_update_objectives
     = R"( INSERT INTO objectives 
-          (name,description,reference_list)
+          (name,description,references)
           VALUES (:name, :description, :references)
           ON CONFLICT (name)
           DO UPDATE SET name = excluded.name
                        , description = excluded.description
-                       , reference_list = excluded.reference_list
+                       , references = excluded.references
          ;
          )";
 

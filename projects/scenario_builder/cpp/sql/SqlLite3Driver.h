@@ -211,7 +211,392 @@ public:
   }
 };
 //----End Objective
+struct Reference : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int reference_id MEMBER id)
+  Q_PROPERTY(QString key MEMBER key)
+  Q_PROPERTY(QString title MEMBER title)
+  Q_PROPERTY(QList<QString> authors MEMBER authors)
+  Q_PROPERTY(QString value MEMBER value)
+public:
+  int32_t id = -1;
+  QString key = "";
+  QString title = "";
+  QList<QString> authors;
+  QString value = "";
+  Reference(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  Reference(const Reference&) = delete;
+  Reference(Reference&&) = delete;
+  Reference& operator=(const Reference&) = delete;
+  Reference& operator=(Reference&&) = delete;
+  virtual ~Reference() = default;
 
+  bool operator==(const Reference& rhs) const
+  {
+    return id == rhs.id
+      && key == rhs.key
+      && title == rhs.title
+      && authors == rhs.authors
+      && value == rhs.value;
+  }
+  bool operator!=(const Reference& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const Reference& rhs)
+  {
+    id = rhs.id;
+    key = rhs.key;
+    title = rhs.title;
+    authors = rhs.authors;
+    value = rhs.value;
+  }
+};
+//----End Reference
+struct Treatment : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int treatment_id MEMBER id)
+  Q_PROPERTY(QString medical_name MEMBER medical_name)
+  Q_PROPERTY(QString common_name MEMBER common_name)
+  Q_PROPERTY(QString description MEMBER description)
+  Q_PROPERTY(QList<QString> equipment_list MEMBER equipment_list)
+  Q_PROPERTY(QList<int> references MEMBER references)
+public:
+  int32_t id = -1;
+  QString medical_name = "";
+  QString common_name = "";
+  QString description = "";
+  QList<QString> equipment_list;
+  QList<int> references;
+  Treatment(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  Treatment(const Treatment&) = delete;
+  Treatment(Treatment&&) = delete;
+  Treatment& operator=(const Treatment&) = delete;
+  Treatment& operator=(Treatment&&) = delete;
+  virtual ~Treatment() = default;
+
+  bool operator==(const Treatment& rhs) const
+  {
+    return id == rhs.id
+      && medical_name == rhs.medical_name
+      && common_name == rhs.common_name
+      && description == rhs.description
+      && equipment_list == rhs.equipment_list
+      && references == rhs.references;
+  }
+  bool operator!=(const Treatment& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const Treatment& rhs)
+  {
+    id = rhs.id;
+    medical_name = rhs.medical_name;
+    common_name = rhs.common_name;
+    description = rhs.description;
+    equipment_list = rhs.equipment_list;
+    references = rhs.references;
+  }
+};
+//----End Treatment
+struct Equipment : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int equipment_id MEMBER id)
+  Q_PROPERTY(QString medical_name MEMBER medical_name)
+  Q_PROPERTY(QString common_name MEMBER common_name)
+  Q_PROPERTY(QString description MEMBER description)
+  Q_PROPERTY(QList<QString> equipment_list MEMBER equipment_list)
+  Q_PROPERTY(QList<int> references MEMBER references)
+public:
+  int32_t id = -1;
+  QString medical_name = "";
+  QString common_name = "";
+  QString description = "";
+  QList<QString> equipment_list;
+  QList<int> references;
+  Equipment(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  Equipment(const Equipment&) = delete;
+  Equipment(Equipment&&) = delete;
+  Equipment& operator=(const Equipment&) = delete;
+  Equipment& operator=(Equipment&&) = delete;
+  virtual ~Equipment() = default;
+
+  bool operator==(const Equipment& rhs) const
+  {
+    return id == rhs.id
+      && medical_name == rhs.medical_name
+      && common_name == rhs.common_name
+      && description == rhs.description
+      && equipment_list == rhs.equipment_list
+      && references == rhs.references;
+  }
+  bool operator!=(const Equipment& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const Equipment& rhs)
+  {
+    id = rhs.id;
+    medical_name = rhs.medical_name;
+    common_name = rhs.common_name;
+    description = rhs.description;
+    equipment_list = rhs.equipment_list;
+    references = rhs.references;
+  }
+};
+//----End Equipment
+struct Injury : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int injury_id MEMBER id)
+  Q_PROPERTY(QString medical_name MEMBER medical_name)
+  Q_PROPERTY(QString common_name MEMBER common_name)
+  Q_PROPERTY(QString description MEMBER description)
+  Q_PROPERTY(QList<QString> equipment_list MEMBER equipment_list)
+  Q_PROPERTY(QList<int> references MEMBER references)
+public:
+  int32_t id = -1;
+  QString medical_name = "";
+  QString common_name = "";
+  QString description = "";
+  QList<QString> equipment_list;
+  QList<int> references;
+  Injury(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  Injury(const Injury&) = delete;
+  Injury(Injury&&) = delete;
+  Injury& operator=(const Injury&) = delete;
+  Injury& operator=(Injury&&) = delete;
+  virtual ~Injury() = default;
+
+  bool operator==(const Injury& rhs) const
+  {
+    return id == rhs.id
+      && medical_name == rhs.medical_name
+      && common_name == rhs.common_name
+      && description == rhs.description
+      && equipment_list == rhs.equipment_list
+      && references == rhs.references;
+  }
+  bool operator!=(const Injury& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const Injury& rhs)
+  {
+    id = rhs.id;
+    medical_name = rhs.medical_name;
+    common_name = rhs.common_name;
+    description = rhs.description;
+    equipment_list = rhs.equipment_list;
+    references = rhs.references;
+  }
+};
+//----End Injury
+struct Assessment : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int assessment_id MEMBER id)
+  Q_PROPERTY(QString name MEMBER name)
+  Q_PROPERTY(QString description MEMBER description)
+  Q_PROPERTY(QString type MEMBER type)
+  Q_PROPERTY(int available_points MEMBER available_points)
+  Q_PROPERTY(QString criteria MEMBER criteria)
+public:
+  int32_t id = -1;
+  QString name = "";
+  QString description = "";
+  QString type = "";
+  int32_t available_points = -1;
+  QString criteria = "";
+  Assessment(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  Assessment(const Assessment&) = delete;
+  Assessment(Assessment&&) = delete;
+  Assessment& operator=(const Assessment&) = delete;
+  Assessment& operator=(Assessment&&) = delete;
+  virtual ~Assessment() = default;
+
+  bool operator==(const Assessment& rhs) const
+  {
+    return id == rhs.id
+      && name == rhs.name
+      && description == rhs.description
+      && type == rhs.type
+      && available_points == rhs.available_points
+      && criteria == rhs.criteria;
+  }
+  bool operator!=(const Assessment& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const Assessment& rhs)
+  {
+    id = rhs.id;
+    name = rhs.name;
+    description = rhs.description;
+    type = rhs.type;
+    available_points = rhs.available_points;
+    criteria = rhs.criteria;
+  }
+};
+//----End Assessment
+struct Location : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int location_id MEMBER id)
+  Q_PROPERTY(QString name MEMBER name)
+  Q_PROPERTY(QString scene_name MEMBER scene_name)
+  Q_PROPERTY(QString time_of_day MEMBER time_of_day)
+  Q_PROPERTY(QString environment MEMBER environment)
+
+public:
+  int32_t id = -1;
+  QString name = "";
+  QString scene_name = "";
+  QString time_of_day = "";
+  QString environment = "";
+
+  Location(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  Location(const Location&) = delete;
+  Location(Location&&) = delete;
+  Location& operator=(const Location&) = delete;
+  Location& operator=(Location&&) = delete;
+  virtual ~Location() = default;
+
+  bool operator==(const Location& rhs) const
+  {
+    return id == rhs.id
+      && name == rhs.name
+      && scene_name == rhs.scene_name
+      && time_of_day == rhs.time_of_day
+      && environment ==  rhs.environment;
+  }
+  bool operator!=(const Location& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const Location& rhs)
+  {
+    id = rhs.id;
+    name = rhs.name;
+    scene_name = rhs.scene_name;
+    time_of_day = rhs.time_of_day;
+    environment = rhs.environment;
+  }
+};
+//----End Location
+struct Role : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int role_id MEMBER id)
+  Q_PROPERTY(QString description MEMBER description)
+public:
+  int32_t id = -1;
+  QString description = "";
+
+  Role(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  Role(const Role&) = delete;
+  Role(Role&&) = delete;
+  Role& operator=(const Role&) = delete;
+  Role& operator=(Role&&) = delete;
+  virtual ~Role() = default;
+
+  bool operator==(const Role& rhs) const
+  {
+    return id == rhs.id
+      && description == rhs.description;
+  }
+  bool operator!=(const Role& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const Role& rhs)
+  {
+    id = rhs.id;
+    description = rhs.description;
+  }
+};
+//----End Role
+struct Prop : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int prop_id MEMBER id)
+  Q_PROPERTY(QString equipment MEMBER equipment)
+public:
+  int32_t id = -1;
+  QString equipment = "";
+
+  Prop(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  Prop(const Prop&) = delete;
+  Prop(Prop&&) = delete;
+  Prop& operator=(const Prop&) = delete;
+  Prop& operator=(Prop&&) = delete;
+  virtual ~Prop() = default;
+
+  bool operator==(const Prop& rhs) const
+  {
+    return id == rhs.id
+      && equipment == rhs.equipment;
+  }
+  bool operator!=(const Prop& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const Prop& rhs)
+  {
+    id = rhs.id;
+    equipment = rhs.equipment;
+  }
+};
+//----End Prop
+struct Event : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int prop_id MEMBER id)
+public:
+  int32_t id = -1;
+
+  Event(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  Event(const Event&) = delete;
+  Event(Event&&) = delete;
+  Event& operator=(const Event&) = delete;
+  Event& operator=(Event&&) = delete;
+  virtual ~Event() = default;
+
+  bool operator==(const Event& rhs) const
+  {
+    return id == rhs.id;
+  }
+  bool operator!=(const Event& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const Event& rhs)
+  {
+    id = rhs.id;
+  }
+};
+//----End Event
 class SQLite3Driver : public QObject {
 public:
   Q_OBJECT

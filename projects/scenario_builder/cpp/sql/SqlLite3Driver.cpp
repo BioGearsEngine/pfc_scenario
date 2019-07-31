@@ -66,17 +66,127 @@ inline void assign_restriction(const QSqlRecord& record, Restriction& restrictio
   restriction.value = record.value(RESTRICTION_VALUE).toString();
 }
 //------------------------------------------------------------------------------
-inline void assign_objective(const QSqlRecord& record, Objective& restriction)
+inline void assign_objective(const QSqlRecord& record, Objective& objective)
 {
-  restriction.id = record.value(OBJECTIVE_ID).toInt();
-  restriction.name = record.value(OBJECTIVE_NAME).toString();
-  restriction.description = record.value(OBJECTIVE_DESCRIPTION).toString();
-  auto ref_list_s = record.value(OBJECTIVE_REFERENCE_LIST).toString();
+  objective.id = record.value(OBJECTIVE_ID).toInt();
+  objective.name = record.value(OBJECTIVE_NAME).toString();
+  objective.description = record.value(OBJECTIVE_DESCRIPTION).toString();
+  auto ref_list_s = record.value(OBJECTIVE_REFERENCES).toString();
   auto ref_list = ref_list_s.split(";");
-  restriction.references.clear();
+  objective.references.clear();
   for (auto& val : ref_list) {
-    restriction.references.push_back(val.toInt());
+    objective.references.push_back(val.toInt());
   }
+}
+//------------------------------------------------------------------------------
+inline void assign_reference(const QSqlRecord& record, Reference& reference)
+{
+  reference.id = record.value(REFERENCE_ID).toInt();
+  reference.key = record.value(REFERENCE_KEY).toString();
+  reference.title = record.value(REFERENCE_TITLE).toString();
+  auto auth_list_s = record.value(REFERENCE_AUTHORS).toString();
+  auto auth_list = auth_list_s.split(";");
+  reference.authors.clear();
+  for (auto& val : auth_list) {
+    reference.authors.push_back(val);
+  }
+  reference.value = record.value(REFERENCE_VALUE).toString();
+}
+//------------------------------------------------------------------------------
+inline void assign_treatment(const QSqlRecord& record, Treatment& treatment)
+{
+  treatment.id = record.value(TREATMENT_ID).toInt();
+  treatment.medical_name = record.value(TREATMENT_MEDICAL_NAME).toString();
+  treatment.common_name = record.value(TREATMENT_COMMON_NAME).toString();
+  treatment.description = record.value(TREATMENT_DESCRIPTION).toString();
+  auto equip_list_s = record.value(TREATMENT_EQUIPMENT_LIST).toString();
+  auto equip_list = equip_list_s.split(";");
+  treatment.equipment_list.clear();
+  for (auto& val : equip_list) {
+    treatment.equipment_list.push_back(val);
+  }
+  auto ref_list_s = record.value(TREATMENT_REFERENCES).toString();
+  auto ref_list = ref_list_s.split(";");
+  treatment.references.clear();
+  for (auto& val : ref_list) {
+    treatment.references.push_back(val.toInt());
+  }
+}
+//------------------------------------------------------------------------------
+inline void assign_equipment(const QSqlRecord& record, Equipment& equipment)
+{
+  equipment.id = record.value(EQUIPMENT_ID).toInt();
+  equipment.medical_name = record.value(EQUIPMENT_MEDICAL_NAME).toString();
+  equipment.common_name = record.value(EQUIPMENT_COMMON_NAME).toString();
+  equipment.description = record.value(EQUIPMENT_DESCRIPTION).toString();
+  auto equip_list_s = record.value(EQUIPMENT_EQUIPMENT_LIST).toString();
+  auto equip_list = equip_list_s.split(";");
+  equipment.equipment_list.clear();
+  for (auto& val : equip_list) {
+    equipment.equipment_list.push_back(val);
+  }
+  auto ref_list_s = record.value(EQUIPMENT_REFERENCES).toString();
+  auto ref_list = ref_list_s.split(";");
+  equipment.references.clear();
+  for (auto& val : ref_list) {
+    equipment.references.push_back(val.toInt());
+  }
+}
+//------------------------------------------------------------------------------
+inline void assign_injury(const QSqlRecord& record, Injury& injury)
+{
+  injury.id = record.value(INJURY_ID).toInt();
+  injury.medical_name = record.value(INJURY_MEDICAL_NAME).toString();
+  injury.common_name = record.value(INJURY_COMMON_NAME).toString();
+  injury.description = record.value(INJURY_DESCRIPTION).toString();
+  auto equip_list_s = record.value(INJURY_EQUIPMENT_LIST).toString();
+  auto equip_list = equip_list_s.split(";");
+  injury.equipment_list.clear();
+  for (auto& val : equip_list) {
+    injury.equipment_list.push_back(val);
+  }
+  auto ref_list_s = record.value(INJURY_REFERENCES).toString();
+  auto ref_list = ref_list_s.split(";");
+  injury.references.clear();
+  for (auto& val : ref_list) {
+    injury.references.push_back(val.toInt());
+  }
+}
+//------------------------------------------------------------------------------
+inline void assign_assessment(const QSqlRecord& record, Assessment& assessment)
+{
+  assessment.id = record.value(ASSESSMENT_ID).toInt();
+  assessment.name = record.value(ASSESSMENT_NAME).toString();
+  assessment.description = record.value(ASSESSMENT_DESCRIPTION).toString();
+  assessment.type = record.value(ASSESSMENT_TYPE).toString();
+  assessment.available_points = record.value(ASSESSMENT_AVAILABLE_POINTS).toInt();
+  assessment.criteria = record.value(ASSESSMENT_CRITERIA).toString();
+}
+//------------------------------------------------------------------------------
+inline void assign_location(const QSqlRecord& record, Location& location)
+{
+  location.id = record.value(LOCATION_ID).toInt();
+  location.name = record.value(LOCATION_NAME).toString();
+  location.scene_name = record.value(LOCATION_SCENE_NAME).toString();
+  location.time_of_day = record.value(LOCATION_TIME_OF_DAY).toString();
+  location.environment = record.value(LOCATION_ENVIRONMENT).toString();
+}
+//------------------------------------------------------------------------------
+inline void assign_role(QSqlRecord& record, Role& role)
+{
+  role.id = record.value(ROLE_ID).toInt();
+  role.description = record.value(ROLE_DESCRIPTION).toString();
+}
+//------------------------------------------------------------------------------
+inline void assign_prop(QSqlRecord& record, Prop& prop)
+{
+  prop.id = record.value(PROP_ID).toInt();
+  prop.equipment = record.value(PROP_EQUIPMENT).toString();
+}
+//------------------------------------------------------------------------------
+inline void assign_event(QSqlRecord& record, Event& event)
+{
+  event.id = record.value(EVENT_ID).toInt();
 }
 //------------------------------------------------------------------------------
 SQLite3Driver::SQLite3Driver(QObject* parent)
@@ -138,7 +248,17 @@ bool SQLite3Driver::initialize_db()
     sqlite3::create_properties_table,
     sqlite3::create_authors_table,
     sqlite3::create_restrictions_table,
-    sqlite3::create_objectives_table
+    sqlite3::create_objectives_table,
+    sqlite3::create_references_table,
+    sqlite3::create_treatments_table,
+    sqlite3::create_equipment_table,
+    sqlite3::create_injuries_table,
+    sqlite3::create_assessments_table,
+    sqlite3::create_objectives_table,
+    sqlite3::create_locations_table,
+    sqlite3::create_roles_table,
+    sqlite3::create_props_table,
+    sqlite3::create_events_table
   };
 
   if (_db.open()) {
@@ -166,6 +286,26 @@ bool SQLite3Driver::clear_db()
     query.bindValue(":table", tables[RESTRICTIONS]);
     iResult &= query.exec();
     query.bindValue(":table", tables[OBJECTIVES]);
+    iResult &= query.exec();
+    query.bindValue(":table", tables[REFERENCES]);
+    iResult &= query.exec();
+    query.bindValue(":table", tables[TREATMENTS]);
+    iResult &= query.exec();
+    query.bindValue(":table", tables[EQUIPMENTS]);
+    iResult &= query.exec();
+    query.bindValue(":table", tables[INJURIES]);
+    iResult &= query.exec();
+    query.bindValue(":table", tables[ASSESSMENTS]);
+    iResult &= query.exec();
+    query.bindValue(":table", tables[OBJECTIVES]);
+    iResult &= query.exec();
+    query.bindValue(":table", tables[LOCATIONS]);
+    iResult &= query.exec();
+    query.bindValue(":table", tables[ROLES]);
+    iResult &= query.exec();
+    query.bindValue(":table", tables[PROPS]);
+    iResult &= query.exec();
+    query.bindValue(":table", tables[EVENTS]);
     return query.exec() && iResult;
   }
   return false;
@@ -186,6 +326,36 @@ bool SQLite3Driver::clear_table(enum SQLite3Driver::Sqlite3Table t)
       break;
     case RESTRICTIONS:
       query.bindValue(":table", tables[RESTRICTIONS]);
+      break;
+    case REFERENCES:
+      query.bindValue(":table", tables[REFERENCES]);
+      break;
+    case TREATMENTS:
+      query.bindValue(":table", tables[TREATMENTS]);
+      break;
+    case EQUIPMENTS:
+      query.bindValue(":table", tables[EQUIPMENTS]);
+      break;
+    case INJURIES:
+      query.bindValue(":table", tables[INJURIES]);
+      break;
+    case ASSESSMENTS:
+      query.bindValue(":table", tables[ASSESSMENTS]);
+      break;
+    case OBJECTIVES:
+      query.bindValue(":table", tables[OBJECTIVES]);
+      break;
+    case LOCATIONS:
+      query.bindValue(":table", tables[LOCATIONS]);
+      break;
+    case ROLES:
+      query.bindValue(":table", tables[ROLES]);
+      break;
+    case PROPS:
+      query.bindValue(":table", tables[PROPS]);
+      break;
+    case EVENTS:
+      query.bindValue(":table", tables[EVENTS]);
       break;
     default:
       return false;
