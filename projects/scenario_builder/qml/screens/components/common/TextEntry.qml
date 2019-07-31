@@ -19,7 +19,7 @@ Rectangle {
    text: 'Title:'
    font.pointSize : 10
    color: "steelblue"
-   width: text.width + 10
+   width: (text.width > 90 ) ? text.width + 10 : 100
   }
   TextField {
     id : value
