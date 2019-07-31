@@ -214,12 +214,14 @@ public:
 struct Reference : public QObject {
   Q_OBJECT
   Q_PROPERTY(int reference_id MEMBER id)
+  Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString key MEMBER key)
   Q_PROPERTY(QString title MEMBER title)
   Q_PROPERTY(QList<QString> authors MEMBER authors)
   Q_PROPERTY(QString value MEMBER value)
 public:
   int32_t id = -1;
+  QString name = "";
   QString key = "";
   QString title = "";
   QList<QString> authors;
@@ -237,6 +239,7 @@ public:
   bool operator==(const Reference& rhs) const
   {
     return id == rhs.id
+      && name == rhs.name
       && key == rhs.key
       && title == rhs.title
       && authors == rhs.authors
@@ -249,6 +252,7 @@ public:
   void assign(const Reference& rhs)
   {
     id = rhs.id;
+    name = rhs.name;
     key = rhs.key;
     title = rhs.title;
     authors = rhs.authors;
@@ -308,15 +312,13 @@ public:
 struct Equipment : public QObject {
   Q_OBJECT
   Q_PROPERTY(int equipment_id MEMBER id)
-  Q_PROPERTY(QString medical_name MEMBER medical_name)
-  Q_PROPERTY(QString common_name MEMBER common_name)
+  Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString description MEMBER description)
   Q_PROPERTY(QList<QString> equipment_list MEMBER equipment_list)
   Q_PROPERTY(QList<int> references MEMBER references)
 public:
   int32_t id = -1;
-  QString medical_name = "";
-  QString common_name = "";
+  QString name = "";
   QString description = "";
   QList<QString> equipment_list;
   QList<int> references;
@@ -333,8 +335,7 @@ public:
   bool operator==(const Equipment& rhs) const
   {
     return id == rhs.id
-      && medical_name == rhs.medical_name
-      && common_name == rhs.common_name
+      && name == rhs.name
       && description == rhs.description
       && equipment_list == rhs.equipment_list
       && references == rhs.references;
@@ -346,8 +347,7 @@ public:
   void assign(const Equipment& rhs)
   {
     id = rhs.id;
-    medical_name = rhs.medical_name;
-    common_name = rhs.common_name;
+    name = rhs.name;
     description = rhs.description;
     equipment_list = rhs.equipment_list;
     references = rhs.references;

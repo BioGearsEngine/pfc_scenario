@@ -91,6 +91,7 @@ inline namespace sqlite3 {
 
   enum REFERENCE_COLUMNS {
     REFERENCE_ID,
+    REFERENCE_NAME,
     REFERENCE_KEY,
     REFERENCE_TITLE,
     REFERENCE_AUTHORS,
@@ -130,8 +131,7 @@ inline namespace sqlite3 {
 
   enum EQUIPMENT_COLUMNS {
     EQUIPMENT_ID,
-    EQUIPMENT_MEDICAL_NAME,
-    EQUIPMENT_COMMON_NAME,
+    EQUIPMENT_NAME,
     EQUIPMENT_DESCRIPTION,
     EQUIPMENT_EQUIPMENT_LIST,
     EQUIPMENT_REFERENCES,
@@ -321,8 +321,28 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM authors WHERE email = :email; )";
   constexpr auto select_restriction_by_name   
     = R"( SELECT * FROM restrictions WHERE name = :name; )";
+  constexpr auto select_reference_by_name
+    = R"( SELECT * FROM references WHERE name = :name; )";
+  constexpr auto select_equipment_by_name
+    = R"( SELECT * FROM equipments WHERE name = :name )";
   constexpr auto select_objective_by_name
     = R"( SELECT * FROM objectives WHERE name = :name; )";
+  constexpr auto select_assessment_by_name
+    = R"( SELECT * FROM assessments WHERE name = :name; )";
+  constexpr auto select_location_by_name
+    = R"( SELECT * FROM locations WHERE name = :name; )";
+
+  constexpr auto select_location_by_scene_name
+    = R"( SELECT * FROM locations WHERE scene_name = :scene_name; )";
+
+  constexpr auto select_treatment_by_medical_name
+    = R"( SELECT * FROM treatments WHERE medical_name = :medical_name; )";
+  constexpr auto select_treatment_by_common_name
+    = R"( SELECT * FROM treatments WHERE common_name = :common_name; )";
+  constexpr auto select_injury_by_medical_name
+    = R"( SELECT * FROM injuries WHERE medical_name = :medical_name; )";
+  constexpr auto select_injury_by_common_name
+    = R"( SELECT * FROM injuries WHERE common_name = :common_name; )";
 
 
   constexpr auto insert_or_update_first_author
