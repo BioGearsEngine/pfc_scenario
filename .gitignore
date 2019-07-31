@@ -3,7 +3,7 @@ build*/
 
 #Sublime
 *.sublime-workspace
-
+CMakeLists.txt.user
 #Linux
 *.swp
 
