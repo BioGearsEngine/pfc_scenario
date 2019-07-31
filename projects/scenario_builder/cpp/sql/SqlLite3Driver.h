@@ -643,32 +643,86 @@ public:
   Q_INVOKABLE int property_count() const;
   Q_INVOKABLE int restriction_count() const;
   Q_INVOKABLE int objective_count() const;
+  Q_INVOKABLE int reference_count() const;
+  Q_INVOKABLE int treatment_count() const;
+  Q_INVOKABLE int equipment_count() const;
+  Q_INVOKABLE int injury_count() const;
+  Q_INVOKABLE int assessment_count() const;
+  Q_INVOKABLE int location_count() const;
+  Q_INVOKABLE int role_count() const;
+  Q_INVOKABLE int prop_count() const;
+  Q_INVOKABLE int event_count() const;
 
   Q_INVOKABLE void authors();
   Q_INVOKABLE void properties();
   Q_INVOKABLE void restrictions();
   Q_INVOKABLE void objectives();
+  Q_INVOKABLE void references();
+  Q_INVOKABLE void treatments();
+  Q_INVOKABLE void equipments();
+  Q_INVOKABLE void injuries();
+  Q_INVOKABLE void assessments();
+  Q_INVOKABLE void locations();
+  Q_INVOKABLE void roles();
+  Q_INVOKABLE void props();
+  Q_INVOKABLE void events();
 
   Q_INVOKABLE bool next_author(Author*);
   Q_INVOKABLE bool next_property(Property*);
   Q_INVOKABLE bool next_restriction(Restriction*);
   Q_INVOKABLE bool next_objective(Objective*);
+  Q_INVOKABLE bool next_reference(Reference*);
+  Q_INVOKABLE bool next_treatment(Treatment*);
+  Q_INVOKABLE bool next_equipment(Equipment*);
+  Q_INVOKABLE bool next_injury(Injury*);
+  Q_INVOKABLE bool next_assessment(Assessment*);
+  Q_INVOKABLE bool next_location(Location*);
+  Q_INVOKABLE bool next_role(Role*);
+  Q_INVOKABLE bool next_prop(Prop*);
+  Q_INVOKABLE bool next_event(Event*);
 
   Q_INVOKABLE bool select_author(Author*) const;
   Q_INVOKABLE bool select_property(Property*) const;
   Q_INVOKABLE bool select_restriction(Restriction*) const;
   Q_INVOKABLE bool select_objective(Objective*) const;
+  Q_INVOKABLE bool select_reference(Reference*) const;
+  Q_INVOKABLE bool select_treatment(Treatment*) const;
+  Q_INVOKABLE bool select_equipment(Equipment*) const;
+  Q_INVOKABLE bool select_injury(Injury*) const;
+  Q_INVOKABLE bool select_assessment(Assessment*) const;
+  Q_INVOKABLE bool select_location(Location*) const;
+  Q_INVOKABLE bool select_role(Role*) const;
+  Q_INVOKABLE bool select_prop(Prop*) const;
+  Q_INVOKABLE bool select_event(Event*) const;
 
   Q_INVOKABLE bool update_author(Author*);
   Q_INVOKABLE bool update_first_author(Author*);
   Q_INVOKABLE bool update_property(Property*);
   Q_INVOKABLE bool update_restriction(Restriction*);
   Q_INVOKABLE bool update_objective(Objective*);
+  Q_INVOKABLE bool update_location(Location*);
+  Q_INVOKABLE bool update_role(Role*);
+  Q_INVOKABLE bool update_prop(Prop*);
+  Q_INVOKABLE bool update_event(Event*);
+  Q_INVOKABLE bool update_reference(Reference*);
+  Q_INVOKABLE bool update_treatment(Treatment*);
+  Q_INVOKABLE bool update_equipment(Equipment*);
+  Q_INVOKABLE bool update_injury(Injury*);
+  Q_INVOKABLE bool update_assessment(Assessment*);
 
   Q_INVOKABLE bool remove_author(Author*);
   Q_INVOKABLE bool remove_property(Property*);
   Q_INVOKABLE bool remove_restriction(Restriction*);
   Q_INVOKABLE bool remove_objective(Objective*);
+  Q_INVOKABLE bool remove_reference(Reference*);
+  Q_INVOKABLE bool remove_treatment(Treatment*);
+  Q_INVOKABLE bool remove_equipment(Equipment*);
+  Q_INVOKABLE bool remove_injury(Injury*);
+  Q_INVOKABLE bool remove_assessment(Assessment*);
+  Q_INVOKABLE bool remove_location(Location*);
+  Q_INVOKABLE bool remove_role(Role*);
+  Q_INVOKABLE bool remove_prop(Prop*);
+  Q_INVOKABLE bool remove_event(Event*);
 
   Q_INVOKABLE int raw_error() const { return _db.lastError().type(); };
   Q_INVOKABLE QString error_message() const { return _db.lastError().text(); }

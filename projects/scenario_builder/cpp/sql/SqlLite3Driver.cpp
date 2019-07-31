@@ -364,7 +364,7 @@ bool SQLite3Driver::clear_table(enum SQLite3Driver::Sqlite3Table t)
   }
   return false;
 }
-//------------------------------------------------------------------------------
+//-------------------------------------------------------------------COUNT_START
 int SQLite3Driver::author_count() const
 {
   if (_db.isOpen()) {
@@ -431,6 +431,51 @@ int SQLite3Driver::property_count() const
   return -1;
 }
 //------------------------------------------------------------------------------
+int SQLite3Driver::reference_count() const
+{
+  return -1;
+}
+//------------------------------------------------------------------------------
+int SQLite3Driver::treatment_count() const
+{
+  return -1;
+}
+//------------------------------------------------------------------------------
+int SQLite3Driver::equipment_count() const
+{
+  return -1;
+}
+//------------------------------------------------------------------------------
+int SQLite3Driver::injury_count() const
+{
+  return -1;
+}
+//------------------------------------------------------------------------------
+int SQLite3Driver::assessment_count() const
+{
+  return -1;
+}
+//------------------------------------------------------------------------------
+int SQLite3Driver::location_count() const
+{
+  return -1;
+}
+//------------------------------------------------------------------------------
+int SQLite3Driver::role_count() const
+{
+  return -1;
+}
+//------------------------------------------------------------------------------
+int SQLite3Driver::prop_count() const
+{
+  return -1;
+}
+//------------------------------------------------------------------------------
+int SQLite3Driver::event_count() const
+{
+  return -1;
+}
+//-------------------------------------------------------------------------START
 void SQLite3Driver::authors()
 {
   qDeleteAll(_authors);
@@ -518,6 +563,42 @@ void SQLite3Driver::objectives()
   }
 }
 //------------------------------------------------------------------------------
+void SQLite3Driver::references()
+{
+}
+//------------------------------------------------------------------------------
+void SQLite3Driver::treatments()
+{
+}
+//------------------------------------------------------------------------------
+void SQLite3Driver::equipments()
+{
+}
+//------------------------------------------------------------------------------
+void SQLite3Driver::injuries()
+{
+}
+//------------------------------------------------------------------------------
+void SQLite3Driver::assessments()
+{
+}
+//------------------------------------------------------------------------------
+void SQLite3Driver::locations()
+{
+}
+//------------------------------------------------------------------------------
+void SQLite3Driver::roles()
+{
+}
+//------------------------------------------------------------------------------
+void SQLite3Driver::props()
+{
+}
+//------------------------------------------------------------------------------
+void SQLite3Driver::events()
+{
+}
+//--------------------------------------------------------------------NEXT_START
 bool SQLite3Driver::next_author(Author* author)
 {
   if (_current_author == _authors.end() || _authors.empty()) {
@@ -560,6 +641,51 @@ bool SQLite3Driver::next_objective(Objective* objective)
   return true;
 }
 //------------------------------------------------------------------------------
+bool SQLite3Driver::next_reference(Reference* reference)
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::next_treatment(Treatment* treatment)
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::next_equipment(Equipment* equipment)
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::next_injury(Injury* injury)
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::next_assessment(Assessment* assessment)
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::next_location(Location* location)
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::next_role(Role* role)
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::next_prop(Prop* prop)
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::next_event(Event* event)
+{
+  return false;
+}
+//------------------------------------------------------------------SELECT_START
 bool SQLite3Driver::select_author(Author* author) const
 {
   if (_db.isOpen()) {
@@ -671,6 +797,51 @@ bool SQLite3Driver::select_objective(Objective* objective) const
   return false;
 }
 //------------------------------------------------------------------------------
+bool SQLite3Driver::select_reference(Reference* reference) const
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::select_treatment(Treatment* treatment) const
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::select_equipment(Equipment* equipment) const
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::select_injury(Injury* injury) const
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::select_assessment(Assessment* assessment) const
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::select_location(Location* location) const
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::select_role(Role* role) const
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::select_prop(Prop* prop) const
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::select_event(Event* event) const
+{
+  return false;
+}
+//------------------------------------------------------------------UPDATE_START
 bool SQLite3Driver::update_author(Author* author)
 {
 
@@ -801,6 +972,51 @@ bool SQLite3Driver::update_objective(Objective* objective)
   return false;
 }
 //------------------------------------------------------------------------------
+bool SQLite3Driver::update_reference(Reference* reference)
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::update_treatment(Treatment* treatment)
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::update_equipment(Equipment* equipment)
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::update_injury(Injury* injury)
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::update_assessment(Assessment* assessment)
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::update_location(Location* location)
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::update_role(Role* role)
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::update_prop(Prop* prop)
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::update_event(Event* event)
+{
+  return false;
+}
+//------------------------------------------------------------------REMOVE_START
 bool SQLite3Driver::remove_author(Author* author)
 {
   if (_db.isOpen()) {
@@ -897,6 +1113,51 @@ bool SQLite3Driver::remove_objective(Objective* objective)
     return true;
   }
   qWarning() << "No Database connection";
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::remove_reference(Reference* reference)
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::remove_treatment(Treatment* treatment)
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::remove_equipment(Equipment* equipment)
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::remove_injury(Injury* injury)
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::remove_assessment(Assessment* assessment)
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::remove_location(Location* location)
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::remove_role(Role* role)
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::remove_prop(Prop* prop)
+{
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::remove_event(Event* event)
+{
   return false;
 }
 //------------------------------------------------------------------------------
