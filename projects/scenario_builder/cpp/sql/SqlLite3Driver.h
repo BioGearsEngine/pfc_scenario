@@ -758,11 +758,29 @@ private:
   QList<Property*> _properties;
   QList<Restriction*> _restrictions;
   QList<Objective*> _objectives;
+  QList<Reference*> _references;
+  QList<Treatment*> _treatments;
+  QList<Equipment*> _equipments;
+  QList<Injury*> _injuries;
+  QList<Assessment*> _assessments;
+  QList<Location*> _locations;
+  QList<Role*> _roles;
+  QList<Prop*> _props;
+  QList<Event*> _events;
 
   QList<Author*>::iterator _current_author;
   QList<Property*>::iterator _current_property;
   QList<Restriction*>::iterator _current_restriction;
   QList<Objective*>::iterator _current_objective;
+  QList<Reference*>::iterator _current_reference;
+  QList<Treatment*>::iterator _current_treatment;
+  QList<Equipment*>::iterator _current_equipment;
+  QList<Injury*>::iterator _current_injury;
+  QList<Assessment*>::iterator _current_assessment;
+  QList<Location*>::iterator _current_location;
+  QList<Role*>::iterator _current_role;
+  QList<Prop*>::iterator _current_prop;
+  QList<Event*>::iterator _current_event;
 };
 }
 

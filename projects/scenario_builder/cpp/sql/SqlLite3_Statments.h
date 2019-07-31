@@ -263,11 +263,29 @@ inline namespace sqlite3 {
   constexpr auto count_authors = R"( SELECT COUNT(author_id) FROM authors; )";
   constexpr auto count_restrictions = R"( SELECT COUNT(restriction_id) FROM restrictions; )";
   constexpr auto count_objectives = R"( SELECT COUNT(objective_id) FROM objectives; )";
+  constexpr auto count_references = R"( SELECT COUNT(reference_id) FROM references; )";
+  constexpr auto count_treatments = R"( SELECT COUNT(treatment_id) FROM treatments; )";
+  constexpr auto count_equipments = R"( SELECT COUNT(equipment_id) FROM equipments; )";
+  constexpr auto count_injuries = R"( SELECT COUNT(injury_id) FROM injuries; )";
+  constexpr auto count_assessments = R"( SELECT COUNT(assessment_id) FROM assessments; )";
+  constexpr auto count_locations = R"( SELECT COUNT(location_id) FROM locations; )";
+  constexpr auto count_roles = R"( SELECT COUNT(role_id) FROM roles; )";
+  constexpr auto count_props = R"( SELECT COUNT(prop_id) FROM props; )";
+  constexpr auto count_events = R"( SELECT COUNT(event_id) FROM events; )";
 
   constexpr auto select_all_properties = R"( SELECT * FROM properties; )";
   constexpr auto select_all_authors = R"( SELECT * FROM authors; )";
   constexpr auto select_all_restrictions = R"( SELECT * FROM restrictions; )";
   constexpr auto select_all_objectives = R"( SELECT * FROM objectives; )";
+  constexpr auto select_all_references = R"( SELECT * FROM references; )";
+  constexpr auto select_all_treatments = R"( SELECT * FROM treatments; )";
+  constexpr auto select_all_equipments = R"( SELECT * FROM equipments; )";
+  constexpr auto select_all_injuries = R"( SELECT * FROM injuries; )";
+  constexpr auto select_all_assessments = R"( SELECT * FROM assessments; )";
+  constexpr auto select_all_locations = R"( SELECT * FROM locations; )";
+  constexpr auto select_all_roles = R"( SELECT * FROM roles; )";
+  constexpr auto select_all_props = R"( SELECT * FROM props; )";
+  constexpr auto select_all_events = R"( SELECT * FROM events; )";
 
   constexpr auto select_property_by_id
     = R"( SELECT * FROM properties WHERE property_id = :id ; )";
@@ -277,6 +295,25 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM restrictions WHERE restriction_id = :id ; )";
   constexpr auto select_objective_by_id
     = R"( SELECT * FROM objectives WHERE objective_id = :id ; )";
+  constexpr auto select_reference_by_id
+    = R"( SELECT * FROM references WHERE reference_id = :id ; )";
+  constexpr auto select_treatment_by_id
+    = R"( SELECT * FROM treatments WHERE treatment_id = :id ; )";
+  constexpr auto select_equipment_by_id
+    = R"( SELECT * FROM equipments WHERE equipment_id = :id ; )";
+  constexpr auto select_injury_by_id
+    = R"( SELECT * FROM injuries WHERE injury_id = :id ; )";
+  constexpr auto select_assessment_by_id
+    = R"( SELECT * FROM assessments WHERE assessment_id = :id ; )";
+  constexpr auto select_location_by_id
+    = R"( SELECT * FROM locations WHERE location_id = :id ; )";
+  constexpr auto select_role_by_id
+    = R"( SELECT * FROM roles WHERE role_id = :id ; )";
+  constexpr auto select_prop_by_id
+    = R"( SELECT * FROM props WHERE prop_id = :id ; )";
+  constexpr auto select_event_by_id
+    = R"( SELECT * FROM events WHERE event_id = :id ; )";
+
 
   constexpr auto select_property_by_name
     = R"( SELECT * FROM properties WHERE name = :name; )";

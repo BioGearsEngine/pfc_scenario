@@ -24,6 +24,7 @@ specific language governing permissions and limitations under the License.
 #include "sqlite3ext.h"
 
 namespace pfc {
+//------------------------------------------------------------------ASSIGN_START
 inline void assign_author(const QSqlRecord& record, Author& author)
 {
   author.id = record.value(AUTHOR_ID).toInt();
@@ -188,7 +189,7 @@ inline void assign_event(QSqlRecord& record, Event& event)
 {
   event.id = record.value(EVENT_ID).toInt();
 }
-//------------------------------------------------------------------------------
+//--------------------------------------------------------------------ASSIGN_END
 SQLite3Driver::SQLite3Driver(QObject* parent)
   : QObject(parent)
   , _db(QSqlDatabase::database())
@@ -433,46 +434,145 @@ int SQLite3Driver::property_count() const
 //------------------------------------------------------------------------------
 int SQLite3Driver::reference_count() const
 {
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_references);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
   return -1;
 }
 //------------------------------------------------------------------------------
 int SQLite3Driver::treatment_count() const
 {
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_treatments);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
   return -1;
 }
 //------------------------------------------------------------------------------
 int SQLite3Driver::equipment_count() const
 {
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_equipments);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
   return -1;
 }
 //------------------------------------------------------------------------------
 int SQLite3Driver::injury_count() const
 {
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_injuries);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
   return -1;
 }
 //------------------------------------------------------------------------------
 int SQLite3Driver::assessment_count() const
 {
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_assessments);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
   return -1;
 }
 //------------------------------------------------------------------------------
 int SQLite3Driver::location_count() const
 {
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_locations);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
   return -1;
 }
 //------------------------------------------------------------------------------
 int SQLite3Driver::role_count() const
 {
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_roles);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
   return -1;
 }
 //------------------------------------------------------------------------------
 int SQLite3Driver::prop_count() const
 {
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_props);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
   return -1;
 }
 //------------------------------------------------------------------------------
 int SQLite3Driver::event_count() const
 {
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_events);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
   return -1;
 }
 //-------------------------------------------------------------------------START
@@ -565,38 +665,200 @@ void SQLite3Driver::objectives()
 //------------------------------------------------------------------------------
 void SQLite3Driver::references()
 {
+  qDeleteAll(_references);
+  _references.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_references);
+    query.exec();
+    while (query.next()) {
+      auto reference = std::make_unique<pfc::Reference>();
+      auto record = query.record();
+      assert(record.count() == 3);
+      assign_reference(record, *reference);
+      _references.push_back(reference.release());
+    }
+    _current_reference = _references.begin();
+    emit restictionsChanged();
+  }
 }
 //------------------------------------------------------------------------------
 void SQLite3Driver::treatments()
 {
+  qDeleteAll(_treatments);
+  _treatments.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_treatments);
+    query.exec();
+    while (query.next()) {
+      auto treatment = std::make_unique<pfc::Treatment>();
+      auto record = query.record();
+      assert(record.count() == 3);
+      assign_treatment(record, *treatment);
+      _treatments.push_back(treatment.release());
+    }
+    _current_treatment = _treatments.begin();
+    emit restictionsChanged();
+  }
 }
 //------------------------------------------------------------------------------
 void SQLite3Driver::equipments()
 {
+  qDeleteAll(_equipments);
+  _equipments.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_equipments);
+    query.exec();
+    while (query.next()) {
+      auto equipment = std::make_unique<pfc::Equipment>();
+      auto record = query.record();
+      assert(record.count() == 3);
+      assign_equipment(record, *equipment);
+      _equipments.push_back(equipment.release());
+    }
+    _current_equipment = _equipments.begin();
+    emit restictionsChanged();
+  }
 }
 //------------------------------------------------------------------------------
 void SQLite3Driver::injuries()
 {
+  qDeleteAll(_injuries);
+  _injuries.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_injuries);
+    query.exec();
+    while (query.next()) {
+      auto injury = std::make_unique<pfc::Injury>();
+      auto record = query.record();
+      assert(record.count() == 3);
+      assign_injury(record, *injury);
+      _injuries.push_back(injury.release());
+    }
+    _current_injury = _injuries.begin();
+    emit restictionsChanged();
+  }
 }
 //------------------------------------------------------------------------------
 void SQLite3Driver::assessments()
 {
+  qDeleteAll(_assessments);
+  _assessments.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_assessments);
+    query.exec();
+    while (query.next()) {
+      auto assessment = std::make_unique<pfc::Assessment>();
+      auto record = query.record();
+      assert(record.count() == 3);
+      assign_assessment(record, *assessment);
+      _assessments.push_back(assessment.release());
+    }
+    _current_assessment = _assessments.begin();
+    emit restictionsChanged();
+  }
 }
 //------------------------------------------------------------------------------
 void SQLite3Driver::locations()
 {
+  qDeleteAll(_locations);
+  _locations.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_locations);
+    query.exec();
+    while (query.next()) {
+      auto location = std::make_unique<pfc::Location>();
+      auto record = query.record();
+      assert(record.count() == 3);
+      assign_location(record, *location);
+      _locations.push_back(location.release());
+    }
+    _current_location = _locations.begin();
+    emit restictionsChanged();
+  }
 }
 //------------------------------------------------------------------------------
 void SQLite3Driver::roles()
 {
+  qDeleteAll(_roles);
+  _roles.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_roles);
+    query.exec();
+    while (query.next()) {
+      auto role = std::make_unique<pfc::Role>();
+      auto record = query.record();
+      assert(record.count() == 3);
+      assign_role(record, *role);
+      _roles.push_back(role.release());
+    }
+    _current_role = _roles.begin();
+    emit restictionsChanged();
+  }
 }
 //------------------------------------------------------------------------------
 void SQLite3Driver::props()
 {
+  qDeleteAll(_props);
+  _props.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_props);
+    query.exec();
+    while (query.next()) {
+      auto prop = std::make_unique<pfc::Prop>();
+      auto record = query.record();
+      assert(record.count() == 3);
+      assign_prop(record, *prop);
+      _props.push_back(prop.release());
+    }
+    _current_prop = _props.begin();
+    emit restictionsChanged();
+  }
 }
 //------------------------------------------------------------------------------
 void SQLite3Driver::events()
 {
+  qDeleteAll(_events);
+  _events.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_events);
+    query.exec();
+    while (query.next()) {
+      auto event = std::make_unique<pfc::Event>();
+      auto record = query.record();
+      assert(record.count() == 3);
+      assign_event(record, *event);
+      _events.push_back(event.release());
+    }
+    _current_event = _events.begin();
+    emit restictionsChanged();
+  }
 }
 //--------------------------------------------------------------------NEXT_START
 bool SQLite3Driver::next_author(Author* author)
@@ -643,47 +905,101 @@ bool SQLite3Driver::next_objective(Objective* objective)
 //------------------------------------------------------------------------------
 bool SQLite3Driver::next_reference(Reference* reference)
 {
-  return false;
+  if (_current_reference == _references.end() || _references.empty()) {
+    return false;
+  }
+  reference->assign(*(*_current_reference));
+  ++_current_reference;
+
+  return true;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::next_treatment(Treatment* treatment)
 {
-  return false;
+  if (_current_treatment == _treatments.end() || _treatments.empty()) {
+    return false;
+  }
+  treatment->assign(*(*_current_treatment));
+  ++_current_treatment;
+
+  return true;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::next_equipment(Equipment* equipment)
 {
-  return false;
+  if (_current_equipment == _equipments.end() || _equipments.empty()) {
+    return false;
+  }
+  equipment->assign(*(*_current_equipment));
+  ++_current_equipment;
+
+  return true;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::next_injury(Injury* injury)
 {
-  return false;
+  if (_current_injury == _injuries.end() || _injuries.empty()) {
+    return false;
+  }
+  injury->assign(*(*_current_injury));
+  ++_current_injury;
+
+  return true;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::next_assessment(Assessment* assessment)
 {
-  return false;
+  if (_current_assessment == _assessments.end() || _assessments.empty()) {
+    return false;
+  }
+  assessment->assign(*(*_current_assessment));
+  ++_current_assessment;
+
+  return true;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::next_location(Location* location)
 {
-  return false;
+  if (_current_location == _locations.end() || _locations.empty()) {
+    return false;
+  }
+  location->assign(*(*_current_location));
+  ++_current_location;
+
+  return true;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::next_role(Role* role)
 {
-  return false;
+  if (_current_role == _roles.end() || _roles.empty()) {
+    return false;
+  }
+  role->assign(*(*_current_role));
+  ++_current_role;
+
+  return true;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::next_prop(Prop* prop)
 {
-  return false;
+  if (_current_prop == _props.end() || _props.empty()) {
+    return false;
+  }
+  prop->assign(*(*_current_prop));
+  ++_current_prop;
+
+  return true;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::next_event(Event* event)
 {
-  return false;
+  if (_current_event == _events.end() || _events.empty()) {
+    return false;
+  }
+  event->assign(*(*_current_event));
+  ++_current_event;
+
+  return true;
 }
 //------------------------------------------------------------------SELECT_START
 bool SQLite3Driver::select_author(Author* author) const
