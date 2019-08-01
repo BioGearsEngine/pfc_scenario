@@ -394,6 +394,25 @@ inline namespace sqlite3 {
          ;
          )";
 
+  constexpr auto insert_or_update_references
+  = R"()";
+  constexpr auto insert_or_update_treatments
+    = R"()";
+  constexpr auto insert_or_update_equipments
+    = R"()";
+  constexpr auto insert_or_update_injuries
+    = R"()";
+  constexpr auto insert_or_update_assessments
+    = R"()";
+    constexpr auto insert_or_update_locations
+      = R"()";
+  constexpr auto insert_or_update_roles
+    = R"()";
+    constexpr auto insert_or_update_props
+      = R"()";
+  constexpr auto insert_or_update_events
+    = R"()";
+
   //constexpr auto insert_into_authors
   //  = R"( INSERT INTO authors 
   //            (  name_first,  name_last,  email,  zipcode,  state,  country,  phone,  organization)
