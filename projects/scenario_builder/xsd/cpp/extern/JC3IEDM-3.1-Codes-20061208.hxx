@@ -288,7 +288,7 @@ namespace oo_2_0
   class ActionReconnaissanceEmploymentImageCoverageModeCode;
   class ActionReconnaissanceEmploymentImageViewQualifierCode;
   class ActionReconnaissanceEmploymentTypeOfCoverageCode;
-  class ActionReferenceAssociationCategoryCode;
+  class ActionCitationAssociationCategoryCode;
   class ActionResourceCategoryCode;
   class ActionResourceCriticalityIndicatorCode;
   class ActionResourceEmploymentCategoryCode;
@@ -367,7 +367,7 @@ namespace oo_2_0
   class CandidateTargetListAuthorisationIndicatorCode;
   class CapabilityCategoryCode;
   class CapabilityDayNightCode;
-  class CapabilityReferenceAssociationCategoryCode;
+  class CapabilityCitationAssociationCategoryCode;
   class CapabilityUnitOfMeasureCode;
   class CargoCategoryCode;
   class CasualtyGroupCode;
@@ -573,7 +573,7 @@ namespace oo_2_0
   class ObjectItemHostilityStatusCode;
   class ObjectItemLocationMeaningCode;
   class ObjectItemLocationRelativeSpeedCode;
-  class ObjectItemReferenceAssociationCategoryCode;
+  class ObjectItemCitationAssociationCategoryCode;
   class ObjectItemStatusBoobyTrapPresenceCode;
   class ObjectItemStatusCategoryCode;
   class ObjectItemStatusEmissionControlCode;
@@ -583,7 +583,7 @@ namespace oo_2_0
   class ObjectTypeEstablishmentEnvironmentConditionCode;
   class ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode;
   class ObjectTypeEstablishmentOperationalModeCode;
-  class ObjectTypeReferenceAssociationCategoryCode;
+  class ObjectTypeCitationAssociationCategoryCode;
   class OperationalCapabilityCategoryCode;
   class OperationalCapabilityLevelCode;
   class OperationalCapabilityQualifierCode;
@@ -597,7 +597,7 @@ namespace oo_2_0
   class OrganisationCategoryCode;
   class OrganisationMaterielTypeAssociationReportableTypeCode;
   class OrganisationPlanOrderAssociationCategoryCode;
-  class OrganisationReferenceAssociationCategoryCode;
+  class OrganisationCitationAssociationCategoryCode;
   class OrganisationStatusAvailabilityCode;
   class OrganisationStatusCbrnDressStateCode;
   class OrganisationStatusCommandAndControlRoleCode;
@@ -629,7 +629,7 @@ namespace oo_2_0
   class PlanCategoryCode;
   class PlanOrderAssociationCategoryCode;
   class PlanOrderCategoryCode;
-  class PlanOrderComponentContentReferenceCategoryCode;
+  class PlanOrderComponentContentCitationCategoryCode;
   class PlanOrderComponentStructureCategoryCode;
   class PlanOrderDistributionAcknowledgementCode;
   class PlanOrderDistributionCategoryCode;
@@ -654,13 +654,13 @@ namespace oo_2_0
   class RailwaySignalSystemEfficiencyCode;
   class RailwayTrackGaugeCode;
   class RailwayTractionSystemCode;
-  class ReferenceAssociationCategoryCode;
-  class ReferenceContentCategoryCode;
-  class ReferenceLifecycleCode;
-  class ReferenceMediumTypeCode;
-  class ReferenceTransmittalTypeCode;
-  class ReferenceVerificationCode;
-  class RelativeCoordinateSystemReferenceCategoryCode;
+  class CitationAssociationCategoryCode;
+  class CitationContentCategoryCode;
+  class CitationLifecycleCode;
+  class CitationMediumTypeCode;
+  class CitationTransmittalTypeCode;
+  class CitationVerificationCode;
+  class RelativeCoordinateSystemCitationCategoryCode;
   class ReleaseCategoryCode;
   class ReportingDataAccuracyCode;
   class ReportingDataCategoryCode;
@@ -719,7 +719,7 @@ namespace oo_2_0
   class VegetationCategoryCode;
   class VegetationSubcategoryCode;
   class VehicleTypeCategoryCode;
-  class VerticalDistanceReferenceCode;
+  class VerticalDistanceCitationCode;
   class VesselTypeCategoryCode;
   class VesselTypePropulsionTypeCode;
   class VisibilityCategoryCode;
@@ -2960,7 +2960,7 @@ namespace oo_2_0
     static const value _xsd_ActionReconnaissanceEmploymentTypeOfCoverageCode_indexes_[25];
   };
 
-  class ActionReferenceAssociationCategoryCode: public ::xml_schema::token
+  class ActionCitationAssociationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -2976,51 +2976,51 @@ namespace oo_2_0
       ISRPTD
     };
 
-    ActionReferenceAssociationCategoryCode (value v);
+    ActionCitationAssociationCategoryCode (value v);
 
-    ActionReferenceAssociationCategoryCode (const char* v);
+    ActionCitationAssociationCategoryCode (const char* v);
 
-    ActionReferenceAssociationCategoryCode (const ::std::string& v);
+    ActionCitationAssociationCategoryCode (const ::std::string& v);
 
-    ActionReferenceAssociationCategoryCode (const ::xml_schema::token& v);
+    ActionCitationAssociationCategoryCode (const ::xml_schema::token& v);
 
-    ActionReferenceAssociationCategoryCode (const ::xercesc::DOMElement& e,
+    ActionCitationAssociationCategoryCode (const ::xercesc::DOMElement& e,
                                             ::xml_schema::flags f = 0,
                                             ::xml_schema::container* c = 0);
 
-    ActionReferenceAssociationCategoryCode (const ::xercesc::DOMAttr& a,
+    ActionCitationAssociationCategoryCode (const ::xercesc::DOMAttr& a,
                                             ::xml_schema::flags f = 0,
                                             ::xml_schema::container* c = 0);
 
-    ActionReferenceAssociationCategoryCode (const ::std::string& s,
+    ActionCitationAssociationCategoryCode (const ::std::string& s,
                                             const ::xercesc::DOMElement* e,
                                             ::xml_schema::flags f = 0,
                                             ::xml_schema::container* c = 0);
 
-    ActionReferenceAssociationCategoryCode (const ActionReferenceAssociationCategoryCode& x,
+    ActionCitationAssociationCategoryCode (const ActionCitationAssociationCategoryCode& x,
                                             ::xml_schema::flags f = 0,
                                             ::xml_schema::container* c = 0);
 
-    virtual ActionReferenceAssociationCategoryCode*
+    virtual ActionCitationAssociationCategoryCode*
     _clone (::xml_schema::flags f = 0,
             ::xml_schema::container* c = 0) const;
 
-    ActionReferenceAssociationCategoryCode&
+    ActionCitationAssociationCategoryCode&
     operator= (value v);
 
     virtual
     operator value () const
     {
-      return _xsd_ActionReferenceAssociationCategoryCode_convert ();
+      return _xsd_ActionCitationAssociationCategoryCode_convert ();
     }
 
     protected:
     value
-    _xsd_ActionReferenceAssociationCategoryCode_convert () const;
+    _xsd_ActionCitationAssociationCategoryCode_convert () const;
 
     public:
-    static const char* const _xsd_ActionReferenceAssociationCategoryCode_literals_[9];
-    static const value _xsd_ActionReferenceAssociationCategoryCode_indexes_[9];
+    static const char* const _xsd_ActionCitationAssociationCategoryCode_literals_[9];
+    static const value _xsd_ActionCitationAssociationCategoryCode_indexes_[9];
   };
 
   class ActionResourceCategoryCode: public ::xml_schema::token
@@ -13902,7 +13902,7 @@ namespace oo_2_0
     static const value _xsd_CapabilityDayNightCode_indexes_[3];
   };
 
-  class CapabilityReferenceAssociationCategoryCode: public ::xml_schema::token
+  class CapabilityCitationAssociationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -13912,51 +13912,51 @@ namespace oo_2_0
       ISDSCR
     };
 
-    CapabilityReferenceAssociationCategoryCode (value v);
+    CapabilityCitationAssociationCategoryCode (value v);
 
-    CapabilityReferenceAssociationCategoryCode (const char* v);
+    CapabilityCitationAssociationCategoryCode (const char* v);
 
-    CapabilityReferenceAssociationCategoryCode (const ::std::string& v);
+    CapabilityCitationAssociationCategoryCode (const ::std::string& v);
 
-    CapabilityReferenceAssociationCategoryCode (const ::xml_schema::token& v);
+    CapabilityCitationAssociationCategoryCode (const ::xml_schema::token& v);
 
-    CapabilityReferenceAssociationCategoryCode (const ::xercesc::DOMElement& e,
+    CapabilityCitationAssociationCategoryCode (const ::xercesc::DOMElement& e,
                                                 ::xml_schema::flags f = 0,
                                                 ::xml_schema::container* c = 0);
 
-    CapabilityReferenceAssociationCategoryCode (const ::xercesc::DOMAttr& a,
+    CapabilityCitationAssociationCategoryCode (const ::xercesc::DOMAttr& a,
                                                 ::xml_schema::flags f = 0,
                                                 ::xml_schema::container* c = 0);
 
-    CapabilityReferenceAssociationCategoryCode (const ::std::string& s,
+    CapabilityCitationAssociationCategoryCode (const ::std::string& s,
                                                 const ::xercesc::DOMElement* e,
                                                 ::xml_schema::flags f = 0,
                                                 ::xml_schema::container* c = 0);
 
-    CapabilityReferenceAssociationCategoryCode (const CapabilityReferenceAssociationCategoryCode& x,
+    CapabilityCitationAssociationCategoryCode (const CapabilityCitationAssociationCategoryCode& x,
                                                 ::xml_schema::flags f = 0,
                                                 ::xml_schema::container* c = 0);
 
-    virtual CapabilityReferenceAssociationCategoryCode*
+    virtual CapabilityCitationAssociationCategoryCode*
     _clone (::xml_schema::flags f = 0,
             ::xml_schema::container* c = 0) const;
 
-    CapabilityReferenceAssociationCategoryCode&
+    CapabilityCitationAssociationCategoryCode&
     operator= (value v);
 
     virtual
     operator value () const
     {
-      return _xsd_CapabilityReferenceAssociationCategoryCode_convert ();
+      return _xsd_CapabilityCitationAssociationCategoryCode_convert ();
     }
 
     protected:
     value
-    _xsd_CapabilityReferenceAssociationCategoryCode_convert () const;
+    _xsd_CapabilityCitationAssociationCategoryCode_convert () const;
 
     public:
-    static const char* const _xsd_CapabilityReferenceAssociationCategoryCode_literals_[3];
-    static const value _xsd_CapabilityReferenceAssociationCategoryCode_indexes_[3];
+    static const char* const _xsd_CapabilityCitationAssociationCategoryCode_literals_[3];
+    static const value _xsd_CapabilityCitationAssociationCategoryCode_indexes_[3];
   };
 
   class CapabilityUnitOfMeasureCode: public ::xml_schema::token
@@ -28087,7 +28087,7 @@ namespace oo_2_0
     static const value _xsd_ObjectItemLocationRelativeSpeedCode_indexes_[4];
   };
 
-  class ObjectItemReferenceAssociationCategoryCode: public ::xml_schema::token
+  class ObjectItemCitationAssociationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -28102,51 +28102,51 @@ namespace oo_2_0
       ISRPTD
     };
 
-    ObjectItemReferenceAssociationCategoryCode (value v);
+    ObjectItemCitationAssociationCategoryCode (value v);
 
-    ObjectItemReferenceAssociationCategoryCode (const char* v);
+    ObjectItemCitationAssociationCategoryCode (const char* v);
 
-    ObjectItemReferenceAssociationCategoryCode (const ::std::string& v);
+    ObjectItemCitationAssociationCategoryCode (const ::std::string& v);
 
-    ObjectItemReferenceAssociationCategoryCode (const ::xml_schema::token& v);
+    ObjectItemCitationAssociationCategoryCode (const ::xml_schema::token& v);
 
-    ObjectItemReferenceAssociationCategoryCode (const ::xercesc::DOMElement& e,
+    ObjectItemCitationAssociationCategoryCode (const ::xercesc::DOMElement& e,
                                                 ::xml_schema::flags f = 0,
                                                 ::xml_schema::container* c = 0);
 
-    ObjectItemReferenceAssociationCategoryCode (const ::xercesc::DOMAttr& a,
+    ObjectItemCitationAssociationCategoryCode (const ::xercesc::DOMAttr& a,
                                                 ::xml_schema::flags f = 0,
                                                 ::xml_schema::container* c = 0);
 
-    ObjectItemReferenceAssociationCategoryCode (const ::std::string& s,
+    ObjectItemCitationAssociationCategoryCode (const ::std::string& s,
                                                 const ::xercesc::DOMElement* e,
                                                 ::xml_schema::flags f = 0,
                                                 ::xml_schema::container* c = 0);
 
-    ObjectItemReferenceAssociationCategoryCode (const ObjectItemReferenceAssociationCategoryCode& x,
+    ObjectItemCitationAssociationCategoryCode (const ObjectItemCitationAssociationCategoryCode& x,
                                                 ::xml_schema::flags f = 0,
                                                 ::xml_schema::container* c = 0);
 
-    virtual ObjectItemReferenceAssociationCategoryCode*
+    virtual ObjectItemCitationAssociationCategoryCode*
     _clone (::xml_schema::flags f = 0,
             ::xml_schema::container* c = 0) const;
 
-    ObjectItemReferenceAssociationCategoryCode&
+    ObjectItemCitationAssociationCategoryCode&
     operator= (value v);
 
     virtual
     operator value () const
     {
-      return _xsd_ObjectItemReferenceAssociationCategoryCode_convert ();
+      return _xsd_ObjectItemCitationAssociationCategoryCode_convert ();
     }
 
     protected:
     value
-    _xsd_ObjectItemReferenceAssociationCategoryCode_convert () const;
+    _xsd_ObjectItemCitationAssociationCategoryCode_convert () const;
 
     public:
-    static const char* const _xsd_ObjectItemReferenceAssociationCategoryCode_literals_[8];
-    static const value _xsd_ObjectItemReferenceAssociationCategoryCode_indexes_[8];
+    static const char* const _xsd_ObjectItemCitationAssociationCategoryCode_literals_[8];
+    static const value _xsd_ObjectItemCitationAssociationCategoryCode_indexes_[8];
   };
 
   class ObjectItemStatusBoobyTrapPresenceCode: public ::xml_schema::token
@@ -28675,7 +28675,7 @@ namespace oo_2_0
     static const value _xsd_ObjectTypeEstablishmentOperationalModeCode_indexes_[7];
   };
 
-  class ObjectTypeReferenceAssociationCategoryCode: public ::xml_schema::token
+  class ObjectTypeCitationAssociationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -28689,51 +28689,51 @@ namespace oo_2_0
       ISSPCF
     };
 
-    ObjectTypeReferenceAssociationCategoryCode (value v);
+    ObjectTypeCitationAssociationCategoryCode (value v);
 
-    ObjectTypeReferenceAssociationCategoryCode (const char* v);
+    ObjectTypeCitationAssociationCategoryCode (const char* v);
 
-    ObjectTypeReferenceAssociationCategoryCode (const ::std::string& v);
+    ObjectTypeCitationAssociationCategoryCode (const ::std::string& v);
 
-    ObjectTypeReferenceAssociationCategoryCode (const ::xml_schema::token& v);
+    ObjectTypeCitationAssociationCategoryCode (const ::xml_schema::token& v);
 
-    ObjectTypeReferenceAssociationCategoryCode (const ::xercesc::DOMElement& e,
+    ObjectTypeCitationAssociationCategoryCode (const ::xercesc::DOMElement& e,
                                                 ::xml_schema::flags f = 0,
                                                 ::xml_schema::container* c = 0);
 
-    ObjectTypeReferenceAssociationCategoryCode (const ::xercesc::DOMAttr& a,
+    ObjectTypeCitationAssociationCategoryCode (const ::xercesc::DOMAttr& a,
                                                 ::xml_schema::flags f = 0,
                                                 ::xml_schema::container* c = 0);
 
-    ObjectTypeReferenceAssociationCategoryCode (const ::std::string& s,
+    ObjectTypeCitationAssociationCategoryCode (const ::std::string& s,
                                                 const ::xercesc::DOMElement* e,
                                                 ::xml_schema::flags f = 0,
                                                 ::xml_schema::container* c = 0);
 
-    ObjectTypeReferenceAssociationCategoryCode (const ObjectTypeReferenceAssociationCategoryCode& x,
+    ObjectTypeCitationAssociationCategoryCode (const ObjectTypeCitationAssociationCategoryCode& x,
                                                 ::xml_schema::flags f = 0,
                                                 ::xml_schema::container* c = 0);
 
-    virtual ObjectTypeReferenceAssociationCategoryCode*
+    virtual ObjectTypeCitationAssociationCategoryCode*
     _clone (::xml_schema::flags f = 0,
             ::xml_schema::container* c = 0) const;
 
-    ObjectTypeReferenceAssociationCategoryCode&
+    ObjectTypeCitationAssociationCategoryCode&
     operator= (value v);
 
     virtual
     operator value () const
     {
-      return _xsd_ObjectTypeReferenceAssociationCategoryCode_convert ();
+      return _xsd_ObjectTypeCitationAssociationCategoryCode_convert ();
     }
 
     protected:
     value
-    _xsd_ObjectTypeReferenceAssociationCategoryCode_convert () const;
+    _xsd_ObjectTypeCitationAssociationCategoryCode_convert () const;
 
     public:
-    static const char* const _xsd_ObjectTypeReferenceAssociationCategoryCode_literals_[7];
-    static const value _xsd_ObjectTypeReferenceAssociationCategoryCode_indexes_[7];
+    static const char* const _xsd_ObjectTypeCitationAssociationCategoryCode_literals_[7];
+    static const value _xsd_ObjectTypeCitationAssociationCategoryCode_indexes_[7];
   };
 
   class OperationalCapabilityCategoryCode: public ::xml_schema::token
@@ -29594,7 +29594,7 @@ namespace oo_2_0
     static const value _xsd_OrganisationPlanOrderAssociationCategoryCode_indexes_[5];
   };
 
-  class OrganisationReferenceAssociationCategoryCode: public ::xml_schema::token
+  class OrganisationCitationAssociationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -29607,51 +29607,51 @@ namespace oo_2_0
       ISRLSA
     };
 
-    OrganisationReferenceAssociationCategoryCode (value v);
+    OrganisationCitationAssociationCategoryCode (value v);
 
-    OrganisationReferenceAssociationCategoryCode (const char* v);
+    OrganisationCitationAssociationCategoryCode (const char* v);
 
-    OrganisationReferenceAssociationCategoryCode (const ::std::string& v);
+    OrganisationCitationAssociationCategoryCode (const ::std::string& v);
 
-    OrganisationReferenceAssociationCategoryCode (const ::xml_schema::token& v);
+    OrganisationCitationAssociationCategoryCode (const ::xml_schema::token& v);
 
-    OrganisationReferenceAssociationCategoryCode (const ::xercesc::DOMElement& e,
+    OrganisationCitationAssociationCategoryCode (const ::xercesc::DOMElement& e,
                                                   ::xml_schema::flags f = 0,
                                                   ::xml_schema::container* c = 0);
 
-    OrganisationReferenceAssociationCategoryCode (const ::xercesc::DOMAttr& a,
+    OrganisationCitationAssociationCategoryCode (const ::xercesc::DOMAttr& a,
                                                   ::xml_schema::flags f = 0,
                                                   ::xml_schema::container* c = 0);
 
-    OrganisationReferenceAssociationCategoryCode (const ::std::string& s,
+    OrganisationCitationAssociationCategoryCode (const ::std::string& s,
                                                   const ::xercesc::DOMElement* e,
                                                   ::xml_schema::flags f = 0,
                                                   ::xml_schema::container* c = 0);
 
-    OrganisationReferenceAssociationCategoryCode (const OrganisationReferenceAssociationCategoryCode& x,
+    OrganisationCitationAssociationCategoryCode (const OrganisationCitationAssociationCategoryCode& x,
                                                   ::xml_schema::flags f = 0,
                                                   ::xml_schema::container* c = 0);
 
-    virtual OrganisationReferenceAssociationCategoryCode*
+    virtual OrganisationCitationAssociationCategoryCode*
     _clone (::xml_schema::flags f = 0,
             ::xml_schema::container* c = 0) const;
 
-    OrganisationReferenceAssociationCategoryCode&
+    OrganisationCitationAssociationCategoryCode&
     operator= (value v);
 
     virtual
     operator value () const
     {
-      return _xsd_OrganisationReferenceAssociationCategoryCode_convert ();
+      return _xsd_OrganisationCitationAssociationCategoryCode_convert ();
     }
 
     protected:
     value
-    _xsd_OrganisationReferenceAssociationCategoryCode_convert () const;
+    _xsd_OrganisationCitationAssociationCategoryCode_convert () const;
 
     public:
-    static const char* const _xsd_OrganisationReferenceAssociationCategoryCode_literals_[6];
-    static const value _xsd_OrganisationReferenceAssociationCategoryCode_indexes_[6];
+    static const char* const _xsd_OrganisationCitationAssociationCategoryCode_literals_[6];
+    static const value _xsd_OrganisationCitationAssociationCategoryCode_indexes_[6];
   };
 
   class OrganisationStatusAvailabilityCode: public ::xml_schema::token
@@ -31596,7 +31596,7 @@ namespace oo_2_0
     static const value _xsd_PlanOrderCategoryCode_indexes_[2];
   };
 
-  class PlanOrderComponentContentReferenceCategoryCode: public ::xml_schema::token
+  class PlanOrderComponentContentCitationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -31610,51 +31610,51 @@ namespace oo_2_0
       ISSPPM
     };
 
-    PlanOrderComponentContentReferenceCategoryCode (value v);
+    PlanOrderComponentContentCitationCategoryCode (value v);
 
-    PlanOrderComponentContentReferenceCategoryCode (const char* v);
+    PlanOrderComponentContentCitationCategoryCode (const char* v);
 
-    PlanOrderComponentContentReferenceCategoryCode (const ::std::string& v);
+    PlanOrderComponentContentCitationCategoryCode (const ::std::string& v);
 
-    PlanOrderComponentContentReferenceCategoryCode (const ::xml_schema::token& v);
+    PlanOrderComponentContentCitationCategoryCode (const ::xml_schema::token& v);
 
-    PlanOrderComponentContentReferenceCategoryCode (const ::xercesc::DOMElement& e,
+    PlanOrderComponentContentCitationCategoryCode (const ::xercesc::DOMElement& e,
                                                     ::xml_schema::flags f = 0,
                                                     ::xml_schema::container* c = 0);
 
-    PlanOrderComponentContentReferenceCategoryCode (const ::xercesc::DOMAttr& a,
+    PlanOrderComponentContentCitationCategoryCode (const ::xercesc::DOMAttr& a,
                                                     ::xml_schema::flags f = 0,
                                                     ::xml_schema::container* c = 0);
 
-    PlanOrderComponentContentReferenceCategoryCode (const ::std::string& s,
+    PlanOrderComponentContentCitationCategoryCode (const ::std::string& s,
                                                     const ::xercesc::DOMElement* e,
                                                     ::xml_schema::flags f = 0,
                                                     ::xml_schema::container* c = 0);
 
-    PlanOrderComponentContentReferenceCategoryCode (const PlanOrderComponentContentReferenceCategoryCode& x,
+    PlanOrderComponentContentCitationCategoryCode (const PlanOrderComponentContentCitationCategoryCode& x,
                                                     ::xml_schema::flags f = 0,
                                                     ::xml_schema::container* c = 0);
 
-    virtual PlanOrderComponentContentReferenceCategoryCode*
+    virtual PlanOrderComponentContentCitationCategoryCode*
     _clone (::xml_schema::flags f = 0,
             ::xml_schema::container* c = 0) const;
 
-    PlanOrderComponentContentReferenceCategoryCode&
+    PlanOrderComponentContentCitationCategoryCode&
     operator= (value v);
 
     virtual
     operator value () const
     {
-      return _xsd_PlanOrderComponentContentReferenceCategoryCode_convert ();
+      return _xsd_PlanOrderComponentContentCitationCategoryCode_convert ();
     }
 
     protected:
     value
-    _xsd_PlanOrderComponentContentReferenceCategoryCode_convert () const;
+    _xsd_PlanOrderComponentContentCitationCategoryCode_convert () const;
 
     public:
-    static const char* const _xsd_PlanOrderComponentContentReferenceCategoryCode_literals_[7];
-    static const value _xsd_PlanOrderComponentContentReferenceCategoryCode_indexes_[7];
+    static const char* const _xsd_PlanOrderComponentContentCitationCategoryCode_literals_[7];
+    static const value _xsd_PlanOrderComponentContentCitationCategoryCode_indexes_[7];
   };
 
   class PlanOrderComponentStructureCategoryCode: public ::xml_schema::token
@@ -33119,7 +33119,7 @@ namespace oo_2_0
     static const value _xsd_RailwayTractionSystemCode_indexes_[2];
   };
 
-  class ReferenceAssociationCategoryCode: public ::xml_schema::token
+  class CitationAssociationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -33137,54 +33137,54 @@ namespace oo_2_0
       SUPRCD
     };
 
-    ReferenceAssociationCategoryCode (value v);
+    CitationAssociationCategoryCode (value v);
 
-    ReferenceAssociationCategoryCode (const char* v);
+    CitationAssociationCategoryCode (const char* v);
 
-    ReferenceAssociationCategoryCode (const ::std::string& v);
+    CitationAssociationCategoryCode (const ::std::string& v);
 
-    ReferenceAssociationCategoryCode (const ::xml_schema::token& v);
+    CitationAssociationCategoryCode (const ::xml_schema::token& v);
 
-    ReferenceAssociationCategoryCode (const ::xercesc::DOMElement& e,
+    CitationAssociationCategoryCode (const ::xercesc::DOMElement& e,
                                       ::xml_schema::flags f = 0,
                                       ::xml_schema::container* c = 0);
 
-    ReferenceAssociationCategoryCode (const ::xercesc::DOMAttr& a,
+    CitationAssociationCategoryCode (const ::xercesc::DOMAttr& a,
                                       ::xml_schema::flags f = 0,
                                       ::xml_schema::container* c = 0);
 
-    ReferenceAssociationCategoryCode (const ::std::string& s,
+    CitationAssociationCategoryCode (const ::std::string& s,
                                       const ::xercesc::DOMElement* e,
                                       ::xml_schema::flags f = 0,
                                       ::xml_schema::container* c = 0);
 
-    ReferenceAssociationCategoryCode (const ReferenceAssociationCategoryCode& x,
+    CitationAssociationCategoryCode (const CitationAssociationCategoryCode& x,
                                       ::xml_schema::flags f = 0,
                                       ::xml_schema::container* c = 0);
 
-    virtual ReferenceAssociationCategoryCode*
+    virtual CitationAssociationCategoryCode*
     _clone (::xml_schema::flags f = 0,
             ::xml_schema::container* c = 0) const;
 
-    ReferenceAssociationCategoryCode&
+    CitationAssociationCategoryCode&
     operator= (value v);
 
     virtual
     operator value () const
     {
-      return _xsd_ReferenceAssociationCategoryCode_convert ();
+      return _xsd_CitationAssociationCategoryCode_convert ();
     }
 
     protected:
     value
-    _xsd_ReferenceAssociationCategoryCode_convert () const;
+    _xsd_CitationAssociationCategoryCode_convert () const;
 
     public:
-    static const char* const _xsd_ReferenceAssociationCategoryCode_literals_[11];
-    static const value _xsd_ReferenceAssociationCategoryCode_indexes_[11];
+    static const char* const _xsd_CitationAssociationCategoryCode_literals_[11];
+    static const value _xsd_CitationAssociationCategoryCode_indexes_[11];
   };
 
-  class ReferenceContentCategoryCode: public ::xml_schema::token
+  class CitationContentCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -33211,54 +33211,54 @@ namespace oo_2_0
       TSTDOC
     };
 
-    ReferenceContentCategoryCode (value v);
+    CitationContentCategoryCode (value v);
 
-    ReferenceContentCategoryCode (const char* v);
+    CitationContentCategoryCode (const char* v);
 
-    ReferenceContentCategoryCode (const ::std::string& v);
+    CitationContentCategoryCode (const ::std::string& v);
 
-    ReferenceContentCategoryCode (const ::xml_schema::token& v);
+    CitationContentCategoryCode (const ::xml_schema::token& v);
 
-    ReferenceContentCategoryCode (const ::xercesc::DOMElement& e,
+    CitationContentCategoryCode (const ::xercesc::DOMElement& e,
                                   ::xml_schema::flags f = 0,
                                   ::xml_schema::container* c = 0);
 
-    ReferenceContentCategoryCode (const ::xercesc::DOMAttr& a,
+    CitationContentCategoryCode (const ::xercesc::DOMAttr& a,
                                   ::xml_schema::flags f = 0,
                                   ::xml_schema::container* c = 0);
 
-    ReferenceContentCategoryCode (const ::std::string& s,
+    CitationContentCategoryCode (const ::std::string& s,
                                   const ::xercesc::DOMElement* e,
                                   ::xml_schema::flags f = 0,
                                   ::xml_schema::container* c = 0);
 
-    ReferenceContentCategoryCode (const ReferenceContentCategoryCode& x,
+    CitationContentCategoryCode (const CitationContentCategoryCode& x,
                                   ::xml_schema::flags f = 0,
                                   ::xml_schema::container* c = 0);
 
-    virtual ReferenceContentCategoryCode*
+    virtual CitationContentCategoryCode*
     _clone (::xml_schema::flags f = 0,
             ::xml_schema::container* c = 0) const;
 
-    ReferenceContentCategoryCode&
+    CitationContentCategoryCode&
     operator= (value v);
 
     virtual
     operator value () const
     {
-      return _xsd_ReferenceContentCategoryCode_convert ();
+      return _xsd_CitationContentCategoryCode_convert ();
     }
 
     protected:
     value
-    _xsd_ReferenceContentCategoryCode_convert () const;
+    _xsd_CitationContentCategoryCode_convert () const;
 
     public:
-    static const char* const _xsd_ReferenceContentCategoryCode_literals_[20];
-    static const value _xsd_ReferenceContentCategoryCode_indexes_[20];
+    static const char* const _xsd_CitationContentCategoryCode_literals_[20];
+    static const value _xsd_CitationContentCategoryCode_indexes_[20];
   };
 
-  class ReferenceLifecycleCode: public ::xml_schema::token
+  class CitationLifecycleCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -33268,54 +33268,54 @@ namespace oo_2_0
       OBSLTE
     };
 
-    ReferenceLifecycleCode (value v);
+    CitationLifecycleCode (value v);
 
-    ReferenceLifecycleCode (const char* v);
+    CitationLifecycleCode (const char* v);
 
-    ReferenceLifecycleCode (const ::std::string& v);
+    CitationLifecycleCode (const ::std::string& v);
 
-    ReferenceLifecycleCode (const ::xml_schema::token& v);
+    CitationLifecycleCode (const ::xml_schema::token& v);
 
-    ReferenceLifecycleCode (const ::xercesc::DOMElement& e,
+    CitationLifecycleCode (const ::xercesc::DOMElement& e,
                             ::xml_schema::flags f = 0,
                             ::xml_schema::container* c = 0);
 
-    ReferenceLifecycleCode (const ::xercesc::DOMAttr& a,
+    CitationLifecycleCode (const ::xercesc::DOMAttr& a,
                             ::xml_schema::flags f = 0,
                             ::xml_schema::container* c = 0);
 
-    ReferenceLifecycleCode (const ::std::string& s,
+    CitationLifecycleCode (const ::std::string& s,
                             const ::xercesc::DOMElement* e,
                             ::xml_schema::flags f = 0,
                             ::xml_schema::container* c = 0);
 
-    ReferenceLifecycleCode (const ReferenceLifecycleCode& x,
+    CitationLifecycleCode (const CitationLifecycleCode& x,
                             ::xml_schema::flags f = 0,
                             ::xml_schema::container* c = 0);
 
-    virtual ReferenceLifecycleCode*
+    virtual CitationLifecycleCode*
     _clone (::xml_schema::flags f = 0,
             ::xml_schema::container* c = 0) const;
 
-    ReferenceLifecycleCode&
+    CitationLifecycleCode&
     operator= (value v);
 
     virtual
     operator value () const
     {
-      return _xsd_ReferenceLifecycleCode_convert ();
+      return _xsd_CitationLifecycleCode_convert ();
     }
 
     protected:
     value
-    _xsd_ReferenceLifecycleCode_convert () const;
+    _xsd_CitationLifecycleCode_convert () const;
 
     public:
-    static const char* const _xsd_ReferenceLifecycleCode_literals_[3];
-    static const value _xsd_ReferenceLifecycleCode_indexes_[3];
+    static const char* const _xsd_CitationLifecycleCode_literals_[3];
+    static const value _xsd_CitationLifecycleCode_indexes_[3];
   };
 
-  class ReferenceMediumTypeCode: public ::xml_schema::token
+  class CitationMediumTypeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -33329,54 +33329,54 @@ namespace oo_2_0
       PAPERB
     };
 
-    ReferenceMediumTypeCode (value v);
+    CitationMediumTypeCode (value v);
 
-    ReferenceMediumTypeCode (const char* v);
+    CitationMediumTypeCode (const char* v);
 
-    ReferenceMediumTypeCode (const ::std::string& v);
+    CitationMediumTypeCode (const ::std::string& v);
 
-    ReferenceMediumTypeCode (const ::xml_schema::token& v);
+    CitationMediumTypeCode (const ::xml_schema::token& v);
 
-    ReferenceMediumTypeCode (const ::xercesc::DOMElement& e,
+    CitationMediumTypeCode (const ::xercesc::DOMElement& e,
                              ::xml_schema::flags f = 0,
                              ::xml_schema::container* c = 0);
 
-    ReferenceMediumTypeCode (const ::xercesc::DOMAttr& a,
+    CitationMediumTypeCode (const ::xercesc::DOMAttr& a,
                              ::xml_schema::flags f = 0,
                              ::xml_schema::container* c = 0);
 
-    ReferenceMediumTypeCode (const ::std::string& s,
+    CitationMediumTypeCode (const ::std::string& s,
                              const ::xercesc::DOMElement* e,
                              ::xml_schema::flags f = 0,
                              ::xml_schema::container* c = 0);
 
-    ReferenceMediumTypeCode (const ReferenceMediumTypeCode& x,
+    CitationMediumTypeCode (const CitationMediumTypeCode& x,
                              ::xml_schema::flags f = 0,
                              ::xml_schema::container* c = 0);
 
-    virtual ReferenceMediumTypeCode*
+    virtual CitationMediumTypeCode*
     _clone (::xml_schema::flags f = 0,
             ::xml_schema::container* c = 0) const;
 
-    ReferenceMediumTypeCode&
+    CitationMediumTypeCode&
     operator= (value v);
 
     virtual
     operator value () const
     {
-      return _xsd_ReferenceMediumTypeCode_convert ();
+      return _xsd_CitationMediumTypeCode_convert ();
     }
 
     protected:
     value
-    _xsd_ReferenceMediumTypeCode_convert () const;
+    _xsd_CitationMediumTypeCode_convert () const;
 
     public:
-    static const char* const _xsd_ReferenceMediumTypeCode_literals_[7];
-    static const value _xsd_ReferenceMediumTypeCode_indexes_[7];
+    static const char* const _xsd_CitationMediumTypeCode_literals_[7];
+    static const value _xsd_CitationMediumTypeCode_indexes_[7];
   };
 
-  class ReferenceTransmittalTypeCode: public ::xml_schema::token
+  class CitationTransmittalTypeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -33394,54 +33394,54 @@ namespace oo_2_0
       VIDEO
     };
 
-    ReferenceTransmittalTypeCode (value v);
+    CitationTransmittalTypeCode (value v);
 
-    ReferenceTransmittalTypeCode (const char* v);
+    CitationTransmittalTypeCode (const char* v);
 
-    ReferenceTransmittalTypeCode (const ::std::string& v);
+    CitationTransmittalTypeCode (const ::std::string& v);
 
-    ReferenceTransmittalTypeCode (const ::xml_schema::token& v);
+    CitationTransmittalTypeCode (const ::xml_schema::token& v);
 
-    ReferenceTransmittalTypeCode (const ::xercesc::DOMElement& e,
+    CitationTransmittalTypeCode (const ::xercesc::DOMElement& e,
                                   ::xml_schema::flags f = 0,
                                   ::xml_schema::container* c = 0);
 
-    ReferenceTransmittalTypeCode (const ::xercesc::DOMAttr& a,
+    CitationTransmittalTypeCode (const ::xercesc::DOMAttr& a,
                                   ::xml_schema::flags f = 0,
                                   ::xml_schema::container* c = 0);
 
-    ReferenceTransmittalTypeCode (const ::std::string& s,
+    CitationTransmittalTypeCode (const ::std::string& s,
                                   const ::xercesc::DOMElement* e,
                                   ::xml_schema::flags f = 0,
                                   ::xml_schema::container* c = 0);
 
-    ReferenceTransmittalTypeCode (const ReferenceTransmittalTypeCode& x,
+    CitationTransmittalTypeCode (const CitationTransmittalTypeCode& x,
                                   ::xml_schema::flags f = 0,
                                   ::xml_schema::container* c = 0);
 
-    virtual ReferenceTransmittalTypeCode*
+    virtual CitationTransmittalTypeCode*
     _clone (::xml_schema::flags f = 0,
             ::xml_schema::container* c = 0) const;
 
-    ReferenceTransmittalTypeCode&
+    CitationTransmittalTypeCode&
     operator= (value v);
 
     virtual
     operator value () const
     {
-      return _xsd_ReferenceTransmittalTypeCode_convert ();
+      return _xsd_CitationTransmittalTypeCode_convert ();
     }
 
     protected:
     value
-    _xsd_ReferenceTransmittalTypeCode_convert () const;
+    _xsd_CitationTransmittalTypeCode_convert () const;
 
     public:
-    static const char* const _xsd_ReferenceTransmittalTypeCode_literals_[11];
-    static const value _xsd_ReferenceTransmittalTypeCode_indexes_[11];
+    static const char* const _xsd_CitationTransmittalTypeCode_literals_[11];
+    static const value _xsd_CitationTransmittalTypeCode_indexes_[11];
   };
 
-  class ReferenceVerificationCode: public ::xml_schema::token
+  class CitationVerificationCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -33451,54 +33451,54 @@ namespace oo_2_0
       REFVNA
     };
 
-    ReferenceVerificationCode (value v);
+    CitationVerificationCode (value v);
 
-    ReferenceVerificationCode (const char* v);
+    CitationVerificationCode (const char* v);
 
-    ReferenceVerificationCode (const ::std::string& v);
+    CitationVerificationCode (const ::std::string& v);
 
-    ReferenceVerificationCode (const ::xml_schema::token& v);
+    CitationVerificationCode (const ::xml_schema::token& v);
 
-    ReferenceVerificationCode (const ::xercesc::DOMElement& e,
+    CitationVerificationCode (const ::xercesc::DOMElement& e,
                                ::xml_schema::flags f = 0,
                                ::xml_schema::container* c = 0);
 
-    ReferenceVerificationCode (const ::xercesc::DOMAttr& a,
+    CitationVerificationCode (const ::xercesc::DOMAttr& a,
                                ::xml_schema::flags f = 0,
                                ::xml_schema::container* c = 0);
 
-    ReferenceVerificationCode (const ::std::string& s,
+    CitationVerificationCode (const ::std::string& s,
                                const ::xercesc::DOMElement* e,
                                ::xml_schema::flags f = 0,
                                ::xml_schema::container* c = 0);
 
-    ReferenceVerificationCode (const ReferenceVerificationCode& x,
+    CitationVerificationCode (const CitationVerificationCode& x,
                                ::xml_schema::flags f = 0,
                                ::xml_schema::container* c = 0);
 
-    virtual ReferenceVerificationCode*
+    virtual CitationVerificationCode*
     _clone (::xml_schema::flags f = 0,
             ::xml_schema::container* c = 0) const;
 
-    ReferenceVerificationCode&
+    CitationVerificationCode&
     operator= (value v);
 
     virtual
     operator value () const
     {
-      return _xsd_ReferenceVerificationCode_convert ();
+      return _xsd_CitationVerificationCode_convert ();
     }
 
     protected:
     value
-    _xsd_ReferenceVerificationCode_convert () const;
+    _xsd_CitationVerificationCode_convert () const;
 
     public:
-    static const char* const _xsd_ReferenceVerificationCode_literals_[3];
-    static const value _xsd_ReferenceVerificationCode_indexes_[3];
+    static const char* const _xsd_CitationVerificationCode_literals_[3];
+    static const value _xsd_CitationVerificationCode_indexes_[3];
   };
 
-  class RelativeCoordinateSystemReferenceCategoryCode: public ::xml_schema::token
+  class RelativeCoordinateSystemCitationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -33507,51 +33507,51 @@ namespace oo_2_0
       PNTREF
     };
 
-    RelativeCoordinateSystemReferenceCategoryCode (value v);
+    RelativeCoordinateSystemCitationCategoryCode (value v);
 
-    RelativeCoordinateSystemReferenceCategoryCode (const char* v);
+    RelativeCoordinateSystemCitationCategoryCode (const char* v);
 
-    RelativeCoordinateSystemReferenceCategoryCode (const ::std::string& v);
+    RelativeCoordinateSystemCitationCategoryCode (const ::std::string& v);
 
-    RelativeCoordinateSystemReferenceCategoryCode (const ::xml_schema::token& v);
+    RelativeCoordinateSystemCitationCategoryCode (const ::xml_schema::token& v);
 
-    RelativeCoordinateSystemReferenceCategoryCode (const ::xercesc::DOMElement& e,
+    RelativeCoordinateSystemCitationCategoryCode (const ::xercesc::DOMElement& e,
                                                    ::xml_schema::flags f = 0,
                                                    ::xml_schema::container* c = 0);
 
-    RelativeCoordinateSystemReferenceCategoryCode (const ::xercesc::DOMAttr& a,
+    RelativeCoordinateSystemCitationCategoryCode (const ::xercesc::DOMAttr& a,
                                                    ::xml_schema::flags f = 0,
                                                    ::xml_schema::container* c = 0);
 
-    RelativeCoordinateSystemReferenceCategoryCode (const ::std::string& s,
+    RelativeCoordinateSystemCitationCategoryCode (const ::std::string& s,
                                                    const ::xercesc::DOMElement* e,
                                                    ::xml_schema::flags f = 0,
                                                    ::xml_schema::container* c = 0);
 
-    RelativeCoordinateSystemReferenceCategoryCode (const RelativeCoordinateSystemReferenceCategoryCode& x,
+    RelativeCoordinateSystemCitationCategoryCode (const RelativeCoordinateSystemCitationCategoryCode& x,
                                                    ::xml_schema::flags f = 0,
                                                    ::xml_schema::container* c = 0);
 
-    virtual RelativeCoordinateSystemReferenceCategoryCode*
+    virtual RelativeCoordinateSystemCitationCategoryCode*
     _clone (::xml_schema::flags f = 0,
             ::xml_schema::container* c = 0) const;
 
-    RelativeCoordinateSystemReferenceCategoryCode&
+    RelativeCoordinateSystemCitationCategoryCode&
     operator= (value v);
 
     virtual
     operator value () const
     {
-      return _xsd_RelativeCoordinateSystemReferenceCategoryCode_convert ();
+      return _xsd_RelativeCoordinateSystemCitationCategoryCode_convert ();
     }
 
     protected:
     value
-    _xsd_RelativeCoordinateSystemReferenceCategoryCode_convert () const;
+    _xsd_RelativeCoordinateSystemCitationCategoryCode_convert () const;
 
     public:
-    static const char* const _xsd_RelativeCoordinateSystemReferenceCategoryCode_literals_[2];
-    static const value _xsd_RelativeCoordinateSystemReferenceCategoryCode_indexes_[2];
+    static const char* const _xsd_RelativeCoordinateSystemCitationCategoryCode_literals_[2];
+    static const value _xsd_RelativeCoordinateSystemCitationCategoryCode_indexes_[2];
   };
 
   class ReleaseCategoryCode: public ::xml_schema::token
@@ -37792,7 +37792,7 @@ namespace oo_2_0
     static const value _xsd_VehicleTypeCategoryCode_indexes_[48];
   };
 
-  class VerticalDistanceReferenceCode: public ::xml_schema::token
+  class VerticalDistanceCitationCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -37809,51 +37809,51 @@ namespace oo_2_0
       WGS84R
     };
 
-    VerticalDistanceReferenceCode (value v);
+    VerticalDistanceCitationCode (value v);
 
-    VerticalDistanceReferenceCode (const char* v);
+    VerticalDistanceCitationCode (const char* v);
 
-    VerticalDistanceReferenceCode (const ::std::string& v);
+    VerticalDistanceCitationCode (const ::std::string& v);
 
-    VerticalDistanceReferenceCode (const ::xml_schema::token& v);
+    VerticalDistanceCitationCode (const ::xml_schema::token& v);
 
-    VerticalDistanceReferenceCode (const ::xercesc::DOMElement& e,
+    VerticalDistanceCitationCode (const ::xercesc::DOMElement& e,
                                    ::xml_schema::flags f = 0,
                                    ::xml_schema::container* c = 0);
 
-    VerticalDistanceReferenceCode (const ::xercesc::DOMAttr& a,
+    VerticalDistanceCitationCode (const ::xercesc::DOMAttr& a,
                                    ::xml_schema::flags f = 0,
                                    ::xml_schema::container* c = 0);
 
-    VerticalDistanceReferenceCode (const ::std::string& s,
+    VerticalDistanceCitationCode (const ::std::string& s,
                                    const ::xercesc::DOMElement* e,
                                    ::xml_schema::flags f = 0,
                                    ::xml_schema::container* c = 0);
 
-    VerticalDistanceReferenceCode (const VerticalDistanceReferenceCode& x,
+    VerticalDistanceCitationCode (const VerticalDistanceCitationCode& x,
                                    ::xml_schema::flags f = 0,
                                    ::xml_schema::container* c = 0);
 
-    virtual VerticalDistanceReferenceCode*
+    virtual VerticalDistanceCitationCode*
     _clone (::xml_schema::flags f = 0,
             ::xml_schema::container* c = 0) const;
 
-    VerticalDistanceReferenceCode&
+    VerticalDistanceCitationCode&
     operator= (value v);
 
     virtual
     operator value () const
     {
-      return _xsd_VerticalDistanceReferenceCode_convert ();
+      return _xsd_VerticalDistanceCitationCode_convert ();
     }
 
     protected:
     value
-    _xsd_VerticalDistanceReferenceCode_convert () const;
+    _xsd_VerticalDistanceCitationCode_convert () const;
 
     public:
-    static const char* const _xsd_VerticalDistanceReferenceCode_literals_[10];
-    static const value _xsd_VerticalDistanceReferenceCode_indexes_[10];
+    static const char* const _xsd_VerticalDistanceCitationCode_literals_[10];
+    static const value _xsd_VerticalDistanceCitationCode_indexes_[10];
   };
 
   class VesselTypeCategoryCode: public ::xml_schema::token
@@ -38709,10 +38709,10 @@ namespace oo_2_0
   operator<< (::std::ostream&, const ActionReconnaissanceEmploymentTypeOfCoverageCode&);
 
   ::std::ostream&
-  operator<< (::std::ostream&, ActionReferenceAssociationCategoryCode::value);
+  operator<< (::std::ostream&, ActionCitationAssociationCategoryCode::value);
 
   ::std::ostream&
-  operator<< (::std::ostream&, const ActionReferenceAssociationCategoryCode&);
+  operator<< (::std::ostream&, const ActionCitationAssociationCategoryCode&);
 
   ::std::ostream&
   operator<< (::std::ostream&, ActionResourceCategoryCode::value);
@@ -39183,10 +39183,10 @@ namespace oo_2_0
   operator<< (::std::ostream&, const CapabilityDayNightCode&);
 
   ::std::ostream&
-  operator<< (::std::ostream&, CapabilityReferenceAssociationCategoryCode::value);
+  operator<< (::std::ostream&, CapabilityCitationAssociationCategoryCode::value);
 
   ::std::ostream&
-  operator<< (::std::ostream&, const CapabilityReferenceAssociationCategoryCode&);
+  operator<< (::std::ostream&, const CapabilityCitationAssociationCategoryCode&);
 
   ::std::ostream&
   operator<< (::std::ostream&, CapabilityUnitOfMeasureCode::value);
@@ -40419,10 +40419,10 @@ namespace oo_2_0
   operator<< (::std::ostream&, const ObjectItemLocationRelativeSpeedCode&);
 
   ::std::ostream&
-  operator<< (::std::ostream&, ObjectItemReferenceAssociationCategoryCode::value);
+  operator<< (::std::ostream&, ObjectItemCitationAssociationCategoryCode::value);
 
   ::std::ostream&
-  operator<< (::std::ostream&, const ObjectItemReferenceAssociationCategoryCode&);
+  operator<< (::std::ostream&, const ObjectItemCitationAssociationCategoryCode&);
 
   ::std::ostream&
   operator<< (::std::ostream&, ObjectItemStatusBoobyTrapPresenceCode::value);
@@ -40479,10 +40479,10 @@ namespace oo_2_0
   operator<< (::std::ostream&, const ObjectTypeEstablishmentOperationalModeCode&);
 
   ::std::ostream&
-  operator<< (::std::ostream&, ObjectTypeReferenceAssociationCategoryCode::value);
+  operator<< (::std::ostream&, ObjectTypeCitationAssociationCategoryCode::value);
 
   ::std::ostream&
-  operator<< (::std::ostream&, const ObjectTypeReferenceAssociationCategoryCode&);
+  operator<< (::std::ostream&, const ObjectTypeCitationAssociationCategoryCode&);
 
   ::std::ostream&
   operator<< (::std::ostream&, OperationalCapabilityCategoryCode::value);
@@ -40563,10 +40563,10 @@ namespace oo_2_0
   operator<< (::std::ostream&, const OrganisationPlanOrderAssociationCategoryCode&);
 
   ::std::ostream&
-  operator<< (::std::ostream&, OrganisationReferenceAssociationCategoryCode::value);
+  operator<< (::std::ostream&, OrganisationCitationAssociationCategoryCode::value);
 
   ::std::ostream&
-  operator<< (::std::ostream&, const OrganisationReferenceAssociationCategoryCode&);
+  operator<< (::std::ostream&, const OrganisationCitationAssociationCategoryCode&);
 
   ::std::ostream&
   operator<< (::std::ostream&, OrganisationStatusAvailabilityCode::value);
@@ -40755,10 +40755,10 @@ namespace oo_2_0
   operator<< (::std::ostream&, const PlanOrderCategoryCode&);
 
   ::std::ostream&
-  operator<< (::std::ostream&, PlanOrderComponentContentReferenceCategoryCode::value);
+  operator<< (::std::ostream&, PlanOrderComponentContentCitationCategoryCode::value);
 
   ::std::ostream&
-  operator<< (::std::ostream&, const PlanOrderComponentContentReferenceCategoryCode&);
+  operator<< (::std::ostream&, const PlanOrderComponentContentCitationCategoryCode&);
 
   ::std::ostream&
   operator<< (::std::ostream&, PlanOrderComponentStructureCategoryCode::value);
@@ -40905,46 +40905,46 @@ namespace oo_2_0
   operator<< (::std::ostream&, const RailwayTractionSystemCode&);
 
   ::std::ostream&
-  operator<< (::std::ostream&, ReferenceAssociationCategoryCode::value);
+  operator<< (::std::ostream&, CitationAssociationCategoryCode::value);
 
   ::std::ostream&
-  operator<< (::std::ostream&, const ReferenceAssociationCategoryCode&);
+  operator<< (::std::ostream&, const CitationAssociationCategoryCode&);
 
   ::std::ostream&
-  operator<< (::std::ostream&, ReferenceContentCategoryCode::value);
+  operator<< (::std::ostream&, CitationContentCategoryCode::value);
 
   ::std::ostream&
-  operator<< (::std::ostream&, const ReferenceContentCategoryCode&);
+  operator<< (::std::ostream&, const CitationContentCategoryCode&);
 
   ::std::ostream&
-  operator<< (::std::ostream&, ReferenceLifecycleCode::value);
+  operator<< (::std::ostream&, CitationLifecycleCode::value);
 
   ::std::ostream&
-  operator<< (::std::ostream&, const ReferenceLifecycleCode&);
+  operator<< (::std::ostream&, const CitationLifecycleCode&);
 
   ::std::ostream&
-  operator<< (::std::ostream&, ReferenceMediumTypeCode::value);
+  operator<< (::std::ostream&, CitationMediumTypeCode::value);
 
   ::std::ostream&
-  operator<< (::std::ostream&, const ReferenceMediumTypeCode&);
+  operator<< (::std::ostream&, const CitationMediumTypeCode&);
 
   ::std::ostream&
-  operator<< (::std::ostream&, ReferenceTransmittalTypeCode::value);
+  operator<< (::std::ostream&, CitationTransmittalTypeCode::value);
 
   ::std::ostream&
-  operator<< (::std::ostream&, const ReferenceTransmittalTypeCode&);
+  operator<< (::std::ostream&, const CitationTransmittalTypeCode&);
 
   ::std::ostream&
-  operator<< (::std::ostream&, ReferenceVerificationCode::value);
+  operator<< (::std::ostream&, CitationVerificationCode::value);
 
   ::std::ostream&
-  operator<< (::std::ostream&, const ReferenceVerificationCode&);
+  operator<< (::std::ostream&, const CitationVerificationCode&);
 
   ::std::ostream&
-  operator<< (::std::ostream&, RelativeCoordinateSystemReferenceCategoryCode::value);
+  operator<< (::std::ostream&, RelativeCoordinateSystemCitationCategoryCode::value);
 
   ::std::ostream&
-  operator<< (::std::ostream&, const RelativeCoordinateSystemReferenceCategoryCode&);
+  operator<< (::std::ostream&, const RelativeCoordinateSystemCitationCategoryCode&);
 
   ::std::ostream&
   operator<< (::std::ostream&, ReleaseCategoryCode::value);
@@ -41295,10 +41295,10 @@ namespace oo_2_0
   operator<< (::std::ostream&, const VehicleTypeCategoryCode&);
 
   ::std::ostream&
-  operator<< (::std::ostream&, VerticalDistanceReferenceCode::value);
+  operator<< (::std::ostream&, VerticalDistanceCitationCode::value);
 
   ::std::ostream&
-  operator<< (::std::ostream&, const VerticalDistanceReferenceCode&);
+  operator<< (::std::ostream&, const VerticalDistanceCitationCode&);
 
   ::std::ostream&
   operator<< (::std::ostream&, VesselTypeCategoryCode::value);
@@ -41676,14 +41676,14 @@ namespace oo_2_0
               const ActionReconnaissanceEmploymentTypeOfCoverageCode&);
 
   void
-  operator<< (::xercesc::DOMElement&, const ActionReferenceAssociationCategoryCode&);
+  operator<< (::xercesc::DOMElement&, const ActionCitationAssociationCategoryCode&);
 
   void
-  operator<< (::xercesc::DOMAttr&, const ActionReferenceAssociationCategoryCode&);
+  operator<< (::xercesc::DOMAttr&, const ActionCitationAssociationCategoryCode&);
 
   void
   operator<< (::xml_schema::list_stream&,
-              const ActionReferenceAssociationCategoryCode&);
+              const ActionCitationAssociationCategoryCode&);
 
   void
   operator<< (::xercesc::DOMElement&, const ActionResourceCategoryCode&);
@@ -42466,14 +42466,14 @@ namespace oo_2_0
               const CapabilityDayNightCode&);
 
   void
-  operator<< (::xercesc::DOMElement&, const CapabilityReferenceAssociationCategoryCode&);
+  operator<< (::xercesc::DOMElement&, const CapabilityCitationAssociationCategoryCode&);
 
   void
-  operator<< (::xercesc::DOMAttr&, const CapabilityReferenceAssociationCategoryCode&);
+  operator<< (::xercesc::DOMAttr&, const CapabilityCitationAssociationCategoryCode&);
 
   void
   operator<< (::xml_schema::list_stream&,
-              const CapabilityReferenceAssociationCategoryCode&);
+              const CapabilityCitationAssociationCategoryCode&);
 
   void
   operator<< (::xercesc::DOMElement&, const CapabilityUnitOfMeasureCode&);
@@ -44526,14 +44526,14 @@ namespace oo_2_0
               const ObjectItemLocationRelativeSpeedCode&);
 
   void
-  operator<< (::xercesc::DOMElement&, const ObjectItemReferenceAssociationCategoryCode&);
+  operator<< (::xercesc::DOMElement&, const ObjectItemCitationAssociationCategoryCode&);
 
   void
-  operator<< (::xercesc::DOMAttr&, const ObjectItemReferenceAssociationCategoryCode&);
+  operator<< (::xercesc::DOMAttr&, const ObjectItemCitationAssociationCategoryCode&);
 
   void
   operator<< (::xml_schema::list_stream&,
-              const ObjectItemReferenceAssociationCategoryCode&);
+              const ObjectItemCitationAssociationCategoryCode&);
 
   void
   operator<< (::xercesc::DOMElement&, const ObjectItemStatusBoobyTrapPresenceCode&);
@@ -44626,14 +44626,14 @@ namespace oo_2_0
               const ObjectTypeEstablishmentOperationalModeCode&);
 
   void
-  operator<< (::xercesc::DOMElement&, const ObjectTypeReferenceAssociationCategoryCode&);
+  operator<< (::xercesc::DOMElement&, const ObjectTypeCitationAssociationCategoryCode&);
 
   void
-  operator<< (::xercesc::DOMAttr&, const ObjectTypeReferenceAssociationCategoryCode&);
+  operator<< (::xercesc::DOMAttr&, const ObjectTypeCitationAssociationCategoryCode&);
 
   void
   operator<< (::xml_schema::list_stream&,
-              const ObjectTypeReferenceAssociationCategoryCode&);
+              const ObjectTypeCitationAssociationCategoryCode&);
 
   void
   operator<< (::xercesc::DOMElement&, const OperationalCapabilityCategoryCode&);
@@ -44766,14 +44766,14 @@ namespace oo_2_0
               const OrganisationPlanOrderAssociationCategoryCode&);
 
   void
-  operator<< (::xercesc::DOMElement&, const OrganisationReferenceAssociationCategoryCode&);
+  operator<< (::xercesc::DOMElement&, const OrganisationCitationAssociationCategoryCode&);
 
   void
-  operator<< (::xercesc::DOMAttr&, const OrganisationReferenceAssociationCategoryCode&);
+  operator<< (::xercesc::DOMAttr&, const OrganisationCitationAssociationCategoryCode&);
 
   void
   operator<< (::xml_schema::list_stream&,
-              const OrganisationReferenceAssociationCategoryCode&);
+              const OrganisationCitationAssociationCategoryCode&);
 
   void
   operator<< (::xercesc::DOMElement&, const OrganisationStatusAvailabilityCode&);
@@ -45086,14 +45086,14 @@ namespace oo_2_0
               const PlanOrderCategoryCode&);
 
   void
-  operator<< (::xercesc::DOMElement&, const PlanOrderComponentContentReferenceCategoryCode&);
+  operator<< (::xercesc::DOMElement&, const PlanOrderComponentContentCitationCategoryCode&);
 
   void
-  operator<< (::xercesc::DOMAttr&, const PlanOrderComponentContentReferenceCategoryCode&);
+  operator<< (::xercesc::DOMAttr&, const PlanOrderComponentContentCitationCategoryCode&);
 
   void
   operator<< (::xml_schema::list_stream&,
-              const PlanOrderComponentContentReferenceCategoryCode&);
+              const PlanOrderComponentContentCitationCategoryCode&);
 
   void
   operator<< (::xercesc::DOMElement&, const PlanOrderComponentStructureCategoryCode&);
@@ -45336,74 +45336,74 @@ namespace oo_2_0
               const RailwayTractionSystemCode&);
 
   void
-  operator<< (::xercesc::DOMElement&, const ReferenceAssociationCategoryCode&);
+  operator<< (::xercesc::DOMElement&, const CitationAssociationCategoryCode&);
 
   void
-  operator<< (::xercesc::DOMAttr&, const ReferenceAssociationCategoryCode&);
-
-  void
-  operator<< (::xml_schema::list_stream&,
-              const ReferenceAssociationCategoryCode&);
-
-  void
-  operator<< (::xercesc::DOMElement&, const ReferenceContentCategoryCode&);
-
-  void
-  operator<< (::xercesc::DOMAttr&, const ReferenceContentCategoryCode&);
+  operator<< (::xercesc::DOMAttr&, const CitationAssociationCategoryCode&);
 
   void
   operator<< (::xml_schema::list_stream&,
-              const ReferenceContentCategoryCode&);
+              const CitationAssociationCategoryCode&);
 
   void
-  operator<< (::xercesc::DOMElement&, const ReferenceLifecycleCode&);
+  operator<< (::xercesc::DOMElement&, const CitationContentCategoryCode&);
 
   void
-  operator<< (::xercesc::DOMAttr&, const ReferenceLifecycleCode&);
-
-  void
-  operator<< (::xml_schema::list_stream&,
-              const ReferenceLifecycleCode&);
-
-  void
-  operator<< (::xercesc::DOMElement&, const ReferenceMediumTypeCode&);
-
-  void
-  operator<< (::xercesc::DOMAttr&, const ReferenceMediumTypeCode&);
+  operator<< (::xercesc::DOMAttr&, const CitationContentCategoryCode&);
 
   void
   operator<< (::xml_schema::list_stream&,
-              const ReferenceMediumTypeCode&);
+              const CitationContentCategoryCode&);
 
   void
-  operator<< (::xercesc::DOMElement&, const ReferenceTransmittalTypeCode&);
+  operator<< (::xercesc::DOMElement&, const CitationLifecycleCode&);
 
   void
-  operator<< (::xercesc::DOMAttr&, const ReferenceTransmittalTypeCode&);
-
-  void
-  operator<< (::xml_schema::list_stream&,
-              const ReferenceTransmittalTypeCode&);
-
-  void
-  operator<< (::xercesc::DOMElement&, const ReferenceVerificationCode&);
-
-  void
-  operator<< (::xercesc::DOMAttr&, const ReferenceVerificationCode&);
+  operator<< (::xercesc::DOMAttr&, const CitationLifecycleCode&);
 
   void
   operator<< (::xml_schema::list_stream&,
-              const ReferenceVerificationCode&);
+              const CitationLifecycleCode&);
 
   void
-  operator<< (::xercesc::DOMElement&, const RelativeCoordinateSystemReferenceCategoryCode&);
+  operator<< (::xercesc::DOMElement&, const CitationMediumTypeCode&);
 
   void
-  operator<< (::xercesc::DOMAttr&, const RelativeCoordinateSystemReferenceCategoryCode&);
+  operator<< (::xercesc::DOMAttr&, const CitationMediumTypeCode&);
 
   void
   operator<< (::xml_schema::list_stream&,
-              const RelativeCoordinateSystemReferenceCategoryCode&);
+              const CitationMediumTypeCode&);
+
+  void
+  operator<< (::xercesc::DOMElement&, const CitationTransmittalTypeCode&);
+
+  void
+  operator<< (::xercesc::DOMAttr&, const CitationTransmittalTypeCode&);
+
+  void
+  operator<< (::xml_schema::list_stream&,
+              const CitationTransmittalTypeCode&);
+
+  void
+  operator<< (::xercesc::DOMElement&, const CitationVerificationCode&);
+
+  void
+  operator<< (::xercesc::DOMAttr&, const CitationVerificationCode&);
+
+  void
+  operator<< (::xml_schema::list_stream&,
+              const CitationVerificationCode&);
+
+  void
+  operator<< (::xercesc::DOMElement&, const RelativeCoordinateSystemCitationCategoryCode&);
+
+  void
+  operator<< (::xercesc::DOMAttr&, const RelativeCoordinateSystemCitationCategoryCode&);
+
+  void
+  operator<< (::xml_schema::list_stream&,
+              const RelativeCoordinateSystemCitationCategoryCode&);
 
   void
   operator<< (::xercesc::DOMElement&, const ReleaseCategoryCode&);
@@ -45986,14 +45986,14 @@ namespace oo_2_0
               const VehicleTypeCategoryCode&);
 
   void
-  operator<< (::xercesc::DOMElement&, const VerticalDistanceReferenceCode&);
+  operator<< (::xercesc::DOMElement&, const VerticalDistanceCitationCode&);
 
   void
-  operator<< (::xercesc::DOMAttr&, const VerticalDistanceReferenceCode&);
+  operator<< (::xercesc::DOMAttr&, const VerticalDistanceCitationCode&);
 
   void
   operator<< (::xml_schema::list_stream&,
-              const VerticalDistanceReferenceCode&);
+              const VerticalDistanceCitationCode&);
 
   void
   operator<< (::xercesc::DOMElement&, const VesselTypeCategoryCode&);

@@ -798,74 +798,74 @@ namespace msdl_1
   }
 
 
-  // CommunicationNetReferencesType
+  // CommunicationNetCitationsType
   // 
 
-  const CommunicationNetReferencesType::CommunicationNetReference_sequence& CommunicationNetReferencesType::
-  CommunicationNetReference () const
+  const CommunicationNetCitationsType::CommunicationNetCitation_sequence& CommunicationNetCitationsType::
+  CommunicationNetCitation () const
   {
-    return this->CommunicationNetReference_;
+    return this->CommunicationNetCitation_;
   }
 
-  CommunicationNetReferencesType::CommunicationNetReference_sequence& CommunicationNetReferencesType::
-  CommunicationNetReference ()
+  CommunicationNetCitationsType::CommunicationNetCitation_sequence& CommunicationNetCitationsType::
+  CommunicationNetCitation ()
   {
-    return this->CommunicationNetReference_;
+    return this->CommunicationNetCitation_;
   }
 
-  void CommunicationNetReferencesType::
-  CommunicationNetReference (const CommunicationNetReference_sequence& s)
+  void CommunicationNetCitationsType::
+  CommunicationNetCitation (const CommunicationNetCitation_sequence& s)
   {
-    this->CommunicationNetReference_ = s;
+    this->CommunicationNetCitation_ = s;
   }
 
 
-  // CommunicationNetReferenceType
+  // CommunicationNetCitationType
   // 
 
-  const CommunicationNetReferenceType::CommunicationNetId_type& CommunicationNetReferenceType::
+  const CommunicationNetCitationType::CommunicationNetId_type& CommunicationNetCitationType::
   CommunicationNetId () const
   {
     return this->CommunicationNetId_.get ();
   }
 
-  CommunicationNetReferenceType::CommunicationNetId_type& CommunicationNetReferenceType::
+  CommunicationNetCitationType::CommunicationNetId_type& CommunicationNetCitationType::
   CommunicationNetId ()
   {
     return this->CommunicationNetId_.get ();
   }
 
-  void CommunicationNetReferenceType::
+  void CommunicationNetCitationType::
   CommunicationNetId (const CommunicationNetId_type& x)
   {
     this->CommunicationNetId_.set (x);
   }
 
-  void CommunicationNetReferenceType::
+  void CommunicationNetCitationType::
   CommunicationNetId (::std::unique_ptr< CommunicationNetId_type > x)
   {
     this->CommunicationNetId_.set (std::move (x));
   }
 
-  const CommunicationNetReferenceType::UnitOwnerHandle_type& CommunicationNetReferenceType::
+  const CommunicationNetCitationType::UnitOwnerHandle_type& CommunicationNetCitationType::
   UnitOwnerHandle () const
   {
     return this->UnitOwnerHandle_.get ();
   }
 
-  CommunicationNetReferenceType::UnitOwnerHandle_type& CommunicationNetReferenceType::
+  CommunicationNetCitationType::UnitOwnerHandle_type& CommunicationNetCitationType::
   UnitOwnerHandle ()
   {
     return this->UnitOwnerHandle_.get ();
   }
 
-  void CommunicationNetReferenceType::
+  void CommunicationNetCitationType::
   UnitOwnerHandle (const UnitOwnerHandle_type& x)
   {
     this->UnitOwnerHandle_.set (x);
   }
 
-  void CommunicationNetReferenceType::
+  void CommunicationNetCitationType::
   UnitOwnerHandle (::std::unique_ptr< UnitOwnerHandle_type > x)
   {
     this->UnitOwnerHandle_.set (std::move (x));
@@ -1453,34 +1453,34 @@ namespace msdl_1
     this->EquipmentSymbolModifiers_.set (std::move (x));
   }
 
-  const EquipmentItemType::CommunicationNetReferences_optional& EquipmentItemType::
-  CommunicationNetReferences () const
+  const EquipmentItemType::CommunicationNetCitations_optional& EquipmentItemType::
+  CommunicationNetCitations () const
   {
-    return this->CommunicationNetReferences_;
+    return this->CommunicationNetCitations_;
   }
 
-  EquipmentItemType::CommunicationNetReferences_optional& EquipmentItemType::
-  CommunicationNetReferences ()
+  EquipmentItemType::CommunicationNetCitations_optional& EquipmentItemType::
+  CommunicationNetCitations ()
   {
-    return this->CommunicationNetReferences_;
-  }
-
-  void EquipmentItemType::
-  CommunicationNetReferences (const CommunicationNetReferences_type& x)
-  {
-    this->CommunicationNetReferences_.set (x);
+    return this->CommunicationNetCitations_;
   }
 
   void EquipmentItemType::
-  CommunicationNetReferences (const CommunicationNetReferences_optional& x)
+  CommunicationNetCitations (const CommunicationNetCitations_type& x)
   {
-    this->CommunicationNetReferences_ = x;
+    this->CommunicationNetCitations_.set (x);
   }
 
   void EquipmentItemType::
-  CommunicationNetReferences (::std::unique_ptr< CommunicationNetReferences_type > x)
+  CommunicationNetCitations (const CommunicationNetCitations_optional& x)
   {
-    this->CommunicationNetReferences_.set (std::move (x));
+    this->CommunicationNetCitations_ = x;
+  }
+
+  void EquipmentItemType::
+  CommunicationNetCitations (::std::unique_ptr< CommunicationNetCitations_type > x)
+  {
+    this->CommunicationNetCitations_.set (std::move (x));
   }
 
   const EquipmentItemType::Disposition_type& EquipmentItemType::
@@ -9576,31 +9576,31 @@ namespace msdl_1
     "CommunicationNetInstanceType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  // CommunicationNetReferencesType
+  // CommunicationNetCitationsType
   //
 
-  CommunicationNetReferencesType::
-  CommunicationNetReferencesType ()
+  CommunicationNetCitationsType::
+  CommunicationNetCitationsType ()
   : ::xml_schema::type (),
-    CommunicationNetReference_ (this)
+    CommunicationNetCitation_ (this)
   {
   }
 
-  CommunicationNetReferencesType::
-  CommunicationNetReferencesType (const CommunicationNetReferencesType& x,
+  CommunicationNetCitationsType::
+  CommunicationNetCitationsType (const CommunicationNetCitationsType& x,
                                   ::xml_schema::flags f,
                                   ::xml_schema::container* c)
   : ::xml_schema::type (x, f, c),
-    CommunicationNetReference_ (x.CommunicationNetReference_, f, this)
+    CommunicationNetCitation_ (x.CommunicationNetCitation_, f, this)
   {
   }
 
-  CommunicationNetReferencesType::
-  CommunicationNetReferencesType (const ::xercesc::DOMElement& e,
+  CommunicationNetCitationsType::
+  CommunicationNetCitationsType (const ::xercesc::DOMElement& e,
                                   ::xml_schema::flags f,
                                   ::xml_schema::container* c)
   : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
-    CommunicationNetReference_ (this)
+    CommunicationNetCitation_ (this)
   {
     if ((f & ::xml_schema::flags::base) == 0)
     {
@@ -9609,7 +9609,7 @@ namespace msdl_1
     }
   }
 
-  void CommunicationNetReferencesType::
+  void CommunicationNetCitationsType::
   parse (::xsd::cxx::xml::dom::parser< char >& p,
          ::xml_schema::flags f)
   {
@@ -9619,27 +9619,27 @@ namespace msdl_1
       const ::xsd::cxx::xml::qualified_name< char > n (
         ::xsd::cxx::xml::dom::name< char > (i));
 
-      // CommunicationNetReference
+      // CommunicationNetCitation
       //
       {
         ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
-            "CommunicationNetReference",
+            "CommunicationNetCitation",
             "",
-            &::xsd::cxx::tree::factory_impl< CommunicationNetReference_type >,
+            &::xsd::cxx::tree::factory_impl< CommunicationNetCitation_type >,
             false, false, i, n, f, this));
 
         if (tmp.get () != 0)
         {
-          ::std::unique_ptr< CommunicationNetReference_type > r (
-            dynamic_cast< CommunicationNetReference_type* > (tmp.get ()));
+          ::std::unique_ptr< CommunicationNetCitation_type > r (
+            dynamic_cast< CommunicationNetCitation_type* > (tmp.get ()));
 
           if (r.get ())
             tmp.release ();
           else
             throw ::xsd::cxx::tree::not_derived< char > ();
 
-          this->CommunicationNetReference_.push_back (::std::move (r));
+          this->CommunicationNetCitation_.push_back (::std::move (r));
           continue;
         }
       }
@@ -9648,41 +9648,41 @@ namespace msdl_1
     }
   }
 
-  CommunicationNetReferencesType* CommunicationNetReferencesType::
+  CommunicationNetCitationsType* CommunicationNetCitationsType::
   _clone (::xml_schema::flags f,
           ::xml_schema::container* c) const
   {
-    return new class CommunicationNetReferencesType (*this, f, c);
+    return new class CommunicationNetCitationsType (*this, f, c);
   }
 
-  CommunicationNetReferencesType& CommunicationNetReferencesType::
-  operator= (const CommunicationNetReferencesType& x)
+  CommunicationNetCitationsType& CommunicationNetCitationsType::
+  operator= (const CommunicationNetCitationsType& x)
   {
     if (this != &x)
     {
       static_cast< ::xml_schema::type& > (*this) = x;
-      this->CommunicationNetReference_ = x.CommunicationNetReference_;
+      this->CommunicationNetCitation_ = x.CommunicationNetCitation_;
     }
 
     return *this;
   }
 
-  CommunicationNetReferencesType::
-  ~CommunicationNetReferencesType ()
+  CommunicationNetCitationsType::
+  ~CommunicationNetCitationsType ()
   {
   }
 
   static
-  const ::xsd::cxx::tree::type_factory_initializer< 0, char, CommunicationNetReferencesType >
-  _xsd_CommunicationNetReferencesType_type_factory_init (
-    "CommunicationNetReferencesType",
+  const ::xsd::cxx::tree::type_factory_initializer< 0, char, CommunicationNetCitationsType >
+  _xsd_CommunicationNetCitationsType_type_factory_init (
+    "CommunicationNetCitationsType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
-  // CommunicationNetReferenceType
+  // CommunicationNetCitationType
   //
 
-  CommunicationNetReferenceType::
-  CommunicationNetReferenceType (const CommunicationNetId_type& CommunicationNetId,
+  CommunicationNetCitationType::
+  CommunicationNetCitationType (const CommunicationNetId_type& CommunicationNetId,
                                  const UnitOwnerHandle_type& UnitOwnerHandle)
   : ::xml_schema::type (),
     CommunicationNetId_ (CommunicationNetId, this),
@@ -9690,8 +9690,8 @@ namespace msdl_1
   {
   }
 
-  CommunicationNetReferenceType::
-  CommunicationNetReferenceType (::std::unique_ptr< CommunicationNetId_type > CommunicationNetId,
+  CommunicationNetCitationType::
+  CommunicationNetCitationType (::std::unique_ptr< CommunicationNetId_type > CommunicationNetId,
                                  ::std::unique_ptr< UnitOwnerHandle_type > UnitOwnerHandle)
   : ::xml_schema::type (),
     CommunicationNetId_ (std::move (CommunicationNetId), this),
@@ -9699,8 +9699,8 @@ namespace msdl_1
   {
   }
 
-  CommunicationNetReferenceType::
-  CommunicationNetReferenceType (const CommunicationNetReferenceType& x,
+  CommunicationNetCitationType::
+  CommunicationNetCitationType (const CommunicationNetCitationType& x,
                                  ::xml_schema::flags f,
                                  ::xml_schema::container* c)
   : ::xml_schema::type (x, f, c),
@@ -9709,8 +9709,8 @@ namespace msdl_1
   {
   }
 
-  CommunicationNetReferenceType::
-  CommunicationNetReferenceType (const ::xercesc::DOMElement& e,
+  CommunicationNetCitationType::
+  CommunicationNetCitationType (const ::xercesc::DOMElement& e,
                                  ::xml_schema::flags f,
                                  ::xml_schema::container* c)
   : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
@@ -9724,7 +9724,7 @@ namespace msdl_1
     }
   }
 
-  void CommunicationNetReferenceType::
+  void CommunicationNetCitationType::
   parse (::xsd::cxx::xml::dom::parser< char >& p,
          ::xml_schema::flags f)
   {
@@ -9808,15 +9808,15 @@ namespace msdl_1
     }
   }
 
-  CommunicationNetReferenceType* CommunicationNetReferenceType::
+  CommunicationNetCitationType* CommunicationNetCitationType::
   _clone (::xml_schema::flags f,
           ::xml_schema::container* c) const
   {
-    return new class CommunicationNetReferenceType (*this, f, c);
+    return new class CommunicationNetCitationType (*this, f, c);
   }
 
-  CommunicationNetReferenceType& CommunicationNetReferenceType::
-  operator= (const CommunicationNetReferenceType& x)
+  CommunicationNetCitationType& CommunicationNetCitationType::
+  operator= (const CommunicationNetCitationType& x)
   {
     if (this != &x)
     {
@@ -9828,15 +9828,15 @@ namespace msdl_1
     return *this;
   }
 
-  CommunicationNetReferenceType::
-  ~CommunicationNetReferenceType ()
+  CommunicationNetCitationType::
+  ~CommunicationNetCitationType ()
   {
   }
 
   static
-  const ::xsd::cxx::tree::type_factory_initializer< 0, char, CommunicationNetReferenceType >
-  _xsd_CommunicationNetReferenceType_type_factory_init (
-    "CommunicationNetReferenceType",
+  const ::xsd::cxx::tree::type_factory_initializer< 0, char, CommunicationNetCitationType >
+  _xsd_CommunicationNetCitationType_type_factory_init (
+    "CommunicationNetCitationType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
   // CoordinateDataStandardType
@@ -10803,7 +10803,7 @@ namespace msdl_1
     SymbolIdentifier_ (SymbolIdentifier, this),
     Name_ (this),
     EquipmentSymbolModifiers_ (this),
-    CommunicationNetReferences_ (this),
+    CommunicationNetCitations_ (this),
     Disposition_ (Disposition, this),
     Relations_ (Relations, this),
     Model_ (this)
@@ -10820,7 +10820,7 @@ namespace msdl_1
     SymbolIdentifier_ (SymbolIdentifier, this),
     Name_ (this),
     EquipmentSymbolModifiers_ (this),
-    CommunicationNetReferences_ (this),
+    CommunicationNetCitations_ (this),
     Disposition_ (std::move (Disposition), this),
     Relations_ (std::move (Relations), this),
     Model_ (this)
@@ -10837,7 +10837,7 @@ namespace msdl_1
     SymbolIdentifier_ (std::move (SymbolIdentifier), this),
     Name_ (this),
     EquipmentSymbolModifiers_ (this),
-    CommunicationNetReferences_ (this),
+    CommunicationNetCitations_ (this),
     Disposition_ (std::move (Disposition), this),
     Relations_ (std::move (Relations), this),
     Model_ (this)
@@ -10853,7 +10853,7 @@ namespace msdl_1
     SymbolIdentifier_ (x.SymbolIdentifier_, f, this),
     Name_ (x.Name_, f, this),
     EquipmentSymbolModifiers_ (x.EquipmentSymbolModifiers_, f, this),
-    CommunicationNetReferences_ (x.CommunicationNetReferences_, f, this),
+    CommunicationNetCitations_ (x.CommunicationNetCitations_, f, this),
     Disposition_ (x.Disposition_, f, this),
     Relations_ (x.Relations_, f, this),
     Model_ (x.Model_, f, this)
@@ -10869,7 +10869,7 @@ namespace msdl_1
     SymbolIdentifier_ (this),
     Name_ (this),
     EquipmentSymbolModifiers_ (this),
-    CommunicationNetReferences_ (this),
+    CommunicationNetCitations_ (this),
     Disposition_ (this),
     Relations_ (this),
     Model_ (this)
@@ -11003,29 +11003,29 @@ namespace msdl_1
         }
       }
 
-      // CommunicationNetReferences
+      // CommunicationNetCitations
       //
       {
         ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
           ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
-            "CommunicationNetReferences",
+            "CommunicationNetCitations",
             "",
-            &::xsd::cxx::tree::factory_impl< CommunicationNetReferences_type >,
+            &::xsd::cxx::tree::factory_impl< CommunicationNetCitations_type >,
             false, false, i, n, f, this));
 
         if (tmp.get () != 0)
         {
-          if (!this->CommunicationNetReferences_)
+          if (!this->CommunicationNetCitations_)
           {
-            ::std::unique_ptr< CommunicationNetReferences_type > r (
-              dynamic_cast< CommunicationNetReferences_type* > (tmp.get ()));
+            ::std::unique_ptr< CommunicationNetCitations_type > r (
+              dynamic_cast< CommunicationNetCitations_type* > (tmp.get ()));
 
             if (r.get ())
               tmp.release ();
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->CommunicationNetReferences_.set (::std::move (r));
+            this->CommunicationNetCitations_.set (::std::move (r));
             continue;
           }
         }
@@ -11164,7 +11164,7 @@ namespace msdl_1
       this->SymbolIdentifier_ = x.SymbolIdentifier_;
       this->Name_ = x.Name_;
       this->EquipmentSymbolModifiers_ = x.EquipmentSymbolModifiers_;
-      this->CommunicationNetReferences_ = x.CommunicationNetReferences_;
+      this->CommunicationNetCitations_ = x.CommunicationNetCitations_;
       this->Disposition_ = x.Disposition_;
       this->Relations_ = x.Relations_;
       this->Model_ = x.Model_;
@@ -23972,17 +23972,17 @@ namespace msdl_1
   _xsd_CommunicationNetInstanceType_std_ostream_init;
 
   ::std::ostream&
-  operator<< (::std::ostream& o, const CommunicationNetReferencesType& i)
+  operator<< (::std::ostream& o, const CommunicationNetCitationsType& i)
   {
     {
       ::xsd::cxx::tree::std_ostream_map< char >& om (
         ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-      for (CommunicationNetReferencesType::CommunicationNetReference_const_iterator
-           b (i.CommunicationNetReference ().begin ()), e (i.CommunicationNetReference ().end ());
+      for (CommunicationNetCitationsType::CommunicationNetCitation_const_iterator
+           b (i.CommunicationNetCitation ().begin ()), e (i.CommunicationNetCitation ().end ());
            b != e; ++b)
       {
-        o << ::std::endl << "CommunicationNetReference: ";
+        o << ::std::endl << "CommunicationNetCitation: ";
         om.insert (o, *b);
       }
     }
@@ -23991,11 +23991,11 @@ namespace msdl_1
   }
 
   static
-  const ::xsd::cxx::tree::std_ostream_initializer< 0, char, CommunicationNetReferencesType >
-  _xsd_CommunicationNetReferencesType_std_ostream_init;
+  const ::xsd::cxx::tree::std_ostream_initializer< 0, char, CommunicationNetCitationsType >
+  _xsd_CommunicationNetCitationsType_std_ostream_init;
 
   ::std::ostream&
-  operator<< (::std::ostream& o, const CommunicationNetReferenceType& i)
+  operator<< (::std::ostream& o, const CommunicationNetCitationType& i)
   {
     {
       ::xsd::cxx::tree::std_ostream_map< char >& om (
@@ -24017,8 +24017,8 @@ namespace msdl_1
   }
 
   static
-  const ::xsd::cxx::tree::std_ostream_initializer< 0, char, CommunicationNetReferenceType >
-  _xsd_CommunicationNetReferenceType_std_ostream_init;
+  const ::xsd::cxx::tree::std_ostream_initializer< 0, char, CommunicationNetCitationType >
+  _xsd_CommunicationNetCitationType_std_ostream_init;
 
   ::std::ostream&
   operator<< (::std::ostream& o, const CoordinateDataStandardType& i)
@@ -24276,10 +24276,10 @@ namespace msdl_1
       ::xsd::cxx::tree::std_ostream_map< char >& om (
         ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-      if (i.CommunicationNetReferences ())
+      if (i.CommunicationNetCitations ())
       {
-        o << ::std::endl << "CommunicationNetReferences: ";
-        om.insert (o, *i.CommunicationNetReferences ());
+        o << ::std::endl << "CommunicationNetCitations: ";
+        om.insert (o, *i.CommunicationNetCitations ());
       }
     }
 
@@ -27957,32 +27957,32 @@ namespace msdl_1
 
 
   void
-  operator<< (::xercesc::DOMElement& e, const CommunicationNetReferencesType& i)
+  operator<< (::xercesc::DOMElement& e, const CommunicationNetCitationsType& i)
   {
     e << static_cast< const ::xml_schema::type& > (i);
 
-    // CommunicationNetReference
+    // CommunicationNetCitation
     //
     {
       ::xsd::cxx::tree::type_serializer_map< char >& tsm (
         ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-      for (CommunicationNetReferencesType::CommunicationNetReference_const_iterator
-           b (i.CommunicationNetReference ().begin ()), n (i.CommunicationNetReference ().end ());
+      for (CommunicationNetCitationsType::CommunicationNetCitation_const_iterator
+           b (i.CommunicationNetCitation ().begin ()), n (i.CommunicationNetCitation ().end ());
            b != n; ++b)
       {
-        if (typeid (CommunicationNetReferencesType::CommunicationNetReference_type) == typeid (*b))
+        if (typeid (CommunicationNetCitationsType::CommunicationNetCitation_type) == typeid (*b))
         {
           ::xercesc::DOMElement& s (
             ::xsd::cxx::xml::dom::create_element (
-              "CommunicationNetReference",
+              "CommunicationNetCitation",
               e));
 
           s << *b;
         }
         else
           tsm.serialize (
-            "CommunicationNetReference",
+            "CommunicationNetCitation",
             "",
             false, false, e, *b);
       }
@@ -27990,14 +27990,14 @@ namespace msdl_1
   }
 
   static
-  const ::xsd::cxx::tree::type_serializer_initializer< 0, char, CommunicationNetReferencesType >
-  _xsd_CommunicationNetReferencesType_type_serializer_init (
-    "CommunicationNetReferencesType",
+  const ::xsd::cxx::tree::type_serializer_initializer< 0, char, CommunicationNetCitationsType >
+  _xsd_CommunicationNetCitationsType_type_serializer_init (
+    "CommunicationNetCitationsType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
 
   void
-  operator<< (::xercesc::DOMElement& e, const CommunicationNetReferenceType& i)
+  operator<< (::xercesc::DOMElement& e, const CommunicationNetCitationType& i)
   {
     e << static_cast< const ::xml_schema::type& > (i);
 
@@ -28007,8 +28007,8 @@ namespace msdl_1
       ::xsd::cxx::tree::type_serializer_map< char >& tsm (
         ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-      const CommunicationNetReferenceType::CommunicationNetId_type& x (i.CommunicationNetId ());
-      if (typeid (CommunicationNetReferenceType::CommunicationNetId_type) == typeid (x))
+      const CommunicationNetCitationType::CommunicationNetId_type& x (i.CommunicationNetId ());
+      if (typeid (CommunicationNetCitationType::CommunicationNetId_type) == typeid (x))
       {
         ::xercesc::DOMElement& s (
           ::xsd::cxx::xml::dom::create_element (
@@ -28030,8 +28030,8 @@ namespace msdl_1
       ::xsd::cxx::tree::type_serializer_map< char >& tsm (
         ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-      const CommunicationNetReferenceType::UnitOwnerHandle_type& x (i.UnitOwnerHandle ());
-      if (typeid (CommunicationNetReferenceType::UnitOwnerHandle_type) == typeid (x))
+      const CommunicationNetCitationType::UnitOwnerHandle_type& x (i.UnitOwnerHandle ());
+      if (typeid (CommunicationNetCitationType::UnitOwnerHandle_type) == typeid (x))
       {
         ::xercesc::DOMElement& s (
           ::xsd::cxx::xml::dom::create_element (
@@ -28049,9 +28049,9 @@ namespace msdl_1
   }
 
   static
-  const ::xsd::cxx::tree::type_serializer_initializer< 0, char, CommunicationNetReferenceType >
-  _xsd_CommunicationNetReferenceType_type_serializer_init (
-    "CommunicationNetReferenceType",
+  const ::xsd::cxx::tree::type_serializer_initializer< 0, char, CommunicationNetCitationType >
+  _xsd_CommunicationNetCitationType_type_serializer_init (
+    "CommunicationNetCitationType",
     "urn:sisostds:scenario:military:data:draft:msdl:1");
 
 
@@ -28624,27 +28624,27 @@ namespace msdl_1
       }
     }
 
-    // CommunicationNetReferences
+    // CommunicationNetCitations
     //
     {
       ::xsd::cxx::tree::type_serializer_map< char >& tsm (
         ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-      if (i.CommunicationNetReferences ())
+      if (i.CommunicationNetCitations ())
       {
-        const EquipmentItemType::CommunicationNetReferences_type& x (*i.CommunicationNetReferences ());
-        if (typeid (EquipmentItemType::CommunicationNetReferences_type) == typeid (x))
+        const EquipmentItemType::CommunicationNetCitations_type& x (*i.CommunicationNetCitations ());
+        if (typeid (EquipmentItemType::CommunicationNetCitations_type) == typeid (x))
         {
           ::xercesc::DOMElement& s (
             ::xsd::cxx::xml::dom::create_element (
-              "CommunicationNetReferences",
+              "CommunicationNetCitations",
               e));
 
           s << x;
         }
         else
           tsm.serialize (
-            "CommunicationNetReferences",
+            "CommunicationNetCitations",
             "",
             false, false, e, x);
       }

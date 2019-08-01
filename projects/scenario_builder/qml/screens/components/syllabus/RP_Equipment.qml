@@ -43,7 +43,7 @@ ColumnLayout  {
     ListEntry {
       Layout.fillWidth: true
       Layout.fillHeight : true
-      label : "References"
+      label : "Citations"
       model : ListModel {}
       delegate : Rectangle {
         Layout.fillWidth : true

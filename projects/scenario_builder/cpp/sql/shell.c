@@ -11395,7 +11395,7 @@ static int showHelp(FILE *out, const char *zPattern){
   return n;
 }
 
-/* Forward reference */
+/* Forward Citation */
 static int process_input(ShellState *p);
 
 /*
@@ -16590,8 +16590,8 @@ static const char zOptions[] =
   "   -quote               set output mode to 'quote'\n"
   "   -readonly            open the database read-only\n"
   "   -separator SEP       set output column separator. Default: '|'\n"
-#ifdef SQLITE_ENABLE_SORTER_REFERENCES
-  "   -sorterref SIZE      sorter references threshold size\n"
+#ifdef SQLITE_ENABLE_SORTER_CitationS
+  "   -sorterref SIZE      sorter Citations threshold size\n"
 #endif
   "   -stats               print memory stats before each finalize\n"
   "   -version             show SQLite version\n"
@@ -16874,7 +16874,7 @@ int SQLITE_CDECL wmain(int argc, wchar_t **wargv){
     }else if( strcmp(z,"-mmap")==0 ){
       sqlite3_int64 sz = integerValue(cmdline_option_value(argc,argv,++i));
       sqlite3_config(SQLITE_CONFIG_MMAP_SIZE, sz, sz);
-#ifdef SQLITE_ENABLE_SORTER_REFERENCES
+#ifdef SQLITE_ENABLE_SORTER_CitationS
     }else if( strcmp(z,"-sorterref")==0 ){
       sqlite3_int64 sz = integerValue(cmdline_option_value(argc,argv,++i));
       sqlite3_config(SQLITE_CONFIG_SORTERREF_SIZE, (int)sz);
@@ -17053,7 +17053,7 @@ int SQLITE_CDECL wmain(int argc, wchar_t **wargv){
       i++;
     }else if( strcmp(z,"-memtrace")==0 ){
       i++;
-#ifdef SQLITE_ENABLE_SORTER_REFERENCES
+#ifdef SQLITE_ENABLE_SORTER_CitationS
     }else if( strcmp(z,"-sorterref")==0 ){
       i++;
 #endif

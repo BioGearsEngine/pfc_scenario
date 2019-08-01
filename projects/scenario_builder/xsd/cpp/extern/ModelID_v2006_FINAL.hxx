@@ -280,9 +280,9 @@ namespace schemas
     class POCTypeEnumeration;
     class POCTypeUnion;
     class pocTypeType;
-    class referenceTypeEnumerations;
-    class referenceTypeUnion;
-    class referenceType;
+    class CitationTypeEnumerations;
+    class CitationTypeUnion;
+    class CitationType;
     class keywordType;
     class modelIdentificationType;
     class type;
@@ -1673,7 +1673,7 @@ namespace schemas
       idtag_optional idtag_;
     };
 
-    class referenceTypeEnumerations: public ::xml_schema::string
+    class CitationTypeEnumerations: public ::xml_schema::string
     {
       public:
       enum value
@@ -1683,84 +1683,84 @@ namespace schemas
         Related_BOM
       };
 
-      referenceTypeEnumerations (value v);
+      CitationTypeEnumerations (value v);
 
-      referenceTypeEnumerations (const char* v);
+      CitationTypeEnumerations (const char* v);
 
-      referenceTypeEnumerations (const ::std::string& v);
+      CitationTypeEnumerations (const ::std::string& v);
 
-      referenceTypeEnumerations (const ::xml_schema::string& v);
+      CitationTypeEnumerations (const ::xml_schema::string& v);
 
-      referenceTypeEnumerations (const ::xercesc::DOMElement& e,
+      CitationTypeEnumerations (const ::xercesc::DOMElement& e,
                                  ::xml_schema::flags f = 0,
                                  ::xml_schema::container* c = 0);
 
-      referenceTypeEnumerations (const ::xercesc::DOMAttr& a,
+      CitationTypeEnumerations (const ::xercesc::DOMAttr& a,
                                  ::xml_schema::flags f = 0,
                                  ::xml_schema::container* c = 0);
 
-      referenceTypeEnumerations (const ::std::string& s,
+      CitationTypeEnumerations (const ::std::string& s,
                                  const ::xercesc::DOMElement* e,
                                  ::xml_schema::flags f = 0,
                                  ::xml_schema::container* c = 0);
 
-      referenceTypeEnumerations (const referenceTypeEnumerations& x,
+      CitationTypeEnumerations (const CitationTypeEnumerations& x,
                                  ::xml_schema::flags f = 0,
                                  ::xml_schema::container* c = 0);
 
-      virtual referenceTypeEnumerations*
+      virtual CitationTypeEnumerations*
       _clone (::xml_schema::flags f = 0,
               ::xml_schema::container* c = 0) const;
 
-      referenceTypeEnumerations&
+      CitationTypeEnumerations&
       operator= (value v);
 
       virtual
       operator value () const
       {
-        return _xsd_referenceTypeEnumerations_convert ();
+        return _xsd_CitationTypeEnumerations_convert ();
       }
 
       protected:
       value
-      _xsd_referenceTypeEnumerations_convert () const;
+      _xsd_CitationTypeEnumerations_convert () const;
 
       public:
-      static const char* const _xsd_referenceTypeEnumerations_literals_[3];
-      static const value _xsd_referenceTypeEnumerations_indexes_[3];
+      static const char* const _xsd_CitationTypeEnumerations_literals_[3];
+      static const value _xsd_CitationTypeEnumerations_indexes_[3];
     };
 
-    class referenceTypeUnion: public ::xml_schema::string
+    class CitationTypeUnion: public ::xml_schema::string
     {
       public:
 
-      referenceTypeUnion (const char* v);
+      CitationTypeUnion (const char* v);
 
-      referenceTypeUnion (const ::std::string& v);
+      CitationTypeUnion (const ::std::string& v);
 
-      referenceTypeUnion (const ::xercesc::DOMElement& e,
+      CitationTypeUnion (const ::xercesc::DOMElement& e,
                           ::xml_schema::flags f = 0,
                           ::xml_schema::container* c = 0);
 
-      referenceTypeUnion (const ::xercesc::DOMAttr& a,
+      CitationTypeUnion (const ::xercesc::DOMAttr& a,
                           ::xml_schema::flags f = 0,
                           ::xml_schema::container* c = 0);
 
-      referenceTypeUnion (const ::std::string& s,
+      CitationTypeUnion (const ::std::string& s,
                           const ::xercesc::DOMElement* e,
                           ::xml_schema::flags f = 0,
                           ::xml_schema::container* c = 0);
 
-      referenceTypeUnion (const referenceTypeUnion& x,
+      CitationTypeUnion (const CitationTypeUnion& x,
                           ::xml_schema::flags f = 0,
                           ::xml_schema::container* c = 0);
 
-      virtual referenceTypeUnion*
+      virtual CitationTypeUnion*
       _clone (::xml_schema::flags f = 0,
               ::xml_schema::container* c = 0) const;
     };
 
-    class referenceType: public ::xml_schema::type
+    class CitationType: public ::xml_schema::type
     {
       public:
       // type
@@ -1841,29 +1841,29 @@ namespace schemas
 
       // Constructors.
       //
-      referenceType (const type_type&,
+      CitationType (const type_type&,
                      const identification_type&);
 
-      referenceType (::std::unique_ptr< type_type >,
+      CitationType (::std::unique_ptr< type_type >,
                      ::std::unique_ptr< identification_type >);
 
-      referenceType (const ::xercesc::DOMElement& e,
+      CitationType (const ::xercesc::DOMElement& e,
                      ::xml_schema::flags f = 0,
                      ::xml_schema::container* c = 0);
 
-      referenceType (const referenceType& x,
+      CitationType (const CitationType& x,
                      ::xml_schema::flags f = 0,
                      ::xml_schema::container* c = 0);
 
-      virtual referenceType*
+      virtual CitationType*
       _clone (::xml_schema::flags f = 0,
               ::xml_schema::container* c = 0) const;
 
-      referenceType&
-      operator= (const referenceType& x);
+      CitationType&
+      operator= (const CitationType& x);
 
       virtual 
-      ~referenceType ();
+      ~CitationType ();
 
       // Implementation.
       //
@@ -2236,22 +2236,22 @@ namespace schemas
       void
       poc (const poc_sequence& s);
 
-      // reference
+      // Citation
       //
-      typedef ::schemas::modelID::referenceType reference_type;
-      typedef ::xsd::cxx::tree::sequence< reference_type > reference_sequence;
-      typedef reference_sequence::iterator reference_iterator;
-      typedef reference_sequence::const_iterator reference_const_iterator;
-      typedef ::xsd::cxx::tree::traits< reference_type, char > reference_traits;
+      typedef ::schemas::modelID::CitationType Citation_type;
+      typedef ::xsd::cxx::tree::sequence< Citation_type > Citation_sequence;
+      typedef Citation_sequence::iterator Citation_iterator;
+      typedef Citation_sequence::const_iterator Citation_const_iterator;
+      typedef ::xsd::cxx::tree::traits< Citation_type, char > Citation_traits;
 
-      const reference_sequence&
-      reference () const;
+      const Citation_sequence&
+      Citation () const;
 
-      reference_sequence&
-      reference ();
+      Citation_sequence&
+      Citation ();
 
       void
-      reference (const reference_sequence& s);
+      Citation (const Citation_sequence& s);
 
       // other
       //
@@ -2392,14 +2392,14 @@ namespace schemas
       useHistory_sequence useHistory_;
       keyword_sequence keyword_;
       poc_sequence poc_;
-      reference_sequence reference_;
+      Citation_sequence Citation_;
       other_optional other_;
       glyph_optional glyph_;
       notes_optional notes_;
       idtag_optional idtag_;
     };
 
-    class type: public ::schemas::modelID::referenceTypeUnion
+    class type: public ::schemas::modelID::CitationTypeUnion
     {
       public:
       // notes
@@ -2450,7 +2450,7 @@ namespace schemas
 
       type (const ::std::string&);
 
-      type (const ::schemas::modelID::referenceTypeUnion&);
+      type (const ::schemas::modelID::CitationTypeUnion&);
 
       type (const ::xercesc::DOMElement& e,
             ::xml_schema::flags f = 0,
@@ -2831,16 +2831,16 @@ namespace schemas
     operator<< (::std::ostream&, const pocTypeType&);
 
     ::std::ostream&
-    operator<< (::std::ostream&, referenceTypeEnumerations::value);
+    operator<< (::std::ostream&, CitationTypeEnumerations::value);
 
     ::std::ostream&
-    operator<< (::std::ostream&, const referenceTypeEnumerations&);
+    operator<< (::std::ostream&, const CitationTypeEnumerations&);
 
     ::std::ostream&
-    operator<< (::std::ostream&, const referenceTypeUnion&);
+    operator<< (::std::ostream&, const CitationTypeUnion&);
 
     ::std::ostream&
-    operator<< (::std::ostream&, const referenceType&);
+    operator<< (::std::ostream&, const CitationType&);
 
     ::std::ostream&
     operator<< (::std::ostream&, const keywordType&);
@@ -3028,27 +3028,27 @@ namespace schemas
     operator<< (::xercesc::DOMElement&, const pocTypeType&);
 
     void
-    operator<< (::xercesc::DOMElement&, const referenceTypeEnumerations&);
+    operator<< (::xercesc::DOMElement&, const CitationTypeEnumerations&);
 
     void
-    operator<< (::xercesc::DOMAttr&, const referenceTypeEnumerations&);
-
-    void
-    operator<< (::xml_schema::list_stream&,
-                const referenceTypeEnumerations&);
-
-    void
-    operator<< (::xercesc::DOMElement&, const referenceTypeUnion&);
-
-    void
-    operator<< (::xercesc::DOMAttr&, const referenceTypeUnion&);
+    operator<< (::xercesc::DOMAttr&, const CitationTypeEnumerations&);
 
     void
     operator<< (::xml_schema::list_stream&,
-                const referenceTypeUnion&);
+                const CitationTypeEnumerations&);
 
     void
-    operator<< (::xercesc::DOMElement&, const referenceType&);
+    operator<< (::xercesc::DOMElement&, const CitationTypeUnion&);
+
+    void
+    operator<< (::xercesc::DOMAttr&, const CitationTypeUnion&);
+
+    void
+    operator<< (::xml_schema::list_stream&,
+                const CitationTypeUnion&);
+
+    void
+    operator<< (::xercesc::DOMElement&, const CitationType&);
 
     void
     operator<< (::xercesc::DOMElement&, const keywordType&);

@@ -13,7 +13,7 @@
 ** presents to client programs.  If a C-function, structure, datatype,
 ** or constant definition does not appear in this file, then it is
 ** not a published API of SQLite, is subject to change without
-** notice, and should not be referenced by programs that use SQLite.
+** notice, and should not be Citationd by programs that use SQLite.
 **
 ** Some of the definitions that are in this file are marked as
 ** "experimental".  Experimental interfaces are normally new
@@ -1973,18 +1973,18 @@ struct sqlite3_mem_methods {
 ** [[SQLITE_CONFIG_SORTERREF_SIZE]]
 ** <dt>SQLITE_CONFIG_SORTERREF_SIZE
 ** <dd>The SQLITE_CONFIG_SORTERREF_SIZE option accepts a single parameter
-** of type (int) - the new value of the sorter-reference size threshold.
+** of type (int) - the new value of the sorter-Citation size threshold.
 ** Usually, when SQLite uses an external sort to order records according
 ** to an ORDER BY clause, all fields required by the caller are present in the
 ** sorted records. However, if SQLite determines based on the declared type
 ** of a table column that its values are likely to be very large - larger
-** than the configured sorter-reference size threshold - then a reference
+** than the configured sorter-Citation size threshold - then a Citation
 ** is stored in each sorted record and the required column values loaded
 ** from the database as records are returned in sorted order. The default
 ** value for this option is to never use this optimization. Specifying a 
 ** negative value for this option restores the default behaviour.
 ** This option is only available if SQLite is compiled with the
-** [SQLITE_ENABLE_SORTER_REFERENCES] compile-time option.
+** [SQLITE_ENABLE_SORTER_CitationS] compile-time option.
 **
 ** [[SQLITE_CONFIG_MEMDB_MAXSIZE]]
 ** <dt>SQLITE_CONFIG_MEMDB_MAXSIZE
@@ -2879,7 +2879,7 @@ SQLITE_API void sqlite3_randomness(int N, void *P);
 ** been read if [SQLITE_OK] had been returned.  The [SQLITE_IGNORE]
 ** return can be used to deny an untrusted user access to individual
 ** columns of a table.
-** ^When a table is referenced by a [SELECT] but no column values are
+** ^When a table is Citationd by a [SELECT] but no column values are
 ** extracted from that table (for example in a query like
 ** "SELECT count(*) FROM tab") then the [SQLITE_READ] authorizer callback
 ** is invoked once for that table with a column name that is an empty string.
@@ -4639,7 +4639,7 @@ SQLITE_API int sqlite3_data_count(sqlite3_stmt *pStmt);
 **
 ** ^Conversions between UTF-16be and UTF-16le are always done in place and do
 ** not invalidate a prior pointer, though of course the content of the buffer
-** that the prior pointer references will have been modified.  Other kinds
+** that the prior pointer Citations will have been modified.  Other kinds
 ** of conversion are done in place when it is possible, but sometimes they
 ** are not possible and in those cases prior pointers are invalidated.
 **
@@ -6123,7 +6123,7 @@ SQLITE_API SQLITE_DEPRECATED void sqlite3_soft_heap_limit(int N);
 ** (i.e. "main", "temp", or an attached database) containing the specified
 ** table or NULL.)^ ^If it is NULL, then all attached databases are searched
 ** for the table using the same algorithm used by the database engine to
-** resolve unqualified table references.
+** resolve unqualified table Citations.
 **
 ** ^The third and fourth parameters to this function are the table and column
 ** name of the desired column, respectively.
@@ -6738,7 +6738,7 @@ typedef struct sqlite3_blob sqlite3_blob;
 ** [database connection] error code and message accessible via 
 ** [sqlite3_errcode()] and [sqlite3_errmsg()] and related functions. 
 **
-** A BLOB referenced by sqlite3_blob_open() may be read using the
+** A BLOB Citationd by sqlite3_blob_open() may be read using the
 ** [sqlite3_blob_read()] interface and modified by using
 ** [sqlite3_blob_write()].  The [BLOB handle] can be moved to a
 ** different row of the same table using the [sqlite3_blob_reopen()]
@@ -8016,7 +8016,7 @@ struct sqlite3_pcache_page {
 ** page cache implementation. ^The page cache implementation
 ** may choose to evict unpinned pages at any time.
 **
-** The cache must not perform any reference counting. A single 
+** The cache must not perform any Citation counting. A single 
 ** call to xUnpin() unpins the page regardless of the number of prior calls 
 ** to xFetch().
 **

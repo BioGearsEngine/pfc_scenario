@@ -33,7 +33,7 @@ ColumnLayout  {
 
     ListEntry {
       Layout.fillWidth: true
-      label : "References"
+      label : "Citations"
       model : ListModel {
           ListElement{name: "item1"}
           ListElement {name: "item2"}

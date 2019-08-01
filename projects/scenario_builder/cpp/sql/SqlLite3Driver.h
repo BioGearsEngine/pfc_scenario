@@ -475,7 +475,7 @@ public:
     value = rhs.value;
   }
 };
-//----End Reference
+//----End Citation
 struct Restriction : public QObject {
   Q_OBJECT
   Q_PROPERTY(int restriction_id MEMBER id)

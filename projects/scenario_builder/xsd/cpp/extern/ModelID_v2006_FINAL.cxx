@@ -1126,180 +1126,180 @@ namespace schemas
     }
 
 
-    // referenceTypeEnumerations
+    // CitationTypeEnumerations
     // 
 
-    referenceTypeEnumerations::
-    referenceTypeEnumerations (value v)
-    : ::xml_schema::string (_xsd_referenceTypeEnumerations_literals_[v])
+    CitationTypeEnumerations::
+    CitationTypeEnumerations (value v)
+    : ::xml_schema::string (_xsd_CitationTypeEnumerations_literals_[v])
     {
     }
 
-    referenceTypeEnumerations::
-    referenceTypeEnumerations (const char* v)
+    CitationTypeEnumerations::
+    CitationTypeEnumerations (const char* v)
     : ::xml_schema::string (v)
     {
     }
 
-    referenceTypeEnumerations::
-    referenceTypeEnumerations (const ::std::string& v)
+    CitationTypeEnumerations::
+    CitationTypeEnumerations (const ::std::string& v)
     : ::xml_schema::string (v)
     {
     }
 
-    referenceTypeEnumerations::
-    referenceTypeEnumerations (const ::xml_schema::string& v)
+    CitationTypeEnumerations::
+    CitationTypeEnumerations (const ::xml_schema::string& v)
     : ::xml_schema::string (v)
     {
     }
 
-    referenceTypeEnumerations::
-    referenceTypeEnumerations (const referenceTypeEnumerations& v,
+    CitationTypeEnumerations::
+    CitationTypeEnumerations (const CitationTypeEnumerations& v,
                                ::xml_schema::flags f,
                                ::xml_schema::container* c)
     : ::xml_schema::string (v, f, c)
     {
     }
 
-    referenceTypeEnumerations& referenceTypeEnumerations::
+    CitationTypeEnumerations& CitationTypeEnumerations::
     operator= (value v)
     {
       static_cast< ::xml_schema::string& > (*this) = 
-      ::xml_schema::string (_xsd_referenceTypeEnumerations_literals_[v]);
+      ::xml_schema::string (_xsd_CitationTypeEnumerations_literals_[v]);
 
       return *this;
     }
 
 
-    // referenceTypeUnion
+    // CitationTypeUnion
     //
 
-    referenceTypeUnion::
-    referenceTypeUnion (const char* s)
+    CitationTypeUnion::
+    CitationTypeUnion (const char* s)
     : ::xml_schema::string (s)
     {
     }
 
-    referenceTypeUnion::
-    referenceTypeUnion (const ::std::string& s)
+    CitationTypeUnion::
+    CitationTypeUnion (const ::std::string& s)
     : ::xml_schema::string (s)
     {
     }
 
-    referenceTypeUnion::
-    referenceTypeUnion (const referenceTypeUnion& o,
+    CitationTypeUnion::
+    CitationTypeUnion (const CitationTypeUnion& o,
                         ::xml_schema::flags f,
                         ::xml_schema::container* c)
     : ::xml_schema::string (o, f, c)
     {
     }
 
-    // referenceType
+    // CitationType
     // 
 
-    const referenceType::type_type& referenceType::
+    const CitationType::type_type& CitationType::
     type () const
     {
       return this->type_.get ();
     }
 
-    referenceType::type_type& referenceType::
+    CitationType::type_type& CitationType::
     type ()
     {
       return this->type_.get ();
     }
 
-    void referenceType::
+    void CitationType::
     type (const type_type& x)
     {
       this->type_.set (x);
     }
 
-    void referenceType::
+    void CitationType::
     type (::std::unique_ptr< type_type > x)
     {
       this->type_.set (std::move (x));
     }
 
-    const referenceType::identification_type& referenceType::
+    const CitationType::identification_type& CitationType::
     identification () const
     {
       return this->identification_.get ();
     }
 
-    referenceType::identification_type& referenceType::
+    CitationType::identification_type& CitationType::
     identification ()
     {
       return this->identification_.get ();
     }
 
-    void referenceType::
+    void CitationType::
     identification (const identification_type& x)
     {
       this->identification_.set (x);
     }
 
-    void referenceType::
+    void CitationType::
     identification (::std::unique_ptr< identification_type > x)
     {
       this->identification_.set (std::move (x));
     }
 
-    const referenceType::notes_optional& referenceType::
+    const CitationType::notes_optional& CitationType::
     notes () const
     {
       return this->notes_;
     }
 
-    referenceType::notes_optional& referenceType::
+    CitationType::notes_optional& CitationType::
     notes ()
     {
       return this->notes_;
     }
 
-    void referenceType::
+    void CitationType::
     notes (const notes_type& x)
     {
       this->notes_.set (x);
     }
 
-    void referenceType::
+    void CitationType::
     notes (const notes_optional& x)
     {
       this->notes_ = x;
     }
 
-    void referenceType::
+    void CitationType::
     notes (::std::unique_ptr< notes_type > x)
     {
       this->notes_.set (std::move (x));
     }
 
-    const referenceType::idtag_optional& referenceType::
+    const CitationType::idtag_optional& CitationType::
     idtag () const
     {
       return this->idtag_;
     }
 
-    referenceType::idtag_optional& referenceType::
+    CitationType::idtag_optional& CitationType::
     idtag ()
     {
       return this->idtag_;
     }
 
-    void referenceType::
+    void CitationType::
     idtag (const idtag_type& x)
     {
       this->idtag_.set (x);
     }
 
-    void referenceType::
+    void CitationType::
     idtag (const idtag_optional& x)
     {
       this->idtag_ = x;
     }
 
-    void referenceType::
+    void CitationType::
     idtag (::std::unique_ptr< idtag_type > x)
     {
       this->idtag_.set (std::move (x));
@@ -1733,22 +1733,22 @@ namespace schemas
       this->poc_ = s;
     }
 
-    const modelIdentificationType::reference_sequence& modelIdentificationType::
-    reference () const
+    const modelIdentificationType::Citation_sequence& modelIdentificationType::
+    Citation () const
     {
-      return this->reference_;
+      return this->Citation_;
     }
 
-    modelIdentificationType::reference_sequence& modelIdentificationType::
-    reference ()
+    modelIdentificationType::Citation_sequence& modelIdentificationType::
+    Citation ()
     {
-      return this->reference_;
+      return this->Citation_;
     }
 
     void modelIdentificationType::
-    reference (const reference_sequence& s)
+    Citation (const Citation_sequence& s)
     {
-      this->reference_ = s;
+      this->Citation_ = s;
     }
 
     const modelIdentificationType::other_optional& modelIdentificationType::
@@ -3998,55 +3998,55 @@ namespace schemas
       "pocTypeType",
       "http://www.sisostds.org/schemas/modelID");
 
-    // referenceTypeEnumerations
+    // CitationTypeEnumerations
     //
 
-    referenceTypeEnumerations::
-    referenceTypeEnumerations (const ::xercesc::DOMElement& e,
+    CitationTypeEnumerations::
+    CitationTypeEnumerations (const ::xercesc::DOMElement& e,
                                ::xml_schema::flags f,
                                ::xml_schema::container* c)
     : ::xml_schema::string (e, f, c)
     {
-      _xsd_referenceTypeEnumerations_convert ();
+      _xsd_CitationTypeEnumerations_convert ();
     }
 
-    referenceTypeEnumerations::
-    referenceTypeEnumerations (const ::xercesc::DOMAttr& a,
+    CitationTypeEnumerations::
+    CitationTypeEnumerations (const ::xercesc::DOMAttr& a,
                                ::xml_schema::flags f,
                                ::xml_schema::container* c)
     : ::xml_schema::string (a, f, c)
     {
-      _xsd_referenceTypeEnumerations_convert ();
+      _xsd_CitationTypeEnumerations_convert ();
     }
 
-    referenceTypeEnumerations::
-    referenceTypeEnumerations (const ::std::string& s,
+    CitationTypeEnumerations::
+    CitationTypeEnumerations (const ::std::string& s,
                                const ::xercesc::DOMElement* e,
                                ::xml_schema::flags f,
                                ::xml_schema::container* c)
     : ::xml_schema::string (s, e, f, c)
     {
-      _xsd_referenceTypeEnumerations_convert ();
+      _xsd_CitationTypeEnumerations_convert ();
     }
 
-    referenceTypeEnumerations* referenceTypeEnumerations::
+    CitationTypeEnumerations* CitationTypeEnumerations::
     _clone (::xml_schema::flags f,
             ::xml_schema::container* c) const
     {
-      return new class referenceTypeEnumerations (*this, f, c);
+      return new class CitationTypeEnumerations (*this, f, c);
     }
 
-    referenceTypeEnumerations::value referenceTypeEnumerations::
-    _xsd_referenceTypeEnumerations_convert () const
+    CitationTypeEnumerations::value CitationTypeEnumerations::
+    _xsd_CitationTypeEnumerations_convert () const
     {
-      ::xsd::cxx::tree::enum_comparator< char > c (_xsd_referenceTypeEnumerations_literals_);
+      ::xsd::cxx::tree::enum_comparator< char > c (_xsd_CitationTypeEnumerations_literals_);
       const value* i (::std::lower_bound (
-                        _xsd_referenceTypeEnumerations_indexes_,
-                        _xsd_referenceTypeEnumerations_indexes_ + 3,
+                        _xsd_CitationTypeEnumerations_indexes_,
+                        _xsd_CitationTypeEnumerations_indexes_ + 3,
                         *this,
                         c));
 
-      if (i == _xsd_referenceTypeEnumerations_indexes_ + 3 || _xsd_referenceTypeEnumerations_literals_[*i] != *this)
+      if (i == _xsd_CitationTypeEnumerations_indexes_ + 3 || _xsd_CitationTypeEnumerations_literals_[*i] != *this)
       {
         throw ::xsd::cxx::tree::unexpected_enumerator < char > (*this);
       }
@@ -4054,49 +4054,49 @@ namespace schemas
       return *i;
     }
 
-    const char* const referenceTypeEnumerations::
-    _xsd_referenceTypeEnumerations_literals_[3] =
+    const char* const CitationTypeEnumerations::
+    _xsd_CitationTypeEnumerations_literals_[3] =
     {
       "Source Material",
       "Conceptual Model",
       "Related BOM"
     };
 
-    const referenceTypeEnumerations::value referenceTypeEnumerations::
-    _xsd_referenceTypeEnumerations_indexes_[3] =
+    const CitationTypeEnumerations::value CitationTypeEnumerations::
+    _xsd_CitationTypeEnumerations_indexes_[3] =
     {
-      ::schemas::modelID::referenceTypeEnumerations::Conceptual_Model,
-      ::schemas::modelID::referenceTypeEnumerations::Related_BOM,
-      ::schemas::modelID::referenceTypeEnumerations::Source_Material
+      ::schemas::modelID::CitationTypeEnumerations::Conceptual_Model,
+      ::schemas::modelID::CitationTypeEnumerations::Related_BOM,
+      ::schemas::modelID::CitationTypeEnumerations::Source_Material
     };
 
     static
-    const ::xsd::cxx::tree::type_factory_initializer< 0, char, referenceTypeEnumerations >
-    _xsd_referenceTypeEnumerations_type_factory_init (
-      "referenceTypeEnumerations",
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, CitationTypeEnumerations >
+    _xsd_CitationTypeEnumerations_type_factory_init (
+      "CitationTypeEnumerations",
       "http://www.sisostds.org/schemas/modelID");
 
-    // referenceTypeUnion
+    // CitationTypeUnion
     //
 
-    referenceTypeUnion::
-    referenceTypeUnion (const ::xercesc::DOMElement& e,
+    CitationTypeUnion::
+    CitationTypeUnion (const ::xercesc::DOMElement& e,
                         ::xml_schema::flags f,
                         ::xml_schema::container* c)
     : ::xml_schema::string (e, f, c)
     {
     }
 
-    referenceTypeUnion::
-    referenceTypeUnion (const ::xercesc::DOMAttr& a,
+    CitationTypeUnion::
+    CitationTypeUnion (const ::xercesc::DOMAttr& a,
                         ::xml_schema::flags f,
                         ::xml_schema::container* c)
     : ::xml_schema::string (a, f, c)
     {
     }
 
-    referenceTypeUnion::
-    referenceTypeUnion (const ::std::string& s,
+    CitationTypeUnion::
+    CitationTypeUnion (const ::std::string& s,
                         const ::xercesc::DOMElement* e,
                         ::xml_schema::flags f,
                         ::xml_schema::container* c)
@@ -4104,24 +4104,24 @@ namespace schemas
     {
     }
 
-    referenceTypeUnion* referenceTypeUnion::
+    CitationTypeUnion* CitationTypeUnion::
     _clone (::xml_schema::flags f,
             ::xml_schema::container* c) const
     {
-      return new class referenceTypeUnion (*this, f, c);
+      return new class CitationTypeUnion (*this, f, c);
     }
 
     static
-    const ::xsd::cxx::tree::type_factory_initializer< 0, char, referenceTypeUnion >
-    _xsd_referenceTypeUnion_type_factory_init (
-      "referenceTypeUnion",
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, CitationTypeUnion >
+    _xsd_CitationTypeUnion_type_factory_init (
+      "CitationTypeUnion",
       "http://www.sisostds.org/schemas/modelID");
 
-    // referenceType
+    // CitationType
     //
 
-    referenceType::
-    referenceType (const type_type& type,
+    CitationType::
+    CitationType (const type_type& type,
                    const identification_type& identification)
     : ::xml_schema::type (),
       type_ (type, this),
@@ -4131,8 +4131,8 @@ namespace schemas
     {
     }
 
-    referenceType::
-    referenceType (::std::unique_ptr< type_type > type,
+    CitationType::
+    CitationType (::std::unique_ptr< type_type > type,
                    ::std::unique_ptr< identification_type > identification)
     : ::xml_schema::type (),
       type_ (std::move (type), this),
@@ -4142,8 +4142,8 @@ namespace schemas
     {
     }
 
-    referenceType::
-    referenceType (const referenceType& x,
+    CitationType::
+    CitationType (const CitationType& x,
                    ::xml_schema::flags f,
                    ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
@@ -4154,8 +4154,8 @@ namespace schemas
     {
     }
 
-    referenceType::
-    referenceType (const ::xercesc::DOMElement& e,
+    CitationType::
+    CitationType (const ::xercesc::DOMElement& e,
                    ::xml_schema::flags f,
                    ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
@@ -4171,7 +4171,7 @@ namespace schemas
       }
     }
 
-    void referenceType::
+    void CitationType::
     parse (::xsd::cxx::xml::dom::parser< char >& p,
            ::xml_schema::flags f)
     {
@@ -4246,15 +4246,15 @@ namespace schemas
       }
     }
 
-    referenceType* referenceType::
+    CitationType* CitationType::
     _clone (::xml_schema::flags f,
             ::xml_schema::container* c) const
     {
-      return new class referenceType (*this, f, c);
+      return new class CitationType (*this, f, c);
     }
 
-    referenceType& referenceType::
-    operator= (const referenceType& x)
+    CitationType& CitationType::
+    operator= (const CitationType& x)
     {
       if (this != &x)
       {
@@ -4268,15 +4268,15 @@ namespace schemas
       return *this;
     }
 
-    referenceType::
-    ~referenceType ()
+    CitationType::
+    ~CitationType ()
     {
     }
 
     static
-    const ::xsd::cxx::tree::type_factory_initializer< 0, char, referenceType >
-    _xsd_referenceType_type_factory_init (
-      "referenceType",
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, CitationType >
+    _xsd_CitationType_type_factory_init (
+      "CitationType",
       "http://www.sisostds.org/schemas/modelID");
 
     // keywordType
@@ -4484,7 +4484,7 @@ namespace schemas
       useHistory_ (this),
       keyword_ (this),
       poc_ (this),
-      reference_ (this),
+      Citation_ (this),
       other_ (this),
       glyph_ (this),
       notes_ (this),
@@ -4513,7 +4513,7 @@ namespace schemas
       useHistory_ (this),
       keyword_ (this),
       poc_ (this),
-      reference_ (this),
+      Citation_ (this),
       other_ (this),
       glyph_ (this),
       notes_ (this),
@@ -4539,7 +4539,7 @@ namespace schemas
       useHistory_ (x.useHistory_, f, this),
       keyword_ (x.keyword_, f, this),
       poc_ (x.poc_, f, this),
-      reference_ (x.reference_, f, this),
+      Citation_ (x.Citation_, f, this),
       other_ (x.other_, f, this),
       glyph_ (x.glyph_, f, this),
       notes_ (x.notes_, f, this),
@@ -4565,7 +4565,7 @@ namespace schemas
       useHistory_ (this),
       keyword_ (this),
       poc_ (this),
-      reference_ (this),
+      Citation_ (this),
       other_ (this),
       glyph_ (this),
       notes_ (this),
@@ -4912,27 +4912,27 @@ namespace schemas
           continue;
         }
 
-        // reference
+        // Citation
         //
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
-              "reference",
+              "Citation",
               "http://www.sisostds.org/schemas/modelID",
-              &::xsd::cxx::tree::factory_impl< reference_type >,
+              &::xsd::cxx::tree::factory_impl< Citation_type >,
               false, true, i, n, f, this));
 
           if (tmp.get () != 0)
           {
-            ::std::unique_ptr< reference_type > r (
-              dynamic_cast< reference_type* > (tmp.get ()));
+            ::std::unique_ptr< Citation_type > r (
+              dynamic_cast< Citation_type* > (tmp.get ()));
 
             if (r.get ())
               tmp.release ();
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->reference_.push_back (::std::move (r));
+            this->Citation_.push_back (::std::move (r));
             continue;
           }
         }
@@ -5070,7 +5070,7 @@ namespace schemas
         this->useHistory_ = x.useHistory_;
         this->keyword_ = x.keyword_;
         this->poc_ = x.poc_;
-        this->reference_ = x.reference_;
+        this->Citation_ = x.Citation_;
         this->other_ = x.other_;
         this->glyph_ = x.glyph_;
         this->notes_ = x.notes_;
@@ -5095,24 +5095,24 @@ namespace schemas
     //
 
     type::
-    type (const char* _xsd_referenceTypeUnion_base)
-    : ::schemas::modelID::referenceTypeUnion (_xsd_referenceTypeUnion_base),
+    type (const char* _xsd_CitationTypeUnion_base)
+    : ::schemas::modelID::CitationTypeUnion (_xsd_CitationTypeUnion_base),
       notes_ (this),
       idtag_ (this)
     {
     }
 
     type::
-    type (const ::std::string& _xsd_referenceTypeUnion_base)
-    : ::schemas::modelID::referenceTypeUnion (_xsd_referenceTypeUnion_base),
+    type (const ::std::string& _xsd_CitationTypeUnion_base)
+    : ::schemas::modelID::CitationTypeUnion (_xsd_CitationTypeUnion_base),
       notes_ (this),
       idtag_ (this)
     {
     }
 
     type::
-    type (const ::schemas::modelID::referenceTypeUnion& _xsd_referenceTypeUnion_base)
-    : ::schemas::modelID::referenceTypeUnion (_xsd_referenceTypeUnion_base),
+    type (const ::schemas::modelID::CitationTypeUnion& _xsd_CitationTypeUnion_base)
+    : ::schemas::modelID::CitationTypeUnion (_xsd_CitationTypeUnion_base),
       notes_ (this),
       idtag_ (this)
     {
@@ -5122,7 +5122,7 @@ namespace schemas
     type (const type& x,
           ::xml_schema::flags f,
           ::xml_schema::container* c)
-    : ::schemas::modelID::referenceTypeUnion (x, f, c),
+    : ::schemas::modelID::CitationTypeUnion (x, f, c),
       notes_ (x.notes_, f, this),
       idtag_ (x.idtag_, f, this)
     {
@@ -5132,7 +5132,7 @@ namespace schemas
     type (const ::xercesc::DOMElement& e,
           ::xml_schema::flags f,
           ::xml_schema::container* c)
-    : ::schemas::modelID::referenceTypeUnion (e, f | ::xml_schema::flags::base, c),
+    : ::schemas::modelID::CitationTypeUnion (e, f | ::xml_schema::flags::base, c),
       notes_ (this),
       idtag_ (this)
     {
@@ -5179,7 +5179,7 @@ namespace schemas
     {
       if (this != &x)
       {
-        static_cast< ::schemas::modelID::referenceTypeUnion& > (*this) = x;
+        static_cast< ::schemas::modelID::CitationTypeUnion& > (*this) = x;
         this->notes_ = x.notes_;
         this->idtag_ = x.idtag_;
       }
@@ -5920,33 +5920,33 @@ namespace schemas
     _xsd_pocTypeType_std_ostream_init;
 
     ::std::ostream&
-    operator<< (::std::ostream& o, referenceTypeEnumerations::value i)
+    operator<< (::std::ostream& o, CitationTypeEnumerations::value i)
     {
-      return o << referenceTypeEnumerations::_xsd_referenceTypeEnumerations_literals_[i];
+      return o << CitationTypeEnumerations::_xsd_CitationTypeEnumerations_literals_[i];
     }
 
     ::std::ostream&
-    operator<< (::std::ostream& o, const referenceTypeEnumerations& i)
-    {
-      return o << static_cast< const ::xml_schema::string& > (i);
-    }
-
-    static
-    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, referenceTypeEnumerations >
-    _xsd_referenceTypeEnumerations_std_ostream_init;
-
-    ::std::ostream&
-    operator<< (::std::ostream& o, const referenceTypeUnion& i)
+    operator<< (::std::ostream& o, const CitationTypeEnumerations& i)
     {
       return o << static_cast< const ::xml_schema::string& > (i);
     }
 
     static
-    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, referenceTypeUnion >
-    _xsd_referenceTypeUnion_std_ostream_init;
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, CitationTypeEnumerations >
+    _xsd_CitationTypeEnumerations_std_ostream_init;
 
     ::std::ostream&
-    operator<< (::std::ostream& o, const referenceType& i)
+    operator<< (::std::ostream& o, const CitationTypeUnion& i)
+    {
+      return o << static_cast< const ::xml_schema::string& > (i);
+    }
+
+    static
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, CitationTypeUnion >
+    _xsd_CitationTypeUnion_std_ostream_init;
+
+    ::std::ostream&
+    operator<< (::std::ostream& o, const CitationType& i)
     {
       o << ::std::endl << "type: " << i.type ();
       o << ::std::endl << "identification: " << i.identification ();
@@ -5964,8 +5964,8 @@ namespace schemas
     }
 
     static
-    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, referenceType >
-    _xsd_referenceType_std_ostream_init;
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, CitationType >
+    _xsd_CitationType_std_ostream_init;
 
     ::std::ostream&
     operator<< (::std::ostream& o, const keywordType& i)
@@ -6133,11 +6133,11 @@ namespace schemas
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-        for (modelIdentificationType::reference_const_iterator
-             b (i.reference ().begin ()), e (i.reference ().end ());
+        for (modelIdentificationType::Citation_const_iterator
+             b (i.Citation ().begin ()), e (i.Citation ().end ());
              b != e; ++b)
         {
-          o << ::std::endl << "reference: ";
+          o << ::std::endl << "Citation: ";
           om.insert (o, *b);
         }
       }
@@ -6178,7 +6178,7 @@ namespace schemas
     ::std::ostream&
     operator<< (::std::ostream& o, const type& i)
     {
-      o << static_cast< const ::schemas::modelID::referenceTypeUnion& > (i);
+      o << static_cast< const ::schemas::modelID::CitationTypeUnion& > (i);
 
       if (i.notes ())
       {
@@ -7062,59 +7062,59 @@ namespace schemas
 
 
     void
-    operator<< (::xercesc::DOMElement& e, const referenceTypeEnumerations& i)
+    operator<< (::xercesc::DOMElement& e, const CitationTypeEnumerations& i)
     {
       e << static_cast< const ::xml_schema::string& > (i);
     }
 
     void
-    operator<< (::xercesc::DOMAttr& a, const referenceTypeEnumerations& i)
+    operator<< (::xercesc::DOMAttr& a, const CitationTypeEnumerations& i)
     {
       a << static_cast< const ::xml_schema::string& > (i);
     }
 
     void
     operator<< (::xml_schema::list_stream& l,
-                const referenceTypeEnumerations& i)
+                const CitationTypeEnumerations& i)
     {
       l << static_cast< const ::xml_schema::string& > (i);
     }
 
     static
-    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, referenceTypeEnumerations >
-    _xsd_referenceTypeEnumerations_type_serializer_init (
-      "referenceTypeEnumerations",
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, CitationTypeEnumerations >
+    _xsd_CitationTypeEnumerations_type_serializer_init (
+      "CitationTypeEnumerations",
       "http://www.sisostds.org/schemas/modelID");
 
 
     void
-    operator<< (::xercesc::DOMElement& e, const referenceTypeUnion& i)
+    operator<< (::xercesc::DOMElement& e, const CitationTypeUnion& i)
     {
       e << static_cast< const ::xml_schema::string& > (i);
     }
 
     void
-    operator<< (::xercesc::DOMAttr& a, const referenceTypeUnion& i)
+    operator<< (::xercesc::DOMAttr& a, const CitationTypeUnion& i)
     {
       a << static_cast< const ::xml_schema::string& > (i);
     }
 
     void
     operator<< (::xml_schema::list_stream& l,
-                const referenceTypeUnion& i)
+                const CitationTypeUnion& i)
     {
       l << static_cast< const ::xml_schema::string& > (i);
     }
 
     static
-    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, referenceTypeUnion >
-    _xsd_referenceTypeUnion_type_serializer_init (
-      "referenceTypeUnion",
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, CitationTypeUnion >
+    _xsd_CitationTypeUnion_type_serializer_init (
+      "CitationTypeUnion",
       "http://www.sisostds.org/schemas/modelID");
 
 
     void
-    operator<< (::xercesc::DOMElement& e, const referenceType& i)
+    operator<< (::xercesc::DOMElement& e, const CitationType& i)
     {
       e << static_cast< const ::xml_schema::type& > (i);
 
@@ -7168,9 +7168,9 @@ namespace schemas
     }
 
     static
-    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, referenceType >
-    _xsd_referenceType_type_serializer_init (
-      "referenceType",
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, CitationType >
+    _xsd_CitationType_type_serializer_init (
+      "CitationType",
       "http://www.sisostds.org/schemas/modelID");
 
 
@@ -7579,21 +7579,21 @@ namespace schemas
         s << *b;
       }
 
-      // reference
+      // Citation
       //
       {
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        for (modelIdentificationType::reference_const_iterator
-             b (i.reference ().begin ()), n (i.reference ().end ());
+        for (modelIdentificationType::Citation_const_iterator
+             b (i.Citation ().begin ()), n (i.Citation ().end ());
              b != n; ++b)
         {
-          if (typeid (modelIdentificationType::reference_type) == typeid (*b))
+          if (typeid (modelIdentificationType::Citation_type) == typeid (*b))
           {
             ::xercesc::DOMElement& s (
               ::xsd::cxx::xml::dom::create_element (
-                "reference",
+                "Citation",
                 "http://www.sisostds.org/schemas/modelID",
                 e));
 
@@ -7601,7 +7601,7 @@ namespace schemas
           }
           else
             tsm.serialize (
-              "reference",
+              "Citation",
               "http://www.sisostds.org/schemas/modelID",
               false, true, e, *b);
         }
@@ -7682,7 +7682,7 @@ namespace schemas
     void
     operator<< (::xercesc::DOMElement& e, const type& i)
     {
-      e << static_cast< const ::schemas::modelID::referenceTypeUnion& > (i);
+      e << static_cast< const ::schemas::modelID::CitationTypeUnion& > (i);
 
       // notes
       //

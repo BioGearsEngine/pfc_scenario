@@ -54,7 +54,7 @@ ColumnLayout  {
       Layout.fillWidth: true
       Layout.fillHeight : true
       Layout.bottomMargin : 5
-      label : "References"
+      label : "Citations"
       model : ListModel {}
       delegate : Rectangle {
         Layout.fillWidth : true

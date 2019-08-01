@@ -142,12 +142,6 @@ inline void assign_injury(const QSqlRecord& record, Injury& injury)
   injury.medical_name = record.value(INJURY_MEDICAL_NAME).toString();
   injury.common_name = record.value(INJURY_COMMON_NAME).toString();
   injury.description = record.value(INJURY_DESCRIPTION).toString();
-  auto equip_list_s = record.value(INJURY_EQUIPMENT_LIST).toString();
-  auto equip_list = equip_list_s.split(";");
-  injury.equipment_list.clear();
-  for (auto& val : equip_list) {
-    injury.equipment_list.push_back(val);
-  }
   auto ref_list_s = record.value(INJURY_CITATIONS).toString();
   auto ref_list = ref_list_s.split(";");
   injury.citations.clear();
@@ -1553,7 +1547,6 @@ bool SQLite3Driver::update_objective(Objective* objective)
       ref_list += QString::number(val) + ";";
     }
     ref_list.chop(1);
-
     query.bindValue(":name", objective->name);
     query.bindValue(":description", objective->description);
     query.bindValue(":citations", ref_list);
@@ -1562,7 +1555,6 @@ bool SQLite3Driver::update_objective(Objective* objective)
       qWarning() << query.lastError();
       return false;
     }
-
     if (-1 == objective->id) {
       return select_objective(objective);
     }

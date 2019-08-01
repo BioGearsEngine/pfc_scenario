@@ -270,8 +270,8 @@ namespace msdl_1
   class CommandRelationType;
   class CommunicationNetInstancesType;
   class CommunicationNetInstanceType;
-  class CommunicationNetReferencesType;
-  class CommunicationNetReferenceType;
+  class CommunicationNetCitationsType;
+  class CommunicationNetCitationType;
   class CoordinateDataStandardType;
   class CoordinatesType;
   class CoordinatePointType;
@@ -1347,47 +1347,47 @@ namespace msdl_1
     ::xsd::cxx::tree::one< CommunicationService_type > CommunicationService_;
   };
 
-  class CommunicationNetReferencesType: public ::xml_schema::type
+  class CommunicationNetCitationsType: public ::xml_schema::type
   {
     public:
-    // CommunicationNetReference
+    // CommunicationNetCitation
     //
-    typedef ::msdl_1::CommunicationNetReferenceType CommunicationNetReference_type;
-    typedef ::xsd::cxx::tree::sequence< CommunicationNetReference_type > CommunicationNetReference_sequence;
-    typedef CommunicationNetReference_sequence::iterator CommunicationNetReference_iterator;
-    typedef CommunicationNetReference_sequence::const_iterator CommunicationNetReference_const_iterator;
-    typedef ::xsd::cxx::tree::traits< CommunicationNetReference_type, char > CommunicationNetReference_traits;
+    typedef ::msdl_1::CommunicationNetCitationType CommunicationNetCitation_type;
+    typedef ::xsd::cxx::tree::sequence< CommunicationNetCitation_type > CommunicationNetCitation_sequence;
+    typedef CommunicationNetCitation_sequence::iterator CommunicationNetCitation_iterator;
+    typedef CommunicationNetCitation_sequence::const_iterator CommunicationNetCitation_const_iterator;
+    typedef ::xsd::cxx::tree::traits< CommunicationNetCitation_type, char > CommunicationNetCitation_traits;
 
-    const CommunicationNetReference_sequence&
-    CommunicationNetReference () const;
+    const CommunicationNetCitation_sequence&
+    CommunicationNetCitation () const;
 
-    CommunicationNetReference_sequence&
-    CommunicationNetReference ();
+    CommunicationNetCitation_sequence&
+    CommunicationNetCitation ();
 
     void
-    CommunicationNetReference (const CommunicationNetReference_sequence& s);
+    CommunicationNetCitation (const CommunicationNetCitation_sequence& s);
 
     // Constructors.
     //
-    CommunicationNetReferencesType ();
+    CommunicationNetCitationsType ();
 
-    CommunicationNetReferencesType (const ::xercesc::DOMElement& e,
+    CommunicationNetCitationsType (const ::xercesc::DOMElement& e,
                                     ::xml_schema::flags f = 0,
                                     ::xml_schema::container* c = 0);
 
-    CommunicationNetReferencesType (const CommunicationNetReferencesType& x,
+    CommunicationNetCitationsType (const CommunicationNetCitationsType& x,
                                     ::xml_schema::flags f = 0,
                                     ::xml_schema::container* c = 0);
 
-    virtual CommunicationNetReferencesType*
+    virtual CommunicationNetCitationsType*
     _clone (::xml_schema::flags f = 0,
             ::xml_schema::container* c = 0) const;
 
-    CommunicationNetReferencesType&
-    operator= (const CommunicationNetReferencesType& x);
+    CommunicationNetCitationsType&
+    operator= (const CommunicationNetCitationsType& x);
 
     virtual 
-    ~CommunicationNetReferencesType ();
+    ~CommunicationNetCitationsType ();
 
     // Implementation.
     //
@@ -1397,10 +1397,10 @@ namespace msdl_1
            ::xml_schema::flags);
 
     protected:
-    CommunicationNetReference_sequence CommunicationNetReference_;
+    CommunicationNetCitation_sequence CommunicationNetCitation_;
   };
 
-  class CommunicationNetReferenceType: public ::xml_schema::type
+  class CommunicationNetCitationType: public ::xml_schema::type
   {
     public:
     // CommunicationNetId
@@ -1439,29 +1439,29 @@ namespace msdl_1
 
     // Constructors.
     //
-    CommunicationNetReferenceType (const CommunicationNetId_type&,
+    CommunicationNetCitationType (const CommunicationNetId_type&,
                                    const UnitOwnerHandle_type&);
 
-    CommunicationNetReferenceType (::std::unique_ptr< CommunicationNetId_type >,
+    CommunicationNetCitationType (::std::unique_ptr< CommunicationNetId_type >,
                                    ::std::unique_ptr< UnitOwnerHandle_type >);
 
-    CommunicationNetReferenceType (const ::xercesc::DOMElement& e,
+    CommunicationNetCitationType (const ::xercesc::DOMElement& e,
                                    ::xml_schema::flags f = 0,
                                    ::xml_schema::container* c = 0);
 
-    CommunicationNetReferenceType (const CommunicationNetReferenceType& x,
+    CommunicationNetCitationType (const CommunicationNetCitationType& x,
                                    ::xml_schema::flags f = 0,
                                    ::xml_schema::container* c = 0);
 
-    virtual CommunicationNetReferenceType*
+    virtual CommunicationNetCitationType*
     _clone (::xml_schema::flags f = 0,
             ::xml_schema::container* c = 0) const;
 
-    CommunicationNetReferenceType&
-    operator= (const CommunicationNetReferenceType& x);
+    CommunicationNetCitationType&
+    operator= (const CommunicationNetCitationType& x);
 
     virtual 
-    ~CommunicationNetReferenceType ();
+    ~CommunicationNetCitationType ();
 
     // Implementation.
     //
@@ -2074,26 +2074,26 @@ namespace msdl_1
     void
     EquipmentSymbolModifiers (::std::unique_ptr< EquipmentSymbolModifiers_type > p);
 
-    // CommunicationNetReferences
+    // CommunicationNetCitations
     //
-    typedef ::msdl_1::CommunicationNetReferencesType CommunicationNetReferences_type;
-    typedef ::xsd::cxx::tree::optional< CommunicationNetReferences_type > CommunicationNetReferences_optional;
-    typedef ::xsd::cxx::tree::traits< CommunicationNetReferences_type, char > CommunicationNetReferences_traits;
+    typedef ::msdl_1::CommunicationNetCitationsType CommunicationNetCitations_type;
+    typedef ::xsd::cxx::tree::optional< CommunicationNetCitations_type > CommunicationNetCitations_optional;
+    typedef ::xsd::cxx::tree::traits< CommunicationNetCitations_type, char > CommunicationNetCitations_traits;
 
-    const CommunicationNetReferences_optional&
-    CommunicationNetReferences () const;
+    const CommunicationNetCitations_optional&
+    CommunicationNetCitations () const;
 
-    CommunicationNetReferences_optional&
-    CommunicationNetReferences ();
-
-    void
-    CommunicationNetReferences (const CommunicationNetReferences_type& x);
+    CommunicationNetCitations_optional&
+    CommunicationNetCitations ();
 
     void
-    CommunicationNetReferences (const CommunicationNetReferences_optional& x);
+    CommunicationNetCitations (const CommunicationNetCitations_type& x);
 
     void
-    CommunicationNetReferences (::std::unique_ptr< CommunicationNetReferences_type > p);
+    CommunicationNetCitations (const CommunicationNetCitations_optional& x);
+
+    void
+    CommunicationNetCitations (::std::unique_ptr< CommunicationNetCitations_type > p);
 
     // Disposition
     //
@@ -2197,7 +2197,7 @@ namespace msdl_1
     ::xsd::cxx::tree::one< SymbolIdentifier_type > SymbolIdentifier_;
     Name_optional Name_;
     EquipmentSymbolModifiers_optional EquipmentSymbolModifiers_;
-    CommunicationNetReferences_optional CommunicationNetReferences_;
+    CommunicationNetCitations_optional CommunicationNetCitations_;
     ::xsd::cxx::tree::one< Disposition_type > Disposition_;
     ::xsd::cxx::tree::one< Relations_type > Relations_;
     Model_optional Model_;
@@ -8939,10 +8939,10 @@ namespace msdl_1
   operator<< (::std::ostream&, const CommunicationNetInstanceType&);
 
   ::std::ostream&
-  operator<< (::std::ostream&, const CommunicationNetReferencesType&);
+  operator<< (::std::ostream&, const CommunicationNetCitationsType&);
 
   ::std::ostream&
-  operator<< (::std::ostream&, const CommunicationNetReferenceType&);
+  operator<< (::std::ostream&, const CommunicationNetCitationType&);
 
   ::std::ostream&
   operator<< (::std::ostream&, const CoordinateDataStandardType&);
@@ -9197,10 +9197,10 @@ namespace msdl_1
   operator<< (::xercesc::DOMElement&, const CommunicationNetInstanceType&);
 
   void
-  operator<< (::xercesc::DOMElement&, const CommunicationNetReferencesType&);
+  operator<< (::xercesc::DOMElement&, const CommunicationNetCitationsType&);
 
   void
-  operator<< (::xercesc::DOMElement&, const CommunicationNetReferenceType&);
+  operator<< (::xercesc::DOMElement&, const CommunicationNetCitationType&);
 
   void
   operator<< (::xercesc::DOMElement&, const CoordinateDataStandardType&);
