@@ -177,13 +177,13 @@ struct Equipment : public QObject {
   Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString description MEMBER description)
   Q_PROPERTY(QList<QString> equipment_list MEMBER equipment_list)
-  Q_PROPERTY(QList<int> references MEMBER references)
+  Q_PROPERTY(QList<int> citations MEMBER citations)
 public:
   int32_t id = -1;
   QString name = "";
   QString description = "";
   QList<QString> equipment_list;
-  QList<int> references;
+  QList<int> citations;
   Equipment(QObject* parent = nullptr)
     : QObject(parent)
   {
@@ -200,7 +200,7 @@ public:
       && name == rhs.name
       && description == rhs.description
       && equipment_list == rhs.equipment_list
-      && references == rhs.references;
+      && citations == rhs.citations;
   }
   bool operator!=(const Equipment& rhs) const
   {
@@ -212,7 +212,7 @@ public:
     name = rhs.name;
     description = rhs.description;
     equipment_list = rhs.equipment_list;
-    references = rhs.references;
+    citations = rhs.citations;
   }
 };
 //----End Equipment
@@ -223,14 +223,14 @@ struct Injury : public QObject {
   Q_PROPERTY(QString common_name MEMBER common_name)
   Q_PROPERTY(QString description MEMBER description)
   Q_PROPERTY(QList<QString> equipment_list MEMBER equipment_list)
-  Q_PROPERTY(QList<int> references MEMBER references)
+  Q_PROPERTY(QList<int> citations MEMBER citations)
 public:
   int32_t id = -1;
   QString medical_name = "";
   QString common_name = "";
   QString description = "";
   QList<QString> equipment_list;
-  QList<int> references;
+  QList<int> citations;
   Injury(QObject* parent = nullptr)
     : QObject(parent)
   {
@@ -248,7 +248,7 @@ public:
       && common_name == rhs.common_name
       && description == rhs.description
       && equipment_list == rhs.equipment_list
-      && references == rhs.references;
+      && citations == rhs.citations;
   }
   bool operator!=(const Injury& rhs) const
   {
@@ -261,7 +261,7 @@ public:
     common_name = rhs.common_name;
     description = rhs.description;
     equipment_list = rhs.equipment_list;
-    references = rhs.references;
+    citations = rhs.citations;
   }
 };
 //----End Injury
@@ -317,12 +317,12 @@ struct Objective : public QObject {
   Q_PROPERTY(int objective_id MEMBER id)
   Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString description MEMBER description)
-  Q_PROPERTY(QList<int> references MEMBER references)
+  Q_PROPERTY(QList<int> citations MEMBER citations)
 public:
   int32_t id = -1;
   QString name = "";
   QString description = "";
-  QList<int> references;
+  QList<int> citations;
 
   Objective(QObject* parent = nullptr)
     : QObject(parent)
@@ -339,7 +339,7 @@ public:
     return id == rhs.id
       && name == rhs.name
       && description == rhs.description
-      && references == rhs.references;
+      && citations == rhs.citations;
   }
   bool operator!=(const Objective& rhs) const
   {
@@ -350,7 +350,7 @@ public:
     id = rhs.id;
     name = rhs.name;
     description = rhs.description;
-    references = rhs.references;
+    citations = rhs.citations;
   }
 };
 //----End Objective
@@ -429,7 +429,7 @@ public:
 //----End Prop
 struct Reference : public QObject {
   Q_OBJECT
-  Q_PROPERTY(int reference_id MEMBER id)
+  Q_PROPERTY(int citation_id MEMBER id)
   Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString key MEMBER key)
   Q_PROPERTY(QString title MEMBER title)
@@ -555,14 +555,14 @@ struct Treatment : public QObject {
   Q_PROPERTY(QString common_name MEMBER common_name)
   Q_PROPERTY(QString description MEMBER description)
   Q_PROPERTY(QList<QString> equipment_list MEMBER equipment_list)
-  Q_PROPERTY(QList<int> references MEMBER references)
+  Q_PROPERTY(QList<int> citations MEMBER citations)
 public:
   int32_t id = -1;
   QString medical_name = "";
   QString common_name = "";
   QString description = "";
   QList<QString> equipment_list;
-  QList<int> references;
+  QList<int> citations;
   Treatment(QObject* parent = nullptr)
     : QObject(parent)
   {
@@ -580,7 +580,7 @@ public:
       && common_name == rhs.common_name
       && description == rhs.description
       && equipment_list == rhs.equipment_list
-      && references == rhs.references;
+      && citations == rhs.citations;
   }
   bool operator!=(const Treatment& rhs) const
   {
@@ -593,7 +593,7 @@ public:
     common_name = rhs.common_name;
     description = rhs.description;
     equipment_list = rhs.equipment_list;
-    references = rhs.references;
+    citations = rhs.citations;
   }
 };
 //----End Treatment
@@ -616,7 +616,7 @@ public:
     OBJECTIVES,
     PROPERTIES,
     PROPS,
-    REFERENCES,
+    CITATIONS,
     RESTRICTIONS,
     ROLES,
     TREATMENTS,
@@ -644,7 +644,7 @@ public:
   Q_INVOKABLE int property_count() const;
   Q_INVOKABLE int restriction_count() const;
   Q_INVOKABLE int objective_count() const;
-  Q_INVOKABLE int reference_count() const;
+  Q_INVOKABLE int citation_count() const;
   Q_INVOKABLE int treatment_count() const;
   Q_INVOKABLE int equipment_count() const;
   Q_INVOKABLE int injury_count() const;
@@ -654,11 +654,13 @@ public:
   Q_INVOKABLE int prop_count() const;
   Q_INVOKABLE int event_count() const;
 
+  Q_INVOKABLE int nextID(Sqlite3Table) const;
+
   Q_INVOKABLE void authors();
   Q_INVOKABLE void properties();
   Q_INVOKABLE void restrictions();
   Q_INVOKABLE void objectives();
-  Q_INVOKABLE void references();
+  Q_INVOKABLE void citations();
   Q_INVOKABLE void treatments();
   Q_INVOKABLE void equipments();
   Q_INVOKABLE void injuries();
@@ -672,7 +674,7 @@ public:
   Q_INVOKABLE bool next_property(Property*);
   Q_INVOKABLE bool next_restriction(Restriction*);
   Q_INVOKABLE bool next_objective(Objective*);
-  Q_INVOKABLE bool next_reference(Reference*);
+  Q_INVOKABLE bool next_citation(Reference*);
   Q_INVOKABLE bool next_treatment(Treatment*);
   Q_INVOKABLE bool next_equipment(Equipment*);
   Q_INVOKABLE bool next_injury(Injury*);
@@ -686,7 +688,7 @@ public:
   Q_INVOKABLE bool select_property(Property*) const;
   Q_INVOKABLE bool select_restriction(Restriction*) const;
   Q_INVOKABLE bool select_objective(Objective*) const;
-  Q_INVOKABLE bool select_reference(Reference*) const;
+  Q_INVOKABLE bool select_citation(Reference*) const;
   Q_INVOKABLE bool select_treatment(Treatment*) const;
   Q_INVOKABLE bool select_equipment(Equipment*) const;
   Q_INVOKABLE bool select_injury(Injury*) const;
@@ -705,7 +707,7 @@ public:
   Q_INVOKABLE bool update_role(Role*);
   Q_INVOKABLE bool update_prop(Prop*);
   Q_INVOKABLE bool update_event(Event*);
-  Q_INVOKABLE bool update_reference(Reference*);
+  Q_INVOKABLE bool update_citation(Reference*);
   Q_INVOKABLE bool update_treatment(Treatment*);
   Q_INVOKABLE bool update_equipment(Equipment*);
   Q_INVOKABLE bool update_injury(Injury*);
@@ -715,7 +717,7 @@ public:
   Q_INVOKABLE bool remove_property(Property*);
   Q_INVOKABLE bool remove_restriction(Restriction*);
   Q_INVOKABLE bool remove_objective(Objective*);
-  Q_INVOKABLE bool remove_reference(Reference*);
+  Q_INVOKABLE bool remove_citation(Reference*);
   Q_INVOKABLE bool remove_treatment(Treatment*);
   Q_INVOKABLE bool remove_equipment(Equipment*);
   Q_INVOKABLE bool remove_injury(Injury*);
@@ -759,7 +761,7 @@ private:
   QList<Property*> _properties;
   QList<Restriction*> _restrictions;
   QList<Objective*> _objectives;
-  QList<Reference*> _references;
+  QList<Reference*> _citations;
   QList<Treatment*> _treatments;
   QList<Equipment*> _equipments;
   QList<Injury*> _injuries;
@@ -773,7 +775,7 @@ private:
   QList<Property*>::iterator _current_property;
   QList<Restriction*>::iterator _current_restriction;
   QList<Objective*>::iterator _current_objective;
-  QList<Reference*>::iterator _current_reference;
+  QList<Reference*>::iterator _current_citation;
   QList<Treatment*>::iterator _current_treatment;
   QList<Equipment*>::iterator _current_equipment;
   QList<Injury*>::iterator _current_injury;

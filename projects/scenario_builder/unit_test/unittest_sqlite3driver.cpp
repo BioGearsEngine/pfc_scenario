@@ -152,15 +152,15 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Objective)
 
   objective_1.name = "Kill the Troll";
   objective_1.description = "There is a troll in the forest in a great big whole who has some gold. Kill it";
-  objective_1.references = { 1, 2, 3 };
+  objective_1.citations = { 1, 2, 3 };
 
   objective_2.name = "Steal the Trolls Gold";
   objective_2.description = "Gold is really dense. Its like crazy heavy bring a levetation spell.";
-  objective_2.references = { 4, 5, 6 };
+  objective_2.citations = { 4, 5, 6 };
 
   objective_3.name = "Return the Gold to the Quest Giver. Kill the Quest Giver";
   objective_3.description = "If we want to keep the gold we need to steal from the quest giver, but he will need to die before we can do that.";
-  objective_3.references = { 7, 8, 9 };
+  objective_3.citations = { 7, 8, 9 };
 
   EXPECT_EQ(0, _db.objective_count());
   EXPECT_TRUE(_db.update_objective(&objective_1));
@@ -282,15 +282,15 @@ TEST_F(TEST_FIXTURE_NAME, Select_Objective)
 
   objective_1.name = "Kill the Troll";
   objective_1.description = "There is a troll in the forest in a great big whole who has some gold. Kill it";
-  objective_1.references = { 1, 2, 3 };
+  objective_1.citations = { 1, 2, 3 };
 
   objective_2.name = "Steal the Trolls Gold";
   objective_2.description = "Gold is really dense. Its like crazy heavy bring a levetation spell.";
-  objective_2.references = { 4, 5, 6 };
+  objective_2.citations = { 4, 5, 6 };
 
   objective_3.name = "Return the Gold to the Quest Giver. Kill the Quest Giver";
   objective_3.description = "If we want to keep the gold we need to steal from the quest giver, but he will need to die before we can do that.";
-  objective_3.references = { 7, 8, 9 };
+  objective_3.citations = { 7, 8, 9 };
 
   EXPECT_EQ(0, _db.objective_count());
   EXPECT_TRUE(_db.update_objective(&objective_1));
@@ -402,15 +402,15 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Objective)
 
   objective_1.name = "Kill the Troll";
   objective_1.description = "There is a troll in the forest in a great big whole who has some gold. Kill it";
-  objective_1.references = { 1, 2, 3 };
+  objective_1.citations = { 1, 2, 3 };
 
   objective_2.name = "Steal the Trolls Gold";
   objective_2.description = "Gold is really dense. Its like crazy heavy bring a levetation spell.";
-  objective_2.references = { 4, 5, 6 };
+  objective_2.citations = { 4, 5, 6 };
 
   objective_3.name = "Return the Gold to the Quest Giver. Kill the Quest Giver";
   objective_3.description = "If we want to keep the gold we need to steal from the quest giver, but he will need to die before we can do that.";
-  objective_3.references = { 7, 8, 9 };
+  objective_3.citations = { 7, 8, 9 };
 
   EXPECT_TRUE(_db.update_objective(&objective_1));
   EXPECT_TRUE(_db.update_objective(&objective_2));

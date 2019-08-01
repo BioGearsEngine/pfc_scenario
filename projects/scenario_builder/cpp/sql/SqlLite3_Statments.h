@@ -26,7 +26,7 @@ inline namespace sqlite3 {
     "objectives",
     "properties",
     "props",
-    "references",
+    "citations",
     "restrictions",
     "roles",
     "treatments",
@@ -134,7 +134,7 @@ inline namespace sqlite3 {
     EQUIPMENT_NAME,
     EQUIPMENT_DESCRIPTION,
     EQUIPMENT_EQUIPMENT_LIST,
-    EQUIPMENT_REFERENCES,
+    EQUIPMENT_CITATIONS,
   };
 
   constexpr auto create_equipment_table = R"(
@@ -162,8 +162,8 @@ inline namespace sqlite3 {
   };
 
   constexpr auto create_events_table = R"(
-  CREATE TABLE IF NOT EXISTS props (
-    event_id INTEGER PRIMARY KEY,
+  CREATE TABLE IF NOT EXISTS events (
+    event_id INTEGER PRIMARY KEY
   );
   )";
   constexpr auto drop_all_events = R"( DELETE FROM events; )";
@@ -181,7 +181,7 @@ inline namespace sqlite3 {
     INJURY_COMMON_NAME,
     INJURY_DESCRIPTION,
     INJURY_EQUIPMENT_LIST,
-    INJURY_REFERENCES,
+    INJURY_CITATIONS,
   };
 
   constexpr auto create_injuries_table = R"(
@@ -191,7 +191,7 @@ inline namespace sqlite3 {
     common_name Varchar(64) NOT NULL UNIQUE,
     description TEXT,
     severity TEXT,
-    references TEXT
+    citations TEXT
   );
   )";
 
@@ -245,7 +245,7 @@ inline namespace sqlite3 {
     OBJECTIVE_ID,
     OBJECTIVE_NAME,
     OBJECTIVE_DESCRIPTION,
-    OBJECTIVE_REFERENCES,
+    OBJECTIVE_CITATIONS,
   };
 
   constexpr auto create_objectives_table = R"(
@@ -253,7 +253,7 @@ inline namespace sqlite3 {
     objective_id INTEGER PRIMARY KEY,
     name Varchar(64) NOT NULL UNIQUE,
     description TEXT,
-    references TEXT
+    citations TEXT
   );
   )";
   constexpr auto drop_all_objectives = R"( DELETE FROM objectives; )";
@@ -265,14 +265,22 @@ inline namespace sqlite3 {
   constexpr auto select_objective_by_name
     = R"( SELECT * FROM objectives WHERE name = :name; )";
 
-  constexpr auto insert_or_update_objectives
+  constexpr auto update_objective_by_id
+    = R"( UPDATE  objectives 
+          SET name = :name
+              , description = :description
+              , citations = :citations
+          WHERE objective_id = :id;
+         )";
+
+  constexpr auto insert_or_update_objective
     = R"( INSERT INTO objectives 
-          (name,description,references)
-          VALUES (:name, :description, :references)
+          (name,description,citations)
+          VALUES (:name, :description, :citations)
           ON CONFLICT (name)
           DO UPDATE SET name = excluded.name
                        , description = excluded.description
-                       , references = excluded.references
+                       , citations = excluded.citations
          ;
          )";
 
@@ -339,19 +347,19 @@ inline namespace sqlite3 {
   constexpr auto delete_property_by_name
     = R"( DELETE FROM properties WHERE name = :name; )";
   
-  //---------------------- REFERENCE STATMENTS ------------------------
-  enum REFERENCE_COLUMNS {
-    REFERENCE_ID,
-    REFERENCE_NAME,
-    REFERENCE_KEY,
-    REFERENCE_TITLE,
-    REFERENCE_AUTHORS,
-    REFERENCE_VALUE
+  //---------------------- CITATION STATMENTS ------------------------
+  enum CITATION_COLUMNS {
+    CITATION_ID,
+    CITATION_NAME,
+    CITATION_KEY,
+    CITATION_TITLE,
+    CITATION_AUTHORS,
+    CITATION_VALUE
   };
 
-  constexpr auto create_references_table = R"(
-  CREATE TABLE IF NOT EXISTS references (
-    reference_id INTEGER PRIMARY KEY,
+  constexpr auto create_citations_table = R"(
+  CREATE TABLE IF NOT EXISTS citations (
+    citation_id INTEGER PRIMARY KEY,
     name Varchar(64) NOT NULL UNIQUE,
     key Varchar(64) NOT NULL,
     title TEXT,
@@ -359,15 +367,15 @@ inline namespace sqlite3 {
     value Varchar(255)
   );
   )";
-  constexpr auto drop_all_references = R"( DELETE FROM references; )";
-  constexpr auto count_references = R"( SELECT COUNT(reference_id) FROM references; )";
-  constexpr auto select_all_references = R"( SELECT * FROM references; )";
+  constexpr auto drop_all_citations = R"( DELETE FROM citations; )";
+  constexpr auto count_citations = R"( SELECT COUNT(citation_id) FROM citations; )";
+  constexpr auto select_all_citations = R"( SELECT * FROM citations; )";
 
-  constexpr auto select_reference_by_id
-    = R"( SELECT * FROM references WHERE reference_id = :id ; )";
-  constexpr auto select_reference_by_name
-    = R"( SELECT * FROM references WHERE name = :name; )";
-  constexpr auto insert_or_update_references
+  constexpr auto select_citation_by_id
+    = R"( SELECT * FROM citations WHERE citation_id = :id ; )";
+  constexpr auto select_citation_by_name
+    = R"( SELECT * FROM citations WHERE name = :name; )";
+  constexpr auto insert_or_update_citations
     = R"()";
 
 
@@ -434,7 +442,7 @@ inline namespace sqlite3 {
     TREATMENT_COMMON_NAME,
     TREATMENT_DESCRIPTION,
     TREATMENT_EQUIPMENT_LIST,
-    TREATMENT_REFERENCES,
+    TREATMENT_CITATIONS,
   };
 
   constexpr auto create_treatments_table = R"(
@@ -444,7 +452,7 @@ inline namespace sqlite3 {
     common_name Varchar(64) NOT NULL UNIQUE,
     description TEXT,
     equipment_list TEXT,
-    references TEXT
+    citations TEXT
   );
   )";
 

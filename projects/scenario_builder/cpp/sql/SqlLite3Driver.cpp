@@ -72,27 +72,29 @@ inline void assign_objective(const QSqlRecord& record, Objective& objective)
   objective.id = record.value(OBJECTIVE_ID).toInt();
   objective.name = record.value(OBJECTIVE_NAME).toString();
   objective.description = record.value(OBJECTIVE_DESCRIPTION).toString();
-  auto ref_list_s = record.value(OBJECTIVE_REFERENCES).toString();
+  auto ref_list_s = record.value(OBJECTIVE_CITATIONS).toString();
   auto ref_list = ref_list_s.split(";");
-  objective.references.clear();
+  objective.citations.clear();
   for (auto& val : ref_list) {
-    objective.references.push_back(val.toInt());
+    if (!val.isEmpty()) {
+      objective.citations.push_back(val.toInt());
+    }
   }
 }
 //------------------------------------------------------------------------------
-inline void assign_reference(const QSqlRecord& record, Reference& reference)
+inline void assign_citation(const QSqlRecord& record, Reference& citation)
 {
-  reference.id = record.value(REFERENCE_ID).toInt();
-  reference.name = record.value(REFERENCE_NAME).toString();
-  reference.key = record.value(REFERENCE_KEY).toString();
-  reference.title = record.value(REFERENCE_TITLE).toString();
-  auto auth_list_s = record.value(REFERENCE_AUTHORS).toString();
+  citation.id = record.value(CITATION_ID).toInt();
+  citation.name = record.value(CITATION_NAME).toString();
+  citation.key = record.value(CITATION_KEY).toString();
+  citation.title = record.value(CITATION_TITLE).toString();
+  auto auth_list_s = record.value(CITATION_AUTHORS).toString();
   auto auth_list = auth_list_s.split(";");
-  reference.authors.clear();
+  citation.authors.clear();
   for (auto& val : auth_list) {
-    reference.authors.push_back(val);
+    citation.authors.push_back(val);
   }
-  reference.value = record.value(REFERENCE_VALUE).toString();
+  citation.value = record.value(CITATION_VALUE).toString();
 }
 //------------------------------------------------------------------------------
 inline void assign_treatment(const QSqlRecord& record, Treatment& treatment)
@@ -107,11 +109,11 @@ inline void assign_treatment(const QSqlRecord& record, Treatment& treatment)
   for (auto& val : equip_list) {
     treatment.equipment_list.push_back(val);
   }
-  auto ref_list_s = record.value(TREATMENT_REFERENCES).toString();
+  auto ref_list_s = record.value(TREATMENT_CITATIONS).toString();
   auto ref_list = ref_list_s.split(";");
-  treatment.references.clear();
+  treatment.citations.clear();
   for (auto& val : ref_list) {
-    treatment.references.push_back(val.toInt());
+    treatment.citations.push_back(val.toInt());
   }
 }
 //------------------------------------------------------------------------------
@@ -126,11 +128,11 @@ inline void assign_equipment(const QSqlRecord& record, Equipment& equipment)
   for (auto& val : equip_list) {
     equipment.equipment_list.push_back(val);
   }
-  auto ref_list_s = record.value(EQUIPMENT_REFERENCES).toString();
+  auto ref_list_s = record.value(EQUIPMENT_CITATIONS).toString();
   auto ref_list = ref_list_s.split(";");
-  equipment.references.clear();
+  equipment.citations.clear();
   for (auto& val : ref_list) {
-    equipment.references.push_back(val.toInt());
+    equipment.citations.push_back(val.toInt());
   }
 }
 //------------------------------------------------------------------------------
@@ -146,11 +148,11 @@ inline void assign_injury(const QSqlRecord& record, Injury& injury)
   for (auto& val : equip_list) {
     injury.equipment_list.push_back(val);
   }
-  auto ref_list_s = record.value(INJURY_REFERENCES).toString();
+  auto ref_list_s = record.value(INJURY_CITATIONS).toString();
   auto ref_list = ref_list_s.split(";");
-  injury.references.clear();
+  injury.citations.clear();
   for (auto& val : ref_list) {
-    injury.references.push_back(val.toInt());
+    injury.citations.push_back(val.toInt());
   }
 }
 //------------------------------------------------------------------------------
@@ -245,34 +247,36 @@ void SQLite3Driver::close()
 bool SQLite3Driver::initialize_db()
 {
   QSqlQuery query(_db);
-  std::vector<char const*> create_statments = {
-    sqlite3::create_properties_table,
-    sqlite3::create_authors_table,
-    sqlite3::create_restrictions_table,
-    sqlite3::create_objectives_table,
-    sqlite3::create_references_table,
-    sqlite3::create_treatments_table,
-    sqlite3::create_equipment_table,
-    sqlite3::create_injuries_table,
-    sqlite3::create_assessments_table,
-    sqlite3::create_objectives_table,
-    sqlite3::create_locations_table,
-    sqlite3::create_roles_table,
-    sqlite3::create_props_table,
-    sqlite3::create_events_table
+  bool creation_failure = false;
+  std::map<char const*, char const*> create_statments = {
+    {tables[AUTHORS],    sqlite3::create_authors_table },
+    {tables[ASSESSMENTS],sqlite3::create_assessments_table},
+    {tables[EVENTS],     sqlite3::create_events_table},
+    {tables[EQUIPMENTS], sqlite3::create_equipment_table},
+    {tables[INJURIES],   sqlite3::create_injuries_table},
+    {tables[LOCATIONS],  sqlite3::create_locations_table},
+    {tables[OBJECTIVES], sqlite3::create_objectives_table},
+    {tables[PROPERTIES], sqlite3::create_properties_table},
+    {tables[PROPS],      sqlite3::create_props_table},
+    {tables[CITATIONS], sqlite3::create_citations_table},
+    {tables[RESTRICTIONS],    sqlite3::create_restrictions_table},
+    {tables[ROLES],      sqlite3::create_roles_table},
+    {tables[TREATMENTS], sqlite3::create_treatments_table}
   };
 
-  if (_db.open()) {
-    for (auto statment : create_statments) {
-      query.prepare(statment);
-      if (!query.exec()) {
-        qCritical() << query.lastError();
-        return false;
-      }
+
+if (_db.open()) {
+  for (auto pair : create_statments) {
+    query.prepare(pair.second);
+    if (!query.exec()) {
+      qCritical() << QString("Could not create table %1 \n\t --").arg(pair.first) << query.lastError();
+      creation_failure = true;
+      continue;
     }
-    return true;
   }
-  return false;
+  return creation_failure;
+}
+return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::clear_db()
@@ -288,7 +292,7 @@ bool SQLite3Driver::clear_db()
     iResult &= query.exec();
     query.bindValue(":table", tables[OBJECTIVES]);
     iResult &= query.exec();
-    query.bindValue(":table", tables[REFERENCES]);
+    query.bindValue(":table", tables[CITATIONS]);
     iResult &= query.exec();
     query.bindValue(":table", tables[TREATMENTS]);
     iResult &= query.exec();
@@ -328,8 +332,8 @@ bool SQLite3Driver::clear_table(enum SQLite3Driver::Sqlite3Table t)
     case RESTRICTIONS:
       query.bindValue(":table", tables[RESTRICTIONS]);
       break;
-    case REFERENCES:
-      query.bindValue(":table", tables[REFERENCES]);
+    case CITATIONS:
+      query.bindValue(":table", tables[CITATIONS]);
       break;
     case TREATMENTS:
       query.bindValue(":table", tables[TREATMENTS]);
@@ -432,12 +436,12 @@ int SQLite3Driver::property_count() const
   return -1;
 }
 //------------------------------------------------------------------------------
-int SQLite3Driver::reference_count() const
+int SQLite3Driver::citation_count() const
 {
   if (_db.isOpen()) {
 
     QSqlQuery query{ _db };
-    query.prepare(sqlite3::count_references);
+    query.prepare(sqlite3::count_citations);
     query.exec();
     if (query.next()) {
       auto record = query.record();
@@ -575,7 +579,66 @@ int SQLite3Driver::event_count() const
   }
   return -1;
 }
-//-------------------------------------------------------------------------START
+//-----------------------------------------------------------------------------
+int SQLite3Driver::nextID(Sqlite3Table table) const
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    QString stmt = "SELECT MAX(%1_id) FROM %1s";
+    switch (table) {
+    case AUTHORS:
+      query.prepare(stmt.arg("author"));
+      break;
+    case ASSESSMENTS:
+      query.prepare(stmt.arg("assessment"));
+      break;
+    case EVENTS:
+      query.prepare(stmt.arg("event"));
+      break;
+    case EQUIPMENTS:
+      query.prepare(stmt.arg("equipment"));
+      break;
+    case INJURIES:
+      query.prepare("SELECT MAX(injury) FROM injuries");
+      break;
+    case LOCATIONS:
+      query.prepare(stmt.arg("loction"));
+      break;
+    case OBJECTIVES:
+      query.prepare(stmt.arg("objective"));
+      break;
+    case PROPERTIES:
+      query.prepare("SELECT MAX(property_id) FROM properties");
+      break;
+    case PROPS:
+      query.prepare(stmt.arg("prop"));
+      break;
+    case CITATIONS:
+      query.prepare(stmt.arg("citation"));
+      break;
+    case RESTRICTIONS:
+      query.prepare(stmt.arg("restriction"));
+      break;
+    case ROLES:
+      query.prepare(stmt.arg("role"));
+      break;
+    case TREATMENTS:
+      query.prepare(stmt.arg("treatment"));
+      break;
+    default:
+      return -1;
+    }
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt() + 1;
+    }
+  }
+  return -1;
+}
+//-----------------------------------------------------------------------------
 void SQLite3Driver::authors()
 {
   qDeleteAll(_authors);
@@ -663,24 +726,24 @@ void SQLite3Driver::objectives()
   }
 }
 //------------------------------------------------------------------------------
-void SQLite3Driver::references()
+void SQLite3Driver::citations()
 {
-  qDeleteAll(_references);
-  _references.clear();
+  qDeleteAll(_citations);
+  _citations.clear();
 
   if (_db.isOpen()) {
 
     QSqlQuery query{ _db };
-    query.prepare(sqlite3::select_all_references);
+    query.prepare(sqlite3::select_all_citations);
     query.exec();
     while (query.next()) {
-      auto reference = std::make_unique<pfc::Reference>();
+      auto citation = std::make_unique<pfc::Reference>();
       auto record = query.record();
       assert(record.count() == 3);
-      assign_reference(record, *reference);
-      _references.push_back(reference.release());
+      assign_citation(record, *citation);
+      _citations.push_back(citation.release());
     }
-    _current_reference = _references.begin();
+    _current_citation = _citations.begin();
     emit restictionsChanged();
   }
 }
@@ -903,13 +966,13 @@ bool SQLite3Driver::next_objective(Objective* objective)
   return true;
 }
 //------------------------------------------------------------------------------
-bool SQLite3Driver::next_reference(Reference* reference)
+bool SQLite3Driver::next_citation(Reference* citation)
 {
-  if (_current_reference == _references.end() || _references.empty()) {
+  if (_current_citation == _citations.end() || _citations.empty()) {
     return false;
   }
-  reference->assign(*(*_current_reference));
-  ++_current_reference;
+  citation->assign(*(*_current_citation));
+  ++_current_citation;
 
   return true;
 }
@@ -1104,7 +1167,7 @@ bool SQLite3Driver::select_objective(Objective* objective) const
       while (query.next()) {
         record = query.record();
         assign_objective(record, *objective);
-      }      
+      }
       return true;
     }
     qWarning() << query.lastError();
@@ -1113,18 +1176,18 @@ bool SQLite3Driver::select_objective(Objective* objective) const
   return false;
 }
 //------------------------------------------------------------------------------
-bool SQLite3Driver::select_reference(Reference* reference) const
+bool SQLite3Driver::select_citation(Reference* citation) const
 {
 
   if (_db.isOpen()) {
     QSqlQuery query(_db);
     QSqlRecord record;
-    if (reference->id != -1) {
-      query.prepare(sqlite3::select_reference_by_id);
-      query.bindValue(":id", reference->id);
-    } else if (!reference->name.isEmpty()) {
-      query.prepare(sqlite3::select_reference_by_name);
-      query.bindValue(":name", reference->name);
+    if (citation->id != -1) {
+      query.prepare(sqlite3::select_citation_by_id);
+      query.bindValue(":id", citation->id);
+    } else if (!citation->name.isEmpty()) {
+      query.prepare(sqlite3::select_citation_by_name);
+      query.bindValue(":name", citation->name);
     } else {
       qWarning() << "Provided Property has no id or name one is required";
       return false;
@@ -1132,7 +1195,7 @@ bool SQLite3Driver::select_reference(Reference* reference) const
     if (query.exec()) {
       while (query.next()) {
         record = query.record();
-        assign_reference(record, *reference);
+        assign_citation(record, *citation);
       }
       return true;
     }
@@ -1478,32 +1541,38 @@ bool SQLite3Driver::update_objective(Objective* objective)
 {
 
   if (_db.isOpen()) {
-    if (!objective->name.isEmpty()) {
-      QSqlQuery query{ _db };
-      query.prepare(sqlite3::insert_or_update_objectives);
-      query.bindValue(":name", objective->name);
-      query.bindValue(":description", objective->description);
-
-      QString ref_list = "";
-      for (auto& val : objective->references) {
-        ref_list += QString::number(val) + ";";
-      }
-      ref_list.chop(1);
-
-      query.bindValue(":references", ref_list);
-      if (!query.exec()) {
-        qWarning() << query.lastError();
-        return false;
-      }
-
-      return true;
+    QSqlQuery query{ _db };
+    if (-1 != objective->id) {
+      query.prepare(sqlite3::update_objective_by_id);
+      query.bindValue(":id", objective->id);
+    } else if (!objective->name.isEmpty()) {
+      query.prepare(sqlite3::insert_or_update_objective);
     }
+    QString ref_list = "";
+    for (auto& val : objective->citations) {
+      ref_list += QString::number(val) + ";";
+    }
+    ref_list.chop(1);
+
+    query.bindValue(":name", objective->name);
+    query.bindValue(":description", objective->description);
+    query.bindValue(":citations", ref_list);
+
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+
+    if (-1 == objective->id) {
+      return select_objective(objective);
+    }
+    return true;
   }
   qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
-bool SQLite3Driver::update_reference(Reference* reference)
+bool SQLite3Driver::update_citation(Reference* citation)
 {
   return false;
 }
@@ -1647,7 +1716,7 @@ bool SQLite3Driver::remove_objective(Objective* objective)
   return false;
 }
 //------------------------------------------------------------------------------
-bool SQLite3Driver::remove_reference(Reference* reference)
+bool SQLite3Driver::remove_citation(Reference* citation)
 {
   return false;
 }

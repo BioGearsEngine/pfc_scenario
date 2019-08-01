@@ -43,10 +43,36 @@ ColumnLayout {
       secondButtonText : "Move Up"
       thirdButtonText : "Move Down"
 
-      onFirstButtonClicked : console.log("firstButtonClicked!")
-      onSecondButtonClicked : console.log("secondButtonClicked!")
-      onThirdButtonClicked : console.log("thirdButtonClicked!")
-      onFourthButtonClicked : console.log("fourthButtonClicked!")
+      onFirstButtonClicked :{
+
+        self.objective_id = -1
+        self.name = "New Objective %1".arg(root.model.count)
+        self.description = "Description of Objective %1".arg(root.model.count)
+        self.citations = new Array()
+
+        root.backend.update_objective(self)
+        root.model.insert(root.model.count,
+          {
+           "id" : self.objective_id,
+           "name": "%1".arg(self.name), 
+           "description": "%1".arg(self.description) , 
+           "citations": self.citations}
+        );
+      }
+      onSecondButtonClicked :{
+        console.log("secondButtonClicked!")
+      }
+      onThirdButtonClicked : {
+        console.log("thirdButtonClicked!")
+      }
+      onFourthButtonClicked : {
+        self.objective_id = -1
+        self.name = root.model.get(root.index).name
+
+        root.backend.remove_objective(self)
+        root.model.remove(root.index)
+        current = Math.max(0,root.index-1)
+      }
     }
 
     ListView {
@@ -67,7 +93,7 @@ ColumnLayout {
       model : ListModel {}
 
       delegate : Rectangle {
-        id : restriction
+        id : objective
         color : 'transparent'
         border.color: "steelblue"
         height : 30
@@ -82,10 +108,10 @@ ColumnLayout {
         }
 
         Text {
-          id : restriction_title_text
-          anchors.left : restriction.left
+          id : objective_title_text
+          anchors.left : objective.left
           anchors.leftMargin : 5
-          text :  model.name 
+          text :  model.name
           width : 150
           font.weight: Font.Bold
           font.pointSize: 10
@@ -94,12 +120,12 @@ ColumnLayout {
         }
 
         Text {
-          id : restriction_value_text
-          anchors.left : restriction_title_text.right
+          id : objective_value_text
+          anchors.left : objective_title_text.right
           anchors.right : parent.right
           anchors.leftMargin : 10
           font.pointSize: 10
-          text :  model.description
+          text :  description
           enabled : false
           color: enabled ? Material.primaryTextColor : Material.primaryTextColor
           elide: Text.ElideRight
@@ -107,8 +133,8 @@ ColumnLayout {
 
         states: State {
           name : "Selected"
-          PropertyChanges{ target : restriction_title_text; enabled : true}
-          PropertyChanges{ target : restriction_value_text; enabled  : true}
+          PropertyChanges{ target : objective_title_text; enabled : true}
+          PropertyChanges{ target : objective_value_text; enabled  : true}
         }
 
         onFocusChanged: {
@@ -127,11 +153,17 @@ ColumnLayout {
         var r_count = backend.objective_count();
         root.backend.objectives()
         while ( root.backend.next_objective(self) ){
-          console.log ("Added Objective")
+          
+          var js_citations = []
+          for ( var citation in self.citations ){
+            js_citations.push( citation )
+          }
           listArea.model.insert(listArea.model.count,
-            {"name": "%1".arg(self.name), 
-             "description": "%1".arg(self.description),
-             "references" : "%1".arg(self.references) 
+            {
+             id  : self.objective_id,
+             name: "%1".arg(self.name), 
+             description: "%1".arg(self.description),
+             citations : self.citations 
             });
         }
       }

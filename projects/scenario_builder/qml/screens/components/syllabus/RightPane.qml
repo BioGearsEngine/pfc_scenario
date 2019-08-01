@@ -29,31 +29,37 @@ Flickable {
 
       RP_Objectives{
         id : objectives
+        backend : root.backend
         Layout.fillHeight: true
         Layout.fillWidth: true
       }
       RP_Assessments{
         id : assessments
+        backend : root.backend
         Layout.fillHeight: true
         Layout.fillWidth: true
       }
       RP_Injuries {
         id : injuries
+        backend : root.backend
         Layout.fillHeight: true
         Layout.fillWidth: true
       }
       RP_Injuries {
         id : injurySets
+        backend : root.backend
         Layout.fillHeight: true
         Layout.fillWidth: true
       }
       RP_Treatments {
         id : treatments
+        backend : root.backend
         Layout.fillHeight: true
         Layout.fillWidth: true
       }
       RP_Equipment {
         id : equipment
+        backend : root.backend
         Layout.fillHeight: true
         Layout.fillWidth: true
       }
