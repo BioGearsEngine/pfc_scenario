@@ -10,11 +10,14 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 ColumnLayout  {
     id: root
     property SQLBackend backend
+    property ListModel model
+    property int index
+
     Layout.fillWidth: true
     Layout.fillHeight: true
 
     TextEntry {
-       Layout.fillWidth: true
+      Layout.fillWidth: true
 
       id: nameEntry
       label : "Name"
@@ -33,6 +36,8 @@ ColumnLayout  {
     ListEntry {
       Layout.fillWidth: true
       Layout.fillHeight : true
+
+      id: referenceEntry
       label : "References"
       model : ListModel {}
       delegate : Rectangle {
@@ -40,5 +45,15 @@ ColumnLayout  {
         Layout.preferredHeight : 100
         color : "red"
       }
+    }
+
+    onIndexChanged : {
+      console.log ("The Index is now " + index)
+      
+      var values = model.get(index)
+      console.log(values.name)
+      nameEntry.value = values.name
+      descriptionEntry.text = values.description
+      //referenceEntry = 
     }
 }

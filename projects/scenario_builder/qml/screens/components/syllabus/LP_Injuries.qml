@@ -7,10 +7,11 @@ import "../common"
 
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
-
 ColumnLayout {
   id: root
   property SQLBackend backend
+  property ListElement model
+  
   //TAB:SYLLABUS_TAB:OBJECTIVES_LEFTWINDOW
   Rectangle {
       id : listRectangle

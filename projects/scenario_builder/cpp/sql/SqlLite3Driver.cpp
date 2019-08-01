@@ -649,7 +649,7 @@ void SQLite3Driver::objectives()
   if (_db.isOpen()) {
 
     QSqlQuery query{ _db };
-    query.prepare(sqlite3::select_all_restrictions);
+    query.prepare(sqlite3::select_all_objectives);
     query.exec();
     while (query.next()) {
       auto objective = std::make_unique<pfc::Objective>();

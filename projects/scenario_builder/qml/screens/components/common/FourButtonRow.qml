@@ -28,7 +28,6 @@ Rectangle{
       anchors.left : section_1.left
       text : "LL Button"
       onClicked : {
-        console.log("PFCButton 1 Clicked in FourButtonRow")
         root.firstButtonClicked()
       }
   }

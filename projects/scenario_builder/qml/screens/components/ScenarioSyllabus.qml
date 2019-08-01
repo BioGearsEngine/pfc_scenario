@@ -28,6 +28,14 @@ GridLayout {
     backend : root.backend
 
     currentIndex : syllabus_leftPane.currentIndex
+    objectiveModel    : syllabus_leftPane.objectiveModel
+    currentAssessment : syllabus_leftPane.currentAssessment
+    currentInjury     : syllabus_leftPane.currentInjury
+    currentInjurySet  : syllabus_leftPane.currentInjurySet
+    currentTreatment  : syllabus_leftPane.currentTreatment
+    currentEquipment  : syllabus_leftPane.currentEquipment
+
+    objectiveIndex    : syllabus_leftPane.objectiveIndex
 
     Layout.fillWidth: true
     Layout.fillHeight: true

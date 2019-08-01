@@ -10,7 +10,17 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 Rectangle {
   id: root
   property alias currentIndex : syllabus_tabs.currentIndex
+  property alias objectiveModel  : objectives.model
+  property alias currentAssessment : assessments.model
+  property alias currentInjury     : injuries.model
+  property alias currentInjurySet  : injurySets.model
+  property alias currentTreatment  : treatments.model
+  property alias currentEquipment  : equipment.model
+
+  property alias objectiveIndex : objectives.index
+  
   property SQLBackend backend
+  property ListElement modelData
 
   ColumnLayout {
     anchors.fill : root
@@ -38,7 +48,7 @@ Rectangle {
         width: implicitWidth
       }
       TabButton {
-          id: injury_set_tab
+        id: injury_set_tab
         text: "Injury Sets"
         width: implicitWidth
       }
@@ -58,38 +68,43 @@ Rectangle {
       id: syllabus_stack_left
       Layout.fillHeight: true
       Layout.fillWidth: true
-      focus: true
       currentIndex: syllabus_tabs.currentIndex
 
       LP_Objectives{
+        id : objectives
         Layout.fillHeight : true
         Layout.fillWidth : true
-        focus : true
+        backend : root.backend
       }
       LP_Assessments{
-          Layout.fillHeight : true
-          Layout.fillWidth : true
-          focus : true
+        id : assessments
+        Layout.fillHeight : true
+        Layout.fillWidth : true
+        backend : root.backend
       }
       LP_Injuries {
-          Layout.fillHeight : true
-          Layout.fillWidth : true
-          focus : true
+        id : injuries
+        Layout.fillHeight : true
+        Layout.fillWidth : true
+        backend : root.backend
       }
       LP_Injuries {
-          Layout.fillHeight : true
-          Layout.fillWidth : true
-          focus : true
+        id : injurySets
+        Layout.fillHeight : true
+        Layout.fillWidth : true
+        backend : root.backend
       }
       LP_Treatments {
-          Layout.fillHeight : true
-          Layout.fillWidth : true
-          focus : true
+        id : treatments
+        Layout.fillHeight : true
+        Layout.fillWidth : true
+        backend : root.backend
       }
       LP_Equipment {
-          Layout.fillHeight : true
-          Layout.fillWidth : true
-          focus : true
+        id : equipment
+        Layout.fillHeight : true
+        Layout.fillWidth : true
+        backend : root.backend
       }
     }
   }
