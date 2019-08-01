@@ -92,223 +92,85 @@ public:
   }
 };
 //----End Author
-struct Property : public QObject {
+struct Assessment : public QObject {
   Q_OBJECT
-  Q_PROPERTY(int property_id MEMBER id)
-  Q_PROPERTY(QString name MEMBER name)
-  Q_PROPERTY(QString value MEMBER value)
-public:
-  int32_t id = -1;
-  QString name = "";
-  QString value = "";
-
-  Property(QObject* parent = nullptr)
-    : QObject(parent)
-  {
-  }
-  Property(const Property&) = delete;
-  Property(Property&&) = delete;
-  Property& operator=(const Property&) = delete;
-  Property& operator=(Property&&) = delete;
-  virtual ~Property() = default;
-
-  bool operator==(const Property& rhs) const
-  {
-    return id == rhs.id
-      && name == rhs.name
-      && value == rhs.value;
-  }
-  bool operator!=(const Property& rhs) const
-  {
-    return !(*this == rhs);
-  }
-
-  void assign(const Property& rhs)
-  {
-    id = rhs.id;
-    name = rhs.name;
-    value = rhs.value;
-  }
-};
-//----End Property
-struct Restriction : public QObject {
-  Q_OBJECT
-  Q_PROPERTY(int restriction_id MEMBER id)
-  Q_PROPERTY(QString name MEMBER name)
-  Q_PROPERTY(QString value MEMBER value)
-public:
-  int32_t id = -1;
-  QString name = "";
-  QString value = "";
-
-  Restriction(QObject* parent = nullptr)
-    : QObject(parent)
-  {
-  }
-  Restriction(const Restriction&) = delete;
-  Restriction(Restriction&&) = delete;
-  Restriction& operator=(const Restriction&) = delete;
-  Restriction& operator=(Restriction&&) = delete;
-  virtual ~Restriction() = default;
-
-  bool operator==(const Restriction& rhs) const
-  {
-    return id == rhs.id
-      && name == rhs.name
-      && value == rhs.value;
-  }
-  bool operator!=(const Restriction& rhs) const
-  {
-    return !(*this == rhs);
-  }
-  void assign(const Restriction& rhs)
-  {
-    id = rhs.id;
-    name = rhs.name;
-    value = rhs.value;
-  }
-};
-//----End Restriction
-struct Objective : public QObject {
-  Q_OBJECT
-  Q_PROPERTY(int objective_id MEMBER id)
+  Q_PROPERTY(int assessment_id MEMBER id)
   Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString description MEMBER description)
-  Q_PROPERTY(QList<int> references MEMBER references)
+  Q_PROPERTY(QString type MEMBER type)
+  Q_PROPERTY(int available_points MEMBER available_points)
+  Q_PROPERTY(QString criteria MEMBER criteria)
 public:
   int32_t id = -1;
   QString name = "";
   QString description = "";
-  QList<int> references;
-
-  Objective(QObject* parent = nullptr)
+  QString type = "";
+  int32_t available_points = -1;
+  QString criteria = "";
+  Assessment(QObject* parent = nullptr)
     : QObject(parent)
   {
   }
-  Objective(const Objective&) = delete;
-  Objective(Objective&&) = delete;
-  Objective& operator=(const Objective&) = delete;
-  Objective& operator=(Objective&&) = delete;
-  virtual ~Objective() = default;
+  Assessment(const Assessment&) = delete;
+  Assessment(Assessment&&) = delete;
+  Assessment& operator=(const Assessment&) = delete;
+  Assessment& operator=(Assessment&&) = delete;
+  virtual ~Assessment() = default;
 
-  bool operator==(const Objective& rhs) const
+  bool operator==(const Assessment& rhs) const
   {
     return id == rhs.id
       && name == rhs.name
       && description == rhs.description
-      && references == rhs.references;
+      && type == rhs.type
+      && available_points == rhs.available_points
+      && criteria == rhs.criteria;
   }
-  bool operator!=(const Objective& rhs) const
+  bool operator!=(const Assessment& rhs) const
   {
     return !(*this == rhs);
   }
-  void assign(const Objective& rhs)
+  void assign(const Assessment& rhs)
   {
     id = rhs.id;
     name = rhs.name;
     description = rhs.description;
-    references = rhs.references;
+    type = rhs.type;
+    available_points = rhs.available_points;
+    criteria = rhs.criteria;
   }
 };
-//----End Objective
-struct Reference : public QObject {
+//----End Assessment
+struct Event : public QObject {
   Q_OBJECT
-  Q_PROPERTY(int reference_id MEMBER id)
-  Q_PROPERTY(QString name MEMBER name)
-  Q_PROPERTY(QString key MEMBER key)
-  Q_PROPERTY(QString title MEMBER title)
-  Q_PROPERTY(QList<QString> authors MEMBER authors)
-  Q_PROPERTY(QString value MEMBER value)
+  Q_PROPERTY(int prop_id MEMBER id)
 public:
   int32_t id = -1;
-  QString name = "";
-  QString key = "";
-  QString title = "";
-  QList<QString> authors;
-  QString value = "";
-  Reference(QObject* parent = nullptr)
+
+  Event(QObject* parent = nullptr)
     : QObject(parent)
   {
   }
-  Reference(const Reference&) = delete;
-  Reference(Reference&&) = delete;
-  Reference& operator=(const Reference&) = delete;
-  Reference& operator=(Reference&&) = delete;
-  virtual ~Reference() = default;
+  Event(const Event&) = delete;
+  Event(Event&&) = delete;
+  Event& operator=(const Event&) = delete;
+  Event& operator=(Event&&) = delete;
+  virtual ~Event() = default;
 
-  bool operator==(const Reference& rhs) const
+  bool operator==(const Event& rhs) const
   {
-    return id == rhs.id
-      && name == rhs.name
-      && key == rhs.key
-      && title == rhs.title
-      && authors == rhs.authors
-      && value == rhs.value;
+    return id == rhs.id;
   }
-  bool operator!=(const Reference& rhs) const
+  bool operator!=(const Event& rhs) const
   {
     return !(*this == rhs);
   }
-  void assign(const Reference& rhs)
+  void assign(const Event& rhs)
   {
     id = rhs.id;
-    name = rhs.name;
-    key = rhs.key;
-    title = rhs.title;
-    authors = rhs.authors;
-    value = rhs.value;
   }
 };
-//----End Reference
-struct Treatment : public QObject {
-  Q_OBJECT
-  Q_PROPERTY(int treatment_id MEMBER id)
-  Q_PROPERTY(QString medical_name MEMBER medical_name)
-  Q_PROPERTY(QString common_name MEMBER common_name)
-  Q_PROPERTY(QString description MEMBER description)
-  Q_PROPERTY(QList<QString> equipment_list MEMBER equipment_list)
-  Q_PROPERTY(QList<int> references MEMBER references)
-public:
-  int32_t id = -1;
-  QString medical_name = "";
-  QString common_name = "";
-  QString description = "";
-  QList<QString> equipment_list;
-  QList<int> references;
-  Treatment(QObject* parent = nullptr)
-    : QObject(parent)
-  {
-  }
-  Treatment(const Treatment&) = delete;
-  Treatment(Treatment&&) = delete;
-  Treatment& operator=(const Treatment&) = delete;
-  Treatment& operator=(Treatment&&) = delete;
-  virtual ~Treatment() = default;
-
-  bool operator==(const Treatment& rhs) const
-  {
-    return id == rhs.id
-      && medical_name == rhs.medical_name
-      && common_name == rhs.common_name
-      && description == rhs.description
-      && equipment_list == rhs.equipment_list
-      && references == rhs.references;
-  }
-  bool operator!=(const Treatment& rhs) const
-  {
-    return !(*this == rhs);
-  }
-  void assign(const Treatment& rhs)
-  {
-    id = rhs.id;
-    medical_name = rhs.medical_name;
-    common_name = rhs.common_name;
-    description = rhs.description;
-    equipment_list = rhs.equipment_list;
-    references = rhs.references;
-  }
-};
-//----End Treatment
+//----End Event
 struct Equipment : public QObject {
   Q_OBJECT
   Q_PROPERTY(int equipment_id MEMBER id)
@@ -403,55 +265,6 @@ public:
   }
 };
 //----End Injury
-struct Assessment : public QObject {
-  Q_OBJECT
-  Q_PROPERTY(int assessment_id MEMBER id)
-  Q_PROPERTY(QString name MEMBER name)
-  Q_PROPERTY(QString description MEMBER description)
-  Q_PROPERTY(QString type MEMBER type)
-  Q_PROPERTY(int available_points MEMBER available_points)
-  Q_PROPERTY(QString criteria MEMBER criteria)
-public:
-  int32_t id = -1;
-  QString name = "";
-  QString description = "";
-  QString type = "";
-  int32_t available_points = -1;
-  QString criteria = "";
-  Assessment(QObject* parent = nullptr)
-    : QObject(parent)
-  {
-  }
-  Assessment(const Assessment&) = delete;
-  Assessment(Assessment&&) = delete;
-  Assessment& operator=(const Assessment&) = delete;
-  Assessment& operator=(Assessment&&) = delete;
-  virtual ~Assessment() = default;
-
-  bool operator==(const Assessment& rhs) const
-  {
-    return id == rhs.id
-      && name == rhs.name
-      && description == rhs.description
-      && type == rhs.type
-      && available_points == rhs.available_points
-      && criteria == rhs.criteria;
-  }
-  bool operator!=(const Assessment& rhs) const
-  {
-    return !(*this == rhs);
-  }
-  void assign(const Assessment& rhs)
-  {
-    id = rhs.id;
-    name = rhs.name;
-    description = rhs.description;
-    type = rhs.type;
-    available_points = rhs.available_points;
-    criteria = rhs.criteria;
-  }
-};
-//----End Assessment
 struct Location : public QObject {
   Q_OBJECT
   Q_PROPERTY(int location_id MEMBER id)
@@ -499,40 +312,87 @@ public:
   }
 };
 //----End Location
-struct Role : public QObject {
+struct Objective : public QObject {
   Q_OBJECT
-  Q_PROPERTY(int role_id MEMBER id)
+  Q_PROPERTY(int objective_id MEMBER id)
+  Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString description MEMBER description)
+  Q_PROPERTY(QList<int> references MEMBER references)
 public:
   int32_t id = -1;
+  QString name = "";
   QString description = "";
+  QList<int> references;
 
-  Role(QObject* parent = nullptr)
+  Objective(QObject* parent = nullptr)
     : QObject(parent)
   {
   }
-  Role(const Role&) = delete;
-  Role(Role&&) = delete;
-  Role& operator=(const Role&) = delete;
-  Role& operator=(Role&&) = delete;
-  virtual ~Role() = default;
+  Objective(const Objective&) = delete;
+  Objective(Objective&&) = delete;
+  Objective& operator=(const Objective&) = delete;
+  Objective& operator=(Objective&&) = delete;
+  virtual ~Objective() = default;
 
-  bool operator==(const Role& rhs) const
+  bool operator==(const Objective& rhs) const
   {
     return id == rhs.id
-      && description == rhs.description;
+      && name == rhs.name
+      && description == rhs.description
+      && references == rhs.references;
   }
-  bool operator!=(const Role& rhs) const
+  bool operator!=(const Objective& rhs) const
   {
     return !(*this == rhs);
   }
-  void assign(const Role& rhs)
+  void assign(const Objective& rhs)
   {
     id = rhs.id;
+    name = rhs.name;
     description = rhs.description;
+    references = rhs.references;
   }
 };
-//----End Role
+//----End Objective
+struct Property : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int property_id MEMBER id)
+  Q_PROPERTY(QString name MEMBER name)
+  Q_PROPERTY(QString value MEMBER value)
+public:
+  int32_t id = -1;
+  QString name = "";
+  QString value = "";
+
+  Property(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  Property(const Property&) = delete;
+  Property(Property&&) = delete;
+  Property& operator=(const Property&) = delete;
+  Property& operator=(Property&&) = delete;
+  virtual ~Property() = default;
+
+  bool operator==(const Property& rhs) const
+  {
+    return id == rhs.id
+      && name == rhs.name
+      && value == rhs.value;
+  }
+  bool operator!=(const Property& rhs) const
+  {
+    return !(*this == rhs);
+  }
+
+  void assign(const Property& rhs)
+  {
+    id = rhs.id;
+    name = rhs.name;
+    value = rhs.value;
+  }
+};
+//----End Property
 struct Prop : public QObject {
   Q_OBJECT
   Q_PROPERTY(int prop_id MEMBER id)
@@ -567,36 +427,177 @@ public:
   }
 };
 //----End Prop
-struct Event : public QObject {
+struct Reference : public QObject {
   Q_OBJECT
-  Q_PROPERTY(int prop_id MEMBER id)
+  Q_PROPERTY(int reference_id MEMBER id)
+  Q_PROPERTY(QString name MEMBER name)
+  Q_PROPERTY(QString key MEMBER key)
+  Q_PROPERTY(QString title MEMBER title)
+  Q_PROPERTY(QList<QString> authors MEMBER authors)
+  Q_PROPERTY(QString value MEMBER value)
 public:
   int32_t id = -1;
-
-  Event(QObject* parent = nullptr)
+  QString name = "";
+  QString key = "";
+  QString title = "";
+  QList<QString> authors;
+  QString value = "";
+  Reference(QObject* parent = nullptr)
     : QObject(parent)
   {
   }
-  Event(const Event&) = delete;
-  Event(Event&&) = delete;
-  Event& operator=(const Event&) = delete;
-  Event& operator=(Event&&) = delete;
-  virtual ~Event() = default;
+  Reference(const Reference&) = delete;
+  Reference(Reference&&) = delete;
+  Reference& operator=(const Reference&) = delete;
+  Reference& operator=(Reference&&) = delete;
+  virtual ~Reference() = default;
 
-  bool operator==(const Event& rhs) const
+  bool operator==(const Reference& rhs) const
   {
-    return id == rhs.id;
+    return id == rhs.id
+      && name == rhs.name
+      && key == rhs.key
+      && title == rhs.title
+      && authors == rhs.authors
+      && value == rhs.value;
   }
-  bool operator!=(const Event& rhs) const
+  bool operator!=(const Reference& rhs) const
   {
     return !(*this == rhs);
   }
-  void assign(const Event& rhs)
+  void assign(const Reference& rhs)
   {
     id = rhs.id;
+    name = rhs.name;
+    key = rhs.key;
+    title = rhs.title;
+    authors = rhs.authors;
+    value = rhs.value;
   }
 };
-//----End Event
+//----End Reference
+struct Restriction : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int restriction_id MEMBER id)
+  Q_PROPERTY(QString name MEMBER name)
+  Q_PROPERTY(QString value MEMBER value)
+public:
+  int32_t id = -1;
+  QString name = "";
+  QString value = "";
+
+  Restriction(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  Restriction(const Restriction&) = delete;
+  Restriction(Restriction&&) = delete;
+  Restriction& operator=(const Restriction&) = delete;
+  Restriction& operator=(Restriction&&) = delete;
+  virtual ~Restriction() = default;
+
+  bool operator==(const Restriction& rhs) const
+  {
+    return id == rhs.id
+      && name == rhs.name
+      && value == rhs.value;
+  }
+  bool operator!=(const Restriction& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const Restriction& rhs)
+  {
+    id = rhs.id;
+    name = rhs.name;
+    value = rhs.value;
+  }
+};
+//----End Restriction
+struct Role : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int role_id MEMBER id)
+  Q_PROPERTY(QString description MEMBER description)
+public:
+  int32_t id = -1;
+  QString description = "";
+
+  Role(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  Role(const Role&) = delete;
+  Role(Role&&) = delete;
+  Role& operator=(const Role&) = delete;
+  Role& operator=(Role&&) = delete;
+  virtual ~Role() = default;
+
+  bool operator==(const Role& rhs) const
+  {
+    return id == rhs.id
+      && description == rhs.description;
+  }
+  bool operator!=(const Role& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const Role& rhs)
+  {
+    id = rhs.id;
+    description = rhs.description;
+  }
+};
+//----End Role
+struct Treatment : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int treatment_id MEMBER id)
+  Q_PROPERTY(QString medical_name MEMBER medical_name)
+  Q_PROPERTY(QString common_name MEMBER common_name)
+  Q_PROPERTY(QString description MEMBER description)
+  Q_PROPERTY(QList<QString> equipment_list MEMBER equipment_list)
+  Q_PROPERTY(QList<int> references MEMBER references)
+public:
+  int32_t id = -1;
+  QString medical_name = "";
+  QString common_name = "";
+  QString description = "";
+  QList<QString> equipment_list;
+  QList<int> references;
+  Treatment(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  Treatment(const Treatment&) = delete;
+  Treatment(Treatment&&) = delete;
+  Treatment& operator=(const Treatment&) = delete;
+  Treatment& operator=(Treatment&&) = delete;
+  virtual ~Treatment() = default;
+
+  bool operator==(const Treatment& rhs) const
+  {
+    return id == rhs.id
+      && medical_name == rhs.medical_name
+      && common_name == rhs.common_name
+      && description == rhs.description
+      && equipment_list == rhs.equipment_list
+      && references == rhs.references;
+  }
+  bool operator!=(const Treatment& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const Treatment& rhs)
+  {
+    id = rhs.id;
+    medical_name = rhs.medical_name;
+    common_name = rhs.common_name;
+    description = rhs.description;
+    equipment_list = rhs.equipment_list;
+    references = rhs.references;
+  }
+};
+//----End Treatment
+
 class SQLite3Driver : public QObject {
 public:
   Q_OBJECT
@@ -606,19 +607,19 @@ public:
 
 public:
   enum Sqlite3Table {
-    PROPERTIES,
     AUTHORS,
-    RESTRICTIONS,
-    REFERENCES,
-    TREATMENTS,
+    ASSESSMENTS,
+    EVENTS,
     EQUIPMENTS,
     INJURIES,
-    ASSESSMENTS,
-    OBJECTIVES,
     LOCATIONS,
-    ROLES,
+    OBJECTIVES,
+    PROPERTIES,
     PROPS,
-    EVENTS
+    REFERENCES,
+    RESTRICTIONS,
+    ROLES,
+    TREATMENTS,
   };
 
   Q_ENUM(Sqlite3Table)
