@@ -72,6 +72,10 @@ inline namespace sqlite3 {
               , criteria = :criteria
           WHERE assessment_id = :id;
          )";
+  constexpr auto delete_assessment_by_id
+      = R"( DELETE FROM assessments WHERE assessment_id = :id; )";
+  constexpr auto delete_assessment_by_name
+    = R"( DELETE FROM assessments WHERE name = :name; )";
   constexpr auto select_assessment_by_name
     = R"( SELECT * FROM assessments WHERE name = :name; )";
   constexpr auto insert_or_update_assessments
@@ -190,6 +194,10 @@ inline namespace sqlite3 {
               , citations = :citations
           WHERE equipment_id = :id;
          )";
+  constexpr auto delete_equipment_by_id
+    = R"( DELETE FROM equipment WHERE equipment_id = :id; )";
+  constexpr auto delete_equipment_by_name
+    = R"( DELETE FROM equipment WHERE name = :name; )";
   constexpr auto select_equipment_by_name
     = R"( SELECT * FROM equipments WHERE name = :name )";
   constexpr auto insert_or_update_equipments
@@ -224,6 +232,8 @@ inline namespace sqlite3 {
     = R"( UPDATE  events
           WHERE event_id = :id;
          )";
+  constexpr auto delete_event_by_id
+    = R"( DELETE FROM events WHERE event_id = :id; )";
   constexpr auto insert_or_update_events
     = R"()";
   //---------------------- INJURY STATMENTS ------------------------
@@ -261,6 +271,12 @@ inline namespace sqlite3 {
               , citations = :citations
           WHERE injury_id = :id;
          )";
+  constexpr auto delete_injury_by_id
+    = R"( DELETE FROM injuries WHERE injury_id = :id; )";
+  constexpr auto delete_injury_by_medical_name
+    = R"( DELETE FROM injuries WHERE medical_name = :medical_name; )";
+  constexpr auto delete_injury_by_common_name
+    = R"( DELETE FROM injuries WHERE common_name = :common_name; )";
   constexpr auto select_injury_by_medical_name
     = R"( SELECT * FROM injuries WHERE medical_name = :medical_name; )";
   constexpr auto select_injury_by_common_name
@@ -316,6 +332,10 @@ inline namespace sqlite3 {
               , environment = :environment
           WHERE location_id = :id;
          )";
+  constexpr auto delete_location_by_id
+    = R"( DELETE FROM locations WHERE location_id = :id; )";
+  constexpr auto delete_location_by_name
+    = R"( DELETE FROM locations WHERE name = :name; )";
   constexpr auto select_location_by_name
     = R"( SELECT * FROM locations WHERE name = :name; )";
   constexpr auto select_location_by_scene_name
@@ -370,7 +390,6 @@ inline namespace sqlite3 {
               , citations = :citations
           WHERE objective_id = :id;
          )";
-
   constexpr auto insert_or_update_objective
     = R"( INSERT INTO objectives 
           (name,description,citations)
@@ -409,6 +428,9 @@ inline namespace sqlite3 {
           SET equipment = :equipment
           WHERE prop_id = :id;
          )";
+  constexpr auto delete_prop_by_id
+    = R"( DELETE FROM props WHERE prop_id = :id; )";
+
   constexpr auto insert_or_update_props
     = R"( INSERT INTO props 
           (name,equipment)
@@ -498,6 +520,10 @@ inline namespace sqlite3 {
               , value = :value
           WHERE citation_id = :id;
          )";
+  constexpr auto delete_citation_by_id
+    = R"( DELETE FROM citations WHERE citation_id = :id; )";
+  constexpr auto delete_citation_by_name
+    = R"( DELETE FROM citations WHERE name = :name; )";
   constexpr auto select_citation_by_name
     = R"( SELECT * FROM citations WHERE name = :name; )";
   constexpr auto insert_or_update_citations
@@ -578,6 +604,9 @@ inline namespace sqlite3 {
           SET description = :description
           WHERE role_id = :id;
          )";
+  constexpr auto delete_role_by_id
+    = R"( DELETE FROM roles WHERE role_id = :id; )";
+
   constexpr auto insert_or_update_roles
     = R"( INSERT INTO roles 
           (name,description)
@@ -629,6 +658,12 @@ inline namespace sqlite3 {
               , citations = :citations
           WHERE treatment_id = :id;
          )";
+  constexpr auto delete_treatment_by_id
+    = R"( DELETE FROM treatments WHERE treatment_id = :id; )";
+  constexpr auto delete_treatment_by_medical_name
+    = R"( DELETE FROM treatments WHERE medical_name = :medical_name; )";
+  constexpr auto delete_treatment_by_common_name
+    = R"( DELETE FROM treatments WHERE common_name = :common_name; )";
   constexpr auto insert_or_update_treatments
     = R"( INSERT INTO treatments
           (medical_name,common_name,description,equipment_list,citations)

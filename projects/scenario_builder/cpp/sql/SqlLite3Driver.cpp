@@ -1941,46 +1941,223 @@ bool SQLite3Driver::remove_objective(Objective* objective)
 //------------------------------------------------------------------------------
 bool SQLite3Driver::remove_citation(Reference* citation)
 {
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (citation->id != -1) {
+      query.prepare(sqlite3::delete_citation_by_id);
+      query.bindValue(":id", citation->id);
+    } else if (!citation->name.isEmpty()) {
+      query.prepare(sqlite3::delete_citation_by_name);
+      query.bindValue(":name", citation->name);
+    } else {
+      qWarning() << "Provided Citation has no id or name one is required";
+      return false;
+    }
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    return true;
+  }
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::remove_treatment(Treatment* treatment)
 {
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (treatment->id != -1) {
+      query.prepare(sqlite3::delete_treatment_by_id);
+      query.bindValue(":id", treatment->id);
+    } else if (!treatment->medical_name.isEmpty()) {
+      query.prepare(sqlite3::delete_treatment_by_medical_name);
+      query.bindValue(":medical_name", treatment->medical_name);
+    } else if (!treatment->common_name.isEmpty()) {
+      query.prepare(sqlite3::delete_treatment_by_common_name);
+      query.bindValue(":common_name", treatment->common_name);
+    } else {
+      qWarning() << "Provided treatment has no id or name one is required";
+      return false;
+    }
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    return true;
+  }
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::remove_equipment(Equipment* equipment)
 {
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (equipment->id != -1) {
+      query.prepare(sqlite3::delete_equipment_by_id);
+      query.bindValue(":id", equipment->id);
+    } else if (!equipment->name.isEmpty()) {
+      query.prepare(sqlite3::delete_equipment_by_name);
+      query.bindValue(":name", equipment->name);
+    } else {
+      qWarning() << "Provided equipment has no id or name one is required";
+      return false;
+    }
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    return true;
+  }
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::remove_injury(Injury* injury)
 {
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (injury->id != -1) {
+      query.prepare(sqlite3::delete_injury_by_id);
+      query.bindValue(":id", injury->id);
+    } else if (!injury->medical_name.isEmpty()) {
+      query.prepare(sqlite3::delete_injury_by_medical_name);
+      query.bindValue(":medical_name", injury->medical_name);
+    } else if (!injury->common_name.isEmpty()) {
+      query.prepare(sqlite3::delete_injury_by_common_name);
+      query.bindValue(":common_name", injury->common_name);
+    } else {
+      qWarning() << "Provided injury has no id or name one is required";
+      return false;
+    }
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    return true;
+  }
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::remove_assessment(Assessment* assessment)
 {
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (assessment->id != -1) {
+      query.prepare(sqlite3::delete_assessment_by_id);
+      query.bindValue(":id", assessment->id);
+    } else if (!assessment->name.isEmpty()) {
+      query.prepare(sqlite3::delete_assessment_by_name);
+      query.bindValue(":name", assessment->name);
+    } else {
+      qWarning() << "Provided assessment has no id or name one is required";
+      return false;
+    }
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    return true;
+  }
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::remove_location(Location* location)
 {
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (location->id != -1) {
+      query.prepare(sqlite3::delete_location_by_id);
+      query.bindValue(":id", location->id);
+    } else if (!location->name.isEmpty()) {
+      query.prepare(sqlite3::delete_location_by_name);
+      query.bindValue(":name", location->name);
+    } else {
+      qWarning() << "Provided location has no id or name one is required";
+      return false;
+    }
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    return true;
+  }
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::remove_role(Role* role)
 {
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (role->id != -1) {
+      query.prepare(sqlite3::delete_role_by_id);
+      query.bindValue(":id", role->id);
+    } else {
+      qWarning() << "Provided role has no id or name one is required";
+      return false;
+    }
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    return true;
+  }
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::remove_prop(Prop* prop)
 {
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (prop->id != -1) {
+      query.prepare(sqlite3::delete_prop_by_id);
+      query.bindValue(":id", prop->id);
+    } else {
+      qWarning() << "Provided prop has no id or name one is required";
+      return false;
+    }
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    return true;
+  }
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::remove_event(Event* event)
 {
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (event->id != -1) {
+      query.prepare(sqlite3::delete_event_by_id);
+      query.bindValue(":id", event->id);
+    } else {
+      qWarning() << "Provided event has no id or name one is required";
+      return false;
+    }
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    return true;
+  }
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
