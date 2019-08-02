@@ -13,9 +13,8 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License.
 **************************************************************************************/
 
-
-#include <QObject>
 #include <QList>
+#include <QObject>
 #include <QString>
 
 namespace pfc {
@@ -424,53 +423,54 @@ public:
     equipment = rhs.equipment;
   }
 };
+
 //----End Prop
-struct Reference : public QObject {
+struct Citation : public QObject {
   Q_OBJECT
   Q_PROPERTY(int citation_id MEMBER id)
-  Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString key MEMBER key)
   Q_PROPERTY(QString title MEMBER title)
   Q_PROPERTY(QList<QString> authors MEMBER authors)
-  Q_PROPERTY(QString value MEMBER value)
+  Q_PROPERTY(QString year MEMBER year)
+  Q_PROPERTY(QString publisher MEMBER publisher)
 public:
   int32_t id = -1;
-  QString name = "";
   QString key = "";
   QString title = "";
   QList<QString> authors;
-  QString value = "";
-  Reference(QObject* parent = nullptr)
+  QString year = "";
+  QString publisher = "";
+  Citation(QObject* parent = nullptr)
     : QObject(parent)
   {
   }
-  Reference(const Reference&) = delete;
-  Reference(Reference&&) = delete;
-  Reference& operator=(const Reference&) = delete;
-  Reference& operator=(Reference&&) = delete;
-  virtual ~Reference() = default;
+  Citation(const Citation&) = delete;
+  Citation(Citation&&) = delete;
+  Citation& operator=(const Citation&) = delete;
+  Citation& operator=(Citation&&) = delete;
+  virtual ~Citation() = default;
 
-  bool operator==(const Reference& rhs) const
+  bool operator==(const Citation& rhs) const
   {
     return id == rhs.id
-      && name == rhs.name
       && key == rhs.key
       && title == rhs.title
       && authors == rhs.authors
-      && value == rhs.value;
+      && year == rhs.year
+      && publisher == rhs.publisher;
   }
-  bool operator!=(const Reference& rhs) const
+  bool operator!=(const Citation& rhs) const
   {
     return !(*this == rhs);
   }
-  void assign(const Reference& rhs)
+  void assign(const Citation& rhs)
   {
     id = rhs.id;
-    name = rhs.name;
     key = rhs.key;
     title = rhs.title;
     authors = rhs.authors;
-    value = rhs.value;
+    year = rhs.year;
+    publisher = rhs.publisher;
   }
 };
 //----End Citation

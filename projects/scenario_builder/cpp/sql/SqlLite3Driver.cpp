@@ -82,10 +82,9 @@ inline void assign_objective(const QSqlRecord& record, Objective& objective)
   }
 }
 //------------------------------------------------------------------------------
-inline void assign_citation(const QSqlRecord& record, Reference& citation)
+inline void assign_citation(const QSqlRecord& record, Citation& citation)
 {
   citation.id = record.value(CITATION_ID).toInt();
-  citation.name = record.value(CITATION_NAME).toString();
   citation.key = record.value(CITATION_KEY).toString();
   citation.title = record.value(CITATION_TITLE).toString();
   auto auth_list_s = record.value(CITATION_AUTHORS).toString();
@@ -94,7 +93,8 @@ inline void assign_citation(const QSqlRecord& record, Reference& citation)
   for (auto& val : auth_list) {
     citation.authors.push_back(val);
   }
-  citation.value = record.value(CITATION_VALUE).toString();
+  citation.year = record.value(CITATION_YEAR).toString();
+  citation.publisher = record.value(CITATION_PUBLISHER).toString();
 }
 //------------------------------------------------------------------------------
 inline void assign_treatment(const QSqlRecord& record, Treatment& treatment)
@@ -243,34 +243,33 @@ bool SQLite3Driver::initialize_db()
   QSqlQuery query(_db);
   bool creation_failure = false;
   std::map<char const*, char const*> create_statments = {
-    {tables[AUTHORS],    sqlite3::create_authors_table },
-    {tables[ASSESSMENTS],sqlite3::create_assessments_table},
-    {tables[EVENTS],     sqlite3::create_events_table},
-    {tables[EQUIPMENTS], sqlite3::create_equipment_table},
-    {tables[INJURIES],   sqlite3::create_injuries_table},
-    {tables[LOCATIONS],  sqlite3::create_locations_table},
-    {tables[OBJECTIVES], sqlite3::create_objectives_table},
-    {tables[PROPERTIES], sqlite3::create_properties_table},
-    {tables[PROPS],      sqlite3::create_props_table},
-    {tables[CITATIONS], sqlite3::create_citations_table},
-    {tables[RESTRICTIONS],    sqlite3::create_restrictions_table},
-    {tables[ROLES],      sqlite3::create_roles_table},
-    {tables[TREATMENTS], sqlite3::create_treatments_table}
+    { tables[AUTHORS], sqlite3::create_authors_table },
+    { tables[ASSESSMENTS], sqlite3::create_assessments_table },
+    { tables[EVENTS], sqlite3::create_events_table },
+    { tables[EQUIPMENTS], sqlite3::create_equipment_table },
+    { tables[INJURIES], sqlite3::create_injuries_table },
+    { tables[LOCATIONS], sqlite3::create_locations_table },
+    { tables[OBJECTIVES], sqlite3::create_objectives_table },
+    { tables[PROPERTIES], sqlite3::create_properties_table },
+    { tables[PROPS], sqlite3::create_props_table },
+    { tables[CITATIONS], sqlite3::create_citations_table },
+    { tables[RESTRICTIONS], sqlite3::create_restrictions_table },
+    { tables[ROLES], sqlite3::create_roles_table },
+    { tables[TREATMENTS], sqlite3::create_treatments_table }
   };
 
-
-if (_db.open()) {
-  for (auto pair : create_statments) {
-    query.prepare(pair.second);
-    if (!query.exec()) {
-      qCritical() << QString("Could not create table %1 \n\t --").arg(pair.first) << query.lastError();
-      creation_failure = true;
-      continue;
+  if (_db.open()) {
+    for (auto pair : create_statments) {
+      query.prepare(pair.second);
+      if (!query.exec()) {
+        qCritical() << QString("Could not create table %1 \n\t --").arg(pair.first) << query.lastError();
+        creation_failure = true;
+        continue;
+      }
     }
+    return creation_failure;
   }
-  return creation_failure;
-}
-return false;
+  return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::clear_db()
@@ -731,7 +730,7 @@ void SQLite3Driver::citations()
     query.prepare(sqlite3::select_all_citations);
     query.exec();
     while (query.next()) {
-      auto citation = std::make_unique<pfc::Reference>();
+      auto citation = std::make_unique<pfc::Citation>();
       auto record = query.record();
       assert(record.count() == 3);
       assign_citation(record, *citation);
@@ -960,7 +959,7 @@ bool SQLite3Driver::next_objective(Objective* objective)
   return true;
 }
 //------------------------------------------------------------------------------
-bool SQLite3Driver::next_citation(Reference* citation)
+bool SQLite3Driver::next_citation(Citation* citation)
 {
   if (_current_citation == _citations.end() || _citations.empty()) {
     return false;
@@ -1170,8 +1169,10 @@ bool SQLite3Driver::select_objective(Objective* objective) const
   return false;
 }
 //------------------------------------------------------------------------------
-bool SQLite3Driver::select_citation(Reference* citation) const
+bool SQLite3Driver::select_citation(Citation* citation) const
 {
+  //TODO: Hitting the exact title is going to be pretty hard
+  //TODO: Might want to add an alias or transform for the select where you remove all whitespace and downcase the title
 
   if (_db.isOpen()) {
     QSqlQuery query(_db);
@@ -1179,11 +1180,14 @@ bool SQLite3Driver::select_citation(Reference* citation) const
     if (citation->id != -1) {
       query.prepare(sqlite3::select_citation_by_id);
       query.bindValue(":id", citation->id);
-    } else if (!citation->name.isEmpty()) {
-      query.prepare(sqlite3::select_citation_by_name);
-      query.bindValue(":name", citation->name);
+    } else if (!citation->key.isEmpty()) {
+      query.prepare(sqlite3::select_citation_by_key);
+      query.bindValue(":name", citation->key);
+    } else if (!citation->title.isEmpty()) {
+      query.prepare(sqlite3::select_citation_by_title);
+      query.bindValue(":title", citation->title);
     } else {
-      qWarning() << "Provided Property has no id or name one is required";
+      qWarning() << "Provided Property has no id, key, or title one is required";
       return false;
     }
     if (query.exec()) {
@@ -1564,7 +1568,7 @@ bool SQLite3Driver::update_objective(Objective* objective)
   return false;
 }
 //------------------------------------------------------------------------------
-bool SQLite3Driver::update_citation(Reference* citation)
+bool SQLite3Driver::update_citation(Citation* citation)
 {
 
   if (_db.isOpen()) {
@@ -1572,18 +1576,24 @@ bool SQLite3Driver::update_citation(Reference* citation)
     if (-1 != citation->id) {
       query.prepare(sqlite3::update_citation_by_id);
       query.bindValue(":id", citation->id);
-    } else if (!citation->name.isEmpty()) {
+    } else if (!citation->key.isEmpty()) {
+      query.prepare(sqlite3::update_citation_by_key);
+    } else if (!citation->title.isEmpty()) {
       query.prepare(sqlite3::insert_or_update_citations);
+      citation->key = (citation->authors.empty()) ? citation->title.toLower().simplified().remove(' ')
+                                                  : QString("%1%2").arg(citation->authors[0]).arg(citation->year);
     }
     QString auth_list = "";
     for (auto& val : citation->authors) {
       auth_list += val + ";";
     }
     auth_list.chop(1);
-    query.bindValue(":name", citation->name);
+
     query.bindValue(":key", citation->key);
     query.bindValue(":title", citation->title);
-    query.bindValue(":value", citation->value);
+    query.bindValue(":authors", auth_list);
+    query.bindValue(":year", citation->year);
+    query.bindValue(":publisher", citation->publisher);
 
     if (!query.exec()) {
       qWarning() << query.lastError();
@@ -1648,7 +1658,7 @@ bool SQLite3Driver::update_equipment(Equipment* equipment)
       query.bindValue(":id", equipment->id);
     } else if (!equipment->name.isEmpty()) {
       query.prepare(sqlite3::insert_or_update_equipments);
-    } 
+    }
     QString equip_list = "";
     for (auto& val : equipment->equipment_list) {
       equip_list += val + ";";
@@ -1777,7 +1787,7 @@ bool SQLite3Driver::update_role(Role* role)
     if (-1 != role->id) {
       query.prepare(sqlite3::update_role_by_id);
       query.bindValue(":id", role->id);
-    } 
+    }
     query.bindValue(":description", role->description);
 
     if (!query.exec()) {
@@ -1939,7 +1949,7 @@ bool SQLite3Driver::remove_objective(Objective* objective)
   return false;
 }
 //------------------------------------------------------------------------------
-bool SQLite3Driver::remove_citation(Reference* citation)
+bool SQLite3Driver::remove_citation(Citation* citation)
 {
 
   if (_db.isOpen()) {
@@ -1947,11 +1957,14 @@ bool SQLite3Driver::remove_citation(Reference* citation)
     if (citation->id != -1) {
       query.prepare(sqlite3::delete_citation_by_id);
       query.bindValue(":id", citation->id);
-    } else if (!citation->name.isEmpty()) {
-      query.prepare(sqlite3::delete_citation_by_name);
-      query.bindValue(":name", citation->name);
+    } else if (!citation->key.isEmpty()) {
+      query.prepare(sqlite3::delete_citation_by_key);
+      query.bindValue(":key", citation->key);
+    } else if (!citation->title.isEmpty()) {
+      query.prepare(sqlite3::delete_citation_by_title);
+      query.bindValue(":title", citation->title);
     } else {
-      qWarning() << "Provided Citation has no id or name one is required";
+      qWarning() << "Provided Citation has no id, key, or title one is required";
       return false;
     }
     if (!query.exec()) {

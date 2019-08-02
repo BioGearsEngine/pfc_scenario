@@ -488,21 +488,21 @@ inline namespace sqlite3 {
   //---------------------- CITATION STATMENTS ------------------------
   enum CITATION_COLUMNS {
     CITATION_ID,
-    CITATION_NAME,
     CITATION_KEY,
     CITATION_TITLE,
     CITATION_AUTHORS,
-    CITATION_VALUE
+    CITATION_YEAR,
+    CITATION_PUBLISHER
   };
 
   constexpr auto create_citations_table = R"(
   CREATE TABLE IF NOT EXISTS citations (
     citation_id INTEGER PRIMARY KEY,
-    name Varchar(64) NOT NULL UNIQUE,
-    key Varchar(64) NOT NULL,
+    key Varchar(64) NOT NULL UNIQUE,
     title TEXT,
     authors TEXT,
-    value Varchar(255)
+    year TEXT,
+    publisher TEXT
   );
   )";
   constexpr auto drop_all_citations = R"( DELETE FROM citations; )";
@@ -511,31 +511,47 @@ inline namespace sqlite3 {
 
   constexpr auto select_citation_by_id
     = R"( SELECT * FROM citations WHERE citation_id = :id ; )";
-  constexpr auto update_citation_by_id
-    = R"( UPDATE  citations
-          SET name = :name
-              , key = :key
-              , title = :title
-              , authors = :authors
-              , value = :value
-          WHERE citation_id = :id;
-         )";
+  constexpr auto select_citation_by_key
+    = R"( SELECT * FROM citations WHERE key = :key; )";
+  constexpr auto select_citation_by_title
+    = R"( SELECT * FROM citations WHERE title = :title; )";
+
   constexpr auto delete_citation_by_id
     = R"( DELETE FROM citations WHERE citation_id = :id; )";
-  constexpr auto delete_citation_by_name
-    = R"( DELETE FROM citations WHERE name = :name; )";
-  constexpr auto select_citation_by_name
-    = R"( SELECT * FROM citations WHERE name = :name; )";
+  constexpr auto delete_citation_by_key
+    = R"( DELETE FROM citations WHERE key = :key; )";
+  constexpr auto delete_citation_by_title
+    = R"( DELETE FROM citations WHERE title = :title; )";
+
+  constexpr auto update_citation_by_id
+    = R"( UPDATE  citations
+          SET key = :key
+              , title = :title
+              , authors = :authors
+              , year = :year
+              , publisher = :publisher
+          WHERE citation_id = :id;
+         )";
+
+    constexpr auto update_citation_by_key
+    = R"( UPDATE  citations
+          SET   title = :title
+              , authors = :authors
+              , year = :year
+              , publisher = :publisher
+          WHERE key = :key;
+         )";
+
+
   constexpr auto insert_or_update_citations
     = R"( INSERT INTO citations
-          (name,key,title,authors,value)
-          VALUES (:name, :key,:title,:authors,:value)
-          ON CONFLICT (name)
-          DO UPDATE SET name = excluded.name
-                       , key = excluded.key
-                       , title = excluded.title
+          (name,key,title,authors,year,publisher)
+          VALUES (:key,:title,:authors, :year, :publisher)
+          ON CONFLICT (key)
+          DO UPDATE SET  title = excluded.title
                        , authors = excluded.authors
-                       , value = excluded.value
+                       , year = excluded.year
+                       , publisher = excluded.publisher
          ;
          )";
 

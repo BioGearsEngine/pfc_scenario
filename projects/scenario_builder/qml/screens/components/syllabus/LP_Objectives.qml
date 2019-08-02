@@ -13,7 +13,7 @@ ColumnLayout {
   property SQLBackend backend
   readonly property alias model : listArea.model 
   readonly property alias index : listArea.currentIndex
-
+  readonly property int nextIndex : 1
   //TAB:SYLLABUS_TAB:OBJECTIVES_LEFTWINDOW
 
   Objective {
@@ -45,14 +45,20 @@ ColumnLayout {
 
       onFirstButtonClicked :{
 
+        if ( nextIndex <= root.model.count){
+          nextIndex = root.model.count+1
+        }
+
         self.objective_id = -1
-        self.name = "New Objective %1".arg(root.model.count)
+        self.name = "New Objective %1".arg(nextIndex++)
         self.description = "Description of Objective %1".arg(root.model.count)
         self.citations = new Array()
-
-        root.backend.update_objective(self)
+        
+        if( !root.backend.update_objective(self) ) {
+          
+        }
         root.model.insert(root.model.count,
-          {
+        {
            "id" : self.objective_id,
            "name": "%1".arg(self.name), 
            "description": "%1".arg(self.description) , 

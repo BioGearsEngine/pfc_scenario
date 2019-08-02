@@ -99,7 +99,7 @@ public:
   Q_INVOKABLE bool next_property(Property*);
   Q_INVOKABLE bool next_restriction(Restriction*);
   Q_INVOKABLE bool next_objective(Objective*);
-  Q_INVOKABLE bool next_citation(Reference*);
+  Q_INVOKABLE bool next_citation(Citation*);
   Q_INVOKABLE bool next_treatment(Treatment*);
   Q_INVOKABLE bool next_equipment(Equipment*);
   Q_INVOKABLE bool next_injury(Injury*);
@@ -113,7 +113,7 @@ public:
   Q_INVOKABLE bool select_property(Property*) const;
   Q_INVOKABLE bool select_restriction(Restriction*) const;
   Q_INVOKABLE bool select_objective(Objective*) const;
-  Q_INVOKABLE bool select_citation(Reference*) const;
+  Q_INVOKABLE bool select_citation(Citation*) const;
   Q_INVOKABLE bool select_treatment(Treatment*) const;
   Q_INVOKABLE bool select_equipment(Equipment*) const;
   Q_INVOKABLE bool select_injury(Injury*) const;
@@ -132,7 +132,7 @@ public:
   Q_INVOKABLE bool update_role(Role*);
   Q_INVOKABLE bool update_prop(Prop*);
   Q_INVOKABLE bool update_event(Event*);
-  Q_INVOKABLE bool update_citation(Reference*);
+  Q_INVOKABLE bool update_citation(Citation*);
   Q_INVOKABLE bool update_treatment(Treatment*);
   Q_INVOKABLE bool update_equipment(Equipment*);
   Q_INVOKABLE bool update_injury(Injury*);
@@ -142,7 +142,7 @@ public:
   Q_INVOKABLE bool remove_property(Property*);
   Q_INVOKABLE bool remove_restriction(Restriction*);
   Q_INVOKABLE bool remove_objective(Objective*);
-  Q_INVOKABLE bool remove_citation(Reference*);
+  Q_INVOKABLE bool remove_citation(Citation*);
   Q_INVOKABLE bool remove_treatment(Treatment*);
   Q_INVOKABLE bool remove_equipment(Equipment*);
   Q_INVOKABLE bool remove_injury(Injury*);
@@ -186,7 +186,7 @@ private:
   QList<Property*> _properties;
   QList<Restriction*> _restrictions;
   QList<Objective*> _objectives;
-  QList<Reference*> _citations;
+  QList<Citation*> _citations;
   QList<Treatment*> _treatments;
   QList<Equipment*> _equipments;
   QList<Injury*> _injuries;
@@ -200,7 +200,7 @@ private:
   QList<Property*>::iterator _current_property;
   QList<Restriction*>::iterator _current_restriction;
   QList<Objective*>::iterator _current_objective;
-  QList<Reference*>::iterator _current_citation;
+  QList<Citation*>::iterator _current_citation;
   QList<Treatment*>::iterator _current_treatment;
   QList<Equipment*>::iterator _current_equipment;
   QList<Injury*>::iterator _current_injury;
