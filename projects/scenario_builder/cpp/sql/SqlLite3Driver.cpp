@@ -1566,46 +1566,277 @@ bool SQLite3Driver::update_objective(Objective* objective)
 //------------------------------------------------------------------------------
 bool SQLite3Driver::update_citation(Reference* citation)
 {
+
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (-1 != citation->id) {
+      query.prepare(sqlite3::update_citation_by_id);
+      query.bindValue(":id", citation->id);
+    } else if (!citation->name.isEmpty()) {
+      query.prepare(sqlite3::insert_or_update_citations);
+    }
+    QString auth_list = "";
+    for (auto& val : citation->authors) {
+      auth_list += val + ";";
+    }
+    auth_list.chop(1);
+    query.bindValue(":name", citation->name);
+    query.bindValue(":key", citation->key);
+    query.bindValue(":title", citation->title);
+    query.bindValue(":value", citation->value);
+
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    if (-1 == citation->id) {
+      return select_citation(citation);
+    }
+    return true;
+  }
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::update_treatment(Treatment* treatment)
 {
+
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (-1 != treatment->id) {
+      query.prepare(sqlite3::update_treatment_by_id);
+      query.bindValue(":id", treatment->id);
+    } else if (!treatment->medical_name.isEmpty()) {
+      query.prepare(sqlite3::insert_or_update_treatments);
+    } else if (!treatment->common_name.isEmpty()) {
+      query.prepare(sqlite3::insert_or_update_treatments);
+    }
+    QString equip_list = "";
+    for (auto& val : treatment->equipment_list) {
+      equip_list += val + ";";
+    }
+    equip_list.chop(1);
+    QString cite_list = "";
+    for (auto& val : treatment->citations) {
+      cite_list += val + ";";
+    }
+    cite_list.chop(1);
+    query.bindValue(":medical_name", treatment->medical_name);
+    query.bindValue(":common_name", treatment->common_name);
+    query.bindValue(":description", treatment->description);
+
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    if (-1 == treatment->id) {
+      return select_treatment(treatment);
+    }
+    return true;
+  }
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::update_equipment(Equipment* equipment)
 {
+
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (-1 != equipment->id) {
+      query.prepare(sqlite3::update_equipment_by_id);
+      query.bindValue(":id", equipment->id);
+    } else if (!equipment->name.isEmpty()) {
+      query.prepare(sqlite3::insert_or_update_equipments);
+    } 
+    QString equip_list = "";
+    for (auto& val : equipment->equipment_list) {
+      equip_list += val + ";";
+    }
+    equip_list.chop(1);
+    QString cite_list = "";
+    for (auto& val : equipment->citations) {
+      cite_list += val + ";";
+    }
+    cite_list.chop(1);
+    query.bindValue(":name", equipment->name);
+    query.bindValue(":description", equipment->description);
+
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    if (-1 == equipment->id) {
+      return select_equipment(equipment);
+    }
+    return true;
+  }
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::update_injury(Injury* injury)
 {
+
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (-1 != injury->id) {
+      query.prepare(sqlite3::update_injury_by_id);
+      query.bindValue(":id", injury->id);
+    } else if (!injury->medical_name.isEmpty()) {
+      query.prepare(sqlite3::insert_or_update_injuries);
+    } else if (!injury->common_name.isEmpty()) {
+      query.prepare(sqlite3::insert_or_update_injuries);
+    }
+    QString cite_list = "";
+    for (auto& val : injury->citations) {
+      cite_list += val + ";";
+    }
+    cite_list.chop(1);
+    query.bindValue(":medical_name", injury->medical_name);
+    query.bindValue(":common_name", injury->common_name);
+    query.bindValue(":description", injury->description);
+
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    if (-1 == injury->id) {
+      return select_injury(injury);
+    }
+    return true;
+  }
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::update_assessment(Assessment* assessment)
 {
+
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (-1 != assessment->id) {
+      query.prepare(sqlite3::update_assessment_by_id);
+      query.bindValue(":id", assessment->id);
+    } else if (!assessment->name.isEmpty()) {
+      query.prepare(sqlite3::insert_or_update_assessments);
+    }
+    query.bindValue(":name", assessment->name);
+    query.bindValue(":description", assessment->description);
+    query.bindValue(":type", assessment->type);
+    query.bindValue(":available_points", assessment->available_points);
+    query.bindValue(":criteria", assessment->criteria);
+
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    if (-1 == assessment->id) {
+      return select_assessment(assessment);
+    }
+    return true;
+  }
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::update_location(Location* location)
 {
+
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (-1 != location->id) {
+      query.prepare(sqlite3::update_location_by_id);
+      query.bindValue(":id", location->id);
+    } else if (!location->name.isEmpty()) {
+      query.prepare(sqlite3::insert_or_update_locations);
+    }
+    query.bindValue(":name", location->name);
+    query.bindValue(":scene_name", location->scene_name);
+    query.bindValue(":time_of_day", location->time_of_day);
+    query.bindValue(":environment", location->environment);
+
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    if (-1 == location->id) {
+      return select_location(location);
+    }
+    return true;
+  }
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::update_role(Role* role)
 {
+
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (-1 != role->id) {
+      query.prepare(sqlite3::update_role_by_id);
+      query.bindValue(":id", role->id);
+    } 
+    query.bindValue(":description", role->description);
+
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    if (-1 == role->id) {
+      return select_role(role);
+    }
+    return true;
+  }
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::update_prop(Prop* prop)
 {
+
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (-1 != prop->id) {
+      query.prepare(sqlite3::update_prop_by_id);
+      query.bindValue(":id", prop->id);
+    }
+    query.bindValue(":equipment", prop->equipment);
+
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    if (-1 == prop->id) {
+      return select_prop(prop);
+    }
+    return true;
+  }
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::update_event(Event* event)
 {
+
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (-1 != event->id) {
+      query.prepare(sqlite3::update_event_by_id);
+      query.bindValue(":id", event->id);
+    }
+
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    if (-1 == event->id) {
+      return select_event(event);
+    }
+    return true;
+  }
+  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------REMOVE_START

@@ -63,6 +63,15 @@ inline namespace sqlite3 {
 
   constexpr auto select_assessment_by_id
     = R"( SELECT * FROM assessments WHERE assessment_id = :id ; )";
+  constexpr auto update_assessment_by_id
+    = R"( UPDATE  assessments 
+          SET name = :name
+              , description = :description
+              , type = :type
+              , available_points = :available_points
+              , criteria = :criteria
+          WHERE assessment_id = :id;
+         )";
   constexpr auto select_assessment_by_name
     = R"( SELECT * FROM assessments WHERE name = :name; )";
   constexpr auto insert_or_update_assessments
@@ -109,6 +118,18 @@ inline namespace sqlite3 {
 
   constexpr auto select_author_by_id
     = R"( SELECT * FROM authors WHERE author_id = :id ; )";
+  constexpr auto update_author_by_id
+    = R"( UPDATE  authors 
+          SET name_first = :name_first
+              , name_last = :name_last
+              , email = :email
+              , zipcode = :zipcode
+              , state = :state
+              , country = :country
+              , phone = :phone
+              , organization = :organization
+          WHERE author_id = :id;
+         )";
   constexpr auto select_author_by_email
     = R"( SELECT * FROM authors WHERE email = :email; )";
 
@@ -161,6 +182,14 @@ inline namespace sqlite3 {
 
   constexpr auto select_equipment_by_id
     = R"( SELECT * FROM equipments WHERE equipment_id = :id ; )";
+  constexpr auto update_equipment_by_id
+    = R"( UPDATE  equipments
+          SET name = :name
+              , description = :description
+              , equipment_list = :equipment_list
+              , citations = :citations
+          WHERE equipment_id = :id;
+         )";
   constexpr auto select_equipment_by_name
     = R"( SELECT * FROM equipments WHERE name = :name )";
   constexpr auto insert_or_update_equipments
@@ -191,6 +220,10 @@ inline namespace sqlite3 {
 
   constexpr auto select_event_by_id
     = R"( SELECT * FROM events WHERE event_id = :id ; )";
+  constexpr auto update_event_by_id
+    = R"( UPDATE  events
+          WHERE event_id = :id;
+         )";
   constexpr auto insert_or_update_events
     = R"()";
   //---------------------- INJURY STATMENTS ------------------------
@@ -219,6 +252,15 @@ inline namespace sqlite3 {
 
   constexpr auto select_injury_by_id
     = R"( SELECT * FROM injuries WHERE injury_id = :id ; )";
+  constexpr auto update_injury_by_id
+    = R"( UPDATE  injuries
+          SET medical_name = :medical_name
+              , common_name = :common_name
+              , description = :description
+              , equipment_list = :equipment_list
+              , citations = :citations
+          WHERE injury_id = :id;
+         )";
   constexpr auto select_injury_by_medical_name
     = R"( SELECT * FROM injuries WHERE medical_name = :medical_name; )";
   constexpr auto select_injury_by_common_name
@@ -266,6 +308,14 @@ inline namespace sqlite3 {
 
   constexpr auto select_location_by_id
     = R"( SELECT * FROM locations WHERE location_id = :id ; )";
+  constexpr auto update_location_by_id
+    = R"( UPDATE  locations
+          SET name = :name
+              , scene_name = :scene_name
+              , time_of_day = :time_of_day
+              , environment = :environment
+          WHERE location_id = :id;
+         )";
   constexpr auto select_location_by_name
     = R"( SELECT * FROM locations WHERE name = :name; )";
   constexpr auto select_location_by_scene_name
@@ -354,6 +404,11 @@ inline namespace sqlite3 {
 
   constexpr auto select_prop_by_id
     = R"( SELECT * FROM props WHERE prop_id = :id ; )";
+  constexpr auto update_prop_by_id
+    = R"( UPDATE  props
+          SET equipment = :equipment
+          WHERE prop_id = :id;
+         )";
   constexpr auto insert_or_update_props
     = R"( INSERT INTO props 
           (name,equipment)
@@ -384,6 +439,12 @@ inline namespace sqlite3 {
 
   constexpr auto select_property_by_id
     = R"( SELECT * FROM properties WHERE property_id = :id ; )";
+  constexpr auto update_property_by_id
+    = R"( UPDATE  properties
+          SET name = :name
+              , value = :value
+          WHERE property_id = :id;
+         )";
   constexpr auto select_property_by_name
     = R"( SELECT * FROM properties WHERE name = :name; )";
 
@@ -428,10 +489,29 @@ inline namespace sqlite3 {
 
   constexpr auto select_citation_by_id
     = R"( SELECT * FROM citations WHERE citation_id = :id ; )";
+  constexpr auto update_citation_by_id
+    = R"( UPDATE  citations
+          SET name = :name
+              , key = :key
+              , title = :title
+              , authors = :authors
+              , value = :value
+          WHERE citation_id = :id;
+         )";
   constexpr auto select_citation_by_name
     = R"( SELECT * FROM citations WHERE name = :name; )";
   constexpr auto insert_or_update_citations
-    = R"()";
+    = R"( INSERT INTO citations
+          (name,key,title,authors,value)
+          VALUES (:name, :key,:title,:authors,:value)
+          ON CONFLICT (name)
+          DO UPDATE SET name = excluded.name
+                       , key = excluded.key
+                       , title = excluded.title
+                       , authors = excluded.authors
+                       , value = excluded.value
+         ;
+         )";
 
 
   //---------------------- RESTRICTION STATMENTS ------------------------
@@ -454,6 +534,12 @@ inline namespace sqlite3 {
 
   constexpr auto select_restriction_by_id
     = R"( SELECT * FROM restrictions WHERE restriction_id = :id ; )";
+  constexpr auto update_restriction_by_id
+    = R"( UPDATE  restrictions
+          SET name = :name
+              , value = :value
+          WHERE restriction_id = :id;
+         )";
   constexpr auto select_restriction_by_name
     = R"( SELECT * FROM restrictions WHERE name = :name; )";
 
@@ -487,6 +573,11 @@ inline namespace sqlite3 {
 
   constexpr auto select_role_by_id
     = R"( SELECT * FROM roles WHERE role_id = :id ; )";
+  constexpr auto update_role_by_id
+    = R"( UPDATE  roles
+          SET description = :description
+          WHERE role_id = :id;
+         )";
   constexpr auto insert_or_update_roles
     = R"( INSERT INTO roles 
           (name,description)
@@ -529,6 +620,15 @@ inline namespace sqlite3 {
 
   constexpr auto select_treatment_by_id
     = R"( SELECT * FROM treatments WHERE treatment_id = :id ; )";
+  constexpr auto update_treatment_by_id
+    = R"( UPDATE  treatments
+          SET medical_name = :medical_name
+              , common_name = :common_name
+              , description = :description
+              , equipment_list = :equipment_list
+              , citations = :citations
+          WHERE treatment_id = :id;
+         )";
   constexpr auto insert_or_update_treatments
     = R"( INSERT INTO treatments
           (medical_name,common_name,description,equipment_list,citations)
