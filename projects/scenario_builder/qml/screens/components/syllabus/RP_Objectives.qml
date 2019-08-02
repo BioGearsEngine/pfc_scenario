@@ -19,6 +19,10 @@ ColumnLayout  {
     Objective {
       id : obj
     }
+    Citation {
+      id : citation
+    }
+
     function update_objective(values) 
     {
       obj.objective_id = values.id
@@ -73,7 +77,7 @@ ColumnLayout  {
 
       id: citationEntry
       label : "Citations"
-      model : ListModel { ListElement {citation_id : -1; title : "PlaceHolder Citation"; authors : "No Author"}}
+      model : ListModel { ListElement {citation_id : -1; title : "PlaceHolder Citation"; authors : "Placeholder Author"}}
       delegate : Row {
         Layout.fillWidth : true
         Layout.preferredHeight : 100
@@ -106,10 +110,26 @@ ColumnLayout  {
       if(values) {
         nameEntry.value = values.name
         descriptionEntry.text = values.description
-        citationEntry.model.clear()
-        citationEntry.model.insert(citationEntry.model.count,{citation_id : 5, title : "The Great Book on Objectives", authors : "Steven A White, Ph.D"});
-        citationEntry.model.insert(citationEntry.model.count,{citation_id : 6, title : "Keystone tactics", authors : "Lucas Marin"});
-        citationEntry.model.insert(citationEntry.model.count,{citation_id : 7, title : "The glory of Keyblades", authors : "Nathan Tatum, Et Al."});
+         citationEntry.model.clear()
+         for (var  i in  values.citations) {
+          citation.citation_id = values.citations[i]
+          root.backend.select_citation(citation)
+          console.log("%1,%2,%3,%4".arg(citation.citation_id)
+            .arg(citation.title)
+            .arg(citation.description)
+            .arg(citation.authors))
+
+          citationEntry.model.insert(citationEntry.model.count,
+              {
+                "citation_id" : citation.citation_id,
+                "title" :citation.title, 
+                "authors":  "%1".arg(citation.authors),
+                "year" : citation.year
+             }
+          );
+          
+        }
       }
     }
 }
+

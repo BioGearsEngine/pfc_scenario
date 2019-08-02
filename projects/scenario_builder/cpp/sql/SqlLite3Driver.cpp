@@ -1160,12 +1160,14 @@ bool SQLite3Driver::select_objective(Objective* objective) const
       while (query.next()) {
         record = query.record();
         assign_objective(record, *objective);
+        return true;
       }
-      return true;
+      qWarning() << "No Record Found.";
     }
     qWarning() << query.lastError();
+  } else {
+    qWarning() << "No Database connection";
   }
-  qWarning() << "No Database connection";
   return false;
 }
 //------------------------------------------------------------------------------
