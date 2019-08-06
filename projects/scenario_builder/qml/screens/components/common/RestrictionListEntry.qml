@@ -103,8 +103,8 @@ ListEntry {
 
   onAdded : {
     self.restriction_id = -1
-    self.name = "New Restriction_%1".arg(root.model.count)
-    self.value = "%1".arg(index)
+    self.name = "New Reference %1".arg(root.model.count)
+    self.value = "New Reference%1".arg(index)
     root.backend.update_restriction(self)
     root.model.insert(root.model.count,
       {"name": "%1".arg(self.name), "value": "%1".arg(self.value)});

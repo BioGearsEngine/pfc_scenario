@@ -22,6 +22,12 @@ ColumnLayout  {
     Citation {
       id : citation
     }
+    Connections {
+      target: backend
+      onCitationRemoved : {
+        console.log( "Removed %1".arg(index))
+      }
+    }
 
     function update_objective(values) 
     {
@@ -71,63 +77,38 @@ ColumnLayout  {
       }
     }
 
-    ListEntry {
-      Layout.fillWidth: true
+    CitationListEntry {
+      id : referenceList
+      Layout.fillWidth : true
       Layout.fillHeight : true
+      backend : root.backend
 
-      id: citationEntry
-      label : "Citations"
-      model : ListModel { ListElement {citation_id : -1; title : "PlaceHolder Citation"; authors : "Placeholder Author"}}
-      delegate : Row {
-        Layout.fillWidth : true
-        Layout.preferredHeight : 100
-        spacing : 6
-        Label {
-          text : "Title:"
-        }
-        Text {
-          text : model.title
-        }
-        Label {
-          text : "Authors:"
-        }
-        Text {
-          text : model.authors
-        }
+      onCitationAdded : {
+        console.log("RP_Objective Added a Reference")
       }
 
-      onAdded : {
-        console.log ("Addeds an Item")
-      }
-
-      onRemoved : {
-        console.log ("Removed an Item")
+      onCitationRemoved : {
+        console.log("RP_Objective Removed a Reference")
       }
     }
-
     onIndexChanged : {
       var values = model.get(index)
       if(values) {
         nameEntry.value = values.name
         descriptionEntry.text = values.description
-         citationEntry.model.clear()
-         for (var  i in  values.citations) {
-          citation.citation_id = values.citations[i]
-          root.backend.select_citation(citation)
-          console.log("%1,%2,%3,%4".arg(citation.citation_id)
-            .arg(citation.title)
-            .arg(citation.description)
-            .arg(citation.authors))
-
-          citationEntry.model.insert(citationEntry.model.count,
-              {
-                "citation_id" : citation.citation_id,
-                "title" :citation.title, 
-                "authors":  "%1".arg(citation.authors),
-                "year" : citation.year
-             }
-          );
-          
+        referenceList.model.clear()
+        for (var  i in  values.citations) {
+           citation.citation_id = values.citations[i]
+           root.backend.select_citation(citation)
+           referenceList.model.insert(referenceList.model.count,
+               {
+                 "citation_id" : "%1".arg(citation.citation_id),
+                 "key" : "%1".arg(citation.key),
+                 "title" : "%1".arg(citation.title), 
+                 "authors":  "%1".arg(citation.authors),
+                 "year" : "%1".arg(citation.year)
+              }
+           );
         }
       }
     }

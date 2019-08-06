@@ -19,6 +19,7 @@ inline namespace sqlite3 {
   constexpr char const* tables[] = {
     "authors",
     "assessments",
+    "citations",
     "events",
     "equipments",
     "injuries",
@@ -26,7 +27,6 @@ inline namespace sqlite3 {
     "objectives",
     "properties",
     "props",
-    "citations",
     "restrictions",
     "roles",
     "treatments",
@@ -525,28 +525,18 @@ inline namespace sqlite3 {
 
   constexpr auto update_citation_by_id
     = R"( UPDATE  citations
-          SET key = :key
-              , title = :title
+          SET key       = :key
+              , title   = :title
               , authors = :authors
-              , year = :year
+              , year    = :year
               , publisher = :publisher
           WHERE citation_id = :id;
          )";
 
-    constexpr auto update_citation_by_key
-    = R"( UPDATE  citations
-          SET   title = :title
-              , authors = :authors
-              , year = :year
-              , publisher = :publisher
-          WHERE key = :key;
-         )";
-
-
   constexpr auto insert_or_update_citations
     = R"( INSERT INTO citations
-          (name,key,title,authors,year,publisher)
-          VALUES (:key,:title,:authors, :year, :publisher)
+          (key, title, authors, year, publisher)
+          VALUES (:key, :title, :authors, :year, :publisher)
           ON CONFLICT (key)
           DO UPDATE SET  title = excluded.title
                        , authors = excluded.authors

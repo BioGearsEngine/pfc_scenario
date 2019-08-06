@@ -22,7 +22,6 @@ specific language governing permissions and limitations under the License.
 #include "SQLTables.h"
 namespace pfc {
 
-
 class SQLite3Driver : public QObject {
 public:
   Q_OBJECT
@@ -34,6 +33,7 @@ public:
   enum Sqlite3Table {
     AUTHORS,
     ASSESSMENTS,
+    CITATIONS,
     EVENTS,
     EQUIPMENTS,
     INJURIES,
@@ -41,7 +41,6 @@ public:
     OBJECTIVES,
     PROPERTIES,
     PROPS,
-    CITATIONS,
     RESTRICTIONS,
     ROLES,
     TREATMENTS,
@@ -169,9 +168,46 @@ signals:
   void pathChanged();
 
   void authorsChanged();
-  void propertiesChanged();
-  void restictionsChanged();
+  void assessmentsChanged();
+  void eventsChanged();
+  void equipmentsChanged();
+  void injuriesChanged();
+  void locationsChanged();
   void objectivesChanged();
+  void propertiesChanged();
+  void propsChanged();
+  void citationsChanged();
+  void restrictionsChanged();
+  void rolesChanged();
+  void treatmentsChanged();
+
+  void authorRemoved(int index);
+  void assessmentRemoved(int index);
+  void eventRemoved(int index);
+  void equipmentRemoved(int index);
+  void injuryRemoved(int index);
+  void locationRemoved(int index);
+  void objectiveRemoved(int index);
+  void propertyRemoved(int index);
+  void propRemoved(int index);
+  void citationRemoved(int index);
+  void restrictionRemoved(int index);
+  void roleRemoved(int index);
+  void treatmentRemoved(int index);
+
+  void authorUpdated(int index);
+  void assessmentUpdated(int index);
+  void eventUpdated(int index);
+  void equipmentUpdated(int index);
+  void injuryUpdated(int index);
+  void locationUpdated(int index);
+  void objectiveUpdated(int index);
+  void propertyUpdated(int index);
+  void propUpdated(int index);
+  void citationUpdated(int index);
+  void restrictionUpdated(int index);
+  void roleUpdated(int index);
+  void treatmentUpdated(int index);
 
 private:
   bool open();
