@@ -50,9 +50,7 @@ ColumnLayout {
         self.equipment_id = -1
         self.name = "New Equipment %1".arg(next)
         self.description = "Description of Equipment %1".arg(next)
-        self.type = "binary" //vs equipment
-        self.available_points = "1"
-        self.criteria = "Unknown Criteria"
+        self.citations = new Array()
 
         while( root.backend.select_equipment(self) )
         { 
@@ -68,9 +66,8 @@ ColumnLayout {
            "id" : self.equipment_id,
            "name": "%1".arg(self.name), 
            "description": "%1".arg(self.description) , 
-           "type": self.type,
-           "available_points": self.available_points,
-           "criteria": self.criteria
+           "citations": self.citaitons,
+
           }
         );
         ++next;
@@ -179,9 +176,8 @@ ColumnLayout {
              id = self.equipment_id,
              name= "%1".arg(self.name), 
              description= "%1".arg(self.description) , 
-             type= self.type,
-             available_points= self.available_points,
-             criteria= self.criteria
+             citaitons= self.citations,
+
             });
         }
       }

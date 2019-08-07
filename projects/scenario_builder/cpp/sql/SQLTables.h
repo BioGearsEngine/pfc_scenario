@@ -215,14 +215,14 @@ struct Injury : public QObject {
   Q_PROPERTY(QString medical_name MEMBER medical_name)
   Q_PROPERTY(QString common_name MEMBER common_name)
   Q_PROPERTY(QString description MEMBER description)
-  Q_PROPERTY(QList<int> equipment_list MEMBER equipment_list)
+  Q_PROPERTY(QList<int> equipment MEMBER equipment)
   Q_PROPERTY(QList<int> citations MEMBER citations)
 public:
   int32_t id = -1;
   QString medical_name = "";
   QString common_name = "";
   QString description = "";
-  QList<int> equipment_list;
+  QList<int> equipment;
   QList<int> citations;
   Injury(QObject* parent = nullptr)
     : QObject(parent)
@@ -240,7 +240,7 @@ public:
       && medical_name == rhs.medical_name
       && common_name == rhs.common_name
       && description == rhs.description
-      && equipment_list == rhs.equipment_list
+      && equipment == rhs.equipment
       && citations == rhs.citations;
   }
   bool operator!=(const Injury& rhs) const
@@ -253,22 +253,22 @@ public:
     medical_name = rhs.medical_name;
     common_name = rhs.common_name;
     description = rhs.description;
-    equipment_list = rhs.equipment_list;
+    equipment = rhs.equipment;
     citations = rhs.citations;
   }
 };
 //----End Injury
 struct InjurySet : public QObject {
   Q_OBJECT
-  Q_PROPERTY(int injury_id MEMBER id)
+  Q_PROPERTY(int injury_set_id MEMBER id)
   Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString description MEMBER description)
-  Q_PROPERTY(QList<int> injury_list MEMBER injury_list)
+  Q_PROPERTY(QList<int> injuries MEMBER injuries)
 public:
   int32_t id = -1;
   QString name = "";
   QString description = "";
-  QList<int> injury_list;
+  QList<int> injuries;
 
   InjurySet(QObject* parent = nullptr)
     : QObject(parent)
@@ -285,7 +285,7 @@ public:
     return id == rhs.id
       && name == rhs.name
       && description == rhs.description
-      && injury_list == rhs.injury_list;
+      && injuries == rhs.injuries;
   }
   bool operator!=(const InjurySet& rhs) const
   {
@@ -296,7 +296,7 @@ public:
     id = rhs.id;
     name = rhs.name;
     description = rhs.description;
-    injury_list = rhs.injury_list;
+    injuries = rhs.injuries;
   }
 };
 //----End Injury Set
@@ -590,14 +590,14 @@ struct Treatment : public QObject {
   Q_PROPERTY(QString medical_name MEMBER medical_name)
   Q_PROPERTY(QString common_name MEMBER common_name)
   Q_PROPERTY(QString description MEMBER description)
-  Q_PROPERTY(QList<int> equipment_list MEMBER equipment_list)
+  Q_PROPERTY(QList<int> equipment MEMBER equipment)
   Q_PROPERTY(QList<int> citations MEMBER citations)
 public:
   int32_t id = -1;
   QString medical_name = "";
   QString common_name = "";
   QString description = "";
-  QList<int> equipment_list;
+  QList<int> equipment;
   QList<int> citations;
   Treatment(QObject* parent = nullptr)
     : QObject(parent)
@@ -615,7 +615,7 @@ public:
       && medical_name == rhs.medical_name
       && common_name == rhs.common_name
       && description == rhs.description
-      && equipment_list == rhs.equipment_list
+      && equipment == rhs.equipment
       && citations == rhs.citations;
   }
   bool operator!=(const Treatment& rhs) const
@@ -628,7 +628,7 @@ public:
     medical_name = rhs.medical_name;
     common_name = rhs.common_name;
     description = rhs.description;
-    equipment_list = rhs.equipment_list;
+    equipment = rhs.equipment;
     citations = rhs.citations;
   }
 };

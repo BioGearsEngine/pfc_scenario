@@ -129,9 +129,9 @@ inline void assign_injury_set(const QSqlRecord& record, InjurySet& injury)
   injury.description = record.value(INJURY_SET_DESCRIPTION).toString();
   auto ref_list_s = record.value(INJURY_SET_INJURIES).toString();
   auto ref_list = ref_list_s.split(";");
-  injury.injury_list.clear();
+  injury.injuries.clear();
   for (auto& val : ref_list) {
-    injury.injury_list.push_back(val.toInt());
+    injury.injuries.push_back(val.toInt());
   }
 }
 //------------------------------------------------------------------------------
@@ -184,9 +184,9 @@ inline void assign_treatment(const QSqlRecord& record, Treatment& treatment)
   treatment.description = record.value(TREATMENT_DESCRIPTION).toString();
   auto equip_list_s = record.value(TREATMENT_EQUIPMENT_LIST).toString();
   auto equip_list = equip_list_s.split(";");
-  treatment.equipment_list.clear();
+  treatment.equipment.clear();
   for (auto& val : equip_list) {
-    treatment.equipment_list.push_back(val.toInt());
+    treatment.equipment.push_back(val.toInt());
   }
   auto ref_list_s = record.value(TREATMENT_CITATIONS).toString();
   auto ref_list = ref_list_s.split(";");
@@ -261,6 +261,7 @@ bool SQLite3Driver::initialize_db()
     { tables[EVENTS], sqlite3::create_events_table },
     { tables[EQUIPMENTS], sqlite3::create_equipment_table },
     { tables[INJURIES], sqlite3::create_injuries_table },
+    { tables[INJURY_SETS], sqlite3::create_injury_sets_table },
     { tables[LOCATIONS], sqlite3::create_locations_table },
     { tables[OBJECTIVES], sqlite3::create_objectives_table },
     { tables[PROPERTIES], sqlite3::create_properties_table },
@@ -505,6 +506,22 @@ int SQLite3Driver::injury_count() const
   return -1;
 }
 //------------------------------------------------------------------------------
+int SQLite3Driver::injury_set_count() const
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_injury_sets);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
+//------------------------------------------------------------------------------
 int SQLite3Driver::assessment_count() const
 {
   if (_db.isOpen()) {
@@ -607,7 +624,10 @@ int SQLite3Driver::nextID(Sqlite3Table table) const
       query.prepare(stmt.arg("equipment"));
       break;
     case INJURIES:
-      query.prepare("SELECT MAX(injury) FROM injuries");
+      query.prepare("SELECT MAX(injury_id) FROM injuries");
+      break;
+    case INJURY_SETS:
+      query.prepare(stmt.arg("injury_set"));
       break;
     case LOCATIONS:
       query.prepare(stmt.arg("loction"));
@@ -821,6 +841,28 @@ void SQLite3Driver::injuries()
   }
 }
 //------------------------------------------------------------------------------
+void SQLite3Driver::injury_sets()
+{
+  qDeleteAll(_injury_sets);
+  _injury_sets.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_injuries);
+    query.exec();
+    while (query.next()) {
+      auto set = std::make_unique<pfc::InjurySet>();
+      auto record = query.record();
+      assert(record.count() == 3);
+      assign_injury_set(record, *set);
+      _injury_sets.push_back(set.release());
+    }
+    _current_injury_set = _injury_sets.begin();
+    emit injuriesChanged();
+  }
+}
+//------------------------------------------------------------------------------
 void SQLite3Driver::assessments()
 {
   qDeleteAll(_assessments);
@@ -1013,6 +1055,17 @@ bool SQLite3Driver::next_injury(Injury* injury)
   }
   injury->assign(*(*_current_injury));
   ++_current_injury;
+
+  return true;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::next_injury_set(InjurySet* injury_set)
+{
+  if (_current_injury_set == _injury_sets.end() || _injury_sets.empty()) {
+    return false;
+  }
+  injury_set->assign(*(*_current_injury_set));
+  ++_current_injury_set;
 
   return true;
 }
@@ -1311,6 +1364,36 @@ bool SQLite3Driver::select_injury(Injury* injury) const
       while (query.next()) {
         record = query.record();
         assign_injury(record, *injury);
+        return true;
+      }
+    }
+    qWarning() << query.lastError();
+    return false;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::select_injury_set(InjurySet* set) const
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    QSqlRecord record;
+    if (set->id != -1) {
+      query.prepare(sqlite3::select_injury_set_by_id);
+      query.bindValue(":id", set->id);
+    } else if (!set->name.isEmpty()) {
+      query.prepare(sqlite3::select_injury_set_by_name);
+      query.bindValue(":name", set->name);
+    } else {
+      qWarning() << "Provided Property has no id or name one is required";
+      return false;
+    }
+    if (query.exec()) {
+      while (query.next()) {
+        record = query.record();
+        assign_injury_set(record, *set);
         return true;
       }
     }
@@ -1659,7 +1742,7 @@ bool SQLite3Driver::update_treatment(Treatment* treatment)
       query.prepare(sqlite3::insert_or_update_treatments);
     }
     QString equip_list = "";
-    for (auto& val : treatment->equipment_list) {
+    for (auto& val : treatment->equipment) {
       equip_list += val + ";";
     }
     equip_list.chop(1);
@@ -1757,6 +1840,42 @@ bool SQLite3Driver::update_injury(Injury* injury)
       return r;
     }
     injuryUpdated(injury->id);
+    return true;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::update_injury_set(InjurySet* injury_set)
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (-1 != injury_set->id) {
+      query.prepare(sqlite3::update_injury_set_by_id);
+      query.bindValue(":id", injury_set->id);
+    } else if (!injury_set->name.isEmpty()) {
+      query.prepare(sqlite3::insert_or_update_injuries);
+    }
+    QString injuries = "";
+    for (auto& val : injury_set->injuries) {
+      injuries += val + ";";
+    }
+    injuries.chop(1);
+    query.bindValue(":common_name", injury_set->name);
+    query.bindValue(":description", injury_set->description);
+    query.bindValue(":injuries", injuries);
+
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    if (-1 == injury_set->id) {
+      const auto r = select_injury_set(injury_set);
+      injurySetUpdated(injury_set->id);
+      return r;
+    }
+    injurySetUpdated(injury_set->id);
     return true;
   }
   qWarning() << "No Database connection";
@@ -2068,6 +2187,27 @@ bool SQLite3Driver::remove_injury(Injury* injury)
         return false;
       }
       injuryRemoved(injury->id);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::remove_injury_set(InjurySet* injury_set)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (select_injury_set(injury_set)) {
+      query.prepare(sqlite3::delete_injury_set_by_id);
+      query.bindValue(":id", injury_set->id);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      injurySetRemoved(injury_set->id);
       return true;
     } else {
       return false;

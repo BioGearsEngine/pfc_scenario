@@ -15,7 +15,7 @@ ColumnLayout {
   readonly property alias index : listArea.currentIndex
 
 
-  Assessment {
+  Injury {
     id : self
   }
 
@@ -47,30 +47,32 @@ ColumnLayout {
       onFirstButtonClicked :{
         if( next < root.model.count ) 
         { next = root.model.count +1}
-        self.assessment_id = -1
-        self.name = "New Assessment %1".arg(next)
-        self.description = "Description of Assessment %1".arg(next)
-        type = "binary" //vs assessment
-        avaliable_points = "1"
-        criteria = "Unknown Criteria"
+        self.injury_id = -1
+        self.medical_name = "New Injury %1".arg(next)
+        self.common_name = "New Injury %1".arg(next)
+        self.description = "Description of Injury %1".arg(next)
+        self.equipment = new Array()
+        self.citations = new Array()
 
-        while( root.backend.select_assessment(self) )
+        while( root.backend.select_injury(self) )
         { 
          next = next +1
-         self.assessment_id = -1; 
-         self.name = "New Assessment %1".arg(next);
-         self.description = "Description of Assessment %1".arg(next)
+         self.injury_id = -1; 
+         self.medical_name = "New Injury %1".arg(next);
+         self.common_name = "New Injury %1".arg(next);
+         self.description = "Description of Injury %1".arg(next)
         } 
 
-        root.backend.update_assessment(self)
+        root.backend.update_injury(self)
         root.model.insert(root.model.count,
           {
-           "id" : self.assessment_id,
-           "name": "%1".arg(self.name), 
+           "id" : self.injury_id,
+           "medical_name": "%1".arg(self.medical_name), 
+           "common_name": "%1".arg(self.common_name), 
            "description": "%1".arg(self.description) , 
-           "type": self.type,
-           "avaliable_points": self.avaliable_points,
-           "criteria": self.criteria
+           "citations": self.citaitons,
+           "equipment": self.equipment,
+
           }
         );
         ++next;
@@ -82,10 +84,10 @@ ColumnLayout {
         console.log("Reordering Currently Unsupported!")
       }
       onFourthButtonClicked : {
-        self.assessment_id = -1
+        self.injury_id = -1
         self.name = root.model.get(root.index).name
 
-        root.backend.remove_assessment(self)
+        root.backend.remove_injury(self)
         root.model.remove(root.index)
         current = Math.max(0,root.index-1)
       }
@@ -109,7 +111,7 @@ ColumnLayout {
       model : ListModel {}
 
       delegate : Rectangle {
-        id : assessment
+        id : injury
         color : 'transparent'
         border.color: "steelblue"
         height : 30
@@ -124,10 +126,10 @@ ColumnLayout {
         }
 
         Text {
-          id : assessment_title_text
-          anchors.left : assessment.left
+          id : injury_title_text
+          anchors.left : injury.left
           anchors.leftMargin : 5
-          text :  model.name
+          text :  model.medical_name
           width : 150
           font.weight: Font.Bold
           font.pointSize: 10
@@ -136,8 +138,8 @@ ColumnLayout {
         }
 
         Text {
-          id : assessment_value_text
-          anchors.left : assessment_title_text.right
+          id : injury_value_text
+          anchors.left : injury_title_text.right
           anchors.right : parent.right
           anchors.leftMargin : 10
           font.pointSize: 10
@@ -149,8 +151,8 @@ ColumnLayout {
 
         states: State {
           name : "Selected"
-          PropertyChanges{ target : assessment_title_text; enabled : true}
-          PropertyChanges{ target : assessment_value_text; enabled  : true}
+          PropertyChanges{ target : injury_title_text; enabled : true}
+          PropertyChanges{ target : injury_value_text; enabled  : true}
         }
 
         onFocusChanged: {
@@ -166,9 +168,9 @@ ColumnLayout {
       ScrollBar.vertical: ScrollBar { }
 
       Component.onCompleted : {
-        var r_count = backend.assessment_count();
-        root.backend.assessments()
-        while ( root.backend.next_assessment(self) ){
+        var r_count = backend.injury_count();
+        root.backend.injuries()
+        while ( root.backend.next_injury(self) ){
           
           var js_citations = []
           for ( var citation in self.citations ){
@@ -176,12 +178,13 @@ ColumnLayout {
           }
           listArea.model.insert(listArea.model.count,
             {
-             id = self.assessment_id,
-             name= "%1".arg(self.name), 
+             id = self.injury_id,
+             medical_name= "%1".arg(self.medical_name), 
+             common_name= "%1".arg(self.common_name), 
              description= "%1".arg(self.description) , 
-             type= self.type,
-             avaliable_points= self.avaliable_points,
-             criteria= self.criteria
+             equipment= self.equipment,
+             citaitons= self.citations,
+
             });
         }
       }

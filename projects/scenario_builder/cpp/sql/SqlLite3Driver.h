@@ -37,6 +37,7 @@ public:
     EVENTS,
     EQUIPMENTS,
     INJURIES,
+    INJURY_SETS,
     LOCATIONS,
     OBJECTIVES,
     PROPERTIES,
@@ -72,6 +73,7 @@ public:
   Q_INVOKABLE int treatment_count() const;
   Q_INVOKABLE int equipment_count() const;
   Q_INVOKABLE int injury_count() const;
+  Q_INVOKABLE int injury_set_count() const;
   Q_INVOKABLE int assessment_count() const;
   Q_INVOKABLE int location_count() const;
   Q_INVOKABLE int role_count() const;
@@ -88,6 +90,7 @@ public:
   Q_INVOKABLE void treatments();
   Q_INVOKABLE void equipments();
   Q_INVOKABLE void injuries();
+  Q_INVOKABLE void injury_sets();
   Q_INVOKABLE void assessments();
   Q_INVOKABLE void locations();
   Q_INVOKABLE void roles();
@@ -102,6 +105,7 @@ public:
   Q_INVOKABLE bool next_treatment(Treatment*);
   Q_INVOKABLE bool next_equipment(Equipment*);
   Q_INVOKABLE bool next_injury(Injury*);
+  Q_INVOKABLE bool next_injury_set(InjurySet*);
   Q_INVOKABLE bool next_assessment(Assessment*);
   Q_INVOKABLE bool next_location(Location*);
   Q_INVOKABLE bool next_role(Role*);
@@ -116,6 +120,7 @@ public:
   Q_INVOKABLE bool select_treatment(Treatment*) const;
   Q_INVOKABLE bool select_equipment(Equipment*) const;
   Q_INVOKABLE bool select_injury(Injury*) const;
+  Q_INVOKABLE bool select_injury_set(InjurySet*) const;
   Q_INVOKABLE bool select_assessment(Assessment*) const;
   Q_INVOKABLE bool select_location(Location*) const;
   Q_INVOKABLE bool select_role(Role*) const;
@@ -135,6 +140,7 @@ public:
   Q_INVOKABLE bool update_treatment(Treatment*);
   Q_INVOKABLE bool update_equipment(Equipment*);
   Q_INVOKABLE bool update_injury(Injury*);
+  Q_INVOKABLE bool update_injury_set(InjurySet*);
   Q_INVOKABLE bool update_assessment(Assessment*);
 
   Q_INVOKABLE bool remove_author(Author*);
@@ -145,6 +151,7 @@ public:
   Q_INVOKABLE bool remove_treatment(Treatment*);
   Q_INVOKABLE bool remove_equipment(Equipment*);
   Q_INVOKABLE bool remove_injury(Injury*);
+  Q_INVOKABLE bool remove_injury_set(InjurySet*);
   Q_INVOKABLE bool remove_assessment(Assessment*);
   Q_INVOKABLE bool remove_location(Location*);
   Q_INVOKABLE bool remove_role(Role*);
@@ -172,6 +179,7 @@ signals:
   void eventsChanged();
   void equipmentsChanged();
   void injuriesChanged();
+  void injurySetsChanged();
   void locationsChanged();
   void objectivesChanged();
   void propertiesChanged();
@@ -186,6 +194,7 @@ signals:
   void eventRemoved(int index);
   void equipmentRemoved(int index);
   void injuryRemoved(int index);
+  void injurySetRemoved(int index);
   void locationRemoved(int index);
   void objectiveRemoved(int index);
   void propertyRemoved(int index);
@@ -200,6 +209,7 @@ signals:
   void eventUpdated(int index);
   void equipmentUpdated(int index);
   void injuryUpdated(int index);
+  void injurySetUpdated(int index);
   void locationUpdated(int index);
   void objectiveUpdated(int index);
   void propertyUpdated(int index);
@@ -226,6 +236,7 @@ private:
   QList<Treatment*> _treatments;
   QList<Equipment*> _equipments;
   QList<Injury*> _injuries;
+  QList<InjurySet*> _injury_sets;
   QList<Assessment*> _assessments;
   QList<Location*> _locations;
   QList<Role*> _roles;
@@ -240,6 +251,7 @@ private:
   QList<Treatment*>::iterator _current_treatment;
   QList<Equipment*>::iterator _current_equipment;
   QList<Injury*>::iterator _current_injury;
+  QList<InjurySet*>::iterator _current_injury_set;
   QList<Assessment*>::iterator _current_assessment;
   QList<Location*>::iterator _current_location;
   QList<Role*>::iterator _current_role;

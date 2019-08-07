@@ -93,7 +93,7 @@ Rectangle {
         Layout.fillWidth : true
         backend : root.backend
       }
-      LP_Injuries {
+      LP_InjurySets {
         id : injurySets
         Layout.fillHeight : true
         Layout.fillWidth : true
