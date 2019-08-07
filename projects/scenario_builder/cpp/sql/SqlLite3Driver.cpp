@@ -24,6 +24,18 @@ specific language governing permissions and limitations under the License.
 #include "sqlite3ext.h"
 
 namespace pfc {
+//------------------------------------------------------------------------------
+//                      Record Assignments
+//------------------------------------------------------------------------------
+inline void assign_assessment(const QSqlRecord& record, Assessment& assessment)
+{
+  assessment.id = record.value(ASSESSMENT_ID).toInt();
+  assessment.name = record.value(ASSESSMENT_NAME).toString();
+  assessment.description = record.value(ASSESSMENT_DESCRIPTION).toString();
+  assessment.type = record.value(ASSESSMENT_TYPE).toString();
+  assessment.available_points = record.value(ASSESSMENT_AVAILABLE_POINTS).toInt();
+  assessment.criteria = record.value(ASSESSMENT_CRITERIA).toString();
+}
 //------------------------------------------------------------------ASSIGN_START
 inline void assign_author(const QSqlRecord& record, Author& author)
 {
@@ -53,18 +65,74 @@ inline void assign_author(const QSqlRecord& record, Author& author)
   author.organization = record.value(AUTHOR_ORGANIZATION).toString();
 }
 //------------------------------------------------------------------------------
-inline void assign_property(const QSqlRecord& record, Property& property)
+inline void assign_citation(const QSqlRecord& record, Citation& citation)
 {
-  property.id = record.value(PROPERTY_ID).toInt();
-  property.name = record.value(PROPERTY_NAME).toString();
-  property.value = record.value(PROPERTY_VALUE).toString();
+  citation.id = record.value(CITATION_ID).toInt();
+  citation.key = record.value(CITATION_KEY).toString();
+  citation.title = record.value(CITATION_TITLE).toString();
+  auto auth_list_s = record.value(CITATION_AUTHORS).toString();
+  auto auth_list = auth_list_s.split(";");
+  citation.authors.clear();
+  for (auto& val : auth_list) {
+    citation.authors.push_back(val.toInt());
+  }
+  citation.year = record.value(CITATION_YEAR).toString();
+  citation.publisher = record.value(CITATION_PUBLISHER).toString();
 }
 //------------------------------------------------------------------------------
-inline void assign_restriction(const QSqlRecord& record, Restriction& restriction)
+inline void assign_equipment(const QSqlRecord& record, Equipment& equipment)
 {
-  restriction.id = record.value(RESTRICTION_ID).toInt();
-  restriction.name = record.value(RESTRICTION_NAME).toString();
-  restriction.value = record.value(RESTRICTION_VALUE).toString();
+  equipment.id = record.value(EQUIPMENT_ID).toInt();
+  equipment.name = record.value(EQUIPMENT_NAME).toString();
+  equipment.description = record.value(EQUIPMENT_DESCRIPTION).toString();
+  
+  auto ref_list_s = record.value(EQUIPMENT_CITATIONS).toString();
+  auto ref_list = ref_list_s.split(";");
+  equipment.citations.clear();
+  for (auto& val : ref_list) {
+    equipment.citations.push_back(val.toInt());
+  }
+}
+//------------------------------------------------------------------------------
+inline void assign_event(QSqlRecord& record, Event& event)
+{
+  event.id = record.value(EVENT_ID).toInt();
+}
+//------------------------------------------------------------------------------
+inline void assign_location(const QSqlRecord& record, Location& location)
+{
+  location.id = record.value(LOCATION_ID).toInt();
+  location.name = record.value(LOCATION_NAME).toString();
+  location.scene_name = record.value(LOCATION_SCENE_NAME).toString();
+  location.time_of_day = record.value(LOCATION_TIME_OF_DAY).toString();
+  location.environment = record.value(LOCATION_ENVIRONMENT).toString();
+}
+//------------------------------------------------------------------------------
+inline void assign_injury(const QSqlRecord& record, Injury& injury)
+{
+  injury.id = record.value(INJURY_ID).toInt();
+  injury.medical_name = record.value(INJURY_MEDICAL_NAME).toString();
+  injury.common_name = record.value(INJURY_COMMON_NAME).toString();
+  injury.description = record.value(INJURY_DESCRIPTION).toString();
+  auto ref_list_s = record.value(INJURY_CITATIONS).toString();
+  auto ref_list = ref_list_s.split(";");
+  injury.citations.clear();
+  for (auto& val : ref_list) {
+    injury.citations.push_back(val.toInt());
+  }
+}
+//------------------------------------------------------------------------------
+inline void assign_injury_set(const QSqlRecord& record, InjurySet& injury)
+{
+  injury.id = record.value(INJURY_SET_ID).toInt();
+  injury.name = record.value(INJURY_SET_NAME).toString();
+  injury.description = record.value(INJURY_SET_DESCRIPTION).toString();
+  auto ref_list_s = record.value(INJURY_SET_INJURIES).toString();
+  auto ref_list = ref_list_s.split(";");
+  injury.injury_list.clear();
+  for (auto& val : ref_list) {
+    injury.injury_list.push_back(val.toInt());
+  }
 }
 //------------------------------------------------------------------------------
 inline void assign_objective(const QSqlRecord& record, Objective& objective)
@@ -82,19 +150,30 @@ inline void assign_objective(const QSqlRecord& record, Objective& objective)
   }
 }
 //------------------------------------------------------------------------------
-inline void assign_citation(const QSqlRecord& record, Citation& citation)
+inline void assign_prop(QSqlRecord& record, Prop& prop)
 {
-  citation.id = record.value(CITATION_ID).toInt();
-  citation.key = record.value(CITATION_KEY).toString();
-  citation.title = record.value(CITATION_TITLE).toString();
-  auto auth_list_s = record.value(CITATION_AUTHORS).toString();
-  auto auth_list = auth_list_s.split(";");
-  citation.authors.clear();
-  for (auto& val : auth_list) {
-    citation.authors.push_back(val);
-  }
-  citation.year = record.value(CITATION_YEAR).toString();
-  citation.publisher = record.value(CITATION_PUBLISHER).toString();
+  prop.id = record.value(PROP_ID).toInt();
+  prop.equipment = record.value(PROP_EQUIPMENT).toString();
+}
+//------------------------------------------------------------------------------
+inline void assign_property(const QSqlRecord& record, Property& property)
+{
+  property.id = record.value(PROPERTY_ID).toInt();
+  property.name = record.value(PROPERTY_NAME).toString();
+  property.value = record.value(PROPERTY_VALUE).toString();
+}
+//------------------------------------------------------------------------------
+inline void assign_role(QSqlRecord& record, Role& role)
+{
+  role.id = record.value(ROLE_ID).toInt();
+  role.description = record.value(ROLE_DESCRIPTION).toString();
+}
+//------------------------------------------------------------------------------
+inline void assign_restriction(const QSqlRecord& record, Restriction& restriction)
+{
+  restriction.id = record.value(RESTRICTION_ID).toInt();
+  restriction.name = record.value(RESTRICTION_NAME).toString();
+  restriction.value = record.value(RESTRICTION_VALUE).toString();
 }
 //------------------------------------------------------------------------------
 inline void assign_treatment(const QSqlRecord& record, Treatment& treatment)
@@ -107,7 +186,7 @@ inline void assign_treatment(const QSqlRecord& record, Treatment& treatment)
   auto equip_list = equip_list_s.split(";");
   treatment.equipment_list.clear();
   for (auto& val : equip_list) {
-    treatment.equipment_list.push_back(val);
+    treatment.equipment_list.push_back(val.toInt());
   }
   auto ref_list_s = record.value(TREATMENT_CITATIONS).toString();
   auto ref_list = ref_list_s.split(";");
@@ -117,75 +196,8 @@ inline void assign_treatment(const QSqlRecord& record, Treatment& treatment)
   }
 }
 //------------------------------------------------------------------------------
-inline void assign_equipment(const QSqlRecord& record, Equipment& equipment)
-{
-  equipment.id = record.value(EQUIPMENT_ID).toInt();
-  equipment.name = record.value(EQUIPMENT_NAME).toString();
-  equipment.description = record.value(EQUIPMENT_DESCRIPTION).toString();
-  auto equip_list_s = record.value(EQUIPMENT_EQUIPMENT_LIST).toString();
-  auto equip_list = equip_list_s.split(";");
-  equipment.equipment_list.clear();
-  for (auto& val : equip_list) {
-    equipment.equipment_list.push_back(val);
-  }
-  auto ref_list_s = record.value(EQUIPMENT_CITATIONS).toString();
-  auto ref_list = ref_list_s.split(";");
-  equipment.citations.clear();
-  for (auto& val : ref_list) {
-    equipment.citations.push_back(val.toInt());
-  }
-}
+//                      SQLiteDriver Functions
 //------------------------------------------------------------------------------
-inline void assign_injury(const QSqlRecord& record, Injury& injury)
-{
-  injury.id = record.value(INJURY_ID).toInt();
-  injury.medical_name = record.value(INJURY_MEDICAL_NAME).toString();
-  injury.common_name = record.value(INJURY_COMMON_NAME).toString();
-  injury.description = record.value(INJURY_DESCRIPTION).toString();
-  auto ref_list_s = record.value(INJURY_CITATIONS).toString();
-  auto ref_list = ref_list_s.split(";");
-  injury.citations.clear();
-  for (auto& val : ref_list) {
-    injury.citations.push_back(val.toInt());
-  }
-}
-//------------------------------------------------------------------------------
-inline void assign_assessment(const QSqlRecord& record, Assessment& assessment)
-{
-  assessment.id = record.value(ASSESSMENT_ID).toInt();
-  assessment.name = record.value(ASSESSMENT_NAME).toString();
-  assessment.description = record.value(ASSESSMENT_DESCRIPTION).toString();
-  assessment.type = record.value(ASSESSMENT_TYPE).toString();
-  assessment.available_points = record.value(ASSESSMENT_AVAILABLE_POINTS).toInt();
-  assessment.criteria = record.value(ASSESSMENT_CRITERIA).toString();
-}
-//------------------------------------------------------------------------------
-inline void assign_location(const QSqlRecord& record, Location& location)
-{
-  location.id = record.value(LOCATION_ID).toInt();
-  location.name = record.value(LOCATION_NAME).toString();
-  location.scene_name = record.value(LOCATION_SCENE_NAME).toString();
-  location.time_of_day = record.value(LOCATION_TIME_OF_DAY).toString();
-  location.environment = record.value(LOCATION_ENVIRONMENT).toString();
-}
-//------------------------------------------------------------------------------
-inline void assign_role(QSqlRecord& record, Role& role)
-{
-  role.id = record.value(ROLE_ID).toInt();
-  role.description = record.value(ROLE_DESCRIPTION).toString();
-}
-//------------------------------------------------------------------------------
-inline void assign_prop(QSqlRecord& record, Prop& prop)
-{
-  prop.id = record.value(PROP_ID).toInt();
-  prop.equipment = record.value(PROP_EQUIPMENT).toString();
-}
-//------------------------------------------------------------------------------
-inline void assign_event(QSqlRecord& record, Event& event)
-{
-  event.id = record.value(EVENT_ID).toInt();
-}
-//--------------------------------------------------------------------ASSIGN_END
 SQLite3Driver::SQLite3Driver(QObject* parent)
   : QObject(parent)
   , _db(QSqlDatabase::database())
@@ -1687,11 +1699,7 @@ bool SQLite3Driver::update_equipment(Equipment* equipment)
     } else if (!equipment->name.isEmpty()) {
       query.prepare(sqlite3::insert_or_update_equipments);
     }
-    QString equip_list = "";
-    for (auto& val : equipment->equipment_list) {
-      equip_list += val + ";";
-    }
-    equip_list.chop(1);
+
     QString cite_list = "";
     for (auto& val : equipment->citations) {
       cite_list += val + ";";
@@ -1699,6 +1707,7 @@ bool SQLite3Driver::update_equipment(Equipment* equipment)
     cite_list.chop(1);
     query.bindValue(":name", equipment->name);
     query.bindValue(":description", equipment->description);
+    query.bindValue(":citations", cite_list);
 
     if (!query.exec()) {
       qWarning() << query.lastError();

@@ -168,7 +168,6 @@ inline namespace sqlite3 {
     EQUIPMENT_ID,
     EQUIPMENT_NAME,
     EQUIPMENT_DESCRIPTION,
-    EQUIPMENT_EQUIPMENT_LIST,
     EQUIPMENT_CITATIONS,
   };
 
@@ -190,7 +189,6 @@ inline namespace sqlite3 {
     = R"( UPDATE  equipments
           SET name = :name
               , description = :description
-              , equipment_list = :equipment_list
               , citations = :citations
           WHERE equipment_id = :id;
          )";
@@ -202,12 +200,11 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM equipments WHERE name = :name )";
   constexpr auto insert_or_update_equipments
     = R"( INSERT INTO equipments
-          (medical_name,common_name,description,equipment_list,citations)
-          VALUES (:name, :description, :equipment_list, :citations)
+          (medical_name,common_name,description,citations)
+          VALUES (:name, :description, :citations)
           ON CONFLICT (name)
           DO UPDATE SET name = excluded.name
                         , description = excluded.description
-                        , equipment_list = excluded.equipment_list
                         , citations = excluded.citations
           ;         
           )";
@@ -299,7 +296,52 @@ inline namespace sqlite3 {
           ;          
           )";
   
+  //---------------------- Injury Set STATMENTS ------------------------
+  enum INJURY_SET_COLUMNS {
+    INJURY_SET_ID,
+    INJURY_SET_NAME,
+    INJURY_SET_DESCRIPTION,
+    INJURY_SET_INJURIES,
+  };
 
+  constexpr auto create_injury_sets_table = R"(
+  CREATE TABLE IF NOT EXISTS injury_sets ( 
+    injury_set_id INTEGER PRIMARY KEY,
+    name Varchar(64) NOT NULL UNIQUE,
+    description TEXT,
+    injuries TEXT,
+  );
+  )";
+
+  constexpr auto drop_all_injury_sets = R"( DELETE FROM injury_sets; )";
+  constexpr auto count_injury_sets = R"( SELECT COUNT(injury_set_id) FROM injury_sets; )";
+  constexpr auto select_all_injury_sets = R"( SELECT * FROM injury_sets; )";
+
+  constexpr auto select_injury_set_by_id
+    = R"( SELECT * FROM injury_sets WHERE injury_set_id = :id ; )";
+  constexpr auto update_injury_set_by_id
+    = R"( UPDATE  injury_sets
+          SET name = :name
+              , description = :description
+              , injuries = :injuries;
+          WHERE injury_set_id = :id;
+         )";
+  constexpr auto delete_injury_set_by_id
+    = R"( DELETE FROM injury_sets WHERE injury_set_id = :id; )";
+  constexpr auto delete_injury_set_by_name
+    = R"( DELETE FROM injury_sets WHERE name = :name; )";
+  constexpr auto select_injury_set_by_name
+    = R"( SELECT * FROM injury_sets WHERE name = :name; )";
+  constexpr auto insert_or_update_injury_sets
+    = R"( INSERT INTO injury_sets
+          (name,description,injuries)
+          VALUES (:medical_name, :common_name, :description, :citations)
+          ON CONFLICT (medical_name)
+          DO UPDATE SET name = excluded.name
+                        , description = excluded.description
+                        , injuries = excluded.injuries
+          ;
+          )";
   //---------------------- LOCATION STATMENTS ------------------------
   enum LOCATION_COLUMNS {
     LOCATION_ID,

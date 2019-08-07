@@ -13,7 +13,6 @@ ColumnLayout {
   property SQLBackend backend
   readonly property alias model : listArea.model 
   readonly property alias index : listArea.currentIndex
-  //TAB:SYLLABUS_TAB:OBJECTIVES_LEFTWINDOW
 
   Objective {
     id : self
@@ -71,10 +70,10 @@ ColumnLayout {
         ++next;
       }
       onSecondButtonClicked :{
-        console.log("secondButtonClicked!")
+        console.log("Reordering Currently Unsupported!")
       }
       onThirdButtonClicked : {
-        console.log("thirdButtonClicked!")
+        console.log("Reordering Currently Unsupported!")
       }
       onFourthButtonClicked : {
         self.objective_id = -1

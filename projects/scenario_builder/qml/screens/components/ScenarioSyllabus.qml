@@ -28,14 +28,20 @@ GridLayout {
     backend : root.backend
 
     currentIndex : syllabus_leftPane.currentIndex
-    objectiveModel    : syllabus_leftPane.objectiveModel
-    currentAssessment : syllabus_leftPane.currentAssessment
-    currentInjury     : syllabus_leftPane.currentInjury
-    currentInjurySet  : syllabus_leftPane.currentInjurySet
-    currentTreatment  : syllabus_leftPane.currentTreatment
-    currentEquipment  : syllabus_leftPane.currentEquipment
+    
+    objectiveModel  : syllabus_leftPane.objectiveModel
+    assessmentModel : syllabus_leftPane.assessmentModel
+    injuryModel     : syllabus_leftPane.injuryModel
+    injurySetModel  : syllabus_leftPane.injurySetModel
+    treatmentModel  : syllabus_leftPane.treatmentModel
+    equipmentModel  : syllabus_leftPane.equipmentModel
 
-    objectiveIndex    : syllabus_leftPane.objectiveIndex
+    objectiveIndex  : syllabus_leftPane.objectiveIndex
+    assessmentIndex : syllabus_leftPane.assessmentIndex
+    injuryIndex     : syllabus_leftPane.injuryIndex
+    injurySetIndex  : syllabus_leftPane.injurySetIndex
+    treatmentIndex  : syllabus_leftPane.treatmentIndex
+    equipmentIndex  : syllabus_leftPane.equipmentIndex
 
     Layout.fillWidth: true
     Layout.fillHeight: true

@@ -11,14 +11,19 @@ Rectangle {
   id: root
   property alias currentIndex : syllabus_tabs.currentIndex
   property alias objectiveModel  : objectives.model
-  property alias currentAssessment : assessments.model
-  property alias currentInjury     : injuries.model
-  property alias currentInjurySet  : injurySets.model
-  property alias currentTreatment  : treatments.model
-  property alias currentEquipment  : equipment.model
+  property alias assessmentModel : assessments.model
+  property alias injuryModel     : injuries.model
+  property alias injurySetModel  : injurySets.model
+  property alias treatmentModel  : treatments.model
+  property alias equipmentModel  : equipment.model
 
   property alias objectiveIndex : objectives.index
-  
+  property alias assessmentIndex: assessments.index
+  property alias injuryIndex    : injuries.index
+  property alias injurySetIndex : injurySets.index
+  property alias treatmentIndex : treatments.index
+  property alias equipmentIndex : equipment.index
+
   property SQLBackend backend
   property ListElement modelData
 

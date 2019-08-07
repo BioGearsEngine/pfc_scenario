@@ -173,13 +173,11 @@ struct Equipment : public QObject {
   Q_PROPERTY(int equipment_id MEMBER id)
   Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString description MEMBER description)
-  Q_PROPERTY(QList<QString> equipment_list MEMBER equipment_list)
   Q_PROPERTY(QList<int> citations MEMBER citations)
 public:
   int32_t id = -1;
   QString name = "";
   QString description = "";
-  QList<QString> equipment_list;
   QList<int> citations;
   Equipment(QObject* parent = nullptr)
     : QObject(parent)
@@ -196,7 +194,6 @@ public:
     return id == rhs.id
       && name == rhs.name
       && description == rhs.description
-      && equipment_list == rhs.equipment_list
       && citations == rhs.citations;
   }
   bool operator!=(const Equipment& rhs) const
@@ -208,7 +205,6 @@ public:
     id = rhs.id;
     name = rhs.name;
     description = rhs.description;
-    equipment_list = rhs.equipment_list;
     citations = rhs.citations;
   }
 };
@@ -219,14 +215,14 @@ struct Injury : public QObject {
   Q_PROPERTY(QString medical_name MEMBER medical_name)
   Q_PROPERTY(QString common_name MEMBER common_name)
   Q_PROPERTY(QString description MEMBER description)
-  Q_PROPERTY(QList<QString> equipment_list MEMBER equipment_list)
+  Q_PROPERTY(QList<int> equipment_list MEMBER equipment_list)
   Q_PROPERTY(QList<int> citations MEMBER citations)
 public:
   int32_t id = -1;
   QString medical_name = "";
   QString common_name = "";
   QString description = "";
-  QList<QString> equipment_list;
+  QList<int> equipment_list;
   QList<int> citations;
   Injury(QObject* parent = nullptr)
     : QObject(parent)
@@ -262,6 +258,48 @@ public:
   }
 };
 //----End Injury
+struct InjurySet : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int injury_id MEMBER id)
+  Q_PROPERTY(QString name MEMBER name)
+  Q_PROPERTY(QString description MEMBER description)
+  Q_PROPERTY(QList<int> injury_list MEMBER injury_list)
+public:
+  int32_t id = -1;
+  QString name = "";
+  QString description = "";
+  QList<int> injury_list;
+
+  InjurySet(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  InjurySet(const InjurySet&) = delete;
+  InjurySet(InjurySet&&) = delete;
+  InjurySet& operator=(const InjurySet&) = delete;
+  InjurySet& operator=(InjurySet&&) = delete;
+  virtual ~InjurySet() = default;
+
+  bool operator==(const InjurySet& rhs) const
+  {
+    return id == rhs.id
+      && name == rhs.name
+      && description == rhs.description
+      && injury_list == rhs.injury_list;
+  }
+  bool operator!=(const InjurySet& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const InjurySet& rhs)
+  {
+    id = rhs.id;
+    name = rhs.name;
+    description = rhs.description;
+    injury_list = rhs.injury_list;
+  }
+};
+//----End Injury Set
 struct Location : public QObject {
   Q_OBJECT
   Q_PROPERTY(int location_id MEMBER id)
@@ -430,14 +468,14 @@ struct Citation : public QObject {
   Q_PROPERTY(int citation_id MEMBER id)
   Q_PROPERTY(QString key MEMBER key)
   Q_PROPERTY(QString title MEMBER title)
-  Q_PROPERTY(QList<QString> authors MEMBER authors)
+  Q_PROPERTY(QList<int> authors MEMBER authors)
   Q_PROPERTY(QString year MEMBER year)
   Q_PROPERTY(QString publisher MEMBER publisher)
 public:
   int32_t id = -1;
   QString key = "";
   QString title = "";
-  QList<QString> authors;
+  QList<int> authors;
   QString year = "";
   QString publisher = "";
   Citation(QObject* parent = nullptr)
@@ -552,14 +590,14 @@ struct Treatment : public QObject {
   Q_PROPERTY(QString medical_name MEMBER medical_name)
   Q_PROPERTY(QString common_name MEMBER common_name)
   Q_PROPERTY(QString description MEMBER description)
-  Q_PROPERTY(QList<QString> equipment_list MEMBER equipment_list)
+  Q_PROPERTY(QList<int> equipment_list MEMBER equipment_list)
   Q_PROPERTY(QList<int> citations MEMBER citations)
 public:
   int32_t id = -1;
   QString medical_name = "";
   QString common_name = "";
   QString description = "";
-  QList<QString> equipment_list;
+  QList<int> equipment_list;
   QList<int> citations;
   Treatment(QObject* parent = nullptr)
     : QObject(parent)

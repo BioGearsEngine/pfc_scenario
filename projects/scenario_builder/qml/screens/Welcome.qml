@@ -10,17 +10,19 @@ Page {
     signal recentClicked(string path)
 
     Rectangle {
-        id: mainArea
+        id  : mainArea
         color : "transparent"
         border.color : "steelblue"
         anchors.centerIn : parent
         anchors.top : parent.top
         anchors.bottom : parent.bottom
-        width : childrenRect.width + 50
-        height: childrenRect.height +75
+        width : 450
+        height: 550 
 
         ColumnLayout {
             Layout.alignment : Qt.AlignCenter
+            Layout.preferredWidth : 400
+            Layout.preferredHeight :300
             anchors.centerIn : parent
             spacing : 15
             RowLayout {
