@@ -81,7 +81,7 @@ ColumnLayout {
 
         root.backend.remove_objective(self)
         root.model.remove(root.index)
-        current = Math.max(0,root.index-1)
+        listArea.currentIndex = Math.max(0,root.index-1)
       }
     }
 

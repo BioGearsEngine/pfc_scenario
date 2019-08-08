@@ -91,6 +91,7 @@ ColumnLayout  {
         console.log("RP_Objective Removed a Reference")
       }
     }
+    
     onIndexChanged : {
       var values = model.get(index)
       if(values) {

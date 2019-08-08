@@ -32,7 +32,7 @@ ListEntry {
      MouseArea {
        anchors.fill: parent
        onClicked: {
-        currentIndex = index
+        root.current = index
        }
      }
 

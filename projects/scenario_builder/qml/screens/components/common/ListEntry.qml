@@ -75,9 +75,8 @@ Rectangle {
 
       highlight: Rectangle {
           color: '#1111110F'
-          anchors.left : parent.left
-          anchors.right : parent.right
-          anchors.margins: 5
+          Layout.fillWidth : true
+          Layout.margins: 5
       }
 
       ScrollBar.vertical: ScrollBar { }
