@@ -307,7 +307,7 @@ inline namespace sqlite3 {
     injury_set_id INTEGER PRIMARY KEY,
     name Varchar(64) NOT NULL UNIQUE,
     description TEXT,
-    injuries TEXT,
+    injuries TEXT
   );
   )";
 
