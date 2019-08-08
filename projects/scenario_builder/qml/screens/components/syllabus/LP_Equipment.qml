@@ -84,7 +84,7 @@ ColumnLayout {
 
         root.backend.remove_equipment(self)
         root.model.remove(root.index)
-        current = Math.max(0,root.index-1)
+        listArea.currentIndex = Math.max(0,root.index-1)
       }
     }
 
@@ -173,10 +173,10 @@ ColumnLayout {
           }
           listArea.model.insert(listArea.model.count,
             {
-             id = self.equipment_id,
-             name= "%1".arg(self.name), 
-             description= "%1".arg(self.description) , 
-             citaitons= self.citations,
+             id : self.equipment_id,
+             name: "%1".arg(self.name), 
+             description: "%1".arg(self.description) , 
+             citaitons: self.citations,
 
             });
         }

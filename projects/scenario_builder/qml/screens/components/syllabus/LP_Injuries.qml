@@ -85,11 +85,11 @@ ColumnLayout {
       }
       onFourthButtonClicked : {
         self.injury_id = -1
-        self.name = root.model.get(root.index).name
+        self.medical_name = root.model.get(root.index).medical_name
 
         root.backend.remove_injury(self)
         root.model.remove(root.index)
-        current = Math.max(0,root.index-1)
+        listArea.currentIndex = Math.max(0,root.index-1)
       }
     }
 
@@ -178,12 +178,12 @@ ColumnLayout {
           }
           listArea.model.insert(listArea.model.count,
             {
-             id = self.injury_id,
-             medical_name= "%1".arg(self.medical_name), 
-             common_name= "%1".arg(self.common_name), 
-             description= "%1".arg(self.description) , 
-             equipment= self.equipment,
-             citaitons= self.citations,
+             id : self.injury_id,
+             medical_name: "%1".arg(self.medical_name), 
+             common_name: "%1".arg(self.common_name), 
+             description: "%1".arg(self.description) , 
+             equipment: self.equipment,
+             citaitons: self.citations,
 
             });
         }

@@ -9,7 +9,7 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 
 Flickable {
   id: root  
-  property alias currentIndex : stack.currentIndex
+  property alias currentIndex    : stack.currentIndex
 
   property alias objectiveModel  : objectives.model
   property alias assessmentModel : assessments.model
@@ -18,7 +18,7 @@ Flickable {
   property alias treatmentModel  : treatments.model
   property alias equipmentModel  : equipment.model
 
-  property alias objectiveIndex : objectives.index
+  property alias objectiveIndex  : objectives.index
   property alias assessmentIndex : assessments.index
   property alias injuryIndex     : injuries.index
   property alias injurySetIndex  : injurySets.index

@@ -305,7 +305,7 @@ inline namespace sqlite3 {
   constexpr auto create_injury_sets_table = R"(
   CREATE TABLE IF NOT EXISTS injury_sets ( 
     injury_set_id INTEGER PRIMARY KEY,
-    name Varchar(64) NOT NULL UNIQUE,
+     Varchar(64) NOT NULL UNIQUE,
     description TEXT,
     injuries TEXT
   );
@@ -333,8 +333,8 @@ inline namespace sqlite3 {
   constexpr auto insert_or_update_injury_sets
     = R"( INSERT INTO injury_sets
           (name,description,injuries)
-          VALUES (:medical_name, :common_name, :description, :citations)
-          ON CONFLICT (medical_name)
+          VALUES (:name, :description, :injuries)
+          ON CONFLICT (name)
           DO UPDATE SET name = excluded.name
                         , description = excluded.description
                         , injuries = excluded.injuries

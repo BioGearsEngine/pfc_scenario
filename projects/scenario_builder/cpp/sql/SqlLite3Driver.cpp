@@ -1884,14 +1884,14 @@ bool SQLite3Driver::update_injury_set(InjurySet* injury_set)
       query.prepare(sqlite3::update_injury_set_by_id);
       query.bindValue(":id", injury_set->id);
     } else if (!injury_set->name.isEmpty()) {
-      query.prepare(sqlite3::insert_or_update_injuries);
+      query.prepare(sqlite3::insert_or_update_injury_sets);
     }
     QString injuries = "";
     for (auto& val : injury_set->injuries) {
       injuries += val + ";";
     }
     injuries.chop(1);
-    query.bindValue(":common_name", injury_set->name);
+    query.bindValue(":name", injury_set->name);
     query.bindValue(":description", injury_set->description);
     query.bindValue(":injuries", injuries);
 
