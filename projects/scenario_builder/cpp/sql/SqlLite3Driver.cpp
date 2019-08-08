@@ -99,6 +99,16 @@ inline void assign_equipment(const QSqlRecord& record, Equipment& equipment)
 inline void assign_event(QSqlRecord& record, Event& event)
 {
   event.id = record.value(EVENT_ID).toInt();
+  event.name = record.value(EVENT_NAME).toString();
+  event.location = record.value(EVENT_LOCATION).toInt();
+  event.actor = record.value(EVENT_ACTOR).toInt();
+  event.description = record.value(EVENT_DESCRIPTION).toString();
+  auto equip_list_s = record.value(EVENT_EQUIPMENT).toString();
+  auto equip_list = equip_list_s.split(";");
+  event.equipment.clear();
+  for (auto& val : equip_list) {
+    event.equipment.push_back(val);
+  }
 }
 //------------------------------------------------------------------------------
 inline void assign_location(const QSqlRecord& record, Location& location)
@@ -1554,6 +1564,9 @@ bool SQLite3Driver::select_event(Event* event) const
     if (event->id != -1) {
       query.prepare(sqlite3::select_event_by_id);
       query.bindValue(":id", event->id);
+    } else if (!event->name.isEmpty()) {
+      query.prepare(sqlite3::select_event_by_name);
+      query.bindValue(":name",event->name);
     } else {
       qWarning() << "Provided Property has no id or name one is required";
       return false;
@@ -1778,6 +1791,8 @@ bool SQLite3Driver::update_treatment(Treatment* treatment)
       cite_list += val + ";";
     }
     cite_list.chop(1);
+    query.bindValue(":citations", cite_list);
+    query.bindValue(":equipment", equip_list);
     query.bindValue(":medical_name", treatment->medical_name);
     query.bindValue(":common_name", treatment->common_name);
     query.bindValue(":description", treatment->description);
@@ -1855,6 +1870,7 @@ bool SQLite3Driver::update_injury(Injury* injury)
       cite_list += val + ";";
     }
     cite_list.chop(1);
+    query.bindValue(":citations", cite_list);
     query.bindValue(":medical_name", injury->medical_name);
     query.bindValue(":common_name", injury->common_name);
     query.bindValue(":description", injury->description);
@@ -2043,9 +2059,20 @@ bool SQLite3Driver::update_event(Event* event)
     if (-1 != event->id) {
       query.prepare(sqlite3::update_event_by_id);
       query.bindValue(":id", event->id);
-    } else {
+    } else if (!event->name.isEmpty()) {
       query.prepare(sqlite3::insert_or_update_events);
     }
+    QString equip_list = "";
+    for (auto& val : event->equipment) {
+      equip_list += val + ";";
+    }
+    equip_list.chop(1);
+    query.bindValue(":equipment", equip_list);
+    query.bindValue(":name", event->name);
+    query.bindValue(":description", event->description);
+    query.bindValue(":location", event->location);
+    query.bindValue(":actor",event->actor);
+
 
     if (!query.exec()) {
       qWarning() << query.lastError();

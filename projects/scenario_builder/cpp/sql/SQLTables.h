@@ -141,8 +141,18 @@ public:
 struct Event : public QObject {
   Q_OBJECT
   Q_PROPERTY(int prop_id MEMBER id)
+  Q_PROPERTY(QString name MEMBER name)
+  Q_PROPERTY(int location MEMBER location)
+  Q_PROPERTY(int actor MEMBER actor)
+  Q_PROPERTY(QList<QString> equipment MEMBER equipment)
+  Q_PROPERTY(QString description MEMBER description)
 public:
   int32_t id = -1;
+  QString name = "";
+  int32_t location = -1;
+  int32_t actor = -1;
+  QList<QString> equipment;
+  QString description = "";
 
   Event(QObject* parent = nullptr)
     : QObject(parent)
@@ -156,7 +166,12 @@ public:
 
   bool operator==(const Event& rhs) const
   {
-    return id == rhs.id;
+    return id == rhs.id
+      && name == rhs.name
+      && location == rhs.location
+      && actor == rhs.actor
+      && equipment == rhs.equipment
+      && description == rhs.description;
   }
   bool operator!=(const Event& rhs) const
   {
@@ -165,6 +180,11 @@ public:
   void assign(const Event& rhs)
   {
     id = rhs.id;
+    name = rhs.name;
+    location = rhs.location;
+    actor = rhs.actor;
+    equipment = rhs.equipment;
+    description = rhs.description;
   }
 };
 //----End Event

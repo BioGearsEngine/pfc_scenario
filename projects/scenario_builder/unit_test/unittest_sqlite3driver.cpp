@@ -507,6 +507,24 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Event)
   Event event_2;
   Event event_3;
 
+  event_1.name = "Barbecue";
+  event_1.location = 1;
+  event_1.actor = 2;
+  event_1.equipment = {"Grill","Spatula"};
+  event_1.description = "People cooking and eating meat outdoors";
+
+  event_2.name = "Wedding";
+  event_2.location = 3;
+  event_2.actor = 4;
+  event_2.equipment = {"Tuxedo","Ring"};
+  event_2.description = "Two people getting married";
+
+  event_3.name = "Funeral";
+  event_3.location = 5;
+  event_3.actor = 6;
+  event_3.equipment = {"Coffin","Body"};
+  event_3.description = "Burying a dead person";
+
   EXPECT_EQ(0, _db.event_count());
   EXPECT_TRUE(_db.update_event(&event_1));
   EXPECT_EQ(1, _db.event_count());
@@ -517,13 +535,84 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Event)
 }
 TEST_F(TEST_FIXTURE_NAME, Select_Event)
 {
-  //TODO: Fill out the event Object, and make this test work
-  EXPECT_TRUE(false);
+  using namespace pfc;
+  Event event_1;
+  Event event_2;
+  Event event_3;
+
+  event_1.name = "Barbecue";
+  event_1.location = 1;
+  event_1.actor = 2;
+  event_1.equipment = { "Grill", "Spatula" };
+  event_1.description = "People cooking and eating meat outdoors";
+
+  event_2.name = "Wedding";
+  event_2.location = 3;
+  event_2.actor = 4;
+  event_2.equipment = { "Tuxedo", "Ring" };
+  event_2.description = "Two people getting married";
+
+  event_3.name = "Funeral";
+  event_3.location = 5;
+  event_3.actor = 6;
+  event_3.equipment = { "Coffin", "Body" };
+  event_3.description = "Burying a dead person";
+
+  EXPECT_EQ(0, _db.event_count());
+  EXPECT_TRUE(_db.update_event(&event_1));
+  EXPECT_EQ(1, _db.event_count());
+  EXPECT_TRUE(_db.update_event(&event_2));
+  EXPECT_EQ(2, _db.event_count());
+  EXPECT_TRUE(_db.update_event(&event_3));
+  EXPECT_EQ(3, _db.event_count());
+
+  Event id;
+  Event name;
+
+  id.id = 1;
+  name.name = "Funeral";
+
+  _db.select_event(&id);
+  _db.select_event(&name);
+  _db.select_event(&name);
+
+  event_1.id = 1;
+  EXPECT_EQ(event_1, id);
+  event_3.id = 3;
+  EXPECT_EQ(event_3, name);
 }
 TEST_F(TEST_FIXTURE_NAME, Remove_Event)
 {
-  //TODO: Like the other $$$$$$_Event tests, it won't work until I really know what goes in the Event object
-  EXPECT_TRUE(false);
+  using namespace pfc;
+  Event event_1;
+  Event event_2;
+  Event event_3;
+
+  event_1.name = "Barbecue";
+  event_1.location = 1;
+  event_1.actor = 2;
+  event_1.equipment = { "Grill", "Spatula" };
+  event_1.description = "People cooking and eating meat outdoors";
+
+  event_2.name = "Wedding";
+  event_2.location = 3;
+  event_2.actor = 4;
+  event_2.equipment = { "Tuxedo", "Ring" };
+  event_2.description = "Two people getting married";
+
+  event_3.name = "Funeral";
+  event_3.location = 5;
+  event_3.actor = 6;
+  event_3.equipment = { "Coffin", "Body" };
+  event_3.description = "Burying a dead person";
+
+  EXPECT_TRUE(_db.update_event(&event_1));
+  EXPECT_TRUE(_db.update_event(&event_2));
+  EXPECT_TRUE(_db.update_event(&event_3));
+  EXPECT_EQ(3, _db.event_count());
+  EXPECT_TRUE(_db.remove_event(&event_1));
+  EXPECT_TRUE(_db.remove_event(&event_3));
+  EXPECT_EQ(1, _db.event_count());
 }
 //INJURY TESTS--------------------------------------------------------------
 TEST_F(TEST_FIXTURE_NAME, Insert_Injury)

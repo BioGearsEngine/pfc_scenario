@@ -217,11 +217,21 @@ inline namespace sqlite3 {
   //---------------------- EVENT STATMENTS ------------------------
   enum EVENT_COLUMNS {
     EVENT_ID,
+    EVENT_NAME,
+    EVENT_LOCATION,
+    EVENT_ACTOR,
+    EVENT_EQUIPMENT,
+    EVENT_DESCRIPTION,
   };
 
   constexpr auto create_events_table = R"(
   CREATE TABLE IF NOT EXISTS events (
-    event_id INTEGER PRIMARY KEY
+    event_id INTEGER PRIMARY KEY,
+    name Varchar(64) NOT NULL UNIQUE,
+    location INTEGER, 
+    actor INTEGER,
+    equipment TEXT,
+    description TEXT
   );
   )";
   constexpr auto drop_all_events = R"( DELETE FROM events; )";
@@ -230,14 +240,31 @@ inline namespace sqlite3 {
 
   constexpr auto select_event_by_id
     = R"( SELECT * FROM events WHERE event_id = :id ; )";
+  constexpr auto select_event_by_name
+    = R"( SELECT * FROM events WHERE name = :name ; )";
   constexpr auto update_event_by_id
     = R"( UPDATE  events
+            SET name = :name
+                , location = :location
+                , actor = :actor
+                , equipment = :equipment
+                , description = :description
           WHERE event_id = :id;
          )";
   constexpr auto delete_event_by_id
     = R"( DELETE FROM events WHERE event_id = :id; )";
   constexpr auto insert_or_update_events
-    = R"()";
+    = R"( INSERT INTO events
+          (name, location, actor, equipment, description)
+          VALUES (:name, :location, :actor, :equipment, :description)
+          ON CONFLICT (name)
+          DO UPDATE SET name = excluded.name
+                        , location = excluded.location
+                        , actor = excluded.actor
+                        , equipment = excluded.equipment
+                        , description = excluded.description
+          ;          
+          )";
   //---------------------- INJURY STATEMENTS ------------------------
   enum INJURY_COLUMNS {
     INJURY_ID,
