@@ -176,12 +176,12 @@ ColumnLayout {
           }
           listArea.model.insert(listArea.model.count,
             {
-             id = self.assessment_id,
-             name= "%1".arg(self.name), 
-             description= "%1".arg(self.description) , 
-             type= self.type,
-             available_points= self.available_points,
-             criteria= self.criteria
+             id :self.assessment_id,
+             name:"%1".arg(self.name), 
+             description:"%1".arg(self.description) , 
+             type:self.type,
+             available_points:self.available_points,
+             criteria:self.criteria
             });
         }
       }

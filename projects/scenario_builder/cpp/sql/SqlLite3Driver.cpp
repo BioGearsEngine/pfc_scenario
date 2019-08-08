@@ -791,7 +791,7 @@ void SQLite3Driver::treatments()
     while (query.next()) {
       auto treatment = std::make_unique<pfc::Treatment>();
       auto record = query.record();
-      assert(record.count() == 3);
+      assert(record.count() == 6);
       assign_treatment(record, *treatment);
       _treatments.push_back(treatment.release());
     }
@@ -813,7 +813,7 @@ void SQLite3Driver::equipments()
     while (query.next()) {
       auto equipment = std::make_unique<pfc::Equipment>();
       auto record = query.record();
-      assert(record.count() == 3);
+      assert(record.count() == 5);
       assign_equipment(record, *equipment);
       _equipments.push_back(equipment.release());
     }
@@ -835,7 +835,7 @@ void SQLite3Driver::injuries()
     while (query.next()) {
       auto injury = std::make_unique<pfc::Injury>();
       auto record = query.record();
-      assert(record.count() == 3);
+      assert(record.count() == 6);
       assign_injury(record, *injury);
       _injuries.push_back(injury.release());
     }
@@ -852,12 +852,12 @@ void SQLite3Driver::injury_sets()
   if (_db.isOpen()) {
 
     QSqlQuery query{ _db };
-    query.prepare(sqlite3::select_all_injuries);
+    query.prepare(sqlite3::select_all_injury_sets);
     query.exec();
     while (query.next()) {
       auto set = std::make_unique<pfc::InjurySet>();
       auto record = query.record();
-      assert(record.count() == 3);
+      assert(record.count() == 4);
       assign_injury_set(record, *set);
       _injury_sets.push_back(set.release());
     }
@@ -879,7 +879,7 @@ void SQLite3Driver::assessments()
     while (query.next()) {
       auto assessment = std::make_unique<pfc::Assessment>();
       auto record = query.record();
-      assert(record.count() == 3);
+      assert(record.count() == 6);
       assign_assessment(record, *assessment);
       _assessments.push_back(assessment.release());
     }
