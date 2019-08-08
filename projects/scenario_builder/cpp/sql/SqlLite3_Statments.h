@@ -23,7 +23,7 @@ inline namespace sqlite3 {
     "events",
     "equipments",
     "injuries",
-    "injury_sets"
+    "injury_sets",
     "locations",
     "objectives",
     "properties",
