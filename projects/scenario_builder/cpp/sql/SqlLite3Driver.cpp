@@ -85,7 +85,7 @@ inline void assign_equipment(const QSqlRecord& record, Equipment& equipment)
   equipment.id = record.value(EQUIPMENT_ID).toInt();
   equipment.name = record.value(EQUIPMENT_NAME).toString();
   equipment.description = record.value(EQUIPMENT_DESCRIPTION).toString();
-  
+
   auto ref_list_s = record.value(EQUIPMENT_CITATIONS).toString();
   auto ref_list = ref_list_s.split(";");
   equipment.citations.clear();
@@ -1148,13 +1148,15 @@ bool SQLite3Driver::select_author(Author* author) const
       qWarning() << "Provided Author has no id or email one is required";
       return false;
     }
-    query.exec();
-    while (query.next()) {
-      record = query.record();
-      assign_author(record, *author);
-      return true;
+    if (query.exec()) {
+      while (query.next()) {
+        record = query.record();
+        assign_author(record, *author);
+        return true;
+      }
+    } else {
+      qWarning() << query.lastError();
     }
-    qWarning() << query.lastError();
     return false;
   }
   qWarning() << "No Database connection";
@@ -1177,13 +1179,16 @@ bool SQLite3Driver::select_property(Property* property) const
       qWarning() << "Provided Property has no id or name one is required";
       return false;
     }
-    query.exec();
-    while (query.next()) {
-      record = query.record();
-      assign_property(record, *property);
-      return true;
+    if (query.exec()) {
+
+      while (query.next()) {
+        record = query.record();
+        assign_property(record, *property);
+        return true;
+      }
+    } else {
+      qWarning() << query.lastError();
     }
-    qWarning() << query.lastError();
     return false;
   }
   qWarning() << "No Database connection";
@@ -1212,7 +1217,11 @@ bool SQLite3Driver::select_restriction(Restriction* restriction) const
         assign_restriction(record, *restriction);
         return true;
       }
-      qWarning() << query.lastError();
+      else
+      {
+
+        qWarning() << query.lastError();
+      }
       return false;
     }
     qWarning() << query.lastError();
@@ -1279,8 +1288,9 @@ bool SQLite3Driver::select_citation(Citation* citation) const
         assign_citation(record, *citation);
         return true;
       }
+    } else {
+      qWarning() << query.lastError();
     }
-    qWarning() << query.lastError();
     return false;
   }
   qWarning() << "No Database connection";
@@ -1312,8 +1322,9 @@ bool SQLite3Driver::select_treatment(Treatment* treatment) const
         assign_treatment(record, *treatment);
         return true;
       }
+    } else {
+      qWarning() << query.lastError();
     }
-    qWarning() << query.lastError();
     return false;
   }
   qWarning() << "No Database connection";
@@ -1341,8 +1352,9 @@ bool SQLite3Driver::select_equipment(Equipment* equipment) const
         assign_equipment(record, *equipment);
         return true;
       }
+    } else {
+      qWarning() << query.lastError();
     }
-    qWarning() << query.lastError();
     return false;
   }
   qWarning() << "No Database connection";
@@ -1374,8 +1386,9 @@ bool SQLite3Driver::select_injury(Injury* injury) const
         assign_injury(record, *injury);
         return true;
       }
+    } else {
+      qWarning() << query.lastError();
     }
-    qWarning() << query.lastError();
     return false;
   }
   qWarning() << "No Database connection";
@@ -1404,8 +1417,9 @@ bool SQLite3Driver::select_injury_set(InjurySet* set) const
         assign_injury_set(record, *set);
         return true;
       }
+    } else {
+      qWarning() << query.lastError();
     }
-    qWarning() << query.lastError();
     return false;
   }
   qWarning() << "No Database connection";
@@ -1434,8 +1448,9 @@ bool SQLite3Driver::select_assessment(Assessment* assessment) const
         assign_assessment(record, *assessment);
         return true;
       }
+    } else {
+      qWarning() << query.lastError();
     }
-    qWarning() << query.lastError();
     return false;
   }
   qWarning() << "No Database connection";
@@ -1467,8 +1482,9 @@ bool SQLite3Driver::select_location(Location* location) const
         assign_location(record, *location);
         return true;
       }
+    } else {
+      qWarning() << query.lastError();
     }
-    qWarning() << query.lastError();
     return false;
   }
   qWarning() << "No Database connection";
@@ -1486,7 +1502,7 @@ bool SQLite3Driver::select_role(Role* role) const
       query.bindValue(":id", role->id);
     } else if (!role->name.isEmpty()) {
       query.prepare(sqlite3::select_role_by_name);
-      query.bindValue(":name",role->name);
+      query.bindValue(":name", role->name);
     } else {
       qWarning() << "Provided Property has no id or name one is required";
       return false;
@@ -1497,8 +1513,10 @@ bool SQLite3Driver::select_role(Role* role) const
         assign_role(record, *role);
         return true;
       }
+    } else {
+
+      qWarning() << query.lastError();
     }
-    qWarning() << query.lastError();
     return false;
   }
   qWarning() << "No Database connection";
@@ -1527,8 +1545,9 @@ bool SQLite3Driver::select_prop(Prop* prop) const
         assign_prop(record, *prop);
         return true;
       }
+    } else {
+      qWarning() << query.lastError();
     }
-    qWarning() << query.lastError();
     return false;
   }
   qWarning() << "No Database connection";
@@ -1554,8 +1573,9 @@ bool SQLite3Driver::select_event(Event* event) const
         assign_event(record, *event);
         return true;
       }
+    } else {
+      qWarning() << query.lastError();
     }
-    qWarning() << query.lastError();
     return false;
   }
   qWarning() << "No Database connection";
@@ -2011,7 +2031,7 @@ bool SQLite3Driver::update_prop(Prop* prop)
       query.prepare(sqlite3::insert_or_update_props);
     }
     query.bindValue(":equipment", prop->equipment);
-    
+
     if (!query.exec()) {
       qWarning() << query.lastError();
       return false;
