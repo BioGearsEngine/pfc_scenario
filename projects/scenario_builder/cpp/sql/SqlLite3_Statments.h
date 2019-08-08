@@ -81,14 +81,14 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM assessments WHERE name = :name; )";
   constexpr auto insert_or_update_assessments
     = R"( INSERT INTO assessments
-          (name,description,type,available_points,citations)
-          VALUES (:name, :description, :type, :available_points, :citations)
+          (name,description,type,available_points,criteria)
+          VALUES (:name, :description, :type, :available_points, :criteria)
           ON CONFLICT (name)
           DO UPDATE SET name = excluded.name
                        , description = excluded.description
                        , type = excluded.type
                        , available_points = excluded.available_points
-                       , citations = excluded.citations
+                       , criteria = excluded.criteria
          ;
          )";
   
@@ -170,13 +170,17 @@ inline namespace sqlite3 {
     EQUIPMENT_NAME,
     EQUIPMENT_DESCRIPTION,
     EQUIPMENT_CITATIONS,
+    EQUIPMENT_EQUIPMENT,
+    EQUIPMENT_IMAGE
   };
-
+  // I know that the plural of equipment is 'equipment', but we've made it equipments to be less ambiguous
   constexpr auto create_equipment_table = R"(
   CREATE TABLE IF NOT EXISTS equipments (
     equipment_id INTEGER PRIMARY KEY,
     name Varchar(64) NOT NULL UNIQUE,
-    purpose Varchar(64) NOT NULL UNIQUE,
+    description Varchar(64) NOT NULL UNIQUE,
+    citations TEXT,
+    equipment TEXT,
     image TEXT
   );
   )";
@@ -191,22 +195,24 @@ inline namespace sqlite3 {
           SET name = :name
               , description = :description
               , citations = :citations
+              , equipment = :equipment
           WHERE equipment_id = :id;
          )";
   constexpr auto delete_equipment_by_id
-    = R"( DELETE FROM equipment WHERE equipment_id = :id; )";
+    = R"( DELETE FROM equipments WHERE equipment_id = :id; )";
   constexpr auto delete_equipment_by_name
-    = R"( DELETE FROM equipment WHERE name = :name; )";
+    = R"( DELETE FROM equipments WHERE name = :name ; )";
   constexpr auto select_equipment_by_name
     = R"( SELECT * FROM equipments WHERE name = :name )";
   constexpr auto insert_or_update_equipments
     = R"( INSERT INTO equipments
-          (medical_name,common_name,description,citations)
-          VALUES (:name, :description, :citations)
+          (name,description,citations,equipment)
+          VALUES (:name, :description, :citations, :equipment)
           ON CONFLICT (name)
           DO UPDATE SET name = excluded.name
                         , description = excluded.description
                         , citations = excluded.citations
+                        , equipment = excluded.equipment
           ;         
           )";
   
@@ -234,7 +240,7 @@ inline namespace sqlite3 {
     = R"( DELETE FROM events WHERE event_id = :id; )";
   constexpr auto insert_or_update_events
     = R"()";
-  //---------------------- INJURY STATMENTS ------------------------
+  //---------------------- INJURY STATEMENTS ------------------------
   enum INJURY_COLUMNS {
     INJURY_ID,
     INJURY_MEDICAL_NAME,
@@ -265,7 +271,7 @@ inline namespace sqlite3 {
           SET medical_name = :medical_name
               , common_name = :common_name
               , description = :description
-              , equipment_list = :equipment_list
+              , equipment = :equipment
               , citations = :citations
           WHERE injury_id = :id;
          )";
@@ -284,14 +290,7 @@ inline namespace sqlite3 {
           (medical_name,common_name,description,citations)
           VALUES (:medical_name, :common_name, :description, :citations)
           ON CONFLICT (medical_name)
-          DO UPDATE SET medical_name = excluded.medical_name
-                        , common_name = excluded.common_name
-                        , description = excluded.description
-                        , citations = excluded.citations
-          ;
-          ON CONFLICT (common_name)
           DO UPDATE SET common_name = excluded.common_name
-                        , medical_name = excluded.medical_name
                         , description = excluded.description
                         , citations = excluded.citations
           ;          
@@ -393,12 +392,6 @@ inline namespace sqlite3 {
                        , time_of_day = excluded.time_of_day
                        , environment = excluded.environment
          ;
-          ON CONFLICT (scene_name)
-          DO UPDATE SET name = excluded.name
-                       , scene_name = excluded.scene_name
-                       , time_of_day = excluded.time_of_day
-                       , environment = excluded.environment
-         ;
          )";
   
   //---------------------- OBJECTIVE STATMENTS ------------------------
@@ -476,12 +469,8 @@ inline namespace sqlite3 {
 
   constexpr auto insert_or_update_props
     = R"( INSERT INTO props 
-          (name,equipment)
-          VALUES (:name, :equipment)
-          ON CONFLICT (name)
-          DO UPDATE SET name = excluded.name
-                       , equipment = excluded.equipment
-         ;
+          (equipment)
+          VALUES (:equipment)
          )";
   
   //---------------------- PROPERTY STATMENTS ------------------------
@@ -575,13 +564,23 @@ inline namespace sqlite3 {
               , publisher = :publisher
           WHERE citation_id = :id;
          )";
+  constexpr auto update_citation_by_key
+    = R"( UPDATE  citations
+          SET key = :key
+              , title = :title
+              , authors = :authors
+              , year = :year
+              , publisher = :publisher
+          WHERE key = :key;
+         )";
 
   constexpr auto insert_or_update_citations
     = R"( INSERT INTO citations
           (key, title, authors, year, publisher)
           VALUES (:key, :title, :authors, :year, :publisher)
           ON CONFLICT (key)
-          DO UPDATE SET  title = excluded.title
+          DO UPDATE SET key = excluded.key
+                       , title = excluded.title
                        , authors = excluded.authors
                        , year = excluded.year
                        , publisher = excluded.publisher
@@ -633,12 +632,14 @@ inline namespace sqlite3 {
   //---------------------- ROLE STATMENTS ------------------------
   enum ROLE_COLUMNS {
     ROLE_ID,
+    ROLE_NAME,
     ROLE_DESCRIPTION,
   };
 
   constexpr auto create_roles_table = R"(
   CREATE TABLE IF NOT EXISTS roles (
     role_id INTEGER PRIMARY KEY,
+    name Varchar(64) NOT NULL UNIQUE,
     description TEXT
   );
   )";
@@ -650,9 +651,12 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM roles WHERE role_id = :id ; )";
   constexpr auto update_role_by_id
     = R"( UPDATE  roles
-          SET description = :description
+          SET description = :description 
+              , name = :name
           WHERE role_id = :id;
          )";
+  constexpr auto select_role_by_name
+    = R"( SELECT * FROM roles WHERE name = :name ; )";
   constexpr auto delete_role_by_id
     = R"( DELETE FROM roles WHERE role_id = :id; )";
 
@@ -672,7 +676,7 @@ inline namespace sqlite3 {
     TREATMENT_MEDICAL_NAME,
     TREATMENT_COMMON_NAME,
     TREATMENT_DESCRIPTION,
-    TREATMENT_EQUIPMENT_LIST,
+    TREATMENT_EQUIPMENT,
     TREATMENT_CITATIONS,
   };
 
@@ -682,7 +686,7 @@ inline namespace sqlite3 {
     medical_name Varchar(64) NOT NULL UNIQUE,
     common_name Varchar(64) NOT NULL UNIQUE,
     description TEXT,
-    equipment_list TEXT,
+    equipment TEXT,
     citations TEXT
   );
   )";
@@ -703,7 +707,7 @@ inline namespace sqlite3 {
           SET medical_name = :medical_name
               , common_name = :common_name
               , description = :description
-              , equipment_list = :equipment_list
+              , equipment = :equipment
               , citations = :citations
           WHERE treatment_id = :id;
          )";
@@ -715,20 +719,13 @@ inline namespace sqlite3 {
     = R"( DELETE FROM treatments WHERE common_name = :common_name; )";
   constexpr auto insert_or_update_treatments
     = R"( INSERT INTO treatments
-          (medical_name,common_name,description,equipment_list,citations)
-          VALUES (:medical_name, :common_name, :description, :equipment_list, :citations)
+          (medical_name,common_name,description,equipment,citations)
+          VALUES (:medical_name, :common_name, :description, :equipment, :citations)
           ON CONFLICT (medical_name)
           DO UPDATE SET medical_name = excluded.medical_name
                         , common_name = excluded.common_name
                         , description = excluded.description
-                        , equipment_list = excluded.equipment_list
-                        , citations = excluded.citations
-          ;
-          ON CONFLICT (common_name)
-          DO UPDATE SET common_name = excluded.common_name
-                        , medical_name = excluded.medical_name
-                        , description = excluded.description
-                        , equipment_list = excluded.equipment_list
+                        , equipment = excluded.equipment
                         , citations = excluded.citations
           ;          
           )";

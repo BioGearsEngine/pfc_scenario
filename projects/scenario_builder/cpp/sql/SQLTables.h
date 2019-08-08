@@ -179,6 +179,7 @@ public:
   QString name = "";
   QString description = "";
   QList<int> citations;
+  QList<QString> equipment;
   Equipment(QObject* parent = nullptr)
     : QObject(parent)
   {
@@ -194,7 +195,8 @@ public:
     return id == rhs.id
       && name == rhs.name
       && description == rhs.description
-      && citations == rhs.citations;
+      && citations == rhs.citations
+      && equipment == rhs.equipment;
   }
   bool operator!=(const Equipment& rhs) const
   {
@@ -206,6 +208,7 @@ public:
     name = rhs.name;
     description = rhs.description;
     citations = rhs.citations;
+    equipment = rhs.equipment;
   }
 };
 //----End Equipment
@@ -553,9 +556,11 @@ public:
 struct Role : public QObject {
   Q_OBJECT
   Q_PROPERTY(int role_id MEMBER id)
+  Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString description MEMBER description)
 public:
   int32_t id = -1;
+  QString name = "";
   QString description = "";
 
   Role(QObject* parent = nullptr)
@@ -571,6 +576,7 @@ public:
   bool operator==(const Role& rhs) const
   {
     return id == rhs.id
+      && name == rhs.name
       && description == rhs.description;
   }
   bool operator!=(const Role& rhs) const
@@ -580,6 +586,7 @@ public:
   void assign(const Role& rhs)
   {
     id = rhs.id;
+    name = rhs.name;
     description = rhs.description;
   }
 };
@@ -590,14 +597,14 @@ struct Treatment : public QObject {
   Q_PROPERTY(QString medical_name MEMBER medical_name)
   Q_PROPERTY(QString common_name MEMBER common_name)
   Q_PROPERTY(QString description MEMBER description)
-  Q_PROPERTY(QList<int> equipment MEMBER equipment)
+  Q_PROPERTY(QList<QString> equipment MEMBER equipment)
   Q_PROPERTY(QList<int> citations MEMBER citations)
 public:
   int32_t id = -1;
   QString medical_name = "";
   QString common_name = "";
   QString description = "";
-  QList<int> equipment;
+  QList<QString> equipment;
   QList<int> citations;
   Treatment(QObject* parent = nullptr)
     : QObject(parent)

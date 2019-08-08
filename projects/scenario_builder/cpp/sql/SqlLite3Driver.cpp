@@ -92,6 +92,13 @@ inline void assign_equipment(const QSqlRecord& record, Equipment& equipment)
   for (auto& val : ref_list) {
     equipment.citations.push_back(val.toInt());
   }
+
+  auto equip_list_s = record.value(EQUIPMENT_EQUIPMENT).toString();
+  auto equip_list = equip_list_s.split(";");
+  equipment.equipment.clear();
+  for (auto& val : equip_list) {
+    equipment.equipment.push_back(val);
+  }
 }
 //------------------------------------------------------------------------------
 inline void assign_event(QSqlRecord& record, Event& event)
@@ -166,6 +173,7 @@ inline void assign_property(const QSqlRecord& record, Property& property)
 inline void assign_role(QSqlRecord& record, Role& role)
 {
   role.id = record.value(ROLE_ID).toInt();
+  role.name = record.value(ROLE_NAME).toString();
   role.description = record.value(ROLE_DESCRIPTION).toString();
 }
 //------------------------------------------------------------------------------
@@ -182,11 +190,11 @@ inline void assign_treatment(const QSqlRecord& record, Treatment& treatment)
   treatment.medical_name = record.value(TREATMENT_MEDICAL_NAME).toString();
   treatment.common_name = record.value(TREATMENT_COMMON_NAME).toString();
   treatment.description = record.value(TREATMENT_DESCRIPTION).toString();
-  auto equip_list_s = record.value(TREATMENT_EQUIPMENT_LIST).toString();
+  auto equip_list_s = record.value(TREATMENT_EQUIPMENT).toString();
   auto equip_list = equip_list_s.split(";");
   treatment.equipment.clear();
   for (auto& val : equip_list) {
-    treatment.equipment.push_back(val.toInt());
+    treatment.equipment.push_back(val);
   }
   auto ref_list_s = record.value(TREATMENT_CITATIONS).toString();
   auto ref_list = ref_list_s.split(";");
@@ -1476,6 +1484,9 @@ bool SQLite3Driver::select_role(Role* role) const
     if (role->id != -1) {
       query.prepare(sqlite3::select_role_by_id);
       query.bindValue(":id", role->id);
+    } else if (!role->name.isEmpty()) {
+      query.prepare(sqlite3::select_role_by_name);
+      query.bindValue(":name",role->name);
     } else {
       qWarning() << "Provided Property has no id or name one is required";
       return false;
@@ -1504,6 +1515,9 @@ bool SQLite3Driver::select_prop(Prop* prop) const
       query.prepare(sqlite3::select_prop_by_id);
       query.bindValue(":id", prop->id);
     } else {
+      // So the issue here is that id is set when the property is inserted, and I can't get it without some other unique field
+      // to look up a prop with
+      //TODO: Run this by Steven
       qWarning() << "Provided Property has no id or name one is required";
       return false;
     }
@@ -1695,6 +1709,8 @@ bool SQLite3Driver::update_citation(Citation* citation)
     if (-1 != citation->id) {
       query.prepare(sqlite3::update_citation_by_id);
       query.bindValue(":id", citation->id);
+    } else if (!citation->key.isEmpty()) {
+      query.prepare(sqlite3::insert_or_update_citations);
     } else if (!citation->title.isEmpty()) {
       query.prepare(sqlite3::insert_or_update_citations);
       citation->key = (citation->authors.empty()) ? citation->title.toLower().simplified().remove(' ')
@@ -1788,9 +1804,15 @@ bool SQLite3Driver::update_equipment(Equipment* equipment)
       cite_list += val + ";";
     }
     cite_list.chop(1);
+    QString equip_list = "";
+    for (auto& val : equipment->equipment) {
+      equip_list += val + ";";
+    }
+    equip_list.chop(1);
     query.bindValue(":name", equipment->name);
     query.bindValue(":description", equipment->description);
     query.bindValue(":citations", cite_list);
+    query.bindValue(":equipment", equip_list);
 
     if (!query.exec()) {
       qWarning() << query.lastError();
@@ -1956,9 +1978,11 @@ bool SQLite3Driver::update_role(Role* role)
     if (-1 != role->id) {
       query.prepare(sqlite3::update_role_by_id);
       query.bindValue(":id", role->id);
+    } else if (!role->name.isEmpty()) {
+      query.prepare(sqlite3::insert_or_update_roles);
     }
     query.bindValue(":description", role->description);
-
+    query.bindValue(":name", role->name);
     if (!query.exec()) {
       qWarning() << query.lastError();
       return false;
@@ -1983,9 +2007,11 @@ bool SQLite3Driver::update_prop(Prop* prop)
     if (-1 != prop->id) {
       query.prepare(sqlite3::update_prop_by_id);
       query.bindValue(":id", prop->id);
+    } else {
+      query.prepare(sqlite3::insert_or_update_props);
     }
     query.bindValue(":equipment", prop->equipment);
-
+    
     if (!query.exec()) {
       qWarning() << query.lastError();
       return false;
@@ -2010,6 +2036,8 @@ bool SQLite3Driver::update_event(Event* event)
     if (-1 != event->id) {
       query.prepare(sqlite3::update_event_by_id);
       query.bindValue(":id", event->id);
+    } else {
+      query.prepare(sqlite3::insert_or_update_events);
     }
 
     if (!query.exec()) {
@@ -2294,6 +2322,7 @@ bool SQLite3Driver::remove_prop(Prop* prop)
       propRemoved(prop->id);
       return true;
     } else {
+      //TODO: Same as select_prop, I can't get the id without looking it up with some other thing
       return false;
     }
   }
