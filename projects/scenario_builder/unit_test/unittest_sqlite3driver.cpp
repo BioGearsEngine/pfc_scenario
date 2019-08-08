@@ -400,17 +400,17 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Equipment)
 
   equipment_1.name = "Keytar";
   equipment_1.description = "Got a sick keytar solo later";
-  equipment_1.equipment.push_back("music stand");
+  equipment_1.image = ("music stand");
   equipment_1.citations.push_back(1);
 
   equipment_2.name = "piano";
   equipment_2.description = "big instrument with keys";
-  equipment_2.equipment.push_back("piano bench");
+  equipment_2.image = ("piano bench");
   equipment_2.citations.push_back(2);
 
   equipment_3.name = "bagpipes";
   equipment_3.description = "please stop playing the bagpipes";
-  equipment_3.equipment.push_back("a bladder");
+  equipment_3.image = ("a bladder");
   equipment_3.citations.push_back(3);
 
   EXPECT_EQ(0, _db.equipment_count());
@@ -430,17 +430,17 @@ TEST_F(TEST_FIXTURE_NAME, Select_Equipment)
 
   equipment_1.name = "Keytar";
   equipment_1.description = "Got a sick keytar solo later";
-  equipment_1.equipment.push_back("music stand");
+  equipment_1.image = ("music stand");
   equipment_1.citations.push_back(1);
 
   equipment_2.name = "piano";
   equipment_2.description = "big instrument with keys";
-  equipment_2.equipment.push_back("piano bench");
+  equipment_2.image = ("piano bench");
   equipment_2.citations.push_back(2);
 
   equipment_3.name = "bagpipes";
   equipment_3.description = "please stop playing the bagpipes";
-  equipment_3.equipment.push_back("a bladder");
+  equipment_3.image = ("a bladder");
   equipment_3.citations.push_back(3);
 
   EXPECT_EQ(0, _db.equipment_count());
@@ -474,17 +474,17 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Equipment)
 
   equipment_1.name = "Keytar";
   equipment_1.description = "Got a sick keytar solo later";
-  equipment_1.equipment.push_back("music stand");
+  equipment_1.image = ("music stand");
   equipment_1.citations.push_back(1);
 
   equipment_2.name = "piano";
   equipment_2.description = "big instrument with keys";
-  equipment_2.equipment.push_back("piano bench");
+  equipment_2.image = ("piano bench");
   equipment_2.citations.push_back(2);
 
   equipment_3.name = "bagpipes";
   equipment_3.description = "please stop playing the bagpipes";
-  equipment_3.equipment.push_back("a bladder");
+  equipment_3.image = ("a bladder");
   equipment_3.citations.push_back(3);
 
   EXPECT_TRUE(_db.update_equipment(&equipment_1));

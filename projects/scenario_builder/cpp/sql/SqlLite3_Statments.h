@@ -170,7 +170,6 @@ inline namespace sqlite3 {
     EQUIPMENT_NAME,
     EQUIPMENT_DESCRIPTION,
     EQUIPMENT_CITATIONS,
-    EQUIPMENT_EQUIPMENT,
     EQUIPMENT_IMAGE
   };
   // I know that the plural of equipment is 'equipment', but we've made it equipments to be less ambiguous
@@ -180,7 +179,6 @@ inline namespace sqlite3 {
     name Varchar(64) NOT NULL UNIQUE,
     description Varchar(64) NOT NULL UNIQUE,
     citations TEXT,
-    equipment TEXT,
     image TEXT
   );
   )";
@@ -195,7 +193,7 @@ inline namespace sqlite3 {
           SET name = :name
               , description = :description
               , citations = :citations
-              , equipment = :equipment
+              , image = :image
           WHERE equipment_id = :id;
          )";
   constexpr auto delete_equipment_by_id
@@ -206,13 +204,13 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM equipments WHERE name = :name )";
   constexpr auto insert_or_update_equipments
     = R"( INSERT INTO equipments
-          (name,description,citations,equipment)
-          VALUES (:name, :description, :citations, :equipment)
+          (name,description,citations,image)
+          VALUES (:name, :description, :citations, :image)
           ON CONFLICT (name)
           DO UPDATE SET name = excluded.name
                         , description = excluded.description
                         , citations = excluded.citations
-                        , equipment = excluded.equipment
+                        , image = excluded.image
           ;         
           )";
   

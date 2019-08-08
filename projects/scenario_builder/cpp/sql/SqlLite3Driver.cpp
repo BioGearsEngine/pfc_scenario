@@ -93,12 +93,7 @@ inline void assign_equipment(const QSqlRecord& record, Equipment& equipment)
     equipment.citations.push_back(val.toInt());
   }
 
-  auto equip_list_s = record.value(EQUIPMENT_EQUIPMENT).toString();
-  auto equip_list = equip_list_s.split(";");
-  equipment.equipment.clear();
-  for (auto& val : equip_list) {
-    equipment.equipment.push_back(val);
-  }
+  equipment.image = record.value(EQUIPMENT_IMAGE).toString();
 }
 //------------------------------------------------------------------------------
 inline void assign_event(QSqlRecord& record, Event& event)
@@ -1217,14 +1212,10 @@ bool SQLite3Driver::select_restriction(Restriction* restriction) const
         assign_restriction(record, *restriction);
         return true;
       }
-      else
-      {
-
-        qWarning() << query.lastError();
-      }
-      return false;
+    } else {
+      qWarning() << query.lastError();
     }
-    qWarning() << query.lastError();
+    return false;
   }
   qWarning() << "No Database connection";
   return false;
@@ -1824,15 +1815,11 @@ bool SQLite3Driver::update_equipment(Equipment* equipment)
       cite_list += val + ";";
     }
     cite_list.chop(1);
-    QString equip_list = "";
-    for (auto& val : equipment->equipment) {
-      equip_list += val + ";";
-    }
-    equip_list.chop(1);
+
     query.bindValue(":name", equipment->name);
     query.bindValue(":description", equipment->description);
     query.bindValue(":citations", cite_list);
-    query.bindValue(":equipment", equip_list);
+    query.bindValue(":image", equipment->image);
 
     if (!query.exec()) {
       qWarning() << query.lastError();
