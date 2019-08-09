@@ -192,11 +192,13 @@ struct Equipment : public QObject {
   Q_OBJECT
   Q_PROPERTY(int equipment_id MEMBER id)
   Q_PROPERTY(QString name MEMBER name)
+  Q_PROPERTY(int type MEMBER type)
   Q_PROPERTY(QString description MEMBER description)
   Q_PROPERTY(QList<int> citations MEMBER citations)
   Q_PROPERTY(QString image MEMBER image)
 public:
   int32_t id = -1;
+  int32_t type = 1;
   QString name = "";
   QString description = "";
   QList<int> citations;
@@ -215,6 +217,7 @@ public:
   {
     return id == rhs.id
       && name == rhs.name
+      && type == rhs.type
       && description == rhs.description
       && citations == rhs.citations
       && image == rhs.image;
@@ -227,6 +230,7 @@ public:
   {
     id = rhs.id;
     name = rhs.name;
+    type = rhs.type;
     description = rhs.description;
     citations = rhs.citations;
     image = rhs.image;

@@ -168,6 +168,7 @@ inline namespace sqlite3 {
   enum EQUIPMENT_COLUMNS {
     EQUIPMENT_ID,
     EQUIPMENT_NAME,
+    EQUIPMENT_TYPE,
     EQUIPMENT_DESCRIPTION,
     EQUIPMENT_CITATIONS,
     EQUIPMENT_IMAGE
@@ -176,6 +177,7 @@ inline namespace sqlite3 {
   constexpr auto create_equipment_table = R"(
   CREATE TABLE IF NOT EXISTS equipments (
     equipment_id INTEGER PRIMARY KEY,
+    type INTEGER NOT NULL DEFAULT 1,
     name Varchar(64) NOT NULL UNIQUE,
     description Varchar(64) NOT NULL UNIQUE,
     citations TEXT,
@@ -191,6 +193,7 @@ inline namespace sqlite3 {
   constexpr auto update_equipment_by_id
     = R"( UPDATE  equipments
           SET name = :name
+              , type = :type
               , description = :description
               , citations = :citations
               , image = :image
@@ -204,10 +207,11 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM equipments WHERE name = :name )";
   constexpr auto insert_or_update_equipments
     = R"( INSERT INTO equipments
-          (name,description,citations,image)
-          VALUES (:name, :description, :citations, :image)
+          (name,type,description,citations,image)
+          VALUES (:name, :type, :description, :citations, :image)
           ON CONFLICT (name)
           DO UPDATE SET name = excluded.name
+                        , type = excluded.type
                         , description = excluded.description
                         , citations = excluded.citations
                         , image = excluded.image

@@ -399,16 +399,19 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Equipment)
   Equipment equipment_3;
 
   equipment_1.name = "Keytar";
+  equipment_1.type = 1;
   equipment_1.description = "Got a sick keytar solo later";
   equipment_1.image = ("music stand");
   equipment_1.citations.push_back(1);
 
   equipment_2.name = "piano";
+  equipment_2.type = 2;
   equipment_2.description = "big instrument with keys";
   equipment_2.image = ("piano bench");
   equipment_2.citations.push_back(2);
 
   equipment_3.name = "bagpipes";
+  equipment_3.type = 3;
   equipment_3.description = "please stop playing the bagpipes";
   equipment_3.image = ("a bladder");
   equipment_3.citations.push_back(3);
@@ -429,16 +432,19 @@ TEST_F(TEST_FIXTURE_NAME, Select_Equipment)
   Equipment equipment_3;
 
   equipment_1.name = "Keytar";
+  equipment_1.type = 1;
   equipment_1.description = "Got a sick keytar solo later";
   equipment_1.image = ("music stand");
   equipment_1.citations.push_back(1);
 
   equipment_2.name = "piano";
+  equipment_2.type = 2;
   equipment_2.description = "big instrument with keys";
   equipment_2.image = ("piano bench");
   equipment_2.citations.push_back(2);
 
   equipment_3.name = "bagpipes";
+  equipment_3.type = 3;
   equipment_3.description = "please stop playing the bagpipes";
   equipment_3.image = ("a bladder");
   equipment_3.citations.push_back(3);
@@ -473,16 +479,19 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Equipment)
   Equipment equipment_3;
 
   equipment_1.name = "Keytar";
+  equipment_1.type = 1;
   equipment_1.description = "Got a sick keytar solo later";
   equipment_1.image = ("music stand");
   equipment_1.citations.push_back(1);
 
   equipment_2.name = "piano";
+  equipment_2.type = 2;
   equipment_2.description = "big instrument with keys";
   equipment_2.image = ("piano bench");
   equipment_2.citations.push_back(2);
 
   equipment_3.name = "bagpipes";
+  equipment_3.type = 3;
   equipment_3.description = "please stop playing the bagpipes";
   equipment_3.image = ("a bladder");
   equipment_3.citations.push_back(3);
@@ -931,78 +940,78 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Objective)
   EXPECT_EQ(1, _db.objective_count());
 }
 //PROP TESTS--------------------------------------------------------------
-TEST_F(TEST_FIXTURE_NAME, Insert_Prop)
-{
-  using namespace pfc;
-  Prop prop_1;
-  Prop prop_2;
-  Prop prop_3;
-
-  prop_1.equipment = "Rubber duck";
-
-  prop_2.equipment = "Bobblehead";
-
-  prop_3.equipment = "Funko pop";
-
-  EXPECT_EQ(0, _db.prop_count());
-  EXPECT_TRUE(_db.update_prop(&prop_1));
-  EXPECT_EQ(1, _db.prop_count());
-  EXPECT_TRUE(_db.update_prop(&prop_2));
-  EXPECT_EQ(2, _db.prop_count());
-  EXPECT_TRUE(_db.update_prop(&prop_3));
-  EXPECT_EQ(3, _db.prop_count());
-}
-TEST_F(TEST_FIXTURE_NAME, Select_Prop)
-{
-  using namespace pfc;
-  Prop prop_1;
-  Prop prop_2;
-  Prop prop_3;
-
-  prop_1.equipment = "Rubber duck";
-
-  prop_2.equipment = "Bobblehead";
-
-  prop_3.equipment = "Funko pop";
-
-  EXPECT_EQ(0, _db.prop_count());
-  EXPECT_TRUE(_db.update_prop(&prop_1));
-  EXPECT_EQ(1, _db.prop_count());
-  EXPECT_TRUE(_db.update_prop(&prop_2));
-  EXPECT_EQ(2, _db.prop_count());
-  EXPECT_TRUE(_db.update_prop(&prop_3));
-  EXPECT_EQ(3, _db.prop_count());
-
-  Prop id;
-
-  id.id = 1;
-
-  _db.select_prop(&id);
-
-  prop_1.id = 1;
-  EXPECT_EQ(prop_1, id);
-}
-TEST_F(TEST_FIXTURE_NAME, Remove_Prop)
-{
-  using namespace pfc;
-  Prop prop_1;
-  Prop prop_2;
-  Prop prop_3;
-
-  prop_1.equipment = "Rubber duck";
-
-  prop_2.equipment = "Bobblehead";
-
-  prop_3.equipment = "Funko pop";
-
-  EXPECT_TRUE(_db.update_prop(&prop_1));
-  EXPECT_TRUE(_db.update_prop(&prop_2));
-  EXPECT_TRUE(_db.update_prop(&prop_3));
-  EXPECT_EQ(3, _db.prop_count());
-  EXPECT_TRUE(_db.remove_prop(&prop_1));
-  EXPECT_TRUE(_db.remove_prop(&prop_3));
-  EXPECT_EQ(1, _db.prop_count());
-}
+//TEST_F(TEST_FIXTURE_NAME, Insert_Prop)
+//{
+//  using namespace pfc;
+//  Prop prop_1;
+//  Prop prop_2;
+//  Prop prop_3;
+//
+//  prop_1.equipment = "Rubber duck";
+//
+//  prop_2.equipment = "Bobblehead";
+//
+//  prop_3.equipment = "Funko pop";
+//
+//  EXPECT_EQ(0, _db.prop_count());
+//  EXPECT_TRUE(_db.update_prop(&prop_1));
+//  EXPECT_EQ(1, _db.prop_count());
+//  EXPECT_TRUE(_db.update_prop(&prop_2));
+//  EXPECT_EQ(2, _db.prop_count());
+//  EXPECT_TRUE(_db.update_prop(&prop_3));
+//  EXPECT_EQ(3, _db.prop_count());
+//}
+//TEST_F(TEST_FIXTURE_NAME, Select_Prop)
+//{
+//  using namespace pfc;
+//  Prop prop_1;
+//  Prop prop_2;
+//  Prop prop_3;
+//
+//  prop_1.equipment = "Rubber duck";
+//
+//  prop_2.equipment = "Bobblehead";
+//
+//  prop_3.equipment = "Funko pop";
+//
+//  EXPECT_EQ(0, _db.prop_count());
+//  EXPECT_TRUE(_db.update_prop(&prop_1));
+//  EXPECT_EQ(1, _db.prop_count());
+//  EXPECT_TRUE(_db.update_prop(&prop_2));
+//  EXPECT_EQ(2, _db.prop_count());
+//  EXPECT_TRUE(_db.update_prop(&prop_3));
+//  EXPECT_EQ(3, _db.prop_count());
+//
+//  Prop id;
+//
+//  id.id = 1;
+//
+//  _db.select_prop(&id);
+//
+//  prop_1.id = 1;
+//  EXPECT_EQ(prop_1, id);
+//}
+//TEST_F(TEST_FIXTURE_NAME, Remove_Prop)
+//{
+//  using namespace pfc;
+//  Prop prop_1;
+//  Prop prop_2;
+//  Prop prop_3;
+//
+//  prop_1.equipment = "Rubber duck";
+//
+//  prop_2.equipment = "Bobblehead";
+//
+//  prop_3.equipment = "Funko pop";
+//
+//  EXPECT_TRUE(_db.update_prop(&prop_1));
+//  EXPECT_TRUE(_db.update_prop(&prop_2));
+//  EXPECT_TRUE(_db.update_prop(&prop_3));
+//  EXPECT_EQ(3, _db.prop_count());
+//  EXPECT_TRUE(_db.remove_prop(&prop_1));
+//  EXPECT_TRUE(_db.remove_prop(&prop_3));
+//  EXPECT_EQ(1, _db.prop_count());
+//}
 //PROPERTY TESTS--------------------------------------------------------------
 TEST_F(TEST_FIXTURE_NAME, Insert_Property)
 {

@@ -84,6 +84,7 @@ inline void assign_equipment(const QSqlRecord& record, Equipment& equipment)
 {
   equipment.id = record.value(EQUIPMENT_ID).toInt();
   equipment.name = record.value(EQUIPMENT_NAME).toString();
+  equipment.type = record.value(EQUIPMENT_TYPE).toInt();
   equipment.description = record.value(EQUIPMENT_DESCRIPTION).toString();
 
   auto ref_list_s = record.value(EQUIPMENT_CITATIONS).toString();
@@ -278,7 +279,7 @@ bool SQLite3Driver::initialize_db()
     { tables[LOCATIONS], sqlite3::create_locations_table },
     { tables[OBJECTIVES], sqlite3::create_objectives_table },
     { tables[PROPERTIES], sqlite3::create_properties_table },
-    { tables[PROPS], sqlite3::create_props_table },
+    //{ tables[PROPS], sqlite3::create_props_table },
     { tables[RESTRICTIONS], sqlite3::create_restrictions_table },
     { tables[ROLES], sqlite3::create_roles_table },
     { tables[TREATMENTS], sqlite3::create_treatments_table }
@@ -1832,6 +1833,7 @@ bool SQLite3Driver::update_equipment(Equipment* equipment)
     cite_list.chop(1);
 
     query.bindValue(":name", equipment->name);
+    query.bindValue(":type",equipment->type);
     query.bindValue(":description", equipment->description);
     query.bindValue(":citations", cite_list);
     query.bindValue(":image", equipment->image);
