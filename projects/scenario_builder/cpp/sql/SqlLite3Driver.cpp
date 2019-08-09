@@ -25,191 +25,6 @@ specific language governing permissions and limitations under the License.
 
 namespace pfc {
 //------------------------------------------------------------------------------
-//                      Record Assignments
-//------------------------------------------------------------------------------
-inline void assign_assessment(const QSqlRecord& record, Assessment& assessment)
-{
-  assessment.id = record.value(ASSESSMENT_ID).toInt();
-  assessment.name = record.value(ASSESSMENT_NAME).toString();
-  assessment.description = record.value(ASSESSMENT_DESCRIPTION).toString();
-  assessment.type = record.value(ASSESSMENT_TYPE).toString();
-  assessment.available_points = record.value(ASSESSMENT_AVAILABLE_POINTS).toInt();
-  assessment.criteria = record.value(ASSESSMENT_CRITERIA).toString();
-}
-//------------------------------------------------------------------ASSIGN_START
-inline void assign_author(const QSqlRecord& record, Author& author)
-{
-  author.id = record.value(AUTHOR_ID).toInt();
-  author.first = record.value(AUTHOR_FIRST_NAME).toString();
-  author.last = record.value(AUTHOR_LAST_NAME).toString();
-  author.email = record.value(AUTHOR_EMAIL).toString();
-
-  auto zip_qstr = record.value(AUTHOR_ZIPCODE).toString();
-
-  QRegularExpression zip(R"((\d{5}))");
-  QRegularExpression zip_plus4(R"((\d{5})-(\d{4}))");
-  QRegularExpressionMatch match = zip_plus4.match(zip_qstr);
-
-  if (match.hasMatch()) {
-    author.zip = match.captured(1);
-    author.plus_4 = match.captured(2);
-  } else {
-    match = zip.match(zip_qstr);
-    if (match.hasMatch()) {
-      author.zip = match.captured(1);
-    }
-  }
-  author.state = record.value(AUTHOR_STATE).toString();
-  author.country = record.value(AUTHOR_COUNTRY).toString();
-  author.phone = record.value(AUTHOR_PHONE).toString();
-  author.organization = record.value(AUTHOR_ORGANIZATION).toString();
-}
-//------------------------------------------------------------------------------
-inline void assign_citation(const QSqlRecord& record, Citation& citation)
-{
-  citation.id = record.value(CITATION_ID).toInt();
-  citation.key = record.value(CITATION_KEY).toString();
-  citation.title = record.value(CITATION_TITLE).toString();
-  auto auth_list_s = record.value(CITATION_AUTHORS).toString();
-  auto auth_list = auth_list_s.split(";");
-  citation.authors.clear();
-  for (auto& val : auth_list) {
-    citation.authors.push_back(val.toInt());
-  }
-  citation.year = record.value(CITATION_YEAR).toString();
-  citation.publisher = record.value(CITATION_PUBLISHER).toString();
-}
-//------------------------------------------------------------------------------
-inline void assign_equipment(const QSqlRecord& record, Equipment& equipment)
-{
-  equipment.id = record.value(EQUIPMENT_ID).toInt();
-  equipment.name = record.value(EQUIPMENT_NAME).toString();
-  equipment.type = record.value(EQUIPMENT_TYPE).toInt();
-  equipment.description = record.value(EQUIPMENT_DESCRIPTION).toString();
-
-  auto ref_list_s = record.value(EQUIPMENT_CITATIONS).toString();
-  auto ref_list = ref_list_s.split(";");
-  equipment.citations.clear();
-  for (auto& val : ref_list) {
-    equipment.citations.push_back(val.toInt());
-  }
-
-  equipment.image = record.value(EQUIPMENT_IMAGE).toString();
-}
-//------------------------------------------------------------------------------
-inline void assign_event(QSqlRecord& record, Event& event)
-{
-  event.id = record.value(EVENT_ID).toInt();
-  event.name = record.value(EVENT_NAME).toString();
-  event.location = record.value(EVENT_LOCATION).toInt();
-  event.actor = record.value(EVENT_ACTOR).toInt();
-  event.description = record.value(EVENT_DESCRIPTION).toString();
-  auto equip_list_s = record.value(EVENT_EQUIPMENT).toString();
-  auto equip_list = equip_list_s.split(";");
-  event.equipment.clear();
-  for (auto& val : equip_list) {
-    event.equipment.push_back(val);
-  }
-}
-//------------------------------------------------------------------------------
-inline void assign_location(const QSqlRecord& record, Location& location)
-{
-  location.id = record.value(LOCATION_ID).toInt();
-  location.name = record.value(LOCATION_NAME).toString();
-  location.scene_name = record.value(LOCATION_SCENE_NAME).toString();
-  location.time_of_day = record.value(LOCATION_TIME_OF_DAY).toString();
-  location.environment = record.value(LOCATION_ENVIRONMENT).toString();
-}
-//------------------------------------------------------------------------------
-inline void assign_injury(const QSqlRecord& record, Injury& injury)
-{
-  injury.id = record.value(INJURY_ID).toInt();
-  injury.medical_name = record.value(INJURY_MEDICAL_NAME).toString();
-  injury.common_name = record.value(INJURY_COMMON_NAME).toString();
-  injury.description = record.value(INJURY_DESCRIPTION).toString();
-  auto ref_list_s = record.value(INJURY_CITATIONS).toString();
-  auto ref_list = ref_list_s.split(";");
-  injury.citations.clear();
-  for (auto& val : ref_list) {
-    injury.citations.push_back(val.toInt());
-  }
-}
-//------------------------------------------------------------------------------
-inline void assign_injury_set(const QSqlRecord& record, InjurySet& injury)
-{
-  injury.id = record.value(INJURY_SET_ID).toInt();
-  injury.name = record.value(INJURY_SET_NAME).toString();
-  injury.description = record.value(INJURY_SET_DESCRIPTION).toString();
-  auto ref_list_s = record.value(INJURY_SET_INJURIES).toString();
-  auto ref_list = ref_list_s.split(";");
-  injury.injuries.clear();
-  for (auto& val : ref_list) {
-    injury.injuries.push_back(val.toInt());
-  }
-}
-//------------------------------------------------------------------------------
-inline void assign_objective(const QSqlRecord& record, Objective& objective)
-{
-  objective.id = record.value(OBJECTIVE_ID).toInt();
-  objective.name = record.value(OBJECTIVE_NAME).toString();
-  objective.description = record.value(OBJECTIVE_DESCRIPTION).toString();
-  auto ref_list_s = record.value(OBJECTIVE_CITATIONS).toString();
-  auto ref_list = ref_list_s.split(";");
-  objective.citations.clear();
-  for (auto& val : ref_list) {
-    if (!val.isEmpty()) {
-      objective.citations.push_back(val.toInt());
-    }
-  }
-}
-//------------------------------------------------------------------------------
-inline void assign_prop(QSqlRecord& record, Prop& prop)
-{
-  prop.id = record.value(PROP_ID).toInt();
-  prop.equipment = record.value(PROP_EQUIPMENT).toString();
-}
-//------------------------------------------------------------------------------
-inline void assign_property(const QSqlRecord& record, Property& property)
-{
-  property.id = record.value(PROPERTY_ID).toInt();
-  property.name = record.value(PROPERTY_NAME).toString();
-  property.value = record.value(PROPERTY_VALUE).toString();
-}
-//------------------------------------------------------------------------------
-inline void assign_role(QSqlRecord& record, Role& role)
-{
-  role.id = record.value(ROLE_ID).toInt();
-  role.name = record.value(ROLE_NAME).toString();
-  role.description = record.value(ROLE_DESCRIPTION).toString();
-}
-//------------------------------------------------------------------------------
-inline void assign_restriction(const QSqlRecord& record, Restriction& restriction)
-{
-  restriction.id = record.value(RESTRICTION_ID).toInt();
-  restriction.name = record.value(RESTRICTION_NAME).toString();
-  restriction.value = record.value(RESTRICTION_VALUE).toString();
-}
-//------------------------------------------------------------------------------
-inline void assign_treatment(const QSqlRecord& record, Treatment& treatment)
-{
-  treatment.id = record.value(TREATMENT_ID).toInt();
-  treatment.medical_name = record.value(TREATMENT_MEDICAL_NAME).toString();
-  treatment.common_name = record.value(TREATMENT_COMMON_NAME).toString();
-  treatment.description = record.value(TREATMENT_DESCRIPTION).toString();
-  auto equip_list_s = record.value(TREATMENT_EQUIPMENT).toString();
-  auto equip_list = equip_list_s.split(";");
-  treatment.equipment.clear();
-  for (auto& val : equip_list) {
-    treatment.equipment.push_back(val);
-  }
-  auto ref_list_s = record.value(TREATMENT_CITATIONS).toString();
-  auto ref_list = ref_list_s.split(";");
-  treatment.citations.clear();
-  for (auto& val : ref_list) {
-    treatment.citations.push_back(val.toInt());
-  }
-}
-//------------------------------------------------------------------------------
 //                      SQLiteDriver Functions
 //------------------------------------------------------------------------------
 SQLite3Driver::SQLite3Driver(QObject* parent)
@@ -389,232 +204,6 @@ bool SQLite3Driver::clear_table(enum SQLite3Driver::Sqlite3Table t)
   }
   return false;
 }
-//-------------------------------------------------------------------COUNT_START
-int SQLite3Driver::author_count() const
-{
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::count_authors);
-    query.exec();
-    if (query.next()) {
-      auto record = query.record();
-      assert(record.count() == 1);
-      return record.value(0).toInt();
-    }
-  }
-  return -1;
-}
-//------------------------------------------------------------------------------
-int SQLite3Driver::restriction_count() const
-
-{
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::count_restrictions);
-    query.exec();
-    if (query.next()) {
-      auto record = query.record();
-      assert(record.count() == 1);
-      return record.value(0).toInt();
-    }
-  }
-  return -1;
-}
-//------------------------------------------------------------------------------
-int SQLite3Driver::objective_count() const
-
-{
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::count_objectives);
-    query.exec();
-    if (query.next()) {
-      auto record = query.record();
-      assert(record.count() == 1);
-      return record.value(0).toInt();
-    }
-  }
-  return -1;
-}
-//------------------------------------------------------------------------------
-int SQLite3Driver::property_count() const
-{
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::count_properties);
-    query.exec();
-    if (query.next()) {
-      auto record = query.record();
-      assert(record.count() == 1);
-      return record.value(0).toInt();
-    }
-  }
-  return -1;
-}
-//------------------------------------------------------------------------------
-int SQLite3Driver::citation_count() const
-{
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::count_citations);
-    query.exec();
-    if (query.next()) {
-      auto record = query.record();
-      assert(record.count() == 1);
-      return record.value(0).toInt();
-    }
-  }
-  return -1;
-}
-//------------------------------------------------------------------------------
-int SQLite3Driver::treatment_count() const
-{
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::count_treatments);
-    query.exec();
-    if (query.next()) {
-      auto record = query.record();
-      assert(record.count() == 1);
-      return record.value(0).toInt();
-    }
-  }
-  return -1;
-}
-//------------------------------------------------------------------------------
-int SQLite3Driver::equipment_count() const
-{
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::count_equipments);
-    query.exec();
-    if (query.next()) {
-      auto record = query.record();
-      assert(record.count() == 1);
-      return record.value(0).toInt();
-    }
-  }
-  return -1;
-}
-//------------------------------------------------------------------------------
-int SQLite3Driver::injury_count() const
-{
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::count_injuries);
-    query.exec();
-    if (query.next()) {
-      auto record = query.record();
-      assert(record.count() == 1);
-      return record.value(0).toInt();
-    }
-  }
-  return -1;
-}
-//------------------------------------------------------------------------------
-int SQLite3Driver::injury_set_count() const
-{
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::count_injury_sets);
-    query.exec();
-    if (query.next()) {
-      auto record = query.record();
-      assert(record.count() == 1);
-      return record.value(0).toInt();
-    }
-  }
-  return -1;
-}
-//------------------------------------------------------------------------------
-int SQLite3Driver::assessment_count() const
-{
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::count_assessments);
-    query.exec();
-    if (query.next()) {
-      auto record = query.record();
-      assert(record.count() == 1);
-      return record.value(0).toInt();
-    }
-  }
-  return -1;
-}
-//------------------------------------------------------------------------------
-int SQLite3Driver::location_count() const
-{
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::count_locations);
-    query.exec();
-    if (query.next()) {
-      auto record = query.record();
-      assert(record.count() == 1);
-      return record.value(0).toInt();
-    }
-  }
-  return -1;
-}
-//------------------------------------------------------------------------------
-int SQLite3Driver::role_count() const
-{
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::count_roles);
-    query.exec();
-    if (query.next()) {
-      auto record = query.record();
-      assert(record.count() == 1);
-      return record.value(0).toInt();
-    }
-  }
-  return -1;
-}
-//------------------------------------------------------------------------------
-int SQLite3Driver::prop_count() const
-{
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::count_props);
-    query.exec();
-    if (query.next()) {
-      auto record = query.record();
-      assert(record.count() == 1);
-      return record.value(0).toInt();
-    }
-  }
-  return -1;
-}
-//------------------------------------------------------------------------------
-int SQLite3Driver::event_count() const
-{
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::count_events);
-    query.exec();
-    if (query.next()) {
-      auto record = query.record();
-      assert(record.count() == 1);
-      return record.value(0).toInt();
-    }
-  }
-  return -1;
-}
 //-----------------------------------------------------------------------------
 int SQLite3Driver::nextID(Sqlite3Table table) const
 {
@@ -679,204 +268,31 @@ int SQLite3Driver::nextID(Sqlite3Table table) const
   }
   return -1;
 }
-//-----------------------------------------------------------------------------
-void SQLite3Driver::authors()
+//-----------------------------------------------------------------------------ASSESSMENT
+inline void assign_assessment(const QSqlRecord& record, Assessment& assessment)
 {
-  qDeleteAll(_authors);
-  _authors.clear();
+  assessment.id = record.value(ASSESSMENT_ID).toInt();
+  assessment.name = record.value(ASSESSMENT_NAME).toString();
+  assessment.description = record.value(ASSESSMENT_DESCRIPTION).toString();
+  assessment.type = record.value(ASSESSMENT_TYPE).toString();
+  assessment.available_points = record.value(ASSESSMENT_AVAILABLE_POINTS).toInt();
+  assessment.criteria = record.value(ASSESSMENT_CRITERIA).toString();
+}
+int SQLite3Driver::assessment_count() const
+{
   if (_db.isOpen()) {
 
     QSqlQuery query{ _db };
-    query.prepare(sqlite3::select_all_authors);
+    query.prepare(sqlite3::count_assessments);
     query.exec();
-    while (query.next()) {
-      auto author = std::make_unique<Author>();
+    if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 9);
-      assign_author(record, *author);
-      _authors.push_back(author.release());
+      assert(record.count() == 1);
+      return record.value(0).toInt();
     }
-    _current_author = _authors.begin();
-    emit authorsChanged();
   }
+  return -1;
 }
-//------------------------------------------------------------------------------
-void SQLite3Driver::properties()
-{
-  qDeleteAll(_properties);
-  _properties.clear();
-
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::select_all_properties);
-    query.exec();
-    while (query.next()) {
-      auto property = std::make_unique<pfc::Property>();
-      auto record = query.record();
-      assert(record.count() == 3);
-      assign_property(record, *property);
-      _properties.push_back(property.release());
-    }
-    _current_property = _properties.begin();
-    emit propertiesChanged();
-  }
-}
-//------------------------------------------------------------------------------
-void SQLite3Driver::restrictions()
-{
-  qDeleteAll(_restrictions);
-  _restrictions.clear();
-
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::select_all_restrictions);
-    query.exec();
-    while (query.next()) {
-      auto restriction = std::make_unique<pfc::Restriction>();
-      auto record = query.record();
-      assert(record.count() == 3);
-      assign_restriction(record, *restriction);
-      _restrictions.push_back(restriction.release());
-    }
-    _current_restriction = _restrictions.begin();
-    emit restrictionsChanged();
-  }
-}
-//------------------------------------------------------------------------------
-void SQLite3Driver::objectives()
-{
-  qDeleteAll(_objectives);
-  _objectives.clear();
-
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::select_all_objectives);
-    query.exec();
-    while (query.next()) {
-      auto objective = std::make_unique<pfc::Objective>();
-      auto record = query.record();
-      assert(record.count() == 4);
-      assign_objective(record, *objective);
-      _objectives.push_back(objective.release());
-    }
-    _current_objective = _objectives.begin();
-    emit objectivesChanged();
-  }
-}
-//------------------------------------------------------------------------------
-void SQLite3Driver::citations()
-{
-  qDeleteAll(_citations);
-  _citations.clear();
-
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::select_all_citations);
-    query.exec();
-    while (query.next()) {
-      auto citation = std::make_unique<pfc::Citation>();
-      auto record = query.record();
-      assert(record.count() == 6);
-      assign_citation(record, *citation);
-      _citations.push_back(citation.release());
-    }
-    _current_citation = _citations.begin();
-    emit citationsChanged();
-  }
-}
-//------------------------------------------------------------------------------
-void SQLite3Driver::treatments()
-{
-  qDeleteAll(_treatments);
-  _treatments.clear();
-
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::select_all_treatments);
-    query.exec();
-    while (query.next()) {
-      auto treatment = std::make_unique<pfc::Treatment>();
-      auto record = query.record();
-      assert(record.count() == 6);
-      assign_treatment(record, *treatment);
-      _treatments.push_back(treatment.release());
-    }
-    _current_treatment = _treatments.begin();
-    emit treatmentsChanged();
-  }
-}
-//------------------------------------------------------------------------------
-void SQLite3Driver::equipments()
-{
-  qDeleteAll(_equipments);
-  _equipments.clear();
-
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::select_all_equipments);
-    query.exec();
-    while (query.next()) {
-      auto equipment = std::make_unique<pfc::Equipment>();
-      auto record = query.record();
-      assert(record.count() == 5);
-      assign_equipment(record, *equipment);
-      _equipments.push_back(equipment.release());
-    }
-    _current_equipment = _equipments.begin();
-    emit equipmentsChanged();
-  }
-}
-//------------------------------------------------------------------------------
-void SQLite3Driver::injuries()
-{
-  qDeleteAll(_injuries);
-  _injuries.clear();
-
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::select_all_injuries);
-    query.exec();
-    while (query.next()) {
-      auto injury = std::make_unique<pfc::Injury>();
-      auto record = query.record();
-      assert(record.count() == 6);
-      assign_injury(record, *injury);
-      _injuries.push_back(injury.release());
-    }
-    _current_injury = _injuries.begin();
-    emit injuriesChanged();
-  }
-}
-//------------------------------------------------------------------------------
-void SQLite3Driver::injury_sets()
-{
-  qDeleteAll(_injury_sets);
-  _injury_sets.clear();
-
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::select_all_injury_sets);
-    query.exec();
-    while (query.next()) {
-      auto set = std::make_unique<pfc::InjurySet>();
-      auto record = query.record();
-      assert(record.count() == 4);
-      assign_injury_set(record, *set);
-      _injury_sets.push_back(set.release());
-    }
-    _current_injury_set = _injury_sets.begin();
-    emit injuriesChanged();
-  }
-}
-//------------------------------------------------------------------------------
 void SQLite3Driver::assessments()
 {
   qDeleteAll(_assessments);
@@ -898,192 +314,6 @@ void SQLite3Driver::assessments()
     emit assessmentsChanged();
   }
 }
-//------------------------------------------------------------------------------
-void SQLite3Driver::locations()
-{
-  qDeleteAll(_locations);
-  _locations.clear();
-
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::select_all_locations);
-    query.exec();
-    while (query.next()) {
-      auto location = std::make_unique<pfc::Location>();
-      auto record = query.record();
-      assert(record.count() == 3);
-      assign_location(record, *location);
-      _locations.push_back(location.release());
-    }
-    _current_location = _locations.begin();
-    emit locationsChanged();
-  }
-}
-//------------------------------------------------------------------------------
-void SQLite3Driver::roles()
-{
-  qDeleteAll(_roles);
-  _roles.clear();
-
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::select_all_roles);
-    query.exec();
-    while (query.next()) {
-      auto role = std::make_unique<pfc::Role>();
-      auto record = query.record();
-      assert(record.count() == 3);
-      assign_role(record, *role);
-      _roles.push_back(role.release());
-    }
-    _current_role = _roles.begin();
-    emit rolesChanged();
-  }
-}
-//------------------------------------------------------------------------------
-void SQLite3Driver::props()
-{
-  qDeleteAll(_props);
-  _props.clear();
-
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::select_all_props);
-    query.exec();
-    while (query.next()) {
-      auto prop = std::make_unique<pfc::Prop>();
-      auto record = query.record();
-      assert(record.count() == 3);
-      assign_prop(record, *prop);
-      _props.push_back(prop.release());
-    }
-    _current_prop = _props.begin();
-    emit propsChanged();
-  }
-}
-//------------------------------------------------------------------------------
-void SQLite3Driver::events()
-{
-  qDeleteAll(_events);
-  _events.clear();
-
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::select_all_events);
-    query.exec();
-    while (query.next()) {
-      auto event = std::make_unique<pfc::Event>();
-      auto record = query.record();
-      assert(record.count() == 3);
-      assign_event(record, *event);
-      _events.push_back(event.release());
-    }
-    _current_event = _events.begin();
-    emit eventsChanged();
-  }
-}
-//--------------------------------------------------------------------NEXT_START
-bool SQLite3Driver::next_author(Author* author)
-{
-  if (_current_author == _authors.end() || _authors.empty()) {
-    return false;
-  }
-  author->assign(*(*_current_author));
-  ++_current_author;
-  return true;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::next_property(Property* property)
-{
-  if (_current_property == _properties.end() || _properties.empty()) {
-    return false;
-  }
-  property->assign(*(*_current_property));
-  ++_current_property;
-  return true;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::next_restriction(Restriction* restriction)
-{
-  if (_current_restriction == _restrictions.end() || _restrictions.empty()) {
-    return false;
-  }
-  restriction->assign(*(*_current_restriction));
-  ++_current_restriction;
-
-  return true;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::next_objective(Objective* objective)
-{
-  if (_current_objective == _objectives.end() || _objectives.empty()) {
-    return false;
-  }
-  objective->assign(*(*_current_objective));
-  ++_current_objective;
-
-  return true;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::next_citation(Citation* citation)
-{
-  if (_current_citation == _citations.end() || _citations.empty()) {
-    return false;
-  }
-  citation->assign(*(*_current_citation));
-  ++_current_citation;
-
-  return true;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::next_treatment(Treatment* treatment)
-{
-  if (_current_treatment == _treatments.end() || _treatments.empty()) {
-    return false;
-  }
-  treatment->assign(*(*_current_treatment));
-  ++_current_treatment;
-
-  return true;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::next_equipment(Equipment* equipment)
-{
-  if (_current_equipment == _equipments.end() || _equipments.empty()) {
-    return false;
-  }
-  equipment->assign(*(*_current_equipment));
-  ++_current_equipment;
-
-  return true;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::next_injury(Injury* injury)
-{
-  if (_current_injury == _injuries.end() || _injuries.empty()) {
-    return false;
-  }
-  injury->assign(*(*_current_injury));
-  ++_current_injury;
-
-  return true;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::next_injury_set(InjurySet* injury_set)
-{
-  if (_current_injury_set == _injury_sets.end() || _injury_sets.empty()) {
-    return false;
-  }
-  injury_set->assign(*(*_current_injury_set));
-  ++_current_injury_set;
-
-  return true;
-}
-//------------------------------------------------------------------------------
 bool SQLite3Driver::next_assessment(Assessment* assessment)
 {
   if (_current_assessment == _assessments.end() || _assessments.empty()) {
@@ -1094,51 +324,161 @@ bool SQLite3Driver::next_assessment(Assessment* assessment)
 
   return true;
 }
-//------------------------------------------------------------------------------
-bool SQLite3Driver::next_location(Location* location)
+bool SQLite3Driver::select_assessment(Assessment* assessment) const
 {
-  if (_current_location == _locations.end() || _locations.empty()) {
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    QSqlRecord record;
+    if (assessment->id != -1) {
+      query.prepare(sqlite3::select_assessment_by_id);
+      query.bindValue(":id", assessment->id);
+    } else if (!assessment->name.isEmpty()) {
+      query.prepare(sqlite3::select_assessment_by_name);
+      query.bindValue(":name", assessment->name);
+    } else {
+      qWarning() << "Provided Property has no id or name one is required";
+      return false;
+    }
+    if (query.exec()) {
+      while (query.next()) {
+        record = query.record();
+        assign_assessment(record, *assessment);
+        return true;
+      }
+    } else {
+      qWarning() << query.lastError();
+    }
     return false;
   }
-  location->assign(*(*_current_location));
-  ++_current_location;
-
-  return true;
+  qWarning() << "No Database connection";
+  return false;
 }
-//------------------------------------------------------------------------------
-bool SQLite3Driver::next_role(Role* role)
+bool SQLite3Driver::update_assessment(Assessment* assessment)
 {
-  if (_current_role == _roles.end() || _roles.empty()) {
+
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (-1 != assessment->id) {
+      query.prepare(sqlite3::update_assessment_by_id);
+      query.bindValue(":id", assessment->id);
+    } else if (!assessment->name.isEmpty()) {
+      query.prepare(sqlite3::insert_or_update_assessments);
+    }
+    query.bindValue(":name", assessment->name);
+    query.bindValue(":description", assessment->description);
+    query.bindValue(":type", assessment->type);
+    query.bindValue(":available_points", assessment->available_points);
+    query.bindValue(":criteria", assessment->criteria);
+
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    if (-1 == assessment->id) {
+      const auto r = select_assessment(assessment);
+      assessmentUpdated(assessment->id);
+      return r;
+      ;
+    }
+    assessmentUpdated(assessment->id);
+    return true;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::remove_assessment(Assessment* assessment)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (select_assessment(assessment)) {
+      query.prepare(sqlite3::delete_assessment_by_id);
+      query.bindValue(":id", assessment->id);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      assessmentRemoved(assessment->id);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+//-----------------------------------------------------------------------------AUTHOR
+inline void assign_author(const QSqlRecord& record, Author& author)
+{
+  author.id = record.value(AUTHOR_ID).toInt();
+  author.first = record.value(AUTHOR_FIRST_NAME).toString();
+  author.last = record.value(AUTHOR_LAST_NAME).toString();
+  author.email = record.value(AUTHOR_EMAIL).toString();
+
+  auto zip_qstr = record.value(AUTHOR_ZIPCODE).toString();
+
+  QRegularExpression zip(R"((\d{5}))");
+  QRegularExpression zip_plus4(R"((\d{5})-(\d{4}))");
+  QRegularExpressionMatch match = zip_plus4.match(zip_qstr);
+
+  if (match.hasMatch()) {
+    author.zip = match.captured(1);
+    author.plus_4 = match.captured(2);
+  } else {
+    match = zip.match(zip_qstr);
+    if (match.hasMatch()) {
+      author.zip = match.captured(1);
+    }
+  }
+  author.state = record.value(AUTHOR_STATE).toString();
+  author.country = record.value(AUTHOR_COUNTRY).toString();
+  author.phone = record.value(AUTHOR_PHONE).toString();
+  author.organization = record.value(AUTHOR_ORGANIZATION).toString();
+}
+int SQLite3Driver::author_count() const
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_authors);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
+void SQLite3Driver::authors()
+{
+  qDeleteAll(_authors);
+  _authors.clear();
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_authors);
+    query.exec();
+    while (query.next()) {
+      auto author = std::make_unique<Author>();
+      auto record = query.record();
+      assert(record.count() == 9);
+      assign_author(record, *author);
+      _authors.push_back(author.release());
+    }
+    _current_author = _authors.begin();
+    emit authorsChanged();
+  }
+}
+bool SQLite3Driver::next_author(Author* author)
+{
+  if (_current_author == _authors.end() || _authors.empty()) {
     return false;
   }
-  role->assign(*(*_current_role));
-  ++_current_role;
-
+  author->assign(*(*_current_author));
+  ++_current_author;
   return true;
 }
-//------------------------------------------------------------------------------
-bool SQLite3Driver::next_prop(Prop* prop)
-{
-  if (_current_prop == _props.end() || _props.empty()) {
-    return false;
-  }
-  prop->assign(*(*_current_prop));
-  ++_current_prop;
-
-  return true;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::next_event(Event* event)
-{
-  if (_current_event == _events.end() || _events.empty()) {
-    return false;
-  }
-  event->assign(*(*_current_event));
-  ++_current_event;
-
-  return true;
-}
-//------------------------------------------------------------------SELECT_START
 bool SQLite3Driver::select_author(Author* author) const
 {
   if (_db.isOpen()) {
@@ -1168,101 +508,146 @@ bool SQLite3Driver::select_author(Author* author) const
   qWarning() << "No Database connection";
   return false;
 }
-//------------------------------------------------------------------------------
-bool SQLite3Driver::select_property(Property* property) const
+bool SQLite3Driver::update_author(Author* author)
 {
 
   if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    QSqlRecord record;
-    if (property->id != -1) {
-      query.prepare(sqlite3::select_property_by_id);
-      query.bindValue(":id", property->id);
-    } else if (!property->name.isEmpty()) {
-      query.prepare(sqlite3::select_property_by_name);
-      query.bindValue(":name", property->name);
-    } else {
-      qWarning() << "Provided Property has no id or name one is required";
-      return false;
-    }
-    if (query.exec()) {
+    if (!author->email.isEmpty()) {
+      QSqlQuery query{ _db };
 
-      while (query.next()) {
-        record = query.record();
-        assign_property(record, *property);
-        return true;
+      query.prepare(sqlite3::insert_or_update_authors);
+      query.bindValue(":name_first", author->first);
+      query.bindValue(":name_last", author->last);
+      query.bindValue(":email", author->email);
+
+      const auto zipcode = (author->plus_4.isEmpty()) ? QString("%1").arg(author->zip) : QString("%1-%2").arg(author->zip).arg(author->plus_4);
+      query.bindValue(":zipcode", zipcode);
+
+      query.bindValue(":state", author->state);
+      query.bindValue(":country", author->country);
+      query.bindValue(":phone", author->phone);
+      query.bindValue(":organization", author->organization);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
       }
-    } else {
-      qWarning() << query.lastError();
+      authorUpdated(author->id);
+      return true;
     }
-    return false;
   }
   qWarning() << "No Database connection";
   return false;
 }
-//------------------------------------------------------------------------------
-bool SQLite3Driver::select_restriction(Restriction* restriction) const
+bool SQLite3Driver::update_first_author(Author* author)
 {
 
   if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    QSqlRecord record;
-    if (restriction->id != -1) {
-      query.prepare(sqlite3::select_restriction_by_id);
-      query.bindValue(":id", restriction->id);
-    } else if (!restriction->name.isEmpty()) {
-      query.prepare(sqlite3::select_restriction_by_name);
-      query.bindValue(":name", restriction->name);
-    } else {
-      qWarning() << "Provided Property has no id or name one is required";
-      return false;
-    }
-    if (query.exec()) {
-      while (query.next()) {
-        record = query.record();
-        assign_restriction(record, *restriction);
-        return true;
+    if (!author->email.isEmpty()) {
+      QSqlQuery query{ _db };
+      query.prepare(sqlite3::insert_or_update_first_author);
+      query.bindValue(":name_first", author->first);
+      query.bindValue(":name_last", author->last);
+      query.bindValue(":email", author->email);
+
+      const auto zipcode = (author->plus_4.isEmpty()) ? QString("%1").arg(author->zip) : QString("%1-%2").arg(author->zip).arg(author->plus_4);
+      query.bindValue(":zipcode", zipcode);
+
+      query.bindValue(":state", author->state);
+      query.bindValue(":country", author->country);
+      query.bindValue(":phone", author->phone);
+      query.bindValue(":organization", author->organization);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
       }
-    } else {
-      qWarning() << query.lastError();
+      authorUpdated(1);
+      return true;
     }
-    return false;
   }
   qWarning() << "No Database connection";
   return false;
 }
-//------------------------------------------------------------------------------
-bool SQLite3Driver::select_objective(Objective* objective) const
+bool SQLite3Driver::remove_author(Author* author)
 {
-
   if (_db.isOpen()) {
     QSqlQuery query(_db);
-    QSqlRecord record;
-    if (objective->id != -1) {
-      query.prepare(sqlite3::select_objective_by_id);
-      query.bindValue(":id", objective->id);
-    } else if (!objective->name.isEmpty()) {
-      query.prepare(sqlite3::select_objective_by_name);
-      query.bindValue(":name", objective->name);
+    if (select_author(author)) {
+      query.prepare(sqlite3::delete_author_by_id);
+      query.bindValue(":id", author->id);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      authorRemoved(author->id);
+      return true;
     } else {
-      qWarning() << "Provided Property has no id or name one is required";
       return false;
     }
-    if (query.exec()) {
-      while (query.next()) {
-        record = query.record();
-        assign_objective(record, *objective);
-        return true;
-      }
-    } else {
-      qWarning() << query.lastError();
-    }
-  } else {
-    qWarning() << "No Database connection";
   }
+  qWarning() << "No Database connection";
   return false;
 }
-//------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------CITATION
+inline void assign_citation(const QSqlRecord& record, Citation& citation)
+{
+  citation.id = record.value(CITATION_ID).toInt();
+  citation.key = record.value(CITATION_KEY).toString();
+  citation.title = record.value(CITATION_TITLE).toString();
+  auto auth_list_s = record.value(CITATION_AUTHORS).toString();
+  auto auth_list = auth_list_s.split(";");
+  citation.authors.clear();
+  for (auto& val : auth_list) {
+    citation.authors.push_back(val.toInt());
+  }
+  citation.year = record.value(CITATION_YEAR).toString();
+  citation.publisher = record.value(CITATION_PUBLISHER).toString();
+}
+int SQLite3Driver::citation_count() const
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_citations);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
+void SQLite3Driver::citations()
+{
+  qDeleteAll(_citations);
+  _citations.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_citations);
+    query.exec();
+    while (query.next()) {
+      auto citation = std::make_unique<pfc::Citation>();
+      auto record = query.record();
+      assert(record.count() == 6);
+      assign_citation(record, *citation);
+      _citations.push_back(citation.release());
+    }
+    _current_citation = _citations.begin();
+    emit citationsChanged();
+  }
+}
+bool SQLite3Driver::next_citation(Citation* citation)
+{
+  if (_current_citation == _citations.end() || _citations.empty()) {
+    return false;
+  }
+  citation->assign(*(*_current_citation));
+  ++_current_citation;
+
+  return true;
+}
 bool SQLite3Driver::select_citation(Citation* citation) const
 {
   //TODO: Hitting the exact title is going to be pretty hard
@@ -1298,434 +683,6 @@ bool SQLite3Driver::select_citation(Citation* citation) const
   qWarning() << "No Database connection";
   return false;
 }
-//------------------------------------------------------------------------------
-bool SQLite3Driver::select_treatment(Treatment* treatment) const
-{
-
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    QSqlRecord record;
-    if (treatment->id != -1) {
-      query.prepare(sqlite3::select_treatment_by_id);
-      query.bindValue(":id", treatment->id);
-    } else if (!treatment->medical_name.isEmpty()) {
-      query.prepare(sqlite3::select_treatment_by_medical_name);
-      query.bindValue(":medical_name", treatment->medical_name);
-    } else if (!treatment->common_name.isEmpty()) {
-      query.prepare(sqlite3::select_treatment_by_common_name);
-      query.bindValue(":common_name", treatment->common_name);
-    } else {
-      qWarning() << "Provided Property has no id or name one is required";
-      return false;
-    }
-    if (query.exec()) {
-      while (query.next()) {
-        record = query.record();
-        assign_treatment(record, *treatment);
-        return true;
-      }
-    } else {
-      qWarning() << query.lastError();
-    }
-    return false;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::select_equipment(Equipment* equipment) const
-{
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    QSqlRecord record;
-    if (equipment->id != -1) {
-      query.prepare(sqlite3::select_equipment_by_id);
-      query.bindValue(":id", equipment->id);
-    } else if (!equipment->name.isEmpty()) {
-      query.prepare(sqlite3::select_equipment_by_name);
-      query.bindValue(":name", equipment->name);
-    } else {
-      qWarning() << "Provided Property has no id or name one is required";
-      return false;
-    }
-    if (query.exec()) {
-      while (query.next()) {
-        record = query.record();
-        assign_equipment(record, *equipment);
-        return true;
-      }
-    } else {
-      qWarning() << query.lastError();
-    }
-    return false;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::select_injury(Injury* injury) const
-{
-
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    QSqlRecord record;
-    if (injury->id != -1) {
-      query.prepare(sqlite3::select_injury_by_id);
-      query.bindValue(":id", injury->id);
-    } else if (!injury->medical_name.isEmpty()) {
-      query.prepare(sqlite3::select_injury_by_medical_name);
-      query.bindValue(":medical_name", injury->medical_name);
-    } else if (!injury->common_name.isEmpty()) {
-      query.prepare(sqlite3::select_injury_by_common_name);
-      query.bindValue(":common_name", injury->common_name);
-    } else {
-      qWarning() << "Provided Property has no id or name one is required";
-      return false;
-    }
-    if (query.exec()) {
-      while (query.next()) {
-        record = query.record();
-        assign_injury(record, *injury);
-        return true;
-      }
-    } else {
-      qWarning() << query.lastError();
-    }
-    return false;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::select_injury_set(InjurySet* set) const
-{
-
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    QSqlRecord record;
-    if (set->id != -1) {
-      query.prepare(sqlite3::select_injury_set_by_id);
-      query.bindValue(":id", set->id);
-    } else if (!set->name.isEmpty()) {
-      query.prepare(sqlite3::select_injury_set_by_name);
-      query.bindValue(":name", set->name);
-    } else {
-      qWarning() << "Provided Property has no id or name one is required";
-      return false;
-    }
-    if (query.exec()) {
-      while (query.next()) {
-        record = query.record();
-        assign_injury_set(record, *set);
-        return true;
-      }
-    } else {
-      qWarning() << query.lastError();
-    }
-    return false;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::select_assessment(Assessment* assessment) const
-{
-
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    QSqlRecord record;
-    if (assessment->id != -1) {
-      query.prepare(sqlite3::select_assessment_by_id);
-      query.bindValue(":id", assessment->id);
-    } else if (!assessment->name.isEmpty()) {
-      query.prepare(sqlite3::select_assessment_by_name);
-      query.bindValue(":name", assessment->name);
-    } else {
-      qWarning() << "Provided Property has no id or name one is required";
-      return false;
-    }
-    if (query.exec()) {
-      while (query.next()) {
-        record = query.record();
-        assign_assessment(record, *assessment);
-        return true;
-      }
-    } else {
-      qWarning() << query.lastError();
-    }
-    return false;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::select_location(Location* location) const
-{
-
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    QSqlRecord record;
-    if (location->id != -1) {
-      query.prepare(sqlite3::select_location_by_id);
-      query.bindValue(":id", location->id);
-    } else if (!location->name.isEmpty()) {
-      query.prepare(sqlite3::select_location_by_name);
-      query.bindValue(":name", location->name);
-    } else if (!location->scene_name.isEmpty()) {
-      query.prepare(sqlite3::select_location_by_scene_name);
-      query.bindValue(":scene_name", location->scene_name);
-    } else {
-      qWarning() << "Provided Property has no id or name one is required";
-      return false;
-    }
-    if (query.exec()) {
-      while (query.next()) {
-        record = query.record();
-        assign_location(record, *location);
-        return true;
-      }
-    } else {
-      qWarning() << query.lastError();
-    }
-    return false;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::select_role(Role* role) const
-{
-
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    QSqlRecord record;
-    if (role->id != -1) {
-      query.prepare(sqlite3::select_role_by_id);
-      query.bindValue(":id", role->id);
-    } else if (!role->name.isEmpty()) {
-      query.prepare(sqlite3::select_role_by_name);
-      query.bindValue(":name", role->name);
-    } else {
-      qWarning() << "Provided Property has no id or name one is required";
-      return false;
-    }
-    if (query.exec()) {
-      while (query.next()) {
-        record = query.record();
-        assign_role(record, *role);
-        return true;
-      }
-    } else {
-
-      qWarning() << query.lastError();
-    }
-    return false;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::select_prop(Prop* prop) const
-{
-
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    QSqlRecord record;
-    if (prop->id != -1) {
-      query.prepare(sqlite3::select_prop_by_id);
-      query.bindValue(":id", prop->id);
-    } else {
-      // So the issue here is that id is set when the property is inserted, and I can't get it without some other unique field
-      // to look up a prop with
-      //TODO: Run this by Steven
-      qWarning() << "Provided Property has no id or name one is required";
-      return false;
-    }
-    if (query.exec()) {
-      while (query.next()) {
-        record = query.record();
-        assign_prop(record, *prop);
-        return true;
-      }
-    } else {
-      qWarning() << query.lastError();
-    }
-    return false;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::select_event(Event* event) const
-{
-
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    QSqlRecord record;
-    if (event->id != -1) {
-      query.prepare(sqlite3::select_event_by_id);
-      query.bindValue(":id", event->id);
-    } else if (!event->name.isEmpty()) {
-      query.prepare(sqlite3::select_event_by_name);
-      query.bindValue(":name",event->name);
-    } else {
-      qWarning() << "Provided Property has no id or name one is required";
-      return false;
-    }
-    if (query.exec()) {
-      while (query.next()) {
-        record = query.record();
-        assign_event(record, *event);
-        return true;
-      }
-    } else {
-      qWarning() << query.lastError();
-    }
-    return false;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------UPDATE_START
-bool SQLite3Driver::update_author(Author* author)
-{
-
-  if (_db.isOpen()) {
-    if (!author->email.isEmpty()) {
-      QSqlQuery query{ _db };
-
-      query.prepare(sqlite3::insert_or_update_authors);
-      query.bindValue(":name_first", author->first);
-      query.bindValue(":name_last", author->last);
-      query.bindValue(":email", author->email);
-
-      const auto zipcode = (author->plus_4.isEmpty()) ? QString("%1").arg(author->zip) : QString("%1-%2").arg(author->zip).arg(author->plus_4);
-      query.bindValue(":zipcode", zipcode);
-
-      query.bindValue(":state", author->state);
-      query.bindValue(":country", author->country);
-      query.bindValue(":phone", author->phone);
-      query.bindValue(":organization", author->organization);
-      if (!query.exec()) {
-        qWarning() << query.lastError();
-        return false;
-      }
-      authorUpdated(author->id);
-      return true;
-    }
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::update_first_author(Author* author)
-{
-
-  if (_db.isOpen()) {
-    if (!author->email.isEmpty()) {
-      QSqlQuery query{ _db };
-      query.prepare(sqlite3::insert_or_update_first_author);
-      query.bindValue(":name_first", author->first);
-      query.bindValue(":name_last", author->last);
-      query.bindValue(":email", author->email);
-
-      const auto zipcode = (author->plus_4.isEmpty()) ? QString("%1").arg(author->zip) : QString("%1-%2").arg(author->zip).arg(author->plus_4);
-      query.bindValue(":zipcode", zipcode);
-
-      query.bindValue(":state", author->state);
-      query.bindValue(":country", author->country);
-      query.bindValue(":phone", author->phone);
-      query.bindValue(":organization", author->organization);
-      if (!query.exec()) {
-        qWarning() << query.lastError();
-        return false;
-      }
-      authorUpdated(1);
-      return true;
-    }
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::update_property(Property* property)
-{
-
-  if (_db.isOpen()) {
-    if (!property->name.isEmpty()) {
-      QSqlQuery query{ _db };
-      query.prepare(sqlite3::insert_or_update_properties);
-      query.bindValue(":name", property->name);
-      query.bindValue(":value", property->value);
-      if (!query.exec()) {
-        qWarning() << query.lastError();
-        return false;
-      }
-      propertyUpdated(property->id);
-      return true;
-    }
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::update_restriction(Restriction* restriction)
-{
-
-  if (_db.isOpen()) {
-    if (!restriction->name.isEmpty()) {
-      QSqlQuery query{ _db };
-      query.prepare(sqlite3::insert_or_update_restrictions);
-      query.bindValue(":name", restriction->name);
-      query.bindValue(":value", restriction->value);
-      if (!query.exec()) {
-        qWarning() << query.lastError();
-        return false;
-      }
-      restrictionUpdated(restriction->id);
-      return true;
-    }
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::update_objective(Objective* objective)
-{
-
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
-    if (-1 != objective->id) {
-      query.prepare(sqlite3::update_objective_by_id);
-      query.bindValue(":id", objective->id);
-    } else if (!objective->name.isEmpty()) {
-      query.prepare(sqlite3::insert_or_update_objective);
-    }
-    QString ref_list = "";
-    for (auto& val : objective->citations) {
-      ref_list += QString::number(val) + ";";
-    }
-    ref_list.chop(1);
-    query.bindValue(":name", objective->name);
-    query.bindValue(":description", objective->description);
-    query.bindValue(":citations", ref_list);
-
-    if (!query.exec()) {
-      qWarning() << query.lastError();
-      return false;
-    }
-    if (-1 == objective->id) {
-      auto r = select_objective(objective);
-      objectiveUpdated(objective->id);
-      return r;
-    }
-    objectiveUpdated(objective->id);
-    return true;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
 bool SQLite3Driver::update_citation(Citation* citation)
 {
 
@@ -1768,7 +725,1515 @@ bool SQLite3Driver::update_citation(Citation* citation)
   qWarning() << "No Database connection";
   return false;
 }
-//------------------------------------------------------------------------------
+bool SQLite3Driver::remove_citation(Citation* citation)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (select_citation(citation)) {
+      query.prepare(sqlite3::delete_citation_by_id);
+      query.bindValue(":id", citation->id);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      citationRemoved(citation->id);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+//-----------------------------------------------------------------------------EQUIPMENT
+inline void assign_equipment(const QSqlRecord& record, Equipment& equipment)
+{
+  equipment.id = record.value(EQUIPMENT_ID).toInt();
+  equipment.name = record.value(EQUIPMENT_NAME).toString();
+  equipment.type = record.value(EQUIPMENT_TYPE).toInt();
+  equipment.description = record.value(EQUIPMENT_DESCRIPTION).toString();
+
+  auto ref_list_s = record.value(EQUIPMENT_CITATIONS).toString();
+  auto ref_list = ref_list_s.split(";");
+  equipment.citations.clear();
+  for (auto& val : ref_list) {
+    equipment.citations.push_back(val.toInt());
+  }
+
+  equipment.image = record.value(EQUIPMENT_IMAGE).toString();
+}
+int SQLite3Driver::equipment_count() const
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_equipments);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
+void SQLite3Driver::equipments()
+{
+  qDeleteAll(_equipments);
+  _equipments.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_equipments);
+    query.exec();
+    while (query.next()) {
+      auto equipment = std::make_unique<pfc::Equipment>();
+      auto record = query.record();
+      assert(record.count() == 5);
+      assign_equipment(record, *equipment);
+      _equipments.push_back(equipment.release());
+    }
+    _current_equipment = _equipments.begin();
+    emit equipmentsChanged();
+  }
+}
+bool SQLite3Driver::next_equipment(Equipment* equipment)
+{
+  if (_current_equipment == _equipments.end() || _equipments.empty()) {
+    return false;
+  }
+  equipment->assign(*(*_current_equipment));
+  ++_current_equipment;
+
+  return true;
+}
+bool SQLite3Driver::select_equipment(Equipment* equipment) const
+{
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    QSqlRecord record;
+    if (equipment->id != -1) {
+      query.prepare(sqlite3::select_equipment_by_id);
+      query.bindValue(":id", equipment->id);
+    } else if (!equipment->name.isEmpty()) {
+      query.prepare(sqlite3::select_equipment_by_name);
+      query.bindValue(":name", equipment->name);
+    } else {
+      qWarning() << "Provided Property has no id or name one is required";
+      return false;
+    }
+    if (query.exec()) {
+      while (query.next()) {
+        record = query.record();
+        assign_equipment(record, *equipment);
+        return true;
+      }
+    } else {
+      qWarning() << query.lastError();
+    }
+    return false;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::update_equipment(Equipment* equipment)
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (-1 != equipment->id) {
+      query.prepare(sqlite3::update_equipment_by_id);
+      query.bindValue(":id", equipment->id);
+    } else if (!equipment->name.isEmpty()) {
+      query.prepare(sqlite3::insert_or_update_equipments);
+    }
+
+    QString cite_list = "";
+    for (auto& val : equipment->citations) {
+      cite_list += val + ";";
+    }
+    cite_list.chop(1);
+
+    query.bindValue(":name", equipment->name);
+    query.bindValue(":type", equipment->type);
+    query.bindValue(":description", equipment->description);
+    query.bindValue(":citations", cite_list);
+    query.bindValue(":image", equipment->image);
+
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    if (-1 == equipment->id) {
+      const auto r = select_equipment(equipment);
+      equipmentUpdated(equipment->id);
+      return r;
+    }
+    equipmentUpdated(equipment->id);
+    return true;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::remove_equipment(Equipment* equipment)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (select_equipment(equipment)) {
+      query.prepare(sqlite3::delete_equipment_by_id);
+      query.bindValue(":id", equipment->id);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      equipmentRemoved(equipment->id);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+//-----------------------------------------------------------------------------EVENT
+inline void assign_event(QSqlRecord& record, Event& event)
+{
+  event.id = record.value(EVENT_ID).toInt();
+  event.name = record.value(EVENT_NAME).toString();
+  event.location = record.value(EVENT_LOCATION).toInt();
+  event.actor = record.value(EVENT_ACTOR).toInt();
+  event.description = record.value(EVENT_DESCRIPTION).toString();
+  auto equip_list_s = record.value(EVENT_EQUIPMENT).toString();
+  auto equip_list = equip_list_s.split(";");
+  event.equipment.clear();
+  for (auto& val : equip_list) {
+    event.equipment.push_back(val);
+  }
+}
+int SQLite3Driver::event_count() const
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_events);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
+void SQLite3Driver::events()
+{
+  qDeleteAll(_events);
+  _events.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_events);
+    query.exec();
+    while (query.next()) {
+      auto event = std::make_unique<pfc::Event>();
+      auto record = query.record();
+      assert(record.count() == 3);
+      assign_event(record, *event);
+      _events.push_back(event.release());
+    }
+    _current_event = _events.begin();
+    emit eventsChanged();
+  }
+}
+bool SQLite3Driver::next_event(Event* event)
+{
+  if (_current_event == _events.end() || _events.empty()) {
+    return false;
+  }
+  event->assign(*(*_current_event));
+  ++_current_event;
+
+  return true;
+}
+bool SQLite3Driver::select_event(Event* event) const
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    QSqlRecord record;
+    if (event->id != -1) {
+      query.prepare(sqlite3::select_event_by_id);
+      query.bindValue(":id", event->id);
+    } else if (!event->name.isEmpty()) {
+      query.prepare(sqlite3::select_event_by_name);
+      query.bindValue(":name", event->name);
+    } else {
+      qWarning() << "Provided Property has no id or name one is required";
+      return false;
+    }
+    if (query.exec()) {
+      while (query.next()) {
+        record = query.record();
+        assign_event(record, *event);
+        return true;
+      }
+    } else {
+      qWarning() << query.lastError();
+    }
+    return false;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::update_event(Event* event)
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (-1 != event->id) {
+      query.prepare(sqlite3::update_event_by_id);
+      query.bindValue(":id", event->id);
+    } else if (!event->name.isEmpty()) {
+      query.prepare(sqlite3::insert_or_update_events);
+    }
+    QString equip_list = "";
+    for (auto& val : event->equipment) {
+      equip_list += val + ";";
+    }
+    equip_list.chop(1);
+    query.bindValue(":equipment", equip_list);
+    query.bindValue(":name", event->name);
+    query.bindValue(":description", event->description);
+    query.bindValue(":location", event->location);
+    query.bindValue(":actor", event->actor);
+
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    if (-1 == event->id) {
+      const auto r = select_event(event);
+      eventUpdated(event->id);
+      return r;
+    }
+    eventUpdated(event->id);
+    return true;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::remove_event(Event* event)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (select_event(event)) {
+      query.prepare(sqlite3::delete_event_by_id);
+      query.bindValue(":id", event->id);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      eventRemoved(event->id);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+//-----------------------------------------------------------------------------INJURY
+inline void assign_injury(const QSqlRecord& record, Injury& injury)
+{
+  injury.id = record.value(INJURY_ID).toInt();
+  injury.medical_name = record.value(INJURY_MEDICAL_NAME).toString();
+  injury.common_name = record.value(INJURY_COMMON_NAME).toString();
+  injury.description = record.value(INJURY_DESCRIPTION).toString();
+  auto ref_list_s = record.value(INJURY_CITATIONS).toString();
+  auto ref_list = ref_list_s.split(";");
+  injury.citations.clear();
+  for (auto& val : ref_list) {
+    injury.citations.push_back(val.toInt());
+  }
+}
+int SQLite3Driver::injury_count() const
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_injuries);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
+void SQLite3Driver::injuries()
+{
+  qDeleteAll(_injuries);
+  _injuries.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_injuries);
+    query.exec();
+    while (query.next()) {
+      auto injury = std::make_unique<pfc::Injury>();
+      auto record = query.record();
+      assert(record.count() == 6);
+      assign_injury(record, *injury);
+      _injuries.push_back(injury.release());
+    }
+    _current_injury = _injuries.begin();
+    emit injuriesChanged();
+  }
+}
+bool SQLite3Driver::next_injury(Injury* injury)
+{
+  if (_current_injury == _injuries.end() || _injuries.empty()) {
+    return false;
+  }
+  injury->assign(*(*_current_injury));
+  ++_current_injury;
+
+  return true;
+}
+bool SQLite3Driver::select_injury(Injury* injury) const
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    QSqlRecord record;
+    if (injury->id != -1) {
+      query.prepare(sqlite3::select_injury_by_id);
+      query.bindValue(":id", injury->id);
+    } else if (!injury->medical_name.isEmpty()) {
+      query.prepare(sqlite3::select_injury_by_medical_name);
+      query.bindValue(":medical_name", injury->medical_name);
+    } else if (!injury->common_name.isEmpty()) {
+      query.prepare(sqlite3::select_injury_by_common_name);
+      query.bindValue(":common_name", injury->common_name);
+    } else {
+      qWarning() << "Provided Property has no id or name one is required";
+      return false;
+    }
+    if (query.exec()) {
+      while (query.next()) {
+        record = query.record();
+        assign_injury(record, *injury);
+        return true;
+      }
+    } else {
+      qWarning() << query.lastError();
+    }
+    return false;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::update_injury(Injury* injury)
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (-1 != injury->id) {
+      query.prepare(sqlite3::update_injury_by_id);
+      query.bindValue(":id", injury->id);
+    } else if (!injury->medical_name.isEmpty()) {
+      query.prepare(sqlite3::insert_or_update_injuries);
+    } else if (!injury->common_name.isEmpty()) {
+      query.prepare(sqlite3::insert_or_update_injuries);
+    }
+    QString cite_list = "";
+    for (auto& val : injury->citations) {
+      cite_list += val + ";";
+    }
+    cite_list.chop(1);
+    query.bindValue(":citations", cite_list);
+    query.bindValue(":medical_name", injury->medical_name);
+    query.bindValue(":common_name", injury->common_name);
+    query.bindValue(":description", injury->description);
+
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    if (-1 == injury->id) {
+      const auto r = select_injury(injury);
+      injuryUpdated(injury->id);
+      return r;
+    }
+    injuryUpdated(injury->id);
+    return true;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::remove_injury(Injury* injury)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (select_injury(injury)) {
+      query.prepare(sqlite3::delete_injury_by_id);
+      query.bindValue(":id", injury->id);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      injuryRemoved(injury->id);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+//------------------------------------------------------------------------------INJURY_SET
+inline void assign_injury_set(const QSqlRecord& record, InjurySet& injury)
+{
+  injury.id = record.value(INJURY_SET_ID).toInt();
+  injury.name = record.value(INJURY_SET_NAME).toString();
+  injury.description = record.value(INJURY_SET_DESCRIPTION).toString();
+  auto ref_list_s = record.value(INJURY_SET_INJURIES).toString();
+  auto ref_list = ref_list_s.split(";");
+  injury.injuries.clear();
+  for (auto& val : ref_list) {
+    injury.injuries.push_back(val.toInt());
+  }
+}
+int SQLite3Driver::injury_set_count() const
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_injury_sets);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
+void SQLite3Driver::injury_sets()
+{
+  qDeleteAll(_injury_sets);
+  _injury_sets.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_injury_sets);
+    query.exec();
+    while (query.next()) {
+      auto set = std::make_unique<pfc::InjurySet>();
+      auto record = query.record();
+      assert(record.count() == 4);
+      assign_injury_set(record, *set);
+      _injury_sets.push_back(set.release());
+    }
+    _current_injury_set = _injury_sets.begin();
+    emit injuriesChanged();
+  }
+}
+bool SQLite3Driver::next_injury_set(InjurySet* injury_set)
+{
+  if (_current_injury_set == _injury_sets.end() || _injury_sets.empty()) {
+    return false;
+  }
+  injury_set->assign(*(*_current_injury_set));
+  ++_current_injury_set;
+
+  return true;
+}
+bool SQLite3Driver::select_injury_set(InjurySet* set) const
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    QSqlRecord record;
+    if (set->id != -1) {
+      query.prepare(sqlite3::select_injury_set_by_id);
+      query.bindValue(":id", set->id);
+    } else if (!set->name.isEmpty()) {
+      query.prepare(sqlite3::select_injury_set_by_name);
+      query.bindValue(":name", set->name);
+    } else {
+      qWarning() << "Provided Property has no id or name one is required";
+      return false;
+    }
+    if (query.exec()) {
+      while (query.next()) {
+        record = query.record();
+        assign_injury_set(record, *set);
+        return true;
+      }
+    } else {
+      qWarning() << query.lastError();
+    }
+    return false;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::update_injury_set(InjurySet* injury_set)
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (-1 != injury_set->id) {
+      query.prepare(sqlite3::update_injury_set_by_id);
+      query.bindValue(":id", injury_set->id);
+    } else if (!injury_set->name.isEmpty()) {
+      query.prepare(sqlite3::insert_or_update_injury_sets);
+    }
+    QString injuries = "";
+    for (auto& val : injury_set->injuries) {
+      injuries += val + ";";
+    }
+    injuries.chop(1);
+    query.bindValue(":name", injury_set->name);
+    query.bindValue(":description", injury_set->description);
+    query.bindValue(":injuries", injuries);
+
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    if (-1 == injury_set->id) {
+      const auto r = select_injury_set(injury_set);
+      injurySetUpdated(injury_set->id);
+      return r;
+    }
+    injurySetUpdated(injury_set->id);
+    return true;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::remove_injury_set(InjurySet* injury_set)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (select_injury_set(injury_set)) {
+      query.prepare(sqlite3::delete_injury_set_by_id);
+      query.bindValue(":id", injury_set->id);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      injurySetRemoved(injury_set->id);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+//------------------------------------------------------------------------------LOCATION
+inline void assign_location(const QSqlRecord& record, Location& location)
+{
+  location.id = record.value(LOCATION_ID).toInt();
+  location.name = record.value(LOCATION_NAME).toString();
+  location.scene_name = record.value(LOCATION_SCENE_NAME).toString();
+  location.time_of_day = record.value(LOCATION_TIME_OF_DAY).toString();
+  location.environment = record.value(LOCATION_ENVIRONMENT).toString();
+}
+int SQLite3Driver::location_count() const
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_locations);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
+void SQLite3Driver::locations()
+{
+  qDeleteAll(_locations);
+  _locations.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_locations);
+    query.exec();
+    while (query.next()) {
+      auto location = std::make_unique<pfc::Location>();
+      auto record = query.record();
+      assert(record.count() == 3);
+      assign_location(record, *location);
+      _locations.push_back(location.release());
+    }
+    _current_location = _locations.begin();
+    emit locationsChanged();
+  }
+}
+bool SQLite3Driver::next_location(Location* location)
+{
+  if (_current_location == _locations.end() || _locations.empty()) {
+    return false;
+  }
+  location->assign(*(*_current_location));
+  ++_current_location;
+
+  return true;
+}
+bool SQLite3Driver::select_location(Location* location) const
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    QSqlRecord record;
+    if (location->id != -1) {
+      query.prepare(sqlite3::select_location_by_id);
+      query.bindValue(":id", location->id);
+    } else if (!location->name.isEmpty()) {
+      query.prepare(sqlite3::select_location_by_name);
+      query.bindValue(":name", location->name);
+    } else if (!location->scene_name.isEmpty()) {
+      query.prepare(sqlite3::select_location_by_scene_name);
+      query.bindValue(":scene_name", location->scene_name);
+    } else {
+      qWarning() << "Provided Property has no id or name one is required";
+      return false;
+    }
+    if (query.exec()) {
+      while (query.next()) {
+        record = query.record();
+        assign_location(record, *location);
+        return true;
+      }
+    } else {
+      qWarning() << query.lastError();
+    }
+    return false;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::update_location(Location* location)
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (-1 != location->id) {
+      query.prepare(sqlite3::update_location_by_id);
+      query.bindValue(":id", location->id);
+    } else if (!location->name.isEmpty()) {
+      query.prepare(sqlite3::insert_or_update_locations);
+    }
+    query.bindValue(":name", location->name);
+    query.bindValue(":scene_name", location->scene_name);
+    query.bindValue(":time_of_day", location->time_of_day);
+    query.bindValue(":environment", location->environment);
+
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    if (-1 == location->id) {
+      const auto r = select_location(location);
+      locationUpdated(location->id);
+      return r;
+    }
+    locationUpdated(location->id);
+    return true;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::remove_location(Location* location)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (select_location(location)) {
+      query.prepare(sqlite3::delete_location_by_id);
+      query.bindValue(":id", location->id);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      locationRemoved(location->id);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+//------------------------------------------------------------------------------OBJECTIVE
+inline void assign_objective(const QSqlRecord& record, Objective& objective)
+{
+  objective.id = record.value(OBJECTIVE_ID).toInt();
+  objective.name = record.value(OBJECTIVE_NAME).toString();
+  objective.description = record.value(OBJECTIVE_DESCRIPTION).toString();
+  auto ref_list_s = record.value(OBJECTIVE_CITATIONS).toString();
+  auto ref_list = ref_list_s.split(";");
+  objective.citations.clear();
+  for (auto& val : ref_list) {
+    if (!val.isEmpty()) {
+      objective.citations.push_back(val.toInt());
+    }
+  }
+}
+int SQLite3Driver::objective_count() const
+
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_objectives);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
+void SQLite3Driver::objectives()
+{
+  qDeleteAll(_objectives);
+  _objectives.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_objectives);
+    query.exec();
+    while (query.next()) {
+      auto objective = std::make_unique<pfc::Objective>();
+      auto record = query.record();
+      assert(record.count() == 4);
+      assign_objective(record, *objective);
+      _objectives.push_back(objective.release());
+    }
+    _current_objective = _objectives.begin();
+    emit objectivesChanged();
+  }
+}
+bool SQLite3Driver::next_objective(Objective* objective)
+{
+  if (_current_objective == _objectives.end() || _objectives.empty()) {
+    return false;
+  }
+  objective->assign(*(*_current_objective));
+  ++_current_objective;
+
+  return true;
+}
+bool SQLite3Driver::select_objective(Objective* objective) const
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    QSqlRecord record;
+    if (objective->id != -1) {
+      query.prepare(sqlite3::select_objective_by_id);
+      query.bindValue(":id", objective->id);
+    } else if (!objective->name.isEmpty()) {
+      query.prepare(sqlite3::select_objective_by_name);
+      query.bindValue(":name", objective->name);
+    } else {
+      qWarning() << "Provided Property has no id or name one is required";
+      return false;
+    }
+    if (query.exec()) {
+      while (query.next()) {
+        record = query.record();
+        assign_objective(record, *objective);
+        return true;
+      }
+    } else {
+      qWarning() << query.lastError();
+    }
+  } else {
+    qWarning() << "No Database connection";
+  }
+  return false;
+}
+bool SQLite3Driver::update_objective(Objective* objective)
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (-1 != objective->id) {
+      query.prepare(sqlite3::update_objective_by_id);
+      query.bindValue(":id", objective->id);
+    } else if (!objective->name.isEmpty()) {
+      query.prepare(sqlite3::insert_or_update_objective);
+    }
+    QString ref_list = "";
+    for (auto& val : objective->citations) {
+      ref_list += QString::number(val) + ";";
+    }
+    ref_list.chop(1);
+    query.bindValue(":name", objective->name);
+    query.bindValue(":description", objective->description);
+    query.bindValue(":citations", ref_list);
+
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    if (-1 == objective->id) {
+      auto r = select_objective(objective);
+      objectiveUpdated(objective->id);
+      return r;
+    }
+    objectiveUpdated(objective->id);
+    return true;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::remove_objective(Objective* objective)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (select_objective(objective)) {
+      query.prepare(sqlite3::delete_objective_by_id);
+      query.bindValue(":id", objective->id);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      objectiveRemoved(objective->id);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+//------------------------------------------------------------------------------PROP
+inline void assign_prop(QSqlRecord& record, Prop& prop)
+{
+  prop.id = record.value(PROP_ID).toInt();
+  prop.equipment = record.value(PROP_EQUIPMENT).toString();
+}
+int SQLite3Driver::prop_count() const
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_props);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
+void SQLite3Driver::props()
+{
+  qDeleteAll(_props);
+  _props.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_props);
+    query.exec();
+    while (query.next()) {
+      auto prop = std::make_unique<pfc::Prop>();
+      auto record = query.record();
+      assert(record.count() == 3);
+      assign_prop(record, *prop);
+      _props.push_back(prop.release());
+    }
+    _current_prop = _props.begin();
+    emit propsChanged();
+  }
+}
+bool SQLite3Driver::next_prop(Prop* prop)
+{
+  if (_current_prop == _props.end() || _props.empty()) {
+    return false;
+  }
+  prop->assign(*(*_current_prop));
+  ++_current_prop;
+
+  return true;
+}
+bool SQLite3Driver::select_prop(Prop* prop) const
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    QSqlRecord record;
+    if (prop->id != -1) {
+      query.prepare(sqlite3::select_prop_by_id);
+      query.bindValue(":id", prop->id);
+    } else {
+      // So the issue here is that id is set when the property is inserted, and I can't get it without some other unique field
+      // to look up a prop with
+      //TODO: Run this by Steven
+      qWarning() << "Provided Property has no id or name one is required";
+      return false;
+    }
+    if (query.exec()) {
+      while (query.next()) {
+        record = query.record();
+        assign_prop(record, *prop);
+        return true;
+      }
+    } else {
+      qWarning() << query.lastError();
+    }
+    return false;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::update_prop(Prop* prop)
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (-1 != prop->id) {
+      query.prepare(sqlite3::update_prop_by_id);
+      query.bindValue(":id", prop->id);
+    } else {
+      query.prepare(sqlite3::insert_or_update_props);
+    }
+    query.bindValue(":equipment", prop->equipment);
+
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    if (-1 == prop->id) {
+      const auto r = select_prop(prop);
+      propUpdated(prop->id);
+      return r;
+    }
+    propUpdated(prop->id);
+    return true;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::remove_prop(Prop* prop)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (select_prop(prop)) {
+      query.prepare(sqlite3::delete_prop_by_id);
+      query.bindValue(":id", prop->id);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      propRemoved(prop->id);
+      return true;
+    } else {
+      //TODO: Same as select_prop, I can't get the id without looking it up with some other thing
+      return false;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+//------------------------------------------------------------------------------PROPERTY
+inline void assign_property(const QSqlRecord& record, Property& property)
+{
+  property.id = record.value(PROPERTY_ID).toInt();
+  property.name = record.value(PROPERTY_NAME).toString();
+  property.value = record.value(PROPERTY_VALUE).toString();
+}
+int SQLite3Driver::property_count() const
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_properties);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
+void SQLite3Driver::properties()
+{
+  qDeleteAll(_properties);
+  _properties.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_properties);
+    query.exec();
+    while (query.next()) {
+      auto property = std::make_unique<pfc::Property>();
+      auto record = query.record();
+      assert(record.count() == 3);
+      assign_property(record, *property);
+      _properties.push_back(property.release());
+    }
+    _current_property = _properties.begin();
+    emit propertiesChanged();
+  }
+}
+bool SQLite3Driver::next_property(Property* property)
+{
+  if (_current_property == _properties.end() || _properties.empty()) {
+    return false;
+  }
+  property->assign(*(*_current_property));
+  ++_current_property;
+  return true;
+}
+bool SQLite3Driver::select_property(Property* property) const
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    QSqlRecord record;
+    if (property->id != -1) {
+      query.prepare(sqlite3::select_property_by_id);
+      query.bindValue(":id", property->id);
+    } else if (!property->name.isEmpty()) {
+      query.prepare(sqlite3::select_property_by_name);
+      query.bindValue(":name", property->name);
+    } else {
+      qWarning() << "Provided Property has no id or name one is required";
+      return false;
+    }
+    if (query.exec()) {
+
+      while (query.next()) {
+        record = query.record();
+        assign_property(record, *property);
+        return true;
+      }
+    } else {
+      qWarning() << query.lastError();
+    }
+    return false;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::update_property(Property* property)
+{
+
+  if (_db.isOpen()) {
+    if (!property->name.isEmpty()) {
+      QSqlQuery query{ _db };
+      query.prepare(sqlite3::insert_or_update_properties);
+      query.bindValue(":name", property->name);
+      query.bindValue(":value", property->value);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      propertyUpdated(property->id);
+      return true;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::remove_property(Property* property)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (select_property(property)) {
+      query.prepare(sqlite3::delete_property_by_id);
+      query.bindValue(":id", property->id);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      propertyRemoved(property->id);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+//------------------------------------------------------------------------------ROLE
+inline void assign_role(QSqlRecord& record, Role& role)
+{
+  role.id = record.value(ROLE_ID).toInt();
+  role.name = record.value(ROLE_NAME).toString();
+  role.description = record.value(ROLE_DESCRIPTION).toString();
+}
+int SQLite3Driver::role_count() const
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_roles);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
+void SQLite3Driver::roles()
+{
+  qDeleteAll(_roles);
+  _roles.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_roles);
+    query.exec();
+    while (query.next()) {
+      auto role = std::make_unique<pfc::Role>();
+      auto record = query.record();
+      assert(record.count() == 3);
+      assign_role(record, *role);
+      _roles.push_back(role.release());
+    }
+    _current_role = _roles.begin();
+    emit rolesChanged();
+  }
+}
+bool SQLite3Driver::next_role(Role* role)
+{
+  if (_current_role == _roles.end() || _roles.empty()) {
+    return false;
+  }
+  role->assign(*(*_current_role));
+  ++_current_role;
+
+  return true;
+}
+bool SQLite3Driver::select_role(Role* role) const
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    QSqlRecord record;
+    if (role->id != -1) {
+      query.prepare(sqlite3::select_role_by_id);
+      query.bindValue(":id", role->id);
+    } else if (!role->name.isEmpty()) {
+      query.prepare(sqlite3::select_role_by_name);
+      query.bindValue(":name", role->name);
+    } else {
+      qWarning() << "Provided Property has no id or name one is required";
+      return false;
+    }
+    if (query.exec()) {
+      while (query.next()) {
+        record = query.record();
+        assign_role(record, *role);
+        return true;
+      }
+    } else {
+
+      qWarning() << query.lastError();
+    }
+    return false;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::update_role(Role* role)
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (-1 != role->id) {
+      query.prepare(sqlite3::update_role_by_id);
+      query.bindValue(":id", role->id);
+    } else if (!role->name.isEmpty()) {
+      query.prepare(sqlite3::insert_or_update_roles);
+    }
+    query.bindValue(":description", role->description);
+    query.bindValue(":name", role->name);
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    if (-1 == role->id) {
+      const auto r = select_role(role);
+      roleUpdated(role->id);
+      return r;
+    }
+    roleUpdated(role->id);
+    return true;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::remove_role(Role* role)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (select_role(role)) {
+      query.prepare(sqlite3::delete_role_by_id);
+      query.bindValue(":id", role->id);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      roleRemoved(role->id);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+//------------------------------------------------------------------------------RESTRICTION
+inline void assign_restriction(const QSqlRecord& record, Restriction& restriction)
+{
+  restriction.id = record.value(RESTRICTION_ID).toInt();
+  restriction.name = record.value(RESTRICTION_NAME).toString();
+  restriction.value = record.value(RESTRICTION_VALUE).toString();
+}
+int SQLite3Driver::restriction_count() const
+
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_restrictions);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
+void SQLite3Driver::restrictions()
+{
+  qDeleteAll(_restrictions);
+  _restrictions.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_restrictions);
+    query.exec();
+    while (query.next()) {
+      auto restriction = std::make_unique<pfc::Restriction>();
+      auto record = query.record();
+      assert(record.count() == 3);
+      assign_restriction(record, *restriction);
+      _restrictions.push_back(restriction.release());
+    }
+    _current_restriction = _restrictions.begin();
+    emit restrictionsChanged();
+  }
+}
+bool SQLite3Driver::next_restriction(Restriction* restriction)
+{
+  if (_current_restriction == _restrictions.end() || _restrictions.empty()) {
+    return false;
+  }
+  restriction->assign(*(*_current_restriction));
+  ++_current_restriction;
+
+  return true;
+}
+bool SQLite3Driver::select_restriction(Restriction* restriction) const
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    QSqlRecord record;
+    if (restriction->id != -1) {
+      query.prepare(sqlite3::select_restriction_by_id);
+      query.bindValue(":id", restriction->id);
+    } else if (!restriction->name.isEmpty()) {
+      query.prepare(sqlite3::select_restriction_by_name);
+      query.bindValue(":name", restriction->name);
+    } else {
+      qWarning() << "Provided Property has no id or name one is required";
+      return false;
+    }
+    if (query.exec()) {
+      while (query.next()) {
+        record = query.record();
+        assign_restriction(record, *restriction);
+        return true;
+      }
+    } else {
+      qWarning() << query.lastError();
+    }
+    return false;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::update_restriction(Restriction* restriction)
+{
+
+  if (_db.isOpen()) {
+    if (!restriction->name.isEmpty()) {
+      QSqlQuery query{ _db };
+      query.prepare(sqlite3::insert_or_update_restrictions);
+      query.bindValue(":name", restriction->name);
+      query.bindValue(":value", restriction->value);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      restrictionUpdated(restriction->id);
+      return true;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::remove_restriction(Restriction* restriction)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (select_restriction(restriction)) {
+      query.prepare(sqlite3::delete_restriction_by_id);
+      query.bindValue(":id", restriction->id);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      restrictionRemoved(restriction->id);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+//------------------------------------------------------------------------------TREATMENT
+inline void assign_treatment(const QSqlRecord& record, Treatment& treatment)
+{
+  treatment.id = record.value(TREATMENT_ID).toInt();
+  treatment.medical_name = record.value(TREATMENT_MEDICAL_NAME).toString();
+  treatment.common_name = record.value(TREATMENT_COMMON_NAME).toString();
+  treatment.description = record.value(TREATMENT_DESCRIPTION).toString();
+  auto equip_list_s = record.value(TREATMENT_EQUIPMENT).toString();
+  auto equip_list = equip_list_s.split(";");
+  treatment.equipment.clear();
+  for (auto& val : equip_list) {
+    treatment.equipment.push_back(val);
+  }
+  auto ref_list_s = record.value(TREATMENT_CITATIONS).toString();
+  auto ref_list = ref_list_s.split(";");
+  treatment.citations.clear();
+  for (auto& val : ref_list) {
+    treatment.citations.push_back(val.toInt());
+  }
+}
+int SQLite3Driver::treatment_count() const
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_treatments);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
+void SQLite3Driver::treatments()
+{
+  qDeleteAll(_treatments);
+  _treatments.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_treatments);
+    query.exec();
+    while (query.next()) {
+      auto treatment = std::make_unique<pfc::Treatment>();
+      auto record = query.record();
+      assert(record.count() == 6);
+      assign_treatment(record, *treatment);
+      _treatments.push_back(treatment.release());
+    }
+    _current_treatment = _treatments.begin();
+    emit treatmentsChanged();
+  }
+}
+bool SQLite3Driver::next_treatment(Treatment* treatment)
+{
+  if (_current_treatment == _treatments.end() || _treatments.empty()) {
+    return false;
+  }
+  treatment->assign(*(*_current_treatment));
+  ++_current_treatment;
+
+  return true;
+}
+bool SQLite3Driver::select_treatment(Treatment* treatment) const
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    QSqlRecord record;
+    if (treatment->id != -1) {
+      query.prepare(sqlite3::select_treatment_by_id);
+      query.bindValue(":id", treatment->id);
+    } else if (!treatment->medical_name.isEmpty()) {
+      query.prepare(sqlite3::select_treatment_by_medical_name);
+      query.bindValue(":medical_name", treatment->medical_name);
+    } else if (!treatment->common_name.isEmpty()) {
+      query.prepare(sqlite3::select_treatment_by_common_name);
+      query.bindValue(":common_name", treatment->common_name);
+    } else {
+      qWarning() << "Provided Property has no id or name one is required";
+      return false;
+    }
+    if (query.exec()) {
+      while (query.next()) {
+        record = query.record();
+        assign_treatment(record, *treatment);
+        return true;
+      }
+    } else {
+      qWarning() << query.lastError();
+    }
+    return false;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
 bool SQLite3Driver::update_treatment(Treatment* treatment)
 {
 
@@ -1813,390 +2278,6 @@ bool SQLite3Driver::update_treatment(Treatment* treatment)
   qWarning() << "No Database connection";
   return false;
 }
-//------------------------------------------------------------------------------
-bool SQLite3Driver::update_equipment(Equipment* equipment)
-{
-
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
-    if (-1 != equipment->id) {
-      query.prepare(sqlite3::update_equipment_by_id);
-      query.bindValue(":id", equipment->id);
-    } else if (!equipment->name.isEmpty()) {
-      query.prepare(sqlite3::insert_or_update_equipments);
-    }
-
-    QString cite_list = "";
-    for (auto& val : equipment->citations) {
-      cite_list += val + ";";
-    }
-    cite_list.chop(1);
-
-    query.bindValue(":name", equipment->name);
-    query.bindValue(":type",equipment->type);
-    query.bindValue(":description", equipment->description);
-    query.bindValue(":citations", cite_list);
-    query.bindValue(":image", equipment->image);
-
-    if (!query.exec()) {
-      qWarning() << query.lastError();
-      return false;
-    }
-    if (-1 == equipment->id) {
-      const auto r = select_equipment(equipment);
-      equipmentUpdated(equipment->id);
-      return r;
-    }
-    equipmentUpdated(equipment->id);
-    return true;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::update_injury(Injury* injury)
-{
-
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
-    if (-1 != injury->id) {
-      query.prepare(sqlite3::update_injury_by_id);
-      query.bindValue(":id", injury->id);
-    } else if (!injury->medical_name.isEmpty()) {
-      query.prepare(sqlite3::insert_or_update_injuries);
-    } else if (!injury->common_name.isEmpty()) {
-      query.prepare(sqlite3::insert_or_update_injuries);
-    }
-    QString cite_list = "";
-    for (auto& val : injury->citations) {
-      cite_list += val + ";";
-    }
-    cite_list.chop(1);
-    query.bindValue(":citations", cite_list);
-    query.bindValue(":medical_name", injury->medical_name);
-    query.bindValue(":common_name", injury->common_name);
-    query.bindValue(":description", injury->description);
-
-    if (!query.exec()) {
-      qWarning() << query.lastError();
-      return false;
-    }
-    if (-1 == injury->id) {
-      const auto r = select_injury(injury);
-      injuryUpdated(injury->id);
-      return r;
-    }
-    injuryUpdated(injury->id);
-    return true;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::update_injury_set(InjurySet* injury_set)
-{
-
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
-    if (-1 != injury_set->id) {
-      query.prepare(sqlite3::update_injury_set_by_id);
-      query.bindValue(":id", injury_set->id);
-    } else if (!injury_set->name.isEmpty()) {
-      query.prepare(sqlite3::insert_or_update_injury_sets);
-    }
-    QString injuries = "";
-    for (auto& val : injury_set->injuries) {
-      injuries += val + ";";
-    }
-    injuries.chop(1);
-    query.bindValue(":name", injury_set->name);
-    query.bindValue(":description", injury_set->description);
-    query.bindValue(":injuries", injuries);
-
-    if (!query.exec()) {
-      qWarning() << query.lastError();
-      return false;
-    }
-    if (-1 == injury_set->id) {
-      const auto r = select_injury_set(injury_set);
-      injurySetUpdated(injury_set->id);
-      return r;
-    }
-    injurySetUpdated(injury_set->id);
-    return true;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::update_assessment(Assessment* assessment)
-{
-
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
-    if (-1 != assessment->id) {
-      query.prepare(sqlite3::update_assessment_by_id);
-      query.bindValue(":id", assessment->id);
-    } else if (!assessment->name.isEmpty()) {
-      query.prepare(sqlite3::insert_or_update_assessments);
-    }
-    query.bindValue(":name", assessment->name);
-    query.bindValue(":description", assessment->description);
-    query.bindValue(":type", assessment->type);
-    query.bindValue(":available_points", assessment->available_points);
-    query.bindValue(":criteria", assessment->criteria);
-
-    if (!query.exec()) {
-      qWarning() << query.lastError();
-      return false;
-    }
-    if (-1 == assessment->id) {
-      const auto r = select_assessment(assessment);
-      assessmentUpdated(assessment->id);
-      return r;
-      ;
-    }
-    assessmentUpdated(assessment->id);
-    return true;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::update_location(Location* location)
-{
-
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
-    if (-1 != location->id) {
-      query.prepare(sqlite3::update_location_by_id);
-      query.bindValue(":id", location->id);
-    } else if (!location->name.isEmpty()) {
-      query.prepare(sqlite3::insert_or_update_locations);
-    }
-    query.bindValue(":name", location->name);
-    query.bindValue(":scene_name", location->scene_name);
-    query.bindValue(":time_of_day", location->time_of_day);
-    query.bindValue(":environment", location->environment);
-
-    if (!query.exec()) {
-      qWarning() << query.lastError();
-      return false;
-    }
-    if (-1 == location->id) {
-      const auto r = select_location(location);
-      locationUpdated(location->id);
-      return r;
-    }
-    locationUpdated(location->id);
-    return true;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::update_role(Role* role)
-{
-
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
-    if (-1 != role->id) {
-      query.prepare(sqlite3::update_role_by_id);
-      query.bindValue(":id", role->id);
-    } else if (!role->name.isEmpty()) {
-      query.prepare(sqlite3::insert_or_update_roles);
-    }
-    query.bindValue(":description", role->description);
-    query.bindValue(":name", role->name);
-    if (!query.exec()) {
-      qWarning() << query.lastError();
-      return false;
-    }
-    if (-1 == role->id) {
-      const auto r = select_role(role);
-      roleUpdated(role->id);
-      return r;
-    }
-    roleUpdated(role->id);
-    return true;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::update_prop(Prop* prop)
-{
-
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
-    if (-1 != prop->id) {
-      query.prepare(sqlite3::update_prop_by_id);
-      query.bindValue(":id", prop->id);
-    } else {
-      query.prepare(sqlite3::insert_or_update_props);
-    }
-    query.bindValue(":equipment", prop->equipment);
-
-    if (!query.exec()) {
-      qWarning() << query.lastError();
-      return false;
-    }
-    if (-1 == prop->id) {
-      const auto r = select_prop(prop);
-      propUpdated(prop->id);
-      return r;
-    }
-    propUpdated(prop->id);
-    return true;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::update_event(Event* event)
-{
-
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
-    if (-1 != event->id) {
-      query.prepare(sqlite3::update_event_by_id);
-      query.bindValue(":id", event->id);
-    } else if (!event->name.isEmpty()) {
-      query.prepare(sqlite3::insert_or_update_events);
-    }
-    QString equip_list = "";
-    for (auto& val : event->equipment) {
-      equip_list += val + ";";
-    }
-    equip_list.chop(1);
-    query.bindValue(":equipment", equip_list);
-    query.bindValue(":name", event->name);
-    query.bindValue(":description", event->description);
-    query.bindValue(":location", event->location);
-    query.bindValue(":actor",event->actor);
-
-
-    if (!query.exec()) {
-      qWarning() << query.lastError();
-      return false;
-    }
-    if (-1 == event->id) {
-      const auto r = select_event(event);
-      eventUpdated(event->id);
-      return r;
-    }
-    eventUpdated(event->id);
-    return true;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------REMOVE_START
-bool SQLite3Driver::remove_author(Author* author)
-{
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    if (select_author(author)) {
-      query.prepare(sqlite3::delete_author_by_id);
-      query.bindValue(":id", author->id);
-      if (!query.exec()) {
-        qWarning() << query.lastError();
-        return false;
-      }
-      authorRemoved(author->id);
-      return true;
-    } else {
-      return false;
-    }
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::remove_property(Property* property)
-{
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    if (select_property(property)) {
-      query.prepare(sqlite3::delete_property_by_id);
-      query.bindValue(":id", property->id);
-      if (!query.exec()) {
-        qWarning() << query.lastError();
-        return false;
-      }
-      propertyRemoved(property->id);
-      return true;
-    } else {
-      return false;
-    }
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::remove_restriction(Restriction* restriction)
-{
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    if (select_restriction(restriction)) {
-      query.prepare(sqlite3::delete_restriction_by_id);
-      query.bindValue(":id", restriction->id);
-      if (!query.exec()) {
-        qWarning() << query.lastError();
-        return false;
-      }
-      restrictionRemoved(restriction->id);
-      return true;
-    } else {
-      return false;
-    }
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::remove_objective(Objective* objective)
-{
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    if (select_objective(objective)) {
-      query.prepare(sqlite3::delete_objective_by_id);
-      query.bindValue(":id", objective->id);
-      if (!query.exec()) {
-        qWarning() << query.lastError();
-        return false;
-      }
-      objectiveRemoved(objective->id);
-      return true;
-    } else {
-      return false;
-    }
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::remove_citation(Citation* citation)
-{
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    if (select_citation(citation)) {
-      query.prepare(sqlite3::delete_citation_by_id);
-      query.bindValue(":id", citation->id);
-      if (!query.exec()) {
-        qWarning() << query.lastError();
-        return false;
-      }
-      citationRemoved(citation->id);
-      return true;
-    } else {
-      return false;
-    }
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
 bool SQLite3Driver::remove_treatment(Treatment* treatment)
 {
   if (_db.isOpen()) {
@@ -2217,174 +2298,5 @@ bool SQLite3Driver::remove_treatment(Treatment* treatment)
   qWarning() << "No Database connection";
   return false;
 }
-//------------------------------------------------------------------------------
-bool SQLite3Driver::remove_equipment(Equipment* equipment)
-{
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    if (select_equipment(equipment)) {
-      query.prepare(sqlite3::delete_equipment_by_id);
-      query.bindValue(":id", equipment->id);
-      if (!query.exec()) {
-        qWarning() << query.lastError();
-        return false;
-      }
-      equipmentRemoved(equipment->id);
-      return true;
-    } else {
-      return false;
-    }
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::remove_injury(Injury* injury)
-{
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    if (select_injury(injury)) {
-      query.prepare(sqlite3::delete_injury_by_id);
-      query.bindValue(":id", injury->id);
-      if (!query.exec()) {
-        qWarning() << query.lastError();
-        return false;
-      }
-      injuryRemoved(injury->id);
-      return true;
-    } else {
-      return false;
-    }
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::remove_injury_set(InjurySet* injury_set)
-{
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    if (select_injury_set(injury_set)) {
-      query.prepare(sqlite3::delete_injury_set_by_id);
-      query.bindValue(":id", injury_set->id);
-      if (!query.exec()) {
-        qWarning() << query.lastError();
-        return false;
-      }
-      injurySetRemoved(injury_set->id);
-      return true;
-    } else {
-      return false;
-    }
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::remove_assessment(Assessment* assessment)
-{
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    if (select_assessment(assessment)) {
-      query.prepare(sqlite3::delete_assessment_by_id);
-      query.bindValue(":id", assessment->id);
-      if (!query.exec()) {
-        qWarning() << query.lastError();
-        return false;
-      }
-      assessmentRemoved(assessment->id);
-      return true;
-    } else {
-      return false;
-    }
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::remove_location(Location* location)
-{
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    if (select_location(location)) {
-      query.prepare(sqlite3::delete_location_by_id);
-      query.bindValue(":id", location->id);
-      if (!query.exec()) {
-        qWarning() << query.lastError();
-        return false;
-      }
-      locationRemoved(location->id);
-      return true;
-    } else {
-      return false;
-    }
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::remove_role(Role* role)
-{
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    if (select_role(role)) {
-      query.prepare(sqlite3::delete_role_by_id);
-      query.bindValue(":id", role->id);
-      if (!query.exec()) {
-        qWarning() << query.lastError();
-        return false;
-      }
-      roleRemoved(role->id);
-      return true;
-    } else {
-      return false;
-    }
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::remove_prop(Prop* prop)
-{
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    if (select_prop(prop)) {
-      query.prepare(sqlite3::delete_prop_by_id);
-      query.bindValue(":id", prop->id);
-      if (!query.exec()) {
-        qWarning() << query.lastError();
-        return false;
-      }
-      propRemoved(prop->id);
-      return true;
-    } else {
-      //TODO: Same as select_prop, I can't get the id without looking it up with some other thing
-      return false;
-    }
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
-bool SQLite3Driver::remove_event(Event* event)
-{
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    if (select_event(event)) {
-      query.prepare(sqlite3::delete_event_by_id);
-      query.bindValue(":id", event->id);
-      if (!query.exec()) {
-        qWarning() << query.lastError();
-        return false;
-      }
-      eventRemoved(event->id);
-      return true;
-    } else {
-      return false;
-    }
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//------------------------------------------------------------------------------
+
 }
