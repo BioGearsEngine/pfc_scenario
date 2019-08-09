@@ -178,6 +178,24 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Assessment)
   EXPECT_TRUE(_db.remove_assessment(&assessment_3));
   EXPECT_EQ(1, _db.assessment_count());
 }
+TEST_F(TEST_FIXTURE_NAME, Equality_Assessment)
+{
+  using namespace pfc;
+  Assessment assessment_1;
+  Assessment assessment_2;
+
+  assessment_1.name = "Math Test";
+  assessment_1.description = "Gotta do some math";
+  assessment_1.type = "Don't fail";
+  assessment_1.available_points = 100;
+  assessment_1.criteria = "what's 2+2";
+
+  assessment_2.name = "Math Test";
+
+  EXPECT_TRUE(_db.update_assessment(&assessment_1));
+  EXPECT_TRUE(_db.select_assessment(&assessment_2));
+  EXPECT_EQ(assessment_1,assessment_2);
+}
 //AUTHOR TESTS--------------------------------------------------------------
 TEST_F(TEST_FIXTURE_NAME, Insert_Author)
 {
@@ -275,6 +293,22 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Author)
   EXPECT_TRUE(_db.remove_author(&author_1));
   EXPECT_TRUE(_db.remove_author(&author_2));
   EXPECT_EQ(1, _db.author_count());
+}
+TEST_F(TEST_FIXTURE_NAME, Equality_Author)
+{
+  using namespace pfc;
+  Author author_1;
+  Author author_2;
+
+  author_1.first = "Solid";
+  author_1.last = "Snake";
+  author_1.email = "SolidSnake@MetalGear.com";
+
+  author_2.email = "SolidSnake@MetalGear.com";
+
+  EXPECT_TRUE(_db.update_author(&author_1));
+  EXPECT_TRUE(_db.select_author(&author_2));
+  EXPECT_EQ(author_1, author_2);
 }
 //CITATION TESTS--------------------------------------------------------------
 TEST_F(TEST_FIXTURE_NAME, Insert_Citation)
@@ -390,6 +424,24 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Citation)
   EXPECT_TRUE(_db.remove_citation(&citation_3));
   EXPECT_EQ(1, _db.citation_count());
 }
+TEST_F(TEST_FIXTURE_NAME, Equality_Citation)
+{
+  using namespace pfc;
+  Citation citation_1;
+  Citation citation_2;
+
+  citation_1.key = "skeleton key";
+  citation_1.title = "Mr. Bones' Wild Ride";
+  citation_1.authors = { 1, 2 };
+  citation_1.year = "1000";
+  citation_1.publisher = "Boneland";
+
+  citation_2.key = "skeleton key";
+
+  EXPECT_TRUE(_db.update_citation(&citation_1));
+  EXPECT_TRUE(_db.select_citation(&citation_2));
+  EXPECT_EQ(citation_1, citation_2);
+}
 //EQUIPMENT TESTS--------------------------------------------------------------
 TEST_F(TEST_FIXTURE_NAME, Insert_Equipment)
 {
@@ -503,6 +555,24 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Equipment)
   EXPECT_TRUE(_db.remove_equipment(&equipment_1));
   EXPECT_TRUE(_db.remove_equipment(&equipment_3));
   EXPECT_EQ(1, _db.equipment_count());
+}
+TEST_F(TEST_FIXTURE_NAME, Equality_Equipment)
+{
+  using namespace pfc;
+  Equipment equipment_1;
+  Equipment equipment_2;
+
+  equipment_1.name = "Keytar";
+  equipment_1.type = 1;
+  equipment_1.description = "Got a sick keytar solo later";
+  equipment_1.image = ("music stand");
+  equipment_1.citations.push_back(1);
+
+  equipment_2.name = "Keytar";
+
+  EXPECT_TRUE(_db.update_equipment(&equipment_1));
+  EXPECT_TRUE(_db.select_equipment(&equipment_2));
+  EXPECT_EQ(equipment_1, equipment_2);
 }
 //EVENT TESTS--------------------------------------------------------------
 TEST_F(TEST_FIXTURE_NAME, Insert_Event)
@@ -623,6 +693,24 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Event)
   EXPECT_TRUE(_db.remove_event(&event_3));
   EXPECT_EQ(1, _db.event_count());
 }
+TEST_F(TEST_FIXTURE_NAME, Equality_Event)
+{
+  using namespace pfc;
+  Event event_1;
+  Event event_2;
+
+  event_1.name = "Barbecue";
+  event_1.location = 1;
+  event_1.actor = 2;
+  event_1.equipment = { "Grill", "Spatula" };
+  event_1.description = "People cooking and eating meat outdoors";
+
+  event_2.description = "Barbecue";
+
+  EXPECT_TRUE(_db.update_event(&event_1));
+  EXPECT_TRUE(_db.select_event(&event_2));
+  EXPECT_EQ(event_1, event_2);
+}
 //INJURY TESTS--------------------------------------------------------------
 TEST_F(TEST_FIXTURE_NAME, Insert_Injury)
 {
@@ -732,6 +820,23 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Injury)
   EXPECT_TRUE(_db.remove_injury(&injury_1));
   EXPECT_TRUE(_db.remove_injury(&injury_3));
   EXPECT_EQ(1, _db.injury_count());
+}
+TEST_F(TEST_FIXTURE_NAME, Equality_Injury)
+{
+  using namespace pfc;
+  Injury injury_1;
+  Injury injury_2;
+
+  injury_1.medical_name = "Keyboardus Faceus";
+  injury_1.common_name = "Keyboard Face";
+  injury_1.description = "Looks like you took a nap on your keyboard";
+  injury_1.citations.push_back(1);
+
+  injury_2.medical_name = "Keyboardus Faceus";
+
+  EXPECT_TRUE(_db.update_injury(&injury_1));
+  EXPECT_TRUE(_db.select_injury(&injury_2));
+  EXPECT_EQ(injury_1, injury_2);
 }
 //LOCATION TESTS--------------------------------------------------------------
 TEST_F(TEST_FIXTURE_NAME, Insert_Location)
@@ -843,6 +948,23 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Location)
   EXPECT_TRUE(_db.remove_location(&location_3));
   EXPECT_EQ(1, _db.location_count());
 }
+TEST_F(TEST_FIXTURE_NAME, Equality_Location)
+{
+  using namespace pfc;
+  Location location_1;
+  Location location_2;
+
+  location_1.name = "My House";
+  location_1.scene_name = "Getting up for work";
+  location_1.time_of_day = "1:30PM";
+  location_1.environment = "Bathroom floor";
+
+  location_2.name = "My House";
+
+  EXPECT_TRUE(_db.update_location(&location_1));
+  EXPECT_TRUE(_db.select_location(&location_2));
+  EXPECT_EQ(location_1, location_2);
+}
 //OBJECTIVE TESTS--------------------------------------------------------------
 TEST_F(TEST_FIXTURE_NAME, Insert_Objective)
 {
@@ -938,6 +1060,22 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Objective)
   EXPECT_TRUE(_db.remove_objective(&objective_1));
   EXPECT_TRUE(_db.remove_objective(&objective_3));
   EXPECT_EQ(1, _db.objective_count());
+}
+TEST_F(TEST_FIXTURE_NAME, Equality_Objective)
+{
+  using namespace pfc;
+  Objective objective_1;
+  Objective objective_2;
+
+  objective_1.name = "Kill the Troll";
+  objective_1.description = "There is a troll in the forest in a great big whole who has some gold. Kill it";
+  objective_1.citations = { 1, 2, 3 };
+
+  objective_2.name = "Kill the Troll";
+
+  EXPECT_TRUE(_db.update_objective(&objective_1));
+  EXPECT_TRUE(_db.select_objective(&objective_2));
+  EXPECT_EQ(objective_1, objective_2);
 }
 //PROP TESTS--------------------------------------------------------------
 //TEST_F(TEST_FIXTURE_NAME, Insert_Prop)
@@ -1089,6 +1227,21 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Property)
   EXPECT_TRUE(_db.remove_property(&property_3));
   EXPECT_EQ(1, _db.property_count());
 }
+TEST_F(TEST_FIXTURE_NAME, Equality_Property)
+{
+  using namespace pfc;
+  Property property_1;
+  Property property_2;
+
+  property_1.name = "Solid";
+  property_1.value = "Snake";
+
+  property_2.name = "Solid";
+
+  EXPECT_TRUE(_db.update_property(&property_1));
+  EXPECT_TRUE(_db.select_property(&property_2));
+  EXPECT_EQ(property_1, property_2);
+}
 //RESTRICTION TESTS--------------------------------------------------------------
 TEST_F(TEST_FIXTURE_NAME, Insert_Restriction)
 {
@@ -1165,6 +1318,21 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Restriction)
   EXPECT_TRUE(_db.remove_restriction(&restriction_1));
   EXPECT_TRUE(_db.remove_restriction(&restriction_3));
   EXPECT_EQ(1, _db.restriction_count());
+}
+TEST_F(TEST_FIXTURE_NAME, Equality_Restriction)
+{
+  using namespace pfc;
+  Restriction restriction_1;
+  Restriction restriction_2;
+
+  restriction_1.name = "Solid";
+  restriction_1.value = "Snake";
+
+  restriction_2.name = "Solid";
+
+  EXPECT_TRUE(_db.update_restriction(&restriction_1));
+  EXPECT_TRUE(_db.select_restriction(&restriction_2));
+  EXPECT_EQ(restriction_1, restriction_2);
 }
 //ROLE TESTS--------------------------------------------------------------
 TEST_F(TEST_FIXTURE_NAME, Insert_Role)
@@ -1252,6 +1420,21 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Role)
   EXPECT_TRUE(_db.remove_role(&role_1));
   EXPECT_TRUE(_db.remove_role(&role_3));
   EXPECT_EQ(1, _db.role_count());
+}
+TEST_F(TEST_FIXTURE_NAME, Equality_Role)
+{
+  using namespace pfc;
+  Role role_1;
+  Role role_2;
+
+  role_1.name = "Software Developer";
+  role_1.description = "Bash your head against a wall for 8 hours a day";
+
+  role_2.name = "Software Developer";
+
+  EXPECT_TRUE(_db.update_role(&role_1));
+  EXPECT_TRUE(_db.select_role(&role_2));
+  EXPECT_EQ(role_1, role_2);
 }
 //TREATMENT TESTS--------------------------------------------------------------
 TEST_F(TEST_FIXTURE_NAME, Insert_Treatment)
@@ -1371,6 +1554,24 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Treatment)
   EXPECT_TRUE(_db.remove_treatment(&treatment_1));
   EXPECT_TRUE(_db.remove_treatment(&treatment_3));
   EXPECT_EQ(1, _db.treatment_count());
+}
+TEST_F(TEST_FIXTURE_NAME, Equality_Treatment)
+{
+  using namespace pfc;
+  Treatment treatment_1;
+  Treatment treatment_2;
+
+  treatment_1.medical_name = "Soupus De Gallinus";
+  treatment_1.common_name = "Chicken Soup";
+  treatment_1.description = "Good for the soul";
+  treatment_1.equipment.push_back("Spoon");
+  treatment_1.citations.push_back(1);
+
+  treatment_2.medical_name = "Soupus De Gallinus";
+
+  EXPECT_TRUE(_db.update_treatment(&treatment_1));
+  EXPECT_TRUE(_db.select_treatment(&treatment_2));
+  EXPECT_EQ(treatment_1, treatment_2);
 }
 
 
