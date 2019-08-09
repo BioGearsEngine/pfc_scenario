@@ -84,7 +84,6 @@ ColumnLayout {
       onFourthButtonClicked : {
         self.assessment_id = -1
         self.name = root.model.get(root.index).name
-
         root.backend.remove_assessment(self)
         root.model.remove(root.index)
         listArea.currentIndex = Math.max(0,root.index-1)

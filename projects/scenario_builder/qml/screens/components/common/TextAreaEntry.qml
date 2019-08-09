@@ -13,6 +13,7 @@ Rectangle {
   property alias text : input_area.text
   property bool required : false
 
+  height : childrenRect.height
   signal editingFinished()
   signal completed()
 

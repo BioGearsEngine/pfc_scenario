@@ -9,6 +9,7 @@ Rectangle {
   property alias value: value.text
   property alias placeholderText: value.placeholderText
 
+  height : childrenRect.height
   signal editingFinished()
   
   Layout.preferredHeight : value.height 
