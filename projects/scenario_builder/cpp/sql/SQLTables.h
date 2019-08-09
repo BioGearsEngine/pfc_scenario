@@ -243,15 +243,17 @@ struct Injury : public QObject {
   Q_PROPERTY(QString medical_name MEMBER medical_name)
   Q_PROPERTY(QString common_name MEMBER common_name)
   Q_PROPERTY(QString description MEMBER description)
-  Q_PROPERTY(QList<int> equipment MEMBER equipment)
   Q_PROPERTY(QList<int> citations MEMBER citations)
+  Q_PROPERTY(float min MEMBER severity_min)
+  Q_PROPERTY(float max MEMBER severity_max)
 public:
   int32_t id = -1;
   QString medical_name = "";
   QString common_name = "";
   QString description = "";
-  QList<int> equipment;
   QList<int> citations;
+  float severity_min;
+  float severity_max;
   Injury(QObject* parent = nullptr)
     : QObject(parent)
   {
@@ -268,8 +270,9 @@ public:
       && medical_name == rhs.medical_name
       && common_name == rhs.common_name
       && description == rhs.description
-      && equipment == rhs.equipment
-      && citations == rhs.citations;
+      && citations == rhs.citations
+      && severity_min == rhs.severity_min 
+      && severity_max == rhs.severity_max;
   }
   bool operator!=(const Injury& rhs) const
   {
@@ -281,7 +284,8 @@ public:
     medical_name = rhs.medical_name;
     common_name = rhs.common_name;
     description = rhs.description;
-    equipment = rhs.equipment;
+    severity_min = rhs.severity_min;
+    severity_max = rhs.severity_max;
     citations = rhs.citations;
   }
 };

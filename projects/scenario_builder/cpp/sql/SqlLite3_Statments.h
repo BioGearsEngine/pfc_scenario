@@ -102,7 +102,7 @@ inline namespace sqlite3 {
     AUTHOR_STATE,
     AUTHOR_COUNTRY,
     AUTHOR_PHONE,
-    AUTHOR_ORGANIZATION,
+    AUTHOR_ORGANIZATION
   };
   constexpr auto create_authors_table = R"(
   CREATE TABLE IF NOT EXISTS authors(
@@ -225,7 +225,7 @@ inline namespace sqlite3 {
     EVENT_LOCATION,
     EVENT_ACTOR,
     EVENT_EQUIPMENT,
-    EVENT_DESCRIPTION,
+    EVENT_DESCRIPTION
   };
 
   constexpr auto create_events_table = R"(
@@ -276,6 +276,8 @@ inline namespace sqlite3 {
     INJURY_COMMON_NAME,
     INJURY_DESCRIPTION,
     INJURY_CITATIONS,
+    INJURY_SEVERITY_MIN,
+    INJURY_SEVERITY_MAX
   };
 
   constexpr auto create_injuries_table = R"(
@@ -284,8 +286,9 @@ inline namespace sqlite3 {
     medical_name Varchar(64) NOT NULL UNIQUE,
     common_name Varchar(64) NOT NULL UNIQUE,
     description TEXT,
-    severity TEXT,
-    citations TEXT
+    citations TEXT,
+    min REAL DEFAULT 0.0,
+    max REAL DEFAULT 1.0
   );
   )";
 
@@ -300,8 +303,9 @@ inline namespace sqlite3 {
           SET medical_name = :medical_name
               , common_name = :common_name
               , description = :description
-              , equipment = :equipment
               , citations = :citations
+              , min  = :min
+              , max  = :max
           WHERE injury_id = :id;
          )";
   constexpr auto delete_injury_by_id
@@ -316,12 +320,14 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM injuries WHERE common_name = :common_name; )";
   constexpr auto insert_or_update_injuries
     = R"( INSERT INTO injuries
-          (medical_name,common_name,description,citations)
-          VALUES (:medical_name, :common_name, :description, :citations)
+          (medical_name,common_name,description,citations,min,max)
+          VALUES (:medical_name, :common_name, :description, :citations, :min, :max)
           ON CONFLICT (medical_name)
           DO UPDATE SET common_name = excluded.common_name
                         , description = excluded.description
                         , citations = excluded.citations
+                        , min= excluded.min
+                        , max= excluded.max
           ;          
           )";
   
@@ -330,7 +336,7 @@ inline namespace sqlite3 {
     INJURY_SET_ID,
     INJURY_SET_NAME,
     INJURY_SET_DESCRIPTION,
-    INJURY_SET_INJURIES,
+    INJURY_SET_INJURIES
   };
 
   constexpr auto create_injury_sets_table = R"(
@@ -377,7 +383,7 @@ inline namespace sqlite3 {
     LOCATION_NAME,
     LOCATION_SCENE_NAME,
     LOCATION_TIME_OF_DAY,
-    LOCATION_ENVIRONMENT,
+    LOCATION_ENVIRONMENT
   };
 
   constexpr auto create_locations_table = R"(
@@ -428,7 +434,7 @@ inline namespace sqlite3 {
     OBJECTIVE_ID,
     OBJECTIVE_NAME,
     OBJECTIVE_DESCRIPTION,
-    OBJECTIVE_CITATIONS,
+    OBJECTIVE_CITATIONS
   };
 
   constexpr auto create_objectives_table = R"(
@@ -473,7 +479,7 @@ inline namespace sqlite3 {
   //---------------------- PROP STATMENTS ------------------------
   enum PROP_COLUMNS {
     PROP_ID,
-    PROP_EQUIPMENT,
+    PROP_EQUIPMENT
   };
 
   constexpr auto create_props_table = R"(
@@ -662,7 +668,7 @@ inline namespace sqlite3 {
   enum ROLE_COLUMNS {
     ROLE_ID,
     ROLE_NAME,
-    ROLE_DESCRIPTION,
+    ROLE_DESCRIPTION
   };
 
   constexpr auto create_roles_table = R"(
@@ -706,7 +712,7 @@ inline namespace sqlite3 {
     TREATMENT_COMMON_NAME,
     TREATMENT_DESCRIPTION,
     TREATMENT_EQUIPMENT,
-    TREATMENT_CITATIONS,
+    TREATMENT_CITATIONS
   };
 
   constexpr auto create_treatments_table = R"(

@@ -51,8 +51,10 @@ ColumnLayout {
         self.medical_name = "New Injury %1".arg(next)
         self.common_name = "New Injury %1".arg(next)
         self.description = "Description of Injury %1".arg(next)
-        self.equipment = new Array()
+        
         self.citations = new Array()
+        self.min = 0.0
+        self.max = 1.0
 
         while( root.backend.select_injury(self) )
         { 
@@ -67,11 +69,12 @@ ColumnLayout {
         root.model.insert(root.model.count,
           {
            "id" : self.injury_id,
-           "medical_name": "%1".arg(self.medical_name), 
-           "common_name": "%1".arg(self.common_name), 
-           "description": "%1".arg(self.description) , 
-           "citations": self.citaitons,
-           "equipment": self.equipment,
+           "medical_name": "%1".arg(self.medical_name),
+           "common_name": "%1".arg(self.common_name),
+           "description": "%1".arg(self.description),
+           "citations": self.citations,
+           "min": self.min,
+           "max": self.max
 
           }
         );
@@ -182,8 +185,9 @@ ColumnLayout {
              medical_name: "%1".arg(self.medical_name), 
              common_name: "%1".arg(self.common_name), 
              description: "%1".arg(self.description) , 
-             equipment: self.equipment,
-             citaitons: self.citations,
+             min: self.min,
+             max: self.max,
+             citations: self.citations,
 
             });
         }

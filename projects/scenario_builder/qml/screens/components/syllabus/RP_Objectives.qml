@@ -100,6 +100,8 @@ ColumnLayout  {
         referenceList.model.clear()
         for (var  i in  values.citations) {
            citation.citation_id = values.citations[i]
+           citation.key = ""
+           citation.title = ""
            root.backend.select_citation(citation)
            referenceList.model.insert(referenceList.model.count,
                {

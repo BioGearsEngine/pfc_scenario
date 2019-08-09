@@ -51,7 +51,7 @@ Flickable {
         Layout.fillHeight: true
         Layout.fillWidth: true
       }
-      RP_Injuries {
+      RP_InjurySets {
         id : injurySets
         backend : root.backend
         Layout.fillHeight: true
