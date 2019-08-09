@@ -336,7 +336,7 @@ inline namespace sqlite3 {
   constexpr auto create_injury_sets_table = R"(
   CREATE TABLE IF NOT EXISTS injury_sets ( 
     injury_set_id INTEGER PRIMARY KEY,
-     Varchar(64) NOT NULL UNIQUE,
+    name Varchar(64) NOT NULL UNIQUE,
     description TEXT,
     injuries TEXT
   );
