@@ -11,7 +11,7 @@
 #ifdef DISABLE_BIOGEARS_Path_TEST
 #define TEST_FIXTURE_NAME DISABLED_SQLite3Driver
 #else
-#define TEST_FIXTURE_NAME SQLLiteDriver
+#define TEST_FIXTURE_NAME SQLiteDriver
 #endif
 
 // The fixture for testing class Foo.
