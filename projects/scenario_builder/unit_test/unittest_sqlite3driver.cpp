@@ -308,7 +308,18 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Author)
 
   EXPECT_TRUE(_db.update_author(&author_1));
   EXPECT_TRUE(_db.select_author(&author_2));
-  EXPECT_EQ(author_1, author_2);
+  //EXPECT_EQ(author_1, author_2);
+  EXPECT_EQ(author_1.id,author_2.id);
+  EXPECT_EQ(author_1.first, author_2.first);
+  EXPECT_EQ(author_1.middle, author_2.middle);
+  EXPECT_EQ(author_1.last, author_2.last);
+  EXPECT_EQ(author_1.email, author_2.email);
+  EXPECT_EQ(author_1.zip, author_2.zip);
+  EXPECT_EQ(author_1.plus_4, author_2.plus_4);
+  EXPECT_EQ(author_1.state, author_2.state);
+  EXPECT_EQ(author_1.country, author_2.country);
+  EXPECT_EQ(author_1.phone, author_2.phone);
+  EXPECT_EQ(author_1.organization, author_2.organization);
 }
 //CITATION TESTS--------------------------------------------------------------
 TEST_F(TEST_FIXTURE_NAME, Insert_Citation)
@@ -705,7 +716,7 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Event)
   event_1.equipment = { "Grill", "Spatula" };
   event_1.description = "People cooking and eating meat outdoors";
 
-  event_2.description = "Barbecue";
+  event_2.name = "Barbecue";
 
   EXPECT_TRUE(_db.update_event(&event_1));
   EXPECT_TRUE(_db.select_event(&event_2));

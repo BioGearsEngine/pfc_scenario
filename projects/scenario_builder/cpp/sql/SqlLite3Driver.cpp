@@ -379,7 +379,6 @@ bool SQLite3Driver::update_assessment(Assessment* assessment)
       const auto r = select_assessment(assessment);
       assessmentUpdated(assessment->id);
       return r;
-      ;
     }
     assessmentUpdated(assessment->id);
     return true;
@@ -530,6 +529,11 @@ bool SQLite3Driver::update_author(Author* author)
       if (!query.exec()) {
         qWarning() << query.lastError();
         return false;
+      }
+      if (-1 == author->id) {
+        const auto r = select_author(author);
+        authorUpdated(author->id);
+        return r;
       }
       authorUpdated(author->id);
       return true;
@@ -1057,6 +1061,8 @@ inline void assign_injury(const QSqlRecord& record, Injury& injury)
   injury.medical_name = record.value(INJURY_MEDICAL_NAME).toString();
   injury.common_name = record.value(INJURY_COMMON_NAME).toString();
   injury.description = record.value(INJURY_DESCRIPTION).toString();
+  injury.severity_min = record.value(INJURY_SEVERITY_MIN).toInt();
+  injury.severity_max = record.value(INJURY_SEVERITY_MAX).toInt();
   auto ref_list_s = record.value(INJURY_CITATIONS).toString();
   auto ref_list = ref_list_s.split(";");
   injury.citations.clear();
@@ -1864,6 +1870,11 @@ bool SQLite3Driver::update_property(Property* property)
         qWarning() << query.lastError();
         return false;
       }
+      if (-1 == property->id) {
+        const auto r = select_property(property);
+        propertyUpdated(property->id);
+        return r;
+      }
       propertyUpdated(property->id);
       return true;
     }
@@ -2119,6 +2130,11 @@ bool SQLite3Driver::update_restriction(Restriction* restriction)
       if (!query.exec()) {
         qWarning() << query.lastError();
         return false;
+      }
+      if (-1 == restriction->id) {
+        const auto r = select_restriction(restriction);
+        restrictionUpdated(restriction->id);
+        return r;
       }
       restrictionUpdated(restriction->id);
       return true;
