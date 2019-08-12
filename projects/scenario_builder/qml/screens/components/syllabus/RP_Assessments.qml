@@ -45,8 +45,8 @@ ColumnLayout  {
 
        onEditingFinished : {
         var entry = model.get(root.index)
-        if ( value != entry.name){
-          entry.name = value
+        if ( text != entry.name){
+          entry.name = text
           console.log("Updating Name filed for Assessment %1".arg(entry.id))
           update_assessment(entry)
         }
@@ -122,9 +122,10 @@ ColumnLayout  {
             placeholderText: "String Field (128 Characters )"
 
              onEditingFinished : {
+              partialCriteriaEntry.text = text
               var entry = model.get(root.index)
-              if ( value != entry.criteria){
-                entry.criteria = value
+              if ( text != entry.criteria){
+                entry.criteria = text
                 console.log("Updating criteria filed for Assessment %1".arg(entry.id))
                 update_assessment(entry)
               }
@@ -150,8 +151,8 @@ ColumnLayout  {
 
              onEditingFinished : {
               var entry = model.get(root.index)
-              if ( value != entry.available_points){
-                entry.available_points = parseInt(value)
+              if ( text != entry.available_points){
+                entry.available_points = parseInt(text)
                 console.log("Updating available_points filed for Assessment %1".arg(entry.id))
                 update_assessment(entry)
               }
@@ -168,9 +169,10 @@ ColumnLayout  {
             placeholderText: "String Field (128 Characters )"
 
              onEditingFinished : {
+              binaryCriteriaEntry.text = text
               var entry = model.get(root.index)
-              if ( value != entry.criteria){
-                entry.criteria = value
+              if ( text != entry.criteria){
+                entry.criteria = text
                 console.log("Updating criteria filed for Assessment %1".arg(entry.id))
                 update_assessment(entry)
               }
@@ -182,19 +184,19 @@ ColumnLayout  {
     onIndexChanged : {
       var values = model.get(index)
       if(values) {
-        nameEntry.value = values.name
+        nameEntry.text = values.name
         descriptionEntry.text = values.description
         if (values.type === "Binary") {
           optionalArea.currentIndex =  0
           typeSelect.currentIndex =  0
 
-          binaryCriteriaEntry.value = values.criteria
         } else {
           optionalArea.currentIndex =  1
           typeSelect.currentIndex =  1
-          partialCriteriaEntry.value = values.criteria
-          partialPointsEntry.value   = "%1".arg(values.available_points)
+          partialPointsEntry.text   = "%1".arg(values.available_points)
         }
+          partialCriteriaEntry.text = values.criteria
+          binaryCriteriaEntry.text = values.criteria
       }
     }
 }

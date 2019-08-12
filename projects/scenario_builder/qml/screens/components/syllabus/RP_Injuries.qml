@@ -44,13 +44,14 @@ ColumnLayout  {
     obj.description          = values.description
 
     obj.citations = []
-    for (var  i in  values.citations) {
-        obj.citations.push(values.citations[i])
+    for (var  i in  referenceList.model) {
+        console.log("Pushing citation %1,%2".arg(i).arg(citation_id.model.get(i).citation_id))
+        obj.citations.push(citation_id.model.get(i).citation_id)
     }
 
     obj.min          = values.min
     obj.max          = values.max
-    root.backend.update_objective(obj)
+    root.backend.update_injury(obj)
   }
 
 
@@ -60,6 +61,15 @@ ColumnLayout  {
     id: medicalNameEntry
     label : "Medical Name"
     placeholderText: "String Field (128 Characters)"
+
+    onEditingFinished : {
+        var entry = model.get(root.index)
+        if ( text != entry.medical_name) {
+          entry.medical_name = text
+          console.log("Updating Name filed for Injury %1".arg(entry.id))
+          update_injury(entry)
+        }
+    }
   }
 
   TextEntry {
@@ -68,23 +78,30 @@ ColumnLayout  {
     id: commonNameEntry
     label : "Common Name"
     placeholderText: "String Field (128 Characters)"
+
+    onEditingFinished : {
+        var entry = model.get(root.index)
+        if ( text != entry.common_name){
+          entry.common_name = text
+          console.log("Updating Name filed for Injury %1".arg(entry.id))
+          update_injury(entry)
+        }
+    }
   }
 
-    CitationListEntry {
-      id : referenceList
-      Layout.fillWidth : true
-      Layout.fillHeight : true
-      backend : root.backend
+  CitationListEntry {
+    id : referenceList
+    Layout.fillWidth : true
+    backend : root.backend
 
-      onCitationAdded : {
-        console.log("RP_Objective Added a Reference")
-      }
-
-      onCitationRemoved : {
-        console.log("RP_Objective Removed a Reference")
-      }
+    onCitationAdded : {
+      console.log("RP_Objective Added a Reference")
     }
 
+    onCitationRemoved : {
+      console.log("RP_Objective Removed a Reference")
+    }
+  }
 
   TextAreaEntry {
     Layout.fillWidth: true
@@ -93,24 +110,41 @@ ColumnLayout  {
     label : "Description"
     required: true
     placeholderText: "Text Area (5-15 Lines)"
+
+    onEditingFinished : {
+      var entry = model.get(root.index)
+      if ( text != entry.description){
+        entry.description = text
+        console.log("Updating Name filed for Injury %1".arg(entry.id))
+        update_injury(entry)
+      }
+    }
   }
 
-  TextEntry {
+  RangeEntry {
     Layout.fillWidth: true
 
     id: severityEntry
     label : "Severity Range"
-    placeholderText: "TODO: Make a Spinner Box"
+
+    onRangeModified : {
+        var entry = model.get(root.index)
+        entry.min = min
+        entry.max = max
+
+        console.log("Updating Name filed for Injury %1".arg(entry.id))
+        update_injury(entry)
+    }
   }
 
   onIndexChanged : {
     var values = model.get(index)
     if(values) {
-      medicalNameEntry.value  =  values.medical_name
-      commonNameEntry.value   =  values.common_name
+      medicalNameEntry.text  =  values.medical_name
+      commonNameEntry.text   =  values.common_name
       descriptionEntry.text   =  values.description
-      severityEntry.value     =  "(%1,%2)".arg(values.min).arg(values.max)
-      console.log(values.citations)
+      severityEntry.min     =  values.min
+      severityEntry.max     =  values.max
       referenceList.model.clear()
       for (var  i in  values.citations) {
          citation.citation_id = values.citations[i]
@@ -127,8 +161,6 @@ ColumnLayout  {
             }
          );
       }
-
-
     }
   }
 }

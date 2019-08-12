@@ -8,7 +8,9 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 
 Rectangle {
   id: root
-  property alias label: name.text
+  property string label : "Label"
+  property string labelPlaural : label + "s" 
+
   property alias model : listArea.model
   property alias delegate : listArea.delegate
   property alias current : listArea.currentIndex
@@ -24,7 +26,7 @@ Rectangle {
   Label {
   id: name
   Layout.alignment : Qt.AlignTop
-   text: 'Label'
+   text: root.labelPlaural
    font.pointSize : 10
    color: "steelblue"
    width: 100
@@ -40,7 +42,7 @@ Rectangle {
 
    PFCButton {
       id : addButton
-      text : "Add " + name.text
+      text : "Add " + root.label
       anchors.left : content.left
       anchors.leftMargin : 5
   
@@ -52,7 +54,7 @@ Rectangle {
 
     PFCButton {
       id: removeButton
-      text : "Remove " + name.text
+      text : "Remove " + root.label
       anchors.right : content.right
       anchors.rightMargin : 5
 
@@ -75,8 +77,10 @@ Rectangle {
 
       highlight: Rectangle {
           color: '#1111110F'
-          Layout.fillWidth : true
-          Layout.margins: 5
+          anchors.left   : (parent)? parent.left : undefined
+          anchors.right  : (parent)? parent.right: undefined
+          anchors.margins : 5
+          
       }
 
       ScrollBar.vertical: ScrollBar { }

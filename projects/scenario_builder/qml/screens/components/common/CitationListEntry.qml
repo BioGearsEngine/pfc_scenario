@@ -13,7 +13,7 @@ ListEntry {
   signal citationAdded(int citation_id)
   signal citationRemoved(int citation_id)
 
-  label: "References"
+  label: "Reference"
   
   Citation {
     id: self
@@ -176,12 +176,12 @@ ListEntry {
       , authors: "%1".arg(self.authors)
       , year: "%1".arg(self.year)
       });
-    root.added(self.citation_id)
+    root.citationAdded(self.citation_id)
   }
   onRemoved : {
     self.citation_id =  root.model.get(index).citation_id
     root.model.remove(index)
     current = Math.max(0,index-1)
-    root.removed(index)
+    root.injuryRemoved(index)
   }
 }

@@ -83,8 +83,8 @@ ColumnLayout {
     Layout.fillWidth : true
     Layout.alignment: Qt.AlignTop
         onEditingFinished : {
-      if ( value != author.organization){
-        author.organization = value
+      if ( text != author.organization){
+        author.organization = text
         root.backend.update_first_author(author)
       }
       root.editingFinished();
@@ -98,8 +98,8 @@ ColumnLayout {
     Layout.fillWidth : true
     Layout.alignment: Qt.AlignTop
     onEditingFinished : {
-      if ( value != author.phone){
-        author.phone = value
+      if ( text != author.phone){
+        author.phone = text
         root.backend.update_first_author(author)
       }
       root.editingFinished();
@@ -113,8 +113,8 @@ ColumnLayout {
     Layout.fillWidth : true
     Layout.alignment: Qt.AlignTop
     onEditingFinished : {
-      if ( value != author.email){
-        author.email = value
+      if ( text != author.email){
+        author.email = text
         root.backend.update_first_author(author)
       }
       root.editingFinished();
@@ -130,13 +130,13 @@ ColumnLayout {
         last_name.text = author.last
       }
       if( author.email !== ""){
-        email.value = author.email
+        email.text = author.email
       }
       if( author.phone !== ""){
-        phone.value = author.phone
+        phone.text = author.phone
       }
       if( author.organiztion !== ""){
-        organization.value = author.organization
+        organization.text = author.organization
       }
     }
   }

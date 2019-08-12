@@ -6,13 +6,13 @@ import QtQuick.Controls 2.12
 Rectangle {
   id: root
   property alias label: name.text
-  property alias value: value.text
-  property alias placeholderText: value.placeholderText
+  property alias text: textEntry.text
+  property alias placeholderText: textEntry.placeholderText
 
   height : childrenRect.height
   signal editingFinished()
   
-  Layout.preferredHeight : value.height 
+  Layout.preferredHeight : textEntry.height 
   Layout.rightMargin : 20
   
   Label {
@@ -23,7 +23,7 @@ Rectangle {
    width: (text.width > 90 ) ? text.width + 10 : 100
   }
   TextField {
-    id : value
+    id : textEntry
     maximumLength: 128
     placeholderText: qsTr( 'String Field (128 Characters)')
     font.pointSize : 10

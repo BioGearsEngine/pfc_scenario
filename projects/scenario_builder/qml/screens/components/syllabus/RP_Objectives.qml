@@ -51,8 +51,8 @@ ColumnLayout  {
       
       onEditingFinished : {
         var entry = model.get(index)
-        if ( value != entry.name){
-          entry.name = value
+        if ( text != entry.name){
+          entry.name = text
           console.log("updating Name filed for entry")
           update_objective(entry)
         }
@@ -95,7 +95,7 @@ ColumnLayout  {
     onIndexChanged : {
       var values = model.get(index)
       if(values) {
-        nameEntry.value = values.name
+        nameEntry.text = values.name
         descriptionEntry.text = values.description
         referenceList.model.clear()
         for (var  i in  values.citations) {

@@ -12,7 +12,7 @@ Rectangle {
   property SQLBackend backend
   property alias label : label.text
   property alias name: self.name
-  property alias value: entryField.text
+  property alias text: entryField.text
   property alias default_value: entryField.placeholderText
   property bool required : false
 

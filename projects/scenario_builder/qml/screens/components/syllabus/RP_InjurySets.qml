@@ -16,51 +16,81 @@ ColumnLayout  {
     Layout.fillWidth: true
     Layout.fillHeight: true
 
-    TextEntry {
-       Layout.fillWidth: true
-
-      id: medicalNameEntry
-      label : "Medical Name"
-      placeholderText: "String Field (128 Characters)"
+    InjurySet {
+      id : obj
+    }
+    Injury {
+      id : injury
     }
 
     TextEntry {
-       Layout.fillWidth: true
-
-      id: commonNameEntry
-      label : "Common Name"
-      placeholderText: "String Field (128 Characters)"
-    }
-
-    ListEntry {
       Layout.fillWidth: true
-      label : "Citations"
-      model : ListModel {
-          ListElement{name: "item1"}
-          ListElement {name: "item2"}
-      }
-      delegate : Rectangle {
-        Layout.fillWidth : true
-        Layout.preferredHeight : 100
-        color : "red"
+      id: nameEntry
+      label : "Name"
+
+      onEditingFinished : {
+        var entry = model.get(index)
+        if ( text != entry.name){
+          entry.name = text
+          console.log("updating Name filed for InjurySet %1".arg(entry.injury_id))
+          update_injury(entry)
+        }
       }
     }
-
 
     TextAreaEntry {
-      Layout.fillWidth: true
+       Layout.fillWidth: true
 
       id: descriptionEntry
       label : "Description"
-      required: true
-      placeholderText: "Text Area (5-15 Lines)"
+
+      onEditingFinished : {
+        var entry = model.get(index)
+        if ( text != entry.description){
+          entry.description = text
+          console.log("updating Description filed for InjurySet %1".arg(entry.injury_id))
+          update_injury(entry)
+        }
+      }
     }
 
-    TextEntry {
-       Layout.fillWidth: true
+    InjuryListEntry {
+      id : injuryList
+      Layout.fillWidth : true
+      backend : root.backend
 
-      id: severityEntry
-      label : "Severity Range"
-      placeholderText: "TODO: Make a Spinner Box"
+      onInjuryAdded : {
+        console.log("RP_Objective Added a Reference")
+      }
+
+      onInjuryRemoved : {
+        console.log("RP_Objective Removed a Reference")
+      }
+    }
+
+    onIndexChanged : {
+      var values = model.get(index)
+      if(values) {
+        nameEntry.text = values.name
+        descriptionEntry.text = values.description
+        injuryList.model.clear()
+        for (var  i in  values.injuries) {
+           injury.injury_id = values.injuries[i]
+           injury.medical_name = ""
+           injury.common_name  = ""
+           root.backend.select_injury(injury)
+           injuryList.model.insert(injuryList.model.count,
+               {
+                 "injury_id" : "%1".arg(injury.injury_id),
+                 "medical_name" : "%1".arg(injury.medical_name),
+                 "common_name" : "%1".arg(injury.common_name), 
+                 "description":  "%1".arg(injury.description),
+                 "citations" : "%1".arg(injury.citations),
+                 "min" : "%1".arg(injury.min),
+                 "max" : "%1".arg(injury.max)
+              }
+           );
+        }
+      }
     }
   }
