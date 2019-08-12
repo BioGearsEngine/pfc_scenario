@@ -171,11 +171,6 @@ ColumnLayout {
         var r_count = backend.treatment_count();
         root.backend.treatments()
         while ( root.backend.next_treatment(self) ){
-          
-          var js_citations = []
-          for ( var citation in self.citations ){
-            js_citations.push( citation )
-          }
           listArea.model.insert(listArea.model.count,
             {
              id : self.treatment_id,
@@ -183,7 +178,7 @@ ColumnLayout {
              common_name: "%1".arg(self.common_name), 
              description: "%1".arg(self.description) , 
              equipment: self.equipment,
-             citaitons: self.citations,
+             citations: self.citations,
 
             });
         }

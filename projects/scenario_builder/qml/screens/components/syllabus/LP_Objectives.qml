@@ -163,11 +163,7 @@ ColumnLayout {
         var r_count = backend.objective_count();
         root.backend.objectives()
         while ( root.backend.next_objective(self) ){
-          
-          var js_citations = []
-          for ( var citation in self.citations ){
-            js_citations.push( citation )
-          }
+
           listArea.model.insert(listArea.model.count,
             {
              id  : self.objective_id,

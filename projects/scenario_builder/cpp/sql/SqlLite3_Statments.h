@@ -44,7 +44,8 @@ inline namespace sqlite3 {
     ASSESSMENT_DESCRIPTION,
     ASSESSMENT_TYPE,
     ASSESSMENT_AVAILABLE_POINTS,
-    ASSESSMENT_CRITERIA
+    ASSESSMENT_CRITERIA,
+    ASSESSMENT_COLUMN_COUNT
   };
 
   constexpr auto create_assessments_table = R"(
@@ -102,7 +103,8 @@ inline namespace sqlite3 {
     AUTHOR_STATE,
     AUTHOR_COUNTRY,
     AUTHOR_PHONE,
-    AUTHOR_ORGANIZATION
+    AUTHOR_ORGANIZATION,
+    AUTHOR_COLUMN_COUNT
   };
   constexpr auto create_authors_table = R"(
   CREATE TABLE IF NOT EXISTS authors(
@@ -167,11 +169,12 @@ inline namespace sqlite3 {
   //---------------------- EQUIPMENT STATMENTS ------------------------
   enum EQUIPMENT_COLUMNS {
     EQUIPMENT_ID,
-    EQUIPMENT_NAME,
     EQUIPMENT_TYPE,
+    EQUIPMENT_NAME,
     EQUIPMENT_DESCRIPTION,
     EQUIPMENT_CITATIONS,
-    EQUIPMENT_IMAGE
+    EQUIPMENT_IMAGE,
+    EQUIPMENT_COLUMN_COUNT
   };
   // I know that the plural of equipment is 'equipment', but we've made it equipments to be less ambiguous
   constexpr auto create_equipment_table = R"(
@@ -225,7 +228,8 @@ inline namespace sqlite3 {
     EVENT_LOCATION,
     EVENT_ACTOR,
     EVENT_EQUIPMENT,
-    EVENT_DESCRIPTION
+    EVENT_DESCRIPTION,
+    EVENT_COLUMN_COUNT
   };
 
   constexpr auto create_events_table = R"(
@@ -277,7 +281,8 @@ inline namespace sqlite3 {
     INJURY_DESCRIPTION,
     INJURY_CITATIONS,
     INJURY_SEVERITY_MIN,
-    INJURY_SEVERITY_MAX
+    INJURY_SEVERITY_MAX,
+    INJURY_COLUMN_COUNT
   };
 
   constexpr auto create_injuries_table = R"(
@@ -336,7 +341,8 @@ inline namespace sqlite3 {
     INJURY_SET_ID,
     INJURY_SET_NAME,
     INJURY_SET_DESCRIPTION,
-    INJURY_SET_INJURIES
+    INJURY_SET_INJURIES,
+    INJURY_SET_COLUMN_COUNT
   };
 
   constexpr auto create_injury_sets_table = R"(
@@ -383,7 +389,8 @@ inline namespace sqlite3 {
     LOCATION_NAME,
     LOCATION_SCENE_NAME,
     LOCATION_TIME_OF_DAY,
-    LOCATION_ENVIRONMENT
+    LOCATION_ENVIRONMENT,
+    LOCATION_COLUMN_COUNT
   };
 
   constexpr auto create_locations_table = R"(
@@ -434,7 +441,8 @@ inline namespace sqlite3 {
     OBJECTIVE_ID,
     OBJECTIVE_NAME,
     OBJECTIVE_DESCRIPTION,
-    OBJECTIVE_CITATIONS
+    OBJECTIVE_CITATIONS,
+    OBJECTIVE_COLUMN_COUNT
   };
 
   constexpr auto create_objectives_table = R"(
@@ -479,7 +487,8 @@ inline namespace sqlite3 {
   //---------------------- PROP STATMENTS ------------------------
   enum PROP_COLUMNS {
     PROP_ID,
-    PROP_EQUIPMENT
+    PROP_EQUIPMENT,
+    PROP_COLUMN_COUNT
   };
 
   constexpr auto create_props_table = R"(
@@ -512,7 +521,8 @@ inline namespace sqlite3 {
   enum PROPERTY_COLUMNS {
     PROPERTY_ID,
     PROPERTY_NAME,
-    PROPERTY_VALUE
+    PROPERTY_VALUE,
+    PROPERTY_COLUMN_COUNT
   };
 
   constexpr auto create_properties_table = R"(
@@ -559,7 +569,8 @@ inline namespace sqlite3 {
     CITATION_TITLE,
     CITATION_AUTHORS,
     CITATION_YEAR,
-    CITATION_PUBLISHER
+    CITATION_PUBLISHER,
+    CITATION_COLUMN_COUNT
   };
 
   constexpr auto create_citations_table = R"(
@@ -627,7 +638,8 @@ inline namespace sqlite3 {
   enum RESTRICTION_COLUMNS {
     RESTRICTION_ID,
     RESTRICTION_NAME,
-    RESTRICTION_VALUE
+    RESTRICTION_VALUE,
+    RESTRICTION_COLUMN_COUNT
   };
 
   constexpr auto create_restrictions_table = R"(
@@ -668,7 +680,8 @@ inline namespace sqlite3 {
   enum ROLE_COLUMNS {
     ROLE_ID,
     ROLE_NAME,
-    ROLE_DESCRIPTION
+    ROLE_DESCRIPTION,
+    ROLE_COLUMN_COUNT
   };
 
   constexpr auto create_roles_table = R"(
@@ -712,7 +725,8 @@ inline namespace sqlite3 {
     TREATMENT_COMMON_NAME,
     TREATMENT_DESCRIPTION,
     TREATMENT_EQUIPMENT,
-    TREATMENT_CITATIONS
+    TREATMENT_CITATIONS,
+    TREATMENT_COLUMN_COUNT
   };
 
   constexpr auto create_treatments_table = R"(

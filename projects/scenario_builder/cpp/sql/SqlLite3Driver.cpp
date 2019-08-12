@@ -268,7 +268,7 @@ int SQLite3Driver::nextID(Sqlite3Table table) const
   }
   return -1;
 }
-//-----------------------------------------------------------------------------ASSESSMENT
+//----------------------------ASSESSMENT-----------------------------------------
 inline void assign_assessment(const QSqlRecord& record, Assessment& assessment)
 {
   assessment.id = record.value(ASSESSMENT_ID).toInt();
@@ -407,7 +407,7 @@ bool SQLite3Driver::remove_assessment(Assessment* assessment)
   qWarning() << "No Database connection";
   return false;
 }
-//-----------------------------------------------------------------------------AUTHOR
+//----------------------------AUTHOR---------------------------------------------
 inline void assign_author(const QSqlRecord& record, Author& author)
 {
   author.id = record.value(AUTHOR_ID).toInt();
@@ -587,7 +587,7 @@ bool SQLite3Driver::remove_author(Author* author)
   qWarning() << "No Database connection";
   return false;
 }
-//-----------------------------------------------------------------------------CITATION
+//----------------------------CITATION--------------------------------------------
 inline void assign_citation(const QSqlRecord& record, Citation& citation)
 {
   citation.id = record.value(CITATION_ID).toInt();
@@ -597,7 +597,9 @@ inline void assign_citation(const QSqlRecord& record, Citation& citation)
   auto auth_list = auth_list_s.split(";");
   citation.authors.clear();
   for (auto& val : auth_list) {
-    citation.authors.push_back(val.toInt());
+    if (!val.isEmpty()) {
+      citation.authors.push_back(val);
+    }
   }
   citation.year = record.value(CITATION_YEAR).toString();
   citation.publisher = record.value(CITATION_PUBLISHER).toString();
@@ -745,7 +747,7 @@ bool SQLite3Driver::remove_citation(Citation* citation)
   qWarning() << "No Database connection";
   return false;
 }
-//-----------------------------------------------------------------------------EQUIPMENT
+//----------------------------EQUIPMENT------------------------------------------
 inline void assign_equipment(const QSqlRecord& record, Equipment& equipment)
 {
   equipment.id = record.value(EQUIPMENT_ID).toInt();
@@ -757,7 +759,9 @@ inline void assign_equipment(const QSqlRecord& record, Equipment& equipment)
   auto ref_list = ref_list_s.split(";");
   equipment.citations.clear();
   for (auto& val : ref_list) {
-    equipment.citations.push_back(val.toInt());
+    if (!val.isEmpty()) {
+      equipment.citations.push_back(val.toInt());
+    }
   }
 
   equipment.image = record.value(EQUIPMENT_IMAGE).toString();
@@ -790,7 +794,7 @@ void SQLite3Driver::equipments()
     while (query.next()) {
       auto equipment = std::make_unique<pfc::Equipment>();
       auto record = query.record();
-      assert(record.count() == 5);
+      assert(record.count() == EQUIPMENT_COLUMN_COUNT);
       assign_equipment(record, *equipment);
       _equipments.push_back(equipment.release());
     }
@@ -896,7 +900,7 @@ bool SQLite3Driver::remove_equipment(Equipment* equipment)
   qWarning() << "No Database connection";
   return false;
 }
-//-----------------------------------------------------------------------------EVENT
+//----------------------------EVENT-------------------------------------------------
 inline void assign_event(QSqlRecord& record, Event& event)
 {
   event.id = record.value(EVENT_ID).toInt();
@@ -908,7 +912,9 @@ inline void assign_event(QSqlRecord& record, Event& event)
   auto equip_list = equip_list_s.split(";");
   event.equipment.clear();
   for (auto& val : equip_list) {
-    event.equipment.push_back(val);
+    if (!val.isEmpty()) {
+      event.equipment.push_back(val);
+    }
   }
 }
 int SQLite3Driver::event_count() const
@@ -939,7 +945,7 @@ void SQLite3Driver::events()
     while (query.next()) {
       auto event = std::make_unique<pfc::Event>();
       auto record = query.record();
-      assert(record.count() == 3);
+      assert(record.count() == EVENT_COLUMN_COUNT);
       assign_event(record, *event);
       _events.push_back(event.release());
     }
@@ -1044,7 +1050,7 @@ bool SQLite3Driver::remove_event(Event* event)
   qWarning() << "No Database connection";
   return false;
 }
-//-----------------------------------------------------------------------------INJURY
+//----------------------------INJURY-------------------------------------------------
 inline void assign_injury(const QSqlRecord& record, Injury& injury)
 {
   injury.id = record.value(INJURY_ID).toInt();
@@ -1055,7 +1061,9 @@ inline void assign_injury(const QSqlRecord& record, Injury& injury)
   auto ref_list = ref_list_s.split(";");
   injury.citations.clear();
   for (auto& val : ref_list) {
-    injury.citations.push_back(val.toInt());
+    if (!val.isEmpty()) {
+      injury.citations.push_back(val.toInt());
+    }
   }
 }
 int SQLite3Driver::injury_count() const
@@ -1086,7 +1094,7 @@ void SQLite3Driver::injuries()
     while (query.next()) {
       auto injury = std::make_unique<pfc::Injury>();
       auto record = query.record();
-      assert(record.count() == 6);
+      assert(record.count() == INJURY_COLUMN_COUNT);
       assign_injury(record, *injury);
       _injuries.push_back(injury.release());
     }
@@ -1159,6 +1167,8 @@ bool SQLite3Driver::update_injury(Injury* injury)
     query.bindValue(":medical_name", injury->medical_name);
     query.bindValue(":common_name", injury->common_name);
     query.bindValue(":description", injury->description);
+    query.bindValue(":min", injury->severity_min);
+    query.bindValue(":max", injury->severity_max);
 
     if (!query.exec()) {
       qWarning() << query.lastError();
@@ -1195,7 +1205,7 @@ bool SQLite3Driver::remove_injury(Injury* injury)
   qWarning() << "No Database connection";
   return false;
 }
-//------------------------------------------------------------------------------INJURY_SET
+//-----------------------------INJURY_SET----------------------------------------
 inline void assign_injury_set(const QSqlRecord& record, InjurySet& injury)
 {
   injury.id = record.value(INJURY_SET_ID).toInt();
@@ -1205,7 +1215,9 @@ inline void assign_injury_set(const QSqlRecord& record, InjurySet& injury)
   auto ref_list = ref_list_s.split(";");
   injury.injuries.clear();
   for (auto& val : ref_list) {
-    injury.injuries.push_back(val.toInt());
+    if (!val.isEmpty()) {
+      injury.injuries.push_back(val.toInt());
+    }
   }
 }
 int SQLite3Driver::injury_set_count() const
@@ -1236,7 +1248,7 @@ void SQLite3Driver::injury_sets()
     while (query.next()) {
       auto set = std::make_unique<pfc::InjurySet>();
       auto record = query.record();
-      assert(record.count() == 4);
+      assert(record.count() == INJURY_SET_COLUMN_COUNT);
       assign_injury_set(record, *set);
       _injury_sets.push_back(set.release());
     }
@@ -1339,7 +1351,7 @@ bool SQLite3Driver::remove_injury_set(InjurySet* injury_set)
   qWarning() << "No Database connection";
   return false;
 }
-//------------------------------------------------------------------------------LOCATION
+//-----------------------------LOCATION------------------------------------------
 inline void assign_location(const QSqlRecord& record, Location& location)
 {
   location.id = record.value(LOCATION_ID).toInt();
@@ -1376,7 +1388,7 @@ void SQLite3Driver::locations()
     while (query.next()) {
       auto location = std::make_unique<pfc::Location>();
       auto record = query.record();
-      assert(record.count() == 3);
+      assert(record.count() == LOCATION_COLUMN_COUNT);
       assign_location(record, *location);
       _locations.push_back(location.release());
     }
@@ -1478,7 +1490,7 @@ bool SQLite3Driver::remove_location(Location* location)
   qWarning() << "No Database connection";
   return false;
 }
-//------------------------------------------------------------------------------OBJECTIVE
+//-----------------------------OBJECTIVE-----------------------------------------
 inline void assign_objective(const QSqlRecord& record, Objective& objective)
 {
   objective.id = record.value(OBJECTIVE_ID).toInt();
@@ -1522,7 +1534,7 @@ void SQLite3Driver::objectives()
     while (query.next()) {
       auto objective = std::make_unique<pfc::Objective>();
       auto record = query.record();
-      assert(record.count() == 4);
+      assert(record.count() == OBJECTIVE_COLUMN_COUNT);
       assign_objective(record, *objective);
       _objectives.push_back(objective.release());
     }
@@ -1625,7 +1637,7 @@ bool SQLite3Driver::remove_objective(Objective* objective)
   qWarning() << "No Database connection";
   return false;
 }
-//------------------------------------------------------------------------------PROP
+//-----------------------------PROP----------------------------------------------
 inline void assign_prop(QSqlRecord& record, Prop& prop)
 {
   prop.id = record.value(PROP_ID).toInt();
@@ -1659,7 +1671,7 @@ void SQLite3Driver::props()
     while (query.next()) {
       auto prop = std::make_unique<pfc::Prop>();
       auto record = query.record();
-      assert(record.count() == 3);
+      assert(record.count() == PROPERTY_COLUMN_COUNT);
       assign_prop(record, *prop);
       _props.push_back(prop.release());
     }
@@ -1756,7 +1768,7 @@ bool SQLite3Driver::remove_prop(Prop* prop)
   qWarning() << "No Database connection";
   return false;
 }
-//------------------------------------------------------------------------------PROPERTY
+//-----------------------------PROPERTY------------------------------------------
 inline void assign_property(const QSqlRecord& record, Property& property)
 {
   property.id = record.value(PROPERTY_ID).toInt();
@@ -1791,7 +1803,7 @@ void SQLite3Driver::properties()
     while (query.next()) {
       auto property = std::make_unique<pfc::Property>();
       auto record = query.record();
-      assert(record.count() == 3);
+      assert(record.count() == PROPERTY_COLUMN_COUNT);
       assign_property(record, *property);
       _properties.push_back(property.release());
     }
@@ -1879,7 +1891,7 @@ bool SQLite3Driver::remove_property(Property* property)
   qWarning() << "No Database connection";
   return false;
 }
-//------------------------------------------------------------------------------ROLE
+//-----------------------------ROLE----------------------------------------------
 inline void assign_role(QSqlRecord& record, Role& role)
 {
   role.id = record.value(ROLE_ID).toInt();
@@ -1914,7 +1926,7 @@ void SQLite3Driver::roles()
     while (query.next()) {
       auto role = std::make_unique<pfc::Role>();
       auto record = query.record();
-      assert(record.count() == 3);
+      assert(record.count() == ROLE_COLUMN_COUNT);
       assign_role(record, *role);
       _roles.push_back(role.release());
     }
@@ -2011,7 +2023,7 @@ bool SQLite3Driver::remove_role(Role* role)
   qWarning() << "No Database connection";
   return false;
 }
-//------------------------------------------------------------------------------RESTRICTION
+//-----------------------------RESTRICTION---------------------------------------
 inline void assign_restriction(const QSqlRecord& record, Restriction& restriction)
 {
   restriction.id = record.value(RESTRICTION_ID).toInt();
@@ -2047,7 +2059,7 @@ void SQLite3Driver::restrictions()
     while (query.next()) {
       auto restriction = std::make_unique<pfc::Restriction>();
       auto record = query.record();
-      assert(record.count() == 3);
+      assert(record.count() == RESTRICTION_COLUMN_COUNT);
       assign_restriction(record, *restriction);
       _restrictions.push_back(restriction.release());
     }
@@ -2135,7 +2147,7 @@ bool SQLite3Driver::remove_restriction(Restriction* restriction)
   qWarning() << "No Database connection";
   return false;
 }
-//------------------------------------------------------------------------------TREATMENT
+//-----------------------------TREATMENT-----------------------------------------
 inline void assign_treatment(const QSqlRecord& record, Treatment& treatment)
 {
   treatment.id = record.value(TREATMENT_ID).toInt();
@@ -2146,13 +2158,17 @@ inline void assign_treatment(const QSqlRecord& record, Treatment& treatment)
   auto equip_list = equip_list_s.split(";");
   treatment.equipment.clear();
   for (auto& val : equip_list) {
-    treatment.equipment.push_back(val);
+    if (!val.isEmpty()) {
+      treatment.equipment.push_back(val.toInt());
+    }
   }
   auto ref_list_s = record.value(TREATMENT_CITATIONS).toString();
   auto ref_list = ref_list_s.split(";");
   treatment.citations.clear();
   for (auto& val : ref_list) {
-    treatment.citations.push_back(val.toInt());
+    if (!val.isEmpty()) {
+      treatment.citations.push_back(val.toInt());
+    }
   }
 }
 int SQLite3Driver::treatment_count() const
@@ -2183,7 +2199,7 @@ void SQLite3Driver::treatments()
     while (query.next()) {
       auto treatment = std::make_unique<pfc::Treatment>();
       auto record = query.record();
-      assert(record.count() == 6);
+      assert(record.count() == TREATMENT_COLUMN_COUNT);
       assign_treatment(record, *treatment);
       _treatments.push_back(treatment.release());
     }
@@ -2298,5 +2314,4 @@ bool SQLite3Driver::remove_treatment(Treatment* treatment)
   qWarning() << "No Database connection";
   return false;
 }
-
 }

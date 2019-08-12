@@ -500,14 +500,14 @@ struct Citation : public QObject {
   Q_PROPERTY(int citation_id MEMBER id)
   Q_PROPERTY(QString key MEMBER key)
   Q_PROPERTY(QString title MEMBER title)
-  Q_PROPERTY(QList<int> authors MEMBER authors)
+  Q_PROPERTY(QList<QString> authors MEMBER authors)
   Q_PROPERTY(QString year MEMBER year)
   Q_PROPERTY(QString publisher MEMBER publisher)
 public:
   int32_t id = -1;
   QString key = "";
   QString title = "";
-  QList<int> authors;
+  QList<QString> authors;
   QString year = "";
   QString publisher = "";
   Citation(QObject* parent = nullptr)
@@ -626,14 +626,14 @@ struct Treatment : public QObject {
   Q_PROPERTY(QString medical_name MEMBER medical_name)
   Q_PROPERTY(QString common_name MEMBER common_name)
   Q_PROPERTY(QString description MEMBER description)
-  Q_PROPERTY(QList<QString> equipment MEMBER equipment)
+  Q_PROPERTY(QList<int> equipment MEMBER equipment)
   Q_PROPERTY(QList<int> citations MEMBER citations)
 public:
   int32_t id = -1;
   QString medical_name = "";
   QString common_name = "";
   QString description = "";
-  QList<QString> equipment;
+  QList<int> equipment;
   QList<int> citations;
   Treatment(QObject* parent = nullptr)
     : QObject(parent)

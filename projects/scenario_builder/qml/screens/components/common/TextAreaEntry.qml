@@ -54,7 +54,7 @@ Rectangle {
       id : input_area
       leftPadding: 5
       font.pointSize : 10
-      placeholderText: qsTr("TextArea Entry Area")
+      placeholderText: qsTr("Text Area (5-15 Lines)")
       background : Rectangle { color: "transparent"}
       selectByMouse:true
       wrapMode: TextArea.Wrap

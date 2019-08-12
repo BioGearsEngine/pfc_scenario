@@ -320,19 +320,19 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Citation)
 
   citation_1.key = "skeleton key";
   citation_1.title = "Mr. Bones' Wild Ride";
-  citation_1.authors = { 1, 2 };
+  citation_1.authors = { "Nathan", "Angel" };
   citation_1.year = "1000";
   citation_1.publisher = "Boneland";
 
   citation_2.key = "boss key";
   citation_2.title = "Legend of Zelda";
-  citation_2.authors = { 3, 4 };
+  citation_2.authors = { "Austin", "Matthew" };
   citation_2.year = "2000";
   citation_2.publisher = "Nintendo";
 
   citation_3.key = "rsa key";
   citation_3.title = "Extra Security";
-  citation_3.authors = { 5, 6 };
+  citation_3.authors = { "Steven", "Lucas" };
   citation_3.year = "2019";
   citation_3.publisher = "ARA";
 
@@ -353,19 +353,19 @@ TEST_F(TEST_FIXTURE_NAME, Select_Citation)
 
   citation_1.key = "skeleton key";
   citation_1.title = "Mr. Bones' Wild Ride";
-  citation_1.authors = { 1, 2 };
+  citation_1.authors = { "Nathan", "Angel" };
   citation_1.year = "1000";
   citation_1.publisher = "Boneland";
 
   citation_2.key = "boss key";
   citation_2.title = "Legend of Zelda";
-  citation_2.authors = { 3, 4 };
+  citation_2.authors = { "Austin", "Matthew" };
   citation_2.year = "2000";
   citation_2.publisher = "Nintendo";
 
   citation_3.key = "rsa key";
   citation_3.title = "Extra Security";
-  citation_3.authors = { 5, 6 };
+  citation_3.authors = { "Steven", "Lucas" };
   citation_3.year = "2019";
   citation_3.publisher = "ARA";
 
@@ -400,19 +400,19 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Citation)
 
   citation_1.key = "skeleton key";
   citation_1.title = "Mr. Bones' Wild Ride";
-  citation_1.authors = { 1, 2 };
+  citation_1.authors = { "Nathan", "Angel" };
   citation_1.year = "1000";
   citation_1.publisher = "Boneland";
 
   citation_2.key = "boss key";
   citation_2.title = "Legend of Zelda";
-  citation_2.authors = { 3, 4 };
+  citation_2.authors = { "Austin", "Matthew" };
   citation_2.year = "2000";
   citation_2.publisher = "Nintendo";
 
   citation_3.key = "rsa key";
   citation_3.title = "Extra Security";
-  citation_3.authors = { 5, 6 };
+  citation_3.authors = { "Steven", "Lucas" };
   citation_3.year = "2019";
   citation_3.publisher = "ARA";
 
@@ -432,7 +432,7 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Citation)
 
   citation_1.key = "skeleton key";
   citation_1.title = "Mr. Bones' Wild Ride";
-  citation_1.authors = { 1, 2 };
+  citation_1.authors = { "White", "Marin" };
   citation_1.year = "1000";
   citation_1.publisher = "Boneland";
 
@@ -1447,19 +1447,19 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Treatment)
   treatment_1.medical_name = "Soupus De Gallinus";
   treatment_1.common_name = "Chicken Soup";
   treatment_1.description = "Good for the soul";
-  treatment_1.equipment.push_back("Spoon");
+  treatment_1.equipment.push_back(2);
   treatment_1.citations.push_back(1);
 
   treatment_2.medical_name = "Massageus";
   treatment_2.common_name = "Massage";
   treatment_2.description = "Back rub";
-  treatment_2.equipment.push_back("Massage Chair");
+  treatment_2.equipment.push_back(3);
   treatment_2.citations.push_back(2);
 
   treatment_3.medical_name = "Bashus Headus againstus Wallus";
   treatment_3.common_name = "Bashing Head Against A Wall";
   treatment_3.description = "Oddly Satisfying";
-  treatment_3.equipment.push_back("Wall");
+  treatment_3.equipment.push_back(4);
   treatment_3.citations.push_back(3);
 
   EXPECT_EQ(0, _db.treatment_count());
@@ -1480,19 +1480,19 @@ TEST_F(TEST_FIXTURE_NAME, Select_Treatment)
   treatment_1.medical_name = "Soupus De Gallinus";
   treatment_1.common_name = "Chicken Soup";
   treatment_1.description = "Good for the soul";
-  treatment_1.equipment.push_back("Spoon");
+  treatment_1.equipment.push_back(2);
   treatment_1.citations.push_back(1);
 
   treatment_2.medical_name = "Massageus";
   treatment_2.common_name = "Massage";
   treatment_2.description = "Back rub";
-  treatment_2.equipment.push_back("Massage Chair");
+  treatment_2.equipment.push_back(3);
   treatment_2.citations.push_back(2);
 
   treatment_3.medical_name = "Bashus Headus againstus Wallus";
   treatment_3.common_name = "Bashing Head Against A Wall";
   treatment_3.description = "Oddly Satisfying";
-  treatment_3.equipment.push_back("Wall");
+  treatment_3.equipment.push_back(4);
   treatment_3.citations.push_back(3);
 
   EXPECT_EQ(0, _db.treatment_count());
@@ -1532,19 +1532,19 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Treatment)
   treatment_1.medical_name = "Soupus De Gallinus";
   treatment_1.common_name = "Chicken Soup";
   treatment_1.description = "Good for the soul";
-  treatment_1.equipment.push_back("Spoon");
+  treatment_1.equipment.push_back(2);
   treatment_1.citations.push_back(1);
 
   treatment_2.medical_name = "Massageus";
   treatment_2.common_name = "Massage";
   treatment_2.description = "Back rub";
-  treatment_2.equipment.push_back("Massage Chair");
+  treatment_2.equipment.push_back(3);
   treatment_2.citations.push_back(2);
 
   treatment_3.medical_name = "Bashus Headus againstus Wallus";
   treatment_3.common_name = "Bashing Head Against A Wall";
   treatment_3.description = "Oddly Satisfying";
-  treatment_3.equipment.push_back("Wall");
+  treatment_3.equipment.push_back(4);
   treatment_3.citations.push_back(3);
 
   EXPECT_TRUE(_db.update_treatment(&treatment_1));
@@ -1564,7 +1564,7 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Treatment)
   treatment_1.medical_name = "Soupus De Gallinus";
   treatment_1.common_name = "Chicken Soup";
   treatment_1.description = "Good for the soul";
-  treatment_1.equipment.push_back("Spoon");
+  treatment_1.equipment.push_back(2);
   treatment_1.citations.push_back(1);
 
   treatment_2.medical_name = "Soupus De Gallinus";

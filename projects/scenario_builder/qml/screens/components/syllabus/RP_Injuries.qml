@@ -45,8 +45,8 @@ ColumnLayout  {
 
     obj.citations = []
     for (var  i in  referenceList.model) {
-        console.log("Pushing citation %1,%2".arg(i).arg(citation_id.model.get(i).citation_id))
-        obj.citations.push(citation_id.model.get(i).citation_id)
+        console.log("Pushing citation %1,%2".arg(i).arg(referenceList.model.get(i).citation_id))
+        obj.citations.push(referenceList.model.get(i).citation_id)
     }
 
     obj.min          = values.min

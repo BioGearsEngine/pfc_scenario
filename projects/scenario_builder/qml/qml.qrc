@@ -12,6 +12,7 @@
         <!--Shared Components -->
         <file>screens/components/common/AuthorEntry.qml</file>
         <file>screens/components/common/CitationListEntry.qml</file>
+        <file>screens/components/common/EquipmentEntry.qml</file>
         <file>screens/components/common/FourButtonRow.qml</file>
         <file>screens/components/common/InjuryListEntry.qml</file>
         <file>screens/components/common/ListEntry.qml</file>

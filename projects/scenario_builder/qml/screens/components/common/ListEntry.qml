@@ -20,6 +20,7 @@ Rectangle {
   signal removed(int index)
 
   height : content.height
+  
   Layout.rightMargin : 20
   Layout.alignment : Qt.AlignTop
 

@@ -25,7 +25,7 @@ ColumnLayout  {
     Connections {
       target: backend
       onCitationRemoved : {
-        console.log( "Removed %1".arg(index))
+        console.log( "Removed %1".arg(root.index))
       }
     }
 
@@ -50,7 +50,7 @@ ColumnLayout  {
       placeholderText: "String Field (128 Characters)"
       
       onEditingFinished : {
-        var entry = model.get(index)
+        var entry = root.model.get(root.index)
         if ( text != entry.name){
           entry.name = text
           console.log("updating Name filed for entry")
@@ -68,7 +68,7 @@ ColumnLayout  {
       placeholderText: "Text Area (5-15 Lines)"
 
       onEditingFinished : {
-        var entry = model.get(index)
+        var entry = root.model.get(root.index)
         if ( text != entry.description){
           entry.description = text
           console.log("updating Description filed for entry")
@@ -85,15 +85,19 @@ ColumnLayout  {
 
       onCitationAdded : {
         console.log("RP_Objective Added a Reference")
+        var entry = root.model.get(root.index)
+        update_objective(entry)
       }
 
       onCitationRemoved : {
         console.log("RP_Objective Removed a Reference")
+        var entry = root.model.get(root.index)
+        update_objective(entry)
       }
     }
     
     onIndexChanged : {
-      var values = model.get(index)
+      var values = root.model.get(root.index)
       if(values) {
         nameEntry.text = values.name
         descriptionEntry.text = values.description

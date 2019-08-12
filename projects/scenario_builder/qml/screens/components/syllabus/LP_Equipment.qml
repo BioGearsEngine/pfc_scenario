@@ -50,6 +50,7 @@ ColumnLayout {
         self.equipment_id = -1
         self.name = "New Equipment %1".arg(next)
         self.description = "Description of Equipment %1".arg(next)
+        self.image = ""
         self.citations = new Array()
 
         while( root.backend.select_equipment(self) )
@@ -67,6 +68,7 @@ ColumnLayout {
            "name": "%1".arg(self.name), 
            "description": "%1".arg(self.description) , 
            "citations": self.citaitons,
+           "image": self.image,
 
           }
         );
@@ -176,6 +178,7 @@ ColumnLayout {
              id : self.equipment_id,
              name: "%1".arg(self.name), 
              description: "%1".arg(self.description) , 
+             image: "%1".arg(self.image) , 
              citaitons: self.citations,
 
             });
