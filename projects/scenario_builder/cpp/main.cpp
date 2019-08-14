@@ -21,8 +21,7 @@ specific language governing permissions and limitations under the License.
 
 int main(int argc, char* argv[])
 {
-  /* Commenti 
-  g the following line resolves the issue but then UI elements looks small */
+  /* Commenting the following line resolves the issue but then UI elements looks small */
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
   QApplication app(argc, argv);
   QQuickStyle::setStyle("Material");
@@ -35,12 +34,15 @@ int main(int argc, char* argv[])
   qmlRegisterType<pfc::Assessment>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Assessment");
   qmlRegisterType<pfc::Citation>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Citation");
   qmlRegisterType<pfc::Equipment>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Equipment");
+  qmlRegisterType<pfc::Event>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Event");
   qmlRegisterType<pfc::Injury>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Injury");
   qmlRegisterType<pfc::InjurySet>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "InjurySet");
-  qmlRegisterType<pfc::Property>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Property");
+  qmlRegisterType<pfc::Location>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Location");
   qmlRegisterType<pfc::Objective>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Objective");
-  qmlRegisterType<pfc::Treatment>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Treatment");
+  qmlRegisterType<pfc::Property>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Property");
   qmlRegisterType<pfc::Restriction>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Restriction");
+  qmlRegisterType<pfc::Role>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Role");
+  qmlRegisterType<pfc::Treatment>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Treatment");
 
   QPixmap pixmap("D:/biogears/pfc/scenario/build/img/sustain_splash.png");
   qDebug() << QString("%1,%2").arg(pixmap.height()).arg(pixmap.width()); //1280x768

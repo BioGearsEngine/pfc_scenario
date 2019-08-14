@@ -37,7 +37,7 @@ ScrollView {
       id : citation
     }
 
-    function update_injury(values) {
+    function update_treatment(values) {
       obj.injury_id = values.id
       obj.medical_name         = values.medical_name
       obj.common_name          = values.common_name

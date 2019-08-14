@@ -3,14 +3,26 @@ import QtQuick.Window 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.12
 
-  Rectangle {
-  id: narrative_rightWindow
+import "../common"
+
+import com.ara.pfc.ScenarioModel.SQL 1.0
+
+Rectangle {
+  id: root
+  property alias currentIndex : narrative_tabs.currentIndex
+  property alias roleModel : roles.model
+
+  property alias roleIndex : roles.index
+
+  property SQLBackend backend
+  property ListElement modelData
+
   clip: true
   Layout.fillWidth: true
   Layout.fillHeight: true
   Layout.margins: 5
   ColumnLayout {
-    anchors.fill: narrative_rightWindow
+    anchors.fill: root
     width: parent.width
     height: parent.height
     TabBar {
@@ -31,15 +43,11 @@ import QtQuick.Controls 2.12
         width: implicitWidth
       }
       TabButton {
-        id: props_tab
-        text: "Props"
-        width: implicitWidth
-      }
-      TabButton {
-          id: events_tab
+        id: events_tab
         text: "Events"
         width: implicitWidth
       }
+      currentIndex: 1
     }
     StackLayout {
     	id: narrative_stack_right
@@ -48,22 +56,23 @@ import QtQuick.Controls 2.12
     	currentIndex: narrative_tabs.currentIndex
 
     	RP_Location {
+        id: locations
     		Layout.fillHeight: true
     		Layout.fillWidth: true
+        backend : root.backend
     	}
     	RP_Roles {
+        id: roles
     		Layout.fillHeight: true
     		Layout.fillWidth: true
-    	}
-    	RP_Props {
-    		Layout.fillHeight: true
-    		Layout.fillWidth: true
+        backend : root.backend
     	}
     	RP_Events {
+        id: events
     		Layout.fillHeight: true
     		Layout.fillWidth: true
+        backend : root.backend
     	}
     }
   }
-
-  }
+}
