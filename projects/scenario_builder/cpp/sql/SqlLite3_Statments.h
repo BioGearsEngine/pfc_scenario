@@ -31,7 +31,7 @@ inline namespace sqlite3 {
     "restrictions",
     "roles",
     "treatments",
-
+    "scenes",
   };
 
   constexpr auto list_tables = "SELECT * FROM sqlite_master WHERE type='table';";
@@ -717,7 +717,47 @@ inline namespace sqlite3 {
                        , description = excluded.description
          ;
          )";
-  
+
+  //---------------------- SCENE STATEMENTS ------------------------
+  enum SCENE_COLUMNS {
+    SCENE_ID,
+    SCENE_NAME,
+    //SCENE_LOCATION,
+    //SCENE_ACTOR,
+    //SCENE_EQUIPMENT,
+    //SCENE_DESCRIPTION,
+    SCENE_COLUMN_COUNT
+  };
+
+  constexpr auto create_scenes_table = R"(
+  CREATE TABLE IF NOT EXISTS scenes (
+    scene_id INTEGER PRIMARY KEY,
+    name Varchar(64) NOT NULL UNIQUE
+  );
+  )";
+  constexpr auto drop_all_scenes = R"( DELETE FROM scenes; )";
+  constexpr auto count_scenes = R"( SELECT COUNT(scene_id) FROM scenes; )";
+  constexpr auto select_all_scenes = R"( SELECT * FROM scenes; )";
+
+  constexpr auto select_scene_by_id
+    = R"( SELECT * FROM scenes WHERE scene_id = :id ; )";
+  constexpr auto select_scene_by_name
+    = R"( SELECT * FROM scenes WHERE name = :name ; )";
+  constexpr auto update_scene_by_id
+    = R"( UPDATE  scenes
+            SET name = :name
+          WHERE scene_id = :id;
+         )";
+  constexpr auto delete_scene_by_id
+    = R"( DELETE FROM scenes WHERE scene_id = :id; )";
+  constexpr auto insert_or_update_scenes
+    = R"( INSERT INTO scenes
+          (name)
+          VALUES (:name)
+          ON CONFLICT (name)
+          DO UPDATE SET name = excluded.name
+          ;          
+          )";
   //---------------------- TREATMENT STATEMENTS ------------------------
   enum TREATMENT_COLUMNS {
     TREATMENT_ID,

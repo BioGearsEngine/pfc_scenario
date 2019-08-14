@@ -97,7 +97,8 @@ bool SQLite3Driver::initialize_db()
     //{ tables[PROPS], sqlite3::create_props_table },
     { tables[RESTRICTIONS], sqlite3::create_restrictions_table },
     { tables[ROLES], sqlite3::create_roles_table },
-    { tables[TREATMENTS], sqlite3::create_treatments_table }
+    { tables[TREATMENTS], sqlite3::create_treatments_table }, 
+    { tables[SCENES], sqlite3::create_scenes_table }
   };
 
   if (_db.open()) {
@@ -2155,6 +2156,136 @@ bool SQLite3Driver::remove_restriction(Restriction* restriction)
         return false;
       }
       restrictionRemoved(restriction->id);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+//-----------------------------SCENE---------------------------------------------
+inline void assign_scene(QSqlRecord& record, Scene& scene)
+{
+  scene.id = record.value(SCENE_ID).toInt();
+  scene.name = record.value(SCENE_NAME).toString();
+}
+int SQLite3Driver::scene_count() const
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_scenes);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
+void SQLite3Driver::scenes()
+{
+  qDeleteAll(_scenes);
+  _scenes.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_scenes);
+    query.exec();
+    while (query.next()) {
+      auto scene = std::make_unique<pfc::Scene>();
+      auto record = query.record();
+      assert(record.count() == SCENE_COLUMN_COUNT);
+      assign_scene(record, *scene);
+      _scenes.push_back(scene.release());
+    }
+    _current_scene = _scenes.begin();
+    emit scenesChanged();
+  }
+}
+bool SQLite3Driver::next_scene(Scene* scene)
+{
+  if (_current_scene == _scenes.end() || _scenes.empty()) {
+    return false;
+  }
+  scene->assign(*(*_current_scene));
+  ++_current_scene;
+
+  return true;
+}
+bool SQLite3Driver::select_scene(Scene* scene) const
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    QSqlRecord record;
+    if (scene->id != -1) {
+      query.prepare(sqlite3::select_scene_by_id);
+      query.bindValue(":id", scene->id);
+    } else if (!scene->name.isEmpty()) {
+      query.prepare(sqlite3::select_scene_by_name);
+      query.bindValue(":name", scene->name);
+    } else {
+      qWarning() << "Provided Property has no id or name one is required";
+      return false;
+    }
+    if (query.exec()) {
+      while (query.next()) {
+        record = query.record();
+        assign_scene(record, *scene);
+        return true;
+      }
+    } else {
+
+      qWarning() << query.lastError();
+    }
+    return false;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::update_scene(Scene* scene)
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (-1 != scene->id) {
+      query.prepare(sqlite3::update_scene_by_id);
+      query.bindValue(":id", scene->id);
+    } else if (!scene->name.isEmpty()) {
+      query.prepare(sqlite3::insert_or_update_scenes);
+    }
+    query.bindValue(":name", scene->name);
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    if (-1 == scene->id) {
+      const auto r = select_scene(scene);
+      sceneUpdated(scene->id);
+      return r;
+    }
+    sceneUpdated(scene->id);
+    return true;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::remove_scene(Scene* scene)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (select_scene(scene)) {
+      query.prepare(sqlite3::delete_scene_by_id);
+      query.bindValue(":id", scene->id);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      sceneRemoved(scene->id);
       return true;
     } else {
       return false;

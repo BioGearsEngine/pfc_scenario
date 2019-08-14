@@ -140,7 +140,7 @@ public:
 //----End Assessment
 struct Event : public QObject {
   Q_OBJECT
-  Q_PROPERTY(int prop_id MEMBER id)
+  Q_PROPERTY(int event_id MEMBER id)
   Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(int location MEMBER location)
   Q_PROPERTY(int actor MEMBER actor)
@@ -620,6 +620,40 @@ public:
   }
 };
 //----End Role
+struct Scene : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int scene_id MEMBER id)
+  Q_PROPERTY(QString name MEMBER name)
+public:
+  int32_t id = -1;
+  QString name = "";
+
+  Scene(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  Scene(const Scene&) = delete;
+  Scene(Scene&&) = delete;
+  Scene& operator=(const Scene&) = delete;
+  Scene& operator=(Scene&&) = delete;
+  virtual ~Scene() = default;
+
+  bool operator==(const Scene& rhs) const
+  {
+    return id == rhs.id
+      && name == rhs.name;
+  }
+  bool operator!=(const Scene& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const Scene& rhs)
+  {
+    id = rhs.id;
+    name = rhs.name;
+  }
+};
+//----End Scene
 struct Treatment : public QObject {
   Q_OBJECT
   Q_PROPERTY(int treatment_id MEMBER id)

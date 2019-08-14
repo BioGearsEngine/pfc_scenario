@@ -45,6 +45,7 @@ public:
     RESTRICTIONS,
     ROLES,
     TREATMENTS,
+    SCENES
   };
 
   Q_ENUM(Sqlite3Table)
@@ -79,6 +80,7 @@ public:
   Q_INVOKABLE int role_count() const;
   Q_INVOKABLE int prop_count() const;
   Q_INVOKABLE int event_count() const;
+  Q_INVOKABLE int scene_count() const;
 
   Q_INVOKABLE int nextID(Sqlite3Table) const;
 
@@ -96,6 +98,7 @@ public:
   Q_INVOKABLE void roles();
   Q_INVOKABLE void props();
   Q_INVOKABLE void events();
+  Q_INVOKABLE void scenes();
 
   Q_INVOKABLE bool next_author(Author*);
   Q_INVOKABLE bool next_property(Property*);
@@ -111,6 +114,7 @@ public:
   Q_INVOKABLE bool next_role(Role*);
   Q_INVOKABLE bool next_prop(Prop*);
   Q_INVOKABLE bool next_event(Event*);
+  Q_INVOKABLE bool next_scene(Scene*);
 
   Q_INVOKABLE bool select_author(Author*) const;
   Q_INVOKABLE bool select_property(Property*) const;
@@ -126,6 +130,7 @@ public:
   Q_INVOKABLE bool select_role(Role*) const;
   Q_INVOKABLE bool select_prop(Prop*) const;
   Q_INVOKABLE bool select_event(Event*) const;
+  Q_INVOKABLE bool select_scene(Scene*) const;
 
   Q_INVOKABLE bool update_author(Author*);
   Q_INVOKABLE bool update_first_author(Author*);
@@ -142,6 +147,7 @@ public:
   Q_INVOKABLE bool update_injury(Injury*);
   Q_INVOKABLE bool update_injury_set(InjurySet*);
   Q_INVOKABLE bool update_assessment(Assessment*);
+  Q_INVOKABLE bool update_scene(Scene*);
 
   Q_INVOKABLE bool remove_author(Author*);
   Q_INVOKABLE bool remove_property(Property*);
@@ -157,6 +163,7 @@ public:
   Q_INVOKABLE bool remove_role(Role*);
   Q_INVOKABLE bool remove_prop(Prop*);
   Q_INVOKABLE bool remove_event(Event*);
+  Q_INVOKABLE bool remove_scene(Scene*);
 
   Q_INVOKABLE int raw_error() const { return _db.lastError().type(); };
   Q_INVOKABLE QString error_message() const { return _db.lastError().text(); }
@@ -187,6 +194,7 @@ signals:
   void citationsChanged();
   void restrictionsChanged();
   void rolesChanged();
+  void scenesChanged();
   void treatmentsChanged();
 
   void authorRemoved(int index);
@@ -202,6 +210,7 @@ signals:
   void citationRemoved(int index);
   void restrictionRemoved(int index);
   void roleRemoved(int index);
+  void sceneRemoved(int index);
   void treatmentRemoved(int index);
 
   void authorUpdated(int index);
@@ -217,6 +226,7 @@ signals:
   void citationUpdated(int index);
   void restrictionUpdated(int index);
   void roleUpdated(int index);
+  void sceneUpdated(int index);
   void treatmentUpdated(int index);
 
 private:
@@ -242,6 +252,7 @@ private:
   QList<Role*> _roles;
   QList<Prop*> _props;
   QList<Event*> _events;
+  QList<Scene*> _scenes;
 
   QList<Author*>::iterator _current_author;
   QList<Property*>::iterator _current_property;
@@ -257,6 +268,7 @@ private:
   QList<Role*>::iterator _current_role;
   QList<Prop*>::iterator _current_prop;
   QList<Event*>::iterator _current_event;
+  QList<Scene*>::iterator _current_scene;
 };
 }
 

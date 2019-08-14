@@ -43,6 +43,7 @@ int main(int argc, char* argv[])
   qmlRegisterType<pfc::Restriction>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Restriction");
   qmlRegisterType<pfc::Role>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Role");
   qmlRegisterType<pfc::Treatment>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Treatment");
+  qmlRegisterType<pfc::Scene>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Scene");
 
   QPixmap pixmap("D:/biogears/pfc/scenario/build/img/sustain_splash.png");
   qDebug() << QString("%1,%2").arg(pixmap.height()).arg(pixmap.width()); //1280x768
