@@ -28,13 +28,9 @@ ColumnLayout  {
     obj.equipment_id = values.id
     obj.name         = values.name
     obj.description  = values.description
-
-    obj.citations = []
-    for (var  i = 0; i < referenceList.model.count; ++i) {
-        obj.citations.push(referenceList.model.get(i).citation_id)
-    }
-
+    obj.citations = values.citations
     obj.image = values.image
+
     root.backend.update_equipment(obj)
   }
 
@@ -94,14 +90,17 @@ ColumnLayout  {
     backend : root.backend
 
     onCitationAdded : {
-      console.log("RP_Treatment Added a Reference")
       var entry = root.model.get(root.index)
+      entry.citations = (entry.citations) ? 
+        entry.citations.concat(";"+citation_id) 
+      : entry.citations.concat(citation_id)
       update_equipment(entry)
     }
 
     onCitationRemoved : {
-      console.log("RP_Treatment Removed a Reference")
       var entry = root.model.get(root.index)
+      var citations = entry.citations.split(";").filter(item => item).filter(item => item != citation_id);
+      entry.citations = citations.join(";")
       update_equipment(entry)
     }
   }
@@ -113,8 +112,9 @@ ColumnLayout  {
       descriptionEntry.text = values.description
       imageEntry.text = values.image
       referenceList.model.clear()
-      for (var  i in  values.citaitons) {
-         citation.citation_id = values.citaitons[i]
+      var citations = values.citations.split(";").filter(x => x);  
+      for(var i = 0; i < citations.length; ++i){
+         citation.citation_id = citaitons[i]
          citation.key = ""
          citation.title  = ""
          root.backend.select_citation(citation)

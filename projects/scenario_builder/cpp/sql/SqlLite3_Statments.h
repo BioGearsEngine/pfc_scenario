@@ -342,15 +342,20 @@ inline namespace sqlite3 {
     INJURY_SET_NAME,
     INJURY_SET_DESCRIPTION,
     INJURY_SET_INJURIES,
+    INJURY_SET_LOCATIONS,
+    INJURY_SET_SEVERITIES,
     INJURY_SET_COLUMN_COUNT
   };
+  //TODO: ADD SUPPORT FOR LOCATION AND SEVERITIES (PRIMITIVE List in the same order as the injuries should do it)
 
   constexpr auto create_injury_sets_table = R"(
   CREATE TABLE IF NOT EXISTS injury_sets ( 
     injury_set_id INTEGER PRIMARY KEY,
     name Varchar(64) NOT NULL UNIQUE,
     description TEXT,
-    injuries TEXT
+    injuries TEXT,
+    locations TEXT,
+    severities TEXT
   );
   )";
 
@@ -364,7 +369,9 @@ inline namespace sqlite3 {
     = R"( UPDATE  injury_sets
           SET name = :name
               , description = :description
-              , injuries = :injuries;
+              , injuries = :injuries
+              , locations = :locations
+              , severities = :severities;
           WHERE injury_set_id = :id;
          )";
   constexpr auto delete_injury_set_by_id
@@ -375,12 +382,14 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM injury_sets WHERE name = :name; )";
   constexpr auto insert_or_update_injury_sets
     = R"( INSERT INTO injury_sets
-          (name,description,injuries)
-          VALUES (:name, :description, :injuries)
+          (name, description, injuries, locations, severities)
+          VALUES (:name, :description, :injuries, :locations, :severities)
           ON CONFLICT (name)
           DO UPDATE SET name = excluded.name
                         , description = excluded.description
                         , injuries = excluded.injuries
+                        , locations = excluded.locations
+                        , severities = excluded.severities
           ;
           )";
   //---------------------- LOCATION STATMENTS ------------------------

@@ -23,8 +23,15 @@ ColumnLayout  {
       id : injury
     }
 
-    function update_injurySet(entry){
+    function update_injury_set(values){
+    obj.injury_set_id = values.id
+    obj.name  = values.name
+    obj.description   = values.description
+    obj.injuries      = values.injuries
+    obj.locations     = values.locations
+    obj.severities    = values.severities
 
+    root.backend.update_injury_set(obj)
     }
     
     TextEntry {
@@ -64,11 +71,18 @@ ColumnLayout  {
       backend : root.backend
 
       onInjuryAdded : {
-        console.log("RP_Objective Added a Reference")
+        var entry = root.model.get(root.index)
+        entry.injuries = (entry)? entry.injuries.concat(";"+injury_id) : entry.injuries.concat(injury_id)
+        console.log("OnInjuryAdded")
+        update_injury_set(entry)
       }
 
       onInjuryRemoved : {
-        console.log("RP_Objective Removed a Reference")
+        var entry = root.model.get(root.index)
+        var injuries = entry.injuries.split(";").filter(item => item).filter(item => item != injury_id);
+        entry.injuries = injuries.join(";")
+        console.log("OnInjuryRemoved")
+        update_injury_set(entry)
       }
     }
 
@@ -77,21 +91,28 @@ ColumnLayout  {
       if(values) {
         nameEntry.text = values.name
         descriptionEntry.text = values.description
+
+        var injuries  = values.injuries.split(";").filter(x => x);  
+        var locations  = values.locations.split(";").filter(x => x);  
+        var severities = values.severities.split(";").filter(x => x);  
+        
         injuryList.model.clear()
-        for (var  i in  values.injuries) {
-           injury.injury_id = values.injuries[i]
+        for(var i = 0; i < injuries.length; ++i){
+           injury.injury_id = injuries[i]
            injury.medical_name = ""
            injury.common_name  = ""
            root.backend.select_injury(injury)
            injuryList.model.insert(injuryList.model.count,
                {
-                 "injury_id" : "%1".arg(injury.injury_id),
-                 "medical_name" : "%1".arg(injury.medical_name),
-                 "common_name" : "%1".arg(injury.common_name), 
-                 "description":  "%1".arg(injury.description),
-                 "citations" : "%1".arg(injury.citations),
-                 "min" : "%1".arg(injury.min),
-                 "max" : "%1".arg(injury.max)
+                 injury_id : "%1".arg(injury.injury_id),
+                 medical_name : "%1".arg(injury.medical_name),
+                 common_name : "%1".arg(injury.common_name), 
+                 description:  "%1".arg(injury.description),
+                 citations : "%1".arg(injury.citations),
+                 min : "%1".arg(injury.min),
+                 max : "%1".arg(injury.max),
+                 location : locations[i],
+                 severity : severities[i]
               }
            );
         }

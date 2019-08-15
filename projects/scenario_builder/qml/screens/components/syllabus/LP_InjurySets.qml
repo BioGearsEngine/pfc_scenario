@@ -50,7 +50,9 @@ ColumnLayout {
         self.injury_set_id = -1
         self.name = "New InjurySet %1".arg(next)
         self.description = "Description of InjurySet %1".arg(next)
-        self.injuries = new Array()
+        self.injuries = ""
+        self.severities = ""
+        self.locations = ""
 
         while( root.backend.select_injury_set(self) )
         { 
@@ -165,18 +167,14 @@ ColumnLayout {
         var r_count = backend.injury_set_count();
         root.backend.injury_sets()
         while ( root.backend.next_injury_set(self) ){
-          
-          var js_citations = []
-          for ( var citation in self.citations ){
-            js_citations.push( citation )
-          }
           listArea.model.insert(listArea.model.count,
             {
              id : self.injury_set_id,
              name: "%1".arg(self.name),
              description: "%1".arg(self.description) , 
              injuries: self.injuries,
-
+             locations: self.locations,
+             severities: self.severities,
             });
         }
       }

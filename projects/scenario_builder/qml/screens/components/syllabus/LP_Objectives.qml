@@ -49,7 +49,7 @@ ColumnLayout {
         self.objective_id = -1
         self.name = "New Objective %1".arg(next)
         self.description = "Description of Objective %1".arg(next)
-        self.citations = new Array()
+        self.citations = ""
 
         while( root.backend.select_objective(self) )
         { 
@@ -65,7 +65,8 @@ ColumnLayout {
            "id" : self.objective_id,
            "name": "%1".arg(self.name), 
            "description": "%1".arg(self.description) , 
-           "citations": self.citations.join(";")}
+           "citations": self.citations
+         }
         );
         ++next;
       }
@@ -167,7 +168,7 @@ ColumnLayout {
              id  : self.objective_id,
              name: "%1".arg(self.name), 
              description: "%1".arg(self.description),
-             citations : self.citations.join(";")
+             citations : self.citations
             });
         }
       }

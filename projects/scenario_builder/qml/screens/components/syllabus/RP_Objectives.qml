@@ -25,7 +25,7 @@ ColumnLayout  {
     Connections {
       target: backend
       onCitationRemoved : {
-        console.log( "Removed %1".arg(root.index))
+        console.log( "Connection backend->RP_Objectives: Removed %1".arg(root.index))
       }
     }
 
@@ -34,12 +34,7 @@ ColumnLayout  {
       obj.objective_id = values.id
       obj.name         = values.name
       obj.description  = values.description
-      obj.citations = []
-
-      for (var  i = 0; i < referenceList.count; ++i) {
-        var citation_id = referenceList.model.get(i).citation_id
-        obj.citations.push(citation_id)
-      }
+      obj.citations    = values.citations
 
       root.backend.update_objective(obj)
     }
@@ -73,7 +68,6 @@ ColumnLayout  {
         var entry = root.model.get(root.index)
         if ( text != entry.description){
           entry.description = text
-          console.log("updating Description filed for entry")
           update_objective(entry)
         }
       }
@@ -86,14 +80,12 @@ ColumnLayout  {
       backend : root.backend
 
       onCitationAdded : {
-        console.log("RP_Objective Added a Reference")
         var entry = root.model.get(root.index)
-        entry.citations = entry.citations.concat(";"+citation_id)
+        entry.citations = (entry.citations) ? entry.citations.concat(";"+citation_id) : entry.citations.concat(citation_id)
         update_objective(entry)
       }
 
       onCitationRemoved : {
-        console.log("RP_Objective Removed a Reference")
         var entry = root.model.get(root.index)
         var citations = entry.citations.split(";").filter(item => item).filter(item => item != citation_id);
         entry.citations = citations.join(";")

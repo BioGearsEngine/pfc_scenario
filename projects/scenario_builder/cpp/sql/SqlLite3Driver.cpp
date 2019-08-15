@@ -97,7 +97,7 @@ bool SQLite3Driver::initialize_db()
     //{ tables[PROPS], sqlite3::create_props_table },
     { tables[RESTRICTIONS], sqlite3::create_restrictions_table },
     { tables[ROLES], sqlite3::create_roles_table },
-    { tables[TREATMENTS], sqlite3::create_treatments_table }, 
+    { tables[TREATMENTS], sqlite3::create_treatments_table },
     { tables[SCENES], sqlite3::create_scenes_table }
   };
 
@@ -598,14 +598,7 @@ inline void assign_citation(const QSqlRecord& record, Citation& citation)
   citation.id = record.value(CITATION_ID).toInt();
   citation.key = record.value(CITATION_KEY).toString();
   citation.title = record.value(CITATION_TITLE).toString();
-  auto auth_list_s = record.value(CITATION_AUTHORS).toString();
-  auto auth_list = auth_list_s.split(";");
-  citation.authors.clear();
-  for (auto& val : auth_list) {
-    if (!val.isEmpty()) {
-      citation.authors.push_back(val);
-    }
-  }
+  citation.authors = record.value(CITATION_AUTHORS).toString();
   citation.year = record.value(CITATION_YEAR).toString();
   citation.publisher = record.value(CITATION_PUBLISHER).toString();
 }
@@ -702,18 +695,13 @@ bool SQLite3Driver::update_citation(Citation* citation)
       query.prepare(sqlite3::insert_or_update_citations);
     } else if (!citation->title.isEmpty()) {
       query.prepare(sqlite3::insert_or_update_citations);
-      citation->key = (citation->authors.empty()) ? citation->title.toLower().simplified().remove(' ')
-                                                  : QString("%1%2").arg(citation->authors[0]).arg(citation->year);
+      auto first_author = citation->authors.split(";", QString::SkipEmptyParts);
+      citation->key = ( first_author.empty() ) ? citation->title.toLower().simplified().remove(' ')
+                                                  : QString("%1%2").arg(first_author[0]).arg(citation->year);
     }
-    QString auth_list = "";
-    for (auto& val : citation->authors) {
-      auth_list += val + ";";
-    }
-    auth_list.chop(1);
-
     query.bindValue(":key", citation->key);
     query.bindValue(":title", citation->title);
-    query.bindValue(":authors", auth_list);
+    query.bindValue(":authors", citation->authors);
     query.bindValue(":year", citation->year);
     query.bindValue(":publisher", citation->publisher);
 
@@ -759,16 +747,7 @@ inline void assign_equipment(const QSqlRecord& record, Equipment& equipment)
   equipment.name = record.value(EQUIPMENT_NAME).toString();
   equipment.type = record.value(EQUIPMENT_TYPE).toInt();
   equipment.description = record.value(EQUIPMENT_DESCRIPTION).toString();
-
-  auto ref_list_s = record.value(EQUIPMENT_CITATIONS).toString();
-  auto ref_list = ref_list_s.split(";");
-  equipment.citations.clear();
-  for (auto& val : ref_list) {
-    if (!val.isEmpty()) {
-      equipment.citations.push_back(val.toInt());
-    }
-  }
-
+  equipment.citations = record.value(EQUIPMENT_CITATIONS).toString();
   equipment.image = record.value(EQUIPMENT_IMAGE).toString();
 }
 int SQLite3Driver::equipment_count() const
@@ -857,17 +836,10 @@ bool SQLite3Driver::update_equipment(Equipment* equipment)
     } else if (!equipment->name.isEmpty()) {
       query.prepare(sqlite3::insert_or_update_equipments);
     }
-
-    QString cite_list = "";
-    for (auto& val : equipment->citations) {
-      cite_list += val + ";";
-    }
-    cite_list.chop(1);
-
     query.bindValue(":name", equipment->name);
     query.bindValue(":type", equipment->type);
     query.bindValue(":description", equipment->description);
-    query.bindValue(":citations", cite_list);
+    query.bindValue(":citations", equipment->citations);
     query.bindValue(":image", equipment->image);
 
     if (!query.exec()) {
@@ -913,14 +885,7 @@ inline void assign_event(QSqlRecord& record, Event& event)
   event.location = record.value(EVENT_LOCATION).toInt();
   event.actor = record.value(EVENT_ACTOR).toInt();
   event.description = record.value(EVENT_DESCRIPTION).toString();
-  auto equip_list_s = record.value(EVENT_EQUIPMENT).toString();
-  auto equip_list = equip_list_s.split(";");
-  event.equipment.clear();
-  for (auto& val : equip_list) {
-    if (!val.isEmpty()) {
-      event.equipment.push_back(val);
-    }
-  }
+  event.equipment = record.value(EVENT_EQUIPMENT).toString();
 }
 int SQLite3Driver::event_count() const
 {
@@ -1009,12 +974,8 @@ bool SQLite3Driver::update_event(Event* event)
     } else if (!event->name.isEmpty()) {
       query.prepare(sqlite3::insert_or_update_events);
     }
-    QString equip_list = "";
-    for (auto& val : event->equipment) {
-      equip_list += val + ";";
-    }
-    equip_list.chop(1);
-    query.bindValue(":equipment", equip_list);
+
+    query.bindValue(":equipment", event->equipment);
     query.bindValue(":name", event->name);
     query.bindValue(":description", event->description);
     query.bindValue(":location", event->location);
@@ -1064,14 +1025,7 @@ inline void assign_injury(const QSqlRecord& record, Injury& injury)
   injury.description = record.value(INJURY_DESCRIPTION).toString();
   injury.severity_min = record.value(INJURY_SEVERITY_MIN).toInt();
   injury.severity_max = record.value(INJURY_SEVERITY_MAX).toInt();
-  auto ref_list_s = record.value(INJURY_CITATIONS).toString();
-  auto ref_list = ref_list_s.split(";");
-  injury.citations.clear();
-  for (auto& val : ref_list) {
-    if (!val.isEmpty()) {
-      injury.citations.push_back(val.toInt());
-    }
-  }
+  injury.citations = record.value(INJURY_CITATIONS).toString();
 }
 int SQLite3Driver::injury_count() const
 {
@@ -1165,12 +1119,8 @@ bool SQLite3Driver::update_injury(Injury* injury)
     } else if (!injury->common_name.isEmpty()) {
       query.prepare(sqlite3::insert_or_update_injuries);
     }
-    QString cite_list = "";
-    for (auto& val : injury->citations) {
-      cite_list += val + ";";
-    }
-    cite_list.chop(1);
-    query.bindValue(":citations", cite_list);
+
+    query.bindValue(":citations", injury->citations);
     query.bindValue(":medical_name", injury->medical_name);
     query.bindValue(":common_name", injury->common_name);
     query.bindValue(":description", injury->description);
@@ -1218,14 +1168,10 @@ inline void assign_injury_set(const QSqlRecord& record, InjurySet& injury)
   injury.id = record.value(INJURY_SET_ID).toInt();
   injury.name = record.value(INJURY_SET_NAME).toString();
   injury.description = record.value(INJURY_SET_DESCRIPTION).toString();
-  auto ref_list_s = record.value(INJURY_SET_INJURIES).toString();
-  auto ref_list = ref_list_s.split(";");
-  injury.injuries.clear();
-  for (auto& val : ref_list) {
-    if (!val.isEmpty()) {
-      injury.injuries.push_back(val.toInt());
-    }
-  }
+  injury.injuries = record.value(INJURY_SET_INJURIES).toString();
+  injury.locations = record.value(INJURY_SET_LOCATIONS).toString();
+  injury.severities = record.value(INJURY_SET_SEVERITIES).toString();
+  
 }
 int SQLite3Driver::injury_set_count() const
 {
@@ -1314,14 +1260,11 @@ bool SQLite3Driver::update_injury_set(InjurySet* injury_set)
     } else if (!injury_set->name.isEmpty()) {
       query.prepare(sqlite3::insert_or_update_injury_sets);
     }
-    QString injuries = "";
-    for (auto& val : injury_set->injuries) {
-      injuries += val + ";";
-    }
-    injuries.chop(1);
     query.bindValue(":name", injury_set->name);
     query.bindValue(":description", injury_set->description);
-    query.bindValue(":injuries", injuries);
+    query.bindValue(":injuries", injury_set->injuries);
+    query.bindValue(":severities", injury_set->severities);
+    query.bindValue(":locations", injury_set->locations);
 
     if (!query.exec()) {
       qWarning() << query.lastError();
@@ -1503,14 +1446,7 @@ inline void assign_objective(const QSqlRecord& record, Objective& objective)
   objective.id = record.value(OBJECTIVE_ID).toInt();
   objective.name = record.value(OBJECTIVE_NAME).toString();
   objective.description = record.value(OBJECTIVE_DESCRIPTION).toString();
-  auto ref_list_s = record.value(OBJECTIVE_CITATIONS).toString();
-  auto ref_list = ref_list_s.split(";");
-  objective.citations.clear();
-  for (auto& val : ref_list) {
-    if (!val.isEmpty()) {
-      objective.citations.push_back(val.toInt());
-    }
-  }
+  objective.citations = record.value(OBJECTIVE_CITATIONS).toString();
 }
 int SQLite3Driver::objective_count() const
 
@@ -1600,14 +1536,10 @@ bool SQLite3Driver::update_objective(Objective* objective)
     } else if (!objective->name.isEmpty()) {
       query.prepare(sqlite3::insert_or_update_objective);
     }
-    QString ref_list = "";
-    for (auto& val : objective->citations) {
-      ref_list += QString::number(val) + ";";
-    }
-    ref_list.chop(1);
+
     query.bindValue(":name", objective->name);
     query.bindValue(":description", objective->description);
-    query.bindValue(":citations", ref_list);
+    query.bindValue(":citations", objective->citations);
 
     if (!query.exec()) {
       qWarning() << query.lastError();
@@ -2301,22 +2233,8 @@ inline void assign_treatment(const QSqlRecord& record, Treatment& treatment)
   treatment.medical_name = record.value(TREATMENT_MEDICAL_NAME).toString();
   treatment.common_name = record.value(TREATMENT_COMMON_NAME).toString();
   treatment.description = record.value(TREATMENT_DESCRIPTION).toString();
-  auto equip_list_s = record.value(TREATMENT_EQUIPMENT).toString();
-  auto equip_list = equip_list_s.split(";");
-  treatment.equipment.clear();
-  for (auto& val : equip_list) {
-    if (!val.isEmpty()) {
-      treatment.equipment.push_back(val.toInt());
-    }
-  }
-  auto ref_list_s = record.value(TREATMENT_CITATIONS).toString();
-  auto ref_list = ref_list_s.split(";");
-  treatment.citations.clear();
-  for (auto& val : ref_list) {
-    if (!val.isEmpty()) {
-      treatment.citations.push_back(val.toInt());
-    }
-  }
+  treatment.equipment = record.value(TREATMENT_EQUIPMENT).toString();
+  treatment.citations = record.value(TREATMENT_CITATIONS).toString();
 }
 int SQLite3Driver::treatment_count() const
 {
@@ -2410,18 +2328,8 @@ bool SQLite3Driver::update_treatment(Treatment* treatment)
     } else if (!treatment->common_name.isEmpty()) {
       query.prepare(sqlite3::insert_or_update_treatments);
     }
-    QString equip_list = "";
-    for (auto& val : treatment->equipment) {
-      equip_list += val + ";";
-    }
-    equip_list.chop(1);
-    QString cite_list = "";
-    for (auto& val : treatment->citations) {
-      cite_list += val + ";";
-    }
-    cite_list.chop(1);
-    query.bindValue(":citations", cite_list);
-    query.bindValue(":equipment", equip_list);
+    query.bindValue(":citations", treatment->citations);
+    query.bindValue(":equipment", treatment->equipment);
     query.bindValue(":medical_name", treatment->medical_name);
     query.bindValue(":common_name", treatment->common_name);
     query.bindValue(":description", treatment->description);

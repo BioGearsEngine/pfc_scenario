@@ -52,7 +52,7 @@ ColumnLayout {
         self.common_name = "New Injury %1".arg(next)
         self.description = "Description of Injury %1".arg(next)
         
-        self.citations = new Array()
+        self.citations = ""
         self.min = 0.0
         self.max = 1.0
 
@@ -174,17 +174,12 @@ ColumnLayout {
         var r_count = backend.injury_count();
         root.backend.injuries()
         while ( root.backend.next_injury(self) ){
-          
-          var js_citations = []
-          for ( var citation in self.citations ){
-            js_citations.push( citation )
-          }
           listArea.model.insert(listArea.model.count,
             {
              id : self.injury_id,
              medical_name: "%1".arg(self.medical_name), 
-             common_name: "%1".arg(self.common_name), 
-             description: "%1".arg(self.description) , 
+             common_name:  "%1".arg(self.common_name), 
+             description:  "%1".arg(self.description) , 
              min: self.min,
              max: self.max,
              citations: self.citations,

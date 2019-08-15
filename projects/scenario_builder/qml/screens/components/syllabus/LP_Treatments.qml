@@ -51,8 +51,8 @@ ColumnLayout {
         self.medical_name = "New Treatment %1".arg(next)
         self.common_name = "New Treatment %1".arg(next)
         self.description = "Description of Treatment %1".arg(next)
-        self.equipment = new Array()
-        self.citations = new Array()
+        self.equipment = ""
+        self.citations = ""
 
         while( root.backend.select_treatment(self) )
         { 

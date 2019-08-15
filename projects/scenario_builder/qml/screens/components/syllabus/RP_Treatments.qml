@@ -43,17 +43,8 @@ ScrollView {
       obj.common_name          = values.common_name
       obj.description          = values.description
 
-      obj.equipment = []
-      for (var  i = 0; i < equipmentList.count; ++i) {
-          var equipment_id = equipmentList.model.get(i).equipment_id
-          obj.citations.push(equipment_id)
-      }
-
-      obj.citations = []
-      for (var  i = 0; i < referenceList.count; ++i) {
-        var citation_id = referenceList.model.get(i).citation_id
-        obj.citations.push(citation_id)
-      }
+      obj.equipment = values.equipment
+      obj.citations = values.citations
       column.backend.update_treatment(obj)
     }
 
@@ -112,12 +103,15 @@ ScrollView {
       onEquipmentAdded : {
         console.log("RP_Treatment Added a Equipment")
         var entry = root.model.get(root.index)
+        entry.equipment = (entry.equipment) ? entry.equipment.concat(";"+equipment_id) : entry.equipment.concat(equipment_id)
         column.update_treatment(entry)
       }
 
       onEquipmentRemoved : {
         console.log("RP_Treatment Removed a Equipment")
         var entry = root.model.get(root.index)
+        var equipment = entry.equipment.split(";").filter(item => item).filter(item => item != equipment_id);
+        entry.equipment = equipment.join(";")
         column.update_treatment(entry)
       }
     }
@@ -130,12 +124,15 @@ ScrollView {
       onCitationAdded : {
         console.log("RP_Treatment Added a Reference")
         var entry = root.model.get(root.index)
+        entry.citations = (entry.citations) ? entry.citations.concat(";"+citation_id) : entry.citations.concat(citation_id)
         column.update_treatment(entry)
       }
 
       onCitationRemoved : {
         console.log("RP_Treatment Removed a Reference")
         var entry = root.model.get(root.index)
+        var citations = entry.citations.split(";").filter(item => item).filter(item => item != citation_id);
+        entry.citations = citations.join(";")
         column.update_treatment(entry)
       }
     }
@@ -149,8 +146,9 @@ ScrollView {
       descriptionEntry.text = values.description
 
       equipmentList.model.clear()
-      for (var  i in  values.equipment) {
-         equipment.equipment_id = values.equipment[i]
+      var equipments = values.equipment.split(";").filter(x => x);  
+      for(var i = 0; i < equipments.length; ++i){
+         equipment.equipment_id = equipments[i]
          equipment.name = ""
          column.backend.select_equipment(equipment)
          equipmentList.model.insert(equipmentList.model.count,
@@ -166,8 +164,9 @@ ScrollView {
       }
 
       referenceList.model.clear()
-      for (var  i in  values.citations) {
-         citation.citation_id = values.citations[i]
+      var citations = values.citations.split(";").filter(x => x);  
+      for(var i = 0; i < citations.length; ++i){
+         citation.citation_id = citations[i]
          citation.key = ""
          citation.title  = ""
          column.backend.select_citation(citation)

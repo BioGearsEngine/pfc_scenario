@@ -28,29 +28,24 @@ ColumnLayout  {
   Connections {
     target: backend
     onCitationRemoved : {
-      console.log( "Removed Citation %1".arg(index))
+      console.log( "Connection backend -> RP_Injury Removed Citation %1".arg(index))
     }
 
     onEquipmentRemoved : {
-      console.log( "Removed Equipment %1".arg(index))
+      console.log( "Connection backend -> RP_Injury Removed Equipment %1".arg(index))
     }
   }
 
 
   function update_injury(values) {
     obj.injury_id = values.id
-    obj.medical_name         = values.medical_name
-    obj.common_name          = values.common_name
-    obj.description          = values.description
+    obj.medical_name  = values.medical_name
+    obj.common_name   = values.common_name
+    obj.description   = values.description
+    obj.citations     = values.citations
+    obj.min           = values.min
+    obj.max           = values.max
 
-    obj.citations = []
-    for (var  i = 0; i < referenceList.count; ++i) {
-        var citation_id = referenceList.model.get(i).citation_id
-        obj.citations.push(citation_id)
-      }
-
-    obj.min          = values.min
-    obj.max          = values.max
     root.backend.update_injury(obj)
   }
 
@@ -66,7 +61,6 @@ ColumnLayout  {
         var entry = model.get(root.index)
         if ( text != entry.medical_name) {
           entry.medical_name = text
-          console.log("Updating Name filed for Injury %1".arg(entry.id))
           update_injury(entry)
         }
     }
@@ -83,7 +77,6 @@ ColumnLayout  {
         var entry = model.get(root.index)
         if ( text != entry.common_name){
           entry.common_name = text
-          console.log("Updating Name filed for Injury %1".arg(entry.id))
           update_injury(entry)
         }
     }
@@ -95,14 +88,15 @@ ColumnLayout  {
     backend : root.backend
 
     onCitationAdded : {
-      console.log("RP_Objective Added a Reference")
-      var entry = model.get(root.index)
+      var entry = root.model.get(root.index)
+      entry.citations = (entry)? entry.citations.concat(";"+citation_id) : entry.citations.concat(citation_id)
       update_injury(entry)
     }
 
     onCitationRemoved : {
-      console.log("RP_Objective Removed a Reference")
-      var entry = model.get(root.index)
+      var entry = root.model.get(root.index)
+      var citations = entry.citations.split(";").filter(item => item).filter(item => item != citation_id);
+      entry.citations = citations.join(";")
       update_injury(entry)
     }
   }
@@ -119,7 +113,6 @@ ColumnLayout  {
       var entry = model.get(root.index)
       if ( text != entry.description){
         entry.description = text
-        console.log("Updating Name filed for Injury %1".arg(entry.id))
         update_injury(entry)
       }
     }
@@ -135,8 +128,6 @@ ColumnLayout  {
         var entry = model.get(root.index)
         entry.min = min
         entry.max = max
-
-        console.log("Updating Name filed for Injury %1".arg(entry.id))
         update_injury(entry)
     }
   }
@@ -150,8 +141,10 @@ ColumnLayout  {
       severityEntry.min     =  values.min
       severityEntry.max     =  values.max
       referenceList.model.clear()
-      for (var  i in  values.citations) {
-         citation.citation_id = values.citations[i]
+
+      var citations = values.citations.split(";").filter(x => x);  
+      for(var i = 0; i < citations.length; ++i){
+         citation.citation_id = citations[i]
          citation.key = ""
          citation.title = ""
          root.backend.select_citation(citation)

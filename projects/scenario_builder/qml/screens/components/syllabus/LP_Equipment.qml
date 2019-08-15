@@ -51,7 +51,7 @@ ColumnLayout {
         self.name = "New Equipment %1".arg(next)
         self.description = "Description of Equipment %1".arg(next)
         self.image = ""
-        self.citations = new Array()
+        self.citations = ""
 
         while( root.backend.select_equipment(self) )
         { 
@@ -168,19 +168,14 @@ ColumnLayout {
         var r_count = backend.equipment_count();
         root.backend.equipments()
         while ( root.backend.next_equipment(self) ){
-          
-          var js_citations = []
-          for ( var citation in self.citations ){
-            js_citations.push( citation )
-          }
           listArea.model.insert(listArea.model.count,
             {
              id : self.equipment_id,
+             type : "%1".arg(self.type),
              name: "%1".arg(self.name), 
-             description: "%1".arg(self.description) , 
-             image: "%1".arg(self.image) , 
-             citaitons: self.citations,
-
+             description: "%1".arg(self.description), 
+             citations: self.citations,
+             image: "%1".arg(self.image) 
             });
         }
       }

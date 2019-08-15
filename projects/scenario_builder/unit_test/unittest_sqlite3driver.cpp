@@ -49,19 +49,19 @@ void TEST_FIXTURE_NAME::TearDown()
 TEST_F(TEST_FIXTURE_NAME, Constructor)
 {
   {
-    pfc::SQLite3Driver driver("Scenario.sqlite");
+    pfc::SQLite3Driver driver("UnitScenario.sqlite");
   }
   {
-    auto file = std::ofstream("Scenario.sqlite", std::ostream::in);
+    auto file = std::ofstream("UnitScenario.sqlite", std::ostream::in);
     EXPECT_TRUE(file.is_open());
     file.close();
   }
   try {
-    boost::filesystem::remove("Scenario.sqlite");
+    boost::filesystem::remove("UnitScenario.sqlite");
   } catch (boost::system::system_error e) {
     std::cout << e.what() << std::endl;
   }
-  auto file2 = std::ofstream("Scenario.sqlite", std::ostream::in);
+  auto file2 = std::ofstream("UnitScenario.sqlite", std::ostream::in);
   EXPECT_FALSE(file2.is_open());
 }
 //ASSESSMENT TESTS--------------------------------------------------------------
@@ -331,19 +331,19 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Citation)
 
   citation_1.key = "skeleton key";
   citation_1.title = "Mr. Bones' Wild Ride";
-  citation_1.authors = { "Nathan", "Angel" };
+  citation_1.authors = "Nathan;Angel";
   citation_1.year = "1000";
   citation_1.publisher = "Boneland";
 
   citation_2.key = "boss key";
   citation_2.title = "Legend of Zelda";
-  citation_2.authors = { "Austin", "Matthew" };
+  citation_2.authors = "Austin;Matthew";
   citation_2.year = "2000";
   citation_2.publisher = "Nintendo";
 
   citation_3.key = "rsa key";
   citation_3.title = "Extra Security";
-  citation_3.authors = { "Steven", "Lucas" };
+  citation_3.authors = "Steven;Lucas";
   citation_3.year = "2019";
   citation_3.publisher = "ARA";
 
@@ -364,19 +364,19 @@ TEST_F(TEST_FIXTURE_NAME, Select_Citation)
 
   citation_1.key = "skeleton key";
   citation_1.title = "Mr. Bones' Wild Ride";
-  citation_1.authors = { "Nathan", "Angel" };
+  citation_1.authors = "Nathan;Angel";
   citation_1.year = "1000";
   citation_1.publisher = "Boneland";
 
   citation_2.key = "boss key";
   citation_2.title = "Legend of Zelda";
-  citation_2.authors = { "Austin", "Matthew" };
+  citation_2.authors = "Austin;Matthew";
   citation_2.year = "2000";
   citation_2.publisher = "Nintendo";
 
   citation_3.key = "rsa key";
   citation_3.title = "Extra Security";
-  citation_3.authors = { "Steven", "Lucas" };
+  citation_3.authors = "Steven;Lucas";
   citation_3.year = "2019";
   citation_3.publisher = "ARA";
 
@@ -411,19 +411,19 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Citation)
 
   citation_1.key = "skeleton key";
   citation_1.title = "Mr. Bones' Wild Ride";
-  citation_1.authors = { "Nathan", "Angel" };
+  citation_1.authors = "Nathan;Angel";
   citation_1.year = "1000";
   citation_1.publisher = "Boneland";
 
   citation_2.key = "boss key";
   citation_2.title = "Legend of Zelda";
-  citation_2.authors = { "Austin", "Matthew" };
+  citation_2.authors = "Austin;Matthew";
   citation_2.year = "2000";
   citation_2.publisher = "Nintendo";
 
   citation_3.key = "rsa key";
   citation_3.title = "Extra Security";
-  citation_3.authors = { "Steven", "Lucas" };
+  citation_3.authors = "Steven;Lucas";
   citation_3.year = "2019";
   citation_3.publisher = "ARA";
 
@@ -443,7 +443,7 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Citation)
 
   citation_1.key = "skeleton key";
   citation_1.title = "Mr. Bones' Wild Ride";
-  citation_1.authors = { "White", "Marin" };
+  citation_1.authors = "White;Marin";
   citation_1.year = "1000";
   citation_1.publisher = "Boneland";
 
@@ -465,19 +465,19 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Equipment)
   equipment_1.type = 1;
   equipment_1.description = "Got a sick keytar solo later";
   equipment_1.image = ("music stand");
-  equipment_1.citations.push_back(1);
+  equipment_1.citations = {1};
 
   equipment_2.name = "piano";
   equipment_2.type = 2;
   equipment_2.description = "big instrument with keys";
   equipment_2.image = ("piano bench");
-  equipment_2.citations.push_back(2);
+  equipment_2.citations = {2};
 
   equipment_3.name = "bagpipes";
   equipment_3.type = 3;
   equipment_3.description = "please stop playing the bagpipes";
   equipment_3.image = ("a bladder");
-  equipment_3.citations.push_back(3);
+  equipment_3.citations = {3};
 
   EXPECT_EQ(0, _db.equipment_count());
   EXPECT_TRUE(_db.update_equipment(&equipment_1));
@@ -498,19 +498,19 @@ TEST_F(TEST_FIXTURE_NAME, Select_Equipment)
   equipment_1.type = 1;
   equipment_1.description = "Got a sick keytar solo later";
   equipment_1.image = ("music stand");
-  equipment_1.citations.push_back(1);
+  equipment_1.citations = {1};
 
   equipment_2.name = "piano";
   equipment_2.type = 2;
   equipment_2.description = "big instrument with keys";
   equipment_2.image = ("piano bench");
-  equipment_2.citations.push_back(2);
+  equipment_2.citations = {2};
 
   equipment_3.name = "bagpipes";
   equipment_3.type = 3;
   equipment_3.description = "please stop playing the bagpipes";
   equipment_3.image = ("a bladder");
-  equipment_3.citations.push_back(3);
+  equipment_3.citations = {3};
 
   EXPECT_EQ(0, _db.equipment_count());
   EXPECT_TRUE(_db.update_equipment(&equipment_1));
@@ -545,19 +545,19 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Equipment)
   equipment_1.type = 1;
   equipment_1.description = "Got a sick keytar solo later";
   equipment_1.image = ("music stand");
-  equipment_1.citations.push_back(1);
+  equipment_1.citations = {1};
 
   equipment_2.name = "piano";
   equipment_2.type = 2;
   equipment_2.description = "big instrument with keys";
   equipment_2.image = ("piano bench");
-  equipment_2.citations.push_back(2);
+  equipment_2.citations = {2};
 
   equipment_3.name = "bagpipes";
   equipment_3.type = 3;
   equipment_3.description = "please stop playing the bagpipes";
   equipment_3.image = ("a bladder");
-  equipment_3.citations.push_back(3);
+  equipment_3.citations = {3};
 
   EXPECT_TRUE(_db.update_equipment(&equipment_1));
   EXPECT_TRUE(_db.update_equipment(&equipment_2));
@@ -577,7 +577,7 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Equipment)
   equipment_1.type = 1;
   equipment_1.description = "Got a sick keytar solo later";
   equipment_1.image = ("music stand");
-  equipment_1.citations.push_back(1);
+  equipment_1.citations = {1};
 
   equipment_2.name = "Keytar";
 
@@ -733,17 +733,17 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Injury)
   injury_1.medical_name = "Keyboardus Faceus";
   injury_1.common_name = "Keyboard Face";
   injury_1.description = "Looks like you took a nap on your keyboard";
-  injury_1.citations.push_back(1);
+  injury_1.citations = {1};
 
   injury_2.medical_name = "Hangnailus";
   injury_2.common_name = "Hangnail";
   injury_2.description = "Ouch, really stings";
-  injury_2.citations.push_back(2);
+  injury_2.citations = {2};
 
   injury_3.medical_name = "Stubbedus Toeus";
   injury_3.common_name = "Stubbed toe";
   injury_3.description = "ouchie";
-  injury_3.citations.push_back(3);
+  injury_3.citations = {3};
 
   EXPECT_EQ(0, _db.injury_count());
   EXPECT_TRUE(_db.update_injury(&injury_1));
@@ -763,17 +763,17 @@ TEST_F(TEST_FIXTURE_NAME, Select_Injury)
   injury_1.medical_name = "Keyboardus Faceus";
   injury_1.common_name = "Keyboard Face";
   injury_1.description = "Looks like you took a nap on your keyboard";
-  injury_1.citations.push_back(1);
+  injury_1.citations = {1};
 
   injury_2.medical_name = "Hangnailus";
   injury_2.common_name = "Hangnail";
   injury_2.description = "Ouch, really stings";
-  injury_2.citations.push_back(2);
+  injury_2.citations = {2};
 
   injury_3.medical_name = "Stubbedus Toeus";
   injury_3.common_name = "Stubbed toe";
   injury_3.description = "ouchie";
-  injury_3.citations.push_back(3);
+  injury_3.citations = {3};
 
   EXPECT_EQ(0, _db.injury_count());
   EXPECT_TRUE(_db.update_injury(&injury_1));
@@ -812,17 +812,17 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Injury)
   injury_1.medical_name = "Keyboardus Faceus";
   injury_1.common_name = "Keyboard Face";
   injury_1.description = "Looks like you took a nap on your keyboard";
-  injury_1.citations.push_back(1);
+  injury_1.citations = {1};
 
   injury_2.medical_name = "Hangnailus";
   injury_2.common_name = "Hangnail";
   injury_2.description = "Ouch, really stings";
-  injury_2.citations.push_back(2);
+  injury_2.citations = {2};
 
   injury_3.medical_name = "Stubbedus Toeus";
   injury_3.common_name = "Stubbed toe";
   injury_3.description = "ouchie";
-  injury_3.citations.push_back(3);
+  injury_3.citations = {3};
 
   EXPECT_TRUE(_db.update_injury(&injury_1));
   EXPECT_TRUE(_db.update_injury(&injury_2));
@@ -841,13 +841,146 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Injury)
   injury_1.medical_name = "Keyboardus Faceus";
   injury_1.common_name = "Keyboard Face";
   injury_1.description = "Looks like you took a nap on your keyboard";
-  injury_1.citations.push_back(1);
+  injury_1.citations = {1};
 
   injury_2.medical_name = "Keyboardus Faceus";
 
   EXPECT_TRUE(_db.update_injury(&injury_1));
   EXPECT_TRUE(_db.select_injury(&injury_2));
   EXPECT_EQ(injury_1, injury_2);
+}
+//INJURY TESTS--------------------------------------------------------------
+TEST_F(TEST_FIXTURE_NAME, Insert_InjurySet)
+{
+  using namespace pfc;
+  InjurySet injury_set_1;
+  InjurySet injury_set_2;
+  InjurySet injury_set_3;
+
+  injury_set_1.name = "Keyboardus Faceus";
+  injury_set_1.description = "Looks like you took a nap on your keyboard";
+  injury_set_1.injuries = { 1 };
+  injury_set_1.locations = { 1 };
+  injury_set_1.severities = { 1 };
+
+  injury_set_2.name = "Hangnailus";
+  injury_set_2.description = "Ouch, really stings";
+  injury_set_2.injuries = { 2 };
+  injury_set_2.locations = { 2 };
+  injury_set_2.severities = { 2 };
+
+  injury_set_3.name = "Stubbedus Toeus";
+  injury_set_3.description = "ouchie";
+  injury_set_3.injuries = { 3 };
+  injury_set_3.locations = { 3 };
+  injury_set_3.severities = { 3 };
+
+  EXPECT_EQ(0, _db.injury_set_count());
+  EXPECT_TRUE(_db.update_injury_set(&injury_set_1));
+  EXPECT_EQ(1, _db.injury_set_count());
+  EXPECT_TRUE(_db.update_injury_set(&injury_set_2));
+  EXPECT_EQ(2, _db.injury_set_count());
+  EXPECT_TRUE(_db.update_injury_set(&injury_set_3));
+  EXPECT_EQ(3, _db.injury_set_count());
+}
+TEST_F(TEST_FIXTURE_NAME, Select_InjurySet)
+{
+  using namespace pfc;
+  InjurySet injury_set_1;
+  InjurySet injury_set_2;
+  InjurySet injury_set_3;
+
+  injury_set_1.name = "Keyboardus Faceus";
+  injury_set_1.description = "Looks like you took a nap on your keyboard";
+  injury_set_1.injuries = { 1 };
+  injury_set_1.locations = { 1 };
+  injury_set_1.severities = { 1 };
+
+  injury_set_2.name = "Hangnailus";
+  injury_set_2.description = "Ouch, really stings";
+  injury_set_2.injuries = { 2 };
+  injury_set_2.locations = { 2 };
+  injury_set_2.severities = { 2 };
+
+  injury_set_3.name = "Stubbedus Toeus";
+  injury_set_3.description = "ouchie";
+  injury_set_3.injuries = { 3 };
+  injury_set_3.locations = { 3 };
+  injury_set_3.severities = { 3 };
+
+  EXPECT_EQ(0, _db.injury_set_count());
+  EXPECT_TRUE(_db.update_injury_set(&injury_set_1));
+  EXPECT_EQ(1, _db.injury_set_count());
+  EXPECT_TRUE(_db.update_injury_set(&injury_set_2));
+  EXPECT_EQ(2, _db.injury_set_count());
+  EXPECT_TRUE(_db.update_injury_set(&injury_set_3));
+  EXPECT_EQ(3, _db.injury_set_count());
+
+  InjurySet id;
+  InjurySet name;
+  InjurySet description;
+
+  id.id = 1;
+  name.name = "Hangnailus";
+
+  _db.select_injury_set(&id);
+  _db.select_injury_set(&name);
+  
+  injury_set_1.id = 1;
+  EXPECT_EQ(injury_set_1, id);
+  injury_set_2.id = 2;
+  EXPECT_EQ(injury_set_2, name);
+}
+TEST_F(TEST_FIXTURE_NAME, Remove_InjurySet)
+{
+  using namespace pfc;
+  InjurySet injury_set_1;
+  InjurySet injury_set_2;
+  InjurySet injury_set_3;
+
+  injury_set_1.name = "Keyboardus Faceus";
+  injury_set_1.description = "Looks like you took a nap on your keyboard";
+  injury_set_1.injuries = { 1 };
+  injury_set_1.locations = { 1 };
+  injury_set_1.severities = {1 };
+
+  injury_set_2.name = "Hangnailus";
+  injury_set_2.description = "Ouch, really stings";
+  injury_set_2.injuries = { 2 };
+  injury_set_2.locations = { 2 };
+  injury_set_2.severities = { 2 };
+
+  injury_set_3.name = "Stubbedus Toeus";
+  injury_set_3.description = "ouchie";
+  injury_set_3.injuries = { 3 };
+  injury_set_3.locations = { 3 };
+  injury_set_3.severities = { 3 };
+
+  EXPECT_TRUE(_db.update_injury_set(&injury_set_1));
+  EXPECT_TRUE(_db.update_injury_set(&injury_set_2));
+  EXPECT_TRUE(_db.update_injury_set(&injury_set_3));
+  EXPECT_EQ(3, _db.injury_set_count());
+  EXPECT_TRUE(_db.remove_injury_set(&injury_set_1));
+  EXPECT_TRUE(_db.remove_injury_set(&injury_set_3));
+  EXPECT_EQ(1, _db.injury_set_count());
+}
+TEST_F(TEST_FIXTURE_NAME, Equality_InjurySet)
+{
+  using namespace pfc;
+  InjurySet injury_set_1;
+  InjurySet injury_set_2;
+
+  injury_set_1.name = "Keyboardus Faceus";
+  injury_set_1.description = "Looks like you took a nap on your keyboard";
+  injury_set_1.injuries = { 1 };
+  injury_set_1.severities = { 2 };
+  injury_set_1.locations = { 3 };
+
+  injury_set_2.name = "Keyboardus Faceus";
+
+  EXPECT_TRUE(_db.update_injury_set(&injury_set_1));
+  EXPECT_TRUE(_db.select_injury_set(&injury_set_2));
+  EXPECT_EQ(injury_set_1, injury_set_2);
 }
 //LOCATION TESTS--------------------------------------------------------------
 TEST_F(TEST_FIXTURE_NAME, Insert_Location)
@@ -986,15 +1119,15 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Objective)
 
   objective_1.name = "Kill the Troll";
   objective_1.description = "There is a troll in the forest in a great big whole who has some gold. Kill it";
-  objective_1.citations = { 1, 2, 3 };
+  objective_1.citations  = "1;2;3";
 
   objective_2.name = "Steal the Trolls Gold";
   objective_2.description = "Gold is really dense. Its like crazy heavy bring a levetation spell.";
-  objective_2.citations = { 4, 5, 6 };
+  objective_2.citations  = "4;5;6";
 
   objective_3.name = "Return the Gold to the Quest Giver. Kill the Quest Giver";
   objective_3.description = "If we want to keep the gold we need to steal from the quest giver, but he will need to die before we can do that.";
-  objective_3.citations = { 7, 8, 9 };
+  objective_3.citations = "7;8;9";
 
   EXPECT_EQ(0, _db.objective_count());
   EXPECT_TRUE(_db.update_objective(&objective_1));
@@ -1013,15 +1146,15 @@ TEST_F(TEST_FIXTURE_NAME, Select_Objective)
 
   objective_1.name = "Kill the Troll";
   objective_1.description = "There is a troll in the forest in a great big whole who has some gold. Kill it";
-  objective_1.citations = { 1, 2, 3 };
+  objective_1.citations  = "1;2;3";
 
   objective_2.name = "Steal the Trolls Gold";
   objective_2.description = "Gold is really dense. Its like crazy heavy bring a levetation spell.";
-  objective_2.citations = { 4, 5, 6 };
+  objective_2.citations  = "4;5;6";
 
   objective_3.name = "Return the Gold to the Quest Giver. Kill the Quest Giver";
   objective_3.description = "If we want to keep the gold we need to steal from the quest giver, but he will need to die before we can do that.";
-  objective_3.citations = { 7, 8, 9 };
+  objective_3.citations  = "7;8;9";
 
   EXPECT_EQ(0, _db.objective_count());
   EXPECT_TRUE(_db.update_objective(&objective_1));
@@ -1054,15 +1187,15 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Objective)
 
   objective_1.name = "Kill the Troll";
   objective_1.description = "There is a troll in the forest in a great big whole who has some gold. Kill it";
-  objective_1.citations = { 1, 2, 3 };
+  objective_1.citations  = "1;2;3";
 
   objective_2.name = "Steal the Trolls Gold";
   objective_2.description = "Gold is really dense. Its like crazy heavy bring a levetation spell.";
-  objective_2.citations = { 4, 5, 6 };
+  objective_2.citations  = "4;5;6";
 
   objective_3.name = "Return the Gold to the Quest Giver. Kill the Quest Giver";
   objective_3.description = "If we want to keep the gold we need to steal from the quest giver, but he will need to die before we can do that.";
-  objective_3.citations = { 7, 8, 9 };
+  objective_3.citations  = "7;8;9";
 
   EXPECT_TRUE(_db.update_objective(&objective_1));
   EXPECT_TRUE(_db.update_objective(&objective_2));
@@ -1080,7 +1213,7 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Objective)
 
   objective_1.name = "Kill the Troll";
   objective_1.description = "There is a troll in the forest in a great big whole who has some gold. Kill it";
-  objective_1.citations = { 1, 2, 3 };
+  objective_1.citations  = "1;2;3";
 
   objective_2.name = "Kill the Troll";
 
@@ -1458,20 +1591,20 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Treatment)
   treatment_1.medical_name = "Soupus De Gallinus";
   treatment_1.common_name = "Chicken Soup";
   treatment_1.description = "Good for the soul";
-  treatment_1.equipment.push_back(2);
-  treatment_1.citations.push_back(1);
+  treatment_1.equipment= {2};
+  treatment_1.citations = {1};
 
   treatment_2.medical_name = "Massageus";
   treatment_2.common_name = "Massage";
   treatment_2.description = "Back rub";
-  treatment_2.equipment.push_back(3);
-  treatment_2.citations.push_back(2);
+  treatment_2.equipment= {3};
+  treatment_2.citations = {2};
 
   treatment_3.medical_name = "Bashus Headus againstus Wallus";
   treatment_3.common_name = "Bashing Head Against A Wall";
   treatment_3.description = "Oddly Satisfying";
-  treatment_3.equipment.push_back(4);
-  treatment_3.citations.push_back(3);
+  treatment_3.equipment= {4};
+  treatment_3.citations = {3};
 
   EXPECT_EQ(0, _db.treatment_count());
   EXPECT_TRUE(_db.update_treatment(&treatment_1));
@@ -1491,20 +1624,20 @@ TEST_F(TEST_FIXTURE_NAME, Select_Treatment)
   treatment_1.medical_name = "Soupus De Gallinus";
   treatment_1.common_name = "Chicken Soup";
   treatment_1.description = "Good for the soul";
-  treatment_1.equipment.push_back(2);
-  treatment_1.citations.push_back(1);
+  treatment_1.equipment= {2};
+  treatment_1.citations = {1};
 
   treatment_2.medical_name = "Massageus";
   treatment_2.common_name = "Massage";
   treatment_2.description = "Back rub";
-  treatment_2.equipment.push_back(3);
-  treatment_2.citations.push_back(2);
+  treatment_2.equipment= {3};
+  treatment_2.citations = {2};
 
   treatment_3.medical_name = "Bashus Headus againstus Wallus";
   treatment_3.common_name = "Bashing Head Against A Wall";
   treatment_3.description = "Oddly Satisfying";
-  treatment_3.equipment.push_back(4);
-  treatment_3.citations.push_back(3);
+  treatment_3.equipment= {4};
+  treatment_3.citations = {3};
 
   EXPECT_EQ(0, _db.treatment_count());
   EXPECT_TRUE(_db.update_treatment(&treatment_1));
@@ -1543,20 +1676,20 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Treatment)
   treatment_1.medical_name = "Soupus De Gallinus";
   treatment_1.common_name = "Chicken Soup";
   treatment_1.description = "Good for the soul";
-  treatment_1.equipment.push_back(2);
-  treatment_1.citations.push_back(1);
+  treatment_1.equipment= {2};
+  treatment_1.citations = {1};
 
   treatment_2.medical_name = "Massageus";
   treatment_2.common_name = "Massage";
   treatment_2.description = "Back rub";
-  treatment_2.equipment.push_back(3);
-  treatment_2.citations.push_back(2);
+  treatment_2.equipment= {3};
+  treatment_2.citations = {2};
 
   treatment_3.medical_name = "Bashus Headus againstus Wallus";
   treatment_3.common_name = "Bashing Head Against A Wall";
   treatment_3.description = "Oddly Satisfying";
-  treatment_3.equipment.push_back(4);
-  treatment_3.citations.push_back(3);
+  treatment_3.equipment= {4};
+  treatment_3.citations = {3};
 
   EXPECT_TRUE(_db.update_treatment(&treatment_1));
   EXPECT_TRUE(_db.update_treatment(&treatment_2));
@@ -1572,11 +1705,11 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Treatment)
   Treatment treatment_1;
   Treatment treatment_2;
 
-  treatment_1.medical_name = "Soupus De Gallinus"; 
+  treatment_1.medical_name = "Soupus De Gallinus";
   treatment_1.common_name = "Chicken Soup";
   treatment_1.description = "Good for the soul";
-  treatment_1.equipment.push_back(2);
-  treatment_1.citations.push_back(1);
+  treatment_1.equipment= {2};
+  treatment_1.citations = {1};
 
   treatment_2.medical_name = "Soupus De Gallinus";
 
