@@ -36,9 +36,11 @@ ColumnLayout  {
       obj.description  = values.description
       obj.citations = []
 
-      for (var  i in  values.citations) {
-          obj.citations.push(values.citations[i])
+      for (var  i = 0; i < referenceList.count; ++i) {
+        var citation_id = referenceList.model.get(i).citation_id
+        obj.citations.push(citation_id)
       }
+
       root.backend.update_objective(obj)
     }
 
@@ -86,12 +88,15 @@ ColumnLayout  {
       onCitationAdded : {
         console.log("RP_Objective Added a Reference")
         var entry = root.model.get(root.index)
+        entry.citations = entry.citations.concat(";"+citation_id)
         update_objective(entry)
       }
 
       onCitationRemoved : {
         console.log("RP_Objective Removed a Reference")
         var entry = root.model.get(root.index)
+        var citations = entry.citations.split(";").filter(item => item).filter(item => item != citation_id);
+        entry.citations = citations.join(";")
         update_objective(entry)
       }
     }
@@ -102,21 +107,24 @@ ColumnLayout  {
         nameEntry.text = values.name
         descriptionEntry.text = values.description
         referenceList.model.clear()
-        for (var  i in  values.citations) {
-           citation.citation_id = values.citations[i]
-           citation.key = ""
-           citation.title = ""
-           root.backend.select_citation(citation)
-           referenceList.model.insert(referenceList.model.count,
-               {
-                 "citation_id" : "%1".arg(citation.citation_id),
-                 "key" : "%1".arg(citation.key),
-                 "title" : "%1".arg(citation.title), 
-                 "authors":  "%1".arg(citation.authors),
-                 "year" : "%1".arg(citation.year)
-              }
-           );
-        }
+
+        var citations = values.citations.split(";").filter(x => x);  
+        for(var i = 0; i < citations.length; ++i){
+          citation.citation_id = citations[i]
+          citation.key = ""
+          citation.title = ""
+          if(root.backend.select_citation(citation)){
+            referenceList.model.insert(referenceList.model.count,
+                {
+                   citation_id : "%1".arg(citation.citation_id),
+                   key : "%1".arg(citation.key),
+                   title : "%1".arg(citation.title), 
+                   authors:  "%1".arg(citation.authors),
+                   year : "%1".arg(citation.year)
+               }
+             );
+          }
+        };
       }
     }
 }

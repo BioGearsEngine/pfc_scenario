@@ -47,7 +47,6 @@ ColumnLayout  {
         var entry = model.get(root.index)
         if ( text != entry.name){
           entry.name = text
-          console.log("Updating Name filed for Assessment %1".arg(entry.id))
           update_assessment(entry)
         }
       }
@@ -65,7 +64,6 @@ ColumnLayout  {
         var entry = model.get(root.index)
         if ( text != entry.description){
           entry.description = text
-          console.log("Updating Description filed for Assessment %1".arg(entry.id))
           update_assessment(entry)
         }
       }
@@ -88,7 +86,6 @@ ColumnLayout  {
           }
           onActivated: {
               optionalArea.currentIndex = index
-               console.log("Index accepted")
                var entry = root.model.get(root.index)
                entry.type = (index) ? "Scalar" : "Binary"
                update_assessment(entry)
@@ -112,7 +109,7 @@ ColumnLayout  {
           height : childrenRect.height + 10
           border.color  : "steelblue"
 
-          TextEntry {
+          TextAreaEntry {
             anchors.top: parent.top
             anchors.left : parent.left
             anchors.right : parent.right
@@ -126,7 +123,6 @@ ColumnLayout  {
               var entry = model.get(root.index)
               if ( text != entry.criteria){
                 entry.criteria = text
-                console.log("Updating criteria filed for Assessment %1".arg(entry.id))
                 update_assessment(entry)
               }
             }
@@ -153,13 +149,12 @@ ColumnLayout  {
               var entry = model.get(root.index)
               if ( text != entry.available_points){
                 entry.available_points = parseInt(text)
-                console.log("Updating available_points filed for Assessment %1".arg(entry.id))
                 update_assessment(entry)
               }
             }
           }
 
-          TextEntry {
+          TextAreaEntry {
             anchors.top: partialPointsEntry.bottom
             anchors.left : parent.left
             anchors.right : parent.right

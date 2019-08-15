@@ -23,6 +23,10 @@ ColumnLayout  {
       id : injury
     }
 
+    function update_injurySet(entry){
+
+    }
+    
     TextEntry {
       Layout.fillWidth: true
       id: nameEntry
@@ -33,7 +37,7 @@ ColumnLayout  {
         if ( text != entry.name){
           entry.name = text
           console.log("updating Name filed for InjurySet %1".arg(entry.injury_id))
-          update_injury(entry)
+          update_injurySet(entry)
         }
       }
     }
@@ -49,7 +53,7 @@ ColumnLayout  {
         if ( text != entry.description){
           entry.description = text
           console.log("updating Description filed for InjurySet %1".arg(entry.injury_id))
-          update_injury(entry)
+          update_injurySet(entry)
         }
       }
     }

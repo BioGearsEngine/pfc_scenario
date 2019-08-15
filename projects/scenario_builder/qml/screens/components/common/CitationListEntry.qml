@@ -10,8 +10,8 @@ ListEntry {
   id: root
   property SQLBackend backend
 
-  signal citationAdded(int citation_id)
-  signal citationRemoved(int citation_id)
+  signal citationAdded(int index, int citation_id)
+  signal citationRemoved(int index, int citation_id)
 
   label: "Reference"
   
@@ -166,7 +166,7 @@ ListEntry {
     self.title  = "New Reference %1".arg(likely_id)
     self.authors = "Unknown Author"
     self.year   = 2018
-    self.key    = "UnknownAuthor"
+    self.key    = "AuthorYear_%1".arg(likely_id)
     root.backend.update_citation(self)
     root.model.insert(root.model.count,
       {
@@ -176,12 +176,12 @@ ListEntry {
       , authors: "%1".arg(self.authors)
       , year: "%1".arg(self.year)
       });
-    root.citationAdded(self.citation_id)
+    root.citationAdded(root.model.count, self.citation_id)
   }
   onRemoved : {
     self.citation_id =  root.model.get(index).citation_id
     root.model.remove(index)
     current = Math.max(0,index-1)
-    root.injuryRemoved(index)
+    root.citationRemoved(index, self.citation_id )
   }
 }

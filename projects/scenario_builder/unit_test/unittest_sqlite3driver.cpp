@@ -1572,7 +1572,7 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Treatment)
   Treatment treatment_1;
   Treatment treatment_2;
 
-  treatment_1.medical_name = "Soupus De Gallinus";
+  treatment_1.medical_name = "Soupus De Gallinus"; 
   treatment_1.common_name = "Chicken Soup";
   treatment_1.description = "Good for the soul";
   treatment_1.equipment.push_back(2);

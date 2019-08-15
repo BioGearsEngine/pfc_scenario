@@ -38,21 +38,21 @@ ScrollView {
     }
 
     function update_treatment(values) {
-      obj.injury_id = values.id
+      obj.treatment_id = values.id
       obj.medical_name         = values.medical_name
       obj.common_name          = values.common_name
       obj.description          = values.description
 
       obj.equipment = []
       for (var  i = 0; i < equipmentList.count; ++i) {
-          console.log("Pushing equipment %1,%2".arg(i).arg(equipmentList.model.get(i).citation_id))
-          obj.citations.push(equipmentList.model.get(i).citation_id)
+          var equipment_id = equipmentList.model.get(i).equipment_id
+          obj.citations.push(equipment_id)
       }
 
       obj.citations = []
       for (var  i = 0; i < referenceList.count; ++i) {
-          console.log("Pushing citations %1,%2".arg(i).arg(referenceList.model.get(i).citation_id))
-          obj.citations.push(referenceList.model.get(i).citation_id)
+        var citation_id = referenceList.model.get(i).citation_id
+        obj.citations.push(citation_id)
       }
       column.backend.update_treatment(obj)
     }
@@ -66,7 +66,7 @@ ScrollView {
         if ( text != entry.medical_name) {
           entry.medical_name = text
           console.log("Updating Name filed for Treatment %1".arg(entry.id))
-          update_treatment(entry)
+          column.update_treatment(entry)
         }
       }
     }
@@ -81,7 +81,7 @@ ScrollView {
         if ( text != entry.common_name) {
           entry.common_name = text
           console.log("Updating Name filed for Treatment %1".arg(entry.id))
-          update_treatment(entry)
+          column.update_treatment(entry)
         }
       }
     }
@@ -99,7 +99,7 @@ ScrollView {
         if ( text != entry.description) {
           entry.description = text
           console.log("Updating Name filed for Treatment %1".arg(entry.id))
-          update_treatment(entry)
+          column.update_treatment(entry)
         }
       }
     }
@@ -112,13 +112,13 @@ ScrollView {
       onEquipmentAdded : {
         console.log("RP_Treatment Added a Equipment")
         var entry = root.model.get(root.index)
-        update_treatment(entry)
+        column.update_treatment(entry)
       }
 
       onEquipmentRemoved : {
         console.log("RP_Treatment Removed a Equipment")
         var entry = root.model.get(root.index)
-        update_treatment(entry)
+        column.update_treatment(entry)
       }
     }
 
@@ -130,13 +130,13 @@ ScrollView {
       onCitationAdded : {
         console.log("RP_Treatment Added a Reference")
         var entry = root.model.get(root.index)
-        update_treatment(entry)
+        column.update_treatment(entry)
       }
 
       onCitationRemoved : {
         console.log("RP_Treatment Removed a Reference")
         var entry = root.model.get(root.index)
-        update_treatment(entry)
+        column.update_treatment(entry)
       }
     }
   }

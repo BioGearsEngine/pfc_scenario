@@ -65,7 +65,7 @@ ColumnLayout {
            "id" : self.objective_id,
            "name": "%1".arg(self.name), 
            "description": "%1".arg(self.description) , 
-           "citations": self.citations}
+           "citations": self.citations.join(";")}
         );
         ++next;
       }
@@ -156,20 +156,18 @@ ColumnLayout {
           }
         }
       }
-
       ScrollBar.vertical: ScrollBar { }
 
       Component.onCompleted : {
         var r_count = backend.objective_count();
         root.backend.objectives()
         while ( root.backend.next_objective(self) ){
-
           listArea.model.insert(listArea.model.count,
             {
              id  : self.objective_id,
              name: "%1".arg(self.name), 
              description: "%1".arg(self.description),
-             citations : self.citations 
+             citations : self.citations.join(";")
             });
         }
       }

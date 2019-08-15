@@ -10,8 +10,8 @@ ListEntry {
   id: root
   property SQLBackend backend
 
-  signal equipmentAdded(int equipment_id)
-  signal equipmentRemoved(int equipment_id)
+  signal equipmentAdded(int index, int equipment_id)
+  signal equipmentRemoved(int index, int equipment_id)
 
   label : "Equipment"
   labelPlaural : "Equipment"
@@ -63,14 +63,30 @@ ListEntry {
     //TODO: It would be cool if the delegate on state change added a description field which expanded it
 
   onAdded : {
-    //TODO; Model Box Popup with  a selection of known Injuries
-    root.equipmentAdded(index)
+    var likely_id = root.backend.nextID(SQLBackend.EQUIPMENT) + 1
+    self.equipment_id = -1
+    self.type = "1"
+    self.name  = "New Equipment %1".arg(likely_id)
+    self.description = "New Equipment %1".arg(likely_id)
+    self.citations   = ""
+    self.image    = ""
+    root.backend.update_equipment(self)
+    root.model.insert(root.model.count,
+      {
+        equipment_id: "%1".arg(self.equipment_id)
+      , type: "%1".arg(self.type)
+      , name : "%1".arg(self.name)
+      , description: "%1".arg(self.description)
+      , citations: "%1".arg(self.citations)
+      , image: "%1".arg(self.image)
+      });
+    root.equipmentAdded (root.model.count, self.citation_id)
   }
 
   onRemoved : {
     self.equipment_id =  root.model.get(index).equipment_id
     root.model.remove(index)
     current = Math.max(0,index-1)
-    root.equipmentRemoved(index)
+    root.equipmentRemoved(index,self.equipment_id)
   }
 }

@@ -171,6 +171,7 @@ ColumnLayout {
         var r_count = backend.treatment_count();
         root.backend.treatments()
         while ( root.backend.next_treatment(self) ){
+          console.log("id-%1".arg(self.treatment_id))
           listArea.model.insert(listArea.model.count,
             {
              id : self.treatment_id,

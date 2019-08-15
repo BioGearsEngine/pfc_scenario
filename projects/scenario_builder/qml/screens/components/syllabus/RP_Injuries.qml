@@ -44,10 +44,10 @@ ColumnLayout  {
     obj.description          = values.description
 
     obj.citations = []
-    for (var  i in  referenceList.model) {
-        console.log("Pushing citation %1,%2".arg(i).arg(referenceList.model.get(i).citation_id))
-        obj.citations.push(referenceList.model.get(i).citation_id)
-    }
+    for (var  i = 0; i < referenceList.count; ++i) {
+        var citation_id = referenceList.model.get(i).citation_id
+        obj.citations.push(citation_id)
+      }
 
     obj.min          = values.min
     obj.max          = values.max
@@ -96,10 +96,14 @@ ColumnLayout  {
 
     onCitationAdded : {
       console.log("RP_Objective Added a Reference")
+      var entry = model.get(root.index)
+      update_injury(entry)
     }
 
     onCitationRemoved : {
       console.log("RP_Objective Removed a Reference")
+      var entry = model.get(root.index)
+      update_injury(entry)
     }
   }
 

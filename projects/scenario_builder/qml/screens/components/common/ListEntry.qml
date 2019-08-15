@@ -11,6 +11,7 @@ Rectangle {
   property string label : "Label"
   property string labelPlaural : label + "s" 
 
+  property alias count : listArea.count
   property alias model : listArea.model
   property alias delegate : listArea.delegate
   property alias current : listArea.currentIndex
