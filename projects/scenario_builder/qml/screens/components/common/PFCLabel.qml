@@ -5,8 +5,11 @@ import QtQuick.Controls 2.12
 
 Label {
   id: root
+
+  property int pointSize : 10
+
    text: 'Title:'
-   font.pointSize : 10
+   font.pointSize : root.pointSize
    color: "steelblue"
    width: (text.width > 90 ) ? text.width + 10 : 100
   }

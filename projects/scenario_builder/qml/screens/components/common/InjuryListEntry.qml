@@ -10,8 +10,10 @@ ListEntry {
   id: root
   property SQLBackend backend
 
-  signal injuryAdded(int injury_id)
-  signal injuryRemoved(int injury_id)
+  signal injuryAdded(int index, int injury_id, double severity, string location)
+  signal injuryRemoved(int index, int injury_id, double severity, string location)
+  signal locationChanged(int index, string location)
+  signal severityChanged(int index, double severity)
 
   label: "Injury"
   labelPlaural: "Injuries"
@@ -30,47 +32,155 @@ ListEntry {
      height : 30
      anchors { left : parent.left; right: parent.right ; margins : 5 }
 
-     MouseArea {
-       anchors.fill: parent
-       onClicked: {
+    MouseArea {
+      anchors.fill: parent
+      onClicked: {
         root.current = index
-       }
-     }
+      }
+    }
 
-     Text {
+    Text {
        id : injury_medical_name_text
        anchors.left : parent.left
-       anchors.leftMargin : 10
-       font.pointSize: 10
+       anchors.leftMargin : 5
+       anchors.verticalCenter  : parent.verticalCenter 
+       width : 100 
+       font.weight: Font.Bold
+       font.pointSize: 8
        text :  model.medical_name
        color: enabled ? Material.primaryTextColor : Material.primaryTextColor
     }
 
-    Text {
-       id : injury_description_text
-       anchors.left : injury_medical_name_text.right
-       anchors.leftMargin : 10
-       font.pointSize: 10
-       text :  model.description
-       color: enabled ? Material.primaryTextColor : Material.primaryTextColor
-       elide : Text.ElideRight
-      }
-
+    PFCLabel {
+      id: injury_location_label
+      anchors.left : injury_medical_name_text.right
+      anchors.leftMargin : 5
+      anchors.verticalCenter  : parent.verticalCenter 
+      text: 'Location:'
     }
 
-    //TODO: Modifiy InjurySets to Store a Severity Value and A Location Value for each Entry
-    //TODO: Then Displa these values instead of the description.
-    //TODO: It would be cool if the delegate on state change added a description field which expanded it
+    TextField {
+      id : injury_location_entry
+      anchors.left : injury_location_label.right
+      anchors.top : parent.top
+      anchors.leftMargin : -5
+      font.pointSize : 8
+
+      text: model.location
+      placeholderText : "Unknown"
+
+      readOnly : false
+      activeFocusOnPress: false
+      hoverEnabled : false
+      enabled : false
+      color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+      onEditingFinished : {
+        root.locationChanged(index , text)
+        if(root.current != index){
+          injury.state = "";
+        }
+      }
+    }
+
+    PFCLabel {
+     id: injury_severity_label
+     anchors.left : injury_location_entry.right
+     anchors.leftMargin : 5
+     anchors.verticalCenter  : parent.verticalCenter 
+     text: 'Severity:'
+    }
+
+    TextField {
+      id: injury_severity_entry
+      anchors.left : injury_severity_label.right
+      anchors.top : parent.top
+      anchors.leftMargin : -5
+      font.pointSize : 8
+
+      text: model.severity
+      placeholderText : "Severity Value"
+       validator: DoubleValidator {
+            bottom:model.min
+            top:   model.max
+        }
+
+       readOnly : false
+       activeFocusOnPress: false
+       hoverEnabled : false
+       enabled : false
+       color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+       onEditingFinished : {
+         root.severityChanged(index , text)
+        if(root.current != index){
+          injury.state = "";
+        }
+      }
+    }
+
+    states: [
+      State {
+        name : "Selected"
+        PropertyChanges{ target : injury_severity_entry; readOnly : false}
+        PropertyChanges{ target : injury_severity_entry; activeFocusOnPress : true}
+        PropertyChanges{ target : injury_severity_entry; hoverEnabled : true}
+        PropertyChanges{ target : injury_severity_entry; enabled : true}
+        PropertyChanges{ target : injury_severity_entry; mouseSelectionMode  : TextInput.SelectCharacters }
+
+        PropertyChanges{ target : injury_location_entry; readOnly : false}
+        PropertyChanges{ target : injury_location_entry; activeFocusOnPress : true}
+        PropertyChanges{ target : injury_location_entry; hoverEnabled : true}
+        PropertyChanges{ target : injury_location_entry; enabled  : true}
+        PropertyChanges{ target : injury_location_entry; mouseSelectionMode  : TextInput.SelectCharacters }
+      }
+    ]
+
+    onFocusChanged: {
+      if(root.current == index){
+        state = 'Selected';
+      }
+      else{
+        state = "";
+      }
+    }
+
+  }
+
+  //TODO: Modifiy InjurySets to Store a Severity Value and A Location Value for each Entry
+  //TODO: Then Displa these values instead of the description.
+  //TODO: It would be cool if the delegate on state change added a description field which expanded it
 
   onAdded : {
     //TODO; Model Box Popup with  a selection of known Injuries
-    root.injuryAdded(index)
+    var likely_id = root.backend.nextID(SQLBackend.INJURIES) + 1
+    self.injury_id     = -1
+    self.medical_name  = "New Equipment %1".arg(likely_id)
+    self.common_name   = "New Equipment %1".arg(likely_id)
+    self.description   = "New Equipment %1".arg(likely_id)
+    self.citations     = ""
+    self.min         =  0.0
+    self.max         =  0.0
+    root.backend.update_injury(self)
+    root.model.insert(root.model.count,
+      {
+        injury_id: self.injury_id
+      , medical_name: self.medical_name
+      , common_name : self.common_name
+      , description: self.description
+      , citations: self.citations
+      , min: "%1".arg(self.min)
+      , max: "%1".arg(self.max)
+      , severity: "%1".arg(self.min)
+      , location: "Unknown"
+      });
+    root.injuryAdded(index, self.injury_id, self.min, "Unknown")
   }
 
   onRemoved : {
     self.injury_id =  root.model.get(index).injury_id
+    var severity =  root.model.get(index).severity
+    var location =  root.model.get(index).location
     root.model.remove(index)
     current = Math.max(0,index-1)
-    root.injuryRemoved(index)
+    root.injuryRemoved(index, self.injury_id, severity, location)
   }
 }

@@ -70,18 +70,46 @@ ColumnLayout  {
       Layout.fillWidth : true
       backend : root.backend
 
+      onSeverityChanged : {
+         console.log("%1, %2".arg(index).arg(severity))
+         var entry = root.model.get(root.index)
+         var severities = entry.severities.split(";").filter(item => item)
+         severities.splice(index,1,severity)
+         entry.severities = severities.join(";")
+         update_injury_set(entry)
+      }
+
+      onLocationChanged : {
+        var entry = root.model.get(root.index)
+        var locations = entry.locations.split(";").filter(item => item)
+        locations.splice(index,1,location)
+        entry.locations = locations.join(";")
+        update_injury_set(entry)
+      }
+
       onInjuryAdded : {
         var entry = root.model.get(root.index)
-        entry.injuries = (entry)? entry.injuries.concat(";"+injury_id) : entry.injuries.concat(injury_id)
+        entry.injuries    = (entry)? entry.injuries.concat(";"+injury_id) : entry.injuries.concat(injury_id)
+        entry.severities  = (entry)? entry.severities.concat(";"+severity) : entry.injuries.concat(severity)
+        entry.locations   = (entry)? entry.locations.concat(";"+location) : entry.injuries.concat(location)
         console.log("OnInjuryAdded")
         update_injury_set(entry)
       }
 
       onInjuryRemoved : {
         var entry = root.model.get(root.index)
-        var injuries = entry.injuries.split(";").filter(item => item).filter(item => item != injury_id);
+        var injuries = entry.injuries.split(";").filter(item => item)
+        var severities = entry.severities.split(";").filter(item => item)
+        var locations = entry.locations.split(";").filter(item => item)
+        
+        injuries.splice(index,1);
+        severities.splice(index,1)
+        locations.splice(index,1)
+        
         entry.injuries = injuries.join(";")
-        console.log("OnInjuryRemoved")
+        entry.severities = severities.join(";")
+        entry.locations = locations.join(";")
+        
         update_injury_set(entry)
       }
     }
@@ -92,10 +120,9 @@ ColumnLayout  {
         nameEntry.text = values.name
         descriptionEntry.text = values.description
 
-        var injuries  = values.injuries.split(";").filter(x => x);  
-        var locations  = values.locations.split(";").filter(x => x);  
-        var severities = values.severities.split(";").filter(x => x);  
-        
+        var injuries  = values.injuries.split(";").filter(x => x);
+        var locations  = values.locations.split(";").filter(x => x);
+        var severities = values.severities.split(";").filter(x => x);
         injuryList.model.clear()
         for(var i = 0; i < injuries.length; ++i){
            injury.injury_id = injuries[i]
@@ -104,17 +131,16 @@ ColumnLayout  {
            root.backend.select_injury(injury)
            injuryList.model.insert(injuryList.model.count,
                {
-                 injury_id : "%1".arg(injury.injury_id),
+                 injury_id : injury.injury_id,
                  medical_name : "%1".arg(injury.medical_name),
                  common_name : "%1".arg(injury.common_name), 
                  description:  "%1".arg(injury.description),
                  citations : "%1".arg(injury.citations),
                  min : "%1".arg(injury.min),
                  max : "%1".arg(injury.max),
-                 location : locations[i],
-                 severity : severities[i]
-              }
-           );
+                 location : (locations.length) ? locations[i] : "",
+                 severity : (severities.length) ?severities[i] : 0.5
+              });
         }
       }
     }

@@ -369,9 +369,9 @@ inline namespace sqlite3 {
     = R"( UPDATE  injury_sets
           SET name = :name
               , description = :description
-              , injuries = :injuries
-              , locations = :locations
-              , severities = :severities;
+              , injuries    = :injuries
+              , locations   = :locations
+              , severities  = :severities
           WHERE injury_set_id = :id;
          )";
   constexpr auto delete_injury_set_by_id

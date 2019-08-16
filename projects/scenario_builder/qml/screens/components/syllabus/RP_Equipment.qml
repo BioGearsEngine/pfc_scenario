@@ -114,7 +114,7 @@ ColumnLayout  {
       referenceList.model.clear()
       var citations = values.citations.split(";").filter(x => x);  
       for(var i = 0; i < citations.length; ++i){
-         citation.citation_id = citaitons[i]
+         citation.citation_id = citations[i]
          citation.key = ""
          citation.title  = ""
          root.backend.select_citation(citation)

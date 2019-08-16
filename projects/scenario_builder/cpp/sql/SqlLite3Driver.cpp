@@ -159,8 +159,32 @@ bool SQLite3Driver::clear_table(enum SQLite3Driver::Sqlite3Table t)
   query.prepare(sqlite3::drop_table);
   if (_db.isOpen()) {
     switch (t) {
+    case ASSESSMENTS:
+      query.bindValue(":table", tables[ASSESSMENTS]);
+      break;
     case AUTHORS:
       query.bindValue(":table", tables[AUTHORS]);
+      break;
+    case CITATIONS:
+      query.bindValue(":table", tables[CITATIONS]);
+      break;
+    case EQUIPMENTS:
+      query.bindValue(":table", tables[EQUIPMENTS]);
+      break;
+    case EVENTS:
+      query.bindValue(":table", tables[EVENTS]);
+      break;
+    case INJURIES:
+      query.bindValue(":table", tables[INJURIES]);
+      break;
+    case LOCATIONS:
+      query.bindValue(":table", tables[LOCATIONS]);
+      break;
+    case OBJECTIVES:
+      query.bindValue(":table", tables[OBJECTIVES]);
+      break;
+    case PROPS:
+      query.bindValue(":table", tables[PROPS]);
       break;
     case PROPERTIES:
       query.bindValue(":table", tables[PROPERTIES]);
@@ -168,35 +192,11 @@ bool SQLite3Driver::clear_table(enum SQLite3Driver::Sqlite3Table t)
     case RESTRICTIONS:
       query.bindValue(":table", tables[RESTRICTIONS]);
       break;
-    case CITATIONS:
-      query.bindValue(":table", tables[CITATIONS]);
-      break;
-    case TREATMENTS:
-      query.bindValue(":table", tables[TREATMENTS]);
-      break;
-    case EQUIPMENTS:
-      query.bindValue(":table", tables[EQUIPMENTS]);
-      break;
-    case INJURIES:
-      query.bindValue(":table", tables[INJURIES]);
-      break;
-    case ASSESSMENTS:
-      query.bindValue(":table", tables[ASSESSMENTS]);
-      break;
-    case OBJECTIVES:
-      query.bindValue(":table", tables[OBJECTIVES]);
-      break;
-    case LOCATIONS:
-      query.bindValue(":table", tables[LOCATIONS]);
-      break;
     case ROLES:
       query.bindValue(":table", tables[ROLES]);
       break;
-    case PROPS:
-      query.bindValue(":table", tables[PROPS]);
-      break;
-    case EVENTS:
-      query.bindValue(":table", tables[EVENTS]);
+    case TREATMENTS:
+      query.bindValue(":table", tables[TREATMENTS]);
       break;
     default:
       return false;
@@ -1252,7 +1252,7 @@ bool SQLite3Driver::select_injury_set(InjurySet* set) const
 bool SQLite3Driver::update_injury_set(InjurySet* injury_set)
 {
 
-  if (_db.isOpen()) {
+    if (_db.isOpen()) {
     QSqlQuery query{ _db };
     if (-1 != injury_set->id) {
       query.prepare(sqlite3::update_injury_set_by_id);

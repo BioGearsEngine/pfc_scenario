@@ -80,7 +80,7 @@ ListEntry {
       , citations: "%1".arg(self.citations)
       , image: "%1".arg(self.image)
       });
-    root.equipmentAdded (root.model.count, self.citation_id)
+    root.equipmentAdded (root.model.count, self.equipment_id)
   }
 
   onRemoved : {
