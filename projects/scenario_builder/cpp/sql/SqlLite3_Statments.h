@@ -229,6 +229,7 @@ inline namespace sqlite3 {
     EVENT_ACTOR,
     EVENT_EQUIPMENT,
     EVENT_DESCRIPTION,
+    EVENT_FK_SCENE,
     EVENT_COLUMN_COUNT
   };
 
@@ -239,7 +240,8 @@ inline namespace sqlite3 {
     location INTEGER, 
     actor INTEGER,
     equipment TEXT,
-    description TEXT
+    description TEXT,
+    fk_scene INTEGER
   );
   )";
   constexpr auto drop_all_events = R"( DELETE FROM events; )";
@@ -257,20 +259,22 @@ inline namespace sqlite3 {
                 , actor = :actor
                 , equipment = :equipment
                 , description = :description
+                , fk_scene = :fk_scene
           WHERE event_id = :id;
          )";
   constexpr auto delete_event_by_id
     = R"( DELETE FROM events WHERE event_id = :id; )";
   constexpr auto insert_or_update_events
     = R"( INSERT INTO events
-          (name, location, actor, equipment, description)
-          VALUES (:name, :location, :actor, :equipment, :description)
+          (name, location, actor, equipment, description, fk_scene)
+          VALUES (:name, :location, :actor, :equipment, :description, :fk_scene)
           ON CONFLICT (name)
           DO UPDATE SET name = excluded.name
                         , location = excluded.location
                         , actor = excluded.actor
                         , equipment = excluded.equipment
                         , description = excluded.description
+                        , fk_scene = excluded.fk_scene
           ;          
           )";
   //---------------------- INJURY STATEMENTS ------------------------
@@ -399,16 +403,18 @@ inline namespace sqlite3 {
     LOCATION_SCENE_NAME,
     LOCATION_TIME_OF_DAY,
     LOCATION_ENVIRONMENT,
+    LOCATION_FK_SCENE,
     LOCATION_COLUMN_COUNT
   };
 
   constexpr auto create_locations_table = R"(
   CREATE TABLE IF NOT EXISTS locations (
     location_id INTEGER PRIMARY KEY,
-    name Varchar(64) NOT NULL UNIQUE,
-    scene_name Varchar(64) NOT NULL UNIQUE,
+    name Varchar(64) NOT NULL,
+    scene_name Varchar(64),
     time_of_day TEXT,
-    environment TEXT
+    environment TEXT,
+    fk_scene INTEGER
   );
   )";
   constexpr auto drop_all_locations = R"( DELETE FROM locations; )";
@@ -423,26 +429,22 @@ inline namespace sqlite3 {
               , scene_name = :scene_name
               , time_of_day = :time_of_day
               , environment = :environment
+              , fk_scene = :fk_scene
           WHERE location_id = :id;
          )";
   constexpr auto delete_location_by_id
     = R"( DELETE FROM locations WHERE location_id = :id; )";
-  constexpr auto delete_location_by_name
-    = R"( DELETE FROM locations WHERE name = :name; )";
-  constexpr auto select_location_by_name
-    = R"( SELECT * FROM locations WHERE name = :name; )";
+  constexpr auto delete_location_by_fk
+    = R"( DELETE FROM locations WHERE fk_scene = :fk_scene; )";
+  constexpr auto select_location_by_fk
+    = R"( SELECT * FROM locations WHERE fk_scene = :fk_scene; )";
   constexpr auto select_location_by_scene_name
     = R"( SELECT * FROM locations WHERE scene_name = :scene_name; )";
   constexpr auto insert_or_update_locations
     = R"( INSERT INTO locations
-          (name,scene_name,time_of_day,environment)
-          VALUES (:name, :scene_name, :time_of_day, :environment)
-          ON CONFLICT (name)
-          DO UPDATE SET name = excluded.name
-                       , scene_name = excluded.scene_name
-                       , time_of_day = excluded.time_of_day
-                       , environment = excluded.environment
-         ;
+          (name,scene_name,time_of_day,environment,fk_scene)
+          VALUES (:name, :scene_name, :time_of_day, :environment, :fk_scene)
+          ;
          )";
   
   //---------------------- OBJECTIVE STATMENTS ------------------------
@@ -690,6 +692,7 @@ inline namespace sqlite3 {
     ROLE_ID,
     ROLE_NAME,
     ROLE_DESCRIPTION,
+    ROLE_FK_SCENE,
     ROLE_COLUMN_COUNT
   };
 
@@ -697,7 +700,8 @@ inline namespace sqlite3 {
   CREATE TABLE IF NOT EXISTS roles (
     role_id INTEGER PRIMARY KEY,
     name Varchar(64) NOT NULL UNIQUE,
-    description TEXT
+    description TEXT,
+    fk_scene INTEGER
   );
   )";
   constexpr auto drop_all_roles = R"( DELETE FROM roles; )";
@@ -710,6 +714,7 @@ inline namespace sqlite3 {
     = R"( UPDATE  roles
           SET description = :description 
               , name = :name
+              , fk_scene = :fk_scene
           WHERE role_id = :id;
          )";
   constexpr auto select_role_by_name
@@ -719,10 +724,11 @@ inline namespace sqlite3 {
 
   constexpr auto insert_or_update_roles
     = R"( INSERT INTO roles 
-          (name,description)
-          VALUES (:name, :description)
+          (name,description,fk_scene)
+          VALUES (:name, :description, :fk_scene)
           ON CONFLICT (name)
           DO UPDATE SET name = excluded.name
+                       , fk_scene = excluded.fk_scene
                        , description = excluded.description
          ;
          )";

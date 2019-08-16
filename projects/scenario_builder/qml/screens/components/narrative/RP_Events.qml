@@ -2,6 +2,7 @@ import QtQuick 2.10
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.12
+import QtQuick.Controls.Material 2.0
 
 import "../common"
 
@@ -10,11 +11,22 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 ColumnLayout {
   id: root
   property SQLBackend backend
-  readonly property alias model : listArea.model 
-  readonly property alias index : listArea.currentIndex
+  property ListModel model
+  property int index // = events.index
 
   Event {
     id : self
+  }
+
+  function update_event(values) {
+    obj.event_id = values.id
+    obj.name = values.name
+    obj.location = values.location
+    obj.actor = values.actor
+    obj.equipment = values.equipment
+    obj.description = values.description
+    obj.fk_scene = values.fk_scene
+    root.backend.update_event(obj)
   }
 
   Rectangle {
@@ -31,8 +43,8 @@ ColumnLayout {
       anchors.left : listRectangle.left
       anchors.right : listRectangle.right
       anchors.topMargin : 2
-      anchors.rightMargin  : 5
-      anchors.leftMargin  : 5
+      anchors.rightMargin : 5
+      anchors.leftMargin : 5
 
       property int next : 1
 
@@ -43,29 +55,38 @@ ColumnLayout {
       thirdButtonText : "Move Down"
 
       onFirstButtonClicked :{
-        if( next < root.model.count ) 
-        { next = root.model.count +1}
+        if( next < listArea.model.count ) 
+        { next = listArea.model.count +1}
         self.event_id = -1
         self.name = "New Event %1".arg(next)
+        self.location = -1
+        self.actor = -1
+        self.equipment = "New Equipment %1".arg(next)
         self.description = "Description of Event %1".arg(next)
-        self.citations = new Array()
-
+        console.log(JSON.stringify(root.model.get(root.index)))
+        self.fk_scene = root.model.get(root.index).id
         while( root.backend.select_event(self) )
         { 
          next = next +1
          self.event_id = -1; 
          self.name = "New Event %1".arg(next);
+         self.location = -1
+         self.actor = -1
+         self.equipment = "New Equipment %1".arg(next)
          self.description = "Description of Event %1".arg(next)
+         self.fk_scene = root.model.get(root.index).id
         } 
 
         root.backend.update_event(self)
-        root.model.insert(root.model.count,
+        listArea.model.insert(listArea.model.count,
           {
            "id" : self.event_id,
            "name": "%1".arg(self.name), 
-           "name": "%1".arg(self.name), 
-           "description": "%1".arg(self.description) , 
-           "citations": self.citations}
+           "location" : self.location,
+           "actor" : self.actor,
+           "equipment" : "%1".arg(self.equipment),
+           "description": "%1".arg(self.description),
+           "fk_scene": self.fk_scene}
         );
         ++next;
       }
@@ -78,7 +99,6 @@ ColumnLayout {
       onFourthButtonClicked : {
         self.event_id = -1
         self.name = root.model.get(root.index).name
-
         root.backend.remove_event(self)
         root.model.remove(root.index)
         listArea.currentIndex = Math.max(0,root.index-1)
@@ -169,7 +189,29 @@ ColumnLayout {
              id  : self.event_id,
              name: "%1".arg(self.name), 
              description: "%1".arg(self.description),
-             citations : self.citations 
+             fk_scene : self.fk_scene
+            });
+        }
+      }
+    }
+  }
+  onIndexChanged : {
+    console.log("onIndexChanged - Start")
+    var values = model.get(index)
+    if(values) {
+      listArea.model.clear()
+      root.backend.events() 
+      while ( root.backend.next_event(self) ) {
+        if ( self.fk_scene == root.model.get(root.index).id ) {
+          listArea.model.insert(listArea.model.count,
+          {
+            "event_id" : self.event_id,
+            "name" : "%1".arg(self.name),
+            "location" : self.location,
+            "actor" : self.actor,
+            "equipment" : "%1".arg(self.equipment),
+            "description" : "%1".arg(self.description),
+            "fk_scene" : self.fk_scene
             });
         }
       }

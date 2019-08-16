@@ -10,9 +10,8 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 Rectangle {
   id: root
   property alias currentIndex : narrative_tabs.currentIndex
-  property alias roleModel : roles.model
-
-  property alias roleIndex : roles.index
+  property ListModel model
+  property int index // creates new int, which is publicly assigned in ScenarioNarrative.qml
 
   property SQLBackend backend
   property ListElement modelData
@@ -60,18 +59,23 @@ Rectangle {
     		Layout.fillHeight: true
     		Layout.fillWidth: true
         backend : root.backend
+
     	}
     	RP_Roles {
         id: roles
     		Layout.fillHeight: true
     		Layout.fillWidth: true
         backend : root.backend
+        model : root.model
+        index : root.index
     	}
     	RP_Events {
         id: events
     		Layout.fillHeight: true
     		Layout.fillWidth: true
         backend : root.backend
+        model : root.model
+        index : root.index
     	}
     }
   }

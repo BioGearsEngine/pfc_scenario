@@ -146,6 +146,7 @@ struct Event : public QObject {
   Q_PROPERTY(int actor MEMBER actor)
   Q_PROPERTY(QString equipment MEMBER equipment)
   Q_PROPERTY(QString description MEMBER description)
+  Q_PROPERTY(int fk_scene MEMBER fk_scene)
 public:
   int32_t id = -1;
   QString name = "";
@@ -153,6 +154,7 @@ public:
   int32_t actor = -1;
   QString equipment;
   QString description = "";
+  int32_t fk_scene = -1;
 
   Event(QObject* parent = nullptr)
     : QObject(parent)
@@ -171,7 +173,8 @@ public:
       && location == rhs.location
       && actor == rhs.actor
       && equipment == rhs.equipment
-      && description == rhs.description;
+      && description == rhs.description
+      && fk_scene == rhs.fk_scene;
   }
   bool operator!=(const Event& rhs) const
   {
@@ -185,6 +188,7 @@ public:
     actor = rhs.actor;
     equipment = rhs.equipment;
     description = rhs.description;
+    fk_scene = rhs.fk_scene;
   }
 };
 //----End Event
@@ -348,6 +352,7 @@ struct Location : public QObject {
   Q_PROPERTY(QString scene_name MEMBER scene_name)
   Q_PROPERTY(QString time_of_day MEMBER time_of_day)
   Q_PROPERTY(QString environment MEMBER environment)
+  Q_PROPERTY(int fk_scene MEMBER fk_scene)
 
 public:
   int32_t id = -1;
@@ -355,6 +360,7 @@ public:
   QString scene_name = "";
   QString time_of_day = "";
   QString environment = "";
+  int32_t fk_scene = -1;
 
   Location(QObject* parent = nullptr)
     : QObject(parent)
@@ -372,7 +378,8 @@ public:
       && name == rhs.name
       && scene_name == rhs.scene_name
       && time_of_day == rhs.time_of_day
-      && environment == rhs.environment;
+      && environment == rhs.environment
+      && fk_scene == rhs.fk_scene;
   }
   bool operator!=(const Location& rhs) const
   {
@@ -385,6 +392,7 @@ public:
     scene_name = rhs.scene_name;
     time_of_day = rhs.time_of_day;
     environment = rhs.environment;
+    fk_scene = rhs.fk_scene;
   }
 };
 //----End Location
@@ -596,11 +604,12 @@ struct Role : public QObject {
   Q_PROPERTY(int role_id MEMBER id)
   Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString description MEMBER description)
+  Q_PROPERTY(int fk_scene MEMBER fk_scene)
 public:
   int32_t id = -1;
   QString name = "";
   QString description = "";
-
+  int32_t fk_scene = -1;
   Role(QObject* parent = nullptr)
     : QObject(parent)
   {
@@ -615,7 +624,8 @@ public:
   {
     return id == rhs.id
       && name == rhs.name
-      && description == rhs.description;
+      && description == rhs.description
+      && fk_scene == rhs.fk_scene;
   }
   bool operator!=(const Role& rhs) const
   {
@@ -626,6 +636,7 @@ public:
     id = rhs.id;
     name = rhs.name;
     description = rhs.description;
+    fk_scene = rhs.fk_scene;
   }
 };
 //----End Role

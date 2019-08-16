@@ -2,6 +2,7 @@ import QtQuick 2.10
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.12
+import QtQuick.Controls.Material 2.0
 
 import "../common"
 
@@ -10,11 +11,19 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 ColumnLayout {
   id: root
   property SQLBackend backend
-  readonly property alias model : listArea.model 
-  readonly property alias index : listArea.currentIndex
+  property ListModel model
+  property int index // = roles.index
 
   Role {
     id : self
+  }
+
+  function update_role(values) {
+    obj.role_id = values.id
+    obj.name = values.name
+    obj.description = values.description
+    obj.fk_scene = values.fk_scene
+    root.backend.update_role(obj)
   }
 
   Rectangle {
@@ -31,8 +40,8 @@ ColumnLayout {
       anchors.left : listRectangle.left
       anchors.right : listRectangle.right
       anchors.topMargin : 2
-      anchors.rightMargin  : 5
-      anchors.leftMargin  : 5
+      anchors.rightMargin : 5
+      anchors.leftMargin : 5
 
       property int next : 1
 
@@ -43,26 +52,29 @@ ColumnLayout {
       thirdButtonText : "Move Down"
 
       onFirstButtonClicked :{
-        if( next < root.model.count ) 
-        { next = root.model.count +1}
+        if( next < listArea.model.count ) 
+        { next = listArea.model.count +1}
         self.role_id = -1
         self.name = "New Role %1".arg(next)
         self.description = "Description of Role %1".arg(next)
-
+        console.log(JSON.stringify(root.model.get(root.index)))
+        self.fk_scene = root.model.get(root.index).id
         while( root.backend.select_role(self) )
         { 
          next = next +1
          self.role_id = -1; 
          self.name = "New Role %1".arg(next);
          self.description = "Description of Role %1".arg(next)
+         self.fk_scene = root.model.get(root.index).id
         } 
 
         root.backend.update_role(self)
-        root.model.insert(root.model.count,
+        listArea.model.insert(listArea.model.count,
           {
            "id" : self.role_id,
            "name": "%1".arg(self.name), 
-           "description": "%1".arg(self.description)}
+           "description": "%1".arg(self.description),
+           "fk_scene": self.fk_scene}
         );
         ++next;
       }
@@ -75,7 +87,6 @@ ColumnLayout {
       onFourthButtonClicked : {
         self.role_id = -1
         self.name = root.model.get(root.index).name
-
         root.backend.remove_role(self)
         root.model.remove(root.index)
         listArea.currentIndex = Math.max(0,root.index-1)
@@ -166,7 +177,26 @@ ColumnLayout {
              id  : self.role_id,
              name: "%1".arg(self.name), 
              description: "%1".arg(self.description),
-             citations : self.citations 
+             fk_scene : self.fk_scene
+            });
+        }
+      }
+    }
+  }
+  onIndexChanged : {
+    console.log("onIndexChanged - Start")
+    var values = model.get(index)
+    if(values) {
+      listArea.model.clear()
+      root.backend.roles() 
+      while ( root.backend.next_role(self) ) {
+        if ( self.fk_scene == root.model.get(root.index).id ) {
+          listArea.model.insert(listArea.model.count,
+          {
+            "role_id" : self.role_id,
+            "name" : "%1".arg(self.name),
+            "description" : "%1".arg(self.description),
+            "fk_scene" : self.fk_scene
             });
         }
       }

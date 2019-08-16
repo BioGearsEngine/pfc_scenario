@@ -25,5 +25,9 @@ RowLayout {
   RightPane{
     id : narrative_right
     backend : root.backend
+    model : narrative_left.model
+    index : narrative_left.index
+
+    onIndexChanged : console.log(index) 
   }
 }

@@ -13,6 +13,16 @@ ColumnLayout  {
     Layout.fillWidth: true
     Layout.fillHeight: true
 
+    function update_location(values) {
+      obj.location_id = values.id
+      obj.name = values.name
+      obj.scene_name = values.scene_name
+      obj.time_of_day = values.time_of_day
+      obj.environment = values.environment
+      obj.fk_scene = values.fk_scene  
+      root.backend.update_location(obj)
+    }
+
     TextEntry {
       Layout.fillWidth: true
       id: nameEntry

@@ -17,7 +17,9 @@ ColumnLayout {
   Scene {
     id : self
   }
-
+  Location {
+    id : location
+  }
   Rectangle {
     id : listRectangle
     Layout.fillWidth : true
@@ -62,6 +64,12 @@ ColumnLayout {
            "id" : self.scene_id,
            "name": "%1".arg(self.name)}
         );
+        location.fk_scene = self.scene_id
+        location.location_id = -1
+        location.name = "New Scene %1 Location".arg(next)
+        location.scene_name = "New Scene %1".arg(next)
+        root.backend.update_location(location)
+
         ++next;
       }
       onSecondButtonClicked :{

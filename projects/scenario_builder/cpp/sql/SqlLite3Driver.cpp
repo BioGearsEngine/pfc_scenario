@@ -886,6 +886,7 @@ inline void assign_event(QSqlRecord& record, Event& event)
   event.actor = record.value(EVENT_ACTOR).toInt();
   event.description = record.value(EVENT_DESCRIPTION).toString();
   event.equipment = record.value(EVENT_EQUIPMENT).toString();
+  event.fk_scene = record.value(EVENT_FK_SCENE).toInt();
 }
 int SQLite3Driver::event_count() const
 {
@@ -980,7 +981,7 @@ bool SQLite3Driver::update_event(Event* event)
     query.bindValue(":description", event->description);
     query.bindValue(":location", event->location);
     query.bindValue(":actor", event->actor);
-
+    query.bindValue(":fk_scene", event->fk_scene);
     if (!query.exec()) {
       qWarning() << query.lastError();
       return false;
@@ -1309,6 +1310,7 @@ inline void assign_location(const QSqlRecord& record, Location& location)
   location.scene_name = record.value(LOCATION_SCENE_NAME).toString();
   location.time_of_day = record.value(LOCATION_TIME_OF_DAY).toString();
   location.environment = record.value(LOCATION_ENVIRONMENT).toString();
+  location.fk_scene = record.value(LOCATION_FK_SCENE).toInt();
 }
 int SQLite3Driver::location_count() const
 {
@@ -1366,11 +1368,8 @@ bool SQLite3Driver::select_location(Location* location) const
       query.prepare(sqlite3::select_location_by_id);
       query.bindValue(":id", location->id);
     } else if (!location->name.isEmpty()) {
-      query.prepare(sqlite3::select_location_by_name);
-      query.bindValue(":name", location->name);
-    } else if (!location->scene_name.isEmpty()) {
-      query.prepare(sqlite3::select_location_by_scene_name);
-      query.bindValue(":scene_name", location->scene_name);
+      query.prepare(sqlite3::select_location_by_fk);
+      query.bindValue(":fk_scene", location->fk_scene);
     } else {
       qWarning() << "Provided Property has no id or name one is required";
       return false;
@@ -1404,7 +1403,7 @@ bool SQLite3Driver::update_location(Location* location)
     query.bindValue(":scene_name", location->scene_name);
     query.bindValue(":time_of_day", location->time_of_day);
     query.bindValue(":environment", location->environment);
-
+    query.bindValue(":fk_scene", location->fk_scene);
     if (!query.exec()) {
       qWarning() << query.lastError();
       return false;
@@ -1841,6 +1840,7 @@ inline void assign_role(QSqlRecord& record, Role& role)
   role.id = record.value(ROLE_ID).toInt();
   role.name = record.value(ROLE_NAME).toString();
   role.description = record.value(ROLE_DESCRIPTION).toString();
+  role.fk_scene = record.value(ROLE_FK_SCENE).toInt();
 }
 int SQLite3Driver::role_count() const
 {
@@ -1932,6 +1932,7 @@ bool SQLite3Driver::update_role(Role* role)
     }
     query.bindValue(":description", role->description);
     query.bindValue(":name", role->name);
+    query.bindValue(":fk_scene", role->fk_scene);
     if (!query.exec()) {
       qWarning() << query.lastError();
       return false;
