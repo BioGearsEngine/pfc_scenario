@@ -10,6 +10,9 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 ColumnLayout  {
     id: root
     property SQLBackend backend
+    property ListModel model
+    property int index
+
     Layout.fillWidth: true
     Layout.fillHeight: true
 
@@ -28,6 +31,14 @@ ColumnLayout  {
       id: nameEntry
       label : "Scene Name"
       placeholderText: "String Field (128 Characters)"
+      onEditingFinished : {
+        var entry = root.model.get(root.index)
+        if ( text != entry.name){
+          entry.name = text
+          console.log("updating Name filed for entry")
+          update_objective(entry)
+        }
+      }
     }
 
     TextEntry {
@@ -53,5 +64,11 @@ ColumnLayout  {
       label : "Environments"
       required: true
       placeholderText: "Weather Input Area"
+    }
+    onIndexChanged : {
+      var values = model.get(root.index)
+      if(values) {
+        nameEntry.text = root.model.get(root.index).name
+      }
     }
 }

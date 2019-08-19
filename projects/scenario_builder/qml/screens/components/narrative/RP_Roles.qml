@@ -184,7 +184,6 @@ ColumnLayout {
     }
   }
   onIndexChanged : {
-    console.log("onIndexChanged - Start")
     var values = model.get(index)
     if(values) {
       listArea.model.clear()

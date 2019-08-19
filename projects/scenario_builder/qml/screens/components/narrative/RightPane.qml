@@ -59,7 +59,8 @@ Rectangle {
     		Layout.fillHeight: true
     		Layout.fillWidth: true
         backend : root.backend
-
+        model : root.model
+        index : root.index
     	}
     	RP_Roles {
         id: roles
