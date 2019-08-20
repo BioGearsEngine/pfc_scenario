@@ -86,10 +86,10 @@ ColumnLayout {
       }
       onFourthButtonClicked : {
         self.role_id = -1
-        self.name = root.model.get(root.index).name
+        self.name = listArea.model.get(listArea.currentIndex).name
         root.backend.remove_role(self)
-        root.model.remove(root.index)
-        listArea.currentIndex = Math.max(0,root.index-1)
+        listArea.model.remove(listArea.currentIndex)
+        listArea.currentIndex = Math.max(0,listArea.currentIndex-1)
       }
     }
 
