@@ -51,10 +51,13 @@ ColumnLayout {
       firstButtonText : "Add"
       fourthButtonText : "Remove"
 
-      secondButtonText : "Move Up"
+      secondButtonText : "New"
       thirdButtonText : "Move Down"
 
       onFirstButtonClicked :{
+
+      }
+      onSecondButtonClicked :{
         if( next < listArea.model.count ) 
         { next = listArea.model.count +1}
         self.event_id = -1
@@ -89,9 +92,6 @@ ColumnLayout {
            "fk_scene": self.fk_scene}
         );
         ++next;
-      }
-      onSecondButtonClicked :{
-        console.log("Reordering Currently Unsupported!")
       }
       onThirdButtonClicked : {
         console.log("Reordering Currently Unsupported!")
