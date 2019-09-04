@@ -396,6 +396,84 @@ public:
   }
 };
 //----End Location
+struct Map : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int map_id MEMBER id)
+  Q_PROPERTY(int fk_scene MEMBER fk_scene)
+  Q_PROPERTY(int fk_role MEMBER fk_role)
+
+public:
+  int32_t id = -1;
+  int32_t fk_scene = -1;
+  int32_t fk_role = -1;
+
+  Map(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  Map(const Map&) = delete;
+  Map(Map&&) = delete;
+  Map& operator=(const Map&) = delete;
+  Map& operator=(Map&&) = delete;
+  virtual ~Map() = default;
+
+  bool operator==(const Map& rhs) const
+  {
+    return id == rhs.id
+      && fk_scene == rhs.fk_scene
+      && fk_role == rhs.fk_role;
+  }
+  bool operator!=(const Map& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const Map& rhs)
+  {
+    id = rhs.id;
+    fk_scene = rhs.fk_scene;
+    fk_role = rhs.fk_role;
+  }
+};
+//----End Map
+struct EventMap : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int map_id MEMBER id)
+  Q_PROPERTY(int fk_scene MEMBER fk_scene)
+  Q_PROPERTY(int fk_event MEMBER fk_event)
+
+public:
+  int32_t id = -1;
+  int32_t fk_scene = -1;
+  int32_t fk_event = -1;
+
+  EventMap(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  EventMap(const EventMap&) = delete;
+  EventMap(EventMap&&) = delete;
+  EventMap& operator=(const EventMap&) = delete;
+  EventMap& operator=(EventMap&&) = delete;
+  virtual ~EventMap() = default;
+
+  bool operator==(const EventMap& rhs) const
+  {
+    return id == rhs.id
+      && fk_scene == rhs.fk_scene
+      && fk_event == rhs.fk_event;
+  }
+  bool operator!=(const EventMap& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const EventMap& rhs)
+  {
+    id = rhs.id;
+    fk_scene = rhs.fk_scene;
+    fk_event = rhs.fk_event;
+  }
+};
+//----End Event_Map
 struct Objective : public QObject {
   Q_OBJECT
   Q_PROPERTY(int objective_id MEMBER id)
@@ -604,12 +682,10 @@ struct Role : public QObject {
   Q_PROPERTY(int role_id MEMBER id)
   Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString description MEMBER description)
-  Q_PROPERTY(int fk_scene MEMBER fk_scene)
 public:
   int32_t id = -1;
   QString name = "";
   QString description = "";
-  int32_t fk_scene = -1;
   Role(QObject* parent = nullptr)
     : QObject(parent)
   {
@@ -624,8 +700,7 @@ public:
   {
     return id == rhs.id
       && name == rhs.name
-      && description == rhs.description
-      && fk_scene == rhs.fk_scene;
+      && description == rhs.description;
   }
   bool operator!=(const Role& rhs) const
   {
@@ -636,7 +711,6 @@ public:
     id = rhs.id;
     name = rhs.name;
     description = rhs.description;
-    fk_scene = rhs.fk_scene;
   }
 };
 //----End Role

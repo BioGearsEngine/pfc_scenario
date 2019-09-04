@@ -39,6 +39,8 @@ public:
     INJURIES,
     INJURY_SETS,
     LOCATIONS,
+    MAPS,
+    EVENT_MAPS,
     OBJECTIVES,
     PROPERTIES,
     PROPS,
@@ -77,7 +79,10 @@ public:
   Q_INVOKABLE int injury_set_count() const;
   Q_INVOKABLE int assessment_count() const;
   Q_INVOKABLE int location_count() const;
+  Q_INVOKABLE int map_count() const;
+  Q_INVOKABLE int event_map_count() const;
   Q_INVOKABLE int role_count() const;
+  Q_INVOKABLE int role_count(Scene*) const;
   Q_INVOKABLE int prop_count() const;
   Q_INVOKABLE int event_count() const;
   Q_INVOKABLE int scene_count() const;
@@ -96,8 +101,12 @@ public:
   Q_INVOKABLE void assessments();
   Q_INVOKABLE void locations();
   Q_INVOKABLE void roles();
+  Q_INVOKABLE void roles_in_scene(Scene* scene);
+  Q_INVOKABLE void maps();
+  Q_INVOKABLE void event_maps();
   Q_INVOKABLE void props();
   Q_INVOKABLE void events();
+  Q_INVOKABLE void events_in_scene(Scene* scene);
   Q_INVOKABLE void scenes();
 
   Q_INVOKABLE bool next_author(Author*);
@@ -111,6 +120,8 @@ public:
   Q_INVOKABLE bool next_injury_set(InjurySet*);
   Q_INVOKABLE bool next_assessment(Assessment*);
   Q_INVOKABLE bool next_location(Location*);
+  Q_INVOKABLE bool next_map(Map*);
+  Q_INVOKABLE bool next_event_map(EventMap*);
   Q_INVOKABLE bool next_role(Role*);
   Q_INVOKABLE bool next_prop(Prop*);
   Q_INVOKABLE bool next_event(Event*);
@@ -127,6 +138,8 @@ public:
   Q_INVOKABLE bool select_injury_set(InjurySet*) const;
   Q_INVOKABLE bool select_assessment(Assessment*) const;
   Q_INVOKABLE bool select_location(Location*) const;
+  Q_INVOKABLE bool select_map(Map*) const;
+  Q_INVOKABLE bool select_event_map(EventMap*) const;
   Q_INVOKABLE bool select_role(Role*) const;
   Q_INVOKABLE bool select_prop(Prop*) const;
   Q_INVOKABLE bool select_event(Event*) const;
@@ -138,9 +151,13 @@ public:
   Q_INVOKABLE bool update_restriction(Restriction*);
   Q_INVOKABLE bool update_objective(Objective*);
   Q_INVOKABLE bool update_location(Location*);
+  Q_INVOKABLE bool update_map(Map*);
+  Q_INVOKABLE bool update_event_map(EventMap*);
   Q_INVOKABLE bool update_role(Role*);
+  Q_INVOKABLE bool update_role_in_scene(Scene*, Role*);
   Q_INVOKABLE bool update_prop(Prop*);
   Q_INVOKABLE bool update_event(Event*);
+  Q_INVOKABLE bool update_event_in_scene(Scene*, Event*);
   Q_INVOKABLE bool update_citation(Citation*);
   Q_INVOKABLE bool update_treatment(Treatment*);
   Q_INVOKABLE bool update_equipment(Equipment*);
@@ -160,9 +177,15 @@ public:
   Q_INVOKABLE bool remove_injury_set(InjurySet*);
   Q_INVOKABLE bool remove_assessment(Assessment*);
   Q_INVOKABLE bool remove_location(Location*);
+  Q_INVOKABLE bool remove_map(Map*);
+  Q_INVOKABLE bool remove_event_map(EventMap*);
+  Q_INVOKABLE bool remove_map_by_fk(Map*);
+  Q_INVOKABLE bool remove_event_map_by_fk(EventMap*);
   Q_INVOKABLE bool remove_role(Role*);
+  Q_INVOKABLE bool remove_role_from_scene(Role*,Scene*);
   Q_INVOKABLE bool remove_prop(Prop*);
   Q_INVOKABLE bool remove_event(Event*);
+  Q_INVOKABLE bool remove_event_from_scene(Event*,Scene*);
   Q_INVOKABLE bool remove_scene(Scene*);
 
   Q_INVOKABLE int raw_error() const { return _db.lastError().type(); };
@@ -188,6 +211,8 @@ signals:
   void injuriesChanged();
   void injurySetsChanged();
   void locationsChanged();
+  void mapsChanged();
+  void eventMapsChanged();
   void objectivesChanged();
   void propertiesChanged();
   void propsChanged();
@@ -204,6 +229,8 @@ signals:
   void injuryRemoved(int index);
   void injurySetRemoved(int index);
   void locationRemoved(int index);
+  void mapRemoved(int index);
+  void eventMapRemoved(int index);
   void objectiveRemoved(int index);
   void propertyRemoved(int index);
   void propRemoved(int index);
@@ -220,6 +247,8 @@ signals:
   void injuryUpdated(int index);
   void injurySetUpdated(int index);
   void locationUpdated(int index);
+  void mapUpdated(int index);
+  void eventMapUpdated(int index);
   void objectiveUpdated(int index);
   void propertyUpdated(int index);
   void propUpdated(int index);
@@ -249,6 +278,8 @@ private:
   QList<InjurySet*> _injury_sets;
   QList<Assessment*> _assessments;
   QList<Location*> _locations;
+  QList<Map*> _maps;
+  QList<EventMap*> _event_maps;
   QList<Role*> _roles;
   QList<Prop*> _props;
   QList<Event*> _events;
@@ -265,6 +296,8 @@ private:
   QList<InjurySet*>::iterator _current_injury_set;
   QList<Assessment*>::iterator _current_assessment;
   QList<Location*>::iterator _current_location;
+  QList<Map*>::iterator _current_map;
+  QList<EventMap*>::iterator _current_event_map;
   QList<Role*>::iterator _current_role;
   QList<Prop*>::iterator _current_prop;
   QList<Event*>::iterator _current_event;

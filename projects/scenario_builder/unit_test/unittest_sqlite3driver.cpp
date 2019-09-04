@@ -600,19 +600,19 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Event)
   event_1.name = "Barbecue";
   event_1.location = 1;
   event_1.actor = 2;
-  event_1.equipment = {"Grill","Spatula"};
+  event_1.equipment = "Spatula";
   event_1.description = "People cooking and eating meat outdoors";
 
   event_2.name = "Wedding";
   event_2.location = 3;
   event_2.actor = 4;
-  event_2.equipment = {"Tuxedo","Ring"};
+  event_2.equipment = "Tuxedo";
   event_2.description = "Two people getting married";
 
   event_3.name = "Funeral";
   event_3.location = 5;
   event_3.actor = 6;
-  event_3.equipment = {"Coffin","Body"};
+  event_3.equipment = "Coffin";
   event_3.description = "Burying a dead person";
 
   EXPECT_EQ(0, _db.event_count());
@@ -633,19 +633,19 @@ TEST_F(TEST_FIXTURE_NAME, Select_Event)
   event_1.name = "Barbecue";
   event_1.location = 1;
   event_1.actor = 2;
-  event_1.equipment = { "Grill", "Spatula" };
+  event_1.equipment = "Spatula";
   event_1.description = "People cooking and eating meat outdoors";
 
   event_2.name = "Wedding";
   event_2.location = 3;
   event_2.actor = 4;
-  event_2.equipment = { "Tuxedo", "Ring" };
+  event_2.equipment = "Tuxedo";
   event_2.description = "Two people getting married";
 
   event_3.name = "Funeral";
   event_3.location = 5;
   event_3.actor = 6;
-  event_3.equipment = { "Coffin", "Body" };
+  event_3.equipment = "Coffin";
   event_3.description = "Burying a dead person";
 
   EXPECT_EQ(0, _db.event_count());
@@ -681,19 +681,19 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Event)
   event_1.name = "Barbecue";
   event_1.location = 1;
   event_1.actor = 2;
-  event_1.equipment = { "Grill", "Spatula" };
+  event_1.equipment = "Spatula";
   event_1.description = "People cooking and eating meat outdoors";
 
   event_2.name = "Wedding";
   event_2.location = 3;
   event_2.actor = 4;
-  event_2.equipment = { "Tuxedo", "Ring" };
+  event_2.equipment = "Tuxedo";
   event_2.description = "Two people getting married";
 
   event_3.name = "Funeral";
   event_3.location = 5;
   event_3.actor = 6;
-  event_3.equipment = { "Coffin", "Body" };
+  event_3.equipment = "Coffin";
   event_3.description = "Burying a dead person";
 
   EXPECT_TRUE(_db.update_event(&event_1));
@@ -713,7 +713,7 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Event)
   event_1.name = "Barbecue";
   event_1.location = 1;
   event_1.actor = 2;
-  event_1.equipment = { "Grill", "Spatula" };
+  event_1.equipment = "Spatula";
   event_1.description = "People cooking and eating meat outdoors";
 
   event_2.name = "Barbecue";
@@ -849,7 +849,7 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Injury)
   EXPECT_TRUE(_db.select_injury(&injury_2));
   EXPECT_EQ(injury_1, injury_2);
 }
-//INJURY TESTS--------------------------------------------------------------
+//INJURY SET TESTS--------------------------------------------------------------
 TEST_F(TEST_FIXTURE_NAME, Insert_InjurySet)
 {
   using namespace pfc;
@@ -1030,18 +1030,11 @@ TEST_F(TEST_FIXTURE_NAME, Select_Location)
   location_2.time_of_day = "2:30PM";
   location_2.environment = "Office Floor";
 
-  location_3.name = "Restaurant";
-  location_3.scene_name = "Getting Dinner";
-  location_3.time_of_day = "3:00PM";
-  location_3.environment = "Booth";
-
   EXPECT_EQ(0, _db.location_count());
   EXPECT_TRUE(_db.update_location(&location_1));
   EXPECT_EQ(1, _db.location_count());
   EXPECT_TRUE(_db.update_location(&location_2));
   EXPECT_EQ(2, _db.location_count());
-  EXPECT_TRUE(_db.update_location(&location_3));
-  EXPECT_EQ(3, _db.location_count());
 
   Location id;
   Location name;
@@ -1049,18 +1042,14 @@ TEST_F(TEST_FIXTURE_NAME, Select_Location)
 
   id.id = 1;
   name.name = "Work Building";
-  scene_name.scene_name = "Getting Dinner";
 
   _db.select_location(&id);
   _db.select_location(&name);
-  _db.select_location(&scene_name);
 
   location_1.id = 1;
   EXPECT_EQ(location_1, id);
   location_2.id = 2;
   EXPECT_EQ(location_2, name);
-  location_3.id = 3;
-  EXPECT_EQ(location_3, scene_name);
 }
 TEST_F(TEST_FIXTURE_NAME, Remove_Location)
 {
@@ -1108,6 +1097,200 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Location)
   EXPECT_TRUE(_db.update_location(&location_1));
   EXPECT_TRUE(_db.select_location(&location_2));
   EXPECT_EQ(location_1, location_2);
+}
+//MAP TESTS------------------------------------------------------------------
+TEST_F(TEST_FIXTURE_NAME, Insert_Map)
+{
+  using namespace pfc;
+  Map map_1;
+  Map map_2;
+  Map map_3;
+
+  map_1.fk_scene = 1;
+  map_1.fk_role = 2;
+
+  map_2.fk_scene = 3;
+  map_2.fk_role = 4;
+
+  map_3.fk_scene = 5;
+  map_3.fk_role = 6;
+
+  EXPECT_EQ(0, _db.map_count());
+  EXPECT_TRUE(_db.update_map(&map_1));
+  EXPECT_EQ(1, _db.map_count());
+  EXPECT_TRUE(_db.update_map(&map_2));
+  EXPECT_EQ(2, _db.map_count());
+  EXPECT_TRUE(_db.update_map(&map_3));
+  EXPECT_EQ(3, _db.map_count());
+}
+TEST_F(TEST_FIXTURE_NAME, Select_Map)
+{
+  using namespace pfc;
+  Map map_1;
+  Map map_2;
+
+  map_1.fk_scene = 1;
+  map_1.fk_role = 2;
+
+  map_2.fk_scene = 3;
+  map_2.fk_role = 4;
+
+  EXPECT_EQ(0, _db.map_count());
+  EXPECT_TRUE(_db.update_map(&map_1));
+  EXPECT_EQ(1, _db.map_count());
+  EXPECT_TRUE(_db.update_map(&map_2));
+  EXPECT_EQ(2, _db.map_count());
+
+  Map id;
+  Map fk;
+
+  id.id = 1;
+  fk.fk_scene = 3;
+  fk.fk_role = 4;
+
+  _db.select_map(&id);
+  _db.select_map(&fk);
+
+  map_1.id = 1;
+  EXPECT_EQ(map_1, id);
+  map_2.id = 2;
+  EXPECT_EQ(map_2, fk);
+}
+TEST_F(TEST_FIXTURE_NAME, Remove_Map)
+{
+  using namespace pfc;
+  Map map_1;
+  Map map_2;
+  Map map_3;
+
+  map_1.fk_scene = 1;
+  map_1.fk_role = 2;
+
+  map_2.fk_scene = 3;
+  map_2.fk_role = 4;
+
+  map_3.fk_scene = 5;
+  map_3.fk_role = 6;
+
+  EXPECT_TRUE(_db.update_map(&map_1));
+  EXPECT_TRUE(_db.update_map(&map_2));
+  EXPECT_TRUE(_db.update_map(&map_3));
+  EXPECT_EQ(3, _db.map_count());
+  EXPECT_TRUE(_db.remove_map(&map_1));
+  EXPECT_TRUE(_db.remove_map(&map_3));
+  EXPECT_EQ(1, _db.map_count());
+}
+TEST_F(TEST_FIXTURE_NAME, Equality_Map)
+{
+  using namespace pfc;
+  Map map_1;
+  Map map_2;
+
+  map_1.fk_scene = 1;
+  map_1.fk_role = 2;
+
+  map_2.id = 1;
+
+  EXPECT_TRUE(_db.update_map(&map_1));
+  EXPECT_TRUE(_db.select_map(&map_2));
+  EXPECT_EQ(map_1, map_2);
+}
+//EVENT MAP TESTS------------------------------------------------------------------
+TEST_F(TEST_FIXTURE_NAME, Insert_EventMap)
+{
+  using namespace pfc;
+  EventMap event_map_1;
+  EventMap event_map_2;
+  EventMap event_map_3;
+
+  event_map_1.fk_scene = 1;
+  event_map_1.fk_event = 2;
+
+  event_map_2.fk_scene = 3;
+  event_map_2.fk_event = 4;
+
+  event_map_3.fk_scene = 5;
+  event_map_3.fk_event = 6;
+
+  EXPECT_EQ(0, _db.event_map_count());
+  EXPECT_TRUE(_db.update_event_map(&event_map_1));
+  EXPECT_EQ(1, _db.event_map_count());
+  EXPECT_TRUE(_db.update_event_map(&event_map_2));
+  EXPECT_EQ(2, _db.event_map_count());
+  EXPECT_TRUE(_db.update_event_map(&event_map_3));
+  EXPECT_EQ(3, _db.event_map_count());
+}
+TEST_F(TEST_FIXTURE_NAME, Select_EventMap)
+{
+  using namespace pfc;
+  EventMap event_map_1;
+  EventMap event_map_2;
+
+  event_map_1.fk_scene = 1;
+  event_map_1.fk_event = 2;
+
+  event_map_2.fk_scene = 3;
+  event_map_2.fk_event = 4;
+
+  EXPECT_EQ(0, _db.event_map_count());
+  EXPECT_TRUE(_db.update_event_map(&event_map_1));
+  EXPECT_EQ(1, _db.event_map_count());
+  EXPECT_TRUE(_db.update_event_map(&event_map_2));
+  EXPECT_EQ(2, _db.event_map_count());
+
+  EventMap id;
+  EventMap fk;
+
+  id.id = 1;
+  fk.fk_scene = 3;
+  fk.fk_event = 4;
+
+  _db.select_event_map(&id);
+  _db.select_event_map(&fk);
+
+  event_map_1.id = 1;
+  EXPECT_EQ(event_map_1, id);
+  event_map_2.id = 2;
+  EXPECT_EQ(event_map_2, fk);
+}
+TEST_F(TEST_FIXTURE_NAME, Remove_EventMap)
+{
+  using namespace pfc;
+  EventMap event_map_1;
+  EventMap event_map_2;
+  EventMap event_map_3;
+
+  event_map_1.fk_scene = 1;
+  event_map_1.fk_event = 2;
+
+  event_map_2.fk_scene = 3;
+  event_map_2.fk_event = 4;
+
+  event_map_3.fk_scene = 5;
+  event_map_3.fk_event = 6;
+
+  EXPECT_TRUE(_db.update_event_map(&event_map_1));
+  EXPECT_TRUE(_db.update_event_map(&event_map_2));
+  EXPECT_TRUE(_db.update_event_map(&event_map_3));
+  EXPECT_EQ(3, _db.event_map_count());
+  EXPECT_TRUE(_db.remove_event_map(&event_map_1));
+  EXPECT_TRUE(_db.remove_event_map(&event_map_3));
+  EXPECT_EQ(1, _db.event_map_count());
+}
+TEST_F(TEST_FIXTURE_NAME, Equality_EventMap)
+{
+  using namespace pfc;
+  EventMap event_map_1;
+  EventMap event_map_2;
+
+  event_map_1.fk_scene = 1;
+  event_map_1.fk_event = 2;
+
+  event_map_2.id = 1;
+
+  EXPECT_TRUE(_db.update_event_map(&event_map_1));
+  EXPECT_TRUE(_db.select_event_map(&event_map_2));
+  EXPECT_EQ(event_map_1, event_map_2);
 }
 //OBJECTIVE TESTS--------------------------------------------------------------
 TEST_F(TEST_FIXTURE_NAME, Insert_Objective)
@@ -1221,79 +1404,6 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Objective)
   EXPECT_TRUE(_db.select_objective(&objective_2));
   EXPECT_EQ(objective_1, objective_2);
 }
-//PROP TESTS--------------------------------------------------------------
-//TEST_F(TEST_FIXTURE_NAME, Insert_Prop)
-//{
-//  using namespace pfc;
-//  Prop prop_1;
-//  Prop prop_2;
-//  Prop prop_3;
-//
-//  prop_1.equipment = "Rubber duck";
-//
-//  prop_2.equipment = "Bobblehead";
-//
-//  prop_3.equipment = "Funko pop";
-//
-//  EXPECT_EQ(0, _db.prop_count());
-//  EXPECT_TRUE(_db.update_prop(&prop_1));
-//  EXPECT_EQ(1, _db.prop_count());
-//  EXPECT_TRUE(_db.update_prop(&prop_2));
-//  EXPECT_EQ(2, _db.prop_count());
-//  EXPECT_TRUE(_db.update_prop(&prop_3));
-//  EXPECT_EQ(3, _db.prop_count());
-//}
-//TEST_F(TEST_FIXTURE_NAME, Select_Prop)
-//{
-//  using namespace pfc;
-//  Prop prop_1;
-//  Prop prop_2;
-//  Prop prop_3;
-//
-//  prop_1.equipment = "Rubber duck";
-//
-//  prop_2.equipment = "Bobblehead";
-//
-//  prop_3.equipment = "Funko pop";
-//
-//  EXPECT_EQ(0, _db.prop_count());
-//  EXPECT_TRUE(_db.update_prop(&prop_1));
-//  EXPECT_EQ(1, _db.prop_count());
-//  EXPECT_TRUE(_db.update_prop(&prop_2));
-//  EXPECT_EQ(2, _db.prop_count());
-//  EXPECT_TRUE(_db.update_prop(&prop_3));
-//  EXPECT_EQ(3, _db.prop_count());
-//
-//  Prop id;
-//
-//  id.id = 1;
-//
-//  _db.select_prop(&id);
-//
-//  prop_1.id = 1;
-//  EXPECT_EQ(prop_1, id);
-//}
-//TEST_F(TEST_FIXTURE_NAME, Remove_Prop)
-//{
-//  using namespace pfc;
-//  Prop prop_1;
-//  Prop prop_2;
-//  Prop prop_3;
-//
-//  prop_1.equipment = "Rubber duck";
-//
-//  prop_2.equipment = "Bobblehead";
-//
-//  prop_3.equipment = "Funko pop";
-//
-//  EXPECT_TRUE(_db.update_prop(&prop_1));
-//  EXPECT_TRUE(_db.update_prop(&prop_2));
-//  EXPECT_TRUE(_db.update_prop(&prop_3));
-//  EXPECT_EQ(3, _db.prop_count());
-//  EXPECT_TRUE(_db.remove_prop(&prop_1));
-//  EXPECT_TRUE(_db.remove_prop(&prop_3));
-//  EXPECT_EQ(1, _db.prop_count());
-//}
 //PROPERTY TESTS--------------------------------------------------------------
 TEST_F(TEST_FIXTURE_NAME, Insert_Property)
 {
@@ -1580,6 +1690,99 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Role)
   EXPECT_TRUE(_db.select_role(&role_2));
   EXPECT_EQ(role_1, role_2);
 }
+//SCENE TESTS----------------------------------------------------------------
+TEST_F(TEST_FIXTURE_NAME, Insert_Scene)
+{
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+
+  scene_1.name = "Opening";
+
+  scene_2.name = "Middle";
+
+  scene_3.name = "Ending";
+
+  EXPECT_EQ(0, _db.scene_count());
+  EXPECT_TRUE(_db.update_scene(&scene_1));
+  EXPECT_EQ(1, _db.scene_count());
+  EXPECT_TRUE(_db.update_scene(&scene_2));
+  EXPECT_EQ(2, _db.scene_count());
+  EXPECT_TRUE(_db.update_scene(&scene_3));
+  EXPECT_EQ(3, _db.scene_count());
+}
+TEST_F(TEST_FIXTURE_NAME, Select_Scene)
+{
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+
+  scene_1.name = "Opening";
+
+  scene_2.name = "Middle";
+
+  scene_3.name = "Ending";
+
+  EXPECT_EQ(0, _db.scene_count());
+  EXPECT_TRUE(_db.update_scene(&scene_1));
+  EXPECT_EQ(1, _db.scene_count());
+  EXPECT_TRUE(_db.update_scene(&scene_2));
+  EXPECT_EQ(2, _db.scene_count());
+  EXPECT_TRUE(_db.update_scene(&scene_3));
+  EXPECT_EQ(3, _db.scene_count());
+
+  Scene id;
+  Scene name;
+
+  id.id = 1;
+  name.name = "Middle";
+
+  _db.select_scene(&id);
+  _db.select_scene(&name);
+
+  scene_1.id = 1;
+  EXPECT_EQ(scene_1, id);
+  scene_2.id = 2;
+  EXPECT_EQ(scene_2, name);
+}
+TEST_F(TEST_FIXTURE_NAME, Remove_Scene)
+{
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+
+  scene_1.name = "Opening";
+
+  scene_2.name = "Middle";
+
+  scene_3.name = "Ending";
+
+  EXPECT_TRUE(_db.update_scene(&scene_1));
+  EXPECT_TRUE(_db.update_scene(&scene_2));
+  EXPECT_TRUE(_db.update_scene(&scene_3));
+  EXPECT_EQ(3, _db.scene_count());
+  EXPECT_TRUE(_db.remove_scene(&scene_1));
+  EXPECT_TRUE(_db.remove_scene(&scene_3));
+  EXPECT_EQ(1, _db.scene_count());
+}
+TEST_F(TEST_FIXTURE_NAME, Equality_Scene)
+{
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+
+  scene_1.name = "Opening";
+
+  scene_2.name = "Opening";
+
+  EXPECT_TRUE(_db.update_scene(&scene_1));
+  EXPECT_TRUE(_db.select_scene(&scene_2));
+  EXPECT_EQ(scene_1, scene_2);
+}
 //TREATMENT TESTS--------------------------------------------------------------
 TEST_F(TEST_FIXTURE_NAME, Insert_Treatment)
 {
@@ -1717,9 +1920,286 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Treatment)
   EXPECT_TRUE(_db.select_treatment(&treatment_2));
   EXPECT_EQ(treatment_1, treatment_2);
 }
+//SCENE_MAP_ROLE TESTS--------------------------------------------------------
+TEST_F(TEST_FIXTURE_NAME, Map_Test_Role_Insertion)
+{
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+  Map map_1;
+  Map map_2;
+  Map map_3;
+  Map map_4;
+  Map map_5;
+  Map map_6;
+  Map map_7;
+  Map map_8;
+  Map map_9;
+  Role role_1;
+  Role role_2;
+  Role role_3;
+  scene_1.name = "Opening";
+  scene_2.name = "Middle";
+  scene_3.name = "Ending";
 
+  _db.update_scene(&scene_1);
+  _db.update_scene(&scene_2);
+  _db.update_scene(&scene_3);
 
+  _db.select_scene(&scene_1);
+  _db.select_scene(&scene_2);
+  _db.select_scene(&scene_3);
 
+  role_1.name = "Software Developer";
+  role_1.description = "Bash your head against a wall for 8 hours a day";
+  role_2.name = "Exterminator";
+  role_2.description = "Look for bugs 8 hours a day";
+  role_3.name = "Tailor";
+  role_3.description = "Make quick patches 8 hours a day";
+
+  _db.update_role(&role_1);
+  _db.update_role(&role_2);
+  _db.update_role(&role_3);
+
+  _db.select_role(&role_1);
+  _db.select_role(&role_2);
+  _db.select_role(&role_3);
+
+  EXPECT_EQ(0, _db.map_count());
+  _db.update_role_in_scene(&scene_1, &role_1);
+  EXPECT_EQ(1, _db.map_count());
+  _db.update_role_in_scene(&scene_1, &role_2);
+  EXPECT_EQ(2, _db.map_count());
+  _db.update_role_in_scene(&scene_1, &role_3);
+  EXPECT_EQ(3, _db.map_count());
+  _db.update_role_in_scene(&scene_2, &role_1);
+  EXPECT_EQ(4, _db.map_count());
+  _db.update_role_in_scene(&scene_2, &role_2);
+  EXPECT_EQ(5, _db.map_count());
+  _db.update_role_in_scene(&scene_2, &role_3);
+  EXPECT_EQ(6, _db.map_count());
+  _db.update_role_in_scene(&scene_3, &role_1);
+  EXPECT_EQ(7, _db.map_count());
+  _db.update_role_in_scene(&scene_3, &role_2);
+  EXPECT_EQ(8, _db.map_count());
+  _db.update_role_in_scene(&scene_3, &role_3);
+  EXPECT_EQ(9, _db.map_count());
+}
+TEST_F(TEST_FIXTURE_NAME, Map_Test_Role_Removal)
+{
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+  Map map_1;
+  Map map_2;
+  Map map_3;
+  Map map_4;
+  Map map_5;
+  Map map_6;
+  Map map_7;
+  Map map_8;
+  Map map_9;
+  Role role_1;
+  Role role_2;
+  Role role_3;
+  scene_1.name = "Opening";
+  scene_2.name = "Middle";
+  scene_3.name = "Ending";
+
+  _db.update_scene(&scene_1);
+  _db.update_scene(&scene_2);
+  _db.update_scene(&scene_3);
+
+  _db.select_scene(&scene_1);
+  _db.select_scene(&scene_2);
+  _db.select_scene(&scene_3);
+
+  role_1.name = "Software Developer";
+  role_1.description = "Bash your head against a wall for 8 hours a day";
+  role_2.name = "Exterminator";
+  role_2.description = "Look for bugs 8 hours a day";
+  role_3.name = "Tailor";
+  role_3.description = "Make quick patches 8 hours a day";
+
+  _db.update_role(&role_1);
+  _db.update_role(&role_2);
+  _db.update_role(&role_3);
+
+  _db.select_role(&role_1);
+  _db.select_role(&role_2);
+  _db.select_role(&role_3);
+
+  _db.update_role_in_scene(&scene_1, &role_1);
+  _db.update_role_in_scene(&scene_1, &role_2);
+  _db.update_role_in_scene(&scene_1, &role_3);
+  _db.update_role_in_scene(&scene_2, &role_1);
+  _db.update_role_in_scene(&scene_2, &role_2);
+  _db.update_role_in_scene(&scene_2, &role_3);
+  _db.update_role_in_scene(&scene_3, &role_1);
+  _db.update_role_in_scene(&scene_3, &role_2);
+  _db.update_role_in_scene(&scene_3, &role_3);
+
+  EXPECT_EQ(9, _db.map_count());
+  _db.remove_role_from_scene(&role_1, &scene_1);
+  EXPECT_EQ(8, _db.map_count());
+  _db.remove_role_from_scene(&role_1, &scene_2);
+  EXPECT_EQ(7, _db.map_count());
+  _db.remove_role_from_scene(&role_1, &scene_3);
+  EXPECT_EQ(6, _db.map_count());
+  _db.remove_role_from_scene(&role_2, &scene_1);
+  EXPECT_EQ(5, _db.map_count());
+  _db.remove_role_from_scene(&role_2, &scene_2);
+  EXPECT_EQ(4, _db.map_count());
+  _db.remove_role_from_scene(&role_2, &scene_3);
+  EXPECT_EQ(3, _db.map_count());
+  _db.remove_role_from_scene(&role_3, &scene_1);
+  EXPECT_EQ(2, _db.map_count());
+  _db.remove_role_from_scene(&role_3, &scene_2);
+  EXPECT_EQ(1, _db.map_count());
+  _db.remove_role_from_scene(&role_3, &scene_3);
+  EXPECT_EQ(0, _db.map_count());
+  EXPECT_EQ(3, _db.role_count());
+}
+TEST_F(TEST_FIXTURE_NAME, Map_Test_Role_Deletion)
+{
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+  Map map_1;
+  Map map_2;
+  Map map_3;
+  Map map_4;
+  Map map_5;
+  Map map_6;
+  Map map_7;
+  Map map_8;
+  Map map_9;
+  Role role_1;
+  Role role_2;
+  Role role_3;
+  scene_1.name = "Opening";
+  scene_2.name = "Middle";
+  scene_3.name = "Ending";
+
+  _db.update_scene(&scene_1);
+  _db.update_scene(&scene_2);
+  _db.update_scene(&scene_3);
+
+  _db.select_scene(&scene_1);
+  _db.select_scene(&scene_2);
+  _db.select_scene(&scene_3);
+
+  role_1.name = "Software Developer";
+  role_1.description = "Bash your head against a wall for 8 hours a day";
+  role_2.name = "Exterminator";
+  role_2.description = "Look for bugs 8 hours a day";
+  role_3.name = "Tailor";
+  role_3.description = "Make quick patches 8 hours a day";
+
+  _db.update_role(&role_1);
+  _db.update_role(&role_2);
+  _db.update_role(&role_3);
+
+  _db.select_role(&role_1);
+  _db.select_role(&role_2);
+  _db.select_role(&role_3);
+
+  _db.update_role_in_scene(&scene_1, &role_1);
+  _db.update_role_in_scene(&scene_1, &role_2);
+  _db.update_role_in_scene(&scene_1, &role_3);
+  _db.update_role_in_scene(&scene_2, &role_1);
+  _db.update_role_in_scene(&scene_2, &role_2);
+  _db.update_role_in_scene(&scene_2, &role_3);
+  _db.update_role_in_scene(&scene_3, &role_1);
+  _db.update_role_in_scene(&scene_3, &role_2);
+  _db.update_role_in_scene(&scene_3, &role_3);
+
+  EXPECT_EQ(9, _db.map_count());
+  EXPECT_EQ(3, _db.role_count(&scene_1));
+  EXPECT_EQ(3, _db.role_count(&scene_2));
+  EXPECT_EQ(3, _db.role_count(&scene_3));
+  _db.remove_role(&role_1);
+  EXPECT_EQ(6, _db.map_count());
+  EXPECT_EQ(2, _db.role_count(&scene_1));
+  EXPECT_EQ(2, _db.role_count(&scene_2));
+  EXPECT_EQ(2, _db.role_count(&scene_3));
+  _db.remove_role(&role_2);
+  EXPECT_EQ(3, _db.map_count());
+  EXPECT_EQ(1, _db.role_count(&scene_1));
+  EXPECT_EQ(1, _db.role_count(&scene_2));
+  EXPECT_EQ(1, _db.role_count(&scene_3));
+  _db.remove_role(&role_3);
+  EXPECT_EQ(0, _db.map_count());
+  EXPECT_EQ(0, _db.role_count(&scene_1));
+  EXPECT_EQ(0, _db.role_count(&scene_2));
+  EXPECT_EQ(0, _db.role_count(&scene_3));
+}
+TEST_F(TEST_FIXTURE_NAME, Map_Test_Scene_Deletion)
+{
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+  Map map_1;
+  Map map_2;
+  Map map_3;
+  Map map_4;
+  Map map_5;
+  Map map_6;
+  Map map_7;
+  Map map_8;
+  Map map_9;
+  Role role_1;
+  Role role_2;
+  Role role_3;
+  scene_1.name = "Opening";
+  scene_2.name = "Middle";
+  scene_3.name = "Ending";
+
+  _db.update_scene(&scene_1);
+  _db.update_scene(&scene_2);
+  _db.update_scene(&scene_3);
+
+  _db.select_scene(&scene_1);
+  _db.select_scene(&scene_2);
+  _db.select_scene(&scene_3);
+
+  role_1.name = "Software Developer";
+  role_1.description = "Bash your head against a wall for 8 hours a day";
+  role_2.name = "Exterminator";
+  role_2.description = "Look for bugs 8 hours a day";
+  role_3.name = "Tailor";
+  role_3.description = "Make quick patches 8 hours a day";
+
+  _db.update_role(&role_1);
+  _db.update_role(&role_2);
+  _db.update_role(&role_3);
+
+  _db.select_role(&role_1);
+  _db.select_role(&role_2);
+  _db.select_role(&role_3);
+
+  _db.update_role_in_scene(&scene_1, &role_1);
+  _db.update_role_in_scene(&scene_1, &role_2);
+  _db.update_role_in_scene(&scene_1, &role_3);
+  _db.update_role_in_scene(&scene_2, &role_1);
+  _db.update_role_in_scene(&scene_2, &role_2);
+  _db.update_role_in_scene(&scene_2, &role_3);
+  _db.update_role_in_scene(&scene_3, &role_1);
+  _db.update_role_in_scene(&scene_3, &role_2);
+  _db.update_role_in_scene(&scene_3, &role_3);
+
+  EXPECT_EQ(9, _db.map_count());
+  _db.remove_scene(&scene_1);
+  EXPECT_EQ(6, _db.map_count());
+  _db.remove_scene(&scene_2);
+  EXPECT_EQ(3, _db.map_count());
+  _db.remove_scene(&scene_3);
+  EXPECT_EQ(0, _db.map_count());
+}
 
 
 

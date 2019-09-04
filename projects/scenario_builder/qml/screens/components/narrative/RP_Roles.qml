@@ -17,12 +17,15 @@ ColumnLayout {
   Role {
     id : self
   }
+  Scene {
+    id : self_scene
+  }
+
 
   function update_role(values) {
     obj.role_id = values.id
     obj.name = values.name
     obj.description = values.description
-    obj.fk_scene = values.fk_scene
     root.backend.update_role(obj)
   }
   StackLayout {
@@ -48,22 +51,92 @@ ColumnLayout {
         property int next : 1  
 
         firstButtonText : "Add"
-        fourthButtonText : "Exit"  
-
         secondButtonText : "New"
         thirdButtonText : "Remove"  
+        fourthButtonText : "Exit"  
 
         onFirstButtonClicked :{
-
+          if ( next < full_listArea.count )
+          { next = full_listArea.model.count + 1 }
+          self.role_id = -1
+          self.name = full_listArea.model.get(full_listArea.currentIndex).name
+          self.description = full_listArea.model.get(full_listArea.currentIndex).description
+          console.log(JSON.stringify(root.model.get(root.index)))
+          self_scene.scene_id = root.model.get(root.index).id
+          self_scene.name = root.model.get(root.index).name
+          root.backend.update_role_in_scene(self_scene,self)
+          role_stack.currentIndex = 1
+          console.log("index changed----------")
+          role_stack.currentIndex = 1
+          var values = model.get(index)
+          if (values) {
+            listArea.model.clear()
+            self_scene.scene_id = root.model.get(root.index).id
+            self_scene.name = root.model.get(root.index).name
+            console.log(JSON.stringify(self_scene))
+            root.backend.roles_in_scene(self_scene)
+            while ( root.backend.next_role(self) ) {
+              console.log(JSON.stringify(self))
+              listArea.model.insert(listArea.model.count,
+              {
+                "role_id" : self.role_id,
+                "name" : "%1".arg(self.name),
+                "description" : "%1".arg(self.description)
+              });
+            }
+          }
         }
         onSecondButtonClicked :{
-
+          if ( next < full_listArea.count )
+          { next = full_listArea.model.count + 1 }
+          self.role_id = -1
+          self.name = "New Role %1".arg(next)
+          self.description = "Description of Role %1".arg(next)
+          console.log(JSON.stringify(root.model.get(root.index)))
+          self_scene.scene_id = root.model.get(root.index).id
+          self_scene.name = root.model.get(root.index).name
+          while( root.backend.select_role(self) )
+          {
+            next = next +1
+            self.role_id = -1
+            self.name = "New Role %1".arg(next)
+            self.description = "Description of Role %1".arg(next)
+          }
+          root.backend.update_role(self)
+          full_listArea.model.insert(listArea.model.count,
+            {
+            "id" : self.role_id,
+            "name" : "%1".arg(self.name),
+            "description" : "%1".arg(self.description)}
+          );
+          ++next;
         }
         onThirdButtonClicked : {
-
+          self.role_id = -1
+          self.name = full_listArea.model.get(full_listArea.currentIndex).name
+          root.backend.remove_role(self)
+          full_listArea.model.remove(full_listArea.currentIndex)
+          full_listArea.currentIndex = Math.max(0, full_listArea.currentIndex-1)
         }
         onFourthButtonClicked : {
           role_stack.currentIndex = 1
+          var values = model.get(index)
+          if (values) {
+            listArea.model.clear()
+            self_scene.scene_id = root.model.get(root.index).id
+            self_scene.name = root.model.get(root.index).name
+            console.log(JSON.stringify(self_scene))
+            root.backend.roles_in_scene(self_scene)
+            while ( root.backend.next_role(self) ) {
+              console.log(JSON.stringify(self))
+              listArea.model.insert(listArea.model.count,
+              {
+                "role_id" : self.role_id,
+                "name" : "%1".arg(self.name),
+                "description" : "%1".arg(self.description)
+              });
+            }
+          }
         }
       } 
 
@@ -177,8 +250,7 @@ ColumnLayout {
             {
               "role_id" : self.role_id,
               "name" : "%1".arg(self.name),
-              "description" : "%1".arg(self.description),
-              "fk_scene" : self.fk_scene              
+              "description" : "%1".arg(self.description)
               });
           }
         }
@@ -189,23 +261,22 @@ ColumnLayout {
           self.name = "New Role %1".arg(next)
           self.description = "Description of Role %1".arg(next)
           console.log(JSON.stringify(root.model.get(root.index)))
-          self.fk_scene = root.model.get(root.index).id
+          self_scene.scene_id = root.model.get(root.index).id
+          self_scene.name = root.model.get(root.index).name
           while( root.backend.select_role(self) )
           { 
            next = next +1
            self.role_id = -1; 
            self.name = "New Role %1".arg(next);
            self.description = "Description of Role %1".arg(next)
-           self.fk_scene = root.model.get(root.index).id
           }   
 
-          root.backend.update_role(self)
+          root.backend.update_role_in_scene(self_scene, self)
           listArea.model.insert(listArea.model.count,
             {
              "id" : self.role_id,
              "name": "%1".arg(self.name), 
-             "description": "%1".arg(self.description),
-             "fk_scene": self.fk_scene}
+             "description": "%1".arg(self.description)}
           );
           ++next;
         }
@@ -213,11 +284,15 @@ ColumnLayout {
           console.log("Reordering Currently Unsupported!")
         }
         onFourthButtonClicked : {
-          self.role_id = -1
-          self.name = full_listArea.model.get(full_listArea.currentIndex).name
-          root.backend.remove_role(self)
-          full_listArea.model.remove(full_listArea.currentIndex)
-          full_listArea.currentIndex = Math.max(0,full_listArea.currentIndex-1)
+          console.log(JSON.stringify(listArea.model.get(listArea.currentIndex)))
+          self.role_id = listArea.model.get(listArea.currentIndex).role_id
+          self.name = listArea.model.get(listArea.currentIndex).name
+          self_scene.scene_id = root.model.get(root.index).id
+          self_scene.name = root.model.get(root.index).name
+          console.log(JSON.stringify(self_scene))
+          root.backend.remove_role_from_scene(self,self_scene)
+          listArea.model.remove(listArea.currentIndex)
+          listArea.currentIndex = Math.max(0,listArea.currentIndex-1)
         }
       }  
 
@@ -304,8 +379,7 @@ ColumnLayout {
               {
                id  : self.role_id,
                name: "%1".arg(self.name), 
-               description: "%1".arg(self.description),
-               fk_scene : self.fk_scene
+               description: "%1".arg(self.description)
               });
           }
         }
@@ -313,21 +387,23 @@ ColumnLayout {
     }
   }
     onIndexChanged : {
+      console.log("index changed----------")
       role_stack.currentIndex = 1
       var values = model.get(index)
-      if(values) {
+      if (values) {
         listArea.model.clear()
-        root.backend.roles() 
+        self_scene.scene_id = root.model.get(root.index).id
+        self_scene.name = root.model.get(root.index).name
+        console.log(JSON.stringify(self_scene))
+        root.backend.roles_in_scene(self_scene)
         while ( root.backend.next_role(self) ) {
-          if ( self.fk_scene == root.model.get(root.index).id ) {
-            listArea.model.insert(listArea.model.count,
-            {
-              "role_id" : self.role_id,
-              "name" : "%1".arg(self.name),
-              "description" : "%1".arg(self.description),
-              "fk_scene" : self.fk_scene
-              });
-          }
+          console.log(JSON.stringify(self))
+          listArea.model.insert(listArea.model.count,
+          {
+            "role_id" : self.role_id,
+            "name" : "%1".arg(self.name),
+            "description" : "%1".arg(self.description)
+          });
         }
       }
     }

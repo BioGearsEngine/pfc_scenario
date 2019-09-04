@@ -32,6 +32,8 @@ inline namespace sqlite3 {
     "roles",
     "treatments",
     "scenes",
+    "maps",
+    "event_maps"
   };
 
   constexpr auto list_tables = "SELECT * FROM sqlite_master WHERE type='table';";
@@ -434,19 +436,141 @@ inline namespace sqlite3 {
          )";
   constexpr auto delete_location_by_id
     = R"( DELETE FROM locations WHERE location_id = :id; )";
-  constexpr auto delete_location_by_fk
-    = R"( DELETE FROM locations WHERE fk_scene = :fk_scene; )";
-  constexpr auto select_location_by_fk
-    = R"( SELECT * FROM locations WHERE fk_scene = :fk_scene; )";
-  constexpr auto select_location_by_scene_name
-    = R"( SELECT * FROM locations WHERE scene_name = :scene_name; )";
+  constexpr auto delete_location_by_name
+    = "R( DELETE FROM locations WHERE location_id = :id; )";
+  constexpr auto select_location_by_name
+    = R"( SELECT * FROM locations WHERE name = :name; )";
   constexpr auto insert_or_update_locations
     = R"( INSERT INTO locations
           (name,scene_name,time_of_day,environment,fk_scene)
           VALUES (:name, :scene_name, :time_of_day, :environment, :fk_scene)
           ;
          )";
-  
+  //--------------------------- MAP STATEMENTS ------------------------
+  enum MAP_COLUMNS {
+    MAP_ID,
+    MAP_FK_SCENE,
+    MAP_FK_ROLE,
+    MAP_COLUMN_COUNT
+  };
+
+//SELECT* FROM MAP_Scene_Role AS map
+//    JOIN Roles
+//      ON Roles.role_id
+//    = map.role
+//        WHERE map.scene
+//    = 2;
+
+  constexpr auto create_maps_table = R"(
+  CREATE TABLE IF NOT EXISTS maps (
+    map_id INTEGER PRIMARY KEY,
+    fk_scene INTEGER,
+    fk_role INTEGER
+  );
+  )";
+  constexpr auto drop_all_maps = R"( DELETE FROM maps; )";
+  constexpr auto count_maps = R"( SELECT COUNT(map_id) FROM maps; )";
+  constexpr auto select_all_maps = R"( SELECT * FROM maps; )";
+
+  constexpr auto select_map_by_id
+    = R"( SELECT * FROM maps WHERE map_id = :id ; )";
+  constexpr auto update_map_by_id
+    = R"( UPDATE  maps
+          SET fk_scene = :fk_scene
+              , fk_role = :fk_role
+          WHERE map_id = :id;
+         )";
+  constexpr auto delete_map_by_id
+    = R"( DELETE FROM maps WHERE map_id = :id; )";
+  constexpr auto delete_map_by_fk_scene
+    = R"( DELETE FROM maps WHERE fk_scene = :fk_scene; )";
+  constexpr auto delete_map_by_fk_role
+    = R"( DELETE FROM maps WHERE fk_role = :fk_role; )";
+  constexpr auto delete_map_by_fk
+    = R"( DELETE FROM maps WHERE fk_role = :fk_role AND fk_scene = :fk_scene )";
+  constexpr auto select_map_by_fk_scene
+    = R"( SELECT * FROM maps WHERE fk_scene = :fk_scene; )";
+  constexpr auto select_map_by_fk_role
+    = R"( SELECT * FROM maps WHERE fk_role = :fk_role; )";
+  constexpr auto select_map_by_fk
+    = R"( SELECT * FROM maps WHERE fk_role = :fk_role AND fk_scene = :fk_scene )";
+  constexpr auto insert_or_update_maps
+    = R"( INSERT INTO maps
+          (fk_scene,fk_role)
+          VALUES (:fk_scene,:fk_role)
+          ;
+         )";
+
+  constexpr auto select_scene_roles_by_fk_scene
+    = R"( SELECT * FROM maps AS map 
+          JOIN roles
+          ON roles.role_id = map.role
+          WHERE map.fk_scene = :id;)";
+
+  constexpr auto select_role_scenes_by_fk_role
+    = R"( SELECT * FROM maps as map
+          JOIN scenes
+          ON scenes.scene_id = map.scene
+          WHERE map.fk_role = :id)";
+  //--------------------------- EVENT MAP STATEMENTS ------------------
+  enum EVENT_MAP_COLUMNS {
+    EVENT_MAP_ID,
+    EVENT_MAP_FK_SCENE,
+    EVENT_MAP_FK_EVENT,
+    EVENT_MAP_COLUMN_COUNT
+  };
+
+  constexpr auto create_event_maps_table = R"(
+  CREATE TABLE IF NOT EXISTS event_maps (
+    event_map_id INTEGER PRIMARY KEY,
+    fk_scene INTEGER,
+    fk_event INTEGER
+  );
+  )";
+  constexpr auto drop_all_event_maps = R"( DELETE FROM event_maps; )";
+  constexpr auto count_event_maps = R"( SELECT COUNT(event_map_id) FROM event_maps; )";
+  constexpr auto select_all_event_maps = R"( SELECT * FROM event_maps; )";
+
+  constexpr auto select_event_map_by_id
+    = R"( SELECT * FROM event_maps WHERE event_map_id = :id ; )";
+  constexpr auto update_event_map_by_id
+    = R"( UPDATE  event_maps
+          SET fk_scene = :fk_scene
+              , fk_event = :fk_event
+          WHERE event_map_id = :id;
+         )";
+  constexpr auto delete_event_map_by_id
+    = R"( DELETE FROM event_maps WHERE event_map_id = :id; )";
+  constexpr auto delete_event_map_by_fk_scene
+    = R"( DELETE FROM event_maps WHERE fk_scene = :fk_scene; )";
+  constexpr auto delete_event_map_by_fk_event
+    = R"( DELETE FROM event_maps WHERE fk_event = :fk_event; )";
+  constexpr auto delete_event_map_by_fk
+    = R"( DELETE FROM event_maps WHERE fk_event = :fk_event AND fk_scene = :fk_scene )";
+  constexpr auto select_event_map_by_fk_scene
+    = R"( SELECT * FROM event_maps WHERE fk_scene = :fk_scene; )";
+  constexpr auto select_event_map_by_fk_event
+    = R"( SELECT * FROM event_maps WHERE fk_event = :fk_event; )";
+  constexpr auto select_event_map_by_fk
+    = R"( SELECT * FROM event_maps WHERE fk_event = :fk_event AND fk_scene = :fk_scene )";
+  constexpr auto insert_or_update_event_maps
+    = R"( INSERT INTO event_maps
+          (fk_scene,fk_event)
+          VALUES (:fk_scene,:fk_event)
+          ;
+         )";
+
+  constexpr auto select_scene_events_by_fk_scene
+    = R"( SELECT * FROM event_maps AS event_map 
+          JOIN roles
+          ON roles.role_id = event_map.role
+          WHERE event_map.fk_scene = :id;)";
+
+  constexpr auto select_event_scenes_by_fk_event
+    = R"( SELECT * FROM event_maps as event_map
+          JOIN scenes
+          ON scenes.scene_id = event_map.scene
+          WHERE event_map.fk_event = :id)";
   //---------------------- OBJECTIVE STATMENTS ------------------------
   enum OBJECTIVE_COLUMNS {
     OBJECTIVE_ID,
@@ -495,7 +619,7 @@ inline namespace sqlite3 {
     = R"( DELETE FROM objectives WHERE objective_id = :id; )";
   constexpr auto delete_objective_by_name
     = R"( DELETE FROM objectives WHERE name = :name; )";
-  //---------------------- PROP STATMENTS ------------------------
+  //---------------------- PROP STATEMENTS ------------------------
   enum PROP_COLUMNS {
     PROP_ID,
     PROP_EQUIPMENT,
@@ -692,7 +816,6 @@ inline namespace sqlite3 {
     ROLE_ID,
     ROLE_NAME,
     ROLE_DESCRIPTION,
-    ROLE_FK_SCENE,
     ROLE_COLUMN_COUNT
   };
 
@@ -700,12 +823,12 @@ inline namespace sqlite3 {
   CREATE TABLE IF NOT EXISTS roles (
     role_id INTEGER PRIMARY KEY,
     name Varchar(64) NOT NULL UNIQUE,
-    description TEXT,
-    fk_scene INTEGER
+    description TEXT
   );
   )";
   constexpr auto drop_all_roles = R"( DELETE FROM roles; )";
   constexpr auto count_roles = R"( SELECT COUNT(role_id) FROM roles; )";
+  constexpr auto count_roles_in_scene = R"( SELECT COUNT(map_id) FROM maps WHERE :id = fk_scene ; )";
   constexpr auto select_all_roles = R"( SELECT * FROM roles; )";
 
   constexpr auto select_role_by_id
@@ -714,21 +837,19 @@ inline namespace sqlite3 {
     = R"( UPDATE  roles
           SET description = :description 
               , name = :name
-              , fk_scene = :fk_scene
           WHERE role_id = :id;
          )";
   constexpr auto select_role_by_name
     = R"( SELECT * FROM roles WHERE name = :name ; )";
   constexpr auto delete_role_by_id
     = R"( DELETE FROM roles WHERE role_id = :id; )";
-
+  
   constexpr auto insert_or_update_roles
     = R"( INSERT INTO roles 
-          (name,description,fk_scene)
-          VALUES (:name, :description, :fk_scene)
+          (name,description)
+          VALUES (:name, :description)
           ON CONFLICT (name)
           DO UPDATE SET name = excluded.name
-                       , fk_scene = excluded.fk_scene
                        , description = excluded.description
          ;
          )";
