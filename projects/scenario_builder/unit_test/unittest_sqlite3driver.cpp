@@ -2200,6 +2200,284 @@ TEST_F(TEST_FIXTURE_NAME, Map_Test_Scene_Deletion)
   _db.remove_scene(&scene_3);
   EXPECT_EQ(0, _db.map_count());
 }
+//SCENE_MAP_EVENT TESTS------------------------------------------------------
+TEST_F(TEST_FIXTURE_NAME, EventMap_Test_Event_Insertion)
+{
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+  EventMap map_1;
+  EventMap map_2;
+  EventMap map_3;
+  EventMap map_4;
+  EventMap map_5;
+  EventMap map_6;
+  EventMap map_7;
+  EventMap map_8;
+  EventMap map_9;
+  Event event_1;
+  Event event_2;
+  Event event_3;
+  scene_1.name = "Opening";
+  scene_2.name = "Middle";
+  scene_3.name = "Ending";
 
+  _db.update_scene(&scene_1);
+  _db.update_scene(&scene_2);
+  _db.update_scene(&scene_3);
 
+  _db.select_scene(&scene_1);
+  _db.select_scene(&scene_2);
+  _db.select_scene(&scene_3);
+
+  event_1.name = "Software Developer";
+  event_1.description = "Bash your head against a wall for 8 hours a day";
+  event_2.name = "Exterminator";
+  event_2.description = "Look for bugs 8 hours a day";
+  event_3.name = "Tailor";
+  event_3.description = "Make quick patches 8 hours a day";
+
+  _db.update_event(&event_1);
+  _db.update_event(&event_2);
+  _db.update_event(&event_3);
+
+  _db.select_event(&event_1);
+  _db.select_event(&event_2);
+  _db.select_event(&event_3);
+
+  EXPECT_EQ(0, _db.event_map_count());
+  _db.update_event_in_scene(&scene_1, &event_1);
+  EXPECT_EQ(1, _db.event_map_count());
+  _db.update_event_in_scene(&scene_1, &event_2);
+  EXPECT_EQ(2, _db.event_map_count());
+  _db.update_event_in_scene(&scene_1, &event_3);
+  EXPECT_EQ(3, _db.event_map_count());
+  _db.update_event_in_scene(&scene_2, &event_1);
+  EXPECT_EQ(4, _db.event_map_count());
+  _db.update_event_in_scene(&scene_2, &event_2);
+  EXPECT_EQ(5, _db.event_map_count());
+  _db.update_event_in_scene(&scene_2, &event_3);
+  EXPECT_EQ(6, _db.event_map_count());
+  _db.update_event_in_scene(&scene_3, &event_1);
+  EXPECT_EQ(7, _db.event_map_count());
+  _db.update_event_in_scene(&scene_3, &event_2);
+  EXPECT_EQ(8, _db.event_map_count());
+  _db.update_event_in_scene(&scene_3, &event_3);
+  EXPECT_EQ(9, _db.event_map_count());
+}
+TEST_F(TEST_FIXTURE_NAME, EventMap_Test_Event_Removal)
+{
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+  EventMap map_1;
+  EventMap map_2;
+  EventMap map_3;
+  EventMap map_4;
+  EventMap map_5;
+  EventMap map_6;
+  EventMap map_7;
+  EventMap map_8;
+  EventMap map_9;
+  Event event_1;
+  Event event_2;
+  Event event_3;
+  scene_1.name = "Opening";
+  scene_2.name = "Middle";
+  scene_3.name = "Ending";
+
+  _db.update_scene(&scene_1);
+  _db.update_scene(&scene_2);
+  _db.update_scene(&scene_3);
+
+  _db.select_scene(&scene_1);
+  _db.select_scene(&scene_2);
+  _db.select_scene(&scene_3);
+
+  event_1.name = "Software Developer";
+  event_1.description = "Bash your head against a wall for 8 hours a day";
+  event_2.name = "Exterminator";
+  event_2.description = "Look for bugs 8 hours a day";
+  event_3.name = "Tailor";
+  event_3.description = "Make quick patches 8 hours a day";
+
+  _db.update_event(&event_1);
+  _db.update_event(&event_2);
+  _db.update_event(&event_3);
+
+  _db.select_event(&event_1);
+  _db.select_event(&event_2);
+  _db.select_event(&event_3);
+
+  _db.update_event_in_scene(&scene_1, &event_1);
+  _db.update_event_in_scene(&scene_1, &event_2);
+  _db.update_event_in_scene(&scene_1, &event_3);
+  _db.update_event_in_scene(&scene_2, &event_1);
+  _db.update_event_in_scene(&scene_2, &event_2);
+  _db.update_event_in_scene(&scene_2, &event_3);
+  _db.update_event_in_scene(&scene_3, &event_1);
+  _db.update_event_in_scene(&scene_3, &event_2);
+  _db.update_event_in_scene(&scene_3, &event_3);
+
+  EXPECT_EQ(9, _db.event_map_count());
+  _db.remove_event_from_scene(&event_1, &scene_1);
+  EXPECT_EQ(8, _db.event_map_count());
+  _db.remove_event_from_scene(&event_1, &scene_2);
+  EXPECT_EQ(7, _db.event_map_count());
+  _db.remove_event_from_scene(&event_1, &scene_3);
+  EXPECT_EQ(6, _db.event_map_count());
+  _db.remove_event_from_scene(&event_2, &scene_1);
+  EXPECT_EQ(5, _db.event_map_count());
+  _db.remove_event_from_scene(&event_2, &scene_2);
+  EXPECT_EQ(4, _db.event_map_count());
+  _db.remove_event_from_scene(&event_2, &scene_3);
+  EXPECT_EQ(3, _db.event_map_count());
+  _db.remove_event_from_scene(&event_3, &scene_1);
+  EXPECT_EQ(2, _db.event_map_count());
+  _db.remove_event_from_scene(&event_3, &scene_2);
+  EXPECT_EQ(1, _db.event_map_count());
+  _db.remove_event_from_scene(&event_3, &scene_3);
+  EXPECT_EQ(0, _db.event_map_count());
+  EXPECT_EQ(3, _db.event_count());
+}
+TEST_F(TEST_FIXTURE_NAME, EventMap_Test_Event_Deletion)
+{
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+  EventMap map_1;
+  EventMap map_2;
+  EventMap map_3;
+  EventMap map_4;
+  EventMap map_5;
+  EventMap map_6;
+  EventMap map_7;
+  EventMap map_8;
+  EventMap map_9;
+  Event event_1;
+  Event event_2;
+  Event event_3;
+  scene_1.name = "Opening";
+  scene_2.name = "Middle";
+  scene_3.name = "Ending";
+
+  _db.update_scene(&scene_1);
+  _db.update_scene(&scene_2);
+  _db.update_scene(&scene_3);
+
+  _db.select_scene(&scene_1);
+  _db.select_scene(&scene_2);
+  _db.select_scene(&scene_3);
+
+  event_1.name = "Software Developer";
+  event_1.description = "Bash your head against a wall for 8 hours a day";
+  event_2.name = "Exterminator";
+  event_2.description = "Look for bugs 8 hours a day";
+  event_3.name = "Tailor";
+  event_3.description = "Make quick patches 8 hours a day";
+
+  _db.update_event(&event_1);
+  _db.update_event(&event_2);
+  _db.update_event(&event_3);
+
+  _db.select_event(&event_1);
+  _db.select_event(&event_2);
+  _db.select_event(&event_3);
+
+  _db.update_event_in_scene(&scene_1, &event_1);
+  _db.update_event_in_scene(&scene_1, &event_2);
+  _db.update_event_in_scene(&scene_1, &event_3);
+  _db.update_event_in_scene(&scene_2, &event_1);
+  _db.update_event_in_scene(&scene_2, &event_2);
+  _db.update_event_in_scene(&scene_2, &event_3);
+  _db.update_event_in_scene(&scene_3, &event_1);
+  _db.update_event_in_scene(&scene_3, &event_2);
+  _db.update_event_in_scene(&scene_3, &event_3);
+
+  EXPECT_EQ(9, _db.event_map_count());
+  EXPECT_EQ(3, _db.event_count(&scene_1));
+  EXPECT_EQ(3, _db.event_count(&scene_2));
+  EXPECT_EQ(3, _db.event_count(&scene_3));
+  _db.remove_event(&event_1);
+  EXPECT_EQ(6, _db.event_map_count());
+  EXPECT_EQ(2, _db.event_count(&scene_1));
+  EXPECT_EQ(2, _db.event_count(&scene_2));
+  EXPECT_EQ(2, _db.event_count(&scene_3));
+  _db.remove_event(&event_2);
+  EXPECT_EQ(3, _db.event_map_count());
+  EXPECT_EQ(1, _db.event_count(&scene_1));
+  EXPECT_EQ(1, _db.event_count(&scene_2));
+  EXPECT_EQ(1, _db.event_count(&scene_3));
+  _db.remove_event(&event_3);
+  EXPECT_EQ(0, _db.event_map_count());
+  EXPECT_EQ(0, _db.event_count(&scene_1));
+  EXPECT_EQ(0, _db.event_count(&scene_2));
+  EXPECT_EQ(0, _db.event_count(&scene_3));
+}
+TEST_F(TEST_FIXTURE_NAME, EventMap_Test_Scene_Deletion)
+{
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+  Map map_1;
+  Map map_2;
+  Map map_3;
+  Map map_4;
+  Map map_5;
+  Map map_6;
+  Map map_7;
+  Map map_8;
+  Map map_9;
+  Event event_1;
+  Event event_2;
+  Event event_3;
+  scene_1.name = "Opening";
+  scene_2.name = "Middle";
+  scene_3.name = "Ending";
+
+  _db.update_scene(&scene_1);
+  _db.update_scene(&scene_2);
+  _db.update_scene(&scene_3);
+
+  _db.select_scene(&scene_1);
+  _db.select_scene(&scene_2);
+  _db.select_scene(&scene_3);
+
+  event_1.name = "Software Developer";
+  event_1.description = "Bash your head against a wall for 8 hours a day";
+  event_2.name = "Exterminator";
+  event_2.description = "Look for bugs 8 hours a day";
+  event_3.name = "Tailor";
+  event_3.description = "Make quick patches 8 hours a day";
+
+  _db.update_event(&event_1);
+  _db.update_event(&event_2);
+  _db.update_event(&event_3);
+
+  _db.select_event(&event_1);
+  _db.select_event(&event_2);
+  _db.select_event(&event_3);
+
+  _db.update_event_in_scene(&scene_1, &event_1);
+  _db.update_event_in_scene(&scene_1, &event_2);
+  _db.update_event_in_scene(&scene_1, &event_3);
+  _db.update_event_in_scene(&scene_2, &event_1);
+  _db.update_event_in_scene(&scene_2, &event_2);
+  _db.update_event_in_scene(&scene_2, &event_3);
+  _db.update_event_in_scene(&scene_3, &event_1);
+  _db.update_event_in_scene(&scene_3, &event_2);
+  _db.update_event_in_scene(&scene_3, &event_3);
+
+  EXPECT_EQ(9, _db.event_map_count());
+  _db.remove_scene(&scene_1);
+  EXPECT_EQ(6, _db.event_map_count());
+  _db.remove_scene(&scene_2);
+  EXPECT_EQ(3, _db.event_map_count());
+  _db.remove_scene(&scene_3);
+  EXPECT_EQ(0, _db.event_map_count());
+}
 

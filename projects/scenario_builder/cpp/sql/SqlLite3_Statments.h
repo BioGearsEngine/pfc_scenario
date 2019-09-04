@@ -231,7 +231,6 @@ inline namespace sqlite3 {
     EVENT_ACTOR,
     EVENT_EQUIPMENT,
     EVENT_DESCRIPTION,
-    EVENT_FK_SCENE,
     EVENT_COLUMN_COUNT
   };
 
@@ -242,12 +241,12 @@ inline namespace sqlite3 {
     location INTEGER, 
     actor INTEGER,
     equipment TEXT,
-    description TEXT,
-    fk_scene INTEGER
+    description TEXT
   );
   )";
   constexpr auto drop_all_events = R"( DELETE FROM events; )";
   constexpr auto count_events = R"( SELECT COUNT(event_id) FROM events; )";
+  constexpr auto count_events_in_scene = R"( SELECT COUNT(event_map_id) FROM event_maps WHERE :id = fk_scene ; )";
   constexpr auto select_all_events = R"( SELECT * FROM events; )";
 
   constexpr auto select_event_by_id
@@ -261,22 +260,20 @@ inline namespace sqlite3 {
                 , actor = :actor
                 , equipment = :equipment
                 , description = :description
-                , fk_scene = :fk_scene
           WHERE event_id = :id;
          )";
   constexpr auto delete_event_by_id
     = R"( DELETE FROM events WHERE event_id = :id; )";
   constexpr auto insert_or_update_events
     = R"( INSERT INTO events
-          (name, location, actor, equipment, description, fk_scene)
-          VALUES (:name, :location, :actor, :equipment, :description, :fk_scene)
+          (name, location, actor, equipment, description)
+          VALUES (:name, :location, :actor, :equipment, :description)
           ON CONFLICT (name)
           DO UPDATE SET name = excluded.name
                         , location = excluded.location
                         , actor = excluded.actor
                         , equipment = excluded.equipment
                         , description = excluded.description
-                        , fk_scene = excluded.fk_scene
           ;          
           )";
   //---------------------- INJURY STATEMENTS ------------------------

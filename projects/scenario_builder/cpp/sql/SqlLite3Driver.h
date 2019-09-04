@@ -85,6 +85,7 @@ public:
   Q_INVOKABLE int role_count(Scene*) const;
   Q_INVOKABLE int prop_count() const;
   Q_INVOKABLE int event_count() const;
+  Q_INVOKABLE int event_count(Scene*) const;
   Q_INVOKABLE int scene_count() const;
 
   Q_INVOKABLE int nextID(Sqlite3Table) const;

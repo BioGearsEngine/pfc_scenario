@@ -1591,7 +1591,7 @@ bool SQLite3Driver::remove_event_map_by_fk(EventMap* map)
   if (_db.isOpen()) {
     QSqlQuery query(_db);
     if (select_event_map(map)) {
-      query.prepare(sqlite3::delete_map_by_fk);
+      query.prepare(sqlite3::delete_event_map_by_fk);
       query.bindValue(":fk_scene", map->fk_scene);
       query.bindValue(":fk_event", map->fk_event);
       if (!query.exec()) {
@@ -1616,7 +1616,6 @@ inline void assign_event(QSqlRecord& record, Event& event)
   event.actor = record.value(EVENT_ACTOR).toInt();
   event.description = record.value(EVENT_DESCRIPTION).toString();
   event.equipment = record.value(EVENT_EQUIPMENT).toString();
-  event.fk_scene = record.value(EVENT_FK_SCENE).toInt();
 }
 int SQLite3Driver::event_count() const
 {
@@ -1624,6 +1623,22 @@ int SQLite3Driver::event_count() const
 
     QSqlQuery query{ _db };
     query.prepare(sqlite3::count_events);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
+int SQLite3Driver::event_count(Scene* scene) const
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_events_in_scene);
+    query.bindValue(":id", scene->id);
     query.exec();
     if (query.next()) {
       auto record = query.record();
@@ -1748,7 +1763,6 @@ bool SQLite3Driver::update_event(Event* event)
     query.bindValue(":description", event->description);
     query.bindValue(":location", event->location);
     query.bindValue(":actor", event->actor);
-    query.bindValue(":fk_scene", event->fk_scene);
     if (!query.exec()) {
       qWarning() << query.lastError();
       return false;

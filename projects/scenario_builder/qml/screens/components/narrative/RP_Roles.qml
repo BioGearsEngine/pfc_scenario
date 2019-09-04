@@ -66,8 +66,6 @@ ColumnLayout {
           self_scene.name = root.model.get(root.index).name
           root.backend.update_role_in_scene(self_scene,self)
           role_stack.currentIndex = 1
-          console.log("index changed----------")
-          role_stack.currentIndex = 1
           var values = model.get(index)
           if (values) {
             listArea.model.clear()
@@ -289,7 +287,6 @@ ColumnLayout {
           self.name = listArea.model.get(listArea.currentIndex).name
           self_scene.scene_id = root.model.get(root.index).id
           self_scene.name = root.model.get(root.index).name
-          console.log(JSON.stringify(self_scene))
           root.backend.remove_role_from_scene(self,self_scene)
           listArea.model.remove(listArea.currentIndex)
           listArea.currentIndex = Math.max(0,listArea.currentIndex-1)
