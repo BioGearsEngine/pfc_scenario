@@ -568,6 +568,124 @@ inline namespace sqlite3 {
           JOIN scenes
           ON scenes.scene_id = event_map.scene
           WHERE event_map.fk_event = :id)";
+  //--------------------------- PROP MAP STATEMENTS ------------------
+  enum PROP_MAP_COLUMNS {
+    PROP_MAP_ID,
+    PROP_MAP_FK_SCENE,
+    PROP_MAP_FK_PROP,
+    PROP_MAP_COLUMN_COUNT
+  };
+
+  constexpr auto create_prop_maps_table = R"(
+  CREATE TABLE IF NOT EXISTS prop_maps (
+    prop_map_id INTEGER PRIMARY KEY,
+    fk_scene INTEGER,
+    fk_prop INTEGER
+  );
+  )";
+  constexpr auto drop_all_prop_maps = R"( DELETE FROM prop_maps; )";
+  constexpr auto count_prop_maps = R"( SELECT COUNT(prop_map_id) FROM prop_maps; )";
+  constexpr auto select_all_prop_maps = R"( SELECT * FROM prop_maps; )";
+
+  constexpr auto select_prop_map_by_id
+    = R"( SELECT * FROM prop_maps WHERE prop_map_id = :id ; )";
+  constexpr auto update_prop_map_by_id
+    = R"( UPDATE  prop_maps
+          SET fk_scene = :fk_scene
+              , fk_prop = :fk_prop
+          WHERE prop_map_id = :id;
+         )";
+  constexpr auto delete_prop_map_by_id
+    = R"( DELETE FROM prop_maps WHERE prop_map_id = :id; )";
+  constexpr auto delete_prop_map_by_fk_scene
+    = R"( DELETE FROM prop_maps WHERE fk_scene = :fk_scene; )";
+  constexpr auto delete_prop_map_by_fk_prop
+    = R"( DELETE FROM prop_maps WHERE fk_prop = :fk_prop; )";
+  constexpr auto delete_prop_map_by_fk
+    = R"( DELETE FROM prop_maps WHERE fk_prop = :fk_prop AND fk_scene = :fk_scene )";
+  constexpr auto select_prop_map_by_fk_scene
+    = R"( SELECT * FROM prop_maps WHERE fk_scene = :fk_scene; )";
+  constexpr auto select_prop_map_by_fk_prop
+    = R"( SELECT * FROM prop_maps WHERE fk_prop = :fk_prop; )";
+  constexpr auto select_prop_map_by_fk
+    = R"( SELECT * FROM prop_maps WHERE fk_prop = :fk_prop AND fk_scene = :fk_scene )";
+  constexpr auto insert_or_update_prop_maps
+    = R"( INSERT INTO prop_maps
+          (fk_scene,fk_prop)
+          VALUES (:fk_scene,:fk_prop)
+          ;
+         )";
+
+  constexpr auto select_scene_props_by_fk_scene
+    = R"( SELECT * FROM prop_maps AS prop_map 
+          JOIN roles
+          ON roles.role_id = prop_map.role
+          WHERE prop_map.fk_scene = :id;)";
+
+  constexpr auto select_prop_scenes_by_fk_prop
+    = R"( SELECT * FROM prop_maps as prop_map
+          JOIN scenes
+          ON scenes.scene_id = prop_map.scene
+          WHERE prop_map.fk_prop = :id)";
+  //--------------------------- CITATION MAP STATEMENTS ------------------
+  enum CITATION_MAP_COLUMNS {
+    CITATION_MAP_ID,
+    CITATION_MAP_FK_SCENE,
+    CITATION_MAP_FK_CITATION,
+    CITATION_MAP_COLUMN_COUNT
+  };
+
+  constexpr auto create_citation_maps_table = R"(
+  CREATE TABLE IF NOT EXISTS citation_maps (
+    citation_map_id INTEGER PRIMARY KEY,
+    fk_scene INTEGER,
+    fk_citation INTEGER
+  );
+  )";
+  constexpr auto drop_all_citation_maps = R"( DELETE FROM citation_maps; )";
+  constexpr auto count_citation_maps = R"( SELECT COUNT(citation_map_id) FROM citation_maps; )";
+  constexpr auto select_all_citation_maps = R"( SELECT * FROM citation_maps; )";
+
+  constexpr auto select_citation_map_by_id
+    = R"( SELECT * FROM citation_maps WHERE citation_map_id = :id ; )";
+  constexpr auto update_citation_map_by_id
+    = R"( UPDATE  citation_maps
+          SET fk_scene = :fk_scene
+              , fk_citation = :fk_citation
+          WHERE citation_map_id = :id;
+         )";
+  constexpr auto delete_citation_map_by_id
+    = R"( DELETE FROM citation_maps WHERE citation_map_id = :id; )";
+  constexpr auto delete_citation_map_by_fk_scene
+    = R"( DELETE FROM citation_maps WHERE fk_scene = :fk_scene; )";
+  constexpr auto delete_citation_map_by_fk_citation
+    = R"( DELETE FROM citation_maps WHERE fk_citation = :fk_citation; )";
+  constexpr auto delete_citation_map_by_fk
+    = R"( DELETE FROM citation_maps WHERE fk_citation = :fk_citation AND fk_scene = :fk_scene )";
+  constexpr auto select_citation_map_by_fk_scene
+    = R"( SELECT * FROM citation_maps WHERE fk_scene = :fk_scene; )";
+  constexpr auto select_citation_map_by_fk_citation
+    = R"( SELECT * FROM citation_maps WHERE fk_citation = :fk_citation; )";
+  constexpr auto select_citation_map_by_fk
+    = R"( SELECT * FROM citation_maps WHERE fk_citation = :fk_citation AND fk_scene = :fk_scene )";
+  constexpr auto insert_or_update_citation_maps
+    = R"( INSERT INTO citation_maps
+          (fk_scene,fk_citation)
+          VALUES (:fk_scene,:fk_citation)
+          ;
+         )";
+
+  constexpr auto select_scene_citations_by_fk_scene
+    = R"( SELECT * FROM citation_maps AS citation_map 
+          JOIN roles
+          ON roles.role_id = citation_map.role
+          WHERE citation_map.fk_scene = :id;)";
+
+  constexpr auto select_citation_scenes_by_fk_citation
+    = R"( SELECT * FROM citation_maps as citation_map
+          JOIN scenes
+          ON scenes.scene_id = citation_map.scene
+          WHERE citation_map.fk_citation = :id)";
   //---------------------- OBJECTIVE STATMENTS ------------------------
   enum OBJECTIVE_COLUMNS {
     OBJECTIVE_ID,
@@ -694,7 +812,7 @@ inline namespace sqlite3 {
   constexpr auto delete_property_by_name
     = R"( DELETE FROM properties WHERE name = :name; )";
   
-  //---------------------- CITATION STATMENTS ------------------------
+  //---------------------- CITATION STATEMENTS ------------------------
   enum CITATION_COLUMNS {
     CITATION_ID,
     CITATION_KEY,

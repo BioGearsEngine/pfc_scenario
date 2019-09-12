@@ -470,6 +470,84 @@ public:
   }
 };
 //----End Event_Map
+struct PropMap : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int map_id MEMBER id)
+  Q_PROPERTY(int fk_scene MEMBER fk_scene)
+  Q_PROPERTY(int fk_prop MEMBER fk_prop)
+
+public:
+  int32_t id = -1;
+  int32_t fk_scene = -1;
+  int32_t fk_prop = -1;
+
+  PropMap(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  PropMap(const PropMap&) = delete;
+  PropMap(PropMap&&) = delete;
+  PropMap& operator=(const PropMap&) = delete;
+  PropMap& operator=(PropMap&&) = delete;
+  virtual ~PropMap() = default;
+
+  bool operator==(const PropMap& rhs) const
+  {
+    return id == rhs.id
+      && fk_scene == rhs.fk_scene
+      && fk_prop == rhs.fk_prop;
+  }
+  bool operator!=(const PropMap& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const PropMap& rhs)
+  {
+    id = rhs.id;
+    fk_scene = rhs.fk_scene;
+    fk_prop = rhs.fk_prop;
+  }
+};
+//----End Prop_Map
+struct CitationMap : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int map_id MEMBER id)
+  Q_PROPERTY(int fk_scene MEMBER fk_scene)
+  Q_PROPERTY(int fk_citation MEMBER fk_citation)
+
+public:
+  int32_t id = -1;
+  int32_t fk_scene = -1;
+  int32_t fk_citation = -1;
+
+  CitationMap(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  CitationMap(const CitationMap&) = delete;
+  CitationMap(CitationMap&&) = delete;
+  CitationMap& operator=(const CitationMap&) = delete;
+  CitationMap& operator=(CitationMap&&) = delete;
+  virtual ~CitationMap() = default;
+
+  bool operator==(const CitationMap& rhs) const
+  {
+    return id == rhs.id
+      && fk_scene == rhs.fk_scene
+      && fk_citation == rhs.fk_citation;
+  }
+  bool operator!=(const CitationMap& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const CitationMap& rhs)
+  {
+    id = rhs.id;
+    fk_scene = rhs.fk_scene;
+    fk_citation = rhs.fk_citation;
+  }
+};
+//----End Citation_Map
 struct Objective : public QObject {
   Q_OBJECT
   Q_PROPERTY(int objective_id MEMBER id)

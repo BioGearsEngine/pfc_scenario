@@ -1607,6 +1607,159 @@ bool SQLite3Driver::remove_event_map_by_fk(EventMap* map)
   qWarning() << "No Database connection";
   return false;
 }
+//-----------------------------PROP MAP------------------------------------------
+inline void assign_prop_map(const QSqlRecord& record, PropMap& map)
+{
+  map.id = record.value(PROP_MAP_ID).toInt();
+  map.fk_scene = record.value(PROP_MAP_FK_SCENE).toInt();
+  map.fk_prop = record.value(PROP_MAP_FK_PROP).toInt();
+}
+int SQLite3Driver::prop_map_count() const
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_prop_maps);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
+void SQLite3Driver::prop_maps()
+{
+  qDeleteAll(_prop_maps);
+  _prop_maps.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_prop_maps);
+    query.exec();
+    while (query.next()) {
+      auto map = std::make_unique<pfc::PropMap>();
+      auto record = query.record();
+      assert(record.count() == PROP_MAP_COLUMN_COUNT);
+      assign_prop_map(record, *map);
+      _prop_maps.push_back(map.release());
+    }
+    _current_prop_map = _prop_maps.begin();
+    emit propMapsChanged();
+  }
+}
+bool SQLite3Driver::next_prop_map(PropMap* map)
+{
+  if (_current_prop_map == _prop_maps.end() || _prop_maps.empty()) {
+    return false;
+  }
+  map->assign(*(*_current_prop_map));
+  ++_current_map;
+
+  return true;
+}
+bool SQLite3Driver::select_prop_map(PropMap* map) const
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    QSqlRecord record;
+    if (map->id != -1) {
+      query.prepare(sqlite3::select_prop_map_by_id);
+      query.bindValue(":id", map->id);
+    } else if (map->fk_scene != -1) {
+      query.prepare(sqlite3::select_prop_map_by_fk);
+      query.bindValue(":fk_scene", map->fk_scene);
+      query.bindValue(":fk_prop", map->fk_prop);
+    } else {
+      qWarning() << "Provided Property has no id, fk_scene, or fk_prop one is required";
+      return false;
+    }
+    if (query.exec()) {
+      while (query.next()) {
+        record = query.record();
+        assign_prop_map(record, *map);
+        return true;
+      }
+    } else {
+      qWarning() << query.lastError();
+    }
+    return false;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::update_prop_map(PropMap* map)
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (-1 != map->id) {
+      query.prepare(sqlite3::update_prop_map_by_id);
+      query.bindValue(":id", map->id);
+    } else {
+      query.prepare(sqlite3::insert_or_update_prop_maps);
+    }
+    query.bindValue(":fk_scene", map->fk_scene);
+    query.bindValue(":fk_prop", map->fk_prop);
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    if (-1 == map->id) {
+      const auto r = select_prop_map(map);
+      propMapUpdated(map->id);
+      return r;
+    }
+    propMapUpdated(map->id);
+    return true;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::remove_prop_map(PropMap* map)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (select_prop_map(map)) {
+      query.prepare(sqlite3::delete_prop_map_by_id);
+      query.bindValue(":id", map->id);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      propMapRemoved(map->id);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::remove_prop_map_by_fk(PropMap* map)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (select_prop_map(map)) {
+      query.prepare(sqlite3::delete_prop_map_by_fk);
+      query.bindValue(":fk_scene", map->fk_scene);
+      query.bindValue(":fk_prop", map->fk_prop);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      propMapRemoved(map->id);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
 //----------------------------EVENT-------------------------------------------------
 inline void assign_event(QSqlRecord& record, Event& event)
 {
