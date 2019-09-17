@@ -38,7 +38,7 @@ ColumnLayout {
       Layout.fillWidth: true
       Layout.fillHeight: true
       Layout.margins: 5
-
+      color: "transparent"
       border.color : "black"
 
       FourButtonRow {

@@ -33,6 +33,8 @@ ColumnLayout {
     currentIndex: 1
     Rectangle {
       id: full_listRectangle
+      width: root.width
+      height: root.height
       Layout.fillWidth: true
       Layout.fillHeight: true
       Layout.margins: 5
