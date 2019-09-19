@@ -3019,4 +3019,30 @@ bool SQLite3Driver::remove_treatment(Treatment* treatment)
   qWarning() << "No Database connection";
   return false;
 }
+
+// Unimplemented methods, just here so that the code compiles
+int SQLite3Driver::citation_map_count() const 
+{
+  return 1;
+}
+int SQLite3Driver::prop_count(Scene* scene) const
+{
+  return 1;
+}
+int SQLite3Driver::citation_count(Scene* scene) const
+{
+  return 1;
+}
+void SQLite3Driver::props_in_scene(Scene* scene)
+{
+  return;
+}
+bool SQLite3Driver::update_prop_in_scene(Scene* scene, Prop* prop)
+{
+  return false;
+}
+bool SQLite3Driver::remove_prop_from_scene(Prop* prop, Scene* scene)
+{
+  return false;
+}
 }
