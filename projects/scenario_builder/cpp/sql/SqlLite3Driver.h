@@ -111,6 +111,7 @@ public:
   Q_INVOKABLE void roles_in_scene(Scene* scene);
   Q_INVOKABLE void maps();
   Q_INVOKABLE void event_maps();
+  Q_INVOKABLE void citation_maps();
   Q_INVOKABLE void prop_maps();
   Q_INVOKABLE void props();
   Q_INVOKABLE void events();
@@ -132,6 +133,7 @@ public:
   Q_INVOKABLE bool next_map(Map*);
   Q_INVOKABLE bool next_event_map(EventMap*);
   Q_INVOKABLE bool next_prop_map(PropMap*);
+  Q_INVOKABLE bool next_citation_map(CitationMap*);
   Q_INVOKABLE bool next_role(Role*);
   Q_INVOKABLE bool next_prop(Prop*);
   Q_INVOKABLE bool next_event(Event*);
@@ -151,6 +153,7 @@ public:
   Q_INVOKABLE bool select_map(Map*) const;
   Q_INVOKABLE bool select_event_map(EventMap*) const;
   Q_INVOKABLE bool select_prop_map(PropMap*) const;
+  Q_INVOKABLE bool select_citation_map(CitationMap*) const;
   Q_INVOKABLE bool select_role(Role*) const;
   Q_INVOKABLE bool select_prop(Prop*) const;
   Q_INVOKABLE bool select_event(Event*) const;
@@ -165,6 +168,7 @@ public:
   Q_INVOKABLE bool update_map(Map*);
   Q_INVOKABLE bool update_event_map(EventMap*);
   Q_INVOKABLE bool update_prop_map(PropMap*);
+  Q_INVOKABLE bool update_citation_map(CitationMap*);
   Q_INVOKABLE bool update_role(Role*);
   Q_INVOKABLE bool update_role_in_scene(Scene*, Role*);
   Q_INVOKABLE bool update_prop(Prop*);
@@ -193,9 +197,11 @@ public:
   Q_INVOKABLE bool remove_map(Map*);
   Q_INVOKABLE bool remove_event_map(EventMap*);
   Q_INVOKABLE bool remove_prop_map(PropMap*);
+  Q_INVOKABLE bool remove_citation_map(CitationMap*);
   Q_INVOKABLE bool remove_map_by_fk(Map*);
   Q_INVOKABLE bool remove_event_map_by_fk(EventMap*);
   Q_INVOKABLE bool remove_prop_map_by_fk(PropMap*);
+  Q_INVOKABLE bool remove_citation_map_by_fk(CitationMap*);
   Q_INVOKABLE bool remove_role(Role*);
   Q_INVOKABLE bool remove_role_from_scene(Role*,Scene*);
   Q_INVOKABLE bool remove_prop(Prop*);
@@ -249,6 +255,7 @@ signals:
   void mapRemoved(int index);
   void eventMapRemoved(int index);
   void propMapRemoved(int index);
+  void citationMapRemoved(int index);
   void objectiveRemoved(int index);
   void propertyRemoved(int index);
   void propRemoved(int index);
@@ -268,6 +275,7 @@ signals:
   void mapUpdated(int index);
   void eventMapUpdated(int index);
   void propMapUpdated(int index);
+  void citationMapUpdated(int index);
   void objectiveUpdated(int index);
   void propertyUpdated(int index);
   void propUpdated(int index);
@@ -300,6 +308,7 @@ private:
   QList<Map*> _maps;
   QList<EventMap*> _event_maps;
   QList<PropMap*> _prop_maps;
+  QList<CitationMap*> _citation_maps;
   QList<Role*> _roles;
   QList<Prop*> _props;
   QList<Event*> _events;
@@ -319,6 +328,7 @@ private:
   QList<Map*>::iterator _current_map;
   QList<EventMap*>::iterator _current_event_map;
   QList<PropMap*>::iterator _current_prop_map;
+  QList<CitationMap*>::iterator _current_citation_map;
   QList<Role*>::iterator _current_role;
   QList<Prop*>::iterator _current_prop;
   QList<Event*>::iterator _current_event;

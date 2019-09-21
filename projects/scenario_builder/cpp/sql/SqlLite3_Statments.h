@@ -749,6 +749,7 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_props = R"( DELETE FROM props; )";
   constexpr auto count_props = R"( SELECT COUNT(prop_id) FROM props; )";
+  constexpr auto count_props_in_scene = R"( SELECT COUNT(prop_map_id) FROM prop_maps WHERE :id = fk_scene ; )";
   constexpr auto select_all_props = R"( SELECT * FROM props; )";
 
   constexpr auto select_prop_by_id
@@ -835,6 +836,7 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_citations = R"( DELETE FROM citations; )";
   constexpr auto count_citations = R"( SELECT COUNT(citation_id) FROM citations; )";
+  constexpr auto count_citations_in_scene = R"( SELECT COUNT(citation_map_id) FROM citation_maps WHERE :id = fk_scene ; )";
   constexpr auto select_all_citations = R"( SELECT * FROM citations; )";
 
   constexpr auto select_citation_by_id

@@ -619,6 +619,22 @@ int SQLite3Driver::citation_count() const
   }
   return -1;
 }
+int SQLite3Driver::citation_count(Scene* scene) const
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_citations_in_scene);
+    query.bindValue(":id", scene->id);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
 void SQLite3Driver::citations()
 {
   qDeleteAll(_citations);
@@ -1760,7 +1776,160 @@ bool SQLite3Driver::remove_prop_map_by_fk(PropMap* map)
   qWarning() << "No Database connection";
   return false;
 }
-//----------------------------EVENT-------------------------------------------------
+//-----------------------------CITATION MAP-----------------------------------------
+inline void assign_citation_map(const QSqlRecord& record, CitationMap& map)
+{
+  map.id = record.value(CITATION_MAP_ID).toInt();
+  map.fk_scene = record.value(CITATION_MAP_FK_SCENE).toInt();
+  map.fk_citation = record.value(CITATION_MAP_FK_CITATION).toInt();
+}
+int SQLite3Driver::citation_map_count() const
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_citation_maps);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
+void SQLite3Driver::citation_maps()
+{
+  qDeleteAll(_prop_maps);
+  _prop_maps.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_prop_maps);
+    query.exec();
+    while (query.next()) {
+      auto map = std::make_unique<pfc::PropMap>();
+      auto record = query.record();
+      assert(record.count() == PROP_MAP_COLUMN_COUNT);
+      assign_prop_map(record, *map);
+      _prop_maps.push_back(map.release());
+    }
+    _current_prop_map = _prop_maps.begin();
+    emit propMapsChanged();
+  }
+}
+bool SQLite3Driver::next_citation_map(CitationMap* map)
+{
+  if (_current_citation_map == _citation_maps.end() || _citation_maps.empty()) {
+    return false;
+  }
+  map->assign(*(*_current_citation_map));
+  ++_current_map;
+
+  return true;
+}
+bool SQLite3Driver::select_citation_map(CitationMap* map) const
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    QSqlRecord record;
+    if (map->id != -1) {
+      query.prepare(sqlite3::select_citation_map_by_id);
+      query.bindValue(":id", map->id);
+    } else if (map->fk_scene != -1) {
+      query.prepare(sqlite3::select_citation_map_by_fk);
+      query.bindValue(":fk_scene", map->fk_scene);
+      query.bindValue(":fk_citation", map->fk_citation);
+    } else {
+      qWarning() << "Provided Property has no id, fk_scene, or fk_citation one is required";
+      return false;
+    }
+    if (query.exec()) {
+      while (query.next()) {
+        record = query.record();
+        assign_citation_map(record, *map);
+        return true;
+      }
+    } else {
+      qWarning() << query.lastError();
+    }
+    return false;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::update_citation_map(CitationMap* map)
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (-1 != map->id) {
+      query.prepare(sqlite3::update_citation_map_by_id);
+      query.bindValue(":id", map->id);
+    } else {
+      query.prepare(sqlite3::insert_or_update_citation_maps);
+    }
+    query.bindValue(":fk_scene", map->fk_scene);
+    query.bindValue(":fk_citation", map->fk_citation);
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    if (-1 == map->id) {
+      const auto r = select_citation_map(map);
+      citationMapUpdated(map->id);
+      return r;
+    }
+    citationMapUpdated(map->id);
+    return true;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::remove_citation_map(CitationMap* map)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (select_citation_map(map)) {
+      query.prepare(sqlite3::delete_citation_map_by_id);
+      query.bindValue(":id", map->id);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      citationMapRemoved(map->id);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::remove_citation_map_by_fk(CitationMap* map)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (select_citation_map(map)) {
+      query.prepare(sqlite3::delete_citation_map_by_fk);
+      query.bindValue(":fk_scene", map->fk_scene);
+      query.bindValue(":fk_citation", map->fk_citation);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      citationMapRemoved(map->id);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+  //----------------------------EVENT-------------------------------------------------
 inline void assign_event(QSqlRecord& record, Event& event)
 {
   event.id = record.value(EVENT_ID).toInt();
@@ -2144,6 +2313,22 @@ int SQLite3Driver::prop_count() const
   }
   return -1;
 }
+int SQLite3Driver::prop_count(Scene* scene) const
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_props_in_scene);
+    query.bindValue(":id", scene->id);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
 void SQLite3Driver::props()
 {
   qDeleteAll(_props);
@@ -2253,6 +2438,71 @@ bool SQLite3Driver::remove_prop(Prop* prop)
   }
   qWarning() << "No Database connection";
   return false;
+}
+void SQLite3Driver::props_in_scene(Scene* scene)
+{
+  qDeleteAll(_props);
+  _props.clear();
+
+  if (_db.isOpen()) {
+    std::vector<int32_t> fk_prop;
+    QSqlQuery prop_map_query{ _db };
+    prop_map_query.prepare(sqlite3::select_prop_map_by_fk_scene);
+    prop_map_query.bindValue(":fk_scene", scene->id);
+    prop_map_query.exec();
+    while (prop_map_query.next()) {
+      auto prop_map = std::make_unique<pfc::PropMap>();
+      auto prop_map_record = prop_map_query.record();
+      assign_prop_map(prop_map_record, *prop_map);
+      fk_prop.push_back(prop_map->fk_prop);
+    }
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_prop_by_id);
+    while (!fk_prop.empty()) {
+      query.bindValue(":id", fk_prop.back());
+      bool huh = query.exec();
+      fk_prop.pop_back();
+      if (query.next()) {
+        auto prop = std::make_unique<pfc::Prop>();
+        auto record = query.record();
+        assign_prop(record, *prop);
+        int32_t iid = prop->id;
+        QString equipment = prop->equipment;
+        _props.push_back(prop.release());
+      }
+    }
+    _current_prop = _props.begin();
+    emit propsChanged();
+  }
+}
+bool SQLite3Driver::update_prop_in_scene(Scene* scene, Prop* prop)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (select_scene(scene)) {
+      if (!select_prop(prop)) {
+        update_prop(prop);
+      }
+      PropMap map;
+      map.fk_prop = prop->id;
+      map.fk_scene = scene->id;
+      if (!select_prop_map(&map)) {
+        update_prop_map(&map);
+      }
+      return true;
+    }
+    qWarning() << "Scene not found";
+    return false;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::remove_prop_from_scene(Prop* prop, Scene* scene)
+{
+  pfc::PropMap map;
+  map.fk_scene = scene->id;
+  map.fk_prop = prop->id;
+  return remove_prop_map_by_fk(&map);
 }
 //-----------------------------PROPERTY------------------------------------------
 inline void assign_property(const QSqlRecord& record, Property& property)
@@ -3020,29 +3270,4 @@ bool SQLite3Driver::remove_treatment(Treatment* treatment)
   return false;
 }
 
-// Unimplemented methods, just here so that the code compiles
-int SQLite3Driver::citation_map_count() const 
-{
-  return 1;
-}
-int SQLite3Driver::prop_count(Scene* scene) const
-{
-  return 1;
-}
-int SQLite3Driver::citation_count(Scene* scene) const
-{
-  return 1;
-}
-void SQLite3Driver::props_in_scene(Scene* scene)
-{
-  return;
-}
-bool SQLite3Driver::update_prop_in_scene(Scene* scene, Prop* prop)
-{
-  return false;
-}
-bool SQLite3Driver::remove_prop_from_scene(Prop* prop, Scene* scene)
-{
-  return false;
-}
 }
