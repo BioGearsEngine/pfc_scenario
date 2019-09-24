@@ -184,7 +184,7 @@ inline namespace sqlite3 {
     equipment_id INTEGER PRIMARY KEY,
     type INTEGER NOT NULL DEFAULT 1,
     name Varchar(64) NOT NULL UNIQUE,
-    description Varchar(64) NOT NULL UNIQUE,
+    description Varchar(64) NOT NULL,
     citations TEXT,
     image TEXT
   );
@@ -686,6 +686,65 @@ inline namespace sqlite3 {
           JOIN scenes
           ON scenes.scene_id = citation_map.scene
           WHERE citation_map.fk_citation = :id)";
+  //--------------------------- EQUIPMENT MAP STATEMENTS ------------------
+  enum EQUIPMENT_MAP_COLUMNS {
+    EQUIPMENT_MAP_ID,
+    EQUIPMENT_MAP_FK_SCENE,
+    EQUIPMENT_MAP_FK_EQUIPMENT,
+    EQUIPMENT_MAP_COLUMN_COUNT
+  };
+
+  constexpr auto create_equipment_maps_table = R"(
+  CREATE TABLE IF NOT EXISTS equipment_maps (
+    equipment_map_id INTEGER PRIMARY KEY,
+    fk_scene INTEGER,
+    fk_equipment INTEGER
+  );
+  )";
+  constexpr auto drop_all_equipment_maps = R"( DELETE FROM equipment_maps; )";
+  constexpr auto count_equipment_maps = R"( SELECT COUNT(equipment_map_id) FROM equipment_maps; )";
+  constexpr auto select_all_equipment_maps = R"( SELECT * FROM equipment_maps; )";
+
+  constexpr auto select_equipment_map_by_id
+    = R"( SELECT * FROM equipment_maps WHERE equipment_map_id = :id ; )";
+  constexpr auto update_equipment_map_by_id
+    = R"( UPDATE  equipment_maps
+          SET fk_scene = :fk_scene
+              , fk_equipment = :fk_equipment
+          WHERE equipment_map_id = :id;
+         )";
+  constexpr auto delete_equipment_map_by_id
+    = R"( DELETE FROM equipment_maps WHERE equipment_map_id = :id; )";
+  constexpr auto delete_equipment_map_by_fk_scene
+    = R"( DELETE FROM equipment_maps WHERE fk_scene = :fk_scene; )";
+  constexpr auto delete_equipment_map_by_fk_equipment
+    = R"( DELETE FROM equipment_maps WHERE fk_equipment = :fk_equipment; )";
+  constexpr auto delete_equipment_map_by_fk
+    = R"( DELETE FROM equipment_maps WHERE fk_equipment = :fk_equipment AND fk_scene = :fk_scene )";
+  constexpr auto select_equipment_map_by_fk_scene
+    = R"( SELECT * FROM equipment_maps WHERE fk_scene = :fk_scene; )";
+  constexpr auto select_equipment_map_by_fk_equipment
+    = R"( SELECT * FROM equipment_maps WHERE fk_equipment = :fk_equipment; )";
+  constexpr auto select_equipment_map_by_fk
+    = R"( SELECT * FROM equipment_maps WHERE fk_equipment = :fk_equipment AND fk_scene = :fk_scene )";
+  constexpr auto insert_or_update_equipment_maps
+    = R"( INSERT INTO equipment_maps
+          (fk_scene,fk_equipment)
+          VALUES (:fk_scene,:fk_equipment)
+          ;
+         )";
+
+  constexpr auto select_scene_equipments_by_fk_scene
+    = R"( SELECT * FROM equipment_maps AS equipment_map 
+          JOIN roles
+          ON roles.role_id = equipment_map.role
+          WHERE equipment_map.fk_scene = :id;)";
+
+  constexpr auto select_equipment_scenes_by_fk_equipment
+    = R"( SELECT * FROM equipment_maps as equipment_map
+          JOIN scenes
+          ON scenes.scene_id = equipment_map.scene
+          WHERE equipment_map.fk_equipment = :id)";
   //---------------------- OBJECTIVE STATMENTS ------------------------
   enum OBJECTIVE_COLUMNS {
     OBJECTIVE_ID,

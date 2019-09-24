@@ -548,6 +548,45 @@ public:
   }
 };
 //----End Citation_Map
+struct EquipmentMap : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int map_id MEMBER id)
+  Q_PROPERTY(int fk_scene MEMBER fk_scene)
+  Q_PROPERTY(int fk_equipment MEMBER fk_equipment)
+
+public:
+  int32_t id = -1;
+  int32_t fk_scene = -1;
+  int32_t fk_equipment = -1;
+
+  EquipmentMap(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  EquipmentMap(const EquipmentMap&) = delete;
+  EquipmentMap(EquipmentMap&&) = delete;
+  EquipmentMap& operator=(const EquipmentMap&) = delete;
+  EquipmentMap& operator=(EquipmentMap&&) = delete;
+  virtual ~EquipmentMap() = default;
+
+  bool operator==(const EquipmentMap& rhs) const
+  {
+    return id == rhs.id
+      && fk_scene == rhs.fk_scene
+      && fk_equipment == rhs.fk_equipment;
+  }
+  bool operator!=(const EquipmentMap& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const EquipmentMap& rhs)
+  {
+    id = rhs.id;
+    fk_scene = rhs.fk_scene;
+    fk_equipment = rhs.fk_equipment;
+  }
+};
+//----End Citation_Map
 struct Objective : public QObject {
   Q_OBJECT
   Q_PROPERTY(int objective_id MEMBER id)

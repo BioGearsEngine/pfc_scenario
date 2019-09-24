@@ -43,6 +43,7 @@ public:
     EVENT_MAPS,
     PROP_MAPS,
     CITATION_MAPS,
+    EQUIPMENT_MAPS,
     OBJECTIVES,
     PROPERTIES,
     PROPS,
@@ -85,6 +86,7 @@ public:
   Q_INVOKABLE int event_map_count() const;
   Q_INVOKABLE int prop_map_count() const;
   Q_INVOKABLE int citation_map_count() const;
+  Q_INVOKABLE int equipment_map_count() const;
   Q_INVOKABLE int role_count() const;
   Q_INVOKABLE int role_count(Scene*) const;
   Q_INVOKABLE int prop_count() const;
@@ -112,11 +114,13 @@ public:
   Q_INVOKABLE void maps();
   Q_INVOKABLE void event_maps();
   Q_INVOKABLE void citation_maps();
+  Q_INVOKABLE void equipment_maps();
   Q_INVOKABLE void prop_maps();
   Q_INVOKABLE void props();
   Q_INVOKABLE void events();
   Q_INVOKABLE void events_in_scene(Scene* scene);
   Q_INVOKABLE void props_in_scene(Scene* scene);
+  Q_INVOKABLE void equipment_in_scene(Scene* scene);
   Q_INVOKABLE void scenes();
 
   Q_INVOKABLE bool next_author(Author*);
@@ -134,6 +138,7 @@ public:
   Q_INVOKABLE bool next_event_map(EventMap*);
   Q_INVOKABLE bool next_prop_map(PropMap*);
   Q_INVOKABLE bool next_citation_map(CitationMap*);
+  Q_INVOKABLE bool next_equipment_map(EquipmentMap*);
   Q_INVOKABLE bool next_role(Role*);
   Q_INVOKABLE bool next_prop(Prop*);
   Q_INVOKABLE bool next_event(Event*);
@@ -154,6 +159,7 @@ public:
   Q_INVOKABLE bool select_event_map(EventMap*) const;
   Q_INVOKABLE bool select_prop_map(PropMap*) const;
   Q_INVOKABLE bool select_citation_map(CitationMap*) const;
+  Q_INVOKABLE bool select_equipment_map(EquipmentMap*) const;
   Q_INVOKABLE bool select_role(Role*) const;
   Q_INVOKABLE bool select_prop(Prop*) const;
   Q_INVOKABLE bool select_event(Event*) const;
@@ -169,6 +175,7 @@ public:
   Q_INVOKABLE bool update_event_map(EventMap*);
   Q_INVOKABLE bool update_prop_map(PropMap*);
   Q_INVOKABLE bool update_citation_map(CitationMap*);
+  Q_INVOKABLE bool update_equipment_map(EquipmentMap*);
   Q_INVOKABLE bool update_role(Role*);
   Q_INVOKABLE bool update_role_in_scene(Scene*, Role*);
   Q_INVOKABLE bool update_prop(Prop*);
@@ -176,8 +183,10 @@ public:
   Q_INVOKABLE bool update_event(Event*);
   Q_INVOKABLE bool update_event_in_scene(Scene*, Event*);
   Q_INVOKABLE bool update_citation(Citation*);
+  Q_INVOKABLE bool update_citation_in_scene(Scene*, Citation*);
   Q_INVOKABLE bool update_treatment(Treatment*);
   Q_INVOKABLE bool update_equipment(Equipment*);
+  Q_INVOKABLE bool update_equipment_in_scene(Scene*, Equipment*);
   Q_INVOKABLE bool update_injury(Injury*);
   Q_INVOKABLE bool update_injury_set(InjurySet*);
   Q_INVOKABLE bool update_assessment(Assessment*);
@@ -190,6 +199,7 @@ public:
   Q_INVOKABLE bool remove_citation(Citation*);
   Q_INVOKABLE bool remove_treatment(Treatment*);
   Q_INVOKABLE bool remove_equipment(Equipment*);
+  Q_INVOKABLE bool remove_equipment_from_scene(Equipment*,Scene*);
   Q_INVOKABLE bool remove_injury(Injury*);
   Q_INVOKABLE bool remove_injury_set(InjurySet*);
   Q_INVOKABLE bool remove_assessment(Assessment*);
@@ -198,10 +208,12 @@ public:
   Q_INVOKABLE bool remove_event_map(EventMap*);
   Q_INVOKABLE bool remove_prop_map(PropMap*);
   Q_INVOKABLE bool remove_citation_map(CitationMap*);
+  Q_INVOKABLE bool remove_equipment_map(EquipmentMap*);
   Q_INVOKABLE bool remove_map_by_fk(Map*);
   Q_INVOKABLE bool remove_event_map_by_fk(EventMap*);
   Q_INVOKABLE bool remove_prop_map_by_fk(PropMap*);
   Q_INVOKABLE bool remove_citation_map_by_fk(CitationMap*);
+  Q_INVOKABLE bool remove_equipment_map_by_fk(EquipmentMap*);
   Q_INVOKABLE bool remove_role(Role*);
   Q_INVOKABLE bool remove_role_from_scene(Role*,Scene*);
   Q_INVOKABLE bool remove_prop(Prop*);
@@ -236,6 +248,8 @@ signals:
   void mapsChanged();
   void eventMapsChanged();
   void propMapsChanged();
+  void citationMapsChanged();
+  void equipmentMapsChanged();
   void objectivesChanged();
   void propertiesChanged();
   void propsChanged();
@@ -256,6 +270,7 @@ signals:
   void eventMapRemoved(int index);
   void propMapRemoved(int index);
   void citationMapRemoved(int index);
+  void equipmentMapRemoved(int index);
   void objectiveRemoved(int index);
   void propertyRemoved(int index);
   void propRemoved(int index);
@@ -276,6 +291,7 @@ signals:
   void eventMapUpdated(int index);
   void propMapUpdated(int index);
   void citationMapUpdated(int index);
+  void equipmentMapUpdated(int index);
   void objectiveUpdated(int index);
   void propertyUpdated(int index);
   void propUpdated(int index);
@@ -309,6 +325,7 @@ private:
   QList<EventMap*> _event_maps;
   QList<PropMap*> _prop_maps;
   QList<CitationMap*> _citation_maps;
+  QList<EquipmentMap*> _equipment_maps;
   QList<Role*> _roles;
   QList<Prop*> _props;
   QList<Event*> _events;
@@ -329,6 +346,7 @@ private:
   QList<EventMap*>::iterator _current_event_map;
   QList<PropMap*>::iterator _current_prop_map;
   QList<CitationMap*>::iterator _current_citation_map;
+  QList<EquipmentMap*>::iterator _current_equipment_map;
   QList<Role*>::iterator _current_role;
   QList<Prop*>::iterator _current_prop;
   QList<Event*>::iterator _current_event;

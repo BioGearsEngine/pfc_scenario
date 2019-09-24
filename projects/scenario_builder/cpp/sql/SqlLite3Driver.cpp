@@ -738,6 +738,28 @@ bool SQLite3Driver::update_citation(Citation* citation)
   qWarning() << "No Database connection";
   return false;
 }
+bool SQLite3Driver::update_citation_in_scene(Scene* scene, Citation* citation)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (select_scene(scene)) {
+      if (!select_citation(citation)) {
+        update_citation(citation);
+      }
+      CitationMap map;
+      map.fk_citation = citation->id;
+      map.fk_scene = scene->id;
+      if (!select_citation_map(&map)) {
+        update_citation_map(&map);
+      }
+      return true;
+    }
+    qWarning() << "Scene not found";
+    return false;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
 bool SQLite3Driver::remove_citation(Citation* citation)
 {
   if (_db.isOpen()) {
@@ -750,143 +772,6 @@ bool SQLite3Driver::remove_citation(Citation* citation)
         return false;
       }
       citationRemoved(citation->id);
-      return true;
-    } else {
-      return false;
-    }
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-//----------------------------EQUIPMENT------------------------------------------
-inline void assign_equipment(const QSqlRecord& record, Equipment& equipment)
-{
-  equipment.id = record.value(EQUIPMENT_ID).toInt();
-  equipment.name = record.value(EQUIPMENT_NAME).toString();
-  equipment.type = record.value(EQUIPMENT_TYPE).toInt();
-  equipment.description = record.value(EQUIPMENT_DESCRIPTION).toString();
-  equipment.citations = record.value(EQUIPMENT_CITATIONS).toString();
-  equipment.image = record.value(EQUIPMENT_IMAGE).toString();
-}
-int SQLite3Driver::equipment_count() const
-{
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::count_equipments);
-    query.exec();
-    if (query.next()) {
-      auto record = query.record();
-      assert(record.count() == 1);
-      return record.value(0).toInt();
-    }
-  }
-  return -1;
-}
-void SQLite3Driver::equipments()
-{
-  qDeleteAll(_equipments);
-  _equipments.clear();
-
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::select_all_equipments);
-    query.exec();
-    while (query.next()) {
-      auto equipment = std::make_unique<pfc::Equipment>();
-      auto record = query.record();
-      assert(record.count() == EQUIPMENT_COLUMN_COUNT);
-      assign_equipment(record, *equipment);
-      _equipments.push_back(equipment.release());
-    }
-    _current_equipment = _equipments.begin();
-    emit equipmentsChanged();
-  }
-}
-bool SQLite3Driver::next_equipment(Equipment* equipment)
-{
-  if (_current_equipment == _equipments.end() || _equipments.empty()) {
-    return false;
-  }
-  equipment->assign(*(*_current_equipment));
-  ++_current_equipment;
-
-  return true;
-}
-bool SQLite3Driver::select_equipment(Equipment* equipment) const
-{
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    QSqlRecord record;
-    if (equipment->id != -1) {
-      query.prepare(sqlite3::select_equipment_by_id);
-      query.bindValue(":id", equipment->id);
-    } else if (!equipment->name.isEmpty()) {
-      query.prepare(sqlite3::select_equipment_by_name);
-      query.bindValue(":name", equipment->name);
-    } else {
-      qWarning() << "Provided Property has no id or name one is required";
-      return false;
-    }
-    if (query.exec()) {
-      while (query.next()) {
-        record = query.record();
-        assign_equipment(record, *equipment);
-        return true;
-      }
-    } else {
-      qWarning() << query.lastError();
-    }
-    return false;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-bool SQLite3Driver::update_equipment(Equipment* equipment)
-{
-
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
-    if (-1 != equipment->id) {
-      query.prepare(sqlite3::update_equipment_by_id);
-      query.bindValue(":id", equipment->id);
-    } else if (!equipment->name.isEmpty()) {
-      query.prepare(sqlite3::insert_or_update_equipments);
-    }
-    query.bindValue(":name", equipment->name);
-    query.bindValue(":type", equipment->type);
-    query.bindValue(":description", equipment->description);
-    query.bindValue(":citations", equipment->citations);
-    query.bindValue(":image", equipment->image);
-
-    if (!query.exec()) {
-      qWarning() << query.lastError();
-      return false;
-    }
-    if (-1 == equipment->id) {
-      const auto r = select_equipment(equipment);
-      equipmentUpdated(equipment->id);
-      return r;
-    }
-    equipmentUpdated(equipment->id);
-    return true;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-bool SQLite3Driver::remove_equipment(Equipment* equipment)
-{
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    if (select_equipment(equipment)) {
-      query.prepare(sqlite3::delete_equipment_by_id);
-      query.bindValue(":id", equipment->id);
-      if (!query.exec()) {
-        qWarning() << query.lastError();
-        return false;
-      }
-      equipmentRemoved(equipment->id);
       return true;
     } else {
       return false;
@@ -1929,6 +1814,159 @@ bool SQLite3Driver::remove_citation_map_by_fk(CitationMap* map)
   qWarning() << "No Database connection";
   return false;
 }
+//------------------------------EQUIPMENT MAP----------------------------------------
+inline void assign_equipment_map(const QSqlRecord& record, EquipmentMap& map)
+{
+  map.id = record.value(EQUIPMENT_MAP_ID).toInt();
+  map.fk_scene = record.value(EQUIPMENT_MAP_FK_SCENE).toInt();
+  map.fk_equipment = record.value(EQUIPMENT_MAP_FK_EQUIPMENT).toInt();
+}
+int SQLite3Driver::equipment_map_count() const
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_equipment_maps);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
+void SQLite3Driver::equipment_maps()
+{
+  qDeleteAll(_prop_maps);
+  _prop_maps.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_prop_maps);
+    query.exec();
+    while (query.next()) {
+      auto map = std::make_unique<pfc::PropMap>();
+      auto record = query.record();
+      assert(record.count() == PROP_MAP_COLUMN_COUNT);
+      assign_prop_map(record, *map);
+      _prop_maps.push_back(map.release());
+    }
+    _current_prop_map = _prop_maps.begin();
+    emit propMapsChanged();
+  }
+}
+bool SQLite3Driver::next_equipment_map(EquipmentMap* map)
+{
+  if (_current_equipment_map == _equipment_maps.end() || _equipment_maps.empty()) {
+    return false;
+  }
+  map->assign(*(*_current_equipment_map));
+  ++_current_map;
+
+  return true;
+}
+bool SQLite3Driver::select_equipment_map(EquipmentMap* map) const
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    QSqlRecord record;
+    if (map->id != -1) {
+      query.prepare(sqlite3::select_equipment_map_by_id);
+      query.bindValue(":id", map->id);
+    } else if (map->fk_scene != -1) {
+      query.prepare(sqlite3::select_equipment_map_by_fk);
+      query.bindValue(":fk_scene", map->fk_scene);
+      query.bindValue(":fk_equipment", map->fk_equipment);
+    } else {
+      qWarning() << "Provided Property has no id, fk_scene, or fk_equipment one is required";
+      return false;
+    }
+    if (query.exec()) {
+      while (query.next()) {
+        record = query.record();
+        assign_equipment_map(record, *map);
+        return true;
+      }
+    } else {
+      qWarning() << query.lastError();
+    }
+    return false;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::update_equipment_map(EquipmentMap* map)
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (-1 != map->id) {
+      query.prepare(sqlite3::update_equipment_map_by_id);
+      query.bindValue(":id", map->id);
+    } else {
+      query.prepare(sqlite3::insert_or_update_equipment_maps);
+    }
+    query.bindValue(":fk_scene", map->fk_scene);
+    query.bindValue(":fk_equipment", map->fk_equipment);
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    if (-1 == map->id) {
+      const auto r = select_equipment_map(map);
+      equipmentMapUpdated(map->id);
+      return r;
+    }
+    equipmentMapUpdated(map->id);
+    return true;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::remove_equipment_map(EquipmentMap* map)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (select_equipment_map(map)) {
+      query.prepare(sqlite3::delete_equipment_map_by_id);
+      query.bindValue(":id", map->id);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      equipmentMapRemoved(map->id);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::remove_equipment_map_by_fk(EquipmentMap* map)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (select_equipment_map(map)) {
+      query.prepare(sqlite3::delete_equipment_map_by_fk);
+      query.bindValue(":fk_scene", map->fk_scene);
+      query.bindValue(":fk_equipment", map->fk_equipment);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      equipmentMapRemoved(map->id);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
   //----------------------------EVENT-------------------------------------------------
 inline void assign_event(QSqlRecord& record, Event& event)
 {
@@ -2155,6 +2193,206 @@ bool SQLite3Driver::remove_event_from_scene(Event* event, Scene* scene)
   map.fk_scene = scene->id;
   map.fk_event = event->id;
   return remove_event_map_by_fk(&map);
+}
+//----------------------------EQUIPMENT------------------------------------------
+inline void assign_equipment(const QSqlRecord& record, Equipment& equipment)
+{
+  equipment.id = record.value(EQUIPMENT_ID).toInt();
+  equipment.name = record.value(EQUIPMENT_NAME).toString();
+  equipment.type = record.value(EQUIPMENT_TYPE).toInt();
+  equipment.description = record.value(EQUIPMENT_DESCRIPTION).toString();
+  equipment.citations = record.value(EQUIPMENT_CITATIONS).toString();
+  equipment.image = record.value(EQUIPMENT_IMAGE).toString();
+}
+int SQLite3Driver::equipment_count() const
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_equipments);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
+void SQLite3Driver::equipments()
+{
+  qDeleteAll(_equipments);
+  _equipments.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_equipments);
+    query.exec();
+    while (query.next()) {
+      auto equipment = std::make_unique<pfc::Equipment>();
+      auto record = query.record();
+      assert(record.count() == EQUIPMENT_COLUMN_COUNT);
+      assign_equipment(record, *equipment);
+      _equipments.push_back(equipment.release());
+    }
+    _current_equipment = _equipments.begin();
+    emit equipmentsChanged();
+  }
+}
+void SQLite3Driver::equipment_in_scene(Scene* scene)
+{
+  qDeleteAll(_equipments);
+  _equipments.clear();
+
+  if (_db.isOpen()) {
+    std::vector<int32_t> fk_equipment;
+    QSqlQuery equipment_map_query{ _db };
+    equipment_map_query.prepare(sqlite3::select_equipment_map_by_fk_scene);
+    equipment_map_query.bindValue(":fk_scene", scene->id);
+    equipment_map_query.exec();
+    while (equipment_map_query.next()) {
+      auto equipment_map = std::make_unique<pfc::EquipmentMap>();
+      auto equipment_map_record = equipment_map_query.record();
+      assign_equipment_map(equipment_map_record, *equipment_map);
+      fk_equipment.push_back(equipment_map->fk_equipment);
+    }
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_equipment_by_id);
+    while (!fk_equipment.empty()) {
+      query.bindValue(":id", fk_equipment.back());
+      bool huh = query.exec();
+      fk_equipment.pop_back();
+      if (query.next()) {
+        auto equipment = std::make_unique<pfc::Equipment>();
+        auto record = query.record();
+        assign_equipment(record, *equipment);
+        _equipments.push_back(equipment.release());
+      }
+    }
+    _current_equipment = _equipments.begin();
+    emit equipmentsChanged();
+  }
+}
+bool SQLite3Driver::next_equipment(Equipment* equipment)
+{
+  if (_current_equipment == _equipments.end() || _equipments.empty()) {
+    return false;
+  }
+  equipment->assign(*(*_current_equipment));
+  ++_current_equipment;
+
+  return true;
+}
+bool SQLite3Driver::select_equipment(Equipment* equipment) const
+{
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    QSqlRecord record;
+    if (equipment->id != -1) {
+      query.prepare(sqlite3::select_equipment_by_id);
+      query.bindValue(":id", equipment->id);
+    } else if (!equipment->name.isEmpty()) {
+      query.prepare(sqlite3::select_equipment_by_name);
+      query.bindValue(":name", equipment->name);
+    } else {
+      qWarning() << "Provided Property has no id or name one is required";
+      return false;
+    }
+    if (query.exec()) {
+      while (query.next()) {
+        record = query.record();
+        assign_equipment(record, *equipment);
+        return true;
+      }
+    } else {
+      qWarning() << query.lastError();
+    }
+    return false;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::update_equipment(Equipment* equipment)
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (-1 != equipment->id) {
+      query.prepare(sqlite3::update_equipment_by_id);
+      query.bindValue(":id", equipment->id);
+    } else if (!equipment->name.isEmpty()) {
+      query.prepare(sqlite3::insert_or_update_equipments);
+    }
+    query.bindValue(":name", equipment->name);
+    query.bindValue(":type", equipment->type);
+    query.bindValue(":description", equipment->description);
+    query.bindValue(":citations", equipment->citations);
+    query.bindValue(":image", equipment->image);
+
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    if (-1 == equipment->id) {
+      const auto r = select_equipment(equipment);
+      equipmentUpdated(equipment->id);
+      return r;
+    }
+    equipmentUpdated(equipment->id);
+    return true;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::update_equipment_in_scene(Scene* scene, Equipment* equipment)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (select_scene(scene)) {
+      if (!select_equipment(equipment)) {
+        update_equipment(equipment);
+      }
+      EquipmentMap map;
+      map.fk_equipment = equipment->id;
+      map.fk_scene = scene->id;
+      if (!select_equipment_map(&map)) {
+        update_equipment_map(&map);
+      }
+      return true;
+    }
+    qWarning() << "Scene not found";
+    return false;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::remove_equipment(Equipment* equipment)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (select_equipment(equipment)) {
+      query.prepare(sqlite3::delete_equipment_by_id);
+      query.bindValue(":id", equipment->id);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      equipmentRemoved(equipment->id);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::remove_equipment_from_scene(Equipment* equipment, Scene* scene)
+{
+  pfc::EquipmentMap map;
+  map.fk_scene = scene->id;
+  map.fk_equipment = equipment->id;
+  return remove_equipment_map_by_fk(&map);
 }
   //-----------------------------OBJECTIVE-----------------------------------------
 inline void assign_objective(const QSqlRecord& record, Objective& objective)
