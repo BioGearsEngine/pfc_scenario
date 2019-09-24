@@ -38,10 +38,53 @@ message(STATUS "Configuring ${PROJECT_NAME}")
 
 #Scenario Driver
 
-add_source_files(HDRS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp 
-                 REGEX "*.h" "*.hpp" SOURCE_GROUP  "Headers\\Private")
-add_source_files(SRCS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp 
-                REGEX "*.c" "*.cpp" SOURCE_GROUP  "Source Files")
+
+add_source_files(SRCS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp
+                REGEX "main.cpp" SOURCE_GROUP  "Source Files")
+add_source_files(SRCS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp/sql
+                REGEX "*.c" "*.cpp" SOURCE_GROUP  "Source Files\\sql")
+add_source_files(HDRS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp/sql
+                 REGEX "*.h" "*.hpp" SOURCE_GROUP  "Headers\\Private\\sql")
+
+add_source_files(SRCS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp/xml
+                REGEX "*.c" "*.cpp" SOURCE_GROUP  "Source Files\\xml")
+add_source_files(HDRS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp/xml
+                 REGEX "*.h" "*.hpp" SOURCE_GROUP  "Headers\\Private\\xml")
+
+add_source_files(SRCS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp/zip
+                REGEX "*.cpp" SOURCE_GROUP  "Source Files\\zip")
+add_source_files(HDRS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp/zip/compression
+                 REGEX "*.h" SOURCE_GROUP  "Headers\\Private\\zip\\compression")
+add_source_files(HDRS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp/zip/detail
+                 REGEX "*.h" SOURCE_GROUP  "Headers\\Private\\zip\\detail")
+add_source_files(HDRS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp/zip/methods
+                 REGEX "*.h" SOURCE_GROUP  "Headers\\Private\\zip\\methods")
+add_source_files(HDRS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp/zip/streams
+                 REGEX "*.h" SOURCE_GROUP  "Headers\\Private\\zip\\streams")
+add_source_files(HDRS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp/zip/utils
+                 REGEX "*.h" SOURCE_GROUP  "Headers\\Private\\zip\\utils")
+
+add_source_files(SRCS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp/zip/extlibs/bzip2
+                REGEX "*.c" SOURCE_GROUP  "Source Files\\zip\\extlibs\\bzip2")
+add_source_files(HDRS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp/zip/extlibs/bzip2
+                 REGEX "*.h" SOURCE_GROUP  "Headers\\Private\\zip\\extlibs\\bzip2")
+
+add_source_files(SRCS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp/zip/extlibs/zlib
+                REGEX "*.c" SOURCE_GROUP  "Source Files\\zip\\extlibs\\zlib")
+add_source_files(HDRS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp/zip/extlibs/zlib
+                 REGEX "*.h" SOURCE_GROUP  "Headers\\Private\\zip\\extlibs\\zlib")
+
+if(UNIX)
+add_source_files(SRCS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp/zip/extlibs/lzma/unix
+                REGEX "*.c" SOURCE_GROUP  "Source Files\\zip\\extlibs\\lzma")
+add_source_files(HDRS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp/zip/extlibs/lzma/unix
+                 REGEX "*.h" SOURCE_GROUP  "Headers\\Private\\zip\\extlibs\\lzma")
+else()
+add_source_files(SRCS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp/zip/extlibs/lzma/win32
+                REGEX "*.c" SOURCE_GROUP  "Source Files\\zip\\extlibs\\lzma")
+add_source_files(HDRS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp/zip/extlibs/lzma/win32
+                 REGEX "*.h" SOURCE_GROUP  "Headers\\Private\\zip\\extlibs\\lzma")
+endif()
 add_source_files(HDRS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/xsd/cpp 
                 REGEX "*.hxx" SOURCE_GROUP  "Headers\\Private\\xsd")
 add_source_files(SRCS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/xsd/cpp 
