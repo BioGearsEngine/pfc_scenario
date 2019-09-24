@@ -71,6 +71,7 @@ ApplicationWindow {
       id: loadDialog
       title: "Please Choose a File:"
       visible: false
+       nameFilters: [ "Scenarios (*.pfc)", "All files (*)" ]
       //folder: StandardPaths.writableLocation(StandardPaths.DesktopLocation)
       onAccepted: {
         console.log("You chose: " + fileDialog.fileUrls)
