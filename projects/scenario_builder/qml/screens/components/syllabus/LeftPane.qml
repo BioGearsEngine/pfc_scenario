@@ -43,11 +43,6 @@ Rectangle {
         width: implicitWidth
       }
       TabButton {
-        id: assessment_tab
-        text: "Assessments"
-        width: implicitWidth
-      }
-      TabButton {
         id: injury_tab
         text: "Injuries"
         width: implicitWidth
@@ -65,6 +60,11 @@ Rectangle {
       TabButton {
           id: equipment_tab
         text: "Equipment"
+        width: implicitWidth
+      }
+      TabButton {
+        id: assessment_tab
+        text: "Assessments"
         width: implicitWidth
       }
     }
