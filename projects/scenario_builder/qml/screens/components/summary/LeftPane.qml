@@ -10,6 +10,7 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 Rectangle {
     id: root
     property SQLBackend backend
+    property string scenarioTitle
 
   ColumnLayout {
       id: summary_leftWindow
@@ -23,6 +24,9 @@ Rectangle {
       name : "scenario_title"
       label : "Title"
       default_value : 'New Scenario'
+      onTextChanged : {
+        root.scenarioTitle = text
+      }
     }
 
     PropertyEntry {

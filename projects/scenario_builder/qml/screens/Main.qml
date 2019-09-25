@@ -25,6 +25,7 @@ Page {
       Layout.fillWidth: true
       Layout.minimumHeight: 50
       Text {
+        id: titleCardText
         anchors.centerIn: parent
         text: 'SCENARIO TITLE'
         font.pointSize: 18
@@ -64,6 +65,9 @@ Page {
       ScenarioSummary{
         id: summary
         backend : root.backend
+        onScenarioTitleChanged : {
+          titleCardText.text = summary.scenarioTitle
+        }
       }
 
       //TAB:SYLLABUS
