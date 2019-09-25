@@ -47,9 +47,9 @@ Rectangle {
       Layout.fillWidth : true
       Layout.alignment: Qt.AlignTop
       backend : root.backend
-      name : "scenario_purpose"
-      label : "Purpose"
-      default_value : 'Enter the scenarios purpose.'
+      name : "scenario_description"
+      label : "Description"
+      default_value : 'Enter the scenarios description.'
       required : false
     }
 
