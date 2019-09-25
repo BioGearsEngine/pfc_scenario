@@ -81,12 +81,6 @@ Rectangle {
         Layout.fillWidth : true
         backend : root.backend
       }
-      LP_Assessments{
-        id : assessments
-        Layout.fillHeight : true
-        Layout.fillWidth : true
-        backend : root.backend
-      }
       LP_Injuries {
         id : injuries
         Layout.fillHeight : true
@@ -107,6 +101,12 @@ Rectangle {
       }
       LP_Equipment {
         id : equipment
+        Layout.fillHeight : true
+        Layout.fillWidth : true
+        backend : root.backend
+      }
+      LP_Assessments{
+        id : assessments
         Layout.fillHeight : true
         Layout.fillWidth : true
         backend : root.backend

@@ -239,7 +239,7 @@ ColumnLayout {
 
       border.color : "black"  
 
-      FourButtonRow {
+      ThreeButtonRow {
         id: controls
         anchors.top : listRectangle.top
         anchors.left : listRectangle.left
@@ -251,10 +251,8 @@ ColumnLayout {
         property int next : 1  
 
         firstButtonText : "Add"
-        fourthButtonText : "Remove"  
-
         secondButtonText : "New"
-        thirdButtonText : "Move Down"  
+        thirdButtonText : "Remove"  
 
         onFirstButtonClicked :{
           event_stack.currentIndex = 0
@@ -310,9 +308,6 @@ ColumnLayout {
           ++next;
         }
         onThirdButtonClicked : {
-          console.log("Reordering Currently Unsupported!")
-        }
-        onFourthButtonClicked : {
           self.event_id = listArea.model.get(listArea.currentIndex).event_id
           self.name = listArea.model.get(listArea.currentIndex).name
           self_scene.scene_id = root.model.get(root.index).id

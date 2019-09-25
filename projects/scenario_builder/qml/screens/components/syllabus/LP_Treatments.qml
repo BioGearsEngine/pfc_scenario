@@ -27,7 +27,7 @@ ColumnLayout {
 
     border.color : "black"
 
-    FourButtonRow {
+    TwoButtonRow {
       id: controls
       anchors.top : listRectangle.top
       anchors.left : listRectangle.left
@@ -39,10 +39,7 @@ ColumnLayout {
       property int next : 1
 
       firstButtonText : "Add"
-      fourthButtonText : "Remove"
-
-      secondButtonText : "Move Up"
-      thirdButtonText : "Move Down"
+      secondButtonText : "Remove"
 
       onFirstButtonClicked :{
         if( next < root.model.count ) 
@@ -77,13 +74,7 @@ ColumnLayout {
         );
         ++next;
       }
-      onSecondButtonClicked :{
-        console.log("Reordering Currently Unsupported!")
-      }
-      onThirdButtonClicked : {
-        console.log("Reordering Currently Unsupported!")
-      }
-      onFourthButtonClicked : {
+      onSecondButtonClicked : {
         self.treatment_id = -1
         self.medical_name = root.model.get(root.index).medical_name
 

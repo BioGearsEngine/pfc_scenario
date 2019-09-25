@@ -15,6 +15,7 @@
         <file>screens/components/common/EquipmentEntry.qml</file>
         <file>screens/components/common/FourButtonRow.qml</file>
         <file>screens/components/common/ThreeButtonRow.qml</file>
+        <file>screens/components/common/TwoButtonRow.qml</file>
         <file>screens/components/common/InjuryListEntry.qml</file>
         <file>screens/components/common/ListEntry.qml</file>
         <file>screens/components/common/PFCButton.qml</file>

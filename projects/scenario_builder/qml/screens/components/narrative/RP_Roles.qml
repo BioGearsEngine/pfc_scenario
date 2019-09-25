@@ -223,7 +223,7 @@ ColumnLayout {
 
       border.color : "black"  
 
-      FourButtonRow {
+      ThreeButtonRow {
         id: controls
         anchors.top : listRectangle.top
         anchors.left : listRectangle.left
@@ -235,10 +235,8 @@ ColumnLayout {
         property int next : 1  
 
         firstButtonText : "Add"
-        fourthButtonText : "Remove"  
-
         secondButtonText : "New"
-        thirdButtonText : "Move Down"  
+        thirdButtonText : "Remove"  
 
         onFirstButtonClicked :{
           role_stack.currentIndex = 0
@@ -281,9 +279,6 @@ ColumnLayout {
           ++next;
         }
         onThirdButtonClicked : {
-          console.log("Reordering Currently Unsupported!")
-        }
-        onFourthButtonClicked : {
           console.log(JSON.stringify(listArea.model.get(listArea.currentIndex)))
           self.role_id = listArea.model.get(listArea.currentIndex).role_id
           self.name = listArea.model.get(listArea.currentIndex).name
