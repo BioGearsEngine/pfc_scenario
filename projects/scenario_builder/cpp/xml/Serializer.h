@@ -6,17 +6,28 @@
 #include "../sql/SqlLite3Driver.h"
 
 namespace pfc {
-class Serializer: public QObject{
+class Serializer : public QObject {
 public:
-  Serializer();
- ~Serializer();
+  Q_OBJECT
 
- void Save(SQLite3Driver *db);
- bool Load(std::string& filename, SQLite3Driver* db);
+  Q_PROPERTY(SQLite3Driver* db MEMBER _db)
+public:
+  explicit Serializer(QObject* parent = nullptr);
+  Serializer(const Serializer&) = delete;
+  Serializer(Serializer&&) = delete;
+  Serializer& operator=(const Serializer&) = delete;
+  Serializer& operator=(Serializer&&) = delete;
+  ~Serializer();
 
- private:
+  Q_INVOKABLE bool save();
+  Q_INVOKABLE bool load(const QString& filename);
 
+signals:
+  void dbChanged();
+
+private:
+  SQLite3Driver* _db = nullptr;
+  
 };
 }
 #endif //PFC_VISUALIZER_XML_SERALIZER_H
-

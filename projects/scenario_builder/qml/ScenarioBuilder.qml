@@ -8,6 +8,7 @@ import QtQuick.Dialogs 1.3
 import "screens"
 
 import com.ara.pfc.ScenarioModel.SQL 1.0 
+import com.ara.pfc.ScenarioModel.XML 1.0 
 //This is importing C++ code
 
 
@@ -48,9 +49,12 @@ ApplicationWindow {
   
   SQLBackend {
     id : scenario_model
-    name : "scenario.sqlite"
+    name : "pfc_sb_working.sqlite"
   }
-
+  XMLSeralizer {
+    id : scenario_serializer
+    db : scenario_model
+  }
   StackView {
     id: mainView
     anchors.fill: parent
@@ -67,14 +71,20 @@ ApplicationWindow {
          mainView.push( scenarioScreen, { backend : scenario_model} )
        }
     }
+
     FileDialog {
       id: loadDialog
       title: "Please Choose a File:"
+      folder:shortcuts.home
       visible: false
+      selectMultiple : false
        nameFilters: [ "Scenarios (*.pfc)", "All files (*)" ]
       //folder: StandardPaths.writableLocation(StandardPaths.DesktopLocation)
       onAccepted: {
-        console.log("You chose: " + fileDialog.fileUrls)
+        console.log("You chose: " + loadDialog.fileUrls)
+        var archive = loadDialog.fileUrls.toString();
+        archive = archive.replace(/file:\/{3}/,"")
+        scenario_serializer.load(archive)
       }
       onRejected: {
         console.log("Canceled")

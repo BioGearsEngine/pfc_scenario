@@ -2,27 +2,46 @@
 
 #include <string>
 
-#include "../zip/ZipFile.h"
-#include "../zip/streams/memstream.h"
-#include "../zip/methods/Bzip2Method.h"
+#include <QDebug>
+
+//#include "../zip/ZipFile.h"
+//#include "../zip/methods/Bzip2Method.h"
+//#include "../zip/streams/memstream.h"
+#include <regex>
 
 namespace pfc {
 
-Serializer::Serializer() {}
-Serializer::~Serializer() {}
-
-void Serializer::Save(SQLite3Driver* db)
+Serializer::Serializer(QObject* parent)
+  : QObject(parent)
 {
 }
 
-bool Serializer::Load(std::string& filename, SQLite3Driver* db)
+Serializer::~Serializer() {}
+
+bool Serializer::save()
 {
-  ZipArchive::Ptr archive = ZipFile::Open("filename");
-  if (archive) {
-    return true;
-  } else {
+  if (!_db) {
     return false;
   }
 }
 
-}// namespace pfc
+bool Serializer::load(const QString& filename)
+{
+  if (!_db) {
+    return false;
+  }
+  //try {
+  //  ZipArchive::Ptr archive = ZipFile::Open(filename.toStdString());
+  //  qInfo() << "OPENED!";
+  //  qInfo() << QString("%1 constains %2 entries").arg(filename).arg(archive->GetEntriesCount());
+  //  for (auto i = 0; i < archive->GetEntriesCount(); ++i) {
+  //    qInfo() << QString("%1").arg(archive->GetEntry(i)->GetName().c_str());
+  //  }
+  //  return true;
+  //} catch (std::runtime_error e){
+  //  qCritical() << "FAILED! "  << e.what();
+    return false;
+  //}
+}
+
+} // namespace pfc

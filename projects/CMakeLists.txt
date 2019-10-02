@@ -37,6 +37,7 @@ find_package(Qt5 COMPONENTS Core Widgets Gui Sql Quick QuickControls2 Qml REQUIR
 #         this list
 ###############################################################################
 add_subdirectory(scenario_builder)
+add_subdirectory(zip)
 ###############################################################################
 # Step 3: Global Doxygen configuration 
 #         you might need to tweak this if you have multiple doxy files

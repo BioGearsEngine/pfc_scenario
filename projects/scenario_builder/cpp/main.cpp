@@ -18,6 +18,7 @@ specific language governing permissions and limitations under the License.
 #include <QSplashScreen>
 #include <QList>
 #include "sql/SqlLite3Driver.h"
+#include "xml/Serializer.h"
 
 int main(int argc, char* argv[])
 {
@@ -45,6 +46,8 @@ int main(int argc, char* argv[])
   qmlRegisterType<pfc::Role>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Role");
   qmlRegisterType<pfc::Treatment>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Treatment");
   qmlRegisterType<pfc::Scene>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Scene");
+
+  qmlRegisterType<pfc::Serializer>("com.ara.pfc.ScenarioModel.XML", 1, 0, "XMLSeralizer");
 
   QPixmap pixmap("D:/biogears/pfc/scenario/build/img/sustain_splash.png");
   qDebug() << QString("%1,%2").arg(pixmap.height()).arg(pixmap.width()); //1280x768
