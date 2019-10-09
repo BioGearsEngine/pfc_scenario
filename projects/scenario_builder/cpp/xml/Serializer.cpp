@@ -1,8 +1,16 @@
 #include "Serializer.h"
 
+#include <chrono>
+#include <iomanip>
+#include <ostream>
+#include <iostream>
+#include <regex>
 #include <string>
 
 #include <QDebug>
+
+#include "../xsd/cpp/MilitaryScenario_1.0.0.hxx"
+#include "../xsd/cpp/pfc_scenario_0.1.hxx"
 
 #include "mz.h"
 #include "mz_os.h"
@@ -12,24 +20,79 @@
 #include "mz_zip.h"
 #include "mz_zip_rw.h"
 
-#include <regex>
+#include "mz_strm_mem.h"
 
 namespace pfc {
+
+xml_schema::date get_now();
 
 Serializer::Serializer(QObject* parent)
   : QObject(parent)
 {
 }
-
-Serializer::~Serializer() {}
-
+//-------------------------------------------------------------------------------
+Serializer::~Serializer()
+{
+}
+//-------------------------------------------------------------------------------
 bool Serializer::save()
 {
+  generate_msdl_stream();
+  generate_pfc_stream();
   if (!_db) {
     return false;
   }
-}
 
+  mz_zip_file file_info;
+  void* read_mem_stream = nullptr;
+  void* write_mem_stream = nullptr;
+  void* os_stream = nullptr;
+  void* zip_handle = nullptr;
+  int32_t written = 0;
+  int32_t read = 0;
+  int32_t text_size = 0;
+  int32_t buffer_size = 0;
+  int32_t err = MZ_OK;
+  char* password = "1234";
+
+  std::string text_name = "scenario.xml";
+  std::string text_ptr = "<XML><!-- Nothing in this file -->";
+
+  memset(&file_info, 0, sizeof(file_info));
+
+  /* Write zip to memory stream */
+  mz_stream_mem_create(&write_mem_stream);
+  mz_stream_mem_set_grow_size(write_mem_stream, 128 * 1024);
+  mz_stream_open(write_mem_stream, nullptr, MZ_OPEN_MODE_CREATE);
+
+  void* writer = nullptr;
+  mz_zip_writer_create(&writer);
+  mz_zip_writer_open_file(writer, "PFC_Scenario.zip", 0, false);
+  text_name = "Scenario.msdl.xml";
+  text_ptr = _msdl_content.str();
+  file_info.version_madeby = MZ_VERSION_MADEBY;
+  file_info.compression_method = MZ_COMPRESS_METHOD_DEFLATE;
+  file_info.filename = text_name.c_str();
+  file_info.uncompressed_size = text_ptr.length();
+  std::cout << file_info.uncompressed_size << "\n";
+  std::cout << text_ptr << "\n";
+  mz_zip_writer_add_buffer(writer, (void*)text_ptr.c_str(), (int32_t)text_ptr.length(), &file_info);
+
+  text_name = "Scenario.pfc.xml";
+  text_ptr = _pfc_content.str();
+  file_info.filename = text_name.c_str();
+  file_info.uncompressed_size = text_ptr.length();
+  std::cout << file_info.uncompressed_size << "\n";
+  std::cout << text_ptr << "\n";
+  mz_zip_writer_add_buffer(writer, (void*)text_ptr.c_str(), (int32_t)text_ptr.length(), &file_info);
+  
+  
+  mz_zip_writer_close(writer);
+  mz_zip_writer_delete(&writer);
+
+  return true;
+}
+//-------------------------------------------------------------------------------
 bool Serializer::load(const QString& filename)
 {
   if (!_db) {
@@ -134,5 +197,122 @@ bool Serializer::load(const QString& filename)
 
   return true;
 }
+//-------------------------------------------------------------------------------
+QString Serializer::get_property(const QString& name)
+{
+  Property prop;
+  prop.name = name;
+  if (_db) {
+    return (_db->select_property(&prop)) ? prop.name : "N/A";
+  }
+  return "N/A";
+}
+//-------------------------------------------------------------------------------
+void Serializer::generate_msdl_stream()
+{
 
-} // namespace pfc
+  auto scenarioID_nameType = msdl_1::MilitaryScenarioType::ScenarioID_type::name_type(get_property("scenario_title").toStdString());
+  auto scenarioID_typeType = msdl_1::MilitaryScenarioType::ScenarioID_type::type_type("PFC");
+  auto scenarioID_versionType = msdl_1::MilitaryScenarioType::ScenarioID_type::version_type(get_property("scenario_version").toStdString());
+  auto scenarioID_modificationDateType = msdl_1::MilitaryScenarioType::ScenarioID_type::modificationDate_type(get_now());
+  auto scenarioID_securityClassificationType = msdl_1::MilitaryScenarioType::ScenarioID_type::securityClassification_type(get_property("scenario_security").toStdString());
+  auto scenarioID_descriptionType = msdl_1::MilitaryScenarioType::ScenarioID_type::description_type(get_property("scenario_purpose").toStdString());
+
+ 
+  auto msdl_scenario_id = std::make_unique<msdl_1::MilitaryScenarioType::ScenarioID_type>(scenarioID_nameType, scenarioID_typeType, scenarioID_versionType, scenarioID_modificationDateType, scenarioID_securityClassificationType, scenarioID_descriptionType);
+  auto msdl_military_version = std::make_unique<msdl_1::MilitaryScenarioType::Options_type>(msdl_1::MilitaryScenarioType::Options_type::MSDLVersion_type(""));
+  auto msdl_force_sides = std::make_unique<msdl_1::MilitaryScenarioType::ForceSides_type>();
+  auto msdl = msdl_1::MilitaryScenarioType(std::move(msdl_scenario_id), std::move(msdl_military_version), std::move(msdl_force_sides));
+
+  _msdl_content.str("");
+
+  xml_schema::namespace_infomap info;
+  info[""].name = "urn:sisostds:scenario:military:data:draft:msdl:1";
+  info[""].schema = "MilitaryScenario_1.0.0.xsd";
+
+  try {
+    msdl_1::MilitaryScenario(_msdl_content, msdl, info);
+  } catch (std::exception e) {
+    std::cout << e.what() << std::endl;
+    _msdl_content << e.what();
+  }
+}
+//-------------------------------------------------------------------------------
+void Serializer::generate_pfc_stream()
+{
+  using pfc::schema::ScenarioSchema;
+
+  namespace pfcs = pfc::schema;
+  auto injury_id = std::make_unique<pfcs::injury::id_type>("");
+  auto injury_medical_name = std::make_unique<pfcs::injury::medical_name_type>();
+  auto injury_description = std::make_unique<pfcs::injury::description_type>();
+
+  auto num_range = pfcs::injury_severity_range();
+  auto injury_severity_range = std::make_unique<pfcs::injury::severity_range_type>(num_range);
+  auto injuries = std::make_unique<pfcs::injury>(std::move(injury_id), std::move(injury_medical_name), std::move(injury_description), std::move(injury_severity_range));
+  auto conditions = std::make_unique<pfcs::ScenarioSchema::conditions_type>(std::move(injuries));
+
+
+  auto treatment_id = std::make_unique<pfcs::treatment_plan::id_type>("");
+  auto treatment_description = std::make_unique<pfcs::treatment_plan::description_type>();
+  auto treatment_required_equipment = std::make_unique<pfcs::treatment_plan::required_equipment_type>();
+  auto treatment_plan = std::make_unique<pfc::schema::treatment_plan>(std::move(treatment_id),std::move(treatment_description), std::move(treatment_required_equipment));
+  auto treatment_plans = std::make_unique<pfcs::treatment_plan_definition_list>(std::move(treatment_plan));
+  
+  
+  auto patient_states = std::make_unique<pfcs::ScenarioSchema::patient_states_type>();
+
+
+  auto learning_objective_id = std::make_unique<pfcs::learning_objective::id_type>("");
+  auto learning_objective_name = std::make_unique<pfcs::learning_objective::name_type>();
+  auto lo_ref_citations = std::make_unique<pfcs::citation_list>();
+  auto lo_ref_cpg_name = std::make_unique<pfcs::cpg_list::name_type>();
+  auto lo_ref_cpg_type = std::make_unique<pfcs::cpg_list::citation_type>();
+  auto lo_ref_cpgs = std::make_unique<pfcs::cpg_list>(std::move(lo_ref_cpg_name), std::move(lo_ref_cpg_type));
+  auto learning_objective_refs = std::make_unique<pfcs::learning_objective::references_type>(std::move(lo_ref_citations), std::move(lo_ref_cpgs));
+  auto lo_ip_ref_list = std::make_unique <pfcs::injury_profile_reference_list>();
+  auto lo_tp_ref_list = std::make_unique <pfcs::treatment_plan_reference_list>();
+  auto learning_objective_relates = std::make_unique<pfcs::learning_objective::relates_to_type>(std::move(lo_tp_ref_list),std::move(lo_ip_ref_list));
+  auto learning_objective = std::make_unique<pfcs::learning_objective>(std::move(learning_objective_id), std::move(learning_objective_name), std::move(learning_objective_refs), std::move(learning_objective_relates));
+  auto learning_objectives = std::make_unique<pfcs::learning_objective_list>(std::move(learning_objective));
+  auto assessment_points = pfcs::assessment_criteria_list::total_points_type();
+  auto assessment_criteira = std::make_unique<pfcs::assessment_criteria_list>(std::move(assessment_points));
+  auto syllabus = std::make_unique<pfcs::ScenarioSchema::syllabus_type>(std::move(learning_objectives), std::move(assessment_criteira));
+
+
+  auto id = ::xml_schema::id("");
+  auto med_sc_roles = std::make_unique<pfcs::medical_scenario::roles_type>();
+  auto med_sc_props = std::make_unique<pfcs::medical_scenario::props_type>();
+  auto med_sc_script = std::make_unique<pfcs::medical_scenario::training_script_type>();
+  auto medical_scenario = std::make_unique<ScenarioSchema::medical_scenario_type>(std::move(id), std::move(med_sc_roles), std::move(med_sc_props), std::move(med_sc_script));
+
+  
+  auto pfc = ScenarioSchema(std::move(conditions), std::move(treatment_plans), std::move(patient_states), std::move(syllabus), std::move(medical_scenario));
+  _pfc_content.str("");
+
+  xml_schema::namespace_infomap info;
+  info[""].name = "urn:sisostds:scenario:military:data:draft:msdl:1";
+  info[""].schema = "MilitaryScenario_1.0.0.xsd";
+
+  try {
+    Scenario(_pfc_content, pfc, info);
+  } catch (std::exception e) {
+    std::cout << e.what() << std::endl;
+    _pfc_content << e.what();
+  }
+}
+//-------------------------------------------------------------------------------
+xml_schema::date get_now()
+{
+  std::time_t t = std::time(nullptr);
+  auto tm = std::localtime(&t);
+
+  return xml_schema::date{ static_cast<int>(tm->tm_year),
+                           static_cast<unsigned short>(tm->tm_mon),
+                           static_cast<unsigned short>(tm->tm_yday),
+                           static_cast< short>(tm->tm_hour),
+                           static_cast< short>(tm->tm_min) };
+}
+//-------------------------------------------------------------------------------
+}
+// namespace pfc

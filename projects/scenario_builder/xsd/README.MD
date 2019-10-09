@@ -9,9 +9,11 @@ The following instructions require Codesynthesis XSD 4.0 which is avaliable as a
  1. Install XSD
  1. In a terminal perform the following
  ```shell
-xsd.exe  cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --output-dir cpp *.xsd
+xsd.exe  cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --output-dir cpp M.xsd
 
 xsd.exe  cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --output-dir cpp/extern extern/*.xsd
+
+\xsd.exe cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --output-dir cpp  --namespace-map "com:ara:pfc:training:1"=pfc::schema pfc_scenario_0.1.xsd
 ```
 
 ## Contents

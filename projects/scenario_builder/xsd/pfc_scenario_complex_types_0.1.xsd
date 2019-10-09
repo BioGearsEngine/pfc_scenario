@@ -6,19 +6,22 @@
 Albuquerque, NM 87110
 All rights reserved.
 ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
-<xs:schema 
-	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="com:ara:pfc:training:1"
+	version="0.1" 
 	xmlns="com:ara:pfc:training:1"
-	xmlns:msdl="urn:sisostds:scenario:military:data:draft:msdl:1" 
 	xmlns:pfc="com:ara:pfc:training:1"
-	targetNamespace="com:ara:pfc:training:1" elementFormDefault="unqualified" attributeFormDefault="unqualified" version="0.1.0" id="pfc">
-	<!--<xs:include schemaLocation="MsdlComplexTypes_1.0.0.xsd"/> -->
+	xmlns:msdl="urn:sisostds:scenario:military:data:draft:msdl:1"
+	xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning">
+
+	<xs:import namespace="urn:sisostds:scenario:military:data:draft:msdl:1" schemaLocation="MilitaryScenario_1.0.0.xsd"/>
+	
 	<xs:complexType name="injury-definition-list">
 		<xs:annotation>
 			<xs:documentation>List of pfc:injury types.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="injury" type="pfc:injury" minOccurs="1" />
+			<xs:element name="injury" type="injury" minOccurs="1"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="injury">
@@ -30,12 +33,12 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:all>
-			<xs:element name="id" type="xs:id"/>
+			<xs:element name="id" type="xs:ID"/>
 			<xs:element name="common-name" type="xs:string" minOccurs="0"/>
 			<xs:element name="medical-name" type="xs:string" minOccurs="1"/>
-			<xs:element name="citations" type="pfc:citation-list" minOccurs="0"/>
+			<xs:element name="citations" type="citation-list" minOccurs="0"/>
 			<xs:element name="description" type="xs:string" minOccurs="1"/>
-			<xs:element name="severity-range" type="pfc:injury-severity-range" minOccurs="1"/>
+			<xs:element name="severity-range" type="injury-severity-range" minOccurs="1"/>
 		</xs:all>
 	</xs:complexType>
 	<xs:complexType name="injury-severity-range">
@@ -47,11 +50,11 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:choice>
-			<xs:element name="numeric-range" type="pfc:numeric-range"/>
-			<xs:element name="token-range" type="pfc:token-range"/>
+			<xs:element name="numeric-range" type="numeric-range"/>
+			<xs:element name="token-range" type="token-range"/>
 		</xs:choice>
 	</xs:complexType>
-	<xs:complexType name="numeric-range" >
+	<xs:complexType name="numeric-range">
 		<xs:annotation>
 			<xs:documentation>
 				Numerical range of two doubles with an optional median value and unit type. The injury definition mostly uses this for documentation.
@@ -93,7 +96,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			<xs:documentation>List of pfc:treatment-plan types.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="treatment-plan" type="pfc:treatment-plan" minOccurs="1" />
+			<xs:element name="treatment-plan" type="treatment-plan" minOccurs="1"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="treatment-plan">
@@ -105,11 +108,11 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:all>
-			<xs:element name="id" type="xs:id"/>
+			<xs:element name="id" type="xs:ID"/>
 			<xs:element name="common-name" type="xs:string" minOccurs="0"/>
 			<xs:element name="description" type="xs:string" minOccurs="1"/>
-			<xs:element name="required-equipment" type="pfc:medical-equipment-list" minOccurs="1"/>
-			<xs:element name="references" type="pfc:treatment-plan-citation-list" minOccurs="0"/>
+			<xs:element name="required-equipment" type="medical-equipment-list" minOccurs="1"/>
+			<xs:element name="references" type="treatment-plan-citation-list" minOccurs="0"/>
 		</xs:all>
 	</xs:complexType>
 	<xs:complexType name="medical-equipment-list">
@@ -119,7 +122,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="equipment-ref" type="xs:idref" minOccurs="1" maxOccurs="unbounded" />
+			<xs:element name="equipment-ref" type="xs:IDREF" minOccurs="1" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="treatment-plan-citation-list">
@@ -131,9 +134,9 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:all>
-			<xs:element name="citations" type="pfc:citation-list" />
-			<xs:element name="cpgs" type="pfc:cpg-list" />
-			<!-- <xs:element name="related-learning-objectives" type="pfc:learning-objective-reference-list" /> -->
+			<xs:element name="citations" type="citation-list"/>
+			<xs:element name="cpgs" type="cpg-list"/>
+			<!-- <xs:element name="related-learning-objectives" type="learning-objective-reference-list" /> -->
 		</xs:all>
 	</xs:complexType>
 	<xs:complexType name="cpg-list">
@@ -144,8 +147,8 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:all>
-			<xs:element name="name" type="xs:string" />
-			<xs:element name="citation" type="xs:string" />
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="citation" type="xs:string"/>
 		</xs:all>
 	</xs:complexType>
 	<xs:complexType name="learning-objective-reference-list">
@@ -155,7 +158,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="objective" type="xs:idref" minOccurs="1" maxOccurs="unbounded" />
+			<xs:element name="objective" type="xs:IDREF" minOccurs="1" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="treatment-plan-reference-list">
@@ -165,7 +168,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="treatment-plan" type="xs:idref" minOccurs="1" maxOccurs="unbounded" />
+			<xs:element name="treatment-plan" type="xs:IDREF" minOccurs="1" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="injury-profile-list">
@@ -175,7 +178,8 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="injury-profile" type="pfc:injury-profile" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="injury-profile" type="injury-profile" minOccurs="1"
+				maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="injury-profile">
@@ -186,13 +190,14 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 				case may include medical conditions or diagnosis, but will generally be a combat casualty wound. 
 			</xs:documentation>
 		</xs:annotation>
-		<xs:all>
-			<xs:element name="id" type="xs:id" minOccurs="1"/>
+		<xs:sequence>
+			<xs:element name="id" type="xs:ID" minOccurs="1"/>
 			<xs:element name="name" type="xs:string" minOccurs="1"/>
-			<xs:element name="physiology-state" type="xs:string" minOccurance="0" />
-			<xs:element name="injuries" type="pfc:injury-occurance-list" minOccurs="1" maxOccurs="unbounded"/>
-			<xs:element name="treatments" type="pfc:treatment-plan-reference-list"/>
-		</xs:all>
+			<xs:element name="physiology-state" type="xs:string" minOccurs="0"/>
+			<xs:element name="injuries" type="injury-occurance-list" minOccurs="1"
+				maxOccurs="unbounded"/>
+			<xs:element name="treatments" type="treatment-plan-reference-list"/>
+		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="injury-profile-reference-list">
 		<xs:annotation>
@@ -201,7 +206,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="injury-profile" type="xs:idref" minOccurs="1" maxOccurs="unbounded" />
+			<xs:element name="injury-profile" type="xs:IDREF" minOccurs="1" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="injury-occurance-list">
@@ -215,7 +220,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:all>
-			<xs:element name="id" type="xs:idref" minOccurs="1"/>
+			<xs:element name="id" type="xs:IDREF" minOccurs="1"/>
 			<xs:element name="location" type="xs:string" minOccurs="1"/>
 			<xs:element name="description" type="xs:string" minOccurs="1"/>
 			<xs:element name="severity" type="xs:string" minOccurs="1"/>
@@ -223,26 +228,28 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 	</xs:complexType>
 	<xs:complexType name="medical-scenario-syllabus">
 		<xs:all>
-			<xs:element name="learning-objectives" type="pfc:learning-objective-list" />
-			<xs:element name="assessment-criteria" type="pfc:assessment-criteria-list" />
+			<xs:element name="learning-objectives" type="learning-objective-list"/>
+			<xs:element name="assessment-criteria" type="assessment-criteria-list"/>
 		</xs:all>
 	</xs:complexType>
 	<xs:complexType name="learning-objective-list">
 		<xs:sequence>
-			<xs:element name="learning-objective" type="pfc:learning-objective"/>
+			<xs:element name="learning-objective" type="learning-objective"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="learning-objective" >
+	<xs:complexType name="learning-objective">
 		<xs:all>
-			<xs:element name="id" type="xs:id" />
-			<xs:element name="name" type="xs:string" />
-			<xs:element name="references" type="pfc:treatment-plan-citation-list" />
-			<xs:complexType name="relates-to">
-				<xs:all>
-					<xs:element name="treatment-plans" type="pfc:treatment-plan-reference-list" />
-					<xs:element name="injury-profiles" type="pfc:injury-profile-reference-list" />
-				</xs:all>
-			</xs:complexType>
+			<xs:element name="id" type="xs:ID"/>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="references" type="treatment-plan-citation-list"/>
+			<xs:element name="relates-to">
+				<xs:complexType>
+					<xs:all>
+						<xs:element name="treatment-plans" type="treatment-plan-reference-list"/>
+						<xs:element name="injury-profiles" type="injury-profile-reference-list"/>
+					</xs:all>
+				</xs:complexType>
+			</xs:element>
 		</xs:all>
 	</xs:complexType>
 	<xs:complexType name="assessment-criteria-list">
@@ -253,20 +260,20 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="total-points" type="xs:integer" minOccurs="1" maxOccurs="1"/>
-			<xs:element name="assessment" type="pfc:assessment" minOccurs="1" maxOccurs="unbounded" />
+			<xs:element name="assessment" type="assessment" minOccurs="1" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="assessment" >
+	<xs:complexType name="assessment">
 		<xs:annotation>
 			<xs:documentation>
 				An assessment consist of an id and a idref to a lesson-objective.  This type is a work in practice and the criteria element is likely be reworked beyond a string in a future revision
 			</xs:documentation>
 		</xs:annotation>
 		<xs:all>
-			<xs:element name="id" type="xs:id" />
-			<xs:element name="objective-id" type="xs:idref" />
+			<xs:element name="id" type="xs:ID"/>
+			<xs:element name="objective-id" type="xs:IDREF"/>
 			<xs:element name="points-avaiable" type="xs:integer"/>
-			<xs:element name="criteria" type="xs:string" />
+			<xs:element name="criteria" type="xs:string"/>
 		</xs:all>
 	</xs:complexType>
 	<xs:complexType name="medical-scenario">
@@ -281,23 +288,23 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:all>
-			<xs:element name="id" type="xs:id" />
-			<xs:element name="roles" type="pfc:role-list"/>
-			<xs:element name="props" type="pfc:prop-list"/>
-			<xs:element name="training-script" type="pfc:scene-list"/>
+			<xs:element name="id" type="xs:ID"/>
+			<xs:element name="roles" type="role-list"/>
+			<xs:element name="props" type="prop-list"/>
+			<xs:element name="training-script" type="scene-list"/>
 		</xs:all>
 	</xs:complexType>
-	<complexType name="role-list">
+	<xs:complexType name="role-list">
 		<xs:annotation>
 			<xs:documentation>
 				List of pfc:roles
 			</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="role" type="pfc:role" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="role" type="role" minOccurs="1" maxOccurs="unbounded"/>
 		</xs:sequence>
-	</complexType>
-	<complexType name="role">
+	</xs:complexType>
+	<xs:complexType name="role">
 		<xs:annotation>
 			<xs:documentation>
 				A role is a refernce to a msdl:force_side:unit with an optional pfc:injury-profile reference.
@@ -307,23 +314,23 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:all>
-			<xs:element name="short-name" type="xs:string" />
-			<xs:element name="unit-id" type="xs:idref" />
-			<xs:element name="injury-profile-id" type="xs:idref" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="description" type="xs:string" />
+			<xs:element name="short-name" type="xs:string"/>
+			<xs:element name="unit-id" type="xs:IDREF"/>
+			<xs:element name="injury-profile-id" type="xs:IDREF" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="description" type="xs:string"/>
 		</xs:all>
-	</complexType>
-	<complexType name="prop-list">
+	</xs:complexType>
+	<xs:complexType name="prop-list">
 		<xs:annotation>
 			<xs:documentation>
 				List of pfc:props
 			</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="prop" type="pfc:prop" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="prop" type="prop" minOccurs="1" maxOccurs="unbounded"/>
 		</xs:sequence>
-	</complexType>
-	<complexType name="prop">
+	</xs:complexType>
+	<xs:complexType name="prop">
 		<xs:annotation>
 			<xs:documentation>
 				A prop is a refernce to a msdl:force_side:equipment
@@ -333,22 +340,22 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:all>
-			<xs:element name="short-name" type="xs:string" />
-			<xs:element name="equipment-id" type="xs:idref" />
-			<xs:element name="description" type="xs:string" />
+			<xs:element name="short-name" type="xs:string"/>
+			<xs:element name="equipment-id" type="xs:IDREF"/>
+			<xs:element name="description" type="xs:string"/>
 		</xs:all>
-	</complexType>
-	<complexType name="scene-list">
+	</xs:complexType>
+	<xs:complexType name="scene-list">
 		<xs:annotation>
 			<xs:documentation>
 				List of pfc:scene(s)
 			</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="scene" type="pfc:scene" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="scene" type="scene" minOccurs="1" maxOccurs="unbounded"/>
 		</xs:sequence>
-	</complexType>
-	<complexType name="scene">
+	</xs:complexType>
+	<xs:complexType name="scene">
 		<xs:annotation>
 			<xs:documentation>
 				A scene is a reference msdl:installation with its own independent metorlgoical data and time of day.
@@ -359,25 +366,25 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:all>
-			<xs:element name="location-id" type="xs:idref" />
-			<xs:element name="description" type="xs:string" />
+			<xs:element name="location-id" type="xs:IDREF"/>
+			<xs:element name="description" type="xs:string"/>
 			<xs:element name="time-of-day" type="xs:time"/>
-			<xs:element name="time-in-simulation" type="xs:integer" />
-			<xs:element name="weather" type="msdl:environment" minOccurs="0"/>
-			<xs:element name="events" type="pfc:event-list"/>
+			<xs:element name="time-in-simulation" type="xs:integer"/>
+			<!-- <xs:element name="weather" type="msdl:EnvironmentType" minOccurs="0"/> -->
+			<xs:element name="events" type="event-list"/>
 		</xs:all>
-	</complexType>
-	<complexType name="event-list">
+	</xs:complexType>
+	<xs:complexType name="event-list">
 		<xs:annotation>
 			<xs:documentation>
 				List of pfc:event(s)
 			</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="event" type="pfc:event" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="event" type="event" minOccurs="1" maxOccurs="unbounded"/>
 		</xs:sequence>
-	</complexType>
-	<complexType name="event">
+	</xs:complexType>
+	<xs:complexType name="event">
 		<xs:annotation>
 			<xs:documentation>
 				An event is a pfc:event-category-enum a pfc:event-fedelity-enum 
@@ -394,21 +401,41 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:all>
-			<xs:element name="category" type="pfc:event-category-enum" />
-			<xs:element name="fedelity" type="pfc:event-fedelity-enum" />
-			<xs:element name="details" type="xs:string" />
+			<xs:element name="category" type="event-category-enum"/>
+			<xs:element name="fedelity" type="event-fedelity-enum"/>
+			<xs:element name="details" type="xs:string"/>
 		</xs:all>
-	</complexType>
+	</xs:complexType>
 	<xs:simpleType name="event-category-enum">
 		<xs:annotation>
 			<xs:documentation>Enumerated choice of an pfc:event category each of which describes one type of action that can occur in this event</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="ACTION"><xs:annotation><xs:documentation>An Action is the result of a Role acting upon a peice of equipment or another Role. Can be detailed at all fedelity levels</xs:documentation></xs:annotation></xs:enumeration>
-			<xs:enumeration value="DIALOG"><xs:annotation><xs:documentation>Dialog is anytime a Role or Object performs audiable dialog in the scene. Typically for Medium or Higher fedelity.</xs:documentation></xs:annotation></xs:enumeration>
-			<xs:enumeration value="MOVMENT"><xs:annotation><xs:documentation>Any time a Role or Object changes location in the scene .</xs:documentation></xs:annotation></xs:enumeration>
-			<xs:enumeration value="SOUND"><xs:annotation><xs:documentation>Background or ambient sound affects typically at a high fedelity level as most low and medium fedeity implementations do not have sound systems.</xs:documentation></xs:annotation></xs:enumeration>
-			<xs:enumeration value="ENVIRONMENT"><xs:annotation><xs:documentation>Typically used to describe changes in set design or weather events almost always reserved for high fedelity simulations.</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="ACTION">
+				<xs:annotation>
+					<xs:documentation>An Action is the result of a Role acting upon a peice of equipment or another Role. Can be detailed at all fedelity levels</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DIALOG">
+				<xs:annotation>
+					<xs:documentation>Dialog is anytime a Role or Object performs audiable dialog in the scene. Typically for Medium or Higher fedelity.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MOVMENT">
+				<xs:annotation>
+					<xs:documentation>Any time a Role or Object changes location in the scene .</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SOUND">
+				<xs:annotation>
+					<xs:documentation>Background or ambient sound affects typically at a high fedelity level as most low and medium fedeity implementations do not have sound systems.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ENVIRONMENT">
+				<xs:annotation>
+					<xs:documentation>Typically used to describe changes in set design or weather events almost always reserved for high fedelity simulations.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="event-fedelity-enum">
@@ -416,10 +443,21 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			<xs:documentation>Enumerated choice of an pfc:event fedelity is intended to be used as a guide by implementations on if the details of this event an be skipped over. Additional fedelity levels may be include in the future</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="LOW"><xs:annotation><xs:documentation>Low fedelity implementations are intende for traditional medical simulators which use live actors are need only to know the high level details like initial injuries and placment of equipment in the scene.</xs:documentation></xs:annotation></xs:enumeration>
-			<xs:enumeration value="MEDIUM"><xs:annotation><xs:documentation>Medium fedelity implementations are higher level simulations which include some scripted dialog and movment. The details included at this  level  give non trainies instructions on how to act when not interacting directly with the trainee</xs:documentation></xs:annotation></xs:enumeration>
-			<xs:enumeration value="HIGH"><xs:annotation><xs:documentation>High fedelity simulations are typically fully virtual simulations which must create atmosphereic ad background effects to enhance emerssian We are truly in the weeds at this level of scripting.</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="LOW">
+				<xs:annotation>
+					<xs:documentation>Low fedelity implementations are intende for traditional medical simulators which use live actors are need only to know the high level details like initial injuries and placment of equipment in the scene.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MEDIUM">
+				<xs:annotation>
+					<xs:documentation>Medium fedelity implementations are higher level simulations which include some scripted dialog and movment. The details included at this  level  give non trainies instructions on how to act when not interacting directly with the trainee</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HIGH">
+				<xs:annotation>
+					<xs:documentation>High fedelity simulations are typically fully virtual simulations which must create atmosphereic ad background effects to enhance emerssian We are truly in the weeds at this level of scripting.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>
-N

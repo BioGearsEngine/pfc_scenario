@@ -23,10 +23,28 @@ ApplicationWindow {
     Menu {
       title: "File"
       font.pointSize : 8
-        MenuItem { text: "New Scenario";     }
-        MenuItem { text: "Save Scenario";    }
-        MenuItem { text: "Save Scenario As"; }
-        MenuItem { text: "Load Scenario";    }
+        MenuItem { text: "New Scenario";
+                   onTriggered : {
+                     console.log (text)
+                     scenario_model.open();
+                     scenario_model.initialize_db();
+                     mainView.push( scenarioScreen, { backend : scenario_model} )
+                 } }
+        MenuItem { text: "Save Scenario";
+                   onTriggered : {
+                    console.log (text)
+                    scenario_serializer.save()
+                 }  }
+        MenuItem { text: "Save Scenario As";
+                  onTriggered : {
+                    console.log (text)
+                    scenario_serializer.save()
+                  }  }
+        MenuItem { text: "Load Scenario";
+                   onTriggered : {
+                   console.log (text)
+                   loadDialog.open()
+                 }  }
     }
     Menu {
       title: "Edit"

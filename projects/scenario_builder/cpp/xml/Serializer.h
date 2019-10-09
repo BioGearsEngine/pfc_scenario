@@ -1,6 +1,7 @@
 #ifndef PFC_VISUALIZER_XML_SERALIZER_H
 #define PFC_VISUALIZER_XML_SERALIZER_H
 
+#include <sstream>
 #include <QObject>
 
 #include "../sql/SqlLite3Driver.h"
@@ -24,10 +25,15 @@ public:
 
 signals:
   void dbChanged();
-
+protected:
+  QString get_property(const QString& name);
+  void generate_msdl_stream();
+  void generate_pfc_stream();
 private:
   SQLite3Driver* _db = nullptr;
-  
+  std::stringstream _msdl_content;
+  std::stringstream _pfc_content;
+  std::map<std::string, std::string> _images;  //Map of Image Keys,Paths
 };
 }
 #endif //PFC_VISUALIZER_XML_SERALIZER_H
