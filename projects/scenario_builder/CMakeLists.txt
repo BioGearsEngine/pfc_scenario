@@ -203,4 +203,5 @@ target_compile_options(unit_${PROJECT_NAME} PRIVATE $<$<PLATFORM_ID:Windows>:/bi
 
 ################################################################################
 message(STATUS "")
+generate_project_suffix()
 endif()
