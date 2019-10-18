@@ -110,25 +110,27 @@ ColumnLayout {
 
           }
         }
-         TextField {
+         Rectangle {
            id : scene_title_text
            anchors.left : scene.left
            anchors.leftMargin : 5
-           text :  model.name 
            width : 150
-           font.weight: Font.Bold
-           font.pointSize: 10
-           readOnly : true
-           activeFocusOnPress: false
-           hoverEnabled : false
+           Text  {
+            text :  model.name 
+            font.weight: Font.Bold
+            font.pointSize: 10
+           }
+           //readOnly : true
+           //activeFocusOnPress: false
+           //hoverEnabled : false
            enabled : false
            color: enabled ? Material.primaryTextColor : Material.primaryTextColor
-           onEditingFinished : {
-             self.scene_id = model.id
-             self.name = text
-             root.backend.update_scene(self)
-             model.id = self.scene_id
-          }
+//           onEditingFinished : {
+//             self.scene_id = model.id
+//             self.name = text
+//             root.backend.update_scene(self)
+//             model.id = self.scene_id
+//          }
         }
 
         states: State {

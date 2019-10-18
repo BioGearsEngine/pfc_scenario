@@ -586,7 +586,7 @@ public:
     fk_equipment = rhs.fk_equipment;
   }
 };
-//----End Citation_Map
+//----End Equipment_Map
 struct Objective : public QObject {
   Q_OBJECT
   Q_PROPERTY(int objective_id MEMBER id)

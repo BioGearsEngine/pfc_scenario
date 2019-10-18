@@ -12,12 +12,14 @@
         <!--Shared Components -->
         <file>screens/components/common/AuthorEntry.qml</file>
         <file>screens/components/common/CitationListEntry.qml</file>
+        <file>screens/components/common/FullCitationListEntry.qml</file>
         <file>screens/components/common/EquipmentEntry.qml</file>
         <file>screens/components/common/FourButtonRow.qml</file>
         <file>screens/components/common/ThreeButtonRow.qml</file>
         <file>screens/components/common/TwoButtonRow.qml</file>
         <file>screens/components/common/InjuryListEntry.qml</file>
         <file>screens/components/common/ListEntry.qml</file>
+        <file>screens/components/common/FullListEntry.qml</file>
         <file>screens/components/common/PFCButton.qml</file>
         <file>screens/components/common/PFCLabel.qml</file>
         <file>screens/components/common/PropertyAreaEntry.qml</file>
@@ -27,6 +29,8 @@
         <file>screens/components/common/TextAreaEntry.qml</file>
         <file>screens/components/common/TextEntry.qml</file>
         <file>screens/components/common/TimeEntry.qml</file>
+        <file>screens/components/common/EventEditPane.qml</file>
+        <file>screens/components/common/RoleEditPane.qml</file>
 
         <!-- Narrative Tab Components -->
         <file>screens/components/narrative/RightPane.qml</file>

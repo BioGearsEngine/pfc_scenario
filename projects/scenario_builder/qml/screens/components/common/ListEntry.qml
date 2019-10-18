@@ -17,6 +17,7 @@ Rectangle {
   property alias current : listArea.currentIndex
   property alias highlight : listArea.highlight
 
+  signal list()
   signal added(int index)
   signal removed(int index)
 
@@ -43,17 +44,29 @@ Rectangle {
     anchors { left : name.right; right: parent.right ; }
 
    PFCButton {
-      id : addButton
-      text : "Add " + root.label
+      id : listButton
+      text : "List " + root.label +"s"
       anchors.left : content.left
       anchors.leftMargin : 5
+  
+      onClicked : {
+        root.list()
+      }
+      onComplete: console.log("Add Button works")
+    }
+   PFCButton {
+      id : addButton
+      text : "Add " + root.label
+      anchors.left : listButton.right
+      anchors.right : removeButton.left
+      anchors.leftMargin : 5
+      anchors.rightMargin : 5
   
       onClicked : {
         root.added(root.model.count)
       }
       onComplete: console.log("Add Button works")
     }
-
     PFCButton {
       id: removeButton
       text : "Remove " + root.label
@@ -62,7 +75,7 @@ Rectangle {
 
       
       onClicked : {
-        root.removed(root.current )
+        root.removed(root.current)
       }
       onComplete: console.log("Remove Button works") 
     }

@@ -159,6 +159,9 @@ ListEntry {
     }
   }
 
+  onList : {
+
+  }
   onAdded : {
     var likely_id = root.backend.nextID(SQLBackend.CITATIONS) + 1
     self.citation_id = -1

@@ -214,7 +214,11 @@ ColumnLayout {
         ScrollBar.vertical: ScrollBar { }  
       }      
     }
-
+    StackLayout {
+      id: contentStack
+      Layout.fillWidth: true
+      Layout.fillHeight: true
+      currentIndex: 0
     Rectangle {
       id : listRectangle
       Layout.fillWidth : true
@@ -320,6 +324,14 @@ ColumnLayout {
               listArea.currentIndex = index  
 
             }
+            onDoubleClicked: {
+              console.log("DOUBLECLICK")
+              console.log(JSON.stringify(listArea.model.get(index)))
+              roleEdit.name = listArea.model.get(index).name
+              roleEdit.description = listArea.model.get(index).description
+              roleEdit.roleID = listArea.model.get(index).role_id
+              contentStack.currentIndex = 1
+            }
           }  
 
           Text {
@@ -378,6 +390,36 @@ ColumnLayout {
           }
         }
       }
+    }
+    RoleEditPane {
+      id: roleEdit
+      Layout.fillWidth : true
+      Layout.fillHeight: true
+      Layout.margins : 5  
+      backend: root.backend
+      onExit : {
+        contentStack.currentIndex = 0
+        role_stack.currentIndex = 1
+        var values = model.get(index)
+        if (values) {
+          listArea.model.clear()
+          self_scene.scene_id = root.model.get(root.index).id
+          self_scene.name = root.model.get(root.index).name
+          console.log(JSON.stringify(self_scene))
+          root.backend.roles_in_scene(self_scene)
+          while ( root.backend.next_role(self) ) {
+            console.log(JSON.stringify(self))
+            listArea.model.insert(listArea.model.count,
+            {
+              "role_id" : self.role_id,
+              "name" : "%1".arg(self.name),
+              "description" : "%1".arg(self.description)
+            });
+          }
+        }        
+      }
+      //border.color : "black"  
+    }
     }
   }
     onIndexChanged : {

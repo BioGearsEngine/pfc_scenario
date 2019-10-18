@@ -39,12 +39,6 @@ Flickable {
         Layout.fillHeight: true
         Layout.fillWidth: true
       }
-      RP_Assessments{
-        id : assessments
-        backend : root.backend
-        Layout.fillHeight: true
-        Layout.fillWidth: true
-      }
       RP_Injuries {
         id : injuries
         backend : root.backend
@@ -65,6 +59,12 @@ Flickable {
       }
       RP_Equipment {
         id : equipment
+        backend : root.backend
+        Layout.fillHeight: true
+        Layout.fillWidth: true
+      }
+      RP_Assessments{
+        id : assessments
         backend : root.backend
         Layout.fillHeight: true
         Layout.fillWidth: true
