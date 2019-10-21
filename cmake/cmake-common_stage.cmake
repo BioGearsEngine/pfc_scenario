@@ -57,10 +57,20 @@ if( NOT UNIX )
 endif()
 
 set(CONFIG_SUFFIX ${CMAKE_${CONFIG}_POSTFIX})
-foreach(_dir IN LISTS CMAKE_PREFIX_PATH)
+message(STATUS "set(CONFIG_SUFFIX ${CMAKE_${CONFIG}_POSTFIX})")
+message(STATUS "CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}")
+list(APPEND SEARCH_LIST ${CMAKE_PREFIX_PATH} ${CMAKE_INSTALL_PREFIX})
+message(STATUS "SEARCH_IST=${SEARCH_LIST}")
+foreach(_dir IN LISTS SEARCH_LIST)
     list(APPEND THIRD_PARTY  ${_dir})
     list(APPEND THIRD_PARTY_LIB ${_dir}/lib)
     list(APPEND THIRD_PARTY_BIN ${_dir}/bin)
+
+message(STATUS "
+    list(APPEND THIRD_PARTY  ${_dir})
+    list(APPEND THIRD_PARTY_LIB ${_dir}/lib)
+    list(APPEND THIRD_PARTY_BIN ${_dir}/bin)
+    ")
 endforeach()
 
 
