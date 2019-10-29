@@ -32,42 +32,77 @@ Flickable {
       id : stack
       anchors.fill : parent
       anchors.bottomMargin : 5
-
-      RP_Objectives{
-        id : objectives
-        backend : root.backend
+      Rectangle {
         Layout.fillHeight: true
         Layout.fillWidth: true
+        border.color: 'black'
+        border.width: 1
+        RP_Objectives{
+          id : objectives
+          backend : root.backend
+          width: parent.width
+          height: parent.height
+        }
       }
-      RP_Injuries {
-        id : injuries
-        backend : root.backend
+      Rectangle {
         Layout.fillHeight: true
         Layout.fillWidth: true
+        border.color: 'black'
+        border.width: 1
+        RP_Injuries {
+          id : injuries
+          backend : root.backend
+          width: parent.width
+          height: parent.height
+        }
       }
-      RP_InjurySets {
-        id : injurySets
-        backend : root.backend
+      Rectangle {
         Layout.fillHeight: true
         Layout.fillWidth: true
+        border.color: 'black'
+        border.width: 1
+        RP_InjurySets {
+          id : injurySets
+          backend : root.backend
+          width: parent.width
+          height: parent.height
+        }
       }
-      RP_Treatments {
-        id : treatments
-        backend : root.backend
+      Rectangle {
         Layout.fillHeight: true
         Layout.fillWidth: true
+        border.color: 'black'
+        border.width: 1
+        RP_Treatments {
+          id : treatments
+          backend : root.backend
+          width: parent.width
+          height: parent.height
+        }
       }
-      RP_Equipment {
-        id : equipment
-        backend : root.backend
+      Rectangle {
         Layout.fillHeight: true
         Layout.fillWidth: true
+        border.color: 'black'
+        border.width: 1      
+        RP_Equipment {
+          id : equipment
+          backend : root.backend
+          width: parent.width
+          height: parent.height
+        }
       }
-      RP_Assessments{
-        id : assessments
-        backend : root.backend
+      Rectangle {
         Layout.fillHeight: true
         Layout.fillWidth: true
+        border.color: 'black'
+        border.width: 1
+        RP_Assessments{
+          id : assessments
+          backend : root.backend
+          width: parent.width
+          height: parent.height
+        }
       }
   }
 }

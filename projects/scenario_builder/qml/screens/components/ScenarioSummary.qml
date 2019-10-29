@@ -21,7 +21,8 @@ GridLayout {
     scenarioTitle : root.scenarioTitle
     Layout.preferredWidth: parent.width / 2
     Layout.fillHeight: true
-
+    border.color: 'black'
+    border.width: 1
     onScenarioTitleChanged : {
       root.scenarioTitle = scenarioTitle
     }
@@ -31,10 +32,10 @@ GridLayout {
   RightPane{
     id : summary_right
     backend : root.backend
-
+    border.color: 'black'
+    border.width: 1
     Layout.fillWidth: true
     Layout.fillHeight: true
-    Layout.topMargin : 58
   }
 }
 

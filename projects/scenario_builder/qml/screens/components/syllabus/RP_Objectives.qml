@@ -41,7 +41,7 @@ ColumnLayout  {
 
     TextEntry {
       Layout.fillWidth: true
-
+      Layout.leftMargin: 5
       id: nameEntry
       label : "Name"
       placeholderText: "String Field (128 Characters)"
@@ -58,7 +58,7 @@ ColumnLayout  {
 
     TextAreaEntry {
       Layout.fillWidth: true
-
+      Layout.leftMargin: 5
       id: descriptionEntry
       label : "Description"
       required: true
@@ -76,6 +76,7 @@ ColumnLayout  {
       id : listStack
       Layout.fillWidth : true
       Layout.fillHeight : true
+      Layout.leftMargin: 5
       currentIndex : 0
       CitationListEntry {
         id : referenceList

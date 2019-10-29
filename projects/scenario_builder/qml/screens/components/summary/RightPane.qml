@@ -35,6 +35,7 @@ Rectangle {
     PropertyEntry {
       Layout.fillWidth : true
       Layout.alignment: Qt.AlignTop
+      Layout.leftMargin: 5
       backend : root.backend
       name : "scenario_keywords"
       label : "Keywords"
@@ -44,6 +45,7 @@ Rectangle {
     PropertyEntry {
       Layout.fillWidth : true
       Layout.alignment: Qt.AlignTop
+      Layout.leftMargin: 5
       backend : root.backend
       name : "scenario_domain"
       label : "Domain"
@@ -54,6 +56,7 @@ Rectangle {
     PropertyAreaEntry {
       Layout.fillWidth : true
       Layout.alignment: Qt.AlignTop
+      Layout.leftMargin: 5
       backend : root.backend
       name : "scenario_limitations"
       label : "Use Limitations"

@@ -20,6 +20,8 @@ Rectangle {
         id: propertyEntry
       Layout.fillWidth : true
       Layout.alignment: Qt.AlignTop
+      Layout.leftMargin: 5
+      Layout.topMargin: 1
       backend : root.backend
       name : "scenario_title"
       label : "Title"
@@ -32,6 +34,7 @@ Rectangle {
     PropertyEntry {
       Layout.fillWidth : true
       Layout.alignment: Qt.AlignTop
+      Layout.leftMargin: 5
       backend : root.backend
       name : "scenario_version"
       label : "Version"
@@ -41,6 +44,7 @@ Rectangle {
     PropertyEntry {
       Layout.fillWidth : true
       Layout.alignment: Qt.AlignTop
+      Layout.leftMargin: 5
       backend : root.backend
       name : "scenario_security"
       label : "Security"
@@ -50,6 +54,7 @@ Rectangle {
     PropertyAreaEntry {
       Layout.fillWidth : true
       Layout.alignment: Qt.AlignTop
+      Layout.leftMargin: 5
       backend : root.backend
       name : "scenario_description"
       label : "Description"
@@ -60,6 +65,7 @@ Rectangle {
     RestrictionListEntry {
       Layout.fillWidth : true
       Layout.alignment: Qt.AlignTop
+      Layout.leftMargin: 5
       backend : root.backend
       height :100
     }

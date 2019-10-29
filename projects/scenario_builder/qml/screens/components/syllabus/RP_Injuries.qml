@@ -52,6 +52,7 @@ ColumnLayout  {
 
   TextEntry {
     Layout.fillWidth: true
+    Layout.leftMargin: 5
 
     id: medicalNameEntry
     label : "Medical Name"
@@ -68,6 +69,7 @@ ColumnLayout  {
 
   TextEntry {
     Layout.fillWidth: true
+    Layout.leftMargin: 5
 
     id: commonNameEntry
     label : "Common Name"
@@ -86,6 +88,7 @@ ColumnLayout  {
       id : listStack
       Layout.fillWidth : true
       Layout.fillHeight : true
+      Layout.leftMargin: 5
       currentIndex : 0
       CitationListEntry {
         id : referenceList
@@ -174,6 +177,7 @@ ColumnLayout  {
 
   TextAreaEntry {
     Layout.fillWidth: true
+    Layout.leftMargin: 5
 
     id: descriptionEntry
     label : "Description"
@@ -191,6 +195,7 @@ ColumnLayout  {
 
   RangeEntry {
     Layout.fillWidth: true
+    Layout.leftMargin: 5
 
     id: severityEntry
     label : "Severity Range"

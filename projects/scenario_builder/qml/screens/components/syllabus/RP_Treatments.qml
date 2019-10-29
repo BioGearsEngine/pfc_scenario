@@ -50,6 +50,7 @@ ScrollView {
 
     TextEntry {
       Layout.fillWidth: true
+      Layout.leftMargin: 5
       id: medicalNameEntry
       label : "Medical Name"
       onEditingFinished : {
@@ -64,6 +65,7 @@ ScrollView {
 
     TextEntry {
       Layout.fillWidth: true
+      Layout.leftMargin: 5
       id: commonNameEntry
       label : "Common Name"
       placeholderText: "String Field (128 Characters )"
@@ -79,6 +81,7 @@ ScrollView {
 
     TextAreaEntry {
       Layout.fillWidth: true
+      Layout.leftMargin: 5
 
       id: descriptionEntry
       label : "Description"
@@ -98,6 +101,7 @@ ScrollView {
     EquipmentEntry {
       id: equipmentList
       Layout.fillWidth: true
+      Layout.leftMargin: 5
       backend : column.backend
 
       onEquipmentAdded : {
@@ -120,6 +124,7 @@ ScrollView {
       id : listStack
       Layout.fillWidth : true
       Layout.fillHeight : true
+      Layout.leftMargin: 5
       currentIndex : 0
       CitationListEntry {
         id : referenceList
@@ -166,6 +171,7 @@ ScrollView {
         id : fullReferenceList
         Layout.fillWidth : true
         Layout.fillHeight : true
+        Layout.leftMargin: 5
         backend : root.backend   
 
         onFullAdded : {

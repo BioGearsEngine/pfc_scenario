@@ -16,6 +16,7 @@ ColumnLayout {
   Row{
     height: first_name.height
     spacing : 5
+    Layout.leftMargin: 5
     Label{
       id: name_label
       text: 'Name'
@@ -82,6 +83,7 @@ ColumnLayout {
     placeholderText: "Your Organization"
     Layout.fillWidth : true
     Layout.alignment: Qt.AlignTop
+    Layout.leftMargin: 5
         onEditingFinished : {
       if ( text != author.organization){
         author.organization = text
@@ -97,6 +99,7 @@ ColumnLayout {
     placeholderText: "(555) 555-5555"
     Layout.fillWidth : true
     Layout.alignment: Qt.AlignTop
+    Layout.leftMargin: 5
     onEditingFinished : {
       if ( text != author.phone){
         author.phone = text
@@ -112,6 +115,7 @@ ColumnLayout {
     placeholderText: "name@organization"
     Layout.fillWidth : true
     Layout.alignment: Qt.AlignTop
+    Layout.leftMargin: 5
     onEditingFinished : {
       if ( text != author.email){
         author.email = text

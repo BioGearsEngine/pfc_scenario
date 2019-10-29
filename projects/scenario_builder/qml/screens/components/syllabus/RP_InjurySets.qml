@@ -36,6 +36,7 @@ ColumnLayout  {
     
     TextEntry {
       Layout.fillWidth: true
+      Layout.leftMargin: 5
       id: nameEntry
       label : "Name"
 
@@ -50,7 +51,8 @@ ColumnLayout  {
     }
 
     TextAreaEntry {
-       Layout.fillWidth: true
+      Layout.fillWidth: true
+      Layout.leftMargin: 5
 
       id: descriptionEntry
       label : "Description"
@@ -68,6 +70,7 @@ ColumnLayout  {
     InjuryListEntry {
       id : injuryList
       Layout.fillWidth : true
+      Layout.leftMargin: 5
       backend : root.backend
 
       onSeverityChanged : {

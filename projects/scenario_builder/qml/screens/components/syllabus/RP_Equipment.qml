@@ -35,7 +35,8 @@ ColumnLayout  {
   }
 
   TextEntry {
-   Layout.fillWidth: true
+    Layout.fillWidth: true
+    Layout.leftMargin: 5
 
     id: nameEntry
     label : "Name"
@@ -53,6 +54,7 @@ ColumnLayout  {
 
   TextAreaEntry {
     Layout.fillWidth: true
+    Layout.leftMargin: 5
 
     id: descriptionEntry
     label : "Description"
@@ -69,6 +71,7 @@ ColumnLayout  {
 
   TextEntry {
     Layout.fillWidth: true
+    Layout.leftMargin: 5
 
     id: imageEntry
     label : "Image"
@@ -88,6 +91,7 @@ ColumnLayout  {
       id : listStack
       Layout.fillWidth : true
       Layout.fillHeight : true
+      Layout.leftMargin: 5
       currentIndex : 0
       CitationListEntry {
         id : referenceList
