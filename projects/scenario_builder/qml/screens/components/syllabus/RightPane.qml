@@ -101,7 +101,7 @@ Flickable {
           id : assessments
           backend : root.backend
           width: parent.width
-          height: parent.height
+          //height: parent.height
         }
       }
   }
