@@ -11,6 +11,8 @@ Rectangle {
     id: root
     property SQLBackend backend
     property string scenarioTitle
+    property ListModel model
+    property int index
 
   ColumnLayout {
       id: summary_leftWindow
@@ -62,12 +64,90 @@ Rectangle {
       required : false
     }
 
-    RestrictionListEntry {
+    StackLayout {
+      id : listStack
       Layout.fillWidth : true
-      Layout.alignment: Qt.AlignTop
+      Layout.fillHeight : true
       Layout.leftMargin: 5
-      backend : root.backend
-      height :100
+      currentIndex : 0
+      RestrictionListEntry {
+        id : restrictionList
+        Layout.fillWidth : true
+        Layout.fillHeight : true
+        backend : root.backend  
+        onList : {
+          console.log("on list")
+          var values = root.model.get(root.index)
+          if(values) {
+            console.log("on list values")
+            fullRestrictionList.model.clear()
+            var restrictions = values.restrictions.split(";").filter(x=>x);
+            root.backend.restrictions()
+            while(root.backend.next_restriction(restriction)){
+              fullRestrictionList.model.insert(fullRestrictionList.model.count,
+                  {
+                    restriction_id : "%1".arg(restriction.restriction_id),
+                    name : "%1".arg(restriction.name),
+                    value : "%1".arg(restriction.value)
+                 }
+               );
+            };
+          }
+          listStack.currentIndex = 1
+        }
+
+        onRestrictionAdded : {
+          var entry = root.model.get(root.index)
+          entry.restrictions = (entry.restrictions) ? entry.restrictions.concat(";"+restriction_id) : entry.restrictions.concat(restriction_id)
+          update_objective(entry)
+        } 
+
+        onRestrictionRemoved : {
+          var entry = root.model.get(root.index)
+          var restrictions = entry.restrictions.split(";").filter(item => item).filter(item => item != restriction_id);
+          entry.restrictions = restrictions.join(";")
+          update_objective(entry)
+        }
+      }
+      FullRestrictionListEntry {
+        id : fullRestrictionList
+        Layout.fillWidth : true
+        Layout.fillHeight : true
+        backend : root.backend   
+
+        onFullAdded : {
+          restriction.id = fullRestrictionList.model.get(currentIndex)
+          root.backend.select_restriction(restriction)
+          var entry = root.model.get(root.index)
+          entry.restrictions = (entry.restrictions) ? entry.restrictions.concat(";"+restriction_id) : entry.restrictions.concat(restriction_id)
+          update_objective(entry)
+        }
+
+        onFullExit : {
+          var values = root.model.get(root.index)
+          if(values) {
+            nameEntry.text = values.name
+            restrictionList.model.clear()   
+
+            var restrictions = values.restrictions.split(";").filter(x => x);  
+            for(var i = 0; i < restrictions.length; ++i){
+              restriction.restriction_id = restrictions[i]
+              restriction.name = ""
+              restriction.value = ""
+              if(root.backend.select_restriction(restriction)){
+                restrictionList.model.insert(restrictionList.model.count,
+                    {
+                       restriction_id : "%1".arg(restriction.restriction_id),
+                       name : "%1".arg(restriction.name),
+                       value : "%1".arg(restriction.value)
+                   }
+                 );
+              }
+            };
+          }
+          listStack.currentIndex = 0
+        }    
+      }
     }
 
     Rectangle {

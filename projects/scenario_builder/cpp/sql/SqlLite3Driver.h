@@ -87,6 +87,7 @@ public:
   Q_INVOKABLE int prop_map_count() const;
   Q_INVOKABLE int citation_map_count() const;
   Q_INVOKABLE int equipment_map_count() const;
+  Q_INVOKABLE int restriction_map_count() const;
   Q_INVOKABLE int role_count() const;
   Q_INVOKABLE int role_count(Scene*) const;
   Q_INVOKABLE int prop_count() const;
@@ -115,6 +116,7 @@ public:
   Q_INVOKABLE void event_maps();
   Q_INVOKABLE void citation_maps();
   Q_INVOKABLE void equipment_maps();
+  Q_INVOKABLE void restriction_maps();
   Q_INVOKABLE void prop_maps();
   Q_INVOKABLE void props();
   Q_INVOKABLE void events();
@@ -137,6 +139,7 @@ public:
   Q_INVOKABLE bool next_map(Map*);
   Q_INVOKABLE bool next_event_map(EventMap*);
   Q_INVOKABLE bool next_prop_map(PropMap*);
+  Q_INVOKABLE bool next_restriction_map(RestrictionMap*);
   Q_INVOKABLE bool next_citation_map(CitationMap*);
   Q_INVOKABLE bool next_equipment_map(EquipmentMap*);
   Q_INVOKABLE bool next_role(Role*);
@@ -160,6 +163,7 @@ public:
   Q_INVOKABLE bool select_prop_map(PropMap*) const;
   Q_INVOKABLE bool select_citation_map(CitationMap*) const;
   Q_INVOKABLE bool select_equipment_map(EquipmentMap*) const;
+  Q_INVOKABLE bool select_restriction_map(RestrictionMap*) const;
   Q_INVOKABLE bool select_role(Role*) const;
   Q_INVOKABLE bool select_prop(Prop*) const;
   Q_INVOKABLE bool select_event(Event*) const;
@@ -176,6 +180,7 @@ public:
   Q_INVOKABLE bool update_prop_map(PropMap*);
   Q_INVOKABLE bool update_citation_map(CitationMap*);
   Q_INVOKABLE bool update_equipment_map(EquipmentMap*);
+  Q_INVOKABLE bool update_restriction_map(RestrictionMap*);
   Q_INVOKABLE bool update_role(Role*);
   Q_INVOKABLE bool update_role_in_scene(Scene*, Role*);
   Q_INVOKABLE bool update_prop(Prop*);
@@ -209,11 +214,13 @@ public:
   Q_INVOKABLE bool remove_prop_map(PropMap*);
   Q_INVOKABLE bool remove_citation_map(CitationMap*);
   Q_INVOKABLE bool remove_equipment_map(EquipmentMap*);
+  Q_INVOKABLE bool remove_restriction_map(RestrictionMap*);
   Q_INVOKABLE bool remove_map_by_fk(Map*);
   Q_INVOKABLE bool remove_event_map_by_fk(EventMap*);
   Q_INVOKABLE bool remove_prop_map_by_fk(PropMap*);
   Q_INVOKABLE bool remove_citation_map_by_fk(CitationMap*);
   Q_INVOKABLE bool remove_equipment_map_by_fk(EquipmentMap*);
+  Q_INVOKABLE bool remove_restriction_map_by_fk(RestrictionMap*);
   Q_INVOKABLE bool remove_role(Role*);
   Q_INVOKABLE bool remove_role_from_scene(Role*,Scene*);
   Q_INVOKABLE bool remove_prop(Prop*);
@@ -271,6 +278,7 @@ signals:
   void propMapRemoved(int index);
   void citationMapRemoved(int index);
   void equipmentMapRemoved(int index);
+  void restrictionMapRemoved(int index);
   void objectiveRemoved(int index);
   void propertyRemoved(int index);
   void propRemoved(int index);
@@ -292,6 +300,7 @@ signals:
   void propMapUpdated(int index);
   void citationMapUpdated(int index);
   void equipmentMapUpdated(int index);
+  void restrictionMapUpdated(int index);
   void objectiveUpdated(int index);
   void propertyUpdated(int index);
   void propUpdated(int index);
@@ -326,6 +335,7 @@ private:
   QList<PropMap*> _prop_maps;
   QList<CitationMap*> _citation_maps;
   QList<EquipmentMap*> _equipment_maps;
+  QList<RestrictionMap*> _restriction_maps;
   QList<Role*> _roles;
   QList<Prop*> _props;
   QList<Event*> _events;
@@ -347,6 +357,7 @@ private:
   QList<PropMap*>::iterator _current_prop_map;
   QList<CitationMap*>::iterator _current_citation_map;
   QList<EquipmentMap*>::iterator _current_equipment_map;
+  QList<RestrictionMap*>::iterator _current_restriction_map;
   QList<Role*>::iterator _current_role;
   QList<Prop*>::iterator _current_prop;
   QList<Event*>::iterator _current_event;

@@ -745,6 +745,65 @@ inline namespace sqlite3 {
           JOIN scenes
           ON scenes.scene_id = equipment_map.scene
           WHERE equipment_map.fk_equipment = :id)";
+  //--------------------------- RESTRICTION MAP STATEMENTS ------------------
+  enum RESTRICTION_MAP_COLUMNS {
+    RESTRICTION_MAP_ID,
+    RESTRICTION_MAP_FK_SCENE,
+    RESTRICTION_MAP_FK_RESTRICTION,
+    RESTRICTION_MAP_COLUMN_COUNT
+  };
+
+  constexpr auto create_restriction_maps_table = R"(
+  CREATE TABLE IF NOT EXISTS restriction_maps (
+    restriction_map_id INTEGER PRIMARY KEY,
+    fk_scene INTEGER,
+    fk_restriction INTEGER
+  );
+  )";
+  constexpr auto drop_all_restriction_maps = R"( DELETE FROM restriction_maps; )";
+  constexpr auto count_restriction_maps = R"( SELECT COUNT(restriction_map_id) FROM restriction_maps; )";
+  constexpr auto select_all_restriction_maps = R"( SELECT * FROM restriction_maps; )";
+
+  constexpr auto select_restriction_map_by_id
+    = R"( SELECT * FROM restriction_maps WHERE restriction_map_id = :id ; )";
+  constexpr auto update_restriction_map_by_id
+    = R"( UPDATE  restriction_maps
+          SET fk_scene = :fk_scene
+              , fk_restriction = :fk_restriction
+          WHERE restriction_map_id = :id;
+         )";
+  constexpr auto delete_restriction_map_by_id
+    = R"( DELETE FROM restriction_maps WHERE restriction_map_id = :id; )";
+  constexpr auto delete_restriction_map_by_fk_scene
+    = R"( DELETE FROM restriction_maps WHERE fk_scene = :fk_scene; )";
+  constexpr auto delete_restriction_map_by_fk_restriction
+    = R"( DELETE FROM restriction_maps WHERE fk_restriction = :fk_restriction; )";
+  constexpr auto delete_restriction_map_by_fk
+    = R"( DELETE FROM restriction_maps WHERE fk_restriction = :fk_restriction AND fk_scene = :fk_scene )";
+  constexpr auto select_restriction_map_by_fk_scene
+    = R"( SELECT * FROM restriction_maps WHERE fk_scene = :fk_scene; )";
+  constexpr auto select_restriction_map_by_fk_restriction
+    = R"( SELECT * FROM restriction_maps WHERE fk_restriction = :fk_restriction; )";
+  constexpr auto select_restriction_map_by_fk
+    = R"( SELECT * FROM restriction_maps WHERE fk_restriction = :fk_restriction AND fk_scene = :fk_scene )";
+  constexpr auto insert_or_update_restriction_maps
+    = R"( INSERT INTO restriction_maps
+          (fk_scene,fk_restriction)
+          VALUES (:fk_scene,:fk_restriction)
+          ;
+         )";
+
+  constexpr auto select_scene_restrictions_by_fk_scene
+    = R"( SELECT * FROM restriction_maps AS restriction_map 
+          JOIN roles
+          ON roles.role_id = restriction_map.role
+          WHERE restriction_map.fk_scene = :id;)";
+
+  constexpr auto select_restriction_scenes_by_fk_restriction
+    = R"( SELECT * FROM restriction_maps as restriction_map
+          JOIN scenes
+          ON scenes.scene_id = restriction_map.scene
+          WHERE restriction_map.fk_restriction = :id)";
   //---------------------- OBJECTIVE STATMENTS ------------------------
   enum OBJECTIVE_COLUMNS {
     OBJECTIVE_ID,

@@ -1967,6 +1967,159 @@ bool SQLite3Driver::remove_equipment_map_by_fk(EquipmentMap* map)
   qWarning() << "No Database connection";
   return false;
 }
+//------------------------------RESTRICTION MAP---------------------------------------
+inline void assign_restriction_map(const QSqlRecord& record, RestrictionMap& map)
+{
+  map.id = record.value(RESTRICTION_MAP_ID).toInt();
+  map.fk_scene = record.value(RESTRICTION_MAP_FK_SCENE).toInt();
+  map.fk_restriction = record.value(RESTRICTION_MAP_FK_RESTRICTION).toInt();
+}
+int SQLite3Driver::restriction_map_count() const
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_restriction_maps);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
+void SQLite3Driver::restriction_maps()
+{
+  qDeleteAll(_prop_maps);
+  _prop_maps.clear();
+
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_all_prop_maps);
+    query.exec();
+    while (query.next()) {
+      auto map = std::make_unique<pfc::PropMap>();
+      auto record = query.record();
+      assert(record.count() == PROP_MAP_COLUMN_COUNT);
+      assign_prop_map(record, *map);
+      _prop_maps.push_back(map.release());
+    }
+    _current_prop_map = _prop_maps.begin();
+    emit propMapsChanged();
+  }
+}
+bool SQLite3Driver::next_restriction_map(RestrictionMap* map)
+{
+  if (_current_restriction_map == _restriction_maps.end() || _restriction_maps.empty()) {
+    return false;
+  }
+  map->assign(*(*_current_restriction_map));
+  ++_current_map;
+
+  return true;
+}
+bool SQLite3Driver::select_restriction_map(RestrictionMap* map) const
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    QSqlRecord record;
+    if (map->id != -1) {
+      query.prepare(sqlite3::select_restriction_map_by_id);
+      query.bindValue(":id", map->id);
+    } else if (map->fk_scene != -1) {
+      query.prepare(sqlite3::select_restriction_map_by_fk);
+      query.bindValue(":fk_scene", map->fk_scene);
+      query.bindValue(":fk_restriction", map->fk_restriction);
+    } else {
+      qWarning() << "Provided Property has no id, fk_scene, or fk_restriction one is required";
+      return false;
+    }
+    if (query.exec()) {
+      while (query.next()) {
+        record = query.record();
+        assign_restriction_map(record, *map);
+        return true;
+      }
+    } else {
+      qWarning() << query.lastError();
+    }
+    return false;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::update_restriction_map(RestrictionMap* map)
+{
+
+  if (_db.isOpen()) {
+    QSqlQuery query{ _db };
+    if (-1 != map->id) {
+      query.prepare(sqlite3::update_restriction_map_by_id);
+      query.bindValue(":id", map->id);
+    } else {
+      query.prepare(sqlite3::insert_or_update_restriction_maps);
+    }
+    query.bindValue(":fk_scene", map->fk_scene);
+    query.bindValue(":fk_restriction", map->fk_restriction);
+    if (!query.exec()) {
+      qWarning() << query.lastError();
+      return false;
+    }
+    if (-1 == map->id) {
+      const auto r = select_restriction_map(map);
+      restrictionMapUpdated(map->id);
+      return r;
+    }
+    restrictionMapUpdated(map->id);
+    return true;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::remove_restriction_map(RestrictionMap* map)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (select_restriction_map(map)) {
+      query.prepare(sqlite3::delete_restriction_map_by_id);
+      query.bindValue(":id", map->id);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      restrictionMapRemoved(map->id);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::remove_restriction_map_by_fk(RestrictionMap* map)
+{
+  if (_db.isOpen()) {
+    QSqlQuery query(_db);
+    if (select_restriction_map(map)) {
+      query.prepare(sqlite3::delete_restriction_map_by_fk);
+      query.bindValue(":fk_scene", map->fk_scene);
+      query.bindValue(":fk_restriction", map->fk_restriction);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+      restrictionMapRemoved(map->id);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
   //----------------------------EVENT-------------------------------------------------
 inline void assign_event(QSqlRecord& record, Event& event)
 {

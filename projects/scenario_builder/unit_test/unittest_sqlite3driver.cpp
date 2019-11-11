@@ -2480,4 +2480,5 @@ TEST_F(TEST_FIXTURE_NAME, EventMap_Test_Scene_Deletion)
   _db.remove_scene(&scene_3);
   EXPECT_EQ(0, _db.event_map_count());
 }
+//SCENE_MAP_RESTRICTION TESTS----------------------------------------------
 

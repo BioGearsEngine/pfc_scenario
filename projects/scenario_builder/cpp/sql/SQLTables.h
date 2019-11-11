@@ -587,6 +587,45 @@ public:
   }
 };
 //----End Equipment_Map
+struct RestrictionMap : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int map_id MEMBER id)
+  Q_PROPERTY(int fk_scene MEMBER fk_scene)
+  Q_PROPERTY(int fk_restriction MEMBER fk_restriction)
+
+public:
+  int32_t id = -1;
+  int32_t fk_scene = -1;
+  int32_t fk_restriction = -1;
+
+  RestrictionMap(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  RestrictionMap(const RestrictionMap&) = delete;
+  RestrictionMap(RestrictionMap&&) = delete;
+  RestrictionMap& operator=(const RestrictionMap&) = delete;
+  RestrictionMap& operator=(RestrictionMap&&) = delete;
+  virtual ~RestrictionMap() = default;
+
+  bool operator==(const RestrictionMap& rhs) const
+  {
+    return id == rhs.id
+      && fk_scene == rhs.fk_scene
+      && fk_restriction == rhs.fk_restriction;
+  }
+  bool operator!=(const RestrictionMap& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const RestrictionMap& rhs)
+  {
+    id = rhs.id;
+    fk_scene = rhs.fk_scene;
+    fk_restriction = rhs.fk_restriction;
+  }
+};
+//----End Restriction_Map
 struct Objective : public QObject {
   Q_OBJECT
   Q_PROPERTY(int objective_id MEMBER id)

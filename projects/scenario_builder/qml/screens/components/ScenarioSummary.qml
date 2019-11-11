@@ -21,6 +21,7 @@ GridLayout {
     scenarioTitle : root.scenarioTitle
     Layout.preferredWidth: parent.width / 2
     Layout.fillHeight: true
+    Layout.leftMargin: 5
     border.color: 'black'
     border.width: 1
     onScenarioTitleChanged : {
@@ -36,6 +37,7 @@ GridLayout {
     border.width: 1
     Layout.fillWidth: true
     Layout.fillHeight: true
+    Layout.rightMargin: 5
   }
 }
 

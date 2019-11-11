@@ -35,6 +35,7 @@ Flickable {
       Rectangle {
         Layout.fillHeight: true
         Layout.fillWidth: true
+        Layout.rightMargin: 5
         border.color: 'black'
         border.width: 1
         RP_Objectives{
@@ -47,6 +48,7 @@ Flickable {
       Rectangle {
         Layout.fillHeight: true
         Layout.fillWidth: true
+        Layout.rightMargin: 5
         border.color: 'black'
         border.width: 1
         RP_Injuries {
@@ -59,6 +61,7 @@ Flickable {
       Rectangle {
         Layout.fillHeight: true
         Layout.fillWidth: true
+        Layout.rightMargin: 5
         border.color: 'black'
         border.width: 1
         RP_InjurySets {
@@ -71,6 +74,7 @@ Flickable {
       Rectangle {
         Layout.fillHeight: true
         Layout.fillWidth: true
+        Layout.rightMargin: 5
         border.color: 'black'
         border.width: 1
         RP_Treatments {
@@ -83,6 +87,7 @@ Flickable {
       Rectangle {
         Layout.fillHeight: true
         Layout.fillWidth: true
+        Layout.rightMargin: 5
         border.color: 'black'
         border.width: 1      
         RP_Equipment {
@@ -95,6 +100,7 @@ Flickable {
       Rectangle {
         Layout.fillHeight: true
         Layout.fillWidth: true
+        Layout.rightMargin: 5
         border.color: 'black'
         border.width: 1
         RP_Assessments{

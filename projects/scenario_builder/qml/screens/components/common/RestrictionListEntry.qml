@@ -10,6 +10,9 @@ ListEntry {
   id: root
   property SQLBackend backend
 
+  signal restrictionAdded(int index, int restriction_id)
+  signal restrictionRemoved(int index, int restriction_id)
+
   label: "Restriction"
 
   Restriction {
@@ -33,6 +36,17 @@ ListEntry {
        }
      }
 
+     function update_restriction(id) {
+         self.restriction_id = id
+         self.name    = restriction_name_text.text
+         self.value   = restriction_value_text.text
+
+         console.log("%1,%2,%3,%4,%5".arg(self.restriction_id)
+          .arg(self.name)
+          .arg(self.value))
+
+         root.backend.update_restriction(self)
+     }
     
      TextField {
        id : restriction_title_text
@@ -101,10 +115,13 @@ ListEntry {
     }
   }
 
+  onList : {
+    
+  }
   onAdded : {
     self.restriction_id = -1
-    self.name = "New Reference %1".arg(root.model.count)
-    self.value = "New Reference%1".arg(index)
+    self.name = "New Restriction %1".arg(root.model.count)
+    self.value = "New Restriction%1".arg(index)
     root.backend.update_restriction(self)
     root.model.insert(root.model.count,
       {"name": "%1".arg(self.name), "value": "%1".arg(self.value)});
