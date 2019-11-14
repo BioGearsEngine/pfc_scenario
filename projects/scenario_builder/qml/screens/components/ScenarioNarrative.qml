@@ -28,6 +28,8 @@ RowLayout {
     model : narrative_left.model
     index : narrative_left.index
 
-    onIndexChanged : console.log(index) 
+    onIndexChanged : {
+      
+    } 
   }
 }

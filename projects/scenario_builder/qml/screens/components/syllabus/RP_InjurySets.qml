@@ -44,7 +44,6 @@ ColumnLayout  {
         var entry = model.get(index)
         if ( text != entry.name){
           entry.name = text
-          console.log("updating Name filed for InjurySet %1".arg(entry.injury_id))
           update_injurySet(entry)
         }
       }
@@ -61,7 +60,6 @@ ColumnLayout  {
         var entry = model.get(index)
         if ( text != entry.description){
           entry.description = text
-          console.log("updating Description filed for InjurySet %1".arg(entry.injury_id))
           update_injurySet(entry)
         }
       }
@@ -74,7 +72,6 @@ ColumnLayout  {
       backend : root.backend
 
       onSeverityChanged : {
-         console.log("%1, %2".arg(index).arg(severity))
          var entry = root.model.get(root.index)
          var severities = entry.severities.split(";").filter(item => item)
          severities.splice(index,1,severity)
@@ -95,7 +92,6 @@ ColumnLayout  {
         entry.injuries    = (entry)? entry.injuries.concat(";"+injury_id) : entry.injuries.concat(injury_id)
         entry.severities  = (entry)? entry.severities.concat(";"+severity) : entry.injuries.concat(severity)
         entry.locations   = (entry)? entry.locations.concat(";"+location) : entry.injuries.concat(location)
-        console.log("OnInjuryAdded")
         update_injury_set(entry)
       }
 

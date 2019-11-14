@@ -43,11 +43,11 @@ FullListEntry {
          self.authors = restriction_authors_text.text
          self.year    = restriction_year_text.text
 
-         console.log("%1,%2,%3,%4,%5".arg(self.restriction_id)
-          .arg(self.key)
-          .arg(self.title)
-          .arg(self.authors)
-          .arg(self.year))
+//         console.log("%1,%2,%3,%4,%5".arg(self.restriction_id)
+//          .arg(self.key)
+//          .arg(self.title)
+//          .arg(self.authors)
+//          .arg(self.year))
 
          root.backend.update_restriction(self)
      }
@@ -64,11 +64,11 @@ FullListEntry {
        enabled : false
        color: enabled ? Material.primaryTextColor : Material.primaryTextColor
        onEditingFinished : {
-          console.log("%1,%2,%3,%4,%5".arg(model.restriction_id)
-          .arg(model.key)
-          .arg(model.title)
-          .arg(model.authors)
-          .arg(model.year))
+//          console.log("%1,%2,%3,%4,%5".arg(model.restriction_id)
+//          .arg(model.key)
+//          .arg(model.title)
+//          .arg(model.authors)
+//          .arg(model.year))
          update_restriction(model.restriction_id)
       }
     }

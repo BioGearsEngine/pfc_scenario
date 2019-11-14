@@ -46,7 +46,6 @@ ColumnLayout  {
         var entry = model.get(root.index)
         if ( text != entry.name) {
           entry.name = text
-          console.log("Updating Name filed for Equipment %1".arg(entry.id))
           update_equipment(entry)
         }
       }
@@ -63,7 +62,6 @@ ColumnLayout  {
         var entry = model.get(root.index)
         if ( text != entry.description) {
           entry.description = text
-          console.log("Updating Description filed for Treatment %1".arg(entry.id))
           update_equipment(entry)
         }
       }
@@ -81,7 +79,6 @@ ColumnLayout  {
         var entry = root.model.get(root.index)
         if ( text != entry.image) {
           entry.image = text
-          console.log("Updating Image filed for Equipment %1".arg(entry.id))
           update_equipment(entry)
         }
       }
@@ -99,10 +96,8 @@ ColumnLayout  {
         Layout.fillHeight : true
         backend : root.backend  
         onList : {
-          console.log("on list")
           var values = root.model.get(root.index)
           if(values) {
-            console.log("on list values")
             fullReferenceList.model.clear()
             var citations = values.citations.split(";").filter(x=>x);
             root.backend.citations()
@@ -124,14 +119,14 @@ ColumnLayout  {
         onCitationAdded : {
           var entry = root.model.get(root.index)
           entry.citations = (entry.citations) ? entry.citations.concat(";"+citation_id) : entry.citations.concat(citation_id)
-          update_objective(entry)
+          update_equipment(entry)
         } 
 
         onCitationRemoved : {
           var entry = root.model.get(root.index)
           var citations = entry.citations.split(";").filter(item => item).filter(item => item != citation_id);
           entry.citations = citations.join(";")
-          update_objective(entry)
+          update_equipment(entry)
         }
       }
       FullCitationListEntry {
@@ -145,7 +140,7 @@ ColumnLayout  {
           root.backend.select_citation(citation)
           var entry = root.model.get(root.index)
           entry.citations = (entry.citations) ? entry.citations.concat(";"+citation_id) : entry.citations.concat(citation_id)
-          update_objective(entry)
+          update_equipment(entry)
         }
 
         onFullExit : {

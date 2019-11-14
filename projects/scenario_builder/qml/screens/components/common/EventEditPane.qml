@@ -45,7 +45,6 @@ Event {
 			anchors.right : section_1.right
 			text : 'Save'
 			onClicked : {
-				console.log('ID:'+root.eventID+',NAME:'+root.name+',DESCRIPTION:'+root.description)
 				self.event_id = root.eventID
 				self.name = root.name
 				self.description = root.description

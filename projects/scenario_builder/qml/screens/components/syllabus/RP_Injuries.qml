@@ -28,11 +28,9 @@ ColumnLayout  {
   Connections {
     target: backend
     onCitationRemoved : {
-      console.log( "Connection backend -> RP_Injury Removed Citation %1".arg(index))
     }
 
     onEquipmentRemoved : {
-      console.log( "Connection backend -> RP_Injury Removed Equipment %1".arg(index))
     }
   }
 
@@ -96,10 +94,8 @@ ColumnLayout  {
         Layout.fillHeight : true
         backend : root.backend  
         onList : {
-          console.log("on list")
           var values = root.model.get(root.index)
           if(values) {
-            console.log("on list values")
             fullReferenceList.model.clear()
             var citations = values.citations.split(";").filter(x=>x);
             root.backend.citations()
@@ -121,14 +117,14 @@ ColumnLayout  {
         onCitationAdded : {
           var entry = root.model.get(root.index)
           entry.citations = (entry.citations) ? entry.citations.concat(";"+citation_id) : entry.citations.concat(citation_id)
-          update_objective(entry)
+          update_injury(entry)
         } 
 
         onCitationRemoved : {
           var entry = root.model.get(root.index)
           var citations = entry.citations.split(";").filter(item => item).filter(item => item != citation_id);
           entry.citations = citations.join(";")
-          update_objective(entry)
+          update_injury(entry)
         }
       }
       FullCitationListEntry {
@@ -142,7 +138,7 @@ ColumnLayout  {
           root.backend.select_citation(citation)
           var entry = root.model.get(root.index)
           entry.citations = (entry.citations) ? entry.citations.concat(";"+citation_id) : entry.citations.concat(citation_id)
-          update_objective(entry)
+          update_injury(entry)
         }
 
         onFullExit : {

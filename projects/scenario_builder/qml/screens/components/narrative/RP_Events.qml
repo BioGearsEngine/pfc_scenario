@@ -66,21 +66,21 @@ ColumnLayout {
           self.actor = full_listArea.model.get(full_listArea.currentIndex).actor
           self.equipment = full_listArea.model.get(full_listArea.currentIndex).equipment
           self.description = full_listArea.model.get(full_listArea.currentIndex).description
-          console.log(JSON.stringify(root.model.get(root.index)))
+
           self_scene.scene_id = root.model.get(root.index).id
           self_scene.name = root.model.get(root.index).name
           root.backend.update_event_in_scene(self_scene,self)
           event_stack.currentIndex = 1
-          console.log("index changed----------")
+
           var values = model.get(index)
           if (values) {
             listArea.model.clear()
             self_scene.scene_id = root.model.get(root.index).id
             self_scene.name = root.model.get(root.index).name
-            console.log(JSON.stringify(self_scene))
+
             root.backend.events_in_scene(self_scene)
             while ( root.backend.next_event(self) ) {
-              console.log(JSON.stringify(self))
+
               listArea.model.insert(listArea.model.count,
               {
              "id" : self.event_id,
@@ -103,7 +103,6 @@ ColumnLayout {
           self.actor = -1
           self.equipment = "New Equipment %1".arg(next)          
 
-          console.log(JSON.stringify(root.model.get(root.index)))
           self_scene.scene_id = root.model.get(root.index).id
           self_scene.name = root.model.get(root.index).name
           while( root.backend.select_event(self) )
@@ -139,10 +138,8 @@ ColumnLayout {
             listArea.model.clear()
             self_scene.scene_id = root.model.get(root.index).id
             self_scene.name = root.model.get(root.index).name
-            console.log(JSON.stringify(self_scene))
             root.backend.events_in_scene(self_scene)
             while ( root.backend.next_event(self) ) {
-              console.log(JSON.stringify(self))
               listArea.model.insert(listArea.model.count,
               {
              "id" : self.event_id,
@@ -264,7 +261,6 @@ ColumnLayout {
           full_listArea.model.clear()
           root.backend.events()
           while ( root.backend.next_event(self) ) {
-            console.log(JSON.stringify(self))
             full_listArea.model.insert(full_listArea.model.count,
             {
              "id" : self.event_id,
@@ -285,7 +281,7 @@ ColumnLayout {
           self.actor = -1
           self.equipment = "New Equipment %1".arg(next)
           self.description = "Description of Event %1".arg(next)
-          console.log(JSON.stringify(root.model.get(root.index)))
+
 
           self_scene.scene_id = root.model.get(root.index).id
           self_scene.name = root.model.get(root.index).name
@@ -332,9 +328,12 @@ ColumnLayout {
 
         highlight: Rectangle {
             color: '#1111110F'
-            anchors.left : parent.left
-            anchors.right : parent.right
-            anchors.margins: 5
+//            anchors.left : parent.left
+//            anchors.right : parent.right
+//            anchors.margins: 5
+            Layout.alignment: Qt.AlignTop
+            Layout.fillWidth: true
+            Layout.margins : 5
         }  
 
         model : ListModel {}  
@@ -353,8 +352,7 @@ ColumnLayout {
 
             }
             onDoubleClicked: {
-              console.log("DOUBLECLICK")
-              console.log(JSON.stringify(listArea.model.get(index)))
+
               eventEdit.name = listArea.model.get(index).name
               eventEdit.description = listArea.model.get(index).description
               eventEdit.eventID = listArea.model.get(index).event_id
@@ -433,10 +431,8 @@ ColumnLayout {
           listArea.model.clear()
           self_scene.scene_id = root.model.get(root.index).id
           self_scene.name = root.model.get(root.index).name
-          console.log(JSON.stringify(self_scene))
           root.backend.events_in_scene(self_scene)
           while ( root.backend.next_event(self) ) {
-            console.log(JSON.stringify(self))
             listArea.model.insert(listArea.model.count,
             {
               "event_id" : self.event_id,
@@ -454,17 +450,14 @@ ColumnLayout {
     }
   }
     onIndexChanged : {
-      console.log("index changed----------")
       event_stack.currentIndex = 1
       var values = model.get(index)
       if (values) {
         listArea.model.clear()
         self_scene.scene_id = root.model.get(root.index).id
         self_scene.name = root.model.get(root.index).name
-        console.log(JSON.stringify(self_scene))
         root.backend.events_in_scene(self_scene)
         while ( root.backend.next_event(self) ) {
-          console.log(JSON.stringify(self))
           listArea.model.insert(listArea.model.count,
           {
             "event_id" : self.event_id,

@@ -43,11 +43,11 @@ ListEntry {
          self.authors = citation_authors_text.text
          self.year    = citation_year_text.text
 
-         console.log("%1,%2,%3,%4,%5".arg(self.citation_id)
-          .arg(self.key)
-          .arg(self.title)
-          .arg(self.authors)
-          .arg(self.year))
+//         console.log("%1,%2,%3,%4,%5".arg(self.citation_id)
+//          .arg(self.key)
+//          .arg(self.title)
+//          .arg(self.authors)
+//          .arg(self.year))
 
          root.backend.update_citation(self)
      }
@@ -64,11 +64,11 @@ ListEntry {
        enabled : false
        color: enabled ? Material.primaryTextColor : Material.primaryTextColor
        onEditingFinished : {
-          console.log("%1,%2,%3,%4,%5".arg(model.citation_id)
-          .arg(model.key)
-          .arg(model.title)
-          .arg(model.authors)
-          .arg(model.year))
+//          console.log("%1,%2,%3,%4,%5".arg(model.citation_id)
+//          .arg(model.key)
+//          .arg(model.title)
+//          .arg(model.authors)
+//          .arg(model.year))
          update_citation(model.citation_id)
       }
     }

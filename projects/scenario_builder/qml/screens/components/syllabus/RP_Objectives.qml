@@ -25,7 +25,6 @@ ColumnLayout  {
     Connections {
       target: backend
       onCitationRemoved : {
-        console.log( "Connection backend->RP_Objectives: Removed %1".arg(root.index))
       }
     }
 
@@ -50,7 +49,6 @@ ColumnLayout  {
         var entry = root.model.get(root.index)
         if ( text != entry.name){
           entry.name = text
-          console.log("updating Name filed for entry")
           update_objective(entry)
         }
       }
@@ -84,10 +82,8 @@ ColumnLayout  {
         Layout.fillHeight : true
         backend : root.backend  
         onList : {
-          console.log("on list")
           var values = root.model.get(root.index)
           if(values) {
-            console.log("on list values")
             fullReferenceList.model.clear()
             var citations = values.citations.split(";").filter(x=>x);
             root.backend.citations()

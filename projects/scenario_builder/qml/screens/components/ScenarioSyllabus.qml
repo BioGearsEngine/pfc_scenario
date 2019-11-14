@@ -49,7 +49,7 @@ GridLayout {
     Layout.rightMargin: 5
 
     Component.onCompleted: {
-      console.log("%1,%2".arg(width).arg(height))
+      
     }
   }
 }

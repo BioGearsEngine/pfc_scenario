@@ -76,10 +76,8 @@ Rectangle {
         Layout.fillHeight : true
         backend : root.backend  
         onList : {
-          console.log("on list")
           var values = root.model.get(root.index)
           if(values) {
-            console.log("on list values")
             fullRestrictionList.model.clear()
             var restrictions = values.restrictions.split(";").filter(x=>x);
             root.backend.restrictions()

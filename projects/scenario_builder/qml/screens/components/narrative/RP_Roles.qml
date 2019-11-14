@@ -63,7 +63,6 @@ ColumnLayout {
           self.role_id = -1
           self.name = full_listArea.model.get(full_listArea.currentIndex).name
           self.description = full_listArea.model.get(full_listArea.currentIndex).description
-          console.log(JSON.stringify(root.model.get(root.index)))
           self_scene.scene_id = root.model.get(root.index).id
           self_scene.name = root.model.get(root.index).name
           root.backend.update_role_in_scene(self_scene,self)
@@ -73,10 +72,8 @@ ColumnLayout {
             listArea.model.clear()
             self_scene.scene_id = root.model.get(root.index).id
             self_scene.name = root.model.get(root.index).name
-            console.log(JSON.stringify(self_scene))
             root.backend.roles_in_scene(self_scene)
             while ( root.backend.next_role(self) ) {
-              console.log(JSON.stringify(self))
               listArea.model.insert(listArea.model.count,
               {
                 "role_id" : self.role_id,
@@ -92,7 +89,6 @@ ColumnLayout {
           self.role_id = -1
           self.name = "New Role %1".arg(next)
           self.description = "Description of Role %1".arg(next)
-          console.log(JSON.stringify(root.model.get(root.index)))
           self_scene.scene_id = root.model.get(root.index).id
           self_scene.name = root.model.get(root.index).name
           while( root.backend.select_role(self) )
@@ -125,10 +121,8 @@ ColumnLayout {
             listArea.model.clear()
             self_scene.scene_id = root.model.get(root.index).id
             self_scene.name = root.model.get(root.index).name
-            console.log(JSON.stringify(self_scene))
             root.backend.roles_in_scene(self_scene)
             while ( root.backend.next_role(self) ) {
-              console.log(JSON.stringify(self))
               listArea.model.insert(listArea.model.count,
               {
                 "role_id" : self.role_id,
@@ -247,7 +241,6 @@ ColumnLayout {
           full_listArea.model.clear()
           root.backend.roles()
           while ( root.backend.next_role(self) ) {
-            console.log(JSON.stringify(self))
             full_listArea.model.insert(full_listArea.model.count,
             {
               "role_id" : self.role_id,
@@ -262,7 +255,6 @@ ColumnLayout {
           self.role_id = -1
           self.name = "New Role %1".arg(next)
           self.description = "Description of Role %1".arg(next)
-          console.log(JSON.stringify(root.model.get(root.index)))
           self_scene.scene_id = root.model.get(root.index).id
           self_scene.name = root.model.get(root.index).name
           while( root.backend.select_role(self) )
@@ -283,7 +275,6 @@ ColumnLayout {
           ++next;
         }
         onThirdButtonClicked : {
-          console.log(JSON.stringify(listArea.model.get(listArea.currentIndex)))
           self.role_id = listArea.model.get(listArea.currentIndex).role_id
           self.name = listArea.model.get(listArea.currentIndex).name
           self_scene.scene_id = root.model.get(root.index).id
@@ -304,9 +295,12 @@ ColumnLayout {
 
         highlight: Rectangle {
             color: '#1111110F'
-            anchors.left : parent.left
-            anchors.right : parent.right
-            anchors.margins: 5
+            //anchors.left : parent.left
+            //anchors.right : parent.right
+            //anchors.margins: 5
+            Layout.alignment: Qt.AlignTop
+            Layout.fillWidth: true
+            Layout.margins : 5
         }  
 
         model : ListModel {}  
@@ -325,8 +319,6 @@ ColumnLayout {
 
             }
             onDoubleClicked: {
-              console.log("DOUBLECLICK")
-              console.log(JSON.stringify(listArea.model.get(index)))
               roleEdit.name = listArea.model.get(index).name
               roleEdit.description = listArea.model.get(index).description
               roleEdit.roleID = listArea.model.get(index).role_id
@@ -405,10 +397,8 @@ ColumnLayout {
           listArea.model.clear()
           self_scene.scene_id = root.model.get(root.index).id
           self_scene.name = root.model.get(root.index).name
-          console.log(JSON.stringify(self_scene))
           root.backend.roles_in_scene(self_scene)
           while ( root.backend.next_role(self) ) {
-            console.log(JSON.stringify(self))
             listArea.model.insert(listArea.model.count,
             {
               "role_id" : self.role_id,
@@ -423,17 +413,14 @@ ColumnLayout {
     }
   }
     onIndexChanged : {
-      console.log("index changed----------")
       role_stack.currentIndex = 1
       var values = model.get(index)
       if (values) {
         listArea.model.clear()
         self_scene.scene_id = root.model.get(root.index).id
         self_scene.name = root.model.get(root.index).name
-        console.log(JSON.stringify(self_scene))
         root.backend.roles_in_scene(self_scene)
         while ( root.backend.next_role(self) ) {
-          console.log(JSON.stringify(self))
           listArea.model.insert(listArea.model.count,
           {
             "role_id" : self.role_id,

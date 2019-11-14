@@ -59,7 +59,7 @@ Rectangle {
         id : newListButton
         text : "New " + root.label
         anchors.left : addButton.right
-        anchors.right : newButton.left
+        anchors.right : exitButton.left
         anchors.leftMargin : 5
         anchors.rightMargin : 5 
 

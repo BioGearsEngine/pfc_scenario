@@ -171,7 +171,6 @@ ColumnLayout  {
               var entry = model.get(root.index)
               if ( text != entry.criteria){
                 entry.criteria = text
-                console.log("Updating criteria filed for Assessment %1".arg(entry.id))
                 update_assessment(entry)
               }
             }

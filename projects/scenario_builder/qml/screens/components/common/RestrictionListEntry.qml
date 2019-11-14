@@ -41,9 +41,9 @@ ListEntry {
          self.name    = restriction_name_text.text
          self.value   = restriction_value_text.text
 
-         console.log("%1,%2,%3,%4,%5".arg(self.restriction_id)
-          .arg(self.name)
-          .arg(self.value))
+//         console.log("%1,%2,%3,%4,%5".arg(self.restriction_id)
+//          .arg(self.name)
+//          .arg(self.value))
 
          root.backend.update_restriction(self)
      }

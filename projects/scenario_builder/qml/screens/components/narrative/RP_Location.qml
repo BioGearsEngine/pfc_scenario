@@ -36,7 +36,6 @@ Rectangle{
             var entry = root.model.get(root.index)
             if ( text != entry.name){
               entry.name = text
-              console.log("updating Name filed for entry")
               update_objective(entry)
             }
           }

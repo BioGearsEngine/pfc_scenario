@@ -57,7 +57,6 @@ ScrollView {
         var entry = root.model.get(root.index)
         if ( text != entry.medical_name) {
           entry.medical_name = text
-          console.log("Updating Name filed for Treatment %1".arg(entry.id))
           column.update_treatment(entry)
         }
       }
@@ -73,7 +72,6 @@ ScrollView {
         var entry = root.model.get(root.index)
         if ( text != entry.common_name) {
           entry.common_name = text
-          console.log("Updating Name filed for Treatment %1".arg(entry.id))
           column.update_treatment(entry)
         }
       }
@@ -92,7 +90,6 @@ ScrollView {
         var entry = root.model.get(root.index)
         if ( text != entry.description) {
           entry.description = text
-          console.log("Updating Name filed for Treatment %1".arg(entry.id))
           column.update_treatment(entry)
         }
       }
@@ -105,14 +102,12 @@ ScrollView {
       backend : column.backend
 
       onEquipmentAdded : {
-        console.log("RP_Treatment Added a Equipment")
         var entry = root.model.get(root.index)
         entry.equipment = (entry.equipment) ? entry.equipment.concat(";"+equipment_id) : entry.equipment.concat(equipment_id)
         column.update_treatment(entry)
       }
 
       onEquipmentRemoved : {
-        console.log("RP_Treatment Removed a Equipment")
         var entry = root.model.get(root.index)
         var equipment = entry.equipment.split(";").filter(item => item).filter(item => item != equipment_id);
         entry.equipment = equipment.join(";")
@@ -128,14 +123,22 @@ ScrollView {
       currentIndex : 0
       CitationListEntry {
         id : referenceList
+        function update_treatment(values) {
+          obj.treatment_id = values.id
+          obj.medical_name         = values.medical_name
+          obj.common_name          = values.common_name
+          obj.description          = values.description   
+
+          obj.equipment = values.equipment
+          obj.citations = values.citations
+          column.backend.update_treatment(obj)
+        }
         Layout.fillWidth : true
         Layout.fillHeight : true
         backend : root.backend  
         onList : {
-          console.log("on list")
           var values = root.model.get(root.index)
           if(values) {
-            console.log("on list values")
             fullReferenceList.model.clear()
             var citations = values.citations.split(";").filter(x=>x);
             root.backend.citations()
@@ -157,14 +160,14 @@ ScrollView {
         onCitationAdded : {
           var entry = root.model.get(root.index)
           entry.citations = (entry.citations) ? entry.citations.concat(";"+citation_id) : entry.citations.concat(citation_id)
-          update_objective(entry)
+          update_treatment(entry)
         } 
 
         onCitationRemoved : {
           var entry = root.model.get(root.index)
           var citations = entry.citations.split(";").filter(item => item).filter(item => item != citation_id);
           entry.citations = citations.join(";")
-          update_objective(entry)
+          update_treatment(entry)
         }
       }
       FullCitationListEntry {
@@ -179,7 +182,7 @@ ScrollView {
           root.backend.select_citation(citation)
           var entry = root.model.get(root.index)
           entry.citations = (entry.citations) ? entry.citations.concat(";"+citation_id) : entry.citations.concat(citation_id)
-          update_objective(entry)
+          update_treatment(entry)
         }
 
         onFullExit : {

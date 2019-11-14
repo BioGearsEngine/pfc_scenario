@@ -45,7 +45,6 @@ Role {
 			anchors.right : section_1.right
 			text : 'Save'
 			onClicked : {
-				console.log('ID:'+root.roleID+',NAME:'+root.name+',DESCRIPTION:'+root.description)
 				self.role_id = root.roleID
 				self.name = root.name
 				self.description = root.description

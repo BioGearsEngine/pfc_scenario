@@ -133,14 +133,14 @@ ColumnLayout {
 //          }
         }
 
-        states: State {
-          name : "Selected"
-                PropertyChanges{ target : scene_title_text; readOnly : false}
-                PropertyChanges{ target : scene_title_text; activeFocusOnPress : true}
-                PropertyChanges{ target : scene_title_text; hoverEnabled : true}
-                PropertyChanges{ target : scene_title_text; enabled : true}
-                PropertyChanges{ target : scene_title_text; mouseSelectionMode  : TextInput.SelectCharacters }
-        }
+//        states: State {
+//          name : "Selected"
+//                PropertyChanges{ target : scene_title_text; readOnly : false}
+//                PropertyChanges{ target : scene_title_text; activeFocusOnPress : true}
+//                PropertyChanges{ target : scene_title_text; hoverEnabled : true}
+//                PropertyChanges{ target : scene_title_text; enabled : true}
+//                PropertyChanges{ target : scene_title_text; mouseSelectionMode  : TextInput.SelectCharacters }
+//        }
 
         onFocusChanged: {
           if(listArea.currentIndex == index){

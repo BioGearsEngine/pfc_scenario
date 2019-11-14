@@ -52,7 +52,9 @@ Rectangle {
       onClicked : {
         root.list()
       }
-      onComplete: console.log("Add Button works")
+      onComplete: {
+        
+      }
     }
    PFCButton {
       id : addButton
@@ -65,7 +67,9 @@ Rectangle {
       onClicked : {
         root.added(root.model.count)
       }
-      onComplete: console.log("Add Button works")
+      onComplete: {
+        
+      }
     }
     PFCButton {
       id: removeButton
@@ -77,7 +81,9 @@ Rectangle {
       onClicked : {
         root.removed(root.current)
       }
-      onComplete: console.log("Remove Button works") 
+      onComplete: {
+        
+      }
     }
 
     ListView {

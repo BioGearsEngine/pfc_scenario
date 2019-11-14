@@ -27,12 +27,12 @@ Button {
 
   onHoveredChanged :{
      root.background.color = root.hovered  ? "#1111110F" : "transparent";
-     // console.log("PFCButton " + text + "Hovered")
+
   }
 
   onPressed : {
     root.contentItem.color = "#CC6633";
-    // console.log("PFCButton " + text + "Pressed")
+
   }
 
   onReleased : {
