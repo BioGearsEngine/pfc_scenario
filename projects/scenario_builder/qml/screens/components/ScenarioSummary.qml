@@ -12,6 +12,8 @@ GridLayout {
   id: root
   property SQLBackend backend
   property string scenarioTitle
+  width: parent.width
+  height: parent.height
   columns : 2
 
   //TAB:SUMMARY_LEFTWINDOW
