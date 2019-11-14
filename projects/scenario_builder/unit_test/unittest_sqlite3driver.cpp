@@ -1102,9 +1102,9 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Location)
 TEST_F(TEST_FIXTURE_NAME, Insert_Map)
 {
   using namespace pfc;
-  Map map_1;
-  Map map_2;
-  Map map_3;
+  RoleMap map_1;
+  RoleMap map_2;
+  RoleMap map_3;
 
   map_1.fk_scene = 1;
   map_1.fk_role = 2;
@@ -1115,19 +1115,19 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Map)
   map_3.fk_scene = 5;
   map_3.fk_role = 6;
 
-  EXPECT_EQ(0, _db.map_count());
-  EXPECT_TRUE(_db.update_map(&map_1));
-  EXPECT_EQ(1, _db.map_count());
-  EXPECT_TRUE(_db.update_map(&map_2));
-  EXPECT_EQ(2, _db.map_count());
-  EXPECT_TRUE(_db.update_map(&map_3));
-  EXPECT_EQ(3, _db.map_count());
+  EXPECT_EQ(0, _db.role_map_count());
+  EXPECT_TRUE(_db.update_role_map(&map_1));
+  EXPECT_EQ(1, _db.role_map_count());
+  EXPECT_TRUE(_db.update_role_map(&map_2));
+  EXPECT_EQ(2, _db.role_map_count());
+  EXPECT_TRUE(_db.update_role_map(&map_3));
+  EXPECT_EQ(3, _db.role_map_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Select_Map)
+TEST_F(TEST_FIXTURE_NAME, Select_RoleMap)
 {
   using namespace pfc;
-  Map map_1;
-  Map map_2;
+  RoleMap map_1;
+  RoleMap map_2;
 
   map_1.fk_scene = 1;
   map_1.fk_role = 2;
@@ -1135,33 +1135,33 @@ TEST_F(TEST_FIXTURE_NAME, Select_Map)
   map_2.fk_scene = 3;
   map_2.fk_role = 4;
 
-  EXPECT_EQ(0, _db.map_count());
-  EXPECT_TRUE(_db.update_map(&map_1));
-  EXPECT_EQ(1, _db.map_count());
-  EXPECT_TRUE(_db.update_map(&map_2));
-  EXPECT_EQ(2, _db.map_count());
+  EXPECT_EQ(0, _db.role_map_count());
+  EXPECT_TRUE(_db.update_role_map(&map_1));
+  EXPECT_EQ(1, _db.role_map_count());
+  EXPECT_TRUE(_db.update_role_map(&map_2));
+  EXPECT_EQ(2, _db.role_map_count());
 
-  Map id;
-  Map fk;
+  RoleMap id;
+  RoleMap fk;
 
   id.id = 1;
   fk.fk_scene = 3;
   fk.fk_role = 4;
 
-  _db.select_map(&id);
-  _db.select_map(&fk);
+  _db.select_role_map(&id);
+  _db.select_role_map(&fk);
 
   map_1.id = 1;
   EXPECT_EQ(map_1, id);
   map_2.id = 2;
   EXPECT_EQ(map_2, fk);
 }
-TEST_F(TEST_FIXTURE_NAME, Remove_Map)
+TEST_F(TEST_FIXTURE_NAME, Remove_RoleMap)
 {
   using namespace pfc;
-  Map map_1;
-  Map map_2;
-  Map map_3;
+  RoleMap map_1;
+  RoleMap map_2;
+  RoleMap map_3;
 
   map_1.fk_scene = 1;
   map_1.fk_role = 2;
@@ -1172,27 +1172,27 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Map)
   map_3.fk_scene = 5;
   map_3.fk_role = 6;
 
-  EXPECT_TRUE(_db.update_map(&map_1));
-  EXPECT_TRUE(_db.update_map(&map_2));
-  EXPECT_TRUE(_db.update_map(&map_3));
-  EXPECT_EQ(3, _db.map_count());
-  EXPECT_TRUE(_db.remove_map(&map_1));
-  EXPECT_TRUE(_db.remove_map(&map_3));
-  EXPECT_EQ(1, _db.map_count());
+  EXPECT_TRUE(_db.update_role_map(&map_1));
+  EXPECT_TRUE(_db.update_role_map(&map_2));
+  EXPECT_TRUE(_db.update_role_map(&map_3));
+  EXPECT_EQ(3, _db.role_map_count());
+  EXPECT_TRUE(_db.remove_role_map(&map_1));
+  EXPECT_TRUE(_db.remove_role_map(&map_3));
+  EXPECT_EQ(1, _db.role_map_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Equality_Map)
+TEST_F(TEST_FIXTURE_NAME, Equality_RoleMap)
 {
   using namespace pfc;
-  Map map_1;
-  Map map_2;
+  RoleMap map_1;
+  RoleMap map_2;
 
   map_1.fk_scene = 1;
   map_1.fk_role = 2;
 
   map_2.id = 1;
 
-  EXPECT_TRUE(_db.update_map(&map_1));
-  EXPECT_TRUE(_db.select_map(&map_2));
+  EXPECT_TRUE(_db.update_role_map(&map_1));
+  EXPECT_TRUE(_db.select_role_map(&map_2));
   EXPECT_EQ(map_1, map_2);
 }
 //EVENT MAP TESTS------------------------------------------------------------------
@@ -1927,15 +1927,15 @@ TEST_F(TEST_FIXTURE_NAME, Map_Test_Role_Insertion)
   Scene scene_1;
   Scene scene_2;
   Scene scene_3;
-  Map map_1;
-  Map map_2;
-  Map map_3;
-  Map map_4;
-  Map map_5;
-  Map map_6;
-  Map map_7;
-  Map map_8;
-  Map map_9;
+  RoleMap map_1;
+  RoleMap map_2;
+  RoleMap map_3;
+  RoleMap map_4;
+  RoleMap map_5;
+  RoleMap map_6;
+  RoleMap map_7;
+  RoleMap map_8;
+  RoleMap map_9;
   Role role_1;
   Role role_2;
   Role role_3;
@@ -1966,41 +1966,41 @@ TEST_F(TEST_FIXTURE_NAME, Map_Test_Role_Insertion)
   _db.select_role(&role_2);
   _db.select_role(&role_3);
 
-  EXPECT_EQ(0, _db.map_count());
+  EXPECT_EQ(0, _db.role_map_count());
   _db.update_role_in_scene(&scene_1, &role_1);
-  EXPECT_EQ(1, _db.map_count());
+  EXPECT_EQ(1, _db.role_map_count());
   _db.update_role_in_scene(&scene_1, &role_2);
-  EXPECT_EQ(2, _db.map_count());
+  EXPECT_EQ(2, _db.role_map_count());
   _db.update_role_in_scene(&scene_1, &role_3);
-  EXPECT_EQ(3, _db.map_count());
+  EXPECT_EQ(3, _db.role_map_count());
   _db.update_role_in_scene(&scene_2, &role_1);
-  EXPECT_EQ(4, _db.map_count());
+  EXPECT_EQ(4, _db.role_map_count());
   _db.update_role_in_scene(&scene_2, &role_2);
-  EXPECT_EQ(5, _db.map_count());
+  EXPECT_EQ(5, _db.role_map_count());
   _db.update_role_in_scene(&scene_2, &role_3);
-  EXPECT_EQ(6, _db.map_count());
+  EXPECT_EQ(6, _db.role_map_count());
   _db.update_role_in_scene(&scene_3, &role_1);
-  EXPECT_EQ(7, _db.map_count());
+  EXPECT_EQ(7, _db.role_map_count());
   _db.update_role_in_scene(&scene_3, &role_2);
-  EXPECT_EQ(8, _db.map_count());
+  EXPECT_EQ(8, _db.role_map_count());
   _db.update_role_in_scene(&scene_3, &role_3);
-  EXPECT_EQ(9, _db.map_count());
+  EXPECT_EQ(9, _db.role_map_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Map_Test_Role_Removal)
+TEST_F(TEST_FIXTURE_NAME, RoleMap_Test_Role_Removal)
 {
   using namespace pfc;
   Scene scene_1;
   Scene scene_2;
   Scene scene_3;
-  Map map_1;
-  Map map_2;
-  Map map_3;
-  Map map_4;
-  Map map_5;
-  Map map_6;
-  Map map_7;
-  Map map_8;
-  Map map_9;
+  RoleMap map_1;
+  RoleMap map_2;
+  RoleMap map_3;
+  RoleMap map_4;
+  RoleMap map_5;
+  RoleMap map_6;
+  RoleMap map_7;
+  RoleMap map_8;
+  RoleMap map_9;
   Role role_1;
   Role role_2;
   Role role_3;
@@ -2041,42 +2041,42 @@ TEST_F(TEST_FIXTURE_NAME, Map_Test_Role_Removal)
   _db.update_role_in_scene(&scene_3, &role_2);
   _db.update_role_in_scene(&scene_3, &role_3);
 
-  EXPECT_EQ(9, _db.map_count());
+  EXPECT_EQ(9, _db.role_map_count());
   _db.remove_role_from_scene(&role_1, &scene_1);
-  EXPECT_EQ(8, _db.map_count());
+  EXPECT_EQ(8, _db.role_map_count());
   _db.remove_role_from_scene(&role_1, &scene_2);
-  EXPECT_EQ(7, _db.map_count());
+  EXPECT_EQ(7, _db.role_map_count());
   _db.remove_role_from_scene(&role_1, &scene_3);
-  EXPECT_EQ(6, _db.map_count());
+  EXPECT_EQ(6, _db.role_map_count());
   _db.remove_role_from_scene(&role_2, &scene_1);
-  EXPECT_EQ(5, _db.map_count());
+  EXPECT_EQ(5, _db.role_map_count());
   _db.remove_role_from_scene(&role_2, &scene_2);
-  EXPECT_EQ(4, _db.map_count());
+  EXPECT_EQ(4, _db.role_map_count());
   _db.remove_role_from_scene(&role_2, &scene_3);
-  EXPECT_EQ(3, _db.map_count());
+  EXPECT_EQ(3, _db.role_map_count());
   _db.remove_role_from_scene(&role_3, &scene_1);
-  EXPECT_EQ(2, _db.map_count());
+  EXPECT_EQ(2, _db.role_map_count());
   _db.remove_role_from_scene(&role_3, &scene_2);
-  EXPECT_EQ(1, _db.map_count());
+  EXPECT_EQ(1, _db.role_map_count());
   _db.remove_role_from_scene(&role_3, &scene_3);
-  EXPECT_EQ(0, _db.map_count());
+  EXPECT_EQ(0, _db.role_map_count());
   EXPECT_EQ(3, _db.role_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Map_Test_Role_Deletion)
+TEST_F(TEST_FIXTURE_NAME, RoleMap_Test_Role_Deletion)
 {
   using namespace pfc;
   Scene scene_1;
   Scene scene_2;
   Scene scene_3;
-  Map map_1;
-  Map map_2;
-  Map map_3;
-  Map map_4;
-  Map map_5;
-  Map map_6;
-  Map map_7;
-  Map map_8;
-  Map map_9;
+  RoleMap map_1;
+  RoleMap map_2;
+  RoleMap map_3;
+  RoleMap map_4;
+  RoleMap map_5;
+  RoleMap map_6;
+  RoleMap map_7;
+  RoleMap map_8;
+  RoleMap map_9;
   Role role_1;
   Role role_2;
   Role role_3;
@@ -2117,41 +2117,41 @@ TEST_F(TEST_FIXTURE_NAME, Map_Test_Role_Deletion)
   _db.update_role_in_scene(&scene_3, &role_2);
   _db.update_role_in_scene(&scene_3, &role_3);
 
-  EXPECT_EQ(9, _db.map_count());
+  EXPECT_EQ(9, _db.role_map_count());
   EXPECT_EQ(3, _db.role_count(&scene_1));
   EXPECT_EQ(3, _db.role_count(&scene_2));
   EXPECT_EQ(3, _db.role_count(&scene_3));
   _db.remove_role(&role_1);
-  EXPECT_EQ(6, _db.map_count());
+  EXPECT_EQ(6, _db.role_map_count());
   EXPECT_EQ(2, _db.role_count(&scene_1));
   EXPECT_EQ(2, _db.role_count(&scene_2));
   EXPECT_EQ(2, _db.role_count(&scene_3));
   _db.remove_role(&role_2);
-  EXPECT_EQ(3, _db.map_count());
+  EXPECT_EQ(3, _db.role_map_count());
   EXPECT_EQ(1, _db.role_count(&scene_1));
   EXPECT_EQ(1, _db.role_count(&scene_2));
   EXPECT_EQ(1, _db.role_count(&scene_3));
   _db.remove_role(&role_3);
-  EXPECT_EQ(0, _db.map_count());
+  EXPECT_EQ(0, _db.role_map_count());
   EXPECT_EQ(0, _db.role_count(&scene_1));
   EXPECT_EQ(0, _db.role_count(&scene_2));
   EXPECT_EQ(0, _db.role_count(&scene_3));
 }
-TEST_F(TEST_FIXTURE_NAME, Map_Test_Scene_Deletion)
+TEST_F(TEST_FIXTURE_NAME, RoleMap_Test_Scene_Deletion)
 {
   using namespace pfc;
   Scene scene_1;
   Scene scene_2;
   Scene scene_3;
-  Map map_1;
-  Map map_2;
-  Map map_3;
-  Map map_4;
-  Map map_5;
-  Map map_6;
-  Map map_7;
-  Map map_8;
-  Map map_9;
+  RoleMap map_1;
+  RoleMap map_2;
+  RoleMap map_3;
+  RoleMap map_4;
+  RoleMap map_5;
+  RoleMap map_6;
+  RoleMap map_7;
+  RoleMap map_8;
+  RoleMap map_9;
   Role role_1;
   Role role_2;
   Role role_3;
@@ -2192,13 +2192,13 @@ TEST_F(TEST_FIXTURE_NAME, Map_Test_Scene_Deletion)
   _db.update_role_in_scene(&scene_3, &role_2);
   _db.update_role_in_scene(&scene_3, &role_3);
 
-  EXPECT_EQ(9, _db.map_count());
+  EXPECT_EQ(9, _db.role_map_count());
   _db.remove_scene(&scene_1);
-  EXPECT_EQ(6, _db.map_count());
+  EXPECT_EQ(6, _db.role_map_count());
   _db.remove_scene(&scene_2);
-  EXPECT_EQ(3, _db.map_count());
+  EXPECT_EQ(3, _db.role_map_count());
   _db.remove_scene(&scene_3);
-  EXPECT_EQ(0, _db.map_count());
+  EXPECT_EQ(0, _db.role_map_count());
 }
 //SCENE_MAP_EVENT TESTS------------------------------------------------------
 TEST_F(TEST_FIXTURE_NAME, EventMap_Test_Event_Insertion)
@@ -2423,15 +2423,15 @@ TEST_F(TEST_FIXTURE_NAME, EventMap_Test_Scene_Deletion)
   Scene scene_1;
   Scene scene_2;
   Scene scene_3;
-  Map map_1;
-  Map map_2;
-  Map map_3;
-  Map map_4;
-  Map map_5;
-  Map map_6;
-  Map map_7;
-  Map map_8;
-  Map map_9;
+  EventMap map_1;
+  EventMap map_2;
+  EventMap map_3;
+  EventMap map_4;
+  EventMap map_5;
+  EventMap map_6;
+  EventMap map_7;
+  EventMap map_8;
+  EventMap map_9;
   Event event_1;
   Event event_2;
   Event event_3;
@@ -2481,4 +2481,930 @@ TEST_F(TEST_FIXTURE_NAME, EventMap_Test_Scene_Deletion)
   EXPECT_EQ(0, _db.event_map_count());
 }
 //SCENE_MAP_RESTRICTION TESTS----------------------------------------------
+TEST_F(TEST_FIXTURE_NAME, RestrictionMap_Test_Restriction_Insertion)
+{
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+  RestrictionMap map_1;
+  RestrictionMap map_2;
+  RestrictionMap map_3;
+  RestrictionMap map_4;
+  RestrictionMap map_5;
+  RestrictionMap map_6;
+  RestrictionMap map_7;
+  RestrictionMap map_8;
+  RestrictionMap map_9;
+  Restriction restriction_1;
+  Restriction restriction_2;
+  Restriction restriction_3;
+  scene_1.name = "Opening";
+  scene_2.name = "Middle";
+  scene_3.name = "Ending";
 
+  _db.update_scene(&scene_1);
+  _db.update_scene(&scene_2);
+  _db.update_scene(&scene_3);
+
+  _db.select_scene(&scene_1);
+  _db.select_scene(&scene_2);
+  _db.select_scene(&scene_3);
+
+  restriction_1.name = "Software Developer";
+  restriction_1.value = "Bash your head against a wall for 8 hours a day";
+  restriction_2.name = "Exterminator";
+  restriction_2.value = "Look for bugs 8 hours a day";
+  restriction_3.name = "Tailor";
+  restriction_3.value = "Make quick patches 8 hours a day";
+
+  _db.update_restriction(&restriction_1);
+  _db.update_restriction(&restriction_2);
+  _db.update_restriction(&restriction_3);
+
+  _db.select_restriction(&restriction_1);
+  _db.select_restriction(&restriction_2);
+  _db.select_restriction(&restriction_3);
+
+  EXPECT_EQ(0, _db.restriction_map_count());
+  _db.update_restriction_in_scene(&scene_1, &restriction_1);
+  EXPECT_EQ(1, _db.restriction_map_count());
+  _db.update_restriction_in_scene(&scene_1, &restriction_2);
+  EXPECT_EQ(2, _db.restriction_map_count());
+  _db.update_restriction_in_scene(&scene_1, &restriction_3);
+  EXPECT_EQ(3, _db.restriction_map_count());
+  _db.update_restriction_in_scene(&scene_2, &restriction_1);
+  EXPECT_EQ(4, _db.restriction_map_count());
+  _db.update_restriction_in_scene(&scene_2, &restriction_2);
+  EXPECT_EQ(5, _db.restriction_map_count());
+  _db.update_restriction_in_scene(&scene_2, &restriction_3);
+  EXPECT_EQ(6, _db.restriction_map_count());
+  _db.update_restriction_in_scene(&scene_3, &restriction_1);
+  EXPECT_EQ(7, _db.restriction_map_count());
+  _db.update_restriction_in_scene(&scene_3, &restriction_2);
+  EXPECT_EQ(8, _db.restriction_map_count());
+  _db.update_restriction_in_scene(&scene_3, &restriction_3);
+  EXPECT_EQ(9, _db.restriction_map_count());
+}
+TEST_F(TEST_FIXTURE_NAME, RestrictionMap_Test_Restriction_Removal)
+{
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+  RestrictionMap map_1;
+  RestrictionMap map_2;
+  RestrictionMap map_3;
+  RestrictionMap map_4;
+  RestrictionMap map_5;
+  RestrictionMap map_6;
+  RestrictionMap map_7;
+  RestrictionMap map_8;
+  RestrictionMap map_9;
+  Restriction restriction_1;
+  Restriction restriction_2;
+  Restriction restriction_3;
+  scene_1.name = "Opening";
+  scene_2.name = "Middle";
+  scene_3.name = "Ending";
+
+  _db.update_scene(&scene_1);
+  _db.update_scene(&scene_2);
+  _db.update_scene(&scene_3);
+
+  _db.select_scene(&scene_1);
+  _db.select_scene(&scene_2);
+  _db.select_scene(&scene_3);
+
+  restriction_1.name = "Software Developer";
+  restriction_1.value = "Bash your head against a wall for 8 hours a day";
+  restriction_2.name = "Exterminator";
+  restriction_2.value = "Look for bugs 8 hours a day";
+  restriction_3.name = "Tailor";
+  restriction_3.value = "Make quick patches 8 hours a day";
+
+  _db.update_restriction(&restriction_1);
+  _db.update_restriction(&restriction_2);
+  _db.update_restriction(&restriction_3);
+
+  _db.select_restriction(&restriction_1);
+  _db.select_restriction(&restriction_2);
+  _db.select_restriction(&restriction_3);
+
+  _db.update_restriction_in_scene(&scene_1, &restriction_1);
+  _db.update_restriction_in_scene(&scene_1, &restriction_2);
+  _db.update_restriction_in_scene(&scene_1, &restriction_3);
+  _db.update_restriction_in_scene(&scene_2, &restriction_1);
+  _db.update_restriction_in_scene(&scene_2, &restriction_2);
+  _db.update_restriction_in_scene(&scene_2, &restriction_3);
+  _db.update_restriction_in_scene(&scene_3, &restriction_1);
+  _db.update_restriction_in_scene(&scene_3, &restriction_2);
+  _db.update_restriction_in_scene(&scene_3, &restriction_3);
+
+  EXPECT_EQ(9, _db.restriction_map_count());
+  _db.remove_restriction_from_scene(&restriction_1, &scene_1);
+  EXPECT_EQ(8, _db.restriction_map_count());
+  _db.remove_restriction_from_scene(&restriction_1, &scene_2);
+  EXPECT_EQ(7, _db.restriction_map_count());
+  _db.remove_restriction_from_scene(&restriction_1, &scene_3);
+  EXPECT_EQ(6, _db.restriction_map_count());
+  _db.remove_restriction_from_scene(&restriction_2, &scene_1);
+  EXPECT_EQ(5, _db.restriction_map_count());
+  _db.remove_restriction_from_scene(&restriction_2, &scene_2);
+  EXPECT_EQ(4, _db.restriction_map_count());
+  _db.remove_restriction_from_scene(&restriction_2, &scene_3);
+  EXPECT_EQ(3, _db.restriction_map_count());
+  _db.remove_restriction_from_scene(&restriction_3, &scene_1);
+  EXPECT_EQ(2, _db.restriction_map_count());
+  _db.remove_restriction_from_scene(&restriction_3, &scene_2);
+  EXPECT_EQ(1, _db.restriction_map_count());
+  _db.remove_restriction_from_scene(&restriction_3, &scene_3);
+  EXPECT_EQ(0, _db.restriction_map_count());
+  EXPECT_EQ(3, _db.restriction_count());
+}
+TEST_F(TEST_FIXTURE_NAME, RestrictionMap_Test_Restriction_Deletion)
+{
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+  RestrictionMap map_1;
+  RestrictionMap map_2;
+  RestrictionMap map_3;
+  RestrictionMap map_4;
+  RestrictionMap map_5;
+  RestrictionMap map_6;
+  RestrictionMap map_7;
+  RestrictionMap map_8;
+  RestrictionMap map_9;
+  Restriction restriction_1;
+  Restriction restriction_2;
+  Restriction restriction_3;
+  scene_1.name = "Opening";
+  scene_2.name = "Middle";
+  scene_3.name = "Ending";
+
+  _db.update_scene(&scene_1);
+  _db.update_scene(&scene_2);
+  _db.update_scene(&scene_3);
+
+  _db.select_scene(&scene_1);
+  _db.select_scene(&scene_2);
+  _db.select_scene(&scene_3);
+
+  restriction_1.name = "Software Developer";
+  restriction_1.value = "Bash your head against a wall for 8 hours a day";
+  restriction_2.name = "Exterminator";
+  restriction_2.value = "Look for bugs 8 hours a day";
+  restriction_3.name = "Tailor";
+  restriction_3.value = "Make quick patches 8 hours a day";
+
+  _db.update_restriction(&restriction_1);
+  _db.update_restriction(&restriction_2);
+  _db.update_restriction(&restriction_3);
+
+  _db.select_restriction(&restriction_1);
+  _db.select_restriction(&restriction_2);
+  _db.select_restriction(&restriction_3);
+
+  _db.update_restriction_in_scene(&scene_1, &restriction_1);
+  _db.update_restriction_in_scene(&scene_1, &restriction_2);
+  _db.update_restriction_in_scene(&scene_1, &restriction_3);
+  _db.update_restriction_in_scene(&scene_2, &restriction_1);
+  _db.update_restriction_in_scene(&scene_2, &restriction_2);
+  _db.update_restriction_in_scene(&scene_2, &restriction_3);
+  _db.update_restriction_in_scene(&scene_3, &restriction_1);
+  _db.update_restriction_in_scene(&scene_3, &restriction_2);
+  _db.update_restriction_in_scene(&scene_3, &restriction_3);
+
+  EXPECT_EQ(9, _db.restriction_map_count());
+  EXPECT_EQ(3, _db.restriction_count(&scene_1));
+  EXPECT_EQ(3, _db.restriction_count(&scene_2));
+  EXPECT_EQ(3, _db.restriction_count(&scene_3));
+  _db.remove_restriction(&restriction_1);
+  EXPECT_EQ(6, _db.restriction_map_count());
+  EXPECT_EQ(2, _db.restriction_count(&scene_1));
+  EXPECT_EQ(2, _db.restriction_count(&scene_2));
+  EXPECT_EQ(2, _db.restriction_count(&scene_3));
+  _db.remove_restriction(&restriction_2);
+  EXPECT_EQ(3, _db.restriction_map_count());
+  EXPECT_EQ(1, _db.restriction_count(&scene_1));
+  EXPECT_EQ(1, _db.restriction_count(&scene_2));
+  EXPECT_EQ(1, _db.restriction_count(&scene_3));
+  _db.remove_restriction(&restriction_3);
+  EXPECT_EQ(0, _db.restriction_map_count());
+  EXPECT_EQ(0, _db.restriction_count(&scene_1));
+  EXPECT_EQ(0, _db.restriction_count(&scene_2));
+  EXPECT_EQ(0, _db.restriction_count(&scene_3));
+}
+TEST_F(TEST_FIXTURE_NAME, RestrictionMap_Test_Scene_Deletion)
+{
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+  RestrictionMap map_1;
+  RestrictionMap map_2;
+  RestrictionMap map_3;
+  RestrictionMap map_4;
+  RestrictionMap map_5;
+  RestrictionMap map_6;
+  RestrictionMap map_7;
+  RestrictionMap map_8;
+  RestrictionMap map_9;
+  Restriction restriction_1;
+  Restriction restriction_2;
+  Restriction restriction_3;
+  scene_1.name = "Opening";
+  scene_2.name = "Middle";
+  scene_3.name = "Ending";
+
+  _db.update_scene(&scene_1);
+  _db.update_scene(&scene_2);
+  _db.update_scene(&scene_3);
+
+  _db.select_scene(&scene_1);
+  _db.select_scene(&scene_2);
+  _db.select_scene(&scene_3);
+
+  restriction_1.name = "Software Developer";
+  restriction_1.value = "Bash your head against a wall for 8 hours a day";
+  restriction_2.name = "Exterminator";
+  restriction_2.value = "Look for bugs 8 hours a day";
+  restriction_3.name = "Tailor";
+  restriction_3.value = "Make quick patches 8 hours a day";
+
+  _db.update_restriction(&restriction_1);
+  _db.update_restriction(&restriction_2);
+  _db.update_restriction(&restriction_3);
+
+  _db.select_restriction(&restriction_1);
+  _db.select_restriction(&restriction_2);
+  _db.select_restriction(&restriction_3);
+
+  _db.update_restriction_in_scene(&scene_1, &restriction_1);
+  _db.update_restriction_in_scene(&scene_1, &restriction_2);
+  _db.update_restriction_in_scene(&scene_1, &restriction_3);
+  _db.update_restriction_in_scene(&scene_2, &restriction_1);
+  _db.update_restriction_in_scene(&scene_2, &restriction_2);
+  _db.update_restriction_in_scene(&scene_2, &restriction_3);
+  _db.update_restriction_in_scene(&scene_3, &restriction_1);
+  _db.update_restriction_in_scene(&scene_3, &restriction_2);
+  _db.update_restriction_in_scene(&scene_3, &restriction_3);
+
+  EXPECT_EQ(9, _db.restriction_map_count());
+  _db.remove_scene(&scene_1);
+  EXPECT_EQ(6, _db.restriction_map_count());
+  _db.remove_scene(&scene_2);
+  EXPECT_EQ(3, _db.restriction_map_count());
+  _db.remove_scene(&scene_3);
+  EXPECT_EQ(0, _db.restriction_map_count());
+}
+//SCENE_MAP_EQUIPMENT TESTS-----------------------------------------------
+TEST_F(TEST_FIXTURE_NAME, EquipmentMap_Test_Equipment_Insertion)
+{
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+  EquipmentMap map_1;
+  EquipmentMap map_2;
+  EquipmentMap map_3;
+  EquipmentMap map_4;
+  EquipmentMap map_5;
+  EquipmentMap map_6;
+  EquipmentMap map_7;
+  EquipmentMap map_8;
+  EquipmentMap map_9;
+  Equipment equipment_1;
+  Equipment equipment_2;
+  Equipment equipment_3;
+  scene_1.name = "Opening";
+  scene_2.name = "Middle";
+  scene_3.name = "Ending";
+
+  _db.update_scene(&scene_1);
+  _db.update_scene(&scene_2);
+  _db.update_scene(&scene_3);
+
+  _db.select_scene(&scene_1);
+  _db.select_scene(&scene_2);
+  _db.select_scene(&scene_3);
+
+  equipment_1.name = "Keytar";
+  equipment_1.type = 1;
+  equipment_1.description = "Got a sick keytar solo later";
+  equipment_1.image = ("music stand");
+  equipment_1.citations = { 1 };
+
+  equipment_2.name = "piano";
+  equipment_2.type = 2;
+  equipment_2.description = "big instrument with keys";
+  equipment_2.image = ("piano bench");
+  equipment_2.citations = { 2 };
+
+  equipment_3.name = "bagpipes";
+  equipment_3.type = 3;
+  equipment_3.description = "please stop playing the bagpipes";
+  equipment_3.image = ("a bladder");
+  equipment_3.citations = { 3 };
+
+  _db.update_equipment(&equipment_1);
+  _db.update_equipment(&equipment_2);
+  _db.update_equipment(&equipment_3);
+
+  _db.select_equipment(&equipment_1);
+  _db.select_equipment(&equipment_2);
+  _db.select_equipment(&equipment_3);
+
+  EXPECT_EQ(0, _db.equipment_map_count());
+  _db.update_equipment_in_scene(&scene_1, &equipment_1);
+  EXPECT_EQ(1, _db.equipment_map_count());
+  _db.update_equipment_in_scene(&scene_1, &equipment_2);
+  EXPECT_EQ(2, _db.equipment_map_count());
+  _db.update_equipment_in_scene(&scene_1, &equipment_3);
+  EXPECT_EQ(3, _db.equipment_map_count());
+  _db.update_equipment_in_scene(&scene_2, &equipment_1);
+  EXPECT_EQ(4, _db.equipment_map_count());
+  _db.update_equipment_in_scene(&scene_2, &equipment_2);
+  EXPECT_EQ(5, _db.equipment_map_count());
+  _db.update_equipment_in_scene(&scene_2, &equipment_3);
+  EXPECT_EQ(6, _db.equipment_map_count());
+  _db.update_equipment_in_scene(&scene_3, &equipment_1);
+  EXPECT_EQ(7, _db.equipment_map_count());
+  _db.update_equipment_in_scene(&scene_3, &equipment_2);
+  EXPECT_EQ(8, _db.equipment_map_count());
+  _db.update_equipment_in_scene(&scene_3, &equipment_3);
+  EXPECT_EQ(9, _db.equipment_map_count());
+}
+TEST_F(TEST_FIXTURE_NAME, EquipmentMap_Test_Equipment_Removal)
+{
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+  EquipmentMap map_1;
+  EquipmentMap map_2;
+  EquipmentMap map_3;
+  EquipmentMap map_4;
+  EquipmentMap map_5;
+  EquipmentMap map_6;
+  EquipmentMap map_7;
+  EquipmentMap map_8;
+  EquipmentMap map_9;
+  Equipment equipment_1;
+  Equipment equipment_2;
+  Equipment equipment_3;
+  scene_1.name = "Opening";
+  scene_2.name = "Middle";
+  scene_3.name = "Ending";
+
+  _db.update_scene(&scene_1);
+  _db.update_scene(&scene_2);
+  _db.update_scene(&scene_3);
+
+  _db.select_scene(&scene_1);
+  _db.select_scene(&scene_2);
+  _db.select_scene(&scene_3);
+
+  equipment_1.name = "Keytar";
+  equipment_1.type = 1;
+  equipment_1.description = "Got a sick keytar solo later";
+  equipment_1.image = ("music stand");
+  equipment_1.citations = { 1 };
+
+  equipment_2.name = "piano";
+  equipment_2.type = 2;
+  equipment_2.description = "big instrument with keys";
+  equipment_2.image = ("piano bench");
+  equipment_2.citations = { 2 };
+
+  equipment_3.name = "bagpipes";
+  equipment_3.type = 3;
+  equipment_3.description = "please stop playing the bagpipes";
+  equipment_3.image = ("a bladder");
+  equipment_3.citations = { 3 };
+
+  _db.update_equipment(&equipment_1);
+  _db.update_equipment(&equipment_2);
+  _db.update_equipment(&equipment_3);
+
+  _db.select_equipment(&equipment_1);
+  _db.select_equipment(&equipment_2);
+  _db.select_equipment(&equipment_3);
+
+  _db.update_equipment_in_scene(&scene_1, &equipment_1);
+  _db.update_equipment_in_scene(&scene_1, &equipment_2);
+  _db.update_equipment_in_scene(&scene_1, &equipment_3);
+  _db.update_equipment_in_scene(&scene_2, &equipment_1);
+  _db.update_equipment_in_scene(&scene_2, &equipment_2);
+  _db.update_equipment_in_scene(&scene_2, &equipment_3);
+  _db.update_equipment_in_scene(&scene_3, &equipment_1);
+  _db.update_equipment_in_scene(&scene_3, &equipment_2);
+  _db.update_equipment_in_scene(&scene_3, &equipment_3);
+
+  EXPECT_EQ(9, _db.equipment_map_count());
+  _db.remove_equipment_from_scene(&equipment_1, &scene_1);
+  EXPECT_EQ(8, _db.equipment_map_count());
+  _db.remove_equipment_from_scene(&equipment_1, &scene_2);
+  EXPECT_EQ(7, _db.equipment_map_count());
+  _db.remove_equipment_from_scene(&equipment_1, &scene_3);
+  EXPECT_EQ(6, _db.equipment_map_count());
+  _db.remove_equipment_from_scene(&equipment_2, &scene_1);
+  EXPECT_EQ(5, _db.equipment_map_count());
+  _db.remove_equipment_from_scene(&equipment_2, &scene_2);
+  EXPECT_EQ(4, _db.equipment_map_count());
+  _db.remove_equipment_from_scene(&equipment_2, &scene_3);
+  EXPECT_EQ(3, _db.equipment_map_count());
+  _db.remove_equipment_from_scene(&equipment_3, &scene_1);
+  EXPECT_EQ(2, _db.equipment_map_count());
+  _db.remove_equipment_from_scene(&equipment_3, &scene_2);
+  EXPECT_EQ(1, _db.equipment_map_count());
+  _db.remove_equipment_from_scene(&equipment_3, &scene_3);
+  EXPECT_EQ(0, _db.equipment_map_count());
+  EXPECT_EQ(3, _db.equipment_count());
+}
+TEST_F(TEST_FIXTURE_NAME, EquipmentMap_Test_Equipment_Deletion)
+{
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+  EquipmentMap map_1;
+  EquipmentMap map_2;
+  EquipmentMap map_3;
+  EquipmentMap map_4;
+  EquipmentMap map_5;
+  EquipmentMap map_6;
+  EquipmentMap map_7;
+  EquipmentMap map_8;
+  EquipmentMap map_9;
+  Equipment equipment_1;
+  Equipment equipment_2;
+  Equipment equipment_3;
+  scene_1.name = "Opening";
+  scene_2.name = "Middle";
+  scene_3.name = "Ending";
+
+  _db.update_scene(&scene_1);
+  _db.update_scene(&scene_2);
+  _db.update_scene(&scene_3);
+
+  _db.select_scene(&scene_1);
+  _db.select_scene(&scene_2);
+  _db.select_scene(&scene_3);
+
+  equipment_1.name = "Keytar";
+  equipment_1.type = 1;
+  equipment_1.description = "Got a sick keytar solo later";
+  equipment_1.image = ("music stand");
+  equipment_1.citations = { 1 };
+
+  equipment_2.name = "piano";
+  equipment_2.type = 2;
+  equipment_2.description = "big instrument with keys";
+  equipment_2.image = ("piano bench");
+  equipment_2.citations = { 2 };
+
+  equipment_3.name = "bagpipes";
+  equipment_3.type = 3;
+  equipment_3.description = "please stop playing the bagpipes";
+  equipment_3.image = ("a bladder");
+  equipment_3.citations = { 3 };
+
+  _db.update_equipment(&equipment_1);
+  _db.update_equipment(&equipment_2);
+  _db.update_equipment(&equipment_3);
+
+  _db.select_equipment(&equipment_1);
+  _db.select_equipment(&equipment_2);
+  _db.select_equipment(&equipment_3);
+
+  _db.update_equipment_in_scene(&scene_1, &equipment_1);
+  _db.update_equipment_in_scene(&scene_1, &equipment_2);
+  _db.update_equipment_in_scene(&scene_1, &equipment_3);
+  _db.update_equipment_in_scene(&scene_2, &equipment_1);
+  _db.update_equipment_in_scene(&scene_2, &equipment_2);
+  _db.update_equipment_in_scene(&scene_2, &equipment_3);
+  _db.update_equipment_in_scene(&scene_3, &equipment_1);
+  _db.update_equipment_in_scene(&scene_3, &equipment_2);
+  _db.update_equipment_in_scene(&scene_3, &equipment_3);
+
+  EXPECT_EQ(9, _db.equipment_map_count());
+  EXPECT_EQ(3, _db.equipment_count(&scene_1));
+  EXPECT_EQ(3, _db.equipment_count(&scene_2));
+  EXPECT_EQ(3, _db.equipment_count(&scene_3));
+  _db.remove_equipment(&equipment_1);
+  EXPECT_EQ(6, _db.equipment_map_count());
+  EXPECT_EQ(2, _db.equipment_count(&scene_1));
+  EXPECT_EQ(2, _db.equipment_count(&scene_2));
+  EXPECT_EQ(2, _db.equipment_count(&scene_3));
+  _db.remove_equipment(&equipment_2);
+  EXPECT_EQ(3, _db.equipment_map_count());
+  EXPECT_EQ(1, _db.equipment_count(&scene_1));
+  EXPECT_EQ(1, _db.equipment_count(&scene_2));
+  EXPECT_EQ(1, _db.equipment_count(&scene_3));
+  _db.remove_equipment(&equipment_3);
+  EXPECT_EQ(0, _db.equipment_map_count());
+  EXPECT_EQ(0, _db.equipment_count(&scene_1));
+  EXPECT_EQ(0, _db.equipment_count(&scene_2));
+  EXPECT_EQ(0, _db.equipment_count(&scene_3));
+}
+TEST_F(TEST_FIXTURE_NAME, EquipmentMap_Test_Scene_Deletion)
+{
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+  EquipmentMap map_1;
+  EquipmentMap map_2;
+  EquipmentMap map_3;
+  EquipmentMap map_4;
+  EquipmentMap map_5;
+  EquipmentMap map_6;
+  EquipmentMap map_7;
+  EquipmentMap map_8;
+  EquipmentMap map_9;
+  Equipment equipment_1;
+  Equipment equipment_2;
+  Equipment equipment_3;
+  scene_1.name = "Opening";
+  scene_2.name = "Middle";
+  scene_3.name = "Ending";
+
+  _db.update_scene(&scene_1);
+  _db.update_scene(&scene_2);
+  _db.update_scene(&scene_3);
+
+  _db.select_scene(&scene_1);
+  _db.select_scene(&scene_2);
+  _db.select_scene(&scene_3);
+
+  equipment_1.name = "Keytar";
+  equipment_1.type = 1;
+  equipment_1.description = "Got a sick keytar solo later";
+  equipment_1.image = ("music stand");
+  equipment_1.citations = { 1 };
+
+  equipment_2.name = "piano";
+  equipment_2.type = 2;
+  equipment_2.description = "big instrument with keys";
+  equipment_2.image = ("piano bench");
+  equipment_2.citations = { 2 };
+
+  equipment_3.name = "bagpipes";
+  equipment_3.type = 3;
+  equipment_3.description = "please stop playing the bagpipes";
+  equipment_3.image = ("a bladder");
+  equipment_3.citations = { 3 };
+
+  _db.update_equipment(&equipment_1);
+  _db.update_equipment(&equipment_2);
+  _db.update_equipment(&equipment_3);
+
+  _db.select_equipment(&equipment_1);
+  _db.select_equipment(&equipment_2);
+  _db.select_equipment(&equipment_3);
+
+  _db.update_equipment_in_scene(&scene_1, &equipment_1);
+  _db.update_equipment_in_scene(&scene_1, &equipment_2);
+  _db.update_equipment_in_scene(&scene_1, &equipment_3);
+  _db.update_equipment_in_scene(&scene_2, &equipment_1);
+  _db.update_equipment_in_scene(&scene_2, &equipment_2);
+  _db.update_equipment_in_scene(&scene_2, &equipment_3);
+  _db.update_equipment_in_scene(&scene_3, &equipment_1);
+  _db.update_equipment_in_scene(&scene_3, &equipment_2);
+  _db.update_equipment_in_scene(&scene_3, &equipment_3);
+
+  EXPECT_EQ(9, _db.equipment_map_count());
+  _db.remove_scene(&scene_1);
+  EXPECT_EQ(6, _db.equipment_map_count());
+  _db.remove_scene(&scene_2);
+  EXPECT_EQ(3, _db.equipment_map_count());
+  _db.remove_scene(&scene_3);
+  EXPECT_EQ(0, _db.equipment_map_count());
+}
+//SCENE_MAP_CITATION TESTS------------------------------------------------
+TEST_F(TEST_FIXTURE_NAME, CitationMap_Test_Citation_Insertion)
+{
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+  CitationMap map_1;
+  CitationMap map_2;
+  CitationMap map_3;
+  CitationMap map_4;
+  CitationMap map_5;
+  CitationMap map_6;
+  CitationMap map_7;
+  CitationMap map_8;
+  CitationMap map_9;
+  Citation citation_1;
+  Citation citation_2;
+  Citation citation_3;
+  scene_1.name = "Opening";
+  scene_2.name = "Middle";
+  scene_3.name = "Ending";
+
+  _db.update_scene(&scene_1);
+  _db.update_scene(&scene_2);
+  _db.update_scene(&scene_3);
+
+  _db.select_scene(&scene_1);
+  _db.select_scene(&scene_2);
+  _db.select_scene(&scene_3);
+
+  citation_1.key = "skeleton key";
+  citation_1.title = "Mr. Bones' Wild Ride";
+  citation_1.authors = "Nathan;Angel";
+  citation_1.year = "1000";
+  citation_1.publisher = "Boneland";
+
+  citation_2.key = "boss key";
+  citation_2.title = "Legend of Zelda";
+  citation_2.authors = "Austin;Matthew";
+  citation_2.year = "2000";
+  citation_2.publisher = "Nintendo";
+
+  citation_3.key = "rsa key";
+  citation_3.title = "Extra Security";
+  citation_3.authors = "Steven;Lucas";
+  citation_3.year = "2019";
+  citation_3.publisher = "ARA";
+
+  _db.update_citation(&citation_1);
+  _db.update_citation(&citation_2);
+  _db.update_citation(&citation_3);
+
+  _db.select_citation(&citation_1);
+  _db.select_citation(&citation_2);
+  _db.select_citation(&citation_3);
+
+  EXPECT_EQ(0, _db.citation_map_count());
+  _db.update_citation_in_scene(&scene_1, &citation_1);
+  EXPECT_EQ(1, _db.citation_map_count());
+  _db.update_citation_in_scene(&scene_1, &citation_2);
+  EXPECT_EQ(2, _db.citation_map_count());
+  _db.update_citation_in_scene(&scene_1, &citation_3);
+  EXPECT_EQ(3, _db.citation_map_count());
+  _db.update_citation_in_scene(&scene_2, &citation_1);
+  EXPECT_EQ(4, _db.citation_map_count());
+  _db.update_citation_in_scene(&scene_2, &citation_2);
+  EXPECT_EQ(5, _db.citation_map_count());
+  _db.update_citation_in_scene(&scene_2, &citation_3);
+  EXPECT_EQ(6, _db.citation_map_count());
+  _db.update_citation_in_scene(&scene_3, &citation_1);
+  EXPECT_EQ(7, _db.citation_map_count());
+  _db.update_citation_in_scene(&scene_3, &citation_2);
+  EXPECT_EQ(8, _db.citation_map_count());
+  _db.update_citation_in_scene(&scene_3, &citation_3);
+  EXPECT_EQ(9, _db.citation_map_count());
+}
+TEST_F(TEST_FIXTURE_NAME, CitationMap_Test_Citation_Removal)
+{
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+  CitationMap map_1;
+  CitationMap map_2;
+  CitationMap map_3;
+  CitationMap map_4;
+  CitationMap map_5;
+  CitationMap map_6;
+  CitationMap map_7;
+  CitationMap map_8;
+  CitationMap map_9;
+  Citation citation_1;
+  Citation citation_2;
+  Citation citation_3;
+  scene_1.name = "Opening";
+  scene_2.name = "Middle";
+  scene_3.name = "Ending";
+
+  _db.update_scene(&scene_1);
+  _db.update_scene(&scene_2);
+  _db.update_scene(&scene_3);
+
+  _db.select_scene(&scene_1);
+  _db.select_scene(&scene_2);
+  _db.select_scene(&scene_3);
+
+  citation_1.key = "skeleton key";
+  citation_1.title = "Mr. Bones' Wild Ride";
+  citation_1.authors = "Nathan;Angel";
+  citation_1.year = "1000";
+  citation_1.publisher = "Boneland";
+
+  citation_2.key = "boss key";
+  citation_2.title = "Legend of Zelda";
+  citation_2.authors = "Austin;Matthew";
+  citation_2.year = "2000";
+  citation_2.publisher = "Nintendo";
+
+  citation_3.key = "rsa key";
+  citation_3.title = "Extra Security";
+  citation_3.authors = "Steven;Lucas";
+  citation_3.year = "2019";
+  citation_3.publisher = "ARA";
+
+  _db.update_citation(&citation_1);
+  _db.update_citation(&citation_2);
+  _db.update_citation(&citation_3);
+
+  _db.select_citation(&citation_1);
+  _db.select_citation(&citation_2);
+  _db.select_citation(&citation_3);
+
+  _db.update_citation_in_scene(&scene_1, &citation_1);
+  _db.update_citation_in_scene(&scene_1, &citation_2);
+  _db.update_citation_in_scene(&scene_1, &citation_3);
+  _db.update_citation_in_scene(&scene_2, &citation_1);
+  _db.update_citation_in_scene(&scene_2, &citation_2);
+  _db.update_citation_in_scene(&scene_2, &citation_3);
+  _db.update_citation_in_scene(&scene_3, &citation_1);
+  _db.update_citation_in_scene(&scene_3, &citation_2);
+  _db.update_citation_in_scene(&scene_3, &citation_3);
+
+  EXPECT_EQ(9, _db.citation_map_count());
+  _db.remove_citation_from_scene(&citation_1, &scene_1);
+  EXPECT_EQ(8, _db.citation_map_count());
+  _db.remove_citation_from_scene(&citation_1, &scene_2);
+  EXPECT_EQ(7, _db.citation_map_count());
+  _db.remove_citation_from_scene(&citation_1, &scene_3);
+  EXPECT_EQ(6, _db.citation_map_count());
+  _db.remove_citation_from_scene(&citation_2, &scene_1);
+  EXPECT_EQ(5, _db.citation_map_count());
+  _db.remove_citation_from_scene(&citation_2, &scene_2);
+  EXPECT_EQ(4, _db.citation_map_count());
+  _db.remove_citation_from_scene(&citation_2, &scene_3);
+  EXPECT_EQ(3, _db.citation_map_count());
+  _db.remove_citation_from_scene(&citation_3, &scene_1);
+  EXPECT_EQ(2, _db.citation_map_count());
+  _db.remove_citation_from_scene(&citation_3, &scene_2);
+  EXPECT_EQ(1, _db.citation_map_count());
+  _db.remove_citation_from_scene(&citation_3, &scene_3);
+  EXPECT_EQ(0, _db.citation_map_count());
+  EXPECT_EQ(3, _db.citation_count());
+}
+TEST_F(TEST_FIXTURE_NAME, CitationMap_Test_Citation_Deletion)
+{
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+  CitationMap map_1;
+  CitationMap map_2;
+  CitationMap map_3;
+  CitationMap map_4;
+  CitationMap map_5;
+  CitationMap map_6;
+  CitationMap map_7;
+  CitationMap map_8;
+  CitationMap map_9;
+  Citation citation_1;
+  Citation citation_2;
+  Citation citation_3;
+  scene_1.name = "Opening";
+  scene_2.name = "Middle";
+  scene_3.name = "Ending";
+
+  _db.update_scene(&scene_1);
+  _db.update_scene(&scene_2);
+  _db.update_scene(&scene_3);
+
+  _db.select_scene(&scene_1);
+  _db.select_scene(&scene_2);
+  _db.select_scene(&scene_3);
+
+  citation_1.key = "skeleton key";
+  citation_1.title = "Mr. Bones' Wild Ride";
+  citation_1.authors = "Nathan;Angel";
+  citation_1.year = "1000";
+  citation_1.publisher = "Boneland";
+
+  citation_2.key = "boss key";
+  citation_2.title = "Legend of Zelda";
+  citation_2.authors = "Austin;Matthew";
+  citation_2.year = "2000";
+  citation_2.publisher = "Nintendo";
+
+  citation_3.key = "rsa key";
+  citation_3.title = "Extra Security";
+  citation_3.authors = "Steven;Lucas";
+  citation_3.year = "2019";
+  citation_3.publisher = "ARA";
+
+  _db.update_citation(&citation_1);
+  _db.update_citation(&citation_2);
+  _db.update_citation(&citation_3);
+
+  _db.select_citation(&citation_1);
+  _db.select_citation(&citation_2);
+  _db.select_citation(&citation_3);
+
+  _db.update_citation_in_scene(&scene_1, &citation_1);
+  _db.update_citation_in_scene(&scene_1, &citation_2);
+  _db.update_citation_in_scene(&scene_1, &citation_3);
+  _db.update_citation_in_scene(&scene_2, &citation_1);
+  _db.update_citation_in_scene(&scene_2, &citation_2);
+  _db.update_citation_in_scene(&scene_2, &citation_3);
+  _db.update_citation_in_scene(&scene_3, &citation_1);
+  _db.update_citation_in_scene(&scene_3, &citation_2);
+  _db.update_citation_in_scene(&scene_3, &citation_3);
+
+  EXPECT_EQ(9, _db.citation_map_count());
+  EXPECT_EQ(3, _db.citation_count(&scene_1));
+  EXPECT_EQ(3, _db.citation_count(&scene_2));
+  EXPECT_EQ(3, _db.citation_count(&scene_3));
+  _db.remove_citation(&citation_1);
+  EXPECT_EQ(6, _db.citation_map_count());
+  EXPECT_EQ(2, _db.citation_count(&scene_1));
+  EXPECT_EQ(2, _db.citation_count(&scene_2));
+  EXPECT_EQ(2, _db.citation_count(&scene_3));
+  _db.remove_citation(&citation_2);
+  EXPECT_EQ(3, _db.citation_map_count());
+  EXPECT_EQ(1, _db.citation_count(&scene_1));
+  EXPECT_EQ(1, _db.citation_count(&scene_2));
+  EXPECT_EQ(1, _db.citation_count(&scene_3));
+  _db.remove_citation(&citation_3);
+  EXPECT_EQ(0, _db.citation_map_count());
+  EXPECT_EQ(0, _db.citation_count(&scene_1));
+  EXPECT_EQ(0, _db.citation_count(&scene_2));
+  EXPECT_EQ(0, _db.citation_count(&scene_3));
+}
+TEST_F(TEST_FIXTURE_NAME, CitationMap_Test_Scene_Deletion)
+{
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+  CitationMap map_1;
+  CitationMap map_2;
+  CitationMap map_3;
+  CitationMap map_4;
+  CitationMap map_5;
+  CitationMap map_6;
+  CitationMap map_7;
+  CitationMap map_8;
+  CitationMap map_9;
+  Citation citation_1;
+  Citation citation_2;
+  Citation citation_3;
+  scene_1.name = "Opening";
+  scene_2.name = "Middle";
+  scene_3.name = "Ending";
+
+  _db.update_scene(&scene_1);
+  _db.update_scene(&scene_2);
+  _db.update_scene(&scene_3);
+
+  _db.select_scene(&scene_1);
+  _db.select_scene(&scene_2);
+  _db.select_scene(&scene_3);
+
+  citation_1.key = "skeleton key";
+  citation_1.title = "Mr. Bones' Wild Ride";
+  citation_1.authors = "Nathan;Angel";
+  citation_1.year = "1000";
+  citation_1.publisher = "Boneland";
+
+  citation_2.key = "boss key";
+  citation_2.title = "Legend of Zelda";
+  citation_2.authors = "Austin;Matthew";
+  citation_2.year = "2000";
+  citation_2.publisher = "Nintendo";
+
+  citation_3.key = "rsa key";
+  citation_3.title = "Extra Security";
+  citation_3.authors = "Steven;Lucas";
+  citation_3.year = "2019";
+  citation_3.publisher = "ARA";
+
+  _db.update_citation(&citation_1);
+  _db.update_citation(&citation_2);
+  _db.update_citation(&citation_3);
+
+  _db.select_citation(&citation_1);
+  _db.select_citation(&citation_2);
+  _db.select_citation(&citation_3);
+
+  _db.update_citation_in_scene(&scene_1, &citation_1);
+  _db.update_citation_in_scene(&scene_1, &citation_2);
+  _db.update_citation_in_scene(&scene_1, &citation_3);
+  _db.update_citation_in_scene(&scene_2, &citation_1);
+  _db.update_citation_in_scene(&scene_2, &citation_2);
+  _db.update_citation_in_scene(&scene_2, &citation_3);
+  _db.update_citation_in_scene(&scene_3, &citation_1);
+  _db.update_citation_in_scene(&scene_3, &citation_2);
+  _db.update_citation_in_scene(&scene_3, &citation_3);
+
+  EXPECT_EQ(9, _db.citation_map_count());
+  _db.remove_scene(&scene_1);
+  EXPECT_EQ(6, _db.citation_map_count());
+  _db.remove_scene(&scene_2);
+  EXPECT_EQ(3, _db.citation_map_count());
+  _db.remove_scene(&scene_3);
+  EXPECT_EQ(0, _db.citation_map_count());
+}

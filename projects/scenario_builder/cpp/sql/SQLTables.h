@@ -392,7 +392,7 @@ public:
   }
 };
 //----End Location
-struct Map : public QObject {
+struct RoleMap : public QObject {
   Q_OBJECT
   Q_PROPERTY(int map_id MEMBER id)
   Q_PROPERTY(int fk_scene MEMBER fk_scene)
@@ -403,34 +403,34 @@ public:
   int32_t fk_scene = -1;
   int32_t fk_role = -1;
 
-  Map(QObject* parent = nullptr)
+  RoleMap(QObject* parent = nullptr)
     : QObject(parent)
   {
   }
-  Map(const Map&) = delete;
-  Map(Map&&) = delete;
-  Map& operator=(const Map&) = delete;
-  Map& operator=(Map&&) = delete;
-  virtual ~Map() = default;
+  RoleMap(const RoleMap&) = delete;
+  RoleMap(RoleMap&&) = delete;
+  RoleMap& operator=(const RoleMap&) = delete;
+  RoleMap& operator=(RoleMap&&) = delete;
+  virtual ~RoleMap() = default;
 
-  bool operator==(const Map& rhs) const
+  bool operator==(const RoleMap& rhs) const
   {
     return id == rhs.id
       && fk_scene == rhs.fk_scene
       && fk_role == rhs.fk_role;
   }
-  bool operator!=(const Map& rhs) const
+  bool operator!=(const RoleMap& rhs) const
   {
     return !(*this == rhs);
   }
-  void assign(const Map& rhs)
+  void assign(const RoleMap& rhs)
   {
     id = rhs.id;
     fk_scene = rhs.fk_scene;
     fk_role = rhs.fk_role;
   }
 };
-//----End Map
+//----End Role Map
 struct EventMap : public QObject {
   Q_OBJECT
   Q_PROPERTY(int map_id MEMBER id)

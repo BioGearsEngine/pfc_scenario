@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
   qmlRegisterType<pfc::Injury>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Injury");
   qmlRegisterType<pfc::InjurySet>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "InjurySet");
   qmlRegisterType<pfc::Location>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Location");
-  qmlRegisterType<pfc::Map>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Map");
+  qmlRegisterType<pfc::RoleMap>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "RoleMap");
   qmlRegisterType<pfc::Objective>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Objective");
   qmlRegisterType<pfc::Property>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Property");
   qmlRegisterType<pfc::Restriction>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Restriction");

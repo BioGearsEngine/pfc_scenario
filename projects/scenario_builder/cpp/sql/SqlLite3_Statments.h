@@ -32,8 +32,10 @@ inline namespace sqlite3 {
     "roles",
     "treatments",
     "scenes",
-    "maps",
-    "event_maps"
+    "role_maps",
+    "event_maps",
+    "prop_maps",
+    "restriction_maps"
   };
 
   constexpr auto list_tables = "SELECT * FROM sqlite_master WHERE type='table';";
@@ -191,6 +193,7 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_equipment = R"( DELETE FROM equipment; )";
   constexpr auto count_equipments = R"( SELECT COUNT(equipment_id) FROM equipments; )";
+  constexpr auto count_equipments_in_scene = R"( SELECT COUNT(equipment_map_id) FROM equipment_maps WHERE :id = fk_scene ; )";
   constexpr auto select_all_equipments = R"( SELECT * FROM equipments ORDER BY name; )";
 
   constexpr auto select_equipment_by_id
@@ -451,64 +454,64 @@ inline namespace sqlite3 {
     MAP_COLUMN_COUNT
   };
 
-//SELECT* FROM MAP_Scene_Role AS map
+//SELECT* FROM MAP_Scene_Role AS role_map
 //    JOIN Roles
 //      ON Roles.role_id
-//    = map.role
-//        WHERE map.scene
+//    = role_map.role
+//        WHERE role_map.scene
 //    = 2;
 
-  constexpr auto create_maps_table = R"(
-  CREATE TABLE IF NOT EXISTS maps (
+  constexpr auto create_role_maps_table = R"(
+  CREATE TABLE IF NOT EXISTS role_maps (
     map_id INTEGER PRIMARY KEY,
     fk_scene INTEGER,
     fk_role INTEGER
   );
   )";
-  constexpr auto drop_all_maps = R"( DELETE FROM maps; )";
-  constexpr auto count_maps = R"( SELECT COUNT(map_id) FROM maps; )";
-  constexpr auto select_all_maps = R"( SELECT * FROM maps; )";
+  constexpr auto drop_all_role_maps = R"( DELETE FROM role_maps; )";
+  constexpr auto count_role_maps = R"( SELECT COUNT(map_id) FROM role_maps; )";
+  constexpr auto select_all_role_maps = R"( SELECT * FROM role_maps; )";
 
-  constexpr auto select_map_by_id
-    = R"( SELECT * FROM maps WHERE map_id = :id ; )";
-  constexpr auto update_map_by_id
-    = R"( UPDATE  maps
+  constexpr auto select_role_map_by_id
+    = R"( SELECT * FROM role_maps WHERE map_id = :id ; )";
+  constexpr auto update_role_map_by_id
+    = R"( UPDATE  role_maps
           SET fk_scene = :fk_scene
               , fk_role = :fk_role
           WHERE map_id = :id;
          )";
-  constexpr auto delete_map_by_id
-    = R"( DELETE FROM maps WHERE map_id = :id; )";
-  constexpr auto delete_map_by_fk_scene
-    = R"( DELETE FROM maps WHERE fk_scene = :fk_scene; )";
-  constexpr auto delete_map_by_fk_role
-    = R"( DELETE FROM maps WHERE fk_role = :fk_role; )";
-  constexpr auto delete_map_by_fk
-    = R"( DELETE FROM maps WHERE fk_role = :fk_role AND fk_scene = :fk_scene )";
-  constexpr auto select_map_by_fk_scene
-    = R"( SELECT * FROM maps WHERE fk_scene = :fk_scene; )";
-  constexpr auto select_map_by_fk_role
-    = R"( SELECT * FROM maps WHERE fk_role = :fk_role; )";
-  constexpr auto select_map_by_fk
-    = R"( SELECT * FROM maps WHERE fk_role = :fk_role AND fk_scene = :fk_scene )";
-  constexpr auto insert_or_update_maps
-    = R"( INSERT INTO maps
+  constexpr auto delete_role_map_by_id
+    = R"( DELETE FROM role_maps WHERE map_id = :id; )";
+  constexpr auto delete_role_map_by_fk_scene
+    = R"( DELETE FROM role_maps WHERE fk_scene = :fk_scene; )";
+  constexpr auto delete_role_map_by_fk_role
+    = R"( DELETE FROM role_maps WHERE fk_role = :fk_role; )";
+  constexpr auto delete_role_map_by_fk
+    = R"( DELETE FROM role_maps WHERE fk_role = :fk_role AND fk_scene = :fk_scene )";
+  constexpr auto select_role_map_by_fk_scene
+    = R"( SELECT * FROM role_maps WHERE fk_scene = :fk_scene; )";
+  constexpr auto select_role_map_by_fk_role
+    = R"( SELECT * FROM role_maps WHERE fk_role = :fk_role; )";
+  constexpr auto select_role_map_by_fk
+    = R"( SELECT * FROM role_maps WHERE fk_role = :fk_role AND fk_scene = :fk_scene )";
+  constexpr auto insert_or_update_role_maps
+    = R"( INSERT INTO role_maps
           (fk_scene,fk_role)
           VALUES (:fk_scene,:fk_role)
           ;
          )";
 
   constexpr auto select_scene_roles_by_fk_scene
-    = R"( SELECT * FROM maps AS map 
+    = R"( SELECT * FROM role_maps AS role_map 
           JOIN roles
-          ON roles.role_id = map.role
-          WHERE map.fk_scene = :id;)";
+          ON roles.role_id = role_map.role
+          WHERE role_map.fk_scene = :id;)";
 
   constexpr auto select_role_scenes_by_fk_role
-    = R"( SELECT * FROM maps as map
+    = R"( SELECT * FROM role_maps as role_map
           JOIN scenes
-          ON scenes.scene_id = map.scene
-          WHERE map.fk_role = :id)";
+          ON scenes.scene_id = role_map.scene
+          WHERE role_map.fk_role = :id)";
   //--------------------------- EVENT MAP STATEMENTS ------------------
   enum EVENT_MAP_COLUMNS {
     EVENT_MAP_ID,
@@ -1021,6 +1024,7 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_restrictions = R"( DELETE FROM restrictions; )";
   constexpr auto count_restrictions = R"( SELECT COUNT(restriction_id) FROM restrictions; )";
+  constexpr auto count_restrictions_in_scene = R"( SELECT COUNT(restriction_map_id) FROM restriction_maps WHERE :id = fk_scene ; )";
   constexpr auto select_all_restrictions = R"( SELECT * FROM restrictions ORDER BY name; )";
 
   constexpr auto select_restriction_by_id
@@ -1063,7 +1067,7 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_roles = R"( DELETE FROM roles; )";
   constexpr auto count_roles = R"( SELECT COUNT(role_id) FROM roles; )";
-  constexpr auto count_roles_in_scene = R"( SELECT COUNT(map_id) FROM maps WHERE :id = fk_scene ; )";
+  constexpr auto count_roles_in_scene = R"( SELECT COUNT(map_id) FROM role_maps WHERE :id = fk_scene ; )";
   constexpr auto select_all_roles = R"( SELECT * FROM roles ORDER BY name; )";
 
   constexpr auto select_role_by_id

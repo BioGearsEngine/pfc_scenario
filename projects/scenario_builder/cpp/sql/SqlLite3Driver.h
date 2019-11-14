@@ -40,10 +40,12 @@ public:
     INJURY_SETS,
     LOCATIONS,
     MAPS,
+    ROLE_MAPS,
     EVENT_MAPS,
     PROP_MAPS,
     CITATION_MAPS,
     EQUIPMENT_MAPS,
+    RESTRICTION_MAPS,
     OBJECTIVES,
     PROPERTIES,
     PROPS,
@@ -78,11 +80,12 @@ public:
   Q_INVOKABLE int citation_count() const;
   Q_INVOKABLE int treatment_count() const;
   Q_INVOKABLE int equipment_count() const;
+  Q_INVOKABLE int equipment_count(Scene*) const;
   Q_INVOKABLE int injury_count() const;
   Q_INVOKABLE int injury_set_count() const;
   Q_INVOKABLE int assessment_count() const;
   Q_INVOKABLE int location_count() const;
-  Q_INVOKABLE int map_count() const;
+  Q_INVOKABLE int role_map_count() const;
   Q_INVOKABLE int event_map_count() const;
   Q_INVOKABLE int prop_map_count() const;
   Q_INVOKABLE int citation_map_count() const;
@@ -94,6 +97,7 @@ public:
   Q_INVOKABLE int event_count() const;
   Q_INVOKABLE int event_count(Scene*) const;
   Q_INVOKABLE int prop_count(Scene*) const;
+  Q_INVOKABLE int restriction_count(Scene*) const;
   Q_INVOKABLE int citation_count(Scene*) const;
   Q_INVOKABLE int scene_count() const;
 
@@ -112,7 +116,7 @@ public:
   Q_INVOKABLE void locations();
   Q_INVOKABLE void roles();
   Q_INVOKABLE void roles_in_scene(Scene* scene);
-  Q_INVOKABLE void maps();
+  Q_INVOKABLE void role_maps();
   Q_INVOKABLE void event_maps();
   Q_INVOKABLE void citation_maps();
   Q_INVOKABLE void equipment_maps();
@@ -136,7 +140,7 @@ public:
   Q_INVOKABLE bool next_injury_set(InjurySet*);
   Q_INVOKABLE bool next_assessment(Assessment*);
   Q_INVOKABLE bool next_location(Location*);
-  Q_INVOKABLE bool next_map(Map*);
+  Q_INVOKABLE bool next_role_map(RoleMap*);
   Q_INVOKABLE bool next_event_map(EventMap*);
   Q_INVOKABLE bool next_prop_map(PropMap*);
   Q_INVOKABLE bool next_restriction_map(RestrictionMap*);
@@ -158,7 +162,7 @@ public:
   Q_INVOKABLE bool select_injury_set(InjurySet*) const;
   Q_INVOKABLE bool select_assessment(Assessment*) const;
   Q_INVOKABLE bool select_location(Location*) const;
-  Q_INVOKABLE bool select_map(Map*) const;
+  Q_INVOKABLE bool select_role_map(RoleMap*) const;
   Q_INVOKABLE bool select_event_map(EventMap*) const;
   Q_INVOKABLE bool select_prop_map(PropMap*) const;
   Q_INVOKABLE bool select_citation_map(CitationMap*) const;
@@ -175,7 +179,7 @@ public:
   Q_INVOKABLE bool update_restriction(Restriction*);
   Q_INVOKABLE bool update_objective(Objective*);
   Q_INVOKABLE bool update_location(Location*);
-  Q_INVOKABLE bool update_map(Map*);
+  Q_INVOKABLE bool update_role_map(RoleMap*);
   Q_INVOKABLE bool update_event_map(EventMap*);
   Q_INVOKABLE bool update_prop_map(PropMap*);
   Q_INVOKABLE bool update_citation_map(CitationMap*);
@@ -185,6 +189,7 @@ public:
   Q_INVOKABLE bool update_role_in_scene(Scene*, Role*);
   Q_INVOKABLE bool update_prop(Prop*);
   Q_INVOKABLE bool update_prop_in_scene(Scene*, Prop*);
+  Q_INVOKABLE bool update_restriction_in_scene(Scene*, Restriction*);
   Q_INVOKABLE bool update_event(Event*);
   Q_INVOKABLE bool update_event_in_scene(Scene*, Event*);
   Q_INVOKABLE bool update_citation(Citation*);
@@ -200,8 +205,10 @@ public:
   Q_INVOKABLE bool remove_author(Author*);
   Q_INVOKABLE bool remove_property(Property*);
   Q_INVOKABLE bool remove_restriction(Restriction*);
+  Q_INVOKABLE bool remove_restriction_from_scene(Restriction*, Scene*);
   Q_INVOKABLE bool remove_objective(Objective*);
   Q_INVOKABLE bool remove_citation(Citation*);
+  Q_INVOKABLE bool remove_citation_from_scene(Citation*,Scene*);
   Q_INVOKABLE bool remove_treatment(Treatment*);
   Q_INVOKABLE bool remove_equipment(Equipment*);
   Q_INVOKABLE bool remove_equipment_from_scene(Equipment*,Scene*);
@@ -209,13 +216,13 @@ public:
   Q_INVOKABLE bool remove_injury_set(InjurySet*);
   Q_INVOKABLE bool remove_assessment(Assessment*);
   Q_INVOKABLE bool remove_location(Location*);
-  Q_INVOKABLE bool remove_map(Map*);
+  Q_INVOKABLE bool remove_role_map(RoleMap*);
   Q_INVOKABLE bool remove_event_map(EventMap*);
   Q_INVOKABLE bool remove_prop_map(PropMap*);
   Q_INVOKABLE bool remove_citation_map(CitationMap*);
   Q_INVOKABLE bool remove_equipment_map(EquipmentMap*);
   Q_INVOKABLE bool remove_restriction_map(RestrictionMap*);
-  Q_INVOKABLE bool remove_map_by_fk(Map*);
+  Q_INVOKABLE bool remove_role_map_by_fk(RoleMap*);
   Q_INVOKABLE bool remove_event_map_by_fk(EventMap*);
   Q_INVOKABLE bool remove_prop_map_by_fk(PropMap*);
   Q_INVOKABLE bool remove_citation_map_by_fk(CitationMap*);
@@ -330,7 +337,7 @@ private:
   QList<InjurySet*> _injury_sets;
   QList<Assessment*> _assessments;
   QList<Location*> _locations;
-  QList<Map*> _maps;
+  QList<RoleMap*> _role_maps;
   QList<EventMap*> _event_maps;
   QList<PropMap*> _prop_maps;
   QList<CitationMap*> _citation_maps;
@@ -352,7 +359,7 @@ private:
   QList<InjurySet*>::iterator _current_injury_set;
   QList<Assessment*>::iterator _current_assessment;
   QList<Location*>::iterator _current_location;
-  QList<Map*>::iterator _current_map;
+  QList<RoleMap*>::iterator _current_role_map;
   QList<EventMap*>::iterator _current_event_map;
   QList<PropMap*>::iterator _current_prop_map;
   QList<CitationMap*>::iterator _current_citation_map;
