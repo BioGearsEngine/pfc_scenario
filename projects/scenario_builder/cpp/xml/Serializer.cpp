@@ -54,7 +54,7 @@ bool Serializer::save()
   int32_t text_size = 0;
   int32_t buffer_size = 0;
   int32_t err = MZ_OK;
-  char* password = "1234";
+  const char* password = "1234";
 
   std::string text_name = "scenario.xml";
   std::string text_ptr = "<XML><!-- Nothing in this file -->";
