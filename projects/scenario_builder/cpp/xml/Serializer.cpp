@@ -2,8 +2,8 @@
 
 #include <chrono>
 #include <iomanip>
-#include <ostream>
 #include <iostream>
+#include <ostream>
 #include <regex>
 #include <string>
 
@@ -86,8 +86,7 @@ bool Serializer::save()
   std::cout << file_info.uncompressed_size << "\n";
   std::cout << text_ptr << "\n";
   mz_zip_writer_add_buffer(writer, (void*)text_ptr.c_str(), (int32_t)text_ptr.length(), &file_info);
-  
-  
+
   mz_zip_writer_close(writer);
   mz_zip_writer_delete(&writer);
 
@@ -219,7 +218,6 @@ void Serializer::generate_msdl_stream()
   auto scenarioID_securityClassificationType = msdl_1::MilitaryScenarioType::ScenarioID_type::securityClassification_type(get_property("scenario_security").toStdString());
   auto scenarioID_descriptionType = msdl_1::MilitaryScenarioType::ScenarioID_type::description_type(get_property("scenario_purpose").toStdString());
 
- 
   auto msdl_scenario_id = std::make_unique<msdl_1::MilitaryScenarioType::ScenarioID_type>(scenarioID_nameType, scenarioID_typeType, scenarioID_versionType, scenarioID_modificationDateType, scenarioID_securityClassificationType, scenarioID_descriptionType);
   auto msdl_military_version = std::make_unique<msdl_1::MilitaryScenarioType::Options_type>(msdl_1::MilitaryScenarioType::Options_type::MSDLVersion_type(""));
   auto msdl_force_sides = std::make_unique<msdl_1::MilitaryScenarioType::ForceSides_type>();
@@ -253,16 +251,13 @@ void Serializer::generate_pfc_stream()
   auto injuries = std::make_unique<pfcs::injury>(std::move(injury_id), std::move(injury_medical_name), std::move(injury_description), std::move(injury_severity_range));
   auto conditions = std::make_unique<pfcs::ScenarioSchema::conditions_type>(std::move(injuries));
 
-
   auto treatment_id = std::make_unique<pfcs::treatment_plan::id_type>("");
   auto treatment_description = std::make_unique<pfcs::treatment_plan::description_type>();
   auto treatment_required_equipment = std::make_unique<pfcs::treatment_plan::required_equipment_type>();
-  auto treatment_plan = std::make_unique<pfc::schema::treatment_plan>(std::move(treatment_id),std::move(treatment_description), std::move(treatment_required_equipment));
+  auto treatment_plan = std::make_unique<pfc::schema::treatment_plan>(std::move(treatment_id), std::move(treatment_description), std::move(treatment_required_equipment));
   auto treatment_plans = std::make_unique<pfcs::treatment_plan_definition_list>(std::move(treatment_plan));
-  
-  
-  auto patient_states = std::make_unique<pfcs::ScenarioSchema::patient_states_type>();
 
+  auto patient_states = std::make_unique<pfcs::ScenarioSchema::patient_states_type>();
 
   auto learning_objective_id = std::make_unique<pfcs::learning_objective::id_type>("");
   auto learning_objective_name = std::make_unique<pfcs::learning_objective::name_type>();
@@ -271,15 +266,14 @@ void Serializer::generate_pfc_stream()
   auto lo_ref_cpg_type = std::make_unique<pfcs::cpg_list::citation_type>();
   auto lo_ref_cpgs = std::make_unique<pfcs::cpg_list>(std::move(lo_ref_cpg_name), std::move(lo_ref_cpg_type));
   auto learning_objective_refs = std::make_unique<pfcs::learning_objective::references_type>(std::move(lo_ref_citations), std::move(lo_ref_cpgs));
-  auto lo_ip_ref_list = std::make_unique <pfcs::injury_profile_reference_list>();
-  auto lo_tp_ref_list = std::make_unique <pfcs::treatment_plan_reference_list>();
-  auto learning_objective_relates = std::make_unique<pfcs::learning_objective::relates_to_type>(std::move(lo_tp_ref_list),std::move(lo_ip_ref_list));
+  auto lo_ip_ref_list = std::make_unique<pfcs::injury_profile_reference_list>();
+  auto lo_tp_ref_list = std::make_unique<pfcs::treatment_plan_reference_list>();
+  auto learning_objective_relates = std::make_unique<pfcs::learning_objective::relates_to_type>(std::move(lo_tp_ref_list), std::move(lo_ip_ref_list));
   auto learning_objective = std::make_unique<pfcs::learning_objective>(std::move(learning_objective_id), std::move(learning_objective_name), std::move(learning_objective_refs), std::move(learning_objective_relates));
   auto learning_objectives = std::make_unique<pfcs::learning_objective_list>(std::move(learning_objective));
   auto assessment_points = pfcs::assessment_criteria_list::total_points_type();
   auto assessment_criteira = std::make_unique<pfcs::assessment_criteria_list>(std::move(assessment_points));
   auto syllabus = std::make_unique<pfcs::ScenarioSchema::syllabus_type>(std::move(learning_objectives), std::move(assessment_criteira));
-
 
   auto id = ::xml_schema::id("");
   auto med_sc_roles = std::make_unique<pfcs::medical_scenario::roles_type>();
@@ -287,7 +281,6 @@ void Serializer::generate_pfc_stream()
   auto med_sc_script = std::make_unique<pfcs::medical_scenario::training_script_type>();
   auto medical_scenario = std::make_unique<ScenarioSchema::medical_scenario_type>(std::move(id), std::move(med_sc_roles), std::move(med_sc_props), std::move(med_sc_script));
 
-  
   auto pfc = ScenarioSchema(std::move(conditions), std::move(treatment_plans), std::move(patient_states), std::move(syllabus), std::move(medical_scenario));
   _pfc_content.str("");
 
@@ -299,74 +292,74 @@ void Serializer::generate_pfc_stream()
     _db = QSqlDatabase::addDatabase("QSQLITE");
   }
   _db.setDatabaseName("/");
-  std::vector<Author> author_list;
-  std::vector<Assessment> assessment_list;
-  std::vector<Citation> citation_list;
-  std::vector<Event> event_list;
-  std::vector<Equipment> equipment_list;
-  std::vector<Injury> injury_list;
-  std::vector<InjurySet> injury_set_list;
-  std::vector<Location> location_list;
-  std::vector<RoleMap> role_map_list;
-  std::vector<EventMap> event_map_list;
-  std::vector<PropMap> prop_map_list;
-  std::vector<CitationMap> citation_map_list;
-  std::vector<EquipmentMap> equipment_map_list;
-  std::vector<RestrictionMap> restriction_map_list;
-  std::vector<Objective> objective_list;
-  std::vector<Property> property_list;
-  std::vector<Prop> prop_list;
-  std::vector<Restriction> restriction_list;
-  std::vector<Role> role_list;
-  std::vector<Treatment> treatment_list;
-  std::vector<Scene> scene_list;
-  QSqlQuery author_query{_db};
+  std::vector<std::shared_ptr<Author>> author_list;
+  std::vector<std::shared_ptr<Assessment>> assessment_list;
+  std::vector<std::shared_ptr<Citation>> citation_list;
+  std::vector<std::shared_ptr<Event>> event_list;
+  std::vector<std::shared_ptr<Equipment>> equipment_list;
+  std::vector<std::shared_ptr<Injury>> injury_list;
+  std::vector<std::shared_ptr<InjurySet>> injury_set_list;
+  std::vector<std::shared_ptr<Location>> location_list;
+  std::vector<std::shared_ptr<RoleMap>> role_map_list;
+  std::vector<std::shared_ptr<EventMap>> event_map_list;
+  std::vector<std::shared_ptr<PropMap>> prop_map_list;
+  std::vector<std::shared_ptr<CitationMap>> citation_map_list;
+  std::vector<std::shared_ptr<EquipmentMap>> equipment_map_list;
+  std::vector<std::shared_ptr<RestrictionMap>> restriction_map_list;
+  std::vector<std::shared_ptr<Objective>> objective_list;
+  std::vector<std::shared_ptr<Property>> property_list;
+  std::vector<std::shared_ptr<Prop>> prop_list;
+  std::vector<std::shared_ptr<Restriction>> restriction_list;
+  std::vector<std::shared_ptr<Role>> role_list;
+  std::vector<std::shared_ptr<Treatment>> treatment_list;
+  std::vector<std::shared_ptr<Scene>> scene_list;
+  QSqlQuery author_query{ _db };
   author_query.prepare("SELECT * FROM authors ORDER BY last_name;");
   while (author_query.next()) {
-    Author temp;
-    author_query.bindValue(":first", temp.first);
-    author_query.bindValue(":middle", temp.middle);
-    author_query.bindValue(":last", temp.last);
-    author_query.bindValue(":email", temp.email);
-    author_query.bindValue(":zip", temp.zip);
-    author_query.bindValue(":plus_4", temp.plus_4);
-    author_query.bindValue(":state", temp.state);
-    author_query.bindValue(":country", temp.country);
-    author_query.bindValue(":phone", temp.phone);
-    author_query.bindValue(":organization", temp.organization);
+    std::shared_ptr<Author> temp;
+    author_query.bindValue(":first", temp->first);
+    author_query.bindValue(":middle", temp->middle);
+    author_query.bindValue(":last", temp->last);
+    author_query.bindValue(":email", temp->email);
+    author_query.bindValue(":zip", temp->zip);
+    author_query.bindValue(":plus_4", temp->plus_4);
+    author_query.bindValue(":state", temp->state);
+    author_query.bindValue(":country", temp->country);
+    author_query.bindValue(":phone", temp->phone);
+    author_query.bindValue(":organization", temp->organization);
     author_list.push_back(temp);
   }
   QSqlQuery assessment_query{ _db };
   assessment_query.prepare("SELECT * FROM assessments ORDER BY name;");
   while (assessment_query.next()) {
-    Assessment temp;
-    assessment_query.bindValue(":name", temp.name);
-    assessment_query.bindValue(":description", temp.description);
-    assessment_query.bindValue(":type", temp.type);
-    assessment_query.bindValue(":available_points", temp.available_points);
-    assessment_query.bindValue(":criteria", temp.criteria);
+    std::shared_ptr<Assessment> temp;
+    assessment_query.bindValue(":name", temp->name);
+    assessment_query.bindValue(":description", temp->description);
+    assessment_query.bindValue(":type", temp->type);
+    assessment_query.bindValue(":available_points", temp->available_points);
+    assessment_query.bindValue(":criteria", temp->criteria);
     assessment_list.push_back(temp);
   }
   QSqlQuery citation_query{ _db };
   citation_query.prepare("SELECT * FROM citations ORDER BY title;");
   while (citation_query.next()) {
-    Citation temp;
-    citation_query.bindValue(":key", temp.key);
-    citation_query.bindValue(":title", temp.title);
-    citation_query.bindValue(":authors", temp.authors);
-    citation_query.bindValue(":year", temp.year);
-    citation_query.bindValue(":publisher", temp.publisher);
+    std::shared_ptr<Citation> temp;
+    citation_query.bindValue(":key", temp->key);
+    citation_query.bindValue(":title", temp->title);
+    citation_query.bindValue(":authors", temp->authors);
+    citation_query.bindValue(":year", temp->year);
+    citation_query.bindValue(":publisher", temp->publisher);
     citation_list.push_back(temp);
   }
   QSqlQuery event_query{ _db };
   event_query.prepare("SELECT * FROM events ORDER BY name;");
   while (event_query.next()) {
-    Event temp;
-    event_query.bindValue(":name", temp.name);
-    event_query.bindValue(":location", temp.location);
-    event_query.bindValue(":actor", temp.actor);
-    event_query.bindValue(":equipment", temp.equipment);
-    event_query.bindValue(":description", temp.description);
+    std::shared_ptr<Event> temp;
+    event_query.bindValue(":name", temp->name);
+    event_query.bindValue(":location", temp->location);
+    event_query.bindValue(":actor", temp->actor);
+    event_query.bindValue(":equipment", temp->equipment);
+    event_query.bindValue(":description", temp->description);
     event_list.push_back(temp);
   }
 
@@ -386,8 +379,8 @@ xml_schema::date get_now()
   return xml_schema::date{ static_cast<int>(tm->tm_year),
                            static_cast<unsigned short>(tm->tm_mon),
                            static_cast<unsigned short>(tm->tm_yday),
-                           static_cast< short>(tm->tm_hour),
-                           static_cast< short>(tm->tm_min) };
+                           static_cast<short>(tm->tm_hour),
+                           static_cast<short>(tm->tm_min) };
 }
 //-------------------------------------------------------------------------------
 }
