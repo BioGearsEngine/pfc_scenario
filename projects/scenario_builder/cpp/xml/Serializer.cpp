@@ -21,6 +21,7 @@
 #include "mz_zip_rw.h"
 
 #include "mz_strm_mem.h"
+#include <QSqlQuery>
 
 namespace pfc {
 
@@ -293,6 +294,81 @@ void Serializer::generate_pfc_stream()
   xml_schema::namespace_infomap info;
   info[""].name = "urn:sisostds:scenario:military:data:draft:msdl:1";
   info[""].schema = "MilitaryScenario_1.0.0.xsd";
+  QSqlDatabase _db;
+  if (_db.isValid()) {
+    _db = QSqlDatabase::addDatabase("QSQLITE");
+  }
+  _db.setDatabaseName("/");
+  std::vector<Author> author_list;
+  std::vector<Assessment> assessment_list;
+  std::vector<Citation> citation_list;
+  std::vector<Event> event_list;
+  std::vector<Equipment> equipment_list;
+  std::vector<Injury> injury_list;
+  std::vector<InjurySet> injury_set_list;
+  std::vector<Location> location_list;
+  std::vector<RoleMap> role_map_list;
+  std::vector<EventMap> event_map_list;
+  std::vector<PropMap> prop_map_list;
+  std::vector<CitationMap> citation_map_list;
+  std::vector<EquipmentMap> equipment_map_list;
+  std::vector<RestrictionMap> restriction_map_list;
+  std::vector<Objective> objective_list;
+  std::vector<Property> property_list;
+  std::vector<Prop> prop_list;
+  std::vector<Restriction> restriction_list;
+  std::vector<Role> role_list;
+  std::vector<Treatment> treatment_list;
+  std::vector<Scene> scene_list;
+  QSqlQuery author_query{_db};
+  author_query.prepare("SELECT * FROM authors ORDER BY last_name;");
+  while (author_query.next()) {
+    Author temp;
+    author_query.bindValue(":first", temp.first);
+    author_query.bindValue(":middle", temp.middle);
+    author_query.bindValue(":last", temp.last);
+    author_query.bindValue(":email", temp.email);
+    author_query.bindValue(":zip", temp.zip);
+    author_query.bindValue(":plus_4", temp.plus_4);
+    author_query.bindValue(":state", temp.state);
+    author_query.bindValue(":country", temp.country);
+    author_query.bindValue(":phone", temp.phone);
+    author_query.bindValue(":organization", temp.organization);
+    author_list.push_back(temp);
+  }
+  QSqlQuery assessment_query{ _db };
+  assessment_query.prepare("SELECT * FROM assessments ORDER BY name;");
+  while (assessment_query.next()) {
+    Assessment temp;
+    assessment_query.bindValue(":name", temp.name);
+    assessment_query.bindValue(":description", temp.description);
+    assessment_query.bindValue(":type", temp.type);
+    assessment_query.bindValue(":available_points", temp.available_points);
+    assessment_query.bindValue(":criteria", temp.criteria);
+    assessment_list.push_back(temp);
+  }
+  QSqlQuery citation_query{ _db };
+  citation_query.prepare("SELECT * FROM citations ORDER BY title;");
+  while (citation_query.next()) {
+    Citation temp;
+    citation_query.bindValue(":key", temp.key);
+    citation_query.bindValue(":title", temp.title);
+    citation_query.bindValue(":authors", temp.authors);
+    citation_query.bindValue(":year", temp.year);
+    citation_query.bindValue(":publisher", temp.publisher);
+    citation_list.push_back(temp);
+  }
+  QSqlQuery event_query{ _db };
+  event_query.prepare("SELECT * FROM events ORDER BY name;");
+  while (event_query.next()) {
+    Event temp;
+    event_query.bindValue(":name", temp.name);
+    event_query.bindValue(":location", temp.location);
+    event_query.bindValue(":actor", temp.actor);
+    event_query.bindValue(":equipment", temp.equipment);
+    event_query.bindValue(":description", temp.description);
+    event_list.push_back(temp);
+  }
 
   try {
     Scenario(_pfc_content, pfc, info);
