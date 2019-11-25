@@ -312,7 +312,7 @@ namespace pfc
 
 #include <xsd/cxx/xml/dom/parsing-header.hxx>
 
-#include "militaryscenario_1.0.0.hxx"
+#include "MilitaryScenario_1.0.0.hxx"
 
 namespace pfc
 {

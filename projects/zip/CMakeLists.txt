@@ -584,7 +584,6 @@ endif()
 # Create minizip library
 source_group("Minizip" FILES ${MINIZIP_SRC} ${MINIZIP_PUBLIC_HEADERS})
 
-
 add_library(libminizip
                 ${MINIZIP_SRC} ${MINIZIP_PUBLIC_HEADERS}
                 ${BRG_SRC} ${BRG_PUBLIC_HEADERS}
@@ -626,18 +625,18 @@ if(Iconv_FOUND AND NOT Iconv_IS_BUILT_IN)
     target_link_libraries(libminizip ${Iconv_LIBRARIES})
 endif()
 if(MZ_OPENSSL AND OPENSSL_FOUND)
-    target_link_libraries(minizip ${OPENSSL_LIBRARIES})
+    target_link_libraries(libminizip ${OPENSSL_LIBRARIES})
 elseif(UNIX)
     if(APPLE AND NOT MZ_BRG)
         message(STATUS "Using CoreFoundation Framework")
         find_library(COREFOUNDATION_LIBRARY CoreFoundation)
-        target_link_libraries(minizip ${COREFOUNDATION_LIBRARY})
+        target_link_libraries(libminizip ${COREFOUNDATION_LIBRARY})
         message(STATUS "Using Security Framework")
         find_library(SECURITY_LIBRARY Security)
-        target_link_libraries(minizip ${SECURITY_LIBRARY})
-        set_target_properties(minizip PROPERTIES LINK_FLAGS "-Wl,-F/Library/Frameworks")
+        target_link_libraries(libminizip ${SECURITY_LIBRARY})
+        set_target_properties(libminizip PROPERTIES LINK_FLAGS "-Wl,-F/Library/Frameworks")
     else()
-        target_link_libraries(minizip ${LIBBSD_LIBRARIES})
+        target_link_libraries(libminizip ${LIBBSD_LIBRARIES})
     endif()
 endif()
 
@@ -667,7 +666,7 @@ if(MZ_BUILD_TEST)
     if(MZ_ZLIB AND NOT MZ_LIBCOMP)
         add_executable(minigzip_cmd "minigzip.c")
         set_target_properties(minigzip_cmd PROPERTIES OUTPUT_NAME minigzip)
-        target_link_libraries(minigzip_cmd minizip)
+        target_link_libraries(minigzip_cmd libminizip)
 
         if(NOT SKIP_INSTALL_BINARIES AND NOT SKIP_INSTALL_ALL)
             install(TARGETS minigzip_cmd RUNTIME DESTINATION "bin")
@@ -675,8 +674,8 @@ if(MZ_BUILD_TEST)
     endif()
 
     add_executable(minizip_cmd "minizip.c" "test/test.c" "test/test.h")
-    set_target_properties(minizip_cmd PROPERTIES OUTPUT_NAME minizip)
-    target_link_libraries(minizip_cmd minizip)
+    set_target_properties(minizip_cmd PROPERTIES OUTPUT_NAME libminizip)
+    target_link_libraries(minizip_cmd libminizip)
 
     if(NOT SKIP_INSTALL_BINARIES AND NOT SKIP_INSTALL_ALL)
         install(TARGETS minizip_cmd RUNTIME DESTINATION "bin")
