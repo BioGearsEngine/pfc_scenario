@@ -98,34 +98,37 @@ Rectangle {
           if ( next < listArea.model.count ) {
             next = listArea.model.count+1
           }
-          self.citation_id = -1
-          self.key = "AuthorYear_%1".arg(next)
-          self.title = "Reference %1".arg(next)
-          self.authors = "Reference Authors"
-          self.year = "Reference Year"
-          self.publisher = "Reference Publisher"  
+          citation.citation_id = -1
+          citation.key = "AuthorYear_%1".arg(next)
+          citation.title = "Reference %1".arg(next)
+          citation.authors = "Reference Authors"
+          citation.year = "Reference Year"
+          citation.publisher = "Reference Publisher"  
 
-          while (root.backend.select_citation(self))
+          while (root.backend.select_citation(citation))
           {
             next = next+1
-            self.citation_id = -1
-            self.key = "AuthorYear_%1".arg(next)
-            self.title = "Reference %1".arg(next)
-            self.authors = "Reference Authors"
-            self.year = "Reference Year"
-            self.publisher = "Reference Publisher"
+            citation.citation_id = -1
+            citation.key = "AuthorYear_%1".arg(next)
+            citation.title = "Reference %1".arg(next)
+            citation.authors = "Reference Authors"
+            citation.year = "Reference Year"
+            citation.publisher = "Reference Publisher"
           }
-          root.backend.update_citation(self)
+          root.backend.update_citation(citation)
           listArea.model.insert(listArea.model.count,
-            {"id" : self.citation_id,
-            "key" : self.key,
-            "title" : self.title,
-            "authors" : self.authors,
-            "year" : self.year,
-            "publisher" : self.publisher});
+            {"id" : citation.citation_id,
+            "key" : citation.key,
+            "title" : citation.title,
+            "authors" : citation.authors,
+            "year" : citation.year,
+            "publisher" : citation.publisher});
           ++next;
         }
         onSecondButtonClicked : {
+          if ( listArea.model.count == 0 ) {
+            return
+          }
           citation.citation_id = -1
           citation.key = listArea.model.get(listArea.currentIndex).key
           root.backend.remove_citation(citation)

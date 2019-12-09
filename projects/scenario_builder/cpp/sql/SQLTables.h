@@ -348,7 +348,6 @@ struct Location : public QObject {
   Q_PROPERTY(QString scene_name MEMBER scene_name)
   Q_PROPERTY(QString time_of_day MEMBER time_of_day)
   Q_PROPERTY(QString environment MEMBER environment)
-  Q_PROPERTY(int fk_scene MEMBER fk_scene)
 
 public:
   int32_t id = -1;
@@ -356,7 +355,6 @@ public:
   QString scene_name = "";
   QString time_of_day = "";
   QString environment = "";
-  int32_t fk_scene = -1;
 
   Location(QObject* parent = nullptr)
     : QObject(parent)
@@ -374,8 +372,7 @@ public:
       && name == rhs.name
       && scene_name == rhs.scene_name
       && time_of_day == rhs.time_of_day
-      && environment == rhs.environment
-      && fk_scene == rhs.fk_scene;
+      && environment == rhs.environment;
   }
   bool operator!=(const Location& rhs) const
   {
@@ -388,7 +385,6 @@ public:
     scene_name = rhs.scene_name;
     time_of_day = rhs.time_of_day;
     environment = rhs.environment;
-    fk_scene = rhs.fk_scene;
   }
 };
 //----End Location

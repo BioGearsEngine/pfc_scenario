@@ -405,7 +405,6 @@ inline namespace sqlite3 {
     LOCATION_SCENE_NAME,
     LOCATION_TIME_OF_DAY,
     LOCATION_ENVIRONMENT,
-    LOCATION_FK_SCENE,
     LOCATION_COLUMN_COUNT
   };
 
@@ -415,8 +414,7 @@ inline namespace sqlite3 {
     name Varchar(64) NOT NULL,
     scene_name Varchar(64),
     time_of_day TEXT,
-    environment TEXT,
-    fk_scene INTEGER
+    environment TEXT
   );
   )";
   constexpr auto drop_all_locations = R"( DELETE FROM locations; )";
@@ -431,7 +429,6 @@ inline namespace sqlite3 {
               , scene_name = :scene_name
               , time_of_day = :time_of_day
               , environment = :environment
-              , fk_scene = :fk_scene
           WHERE location_id = :id;
          )";
   constexpr auto delete_location_by_id
@@ -443,7 +440,7 @@ inline namespace sqlite3 {
   constexpr auto insert_or_update_locations
     = R"( INSERT INTO locations
           (name,scene_name,time_of_day,environment,fk_scene)
-          VALUES (:name, :scene_name, :time_of_day, :environment, :fk_scene)
+          VALUES (:name, :scene_name, :time_of_day, :environment)
           ;
          )";
   //--------------------------- MAP STATEMENTS ------------------------

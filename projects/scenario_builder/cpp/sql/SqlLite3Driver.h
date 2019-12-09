@@ -64,6 +64,7 @@ public:
   SQLite3Driver& operator=(const SQLite3Driver&) = delete;
   SQLite3Driver& operator=(SQLite3Driver&&) = delete;
   ~SQLite3Driver();
+  bool serialize();
 
   Q_INVOKABLE bool open(QString db_name);
   Q_INVOKABLE void close();

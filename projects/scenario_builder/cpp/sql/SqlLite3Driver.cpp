@@ -20,6 +20,9 @@ specific language governing permissions and limitations under the License.
 #include <QSqlRecord>
 #include <QtGlobal>
 
+#include <iostream>
+#include <fstream>
+
 #include "SqlLite3_Statments.h"
 #include "sqlite3ext.h"
 
@@ -1091,7 +1094,6 @@ inline void assign_location(const QSqlRecord& record, Location& location)
   location.scene_name = record.value(LOCATION_SCENE_NAME).toString();
   location.time_of_day = record.value(LOCATION_TIME_OF_DAY).toString();
   location.environment = record.value(LOCATION_ENVIRONMENT).toString();
-  location.fk_scene = record.value(LOCATION_FK_SCENE).toInt();
 }
 int SQLite3Driver::location_count() const
 {
@@ -1184,7 +1186,6 @@ bool SQLite3Driver::update_location(Location* location)
     query.bindValue(":scene_name", location->scene_name);
     query.bindValue(":time_of_day", location->time_of_day);
     query.bindValue(":environment", location->environment);
-    query.bindValue(":fk_scene", location->fk_scene);
     if (!query.exec()) {
       qWarning() << query.lastError();
       return false;
@@ -3784,6 +3785,124 @@ bool SQLite3Driver::remove_treatment(Treatment* treatment)
   }
   qWarning() << "No Database connection";
   return false;
+}
+
+bool SQLite3Driver::serialize()
+{
+  if (_db.isOpen()) {
+
+    std::vector<EventMap> event_map_list;
+    std::vector<PropMap> prop_map_list;
+    std::vector<CitationMap> citation_map_list;
+    std::vector<EquipmentMap> equipment_map_list;
+    std::vector<RestrictionMap> restriction_map_list;
+    std::vector<Objective> objective_list;
+    std::vector<Property> property_list;
+    std::vector<Prop> prop_list;
+    std::vector<Restriction> restriction_list;
+    std::vector<Role> role_list;
+    std::vector<Treatment> treatment_list;
+    std::vector<Scene> scene_list;
+    std::vector<Author> author_list;
+    QSqlQuery author_query{ _db };
+    author_query.prepare(select_all_authors);
+    while (author_query.next()) {
+      Author temp;
+      author_query.bindValue(":first", temp.first);
+      author_query.bindValue(":middle", temp.middle);
+      author_query.bindValue(":last", temp.last);
+      author_query.bindValue(":email", temp.email);
+      author_query.bindValue(":zip", temp.zip);
+      author_query.bindValue(":plus_4", temp.plus_4);
+      author_query.bindValue(":state", temp.state);
+      author_query.bindValue(":country", temp.country);
+      author_query.bindValue(":phone", temp.phone);
+      author_query.bindValue(":organization", temp.organization);
+
+    }
+    std::vector<Assessment> assessment_list;
+    QSqlQuery assessment_query{ _db };
+    assessment_query.prepare(select_all_assessments);
+    while (assessment_query.next()) {
+      Assessment temp;
+      assessment_query.bindValue(":name", temp.name);
+      assessment_query.bindValue(":description", temp.description);
+      assessment_query.bindValue(":type", temp.type);
+      assessment_query.bindValue(":available_points", temp.available_points);
+      assessment_query.bindValue(":criteria", temp.criteria);
+
+    }
+    std::vector<Citation> citation_list;
+    QSqlQuery citation_query{ _db };
+    citation_query.prepare(select_all_citations);
+    while (citation_query.next()) {
+      Citation temp;
+      citation_query.bindValue(":key", temp.key);
+      citation_query.bindValue(":title", temp.title);
+      citation_query.bindValue(":authors", temp.authors);
+      citation_query.bindValue(":year", temp.year);
+      citation_query.bindValue(":publisher", temp.publisher);
+
+    }
+    std::vector<Event> event_list;
+    QSqlQuery event_query{ _db };
+    event_query.prepare(select_all_events);
+    while (event_query.next()) {
+      Event temp;
+      event_query.bindValue(":name", temp.name);
+      event_query.bindValue(":location", temp.location);
+      event_query.bindValue(":actor", temp.actor);
+      event_query.bindValue(":equipment", temp.equipment);
+      event_query.bindValue(":description", temp.description);
+
+    }    
+    std::vector<Equipment> equipment_list;
+    QSqlQuery equipment_query{ _db };
+    event_query.prepare(select_all_equipments);
+    while (event_query.next()) {
+      Equipment temp;
+      equipment_query.bindValue(":type", temp.type);
+      equipment_query.bindValue(":name", temp.name);
+      equipment_query.bindValue(":description", temp.description);
+      equipment_query.bindValue(":citations", temp.citations);
+      equipment_query.bindValue(":image", temp.image);
+
+    }
+    std::vector<Injury> injury_list;
+    QSqlQuery injury_query{ _db };
+    event_query.prepare(select_all_injuries);
+    while (event_query.next()) {
+      Injury temp;
+      injury_query.bindValue(":medical_name", temp.medical_name);
+      injury_query.bindValue(":common_name", temp.common_name);
+      injury_query.bindValue(":description", temp.description);
+      injury_query.bindValue(":citations", temp.citations);
+      injury_query.bindValue(":severity_min", temp.severity_min);
+      injury_query.bindValue(":severity_max", temp.severity_max);
+    }
+    std::vector<Equipment> injury_set_list;
+    QSqlQuery injury_set_query{ _db };
+    event_query.prepare(select_all_injury_sets);
+    while (event_query.next()) {
+      InjurySet temp;
+      injury_set_query.bindValue(":injuries", temp.injuries);
+      injury_set_query.bindValue(":name", temp.name);
+      injury_set_query.bindValue(":description", temp.description);
+      injury_set_query.bindValue(":locations", temp.locations);
+      injury_set_query.bindValue(":injuries", temp.injuries);
+      injury_set_query.bindValue(":severities", temp.severities);
+    }
+    std::vector<Location> location_list;
+    QSqlQuery role_map_query{ _db };
+    role_map_query.prepare(select_all_role_maps);
+    while(role_map_query.next()) {
+      RoleMap temp;
+      role_map_query.bindValue(":fk_scene",temp.fk_scene);
+      role_map_query.bindValue(":fk_role",temp.fk_role);
+    }
+    std::vector<RoleMap> role_map_list;
+    return false;
+  }
 }
 
 }
