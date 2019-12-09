@@ -79,6 +79,9 @@ ColumnLayout {
         ++next;
       }
       onSecondButtonClicked : {
+        if (root.model.count == 0) {
+          return
+        }
         self.injury_id = -1
         self.medical_name = root.model.get(root.index).medical_name
 

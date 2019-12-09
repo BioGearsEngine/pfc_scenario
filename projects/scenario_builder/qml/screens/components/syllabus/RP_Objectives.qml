@@ -103,6 +103,9 @@ ColumnLayout  {
         }
 
         onCitationAdded : {
+          if ( root.model.count == 0) {
+            return
+          }
           var entry = root.model.get(root.index)
           entry.citations = (entry.citations) ? entry.citations.concat(";"+citation_id) : entry.citations.concat(citation_id)
           update_objective(entry)
