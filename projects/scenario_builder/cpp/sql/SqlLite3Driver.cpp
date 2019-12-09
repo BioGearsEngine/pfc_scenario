@@ -1182,6 +1182,7 @@ bool SQLite3Driver::update_location(Location* location)
     } else if (!location->name.isEmpty()) {
       query.prepare(sqlite3::insert_or_update_locations);
     }
+    
     query.bindValue(":name", location->name);
     query.bindValue(":scene_name", location->scene_name);
     query.bindValue(":time_of_day", location->time_of_day);

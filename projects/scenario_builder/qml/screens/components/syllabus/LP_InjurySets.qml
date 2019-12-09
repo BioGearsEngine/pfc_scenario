@@ -93,9 +93,9 @@ ColumnLayout {
 
       highlight: Rectangle {
           color: '#1111110F'
-          anchors.left : (parent) ? parent.left :  undefined
-          anchors.right : (parent) ? parent.left :  undefined
-          anchors.margins: 5
+          Layout.alignment: Qt.AlignTop
+          Layout.fillWidth: true
+          Layout.margins : 5
       }
 
       model : ListModel {}

@@ -439,7 +439,7 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM locations WHERE name = :name ORDER BY name; )";
   constexpr auto insert_or_update_locations
     = R"( INSERT INTO locations
-          (name,scene_name,time_of_day,environment,fk_scene)
+          (name,scene_name,time_of_day,environment)
           VALUES (:name, :scene_name, :time_of_day, :environment)
           ;
          )";

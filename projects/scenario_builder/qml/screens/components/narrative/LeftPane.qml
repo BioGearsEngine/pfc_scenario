@@ -54,7 +54,6 @@ ColumnLayout {
          self.scene_id = -1; 
          self.name = "New Scene %1".arg(next);
         } 
-
         root.backend.update_scene(self)
         root.model.insert(root.model.count,
           {
@@ -64,8 +63,9 @@ ColumnLayout {
         location.location_id = -1
         location.name = "New Scene %1 Location".arg(next)
         location.scene_name = "New Scene %1".arg(next)
+        location.time_of_day = "";
+        location.environment = "";
         root.backend.update_location(location)
-
         ++next;
       }
       onSecondButtonClicked : {
@@ -91,9 +91,9 @@ ColumnLayout {
 
       highlight: Rectangle {
           color: '#1111110F'
-          anchors.left : (parent) ? parent.left :  undefined
-          anchors.right : (parent) ? parent.left :  undefined
-          anchors.margins: 5
+          Layout.alignment: Qt.AlignTop
+          Layout.fillWidth: true
+          Layout.margins : 5
       }
 
       model : ListModel {}
