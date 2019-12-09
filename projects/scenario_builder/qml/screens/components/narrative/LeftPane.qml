@@ -61,7 +61,6 @@ ColumnLayout {
            "id" : self.scene_id,
            "name": "%1".arg(self.name)}
         );
-        location.fk_scene = self.scene_id
         location.location_id = -1
         location.name = "New Scene %1 Location".arg(next)
         location.scene_name = "New Scene %1".arg(next)
@@ -70,6 +69,9 @@ ColumnLayout {
         ++next;
       }
       onSecondButtonClicked : {
+        if (listArea.model.count == 0) {
+          return
+        }
         self.scene_id = -1
         self.name = root.model.get(root.index).name
 
@@ -89,8 +91,8 @@ ColumnLayout {
 
       highlight: Rectangle {
           color: '#1111110F'
-          anchors.left : parent.left
-          anchors.right : parent.right
+          anchors.left : (parent) ? parent.left :  undefined
+          anchors.right : (parent) ? parent.left :  undefined
           anchors.margins: 5
       }
 

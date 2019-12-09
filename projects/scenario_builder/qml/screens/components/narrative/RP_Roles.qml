@@ -58,6 +58,9 @@ ColumnLayout {
         fourthButtonText : "Exit"  
 
         onFirstButtonClicked :{
+          if (full_listArea.model.count == 0) {
+            return
+          }
           if ( next < full_listArea.count )
           { next = full_listArea.model.count + 1 }
           self.role_id = -1
@@ -108,6 +111,9 @@ ColumnLayout {
           ++next;
         }
         onThirdButtonClicked : {
+          if (full_listArea.model.count == 0) {
+            return
+          }
           self.role_id = -1
           self.name = full_listArea.model.get(full_listArea.currentIndex).name
           root.backend.remove_role(self)
@@ -144,8 +150,8 @@ ColumnLayout {
 
         highlight: Rectangle {
             color: '#1111110F'
-            anchors.left : parent.left
-            anchors.right : parent.right
+            anchors.left : (parent) ? parent.left :  undefined
+            anchors.right : (parent) ? parent.left :  undefined
             anchors.margins: 5
         }  
 
