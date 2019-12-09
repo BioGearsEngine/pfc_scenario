@@ -1,16 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="D:\remotes\sed-stash\biogears\pfc\scenario\projects\zip\lib\zlib\test\minigzip.c">
+    <ClCompile Include="D:\biogears\pfc\pfc_scenario\projects\zip\lib\zlib\test\minigzip.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="D:\remotes\sed-stash\biogears\pfc\scenario\projects\zip\lib\zlib\CMakeLists.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{07DDCC68-3F16-3125-B51E-6E1AA4C3D9E3}</UniqueIdentifier>
+      <UniqueIdentifier>{CE4D0F17-CE89-3B0A-AFB5-2A1F85702CFF}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
