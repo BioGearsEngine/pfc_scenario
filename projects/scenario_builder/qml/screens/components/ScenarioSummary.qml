@@ -12,6 +12,7 @@ GridLayout {
   id: root
   property SQLBackend backend
   property string scenarioTitle
+  property int index
   width: parent.width
   height: parent.height
   columns : 2
@@ -19,6 +20,7 @@ GridLayout {
   //TAB:SUMMARY_LEFTWINDOW
   LeftPane{
     id : summary_left
+    index : root.index
     backend : root.backend
     scenarioTitle : root.scenarioTitle
     Layout.preferredWidth: parent.width / 2

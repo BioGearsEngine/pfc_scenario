@@ -369,6 +369,9 @@ ColumnLayout {
         ScrollBar.vertical: ScrollBar { }  
 
         Component.onCompleted : {
+          if (model.count == 0) {
+            return
+          }
           var r_count = backend.role_count();
           root.backend.roles()
           while ( root.backend.next_role(self) ){  
@@ -415,7 +418,7 @@ ColumnLayout {
     onIndexChanged : {
       role_stack.currentIndex = 1
       var values = model.get(index)
-      if (values) {
+      if (values && model.count != 0) {
         listArea.model.clear()
         self_scene.scene_id = root.model.get(root.index).id
         self_scene.name = root.model.get(root.index).name

@@ -2,6 +2,7 @@ import QtQuick 2.10
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.12
+import QtQuick.Controls.Material 2.0
 
 import "../common"
 
@@ -11,13 +12,26 @@ Rectangle {
     id: root
     property SQLBackend backend
     property string scenarioTitle
-    property ListModel model
     property int index
+    //readonly property alias index : citationList.currentIndex
+    readonly property alias model : listArea.model 
 
+    function update_citation(values) {
+      obj.citation_id = values.id
+      obj.key = values.key
+      obj.title = values.title
+      obj.authors = values.authors
+      obj.year = values.year
+      obj.publisher = values.publisher
+    }
+
+    Citation {
+      id : citation 
+    }
   ColumnLayout {
       id: summary_leftWindow
       anchors.fill : parent
-
+      anchors.bottom : parent.bottom
     PropertyEntry {
         id: propertyEntry
       Layout.fillWidth : true
@@ -63,95 +77,180 @@ Rectangle {
       default_value : 'Enter the scenarios description.'
       required : false
     }
-
-    StackLayout {
-      id : listStack
+    Rectangle {
       Layout.fillWidth : true
       Layout.fillHeight : true
-      Layout.leftMargin: 5
-      currentIndex : 0
-      RestrictionListEntry {
-        id : restrictionList
-        Layout.fillWidth : true
-        Layout.fillHeight : true
-        backend : root.backend  
-        onList : {
-          var values = root.model.get(root.index)
-          if(values) {
-            fullRestrictionList.model.clear()
-            var restrictions = values.restrictions.split(";").filter(x=>x);
-            root.backend.restrictions()
-            while(root.backend.next_restriction(restriction)){
-              fullRestrictionList.model.insert(fullRestrictionList.model.count,
-                  {
-                    restriction_id : "%1".arg(restriction.restriction_id),
-                    name : "%1".arg(restriction.name),
-                    value : "%1".arg(restriction.value)
-                 }
-               );
-            };
+      Layout.margins : 5
+      //Layout.alignment : Qt.AlignTop
+      border.color : "black"
+      TwoButtonRow {
+        id : controls
+        anchors.top : parent.top
+        anchors.left : parent.left
+        anchors.right : parent.right
+        anchors.topMargin : 2
+        anchors.rightMargin : 5
+        anchors.leftMargin : 5
+        property int next : 1
+        label : "Reference"
+
+        onFirstButtonClicked : {
+          if ( next < listArea.model.count ) {
+            next = listArea.model.count+1
           }
-          listStack.currentIndex = 1
+          self.citation_id = -1
+          self.key = "AuthorYear_%1".arg(next)
+          self.title = "Reference %1".arg(next)
+          self.authors = "Reference Authors"
+          self.year = "Reference Year"
+          self.publisher = "Reference Publisher"  
+
+          while (root.backend.select_citation(self))
+          {
+            next = next+1
+            self.citation_id = -1
+            self.key = "AuthorYear_%1".arg(next)
+            self.title = "Reference %1".arg(next)
+            self.authors = "Reference Authors"
+            self.year = "Reference Year"
+            self.publisher = "Reference Publisher"
+          }
+          root.backend.update_citation(self)
+          listArea.model.insert(listArea.model.count,
+            {"id" : self.citation_id,
+            "key" : self.key,
+            "title" : self.title,
+            "authors" : self.authors,
+            "year" : self.year,
+            "publisher" : self.publisher});
+          ++next;
         }
-
-        onRestrictionAdded : {
-          var entry = root.model.get(root.index)
-          entry.restrictions = (entry.restrictions) ? entry.restrictions.concat(";"+restriction_id) : entry.restrictions.concat(restriction_id)
-          update_objective(entry)
-        } 
-
-        onRestrictionRemoved : {
-          var entry = root.model.get(root.index)
-          var restrictions = entry.restrictions.split(";").filter(item => item).filter(item => item != restriction_id);
-          entry.restrictions = restrictions.join(";")
-          update_objective(entry)
+        onSecondButtonClicked : {
+          citation.citation_id = -1
+          citation.key = listArea.model.get(listArea.currentIndex).key
+          root.backend.remove_citation(citation)
+          listArea.model.remove(listArea.currentIndex)
+          listArea.currentIndex = Math.max(0, listArea.currentIndex-1)
         }
       }
-      FullRestrictionListEntry {
-        id : fullRestrictionList
-        Layout.fillWidth : true
-        Layout.fillHeight : true
-        backend : root.backend   
+      ListView {
+        id : listArea
+        anchors { top : controls.bottom ; bottom : parent.bottom; 
+                     left : parent.left ; right : parent.right } 
+        spacing : 5
+        clip: true
+        highlightFollowsCurrentItem : true  
 
-        onFullAdded : {
-          restriction.id = fullRestrictionList.model.get(currentIndex)
-          root.backend.select_restriction(restriction)
-          var entry = root.model.get(root.index)
-          entry.restrictions = (entry.restrictions) ? entry.restrictions.concat(";"+restriction_id) : entry.restrictions.concat(restriction_id)
-          update_objective(entry)
-        }
+        highlight: Rectangle {
+            color: '#1111110F'
+            Layout.alignment: Qt.AlignTop
+            Layout.fillWidth: true
+            Layout.margins : 5
+        }  
 
-        onFullExit : {
-          var values = root.model.get(root.index)
-          if(values) {
-            nameEntry.text = values.name
-            restrictionList.model.clear()   
+        model : ListModel {}  
 
-            var restrictions = values.restrictions.split(";").filter(x => x);  
-            for(var i = 0; i < restrictions.length; ++i){
-              restriction.restriction_id = restrictions[i]
-              restriction.name = ""
-              restriction.value = ""
-              if(root.backend.select_restriction(restriction)){
-                restrictionList.model.insert(restrictionList.model.count,
-                    {
-                       restriction_id : "%1".arg(restriction.restriction_id),
-                       name : "%1".arg(restriction.name),
-                       value : "%1".arg(restriction.value)
-                   }
-                 );
-              }
-            };
+        delegate : Rectangle {
+          id : citation
+          color : 'transparent'
+          border.color: "steelblue"
+          height : 30
+          anchors { left : parent.left; right: parent.right ; margins : 5 }  
+
+          MouseArea {
+            anchors.fill: parent
+            onClicked: {
+              listArea.currentIndex = index  
+
+            }
+            onDoubleClicked: {
+
+              citationEdit.name = listArea.model.get(index).name
+              citationEdit.description = listArea.model.get(index).description
+              citationEdit.citationID = listArea.model.get(index).citation_id
+              contentStack.currentIndex = 1
+            }
+          }  
+
+          Text {
+            id : citation_title_text
+            anchors.left : citation.left
+            anchors.leftMargin : 5
+            text :  model.title
+            width : 150
+            font.weight: Font.Bold
+            font.pointSize: 10
+            enabled : false
+            color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+          }  
+
+          Text {
+            id : citation_value_text
+            anchors.left : citation_title_text.right
+            anchors.right : parent.right
+            anchors.leftMargin : 10
+            font.pointSize: 10
+            text :  model.key
+            enabled : false
+            color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+            elide: Text.ElideRight
+          }  
+
+          states: State {
+            name : "Selected"
+            PropertyChanges{ target : citation_title_text; enabled : true}
+            PropertyChanges{ target : citation_value_text; enabled  : true}
+          }  
+
+          onFocusChanged: {
+            if(listArea.currentIndex == index){
+              state = 'Selected';
+            }
+            else{
+              state = '';
+            }
           }
-          listStack.currentIndex = 0
-        }    
-      }
-    }
+        }  
 
+        ScrollBar.vertical: ScrollBar { }  
+
+        Component.onCompleted : {
+          var r_count = backend.citation_count();
+          root.backend.citations()
+          while ( root.backend.next_citation(citation) ){  
+
+            listArea.model.insert(listArea.model.count,
+              {
+               id  : citation.citation_id,
+               key: "%1".arg(citation.key), 
+               title: "%1".arg(citation.title),
+               authors: "%1".arg(citation.authors),
+               year: "%1".arg(citation.year),
+               publisher: "%1".arg(citation.publisher)
+              });
+          }
+        }
+      }
+      }
     Rectangle {
         Layout.fillHeight: true
         color : "Red"
         border.color:"Red"
+    }
+  }
+  onIndexChanged : {
+    listArea.model.clear()
+    root.backend.citations()
+    while(root.backend.next_citation(citation)){
+      listArea.model.insert(listArea.model.count,
+      {
+        citation_id : "%1".arg(citation.citation_id),
+        key : "%1".arg(citation.key),
+        title : "%1".arg(citation.title),
+        authors : "%1".arg(citation.authors),
+        year : "%1".arg(citation.year),
+        publisher : "%1".arg(citation.publisher)
+      });
     }
   }
 }

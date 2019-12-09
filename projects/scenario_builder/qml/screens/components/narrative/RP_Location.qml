@@ -8,23 +8,33 @@ import "../common"
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
 Rectangle{
-    id: root
+    id: root  
     property SQLBackend backend
     property ListModel model
     property int index
+    Location {
+      id : self
+    }
+
+    function update_location() {
+      if (model.count == 0) {
+        return
+      }
+      var obj = self
+      obj.location_id = -1
+      obj.name = locationNameEntry.text
+      obj.scene_name = nameEntry.text
+      //obj.time_of_day = values.time_of_day
+      obj.environment = environmentEntry.text
+      //obj.fk_scene = values.fk_scene  
+      console.log(JSON.stringify(self))
+      root.backend.update_location(obj)
+    } 
     border.color: 'black'
     border.width: 1
     ColumnLayout  {
         width: parent.width
-        function update_location(values) {
-          obj.location_id = values.id
-          obj.name = values.name
-          obj.scene_name = values.scene_name
-          obj.time_of_day = values.time_of_day
-          obj.environment = values.environment
-          obj.fk_scene = values.fk_scene  
-          root.backend.update_location(obj)
-        }   
+
 
         TextEntry {
           Layout.fillWidth: true
@@ -35,8 +45,7 @@ Rectangle{
           onEditingFinished : {
             var entry = root.model.get(root.index)
             if ( text != entry.name){
-              entry.name = text
-              update_objective(entry)
+              update_location()
             }
           }
         }   
@@ -73,7 +82,7 @@ Rectangle{
     }
     onIndexChanged : {
       var values = model.get(root.index)
-      if(values) {
+      if(values && model.count != 0) {
         nameEntry.text = root.model.get(root.index).name
       }
     }

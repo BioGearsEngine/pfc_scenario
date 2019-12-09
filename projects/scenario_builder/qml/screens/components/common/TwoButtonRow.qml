@@ -8,10 +8,11 @@ id: root
 Layout.preferredHeight : 30
 height : section_1.height
 
+property string label : "Label"
 property alias firstButtonText : firstButton.text
 property alias secondButtonText : secondButton.text
 
-signal firstButtonClicked()
+signal firstButtonClicked();
 signal secondButtonClicked();
 
 Rectangle{
@@ -22,7 +23,7 @@ Rectangle{
   PFCButton {
       id: firstButton
       anchors.left : section_1.left
-      text : "L Button"
+      text : "New " + root.label
       onClicked : {
         root.firstButtonClicked()
       }
@@ -38,7 +39,7 @@ Rectangle{
   PFCButton {
       id : secondButton
       anchors.right : section_2.right
-      text : "R Button"
+      text : "Delete " + root.label
       onClicked : {
         root.secondButtonClicked()
       }

@@ -38,10 +38,8 @@ FullListEntry {
 
      function update_restriction(id) {
          self.restriction_id = id
-         self.key     = restriction_key_text.text
-         self.title   = restriction_title_text.text
-         self.authors = restriction_authors_text.text
-         self.year    = restriction_year_text.text
+         self.name     = restriction_name_text.text
+         self.value   = restriction_value_text.text
 
 //         console.log("%1,%2,%3,%4,%5".arg(self.restriction_id)
 //          .arg(self.key)
@@ -53,11 +51,11 @@ FullListEntry {
      }
 
      TextField {
-       id : restriction_key_text
+       id : restriction_name_text
        anchors.left : parent.left
        anchors.leftMargin : 10
        font.pointSize: 10
-       text :  model.key
+       text :  model.name
        readOnly : true
        activeFocusOnPress: false
        hoverEnabled : false
@@ -72,46 +70,13 @@ FullListEntry {
          update_restriction(model.restriction_id)
       }
     }
-    TextField {
-       id : restriction_authors_text
-       anchors.left : restriction_key_text.right
-       anchors.leftMargin : 10
-       font.pointSize: 10
-       text :  model.authors
-       readOnly : true
-       activeFocusOnPress: false
-       hoverEnabled : false
-       enabled : false
-       color: enabled ? Material.primaryTextColor : Material.primaryTextColor
-       onEditingFinished : {
-         update_restriction(model.restriction_id)
-       }
-    }
 
      TextField {
-       id : restriction_year_text
-       anchors.left : restriction_authors_text.right
+       id : restriction_value_text
+       anchors.left : restriction_name_text.right
        anchors.leftMargin : 10
        font.pointSize: 10
-       text :  model.year
-       readOnly : true
-       activeFocusOnPress: false
-       hoverEnabled : false
-       enabled : false
-       color: enabled ? Material.primaryTextColor : Material.primaryTextColor
-       onEditingFinished : {
-         update_restriction(model.restriction_id)
-      }
-    }
-    TextField {
-       id : restriction_title_text
-       anchors.left : restriction_year_text.right
-       anchors.right : parent.right
-       anchors.leftMargin : 5
-       text :  model.title 
-       width : 150
-       font.weight: Font.Bold
-       font.pointSize: 10
+       text :  model.value
        readOnly : true
        activeFocusOnPress: false
        hoverEnabled : false
@@ -124,29 +89,19 @@ FullListEntry {
 
     states: State {
       name : "Selected"
-      PropertyChanges{ target : restriction_title_text; readOnly : false}
-      PropertyChanges{ target : restriction_title_text; activeFocusOnPress : true}
-      PropertyChanges{ target : restriction_title_text; hoverEnabled : true}
-      PropertyChanges{ target : restriction_title_text; enabled : true}
-      PropertyChanges{ target : restriction_title_text; mouseSelectionMode  : TextInput.SelectCharacters }
 
-      PropertyChanges{ target : restriction_key_text; readOnly : false}
-      PropertyChanges{ target : restriction_key_text; activeFocusOnPress : true}
-      PropertyChanges{ target : restriction_key_text; hoverEnabled : true}
-      PropertyChanges{ target : restriction_key_text; enabled : true}
-      PropertyChanges{ target : restriction_key_text; mouseSelectionMode  : TextInput.SelectCharacters }
+      PropertyChanges{ target : restriction_name_text; readOnly : false}
+      PropertyChanges{ target : restriction_name_text; activeFocusOnPress : true}
+      PropertyChanges{ target : restriction_name_text; hoverEnabled : true}
+      PropertyChanges{ target : restriction_name_text; enabled : true}
+      PropertyChanges{ target : restriction_name_text; mouseSelectionMode  : TextInput.SelectCharacters }
 
-      PropertyChanges{ target : restriction_authors_text; readOnly : false}
-      PropertyChanges{ target : restriction_authors_text; activeFocusOnPress : true}
-      PropertyChanges{ target : restriction_authors_text; hoverEnabled : true}
-      PropertyChanges{ target : restriction_authors_text; enabled  : true}
-      PropertyChanges{ target : restriction_authors_text; mouseSelectionMode  : TextInput.SelectCharacters }
+      PropertyChanges{ target : restriction_value_text; readOnly : false}
+      PropertyChanges{ target : restriction_value_text; activeFocusOnPress : true}
+      PropertyChanges{ target : restriction_value_text; hoverEnabled : true}
+      PropertyChanges{ target : restriction_value_text; enabled  : true}
+      PropertyChanges{ target : restriction_value_text; mouseSelectionMode  : TextInput.SelectCharacters }
 
-      PropertyChanges{ target : restriction_year_text; readOnly : false}
-      PropertyChanges{ target : restriction_year_text; activeFocusOnPress : true}
-      PropertyChanges{ target : restriction_year_text; hoverEnabled : true}
-      PropertyChanges{ target : restriction_year_text; enabled  : true}
-      PropertyChanges{ target : restriction_year_text; mouseSelectionMode  : TextInput.SelectCharacters }
     }
 
     onFocusChanged: {

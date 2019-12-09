@@ -55,7 +55,7 @@ Page {
         text: "Narrative"
         width: implicitWidth
       }
-      currentIndex : 1
+      currentIndex : 0
 
     }
 
@@ -71,6 +71,7 @@ Page {
 
       ScenarioSummary{
         id: summary
+        index : tabs.currentIndex
         backend : root.backend
         onScenarioTitleChanged : {
           titleCardText.text = summary.scenarioTitle

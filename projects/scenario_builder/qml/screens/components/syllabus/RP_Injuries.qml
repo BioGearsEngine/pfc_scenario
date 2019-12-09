@@ -116,6 +116,7 @@ ColumnLayout  {
 
         onCitationAdded : {
           var entry = root.model.get(root.index)
+          console.log(JSON.stringify(root.model.get(root.index)))
           entry.citations = (entry.citations) ? entry.citations.concat(";"+citation_id) : entry.citations.concat(citation_id)
           update_injury(entry)
         } 
@@ -134,10 +135,10 @@ ColumnLayout  {
         backend : root.backend   
 
         onFullAdded : {
-          citation.id = fullReferenceList.model.get(currentIndex)
+          citation.citation_id = fullReferenceList.model.get(fullReferenceList.current).citation_id
           root.backend.select_citation(citation)
           var entry = root.model.get(root.index)
-          entry.citations = (entry.citations) ? entry.citations.concat(";"+citation_id) : entry.citations.concat(citation_id)
+          entry.citations = (entry.citations) ? entry.citations.concat(";"+citation.citation_id) : entry.citations.concat(citation.citation_id)
           update_injury(entry)
         }
 
@@ -145,7 +146,8 @@ ColumnLayout  {
           listStack.currentIndex = 0
           var values = root.model.get(root.index)
           if(values) {
-            nameEntry.text = values.name
+            commonNameEntry.text = values.common_name
+            medicalNameEntry.text = values.medical_name
             descriptionEntry.text = values.description
             referenceList.model.clear()   
 
