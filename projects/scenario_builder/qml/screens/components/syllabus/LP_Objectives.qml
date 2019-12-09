@@ -68,6 +68,9 @@ ColumnLayout {
         ++next;
       }
       onSecondButtonClicked : {
+        if (root.model.count == 0) {
+          return
+        }
         self.objective_id = -1
         self.name = root.model.get(root.index).name
 
@@ -87,8 +90,8 @@ ColumnLayout {
 
       highlight: Rectangle {
           color: '#1111110F'
-          anchors.left : parent.left
-          anchors.right : parent.right
+          anchors.left : (parent) ? parent.left :  undefined
+          anchors.right : (parent) ? parent.left :  undefined
           anchors.margins: 5
       }
 

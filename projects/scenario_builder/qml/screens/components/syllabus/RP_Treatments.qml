@@ -224,7 +224,7 @@ ScrollView {
       descriptionEntry.text = values.description
 
       equipmentList.model.clear()
-      var equipments = values.equipment.split(";").filter(x => x);  
+      var equipments = (values.equipment) ? values.equipment.split(";").filter(x => x) : "";  
       for(var i = 0; i < equipments.length; ++i){
          equipment.equipment_id = equipments[i]
          equipment.name = ""
@@ -242,7 +242,7 @@ ScrollView {
       }
 
       referenceList.model.clear()
-      var citations = values.citations.split(";").filter(x => x);  
+      var citations = (values.citations) ? values.citations.split(";").filter(x => x) : "";  
       for(var i = 0; i < citations.length; ++i){
          citation.citation_id = citations[i]
          citation.key = ""

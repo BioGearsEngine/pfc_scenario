@@ -54,7 +54,7 @@ ColumnLayout {
         while( root.backend.select_injury_set(self) )
         { 
          next = next +1
-         self.InjurySet_id = -1; 
+         self.injury_set_id = -1; 
          self.name = "New InjurySet %1".arg(next);
          self.description = "Description of InjurySet %1".arg(next)
         } 
@@ -71,6 +71,9 @@ ColumnLayout {
         ++next;
       }
       onSecondButtonClicked : {
+        if (root.model.count == 0) {
+          return
+        }
         self.injury_set_id = -1
         self.name = root.model.get(root.index).name
 
@@ -90,8 +93,8 @@ ColumnLayout {
 
       highlight: Rectangle {
           color: '#1111110F'
-          anchors.left : parent.left
-          anchors.right : parent.right
+          anchors.left : (parent) ? parent.left :  undefined
+          anchors.right : (parent) ? parent.left :  undefined
           anchors.margins: 5
       }
 

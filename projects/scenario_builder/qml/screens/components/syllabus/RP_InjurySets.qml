@@ -119,9 +119,9 @@ ColumnLayout  {
         nameEntry.text = values.name
         descriptionEntry.text = values.description
 
-        var injuries  = values.injuries.split(";").filter(x => x);
-        var locations  = values.locations.split(";").filter(x => x);
-        var severities = values.severities.split(";").filter(x => x);
+        var injuries   = (values.injuries) ? values.injuries.split(";").filter(x => x)  : "";
+        var locations  = (values.locations) ? values.locations.split(";").filter(x => x) : "";
+        var severities = (values.severities) ? values.severities.split(";").filter(x => x): "";
         injuryList.model.clear()
         for(var i = 0; i < injuries.length; ++i){
            injury.injury_id = injuries[i]

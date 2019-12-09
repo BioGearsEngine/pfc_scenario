@@ -180,7 +180,7 @@ ColumnLayout  {
       descriptionEntry.text = values.description
       imageEntry.text = values.image
       referenceList.model.clear()
-      var citations = values.citations.split(";").filter(x => x);  
+      var citations = (values.citations) ? values.citations.split(";").filter(x => x) : "";  
       for(var i = 0; i < citations.length; ++i){
          citation.citation_id = citations[i]
          citation.key = ""
