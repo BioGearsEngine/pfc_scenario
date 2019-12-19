@@ -36,10 +36,10 @@ Serializer::~Serializer()
 {
 }
 //-------------------------------------------------------------------------------
-bool Serializer::save()
+bool Serializer::save(SQLite3Driver* driver)
 {
-  generate_msdl_stream();
-  generate_pfc_stream();
+  generate_msdl_stream(driver);
+  generate_pfc_stream(driver);
   if (!_db) {
     return false;
   }
@@ -208,15 +208,35 @@ QString Serializer::get_property(const QString& name)
   return "N/A";
 }
 //-------------------------------------------------------------------------------
-void Serializer::generate_msdl_stream()
+void Serializer::generate_msdl_stream(SQLite3Driver* driver)
 {
 
-  auto scenarioID_nameType = msdl_1::MilitaryScenarioType::ScenarioID_type::name_type(get_property("scenario_title").toStdString());
-  auto scenarioID_typeType = msdl_1::MilitaryScenarioType::ScenarioID_type::type_type("PFC");
-  auto scenarioID_versionType = msdl_1::MilitaryScenarioType::ScenarioID_type::version_type(get_property("scenario_version").toStdString());
+  std::vector<Property*> property_list = driver->get_properties();
+  qInfo() << property_list[0]->name;
+  qInfo() << property_list[0]->value;
+  Property titleProperty,domainProperty,versionProperty,securityProperty,descriptionProperty;
+  titleProperty.name = "scenario_title";
+  domainProperty.name = "scenario_domain";
+  versionProperty.name = "scenario_version";
+  securityProperty.name = "scenario_security";
+  descriptionProperty.name = "scenario_description";
+  driver->select_property(&titleProperty);
+  driver->select_property(&domainProperty);
+  driver->select_property(&versionProperty);
+  driver->select_property(&securityProperty);
+  driver->select_property(&descriptionProperty);
+  std::string name = titleProperty.value.toStdString();
+  std::string domain = domainProperty.value.toStdString();
+  std::string version = versionProperty.value.toStdString();
+  std::string security = securityProperty.value.toStdString();
+  std::string description = descriptionProperty.value.toStdString();
+
+  auto scenarioID_nameType = msdl_1::MilitaryScenarioType::ScenarioID_type::name_type(name);
+  auto scenarioID_typeType = msdl_1::MilitaryScenarioType::ScenarioID_type::type_type(domain);
+  auto scenarioID_versionType = msdl_1::MilitaryScenarioType::ScenarioID_type::version_type(version);
   auto scenarioID_modificationDateType = msdl_1::MilitaryScenarioType::ScenarioID_type::modificationDate_type(get_now());
-  auto scenarioID_securityClassificationType = msdl_1::MilitaryScenarioType::ScenarioID_type::securityClassification_type(get_property("scenario_security").toStdString());
-  auto scenarioID_descriptionType = msdl_1::MilitaryScenarioType::ScenarioID_type::description_type(get_property("scenario_purpose").toStdString());
+  auto scenarioID_securityClassificationType = msdl_1::MilitaryScenarioType::ScenarioID_type::securityClassification_type(security);
+  auto scenarioID_descriptionType = msdl_1::MilitaryScenarioType::ScenarioID_type::description_type(description);
 
   auto msdl_scenario_id = std::make_unique<msdl_1::MilitaryScenarioType::ScenarioID_type>(scenarioID_nameType, scenarioID_typeType, scenarioID_versionType, scenarioID_modificationDateType, scenarioID_securityClassificationType, scenarioID_descriptionType);
   auto msdl_military_version = std::make_unique<msdl_1::MilitaryScenarioType::Options_type>(msdl_1::MilitaryScenarioType::Options_type::MSDLVersion_type(""));
@@ -237,9 +257,13 @@ void Serializer::generate_msdl_stream()
   }
 }
 //-------------------------------------------------------------------------------
-void Serializer::generate_pfc_stream()
+void Serializer::generate_pfc_stream(SQLite3Driver* driver)
 {
   using pfc::schema::ScenarioSchema;
+  
+  std::vector<Property*> property_list = driver->get_properties();
+  std::string name = property_list[0]->name.toStdString();
+  std::string value = property_list[0]->value.toStdString();
 
   namespace pfcs = pfc::schema;
   auto injury_id = std::make_unique<pfcs::injury::id_type>("");

@@ -130,6 +130,28 @@ public:
   Q_INVOKABLE void equipment_in_scene(Scene* scene);
   Q_INVOKABLE void scenes();
 
+  Q_INVOKABLE std::vector<Author*> get_authors();
+  Q_INVOKABLE std::vector<Assessment*> get_assessments();
+  Q_INVOKABLE std::vector<Citation*> get_citations();
+  Q_INVOKABLE std::vector<Event*> get_events();
+  Q_INVOKABLE std::vector<Equipment*> get_equipments();
+  Q_INVOKABLE std::vector<Injury*> get_injuries();
+  Q_INVOKABLE std::vector<InjurySet*> get_injury_sets();
+  Q_INVOKABLE std::vector<RoleMap*> get_role_maps();
+  Q_INVOKABLE std::vector<EventMap*> get_event_maps();
+  Q_INVOKABLE std::vector<PropMap*> get_prop_maps();
+  Q_INVOKABLE std::vector<CitationMap*> get_citation_maps();
+  Q_INVOKABLE std::vector<EquipmentMap*> get_equipment_maps();
+  Q_INVOKABLE std::vector<RestrictionMap*> get_restriction_maps();
+  Q_INVOKABLE std::vector<Objective*> get_objectives();
+  Q_INVOKABLE std::vector<Property*> get_properties();
+  Q_INVOKABLE std::vector<Prop*> get_props();
+  Q_INVOKABLE std::vector<Restriction*> get_restrictions();
+  Q_INVOKABLE std::vector<Role*> get_roles();
+  Q_INVOKABLE std::vector<Treatment*> get_treatments();
+  Q_INVOKABLE std::vector<Scene*> get_scenes();
+
+
   Q_INVOKABLE bool next_author(Author*);
   Q_INVOKABLE bool next_property(Property*);
   Q_INVOKABLE bool next_restriction(Restriction*);

@@ -20,15 +20,16 @@ public:
   Serializer& operator=(Serializer&&) = delete;
   ~Serializer();
 
-  Q_INVOKABLE bool save();
+  Q_INVOKABLE bool save(SQLite3Driver* driver);
   Q_INVOKABLE bool load(const QString& filename);
 
 signals:
   void dbChanged();
 protected:
   QString get_property(const QString& name);
-  void generate_msdl_stream();
-  void generate_pfc_stream();
+  void generate_msdl_stream(SQLite3Driver* driver);
+  void generate_pfc_stream(SQLite3Driver* driver);
+
 private:
   SQLite3Driver* _db = nullptr;
   std::stringstream _msdl_content;

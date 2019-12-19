@@ -903,7 +903,7 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_properties = R"( DELETE FROM properties; )";
   constexpr auto count_properties = R"( SELECT COUNT(property_id) FROM properties; )";
-  constexpr auto select_all_properties = R"( SELECT * FROM properties ORDER BY name; )";
+  constexpr auto select_all_properties = R"( SELECT name,value FROM properties ORDER BY property_id; )";
 
   constexpr auto select_property_by_id
     = R"( SELECT * FROM properties WHERE property_id = :id ; )";

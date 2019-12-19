@@ -3791,119 +3791,617 @@ bool SQLite3Driver::remove_treatment(Treatment* treatment)
 bool SQLite3Driver::serialize()
 {
   if (_db.isOpen()) {
-
-    std::vector<EventMap> event_map_list;
-    std::vector<PropMap> prop_map_list;
-    std::vector<CitationMap> citation_map_list;
-    std::vector<EquipmentMap> equipment_map_list;
-    std::vector<RestrictionMap> restriction_map_list;
-    std::vector<Objective> objective_list;
-    std::vector<Property> property_list;
-    std::vector<Prop> prop_list;
-    std::vector<Restriction> restriction_list;
-    std::vector<Role> role_list;
-    std::vector<Treatment> treatment_list;
-    std::vector<Scene> scene_list;
-    std::vector<Author> author_list;
+    std::vector<Author*> author_list;
     QSqlQuery author_query{ _db };
     author_query.prepare(select_all_authors);
     while (author_query.next()) {
-      Author temp;
-      author_query.bindValue(":first", temp.first);
-      author_query.bindValue(":middle", temp.middle);
-      author_query.bindValue(":last", temp.last);
-      author_query.bindValue(":email", temp.email);
-      author_query.bindValue(":zip", temp.zip);
-      author_query.bindValue(":plus_4", temp.plus_4);
-      author_query.bindValue(":state", temp.state);
-      author_query.bindValue(":country", temp.country);
-      author_query.bindValue(":phone", temp.phone);
-      author_query.bindValue(":organization", temp.organization);
-
+      Author* temp;
+      author_query.bindValue(":first", temp->first);
+      author_query.bindValue(":middle", temp->middle);
+      author_query.bindValue(":last", temp->last);
+      author_query.bindValue(":email", temp->email);
+      author_query.bindValue(":zip", temp->zip);
+      author_query.bindValue(":plus_4", temp->plus_4);
+      author_query.bindValue(":state", temp->state);
+      author_query.bindValue(":country", temp->country);
+      author_query.bindValue(":phone", temp->phone);
+      author_query.bindValue(":organization", temp->organization);
+      author_list.push_back(temp);
     }
-    std::vector<Assessment> assessment_list;
+    std::vector<Assessment*> assessment_list;
     QSqlQuery assessment_query{ _db };
     assessment_query.prepare(select_all_assessments);
     while (assessment_query.next()) {
-      Assessment temp;
-      assessment_query.bindValue(":name", temp.name);
-      assessment_query.bindValue(":description", temp.description);
-      assessment_query.bindValue(":type", temp.type);
-      assessment_query.bindValue(":available_points", temp.available_points);
-      assessment_query.bindValue(":criteria", temp.criteria);
+      Assessment* temp;
+      assessment_query.bindValue(":name", temp->name);
+      assessment_query.bindValue(":description", temp->description);
+      assessment_query.bindValue(":type", temp->type);
+      assessment_query.bindValue(":available_points", temp->available_points);
+      assessment_query.bindValue(":criteria", temp->criteria);
+      assessment_list.push_back(temp);
 
     }
-    std::vector<Citation> citation_list;
+    std::vector<Citation*> citation_list;
     QSqlQuery citation_query{ _db };
     citation_query.prepare(select_all_citations);
     while (citation_query.next()) {
-      Citation temp;
-      citation_query.bindValue(":key", temp.key);
-      citation_query.bindValue(":title", temp.title);
-      citation_query.bindValue(":authors", temp.authors);
-      citation_query.bindValue(":year", temp.year);
-      citation_query.bindValue(":publisher", temp.publisher);
+      Citation* temp;
+      citation_query.bindValue(":key", temp->key);
+      citation_query.bindValue(":title", temp->title);
+      citation_query.bindValue(":authors", temp->authors);
+      citation_query.bindValue(":year", temp->year);
+      citation_query.bindValue(":publisher", temp->publisher);
+      citation_list.push_back(temp);
 
     }
-    std::vector<Event> event_list;
+    std::vector<Event*> event_list;
     QSqlQuery event_query{ _db };
     event_query.prepare(select_all_events);
     while (event_query.next()) {
-      Event temp;
-      event_query.bindValue(":name", temp.name);
-      event_query.bindValue(":location", temp.location);
-      event_query.bindValue(":actor", temp.actor);
-      event_query.bindValue(":equipment", temp.equipment);
-      event_query.bindValue(":description", temp.description);
+      Event* temp;
+      event_query.bindValue(":name", temp->name);
+      event_query.bindValue(":location", temp->location);
+      event_query.bindValue(":actor", temp->actor);
+      event_query.bindValue(":equipment", temp->equipment);
+      event_query.bindValue(":description", temp->description);
+      event_list.push_back(temp);
 
     }    
-    std::vector<Equipment> equipment_list;
+    std::vector<Equipment*> equipment_list;
     QSqlQuery equipment_query{ _db };
     event_query.prepare(select_all_equipments);
     while (event_query.next()) {
-      Equipment temp;
-      equipment_query.bindValue(":type", temp.type);
-      equipment_query.bindValue(":name", temp.name);
-      equipment_query.bindValue(":description", temp.description);
-      equipment_query.bindValue(":citations", temp.citations);
-      equipment_query.bindValue(":image", temp.image);
+      Equipment* temp;
+      equipment_query.bindValue(":type", temp->type);
+      equipment_query.bindValue(":name", temp->name);
+      equipment_query.bindValue(":description", temp->description);
+      equipment_query.bindValue(":citations", temp->citations);
+      equipment_query.bindValue(":image", temp->image);
+      equipment_list.push_back(temp);
 
     }
-    std::vector<Injury> injury_list;
+    std::vector<Injury*> injury_list;
     QSqlQuery injury_query{ _db };
     event_query.prepare(select_all_injuries);
     while (event_query.next()) {
-      Injury temp;
-      injury_query.bindValue(":medical_name", temp.medical_name);
-      injury_query.bindValue(":common_name", temp.common_name);
-      injury_query.bindValue(":description", temp.description);
-      injury_query.bindValue(":citations", temp.citations);
-      injury_query.bindValue(":severity_min", temp.severity_min);
-      injury_query.bindValue(":severity_max", temp.severity_max);
+      Injury* temp;
+      injury_query.bindValue(":medical_name", temp->medical_name);
+      injury_query.bindValue(":common_name", temp->common_name);
+      injury_query.bindValue(":description", temp->description);
+      injury_query.bindValue(":citations", temp->citations);
+      injury_query.bindValue(":severity_min", temp->severity_min);
+      injury_query.bindValue(":severity_max", temp->severity_max);
+      injury_list.push_back(temp);
+
     }
-    std::vector<Equipment> injury_set_list;
+    std::vector<InjurySet*> injury_set_list;
     QSqlQuery injury_set_query{ _db };
     event_query.prepare(select_all_injury_sets);
     while (event_query.next()) {
-      InjurySet temp;
-      injury_set_query.bindValue(":injuries", temp.injuries);
-      injury_set_query.bindValue(":name", temp.name);
-      injury_set_query.bindValue(":description", temp.description);
-      injury_set_query.bindValue(":locations", temp.locations);
-      injury_set_query.bindValue(":injuries", temp.injuries);
-      injury_set_query.bindValue(":severities", temp.severities);
+      InjurySet* temp;
+      injury_set_query.bindValue(":injuries", temp->injuries);
+      injury_set_query.bindValue(":name", temp->name);
+      injury_set_query.bindValue(":description", temp->description);
+      injury_set_query.bindValue(":locations", temp->locations);
+      injury_set_query.bindValue(":injuries", temp->injuries);
+      injury_set_query.bindValue(":severities", temp->severities);
+      injury_set_list.push_back(temp);
+
     }
-    std::vector<Location> location_list;
+    std::vector<RoleMap*> role_map_list;
     QSqlQuery role_map_query{ _db };
     role_map_query.prepare(select_all_role_maps);
     while(role_map_query.next()) {
-      RoleMap temp;
-      role_map_query.bindValue(":fk_scene",temp.fk_scene);
-      role_map_query.bindValue(":fk_role",temp.fk_role);
+      RoleMap* temp;
+      role_map_query.bindValue(":fk_scene",temp->fk_scene);
+      role_map_query.bindValue(":fk_role",temp->fk_role);
+      role_map_list.push_back(temp);
     }
-    std::vector<RoleMap> role_map_list;
+
+    std::vector<EventMap*> event_map_list;
+    QSqlQuery event_map_query{ _db };
+    event_map_query.prepare(select_all_event_maps);
+    while (event_map_query.next()) {
+      EventMap* temp;
+      event_map_query.bindValue(":fk_scene", temp->fk_scene);
+      event_map_query.bindValue(":fk_event", temp->fk_event);
+      event_map_list.push_back(temp);
+    }
+
+    std::vector<PropMap*> prop_map_list;
+    QSqlQuery prop_map_query{ _db };
+    prop_map_query.prepare(select_all_prop_maps);
+    while (prop_map_query.next()) {
+      PropMap* temp;
+      prop_map_query.bindValue(":fk_scene", temp->fk_scene);
+      prop_map_query.bindValue(":fk_prop", temp->fk_prop);
+      prop_map_list.push_back(temp);
+    }
+
+    std::vector<CitationMap*> citation_map_list;
+    QSqlQuery citation_map_query{ _db };
+    citation_map_query.prepare(select_all_citation_maps);
+    while (citation_map_query.next()) {
+      CitationMap* temp;
+      citation_map_query.bindValue(":fk_scene", temp->fk_scene);
+      citation_map_query.bindValue(":fk_citation", temp->fk_citation);
+      citation_map_list.push_back(temp);
+    }
+
+    std::vector<EquipmentMap*> equipment_map_list;
+    QSqlQuery equipment_map_query{ _db };
+    equipment_map_query.prepare(select_all_equipment_maps);
+    while (equipment_map_query.next()) {
+      EquipmentMap* temp;
+      equipment_map_query.bindValue(":fk_scene", temp->fk_scene);
+      equipment_map_query.bindValue(":fk_equipment", temp->fk_equipment);
+      equipment_map_list.push_back(temp);
+    }
+
+    std::vector<RestrictionMap*> restriction_map_list;
+    QSqlQuery restriction_map_query{ _db };
+    restriction_map_query.prepare(select_all_restriction_maps);
+    while (restriction_map_query.next()) {
+      RestrictionMap* temp;
+      restriction_map_query.bindValue(":fk_scene", temp->fk_scene);
+      restriction_map_query.bindValue(":fk_restriction", temp->fk_restriction);
+      restriction_map_list.push_back(temp);
+    }
+
+    std::vector<Objective*> objective_list;
+    QSqlQuery objective_query{ _db };
+    event_query.prepare(select_all_objectives);
+    while (event_query.next()) {
+      Objective* temp;
+      objective_query.bindValue(":name", temp->name);
+      objective_query.bindValue(":description", temp->description);
+      objective_query.bindValue(":citations", temp->citations);
+      objective_list.push_back(temp);
+    }
+
+    std::vector<Property*> property_list;
+    QSqlQuery property_query{ _db };
+    event_query.prepare(select_all_properties);
+    while (event_query.next()) {
+      Property* temp;
+      property_query.bindValue(":name", temp->name);
+      property_query.bindValue(":value", temp->value);
+      property_list.push_back(temp);
+    }
+
+    std::vector<Prop*> prop_list;
+    QSqlQuery prop_query{ _db };
+    event_query.prepare(select_all_props);
+    while (event_query.next()) {
+      Prop* temp;
+      prop_query.bindValue(":equipment", temp->equipment);
+      prop_list.push_back(temp);
+    }
+
+    std::vector<Restriction*> restriction_list;
+    QSqlQuery restriction_query{ _db };
+    event_query.prepare(select_all_properties);
+    while (event_query.next()) {
+      Restriction* temp;
+      restriction_query.bindValue(":name", temp->name);
+      restriction_query.bindValue(":value", temp->value);
+      restriction_list.push_back(temp);
+    }
+
+    std::vector<Role*> role_list;
+    QSqlQuery role_query{ _db };
+    event_query.prepare(select_all_roles);
+    while (event_query.next()) {
+      Role* temp;
+      role_query.bindValue(":name", temp->name);
+      role_query.bindValue(":description", temp->description);
+      role_list.push_back(temp);
+    }
+
+    std::vector<Treatment*> treatment_list;
+    QSqlQuery treatment_query{ _db };
+    event_query.prepare(select_all_treatments);
+    while (event_query.next()) {
+      Treatment* temp;
+      treatment_query.bindValue(":medical_name", temp->medical_name);
+      treatment_query.bindValue(":common_name", temp->common_name);
+      treatment_query.bindValue(":description", temp->description);
+      treatment_query.bindValue(":equipment", temp->equipment);
+      treatment_query.bindValue(":citations", temp->citations);
+      treatment_list.push_back(temp);
+    }
+
+    std::vector<Scene*> scene_list;
+    QSqlQuery scene_query{ _db };
+    event_query.prepare(select_all_scenes);
+    while (event_query.next()) {
+      Scene* temp;
+      scene_query.bindValue(":name", temp->name);
+      scene_list.push_back(temp);
+    }
     return false;
   }
+}
+
+std::vector<Author*> SQLite3Driver::get_authors()
+{
+  if (_db.isOpen()) {
+    std::vector<Author*> author_list;
+    QSqlQuery author_query{ _db };
+    author_query.prepare(select_all_authors);
+    author_query.exec();
+    while (author_query.next()) {
+      auto temp = std::make_unique<Author>();
+      author_query.bindValue(":first", temp->first);
+      author_query.bindValue(":middle", temp->middle);
+      author_query.bindValue(":last", temp->last);
+      author_query.bindValue(":email", temp->email);
+      author_query.bindValue(":zip", temp->zip);
+      author_query.bindValue(":plus_4", temp->plus_4);
+      author_query.bindValue(":state", temp->state);
+      author_query.bindValue(":country", temp->country);
+      author_query.bindValue(":phone", temp->phone);
+      author_query.bindValue(":organization", temp->organization);
+      author_list.push_back(temp.release());
+    }
+    return author_list;
+  }
+  throw std::runtime_error("No db connection");
+}
+std::vector<Assessment*> SQLite3Driver::get_assessments()
+{
+  if (_db.isOpen()) {
+    std::vector<Assessment*> assessment_list;
+    QSqlQuery assessment_query{ _db };
+    assessment_query.prepare(select_all_assessments);
+    assessment_query.exec();
+    while (assessment_query.next()) {
+      auto temp = std::make_unique<Assessment>();
+      assessment_query.bindValue(":name", temp->name);
+      assessment_query.bindValue(":description", temp->description);
+      assessment_query.bindValue(":type", temp->type);
+      assessment_query.bindValue(":available_points", temp->available_points);
+      assessment_query.bindValue(":criteria", temp->criteria);
+      assessment_list.push_back(temp.release());
+    }
+    return assessment_list;
+  }
+  throw std::runtime_error("No db connection");
+}
+std::vector<Citation*> SQLite3Driver::get_citations()
+{
+  if (_db.isOpen()) {
+    std::vector<Citation*> citation_list;
+    QSqlQuery citation_query{ _db };
+    citation_query.prepare(select_all_citations);
+    citation_query.exec();
+    while (citation_query.next()) {
+      auto temp = std::make_unique<Citation>();
+      citation_query.bindValue(":key", temp->key);
+      citation_query.bindValue(":title", temp->title);
+      citation_query.bindValue(":authors", temp->authors);
+      citation_query.bindValue(":year", temp->year);
+      citation_query.bindValue(":publisher", temp->publisher);
+      citation_list.push_back(temp.release());
+    }
+    return citation_list;
+  }
+  throw std::runtime_error("No db connection");
+}
+std::vector<Event*> SQLite3Driver::get_events()
+{
+  if (_db.isOpen()) {
+    std::vector<Event*> event_list;
+    QSqlQuery event_query{ _db };
+    event_query.prepare(select_all_events);
+    event_query.exec();
+    while (event_query.next()) {
+      auto temp = std::make_unique<Event>();
+      event_query.bindValue(":name", temp->name);
+      event_query.bindValue(":location", temp->location);
+      event_query.bindValue(":actor", temp->actor);
+      event_query.bindValue(":equipment", temp->equipment);
+      event_query.bindValue(":description", temp->description);
+      event_list.push_back(temp.release());
+    }
+    return event_list;
+  }
+  throw std::runtime_error("No db connection");
+}
+std::vector<Equipment*> SQLite3Driver::get_equipments()
+{
+  if (_db.isOpen()) {
+    std::vector<Equipment*> equipment_list;
+    QSqlQuery equipment_query{ _db };
+    equipment_query.prepare(select_all_equipments);
+    equipment_query.exec();
+    while (equipment_query.next()) {
+      auto temp = std::make_unique<Equipment>();
+      equipment_query.bindValue(":type", temp->type);
+      equipment_query.bindValue(":name", temp->name);
+      equipment_query.bindValue(":description", temp->description);
+      equipment_query.bindValue(":citations", temp->citations);
+      equipment_query.bindValue(":image", temp->image);
+      equipment_list.push_back(temp.release());
+    }
+    return equipment_list;
+  }
+  throw std::runtime_error("No db connection");
+}
+std::vector<Injury*> SQLite3Driver::get_injuries()
+{
+  if (_db.isOpen()) {
+    std::vector<Injury*> injury_list;
+    QSqlQuery injury_query{ _db };
+    injury_query.prepare(select_all_injuries);
+    injury_query.exec();
+    while (injury_query.next()) {
+      auto temp = std::make_unique<Injury>();
+      injury_query.bindValue(":medical_name", temp->medical_name);
+      injury_query.bindValue(":common_name", temp->common_name);
+      injury_query.bindValue(":description", temp->description);
+      injury_query.bindValue(":citations", temp->citations);
+      injury_query.bindValue(":severity_min", temp->severity_min);
+      injury_query.bindValue(":severity_max", temp->severity_max);
+      injury_list.push_back(temp.release());
+    }
+    return injury_list;
+  }
+  throw std::runtime_error("No db connection");
+}
+std::vector<InjurySet*> SQLite3Driver::get_injury_sets()
+{
+  if (_db.isOpen()) {
+    std::vector<InjurySet*> injury_set_list;
+    QSqlQuery injury_set_query{ _db };
+    injury_set_query.prepare(select_all_injury_sets);
+    injury_set_query.exec();
+    while (injury_set_query.next()) {
+      auto temp = std::make_unique<InjurySet>();
+      injury_set_query.bindValue(":injuries", temp->injuries);
+      injury_set_query.bindValue(":name", temp->name);
+      injury_set_query.bindValue(":description", temp->description);
+      injury_set_query.bindValue(":locations", temp->locations);
+      injury_set_query.bindValue(":injuries", temp->injuries);
+      injury_set_query.bindValue(":severities", temp->severities);
+      injury_set_list.push_back(temp.release());
+    }
+    return injury_set_list;
+  }
+  throw std::runtime_error("No db connection");
+}
+std::vector<RoleMap*> SQLite3Driver::get_role_maps()
+{
+  if (_db.isOpen()) {
+    std::vector<RoleMap*> role_map_list;
+    QSqlQuery role_map_query{ _db };
+    role_map_query.prepare(select_all_role_maps);
+    role_map_query.exec();
+    while (role_map_query.next()) {
+      auto temp = std::make_unique<RoleMap>();
+      role_map_query.bindValue(":fk_scene", temp->fk_scene);
+      role_map_query.bindValue(":fk_role", temp->fk_role);
+      role_map_list.push_back(temp.release());
+    }
+    return role_map_list;
+  }
+  throw std::runtime_error("No db connection");
+}
+std::vector<EventMap*> SQLite3Driver::get_event_maps()
+{
+  if (_db.isOpen()) {
+    std::vector<EventMap*> event_map_list;
+    QSqlQuery event_map_query{ _db };
+    event_map_query.prepare(select_all_event_maps);
+    event_map_query.exec();
+    while (event_map_query.next()) {
+      auto temp = std::make_unique<EventMap>();
+      event_map_query.bindValue(":fk_scene", temp->fk_scene);
+      event_map_query.bindValue(":fk_event", temp->fk_event);
+      event_map_list.push_back(temp.release());
+    }
+    return event_map_list;
+  }
+  throw std::runtime_error("No db connection");
+}
+std::vector<PropMap*> SQLite3Driver::get_prop_maps()
+{
+  if (_db.isOpen()) {
+    std::vector<PropMap*> prop_map_list;
+    QSqlQuery prop_map_query{ _db };
+    prop_map_query.prepare(select_all_prop_maps);
+    prop_map_query.exec();
+    while (prop_map_query.next()) {
+      auto temp = std::make_unique<PropMap>();
+      prop_map_query.bindValue(":fk_scene", temp->fk_scene);
+      prop_map_query.bindValue(":fk_prop", temp->fk_prop);
+      prop_map_list.push_back(temp.release());
+    }
+    return prop_map_list;
+  }
+  throw std::runtime_error("No db connection");
+}
+std::vector<CitationMap*> SQLite3Driver::get_citation_maps()
+{
+  if (_db.isOpen()) {
+    std::vector<CitationMap*> citation_map_list;
+    QSqlQuery citation_map_query{ _db };
+    citation_map_query.prepare(select_all_citation_maps);
+    citation_map_query.exec();
+    while (citation_map_query.next()) {
+      auto temp = std::make_unique<CitationMap>();
+      citation_map_query.bindValue(":fk_scene", temp->fk_scene);
+      citation_map_query.bindValue(":fk_citation", temp->fk_citation);
+      citation_map_list.push_back(temp.release());
+    }
+    return citation_map_list;
+  }
+  throw std::runtime_error("No db connection");
+}
+std::vector<EquipmentMap*> SQLite3Driver::get_equipment_maps()
+{
+  if (_db.isOpen()) {
+    std::vector<EquipmentMap*> equipment_map_list;
+    QSqlQuery equipment_map_query{ _db };
+    equipment_map_query.prepare(select_all_equipment_maps);
+    equipment_map_query.exec();
+    while (equipment_map_query.next()) {
+      auto temp = std::make_unique<EquipmentMap>();
+      equipment_map_query.bindValue(":fk_scene", temp->fk_scene);
+      equipment_map_query.bindValue(":fk_equipment", temp->fk_equipment);
+      equipment_map_list.push_back(temp.release());
+    }
+    return equipment_map_list;
+  }
+  throw std::runtime_error("No db connection");
+}
+std::vector<RestrictionMap*> SQLite3Driver::get_restriction_maps()
+{
+  if (_db.isOpen()) {
+    std::vector<RestrictionMap*> restriction_map_list;
+    QSqlQuery restriction_map_query{ _db };
+    restriction_map_query.prepare(select_all_restriction_maps);
+    restriction_map_query.exec();
+    while (restriction_map_query.next()) {
+      auto temp = std::make_unique<RestrictionMap>();
+      restriction_map_query.bindValue(":fk_scene", temp->fk_scene);
+      restriction_map_query.bindValue(":fk_restriction", temp->fk_restriction);
+      restriction_map_list.push_back(temp.release());
+    }
+    return restriction_map_list;
+  }
+  throw std::runtime_error("No db connection");
+}
+std::vector<Objective*> SQLite3Driver::get_objectives()
+{
+  if (_db.isOpen()) {
+    std::vector<Objective*> objective_list;
+    QSqlQuery objective_query{ _db };
+    objective_query.prepare(select_all_objectives);
+    objective_query.exec();
+    while (objective_query.next()) {
+      auto temp = std::make_unique<Objective>();
+      auto record = objective_query.record();
+      objective_query.bindValue(":name", temp->name);
+      objective_query.bindValue(":description", temp->description);
+      objective_query.bindValue(":citations", temp->citations);
+      objective_list.push_back(temp.release());
+    }
+    return objective_list;
+  }
+  throw std::runtime_error("No db connection");
+}
+std::vector<Property*> SQLite3Driver::get_properties()
+{
+  if (_db.isOpen()) {
+    std::vector<Property*> property_list;
+    QSqlQuery property_query{ _db };
+    property_query.prepare(select_all_properties);
+    property_query.exec();
+    while (property_query.next()) {
+      auto temp = std::make_unique<Property>();
+      auto record = property_query.record();
+      temp->name  = record.value(0).toString();
+      temp->value = record.value(1).toString();
+      property_list.push_back(temp.release());
+    }
+    return property_list;
+  }
+  throw std::runtime_error("No db connection");
+}
+std::vector<Prop*> SQLite3Driver::get_props()
+{
+  if (_db.isOpen()) {
+    std::vector<Prop*> prop_list;
+    QSqlQuery prop_query{ _db };
+    prop_query.prepare(select_all_props);
+    prop_query.exec();
+    while (prop_query.next()) {
+      auto temp = std::make_unique<Prop>();
+      prop_query.bindValue(":equipment", temp->equipment);
+
+      auto record = prop_query.record();
+      temp->id = record.value(0).toInt();
+      temp->equipment = record.value(1).toString();
+      prop_list.push_back(temp.release());
+    }
+    return prop_list;
+  }
+  throw std::runtime_error("No db connection");
+}
+std::vector<Restriction*> SQLite3Driver::get_restrictions()
+{
+  if (_db.isOpen()) {
+    std::vector<Restriction*> restriction_list;
+    QSqlQuery restriction_query{ _db };
+    restriction_query.prepare(select_all_properties);
+    restriction_query.exec();
+    while (restriction_query.next()) {
+      auto temp = std::make_unique<Restriction>();
+      auto record = restriction_query.record();
+      temp->name = record.value(0).toString();
+      temp->value = record.value(1).toString();
+      restriction_list.push_back(temp.release());
+    }
+    return restriction_list;
+  }
+  throw std::runtime_error("No db connection");
+}
+std::vector<Role*> SQLite3Driver::get_roles()
+{
+  if (_db.isOpen()) {
+    std::vector<Role*> role_list;
+    QSqlQuery role_query{ _db };
+    role_query.prepare(select_all_roles);
+    role_query.exec();
+    while (role_query.next()) {
+      auto temp = std::make_unique<Role>();
+      auto record = role_query.record();
+      temp->name = record.value(0).toString();
+      temp->description = record.value(1).toString();
+      role_list.push_back(temp.release());
+    }
+    return role_list;
+  }
+  throw std::runtime_error("No db connection");
+}
+std::vector<Treatment*> SQLite3Driver::get_treatments()
+{
+  if (_db.isOpen()) {
+    std::vector<Treatment*> treatment_list;
+    QSqlQuery treatment_query{ _db };
+    treatment_query.prepare(select_all_treatments);
+    treatment_query.exec();
+    while (treatment_query.next()) {
+      auto temp = std::make_unique<Treatment>();
+      auto record = treatment_query.record();
+      temp->medical_name = record.value(0).toString();
+      temp->common_name = record.value(1).toString();
+      temp->description = record.value(2).toString();
+      temp->equipment = record.value(3).toString();
+      temp->citations = record.value(4).toString();
+      treatment_list.push_back(temp.release());
+    }
+    return treatment_list;
+  }
+  throw std::runtime_error("No db connection");
+}
+std::vector<Scene*> SQLite3Driver::get_scenes()
+{
+  if (_db.isOpen()) {
+    std::vector<Scene*> scene_list;
+    QSqlQuery scene_query{ _db };
+    scene_query.prepare(select_all_scenes);
+    scene_query.exec();
+    while (scene_query.next()) {
+      auto temp = std::make_unique<Scene>();      
+      auto record = scene_query.record();
+      temp->name = record.value(0).toString();      
+      scene_list.push_back(temp.release());
+    }
+    return scene_list;
+  }
+  throw std::runtime_error("No db connection");
 }
 
 }
