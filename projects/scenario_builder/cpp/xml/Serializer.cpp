@@ -237,6 +237,9 @@ void Serializer::generate_msdl_stream(SQLite3Driver* driver)
   auto scenarioID_modificationDateType = msdl_1::MilitaryScenarioType::ScenarioID_type::modificationDate_type(get_now());
   auto scenarioID_securityClassificationType = msdl_1::MilitaryScenarioType::ScenarioID_type::securityClassification_type(security);
   auto scenarioID_descriptionType = msdl_1::MilitaryScenarioType::ScenarioID_type::description_type(description);
+  //
+  
+  //
 
   auto msdl_scenario_id = std::make_unique<msdl_1::MilitaryScenarioType::ScenarioID_type>(scenarioID_nameType, scenarioID_typeType, scenarioID_versionType, scenarioID_modificationDateType, scenarioID_securityClassificationType, scenarioID_descriptionType);
   auto msdl_military_version = std::make_unique<msdl_1::MilitaryScenarioType::Options_type>(msdl_1::MilitaryScenarioType::Options_type::MSDLVersion_type(""));
@@ -261,17 +264,21 @@ void Serializer::generate_pfc_stream(SQLite3Driver* driver)
 {
   using pfc::schema::ScenarioSchema;
   
-  std::vector<Property*> property_list = driver->get_properties();
-  std::string name = property_list[0]->name.toStdString();
-  std::string value = property_list[0]->value.toStdString();
+  std::vector<Injury*> injury_list = driver->get_injuries();
+  std::string medical_name = injury_list[0]->medical_name.toStdString();
+  std::string common_name = injury_list[0]->common_name.toStdString();
+  std::string description = injury_list[0]->description.toStdString();
+  std::string citations = injury_list[0]->citations.toStdString();
+  float severity_max = injury_list[0]->severity_min;
+  float severity_min = injury_list[0]->severity_max;
 
   namespace pfcs = pfc::schema;
   auto injury_id = std::make_unique<pfcs::injury::id_type>("");
-  auto injury_medical_name = std::make_unique<pfcs::injury::medical_name_type>();
-  auto injury_description = std::make_unique<pfcs::injury::description_type>();
+  auto injury_medical_name = std::make_unique<pfcs::injury::medical_name_type>(medical_name);
+  auto injury_description = std::make_unique<pfcs::injury::description_type>(description);
 
   auto num_range = pfcs::injury_severity_range();
-  auto injury_severity_range = std::make_unique<pfcs::injury::severity_range_type>(num_range);
+  auto injury_severity_range = std::make_unique<pfcs::injury::severity_range_type>();
   auto injuries = std::make_unique<pfcs::injury>(std::move(injury_id), std::move(injury_medical_name), std::move(injury_description), std::move(injury_severity_range));
   auto conditions = std::make_unique<pfcs::ScenarioSchema::conditions_type>(std::move(injuries));
 

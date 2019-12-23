@@ -2973,6 +2973,7 @@ void SQLite3Driver::properties()
     while (query.next()) {
       auto property = std::make_unique<pfc::Property>();
       auto record = query.record();
+      int ct = record.count();
       assert(record.count() == PROPERTY_COLUMN_COUNT);
       assign_property(record, *property);
       _properties.push_back(property.release());
@@ -4032,16 +4033,15 @@ std::vector<Author*> SQLite3Driver::get_authors()
     author_query.exec();
     while (author_query.next()) {
       auto temp = std::make_unique<Author>();
-      author_query.bindValue(":first", temp->first);
-      author_query.bindValue(":middle", temp->middle);
-      author_query.bindValue(":last", temp->last);
-      author_query.bindValue(":email", temp->email);
-      author_query.bindValue(":zip", temp->zip);
-      author_query.bindValue(":plus_4", temp->plus_4);
-      author_query.bindValue(":state", temp->state);
-      author_query.bindValue(":country", temp->country);
-      author_query.bindValue(":phone", temp->phone);
-      author_query.bindValue(":organization", temp->organization);
+      auto record = author_query.record();
+      temp->first = record.value(1).toString();
+      temp->last = record.value(2).toString();
+      temp->email = record.value(3).toString();
+      temp->zip = record.value(4).toString();
+      temp->state = record.value(5).toString();
+      temp->country = record.value(6).toString();
+      temp->phone = record.value(7).toString();
+      temp->organization = record.value(8).toString();
       author_list.push_back(temp.release());
     }
     return author_list;
@@ -4057,11 +4057,12 @@ std::vector<Assessment*> SQLite3Driver::get_assessments()
     assessment_query.exec();
     while (assessment_query.next()) {
       auto temp = std::make_unique<Assessment>();
-      assessment_query.bindValue(":name", temp->name);
-      assessment_query.bindValue(":description", temp->description);
-      assessment_query.bindValue(":type", temp->type);
-      assessment_query.bindValue(":available_points", temp->available_points);
-      assessment_query.bindValue(":criteria", temp->criteria);
+      auto record = assessment_query.record();
+      temp->name = record.value(1).toString();
+      temp->description = record.value(2).toString();
+      temp->type = record.value(3).toString();
+      temp->available_points = record.value(4).toInt();
+      temp->criteria = record.value(5).toString();
       assessment_list.push_back(temp.release());
     }
     return assessment_list;
@@ -4077,11 +4078,12 @@ std::vector<Citation*> SQLite3Driver::get_citations()
     citation_query.exec();
     while (citation_query.next()) {
       auto temp = std::make_unique<Citation>();
-      citation_query.bindValue(":key", temp->key);
-      citation_query.bindValue(":title", temp->title);
-      citation_query.bindValue(":authors", temp->authors);
-      citation_query.bindValue(":year", temp->year);
-      citation_query.bindValue(":publisher", temp->publisher);
+      auto record = citation_query.record();
+      temp->key = record.value(1).toInt();
+      temp->title = record.value(2).toString();
+      temp->authors = record.value(3).toString();
+      temp->year = record.value(4).toString();
+      temp->publisher = record.value(5).toString();
       citation_list.push_back(temp.release());
     }
     return citation_list;
@@ -4097,11 +4099,12 @@ std::vector<Event*> SQLite3Driver::get_events()
     event_query.exec();
     while (event_query.next()) {
       auto temp = std::make_unique<Event>();
-      event_query.bindValue(":name", temp->name);
-      event_query.bindValue(":location", temp->location);
-      event_query.bindValue(":actor", temp->actor);
-      event_query.bindValue(":equipment", temp->equipment);
-      event_query.bindValue(":description", temp->description);
+      auto record = event_query.record();
+      temp->name = record.value(1).toString();
+      temp->location = record.value(2).toInt();
+      temp->actor = record.value(3).toInt();
+      temp->equipment = record.value(4).toString();
+      temp->description = record.value(5).toString();
       event_list.push_back(temp.release());
     }
     return event_list;
@@ -4117,11 +4120,12 @@ std::vector<Equipment*> SQLite3Driver::get_equipments()
     equipment_query.exec();
     while (equipment_query.next()) {
       auto temp = std::make_unique<Equipment>();
-      equipment_query.bindValue(":type", temp->type);
-      equipment_query.bindValue(":name", temp->name);
-      equipment_query.bindValue(":description", temp->description);
-      equipment_query.bindValue(":citations", temp->citations);
-      equipment_query.bindValue(":image", temp->image);
+      auto record = equipment_query.record();
+      temp->type = record.value(1).toInt();
+      temp->name = record.value(2).toString();
+      temp->description = record.value(3).toString();
+      temp->citations = record.value(4).toString();
+      temp->image = record.value(5).toString();
       equipment_list.push_back(temp.release());
     }
     return equipment_list;
@@ -4137,12 +4141,13 @@ std::vector<Injury*> SQLite3Driver::get_injuries()
     injury_query.exec();
     while (injury_query.next()) {
       auto temp = std::make_unique<Injury>();
-      injury_query.bindValue(":medical_name", temp->medical_name);
-      injury_query.bindValue(":common_name", temp->common_name);
-      injury_query.bindValue(":description", temp->description);
-      injury_query.bindValue(":citations", temp->citations);
-      injury_query.bindValue(":severity_min", temp->severity_min);
-      injury_query.bindValue(":severity_max", temp->severity_max);
+      auto record = injury_query.record();
+      temp->medical_name = record.value(1).toString();
+      temp->common_name = record.value(2).toString();
+      temp->description = record.value(3).toString();
+      temp->citations = record.value(4).toString();
+      temp->severity_min = record.value(5).toFloat();
+      temp->severity_max = record.value(6).toFloat();
       injury_list.push_back(temp.release());
     }
     return injury_list;
@@ -4158,12 +4163,12 @@ std::vector<InjurySet*> SQLite3Driver::get_injury_sets()
     injury_set_query.exec();
     while (injury_set_query.next()) {
       auto temp = std::make_unique<InjurySet>();
-      injury_set_query.bindValue(":injuries", temp->injuries);
-      injury_set_query.bindValue(":name", temp->name);
-      injury_set_query.bindValue(":description", temp->description);
-      injury_set_query.bindValue(":locations", temp->locations);
-      injury_set_query.bindValue(":injuries", temp->injuries);
-      injury_set_query.bindValue(":severities", temp->severities);
+      auto record = injury_set_query.record();
+      temp->name = record.value(1).toString();
+      temp->description = record.value(2).toString();
+      temp->injuries = record.value(3).toString();
+      temp->locations = record.value(4).toString();
+      temp->severities = record.value(5).toString();
       injury_set_list.push_back(temp.release());
     }
     return injury_set_list;
@@ -4179,8 +4184,9 @@ std::vector<RoleMap*> SQLite3Driver::get_role_maps()
     role_map_query.exec();
     while (role_map_query.next()) {
       auto temp = std::make_unique<RoleMap>();
-      role_map_query.bindValue(":fk_scene", temp->fk_scene);
-      role_map_query.bindValue(":fk_role", temp->fk_role);
+      auto record = role_map_query.record();
+      temp->fk_scene = record.value(1).toInt();
+      temp->fk_role = record.value(2).toInt();
       role_map_list.push_back(temp.release());
     }
     return role_map_list;
@@ -4196,8 +4202,9 @@ std::vector<EventMap*> SQLite3Driver::get_event_maps()
     event_map_query.exec();
     while (event_map_query.next()) {
       auto temp = std::make_unique<EventMap>();
-      event_map_query.bindValue(":fk_scene", temp->fk_scene);
-      event_map_query.bindValue(":fk_event", temp->fk_event);
+      auto record = event_map_query.record();
+      temp->fk_scene = record.value(1).toInt();
+      temp->fk_event = record.value(2).toInt();
       event_map_list.push_back(temp.release());
     }
     return event_map_list;
@@ -4213,8 +4220,9 @@ std::vector<PropMap*> SQLite3Driver::get_prop_maps()
     prop_map_query.exec();
     while (prop_map_query.next()) {
       auto temp = std::make_unique<PropMap>();
-      prop_map_query.bindValue(":fk_scene", temp->fk_scene);
-      prop_map_query.bindValue(":fk_prop", temp->fk_prop);
+      auto record = prop_map_query.record();
+      temp->fk_scene = record.value(1).toInt();
+      temp->fk_prop = record.value(2).toInt();
       prop_map_list.push_back(temp.release());
     }
     return prop_map_list;
@@ -4230,8 +4238,9 @@ std::vector<CitationMap*> SQLite3Driver::get_citation_maps()
     citation_map_query.exec();
     while (citation_map_query.next()) {
       auto temp = std::make_unique<CitationMap>();
-      citation_map_query.bindValue(":fk_scene", temp->fk_scene);
-      citation_map_query.bindValue(":fk_citation", temp->fk_citation);
+      auto record = citation_map_query.record();
+      temp->fk_scene = record.value(1).toInt();
+      temp->fk_citation = record.value(2).toInt();
       citation_map_list.push_back(temp.release());
     }
     return citation_map_list;
@@ -4247,8 +4256,9 @@ std::vector<EquipmentMap*> SQLite3Driver::get_equipment_maps()
     equipment_map_query.exec();
     while (equipment_map_query.next()) {
       auto temp = std::make_unique<EquipmentMap>();
-      equipment_map_query.bindValue(":fk_scene", temp->fk_scene);
-      equipment_map_query.bindValue(":fk_equipment", temp->fk_equipment);
+      auto record = equipment_map_query.record();
+      temp->fk_scene = record.value(1).toInt();
+      temp->fk_equipment = record.value(2).toInt();
       equipment_map_list.push_back(temp.release());
     }
     return equipment_map_list;
@@ -4264,8 +4274,9 @@ std::vector<RestrictionMap*> SQLite3Driver::get_restriction_maps()
     restriction_map_query.exec();
     while (restriction_map_query.next()) {
       auto temp = std::make_unique<RestrictionMap>();
-      restriction_map_query.bindValue(":fk_scene", temp->fk_scene);
-      restriction_map_query.bindValue(":fk_restriction", temp->fk_restriction);
+      auto record = restriction_map_query.record();
+      temp->fk_scene = record.value(1).toInt();
+      temp->fk_restriction = record.value(2).toInt();
       restriction_map_list.push_back(temp.release());
     }
     return restriction_map_list;
@@ -4282,9 +4293,9 @@ std::vector<Objective*> SQLite3Driver::get_objectives()
     while (objective_query.next()) {
       auto temp = std::make_unique<Objective>();
       auto record = objective_query.record();
-      objective_query.bindValue(":name", temp->name);
-      objective_query.bindValue(":description", temp->description);
-      objective_query.bindValue(":citations", temp->citations);
+      temp->name = record.value(1).toString();
+      temp->description = record.value(2).toString();
+      temp->citations = record.value(3).toString();
       objective_list.push_back(temp.release());
     }
     return objective_list;
@@ -4301,8 +4312,8 @@ std::vector<Property*> SQLite3Driver::get_properties()
     while (property_query.next()) {
       auto temp = std::make_unique<Property>();
       auto record = property_query.record();
-      temp->name  = record.value(0).toString();
-      temp->value = record.value(1).toString();
+      temp->name  = record.value(1).toString();
+      temp->value = record.value(2).toString();
       property_list.push_back(temp.release());
     }
     return property_list;
@@ -4318,8 +4329,6 @@ std::vector<Prop*> SQLite3Driver::get_props()
     prop_query.exec();
     while (prop_query.next()) {
       auto temp = std::make_unique<Prop>();
-      prop_query.bindValue(":equipment", temp->equipment);
-
       auto record = prop_query.record();
       temp->id = record.value(0).toInt();
       temp->equipment = record.value(1).toString();
@@ -4339,8 +4348,8 @@ std::vector<Restriction*> SQLite3Driver::get_restrictions()
     while (restriction_query.next()) {
       auto temp = std::make_unique<Restriction>();
       auto record = restriction_query.record();
-      temp->name = record.value(0).toString();
-      temp->value = record.value(1).toString();
+      temp->name = record.value(1).toString();
+      temp->value = record.value(2).toString();
       restriction_list.push_back(temp.release());
     }
     return restriction_list;
@@ -4375,11 +4384,11 @@ std::vector<Treatment*> SQLite3Driver::get_treatments()
     while (treatment_query.next()) {
       auto temp = std::make_unique<Treatment>();
       auto record = treatment_query.record();
-      temp->medical_name = record.value(0).toString();
-      temp->common_name = record.value(1).toString();
-      temp->description = record.value(2).toString();
-      temp->equipment = record.value(3).toString();
-      temp->citations = record.value(4).toString();
+      temp->medical_name = record.value(1).toString();
+      temp->common_name = record.value(2).toString();
+      temp->description = record.value(3).toString();
+      temp->equipment = record.value(4).toString();
+      temp->citations = record.value(5).toString();
       treatment_list.push_back(temp.release());
     }
     return treatment_list;
@@ -4396,7 +4405,7 @@ std::vector<Scene*> SQLite3Driver::get_scenes()
     while (scene_query.next()) {
       auto temp = std::make_unique<Scene>();      
       auto record = scene_query.record();
-      temp->name = record.value(0).toString();      
+      temp->name = record.value(1).toString();      
       scene_list.push_back(temp.release());
     }
     return scene_list;

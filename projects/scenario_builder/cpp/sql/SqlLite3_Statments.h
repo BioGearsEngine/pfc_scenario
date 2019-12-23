@@ -65,7 +65,7 @@ inline namespace sqlite3 {
 
   constexpr auto drop_all_assessments = R"( DELETE FROM assessments; )";
   constexpr auto count_assessments = R"( SELECT COUNT(assessment_id) FROM assessments; )";
-  constexpr auto select_all_assessments = R"( SELECT * FROM assessments ORDER BY name; )";
+  constexpr auto select_all_assessments = R"( SELECT assessment_id,name,description,type,available_points,criteria FROM assessments ORDER BY name; )";
 
   constexpr auto select_assessment_by_id
     = R"( SELECT * FROM assessments WHERE assessment_id = :id; )";
@@ -125,7 +125,7 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_authors = R"( DELETE FROM authors; )";
   constexpr auto count_authors = R"( SELECT COUNT(author_id) FROM authors; )";
-  constexpr auto select_all_authors = R"( SELECT * FROM authors ORDER BY name_last; )";
+  constexpr auto select_all_authors = R"( SELECT author_id,name_first,name_last,email,zipcode,state,country,phone,organization FROM authors ORDER BY name_last; )";
 
   constexpr auto select_author_by_id
     = R"( SELECT * FROM authors WHERE author_id = :id ; )";
@@ -194,7 +194,7 @@ inline namespace sqlite3 {
   constexpr auto drop_all_equipment = R"( DELETE FROM equipment; )";
   constexpr auto count_equipments = R"( SELECT COUNT(equipment_id) FROM equipments; )";
   constexpr auto count_equipments_in_scene = R"( SELECT COUNT(equipment_map_id) FROM equipment_maps WHERE :id = fk_scene ; )";
-  constexpr auto select_all_equipments = R"( SELECT * FROM equipments ORDER BY name; )";
+  constexpr auto select_all_equipments = R"( SELECT equipment_id,type,name,description,citations,image FROM equipments ORDER BY name; )";
 
   constexpr auto select_equipment_by_id
     = R"( SELECT * FROM equipments WHERE equipment_id = :id ; )";
@@ -250,7 +250,7 @@ inline namespace sqlite3 {
   constexpr auto drop_all_events = R"( DELETE FROM events; )";
   constexpr auto count_events = R"( SELECT COUNT(event_id) FROM events; )";
   constexpr auto count_events_in_scene = R"( SELECT COUNT(event_map_id) FROM event_maps WHERE :id = fk_scene ; )";
-  constexpr auto select_all_events = R"( SELECT * FROM events ORDER BY name; )";
+  constexpr auto select_all_events = R"( SELECT event_id,name,location,actor,equipment,description FROM events ORDER BY name; )";
 
   constexpr auto select_event_by_id
     = R"( SELECT * FROM events WHERE event_id = :id ; )";
@@ -305,7 +305,7 @@ inline namespace sqlite3 {
 
   constexpr auto drop_all_injuries = R"( DELETE FROM injuries; )";
   constexpr auto count_injuries = R"( SELECT COUNT(injury_id) FROM injuries; )";
-  constexpr auto select_all_injuries = R"( SELECT * FROM injuries ORDER BY medical_name; )";
+  constexpr auto select_all_injuries = R"( SELECT injury_id,medical_name,common_name,description,citations,min,max FROM injuries ORDER BY medical_name; )";
 
   constexpr auto select_injury_by_id
     = R"( SELECT * FROM injuries WHERE injury_id = :id ; )";
@@ -367,7 +367,7 @@ inline namespace sqlite3 {
 
   constexpr auto drop_all_injury_sets = R"( DELETE FROM injury_sets; )";
   constexpr auto count_injury_sets = R"( SELECT COUNT(injury_set_id) FROM injury_sets; )";
-  constexpr auto select_all_injury_sets = R"( SELECT * FROM injury_sets ORDER BY name; )";
+  constexpr auto select_all_injury_sets = R"( SELECT injury_set_id,name,description,injuries,locations,severities FROM injury_sets ORDER BY name; )";
 
   constexpr auto select_injury_set_by_id
     = R"( SELECT * FROM injury_sets WHERE injury_set_id = :id ; )";
@@ -419,7 +419,7 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_locations = R"( DELETE FROM locations; )";
   constexpr auto count_locations = R"( SELECT COUNT(location_id) FROM locations; )";
-  constexpr auto select_all_locations = R"( SELECT * FROM locations ORDER BY name; )";
+  constexpr auto select_all_locations = R"( SELECT location_id,name,scene_name,time_of_day,environment FROM locations ORDER BY name; )";
 
   constexpr auto select_location_by_id
     = R"( SELECT * FROM locations WHERE location_id = :id ; )";
@@ -467,7 +467,7 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_role_maps = R"( DELETE FROM role_maps; )";
   constexpr auto count_role_maps = R"( SELECT COUNT(map_id) FROM role_maps; )";
-  constexpr auto select_all_role_maps = R"( SELECT * FROM role_maps; )";
+  constexpr auto select_all_role_maps = R"( SELECT map_id,fk_scene,fk_role FROM role_maps; )";
 
   constexpr auto select_role_map_by_id
     = R"( SELECT * FROM role_maps WHERE map_id = :id ; )";
@@ -526,7 +526,7 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_event_maps = R"( DELETE FROM event_maps; )";
   constexpr auto count_event_maps = R"( SELECT COUNT(event_map_id) FROM event_maps; )";
-  constexpr auto select_all_event_maps = R"( SELECT * FROM event_maps; )";
+  constexpr auto select_all_event_maps = R"( SELECT event_map_id,fk_scene,fk_event FROM event_maps; )";
 
   constexpr auto select_event_map_by_id
     = R"( SELECT * FROM event_maps WHERE event_map_id = :id ; )";
@@ -585,7 +585,7 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_prop_maps = R"( DELETE FROM prop_maps; )";
   constexpr auto count_prop_maps = R"( SELECT COUNT(prop_map_id) FROM prop_maps; )";
-  constexpr auto select_all_prop_maps = R"( SELECT * FROM prop_maps; )";
+  constexpr auto select_all_prop_maps = R"( SELECT prop_map_id,fk_scene,fk_prop FROM prop_maps; )";
 
   constexpr auto select_prop_map_by_id
     = R"( SELECT * FROM prop_maps WHERE prop_map_id = :id ; )";
@@ -644,7 +644,7 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_citation_maps = R"( DELETE FROM citation_maps; )";
   constexpr auto count_citation_maps = R"( SELECT COUNT(citation_map_id) FROM citation_maps; )";
-  constexpr auto select_all_citation_maps = R"( SELECT * FROM citation_maps; )";
+  constexpr auto select_all_citation_maps = R"( SELECT citation_map_id,fk_scene,fk_citation FROM citation_maps; )";
 
   constexpr auto select_citation_map_by_id
     = R"( SELECT * FROM citation_maps WHERE citation_map_id = :id ; )";
@@ -703,7 +703,7 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_equipment_maps = R"( DELETE FROM equipment_maps; )";
   constexpr auto count_equipment_maps = R"( SELECT COUNT(equipment_map_id) FROM equipment_maps; )";
-  constexpr auto select_all_equipment_maps = R"( SELECT * FROM equipment_maps; )";
+  constexpr auto select_all_equipment_maps = R"( SELECT equipment_map_id,fk_scene,fk_equipment FROM equipment_maps; )";
 
   constexpr auto select_equipment_map_by_id
     = R"( SELECT * FROM equipment_maps WHERE equipment_map_id = :id ; )";
@@ -762,7 +762,7 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_restriction_maps = R"( DELETE FROM restriction_maps; )";
   constexpr auto count_restriction_maps = R"( SELECT COUNT(restriction_map_id) FROM restriction_maps; )";
-  constexpr auto select_all_restriction_maps = R"( SELECT * FROM restriction_maps; )";
+  constexpr auto select_all_restriction_maps = R"( SELECT restriction_map_id,fk_scene,fk_restriction FROM restriction_maps; )";
 
   constexpr auto select_restriction_map_by_id
     = R"( SELECT * FROM restriction_maps WHERE restriction_map_id = :id ; )";
@@ -823,7 +823,7 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_objectives = R"( DELETE FROM objectives; )";
   constexpr auto count_objectives = R"( SELECT COUNT(objective_id) FROM objectives; )";
-  constexpr auto select_all_objectives = R"( SELECT * FROM objectives ORDER BY name; )";
+  constexpr auto select_all_objectives = R"( SELECT objective_id,name,description,citations FROM objectives ORDER BY name; )";
 
   constexpr auto select_objective_by_id
     = R"( SELECT * FROM objectives WHERE objective_id = :id ; )";
@@ -868,7 +868,7 @@ inline namespace sqlite3 {
   constexpr auto drop_all_props = R"( DELETE FROM props; )";
   constexpr auto count_props = R"( SELECT COUNT(prop_id) FROM props; )";
   constexpr auto count_props_in_scene = R"( SELECT COUNT(prop_map_id) FROM prop_maps WHERE :id = fk_scene ; )";
-  constexpr auto select_all_props = R"( SELECT * FROM props ORDER BY equipment; )";
+  constexpr auto select_all_props = R"( SELECT prop_id,equipment FROM props ORDER BY equipment; )";
 
   constexpr auto select_prop_by_id
     = R"( SELECT * FROM props WHERE prop_id = :id ; )";
@@ -903,7 +903,7 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_properties = R"( DELETE FROM properties; )";
   constexpr auto count_properties = R"( SELECT COUNT(property_id) FROM properties; )";
-  constexpr auto select_all_properties = R"( SELECT name,value FROM properties ORDER BY property_id; )";
+  constexpr auto select_all_properties = R"( SELECT property_id,name,value FROM properties ORDER BY property_id; )";
 
   constexpr auto select_property_by_id
     = R"( SELECT * FROM properties WHERE property_id = :id ; )";
@@ -955,7 +955,7 @@ inline namespace sqlite3 {
   constexpr auto drop_all_citations = R"( DELETE FROM citations; )";
   constexpr auto count_citations = R"( SELECT COUNT(citation_id) FROM citations; )";
   constexpr auto count_citations_in_scene = R"( SELECT COUNT(citation_map_id) FROM citation_maps WHERE :id = fk_scene ; )";
-  constexpr auto select_all_citations = R"( SELECT * FROM citations ORDER BY title; )";
+  constexpr auto select_all_citations = R"( SELECT citation_id,key,title,authors,year,publisher FROM citations ORDER BY title; )";
 
   constexpr auto select_citation_by_id
     = R"( SELECT * FROM citations WHERE citation_id = :id ; )";
@@ -1022,7 +1022,7 @@ inline namespace sqlite3 {
   constexpr auto drop_all_restrictions = R"( DELETE FROM restrictions; )";
   constexpr auto count_restrictions = R"( SELECT COUNT(restriction_id) FROM restrictions; )";
   constexpr auto count_restrictions_in_scene = R"( SELECT COUNT(restriction_map_id) FROM restriction_maps WHERE :id = fk_scene ; )";
-  constexpr auto select_all_restrictions = R"( SELECT * FROM restrictions ORDER BY name; )";
+  constexpr auto select_all_restrictions = R"( SELECT restriction_id,name,value FROM restrictions ORDER BY name; )";
 
   constexpr auto select_restriction_by_id
     = R"( SELECT * FROM restrictions WHERE restriction_id = :id ; )";
@@ -1065,7 +1065,7 @@ inline namespace sqlite3 {
   constexpr auto drop_all_roles = R"( DELETE FROM roles; )";
   constexpr auto count_roles = R"( SELECT COUNT(role_id) FROM roles; )";
   constexpr auto count_roles_in_scene = R"( SELECT COUNT(map_id) FROM role_maps WHERE :id = fk_scene ; )";
-  constexpr auto select_all_roles = R"( SELECT * FROM roles ORDER BY name; )";
+  constexpr auto select_all_roles = R"( SELECT role_id,name,description FROM roles ORDER BY name; )";
 
   constexpr auto select_role_by_id
     = R"( SELECT * FROM roles WHERE role_id = :id ; )";
@@ -1109,7 +1109,7 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_scenes = R"( DELETE FROM scenes; )";
   constexpr auto count_scenes = R"( SELECT COUNT(scene_id) FROM scenes; )";
-  constexpr auto select_all_scenes = R"( SELECT * FROM scenes ORDER BY name; )";
+  constexpr auto select_all_scenes = R"( SELECT scene_id,name FROM scenes ORDER BY name; )";
 
   constexpr auto select_scene_by_id
     = R"( SELECT * FROM scenes WHERE scene_id = :id ; )";
@@ -1154,7 +1154,7 @@ inline namespace sqlite3 {
 
   constexpr auto drop_all_treatments = R"( DELETE FROM treatments; )";
   constexpr auto count_treatments = R"( SELECT COUNT(treatment_id) FROM treatments; )";
-  constexpr auto select_all_treatments = R"( SELECT * FROM treatments ORDER BY medical_name; )";
+  constexpr auto select_all_treatments = R"( SELECT treatment_id,medical_name,common_name,description,equipment,citations FROM treatments ORDER BY medical_name; )";
 
   constexpr auto select_treatment_by_medical_name
     = R"( SELECT * FROM treatments WHERE medical_name = :medical_name ORDER BY medical_name; )";

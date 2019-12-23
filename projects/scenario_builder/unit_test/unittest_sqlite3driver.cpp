@@ -7,6 +7,7 @@
 
 #include "sql/SqlLite3Driver.h"
 #include "sql/SqlLite3_Statments.h"
+#include "xml/Serializer.h"
 
 #ifdef DISABLE_BIOGEARS_Path_TEST
 #define TEST_FIXTURE_NAME DISABLED_SQLite3Driver
@@ -46,6 +47,13 @@ void TEST_FIXTURE_NAME::TearDown()
 {
 }
 
+//TEST_F(TEST_FIXTURE_NAME, saving)
+//{
+//  pfc::SQLite3Driver driver("pfc_sb_working.sqlite", "", nullptr);
+//  pfc::Serializer serializer(nullptr);
+//  serializer.save(&driver);
+//}
+
 TEST_F(TEST_FIXTURE_NAME, Constructor)
 {
   {
@@ -68,7 +76,7 @@ TEST_F(TEST_FIXTURE_NAME, Constructor)
 TEST_F(TEST_FIXTURE_NAME, Insert_Assessment)
 {
   using namespace pfc;
-  Assessment assessment_1;
+  Assessment assessment_1; //   Assessment* assessment_1 = new Assessment(NULLPTR);
   Assessment assessment_2;
   Assessment assessment_3;
 
