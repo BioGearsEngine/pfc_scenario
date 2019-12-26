@@ -3416,3 +3416,386 @@ TEST_F(TEST_FIXTURE_NAME, CitationMap_Test_Scene_Deletion)
   _db.remove_scene(&scene_3);
   EXPECT_EQ(0, _db.citation_map_count());
 }
+
+TEST_F(TEST_FIXTURE_NAME, get_authors)
+{
+  using namespace pfc;
+  Author author_1;
+
+  author_1.first = "Solid";
+  author_1.last = "Snake";
+  author_1.email = "SolidSnake@MetalGear.com";
+
+  EXPECT_EQ(0, _db.author_count());
+  EXPECT_TRUE(_db.update_author(&author_1));
+
+  std::vector<Author*> list = _db.get_authors();
+
+  EXPECT_TRUE(list[0]->first.compare(author_1.first) == 0);
+  EXPECT_TRUE(list[0]->last.compare(author_1.last) == 0);
+  EXPECT_TRUE(list[0]->email.compare(author_1.email) == 0);
+}
+TEST_F(TEST_FIXTURE_NAME, get_assessments)
+{
+  using namespace pfc;
+  Assessment assessment_1; //   Assessment* assessment_1 = new Assessment(NULLPTR);
+
+  assessment_1.name = "Math Test";
+  assessment_1.description = "Gotta do some math";
+  assessment_1.type = "Don't fail";
+  assessment_1.available_points = 100;
+  assessment_1.criteria = "what's 2+2";
+
+  EXPECT_EQ(0, _db.assessment_count());
+  EXPECT_TRUE(_db.update_assessment(&assessment_1));
+
+  std::vector<Assessment*> list = _db.get_assessments();
+
+  EXPECT_TRUE(list[0]->name.compare(assessment_1.name) == 0);
+  EXPECT_TRUE(list[0]->description.compare(assessment_1.description) == 0);
+  EXPECT_TRUE(list[0]->type.compare(assessment_1.type) == 0);
+  EXPECT_TRUE(list[0]->available_points == assessment_1.available_points);
+  EXPECT_TRUE(list[0]->criteria.compare(assessment_1.criteria) == 0);
+}
+TEST_F(TEST_FIXTURE_NAME, get_citations)
+{
+  using namespace pfc;
+  Citation citation_1;
+
+  citation_1.key = "skeleton key";
+  citation_1.title = "Mr. Bones' Wild Ride";
+  citation_1.authors = "Nathan;Angel";
+  citation_1.year = "1000";
+  citation_1.publisher = "Boneland";
+
+  EXPECT_EQ(0, _db.citation_count());
+  EXPECT_TRUE(_db.update_citation(&citation_1));
+
+  std::vector<Citation*> list = _db.get_citations();
+
+  EXPECT_TRUE(list[0]->key.compare(citation_1.key) == 0);
+  EXPECT_TRUE(list[0]->title.compare(citation_1.title) == 0);
+  EXPECT_TRUE(list[0]->authors.compare(citation_1.authors) == 0);
+  EXPECT_TRUE(list[0]->year.compare(citation_1.year) == 0);
+  EXPECT_TRUE(list[0]->publisher.compare(citation_1.publisher) == 0);
+}
+TEST_F(TEST_FIXTURE_NAME, get_events)
+{
+  using namespace pfc;
+  Event event_1;
+
+  event_1.name = "Barbecue";
+  event_1.location = 1;
+  event_1.actor = 2;
+  event_1.equipment = "Spatula";
+  event_1.description = "People cooking and eating meat outdoors";
+
+  EXPECT_EQ(0, _db.event_count());
+  EXPECT_TRUE(_db.update_event(&event_1));
+
+  std::vector<Event*> list = _db.get_events();
+
+  EXPECT_TRUE(list[0]->name.compare(event_1.name) == 0);
+  EXPECT_TRUE(list[0]->description.compare(event_1.description) == 0);
+  EXPECT_TRUE(list[0]->equipment.compare(event_1.equipment) == 0);
+  EXPECT_TRUE(list[0]->location == event_1.location);
+  EXPECT_TRUE(list[0]->actor == event_1.actor);
+}
+TEST_F(TEST_FIXTURE_NAME, get_equipments)
+{
+  using namespace pfc;
+  Equipment equipment_1;
+
+  equipment_1.name = "Keytar";
+  equipment_1.type = 1;
+  equipment_1.description = "Got a sick keytar solo later";
+  equipment_1.image = "music stand";
+  equipment_1.citations = { 1 };
+
+  EXPECT_EQ(0, _db.equipment_count());
+  EXPECT_TRUE(_db.update_equipment(&equipment_1));
+
+  std::vector<Equipment*> list = _db.get_equipments();
+
+  EXPECT_TRUE(list[0]->name.compare(equipment_1.name) == 0);
+  EXPECT_TRUE(list[0]->description.compare(equipment_1.description) == 0);
+  EXPECT_TRUE(list[0]->type == equipment_1.type);
+  EXPECT_TRUE(list[0]->image.compare(equipment_1.image) == 0);
+  EXPECT_TRUE(list[0]->citations.compare(equipment_1.citations) == 0);
+}
+TEST_F(TEST_FIXTURE_NAME, get_injuries)
+{
+  using namespace pfc;
+  Injury injury_1;
+
+  injury_1.medical_name = "Keyboardus Faceus";
+  injury_1.common_name = "Keyboard Face";
+  injury_1.description = "Looks like you took a nap on your keyboard";
+  injury_1.citations = { 1 };
+
+  EXPECT_EQ(0, _db.injury_count());
+  EXPECT_TRUE(_db.update_injury(&injury_1));
+
+  std::vector<Injury*> list = _db.get_injuries();
+
+  EXPECT_TRUE(list[0]->medical_name.compare(injury_1.medical_name) == 0);
+  EXPECT_TRUE(list[0]->description.compare(injury_1.description) == 0);
+  EXPECT_TRUE(list[0]->common_name.compare(injury_1.common_name) == 0);
+  EXPECT_TRUE(list[0]->citations.compare(injury_1.citations) == 0);
+}
+TEST_F(TEST_FIXTURE_NAME, get_injury_sets)
+{
+  using namespace pfc;
+  InjurySet injury_set_1;
+
+  injury_set_1.name = "Keyboardus Faceus";
+  injury_set_1.description = "Looks like you took a nap on your keyboard";
+  injury_set_1.injuries = { 1 };
+  injury_set_1.locations = { 1 };
+  injury_set_1.severities = { 1 };
+
+  EXPECT_EQ(0, _db.injury_set_count());
+  EXPECT_TRUE(_db.update_injury_set(&injury_set_1));
+
+  std::vector<InjurySet*> list = _db.get_injury_sets();
+
+  EXPECT_TRUE(list[0]->name.compare(injury_set_1.name) == 0);
+  EXPECT_TRUE(list[0]->description.compare(injury_set_1.description) == 0);
+  EXPECT_TRUE(list[0]->injuries.compare(injury_set_1.injuries) == 0);
+  EXPECT_TRUE(list[0]->locations.compare(injury_set_1.locations) == 0);
+  EXPECT_TRUE(list[0]->severities.compare(injury_set_1.severities) == 0);
+
+}
+TEST_F(TEST_FIXTURE_NAME, get_role_maps)
+{
+  using namespace pfc;
+  Scene scene_1;
+  RoleMap map_1;
+  Role role_1;
+  scene_1.name = "Opening";
+
+  _db.update_scene(&scene_1);
+
+  _db.select_scene(&scene_1);
+
+  role_1.name = "Software Developer";
+  role_1.description = "Bash your head against a wall for 8 hours a day";
+
+  _db.update_role(&role_1);
+  _db.select_role(&role_1);
+  _db.update_role_in_scene(&scene_1, &role_1);
+
+  std::vector<RoleMap*> list = _db.get_role_maps();
+
+  EXPECT_EQ(1,list[0]->fk_scene);
+  EXPECT_EQ(1,list[0]->fk_role);
+}
+TEST_F(TEST_FIXTURE_NAME, get_event_maps)
+{
+  using namespace pfc;
+  Scene scene_1;
+  EventMap map_1;
+  Event event_1;
+  scene_1.name = "Opening";
+
+  _db.update_scene(&scene_1);
+
+  _db.select_scene(&scene_1);
+
+  event_1.name = "Software Developer";
+  event_1.description = "Bash your head against a wall for 8 hours a day";
+
+  _db.update_event(&event_1);
+  _db.select_event(&event_1);
+  _db.update_event_in_scene(&scene_1, &event_1);
+
+  std::vector<EventMap*> list = _db.get_event_maps();
+
+  EXPECT_EQ(1, list[0]->fk_scene);
+  EXPECT_EQ(1, list[0]->fk_event);
+}
+//TEST_F(TEST_FIXTURE_NAME, get_prop_maps) {}
+TEST_F(TEST_FIXTURE_NAME, get_citation_maps)
+{
+  using namespace pfc;
+  Scene scene_1;
+  CitationMap map_1;
+  Citation citation_1;
+  scene_1.name = "Opening";
+
+  _db.update_scene(&scene_1);
+
+  _db.select_scene(&scene_1);
+
+  citation_1.key = "skeleton key";
+  citation_1.title = "Mr. Bones' Wild Ride";
+  citation_1.authors = "Nathan;Angel";
+  citation_1.year = "1000";
+  citation_1.publisher = "Boneland";
+
+  _db.update_citation(&citation_1);
+  _db.select_citation(&citation_1);
+  _db.update_citation_in_scene(&scene_1, &citation_1);
+
+  std::vector<CitationMap*> list = _db.get_citation_maps();
+
+  EXPECT_EQ(1, list[0]->fk_scene);
+  EXPECT_EQ(1, list[0]->fk_citation);
+}
+TEST_F(TEST_FIXTURE_NAME, get_equipment_maps)
+{
+  using namespace pfc;
+  Scene scene_1;
+  EquipmentMap map_1;
+  Equipment equipment_1;
+  scene_1.name = "Opening";
+
+  _db.update_scene(&scene_1);
+
+  _db.select_scene(&scene_1);
+
+  equipment_1.name = "Keytar";
+  equipment_1.type = 1;
+  equipment_1.description = "Got a sick keytar solo later";
+  equipment_1.image = "music stand";
+  equipment_1.citations = { 1 };
+
+  _db.update_equipment(&equipment_1);
+  _db.select_equipment(&equipment_1);
+  _db.update_equipment_in_scene(&scene_1, &equipment_1);
+
+  std::vector<EquipmentMap*> list = _db.get_equipment_maps();
+
+  EXPECT_EQ(1, list[0]->fk_scene);
+  EXPECT_EQ(1, list[0]->fk_equipment);
+}
+TEST_F(TEST_FIXTURE_NAME, get_restriction_maps)
+{
+  using namespace pfc;
+  Scene scene_1;
+  RestrictionMap map_1;
+  Restriction restriction_1;
+  scene_1.name = "Opening";
+
+  _db.update_scene(&scene_1);
+
+  _db.select_scene(&scene_1);
+
+  restriction_1.name = "Software Developer";
+  restriction_1.value = "Bash your head against a wall for 8 hours a day";
+
+  _db.update_restriction(&restriction_1);
+  _db.select_restriction(&restriction_1);
+  _db.update_restriction_in_scene(&scene_1, &restriction_1);
+
+  std::vector<RestrictionMap*> list = _db.get_restriction_maps();
+
+  EXPECT_EQ(1, list[0]->fk_scene);
+  EXPECT_EQ(1, list[0]->fk_restriction);
+}
+TEST_F(TEST_FIXTURE_NAME, get_objectives)
+{
+  using namespace pfc;
+  Objective objective_1;
+
+  objective_1.name = "Kill the Troll";
+  objective_1.description = "There is a troll in the forest in a great big whole who has some gold. Kill it";
+  objective_1.citations = "1;2;3";
+
+  EXPECT_EQ(0, _db.objective_count());
+  EXPECT_TRUE(_db.update_objective(&objective_1));
+
+  std::vector<Objective*> list = _db.get_objectives();
+
+  EXPECT_TRUE(list[0]->name.compare(objective_1.name) == 0);
+  EXPECT_TRUE(list[0]->description.compare(objective_1.description) == 0);
+  EXPECT_TRUE(list[0]->citations.compare(objective_1.citations) == 0);
+}
+TEST_F(TEST_FIXTURE_NAME, get_properties)
+{
+  using namespace pfc;
+  Property property_1;
+
+  property_1.name = "Solid";
+  property_1.value = "Snake";
+
+  EXPECT_EQ(0, _db.property_count());
+  EXPECT_TRUE(_db.update_property(&property_1));
+
+  std::vector<Property*> list = _db.get_properties();
+
+  EXPECT_TRUE(list[0]->name.compare(property_1.name) == 0);
+  EXPECT_TRUE(list[0]->value.compare(property_1.value) == 0);
+
+}
+//TEST_F(TEST_FIXTURE_NAME, get_props) {}
+TEST_F(TEST_FIXTURE_NAME, get_restrictions)
+{
+  using namespace pfc;
+  Restriction restriction_1;
+
+  restriction_1.name = "Solid";
+  restriction_1.value = "Snake";
+
+  EXPECT_EQ(0, _db.restriction_count());
+  EXPECT_TRUE(_db.update_restriction(&restriction_1));
+
+  std::vector<Restriction*> list = _db.get_restrictions();
+
+  EXPECT_TRUE(list[0]->name.compare(restriction_1.name) == 0);
+  EXPECT_TRUE(list[0]->value.compare(restriction_1.value) == 0);
+
+}
+TEST_F(TEST_FIXTURE_NAME, get_roles)
+{
+  using namespace pfc;
+  Role role_1;
+
+  role_1.name = "Software Developer";
+  role_1.description = "Bash your head against a wall for 8 hours a day";
+
+  EXPECT_EQ(0, _db.role_count());
+  EXPECT_TRUE(_db.update_role(&role_1));
+
+  std::vector<Role*> list = _db.get_roles();
+
+  EXPECT_TRUE(list[0]->name.compare(role_1.name) == 0);
+  EXPECT_TRUE(list[0]->description.compare(role_1.description) == 0);
+}
+TEST_F(TEST_FIXTURE_NAME, get_treatments)
+{
+  using namespace pfc;
+  Treatment treatment_1;
+
+  treatment_1.medical_name = "Soupus De Gallinus";
+  treatment_1.common_name = "Chicken Soup";
+  treatment_1.description = "Good for the soul";
+  treatment_1.equipment = { 2 };
+  treatment_1.citations = { 1 };
+
+  EXPECT_EQ(0, _db.treatment_count());
+  EXPECT_TRUE(_db.update_treatment(&treatment_1));
+
+  std::vector<Treatment*> list = _db.get_treatments();
+
+  EXPECT_TRUE(list[0]->medical_name.compare(treatment_1.medical_name) == 0);
+  EXPECT_TRUE(list[0]->description.compare(treatment_1.description) == 0);
+  EXPECT_TRUE(list[0]->common_name.compare(treatment_1.common_name) == 0);
+  EXPECT_TRUE(list[0]->equipment.compare(treatment_1.equipment) == 0);
+  EXPECT_TRUE(list[0]->citations.compare(treatment_1.citations) == 0);
+}
+TEST_F(TEST_FIXTURE_NAME, get_scenes)
+{
+  using namespace pfc;
+  Scene scene_1;
+
+  scene_1.name = "Opening";
+
+  EXPECT_EQ(0, _db.scene_count());
+  EXPECT_TRUE(_db.update_scene(&scene_1));
+
+  std::vector<Scene*> list = _db.get_scenes();
+
+  EXPECT_TRUE(list[0]->name.compare(scene_1.name) == 0);
+
+}

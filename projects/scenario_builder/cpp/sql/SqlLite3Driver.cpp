@@ -4079,7 +4079,7 @@ std::vector<Citation*> SQLite3Driver::get_citations()
     while (citation_query.next()) {
       auto temp = std::make_unique<Citation>();
       auto record = citation_query.record();
-      temp->key = record.value(1).toInt();
+      temp->key = record.value(1).toString();
       temp->title = record.value(2).toString();
       temp->authors = record.value(3).toString();
       temp->year = record.value(4).toString();
@@ -4343,7 +4343,7 @@ std::vector<Restriction*> SQLite3Driver::get_restrictions()
   if (_db.isOpen()) {
     std::vector<Restriction*> restriction_list;
     QSqlQuery restriction_query{ _db };
-    restriction_query.prepare(select_all_properties);
+    restriction_query.prepare(select_all_restrictions);
     restriction_query.exec();
     while (restriction_query.next()) {
       auto temp = std::make_unique<Restriction>();
@@ -4366,8 +4366,8 @@ std::vector<Role*> SQLite3Driver::get_roles()
     while (role_query.next()) {
       auto temp = std::make_unique<Role>();
       auto record = role_query.record();
-      temp->name = record.value(0).toString();
-      temp->description = record.value(1).toString();
+      temp->name = record.value(1).toString();
+      temp->description = record.value(2).toString();
       role_list.push_back(temp.release());
     }
     return role_list;
