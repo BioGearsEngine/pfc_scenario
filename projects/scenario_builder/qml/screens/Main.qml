@@ -6,14 +6,7 @@ import QtQuick.Controls 2.12
 import "components"
 
 import com.ara.pfc.ScenarioModel.SQL 1.0
-//Still to do 
-/*
-    Unify Reference Button s
-    Give equipment the behavior of roles/events
-    Roles/Events needs edit pane
-    Left scene needs to not be editable
-    Selection of right pane does not submit left pane
-*/
+
 Page {
   id: root
   signal closed

@@ -36,7 +36,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			<xs:element name="id" type="xs:ID"/>
 			<xs:element name="common-name" type="xs:string" minOccurs="0"/>
 			<xs:element name="medical-name" type="xs:string" minOccurs="1"/>
-			<xs:element name="citations" type="citation-list" minOccurs="0"/>
+			<xs:element name="citations" type="citation-ref-list" minOccurs="0"/>
 			<xs:element name="description" type="xs:string" minOccurs="1"/>
 			<xs:element name="severity-range" type="injury-severity-range" minOccurs="1"/>
 		</xs:all>
@@ -81,14 +81,14 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			<xs:element name="token" type="xs:NCName" minOccurs="2" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="citation-list">
+	<xs:complexType name="citation-ref-list">
 		<xs:annotation>
 			<xs:documentation>List of strings which should be citations for source material. This could be expanded to be a more strengent 
 				field combination, but lets see what happens
 			</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="citation" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="citation-ref" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="treatment-plan-definition-list">
@@ -112,7 +112,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			<xs:element name="common-name" type="xs:string" minOccurs="0"/>
 			<xs:element name="description" type="xs:string" minOccurs="1"/>
 			<xs:element name="required-equipment" type="medical-equipment-list" minOccurs="1"/>
-			<xs:element name="references" type="treatment-plan-citation-list" minOccurs="0"/>
+			<xs:element name="references" type="treatment-plan-citation-ref-list" minOccurs="0"/>
 		</xs:all>
 	</xs:complexType>
 	<xs:complexType name="medical-equipment-list">
@@ -122,10 +122,10 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="equipment-ref" type="xs:IDREF" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="equipment-refs" type="xs:IDREF" minOccurs="1" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="treatment-plan-citation-list">
+	<xs:complexType name="treatment-plan-citation-ref-list">
 		<xs:annotation>
 			<xs:documentation>
 				Series of citations that the treatment plan was built on.  
@@ -134,7 +134,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:all>
-			<xs:element name="citations" type="citation-list"/>
+			<xs:element name="citations" type="citation-ref-list"/>
 			<xs:element name="cpgs" type="cpg-list"/>
 			<!-- <xs:element name="related-learning-objectives" type="learning-objective-reference-list" /> -->
 		</xs:all>
@@ -148,7 +148,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 		</xs:annotation>
 		<xs:all>
 			<xs:element name="name" type="xs:string"/>
-			<xs:element name="citation" type="xs:string"/>
+			<xs:element name="citation-ref" type="xs:string"/>
 		</xs:all>
 	</xs:complexType>
 	<xs:complexType name="learning-objective-reference-list">
@@ -227,21 +227,22 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 		</xs:all>
 	</xs:complexType>
 	<xs:complexType name="medical-scenario-syllabus">
-		<xs:all>
-			<xs:element name="learning-objectives" type="learning-objective-list"/>
-			<xs:element name="assessment-criteria" type="assessment-criteria-list"/>
-		</xs:all>
+			<xs:sequence>
+				<xs:element name="learning-objectives" type="learning-objective" minOccurs="0" maxOccurs="unbounded"/>
+     			<xs:element name="total-assessment-points" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="learning-assessments" type="assessment" minOccurs="0" maxOccurs="unbounded"/>
+		    </xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="learning-objective-list">
 		<xs:sequence>
-			<xs:element name="learning-objective" type="learning-objective"/>
+			<xs:element name="objectives" type="learning-objective" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="learning-objective">
 		<xs:all>
 			<xs:element name="id" type="xs:ID"/>
 			<xs:element name="name" type="xs:string"/>
-			<xs:element name="references" type="treatment-plan-citation-list"/>
+			<xs:element name="references" type="treatment-plan-citation-ref-list"/>
 			<xs:element name="relates-to">
 				<xs:complexType>
 					<xs:all>
@@ -460,4 +461,27 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:complexType name="citation-list">
+		<xs:annotation>
+			<xs:documentation>List of Citation Information that a citation-ref-list refers to
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="citation" type="citation" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="citation">
+		<xs:annotation>
+			<xs:documentation>General Citation Information for a bib reference
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="uuid" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="authors" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="title" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="date" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="page" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="accessed" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
 </xs:schema>

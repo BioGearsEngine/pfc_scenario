@@ -373,19 +373,38 @@ namespace pfc
       void
       medical_scenario (::std::unique_ptr< medical_scenario_type > p);
 
+      // works-cited
+      //
+      typedef ::pfc::schema::citation_list works_cited_type;
+      typedef ::xsd::cxx::tree::traits< works_cited_type, char > works_cited_traits;
+
+      const works_cited_type&
+      works_cited () const;
+
+      works_cited_type&
+      works_cited ();
+
+      void
+      works_cited (const works_cited_type& x);
+
+      void
+      works_cited (::std::unique_ptr< works_cited_type > p);
+
       // Constructors.
       //
       ScenarioSchema (const conditions_type&,
                       const treatment_plans_type&,
                       const patient_states_type&,
                       const syllabus_type&,
-                      const medical_scenario_type&);
+                      const medical_scenario_type&,
+                      const works_cited_type&);
 
       ScenarioSchema (::std::unique_ptr< conditions_type >,
                       ::std::unique_ptr< treatment_plans_type >,
                       ::std::unique_ptr< patient_states_type >,
                       ::std::unique_ptr< syllabus_type >,
-                      ::std::unique_ptr< medical_scenario_type >);
+                      ::std::unique_ptr< medical_scenario_type >,
+                      ::std::unique_ptr< works_cited_type >);
 
       ScenarioSchema (const ::xercesc::DOMElement& e,
                       ::xml_schema::flags f = 0,
@@ -418,6 +437,7 @@ namespace pfc
       ::xsd::cxx::tree::one< patient_states_type > patient_states_;
       ::xsd::cxx::tree::one< syllabus_type > syllabus_;
       ::xsd::cxx::tree::one< medical_scenario_type > medical_scenario_;
+      ::xsd::cxx::tree::one< works_cited_type > works_cited_;
     };
   }
 }

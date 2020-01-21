@@ -166,6 +166,30 @@ namespace pfc
     {
       this->medical_scenario_.set (std::move (x));
     }
+
+    const ScenarioSchema::works_cited_type& ScenarioSchema::
+    works_cited () const
+    {
+      return this->works_cited_.get ();
+    }
+
+    ScenarioSchema::works_cited_type& ScenarioSchema::
+    works_cited ()
+    {
+      return this->works_cited_.get ();
+    }
+
+    void ScenarioSchema::
+    works_cited (const works_cited_type& x)
+    {
+      this->works_cited_.set (x);
+    }
+
+    void ScenarioSchema::
+    works_cited (::std::unique_ptr< works_cited_type > x)
+    {
+      this->works_cited_.set (std::move (x));
+    }
   }
 }
 
@@ -192,13 +216,15 @@ namespace pfc
                     const treatment_plans_type& treatment_plans,
                     const patient_states_type& patient_states,
                     const syllabus_type& syllabus,
-                    const medical_scenario_type& medical_scenario)
+                    const medical_scenario_type& medical_scenario,
+                    const works_cited_type& works_cited)
     : ::xml_schema::type (),
       conditions_ (conditions, this),
       treatment_plans_ (treatment_plans, this),
       patient_states_ (patient_states, this),
       syllabus_ (syllabus, this),
-      medical_scenario_ (medical_scenario, this)
+      medical_scenario_ (medical_scenario, this),
+      works_cited_ (works_cited, this)
     {
     }
 
@@ -207,13 +233,15 @@ namespace pfc
                     ::std::unique_ptr< treatment_plans_type > treatment_plans,
                     ::std::unique_ptr< patient_states_type > patient_states,
                     ::std::unique_ptr< syllabus_type > syllabus,
-                    ::std::unique_ptr< medical_scenario_type > medical_scenario)
+                    ::std::unique_ptr< medical_scenario_type > medical_scenario,
+                    ::std::unique_ptr< works_cited_type > works_cited)
     : ::xml_schema::type (),
       conditions_ (std::move (conditions), this),
       treatment_plans_ (std::move (treatment_plans), this),
       patient_states_ (std::move (patient_states), this),
       syllabus_ (std::move (syllabus), this),
-      medical_scenario_ (std::move (medical_scenario), this)
+      medical_scenario_ (std::move (medical_scenario), this),
+      works_cited_ (std::move (works_cited), this)
     {
     }
 
@@ -226,7 +254,8 @@ namespace pfc
       treatment_plans_ (x.treatment_plans_, f, this),
       patient_states_ (x.patient_states_, f, this),
       syllabus_ (x.syllabus_, f, this),
-      medical_scenario_ (x.medical_scenario_, f, this)
+      medical_scenario_ (x.medical_scenario_, f, this),
+      works_cited_ (x.works_cited_, f, this)
     {
     }
 
@@ -239,7 +268,8 @@ namespace pfc
       treatment_plans_ (this),
       patient_states_ (this),
       syllabus_ (this),
-      medical_scenario_ (this)
+      medical_scenario_ (this),
+      works_cited_ (this)
     {
       if ((f & ::xml_schema::flags::base) == 0)
       {
@@ -398,6 +428,34 @@ namespace pfc
           }
         }
 
+        // works-cited
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "works-cited",
+              "",
+              &::xsd::cxx::tree::factory_impl< works_cited_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!works_cited_.present ())
+            {
+              ::std::unique_ptr< works_cited_type > r (
+                dynamic_cast< works_cited_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->works_cited_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
         break;
       }
 
@@ -435,6 +493,13 @@ namespace pfc
           "medical-scenario",
           "");
       }
+
+      if (!works_cited_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "works-cited",
+          "");
+      }
     }
 
     ScenarioSchema* ScenarioSchema::
@@ -455,6 +520,7 @@ namespace pfc
         this->patient_states_ = x.patient_states_;
         this->syllabus_ = x.syllabus_;
         this->medical_scenario_ = x.medical_scenario_;
+        this->works_cited_ = x.works_cited_;
       }
 
       return *this;
@@ -529,6 +595,14 @@ namespace pfc
 
         o << ::std::endl << "medical-scenario: ";
         om.insert (o, i.medical_scenario ());
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "works-cited: ";
+        om.insert (o, i.works_cited ());
       }
 
       return o;
@@ -972,6 +1046,29 @@ namespace pfc
         else
           tsm.serialize (
             "medical-scenario",
+            "",
+            false, false, e, x);
+      }
+
+      // works-cited
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const ScenarioSchema::works_cited_type& x (i.works_cited ());
+        if (typeid (ScenarioSchema::works_cited_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "works-cited",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "works-cited",
             "",
             false, false, e, x);
       }

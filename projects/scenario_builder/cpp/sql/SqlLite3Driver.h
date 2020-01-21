@@ -148,6 +148,7 @@ public:
   Q_INVOKABLE std::vector<Prop*> get_props();
   Q_INVOKABLE std::vector<Restriction*> get_restrictions();
   Q_INVOKABLE std::vector<Role*> get_roles();
+  Q_INVOKABLE std::vector<Role*> get_roles_in_scene(Scene*);
   Q_INVOKABLE std::vector<Treatment*> get_treatments();
   Q_INVOKABLE std::vector<Scene*> get_scenes();
 

@@ -265,11 +265,11 @@ namespace pfc
     class injury_severity_range;
     class numeric_range;
     class token_range;
-    class citation_list;
+    class citation_ref_list;
     class treatment_plan_definition_list;
     class treatment_plan;
     class medical_equipment_list;
-    class treatment_plan_citation_list;
+    class treatment_plan_citation_ref_list;
     class cpg_list;
     class learning_objective_reference_list;
     class treatment_plan_reference_list;
@@ -293,6 +293,8 @@ namespace pfc
     class event;
     class event_category_enum;
     class event_fedelity_enum;
+    class citation_list;
+    class citation;
     class relates_to;
   }
 }
@@ -312,7 +314,7 @@ namespace pfc
 
 #include <xsd/cxx/xml/dom/parsing-header.hxx>
 
-#include "MilitaryScenario_1.0.0.hxx"
+#include "militaryscenario_1.0.0.hxx"
 
 namespace pfc
 {
@@ -433,7 +435,7 @@ namespace pfc
 
       // citations
       //
-      typedef ::pfc::schema::citation_list citations_type;
+      typedef ::pfc::schema::citation_ref_list citations_type;
       typedef ::xsd::cxx::tree::optional< citations_type > citations_optional;
       typedef ::xsd::cxx::tree::traits< citations_type, char > citations_traits;
 
@@ -776,47 +778,47 @@ namespace pfc
       token_sequence token_;
     };
 
-    class citation_list: public ::xml_schema::type
+    class citation_ref_list: public ::xml_schema::type
     {
       public:
-      // citation
+      // citation-ref
       //
-      typedef ::xml_schema::string citation_type;
-      typedef ::xsd::cxx::tree::sequence< citation_type > citation_sequence;
-      typedef citation_sequence::iterator citation_iterator;
-      typedef citation_sequence::const_iterator citation_const_iterator;
-      typedef ::xsd::cxx::tree::traits< citation_type, char > citation_traits;
+      typedef ::xml_schema::string citation_ref_type;
+      typedef ::xsd::cxx::tree::sequence< citation_ref_type > citation_ref_sequence;
+      typedef citation_ref_sequence::iterator citation_ref_iterator;
+      typedef citation_ref_sequence::const_iterator citation_ref_const_iterator;
+      typedef ::xsd::cxx::tree::traits< citation_ref_type, char > citation_ref_traits;
 
-      const citation_sequence&
-      citation () const;
+      const citation_ref_sequence&
+      citation_ref () const;
 
-      citation_sequence&
-      citation ();
+      citation_ref_sequence&
+      citation_ref ();
 
       void
-      citation (const citation_sequence& s);
+      citation_ref (const citation_ref_sequence& s);
 
       // Constructors.
       //
-      citation_list ();
+      citation_ref_list ();
 
-      citation_list (const ::xercesc::DOMElement& e,
-                     ::xml_schema::flags f = 0,
-                     ::xml_schema::container* c = 0);
+      citation_ref_list (const ::xercesc::DOMElement& e,
+                         ::xml_schema::flags f = 0,
+                         ::xml_schema::container* c = 0);
 
-      citation_list (const citation_list& x,
-                     ::xml_schema::flags f = 0,
-                     ::xml_schema::container* c = 0);
+      citation_ref_list (const citation_ref_list& x,
+                         ::xml_schema::flags f = 0,
+                         ::xml_schema::container* c = 0);
 
-      virtual citation_list*
+      virtual citation_ref_list*
       _clone (::xml_schema::flags f = 0,
               ::xml_schema::container* c = 0) const;
 
-      citation_list&
-      operator= (const citation_list& x);
+      citation_ref_list&
+      operator= (const citation_ref_list& x);
 
       virtual 
-      ~citation_list ();
+      ~citation_ref_list ();
 
       // Implementation.
       //
@@ -826,7 +828,7 @@ namespace pfc
              ::xml_schema::flags);
 
       protected:
-      citation_sequence citation_;
+      citation_ref_sequence citation_ref_;
     };
 
     class treatment_plan_definition_list: public ::xml_schema::type
@@ -961,7 +963,7 @@ namespace pfc
 
       // references
       //
-      typedef ::pfc::schema::treatment_plan_citation_list references_type;
+      typedef ::pfc::schema::treatment_plan_citation_ref_list references_type;
       typedef ::xsd::cxx::tree::optional< references_type > references_optional;
       typedef ::xsd::cxx::tree::traits< references_type, char > references_traits;
 
@@ -1030,22 +1032,22 @@ namespace pfc
     class medical_equipment_list: public ::xml_schema::type
     {
       public:
-      // equipment-ref
+      // equipment-refs
       //
-      typedef ::xml_schema::idref equipment_ref_type;
-      typedef ::xsd::cxx::tree::sequence< equipment_ref_type > equipment_ref_sequence;
-      typedef equipment_ref_sequence::iterator equipment_ref_iterator;
-      typedef equipment_ref_sequence::const_iterator equipment_ref_const_iterator;
-      typedef ::xsd::cxx::tree::traits< equipment_ref_type, char > equipment_ref_traits;
+      typedef ::xml_schema::idref equipment_refs_type;
+      typedef ::xsd::cxx::tree::sequence< equipment_refs_type > equipment_refs_sequence;
+      typedef equipment_refs_sequence::iterator equipment_refs_iterator;
+      typedef equipment_refs_sequence::const_iterator equipment_refs_const_iterator;
+      typedef ::xsd::cxx::tree::traits< equipment_refs_type, char > equipment_refs_traits;
 
-      const equipment_ref_sequence&
-      equipment_ref () const;
+      const equipment_refs_sequence&
+      equipment_refs () const;
 
-      equipment_ref_sequence&
-      equipment_ref ();
+      equipment_refs_sequence&
+      equipment_refs ();
 
       void
-      equipment_ref (const equipment_ref_sequence& s);
+      equipment_refs (const equipment_refs_sequence& s);
 
       // Constructors.
       //
@@ -1077,15 +1079,15 @@ namespace pfc
              ::xml_schema::flags);
 
       protected:
-      equipment_ref_sequence equipment_ref_;
+      equipment_refs_sequence equipment_refs_;
     };
 
-    class treatment_plan_citation_list: public ::xml_schema::type
+    class treatment_plan_citation_ref_list: public ::xml_schema::type
     {
       public:
       // citations
       //
-      typedef ::pfc::schema::citation_list citations_type;
+      typedef ::pfc::schema::citation_ref_list citations_type;
       typedef ::xsd::cxx::tree::traits< citations_type, char > citations_traits;
 
       const citations_type&
@@ -1119,29 +1121,29 @@ namespace pfc
 
       // Constructors.
       //
-      treatment_plan_citation_list (const citations_type&,
-                                    const cpgs_type&);
+      treatment_plan_citation_ref_list (const citations_type&,
+                                        const cpgs_type&);
 
-      treatment_plan_citation_list (::std::unique_ptr< citations_type >,
-                                    ::std::unique_ptr< cpgs_type >);
+      treatment_plan_citation_ref_list (::std::unique_ptr< citations_type >,
+                                        ::std::unique_ptr< cpgs_type >);
 
-      treatment_plan_citation_list (const ::xercesc::DOMElement& e,
-                                    ::xml_schema::flags f = 0,
-                                    ::xml_schema::container* c = 0);
+      treatment_plan_citation_ref_list (const ::xercesc::DOMElement& e,
+                                        ::xml_schema::flags f = 0,
+                                        ::xml_schema::container* c = 0);
 
-      treatment_plan_citation_list (const treatment_plan_citation_list& x,
-                                    ::xml_schema::flags f = 0,
-                                    ::xml_schema::container* c = 0);
+      treatment_plan_citation_ref_list (const treatment_plan_citation_ref_list& x,
+                                        ::xml_schema::flags f = 0,
+                                        ::xml_schema::container* c = 0);
 
-      virtual treatment_plan_citation_list*
+      virtual treatment_plan_citation_ref_list*
       _clone (::xml_schema::flags f = 0,
               ::xml_schema::container* c = 0) const;
 
-      treatment_plan_citation_list&
-      operator= (const treatment_plan_citation_list& x);
+      treatment_plan_citation_ref_list&
+      operator= (const treatment_plan_citation_ref_list& x);
 
       virtual 
-      ~treatment_plan_citation_list ();
+      ~treatment_plan_citation_ref_list ();
 
       // Implementation.
       //
@@ -1175,30 +1177,30 @@ namespace pfc
       void
       name (::std::unique_ptr< name_type > p);
 
-      // citation
+      // citation-ref
       //
-      typedef ::xml_schema::string citation_type;
-      typedef ::xsd::cxx::tree::traits< citation_type, char > citation_traits;
+      typedef ::xml_schema::string citation_ref_type;
+      typedef ::xsd::cxx::tree::traits< citation_ref_type, char > citation_ref_traits;
 
-      const citation_type&
-      citation () const;
+      const citation_ref_type&
+      citation_ref () const;
 
-      citation_type&
-      citation ();
-
-      void
-      citation (const citation_type& x);
+      citation_ref_type&
+      citation_ref ();
 
       void
-      citation (::std::unique_ptr< citation_type > p);
+      citation_ref (const citation_ref_type& x);
+
+      void
+      citation_ref (::std::unique_ptr< citation_ref_type > p);
 
       // Constructors.
       //
       cpg_list (const name_type&,
-                const citation_type&);
+                const citation_ref_type&);
 
       cpg_list (::std::unique_ptr< name_type >,
-                ::std::unique_ptr< citation_type >);
+                ::std::unique_ptr< citation_ref_type >);
 
       cpg_list (const ::xercesc::DOMElement& e,
                 ::xml_schema::flags f = 0,
@@ -1227,7 +1229,7 @@ namespace pfc
 
       protected:
       ::xsd::cxx::tree::one< name_type > name_;
-      ::xsd::cxx::tree::one< citation_type > citation_;
+      ::xsd::cxx::tree::one< citation_ref_type > citation_ref_;
     };
 
     class learning_objective_reference_list: public ::xml_schema::type
@@ -1701,45 +1703,55 @@ namespace pfc
       public:
       // learning-objectives
       //
-      typedef ::pfc::schema::learning_objective_list learning_objectives_type;
+      typedef ::pfc::schema::learning_objective learning_objectives_type;
+      typedef ::xsd::cxx::tree::sequence< learning_objectives_type > learning_objectives_sequence;
+      typedef learning_objectives_sequence::iterator learning_objectives_iterator;
+      typedef learning_objectives_sequence::const_iterator learning_objectives_const_iterator;
       typedef ::xsd::cxx::tree::traits< learning_objectives_type, char > learning_objectives_traits;
 
-      const learning_objectives_type&
+      const learning_objectives_sequence&
       learning_objectives () const;
 
-      learning_objectives_type&
+      learning_objectives_sequence&
       learning_objectives ();
 
       void
-      learning_objectives (const learning_objectives_type& x);
+      learning_objectives (const learning_objectives_sequence& s);
 
-      void
-      learning_objectives (::std::unique_ptr< learning_objectives_type > p);
-
-      // assessment-criteria
+      // total-assessment-points
       //
-      typedef ::pfc::schema::assessment_criteria_list assessment_criteria_type;
-      typedef ::xsd::cxx::tree::traits< assessment_criteria_type, char > assessment_criteria_traits;
+      typedef ::xml_schema::integer total_assessment_points_type;
+      typedef ::xsd::cxx::tree::traits< total_assessment_points_type, char > total_assessment_points_traits;
 
-      const assessment_criteria_type&
-      assessment_criteria () const;
+      const total_assessment_points_type&
+      total_assessment_points () const;
 
-      assessment_criteria_type&
-      assessment_criteria ();
-
-      void
-      assessment_criteria (const assessment_criteria_type& x);
+      total_assessment_points_type&
+      total_assessment_points ();
 
       void
-      assessment_criteria (::std::unique_ptr< assessment_criteria_type > p);
+      total_assessment_points (const total_assessment_points_type& x);
+
+      // learning-assessments
+      //
+      typedef ::pfc::schema::assessment learning_assessments_type;
+      typedef ::xsd::cxx::tree::sequence< learning_assessments_type > learning_assessments_sequence;
+      typedef learning_assessments_sequence::iterator learning_assessments_iterator;
+      typedef learning_assessments_sequence::const_iterator learning_assessments_const_iterator;
+      typedef ::xsd::cxx::tree::traits< learning_assessments_type, char > learning_assessments_traits;
+
+      const learning_assessments_sequence&
+      learning_assessments () const;
+
+      learning_assessments_sequence&
+      learning_assessments ();
+
+      void
+      learning_assessments (const learning_assessments_sequence& s);
 
       // Constructors.
       //
-      medical_scenario_syllabus (const learning_objectives_type&,
-                                 const assessment_criteria_type&);
-
-      medical_scenario_syllabus (::std::unique_ptr< learning_objectives_type >,
-                                 ::std::unique_ptr< assessment_criteria_type >);
+      medical_scenario_syllabus (const total_assessment_points_type&);
 
       medical_scenario_syllabus (const ::xercesc::DOMElement& e,
                                  ::xml_schema::flags f = 0,
@@ -1767,35 +1779,34 @@ namespace pfc
              ::xml_schema::flags);
 
       protected:
-      ::xsd::cxx::tree::one< learning_objectives_type > learning_objectives_;
-      ::xsd::cxx::tree::one< assessment_criteria_type > assessment_criteria_;
+      learning_objectives_sequence learning_objectives_;
+      ::xsd::cxx::tree::one< total_assessment_points_type > total_assessment_points_;
+      learning_assessments_sequence learning_assessments_;
     };
 
     class learning_objective_list: public ::xml_schema::type
     {
       public:
-      // learning-objective
+      // objectives
       //
-      typedef ::pfc::schema::learning_objective learning_objective_type;
-      typedef ::xsd::cxx::tree::traits< learning_objective_type, char > learning_objective_traits;
+      typedef ::pfc::schema::learning_objective objectives_type;
+      typedef ::xsd::cxx::tree::sequence< objectives_type > objectives_sequence;
+      typedef objectives_sequence::iterator objectives_iterator;
+      typedef objectives_sequence::const_iterator objectives_const_iterator;
+      typedef ::xsd::cxx::tree::traits< objectives_type, char > objectives_traits;
 
-      const learning_objective_type&
-      learning_objective () const;
+      const objectives_sequence&
+      objectives () const;
 
-      learning_objective_type&
-      learning_objective ();
+      objectives_sequence&
+      objectives ();
 
       void
-      learning_objective (const learning_objective_type& x);
-
-      void
-      learning_objective (::std::unique_ptr< learning_objective_type > p);
+      objectives (const objectives_sequence& s);
 
       // Constructors.
       //
-      learning_objective_list (const learning_objective_type&);
-
-      learning_objective_list (::std::unique_ptr< learning_objective_type >);
+      learning_objective_list ();
 
       learning_objective_list (const ::xercesc::DOMElement& e,
                                ::xml_schema::flags f = 0,
@@ -1823,7 +1834,7 @@ namespace pfc
              ::xml_schema::flags);
 
       protected:
-      ::xsd::cxx::tree::one< learning_objective_type > learning_objective_;
+      objectives_sequence objectives_;
     };
 
     class learning_objective: public ::xml_schema::type
@@ -1865,7 +1876,7 @@ namespace pfc
 
       // references
       //
-      typedef ::pfc::schema::treatment_plan_citation_list references_type;
+      typedef ::pfc::schema::treatment_plan_citation_ref_list references_type;
       typedef ::xsd::cxx::tree::traits< references_type, char > references_traits;
 
       const references_type&
@@ -3019,6 +3030,216 @@ namespace pfc
       static const value _xsd_event_fedelity_enum_indexes_[3];
     };
 
+    class citation_list: public ::xml_schema::type
+    {
+      public:
+      // citation
+      //
+      typedef ::pfc::schema::citation citation_type;
+      typedef ::xsd::cxx::tree::sequence< citation_type > citation_sequence;
+      typedef citation_sequence::iterator citation_iterator;
+      typedef citation_sequence::const_iterator citation_const_iterator;
+      typedef ::xsd::cxx::tree::traits< citation_type, char > citation_traits;
+
+      const citation_sequence&
+      citation () const;
+
+      citation_sequence&
+      citation ();
+
+      void
+      citation (const citation_sequence& s);
+
+      // Constructors.
+      //
+      citation_list ();
+
+      citation_list (const ::xercesc::DOMElement& e,
+                     ::xml_schema::flags f = 0,
+                     ::xml_schema::container* c = 0);
+
+      citation_list (const citation_list& x,
+                     ::xml_schema::flags f = 0,
+                     ::xml_schema::container* c = 0);
+
+      virtual citation_list*
+      _clone (::xml_schema::flags f = 0,
+              ::xml_schema::container* c = 0) const;
+
+      citation_list&
+      operator= (const citation_list& x);
+
+      virtual 
+      ~citation_list ();
+
+      // Implementation.
+      //
+      protected:
+      void
+      parse (::xsd::cxx::xml::dom::parser< char >&,
+             ::xml_schema::flags);
+
+      protected:
+      citation_sequence citation_;
+    };
+
+    class citation: public ::xml_schema::type
+    {
+      public:
+      // uuid
+      //
+      typedef ::xml_schema::string uuid_type;
+      typedef ::xsd::cxx::tree::traits< uuid_type, char > uuid_traits;
+
+      const uuid_type&
+      uuid () const;
+
+      uuid_type&
+      uuid ();
+
+      void
+      uuid (const uuid_type& x);
+
+      void
+      uuid (::std::unique_ptr< uuid_type > p);
+
+      // authors
+      //
+      typedef ::xml_schema::string authors_type;
+      typedef ::xsd::cxx::tree::sequence< authors_type > authors_sequence;
+      typedef authors_sequence::iterator authors_iterator;
+      typedef authors_sequence::const_iterator authors_const_iterator;
+      typedef ::xsd::cxx::tree::traits< authors_type, char > authors_traits;
+
+      const authors_sequence&
+      authors () const;
+
+      authors_sequence&
+      authors ();
+
+      void
+      authors (const authors_sequence& s);
+
+      // title
+      //
+      typedef ::xml_schema::string title_type;
+      typedef ::xsd::cxx::tree::traits< title_type, char > title_traits;
+
+      const title_type&
+      title () const;
+
+      title_type&
+      title ();
+
+      void
+      title (const title_type& x);
+
+      void
+      title (::std::unique_ptr< title_type > p);
+
+      // date
+      //
+      typedef ::xml_schema::string date_type;
+      typedef ::xsd::cxx::tree::traits< date_type, char > date_traits;
+
+      const date_type&
+      date () const;
+
+      date_type&
+      date ();
+
+      void
+      date (const date_type& x);
+
+      void
+      date (::std::unique_ptr< date_type > p);
+
+      // page
+      //
+      typedef ::xml_schema::string page_type;
+      typedef ::xsd::cxx::tree::optional< page_type > page_optional;
+      typedef ::xsd::cxx::tree::traits< page_type, char > page_traits;
+
+      const page_optional&
+      page () const;
+
+      page_optional&
+      page ();
+
+      void
+      page (const page_type& x);
+
+      void
+      page (const page_optional& x);
+
+      void
+      page (::std::unique_ptr< page_type > p);
+
+      // accessed
+      //
+      typedef ::xml_schema::string accessed_type;
+      typedef ::xsd::cxx::tree::optional< accessed_type > accessed_optional;
+      typedef ::xsd::cxx::tree::traits< accessed_type, char > accessed_traits;
+
+      const accessed_optional&
+      accessed () const;
+
+      accessed_optional&
+      accessed ();
+
+      void
+      accessed (const accessed_type& x);
+
+      void
+      accessed (const accessed_optional& x);
+
+      void
+      accessed (::std::unique_ptr< accessed_type > p);
+
+      // Constructors.
+      //
+      citation (const uuid_type&,
+                const title_type&,
+                const date_type&);
+
+      citation (::std::unique_ptr< uuid_type >,
+                ::std::unique_ptr< title_type >,
+                ::std::unique_ptr< date_type >);
+
+      citation (const ::xercesc::DOMElement& e,
+                ::xml_schema::flags f = 0,
+                ::xml_schema::container* c = 0);
+
+      citation (const citation& x,
+                ::xml_schema::flags f = 0,
+                ::xml_schema::container* c = 0);
+
+      virtual citation*
+      _clone (::xml_schema::flags f = 0,
+              ::xml_schema::container* c = 0) const;
+
+      citation&
+      operator= (const citation& x);
+
+      virtual 
+      ~citation ();
+
+      // Implementation.
+      //
+      protected:
+      void
+      parse (::xsd::cxx::xml::dom::parser< char >&,
+             ::xml_schema::flags);
+
+      protected:
+      ::xsd::cxx::tree::one< uuid_type > uuid_;
+      authors_sequence authors_;
+      ::xsd::cxx::tree::one< title_type > title_;
+      ::xsd::cxx::tree::one< date_type > date_;
+      page_optional page_;
+      accessed_optional accessed_;
+    };
+
     class relates_to: public ::xml_schema::type
     {
       public:
@@ -3118,7 +3339,7 @@ namespace pfc
     operator<< (::std::ostream&, const token_range&);
 
     ::std::ostream&
-    operator<< (::std::ostream&, const citation_list&);
+    operator<< (::std::ostream&, const citation_ref_list&);
 
     ::std::ostream&
     operator<< (::std::ostream&, const treatment_plan_definition_list&);
@@ -3130,7 +3351,7 @@ namespace pfc
     operator<< (::std::ostream&, const medical_equipment_list&);
 
     ::std::ostream&
-    operator<< (::std::ostream&, const treatment_plan_citation_list&);
+    operator<< (::std::ostream&, const treatment_plan_citation_ref_list&);
 
     ::std::ostream&
     operator<< (::std::ostream&, const cpg_list&);
@@ -3208,6 +3429,12 @@ namespace pfc
     operator<< (::std::ostream&, const event_fedelity_enum&);
 
     ::std::ostream&
+    operator<< (::std::ostream&, const citation_list&);
+
+    ::std::ostream&
+    operator<< (::std::ostream&, const citation&);
+
+    ::std::ostream&
     operator<< (::std::ostream&, const relates_to&);
   }
 }
@@ -3253,7 +3480,7 @@ namespace pfc
     operator<< (::xercesc::DOMElement&, const token_range&);
 
     void
-    operator<< (::xercesc::DOMElement&, const citation_list&);
+    operator<< (::xercesc::DOMElement&, const citation_ref_list&);
 
     void
     operator<< (::xercesc::DOMElement&, const treatment_plan_definition_list&);
@@ -3265,7 +3492,7 @@ namespace pfc
     operator<< (::xercesc::DOMElement&, const medical_equipment_list&);
 
     void
-    operator<< (::xercesc::DOMElement&, const treatment_plan_citation_list&);
+    operator<< (::xercesc::DOMElement&, const treatment_plan_citation_ref_list&);
 
     void
     operator<< (::xercesc::DOMElement&, const cpg_list&);
@@ -3349,6 +3576,12 @@ namespace pfc
     void
     operator<< (::xml_schema::list_stream&,
                 const event_fedelity_enum&);
+
+    void
+    operator<< (::xercesc::DOMElement&, const citation_list&);
+
+    void
+    operator<< (::xercesc::DOMElement&, const citation&);
 
     void
     operator<< (::xercesc::DOMElement&, const relates_to&);

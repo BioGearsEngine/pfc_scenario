@@ -16,7 +16,6 @@ ApplicationWindow {
   title: qsTr("Test")
   width: 1280; height: 768
   visible: true
-
   menuBar: MenuBar {
     visible: true
     font.pointSize : 8
@@ -33,7 +32,7 @@ ApplicationWindow {
         MenuItem { text: "Save Scenario";
                    onTriggered : {
                     console.log (text)
-                    scenario_serializer.save()
+                    scenario_serializer.save(scenario_model)
                  }  }
         MenuItem { text: "Save Scenario As";
                   onTriggered : {

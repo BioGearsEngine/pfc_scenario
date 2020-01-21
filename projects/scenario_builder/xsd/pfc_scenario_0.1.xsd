@@ -38,6 +38,11 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 					<xs:documentation>The full medical training scenario which combines a MSDL scenario with the PFC extensions to create a training narrative which accomplishes the learning objectives described in the syllabus.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="works-cited" type="pfc:citation-list">
+				<xs:annotation>
+					<xs:documentation>The bibliography used to create this scenario.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:all>
 	</xs:complexType>
 	<xs:element name="Scenario" type="ScenarioSchema"/>
