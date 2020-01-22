@@ -47,28 +47,22 @@ namespace pfc
     // injury_definition_list
     // 
 
-    const injury_definition_list::injury_type& injury_definition_list::
+    const injury_definition_list::injury_sequence& injury_definition_list::
     injury () const
     {
-      return this->injury_.get ();
+      return this->injury_;
     }
 
-    injury_definition_list::injury_type& injury_definition_list::
+    injury_definition_list::injury_sequence& injury_definition_list::
     injury ()
     {
-      return this->injury_.get ();
+      return this->injury_;
     }
 
     void injury_definition_list::
-    injury (const injury_type& x)
+    injury (const injury_sequence& s)
     {
-      this->injury_.set (x);
-    }
-
-    void injury_definition_list::
-    injury (::std::unique_ptr< injury_type > x)
-    {
-      this->injury_.set (std::move (x));
+      this->injury_ = s;
     }
 
 
@@ -437,28 +431,22 @@ namespace pfc
     // treatment_plan_definition_list
     // 
 
-    const treatment_plan_definition_list::treatment_plan_type& treatment_plan_definition_list::
+    const treatment_plan_definition_list::treatment_plan_sequence& treatment_plan_definition_list::
     treatment_plan () const
     {
-      return this->treatment_plan_.get ();
+      return this->treatment_plan_;
     }
 
-    treatment_plan_definition_list::treatment_plan_type& treatment_plan_definition_list::
+    treatment_plan_definition_list::treatment_plan_sequence& treatment_plan_definition_list::
     treatment_plan ()
     {
-      return this->treatment_plan_.get ();
+      return this->treatment_plan_;
     }
 
     void treatment_plan_definition_list::
-    treatment_plan (const treatment_plan_type& x)
+    treatment_plan (const treatment_plan_sequence& s)
     {
-      this->treatment_plan_.set (x);
-    }
-
-    void treatment_plan_definition_list::
-    treatment_plan (::std::unique_ptr< treatment_plan_type > x)
-    {
-      this->treatment_plan_.set (std::move (x));
+      this->treatment_plan_ = s;
     }
 
 
@@ -1039,40 +1027,28 @@ namespace pfc
     // medical_scenario_syllabus
     // 
 
-    const medical_scenario_syllabus::learning_objectives_sequence& medical_scenario_syllabus::
+    const medical_scenario_syllabus::learning_objectives_type& medical_scenario_syllabus::
     learning_objectives () const
     {
-      return this->learning_objectives_;
+      return this->learning_objectives_.get ();
     }
 
-    medical_scenario_syllabus::learning_objectives_sequence& medical_scenario_syllabus::
+    medical_scenario_syllabus::learning_objectives_type& medical_scenario_syllabus::
     learning_objectives ()
     {
-      return this->learning_objectives_;
+      return this->learning_objectives_.get ();
     }
 
     void medical_scenario_syllabus::
-    learning_objectives (const learning_objectives_sequence& s)
+    learning_objectives (const learning_objectives_type& x)
     {
-      this->learning_objectives_ = s;
-    }
-
-    const medical_scenario_syllabus::total_assessment_points_type& medical_scenario_syllabus::
-    total_assessment_points () const
-    {
-      return this->total_assessment_points_.get ();
-    }
-
-    medical_scenario_syllabus::total_assessment_points_type& medical_scenario_syllabus::
-    total_assessment_points ()
-    {
-      return this->total_assessment_points_.get ();
+      this->learning_objectives_.set (x);
     }
 
     void medical_scenario_syllabus::
-    total_assessment_points (const total_assessment_points_type& x)
+    learning_objectives (::std::unique_ptr< learning_objectives_type > x)
     {
-      this->total_assessment_points_.set (x);
+      this->learning_objectives_.set (std::move (x));
     }
 
     const medical_scenario_syllabus::learning_assessments_sequence& medical_scenario_syllabus::
@@ -1097,22 +1073,22 @@ namespace pfc
     // learning_objective_list
     // 
 
-    const learning_objective_list::objectives_sequence& learning_objective_list::
-    objectives () const
+    const learning_objective_list::objective_sequence& learning_objective_list::
+    objective () const
     {
-      return this->objectives_;
+      return this->objective_;
     }
 
-    learning_objective_list::objectives_sequence& learning_objective_list::
-    objectives ()
+    learning_objective_list::objective_sequence& learning_objective_list::
+    objective ()
     {
-      return this->objectives_;
+      return this->objective_;
     }
 
     void learning_objective_list::
-    objectives (const objectives_sequence& s)
+    objective (const objective_sequence& s)
     {
-      this->objectives_ = s;
+      this->objective_ = s;
     }
 
 
@@ -2252,16 +2228,9 @@ namespace pfc
     //
 
     injury_definition_list::
-    injury_definition_list (const injury_type& injury)
+    injury_definition_list ()
     : ::xml_schema::type (),
-      injury_ (injury, this)
-    {
-    }
-
-    injury_definition_list::
-    injury_definition_list (::std::unique_ptr< injury_type > injury)
-    : ::xml_schema::type (),
-      injury_ (std::move (injury), this)
+      injury_ (this)
     {
     }
 
@@ -2310,30 +2279,20 @@ namespace pfc
 
           if (tmp.get () != 0)
           {
-            if (!injury_.present ())
-            {
-              ::std::unique_ptr< injury_type > r (
-                dynamic_cast< injury_type* > (tmp.get ()));
+            ::std::unique_ptr< injury_type > r (
+              dynamic_cast< injury_type* > (tmp.get ()));
 
-              if (r.get ())
-                tmp.release ();
-              else
-                throw ::xsd::cxx::tree::not_derived< char > ();
+            if (r.get ())
+              tmp.release ();
+            else
+              throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->injury_.set (::std::move (r));
-              continue;
-            }
+            this->injury_.push_back (::std::move (r));
+            continue;
           }
         }
 
         break;
-      }
-
-      if (!injury_.present ())
-      {
-        throw ::xsd::cxx::tree::expected_element< char > (
-          "injury",
-          "");
       }
     }
 
@@ -3203,16 +3162,9 @@ namespace pfc
     //
 
     treatment_plan_definition_list::
-    treatment_plan_definition_list (const treatment_plan_type& treatment_plan)
+    treatment_plan_definition_list ()
     : ::xml_schema::type (),
-      treatment_plan_ (treatment_plan, this)
-    {
-    }
-
-    treatment_plan_definition_list::
-    treatment_plan_definition_list (::std::unique_ptr< treatment_plan_type > treatment_plan)
-    : ::xml_schema::type (),
-      treatment_plan_ (std::move (treatment_plan), this)
+      treatment_plan_ (this)
     {
     }
 
@@ -3261,30 +3213,20 @@ namespace pfc
 
           if (tmp.get () != 0)
           {
-            if (!treatment_plan_.present ())
-            {
-              ::std::unique_ptr< treatment_plan_type > r (
-                dynamic_cast< treatment_plan_type* > (tmp.get ()));
+            ::std::unique_ptr< treatment_plan_type > r (
+              dynamic_cast< treatment_plan_type* > (tmp.get ()));
 
-              if (r.get ())
-                tmp.release ();
-              else
-                throw ::xsd::cxx::tree::not_derived< char > ();
+            if (r.get ())
+              tmp.release ();
+            else
+              throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->treatment_plan_.set (::std::move (r));
-              continue;
-            }
+            this->treatment_plan_.push_back (::std::move (r));
+            continue;
           }
         }
 
         break;
-      }
-
-      if (!treatment_plan_.present ())
-      {
-        throw ::xsd::cxx::tree::expected_element< char > (
-          "treatment-plan",
-          "");
       }
     }
 
@@ -4960,10 +4902,17 @@ namespace pfc
     //
 
     medical_scenario_syllabus::
-    medical_scenario_syllabus (const total_assessment_points_type& total_assessment_points)
+    medical_scenario_syllabus (const learning_objectives_type& learning_objectives)
     : ::xml_schema::type (),
-      learning_objectives_ (this),
-      total_assessment_points_ (total_assessment_points, this),
+      learning_objectives_ (learning_objectives, this),
+      learning_assessments_ (this)
+    {
+    }
+
+    medical_scenario_syllabus::
+    medical_scenario_syllabus (::std::unique_ptr< learning_objectives_type > learning_objectives)
+    : ::xml_schema::type (),
+      learning_objectives_ (std::move (learning_objectives), this),
       learning_assessments_ (this)
     {
     }
@@ -4974,7 +4923,6 @@ namespace pfc
                                ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
       learning_objectives_ (x.learning_objectives_, f, this),
-      total_assessment_points_ (x.total_assessment_points_, f, this),
       learning_assessments_ (x.learning_assessments_, f, this)
     {
     }
@@ -4985,7 +4933,6 @@ namespace pfc
                                ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
       learning_objectives_ (this),
-      total_assessment_points_ (this),
       learning_assessments_ (this)
     {
       if ((f & ::xml_schema::flags::base) == 0)
@@ -5017,27 +4964,19 @@ namespace pfc
 
           if (tmp.get () != 0)
           {
-            ::std::unique_ptr< learning_objectives_type > r (
-              dynamic_cast< learning_objectives_type* > (tmp.get ()));
+            if (!learning_objectives_.present ())
+            {
+              ::std::unique_ptr< learning_objectives_type > r (
+                dynamic_cast< learning_objectives_type* > (tmp.get ()));
 
-            if (r.get ())
-              tmp.release ();
-            else
-              throw ::xsd::cxx::tree::not_derived< char > ();
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->learning_objectives_.push_back (::std::move (r));
-            continue;
-          }
-        }
-
-        // total-assessment-points
-        //
-        if (n.name () == "total-assessment-points" && n.namespace_ ().empty ())
-        {
-          if (!total_assessment_points_.present ())
-          {
-            this->total_assessment_points_.set (total_assessment_points_traits::create (i, f, this));
-            continue;
+              this->learning_objectives_.set (::std::move (r));
+              continue;
+            }
           }
         }
 
@@ -5069,10 +5008,10 @@ namespace pfc
         break;
       }
 
-      if (!total_assessment_points_.present ())
+      if (!learning_objectives_.present ())
       {
         throw ::xsd::cxx::tree::expected_element< char > (
-          "total-assessment-points",
+          "learning-objectives",
           "");
       }
     }
@@ -5091,7 +5030,6 @@ namespace pfc
       {
         static_cast< ::xml_schema::type& > (*this) = x;
         this->learning_objectives_ = x.learning_objectives_;
-        this->total_assessment_points_ = x.total_assessment_points_;
         this->learning_assessments_ = x.learning_assessments_;
       }
 
@@ -5115,7 +5053,7 @@ namespace pfc
     learning_objective_list::
     learning_objective_list ()
     : ::xml_schema::type (),
-      objectives_ (this)
+      objective_ (this)
     {
     }
 
@@ -5124,7 +5062,7 @@ namespace pfc
                              ::xml_schema::flags f,
                              ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
-      objectives_ (x.objectives_, f, this)
+      objective_ (x.objective_, f, this)
     {
     }
 
@@ -5133,7 +5071,7 @@ namespace pfc
                              ::xml_schema::flags f,
                              ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
-      objectives_ (this)
+      objective_ (this)
     {
       if ((f & ::xml_schema::flags::base) == 0)
       {
@@ -5152,27 +5090,27 @@ namespace pfc
         const ::xsd::cxx::xml::qualified_name< char > n (
           ::xsd::cxx::xml::dom::name< char > (i));
 
-        // objectives
+        // objective
         //
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
-              "objectives",
+              "objective",
               "",
-              &::xsd::cxx::tree::factory_impl< objectives_type >,
+              &::xsd::cxx::tree::factory_impl< objective_type >,
               false, false, i, n, f, this));
 
           if (tmp.get () != 0)
           {
-            ::std::unique_ptr< objectives_type > r (
-              dynamic_cast< objectives_type* > (tmp.get ()));
+            ::std::unique_ptr< objective_type > r (
+              dynamic_cast< objective_type* > (tmp.get ()));
 
             if (r.get ())
               tmp.release ();
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->objectives_.push_back (::std::move (r));
+            this->objective_.push_back (::std::move (r));
             continue;
           }
         }
@@ -5194,7 +5132,7 @@ namespace pfc
       if (this != &x)
       {
         static_cast< ::xml_schema::type& > (*this) = x;
-        this->objectives_ = x.objectives_;
+        this->objective_ = x.objective_;
       }
 
       return *this;
@@ -8140,8 +8078,13 @@ namespace pfc
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-        o << ::std::endl << "injury: ";
-        om.insert (o, i.injury ());
+        for (injury_definition_list::injury_const_iterator
+             b (i.injury ().begin ()), e (i.injury ().end ());
+             b != e; ++b)
+        {
+          o << ::std::endl << "injury: ";
+          om.insert (o, *b);
+        }
       }
 
       return o;
@@ -8328,8 +8271,13 @@ namespace pfc
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-        o << ::std::endl << "treatment-plan: ";
-        om.insert (o, i.treatment_plan ());
+        for (treatment_plan_definition_list::treatment_plan_const_iterator
+             b (i.treatment_plan ().begin ()), e (i.treatment_plan ().end ());
+             b != e; ++b)
+        {
+          o << ::std::endl << "treatment-plan: ";
+          om.insert (o, *b);
+        }
       }
 
       return o;
@@ -8669,16 +8617,10 @@ namespace pfc
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-        for (medical_scenario_syllabus::learning_objectives_const_iterator
-             b (i.learning_objectives ().begin ()), e (i.learning_objectives ().end ());
-             b != e; ++b)
-        {
-          o << ::std::endl << "learning-objectives: ";
-          om.insert (o, *b);
-        }
+        o << ::std::endl << "learning-objectives: ";
+        om.insert (o, i.learning_objectives ());
       }
 
-      o << ::std::endl << "total-assessment-points: " << i.total_assessment_points ();
       {
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
@@ -8706,11 +8648,11 @@ namespace pfc
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-        for (learning_objective_list::objectives_const_iterator
-             b (i.objectives ().begin ()), e (i.objectives ().end ());
+        for (learning_objective_list::objective_const_iterator
+             b (i.objective ().begin ()), e (i.objective ().end ());
              b != e; ++b)
         {
-          o << ::std::endl << "objectives: ";
+          o << ::std::endl << "objective: ";
           om.insert (o, *b);
         }
       }
@@ -9293,21 +9235,25 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const injury_definition_list::injury_type& x (i.injury ());
-        if (typeid (injury_definition_list::injury_type) == typeid (x))
+        for (injury_definition_list::injury_const_iterator
+             b (i.injury ().begin ()), n (i.injury ().end ());
+             b != n; ++b)
         {
-          ::xercesc::DOMElement& s (
-            ::xsd::cxx::xml::dom::create_element (
-              "injury",
-              e));
+          if (typeid (injury_definition_list::injury_type) == typeid (*b))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "injury",
+                e));
 
-          s << x;
+            s << *b;
+          }
+          else
+            tsm.serialize (
+              "injury",
+              "",
+              false, false, e, *b);
         }
-        else
-          tsm.serialize (
-            "injury",
-            "",
-            false, false, e, x);
       }
     }
 
@@ -9704,21 +9650,25 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const treatment_plan_definition_list::treatment_plan_type& x (i.treatment_plan ());
-        if (typeid (treatment_plan_definition_list::treatment_plan_type) == typeid (x))
+        for (treatment_plan_definition_list::treatment_plan_const_iterator
+             b (i.treatment_plan ().begin ()), n (i.treatment_plan ().end ());
+             b != n; ++b)
         {
-          ::xercesc::DOMElement& s (
-            ::xsd::cxx::xml::dom::create_element (
-              "treatment-plan",
-              e));
+          if (typeid (treatment_plan_definition_list::treatment_plan_type) == typeid (*b))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "treatment-plan",
+                e));
 
-          s << x;
+            s << *b;
+          }
+          else
+            tsm.serialize (
+              "treatment-plan",
+              "",
+              false, false, e, *b);
         }
-        else
-          tsm.serialize (
-            "treatment-plan",
-            "",
-            false, false, e, x);
       }
     }
 
@@ -10432,36 +10382,21 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        for (medical_scenario_syllabus::learning_objectives_const_iterator
-             b (i.learning_objectives ().begin ()), n (i.learning_objectives ().end ());
-             b != n; ++b)
+        const medical_scenario_syllabus::learning_objectives_type& x (i.learning_objectives ());
+        if (typeid (medical_scenario_syllabus::learning_objectives_type) == typeid (x))
         {
-          if (typeid (medical_scenario_syllabus::learning_objectives_type) == typeid (*b))
-          {
-            ::xercesc::DOMElement& s (
-              ::xsd::cxx::xml::dom::create_element (
-                "learning-objectives",
-                e));
-
-            s << *b;
-          }
-          else
-            tsm.serialize (
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
               "learning-objectives",
-              "",
-              false, false, e, *b);
+              e));
+
+          s << x;
         }
-      }
-
-      // total-assessment-points
-      //
-      {
-        ::xercesc::DOMElement& s (
-          ::xsd::cxx::xml::dom::create_element (
-            "total-assessment-points",
-            e));
-
-        s << i.total_assessment_points ();
+        else
+          tsm.serialize (
+            "learning-objectives",
+            "",
+            false, false, e, x);
       }
 
       // learning-assessments
@@ -10504,28 +10439,28 @@ namespace pfc
     {
       e << static_cast< const ::xml_schema::type& > (i);
 
-      // objectives
+      // objective
       //
       {
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        for (learning_objective_list::objectives_const_iterator
-             b (i.objectives ().begin ()), n (i.objectives ().end ());
+        for (learning_objective_list::objective_const_iterator
+             b (i.objective ().begin ()), n (i.objective ().end ());
              b != n; ++b)
         {
-          if (typeid (learning_objective_list::objectives_type) == typeid (*b))
+          if (typeid (learning_objective_list::objective_type) == typeid (*b))
           {
             ::xercesc::DOMElement& s (
               ::xsd::cxx::xml::dom::create_element (
-                "objectives",
+                "objective",
                 e));
 
             s << *b;
           }
           else
             tsm.serialize (
-              "objectives",
+              "objective",
               "",
               false, false, e, *b);
         }

@@ -326,25 +326,23 @@ namespace pfc
       // injury
       //
       typedef ::pfc::schema::injury injury_type;
+      typedef ::xsd::cxx::tree::sequence< injury_type > injury_sequence;
+      typedef injury_sequence::iterator injury_iterator;
+      typedef injury_sequence::const_iterator injury_const_iterator;
       typedef ::xsd::cxx::tree::traits< injury_type, char > injury_traits;
 
-      const injury_type&
+      const injury_sequence&
       injury () const;
 
-      injury_type&
+      injury_sequence&
       injury ();
 
       void
-      injury (const injury_type& x);
-
-      void
-      injury (::std::unique_ptr< injury_type > p);
+      injury (const injury_sequence& s);
 
       // Constructors.
       //
-      injury_definition_list (const injury_type&);
-
-      injury_definition_list (::std::unique_ptr< injury_type >);
+      injury_definition_list ();
 
       injury_definition_list (const ::xercesc::DOMElement& e,
                               ::xml_schema::flags f = 0,
@@ -372,7 +370,7 @@ namespace pfc
              ::xml_schema::flags);
 
       protected:
-      ::xsd::cxx::tree::one< injury_type > injury_;
+      injury_sequence injury_;
     };
 
     class injury: public ::xml_schema::type
@@ -837,25 +835,23 @@ namespace pfc
       // treatment-plan
       //
       typedef ::pfc::schema::treatment_plan treatment_plan_type;
+      typedef ::xsd::cxx::tree::sequence< treatment_plan_type > treatment_plan_sequence;
+      typedef treatment_plan_sequence::iterator treatment_plan_iterator;
+      typedef treatment_plan_sequence::const_iterator treatment_plan_const_iterator;
       typedef ::xsd::cxx::tree::traits< treatment_plan_type, char > treatment_plan_traits;
 
-      const treatment_plan_type&
+      const treatment_plan_sequence&
       treatment_plan () const;
 
-      treatment_plan_type&
+      treatment_plan_sequence&
       treatment_plan ();
 
       void
-      treatment_plan (const treatment_plan_type& x);
-
-      void
-      treatment_plan (::std::unique_ptr< treatment_plan_type > p);
+      treatment_plan (const treatment_plan_sequence& s);
 
       // Constructors.
       //
-      treatment_plan_definition_list (const treatment_plan_type&);
-
-      treatment_plan_definition_list (::std::unique_ptr< treatment_plan_type >);
+      treatment_plan_definition_list ();
 
       treatment_plan_definition_list (const ::xercesc::DOMElement& e,
                                       ::xml_schema::flags f = 0,
@@ -883,7 +879,7 @@ namespace pfc
              ::xml_schema::flags);
 
       protected:
-      ::xsd::cxx::tree::one< treatment_plan_type > treatment_plan_;
+      treatment_plan_sequence treatment_plan_;
     };
 
     class treatment_plan: public ::xml_schema::type
@@ -1703,34 +1699,20 @@ namespace pfc
       public:
       // learning-objectives
       //
-      typedef ::pfc::schema::learning_objective learning_objectives_type;
-      typedef ::xsd::cxx::tree::sequence< learning_objectives_type > learning_objectives_sequence;
-      typedef learning_objectives_sequence::iterator learning_objectives_iterator;
-      typedef learning_objectives_sequence::const_iterator learning_objectives_const_iterator;
+      typedef ::pfc::schema::learning_objective_list learning_objectives_type;
       typedef ::xsd::cxx::tree::traits< learning_objectives_type, char > learning_objectives_traits;
 
-      const learning_objectives_sequence&
+      const learning_objectives_type&
       learning_objectives () const;
 
-      learning_objectives_sequence&
+      learning_objectives_type&
       learning_objectives ();
 
       void
-      learning_objectives (const learning_objectives_sequence& s);
-
-      // total-assessment-points
-      //
-      typedef ::xml_schema::integer total_assessment_points_type;
-      typedef ::xsd::cxx::tree::traits< total_assessment_points_type, char > total_assessment_points_traits;
-
-      const total_assessment_points_type&
-      total_assessment_points () const;
-
-      total_assessment_points_type&
-      total_assessment_points ();
+      learning_objectives (const learning_objectives_type& x);
 
       void
-      total_assessment_points (const total_assessment_points_type& x);
+      learning_objectives (::std::unique_ptr< learning_objectives_type > p);
 
       // learning-assessments
       //
@@ -1751,7 +1733,9 @@ namespace pfc
 
       // Constructors.
       //
-      medical_scenario_syllabus (const total_assessment_points_type&);
+      medical_scenario_syllabus (const learning_objectives_type&);
+
+      medical_scenario_syllabus (::std::unique_ptr< learning_objectives_type >);
 
       medical_scenario_syllabus (const ::xercesc::DOMElement& e,
                                  ::xml_schema::flags f = 0,
@@ -1779,30 +1763,29 @@ namespace pfc
              ::xml_schema::flags);
 
       protected:
-      learning_objectives_sequence learning_objectives_;
-      ::xsd::cxx::tree::one< total_assessment_points_type > total_assessment_points_;
+      ::xsd::cxx::tree::one< learning_objectives_type > learning_objectives_;
       learning_assessments_sequence learning_assessments_;
     };
 
     class learning_objective_list: public ::xml_schema::type
     {
       public:
-      // objectives
+      // objective
       //
-      typedef ::pfc::schema::learning_objective objectives_type;
-      typedef ::xsd::cxx::tree::sequence< objectives_type > objectives_sequence;
-      typedef objectives_sequence::iterator objectives_iterator;
-      typedef objectives_sequence::const_iterator objectives_const_iterator;
-      typedef ::xsd::cxx::tree::traits< objectives_type, char > objectives_traits;
+      typedef ::pfc::schema::learning_objective objective_type;
+      typedef ::xsd::cxx::tree::sequence< objective_type > objective_sequence;
+      typedef objective_sequence::iterator objective_iterator;
+      typedef objective_sequence::const_iterator objective_const_iterator;
+      typedef ::xsd::cxx::tree::traits< objective_type, char > objective_traits;
 
-      const objectives_sequence&
-      objectives () const;
+      const objective_sequence&
+      objective () const;
 
-      objectives_sequence&
-      objectives ();
+      objective_sequence&
+      objective ();
 
       void
-      objectives (const objectives_sequence& s);
+      objective (const objective_sequence& s);
 
       // Constructors.
       //
@@ -1834,7 +1817,7 @@ namespace pfc
              ::xml_schema::flags);
 
       protected:
-      objectives_sequence objectives_;
+      objective_sequence objective_;
     };
 
     class learning_objective: public ::xml_schema::type

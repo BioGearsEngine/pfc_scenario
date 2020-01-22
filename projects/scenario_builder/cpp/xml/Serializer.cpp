@@ -260,71 +260,56 @@ void Serializer::generate_msdl_stream(SQLite3Driver* driver)
 void Serializer::generate_pfc_stream(SQLite3Driver* driver)
 {
   using pfc::schema::ScenarioSchema;
+  namespace pfcs = pfc::schema;
 
   // Injury Variables
   std::vector<Injury*> injury_list = driver->get_injuries();
-  std::string medical_name = injury_list[0]->medical_name.toStdString();
-  std::string common_name = injury_list[0]->common_name.toStdString();
-  std::string description = injury_list[0]->description.toStdString();
-  std::string citations = injury_list[0]->citations.toStdString();
-  float severity_min = injury_list[0]->severity_min;
-  float severity_max = injury_list[0]->severity_max;
+  auto conditions = std::make_unique<pfcs::ScenarioSchema::conditions_type>();
+  for (auto i = 0;i < injury_list.size();++i) {
+    std::string medical_name = injury_list[i]->medical_name.toStdString();
+    std::string common_name = injury_list[i]->common_name.toStdString();
+    std::string description = injury_list[i]->description.toStdString();
+    std::string citations = injury_list[i]->citations.toStdString();
+    float severity_min = injury_list[i]->severity_min;
+    float severity_max = injury_list[i]->severity_max;
+    auto injury_id = std::make_unique<pfcs::injury::id_type>("Injury_"+std::to_string(i+1));
+    auto injury_medical_name = std::make_unique<pfcs::injury::medical_name_type>(medical_name);
+    auto injury_description = std::make_unique<pfcs::injury::description_type>(description);
+    auto num_range = pfcs::injury_severity_range();
+    num_range.numeric_range(std::make_unique<pfc::schema::numeric_range>(severity_min, severity_max));
+    auto injury_severity_range = std::make_unique<pfcs::injury::severity_range_type>(num_range);
+    auto injuries = std::make_unique<pfcs::injury>(std::move(injury_id), std::move(injury_medical_name), std::move(injury_description), std::move(injury_severity_range));
+    conditions->injury().push_back(std::move(injuries));
+  }
 
-  namespace pfcs = pfc::schema;
-  auto injury_id = std::make_unique<pfcs::injury::id_type>("");
-  auto injury_medical_name = std::make_unique<pfcs::injury::medical_name_type>(medical_name);
-  auto injury_description = std::make_unique<pfcs::injury::description_type>(description);
-  auto num_range = pfcs::injury_severity_range(); // Check back with this
-  //num_range.numeric_range().;
-  num_range.numeric_range(std::make_unique <pfc::schema::numeric_range>(severity_min,severity_max));
-  auto injury_severity_range = std::make_unique<pfcs::injury::severity_range_type>(num_range);
-  auto injuries = std::make_unique<pfcs::injury>(std::move(injury_id), std::move(injury_medical_name), std::move(injury_description), std::move(injury_severity_range));
-  auto conditions = std::make_unique<pfcs::ScenarioSchema::conditions_type>(std::move(injuries));
-  
   // Treatment Variables
   std::vector<Treatment*> treatment_list = driver->get_treatments();
-  int trt_id = treatment_list[0]->id;
-  std::string treatment_medical_name = treatment_list[0]->medical_name.toStdString();
-  std::string trtmnt_common_name = treatment_list[0]->common_name.toStdString();
-  std::string treatment_desc = treatment_list[0]->description.toStdString();
-  std::string treatment_equipment = treatment_list[0]->equipment.toStdString();
-  std::string trtmnt_citations = treatment_list[0]->citations.toStdString();
-  auto treatment_id = std::make_unique<pfcs::treatment_plan::id_type>("trt_id");
-  auto treatment_description = std::make_unique<pfcs::treatment_plan::description_type>(treatment_desc);
-  auto treatment_common_name = std::make_unique<pfcs::treatment_plan::common_name_type>(trtmnt_common_name); // This isn't in the constructor right now but we could add it later
-  auto equ_list = std::make_unique<pfc::schema::medical_equipment_list>();
-  auto treatment_required_equipment = std::make_unique<pfcs::treatment_plan::required_equipment_type>();
-  treatment_required_equipment->equipment_refs().push_back("UUID");
-  auto treatment_citation_list = std::make_unique<pfcs::citation_list>();
-  auto treatment_plan = std::make_unique<pfc::schema::treatment_plan>(std::move(treatment_id), std::move(treatment_description), std::move(treatment_required_equipment));
-  auto treatment_plans = std::make_unique<pfcs::treatment_plan_definition_list>(std::move(treatment_plan));
+  auto treatment_plans = std::make_unique<pfcs::treatment_plan_definition_list>();
+  for (auto i = 0;i < treatment_list.size();++i) {
+    std::string treatment_medical_name = treatment_list[i]->medical_name.toStdString();
+    std::string trtmnt_common_name = treatment_list[i]->common_name.toStdString();
+    std::string treatment_desc = treatment_list[i]->description.toStdString();
+    std::string treatment_equipment = treatment_list[i]->equipment.toStdString();
+    std::string trtmnt_citations = treatment_list[i]->citations.toStdString();
+    auto treatment_id = std::make_unique<pfcs::treatment_plan::id_type>("Treatment_"+std::to_string(i+1));
+    auto treatment_description = std::make_unique<pfcs::treatment_plan::description_type>(treatment_desc);
+    auto treatment_common_name = std::make_unique<pfcs::treatment_plan::common_name_type>(trtmnt_common_name); // This isn't in the constructor right now but we could add it later
+    auto treatment_required_equipment = std::make_unique<pfcs::treatment_plan::required_equipment_type>();
+    treatment_required_equipment->equipment_refs().push_back(treatment_equipment);
+    auto treatment_citation_list = std::make_unique<pfcs::citation_list>();
+    auto treatment_plan = std::make_unique<pfc::schema::treatment_plan>(std::move(treatment_id), std::move(treatment_description), std::move(treatment_required_equipment));
+    treatment_plans->treatment_plan().push_back(std::move(treatment_plan));
+  }
+
   auto patient_states = std::make_unique<pfcs::ScenarioSchema::patient_states_type>();
   
 //Learning Objective
-  std::vector<Property*> property_list = driver->get_properties();
-  std::string scenario_name = property_list[0]->name.toStdString();
-  std::string scenario_domain = property_list[0]->value.toStdString();
-  std::string scenario_version = "";
-  std::string scenario_security = "";
-  std::string scenario_description = "";
-  auto learning_objective_id = std::make_unique<pfcs::learning_objective::id_type>("OOGITYBOOGITY");
-  auto learning_objective_name = std::make_unique<pfcs::learning_objective::name_type>();
-  auto lo_ref_citations = std::make_unique<pfcs::citation_ref_list>();
-  auto lo_ref_cpg_name = std::make_unique<pfcs::cpg_list::name_type>();
-  auto lo_ref_cpg_type = std::make_unique<pfcs::cpg_list::citation_ref_type>();
-  auto lo_ref_cpgs = std::make_unique<pfcs::cpg_list>(std::move(lo_ref_cpg_name), std::move(lo_ref_cpg_type)); //lo_ref_citations is a citation_list
-  auto learning_objective_refs = std::make_unique<pfcs::learning_objective::references_type>(std::move(lo_ref_citations), std::move(lo_ref_cpgs));
-  auto lo_ip_ref_list = std::make_unique<pfcs::injury_profile_reference_list>();                            //lo_ref_cpgs is a cpg_list
-  auto lo_tp_ref_list = std::make_unique<pfcs::treatment_plan_reference_list>();
-  auto learning_objective_relates = std::make_unique<pfcs::learning_objective::relates_to_type>(std::move(lo_tp_ref_list), std::move(lo_ip_ref_list));
-  auto learning_objective = std::make_unique<pfcs::learning_objective>(std::move(learning_objective_id), std::move(learning_objective_name), std::move(learning_objective_refs), std::move(learning_objective_relates));
   auto assessment_points = pfcs::assessment_criteria_list::total_points_type();
   auto assessment_criteira = std::make_unique<pfcs::assessment_criteria_list>(std::move(assessment_points));
-  
-  auto syllabus = std::make_unique<pfcs::ScenarioSchema::syllabus_type>(assessment_points);
-  auto learning_objectives = syllabus->learning_objectives();
-  auto assessment_criteria = syllabus->learning_assessments();
-  auto total_assessment_points = syllabus->total_assessment_points();
+  auto assessment_objectives = std::make_unique<pfcs::learning_objective_list>();
+  auto syllabus = std::make_unique<pfcs::ScenarioSchema::syllabus_type>(std::move(assessment_objectives),std::move(assessment_points)); // What is total assessment points? Is it a summation?
+  auto& assessment_criteria = syllabus->learning_assessments();
+  auto& learning_objectives = syllabus->learning_objectives().objective();
 
   std::vector<Objective*> objective_list = driver->get_objectives();
   for (auto i = 0;i < objective_list.size();++i) {
@@ -333,6 +318,7 @@ void Serializer::generate_pfc_stream(SQLite3Driver* driver)
     auto lo_ref_citations = std::make_unique<pfcs::citation_ref_list>();
     lo_ref_citations->citation_ref().push_back(objective_list[i]->citations.toStdString());
     auto lo_ref_cpg_type = std::make_unique<pfcs::cpg_list::citation_ref_type>();
+    auto lo_ref_cpg_name = std::make_unique<pfcs::cpg_list::name_type>();
     auto lo_ref_cpgs = std::make_unique<pfcs::cpg_list>(std::move(lo_ref_cpg_name), std::move(lo_ref_cpg_type)); //lo_ref_citations is a citation_list
     auto learning_objective_refs = std::make_unique<pfcs::learning_objective::references_type>(std::move(lo_ref_citations), std::move(lo_ref_cpgs));
     auto lo_ip_ref_list = std::make_unique<pfcs::injury_profile_reference_list>(); //lo_ref_cpgs is a cpg_list
@@ -341,8 +327,20 @@ void Serializer::generate_pfc_stream(SQLite3Driver* driver)
     auto learning_objective = std::make_unique<pfcs::learning_objective>(std::move(learning_objective_id), std::move(learning_objective_name), std::move(learning_objective_refs), std::move(learning_objective_relates));
     learning_objectives.push_back( std::move(learning_objective));
   }
+  //syllabus->learning_objectives().objective(learning_objectives);
 
+  //scene(const location_id_type&,
+  //      const description_type&,
+  //      const time_of_day_type&,
+  //      const time_in_simulation_type&,
+  //      const events_type&);
+  auto scenes = std::make_unique<pfcs::scene_list>();
   std::vector<Scene*> scene_list = driver->get_scenes();
+  for (auto i = 0;i < scene_list.size();++i) {
+    std::string scene_id = std::to_string(scene_list[i]->id);
+    std::string scene_name = scene_list[i]->name.toStdString();
+    //auto scene = std::make_unique<pfcs::scene>();
+  }
   std::string scene_id = std::to_string(scene_list[0]->id);
   std::string scene_name = scene_list[0]->name.toStdString();
   auto id = ::xml_schema::id(scene_id);
@@ -362,7 +360,6 @@ void Serializer::generate_pfc_stream(SQLite3Driver* driver)
     auto citation = std::make_unique<pfcs::citation>(key, cit->title.toStdString(), cit->year.toStdString());
     citation->authors().push_back(cit->authors.toStdString());
     lo_ref_citation_list->citation().push_back(std::move(citation));
-    ++i;
   }
 //
 

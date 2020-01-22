@@ -21,7 +21,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			<xs:documentation>List of pfc:injury types.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="injury" type="injury" minOccurs="1"/>
+			<xs:element name="injury" type="injury" minOccurs="1" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="injury">
@@ -96,7 +96,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			<xs:documentation>List of pfc:treatment-plan types.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="treatment-plan" type="treatment-plan" minOccurs="1"/>
+			<xs:element name="treatment-plan" type="treatment-plan" minOccurs="1" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="treatment-plan">
@@ -228,14 +228,13 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 	</xs:complexType>
 	<xs:complexType name="medical-scenario-syllabus">
 			<xs:sequence>
-				<xs:element name="learning-objectives" type="learning-objective" minOccurs="0" maxOccurs="unbounded"/>
-     			<xs:element name="total-assessment-points" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="learning-objectives" type="learning-objective-list" minOccurs="1" maxOccurs="1"/>
 				<xs:element name="learning-assessments" type="assessment" minOccurs="0" maxOccurs="unbounded"/>
 		    </xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="learning-objective-list">
 		<xs:sequence>
-			<xs:element name="objectives" type="learning-objective" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="objective" type="learning-objective" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="learning-objective">
@@ -273,8 +272,8 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 		<xs:all>
 			<xs:element name="id" type="xs:ID"/>
 			<xs:element name="objective-id" type="xs:IDREF"/>
-			<xs:element name="points-avaiable" type="xs:integer"/>
-			<xs:element name="criteria" type="xs:string"/>
+			<xs:element name="points-avaiable" type="xs:integer"/><!--IF PARTIAL THEN HOW MANY TOTAL POINTS AVALIABLE-->
+			<xs:element name="criteria" type="xs:string"/><!--PASS/FAIL OR PARTIAL-->
 		</xs:all>
 	</xs:complexType>
 	<xs:complexType name="medical-scenario">
