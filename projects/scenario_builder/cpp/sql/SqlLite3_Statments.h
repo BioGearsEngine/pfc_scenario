@@ -419,6 +419,7 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_locations = R"( DELETE FROM locations; )";
   constexpr auto count_locations = R"( SELECT COUNT(location_id) FROM locations; )";
+  constexpr auto count_locations_in_scene = R"( SELECT COUNT(location_map_id) FROM location_maps WHERE :id = fk_scene ; )";
   constexpr auto select_all_locations = R"( SELECT location_id,name,scene_name,time_of_day,environment FROM locations ORDER BY name; )";
 
   constexpr auto select_location_by_id
@@ -568,6 +569,65 @@ inline namespace sqlite3 {
           JOIN scenes
           ON scenes.scene_id = event_map.scene
           WHERE event_map.fk_event = :id)";
+  //--------------------------- LOCATION MAP STATEMENTS ------------------
+  enum LOCATION_MAP_COLUMNS {
+    LOCATION_MAP_ID,
+    LOCATION_MAP_FK_SCENE,
+    LOCATION_MAP_FK_LOCATION,
+    LOCATION_MAP_COLUMN_COUNT
+  };
+
+  constexpr auto create_location_maps_table = R"(
+  CREATE TABLE IF NOT EXISTS location_maps (
+    location_map_id INTEGER PRIMARY KEY,
+    fk_scene INTEGER,
+    fk_location INTEGER
+  );
+  )";
+  constexpr auto drop_all_location_maps = R"( DELETE FROM location_maps; )";
+  constexpr auto count_location_maps = R"( SELECT COUNT(location_map_id) FROM location_maps; )";
+  constexpr auto select_all_location_maps = R"( SELECT location_map_id,fk_scene,fk_location FROM location_maps; )";
+
+  constexpr auto select_location_map_by_id
+    = R"( SELECT * FROM location_maps WHERE location_map_id = :id ; )";
+  constexpr auto update_location_map_by_id
+    = R"( UPDATE  location_maps
+          SET fk_scene = :fk_scene
+              , fk_location = :fk_location
+          WHERE location_map_id = :id;
+         )";
+  constexpr auto delete_location_map_by_id
+    = R"( DELETE FROM location_maps WHERE location_map_id = :id; )";
+  constexpr auto delete_location_map_by_fk_scene
+    = R"( DELETE FROM location_maps WHERE fk_scene = :fk_scene; )";
+  constexpr auto delete_location_map_by_fk_location
+    = R"( DELETE FROM location_maps WHERE fk_location = :fk_location; )";
+  constexpr auto delete_location_map_by_fk
+    = R"( DELETE FROM location_maps WHERE fk_location = :fk_location AND fk_scene = :fk_scene )";
+  constexpr auto select_location_map_by_fk_scene
+    = R"( SELECT * FROM location_maps WHERE fk_scene = :fk_scene; )";
+  constexpr auto select_location_map_by_fk_location
+    = R"( SELECT * FROM location_maps WHERE fk_location = :fk_location; )";
+  constexpr auto select_location_map_by_fk
+    = R"( SELECT * FROM location_maps WHERE fk_location = :fk_location AND fk_scene = :fk_scene )";
+  constexpr auto insert_or_update_location_maps
+    = R"( INSERT INTO location_maps
+          (fk_scene,fk_location)
+          VALUES (:fk_scene,:fk_location)
+          ;
+         )";
+
+  constexpr auto select_scene_locations_by_fk_scene
+    = R"( SELECT * FROM location_maps AS location_map 
+          JOIN roles
+          ON roles.role_id = location_map.role
+          WHERE location_map.fk_scene = :id;)";
+
+  constexpr auto select_location_scenes_by_fk_location
+    = R"( SELECT * FROM location_maps as location_map
+          JOIN scenes
+          ON scenes.scene_id = location_map.scene
+          WHERE location_map.fk_location = :id)";
   //--------------------------- PROP MAP STATEMENTS ------------------
   enum PROP_MAP_COLUMNS {
     PROP_MAP_ID,

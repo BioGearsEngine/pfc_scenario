@@ -466,6 +466,45 @@ public:
   }
 };
 //----End Event_Map
+struct LocationMap : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int map_id MEMBER id)
+  Q_PROPERTY(int fk_scene MEMBER fk_scene)
+  Q_PROPERTY(int fk_location MEMBER fk_location)
+
+public:
+  int32_t id = -1;
+  int32_t fk_scene = -1;
+  int32_t fk_location = -1;
+
+  LocationMap(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  LocationMap(const LocationMap&) = delete;
+  LocationMap(LocationMap&&) = delete;
+  LocationMap& operator=(const LocationMap&) = delete;
+  LocationMap& operator=(LocationMap&&) = delete;
+  virtual ~LocationMap() = default;
+
+  bool operator==(const LocationMap& rhs) const
+  {
+    return id == rhs.id
+      && fk_scene == rhs.fk_scene
+      && fk_location == rhs.fk_location;
+  }
+  bool operator!=(const LocationMap& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const LocationMap& rhs)
+  {
+    id = rhs.id;
+    fk_scene = rhs.fk_scene;
+    fk_location = rhs.fk_location;
+  }
+};
+//----End Location_Map
 struct PropMap : public QObject {
   Q_OBJECT
   Q_PROPERTY(int map_id MEMBER id)
