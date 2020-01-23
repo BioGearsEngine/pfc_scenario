@@ -91,6 +91,7 @@ public:
   Q_INVOKABLE int role_map_count() const;
   Q_INVOKABLE int event_map_count() const;
   Q_INVOKABLE int location_map_count() const;
+  Q_INVOKABLE int location_map_count(Scene*) const;
   Q_INVOKABLE int prop_map_count() const;
   Q_INVOKABLE int citation_map_count() const;
   Q_INVOKABLE int equipment_map_count() const;

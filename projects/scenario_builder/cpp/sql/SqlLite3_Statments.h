@@ -34,6 +34,7 @@ inline namespace sqlite3 {
     "scenes",
     "role_maps",
     "event_maps",
+    "location_maps",
     "prop_maps",
     "restriction_maps"
   };
@@ -586,6 +587,7 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_location_maps = R"( DELETE FROM location_maps; )";
   constexpr auto count_location_maps = R"( SELECT COUNT(location_map_id) FROM location_maps; )";
+  constexpr auto count_location_maps_in_scene = R"( SELECT COUNT(location_map_id) FROM location_maps WHERE fk_scene = :fk_scene; )";
   constexpr auto select_all_location_maps = R"( SELECT location_map_id,fk_scene,fk_location FROM location_maps; )";
 
   constexpr auto select_location_map_by_id

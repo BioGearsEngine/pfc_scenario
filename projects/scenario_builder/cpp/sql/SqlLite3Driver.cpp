@@ -97,6 +97,7 @@ bool SQLite3Driver::initialize_db()
     { tables[LOCATIONS], sqlite3::create_locations_table },
     { tables[ROLE_MAPS], sqlite3::create_role_maps_table },
     { tables[EVENT_MAPS], sqlite3::create_event_maps_table },
+    { tables[LOCATION_MAPS], sqlite3::create_location_maps_table },
     { tables[CITATION_MAPS], sqlite3::create_citation_maps_table },
     { tables[PROP_MAPS], sqlite3::create_prop_maps_table },
     { tables[RESTRICTION_MAPS], sqlite3::create_restriction_maps_table },
@@ -1414,6 +1415,22 @@ int SQLite3Driver::location_map_count() const
   }
   return -1;
 }
+int SQLite3Driver::location_map_count(Scene* scene) const //we currently only support a scene having one location, but this might change in the future
+{
+  if (_db.isOpen()) {
+
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::count_location_maps_in_scene);
+    query.bindValue(":fk_scene",scene->id);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+      assert(record.count() == 1);
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
 void SQLite3Driver::location_maps()
 {
   qDeleteAll(_location_maps);
@@ -2555,12 +2572,21 @@ bool SQLite3Driver::update_location_in_scene(Scene* scene, Location* location)
   if (_db.isOpen()) {
     QSqlQuery query{ _db };
     if (select_scene(scene)) {
-      if (!select_location(location)) {
+      if (!select_location(location)) { 
         update_location(location);
       }
       LocationMap map;
       map.fk_location = location->id;
       map.fk_scene = scene->id;
+      if (location_map_count(scene) > 0) {
+        QSqlQuery query_location_map(_db);
+        query_location_map.prepare(sqlite3::delete_location_map_by_fk_scene);
+        query_location_map.bindValue(":fk_scene", scene->id);
+        if (!query_location_map.exec()) {
+          qWarning() << query_location_map.lastError();
+          return false;
+        }
+      } 
       if (!select_location_map(&map)) {
         update_location_map(&map);
       } else {
