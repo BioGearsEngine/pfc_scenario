@@ -284,7 +284,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 				The best metephor for this extension is a stageplay script which requires a list of cast members, contains a description of the scenary and props to be used with int the narrative along with a timeline of events.
 
 				This metephor maps to the list of requirments needed to accurately simulate a medical training scenario to provide the immersion needed
-				to properly elevate the training and make learning transfer possible. The breakdown can be as simple or complex as is needed for a narrative to be completed. Various elements also have a fedelity field which is designed to allow additinal information to be encoded int he scenario that is ignored by lower fedelity implementations.
+				to properly elevate the training and make learning transfer possible. The breakdown can be as simple or complex as is needed for a narrative to be completed. Various elements also have a fidelity field which is designed to allow additinal information to be encoded int he scenario that is ignored by lower fidelity implementations.
 			</xs:documentation>
 		</xs:annotation>
 		<xs:all>
@@ -387,7 +387,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 	<xs:complexType name="event">
 		<xs:annotation>
 			<xs:documentation>
-				An event is a pfc:event-category-enum a pfc:event-fedelity-enum 
+				An event is a pfc:event-category-enum a pfc:event-fidelity-enum 
 				and a set of details. 
 				An additional description describes the purpose of the prop in the training simulation in human terms on the level of a cliff-note.
 				At this time details is a string field a future update to this spec will define a event-detail-tye which will be a choice of the following
@@ -396,13 +396,13 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 					event-movment-details
 					event-acoustic-details
 					event-environment-details
-					event-script-details <!--Complex max fedelity code scripting to be loaded by level creators -->
+					event-script-details <!--Complex max fidelity code scripting to be loaded by level creators -->
 				Each one with its own set of fields to be mainpulated
 			</xs:documentation>
 		</xs:annotation>
 		<xs:all>
 			<xs:element name="category" type="event-category-enum"/>
-			<xs:element name="fedelity" type="event-fedelity-enum"/>
+			<xs:element name="fidelity" type="event-fidelity-enum"/>
 			<xs:element name="details" type="xs:string"/>
 		</xs:all>
 	</xs:complexType>
@@ -413,12 +413,12 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="ACTION">
 				<xs:annotation>
-					<xs:documentation>An Action is the result of a Role acting upon a peice of equipment or another Role. Can be detailed at all fedelity levels</xs:documentation>
+					<xs:documentation>An Action is the result of a Role acting upon a peice of equipment or another Role. Can be detailed at all fidelity levels</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="DIALOG">
 				<xs:annotation>
-					<xs:documentation>Dialog is anytime a Role or Object performs audiable dialog in the scene. Typically for Medium or Higher fedelity.</xs:documentation>
+					<xs:documentation>Dialog is anytime a Role or Object performs audiable dialog in the scene. Typically for Medium or Higher fidelity.</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="MOVMENT">
@@ -428,34 +428,34 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:enumeration>
 			<xs:enumeration value="SOUND">
 				<xs:annotation>
-					<xs:documentation>Background or ambient sound affects typically at a high fedelity level as most low and medium fedeity implementations do not have sound systems.</xs:documentation>
+					<xs:documentation>Background or ambient sound affects typically at a high fidelity level as most low and medium fedeity implementations do not have sound systems.</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="ENVIRONMENT">
 				<xs:annotation>
-					<xs:documentation>Typically used to describe changes in set design or weather events almost always reserved for high fedelity simulations.</xs:documentation>
+					<xs:documentation>Typically used to describe changes in set design or weather events almost always reserved for high fidelity simulations.</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:simpleType name="event-fedelity-enum">
+	<xs:simpleType name="event-fidelity-enum">
 		<xs:annotation>
-			<xs:documentation>Enumerated choice of an pfc:event fedelity is intended to be used as a guide by implementations on if the details of this event an be skipped over. Additional fedelity levels may be include in the future</xs:documentation>
+			<xs:documentation>Enumerated choice of an pfc:event fidelity is intended to be used as a guide by implementations on if the details of this event an be skipped over. Additional fidelity levels may be include in the future</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="LOW">
 				<xs:annotation>
-					<xs:documentation>Low fedelity implementations are intende for traditional medical simulators which use live actors are need only to know the high level details like initial injuries and placment of equipment in the scene.</xs:documentation>
+					<xs:documentation>Low fidelity implementations are intende for traditional medical simulators which use live actors are need only to know the high level details like initial injuries and placment of equipment in the scene.</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="MEDIUM">
 				<xs:annotation>
-					<xs:documentation>Medium fedelity implementations are higher level simulations which include some scripted dialog and movment. The details included at this  level  give non trainies instructions on how to act when not interacting directly with the trainee</xs:documentation>
+					<xs:documentation>Medium fidelity implementations are higher level simulations which include some scripted dialog and movment. The details included at this  level  give non trainies instructions on how to act when not interacting directly with the trainee</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="HIGH">
 				<xs:annotation>
-					<xs:documentation>High fedelity simulations are typically fully virtual simulations which must create atmosphereic ad background effects to enhance emerssian We are truly in the weeds at this level of scripting.</xs:documentation>
+					<xs:documentation>High fidelity simulations are typically fully virtual simulations which must create atmosphereic ad background effects to enhance emerssian We are truly in the weeds at this level of scripting.</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 		</xs:restriction>

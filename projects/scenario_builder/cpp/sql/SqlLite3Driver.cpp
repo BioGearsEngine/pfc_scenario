@@ -4600,6 +4600,61 @@ std::vector<Objective*> SQLite3Driver::get_objectives()
   }
   throw std::runtime_error("No db connection");
 }
+std::vector<Location*> SQLite3Driver::get_locations()
+{
+  if (_db.isOpen()) {
+    std::vector<Location*> location_list;
+    QSqlQuery location_query{ _db };
+    location_query.prepare(select_all_locations);
+    location_query.exec();
+    while (location_query.next()) {
+      auto temp = std::make_unique<Location>();
+      auto record = location_query.record();
+      temp->id = record.value(0).toInt();
+      temp->name = record.value(1).toString();
+      temp->scene_name = record.value(2).toString();
+      temp->time_of_day = record.value(3).toString();
+      temp->environment = record.value(4).toString();
+      location_list.push_back(temp.release());
+    }
+    return location_list;
+  }
+  throw std::runtime_error("No db connection");
+}
+std::vector<Location*> SQLite3Driver::get_locations_in_scene(Scene* scene)
+{
+  if (_db.isOpen()) {
+    std::vector<Location*> location_list;
+    std::vector<int32_t> fk_location;
+    QSqlQuery map_query{ _db };
+    map_query.prepare(sqlite3::select_location_map_by_fk_scene);
+    map_query.bindValue(":fk_scene", scene->id);
+    map_query.exec();
+    while (map_query.next()) {
+      auto map = std::make_unique<pfc::LocationMap>();
+      auto map_record = map_query.record();
+      assign_location_map(map_record, *map);
+      fk_location.push_back(map->fk_location);
+    }
+    QSqlQuery query{ _db };
+    query.prepare(sqlite3::select_location_by_id);
+    while (!fk_location.empty()) {
+      query.bindValue(":id", fk_location.back());
+      fk_location.pop_back();
+      if (query.next()) {
+        auto location = std::make_unique<pfc::Location>();
+        auto record = query.record();
+        location->name = record.value(1).toString();
+        location->scene_name = record.value(2).toString();
+        location->time_of_day = record.value(3).toString();
+        location->environment = record.value(4).toString();
+        location_list.push_back(location.release());
+      }
+    }
+    return location_list;
+  }
+  throw std::runtime_error("No db connection");
+}
 std::vector<Property*> SQLite3Driver::get_properties()
 {
   if (_db.isOpen()) {

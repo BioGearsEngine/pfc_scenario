@@ -1841,28 +1841,28 @@ namespace pfc
       this->category_.set (std::move (x));
     }
 
-    const event::fedelity_type& event::
-    fedelity () const
+    const event::fidelity_type& event::
+    fidelity () const
     {
-      return this->fedelity_.get ();
+      return this->fidelity_.get ();
     }
 
-    event::fedelity_type& event::
-    fedelity ()
+    event::fidelity_type& event::
+    fidelity ()
     {
-      return this->fedelity_.get ();
-    }
-
-    void event::
-    fedelity (const fedelity_type& x)
-    {
-      this->fedelity_.set (x);
+      return this->fidelity_.get ();
     }
 
     void event::
-    fedelity (::std::unique_ptr< fedelity_type > x)
+    fidelity (const fidelity_type& x)
     {
-      this->fedelity_.set (std::move (x));
+      this->fidelity_.set (x);
+    }
+
+    void event::
+    fidelity (::std::unique_ptr< fidelity_type > x)
+    {
+      this->fidelity_.set (std::move (x));
     }
 
     const event::details_type& event::
@@ -1935,46 +1935,46 @@ namespace pfc
     }
 
 
-    // event_fedelity_enum
+    // event_fidelity_enum
     // 
 
-    event_fedelity_enum::
-    event_fedelity_enum (value v)
-    : ::xml_schema::string (_xsd_event_fedelity_enum_literals_[v])
+    event_fidelity_enum::
+    event_fidelity_enum (value v)
+    : ::xml_schema::string (_xsd_event_fidelity_enum_literals_[v])
     {
     }
 
-    event_fedelity_enum::
-    event_fedelity_enum (const char* v)
+    event_fidelity_enum::
+    event_fidelity_enum (const char* v)
     : ::xml_schema::string (v)
     {
     }
 
-    event_fedelity_enum::
-    event_fedelity_enum (const ::std::string& v)
+    event_fidelity_enum::
+    event_fidelity_enum (const ::std::string& v)
     : ::xml_schema::string (v)
     {
     }
 
-    event_fedelity_enum::
-    event_fedelity_enum (const ::xml_schema::string& v)
+    event_fidelity_enum::
+    event_fidelity_enum (const ::xml_schema::string& v)
     : ::xml_schema::string (v)
     {
     }
 
-    event_fedelity_enum::
-    event_fedelity_enum (const event_fedelity_enum& v,
+    event_fidelity_enum::
+    event_fidelity_enum (const event_fidelity_enum& v,
                          ::xml_schema::flags f,
                          ::xml_schema::container* c)
     : ::xml_schema::string (v, f, c)
     {
     }
 
-    event_fedelity_enum& event_fedelity_enum::
+    event_fidelity_enum& event_fidelity_enum::
     operator= (value v)
     {
       static_cast< ::xml_schema::string& > (*this) = 
-      ::xml_schema::string (_xsd_event_fedelity_enum_literals_[v]);
+      ::xml_schema::string (_xsd_event_fidelity_enum_literals_[v]);
 
       return *this;
     }
@@ -7140,22 +7140,22 @@ namespace pfc
 
     event::
     event (const category_type& category,
-           const fedelity_type& fedelity,
+           const fidelity_type& fidelity,
            const details_type& details)
     : ::xml_schema::type (),
       category_ (category, this),
-      fedelity_ (fedelity, this),
+      fidelity_ (fidelity, this),
       details_ (details, this)
     {
     }
 
     event::
     event (::std::unique_ptr< category_type > category,
-           ::std::unique_ptr< fedelity_type > fedelity,
+           ::std::unique_ptr< fidelity_type > fidelity,
            ::std::unique_ptr< details_type > details)
     : ::xml_schema::type (),
       category_ (std::move (category), this),
-      fedelity_ (std::move (fedelity), this),
+      fidelity_ (std::move (fidelity), this),
       details_ (std::move (details), this)
     {
     }
@@ -7166,7 +7166,7 @@ namespace pfc
            ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
       category_ (x.category_, f, this),
-      fedelity_ (x.fedelity_, f, this),
+      fidelity_ (x.fidelity_, f, this),
       details_ (x.details_, f, this)
     {
     }
@@ -7177,7 +7177,7 @@ namespace pfc
            ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
       category_ (this),
-      fedelity_ (this),
+      fidelity_ (this),
       details_ (this)
     {
       if ((f & ::xml_schema::flags::base) == 0)
@@ -7225,29 +7225,29 @@ namespace pfc
           }
         }
 
-        // fedelity
+        // fidelity
         //
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
-              "fedelity",
+              "fidelity",
               "",
-              &::xsd::cxx::tree::factory_impl< fedelity_type >,
+              &::xsd::cxx::tree::factory_impl< fidelity_type >,
               false, false, i, n, f, this));
 
           if (tmp.get () != 0)
           {
-            if (!fedelity_.present ())
+            if (!fidelity_.present ())
             {
-              ::std::unique_ptr< fedelity_type > r (
-                dynamic_cast< fedelity_type* > (tmp.get ()));
+              ::std::unique_ptr< fidelity_type > r (
+                dynamic_cast< fidelity_type* > (tmp.get ()));
 
               if (r.get ())
                 tmp.release ();
               else
                 throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->fedelity_.set (::std::move (r));
+              this->fidelity_.set (::std::move (r));
               continue;
             }
           }
@@ -7291,10 +7291,10 @@ namespace pfc
           "");
       }
 
-      if (!fedelity_.present ())
+      if (!fidelity_.present ())
       {
         throw ::xsd::cxx::tree::expected_element< char > (
-          "fedelity",
+          "fidelity",
           "");
       }
 
@@ -7320,7 +7320,7 @@ namespace pfc
       {
         static_cast< ::xml_schema::type& > (*this) = x;
         this->category_ = x.category_;
-        this->fedelity_ = x.fedelity_;
+        this->fidelity_ = x.fidelity_;
         this->details_ = x.details_;
       }
 
@@ -7420,55 +7420,55 @@ namespace pfc
       "event-category-enum",
       "com:ara:pfc:training:1");
 
-    // event_fedelity_enum
+    // event_fidelity_enum
     //
 
-    event_fedelity_enum::
-    event_fedelity_enum (const ::xercesc::DOMElement& e,
+    event_fidelity_enum::
+    event_fidelity_enum (const ::xercesc::DOMElement& e,
                          ::xml_schema::flags f,
                          ::xml_schema::container* c)
     : ::xml_schema::string (e, f, c)
     {
-      _xsd_event_fedelity_enum_convert ();
+      _xsd_event_fidelity_enum_convert ();
     }
 
-    event_fedelity_enum::
-    event_fedelity_enum (const ::xercesc::DOMAttr& a,
+    event_fidelity_enum::
+    event_fidelity_enum (const ::xercesc::DOMAttr& a,
                          ::xml_schema::flags f,
                          ::xml_schema::container* c)
     : ::xml_schema::string (a, f, c)
     {
-      _xsd_event_fedelity_enum_convert ();
+      _xsd_event_fidelity_enum_convert ();
     }
 
-    event_fedelity_enum::
-    event_fedelity_enum (const ::std::string& s,
+    event_fidelity_enum::
+    event_fidelity_enum (const ::std::string& s,
                          const ::xercesc::DOMElement* e,
                          ::xml_schema::flags f,
                          ::xml_schema::container* c)
     : ::xml_schema::string (s, e, f, c)
     {
-      _xsd_event_fedelity_enum_convert ();
+      _xsd_event_fidelity_enum_convert ();
     }
 
-    event_fedelity_enum* event_fedelity_enum::
+    event_fidelity_enum* event_fidelity_enum::
     _clone (::xml_schema::flags f,
             ::xml_schema::container* c) const
     {
-      return new class event_fedelity_enum (*this, f, c);
+      return new class event_fidelity_enum (*this, f, c);
     }
 
-    event_fedelity_enum::value event_fedelity_enum::
-    _xsd_event_fedelity_enum_convert () const
+    event_fidelity_enum::value event_fidelity_enum::
+    _xsd_event_fidelity_enum_convert () const
     {
-      ::xsd::cxx::tree::enum_comparator< char > c (_xsd_event_fedelity_enum_literals_);
+      ::xsd::cxx::tree::enum_comparator< char > c (_xsd_event_fidelity_enum_literals_);
       const value* i (::std::lower_bound (
-                        _xsd_event_fedelity_enum_indexes_,
-                        _xsd_event_fedelity_enum_indexes_ + 3,
+                        _xsd_event_fidelity_enum_indexes_,
+                        _xsd_event_fidelity_enum_indexes_ + 3,
                         *this,
                         c));
 
-      if (i == _xsd_event_fedelity_enum_indexes_ + 3 || _xsd_event_fedelity_enum_literals_[*i] != *this)
+      if (i == _xsd_event_fidelity_enum_indexes_ + 3 || _xsd_event_fidelity_enum_literals_[*i] != *this)
       {
         throw ::xsd::cxx::tree::unexpected_enumerator < char > (*this);
       }
@@ -7476,26 +7476,26 @@ namespace pfc
       return *i;
     }
 
-    const char* const event_fedelity_enum::
-    _xsd_event_fedelity_enum_literals_[3] =
+    const char* const event_fidelity_enum::
+    _xsd_event_fidelity_enum_literals_[3] =
     {
       "LOW",
       "MEDIUM",
       "HIGH"
     };
 
-    const event_fedelity_enum::value event_fedelity_enum::
-    _xsd_event_fedelity_enum_indexes_[3] =
+    const event_fidelity_enum::value event_fidelity_enum::
+    _xsd_event_fidelity_enum_indexes_[3] =
     {
-      ::pfc::schema::event_fedelity_enum::HIGH,
-      ::pfc::schema::event_fedelity_enum::LOW,
-      ::pfc::schema::event_fedelity_enum::MEDIUM
+      ::pfc::schema::event_fidelity_enum::HIGH,
+      ::pfc::schema::event_fidelity_enum::LOW,
+      ::pfc::schema::event_fidelity_enum::MEDIUM
     };
 
     static
-    const ::xsd::cxx::tree::type_factory_initializer< 0, char, event_fedelity_enum >
-    _xsd_event_fedelity_enum_type_factory_init (
-      "event-fedelity-enum",
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, event_fidelity_enum >
+    _xsd_event_fidelity_enum_type_factory_init (
+      "event-fidelity-enum",
       "com:ara:pfc:training:1");
 
     // citation_list
@@ -9029,8 +9029,8 @@ namespace pfc
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-        o << ::std::endl << "fedelity: ";
-        om.insert (o, i.fedelity ());
+        o << ::std::endl << "fidelity: ";
+        om.insert (o, i.fidelity ());
       }
 
       {
@@ -9065,20 +9065,20 @@ namespace pfc
     _xsd_event_category_enum_std_ostream_init;
 
     ::std::ostream&
-    operator<< (::std::ostream& o, event_fedelity_enum::value i)
+    operator<< (::std::ostream& o, event_fidelity_enum::value i)
     {
-      return o << event_fedelity_enum::_xsd_event_fedelity_enum_literals_[i];
+      return o << event_fidelity_enum::_xsd_event_fidelity_enum_literals_[i];
     }
 
     ::std::ostream&
-    operator<< (::std::ostream& o, const event_fedelity_enum& i)
+    operator<< (::std::ostream& o, const event_fidelity_enum& i)
     {
       return o << static_cast< const ::xml_schema::string& > (i);
     }
 
     static
-    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, event_fedelity_enum >
-    _xsd_event_fedelity_enum_std_ostream_init;
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, event_fidelity_enum >
+    _xsd_event_fidelity_enum_std_ostream_init;
 
     ::std::ostream&
     operator<< (::std::ostream& o, const citation_list& i)
@@ -11310,25 +11310,25 @@ namespace pfc
             false, false, e, x);
       }
 
-      // fedelity
+      // fidelity
       //
       {
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const event::fedelity_type& x (i.fedelity ());
-        if (typeid (event::fedelity_type) == typeid (x))
+        const event::fidelity_type& x (i.fidelity ());
+        if (typeid (event::fidelity_type) == typeid (x))
         {
           ::xercesc::DOMElement& s (
             ::xsd::cxx::xml::dom::create_element (
-              "fedelity",
+              "fidelity",
               e));
 
           s << x;
         }
         else
           tsm.serialize (
-            "fedelity",
+            "fidelity",
             "",
             false, false, e, x);
       }
@@ -11391,28 +11391,28 @@ namespace pfc
 
 
     void
-    operator<< (::xercesc::DOMElement& e, const event_fedelity_enum& i)
+    operator<< (::xercesc::DOMElement& e, const event_fidelity_enum& i)
     {
       e << static_cast< const ::xml_schema::string& > (i);
     }
 
     void
-    operator<< (::xercesc::DOMAttr& a, const event_fedelity_enum& i)
+    operator<< (::xercesc::DOMAttr& a, const event_fidelity_enum& i)
     {
       a << static_cast< const ::xml_schema::string& > (i);
     }
 
     void
     operator<< (::xml_schema::list_stream& l,
-                const event_fedelity_enum& i)
+                const event_fidelity_enum& i)
     {
       l << static_cast< const ::xml_schema::string& > (i);
     }
 
     static
-    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, event_fedelity_enum >
-    _xsd_event_fedelity_enum_type_serializer_init (
-      "event-fedelity-enum",
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, event_fidelity_enum >
+    _xsd_event_fidelity_enum_type_serializer_init (
+      "event-fidelity-enum",
       "com:ara:pfc:training:1");
 
 

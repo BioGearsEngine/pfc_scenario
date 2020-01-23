@@ -151,6 +151,8 @@ public:
   Q_INVOKABLE std::vector<EquipmentMap*> get_equipment_maps();
   Q_INVOKABLE std::vector<RestrictionMap*> get_restriction_maps();
   Q_INVOKABLE std::vector<Objective*> get_objectives();
+  Q_INVOKABLE std::vector<Location*> get_locations();
+  Q_INVOKABLE std::vector<Location*> get_locations_in_scene(Scene*);
   Q_INVOKABLE std::vector<Property*> get_properties();
   Q_INVOKABLE std::vector<Prop*> get_props();
   Q_INVOKABLE std::vector<Restriction*> get_restrictions();

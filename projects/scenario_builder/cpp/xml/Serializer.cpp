@@ -334,12 +334,27 @@ void Serializer::generate_pfc_stream(SQLite3Driver* driver)
   //      const time_of_day_type&,
   //      const time_in_simulation_type&,
   //      const events_type&);
+  //event(const category_type&,
+  //      const fedelity_type&,
+  //      const details_type&);
   auto scenes = std::make_unique<pfcs::scene_list>();
   std::vector<Scene*> scene_list = driver->get_scenes();
   for (auto i = 0;i < scene_list.size();++i) {
     std::string scene_id = std::to_string(scene_list[i]->id);
     std::string scene_name = scene_list[i]->name.toStdString();
-    //auto scene = std::make_unique<pfcs::scene>();
+    std::vector<Location*> locations = driver->get_locations_in_scene(scene_list[i]);                              // Currently we only support 1 singular location being mapped to a scene, 
+    auto loc_id = std::make_unique<pfcs::scene::location_id_type>("Location_" + std::to_string(locations[0]->id)); //however in the future we may want to update that, for now there's no need 
+    auto desc = std::make_unique<pfcs::scene::description_type>("Scene Description "+std::to_string(i));       // to iterate since the vector will have max 1 element
+    auto t_o_d = std::make_unique<pfcs::scene::time_of_day_type>(0/*Hours*/, 0/*Minutes*/, 0/*Seconds*/); // Not sure how to set this, check back later
+    auto t_i_s = pfcs::scene::time_in_simulation_type(60/*One Hour*/);
+    auto cat = std::make_unique<pfcs::event::category_type>(pfcs::event_category_enum::ACTION); // Arbitrary pick, come back to this
+    auto fid = std::make_unique<pfcs::event::fidelity_type>(pfcs::event_fidelity_enum::LOW);
+    auto det = std::make_unique<pfcs::event::details_type>(locations[0]->environment.toStdString());
+    auto ev = std::make_unique<pfcs::event>(std::move(cat),std::move(fid),std::move(det));
+    auto ev_list = std::make_unique<pfcs::scene::events_type>();
+    ev_list->event().push_back(std::move(ev));
+    auto scene = std::make_unique<pfcs::scene>(std::move(loc_id),std::move(desc),std::move(t_o_d),std::move(t_i_s),std::move(ev_list));
+    //how do I assigned time_of_day and time_in_simulation?
   }
   std::string scene_id = std::to_string(scene_list[0]->id);
   std::string scene_name = scene_list[0]->name.toStdString();

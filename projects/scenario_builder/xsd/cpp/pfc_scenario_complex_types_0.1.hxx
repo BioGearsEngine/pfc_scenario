@@ -292,7 +292,7 @@ namespace pfc
     class event_list;
     class event;
     class event_category_enum;
-    class event_fedelity_enum;
+    class event_fidelity_enum;
     class citation_list;
     class citation;
     class relates_to;
@@ -2822,22 +2822,22 @@ namespace pfc
       void
       category (::std::unique_ptr< category_type > p);
 
-      // fedelity
+      // fidelity
       //
-      typedef ::pfc::schema::event_fedelity_enum fedelity_type;
-      typedef ::xsd::cxx::tree::traits< fedelity_type, char > fedelity_traits;
+      typedef ::pfc::schema::event_fidelity_enum fidelity_type;
+      typedef ::xsd::cxx::tree::traits< fidelity_type, char > fidelity_traits;
 
-      const fedelity_type&
-      fedelity () const;
+      const fidelity_type&
+      fidelity () const;
 
-      fedelity_type&
-      fedelity ();
-
-      void
-      fedelity (const fedelity_type& x);
+      fidelity_type&
+      fidelity ();
 
       void
-      fedelity (::std::unique_ptr< fedelity_type > p);
+      fidelity (const fidelity_type& x);
+
+      void
+      fidelity (::std::unique_ptr< fidelity_type > p);
 
       // details
       //
@@ -2859,11 +2859,11 @@ namespace pfc
       // Constructors.
       //
       event (const category_type&,
-             const fedelity_type&,
+             const fidelity_type&,
              const details_type&);
 
       event (::std::unique_ptr< category_type >,
-             ::std::unique_ptr< fedelity_type >,
+             ::std::unique_ptr< fidelity_type >,
              ::std::unique_ptr< details_type >);
 
       event (const ::xercesc::DOMElement& e,
@@ -2893,7 +2893,7 @@ namespace pfc
 
       protected:
       ::xsd::cxx::tree::one< category_type > category_;
-      ::xsd::cxx::tree::one< fedelity_type > fedelity_;
+      ::xsd::cxx::tree::one< fidelity_type > fidelity_;
       ::xsd::cxx::tree::one< details_type > details_;
     };
 
@@ -2956,7 +2956,7 @@ namespace pfc
       static const value _xsd_event_category_enum_indexes_[5];
     };
 
-    class event_fedelity_enum: public ::xml_schema::string
+    class event_fidelity_enum: public ::xml_schema::string
     {
       public:
       enum value
@@ -2966,51 +2966,51 @@ namespace pfc
         HIGH
       };
 
-      event_fedelity_enum (value v);
+      event_fidelity_enum (value v);
 
-      event_fedelity_enum (const char* v);
+      event_fidelity_enum (const char* v);
 
-      event_fedelity_enum (const ::std::string& v);
+      event_fidelity_enum (const ::std::string& v);
 
-      event_fedelity_enum (const ::xml_schema::string& v);
+      event_fidelity_enum (const ::xml_schema::string& v);
 
-      event_fedelity_enum (const ::xercesc::DOMElement& e,
+      event_fidelity_enum (const ::xercesc::DOMElement& e,
                            ::xml_schema::flags f = 0,
                            ::xml_schema::container* c = 0);
 
-      event_fedelity_enum (const ::xercesc::DOMAttr& a,
+      event_fidelity_enum (const ::xercesc::DOMAttr& a,
                            ::xml_schema::flags f = 0,
                            ::xml_schema::container* c = 0);
 
-      event_fedelity_enum (const ::std::string& s,
+      event_fidelity_enum (const ::std::string& s,
                            const ::xercesc::DOMElement* e,
                            ::xml_schema::flags f = 0,
                            ::xml_schema::container* c = 0);
 
-      event_fedelity_enum (const event_fedelity_enum& x,
+      event_fidelity_enum (const event_fidelity_enum& x,
                            ::xml_schema::flags f = 0,
                            ::xml_schema::container* c = 0);
 
-      virtual event_fedelity_enum*
+      virtual event_fidelity_enum*
       _clone (::xml_schema::flags f = 0,
               ::xml_schema::container* c = 0) const;
 
-      event_fedelity_enum&
+      event_fidelity_enum&
       operator= (value v);
 
       virtual
       operator value () const
       {
-        return _xsd_event_fedelity_enum_convert ();
+        return _xsd_event_fidelity_enum_convert ();
       }
 
       protected:
       value
-      _xsd_event_fedelity_enum_convert () const;
+      _xsd_event_fidelity_enum_convert () const;
 
       public:
-      static const char* const _xsd_event_fedelity_enum_literals_[3];
-      static const value _xsd_event_fedelity_enum_indexes_[3];
+      static const char* const _xsd_event_fidelity_enum_literals_[3];
+      static const value _xsd_event_fidelity_enum_indexes_[3];
     };
 
     class citation_list: public ::xml_schema::type
@@ -3406,10 +3406,10 @@ namespace pfc
     operator<< (::std::ostream&, const event_category_enum&);
 
     ::std::ostream&
-    operator<< (::std::ostream&, event_fedelity_enum::value);
+    operator<< (::std::ostream&, event_fidelity_enum::value);
 
     ::std::ostream&
-    operator<< (::std::ostream&, const event_fedelity_enum&);
+    operator<< (::std::ostream&, const event_fidelity_enum&);
 
     ::std::ostream&
     operator<< (::std::ostream&, const citation_list&);
@@ -3551,14 +3551,14 @@ namespace pfc
                 const event_category_enum&);
 
     void
-    operator<< (::xercesc::DOMElement&, const event_fedelity_enum&);
+    operator<< (::xercesc::DOMElement&, const event_fidelity_enum&);
 
     void
-    operator<< (::xercesc::DOMAttr&, const event_fedelity_enum&);
+    operator<< (::xercesc::DOMAttr&, const event_fidelity_enum&);
 
     void
     operator<< (::xml_schema::list_stream&,
-                const event_fedelity_enum&);
+                const event_fidelity_enum&);
 
     void
     operator<< (::xercesc::DOMElement&, const citation_list&);
