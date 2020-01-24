@@ -1,8 +1,0 @@
-D:/biogears/pfc/pfc_scenario/projects/zip/lib/zlib/CMakeFiles/zlib.dir
-D:/biogears/pfc/pfc_scenario/projects/zip/lib/zlib/CMakeFiles/zlibstatic.dir
-D:/biogears/pfc/pfc_scenario/projects/zip/lib/zlib/CMakeFiles/example.dir
-D:/biogears/pfc/pfc_scenario/projects/zip/lib/zlib/CMakeFiles/minigzip.dir
-D:/biogears/pfc/pfc_scenario/projects/zip/lib/zlib/CMakeFiles/INSTALL.dir
-D:/biogears/pfc/pfc_scenario/projects/zip/lib/zlib/CMakeFiles/RUN_TESTS.dir
-D:/biogears/pfc/pfc_scenario/projects/zip/lib/zlib/CMakeFiles/ALL_BUILD.dir
-D:/biogears/pfc/pfc_scenario/projects/zip/lib/zlib/CMakeFiles/ZERO_CHECK.dir
