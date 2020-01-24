@@ -44,6 +44,206 @@ namespace pfc
 {
   namespace schema
   {
+    // equipment_definition_list
+    // 
+
+    const equipment_definition_list::equipment_sequence& equipment_definition_list::
+    equipment () const
+    {
+      return this->equipment_;
+    }
+
+    equipment_definition_list::equipment_sequence& equipment_definition_list::
+    equipment ()
+    {
+      return this->equipment_;
+    }
+
+    void equipment_definition_list::
+    equipment (const equipment_sequence& s)
+    {
+      this->equipment_ = s;
+    }
+
+
+    // equipment
+    // 
+
+    const equipment::id_type& equipment::
+    id () const
+    {
+      return this->id_.get ();
+    }
+
+    equipment::id_type& equipment::
+    id ()
+    {
+      return this->id_.get ();
+    }
+
+    void equipment::
+    id (const id_type& x)
+    {
+      this->id_.set (x);
+    }
+
+    void equipment::
+    id (::std::unique_ptr< id_type > x)
+    {
+      this->id_.set (std::move (x));
+    }
+
+    const equipment::name_type& equipment::
+    name () const
+    {
+      return this->name_.get ();
+    }
+
+    equipment::name_type& equipment::
+    name ()
+    {
+      return this->name_.get ();
+    }
+
+    void equipment::
+    name (const name_type& x)
+    {
+      this->name_.set (x);
+    }
+
+    void equipment::
+    name (::std::unique_ptr< name_type > x)
+    {
+      this->name_.set (std::move (x));
+    }
+
+    const equipment::type_optional& equipment::
+    type () const
+    {
+      return this->type_;
+    }
+
+    equipment::type_optional& equipment::
+    type ()
+    {
+      return this->type_;
+    }
+
+    void equipment::
+    type (const type_type& x)
+    {
+      this->type_.set (x);
+    }
+
+    void equipment::
+    type (const type_optional& x)
+    {
+      this->type_ = x;
+    }
+
+    const equipment::description_type& equipment::
+    description () const
+    {
+      return this->description_.get ();
+    }
+
+    equipment::description_type& equipment::
+    description ()
+    {
+      return this->description_.get ();
+    }
+
+    void equipment::
+    description (const description_type& x)
+    {
+      this->description_.set (x);
+    }
+
+    void equipment::
+    description (::std::unique_ptr< description_type > x)
+    {
+      this->description_.set (std::move (x));
+    }
+
+    const equipment::citations_type& equipment::
+    citations () const
+    {
+      return this->citations_.get ();
+    }
+
+    equipment::citations_type& equipment::
+    citations ()
+    {
+      return this->citations_.get ();
+    }
+
+    void equipment::
+    citations (const citations_type& x)
+    {
+      this->citations_.set (x);
+    }
+
+    void equipment::
+    citations (::std::unique_ptr< citations_type > x)
+    {
+      this->citations_.set (std::move (x));
+    }
+
+    const equipment::image_optional& equipment::
+    image () const
+    {
+      return this->image_;
+    }
+
+    equipment::image_optional& equipment::
+    image ()
+    {
+      return this->image_;
+    }
+
+    void equipment::
+    image (const image_type& x)
+    {
+      this->image_.set (x);
+    }
+
+    void equipment::
+    image (const image_optional& x)
+    {
+      this->image_ = x;
+    }
+
+    void equipment::
+    image (::std::unique_ptr< image_type > x)
+    {
+      this->image_.set (std::move (x));
+    }
+
+    const equipment::properties_type& equipment::
+    properties () const
+    {
+      return this->properties_.get ();
+    }
+
+    equipment::properties_type& equipment::
+    properties ()
+    {
+      return this->properties_.get ();
+    }
+
+    void equipment::
+    properties (const properties_type& x)
+    {
+      this->properties_.set (x);
+    }
+
+    void equipment::
+    properties (::std::unique_ptr< properties_type > x)
+    {
+      this->properties_.set (std::move (x));
+    }
+
+
     // injury_definition_list
     // 
 
@@ -2272,6 +2472,80 @@ namespace pfc
     }
 
 
+    // properties_list
+    // 
+
+    const properties_list::property_sequence& properties_list::
+    property () const
+    {
+      return this->property_;
+    }
+
+    properties_list::property_sequence& properties_list::
+    property ()
+    {
+      return this->property_;
+    }
+
+    void properties_list::
+    property (const property_sequence& s)
+    {
+      this->property_ = s;
+    }
+
+
+    // property
+    // 
+
+    const property::name_type& property::
+    name () const
+    {
+      return this->name_.get ();
+    }
+
+    property::name_type& property::
+    name ()
+    {
+      return this->name_.get ();
+    }
+
+    void property::
+    name (const name_type& x)
+    {
+      this->name_.set (x);
+    }
+
+    void property::
+    name (::std::unique_ptr< name_type > x)
+    {
+      this->name_.set (std::move (x));
+    }
+
+    const property::type_type& property::
+    type () const
+    {
+      return this->type_.get ();
+    }
+
+    property::type_type& property::
+    type ()
+    {
+      return this->type_.get ();
+    }
+
+    void property::
+    type (const type_type& x)
+    {
+      this->type_.set (x);
+    }
+
+    void property::
+    type (::std::unique_ptr< type_type > x)
+    {
+      this->type_.set (std::move (x));
+    }
+
+
     // relates_to
     // 
 
@@ -2340,6 +2614,461 @@ namespace pfc
 {
   namespace schema
   {
+    // equipment_definition_list
+    //
+
+    equipment_definition_list::
+    equipment_definition_list ()
+    : ::xml_schema::type (),
+      equipment_ (this)
+    {
+    }
+
+    equipment_definition_list::
+    equipment_definition_list (const equipment_definition_list& x,
+                               ::xml_schema::flags f,
+                               ::xml_schema::container* c)
+    : ::xml_schema::type (x, f, c),
+      equipment_ (x.equipment_, f, this)
+    {
+    }
+
+    equipment_definition_list::
+    equipment_definition_list (const ::xercesc::DOMElement& e,
+                               ::xml_schema::flags f,
+                               ::xml_schema::container* c)
+    : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+      equipment_ (this)
+    {
+      if ((f & ::xml_schema::flags::base) == 0)
+      {
+        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+        this->parse (p, f);
+      }
+    }
+
+    void equipment_definition_list::
+    parse (::xsd::cxx::xml::dom::parser< char >& p,
+           ::xml_schema::flags f)
+    {
+      for (; p.more_content (); p.next_content (false))
+      {
+        const ::xercesc::DOMElement& i (p.cur_element ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+
+        // equipment
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "equipment",
+              "",
+              &::xsd::cxx::tree::factory_impl< equipment_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            ::std::unique_ptr< equipment_type > r (
+              dynamic_cast< equipment_type* > (tmp.get ()));
+
+            if (r.get ())
+              tmp.release ();
+            else
+              throw ::xsd::cxx::tree::not_derived< char > ();
+
+            this->equipment_.push_back (::std::move (r));
+            continue;
+          }
+        }
+
+        break;
+      }
+    }
+
+    equipment_definition_list* equipment_definition_list::
+    _clone (::xml_schema::flags f,
+            ::xml_schema::container* c) const
+    {
+      return new class equipment_definition_list (*this, f, c);
+    }
+
+    equipment_definition_list& equipment_definition_list::
+    operator= (const equipment_definition_list& x)
+    {
+      if (this != &x)
+      {
+        static_cast< ::xml_schema::type& > (*this) = x;
+        this->equipment_ = x.equipment_;
+      }
+
+      return *this;
+    }
+
+    equipment_definition_list::
+    ~equipment_definition_list ()
+    {
+    }
+
+    static
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, equipment_definition_list >
+    _xsd_equipment_definition_list_type_factory_init (
+      "equipment-definition-list",
+      "com:ara:pfc:training:1");
+
+    // equipment
+    //
+
+    equipment::
+    equipment (const id_type& id,
+               const name_type& name,
+               const description_type& description,
+               const citations_type& citations,
+               const properties_type& properties)
+    : ::xml_schema::type (),
+      id_ (id, this),
+      name_ (name, this),
+      type_ (this),
+      description_ (description, this),
+      citations_ (citations, this),
+      image_ (this),
+      properties_ (properties, this)
+    {
+    }
+
+    equipment::
+    equipment (const id_type& id,
+               const name_type& name,
+               const description_type& description,
+               ::std::unique_ptr< citations_type > citations,
+               ::std::unique_ptr< properties_type > properties)
+    : ::xml_schema::type (),
+      id_ (id, this),
+      name_ (name, this),
+      type_ (this),
+      description_ (description, this),
+      citations_ (std::move (citations), this),
+      image_ (this),
+      properties_ (std::move (properties), this)
+    {
+    }
+
+    equipment::
+    equipment (::std::unique_ptr< id_type > id,
+               ::std::unique_ptr< name_type > name,
+               ::std::unique_ptr< description_type > description,
+               ::std::unique_ptr< citations_type > citations,
+               ::std::unique_ptr< properties_type > properties)
+    : ::xml_schema::type (),
+      id_ (std::move (id), this),
+      name_ (std::move (name), this),
+      type_ (this),
+      description_ (std::move (description), this),
+      citations_ (std::move (citations), this),
+      image_ (this),
+      properties_ (std::move (properties), this)
+    {
+    }
+
+    equipment::
+    equipment (const equipment& x,
+               ::xml_schema::flags f,
+               ::xml_schema::container* c)
+    : ::xml_schema::type (x, f, c),
+      id_ (x.id_, f, this),
+      name_ (x.name_, f, this),
+      type_ (x.type_, f, this),
+      description_ (x.description_, f, this),
+      citations_ (x.citations_, f, this),
+      image_ (x.image_, f, this),
+      properties_ (x.properties_, f, this)
+    {
+    }
+
+    equipment::
+    equipment (const ::xercesc::DOMElement& e,
+               ::xml_schema::flags f,
+               ::xml_schema::container* c)
+    : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+      id_ (this),
+      name_ (this),
+      type_ (this),
+      description_ (this),
+      citations_ (this),
+      image_ (this),
+      properties_ (this)
+    {
+      if ((f & ::xml_schema::flags::base) == 0)
+      {
+        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+        this->parse (p, f);
+      }
+    }
+
+    void equipment::
+    parse (::xsd::cxx::xml::dom::parser< char >& p,
+           ::xml_schema::flags f)
+    {
+      for (; p.more_content (); p.next_content (false))
+      {
+        const ::xercesc::DOMElement& i (p.cur_element ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+
+        // id
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "id",
+              "",
+              &::xsd::cxx::tree::factory_impl< id_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!id_.present ())
+            {
+              ::std::unique_ptr< id_type > r (
+                dynamic_cast< id_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->id_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // name
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "name",
+              "",
+              &::xsd::cxx::tree::factory_impl< name_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!name_.present ())
+            {
+              ::std::unique_ptr< name_type > r (
+                dynamic_cast< name_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->name_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // type
+        //
+        if (n.name () == "type" && n.namespace_ ().empty ())
+        {
+          if (!this->type_)
+          {
+            this->type_.set (type_traits::create (i, f, this));
+            continue;
+          }
+        }
+
+        // description
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "description",
+              "",
+              &::xsd::cxx::tree::factory_impl< description_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!description_.present ())
+            {
+              ::std::unique_ptr< description_type > r (
+                dynamic_cast< description_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->description_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // citations
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "citations",
+              "",
+              &::xsd::cxx::tree::factory_impl< citations_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!citations_.present ())
+            {
+              ::std::unique_ptr< citations_type > r (
+                dynamic_cast< citations_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->citations_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // image
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "image",
+              "",
+              &::xsd::cxx::tree::factory_impl< image_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!this->image_)
+            {
+              ::std::unique_ptr< image_type > r (
+                dynamic_cast< image_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->image_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // properties
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "properties",
+              "",
+              &::xsd::cxx::tree::factory_impl< properties_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!properties_.present ())
+            {
+              ::std::unique_ptr< properties_type > r (
+                dynamic_cast< properties_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->properties_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        break;
+      }
+
+      if (!id_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "id",
+          "");
+      }
+
+      if (!name_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "name",
+          "");
+      }
+
+      if (!description_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "description",
+          "");
+      }
+
+      if (!citations_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "citations",
+          "");
+      }
+
+      if (!properties_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "properties",
+          "");
+      }
+    }
+
+    equipment* equipment::
+    _clone (::xml_schema::flags f,
+            ::xml_schema::container* c) const
+    {
+      return new class equipment (*this, f, c);
+    }
+
+    equipment& equipment::
+    operator= (const equipment& x)
+    {
+      if (this != &x)
+      {
+        static_cast< ::xml_schema::type& > (*this) = x;
+        this->id_ = x.id_;
+        this->name_ = x.name_;
+        this->type_ = x.type_;
+        this->description_ = x.description_;
+        this->citations_ = x.citations_;
+        this->image_ = x.image_;
+        this->properties_ = x.properties_;
+      }
+
+      return *this;
+    }
+
+    equipment::
+    ~equipment ()
+    {
+    }
+
+    static
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, equipment >
+    _xsd_equipment_type_factory_init (
+      "equipment",
+      "com:ara:pfc:training:1");
+
     // injury_definition_list
     //
 
@@ -8381,6 +9110,269 @@ namespace pfc
       "citation",
       "com:ara:pfc:training:1");
 
+    // properties_list
+    //
+
+    properties_list::
+    properties_list ()
+    : ::xml_schema::type (),
+      property_ (this)
+    {
+    }
+
+    properties_list::
+    properties_list (const properties_list& x,
+                     ::xml_schema::flags f,
+                     ::xml_schema::container* c)
+    : ::xml_schema::type (x, f, c),
+      property_ (x.property_, f, this)
+    {
+    }
+
+    properties_list::
+    properties_list (const ::xercesc::DOMElement& e,
+                     ::xml_schema::flags f,
+                     ::xml_schema::container* c)
+    : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+      property_ (this)
+    {
+      if ((f & ::xml_schema::flags::base) == 0)
+      {
+        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+        this->parse (p, f);
+      }
+    }
+
+    void properties_list::
+    parse (::xsd::cxx::xml::dom::parser< char >& p,
+           ::xml_schema::flags f)
+    {
+      for (; p.more_content (); p.next_content (false))
+      {
+        const ::xercesc::DOMElement& i (p.cur_element ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+
+        // property
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "property",
+              "",
+              &::xsd::cxx::tree::factory_impl< property_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            ::std::unique_ptr< property_type > r (
+              dynamic_cast< property_type* > (tmp.get ()));
+
+            if (r.get ())
+              tmp.release ();
+            else
+              throw ::xsd::cxx::tree::not_derived< char > ();
+
+            this->property_.push_back (::std::move (r));
+            continue;
+          }
+        }
+
+        break;
+      }
+    }
+
+    properties_list* properties_list::
+    _clone (::xml_schema::flags f,
+            ::xml_schema::container* c) const
+    {
+      return new class properties_list (*this, f, c);
+    }
+
+    properties_list& properties_list::
+    operator= (const properties_list& x)
+    {
+      if (this != &x)
+      {
+        static_cast< ::xml_schema::type& > (*this) = x;
+        this->property_ = x.property_;
+      }
+
+      return *this;
+    }
+
+    properties_list::
+    ~properties_list ()
+    {
+    }
+
+    static
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, properties_list >
+    _xsd_properties_list_type_factory_init (
+      "properties-list",
+      "com:ara:pfc:training:1");
+
+    // property
+    //
+
+    property::
+    property (const name_type& name,
+              const type_type& type)
+    : ::xml_schema::type (),
+      name_ (name, this),
+      type_ (type, this)
+    {
+    }
+
+    property::
+    property (::std::unique_ptr< name_type > name,
+              ::std::unique_ptr< type_type > type)
+    : ::xml_schema::type (),
+      name_ (std::move (name), this),
+      type_ (std::move (type), this)
+    {
+    }
+
+    property::
+    property (const property& x,
+              ::xml_schema::flags f,
+              ::xml_schema::container* c)
+    : ::xml_schema::type (x, f, c),
+      name_ (x.name_, f, this),
+      type_ (x.type_, f, this)
+    {
+    }
+
+    property::
+    property (const ::xercesc::DOMElement& e,
+              ::xml_schema::flags f,
+              ::xml_schema::container* c)
+    : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+      name_ (this),
+      type_ (this)
+    {
+      if ((f & ::xml_schema::flags::base) == 0)
+      {
+        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+        this->parse (p, f);
+      }
+    }
+
+    void property::
+    parse (::xsd::cxx::xml::dom::parser< char >& p,
+           ::xml_schema::flags f)
+    {
+      for (; p.more_content (); p.next_content (false))
+      {
+        const ::xercesc::DOMElement& i (p.cur_element ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+
+        // name
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "name",
+              "",
+              &::xsd::cxx::tree::factory_impl< name_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!name_.present ())
+            {
+              ::std::unique_ptr< name_type > r (
+                dynamic_cast< name_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->name_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // type
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "type",
+              "",
+              &::xsd::cxx::tree::factory_impl< type_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!type_.present ())
+            {
+              ::std::unique_ptr< type_type > r (
+                dynamic_cast< type_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->type_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        break;
+      }
+
+      if (!name_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "name",
+          "");
+      }
+
+      if (!type_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "type",
+          "");
+      }
+    }
+
+    property* property::
+    _clone (::xml_schema::flags f,
+            ::xml_schema::container* c) const
+    {
+      return new class property (*this, f, c);
+    }
+
+    property& property::
+    operator= (const property& x)
+    {
+      if (this != &x)
+      {
+        static_cast< ::xml_schema::type& > (*this) = x;
+        this->name_ = x.name_;
+        this->type_ = x.type_;
+      }
+
+      return *this;
+    }
+
+    property::
+    ~property ()
+    {
+    }
+
+    static
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, property >
+    _xsd_property_type_factory_init (
+      "property",
+      "com:ara:pfc:training:1");
+
     // relates_to
     //
 
@@ -8553,6 +9545,95 @@ namespace pfc
 {
   namespace schema
   {
+    ::std::ostream&
+    operator<< (::std::ostream& o, const equipment_definition_list& i)
+    {
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        for (equipment_definition_list::equipment_const_iterator
+             b (i.equipment ().begin ()), e (i.equipment ().end ());
+             b != e; ++b)
+        {
+          o << ::std::endl << "equipment: ";
+          om.insert (o, *b);
+        }
+      }
+
+      return o;
+    }
+
+    static
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, equipment_definition_list >
+    _xsd_equipment_definition_list_std_ostream_init;
+
+    ::std::ostream&
+    operator<< (::std::ostream& o, const equipment& i)
+    {
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "id: ";
+        om.insert (o, i.id ());
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "name: ";
+        om.insert (o, i.name ());
+      }
+
+      if (i.type ())
+      {
+        o << ::std::endl << "type: " << *i.type ();
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "description: ";
+        om.insert (o, i.description ());
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "citations: ";
+        om.insert (o, i.citations ());
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        if (i.image ())
+        {
+          o << ::std::endl << "image: ";
+          om.insert (o, *i.image ());
+        }
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "properties: ";
+        om.insert (o, i.properties ());
+      }
+
+      return o;
+    }
+
+    static
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, equipment >
+    _xsd_equipment_std_ostream_init;
+
     ::std::ostream&
     operator<< (::std::ostream& o, const injury_definition_list& i)
     {
@@ -9714,6 +10795,55 @@ namespace pfc
     _xsd_citation_std_ostream_init;
 
     ::std::ostream&
+    operator<< (::std::ostream& o, const properties_list& i)
+    {
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        for (properties_list::property_const_iterator
+             b (i.property ().begin ()), e (i.property ().end ());
+             b != e; ++b)
+        {
+          o << ::std::endl << "property: ";
+          om.insert (o, *b);
+        }
+      }
+
+      return o;
+    }
+
+    static
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, properties_list >
+    _xsd_properties_list_std_ostream_init;
+
+    ::std::ostream&
+    operator<< (::std::ostream& o, const property& i)
+    {
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "name: ";
+        om.insert (o, i.name ());
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "type: ";
+        om.insert (o, i.type ());
+      }
+
+      return o;
+    }
+
+    static
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, property >
+    _xsd_property_std_ostream_init;
+
+    ::std::ostream&
     operator<< (::std::ostream& o, const relates_to& i)
     {
       {
@@ -9765,6 +10895,212 @@ namespace pfc
 {
   namespace schema
   {
+    void
+    operator<< (::xercesc::DOMElement& e, const equipment_definition_list& i)
+    {
+      e << static_cast< const ::xml_schema::type& > (i);
+
+      // equipment
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        for (equipment_definition_list::equipment_const_iterator
+             b (i.equipment ().begin ()), n (i.equipment ().end ());
+             b != n; ++b)
+        {
+          if (typeid (equipment_definition_list::equipment_type) == typeid (*b))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "equipment",
+                e));
+
+            s << *b;
+          }
+          else
+            tsm.serialize (
+              "equipment",
+              "",
+              false, false, e, *b);
+        }
+      }
+    }
+
+    static
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, equipment_definition_list >
+    _xsd_equipment_definition_list_type_serializer_init (
+      "equipment-definition-list",
+      "com:ara:pfc:training:1");
+
+
+    void
+    operator<< (::xercesc::DOMElement& e, const equipment& i)
+    {
+      e << static_cast< const ::xml_schema::type& > (i);
+
+      // id
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const equipment::id_type& x (i.id ());
+        if (typeid (equipment::id_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "id",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "id",
+            "",
+            false, false, e, x);
+      }
+
+      // name
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const equipment::name_type& x (i.name ());
+        if (typeid (equipment::name_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "name",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "name",
+            "",
+            false, false, e, x);
+      }
+
+      // type
+      //
+      if (i.type ())
+      {
+        ::xercesc::DOMElement& s (
+          ::xsd::cxx::xml::dom::create_element (
+            "type",
+            e));
+
+        s << *i.type ();
+      }
+
+      // description
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const equipment::description_type& x (i.description ());
+        if (typeid (equipment::description_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "description",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "description",
+            "",
+            false, false, e, x);
+      }
+
+      // citations
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const equipment::citations_type& x (i.citations ());
+        if (typeid (equipment::citations_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "citations",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "citations",
+            "",
+            false, false, e, x);
+      }
+
+      // image
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        if (i.image ())
+        {
+          const equipment::image_type& x (*i.image ());
+          if (typeid (equipment::image_type) == typeid (x))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "image",
+                e));
+
+            s << x;
+          }
+          else
+            tsm.serialize (
+              "image",
+              "",
+              false, false, e, x);
+        }
+      }
+
+      // properties
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const equipment::properties_type& x (i.properties ());
+        if (typeid (equipment::properties_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "properties",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "properties",
+            "",
+            false, false, e, x);
+      }
+    }
+
+    static
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, equipment >
+    _xsd_equipment_type_serializer_init (
+      "equipment",
+      "com:ara:pfc:training:1");
+
+
     void
     operator<< (::xercesc::DOMElement& e, const injury_definition_list& i)
     {
@@ -12294,6 +13630,105 @@ namespace pfc
     const ::xsd::cxx::tree::type_serializer_initializer< 0, char, citation >
     _xsd_citation_type_serializer_init (
       "citation",
+      "com:ara:pfc:training:1");
+
+
+    void
+    operator<< (::xercesc::DOMElement& e, const properties_list& i)
+    {
+      e << static_cast< const ::xml_schema::type& > (i);
+
+      // property
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        for (properties_list::property_const_iterator
+             b (i.property ().begin ()), n (i.property ().end ());
+             b != n; ++b)
+        {
+          if (typeid (properties_list::property_type) == typeid (*b))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "property",
+                e));
+
+            s << *b;
+          }
+          else
+            tsm.serialize (
+              "property",
+              "",
+              false, false, e, *b);
+        }
+      }
+    }
+
+    static
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, properties_list >
+    _xsd_properties_list_type_serializer_init (
+      "properties-list",
+      "com:ara:pfc:training:1");
+
+
+    void
+    operator<< (::xercesc::DOMElement& e, const property& i)
+    {
+      e << static_cast< const ::xml_schema::type& > (i);
+
+      // name
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const property::name_type& x (i.name ());
+        if (typeid (property::name_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "name",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "name",
+            "",
+            false, false, e, x);
+      }
+
+      // type
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const property::type_type& x (i.type ());
+        if (typeid (property::type_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "type",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "type",
+            "",
+            false, false, e, x);
+      }
+    }
+
+    static
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, property >
+    _xsd_property_type_serializer_init (
+      "property",
       "com:ara:pfc:training:1");
 
 

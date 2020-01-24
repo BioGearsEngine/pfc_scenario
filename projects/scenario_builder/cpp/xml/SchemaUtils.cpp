@@ -2,6 +2,7 @@
 
 #include "../sql/SQLTables.h"
 
+#include <iostream>
 #include <mutex>
 
 #include <QString>
@@ -22,7 +23,7 @@ namespace schema {
   //-------------------------------------------------------------------------------
   auto make_uuid(std::string input) -> ::xml_schema::string
   {
-    return ::xml_schema::id(input);
+    return ::xml_schema::string(input);
   }
   //--------------------------------------------------------------------------------
   auto make_string(std::string input) -> ::xml_schema::string
@@ -38,20 +39,20 @@ namespace schema {
     case 0:
       return ::xml_schema::time{ 0, 0, 0 };
     case 1:
-      return ::xml_schema::time { 0, 0, components[0].toDouble() };
+      return ::xml_schema::time{ 0, 0, components[0].toDouble() };
     case 2:
       return ::xml_schema::time{ 0, components[0].toUShort(), components[1].toDouble() };
     case 3:
     default:
       return ::xml_schema::time{ components[0].toUShort(), components[1].toUShort(), components[2].toDouble() };
     }
-
   }
 
   //-------------------------------------------------------------------------------
   ScenarioSchema PFC::make_Scenario()
   {
-    return ScenarioSchema(make_conditions(),
+    return ScenarioSchema(make_equipments(),
+                          make_conditions(),
                           make_treatment_plans(),
                           make_patient_states(),
                           make_syllabus(),
@@ -59,24 +60,18 @@ namespace schema {
                           make_citation_list());
   }
   //-------------------------------------------------------------------------------
+  auto PFC::make_equipments() -> std::unique_ptr<ScenarioSchema::equipment_type>
+  {
+    return std::make_unique<schema::ScenarioSchema::equipment_type>();
+  }
+  //-------------------------------------------------------------------------------
   auto PFC::make_conditions() -> std::unique_ptr<ScenarioSchema::conditions_type>
   {
-    //auto injury_id = std::make_unique<schema::injury::id_type>("");
-    //auto injury_medical_name = std::make_unique<schema::injury::medical_name_type>();
-    //auto injury_description = std::make_unique<schema::injury::description_type>();
-    //auto num_range = schema::injury_severity_range();
-    //auto injury_severity_range = std::make_unique<schema::injury::severity_range_type>(num_range);
-    //auto injuries = std::make_unique<schema::injury>(std::move(injury_id), std::move(injury_medical_name), std::move(injury_description), std::move(injury_severity_range));
     return std::make_unique<schema::ScenarioSchema::conditions_type>();
   }
 
   auto PFC::make_treatment_plans() -> std::unique_ptr<ScenarioSchema::treatment_plans_type>
   {
-    //auto treatment_id = std::make_unique<schema::treatment_plan::id_type>("");
-    //auto treatment_description = std::make_unique<schema::treatment_plan::description_type>();
-    //auto treatment_required_equipment = std::make_unique<schema::treatment_plan::required_equipment_type>();
-    //auto treatment_plan = std::make_unique<pfc::schema::treatment_plan>(std::move(treatment_id), std::move(treatment_description), std::move(treatment_required_equipment));
-
     return std::make_unique<schema::ScenarioSchema::treatment_plans_type>();
   }
   //-------------------------------------------------------------------------------
@@ -113,13 +108,13 @@ namespace schema {
     num_range.numeric_range(std::make_unique<pfc::schema::numeric_range>(input->severity_min, input->severity_max));
 
     auto injury = std::make_unique<pfc::schema::injury>(
-      std::make_unique<pfc::schema::injury::id_type>("Injury_" + std::to_string(input->id + 1)),
+      std::make_unique<pfc::schema::injury::id_type>("Injury_" + std::to_string(input->id)),
       std::make_unique<pfc::schema::injury::medical_name_type>(input->medical_name.toStdString()),
       std::make_unique<pfc::schema::citation_ref_list>(),
       std::make_unique<pfc::schema::injury::description_type>(input->description.toStdString()),
       std::make_unique<pfc::schema::injury::severity_range_type>(num_range));
     injury->common_name(input->common_name.toStdString());
-    injury->citations(make_citation_ref_list(input->common_name));
+    injury->citations(make_citation_ref_list(input->citations));
 
     return injury;
   }
@@ -128,7 +123,9 @@ namespace schema {
   {
     auto citation_ref_list = std::make_unique<schema::citation_ref_list>();
     for (auto& token : ref_list.split(';')) {
-      citation_ref_list->citation_ref().push_back(token.toStdString());
+      if (!token.isEmpty()) {
+        citation_ref_list->citation_ref().push_back(schema::make_string("Citation_" + token.toStdString()));
+      }
     }
     return citation_ref_list;
   }
@@ -137,7 +134,9 @@ namespace schema {
   {
     auto cpg_ref_list = std::make_unique<schema::cpg_ref_list>();
     for (auto& token : ref_list.split(';')) {
-      cpg_ref_list->cpg_ref().push_back(token.toStdString());
+      if (!token.isEmpty()) {
+        cpg_ref_list->cpg_ref().push_back("CPG_"+token.toStdString());
+      }
     }
     return cpg_ref_list;
   }
@@ -146,7 +145,9 @@ namespace schema {
   {
     auto equipment_ref_list = std::make_unique<schema::equipment_ref_list>();
     for (auto& token : ref_list.split(';')) {
-      equipment_ref_list->equipment_refs().push_back(token.toStdString());
+      if (!token.isEmpty()) {
+        equipment_ref_list->equipment_refs().push_back("Equipment_"+token.toStdString());
+      }
     }
     return equipment_ref_list;
   }
@@ -155,7 +156,9 @@ namespace schema {
   {
     auto injury_profile_ref_list = std::make_unique<schema::injury_profile_ref_list>();
     for (auto& token : ref_list.split(';')) {
-      injury_profile_ref_list->injury_profile().push_back(token.toStdString());
+      if (!token.isEmpty()) {
+        injury_profile_ref_list->injury_profile().push_back("Profile_"+token.toStdString());
+      }
     }
     return injury_profile_ref_list;
   }
@@ -164,16 +167,38 @@ namespace schema {
   {
     auto treatment_plan_ref_list = std::make_unique<schema::treatment_plan_ref_list>();
     for (auto& token : ref_list.split(';')) {
-      treatment_plan_ref_list->treatment_plan().push_back(token.toStdString());
+      if (!token.isEmpty()) {
+        treatment_plan_ref_list->treatment_plan().push_back("Treatment_"+token.toStdString());
+      }
     }
     return treatment_plan_ref_list;
+  }
+  //-----------------------------------------------------------------------------
+  auto PFC::make_properties_list(QString properties_list) -> std::unique_ptr<schema::properties_list>
+  {
+    auto property_list = std::make_unique<schema::properties_list>();
+    for (auto& token : properties_list.split(';')) {
+      if (!token.isEmpty()) {
+        auto name_value = token.split(':');
+        if (name_value.size() == 2) {
+          property_list->property().push_back(std::make_unique<schema::property>(name_value[0].toStdString(),
+                                                                                 name_value[1].toStdString()));
+        } else if (name_value.size() == 1 && !name_value[0].isEmpty()) {
+          property_list->property().push_back(std::make_unique<schema::property>(name_value[0].toStdString(),
+                                                                                 "NUMBER"));
+        }
+      }
+    }
+    return property_list;
   }
   //-----------------------------------------------------------------------------
   auto PFC::make_authors_list(QString name_list) -> schema::citation::authors_sequence
   {
     auto author_list = schema::citation::authors_sequence{};
     for (auto& token : name_list.split(';')) {
-      author_list.push_back(token.toStdString());
+      if (!token.isEmpty()) {
+        author_list.push_back("Author_"+token.toStdString());
+      }
     }
     return author_list;
   }
@@ -209,7 +234,7 @@ namespace schema {
   auto PFC::make_citation(::pfc::Citation const* const input) -> std::unique_ptr<schema::citation>
   {
 
-    auto citation = std::make_unique<pfc::schema::citation>(make_uuid("citation_" + std::to_string(input->id)),
+    auto citation = std::make_unique<pfc::schema::citation>(make_uuid("Citation_" + std::to_string(input->id)),
                                                             input->title.toStdString(),
                                                             input->year.toStdString());
     citation->authors(make_authors_list(input->authors));
@@ -225,7 +250,18 @@ namespace schema {
                                                 input->time_in_simulation,
                                                 std::make_unique<pfc::schema::scene::events_type>());
   }
-
+  //-----------------------------------------------------------------------------
+  auto PFC::make_equipment(::pfc::Equipment const* const input) -> std::unique_ptr<schema::equipment>
+  {
+    auto equipment = std::make_unique<pfc::schema::equipment>(schema::make_uuid("Equipment_" + std::to_string(input->id)),
+                                                              schema::make_string(input->name.toStdString()),
+                                                              schema::make_string(input->description.toStdString()),
+                                                              make_citation_ref_list(input->citations),
+                                                              make_properties_list(input->properties));
+    equipment->type(input->type);
+    equipment->image(input->image.toStdString());
+    return equipment;
+  }
   //-----------------------------------------------------------------------------
   auto PFC::make_medical_reference_list() -> std::unique_ptr<schema::medical_reference_list>
   {

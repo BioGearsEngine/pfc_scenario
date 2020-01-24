@@ -288,6 +288,23 @@ namespace pfc
     class ScenarioSchema: public ::xml_schema::type
     {
       public:
+      // equipment
+      //
+      typedef ::pfc::schema::equipment_definition_list equipment_type;
+      typedef ::xsd::cxx::tree::traits< equipment_type, char > equipment_traits;
+
+      const equipment_type&
+      equipment () const;
+
+      equipment_type&
+      equipment ();
+
+      void
+      equipment (const equipment_type& x);
+
+      void
+      equipment (::std::unique_ptr< equipment_type > p);
+
       // conditions
       //
       typedef ::pfc::schema::injury_definition_list conditions_type;
@@ -392,14 +409,16 @@ namespace pfc
 
       // Constructors.
       //
-      ScenarioSchema (const conditions_type&,
+      ScenarioSchema (const equipment_type&,
+                      const conditions_type&,
                       const treatment_plans_type&,
                       const patient_states_type&,
                       const syllabus_type&,
                       const medical_scenario_type&,
                       const works_cited_type&);
 
-      ScenarioSchema (::std::unique_ptr< conditions_type >,
+      ScenarioSchema (::std::unique_ptr< equipment_type >,
+                      ::std::unique_ptr< conditions_type >,
                       ::std::unique_ptr< treatment_plans_type >,
                       ::std::unique_ptr< patient_states_type >,
                       ::std::unique_ptr< syllabus_type >,
@@ -432,6 +451,7 @@ namespace pfc
              ::xml_schema::flags);
 
       protected:
+      ::xsd::cxx::tree::one< equipment_type > equipment_;
       ::xsd::cxx::tree::one< conditions_type > conditions_;
       ::xsd::cxx::tree::one< treatment_plans_type > treatment_plans_;
       ::xsd::cxx::tree::one< patient_states_type > patient_states_;

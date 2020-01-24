@@ -15,13 +15,37 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 	xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning">
 
 	<xs:import namespace="urn:sisostds:scenario:military:data:draft:msdl:1" schemaLocation="MilitaryScenario_1.0.0.xsd"/>
-	
+  <xs:complexType name="equipment-definition-list">
+    <xs:annotation>
+      <xs:documentation>List of pfc:equipment types.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="equipment" type="equipment" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>me
+  </xs:complexType>
+  <xs:complexType name="equipment">
+    <xs:annotation>
+      <xs:documentation>
+        A PFC representation any equipment or inventory that might be used in the scenario. This could be a medical device or a
+        any common item which is of significance to the scenario narrative.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element name="id" type="xs:string"/>
+      <xs:element name="name" type="xs:string" minOccurs="1"/>
+      <xs:element name="type" type="xs:integer" minOccurs="0"/>
+      <xs:element name="description" type="xs:string" minOccurs="1"/>
+      <xs:element name="citations" type="citation-ref-list" minOccurs="1"/>
+      <xs:element name="image" type="xs:string" minOccurs="0"/>
+      <xs:element name="properties" type="properties-list" minOccurs="1"/>
+    </xs:all>
+  </xs:complexType>
 	<xs:complexType name="injury-definition-list">
 		<xs:annotation>
 			<xs:documentation>List of pfc:injury types.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="injury" type="injury" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="injury" type="injury" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="injury">
@@ -489,7 +513,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="citation" type="citation" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="citation" type="citation" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="citation">
@@ -506,4 +530,23 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			<xs:element name="accessed" type="xs:string" minOccurs="0" maxOccurs="1"/>
 		</xs:sequence>
 	</xs:complexType>
+  <xs:complexType name="properties-list">
+    <xs:annotation>
+      <xs:documentation>List of Citation Information that a citation-ref-list refers to
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="property" type="property" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="property">
+    <xs:annotation>
+      <xs:documentation>General Citation Information for a bib reference
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element name="name" type="xs:string" />
+      <xs:element name="type" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
 </xs:schema>

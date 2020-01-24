@@ -260,6 +260,8 @@ namespace pfc
 {
   namespace schema
   {
+    class equipment_definition_list;
+    class equipment;
     class injury_definition_list;
     class injury;
     class injury_severity_range;
@@ -297,6 +299,8 @@ namespace pfc
     class event_fidelity_enum;
     class citation_list;
     class citation;
+    class properties_list;
+    class property;
     class relates_to;
   }
 }
@@ -322,6 +326,241 @@ namespace pfc
 {
   namespace schema
   {
+    class equipment_definition_list: public ::xml_schema::type
+    {
+      public:
+      // equipment
+      //
+      typedef ::pfc::schema::equipment equipment_type;
+      typedef ::xsd::cxx::tree::sequence< equipment_type > equipment_sequence;
+      typedef equipment_sequence::iterator equipment_iterator;
+      typedef equipment_sequence::const_iterator equipment_const_iterator;
+      typedef ::xsd::cxx::tree::traits< equipment_type, char > equipment_traits;
+
+      const equipment_sequence&
+      equipment () const;
+
+      equipment_sequence&
+      equipment ();
+
+      void
+      equipment (const equipment_sequence& s);
+
+      // Constructors.
+      //
+      equipment_definition_list ();
+
+      equipment_definition_list (const ::xercesc::DOMElement& e,
+                                 ::xml_schema::flags f = 0,
+                                 ::xml_schema::container* c = 0);
+
+      equipment_definition_list (const equipment_definition_list& x,
+                                 ::xml_schema::flags f = 0,
+                                 ::xml_schema::container* c = 0);
+
+      virtual equipment_definition_list*
+      _clone (::xml_schema::flags f = 0,
+              ::xml_schema::container* c = 0) const;
+
+      equipment_definition_list&
+      operator= (const equipment_definition_list& x);
+
+      virtual 
+      ~equipment_definition_list ();
+
+      // Implementation.
+      //
+      protected:
+      void
+      parse (::xsd::cxx::xml::dom::parser< char >&,
+             ::xml_schema::flags);
+
+      protected:
+      equipment_sequence equipment_;
+    };
+
+    class equipment: public ::xml_schema::type
+    {
+      public:
+      // id
+      //
+      typedef ::xml_schema::string id_type;
+      typedef ::xsd::cxx::tree::traits< id_type, char > id_traits;
+
+      const id_type&
+      id () const;
+
+      id_type&
+      id ();
+
+      void
+      id (const id_type& x);
+
+      void
+      id (::std::unique_ptr< id_type > p);
+
+      // name
+      //
+      typedef ::xml_schema::string name_type;
+      typedef ::xsd::cxx::tree::traits< name_type, char > name_traits;
+
+      const name_type&
+      name () const;
+
+      name_type&
+      name ();
+
+      void
+      name (const name_type& x);
+
+      void
+      name (::std::unique_ptr< name_type > p);
+
+      // type
+      //
+      typedef ::xml_schema::integer type_type;
+      typedef ::xsd::cxx::tree::optional< type_type > type_optional;
+      typedef ::xsd::cxx::tree::traits< type_type, char > type_traits;
+
+      const type_optional&
+      type () const;
+
+      type_optional&
+      type ();
+
+      void
+      type (const type_type& x);
+
+      void
+      type (const type_optional& x);
+
+      // description
+      //
+      typedef ::xml_schema::string description_type;
+      typedef ::xsd::cxx::tree::traits< description_type, char > description_traits;
+
+      const description_type&
+      description () const;
+
+      description_type&
+      description ();
+
+      void
+      description (const description_type& x);
+
+      void
+      description (::std::unique_ptr< description_type > p);
+
+      // citations
+      //
+      typedef ::pfc::schema::citation_ref_list citations_type;
+      typedef ::xsd::cxx::tree::traits< citations_type, char > citations_traits;
+
+      const citations_type&
+      citations () const;
+
+      citations_type&
+      citations ();
+
+      void
+      citations (const citations_type& x);
+
+      void
+      citations (::std::unique_ptr< citations_type > p);
+
+      // image
+      //
+      typedef ::xml_schema::string image_type;
+      typedef ::xsd::cxx::tree::optional< image_type > image_optional;
+      typedef ::xsd::cxx::tree::traits< image_type, char > image_traits;
+
+      const image_optional&
+      image () const;
+
+      image_optional&
+      image ();
+
+      void
+      image (const image_type& x);
+
+      void
+      image (const image_optional& x);
+
+      void
+      image (::std::unique_ptr< image_type > p);
+
+      // properties
+      //
+      typedef ::pfc::schema::properties_list properties_type;
+      typedef ::xsd::cxx::tree::traits< properties_type, char > properties_traits;
+
+      const properties_type&
+      properties () const;
+
+      properties_type&
+      properties ();
+
+      void
+      properties (const properties_type& x);
+
+      void
+      properties (::std::unique_ptr< properties_type > p);
+
+      // Constructors.
+      //
+      equipment (const id_type&,
+                 const name_type&,
+                 const description_type&,
+                 const citations_type&,
+                 const properties_type&);
+
+      equipment (const id_type&,
+                 const name_type&,
+                 const description_type&,
+                 ::std::unique_ptr< citations_type >,
+                 ::std::unique_ptr< properties_type >);
+
+      equipment (::std::unique_ptr< id_type >,
+                 ::std::unique_ptr< name_type >,
+                 ::std::unique_ptr< description_type >,
+                 ::std::unique_ptr< citations_type >,
+                 ::std::unique_ptr< properties_type >);
+
+      equipment (const ::xercesc::DOMElement& e,
+                 ::xml_schema::flags f = 0,
+                 ::xml_schema::container* c = 0);
+
+      equipment (const equipment& x,
+                 ::xml_schema::flags f = 0,
+                 ::xml_schema::container* c = 0);
+
+      virtual equipment*
+      _clone (::xml_schema::flags f = 0,
+              ::xml_schema::container* c = 0) const;
+
+      equipment&
+      operator= (const equipment& x);
+
+      virtual 
+      ~equipment ();
+
+      // Implementation.
+      //
+      protected:
+      void
+      parse (::xsd::cxx::xml::dom::parser< char >&,
+             ::xml_schema::flags);
+
+      protected:
+      ::xsd::cxx::tree::one< id_type > id_;
+      ::xsd::cxx::tree::one< name_type > name_;
+      type_optional type_;
+      ::xsd::cxx::tree::one< description_type > description_;
+      ::xsd::cxx::tree::one< citations_type > citations_;
+      image_optional image_;
+      ::xsd::cxx::tree::one< properties_type > properties_;
+    };
+
     class injury_definition_list: public ::xml_schema::type
     {
       public:
@@ -3396,6 +3635,134 @@ namespace pfc
       accessed_optional accessed_;
     };
 
+    class properties_list: public ::xml_schema::type
+    {
+      public:
+      // property
+      //
+      typedef ::pfc::schema::property property_type;
+      typedef ::xsd::cxx::tree::sequence< property_type > property_sequence;
+      typedef property_sequence::iterator property_iterator;
+      typedef property_sequence::const_iterator property_const_iterator;
+      typedef ::xsd::cxx::tree::traits< property_type, char > property_traits;
+
+      const property_sequence&
+      property () const;
+
+      property_sequence&
+      property ();
+
+      void
+      property (const property_sequence& s);
+
+      // Constructors.
+      //
+      properties_list ();
+
+      properties_list (const ::xercesc::DOMElement& e,
+                       ::xml_schema::flags f = 0,
+                       ::xml_schema::container* c = 0);
+
+      properties_list (const properties_list& x,
+                       ::xml_schema::flags f = 0,
+                       ::xml_schema::container* c = 0);
+
+      virtual properties_list*
+      _clone (::xml_schema::flags f = 0,
+              ::xml_schema::container* c = 0) const;
+
+      properties_list&
+      operator= (const properties_list& x);
+
+      virtual 
+      ~properties_list ();
+
+      // Implementation.
+      //
+      protected:
+      void
+      parse (::xsd::cxx::xml::dom::parser< char >&,
+             ::xml_schema::flags);
+
+      protected:
+      property_sequence property_;
+    };
+
+    class property: public ::xml_schema::type
+    {
+      public:
+      // name
+      //
+      typedef ::xml_schema::string name_type;
+      typedef ::xsd::cxx::tree::traits< name_type, char > name_traits;
+
+      const name_type&
+      name () const;
+
+      name_type&
+      name ();
+
+      void
+      name (const name_type& x);
+
+      void
+      name (::std::unique_ptr< name_type > p);
+
+      // type
+      //
+      typedef ::xml_schema::string type_type;
+      typedef ::xsd::cxx::tree::traits< type_type, char > type_traits;
+
+      const type_type&
+      type () const;
+
+      type_type&
+      type ();
+
+      void
+      type (const type_type& x);
+
+      void
+      type (::std::unique_ptr< type_type > p);
+
+      // Constructors.
+      //
+      property (const name_type&,
+                const type_type&);
+
+      property (::std::unique_ptr< name_type >,
+                ::std::unique_ptr< type_type >);
+
+      property (const ::xercesc::DOMElement& e,
+                ::xml_schema::flags f = 0,
+                ::xml_schema::container* c = 0);
+
+      property (const property& x,
+                ::xml_schema::flags f = 0,
+                ::xml_schema::container* c = 0);
+
+      virtual property*
+      _clone (::xml_schema::flags f = 0,
+              ::xml_schema::container* c = 0) const;
+
+      property&
+      operator= (const property& x);
+
+      virtual 
+      ~property ();
+
+      // Implementation.
+      //
+      protected:
+      void
+      parse (::xsd::cxx::xml::dom::parser< char >&,
+             ::xml_schema::flags);
+
+      protected:
+      ::xsd::cxx::tree::one< name_type > name_;
+      ::xsd::cxx::tree::one< type_type > type_;
+    };
+
     class relates_to: public ::xml_schema::type
     {
       public:
@@ -3479,6 +3846,12 @@ namespace pfc
 {
   namespace schema
   {
+    ::std::ostream&
+    operator<< (::std::ostream&, const equipment_definition_list&);
+
+    ::std::ostream&
+    operator<< (::std::ostream&, const equipment&);
+
     ::std::ostream&
     operator<< (::std::ostream&, const injury_definition_list&);
 
@@ -3597,6 +3970,12 @@ namespace pfc
     operator<< (::std::ostream&, const citation&);
 
     ::std::ostream&
+    operator<< (::std::ostream&, const properties_list&);
+
+    ::std::ostream&
+    operator<< (::std::ostream&, const property&);
+
+    ::std::ostream&
     operator<< (::std::ostream&, const relates_to&);
   }
 }
@@ -3626,6 +4005,12 @@ namespace pfc
 {
   namespace schema
   {
+    void
+    operator<< (::xercesc::DOMElement&, const equipment_definition_list&);
+
+    void
+    operator<< (::xercesc::DOMElement&, const equipment&);
+
     void
     operator<< (::xercesc::DOMElement&, const injury_definition_list&);
 
@@ -3750,6 +4135,12 @@ namespace pfc
 
     void
     operator<< (::xercesc::DOMElement&, const citation&);
+
+    void
+    operator<< (::xercesc::DOMElement&, const properties_list&);
+
+    void
+    operator<< (::xercesc::DOMElement&, const property&);
 
     void
     operator<< (::xercesc::DOMElement&, const relates_to&);

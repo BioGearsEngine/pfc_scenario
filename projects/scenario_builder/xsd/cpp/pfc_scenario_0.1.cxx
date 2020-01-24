@@ -47,6 +47,30 @@ namespace pfc
     // ScenarioSchema
     // 
 
+    const ScenarioSchema::equipment_type& ScenarioSchema::
+    equipment () const
+    {
+      return this->equipment_.get ();
+    }
+
+    ScenarioSchema::equipment_type& ScenarioSchema::
+    equipment ()
+    {
+      return this->equipment_.get ();
+    }
+
+    void ScenarioSchema::
+    equipment (const equipment_type& x)
+    {
+      this->equipment_.set (x);
+    }
+
+    void ScenarioSchema::
+    equipment (::std::unique_ptr< equipment_type > x)
+    {
+      this->equipment_.set (std::move (x));
+    }
+
     const ScenarioSchema::conditions_type& ScenarioSchema::
     conditions () const
     {
@@ -212,13 +236,15 @@ namespace pfc
     //
 
     ScenarioSchema::
-    ScenarioSchema (const conditions_type& conditions,
+    ScenarioSchema (const equipment_type& equipment,
+                    const conditions_type& conditions,
                     const treatment_plans_type& treatment_plans,
                     const patient_states_type& patient_states,
                     const syllabus_type& syllabus,
                     const medical_scenario_type& medical_scenario,
                     const works_cited_type& works_cited)
     : ::xml_schema::type (),
+      equipment_ (equipment, this),
       conditions_ (conditions, this),
       treatment_plans_ (treatment_plans, this),
       patient_states_ (patient_states, this),
@@ -229,13 +255,15 @@ namespace pfc
     }
 
     ScenarioSchema::
-    ScenarioSchema (::std::unique_ptr< conditions_type > conditions,
+    ScenarioSchema (::std::unique_ptr< equipment_type > equipment,
+                    ::std::unique_ptr< conditions_type > conditions,
                     ::std::unique_ptr< treatment_plans_type > treatment_plans,
                     ::std::unique_ptr< patient_states_type > patient_states,
                     ::std::unique_ptr< syllabus_type > syllabus,
                     ::std::unique_ptr< medical_scenario_type > medical_scenario,
                     ::std::unique_ptr< works_cited_type > works_cited)
     : ::xml_schema::type (),
+      equipment_ (std::move (equipment), this),
       conditions_ (std::move (conditions), this),
       treatment_plans_ (std::move (treatment_plans), this),
       patient_states_ (std::move (patient_states), this),
@@ -250,6 +278,7 @@ namespace pfc
                     ::xml_schema::flags f,
                     ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
+      equipment_ (x.equipment_, f, this),
       conditions_ (x.conditions_, f, this),
       treatment_plans_ (x.treatment_plans_, f, this),
       patient_states_ (x.patient_states_, f, this),
@@ -264,6 +293,7 @@ namespace pfc
                     ::xml_schema::flags f,
                     ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+      equipment_ (this),
       conditions_ (this),
       treatment_plans_ (this),
       patient_states_ (this),
@@ -287,6 +317,34 @@ namespace pfc
         const ::xercesc::DOMElement& i (p.cur_element ());
         const ::xsd::cxx::xml::qualified_name< char > n (
           ::xsd::cxx::xml::dom::name< char > (i));
+
+        // equipment
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "equipment",
+              "",
+              &::xsd::cxx::tree::factory_impl< equipment_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!equipment_.present ())
+            {
+              ::std::unique_ptr< equipment_type > r (
+                dynamic_cast< equipment_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->equipment_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
 
         // conditions
         //
@@ -459,6 +517,13 @@ namespace pfc
         break;
       }
 
+      if (!equipment_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "equipment",
+          "");
+      }
+
       if (!conditions_.present ())
       {
         throw ::xsd::cxx::tree::expected_element< char > (
@@ -515,6 +580,7 @@ namespace pfc
       if (this != &x)
       {
         static_cast< ::xml_schema::type& > (*this) = x;
+        this->equipment_ = x.equipment_;
         this->conditions_ = x.conditions_;
         this->treatment_plans_ = x.treatment_plans_;
         this->patient_states_ = x.patient_states_;
@@ -557,6 +623,14 @@ namespace pfc
     ::std::ostream&
     operator<< (::std::ostream& o, const ScenarioSchema& i)
     {
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "equipment: ";
+        om.insert (o, i.equipment ());
+      }
+
       {
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
@@ -934,6 +1008,29 @@ namespace pfc
     operator<< (::xercesc::DOMElement& e, const ScenarioSchema& i)
     {
       e << static_cast< const ::xml_schema::type& > (i);
+
+      // equipment
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const ScenarioSchema::equipment_type& x (i.equipment ());
+        if (typeid (ScenarioSchema::equipment_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "equipment",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "equipment",
+            "",
+            false, false, e, x);
+      }
 
       // conditions
       //
