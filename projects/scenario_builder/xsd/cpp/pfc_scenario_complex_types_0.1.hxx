@@ -268,19 +268,21 @@ namespace pfc
     class citation_ref_list;
     class treatment_plan_definition_list;
     class treatment_plan;
-    class medical_equipment_list;
-    class treatment_plan_citation_ref_list;
+    class equipment_ref_list;
+    class medical_reference_list;
+    class cpg_ref_list;
     class cpg_list;
+    class cpg;
     class learning_objective_reference_list;
-    class treatment_plan_reference_list;
+    class treatment_plan_ref_list;
     class injury_profile_list;
     class injury_profile;
-    class injury_profile_reference_list;
+    class injury_profile_ref_list;
     class injury_occurance_list;
     class medical_scenario_syllabus;
     class learning_objective_list;
     class learning_objective;
-    class assessment_criteria_list;
+    class assessment_list;
     class assessment;
     class medical_scenario;
     class role_list;
@@ -378,7 +380,7 @@ namespace pfc
       public:
       // id
       //
-      typedef ::xml_schema::id id_type;
+      typedef ::xml_schema::string id_type;
       typedef ::xsd::cxx::tree::traits< id_type, char > id_traits;
 
       const id_type&
@@ -434,20 +436,16 @@ namespace pfc
       // citations
       //
       typedef ::pfc::schema::citation_ref_list citations_type;
-      typedef ::xsd::cxx::tree::optional< citations_type > citations_optional;
       typedef ::xsd::cxx::tree::traits< citations_type, char > citations_traits;
 
-      const citations_optional&
+      const citations_type&
       citations () const;
 
-      citations_optional&
+      citations_type&
       citations ();
 
       void
       citations (const citations_type& x);
-
-      void
-      citations (const citations_optional& x);
 
       void
       citations (::std::unique_ptr< citations_type > p);
@@ -490,16 +488,19 @@ namespace pfc
       //
       injury (const id_type&,
               const medical_name_type&,
+              const citations_type&,
               const description_type&,
               const severity_range_type&);
 
       injury (const id_type&,
               const medical_name_type&,
+              ::std::unique_ptr< citations_type >,
               const description_type&,
               ::std::unique_ptr< severity_range_type >);
 
       injury (::std::unique_ptr< id_type >,
               ::std::unique_ptr< medical_name_type >,
+              ::std::unique_ptr< citations_type >,
               ::std::unique_ptr< description_type >,
               ::std::unique_ptr< severity_range_type >);
 
@@ -532,7 +533,7 @@ namespace pfc
       ::xsd::cxx::tree::one< id_type > id_;
       common_name_optional common_name_;
       ::xsd::cxx::tree::one< medical_name_type > medical_name_;
-      citations_optional citations_;
+      ::xsd::cxx::tree::one< citations_type > citations_;
       ::xsd::cxx::tree::one< description_type > description_;
       ::xsd::cxx::tree::one< severity_range_type > severity_range_;
     };
@@ -887,7 +888,7 @@ namespace pfc
       public:
       // id
       //
-      typedef ::xml_schema::id id_type;
+      typedef ::xml_schema::string id_type;
       typedef ::xsd::cxx::tree::traits< id_type, char > id_traits;
 
       const id_type&
@@ -942,7 +943,7 @@ namespace pfc
 
       // required-equipment
       //
-      typedef ::pfc::schema::medical_equipment_list required_equipment_type;
+      typedef ::pfc::schema::equipment_ref_list required_equipment_type;
       typedef ::xsd::cxx::tree::traits< required_equipment_type, char > required_equipment_traits;
 
       const required_equipment_type&
@@ -959,21 +960,17 @@ namespace pfc
 
       // references
       //
-      typedef ::pfc::schema::treatment_plan_citation_ref_list references_type;
-      typedef ::xsd::cxx::tree::optional< references_type > references_optional;
+      typedef ::pfc::schema::medical_reference_list references_type;
       typedef ::xsd::cxx::tree::traits< references_type, char > references_traits;
 
-      const references_optional&
+      const references_type&
       references () const;
 
-      references_optional&
+      references_type&
       references ();
 
       void
       references (const references_type& x);
-
-      void
-      references (const references_optional& x);
 
       void
       references (::std::unique_ptr< references_type > p);
@@ -982,15 +979,18 @@ namespace pfc
       //
       treatment_plan (const id_type&,
                       const description_type&,
-                      const required_equipment_type&);
+                      const required_equipment_type&,
+                      const references_type&);
 
       treatment_plan (const id_type&,
                       const description_type&,
-                      ::std::unique_ptr< required_equipment_type >);
+                      ::std::unique_ptr< required_equipment_type >,
+                      ::std::unique_ptr< references_type >);
 
       treatment_plan (::std::unique_ptr< id_type >,
                       ::std::unique_ptr< description_type >,
-                      ::std::unique_ptr< required_equipment_type >);
+                      ::std::unique_ptr< required_equipment_type >,
+                      ::std::unique_ptr< references_type >);
 
       treatment_plan (const ::xercesc::DOMElement& e,
                       ::xml_schema::flags f = 0,
@@ -1022,15 +1022,15 @@ namespace pfc
       common_name_optional common_name_;
       ::xsd::cxx::tree::one< description_type > description_;
       ::xsd::cxx::tree::one< required_equipment_type > required_equipment_;
-      references_optional references_;
+      ::xsd::cxx::tree::one< references_type > references_;
     };
 
-    class medical_equipment_list: public ::xml_schema::type
+    class equipment_ref_list: public ::xml_schema::type
     {
       public:
       // equipment-refs
       //
-      typedef ::xml_schema::idref equipment_refs_type;
+      typedef ::xml_schema::string equipment_refs_type;
       typedef ::xsd::cxx::tree::sequence< equipment_refs_type > equipment_refs_sequence;
       typedef equipment_refs_sequence::iterator equipment_refs_iterator;
       typedef equipment_refs_sequence::const_iterator equipment_refs_const_iterator;
@@ -1047,25 +1047,25 @@ namespace pfc
 
       // Constructors.
       //
-      medical_equipment_list ();
+      equipment_ref_list ();
 
-      medical_equipment_list (const ::xercesc::DOMElement& e,
-                              ::xml_schema::flags f = 0,
-                              ::xml_schema::container* c = 0);
+      equipment_ref_list (const ::xercesc::DOMElement& e,
+                          ::xml_schema::flags f = 0,
+                          ::xml_schema::container* c = 0);
 
-      medical_equipment_list (const medical_equipment_list& x,
-                              ::xml_schema::flags f = 0,
-                              ::xml_schema::container* c = 0);
+      equipment_ref_list (const equipment_ref_list& x,
+                          ::xml_schema::flags f = 0,
+                          ::xml_schema::container* c = 0);
 
-      virtual medical_equipment_list*
+      virtual equipment_ref_list*
       _clone (::xml_schema::flags f = 0,
               ::xml_schema::container* c = 0) const;
 
-      medical_equipment_list&
-      operator= (const medical_equipment_list& x);
+      equipment_ref_list&
+      operator= (const equipment_ref_list& x);
 
       virtual 
-      ~medical_equipment_list ();
+      ~equipment_ref_list ();
 
       // Implementation.
       //
@@ -1078,7 +1078,7 @@ namespace pfc
       equipment_refs_sequence equipment_refs_;
     };
 
-    class treatment_plan_citation_ref_list: public ::xml_schema::type
+    class medical_reference_list: public ::xml_schema::type
     {
       public:
       // citations
@@ -1100,7 +1100,7 @@ namespace pfc
 
       // cpgs
       //
-      typedef ::pfc::schema::cpg_list cpgs_type;
+      typedef ::pfc::schema::cpg_ref_list cpgs_type;
       typedef ::xsd::cxx::tree::traits< cpgs_type, char > cpgs_traits;
 
       const cpgs_type&
@@ -1117,29 +1117,29 @@ namespace pfc
 
       // Constructors.
       //
-      treatment_plan_citation_ref_list (const citations_type&,
-                                        const cpgs_type&);
+      medical_reference_list (const citations_type&,
+                              const cpgs_type&);
 
-      treatment_plan_citation_ref_list (::std::unique_ptr< citations_type >,
-                                        ::std::unique_ptr< cpgs_type >);
+      medical_reference_list (::std::unique_ptr< citations_type >,
+                              ::std::unique_ptr< cpgs_type >);
 
-      treatment_plan_citation_ref_list (const ::xercesc::DOMElement& e,
-                                        ::xml_schema::flags f = 0,
-                                        ::xml_schema::container* c = 0);
+      medical_reference_list (const ::xercesc::DOMElement& e,
+                              ::xml_schema::flags f = 0,
+                              ::xml_schema::container* c = 0);
 
-      treatment_plan_citation_ref_list (const treatment_plan_citation_ref_list& x,
-                                        ::xml_schema::flags f = 0,
-                                        ::xml_schema::container* c = 0);
+      medical_reference_list (const medical_reference_list& x,
+                              ::xml_schema::flags f = 0,
+                              ::xml_schema::container* c = 0);
 
-      virtual treatment_plan_citation_ref_list*
+      virtual medical_reference_list*
       _clone (::xml_schema::flags f = 0,
               ::xml_schema::container* c = 0) const;
 
-      treatment_plan_citation_ref_list&
-      operator= (const treatment_plan_citation_ref_list& x);
+      medical_reference_list&
+      operator= (const medical_reference_list& x);
 
       virtual 
-      ~treatment_plan_citation_ref_list ();
+      ~medical_reference_list ();
 
       // Implementation.
       //
@@ -1153,50 +1153,82 @@ namespace pfc
       ::xsd::cxx::tree::one< cpgs_type > cpgs_;
     };
 
-    class cpg_list: public ::xml_schema::type
+    class cpg_ref_list: public ::xml_schema::type
     {
       public:
-      // name
+      // cpg-ref
       //
-      typedef ::xml_schema::string name_type;
-      typedef ::xsd::cxx::tree::traits< name_type, char > name_traits;
+      typedef ::xml_schema::string cpg_ref_type;
+      typedef ::xsd::cxx::tree::sequence< cpg_ref_type > cpg_ref_sequence;
+      typedef cpg_ref_sequence::iterator cpg_ref_iterator;
+      typedef cpg_ref_sequence::const_iterator cpg_ref_const_iterator;
+      typedef ::xsd::cxx::tree::traits< cpg_ref_type, char > cpg_ref_traits;
 
-      const name_type&
-      name () const;
+      const cpg_ref_sequence&
+      cpg_ref () const;
 
-      name_type&
-      name ();
-
-      void
-      name (const name_type& x);
-
-      void
-      name (::std::unique_ptr< name_type > p);
-
-      // citation-ref
-      //
-      typedef ::xml_schema::string citation_ref_type;
-      typedef ::xsd::cxx::tree::traits< citation_ref_type, char > citation_ref_traits;
-
-      const citation_ref_type&
-      citation_ref () const;
-
-      citation_ref_type&
-      citation_ref ();
+      cpg_ref_sequence&
+      cpg_ref ();
 
       void
-      citation_ref (const citation_ref_type& x);
-
-      void
-      citation_ref (::std::unique_ptr< citation_ref_type > p);
+      cpg_ref (const cpg_ref_sequence& s);
 
       // Constructors.
       //
-      cpg_list (const name_type&,
-                const citation_ref_type&);
+      cpg_ref_list ();
 
-      cpg_list (::std::unique_ptr< name_type >,
-                ::std::unique_ptr< citation_ref_type >);
+      cpg_ref_list (const ::xercesc::DOMElement& e,
+                    ::xml_schema::flags f = 0,
+                    ::xml_schema::container* c = 0);
+
+      cpg_ref_list (const cpg_ref_list& x,
+                    ::xml_schema::flags f = 0,
+                    ::xml_schema::container* c = 0);
+
+      virtual cpg_ref_list*
+      _clone (::xml_schema::flags f = 0,
+              ::xml_schema::container* c = 0) const;
+
+      cpg_ref_list&
+      operator= (const cpg_ref_list& x);
+
+      virtual 
+      ~cpg_ref_list ();
+
+      // Implementation.
+      //
+      protected:
+      void
+      parse (::xsd::cxx::xml::dom::parser< char >&,
+             ::xml_schema::flags);
+
+      protected:
+      cpg_ref_sequence cpg_ref_;
+    };
+
+    class cpg_list: public ::xml_schema::type
+    {
+      public:
+      // cpg
+      //
+      typedef ::pfc::schema::cpg cpg_type;
+      typedef ::xsd::cxx::tree::sequence< cpg_type > cpg_sequence;
+      typedef cpg_sequence::iterator cpg_iterator;
+      typedef cpg_sequence::const_iterator cpg_const_iterator;
+      typedef ::xsd::cxx::tree::traits< cpg_type, char > cpg_traits;
+
+      const cpg_sequence&
+      cpg () const;
+
+      cpg_sequence&
+      cpg ();
+
+      void
+      cpg (const cpg_sequence& s);
+
+      // Constructors.
+      //
+      cpg_list ();
 
       cpg_list (const ::xercesc::DOMElement& e,
                 ::xml_schema::flags f = 0,
@@ -1224,7 +1256,101 @@ namespace pfc
              ::xml_schema::flags);
 
       protected:
+      cpg_sequence cpg_;
+    };
+
+    class cpg: public ::xml_schema::type
+    {
+      public:
+      // name
+      //
+      typedef ::xml_schema::string name_type;
+      typedef ::xsd::cxx::tree::traits< name_type, char > name_traits;
+
+      const name_type&
+      name () const;
+
+      name_type&
+      name ();
+
+      void
+      name (const name_type& x);
+
+      void
+      name (::std::unique_ptr< name_type > p);
+
+      // description
+      //
+      typedef ::xml_schema::string description_type;
+      typedef ::xsd::cxx::tree::traits< description_type, char > description_traits;
+
+      const description_type&
+      description () const;
+
+      description_type&
+      description ();
+
+      void
+      description (const description_type& x);
+
+      void
+      description (::std::unique_ptr< description_type > p);
+
+      // citation-ref
+      //
+      typedef ::xml_schema::string citation_ref_type;
+      typedef ::xsd::cxx::tree::traits< citation_ref_type, char > citation_ref_traits;
+
+      const citation_ref_type&
+      citation_ref () const;
+
+      citation_ref_type&
+      citation_ref ();
+
+      void
+      citation_ref (const citation_ref_type& x);
+
+      void
+      citation_ref (::std::unique_ptr< citation_ref_type > p);
+
+      // Constructors.
+      //
+      cpg (const name_type&,
+           const description_type&,
+           const citation_ref_type&);
+
+      cpg (::std::unique_ptr< name_type >,
+           ::std::unique_ptr< description_type >,
+           ::std::unique_ptr< citation_ref_type >);
+
+      cpg (const ::xercesc::DOMElement& e,
+           ::xml_schema::flags f = 0,
+           ::xml_schema::container* c = 0);
+
+      cpg (const cpg& x,
+           ::xml_schema::flags f = 0,
+           ::xml_schema::container* c = 0);
+
+      virtual cpg*
+      _clone (::xml_schema::flags f = 0,
+              ::xml_schema::container* c = 0) const;
+
+      cpg&
+      operator= (const cpg& x);
+
+      virtual 
+      ~cpg ();
+
+      // Implementation.
+      //
+      protected:
+      void
+      parse (::xsd::cxx::xml::dom::parser< char >&,
+             ::xml_schema::flags);
+
+      protected:
       ::xsd::cxx::tree::one< name_type > name_;
+      ::xsd::cxx::tree::one< description_type > description_;
       ::xsd::cxx::tree::one< citation_ref_type > citation_ref_;
     };
 
@@ -1233,7 +1359,7 @@ namespace pfc
       public:
       // objective
       //
-      typedef ::xml_schema::idref objective_type;
+      typedef ::xml_schema::string objective_type;
       typedef ::xsd::cxx::tree::sequence< objective_type > objective_sequence;
       typedef objective_sequence::iterator objective_iterator;
       typedef objective_sequence::const_iterator objective_const_iterator;
@@ -1281,12 +1407,12 @@ namespace pfc
       objective_sequence objective_;
     };
 
-    class treatment_plan_reference_list: public ::xml_schema::type
+    class treatment_plan_ref_list: public ::xml_schema::type
     {
       public:
       // treatment-plan
       //
-      typedef ::xml_schema::idref treatment_plan_type;
+      typedef ::xml_schema::string treatment_plan_type;
       typedef ::xsd::cxx::tree::sequence< treatment_plan_type > treatment_plan_sequence;
       typedef treatment_plan_sequence::iterator treatment_plan_iterator;
       typedef treatment_plan_sequence::const_iterator treatment_plan_const_iterator;
@@ -1303,25 +1429,25 @@ namespace pfc
 
       // Constructors.
       //
-      treatment_plan_reference_list ();
+      treatment_plan_ref_list ();
 
-      treatment_plan_reference_list (const ::xercesc::DOMElement& e,
-                                     ::xml_schema::flags f = 0,
-                                     ::xml_schema::container* c = 0);
+      treatment_plan_ref_list (const ::xercesc::DOMElement& e,
+                               ::xml_schema::flags f = 0,
+                               ::xml_schema::container* c = 0);
 
-      treatment_plan_reference_list (const treatment_plan_reference_list& x,
-                                     ::xml_schema::flags f = 0,
-                                     ::xml_schema::container* c = 0);
+      treatment_plan_ref_list (const treatment_plan_ref_list& x,
+                               ::xml_schema::flags f = 0,
+                               ::xml_schema::container* c = 0);
 
-      virtual treatment_plan_reference_list*
+      virtual treatment_plan_ref_list*
       _clone (::xml_schema::flags f = 0,
               ::xml_schema::container* c = 0) const;
 
-      treatment_plan_reference_list&
-      operator= (const treatment_plan_reference_list& x);
+      treatment_plan_ref_list&
+      operator= (const treatment_plan_ref_list& x);
 
       virtual 
-      ~treatment_plan_reference_list ();
+      ~treatment_plan_ref_list ();
 
       // Implementation.
       //
@@ -1392,7 +1518,7 @@ namespace pfc
       public:
       // id
       //
-      typedef ::xml_schema::id id_type;
+      typedef ::xml_schema::string id_type;
       typedef ::xsd::cxx::tree::traits< id_type, char > id_traits;
 
       const id_type&
@@ -1464,7 +1590,7 @@ namespace pfc
 
       // treatments
       //
-      typedef ::pfc::schema::treatment_plan_reference_list treatments_type;
+      typedef ::pfc::schema::treatment_plan_ref_list treatments_type;
       typedef ::xsd::cxx::tree::traits< treatments_type, char > treatments_traits;
 
       const treatments_type&
@@ -1526,12 +1652,12 @@ namespace pfc
       ::xsd::cxx::tree::one< treatments_type > treatments_;
     };
 
-    class injury_profile_reference_list: public ::xml_schema::type
+    class injury_profile_ref_list: public ::xml_schema::type
     {
       public:
       // injury-profile
       //
-      typedef ::xml_schema::idref injury_profile_type;
+      typedef ::xml_schema::string injury_profile_type;
       typedef ::xsd::cxx::tree::sequence< injury_profile_type > injury_profile_sequence;
       typedef injury_profile_sequence::iterator injury_profile_iterator;
       typedef injury_profile_sequence::const_iterator injury_profile_const_iterator;
@@ -1548,25 +1674,25 @@ namespace pfc
 
       // Constructors.
       //
-      injury_profile_reference_list ();
+      injury_profile_ref_list ();
 
-      injury_profile_reference_list (const ::xercesc::DOMElement& e,
-                                     ::xml_schema::flags f = 0,
-                                     ::xml_schema::container* c = 0);
+      injury_profile_ref_list (const ::xercesc::DOMElement& e,
+                               ::xml_schema::flags f = 0,
+                               ::xml_schema::container* c = 0);
 
-      injury_profile_reference_list (const injury_profile_reference_list& x,
-                                     ::xml_schema::flags f = 0,
-                                     ::xml_schema::container* c = 0);
+      injury_profile_ref_list (const injury_profile_ref_list& x,
+                               ::xml_schema::flags f = 0,
+                               ::xml_schema::container* c = 0);
 
-      virtual injury_profile_reference_list*
+      virtual injury_profile_ref_list*
       _clone (::xml_schema::flags f = 0,
               ::xml_schema::container* c = 0) const;
 
-      injury_profile_reference_list&
-      operator= (const injury_profile_reference_list& x);
+      injury_profile_ref_list&
+      operator= (const injury_profile_ref_list& x);
 
       virtual 
-      ~injury_profile_reference_list ();
+      ~injury_profile_ref_list ();
 
       // Implementation.
       //
@@ -1584,7 +1710,7 @@ namespace pfc
       public:
       // id
       //
-      typedef ::xml_schema::idref id_type;
+      typedef ::xml_schema::string id_type;
       typedef ::xsd::cxx::tree::traits< id_type, char > id_traits;
 
       const id_type&
@@ -1716,26 +1842,28 @@ namespace pfc
 
       // learning-assessments
       //
-      typedef ::pfc::schema::assessment learning_assessments_type;
-      typedef ::xsd::cxx::tree::sequence< learning_assessments_type > learning_assessments_sequence;
-      typedef learning_assessments_sequence::iterator learning_assessments_iterator;
-      typedef learning_assessments_sequence::const_iterator learning_assessments_const_iterator;
+      typedef ::pfc::schema::assessment_list learning_assessments_type;
       typedef ::xsd::cxx::tree::traits< learning_assessments_type, char > learning_assessments_traits;
 
-      const learning_assessments_sequence&
+      const learning_assessments_type&
       learning_assessments () const;
 
-      learning_assessments_sequence&
+      learning_assessments_type&
       learning_assessments ();
 
       void
-      learning_assessments (const learning_assessments_sequence& s);
+      learning_assessments (const learning_assessments_type& x);
+
+      void
+      learning_assessments (::std::unique_ptr< learning_assessments_type > p);
 
       // Constructors.
       //
-      medical_scenario_syllabus (const learning_objectives_type&);
+      medical_scenario_syllabus (const learning_objectives_type&,
+                                 const learning_assessments_type&);
 
-      medical_scenario_syllabus (::std::unique_ptr< learning_objectives_type >);
+      medical_scenario_syllabus (::std::unique_ptr< learning_objectives_type >,
+                                 ::std::unique_ptr< learning_assessments_type >);
 
       medical_scenario_syllabus (const ::xercesc::DOMElement& e,
                                  ::xml_schema::flags f = 0,
@@ -1764,7 +1892,7 @@ namespace pfc
 
       protected:
       ::xsd::cxx::tree::one< learning_objectives_type > learning_objectives_;
-      learning_assessments_sequence learning_assessments_;
+      ::xsd::cxx::tree::one< learning_assessments_type > learning_assessments_;
     };
 
     class learning_objective_list: public ::xml_schema::type
@@ -1825,7 +1953,7 @@ namespace pfc
       public:
       // id
       //
-      typedef ::xml_schema::id id_type;
+      typedef ::xml_schema::string id_type;
       typedef ::xsd::cxx::tree::traits< id_type, char > id_traits;
 
       const id_type&
@@ -1857,9 +1985,26 @@ namespace pfc
       void
       name (::std::unique_ptr< name_type > p);
 
+      // description
+      //
+      typedef ::xml_schema::string description_type;
+      typedef ::xsd::cxx::tree::traits< description_type, char > description_traits;
+
+      const description_type&
+      description () const;
+
+      description_type&
+      description ();
+
+      void
+      description (const description_type& x);
+
+      void
+      description (::std::unique_ptr< description_type > p);
+
       // references
       //
-      typedef ::pfc::schema::treatment_plan_citation_ref_list references_type;
+      typedef ::pfc::schema::medical_reference_list references_type;
       typedef ::xsd::cxx::tree::traits< references_type, char > references_traits;
 
       const references_type&
@@ -1895,16 +2040,19 @@ namespace pfc
       //
       learning_objective (const id_type&,
                           const name_type&,
+                          const description_type&,
                           const references_type&,
                           const relates_to_type&);
 
       learning_objective (const id_type&,
                           const name_type&,
+                          const description_type&,
                           ::std::unique_ptr< references_type >,
                           ::std::unique_ptr< relates_to_type >);
 
       learning_objective (::std::unique_ptr< id_type >,
                           ::std::unique_ptr< name_type >,
+                          ::std::unique_ptr< description_type >,
                           ::std::unique_ptr< references_type >,
                           ::std::unique_ptr< relates_to_type >);
 
@@ -1936,11 +2084,12 @@ namespace pfc
       protected:
       ::xsd::cxx::tree::one< id_type > id_;
       ::xsd::cxx::tree::one< name_type > name_;
+      ::xsd::cxx::tree::one< description_type > description_;
       ::xsd::cxx::tree::one< references_type > references_;
       ::xsd::cxx::tree::one< relates_to_type > relates_to_;
     };
 
-    class assessment_criteria_list: public ::xml_schema::type
+    class assessment_list: public ::xml_schema::type
     {
       public:
       // total-points
@@ -1956,6 +2105,9 @@ namespace pfc
 
       void
       total_points (const total_points_type& x);
+
+      static total_points_type
+      total_points_default_value ();
 
       // assessment
       //
@@ -1976,25 +2128,25 @@ namespace pfc
 
       // Constructors.
       //
-      assessment_criteria_list (const total_points_type&);
+      assessment_list (const total_points_type&);
 
-      assessment_criteria_list (const ::xercesc::DOMElement& e,
-                                ::xml_schema::flags f = 0,
-                                ::xml_schema::container* c = 0);
+      assessment_list (const ::xercesc::DOMElement& e,
+                       ::xml_schema::flags f = 0,
+                       ::xml_schema::container* c = 0);
 
-      assessment_criteria_list (const assessment_criteria_list& x,
-                                ::xml_schema::flags f = 0,
-                                ::xml_schema::container* c = 0);
+      assessment_list (const assessment_list& x,
+                       ::xml_schema::flags f = 0,
+                       ::xml_schema::container* c = 0);
 
-      virtual assessment_criteria_list*
+      virtual assessment_list*
       _clone (::xml_schema::flags f = 0,
               ::xml_schema::container* c = 0) const;
 
-      assessment_criteria_list&
-      operator= (const assessment_criteria_list& x);
+      assessment_list&
+      operator= (const assessment_list& x);
 
       virtual 
-      ~assessment_criteria_list ();
+      ~assessment_list ();
 
       // Implementation.
       //
@@ -2013,7 +2165,7 @@ namespace pfc
       public:
       // id
       //
-      typedef ::xml_schema::id id_type;
+      typedef ::xml_schema::string id_type;
       typedef ::xsd::cxx::tree::traits< id_type, char > id_traits;
 
       const id_type&
@@ -2030,7 +2182,7 @@ namespace pfc
 
       // objective-id
       //
-      typedef ::xml_schema::idref objective_id_type;
+      typedef ::xml_schema::string objective_id_type;
       typedef ::xsd::cxx::tree::traits< objective_id_type, char > objective_id_traits;
 
       const objective_id_type&
@@ -2125,7 +2277,7 @@ namespace pfc
       public:
       // id
       //
-      typedef ::xml_schema::id id_type;
+      typedef ::xml_schema::string id_type;
       typedef ::xsd::cxx::tree::traits< id_type, char > id_traits;
 
       const id_type&
@@ -2315,7 +2467,7 @@ namespace pfc
 
       // unit-id
       //
-      typedef ::xml_schema::idref unit_id_type;
+      typedef ::xml_schema::string unit_id_type;
       typedef ::xsd::cxx::tree::traits< unit_id_type, char > unit_id_traits;
 
       const unit_id_type&
@@ -2332,7 +2484,7 @@ namespace pfc
 
       // injury-profile-id
       //
-      typedef ::xml_schema::idref injury_profile_id_type;
+      typedef ::xml_schema::string injury_profile_id_type;
       typedef ::xsd::cxx::tree::optional< injury_profile_id_type > injury_profile_id_optional;
       typedef ::xsd::cxx::tree::traits< injury_profile_id_type, char > injury_profile_id_traits;
 
@@ -2485,7 +2637,7 @@ namespace pfc
 
       // equipment-id
       //
-      typedef ::xml_schema::idref equipment_id_type;
+      typedef ::xml_schema::string equipment_id_type;
       typedef ::xsd::cxx::tree::traits< equipment_id_type, char > equipment_id_traits;
 
       const equipment_id_type&
@@ -2616,7 +2768,7 @@ namespace pfc
       public:
       // location-id
       //
-      typedef ::xml_schema::idref location_id_type;
+      typedef ::xml_schema::string location_id_type;
       typedef ::xsd::cxx::tree::traits< location_id_type, char > location_id_traits;
 
       const location_id_type&
@@ -2630,6 +2782,23 @@ namespace pfc
 
       void
       location_id (::std::unique_ptr< location_id_type > p);
+
+      // name
+      //
+      typedef ::xml_schema::string name_type;
+      typedef ::xsd::cxx::tree::traits< name_type, char > name_traits;
+
+      const name_type&
+      name () const;
+
+      name_type&
+      name ();
+
+      void
+      name (const name_type& x);
+
+      void
+      name (::std::unique_ptr< name_type > p);
 
       // description
       //
@@ -2699,18 +2868,21 @@ namespace pfc
       // Constructors.
       //
       scene (const location_id_type&,
+             const name_type&,
              const description_type&,
              const time_of_day_type&,
              const time_in_simulation_type&,
              const events_type&);
 
       scene (const location_id_type&,
+             const name_type&,
              const description_type&,
              const time_of_day_type&,
              const time_in_simulation_type&,
              ::std::unique_ptr< events_type >);
 
       scene (::std::unique_ptr< location_id_type >,
+             ::std::unique_ptr< name_type >,
              ::std::unique_ptr< description_type >,
              ::std::unique_ptr< time_of_day_type >,
              const time_in_simulation_type&,
@@ -2743,6 +2915,7 @@ namespace pfc
 
       protected:
       ::xsd::cxx::tree::one< location_id_type > location_id_;
+      ::xsd::cxx::tree::one< name_type > name_;
       ::xsd::cxx::tree::one< description_type > description_;
       ::xsd::cxx::tree::one< time_of_day_type > time_of_day_;
       ::xsd::cxx::tree::one< time_in_simulation_type > time_in_simulation_;
@@ -3228,7 +3401,7 @@ namespace pfc
       public:
       // treatment-plans
       //
-      typedef ::pfc::schema::treatment_plan_reference_list treatment_plans_type;
+      typedef ::pfc::schema::treatment_plan_ref_list treatment_plans_type;
       typedef ::xsd::cxx::tree::traits< treatment_plans_type, char > treatment_plans_traits;
 
       const treatment_plans_type&
@@ -3245,7 +3418,7 @@ namespace pfc
 
       // injury-profiles
       //
-      typedef ::pfc::schema::injury_profile_reference_list injury_profiles_type;
+      typedef ::pfc::schema::injury_profile_ref_list injury_profiles_type;
       typedef ::xsd::cxx::tree::traits< injury_profiles_type, char > injury_profiles_traits;
 
       const injury_profiles_type&
@@ -3331,19 +3504,25 @@ namespace pfc
     operator<< (::std::ostream&, const treatment_plan&);
 
     ::std::ostream&
-    operator<< (::std::ostream&, const medical_equipment_list&);
+    operator<< (::std::ostream&, const equipment_ref_list&);
 
     ::std::ostream&
-    operator<< (::std::ostream&, const treatment_plan_citation_ref_list&);
+    operator<< (::std::ostream&, const medical_reference_list&);
+
+    ::std::ostream&
+    operator<< (::std::ostream&, const cpg_ref_list&);
 
     ::std::ostream&
     operator<< (::std::ostream&, const cpg_list&);
 
     ::std::ostream&
+    operator<< (::std::ostream&, const cpg&);
+
+    ::std::ostream&
     operator<< (::std::ostream&, const learning_objective_reference_list&);
 
     ::std::ostream&
-    operator<< (::std::ostream&, const treatment_plan_reference_list&);
+    operator<< (::std::ostream&, const treatment_plan_ref_list&);
 
     ::std::ostream&
     operator<< (::std::ostream&, const injury_profile_list&);
@@ -3352,7 +3531,7 @@ namespace pfc
     operator<< (::std::ostream&, const injury_profile&);
 
     ::std::ostream&
-    operator<< (::std::ostream&, const injury_profile_reference_list&);
+    operator<< (::std::ostream&, const injury_profile_ref_list&);
 
     ::std::ostream&
     operator<< (::std::ostream&, const injury_occurance_list&);
@@ -3367,7 +3546,7 @@ namespace pfc
     operator<< (::std::ostream&, const learning_objective&);
 
     ::std::ostream&
-    operator<< (::std::ostream&, const assessment_criteria_list&);
+    operator<< (::std::ostream&, const assessment_list&);
 
     ::std::ostream&
     operator<< (::std::ostream&, const assessment&);
@@ -3472,19 +3651,25 @@ namespace pfc
     operator<< (::xercesc::DOMElement&, const treatment_plan&);
 
     void
-    operator<< (::xercesc::DOMElement&, const medical_equipment_list&);
+    operator<< (::xercesc::DOMElement&, const equipment_ref_list&);
 
     void
-    operator<< (::xercesc::DOMElement&, const treatment_plan_citation_ref_list&);
+    operator<< (::xercesc::DOMElement&, const medical_reference_list&);
+
+    void
+    operator<< (::xercesc::DOMElement&, const cpg_ref_list&);
 
     void
     operator<< (::xercesc::DOMElement&, const cpg_list&);
 
     void
+    operator<< (::xercesc::DOMElement&, const cpg&);
+
+    void
     operator<< (::xercesc::DOMElement&, const learning_objective_reference_list&);
 
     void
-    operator<< (::xercesc::DOMElement&, const treatment_plan_reference_list&);
+    operator<< (::xercesc::DOMElement&, const treatment_plan_ref_list&);
 
     void
     operator<< (::xercesc::DOMElement&, const injury_profile_list&);
@@ -3493,7 +3678,7 @@ namespace pfc
     operator<< (::xercesc::DOMElement&, const injury_profile&);
 
     void
-    operator<< (::xercesc::DOMElement&, const injury_profile_reference_list&);
+    operator<< (::xercesc::DOMElement&, const injury_profile_ref_list&);
 
     void
     operator<< (::xercesc::DOMElement&, const injury_occurance_list&);
@@ -3508,7 +3693,7 @@ namespace pfc
     operator<< (::xercesc::DOMElement&, const learning_objective&);
 
     void
-    operator<< (::xercesc::DOMElement&, const assessment_criteria_list&);
+    operator<< (::xercesc::DOMElement&, const assessment_list&);
 
     void
     operator<< (::xercesc::DOMElement&, const assessment&);

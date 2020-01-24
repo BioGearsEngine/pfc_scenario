@@ -303,7 +303,7 @@ public:
   int32_t id = -1;
   QString name = "";
   QString description = "";
-  QString injuries    = "";
+  QString injuries = "";
   QString locations = "";
   QString severities = "";
 
@@ -667,11 +667,17 @@ struct Objective : public QObject {
   Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString description MEMBER description)
   Q_PROPERTY(QString citations MEMBER citations)
+  Q_PROPERTY(QString cpgs MEMBER cpgs)
+  Q_PROPERTY(QString treatment_plans MEMBER treatment_plans)
+  Q_PROPERTY(QString injury_profiles MEMBER injury_profiles)
 public:
   int32_t id = -1;
   QString name = "";
   QString description = "";
   QString citations;
+  QString cpgs;
+  QString treatment_plans;
+  QString injury_profiles;
 
   Objective(QObject* parent = nullptr)
     : QObject(parent)
@@ -688,7 +694,10 @@ public:
     return id == rhs.id
       && name == rhs.name
       && description == rhs.description
-      && citations == rhs.citations;
+      && citations == rhs.citations
+      && cpgs == rhs.cpgs
+      && treatment_plans == rhs.treatment_plans
+      && injury_profiles == rhs.injury_profiles;
   }
   bool operator!=(const Objective& rhs) const
   {
@@ -700,6 +709,9 @@ public:
     name = rhs.name;
     description = rhs.description;
     citations = rhs.citations;
+    cpgs = rhs.cpgs;
+    treatment_plans = rhs.treatment_plans;
+    injury_profiles = rhs.injury_profiles;
   }
 };
 //----End Objective
@@ -905,9 +917,15 @@ struct Scene : public QObject {
   Q_OBJECT
   Q_PROPERTY(int scene_id MEMBER id)
   Q_PROPERTY(QString name MEMBER name)
+  Q_PROPERTY(QString description MEMBER description)
+  Q_PROPERTY(QString time_of_day MEMBER time_of_day)
+  Q_PROPERTY(int time_in_simulation MEMBER time_in_simulation)
 public:
   int32_t id = -1;
   QString name = "";
+  QString description = "";
+  QString time_of_day = "";
+  int32_t time_in_simulation = 0;
 
   Scene(QObject* parent = nullptr)
     : QObject(parent)
@@ -922,7 +940,10 @@ public:
   bool operator==(const Scene& rhs) const
   {
     return id == rhs.id
-      && name == rhs.name;
+      && name == rhs.name
+      && description == rhs.description
+      && time_of_day == rhs.time_of_day
+      && time_in_simulation == rhs.time_in_simulation;
   }
   bool operator!=(const Scene& rhs) const
   {
@@ -932,6 +953,9 @@ public:
   {
     id = rhs.id;
     name = rhs.name;
+    description = rhs.description;
+    time_of_day = rhs.time_of_day;
+    time_in_simulation = rhs.time_in_simulation;
   }
 };
 //----End Scene
@@ -943,6 +967,7 @@ struct Treatment : public QObject {
   Q_PROPERTY(QString description MEMBER description)
   Q_PROPERTY(QString equipment MEMBER equipment)
   Q_PROPERTY(QString citations MEMBER citations)
+  Q_PROPERTY(QString cpgs MEMBER citations)
 public:
   int32_t id = -1;
   QString medical_name = "";
@@ -950,6 +975,8 @@ public:
   QString description = "";
   QString equipment;
   QString citations;
+  QString cpgs;
+
   Treatment(QObject* parent = nullptr)
     : QObject(parent)
   {
@@ -967,7 +994,8 @@ public:
       && common_name == rhs.common_name
       && description == rhs.description
       && equipment == rhs.equipment
-      && citations == rhs.citations;
+      && citations == rhs.citations
+      && cpgs == rhs.cpgs;
   }
   bool operator!=(const Treatment& rhs) const
   {
@@ -981,6 +1009,7 @@ public:
     description = rhs.description;
     equipment = rhs.equipment;
     citations = rhs.citations;
+    cpgs = rhs.cpgs;
   }
 };
 //----End Treatment

@@ -147,28 +147,22 @@ namespace pfc
       this->medical_name_.set (std::move (x));
     }
 
-    const injury::citations_optional& injury::
+    const injury::citations_type& injury::
     citations () const
     {
-      return this->citations_;
+      return this->citations_.get ();
     }
 
-    injury::citations_optional& injury::
+    injury::citations_type& injury::
     citations ()
     {
-      return this->citations_;
+      return this->citations_.get ();
     }
 
     void injury::
     citations (const citations_type& x)
     {
       this->citations_.set (x);
-    }
-
-    void injury::
-    citations (const citations_optional& x)
-    {
-      this->citations_ = x;
     }
 
     void injury::
@@ -555,16 +549,16 @@ namespace pfc
       this->required_equipment_.set (std::move (x));
     }
 
-    const treatment_plan::references_optional& treatment_plan::
+    const treatment_plan::references_type& treatment_plan::
     references () const
     {
-      return this->references_;
+      return this->references_.get ();
     }
 
-    treatment_plan::references_optional& treatment_plan::
+    treatment_plan::references_type& treatment_plan::
     references ()
     {
-      return this->references_;
+      return this->references_.get ();
     }
 
     void treatment_plan::
@@ -574,138 +568,200 @@ namespace pfc
     }
 
     void treatment_plan::
-    references (const references_optional& x)
-    {
-      this->references_ = x;
-    }
-
-    void treatment_plan::
     references (::std::unique_ptr< references_type > x)
     {
       this->references_.set (std::move (x));
     }
 
 
-    // medical_equipment_list
+    // equipment_ref_list
     // 
 
-    const medical_equipment_list::equipment_refs_sequence& medical_equipment_list::
+    const equipment_ref_list::equipment_refs_sequence& equipment_ref_list::
     equipment_refs () const
     {
       return this->equipment_refs_;
     }
 
-    medical_equipment_list::equipment_refs_sequence& medical_equipment_list::
+    equipment_ref_list::equipment_refs_sequence& equipment_ref_list::
     equipment_refs ()
     {
       return this->equipment_refs_;
     }
 
-    void medical_equipment_list::
+    void equipment_ref_list::
     equipment_refs (const equipment_refs_sequence& s)
     {
       this->equipment_refs_ = s;
     }
 
 
-    // treatment_plan_citation_ref_list
+    // medical_reference_list
     // 
 
-    const treatment_plan_citation_ref_list::citations_type& treatment_plan_citation_ref_list::
+    const medical_reference_list::citations_type& medical_reference_list::
     citations () const
     {
       return this->citations_.get ();
     }
 
-    treatment_plan_citation_ref_list::citations_type& treatment_plan_citation_ref_list::
+    medical_reference_list::citations_type& medical_reference_list::
     citations ()
     {
       return this->citations_.get ();
     }
 
-    void treatment_plan_citation_ref_list::
+    void medical_reference_list::
     citations (const citations_type& x)
     {
       this->citations_.set (x);
     }
 
-    void treatment_plan_citation_ref_list::
+    void medical_reference_list::
     citations (::std::unique_ptr< citations_type > x)
     {
       this->citations_.set (std::move (x));
     }
 
-    const treatment_plan_citation_ref_list::cpgs_type& treatment_plan_citation_ref_list::
+    const medical_reference_list::cpgs_type& medical_reference_list::
     cpgs () const
     {
       return this->cpgs_.get ();
     }
 
-    treatment_plan_citation_ref_list::cpgs_type& treatment_plan_citation_ref_list::
+    medical_reference_list::cpgs_type& medical_reference_list::
     cpgs ()
     {
       return this->cpgs_.get ();
     }
 
-    void treatment_plan_citation_ref_list::
+    void medical_reference_list::
     cpgs (const cpgs_type& x)
     {
       this->cpgs_.set (x);
     }
 
-    void treatment_plan_citation_ref_list::
+    void medical_reference_list::
     cpgs (::std::unique_ptr< cpgs_type > x)
     {
       this->cpgs_.set (std::move (x));
     }
 
 
+    // cpg_ref_list
+    // 
+
+    const cpg_ref_list::cpg_ref_sequence& cpg_ref_list::
+    cpg_ref () const
+    {
+      return this->cpg_ref_;
+    }
+
+    cpg_ref_list::cpg_ref_sequence& cpg_ref_list::
+    cpg_ref ()
+    {
+      return this->cpg_ref_;
+    }
+
+    void cpg_ref_list::
+    cpg_ref (const cpg_ref_sequence& s)
+    {
+      this->cpg_ref_ = s;
+    }
+
+
     // cpg_list
     // 
 
-    const cpg_list::name_type& cpg_list::
+    const cpg_list::cpg_sequence& cpg_list::
+    cpg () const
+    {
+      return this->cpg_;
+    }
+
+    cpg_list::cpg_sequence& cpg_list::
+    cpg ()
+    {
+      return this->cpg_;
+    }
+
+    void cpg_list::
+    cpg (const cpg_sequence& s)
+    {
+      this->cpg_ = s;
+    }
+
+
+    // cpg
+    // 
+
+    const cpg::name_type& cpg::
     name () const
     {
       return this->name_.get ();
     }
 
-    cpg_list::name_type& cpg_list::
+    cpg::name_type& cpg::
     name ()
     {
       return this->name_.get ();
     }
 
-    void cpg_list::
+    void cpg::
     name (const name_type& x)
     {
       this->name_.set (x);
     }
 
-    void cpg_list::
+    void cpg::
     name (::std::unique_ptr< name_type > x)
     {
       this->name_.set (std::move (x));
     }
 
-    const cpg_list::citation_ref_type& cpg_list::
+    const cpg::description_type& cpg::
+    description () const
+    {
+      return this->description_.get ();
+    }
+
+    cpg::description_type& cpg::
+    description ()
+    {
+      return this->description_.get ();
+    }
+
+    void cpg::
+    description (const description_type& x)
+    {
+      this->description_.set (x);
+    }
+
+    void cpg::
+    description (::std::unique_ptr< description_type > x)
+    {
+      this->description_.set (std::move (x));
+    }
+
+    const cpg::citation_ref_type& cpg::
     citation_ref () const
     {
       return this->citation_ref_.get ();
     }
 
-    cpg_list::citation_ref_type& cpg_list::
+    cpg::citation_ref_type& cpg::
     citation_ref ()
     {
       return this->citation_ref_.get ();
     }
 
-    void cpg_list::
+    void cpg::
     citation_ref (const citation_ref_type& x)
     {
       this->citation_ref_.set (x);
     }
 
-    void cpg_list::
+    void cpg::
     citation_ref (::std::unique_ptr< citation_ref_type > x)
     {
       this->citation_ref_.set (std::move (x));
@@ -734,22 +790,22 @@ namespace pfc
     }
 
 
-    // treatment_plan_reference_list
+    // treatment_plan_ref_list
     // 
 
-    const treatment_plan_reference_list::treatment_plan_sequence& treatment_plan_reference_list::
+    const treatment_plan_ref_list::treatment_plan_sequence& treatment_plan_ref_list::
     treatment_plan () const
     {
       return this->treatment_plan_;
     }
 
-    treatment_plan_reference_list::treatment_plan_sequence& treatment_plan_reference_list::
+    treatment_plan_ref_list::treatment_plan_sequence& treatment_plan_ref_list::
     treatment_plan ()
     {
       return this->treatment_plan_;
     }
 
-    void treatment_plan_reference_list::
+    void treatment_plan_ref_list::
     treatment_plan (const treatment_plan_sequence& s)
     {
       this->treatment_plan_ = s;
@@ -902,22 +958,22 @@ namespace pfc
     }
 
 
-    // injury_profile_reference_list
+    // injury_profile_ref_list
     // 
 
-    const injury_profile_reference_list::injury_profile_sequence& injury_profile_reference_list::
+    const injury_profile_ref_list::injury_profile_sequence& injury_profile_ref_list::
     injury_profile () const
     {
       return this->injury_profile_;
     }
 
-    injury_profile_reference_list::injury_profile_sequence& injury_profile_reference_list::
+    injury_profile_ref_list::injury_profile_sequence& injury_profile_ref_list::
     injury_profile ()
     {
       return this->injury_profile_;
     }
 
-    void injury_profile_reference_list::
+    void injury_profile_ref_list::
     injury_profile (const injury_profile_sequence& s)
     {
       this->injury_profile_ = s;
@@ -1051,22 +1107,28 @@ namespace pfc
       this->learning_objectives_.set (std::move (x));
     }
 
-    const medical_scenario_syllabus::learning_assessments_sequence& medical_scenario_syllabus::
+    const medical_scenario_syllabus::learning_assessments_type& medical_scenario_syllabus::
     learning_assessments () const
     {
-      return this->learning_assessments_;
+      return this->learning_assessments_.get ();
     }
 
-    medical_scenario_syllabus::learning_assessments_sequence& medical_scenario_syllabus::
+    medical_scenario_syllabus::learning_assessments_type& medical_scenario_syllabus::
     learning_assessments ()
     {
-      return this->learning_assessments_;
+      return this->learning_assessments_.get ();
     }
 
     void medical_scenario_syllabus::
-    learning_assessments (const learning_assessments_sequence& s)
+    learning_assessments (const learning_assessments_type& x)
     {
-      this->learning_assessments_ = s;
+      this->learning_assessments_.set (x);
+    }
+
+    void medical_scenario_syllabus::
+    learning_assessments (::std::unique_ptr< learning_assessments_type > x)
+    {
+      this->learning_assessments_.set (std::move (x));
     }
 
 
@@ -1143,6 +1205,30 @@ namespace pfc
       this->name_.set (std::move (x));
     }
 
+    const learning_objective::description_type& learning_objective::
+    description () const
+    {
+      return this->description_.get ();
+    }
+
+    learning_objective::description_type& learning_objective::
+    description ()
+    {
+      return this->description_.get ();
+    }
+
+    void learning_objective::
+    description (const description_type& x)
+    {
+      this->description_.set (x);
+    }
+
+    void learning_objective::
+    description (::std::unique_ptr< description_type > x)
+    {
+      this->description_.set (std::move (x));
+    }
+
     const learning_objective::references_type& learning_objective::
     references () const
     {
@@ -1192,40 +1278,46 @@ namespace pfc
     }
 
 
-    // assessment_criteria_list
+    // assessment_list
     // 
 
-    const assessment_criteria_list::total_points_type& assessment_criteria_list::
+    const assessment_list::total_points_type& assessment_list::
     total_points () const
     {
       return this->total_points_.get ();
     }
 
-    assessment_criteria_list::total_points_type& assessment_criteria_list::
+    assessment_list::total_points_type& assessment_list::
     total_points ()
     {
       return this->total_points_.get ();
     }
 
-    void assessment_criteria_list::
+    void assessment_list::
     total_points (const total_points_type& x)
     {
       this->total_points_.set (x);
     }
 
-    const assessment_criteria_list::assessment_sequence& assessment_criteria_list::
+    assessment_list::total_points_type assessment_list::
+    total_points_default_value ()
+    {
+      return total_points_type (0LL);
+    }
+
+    const assessment_list::assessment_sequence& assessment_list::
     assessment () const
     {
       return this->assessment_;
     }
 
-    assessment_criteria_list::assessment_sequence& assessment_criteria_list::
+    assessment_list::assessment_sequence& assessment_list::
     assessment ()
     {
       return this->assessment_;
     }
 
-    void assessment_criteria_list::
+    void assessment_list::
     assessment (const assessment_sequence& s)
     {
       this->assessment_ = s;
@@ -1699,6 +1791,30 @@ namespace pfc
     location_id (::std::unique_ptr< location_id_type > x)
     {
       this->location_id_.set (std::move (x));
+    }
+
+    const scene::name_type& scene::
+    name () const
+    {
+      return this->name_.get ();
+    }
+
+    scene::name_type& scene::
+    name ()
+    {
+      return this->name_.get ();
+    }
+
+    void scene::
+    name (const name_type& x)
+    {
+      this->name_.set (x);
+    }
+
+    void scene::
+    name (::std::unique_ptr< name_type > x)
+    {
+      this->name_.set (std::move (x));
     }
 
     const scene::description_type& scene::
@@ -2332,13 +2448,14 @@ namespace pfc
     injury::
     injury (const id_type& id,
             const medical_name_type& medical_name,
+            const citations_type& citations,
             const description_type& description,
             const severity_range_type& severity_range)
     : ::xml_schema::type (),
       id_ (id, this),
       common_name_ (this),
       medical_name_ (medical_name, this),
-      citations_ (this),
+      citations_ (citations, this),
       description_ (description, this),
       severity_range_ (severity_range, this)
     {
@@ -2347,13 +2464,14 @@ namespace pfc
     injury::
     injury (const id_type& id,
             const medical_name_type& medical_name,
+            ::std::unique_ptr< citations_type > citations,
             const description_type& description,
             ::std::unique_ptr< severity_range_type > severity_range)
     : ::xml_schema::type (),
       id_ (id, this),
       common_name_ (this),
       medical_name_ (medical_name, this),
-      citations_ (this),
+      citations_ (std::move (citations), this),
       description_ (description, this),
       severity_range_ (std::move (severity_range), this)
     {
@@ -2362,13 +2480,14 @@ namespace pfc
     injury::
     injury (::std::unique_ptr< id_type > id,
             ::std::unique_ptr< medical_name_type > medical_name,
+            ::std::unique_ptr< citations_type > citations,
             ::std::unique_ptr< description_type > description,
             ::std::unique_ptr< severity_range_type > severity_range)
     : ::xml_schema::type (),
       id_ (std::move (id), this),
       common_name_ (this),
       medical_name_ (std::move (medical_name), this),
-      citations_ (this),
+      citations_ (std::move (citations), this),
       description_ (std::move (description), this),
       severity_range_ (std::move (severity_range), this)
     {
@@ -2513,7 +2632,7 @@ namespace pfc
 
           if (tmp.get () != 0)
           {
-            if (!this->citations_)
+            if (!citations_.present ())
             {
               ::std::unique_ptr< citations_type > r (
                 dynamic_cast< citations_type* > (tmp.get ()));
@@ -2599,6 +2718,13 @@ namespace pfc
       {
         throw ::xsd::cxx::tree::expected_element< char > (
           "medical-name",
+          "");
+      }
+
+      if (!citations_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "citations",
           "");
       }
 
@@ -3266,39 +3392,42 @@ namespace pfc
     treatment_plan::
     treatment_plan (const id_type& id,
                     const description_type& description,
-                    const required_equipment_type& required_equipment)
+                    const required_equipment_type& required_equipment,
+                    const references_type& references)
     : ::xml_schema::type (),
       id_ (id, this),
       common_name_ (this),
       description_ (description, this),
       required_equipment_ (required_equipment, this),
-      references_ (this)
+      references_ (references, this)
     {
     }
 
     treatment_plan::
     treatment_plan (const id_type& id,
                     const description_type& description,
-                    ::std::unique_ptr< required_equipment_type > required_equipment)
+                    ::std::unique_ptr< required_equipment_type > required_equipment,
+                    ::std::unique_ptr< references_type > references)
     : ::xml_schema::type (),
       id_ (id, this),
       common_name_ (this),
       description_ (description, this),
       required_equipment_ (std::move (required_equipment), this),
-      references_ (this)
+      references_ (std::move (references), this)
     {
     }
 
     treatment_plan::
     treatment_plan (::std::unique_ptr< id_type > id,
                     ::std::unique_ptr< description_type > description,
-                    ::std::unique_ptr< required_equipment_type > required_equipment)
+                    ::std::unique_ptr< required_equipment_type > required_equipment,
+                    ::std::unique_ptr< references_type > references)
     : ::xml_schema::type (),
       id_ (std::move (id), this),
       common_name_ (this),
       description_ (std::move (description), this),
       required_equipment_ (std::move (required_equipment), this),
-      references_ (this)
+      references_ (std::move (references), this)
     {
     }
 
@@ -3467,7 +3596,7 @@ namespace pfc
 
           if (tmp.get () != 0)
           {
-            if (!this->references_)
+            if (!references_.present ())
             {
               ::std::unique_ptr< references_type > r (
                 dynamic_cast< references_type* > (tmp.get ()));
@@ -3506,6 +3635,13 @@ namespace pfc
           "required-equipment",
           "");
       }
+
+      if (!references_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "references",
+          "");
+      }
     }
 
     treatment_plan* treatment_plan::
@@ -3542,29 +3678,29 @@ namespace pfc
       "treatment-plan",
       "com:ara:pfc:training:1");
 
-    // medical_equipment_list
+    // equipment_ref_list
     //
 
-    medical_equipment_list::
-    medical_equipment_list ()
+    equipment_ref_list::
+    equipment_ref_list ()
     : ::xml_schema::type (),
       equipment_refs_ (this)
     {
     }
 
-    medical_equipment_list::
-    medical_equipment_list (const medical_equipment_list& x,
-                            ::xml_schema::flags f,
-                            ::xml_schema::container* c)
+    equipment_ref_list::
+    equipment_ref_list (const equipment_ref_list& x,
+                        ::xml_schema::flags f,
+                        ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
       equipment_refs_ (x.equipment_refs_, f, this)
     {
     }
 
-    medical_equipment_list::
-    medical_equipment_list (const ::xercesc::DOMElement& e,
-                            ::xml_schema::flags f,
-                            ::xml_schema::container* c)
+    equipment_ref_list::
+    equipment_ref_list (const ::xercesc::DOMElement& e,
+                        ::xml_schema::flags f,
+                        ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
       equipment_refs_ (this)
     {
@@ -3575,7 +3711,7 @@ namespace pfc
       }
     }
 
-    void medical_equipment_list::
+    void equipment_ref_list::
     parse (::xsd::cxx::xml::dom::parser< char >& p,
            ::xml_schema::flags f)
     {
@@ -3614,15 +3750,15 @@ namespace pfc
       }
     }
 
-    medical_equipment_list* medical_equipment_list::
+    equipment_ref_list* equipment_ref_list::
     _clone (::xml_schema::flags f,
             ::xml_schema::container* c) const
     {
-      return new class medical_equipment_list (*this, f, c);
+      return new class equipment_ref_list (*this, f, c);
     }
 
-    medical_equipment_list& medical_equipment_list::
-    operator= (const medical_equipment_list& x)
+    equipment_ref_list& equipment_ref_list::
+    operator= (const equipment_ref_list& x)
     {
       if (this != &x)
       {
@@ -3633,52 +3769,52 @@ namespace pfc
       return *this;
     }
 
-    medical_equipment_list::
-    ~medical_equipment_list ()
+    equipment_ref_list::
+    ~equipment_ref_list ()
     {
     }
 
     static
-    const ::xsd::cxx::tree::type_factory_initializer< 0, char, medical_equipment_list >
-    _xsd_medical_equipment_list_type_factory_init (
-      "medical-equipment-list",
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, equipment_ref_list >
+    _xsd_equipment_ref_list_type_factory_init (
+      "equipment-ref-list",
       "com:ara:pfc:training:1");
 
-    // treatment_plan_citation_ref_list
+    // medical_reference_list
     //
 
-    treatment_plan_citation_ref_list::
-    treatment_plan_citation_ref_list (const citations_type& citations,
-                                      const cpgs_type& cpgs)
+    medical_reference_list::
+    medical_reference_list (const citations_type& citations,
+                            const cpgs_type& cpgs)
     : ::xml_schema::type (),
       citations_ (citations, this),
       cpgs_ (cpgs, this)
     {
     }
 
-    treatment_plan_citation_ref_list::
-    treatment_plan_citation_ref_list (::std::unique_ptr< citations_type > citations,
-                                      ::std::unique_ptr< cpgs_type > cpgs)
+    medical_reference_list::
+    medical_reference_list (::std::unique_ptr< citations_type > citations,
+                            ::std::unique_ptr< cpgs_type > cpgs)
     : ::xml_schema::type (),
       citations_ (std::move (citations), this),
       cpgs_ (std::move (cpgs), this)
     {
     }
 
-    treatment_plan_citation_ref_list::
-    treatment_plan_citation_ref_list (const treatment_plan_citation_ref_list& x,
-                                      ::xml_schema::flags f,
-                                      ::xml_schema::container* c)
+    medical_reference_list::
+    medical_reference_list (const medical_reference_list& x,
+                            ::xml_schema::flags f,
+                            ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
       citations_ (x.citations_, f, this),
       cpgs_ (x.cpgs_, f, this)
     {
     }
 
-    treatment_plan_citation_ref_list::
-    treatment_plan_citation_ref_list (const ::xercesc::DOMElement& e,
-                                      ::xml_schema::flags f,
-                                      ::xml_schema::container* c)
+    medical_reference_list::
+    medical_reference_list (const ::xercesc::DOMElement& e,
+                            ::xml_schema::flags f,
+                            ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
       citations_ (this),
       cpgs_ (this)
@@ -3690,7 +3826,7 @@ namespace pfc
       }
     }
 
-    void treatment_plan_citation_ref_list::
+    void medical_reference_list::
     parse (::xsd::cxx::xml::dom::parser< char >& p,
            ::xml_schema::flags f)
     {
@@ -3774,15 +3910,15 @@ namespace pfc
       }
     }
 
-    treatment_plan_citation_ref_list* treatment_plan_citation_ref_list::
+    medical_reference_list* medical_reference_list::
     _clone (::xml_schema::flags f,
             ::xml_schema::container* c) const
     {
-      return new class treatment_plan_citation_ref_list (*this, f, c);
+      return new class medical_reference_list (*this, f, c);
     }
 
-    treatment_plan_citation_ref_list& treatment_plan_citation_ref_list::
-    operator= (const treatment_plan_citation_ref_list& x)
+    medical_reference_list& medical_reference_list::
+    operator= (const medical_reference_list& x)
     {
       if (this != &x)
       {
@@ -3794,35 +3930,126 @@ namespace pfc
       return *this;
     }
 
-    treatment_plan_citation_ref_list::
-    ~treatment_plan_citation_ref_list ()
+    medical_reference_list::
+    ~medical_reference_list ()
     {
     }
 
     static
-    const ::xsd::cxx::tree::type_factory_initializer< 0, char, treatment_plan_citation_ref_list >
-    _xsd_treatment_plan_citation_ref_list_type_factory_init (
-      "treatment-plan-citation-ref-list",
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, medical_reference_list >
+    _xsd_medical_reference_list_type_factory_init (
+      "medical-reference-list",
+      "com:ara:pfc:training:1");
+
+    // cpg_ref_list
+    //
+
+    cpg_ref_list::
+    cpg_ref_list ()
+    : ::xml_schema::type (),
+      cpg_ref_ (this)
+    {
+    }
+
+    cpg_ref_list::
+    cpg_ref_list (const cpg_ref_list& x,
+                  ::xml_schema::flags f,
+                  ::xml_schema::container* c)
+    : ::xml_schema::type (x, f, c),
+      cpg_ref_ (x.cpg_ref_, f, this)
+    {
+    }
+
+    cpg_ref_list::
+    cpg_ref_list (const ::xercesc::DOMElement& e,
+                  ::xml_schema::flags f,
+                  ::xml_schema::container* c)
+    : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+      cpg_ref_ (this)
+    {
+      if ((f & ::xml_schema::flags::base) == 0)
+      {
+        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+        this->parse (p, f);
+      }
+    }
+
+    void cpg_ref_list::
+    parse (::xsd::cxx::xml::dom::parser< char >& p,
+           ::xml_schema::flags f)
+    {
+      for (; p.more_content (); p.next_content (false))
+      {
+        const ::xercesc::DOMElement& i (p.cur_element ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+
+        // cpg-ref
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "cpg-ref",
+              "",
+              &::xsd::cxx::tree::factory_impl< cpg_ref_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            ::std::unique_ptr< cpg_ref_type > r (
+              dynamic_cast< cpg_ref_type* > (tmp.get ()));
+
+            if (r.get ())
+              tmp.release ();
+            else
+              throw ::xsd::cxx::tree::not_derived< char > ();
+
+            this->cpg_ref_.push_back (::std::move (r));
+            continue;
+          }
+        }
+
+        break;
+      }
+    }
+
+    cpg_ref_list* cpg_ref_list::
+    _clone (::xml_schema::flags f,
+            ::xml_schema::container* c) const
+    {
+      return new class cpg_ref_list (*this, f, c);
+    }
+
+    cpg_ref_list& cpg_ref_list::
+    operator= (const cpg_ref_list& x)
+    {
+      if (this != &x)
+      {
+        static_cast< ::xml_schema::type& > (*this) = x;
+        this->cpg_ref_ = x.cpg_ref_;
+      }
+
+      return *this;
+    }
+
+    cpg_ref_list::
+    ~cpg_ref_list ()
+    {
+    }
+
+    static
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, cpg_ref_list >
+    _xsd_cpg_ref_list_type_factory_init (
+      "cpg-ref-list",
       "com:ara:pfc:training:1");
 
     // cpg_list
     //
 
     cpg_list::
-    cpg_list (const name_type& name,
-              const citation_ref_type& citation_ref)
+    cpg_list ()
     : ::xml_schema::type (),
-      name_ (name, this),
-      citation_ref_ (citation_ref, this)
-    {
-    }
-
-    cpg_list::
-    cpg_list (::std::unique_ptr< name_type > name,
-              ::std::unique_ptr< citation_ref_type > citation_ref)
-    : ::xml_schema::type (),
-      name_ (std::move (name), this),
-      citation_ref_ (std::move (citation_ref), this)
+      cpg_ (this)
     {
     }
 
@@ -3831,8 +4058,7 @@ namespace pfc
               ::xml_schema::flags f,
               ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
-      name_ (x.name_, f, this),
-      citation_ref_ (x.citation_ref_, f, this)
+      cpg_ (x.cpg_, f, this)
     {
     }
 
@@ -3841,8 +4067,7 @@ namespace pfc
               ::xml_schema::flags f,
               ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
-      name_ (this),
-      citation_ref_ (this)
+      cpg_ (this)
     {
       if ((f & ::xml_schema::flags::base) == 0)
       {
@@ -3852,6 +4077,127 @@ namespace pfc
     }
 
     void cpg_list::
+    parse (::xsd::cxx::xml::dom::parser< char >& p,
+           ::xml_schema::flags f)
+    {
+      for (; p.more_content (); p.next_content (false))
+      {
+        const ::xercesc::DOMElement& i (p.cur_element ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+
+        // cpg
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "cpg",
+              "",
+              &::xsd::cxx::tree::factory_impl< cpg_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            ::std::unique_ptr< cpg_type > r (
+              dynamic_cast< cpg_type* > (tmp.get ()));
+
+            if (r.get ())
+              tmp.release ();
+            else
+              throw ::xsd::cxx::tree::not_derived< char > ();
+
+            this->cpg_.push_back (::std::move (r));
+            continue;
+          }
+        }
+
+        break;
+      }
+    }
+
+    cpg_list* cpg_list::
+    _clone (::xml_schema::flags f,
+            ::xml_schema::container* c) const
+    {
+      return new class cpg_list (*this, f, c);
+    }
+
+    cpg_list& cpg_list::
+    operator= (const cpg_list& x)
+    {
+      if (this != &x)
+      {
+        static_cast< ::xml_schema::type& > (*this) = x;
+        this->cpg_ = x.cpg_;
+      }
+
+      return *this;
+    }
+
+    cpg_list::
+    ~cpg_list ()
+    {
+    }
+
+    static
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, cpg_list >
+    _xsd_cpg_list_type_factory_init (
+      "cpg-list",
+      "com:ara:pfc:training:1");
+
+    // cpg
+    //
+
+    cpg::
+    cpg (const name_type& name,
+         const description_type& description,
+         const citation_ref_type& citation_ref)
+    : ::xml_schema::type (),
+      name_ (name, this),
+      description_ (description, this),
+      citation_ref_ (citation_ref, this)
+    {
+    }
+
+    cpg::
+    cpg (::std::unique_ptr< name_type > name,
+         ::std::unique_ptr< description_type > description,
+         ::std::unique_ptr< citation_ref_type > citation_ref)
+    : ::xml_schema::type (),
+      name_ (std::move (name), this),
+      description_ (std::move (description), this),
+      citation_ref_ (std::move (citation_ref), this)
+    {
+    }
+
+    cpg::
+    cpg (const cpg& x,
+         ::xml_schema::flags f,
+         ::xml_schema::container* c)
+    : ::xml_schema::type (x, f, c),
+      name_ (x.name_, f, this),
+      description_ (x.description_, f, this),
+      citation_ref_ (x.citation_ref_, f, this)
+    {
+    }
+
+    cpg::
+    cpg (const ::xercesc::DOMElement& e,
+         ::xml_schema::flags f,
+         ::xml_schema::container* c)
+    : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+      name_ (this),
+      description_ (this),
+      citation_ref_ (this)
+    {
+      if ((f & ::xml_schema::flags::base) == 0)
+      {
+        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+        this->parse (p, f);
+      }
+    }
+
+    void cpg::
     parse (::xsd::cxx::xml::dom::parser< char >& p,
            ::xml_schema::flags f)
     {
@@ -3884,6 +4230,34 @@ namespace pfc
                 throw ::xsd::cxx::tree::not_derived< char > ();
 
               this->name_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // description
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "description",
+              "",
+              &::xsd::cxx::tree::factory_impl< description_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!description_.present ())
+            {
+              ::std::unique_ptr< description_type > r (
+                dynamic_cast< description_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->description_.set (::std::move (r));
               continue;
             }
           }
@@ -3927,6 +4301,13 @@ namespace pfc
           "");
       }
 
+      if (!description_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "description",
+          "");
+      }
+
       if (!citation_ref_.present ())
       {
         throw ::xsd::cxx::tree::expected_element< char > (
@@ -3935,35 +4316,36 @@ namespace pfc
       }
     }
 
-    cpg_list* cpg_list::
+    cpg* cpg::
     _clone (::xml_schema::flags f,
             ::xml_schema::container* c) const
     {
-      return new class cpg_list (*this, f, c);
+      return new class cpg (*this, f, c);
     }
 
-    cpg_list& cpg_list::
-    operator= (const cpg_list& x)
+    cpg& cpg::
+    operator= (const cpg& x)
     {
       if (this != &x)
       {
         static_cast< ::xml_schema::type& > (*this) = x;
         this->name_ = x.name_;
+        this->description_ = x.description_;
         this->citation_ref_ = x.citation_ref_;
       }
 
       return *this;
     }
 
-    cpg_list::
-    ~cpg_list ()
+    cpg::
+    ~cpg ()
     {
     }
 
     static
-    const ::xsd::cxx::tree::type_factory_initializer< 0, char, cpg_list >
-    _xsd_cpg_list_type_factory_init (
-      "cpg-list",
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, cpg >
+    _xsd_cpg_type_factory_init (
+      "cpg",
       "com:ara:pfc:training:1");
 
     // learning_objective_reference_list
@@ -4068,29 +4450,29 @@ namespace pfc
       "learning-objective-reference-list",
       "com:ara:pfc:training:1");
 
-    // treatment_plan_reference_list
+    // treatment_plan_ref_list
     //
 
-    treatment_plan_reference_list::
-    treatment_plan_reference_list ()
+    treatment_plan_ref_list::
+    treatment_plan_ref_list ()
     : ::xml_schema::type (),
       treatment_plan_ (this)
     {
     }
 
-    treatment_plan_reference_list::
-    treatment_plan_reference_list (const treatment_plan_reference_list& x,
-                                   ::xml_schema::flags f,
-                                   ::xml_schema::container* c)
+    treatment_plan_ref_list::
+    treatment_plan_ref_list (const treatment_plan_ref_list& x,
+                             ::xml_schema::flags f,
+                             ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
       treatment_plan_ (x.treatment_plan_, f, this)
     {
     }
 
-    treatment_plan_reference_list::
-    treatment_plan_reference_list (const ::xercesc::DOMElement& e,
-                                   ::xml_schema::flags f,
-                                   ::xml_schema::container* c)
+    treatment_plan_ref_list::
+    treatment_plan_ref_list (const ::xercesc::DOMElement& e,
+                             ::xml_schema::flags f,
+                             ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
       treatment_plan_ (this)
     {
@@ -4101,7 +4483,7 @@ namespace pfc
       }
     }
 
-    void treatment_plan_reference_list::
+    void treatment_plan_ref_list::
     parse (::xsd::cxx::xml::dom::parser< char >& p,
            ::xml_schema::flags f)
     {
@@ -4140,15 +4522,15 @@ namespace pfc
       }
     }
 
-    treatment_plan_reference_list* treatment_plan_reference_list::
+    treatment_plan_ref_list* treatment_plan_ref_list::
     _clone (::xml_schema::flags f,
             ::xml_schema::container* c) const
     {
-      return new class treatment_plan_reference_list (*this, f, c);
+      return new class treatment_plan_ref_list (*this, f, c);
     }
 
-    treatment_plan_reference_list& treatment_plan_reference_list::
-    operator= (const treatment_plan_reference_list& x)
+    treatment_plan_ref_list& treatment_plan_ref_list::
+    operator= (const treatment_plan_ref_list& x)
     {
       if (this != &x)
       {
@@ -4159,15 +4541,15 @@ namespace pfc
       return *this;
     }
 
-    treatment_plan_reference_list::
-    ~treatment_plan_reference_list ()
+    treatment_plan_ref_list::
+    ~treatment_plan_ref_list ()
     {
     }
 
     static
-    const ::xsd::cxx::tree::type_factory_initializer< 0, char, treatment_plan_reference_list >
-    _xsd_treatment_plan_reference_list_type_factory_init (
-      "treatment-plan-reference-list",
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, treatment_plan_ref_list >
+    _xsd_treatment_plan_ref_list_type_factory_init (
+      "treatment-plan-ref-list",
       "com:ara:pfc:training:1");
 
     // injury_profile_list
@@ -4551,29 +4933,29 @@ namespace pfc
       "injury-profile",
       "com:ara:pfc:training:1");
 
-    // injury_profile_reference_list
+    // injury_profile_ref_list
     //
 
-    injury_profile_reference_list::
-    injury_profile_reference_list ()
+    injury_profile_ref_list::
+    injury_profile_ref_list ()
     : ::xml_schema::type (),
       injury_profile_ (this)
     {
     }
 
-    injury_profile_reference_list::
-    injury_profile_reference_list (const injury_profile_reference_list& x,
-                                   ::xml_schema::flags f,
-                                   ::xml_schema::container* c)
+    injury_profile_ref_list::
+    injury_profile_ref_list (const injury_profile_ref_list& x,
+                             ::xml_schema::flags f,
+                             ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
       injury_profile_ (x.injury_profile_, f, this)
     {
     }
 
-    injury_profile_reference_list::
-    injury_profile_reference_list (const ::xercesc::DOMElement& e,
-                                   ::xml_schema::flags f,
-                                   ::xml_schema::container* c)
+    injury_profile_ref_list::
+    injury_profile_ref_list (const ::xercesc::DOMElement& e,
+                             ::xml_schema::flags f,
+                             ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
       injury_profile_ (this)
     {
@@ -4584,7 +4966,7 @@ namespace pfc
       }
     }
 
-    void injury_profile_reference_list::
+    void injury_profile_ref_list::
     parse (::xsd::cxx::xml::dom::parser< char >& p,
            ::xml_schema::flags f)
     {
@@ -4623,15 +5005,15 @@ namespace pfc
       }
     }
 
-    injury_profile_reference_list* injury_profile_reference_list::
+    injury_profile_ref_list* injury_profile_ref_list::
     _clone (::xml_schema::flags f,
             ::xml_schema::container* c) const
     {
-      return new class injury_profile_reference_list (*this, f, c);
+      return new class injury_profile_ref_list (*this, f, c);
     }
 
-    injury_profile_reference_list& injury_profile_reference_list::
-    operator= (const injury_profile_reference_list& x)
+    injury_profile_ref_list& injury_profile_ref_list::
+    operator= (const injury_profile_ref_list& x)
     {
       if (this != &x)
       {
@@ -4642,15 +5024,15 @@ namespace pfc
       return *this;
     }
 
-    injury_profile_reference_list::
-    ~injury_profile_reference_list ()
+    injury_profile_ref_list::
+    ~injury_profile_ref_list ()
     {
     }
 
     static
-    const ::xsd::cxx::tree::type_factory_initializer< 0, char, injury_profile_reference_list >
-    _xsd_injury_profile_reference_list_type_factory_init (
-      "injury-profile-reference-list",
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, injury_profile_ref_list >
+    _xsd_injury_profile_ref_list_type_factory_init (
+      "injury-profile-ref-list",
       "com:ara:pfc:training:1");
 
     // injury_occurance_list
@@ -4902,18 +5284,20 @@ namespace pfc
     //
 
     medical_scenario_syllabus::
-    medical_scenario_syllabus (const learning_objectives_type& learning_objectives)
+    medical_scenario_syllabus (const learning_objectives_type& learning_objectives,
+                               const learning_assessments_type& learning_assessments)
     : ::xml_schema::type (),
       learning_objectives_ (learning_objectives, this),
-      learning_assessments_ (this)
+      learning_assessments_ (learning_assessments, this)
     {
     }
 
     medical_scenario_syllabus::
-    medical_scenario_syllabus (::std::unique_ptr< learning_objectives_type > learning_objectives)
+    medical_scenario_syllabus (::std::unique_ptr< learning_objectives_type > learning_objectives,
+                               ::std::unique_ptr< learning_assessments_type > learning_assessments)
     : ::xml_schema::type (),
       learning_objectives_ (std::move (learning_objectives), this),
-      learning_assessments_ (this)
+      learning_assessments_ (std::move (learning_assessments), this)
     {
     }
 
@@ -4992,16 +5376,19 @@ namespace pfc
 
           if (tmp.get () != 0)
           {
-            ::std::unique_ptr< learning_assessments_type > r (
-              dynamic_cast< learning_assessments_type* > (tmp.get ()));
+            if (!learning_assessments_.present ())
+            {
+              ::std::unique_ptr< learning_assessments_type > r (
+                dynamic_cast< learning_assessments_type* > (tmp.get ()));
 
-            if (r.get ())
-              tmp.release ();
-            else
-              throw ::xsd::cxx::tree::not_derived< char > ();
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->learning_assessments_.push_back (::std::move (r));
-            continue;
+              this->learning_assessments_.set (::std::move (r));
+              continue;
+            }
           }
         }
 
@@ -5012,6 +5399,13 @@ namespace pfc
       {
         throw ::xsd::cxx::tree::expected_element< char > (
           "learning-objectives",
+          "");
+      }
+
+      if (!learning_assessments_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "learning-assessments",
           "");
       }
     }
@@ -5155,11 +5549,13 @@ namespace pfc
     learning_objective::
     learning_objective (const id_type& id,
                         const name_type& name,
+                        const description_type& description,
                         const references_type& references,
                         const relates_to_type& relates_to)
     : ::xml_schema::type (),
       id_ (id, this),
       name_ (name, this),
+      description_ (description, this),
       references_ (references, this),
       relates_to_ (relates_to, this)
     {
@@ -5168,11 +5564,13 @@ namespace pfc
     learning_objective::
     learning_objective (const id_type& id,
                         const name_type& name,
+                        const description_type& description,
                         ::std::unique_ptr< references_type > references,
                         ::std::unique_ptr< relates_to_type > relates_to)
     : ::xml_schema::type (),
       id_ (id, this),
       name_ (name, this),
+      description_ (description, this),
       references_ (std::move (references), this),
       relates_to_ (std::move (relates_to), this)
     {
@@ -5181,11 +5579,13 @@ namespace pfc
     learning_objective::
     learning_objective (::std::unique_ptr< id_type > id,
                         ::std::unique_ptr< name_type > name,
+                        ::std::unique_ptr< description_type > description,
                         ::std::unique_ptr< references_type > references,
                         ::std::unique_ptr< relates_to_type > relates_to)
     : ::xml_schema::type (),
       id_ (std::move (id), this),
       name_ (std::move (name), this),
+      description_ (std::move (description), this),
       references_ (std::move (references), this),
       relates_to_ (std::move (relates_to), this)
     {
@@ -5198,6 +5598,7 @@ namespace pfc
     : ::xml_schema::type (x, f, c),
       id_ (x.id_, f, this),
       name_ (x.name_, f, this),
+      description_ (x.description_, f, this),
       references_ (x.references_, f, this),
       relates_to_ (x.relates_to_, f, this)
     {
@@ -5210,6 +5611,7 @@ namespace pfc
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
       id_ (this),
       name_ (this),
+      description_ (this),
       references_ (this),
       relates_to_ (this)
     {
@@ -5286,6 +5688,34 @@ namespace pfc
           }
         }
 
+        // description
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "description",
+              "",
+              &::xsd::cxx::tree::factory_impl< description_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!description_.present ())
+            {
+              ::std::unique_ptr< description_type > r (
+                dynamic_cast< description_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->description_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
         // references
         //
         {
@@ -5345,6 +5775,13 @@ namespace pfc
           "");
       }
 
+      if (!description_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "description",
+          "");
+      }
+
       if (!references_.present ())
       {
         throw ::xsd::cxx::tree::expected_element< char > (
@@ -5375,6 +5812,7 @@ namespace pfc
         static_cast< ::xml_schema::type& > (*this) = x;
         this->id_ = x.id_;
         this->name_ = x.name_;
+        this->description_ = x.description_;
         this->references_ = x.references_;
         this->relates_to_ = x.relates_to_;
       }
@@ -5393,31 +5831,31 @@ namespace pfc
       "learning-objective",
       "com:ara:pfc:training:1");
 
-    // assessment_criteria_list
+    // assessment_list
     //
 
-    assessment_criteria_list::
-    assessment_criteria_list (const total_points_type& total_points)
+    assessment_list::
+    assessment_list (const total_points_type& total_points)
     : ::xml_schema::type (),
       total_points_ (total_points, this),
       assessment_ (this)
     {
     }
 
-    assessment_criteria_list::
-    assessment_criteria_list (const assessment_criteria_list& x,
-                              ::xml_schema::flags f,
-                              ::xml_schema::container* c)
+    assessment_list::
+    assessment_list (const assessment_list& x,
+                     ::xml_schema::flags f,
+                     ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
       total_points_ (x.total_points_, f, this),
       assessment_ (x.assessment_, f, this)
     {
     }
 
-    assessment_criteria_list::
-    assessment_criteria_list (const ::xercesc::DOMElement& e,
-                              ::xml_schema::flags f,
-                              ::xml_schema::container* c)
+    assessment_list::
+    assessment_list (const ::xercesc::DOMElement& e,
+                     ::xml_schema::flags f,
+                     ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
       total_points_ (this),
       assessment_ (this)
@@ -5429,7 +5867,7 @@ namespace pfc
       }
     }
 
-    void assessment_criteria_list::
+    void assessment_list::
     parse (::xsd::cxx::xml::dom::parser< char >& p,
            ::xml_schema::flags f)
     {
@@ -5486,15 +5924,15 @@ namespace pfc
       }
     }
 
-    assessment_criteria_list* assessment_criteria_list::
+    assessment_list* assessment_list::
     _clone (::xml_schema::flags f,
             ::xml_schema::container* c) const
     {
-      return new class assessment_criteria_list (*this, f, c);
+      return new class assessment_list (*this, f, c);
     }
 
-    assessment_criteria_list& assessment_criteria_list::
-    operator= (const assessment_criteria_list& x)
+    assessment_list& assessment_list::
+    operator= (const assessment_list& x)
     {
       if (this != &x)
       {
@@ -5506,15 +5944,15 @@ namespace pfc
       return *this;
     }
 
-    assessment_criteria_list::
-    ~assessment_criteria_list ()
+    assessment_list::
+    ~assessment_list ()
     {
     }
 
     static
-    const ::xsd::cxx::tree::type_factory_initializer< 0, char, assessment_criteria_list >
-    _xsd_assessment_criteria_list_type_factory_init (
-      "assessment-criteria-list",
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, assessment_list >
+    _xsd_assessment_list_type_factory_init (
+      "assessment-list",
       "com:ara:pfc:training:1");
 
     // assessment
@@ -6753,12 +7191,14 @@ namespace pfc
 
     scene::
     scene (const location_id_type& location_id,
+           const name_type& name,
            const description_type& description,
            const time_of_day_type& time_of_day,
            const time_in_simulation_type& time_in_simulation,
            const events_type& events)
     : ::xml_schema::type (),
       location_id_ (location_id, this),
+      name_ (name, this),
       description_ (description, this),
       time_of_day_ (time_of_day, this),
       time_in_simulation_ (time_in_simulation, this),
@@ -6768,12 +7208,14 @@ namespace pfc
 
     scene::
     scene (const location_id_type& location_id,
+           const name_type& name,
            const description_type& description,
            const time_of_day_type& time_of_day,
            const time_in_simulation_type& time_in_simulation,
            ::std::unique_ptr< events_type > events)
     : ::xml_schema::type (),
       location_id_ (location_id, this),
+      name_ (name, this),
       description_ (description, this),
       time_of_day_ (time_of_day, this),
       time_in_simulation_ (time_in_simulation, this),
@@ -6783,12 +7225,14 @@ namespace pfc
 
     scene::
     scene (::std::unique_ptr< location_id_type > location_id,
+           ::std::unique_ptr< name_type > name,
            ::std::unique_ptr< description_type > description,
            ::std::unique_ptr< time_of_day_type > time_of_day,
            const time_in_simulation_type& time_in_simulation,
            ::std::unique_ptr< events_type > events)
     : ::xml_schema::type (),
       location_id_ (std::move (location_id), this),
+      name_ (std::move (name), this),
       description_ (std::move (description), this),
       time_of_day_ (std::move (time_of_day), this),
       time_in_simulation_ (time_in_simulation, this),
@@ -6802,6 +7246,7 @@ namespace pfc
            ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
       location_id_ (x.location_id_, f, this),
+      name_ (x.name_, f, this),
       description_ (x.description_, f, this),
       time_of_day_ (x.time_of_day_, f, this),
       time_in_simulation_ (x.time_in_simulation_, f, this),
@@ -6815,6 +7260,7 @@ namespace pfc
            ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
       location_id_ (this),
+      name_ (this),
       description_ (this),
       time_of_day_ (this),
       time_in_simulation_ (this),
@@ -6860,6 +7306,34 @@ namespace pfc
                 throw ::xsd::cxx::tree::not_derived< char > ();
 
               this->location_id_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // name
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "name",
+              "",
+              &::xsd::cxx::tree::factory_impl< name_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!name_.present ())
+            {
+              ::std::unique_ptr< name_type > r (
+                dynamic_cast< name_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->name_.set (::std::move (r));
               continue;
             }
           }
@@ -6970,6 +7444,13 @@ namespace pfc
           "");
       }
 
+      if (!name_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "name",
+          "");
+      }
+
       if (!description_.present ())
       {
         throw ::xsd::cxx::tree::expected_element< char > (
@@ -7013,6 +7494,7 @@ namespace pfc
       {
         static_cast< ::xml_schema::type& > (*this) = x;
         this->location_id_ = x.location_id_;
+        this->name_ = x.name_;
         this->description_ = x.description_;
         this->time_of_day_ = x.time_of_day_;
         this->time_in_simulation_ = x.time_in_simulation_;
@@ -8128,11 +8610,8 @@ namespace pfc
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-        if (i.citations ())
-        {
-          o << ::std::endl << "citations: ";
-          om.insert (o, *i.citations ());
-        }
+        o << ::std::endl << "citations: ";
+        om.insert (o, i.citations ());
       }
 
       {
@@ -8329,11 +8808,8 @@ namespace pfc
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-        if (i.references ())
-        {
-          o << ::std::endl << "references: ";
-          om.insert (o, *i.references ());
-        }
+        o << ::std::endl << "references: ";
+        om.insert (o, i.references ());
       }
 
       return o;
@@ -8344,13 +8820,13 @@ namespace pfc
     _xsd_treatment_plan_std_ostream_init;
 
     ::std::ostream&
-    operator<< (::std::ostream& o, const medical_equipment_list& i)
+    operator<< (::std::ostream& o, const equipment_ref_list& i)
     {
       {
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-        for (medical_equipment_list::equipment_refs_const_iterator
+        for (equipment_ref_list::equipment_refs_const_iterator
              b (i.equipment_refs ().begin ()), e (i.equipment_refs ().end ());
              b != e; ++b)
         {
@@ -8363,11 +8839,11 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, medical_equipment_list >
-    _xsd_medical_equipment_list_std_ostream_init;
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, equipment_ref_list >
+    _xsd_equipment_ref_list_std_ostream_init;
 
     ::std::ostream&
-    operator<< (::std::ostream& o, const treatment_plan_citation_ref_list& i)
+    operator<< (::std::ostream& o, const medical_reference_list& i)
     {
       {
         ::xsd::cxx::tree::std_ostream_map< char >& om (
@@ -8389,8 +8865,31 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, treatment_plan_citation_ref_list >
-    _xsd_treatment_plan_citation_ref_list_std_ostream_init;
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, medical_reference_list >
+    _xsd_medical_reference_list_std_ostream_init;
+
+    ::std::ostream&
+    operator<< (::std::ostream& o, const cpg_ref_list& i)
+    {
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        for (cpg_ref_list::cpg_ref_const_iterator
+             b (i.cpg_ref ().begin ()), e (i.cpg_ref ().end ());
+             b != e; ++b)
+        {
+          o << ::std::endl << "cpg-ref: ";
+          om.insert (o, *b);
+        }
+      }
+
+      return o;
+    }
+
+    static
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, cpg_ref_list >
+    _xsd_cpg_ref_list_std_ostream_init;
 
     ::std::ostream&
     operator<< (::std::ostream& o, const cpg_list& i)
@@ -8399,8 +8898,39 @@ namespace pfc
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
+        for (cpg_list::cpg_const_iterator
+             b (i.cpg ().begin ()), e (i.cpg ().end ());
+             b != e; ++b)
+        {
+          o << ::std::endl << "cpg: ";
+          om.insert (o, *b);
+        }
+      }
+
+      return o;
+    }
+
+    static
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, cpg_list >
+    _xsd_cpg_list_std_ostream_init;
+
+    ::std::ostream&
+    operator<< (::std::ostream& o, const cpg& i)
+    {
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
         o << ::std::endl << "name: ";
         om.insert (o, i.name ());
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "description: ";
+        om.insert (o, i.description ());
       }
 
       {
@@ -8415,8 +8945,8 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, cpg_list >
-    _xsd_cpg_list_std_ostream_init;
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, cpg >
+    _xsd_cpg_std_ostream_init;
 
     ::std::ostream&
     operator<< (::std::ostream& o, const learning_objective_reference_list& i)
@@ -8442,13 +8972,13 @@ namespace pfc
     _xsd_learning_objective_reference_list_std_ostream_init;
 
     ::std::ostream&
-    operator<< (::std::ostream& o, const treatment_plan_reference_list& i)
+    operator<< (::std::ostream& o, const treatment_plan_ref_list& i)
     {
       {
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-        for (treatment_plan_reference_list::treatment_plan_const_iterator
+        for (treatment_plan_ref_list::treatment_plan_const_iterator
              b (i.treatment_plan ().begin ()), e (i.treatment_plan ().end ());
              b != e; ++b)
         {
@@ -8461,8 +8991,8 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, treatment_plan_reference_list >
-    _xsd_treatment_plan_reference_list_std_ostream_init;
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, treatment_plan_ref_list >
+    _xsd_treatment_plan_ref_list_std_ostream_init;
 
     ::std::ostream&
     operator<< (::std::ostream& o, const injury_profile_list& i)
@@ -8546,13 +9076,13 @@ namespace pfc
     _xsd_injury_profile_std_ostream_init;
 
     ::std::ostream&
-    operator<< (::std::ostream& o, const injury_profile_reference_list& i)
+    operator<< (::std::ostream& o, const injury_profile_ref_list& i)
     {
       {
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-        for (injury_profile_reference_list::injury_profile_const_iterator
+        for (injury_profile_ref_list::injury_profile_const_iterator
              b (i.injury_profile ().begin ()), e (i.injury_profile ().end ());
              b != e; ++b)
         {
@@ -8565,8 +9095,8 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, injury_profile_reference_list >
-    _xsd_injury_profile_reference_list_std_ostream_init;
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, injury_profile_ref_list >
+    _xsd_injury_profile_ref_list_std_ostream_init;
 
     ::std::ostream&
     operator<< (::std::ostream& o, const injury_occurance_list& i)
@@ -8625,13 +9155,8 @@ namespace pfc
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-        for (medical_scenario_syllabus::learning_assessments_const_iterator
-             b (i.learning_assessments ().begin ()), e (i.learning_assessments ().end ());
-             b != e; ++b)
-        {
-          o << ::std::endl << "learning-assessments: ";
-          om.insert (o, *b);
-        }
+        o << ::std::endl << "learning-assessments: ";
+        om.insert (o, i.learning_assessments ());
       }
 
       return o;
@@ -8687,6 +9212,14 @@ namespace pfc
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
+        o << ::std::endl << "description: ";
+        om.insert (o, i.description ());
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
         o << ::std::endl << "references: ";
         om.insert (o, i.references ());
       }
@@ -8700,14 +9233,14 @@ namespace pfc
     _xsd_learning_objective_std_ostream_init;
 
     ::std::ostream&
-    operator<< (::std::ostream& o, const assessment_criteria_list& i)
+    operator<< (::std::ostream& o, const assessment_list& i)
     {
       o << ::std::endl << "total-points: " << i.total_points ();
       {
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-        for (assessment_criteria_list::assessment_const_iterator
+        for (assessment_list::assessment_const_iterator
              b (i.assessment ().begin ()), e (i.assessment ().end ());
              b != e; ++b)
         {
@@ -8720,8 +9253,8 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, assessment_criteria_list >
-    _xsd_assessment_criteria_list_std_ostream_init;
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, assessment_list >
+    _xsd_assessment_list_std_ostream_init;
 
     ::std::ostream&
     operator<< (::std::ostream& o, const assessment& i)
@@ -8957,6 +9490,14 @@ namespace pfc
 
         o << ::std::endl << "location-id: ";
         om.insert (o, i.location_id ());
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "name: ";
+        om.insert (o, i.name ());
       }
 
       {
@@ -9347,24 +9888,21 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        if (i.citations ())
+        const injury::citations_type& x (i.citations ());
+        if (typeid (injury::citations_type) == typeid (x))
         {
-          const injury::citations_type& x (*i.citations ());
-          if (typeid (injury::citations_type) == typeid (x))
-          {
-            ::xercesc::DOMElement& s (
-              ::xsd::cxx::xml::dom::create_element (
-                "citations",
-                e));
-
-            s << x;
-          }
-          else
-            tsm.serialize (
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
               "citations",
-              "",
-              false, false, e, x);
+              e));
+
+          s << x;
         }
+        else
+          tsm.serialize (
+            "citations",
+            "",
+            false, false, e, x);
       }
 
       // description
@@ -9785,24 +10323,21 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        if (i.references ())
+        const treatment_plan::references_type& x (i.references ());
+        if (typeid (treatment_plan::references_type) == typeid (x))
         {
-          const treatment_plan::references_type& x (*i.references ());
-          if (typeid (treatment_plan::references_type) == typeid (x))
-          {
-            ::xercesc::DOMElement& s (
-              ::xsd::cxx::xml::dom::create_element (
-                "references",
-                e));
-
-            s << x;
-          }
-          else
-            tsm.serialize (
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
               "references",
-              "",
-              false, false, e, x);
+              e));
+
+          s << x;
         }
+        else
+          tsm.serialize (
+            "references",
+            "",
+            false, false, e, x);
       }
     }
 
@@ -9814,7 +10349,7 @@ namespace pfc
 
 
     void
-    operator<< (::xercesc::DOMElement& e, const medical_equipment_list& i)
+    operator<< (::xercesc::DOMElement& e, const equipment_ref_list& i)
     {
       e << static_cast< const ::xml_schema::type& > (i);
 
@@ -9824,11 +10359,11 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        for (medical_equipment_list::equipment_refs_const_iterator
+        for (equipment_ref_list::equipment_refs_const_iterator
              b (i.equipment_refs ().begin ()), n (i.equipment_refs ().end ());
              b != n; ++b)
         {
-          if (typeid (medical_equipment_list::equipment_refs_type) == typeid (*b))
+          if (typeid (equipment_ref_list::equipment_refs_type) == typeid (*b))
           {
             ::xercesc::DOMElement& s (
               ::xsd::cxx::xml::dom::create_element (
@@ -9847,14 +10382,14 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, medical_equipment_list >
-    _xsd_medical_equipment_list_type_serializer_init (
-      "medical-equipment-list",
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, equipment_ref_list >
+    _xsd_equipment_ref_list_type_serializer_init (
+      "equipment-ref-list",
       "com:ara:pfc:training:1");
 
 
     void
-    operator<< (::xercesc::DOMElement& e, const treatment_plan_citation_ref_list& i)
+    operator<< (::xercesc::DOMElement& e, const medical_reference_list& i)
     {
       e << static_cast< const ::xml_schema::type& > (i);
 
@@ -9864,8 +10399,8 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const treatment_plan_citation_ref_list::citations_type& x (i.citations ());
-        if (typeid (treatment_plan_citation_ref_list::citations_type) == typeid (x))
+        const medical_reference_list::citations_type& x (i.citations ());
+        if (typeid (medical_reference_list::citations_type) == typeid (x))
         {
           ::xercesc::DOMElement& s (
             ::xsd::cxx::xml::dom::create_element (
@@ -9887,8 +10422,8 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const treatment_plan_citation_ref_list::cpgs_type& x (i.cpgs ());
-        if (typeid (treatment_plan_citation_ref_list::cpgs_type) == typeid (x))
+        const medical_reference_list::cpgs_type& x (i.cpgs ());
+        if (typeid (medical_reference_list::cpgs_type) == typeid (x))
         {
           ::xercesc::DOMElement& s (
             ::xsd::cxx::xml::dom::create_element (
@@ -9906,14 +10441,94 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, treatment_plan_citation_ref_list >
-    _xsd_treatment_plan_citation_ref_list_type_serializer_init (
-      "treatment-plan-citation-ref-list",
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, medical_reference_list >
+    _xsd_medical_reference_list_type_serializer_init (
+      "medical-reference-list",
+      "com:ara:pfc:training:1");
+
+
+    void
+    operator<< (::xercesc::DOMElement& e, const cpg_ref_list& i)
+    {
+      e << static_cast< const ::xml_schema::type& > (i);
+
+      // cpg-ref
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        for (cpg_ref_list::cpg_ref_const_iterator
+             b (i.cpg_ref ().begin ()), n (i.cpg_ref ().end ());
+             b != n; ++b)
+        {
+          if (typeid (cpg_ref_list::cpg_ref_type) == typeid (*b))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "cpg-ref",
+                e));
+
+            s << *b;
+          }
+          else
+            tsm.serialize (
+              "cpg-ref",
+              "",
+              false, false, e, *b);
+        }
+      }
+    }
+
+    static
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, cpg_ref_list >
+    _xsd_cpg_ref_list_type_serializer_init (
+      "cpg-ref-list",
       "com:ara:pfc:training:1");
 
 
     void
     operator<< (::xercesc::DOMElement& e, const cpg_list& i)
+    {
+      e << static_cast< const ::xml_schema::type& > (i);
+
+      // cpg
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        for (cpg_list::cpg_const_iterator
+             b (i.cpg ().begin ()), n (i.cpg ().end ());
+             b != n; ++b)
+        {
+          if (typeid (cpg_list::cpg_type) == typeid (*b))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "cpg",
+                e));
+
+            s << *b;
+          }
+          else
+            tsm.serialize (
+              "cpg",
+              "",
+              false, false, e, *b);
+        }
+      }
+    }
+
+    static
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, cpg_list >
+    _xsd_cpg_list_type_serializer_init (
+      "cpg-list",
+      "com:ara:pfc:training:1");
+
+
+    void
+    operator<< (::xercesc::DOMElement& e, const cpg& i)
     {
       e << static_cast< const ::xml_schema::type& > (i);
 
@@ -9923,8 +10538,8 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const cpg_list::name_type& x (i.name ());
-        if (typeid (cpg_list::name_type) == typeid (x))
+        const cpg::name_type& x (i.name ());
+        if (typeid (cpg::name_type) == typeid (x))
         {
           ::xercesc::DOMElement& s (
             ::xsd::cxx::xml::dom::create_element (
@@ -9940,14 +10555,37 @@ namespace pfc
             false, false, e, x);
       }
 
+      // description
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const cpg::description_type& x (i.description ());
+        if (typeid (cpg::description_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "description",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "description",
+            "",
+            false, false, e, x);
+      }
+
       // citation-ref
       //
       {
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const cpg_list::citation_ref_type& x (i.citation_ref ());
-        if (typeid (cpg_list::citation_ref_type) == typeid (x))
+        const cpg::citation_ref_type& x (i.citation_ref ());
+        if (typeid (cpg::citation_ref_type) == typeid (x))
         {
           ::xercesc::DOMElement& s (
             ::xsd::cxx::xml::dom::create_element (
@@ -9965,9 +10603,9 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, cpg_list >
-    _xsd_cpg_list_type_serializer_init (
-      "cpg-list",
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, cpg >
+    _xsd_cpg_type_serializer_init (
+      "cpg",
       "com:ara:pfc:training:1");
 
 
@@ -10012,7 +10650,7 @@ namespace pfc
 
 
     void
-    operator<< (::xercesc::DOMElement& e, const treatment_plan_reference_list& i)
+    operator<< (::xercesc::DOMElement& e, const treatment_plan_ref_list& i)
     {
       e << static_cast< const ::xml_schema::type& > (i);
 
@@ -10022,11 +10660,11 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        for (treatment_plan_reference_list::treatment_plan_const_iterator
+        for (treatment_plan_ref_list::treatment_plan_const_iterator
              b (i.treatment_plan ().begin ()), n (i.treatment_plan ().end ());
              b != n; ++b)
         {
-          if (typeid (treatment_plan_reference_list::treatment_plan_type) == typeid (*b))
+          if (typeid (treatment_plan_ref_list::treatment_plan_type) == typeid (*b))
           {
             ::xercesc::DOMElement& s (
               ::xsd::cxx::xml::dom::create_element (
@@ -10045,9 +10683,9 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, treatment_plan_reference_list >
-    _xsd_treatment_plan_reference_list_type_serializer_init (
-      "treatment-plan-reference-list",
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, treatment_plan_ref_list >
+    _xsd_treatment_plan_ref_list_type_serializer_init (
+      "treatment-plan-ref-list",
       "com:ara:pfc:training:1");
 
 
@@ -10227,7 +10865,7 @@ namespace pfc
 
 
     void
-    operator<< (::xercesc::DOMElement& e, const injury_profile_reference_list& i)
+    operator<< (::xercesc::DOMElement& e, const injury_profile_ref_list& i)
     {
       e << static_cast< const ::xml_schema::type& > (i);
 
@@ -10237,11 +10875,11 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        for (injury_profile_reference_list::injury_profile_const_iterator
+        for (injury_profile_ref_list::injury_profile_const_iterator
              b (i.injury_profile ().begin ()), n (i.injury_profile ().end ());
              b != n; ++b)
         {
-          if (typeid (injury_profile_reference_list::injury_profile_type) == typeid (*b))
+          if (typeid (injury_profile_ref_list::injury_profile_type) == typeid (*b))
           {
             ::xercesc::DOMElement& s (
               ::xsd::cxx::xml::dom::create_element (
@@ -10260,9 +10898,9 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, injury_profile_reference_list >
-    _xsd_injury_profile_reference_list_type_serializer_init (
-      "injury-profile-reference-list",
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, injury_profile_ref_list >
+    _xsd_injury_profile_ref_list_type_serializer_init (
+      "injury-profile-ref-list",
       "com:ara:pfc:training:1");
 
 
@@ -10405,25 +11043,21 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        for (medical_scenario_syllabus::learning_assessments_const_iterator
-             b (i.learning_assessments ().begin ()), n (i.learning_assessments ().end ());
-             b != n; ++b)
+        const medical_scenario_syllabus::learning_assessments_type& x (i.learning_assessments ());
+        if (typeid (medical_scenario_syllabus::learning_assessments_type) == typeid (x))
         {
-          if (typeid (medical_scenario_syllabus::learning_assessments_type) == typeid (*b))
-          {
-            ::xercesc::DOMElement& s (
-              ::xsd::cxx::xml::dom::create_element (
-                "learning-assessments",
-                e));
-
-            s << *b;
-          }
-          else
-            tsm.serialize (
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
               "learning-assessments",
-              "",
-              false, false, e, *b);
+              e));
+
+          s << x;
         }
+        else
+          tsm.serialize (
+            "learning-assessments",
+            "",
+            false, false, e, x);
       }
     }
 
@@ -10525,6 +11159,29 @@ namespace pfc
             false, false, e, x);
       }
 
+      // description
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const learning_objective::description_type& x (i.description ());
+        if (typeid (learning_objective::description_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "description",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "description",
+            "",
+            false, false, e, x);
+      }
+
       // references
       //
       {
@@ -10568,7 +11225,7 @@ namespace pfc
 
 
     void
-    operator<< (::xercesc::DOMElement& e, const assessment_criteria_list& i)
+    operator<< (::xercesc::DOMElement& e, const assessment_list& i)
     {
       e << static_cast< const ::xml_schema::type& > (i);
 
@@ -10589,11 +11246,11 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        for (assessment_criteria_list::assessment_const_iterator
+        for (assessment_list::assessment_const_iterator
              b (i.assessment ().begin ()), n (i.assessment ().end ());
              b != n; ++b)
         {
-          if (typeid (assessment_criteria_list::assessment_type) == typeid (*b))
+          if (typeid (assessment_list::assessment_type) == typeid (*b))
           {
             ::xercesc::DOMElement& s (
               ::xsd::cxx::xml::dom::create_element (
@@ -10612,9 +11269,9 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, assessment_criteria_list >
-    _xsd_assessment_criteria_list_type_serializer_init (
-      "assessment-criteria-list",
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, assessment_list >
+    _xsd_assessment_list_type_serializer_init (
+      "assessment-list",
       "com:ara:pfc:training:1");
 
 
@@ -11150,6 +11807,29 @@ namespace pfc
         else
           tsm.serialize (
             "location-id",
+            "",
+            false, false, e, x);
+      }
+
+      // name
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const scene::name_type& x (i.name ());
+        if (typeid (scene::name_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "name",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "name",
             "",
             false, false, e, x);
       }

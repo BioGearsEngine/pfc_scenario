@@ -33,10 +33,10 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:all>
-			<xs:element name="id" type="xs:ID"/>
+			<xs:element name="id" type="xs:string"/>
 			<xs:element name="common-name" type="xs:string" minOccurs="0"/>
 			<xs:element name="medical-name" type="xs:string" minOccurs="1"/>
-			<xs:element name="citations" type="citation-ref-list" minOccurs="0"/>
+			<xs:element name="citations" type="citation-ref-list" minOccurs="1"/>
 			<xs:element name="description" type="xs:string" minOccurs="1"/>
 			<xs:element name="severity-range" type="injury-severity-range" minOccurs="1"/>
 		</xs:all>
@@ -88,7 +88,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="citation-ref" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="citation-ref" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="treatment-plan-definition-list">
@@ -108,24 +108,24 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:all>
-			<xs:element name="id" type="xs:ID"/>
+			<xs:element name="id" type="xs:string"/>
 			<xs:element name="common-name" type="xs:string" minOccurs="0"/>
 			<xs:element name="description" type="xs:string" minOccurs="1"/>
-			<xs:element name="required-equipment" type="medical-equipment-list" minOccurs="1"/>
-			<xs:element name="references" type="treatment-plan-citation-ref-list" minOccurs="0"/>
-		</xs:all>
-	</xs:complexType>
-	<xs:complexType name="medical-equipment-list">
+			<xs:element name="required-equipment" type="equipment-ref-list" minOccurs="1"/>
+      <xs:element name="references" type="medical-reference-list" />
+    </xs:all>
+  </xs:complexType>
+	<xs:complexType name="equipment-ref-list">
 		<xs:annotation>
 			<xs:documentation>
 				List of UUIDs from the equipment list in the FORCE_SIDE section of an associated MSDL file
 			</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="equipment-refs" type="xs:IDREF" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="equipment-refs" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="treatment-plan-citation-ref-list">
+	<xs:complexType name="medical-reference-list">
 		<xs:annotation>
 			<xs:documentation>
 				Series of citations that the treatment plan was built on.  
@@ -135,19 +135,41 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 		</xs:annotation>
 		<xs:all>
 			<xs:element name="citations" type="citation-ref-list"/>
-			<xs:element name="cpgs" type="cpg-list"/>
+			<xs:element name="cpgs" type="cpg-ref-list"/>
 			<!-- <xs:element name="related-learning-objectives" type="learning-objective-reference-list" /> -->
 		</xs:all>
 	</xs:complexType>
-	<xs:complexType name="cpg-list">
+  <xs:complexType name="cpg-ref-list">
+    <xs:annotation>
+      <xs:documentation>
+        List of CPG specific citations. This tag is differentatated from the citations tag in order to make it easier for user interfaces
+        to parse out all associated CPGs and make mapping widgets.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="cpg-ref" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cpg-list">
+    <xs:annotation>
+      <xs:documentation>
+        List of CPG specific citations. This tag is differentatated from the citations tag in order to make it easier for user interfaces
+        to parse out all associated CPGs and make mapping widgets.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="cpg" type="cpg" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+	<xs:complexType name="cpg">
 		<xs:annotation>
 			<xs:documentation>
-				List of CPG specific citations. This tag is differentatated fromthe citations tag in order to make it easier for user interfaces
-				to parse out all associated CPGs and make mapping widgets.
+				Clinical Practice Guideline
 			</xs:documentation>
 		</xs:annotation>
 		<xs:all>
 			<xs:element name="name" type="xs:string"/>
+      <xs:element name="description" type="xs:string"/>
 			<xs:element name="citation-ref" type="xs:string"/>
 		</xs:all>
 	</xs:complexType>
@@ -158,17 +180,17 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="objective" type="xs:IDREF" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="objective" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="treatment-plan-reference-list">
+	<xs:complexType name="treatment-plan-ref-list">
 		<xs:annotation>
 			<xs:documentation>
 				List of UUIDs from the treatment-plans in the treatment-definition-list
 			</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="treatment-plan" type="xs:IDREF" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="treatment-plan" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="injury-profile-list">
@@ -191,22 +213,21 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="id" type="xs:ID" minOccurs="1"/>
+			<xs:element name="id" type="xs:string" minOccurs="1"/>
 			<xs:element name="name" type="xs:string" minOccurs="1"/>
 			<xs:element name="physiology-state" type="xs:string" minOccurs="0"/>
-			<xs:element name="injuries" type="injury-occurance-list" minOccurs="1"
-				maxOccurs="unbounded"/>
-			<xs:element name="treatments" type="treatment-plan-reference-list"/>
+			<xs:element name="injuries" type="injury-occurance-list" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="treatments" type="treatment-plan-ref-list"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="injury-profile-reference-list">
+	<xs:complexType name="injury-profile-ref-list">
 		<xs:annotation>
 			<xs:documentation>
 				List of UUIDs from the injury-profiles in the profile list
 			</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="injury-profile" type="xs:IDREF" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="injury-profile" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="injury-occurance-list">
@@ -220,7 +241,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:all>
-			<xs:element name="id" type="xs:IDREF" minOccurs="1"/>
+			<xs:element name="id" type="xs:string" minOccurs="1"/>
 			<xs:element name="location" type="xs:string" minOccurs="1"/>
 			<xs:element name="description" type="xs:string" minOccurs="1"/>
 			<xs:element name="severity" type="xs:string" minOccurs="1"/>
@@ -228,8 +249,8 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 	</xs:complexType>
 	<xs:complexType name="medical-scenario-syllabus">
 			<xs:sequence>
-				<xs:element name="learning-objectives" type="learning-objective-list" minOccurs="1" maxOccurs="1"/>
-				<xs:element name="learning-assessments" type="assessment" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="learning-objectives" type="learning-objective-list" />
+				<xs:element name="learning-assessments" type="assessment-list" />
 		    </xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="learning-objective-list">
@@ -239,27 +260,28 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 	</xs:complexType>
 	<xs:complexType name="learning-objective">
 		<xs:all>
-			<xs:element name="id" type="xs:ID"/>
+			<xs:element name="id" type="xs:string"/>
 			<xs:element name="name" type="xs:string"/>
-			<xs:element name="references" type="treatment-plan-citation-ref-list"/>
+      <xs:element name="description" type="xs:string"/>
+			<xs:element name="references" type="medical-reference-list"/>
 			<xs:element name="relates-to">
 				<xs:complexType>
 					<xs:all>
-						<xs:element name="treatment-plans" type="treatment-plan-reference-list"/>
-						<xs:element name="injury-profiles" type="injury-profile-reference-list"/>
+						<xs:element name="treatment-plans" type="treatment-plan-ref-list"/>
+						<xs:element name="injury-profiles" type="injury-profile-ref-list"/>
 					</xs:all>
 				</xs:complexType>
 			</xs:element>
 		</xs:all>
 	</xs:complexType>
-	<xs:complexType name="assessment-criteria-list">
+	<xs:complexType name="assessment-list">
 		<xs:annotation>
 			<xs:documentation>
 				List of pfc:assessment with a required total-points field which should equal the sum of all points-avaliable in the assessment fields.  Used as a sanity check by implementations.
 			</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="total-points" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="total-points" default="0" type="xs:integer" minOccurs="1" maxOccurs="1"/>
 			<xs:element name="assessment" type="assessment" minOccurs="1" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -270,8 +292,8 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:all>
-			<xs:element name="id" type="xs:ID"/>
-			<xs:element name="objective-id" type="xs:IDREF"/>
+			<xs:element name="id" type="xs:string"/>
+			<xs:element name="objective-id" type="xs:string"/>
 			<xs:element name="points-avaiable" type="xs:integer"/><!--IF PARTIAL THEN HOW MANY TOTAL POINTS AVALIABLE-->
 			<xs:element name="criteria" type="xs:string"/><!--PASS/FAIL OR PARTIAL-->
 		</xs:all>
@@ -288,7 +310,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:all>
-			<xs:element name="id" type="xs:ID"/>
+			<xs:element name="id" type="xs:string"/>
 			<xs:element name="roles" type="role-list"/>
 			<xs:element name="props" type="prop-list"/>
 			<xs:element name="training-script" type="scene-list"/>
@@ -315,8 +337,8 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 		</xs:annotation>
 		<xs:all>
 			<xs:element name="short-name" type="xs:string"/>
-			<xs:element name="unit-id" type="xs:IDREF"/>
-			<xs:element name="injury-profile-id" type="xs:IDREF" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="unit-id" type="xs:string"/>
+			<xs:element name="injury-profile-id" type="xs:string" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="description" type="xs:string"/>
 		</xs:all>
 	</xs:complexType>
@@ -341,7 +363,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 		</xs:annotation>
 		<xs:all>
 			<xs:element name="short-name" type="xs:string"/>
-			<xs:element name="equipment-id" type="xs:IDREF"/>
+			<xs:element name="equipment-id" type="xs:string"/>
 			<xs:element name="description" type="xs:string"/>
 		</xs:all>
 	</xs:complexType>
@@ -366,7 +388,8 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
 		</xs:annotation>
 		<xs:all>
-			<xs:element name="location-id" type="xs:IDREF"/>
+			<xs:element name="location-id" type="xs:string"/>
+      <xs:element name="name" type="xs:string"/>
 			<xs:element name="description" type="xs:string"/>
 			<xs:element name="time-of-day" type="xs:time"/>
 			<xs:element name="time-in-simulation" type="xs:integer"/>

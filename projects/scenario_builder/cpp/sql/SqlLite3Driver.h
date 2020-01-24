@@ -65,7 +65,6 @@ public:
   SQLite3Driver& operator=(const SQLite3Driver&) = delete;
   SQLite3Driver& operator=(SQLite3Driver&&) = delete;
   ~SQLite3Driver();
-  bool serialize();
 
   Q_INVOKABLE bool open(QString db_name);
   Q_INVOKABLE void close();
@@ -136,30 +135,30 @@ public:
   Q_INVOKABLE void equipment_in_scene(Scene* scene);
   Q_INVOKABLE void scenes();
 
-  Q_INVOKABLE std::vector<Author*> get_authors();
-  Q_INVOKABLE std::vector<Assessment*> get_assessments();
-  Q_INVOKABLE std::vector<Citation*> get_citations();
-  Q_INVOKABLE std::vector<Event*> get_events();
-  Q_INVOKABLE std::vector<Equipment*> get_equipments();
-  Q_INVOKABLE std::vector<Injury*> get_injuries();
-  Q_INVOKABLE std::vector<InjurySet*> get_injury_sets();
-  Q_INVOKABLE std::vector<RoleMap*> get_role_maps();
-  Q_INVOKABLE std::vector<EventMap*> get_event_maps();
-  Q_INVOKABLE std::vector<LocationMap*> get_location_maps();
-  Q_INVOKABLE std::vector<PropMap*> get_prop_maps();
-  Q_INVOKABLE std::vector<CitationMap*> get_citation_maps();
-  Q_INVOKABLE std::vector<EquipmentMap*> get_equipment_maps();
-  Q_INVOKABLE std::vector<RestrictionMap*> get_restriction_maps();
-  Q_INVOKABLE std::vector<Objective*> get_objectives();
-  Q_INVOKABLE std::vector<Location*> get_locations();
-  Q_INVOKABLE std::vector<Location*> get_locations_in_scene(Scene*);
-  Q_INVOKABLE std::vector<Property*> get_properties();
-  Q_INVOKABLE std::vector<Prop*> get_props();
-  Q_INVOKABLE std::vector<Restriction*> get_restrictions();
-  Q_INVOKABLE std::vector<Role*> get_roles();
-  Q_INVOKABLE std::vector<Role*> get_roles_in_scene(Scene*);
-  Q_INVOKABLE std::vector<Treatment*> get_treatments();
-  Q_INVOKABLE std::vector<Scene*> get_scenes();
+  Q_INVOKABLE std::vector<std::unique_ptr<Author>> get_authors() const;
+  Q_INVOKABLE std::vector<std::unique_ptr<Assessment>> get_assessments() const;
+  Q_INVOKABLE std::vector<std::unique_ptr<Citation>> get_citations() const;
+  Q_INVOKABLE std::vector<std::unique_ptr<Event>> get_events() const;
+  Q_INVOKABLE std::vector<std::unique_ptr<Equipment>> get_equipments() const;
+  Q_INVOKABLE std::vector<std::unique_ptr<Injury>> get_injuries() const;
+  Q_INVOKABLE std::vector<std::unique_ptr<InjurySet>> get_injury_sets() const;
+  Q_INVOKABLE std::vector<std::unique_ptr<RoleMap>> get_role_maps() const;
+  Q_INVOKABLE std::vector<std::unique_ptr<EventMap>> get_event_maps() const;
+  Q_INVOKABLE std::vector<std::unique_ptr<LocationMap>> get_location_maps() const;
+  Q_INVOKABLE std::vector<std::unique_ptr<PropMap>> get_prop_maps() const;
+  Q_INVOKABLE std::vector<std::unique_ptr<CitationMap>> get_citation_maps() const;
+  Q_INVOKABLE std::vector<std::unique_ptr<EquipmentMap>> get_equipment_maps() const;
+  Q_INVOKABLE std::vector<std::unique_ptr<RestrictionMap>> get_restriction_maps() const;
+  Q_INVOKABLE std::vector<std::unique_ptr<Objective>> get_objectives() const;
+  Q_INVOKABLE std::vector<std::unique_ptr<Location>> get_locations() const;
+  Q_INVOKABLE std::vector<std::unique_ptr<Location>> get_locations_in_scene(Scene*) const;
+  Q_INVOKABLE std::vector<std::unique_ptr<Property>> get_properties() const;
+  Q_INVOKABLE std::vector<std::unique_ptr<Prop>> get_props() const;
+  Q_INVOKABLE std::vector<std::unique_ptr<Restriction>> get_restrictions() const;
+  Q_INVOKABLE std::vector<std::unique_ptr<Role>> get_roles() const;
+  Q_INVOKABLE std::vector<std::unique_ptr<Role>> get_roles_in_scene(Scene*) const;
+  Q_INVOKABLE std::vector<std::unique_ptr<Treatment>> get_treatments() const;
+  Q_INVOKABLE std::vector<std::unique_ptr<Scene>> get_scenes() const ;
 
 
   Q_INVOKABLE bool next_author(Author*);
