@@ -125,7 +125,7 @@ ColumnLayout  {
         backend : root.backend   
 
         onFullAdded : {
-          citation.id = fullReferenceList.model.get(currentIndex)
+          citation.citation_id = fullReferenceList.model.get(currentIndex)
           root.backend.select_citation(citation)
           var entry = root.model.get(root.index)
           entry.citations = (entry.citations) ? entry.citations.concat(";"+citation_id) : entry.citations.concat(citation_id)
@@ -141,7 +141,7 @@ ColumnLayout  {
 
             var citations = values.citations.split(";").filter(x => x);  
             for(var i = 0; i < citations.length; ++i){
-              citation.citation_id = citations[i]
+              citation.citation_id = parseInt(citations[i])
               citation.key = ""
               citation.title = ""
               if(root.backend.select_citation(citation)){
@@ -168,10 +168,9 @@ ColumnLayout  {
         nameEntry.text = values.name
         descriptionEntry.text = values.description
         referenceList.model.clear()
-
         var citations = values.citations.split(";").filter(x => x);  
         for(var i = 0; i < citations.length; ++i){
-          citation.citation_id = citations[i]
+          citation.citation_id = parseInt(citations[i])
           citation.key = ""
           citation.title = ""
           if(root.backend.select_citation(citation)){

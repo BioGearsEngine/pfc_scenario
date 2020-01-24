@@ -195,7 +195,7 @@ ScrollView {
 
             var citations = values.citations.split(";").filter(x => x);  
             for(var i = 0; i < citations.length; ++i){
-              citation.citation_id = citations[i]
+              citation.citation_id = parseInt(citations[i])
               citation.key = ""
               citation.title = ""
               if(root.backend.select_citation(citation)){
@@ -244,7 +244,7 @@ ScrollView {
       referenceList.model.clear()
       var citations = (values.citations) ? values.citations.split(";").filter(x => x) : "";  
       for(var i = 0; i < citations.length; ++i){
-         citation.citation_id = citations[i]
+         citation.citation_id = parseInt(citations[i])
          citation.key = ""
          citation.title  = ""
          column.backend.select_citation(citation)
