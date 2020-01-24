@@ -290,8 +290,9 @@ namespace pfc
     class medical_scenario;
     class role_list;
     class role;
-    class prop_list;
-    class prop;
+    class role_ref_list;
+    class item_list;
+    class item;
     class scene_list;
     class scene;
     class event_list;
@@ -302,6 +303,8 @@ namespace pfc
     class citation;
     class properties_list;
     class property;
+    class property_value_list;
+    class property_value;
     class relates_to;
   }
 }
@@ -2645,23 +2648,6 @@ namespace pfc
       void
       roles (::std::unique_ptr< roles_type > p);
 
-      // props
-      //
-      typedef ::pfc::schema::prop_list props_type;
-      typedef ::xsd::cxx::tree::traits< props_type, char > props_traits;
-
-      const props_type&
-      props () const;
-
-      props_type&
-      props ();
-
-      void
-      props (const props_type& x);
-
-      void
-      props (::std::unique_ptr< props_type > p);
-
       // training-script
       //
       typedef ::pfc::schema::scene_list training_script_type;
@@ -2683,17 +2669,14 @@ namespace pfc
       //
       medical_scenario (const id_type&,
                         const roles_type&,
-                        const props_type&,
                         const training_script_type&);
 
       medical_scenario (const id_type&,
                         ::std::unique_ptr< roles_type >,
-                        ::std::unique_ptr< props_type >,
                         ::std::unique_ptr< training_script_type >);
 
       medical_scenario (::std::unique_ptr< id_type >,
                         ::std::unique_ptr< roles_type >,
-                        ::std::unique_ptr< props_type >,
                         ::std::unique_ptr< training_script_type >);
 
       medical_scenario (const ::xercesc::DOMElement& e,
@@ -2724,7 +2707,6 @@ namespace pfc
       protected:
       ::xsd::cxx::tree::one< id_type > id_;
       ::xsd::cxx::tree::one< roles_type > roles_;
-      ::xsd::cxx::tree::one< props_type > props_;
       ::xsd::cxx::tree::one< training_script_type > training_script_;
     };
 
@@ -2784,6 +2766,40 @@ namespace pfc
     class role: public ::xml_schema::type
     {
       public:
+      // id
+      //
+      typedef ::xml_schema::string id_type;
+      typedef ::xsd::cxx::tree::traits< id_type, char > id_traits;
+
+      const id_type&
+      id () const;
+
+      id_type&
+      id ();
+
+      void
+      id (const id_type& x);
+
+      void
+      id (::std::unique_ptr< id_type > p);
+
+      // name
+      //
+      typedef ::xml_schema::string name_type;
+      typedef ::xsd::cxx::tree::traits< name_type, char > name_traits;
+
+      const name_type&
+      name () const;
+
+      name_type&
+      name ();
+
+      void
+      name (const name_type& x);
+
+      void
+      name (::std::unique_ptr< name_type > p);
+
       // short-name
       //
       typedef ::xml_schema::string short_name_type;
@@ -2801,43 +2817,26 @@ namespace pfc
       void
       short_name (::std::unique_ptr< short_name_type > p);
 
-      // unit-id
+      // trauma-profile-ref
       //
-      typedef ::xml_schema::string unit_id_type;
-      typedef ::xsd::cxx::tree::traits< unit_id_type, char > unit_id_traits;
+      typedef ::xml_schema::string trauma_profile_ref_type;
+      typedef ::xsd::cxx::tree::optional< trauma_profile_ref_type > trauma_profile_ref_optional;
+      typedef ::xsd::cxx::tree::traits< trauma_profile_ref_type, char > trauma_profile_ref_traits;
 
-      const unit_id_type&
-      unit_id () const;
+      const trauma_profile_ref_optional&
+      trauma_profile_ref () const;
 
-      unit_id_type&
-      unit_id ();
-
-      void
-      unit_id (const unit_id_type& x);
+      trauma_profile_ref_optional&
+      trauma_profile_ref ();
 
       void
-      unit_id (::std::unique_ptr< unit_id_type > p);
-
-      // trauma-profile-id
-      //
-      typedef ::xml_schema::string trauma_profile_id_type;
-      typedef ::xsd::cxx::tree::optional< trauma_profile_id_type > trauma_profile_id_optional;
-      typedef ::xsd::cxx::tree::traits< trauma_profile_id_type, char > trauma_profile_id_traits;
-
-      const trauma_profile_id_optional&
-      trauma_profile_id () const;
-
-      trauma_profile_id_optional&
-      trauma_profile_id ();
+      trauma_profile_ref (const trauma_profile_ref_type& x);
 
       void
-      trauma_profile_id (const trauma_profile_id_type& x);
+      trauma_profile_ref (const trauma_profile_ref_optional& x);
 
       void
-      trauma_profile_id (const trauma_profile_id_optional& x);
-
-      void
-      trauma_profile_id (::std::unique_ptr< trauma_profile_id_type > p);
+      trauma_profile_ref (::std::unique_ptr< trauma_profile_ref_type > p);
 
       // description
       //
@@ -2858,12 +2857,14 @@ namespace pfc
 
       // Constructors.
       //
-      role (const short_name_type&,
-            const unit_id_type&,
+      role (const id_type&,
+            const name_type&,
+            const short_name_type&,
             const description_type&);
 
-      role (::std::unique_ptr< short_name_type >,
-            ::std::unique_ptr< unit_id_type >,
+      role (::std::unique_ptr< id_type >,
+            ::std::unique_ptr< name_type >,
+            ::std::unique_ptr< short_name_type >,
             ::std::unique_ptr< description_type >);
 
       role (const ::xercesc::DOMElement& e,
@@ -2892,53 +2893,54 @@ namespace pfc
              ::xml_schema::flags);
 
       protected:
+      ::xsd::cxx::tree::one< id_type > id_;
+      ::xsd::cxx::tree::one< name_type > name_;
       ::xsd::cxx::tree::one< short_name_type > short_name_;
-      ::xsd::cxx::tree::one< unit_id_type > unit_id_;
-      trauma_profile_id_optional trauma_profile_id_;
+      trauma_profile_ref_optional trauma_profile_ref_;
       ::xsd::cxx::tree::one< description_type > description_;
     };
 
-    class prop_list: public ::xml_schema::type
+    class role_ref_list: public ::xml_schema::type
     {
       public:
-      // prop
+      // role-ref
       //
-      typedef ::pfc::schema::prop prop_type;
-      typedef ::xsd::cxx::tree::sequence< prop_type > prop_sequence;
-      typedef prop_sequence::iterator prop_iterator;
-      typedef prop_sequence::const_iterator prop_const_iterator;
-      typedef ::xsd::cxx::tree::traits< prop_type, char > prop_traits;
+      typedef ::xml_schema::string role_ref_type;
+      typedef ::xsd::cxx::tree::sequence< role_ref_type > role_ref_sequence;
+      typedef role_ref_sequence::iterator role_ref_iterator;
+      typedef role_ref_sequence::const_iterator role_ref_const_iterator;
+      typedef ::xsd::cxx::tree::traits< role_ref_type, char > role_ref_traits;
 
-      const prop_sequence&
-      prop () const;
+      const role_ref_sequence&
+      role_ref () const;
 
-      prop_sequence&
-      prop ();
+      role_ref_sequence&
+      role_ref ();
 
       void
-      prop (const prop_sequence& s);
+      role_ref (const role_ref_sequence& s);
 
       // Constructors.
       //
-      prop_list ();
+      role_ref_list ();
 
-      prop_list (const ::xercesc::DOMElement& e,
-                 ::xml_schema::flags f = 0,
-                 ::xml_schema::container* c = 0);
+      role_ref_list (const ::xercesc::DOMElement& e,
+                     ::xml_schema::flags f = 0,
+                     ::xml_schema::container* c = 0);
 
-      prop_list (const prop_list& x,
-                 ::xml_schema::flags f = 0,
-                 ::xml_schema::container* c = 0);
+      role_ref_list (const role_ref_list& x,
+                     ::xml_schema::flags f = 0,
+                     ::xml_schema::container* c = 0);
 
-      virtual prop_list*
+      virtual role_ref_list*
       _clone (::xml_schema::flags f = 0,
               ::xml_schema::container* c = 0) const;
 
-      prop_list&
-      operator= (const prop_list& x);
+      role_ref_list&
+      operator= (const role_ref_list& x);
 
       virtual 
-      ~prop_list ();
+      ~role_ref_list ();
 
       // Implementation.
       //
@@ -2948,10 +2950,63 @@ namespace pfc
              ::xml_schema::flags);
 
       protected:
-      prop_sequence prop_;
+      role_ref_sequence role_ref_;
     };
 
-    class prop: public ::xml_schema::type
+    class item_list: public ::xml_schema::type
+    {
+      public:
+      // item
+      //
+      typedef ::pfc::schema::item item_type;
+      typedef ::xsd::cxx::tree::sequence< item_type > item_sequence;
+      typedef item_sequence::iterator item_iterator;
+      typedef item_sequence::const_iterator item_const_iterator;
+      typedef ::xsd::cxx::tree::traits< item_type, char > item_traits;
+
+      const item_sequence&
+      item () const;
+
+      item_sequence&
+      item ();
+
+      void
+      item (const item_sequence& s);
+
+      // Constructors.
+      //
+      item_list ();
+
+      item_list (const ::xercesc::DOMElement& e,
+                 ::xml_schema::flags f = 0,
+                 ::xml_schema::container* c = 0);
+
+      item_list (const item_list& x,
+                 ::xml_schema::flags f = 0,
+                 ::xml_schema::container* c = 0);
+
+      virtual item_list*
+      _clone (::xml_schema::flags f = 0,
+              ::xml_schema::container* c = 0) const;
+
+      item_list&
+      operator= (const item_list& x);
+
+      virtual 
+      ~item_list ();
+
+      // Implementation.
+      //
+      protected:
+      void
+      parse (::xsd::cxx::xml::dom::parser< char >&,
+             ::xml_schema::flags);
+
+      protected:
+      item_sequence item_;
+    };
+
+    class item: public ::xml_schema::type
     {
       public:
       // short-name
@@ -3005,33 +3060,57 @@ namespace pfc
       void
       description (::std::unique_ptr< description_type > p);
 
+      // properties
+      //
+      typedef ::pfc::schema::property_value_list properties_type;
+      typedef ::xsd::cxx::tree::traits< properties_type, char > properties_traits;
+
+      const properties_type&
+      properties () const;
+
+      properties_type&
+      properties ();
+
+      void
+      properties (const properties_type& x);
+
+      void
+      properties (::std::unique_ptr< properties_type > p);
+
       // Constructors.
       //
-      prop (const short_name_type&,
+      item (const short_name_type&,
             const equipment_id_type&,
-            const description_type&);
+            const description_type&,
+            const properties_type&);
 
-      prop (::std::unique_ptr< short_name_type >,
+      item (const short_name_type&,
+            const equipment_id_type&,
+            const description_type&,
+            ::std::unique_ptr< properties_type >);
+
+      item (::std::unique_ptr< short_name_type >,
             ::std::unique_ptr< equipment_id_type >,
-            ::std::unique_ptr< description_type >);
+            ::std::unique_ptr< description_type >,
+            ::std::unique_ptr< properties_type >);
 
-      prop (const ::xercesc::DOMElement& e,
+      item (const ::xercesc::DOMElement& e,
             ::xml_schema::flags f = 0,
             ::xml_schema::container* c = 0);
 
-      prop (const prop& x,
+      item (const item& x,
             ::xml_schema::flags f = 0,
             ::xml_schema::container* c = 0);
 
-      virtual prop*
+      virtual item*
       _clone (::xml_schema::flags f = 0,
               ::xml_schema::container* c = 0) const;
 
-      prop&
-      operator= (const prop& x);
+      item&
+      operator= (const item& x);
 
       virtual 
-      ~prop ();
+      ~item ();
 
       // Implementation.
       //
@@ -3044,6 +3123,7 @@ namespace pfc
       ::xsd::cxx::tree::one< short_name_type > short_name_;
       ::xsd::cxx::tree::one< equipment_id_type > equipment_id_;
       ::xsd::cxx::tree::one< description_type > description_;
+      ::xsd::cxx::tree::one< properties_type > properties_;
     };
 
     class scene_list: public ::xml_schema::type
@@ -3201,6 +3281,40 @@ namespace pfc
       void
       events (::std::unique_ptr< events_type > p);
 
+      // item
+      //
+      typedef ::pfc::schema::item_list item_type;
+      typedef ::xsd::cxx::tree::traits< item_type, char > item_traits;
+
+      const item_type&
+      item () const;
+
+      item_type&
+      item ();
+
+      void
+      item (const item_type& x);
+
+      void
+      item (::std::unique_ptr< item_type > p);
+
+      // roles
+      //
+      typedef ::pfc::schema::role_ref_list roles_type;
+      typedef ::xsd::cxx::tree::traits< roles_type, char > roles_traits;
+
+      const roles_type&
+      roles () const;
+
+      roles_type&
+      roles ();
+
+      void
+      roles (const roles_type& x);
+
+      void
+      roles (::std::unique_ptr< roles_type > p);
+
       // Constructors.
       //
       scene (const location_id_type&,
@@ -3208,21 +3322,27 @@ namespace pfc
              const description_type&,
              const time_of_day_type&,
              const time_in_simulation_type&,
-             const events_type&);
+             const events_type&,
+             const item_type&,
+             const roles_type&);
 
       scene (const location_id_type&,
              const name_type&,
              const description_type&,
              const time_of_day_type&,
              const time_in_simulation_type&,
-             ::std::unique_ptr< events_type >);
+             ::std::unique_ptr< events_type >,
+             ::std::unique_ptr< item_type >,
+             ::std::unique_ptr< roles_type >);
 
       scene (::std::unique_ptr< location_id_type >,
              ::std::unique_ptr< name_type >,
              ::std::unique_ptr< description_type >,
              ::std::unique_ptr< time_of_day_type >,
              const time_in_simulation_type&,
-             ::std::unique_ptr< events_type >);
+             ::std::unique_ptr< events_type >,
+             ::std::unique_ptr< item_type >,
+             ::std::unique_ptr< roles_type >);
 
       scene (const ::xercesc::DOMElement& e,
              ::xml_schema::flags f = 0,
@@ -3256,6 +3376,8 @@ namespace pfc
       ::xsd::cxx::tree::one< time_of_day_type > time_of_day_;
       ::xsd::cxx::tree::one< time_in_simulation_type > time_in_simulation_;
       ::xsd::cxx::tree::one< events_type > events_;
+      ::xsd::cxx::tree::one< item_type > item_;
+      ::xsd::cxx::tree::one< roles_type > roles_;
     };
 
     class event_list: public ::xml_schema::type
@@ -3860,6 +3982,114 @@ namespace pfc
       ::xsd::cxx::tree::one< type_type > type_;
     };
 
+    class property_value_list: public ::xml_schema::type
+    {
+      public:
+      // value
+      //
+      typedef ::pfc::schema::property_value value_type;
+      typedef ::xsd::cxx::tree::sequence< value_type > value_sequence;
+      typedef value_sequence::iterator value_iterator;
+      typedef value_sequence::const_iterator value_const_iterator;
+      typedef ::xsd::cxx::tree::traits< value_type, char > value_traits;
+
+      const value_sequence&
+      value () const;
+
+      value_sequence&
+      value ();
+
+      void
+      value (const value_sequence& s);
+
+      // Constructors.
+      //
+      property_value_list ();
+
+      property_value_list (const ::xercesc::DOMElement& e,
+                           ::xml_schema::flags f = 0,
+                           ::xml_schema::container* c = 0);
+
+      property_value_list (const property_value_list& x,
+                           ::xml_schema::flags f = 0,
+                           ::xml_schema::container* c = 0);
+
+      virtual property_value_list*
+      _clone (::xml_schema::flags f = 0,
+              ::xml_schema::container* c = 0) const;
+
+      property_value_list&
+      operator= (const property_value_list& x);
+
+      virtual 
+      ~property_value_list ();
+
+      // Implementation.
+      //
+      protected:
+      void
+      parse (::xsd::cxx::xml::dom::parser< char >&,
+             ::xml_schema::flags);
+
+      protected:
+      value_sequence value_;
+    };
+
+    class property_value: public ::xml_schema::type
+    {
+      public:
+      // value
+      //
+      typedef ::xml_schema::string value_type;
+      typedef ::xsd::cxx::tree::traits< value_type, char > value_traits;
+
+      const value_type&
+      value () const;
+
+      value_type&
+      value ();
+
+      void
+      value (const value_type& x);
+
+      void
+      value (::std::unique_ptr< value_type > p);
+
+      // Constructors.
+      //
+      property_value (const value_type&);
+
+      property_value (::std::unique_ptr< value_type >);
+
+      property_value (const ::xercesc::DOMElement& e,
+                      ::xml_schema::flags f = 0,
+                      ::xml_schema::container* c = 0);
+
+      property_value (const property_value& x,
+                      ::xml_schema::flags f = 0,
+                      ::xml_schema::container* c = 0);
+
+      virtual property_value*
+      _clone (::xml_schema::flags f = 0,
+              ::xml_schema::container* c = 0) const;
+
+      property_value&
+      operator= (const property_value& x);
+
+      virtual 
+      ~property_value ();
+
+      // Implementation.
+      //
+      protected:
+      void
+      parse (::xsd::cxx::xml::dom::parser< char >&,
+             ::xml_schema::flags);
+
+      protected:
+      ::xsd::cxx::tree::one< value_type > value_;
+    };
+
     class relates_to: public ::xml_schema::type
     {
       public:
@@ -4034,10 +4264,13 @@ namespace pfc
     operator<< (::std::ostream&, const role&);
 
     ::std::ostream&
-    operator<< (::std::ostream&, const prop_list&);
+    operator<< (::std::ostream&, const role_ref_list&);
 
     ::std::ostream&
-    operator<< (::std::ostream&, const prop&);
+    operator<< (::std::ostream&, const item_list&);
+
+    ::std::ostream&
+    operator<< (::std::ostream&, const item&);
 
     ::std::ostream&
     operator<< (::std::ostream&, const scene_list&);
@@ -4074,6 +4307,12 @@ namespace pfc
 
     ::std::ostream&
     operator<< (::std::ostream&, const property&);
+
+    ::std::ostream&
+    operator<< (::std::ostream&, const property_value_list&);
+
+    ::std::ostream&
+    operator<< (::std::ostream&, const property_value&);
 
     ::std::ostream&
     operator<< (::std::ostream&, const relates_to&);
@@ -4196,10 +4435,13 @@ namespace pfc
     operator<< (::xercesc::DOMElement&, const role&);
 
     void
-    operator<< (::xercesc::DOMElement&, const prop_list&);
+    operator<< (::xercesc::DOMElement&, const role_ref_list&);
 
     void
-    operator<< (::xercesc::DOMElement&, const prop&);
+    operator<< (::xercesc::DOMElement&, const item_list&);
+
+    void
+    operator<< (::xercesc::DOMElement&, const item&);
 
     void
     operator<< (::xercesc::DOMElement&, const scene_list&);
@@ -4244,6 +4486,12 @@ namespace pfc
 
     void
     operator<< (::xercesc::DOMElement&, const property&);
+
+    void
+    operator<< (::xercesc::DOMElement&, const property_value_list&);
+
+    void
+    operator<< (::xercesc::DOMElement&, const property_value&);
 
     void
     operator<< (::xercesc::DOMElement&, const relates_to&);

@@ -897,10 +897,14 @@ struct Role : public QObject {
   Q_PROPERTY(int role_id MEMBER id)
   Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString description MEMBER description)
+  Q_PROPERTY(QString short_name MEMBER description)
+  Q_PROPERTY(QString trauma_profile MEMBER trauma_profile)
 public:
   int32_t id = -1;
   QString name = "";
+  QString short_name = "";
   QString description = "";
+  QString trauma_profile = "";
   Role(QObject* parent = nullptr)
     : QObject(parent)
   {
@@ -915,7 +919,9 @@ public:
   {
     return id == rhs.id
       && name == rhs.name
-      && description == rhs.description;
+      && description == rhs.description
+      && short_name == rhs.short_name
+      && trauma_profile == rhs.trauma_profile;
   }
   bool operator!=(const Role& rhs) const
   {
@@ -926,6 +932,8 @@ public:
     id = rhs.id;
     name = rhs.name;
     description = rhs.description;
+    short_name = rhs.short_name;
+    trauma_profile = rhs.trauma_profile;
   }
 };
 //----End Role

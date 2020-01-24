@@ -47,6 +47,7 @@ namespace schema {
     static auto make_equipment(::pfc::Equipment const* const) -> std::unique_ptr<schema::equipment>;
     static auto make_trauma_profile(::pfc::InjurySet const* const) -> std::unique_ptr<schema::trauma_profile>;
     static auto make_assessment(::pfc::Assessment const* const) -> std::unique_ptr<schema::assessment>;
+    static auto make_role(::pfc::Role const* const) -> std::unique_ptr<schema::role>;
 
     static auto make_citation_ref_list(QString ref_list) -> std::unique_ptr<schema::citation_ref_list>;
     static auto make_cpg_ref_list(QString ref_list) -> std::unique_ptr<schema::cpg_ref_list>;

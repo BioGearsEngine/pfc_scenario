@@ -89,11 +89,10 @@ namespace schema {
   //-------------------------------------------------------------------------------
   auto PFC::make_medical_scenario() -> std::unique_ptr<ScenarioSchema::medical_scenario_type>
   {
-    auto id = ::xml_schema::id("");
+    auto id = ::xml_schema::string("Medical Scenario 1");
     auto med_sc_roles = std::make_unique<schema::medical_scenario::roles_type>();
-    auto med_sc_props = std::make_unique<schema::medical_scenario::props_type>();
     auto med_sc_script = std::make_unique<schema::medical_scenario::training_script_type>();
-    return std::make_unique<schema::ScenarioSchema::medical_scenario_type>(std::move(id), std::move(med_sc_roles), std::move(med_sc_props), std::move(med_sc_script));
+    return std::make_unique<schema::ScenarioSchema::medical_scenario_type>(std::move(id), std::move(med_sc_roles), std::move(med_sc_script));
   }
   //-------------------------------------------------------------------------------
   auto PFC::make_citation_list() -> std::unique_ptr<ScenarioSchema::works_cited_type>
@@ -274,7 +273,9 @@ namespace schema {
                                                 schema::make_string(input->description.toStdString()),
                                                 schema::make_time(input->time_of_day),
                                                 input->time_in_simulation,
-                                                std::make_unique<pfc::schema::scene::events_type>());
+                                                std::make_unique<pfc::schema::scene::events_type>(),
+                                                std::make_unique<pfc::schema::scene::item_type>(),
+                                                std::make_unique<pfc::schema::scene::roles_type>());
   }
   //-----------------------------------------------------------------------------
   auto PFC::make_equipment(::pfc::Equipment const* const input) -> std::unique_ptr<schema::equipment>
@@ -309,6 +310,16 @@ namespace schema {
                                                            input->available_points,
                                                            make_string(input->criteria.toStdString()));
     return assessment;
+  }
+  //-----------------------------------------------------------------------------
+  auto PFC::make_role(::pfc::Role const* const input) -> std::unique_ptr<schema::role>
+  {
+    auto role = std::make_unique<schema::role>(make_uuid("Role_" + std::to_string(input->id)),
+                                               make_string(input->name.toStdString()),
+                                               make_string(input->short_name.toStdString()),
+                                               make_string(input->description.toStdString()));
+    role->trauma_profile_ref(make_string(input->trauma_profile.toStdString()));
+    return role;
   }
   //-----------------------------------------------------------------------------
   auto PFC::make_medical_reference_list() -> std::unique_ptr<schema::medical_reference_list>

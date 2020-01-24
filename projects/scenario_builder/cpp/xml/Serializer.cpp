@@ -264,52 +264,52 @@ void Serializer::generate_pfc_stream(SQLite3Driver* driver)
 
   auto pfc_scenario = PFC::make_Scenario();
 
-  //Step 1 <Equipment>
+  //1. <Equipment>
   for (auto& equipment : driver->get_equipments()) {
     pfc_scenario.equipment().equipment().push_back(PFC::make_equipment(equipment.get()));
   }
-  //Step 2 <conditions>
+  //2. <conditions>
   for (auto& injury : driver->get_injuries()) {
     pfc_scenario.trauma_definitions().trauma().push_back(PFC::make_trauma(injury.get()));
   }
 
-  //Populate <treatment_plans>
+  //3. <treatment_plans>
   for (auto& treatment : driver->get_treatments()) {
     pfc_scenario.treatment_plans().treatment_plan().push_back(PFC::make_treatment_plan(treatment.get()));
   }
 
-  //: Populate <trauma_sets>
+  //4. Populate <trauma_sets>
   for (auto& trauma : driver->get_injury_sets()) {
     pfc_scenario.trauma_sets().trauma_profile().push_back(PFC::make_trauma_profile(trauma.get()));
   }
-  //Populate <syllabus>
-  //Populate <syllabus><learning_objective>
+  //5. <syllabus>
+  //5.1 <syllabus><learning_objective>
   for (auto& objective : driver->get_objectives()) {
     pfc_scenario.syllabus().learning_objectives().objective().push_back(PFC::make_learning_objective(objective.get()));
   }
+  //5.2 <syllabus><assessment>
+  int32_t total_points = 0;
   for (auto& assessment : driver->get_assessments()) {
+    total_points += assessment->available_points;
     pfc_scenario.syllabus().learning_assessments().assessment().push_back(PFC::make_assessment(assessment.get()));
   }
+  pfc_scenario.syllabus().learning_assessments().total_points(total_points);
 
-  //Begin  <medical-scenario>
-  //Populate <medical-scenario><scenes>
+  //6.  <medical-scenario>
+  //6.1 <medical-scenario><scenes>
   for (auto& scene : driver->get_scenes()) {
     pfc_scenario.medical_scenario().training_script().scene().push_back(PFC::make_scene(scene.get()));
   }
+  //6.2 <medical-scenario><roles>
+  for (auto& role : driver->get_roles()) {
+    pfc_scenario.medical_scenario().roles().role().push_back(PFC::make_role(role.get()));
+  }
+ 
 
-
-  //Populate <works-cited>
+  //7. <works-cited>
   for (auto& citation : driver->get_citations()) {
     pfc_scenario.works_cited().citation().push_back(PFC::make_citation(citation.get()));
   }
- /* std::string scene_id = std::to_string(scene_list[0]->id);
-  std::string scene_name = scene_list[0]->name.toStdString();
-  auto id = ::xml_schema::id(scene_id);
-  auto med_sc_roles = std::make_unique<pfc::schema::medical_scenario::roles_type>();
-  auto med_sc_props = std::make_unique<pfc::schema::medical_scenario::props_type>();
-  auto med_sc_script = std::make_unique<pfc::schema::medical_scenario::training_script_type>();
-  auto medical_scenario = std::make_unique<ScenarioSchema::medical_scenario_type>(std::move(id), std::move(med_sc_roles), std::move(med_sc_props), std::move(med_sc_script));*/
-
 
   _pfc_content.str("");
 

@@ -1745,30 +1745,6 @@ namespace pfc
       this->roles_.set (std::move (x));
     }
 
-    const medical_scenario::props_type& medical_scenario::
-    props () const
-    {
-      return this->props_.get ();
-    }
-
-    medical_scenario::props_type& medical_scenario::
-    props ()
-    {
-      return this->props_.get ();
-    }
-
-    void medical_scenario::
-    props (const props_type& x)
-    {
-      this->props_.set (x);
-    }
-
-    void medical_scenario::
-    props (::std::unique_ptr< props_type > x)
-    {
-      this->props_.set (std::move (x));
-    }
-
     const medical_scenario::training_script_type& medical_scenario::
     training_script () const
     {
@@ -1819,6 +1795,54 @@ namespace pfc
     // role
     // 
 
+    const role::id_type& role::
+    id () const
+    {
+      return this->id_.get ();
+    }
+
+    role::id_type& role::
+    id ()
+    {
+      return this->id_.get ();
+    }
+
+    void role::
+    id (const id_type& x)
+    {
+      this->id_.set (x);
+    }
+
+    void role::
+    id (::std::unique_ptr< id_type > x)
+    {
+      this->id_.set (std::move (x));
+    }
+
+    const role::name_type& role::
+    name () const
+    {
+      return this->name_.get ();
+    }
+
+    role::name_type& role::
+    name ()
+    {
+      return this->name_.get ();
+    }
+
+    void role::
+    name (const name_type& x)
+    {
+      this->name_.set (x);
+    }
+
+    void role::
+    name (::std::unique_ptr< name_type > x)
+    {
+      this->name_.set (std::move (x));
+    }
+
     const role::short_name_type& role::
     short_name () const
     {
@@ -1843,58 +1867,34 @@ namespace pfc
       this->short_name_.set (std::move (x));
     }
 
-    const role::unit_id_type& role::
-    unit_id () const
+    const role::trauma_profile_ref_optional& role::
+    trauma_profile_ref () const
     {
-      return this->unit_id_.get ();
+      return this->trauma_profile_ref_;
     }
 
-    role::unit_id_type& role::
-    unit_id ()
+    role::trauma_profile_ref_optional& role::
+    trauma_profile_ref ()
     {
-      return this->unit_id_.get ();
-    }
-
-    void role::
-    unit_id (const unit_id_type& x)
-    {
-      this->unit_id_.set (x);
+      return this->trauma_profile_ref_;
     }
 
     void role::
-    unit_id (::std::unique_ptr< unit_id_type > x)
+    trauma_profile_ref (const trauma_profile_ref_type& x)
     {
-      this->unit_id_.set (std::move (x));
-    }
-
-    const role::trauma_profile_id_optional& role::
-    trauma_profile_id () const
-    {
-      return this->trauma_profile_id_;
-    }
-
-    role::trauma_profile_id_optional& role::
-    trauma_profile_id ()
-    {
-      return this->trauma_profile_id_;
+      this->trauma_profile_ref_.set (x);
     }
 
     void role::
-    trauma_profile_id (const trauma_profile_id_type& x)
+    trauma_profile_ref (const trauma_profile_ref_optional& x)
     {
-      this->trauma_profile_id_.set (x);
+      this->trauma_profile_ref_ = x;
     }
 
     void role::
-    trauma_profile_id (const trauma_profile_id_optional& x)
+    trauma_profile_ref (::std::unique_ptr< trauma_profile_ref_type > x)
     {
-      this->trauma_profile_id_ = x;
-    }
-
-    void role::
-    trauma_profile_id (::std::unique_ptr< trauma_profile_id_type > x)
-    {
-      this->trauma_profile_id_.set (std::move (x));
+      this->trauma_profile_ref_.set (std::move (x));
     }
 
     const role::description_type& role::
@@ -1922,101 +1922,147 @@ namespace pfc
     }
 
 
-    // prop_list
+    // role_ref_list
     // 
 
-    const prop_list::prop_sequence& prop_list::
-    prop () const
+    const role_ref_list::role_ref_sequence& role_ref_list::
+    role_ref () const
     {
-      return this->prop_;
+      return this->role_ref_;
     }
 
-    prop_list::prop_sequence& prop_list::
-    prop ()
+    role_ref_list::role_ref_sequence& role_ref_list::
+    role_ref ()
     {
-      return this->prop_;
+      return this->role_ref_;
     }
 
-    void prop_list::
-    prop (const prop_sequence& s)
+    void role_ref_list::
+    role_ref (const role_ref_sequence& s)
     {
-      this->prop_ = s;
+      this->role_ref_ = s;
     }
 
 
-    // prop
+    // item_list
     // 
 
-    const prop::short_name_type& prop::
+    const item_list::item_sequence& item_list::
+    item () const
+    {
+      return this->item_;
+    }
+
+    item_list::item_sequence& item_list::
+    item ()
+    {
+      return this->item_;
+    }
+
+    void item_list::
+    item (const item_sequence& s)
+    {
+      this->item_ = s;
+    }
+
+
+    // item
+    // 
+
+    const item::short_name_type& item::
     short_name () const
     {
       return this->short_name_.get ();
     }
 
-    prop::short_name_type& prop::
+    item::short_name_type& item::
     short_name ()
     {
       return this->short_name_.get ();
     }
 
-    void prop::
+    void item::
     short_name (const short_name_type& x)
     {
       this->short_name_.set (x);
     }
 
-    void prop::
+    void item::
     short_name (::std::unique_ptr< short_name_type > x)
     {
       this->short_name_.set (std::move (x));
     }
 
-    const prop::equipment_id_type& prop::
+    const item::equipment_id_type& item::
     equipment_id () const
     {
       return this->equipment_id_.get ();
     }
 
-    prop::equipment_id_type& prop::
+    item::equipment_id_type& item::
     equipment_id ()
     {
       return this->equipment_id_.get ();
     }
 
-    void prop::
+    void item::
     equipment_id (const equipment_id_type& x)
     {
       this->equipment_id_.set (x);
     }
 
-    void prop::
+    void item::
     equipment_id (::std::unique_ptr< equipment_id_type > x)
     {
       this->equipment_id_.set (std::move (x));
     }
 
-    const prop::description_type& prop::
+    const item::description_type& item::
     description () const
     {
       return this->description_.get ();
     }
 
-    prop::description_type& prop::
+    item::description_type& item::
     description ()
     {
       return this->description_.get ();
     }
 
-    void prop::
+    void item::
     description (const description_type& x)
     {
       this->description_.set (x);
     }
 
-    void prop::
+    void item::
     description (::std::unique_ptr< description_type > x)
     {
       this->description_.set (std::move (x));
+    }
+
+    const item::properties_type& item::
+    properties () const
+    {
+      return this->properties_.get ();
+    }
+
+    item::properties_type& item::
+    properties ()
+    {
+      return this->properties_.get ();
+    }
+
+    void item::
+    properties (const properties_type& x)
+    {
+      this->properties_.set (x);
+    }
+
+    void item::
+    properties (::std::unique_ptr< properties_type > x)
+    {
+      this->properties_.set (std::move (x));
     }
 
 
@@ -2181,6 +2227,54 @@ namespace pfc
     events (::std::unique_ptr< events_type > x)
     {
       this->events_.set (std::move (x));
+    }
+
+    const scene::item_type& scene::
+    item () const
+    {
+      return this->item_.get ();
+    }
+
+    scene::item_type& scene::
+    item ()
+    {
+      return this->item_.get ();
+    }
+
+    void scene::
+    item (const item_type& x)
+    {
+      this->item_.set (x);
+    }
+
+    void scene::
+    item (::std::unique_ptr< item_type > x)
+    {
+      this->item_.set (std::move (x));
+    }
+
+    const scene::roles_type& scene::
+    roles () const
+    {
+      return this->roles_.get ();
+    }
+
+    scene::roles_type& scene::
+    roles ()
+    {
+      return this->roles_.get ();
+    }
+
+    void scene::
+    roles (const roles_type& x)
+    {
+      this->roles_.set (x);
+    }
+
+    void scene::
+    roles (::std::unique_ptr< roles_type > x)
+    {
+      this->roles_.set (std::move (x));
     }
 
 
@@ -2619,6 +2713,56 @@ namespace pfc
     type (::std::unique_ptr< type_type > x)
     {
       this->type_.set (std::move (x));
+    }
+
+
+    // property_value_list
+    // 
+
+    const property_value_list::value_sequence& property_value_list::
+    value () const
+    {
+      return this->value_;
+    }
+
+    property_value_list::value_sequence& property_value_list::
+    value ()
+    {
+      return this->value_;
+    }
+
+    void property_value_list::
+    value (const value_sequence& s)
+    {
+      this->value_ = s;
+    }
+
+
+    // property_value
+    // 
+
+    const property_value::value_type& property_value::
+    value () const
+    {
+      return this->value_.get ();
+    }
+
+    property_value::value_type& property_value::
+    value ()
+    {
+      return this->value_.get ();
+    }
+
+    void property_value::
+    value (const value_type& x)
+    {
+      this->value_.set (x);
+    }
+
+    void property_value::
+    value (::std::unique_ptr< value_type > x)
+    {
+      this->value_.set (std::move (x));
     }
 
 
@@ -7193,12 +7337,10 @@ namespace pfc
     medical_scenario::
     medical_scenario (const id_type& id,
                       const roles_type& roles,
-                      const props_type& props,
                       const training_script_type& training_script)
     : ::xml_schema::type (),
       id_ (id, this),
       roles_ (roles, this),
-      props_ (props, this),
       training_script_ (training_script, this)
     {
     }
@@ -7206,12 +7348,10 @@ namespace pfc
     medical_scenario::
     medical_scenario (const id_type& id,
                       ::std::unique_ptr< roles_type > roles,
-                      ::std::unique_ptr< props_type > props,
                       ::std::unique_ptr< training_script_type > training_script)
     : ::xml_schema::type (),
       id_ (id, this),
       roles_ (std::move (roles), this),
-      props_ (std::move (props), this),
       training_script_ (std::move (training_script), this)
     {
     }
@@ -7219,12 +7359,10 @@ namespace pfc
     medical_scenario::
     medical_scenario (::std::unique_ptr< id_type > id,
                       ::std::unique_ptr< roles_type > roles,
-                      ::std::unique_ptr< props_type > props,
                       ::std::unique_ptr< training_script_type > training_script)
     : ::xml_schema::type (),
       id_ (std::move (id), this),
       roles_ (std::move (roles), this),
-      props_ (std::move (props), this),
       training_script_ (std::move (training_script), this)
     {
     }
@@ -7236,7 +7374,6 @@ namespace pfc
     : ::xml_schema::type (x, f, c),
       id_ (x.id_, f, this),
       roles_ (x.roles_, f, this),
-      props_ (x.props_, f, this),
       training_script_ (x.training_script_, f, this)
     {
     }
@@ -7248,7 +7385,6 @@ namespace pfc
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
       id_ (this),
       roles_ (this),
-      props_ (this),
       training_script_ (this)
     {
       if ((f & ::xml_schema::flags::base) == 0)
@@ -7324,34 +7460,6 @@ namespace pfc
           }
         }
 
-        // props
-        //
-        {
-          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
-            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
-              "props",
-              "",
-              &::xsd::cxx::tree::factory_impl< props_type >,
-              false, false, i, n, f, this));
-
-          if (tmp.get () != 0)
-          {
-            if (!props_.present ())
-            {
-              ::std::unique_ptr< props_type > r (
-                dynamic_cast< props_type* > (tmp.get ()));
-
-              if (r.get ())
-                tmp.release ();
-              else
-                throw ::xsd::cxx::tree::not_derived< char > ();
-
-              this->props_.set (::std::move (r));
-              continue;
-            }
-          }
-        }
-
         // training-script
         //
         {
@@ -7397,13 +7505,6 @@ namespace pfc
           "");
       }
 
-      if (!props_.present ())
-      {
-        throw ::xsd::cxx::tree::expected_element< char > (
-          "props",
-          "");
-      }
-
       if (!training_script_.present ())
       {
         throw ::xsd::cxx::tree::expected_element< char > (
@@ -7427,7 +7528,6 @@ namespace pfc
         static_cast< ::xml_schema::type& > (*this) = x;
         this->id_ = x.id_;
         this->roles_ = x.roles_;
-        this->props_ = x.props_;
         this->training_script_ = x.training_script_;
       }
 
@@ -7551,25 +7651,29 @@ namespace pfc
     //
 
     role::
-    role (const short_name_type& short_name,
-          const unit_id_type& unit_id,
+    role (const id_type& id,
+          const name_type& name,
+          const short_name_type& short_name,
           const description_type& description)
     : ::xml_schema::type (),
+      id_ (id, this),
+      name_ (name, this),
       short_name_ (short_name, this),
-      unit_id_ (unit_id, this),
-      trauma_profile_id_ (this),
+      trauma_profile_ref_ (this),
       description_ (description, this)
     {
     }
 
     role::
-    role (::std::unique_ptr< short_name_type > short_name,
-          ::std::unique_ptr< unit_id_type > unit_id,
+    role (::std::unique_ptr< id_type > id,
+          ::std::unique_ptr< name_type > name,
+          ::std::unique_ptr< short_name_type > short_name,
           ::std::unique_ptr< description_type > description)
     : ::xml_schema::type (),
+      id_ (std::move (id), this),
+      name_ (std::move (name), this),
       short_name_ (std::move (short_name), this),
-      unit_id_ (std::move (unit_id), this),
-      trauma_profile_id_ (this),
+      trauma_profile_ref_ (this),
       description_ (std::move (description), this)
     {
     }
@@ -7579,9 +7683,10 @@ namespace pfc
           ::xml_schema::flags f,
           ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
+      id_ (x.id_, f, this),
+      name_ (x.name_, f, this),
       short_name_ (x.short_name_, f, this),
-      unit_id_ (x.unit_id_, f, this),
-      trauma_profile_id_ (x.trauma_profile_id_, f, this),
+      trauma_profile_ref_ (x.trauma_profile_ref_, f, this),
       description_ (x.description_, f, this)
     {
     }
@@ -7591,9 +7696,10 @@ namespace pfc
           ::xml_schema::flags f,
           ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+      id_ (this),
+      name_ (this),
       short_name_ (this),
-      unit_id_ (this),
-      trauma_profile_id_ (this),
+      trauma_profile_ref_ (this),
       description_ (this)
     {
       if ((f & ::xml_schema::flags::base) == 0)
@@ -7612,6 +7718,62 @@ namespace pfc
         const ::xercesc::DOMElement& i (p.cur_element ());
         const ::xsd::cxx::xml::qualified_name< char > n (
           ::xsd::cxx::xml::dom::name< char > (i));
+
+        // id
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "id",
+              "",
+              &::xsd::cxx::tree::factory_impl< id_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!id_.present ())
+            {
+              ::std::unique_ptr< id_type > r (
+                dynamic_cast< id_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->id_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // name
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "name",
+              "",
+              &::xsd::cxx::tree::factory_impl< name_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!name_.present ())
+            {
+              ::std::unique_ptr< name_type > r (
+                dynamic_cast< name_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->name_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
 
         // short-name
         //
@@ -7641,57 +7803,29 @@ namespace pfc
           }
         }
 
-        // unit-id
+        // trauma-profile-ref
         //
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
-              "unit-id",
+              "trauma-profile-ref",
               "",
-              &::xsd::cxx::tree::factory_impl< unit_id_type >,
+              &::xsd::cxx::tree::factory_impl< trauma_profile_ref_type >,
               false, false, i, n, f, this));
 
           if (tmp.get () != 0)
           {
-            if (!unit_id_.present ())
+            if (!this->trauma_profile_ref_)
             {
-              ::std::unique_ptr< unit_id_type > r (
-                dynamic_cast< unit_id_type* > (tmp.get ()));
+              ::std::unique_ptr< trauma_profile_ref_type > r (
+                dynamic_cast< trauma_profile_ref_type* > (tmp.get ()));
 
               if (r.get ())
                 tmp.release ();
               else
                 throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->unit_id_.set (::std::move (r));
-              continue;
-            }
-          }
-        }
-
-        // trauma-profile-id
-        //
-        {
-          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
-            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
-              "trauma-profile-id",
-              "",
-              &::xsd::cxx::tree::factory_impl< trauma_profile_id_type >,
-              false, false, i, n, f, this));
-
-          if (tmp.get () != 0)
-          {
-            if (!this->trauma_profile_id_)
-            {
-              ::std::unique_ptr< trauma_profile_id_type > r (
-                dynamic_cast< trauma_profile_id_type* > (tmp.get ()));
-
-              if (r.get ())
-                tmp.release ();
-              else
-                throw ::xsd::cxx::tree::not_derived< char > ();
-
-              this->trauma_profile_id_.set (::std::move (r));
+              this->trauma_profile_ref_.set (::std::move (r));
               continue;
             }
           }
@@ -7728,17 +7862,24 @@ namespace pfc
         break;
       }
 
+      if (!id_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "id",
+          "");
+      }
+
+      if (!name_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "name",
+          "");
+      }
+
       if (!short_name_.present ())
       {
         throw ::xsd::cxx::tree::expected_element< char > (
           "short-name",
-          "");
-      }
-
-      if (!unit_id_.present ())
-      {
-        throw ::xsd::cxx::tree::expected_element< char > (
-          "unit-id",
           "");
       }
 
@@ -7763,9 +7904,10 @@ namespace pfc
       if (this != &x)
       {
         static_cast< ::xml_schema::type& > (*this) = x;
+        this->id_ = x.id_;
+        this->name_ = x.name_;
         this->short_name_ = x.short_name_;
-        this->unit_id_ = x.unit_id_;
-        this->trauma_profile_id_ = x.trauma_profile_id_;
+        this->trauma_profile_ref_ = x.trauma_profile_ref_;
         this->description_ = x.description_;
       }
 
@@ -7783,31 +7925,31 @@ namespace pfc
       "role",
       "com:ara:pfc:training:1");
 
-    // prop_list
+    // role_ref_list
     //
 
-    prop_list::
-    prop_list ()
+    role_ref_list::
+    role_ref_list ()
     : ::xml_schema::type (),
-      prop_ (this)
+      role_ref_ (this)
     {
     }
 
-    prop_list::
-    prop_list (const prop_list& x,
-               ::xml_schema::flags f,
-               ::xml_schema::container* c)
+    role_ref_list::
+    role_ref_list (const role_ref_list& x,
+                   ::xml_schema::flags f,
+                   ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
-      prop_ (x.prop_, f, this)
+      role_ref_ (x.role_ref_, f, this)
     {
     }
 
-    prop_list::
-    prop_list (const ::xercesc::DOMElement& e,
-               ::xml_schema::flags f,
-               ::xml_schema::container* c)
+    role_ref_list::
+    role_ref_list (const ::xercesc::DOMElement& e,
+                   ::xml_schema::flags f,
+                   ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
-      prop_ (this)
+      role_ref_ (this)
     {
       if ((f & ::xml_schema::flags::base) == 0)
       {
@@ -7816,7 +7958,7 @@ namespace pfc
       }
     }
 
-    void prop_list::
+    void role_ref_list::
     parse (::xsd::cxx::xml::dom::parser< char >& p,
            ::xml_schema::flags f)
     {
@@ -7826,27 +7968,27 @@ namespace pfc
         const ::xsd::cxx::xml::qualified_name< char > n (
           ::xsd::cxx::xml::dom::name< char > (i));
 
-        // prop
+        // role-ref
         //
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
-              "prop",
+              "role-ref",
               "",
-              &::xsd::cxx::tree::factory_impl< prop_type >,
+              &::xsd::cxx::tree::factory_impl< role_ref_type >,
               false, false, i, n, f, this));
 
           if (tmp.get () != 0)
           {
-            ::std::unique_ptr< prop_type > r (
-              dynamic_cast< prop_type* > (tmp.get ()));
+            ::std::unique_ptr< role_ref_type > r (
+              dynamic_cast< role_ref_type* > (tmp.get ()));
 
             if (r.get ())
               tmp.release ();
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->prop_.push_back (::std::move (r));
+            this->role_ref_.push_back (::std::move (r));
             continue;
           }
         }
@@ -7855,80 +7997,61 @@ namespace pfc
       }
     }
 
-    prop_list* prop_list::
+    role_ref_list* role_ref_list::
     _clone (::xml_schema::flags f,
             ::xml_schema::container* c) const
     {
-      return new class prop_list (*this, f, c);
+      return new class role_ref_list (*this, f, c);
     }
 
-    prop_list& prop_list::
-    operator= (const prop_list& x)
+    role_ref_list& role_ref_list::
+    operator= (const role_ref_list& x)
     {
       if (this != &x)
       {
         static_cast< ::xml_schema::type& > (*this) = x;
-        this->prop_ = x.prop_;
+        this->role_ref_ = x.role_ref_;
       }
 
       return *this;
     }
 
-    prop_list::
-    ~prop_list ()
+    role_ref_list::
+    ~role_ref_list ()
     {
     }
 
     static
-    const ::xsd::cxx::tree::type_factory_initializer< 0, char, prop_list >
-    _xsd_prop_list_type_factory_init (
-      "prop-list",
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, role_ref_list >
+    _xsd_role_ref_list_type_factory_init (
+      "role-ref-list",
       "com:ara:pfc:training:1");
 
-    // prop
+    // item_list
     //
 
-    prop::
-    prop (const short_name_type& short_name,
-          const equipment_id_type& equipment_id,
-          const description_type& description)
+    item_list::
+    item_list ()
     : ::xml_schema::type (),
-      short_name_ (short_name, this),
-      equipment_id_ (equipment_id, this),
-      description_ (description, this)
+      item_ (this)
     {
     }
 
-    prop::
-    prop (::std::unique_ptr< short_name_type > short_name,
-          ::std::unique_ptr< equipment_id_type > equipment_id,
-          ::std::unique_ptr< description_type > description)
-    : ::xml_schema::type (),
-      short_name_ (std::move (short_name), this),
-      equipment_id_ (std::move (equipment_id), this),
-      description_ (std::move (description), this)
-    {
-    }
-
-    prop::
-    prop (const prop& x,
-          ::xml_schema::flags f,
-          ::xml_schema::container* c)
+    item_list::
+    item_list (const item_list& x,
+               ::xml_schema::flags f,
+               ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
-      short_name_ (x.short_name_, f, this),
-      equipment_id_ (x.equipment_id_, f, this),
-      description_ (x.description_, f, this)
+      item_ (x.item_, f, this)
     {
     }
 
-    prop::
-    prop (const ::xercesc::DOMElement& e,
-          ::xml_schema::flags f,
-          ::xml_schema::container* c)
+    item_list::
+    item_list (const ::xercesc::DOMElement& e,
+               ::xml_schema::flags f,
+               ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
-      short_name_ (this),
-      equipment_id_ (this),
-      description_ (this)
+      item_ (this)
     {
       if ((f & ::xml_schema::flags::base) == 0)
       {
@@ -7937,7 +8060,147 @@ namespace pfc
       }
     }
 
-    void prop::
+    void item_list::
+    parse (::xsd::cxx::xml::dom::parser< char >& p,
+           ::xml_schema::flags f)
+    {
+      for (; p.more_content (); p.next_content (false))
+      {
+        const ::xercesc::DOMElement& i (p.cur_element ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+
+        // item
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "item",
+              "",
+              &::xsd::cxx::tree::factory_impl< item_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            ::std::unique_ptr< item_type > r (
+              dynamic_cast< item_type* > (tmp.get ()));
+
+            if (r.get ())
+              tmp.release ();
+            else
+              throw ::xsd::cxx::tree::not_derived< char > ();
+
+            this->item_.push_back (::std::move (r));
+            continue;
+          }
+        }
+
+        break;
+      }
+    }
+
+    item_list* item_list::
+    _clone (::xml_schema::flags f,
+            ::xml_schema::container* c) const
+    {
+      return new class item_list (*this, f, c);
+    }
+
+    item_list& item_list::
+    operator= (const item_list& x)
+    {
+      if (this != &x)
+      {
+        static_cast< ::xml_schema::type& > (*this) = x;
+        this->item_ = x.item_;
+      }
+
+      return *this;
+    }
+
+    item_list::
+    ~item_list ()
+    {
+    }
+
+    static
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, item_list >
+    _xsd_item_list_type_factory_init (
+      "item-list",
+      "com:ara:pfc:training:1");
+
+    // item
+    //
+
+    item::
+    item (const short_name_type& short_name,
+          const equipment_id_type& equipment_id,
+          const description_type& description,
+          const properties_type& properties)
+    : ::xml_schema::type (),
+      short_name_ (short_name, this),
+      equipment_id_ (equipment_id, this),
+      description_ (description, this),
+      properties_ (properties, this)
+    {
+    }
+
+    item::
+    item (const short_name_type& short_name,
+          const equipment_id_type& equipment_id,
+          const description_type& description,
+          ::std::unique_ptr< properties_type > properties)
+    : ::xml_schema::type (),
+      short_name_ (short_name, this),
+      equipment_id_ (equipment_id, this),
+      description_ (description, this),
+      properties_ (std::move (properties), this)
+    {
+    }
+
+    item::
+    item (::std::unique_ptr< short_name_type > short_name,
+          ::std::unique_ptr< equipment_id_type > equipment_id,
+          ::std::unique_ptr< description_type > description,
+          ::std::unique_ptr< properties_type > properties)
+    : ::xml_schema::type (),
+      short_name_ (std::move (short_name), this),
+      equipment_id_ (std::move (equipment_id), this),
+      description_ (std::move (description), this),
+      properties_ (std::move (properties), this)
+    {
+    }
+
+    item::
+    item (const item& x,
+          ::xml_schema::flags f,
+          ::xml_schema::container* c)
+    : ::xml_schema::type (x, f, c),
+      short_name_ (x.short_name_, f, this),
+      equipment_id_ (x.equipment_id_, f, this),
+      description_ (x.description_, f, this),
+      properties_ (x.properties_, f, this)
+    {
+    }
+
+    item::
+    item (const ::xercesc::DOMElement& e,
+          ::xml_schema::flags f,
+          ::xml_schema::container* c)
+    : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+      short_name_ (this),
+      equipment_id_ (this),
+      description_ (this),
+      properties_ (this)
+    {
+      if ((f & ::xml_schema::flags::base) == 0)
+      {
+        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+        this->parse (p, f);
+      }
+    }
+
+    void item::
     parse (::xsd::cxx::xml::dom::parser< char >& p,
            ::xml_schema::flags f)
     {
@@ -8031,6 +8294,34 @@ namespace pfc
           }
         }
 
+        // properties
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "properties",
+              "",
+              &::xsd::cxx::tree::factory_impl< properties_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!properties_.present ())
+            {
+              ::std::unique_ptr< properties_type > r (
+                dynamic_cast< properties_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->properties_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
         break;
       }
 
@@ -8054,17 +8345,24 @@ namespace pfc
           "description",
           "");
       }
+
+      if (!properties_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "properties",
+          "");
+      }
     }
 
-    prop* prop::
+    item* item::
     _clone (::xml_schema::flags f,
             ::xml_schema::container* c) const
     {
-      return new class prop (*this, f, c);
+      return new class item (*this, f, c);
     }
 
-    prop& prop::
-    operator= (const prop& x)
+    item& item::
+    operator= (const item& x)
     {
       if (this != &x)
       {
@@ -8072,20 +8370,21 @@ namespace pfc
         this->short_name_ = x.short_name_;
         this->equipment_id_ = x.equipment_id_;
         this->description_ = x.description_;
+        this->properties_ = x.properties_;
       }
 
       return *this;
     }
 
-    prop::
-    ~prop ()
+    item::
+    ~item ()
     {
     }
 
     static
-    const ::xsd::cxx::tree::type_factory_initializer< 0, char, prop >
-    _xsd_prop_type_factory_init (
-      "prop",
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, item >
+    _xsd_item_type_factory_init (
+      "item",
       "com:ara:pfc:training:1");
 
     // scene_list
@@ -8199,14 +8498,18 @@ namespace pfc
            const description_type& description,
            const time_of_day_type& time_of_day,
            const time_in_simulation_type& time_in_simulation,
-           const events_type& events)
+           const events_type& events,
+           const item_type& item,
+           const roles_type& roles)
     : ::xml_schema::type (),
       location_id_ (location_id, this),
       name_ (name, this),
       description_ (description, this),
       time_of_day_ (time_of_day, this),
       time_in_simulation_ (time_in_simulation, this),
-      events_ (events, this)
+      events_ (events, this),
+      item_ (item, this),
+      roles_ (roles, this)
     {
     }
 
@@ -8216,14 +8519,18 @@ namespace pfc
            const description_type& description,
            const time_of_day_type& time_of_day,
            const time_in_simulation_type& time_in_simulation,
-           ::std::unique_ptr< events_type > events)
+           ::std::unique_ptr< events_type > events,
+           ::std::unique_ptr< item_type > item,
+           ::std::unique_ptr< roles_type > roles)
     : ::xml_schema::type (),
       location_id_ (location_id, this),
       name_ (name, this),
       description_ (description, this),
       time_of_day_ (time_of_day, this),
       time_in_simulation_ (time_in_simulation, this),
-      events_ (std::move (events), this)
+      events_ (std::move (events), this),
+      item_ (std::move (item), this),
+      roles_ (std::move (roles), this)
     {
     }
 
@@ -8233,14 +8540,18 @@ namespace pfc
            ::std::unique_ptr< description_type > description,
            ::std::unique_ptr< time_of_day_type > time_of_day,
            const time_in_simulation_type& time_in_simulation,
-           ::std::unique_ptr< events_type > events)
+           ::std::unique_ptr< events_type > events,
+           ::std::unique_ptr< item_type > item,
+           ::std::unique_ptr< roles_type > roles)
     : ::xml_schema::type (),
       location_id_ (std::move (location_id), this),
       name_ (std::move (name), this),
       description_ (std::move (description), this),
       time_of_day_ (std::move (time_of_day), this),
       time_in_simulation_ (time_in_simulation, this),
-      events_ (std::move (events), this)
+      events_ (std::move (events), this),
+      item_ (std::move (item), this),
+      roles_ (std::move (roles), this)
     {
     }
 
@@ -8254,7 +8565,9 @@ namespace pfc
       description_ (x.description_, f, this),
       time_of_day_ (x.time_of_day_, f, this),
       time_in_simulation_ (x.time_in_simulation_, f, this),
-      events_ (x.events_, f, this)
+      events_ (x.events_, f, this),
+      item_ (x.item_, f, this),
+      roles_ (x.roles_, f, this)
     {
     }
 
@@ -8268,7 +8581,9 @@ namespace pfc
       description_ (this),
       time_of_day_ (this),
       time_in_simulation_ (this),
-      events_ (this)
+      events_ (this),
+      item_ (this),
+      roles_ (this)
     {
       if ((f & ::xml_schema::flags::base) == 0)
       {
@@ -8438,6 +8753,62 @@ namespace pfc
           }
         }
 
+        // item
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "item",
+              "",
+              &::xsd::cxx::tree::factory_impl< item_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!item_.present ())
+            {
+              ::std::unique_ptr< item_type > r (
+                dynamic_cast< item_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->item_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // roles
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "roles",
+              "",
+              &::xsd::cxx::tree::factory_impl< roles_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!roles_.present ())
+            {
+              ::std::unique_ptr< roles_type > r (
+                dynamic_cast< roles_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->roles_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
         break;
       }
 
@@ -8482,6 +8853,20 @@ namespace pfc
           "events",
           "");
       }
+
+      if (!item_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "item",
+          "");
+      }
+
+      if (!roles_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "roles",
+          "");
+      }
     }
 
     scene* scene::
@@ -8503,6 +8888,8 @@ namespace pfc
         this->time_of_day_ = x.time_of_day_;
         this->time_in_simulation_ = x.time_in_simulation_;
         this->events_ = x.events_;
+        this->item_ = x.item_;
+        this->roles_ = x.roles_;
       }
 
       return *this;
@@ -9648,6 +10035,227 @@ namespace pfc
       "property",
       "com:ara:pfc:training:1");
 
+    // property_value_list
+    //
+
+    property_value_list::
+    property_value_list ()
+    : ::xml_schema::type (),
+      value_ (this)
+    {
+    }
+
+    property_value_list::
+    property_value_list (const property_value_list& x,
+                         ::xml_schema::flags f,
+                         ::xml_schema::container* c)
+    : ::xml_schema::type (x, f, c),
+      value_ (x.value_, f, this)
+    {
+    }
+
+    property_value_list::
+    property_value_list (const ::xercesc::DOMElement& e,
+                         ::xml_schema::flags f,
+                         ::xml_schema::container* c)
+    : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+      value_ (this)
+    {
+      if ((f & ::xml_schema::flags::base) == 0)
+      {
+        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+        this->parse (p, f);
+      }
+    }
+
+    void property_value_list::
+    parse (::xsd::cxx::xml::dom::parser< char >& p,
+           ::xml_schema::flags f)
+    {
+      for (; p.more_content (); p.next_content (false))
+      {
+        const ::xercesc::DOMElement& i (p.cur_element ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+
+        // value
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "value",
+              "",
+              &::xsd::cxx::tree::factory_impl< value_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            ::std::unique_ptr< value_type > r (
+              dynamic_cast< value_type* > (tmp.get ()));
+
+            if (r.get ())
+              tmp.release ();
+            else
+              throw ::xsd::cxx::tree::not_derived< char > ();
+
+            this->value_.push_back (::std::move (r));
+            continue;
+          }
+        }
+
+        break;
+      }
+    }
+
+    property_value_list* property_value_list::
+    _clone (::xml_schema::flags f,
+            ::xml_schema::container* c) const
+    {
+      return new class property_value_list (*this, f, c);
+    }
+
+    property_value_list& property_value_list::
+    operator= (const property_value_list& x)
+    {
+      if (this != &x)
+      {
+        static_cast< ::xml_schema::type& > (*this) = x;
+        this->value_ = x.value_;
+      }
+
+      return *this;
+    }
+
+    property_value_list::
+    ~property_value_list ()
+    {
+    }
+
+    static
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, property_value_list >
+    _xsd_property_value_list_type_factory_init (
+      "property-value-list",
+      "com:ara:pfc:training:1");
+
+    // property_value
+    //
+
+    property_value::
+    property_value (const value_type& value)
+    : ::xml_schema::type (),
+      value_ (value, this)
+    {
+    }
+
+    property_value::
+    property_value (::std::unique_ptr< value_type > value)
+    : ::xml_schema::type (),
+      value_ (std::move (value), this)
+    {
+    }
+
+    property_value::
+    property_value (const property_value& x,
+                    ::xml_schema::flags f,
+                    ::xml_schema::container* c)
+    : ::xml_schema::type (x, f, c),
+      value_ (x.value_, f, this)
+    {
+    }
+
+    property_value::
+    property_value (const ::xercesc::DOMElement& e,
+                    ::xml_schema::flags f,
+                    ::xml_schema::container* c)
+    : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+      value_ (this)
+    {
+      if ((f & ::xml_schema::flags::base) == 0)
+      {
+        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+        this->parse (p, f);
+      }
+    }
+
+    void property_value::
+    parse (::xsd::cxx::xml::dom::parser< char >& p,
+           ::xml_schema::flags f)
+    {
+      for (; p.more_content (); p.next_content (false))
+      {
+        const ::xercesc::DOMElement& i (p.cur_element ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+
+        // value
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "value",
+              "",
+              &::xsd::cxx::tree::factory_impl< value_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!value_.present ())
+            {
+              ::std::unique_ptr< value_type > r (
+                dynamic_cast< value_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->value_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        break;
+      }
+
+      if (!value_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "value",
+          "");
+      }
+    }
+
+    property_value* property_value::
+    _clone (::xml_schema::flags f,
+            ::xml_schema::container* c) const
+    {
+      return new class property_value (*this, f, c);
+    }
+
+    property_value& property_value::
+    operator= (const property_value& x)
+    {
+      if (this != &x)
+      {
+        static_cast< ::xml_schema::type& > (*this) = x;
+        this->value_ = x.value_;
+      }
+
+      return *this;
+    }
+
+    property_value::
+    ~property_value ()
+    {
+    }
+
+    static
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, property_value >
+    _xsd_property_value_type_factory_init (
+      "property-value",
+      "com:ara:pfc:training:1");
+
     // relates_to
     //
 
@@ -10704,14 +11312,6 @@ namespace pfc
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-        o << ::std::endl << "props: ";
-        om.insert (o, i.props ());
-      }
-
-      {
-        ::xsd::cxx::tree::std_ostream_map< char >& om (
-          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
-
         o << ::std::endl << "training-script: ";
         om.insert (o, i.training_script ());
       }
@@ -10753,6 +11353,22 @@ namespace pfc
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
+        o << ::std::endl << "id: ";
+        om.insert (o, i.id ());
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "name: ";
+        om.insert (o, i.name ());
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
         o << ::std::endl << "short-name: ";
         om.insert (o, i.short_name ());
       }
@@ -10761,18 +11377,10 @@ namespace pfc
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-        o << ::std::endl << "unit-id: ";
-        om.insert (o, i.unit_id ());
-      }
-
-      {
-        ::xsd::cxx::tree::std_ostream_map< char >& om (
-          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
-
-        if (i.trauma_profile_id ())
+        if (i.trauma_profile_ref ())
         {
-          o << ::std::endl << "trauma-profile-id: ";
-          om.insert (o, *i.trauma_profile_id ());
+          o << ::std::endl << "trauma-profile-ref: ";
+          om.insert (o, *i.trauma_profile_ref ());
         }
       }
 
@@ -10792,17 +11400,17 @@ namespace pfc
     _xsd_role_std_ostream_init;
 
     ::std::ostream&
-    operator<< (::std::ostream& o, const prop_list& i)
+    operator<< (::std::ostream& o, const role_ref_list& i)
     {
       {
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-        for (prop_list::prop_const_iterator
-             b (i.prop ().begin ()), e (i.prop ().end ());
+        for (role_ref_list::role_ref_const_iterator
+             b (i.role_ref ().begin ()), e (i.role_ref ().end ());
              b != e; ++b)
         {
-          o << ::std::endl << "prop: ";
+          o << ::std::endl << "role-ref: ";
           om.insert (o, *b);
         }
       }
@@ -10811,11 +11419,34 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, prop_list >
-    _xsd_prop_list_std_ostream_init;
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, role_ref_list >
+    _xsd_role_ref_list_std_ostream_init;
 
     ::std::ostream&
-    operator<< (::std::ostream& o, const prop& i)
+    operator<< (::std::ostream& o, const item_list& i)
+    {
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        for (item_list::item_const_iterator
+             b (i.item ().begin ()), e (i.item ().end ());
+             b != e; ++b)
+        {
+          o << ::std::endl << "item: ";
+          om.insert (o, *b);
+        }
+      }
+
+      return o;
+    }
+
+    static
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, item_list >
+    _xsd_item_list_std_ostream_init;
+
+    ::std::ostream&
+    operator<< (::std::ostream& o, const item& i)
     {
       {
         ::xsd::cxx::tree::std_ostream_map< char >& om (
@@ -10841,12 +11472,20 @@ namespace pfc
         om.insert (o, i.description ());
       }
 
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "properties: ";
+        om.insert (o, i.properties ());
+      }
+
       return o;
     }
 
     static
-    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, prop >
-    _xsd_prop_std_ostream_init;
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, item >
+    _xsd_item_std_ostream_init;
 
     ::std::ostream&
     operator<< (::std::ostream& o, const scene_list& i)
@@ -10913,6 +11552,22 @@ namespace pfc
 
         o << ::std::endl << "events: ";
         om.insert (o, i.events ());
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "item: ";
+        om.insert (o, i.item ());
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "roles: ";
+        om.insert (o, i.roles ());
       }
 
       return o;
@@ -11151,6 +11806,47 @@ namespace pfc
     static
     const ::xsd::cxx::tree::std_ostream_initializer< 0, char, property >
     _xsd_property_std_ostream_init;
+
+    ::std::ostream&
+    operator<< (::std::ostream& o, const property_value_list& i)
+    {
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        for (property_value_list::value_const_iterator
+             b (i.value ().begin ()), e (i.value ().end ());
+             b != e; ++b)
+        {
+          o << ::std::endl << "value: ";
+          om.insert (o, *b);
+        }
+      }
+
+      return o;
+    }
+
+    static
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, property_value_list >
+    _xsd_property_value_list_std_ostream_init;
+
+    ::std::ostream&
+    operator<< (::std::ostream& o, const property_value& i)
+    {
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "value: ";
+        om.insert (o, i.value ());
+      }
+
+      return o;
+    }
+
+    static
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, property_value >
+    _xsd_property_value_std_ostream_init;
 
     ::std::ostream&
     operator<< (::std::ostream& o, const relates_to& i)
@@ -13146,29 +13842,6 @@ namespace pfc
             false, false, e, x);
       }
 
-      // props
-      //
-      {
-        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
-          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
-
-        const medical_scenario::props_type& x (i.props ());
-        if (typeid (medical_scenario::props_type) == typeid (x))
-        {
-          ::xercesc::DOMElement& s (
-            ::xsd::cxx::xml::dom::create_element (
-              "props",
-              e));
-
-          s << x;
-        }
-        else
-          tsm.serialize (
-            "props",
-            "",
-            false, false, e, x);
-      }
-
       // training-script
       //
       {
@@ -13245,6 +13918,52 @@ namespace pfc
     {
       e << static_cast< const ::xml_schema::type& > (i);
 
+      // id
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const role::id_type& x (i.id ());
+        if (typeid (role::id_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "id",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "id",
+            "",
+            false, false, e, x);
+      }
+
+      // name
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const role::name_type& x (i.name ());
+        if (typeid (role::name_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "name",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "name",
+            "",
+            false, false, e, x);
+      }
+
       // short-name
       //
       {
@@ -13268,50 +13987,27 @@ namespace pfc
             false, false, e, x);
       }
 
-      // unit-id
+      // trauma-profile-ref
       //
       {
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const role::unit_id_type& x (i.unit_id ());
-        if (typeid (role::unit_id_type) == typeid (x))
+        if (i.trauma_profile_ref ())
         {
-          ::xercesc::DOMElement& s (
-            ::xsd::cxx::xml::dom::create_element (
-              "unit-id",
-              e));
-
-          s << x;
-        }
-        else
-          tsm.serialize (
-            "unit-id",
-            "",
-            false, false, e, x);
-      }
-
-      // trauma-profile-id
-      //
-      {
-        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
-          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
-
-        if (i.trauma_profile_id ())
-        {
-          const role::trauma_profile_id_type& x (*i.trauma_profile_id ());
-          if (typeid (role::trauma_profile_id_type) == typeid (x))
+          const role::trauma_profile_ref_type& x (*i.trauma_profile_ref ());
+          if (typeid (role::trauma_profile_ref_type) == typeid (x))
           {
             ::xercesc::DOMElement& s (
               ::xsd::cxx::xml::dom::create_element (
-                "trauma-profile-id",
+                "trauma-profile-ref",
                 e));
 
             s << x;
           }
           else
             tsm.serialize (
-              "trauma-profile-id",
+              "trauma-profile-ref",
               "",
               false, false, e, x);
         }
@@ -13349,32 +14045,32 @@ namespace pfc
 
 
     void
-    operator<< (::xercesc::DOMElement& e, const prop_list& i)
+    operator<< (::xercesc::DOMElement& e, const role_ref_list& i)
     {
       e << static_cast< const ::xml_schema::type& > (i);
 
-      // prop
+      // role-ref
       //
       {
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        for (prop_list::prop_const_iterator
-             b (i.prop ().begin ()), n (i.prop ().end ());
+        for (role_ref_list::role_ref_const_iterator
+             b (i.role_ref ().begin ()), n (i.role_ref ().end ());
              b != n; ++b)
         {
-          if (typeid (prop_list::prop_type) == typeid (*b))
+          if (typeid (role_ref_list::role_ref_type) == typeid (*b))
           {
             ::xercesc::DOMElement& s (
               ::xsd::cxx::xml::dom::create_element (
-                "prop",
+                "role-ref",
                 e));
 
             s << *b;
           }
           else
             tsm.serialize (
-              "prop",
+              "role-ref",
               "",
               false, false, e, *b);
         }
@@ -13382,14 +14078,54 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, prop_list >
-    _xsd_prop_list_type_serializer_init (
-      "prop-list",
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, role_ref_list >
+    _xsd_role_ref_list_type_serializer_init (
+      "role-ref-list",
       "com:ara:pfc:training:1");
 
 
     void
-    operator<< (::xercesc::DOMElement& e, const prop& i)
+    operator<< (::xercesc::DOMElement& e, const item_list& i)
+    {
+      e << static_cast< const ::xml_schema::type& > (i);
+
+      // item
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        for (item_list::item_const_iterator
+             b (i.item ().begin ()), n (i.item ().end ());
+             b != n; ++b)
+        {
+          if (typeid (item_list::item_type) == typeid (*b))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "item",
+                e));
+
+            s << *b;
+          }
+          else
+            tsm.serialize (
+              "item",
+              "",
+              false, false, e, *b);
+        }
+      }
+    }
+
+    static
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, item_list >
+    _xsd_item_list_type_serializer_init (
+      "item-list",
+      "com:ara:pfc:training:1");
+
+
+    void
+    operator<< (::xercesc::DOMElement& e, const item& i)
     {
       e << static_cast< const ::xml_schema::type& > (i);
 
@@ -13399,8 +14135,8 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const prop::short_name_type& x (i.short_name ());
-        if (typeid (prop::short_name_type) == typeid (x))
+        const item::short_name_type& x (i.short_name ());
+        if (typeid (item::short_name_type) == typeid (x))
         {
           ::xercesc::DOMElement& s (
             ::xsd::cxx::xml::dom::create_element (
@@ -13422,8 +14158,8 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const prop::equipment_id_type& x (i.equipment_id ());
-        if (typeid (prop::equipment_id_type) == typeid (x))
+        const item::equipment_id_type& x (i.equipment_id ());
+        if (typeid (item::equipment_id_type) == typeid (x))
         {
           ::xercesc::DOMElement& s (
             ::xsd::cxx::xml::dom::create_element (
@@ -13445,8 +14181,8 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const prop::description_type& x (i.description ());
-        if (typeid (prop::description_type) == typeid (x))
+        const item::description_type& x (i.description ());
+        if (typeid (item::description_type) == typeid (x))
         {
           ::xercesc::DOMElement& s (
             ::xsd::cxx::xml::dom::create_element (
@@ -13461,12 +14197,35 @@ namespace pfc
             "",
             false, false, e, x);
       }
+
+      // properties
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const item::properties_type& x (i.properties ());
+        if (typeid (item::properties_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "properties",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "properties",
+            "",
+            false, false, e, x);
+      }
     }
 
     static
-    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, prop >
-    _xsd_prop_type_serializer_init (
-      "prop",
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, item >
+    _xsd_item_type_serializer_init (
+      "item",
       "com:ara:pfc:training:1");
 
 
@@ -13637,6 +14396,52 @@ namespace pfc
         else
           tsm.serialize (
             "events",
+            "",
+            false, false, e, x);
+      }
+
+      // item
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const scene::item_type& x (i.item ());
+        if (typeid (scene::item_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "item",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "item",
+            "",
+            false, false, e, x);
+      }
+
+      // roles
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const scene::roles_type& x (i.roles ());
+        if (typeid (scene::roles_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "roles",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "roles",
             "",
             false, false, e, x);
       }
@@ -14120,6 +14925,82 @@ namespace pfc
     const ::xsd::cxx::tree::type_serializer_initializer< 0, char, property >
     _xsd_property_type_serializer_init (
       "property",
+      "com:ara:pfc:training:1");
+
+
+    void
+    operator<< (::xercesc::DOMElement& e, const property_value_list& i)
+    {
+      e << static_cast< const ::xml_schema::type& > (i);
+
+      // value
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        for (property_value_list::value_const_iterator
+             b (i.value ().begin ()), n (i.value ().end ());
+             b != n; ++b)
+        {
+          if (typeid (property_value_list::value_type) == typeid (*b))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "value",
+                e));
+
+            s << *b;
+          }
+          else
+            tsm.serialize (
+              "value",
+              "",
+              false, false, e, *b);
+        }
+      }
+    }
+
+    static
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, property_value_list >
+    _xsd_property_value_list_type_serializer_init (
+      "property-value-list",
+      "com:ara:pfc:training:1");
+
+
+    void
+    operator<< (::xercesc::DOMElement& e, const property_value& i)
+    {
+      e << static_cast< const ::xml_schema::type& > (i);
+
+      // value
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const property_value::value_type& x (i.value ());
+        if (typeid (property_value::value_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "value",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "value",
+            "",
+            false, false, e, x);
+      }
+    }
+
+    static
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, property_value >
+    _xsd_property_value_type_serializer_init (
+      "property-value",
       "com:ara:pfc:training:1");
 
 
