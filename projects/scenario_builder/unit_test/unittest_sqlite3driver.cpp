@@ -3429,7 +3429,7 @@ TEST_F(TEST_FIXTURE_NAME, get_authors)
   EXPECT_EQ(0, _db.author_count());
   EXPECT_TRUE(_db.update_author(&author_1));
 
-  std::vector<Author*> list = _db.get_authors();
+  auto list = _db.get_authors();
 
   EXPECT_TRUE(list[0]->first.compare(author_1.first) == 0);
   EXPECT_TRUE(list[0]->last.compare(author_1.last) == 0);
@@ -3449,7 +3449,7 @@ TEST_F(TEST_FIXTURE_NAME, get_assessments)
   EXPECT_EQ(0, _db.assessment_count());
   EXPECT_TRUE(_db.update_assessment(&assessment_1));
 
-  std::vector<Assessment*> list = _db.get_assessments();
+  auto list = _db.get_assessments();
 
   EXPECT_TRUE(list[0]->name.compare(assessment_1.name) == 0);
   EXPECT_TRUE(list[0]->description.compare(assessment_1.description) == 0);
@@ -3471,7 +3471,7 @@ TEST_F(TEST_FIXTURE_NAME, get_citations)
   EXPECT_EQ(0, _db.citation_count());
   EXPECT_TRUE(_db.update_citation(&citation_1));
 
-  std::vector<Citation*> list = _db.get_citations();
+  auto list = _db.get_citations();
 
   EXPECT_TRUE(list[0]->key.compare(citation_1.key) == 0);
   EXPECT_TRUE(list[0]->title.compare(citation_1.title) == 0);
@@ -3493,7 +3493,7 @@ TEST_F(TEST_FIXTURE_NAME, get_events)
   EXPECT_EQ(0, _db.event_count());
   EXPECT_TRUE(_db.update_event(&event_1));
 
-  std::vector<Event*> list = _db.get_events();
+  auto list = _db.get_events();
 
   EXPECT_TRUE(list[0]->name.compare(event_1.name) == 0);
   EXPECT_TRUE(list[0]->description.compare(event_1.description) == 0);
@@ -3841,7 +3841,7 @@ TEST_F(TEST_FIXTURE_NAME, get_equipments)
   EXPECT_EQ(0, _db.equipment_count());
   EXPECT_TRUE(_db.update_equipment(&equipment_1));
 
-  std::vector<Equipment*> list = _db.get_equipments();
+  auto list = _db.get_equipments();
 
   EXPECT_TRUE(list[0]->name.compare(equipment_1.name) == 0);
   EXPECT_TRUE(list[0]->description.compare(equipment_1.description) == 0);
@@ -3862,7 +3862,7 @@ TEST_F(TEST_FIXTURE_NAME, get_injuries)
   EXPECT_EQ(0, _db.injury_count());
   EXPECT_TRUE(_db.update_injury(&injury_1));
 
-  std::vector<Injury*> list = _db.get_injuries();
+  auto list = _db.get_injuries();
 
   EXPECT_TRUE(list[0]->medical_name.compare(injury_1.medical_name) == 0);
   EXPECT_TRUE(list[0]->description.compare(injury_1.description) == 0);
@@ -3883,7 +3883,7 @@ TEST_F(TEST_FIXTURE_NAME, get_injury_sets)
   EXPECT_EQ(0, _db.injury_set_count());
   EXPECT_TRUE(_db.update_injury_set(&injury_set_1));
 
-  std::vector<InjurySet*> list = _db.get_injury_sets();
+  auto list = _db.get_injury_sets();
 
   EXPECT_TRUE(list[0]->name.compare(injury_set_1.name) == 0);
   EXPECT_TRUE(list[0]->description.compare(injury_set_1.description) == 0);
@@ -3911,7 +3911,7 @@ TEST_F(TEST_FIXTURE_NAME, get_role_maps)
   _db.select_role(&role_1);
   _db.update_role_in_scene(&scene_1, &role_1);
 
-  std::vector<RoleMap*> list = _db.get_role_maps();
+  auto list = _db.get_role_maps();
 
   EXPECT_EQ(1,list[0]->fk_scene);
   EXPECT_EQ(1,list[0]->fk_role);
@@ -3935,7 +3935,7 @@ TEST_F(TEST_FIXTURE_NAME, get_event_maps)
   _db.select_event(&event_1);
   _db.update_event_in_scene(&scene_1, &event_1);
 
-  std::vector<EventMap*> list = _db.get_event_maps();
+  auto list = _db.get_event_maps();
 
   EXPECT_EQ(1, list[0]->fk_scene);
   EXPECT_EQ(1, list[0]->fk_event);
@@ -3963,7 +3963,7 @@ TEST_F(TEST_FIXTURE_NAME, get_citation_maps)
   _db.select_citation(&citation_1);
   _db.update_citation_in_scene(&scene_1, &citation_1);
 
-  std::vector<CitationMap*> list = _db.get_citation_maps();
+  auto list = _db.get_citation_maps();
 
   EXPECT_EQ(1, list[0]->fk_scene);
   EXPECT_EQ(1, list[0]->fk_citation);
@@ -3990,7 +3990,7 @@ TEST_F(TEST_FIXTURE_NAME, get_equipment_maps)
   _db.select_equipment(&equipment_1);
   _db.update_equipment_in_scene(&scene_1, &equipment_1);
 
-  std::vector<EquipmentMap*> list = _db.get_equipment_maps();
+  auto list = _db.get_equipment_maps();
 
   EXPECT_EQ(1, list[0]->fk_scene);
   EXPECT_EQ(1, list[0]->fk_equipment);
@@ -4014,7 +4014,7 @@ TEST_F(TEST_FIXTURE_NAME, get_restriction_maps)
   _db.select_restriction(&restriction_1);
   _db.update_restriction_in_scene(&scene_1, &restriction_1);
 
-  std::vector<RestrictionMap*> list = _db.get_restriction_maps();
+  auto list = _db.get_restriction_maps();
 
   EXPECT_EQ(1, list[0]->fk_scene);
   EXPECT_EQ(1, list[0]->fk_restriction);
@@ -4031,7 +4031,7 @@ TEST_F(TEST_FIXTURE_NAME, get_objectives)
   EXPECT_EQ(0, _db.objective_count());
   EXPECT_TRUE(_db.update_objective(&objective_1));
 
-  std::vector<Objective*> list = _db.get_objectives();
+  auto list = _db.get_objectives();
 
   EXPECT_TRUE(list[0]->name.compare(objective_1.name) == 0);
   EXPECT_TRUE(list[0]->description.compare(objective_1.description) == 0);
@@ -4048,7 +4048,7 @@ TEST_F(TEST_FIXTURE_NAME, get_properties)
   EXPECT_EQ(0, _db.property_count());
   EXPECT_TRUE(_db.update_property(&property_1));
 
-  std::vector<Property*> list = _db.get_properties();
+  auto list = _db.get_properties();
 
   EXPECT_TRUE(list[0]->name.compare(property_1.name) == 0);
   EXPECT_TRUE(list[0]->value.compare(property_1.value) == 0);
@@ -4066,7 +4066,7 @@ TEST_F(TEST_FIXTURE_NAME, get_restrictions)
   EXPECT_EQ(0, _db.restriction_count());
   EXPECT_TRUE(_db.update_restriction(&restriction_1));
 
-  std::vector<Restriction*> list = _db.get_restrictions();
+  auto list = _db.get_restrictions();
 
   EXPECT_TRUE(list[0]->name.compare(restriction_1.name) == 0);
   EXPECT_TRUE(list[0]->value.compare(restriction_1.value) == 0);
@@ -4083,7 +4083,7 @@ TEST_F(TEST_FIXTURE_NAME, get_roles)
   EXPECT_EQ(0, _db.role_count());
   EXPECT_TRUE(_db.update_role(&role_1));
 
-  std::vector<Role*> list = _db.get_roles();
+  auto list = _db.get_roles();
 
   EXPECT_TRUE(list[0]->name.compare(role_1.name) == 0);
   EXPECT_TRUE(list[0]->description.compare(role_1.description) == 0);
@@ -4102,7 +4102,7 @@ TEST_F(TEST_FIXTURE_NAME, get_treatments)
   EXPECT_EQ(0, _db.treatment_count());
   EXPECT_TRUE(_db.update_treatment(&treatment_1));
 
-  std::vector<Treatment*> list = _db.get_treatments();
+  auto list = _db.get_treatments();
 
   EXPECT_TRUE(list[0]->medical_name.compare(treatment_1.medical_name) == 0);
   EXPECT_TRUE(list[0]->description.compare(treatment_1.description) == 0);
@@ -4120,7 +4120,7 @@ TEST_F(TEST_FIXTURE_NAME, get_scenes)
   EXPECT_EQ(0, _db.scene_count());
   EXPECT_TRUE(_db.update_scene(&scene_1));
 
-  std::vector<Scene*> list = _db.get_scenes();
+  auto list = _db.get_scenes();
 
   EXPECT_TRUE(list[0]->name.compare(scene_1.name) == 0);
 
