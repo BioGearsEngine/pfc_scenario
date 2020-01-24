@@ -6,7 +6,7 @@ import QtQuick.Controls.Material 2.0
 
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
-ListEntry {
+FullListEntry {
   id: root
   property SQLBackend backend
 
@@ -51,22 +51,14 @@ ListEntry {
        color: enabled ? Material.primaryTextColor : Material.primaryTextColor
     }
 
-    PFCLabel {
-      id: injury_location_label
-      anchors.left : injury_medical_name_text.right
-      anchors.leftMargin : 5
-      anchors.verticalCenter  : parent.verticalCenter 
-      text: 'Location:'
-    }
-
     TextField {
-      id : injury_location_entry
-      anchors.left : injury_location_label.right
+      id : injury_description_entry
+      anchors.left : injury_medical_name_text.right
       anchors.top : parent.top
       anchors.leftMargin : -5
       font.pointSize : 8
 
-      text: model.location
+      text: model.description
       placeholderText : "Unknown"
 
       readOnly : false
@@ -82,55 +74,15 @@ ListEntry {
       }
     }
 
-    PFCLabel {
-     id: injury_severity_label
-     anchors.left : injury_location_entry.right
-     anchors.leftMargin : 5
-     anchors.verticalCenter  : parent.verticalCenter 
-     text: 'Severity:'
-    }
-
-    TextField {
-      id: injury_severity_entry
-      anchors.left : injury_severity_label.right
-      anchors.top : parent.top
-      anchors.leftMargin : -5
-      font.pointSize : 8
-
-      text: model.severity
-      placeholderText : "Severity Value"
-       validator: DoubleValidator {
-            bottom:model.min
-            top:   model.max
-        }
-
-       readOnly : false
-       activeFocusOnPress: false
-       hoverEnabled : false
-       enabled : false
-       color: enabled ? Material.primaryTextColor : Material.primaryTextColor
-       onEditingFinished : {
-         root.severityChanged(index , text)
-        if(root.current != index){
-          injury.state = "";
-        }
-      }
-    }
-
     states: [
       State {
         name : "Selected"
-        PropertyChanges{ target : injury_severity_entry; readOnly : false}
-        PropertyChanges{ target : injury_severity_entry; activeFocusOnPress : true}
-        PropertyChanges{ target : injury_severity_entry; hoverEnabled : true}
-        PropertyChanges{ target : injury_severity_entry; enabled : true}
-        PropertyChanges{ target : injury_severity_entry; mouseSelectionMode  : TextInput.SelectCharacters }
 
-        PropertyChanges{ target : injury_location_entry; readOnly : false}
-        PropertyChanges{ target : injury_location_entry; activeFocusOnPress : true}
-        PropertyChanges{ target : injury_location_entry; hoverEnabled : true}
-        PropertyChanges{ target : injury_location_entry; enabled  : true}
-        PropertyChanges{ target : injury_location_entry; mouseSelectionMode  : TextInput.SelectCharacters }
+        PropertyChanges{ target : injury_description_entry; readOnly : false}
+        PropertyChanges{ target : injury_description_entry; activeFocusOnPress : true}
+        PropertyChanges{ target : injury_description_entry; hoverEnabled : true}
+        PropertyChanges{ target : injury_description_entry; enabled  : true}
+        PropertyChanges{ target : injury_description_entry; mouseSelectionMode  : TextInput.SelectCharacters }
       }
     ]
 
@@ -149,11 +101,10 @@ ListEntry {
   //TODO: Then Displa these values instead of the description.
   //TODO: It would be cool if the delegate on state change added a description field which expanded it
 
-  onList : {
-    
-  }
+  onFullAdded : {
 
-  onAdded : {
+  }
+  onFullNew : {
     //TODO; Model Box Popup with  a selection of known Injuries
     var likely_id = root.backend.nextID(SQLBackend.INJURIES) + 1
     self.injury_id     = -1
@@ -179,12 +130,11 @@ ListEntry {
     root.injuryAdded(index, self.injury_id, self.min, "Unknown")
   }
 
-  onRemoved : {
-    self.injury_id =  root.model.get(index).injury_id
-    var severity =  root.model.get(index).severity
-    var location =  root.model.get(index).location
-    root.model.remove(index)
-    current = Math.max(0,index-1)
-    root.injuryRemoved(index, self.injury_id, severity, location)
+  onFullDeleted : {
+
+  }
+
+  onFullExit : {
+
   }
 }

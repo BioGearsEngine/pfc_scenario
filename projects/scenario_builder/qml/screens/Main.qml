@@ -48,7 +48,7 @@ Page {
         text: "Narrative"
         width: implicitWidth
       }
-      currentIndex : 0
+      currentIndex : 1
 
     }
 

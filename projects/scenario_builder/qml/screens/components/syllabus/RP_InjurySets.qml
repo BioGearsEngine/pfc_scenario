@@ -64,55 +64,132 @@ ColumnLayout  {
         }
       }
     }
-
-    InjuryListEntry {
-      id : injuryList
+    StackLayout {
+      id : listStack
       Layout.fillWidth : true
+      Layout.fillHeight : true
       Layout.leftMargin: 5
-      backend : root.backend
+      currentIndex : 0
+      InjuryListEntry {
+        id : injuryList
+        Layout.fillWidth : true
+        Layout.leftMargin: 5
+        backend : root.backend  
 
-      onSeverityChanged : {
-         var entry = root.model.get(root.index)
-         var severities = entry.severities.split(";").filter(item => item)
-         severities.splice(index,1,severity)
-         entry.severities = severities.join(";")
-         update_injury_set(entry)
+        onList : {
+          var values = root.model.get(root.index)
+          if(values) {
+            fullInjuryList.model.clear()
+            root.backend.injuries()
+            while(root.backend.next_injury(injury)) {
+              fullInjuryList.model.insert(fullInjuryList.model.count,
+                {
+                  injury_id : "%1".arg(injury.injury_id),
+                  medical_name : "%1".arg(injury.medical_name),
+                  common_name : "%1".arg(injury.common_name),
+                  description : "%1".arg(injury.description),
+                  citations : "%1".arg(injury.citations),
+                  min : "%1".arg(injury.min),
+                  max : "%1".arg(injury.max)
+                }
+              );
+            };
+          }
+          listStack.currentIndex = 1
+        }
+
+        onSeverityChanged : {
+           var entry = root.model.get(root.index)
+           var severities = entry.severities.split(";").filter(item => item)
+           severities.splice(index,1,severity)
+           entry.severities = severities.join(";")
+           update_injury_set(entry)
+        }  
+
+        onLocationChanged : {
+          var entry = root.model.get(root.index)
+          var locations = entry.locations.split(";").filter(item => item)
+          locations.splice(index,1,location)
+          entry.locations = locations.join(";")
+          update_injury_set(entry)
+        }  
+
+        onInjuryAdded : {
+          var entry = root.model.get(root.index)
+          entry.injuries    = (entry)? entry.injuries.concat(";"+injury_id) : entry.injuries.concat(injury_id)
+          entry.severities  = (entry)? entry.severities.concat(";"+severity) : entry.injuries.concat(severity)
+          entry.locations   = (entry)? entry.locations.concat(";"+location) : entry.injuries.concat(location)
+          update_injury_set(entry)
+        }  
+
+        onInjuryRemoved : {
+          var entry = root.model.get(root.index)
+          var injuries = entry.injuries.split(";").filter(item => item)
+          var severities = entry.severities.split(";").filter(item => item)
+          var locations = entry.locations.split(";").filter(item => item)
+          
+          injuries.splice(index,1);
+          severities.splice(index,1)
+          locations.splice(index,1)
+          
+          entry.injuries = injuries.join(";")
+          entry.severities = severities.join(";")
+          entry.locations = locations.join(";")
+          
+          update_injury_set(entry)
+        }
       }
+      FullInjuryListEntry {
+        id : fullInjuryList
+        Layout.fillWidth : true
+        Layout.fillHeight : true
+        backend : root.backend
 
-      onLocationChanged : {
-        var entry = root.model.get(root.index)
-        var locations = entry.locations.split(";").filter(item => item)
-        locations.splice(index,1,location)
-        entry.locations = locations.join(";")
-        update_injury_set(entry)
-      }
+        onFullAdded : {
+          injury.injury_id = fullInjuryList.model.get(current).injury_id
+          root.backend.select_injury(injury)
+          var entry = root.model.get(root.index)
+          entry.locations = "Unknown"
+          entry.severities = injury.min
+          entry.injuries = (entry.injuries) ? entry.injuries.concat(";"+injury.injury_id) : entry.injuries.concat(injury.injury_id)
+          update_injury_set(entry)
+          fullExit()
+        }
 
-      onInjuryAdded : {
-        var entry = root.model.get(root.index)
-        entry.injuries    = (entry)? entry.injuries.concat(";"+injury_id) : entry.injuries.concat(injury_id)
-        entry.severities  = (entry)? entry.severities.concat(";"+severity) : entry.injuries.concat(severity)
-        entry.locations   = (entry)? entry.locations.concat(";"+location) : entry.injuries.concat(location)
-        update_injury_set(entry)
-      }
-
-      onInjuryRemoved : {
-        var entry = root.model.get(root.index)
-        var injuries = entry.injuries.split(";").filter(item => item)
-        var severities = entry.severities.split(";").filter(item => item)
-        var locations = entry.locations.split(";").filter(item => item)
-        
-        injuries.splice(index,1);
-        severities.splice(index,1)
-        locations.splice(index,1)
-        
-        entry.injuries = injuries.join(";")
-        entry.severities = severities.join(";")
-        entry.locations = locations.join(";")
-        
-        update_injury_set(entry)
+        onFullExit : {
+          var values = root.model.get(root.index)
+          if (values) {
+            nameEntry.text = values.name
+            descriptionEntry.text = values.description
+            injuryList.model.clear()
+            var injuries = values.injuries.split(";").filter(x=>x)
+            var locations  = (values.locations) ? values.locations.split(";").filter(x => x) : "";
+            var severities = (values.severities) ? values.severities.split(";").filter(x => x): "";
+            for(var i = 0;i < injuries.length;++i) {
+              injury.injury_id = injuries[i]
+              injury.medical_name = ""
+              injury.common_name = ""
+              if(root.backend.select_injury(injury)) {
+                injuryList.model.insert(injuryList.model.count,
+                {
+                 injury_id : injury.injury_id,
+                 medical_name : "%1".arg(injury.medical_name),
+                 common_name : "%1".arg(injury.common_name), 
+                 description:  "%1".arg(injury.description),
+                 citations : "%1".arg(injury.citations),
+                 min : "%1".arg(injury.min),
+                 max : "%1".arg(injury.max),
+                 location : (locations.length) ? locations[i] : "",
+                 severity : (severities.length) ?severities[i] : 0.5
+                }
+              );
+              }
+            };
+          }
+          listStack.currentIndex = 0
+        }
       }
     }
-
     onIndexChanged : {
       var values = model.get(index)
       if(values) {
