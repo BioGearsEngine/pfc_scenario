@@ -71,28 +71,28 @@ namespace pfc
       this->equipment_.set (std::move (x));
     }
 
-    const ScenarioSchema::conditions_type& ScenarioSchema::
-    conditions () const
+    const ScenarioSchema::trauma_definitions_type& ScenarioSchema::
+    trauma_definitions () const
     {
-      return this->conditions_.get ();
+      return this->trauma_definitions_.get ();
     }
 
-    ScenarioSchema::conditions_type& ScenarioSchema::
-    conditions ()
+    ScenarioSchema::trauma_definitions_type& ScenarioSchema::
+    trauma_definitions ()
     {
-      return this->conditions_.get ();
-    }
-
-    void ScenarioSchema::
-    conditions (const conditions_type& x)
-    {
-      this->conditions_.set (x);
+      return this->trauma_definitions_.get ();
     }
 
     void ScenarioSchema::
-    conditions (::std::unique_ptr< conditions_type > x)
+    trauma_definitions (const trauma_definitions_type& x)
     {
-      this->conditions_.set (std::move (x));
+      this->trauma_definitions_.set (x);
+    }
+
+    void ScenarioSchema::
+    trauma_definitions (::std::unique_ptr< trauma_definitions_type > x)
+    {
+      this->trauma_definitions_.set (std::move (x));
     }
 
     const ScenarioSchema::treatment_plans_type& ScenarioSchema::
@@ -119,28 +119,28 @@ namespace pfc
       this->treatment_plans_.set (std::move (x));
     }
 
-    const ScenarioSchema::patient_states_type& ScenarioSchema::
-    patient_states () const
+    const ScenarioSchema::trauma_sets_type& ScenarioSchema::
+    trauma_sets () const
     {
-      return this->patient_states_.get ();
+      return this->trauma_sets_.get ();
     }
 
-    ScenarioSchema::patient_states_type& ScenarioSchema::
-    patient_states ()
+    ScenarioSchema::trauma_sets_type& ScenarioSchema::
+    trauma_sets ()
     {
-      return this->patient_states_.get ();
-    }
-
-    void ScenarioSchema::
-    patient_states (const patient_states_type& x)
-    {
-      this->patient_states_.set (x);
+      return this->trauma_sets_.get ();
     }
 
     void ScenarioSchema::
-    patient_states (::std::unique_ptr< patient_states_type > x)
+    trauma_sets (const trauma_sets_type& x)
     {
-      this->patient_states_.set (std::move (x));
+      this->trauma_sets_.set (x);
+    }
+
+    void ScenarioSchema::
+    trauma_sets (::std::unique_ptr< trauma_sets_type > x)
+    {
+      this->trauma_sets_.set (std::move (x));
     }
 
     const ScenarioSchema::syllabus_type& ScenarioSchema::
@@ -237,17 +237,17 @@ namespace pfc
 
     ScenarioSchema::
     ScenarioSchema (const equipment_type& equipment,
-                    const conditions_type& conditions,
+                    const trauma_definitions_type& trauma_definitions,
                     const treatment_plans_type& treatment_plans,
-                    const patient_states_type& patient_states,
+                    const trauma_sets_type& trauma_sets,
                     const syllabus_type& syllabus,
                     const medical_scenario_type& medical_scenario,
                     const works_cited_type& works_cited)
     : ::xml_schema::type (),
       equipment_ (equipment, this),
-      conditions_ (conditions, this),
+      trauma_definitions_ (trauma_definitions, this),
       treatment_plans_ (treatment_plans, this),
-      patient_states_ (patient_states, this),
+      trauma_sets_ (trauma_sets, this),
       syllabus_ (syllabus, this),
       medical_scenario_ (medical_scenario, this),
       works_cited_ (works_cited, this)
@@ -256,17 +256,17 @@ namespace pfc
 
     ScenarioSchema::
     ScenarioSchema (::std::unique_ptr< equipment_type > equipment,
-                    ::std::unique_ptr< conditions_type > conditions,
+                    ::std::unique_ptr< trauma_definitions_type > trauma_definitions,
                     ::std::unique_ptr< treatment_plans_type > treatment_plans,
-                    ::std::unique_ptr< patient_states_type > patient_states,
+                    ::std::unique_ptr< trauma_sets_type > trauma_sets,
                     ::std::unique_ptr< syllabus_type > syllabus,
                     ::std::unique_ptr< medical_scenario_type > medical_scenario,
                     ::std::unique_ptr< works_cited_type > works_cited)
     : ::xml_schema::type (),
       equipment_ (std::move (equipment), this),
-      conditions_ (std::move (conditions), this),
+      trauma_definitions_ (std::move (trauma_definitions), this),
       treatment_plans_ (std::move (treatment_plans), this),
-      patient_states_ (std::move (patient_states), this),
+      trauma_sets_ (std::move (trauma_sets), this),
       syllabus_ (std::move (syllabus), this),
       medical_scenario_ (std::move (medical_scenario), this),
       works_cited_ (std::move (works_cited), this)
@@ -279,9 +279,9 @@ namespace pfc
                     ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
       equipment_ (x.equipment_, f, this),
-      conditions_ (x.conditions_, f, this),
+      trauma_definitions_ (x.trauma_definitions_, f, this),
       treatment_plans_ (x.treatment_plans_, f, this),
-      patient_states_ (x.patient_states_, f, this),
+      trauma_sets_ (x.trauma_sets_, f, this),
       syllabus_ (x.syllabus_, f, this),
       medical_scenario_ (x.medical_scenario_, f, this),
       works_cited_ (x.works_cited_, f, this)
@@ -294,9 +294,9 @@ namespace pfc
                     ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
       equipment_ (this),
-      conditions_ (this),
+      trauma_definitions_ (this),
       treatment_plans_ (this),
-      patient_states_ (this),
+      trauma_sets_ (this),
       syllabus_ (this),
       medical_scenario_ (this),
       works_cited_ (this)
@@ -346,29 +346,29 @@ namespace pfc
           }
         }
 
-        // conditions
+        // trauma-definitions
         //
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
-              "conditions",
+              "trauma-definitions",
               "",
-              &::xsd::cxx::tree::factory_impl< conditions_type >,
+              &::xsd::cxx::tree::factory_impl< trauma_definitions_type >,
               false, false, i, n, f, this));
 
           if (tmp.get () != 0)
           {
-            if (!conditions_.present ())
+            if (!trauma_definitions_.present ())
             {
-              ::std::unique_ptr< conditions_type > r (
-                dynamic_cast< conditions_type* > (tmp.get ()));
+              ::std::unique_ptr< trauma_definitions_type > r (
+                dynamic_cast< trauma_definitions_type* > (tmp.get ()));
 
               if (r.get ())
                 tmp.release ();
               else
                 throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->conditions_.set (::std::move (r));
+              this->trauma_definitions_.set (::std::move (r));
               continue;
             }
           }
@@ -402,29 +402,29 @@ namespace pfc
           }
         }
 
-        // patient-states
+        // trauma-sets
         //
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
-              "patient-states",
+              "trauma-sets",
               "",
-              &::xsd::cxx::tree::factory_impl< patient_states_type >,
+              &::xsd::cxx::tree::factory_impl< trauma_sets_type >,
               false, false, i, n, f, this));
 
           if (tmp.get () != 0)
           {
-            if (!patient_states_.present ())
+            if (!trauma_sets_.present ())
             {
-              ::std::unique_ptr< patient_states_type > r (
-                dynamic_cast< patient_states_type* > (tmp.get ()));
+              ::std::unique_ptr< trauma_sets_type > r (
+                dynamic_cast< trauma_sets_type* > (tmp.get ()));
 
               if (r.get ())
                 tmp.release ();
               else
                 throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->patient_states_.set (::std::move (r));
+              this->trauma_sets_.set (::std::move (r));
               continue;
             }
           }
@@ -524,10 +524,10 @@ namespace pfc
           "");
       }
 
-      if (!conditions_.present ())
+      if (!trauma_definitions_.present ())
       {
         throw ::xsd::cxx::tree::expected_element< char > (
-          "conditions",
+          "trauma-definitions",
           "");
       }
 
@@ -538,10 +538,10 @@ namespace pfc
           "");
       }
 
-      if (!patient_states_.present ())
+      if (!trauma_sets_.present ())
       {
         throw ::xsd::cxx::tree::expected_element< char > (
-          "patient-states",
+          "trauma-sets",
           "");
       }
 
@@ -581,9 +581,9 @@ namespace pfc
       {
         static_cast< ::xml_schema::type& > (*this) = x;
         this->equipment_ = x.equipment_;
-        this->conditions_ = x.conditions_;
+        this->trauma_definitions_ = x.trauma_definitions_;
         this->treatment_plans_ = x.treatment_plans_;
-        this->patient_states_ = x.patient_states_;
+        this->trauma_sets_ = x.trauma_sets_;
         this->syllabus_ = x.syllabus_;
         this->medical_scenario_ = x.medical_scenario_;
         this->works_cited_ = x.works_cited_;
@@ -635,8 +635,8 @@ namespace pfc
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-        o << ::std::endl << "conditions: ";
-        om.insert (o, i.conditions ());
+        o << ::std::endl << "trauma-definitions: ";
+        om.insert (o, i.trauma_definitions ());
       }
 
       {
@@ -651,8 +651,8 @@ namespace pfc
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-        o << ::std::endl << "patient-states: ";
-        om.insert (o, i.patient_states ());
+        o << ::std::endl << "trauma-sets: ";
+        om.insert (o, i.trauma_sets ());
       }
 
       {
@@ -1032,25 +1032,25 @@ namespace pfc
             false, false, e, x);
       }
 
-      // conditions
+      // trauma-definitions
       //
       {
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const ScenarioSchema::conditions_type& x (i.conditions ());
-        if (typeid (ScenarioSchema::conditions_type) == typeid (x))
+        const ScenarioSchema::trauma_definitions_type& x (i.trauma_definitions ());
+        if (typeid (ScenarioSchema::trauma_definitions_type) == typeid (x))
         {
           ::xercesc::DOMElement& s (
             ::xsd::cxx::xml::dom::create_element (
-              "conditions",
+              "trauma-definitions",
               e));
 
           s << x;
         }
         else
           tsm.serialize (
-            "conditions",
+            "trauma-definitions",
             "",
             false, false, e, x);
       }
@@ -1078,25 +1078,25 @@ namespace pfc
             false, false, e, x);
       }
 
-      // patient-states
+      // trauma-sets
       //
       {
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const ScenarioSchema::patient_states_type& x (i.patient_states ());
-        if (typeid (ScenarioSchema::patient_states_type) == typeid (x))
+        const ScenarioSchema::trauma_sets_type& x (i.trauma_sets ());
+        if (typeid (ScenarioSchema::trauma_sets_type) == typeid (x))
         {
           ::xercesc::DOMElement& s (
             ::xsd::cxx::xml::dom::create_element (
-              "patient-states",
+              "trauma-sets",
               e));
 
           s << x;
         }
         else
           tsm.serialize (
-            "patient-states",
+            "trauma-sets",
             "",
             false, false, e, x);
       }

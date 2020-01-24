@@ -270,20 +270,25 @@ void Serializer::generate_pfc_stream(SQLite3Driver* driver)
   }
   //Step 2 <conditions>
   for (auto& injury : driver->get_injuries()) {
-    pfc_scenario.conditions().injury().push_back(PFC::make_injury(injury.get()));
+    pfc_scenario.trauma_definitions().trauma().push_back(PFC::make_trauma(injury.get()));
   }
 
-  //Populate <treatment-plans>
+  //Populate <treatment_plans>
   for (auto& treatment : driver->get_treatments()) {
     pfc_scenario.treatment_plans().treatment_plan().push_back(PFC::make_treatment_plan(treatment.get()));
   }
 
-  //TODO: Populate <patient-states>
-
+  //: Populate <trauma_sets>
+  for (auto& trauma : driver->get_injury_sets()) {
+    pfc_scenario.trauma_sets().trauma_profile().push_back(PFC::make_trauma_profile(trauma.get()));
+  }
   //Populate <syllabus>
   //Populate <syllabus><learning_objective>
   for (auto& objective : driver->get_objectives()) {
     pfc_scenario.syllabus().learning_objectives().objective().push_back(PFC::make_learning_objective(objective.get()));
+  }
+  for (auto& assessment : driver->get_assessments()) {
+    pfc_scenario.syllabus().learning_assessments().assessment().push_back(PFC::make_assessment(assessment.get()));
   }
 
   //Begin  <medical-scenario>

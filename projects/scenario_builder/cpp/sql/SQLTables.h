@@ -95,6 +95,7 @@ struct Assessment : public QObject {
   Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString description MEMBER description)
   Q_PROPERTY(QString type MEMBER type)
+  Q_PROPERTY(QString objective MEMBER objective)
   Q_PROPERTY(int available_points MEMBER available_points)
   Q_PROPERTY(QString criteria MEMBER criteria)
 public:
@@ -102,6 +103,7 @@ public:
   QString name = "";
   QString description = "";
   QString type = "";
+  QString objective = ""; // Forign Key to Objective this Assesses
   int32_t available_points = -1;
   QString criteria = "";
   Assessment(QObject* parent = nullptr)
@@ -120,6 +122,7 @@ public:
       && name == rhs.name
       && description == rhs.description
       && type == rhs.type
+      && objective == rhs.objective
       && available_points == rhs.available_points
       && criteria == rhs.criteria;
   }
@@ -134,6 +137,7 @@ public:
     description = rhs.description;
     type = rhs.type;
     available_points = rhs.available_points;
+    objective = rhs.objective;
     criteria = rhs.criteria;
   }
 };
@@ -302,6 +306,8 @@ struct InjurySet : public QObject {
   Q_PROPERTY(QString injuries MEMBER injuries)
   Q_PROPERTY(QString locations MEMBER locations)
   Q_PROPERTY(QString severities MEMBER severities)
+  Q_PROPERTY(QString physiology_file MEMBER physiology_file)
+  Q_PROPERTY(QString treatments MEMBER treatments)
 
 public:
   int32_t id = -1;
@@ -310,6 +316,8 @@ public:
   QString injuries = "";
   QString locations = "";
   QString severities = "";
+  QString physiology_file = "";
+  QString treatments = "";
 
   InjurySet(QObject* parent = nullptr)
     : QObject(parent)
@@ -328,7 +336,9 @@ public:
       && description == rhs.description
       && injuries == rhs.injuries
       && locations == rhs.locations
-      && severities == rhs.severities;
+      && severities == rhs.severities
+      && physiology_file == rhs.physiology_file
+      && treatments == rhs.treatments;
   }
   bool operator!=(const InjurySet& rhs) const
   {
@@ -342,6 +352,8 @@ public:
     injuries = rhs.injuries;
     locations = rhs.locations;
     severities = rhs.severities;
+    physiology_file = rhs.physiology_file;
+    treatments = rhs.treatments;
   }
 };
 //----End Injury Set

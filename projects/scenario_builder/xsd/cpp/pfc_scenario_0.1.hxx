@@ -305,22 +305,22 @@ namespace pfc
       void
       equipment (::std::unique_ptr< equipment_type > p);
 
-      // conditions
+      // trauma-definitions
       //
-      typedef ::pfc::schema::injury_definition_list conditions_type;
-      typedef ::xsd::cxx::tree::traits< conditions_type, char > conditions_traits;
+      typedef ::pfc::schema::trauma_definition_list trauma_definitions_type;
+      typedef ::xsd::cxx::tree::traits< trauma_definitions_type, char > trauma_definitions_traits;
 
-      const conditions_type&
-      conditions () const;
+      const trauma_definitions_type&
+      trauma_definitions () const;
 
-      conditions_type&
-      conditions ();
-
-      void
-      conditions (const conditions_type& x);
+      trauma_definitions_type&
+      trauma_definitions ();
 
       void
-      conditions (::std::unique_ptr< conditions_type > p);
+      trauma_definitions (const trauma_definitions_type& x);
+
+      void
+      trauma_definitions (::std::unique_ptr< trauma_definitions_type > p);
 
       // treatment-plans
       //
@@ -339,22 +339,22 @@ namespace pfc
       void
       treatment_plans (::std::unique_ptr< treatment_plans_type > p);
 
-      // patient-states
+      // trauma-sets
       //
-      typedef ::pfc::schema::injury_profile_list patient_states_type;
-      typedef ::xsd::cxx::tree::traits< patient_states_type, char > patient_states_traits;
+      typedef ::pfc::schema::trauma_profile_list trauma_sets_type;
+      typedef ::xsd::cxx::tree::traits< trauma_sets_type, char > trauma_sets_traits;
 
-      const patient_states_type&
-      patient_states () const;
+      const trauma_sets_type&
+      trauma_sets () const;
 
-      patient_states_type&
-      patient_states ();
-
-      void
-      patient_states (const patient_states_type& x);
+      trauma_sets_type&
+      trauma_sets ();
 
       void
-      patient_states (::std::unique_ptr< patient_states_type > p);
+      trauma_sets (const trauma_sets_type& x);
+
+      void
+      trauma_sets (::std::unique_ptr< trauma_sets_type > p);
 
       // syllabus
       //
@@ -410,17 +410,17 @@ namespace pfc
       // Constructors.
       //
       ScenarioSchema (const equipment_type&,
-                      const conditions_type&,
+                      const trauma_definitions_type&,
                       const treatment_plans_type&,
-                      const patient_states_type&,
+                      const trauma_sets_type&,
                       const syllabus_type&,
                       const medical_scenario_type&,
                       const works_cited_type&);
 
       ScenarioSchema (::std::unique_ptr< equipment_type >,
-                      ::std::unique_ptr< conditions_type >,
+                      ::std::unique_ptr< trauma_definitions_type >,
                       ::std::unique_ptr< treatment_plans_type >,
-                      ::std::unique_ptr< patient_states_type >,
+                      ::std::unique_ptr< trauma_sets_type >,
                       ::std::unique_ptr< syllabus_type >,
                       ::std::unique_ptr< medical_scenario_type >,
                       ::std::unique_ptr< works_cited_type >);
@@ -452,9 +452,9 @@ namespace pfc
 
       protected:
       ::xsd::cxx::tree::one< equipment_type > equipment_;
-      ::xsd::cxx::tree::one< conditions_type > conditions_;
+      ::xsd::cxx::tree::one< trauma_definitions_type > trauma_definitions_;
       ::xsd::cxx::tree::one< treatment_plans_type > treatment_plans_;
-      ::xsd::cxx::tree::one< patient_states_type > patient_states_;
+      ::xsd::cxx::tree::one< trauma_sets_type > trauma_sets_;
       ::xsd::cxx::tree::one< syllabus_type > syllabus_;
       ::xsd::cxx::tree::one< medical_scenario_type > medical_scenario_;
       ::xsd::cxx::tree::one< works_cited_type > works_cited_;

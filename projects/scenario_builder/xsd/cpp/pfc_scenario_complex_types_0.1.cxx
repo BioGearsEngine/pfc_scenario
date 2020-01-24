@@ -244,240 +244,240 @@ namespace pfc
     }
 
 
-    // injury_definition_list
+    // trauma_definition_list
     // 
 
-    const injury_definition_list::injury_sequence& injury_definition_list::
-    injury () const
+    const trauma_definition_list::trauma_sequence& trauma_definition_list::
+    trauma () const
     {
-      return this->injury_;
+      return this->trauma_;
     }
 
-    injury_definition_list::injury_sequence& injury_definition_list::
-    injury ()
+    trauma_definition_list::trauma_sequence& trauma_definition_list::
+    trauma ()
     {
-      return this->injury_;
+      return this->trauma_;
     }
 
-    void injury_definition_list::
-    injury (const injury_sequence& s)
+    void trauma_definition_list::
+    trauma (const trauma_sequence& s)
     {
-      this->injury_ = s;
+      this->trauma_ = s;
     }
 
 
-    // injury
+    // trauma
     // 
 
-    const injury::id_type& injury::
+    const trauma::id_type& trauma::
     id () const
     {
       return this->id_.get ();
     }
 
-    injury::id_type& injury::
+    trauma::id_type& trauma::
     id ()
     {
       return this->id_.get ();
     }
 
-    void injury::
+    void trauma::
     id (const id_type& x)
     {
       this->id_.set (x);
     }
 
-    void injury::
+    void trauma::
     id (::std::unique_ptr< id_type > x)
     {
       this->id_.set (std::move (x));
     }
 
-    const injury::common_name_optional& injury::
+    const trauma::common_name_optional& trauma::
     common_name () const
     {
       return this->common_name_;
     }
 
-    injury::common_name_optional& injury::
+    trauma::common_name_optional& trauma::
     common_name ()
     {
       return this->common_name_;
     }
 
-    void injury::
+    void trauma::
     common_name (const common_name_type& x)
     {
       this->common_name_.set (x);
     }
 
-    void injury::
+    void trauma::
     common_name (const common_name_optional& x)
     {
       this->common_name_ = x;
     }
 
-    void injury::
+    void trauma::
     common_name (::std::unique_ptr< common_name_type > x)
     {
       this->common_name_.set (std::move (x));
     }
 
-    const injury::medical_name_type& injury::
+    const trauma::medical_name_type& trauma::
     medical_name () const
     {
       return this->medical_name_.get ();
     }
 
-    injury::medical_name_type& injury::
+    trauma::medical_name_type& trauma::
     medical_name ()
     {
       return this->medical_name_.get ();
     }
 
-    void injury::
+    void trauma::
     medical_name (const medical_name_type& x)
     {
       this->medical_name_.set (x);
     }
 
-    void injury::
+    void trauma::
     medical_name (::std::unique_ptr< medical_name_type > x)
     {
       this->medical_name_.set (std::move (x));
     }
 
-    const injury::citations_type& injury::
+    const trauma::citations_type& trauma::
     citations () const
     {
       return this->citations_.get ();
     }
 
-    injury::citations_type& injury::
+    trauma::citations_type& trauma::
     citations ()
     {
       return this->citations_.get ();
     }
 
-    void injury::
+    void trauma::
     citations (const citations_type& x)
     {
       this->citations_.set (x);
     }
 
-    void injury::
+    void trauma::
     citations (::std::unique_ptr< citations_type > x)
     {
       this->citations_.set (std::move (x));
     }
 
-    const injury::description_type& injury::
+    const trauma::description_type& trauma::
     description () const
     {
       return this->description_.get ();
     }
 
-    injury::description_type& injury::
+    trauma::description_type& trauma::
     description ()
     {
       return this->description_.get ();
     }
 
-    void injury::
+    void trauma::
     description (const description_type& x)
     {
       this->description_.set (x);
     }
 
-    void injury::
+    void trauma::
     description (::std::unique_ptr< description_type > x)
     {
       this->description_.set (std::move (x));
     }
 
-    const injury::severity_range_type& injury::
+    const trauma::severity_range_type& trauma::
     severity_range () const
     {
       return this->severity_range_.get ();
     }
 
-    injury::severity_range_type& injury::
+    trauma::severity_range_type& trauma::
     severity_range ()
     {
       return this->severity_range_.get ();
     }
 
-    void injury::
+    void trauma::
     severity_range (const severity_range_type& x)
     {
       this->severity_range_.set (x);
     }
 
-    void injury::
+    void trauma::
     severity_range (::std::unique_ptr< severity_range_type > x)
     {
       this->severity_range_.set (std::move (x));
     }
 
 
-    // injury_severity_range
+    // trauma_severity_range
     // 
 
-    const injury_severity_range::numeric_range_optional& injury_severity_range::
+    const trauma_severity_range::numeric_range_optional& trauma_severity_range::
     numeric_range () const
     {
       return this->numeric_range_;
     }
 
-    injury_severity_range::numeric_range_optional& injury_severity_range::
+    trauma_severity_range::numeric_range_optional& trauma_severity_range::
     numeric_range ()
     {
       return this->numeric_range_;
     }
 
-    void injury_severity_range::
+    void trauma_severity_range::
     numeric_range (const numeric_range_type& x)
     {
       this->numeric_range_.set (x);
     }
 
-    void injury_severity_range::
+    void trauma_severity_range::
     numeric_range (const numeric_range_optional& x)
     {
       this->numeric_range_ = x;
     }
 
-    void injury_severity_range::
+    void trauma_severity_range::
     numeric_range (::std::unique_ptr< numeric_range_type > x)
     {
       this->numeric_range_.set (std::move (x));
     }
 
-    const injury_severity_range::token_range_optional& injury_severity_range::
+    const trauma_severity_range::token_range_optional& trauma_severity_range::
     token_range () const
     {
       return this->token_range_;
     }
 
-    injury_severity_range::token_range_optional& injury_severity_range::
+    trauma_severity_range::token_range_optional& trauma_severity_range::
     token_range ()
     {
       return this->token_range_;
     }
 
-    void injury_severity_range::
+    void trauma_severity_range::
     token_range (const token_range_type& x)
     {
       this->token_range_.set (x);
     }
 
-    void injury_severity_range::
+    void trauma_severity_range::
     token_range (const token_range_optional& x)
     {
       this->token_range_ = x;
     }
 
-    void injury_severity_range::
+    void trauma_severity_range::
     token_range (::std::unique_ptr< token_range_type > x)
     {
       this->token_range_.set (std::move (x));
@@ -1012,268 +1012,296 @@ namespace pfc
     }
 
 
-    // injury_profile_list
+    // trauma_profile_list
     // 
 
-    const injury_profile_list::injury_profile_sequence& injury_profile_list::
-    injury_profile () const
+    const trauma_profile_list::trauma_profile_sequence& trauma_profile_list::
+    trauma_profile () const
     {
-      return this->injury_profile_;
+      return this->trauma_profile_;
     }
 
-    injury_profile_list::injury_profile_sequence& injury_profile_list::
-    injury_profile ()
+    trauma_profile_list::trauma_profile_sequence& trauma_profile_list::
+    trauma_profile ()
     {
-      return this->injury_profile_;
+      return this->trauma_profile_;
     }
 
-    void injury_profile_list::
-    injury_profile (const injury_profile_sequence& s)
+    void trauma_profile_list::
+    trauma_profile (const trauma_profile_sequence& s)
     {
-      this->injury_profile_ = s;
+      this->trauma_profile_ = s;
     }
 
 
-    // injury_profile
+    // trauma_profile
     // 
 
-    const injury_profile::id_type& injury_profile::
+    const trauma_profile::id_type& trauma_profile::
     id () const
     {
       return this->id_.get ();
     }
 
-    injury_profile::id_type& injury_profile::
+    trauma_profile::id_type& trauma_profile::
     id ()
     {
       return this->id_.get ();
     }
 
-    void injury_profile::
+    void trauma_profile::
     id (const id_type& x)
     {
       this->id_.set (x);
     }
 
-    void injury_profile::
+    void trauma_profile::
     id (::std::unique_ptr< id_type > x)
     {
       this->id_.set (std::move (x));
     }
 
-    const injury_profile::name_type& injury_profile::
+    const trauma_profile::name_type& trauma_profile::
     name () const
     {
       return this->name_.get ();
     }
 
-    injury_profile::name_type& injury_profile::
+    trauma_profile::name_type& trauma_profile::
     name ()
     {
       return this->name_.get ();
     }
 
-    void injury_profile::
+    void trauma_profile::
     name (const name_type& x)
     {
       this->name_.set (x);
     }
 
-    void injury_profile::
+    void trauma_profile::
     name (::std::unique_ptr< name_type > x)
     {
       this->name_.set (std::move (x));
     }
 
-    const injury_profile::physiology_state_optional& injury_profile::
+    const trauma_profile::physiology_state_optional& trauma_profile::
     physiology_state () const
     {
       return this->physiology_state_;
     }
 
-    injury_profile::physiology_state_optional& injury_profile::
+    trauma_profile::physiology_state_optional& trauma_profile::
     physiology_state ()
     {
       return this->physiology_state_;
     }
 
-    void injury_profile::
+    void trauma_profile::
     physiology_state (const physiology_state_type& x)
     {
       this->physiology_state_.set (x);
     }
 
-    void injury_profile::
+    void trauma_profile::
     physiology_state (const physiology_state_optional& x)
     {
       this->physiology_state_ = x;
     }
 
-    void injury_profile::
+    void trauma_profile::
     physiology_state (::std::unique_ptr< physiology_state_type > x)
     {
       this->physiology_state_.set (std::move (x));
     }
 
-    const injury_profile::injuries_sequence& injury_profile::
+    const trauma_profile::injuries_type& trauma_profile::
     injuries () const
     {
-      return this->injuries_;
+      return this->injuries_.get ();
     }
 
-    injury_profile::injuries_sequence& injury_profile::
+    trauma_profile::injuries_type& trauma_profile::
     injuries ()
     {
-      return this->injuries_;
+      return this->injuries_.get ();
     }
 
-    void injury_profile::
-    injuries (const injuries_sequence& s)
+    void trauma_profile::
+    injuries (const injuries_type& x)
     {
-      this->injuries_ = s;
+      this->injuries_.set (x);
     }
 
-    const injury_profile::treatments_type& injury_profile::
+    void trauma_profile::
+    injuries (::std::unique_ptr< injuries_type > x)
+    {
+      this->injuries_.set (std::move (x));
+    }
+
+    const trauma_profile::treatments_type& trauma_profile::
     treatments () const
     {
       return this->treatments_.get ();
     }
 
-    injury_profile::treatments_type& injury_profile::
+    trauma_profile::treatments_type& trauma_profile::
     treatments ()
     {
       return this->treatments_.get ();
     }
 
-    void injury_profile::
+    void trauma_profile::
     treatments (const treatments_type& x)
     {
       this->treatments_.set (x);
     }
 
-    void injury_profile::
+    void trauma_profile::
     treatments (::std::unique_ptr< treatments_type > x)
     {
       this->treatments_.set (std::move (x));
     }
 
 
-    // injury_profile_ref_list
+    // trauma_profile_ref_list
     // 
 
-    const injury_profile_ref_list::injury_profile_sequence& injury_profile_ref_list::
-    injury_profile () const
+    const trauma_profile_ref_list::trauma_profile_sequence& trauma_profile_ref_list::
+    trauma_profile () const
     {
-      return this->injury_profile_;
+      return this->trauma_profile_;
     }
 
-    injury_profile_ref_list::injury_profile_sequence& injury_profile_ref_list::
-    injury_profile ()
+    trauma_profile_ref_list::trauma_profile_sequence& trauma_profile_ref_list::
+    trauma_profile ()
     {
-      return this->injury_profile_;
+      return this->trauma_profile_;
     }
 
-    void injury_profile_ref_list::
-    injury_profile (const injury_profile_sequence& s)
+    void trauma_profile_ref_list::
+    trauma_profile (const trauma_profile_sequence& s)
     {
-      this->injury_profile_ = s;
+      this->trauma_profile_ = s;
     }
 
 
-    // injury_occurance_list
+    // trauma_occurence_list
     // 
 
-    const injury_occurance_list::id_type& injury_occurance_list::
+    const trauma_occurence_list::trauma_sequence& trauma_occurence_list::
+    trauma () const
+    {
+      return this->trauma_;
+    }
+
+    trauma_occurence_list::trauma_sequence& trauma_occurence_list::
+    trauma ()
+    {
+      return this->trauma_;
+    }
+
+    void trauma_occurence_list::
+    trauma (const trauma_sequence& s)
+    {
+      this->trauma_ = s;
+    }
+
+
+    // trauma_occurence
+    // 
+
+    const trauma_occurence::id_type& trauma_occurence::
     id () const
     {
       return this->id_.get ();
     }
 
-    injury_occurance_list::id_type& injury_occurance_list::
+    trauma_occurence::id_type& trauma_occurence::
     id ()
     {
       return this->id_.get ();
     }
 
-    void injury_occurance_list::
+    void trauma_occurence::
     id (const id_type& x)
     {
       this->id_.set (x);
     }
 
-    void injury_occurance_list::
+    void trauma_occurence::
     id (::std::unique_ptr< id_type > x)
     {
       this->id_.set (std::move (x));
     }
 
-    const injury_occurance_list::location_type& injury_occurance_list::
+    const trauma_occurence::location_type& trauma_occurence::
     location () const
     {
       return this->location_.get ();
     }
 
-    injury_occurance_list::location_type& injury_occurance_list::
+    trauma_occurence::location_type& trauma_occurence::
     location ()
     {
       return this->location_.get ();
     }
 
-    void injury_occurance_list::
+    void trauma_occurence::
     location (const location_type& x)
     {
       this->location_.set (x);
     }
 
-    void injury_occurance_list::
+    void trauma_occurence::
     location (::std::unique_ptr< location_type > x)
     {
       this->location_.set (std::move (x));
     }
 
-    const injury_occurance_list::description_type& injury_occurance_list::
+    const trauma_occurence::description_type& trauma_occurence::
     description () const
     {
       return this->description_.get ();
     }
 
-    injury_occurance_list::description_type& injury_occurance_list::
+    trauma_occurence::description_type& trauma_occurence::
     description ()
     {
       return this->description_.get ();
     }
 
-    void injury_occurance_list::
+    void trauma_occurence::
     description (const description_type& x)
     {
       this->description_.set (x);
     }
 
-    void injury_occurance_list::
+    void trauma_occurence::
     description (::std::unique_ptr< description_type > x)
     {
       this->description_.set (std::move (x));
     }
 
-    const injury_occurance_list::severity_type& injury_occurance_list::
+    const trauma_occurence::severity_type& trauma_occurence::
     severity () const
     {
       return this->severity_.get ();
     }
 
-    injury_occurance_list::severity_type& injury_occurance_list::
+    trauma_occurence::severity_type& trauma_occurence::
     severity ()
     {
       return this->severity_.get ();
     }
 
-    void injury_occurance_list::
+    void trauma_occurence::
     severity (const severity_type& x)
     {
       this->severity_.set (x);
     }
 
-    void injury_occurance_list::
+    void trauma_occurence::
     severity (::std::unique_ptr< severity_type > x)
     {
       this->severity_.set (std::move (x));
@@ -1575,6 +1603,54 @@ namespace pfc
       this->objective_id_.set (std::move (x));
     }
 
+    const assessment::name_type& assessment::
+    name () const
+    {
+      return this->name_.get ();
+    }
+
+    assessment::name_type& assessment::
+    name ()
+    {
+      return this->name_.get ();
+    }
+
+    void assessment::
+    name (const name_type& x)
+    {
+      this->name_.set (x);
+    }
+
+    void assessment::
+    name (::std::unique_ptr< name_type > x)
+    {
+      this->name_.set (std::move (x));
+    }
+
+    const assessment::description_type& assessment::
+    description () const
+    {
+      return this->description_.get ();
+    }
+
+    assessment::description_type& assessment::
+    description ()
+    {
+      return this->description_.get ();
+    }
+
+    void assessment::
+    description (const description_type& x)
+    {
+      this->description_.set (x);
+    }
+
+    void assessment::
+    description (::std::unique_ptr< description_type > x)
+    {
+      this->description_.set (std::move (x));
+    }
+
     const assessment::points_avaiable_type& assessment::
     points_avaiable () const
     {
@@ -1791,34 +1867,34 @@ namespace pfc
       this->unit_id_.set (std::move (x));
     }
 
-    const role::injury_profile_id_optional& role::
-    injury_profile_id () const
+    const role::trauma_profile_id_optional& role::
+    trauma_profile_id () const
     {
-      return this->injury_profile_id_;
+      return this->trauma_profile_id_;
     }
 
-    role::injury_profile_id_optional& role::
-    injury_profile_id ()
+    role::trauma_profile_id_optional& role::
+    trauma_profile_id ()
     {
-      return this->injury_profile_id_;
-    }
-
-    void role::
-    injury_profile_id (const injury_profile_id_type& x)
-    {
-      this->injury_profile_id_.set (x);
+      return this->trauma_profile_id_;
     }
 
     void role::
-    injury_profile_id (const injury_profile_id_optional& x)
+    trauma_profile_id (const trauma_profile_id_type& x)
     {
-      this->injury_profile_id_ = x;
+      this->trauma_profile_id_.set (x);
     }
 
     void role::
-    injury_profile_id (::std::unique_ptr< injury_profile_id_type > x)
+    trauma_profile_id (const trauma_profile_id_optional& x)
     {
-      this->injury_profile_id_.set (std::move (x));
+      this->trauma_profile_id_ = x;
+    }
+
+    void role::
+    trauma_profile_id (::std::unique_ptr< trauma_profile_id_type > x)
+    {
+      this->trauma_profile_id_.set (std::move (x));
     }
 
     const role::description_type& role::
@@ -2573,28 +2649,28 @@ namespace pfc
       this->treatment_plans_.set (std::move (x));
     }
 
-    const relates_to::injury_profiles_type& relates_to::
-    injury_profiles () const
+    const relates_to::trauma_profiles_type& relates_to::
+    trauma_profiles () const
     {
-      return this->injury_profiles_.get ();
+      return this->trauma_profiles_.get ();
     }
 
-    relates_to::injury_profiles_type& relates_to::
-    injury_profiles ()
+    relates_to::trauma_profiles_type& relates_to::
+    trauma_profiles ()
     {
-      return this->injury_profiles_.get ();
-    }
-
-    void relates_to::
-    injury_profiles (const injury_profiles_type& x)
-    {
-      this->injury_profiles_.set (x);
+      return this->trauma_profiles_.get ();
     }
 
     void relates_to::
-    injury_profiles (::std::unique_ptr< injury_profiles_type > x)
+    trauma_profiles (const trauma_profiles_type& x)
     {
-      this->injury_profiles_.set (std::move (x));
+      this->trauma_profiles_.set (x);
+    }
+
+    void relates_to::
+    trauma_profiles (::std::unique_ptr< trauma_profiles_type > x)
+    {
+      this->trauma_profiles_.set (std::move (x));
     }
   }
 }
@@ -3069,31 +3145,31 @@ namespace pfc
       "equipment",
       "com:ara:pfc:training:1");
 
-    // injury_definition_list
+    // trauma_definition_list
     //
 
-    injury_definition_list::
-    injury_definition_list ()
+    trauma_definition_list::
+    trauma_definition_list ()
     : ::xml_schema::type (),
-      injury_ (this)
+      trauma_ (this)
     {
     }
 
-    injury_definition_list::
-    injury_definition_list (const injury_definition_list& x,
+    trauma_definition_list::
+    trauma_definition_list (const trauma_definition_list& x,
                             ::xml_schema::flags f,
                             ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
-      injury_ (x.injury_, f, this)
+      trauma_ (x.trauma_, f, this)
     {
     }
 
-    injury_definition_list::
-    injury_definition_list (const ::xercesc::DOMElement& e,
+    trauma_definition_list::
+    trauma_definition_list (const ::xercesc::DOMElement& e,
                             ::xml_schema::flags f,
                             ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
-      injury_ (this)
+      trauma_ (this)
     {
       if ((f & ::xml_schema::flags::base) == 0)
       {
@@ -3102,7 +3178,7 @@ namespace pfc
       }
     }
 
-    void injury_definition_list::
+    void trauma_definition_list::
     parse (::xsd::cxx::xml::dom::parser< char >& p,
            ::xml_schema::flags f)
     {
@@ -3112,27 +3188,27 @@ namespace pfc
         const ::xsd::cxx::xml::qualified_name< char > n (
           ::xsd::cxx::xml::dom::name< char > (i));
 
-        // injury
+        // trauma
         //
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
-              "injury",
+              "trauma",
               "",
-              &::xsd::cxx::tree::factory_impl< injury_type >,
+              &::xsd::cxx::tree::factory_impl< trauma_type >,
               false, false, i, n, f, this));
 
           if (tmp.get () != 0)
           {
-            ::std::unique_ptr< injury_type > r (
-              dynamic_cast< injury_type* > (tmp.get ()));
+            ::std::unique_ptr< trauma_type > r (
+              dynamic_cast< trauma_type* > (tmp.get ()));
 
             if (r.get ())
               tmp.release ();
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->injury_.push_back (::std::move (r));
+            this->trauma_.push_back (::std::move (r));
             continue;
           }
         }
@@ -3141,41 +3217,41 @@ namespace pfc
       }
     }
 
-    injury_definition_list* injury_definition_list::
+    trauma_definition_list* trauma_definition_list::
     _clone (::xml_schema::flags f,
             ::xml_schema::container* c) const
     {
-      return new class injury_definition_list (*this, f, c);
+      return new class trauma_definition_list (*this, f, c);
     }
 
-    injury_definition_list& injury_definition_list::
-    operator= (const injury_definition_list& x)
+    trauma_definition_list& trauma_definition_list::
+    operator= (const trauma_definition_list& x)
     {
       if (this != &x)
       {
         static_cast< ::xml_schema::type& > (*this) = x;
-        this->injury_ = x.injury_;
+        this->trauma_ = x.trauma_;
       }
 
       return *this;
     }
 
-    injury_definition_list::
-    ~injury_definition_list ()
+    trauma_definition_list::
+    ~trauma_definition_list ()
     {
     }
 
     static
-    const ::xsd::cxx::tree::type_factory_initializer< 0, char, injury_definition_list >
-    _xsd_injury_definition_list_type_factory_init (
-      "injury-definition-list",
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, trauma_definition_list >
+    _xsd_trauma_definition_list_type_factory_init (
+      "trauma-definition-list",
       "com:ara:pfc:training:1");
 
-    // injury
+    // trauma
     //
 
-    injury::
-    injury (const id_type& id,
+    trauma::
+    trauma (const id_type& id,
             const medical_name_type& medical_name,
             const citations_type& citations,
             const description_type& description,
@@ -3190,8 +3266,8 @@ namespace pfc
     {
     }
 
-    injury::
-    injury (const id_type& id,
+    trauma::
+    trauma (const id_type& id,
             const medical_name_type& medical_name,
             ::std::unique_ptr< citations_type > citations,
             const description_type& description,
@@ -3206,8 +3282,8 @@ namespace pfc
     {
     }
 
-    injury::
-    injury (::std::unique_ptr< id_type > id,
+    trauma::
+    trauma (::std::unique_ptr< id_type > id,
             ::std::unique_ptr< medical_name_type > medical_name,
             ::std::unique_ptr< citations_type > citations,
             ::std::unique_ptr< description_type > description,
@@ -3222,8 +3298,8 @@ namespace pfc
     {
     }
 
-    injury::
-    injury (const injury& x,
+    trauma::
+    trauma (const trauma& x,
             ::xml_schema::flags f,
             ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
@@ -3236,8 +3312,8 @@ namespace pfc
     {
     }
 
-    injury::
-    injury (const ::xercesc::DOMElement& e,
+    trauma::
+    trauma (const ::xercesc::DOMElement& e,
             ::xml_schema::flags f,
             ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
@@ -3255,7 +3331,7 @@ namespace pfc
       }
     }
 
-    void injury::
+    void trauma::
     parse (::xsd::cxx::xml::dom::parser< char >& p,
            ::xml_schema::flags f)
     {
@@ -3472,15 +3548,15 @@ namespace pfc
       }
     }
 
-    injury* injury::
+    trauma* trauma::
     _clone (::xml_schema::flags f,
             ::xml_schema::container* c) const
     {
-      return new class injury (*this, f, c);
+      return new class trauma (*this, f, c);
     }
 
-    injury& injury::
-    operator= (const injury& x)
+    trauma& trauma::
+    operator= (const trauma& x)
     {
       if (this != &x)
       {
@@ -3496,30 +3572,30 @@ namespace pfc
       return *this;
     }
 
-    injury::
-    ~injury ()
+    trauma::
+    ~trauma ()
     {
     }
 
     static
-    const ::xsd::cxx::tree::type_factory_initializer< 0, char, injury >
-    _xsd_injury_type_factory_init (
-      "injury",
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, trauma >
+    _xsd_trauma_type_factory_init (
+      "trauma",
       "com:ara:pfc:training:1");
 
-    // injury_severity_range
+    // trauma_severity_range
     //
 
-    injury_severity_range::
-    injury_severity_range ()
+    trauma_severity_range::
+    trauma_severity_range ()
     : ::xml_schema::type (),
       numeric_range_ (this),
       token_range_ (this)
     {
     }
 
-    injury_severity_range::
-    injury_severity_range (const injury_severity_range& x,
+    trauma_severity_range::
+    trauma_severity_range (const trauma_severity_range& x,
                            ::xml_schema::flags f,
                            ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
@@ -3528,8 +3604,8 @@ namespace pfc
     {
     }
 
-    injury_severity_range::
-    injury_severity_range (const ::xercesc::DOMElement& e,
+    trauma_severity_range::
+    trauma_severity_range (const ::xercesc::DOMElement& e,
                            ::xml_schema::flags f,
                            ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
@@ -3543,7 +3619,7 @@ namespace pfc
       }
     }
 
-    void injury_severity_range::
+    void trauma_severity_range::
     parse (::xsd::cxx::xml::dom::parser< char >& p,
            ::xml_schema::flags f)
     {
@@ -3613,15 +3689,15 @@ namespace pfc
       }
     }
 
-    injury_severity_range* injury_severity_range::
+    trauma_severity_range* trauma_severity_range::
     _clone (::xml_schema::flags f,
             ::xml_schema::container* c) const
     {
-      return new class injury_severity_range (*this, f, c);
+      return new class trauma_severity_range (*this, f, c);
     }
 
-    injury_severity_range& injury_severity_range::
-    operator= (const injury_severity_range& x)
+    trauma_severity_range& trauma_severity_range::
+    operator= (const trauma_severity_range& x)
     {
       if (this != &x)
       {
@@ -3633,15 +3709,15 @@ namespace pfc
       return *this;
     }
 
-    injury_severity_range::
-    ~injury_severity_range ()
+    trauma_severity_range::
+    ~trauma_severity_range ()
     {
     }
 
     static
-    const ::xsd::cxx::tree::type_factory_initializer< 0, char, injury_severity_range >
-    _xsd_injury_severity_range_type_factory_init (
-      "injury-severity-range",
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, trauma_severity_range >
+    _xsd_trauma_severity_range_type_factory_init (
+      "trauma-severity-range",
       "com:ara:pfc:training:1");
 
     // numeric_range
@@ -5281,31 +5357,31 @@ namespace pfc
       "treatment-plan-ref-list",
       "com:ara:pfc:training:1");
 
-    // injury_profile_list
+    // trauma_profile_list
     //
 
-    injury_profile_list::
-    injury_profile_list ()
+    trauma_profile_list::
+    trauma_profile_list ()
     : ::xml_schema::type (),
-      injury_profile_ (this)
+      trauma_profile_ (this)
     {
     }
 
-    injury_profile_list::
-    injury_profile_list (const injury_profile_list& x,
+    trauma_profile_list::
+    trauma_profile_list (const trauma_profile_list& x,
                          ::xml_schema::flags f,
                          ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
-      injury_profile_ (x.injury_profile_, f, this)
+      trauma_profile_ (x.trauma_profile_, f, this)
     {
     }
 
-    injury_profile_list::
-    injury_profile_list (const ::xercesc::DOMElement& e,
+    trauma_profile_list::
+    trauma_profile_list (const ::xercesc::DOMElement& e,
                          ::xml_schema::flags f,
                          ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
-      injury_profile_ (this)
+      trauma_profile_ (this)
     {
       if ((f & ::xml_schema::flags::base) == 0)
       {
@@ -5314,7 +5390,7 @@ namespace pfc
       }
     }
 
-    void injury_profile_list::
+    void trauma_profile_list::
     parse (::xsd::cxx::xml::dom::parser< char >& p,
            ::xml_schema::flags f)
     {
@@ -5324,27 +5400,27 @@ namespace pfc
         const ::xsd::cxx::xml::qualified_name< char > n (
           ::xsd::cxx::xml::dom::name< char > (i));
 
-        // injury-profile
+        // trauma-profile
         //
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
-              "injury-profile",
+              "trauma-profile",
               "",
-              &::xsd::cxx::tree::factory_impl< injury_profile_type >,
+              &::xsd::cxx::tree::factory_impl< trauma_profile_type >,
               false, false, i, n, f, this));
 
           if (tmp.get () != 0)
           {
-            ::std::unique_ptr< injury_profile_type > r (
-              dynamic_cast< injury_profile_type* > (tmp.get ()));
+            ::std::unique_ptr< trauma_profile_type > r (
+              dynamic_cast< trauma_profile_type* > (tmp.get ()));
 
             if (r.get ())
               tmp.release ();
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->injury_profile_.push_back (::std::move (r));
+            this->trauma_profile_.push_back (::std::move (r));
             continue;
           }
         }
@@ -5353,80 +5429,83 @@ namespace pfc
       }
     }
 
-    injury_profile_list* injury_profile_list::
+    trauma_profile_list* trauma_profile_list::
     _clone (::xml_schema::flags f,
             ::xml_schema::container* c) const
     {
-      return new class injury_profile_list (*this, f, c);
+      return new class trauma_profile_list (*this, f, c);
     }
 
-    injury_profile_list& injury_profile_list::
-    operator= (const injury_profile_list& x)
+    trauma_profile_list& trauma_profile_list::
+    operator= (const trauma_profile_list& x)
     {
       if (this != &x)
       {
         static_cast< ::xml_schema::type& > (*this) = x;
-        this->injury_profile_ = x.injury_profile_;
+        this->trauma_profile_ = x.trauma_profile_;
       }
 
       return *this;
     }
 
-    injury_profile_list::
-    ~injury_profile_list ()
+    trauma_profile_list::
+    ~trauma_profile_list ()
     {
     }
 
     static
-    const ::xsd::cxx::tree::type_factory_initializer< 0, char, injury_profile_list >
-    _xsd_injury_profile_list_type_factory_init (
-      "injury-profile-list",
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, trauma_profile_list >
+    _xsd_trauma_profile_list_type_factory_init (
+      "trauma-profile-list",
       "com:ara:pfc:training:1");
 
-    // injury_profile
+    // trauma_profile
     //
 
-    injury_profile::
-    injury_profile (const id_type& id,
+    trauma_profile::
+    trauma_profile (const id_type& id,
                     const name_type& name,
+                    const injuries_type& injuries,
                     const treatments_type& treatments)
     : ::xml_schema::type (),
       id_ (id, this),
       name_ (name, this),
       physiology_state_ (this),
-      injuries_ (this),
+      injuries_ (injuries, this),
       treatments_ (treatments, this)
     {
     }
 
-    injury_profile::
-    injury_profile (const id_type& id,
+    trauma_profile::
+    trauma_profile (const id_type& id,
                     const name_type& name,
+                    ::std::unique_ptr< injuries_type > injuries,
                     ::std::unique_ptr< treatments_type > treatments)
     : ::xml_schema::type (),
       id_ (id, this),
       name_ (name, this),
       physiology_state_ (this),
-      injuries_ (this),
+      injuries_ (std::move (injuries), this),
       treatments_ (std::move (treatments), this)
     {
     }
 
-    injury_profile::
-    injury_profile (::std::unique_ptr< id_type > id,
+    trauma_profile::
+    trauma_profile (::std::unique_ptr< id_type > id,
                     ::std::unique_ptr< name_type > name,
+                    ::std::unique_ptr< injuries_type > injuries,
                     ::std::unique_ptr< treatments_type > treatments)
     : ::xml_schema::type (),
       id_ (std::move (id), this),
       name_ (std::move (name), this),
       physiology_state_ (this),
-      injuries_ (this),
+      injuries_ (std::move (injuries), this),
       treatments_ (std::move (treatments), this)
     {
     }
 
-    injury_profile::
-    injury_profile (const injury_profile& x,
+    trauma_profile::
+    trauma_profile (const trauma_profile& x,
                     ::xml_schema::flags f,
                     ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
@@ -5438,8 +5517,8 @@ namespace pfc
     {
     }
 
-    injury_profile::
-    injury_profile (const ::xercesc::DOMElement& e,
+    trauma_profile::
+    trauma_profile (const ::xercesc::DOMElement& e,
                     ::xml_schema::flags f,
                     ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
@@ -5456,7 +5535,7 @@ namespace pfc
       }
     }
 
-    void injury_profile::
+    void trauma_profile::
     parse (::xsd::cxx::xml::dom::parser< char >& p,
            ::xml_schema::flags f)
     {
@@ -5562,16 +5641,19 @@ namespace pfc
 
           if (tmp.get () != 0)
           {
-            ::std::unique_ptr< injuries_type > r (
-              dynamic_cast< injuries_type* > (tmp.get ()));
+            if (!injuries_.present ())
+            {
+              ::std::unique_ptr< injuries_type > r (
+                dynamic_cast< injuries_type* > (tmp.get ()));
 
-            if (r.get ())
-              tmp.release ();
-            else
-              throw ::xsd::cxx::tree::not_derived< char > ();
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->injuries_.push_back (::std::move (r));
-            continue;
+              this->injuries_.set (::std::move (r));
+              continue;
+            }
           }
         }
 
@@ -5620,6 +5702,13 @@ namespace pfc
           "");
       }
 
+      if (!injuries_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "injuries",
+          "");
+      }
+
       if (!treatments_.present ())
       {
         throw ::xsd::cxx::tree::expected_element< char > (
@@ -5628,15 +5717,15 @@ namespace pfc
       }
     }
 
-    injury_profile* injury_profile::
+    trauma_profile* trauma_profile::
     _clone (::xml_schema::flags f,
             ::xml_schema::container* c) const
     {
-      return new class injury_profile (*this, f, c);
+      return new class trauma_profile (*this, f, c);
     }
 
-    injury_profile& injury_profile::
-    operator= (const injury_profile& x)
+    trauma_profile& trauma_profile::
+    operator= (const trauma_profile& x)
     {
       if (this != &x)
       {
@@ -5651,42 +5740,42 @@ namespace pfc
       return *this;
     }
 
-    injury_profile::
-    ~injury_profile ()
+    trauma_profile::
+    ~trauma_profile ()
     {
     }
 
     static
-    const ::xsd::cxx::tree::type_factory_initializer< 0, char, injury_profile >
-    _xsd_injury_profile_type_factory_init (
-      "injury-profile",
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, trauma_profile >
+    _xsd_trauma_profile_type_factory_init (
+      "trauma-profile",
       "com:ara:pfc:training:1");
 
-    // injury_profile_ref_list
+    // trauma_profile_ref_list
     //
 
-    injury_profile_ref_list::
-    injury_profile_ref_list ()
+    trauma_profile_ref_list::
+    trauma_profile_ref_list ()
     : ::xml_schema::type (),
-      injury_profile_ (this)
+      trauma_profile_ (this)
     {
     }
 
-    injury_profile_ref_list::
-    injury_profile_ref_list (const injury_profile_ref_list& x,
+    trauma_profile_ref_list::
+    trauma_profile_ref_list (const trauma_profile_ref_list& x,
                              ::xml_schema::flags f,
                              ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
-      injury_profile_ (x.injury_profile_, f, this)
+      trauma_profile_ (x.trauma_profile_, f, this)
     {
     }
 
-    injury_profile_ref_list::
-    injury_profile_ref_list (const ::xercesc::DOMElement& e,
+    trauma_profile_ref_list::
+    trauma_profile_ref_list (const ::xercesc::DOMElement& e,
                              ::xml_schema::flags f,
                              ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
-      injury_profile_ (this)
+      trauma_profile_ (this)
     {
       if ((f & ::xml_schema::flags::base) == 0)
       {
@@ -5695,7 +5784,7 @@ namespace pfc
       }
     }
 
-    void injury_profile_ref_list::
+    void trauma_profile_ref_list::
     parse (::xsd::cxx::xml::dom::parser< char >& p,
            ::xml_schema::flags f)
     {
@@ -5705,27 +5794,27 @@ namespace pfc
         const ::xsd::cxx::xml::qualified_name< char > n (
           ::xsd::cxx::xml::dom::name< char > (i));
 
-        // injury-profile
+        // trauma-profile
         //
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
-              "injury-profile",
+              "trauma-profile",
               "",
-              &::xsd::cxx::tree::factory_impl< injury_profile_type >,
+              &::xsd::cxx::tree::factory_impl< trauma_profile_type >,
               false, false, i, n, f, this));
 
           if (tmp.get () != 0)
           {
-            ::std::unique_ptr< injury_profile_type > r (
-              dynamic_cast< injury_profile_type* > (tmp.get ()));
+            ::std::unique_ptr< trauma_profile_type > r (
+              dynamic_cast< trauma_profile_type* > (tmp.get ()));
 
             if (r.get ())
               tmp.release ();
             else
               throw ::xsd::cxx::tree::not_derived< char > ();
 
-            this->injury_profile_.push_back (::std::move (r));
+            this->trauma_profile_.push_back (::std::move (r));
             continue;
           }
         }
@@ -5734,44 +5823,146 @@ namespace pfc
       }
     }
 
-    injury_profile_ref_list* injury_profile_ref_list::
+    trauma_profile_ref_list* trauma_profile_ref_list::
     _clone (::xml_schema::flags f,
             ::xml_schema::container* c) const
     {
-      return new class injury_profile_ref_list (*this, f, c);
+      return new class trauma_profile_ref_list (*this, f, c);
     }
 
-    injury_profile_ref_list& injury_profile_ref_list::
-    operator= (const injury_profile_ref_list& x)
+    trauma_profile_ref_list& trauma_profile_ref_list::
+    operator= (const trauma_profile_ref_list& x)
     {
       if (this != &x)
       {
         static_cast< ::xml_schema::type& > (*this) = x;
-        this->injury_profile_ = x.injury_profile_;
+        this->trauma_profile_ = x.trauma_profile_;
       }
 
       return *this;
     }
 
-    injury_profile_ref_list::
-    ~injury_profile_ref_list ()
+    trauma_profile_ref_list::
+    ~trauma_profile_ref_list ()
     {
     }
 
     static
-    const ::xsd::cxx::tree::type_factory_initializer< 0, char, injury_profile_ref_list >
-    _xsd_injury_profile_ref_list_type_factory_init (
-      "injury-profile-ref-list",
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, trauma_profile_ref_list >
+    _xsd_trauma_profile_ref_list_type_factory_init (
+      "trauma-profile-ref-list",
       "com:ara:pfc:training:1");
 
-    // injury_occurance_list
+    // trauma_occurence_list
     //
 
-    injury_occurance_list::
-    injury_occurance_list (const id_type& id,
-                           const location_type& location,
-                           const description_type& description,
-                           const severity_type& severity)
+    trauma_occurence_list::
+    trauma_occurence_list ()
+    : ::xml_schema::type (),
+      trauma_ (this)
+    {
+    }
+
+    trauma_occurence_list::
+    trauma_occurence_list (const trauma_occurence_list& x,
+                           ::xml_schema::flags f,
+                           ::xml_schema::container* c)
+    : ::xml_schema::type (x, f, c),
+      trauma_ (x.trauma_, f, this)
+    {
+    }
+
+    trauma_occurence_list::
+    trauma_occurence_list (const ::xercesc::DOMElement& e,
+                           ::xml_schema::flags f,
+                           ::xml_schema::container* c)
+    : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+      trauma_ (this)
+    {
+      if ((f & ::xml_schema::flags::base) == 0)
+      {
+        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+        this->parse (p, f);
+      }
+    }
+
+    void trauma_occurence_list::
+    parse (::xsd::cxx::xml::dom::parser< char >& p,
+           ::xml_schema::flags f)
+    {
+      for (; p.more_content (); p.next_content (false))
+      {
+        const ::xercesc::DOMElement& i (p.cur_element ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+
+        // trauma
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "trauma",
+              "",
+              &::xsd::cxx::tree::factory_impl< trauma_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            ::std::unique_ptr< trauma_type > r (
+              dynamic_cast< trauma_type* > (tmp.get ()));
+
+            if (r.get ())
+              tmp.release ();
+            else
+              throw ::xsd::cxx::tree::not_derived< char > ();
+
+            this->trauma_.push_back (::std::move (r));
+            continue;
+          }
+        }
+
+        break;
+      }
+    }
+
+    trauma_occurence_list* trauma_occurence_list::
+    _clone (::xml_schema::flags f,
+            ::xml_schema::container* c) const
+    {
+      return new class trauma_occurence_list (*this, f, c);
+    }
+
+    trauma_occurence_list& trauma_occurence_list::
+    operator= (const trauma_occurence_list& x)
+    {
+      if (this != &x)
+      {
+        static_cast< ::xml_schema::type& > (*this) = x;
+        this->trauma_ = x.trauma_;
+      }
+
+      return *this;
+    }
+
+    trauma_occurence_list::
+    ~trauma_occurence_list ()
+    {
+    }
+
+    static
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, trauma_occurence_list >
+    _xsd_trauma_occurence_list_type_factory_init (
+      "trauma-occurence-list",
+      "com:ara:pfc:training:1");
+
+    // trauma_occurence
+    //
+
+    trauma_occurence::
+    trauma_occurence (const id_type& id,
+                      const location_type& location,
+                      const description_type& description,
+                      const severity_type& severity)
     : ::xml_schema::type (),
       id_ (id, this),
       location_ (location, this),
@@ -5780,11 +5971,11 @@ namespace pfc
     {
     }
 
-    injury_occurance_list::
-    injury_occurance_list (::std::unique_ptr< id_type > id,
-                           ::std::unique_ptr< location_type > location,
-                           ::std::unique_ptr< description_type > description,
-                           ::std::unique_ptr< severity_type > severity)
+    trauma_occurence::
+    trauma_occurence (::std::unique_ptr< id_type > id,
+                      ::std::unique_ptr< location_type > location,
+                      ::std::unique_ptr< description_type > description,
+                      ::std::unique_ptr< severity_type > severity)
     : ::xml_schema::type (),
       id_ (std::move (id), this),
       location_ (std::move (location), this),
@@ -5793,10 +5984,10 @@ namespace pfc
     {
     }
 
-    injury_occurance_list::
-    injury_occurance_list (const injury_occurance_list& x,
-                           ::xml_schema::flags f,
-                           ::xml_schema::container* c)
+    trauma_occurence::
+    trauma_occurence (const trauma_occurence& x,
+                      ::xml_schema::flags f,
+                      ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
       id_ (x.id_, f, this),
       location_ (x.location_, f, this),
@@ -5805,10 +5996,10 @@ namespace pfc
     {
     }
 
-    injury_occurance_list::
-    injury_occurance_list (const ::xercesc::DOMElement& e,
-                           ::xml_schema::flags f,
-                           ::xml_schema::container* c)
+    trauma_occurence::
+    trauma_occurence (const ::xercesc::DOMElement& e,
+                      ::xml_schema::flags f,
+                      ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
       id_ (this),
       location_ (this),
@@ -5822,7 +6013,7 @@ namespace pfc
       }
     }
 
-    void injury_occurance_list::
+    void trauma_occurence::
     parse (::xsd::cxx::xml::dom::parser< char >& p,
            ::xml_schema::flags f)
     {
@@ -5976,15 +6167,15 @@ namespace pfc
       }
     }
 
-    injury_occurance_list* injury_occurance_list::
+    trauma_occurence* trauma_occurence::
     _clone (::xml_schema::flags f,
             ::xml_schema::container* c) const
     {
-      return new class injury_occurance_list (*this, f, c);
+      return new class trauma_occurence (*this, f, c);
     }
 
-    injury_occurance_list& injury_occurance_list::
-    operator= (const injury_occurance_list& x)
+    trauma_occurence& trauma_occurence::
+    operator= (const trauma_occurence& x)
     {
       if (this != &x)
       {
@@ -5998,15 +6189,15 @@ namespace pfc
       return *this;
     }
 
-    injury_occurance_list::
-    ~injury_occurance_list ()
+    trauma_occurence::
+    ~trauma_occurence ()
     {
     }
 
     static
-    const ::xsd::cxx::tree::type_factory_initializer< 0, char, injury_occurance_list >
-    _xsd_injury_occurance_list_type_factory_init (
-      "injury-occurance-list",
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, trauma_occurence >
+    _xsd_trauma_occurence_type_factory_init (
+      "trauma-occurence",
       "com:ara:pfc:training:1");
 
     // medical_scenario_syllabus
@@ -6690,11 +6881,15 @@ namespace pfc
     assessment::
     assessment (const id_type& id,
                 const objective_id_type& objective_id,
+                const name_type& name,
+                const description_type& description,
                 const points_avaiable_type& points_avaiable,
                 const criteria_type& criteria)
     : ::xml_schema::type (),
       id_ (id, this),
       objective_id_ (objective_id, this),
+      name_ (name, this),
+      description_ (description, this),
       points_avaiable_ (points_avaiable, this),
       criteria_ (criteria, this)
     {
@@ -6703,11 +6898,15 @@ namespace pfc
     assessment::
     assessment (::std::unique_ptr< id_type > id,
                 ::std::unique_ptr< objective_id_type > objective_id,
+                ::std::unique_ptr< name_type > name,
+                ::std::unique_ptr< description_type > description,
                 const points_avaiable_type& points_avaiable,
                 ::std::unique_ptr< criteria_type > criteria)
     : ::xml_schema::type (),
       id_ (std::move (id), this),
       objective_id_ (std::move (objective_id), this),
+      name_ (std::move (name), this),
+      description_ (std::move (description), this),
       points_avaiable_ (points_avaiable, this),
       criteria_ (std::move (criteria), this)
     {
@@ -6720,6 +6919,8 @@ namespace pfc
     : ::xml_schema::type (x, f, c),
       id_ (x.id_, f, this),
       objective_id_ (x.objective_id_, f, this),
+      name_ (x.name_, f, this),
+      description_ (x.description_, f, this),
       points_avaiable_ (x.points_avaiable_, f, this),
       criteria_ (x.criteria_, f, this)
     {
@@ -6732,6 +6933,8 @@ namespace pfc
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
       id_ (this),
       objective_id_ (this),
+      name_ (this),
+      description_ (this),
       points_avaiable_ (this),
       criteria_ (this)
     {
@@ -6808,6 +7011,62 @@ namespace pfc
           }
         }
 
+        // name
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "name",
+              "",
+              &::xsd::cxx::tree::factory_impl< name_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!name_.present ())
+            {
+              ::std::unique_ptr< name_type > r (
+                dynamic_cast< name_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->name_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // description
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "description",
+              "",
+              &::xsd::cxx::tree::factory_impl< description_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!description_.present ())
+            {
+              ::std::unique_ptr< description_type > r (
+                dynamic_cast< description_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->description_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
         // points-avaiable
         //
         if (n.name () == "points-avaiable" && n.namespace_ ().empty ())
@@ -6864,6 +7123,20 @@ namespace pfc
           "");
       }
 
+      if (!name_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "name",
+          "");
+      }
+
+      if (!description_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "description",
+          "");
+      }
+
       if (!points_avaiable_.present ())
       {
         throw ::xsd::cxx::tree::expected_element< char > (
@@ -6894,6 +7167,8 @@ namespace pfc
         static_cast< ::xml_schema::type& > (*this) = x;
         this->id_ = x.id_;
         this->objective_id_ = x.objective_id_;
+        this->name_ = x.name_;
+        this->description_ = x.description_;
         this->points_avaiable_ = x.points_avaiable_;
         this->criteria_ = x.criteria_;
       }
@@ -7282,7 +7557,7 @@ namespace pfc
     : ::xml_schema::type (),
       short_name_ (short_name, this),
       unit_id_ (unit_id, this),
-      injury_profile_id_ (this),
+      trauma_profile_id_ (this),
       description_ (description, this)
     {
     }
@@ -7294,7 +7569,7 @@ namespace pfc
     : ::xml_schema::type (),
       short_name_ (std::move (short_name), this),
       unit_id_ (std::move (unit_id), this),
-      injury_profile_id_ (this),
+      trauma_profile_id_ (this),
       description_ (std::move (description), this)
     {
     }
@@ -7306,7 +7581,7 @@ namespace pfc
     : ::xml_schema::type (x, f, c),
       short_name_ (x.short_name_, f, this),
       unit_id_ (x.unit_id_, f, this),
-      injury_profile_id_ (x.injury_profile_id_, f, this),
+      trauma_profile_id_ (x.trauma_profile_id_, f, this),
       description_ (x.description_, f, this)
     {
     }
@@ -7318,7 +7593,7 @@ namespace pfc
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
       short_name_ (this),
       unit_id_ (this),
-      injury_profile_id_ (this),
+      trauma_profile_id_ (this),
       description_ (this)
     {
       if ((f & ::xml_schema::flags::base) == 0)
@@ -7394,29 +7669,29 @@ namespace pfc
           }
         }
 
-        // injury-profile-id
+        // trauma-profile-id
         //
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
-              "injury-profile-id",
+              "trauma-profile-id",
               "",
-              &::xsd::cxx::tree::factory_impl< injury_profile_id_type >,
+              &::xsd::cxx::tree::factory_impl< trauma_profile_id_type >,
               false, false, i, n, f, this));
 
           if (tmp.get () != 0)
           {
-            if (!this->injury_profile_id_)
+            if (!this->trauma_profile_id_)
             {
-              ::std::unique_ptr< injury_profile_id_type > r (
-                dynamic_cast< injury_profile_id_type* > (tmp.get ()));
+              ::std::unique_ptr< trauma_profile_id_type > r (
+                dynamic_cast< trauma_profile_id_type* > (tmp.get ()));
 
               if (r.get ())
                 tmp.release ();
               else
                 throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->injury_profile_id_.set (::std::move (r));
+              this->trauma_profile_id_.set (::std::move (r));
               continue;
             }
           }
@@ -7490,7 +7765,7 @@ namespace pfc
         static_cast< ::xml_schema::type& > (*this) = x;
         this->short_name_ = x.short_name_;
         this->unit_id_ = x.unit_id_;
-        this->injury_profile_id_ = x.injury_profile_id_;
+        this->trauma_profile_id_ = x.trauma_profile_id_;
         this->description_ = x.description_;
       }
 
@@ -9378,19 +9653,19 @@ namespace pfc
 
     relates_to::
     relates_to (const treatment_plans_type& treatment_plans,
-                const injury_profiles_type& injury_profiles)
+                const trauma_profiles_type& trauma_profiles)
     : ::xml_schema::type (),
       treatment_plans_ (treatment_plans, this),
-      injury_profiles_ (injury_profiles, this)
+      trauma_profiles_ (trauma_profiles, this)
     {
     }
 
     relates_to::
     relates_to (::std::unique_ptr< treatment_plans_type > treatment_plans,
-                ::std::unique_ptr< injury_profiles_type > injury_profiles)
+                ::std::unique_ptr< trauma_profiles_type > trauma_profiles)
     : ::xml_schema::type (),
       treatment_plans_ (std::move (treatment_plans), this),
-      injury_profiles_ (std::move (injury_profiles), this)
+      trauma_profiles_ (std::move (trauma_profiles), this)
     {
     }
 
@@ -9400,7 +9675,7 @@ namespace pfc
                 ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
       treatment_plans_ (x.treatment_plans_, f, this),
-      injury_profiles_ (x.injury_profiles_, f, this)
+      trauma_profiles_ (x.trauma_profiles_, f, this)
     {
     }
 
@@ -9410,7 +9685,7 @@ namespace pfc
                 ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
       treatment_plans_ (this),
-      injury_profiles_ (this)
+      trauma_profiles_ (this)
     {
       if ((f & ::xml_schema::flags::base) == 0)
       {
@@ -9457,29 +9732,29 @@ namespace pfc
           }
         }
 
-        // injury-profiles
+        // trauma-profiles
         //
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
-              "injury-profiles",
+              "trauma-profiles",
               "",
-              &::xsd::cxx::tree::factory_impl< injury_profiles_type >,
+              &::xsd::cxx::tree::factory_impl< trauma_profiles_type >,
               false, false, i, n, f, this));
 
           if (tmp.get () != 0)
           {
-            if (!injury_profiles_.present ())
+            if (!trauma_profiles_.present ())
             {
-              ::std::unique_ptr< injury_profiles_type > r (
-                dynamic_cast< injury_profiles_type* > (tmp.get ()));
+              ::std::unique_ptr< trauma_profiles_type > r (
+                dynamic_cast< trauma_profiles_type* > (tmp.get ()));
 
               if (r.get ())
                 tmp.release ();
               else
                 throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->injury_profiles_.set (::std::move (r));
+              this->trauma_profiles_.set (::std::move (r));
               continue;
             }
           }
@@ -9495,10 +9770,10 @@ namespace pfc
           "");
       }
 
-      if (!injury_profiles_.present ())
+      if (!trauma_profiles_.present ())
       {
         throw ::xsd::cxx::tree::expected_element< char > (
-          "injury-profiles",
+          "trauma-profiles",
           "");
       }
     }
@@ -9517,7 +9792,7 @@ namespace pfc
       {
         static_cast< ::xml_schema::type& > (*this) = x;
         this->treatment_plans_ = x.treatment_plans_;
-        this->injury_profiles_ = x.injury_profiles_;
+        this->trauma_profiles_ = x.trauma_profiles_;
       }
 
       return *this;
@@ -9635,17 +9910,17 @@ namespace pfc
     _xsd_equipment_std_ostream_init;
 
     ::std::ostream&
-    operator<< (::std::ostream& o, const injury_definition_list& i)
+    operator<< (::std::ostream& o, const trauma_definition_list& i)
     {
       {
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-        for (injury_definition_list::injury_const_iterator
-             b (i.injury ().begin ()), e (i.injury ().end ());
+        for (trauma_definition_list::trauma_const_iterator
+             b (i.trauma ().begin ()), e (i.trauma ().end ());
              b != e; ++b)
         {
-          o << ::std::endl << "injury: ";
+          o << ::std::endl << "trauma: ";
           om.insert (o, *b);
         }
       }
@@ -9654,11 +9929,11 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, injury_definition_list >
-    _xsd_injury_definition_list_std_ostream_init;
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, trauma_definition_list >
+    _xsd_trauma_definition_list_std_ostream_init;
 
     ::std::ostream&
-    operator<< (::std::ostream& o, const injury& i)
+    operator<< (::std::ostream& o, const trauma& i)
     {
       {
         ::xsd::cxx::tree::std_ostream_map< char >& om (
@@ -9715,11 +9990,11 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, injury >
-    _xsd_injury_std_ostream_init;
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, trauma >
+    _xsd_trauma_std_ostream_init;
 
     ::std::ostream&
-    operator<< (::std::ostream& o, const injury_severity_range& i)
+    operator<< (::std::ostream& o, const trauma_severity_range& i)
     {
       {
         ::xsd::cxx::tree::std_ostream_map< char >& om (
@@ -9747,8 +10022,8 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, injury_severity_range >
-    _xsd_injury_severity_range_std_ostream_init;
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, trauma_severity_range >
+    _xsd_trauma_severity_range_std_ostream_init;
 
     ::std::ostream&
     operator<< (::std::ostream& o, const numeric_range& i)
@@ -10076,17 +10351,17 @@ namespace pfc
     _xsd_treatment_plan_ref_list_std_ostream_init;
 
     ::std::ostream&
-    operator<< (::std::ostream& o, const injury_profile_list& i)
+    operator<< (::std::ostream& o, const trauma_profile_list& i)
     {
       {
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-        for (injury_profile_list::injury_profile_const_iterator
-             b (i.injury_profile ().begin ()), e (i.injury_profile ().end ());
+        for (trauma_profile_list::trauma_profile_const_iterator
+             b (i.trauma_profile ().begin ()), e (i.trauma_profile ().end ());
              b != e; ++b)
         {
-          o << ::std::endl << "injury-profile: ";
+          o << ::std::endl << "trauma-profile: ";
           om.insert (o, *b);
         }
       }
@@ -10095,11 +10370,11 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, injury_profile_list >
-    _xsd_injury_profile_list_std_ostream_init;
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, trauma_profile_list >
+    _xsd_trauma_profile_list_std_ostream_init;
 
     ::std::ostream&
-    operator<< (::std::ostream& o, const injury_profile& i)
+    operator<< (::std::ostream& o, const trauma_profile& i)
     {
       {
         ::xsd::cxx::tree::std_ostream_map< char >& om (
@@ -10132,13 +10407,8 @@ namespace pfc
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-        for (injury_profile::injuries_const_iterator
-             b (i.injuries ().begin ()), e (i.injuries ().end ());
-             b != e; ++b)
-        {
-          o << ::std::endl << "injuries: ";
-          om.insert (o, *b);
-        }
+        o << ::std::endl << "injuries: ";
+        om.insert (o, i.injuries ());
       }
 
       {
@@ -10153,21 +10423,21 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, injury_profile >
-    _xsd_injury_profile_std_ostream_init;
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, trauma_profile >
+    _xsd_trauma_profile_std_ostream_init;
 
     ::std::ostream&
-    operator<< (::std::ostream& o, const injury_profile_ref_list& i)
+    operator<< (::std::ostream& o, const trauma_profile_ref_list& i)
     {
       {
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-        for (injury_profile_ref_list::injury_profile_const_iterator
-             b (i.injury_profile ().begin ()), e (i.injury_profile ().end ());
+        for (trauma_profile_ref_list::trauma_profile_const_iterator
+             b (i.trauma_profile ().begin ()), e (i.trauma_profile ().end ());
              b != e; ++b)
         {
-          o << ::std::endl << "injury-profile: ";
+          o << ::std::endl << "trauma-profile: ";
           om.insert (o, *b);
         }
       }
@@ -10176,11 +10446,34 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, injury_profile_ref_list >
-    _xsd_injury_profile_ref_list_std_ostream_init;
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, trauma_profile_ref_list >
+    _xsd_trauma_profile_ref_list_std_ostream_init;
 
     ::std::ostream&
-    operator<< (::std::ostream& o, const injury_occurance_list& i)
+    operator<< (::std::ostream& o, const trauma_occurence_list& i)
+    {
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        for (trauma_occurence_list::trauma_const_iterator
+             b (i.trauma ().begin ()), e (i.trauma ().end ());
+             b != e; ++b)
+        {
+          o << ::std::endl << "trauma: ";
+          om.insert (o, *b);
+        }
+      }
+
+      return o;
+    }
+
+    static
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, trauma_occurence_list >
+    _xsd_trauma_occurence_list_std_ostream_init;
+
+    ::std::ostream&
+    operator<< (::std::ostream& o, const trauma_occurence& i)
     {
       {
         ::xsd::cxx::tree::std_ostream_map< char >& om (
@@ -10218,8 +10511,8 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, injury_occurance_list >
-    _xsd_injury_occurance_list_std_ostream_init;
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, trauma_occurence >
+    _xsd_trauma_occurence_std_ostream_init;
 
     ::std::ostream&
     operator<< (::std::ostream& o, const medical_scenario_syllabus& i)
@@ -10356,6 +10649,22 @@ namespace pfc
         om.insert (o, i.objective_id ());
       }
 
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "name: ";
+        om.insert (o, i.name ());
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "description: ";
+        om.insert (o, i.description ());
+      }
+
       o << ::std::endl << "points-avaiable: " << i.points_avaiable ();
       {
         ::xsd::cxx::tree::std_ostream_map< char >& om (
@@ -10460,10 +10769,10 @@ namespace pfc
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-        if (i.injury_profile_id ())
+        if (i.trauma_profile_id ())
         {
-          o << ::std::endl << "injury-profile-id: ";
-          om.insert (o, *i.injury_profile_id ());
+          o << ::std::endl << "trauma-profile-id: ";
+          om.insert (o, *i.trauma_profile_id ());
         }
       }
 
@@ -10858,8 +11167,8 @@ namespace pfc
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
-        o << ::std::endl << "injury-profiles: ";
-        om.insert (o, i.injury_profiles ());
+        o << ::std::endl << "trauma-profiles: ";
+        om.insert (o, i.trauma_profiles ());
       }
 
       return o;
@@ -11102,32 +11411,32 @@ namespace pfc
 
 
     void
-    operator<< (::xercesc::DOMElement& e, const injury_definition_list& i)
+    operator<< (::xercesc::DOMElement& e, const trauma_definition_list& i)
     {
       e << static_cast< const ::xml_schema::type& > (i);
 
-      // injury
+      // trauma
       //
       {
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        for (injury_definition_list::injury_const_iterator
-             b (i.injury ().begin ()), n (i.injury ().end ());
+        for (trauma_definition_list::trauma_const_iterator
+             b (i.trauma ().begin ()), n (i.trauma ().end ());
              b != n; ++b)
         {
-          if (typeid (injury_definition_list::injury_type) == typeid (*b))
+          if (typeid (trauma_definition_list::trauma_type) == typeid (*b))
           {
             ::xercesc::DOMElement& s (
               ::xsd::cxx::xml::dom::create_element (
-                "injury",
+                "trauma",
                 e));
 
             s << *b;
           }
           else
             tsm.serialize (
-              "injury",
+              "trauma",
               "",
               false, false, e, *b);
         }
@@ -11135,14 +11444,14 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, injury_definition_list >
-    _xsd_injury_definition_list_type_serializer_init (
-      "injury-definition-list",
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, trauma_definition_list >
+    _xsd_trauma_definition_list_type_serializer_init (
+      "trauma-definition-list",
       "com:ara:pfc:training:1");
 
 
     void
-    operator<< (::xercesc::DOMElement& e, const injury& i)
+    operator<< (::xercesc::DOMElement& e, const trauma& i)
     {
       e << static_cast< const ::xml_schema::type& > (i);
 
@@ -11152,8 +11461,8 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const injury::id_type& x (i.id ());
-        if (typeid (injury::id_type) == typeid (x))
+        const trauma::id_type& x (i.id ());
+        if (typeid (trauma::id_type) == typeid (x))
         {
           ::xercesc::DOMElement& s (
             ::xsd::cxx::xml::dom::create_element (
@@ -11177,8 +11486,8 @@ namespace pfc
 
         if (i.common_name ())
         {
-          const injury::common_name_type& x (*i.common_name ());
-          if (typeid (injury::common_name_type) == typeid (x))
+          const trauma::common_name_type& x (*i.common_name ());
+          if (typeid (trauma::common_name_type) == typeid (x))
           {
             ::xercesc::DOMElement& s (
               ::xsd::cxx::xml::dom::create_element (
@@ -11201,8 +11510,8 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const injury::medical_name_type& x (i.medical_name ());
-        if (typeid (injury::medical_name_type) == typeid (x))
+        const trauma::medical_name_type& x (i.medical_name ());
+        if (typeid (trauma::medical_name_type) == typeid (x))
         {
           ::xercesc::DOMElement& s (
             ::xsd::cxx::xml::dom::create_element (
@@ -11224,8 +11533,8 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const injury::citations_type& x (i.citations ());
-        if (typeid (injury::citations_type) == typeid (x))
+        const trauma::citations_type& x (i.citations ());
+        if (typeid (trauma::citations_type) == typeid (x))
         {
           ::xercesc::DOMElement& s (
             ::xsd::cxx::xml::dom::create_element (
@@ -11247,8 +11556,8 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const injury::description_type& x (i.description ());
-        if (typeid (injury::description_type) == typeid (x))
+        const trauma::description_type& x (i.description ());
+        if (typeid (trauma::description_type) == typeid (x))
         {
           ::xercesc::DOMElement& s (
             ::xsd::cxx::xml::dom::create_element (
@@ -11270,8 +11579,8 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const injury::severity_range_type& x (i.severity_range ());
-        if (typeid (injury::severity_range_type) == typeid (x))
+        const trauma::severity_range_type& x (i.severity_range ());
+        if (typeid (trauma::severity_range_type) == typeid (x))
         {
           ::xercesc::DOMElement& s (
             ::xsd::cxx::xml::dom::create_element (
@@ -11289,14 +11598,14 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, injury >
-    _xsd_injury_type_serializer_init (
-      "injury",
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, trauma >
+    _xsd_trauma_type_serializer_init (
+      "trauma",
       "com:ara:pfc:training:1");
 
 
     void
-    operator<< (::xercesc::DOMElement& e, const injury_severity_range& i)
+    operator<< (::xercesc::DOMElement& e, const trauma_severity_range& i)
     {
       e << static_cast< const ::xml_schema::type& > (i);
 
@@ -11308,8 +11617,8 @@ namespace pfc
 
         if (i.numeric_range ())
         {
-          const injury_severity_range::numeric_range_type& x (*i.numeric_range ());
-          if (typeid (injury_severity_range::numeric_range_type) == typeid (x))
+          const trauma_severity_range::numeric_range_type& x (*i.numeric_range ());
+          if (typeid (trauma_severity_range::numeric_range_type) == typeid (x))
           {
             ::xercesc::DOMElement& s (
               ::xsd::cxx::xml::dom::create_element (
@@ -11334,8 +11643,8 @@ namespace pfc
 
         if (i.token_range ())
         {
-          const injury_severity_range::token_range_type& x (*i.token_range ());
-          if (typeid (injury_severity_range::token_range_type) == typeid (x))
+          const trauma_severity_range::token_range_type& x (*i.token_range ());
+          if (typeid (trauma_severity_range::token_range_type) == typeid (x))
           {
             ::xercesc::DOMElement& s (
               ::xsd::cxx::xml::dom::create_element (
@@ -11354,9 +11663,9 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, injury_severity_range >
-    _xsd_injury_severity_range_type_serializer_init (
-      "injury-severity-range",
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, trauma_severity_range >
+    _xsd_trauma_severity_range_type_serializer_init (
+      "trauma-severity-range",
       "com:ara:pfc:training:1");
 
 
@@ -12026,32 +12335,32 @@ namespace pfc
 
 
     void
-    operator<< (::xercesc::DOMElement& e, const injury_profile_list& i)
+    operator<< (::xercesc::DOMElement& e, const trauma_profile_list& i)
     {
       e << static_cast< const ::xml_schema::type& > (i);
 
-      // injury-profile
+      // trauma-profile
       //
       {
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        for (injury_profile_list::injury_profile_const_iterator
-             b (i.injury_profile ().begin ()), n (i.injury_profile ().end ());
+        for (trauma_profile_list::trauma_profile_const_iterator
+             b (i.trauma_profile ().begin ()), n (i.trauma_profile ().end ());
              b != n; ++b)
         {
-          if (typeid (injury_profile_list::injury_profile_type) == typeid (*b))
+          if (typeid (trauma_profile_list::trauma_profile_type) == typeid (*b))
           {
             ::xercesc::DOMElement& s (
               ::xsd::cxx::xml::dom::create_element (
-                "injury-profile",
+                "trauma-profile",
                 e));
 
             s << *b;
           }
           else
             tsm.serialize (
-              "injury-profile",
+              "trauma-profile",
               "",
               false, false, e, *b);
         }
@@ -12059,14 +12368,14 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, injury_profile_list >
-    _xsd_injury_profile_list_type_serializer_init (
-      "injury-profile-list",
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, trauma_profile_list >
+    _xsd_trauma_profile_list_type_serializer_init (
+      "trauma-profile-list",
       "com:ara:pfc:training:1");
 
 
     void
-    operator<< (::xercesc::DOMElement& e, const injury_profile& i)
+    operator<< (::xercesc::DOMElement& e, const trauma_profile& i)
     {
       e << static_cast< const ::xml_schema::type& > (i);
 
@@ -12076,8 +12385,8 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const injury_profile::id_type& x (i.id ());
-        if (typeid (injury_profile::id_type) == typeid (x))
+        const trauma_profile::id_type& x (i.id ());
+        if (typeid (trauma_profile::id_type) == typeid (x))
         {
           ::xercesc::DOMElement& s (
             ::xsd::cxx::xml::dom::create_element (
@@ -12099,8 +12408,8 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const injury_profile::name_type& x (i.name ());
-        if (typeid (injury_profile::name_type) == typeid (x))
+        const trauma_profile::name_type& x (i.name ());
+        if (typeid (trauma_profile::name_type) == typeid (x))
         {
           ::xercesc::DOMElement& s (
             ::xsd::cxx::xml::dom::create_element (
@@ -12124,8 +12433,8 @@ namespace pfc
 
         if (i.physiology_state ())
         {
-          const injury_profile::physiology_state_type& x (*i.physiology_state ());
-          if (typeid (injury_profile::physiology_state_type) == typeid (x))
+          const trauma_profile::physiology_state_type& x (*i.physiology_state ());
+          if (typeid (trauma_profile::physiology_state_type) == typeid (x))
           {
             ::xercesc::DOMElement& s (
               ::xsd::cxx::xml::dom::create_element (
@@ -12148,25 +12457,21 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        for (injury_profile::injuries_const_iterator
-             b (i.injuries ().begin ()), n (i.injuries ().end ());
-             b != n; ++b)
+        const trauma_profile::injuries_type& x (i.injuries ());
+        if (typeid (trauma_profile::injuries_type) == typeid (x))
         {
-          if (typeid (injury_profile::injuries_type) == typeid (*b))
-          {
-            ::xercesc::DOMElement& s (
-              ::xsd::cxx::xml::dom::create_element (
-                "injuries",
-                e));
-
-            s << *b;
-          }
-          else
-            tsm.serialize (
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
               "injuries",
-              "",
-              false, false, e, *b);
+              e));
+
+          s << x;
         }
+        else
+          tsm.serialize (
+            "injuries",
+            "",
+            false, false, e, x);
       }
 
       // treatments
@@ -12175,8 +12480,8 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const injury_profile::treatments_type& x (i.treatments ());
-        if (typeid (injury_profile::treatments_type) == typeid (x))
+        const trauma_profile::treatments_type& x (i.treatments ());
+        if (typeid (trauma_profile::treatments_type) == typeid (x))
         {
           ::xercesc::DOMElement& s (
             ::xsd::cxx::xml::dom::create_element (
@@ -12194,39 +12499,39 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, injury_profile >
-    _xsd_injury_profile_type_serializer_init (
-      "injury-profile",
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, trauma_profile >
+    _xsd_trauma_profile_type_serializer_init (
+      "trauma-profile",
       "com:ara:pfc:training:1");
 
 
     void
-    operator<< (::xercesc::DOMElement& e, const injury_profile_ref_list& i)
+    operator<< (::xercesc::DOMElement& e, const trauma_profile_ref_list& i)
     {
       e << static_cast< const ::xml_schema::type& > (i);
 
-      // injury-profile
+      // trauma-profile
       //
       {
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        for (injury_profile_ref_list::injury_profile_const_iterator
-             b (i.injury_profile ().begin ()), n (i.injury_profile ().end ());
+        for (trauma_profile_ref_list::trauma_profile_const_iterator
+             b (i.trauma_profile ().begin ()), n (i.trauma_profile ().end ());
              b != n; ++b)
         {
-          if (typeid (injury_profile_ref_list::injury_profile_type) == typeid (*b))
+          if (typeid (trauma_profile_ref_list::trauma_profile_type) == typeid (*b))
           {
             ::xercesc::DOMElement& s (
               ::xsd::cxx::xml::dom::create_element (
-                "injury-profile",
+                "trauma-profile",
                 e));
 
             s << *b;
           }
           else
             tsm.serialize (
-              "injury-profile",
+              "trauma-profile",
               "",
               false, false, e, *b);
         }
@@ -12234,14 +12539,54 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, injury_profile_ref_list >
-    _xsd_injury_profile_ref_list_type_serializer_init (
-      "injury-profile-ref-list",
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, trauma_profile_ref_list >
+    _xsd_trauma_profile_ref_list_type_serializer_init (
+      "trauma-profile-ref-list",
       "com:ara:pfc:training:1");
 
 
     void
-    operator<< (::xercesc::DOMElement& e, const injury_occurance_list& i)
+    operator<< (::xercesc::DOMElement& e, const trauma_occurence_list& i)
+    {
+      e << static_cast< const ::xml_schema::type& > (i);
+
+      // trauma
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        for (trauma_occurence_list::trauma_const_iterator
+             b (i.trauma ().begin ()), n (i.trauma ().end ());
+             b != n; ++b)
+        {
+          if (typeid (trauma_occurence_list::trauma_type) == typeid (*b))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "trauma",
+                e));
+
+            s << *b;
+          }
+          else
+            tsm.serialize (
+              "trauma",
+              "",
+              false, false, e, *b);
+        }
+      }
+    }
+
+    static
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, trauma_occurence_list >
+    _xsd_trauma_occurence_list_type_serializer_init (
+      "trauma-occurence-list",
+      "com:ara:pfc:training:1");
+
+
+    void
+    operator<< (::xercesc::DOMElement& e, const trauma_occurence& i)
     {
       e << static_cast< const ::xml_schema::type& > (i);
 
@@ -12251,8 +12596,8 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const injury_occurance_list::id_type& x (i.id ());
-        if (typeid (injury_occurance_list::id_type) == typeid (x))
+        const trauma_occurence::id_type& x (i.id ());
+        if (typeid (trauma_occurence::id_type) == typeid (x))
         {
           ::xercesc::DOMElement& s (
             ::xsd::cxx::xml::dom::create_element (
@@ -12274,8 +12619,8 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const injury_occurance_list::location_type& x (i.location ());
-        if (typeid (injury_occurance_list::location_type) == typeid (x))
+        const trauma_occurence::location_type& x (i.location ());
+        if (typeid (trauma_occurence::location_type) == typeid (x))
         {
           ::xercesc::DOMElement& s (
             ::xsd::cxx::xml::dom::create_element (
@@ -12297,8 +12642,8 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const injury_occurance_list::description_type& x (i.description ());
-        if (typeid (injury_occurance_list::description_type) == typeid (x))
+        const trauma_occurence::description_type& x (i.description ());
+        if (typeid (trauma_occurence::description_type) == typeid (x))
         {
           ::xercesc::DOMElement& s (
             ::xsd::cxx::xml::dom::create_element (
@@ -12320,8 +12665,8 @@ namespace pfc
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const injury_occurance_list::severity_type& x (i.severity ());
-        if (typeid (injury_occurance_list::severity_type) == typeid (x))
+        const trauma_occurence::severity_type& x (i.severity ());
+        if (typeid (trauma_occurence::severity_type) == typeid (x))
         {
           ::xercesc::DOMElement& s (
             ::xsd::cxx::xml::dom::create_element (
@@ -12339,9 +12684,9 @@ namespace pfc
     }
 
     static
-    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, injury_occurance_list >
-    _xsd_injury_occurance_list_type_serializer_init (
-      "injury-occurance-list",
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, trauma_occurence >
+    _xsd_trauma_occurence_type_serializer_init (
+      "trauma-occurence",
       "com:ara:pfc:training:1");
 
 
@@ -12662,6 +13007,52 @@ namespace pfc
             false, false, e, x);
       }
 
+      // name
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const assessment::name_type& x (i.name ());
+        if (typeid (assessment::name_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "name",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "name",
+            "",
+            false, false, e, x);
+      }
+
+      // description
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const assessment::description_type& x (i.description ());
+        if (typeid (assessment::description_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "description",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "description",
+            "",
+            false, false, e, x);
+      }
+
       // points-avaiable
       //
       {
@@ -12900,27 +13291,27 @@ namespace pfc
             false, false, e, x);
       }
 
-      // injury-profile-id
+      // trauma-profile-id
       //
       {
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        if (i.injury_profile_id ())
+        if (i.trauma_profile_id ())
         {
-          const role::injury_profile_id_type& x (*i.injury_profile_id ());
-          if (typeid (role::injury_profile_id_type) == typeid (x))
+          const role::trauma_profile_id_type& x (*i.trauma_profile_id ());
+          if (typeid (role::trauma_profile_id_type) == typeid (x))
           {
             ::xercesc::DOMElement& s (
               ::xsd::cxx::xml::dom::create_element (
-                "injury-profile-id",
+                "trauma-profile-id",
                 e));
 
             s << x;
           }
           else
             tsm.serialize (
-              "injury-profile-id",
+              "trauma-profile-id",
               "",
               false, false, e, x);
         }
@@ -13760,25 +14151,25 @@ namespace pfc
             false, false, e, x);
       }
 
-      // injury-profiles
+      // trauma-profiles
       //
       {
         ::xsd::cxx::tree::type_serializer_map< char >& tsm (
           ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
 
-        const relates_to::injury_profiles_type& x (i.injury_profiles ());
-        if (typeid (relates_to::injury_profiles_type) == typeid (x))
+        const relates_to::trauma_profiles_type& x (i.trauma_profiles ());
+        if (typeid (relates_to::trauma_profiles_type) == typeid (x))
         {
           ::xercesc::DOMElement& s (
             ::xsd::cxx::xml::dom::create_element (
-              "injury-profiles",
+              "trauma-profiles",
               e));
 
           s << x;
         }
         else
           tsm.serialize (
-            "injury-profiles",
+            "trauma-profiles",
             "",
             false, false, e, x);
       }

@@ -18,7 +18,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
           <xs:documentation>The bibliography used to create this scenario.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="conditions" type="pfc:injury-definition-list">
+      <xs:element name="trauma-definitions" type="pfc:trauma-definition-list">
 				<xs:annotation>
 					<xs:documentation>XML Database of Injuries contained that can be referenced in this file.</xs:documentation>
 				</xs:annotation>
@@ -28,7 +28,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 					<xs:documentation>XML Database of Treatment Plans for the injuries cotnained in the injury databse.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="patient-states" type="pfc:injury-profile-list">
+			<xs:element name="trauma-sets" type="pfc:trauma-profile-list">
 				<xs:annotation>
 					<xs:documentation>XML Database of Complex injury combinations. For the PFC schema this is kind of like a database of medical records which can be applied to patients. It allows the same set of injuries to be applied to multiple patients with minimal documentation.</xs:documentation>
 				</xs:annotation>

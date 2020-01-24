@@ -262,9 +262,9 @@ namespace pfc
   {
     class equipment_definition_list;
     class equipment;
-    class injury_definition_list;
-    class injury;
-    class injury_severity_range;
+    class trauma_definition_list;
+    class trauma;
+    class trauma_severity_range;
     class numeric_range;
     class token_range;
     class citation_ref_list;
@@ -277,10 +277,11 @@ namespace pfc
     class cpg;
     class learning_objective_reference_list;
     class treatment_plan_ref_list;
-    class injury_profile_list;
-    class injury_profile;
-    class injury_profile_ref_list;
-    class injury_occurance_list;
+    class trauma_profile_list;
+    class trauma_profile;
+    class trauma_profile_ref_list;
+    class trauma_occurence_list;
+    class trauma_occurence;
     class medical_scenario_syllabus;
     class learning_objective_list;
     class learning_objective;
@@ -561,47 +562,47 @@ namespace pfc
       ::xsd::cxx::tree::one< properties_type > properties_;
     };
 
-    class injury_definition_list: public ::xml_schema::type
+    class trauma_definition_list: public ::xml_schema::type
     {
       public:
-      // injury
+      // trauma
       //
-      typedef ::pfc::schema::injury injury_type;
-      typedef ::xsd::cxx::tree::sequence< injury_type > injury_sequence;
-      typedef injury_sequence::iterator injury_iterator;
-      typedef injury_sequence::const_iterator injury_const_iterator;
-      typedef ::xsd::cxx::tree::traits< injury_type, char > injury_traits;
+      typedef ::pfc::schema::trauma trauma_type;
+      typedef ::xsd::cxx::tree::sequence< trauma_type > trauma_sequence;
+      typedef trauma_sequence::iterator trauma_iterator;
+      typedef trauma_sequence::const_iterator trauma_const_iterator;
+      typedef ::xsd::cxx::tree::traits< trauma_type, char > trauma_traits;
 
-      const injury_sequence&
-      injury () const;
+      const trauma_sequence&
+      trauma () const;
 
-      injury_sequence&
-      injury ();
+      trauma_sequence&
+      trauma ();
 
       void
-      injury (const injury_sequence& s);
+      trauma (const trauma_sequence& s);
 
       // Constructors.
       //
-      injury_definition_list ();
+      trauma_definition_list ();
 
-      injury_definition_list (const ::xercesc::DOMElement& e,
+      trauma_definition_list (const ::xercesc::DOMElement& e,
                               ::xml_schema::flags f = 0,
                               ::xml_schema::container* c = 0);
 
-      injury_definition_list (const injury_definition_list& x,
+      trauma_definition_list (const trauma_definition_list& x,
                               ::xml_schema::flags f = 0,
                               ::xml_schema::container* c = 0);
 
-      virtual injury_definition_list*
+      virtual trauma_definition_list*
       _clone (::xml_schema::flags f = 0,
               ::xml_schema::container* c = 0) const;
 
-      injury_definition_list&
-      operator= (const injury_definition_list& x);
+      trauma_definition_list&
+      operator= (const trauma_definition_list& x);
 
       virtual 
-      ~injury_definition_list ();
+      ~trauma_definition_list ();
 
       // Implementation.
       //
@@ -611,10 +612,10 @@ namespace pfc
              ::xml_schema::flags);
 
       protected:
-      injury_sequence injury_;
+      trauma_sequence trauma_;
     };
 
-    class injury: public ::xml_schema::type
+    class trauma: public ::xml_schema::type
     {
       public:
       // id
@@ -708,7 +709,7 @@ namespace pfc
 
       // severity-range
       //
-      typedef ::pfc::schema::injury_severity_range severity_range_type;
+      typedef ::pfc::schema::trauma_severity_range severity_range_type;
       typedef ::xsd::cxx::tree::traits< severity_range_type, char > severity_range_traits;
 
       const severity_range_type&
@@ -725,41 +726,41 @@ namespace pfc
 
       // Constructors.
       //
-      injury (const id_type&,
+      trauma (const id_type&,
               const medical_name_type&,
               const citations_type&,
               const description_type&,
               const severity_range_type&);
 
-      injury (const id_type&,
+      trauma (const id_type&,
               const medical_name_type&,
               ::std::unique_ptr< citations_type >,
               const description_type&,
               ::std::unique_ptr< severity_range_type >);
 
-      injury (::std::unique_ptr< id_type >,
+      trauma (::std::unique_ptr< id_type >,
               ::std::unique_ptr< medical_name_type >,
               ::std::unique_ptr< citations_type >,
               ::std::unique_ptr< description_type >,
               ::std::unique_ptr< severity_range_type >);
 
-      injury (const ::xercesc::DOMElement& e,
+      trauma (const ::xercesc::DOMElement& e,
               ::xml_schema::flags f = 0,
               ::xml_schema::container* c = 0);
 
-      injury (const injury& x,
+      trauma (const trauma& x,
               ::xml_schema::flags f = 0,
               ::xml_schema::container* c = 0);
 
-      virtual injury*
+      virtual trauma*
       _clone (::xml_schema::flags f = 0,
               ::xml_schema::container* c = 0) const;
 
-      injury&
-      operator= (const injury& x);
+      trauma&
+      operator= (const trauma& x);
 
       virtual 
-      ~injury ();
+      ~trauma ();
 
       // Implementation.
       //
@@ -777,7 +778,7 @@ namespace pfc
       ::xsd::cxx::tree::one< severity_range_type > severity_range_;
     };
 
-    class injury_severity_range: public ::xml_schema::type
+    class trauma_severity_range: public ::xml_schema::type
     {
       public:
       // numeric-range
@@ -824,25 +825,25 @@ namespace pfc
 
       // Constructors.
       //
-      injury_severity_range ();
+      trauma_severity_range ();
 
-      injury_severity_range (const ::xercesc::DOMElement& e,
+      trauma_severity_range (const ::xercesc::DOMElement& e,
                              ::xml_schema::flags f = 0,
                              ::xml_schema::container* c = 0);
 
-      injury_severity_range (const injury_severity_range& x,
+      trauma_severity_range (const trauma_severity_range& x,
                              ::xml_schema::flags f = 0,
                              ::xml_schema::container* c = 0);
 
-      virtual injury_severity_range*
+      virtual trauma_severity_range*
       _clone (::xml_schema::flags f = 0,
               ::xml_schema::container* c = 0) const;
 
-      injury_severity_range&
-      operator= (const injury_severity_range& x);
+      trauma_severity_range&
+      operator= (const trauma_severity_range& x);
 
       virtual 
-      ~injury_severity_range ();
+      ~trauma_severity_range ();
 
       // Implementation.
       //
@@ -1699,47 +1700,47 @@ namespace pfc
       treatment_plan_sequence treatment_plan_;
     };
 
-    class injury_profile_list: public ::xml_schema::type
+    class trauma_profile_list: public ::xml_schema::type
     {
       public:
-      // injury-profile
+      // trauma-profile
       //
-      typedef ::pfc::schema::injury_profile injury_profile_type;
-      typedef ::xsd::cxx::tree::sequence< injury_profile_type > injury_profile_sequence;
-      typedef injury_profile_sequence::iterator injury_profile_iterator;
-      typedef injury_profile_sequence::const_iterator injury_profile_const_iterator;
-      typedef ::xsd::cxx::tree::traits< injury_profile_type, char > injury_profile_traits;
+      typedef ::pfc::schema::trauma_profile trauma_profile_type;
+      typedef ::xsd::cxx::tree::sequence< trauma_profile_type > trauma_profile_sequence;
+      typedef trauma_profile_sequence::iterator trauma_profile_iterator;
+      typedef trauma_profile_sequence::const_iterator trauma_profile_const_iterator;
+      typedef ::xsd::cxx::tree::traits< trauma_profile_type, char > trauma_profile_traits;
 
-      const injury_profile_sequence&
-      injury_profile () const;
+      const trauma_profile_sequence&
+      trauma_profile () const;
 
-      injury_profile_sequence&
-      injury_profile ();
+      trauma_profile_sequence&
+      trauma_profile ();
 
       void
-      injury_profile (const injury_profile_sequence& s);
+      trauma_profile (const trauma_profile_sequence& s);
 
       // Constructors.
       //
-      injury_profile_list ();
+      trauma_profile_list ();
 
-      injury_profile_list (const ::xercesc::DOMElement& e,
+      trauma_profile_list (const ::xercesc::DOMElement& e,
                            ::xml_schema::flags f = 0,
                            ::xml_schema::container* c = 0);
 
-      injury_profile_list (const injury_profile_list& x,
+      trauma_profile_list (const trauma_profile_list& x,
                            ::xml_schema::flags f = 0,
                            ::xml_schema::container* c = 0);
 
-      virtual injury_profile_list*
+      virtual trauma_profile_list*
       _clone (::xml_schema::flags f = 0,
               ::xml_schema::container* c = 0) const;
 
-      injury_profile_list&
-      operator= (const injury_profile_list& x);
+      trauma_profile_list&
+      operator= (const trauma_profile_list& x);
 
       virtual 
-      ~injury_profile_list ();
+      ~trauma_profile_list ();
 
       // Implementation.
       //
@@ -1749,10 +1750,10 @@ namespace pfc
              ::xml_schema::flags);
 
       protected:
-      injury_profile_sequence injury_profile_;
+      trauma_profile_sequence trauma_profile_;
     };
 
-    class injury_profile: public ::xml_schema::type
+    class trauma_profile: public ::xml_schema::type
     {
       public:
       // id
@@ -1812,20 +1813,20 @@ namespace pfc
 
       // injuries
       //
-      typedef ::pfc::schema::injury_occurance_list injuries_type;
-      typedef ::xsd::cxx::tree::sequence< injuries_type > injuries_sequence;
-      typedef injuries_sequence::iterator injuries_iterator;
-      typedef injuries_sequence::const_iterator injuries_const_iterator;
+      typedef ::pfc::schema::trauma_occurence_list injuries_type;
       typedef ::xsd::cxx::tree::traits< injuries_type, char > injuries_traits;
 
-      const injuries_sequence&
+      const injuries_type&
       injuries () const;
 
-      injuries_sequence&
+      injuries_type&
       injuries ();
 
       void
-      injuries (const injuries_sequence& s);
+      injuries (const injuries_type& x);
+
+      void
+      injuries (::std::unique_ptr< injuries_type > p);
 
       // treatments
       //
@@ -1846,35 +1847,38 @@ namespace pfc
 
       // Constructors.
       //
-      injury_profile (const id_type&,
+      trauma_profile (const id_type&,
                       const name_type&,
+                      const injuries_type&,
                       const treatments_type&);
 
-      injury_profile (const id_type&,
+      trauma_profile (const id_type&,
                       const name_type&,
+                      ::std::unique_ptr< injuries_type >,
                       ::std::unique_ptr< treatments_type >);
 
-      injury_profile (::std::unique_ptr< id_type >,
+      trauma_profile (::std::unique_ptr< id_type >,
                       ::std::unique_ptr< name_type >,
+                      ::std::unique_ptr< injuries_type >,
                       ::std::unique_ptr< treatments_type >);
 
-      injury_profile (const ::xercesc::DOMElement& e,
+      trauma_profile (const ::xercesc::DOMElement& e,
                       ::xml_schema::flags f = 0,
                       ::xml_schema::container* c = 0);
 
-      injury_profile (const injury_profile& x,
+      trauma_profile (const trauma_profile& x,
                       ::xml_schema::flags f = 0,
                       ::xml_schema::container* c = 0);
 
-      virtual injury_profile*
+      virtual trauma_profile*
       _clone (::xml_schema::flags f = 0,
               ::xml_schema::container* c = 0) const;
 
-      injury_profile&
-      operator= (const injury_profile& x);
+      trauma_profile&
+      operator= (const trauma_profile& x);
 
       virtual 
-      ~injury_profile ();
+      ~trauma_profile ();
 
       // Implementation.
       //
@@ -1887,51 +1891,51 @@ namespace pfc
       ::xsd::cxx::tree::one< id_type > id_;
       ::xsd::cxx::tree::one< name_type > name_;
       physiology_state_optional physiology_state_;
-      injuries_sequence injuries_;
+      ::xsd::cxx::tree::one< injuries_type > injuries_;
       ::xsd::cxx::tree::one< treatments_type > treatments_;
     };
 
-    class injury_profile_ref_list: public ::xml_schema::type
+    class trauma_profile_ref_list: public ::xml_schema::type
     {
       public:
-      // injury-profile
+      // trauma-profile
       //
-      typedef ::xml_schema::string injury_profile_type;
-      typedef ::xsd::cxx::tree::sequence< injury_profile_type > injury_profile_sequence;
-      typedef injury_profile_sequence::iterator injury_profile_iterator;
-      typedef injury_profile_sequence::const_iterator injury_profile_const_iterator;
-      typedef ::xsd::cxx::tree::traits< injury_profile_type, char > injury_profile_traits;
+      typedef ::xml_schema::string trauma_profile_type;
+      typedef ::xsd::cxx::tree::sequence< trauma_profile_type > trauma_profile_sequence;
+      typedef trauma_profile_sequence::iterator trauma_profile_iterator;
+      typedef trauma_profile_sequence::const_iterator trauma_profile_const_iterator;
+      typedef ::xsd::cxx::tree::traits< trauma_profile_type, char > trauma_profile_traits;
 
-      const injury_profile_sequence&
-      injury_profile () const;
+      const trauma_profile_sequence&
+      trauma_profile () const;
 
-      injury_profile_sequence&
-      injury_profile ();
+      trauma_profile_sequence&
+      trauma_profile ();
 
       void
-      injury_profile (const injury_profile_sequence& s);
+      trauma_profile (const trauma_profile_sequence& s);
 
       // Constructors.
       //
-      injury_profile_ref_list ();
+      trauma_profile_ref_list ();
 
-      injury_profile_ref_list (const ::xercesc::DOMElement& e,
+      trauma_profile_ref_list (const ::xercesc::DOMElement& e,
                                ::xml_schema::flags f = 0,
                                ::xml_schema::container* c = 0);
 
-      injury_profile_ref_list (const injury_profile_ref_list& x,
+      trauma_profile_ref_list (const trauma_profile_ref_list& x,
                                ::xml_schema::flags f = 0,
                                ::xml_schema::container* c = 0);
 
-      virtual injury_profile_ref_list*
+      virtual trauma_profile_ref_list*
       _clone (::xml_schema::flags f = 0,
               ::xml_schema::container* c = 0) const;
 
-      injury_profile_ref_list&
-      operator= (const injury_profile_ref_list& x);
+      trauma_profile_ref_list&
+      operator= (const trauma_profile_ref_list& x);
 
       virtual 
-      ~injury_profile_ref_list ();
+      ~trauma_profile_ref_list ();
 
       // Implementation.
       //
@@ -1941,10 +1945,63 @@ namespace pfc
              ::xml_schema::flags);
 
       protected:
-      injury_profile_sequence injury_profile_;
+      trauma_profile_sequence trauma_profile_;
     };
 
-    class injury_occurance_list: public ::xml_schema::type
+    class trauma_occurence_list: public ::xml_schema::type
+    {
+      public:
+      // trauma
+      //
+      typedef ::pfc::schema::trauma_occurence trauma_type;
+      typedef ::xsd::cxx::tree::sequence< trauma_type > trauma_sequence;
+      typedef trauma_sequence::iterator trauma_iterator;
+      typedef trauma_sequence::const_iterator trauma_const_iterator;
+      typedef ::xsd::cxx::tree::traits< trauma_type, char > trauma_traits;
+
+      const trauma_sequence&
+      trauma () const;
+
+      trauma_sequence&
+      trauma ();
+
+      void
+      trauma (const trauma_sequence& s);
+
+      // Constructors.
+      //
+      trauma_occurence_list ();
+
+      trauma_occurence_list (const ::xercesc::DOMElement& e,
+                             ::xml_schema::flags f = 0,
+                             ::xml_schema::container* c = 0);
+
+      trauma_occurence_list (const trauma_occurence_list& x,
+                             ::xml_schema::flags f = 0,
+                             ::xml_schema::container* c = 0);
+
+      virtual trauma_occurence_list*
+      _clone (::xml_schema::flags f = 0,
+              ::xml_schema::container* c = 0) const;
+
+      trauma_occurence_list&
+      operator= (const trauma_occurence_list& x);
+
+      virtual 
+      ~trauma_occurence_list ();
+
+      // Implementation.
+      //
+      protected:
+      void
+      parse (::xsd::cxx::xml::dom::parser< char >&,
+             ::xml_schema::flags);
+
+      protected:
+      trauma_sequence trauma_;
+    };
+
+    class trauma_occurence: public ::xml_schema::type
     {
       public:
       // id
@@ -2017,33 +2074,33 @@ namespace pfc
 
       // Constructors.
       //
-      injury_occurance_list (const id_type&,
-                             const location_type&,
-                             const description_type&,
-                             const severity_type&);
+      trauma_occurence (const id_type&,
+                        const location_type&,
+                        const description_type&,
+                        const severity_type&);
 
-      injury_occurance_list (::std::unique_ptr< id_type >,
-                             ::std::unique_ptr< location_type >,
-                             ::std::unique_ptr< description_type >,
-                             ::std::unique_ptr< severity_type >);
+      trauma_occurence (::std::unique_ptr< id_type >,
+                        ::std::unique_ptr< location_type >,
+                        ::std::unique_ptr< description_type >,
+                        ::std::unique_ptr< severity_type >);
 
-      injury_occurance_list (const ::xercesc::DOMElement& e,
-                             ::xml_schema::flags f = 0,
-                             ::xml_schema::container* c = 0);
+      trauma_occurence (const ::xercesc::DOMElement& e,
+                        ::xml_schema::flags f = 0,
+                        ::xml_schema::container* c = 0);
 
-      injury_occurance_list (const injury_occurance_list& x,
-                             ::xml_schema::flags f = 0,
-                             ::xml_schema::container* c = 0);
+      trauma_occurence (const trauma_occurence& x,
+                        ::xml_schema::flags f = 0,
+                        ::xml_schema::container* c = 0);
 
-      virtual injury_occurance_list*
+      virtual trauma_occurence*
       _clone (::xml_schema::flags f = 0,
               ::xml_schema::container* c = 0) const;
 
-      injury_occurance_list&
-      operator= (const injury_occurance_list& x);
+      trauma_occurence&
+      operator= (const trauma_occurence& x);
 
       virtual 
-      ~injury_occurance_list ();
+      ~trauma_occurence ();
 
       // Implementation.
       //
@@ -2436,6 +2493,40 @@ namespace pfc
       void
       objective_id (::std::unique_ptr< objective_id_type > p);
 
+      // name
+      //
+      typedef ::xml_schema::string name_type;
+      typedef ::xsd::cxx::tree::traits< name_type, char > name_traits;
+
+      const name_type&
+      name () const;
+
+      name_type&
+      name ();
+
+      void
+      name (const name_type& x);
+
+      void
+      name (::std::unique_ptr< name_type > p);
+
+      // description
+      //
+      typedef ::xml_schema::string description_type;
+      typedef ::xsd::cxx::tree::traits< description_type, char > description_traits;
+
+      const description_type&
+      description () const;
+
+      description_type&
+      description ();
+
+      void
+      description (const description_type& x);
+
+      void
+      description (::std::unique_ptr< description_type > p);
+
       // points-avaiable
       //
       typedef ::xml_schema::integer points_avaiable_type;
@@ -2471,11 +2562,15 @@ namespace pfc
       //
       assessment (const id_type&,
                   const objective_id_type&,
+                  const name_type&,
+                  const description_type&,
                   const points_avaiable_type&,
                   const criteria_type&);
 
       assessment (::std::unique_ptr< id_type >,
                   ::std::unique_ptr< objective_id_type >,
+                  ::std::unique_ptr< name_type >,
+                  ::std::unique_ptr< description_type >,
                   const points_avaiable_type&,
                   ::std::unique_ptr< criteria_type >);
 
@@ -2507,6 +2602,8 @@ namespace pfc
       protected:
       ::xsd::cxx::tree::one< id_type > id_;
       ::xsd::cxx::tree::one< objective_id_type > objective_id_;
+      ::xsd::cxx::tree::one< name_type > name_;
+      ::xsd::cxx::tree::one< description_type > description_;
       ::xsd::cxx::tree::one< points_avaiable_type > points_avaiable_;
       ::xsd::cxx::tree::one< criteria_type > criteria_;
     };
@@ -2721,26 +2818,26 @@ namespace pfc
       void
       unit_id (::std::unique_ptr< unit_id_type > p);
 
-      // injury-profile-id
+      // trauma-profile-id
       //
-      typedef ::xml_schema::string injury_profile_id_type;
-      typedef ::xsd::cxx::tree::optional< injury_profile_id_type > injury_profile_id_optional;
-      typedef ::xsd::cxx::tree::traits< injury_profile_id_type, char > injury_profile_id_traits;
+      typedef ::xml_schema::string trauma_profile_id_type;
+      typedef ::xsd::cxx::tree::optional< trauma_profile_id_type > trauma_profile_id_optional;
+      typedef ::xsd::cxx::tree::traits< trauma_profile_id_type, char > trauma_profile_id_traits;
 
-      const injury_profile_id_optional&
-      injury_profile_id () const;
+      const trauma_profile_id_optional&
+      trauma_profile_id () const;
 
-      injury_profile_id_optional&
-      injury_profile_id ();
-
-      void
-      injury_profile_id (const injury_profile_id_type& x);
+      trauma_profile_id_optional&
+      trauma_profile_id ();
 
       void
-      injury_profile_id (const injury_profile_id_optional& x);
+      trauma_profile_id (const trauma_profile_id_type& x);
 
       void
-      injury_profile_id (::std::unique_ptr< injury_profile_id_type > p);
+      trauma_profile_id (const trauma_profile_id_optional& x);
+
+      void
+      trauma_profile_id (::std::unique_ptr< trauma_profile_id_type > p);
 
       // description
       //
@@ -2797,7 +2894,7 @@ namespace pfc
       protected:
       ::xsd::cxx::tree::one< short_name_type > short_name_;
       ::xsd::cxx::tree::one< unit_id_type > unit_id_;
-      injury_profile_id_optional injury_profile_id_;
+      trauma_profile_id_optional trauma_profile_id_;
       ::xsd::cxx::tree::one< description_type > description_;
     };
 
@@ -3783,30 +3880,30 @@ namespace pfc
       void
       treatment_plans (::std::unique_ptr< treatment_plans_type > p);
 
-      // injury-profiles
+      // trauma-profiles
       //
-      typedef ::pfc::schema::injury_profile_ref_list injury_profiles_type;
-      typedef ::xsd::cxx::tree::traits< injury_profiles_type, char > injury_profiles_traits;
+      typedef ::pfc::schema::trauma_profile_ref_list trauma_profiles_type;
+      typedef ::xsd::cxx::tree::traits< trauma_profiles_type, char > trauma_profiles_traits;
 
-      const injury_profiles_type&
-      injury_profiles () const;
+      const trauma_profiles_type&
+      trauma_profiles () const;
 
-      injury_profiles_type&
-      injury_profiles ();
-
-      void
-      injury_profiles (const injury_profiles_type& x);
+      trauma_profiles_type&
+      trauma_profiles ();
 
       void
-      injury_profiles (::std::unique_ptr< injury_profiles_type > p);
+      trauma_profiles (const trauma_profiles_type& x);
+
+      void
+      trauma_profiles (::std::unique_ptr< trauma_profiles_type > p);
 
       // Constructors.
       //
       relates_to (const treatment_plans_type&,
-                  const injury_profiles_type&);
+                  const trauma_profiles_type&);
 
       relates_to (::std::unique_ptr< treatment_plans_type >,
-                  ::std::unique_ptr< injury_profiles_type >);
+                  ::std::unique_ptr< trauma_profiles_type >);
 
       relates_to (const ::xercesc::DOMElement& e,
                   ::xml_schema::flags f = 0,
@@ -3835,7 +3932,7 @@ namespace pfc
 
       protected:
       ::xsd::cxx::tree::one< treatment_plans_type > treatment_plans_;
-      ::xsd::cxx::tree::one< injury_profiles_type > injury_profiles_;
+      ::xsd::cxx::tree::one< trauma_profiles_type > trauma_profiles_;
     };
   }
 }
@@ -3853,13 +3950,13 @@ namespace pfc
     operator<< (::std::ostream&, const equipment&);
 
     ::std::ostream&
-    operator<< (::std::ostream&, const injury_definition_list&);
+    operator<< (::std::ostream&, const trauma_definition_list&);
 
     ::std::ostream&
-    operator<< (::std::ostream&, const injury&);
+    operator<< (::std::ostream&, const trauma&);
 
     ::std::ostream&
-    operator<< (::std::ostream&, const injury_severity_range&);
+    operator<< (::std::ostream&, const trauma_severity_range&);
 
     ::std::ostream&
     operator<< (::std::ostream&, const numeric_range&);
@@ -3898,16 +3995,19 @@ namespace pfc
     operator<< (::std::ostream&, const treatment_plan_ref_list&);
 
     ::std::ostream&
-    operator<< (::std::ostream&, const injury_profile_list&);
+    operator<< (::std::ostream&, const trauma_profile_list&);
 
     ::std::ostream&
-    operator<< (::std::ostream&, const injury_profile&);
+    operator<< (::std::ostream&, const trauma_profile&);
 
     ::std::ostream&
-    operator<< (::std::ostream&, const injury_profile_ref_list&);
+    operator<< (::std::ostream&, const trauma_profile_ref_list&);
 
     ::std::ostream&
-    operator<< (::std::ostream&, const injury_occurance_list&);
+    operator<< (::std::ostream&, const trauma_occurence_list&);
+
+    ::std::ostream&
+    operator<< (::std::ostream&, const trauma_occurence&);
 
     ::std::ostream&
     operator<< (::std::ostream&, const medical_scenario_syllabus&);
@@ -4012,13 +4112,13 @@ namespace pfc
     operator<< (::xercesc::DOMElement&, const equipment&);
 
     void
-    operator<< (::xercesc::DOMElement&, const injury_definition_list&);
+    operator<< (::xercesc::DOMElement&, const trauma_definition_list&);
 
     void
-    operator<< (::xercesc::DOMElement&, const injury&);
+    operator<< (::xercesc::DOMElement&, const trauma&);
 
     void
-    operator<< (::xercesc::DOMElement&, const injury_severity_range&);
+    operator<< (::xercesc::DOMElement&, const trauma_severity_range&);
 
     void
     operator<< (::xercesc::DOMElement&, const numeric_range&);
@@ -4057,16 +4157,19 @@ namespace pfc
     operator<< (::xercesc::DOMElement&, const treatment_plan_ref_list&);
 
     void
-    operator<< (::xercesc::DOMElement&, const injury_profile_list&);
+    operator<< (::xercesc::DOMElement&, const trauma_profile_list&);
 
     void
-    operator<< (::xercesc::DOMElement&, const injury_profile&);
+    operator<< (::xercesc::DOMElement&, const trauma_profile&);
 
     void
-    operator<< (::xercesc::DOMElement&, const injury_profile_ref_list&);
+    operator<< (::xercesc::DOMElement&, const trauma_profile_ref_list&);
 
     void
-    operator<< (::xercesc::DOMElement&, const injury_occurance_list&);
+    operator<< (::xercesc::DOMElement&, const trauma_occurence_list&);
+
+    void
+    operator<< (::xercesc::DOMElement&, const trauma_occurence&);
 
     void
     operator<< (::xercesc::DOMElement&, const medical_scenario_syllabus&);

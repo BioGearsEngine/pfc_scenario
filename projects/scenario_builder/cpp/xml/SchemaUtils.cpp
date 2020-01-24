@@ -52,9 +52,9 @@ namespace schema {
   ScenarioSchema PFC::make_Scenario()
   {
     return ScenarioSchema(make_equipments(),
-                          make_conditions(),
+                          make_trauma_definitions(),
                           make_treatment_plans(),
-                          make_patient_states(),
+                          make_trauma_sets(),
                           make_syllabus(),
                           make_medical_scenario(),
                           make_citation_list());
@@ -65,9 +65,9 @@ namespace schema {
     return std::make_unique<schema::ScenarioSchema::equipment_type>();
   }
   //-------------------------------------------------------------------------------
-  auto PFC::make_conditions() -> std::unique_ptr<ScenarioSchema::conditions_type>
+  auto PFC::make_trauma_definitions() -> std::unique_ptr<ScenarioSchema::trauma_definitions_type>
   {
-    return std::make_unique<schema::ScenarioSchema::conditions_type>();
+    return std::make_unique<schema::ScenarioSchema::trauma_definitions_type>();
   }
 
   auto PFC::make_treatment_plans() -> std::unique_ptr<ScenarioSchema::treatment_plans_type>
@@ -75,9 +75,9 @@ namespace schema {
     return std::make_unique<schema::ScenarioSchema::treatment_plans_type>();
   }
   //-------------------------------------------------------------------------------
-  auto PFC::make_patient_states() -> std::unique_ptr<ScenarioSchema::patient_states_type>
+  auto PFC::make_trauma_sets() -> std::unique_ptr<ScenarioSchema::trauma_sets_type>
   {
-    return std::make_unique<schema::ScenarioSchema::patient_states_type>();
+    return std::make_unique<schema::ScenarioSchema::trauma_sets_type>();
   }
   //-------------------------------------------------------------------------------
   auto PFC::make_syllabus() -> std::unique_ptr<ScenarioSchema::syllabus_type>
@@ -101,22 +101,22 @@ namespace schema {
     return std::make_unique<schema::ScenarioSchema::works_cited_type>();
   }
   //-------------------------------------------------------------------------------
-  auto PFC::make_injury(::pfc::Injury const* const input) -> std::unique_ptr<schema::injury>
+  auto PFC::make_trauma(::pfc::Injury const* const input) -> std::unique_ptr<schema::trauma>
   {
 
-    auto num_range = pfc::schema::injury_severity_range();
+    auto num_range = pfc::schema::trauma_severity_range();
     num_range.numeric_range(std::make_unique<pfc::schema::numeric_range>(input->severity_min, input->severity_max));
 
-    auto injury = std::make_unique<pfc::schema::injury>(
-      std::make_unique<pfc::schema::injury::id_type>("Injury_" + std::to_string(input->id)),
-      std::make_unique<pfc::schema::injury::medical_name_type>(input->medical_name.toStdString()),
+    auto trauma = std::make_unique<pfc::schema::trauma>(
+      std::make_unique<pfc::schema::trauma::id_type>("Injury_" + std::to_string(input->id)),
+      std::make_unique<pfc::schema::trauma::medical_name_type>(input->medical_name.toStdString()),
       std::make_unique<pfc::schema::citation_ref_list>(),
-      std::make_unique<pfc::schema::injury::description_type>(input->description.toStdString()),
-      std::make_unique<pfc::schema::injury::severity_range_type>(num_range));
-    injury->common_name(input->common_name.toStdString());
-    injury->citations(make_citation_ref_list(input->citations));
+      std::make_unique<pfc::schema::trauma::description_type>(input->description.toStdString()),
+      std::make_unique<pfc::schema::trauma::severity_range_type>(num_range));
+    trauma->common_name(input->common_name.toStdString());
+    trauma->citations(make_citation_ref_list(input->citations));
 
-    return injury;
+    return trauma;
   }
   //------------------------------------------------------------------------------
   auto PFC::make_citation_ref_list(QString ref_list) -> std::unique_ptr<schema::citation_ref_list>
@@ -135,7 +135,7 @@ namespace schema {
     auto cpg_ref_list = std::make_unique<schema::cpg_ref_list>();
     for (auto& token : ref_list.split(';')) {
       if (!token.isEmpty()) {
-        cpg_ref_list->cpg_ref().push_back("CPG_"+token.toStdString());
+        cpg_ref_list->cpg_ref().push_back("CPG_" + token.toStdString());
       }
     }
     return cpg_ref_list;
@@ -146,21 +146,21 @@ namespace schema {
     auto equipment_ref_list = std::make_unique<schema::equipment_ref_list>();
     for (auto& token : ref_list.split(';')) {
       if (!token.isEmpty()) {
-        equipment_ref_list->equipment_refs().push_back("Equipment_"+token.toStdString());
+        equipment_ref_list->equipment_refs().push_back("Equipment_" + token.toStdString());
       }
     }
     return equipment_ref_list;
   }
   //-----------------------------------------------------------------------------
-  auto PFC::make_injury_set_ref_list(QString ref_list) -> std::unique_ptr<schema::injury_profile_ref_list>
+  auto PFC::make_trauma_set_ref_list(QString ref_list) -> std::unique_ptr<schema::trauma_profile_ref_list>
   {
-    auto injury_profile_ref_list = std::make_unique<schema::injury_profile_ref_list>();
+    auto trauma_profile_ref_list = std::make_unique<schema::trauma_profile_ref_list>();
     for (auto& token : ref_list.split(';')) {
       if (!token.isEmpty()) {
-        injury_profile_ref_list->injury_profile().push_back("Profile_"+token.toStdString());
+        trauma_profile_ref_list->trauma_profile().push_back("Profile_" + token.toStdString());
       }
     }
-    return injury_profile_ref_list;
+    return trauma_profile_ref_list;
   }
   //-----------------------------------------------------------------------------
   auto PFC::make_treatment_plan_ref_list(QString ref_list) -> std::unique_ptr<schema::treatment_plan_ref_list>
@@ -168,11 +168,37 @@ namespace schema {
     auto treatment_plan_ref_list = std::make_unique<schema::treatment_plan_ref_list>();
     for (auto& token : ref_list.split(';')) {
       if (!token.isEmpty()) {
-        treatment_plan_ref_list->treatment_plan().push_back("Treatment_"+token.toStdString());
+        treatment_plan_ref_list->treatment_plan().push_back("Treatment_" + token.toStdString());
       }
     }
     return treatment_plan_ref_list;
   }
+  //-----------------------------------------------------------------------------
+  auto PFC::make_trauma_occurance_list(QString ref_list, QString occurance_list, QString severity_list) -> std::unique_ptr<schema::trauma_occurence_list>
+  {
+    auto trauma_occurence_list = std::make_unique<schema::trauma_occurence_list>();
+    auto refs = ref_list.split(';');
+    auto occurences = occurance_list.split(';');
+    auto severities = severity_list.split(';');
+
+    for (auto i = 0; i < refs.size(); ++i) {
+      if (!refs[i].isEmpty()) {
+        try {
+          auto ref = refs.at(i);
+          auto occurence = occurences.at(i);
+          auto severity = severities.at(i);
+          trauma_occurence_list->trauma().push_back(std::make_unique<schema::trauma_occurence>(make_string("Trauma_" + ref.toStdString()),
+                                                                                               make_string(occurence.toStdString()),
+                                                                                               make_string(""),
+                                                                                               make_string(severity.toStdString())));
+        } catch (std::exception e) {
+          std::cout << "Error index mismatch between refs,occurances, and severities";
+        }
+      }
+    }
+    return trauma_occurence_list;
+  }
+
   //-----------------------------------------------------------------------------
   auto PFC::make_properties_list(QString properties_list) -> std::unique_ptr<schema::properties_list>
   {
@@ -197,7 +223,7 @@ namespace schema {
     auto author_list = schema::citation::authors_sequence{};
     for (auto& token : name_list.split(';')) {
       if (!token.isEmpty()) {
-        author_list.push_back("Author_"+token.toStdString());
+        author_list.push_back(token.toStdString());
       }
     }
     return author_list;
@@ -227,7 +253,7 @@ namespace schema {
                                                                        std::make_unique<pfc::schema::learning_objective::references_type>(make_citation_ref_list(input->citations),
                                                                                                                                           make_cpg_ref_list(input->cpgs)),
                                                                        std::make_unique<pfc::schema::learning_objective::relates_to_type>(make_treatment_plan_ref_list(input->treatment_plans),
-                                                                                                                                          make_injury_set_ref_list(input->injury_profiles)));
+                                                                                                                                          make_trauma_set_ref_list(input->injury_profiles)));
     return objective;
   }
   //-----------------------------------------------------------------------------
@@ -261,6 +287,28 @@ namespace schema {
     equipment->type(input->type);
     equipment->image(input->image.toStdString());
     return equipment;
+  }
+  //-----------------------------------------------------------------------------
+  auto PFC::make_trauma_profile(::pfc::InjurySet const* const input) -> std::unique_ptr<schema::trauma_profile>
+  {
+
+    auto trauma = std::make_unique<schema::trauma_profile>(make_uuid("TraumaProfile_" + std::to_string(input->id)),
+                                                           make_string(input->name.toStdString()),
+                                                           make_trauma_occurance_list(input->injuries, input->locations, input->severities),
+                                                           make_treatment_plan_ref_list(input->treatments));
+    trauma->physiology_state(input->physiology_file.toStdString());
+    return trauma;
+  }
+  //-----------------------------------------------------------------------------
+  auto PFC::make_assessment(::pfc::Assessment const* const input) -> std::unique_ptr<schema::assessment>
+  {
+    auto assessment = std::make_unique<schema::assessment>(make_uuid("Assessment_" + std::to_string(input->id)),
+                                                           make_uuid("Objective_" + input->objective.toStdString()),
+                                                           make_string(input->name.toStdString()),
+                                                           make_string(input->description.toStdString()),
+                                                           input->available_points,
+                                                           make_string(input->criteria.toStdString()));
+    return assessment;
   }
   //-----------------------------------------------------------------------------
   auto PFC::make_medical_reference_list() -> std::unique_ptr<schema::medical_reference_list>
