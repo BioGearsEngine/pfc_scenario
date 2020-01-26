@@ -202,7 +202,7 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Assessment)
 
   EXPECT_TRUE(_db.update_assessment(&assessment_1));
   EXPECT_TRUE(_db.select_assessment(&assessment_2));
-  EXPECT_EQ(assessment_1,assessment_2);
+  EXPECT_EQ(assessment_1, assessment_2);
 }
 //AUTHOR TESTS--------------------------------------------------------------
 TEST_F(TEST_FIXTURE_NAME, Insert_Author)
@@ -317,7 +317,7 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Author)
   EXPECT_TRUE(_db.update_author(&author_1));
   EXPECT_TRUE(_db.select_author(&author_2));
   //EXPECT_EQ(author_1, author_2);
-  EXPECT_EQ(author_1.id,author_2.id);
+  EXPECT_EQ(author_1.id, author_2.id);
   EXPECT_EQ(author_1.first, author_2.first);
   EXPECT_EQ(author_1.middle, author_2.middle);
   EXPECT_EQ(author_1.last, author_2.last);
@@ -473,19 +473,19 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Equipment)
   equipment_1.type = 1;
   equipment_1.description = "Got a sick keytar solo later";
   equipment_1.image = ("music stand");
-  equipment_1.citations = {1};
+  equipment_1.citations = { 1 };
 
   equipment_2.name = "piano";
   equipment_2.type = 2;
   equipment_2.description = "big instrument with keys";
   equipment_2.image = ("piano bench");
-  equipment_2.citations = {2};
+  equipment_2.citations = { 2 };
 
   equipment_3.name = "bagpipes";
   equipment_3.type = 3;
   equipment_3.description = "please stop playing the bagpipes";
   equipment_3.image = ("a bladder");
-  equipment_3.citations = {3};
+  equipment_3.citations = { 3 };
 
   EXPECT_EQ(0, _db.equipment_count());
   EXPECT_TRUE(_db.update_equipment(&equipment_1));
@@ -506,19 +506,19 @@ TEST_F(TEST_FIXTURE_NAME, Select_Equipment)
   equipment_1.type = 1;
   equipment_1.description = "Got a sick keytar solo later";
   equipment_1.image = ("music stand");
-  equipment_1.citations = {1};
+  equipment_1.citations = { 1 };
 
   equipment_2.name = "piano";
   equipment_2.type = 2;
   equipment_2.description = "big instrument with keys";
   equipment_2.image = ("piano bench");
-  equipment_2.citations = {2};
+  equipment_2.citations = { 2 };
 
   equipment_3.name = "bagpipes";
   equipment_3.type = 3;
   equipment_3.description = "please stop playing the bagpipes";
   equipment_3.image = ("a bladder");
-  equipment_3.citations = {3};
+  equipment_3.citations = { 3 };
 
   EXPECT_EQ(0, _db.equipment_count());
   EXPECT_TRUE(_db.update_equipment(&equipment_1));
@@ -553,19 +553,19 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Equipment)
   equipment_1.type = 1;
   equipment_1.description = "Got a sick keytar solo later";
   equipment_1.image = ("music stand");
-  equipment_1.citations = {1};
+  equipment_1.citations = { 1 };
 
   equipment_2.name = "piano";
   equipment_2.type = 2;
   equipment_2.description = "big instrument with keys";
   equipment_2.image = ("piano bench");
-  equipment_2.citations = {2};
+  equipment_2.citations = { 2 };
 
   equipment_3.name = "bagpipes";
   equipment_3.type = 3;
   equipment_3.description = "please stop playing the bagpipes";
   equipment_3.image = ("a bladder");
-  equipment_3.citations = {3};
+  equipment_3.citations = { 3 };
 
   EXPECT_TRUE(_db.update_equipment(&equipment_1));
   EXPECT_TRUE(_db.update_equipment(&equipment_2));
@@ -585,7 +585,7 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Equipment)
   equipment_1.type = 1;
   equipment_1.description = "Got a sick keytar solo later";
   equipment_1.image = ("music stand");
-  equipment_1.citations = {1};
+  equipment_1.citations = { 1 };
 
   equipment_2.name = "Keytar";
 
@@ -606,22 +606,31 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Event)
   Event event_3;
 
   event_1.name = "Barbecue";
-  event_1.location = 1;
-  event_1.actor = 2;
-  event_1.equipment = "Spatula";
-  event_1.description = "People cooking and eating meat outdoors";
+  event_1.description = "Barbecue Barbecue";
+  event_1.category = "DIALOG";
+  event_1.fidelity = "ACTION";
+  event_1.fk_actor_1 = 2;
+  event_1.fk_actor_2 = 3;
+  event_1.equipment = "5;6;7";
+  event_1.details = "People cooking and eating meat outdoors";
 
   event_2.name = "Wedding";
-  event_2.location = 3;
-  event_2.actor = 4;
-  event_2.equipment = "Tuxedo";
-  event_2.description = "Two people getting married";
+  event_2.description = "Wedding Barbecue";
+  event_2.category = "DIALOG";
+  event_2.fidelity = "ACTION";
+  event_2.fk_actor_1 = 4;
+  event_2.fk_actor_2 = 5;
+  event_2.equipment = "3;4;5";
+  event_2.details = "Two people getting married";
 
   event_3.name = "Funeral";
-  event_3.location = 5;
-  event_3.actor = 6;
-  event_3.equipment = "Coffin";
-  event_3.description = "Burying a dead person";
+  event_3.description = "Funeral Barbecue";
+  event_3.category = "DIALOG";
+  event_3.fidelity = "ACTION";
+  event_3.fk_actor_1 = 6;
+  event_3.fk_actor_2 = 7;
+  event_3.equipment = "1;2;3";
+  event_3.details = "Burying a dead person";
 
   EXPECT_EQ(0, _db.event_count());
   EXPECT_TRUE(_db.update_event(&event_1));
@@ -639,22 +648,31 @@ TEST_F(TEST_FIXTURE_NAME, Select_Event)
   Event event_3;
 
   event_1.name = "Barbecue";
-  event_1.location = 1;
-  event_1.actor = 2;
-  event_1.equipment = "Spatula";
-  event_1.description = "People cooking and eating meat outdoors";
+  event_1.description = "Barbecue Barbecue";
+  event_1.category = "DIALOG";
+  event_1.fidelity = "ACTION";
+  event_1.fk_actor_1 = 2;
+  event_1.fk_actor_2 = 3;
+  event_1.equipment = "5;6;7";
+  event_1.details = "People cooking and eating meat outdoors";
 
   event_2.name = "Wedding";
-  event_2.location = 3;
-  event_2.actor = 4;
-  event_2.equipment = "Tuxedo";
-  event_2.description = "Two people getting married";
+  event_2.description = "Wedding Barbecue";
+  event_2.category = "DIALOG";
+  event_2.fidelity = "ACTION";
+  event_2.fk_actor_1 = 4;
+  event_2.fk_actor_2 = 5;
+  event_2.equipment = "3;4;5";
+  event_2.details = "Two people getting married";
 
   event_3.name = "Funeral";
-  event_3.location = 5;
-  event_3.actor = 6;
-  event_3.equipment = "Coffin";
-  event_3.description = "Burying a dead person";
+  event_3.description = "Funeral Barbecue";
+  event_3.category = "DIALOG";
+  event_3.fidelity = "ACTION";
+  event_3.fk_actor_1 = 6;
+  event_3.fk_actor_2 = 7;
+  event_3.equipment = "1;2;3";
+  event_3.details = "Burying a dead person";
 
   EXPECT_EQ(0, _db.event_count());
   EXPECT_TRUE(_db.update_event(&event_1));
@@ -687,22 +705,31 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Event)
   Event event_3;
 
   event_1.name = "Barbecue";
-  event_1.location = 1;
-  event_1.actor = 2;
-  event_1.equipment = "Spatula";
-  event_1.description = "People cooking and eating meat outdoors";
+  event_1.description = "Barbecue Barbecue";
+  event_1.category = "DIALOG";
+  event_1.fidelity = "ACTION";
+  event_1.fk_actor_1 = 2;
+  event_1.fk_actor_2 = 3;
+  event_1.equipment = "5;6;7";
+  event_1.details = "People cooking and eating meat outdoors";
 
   event_2.name = "Wedding";
-  event_2.location = 3;
-  event_2.actor = 4;
-  event_2.equipment = "Tuxedo";
-  event_2.description = "Two people getting married";
+  event_2.description = "Wedding Barbecue";
+  event_2.category = "DIALOG";
+  event_2.fidelity = "ACTION";
+  event_2.fk_actor_1 = 4;
+  event_2.fk_actor_2 = 5;
+  event_2.equipment = "3;4;5";
+  event_2.details = "Two people getting married";
 
   event_3.name = "Funeral";
-  event_3.location = 5;
-  event_3.actor = 6;
-  event_3.equipment = "Coffin";
-  event_3.description = "Burying a dead person";
+  event_3.description = "Funeral Barbecue";
+  event_3.category = "DIALOG";
+  event_3.fidelity = "ACTION";
+  event_3.fk_actor_1 = 6;
+  event_3.fk_actor_2 = 7;
+  event_3.equipment = "1;2;3";
+  event_3.details = "Burying a dead person";
 
   EXPECT_TRUE(_db.update_event(&event_1));
   EXPECT_TRUE(_db.update_event(&event_2));
@@ -719,10 +746,13 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Event)
   Event event_2;
 
   event_1.name = "Barbecue";
-  event_1.location = 1;
-  event_1.actor = 2;
-  event_1.equipment = "Spatula";
-  event_1.description = "People cooking and eating meat outdoors";
+  event_1.description = "Barbecue Barbecue";
+  event_1.category = "DIALOG";
+  event_1.fidelity = "ACTION";
+  event_1.fk_actor_1 = 2;
+  event_1.fk_actor_2 = 3;
+  event_1.equipment = "5;6;7";
+  event_1.details = "People cooking and eating meat outdoors";
 
   event_2.name = "Barbecue";
 
@@ -741,17 +771,17 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Injury)
   injury_1.medical_name = "Keyboardus Faceus";
   injury_1.common_name = "Keyboard Face";
   injury_1.description = "Looks like you took a nap on your keyboard";
-  injury_1.citations = {1};
+  injury_1.citations = { 1 };
 
   injury_2.medical_name = "Hangnailus";
   injury_2.common_name = "Hangnail";
   injury_2.description = "Ouch, really stings";
-  injury_2.citations = {2};
+  injury_2.citations = { 2 };
 
   injury_3.medical_name = "Stubbedus Toeus";
   injury_3.common_name = "Stubbed toe";
   injury_3.description = "ouchie";
-  injury_3.citations = {3};
+  injury_3.citations = { 3 };
 
   EXPECT_EQ(0, _db.injury_count());
   EXPECT_TRUE(_db.update_injury(&injury_1));
@@ -771,17 +801,17 @@ TEST_F(TEST_FIXTURE_NAME, Select_Injury)
   injury_1.medical_name = "Keyboardus Faceus";
   injury_1.common_name = "Keyboard Face";
   injury_1.description = "Looks like you took a nap on your keyboard";
-  injury_1.citations = {1};
+  injury_1.citations = { 1 };
 
   injury_2.medical_name = "Hangnailus";
   injury_2.common_name = "Hangnail";
   injury_2.description = "Ouch, really stings";
-  injury_2.citations = {2};
+  injury_2.citations = { 2 };
 
   injury_3.medical_name = "Stubbedus Toeus";
   injury_3.common_name = "Stubbed toe";
   injury_3.description = "ouchie";
-  injury_3.citations = {3};
+  injury_3.citations = { 3 };
 
   EXPECT_EQ(0, _db.injury_count());
   EXPECT_TRUE(_db.update_injury(&injury_1));
@@ -820,17 +850,17 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Injury)
   injury_1.medical_name = "Keyboardus Faceus";
   injury_1.common_name = "Keyboard Face";
   injury_1.description = "Looks like you took a nap on your keyboard";
-  injury_1.citations = {1};
+  injury_1.citations = { 1 };
 
   injury_2.medical_name = "Hangnailus";
   injury_2.common_name = "Hangnail";
   injury_2.description = "Ouch, really stings";
-  injury_2.citations = {2};
+  injury_2.citations = { 2 };
 
   injury_3.medical_name = "Stubbedus Toeus";
   injury_3.common_name = "Stubbed toe";
   injury_3.description = "ouchie";
-  injury_3.citations = {3};
+  injury_3.citations = { 3 };
 
   EXPECT_TRUE(_db.update_injury(&injury_1));
   EXPECT_TRUE(_db.update_injury(&injury_2));
@@ -849,7 +879,7 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Injury)
   injury_1.medical_name = "Keyboardus Faceus";
   injury_1.common_name = "Keyboard Face";
   injury_1.description = "Looks like you took a nap on your keyboard";
-  injury_1.citations = {1};
+  injury_1.citations = { 1 };
 
   injury_2.medical_name = "Keyboardus Faceus";
 
@@ -933,7 +963,7 @@ TEST_F(TEST_FIXTURE_NAME, Select_InjurySet)
 
   _db.select_injury_set(&id);
   _db.select_injury_set(&name);
-  
+
   injury_set_1.id = 1;
   EXPECT_EQ(injury_set_1, id);
   injury_set_2.id = 2;
@@ -950,7 +980,7 @@ TEST_F(TEST_FIXTURE_NAME, Remove_InjurySet)
   injury_set_1.description = "Looks like you took a nap on your keyboard";
   injury_set_1.injuries = { 1 };
   injury_set_1.locations = { 1 };
-  injury_set_1.severities = {1 };
+  injury_set_1.severities = { 1 };
 
   injury_set_2.name = "Hangnailus";
   injury_set_2.description = "Ouch, really stings";
@@ -1310,11 +1340,11 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Objective)
 
   objective_1.name = "Kill the Troll";
   objective_1.description = "There is a troll in the forest in a great big whole who has some gold. Kill it";
-  objective_1.citations  = "1;2;3";
+  objective_1.citations = "1;2;3";
 
   objective_2.name = "Steal the Trolls Gold";
   objective_2.description = "Gold is really dense. Its like crazy heavy bring a levetation spell.";
-  objective_2.citations  = "4;5;6";
+  objective_2.citations = "4;5;6";
 
   objective_3.name = "Return the Gold to the Quest Giver. Kill the Quest Giver";
   objective_3.description = "If we want to keep the gold we need to steal from the quest giver, but he will need to die before we can do that.";
@@ -1337,15 +1367,15 @@ TEST_F(TEST_FIXTURE_NAME, Select_Objective)
 
   objective_1.name = "Kill the Troll";
   objective_1.description = "There is a troll in the forest in a great big whole who has some gold. Kill it";
-  objective_1.citations  = "1;2;3";
+  objective_1.citations = "1;2;3";
 
   objective_2.name = "Steal the Trolls Gold";
   objective_2.description = "Gold is really dense. Its like crazy heavy bring a levetation spell.";
-  objective_2.citations  = "4;5;6";
+  objective_2.citations = "4;5;6";
 
   objective_3.name = "Return the Gold to the Quest Giver. Kill the Quest Giver";
   objective_3.description = "If we want to keep the gold we need to steal from the quest giver, but he will need to die before we can do that.";
-  objective_3.citations  = "7;8;9";
+  objective_3.citations = "7;8;9";
 
   EXPECT_EQ(0, _db.objective_count());
   EXPECT_TRUE(_db.update_objective(&objective_1));
@@ -1378,15 +1408,15 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Objective)
 
   objective_1.name = "Kill the Troll";
   objective_1.description = "There is a troll in the forest in a great big whole who has some gold. Kill it";
-  objective_1.citations  = "1;2;3";
+  objective_1.citations = "1;2;3";
 
   objective_2.name = "Steal the Trolls Gold";
   objective_2.description = "Gold is really dense. Its like crazy heavy bring a levetation spell.";
-  objective_2.citations  = "4;5;6";
+  objective_2.citations = "4;5;6";
 
   objective_3.name = "Return the Gold to the Quest Giver. Kill the Quest Giver";
   objective_3.description = "If we want to keep the gold we need to steal from the quest giver, but he will need to die before we can do that.";
-  objective_3.citations  = "7;8;9";
+  objective_3.citations = "7;8;9";
 
   EXPECT_TRUE(_db.update_objective(&objective_1));
   EXPECT_TRUE(_db.update_objective(&objective_2));
@@ -1404,7 +1434,7 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Objective)
 
   objective_1.name = "Kill the Troll";
   objective_1.description = "There is a troll in the forest in a great big whole who has some gold. Kill it";
-  objective_1.citations  = "1;2;3";
+  objective_1.citations = "1;2;3";
 
   objective_2.name = "Kill the Troll";
 
@@ -1784,6 +1814,11 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Scene)
   Scene scene_3;
 
   scene_1.name = "Opening";
+  scene_1.description = "Opening";
+  scene_1.time_of_day = "Opening";
+  scene_1.time_in_simulation = 60;
+  scene_1.items = "Opening";
+  scene_1.details = "Opening";
 
   scene_2.name = "Opening";
 
@@ -1802,20 +1837,20 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Treatment)
   treatment_1.medical_name = "Soupus De Gallinus";
   treatment_1.common_name = "Chicken Soup";
   treatment_1.description = "Good for the soul";
-  treatment_1.equipment= {2};
-  treatment_1.citations = {1};
+  treatment_1.equipment = { 2 };
+  treatment_1.citations = { 1 };
 
   treatment_2.medical_name = "Massageus";
   treatment_2.common_name = "Massage";
   treatment_2.description = "Back rub";
-  treatment_2.equipment= {3};
-  treatment_2.citations = {2};
+  treatment_2.equipment = { 3 };
+  treatment_2.citations = { 2 };
 
   treatment_3.medical_name = "Bashus Headus againstus Wallus";
   treatment_3.common_name = "Bashing Head Against A Wall";
   treatment_3.description = "Oddly Satisfying";
-  treatment_3.equipment= {4};
-  treatment_3.citations = {3};
+  treatment_3.equipment = { 4 };
+  treatment_3.citations = { 3 };
 
   EXPECT_EQ(0, _db.treatment_count());
   EXPECT_TRUE(_db.update_treatment(&treatment_1));
@@ -1835,20 +1870,20 @@ TEST_F(TEST_FIXTURE_NAME, Select_Treatment)
   treatment_1.medical_name = "Soupus De Gallinus";
   treatment_1.common_name = "Chicken Soup";
   treatment_1.description = "Good for the soul";
-  treatment_1.equipment= {2};
-  treatment_1.citations = {1};
+  treatment_1.equipment = { 2 };
+  treatment_1.citations = { 1 };
 
   treatment_2.medical_name = "Massageus";
   treatment_2.common_name = "Massage";
   treatment_2.description = "Back rub";
-  treatment_2.equipment= {3};
-  treatment_2.citations = {2};
+  treatment_2.equipment = { 3 };
+  treatment_2.citations = { 2 };
 
   treatment_3.medical_name = "Bashus Headus againstus Wallus";
   treatment_3.common_name = "Bashing Head Against A Wall";
   treatment_3.description = "Oddly Satisfying";
-  treatment_3.equipment= {4};
-  treatment_3.citations = {3};
+  treatment_3.equipment = { 4 };
+  treatment_3.citations = { 3 };
 
   EXPECT_EQ(0, _db.treatment_count());
   EXPECT_TRUE(_db.update_treatment(&treatment_1));
@@ -1887,20 +1922,20 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Treatment)
   treatment_1.medical_name = "Soupus De Gallinus";
   treatment_1.common_name = "Chicken Soup";
   treatment_1.description = "Good for the soul";
-  treatment_1.equipment= {2};
-  treatment_1.citations = {1};
+  treatment_1.equipment = { 2 };
+  treatment_1.citations = { 1 };
 
   treatment_2.medical_name = "Massageus";
   treatment_2.common_name = "Massage";
   treatment_2.description = "Back rub";
-  treatment_2.equipment= {3};
-  treatment_2.citations = {2};
+  treatment_2.equipment = { 3 };
+  treatment_2.citations = { 2 };
 
   treatment_3.medical_name = "Bashus Headus againstus Wallus";
   treatment_3.common_name = "Bashing Head Against A Wall";
   treatment_3.description = "Oddly Satisfying";
-  treatment_3.equipment= {4};
-  treatment_3.citations = {3};
+  treatment_3.equipment = { 4 };
+  treatment_3.citations = { 3 };
 
   EXPECT_TRUE(_db.update_treatment(&treatment_1));
   EXPECT_TRUE(_db.update_treatment(&treatment_2));
@@ -1919,8 +1954,8 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Treatment)
   treatment_1.medical_name = "Soupus De Gallinus";
   treatment_1.common_name = "Chicken Soup";
   treatment_1.description = "Good for the soul";
-  treatment_1.equipment= {2};
-  treatment_1.citations = {1};
+  treatment_1.equipment = { 2 };
+  treatment_1.citations = { 1 };
 
   treatment_2.medical_name = "Soupus De Gallinus";
 
@@ -3483,23 +3518,42 @@ TEST_F(TEST_FIXTURE_NAME, get_events)
 {
   using namespace pfc;
   Event event_1;
+  EventMap eventMap_1;
+  Scene scene_1;
+
+  scene_1.name = "Scene 1";
+  scene_1.items = "1;2";
+  scene_1.roles = "1;2";
 
   event_1.name = "Barbecue";
-  event_1.location = 1;
-  event_1.actor = 2;
-  event_1.equipment = "Spatula";
-  event_1.description = "People cooking and eating meat outdoors";
+  event_1.description = "Barbecue Barbecue";
+  event_1.category = "DIALOG";
+  event_1.fidelity = "ACTION";
+  event_1.fk_actor_1 = 2;
+  event_1.fk_actor_2 = 3;
+  event_1.equipment = "5;6;7";
+  event_1.details = "People cooking and eating meat outdoors";
 
   EXPECT_EQ(0, _db.event_count());
-  EXPECT_TRUE(_db.update_event(&event_1));
 
-  auto list = _db.get_events();
+  EXPECT_TRUE(_db.update_event(&event_1));
+  EXPECT_TRUE(_db.update_scene(&scene_1));
+
+  eventMap_1.fk_event = scene_1.id;
+  eventMap_1.fk_scene = event_1.id;
+
+  EXPECT_TRUE(_db.update_event_map(&eventMap_1));
+
+  auto list = _db.get_events_in_scene(&scene_1);
 
   EXPECT_TRUE(list[0]->name.compare(event_1.name) == 0);
   EXPECT_TRUE(list[0]->description.compare(event_1.description) == 0);
   EXPECT_TRUE(list[0]->equipment.compare(event_1.equipment) == 0);
-  EXPECT_TRUE(list[0]->location == event_1.location);
-  EXPECT_TRUE(list[0]->actor == event_1.actor);
+  EXPECT_TRUE(list[0]->category == event_1.category);
+  EXPECT_TRUE(list[0]->fidelity == event_1.fidelity);
+  EXPECT_TRUE(list[0]->fk_actor_1 == event_1.fk_actor_1);
+  EXPECT_TRUE(list[0]->fk_actor_2 == event_1.fk_actor_2);
+  EXPECT_TRUE(list[0]->details == event_1.details);
 }
 
 TEST_F(TEST_FIXTURE_NAME, LocationMap_Test_Location_Insertion)
@@ -3890,7 +3944,6 @@ TEST_F(TEST_FIXTURE_NAME, get_injury_sets)
   EXPECT_TRUE(list[0]->injuries.compare(injury_set_1.injuries) == 0);
   EXPECT_TRUE(list[0]->locations.compare(injury_set_1.locations) == 0);
   EXPECT_TRUE(list[0]->severities.compare(injury_set_1.severities) == 0);
-
 }
 TEST_F(TEST_FIXTURE_NAME, get_role_maps)
 {
@@ -3913,8 +3966,8 @@ TEST_F(TEST_FIXTURE_NAME, get_role_maps)
 
   auto list = _db.get_role_maps();
 
-  EXPECT_EQ(1,list[0]->fk_scene);
-  EXPECT_EQ(1,list[0]->fk_role);
+  EXPECT_EQ(1, list[0]->fk_scene);
+  EXPECT_EQ(1, list[0]->fk_role);
 }
 TEST_F(TEST_FIXTURE_NAME, get_event_maps)
 {
@@ -3940,7 +3993,7 @@ TEST_F(TEST_FIXTURE_NAME, get_event_maps)
   EXPECT_EQ(1, list[0]->fk_scene);
   EXPECT_EQ(1, list[0]->fk_event);
 }
-//TEST_F(TEST_FIXTURE_NAME, get_prop_maps) {}
+
 TEST_F(TEST_FIXTURE_NAME, get_citation_maps)
 {
   using namespace pfc;
@@ -4052,9 +4105,8 @@ TEST_F(TEST_FIXTURE_NAME, get_properties)
 
   EXPECT_TRUE(list[0]->name.compare(property_1.name) == 0);
   EXPECT_TRUE(list[0]->value.compare(property_1.value) == 0);
-
 }
-//TEST_F(TEST_FIXTURE_NAME, get_props) {}
+
 TEST_F(TEST_FIXTURE_NAME, get_restrictions)
 {
   using namespace pfc;
@@ -4070,7 +4122,6 @@ TEST_F(TEST_FIXTURE_NAME, get_restrictions)
 
   EXPECT_TRUE(list[0]->name.compare(restriction_1.name) == 0);
   EXPECT_TRUE(list[0]->value.compare(restriction_1.value) == 0);
-
 }
 TEST_F(TEST_FIXTURE_NAME, get_roles)
 {
@@ -4123,5 +4174,4 @@ TEST_F(TEST_FIXTURE_NAME, get_scenes)
   auto list = _db.get_scenes();
 
   EXPECT_TRUE(list[0]->name.compare(scene_1.name) == 0);
-
 }

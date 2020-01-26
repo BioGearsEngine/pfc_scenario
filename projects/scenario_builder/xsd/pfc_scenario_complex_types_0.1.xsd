@@ -443,7 +443,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
       <xs:element name="time-in-simulation" type="xs:integer"/>
       <!-- <xs:element name="weather" type="msdl:EnvironmentType" minOccurs="0"/> -->
       <xs:element name="events" type="event-list"/>
-      <xs:element name="item" type="item-list"/>
+      <xs:element name="items" type="item-list"/>
       <xs:element name="roles" type="role-ref-list"/>
     </xs:all>
   </xs:complexType>
@@ -474,8 +474,13 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
     </xs:annotation>
     <xs:all>
+      <xs:element name="id" type="xs:string"/>
+      <xs:element name="name" type="xs:string"/>
       <xs:element name="category" type="event-category-enum"/>
       <xs:element name="fidelity" type="event-fidelity-enum"/>
+      <xs:element name="actor_1" type="xs:string"/>
+      <xs:element name="actor_2" type="xs:string"/>
+      <xs:element name="equipment" type="xs:string"/>
       <xs:element name="details" type="xs:string"/>
     </xs:all>
   </xs:complexType>

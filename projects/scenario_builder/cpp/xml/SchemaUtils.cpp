@@ -227,6 +227,48 @@ namespace schema {
     }
     return author_list;
   }
+  //-----------------------------------------------------------------------------
+  auto PFC::make_event_category(QString cat) -> schema::event_category_enum
+  {
+    auto category = schema::event_category_enum::value::ACTION;
+    if (cat == "ACTION") {
+      category = schema::event_category_enum::value::ACTION;
+    } else if (cat == "DIALOG") {
+      category = schema::event_category_enum::value::DIALOG;
+    } else if (cat == "MOVMENT") {
+      category = schema::event_category_enum::value::MOVMENT;
+    } else if (cat == "SOUND") {
+      category = schema::event_category_enum::value::SOUND;
+    } else if (cat == "ENVIRONMENT") {
+      category = schema::event_category_enum::value::ENVIRONMENT;
+    }
+    return category;
+  }
+
+  auto PFC::make_event_fedelity(QString fed) -> schema::event_fidelity_enum
+  {
+    auto fedelity = schema::event_fidelity_enum::value::HIGH;
+    if (fed == "HIGH") {
+      fedelity = schema::event_fidelity_enum::value::HIGH;
+    } else if (fed == "MEDIUM") {
+      fedelity = schema::event_fidelity_enum::value::MEDIUM;
+    } else if (fed == "LOW") {
+      fedelity = schema::event_fidelity_enum::value::LOW;
+    }
+    return fedelity;
+  }
+  //-----------------------------------------------------------------------------
+  auto PFC::make_property_value_list(QString value_list) -> std::unique_ptr<schema::property_value_list>
+  {
+    auto list = std::make_unique<schema::property_value_list>();
+    auto vec = value_list.split(';');
+    for (auto value : vec) {
+      if (!value.isEmpty()) {
+        //list->value().push_back( std::make_unique<schema::property_value>(value.toStdString()));
+      }
+    }
+    return list;
+  }
 
   //-----------------------------------------------------------------------------
   auto PFC::make_treatment_plan(::pfc::Treatment const* const input) -> std::unique_ptr<treatment_plan>
@@ -274,7 +316,7 @@ namespace schema {
                                                 schema::make_time(input->time_of_day),
                                                 input->time_in_simulation,
                                                 std::make_unique<pfc::schema::scene::events_type>(),
-                                                std::make_unique<pfc::schema::scene::item_type>(),
+                                                std::make_unique<pfc::schema::scene::items_type>(),
                                                 std::make_unique<pfc::schema::scene::roles_type>());
   }
   //-----------------------------------------------------------------------------
@@ -321,6 +363,35 @@ namespace schema {
     role->trauma_profile_ref(make_string(input->trauma_profile.toStdString()));
     return role;
   }
+  //-----------------------------------------------------------------------------
+  auto PFC::make_event(::pfc::Event const* const input) -> std::unique_ptr<schema::event>
+  {
+    auto event = std::make_unique<schema::event>(make_uuid("Event_" + std::to_string(input->id)),
+                                                 make_string(input->name.toStdString()),
+                                                 make_event_category(input->category),
+                                                 make_event_fedelity(input->fidelity),
+                                                 make_string("Actor_" + std::to_string(input->fk_actor_1)),
+                                                 make_string("Actor_" + std::to_string(input->fk_actor_2)),
+                                                 make_string(input->equipment.toStdString()),
+                                                 make_string(input->details.toStdString()));
+
+    return event;
+  }
+
+  auto PFC::make_item(::pfc::EquipmentMap const* const input) -> std::unique_ptr<schema::item>
+  {
+    auto item = std::make_unique<schema::item>(make_string(input->name.toStdString()),
+                                               make_string("Equipment_" + std::to_string(input->id)),
+                                               make_string(input->notes.toStdString()),
+                                               make_property_value_list(input->property_values));
+    return item;
+  }
+  //-----------------------------------------------------------------------------
+  auto PFC::make_role_ref(::pfc::Role const* const input) -> std::unique_ptr<::xml_schema::string>
+  {
+    return std::make_unique<::xml_schema::string>("Role_" + std::to_string(input->id));
+  }
+
   //-----------------------------------------------------------------------------
   auto PFC::make_medical_reference_list() -> std::unique_ptr<schema::medical_reference_list>
   {

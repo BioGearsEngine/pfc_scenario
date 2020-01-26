@@ -298,7 +298,22 @@ void Serializer::generate_pfc_stream(SQLite3Driver* driver)
   //6.  <medical-scenario>
   //6.1 <medical-scenario><scenes>
   for (auto& scene : driver->get_scenes()) {
-    pfc_scenario.medical_scenario().training_script().scene().push_back(PFC::make_scene(scene.get()));
+    auto scene_ptr = PFC::make_scene(scene.get());
+    //6.1.1 <medical-scenario><scenes><events>
+    for ( auto& event : driver->get_events_in_scene(scene.get()) ){
+      scene_ptr->events().event().push_back(PFC::make_event(event.get()));
+    }
+    //6.1.2 <medical-scenario><scenes><items>
+    for ( auto& item : driver->get_equipment_in_scene(scene.get()) ){
+      scene_ptr->items().item().push_back(PFC::make_item(item.get()));
+    }
+    ////6.1.3 <medical-scenario><scenes><roles>
+    for (auto& role : driver->get_roles_in_scene(scene.get())) {
+      if (role->id != -1) {
+        scene_ptr->roles().role_ref().push_back(PFC::make_role_ref(role.get()));
+      }
+    }
+    pfc_scenario.medical_scenario().training_script().scene().push_back(std::move(scene_ptr));
   }
   //6.2 <medical-scenario><roles>
   for (auto& role : driver->get_roles()) {

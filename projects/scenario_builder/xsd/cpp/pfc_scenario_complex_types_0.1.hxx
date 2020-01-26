@@ -3281,22 +3281,22 @@ namespace pfc
       void
       events (::std::unique_ptr< events_type > p);
 
-      // item
+      // items
       //
-      typedef ::pfc::schema::item_list item_type;
-      typedef ::xsd::cxx::tree::traits< item_type, char > item_traits;
+      typedef ::pfc::schema::item_list items_type;
+      typedef ::xsd::cxx::tree::traits< items_type, char > items_traits;
 
-      const item_type&
-      item () const;
+      const items_type&
+      items () const;
 
-      item_type&
-      item ();
-
-      void
-      item (const item_type& x);
+      items_type&
+      items ();
 
       void
-      item (::std::unique_ptr< item_type > p);
+      items (const items_type& x);
+
+      void
+      items (::std::unique_ptr< items_type > p);
 
       // roles
       //
@@ -3323,7 +3323,7 @@ namespace pfc
              const time_of_day_type&,
              const time_in_simulation_type&,
              const events_type&,
-             const item_type&,
+             const items_type&,
              const roles_type&);
 
       scene (const location_id_type&,
@@ -3332,7 +3332,7 @@ namespace pfc
              const time_of_day_type&,
              const time_in_simulation_type&,
              ::std::unique_ptr< events_type >,
-             ::std::unique_ptr< item_type >,
+             ::std::unique_ptr< items_type >,
              ::std::unique_ptr< roles_type >);
 
       scene (::std::unique_ptr< location_id_type >,
@@ -3341,7 +3341,7 @@ namespace pfc
              ::std::unique_ptr< time_of_day_type >,
              const time_in_simulation_type&,
              ::std::unique_ptr< events_type >,
-             ::std::unique_ptr< item_type >,
+             ::std::unique_ptr< items_type >,
              ::std::unique_ptr< roles_type >);
 
       scene (const ::xercesc::DOMElement& e,
@@ -3376,7 +3376,7 @@ namespace pfc
       ::xsd::cxx::tree::one< time_of_day_type > time_of_day_;
       ::xsd::cxx::tree::one< time_in_simulation_type > time_in_simulation_;
       ::xsd::cxx::tree::one< events_type > events_;
-      ::xsd::cxx::tree::one< item_type > item_;
+      ::xsd::cxx::tree::one< items_type > items_;
       ::xsd::cxx::tree::one< roles_type > roles_;
     };
 
@@ -3436,6 +3436,40 @@ namespace pfc
     class event: public ::xml_schema::type
     {
       public:
+      // id
+      //
+      typedef ::xml_schema::string id_type;
+      typedef ::xsd::cxx::tree::traits< id_type, char > id_traits;
+
+      const id_type&
+      id () const;
+
+      id_type&
+      id ();
+
+      void
+      id (const id_type& x);
+
+      void
+      id (::std::unique_ptr< id_type > p);
+
+      // name
+      //
+      typedef ::xml_schema::string name_type;
+      typedef ::xsd::cxx::tree::traits< name_type, char > name_traits;
+
+      const name_type&
+      name () const;
+
+      name_type&
+      name ();
+
+      void
+      name (const name_type& x);
+
+      void
+      name (::std::unique_ptr< name_type > p);
+
       // category
       //
       typedef ::pfc::schema::event_category_enum category_type;
@@ -3470,6 +3504,57 @@ namespace pfc
       void
       fidelity (::std::unique_ptr< fidelity_type > p);
 
+      // actor_1
+      //
+      typedef ::xml_schema::string actor_1_type;
+      typedef ::xsd::cxx::tree::traits< actor_1_type, char > actor_1_traits;
+
+      const actor_1_type&
+      actor_1 () const;
+
+      actor_1_type&
+      actor_1 ();
+
+      void
+      actor_1 (const actor_1_type& x);
+
+      void
+      actor_1 (::std::unique_ptr< actor_1_type > p);
+
+      // actor_2
+      //
+      typedef ::xml_schema::string actor_2_type;
+      typedef ::xsd::cxx::tree::traits< actor_2_type, char > actor_2_traits;
+
+      const actor_2_type&
+      actor_2 () const;
+
+      actor_2_type&
+      actor_2 ();
+
+      void
+      actor_2 (const actor_2_type& x);
+
+      void
+      actor_2 (::std::unique_ptr< actor_2_type > p);
+
+      // equipment
+      //
+      typedef ::xml_schema::string equipment_type;
+      typedef ::xsd::cxx::tree::traits< equipment_type, char > equipment_traits;
+
+      const equipment_type&
+      equipment () const;
+
+      equipment_type&
+      equipment ();
+
+      void
+      equipment (const equipment_type& x);
+
+      void
+      equipment (::std::unique_ptr< equipment_type > p);
+
       // details
       //
       typedef ::xml_schema::string details_type;
@@ -3489,12 +3574,22 @@ namespace pfc
 
       // Constructors.
       //
-      event (const category_type&,
+      event (const id_type&,
+             const name_type&,
+             const category_type&,
              const fidelity_type&,
+             const actor_1_type&,
+             const actor_2_type&,
+             const equipment_type&,
              const details_type&);
 
-      event (::std::unique_ptr< category_type >,
+      event (::std::unique_ptr< id_type >,
+             ::std::unique_ptr< name_type >,
+             ::std::unique_ptr< category_type >,
              ::std::unique_ptr< fidelity_type >,
+             ::std::unique_ptr< actor_1_type >,
+             ::std::unique_ptr< actor_2_type >,
+             ::std::unique_ptr< equipment_type >,
              ::std::unique_ptr< details_type >);
 
       event (const ::xercesc::DOMElement& e,
@@ -3523,8 +3618,13 @@ namespace pfc
              ::xml_schema::flags);
 
       protected:
+      ::xsd::cxx::tree::one< id_type > id_;
+      ::xsd::cxx::tree::one< name_type > name_;
       ::xsd::cxx::tree::one< category_type > category_;
       ::xsd::cxx::tree::one< fidelity_type > fidelity_;
+      ::xsd::cxx::tree::one< actor_1_type > actor_1_;
+      ::xsd::cxx::tree::one< actor_2_type > actor_2_;
+      ::xsd::cxx::tree::one< equipment_type > equipment_;
       ::xsd::cxx::tree::one< details_type > details_;
     };
 

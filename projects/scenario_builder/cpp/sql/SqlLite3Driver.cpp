@@ -20,8 +20,8 @@ specific language governing permissions and limitations under the License.
 #include <QSqlRecord>
 #include <QtGlobal>
 
-#include <iostream>
 #include <fstream>
+#include <iostream>
 
 #include "SqlLite3_Statments.h"
 #include "sqlite3ext.h"
@@ -90,25 +90,23 @@ bool SQLite3Driver::initialize_db()
     { tables[AUTHORS], sqlite3::create_authors_table },
     { tables[ASSESSMENTS], sqlite3::create_assessments_table },
     { tables[CITATIONS], sqlite3::create_citations_table },
+    { tables[CITATION_MAPS], sqlite3::create_citation_maps_table },
     { tables[EVENTS], sqlite3::create_events_table },
+    { tables[EVENT_MAPS], sqlite3::create_event_maps_table },
     { tables[EQUIPMENTS], sqlite3::create_equipment_table },
+    { tables[EQUIPMENT_MAPS], sqlite3::create_equipment_map_table },
     { tables[INJURIES], sqlite3::create_injuries_table },
     { tables[INJURY_SETS], sqlite3::create_injury_sets_table },
     { tables[LOCATIONS], sqlite3::create_locations_table },
-    { tables[ROLE_MAPS], sqlite3::create_role_maps_table },
-    { tables[EVENT_MAPS], sqlite3::create_event_maps_table },
     { tables[LOCATION_MAPS], sqlite3::create_location_maps_table },
-    { tables[CITATION_MAPS], sqlite3::create_citation_maps_table },
-    { tables[PROP_MAPS], sqlite3::create_prop_maps_table },
+    { tables[ROLE_MAPS], sqlite3::create_role_maps_table },
     { tables[RESTRICTION_MAPS], sqlite3::create_restriction_maps_table },
-    { tables[EQUIPMENT_MAPS], sqlite3::create_equipment_maps_table },
     { tables[OBJECTIVES], sqlite3::create_objectives_table },
     { tables[PROPERTIES], sqlite3::create_properties_table },
-    { tables[PROPS], sqlite3::create_props_table },
     { tables[RESTRICTIONS], sqlite3::create_restrictions_table },
     { tables[ROLES], sqlite3::create_roles_table },
-    { tables[TREATMENTS], sqlite3::create_treatments_table },
-    { tables[SCENES], sqlite3::create_scenes_table }
+    { tables[SCENES], sqlite3::create_scenes_table },
+    { tables[TREATMENTS], sqlite3::create_treatments_table }
   };
 
   if (_db.open()) {
@@ -132,31 +130,44 @@ bool SQLite3Driver::clear_db()
     query.prepare(sqlite3::drop_table);
     query.bindValue(":table", tables[AUTHORS]);
     bool iResult = query.exec();
-    query.bindValue(":table", tables[PROPERTIES]);
-    iResult &= query.exec();
-    query.bindValue(":table", tables[RESTRICTIONS]);
-    iResult &= query.exec();
-    query.bindValue(":table", tables[OBJECTIVES]);
+    query.bindValue(":table", tables[ASSESSMENTS]);
     iResult &= query.exec();
     query.bindValue(":table", tables[CITATIONS]);
     iResult &= query.exec();
-    query.bindValue(":table", tables[TREATMENTS]);
+    query.bindValue(":table", tables[CITATION_MAPS]);
+    iResult &= query.exec();
+    query.bindValue(":table", tables[EVENTS]);
+    iResult &= query.exec();
+    query.bindValue(":table", tables[EVENT_MAPS]);
     iResult &= query.exec();
     query.bindValue(":table", tables[EQUIPMENTS]);
     iResult &= query.exec();
+    query.bindValue(":table", tables[EQUIPMENT_MAPS]);
+    iResult &= query.exec();
     query.bindValue(":table", tables[INJURIES]);
     iResult &= query.exec();
-    query.bindValue(":table", tables[ASSESSMENTS]);
-    iResult &= query.exec();
-    query.bindValue(":table", tables[OBJECTIVES]);
+    query.bindValue(":table", tables[INJURY_SETS]);
     iResult &= query.exec();
     query.bindValue(":table", tables[LOCATIONS]);
     iResult &= query.exec();
+    query.bindValue(":table", tables[LOCATION_MAPS]);
+    iResult &= query.exec();
+    query.bindValue(":table", tables[OBJECTIVES]);
+    iResult &= query.exec();
+    query.bindValue(":table", tables[PROPERTIES]);
+    iResult &= query.exec();
     query.bindValue(":table", tables[ROLES]);
     iResult &= query.exec();
-    query.bindValue(":table", tables[PROPS]);
+    query.bindValue(":table", tables[ROLE_MAPS]);
     iResult &= query.exec();
-    query.bindValue(":table", tables[EVENTS]);
+    query.bindValue(":table", tables[RESTRICTIONS]);
+    iResult &= query.exec();
+    query.bindValue(":table", tables[RESTRICTION_MAPS]);
+    iResult &= query.exec();
+    query.bindValue(":table", tables[SCENES]);
+    iResult &= query.exec();
+    query.bindValue(":table", tables[TREATMENTS]);
+    iResult &= query.exec();
     return query.exec() && iResult;
   }
   return false;
@@ -192,9 +203,6 @@ bool SQLite3Driver::clear_table(enum SQLite3Driver::Sqlite3Table t)
       break;
     case OBJECTIVES:
       query.bindValue(":table", tables[OBJECTIVES]);
-      break;
-    case PROPS:
-      query.bindValue(":table", tables[PROPS]);
       break;
     case PROPERTIES:
       query.bindValue(":table", tables[PROPERTIES]);
@@ -251,9 +259,6 @@ int SQLite3Driver::nextID(Sqlite3Table table) const
       break;
     case PROPERTIES:
       query.prepare("SELECT MAX(property_id) FROM properties");
-      break;
-    case PROPS:
-      query.prepare(stmt.arg("prop"));
       break;
     case CITATIONS:
       query.prepare(stmt.arg("citation"));
@@ -722,8 +727,8 @@ bool SQLite3Driver::update_citation(Citation* citation)
     } else if (!citation->title.isEmpty()) {
       query.prepare(sqlite3::insert_or_update_citations);
       auto first_author = citation->authors.split(";", QString::SkipEmptyParts);
-      citation->key = ( first_author.empty() ) ? citation->title.toLower().simplified().remove(' ')
-                                                  : QString("%1%2").arg(first_author[0]).arg(citation->year);
+      citation->key = (first_author.empty()) ? citation->title.toLower().simplified().remove(' ')
+                                             : QString("%1%2").arg(first_author[0]).arg(citation->year);
     }
     query.bindValue(":key", citation->key);
     query.bindValue(":title", citation->title);
@@ -957,7 +962,6 @@ inline void assign_injury_set(const QSqlRecord& record, InjurySet& injury)
   injury.injuries = record.value(INJURY_SET_INJURIES).toString();
   injury.locations = record.value(INJURY_SET_LOCATIONS).toString();
   injury.severities = record.value(INJURY_SET_SEVERITIES).toString();
-  
 }
 int SQLite3Driver::injury_set_count() const
 {
@@ -1038,7 +1042,7 @@ bool SQLite3Driver::select_injury_set(InjurySet* set) const
 bool SQLite3Driver::update_injury_set(InjurySet* injury_set)
 {
 
-    if (_db.isOpen()) {
+  if (_db.isOpen()) {
     QSqlQuery query{ _db };
     if (-1 != injury_set->id) {
       query.prepare(sqlite3::update_injury_set_by_id);
@@ -1149,7 +1153,7 @@ bool SQLite3Driver::select_role_map(RoleMap* map) const
     if (map->id != -1) {
       query.prepare(sqlite3::select_role_map_by_id);
       query.bindValue(":id", map->id);
-    } else if (map->fk_scene != -1){
+    } else if (map->fk_scene != -1) {
       query.prepare(sqlite3::select_role_map_by_fk);
       query.bindValue(":fk_scene", map->fk_scene);
       query.bindValue(":fk_role", map->fk_role);
@@ -1421,7 +1425,7 @@ int SQLite3Driver::location_map_count(Scene* scene) const //we currently only su
 
     QSqlQuery query{ _db };
     query.prepare(sqlite3::count_location_maps_in_scene);
-    query.bindValue(":fk_scene",scene->id);
+    query.bindValue(":fk_scene", scene->id);
     query.exec();
     if (query.next()) {
       auto record = query.record();
@@ -1562,159 +1566,6 @@ bool SQLite3Driver::remove_location_map_by_fk(LocationMap* map)
   qWarning() << "No Database connection";
   return false;
 }
-//-----------------------------PROP MAP------------------------------------------
-inline void assign_prop_map(const QSqlRecord& record, PropMap& map)
-{
-  map.id = record.value(PROP_MAP_ID).toInt();
-  map.fk_scene = record.value(PROP_MAP_FK_SCENE).toInt();
-  map.fk_prop = record.value(PROP_MAP_FK_PROP).toInt();
-}
-int SQLite3Driver::prop_map_count() const
-{
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::count_prop_maps);
-    query.exec();
-    if (query.next()) {
-      auto record = query.record();
-      assert(record.count() == 1);
-      return record.value(0).toInt();
-    }
-  }
-  return -1;
-}
-void SQLite3Driver::prop_maps()
-{
-  qDeleteAll(_prop_maps);
-  _prop_maps.clear();
-
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::select_all_prop_maps);
-    query.exec();
-    while (query.next()) {
-      auto map = std::make_unique<pfc::PropMap>();
-      auto record = query.record();
-      assert(record.count() == PROP_MAP_COLUMN_COUNT);
-      assign_prop_map(record, *map);
-      _prop_maps.push_back(map.release());
-    }
-    _current_prop_map = _prop_maps.begin();
-    emit propMapsChanged();
-  }
-}
-bool SQLite3Driver::next_prop_map(PropMap* map)
-{
-  if (_current_prop_map == _prop_maps.end() || _prop_maps.empty()) {
-    return false;
-  }
-  map->assign(*(*_current_prop_map));
-  ++_current_role_map;
-
-  return true;
-}
-bool SQLite3Driver::select_prop_map(PropMap* map) const
-{
-
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    QSqlRecord record;
-    if (map->id != -1) {
-      query.prepare(sqlite3::select_prop_map_by_id);
-      query.bindValue(":id", map->id);
-    } else if (map->fk_scene != -1) {
-      query.prepare(sqlite3::select_prop_map_by_fk);
-      query.bindValue(":fk_scene", map->fk_scene);
-      query.bindValue(":fk_prop", map->fk_prop);
-    } else {
-      qWarning() << "Provided Property has no id, fk_scene, or fk_prop one is required";
-      return false;
-    }
-    if (query.exec()) {
-      while (query.next()) {
-        record = query.record();
-        assign_prop_map(record, *map);
-        return true;
-      }
-    } else {
-      qWarning() << query.lastError();
-    }
-    return false;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-bool SQLite3Driver::update_prop_map(PropMap* map)
-{
-
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
-    if (-1 != map->id) {
-      query.prepare(sqlite3::update_prop_map_by_id);
-      query.bindValue(":id", map->id);
-    } else {
-      query.prepare(sqlite3::insert_or_update_prop_maps);
-    }
-    query.bindValue(":fk_scene", map->fk_scene);
-    query.bindValue(":fk_prop", map->fk_prop);
-    if (!query.exec()) {
-      qWarning() << query.lastError();
-      return false;
-    }
-    if (-1 == map->id) {
-      const auto r = select_prop_map(map);
-      propMapUpdated(map->id);
-      return r;
-    }
-    propMapUpdated(map->id);
-    return true;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-bool SQLite3Driver::remove_prop_map(PropMap* map)
-{
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    if (select_prop_map(map)) {
-      query.prepare(sqlite3::delete_prop_map_by_id);
-      query.bindValue(":id", map->id);
-      if (!query.exec()) {
-        qWarning() << query.lastError();
-        return false;
-      }
-      propMapRemoved(map->id);
-      return true;
-    } else {
-      return false;
-    }
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-bool SQLite3Driver::remove_prop_map_by_fk(PropMap* map)
-{
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    if (select_prop_map(map)) {
-      query.prepare(sqlite3::delete_prop_map_by_fk);
-      query.bindValue(":fk_scene", map->fk_scene);
-      query.bindValue(":fk_prop", map->fk_prop);
-      if (!query.exec()) {
-        qWarning() << query.lastError();
-        return false;
-      }
-      propMapRemoved(map->id);
-      return true;
-    } else {
-      return false;
-    }
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
 //-----------------------------CITATION MAP-----------------------------------------
 inline void assign_citation_map(const QSqlRecord& record, CitationMap& map)
 {
@@ -1739,23 +1590,23 @@ int SQLite3Driver::citation_map_count() const
 }
 void SQLite3Driver::citation_maps()
 {
-  qDeleteAll(_prop_maps);
-  _prop_maps.clear();
+  qDeleteAll(_citation_maps);
+  _citation_maps.clear();
 
   if (_db.isOpen()) {
 
     QSqlQuery query{ _db };
-    query.prepare(sqlite3::select_all_prop_maps);
+    query.prepare(sqlite3::select_all_citation_maps);
     query.exec();
     while (query.next()) {
-      auto map = std::make_unique<pfc::PropMap>();
+      auto map = std::make_unique<pfc::CitationMap>();
       auto record = query.record();
-      assert(record.count() == PROP_MAP_COLUMN_COUNT);
-      assign_prop_map(record, *map);
-      _prop_maps.push_back(map.release());
+      assert(record.count() == CITATION_MAP_COLUMN_COUNT);
+      assign_citation_map(record, *map);
+      _citation_maps.push_back(map.release());
     }
-    _current_prop_map = _prop_maps.begin();
-    emit propMapsChanged();
+    _current_citation_map = _citation_maps.begin();
+    emit citationMapsChanged();
   }
 }
 bool SQLite3Driver::next_citation_map(CitationMap* map)
@@ -1874,13 +1725,26 @@ inline void assign_equipment_map(const QSqlRecord& record, EquipmentMap& map)
   map.id = record.value(EQUIPMENT_MAP_ID).toInt();
   map.fk_scene = record.value(EQUIPMENT_MAP_FK_SCENE).toInt();
   map.fk_equipment = record.value(EQUIPMENT_MAP_FK_EQUIPMENT).toInt();
+  map.name = record.value(EQUIPMENT_MAP_NAME).toString();
+  map.property_values = record.value(EQUIPMENT_MAP_ROPERTY_VALUES).toString();
+  map.notes = record.value(EQUIPMENT_MAP_NOTES).toString();
 }
+inline void assign_equipment_from_scene(const QSqlRecord& record, EquipmentMap& map)
+{
+  map.id = record.value(0).toInt();
+  map.fk_scene;
+  map.fk_equipment;
+  map.name = record.value(6).toString();
+  map.property_values = record.value(7).toString();
+  map.notes = record.value(8).toString();
+}
+
 int SQLite3Driver::equipment_map_count() const
 {
   if (_db.isOpen()) {
 
     QSqlQuery query{ _db };
-    query.prepare(sqlite3::count_equipment_maps);
+    query.prepare(sqlite3::count_equipment_map);
     query.exec();
     if (query.next()) {
       auto record = query.record();
@@ -1892,23 +1756,23 @@ int SQLite3Driver::equipment_map_count() const
 }
 void SQLite3Driver::equipment_maps()
 {
-  qDeleteAll(_prop_maps);
-  _prop_maps.clear();
+  qDeleteAll(_equipment_maps);
+  _equipment_maps.clear();
 
   if (_db.isOpen()) {
 
     QSqlQuery query{ _db };
-    query.prepare(sqlite3::select_all_prop_maps);
+    query.prepare(sqlite3::select_all_equipment_map);
     query.exec();
     while (query.next()) {
-      auto map = std::make_unique<pfc::PropMap>();
+      auto map = std::make_unique<pfc::EquipmentMap>();
       auto record = query.record();
-      assert(record.count() == PROP_MAP_COLUMN_COUNT);
-      assign_prop_map(record, *map);
-      _prop_maps.push_back(map.release());
+      assert(record.count() == EQUIPMENT_MAP_COLUMN_COUNT);
+      assign_equipment_map(record, *map);
+      _equipment_maps.push_back(map.release());
     }
-    _current_prop_map = _prop_maps.begin();
-    emit propMapsChanged();
+    _current_equipment_map = _equipment_maps.begin();
+    emit equipmentMapsChanged();
   }
 }
 bool SQLite3Driver::next_equipment_map(EquipmentMap* map)
@@ -1934,6 +1798,9 @@ bool SQLite3Driver::select_equipment_map(EquipmentMap* map) const
       query.prepare(sqlite3::select_equipment_map_by_fk);
       query.bindValue(":fk_scene", map->fk_scene);
       query.bindValue(":fk_equipment", map->fk_equipment);
+      query.bindValue(":name", map->name);
+      query.bindValue(":values", map->property_values);
+      query.bindValue(":notes", map->notes);
     } else {
       qWarning() << "Provided Property has no id, fk_scene, or fk_equipment one is required";
       return false;
@@ -1961,7 +1828,7 @@ bool SQLite3Driver::update_equipment_map(EquipmentMap* map)
       query.prepare(sqlite3::update_equipment_map_by_id);
       query.bindValue(":id", map->id);
     } else {
-      query.prepare(sqlite3::insert_or_update_equipment_maps);
+      query.prepare(sqlite3::insert_or_update_equipment_map);
     }
     query.bindValue(":fk_scene", map->fk_scene);
     query.bindValue(":fk_equipment", map->fk_equipment);
@@ -2045,23 +1912,23 @@ int SQLite3Driver::restriction_map_count() const
 }
 void SQLite3Driver::restriction_maps()
 {
-  qDeleteAll(_prop_maps);
-  _prop_maps.clear();
+  qDeleteAll(_restriction_maps);
+  _restriction_maps.clear();
 
   if (_db.isOpen()) {
 
     QSqlQuery query{ _db };
-    query.prepare(sqlite3::select_all_prop_maps);
+    query.prepare(sqlite3::select_all_restriction_maps);
     query.exec();
     while (query.next()) {
-      auto map = std::make_unique<pfc::PropMap>();
+      auto map = std::make_unique<pfc::RestrictionMap>();
       auto record = query.record();
-      assert(record.count() == PROP_MAP_COLUMN_COUNT);
-      assign_prop_map(record, *map);
-      _prop_maps.push_back(map.release());
+      assert(record.count() == RESTRICTION_MAP_COLUMN_COUNT);
+      assign_restriction_map(record, *map);
+      _restriction_maps.push_back(map.release());
     }
-    _current_prop_map = _prop_maps.begin();
-    emit propMapsChanged();
+    _current_restriction_map = _restriction_maps.begin();
+    emit restrictionMapChanged();
   }
 }
 bool SQLite3Driver::next_restriction_map(RestrictionMap* map)
@@ -2174,15 +2041,16 @@ bool SQLite3Driver::remove_restriction_map_by_fk(RestrictionMap* map)
   qWarning() << "No Database connection";
   return false;
 }
-  //----------------------------EVENT-------------------------------------------------
+//----------------------------EVENT-------------------------------------------------
 inline void assign_event(QSqlRecord& record, Event& event)
 {
   event.id = record.value(EVENT_ID).toInt();
   event.name = record.value(EVENT_NAME).toString();
-  event.location = record.value(EVENT_LOCATION).toInt();
-  event.actor = record.value(EVENT_ACTOR).toInt();
   event.description = record.value(EVENT_DESCRIPTION).toString();
+  event.fk_actor_1 = record.value(EVENT_ACTOR_1).toInt();
+  event.fk_actor_2 = record.value(EVENT_ACTOR_1).toInt();
   event.equipment = record.value(EVENT_EQUIPMENT).toString();
+  event.details = record.value(EVENT_DETAILS).toString();
 }
 int SQLite3Driver::event_count() const
 {
@@ -2242,32 +2110,16 @@ void SQLite3Driver::events_in_scene(Scene* scene)
   _events.clear();
 
   if (_db.isOpen()) {
-    std::vector<int32_t> fk_event;
-    QSqlQuery event_map_query{ _db };
-    event_map_query.prepare(sqlite3::select_event_map_by_fk_scene);
-    event_map_query.bindValue(":fk_scene", scene->id);
-    event_map_query.exec();
-    while (event_map_query.next()) {
-      auto event_map = std::make_unique<pfc::EventMap>();
-      auto event_map_record = event_map_query.record();
-      assign_event_map(event_map_record, *event_map);
-      fk_event.push_back(event_map->fk_event);
-    }
     QSqlQuery query{ _db };
-    query.prepare(sqlite3::select_event_by_id);
-    while (!fk_event.empty()) {
-      query.bindValue(":id", fk_event.back());
-      bool huh = query.exec();
-      fk_event.pop_back();
-      if (query.next()) {
-        auto event = std::make_unique<pfc::Event>();
-        auto record = query.record();
-        assign_event(record, *event);
-        int32_t iid = event->id;
-        QString nuum = event->name;
-        QString desc = event->description;
-        _events.push_back(event.release());
-      }
+    query.prepare(sqlite3::select_events_in_scene);
+    query.bindValue(":scene_id", scene->id);
+    query.exec();
+    while (query.next()) {
+      auto event = std::make_unique<pfc::Event>();
+      auto record = query.record();
+      assert(record.count() == EVENT_COLUMN_COUNT);
+      assign_event(record, *event);
+      _events.push_back(event.release());
     }
     _current_event = _events.begin();
     emit eventsChanged();
@@ -2296,7 +2148,7 @@ bool SQLite3Driver::select_event(Event* event) const
       query.prepare(sqlite3::select_event_by_name);
       query.bindValue(":name", event->name);
     } else {
-      qWarning() << "Provided Property has no id or name one is required";
+      qWarning() << "Provided Event has no id or name one is required";
       return false;
     }
     if (query.exec()) {
@@ -2324,12 +2176,14 @@ bool SQLite3Driver::update_event(Event* event)
     } else if (!event->name.isEmpty()) {
       query.prepare(sqlite3::insert_or_update_events);
     }
-
     query.bindValue(":equipment", event->equipment);
     query.bindValue(":name", event->name);
     query.bindValue(":description", event->description);
-    query.bindValue(":location", event->location);
-    query.bindValue(":actor", event->actor);
+    query.bindValue(":category", event->category);
+    query.bindValue(":fidelity", event->fidelity);
+    query.bindValue(":actor_1", event->fk_actor_1);
+    query.bindValue(":actor_2", event->fk_actor_2);
+    query.bindValue(":details", event->description);
     if (!query.exec()) {
       qWarning() << query.lastError();
       return false;
@@ -2572,7 +2426,7 @@ bool SQLite3Driver::update_location_in_scene(Scene* scene, Location* location)
   if (_db.isOpen()) {
     QSqlQuery query{ _db };
     if (select_scene(scene)) {
-      if (!select_location(location)) { 
+      if (!select_location(location)) {
         update_location(location);
       }
       LocationMap map;
@@ -2586,7 +2440,7 @@ bool SQLite3Driver::update_location_in_scene(Scene* scene, Location* location)
           qWarning() << query_location_map.lastError();
           return false;
         }
-      } 
+      }
       if (!select_location_map(&map)) {
         update_location_map(&map);
       } else {
@@ -2862,7 +2716,7 @@ bool SQLite3Driver::remove_equipment_from_scene(Equipment* equipment, Scene* sce
   map.fk_equipment = equipment->id;
   return remove_equipment_map_by_fk(&map);
 }
-  //-----------------------------OBJECTIVE-----------------------------------------
+//-----------------------------OBJECTIVE-----------------------------------------
 inline void assign_objective(const QSqlRecord& record, Objective& objective)
 {
   objective.id = record.value(OBJECTIVE_ID).toInt();
@@ -2997,218 +2851,6 @@ bool SQLite3Driver::remove_objective(Objective* objective)
   }
   qWarning() << "No Database connection";
   return false;
-}
-//-----------------------------PROP----------------------------------------------
-inline void assign_prop(QSqlRecord& record, Prop& prop)
-{
-  prop.id = record.value(PROP_ID).toInt();
-  prop.equipment = record.value(PROP_EQUIPMENT).toString();
-}
-int SQLite3Driver::prop_count() const
-{
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::count_props);
-    query.exec();
-    if (query.next()) {
-      auto record = query.record();
-      assert(record.count() == 1);
-      return record.value(0).toInt();
-    }
-  }
-  return -1;
-}
-int SQLite3Driver::prop_count(Scene* scene) const
-{
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::count_props_in_scene);
-    query.bindValue(":id", scene->id);
-    query.exec();
-    if (query.next()) {
-      auto record = query.record();
-      assert(record.count() == 1);
-      return record.value(0).toInt();
-    }
-  }
-  return -1;
-}
-void SQLite3Driver::props()
-{
-  qDeleteAll(_props);
-  _props.clear();
-
-  if (_db.isOpen()) {
-
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::select_all_props);
-    query.exec();
-    while (query.next()) {
-      auto prop = std::make_unique<pfc::Prop>();
-      auto record = query.record();
-      assert(record.count() == PROP_COLUMN_COUNT);
-      assign_prop(record, *prop);
-      _props.push_back(prop.release());
-    }
-    _current_prop = _props.begin();
-    emit propsChanged();
-  }
-}
-bool SQLite3Driver::next_prop(Prop* prop)
-{
-  if (_current_prop == _props.end() || _props.empty()) {
-    return false;
-  }
-  prop->assign(*(*_current_prop));
-  ++_current_prop;
-
-  return true;
-}
-bool SQLite3Driver::select_prop(Prop* prop) const
-{
-
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    QSqlRecord record;
-    if (prop->id != -1) {
-      query.prepare(sqlite3::select_prop_by_id);
-      query.bindValue(":id", prop->id);
-    } else {
-      // So the issue here is that id is set when the property is inserted, and I can't get it without some other unique field
-      // to look up a prop with
-      //TODO: Run this by Steven
-      qWarning() << "Provided Property has no id or name one is required";
-      return false;
-    }
-    if (query.exec()) {
-      while (query.next()) {
-        record = query.record();
-        assign_prop(record, *prop);
-        return true;
-      }
-    } else {
-      qWarning() << query.lastError();
-    }
-    return false;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-bool SQLite3Driver::update_prop(Prop* prop)
-{
-
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
-    if (-1 != prop->id) {
-      query.prepare(sqlite3::update_prop_by_id);
-      query.bindValue(":id", prop->id);
-    } else {
-      query.prepare(sqlite3::insert_or_update_props);
-    }
-    query.bindValue(":equipment", prop->equipment);
-
-    if (!query.exec()) {
-      qWarning() << query.lastError();
-      return false;
-    }
-    if (-1 == prop->id) {
-      const auto r = select_prop(prop);
-      propUpdated(prop->id);
-      return r;
-    }
-    propUpdated(prop->id);
-    return true;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-bool SQLite3Driver::remove_prop(Prop* prop)
-{
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
-    if (select_prop(prop)) {
-      query.prepare(sqlite3::delete_prop_by_id);
-      query.bindValue(":id", prop->id);
-      if (!query.exec()) {
-        qWarning() << query.lastError();
-        return false;
-      }
-      propRemoved(prop->id);
-      return true;
-    } else {
-      //TODO: Same as select_prop, I can't get the id without looking it up with some other thing
-      return false;
-    }
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-void SQLite3Driver::props_in_scene(Scene* scene)
-{
-  qDeleteAll(_props);
-  _props.clear();
-
-  if (_db.isOpen()) {
-    std::vector<int32_t> fk_prop;
-    QSqlQuery prop_map_query{ _db };
-    prop_map_query.prepare(sqlite3::select_prop_map_by_fk_scene);
-    prop_map_query.bindValue(":fk_scene", scene->id);
-    prop_map_query.exec();
-    while (prop_map_query.next()) {
-      auto prop_map = std::make_unique<pfc::PropMap>();
-      auto prop_map_record = prop_map_query.record();
-      assign_prop_map(prop_map_record, *prop_map);
-      fk_prop.push_back(prop_map->fk_prop);
-    }
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::select_prop_by_id);
-    while (!fk_prop.empty()) {
-      query.bindValue(":id", fk_prop.back());
-      bool huh = query.exec();
-      fk_prop.pop_back();
-      if (query.next()) {
-        auto prop = std::make_unique<pfc::Prop>();
-        auto record = query.record();
-        assign_prop(record, *prop);
-        int32_t iid = prop->id;
-        QString equipment = prop->equipment;
-        _props.push_back(prop.release());
-      }
-    }
-    _current_prop = _props.begin();
-    emit propsChanged();
-  }
-}
-bool SQLite3Driver::update_prop_in_scene(Scene* scene, Prop* prop)
-{
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
-    if (select_scene(scene)) {
-      if (!select_prop(prop)) {
-        update_prop(prop);
-      }
-      PropMap map;
-      map.fk_prop = prop->id;
-      map.fk_scene = scene->id;
-      if (!select_prop_map(&map)) {
-        update_prop_map(&map);
-      }
-      return true;
-    }
-    qWarning() << "Scene not found";
-    return false;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-bool SQLite3Driver::remove_prop_from_scene(Prop* prop, Scene* scene)
-{
-  pfc::PropMap map;
-  map.fk_scene = scene->id;
-  map.fk_prop = prop->id;
-  return remove_prop_map_by_fk(&map);
 }
 //-----------------------------PROPERTY------------------------------------------
 inline void assign_property(const QSqlRecord& record, Property& property)
@@ -3367,7 +3009,7 @@ int SQLite3Driver::role_count(Scene* scene) const
 
     QSqlQuery query{ _db };
     query.prepare(sqlite3::count_roles_in_scene);
-    query.bindValue(":id",scene->id);
+    query.bindValue(":id", scene->id);
     query.exec();
     if (query.next()) {
       auto record = query.record();
@@ -3407,9 +3049,9 @@ void SQLite3Driver::roles_in_scene(Scene* scene)
     std::vector<int32_t> fk_role;
     QSqlQuery map_query{ _db };
     map_query.prepare(sqlite3::select_role_map_by_fk_scene);
-    map_query.bindValue(":fk_scene",scene->id);
+    map_query.bindValue(":fk_scene", scene->id);
     map_query.exec();
-    while(map_query.next()) {
+    while (map_query.next()) {
       auto map = std::make_unique<pfc::RoleMap>();
       auto map_record = map_query.record();
       assign_role_map(map_record, *map);
@@ -3417,11 +3059,11 @@ void SQLite3Driver::roles_in_scene(Scene* scene)
     }
     QSqlQuery query{ _db };
     query.prepare(sqlite3::select_role_by_id);
-    while(!fk_role.empty()) {
-      query.bindValue(":id",fk_role.back());
+    while (!fk_role.empty()) {
+      query.bindValue(":id", fk_role.back());
       bool huh = query.exec();
       fk_role.pop_back();
-      if(query.next()) {
+      if (query.next()) {
         auto role = std::make_unique<pfc::Role>();
         auto record = query.record();
         assign_role(record, *role);
@@ -3506,16 +3148,16 @@ bool SQLite3Driver::update_role(Role* role)
 }
 bool SQLite3Driver::update_role_in_scene(Scene* scene, Role* role)
 {
-  if(_db.isOpen()) {
+  if (_db.isOpen()) {
     QSqlQuery query{ _db };
     if (select_scene(scene)) {
-      if ( !select_role(role) ) {
+      if (!select_role(role)) {
         update_role(role);
       }
       RoleMap map;
       map.fk_role = role->id;
       map.fk_scene = scene->id;
-      if ( !select_role_map(&map) ) {
+      if (!select_role_map(&map)) {
         update_role_map(&map);
       }
       return true;
@@ -3750,6 +3392,14 @@ inline void assign_scene(QSqlRecord& record, Scene& scene)
 {
   scene.id = record.value(SCENE_ID).toInt();
   scene.name = record.value(SCENE_NAME).toString();
+  scene.description = record.value(SCENE_DESCRIPTION).toString();
+  scene.time_of_day = record.value(SCENE_TIME_OF_DAY).toString();
+  scene.time_in_simulation = record.value(SCENE_TIME_IN_SIMULATION).toInt();
+  scene.weather = record.value(SCENE_WEATHER).toString();
+  scene.events = record.value(SCENE_EVENTS).toString();
+  scene.items = record.value(SCENE_ITEMS).toString();
+  scene.roles = record.value(SCENE_ROLES).toString();
+  scene.details = record.value(SCENE_DETAILS).toString();
 }
 int SQLite3Driver::scene_count() const
 {
@@ -3840,6 +3490,14 @@ bool SQLite3Driver::update_scene(Scene* scene)
       query.prepare(sqlite3::insert_or_update_scenes);
     }
     query.bindValue(":name", scene->name);
+    query.bindValue(":description", scene->description);
+    query.bindValue(":time_of_day", scene->time_of_day);
+    query.bindValue(":time_in_simulation", scene->time_in_simulation);
+    query.bindValue(":weather", scene->weather);
+    query.bindValue(":events", scene->events);
+    query.bindValue(":items", scene->items);
+    query.bindValue(":roles", scene->roles);
+    query.bindValue(":details", scene->details);
     if (!query.exec()) {
       qWarning() << query.lastError();
       return false;
@@ -3869,15 +3527,15 @@ bool SQLite3Driver::remove_scene(Scene* scene)
       sceneRemoved(scene->id);
       QSqlQuery query_map(_db);
       query_map.prepare(sqlite3::delete_role_map_by_fk_scene);
-      query_map.bindValue(":fk_scene",scene->id);
-      if(!query_map.exec()) {
+      query_map.bindValue(":fk_scene", scene->id);
+      if (!query_map.exec()) {
         qWarning() << query_map.lastError();
         return false;
       }
       QSqlQuery query_event_map(_db);
       query_event_map.prepare(sqlite3::delete_event_map_by_fk_scene);
-      query_event_map.bindValue(":fk_scene",scene->id);
-      if(!query_event_map.exec()) {
+      query_event_map.bindValue(":fk_scene", scene->id);
+      if (!query_event_map.exec()) {
         qWarning() << query_event_map.lastError();
         return false;
       }
@@ -3886,13 +3544,6 @@ bool SQLite3Driver::remove_scene(Scene* scene)
       query_restriction_map.bindValue(":fk_scene", scene->id);
       if (!query_restriction_map.exec()) {
         qWarning() << query_restriction_map.lastError();
-        return false;
-      }
-      QSqlQuery query_prop_map(_db);
-      query_prop_map.prepare(sqlite3::delete_prop_map_by_fk_scene);
-      query_prop_map.bindValue(":fk_scene", scene->id);
-      if (!query_prop_map.exec()) {
-        qWarning() << query_prop_map.lastError();
         return false;
       }
       QSqlQuery query_equipment_map(_db);
@@ -4067,7 +3718,7 @@ bool SQLite3Driver::remove_treatment(Treatment* treatment)
   qWarning() << "No Database connection";
   return false;
 }
-
+//-----------------------------BACK DOORS FOR NOW----------------------------------
 std::vector<std::unique_ptr<Author>> SQLite3Driver::get_authors() const
 {
   if (_db.isOpen()) {
@@ -4137,22 +3788,23 @@ std::vector<std::unique_ptr<Citation>> SQLite3Driver::get_citations() const
   }
   throw std::runtime_error("No db connection");
 }
-std::vector<std::unique_ptr<Event>> SQLite3Driver::get_events() const
+std::vector<std::unique_ptr<Event>> SQLite3Driver::get_events_in_scene(Scene const* const scene) const
 {
   if (_db.isOpen()) {
     std::vector<std::unique_ptr<Event>> event_list;
     QSqlQuery event_query{ _db };
-    event_query.prepare(select_all_events);
+    event_query.prepare(select_events_in_scene);
+    event_query.bindValue(":scene_id", scene->id);
     event_query.exec();
     while (event_query.next()) {
       auto temp = std::make_unique<Event>();
       auto record = event_query.record();
-      temp->id = record.value(0).toInt();
-      temp->name = record.value(1).toString();
-      temp->location = record.value(2).toInt();
-      temp->actor = record.value(3).toInt();
-      temp->equipment = record.value(4).toString();
-      temp->description = record.value(5).toString();
+      temp->id = record.value(EVENT_ID).toInt();
+      temp->name = record.value(EVENT_NAME).toString();
+      //temp->location = record.value(2).toInt();
+      //temp->actor = record.value(3).toInt();
+      temp->equipment = record.value(EVENT_EQUIPMENT).toString();
+      temp->details = record.value(EVENT_DETAILS).toString();
       event_list.push_back(std::move(temp));
     }
     return event_list;
@@ -4169,12 +3821,30 @@ std::vector<std::unique_ptr<Equipment>> SQLite3Driver::get_equipments() const
     while (equipment_query.next()) {
       auto temp = std::make_unique<Equipment>();
       auto record = equipment_query.record();
-      temp->id = record.value(0).toInt();
-      temp->type = record.value(1).toInt();
-      temp->name = record.value(2).toString();
-      temp->description = record.value(3).toString();
-      temp->citations = record.value(4).toString();
-      temp->image = record.value(5).toString();
+      temp->id = record.value(EQUIPMENT_ID).toInt();
+      temp->type = record.value(EQUIPMENT_TYPE).toInt();
+      temp->name = record.value(EQUIPMENT_NAME).toString();
+      temp->description = record.value(EQUIPMENT_DESCRIPTION).toString();
+      temp->citations = record.value(EQUIPMENT_CITATIONS).toString();
+      temp->image = record.value(EQUIPMENT_IMAGE).toString();
+      equipment_list.push_back(std::move(temp));
+    }
+    return equipment_list;
+  }
+  throw std::runtime_error("No db connection");
+}
+std::vector<std::unique_ptr<EquipmentMap>> SQLite3Driver::get_equipment_in_scene(Scene const* const scene) const
+{
+  if (_db.isOpen()) {
+    std::vector<std::unique_ptr<EquipmentMap>> equipment_list;
+    QSqlQuery scene_query{ _db };
+    scene_query.prepare(select_equipment_in_scene);
+    scene_query.bindValue(":scene_id", scene->id);
+    scene_query.exec();
+    while (scene_query.next()) {
+      auto temp = std::make_unique<EquipmentMap>();
+      auto record = scene_query.record();
+      assign_equipment_from_scene(record, *temp);
       equipment_list.push_back(std::move(temp));
     }
     return equipment_list;
@@ -4283,25 +3953,6 @@ std::vector<std::unique_ptr<LocationMap>> SQLite3Driver::get_location_maps() con
   }
   throw std::runtime_error("No db connection");
 }
-std::vector<std::unique_ptr<PropMap>> SQLite3Driver::get_prop_maps() const
-{
-  if (_db.isOpen()) {
-    std::vector<std::unique_ptr<PropMap>> prop_map_list;
-    QSqlQuery prop_map_query{ _db };
-    prop_map_query.prepare(select_all_prop_maps);
-    prop_map_query.exec();
-    while (prop_map_query.next()) {
-      auto temp = std::make_unique<PropMap>();
-      auto record = prop_map_query.record();
-      temp->id = record.value(0).toInt();
-      temp->fk_scene = record.value(1).toInt();
-      temp->fk_prop = record.value(2).toInt();
-      prop_map_list.push_back(std::move(temp));
-    }
-    return prop_map_list;
-  }
-  throw std::runtime_error("No db connection");
-}
 std::vector<std::unique_ptr<CitationMap>> SQLite3Driver::get_citation_maps() const
 {
   if (_db.isOpen()) {
@@ -4326,7 +3977,7 @@ std::vector<std::unique_ptr<EquipmentMap>> SQLite3Driver::get_equipment_maps() c
   if (_db.isOpen()) {
     std::vector<std::unique_ptr<EquipmentMap>> equipment_map_list;
     QSqlQuery equipment_map_query{ _db };
-    equipment_map_query.prepare(select_all_equipment_maps);
+    equipment_map_query.prepare(select_all_equipment_map);
     equipment_map_query.exec();
     while (equipment_map_query.next()) {
       auto temp = std::make_unique<EquipmentMap>();
@@ -4445,29 +4096,11 @@ std::vector<std::unique_ptr<Property>> SQLite3Driver::get_properties() const
       auto temp = std::make_unique<Property>();
       auto record = property_query.record();
       temp->id = record.value(0).toInt();
-      temp->name  = record.value(1).toString();
+      temp->name = record.value(1).toString();
       temp->value = record.value(2).toString();
       property_list.push_back(std::move(temp));
     }
     return property_list;
-  }
-  throw std::runtime_error("No db connection");
-}
-std::vector<std::unique_ptr<Prop>> SQLite3Driver::get_props() const
-{
-  if (_db.isOpen()) {
-    std::vector<std::unique_ptr<Prop>> prop_list;
-    QSqlQuery prop_query{ _db };
-    prop_query.prepare(select_all_props);
-    prop_query.exec();
-    while (prop_query.next()) {
-      auto temp = std::make_unique<Prop>();
-      auto record = prop_query.record();
-      temp->id = record.value(0).toInt();
-      temp->equipment = record.value(1).toString();
-      prop_list.push_back(std::move(temp));
-    }
-    return prop_list;
   }
   throw std::runtime_error("No db connection");
 }
@@ -4513,29 +4146,17 @@ std::vector<std::unique_ptr<Role>> SQLite3Driver::get_roles_in_scene(Scene* scen
 {
   if (_db.isOpen()) {
     std::vector<std::unique_ptr<Role>> role_list;
-    std::vector<int32_t> fk_role;
-    QSqlQuery map_query{ _db };
-    map_query.prepare(sqlite3::select_role_map_by_fk_scene);
-    map_query.bindValue(":fk_scene", scene->id);
-    map_query.exec();
-    while (map_query.next()) {
-      auto map = std::make_unique<pfc::RoleMap>();
-      auto map_record = map_query.record();
-      assign_role_map(map_record, *map);
-      fk_role.push_back(map->fk_role);
-    }
-    QSqlQuery query{ _db };
-    query.prepare(sqlite3::select_role_by_id);
-    for (auto& role : fk_role) {
-      query.bindValue(":id", role);
-      if (query.next()) {
-        auto role = std::make_unique<pfc::Role>();
-        auto record = query.record();
-        role->id = fk_role.back();
-        role->name = record.value(1).toString();
-        role->description = record.value(2).toString();
-        role_list.push_back(std::move(role));
-      }
+    QSqlQuery role_query{ _db };
+    role_query.prepare(sqlite3::select_roles_in_scene);
+    role_query.bindValue(":scene_id", scene->id);
+    role_query.exec();
+    while (role_query.next()) {
+      auto role = std::make_unique<pfc::Role>();
+      auto record = role_query.record();
+      role->id = record.value(ROLE_ID).toInt();
+      role->name = record.value(ROLE_NAME).toString();
+      role->description = record.value(ROLE_DESCRIPTION).toString();
+      role_list.push_back(std::move(role));
     }
     return role_list;
   }
@@ -4571,15 +4192,14 @@ std::vector<std::unique_ptr<Scene>> SQLite3Driver::get_scenes() const
     scene_query.prepare(select_all_scenes);
     scene_query.exec();
     while (scene_query.next()) {
-      auto temp = std::make_unique<Scene>();      
+      auto temp = std::make_unique<Scene>();
       auto record = scene_query.record();
       temp->id = record.value(0).toInt();
-      temp->name = record.value(1).toString();      
+      temp->name = record.value(1).toString();
       scene_list.push_back(std::move(temp));
     }
     return scene_list;
   }
   throw std::runtime_error("No db connection");
 }
-
 }
