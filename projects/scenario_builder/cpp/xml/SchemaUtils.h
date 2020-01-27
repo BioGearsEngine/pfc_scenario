@@ -4,7 +4,7 @@
 #include <QString>
 #include <memory>
 
-#include "../xsd/cpp/MilitaryScenario_1.0.0.hxx"
+#include "../xsd/cpp/militaryscenario_1.0.0.hxx"
 #include "../xsd/cpp/pfc_scenario_0.1.hxx"
 
 namespace pfc {

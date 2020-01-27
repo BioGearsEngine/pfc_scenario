@@ -10,7 +10,7 @@
 #include <QDebug>
 
 #include "SchemaUtils.h"
-#include "../xsd/cpp/MilitaryScenario_1.0.0.hxx"
+#include "../xsd/cpp/militaryscenario_1.0.0.hxx"
 #include "../xsd/cpp/pfc_scenario_0.1.hxx"
 
 #include "mz.h"
@@ -248,7 +248,7 @@ void Serializer::generate_msdl_stream(SQLite3Driver* driver)
 
   xml_schema::namespace_infomap info;
   info[""].name = "urn:sisostds:scenario:military:data:draft:msdl:1";
-  info[""].schema = "MilitaryScenario_1.0.0.xsd";
+  info[""].schema = "militaryscenario_1.0.0.xsd";
 
   try {
     msdl_1::MilitaryScenario(_msdl_content, msdl, info);
@@ -330,7 +330,7 @@ void Serializer::generate_pfc_stream(SQLite3Driver* driver)
 
   xml_schema::namespace_infomap info;
   info[""].name = "urn:sisostds:scenario:military:data:draft:msdl:1";
-  info[""].schema = "MilitaryScenario_1.0.0.xsd";
+  info[""].schema = "militaryscenario_1.0.0.xsd";
   QSqlDatabase _db;
   if (_db.isValid()) {
     _db = QSqlDatabase::addDatabase("QSQLITE");
