@@ -13,6 +13,9 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License.
 **************************************************************************************/
 
+#include <memory>
+#include <vector>
+
 #include <QList>
 #include <QObject>
 #include <QSqlDatabase>
@@ -131,7 +134,7 @@ public:
   std::vector<std::unique_ptr<Citation>> get_citations() const;
   std::vector<std::unique_ptr<Event>> get_events_in_scene(Scene const* const) const;
   std::vector<std::unique_ptr<Equipment>> get_equipments() const;
-  std::vector<std::unique_ptr<EquipmentMap>> get_equipment_in_scene(Scene const * const) const;
+  std::vector<std::unique_ptr<EquipmentMap>> get_equipment_in_scene(Scene const* const) const;
   std::vector<std::unique_ptr<Injury>> get_injuries() const;
   std::vector<std::unique_ptr<InjurySet>> get_injury_sets() const;
   std::vector<std::unique_ptr<RoleMap>> get_role_maps() const;
@@ -148,8 +151,7 @@ public:
   std::vector<std::unique_ptr<Role>> get_roles() const;
   std::vector<std::unique_ptr<Role>> get_roles_in_scene(Scene*) const;
   std::vector<std::unique_ptr<Treatment>> get_treatments() const;
-  std::vector<std::unique_ptr<Scene>> get_scenes() const ;
-
+  std::vector<std::unique_ptr<Scene>> get_scenes() const;
 
   Q_INVOKABLE bool next_author(Author*);
   Q_INVOKABLE bool next_property(Property*);
@@ -228,15 +230,15 @@ public:
   Q_INVOKABLE bool remove_restriction_from_scene(Restriction*, Scene*);
   Q_INVOKABLE bool remove_objective(Objective*);
   Q_INVOKABLE bool remove_citation(Citation*);
-  Q_INVOKABLE bool remove_citation_from_scene(Citation*,Scene*);
+  Q_INVOKABLE bool remove_citation_from_scene(Citation*, Scene*);
   Q_INVOKABLE bool remove_treatment(Treatment*);
   Q_INVOKABLE bool remove_equipment(Equipment*);
-  Q_INVOKABLE bool remove_equipment_from_scene(Equipment*,Scene*);
+  Q_INVOKABLE bool remove_equipment_from_scene(Equipment*, Scene*);
   Q_INVOKABLE bool remove_injury(Injury*);
   Q_INVOKABLE bool remove_injury_set(InjurySet*);
   Q_INVOKABLE bool remove_assessment(Assessment*);
   Q_INVOKABLE bool remove_location(Location*);
-  Q_INVOKABLE bool remove_location_from_scene(Location*,Scene*);
+  Q_INVOKABLE bool remove_location_from_scene(Location*, Scene*);
   Q_INVOKABLE bool remove_role_map(RoleMap*);
   Q_INVOKABLE bool remove_event_map(EventMap*);
   Q_INVOKABLE bool remove_location_map(LocationMap*);
@@ -250,9 +252,9 @@ public:
   Q_INVOKABLE bool remove_equipment_map_by_fk(EquipmentMap*);
   Q_INVOKABLE bool remove_restriction_map_by_fk(RestrictionMap*);
   Q_INVOKABLE bool remove_role(Role*);
-  Q_INVOKABLE bool remove_role_from_scene(Role*,Scene*);
+  Q_INVOKABLE bool remove_role_from_scene(Role*, Scene*);
   Q_INVOKABLE bool remove_event(Event*);
-  Q_INVOKABLE bool remove_event_from_scene(Event*,Scene*);
+  Q_INVOKABLE bool remove_event_from_scene(Event*, Scene*);
   Q_INVOKABLE bool remove_scene(Scene*);
 
   Q_INVOKABLE int raw_error() const { return _db.lastError().type(); };
