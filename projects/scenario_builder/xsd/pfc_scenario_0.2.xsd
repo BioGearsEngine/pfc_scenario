@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?purpose description="This schema defines MSDL extensions for PFC Training" ?>
+<?version number="0.2" date="2020-01-28"?>
+<?copyright statement="Copyright (c) 2019 by the Applied Resaearch Associates, Inc.
+4300 San Mateo Blvd. NE, Suite A-220
+Albuquerque, NM 87110
+All rights reserved.
+ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
+<xs:schema xmlns="com:ara:pfc:training:1" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:pfc="com:ara:pfc:training:1" targetNamespace="com:ara:pfc:training:1"
+	elementFormDefault="unqualified" attributeFormDefault="unqualified" version="0.2.0" id="pfc"
+	vc:maxVersion="1.1" vc:minVersion="1.0" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning">
+	<xs:include schemaLocation="pfc_scenario_complex_types_0.2.xsd"/>
+	<xs:complexType name="ScenarioSchema">
+		<xs:all>
+      <xs:element name="equipment" type="pfc:equipment-definition-list">
+        <xs:annotation>
+          <xs:documentation>The bibliography used to create this scenario.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="trauma-definitions" type="pfc:trauma-definition-list">
+				<xs:annotation>
+					<xs:documentation>XML Database of Injuries contained that can be referenced in this file.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="treatment-plans" type="pfc:treatment-plan-definition-list">
+				<xs:annotation>
+					<xs:documentation>XML Database of Treatment Plans for the injuries cotnained in the injury databse.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="trauma-sets" type="pfc:trauma-profile-list">
+				<xs:annotation>
+					<xs:documentation>XML Database of Complex injury combinations. For the PFC schema this is kind of like a database of medical records which can be applied to patients. It allows the same set of injuries to be applied to multiple patients with minimal documentation.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="syllabus" type="pfc:medical-scenario-syllabus">
+				<xs:annotation>
+					<xs:documentation>A breakdown of learning-objectives and the occopanying assessment-critiera.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="medical-scenario" type="pfc:medical-scenario">
+				<xs:annotation>
+					<xs:documentation>The full medical training scenario which combines a MSDL scenario with the PFC extensions to create a training narrative which accomplishes the learning objectives described in the syllabus.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="works-cited" type="pfc:citation-list">
+				<xs:annotation>
+					<xs:documentation>The bibliography used to create this scenario.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+	<xs:element name="Scenario" type="ScenarioSchema"/>
+</xs:schema>

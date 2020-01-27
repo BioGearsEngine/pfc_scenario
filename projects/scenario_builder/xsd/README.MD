@@ -9,19 +9,22 @@ The following instructions require Codesynthesis XSD 4.0 which is avaliable as a
  1. Install XSD
  1. In a terminal perform the following
  ```shell
-xsd.exe  cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --output-dir cpp MilitaryScenario_1.0.0.xsd
+xsd.exe  cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --output-dir cpp military_scenario_1.0.0.xsd
+xsd.exe  cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --output-dir cpp msdl_complex_types_1.0.0.xsd
+xsd.exe  cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --output-dir cpp msdl_simple_types_1.0.0.xsd
+xsd.exe  cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --output-dir cpp msdl_codes_1.0.0.xsd
 xsd.exe  cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --output-dir cpp/extern extern/*.xsd
 
-xsd.exe cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --output-dir cpp  --namespace-map "com:ara:pfc:training:1"=pfc::schema pfc_scenario_0.1.xsd
-xsd.exe cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --output-dir cpp  --namespace-map "com:ara:pfc:training:1"=pfc::schema pfc_scenario_complex_types_0.1.xsd
+xsd.exe cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --output-dir cpp  --namespace-map "com:ara:pfc:training:1"=pfc::schema pfc_scenario_0.2.xsd
+xsd.exe cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --output-dir cpp  --namespace-map "com:ara:pfc:training:1"=pfc::schema pfc_scenario_complex_types_0.2.xsd
 ```
 
 ## Contents
         MSDL Specification is specified in the following files
-        1. MilitarytScenario_1.0.0.xsd
-        2. MsdlComplexTypes_1.0.0.xsd
-        3. MsdlSimpleTypes_1.0.0.xsd
-        4. MsdlCodes_1.0.0.xsd
+        1. militaryt_scenario_1.0.0.xsd
+        2. msd_lcomplex_types_1.0.0.xsd
+        3. msd_lsimple_types_1.0.0.xsd
+        4. msd_lcodes_1.0.0.xsd
         5. extern/
         5. 1. ModelID_v2006_FINAL.xsd
         5. 2. JC3IEDMMeteorological.xsd

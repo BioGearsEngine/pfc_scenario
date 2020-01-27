@@ -10,8 +10,8 @@
 #include <QDebug>
 
 #include "SchemaUtils.h"
-#include "../xsd/cpp/militaryscenario_1.0.0.hxx"
-#include "../xsd/cpp/pfc_scenario_0.1.hxx"
+#include "../xsd/cpp/military_scenario_1.0.0.hxx"
+#include "../xsd/cpp/pfc_scenario_0.2.hxx"
 
 #include "mz.h"
 #include "mz_os.h"
