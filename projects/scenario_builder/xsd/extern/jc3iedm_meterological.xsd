@@ -4,7 +4,7 @@
 	<annotation>
 		<documentation xml:lang="en">XML schema defined by the Multilateral Interoperability Programme (MIP) - Editor: Dr. Michael Gerz, gerz@fgan.de, FGAN FKIE, Germany</documentation>
 	</annotation>
-	<include schemaLocation="JC3IEDM-3.1-Codes-20061208.xsd"/>
+	<include schemaLocation="jc3iedm-3.1-codes-20061208.xsd"/>
 	<simpleType name="AngleOptionalTypeRangeAngle7_4">
 		<annotation>
 			<documentation xml:lang="en">The rotational measurement between two lines and/or planes diverging from a common point and/or line. This measurement will be expressed in units of degrees.</documentation>

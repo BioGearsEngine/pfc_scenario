@@ -358,9 +358,9 @@ namespace msdl_1
 
 #include "msdl_simple_types_1.0.0.hxx"
 
-#include "extern/modelid_v2006_final.hxx"
+#include "extern/model_id_v2006_final.hxx"
 
-#include "extern/jc3iedmmeteorological.hxx"
+#include "extern/jc3iedm_meterological.hxx"
 
 namespace msdl_1
 {

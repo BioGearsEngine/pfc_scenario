@@ -38,7 +38,7 @@
 
 #include <xsd/cxx/pre.hxx>
 
-#include "ModelID_v2006_FINAL.hxx"
+#include "model_id_v2006_final.hxx"
 
 namespace schemas
 {

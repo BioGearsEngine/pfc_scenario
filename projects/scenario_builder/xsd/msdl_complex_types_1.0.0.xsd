@@ -13,8 +13,8 @@ Orlando, FL 32878-1238, USA"?>
 <xs:schema xmlns:msdl="urn:sisostds:scenario:military:data:draft:msdl:1" xmlns:modelID="http://www.sisostds.org/schemas/modelID" xmlns:jc3iedm="urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:sisostds:scenario:military:data:draft:msdl:1" elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0" id="MSDL">
 	<xs:include schemaLocation="msdl_codes_1.0.0.xsd"/>
 	<xs:include schemaLocation="msdl_simple_types_1.0.0.xsd"/>
-	<xs:import namespace="http://www.sisostds.org/schemas/modelID" schemaLocation="extern\ModelID_v2006_FINAL.xsd"/>
-	<xs:import namespace="urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0" schemaLocation="extern\JC3IEDMMeteorological.xsd"/>
+	<xs:import namespace="http://www.sisostds.org/schemas/modelID" schemaLocation="extern/model_id_v2006_final.xsd"/>
+	<xs:import namespace="urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0" schemaLocation="extern/jc3iedm_meterological.xsd"/>
 	<xs:complexType name="AnchorPointType">
 		<xs:annotation>
 			<xs:documentation>Single anchor point description.</xs:documentation>

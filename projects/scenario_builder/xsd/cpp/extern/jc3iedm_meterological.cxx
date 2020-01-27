@@ -38,7 +38,7 @@
 
 #include <xsd/cxx/pre.hxx>
 
-#include "JC3IEDMMeteorological.hxx"
+#include "jc3iedm_meterological.hxx"
 
 namespace oo_2_0
 {
