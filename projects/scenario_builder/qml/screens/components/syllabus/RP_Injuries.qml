@@ -116,7 +116,6 @@ ColumnLayout  {
 
         onCitationAdded : {
           var entry = root.model.get(root.index)
-          console.log(JSON.stringify(root.model.get(root.index)))
           entry.citations = (entry.citations) ? entry.citations.concat(";"+citation_id) : entry.citations.concat(citation_id)
           update_injury(entry)
         } 
