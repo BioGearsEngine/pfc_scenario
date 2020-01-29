@@ -218,7 +218,7 @@ inline namespace sqlite3 {
     = R"( INSERT INTO equipments
           (name,type,description,citations,image)
           VALUES (:name, :type, :description, :citations, :image)
-          ON CONsFLICT (name)
+          ON CONFLICT (name)
           DO UPDATE SET name = excluded.name
                         , type = excluded.type
                         , description = excluded.description
