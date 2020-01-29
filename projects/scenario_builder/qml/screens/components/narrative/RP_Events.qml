@@ -24,10 +24,13 @@ ColumnLayout {
   function update_event(values) {
     obj.event_id = values.id
     obj.name = values.name
-    obj.location = values.location
-    obj.actor = values.actor
-    obj.equipment = values.equipment
     obj.description = values.description
+    obj.category = values.category
+    obj.fidelity = values.fidelity
+    obj.actor_1 = values.actor_1
+    obj.actor_2 = values.actor_2
+    obj.equipment = values.equipment
+    obj.details = values.details
     root.backend.update_event(obj)
   }
   StackLayout {
@@ -65,9 +68,6 @@ ColumnLayout {
           { next = full_listArea.model.count + 1 }
           self.event_id = -1
           self.name = full_listArea.model.get(full_listArea.currentIndex).name
-          self.location = full_listArea.model.get(full_listArea.currentIndex).location
-          self.actor = full_listArea.model.get(full_listArea.currentIndex).actor
-          self.equipment = full_listArea.model.get(full_listArea.currentIndex).equipment
           self.description = full_listArea.model.get(full_listArea.currentIndex).description
 
           self_scene.scene_id = root.model.get(root.index).id
@@ -88,9 +88,6 @@ ColumnLayout {
               {
              "id" : self.event_id,
              "name": "%1".arg(self.name), 
-             "location" : self.location,
-             "actor" : self.actor,
-             "equipment" : "%1".arg(self.equipment),
              "description": "%1".arg(self.description)
               });
             }
@@ -102,9 +99,6 @@ ColumnLayout {
           self.event_id = -1
           self.name = "New Event %1".arg(next)
           self.description = "Description of Event %1".arg(next)
-          self.location = -1
-          self.actor = -1
-          self.equipment = "New Equipment %1".arg(next)          
 
           self_scene.scene_id = root.model.get(root.index).id
           self_scene.name = root.model.get(root.index).name
@@ -120,9 +114,6 @@ ColumnLayout {
             {
              "id" : self.event_id,
              "name": "%1".arg(self.name), 
-             "location" : self.location,
-             "actor" : self.actor,
-             "equipment" : "%1".arg(self.equipment),
              "description": "%1".arg(self.description)}
           );
           ++next;
@@ -150,9 +141,6 @@ ColumnLayout {
               {
              "id" : self.event_id,
              "name": "%1".arg(self.name), 
-             "location" : self.location,
-             "actor" : self.actor,
-             "equipment" : "%1".arg(self.equipment),
              "description": "%1".arg(self.description)
               });
             }
@@ -239,90 +227,78 @@ ColumnLayout {
       Layout.fillWidth: true
       Layout.fillHeight: true
       currentIndex: 0
-    Rectangle {
-      id : listRectangle
-      Layout.fillWidth : true
-      Layout.fillHeight: true
-      Layout.margins : 5  
+      Rectangle {
+        id : listRectangle
+        Layout.fillWidth : true
+        Layout.fillHeight: true
+        Layout.margins : 5  
 
-      border.color : "black"  
+        border.color : "black"  
 
-      ThreeButtonRow {
-        id: controls
-        anchors.top : listRectangle.top
-        anchors.left : listRectangle.left
-        anchors.right : listRectangle.right
-        anchors.topMargin : 2
-        anchors.rightMargin : 5
-        anchors.leftMargin : 5  
+        ThreeButtonRow {
+          id: controls
+          anchors.top : listRectangle.top
+          anchors.left : listRectangle.left
+          anchors.right : listRectangle.right
+          anchors.topMargin : 2
+          anchors.rightMargin : 5
+          anchors.leftMargin : 5  
 
-        property int next : 1  
+          property int next : 1  
 
-        firstButtonText : "Add"
-        secondButtonText : "New"
-        thirdButtonText : "Remove"  
+          firstButtonText : "Add"
+          secondButtonText : "New"
+          thirdButtonText : "Remove"  
 
-        onFirstButtonClicked :{
-          event_stack.currentIndex = 0
-          full_listArea.model.clear()
-          root.backend.events()
-          while ( root.backend.next_event(self) ) {
-            full_listArea.model.insert(full_listArea.model.count,
-            {
-             "id" : self.event_id,
-             "name": "%1".arg(self.name), 
-             "location" : self.location,
-             "actor" : self.actor,
-             "equipment" : "%1".arg(self.equipment),
-             "description": "%1".arg(self.description)
-              });
+          onFirstButtonClicked :{
+            event_stack.currentIndex = 0
+            full_listArea.model.clear()
+            root.backend.events()
+            while ( root.backend.next_event(self) ) {
+              full_listArea.model.insert(full_listArea.model.count,
+              {
+               "id" : self.event_id,
+               "name": "%1".arg(self.name), 
+               "description": "%1".arg(self.description)
+                });
+            }
           }
-        }
-        onSecondButtonClicked :{
-          if( next < listArea.model.count ) 
-          { next = listArea.model.count +1}
-          self.event_id = -1
-          self.name = "New Event %1".arg(next)
-          self.location = -1
-          self.actor = -1
-          self.equipment = "New Equipment %1".arg(next)
-          self.description = "Description of Event %1".arg(next)
+          onSecondButtonClicked :{
+            if( next < listArea.model.count ) 
+            { next = listArea.model.count +1}
+            self.event_id = -1
+            self.name = "New Event %1".arg(next)
+            self.description = "Description of Event %1".arg(next)  
+  
 
+            self_scene.scene_id = root.model.get(root.index).id
+            self_scene.name = root.model.get(root.index).name
+            while( root.backend.select_event(self) )
+            { 
+             next = next +1
+             self.event_id = -1; 
+             self.name = "New Event %1".arg(next);
+             self.description = "Description of Event %1".arg(next)
+            }     
 
-          self_scene.scene_id = root.model.get(root.index).id
-          self_scene.name = root.model.get(root.index).name
-          while( root.backend.select_event(self) )
-          { 
-           next = next +1
-           self.event_id = -1; 
-           self.name = "New Event %1".arg(next);
-           self.location = -1
-           self.actor = -1
-           self.equipment = "New Equipment %1".arg(next)
-           self.description = "Description of Event %1".arg(next)
-          }   
-
-          root.backend.update_event_in_scene(self_scene, self)
-          listArea.model.insert(listArea.model.count,
-            {
-             "id" : self.event_id,
-             "name": "%1".arg(self.name), 
-             "location" : self.location,
-             "actor" : self.actor,
-             "equipment" : "%1".arg(self.equipment),
-             "description": "%1".arg(self.description)}
-          );
-          ++next;
-        }
-        onThirdButtonClicked : {
-          self.event_id = listArea.model.get(listArea.currentIndex).event_id
-          self.name = listArea.model.get(listArea.currentIndex).name
-          self_scene.scene_id = root.model.get(root.index).id
-          self_scene.name = root.model.get(root.index).name          
-          root.backend.remove_event_from_scene(self,self_scene)
-          listArea.model.remove(listArea.currentIndex)
-          listArea.currentIndex = Math.max(0,listArea.currentIndex-1)
-        }
+            root.backend.update_event_in_scene(self_scene, self)
+            listArea.model.insert(listArea.model.count,
+              {
+               "id" : self.event_id,
+               "name": "%1".arg(self.name), 
+               "description": "%1".arg(self.description)}
+            );
+            ++next;
+          }
+          onThirdButtonClicked : {
+            self.event_id = listArea.model.get(listArea.currentIndex).event_id
+            self.name = listArea.model.get(listArea.currentIndex).name
+            self_scene.scene_id = root.model.get(root.index).id
+            self_scene.name = root.model.get(root.index).name          
+            root.backend.remove_event_from_scene(self,self_scene)
+            listArea.model.remove(listArea.currentIndex)
+            listArea.currentIndex = Math.max(0,listArea.currentIndex-1)
+          }
       }  
       ListView {
         id : listArea
@@ -334,9 +310,7 @@ ColumnLayout {
 
         highlight: Rectangle {
             color: '#1111110F'
-//            anchors.left : parent.left
-//            anchors.right : parent.right
-//            anchors.margins: 5
+
             Layout.alignment: Qt.AlignTop
             Layout.fillWidth: true
             Layout.margins : 5
@@ -443,9 +417,6 @@ ColumnLayout {
             {
               "event_id" : self.event_id,
               "name" : "%1".arg(self.name),
-              "location" : self.location,
-              "actor" : self.actor,
-              "equipment" : "%1".arg(self.equipment),
               "description" : "%1".arg(self.description)
             });
           }
@@ -468,9 +439,6 @@ ColumnLayout {
           {
             "event_id" : self.event_id,
             "name" : "%1".arg(self.name),
-            "location" : self.location,
-            "actor" : self.actor,
-            "equipment" : "%1".arg(self.equipment),
             "description" : "%1".arg(self.description)
           });
         }

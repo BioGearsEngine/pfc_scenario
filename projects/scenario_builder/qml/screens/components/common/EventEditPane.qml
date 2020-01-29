@@ -7,21 +7,21 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 
 
 
-
-ColumnLayout {
+ScrollView {
 	id: root
-
-Event {
-	id: self
-}
+	Layout.fillWidth: true
+	Layout.fillHeight: true
 	property SQLBackend backend
 	property ListElement modelData
 	property alias name : name.text
 	property alias description : description.text
 	property int eventID
 	signal exit() 
-	Layout.fillWidth: true
-	Layout.fillHeight: true
+ColumnLayout {
+Event {
+	id: self
+}
+	anchors.fill : parent
 
 	TextEntry {
 		id: name
@@ -35,6 +35,63 @@ Event {
 		label: "Description"
 		placeholderText: "String Field"
 	}
+	TextAreaEntry {
+		id: actor_1
+		Layout.fillWidth : true
+		label : "Actor 1"
+		placeholderText : "String Field"
+	}
+	TextAreaEntry {
+		id: actor_2
+		Layout.fillWidth : true
+		label : "Actor 2"
+		placeholderText : "String Field"
+	}
+	TextAreaEntry {
+		id: details
+		Layout.fillWidth : true
+		label : "Details"
+		placeholderText : "String Field"
+	}
+    RowLayout {
+      id : fidelity
+      Layout.leftMargin: 5
+      Label {
+        text : "Fidelity"
+      }
+      ComboBox {
+          id : fidelitySelect
+          width: 200
+          model: [ "Low", "Medium", "High"]
+
+          contentItem: Text {
+
+              text: typeSelect.displayText
+              font.pointSize: 8
+              verticalAlignment: Text.AlignVCenter
+              elide: Text.ElideRight
+          }
+      }
+    }	
+    RowLayout {
+      id : type
+      Layout.leftMargin: 5
+      Label {
+        text : "Type"
+      }
+      ComboBox {
+          id : typeSelect
+          width: 200
+          model: [ "0", "1", "2"]
+
+          contentItem: Text {
+              text: typeSelect.displayText
+              font.pointSize: 8
+              verticalAlignment: Text.AlignVCenter
+              elide: Text.ElideRight
+          }
+      }
+    }
 	Rectangle {
 		id: section_1
 		width: 300
@@ -62,8 +119,11 @@ Event {
 			anchors.right : section_2.right
 			text : 'Exit'
 			onClicked : {
-				exit()
+				root.exit()
 			}
 		}
 	}
+
+}
+
 }

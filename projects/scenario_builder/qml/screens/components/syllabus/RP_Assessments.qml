@@ -97,7 +97,6 @@ ColumnLayout  {
               entry.type = (index) ? "Scalar" : "Binary"
               update_assessment(entry)
           }
-
       }
     }
 

@@ -45,6 +45,7 @@ ColumnLayout {
         if( next < root.model.count ) 
         { next = root.model.count +1}
         self.equipment_id = -1
+        self.type = 1
         self.name = "New Equipment %1".arg(next)
         self.description = "Description of Equipment %1".arg(next)
         self.image = ""
@@ -57,18 +58,19 @@ ColumnLayout {
          self.name = "New Equipment %1".arg(next);
          self.description = "Description of Equipment %1".arg(next)
         } 
-
         root.backend.update_equipment(self)
         root.model.insert(root.model.count,
           {
            "id" : self.equipment_id,
+           "type" : 1, //Change this to not be default later
            "name": "%1".arg(self.name), 
            "description": "%1".arg(self.description) , 
-           "citations": self.citaitons,
+           "citations": self.citations,
            "image": self.image,
 
           }
         );
+
         ++next;
       }
       onSecondButtonClicked : {
