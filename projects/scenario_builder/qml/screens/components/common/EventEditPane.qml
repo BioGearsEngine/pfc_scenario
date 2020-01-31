@@ -17,12 +17,16 @@ ScrollView {
 	property alias description : description.text
 	property int eventID
 	signal exit() 
+	onWidthChanged: {
+		eventColumn.width = width
+	}
 ColumnLayout {
+	id: eventColumn
 Event {
 	id: self
 }
-	anchors.fill : parent
-
+	//anchors.fill : parent
+	Layout.fillWidth: true
 	TextEntry {
 		id: name
 		Layout.fillWidth : true
@@ -82,7 +86,7 @@ Event {
       ComboBox {
           id : typeSelect
           width: 200
-          model: [ "0", "1", "2"]
+          model: [ "Action", "Dialogue", "Movement", "Sound", "Environment"]
 
           contentItem: Text {
               text: typeSelect.displayText
