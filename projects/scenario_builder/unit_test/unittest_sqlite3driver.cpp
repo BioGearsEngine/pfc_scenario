@@ -690,11 +690,11 @@ TEST_F(TEST_FIXTURE_NAME, Select_Event)
 
   _db.select_event(&id);
   _db.select_event(&name);
-  _db.select_event(&name);
-
+  //_db.select_event(&event_1);
+  //_db.select_event(&event_3);
   event_1.id = 1;
-  EXPECT_EQ(event_1, id);
   event_3.id = 3;
+  EXPECT_EQ(event_1, id);
   EXPECT_EQ(event_3, name);
 }
 TEST_F(TEST_FIXTURE_NAME, Remove_Event)
@@ -3518,12 +3518,6 @@ TEST_F(TEST_FIXTURE_NAME, get_events)
 {
   using namespace pfc;
   Event event_1;
-  EventMap eventMap_1;
-  Scene scene_1;
-
-  scene_1.name = "Scene 1";
-  scene_1.items = "1;2";
-  scene_1.roles = "1;2";
 
   event_1.name = "Barbecue";
   event_1.description = "Barbecue Barbecue";
@@ -3535,25 +3529,18 @@ TEST_F(TEST_FIXTURE_NAME, get_events)
   event_1.details = "People cooking and eating meat outdoors";
 
   EXPECT_EQ(0, _db.event_count());
-
   EXPECT_TRUE(_db.update_event(&event_1));
-  EXPECT_TRUE(_db.update_scene(&scene_1));
 
-  eventMap_1.fk_event = scene_1.id;
-  eventMap_1.fk_scene = event_1.id;
-
-  EXPECT_TRUE(_db.update_event_map(&eventMap_1));
-
-  auto list = _db.get_events_in_scene(&scene_1);
+  auto list = _db.get_events();
 
   EXPECT_TRUE(list[0]->name.compare(event_1.name) == 0);
   EXPECT_TRUE(list[0]->description.compare(event_1.description) == 0);
   EXPECT_TRUE(list[0]->equipment.compare(event_1.equipment) == 0);
-  EXPECT_TRUE(list[0]->category == event_1.category);
-  EXPECT_TRUE(list[0]->fidelity == event_1.fidelity);
+  EXPECT_TRUE(list[0]->category.compare(event_1.category) == 0);
+  EXPECT_TRUE(list[0]->fidelity.compare(event_1.fidelity) == 0);
   EXPECT_TRUE(list[0]->fk_actor_1 == event_1.fk_actor_1);
   EXPECT_TRUE(list[0]->fk_actor_2 == event_1.fk_actor_2);
-  EXPECT_TRUE(list[0]->details == event_1.details);
+  EXPECT_TRUE(list[0]->details.compare(event_1.details) == 0);
 }
 
 TEST_F(TEST_FIXTURE_NAME, LocationMap_Test_Location_Insertion)

@@ -2047,8 +2047,10 @@ inline void assign_event(QSqlRecord& record, Event& event)
   event.id = record.value(EVENT_ID).toInt();
   event.name = record.value(EVENT_NAME).toString();
   event.description = record.value(EVENT_DESCRIPTION).toString();
+  event.fidelity = record.value(EVENT_FIDELITY).toString();
+  event.category = record.value(EVENT_CATEGORY).toString();
   event.fk_actor_1 = record.value(EVENT_ACTOR_1).toInt();
-  event.fk_actor_2 = record.value(EVENT_ACTOR_1).toInt();
+  event.fk_actor_2 = record.value(EVENT_ACTOR_2).toInt();
   event.equipment = record.value(EVENT_EQUIPMENT).toString();
   event.details = record.value(EVENT_DETAILS).toString();
 }
@@ -3785,6 +3787,31 @@ std::vector<std::unique_ptr<Citation>> SQLite3Driver::get_citations() const
       citation_list.push_back(std::move(temp));
     }
     return citation_list;
+  }
+  throw std::runtime_error("No db connection");
+}
+std::vector<std::unique_ptr<Event>> SQLite3Driver::get_events() const
+{
+  if (_db.isOpen()) {
+    std::vector<std::unique_ptr<Event>> event_list;
+    QSqlQuery event_query{ _db };
+    event_query.prepare(select_all_events);
+    event_query.exec();
+    while (event_query.next()) {
+      auto temp = std::make_unique<Event>();
+      auto record = event_query.record();
+      temp->id = record.value(0).toInt();
+      temp->name = record.value(1).toString();
+      temp->description = record.value(2).toString();
+      temp->category = record.value(3).toString();
+      temp->fidelity = record.value(4).toString();
+      temp->fk_actor_1 = record.value(5).toInt();
+      temp->fk_actor_2 = record.value(6).toInt();
+      temp->equipment = record.value(7).toString();
+      temp->details = record.value(8).toString();
+      event_list.push_back(std::move(temp));
+    }
+    return event_list;
   }
   throw std::runtime_error("No db connection");
 }

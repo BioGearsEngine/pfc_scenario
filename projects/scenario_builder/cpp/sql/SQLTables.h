@@ -265,14 +265,14 @@ public:
   bool operator==(const Event& rhs) const
   {
     return id == rhs.id
-      && name == rhs.name
-      && description == rhs.description
-      && category == rhs.category
-      && fidelity == rhs.fidelity
-      && fk_actor_1 == rhs.fk_actor_1
-      && fk_actor_2 == rhs.fk_actor_2
-      && equipment == rhs.equipment
-      && details == rhs.details;
+    && name == rhs.name
+    && description == rhs.description
+    && category == rhs.category
+    && fidelity == rhs.fidelity
+    && fk_actor_1 == rhs.fk_actor_1
+    && fk_actor_2 == rhs.fk_actor_2
+    && equipment == rhs.equipment
+    && details == rhs.details;
   }
   bool operator!=(const Event& rhs) const
   {

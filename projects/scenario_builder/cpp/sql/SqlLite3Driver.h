@@ -132,6 +132,7 @@ public:
   std::vector<std::unique_ptr<Author>> get_authors() const;
   std::vector<std::unique_ptr<Assessment>> get_assessments() const;
   std::vector<std::unique_ptr<Citation>> get_citations() const;
+  std::vector<std::unique_ptr<Event>> get_events() const;
   std::vector<std::unique_ptr<Event>> get_events_in_scene(Scene const* const) const;
   std::vector<std::unique_ptr<Equipment>> get_equipments() const;
   std::vector<std::unique_ptr<EquipmentMap>> get_equipment_in_scene(Scene const* const) const;
