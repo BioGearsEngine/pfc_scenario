@@ -63,7 +63,7 @@ ListEntry {
     //TODO: It would be cool if the delegate on state change added a description field which expanded it
 
   onAdded : {
-    var likely_id = root.backend.nextID(SQLBackend.EQUIPMENT) + 1
+    var likely_id = root.backend.nextID(SQLBackend.EQUIPMENTS) + 1
     self.equipment_id = -1
     self.type = "1"
     self.name  = "New Equipment %1".arg(likely_id)

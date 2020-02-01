@@ -178,18 +178,18 @@ ScrollView {
         backend : root.backend   
 
         onFullAdded : {
-          citation.id = fullReferenceList.model.get(currentIndex)
+          citation.citation_id = fullReferenceList.model.get(current).citation_id
           root.backend.select_citation(citation)
           var entry = root.model.get(root.index)
-          entry.citations = (entry.citations) ? entry.citations.concat(";"+citation_id) : entry.citations.concat(citation_id)
-          update_treatment(entry)
+          entry.citations = (entry.citations) ? entry.citations.concat(";"+citation.citation_id) : entry.citations.concat(citation.citation_id)
+          column.update_treatment(entry)
+          fullExit()
         }
 
         onFullExit : {
           listStack.currentIndex = 0
           var values = root.model.get(root.index)
           if(values) {
-            nameEntry.text = values.name
             descriptionEntry.text = values.description
             referenceList.model.clear()   
 
@@ -226,7 +226,7 @@ ScrollView {
       equipmentList.model.clear()
       var equipments = (values.equipment) ? values.equipment.split(";").filter(x => x) : "";  
       for(var i = 0; i < equipments.length; ++i){
-         equipment.equipment_id = equipments[i]
+         equipment.equipment_id = parseInt(equipments[i])
          equipment.name = ""
          column.backend.select_equipment(equipment)
          equipmentList.model.insert(equipmentList.model.count,

@@ -252,7 +252,7 @@ int SQLite3Driver::nextID(Sqlite3Table table) const
       query.prepare(stmt.arg("injury_set"));
       break;
     case LOCATIONS:
-      query.prepare(stmt.arg("loction"));
+      query.prepare(stmt.arg("location"));
       break;
     case OBJECTIVES:
       query.prepare(stmt.arg("objective"));

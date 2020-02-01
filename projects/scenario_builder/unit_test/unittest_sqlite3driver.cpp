@@ -690,8 +690,6 @@ TEST_F(TEST_FIXTURE_NAME, Select_Event)
 
   _db.select_event(&id);
   _db.select_event(&name);
-  //_db.select_event(&event_1);
-  //_db.select_event(&event_3);
   event_1.id = 1;
   event_3.id = 3;
   EXPECT_EQ(event_1, id);
