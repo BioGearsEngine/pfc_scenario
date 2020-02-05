@@ -258,6 +258,20 @@ public:
   Q_INVOKABLE bool remove_event_from_scene(Event*, Scene*);
   Q_INVOKABLE bool remove_scene(Scene*);
 
+  Q_INVOKABLE bool remove_equipment_from_treatments(int);
+  Q_INVOKABLE bool remove_equipment_from_treatments(std::string);
+  Q_INVOKABLE bool remove_citation_from_treatments(int);
+  Q_INVOKABLE bool remove_citation_from_treatments(std::string);
+  Q_INVOKABLE bool remove_citation_from_injuries(int);
+  Q_INVOKABLE bool remove_citation_from_injuries(std::string);
+  Q_INVOKABLE bool remove_citation_from_equipment(int);
+  Q_INVOKABLE bool remove_citation_from_equipment(std::string);
+  Q_INVOKABLE bool remove_citation_from_objectives(int);
+  Q_INVOKABLE bool remove_citation_from_objectives(std::string);
+
+  std::string list_remove(std::string,std::string) const;
+
+
   Q_INVOKABLE int raw_error() const { return _db.lastError().type(); };
   Q_INVOKABLE QString error_message() const { return _db.lastError().text(); }
   Q_INVOKABLE bool success() const { return !error(); }

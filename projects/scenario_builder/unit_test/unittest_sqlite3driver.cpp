@@ -4160,3 +4160,57 @@ TEST_F(TEST_FIXTURE_NAME, get_scenes)
 
   EXPECT_TRUE(list[0]->name.compare(scene_1.name) == 0);
 }
+
+TEST_F(TEST_FIXTURE_NAME, remove_equipment_from_treatments)
+{
+  using namespace pfc;
+  Treatment treatment_1;
+  Treatment treatment_2;
+  Treatment treatment_3;
+  Treatment treatment_4;
+  Treatment treatment_5;
+  Treatment treatment_6;
+
+  treatment_1.medical_name = "Soupus De Gallinus";
+  treatment_1.common_name = "Chicken Soup";
+  treatment_1.description = "Good for the soul";
+  treatment_1.equipment = "1;2;3;4";
+  treatment_1.citations = { 1 };
+
+  treatment_6.medical_name = "Soupus De Gallinus";
+  treatment_6.common_name = "Chicken Soup";
+  treatment_6.description = "Good for the soul";
+  treatment_6.equipment = "1;2;3;4";
+  treatment_6.citations = { 1 };  
+
+  treatment_2.equipment = "1;3;4";
+  treatment_3.equipment = "1;3";
+  treatment_4.equipment = "3";
+  treatment_5.equipment = "";
+
+  _db.update_treatment(&treatment_1);
+  _db.update_treatment(&treatment_6);
+  _db.select_treatment(&treatment_1);
+  _db.select_treatment(&treatment_6);
+
+  EXPECT_TRUE(_db.remove_equipment_from_treatments(2));
+  _db.select_treatment(&treatment_1);
+  _db.select_treatment(&treatment_6);
+  EXPECT_EQ(treatment_2.equipment.toStdString(), treatment_1.equipment.toStdString());
+  EXPECT_EQ(treatment_2.equipment.toStdString(), treatment_6.equipment.toStdString());
+  EXPECT_TRUE(_db.remove_equipment_from_treatments(4));
+  _db.select_treatment(&treatment_1);
+  _db.select_treatment(&treatment_6);
+  EXPECT_EQ(treatment_3.equipment.toStdString(), treatment_1.equipment.toStdString());
+  EXPECT_EQ(treatment_3.equipment.toStdString(), treatment_6.equipment.toStdString());
+  EXPECT_TRUE(_db.remove_equipment_from_treatments(1));
+  _db.select_treatment(&treatment_1);
+  _db.select_treatment(&treatment_6);
+  EXPECT_EQ(treatment_4.equipment.toStdString(), treatment_1.equipment.toStdString());
+  EXPECT_EQ(treatment_4.equipment.toStdString(), treatment_6.equipment.toStdString());
+  EXPECT_TRUE(_db.remove_equipment_from_treatments(3));
+  _db.select_treatment(&treatment_1);
+  _db.select_treatment(&treatment_6);
+  EXPECT_EQ(treatment_5.equipment.toStdString(), treatment_1.equipment.toStdString());
+  EXPECT_EQ(treatment_5.equipment.toStdString(), treatment_6.equipment.toStdString());
+}

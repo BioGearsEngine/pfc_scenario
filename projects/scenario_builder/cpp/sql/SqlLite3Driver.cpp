@@ -25,6 +25,7 @@ specific language governing permissions and limitations under the License.
 
 #include "SqlLite3_Statments.h"
 #include "sqlite3ext.h"
+#include <regex>
 
 namespace pfc {
 //------------------------------------------------------------------------------
@@ -1738,7 +1739,6 @@ inline void assign_equipment_from_scene(const QSqlRecord& record, EquipmentMap& 
   map.property_values = record.value(7).toString();
   map.notes = record.value(8).toString();
 }
-
 int SQLite3Driver::equipment_map_count() const
 {
   if (_db.isOpen()) {
@@ -4229,4 +4229,163 @@ std::vector<std::unique_ptr<Scene>> SQLite3Driver::get_scenes() const
   }
   throw std::runtime_error("No db connection");
 }
+//----------------------------------------------------------------------------
+bool SQLite3Driver::remove_equipment_from_treatments(int equipment_id)
+{
+  return remove_equipment_from_treatments(std::to_string(equipment_id));
+}
+bool SQLite3Driver::remove_equipment_from_treatments(std::string equipment_id)
+{
+  auto treatments = get_treatments();
+  if ( _db.isOpen() ) {
+    for (auto& treatment : treatments) {
+      std::string equipment = list_remove(treatment->equipment.toStdString(),equipment_id);
+      QSqlQuery query{ _db };
+      query.prepare(update_treatment_by_id);
+      query.bindValue(":id", treatment->id);
+      query.bindValue(":citations", treatment->citations);
+      query.bindValue(":equipment", equipment.c_str());
+      query.bindValue(":medical_name", treatment->medical_name);
+      query.bindValue(":common_name", treatment->common_name);
+      query.bindValue(":description", treatment->description);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+    }
+    return true;
+  }
+  return false;
+}
+bool SQLite3Driver::remove_citation_from_treatments(int citation_id)
+{
+  return remove_citation_from_treatments(std::to_string(citation_id)); 
+}
+bool SQLite3Driver::remove_citation_from_treatments(std::string citation_id)
+{
+  auto treatments = get_treatments();
+  if (_db.isOpen()) {
+    for (auto& treatment : treatments) {
+      std::string citations = list_remove(treatment->citations.toStdString(), citation_id);
+      QSqlQuery query{ _db };
+      query.prepare(update_treatment_by_id);
+      query.bindValue(":id", treatment->id);
+      query.bindValue(":citations", citations.c_str());
+      query.bindValue(":equipment", treatment->equipment);
+      query.bindValue(":medical_name", treatment->medical_name);
+      query.bindValue(":common_name", treatment->common_name);
+      query.bindValue(":description", treatment->description);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+    }
+    return true;
+  }
+  return false;
+}
+bool SQLite3Driver::remove_citation_from_injuries(int citation_id)
+{
+  return remove_citation_from_injuries(std::to_string(citation_id));
+}
+bool SQLite3Driver::remove_citation_from_injuries(std::string citation_id)
+{
+  auto injuries = get_injuries();
+  if (_db.isOpen()) {
+    for (auto& injury : injuries) {
+      std::string citations = list_remove(injury->citations.toStdString(), citation_id);
+      QSqlQuery query{ _db };
+      query.prepare(update_injury_by_id);
+      query.bindValue(":id", injury->id);
+      query.bindValue(":citations", citations.c_str());
+      query.bindValue(":medical_name", injury->medical_name);
+      query.bindValue(":common_name", injury->common_name);
+      query.bindValue(":description", injury->description);
+      query.bindValue(":min", injury->severity_min);
+      query.bindValue(":max", injury->severity_max);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+    }
+    return true;
+  }
+  return false;
+}
+bool SQLite3Driver::remove_citation_from_equipment(int citation_id)
+{
+  return remove_citation_from_equipment(std::to_string(citation_id));
+}
+bool SQLite3Driver::remove_citation_from_equipment(std::string citation_id)
+{
+  auto equipments = get_equipments();
+  if (_db.isOpen()) {
+    for (auto& equipment : equipments) {
+      std::string citations = list_remove(equipment->citations.toStdString(), citation_id);
+      QSqlQuery query{ _db };
+      query.prepare(update_equipment_by_id);
+      query.bindValue(":id", equipment->id);
+      query.bindValue(":name", equipment->name);
+      query.bindValue(":type", equipment->type);
+      query.bindValue(":description", equipment->description);
+      query.bindValue(":citations", equipment->citations);
+      query.bindValue(":image", equipment->image);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+    }
+    return true;
+  }
+  return false;
+}
+bool SQLite3Driver::remove_citation_from_objectives(int citation_id)
+{
+  return remove_citation_from_objectives(std::to_string(citation_id));
+}
+bool SQLite3Driver::remove_citation_from_objectives(std::string citation_id)
+{
+  auto objectives = get_objectives();
+  if (_db.isOpen()) {
+    for (auto& objective : objectives) {
+      std::string citations = list_remove(objective->citations.toStdString(), citation_id);
+      QSqlQuery query{ _db };
+      query.prepare(update_objective_by_id);
+      query.bindValue(":id", objective->id);
+      query.bindValue(":name", objective->name);
+      query.bindValue(":description", objective->description);
+      query.bindValue(":citations", objective->citations);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+    }
+    return true;
+  }
+  return false;
+}
+
+std::string SQLite3Driver::list_remove(std::string list, std::string id) const
+{
+  std::string result;
+  std::string temp_id;
+  for (int i = 0;i < list.length();++i) {
+    if (list[i] != ';') {
+      temp_id += list[i];
+    } else {
+      if (temp_id != id && !temp_id.empty()) {
+        result += (temp_id+";");
+      }
+      temp_id.clear();
+    }
+  }
+  if (temp_id != id) {
+    result += temp_id;
+  }
+  if (!result.empty() && result[result.length() - 1] == ';') {
+    result.pop_back();
+  }
+  return result;
+}
+
 }
