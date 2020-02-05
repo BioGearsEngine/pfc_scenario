@@ -48,6 +48,7 @@ GridLayout {
     Layout.topMargin : 58
     Layout.rightMargin: 5
 
+
     Component.onCompleted: {
       
     }

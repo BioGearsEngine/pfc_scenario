@@ -14,6 +14,7 @@ ColumnLayout {
   readonly property alias model : listArea.model 
   readonly property alias index : listArea.currentIndex
 
+  signal reloadEquipmentList();
 
   Equipment {
     id : self
@@ -175,6 +176,21 @@ ColumnLayout {
             });
         }
       }
+    }
+  }
+  onReloadEquipmentList : {
+    listArea.model.clear()
+    root.backend.equipments()
+    while (root.backend.next_equipment(self) ){
+      listArea.model.insert(listArea.model.count, 
+      {
+        id : self.equipment_id,
+        type : "%1".arg(self.type),
+        name: "%1".arg(self.name), 
+        description: "%1".arg(self.description), 
+        citations: self.citations,
+        image: "%1".arg(self.image) 
+      });
     }
   }
 }

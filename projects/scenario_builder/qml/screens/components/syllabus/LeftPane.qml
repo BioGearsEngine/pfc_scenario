@@ -111,6 +111,11 @@ Rectangle {
         Layout.fillWidth : true
         backend : root.backend
       }
+      onCurrentIndexChanged : {
+        if (currentIndex == 4) {
+          equipment.reloadEquipmentList()
+        }
+      }
     }
   }
 }

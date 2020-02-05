@@ -83,6 +83,9 @@ ColumnLayout {
 
         root.backend.remove_treatment(self)
         root.model.remove(root.index)
+        if (listArea.currentIndex == 0) { // If the index was 0 this wasn't registering as an index change and the right pane wasn't reloading
+          listArea.currentIndex = 1
+        } 
         listArea.currentIndex = Math.max(0,root.index-1)
       }
     }
