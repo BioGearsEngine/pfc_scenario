@@ -4328,7 +4328,7 @@ bool SQLite3Driver::remove_citation_from_equipment(std::string citation_id)
       query.bindValue(":name", equipment->name);
       query.bindValue(":type", equipment->type);
       query.bindValue(":description", equipment->description);
-      query.bindValue(":citations", equipment->citations);
+      query.bindValue(":citations", citations.c_str());
       query.bindValue(":image", equipment->image);
       if (!query.exec()) {
         qWarning() << query.lastError();
@@ -4354,7 +4354,7 @@ bool SQLite3Driver::remove_citation_from_objectives(std::string citation_id)
       query.bindValue(":id", objective->id);
       query.bindValue(":name", objective->name);
       query.bindValue(":description", objective->description);
-      query.bindValue(":citations", objective->citations);
+      query.bindValue(":citations", citations.c_str());
       if (!query.exec()) {
         qWarning() << query.lastError();
         return false;

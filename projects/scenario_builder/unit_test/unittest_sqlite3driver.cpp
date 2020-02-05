@@ -4177,8 +4177,8 @@ TEST_F(TEST_FIXTURE_NAME, remove_equipment_from_treatments)
   treatment_1.equipment = "1;2;3;4";
   treatment_1.citations = { 1 };
 
-  treatment_6.medical_name = "Soupus De Gallinus";
-  treatment_6.common_name = "Chicken Soup";
+  treatment_6.medical_name = "Soupus De Gallinus2";
+  treatment_6.common_name = "Chicken Soup2";
   treatment_6.description = "Good for the soul";
   treatment_6.equipment = "1;2;3;4";
   treatment_6.citations = { 1 };  
@@ -4213,4 +4213,210 @@ TEST_F(TEST_FIXTURE_NAME, remove_equipment_from_treatments)
   _db.select_treatment(&treatment_6);
   EXPECT_EQ(treatment_5.equipment.toStdString(), treatment_1.equipment.toStdString());
   EXPECT_EQ(treatment_5.equipment.toStdString(), treatment_6.equipment.toStdString());
+}
+TEST_F(TEST_FIXTURE_NAME, remove_citation_from_treatments)
+{
+  using namespace pfc;
+  Treatment treatment_1;
+  Treatment treatment_2;
+  Treatment treatment_3;
+  Treatment treatment_4;
+  Treatment treatment_5;
+  Treatment treatment_6;
+
+  treatment_1.medical_name = "Soupus De Gallinus";
+  treatment_1.common_name = "Chicken Soup";
+  treatment_1.description = "Good for the soul";
+  treatment_1.citations = "1;2;3;4";
+  treatment_1.equipment = { 1 };
+
+  treatment_6.medical_name = "Soupus De Gallinus2";
+  treatment_6.common_name = "Chicken Soup2";
+  treatment_6.description = "Good for the soul";
+  treatment_6.citations = "1;2;3;4";
+  treatment_6.equipment = { 1 };
+
+  treatment_2.citations = "1;3;4";
+  treatment_3.citations = "1;3";
+  treatment_4.citations = "3";
+  treatment_5.citations = "";
+
+  _db.update_treatment(&treatment_1);
+  _db.update_treatment(&treatment_6);
+  _db.select_treatment(&treatment_1);
+  _db.select_treatment(&treatment_6);
+
+  EXPECT_TRUE(_db.remove_citation_from_treatments(2));
+  _db.select_treatment(&treatment_1);
+  _db.select_treatment(&treatment_6);
+  EXPECT_EQ(treatment_2.citations.toStdString(), treatment_1.citations.toStdString());
+  EXPECT_EQ(treatment_2.citations.toStdString(), treatment_6.citations.toStdString());
+  EXPECT_TRUE(_db.remove_citation_from_treatments(4));
+  _db.select_treatment(&treatment_1);
+  _db.select_treatment(&treatment_6);
+  EXPECT_EQ(treatment_3.citations.toStdString(), treatment_1.citations.toStdString());
+  EXPECT_EQ(treatment_3.citations.toStdString(), treatment_6.citations.toStdString());
+  EXPECT_TRUE(_db.remove_citation_from_treatments(1));
+  _db.select_treatment(&treatment_1);
+  _db.select_treatment(&treatment_6);
+  EXPECT_EQ(treatment_4.citations.toStdString(), treatment_1.citations.toStdString());
+  EXPECT_EQ(treatment_4.citations.toStdString(), treatment_6.citations.toStdString());
+  EXPECT_TRUE(_db.remove_citation_from_treatments(3));
+  _db.select_treatment(&treatment_1);
+  _db.select_treatment(&treatment_6);
+  EXPECT_EQ(treatment_5.citations.toStdString(), treatment_1.citations.toStdString());
+  EXPECT_EQ(treatment_5.citations.toStdString(), treatment_6.citations.toStdString());
+}
+TEST_F(TEST_FIXTURE_NAME, remove_citation_from_injuries)
+{
+  using namespace pfc;
+  Injury injury_1;
+  Injury injury_2;
+  Injury injury_3;
+  Injury injury_4;
+  Injury injury_5;
+  Injury injury_6;
+
+  injury_1.medical_name = "Keyboardus Faceus";
+  injury_1.common_name = "Keyboard Face";
+  injury_1.description = "Looks like you took a nap on your keyboard";
+  injury_1.citations = "1;2;3;4";
+
+  injury_6.medical_name = "Keyboardus Faceus2";
+  injury_6.common_name = "Keyboard Face2";
+  injury_6.description = "Looks like you took a nap on your keyboard";
+  injury_6.citations = "1;2;3;4";
+
+  injury_2.citations = "1;3;4";
+  injury_3.citations = "1;3";
+  injury_4.citations = "3";
+  injury_5.citations = "";
+
+  _db.update_injury(&injury_1);
+  _db.update_injury(&injury_6);
+  _db.select_injury(&injury_1);
+  _db.select_injury(&injury_6);
+
+  EXPECT_TRUE(_db.remove_citation_from_injuries(2));
+  _db.select_injury(&injury_1);
+  _db.select_injury(&injury_6);
+  EXPECT_EQ(injury_2.citations.toStdString(), injury_1.citations.toStdString());
+  EXPECT_EQ(injury_2.citations.toStdString(), injury_6.citations.toStdString());
+  EXPECT_TRUE(_db.remove_citation_from_injuries(4));
+  _db.select_injury(&injury_1);
+  _db.select_injury(&injury_6);
+  EXPECT_EQ(injury_3.citations.toStdString(), injury_1.citations.toStdString());
+  EXPECT_EQ(injury_3.citations.toStdString(), injury_6.citations.toStdString());
+  EXPECT_TRUE(_db.remove_citation_from_injuries(1));
+  _db.select_injury(&injury_1);
+  _db.select_injury(&injury_6);
+  EXPECT_EQ(injury_4.citations.toStdString(), injury_1.citations.toStdString());
+  EXPECT_EQ(injury_4.citations.toStdString(), injury_6.citations.toStdString());
+  EXPECT_TRUE(_db.remove_citation_from_injuries(3));
+  _db.select_injury(&injury_1);
+  _db.select_injury(&injury_6);
+  EXPECT_EQ(injury_5.citations.toStdString(), injury_1.citations.toStdString());
+  EXPECT_EQ(injury_5.citations.toStdString(), injury_6.citations.toStdString());
+}
+TEST_F(TEST_FIXTURE_NAME, remove_citation_from_equipment)
+{
+  using namespace pfc;
+  Equipment equipment_1;
+  Equipment equipment_2;
+  Equipment equipment_3;
+  Equipment equipment_4;
+  Equipment equipment_5;
+  Equipment equipment_6;
+
+  equipment_1.name = "Keytar";
+  equipment_1.type = 1;
+  equipment_1.description = "Got a sick keytar solo later";
+  equipment_1.image = ("music stand");
+  equipment_1.citations = "1;2;3;4";
+
+  equipment_6.name = "Keytar2";
+  equipment_6.type = 1;
+  equipment_6.description = "Got a sick keytar solo later";
+  equipment_6.image = ("music stand");
+  equipment_6.citations = "1;2;3;4";
+
+  equipment_2.citations = "1;3;4";
+  equipment_3.citations = "1;3";
+  equipment_4.citations = "3";
+  equipment_5.citations = "";
+
+  _db.update_equipment(&equipment_1);
+  _db.update_equipment(&equipment_6);
+  _db.select_equipment(&equipment_1);
+  _db.select_equipment(&equipment_6);
+
+  EXPECT_TRUE(_db.remove_citation_from_equipment(2));
+  _db.select_equipment(&equipment_1);
+  _db.select_equipment(&equipment_6);
+  EXPECT_EQ(equipment_2.citations.toStdString(), equipment_1.citations.toStdString());
+  EXPECT_EQ(equipment_2.citations.toStdString(), equipment_6.citations.toStdString());
+  EXPECT_TRUE(_db.remove_citation_from_equipment(4));
+  _db.select_equipment(&equipment_1);
+  _db.select_equipment(&equipment_6);
+  EXPECT_EQ(equipment_3.citations.toStdString(), equipment_1.citations.toStdString());
+  EXPECT_EQ(equipment_3.citations.toStdString(), equipment_6.citations.toStdString());
+  EXPECT_TRUE(_db.remove_citation_from_equipment(1));
+  _db.select_equipment(&equipment_1);
+  _db.select_equipment(&equipment_6);
+  EXPECT_EQ(equipment_4.citations.toStdString(), equipment_1.citations.toStdString());
+  EXPECT_EQ(equipment_4.citations.toStdString(), equipment_6.citations.toStdString());
+  EXPECT_TRUE(_db.remove_citation_from_equipment(3));
+  _db.select_equipment(&equipment_1);
+  _db.select_equipment(&equipment_6);
+  EXPECT_EQ(equipment_5.citations.toStdString(), equipment_1.citations.toStdString());
+  EXPECT_EQ(equipment_5.citations.toStdString(), equipment_6.citations.toStdString());
+}
+TEST_F(TEST_FIXTURE_NAME, remove_citation_from_objectives)
+{
+  using namespace pfc;
+  Objective objective_1;
+  Objective objective_2;
+  Objective objective_3;
+  Objective objective_4;
+  Objective objective_5;
+  Objective objective_6;
+
+  objective_1.name = "Kill the Troll";
+  objective_1.description = "There is a troll in the forest in a great big whole who has some gold. Kill it";
+  objective_1.citations = "1;2;3;4";
+
+  objective_6.name = "Kill the Troll2";
+  objective_6.description = "There is a troll in the forest in a great big whole who has some gold. Kill it";
+  objective_6.citations = "1;2;3;4";
+
+  objective_2.citations = "1;3;4";
+  objective_3.citations = "1;3";
+  objective_4.citations = "3";
+  objective_5.citations = "";
+
+  _db.update_objective(&objective_1);
+  _db.update_objective(&objective_6);
+  _db.select_objective(&objective_1);
+  _db.select_objective(&objective_6);
+
+  EXPECT_TRUE(_db.remove_citation_from_objectives(2));
+  _db.select_objective(&objective_1);
+  _db.select_objective(&objective_6);
+  EXPECT_EQ(objective_2.citations.toStdString(), objective_1.citations.toStdString());
+  EXPECT_EQ(objective_2.citations.toStdString(), objective_6.citations.toStdString());
+  EXPECT_TRUE(_db.remove_citation_from_objectives(4));
+  _db.select_objective(&objective_1);
+  _db.select_objective(&objective_6);
+  EXPECT_EQ(objective_3.citations.toStdString(), objective_1.citations.toStdString());
+  EXPECT_EQ(objective_3.citations.toStdString(), objective_6.citations.toStdString());
+  EXPECT_TRUE(_db.remove_citation_from_objectives(1));
+  _db.select_objective(&objective_1);
+  _db.select_objective(&objective_6);
+  EXPECT_EQ(objective_4.citations.toStdString(), objective_1.citations.toStdString());
+  EXPECT_EQ(objective_4.citations.toStdString(), objective_6.citations.toStdString());
+  EXPECT_TRUE(_db.remove_citation_from_objectives(3));
+  _db.select_objective(&objective_1);
+  _db.select_objective(&objective_6);
+  EXPECT_EQ(objective_5.citations.toStdString(), objective_1.citations.toStdString());
+  EXPECT_EQ(objective_5.citations.toStdString(), objective_6.citations.toStdString());
 }
