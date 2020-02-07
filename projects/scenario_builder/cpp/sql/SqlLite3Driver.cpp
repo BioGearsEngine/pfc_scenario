@@ -793,7 +793,10 @@ bool SQLite3Driver::remove_citation(Citation* citation)
         qWarning() << query_map.lastError();
         return false;
       }
-      return true;
+      return (remove_citation_from_equipment(citation->id) && 
+		          remove_citation_from_treatments(citation->id) && 
+		          remove_citation_from_injuries(citation->id) && 
+		          remove_citation_from_objectives(citation->id));
     } else {
       return false;
     }
@@ -2703,7 +2706,7 @@ bool SQLite3Driver::remove_equipment(Equipment* equipment)
         qWarning() << query_map.lastError();
         return false;
       }
-      return true;
+      return remove_equipment_from_treatments(equipment->id);
     } else {
       return false;
     }
