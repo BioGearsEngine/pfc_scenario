@@ -42,7 +42,8 @@ ApplicationWindow {
         MenuItem { text: "Load Scenario";
                    onTriggered : {
                    console.log (text)
-                   loadDialog.open()
+                   scenario_serializer.load("PFC_Scenario.zip")
+                   //loadDialog.open()
                  }  }
     }
     Menu {

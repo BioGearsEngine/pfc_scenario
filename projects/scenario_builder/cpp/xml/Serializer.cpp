@@ -23,6 +23,7 @@
 
 #include "mz_strm_mem.h"
 #include <QSqlQuery>
+#include <fstream>
 
 namespace pfc {
 
@@ -190,6 +191,12 @@ bool Serializer::load(const QString& filename)
       break;
     }
   } while (err == MZ_OK);
+
+  std::filebuf file_buf;
+  file_buf.open("Scenario.pfc.xml",std::ios::in);
+  std::istream i_stream(&file_buf);
+  auto scenario_schema = pfc::schema::Scenario(i_stream);
+  file_buf.close();
 
   mz_zip_reader_delete(&reader);
 

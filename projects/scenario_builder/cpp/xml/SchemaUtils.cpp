@@ -245,17 +245,17 @@ namespace schema {
     return category;
   }
 
-  auto PFC::make_event_fedelity(QString fed) -> schema::event_fidelity_enum
+  auto PFC::make_event_fidelity(QString fed) -> schema::event_fidelity_enum
   {
-    auto fedelity = schema::event_fidelity_enum::value::HIGH;
+    auto fidelity = schema::event_fidelity_enum::value::HIGH;
     if (fed == "HIGH") {
-      fedelity = schema::event_fidelity_enum::value::HIGH;
+      fidelity = schema::event_fidelity_enum::value::HIGH;
     } else if (fed == "MEDIUM") {
-      fedelity = schema::event_fidelity_enum::value::MEDIUM;
+      fidelity = schema::event_fidelity_enum::value::MEDIUM;
     } else if (fed == "LOW") {
-      fedelity = schema::event_fidelity_enum::value::LOW;
+      fidelity = schema::event_fidelity_enum::value::LOW;
     }
-    return fedelity;
+    return fidelity;
   }
   //-----------------------------------------------------------------------------
   auto PFC::make_property_value_list(QString value_list) -> std::unique_ptr<schema::property_value_list>
@@ -264,7 +264,7 @@ namespace schema {
     auto vec = value_list.split(';');
     for (auto value : vec) {
       if (!value.isEmpty()) {
-        //list->value().push_back( std::make_unique<schema::property_value>(value.toStdString()));
+        list->value().push_back( std::make_unique<schema::property_value>(value.toStdString()));
       }
     }
     return list;
@@ -369,7 +369,7 @@ namespace schema {
     auto event = std::make_unique<schema::event>(make_uuid("Event_" + std::to_string(input->id)),
                                                  make_string(input->name.toStdString()),
                                                  make_event_category(input->category),
-                                                 make_event_fedelity(input->fidelity),
+                                                 make_event_fidelity(input->fidelity),
                                                  make_string("Actor_" + std::to_string(input->fk_actor_1)),
                                                  make_string("Actor_" + std::to_string(input->fk_actor_2)),
                                                  make_string(input->equipment.toStdString()),
@@ -399,7 +399,260 @@ namespace schema {
       std::make_unique<citation_ref_list>(),
       std::make_unique<cpg_ref_list>());
   }
+  //----------These will be filled in incremental commits-----------------------------------
+  bool PFC::load_assessments(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver _db)
+  {
+    auto assessments = scenario_schema->syllabus().learning_assessments().assessment();
+    for (auto assessment : assessments) {
+      pfc::Assessment temp;
+      temp.name = QString::fromStdString(assessment.name().text_content());
+      temp.description = QString::fromStdString(assessment.description().text_content());
+      temp.type = (assessment.points_avaiable() == 1) ? QString("binary") : QString("partial");
+      temp.available_points = assessment.points_avaiable();
+      temp.criteria = QString::fromStdString(assessment.criteria().text_content());
+      _db.update_assessment(&temp);
+    }
+    return false;
+  }
   //-----------------------------------------------------------------------------
+  bool PFC::load_authors(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver _db)
+  {
+    //auto authors = scenario_schema->syllabus().learning_authors().author();
+    //for (auto author : authors) {
+    //  pfc::Author temp;
+    //  temp.name = QString::fromStdString(author.name().text_content());
+    //  temp.description = QString::fromStdString(author.description().text_content());
+    //  temp.type = (author.points_avaiable() == 1) ? QString("binary") : QString("partial");
+    //  temp.available_points = author.points_avaiable();
+    //  temp.criteria = QString::fromStdString(author.criteria().text_content());
+    //  _db.update_author(&temp);
+    //}
+    return false;
+  }
+  //-----------------------------------------------------------------------------
+  bool PFC::load_citations(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver _db)
+  {
+    auto citations = scenario_schema->works_cited().citation();
+    for (auto citation : citations) {
+      pfc::Citation temp;
+      temp.title = QString::fromStdString(citation.title().text_content());
+      temp.authors = QString::fromStdString(citation.authors().back().text_content());
+      temp.year = QString::fromStdString(citation.date());
+      temp.id = std::stoi(citation.uuid().text_content().substr(citation.uuid().text_content().find("_")));
+      //temp.key
+      //temp.publisher
+      _db.update_citation(&temp);
+    }
+    return false;
+  }
+  //-----------------------------------------------------------------------------
+  bool PFC::load_equipment(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver _db)
+  {
+    auto equipments = scenario_schema->equipment().equipment();
+    for (auto equipment : equipments) {
+      pfc::Equipment temp;
+      temp.name = QString::fromStdString(equipment.name().text_content());
+      temp.description = QString::fromStdString(equipment.description().text_content());
+      temp.type = equipment.type().get();
+      temp.image = QString::fromStdString(equipment.image()->text_content());
+      temp.id = std::stoi(equipment.id().text_content().substr(equipment.id().text_content().find("_")));
+      std::string citations;
+      for (auto citation : equipment.citations().citation_ref()){
+        citations += (citation.text_content()+";");
+      }
+      if(!citations.empty()){
+        citations.pop_back();
+      }
+      temp.citations = QString::fromStdString(citations);
+      _db.update_equipment(&temp);
+    }
+    return false;
+  }
+  //-----------------------------------------------------------------------------
+  bool PFC::load_events(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver _db)
+  {
+    auto scenes = scenario_schema->medical_scenario().training_script().scene();
+    for (auto scene : scenes) {
+      for (auto event : scene.events().event()) {
+        pfc::Event temp;
+        temp.name = QString::fromStdString(event.name().text_content());
+        temp.description = QString::fromStdString(event.details().text_content());
+        temp.category = QString::fromStdString(event.category().text_content());
+        temp.fidelity = QString::fromStdString(event.fidelity().text_content());
+        temp.fk_actor_1 = std::stoi(event.actor_1().text_content().substr(event.actor_1().text_content().find("_")));
+        temp.fk_actor_2 = std::stoi(event.actor_2().text_content().substr(event.actor_2().text_content().find("_")));
+        temp.equipment = QString::fromStdString(event.equipment().text_content());
+        _db.update_event(&temp);
+      }
+    }
+    return false;
+  }
+  //-----------------------------------------------------------------------------
+  bool PFC::load_injuries(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver _db)
+  {
+    auto injuries = scenario_schema->trauma_definitions().trauma();
+    for (auto injury : injuries) {
+      pfc::Injury temp;
+      temp.medical_name = QString::fromStdString(injury.medical_name().text_content());
+      temp.common_name = QString::fromStdString(injury.common_name()->text_content()); // Why is this different from medical_name at all?
+      temp.description = QString::fromStdString(injury.description().text_content());
+      temp.severity_min = injury.severity_range().numeric_range().get().min();
+      temp.severity_max = injury.severity_range().numeric_range().get().max();
+      std::string citations;
+      for (auto citation : injury.citations().citation_ref()) {
+        citations += ((citation.text_content().substr(citation.text_content().find("_")))+";");
+      }
+      if(!citations.empty()){
+        citations.pop_back();
+      }
+      temp.citations = QString::fromStdString(citations);
+      _db.update_injury(&temp);
+    }
+    return false;
+  }
+  //-----------------------------------------------------------------------------
+  bool PFC::load_injury_sets(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver _db)
+  {
+    auto trauma_sets = scenario_schema->trauma_sets();
+    auto trauma_profiles = trauma_sets.trauma_profile();
+    for (auto trauma_profile : trauma_profiles) {
+      pfc::InjurySet temp;
+      temp.name = QString::fromStdString(trauma_profile.name().text_content());
+      std::string injuries;
+      std::string locations;
+      std::string severities;
+      std::string descriptions;
+      for (auto injury : trauma_profile.injuries().trauma() ) {
+        std::string injury_id = std::string(injury.id());
+        injuries += (injury_id.substr(injury_id.find("_"))+";");
+        std::string location = std::string(injury.location());
+        locations += (location+";");
+        std::string severity = std::string(injury.severity());
+        severities += (severity+";");
+        std::string description = std::string(injury.description());
+        descriptions += (description+";");
+      }
+      if(!injuries.empty()){ //Have to remove last ';' but pop_back() is undefined behavior on empty string
+        injuries.pop_back();
+      }
+      if(!locations.empty()){
+        locations.pop_back();
+      }
+      if(!severities.empty()){
+        severities.pop_back();
+      }
+      if(!descriptions.empty()){
+        descriptions.pop_back();
+      }
+      temp.injuries = QString::fromStdString(injuries);
+      temp.locations = QString::fromStdString(locations);
+      temp.severities = QString::fromStdString(injuries);
+      temp.description = QString::fromStdString(descriptions);
+      _db.update_injury_set(&temp);
+    }
+    return false;
+  }
+  //-----------------------------------------------------------------------------
+  bool PFC::load_locations(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver _db)
+  {
+    auto locations = scenario_schema->medical_scenario().training_script().scene();
+    for (auto location : locations) {
+      pfc::Location temp;
+      temp.name = QString::fromStdString(std::string(location.name().text_content())+" Location");
+      temp.scene_name = QString::fromStdString(location.name());
+      temp.time_of_day = QString::fromStdString(location.time_of_day().text_content());
+      //temp.environment - I'm not sure what to do with this?
+      _db.update_location(&temp);
+    }
+    return false;
+  }
+  //-----------------------------------------------------------------------------
+  bool PFC::load_objectives(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver _db)
+  {
+    auto objectives = scenario_schema->syllabus().learning_objectives().objective();
+    for (auto objective : objectives) {
+      pfc::Objective temp;
+      temp.name = QString::fromStdString(objective.name().text_content());
+      temp.description = QString::fromStdString(objective.description().text_content());
+      std::string citations;
+      for (auto citation : objective.references().citations().citation_ref()){
+        citations += ((citation.text_content().substr(citation.text_content().find("_")))+";");
+      }
+      _db.update_objective(&temp);
+    }
+    return false;
+  }
+  //-----------------------------------------------------------------------------
+  bool PFC::load_properties(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver _db)
+  {
+    return false;
+  }
+  //-----------------------------------------------------------------------------
+  bool PFC::load_restrictions(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver _db)
+  {
+    //auto restriction = scenario_schema->syllabus().
+    return false;
+  }
+  //-----------------------------------------------------------------------------
+  bool PFC::load_roles(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver _db)
+  {
+    auto roles = scenario_schema->medical_scenario().roles().role();
+    for (auto role : roles) {
+      pfc::Role temp;
+      temp.name = QString::fromStdString(role.name().text_content());
+      temp.description = QString::fromStdString(role.description().text_content());
+      _db.update_role(&temp);
+    }
+    return false;
+  }
+  //-----------------------------------------------------------------------------
+  bool PFC::load_scenes(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver _db)
+  {
+    auto scenes = scenario_schema->medical_scenario().training_script().scene();
+    for (auto scene : scenes) {
+      pfc::Scene temp;
+      temp.name = QString::fromStdString(scene.name().text_content());
+      temp.description = QString::fromStdString(scene.description().text_content());
+      temp.time_of_day = QString::fromStdString(scene.time_of_day().text_content());
+      temp.time_in_simulation = scene.time_in_simulation();
+      //temp.weather - where do I get this?
+      //temp.events - this is slightly more complicated to figure out
+      //temp.items - same with all of the fields remaining really
+      _db.update_scene(&temp);
+    }
+    return false;
+  }
+  //-----------------------------------------------------------------------------
+  bool PFC::load_treatments(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver _db)
+  {
+    auto treatments = scenario_schema->treatment_plans().treatment_plan();
+    for (auto treatment : treatments) {
+      pfc::Treatment temp;
+      //temp.medical_name = QString::fromStdString(treatment.medical_name().text_content());
+      temp.common_name = QString::fromStdString(treatment.common_name()->text_content()); // Why is this different from medical_name at all?
+      temp.description = QString::fromStdString(treatment.description().text_content());
+      std::string citations;
+      for (auto citation : treatment.references().citations().citation_ref()) {
+        citations += ((citation.text_content().substr(citation.text_content().find("_"))) + ";");
+      }
+      if (!citations.empty()) {
+        citations.pop_back();
+      }
+      std::string equipments;
+      for (auto equipment : treatment.required_equipment().equipment_refs()){
+        equipments += ((equipment.text_content().substr(equipment.text_content().find("_")))+";");
+      }
+      if (!equipments.empty()) {
+        equipments.pop_back();
+      }
+      temp.citations = QString::fromStdString(citations);
+      temp.equipment = QString::fromStdString(equipments);
+      _db.update_treatment(&temp);
+    }
+    return false;
+  }
+  //-----------------------------------------------------------------------------
+
 } //namespace schema
 
 } // namespace PFC
