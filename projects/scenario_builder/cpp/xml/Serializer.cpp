@@ -255,7 +255,7 @@ void Serializer::generate_msdl_stream(SQLite3Driver* driver)
 
   xml_schema::namespace_infomap info;
   info[""].name = "urn:sisostds:scenario:military:data:draft:msdl:1";
-  info[""].schema = "militaryscenario_1.0.0.xsd";
+  info[""].schema = "military_scenario_1.0.0.xsd";
 
   try {
     msdl_1::MilitaryScenario(_msdl_content, msdl, info);
@@ -337,7 +337,7 @@ void Serializer::generate_pfc_stream(SQLite3Driver* driver)
 
   xml_schema::namespace_infomap info;
   info[""].name = "urn:sisostds:scenario:military:data:draft:msdl:1";
-  info[""].schema = "militaryscenario_1.0.0.xsd";
+  info[""].schema = "military_scenario_1.0.0.xsd";
   QSqlDatabase _db;
   if (_db.isValid()) {
     _db = QSqlDatabase::addDatabase("QSQLITE");

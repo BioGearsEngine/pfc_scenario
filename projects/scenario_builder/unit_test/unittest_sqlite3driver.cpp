@@ -8,6 +8,8 @@
 #include "sql/SqlLite3Driver.h"
 #include "sql/SqlLite3_Statments.h"
 #include "xml/Serializer.h"
+#include "pfc_scenario_0.2.hxx"
+#include "xml/SchemaUtils.h"
 
 #ifdef DISABLE_BIOGEARS_Path_TEST
 #define TEST_FIXTURE_NAME DISABLED_SQLite3Driver
@@ -39,12 +41,166 @@ public:
   pfc::SQLite3Driver _db;
 };
 
+class DATABASE_LOADING_TEST : public ::testing::Test
+{
+protected:
+  DATABASE_LOADING_TEST(): _db("unittest_db.sqlite")
+  {
+  };
+  ~DATABASE_LOADING_TEST()
+  {
+    _db.close();
+    try {
+      boost::filesystem::remove("unittest_db.sqlite");
+    } catch (boost::system::system_error e) {
+      std::cout << e.what() << std::endl;
+    }
+  };
+
+  virtual void SetUp();
+  virtual void TearDown();
+
+public:
+  pfc::SQLite3Driver _db;
+  std::filebuf file_buf;
+  std::unique_ptr<pfc::schema::ScenarioSchema> scenario_schema;
+};
+
 void TEST_FIXTURE_NAME::SetUp()
 {
 }
 
 void TEST_FIXTURE_NAME::TearDown()
 {
+}
+
+void DATABASE_LOADING_TEST::SetUp()
+{
+  file_buf.open("TestScenario.pfc.xml", std::ios::in);
+  std::istream i_stream(&file_buf);
+  try { // If the parsing fails this prints out every error
+    scenario_schema = pfc::schema::Scenario(i_stream);
+  } catch (const xml_schema::exception& e) {
+    std::cout << e << '\n';
+    FAIL();
+  }
+}
+
+void DATABASE_LOADING_TEST::TearDown()
+{
+  scenario_schema.release();
+  file_buf.close();
+}
+
+TEST_F(DATABASE_LOADING_TEST, load_assessments)
+{
+  pfc::schema::PFC::load_assessments(std::move(scenario_schema), _db);
+  EXPECT_EQ(1, _db.assessment_count());
+  auto temp = _db.get_assessments();
+  EXPECT_EQ(0, temp[0]->name.compare("Assessment_Name"));
+  EXPECT_EQ(0, temp[0]->description.compare("Assessment_Description"));
+  EXPECT_EQ(0, temp[0]->type.compare("binary"));
+  EXPECT_EQ(0, temp[0]->criteria.compare("Assessment_Criteria"));
+}
+TEST_F(DATABASE_LOADING_TEST, load_citations)
+{
+  pfc::schema::PFC::load_citations(std::move(scenario_schema), _db);
+  EXPECT_EQ(1, _db.citation_count());
+  auto temp = _db.get_citations();
+  EXPECT_EQ(0, temp[0]->title.compare("Citation_Title"));
+  EXPECT_EQ(0, temp[0]->authors.compare("Citation_Authors"));
+  EXPECT_EQ(0, temp[0]->year.compare("Citation_Year"));
+}
+TEST_F(DATABASE_LOADING_TEST, load_equipment)
+{
+  pfc::schema::PFC::load_equipment(std::move(scenario_schema), _db);
+  EXPECT_EQ(1, _db.equipment_count());
+  auto temp = _db.get_equipments();
+  EXPECT_EQ(0, temp[0]->name.compare("Equipment_Name"));
+  EXPECT_EQ(0, temp[0]->description.compare("Equipment_Description"));
+  EXPECT_EQ(0, temp[0]->type);
+  EXPECT_EQ(0, temp[0]->image.compare("Equipment_Image"));
+}
+TEST_F(DATABASE_LOADING_TEST, load_events)
+{
+  pfc::schema::PFC::load_events(std::move(scenario_schema), _db);
+  EXPECT_EQ(1, _db.event_count());
+  auto temp = _db.get_events();
+  EXPECT_EQ(0, temp[0]->name.compare("Event_Name"));
+  EXPECT_EQ(0, temp[0]->description.compare("Event_Description"));
+  EXPECT_EQ(0, temp[0]->category.compare("Event_Category"));
+  EXPECT_EQ(0, temp[0]->fidelity.compare("Event_Fidelity"));
+  EXPECT_EQ(1, temp[0]->fk_actor_1);
+  EXPECT_EQ(2, temp[0]->fk_actor_2);
+}
+TEST_F(DATABASE_LOADING_TEST, load_injuries)
+{
+  pfc::schema::PFC::load_injuries(std::move(scenario_schema), _db);
+  EXPECT_EQ(1, _db.injury_count());
+  auto temp = _db.get_injuries();
+  EXPECT_EQ(0, temp[0]->medical_name.compare("Injury_Medical_Name"));
+  EXPECT_EQ(0, temp[0]->common_name.compare("Injury_Common_Name"));
+  EXPECT_EQ(0, temp[0]->description.compare("Injury_Description"));
+  EXPECT_EQ(1, temp[0]->severity_min);
+  EXPECT_EQ(2, temp[0]->severity_max);
+}
+TEST_F(DATABASE_LOADING_TEST, load_injury_sets)
+{
+  pfc::schema::PFC::load_injury_sets(std::move(scenario_schema), _db);
+  EXPECT_EQ(1, _db.injury_set_count());
+  auto temp = _db.get_injury_sets();
+  EXPECT_EQ(0, temp[0]->name.compare("Injury_Set_Name"));
+  EXPECT_EQ(0, temp[0]->description.compare("Description_1,Description_2"));
+  EXPECT_EQ(0, temp[0]->injuries.compare("0;1"));
+  EXPECT_EQ(0, temp[0]->locations.compare("Location_1,Location_2"));
+  EXPECT_EQ(0, temp[0]->severities.compare("0,1"));
+}
+TEST_F(DATABASE_LOADING_TEST, load_locations)
+{
+  pfc::schema::PFC::load_locations(std::move(scenario_schema), _db);
+  EXPECT_EQ(1, _db.location_count());
+  auto temp = _db.get_locations();
+  EXPECT_EQ(0, temp[0]->name.compare("Scene_Name Location"));
+  EXPECT_EQ(0, temp[0]->scene_name.compare("Location_Scene_Name"));
+  EXPECT_EQ(0, temp[0]->time_of_day.compare("00:00:00"));
+}
+TEST_F(DATABASE_LOADING_TEST, load_objectives)
+{
+  pfc::schema::PFC::load_objectives(std::move(scenario_schema), _db);
+  EXPECT_EQ(1, _db.objective_count());
+  auto temp = _db.get_objectives();
+  EXPECT_EQ(0, temp[0]->name.compare("Objective_Name"));
+  EXPECT_EQ(0, temp[0]->description.compare("Objective_Description"));
+  EXPECT_EQ(0, temp[0]->citations.compare("0;1"));
+}
+TEST_F(DATABASE_LOADING_TEST, load_roles)
+{
+  pfc::schema::PFC::load_roles(std::move(scenario_schema), _db);
+  EXPECT_EQ(1, _db.role_count());
+  auto temp = _db.get_roles();
+  EXPECT_EQ(0, temp[0]->name.compare("Role_Name"));
+  EXPECT_EQ(0, temp[0]->description.compare("Role_Description"));
+}
+TEST_F(DATABASE_LOADING_TEST, load_scenes)
+{
+  pfc::schema::PFC::load_scenes(std::move(scenario_schema), _db);
+  EXPECT_EQ(1, _db.scene_count());
+  auto temp = _db.get_scenes();
+  EXPECT_EQ(0, temp[0]->name.compare("Scene_Name"));
+  EXPECT_EQ(0, temp[0]->description.compare("Scene_Description"));
+  EXPECT_EQ(0, temp[0]->time_of_day.compare("00:00:00"));
+  EXPECT_EQ(0, temp[0]->time_in_simulation);
+}
+TEST_F(DATABASE_LOADING_TEST, load_treatments)
+{
+  pfc::schema::PFC::load_treatments(std::move(scenario_schema), _db);
+  EXPECT_EQ(1, _db.treatment_count());
+  auto temp = _db.get_treatments();
+  EXPECT_EQ(0, temp[0]->medical_name.compare("Treatment_Medical_Name"));
+  EXPECT_EQ(0, temp[0]->common_name.compare("Treatment_Common_Name"));
+  EXPECT_EQ(0, temp[0]->description.compare("Treatment_Description"));
+  EXPECT_EQ(0, temp[0]->citations.compare("0;1"));
+  EXPECT_EQ(0, temp[0]->equipment.compare("0;1"));
 }
 
 //TEST_F(TEST_FIXTURE_NAME, saving)
@@ -72,6 +228,9 @@ TEST_F(TEST_FIXTURE_NAME, Constructor)
   auto file2 = std::ofstream("UnitScenario.sqlite", std::ostream::in);
   EXPECT_FALSE(file2.is_open());
 }
+
+
+
 //ASSESSMENT TESTS--------------------------------------------------------------
 TEST_F(TEST_FIXTURE_NAME, Insert_Assessment)
 {
@@ -4420,3 +4579,4 @@ TEST_F(TEST_FIXTURE_NAME, remove_citation_from_objectives)
   EXPECT_EQ(objective_5.citations.toStdString(), objective_1.citations.toStdString());
   EXPECT_EQ(objective_5.citations.toStdString(), objective_6.citations.toStdString());
 }
+

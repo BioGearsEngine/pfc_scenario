@@ -268,6 +268,8 @@ public:
   Q_INVOKABLE bool remove_citation_from_equipment(std::string);
   Q_INVOKABLE bool remove_citation_from_objectives(int);
   Q_INVOKABLE bool remove_citation_from_objectives(std::string);
+  Q_INVOKABLE bool remove_injury_from_injury_sets(int);
+  Q_INVOKABLE bool remove_injury_from_injury_sets(std::string);
 
   std::string list_remove(std::string,std::string) const;
 

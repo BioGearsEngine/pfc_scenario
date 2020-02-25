@@ -4367,6 +4367,14 @@ bool SQLite3Driver::remove_citation_from_objectives(std::string citation_id)
   }
   return false;
 }
+bool SQLite3Driver::remove_injury_from_injury_sets(int injury_id)
+{
+  return remove_injury_from_injury_sets(std::to_string(injury_id));  
+}
+bool SQLite3Driver::remove_injury_from_injury_sets(std::string injury_id)
+{
+  return false;
+}
 
 std::string SQLite3Driver::list_remove(std::string list, std::string id) const
 {
