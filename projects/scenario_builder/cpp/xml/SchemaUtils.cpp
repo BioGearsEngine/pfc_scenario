@@ -6,6 +6,7 @@
 #include <mutex>
 
 #include <QString>
+#include <QDebug>
 
 namespace pfc {
 
@@ -408,11 +409,11 @@ namespace schema {
     auto assessments = scenario_schema->syllabus().learning_assessments().assessment();
     for (auto assessment : assessments) {
       pfc::Assessment temp;
-      temp.name = QString::fromStdString(assessment.name().text_content());
-      temp.description = QString::fromStdString(assessment.description().text_content());
+      temp.name = QString::fromStdString(assessment.name());
+      temp.description = QString::fromStdString(assessment.description());
       temp.type = (assessment.points_avaiable() == 1) ? QString("binary") : QString("partial");
       temp.available_points = assessment.points_avaiable();
-      temp.criteria = QString::fromStdString(assessment.criteria().text_content());
+      temp.criteria = QString::fromStdString(assessment.criteria());
       if(!_db.update_assessment(&temp)) {
         return false;
       }
@@ -425,10 +426,10 @@ namespace schema {
     auto citations = scenario_schema->works_cited().citation();
     for (auto citation : citations) {
       pfc::Citation temp;
-      temp.title = QString::fromStdString(citation.title().text_content());
-      temp.authors = QString::fromStdString(citation.authors().back().text_content());
+      temp.title = QString::fromStdString(citation.title());
+      temp.authors = QString::fromStdString(citation.authors().back());
       temp.year = QString::fromStdString(citation.date());
-      temp.id = std::stoi(citation.uuid().text_content().substr(citation.uuid().text_content().find("_")));
+      //temp.id = std::stoi(citation.uuid().substr(citation.uuid().find("_")+1));
       //temp.key
       //temp.publisher
       if(!_db.update_citation(&temp)){
@@ -443,14 +444,14 @@ namespace schema {
     auto equipments = scenario_schema->equipment().equipment();
     for (auto equipment : equipments) {
       pfc::Equipment temp;
-      temp.name = QString::fromStdString(equipment.name().text_content());
-      temp.description = QString::fromStdString(equipment.description().text_content());
+      temp.name = QString::fromStdString(equipment.name());
+      temp.description = QString::fromStdString(equipment.description());
       temp.type = equipment.type().get();
-      temp.image = QString::fromStdString(equipment.image()->text_content());
-      temp.id = std::stoi(equipment.id().text_content().substr(equipment.id().text_content().find("_")));
+      temp.image = QString::fromStdString(*equipment.image());
+      //temp.id = std::stoi(equipment.id().substr(equipment.id().find("_")+1));
       std::string citations;
       for (auto citation : equipment.citations().citation_ref()){
-        citations += (citation.text_content()+";");
+        citations += (citation+";");
       }
       if(!citations.empty()){
         citations.pop_back();
@@ -469,13 +470,13 @@ namespace schema {
     for (auto scene : scenes) {
       for (auto event : scene.events().event()) {
         pfc::Event temp;
-        temp.name = QString::fromStdString(event.name().text_content());
-        temp.description = QString::fromStdString(event.details().text_content());
-        temp.category = QString::fromStdString(event.category().text_content());
-        temp.fidelity = QString::fromStdString(event.fidelity().text_content());
-        temp.fk_actor_1 = std::stoi(event.actor_1().text_content().substr(event.actor_1().text_content().find("_")));
-        temp.fk_actor_2 = std::stoi(event.actor_2().text_content().substr(event.actor_2().text_content().find("_")));
-        temp.equipment = QString::fromStdString(event.equipment().text_content());
+        temp.name = QString::fromStdString(event.name());
+        temp.description = QString::fromStdString(event.details());
+        temp.category = QString::fromStdString(event.category());
+        temp.fidelity = QString::fromStdString(event.fidelity());
+        temp.fk_actor_1 = std::stoi(event.actor_1().substr(event.actor_1().find("_")+1));
+        temp.fk_actor_2 = std::stoi(event.actor_2().substr(event.actor_2().find("_")+1));
+        temp.equipment = QString::fromStdString(event.equipment());
         if(!_db.update_event(&temp)){
           return false;
         }
@@ -489,14 +490,14 @@ namespace schema {
     auto injuries = scenario_schema->trauma_definitions().trauma();
     for (auto injury : injuries) {
       pfc::Injury temp;
-      temp.medical_name = QString::fromStdString(injury.medical_name().text_content());
-      temp.common_name = QString::fromStdString(injury.common_name()->text_content()); // Why is this different from medical_name at all?
-      temp.description = QString::fromStdString(injury.description().text_content());
+      temp.medical_name = QString::fromStdString(injury.medical_name());
+      temp.common_name = QString::fromStdString(*injury.common_name()); // Why is this different from medical_name at all?
+      temp.description = QString::fromStdString(injury.description());
       temp.severity_min = injury.severity_range().numeric_range().get().min();
       temp.severity_max = injury.severity_range().numeric_range().get().max();
       std::string citations;
       for (auto citation : injury.citations().citation_ref()) {
-        citations += ((citation.text_content().substr(citation.text_content().find("_")))+";");
+        citations += ((citation.substr(citation.find("_")+1))+";");
       }
       if(!citations.empty()){
         citations.pop_back();
@@ -515,14 +516,14 @@ namespace schema {
     auto trauma_profiles = trauma_sets.trauma_profile();
     for (auto trauma_profile : trauma_profiles) {
       pfc::InjurySet temp;
-      temp.name = QString::fromStdString(trauma_profile.name().text_content());
+      temp.name = QString::fromStdString(trauma_profile.name());
       std::string injuries;
       std::string locations;
       std::string severities;
       std::string descriptions;
       for (auto injury : trauma_profile.injuries().trauma() ) {
         std::string injury_id = std::string(injury.id());
-        injuries += (injury_id.substr(injury_id.find("_"))+";");
+        injuries += (injury_id.substr(injury_id.find("_")+1)+";");
         std::string location = std::string(injury.location());
         locations += (location+";");
         std::string severity = std::string(injury.severity());
@@ -558,9 +559,16 @@ namespace schema {
     auto locations = scenario_schema->medical_scenario().training_script().scene();
     for (auto location : locations) {
       pfc::Location temp;
-      temp.name = QString::fromStdString(std::string(location.name().text_content())+" Location");
+      temp.name = QString::fromStdString(std::string(location.name())+" Location");
       temp.scene_name = QString::fromStdString(location.name());
-      temp.time_of_day = QString::fromStdString(location.time_of_day().text_content());
+      std::string hours = std::to_string(location.time_of_day().hours());
+      hours = (hours.length() == 1) ? ("0"+hours) : (hours);
+      std::string minutes = std::to_string(location.time_of_day().minutes());
+      minutes = (minutes.length() == 1) ? ("0"+minutes) : (minutes);
+      std::string seconds = std::to_string(location.time_of_day().seconds());
+      seconds = seconds.substr(0,seconds.find("."));
+      seconds = (seconds.length() == 1) ? ("0"+seconds) : (seconds);
+      temp.time_of_day = QString::fromStdString(hours+":"+minutes+":"+seconds);
       if(!_db.update_location(&temp)){
         return false;
       }
@@ -573,11 +581,11 @@ namespace schema {
     auto objectives = scenario_schema->syllabus().learning_objectives().objective();
     for (auto objective : objectives) {
       pfc::Objective temp;
-      temp.name = QString::fromStdString(objective.name().text_content());
-      temp.description = QString::fromStdString(objective.description().text_content());
+      temp.name = QString::fromStdString(objective.name());
+      temp.description = QString::fromStdString(objective.description());
       std::string citations;
       for (auto citation : objective.references().citations().citation_ref()){
-        citations += ((citation.text_content().substr(citation.text_content().find("_")))+";");
+        citations += ((citation.substr(citation.find("_")+1))+";");
       }
       if(!citations.empty()){
         citations.pop_back();
@@ -595,8 +603,8 @@ namespace schema {
     auto roles = scenario_schema->medical_scenario().roles().role();
     for (auto role : roles) {
       pfc::Role temp;
-      temp.name = QString::fromStdString(role.name().text_content());
-      temp.description = QString::fromStdString(role.description().text_content());
+      temp.name = QString::fromStdString(role.name());
+      temp.description = QString::fromStdString(role.description());
       if(!_db.update_role(&temp)){
         return false;
       }
@@ -609,9 +617,16 @@ namespace schema {
     auto scenes = scenario_schema->medical_scenario().training_script().scene();
     for (auto scene : scenes) {
       pfc::Scene temp;
-      temp.name = QString::fromStdString(scene.name().text_content());
-      temp.description = QString::fromStdString(scene.description().text_content());
-      temp.time_of_day = QString::fromStdString(scene.time_of_day().text_content());
+      temp.name = QString::fromStdString(scene.name());
+      temp.description = QString::fromStdString(scene.description());
+      std::string hours = std::to_string(scene.time_of_day().hours());
+      hours = (hours.length() == 1) ? ("0" + hours) : (hours);
+      std::string minutes = std::to_string(scene.time_of_day().minutes());
+      minutes = (minutes.length() == 1) ? ("0" + minutes) : (minutes);
+      std::string seconds = std::to_string(scene.time_of_day().seconds());
+      seconds = seconds.substr(0, seconds.find("."));
+      seconds = (seconds.length() == 1) ? ("0" + seconds) : (seconds);
+      temp.time_of_day = QString::fromStdString(hours+":"+minutes+":"+seconds);
       temp.time_in_simulation = scene.time_in_simulation();
       //temp.weather - where do I get this?
       //temp.events - this is slightly more complicated to figure out
@@ -628,19 +643,19 @@ namespace schema {
     auto treatments = scenario_schema->treatment_plans().treatment_plan();
     for (auto treatment : treatments) {
       pfc::Treatment temp;
-      //temp.medical_name = QString::fromStdString(treatment.medical_name().text_content());
-      temp.common_name = QString::fromStdString(treatment.common_name()->text_content()); // Why is this different from medical_name at all?
-      temp.description = QString::fromStdString(treatment.description().text_content());
+      //temp.medical_name = QString::fromStdString(treatment.);
+      temp.common_name = QString::fromStdString(*treatment.common_name()); // Why is this different from medical_name at all?
+      temp.description = QString::fromStdString(treatment.description());
       std::string citations;
       for (auto citation : treatment.references().citations().citation_ref()) {
-        citations += ((citation.text_content().substr(citation.text_content().find("_"))) + ";");
+        citations += ((citation.substr(citation.find("_")+1)) + ";");
       }
       if (!citations.empty()) {
         citations.pop_back();
       }
       std::string equipments;
       for (auto equipment : treatment.required_equipment().equipment_refs()){
-        equipments += ((equipment.text_content().substr(equipment.text_content().find("_")))+";");
+        equipments += ((equipment.substr(equipment.find("_")+1))+";");
       }
       if (!equipments.empty()) {
         equipments.pop_back();

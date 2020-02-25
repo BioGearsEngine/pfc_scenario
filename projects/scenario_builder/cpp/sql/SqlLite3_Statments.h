@@ -1113,7 +1113,17 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_scenes = R"( DELETE FROM scenes; )";
   constexpr auto count_scenes = R"( SELECT COUNT(scene_id) FROM scenes; )";
-  constexpr auto select_all_scenes = R"( SELECT scene_id,name, description, time_of_day, time_in_simulation, weather, events, items, roles, details FROM scenes ORDER BY name; )";
+  constexpr auto select_all_scenes = R"( SELECT scene_id,
+                                                name, 
+                                                description, 
+                                                time_of_day, 
+                                                time_in_simulation, 
+                                                weather, 
+                                                events, 
+                                                items, 
+                                                roles, 
+                                                details 
+                                                FROM scenes ORDER BY name; )";
 
   constexpr auto select_scene_by_id
     = R"( SELECT * FROM scenes WHERE scene_id = :id ; )";

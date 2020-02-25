@@ -336,8 +336,8 @@ void Serializer::generate_pfc_stream(SQLite3Driver* driver)
   _pfc_content.str("");
 
   xml_schema::namespace_infomap info;
-  info[""].name = "urn:sisostds:scenario:military:data:draft:msdl:1";
-  info[""].schema = "military_scenario_1.0.0.xsd";
+  info[""].name = "com:ara:pfc:training:1";
+  info[""].schema = "pfc_scenario_0.2.xsd";
   QSqlDatabase _db;
   if (_db.isValid()) {
     _db = QSqlDatabase::addDatabase("QSQLITE");

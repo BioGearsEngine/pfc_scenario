@@ -92,116 +92,6 @@ void DATABASE_LOADING_TEST::TearDown()
   file_buf.close();
 }
 
-TEST_F(DATABASE_LOADING_TEST, load_assessments)
-{
-  pfc::schema::PFC::load_assessments(std::move(scenario_schema), _db);
-  EXPECT_EQ(1, _db.assessment_count());
-  auto temp = _db.get_assessments();
-  EXPECT_EQ(0, temp[0]->name.compare("Assessment_Name"));
-  EXPECT_EQ(0, temp[0]->description.compare("Assessment_Description"));
-  EXPECT_EQ(0, temp[0]->type.compare("binary"));
-  EXPECT_EQ(0, temp[0]->criteria.compare("Assessment_Criteria"));
-}
-TEST_F(DATABASE_LOADING_TEST, load_citations)
-{
-  pfc::schema::PFC::load_citations(std::move(scenario_schema), _db);
-  EXPECT_EQ(1, _db.citation_count());
-  auto temp = _db.get_citations();
-  EXPECT_EQ(0, temp[0]->title.compare("Citation_Title"));
-  EXPECT_EQ(0, temp[0]->authors.compare("Citation_Authors"));
-  EXPECT_EQ(0, temp[0]->year.compare("Citation_Year"));
-}
-TEST_F(DATABASE_LOADING_TEST, load_equipment)
-{
-  pfc::schema::PFC::load_equipment(std::move(scenario_schema), _db);
-  EXPECT_EQ(1, _db.equipment_count());
-  auto temp = _db.get_equipments();
-  EXPECT_EQ(0, temp[0]->name.compare("Equipment_Name"));
-  EXPECT_EQ(0, temp[0]->description.compare("Equipment_Description"));
-  EXPECT_EQ(0, temp[0]->type);
-  EXPECT_EQ(0, temp[0]->image.compare("Equipment_Image"));
-}
-TEST_F(DATABASE_LOADING_TEST, load_events)
-{
-  pfc::schema::PFC::load_events(std::move(scenario_schema), _db);
-  EXPECT_EQ(1, _db.event_count());
-  auto temp = _db.get_events();
-  EXPECT_EQ(0, temp[0]->name.compare("Event_Name"));
-  EXPECT_EQ(0, temp[0]->description.compare("Event_Description"));
-  EXPECT_EQ(0, temp[0]->category.compare("Event_Category"));
-  EXPECT_EQ(0, temp[0]->fidelity.compare("Event_Fidelity"));
-  EXPECT_EQ(1, temp[0]->fk_actor_1);
-  EXPECT_EQ(2, temp[0]->fk_actor_2);
-}
-TEST_F(DATABASE_LOADING_TEST, load_injuries)
-{
-  pfc::schema::PFC::load_injuries(std::move(scenario_schema), _db);
-  EXPECT_EQ(1, _db.injury_count());
-  auto temp = _db.get_injuries();
-  EXPECT_EQ(0, temp[0]->medical_name.compare("Injury_Medical_Name"));
-  EXPECT_EQ(0, temp[0]->common_name.compare("Injury_Common_Name"));
-  EXPECT_EQ(0, temp[0]->description.compare("Injury_Description"));
-  EXPECT_EQ(1, temp[0]->severity_min);
-  EXPECT_EQ(2, temp[0]->severity_max);
-}
-TEST_F(DATABASE_LOADING_TEST, load_injury_sets)
-{
-  pfc::schema::PFC::load_injury_sets(std::move(scenario_schema), _db);
-  EXPECT_EQ(1, _db.injury_set_count());
-  auto temp = _db.get_injury_sets();
-  EXPECT_EQ(0, temp[0]->name.compare("Injury_Set_Name"));
-  EXPECT_EQ(0, temp[0]->description.compare("Description_1,Description_2"));
-  EXPECT_EQ(0, temp[0]->injuries.compare("0;1"));
-  EXPECT_EQ(0, temp[0]->locations.compare("Location_1,Location_2"));
-  EXPECT_EQ(0, temp[0]->severities.compare("0,1"));
-}
-TEST_F(DATABASE_LOADING_TEST, load_locations)
-{
-  pfc::schema::PFC::load_locations(std::move(scenario_schema), _db);
-  EXPECT_EQ(1, _db.location_count());
-  auto temp = _db.get_locations();
-  EXPECT_EQ(0, temp[0]->name.compare("Scene_Name Location"));
-  EXPECT_EQ(0, temp[0]->scene_name.compare("Location_Scene_Name"));
-  EXPECT_EQ(0, temp[0]->time_of_day.compare("00:00:00"));
-}
-TEST_F(DATABASE_LOADING_TEST, load_objectives)
-{
-  pfc::schema::PFC::load_objectives(std::move(scenario_schema), _db);
-  EXPECT_EQ(1, _db.objective_count());
-  auto temp = _db.get_objectives();
-  EXPECT_EQ(0, temp[0]->name.compare("Objective_Name"));
-  EXPECT_EQ(0, temp[0]->description.compare("Objective_Description"));
-  EXPECT_EQ(0, temp[0]->citations.compare("0;1"));
-}
-TEST_F(DATABASE_LOADING_TEST, load_roles)
-{
-  pfc::schema::PFC::load_roles(std::move(scenario_schema), _db);
-  EXPECT_EQ(1, _db.role_count());
-  auto temp = _db.get_roles();
-  EXPECT_EQ(0, temp[0]->name.compare("Role_Name"));
-  EXPECT_EQ(0, temp[0]->description.compare("Role_Description"));
-}
-TEST_F(DATABASE_LOADING_TEST, load_scenes)
-{
-  pfc::schema::PFC::load_scenes(std::move(scenario_schema), _db);
-  EXPECT_EQ(1, _db.scene_count());
-  auto temp = _db.get_scenes();
-  EXPECT_EQ(0, temp[0]->name.compare("Scene_Name"));
-  EXPECT_EQ(0, temp[0]->description.compare("Scene_Description"));
-  EXPECT_EQ(0, temp[0]->time_of_day.compare("00:00:00"));
-  EXPECT_EQ(0, temp[0]->time_in_simulation);
-}
-TEST_F(DATABASE_LOADING_TEST, load_treatments)
-{
-  pfc::schema::PFC::load_treatments(std::move(scenario_schema), _db);
-  EXPECT_EQ(1, _db.treatment_count());
-  auto temp = _db.get_treatments();
-  EXPECT_EQ(0, temp[0]->medical_name.compare("Treatment_Medical_Name"));
-  EXPECT_EQ(0, temp[0]->common_name.compare("Treatment_Common_Name"));
-  EXPECT_EQ(0, temp[0]->description.compare("Treatment_Description"));
-  EXPECT_EQ(0, temp[0]->citations.compare("0;1"));
-  EXPECT_EQ(0, temp[0]->equipment.compare("0;1"));
-}
 
 //TEST_F(TEST_FIXTURE_NAME, saving)
 //{
@@ -4311,6 +4201,14 @@ TEST_F(TEST_FIXTURE_NAME, get_scenes)
   Scene scene_1;
 
   scene_1.name = "Opening";
+  scene_1.description = "Desc";
+  scene_1.time_of_day = "00:00:00";
+  scene_1.time_in_simulation = 0;
+  scene_1.weather = "Overcast";
+  scene_1.events = "1";
+  scene_1.items = "2";
+  scene_1.roles = "3";
+  scene_1.details = "Dets";
 
   EXPECT_EQ(0, _db.scene_count());
   EXPECT_TRUE(_db.update_scene(&scene_1));
@@ -4318,6 +4216,14 @@ TEST_F(TEST_FIXTURE_NAME, get_scenes)
   auto list = _db.get_scenes();
 
   EXPECT_TRUE(list[0]->name.compare(scene_1.name) == 0);
+  EXPECT_TRUE(list[0]->description.compare(scene_1.description) == 0);
+  EXPECT_TRUE(list[0]->time_of_day.compare(scene_1.time_of_day) == 0);
+  EXPECT_TRUE(list[0]->time_in_simulation == scene_1.time_in_simulation);
+  EXPECT_TRUE(list[0]->weather.compare(scene_1.weather) == 0);
+  EXPECT_TRUE(list[0]->events.compare(scene_1.events) == 0);
+  EXPECT_TRUE(list[0]->items.compare(scene_1.items) == 0);
+  EXPECT_TRUE(list[0]->roles.compare(scene_1.roles) == 0);
+  EXPECT_TRUE(list[0]->details.compare(scene_1.details) == 0);
 }
 
 TEST_F(TEST_FIXTURE_NAME, remove_equipment_from_treatments)
@@ -4580,3 +4486,112 @@ TEST_F(TEST_FIXTURE_NAME, remove_citation_from_objectives)
   EXPECT_EQ(objective_5.citations.toStdString(), objective_6.citations.toStdString());
 }
 
+TEST_F(DATABASE_LOADING_TEST, load_assessments)
+{
+  pfc::schema::PFC::load_assessments(std::move(scenario_schema), _db);
+  EXPECT_EQ(1, _db.assessment_count());
+  auto temp = _db.get_assessments();
+  EXPECT_EQ(0, temp[0]->name.compare("Assessment_Name"));
+  EXPECT_EQ(0, temp[0]->description.compare("Assessment_Description"));
+  EXPECT_EQ(0, temp[0]->type.compare("binary"));
+  EXPECT_EQ(0, temp[0]->criteria.compare("Assessment_Criteria"));
+}
+TEST_F(DATABASE_LOADING_TEST, load_citations)
+{
+  pfc::schema::PFC::load_citations(std::move(scenario_schema), _db);
+  EXPECT_EQ(1, _db.citation_count());
+  auto temp = _db.get_citations();
+  EXPECT_EQ(0, temp[0]->title.compare("Citation_Title"));
+  EXPECT_EQ(0, temp[0]->authors.compare("Citation_Authors"));
+  EXPECT_EQ(0, temp[0]->year.compare("Citation_Year"));
+}
+TEST_F(DATABASE_LOADING_TEST, load_equipment)
+{
+  pfc::schema::PFC::load_equipment(std::move(scenario_schema), _db);
+  EXPECT_EQ(1, _db.equipment_count());
+  auto temp = _db.get_equipments();
+  EXPECT_EQ(0, temp[0]->name.compare("Equipment_Name"));
+  EXPECT_EQ(0, temp[0]->description.compare("Equipment_Description"));
+  EXPECT_EQ(0, temp[0]->type);
+  EXPECT_EQ(0, temp[0]->image.compare("Equipment_Image"));
+}
+TEST_F(DATABASE_LOADING_TEST, load_events)
+{
+  pfc::schema::PFC::load_events(std::move(scenario_schema), _db);
+  EXPECT_EQ(1, _db.event_count());
+  auto temp = _db.get_events();
+  EXPECT_EQ(0, temp[0]->name.compare("Event_Name"));
+  EXPECT_EQ(0, temp[0]->description.compare("Event_Description"));
+  EXPECT_EQ(0, temp[0]->category.compare("ACTION"));
+  EXPECT_EQ(0, temp[0]->fidelity.compare("HIGH"));
+  EXPECT_EQ(1, temp[0]->fk_actor_1);
+  EXPECT_EQ(2, temp[0]->fk_actor_2);
+}
+TEST_F(DATABASE_LOADING_TEST, load_injuries)
+{
+  pfc::schema::PFC::load_injuries(std::move(scenario_schema), _db);
+  EXPECT_EQ(1, _db.injury_count());
+  auto temp = _db.get_injuries();
+  EXPECT_EQ(0, temp[0]->medical_name.compare("Injury_Medical_Name"));
+  EXPECT_EQ(0, temp[0]->common_name.compare("Injury_Common_Name"));
+  EXPECT_EQ(0, temp[0]->description.compare("Injury_Description"));
+  EXPECT_EQ(1, temp[0]->severity_min);
+  EXPECT_EQ(2, temp[0]->severity_max);
+}
+TEST_F(DATABASE_LOADING_TEST, load_injury_sets)
+{
+  pfc::schema::PFC::load_injury_sets(std::move(scenario_schema), _db);
+  EXPECT_EQ(1, _db.injury_set_count());
+  auto temp = _db.get_injury_sets();
+  EXPECT_EQ(0, temp[0]->name.compare("Injury_Set_Name"));
+  EXPECT_EQ(0, temp[0]->description.compare("Description_1;Description_2"));
+  EXPECT_EQ(0, temp[0]->injuries.compare("0;1"));
+  EXPECT_EQ(0, temp[0]->locations.compare("Location_1;Location_2"));
+  EXPECT_EQ(0, temp[0]->severities.compare("0;1"));
+}
+TEST_F(DATABASE_LOADING_TEST, load_locations)
+{
+  pfc::schema::PFC::load_locations(std::move(scenario_schema), _db);
+  EXPECT_EQ(1, _db.location_count());
+  auto temp = _db.get_locations();
+  EXPECT_EQ(0, temp[0]->name.compare("Scene_Name Location"));
+  EXPECT_EQ(0, temp[0]->scene_name.compare("Scene_Name"));
+  EXPECT_EQ(0, temp[0]->time_of_day.compare("00:00:00"));
+}
+TEST_F(DATABASE_LOADING_TEST, load_objectives)
+{
+  pfc::schema::PFC::load_objectives(std::move(scenario_schema), _db);
+  EXPECT_EQ(1, _db.objective_count());
+  auto temp = _db.get_objectives();
+  EXPECT_EQ(0, temp[0]->name.compare("Objective_Name"));
+  EXPECT_EQ(0, temp[0]->description.compare("Objective_Description"));
+  EXPECT_EQ(0, temp[0]->citations.compare("0;1"));
+}
+TEST_F(DATABASE_LOADING_TEST, load_roles)
+{
+  pfc::schema::PFC::load_roles(std::move(scenario_schema), _db);
+  EXPECT_EQ(1, _db.role_count());
+  auto temp = _db.get_roles();
+  EXPECT_EQ(0, temp[0]->name.compare("Role_Name"));
+  EXPECT_EQ(0, temp[0]->description.compare("Role_Description"));
+}
+TEST_F(DATABASE_LOADING_TEST, load_scenes)
+{
+  pfc::schema::PFC::load_scenes(std::move(scenario_schema), _db);
+  EXPECT_EQ(1, _db.scene_count());
+  auto temp = _db.get_scenes();
+  EXPECT_EQ(0, temp[0]->name.compare("Scene_Name"));
+  EXPECT_EQ(0, temp[0]->description.compare("Scene_Description"));
+  EXPECT_EQ(0, temp[0]->time_of_day.compare("00:00:00"));
+  EXPECT_EQ(0, temp[0]->time_in_simulation);
+}
+TEST_F(DATABASE_LOADING_TEST, load_treatments)
+{
+  pfc::schema::PFC::load_treatments(std::move(scenario_schema), _db);
+  EXPECT_EQ(1, _db.treatment_count());
+  auto temp = _db.get_treatments();
+  EXPECT_EQ(0, temp[0]->common_name.compare("Treatment_Common_Name"));
+  EXPECT_EQ(0, temp[0]->description.compare("Treatment_Description"));
+  EXPECT_EQ(0, temp[0]->citations.compare("0;1"));
+  EXPECT_EQ(0, temp[0]->equipment.compare("0;1"));
+}

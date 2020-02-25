@@ -4226,6 +4226,14 @@ std::vector<std::unique_ptr<Scene>> SQLite3Driver::get_scenes() const
       auto record = scene_query.record();
       temp->id = record.value(0).toInt();
       temp->name = record.value(1).toString();
+      temp->description = record.value(2).toString();
+      temp->time_of_day = record.value(3).toString();
+      temp->time_in_simulation = record.value(4).toInt();
+      temp->weather = record.value(5).toString();
+      temp->events = record.value(6).toString();
+      temp->items = record.value(7).toString();
+      temp->roles = record.value(8).toString();
+      temp->details = record.value(9).toString();
       scene_list.push_back(std::move(temp));
     }
     return scene_list;
