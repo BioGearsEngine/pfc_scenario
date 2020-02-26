@@ -1,6 +1,6 @@
-<!-- This is a document designed for running the unit tests for loading XML->XSD->SQL - Lucas Marin -->
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <Scenario xmlns="com:ara:pfc:training:1" xmlns:msdl="urn:sisostds:scenario:military:data:draft:msdl:1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="com:ara:pfc:training:1 pfc_scenario_0.2.xsd urn:sisostds:scenario:military:data:draft:msdl:1 military_scenario_1.0.0.xsd">
+<!-- This is a document designed for running the unit tests for loading XML->XSD->SQL - Lucas Marin -->
   <author xmlns="">
     <first_name>Test_First_Name</first_name>
     <last_name>Test_Last_Name</last_name>
