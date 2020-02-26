@@ -33,6 +33,7 @@ namespace schema {
   class PFC {
   public:
     static ScenarioSchema make_Scenario();
+    static auto make_author() -> std::unique_ptr<ScenarioSchema::author_type>;
     static auto make_equipments() -> std::unique_ptr<ScenarioSchema::equipment_type>;
     static auto make_trauma_definitions() -> std::unique_ptr<ScenarioSchema::trauma_definitions_type>;
     static auto make_treatment_plans() -> std::unique_ptr<ScenarioSchema::treatment_plans_type>;

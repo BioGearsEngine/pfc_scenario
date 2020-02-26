@@ -271,6 +271,17 @@ void Serializer::generate_pfc_stream(SQLite3Driver* driver)
 
   auto pfc_scenario = PFC::make_Scenario();
 
+  //0. <Author> 
+  for (auto& author : driver->get_authors()) { // For now there should only ever be one author
+    pfc_scenario.author().email() = author->email.toStdString();
+    pfc_scenario.author().first_name() = author->first.toStdString();
+    pfc_scenario.author().last_name() = author->last.toStdString();
+    pfc_scenario.author().phone_number() = author->phone.toStdString();
+    pfc_scenario.author().zip() = author->zip.toStdString();
+    pfc_scenario.author().state() = author->state.toStdString();
+    pfc_scenario.author().country() = author->country.toStdString();
+  }
+
   //1. <Equipment>
   for (auto& equipment : driver->get_equipments()) {
     pfc_scenario.equipment().equipment().push_back(PFC::make_equipment(equipment.get()));

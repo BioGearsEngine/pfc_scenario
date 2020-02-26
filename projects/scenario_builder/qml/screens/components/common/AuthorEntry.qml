@@ -142,6 +142,63 @@ ColumnLayout {
       if( author.organiztion !== ""){
         organization.text = author.organization
       }
+      if( author.zip !== ""){
+        zipcode.text = author.zip
+      }
+      if( author.state !== ""){
+        state.text = author.state
+      }
+      if( author.country !== ""){
+        country.text = author.country
+      }
+    }
+  }
+
+  TextEntry{
+    id: zipcode
+    label: "Zipcode"
+    placeholderText: "55555"
+    Layout.fillWidth : true
+    Layout.alignment: Qt.AlignTop
+    Layout.leftMargin: 5
+    onEditingFinished : {
+      if ( text != author.zip){
+        author.zip = text
+        root.backend.update_first_author(author)
+      }
+      root.editingFinished();
+    }
+  }
+
+  TextEntry{
+    id: state
+    label: "State"
+    placeholderText: "Virginia"
+    Layout.fillWidth : true
+    Layout.alignment: Qt.AlignTop
+    Layout.leftMargin: 5
+    onEditingFinished : {
+      if ( text != author.state){
+        author.state = text
+        root.backend.update_first_author(author)
+      }
+      root.editingFinished();
+    }
+  }
+
+  TextEntry{
+    id: country
+    label: "Country"
+    placeholderText: "United States"
+    Layout.fillWidth : true
+    Layout.alignment: Qt.AlignTop
+    Layout.leftMargin: 5
+    onEditingFinished : {
+      if ( text != author.country){
+        author.country = text
+        root.backend.update_first_author(author)
+      }
+      root.editingFinished();
     }
   }
 

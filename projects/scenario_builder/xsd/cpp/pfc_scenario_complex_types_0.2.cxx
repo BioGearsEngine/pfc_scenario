@@ -44,6 +44,250 @@ namespace pfc
 {
   namespace schema
   {
+    // author
+    // 
+
+    const author::first_name_optional& author::
+    first_name () const
+    {
+      return this->first_name_;
+    }
+
+    author::first_name_optional& author::
+    first_name ()
+    {
+      return this->first_name_;
+    }
+
+    void author::
+    first_name (const first_name_type& x)
+    {
+      this->first_name_.set (x);
+    }
+
+    void author::
+    first_name (const first_name_optional& x)
+    {
+      this->first_name_ = x;
+    }
+
+    void author::
+    first_name (::std::unique_ptr< first_name_type > x)
+    {
+      this->first_name_.set (std::move (x));
+    }
+
+    const author::last_name_optional& author::
+    last_name () const
+    {
+      return this->last_name_;
+    }
+
+    author::last_name_optional& author::
+    last_name ()
+    {
+      return this->last_name_;
+    }
+
+    void author::
+    last_name (const last_name_type& x)
+    {
+      this->last_name_.set (x);
+    }
+
+    void author::
+    last_name (const last_name_optional& x)
+    {
+      this->last_name_ = x;
+    }
+
+    void author::
+    last_name (::std::unique_ptr< last_name_type > x)
+    {
+      this->last_name_.set (std::move (x));
+    }
+
+    const author::organization_optional& author::
+    organization () const
+    {
+      return this->organization_;
+    }
+
+    author::organization_optional& author::
+    organization ()
+    {
+      return this->organization_;
+    }
+
+    void author::
+    organization (const organization_type& x)
+    {
+      this->organization_.set (x);
+    }
+
+    void author::
+    organization (const organization_optional& x)
+    {
+      this->organization_ = x;
+    }
+
+    void author::
+    organization (::std::unique_ptr< organization_type > x)
+    {
+      this->organization_.set (std::move (x));
+    }
+
+    const author::phone_number_optional& author::
+    phone_number () const
+    {
+      return this->phone_number_;
+    }
+
+    author::phone_number_optional& author::
+    phone_number ()
+    {
+      return this->phone_number_;
+    }
+
+    void author::
+    phone_number (const phone_number_type& x)
+    {
+      this->phone_number_.set (x);
+    }
+
+    void author::
+    phone_number (const phone_number_optional& x)
+    {
+      this->phone_number_ = x;
+    }
+
+    void author::
+    phone_number (::std::unique_ptr< phone_number_type > x)
+    {
+      this->phone_number_.set (std::move (x));
+    }
+
+    const author::email_optional& author::
+    email () const
+    {
+      return this->email_;
+    }
+
+    author::email_optional& author::
+    email ()
+    {
+      return this->email_;
+    }
+
+    void author::
+    email (const email_type& x)
+    {
+      this->email_.set (x);
+    }
+
+    void author::
+    email (const email_optional& x)
+    {
+      this->email_ = x;
+    }
+
+    void author::
+    email (::std::unique_ptr< email_type > x)
+    {
+      this->email_.set (std::move (x));
+    }
+
+    const author::zip_optional& author::
+    zip () const
+    {
+      return this->zip_;
+    }
+
+    author::zip_optional& author::
+    zip ()
+    {
+      return this->zip_;
+    }
+
+    void author::
+    zip (const zip_type& x)
+    {
+      this->zip_.set (x);
+    }
+
+    void author::
+    zip (const zip_optional& x)
+    {
+      this->zip_ = x;
+    }
+
+    void author::
+    zip (::std::unique_ptr< zip_type > x)
+    {
+      this->zip_.set (std::move (x));
+    }
+
+    const author::state_optional& author::
+    state () const
+    {
+      return this->state_;
+    }
+
+    author::state_optional& author::
+    state ()
+    {
+      return this->state_;
+    }
+
+    void author::
+    state (const state_type& x)
+    {
+      this->state_.set (x);
+    }
+
+    void author::
+    state (const state_optional& x)
+    {
+      this->state_ = x;
+    }
+
+    void author::
+    state (::std::unique_ptr< state_type > x)
+    {
+      this->state_.set (std::move (x));
+    }
+
+    const author::country_optional& author::
+    country () const
+    {
+      return this->country_;
+    }
+
+    author::country_optional& author::
+    country ()
+    {
+      return this->country_;
+    }
+
+    void author::
+    country (const country_type& x)
+    {
+      this->country_.set (x);
+    }
+
+    void author::
+    country (const country_optional& x)
+    {
+      this->country_ = x;
+    }
+
+    void author::
+    country (::std::unique_ptr< country_type > x)
+    {
+      this->country_.set (std::move (x));
+    }
+
+
     // equipment_definition_list
     // 
 
@@ -2954,6 +3198,335 @@ namespace pfc
 {
   namespace schema
   {
+    // author
+    //
+
+    author::
+    author ()
+    : ::xml_schema::type (),
+      first_name_ (this),
+      last_name_ (this),
+      organization_ (this),
+      phone_number_ (this),
+      email_ (this),
+      zip_ (this),
+      state_ (this),
+      country_ (this)
+    {
+    }
+
+    author::
+    author (const author& x,
+            ::xml_schema::flags f,
+            ::xml_schema::container* c)
+    : ::xml_schema::type (x, f, c),
+      first_name_ (x.first_name_, f, this),
+      last_name_ (x.last_name_, f, this),
+      organization_ (x.organization_, f, this),
+      phone_number_ (x.phone_number_, f, this),
+      email_ (x.email_, f, this),
+      zip_ (x.zip_, f, this),
+      state_ (x.state_, f, this),
+      country_ (x.country_, f, this)
+    {
+    }
+
+    author::
+    author (const ::xercesc::DOMElement& e,
+            ::xml_schema::flags f,
+            ::xml_schema::container* c)
+    : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+      first_name_ (this),
+      last_name_ (this),
+      organization_ (this),
+      phone_number_ (this),
+      email_ (this),
+      zip_ (this),
+      state_ (this),
+      country_ (this)
+    {
+      if ((f & ::xml_schema::flags::base) == 0)
+      {
+        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+        this->parse (p, f);
+      }
+    }
+
+    void author::
+    parse (::xsd::cxx::xml::dom::parser< char >& p,
+           ::xml_schema::flags f)
+    {
+      for (; p.more_content (); p.next_content (false))
+      {
+        const ::xercesc::DOMElement& i (p.cur_element ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+
+        // first_name
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "first_name",
+              "",
+              &::xsd::cxx::tree::factory_impl< first_name_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!this->first_name_)
+            {
+              ::std::unique_ptr< first_name_type > r (
+                dynamic_cast< first_name_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->first_name_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // last_name
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "last_name",
+              "",
+              &::xsd::cxx::tree::factory_impl< last_name_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!this->last_name_)
+            {
+              ::std::unique_ptr< last_name_type > r (
+                dynamic_cast< last_name_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->last_name_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // organization
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "organization",
+              "",
+              &::xsd::cxx::tree::factory_impl< organization_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!this->organization_)
+            {
+              ::std::unique_ptr< organization_type > r (
+                dynamic_cast< organization_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->organization_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // phone_number
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "phone_number",
+              "",
+              &::xsd::cxx::tree::factory_impl< phone_number_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!this->phone_number_)
+            {
+              ::std::unique_ptr< phone_number_type > r (
+                dynamic_cast< phone_number_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->phone_number_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // email
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "email",
+              "",
+              &::xsd::cxx::tree::factory_impl< email_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!this->email_)
+            {
+              ::std::unique_ptr< email_type > r (
+                dynamic_cast< email_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->email_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // zip
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "zip",
+              "",
+              &::xsd::cxx::tree::factory_impl< zip_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!this->zip_)
+            {
+              ::std::unique_ptr< zip_type > r (
+                dynamic_cast< zip_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->zip_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // state
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "state",
+              "",
+              &::xsd::cxx::tree::factory_impl< state_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!this->state_)
+            {
+              ::std::unique_ptr< state_type > r (
+                dynamic_cast< state_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->state_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // country
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "country",
+              "",
+              &::xsd::cxx::tree::factory_impl< country_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!this->country_)
+            {
+              ::std::unique_ptr< country_type > r (
+                dynamic_cast< country_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->country_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        break;
+      }
+    }
+
+    author* author::
+    _clone (::xml_schema::flags f,
+            ::xml_schema::container* c) const
+    {
+      return new class author (*this, f, c);
+    }
+
+    author& author::
+    operator= (const author& x)
+    {
+      if (this != &x)
+      {
+        static_cast< ::xml_schema::type& > (*this) = x;
+        this->first_name_ = x.first_name_;
+        this->last_name_ = x.last_name_;
+        this->organization_ = x.organization_;
+        this->phone_number_ = x.phone_number_;
+        this->email_ = x.email_;
+        this->zip_ = x.zip_;
+        this->state_ = x.state_;
+        this->country_ = x.country_;
+      }
+
+      return *this;
+    }
+
+    author::
+    ~author ()
+    {
+    }
+
+    static
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, author >
+    _xsd_author_type_factory_init (
+      "author",
+      "com:ara:pfc:training:1");
+
     // equipment_definition_list
     //
 
@@ -10759,6 +11332,104 @@ namespace pfc
   namespace schema
   {
     ::std::ostream&
+    operator<< (::std::ostream& o, const author& i)
+    {
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        if (i.first_name ())
+        {
+          o << ::std::endl << "first_name: ";
+          om.insert (o, *i.first_name ());
+        }
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        if (i.last_name ())
+        {
+          o << ::std::endl << "last_name: ";
+          om.insert (o, *i.last_name ());
+        }
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        if (i.organization ())
+        {
+          o << ::std::endl << "organization: ";
+          om.insert (o, *i.organization ());
+        }
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        if (i.phone_number ())
+        {
+          o << ::std::endl << "phone_number: ";
+          om.insert (o, *i.phone_number ());
+        }
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        if (i.email ())
+        {
+          o << ::std::endl << "email: ";
+          om.insert (o, *i.email ());
+        }
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        if (i.zip ())
+        {
+          o << ::std::endl << "zip: ";
+          om.insert (o, *i.zip ());
+        }
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        if (i.state ())
+        {
+          o << ::std::endl << "state: ";
+          om.insert (o, *i.state ());
+        }
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        if (i.country ())
+        {
+          o << ::std::endl << "country: ";
+          om.insert (o, *i.country ());
+        }
+      }
+
+      return o;
+    }
+
+    static
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, author >
+    _xsd_author_std_ostream_init;
+
+    ::std::ostream&
     operator<< (::std::ostream& o, const equipment_definition_list& i)
     {
       {
@@ -12270,6 +12941,227 @@ namespace pfc
 {
   namespace schema
   {
+    void
+    operator<< (::xercesc::DOMElement& e, const author& i)
+    {
+      e << static_cast< const ::xml_schema::type& > (i);
+
+      // first_name
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        if (i.first_name ())
+        {
+          const author::first_name_type& x (*i.first_name ());
+          if (typeid (author::first_name_type) == typeid (x))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "first_name",
+                e));
+
+            s << x;
+          }
+          else
+            tsm.serialize (
+              "first_name",
+              "",
+              false, false, e, x);
+        }
+      }
+
+      // last_name
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        if (i.last_name ())
+        {
+          const author::last_name_type& x (*i.last_name ());
+          if (typeid (author::last_name_type) == typeid (x))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "last_name",
+                e));
+
+            s << x;
+          }
+          else
+            tsm.serialize (
+              "last_name",
+              "",
+              false, false, e, x);
+        }
+      }
+
+      // organization
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        if (i.organization ())
+        {
+          const author::organization_type& x (*i.organization ());
+          if (typeid (author::organization_type) == typeid (x))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "organization",
+                e));
+
+            s << x;
+          }
+          else
+            tsm.serialize (
+              "organization",
+              "",
+              false, false, e, x);
+        }
+      }
+
+      // phone_number
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        if (i.phone_number ())
+        {
+          const author::phone_number_type& x (*i.phone_number ());
+          if (typeid (author::phone_number_type) == typeid (x))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "phone_number",
+                e));
+
+            s << x;
+          }
+          else
+            tsm.serialize (
+              "phone_number",
+              "",
+              false, false, e, x);
+        }
+      }
+
+      // email
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        if (i.email ())
+        {
+          const author::email_type& x (*i.email ());
+          if (typeid (author::email_type) == typeid (x))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "email",
+                e));
+
+            s << x;
+          }
+          else
+            tsm.serialize (
+              "email",
+              "",
+              false, false, e, x);
+        }
+      }
+
+      // zip
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        if (i.zip ())
+        {
+          const author::zip_type& x (*i.zip ());
+          if (typeid (author::zip_type) == typeid (x))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "zip",
+                e));
+
+            s << x;
+          }
+          else
+            tsm.serialize (
+              "zip",
+              "",
+              false, false, e, x);
+        }
+      }
+
+      // state
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        if (i.state ())
+        {
+          const author::state_type& x (*i.state ());
+          if (typeid (author::state_type) == typeid (x))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "state",
+                e));
+
+            s << x;
+          }
+          else
+            tsm.serialize (
+              "state",
+              "",
+              false, false, e, x);
+        }
+      }
+
+      // country
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        if (i.country ())
+        {
+          const author::country_type& x (*i.country ());
+          if (typeid (author::country_type) == typeid (x))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "country",
+                e));
+
+            s << x;
+          }
+          else
+            tsm.serialize (
+              "country",
+              "",
+              false, false, e, x);
+        }
+      }
+    }
+
+    static
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, author >
+    _xsd_author_type_serializer_init (
+      "author",
+      "com:ara:pfc:training:1");
+
+
     void
     operator<< (::xercesc::DOMElement& e, const equipment_definition_list& i)
     {

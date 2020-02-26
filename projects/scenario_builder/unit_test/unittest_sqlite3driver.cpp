@@ -4486,6 +4486,19 @@ TEST_F(TEST_FIXTURE_NAME, remove_citation_from_objectives)
   EXPECT_EQ(objective_5.citations.toStdString(), objective_6.citations.toStdString());
 }
 
+TEST_F(DATABASE_LOADING_TEST, load_authors)
+{
+  pfc::schema::PFC::load_authors(std::move(scenario_schema), _db);
+  EXPECT_EQ(1, _db.author_count());
+  auto temp = _db.get_authors();
+  EXPECT_EQ(0, temp[0]->email.compare("Test@Email.com"));
+  EXPECT_EQ(0, temp[0]->first.compare("Test_First_Name"));
+  EXPECT_EQ(0, temp[0]->last.compare("Test_Last_Name"));
+  EXPECT_EQ(0, temp[0]->phone.compare("Test_Phone#"));
+  EXPECT_EQ(0, temp[0]->zip.compare("Test_Zip"));
+  EXPECT_EQ(0, temp[0]->state.compare("Test_State"));
+  EXPECT_EQ(0, temp[0]->country.compare("Test_Country"));
+}
 TEST_F(DATABASE_LOADING_TEST, load_assessments)
 {
   pfc::schema::PFC::load_assessments(std::move(scenario_schema), _db);

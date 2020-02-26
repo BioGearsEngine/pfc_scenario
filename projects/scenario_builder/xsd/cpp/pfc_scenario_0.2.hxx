@@ -288,6 +288,23 @@ namespace pfc
     class ScenarioSchema: public ::xml_schema::type
     {
       public:
+      // author
+      //
+      typedef ::pfc::schema::author author_type;
+      typedef ::xsd::cxx::tree::traits< author_type, char > author_traits;
+
+      const author_type&
+      author () const;
+
+      author_type&
+      author ();
+
+      void
+      author (const author_type& x);
+
+      void
+      author (::std::unique_ptr< author_type > p);
+
       // equipment
       //
       typedef ::pfc::schema::equipment_definition_list equipment_type;
@@ -409,7 +426,8 @@ namespace pfc
 
       // Constructors.
       //
-      ScenarioSchema (const equipment_type&,
+      ScenarioSchema (const author_type&,
+                      const equipment_type&,
                       const trauma_definitions_type&,
                       const treatment_plans_type&,
                       const trauma_sets_type&,
@@ -417,7 +435,8 @@ namespace pfc
                       const medical_scenario_type&,
                       const works_cited_type&);
 
-      ScenarioSchema (::std::unique_ptr< equipment_type >,
+      ScenarioSchema (::std::unique_ptr< author_type >,
+                      ::std::unique_ptr< equipment_type >,
                       ::std::unique_ptr< trauma_definitions_type >,
                       ::std::unique_ptr< treatment_plans_type >,
                       ::std::unique_ptr< trauma_sets_type >,
@@ -451,6 +470,7 @@ namespace pfc
              ::xml_schema::flags);
 
       protected:
+      ::xsd::cxx::tree::one< author_type > author_;
       ::xsd::cxx::tree::one< equipment_type > equipment_;
       ::xsd::cxx::tree::one< trauma_definitions_type > trauma_definitions_;
       ::xsd::cxx::tree::one< treatment_plans_type > treatment_plans_;

@@ -52,13 +52,19 @@ namespace schema {
   //-------------------------------------------------------------------------------
   ScenarioSchema PFC::make_Scenario()
   {
-    return ScenarioSchema(make_equipments(),
+    return ScenarioSchema(make_author(),
+		                      make_equipments(),
                           make_trauma_definitions(),
                           make_treatment_plans(),
                           make_trauma_sets(),
                           make_syllabus(),
                           make_medical_scenario(),
                           make_citation_list());
+  }
+  //-------------------------------------------------------------------------------
+  auto PFC::make_author() -> std::unique_ptr<ScenarioSchema::author_type>
+  {
+    return std::make_unique<schema::ScenarioSchema::author_type>();
   }
   //-------------------------------------------------------------------------------
   auto PFC::make_equipments() -> std::unique_ptr<ScenarioSchema::equipment_type>
@@ -404,6 +410,22 @@ namespace schema {
       std::make_unique<cpg_ref_list>());
   }
   //----------These will be filled in incremental commits-----------------------------------
+  bool PFC::load_authors(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db)
+  {
+    auto author = scenario_schema->author();
+    pfc::Author temp;
+    temp.first = QString::fromStdString(author.first_name().get());
+    temp.last = QString::fromStdString(author.last_name().get());
+    temp.phone = QString::fromStdString(author.phone_number().get());
+    temp.email = QString::fromStdString(author.email().get());
+    temp.zip = QString::fromStdString(author.zip().get());
+    temp.state = QString::fromStdString(author.state().get());
+    temp.country = QString::fromStdString(author.country().get());
+    if(!_db.update_author(&temp)) {
+      return false;
+    }
+    return true;
+  }
   bool PFC::load_assessments(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db)
   {
     auto assessments = scenario_schema->syllabus().learning_assessments().assessment();

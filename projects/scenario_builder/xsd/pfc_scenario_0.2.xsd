@@ -13,12 +13,19 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 	<xs:include schemaLocation="pfc_scenario_complex_types_0.2.xsd"/>
 	<xs:complexType name="ScenarioSchema">
 		<xs:all>
-      <xs:element name="equipment" type="pfc:equipment-definition-list">
-        <xs:annotation>
-          <xs:documentation>The bibliography used to create this scenario.</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="trauma-definitions" type="pfc:trauma-definition-list">
+  <!-- NEW TAGS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+			<xs:element name="author" type="pfc:author">
+        		<xs:annotation>
+          			<xs:documentation>The creator of this scenario</xs:documentation>
+        		</xs:annotation>				
+			</xs:element>
+  <!-- /NEW TAGS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+      		<xs:element name="equipment" type="pfc:equipment-definition-list">
+        		<xs:annotation>
+          			<xs:documentation>The bibliography used to create this scenario.</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="trauma-definitions" type="pfc:trauma-definition-list">
 				<xs:annotation>
 					<xs:documentation>XML Database of Injuries contained that can be referenced in this file.</xs:documentation>
 				</xs:annotation>

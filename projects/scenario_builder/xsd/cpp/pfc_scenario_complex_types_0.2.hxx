@@ -260,6 +260,7 @@ namespace pfc
 {
   namespace schema
   {
+    class author;
     class equipment_definition_list;
     class equipment;
     class trauma_definition_list;
@@ -330,6 +331,217 @@ namespace pfc
 {
   namespace schema
   {
+    class author: public ::xml_schema::type
+    {
+      public:
+      // first_name
+      //
+      typedef ::xml_schema::string first_name_type;
+      typedef ::xsd::cxx::tree::optional< first_name_type > first_name_optional;
+      typedef ::xsd::cxx::tree::traits< first_name_type, char > first_name_traits;
+
+      const first_name_optional&
+      first_name () const;
+
+      first_name_optional&
+      first_name ();
+
+      void
+      first_name (const first_name_type& x);
+
+      void
+      first_name (const first_name_optional& x);
+
+      void
+      first_name (::std::unique_ptr< first_name_type > p);
+
+      // last_name
+      //
+      typedef ::xml_schema::string last_name_type;
+      typedef ::xsd::cxx::tree::optional< last_name_type > last_name_optional;
+      typedef ::xsd::cxx::tree::traits< last_name_type, char > last_name_traits;
+
+      const last_name_optional&
+      last_name () const;
+
+      last_name_optional&
+      last_name ();
+
+      void
+      last_name (const last_name_type& x);
+
+      void
+      last_name (const last_name_optional& x);
+
+      void
+      last_name (::std::unique_ptr< last_name_type > p);
+
+      // organization
+      //
+      typedef ::xml_schema::string organization_type;
+      typedef ::xsd::cxx::tree::optional< organization_type > organization_optional;
+      typedef ::xsd::cxx::tree::traits< organization_type, char > organization_traits;
+
+      const organization_optional&
+      organization () const;
+
+      organization_optional&
+      organization ();
+
+      void
+      organization (const organization_type& x);
+
+      void
+      organization (const organization_optional& x);
+
+      void
+      organization (::std::unique_ptr< organization_type > p);
+
+      // phone_number
+      //
+      typedef ::xml_schema::string phone_number_type;
+      typedef ::xsd::cxx::tree::optional< phone_number_type > phone_number_optional;
+      typedef ::xsd::cxx::tree::traits< phone_number_type, char > phone_number_traits;
+
+      const phone_number_optional&
+      phone_number () const;
+
+      phone_number_optional&
+      phone_number ();
+
+      void
+      phone_number (const phone_number_type& x);
+
+      void
+      phone_number (const phone_number_optional& x);
+
+      void
+      phone_number (::std::unique_ptr< phone_number_type > p);
+
+      // email
+      //
+      typedef ::xml_schema::string email_type;
+      typedef ::xsd::cxx::tree::optional< email_type > email_optional;
+      typedef ::xsd::cxx::tree::traits< email_type, char > email_traits;
+
+      const email_optional&
+      email () const;
+
+      email_optional&
+      email ();
+
+      void
+      email (const email_type& x);
+
+      void
+      email (const email_optional& x);
+
+      void
+      email (::std::unique_ptr< email_type > p);
+
+      // zip
+      //
+      typedef ::xml_schema::string zip_type;
+      typedef ::xsd::cxx::tree::optional< zip_type > zip_optional;
+      typedef ::xsd::cxx::tree::traits< zip_type, char > zip_traits;
+
+      const zip_optional&
+      zip () const;
+
+      zip_optional&
+      zip ();
+
+      void
+      zip (const zip_type& x);
+
+      void
+      zip (const zip_optional& x);
+
+      void
+      zip (::std::unique_ptr< zip_type > p);
+
+      // state
+      //
+      typedef ::xml_schema::string state_type;
+      typedef ::xsd::cxx::tree::optional< state_type > state_optional;
+      typedef ::xsd::cxx::tree::traits< state_type, char > state_traits;
+
+      const state_optional&
+      state () const;
+
+      state_optional&
+      state ();
+
+      void
+      state (const state_type& x);
+
+      void
+      state (const state_optional& x);
+
+      void
+      state (::std::unique_ptr< state_type > p);
+
+      // country
+      //
+      typedef ::xml_schema::string country_type;
+      typedef ::xsd::cxx::tree::optional< country_type > country_optional;
+      typedef ::xsd::cxx::tree::traits< country_type, char > country_traits;
+
+      const country_optional&
+      country () const;
+
+      country_optional&
+      country ();
+
+      void
+      country (const country_type& x);
+
+      void
+      country (const country_optional& x);
+
+      void
+      country (::std::unique_ptr< country_type > p);
+
+      // Constructors.
+      //
+      author ();
+
+      author (const ::xercesc::DOMElement& e,
+              ::xml_schema::flags f = 0,
+              ::xml_schema::container* c = 0);
+
+      author (const author& x,
+              ::xml_schema::flags f = 0,
+              ::xml_schema::container* c = 0);
+
+      virtual author*
+      _clone (::xml_schema::flags f = 0,
+              ::xml_schema::container* c = 0) const;
+
+      author&
+      operator= (const author& x);
+
+      virtual 
+      ~author ();
+
+      // Implementation.
+      //
+      protected:
+      void
+      parse (::xsd::cxx::xml::dom::parser< char >&,
+             ::xml_schema::flags);
+
+      protected:
+      first_name_optional first_name_;
+      last_name_optional last_name_;
+      organization_optional organization_;
+      phone_number_optional phone_number_;
+      email_optional email_;
+      zip_optional zip_;
+      state_optional state_;
+      country_optional country_;
+    };
+
     class equipment_definition_list: public ::xml_schema::type
     {
       public:
@@ -4274,6 +4486,9 @@ namespace pfc
   namespace schema
   {
     ::std::ostream&
+    operator<< (::std::ostream&, const author&);
+
+    ::std::ostream&
     operator<< (::std::ostream&, const equipment_definition_list&);
 
     ::std::ostream&
@@ -4444,6 +4659,9 @@ namespace pfc
 {
   namespace schema
   {
+    void
+    operator<< (::xercesc::DOMElement&, const author&);
+
     void
     operator<< (::xercesc::DOMElement&, const equipment_definition_list&);
 

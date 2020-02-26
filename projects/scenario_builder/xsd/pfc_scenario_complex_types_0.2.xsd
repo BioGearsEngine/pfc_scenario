@@ -14,6 +14,23 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 	xmlns:msdl="urn:sisostds:scenario:military:data:draft:msdl:1"
 	xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning">
   <xs:import namespace="urn:sisostds:scenario:military:data:draft:msdl:1" schemaLocation="military_scenario_1.0.0.xsd"/>
+  <!-- NEW TAGS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+  <xs:complexType name="author">
+    <xs:annotation>
+      <xs:documentation>Important data regarding a scenario's creator.</xs:documentation>
+    </xs:annotation>   
+    <xs:all>
+      <xs:element name="first_name" type="xs:string" minOccurs="0"/>
+      <xs:element name="last_name" type="xs:string" minOccurs="0"/>
+      <xs:element name="organization" type="xs:string" minOccurs="0"/>
+      <xs:element name="phone_number" type="xs:string" minOccurs="0"/>
+      <xs:element name="email" type="xs:string" minOccurs="0"/>
+      <xs:element name="zip" type="xs:string" minOccurs="0"/>
+      <xs:element name="state" type="xs:string" minOccurs="0"/>
+      <xs:element name="country" type="xs:string" minOccurs="0"/>
+  </xs:all>
+  </xs:complexType>
+  <!-- /NEW TAGS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
   <xs:complexType name="equipment-definition-list">
     <xs:annotation>
       <xs:documentation>List of pfc:equipment types.</xs:documentation>
@@ -250,7 +267,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 			</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="trauma-profile" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="trauma-profile" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="trauma-occurence-list">

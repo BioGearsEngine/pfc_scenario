@@ -47,6 +47,30 @@ namespace pfc
     // ScenarioSchema
     // 
 
+    const ScenarioSchema::author_type& ScenarioSchema::
+    author () const
+    {
+      return this->author_.get ();
+    }
+
+    ScenarioSchema::author_type& ScenarioSchema::
+    author ()
+    {
+      return this->author_.get ();
+    }
+
+    void ScenarioSchema::
+    author (const author_type& x)
+    {
+      this->author_.set (x);
+    }
+
+    void ScenarioSchema::
+    author (::std::unique_ptr< author_type > x)
+    {
+      this->author_.set (std::move (x));
+    }
+
     const ScenarioSchema::equipment_type& ScenarioSchema::
     equipment () const
     {
@@ -236,7 +260,8 @@ namespace pfc
     //
 
     ScenarioSchema::
-    ScenarioSchema (const equipment_type& equipment,
+    ScenarioSchema (const author_type& author,
+                    const equipment_type& equipment,
                     const trauma_definitions_type& trauma_definitions,
                     const treatment_plans_type& treatment_plans,
                     const trauma_sets_type& trauma_sets,
@@ -244,6 +269,7 @@ namespace pfc
                     const medical_scenario_type& medical_scenario,
                     const works_cited_type& works_cited)
     : ::xml_schema::type (),
+      author_ (author, this),
       equipment_ (equipment, this),
       trauma_definitions_ (trauma_definitions, this),
       treatment_plans_ (treatment_plans, this),
@@ -255,7 +281,8 @@ namespace pfc
     }
 
     ScenarioSchema::
-    ScenarioSchema (::std::unique_ptr< equipment_type > equipment,
+    ScenarioSchema (::std::unique_ptr< author_type > author,
+                    ::std::unique_ptr< equipment_type > equipment,
                     ::std::unique_ptr< trauma_definitions_type > trauma_definitions,
                     ::std::unique_ptr< treatment_plans_type > treatment_plans,
                     ::std::unique_ptr< trauma_sets_type > trauma_sets,
@@ -263,6 +290,7 @@ namespace pfc
                     ::std::unique_ptr< medical_scenario_type > medical_scenario,
                     ::std::unique_ptr< works_cited_type > works_cited)
     : ::xml_schema::type (),
+      author_ (std::move (author), this),
       equipment_ (std::move (equipment), this),
       trauma_definitions_ (std::move (trauma_definitions), this),
       treatment_plans_ (std::move (treatment_plans), this),
@@ -278,6 +306,7 @@ namespace pfc
                     ::xml_schema::flags f,
                     ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
+      author_ (x.author_, f, this),
       equipment_ (x.equipment_, f, this),
       trauma_definitions_ (x.trauma_definitions_, f, this),
       treatment_plans_ (x.treatment_plans_, f, this),
@@ -293,6 +322,7 @@ namespace pfc
                     ::xml_schema::flags f,
                     ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+      author_ (this),
       equipment_ (this),
       trauma_definitions_ (this),
       treatment_plans_ (this),
@@ -317,6 +347,34 @@ namespace pfc
         const ::xercesc::DOMElement& i (p.cur_element ());
         const ::xsd::cxx::xml::qualified_name< char > n (
           ::xsd::cxx::xml::dom::name< char > (i));
+
+        // author
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "author",
+              "",
+              &::xsd::cxx::tree::factory_impl< author_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!author_.present ())
+            {
+              ::std::unique_ptr< author_type > r (
+                dynamic_cast< author_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->author_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
 
         // equipment
         //
@@ -517,6 +575,13 @@ namespace pfc
         break;
       }
 
+      if (!author_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "author",
+          "");
+      }
+
       if (!equipment_.present ())
       {
         throw ::xsd::cxx::tree::expected_element< char > (
@@ -580,6 +645,7 @@ namespace pfc
       if (this != &x)
       {
         static_cast< ::xml_schema::type& > (*this) = x;
+        this->author_ = x.author_;
         this->equipment_ = x.equipment_;
         this->trauma_definitions_ = x.trauma_definitions_;
         this->treatment_plans_ = x.treatment_plans_;
@@ -623,6 +689,14 @@ namespace pfc
     ::std::ostream&
     operator<< (::std::ostream& o, const ScenarioSchema& i)
     {
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "author: ";
+        om.insert (o, i.author ());
+      }
+
       {
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
@@ -1008,6 +1082,29 @@ namespace pfc
     operator<< (::xercesc::DOMElement& e, const ScenarioSchema& i)
     {
       e << static_cast< const ::xml_schema::type& > (i);
+
+      // author
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const ScenarioSchema::author_type& x (i.author ());
+        if (typeid (ScenarioSchema::author_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "author",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "author",
+            "",
+            false, false, e, x);
+      }
 
       // equipment
       //

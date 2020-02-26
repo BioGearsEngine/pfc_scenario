@@ -21,7 +21,7 @@ xsd.exe cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-al
 
 ## Contents
         MSDL Specification is specified in the following files
-        1. militaryt_scenario_1.0.0.xsd
+        1. military_scenario_1.0.0.xsd
         2. msd_lcomplex_types_1.0.0.xsd
         3. msd_lsimple_types_1.0.0.xsd
         4. msd_lcodes_1.0.0.xsd
