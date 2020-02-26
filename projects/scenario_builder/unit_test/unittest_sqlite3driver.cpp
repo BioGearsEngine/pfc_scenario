@@ -4507,6 +4507,7 @@ TEST_F(DATABASE_LOADING_TEST, load_assessments)
   EXPECT_EQ(0, temp[0]->name.compare("Assessment_Name"));
   EXPECT_EQ(0, temp[0]->description.compare("Assessment_Description"));
   EXPECT_EQ(0, temp[0]->type.compare("binary"));
+  EXPECT_EQ(1, temp[0]->available_points);
   EXPECT_EQ(0, temp[0]->criteria.compare("Assessment_Criteria"));
 }
 TEST_F(DATABASE_LOADING_TEST, load_citations)

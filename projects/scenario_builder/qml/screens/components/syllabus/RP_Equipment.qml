@@ -136,11 +136,12 @@ ColumnLayout  {
         backend : root.backend   
 
         onFullAdded : {
-          citation.id = fullReferenceList.model.get(currentIndex)
+          citation.citation_id = fullReferenceList.model.get(current).citation_id
           root.backend.select_citation(citation)
           var entry = root.model.get(root.index)
-          entry.citations = (entry.citations) ? entry.citations.concat(";"+citation_id) : entry.citations.concat(citation_id)
+          entry.citations = (entry.citations) ? entry.citations.concat(";"+citation.citation_id) : entry.citations.concat(citation.citation_id)
           update_equipment(entry)
+          fullExit()
         }
 
         onFullExit : {
