@@ -2739,6 +2739,30 @@ namespace pfc
       this->details_.set (std::move (x));
     }
 
+    const event::description_type& event::
+    description () const
+    {
+      return this->description_.get ();
+    }
+
+    event::description_type& event::
+    description ()
+    {
+      return this->description_.get ();
+    }
+
+    void event::
+    description (const description_type& x)
+    {
+      this->description_.set (x);
+    }
+
+    void event::
+    description (::std::unique_ptr< description_type > x)
+    {
+      this->description_.set (std::move (x));
+    }
+
 
     // event_category_enum
     // 
@@ -2877,6 +2901,36 @@ namespace pfc
     uuid (::std::unique_ptr< uuid_type > x)
     {
       this->uuid_.set (std::move (x));
+    }
+
+    const citation::key_optional& citation::
+    key () const
+    {
+      return this->key_;
+    }
+
+    citation::key_optional& citation::
+    key ()
+    {
+      return this->key_;
+    }
+
+    void citation::
+    key (const key_type& x)
+    {
+      this->key_.set (x);
+    }
+
+    void citation::
+    key (const key_optional& x)
+    {
+      this->key_ = x;
+    }
+
+    void citation::
+    key (::std::unique_ptr< key_type > x)
+    {
+      this->key_.set (std::move (x));
     }
 
     const citation::authors_sequence& citation::
@@ -9712,7 +9766,8 @@ namespace pfc
            const actor_1_type& actor_1,
            const actor_2_type& actor_2,
            const equipment_type& equipment,
-           const details_type& details)
+           const details_type& details,
+           const description_type& description)
     : ::xml_schema::type (),
       id_ (id, this),
       name_ (name, this),
@@ -9721,7 +9776,8 @@ namespace pfc
       actor_1_ (actor_1, this),
       actor_2_ (actor_2, this),
       equipment_ (equipment, this),
-      details_ (details, this)
+      details_ (details, this),
+      description_ (description, this)
     {
     }
 
@@ -9733,7 +9789,8 @@ namespace pfc
            ::std::unique_ptr< actor_1_type > actor_1,
            ::std::unique_ptr< actor_2_type > actor_2,
            ::std::unique_ptr< equipment_type > equipment,
-           ::std::unique_ptr< details_type > details)
+           ::std::unique_ptr< details_type > details,
+           ::std::unique_ptr< description_type > description)
     : ::xml_schema::type (),
       id_ (std::move (id), this),
       name_ (std::move (name), this),
@@ -9742,7 +9799,8 @@ namespace pfc
       actor_1_ (std::move (actor_1), this),
       actor_2_ (std::move (actor_2), this),
       equipment_ (std::move (equipment), this),
-      details_ (std::move (details), this)
+      details_ (std::move (details), this),
+      description_ (std::move (description), this)
     {
     }
 
@@ -9758,7 +9816,8 @@ namespace pfc
       actor_1_ (x.actor_1_, f, this),
       actor_2_ (x.actor_2_, f, this),
       equipment_ (x.equipment_, f, this),
-      details_ (x.details_, f, this)
+      details_ (x.details_, f, this),
+      description_ (x.description_, f, this)
     {
     }
 
@@ -9774,7 +9833,8 @@ namespace pfc
       actor_1_ (this),
       actor_2_ (this),
       equipment_ (this),
-      details_ (this)
+      details_ (this),
+      description_ (this)
     {
       if ((f & ::xml_schema::flags::base) == 0)
       {
@@ -10017,6 +10077,34 @@ namespace pfc
           }
         }
 
+        // description
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "description",
+              "",
+              &::xsd::cxx::tree::factory_impl< description_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!description_.present ())
+            {
+              ::std::unique_ptr< description_type > r (
+                dynamic_cast< description_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->description_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
         break;
       }
 
@@ -10075,6 +10163,13 @@ namespace pfc
           "details",
           "");
       }
+
+      if (!description_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "description",
+          "");
+      }
     }
 
     event* event::
@@ -10098,6 +10193,7 @@ namespace pfc
         this->actor_2_ = x.actor_2_;
         this->equipment_ = x.equipment_;
         this->details_ = x.details_;
+        this->description_ = x.description_;
       }
 
       return *this;
@@ -10385,6 +10481,7 @@ namespace pfc
               const date_type& date)
     : ::xml_schema::type (),
       uuid_ (uuid, this),
+      key_ (this),
       authors_ (this),
       title_ (title, this),
       date_ (date, this),
@@ -10399,6 +10496,7 @@ namespace pfc
               ::std::unique_ptr< date_type > date)
     : ::xml_schema::type (),
       uuid_ (std::move (uuid), this),
+      key_ (this),
       authors_ (this),
       title_ (std::move (title), this),
       date_ (std::move (date), this),
@@ -10413,6 +10511,7 @@ namespace pfc
               ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
       uuid_ (x.uuid_, f, this),
+      key_ (x.key_, f, this),
       authors_ (x.authors_, f, this),
       title_ (x.title_, f, this),
       date_ (x.date_, f, this),
@@ -10427,6 +10526,7 @@ namespace pfc
               ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
       uuid_ (this),
+      key_ (this),
       authors_ (this),
       title_ (this),
       date_ (this),
@@ -10473,6 +10573,34 @@ namespace pfc
                 throw ::xsd::cxx::tree::not_derived< char > ();
 
               this->uuid_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // key
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "key",
+              "",
+              &::xsd::cxx::tree::factory_impl< key_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!this->key_)
+            {
+              ::std::unique_ptr< key_type > r (
+                dynamic_cast< key_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->key_.set (::std::move (r));
               continue;
             }
           }
@@ -10654,6 +10782,7 @@ namespace pfc
       {
         static_cast< ::xml_schema::type& > (*this) = x;
         this->uuid_ = x.uuid_;
+        this->key_ = x.key_;
         this->authors_ = x.authors_;
         this->title_ = x.title_;
         this->date_ = x.date_;
@@ -12668,6 +12797,14 @@ namespace pfc
         om.insert (o, i.details ());
       }
 
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "description: ";
+        om.insert (o, i.description ());
+      }
+
       return o;
     }
 
@@ -12739,6 +12876,17 @@ namespace pfc
 
         o << ::std::endl << "uuid: ";
         om.insert (o, i.uuid ());
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        if (i.key ())
+        {
+          o << ::std::endl << "key: ";
+          om.insert (o, *i.key ());
+        }
       }
 
       {
@@ -15944,6 +16092,29 @@ namespace pfc
             "",
             false, false, e, x);
       }
+
+      // description
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const event::description_type& x (i.description ());
+        if (typeid (event::description_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "description",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "description",
+            "",
+            false, false, e, x);
+      }
     }
 
     static
@@ -16071,6 +16242,32 @@ namespace pfc
             "uuid",
             "",
             false, false, e, x);
+      }
+
+      // key
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        if (i.key ())
+        {
+          const citation::key_type& x (*i.key ());
+          if (typeid (citation::key_type) == typeid (x))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "key",
+                e));
+
+            s << x;
+          }
+          else
+            tsm.serialize (
+              "key",
+              "",
+              false, false, e, x);
+        }
       }
 
       // authors

@@ -137,7 +137,8 @@
             <actor_1>Actor_1</actor_1>
             <actor_2>Actor_2</actor_2>
             <equipment/>
-            <details>Event_Description</details>
+            <details>Event_Details</details>
+            <description>Event_Description</description>
           </event>
         </events>
         <items/>
@@ -148,6 +149,7 @@
   <works-cited xmlns="">
     <citation>
       <uuid>Citation_9</uuid>
+      <key>Citation_Key</key>
       <authors>Citation_Authors</authors>
       <title>Citation_Title</title>
       <date>Citation_Year</date>

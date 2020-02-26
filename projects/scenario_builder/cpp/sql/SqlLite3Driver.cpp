@@ -2052,8 +2052,8 @@ inline void assign_event(QSqlRecord& record, Event& event)
   event.description = record.value(EVENT_DESCRIPTION).toString();
   event.fidelity = record.value(EVENT_FIDELITY).toString();
   event.category = record.value(EVENT_CATEGORY).toString();
-  event.fk_actor_1 = record.value(EVENT_ACTOR_1).toInt();
-  event.fk_actor_2 = record.value(EVENT_ACTOR_2).toInt();
+  event.fk_actor_1 = record.value(EVENT_ACTOR_1).toString();
+  event.fk_actor_2 = record.value(EVENT_ACTOR_2).toString();
   event.equipment = record.value(EVENT_EQUIPMENT).toString();
   event.details = record.value(EVENT_DETAILS).toString();
 }
@@ -2188,7 +2188,7 @@ bool SQLite3Driver::update_event(Event* event)
     query.bindValue(":fidelity", event->fidelity);
     query.bindValue(":actor_1", event->fk_actor_1);
     query.bindValue(":actor_2", event->fk_actor_2);
-    query.bindValue(":details", event->description);
+    query.bindValue(":details", event->details);
     if (!query.exec()) {
       qWarning() << query.lastError();
       return false;
@@ -3808,8 +3808,8 @@ std::vector<std::unique_ptr<Event>> SQLite3Driver::get_events() const
       temp->description = record.value(2).toString();
       temp->category = record.value(3).toString();
       temp->fidelity = record.value(4).toString();
-      temp->fk_actor_1 = record.value(5).toInt();
-      temp->fk_actor_2 = record.value(6).toInt();
+      temp->fk_actor_1 = record.value(5).toString();
+      temp->fk_actor_2 = record.value(6).toString();
       temp->equipment = record.value(7).toString();
       temp->details = record.value(8).toString();
       event_list.push_back(std::move(temp));

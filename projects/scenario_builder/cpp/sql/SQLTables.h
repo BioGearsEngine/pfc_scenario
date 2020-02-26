@@ -237,8 +237,8 @@ struct Event : public QObject {
   Q_PROPERTY(QString description MEMBER description)
   Q_PROPERTY(QString category MEMBER category)
   Q_PROPERTY(QString fidelity MEMBER fidelity)
-  Q_PROPERTY(int actor_1 MEMBER fk_actor_1)
-  Q_PROPERTY(int actor_2 MEMBER fk_actor_2)
+  Q_PROPERTY(QString actor_1 MEMBER fk_actor_1)
+  Q_PROPERTY(QString actor_2 MEMBER fk_actor_2)
   Q_PROPERTY(QString equipmet MEMBER equipment)
   Q_PROPERTY(QString details MEMBER details)
 public:
@@ -247,8 +247,8 @@ public:
   QString description = "";
   QString category = "";
   QString fidelity = "";
-  int32_t fk_actor_1 = -1;
-  int32_t fk_actor_2 = -1;
+  QString fk_actor_1 = "";
+  QString fk_actor_2 = "";
   QString equipment;
   QString details = "";
 

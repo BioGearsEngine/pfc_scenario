@@ -15,6 +15,11 @@ ScrollView {
 	property ListElement modelData
 	property alias name : name.text
 	property alias description : description.text
+	property alias actor_1 : actor_1.text
+	property alias actor_2 : actor_2.text
+	property alias details : details.text
+	property alias fidelity : fidelitySelect.displayText
+	property alias type : typeSelect.displayText
 	property int eventID
 	signal exit() 
 	onWidthChanged: {
@@ -69,8 +74,7 @@ Event {
           model: [ "Low", "Medium", "High"]
 
           contentItem: Text {
-
-              text: typeSelect.displayText
+              text: fidelitySelect.displayText
               font.pointSize: 8
               verticalAlignment: Text.AlignVCenter
               elide: Text.ElideRight
@@ -109,6 +113,11 @@ Event {
 				self.event_id = root.eventID
 				self.name = root.name
 				self.description = root.description
+				self.actor_1 = root.actor_1
+				self.actor_2 = root.actor_2
+				self.details = root.details
+				self.fidelity = root.fidelity
+				self.category = root.type
 				root.backend.update_event(self)
 			}
 		}

@@ -1,4 +1,6 @@
 #include <QList>
+#include <QDebug>
+
 #include <boost/filesystem.hpp>
 #include <fstream>
 #include <gtest/gtest.h>
@@ -658,8 +660,8 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Event)
   event_1.description = "Barbecue Barbecue";
   event_1.category = "DIALOG";
   event_1.fidelity = "ACTION";
-  event_1.fk_actor_1 = 2;
-  event_1.fk_actor_2 = 3;
+  event_1.fk_actor_1 = "2";
+  event_1.fk_actor_2 = "3";
   event_1.equipment = "5;6;7";
   event_1.details = "People cooking and eating meat outdoors";
 
@@ -667,8 +669,8 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Event)
   event_2.description = "Wedding Barbecue";
   event_2.category = "DIALOG";
   event_2.fidelity = "ACTION";
-  event_2.fk_actor_1 = 4;
-  event_2.fk_actor_2 = 5;
+  event_2.fk_actor_1 = "4";
+  event_2.fk_actor_2 = "5";
   event_2.equipment = "3;4;5";
   event_2.details = "Two people getting married";
 
@@ -676,8 +678,8 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Event)
   event_3.description = "Funeral Barbecue";
   event_3.category = "DIALOG";
   event_3.fidelity = "ACTION";
-  event_3.fk_actor_1 = 6;
-  event_3.fk_actor_2 = 7;
+  event_3.fk_actor_1 = "6";
+  event_3.fk_actor_2 = "7";
   event_3.equipment = "1;2;3";
   event_3.details = "Burying a dead person";
 
@@ -700,8 +702,8 @@ TEST_F(TEST_FIXTURE_NAME, Select_Event)
   event_1.description = "Barbecue Barbecue";
   event_1.category = "DIALOG";
   event_1.fidelity = "ACTION";
-  event_1.fk_actor_1 = 2;
-  event_1.fk_actor_2 = 3;
+  event_1.fk_actor_1 = "2";
+  event_1.fk_actor_2 = "3";
   event_1.equipment = "5;6;7";
   event_1.details = "People cooking and eating meat outdoors";
 
@@ -709,8 +711,8 @@ TEST_F(TEST_FIXTURE_NAME, Select_Event)
   event_2.description = "Wedding Barbecue";
   event_2.category = "DIALOG";
   event_2.fidelity = "ACTION";
-  event_2.fk_actor_1 = 4;
-  event_2.fk_actor_2 = 5;
+  event_2.fk_actor_1 = "4";
+  event_2.fk_actor_2 = "5";
   event_2.equipment = "3;4;5";
   event_2.details = "Two people getting married";
 
@@ -718,8 +720,8 @@ TEST_F(TEST_FIXTURE_NAME, Select_Event)
   event_3.description = "Funeral Barbecue";
   event_3.category = "DIALOG";
   event_3.fidelity = "ACTION";
-  event_3.fk_actor_1 = 6;
-  event_3.fk_actor_2 = 7;
+  event_3.fk_actor_1 = "6";
+  event_3.fk_actor_2 = "7";
   event_3.equipment = "1;2;3";
   event_3.details = "Burying a dead person";
 
@@ -755,8 +757,8 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Event)
   event_1.description = "Barbecue Barbecue";
   event_1.category = "DIALOG";
   event_1.fidelity = "ACTION";
-  event_1.fk_actor_1 = 2;
-  event_1.fk_actor_2 = 3;
+  event_1.fk_actor_1 = "2";
+  event_1.fk_actor_2 = "3";
   event_1.equipment = "5;6;7";
   event_1.details = "People cooking and eating meat outdoors";
 
@@ -764,8 +766,8 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Event)
   event_2.description = "Wedding Barbecue";
   event_2.category = "DIALOG";
   event_2.fidelity = "ACTION";
-  event_2.fk_actor_1 = 4;
-  event_2.fk_actor_2 = 5;
+  event_2.fk_actor_1 = "4";
+  event_2.fk_actor_2 = "5";
   event_2.equipment = "3;4;5";
   event_2.details = "Two people getting married";
 
@@ -773,8 +775,8 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Event)
   event_3.description = "Funeral Barbecue";
   event_3.category = "DIALOG";
   event_3.fidelity = "ACTION";
-  event_3.fk_actor_1 = 6;
-  event_3.fk_actor_2 = 7;
+  event_3.fk_actor_1 = "6";
+  event_3.fk_actor_2 = "7";
   event_3.equipment = "1;2;3";
   event_3.details = "Burying a dead person";
 
@@ -796,8 +798,8 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Event)
   event_1.description = "Barbecue Barbecue";
   event_1.category = "DIALOG";
   event_1.fidelity = "ACTION";
-  event_1.fk_actor_1 = 2;
-  event_1.fk_actor_2 = 3;
+  event_1.fk_actor_1 = "2";
+  event_1.fk_actor_2 = "3";
   event_1.equipment = "5;6;7";
   event_1.details = "People cooking and eating meat outdoors";
 
@@ -3570,8 +3572,8 @@ TEST_F(TEST_FIXTURE_NAME, get_events)
   event_1.description = "Barbecue Barbecue";
   event_1.category = "DIALOG";
   event_1.fidelity = "ACTION";
-  event_1.fk_actor_1 = 2;
-  event_1.fk_actor_2 = 3;
+  event_1.fk_actor_1 = "2";
+  event_1.fk_actor_2 = "3";
   event_1.equipment = "5;6;7";
   event_1.details = "People cooking and eating meat outdoors";
 
@@ -3585,8 +3587,8 @@ TEST_F(TEST_FIXTURE_NAME, get_events)
   EXPECT_TRUE(list[0]->equipment.compare(event_1.equipment) == 0);
   EXPECT_TRUE(list[0]->category.compare(event_1.category) == 0);
   EXPECT_TRUE(list[0]->fidelity.compare(event_1.fidelity) == 0);
-  EXPECT_TRUE(list[0]->fk_actor_1 == event_1.fk_actor_1);
-  EXPECT_TRUE(list[0]->fk_actor_2 == event_1.fk_actor_2);
+  EXPECT_TRUE(list[0]->fk_actor_1.compare(event_1.fk_actor_1) == 0);
+  EXPECT_TRUE(list[0]->fk_actor_2.compare(event_1.fk_actor_2) == 0);
   EXPECT_TRUE(list[0]->details.compare(event_1.details) == 0);
 }
 
@@ -4515,6 +4517,7 @@ TEST_F(DATABASE_LOADING_TEST, load_citations)
   pfc::schema::PFC::load_citations(std::move(scenario_schema), _db);
   EXPECT_EQ(1, _db.citation_count());
   auto temp = _db.get_citations();
+  EXPECT_EQ(0, temp[0]->key.compare("Citation_Key"));
   EXPECT_EQ(0, temp[0]->title.compare("Citation_Title"));
   EXPECT_EQ(0, temp[0]->authors.compare("Citation_Authors"));
   EXPECT_EQ(0, temp[0]->year.compare("Citation_Year"));
@@ -4538,8 +4541,9 @@ TEST_F(DATABASE_LOADING_TEST, load_events)
   EXPECT_EQ(0, temp[0]->description.compare("Event_Description"));
   EXPECT_EQ(0, temp[0]->category.compare("ACTION"));
   EXPECT_EQ(0, temp[0]->fidelity.compare("HIGH"));
-  EXPECT_EQ(1, temp[0]->fk_actor_1);
-  EXPECT_EQ(2, temp[0]->fk_actor_2);
+  EXPECT_EQ(0, temp[0]->details.compare("Event_Details"));
+  EXPECT_EQ(0, temp[0]->fk_actor_1.compare("1"));
+  EXPECT_EQ(0, temp[0]->fk_actor_2.compare("2"));
 }
 TEST_F(DATABASE_LOADING_TEST, load_injuries)
 {

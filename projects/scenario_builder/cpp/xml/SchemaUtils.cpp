@@ -315,6 +315,7 @@ namespace schema {
                                                             input->title.toStdString(),
                                                             input->year.toStdString());
     citation->authors(make_authors_list(input->authors));
+    citation->key().set(input->key.toStdString());
     return citation;
   }
   //-----------------------------------------------------------------------------
@@ -380,10 +381,11 @@ namespace schema {
                                                  make_string(input->name.toStdString()),
                                                  make_event_category(input->category),
                                                  make_event_fidelity(input->fidelity),
-                                                 make_string("Actor_" + std::to_string(input->fk_actor_1)),
-                                                 make_string("Actor_" + std::to_string(input->fk_actor_2)),
+                                                 make_string(input->fk_actor_1.toStdString()),
+                                                 make_string(input->fk_actor_2.toStdString()),
                                                  make_string(input->equipment.toStdString()),
-                                                 make_string(input->details.toStdString()));
+                                                 make_string(input->details.toStdString()),
+		                                             make_string(input->description.toStdString()));
 
     return event;
   }
@@ -452,7 +454,7 @@ namespace schema {
       temp.authors = QString::fromStdString(citation.authors().back());
       temp.year = QString::fromStdString(citation.date());
       //temp.id = std::stoi(citation.uuid().substr(citation.uuid().find("_")+1));
-      //temp.key
+      temp.key = QString::fromStdString(citation.key().get());
       //temp.publisher
       if(!_db.update_citation(&temp)){
         return false;
@@ -493,12 +495,13 @@ namespace schema {
       for (auto event : scene.events().event()) {
         pfc::Event temp;
         temp.name = QString::fromStdString(event.name());
-        temp.description = QString::fromStdString(event.details());
+        temp.description = QString::fromStdString(event.description());
         temp.category = QString::fromStdString(event.category());
         temp.fidelity = QString::fromStdString(event.fidelity());
-        temp.fk_actor_1 = std::stoi(event.actor_1().substr(event.actor_1().find("_")+1));
-        temp.fk_actor_2 = std::stoi(event.actor_2().substr(event.actor_2().find("_")+1));
+        temp.fk_actor_1 = QString::fromStdString(event.actor_1());
+        temp.fk_actor_2 = QString::fromStdString(event.actor_2());
         temp.equipment = QString::fromStdString(event.equipment());
+        temp.details = QString::fromStdString(event.details());
         if(!_db.update_event(&temp)){
           return false;
         }

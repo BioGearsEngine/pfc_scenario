@@ -3784,6 +3784,23 @@ namespace pfc
       void
       details (::std::unique_ptr< details_type > p);
 
+      // description
+      //
+      typedef ::xml_schema::string description_type;
+      typedef ::xsd::cxx::tree::traits< description_type, char > description_traits;
+
+      const description_type&
+      description () const;
+
+      description_type&
+      description ();
+
+      void
+      description (const description_type& x);
+
+      void
+      description (::std::unique_ptr< description_type > p);
+
       // Constructors.
       //
       event (const id_type&,
@@ -3793,7 +3810,8 @@ namespace pfc
              const actor_1_type&,
              const actor_2_type&,
              const equipment_type&,
-             const details_type&);
+             const details_type&,
+             const description_type&);
 
       event (::std::unique_ptr< id_type >,
              ::std::unique_ptr< name_type >,
@@ -3802,7 +3820,8 @@ namespace pfc
              ::std::unique_ptr< actor_1_type >,
              ::std::unique_ptr< actor_2_type >,
              ::std::unique_ptr< equipment_type >,
-             ::std::unique_ptr< details_type >);
+             ::std::unique_ptr< details_type >,
+             ::std::unique_ptr< description_type >);
 
       event (const ::xercesc::DOMElement& e,
              ::xml_schema::flags f = 0,
@@ -3838,6 +3857,7 @@ namespace pfc
       ::xsd::cxx::tree::one< actor_2_type > actor_2_;
       ::xsd::cxx::tree::one< equipment_type > equipment_;
       ::xsd::cxx::tree::one< details_type > details_;
+      ::xsd::cxx::tree::one< description_type > description_;
     };
 
     class event_category_enum: public ::xml_schema::string
@@ -4029,6 +4049,27 @@ namespace pfc
       void
       uuid (::std::unique_ptr< uuid_type > p);
 
+      // key
+      //
+      typedef ::xml_schema::string key_type;
+      typedef ::xsd::cxx::tree::optional< key_type > key_optional;
+      typedef ::xsd::cxx::tree::traits< key_type, char > key_traits;
+
+      const key_optional&
+      key () const;
+
+      key_optional&
+      key ();
+
+      void
+      key (const key_type& x);
+
+      void
+      key (const key_optional& x);
+
+      void
+      key (::std::unique_ptr< key_type > p);
+
       // authors
       //
       typedef ::xml_schema::string authors_type;
@@ -4159,6 +4200,7 @@ namespace pfc
 
       protected:
       ::xsd::cxx::tree::one< uuid_type > uuid_;
+      key_optional key_;
       authors_sequence authors_;
       ::xsd::cxx::tree::one< title_type > title_;
       ::xsd::cxx::tree::one< date_type > date_;

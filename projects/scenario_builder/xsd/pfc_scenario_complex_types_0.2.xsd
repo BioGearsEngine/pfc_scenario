@@ -499,6 +499,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
       <xs:element name="actor_2" type="xs:string"/>
       <xs:element name="equipment" type="xs:string"/>
       <xs:element name="details" type="xs:string"/>
+      <xs:element name="description" type="xs:string"/>
     </xs:all>
   </xs:complexType>
   <xs:simpleType name="event-category-enum">
@@ -571,6 +572,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="uuid" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="key" type="xs:string" minOccurs="0" maxOccurs="1"/>
       <xs:element name="authors" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
       <xs:element name="title" type="xs:string" minOccurs="1" maxOccurs="1"/>
       <xs:element name="date" type="xs:string" minOccurs="1" maxOccurs="1"/>
