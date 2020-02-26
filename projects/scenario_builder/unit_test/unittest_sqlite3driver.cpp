@@ -4542,8 +4542,8 @@ TEST_F(DATABASE_LOADING_TEST, load_events)
   EXPECT_EQ(0, temp[0]->category.compare("ACTION"));
   EXPECT_EQ(0, temp[0]->fidelity.compare("HIGH"));
   EXPECT_EQ(0, temp[0]->details.compare("Event_Details"));
-  EXPECT_EQ(0, temp[0]->fk_actor_1.compare("1"));
-  EXPECT_EQ(0, temp[0]->fk_actor_2.compare("2"));
+  EXPECT_EQ(0, temp[0]->fk_actor_1.compare("Actor_1"));
+  EXPECT_EQ(0, temp[0]->fk_actor_2.compare("Actor_2"));
 }
 TEST_F(DATABASE_LOADING_TEST, load_injuries)
 {
