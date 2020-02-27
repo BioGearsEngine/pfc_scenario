@@ -261,6 +261,7 @@ namespace pfc
   namespace schema
   {
     class author;
+    class maps;
     class equipment_definition_list;
     class equipment;
     class trauma_definition_list;
@@ -540,6 +541,141 @@ namespace pfc
       zip_optional zip_;
       state_optional state_;
       country_optional country_;
+    };
+
+    class maps: public ::xml_schema::type
+    {
+      public:
+      // citation_maps
+      //
+      typedef ::xml_schema::string citation_maps_type;
+      typedef ::xsd::cxx::tree::traits< citation_maps_type, char > citation_maps_traits;
+
+      const citation_maps_type&
+      citation_maps () const;
+
+      citation_maps_type&
+      citation_maps ();
+
+      void
+      citation_maps (const citation_maps_type& x);
+
+      void
+      citation_maps (::std::unique_ptr< citation_maps_type > p);
+
+      // event_maps
+      //
+      typedef ::xml_schema::string event_maps_type;
+      typedef ::xsd::cxx::tree::traits< event_maps_type, char > event_maps_traits;
+
+      const event_maps_type&
+      event_maps () const;
+
+      event_maps_type&
+      event_maps ();
+
+      void
+      event_maps (const event_maps_type& x);
+
+      void
+      event_maps (::std::unique_ptr< event_maps_type > p);
+
+      // equipment_maps
+      //
+      typedef ::xml_schema::string equipment_maps_type;
+      typedef ::xsd::cxx::tree::traits< equipment_maps_type, char > equipment_maps_traits;
+
+      const equipment_maps_type&
+      equipment_maps () const;
+
+      equipment_maps_type&
+      equipment_maps ();
+
+      void
+      equipment_maps (const equipment_maps_type& x);
+
+      void
+      equipment_maps (::std::unique_ptr< equipment_maps_type > p);
+
+      // location_maps
+      //
+      typedef ::xml_schema::string location_maps_type;
+      typedef ::xsd::cxx::tree::traits< location_maps_type, char > location_maps_traits;
+
+      const location_maps_type&
+      location_maps () const;
+
+      location_maps_type&
+      location_maps ();
+
+      void
+      location_maps (const location_maps_type& x);
+
+      void
+      location_maps (::std::unique_ptr< location_maps_type > p);
+
+      // role_maps
+      //
+      typedef ::xml_schema::string role_maps_type;
+      typedef ::xsd::cxx::tree::traits< role_maps_type, char > role_maps_traits;
+
+      const role_maps_type&
+      role_maps () const;
+
+      role_maps_type&
+      role_maps ();
+
+      void
+      role_maps (const role_maps_type& x);
+
+      void
+      role_maps (::std::unique_ptr< role_maps_type > p);
+
+      // Constructors.
+      //
+      maps (const citation_maps_type&,
+            const event_maps_type&,
+            const equipment_maps_type&,
+            const location_maps_type&,
+            const role_maps_type&);
+
+      maps (::std::unique_ptr< citation_maps_type >,
+            ::std::unique_ptr< event_maps_type >,
+            ::std::unique_ptr< equipment_maps_type >,
+            ::std::unique_ptr< location_maps_type >,
+            ::std::unique_ptr< role_maps_type >);
+
+      maps (const ::xercesc::DOMElement& e,
+            ::xml_schema::flags f = 0,
+            ::xml_schema::container* c = 0);
+
+      maps (const maps& x,
+            ::xml_schema::flags f = 0,
+            ::xml_schema::container* c = 0);
+
+      virtual maps*
+      _clone (::xml_schema::flags f = 0,
+              ::xml_schema::container* c = 0) const;
+
+      maps&
+      operator= (const maps& x);
+
+      virtual 
+      ~maps ();
+
+      // Implementation.
+      //
+      protected:
+      void
+      parse (::xsd::cxx::xml::dom::parser< char >&,
+             ::xml_schema::flags);
+
+      protected:
+      ::xsd::cxx::tree::one< citation_maps_type > citation_maps_;
+      ::xsd::cxx::tree::one< event_maps_type > event_maps_;
+      ::xsd::cxx::tree::one< equipment_maps_type > equipment_maps_;
+      ::xsd::cxx::tree::one< location_maps_type > location_maps_;
+      ::xsd::cxx::tree::one< role_maps_type > role_maps_;
     };
 
     class equipment_definition_list: public ::xml_schema::type
@@ -4553,6 +4689,9 @@ namespace pfc
     operator<< (::std::ostream&, const author&);
 
     ::std::ostream&
+    operator<< (::std::ostream&, const maps&);
+
+    ::std::ostream&
     operator<< (::std::ostream&, const equipment_definition_list&);
 
     ::std::ostream&
@@ -4725,6 +4864,9 @@ namespace pfc
   {
     void
     operator<< (::xercesc::DOMElement&, const author&);
+
+    void
+    operator<< (::xercesc::DOMElement&, const maps&);
 
     void
     operator<< (::xercesc::DOMElement&, const equipment_definition_list&);

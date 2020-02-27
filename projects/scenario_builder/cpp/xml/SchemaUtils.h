@@ -34,6 +34,7 @@ namespace schema {
   public:
     static ScenarioSchema make_Scenario();
     static auto make_author() -> std::unique_ptr<ScenarioSchema::author_type>;
+    static auto make_maps() -> std::unique_ptr<ScenarioSchema::maps_type>;
     static auto make_equipments() -> std::unique_ptr<ScenarioSchema::equipment_type>;
     static auto make_trauma_definitions() -> std::unique_ptr<ScenarioSchema::trauma_definitions_type>;
     static auto make_treatment_plans() -> std::unique_ptr<ScenarioSchema::treatment_plans_type>;
@@ -81,6 +82,11 @@ namespace schema {
     static bool load_roles(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db);
     static bool load_scenes(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db);
     static bool load_treatments(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db);
+    static bool load_citation_maps(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db);
+    static bool load_event_maps(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db);
+    static bool load_equipment_maps(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db);
+    static bool load_location_maps(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db);
+    static bool load_role_maps(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db);
   };
 
   class MSDL {

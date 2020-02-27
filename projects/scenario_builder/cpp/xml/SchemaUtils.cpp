@@ -59,12 +59,18 @@ namespace schema {
                           make_trauma_sets(),
                           make_syllabus(),
                           make_medical_scenario(),
-                          make_citation_list());
+                          make_citation_list(),
+		                      make_maps());
   }
   //-------------------------------------------------------------------------------
   auto PFC::make_author() -> std::unique_ptr<ScenarioSchema::author_type>
   {
     return std::make_unique<schema::ScenarioSchema::author_type>();
+  }
+  //-------------------------------------------------------------------------------
+  auto PFC::make_maps() -> std::unique_ptr<ScenarioSchema::maps_type>
+  {
+    return std::make_unique<schema::ScenarioSchema::maps_type>("","","","","");
   }
   //-------------------------------------------------------------------------------
   auto PFC::make_equipments() -> std::unique_ptr<ScenarioSchema::equipment_type>
@@ -696,7 +702,105 @@ namespace schema {
     return true;
   }
   //-----------------------------------------------------------------------------
-
+  bool PFC::load_citation_maps(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db)
+  {
+    std::string maps = scenario_schema->maps().citation_maps();
+    while (!maps.empty()) {
+      CitationMap temp;
+      int separator = maps.find_first_of(',');
+      int end = maps.find_first_of(')');
+      temp.fk_scene = std::stoi(maps.substr(1,separator));
+      temp.fk_citation = std::stoi(maps.substr(separator+1,end - separator));
+      if(!_db.update_citation_map(&temp)) {
+        return false;
+      }
+      if(maps.find_last_of(')') == end) {
+        break;
+      }
+      maps = maps.substr(end+1);
+    }
+    return true;
+  }
+  //-----------------------------------------------------------------------------
+  bool PFC::load_event_maps(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db)
+  {
+    std::string maps = scenario_schema->maps().event_maps();
+    while (!maps.empty()) {
+      EventMap temp;
+      int separator = maps.find_first_of(',');
+      int end = maps.find_first_of(')');
+      temp.fk_scene = std::stoi(maps.substr(1, separator));
+      temp.fk_event = std::stoi(maps.substr(separator + 1, end - separator));
+      if (!_db.update_event_map(&temp)) {
+        return false;
+      }
+      if (maps.find_last_of(')') == end) {
+        break;
+      }
+      maps = maps.substr(end + 1);
+    }
+    return true;
+  }
+  //-----------------------------------------------------------------------------
+  bool PFC::load_equipment_maps(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db)
+  {
+    std::string maps = scenario_schema->maps().equipment_maps();
+    while (!maps.empty()) {
+      EquipmentMap temp;
+      int separator = maps.find_first_of(',');
+      int end = maps.find_first_of(')');
+      temp.fk_scene = std::stoi(maps.substr(1, separator));
+      temp.fk_equipment = std::stoi(maps.substr(separator + 1, end - separator));
+      if (!_db.update_equipment_map(&temp)) {
+        return false;
+      }
+      if (maps.find_last_of(')') == end) {
+        break;
+      }
+      maps = maps.substr(end + 1);
+    }
+    return true;
+  }
+  //-----------------------------------------------------------------------------
+  bool PFC::load_location_maps(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db)
+  {
+    std::string maps = scenario_schema->maps().location_maps();
+    while (!maps.empty()) {
+      LocationMap temp;
+      int separator = maps.find_first_of(',');
+      int end = maps.find_first_of(')');
+      temp.fk_scene = std::stoi(maps.substr(1, separator));
+      temp.fk_location = std::stoi(maps.substr(separator + 1, end - separator));
+      if (!_db.update_location_map(&temp)) {
+        return false;
+      }
+      if (maps.find_last_of(')') == end) {
+        break;
+      }
+      maps = maps.substr(end + 1);
+    }
+    return true;
+  }
+  //-----------------------------------------------------------------------------
+  bool PFC::load_role_maps(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db)
+  {
+    std::string maps = scenario_schema->maps().role_maps();
+    while (!maps.empty()) {
+      RoleMap temp;
+      int separator = maps.find_first_of(',');
+      int end = maps.find_first_of(')');
+      temp.fk_scene = std::stoi(maps.substr(1, separator));
+      temp.fk_role = std::stoi(maps.substr(separator + 1, end - separator));
+      if (!_db.update_role_map(&temp)) {
+        return false;
+      }
+      if (maps.find_last_of(')') == end) {
+        break;
+      }
+      maps = maps.substr(end + 1);
+    }
+    return true;
+  }
 } //namespace schema
 
 } // namespace PFC

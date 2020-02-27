@@ -282,6 +282,43 @@ void Serializer::generate_pfc_stream(SQLite3Driver* driver)
     pfc_scenario.author().country() = author->country.toStdString();
   }
 
+  //0.5 <Maps>
+  auto citation_maps = _db->get_citation_maps();
+  std::string citation_map_list;
+  for (int i = 0; i < citation_maps.size(); ++i) {
+    std::string map = '(' + std::to_string(citation_maps[i]->fk_scene) + ',' + std::to_string(citation_maps[i]->fk_citation) + ')';
+    citation_map_list += map;
+  }
+  auto event_maps = _db->get_event_maps();
+  std::string event_map_list;
+  for (int i = 0; i < event_maps.size(); ++i) {
+    std::string map = '(' + std::to_string(event_maps[i]->fk_scene) + ',' + std::to_string(event_maps[i]->fk_event) + ')';
+    event_map_list += map;
+  }
+  auto equipment_maps = _db->get_equipment_maps();
+  std::string equipment_map_list;
+  for (int i = 0; i < equipment_maps.size(); ++i) {
+    std::string map = '(' + std::to_string(equipment_maps[i]->fk_scene) + ',' + std::to_string(equipment_maps[i]->fk_equipment) + ')';
+    equipment_map_list += map;
+  }
+  auto location_maps = _db->get_location_maps();
+  std::string location_map_list;
+  for (int i = 0; i < location_maps.size(); ++i) {
+    std::string map = '(' + std::to_string(location_maps[i]->fk_scene) + ',' + std::to_string(location_maps[i]->fk_location) + ')';
+    location_map_list += map;
+  }
+  auto role_maps = _db->get_role_maps();
+  std::string role_map_list;
+  for (int i = 0; i < role_maps.size(); ++i) {
+    std::string map = '(' + std::to_string(role_maps[i]->fk_scene) + ',' + std::to_string(role_maps[i]->fk_role) + ')';
+    role_map_list += map;
+  }
+  pfc_scenario.maps().citation_maps() = citation_map_list;
+  pfc_scenario.maps().event_maps() = event_map_list;
+  pfc_scenario.maps().equipment_maps() = equipment_map_list;
+  pfc_scenario.maps().location_maps() = location_map_list;
+  pfc_scenario.maps().role_maps() = role_map_list;
+
   //1. <Equipment>
   for (auto& equipment : driver->get_equipments()) {
     pfc_scenario.equipment().equipment().push_back(PFC::make_equipment(equipment.get()));

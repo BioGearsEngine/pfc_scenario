@@ -30,6 +30,19 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
       <xs:element name="country" type="xs:string" minOccurs="0"/>
   </xs:all>
   </xs:complexType>
+  <xs:complexType name="maps">
+    <xs:annotation>
+      <xs:documentation>List of Citation, Event, Equipment, Location, Role, and Restriction Maps stored as strings.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="citation_maps" type="xs:string" minOccurs="1"/>
+      <xs:element name="event_maps" type="xs:string" minOccurs="1"/>
+      <xs:element name="equipment_maps" type="xs:string" minOccurs="1"/>
+      <xs:element name="location_maps" type="xs:string" minOccurs="1"/>
+      <xs:element name="role_maps" type="xs:string" minOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+    
   <!-- /NEW TAGS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
   <xs:complexType name="equipment-definition-list">
     <xs:annotation>

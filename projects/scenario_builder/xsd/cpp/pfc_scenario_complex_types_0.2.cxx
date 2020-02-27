@@ -288,6 +288,130 @@ namespace pfc
     }
 
 
+    // maps
+    // 
+
+    const maps::citation_maps_type& maps::
+    citation_maps () const
+    {
+      return this->citation_maps_.get ();
+    }
+
+    maps::citation_maps_type& maps::
+    citation_maps ()
+    {
+      return this->citation_maps_.get ();
+    }
+
+    void maps::
+    citation_maps (const citation_maps_type& x)
+    {
+      this->citation_maps_.set (x);
+    }
+
+    void maps::
+    citation_maps (::std::unique_ptr< citation_maps_type > x)
+    {
+      this->citation_maps_.set (std::move (x));
+    }
+
+    const maps::event_maps_type& maps::
+    event_maps () const
+    {
+      return this->event_maps_.get ();
+    }
+
+    maps::event_maps_type& maps::
+    event_maps ()
+    {
+      return this->event_maps_.get ();
+    }
+
+    void maps::
+    event_maps (const event_maps_type& x)
+    {
+      this->event_maps_.set (x);
+    }
+
+    void maps::
+    event_maps (::std::unique_ptr< event_maps_type > x)
+    {
+      this->event_maps_.set (std::move (x));
+    }
+
+    const maps::equipment_maps_type& maps::
+    equipment_maps () const
+    {
+      return this->equipment_maps_.get ();
+    }
+
+    maps::equipment_maps_type& maps::
+    equipment_maps ()
+    {
+      return this->equipment_maps_.get ();
+    }
+
+    void maps::
+    equipment_maps (const equipment_maps_type& x)
+    {
+      this->equipment_maps_.set (x);
+    }
+
+    void maps::
+    equipment_maps (::std::unique_ptr< equipment_maps_type > x)
+    {
+      this->equipment_maps_.set (std::move (x));
+    }
+
+    const maps::location_maps_type& maps::
+    location_maps () const
+    {
+      return this->location_maps_.get ();
+    }
+
+    maps::location_maps_type& maps::
+    location_maps ()
+    {
+      return this->location_maps_.get ();
+    }
+
+    void maps::
+    location_maps (const location_maps_type& x)
+    {
+      this->location_maps_.set (x);
+    }
+
+    void maps::
+    location_maps (::std::unique_ptr< location_maps_type > x)
+    {
+      this->location_maps_.set (std::move (x));
+    }
+
+    const maps::role_maps_type& maps::
+    role_maps () const
+    {
+      return this->role_maps_.get ();
+    }
+
+    maps::role_maps_type& maps::
+    role_maps ()
+    {
+      return this->role_maps_.get ();
+    }
+
+    void maps::
+    role_maps (const role_maps_type& x)
+    {
+      this->role_maps_.set (x);
+    }
+
+    void maps::
+    role_maps (::std::unique_ptr< role_maps_type > x)
+    {
+      this->role_maps_.set (std::move (x));
+    }
+
+
     // equipment_definition_list
     // 
 
@@ -3609,6 +3733,293 @@ namespace pfc
     const ::xsd::cxx::tree::type_factory_initializer< 0, char, author >
     _xsd_author_type_factory_init (
       "author",
+      "com:ara:pfc:training:1");
+
+    // maps
+    //
+
+    maps::
+    maps (const citation_maps_type& citation_maps,
+          const event_maps_type& event_maps,
+          const equipment_maps_type& equipment_maps,
+          const location_maps_type& location_maps,
+          const role_maps_type& role_maps)
+    : ::xml_schema::type (),
+      citation_maps_ (citation_maps, this),
+      event_maps_ (event_maps, this),
+      equipment_maps_ (equipment_maps, this),
+      location_maps_ (location_maps, this),
+      role_maps_ (role_maps, this)
+    {
+    }
+
+    maps::
+    maps (::std::unique_ptr< citation_maps_type > citation_maps,
+          ::std::unique_ptr< event_maps_type > event_maps,
+          ::std::unique_ptr< equipment_maps_type > equipment_maps,
+          ::std::unique_ptr< location_maps_type > location_maps,
+          ::std::unique_ptr< role_maps_type > role_maps)
+    : ::xml_schema::type (),
+      citation_maps_ (std::move (citation_maps), this),
+      event_maps_ (std::move (event_maps), this),
+      equipment_maps_ (std::move (equipment_maps), this),
+      location_maps_ (std::move (location_maps), this),
+      role_maps_ (std::move (role_maps), this)
+    {
+    }
+
+    maps::
+    maps (const maps& x,
+          ::xml_schema::flags f,
+          ::xml_schema::container* c)
+    : ::xml_schema::type (x, f, c),
+      citation_maps_ (x.citation_maps_, f, this),
+      event_maps_ (x.event_maps_, f, this),
+      equipment_maps_ (x.equipment_maps_, f, this),
+      location_maps_ (x.location_maps_, f, this),
+      role_maps_ (x.role_maps_, f, this)
+    {
+    }
+
+    maps::
+    maps (const ::xercesc::DOMElement& e,
+          ::xml_schema::flags f,
+          ::xml_schema::container* c)
+    : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+      citation_maps_ (this),
+      event_maps_ (this),
+      equipment_maps_ (this),
+      location_maps_ (this),
+      role_maps_ (this)
+    {
+      if ((f & ::xml_schema::flags::base) == 0)
+      {
+        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+        this->parse (p, f);
+      }
+    }
+
+    void maps::
+    parse (::xsd::cxx::xml::dom::parser< char >& p,
+           ::xml_schema::flags f)
+    {
+      for (; p.more_content (); p.next_content (false))
+      {
+        const ::xercesc::DOMElement& i (p.cur_element ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+
+        // citation_maps
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "citation_maps",
+              "",
+              &::xsd::cxx::tree::factory_impl< citation_maps_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!citation_maps_.present ())
+            {
+              ::std::unique_ptr< citation_maps_type > r (
+                dynamic_cast< citation_maps_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->citation_maps_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // event_maps
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "event_maps",
+              "",
+              &::xsd::cxx::tree::factory_impl< event_maps_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!event_maps_.present ())
+            {
+              ::std::unique_ptr< event_maps_type > r (
+                dynamic_cast< event_maps_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->event_maps_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // equipment_maps
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "equipment_maps",
+              "",
+              &::xsd::cxx::tree::factory_impl< equipment_maps_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!equipment_maps_.present ())
+            {
+              ::std::unique_ptr< equipment_maps_type > r (
+                dynamic_cast< equipment_maps_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->equipment_maps_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // location_maps
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "location_maps",
+              "",
+              &::xsd::cxx::tree::factory_impl< location_maps_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!location_maps_.present ())
+            {
+              ::std::unique_ptr< location_maps_type > r (
+                dynamic_cast< location_maps_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->location_maps_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // role_maps
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "role_maps",
+              "",
+              &::xsd::cxx::tree::factory_impl< role_maps_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!role_maps_.present ())
+            {
+              ::std::unique_ptr< role_maps_type > r (
+                dynamic_cast< role_maps_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->role_maps_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        break;
+      }
+
+      if (!citation_maps_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "citation_maps",
+          "");
+      }
+
+      if (!event_maps_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "event_maps",
+          "");
+      }
+
+      if (!equipment_maps_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "equipment_maps",
+          "");
+      }
+
+      if (!location_maps_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "location_maps",
+          "");
+      }
+
+      if (!role_maps_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "role_maps",
+          "");
+      }
+    }
+
+    maps* maps::
+    _clone (::xml_schema::flags f,
+            ::xml_schema::container* c) const
+    {
+      return new class maps (*this, f, c);
+    }
+
+    maps& maps::
+    operator= (const maps& x)
+    {
+      if (this != &x)
+      {
+        static_cast< ::xml_schema::type& > (*this) = x;
+        this->citation_maps_ = x.citation_maps_;
+        this->event_maps_ = x.event_maps_;
+        this->equipment_maps_ = x.equipment_maps_;
+        this->location_maps_ = x.location_maps_;
+        this->role_maps_ = x.role_maps_;
+      }
+
+      return *this;
+    }
+
+    maps::
+    ~maps ()
+    {
+    }
+
+    static
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, maps >
+    _xsd_maps_type_factory_init (
+      "maps",
       "com:ara:pfc:training:1");
 
     // equipment_definition_list
@@ -11623,6 +12034,56 @@ namespace pfc
     _xsd_author_std_ostream_init;
 
     ::std::ostream&
+    operator<< (::std::ostream& o, const maps& i)
+    {
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "citation_maps: ";
+        om.insert (o, i.citation_maps ());
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "event_maps: ";
+        om.insert (o, i.event_maps ());
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "equipment_maps: ";
+        om.insert (o, i.equipment_maps ());
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "location_maps: ";
+        om.insert (o, i.location_maps ());
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "role_maps: ";
+        om.insert (o, i.role_maps ());
+      }
+
+      return o;
+    }
+
+    static
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, maps >
+    _xsd_maps_std_ostream_init;
+
+    ::std::ostream&
     operator<< (::std::ostream& o, const equipment_definition_list& i)
     {
       {
@@ -13382,6 +13843,134 @@ namespace pfc
     const ::xsd::cxx::tree::type_serializer_initializer< 0, char, author >
     _xsd_author_type_serializer_init (
       "author",
+      "com:ara:pfc:training:1");
+
+
+    void
+    operator<< (::xercesc::DOMElement& e, const maps& i)
+    {
+      e << static_cast< const ::xml_schema::type& > (i);
+
+      // citation_maps
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const maps::citation_maps_type& x (i.citation_maps ());
+        if (typeid (maps::citation_maps_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "citation_maps",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "citation_maps",
+            "",
+            false, false, e, x);
+      }
+
+      // event_maps
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const maps::event_maps_type& x (i.event_maps ());
+        if (typeid (maps::event_maps_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "event_maps",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "event_maps",
+            "",
+            false, false, e, x);
+      }
+
+      // equipment_maps
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const maps::equipment_maps_type& x (i.equipment_maps ());
+        if (typeid (maps::equipment_maps_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "equipment_maps",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "equipment_maps",
+            "",
+            false, false, e, x);
+      }
+
+      // location_maps
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const maps::location_maps_type& x (i.location_maps ());
+        if (typeid (maps::location_maps_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "location_maps",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "location_maps",
+            "",
+            false, false, e, x);
+      }
+
+      // role_maps
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const maps::role_maps_type& x (i.role_maps ());
+        if (typeid (maps::role_maps_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "role_maps",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "role_maps",
+            "",
+            false, false, e, x);
+      }
+    }
+
+    static
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, maps >
+    _xsd_maps_type_serializer_init (
+      "maps",
       "com:ara:pfc:training:1");
 
 
