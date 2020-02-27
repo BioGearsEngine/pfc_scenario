@@ -46,7 +46,7 @@ ColumnLayout {
         { next = root.model.count +1}
         self.injury_set_id = -1
         self.name = "New InjurySet %1".arg(next)
-        self.description = "Description of InjurySet %1".arg(next)
+        self.description = ""
         self.injuries = ""
         self.severities = ""
         self.locations = ""
@@ -56,7 +56,7 @@ ColumnLayout {
          next = next +1
          self.injury_set_id = -1; 
          self.name = "New InjurySet %1".arg(next);
-         self.description = "Description of InjurySet %1".arg(next)
+         self.description = ""
         } 
 
         root.backend.update_injury_set(self)

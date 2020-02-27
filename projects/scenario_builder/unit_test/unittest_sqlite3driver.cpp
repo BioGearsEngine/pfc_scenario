@@ -121,8 +121,6 @@ TEST_F(TEST_FIXTURE_NAME, Constructor)
   EXPECT_FALSE(file2.is_open());
 }
 
-
-
 //ASSESSMENT TESTS--------------------------------------------------------------
 TEST_F(TEST_FIXTURE_NAME, Insert_Assessment)
 {
@@ -4487,6 +4485,115 @@ TEST_F(TEST_FIXTURE_NAME, remove_citation_from_objectives)
   EXPECT_EQ(objective_5.citations.toStdString(), objective_1.citations.toStdString());
   EXPECT_EQ(objective_5.citations.toStdString(), objective_6.citations.toStdString());
 }
+TEST_F(TEST_FIXTURE_NAME, remove_injury_from_injury_sets)
+{
+  using namespace pfc;
+  InjurySet injury_set_1;
+  InjurySet injury_set_2;
+  InjurySet injury_set_3;
+  InjurySet injury_set_4;
+  InjurySet injury_set_5;
+  InjurySet injury_set_6;
+
+  injury_set_1.name = "Keyboardus Faceus";
+  injury_set_1.description = "Punch;Kick;Stomp;Tear";
+  injury_set_1.injuries = "1;2;3;4";
+  injury_set_1.locations = "Head;Shoulders;Knees;Toes";
+  injury_set_1.severities = "Good;Better;Bad;Worse";
+
+  injury_set_6.name = "Keyboardus Faceus";
+  injury_set_6.description = "Punch;Kick;Stomp;Tear";
+  injury_set_6.injuries = "1;2;3;4";
+  injury_set_6.locations = "Head;Shoulders;Knees;Toes";
+  injury_set_6.severities = "Good;Better;Bad;Worse";
+
+  injury_set_2.injuries = "1;3;4";
+  injury_set_2.locations = "Head;Knees;Toes";
+  injury_set_2.description = "Punch;Stomp;Tear";
+  injury_set_2.severities = "Good;Bad;Worse";
+  injury_set_3.injuries = "1;3";
+  injury_set_3.locations = "Head;Knees";
+  injury_set_3.description = "Punch;Stomp";
+  injury_set_3.severities = "Good;Bad";
+  injury_set_4.injuries = "3";
+  injury_set_4.locations = "Knees";
+  injury_set_4.description = "Stomp";
+  injury_set_4.severities = "Bad";
+  injury_set_5.injuries = "";
+  injury_set_5.locations = "";
+  injury_set_5.description = "";
+  injury_set_5.severities = "";
+
+  _db.update_injury_set(&injury_set_1);
+  _db.update_injury_set(&injury_set_6);
+  _db.select_injury_set(&injury_set_1);
+  _db.select_injury_set(&injury_set_6);
+
+  EXPECT_EQ(_db.list_find(std::string("1;2;3;4"), std::string("1")), 0);
+  EXPECT_EQ(_db.list_find(std::string("1;2;3;4"), std::string("2")), 1);
+  EXPECT_EQ(_db.list_find(std::string("1;2;3;4"), std::string("3")), 2);
+  EXPECT_EQ(_db.list_find(std::string("1;2;3;4"), std::string("4")), 3);
+
+  EXPECT_TRUE(_db.remove_injury_from_injury_sets(100));
+  _db.select_injury_set(&injury_set_1);
+  _db.select_injury_set(&injury_set_6);
+  EXPECT_EQ(injury_set_6.injuries.toStdString(), injury_set_1.injuries.toStdString());
+  EXPECT_EQ(injury_set_6.description.toStdString(), injury_set_1.description.toStdString());
+  EXPECT_EQ(injury_set_6.locations.toStdString(), injury_set_1.locations.toStdString());
+  EXPECT_EQ(injury_set_6.severities.toStdString(), injury_set_1.severities.toStdString());
+
+  EXPECT_TRUE(_db.remove_injury_from_injury_sets(2));
+  _db.select_injury_set(&injury_set_1);
+  _db.select_injury_set(&injury_set_6);
+  EXPECT_EQ(injury_set_2.injuries.toStdString(), injury_set_1.injuries.toStdString());
+  EXPECT_EQ(injury_set_2.description.toStdString(), injury_set_1.description.toStdString());
+  EXPECT_EQ(injury_set_2.locations.toStdString(), injury_set_1.locations.toStdString());
+  EXPECT_EQ(injury_set_2.severities.toStdString(), injury_set_1.severities.toStdString());
+
+  EXPECT_EQ(injury_set_2.injuries.toStdString(), injury_set_6.injuries.toStdString());
+  EXPECT_EQ(injury_set_2.description.toStdString(), injury_set_6.description.toStdString());
+  EXPECT_EQ(injury_set_2.locations.toStdString(), injury_set_6.locations.toStdString());
+  EXPECT_EQ(injury_set_2.severities.toStdString(), injury_set_6.severities.toStdString());
+
+  EXPECT_TRUE(_db.remove_injury_from_injury_sets(4));
+  _db.select_injury_set(&injury_set_1);
+  _db.select_injury_set(&injury_set_6);
+  EXPECT_EQ(injury_set_3.injuries.toStdString(), injury_set_1.injuries.toStdString());
+  EXPECT_EQ(injury_set_3.description.toStdString(), injury_set_1.description.toStdString());
+  EXPECT_EQ(injury_set_3.locations.toStdString(), injury_set_1.locations.toStdString());
+  EXPECT_EQ(injury_set_3.severities.toStdString(), injury_set_1.severities.toStdString());
+
+  EXPECT_EQ(injury_set_3.injuries.toStdString(), injury_set_6.injuries.toStdString());
+  EXPECT_EQ(injury_set_3.description.toStdString(), injury_set_6.description.toStdString());
+  EXPECT_EQ(injury_set_3.locations.toStdString(), injury_set_6.locations.toStdString());
+  EXPECT_EQ(injury_set_3.severities.toStdString(), injury_set_6.severities.toStdString());
+
+  EXPECT_TRUE(_db.remove_injury_from_injury_sets(1));
+  _db.select_injury_set(&injury_set_1);
+  _db.select_injury_set(&injury_set_6);
+  EXPECT_EQ(injury_set_4.injuries.toStdString(), injury_set_1.injuries.toStdString());
+  EXPECT_EQ(injury_set_4.description.toStdString(), injury_set_1.description.toStdString());
+  EXPECT_EQ(injury_set_4.locations.toStdString(), injury_set_1.locations.toStdString());
+  EXPECT_EQ(injury_set_4.severities.toStdString(), injury_set_1.severities.toStdString());
+
+  EXPECT_EQ(injury_set_4.injuries.toStdString(), injury_set_6.injuries.toStdString());
+  EXPECT_EQ(injury_set_4.description.toStdString(), injury_set_6.description.toStdString());
+  EXPECT_EQ(injury_set_4.locations.toStdString(), injury_set_6.locations.toStdString());
+  EXPECT_EQ(injury_set_4.severities.toStdString(), injury_set_6.severities.toStdString());
+
+  EXPECT_TRUE(_db.remove_injury_from_injury_sets(3));
+  _db.select_injury_set(&injury_set_1);
+  _db.select_injury_set(&injury_set_6);
+  EXPECT_EQ(injury_set_5.injuries.toStdString(), injury_set_1.injuries.toStdString());
+  EXPECT_EQ(injury_set_5.description.toStdString(), injury_set_1.description.toStdString());
+  EXPECT_EQ(injury_set_5.locations.toStdString(), injury_set_1.locations.toStdString());
+  EXPECT_EQ(injury_set_5.severities.toStdString(), injury_set_1.severities.toStdString());
+
+  EXPECT_EQ(injury_set_5.injuries.toStdString(), injury_set_6.injuries.toStdString());
+  EXPECT_EQ(injury_set_5.description.toStdString(), injury_set_6.description.toStdString());
+  EXPECT_EQ(injury_set_5.locations.toStdString(), injury_set_6.locations.toStdString());
+  EXPECT_EQ(injury_set_5.severities.toStdString(), injury_set_6.severities.toStdString());
+}
 
 TEST_F(DATABASE_LOADING_TEST, load_authors)
 {
@@ -4555,6 +4662,7 @@ TEST_F(DATABASE_LOADING_TEST, load_injuries)
   EXPECT_EQ(0, temp[0]->description.compare("Injury_Description"));
   EXPECT_EQ(1, temp[0]->severity_min);
   EXPECT_EQ(2, temp[0]->severity_max);
+  EXPECT_EQ(0, temp[0]->citations.compare("0;1"));
 }
 TEST_F(DATABASE_LOADING_TEST, load_injury_sets)
 {

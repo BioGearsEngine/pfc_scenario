@@ -949,7 +949,7 @@ bool SQLite3Driver::remove_injury(Injury* injury)
         return false;
       }
       injuryRemoved(injury->id);
-      return true;
+      return remove_injury_from_injury_sets(injury->id);
     } else {
       return false;
     }
@@ -4381,6 +4381,30 @@ bool SQLite3Driver::remove_injury_from_injury_sets(int injury_id)
 }
 bool SQLite3Driver::remove_injury_from_injury_sets(std::string injury_id)
 {
+  auto injury_sets = get_injury_sets();
+  if (_db.isOpen()) {
+    for (auto& injury_set : injury_sets) {
+      std::string descriptions = list_remove_index(injury_set->description.toStdString(), list_find(injury_set->injuries.toStdString(), injury_id));
+      std::string severities = list_remove_index(injury_set->severities.toStdString(), list_find(injury_set->injuries.toStdString(), injury_id));
+      std::string locations = list_remove_index(injury_set->locations.toStdString(), list_find(injury_set->injuries.toStdString(), injury_id));
+      std::string injuries = list_remove(injury_set->injuries.toStdString(), injury_id);
+      QSqlQuery query{ _db };
+      query.prepare(update_injury_set_by_id);
+      query.bindValue(":id", injury_set->id);
+      query.bindValue(":name", injury_set->name);
+      query.bindValue(":description", descriptions.c_str());
+      query.bindValue(":locations", locations.c_str());
+      query.bindValue(":severities", severities.c_str());
+      query.bindValue(":injuries", injuries.c_str());
+      //query.bindValue(":physiology_file", injury_set->physiology_file);
+      //query.bindValue(":treatment", injury_set->treatment);
+      if (!query.exec()) {
+        qWarning() << query.lastError();
+        return false;
+      }
+    }
+    return true;
+  }
   return false;
 }
 
@@ -4405,6 +4429,50 @@ std::string SQLite3Driver::list_remove(std::string list, std::string id) const
     result.pop_back();
   }
   return result;
+}
+
+std::string SQLite3Driver::list_remove_index(std::string list, int index) const
+{
+  std::vector<std::string> tokenized_list;
+  std::string temp;
+  int current_index = 0;
+  for (int i = 0;i <= list.length();++i) {
+    if (i != list.length() && list[i] != ';') {
+      temp += list[i];
+    } else {
+      if (current_index != index) {
+        tokenized_list.push_back(temp);
+      }
+      ++current_index;
+      temp.clear();
+    }
+  }
+  std::string result;
+  for (int i = 0;i < tokenized_list.size();++i) {
+    result += (tokenized_list[i] + ';');
+  }
+  if (!result.empty()) {
+    result.pop_back();
+  }
+  return result;
+}
+
+int SQLite3Driver::list_find(std::string list, std::string id) const
+{
+  int result = 0;
+  std::string temp_id;
+  for (int i = 0; i <= list.length(); ++i) {
+    if (i != list.length() && list[i] != ';') {
+      temp_id += list[i];
+    } else {
+      if (temp_id == id) {
+        return result;
+      }
+      ++result;
+      temp_id.clear();
+    }
+  }
+  return -1;
 }
 
 }

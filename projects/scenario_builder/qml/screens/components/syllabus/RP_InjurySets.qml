@@ -49,21 +49,6 @@ ColumnLayout  {
       }
     }
 
-    TextAreaEntry {
-      Layout.fillWidth: true
-      Layout.leftMargin: 5
-
-      id: descriptionEntry
-      label : "Description"
-
-      onEditingFinished : {
-        var entry = model.get(index)
-        if ( text != entry.description){
-          entry.description = text
-          update_injurySet(entry)
-        }
-      }
-    }
     StackLayout {
       id : listStack
       Layout.fillWidth : true
@@ -160,7 +145,6 @@ ColumnLayout  {
           var values = root.model.get(root.index)
           if (values) {
             nameEntry.text = values.name
-            descriptionEntry.text = values.description
             injuryList.model.clear()
             var injuries = values.injuries.split(";").filter(x=>x)
             var locations  = (values.locations) ? values.locations.split(";").filter(x => x) : "";
@@ -194,7 +178,6 @@ ColumnLayout  {
       var values = model.get(index)
       if(values) {
         nameEntry.text = values.name
-        descriptionEntry.text = values.description
 
         var injuries   = (values.injuries) ? values.injuries.split(";").filter(x => x)  : "";
         var locations  = (values.locations) ? values.locations.split(";").filter(x => x) : "";

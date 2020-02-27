@@ -272,7 +272,8 @@ public:
   Q_INVOKABLE bool remove_injury_from_injury_sets(std::string);
 
   std::string list_remove(std::string,std::string) const;
-
+  std::string list_remove_index(std::string, int) const;
+  int list_find(std::string, std::string) const;
 
   Q_INVOKABLE int raw_error() const { return _db.lastError().type(); };
   Q_INVOKABLE QString error_message() const { return _db.lastError().text(); }
