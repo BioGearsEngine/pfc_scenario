@@ -71,6 +71,8 @@ public:
 
   Q_INVOKABLE bool initialize_db();
 
+  Q_INVOKABLE bool populate_db();
+
   Q_INVOKABLE bool clear_db();
   Q_INVOKABLE bool clear_table(enum SQLite3Driver::Sqlite3Table);
 

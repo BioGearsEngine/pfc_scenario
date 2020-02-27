@@ -121,6 +121,13 @@
         <trauma-profile-ref/>
         <description>Role_Description</description>
       </role>
+      <role>
+        <id>Role_2</id>
+        <name>Role_Name</name>
+        <short-name/>
+        <trauma-profile-ref/>
+        <description>Role_Description</description>
+      </role>
     </roles>
     <training-script>
       <scene>

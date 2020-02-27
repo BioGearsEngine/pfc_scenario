@@ -48,7 +48,7 @@ SQLite3Driver::SQLite3Driver(const std::string& dbName, const std::string& path,
   }
   //TODO: Add Logic for detecting if this is required
   if (!initialize_db()) {
-    QSqlError("Unable to propertly initialize db!");
+    QSqlError("Unable to properly initialize db!");
   }
 }
 //------------------------------------------------------------------------------
@@ -122,6 +122,167 @@ bool SQLite3Driver::initialize_db()
     return creation_failure;
   }
   return false;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::populate_db()
+{
+  Author default_author;
+  Assessment default_assessment;
+  Citation default_citation;
+  Event default_event;
+  Equipment default_equipment;
+  Injury default_injury;
+  InjurySet default_injury_set;
+  Location default_location;
+  Objective default_objective;
+  Role default_role;
+  Scene default_scene;
+  Treatment default_treatment;
+  //---Author---
+  if(author_count() == 0) {
+    default_author.first = "First_Name";
+    default_author.last = "Last_Name";
+    default_author.email = "example@email.com";
+    default_author.zip = "00000";
+    default_author.state = "VA";
+    default_author.country = "United States";
+    default_author.phone = "(000)000-0000";
+    default_author.organization = "Organization";
+    if (!update_first_author(&default_author)) {
+      return false;
+    }
+  }
+  //---Assessment---
+  if(assessment_count() == 0) {
+    default_assessment.name = "Assessment_1";
+    default_assessment.description = "Description of Assessment_1";
+    default_assessment.type = "binary";
+    default_assessment.available_points = 1;
+    default_assessment.objective = ""; // This isn't actually a db field
+    default_assessment.criteria = "Criteria for Assessment_1";
+    if (!update_assessment(&default_assessment)) {
+      return false;
+    }
+  }
+  //---Citation---
+  if(citation_count() == 0) {
+    default_citation.title = "Citation_1";
+    default_citation.key = "";
+    default_citation.authors = "";
+    default_citation.year = "";
+    default_citation.publisher = "";
+    if (!update_citation(&default_citation)) {
+      return false;
+    }
+  }
+  //---Event---
+  if(event_count() == 0){
+    default_event.name = "Event_1";
+    default_event.description = "Event_1 description";
+    default_event.category = "ACTION";
+    default_event.fidelity = "LOW";
+    default_event.fk_actor_1 = "";
+    default_event.fk_actor_2 = "";
+    default_event.equipment = "";
+    default_event.details = "Event_1 details";
+    if (!update_event(&default_event)) {
+      return false;
+    }
+  }
+  //---Equipment---
+  if(equipment_count() == 0){
+    default_equipment.type = 1;
+    default_equipment.name = "Equipment_1";
+    default_equipment.description = "Description of Equipment_1";
+    default_equipment.citations = "";
+    default_equipment.image = "";
+    default_equipment.properties = "";
+    if (!update_equipment(&default_equipment)) {
+      return false;
+    }
+  }
+  //---Injury---
+  if(injury_count() == 0){
+    default_injury.medical_name = "Injury_Medical_Name";
+    default_injury.common_name = "Injury_Common_Name";
+    default_injury.description = "Description of Injury";
+    default_injury.citations = "";
+    default_injury.severity_min = 0;
+    default_injury.severity_max = 1;
+    if (!update_injury(&default_injury)) {
+      return false;
+    }
+  }
+  //---InjurySet---
+  if(injury_set_count() == 0){
+    default_injury_set.name = "Injury_Set_Name";
+    default_injury_set.description = "";
+    default_injury_set.injuries = "";
+    default_injury_set.locations = "";
+    default_injury_set.severities = "";
+    default_injury_set.physiology_file = "";
+    default_injury_set.treatments = "";
+    if (!update_injury_set(&default_injury_set)) {
+      return false;
+    }
+  }
+  //---Location---
+  if(location_count() == 0){
+    default_location.name = "Location_1";
+    default_location.time_of_day = "00:00:00";
+    default_location.environment = "Location_1 environment";
+    if (!update_location(&default_location)) {
+      return false;
+    }
+  }
+  //---Objective---
+  if(objective_count() == 0){
+    default_objective.name = "Objective_1";
+    default_objective.description = "Description of Objective_1";
+    default_objective.citations = "";
+    default_objective.cpgs = "";
+    default_objective.treatment_plans = "";
+    default_objective.injury_profiles = "";
+    if (!update_objective(&default_objective)) {
+      return false;
+    }
+  }
+  //---Role---
+  if(role_count() == 0){
+    default_role.name = "Role_1";
+    default_role.description = "Description of Role_1";
+    if (!update_role(&default_role)) {
+      return false;
+    }
+  }
+  //---Scene---
+  if(scene_count() == 0){
+    default_scene.name = "Scene_1";
+    default_scene.description = "Description of Scene_1";
+    default_scene.time_of_day = "00:00:00";
+    default_scene.time_in_simulation = 0;
+    default_scene.weather = "";
+    default_scene.events = "";
+    default_scene.items = "";
+    default_scene.roles = "";
+    default_scene.details = "";
+    if (!update_scene(&default_scene)) {
+      return false;
+    }
+  }
+  //---Treatment---
+  if (treatment_count() == 0){
+    default_treatment.medical_name = "Treatment_1_Medical_Name";
+    default_treatment.common_name = "Treatment_1_Common_Name";
+    default_treatment.description = "Description of Treatment_1";
+    default_treatment.equipment = "";
+    default_treatment.citations = "";
+    default_treatment.cpgs = "";
+    if (!update_treatment(&default_treatment)) {
+      return false;
+    }
+  }
+  return true;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::clear_db()
@@ -555,6 +716,8 @@ bool SQLite3Driver::update_author(Author* author)
       authorUpdated(author->id);
       return true;
     }
+    qWarning() << "Author Requires an Email Value";
+    return false;
   }
   qWarning() << "No Database connection";
   return false;
@@ -584,6 +747,8 @@ bool SQLite3Driver::update_first_author(Author* author)
       authorUpdated(1);
       return true;
     }
+    qWarning() << "Author Requires an Email Value";
+    return false;
   }
   qWarning() << "No Database connection";
   return false;
@@ -793,10 +958,7 @@ bool SQLite3Driver::remove_citation(Citation* citation)
         qWarning() << query_map.lastError();
         return false;
       }
-      return (remove_citation_from_equipment(citation->id) && 
-		          remove_citation_from_treatments(citation->id) && 
-		          remove_citation_from_injuries(citation->id) && 
-		          remove_citation_from_objectives(citation->id));
+      return (remove_citation_from_equipment(citation->id) && remove_citation_from_treatments(citation->id) && remove_citation_from_injuries(citation->id) && remove_citation_from_objectives(citation->id));
     } else {
       return false;
     }
@@ -4248,9 +4410,9 @@ bool SQLite3Driver::remove_equipment_from_treatments(int equipment_id)
 bool SQLite3Driver::remove_equipment_from_treatments(std::string equipment_id)
 {
   auto treatments = get_treatments();
-  if ( _db.isOpen() ) {
+  if (_db.isOpen()) {
     for (auto& treatment : treatments) {
-      std::string equipment = list_remove(treatment->equipment.toStdString(),equipment_id);
+      std::string equipment = list_remove(treatment->equipment.toStdString(), equipment_id);
       QSqlQuery query{ _db };
       query.prepare(update_treatment_by_id);
       query.bindValue(":id", treatment->id);
@@ -4270,7 +4432,7 @@ bool SQLite3Driver::remove_equipment_from_treatments(std::string equipment_id)
 }
 bool SQLite3Driver::remove_citation_from_treatments(int citation_id)
 {
-  return remove_citation_from_treatments(std::to_string(citation_id)); 
+  return remove_citation_from_treatments(std::to_string(citation_id));
 }
 bool SQLite3Driver::remove_citation_from_treatments(std::string citation_id)
 {
@@ -4377,7 +4539,7 @@ bool SQLite3Driver::remove_citation_from_objectives(std::string citation_id)
 }
 bool SQLite3Driver::remove_injury_from_injury_sets(int injury_id)
 {
-  return remove_injury_from_injury_sets(std::to_string(injury_id));  
+  return remove_injury_from_injury_sets(std::to_string(injury_id));
 }
 bool SQLite3Driver::remove_injury_from_injury_sets(std::string injury_id)
 {
@@ -4412,12 +4574,12 @@ std::string SQLite3Driver::list_remove(std::string list, std::string id) const
 {
   std::string result;
   std::string temp_id;
-  for (int i = 0;i < list.length();++i) {
+  for (int i = 0; i < list.length(); ++i) {
     if (list[i] != ';') {
       temp_id += list[i];
     } else {
       if (temp_id != id && !temp_id.empty()) {
-        result += (temp_id+";");
+        result += (temp_id + ";");
       }
       temp_id.clear();
     }
@@ -4436,7 +4598,7 @@ std::string SQLite3Driver::list_remove_index(std::string list, int index) const
   std::vector<std::string> tokenized_list;
   std::string temp;
   int current_index = 0;
-  for (int i = 0;i <= list.length();++i) {
+  for (int i = 0; i <= list.length(); ++i) {
     if (i != list.length() && list[i] != ';') {
       temp += list[i];
     } else {
@@ -4448,7 +4610,7 @@ std::string SQLite3Driver::list_remove_index(std::string list, int index) const
     }
   }
   std::string result;
-  for (int i = 0;i < tokenized_list.size();++i) {
+  for (int i = 0; i < tokenized_list.size(); ++i) {
     result += (tokenized_list[i] + ';');
   }
   if (!result.empty()) {
@@ -4474,5 +4636,4 @@ int SQLite3Driver::list_find(std::string list, std::string id) const
   }
   return -1;
 }
-
 }

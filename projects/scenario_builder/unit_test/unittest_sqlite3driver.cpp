@@ -281,6 +281,51 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Author)
   EXPECT_TRUE(_db.update_author(&author_3));
   EXPECT_EQ(3, _db.author_count());
 }
+TEST_F(TEST_FIXTURE_NAME, Insert_First_Author)
+{
+  using namespace pfc;
+  Author author_1;
+  Author author_2;
+  Author author_3;
+
+  author_1.first = "Solid";
+  author_1.last = "Snake";
+  author_1.email = "SolidSnake@MetalGear.com";
+  author_1.zip = "55555";
+  author_1.state = "NC";
+  author_1.country = "USA";
+  author_1.phone = "(555)555-5555";
+  author_1.organization = "Foxhound";
+
+  author_2.first = "Rocky";
+  author_2.last = "Balboa";
+  author_2.email = "ItalianStalion@moives.com";
+  author_2.zip = "01010";
+  author_2.state = "NC";
+  author_2.country = "USA";
+  author_2.phone = "(555)555-5555";
+  author_2.organization = "Foxhound";
+
+  author_3.email = "SolidSnake@MetalGear.com";
+
+
+  EXPECT_EQ(0, _db.author_count());
+  EXPECT_TRUE(_db.update_first_author(&author_1));
+  author_1.id = 1;
+  EXPECT_EQ(1, _db.author_count());
+  _db.select_author(&author_3);
+  EXPECT_EQ(author_1,author_3);
+
+  author_3.first = "Rocky";
+  author_3.last = "Balboa";
+  author_3.email = "ItalianStalion@moives.com";
+
+  EXPECT_TRUE(_db.update_first_author(&author_2));
+  author_2.id = 1;
+  EXPECT_EQ(1, _db.author_count());
+  _db.select_author(&author_3);
+  EXPECT_EQ(author_2,author_3);
+}
 TEST_F(TEST_FIXTURE_NAME, Select_Author)
 {
   using namespace pfc;
