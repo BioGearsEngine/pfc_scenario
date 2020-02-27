@@ -4716,6 +4716,7 @@ TEST_F(DATABASE_LOADING_TEST, load_treatments)
   pfc::schema::PFC::load_treatments(std::move(scenario_schema), _db);
   EXPECT_EQ(1, _db.treatment_count());
   auto temp = _db.get_treatments();
+  EXPECT_EQ(0, temp[0]->medical_name.compare("Treatment_Medical_Name"));
   EXPECT_EQ(0, temp[0]->common_name.compare("Treatment_Common_Name"));
   EXPECT_EQ(0, temp[0]->description.compare("Treatment_Description"));
   EXPECT_EQ(0, temp[0]->citations.compare("0;1"));

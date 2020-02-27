@@ -42,6 +42,7 @@
   <treatment-plans xmlns="">
     <treatment-plan>
       <id>Treatment_11</id>
+      <medical-name>Treatment_Medical_Name</medical-name>
       <common-name>Treatment_Common_Name</common-name>
       <description>Treatment_Description</description>
       <required-equipment>

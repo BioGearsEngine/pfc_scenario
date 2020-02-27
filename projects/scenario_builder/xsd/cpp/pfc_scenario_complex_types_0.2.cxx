@@ -945,6 +945,36 @@ namespace pfc
       this->common_name_.set (std::move (x));
     }
 
+    const treatment_plan::medical_name_optional& treatment_plan::
+    medical_name () const
+    {
+      return this->medical_name_;
+    }
+
+    treatment_plan::medical_name_optional& treatment_plan::
+    medical_name ()
+    {
+      return this->medical_name_;
+    }
+
+    void treatment_plan::
+    medical_name (const medical_name_type& x)
+    {
+      this->medical_name_.set (x);
+    }
+
+    void treatment_plan::
+    medical_name (const medical_name_optional& x)
+    {
+      this->medical_name_ = x;
+    }
+
+    void treatment_plan::
+    medical_name (::std::unique_ptr< medical_name_type > x)
+    {
+      this->medical_name_.set (std::move (x));
+    }
+
     const treatment_plan::description_type& treatment_plan::
     description () const
     {
@@ -5093,6 +5123,7 @@ namespace pfc
     : ::xml_schema::type (),
       id_ (id, this),
       common_name_ (this),
+      medical_name_ (this),
       description_ (description, this),
       required_equipment_ (required_equipment, this),
       references_ (references, this)
@@ -5107,6 +5138,7 @@ namespace pfc
     : ::xml_schema::type (),
       id_ (id, this),
       common_name_ (this),
+      medical_name_ (this),
       description_ (description, this),
       required_equipment_ (std::move (required_equipment), this),
       references_ (std::move (references), this)
@@ -5121,6 +5153,7 @@ namespace pfc
     : ::xml_schema::type (),
       id_ (std::move (id), this),
       common_name_ (this),
+      medical_name_ (this),
       description_ (std::move (description), this),
       required_equipment_ (std::move (required_equipment), this),
       references_ (std::move (references), this)
@@ -5134,6 +5167,7 @@ namespace pfc
     : ::xml_schema::type (x, f, c),
       id_ (x.id_, f, this),
       common_name_ (x.common_name_, f, this),
+      medical_name_ (x.medical_name_, f, this),
       description_ (x.description_, f, this),
       required_equipment_ (x.required_equipment_, f, this),
       references_ (x.references_, f, this)
@@ -5147,6 +5181,7 @@ namespace pfc
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
       id_ (this),
       common_name_ (this),
+      medical_name_ (this),
       description_ (this),
       required_equipment_ (this),
       references_ (this)
@@ -5219,6 +5254,34 @@ namespace pfc
                 throw ::xsd::cxx::tree::not_derived< char > ();
 
               this->common_name_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // medical-name
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "medical-name",
+              "",
+              &::xsd::cxx::tree::factory_impl< medical_name_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!this->medical_name_)
+            {
+              ::std::unique_ptr< medical_name_type > r (
+                dynamic_cast< medical_name_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->medical_name_.set (::std::move (r));
               continue;
             }
           }
@@ -5355,6 +5418,7 @@ namespace pfc
         static_cast< ::xml_schema::type& > (*this) = x;
         this->id_ = x.id_;
         this->common_name_ = x.common_name_;
+        this->medical_name_ = x.medical_name_;
         this->description_ = x.description_;
         this->required_equipment_ = x.required_equipment_;
         this->references_ = x.references_;
@@ -11886,6 +11950,17 @@ namespace pfc
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
+        if (i.medical_name ())
+        {
+          o << ::std::endl << "medical-name: ";
+          om.insert (o, *i.medical_name ());
+        }
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
         o << ::std::endl << "description: ";
         om.insert (o, i.description ());
       }
@@ -14017,6 +14092,32 @@ namespace pfc
           else
             tsm.serialize (
               "common-name",
+              "",
+              false, false, e, x);
+        }
+      }
+
+      // medical-name
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        if (i.medical_name ())
+        {
+          const treatment_plan::medical_name_type& x (*i.medical_name ());
+          if (typeid (treatment_plan::medical_name_type) == typeid (x))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "medical-name",
+                e));
+
+            s << x;
+          }
+          else
+            tsm.serialize (
+              "medical-name",
               "",
               false, false, e, x);
         }

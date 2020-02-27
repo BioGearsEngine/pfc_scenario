@@ -292,6 +292,7 @@ namespace schema {
     treatment->common_name(input->common_name.toStdString());
     treatment->references().citations(make_citation_ref_list(input->citations));
     treatment->references().cpgs(make_cpg_ref_list(input->cpgs));
+    treatment->medical_name(input->medical_name.toStdString());
 
     return treatment;
   }
@@ -594,6 +595,7 @@ namespace schema {
       seconds = seconds.substr(0,seconds.find("."));
       seconds = (seconds.length() == 1) ? ("0"+seconds) : (seconds);
       temp.time_of_day = QString::fromStdString(hours+":"+minutes+":"+seconds);
+      
       if(!_db.update_location(&temp)){
         return false;
       }
@@ -668,7 +670,7 @@ namespace schema {
     auto treatments = scenario_schema->treatment_plans().treatment_plan();
     for (auto treatment : treatments) {
       pfc::Treatment temp;
-      //temp.medical_name = QString::fromStdString(treatment.);
+      temp.medical_name = QString::fromStdString(treatment.medical_name().get());
       temp.common_name = QString::fromStdString(*treatment.common_name()); // Why is this different from medical_name at all?
       temp.description = QString::fromStdString(treatment.description());
       std::string citations;

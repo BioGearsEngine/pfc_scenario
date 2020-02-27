@@ -1379,6 +1379,27 @@ namespace pfc
       void
       common_name (::std::unique_ptr< common_name_type > p);
 
+      // medical-name
+      //
+      typedef ::xml_schema::string medical_name_type;
+      typedef ::xsd::cxx::tree::optional< medical_name_type > medical_name_optional;
+      typedef ::xsd::cxx::tree::traits< medical_name_type, char > medical_name_traits;
+
+      const medical_name_optional&
+      medical_name () const;
+
+      medical_name_optional&
+      medical_name ();
+
+      void
+      medical_name (const medical_name_type& x);
+
+      void
+      medical_name (const medical_name_optional& x);
+
+      void
+      medical_name (::std::unique_ptr< medical_name_type > p);
+
       // description
       //
       typedef ::xml_schema::string description_type;
@@ -1475,6 +1496,7 @@ namespace pfc
       protected:
       ::xsd::cxx::tree::one< id_type > id_;
       common_name_optional common_name_;
+      medical_name_optional medical_name_;
       ::xsd::cxx::tree::one< description_type > description_;
       ::xsd::cxx::tree::one< required_equipment_type > required_equipment_;
       ::xsd::cxx::tree::one< references_type > references_;
