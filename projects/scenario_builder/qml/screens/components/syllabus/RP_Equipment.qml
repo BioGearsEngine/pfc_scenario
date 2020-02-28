@@ -40,7 +40,7 @@ ColumnLayout  {
 
     id: nameEntry
     label : "Name"
-    placeholderText: "String Field (128 Characters )"
+    placeholderText: "String Field (128 Characters)"
 
     onEditingFinished : {
         var entry = model.get(root.index)

@@ -178,7 +178,7 @@ bool SQLite3Driver::populate_db()
   //---Event---
   if(event_count() == 0){
     default_event.name = "Event_1";
-    default_event.description = "Event_1 description";
+    default_event.description = "Description of Event_1";
     default_event.category = "ACTION";
     default_event.fidelity = "LOW";
     default_event.fk_actor_1 = "";
@@ -203,9 +203,9 @@ bool SQLite3Driver::populate_db()
   }
   //---Injury---
   if(injury_count() == 0){
-    default_injury.medical_name = "Injury_Medical_Name";
-    default_injury.common_name = "Injury_Common_Name";
-    default_injury.description = "Description of Injury";
+    default_injury.medical_name = "Injury_1_Medical_Name";
+    default_injury.common_name = "Injury_1_Common_Name";
+    default_injury.description = "Description of Injury_1";
     default_injury.citations = "";
     default_injury.severity_min = 0;
     default_injury.severity_max = 1;
@@ -215,7 +215,7 @@ bool SQLite3Driver::populate_db()
   }
   //---InjurySet---
   if(injury_set_count() == 0){
-    default_injury_set.name = "Injury_Set_Name";
+    default_injury_set.name = "Injury_Set_1";
     default_injury_set.description = "";
     default_injury_set.injuries = "";
     default_injury_set.locations = "";

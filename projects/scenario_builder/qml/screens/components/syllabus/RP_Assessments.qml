@@ -42,7 +42,7 @@ ColumnLayout  {
       Layout.leftMargin: 5
       id: nameEntry
       label : "Name"
-      placeholderText: "String Field (128 Characters )"
+      placeholderText: "String Field (128 Characters)"
 
        onEditingFinished : {
         var entry = model.get(root.index)
@@ -122,7 +122,7 @@ ColumnLayout  {
             anchors.margins : 5
             id: binaryCriteriaEntry
             label : "Criteria"
-            placeholderText: "String Field (128 Characters )"
+            placeholderText: "String Field (128 Characters)"
 
              onEditingFinished : {
               partialCriteriaEntry.text = text
@@ -149,7 +149,7 @@ ColumnLayout  {
 
             id: partialPointsEntry
             label : "Total Points"
-            placeholderText: "String Field ( 128 Characters )"
+            placeholderText: "String Field (128 Characters)"
 
              onEditingFinished : {
               var entry = model.get(root.index)
@@ -167,7 +167,7 @@ ColumnLayout  {
             anchors.margins : 5
             id: partialCriteriaEntry
             label : "Criteria"
-            placeholderText: "String Field (128 Characters )"
+            placeholderText: "String Field (128 Characters)"
 
              onEditingFinished : {
               binaryCriteriaEntry.text = text

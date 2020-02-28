@@ -67,7 +67,7 @@ ScrollView {
       Layout.leftMargin: 5
       id: commonNameEntry
       label : "Common Name"
-      placeholderText: "String Field (128 Characters )"
+      placeholderText: "String Field (128 Characters)"
       onEditingFinished : {
         var entry = root.model.get(root.index)
         if ( text != entry.common_name) {
@@ -94,27 +94,104 @@ ScrollView {
         }
       }
     }
-
-    EquipmentEntry {
-      id: equipmentList
-      Layout.fillWidth: true
+    StackLayout {
+      id : equipmentListStack
+      Layout.fillWidth : true
+      Layout.fillHeight : true
       Layout.leftMargin: 5
-      backend : column.backend
+      currentIndex : 0
+      EquipmentListEntry {
+        id: equipmentList
+        function update_treatment(values) {
+          obj.treatment_id = values.id
+          obj.medical_name         = values.medical_name
+          obj.common_name          = values.common_name
+          obj.description          = values.description   
+          obj.equipment = values.equipment
+          obj.citations = values.citations
+          column.backend.update_treatment(obj)
+        }
+        Layout.fillWidth: true
+        Layout.leftMargin: 5
+        backend : column.backend  
+        onList : {
+          var values = root.model.get(root.index)
+          if(values) {
+            fullEquipmentList.model.clear()
+            var equipments = values.equipment.split(";").filter(x=>x);
+            root.backend.equipments()
+            while(root.backend.next_equipment(equipment)){
+              fullEquipmentList.model.insert(fullEquipmentList.model.count,
+                  {
+                      equipment_id: "%1".arg(equipment.equipment_id)
+                    , type: "%1".arg(equipment.type)
+                    , name : "%1".arg(equipment.name)
+                    , description: "%1".arg(equipment.description)
+                    , citations: "%1".arg(equipment.citations)
+                    , image: "%1".arg(equipment.image)
+                 }
+               );
+            };
+          }
+          equipmentListStack.currentIndex = 1
+        }
 
-      onEquipmentAdded : {
-        var entry = root.model.get(root.index)
-        entry.equipment = (entry.equipment) ? entry.equipment.concat(";"+equipment_id) : entry.equipment.concat(equipment_id)
-        column.update_treatment(entry)
+        onEquipmentAdded : {
+          var entry = root.model.get(root.index)
+          entry.equipment = (entry.equipment) ? entry.equipment.concat(";"+equipment_id) : entry.equipment.concat(equipment_id)
+          column.update_treatment(entry)
+        } 
+
+        onEquipmentRemoved : {
+          var entry = root.model.get(root.index)
+          var equipment = entry.equipment.split(";").filter(item => item).filter(item => item != equipment_id);
+          entry.equipment = equipment.join(";")
+          column.update_treatment(entry)
+        }
       }
+      FullEquipmentListEntry {
+        id : fullEquipmentList
+        Layout.fillWidth : true
+        Layout.fillHeight : true
+        Layout.leftMargin: 5
+        backend : root.backend   
 
-      onEquipmentRemoved : {
-        var entry = root.model.get(root.index)
-        var equipment = entry.equipment.split(";").filter(item => item).filter(item => item != equipment_id);
-        entry.equipment = equipment.join(";")
-        column.update_treatment(entry)
+        onFullAdded : {
+          equipment.equipment_id = fullEquipmentList.model.get(current).equipment_id
+          root.backend.select_equipment(equipment)
+          var entry = root.model.get(root.index)
+          entry.equipment = (entry.equipment) ? entry.equipment.concat(";"+equipment.equipment_id) : entry.equipment.concat(equipment.equipment_id)
+          column.update_treatment(entry)
+          fullExit()
+        }
+
+        onFullExit : {
+          equipmentListStack.currentIndex = 0
+          var values = root.model.get(root.index)
+          if(values) {
+            descriptionEntry.text = values.description
+            equipmentList.model.clear()   
+
+            var equipments = values.equipment.split(";").filter(x => x);  
+            for(var i = 0; i < equipments.length; ++i){
+              equipment.equipment_id = parseInt(equipments[i])
+              if(root.backend.select_equipment(equipment)){
+                equipmentList.model.insert(equipmentList.model.count,
+                    {
+                      equipment_id: "%1".arg(equipment.equipment_id)
+                    , type: "%1".arg(equipment.type)
+                    , name : "%1".arg(equipment.name)
+                    , description: "%1".arg(equipment.description)
+                    , citations: "%1".arg(equipment.citations)
+                    , image: "%1".arg(equipment.image)
+                   }
+                 );
+              }
+            };
+          }
+        }    
       }
     }
-
     StackLayout {
       id : listStack
       Layout.fillWidth : true
@@ -128,7 +205,6 @@ ScrollView {
           obj.medical_name         = values.medical_name
           obj.common_name          = values.common_name
           obj.description          = values.description   
-
           obj.equipment = values.equipment
           obj.citations = values.citations
           column.backend.update_treatment(obj)
