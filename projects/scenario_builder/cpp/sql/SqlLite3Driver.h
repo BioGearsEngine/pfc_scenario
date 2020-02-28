@@ -66,6 +66,7 @@ public:
   SQLite3Driver& operator=(SQLite3Driver&&) = delete;
   ~SQLite3Driver();
 
+  Q_INVOKABLE bool ready();
   Q_INVOKABLE bool open(QString db_name);
   Q_INVOKABLE void close();
 
@@ -281,8 +282,7 @@ public:
   Q_INVOKABLE QString error_message() const { return _db.lastError().text(); }
   Q_INVOKABLE bool success() const { return !error(); }
   Q_INVOKABLE bool error() const { return _db.lastError().isValid(); };
-  Q_INVOKABLE bool open() const { return _db.isOpen(); };
-
+  
   QString Path() const { return _db_path; };
   QString Name() const { return _db_name; };
 

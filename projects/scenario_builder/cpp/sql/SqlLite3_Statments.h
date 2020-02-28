@@ -20,23 +20,23 @@ inline namespace sqlite3 {
     "authors",
     "assessments",
     "citations",
+    "citation_maps",
     "events",
+    "event_maps",
     "equipments",
+    "equipment_map"
     "injuries",
     "injury_sets",
     "locations",
+    "location_maps",
     "objectives",
     "properties",
-    "props",
-    "restrictions",
     "roles",
-    "treatments",
-    "scenes",
     "role_maps",
-    "event_maps",
-    "location_maps",
-    "prop_maps",
-    "restriction_maps"
+    "restrictions",
+    "restriction_maps",
+    "scenes",
+    "treatments",
   };
 
   constexpr auto list_tables = "SELECT * FROM sqlite_master WHERE type='table';";

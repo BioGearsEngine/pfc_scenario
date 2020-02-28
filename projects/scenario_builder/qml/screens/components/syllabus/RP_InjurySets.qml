@@ -85,6 +85,7 @@ ColumnLayout  {
 
         onSeverityChanged : {
            var entry = root.model.get(root.index)
+          console.log(JSON.stringify(entry))
            var severities = entry.severities.split(";").filter(item => item)
            severities.splice(index,1,severity)
            entry.severities = severities.join(";")
@@ -93,6 +94,7 @@ ColumnLayout  {
 
         onLocationChanged : {
           var entry = root.model.get(root.index)
+          console.log(JSON.stringify(entry))
           var locations = entry.locations.split(";").filter(item => item)
           locations.splice(index,1,location)
           entry.locations = locations.join(";")
@@ -101,9 +103,11 @@ ColumnLayout  {
 
         onInjuryAdded : {
           var entry = root.model.get(root.index)
-          entry.injuries    = (entry)? entry.injuries.concat(";"+injury_id) : entry.injuries.concat(injury_id)
-          entry.severities  = (entry)? entry.severities.concat(";"+severity) : entry.injuries.concat(severity)
-          entry.locations   = (entry)? entry.locations.concat(";"+location) : entry.injuries.concat(location)
+          entry.injuries    = (entry.injuries) ? entry.injuries.concat(";"+injury_id) : entry.injuries.concat(injury_id)
+          entry.severities  = (entry.severities) ? entry.severities.concat(";"+severity) : entry.severities.concat(severity)
+          entry.locations   = (entry.locations) ? entry.locations.concat(";"+location) : entry.locations.concat(location)
+          console.log(JSON.stringify(injury))
+          entry.description = (entry.description) ? entry.description.concat(";"+description) : entry.description.concat(description)
           update_injury_set(entry)
         }  
 
@@ -112,7 +116,7 @@ ColumnLayout  {
           var injuries = entry.injuries.split(";").filter(item => item)
           var severities = entry.severities.split(";").filter(item => item)
           var locations = entry.locations.split(";").filter(item => item)
-          
+          var description = entry.description.split(";").filter(item => item)
           injuries.splice(index,1);
           severities.splice(index,1)
           locations.splice(index,1)
@@ -120,7 +124,7 @@ ColumnLayout  {
           entry.injuries = injuries.join(";")
           entry.severities = severities.join(";")
           entry.locations = locations.join(";")
-          
+          entry.description = description.join(";")
           update_injury_set(entry)
         }
       }
@@ -134,9 +138,10 @@ ColumnLayout  {
           injury.injury_id = fullInjuryList.model.get(current).injury_id
           root.backend.select_injury(injury)
           var entry = root.model.get(root.index)
-          entry.locations = "Unknown"
-          entry.severities = injury.min
+          entry.severities  = (entry.severities) ? entry.severities.concat(";"+severity) : entry.severities.concat(severity)
+          entry.locations   = (entry.locations) ? entry.locations.concat(";"+location) : entry.locations.concat(location)
           entry.injuries = (entry.injuries) ? entry.injuries.concat(";"+injury.injury_id) : entry.injuries.concat(injury.injury_id)
+          entry.description = (entry.description) ? entry.description.concat(";"+description) : entry.description.concat(description)
           update_injury_set(entry)
           fullExit()
         }

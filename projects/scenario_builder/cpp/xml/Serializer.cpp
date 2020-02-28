@@ -9,9 +9,9 @@
 
 #include <QDebug>
 
-#include "SchemaUtils.h"
 #include "../xsd/cpp/military_scenario_1.0.0.hxx"
 #include "../xsd/cpp/pfc_scenario_0.2.hxx"
+#include "SchemaUtils.h"
 
 #include "mz.h"
 #include "mz_os.h"
@@ -97,9 +97,14 @@ bool Serializer::save(SQLite3Driver* driver)
 //-------------------------------------------------------------------------------
 bool Serializer::load(const QString& filename)
 {
-  if (!_db) {
+  if (!_db ) {
     return false;
   }
+  _db->open(_db->Name());
+  _db->clear_db();
+  _db->close();
+  _db->initialize_db();
+
   mz_zip_file* file_info = NULL;
   uint32_t ratio = 0;
   int16_t level = 0;
@@ -125,77 +130,75 @@ bool Serializer::load(const QString& filename)
     return err;
   }
 
-  printf("      Packed     Unpacked Ratio Method   Attribs Date     Time  CRC-32     Name\n");
-  printf("      ------     -------- ----- ------   ------- ----     ----  ------     ----\n");
-
-  /* Enumerate all entries in the archive */
-  do {
-    err = mz_zip_reader_entry_get_info(reader, &file_info);
-
-    if (err != MZ_OK) {
-      printf("Error %" PRId32 " getting entry info in archive\n", err);
-      break;
-    }
-
-    ratio = 0;
-    if (file_info->uncompressed_size > 0)
-      ratio = (uint32_t)((file_info->compressed_size * 100) / file_info->uncompressed_size);
-
-    /* Display a '*' if the file is encrypted */
-    if (file_info->flag & MZ_ZIP_FLAG_ENCRYPTED)
-      crypt = '*';
-    else
-      crypt = ' ';
-
-    switch (file_info->compression_method) {
-    case MZ_COMPRESS_METHOD_STORE:
-      string_method = "Stored";
-      break;
-    case MZ_COMPRESS_METHOD_DEFLATE:
-      level = (int16_t)((file_info->flag & 0x6) / 2);
-      if (level == 0)
-        string_method = "Defl:N";
-      else if (level == 1)
-        string_method = "Defl:X";
-      else if ((level == 2) || (level == 3))
-        string_method = "Defl:F"; /* 2: fast , 3: extra fast */
-      else
-        string_method = "Defl:?";
-      break;
-    case MZ_COMPRESS_METHOD_BZIP2:
-      string_method = "BZip2";
-      break;
-    case MZ_COMPRESS_METHOD_LZMA:
-      string_method = "LZMA";
-      break;
-    default:
-      string_method = "?";
-    }
-
-    mz_zip_time_t_to_tm(file_info->modified_date, &tmu_date);
-
-    /* Print entry information */
-    printf("%12" PRId64 " %12" PRId64 "  %3" PRIu32 "%% %6s%c %8" PRIx32 " %2.2" PRIu32
-           "-%2.2" PRIu32 "-%2.2" PRIu32 " %2.2" PRIu32 ":%2.2" PRIu32 " %8.8" PRIx32 "   %s\n",
-           file_info->compressed_size, file_info->uncompressed_size, ratio,
-           string_method, crypt, file_info->external_fa,
-           (uint32_t)tmu_date.tm_mon + 1, (uint32_t)tmu_date.tm_mday,
-           (uint32_t)tmu_date.tm_year % 100,
-           (uint32_t)tmu_date.tm_hour, (uint32_t)tmu_date.tm_min,
-           file_info->crc, file_info->filename);
-
-    err = mz_zip_reader_goto_next_entry(reader);
-
-    if (err != MZ_OK && err != MZ_END_OF_LIST) {
-      printf("Error %" PRId32 " going to next entry in archive\n", err);
-      break;
-    }
-  } while (err == MZ_OK);
-
   std::filebuf file_buf;
-  file_buf.open("Scenario.pfc.xml",std::ios::in);
+  file_buf.open("Scenario.pfc.xml", std::ios::in);
   std::istream i_stream(&file_buf);
-  auto scenario_schema = pfc::schema::Scenario(i_stream);
+  //
+  try { // If the parsing fails this prints out every error
+    auto scenario_schema = pfc::schema::Scenario(i_stream);
+    bool successful = false;
+    scenario_schema = pfc::schema::PFC::load_authors(std::move(scenario_schema), *_db, successful);
+    if (successful) {
+      scenario_schema = pfc::schema::PFC::load_assessments(std::move(scenario_schema), *_db, successful);
+    } else {
+      throw std::runtime_error("Failed to load authors");
+    }
+    if (successful) {
+      scenario_schema = pfc::schema::PFC::load_citations(std::move(scenario_schema), *_db, successful);
+    } else {
+      throw std::runtime_error("Failed to load citations");
+    }
+    if (successful) {
+      scenario_schema = pfc::schema::PFC::load_equipment(std::move(scenario_schema), *_db, successful);
+    } else {
+      throw std::runtime_error("Failed to load equipment");
+    }
+
+    if (successful) {
+      scenario_schema = pfc::schema::PFC::load_injuries(std::move(scenario_schema), *_db, successful);
+    } else {
+      throw std::runtime_error("Failed to load injuries");
+    }
+    if (successful) {
+      scenario_schema = pfc::schema::PFC::load_injury_sets(std::move(scenario_schema), *_db, successful);
+    } else {
+      throw std::runtime_error("Failed to load injury sets");
+    }
+    if (successful) {
+      scenario_schema = pfc::schema::PFC::load_objectives(std::move(scenario_schema), *_db, successful);
+    } else {
+      throw std::runtime_error("Failed to load objectives");
+    }
+    if (successful) {
+      scenario_schema = pfc::schema::PFC::load_locations(std::move(scenario_schema), *_db, successful);
+    } else {
+      throw std::runtime_error("Failed to load locations");
+    }
+    if (successful) {
+      scenario_schema = pfc::schema::PFC::load_roles(std::move(scenario_schema), *_db, successful);
+    } else {
+      throw std::runtime_error("Failed to load roles");
+    }
+    if (successful) {
+      scenario_schema = pfc::schema::PFC::load_treatments(std::move(scenario_schema), *_db, successful);
+    } else {
+      throw std::runtime_error("Failed to load treatments");
+    }
+    if (successful) {
+      scenario_schema = pfc::schema::PFC::load_events(std::move(scenario_schema), *_db, successful);
+    } else {
+      throw std::runtime_error("Failed to load events");
+    }
+    if (successful) {
+      scenario_schema = pfc::schema::PFC::load_scenes(std::move(scenario_schema), *_db, successful);
+    } else {
+      throw std::runtime_error("Failed to load scenes");
+    }
+  } catch (const xml_schema::exception& e) {
+    std::cout << e << '\n';
+    return false;
+  }
+  //
   file_buf.close();
 
   mz_zip_reader_delete(&reader);
@@ -222,7 +225,7 @@ void Serializer::generate_msdl_stream(SQLite3Driver* driver)
   auto property_list = driver->get_properties();
   qInfo() << property_list[0]->name;
   qInfo() << property_list[0]->value;
-  Property titleProperty,domainProperty,versionProperty,securityProperty,descriptionProperty;
+  Property titleProperty, domainProperty, versionProperty, securityProperty, descriptionProperty;
   titleProperty.name = "scenario_title";
   domainProperty.name = "scenario_domain";
   versionProperty.name = "scenario_version";
@@ -271,7 +274,7 @@ void Serializer::generate_pfc_stream(SQLite3Driver* driver)
 
   auto pfc_scenario = PFC::make_Scenario();
 
-  //0. <Author> 
+  //0. <Author>
   for (auto& author : driver->get_authors()) { // For now there should only ever be one author
     pfc_scenario.author().email() = author->email.toStdString();
     pfc_scenario.author().first_name() = author->first.toStdString();
@@ -355,11 +358,11 @@ void Serializer::generate_pfc_stream(SQLite3Driver* driver)
   for (auto& scene : driver->get_scenes()) {
     auto scene_ptr = PFC::make_scene(scene.get());
     //6.1.1 <medical-scenario><scenes><events>
-    for ( auto& event : driver->get_events_in_scene(scene.get()) ){
+    for (auto& event : driver->get_events_in_scene(scene.get())) {
       scene_ptr->events().event().push_back(PFC::make_event(event.get()));
     }
     //6.1.2 <medical-scenario><scenes><items>
-    for ( auto& item : driver->get_equipment_in_scene(scene.get()) ){
+    for (auto& item : driver->get_equipment_in_scene(scene.get())) {
       scene_ptr->items().item().push_back(PFC::make_item(item.get()));
     }
     ////6.1.3 <medical-scenario><scenes><roles>
@@ -374,7 +377,6 @@ void Serializer::generate_pfc_stream(SQLite3Driver* driver)
   for (auto& role : driver->get_roles()) {
     pfc_scenario.medical_scenario().roles().role().push_back(PFC::make_role(role.get()));
   }
- 
 
   //7. <works-cited>
   for (auto& citation : driver->get_citations()) {

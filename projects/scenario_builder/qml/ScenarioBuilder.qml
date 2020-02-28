@@ -85,7 +85,6 @@ ApplicationWindow {
          loadDialog.open()
        }
        onCreateClicked: {
-        scenario_model.open();
         scenario_model.initialize_db();
         scenario_model.populate_db();
          mainView.push( scenarioScreen, { backend : scenario_model} )

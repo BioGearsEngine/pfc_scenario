@@ -29,7 +29,7 @@ FullListEntry {
      id : injury
      color : 'transparent'
      border.color: "steelblue"
-     height : 30
+     height : injury_medical_name_text.height + injury_description_entry.height
      anchors { left : parent.left; right: parent.right ; margins : 5 }
 
     MouseArea {
@@ -53,9 +53,10 @@ FullListEntry {
 
     TextField {
       id : injury_description_entry
-      anchors.left : injury_medical_name_text.right
-      anchors.top : parent.top
-      anchors.leftMargin : -5
+      anchors.left : parent.left
+      anchors.top : injury_medical_name_text.top
+      anchors.topMargin : 5
+      anchors.leftMargin : 5
       font.pointSize : 8
 
       text: model.description
@@ -102,10 +103,11 @@ FullListEntry {
   //TODO: It would be cool if the delegate on state change added a description field which expanded it
 
   onFullAdded : {
-
+    console.log("FULLADDED")
   }
   onFullNew : {
     //TODO; Model Box Popup with  a selection of known Injuries
+    console.log("!!!!")
     var likely_id = root.backend.nextID(SQLBackend.INJURIES) + 1
     self.injury_id     = -1
     self.medical_name  = "New Injury %1".arg(likely_id)
@@ -117,7 +119,7 @@ FullListEntry {
     root.backend.update_injury(self)
     root.model.insert(root.model.count,
       {
-        injury_id: self.injury_id
+        injury_id: "%1".arg(self.injury_id)
       , medical_name: self.medical_name
       , common_name : self.common_name
       , description: self.description
@@ -128,6 +130,7 @@ FullListEntry {
       , location: "Unknown"
       });
     root.injuryAdded(index, self.injury_id, self.min, "Unknown")
+    console.log("!!!!")
   }
 
   onFullDeleted : {

@@ -57,6 +57,11 @@ SQLite3Driver::~SQLite3Driver()
   _db.close();
 }
 //------------------------------------------------------------------------------
+bool SQLite3Driver::ready()
+{
+  return _db.isOpen();
+}
+//------------------------------------------------------------------------------
 bool SQLite3Driver::open(QString name)
 {
   _db.close();
@@ -139,7 +144,7 @@ bool SQLite3Driver::populate_db()
   Scene default_scene;
   Treatment default_treatment;
   //---Author---
-  if(author_count() == 0) {
+  if (author_count() == 0) {
     default_author.first = "First_Name";
     default_author.last = "Last_Name";
     default_author.email = "example@email.com";
@@ -153,7 +158,7 @@ bool SQLite3Driver::populate_db()
     }
   }
   //---Assessment---
-  if(assessment_count() == 0) {
+  if (assessment_count() == 0) {
     default_assessment.name = "Assessment_1";
     default_assessment.description = "Description of Assessment_1";
     default_assessment.type = "binary";
@@ -165,7 +170,7 @@ bool SQLite3Driver::populate_db()
     }
   }
   //---Citation---
-  if(citation_count() == 0) {
+  if (citation_count() == 0) {
     default_citation.title = "Citation_1";
     default_citation.key = "";
     default_citation.authors = "";
@@ -176,7 +181,7 @@ bool SQLite3Driver::populate_db()
     }
   }
   //---Event---
-  if(event_count() == 0){
+  if (event_count() == 0) {
     default_event.name = "Event_1";
     default_event.description = "Description of Event_1";
     default_event.category = "ACTION";
@@ -190,7 +195,7 @@ bool SQLite3Driver::populate_db()
     }
   }
   //---Equipment---
-  if(equipment_count() == 0){
+  if (equipment_count() == 0) {
     default_equipment.type = 1;
     default_equipment.name = "Equipment_1";
     default_equipment.description = "Description of Equipment_1";
@@ -202,7 +207,7 @@ bool SQLite3Driver::populate_db()
     }
   }
   //---Injury---
-  if(injury_count() == 0){
+  if (injury_count() == 0) {
     default_injury.medical_name = "Injury_1_Medical_Name";
     default_injury.common_name = "Injury_1_Common_Name";
     default_injury.description = "Description of Injury_1";
@@ -214,7 +219,7 @@ bool SQLite3Driver::populate_db()
     }
   }
   //---InjurySet---
-  if(injury_set_count() == 0){
+  if (injury_set_count() == 0) {
     default_injury_set.name = "Injury_Set_1";
     default_injury_set.description = "";
     default_injury_set.injuries = "";
@@ -227,7 +232,7 @@ bool SQLite3Driver::populate_db()
     }
   }
   //---Location---
-  if(location_count() == 0){
+  if (location_count() == 0) {
     default_location.name = "Location_1";
     default_location.time_of_day = "00:00:00";
     default_location.environment = "Location_1 environment";
@@ -236,7 +241,7 @@ bool SQLite3Driver::populate_db()
     }
   }
   //---Objective---
-  if(objective_count() == 0){
+  if (objective_count() == 0) {
     default_objective.name = "Objective_1";
     default_objective.description = "Description of Objective_1";
     default_objective.citations = "";
@@ -248,7 +253,7 @@ bool SQLite3Driver::populate_db()
     }
   }
   //---Role---
-  if(role_count() == 0){
+  if (role_count() == 0) {
     default_role.name = "Role_1";
     default_role.description = "Description of Role_1";
     if (!update_role(&default_role)) {
@@ -256,7 +261,7 @@ bool SQLite3Driver::populate_db()
     }
   }
   //---Scene---
-  if(scene_count() == 0){
+  if (scene_count() == 0) {
     default_scene.name = "Scene_1";
     default_scene.description = "Description of Scene_1";
     default_scene.time_of_day = "00:00:00";
@@ -271,7 +276,7 @@ bool SQLite3Driver::populate_db()
     }
   }
   //---Treatment---
-  if (treatment_count() == 0){
+  if (treatment_count() == 0) {
     default_treatment.medical_name = "Treatment_1_Medical_Name";
     default_treatment.common_name = "Treatment_1_Common_Name";
     default_treatment.description = "Description of Treatment_1";
@@ -289,48 +294,30 @@ bool SQLite3Driver::clear_db()
 {
   QSqlQuery query(_db);
   if (_db.isOpen()) {
-    query.prepare(sqlite3::drop_table);
-    query.bindValue(":table", tables[AUTHORS]);
-    bool iResult = query.exec();
-    query.bindValue(":table", tables[ASSESSMENTS]);
-    iResult &= query.exec();
-    query.bindValue(":table", tables[CITATIONS]);
-    iResult &= query.exec();
-    query.bindValue(":table", tables[CITATION_MAPS]);
-    iResult &= query.exec();
-    query.bindValue(":table", tables[EVENTS]);
-    iResult &= query.exec();
-    query.bindValue(":table", tables[EVENT_MAPS]);
-    iResult &= query.exec();
-    query.bindValue(":table", tables[EQUIPMENTS]);
-    iResult &= query.exec();
-    query.bindValue(":table", tables[EQUIPMENT_MAPS]);
-    iResult &= query.exec();
-    query.bindValue(":table", tables[INJURIES]);
-    iResult &= query.exec();
-    query.bindValue(":table", tables[INJURY_SETS]);
-    iResult &= query.exec();
-    query.bindValue(":table", tables[LOCATIONS]);
-    iResult &= query.exec();
-    query.bindValue(":table", tables[LOCATION_MAPS]);
-    iResult &= query.exec();
-    query.bindValue(":table", tables[OBJECTIVES]);
-    iResult &= query.exec();
-    query.bindValue(":table", tables[PROPERTIES]);
-    iResult &= query.exec();
-    query.bindValue(":table", tables[ROLES]);
-    iResult &= query.exec();
-    query.bindValue(":table", tables[ROLE_MAPS]);
-    iResult &= query.exec();
-    query.bindValue(":table", tables[RESTRICTIONS]);
-    iResult &= query.exec();
-    query.bindValue(":table", tables[RESTRICTION_MAPS]);
-    iResult &= query.exec();
-    query.bindValue(":table", tables[SCENES]);
-    iResult &= query.exec();
-    query.bindValue(":table", tables[TREATMENTS]);
-    iResult &= query.exec();
-    return query.exec() && iResult;
+
+    _db.exec("DROP TABLE IF EXISTS authors;");
+    _db.exec("DROP TABLE IF EXISTS assessments;");
+    _db.exec("DROP TABLE IF EXISTS citations;");
+    _db.exec("DROP TABLE IF EXISTS citation_maps;");
+    _db.exec("DROP TABLE IF EXISTS events;");
+    _db.exec("DROP TABLE IF EXISTS event_maps;");
+    _db.exec("DROP TABLE IF EXISTS equipments;");
+    _db.exec("DROP TABLE IF EXISTS equipment_map;");
+    _db.exec("DROP TABLE IF EXISTS injuries;");
+    _db.exec("DROP TABLE IF EXISTS injury_sets;");
+    _db.exec("DROP TABLE IF EXISTS locations;");
+    _db.exec("DROP TABLE IF EXISTS location_maps;");
+    _db.exec("DROP TABLE IF EXISTS objectives;");
+    _db.exec("DROP TABLE IF EXISTS properties;");
+    _db.exec("DROP TABLE IF EXISTS roles;");
+    _db.exec("DROP TABLE IF EXISTS role_maps;");
+    _db.exec("DROP TABLE IF EXISTS restrictions;");
+    _db.exec("DROP TABLE IF EXISTS restriction_maps;");
+    _db.exec("DROP TABLE IF EXISTS scenes;");
+    _db.exec("DROP TABLE IF EXISTS treatments;");
+    
+
+    return true;
   }
   return false;
 }

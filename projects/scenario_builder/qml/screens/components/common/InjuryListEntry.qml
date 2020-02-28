@@ -10,8 +10,8 @@ ListEntry {
   id: root
   property SQLBackend backend
 
-  signal injuryAdded(int index, int injury_id, double severity, string location)
-  signal injuryRemoved(int index, int injury_id, double severity, string location)
+  signal injuryAdded(int index, int injury_id, double severity, string location, string description)
+  signal injuryRemoved(int index, int injury_id, double severity, string location, string description)
   signal locationChanged(int index, string location)
   signal severityChanged(int index, double severity)
 
@@ -155,6 +155,7 @@ ListEntry {
 
   onAdded : {
     //TODO; Model Box Popup with  a selection of known Injuries
+    console.log("INJURYADDED")
     var likely_id = root.backend.nextID(SQLBackend.INJURIES) + 1
     self.injury_id     = -1
     self.medical_name  = "New Injury %1".arg(likely_id)
@@ -176,7 +177,8 @@ ListEntry {
       , severity: "%1".arg(self.min)
       , location: "Unknown"
       });
-    root.injuryAdded(index, self.injury_id, self.min, "Unknown")
+    root.injuryAdded(index, self.injury_id, self.min, "Unknown", self.description)
+    index++
   }
 
   onRemoved : {
@@ -185,6 +187,6 @@ ListEntry {
     var location =  root.model.get(index).location
     root.model.remove(index)
     current = Math.max(0,index-1)
-    root.injuryRemoved(index, self.injury_id, severity, location)
+    root.injuryRemoved(index, self.injury_id, severity, location, self.description)
   }
 }

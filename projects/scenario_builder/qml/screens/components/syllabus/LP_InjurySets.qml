@@ -62,10 +62,12 @@ ColumnLayout {
         root.backend.update_injury_set(self)
         root.model.insert(root.model.count,
           {
-           "id" : self.injury_set,
+           "id" : self.injury_set_id,
            "name": "%1".arg(self.name), 
            "description": "%1".arg(self.description) , 
            "injuries": self.injuries,
+           "severities": self.severities,
+           "locations": self.locations,
           }
         );
         ++next;
