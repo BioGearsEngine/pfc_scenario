@@ -1,8 +1,8 @@
 #ifndef PFC_VISUALIZER_XML_SERALIZER_H
 #define PFC_VISUALIZER_XML_SERALIZER_H
 
-#include <sstream>
 #include <QObject>
+#include <sstream>
 
 #include "../sql/SqlLite3Driver.h"
 
@@ -12,6 +12,7 @@ public:
   Q_OBJECT
 
   Q_PROPERTY(SQLite3Driver* db MEMBER _db)
+  Q_PROPERTY(QString file MEMBER _sourceFile)
 public:
   explicit Serializer(QObject* parent = nullptr);
   Serializer(const Serializer&) = delete;
@@ -20,21 +21,23 @@ public:
   Serializer& operator=(Serializer&&) = delete;
   ~Serializer();
 
-  Q_INVOKABLE bool save(SQLite3Driver* driver);
+  Q_INVOKABLE bool save() const;
+  Q_INVOKABLE bool save_as(const QString& Save) const;
   Q_INVOKABLE bool load(const QString& filename);
 
 signals:
   void dbChanged();
+
 protected:
-  QString get_property(const QString& name);
-  void generate_msdl_stream(SQLite3Driver* driver);
-  void generate_pfc_stream(SQLite3Driver* driver);
+  QString get_property(const QString& name) const;
+  auto generate_msdl_stream() const -> std::stringstream;
+  auto generate_pfc_stream() const -> std::stringstream;
+  bool record_source_file(const QString& filepath) const;
 
 private:
   SQLite3Driver* _db = nullptr;
-  std::stringstream _msdl_content;
-  std::stringstream _pfc_content;
-  std::map<std::string, std::string> _images;  //Map of Image Keys,Paths
+  QString _sourceFile = "PFC_SCENARIO.pfc";
+  std::map<std::string, std::string> _images; //Map of Image Keys,Paths
 };
 }
 #endif //PFC_VISUALIZER_XML_SERALIZER_H

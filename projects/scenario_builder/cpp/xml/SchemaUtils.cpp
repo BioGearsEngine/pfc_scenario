@@ -807,8 +807,8 @@ namespace schema {
     std::string maps = scenario_schema->maps().citation_maps();
     while (!maps.empty()) {
       CitationMap temp;
-      int separator = maps.find_first_of(',');
-      int end = maps.find_first_of(')');
+      size_t separator = maps.find_first_of(',');
+      size_t end = maps.find_first_of(')');
       temp.fk_scene = std::stoi(maps.substr(1, separator));
       temp.fk_citation = std::stoi(maps.substr(separator + 1, end - separator));
       if (!_db.update_citation_map(&temp)) {
@@ -829,8 +829,8 @@ namespace schema {
     std::string maps = scenario_schema->maps().event_maps();
     while (!maps.empty()) {
       EventMap temp;
-      int separator = maps.find_first_of(',');
-      int end = maps.find_first_of(')');
+      size_t separator = maps.find_first_of(',');
+      size_t end = maps.find_first_of(')');
       temp.fk_scene = std::stoi(maps.substr(1, separator));
       temp.fk_event = std::stoi(maps.substr(separator + 1, end - separator));
       if (!_db.update_event_map(&temp)) {
@@ -851,8 +851,8 @@ namespace schema {
     std::string maps = scenario_schema->maps().equipment_maps();
     while (!maps.empty()) {
       EquipmentMap temp;
-      int separator = maps.find_first_of(',');
-      int end = maps.find_first_of(')');
+      size_t separator = maps.find_first_of(',');
+      size_t end = maps.find_first_of(')');
       temp.fk_scene = std::stoi(maps.substr(1, separator));
       temp.fk_equipment = std::stoi(maps.substr(separator + 1, end - separator));
       if (!_db.update_equipment_map(&temp)) {
@@ -873,8 +873,8 @@ namespace schema {
     std::string maps = scenario_schema->maps().location_maps();
     while (!maps.empty()) {
       LocationMap temp;
-      int separator = maps.find_first_of(',');
-      int end = maps.find_first_of(')');
+      size_t separator = maps.find_first_of(',');
+      size_t end = maps.find_first_of(')');
       temp.fk_scene = std::stoi(maps.substr(1, separator));
       temp.fk_location = std::stoi(maps.substr(separator + 1, end - separator));
       if (!_db.update_location_map(&temp)) {
@@ -895,8 +895,8 @@ namespace schema {
     std::string maps = scenario_schema->maps().role_maps();
     while (!maps.empty()) {
       RoleMap temp;
-      int separator = maps.find_first_of(',');
-      int end = maps.find_first_of(')');
+      size_t separator = maps.find_first_of(',');
+      size_t end = maps.find_first_of(')');
       temp.fk_scene = std::stoi(maps.substr(1, separator));
       temp.fk_role = std::stoi(maps.substr(separator + 1, end - separator));
       if (!_db.update_role_map(&temp)) {

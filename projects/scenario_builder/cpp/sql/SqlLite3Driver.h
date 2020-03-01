@@ -55,8 +55,30 @@ public:
     SCENES,
     TREATMENTS
   };
-
   Q_ENUM(Sqlite3Table)
+
+  std::map<Sqlite3Table, char const*> tables = {
+    { AUTHORS, "authors" },
+    { ASSESSMENTS, "assessments" },
+    { CITATIONS, "citations" },
+    { CITATION_MAPS, "citation_maps" },
+    { EVENTS, "events" },
+    { EVENT_MAPS, "event_maps" },
+    { EQUIPMENTS, "equipments" },
+    { EQUIPMENT_MAPS, "equipment_map" },
+    { INJURIES, "injuries" },
+    { INJURY_SETS, "injury_sets" },
+    { LOCATIONS, "locations" },
+    { LOCATION_MAPS, "location_maps" },
+    { OBJECTIVES, "objectives" },
+    { PROPERTIES, "properties" },
+    { ROLES, "roles" },
+    { ROLE_MAPS, "role_maps" },
+    { RESTRICTIONS, "restrictions" },
+    { RESTRICTION_MAPS, "restriction_maps" },
+    { SCENES, "scenes" },
+    { TREATMENTS, "treatments" }
+  };
 
   explicit SQLite3Driver(QObject* parent = nullptr);
   SQLite3Driver(const std::string& dbName, const std::string& path = "./", QObject* parent = nullptr);
@@ -274,7 +296,7 @@ public:
   Q_INVOKABLE bool remove_injury_from_injury_sets(int);
   Q_INVOKABLE bool remove_injury_from_injury_sets(std::string);
 
-  std::string list_remove(std::string,std::string) const;
+  std::string list_remove(std::string, std::string) const;
   std::string list_remove_index(std::string, int) const;
   int list_find(std::string, std::string) const;
 
@@ -282,7 +304,7 @@ public:
   Q_INVOKABLE QString error_message() const { return _db.lastError().text(); }
   Q_INVOKABLE bool success() const { return !error(); }
   Q_INVOKABLE bool error() const { return _db.lastError().isValid(); };
-  
+
   QString Path() const { return _db_path; };
   QString Name() const { return _db_name; };
 

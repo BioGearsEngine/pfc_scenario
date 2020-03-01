@@ -90,9 +90,9 @@ void SQLite3Driver::close()
 //------------------------------------------------------------------------------
 bool SQLite3Driver::initialize_db()
 {
-  QSqlQuery query(_db);
   bool creation_failure = false;
-  std::map<char const*, char const*> create_statments = {
+  std::map<char const*, char const*> create_statments = 
+  {
     { tables[AUTHORS], sqlite3::create_authors_table },
     { tables[ASSESSMENTS], sqlite3::create_assessments_table },
     { tables[CITATIONS], sqlite3::create_citations_table },
@@ -115,7 +115,8 @@ bool SQLite3Driver::initialize_db()
     { tables[TREATMENTS], sqlite3::create_treatments_table }
   };
 
-  if (_db.open()) {
+  if (open()) {
+    QSqlQuery query(_db);
     for (auto pair : create_statments) {
       query.prepare(pair.second);
       if (!query.exec()) {

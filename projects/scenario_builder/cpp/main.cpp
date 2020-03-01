@@ -25,6 +25,9 @@ int main(int argc, char* argv[])
   /* Commenting the following line resolves the issue but then UI elements looks small */
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
   QApplication app(argc, argv);
+  app.setOrganizationName("Applied Research Associates");
+  app.setOrganizationDomain("https://biogearsengine.com");
+
   QQuickStyle::setStyle("Material");
   QQmlApplicationEngine engine;
 

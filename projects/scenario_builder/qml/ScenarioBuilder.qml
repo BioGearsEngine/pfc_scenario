@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Styles 1.3
 import QtQuick.Dialogs 1.3
+import Qt.labs.settings 1.0
 
 import "screens"
 
@@ -22,30 +23,46 @@ ApplicationWindow {
     Menu {
       title: "File"
       font.pointSize : 8
-        MenuItem { text: "New Scenario";
-                   onTriggered : {
-                     console.log (text)
-                     scenario_model.open();
-                     scenario_model.initialize_db();
-                     scenario_model.populate_db();
-                     mainView.push( scenarioScreen, { backend : scenario_model} )
-                 } }
-        MenuItem { text: "Save Scenario";
-                   onTriggered : {
-                    console.log (text)
-                    scenario_serializer.save(scenario_model)
-                 }  }
-        MenuItem { text: "Save Scenario As";
-                  onTriggered : {
-                    console.log (text)
-                    scenario_serializer.save()
-                  }  }
-        MenuItem { text: "Load Scenario";
-                   onTriggered : {
-                   console.log (text)
-                   scenario_serializer.load("PFC_Scenario.zip")
-                   //loadDialog.open()
-                 }  }
+      MenuItem { 
+        text: "New Scenario";
+          onTriggered : {
+          create_scenario(scenario_model)
+        } 
+      }
+      MenuItem { 
+        id : saveOption
+        text: "Save Scenario";
+        enabled : false
+        onTriggered : {
+          save_scenario(scenario_serializer)
+        }
+      }
+      MenuItem {
+        id: saveAsOption
+        text: "Save Scenario As";
+        enabled : false
+        onTriggered : {
+          save_scenario_as(scenario_serializer)
+        } 
+      }
+      MenuItem { 
+        text: "Load Scenario";
+        onTriggered : {
+          load_scenario(scenario_serializer)
+        }
+       }
+       MenuItem { 
+         id : closeOption
+         text: "Close Scenario";
+         enabled : false
+        onTriggered : {
+          mainView.pop()
+          saveOption.enabled = false
+          saveAsOption.enabled = false
+          closeOption.enabled = false
+          mainView.push(welcomeScreen)
+        }
+      }
     }
     Menu {
       title: "Edit"
@@ -73,34 +90,25 @@ ApplicationWindow {
   XMLSeralizer {
     id : scenario_serializer
     db : scenario_model
+    file : "PFC_SCENARIO.pfc"
   }
   StackView {
     id: mainView
     anchors.fill: parent
 
-    initialItem : startScreen
-    Welcome {
-       id: startScreen
-       onLoadClicked: {
-         loadDialog.open()
-       }
-       onCreateClicked: {
-        scenario_model.initialize_db();
-        scenario_model.populate_db();
-         mainView.push( scenarioScreen, { backend : scenario_model} )
-       }
+    initialItem : welcomeScreen
     }
 
     FileDialog {
       id: loadDialog
       title: "Please Choose a File:"
-      folder:shortcuts.home
       visible: false
       selectMultiple : false
-       nameFilters: [ "Scenarios (*.pfc)", "All files (*)" ]
-      //folder: StandardPaths.writableLocation(StandardPaths.DesktopLocation)
+      selectExisting : true
+      nameFilters: [ "Scenarios (*.pfc;*.zip)", "All files (*)" ]
+      folder: "./"//StandardPaths.writableLocation(StandardPaths.DesktopLocation)
       onAccepted: {
-        console.log("You chose: " + loadDialog.fileUrls)
+        console.log("You choose: " + loadDialog.fileUrls)
         var archive = loadDialog.fileUrls.toString();
         archive = archive.replace(/file:\/{3}/,"")
         scenario_serializer.load(archive)
@@ -109,6 +117,26 @@ ApplicationWindow {
         console.log("Canceled")
       }
     }
+
+    FileDialog {
+      id: saveDialog
+      title: "Please Choose a File:"
+      visible: false
+      selectMultiple : false
+      selectExisting : false
+      nameFilters: [ "Scenarios (*.pfc,*.zip)", "All files (*)" ]
+      folder: "./"// StandardPaths.writableLocation(StandardPaths.DesktopLocation)
+      onAccepted: {
+        console.log("You choose: " + saveDialog.fileUrls)
+        var archive = saveDialog.fileUrls.toString();
+        archive = archive.replace(/file:\/{3}/,"")
+        scenario_serializer.save(archive, scenario_model)
+      }
+      onRejected: {
+        console.log("Canceled")
+      }
+    }
+
     Component {
       id: scenarioScreen
       Main {
@@ -117,5 +145,45 @@ ApplicationWindow {
         onClosed : mainView.pop()
       }
     }
+    Component {
+      id: welcomeScreen
+      Welcome {
+        onLoadClicked: {
+         load_scenario(scenario_model)
+        }
+        onCreateClicked: {
+         create_scenario(scenario_model)
+        }
+      }
+    }
+  Settings {
+        id: settings
+        property var previous_scenarios : []
+  }
+  function create_scenario( model ) {
+        saveOption.enabled = true
+        saveAsOption.enabled = true
+        closeOption.enabled = true
+        model.initialize_db();
+        model.populate_db();
+        mainView.push( scenarioScreen, { backend : model} )
+  }
+
+  function save_scenario() {
+       scenario_serializer.save()
+  }
+
+  function save_scenario_as() {
+       saveOption.enabled = true
+       saveAsOption.enabled = true
+       closeOption.enabled = true
+       saveDialog.open()
+       var archive = saveDialog.fileUrls.toString();
+       settings.previous_scenarios.push({"file": archive })
+  }
+
+  function load_scenario( file, backend) {
+    settings.previous_scenarios.push({"file": file })
+    loadDialog.open()
   }
 }

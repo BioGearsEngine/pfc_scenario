@@ -16,29 +16,6 @@ specific language governing permissions and limitations under the License.
 namespace pfc {
 inline namespace sqlite3 {
 
-  constexpr char const* tables[] = {
-    "authors",
-    "assessments",
-    "citations",
-    "citation_maps",
-    "events",
-    "event_maps",
-    "equipments",
-    "equipment_map"
-    "injuries",
-    "injury_sets",
-    "locations",
-    "location_maps",
-    "objectives",
-    "properties",
-    "roles",
-    "role_maps",
-    "restrictions",
-    "restriction_maps",
-    "scenes",
-    "treatments",
-  };
-
   constexpr auto list_tables = "SELECT * FROM sqlite_master WHERE type='table';";
   constexpr auto drop_table = "DROP TABLE IF EXISTS :table;";
 

@@ -66,6 +66,7 @@ public:
   pfc::SQLite3Driver _db;
   std::filebuf file_buf;
   std::unique_ptr<pfc::schema::ScenarioSchema> scenario_schema;
+  bool load_result = false;
 };
 
 void TEST_FIXTURE_NAME::SetUp()
@@ -4642,7 +4643,7 @@ TEST_F(TEST_FIXTURE_NAME, remove_injury_from_injury_sets)
 
 TEST_F(DATABASE_LOADING_TEST, load_authors)
 {
-  pfc::schema::PFC::load_authors(std::move(scenario_schema), _db);
+  pfc::schema::PFC::load_authors(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.author_count());
   auto temp = _db.get_authors();
   EXPECT_EQ(0, temp[0]->email.compare("Test@Email.com"));
@@ -4655,7 +4656,7 @@ TEST_F(DATABASE_LOADING_TEST, load_authors)
 }
 TEST_F(DATABASE_LOADING_TEST, load_assessments)
 {
-  pfc::schema::PFC::load_assessments(std::move(scenario_schema), _db);
+  pfc::schema::PFC::load_assessments(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.assessment_count());
   auto temp = _db.get_assessments();
   EXPECT_EQ(0, temp[0]->name.compare("Assessment_Name"));
@@ -4666,7 +4667,7 @@ TEST_F(DATABASE_LOADING_TEST, load_assessments)
 }
 TEST_F(DATABASE_LOADING_TEST, load_citations)
 {
-  pfc::schema::PFC::load_citations(std::move(scenario_schema), _db);
+  pfc::schema::PFC::load_citations(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.citation_count());
   auto temp = _db.get_citations();
   EXPECT_EQ(0, temp[0]->key.compare("Citation_Key"));
@@ -4676,7 +4677,7 @@ TEST_F(DATABASE_LOADING_TEST, load_citations)
 }
 TEST_F(DATABASE_LOADING_TEST, load_equipment)
 {
-  pfc::schema::PFC::load_equipment(std::move(scenario_schema), _db);
+  pfc::schema::PFC::load_equipment(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.equipment_count());
   auto temp = _db.get_equipments();
   EXPECT_EQ(0, temp[0]->name.compare("Equipment_Name"));
@@ -4686,7 +4687,7 @@ TEST_F(DATABASE_LOADING_TEST, load_equipment)
 }
 TEST_F(DATABASE_LOADING_TEST, load_events)
 {
-  pfc::schema::PFC::load_events(std::move(scenario_schema), _db);
+  pfc::schema::PFC::load_events(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.event_count());
   auto temp = _db.get_events();
   EXPECT_EQ(0, temp[0]->name.compare("Event_Name"));
@@ -4699,7 +4700,7 @@ TEST_F(DATABASE_LOADING_TEST, load_events)
 }
 TEST_F(DATABASE_LOADING_TEST, load_injuries)
 {
-  pfc::schema::PFC::load_injuries(std::move(scenario_schema), _db);
+  pfc::schema::PFC::load_injuries(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.injury_count());
   auto temp = _db.get_injuries();
   EXPECT_EQ(0, temp[0]->medical_name.compare("Injury_Medical_Name"));
@@ -4711,7 +4712,7 @@ TEST_F(DATABASE_LOADING_TEST, load_injuries)
 }
 TEST_F(DATABASE_LOADING_TEST, load_injury_sets)
 {
-  pfc::schema::PFC::load_injury_sets(std::move(scenario_schema), _db);
+  pfc::schema::PFC::load_injury_sets(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.injury_set_count());
   auto temp = _db.get_injury_sets();
   EXPECT_EQ(0, temp[0]->name.compare("Injury_Set_Name"));
@@ -4722,7 +4723,7 @@ TEST_F(DATABASE_LOADING_TEST, load_injury_sets)
 }
 TEST_F(DATABASE_LOADING_TEST, load_locations)
 {
-  pfc::schema::PFC::load_locations(std::move(scenario_schema), _db);
+  pfc::schema::PFC::load_locations(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.location_count());
   auto temp = _db.get_locations();
   EXPECT_EQ(0, temp[0]->name.compare("Scene_Name Location"));
@@ -4731,7 +4732,7 @@ TEST_F(DATABASE_LOADING_TEST, load_locations)
 }
 TEST_F(DATABASE_LOADING_TEST, load_objectives)
 {
-  pfc::schema::PFC::load_objectives(std::move(scenario_schema), _db);
+  pfc::schema::PFC::load_objectives(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.objective_count());
   auto temp = _db.get_objectives();
   EXPECT_EQ(0, temp[0]->name.compare("Objective_Name"));
@@ -4740,7 +4741,7 @@ TEST_F(DATABASE_LOADING_TEST, load_objectives)
 }
 TEST_F(DATABASE_LOADING_TEST, load_roles)
 {
-  pfc::schema::PFC::load_roles(std::move(scenario_schema), _db);
+  pfc::schema::PFC::load_roles(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.role_count());
   auto temp = _db.get_roles();
   EXPECT_EQ(0, temp[0]->name.compare("Role_Name"));
@@ -4748,7 +4749,7 @@ TEST_F(DATABASE_LOADING_TEST, load_roles)
 }
 TEST_F(DATABASE_LOADING_TEST, load_scenes)
 {
-  pfc::schema::PFC::load_scenes(std::move(scenario_schema), _db);
+  pfc::schema::PFC::load_scenes(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.scene_count());
   auto temp = _db.get_scenes();
   EXPECT_EQ(0, temp[0]->name.compare("Scene_Name"));
@@ -4758,7 +4759,7 @@ TEST_F(DATABASE_LOADING_TEST, load_scenes)
 }
 TEST_F(DATABASE_LOADING_TEST, load_treatments)
 {
-  pfc::schema::PFC::load_treatments(std::move(scenario_schema), _db);
+  pfc::schema::PFC::load_treatments(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.treatment_count());
   auto temp = _db.get_treatments();
   EXPECT_EQ(0, temp[0]->medical_name.compare("Treatment_Medical_Name"));
@@ -4769,7 +4770,7 @@ TEST_F(DATABASE_LOADING_TEST, load_treatments)
 }
 TEST_F(DATABASE_LOADING_TEST, load_citation_maps)
 {
-  pfc::schema::PFC::load_citation_maps(std::move(scenario_schema), _db);
+  pfc::schema::PFC::load_citation_maps(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.citation_map_count());
   auto temp = _db.get_citation_maps();
   EXPECT_EQ(1, temp[0]->fk_scene);
@@ -4777,7 +4778,7 @@ TEST_F(DATABASE_LOADING_TEST, load_citation_maps)
 }
 TEST_F(DATABASE_LOADING_TEST, load_event_maps)
 {
-  pfc::schema::PFC::load_event_maps(std::move(scenario_schema), _db);
+  pfc::schema::PFC::load_event_maps(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.event_map_count());
   auto temp = _db.get_event_maps();
   EXPECT_EQ(3, temp[0]->fk_scene);
@@ -4785,7 +4786,7 @@ TEST_F(DATABASE_LOADING_TEST, load_event_maps)
 }
 TEST_F(DATABASE_LOADING_TEST, load_equipment_maps)
 {
-  pfc::schema::PFC::load_equipment_maps(std::move(scenario_schema), _db);
+  pfc::schema::PFC::load_equipment_maps(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.equipment_map_count());
   auto temp = _db.get_equipment_maps();
   EXPECT_EQ(5, temp[0]->fk_scene);
@@ -4793,7 +4794,7 @@ TEST_F(DATABASE_LOADING_TEST, load_equipment_maps)
 }
 TEST_F(DATABASE_LOADING_TEST, load_location_maps)
 {
-  pfc::schema::PFC::load_location_maps(std::move(scenario_schema), _db);
+  pfc::schema::PFC::load_location_maps(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.location_map_count());
   auto temp = _db.get_location_maps();
   EXPECT_EQ(7, temp[0]->fk_scene);
@@ -4801,7 +4802,7 @@ TEST_F(DATABASE_LOADING_TEST, load_location_maps)
 }
 TEST_F(DATABASE_LOADING_TEST, load_role_maps)
 {
-  pfc::schema::PFC::load_role_maps(std::move(scenario_schema), _db);
+  pfc::schema::PFC::load_role_maps(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.role_map_count());
   auto temp = _db.get_role_maps();
   EXPECT_EQ(9, temp[0]->fk_scene);

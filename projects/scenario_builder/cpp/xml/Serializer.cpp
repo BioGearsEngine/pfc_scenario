@@ -38,12 +38,37 @@ Serializer::~Serializer()
 {
 }
 //-------------------------------------------------------------------------------
-bool Serializer::save(SQLite3Driver* driver)
+bool Serializer::save() const
 {
-  generate_msdl_stream(driver);
-  generate_pfc_stream(driver);
+  QString filename = get_property("archive_file");
+  if (!filename.contains("_NOTFOUND", Qt::CaseSensitive)) {
+    return save_as(filename);
+  }
+  filename = get_property("scenario_title");
+  if (!filename.contains("_NOTFOUND", Qt::CaseSensitive)) {
+    filename = filename.replace(" ", "_") + ".pfc";
+    return save_as(filename);
+  }
+  filename = get_property("PFC_SCENARIO.pfc");
+  return save_as(filename);
+}
+//-------------------------------------------------------------------------------
+bool Serializer::save_as(const QString& filename) const
+{
   if (!_db) {
     return false;
+  }
+
+  std::stringstream msdl_stream;
+  std::stringstream pfc_stream;
+
+  try {
+    msdl_stream = generate_msdl_stream();
+    pfc_stream = generate_pfc_stream();
+  } catch (::xsd::cxx::tree::serialization<char> e) {
+    std::stringstream ss;
+    ss << e;
+    qCritical() << ss.str().c_str();
   }
 
   mz_zip_file file_info;
@@ -70,9 +95,10 @@ bool Serializer::save(SQLite3Driver* driver)
 
   void* writer = nullptr;
   mz_zip_writer_create(&writer);
-  mz_zip_writer_open_file(writer, "PFC_Scenario.zip", 0, false);
+  mz_zip_writer_open_file(writer, filename.toStdString().c_str(), 0, false);
+
   text_name = "Scenario.msdl.xml";
-  text_ptr = _msdl_content.str();
+  text_ptr = msdl_stream.str();
   file_info.version_madeby = MZ_VERSION_MADEBY;
   file_info.compression_method = MZ_COMPRESS_METHOD_DEFLATE;
   file_info.filename = text_name.c_str();
@@ -82,7 +108,7 @@ bool Serializer::save(SQLite3Driver* driver)
   mz_zip_writer_add_buffer(writer, (void*)text_ptr.c_str(), (int32_t)text_ptr.length(), &file_info);
 
   text_name = "Scenario.pfc.xml";
-  text_ptr = _pfc_content.str();
+  text_ptr = pfc_stream.str();
   file_info.filename = text_name.c_str();
   file_info.uncompressed_size = text_ptr.length();
   std::cout << file_info.uncompressed_size << "\n";
@@ -92,12 +118,12 @@ bool Serializer::save(SQLite3Driver* driver)
   mz_zip_writer_close(writer);
   mz_zip_writer_delete(&writer);
 
-  return true;
+  return record_source_file(filename);
 }
 //-------------------------------------------------------------------------------
 bool Serializer::load(const QString& filename)
 {
-  if (!_db ) {
+  if (!_db) {
     return false;
   }
   _db->open(_db->Name());
@@ -206,23 +232,34 @@ bool Serializer::load(const QString& filename)
   if (err == MZ_END_OF_LIST)
     return MZ_OK;
 
-  return true;
+  return record_source_file(filename);
 }
 //-------------------------------------------------------------------------------
-QString Serializer::get_property(const QString& name)
+bool Serializer::record_source_file(const QString& filepath) const
+{
+  Property prop;
+  prop.name = "archive_file";
+  prop.value = filepath;
+  if (_db) {
+    return _db->update_property(&prop);
+  }
+  return false;
+}
+//-------------------------------------------------------------------------------
+QString Serializer::get_property(const QString& name) const
 {
   Property prop;
   prop.name = name;
   if (_db) {
-    return (_db->select_property(&prop)) ? prop.name : "N/A";
+    return (_db->select_property(&prop)) ? prop.value : QString("%1_NOTFOUND").arg(name);
   }
-  return "N/A";
+  return QString("%1_NOTFOUND").arg(name);
 }
 //-------------------------------------------------------------------------------
-void Serializer::generate_msdl_stream(SQLite3Driver* driver)
+auto Serializer::generate_msdl_stream() const -> std::stringstream
 {
 
-  auto property_list = driver->get_properties();
+  auto property_list = _db->get_properties();
   qInfo() << property_list[0]->name;
   qInfo() << property_list[0]->value;
   Property titleProperty, domainProperty, versionProperty, securityProperty, descriptionProperty;
@@ -231,11 +268,11 @@ void Serializer::generate_msdl_stream(SQLite3Driver* driver)
   versionProperty.name = "scenario_version";
   securityProperty.name = "scenario_security";
   descriptionProperty.name = "scenario_description";
-  driver->select_property(&titleProperty);
-  driver->select_property(&domainProperty);
-  driver->select_property(&versionProperty);
-  driver->select_property(&securityProperty);
-  driver->select_property(&descriptionProperty);
+  _db->select_property(&titleProperty);
+  _db->select_property(&domainProperty);
+  _db->select_property(&versionProperty);
+  _db->select_property(&securityProperty);
+  _db->select_property(&descriptionProperty);
   std::string name = titleProperty.value.toStdString();
   std::string domain = domainProperty.value.toStdString();
   std::string version = versionProperty.value.toStdString();
@@ -254,28 +291,23 @@ void Serializer::generate_msdl_stream(SQLite3Driver* driver)
   auto msdl_force_sides = std::make_unique<msdl_1::MilitaryScenarioType::ForceSides_type>();
   auto msdl = msdl_1::MilitaryScenarioType(std::move(msdl_scenario_id), std::move(msdl_military_version), std::move(msdl_force_sides));
 
-  _msdl_content.str("");
-
   xml_schema::namespace_infomap info;
   info[""].name = "urn:sisostds:scenario:military:data:draft:msdl:1";
   info[""].schema = "military_scenario_1.0.0.xsd";
 
-  try {
-    msdl_1::MilitaryScenario(_msdl_content, msdl, info);
-  } catch (std::exception e) {
-    std::cout << e.what() << std::endl;
-    _msdl_content << e.what();
-  }
+  std::stringstream msdl_content;
+  msdl_1::MilitaryScenario(msdl_content, msdl, info);
+  return msdl_content;
 }
 //-------------------------------------------------------------------------------
-void Serializer::generate_pfc_stream(SQLite3Driver* driver)
+auto Serializer::generate_pfc_stream() const -> std::stringstream
 {
   using namespace ::pfc::schema;
 
   auto pfc_scenario = PFC::make_Scenario();
 
   //0. <Author>
-  for (auto& author : driver->get_authors()) { // For now there should only ever be one author
+  for (auto& author : _db->get_authors()) { // For now there should only ever be one author
     pfc_scenario.author().email() = author->email.toStdString();
     pfc_scenario.author().first_name() = author->first.toStdString();
     pfc_scenario.author().last_name() = author->last.toStdString();
@@ -323,31 +355,31 @@ void Serializer::generate_pfc_stream(SQLite3Driver* driver)
   pfc_scenario.maps().role_maps() = role_map_list;
 
   //1. <Equipment>
-  for (auto& equipment : driver->get_equipments()) {
+  for (auto& equipment : _db->get_equipments()) {
     pfc_scenario.equipment().equipment().push_back(PFC::make_equipment(equipment.get()));
   }
   //2. <conditions>
-  for (auto& injury : driver->get_injuries()) {
+  for (auto& injury : _db->get_injuries()) {
     pfc_scenario.trauma_definitions().trauma().push_back(PFC::make_trauma(injury.get()));
   }
 
   //3. <treatment_plans>
-  for (auto& treatment : driver->get_treatments()) {
+  for (auto& treatment : _db->get_treatments()) {
     pfc_scenario.treatment_plans().treatment_plan().push_back(PFC::make_treatment_plan(treatment.get()));
   }
 
   //4. Populate <trauma_sets>
-  for (auto& trauma : driver->get_injury_sets()) {
+  for (auto& trauma : _db->get_injury_sets()) {
     pfc_scenario.trauma_sets().trauma_profile().push_back(PFC::make_trauma_profile(trauma.get()));
   }
   //5. <syllabus>
   //5.1 <syllabus><learning_objective>
-  for (auto& objective : driver->get_objectives()) {
+  for (auto& objective : _db->get_objectives()) {
     pfc_scenario.syllabus().learning_objectives().objective().push_back(PFC::make_learning_objective(objective.get()));
   }
   //5.2 <syllabus><assessment>
   int32_t total_points = 0;
-  for (auto& assessment : driver->get_assessments()) {
+  for (auto& assessment : _db->get_assessments()) {
     total_points += assessment->available_points;
     pfc_scenario.syllabus().learning_assessments().assessment().push_back(PFC::make_assessment(assessment.get()));
   }
@@ -355,18 +387,18 @@ void Serializer::generate_pfc_stream(SQLite3Driver* driver)
 
   //6.  <medical-scenario>
   //6.1 <medical-scenario><scenes>
-  for (auto& scene : driver->get_scenes()) {
+  for (auto& scene : _db->get_scenes()) {
     auto scene_ptr = PFC::make_scene(scene.get());
     //6.1.1 <medical-scenario><scenes><events>
-    for (auto& event : driver->get_events_in_scene(scene.get())) {
+    for (auto& event : _db->get_events_in_scene(scene.get())) {
       scene_ptr->events().event().push_back(PFC::make_event(event.get()));
     }
     //6.1.2 <medical-scenario><scenes><items>
-    for (auto& item : driver->get_equipment_in_scene(scene.get())) {
+    for (auto& item : _db->get_equipment_in_scene(scene.get())) {
       scene_ptr->items().item().push_back(PFC::make_item(item.get()));
     }
     ////6.1.3 <medical-scenario><scenes><roles>
-    for (auto& role : driver->get_roles_in_scene(scene.get())) {
+    for (auto& role : _db->get_roles_in_scene(scene.get())) {
       if (role->id != -1) {
         scene_ptr->roles().role_ref().push_back(PFC::make_role_ref(role.get()));
       }
@@ -374,16 +406,14 @@ void Serializer::generate_pfc_stream(SQLite3Driver* driver)
     pfc_scenario.medical_scenario().training_script().scene().push_back(std::move(scene_ptr));
   }
   //6.2 <medical-scenario><roles>
-  for (auto& role : driver->get_roles()) {
+  for (auto& role : _db->get_roles()) {
     pfc_scenario.medical_scenario().roles().role().push_back(PFC::make_role(role.get()));
   }
 
   //7. <works-cited>
-  for (auto& citation : driver->get_citations()) {
+  for (auto& citation : _db->get_citations()) {
     pfc_scenario.works_cited().citation().push_back(PFC::make_citation(citation.get()));
   }
-
-  _pfc_content.str("");
 
   xml_schema::namespace_infomap info;
   info[""].name = "com:ara:pfc:training:1";
@@ -392,12 +422,9 @@ void Serializer::generate_pfc_stream(SQLite3Driver* driver)
   if (_db.isValid()) {
     _db = QSqlDatabase::addDatabase("QSQLITE");
   }
-  try {
-    Scenario(_pfc_content, pfc_scenario, info);
-  } catch (std::exception e) {
-    std::cout << e.what() << std::endl;
-    _pfc_content << e.what();
-  }
+  std::stringstream pfc_content;
+  Scenario(pfc_content, pfc_scenario, info);
+  return pfc_content;
 }
 //-------------------------------------------------------------------------------
 xml_schema::date get_now()
