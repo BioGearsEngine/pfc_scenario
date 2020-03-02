@@ -68,6 +68,33 @@ add_source_files(UNIT_TEST LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/unit_test
                 REGEX "*.cpp" SOURCE_GROUP  "Tests")
 
 
+set ( XSD_FILES
+    "xsd/pfc_scenario_0.2.xsd"
+    "xsd/pfc_scenario_complex_types_0.2.xsd"
+    "xsd/msdl_simple_types_1.0.0.xsd"
+    "xsd/msdl_complex_types_1.0.0.xsd"
+    "xsd/msdl_complex_types_1.0.0.xsd"
+    "xsd/msdl_codes_1.0.0.xsd"
+    "xsd/military_scenario_1.0.0.xsd"
+    "xsd/extern/jc3iedm_meterological.xsd"
+    "xsd/extern/jc3iedm-3.1-codes-20061208.xsd"
+    "xsd/extern/model_id_v2006_final.xsd"
+  )
+  foreach(schema IN LISTS XSD_FILES)
+      message(STATUS "Tracking ${schema}")
+	  add_custom_command(
+		OUTPUT  ${PROJECT_BINARY_DIR}/${schema}
+		DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${schema}
+		COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/${schema} ${PROJECT_BINARY_DIR}/${schema}
+		COMMAND ${CMAKE_COMMAND} -E echo ${CMAKE_CURRENT_SOURCE_DIR}/${schema} ${PROJECT_BINARY_DIR}/${schema}
+	  )	  
+  endforeach()
+  add_custom_target( prepare_runtime_dir
+	  DEPENDS ${XSD_FILES}
+	  COMMENT "Scanning for need to stage runtime dir"
+  )
+
+
 set(${PREFIX}_HEADERS ${HDRS} ${PUBLIC_HDRS} ${GEN_HDRS})
 set(${PREFIX}_SOURCES ${SRCS} ${GEN_SRCS})
 

@@ -44,6 +44,220 @@ namespace pfc
 {
   namespace schema
   {
+    // summary
+    // 
+
+    const summary::title_optional& summary::
+    title () const
+    {
+      return this->title_;
+    }
+
+    summary::title_optional& summary::
+    title ()
+    {
+      return this->title_;
+    }
+
+    void summary::
+    title (const title_type& x)
+    {
+      this->title_.set (x);
+    }
+
+    void summary::
+    title (const title_optional& x)
+    {
+      this->title_ = x;
+    }
+
+    void summary::
+    title (::std::unique_ptr< title_type > x)
+    {
+      this->title_.set (std::move (x));
+    }
+
+    const summary::description_optional& summary::
+    description () const
+    {
+      return this->description_;
+    }
+
+    summary::description_optional& summary::
+    description ()
+    {
+      return this->description_;
+    }
+
+    void summary::
+    description (const description_type& x)
+    {
+      this->description_.set (x);
+    }
+
+    void summary::
+    description (const description_optional& x)
+    {
+      this->description_ = x;
+    }
+
+    void summary::
+    description (::std::unique_ptr< description_type > x)
+    {
+      this->description_.set (std::move (x));
+    }
+
+    const summary::version_optional& summary::
+    version () const
+    {
+      return this->version_;
+    }
+
+    summary::version_optional& summary::
+    version ()
+    {
+      return this->version_;
+    }
+
+    void summary::
+    version (const version_type& x)
+    {
+      this->version_.set (x);
+    }
+
+    void summary::
+    version (const version_optional& x)
+    {
+      this->version_ = x;
+    }
+
+    void summary::
+    version (::std::unique_ptr< version_type > x)
+    {
+      this->version_.set (std::move (x));
+    }
+
+    const summary::classification_optional& summary::
+    classification () const
+    {
+      return this->classification_;
+    }
+
+    summary::classification_optional& summary::
+    classification ()
+    {
+      return this->classification_;
+    }
+
+    void summary::
+    classification (const classification_type& x)
+    {
+      this->classification_.set (x);
+    }
+
+    void summary::
+    classification (const classification_optional& x)
+    {
+      this->classification_ = x;
+    }
+
+    void summary::
+    classification (::std::unique_ptr< classification_type > x)
+    {
+      this->classification_.set (std::move (x));
+    }
+
+    const summary::keywords_optional& summary::
+    keywords () const
+    {
+      return this->keywords_;
+    }
+
+    summary::keywords_optional& summary::
+    keywords ()
+    {
+      return this->keywords_;
+    }
+
+    void summary::
+    keywords (const keywords_type& x)
+    {
+      this->keywords_.set (x);
+    }
+
+    void summary::
+    keywords (const keywords_optional& x)
+    {
+      this->keywords_ = x;
+    }
+
+    void summary::
+    keywords (::std::unique_ptr< keywords_type > x)
+    {
+      this->keywords_.set (std::move (x));
+    }
+
+    const summary::domain_optional& summary::
+    domain () const
+    {
+      return this->domain_;
+    }
+
+    summary::domain_optional& summary::
+    domain ()
+    {
+      return this->domain_;
+    }
+
+    void summary::
+    domain (const domain_type& x)
+    {
+      this->domain_.set (x);
+    }
+
+    void summary::
+    domain (const domain_optional& x)
+    {
+      this->domain_ = x;
+    }
+
+    void summary::
+    domain (::std::unique_ptr< domain_type > x)
+    {
+      this->domain_.set (std::move (x));
+    }
+
+    const summary::limitations_optional& summary::
+    limitations () const
+    {
+      return this->limitations_;
+    }
+
+    summary::limitations_optional& summary::
+    limitations ()
+    {
+      return this->limitations_;
+    }
+
+    void summary::
+    limitations (const limitations_type& x)
+    {
+      this->limitations_.set (x);
+    }
+
+    void summary::
+    limitations (const limitations_optional& x)
+    {
+      this->limitations_ = x;
+    }
+
+    void summary::
+    limitations (::std::unique_ptr< limitations_type > x)
+    {
+      this->limitations_.set (std::move (x));
+    }
+
+
     // author
     // 
 
@@ -285,130 +499,6 @@ namespace pfc
     country (::std::unique_ptr< country_type > x)
     {
       this->country_.set (std::move (x));
-    }
-
-
-    // maps
-    // 
-
-    const maps::citation_maps_type& maps::
-    citation_maps () const
-    {
-      return this->citation_maps_.get ();
-    }
-
-    maps::citation_maps_type& maps::
-    citation_maps ()
-    {
-      return this->citation_maps_.get ();
-    }
-
-    void maps::
-    citation_maps (const citation_maps_type& x)
-    {
-      this->citation_maps_.set (x);
-    }
-
-    void maps::
-    citation_maps (::std::unique_ptr< citation_maps_type > x)
-    {
-      this->citation_maps_.set (std::move (x));
-    }
-
-    const maps::event_maps_type& maps::
-    event_maps () const
-    {
-      return this->event_maps_.get ();
-    }
-
-    maps::event_maps_type& maps::
-    event_maps ()
-    {
-      return this->event_maps_.get ();
-    }
-
-    void maps::
-    event_maps (const event_maps_type& x)
-    {
-      this->event_maps_.set (x);
-    }
-
-    void maps::
-    event_maps (::std::unique_ptr< event_maps_type > x)
-    {
-      this->event_maps_.set (std::move (x));
-    }
-
-    const maps::equipment_maps_type& maps::
-    equipment_maps () const
-    {
-      return this->equipment_maps_.get ();
-    }
-
-    maps::equipment_maps_type& maps::
-    equipment_maps ()
-    {
-      return this->equipment_maps_.get ();
-    }
-
-    void maps::
-    equipment_maps (const equipment_maps_type& x)
-    {
-      this->equipment_maps_.set (x);
-    }
-
-    void maps::
-    equipment_maps (::std::unique_ptr< equipment_maps_type > x)
-    {
-      this->equipment_maps_.set (std::move (x));
-    }
-
-    const maps::location_maps_type& maps::
-    location_maps () const
-    {
-      return this->location_maps_.get ();
-    }
-
-    maps::location_maps_type& maps::
-    location_maps ()
-    {
-      return this->location_maps_.get ();
-    }
-
-    void maps::
-    location_maps (const location_maps_type& x)
-    {
-      this->location_maps_.set (x);
-    }
-
-    void maps::
-    location_maps (::std::unique_ptr< location_maps_type > x)
-    {
-      this->location_maps_.set (std::move (x));
-    }
-
-    const maps::role_maps_type& maps::
-    role_maps () const
-    {
-      return this->role_maps_.get ();
-    }
-
-    maps::role_maps_type& maps::
-    role_maps ()
-    {
-      return this->role_maps_.get ();
-    }
-
-    void maps::
-    role_maps (const role_maps_type& x)
-    {
-      this->role_maps_.set (x);
-    }
-
-    void maps::
-    role_maps (::std::unique_ptr< role_maps_type > x)
-    {
-      this->role_maps_.set (std::move (x));
     }
 
 
@@ -3313,6 +3403,30 @@ namespace pfc
     // property_value
     // 
 
+    const property_value::name_type& property_value::
+    name () const
+    {
+      return this->name_.get ();
+    }
+
+    property_value::name_type& property_value::
+    name ()
+    {
+      return this->name_.get ();
+    }
+
+    void property_value::
+    name (const name_type& x)
+    {
+      this->name_.set (x);
+    }
+
+    void property_value::
+    name (::std::unique_ptr< name_type > x)
+    {
+      this->name_.set (std::move (x));
+    }
+
     const property_value::value_type& property_value::
     value () const
     {
@@ -3406,6 +3520,303 @@ namespace pfc
 {
   namespace schema
   {
+    // summary
+    //
+
+    summary::
+    summary ()
+    : ::xml_schema::type (),
+      title_ (this),
+      description_ (this),
+      version_ (this),
+      classification_ (this),
+      keywords_ (this),
+      domain_ (this),
+      limitations_ (this)
+    {
+    }
+
+    summary::
+    summary (const summary& x,
+             ::xml_schema::flags f,
+             ::xml_schema::container* c)
+    : ::xml_schema::type (x, f, c),
+      title_ (x.title_, f, this),
+      description_ (x.description_, f, this),
+      version_ (x.version_, f, this),
+      classification_ (x.classification_, f, this),
+      keywords_ (x.keywords_, f, this),
+      domain_ (x.domain_, f, this),
+      limitations_ (x.limitations_, f, this)
+    {
+    }
+
+    summary::
+    summary (const ::xercesc::DOMElement& e,
+             ::xml_schema::flags f,
+             ::xml_schema::container* c)
+    : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+      title_ (this),
+      description_ (this),
+      version_ (this),
+      classification_ (this),
+      keywords_ (this),
+      domain_ (this),
+      limitations_ (this)
+    {
+      if ((f & ::xml_schema::flags::base) == 0)
+      {
+        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+        this->parse (p, f);
+      }
+    }
+
+    void summary::
+    parse (::xsd::cxx::xml::dom::parser< char >& p,
+           ::xml_schema::flags f)
+    {
+      for (; p.more_content (); p.next_content (false))
+      {
+        const ::xercesc::DOMElement& i (p.cur_element ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+
+        // title
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "title",
+              "",
+              &::xsd::cxx::tree::factory_impl< title_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!this->title_)
+            {
+              ::std::unique_ptr< title_type > r (
+                dynamic_cast< title_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->title_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // description
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "description",
+              "",
+              &::xsd::cxx::tree::factory_impl< description_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!this->description_)
+            {
+              ::std::unique_ptr< description_type > r (
+                dynamic_cast< description_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->description_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // version
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "version",
+              "",
+              &::xsd::cxx::tree::factory_impl< version_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!this->version_)
+            {
+              ::std::unique_ptr< version_type > r (
+                dynamic_cast< version_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->version_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // classification
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "classification",
+              "",
+              &::xsd::cxx::tree::factory_impl< classification_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!this->classification_)
+            {
+              ::std::unique_ptr< classification_type > r (
+                dynamic_cast< classification_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->classification_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // keywords
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "keywords",
+              "",
+              &::xsd::cxx::tree::factory_impl< keywords_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!this->keywords_)
+            {
+              ::std::unique_ptr< keywords_type > r (
+                dynamic_cast< keywords_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->keywords_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // domain
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "domain",
+              "",
+              &::xsd::cxx::tree::factory_impl< domain_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!this->domain_)
+            {
+              ::std::unique_ptr< domain_type > r (
+                dynamic_cast< domain_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->domain_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        // limitations
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "limitations",
+              "",
+              &::xsd::cxx::tree::factory_impl< limitations_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!this->limitations_)
+            {
+              ::std::unique_ptr< limitations_type > r (
+                dynamic_cast< limitations_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->limitations_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
+
+        break;
+      }
+    }
+
+    summary* summary::
+    _clone (::xml_schema::flags f,
+            ::xml_schema::container* c) const
+    {
+      return new class summary (*this, f, c);
+    }
+
+    summary& summary::
+    operator= (const summary& x)
+    {
+      if (this != &x)
+      {
+        static_cast< ::xml_schema::type& > (*this) = x;
+        this->title_ = x.title_;
+        this->description_ = x.description_;
+        this->version_ = x.version_;
+        this->classification_ = x.classification_;
+        this->keywords_ = x.keywords_;
+        this->domain_ = x.domain_;
+        this->limitations_ = x.limitations_;
+      }
+
+      return *this;
+    }
+
+    summary::
+    ~summary ()
+    {
+    }
+
+    static
+    const ::xsd::cxx::tree::type_factory_initializer< 0, char, summary >
+    _xsd_summary_type_factory_init (
+      "summary",
+      "com:ara:pfc:training:1");
+
     // author
     //
 
@@ -3733,293 +4144,6 @@ namespace pfc
     const ::xsd::cxx::tree::type_factory_initializer< 0, char, author >
     _xsd_author_type_factory_init (
       "author",
-      "com:ara:pfc:training:1");
-
-    // maps
-    //
-
-    maps::
-    maps (const citation_maps_type& citation_maps,
-          const event_maps_type& event_maps,
-          const equipment_maps_type& equipment_maps,
-          const location_maps_type& location_maps,
-          const role_maps_type& role_maps)
-    : ::xml_schema::type (),
-      citation_maps_ (citation_maps, this),
-      event_maps_ (event_maps, this),
-      equipment_maps_ (equipment_maps, this),
-      location_maps_ (location_maps, this),
-      role_maps_ (role_maps, this)
-    {
-    }
-
-    maps::
-    maps (::std::unique_ptr< citation_maps_type > citation_maps,
-          ::std::unique_ptr< event_maps_type > event_maps,
-          ::std::unique_ptr< equipment_maps_type > equipment_maps,
-          ::std::unique_ptr< location_maps_type > location_maps,
-          ::std::unique_ptr< role_maps_type > role_maps)
-    : ::xml_schema::type (),
-      citation_maps_ (std::move (citation_maps), this),
-      event_maps_ (std::move (event_maps), this),
-      equipment_maps_ (std::move (equipment_maps), this),
-      location_maps_ (std::move (location_maps), this),
-      role_maps_ (std::move (role_maps), this)
-    {
-    }
-
-    maps::
-    maps (const maps& x,
-          ::xml_schema::flags f,
-          ::xml_schema::container* c)
-    : ::xml_schema::type (x, f, c),
-      citation_maps_ (x.citation_maps_, f, this),
-      event_maps_ (x.event_maps_, f, this),
-      equipment_maps_ (x.equipment_maps_, f, this),
-      location_maps_ (x.location_maps_, f, this),
-      role_maps_ (x.role_maps_, f, this)
-    {
-    }
-
-    maps::
-    maps (const ::xercesc::DOMElement& e,
-          ::xml_schema::flags f,
-          ::xml_schema::container* c)
-    : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
-      citation_maps_ (this),
-      event_maps_ (this),
-      equipment_maps_ (this),
-      location_maps_ (this),
-      role_maps_ (this)
-    {
-      if ((f & ::xml_schema::flags::base) == 0)
-      {
-        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
-        this->parse (p, f);
-      }
-    }
-
-    void maps::
-    parse (::xsd::cxx::xml::dom::parser< char >& p,
-           ::xml_schema::flags f)
-    {
-      for (; p.more_content (); p.next_content (false))
-      {
-        const ::xercesc::DOMElement& i (p.cur_element ());
-        const ::xsd::cxx::xml::qualified_name< char > n (
-          ::xsd::cxx::xml::dom::name< char > (i));
-
-        // citation_maps
-        //
-        {
-          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
-            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
-              "citation_maps",
-              "",
-              &::xsd::cxx::tree::factory_impl< citation_maps_type >,
-              false, false, i, n, f, this));
-
-          if (tmp.get () != 0)
-          {
-            if (!citation_maps_.present ())
-            {
-              ::std::unique_ptr< citation_maps_type > r (
-                dynamic_cast< citation_maps_type* > (tmp.get ()));
-
-              if (r.get ())
-                tmp.release ();
-              else
-                throw ::xsd::cxx::tree::not_derived< char > ();
-
-              this->citation_maps_.set (::std::move (r));
-              continue;
-            }
-          }
-        }
-
-        // event_maps
-        //
-        {
-          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
-            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
-              "event_maps",
-              "",
-              &::xsd::cxx::tree::factory_impl< event_maps_type >,
-              false, false, i, n, f, this));
-
-          if (tmp.get () != 0)
-          {
-            if (!event_maps_.present ())
-            {
-              ::std::unique_ptr< event_maps_type > r (
-                dynamic_cast< event_maps_type* > (tmp.get ()));
-
-              if (r.get ())
-                tmp.release ();
-              else
-                throw ::xsd::cxx::tree::not_derived< char > ();
-
-              this->event_maps_.set (::std::move (r));
-              continue;
-            }
-          }
-        }
-
-        // equipment_maps
-        //
-        {
-          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
-            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
-              "equipment_maps",
-              "",
-              &::xsd::cxx::tree::factory_impl< equipment_maps_type >,
-              false, false, i, n, f, this));
-
-          if (tmp.get () != 0)
-          {
-            if (!equipment_maps_.present ())
-            {
-              ::std::unique_ptr< equipment_maps_type > r (
-                dynamic_cast< equipment_maps_type* > (tmp.get ()));
-
-              if (r.get ())
-                tmp.release ();
-              else
-                throw ::xsd::cxx::tree::not_derived< char > ();
-
-              this->equipment_maps_.set (::std::move (r));
-              continue;
-            }
-          }
-        }
-
-        // location_maps
-        //
-        {
-          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
-            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
-              "location_maps",
-              "",
-              &::xsd::cxx::tree::factory_impl< location_maps_type >,
-              false, false, i, n, f, this));
-
-          if (tmp.get () != 0)
-          {
-            if (!location_maps_.present ())
-            {
-              ::std::unique_ptr< location_maps_type > r (
-                dynamic_cast< location_maps_type* > (tmp.get ()));
-
-              if (r.get ())
-                tmp.release ();
-              else
-                throw ::xsd::cxx::tree::not_derived< char > ();
-
-              this->location_maps_.set (::std::move (r));
-              continue;
-            }
-          }
-        }
-
-        // role_maps
-        //
-        {
-          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
-            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
-              "role_maps",
-              "",
-              &::xsd::cxx::tree::factory_impl< role_maps_type >,
-              false, false, i, n, f, this));
-
-          if (tmp.get () != 0)
-          {
-            if (!role_maps_.present ())
-            {
-              ::std::unique_ptr< role_maps_type > r (
-                dynamic_cast< role_maps_type* > (tmp.get ()));
-
-              if (r.get ())
-                tmp.release ();
-              else
-                throw ::xsd::cxx::tree::not_derived< char > ();
-
-              this->role_maps_.set (::std::move (r));
-              continue;
-            }
-          }
-        }
-
-        break;
-      }
-
-      if (!citation_maps_.present ())
-      {
-        throw ::xsd::cxx::tree::expected_element< char > (
-          "citation_maps",
-          "");
-      }
-
-      if (!event_maps_.present ())
-      {
-        throw ::xsd::cxx::tree::expected_element< char > (
-          "event_maps",
-          "");
-      }
-
-      if (!equipment_maps_.present ())
-      {
-        throw ::xsd::cxx::tree::expected_element< char > (
-          "equipment_maps",
-          "");
-      }
-
-      if (!location_maps_.present ())
-      {
-        throw ::xsd::cxx::tree::expected_element< char > (
-          "location_maps",
-          "");
-      }
-
-      if (!role_maps_.present ())
-      {
-        throw ::xsd::cxx::tree::expected_element< char > (
-          "role_maps",
-          "");
-      }
-    }
-
-    maps* maps::
-    _clone (::xml_schema::flags f,
-            ::xml_schema::container* c) const
-    {
-      return new class maps (*this, f, c);
-    }
-
-    maps& maps::
-    operator= (const maps& x)
-    {
-      if (this != &x)
-      {
-        static_cast< ::xml_schema::type& > (*this) = x;
-        this->citation_maps_ = x.citation_maps_;
-        this->event_maps_ = x.event_maps_;
-        this->equipment_maps_ = x.equipment_maps_;
-        this->location_maps_ = x.location_maps_;
-        this->role_maps_ = x.role_maps_;
-      }
-
-      return *this;
-    }
-
-    maps::
-    ~maps ()
-    {
-    }
-
-    static
-    const ::xsd::cxx::tree::type_factory_initializer< 0, char, maps >
-    _xsd_maps_type_factory_init (
-      "maps",
       "com:ara:pfc:training:1");
 
     // equipment_definition_list
@@ -11648,15 +11772,19 @@ namespace pfc
     //
 
     property_value::
-    property_value (const value_type& value)
+    property_value (const name_type& name,
+                    const value_type& value)
     : ::xml_schema::type (),
+      name_ (name, this),
       value_ (value, this)
     {
     }
 
     property_value::
-    property_value (::std::unique_ptr< value_type > value)
+    property_value (::std::unique_ptr< name_type > name,
+                    ::std::unique_ptr< value_type > value)
     : ::xml_schema::type (),
+      name_ (std::move (name), this),
       value_ (std::move (value), this)
     {
     }
@@ -11666,6 +11794,7 @@ namespace pfc
                     ::xml_schema::flags f,
                     ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
+      name_ (x.name_, f, this),
       value_ (x.value_, f, this)
     {
     }
@@ -11675,6 +11804,7 @@ namespace pfc
                     ::xml_schema::flags f,
                     ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+      name_ (this),
       value_ (this)
     {
       if ((f & ::xml_schema::flags::base) == 0)
@@ -11693,6 +11823,34 @@ namespace pfc
         const ::xercesc::DOMElement& i (p.cur_element ());
         const ::xsd::cxx::xml::qualified_name< char > n (
           ::xsd::cxx::xml::dom::name< char > (i));
+
+        // name
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "name",
+              "",
+              &::xsd::cxx::tree::factory_impl< name_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!name_.present ())
+            {
+              ::std::unique_ptr< name_type > r (
+                dynamic_cast< name_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->name_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
 
         // value
         //
@@ -11725,6 +11883,13 @@ namespace pfc
         break;
       }
 
+      if (!name_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "name",
+          "");
+      }
+
       if (!value_.present ())
       {
         throw ::xsd::cxx::tree::expected_element< char > (
@@ -11746,6 +11911,7 @@ namespace pfc
       if (this != &x)
       {
         static_cast< ::xml_schema::type& > (*this) = x;
+        this->name_ = x.name_;
         this->value_ = x.value_;
       }
 
@@ -11936,6 +12102,93 @@ namespace pfc
   namespace schema
   {
     ::std::ostream&
+    operator<< (::std::ostream& o, const summary& i)
+    {
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        if (i.title ())
+        {
+          o << ::std::endl << "title: ";
+          om.insert (o, *i.title ());
+        }
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        if (i.description ())
+        {
+          o << ::std::endl << "description: ";
+          om.insert (o, *i.description ());
+        }
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        if (i.version ())
+        {
+          o << ::std::endl << "version: ";
+          om.insert (o, *i.version ());
+        }
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        if (i.classification ())
+        {
+          o << ::std::endl << "classification: ";
+          om.insert (o, *i.classification ());
+        }
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        if (i.keywords ())
+        {
+          o << ::std::endl << "keywords: ";
+          om.insert (o, *i.keywords ());
+        }
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        if (i.domain ())
+        {
+          o << ::std::endl << "domain: ";
+          om.insert (o, *i.domain ());
+        }
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        if (i.limitations ())
+        {
+          o << ::std::endl << "limitations: ";
+          om.insert (o, *i.limitations ());
+        }
+      }
+
+      return o;
+    }
+
+    static
+    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, summary >
+    _xsd_summary_std_ostream_init;
+
+    ::std::ostream&
     operator<< (::std::ostream& o, const author& i)
     {
       {
@@ -12032,56 +12285,6 @@ namespace pfc
     static
     const ::xsd::cxx::tree::std_ostream_initializer< 0, char, author >
     _xsd_author_std_ostream_init;
-
-    ::std::ostream&
-    operator<< (::std::ostream& o, const maps& i)
-    {
-      {
-        ::xsd::cxx::tree::std_ostream_map< char >& om (
-          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
-
-        o << ::std::endl << "citation_maps: ";
-        om.insert (o, i.citation_maps ());
-      }
-
-      {
-        ::xsd::cxx::tree::std_ostream_map< char >& om (
-          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
-
-        o << ::std::endl << "event_maps: ";
-        om.insert (o, i.event_maps ());
-      }
-
-      {
-        ::xsd::cxx::tree::std_ostream_map< char >& om (
-          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
-
-        o << ::std::endl << "equipment_maps: ";
-        om.insert (o, i.equipment_maps ());
-      }
-
-      {
-        ::xsd::cxx::tree::std_ostream_map< char >& om (
-          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
-
-        o << ::std::endl << "location_maps: ";
-        om.insert (o, i.location_maps ());
-      }
-
-      {
-        ::xsd::cxx::tree::std_ostream_map< char >& om (
-          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
-
-        o << ::std::endl << "role_maps: ";
-        om.insert (o, i.role_maps ());
-      }
-
-      return o;
-    }
-
-    static
-    const ::xsd::cxx::tree::std_ostream_initializer< 0, char, maps >
-    _xsd_maps_std_ostream_init;
 
     ::std::ostream&
     operator<< (::std::ostream& o, const equipment_definition_list& i)
@@ -13562,6 +13765,14 @@ namespace pfc
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
 
+        o << ::std::endl << "name: ";
+        om.insert (o, i.name ());
+      }
+
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
         o << ::std::endl << "value: ";
         om.insert (o, i.value ());
       }
@@ -13625,6 +13836,201 @@ namespace pfc
 {
   namespace schema
   {
+    void
+    operator<< (::xercesc::DOMElement& e, const summary& i)
+    {
+      e << static_cast< const ::xml_schema::type& > (i);
+
+      // title
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        if (i.title ())
+        {
+          const summary::title_type& x (*i.title ());
+          if (typeid (summary::title_type) == typeid (x))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "title",
+                e));
+
+            s << x;
+          }
+          else
+            tsm.serialize (
+              "title",
+              "",
+              false, false, e, x);
+        }
+      }
+
+      // description
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        if (i.description ())
+        {
+          const summary::description_type& x (*i.description ());
+          if (typeid (summary::description_type) == typeid (x))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "description",
+                e));
+
+            s << x;
+          }
+          else
+            tsm.serialize (
+              "description",
+              "",
+              false, false, e, x);
+        }
+      }
+
+      // version
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        if (i.version ())
+        {
+          const summary::version_type& x (*i.version ());
+          if (typeid (summary::version_type) == typeid (x))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "version",
+                e));
+
+            s << x;
+          }
+          else
+            tsm.serialize (
+              "version",
+              "",
+              false, false, e, x);
+        }
+      }
+
+      // classification
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        if (i.classification ())
+        {
+          const summary::classification_type& x (*i.classification ());
+          if (typeid (summary::classification_type) == typeid (x))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "classification",
+                e));
+
+            s << x;
+          }
+          else
+            tsm.serialize (
+              "classification",
+              "",
+              false, false, e, x);
+        }
+      }
+
+      // keywords
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        if (i.keywords ())
+        {
+          const summary::keywords_type& x (*i.keywords ());
+          if (typeid (summary::keywords_type) == typeid (x))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "keywords",
+                e));
+
+            s << x;
+          }
+          else
+            tsm.serialize (
+              "keywords",
+              "",
+              false, false, e, x);
+        }
+      }
+
+      // domain
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        if (i.domain ())
+        {
+          const summary::domain_type& x (*i.domain ());
+          if (typeid (summary::domain_type) == typeid (x))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "domain",
+                e));
+
+            s << x;
+          }
+          else
+            tsm.serialize (
+              "domain",
+              "",
+              false, false, e, x);
+        }
+      }
+
+      // limitations
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        if (i.limitations ())
+        {
+          const summary::limitations_type& x (*i.limitations ());
+          if (typeid (summary::limitations_type) == typeid (x))
+          {
+            ::xercesc::DOMElement& s (
+              ::xsd::cxx::xml::dom::create_element (
+                "limitations",
+                e));
+
+            s << x;
+          }
+          else
+            tsm.serialize (
+              "limitations",
+              "",
+              false, false, e, x);
+        }
+      }
+    }
+
+    static
+    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, summary >
+    _xsd_summary_type_serializer_init (
+      "summary",
+      "com:ara:pfc:training:1");
+
+
     void
     operator<< (::xercesc::DOMElement& e, const author& i)
     {
@@ -13843,134 +14249,6 @@ namespace pfc
     const ::xsd::cxx::tree::type_serializer_initializer< 0, char, author >
     _xsd_author_type_serializer_init (
       "author",
-      "com:ara:pfc:training:1");
-
-
-    void
-    operator<< (::xercesc::DOMElement& e, const maps& i)
-    {
-      e << static_cast< const ::xml_schema::type& > (i);
-
-      // citation_maps
-      //
-      {
-        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
-          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
-
-        const maps::citation_maps_type& x (i.citation_maps ());
-        if (typeid (maps::citation_maps_type) == typeid (x))
-        {
-          ::xercesc::DOMElement& s (
-            ::xsd::cxx::xml::dom::create_element (
-              "citation_maps",
-              e));
-
-          s << x;
-        }
-        else
-          tsm.serialize (
-            "citation_maps",
-            "",
-            false, false, e, x);
-      }
-
-      // event_maps
-      //
-      {
-        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
-          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
-
-        const maps::event_maps_type& x (i.event_maps ());
-        if (typeid (maps::event_maps_type) == typeid (x))
-        {
-          ::xercesc::DOMElement& s (
-            ::xsd::cxx::xml::dom::create_element (
-              "event_maps",
-              e));
-
-          s << x;
-        }
-        else
-          tsm.serialize (
-            "event_maps",
-            "",
-            false, false, e, x);
-      }
-
-      // equipment_maps
-      //
-      {
-        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
-          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
-
-        const maps::equipment_maps_type& x (i.equipment_maps ());
-        if (typeid (maps::equipment_maps_type) == typeid (x))
-        {
-          ::xercesc::DOMElement& s (
-            ::xsd::cxx::xml::dom::create_element (
-              "equipment_maps",
-              e));
-
-          s << x;
-        }
-        else
-          tsm.serialize (
-            "equipment_maps",
-            "",
-            false, false, e, x);
-      }
-
-      // location_maps
-      //
-      {
-        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
-          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
-
-        const maps::location_maps_type& x (i.location_maps ());
-        if (typeid (maps::location_maps_type) == typeid (x))
-        {
-          ::xercesc::DOMElement& s (
-            ::xsd::cxx::xml::dom::create_element (
-              "location_maps",
-              e));
-
-          s << x;
-        }
-        else
-          tsm.serialize (
-            "location_maps",
-            "",
-            false, false, e, x);
-      }
-
-      // role_maps
-      //
-      {
-        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
-          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
-
-        const maps::role_maps_type& x (i.role_maps ());
-        if (typeid (maps::role_maps_type) == typeid (x))
-        {
-          ::xercesc::DOMElement& s (
-            ::xsd::cxx::xml::dom::create_element (
-              "role_maps",
-              e));
-
-          s << x;
-        }
-        else
-          tsm.serialize (
-            "role_maps",
-            "",
-            false, false, e, x);
-      }
-    }
-
-    static
-    const ::xsd::cxx::tree::type_serializer_initializer< 0, char, maps >
-    _xsd_maps_type_serializer_init (
-      "maps",
       "com:ara:pfc:training:1");
 
 
@@ -17236,6 +17514,29 @@ namespace pfc
     operator<< (::xercesc::DOMElement& e, const property_value& i)
     {
       e << static_cast< const ::xml_schema::type& > (i);
+
+      // name
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const property_value::name_type& x (i.name ());
+        if (typeid (property_value::name_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "name",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "name",
+            "",
+            false, false, e, x);
+      }
 
       // value
       //

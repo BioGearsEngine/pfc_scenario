@@ -390,6 +390,7 @@ struct EquipmentMap : public QObject {
   Q_PROPERTY(int Scene MEMBER fk_scene)
   Q_PROPERTY(int Equipment MEMBER fk_equipment)
   Q_PROPERTY(QString name MEMBER name)
+  Q_PROPERTY(QString p_names MEMBER property_names)
   Q_PROPERTY(QString values MEMBER property_values)
   Q_PROPERTY(QString notes MEMBER notes)
 public:
@@ -397,6 +398,7 @@ public:
   int32_t fk_scene = 1;
   int32_t fk_equipment = 1;
   QString name = "";
+  QString property_names = "";
   QString property_values = "";
   QString notes;
 ;
@@ -417,6 +419,7 @@ public:
       && fk_scene == rhs.fk_scene
       && fk_equipment == rhs.fk_equipment
       && name == rhs.name
+      && property_names == rhs.property_names
       && property_values == rhs.property_values
       && notes == rhs.notes;
   }
@@ -431,6 +434,7 @@ public:
     fk_scene = rhs.fk_scene;;
     fk_equipment = rhs.fk_equipment;
     name = rhs.name;
+    property_names = rhs.property_names;
     property_values = rhs.property_values;
     notes = rhs.notes;
   }

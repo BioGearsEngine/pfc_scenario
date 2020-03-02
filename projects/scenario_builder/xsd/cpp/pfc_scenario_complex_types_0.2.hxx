@@ -260,8 +260,8 @@ namespace pfc
 {
   namespace schema
   {
+    class summary;
     class author;
-    class maps;
     class equipment_definition_list;
     class equipment;
     class trauma_definition_list;
@@ -332,6 +332,195 @@ namespace pfc
 {
   namespace schema
   {
+    class summary: public ::xml_schema::type
+    {
+      public:
+      // title
+      //
+      typedef ::xml_schema::string title_type;
+      typedef ::xsd::cxx::tree::optional< title_type > title_optional;
+      typedef ::xsd::cxx::tree::traits< title_type, char > title_traits;
+
+      const title_optional&
+      title () const;
+
+      title_optional&
+      title ();
+
+      void
+      title (const title_type& x);
+
+      void
+      title (const title_optional& x);
+
+      void
+      title (::std::unique_ptr< title_type > p);
+
+      // description
+      //
+      typedef ::xml_schema::string description_type;
+      typedef ::xsd::cxx::tree::optional< description_type > description_optional;
+      typedef ::xsd::cxx::tree::traits< description_type, char > description_traits;
+
+      const description_optional&
+      description () const;
+
+      description_optional&
+      description ();
+
+      void
+      description (const description_type& x);
+
+      void
+      description (const description_optional& x);
+
+      void
+      description (::std::unique_ptr< description_type > p);
+
+      // version
+      //
+      typedef ::xml_schema::string version_type;
+      typedef ::xsd::cxx::tree::optional< version_type > version_optional;
+      typedef ::xsd::cxx::tree::traits< version_type, char > version_traits;
+
+      const version_optional&
+      version () const;
+
+      version_optional&
+      version ();
+
+      void
+      version (const version_type& x);
+
+      void
+      version (const version_optional& x);
+
+      void
+      version (::std::unique_ptr< version_type > p);
+
+      // classification
+      //
+      typedef ::xml_schema::string classification_type;
+      typedef ::xsd::cxx::tree::optional< classification_type > classification_optional;
+      typedef ::xsd::cxx::tree::traits< classification_type, char > classification_traits;
+
+      const classification_optional&
+      classification () const;
+
+      classification_optional&
+      classification ();
+
+      void
+      classification (const classification_type& x);
+
+      void
+      classification (const classification_optional& x);
+
+      void
+      classification (::std::unique_ptr< classification_type > p);
+
+      // keywords
+      //
+      typedef ::xml_schema::string keywords_type;
+      typedef ::xsd::cxx::tree::optional< keywords_type > keywords_optional;
+      typedef ::xsd::cxx::tree::traits< keywords_type, char > keywords_traits;
+
+      const keywords_optional&
+      keywords () const;
+
+      keywords_optional&
+      keywords ();
+
+      void
+      keywords (const keywords_type& x);
+
+      void
+      keywords (const keywords_optional& x);
+
+      void
+      keywords (::std::unique_ptr< keywords_type > p);
+
+      // domain
+      //
+      typedef ::xml_schema::string domain_type;
+      typedef ::xsd::cxx::tree::optional< domain_type > domain_optional;
+      typedef ::xsd::cxx::tree::traits< domain_type, char > domain_traits;
+
+      const domain_optional&
+      domain () const;
+
+      domain_optional&
+      domain ();
+
+      void
+      domain (const domain_type& x);
+
+      void
+      domain (const domain_optional& x);
+
+      void
+      domain (::std::unique_ptr< domain_type > p);
+
+      // limitations
+      //
+      typedef ::xml_schema::string limitations_type;
+      typedef ::xsd::cxx::tree::optional< limitations_type > limitations_optional;
+      typedef ::xsd::cxx::tree::traits< limitations_type, char > limitations_traits;
+
+      const limitations_optional&
+      limitations () const;
+
+      limitations_optional&
+      limitations ();
+
+      void
+      limitations (const limitations_type& x);
+
+      void
+      limitations (const limitations_optional& x);
+
+      void
+      limitations (::std::unique_ptr< limitations_type > p);
+
+      // Constructors.
+      //
+      summary ();
+
+      summary (const ::xercesc::DOMElement& e,
+               ::xml_schema::flags f = 0,
+               ::xml_schema::container* c = 0);
+
+      summary (const summary& x,
+               ::xml_schema::flags f = 0,
+               ::xml_schema::container* c = 0);
+
+      virtual summary*
+      _clone (::xml_schema::flags f = 0,
+              ::xml_schema::container* c = 0) const;
+
+      summary&
+      operator= (const summary& x);
+
+      virtual 
+      ~summary ();
+
+      // Implementation.
+      //
+      protected:
+      void
+      parse (::xsd::cxx::xml::dom::parser< char >&,
+             ::xml_schema::flags);
+
+      protected:
+      title_optional title_;
+      description_optional description_;
+      version_optional version_;
+      classification_optional classification_;
+      keywords_optional keywords_;
+      domain_optional domain_;
+      limitations_optional limitations_;
+    };
+
     class author: public ::xml_schema::type
     {
       public:
@@ -541,141 +730,6 @@ namespace pfc
       zip_optional zip_;
       state_optional state_;
       country_optional country_;
-    };
-
-    class maps: public ::xml_schema::type
-    {
-      public:
-      // citation_maps
-      //
-      typedef ::xml_schema::string citation_maps_type;
-      typedef ::xsd::cxx::tree::traits< citation_maps_type, char > citation_maps_traits;
-
-      const citation_maps_type&
-      citation_maps () const;
-
-      citation_maps_type&
-      citation_maps ();
-
-      void
-      citation_maps (const citation_maps_type& x);
-
-      void
-      citation_maps (::std::unique_ptr< citation_maps_type > p);
-
-      // event_maps
-      //
-      typedef ::xml_schema::string event_maps_type;
-      typedef ::xsd::cxx::tree::traits< event_maps_type, char > event_maps_traits;
-
-      const event_maps_type&
-      event_maps () const;
-
-      event_maps_type&
-      event_maps ();
-
-      void
-      event_maps (const event_maps_type& x);
-
-      void
-      event_maps (::std::unique_ptr< event_maps_type > p);
-
-      // equipment_maps
-      //
-      typedef ::xml_schema::string equipment_maps_type;
-      typedef ::xsd::cxx::tree::traits< equipment_maps_type, char > equipment_maps_traits;
-
-      const equipment_maps_type&
-      equipment_maps () const;
-
-      equipment_maps_type&
-      equipment_maps ();
-
-      void
-      equipment_maps (const equipment_maps_type& x);
-
-      void
-      equipment_maps (::std::unique_ptr< equipment_maps_type > p);
-
-      // location_maps
-      //
-      typedef ::xml_schema::string location_maps_type;
-      typedef ::xsd::cxx::tree::traits< location_maps_type, char > location_maps_traits;
-
-      const location_maps_type&
-      location_maps () const;
-
-      location_maps_type&
-      location_maps ();
-
-      void
-      location_maps (const location_maps_type& x);
-
-      void
-      location_maps (::std::unique_ptr< location_maps_type > p);
-
-      // role_maps
-      //
-      typedef ::xml_schema::string role_maps_type;
-      typedef ::xsd::cxx::tree::traits< role_maps_type, char > role_maps_traits;
-
-      const role_maps_type&
-      role_maps () const;
-
-      role_maps_type&
-      role_maps ();
-
-      void
-      role_maps (const role_maps_type& x);
-
-      void
-      role_maps (::std::unique_ptr< role_maps_type > p);
-
-      // Constructors.
-      //
-      maps (const citation_maps_type&,
-            const event_maps_type&,
-            const equipment_maps_type&,
-            const location_maps_type&,
-            const role_maps_type&);
-
-      maps (::std::unique_ptr< citation_maps_type >,
-            ::std::unique_ptr< event_maps_type >,
-            ::std::unique_ptr< equipment_maps_type >,
-            ::std::unique_ptr< location_maps_type >,
-            ::std::unique_ptr< role_maps_type >);
-
-      maps (const ::xercesc::DOMElement& e,
-            ::xml_schema::flags f = 0,
-            ::xml_schema::container* c = 0);
-
-      maps (const maps& x,
-            ::xml_schema::flags f = 0,
-            ::xml_schema::container* c = 0);
-
-      virtual maps*
-      _clone (::xml_schema::flags f = 0,
-              ::xml_schema::container* c = 0) const;
-
-      maps&
-      operator= (const maps& x);
-
-      virtual 
-      ~maps ();
-
-      // Implementation.
-      //
-      protected:
-      void
-      parse (::xsd::cxx::xml::dom::parser< char >&,
-             ::xml_schema::flags);
-
-      protected:
-      ::xsd::cxx::tree::one< citation_maps_type > citation_maps_;
-      ::xsd::cxx::tree::one< event_maps_type > event_maps_;
-      ::xsd::cxx::tree::one< equipment_maps_type > equipment_maps_;
-      ::xsd::cxx::tree::one< location_maps_type > location_maps_;
-      ::xsd::cxx::tree::one< role_maps_type > role_maps_;
     };
 
     class equipment_definition_list: public ::xml_schema::type
@@ -4550,6 +4604,23 @@ namespace pfc
     class property_value: public ::xml_schema::type
     {
       public:
+      // name
+      //
+      typedef ::xml_schema::string name_type;
+      typedef ::xsd::cxx::tree::traits< name_type, char > name_traits;
+
+      const name_type&
+      name () const;
+
+      name_type&
+      name ();
+
+      void
+      name (const name_type& x);
+
+      void
+      name (::std::unique_ptr< name_type > p);
+
       // value
       //
       typedef ::xml_schema::string value_type;
@@ -4569,9 +4640,11 @@ namespace pfc
 
       // Constructors.
       //
-      property_value (const value_type&);
+      property_value (const name_type&,
+                      const value_type&);
 
-      property_value (::std::unique_ptr< value_type >);
+      property_value (::std::unique_ptr< name_type >,
+                      ::std::unique_ptr< value_type >);
 
       property_value (const ::xercesc::DOMElement& e,
                       ::xml_schema::flags f = 0,
@@ -4599,6 +4672,7 @@ namespace pfc
              ::xml_schema::flags);
 
       protected:
+      ::xsd::cxx::tree::one< name_type > name_;
       ::xsd::cxx::tree::one< value_type > value_;
     };
 
@@ -4686,10 +4760,10 @@ namespace pfc
   namespace schema
   {
     ::std::ostream&
-    operator<< (::std::ostream&, const author&);
+    operator<< (::std::ostream&, const summary&);
 
     ::std::ostream&
-    operator<< (::std::ostream&, const maps&);
+    operator<< (::std::ostream&, const author&);
 
     ::std::ostream&
     operator<< (::std::ostream&, const equipment_definition_list&);
@@ -4863,10 +4937,10 @@ namespace pfc
   namespace schema
   {
     void
-    operator<< (::xercesc::DOMElement&, const author&);
+    operator<< (::xercesc::DOMElement&, const summary&);
 
     void
-    operator<< (::xercesc::DOMElement&, const maps&);
+    operator<< (::xercesc::DOMElement&, const author&);
 
     void
     operator<< (::xercesc::DOMElement&, const equipment_definition_list&);

@@ -378,6 +378,7 @@ signals:
   void sceneUpdated(int index);
   void treatmentUpdated(int index);
 
+  void refresh();
 private:
   bool open();
 

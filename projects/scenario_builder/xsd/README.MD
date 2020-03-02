@@ -39,3 +39,5 @@ xsd.exe cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-al
 ## References
 All MSDL files are from the [Simulation Interoperability Standards Organization](https://www.sisostds.org/Schemas.aspx) (SIS)
 MSDL can be obtained [here](https://www.sisostds.org/DigitalLibrary.aspx?Command=Core_Download&EntryId=46997) [2019-06-01]
+
+set PATH=%PATH%;D:\remotes\sed-stash\biogears\external\windows-vc15-amd64\bin\

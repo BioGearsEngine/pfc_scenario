@@ -25,6 +25,15 @@
 #include <QSqlQuery>
 #include <fstream>
 
+template <typename CharT, typename TraitsT = std::char_traits<CharT>>
+class vectorwrapbuf : public std::basic_streambuf<CharT, TraitsT> {
+public:
+  vectorwrapbuf(std::vector<CharT>& vec)
+  {
+    setg(vec.data(), vec.data(), vec.data() + vec.size());
+  }
+};
+
 namespace pfc {
 
 xml_schema::date get_now();
@@ -49,7 +58,7 @@ bool Serializer::save() const
     filename = filename.replace(" ", "_") + ".pfc";
     return save_as(filename);
   }
-  filename = get_property("PFC_SCENARIO.pfc");
+  filename = "PFC_SCENARIO.pfc";
   return save_as(filename);
 }
 //-------------------------------------------------------------------------------
@@ -115,10 +124,38 @@ bool Serializer::save_as(const QString& filename) const
   std::cout << text_ptr << "\n";
   mz_zip_writer_add_buffer(writer, (void*)text_ptr.c_str(), (int32_t)text_ptr.length(), &file_info);
 
+  std::vector<char const*> schemas = {
+    "xsd/pfc_scenario_0.2.xsd",
+    "xsd/pfc_scenario_complex_types_0.2.xsd",
+    "xsd/msdl_simple_types_1.0.0.xsd",
+    "xsd/msdl_complex_types_1.0.0.xsd",
+    "xsd/msdl_complex_types_1.0.0.xsd",
+    "xsd/msdl_codes_1.0.0.xsd",
+    "xsd/military_scenario_1.0.0.xsd",
+    "xsd/extern/jc3iedm_meterological.xsd",
+    "xsd/extern/jc3iedm-3.1-codes-20061208.xsd",
+    "xsd/extern/model_id_v2006_final.xsd"
+  };
+  std::string file_contents;
+  for (auto& schema : schemas) {
+    std::fstream fileIO{ schema };
+    if (fileIO.is_open()) {
+      fileIO.seekg(0, std::ios::end);
+      file_contents.reserve(fileIO.tellg());
+      fileIO.seekg(0, std::ios::beg);
+
+      file_contents.assign(std::istreambuf_iterator<char>(fileIO),
+                           std::istreambuf_iterator<char>());
+      file_info.filename = schema;
+      file_info.uncompressed_size = file_contents.length();
+      mz_zip_writer_add_buffer(writer, (void*)file_contents.c_str(), (int32_t)file_contents.length(), &file_info);
+    }
+  }
+
   mz_zip_writer_close(writer);
   mz_zip_writer_delete(&writer);
 
-  return record_source_file(filename);
+  return update_property("archive_file", filename.toStdString());
 }
 //-------------------------------------------------------------------------------
 bool Serializer::load(const QString& filename)
@@ -135,7 +172,6 @@ bool Serializer::load(const QString& filename)
   uint32_t ratio = 0;
   int16_t level = 0;
   int32_t err = MZ_OK;
-  struct tm tmu_date;
   const char* string_method = NULL;
   char crypt = ' ';
   void* reader = NULL;
@@ -145,101 +181,166 @@ bool Serializer::load(const QString& filename)
   if (err != MZ_OK) {
     qInfo() << QString("Error %1 opening archive %2\n").arg(err).arg(filename);
     mz_zip_reader_delete(&reader);
+    _db->refresh();
     return err;
   }
 
-  err = mz_zip_reader_goto_first_entry(reader);
+  //if (mz_zip_reader_locate_entry(reader, "Scenario.msdl.xml", 1) == MZ_OK) {
+  //  if (mz_zip_reader_entry_get_info(reader, &file_info) == MZ_OK && mz_zip_reader_entry_open(reader) == MZ_OK) {
+  //    //NOTE: At this point I want to pull all scenarios in to memory for parsing.  Then Close down the archive
+  //    //At the time of this function being written the average size of an archive was < 1MB, but it is easy to invision a world
+  //    //Where they grow to < 1GB.  However we would need to refactor a great many things reguarding file io to handle such an occurance.
 
-  if (err != MZ_OK && err != MZ_END_OF_LIST) {
-    printf("Error %" PRId32 " going to first entry in archive\n", err);
+  //    //If Scenarios grow beyond 50Mbs concider streamed reading and background loading to speed up launching of the application.
+
+  //    std::vector<char> buffer;
+  //    buffer.resize(file_info->uncompressed_size);
+  //    auto bytes_read = mz_zip_reader_entry_read(reader, &buffer[0], file_info->uncompressed_size);
+  //    vectorwrapbuf<char> schema_buffer{ buffer };
+
+  //    std::istream i_stream(&schema_buffer);
+  //    mz_zip_reader_entry_close(&reader);
+  //    try { // If the parsing fails this prints out every error
+  //      auto msdl_schema = msdl_1::MilitaryScenario(i_stream);
+  //      auto scenario_id = msdl_schema->ScenarioID();
+
+  //      auto name = scenario_id.name();
+  //      auto domain = scenario_id.applicationDomain();
+  //      auto version = scenario_id.version();
+  //      auto security = scenario_id.securityClassification();
+  //      auto description = scenario_id.description();
+
+  //      auto success = update_property("scenario_title", name);
+
+  //      if (domain.present()) {
+  //        success &= update_property("scenario_domain", *domain);
+  //      }
+  //      success &= update_property("scenario_version", version);
+  //      success &= update_property("scenario_security", security);
+  //      success &= update_property("scenario_description", description);
+
+  //    } catch (const xml_schema::exception& e) {
+  //      std::cout << e << '\n';
+  //      _db->refresh();
+  //      mz_zip_reader_delete(&reader); //Removing the Reader if this moves below the try remember you must always cal this function before leaving this function
+  //      return false;
+  //    }
+  //  }
+  //}
+  if (mz_zip_reader_locate_entry(reader, "Scenario.pfc.xml", 1) == MZ_OK) {
+    if (mz_zip_reader_entry_get_info(reader, &file_info) == MZ_OK && mz_zip_reader_entry_open(reader) == MZ_OK) {
+      //NOTE: At this point I want to pull all scenarios in to memory for parsing.  Then Close down the archive
+      //At the time of this function being written the average size of an archive was < 1MB, but it is easy to invision a world
+      //Where they grow to < 1GB.  However we would need to refactor a great many things reguarding file io to handle such an occurance.
+
+      //If Scenarios grow beyond 50Mbs concider streamed reading and background loading to speed up launching of the application.
+
+      std::vector<char> buffer;
+      buffer.resize(file_info->uncompressed_size);
+      auto bytes_read = mz_zip_reader_entry_read(reader, &buffer[0], file_info->uncompressed_size);
+      vectorwrapbuf<char> schema_buffer{ buffer };
+
+      std::istream i_stream(&schema_buffer);
+
+      mz_zip_reader_entry_close(&reader);
+      try { // If the parsing fails this prints out every error
+        auto scenario_schema = pfc::schema::Scenario(i_stream);
+        bool successful = false;
+        scenario_schema = pfc::schema::PFC::load_authors(std::move(scenario_schema), *_db, successful);
+        if (successful) {
+          update_property("scenario_title", scenario_schema->summary().title()->c_str());
+          update_property("scenario_version", scenario_schema->summary().version()->c_str());
+          update_property("scenario_security", scenario_schema->summary().classification()->c_str());
+          update_property("scenario_description", scenario_schema->summary().description()->c_str());
+          update_property("scenario_keywords", scenario_schema->summary().keywords()->c_str());
+          update_property("scenario_domain", scenario_schema->summary().domain()->c_str());
+          update_property("scenario_limitations", scenario_schema->summary().limitations()->c_str());
+        } else {
+          throw std::runtime_error("Failed to load authors");
+        }
+        if (successful) {
+          scenario_schema = pfc::schema::PFC::load_assessments(std::move(scenario_schema), *_db, successful);
+        } else {
+          throw std::runtime_error("Failed to load authors");
+        }
+        if (successful) {
+          scenario_schema = pfc::schema::PFC::load_citations(std::move(scenario_schema), *_db, successful);
+        } else {
+          throw std::runtime_error("Failed to load citations");
+        }
+        if (successful) {
+          scenario_schema = pfc::schema::PFC::load_equipment(std::move(scenario_schema), *_db, successful);
+        } else {
+          throw std::runtime_error("Failed to load equipment");
+        }
+
+        if (successful) {
+          scenario_schema = pfc::schema::PFC::load_injuries(std::move(scenario_schema), *_db, successful);
+        } else {
+          throw std::runtime_error("Failed to load injuries");
+        }
+        if (successful) {
+          scenario_schema = pfc::schema::PFC::load_injury_sets(std::move(scenario_schema), *_db, successful);
+        } else {
+          throw std::runtime_error("Failed to load injury sets");
+        }
+        if (successful) {
+          scenario_schema = pfc::schema::PFC::load_objectives(std::move(scenario_schema), *_db, successful);
+        } else {
+          throw std::runtime_error("Failed to load objectives");
+        }
+        if (successful) {
+          scenario_schema = pfc::schema::PFC::load_locations(std::move(scenario_schema), *_db, successful);
+        } else {
+          throw std::runtime_error("Failed to load locations");
+        }
+        if (successful) {
+          scenario_schema = pfc::schema::PFC::load_roles(std::move(scenario_schema), *_db, successful);
+        } else {
+          throw std::runtime_error("Failed to load roles");
+        }
+        if (successful) {
+          scenario_schema = pfc::schema::PFC::load_treatments(std::move(scenario_schema), *_db, successful);
+        } else {
+          throw std::runtime_error("Failed to load treatments");
+        }
+        if (successful) {
+          scenario_schema = pfc::schema::PFC::load_events(std::move(scenario_schema), *_db, successful);
+        } else {
+          throw std::runtime_error("Failed to load events");
+        }
+        if (successful) {
+          scenario_schema = pfc::schema::PFC::load_scenes(std::move(scenario_schema), *_db, successful);
+        } else {
+          throw std::runtime_error("Failed to load scenes");
+        }
+        mz_zip_reader_delete(&reader); //Removing the Reader if this moves below the try remember you must always cal this function before leaving this function
+        _db->refresh();
+        return true;
+      } catch (const xml_schema::exception& e) {
+        std::cout << e << '\n';
+        _db->refresh();
+        mz_zip_reader_delete(&reader); //Removing the Reader if this moves below the try remember you must always cal this function before leaving this function
+        return false;
+      }
+      mz_zip_reader_delete(&reader); //Removing the Reader if this moves below the try remember you must always cal this function before leaving this function
+      return update_property("archive_file", filename.toStdString());
+    }
+  } else {
     mz_zip_reader_delete(&reader);
-    return err;
-  }
-
-  std::filebuf file_buf;
-  file_buf.open("Scenario.pfc.xml", std::ios::in);
-  std::istream i_stream(&file_buf);
-  //
-  try { // If the parsing fails this prints out every error
-    auto scenario_schema = pfc::schema::Scenario(i_stream);
-    bool successful = false;
-    scenario_schema = pfc::schema::PFC::load_authors(std::move(scenario_schema), *_db, successful);
-    if (successful) {
-      scenario_schema = pfc::schema::PFC::load_assessments(std::move(scenario_schema), *_db, successful);
-    } else {
-      throw std::runtime_error("Failed to load authors");
-    }
-    if (successful) {
-      scenario_schema = pfc::schema::PFC::load_citations(std::move(scenario_schema), *_db, successful);
-    } else {
-      throw std::runtime_error("Failed to load citations");
-    }
-    if (successful) {
-      scenario_schema = pfc::schema::PFC::load_equipment(std::move(scenario_schema), *_db, successful);
-    } else {
-      throw std::runtime_error("Failed to load equipment");
-    }
-
-    if (successful) {
-      scenario_schema = pfc::schema::PFC::load_injuries(std::move(scenario_schema), *_db, successful);
-    } else {
-      throw std::runtime_error("Failed to load injuries");
-    }
-    if (successful) {
-      scenario_schema = pfc::schema::PFC::load_injury_sets(std::move(scenario_schema), *_db, successful);
-    } else {
-      throw std::runtime_error("Failed to load injury sets");
-    }
-    if (successful) {
-      scenario_schema = pfc::schema::PFC::load_objectives(std::move(scenario_schema), *_db, successful);
-    } else {
-      throw std::runtime_error("Failed to load objectives");
-    }
-    if (successful) {
-      scenario_schema = pfc::schema::PFC::load_locations(std::move(scenario_schema), *_db, successful);
-    } else {
-      throw std::runtime_error("Failed to load locations");
-    }
-    if (successful) {
-      scenario_schema = pfc::schema::PFC::load_roles(std::move(scenario_schema), *_db, successful);
-    } else {
-      throw std::runtime_error("Failed to load roles");
-    }
-    if (successful) {
-      scenario_schema = pfc::schema::PFC::load_treatments(std::move(scenario_schema), *_db, successful);
-    } else {
-      throw std::runtime_error("Failed to load treatments");
-    }
-    if (successful) {
-      scenario_schema = pfc::schema::PFC::load_events(std::move(scenario_schema), *_db, successful);
-    } else {
-      throw std::runtime_error("Failed to load events");
-    }
-    if (successful) {
-      scenario_schema = pfc::schema::PFC::load_scenes(std::move(scenario_schema), *_db, successful);
-    } else {
-      throw std::runtime_error("Failed to load scenes");
-    }
-  } catch (const xml_schema::exception& e) {
-    std::cout << e << '\n';
+    printf("Could not find %s in archive %s\n", "Scenario.pfc.xml", filename.toStdString().c_str());
+    _db->refresh();
     return false;
   }
-  //
-  file_buf.close();
-
-  mz_zip_reader_delete(&reader);
-
-  if (err == MZ_END_OF_LIST)
-    return MZ_OK;
-
-  return record_source_file(filename);
+  _db->refresh();
+  return false;
 }
 //-------------------------------------------------------------------------------
-bool Serializer::record_source_file(const QString& filepath) const
+bool Serializer::update_property(const std::string& name, const std::string& value) const
 {
   Property prop;
-  prop.name = "archive_file";
-  prop.value = filepath;
+  prop.name = name.c_str();
+  prop.value = value.c_str();
   if (_db) {
     return _db->update_property(&prop);
   }
@@ -259,20 +360,19 @@ QString Serializer::get_property(const QString& name) const
 auto Serializer::generate_msdl_stream() const -> std::stringstream
 {
 
-  auto property_list = _db->get_properties();
-  qInfo() << property_list[0]->name;
-  qInfo() << property_list[0]->value;
   Property titleProperty, domainProperty, versionProperty, securityProperty, descriptionProperty;
   titleProperty.name = "scenario_title";
   domainProperty.name = "scenario_domain";
   versionProperty.name = "scenario_version";
   securityProperty.name = "scenario_security";
   descriptionProperty.name = "scenario_description";
+
   _db->select_property(&titleProperty);
   _db->select_property(&domainProperty);
   _db->select_property(&versionProperty);
   _db->select_property(&securityProperty);
   _db->select_property(&descriptionProperty);
+
   std::string name = titleProperty.value.toStdString();
   std::string domain = domainProperty.value.toStdString();
   std::string version = versionProperty.value.toStdString();
@@ -293,7 +393,7 @@ auto Serializer::generate_msdl_stream() const -> std::stringstream
 
   xml_schema::namespace_infomap info;
   info[""].name = "urn:sisostds:scenario:military:data:draft:msdl:1";
-  info[""].schema = "military_scenario_1.0.0.xsd";
+  info[""].schema = "xsd/military_scenario_1.0.0.xsd";
 
   std::stringstream msdl_content;
   msdl_1::MilitaryScenario(msdl_content, msdl, info);
@@ -308,51 +408,22 @@ auto Serializer::generate_pfc_stream() const -> std::stringstream
 
   //0. <Author>
   for (auto& author : _db->get_authors()) { // For now there should only ever be one author
-    pfc_scenario.author().email() = author->email.toStdString();
-    pfc_scenario.author().first_name() = author->first.toStdString();
-    pfc_scenario.author().last_name() = author->last.toStdString();
-    pfc_scenario.author().phone_number() = author->phone.toStdString();
-    pfc_scenario.author().zip() = author->zip.toStdString();
-    pfc_scenario.author().state() = author->state.toStdString();
-    pfc_scenario.author().country() = author->country.toStdString();
+    pfc_scenario.author().email(author->email.toStdString());
+    pfc_scenario.author().first_name(author->first.toStdString());
+    pfc_scenario.author().last_name(author->last.toStdString());
+    pfc_scenario.author().phone_number(author->phone.toStdString());
+    pfc_scenario.author().zip(author->zip.toStdString());
+    pfc_scenario.author().state(author->state.toStdString());
+    pfc_scenario.author().country(author->country.toStdString());
   }
 
-  //0.5 <Maps>
-  auto citation_maps = _db->get_citation_maps();
-  std::string citation_map_list;
-  for (int i = 0; i < citation_maps.size(); ++i) {
-    std::string map = '(' + std::to_string(citation_maps[i]->fk_scene) + ',' + std::to_string(citation_maps[i]->fk_citation) + ')';
-    citation_map_list += map;
-  }
-  auto event_maps = _db->get_event_maps();
-  std::string event_map_list;
-  for (int i = 0; i < event_maps.size(); ++i) {
-    std::string map = '(' + std::to_string(event_maps[i]->fk_scene) + ',' + std::to_string(event_maps[i]->fk_event) + ')';
-    event_map_list += map;
-  }
-  auto equipment_maps = _db->get_equipment_maps();
-  std::string equipment_map_list;
-  for (int i = 0; i < equipment_maps.size(); ++i) {
-    std::string map = '(' + std::to_string(equipment_maps[i]->fk_scene) + ',' + std::to_string(equipment_maps[i]->fk_equipment) + ')';
-    equipment_map_list += map;
-  }
-  auto location_maps = _db->get_location_maps();
-  std::string location_map_list;
-  for (int i = 0; i < location_maps.size(); ++i) {
-    std::string map = '(' + std::to_string(location_maps[i]->fk_scene) + ',' + std::to_string(location_maps[i]->fk_location) + ')';
-    location_map_list += map;
-  }
-  auto role_maps = _db->get_role_maps();
-  std::string role_map_list;
-  for (int i = 0; i < role_maps.size(); ++i) {
-    std::string map = '(' + std::to_string(role_maps[i]->fk_scene) + ',' + std::to_string(role_maps[i]->fk_role) + ')';
-    role_map_list += map;
-  }
-  pfc_scenario.maps().citation_maps() = citation_map_list;
-  pfc_scenario.maps().event_maps() = event_map_list;
-  pfc_scenario.maps().equipment_maps() = equipment_map_list;
-  pfc_scenario.maps().location_maps() = location_map_list;
-  pfc_scenario.maps().role_maps() = role_map_list;
+  pfc_scenario.summary().title(get_property("scenario_title").toStdString());
+  pfc_scenario.summary().version(get_property("scenario_version").toStdString());
+  pfc_scenario.summary().classification(get_property("scenario_security").toStdString());
+  pfc_scenario.summary().description(get_property("scenario_description").toStdString());
+  pfc_scenario.summary().limitations(get_property("scenario_limitations").toStdString());
+  pfc_scenario.summary().domain(get_property("scenario_domain").toStdString().c_str());
+  pfc_scenario.summary().keywords(get_property("scenario_keywords").toStdString().c_str());
 
   //1. <Equipment>
   for (auto& equipment : _db->get_equipments()) {
@@ -417,7 +488,7 @@ auto Serializer::generate_pfc_stream() const -> std::stringstream
 
   xml_schema::namespace_infomap info;
   info[""].name = "com:ara:pfc:training:1";
-  info[""].schema = "pfc_scenario_0.2.xsd";
+  info[""].schema = "xsd/pfc_scenario_0.2.xsd";
   QSqlDatabase _db;
   if (_db.isValid()) {
     _db = QSqlDatabase::addDatabase("QSQLITE");

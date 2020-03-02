@@ -45,16 +45,8 @@ Rectangle {
     rightPadding: 5
     selectByMouse : true
 
-    onEditingFinished : {
-      if ( entryField.text != self.value){
-        self.value = entryField.text
-        root.backend.update_property(self)
-      }
-      root.editingFinished();
-    }
-
-    Component.onCompleted : {
-        root.backend.select_property(self);
+    function update() {
+      root.backend.select_property(self);
         if(self.value === ""){
           self.value = root.default_value;
           if(root.required){
@@ -64,9 +56,23 @@ Rectangle {
         } else {
           entryField.text = self.value;
         }
-      }
-  }
+    }
 
+    onEditingFinished : {
+        if ( entryField.text != self.value){
+          self.value = entryField.text
+          root.backend.update_property(self)
+        }
+        root.editingFinished();
+    }
+
+    Component.onCompleted : {
+        update()
+    }
+  }
+   onBackendChanged : {
+      entryField.update()
+  }
 }
 
 

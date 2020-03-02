@@ -6,19 +6,30 @@
 Albuquerque, NM 87110
 All rights reserved.
 ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	targetNamespace="com:ara:pfc:training:1"
-	version="0.2"
-	xmlns="com:ara:pfc:training:1"
-	xmlns:pfc="com:ara:pfc:training:1"
-	xmlns:msdl="urn:sisostds:scenario:military:data:draft:msdl:1"
-	xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="com:ara:pfc:training:1" version="0.2" 
+  xmlns="com:ara:pfc:training:1" 
+  xmlns:pfc="com:ara:pfc:training:1" 
+  xmlns:msdl="urn:sisostds:scenario:military:data:draft:msdl:1" 
+  xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning">
   <xs:import namespace="urn:sisostds:scenario:military:data:draft:msdl:1" schemaLocation="military_scenario_1.0.0.xsd"/>
-  <!-- NEW TAGS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+  <xs:complexType name="summary">
+    <xs:annotation>
+      <xs:documentation>General Information About the Scenario.</xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element name="title" type="xs:string" minOccurs="0"/>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <xs:element name="version" type="xs:string" minOccurs="0"/>
+      <xs:element name="classification" type="xs:string" minOccurs="0"/>
+      <xs:element name="keywords" type="xs:string" minOccurs="0"/>
+      <xs:element name="domain" type="xs:string" minOccurs="0"/>
+      <xs:element name="limitations" type="xs:string" minOccurs="0"/>
+    </xs:all>
+  </xs:complexType>
   <xs:complexType name="author">
     <xs:annotation>
       <xs:documentation>Important data regarding a scenario's creator.</xs:documentation>
-    </xs:annotation>   
+    </xs:annotation>
     <xs:all>
       <xs:element name="first_name" type="xs:string" minOccurs="0"/>
       <xs:element name="last_name" type="xs:string" minOccurs="0"/>
@@ -28,22 +39,8 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
       <xs:element name="zip" type="xs:string" minOccurs="0"/>
       <xs:element name="state" type="xs:string" minOccurs="0"/>
       <xs:element name="country" type="xs:string" minOccurs="0"/>
-  </xs:all>
+    </xs:all>
   </xs:complexType>
-  <xs:complexType name="maps">
-    <xs:annotation>
-      <xs:documentation>List of Citation, Event, Equipment, Location, Role, and Restriction Maps stored as strings.</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name="citation_maps" type="xs:string" minOccurs="1"/>
-      <xs:element name="event_maps" type="xs:string" minOccurs="1"/>
-      <xs:element name="equipment_maps" type="xs:string" minOccurs="1"/>
-      <xs:element name="location_maps" type="xs:string" minOccurs="1"/>
-      <xs:element name="role_maps" type="xs:string" minOccurs="1"/>
-    </xs:sequence>
-  </xs:complexType>
-    
-  <!-- /NEW TAGS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
   <xs:complexType name="equipment-definition-list">
     <xs:annotation>
       <xs:documentation>List of pfc:equipment types.</xs:documentation>
@@ -83,7 +80,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 				A PFC representation of a simple trauma. Injuries are associated to a Injury-Profile where severity and trauma-site are applied.
 				An trauma must have a medical-name, but can also have a common-name for use in documentation. It is good to provide a list of citations 
 				which describe the trauma in more traditional terms in the references section, but is not required.
-			</xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:all>
       <xs:element name="id" type="xs:string"/>
@@ -100,7 +97,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 				Every trauma has a severity range which can either be presented as a numeric-range or a token range. 
 				Token ranges are a list of enums that describe the trauma, some are provided in the base XSD.  numeric-ranges are either
 				a scalar value or a unit-scalar which include a min and max value that represent some measure of scale.
-			</xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:choice>
       <xs:element name="numeric-range" type="numeric-range"/>
@@ -113,7 +110,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 				Numerical range of two doubles with an optional median value and unit type. The trauma definition mostly uses this for documentation.
 				Scenario UIs may try to use it for visualization of trauma sets, but that is implementation defined. A physiology engine might use
 				severity to set its own internal insults/injuries where valid values may be [0.0,1.0], [0.0, .5 l/s]
-			</xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:all>
       <xs:element name="min" type="xs:double" minOccurs="1"/>
@@ -128,7 +125,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 				Some ranges are better described with english words [low,medium,high] token-range allows a trauma definition to specificy a 
 				custom enummeration that a UI would then convert to a valid dropdown list when constructing a UI. trauma-profiles can not
 				validate against the trauma definition with out restricting the possible ranges so this is really for internal documentation.
-			</xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="token" type="xs:NCName" minOccurs="2" maxOccurs="unbounded"/>
@@ -138,7 +135,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
     <xs:annotation>
       <xs:documentation>List of strings which should be citations for source material. This could be expanded to be a more strengent 
 				field combination, but lets see what happens
-			</xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="citation-ref" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
@@ -158,7 +155,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 				A Treatment Plan is intended to be a break down of a clinical practice guideline in to a series of descrete steps. The simplicty of 
 				the treatment plan breakdown is matched to the intended training for the scenario and not the true complexity of the full CPG.
 				Future versions may allow logcial branching but currently the representation is a linear flow of steps.
-			</xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:all>
       <xs:element name="id" type="xs:string"/>
@@ -173,7 +170,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
     <xs:annotation>
       <xs:documentation>
 				List of UUIDs from the equipment list in the FORCE_SIDE section of an associated MSDL file
-			</xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="equipment-refs" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
@@ -185,7 +182,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 				Series of citations that the treatment plan was built on.  
 				Allows the user to refer to more detailed material beyond the simplified
 				training plan.
-			</xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:all>
       <xs:element name="citations" type="citation-ref-list"/>
@@ -219,7 +216,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
     <xs:annotation>
       <xs:documentation>
 				Clinical Practice Guideline
-			</xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:all>
       <xs:element name="name" type="xs:string"/>
@@ -231,7 +228,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
     <xs:annotation>
       <xs:documentation>
 				List of UUIDs from the lessons list in the learning-objective-list in a pfc:syllabus
-			</xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="objective" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
@@ -241,7 +238,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
     <xs:annotation>
       <xs:documentation>
 				List of UUIDs from the treatment-plans in the treatment-definition-list
-			</xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="treatment-plan" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
@@ -251,11 +248,10 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
     <xs:annotation>
       <xs:documentation>
 				List of pfc:trauma-profiles.  
-			</xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="trauma-profile" type="trauma-profile" minOccurs="1"
-				maxOccurs="unbounded"/>
+      <xs:element name="trauma-profile" type="trauma-profile" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="trauma-profile">
@@ -264,7 +260,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 				A collection of Injuries which is intended to act as a boot strap medical record for an acor in a medical-scenario.
 				Injury profiles can be appended either to an actor initially or mid scenario to act like a contracted wound. Injury in this 
 				case may include medical conditions or diagnosis, but will generally be a combat casualty wound. 
-			</xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="id" type="xs:string" minOccurs="1"/>
@@ -278,7 +274,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
     <xs:annotation>
       <xs:documentation>
 				List of UUIDs from the trauma-profiles in the profile list
-			</xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="trauma-profile" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
@@ -288,7 +284,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
     <xs:annotation>
       <xs:documentation>
 				List of pfc:trauma-occurence
-			</xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="trauma" type="trauma-occurence" minOccurs="0" maxOccurs="unbounded"/>
@@ -342,7 +338,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
     <xs:annotation>
       <xs:documentation>
 				List of pfc:assessment with a required total-points field which should equal the sum of all points-avaliable in the assessment fields.  Used as a sanity check by implementations.
-			</xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="total-points" default="0" type="xs:integer" minOccurs="1" maxOccurs="1"/>
@@ -353,7 +349,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
     <xs:annotation>
       <xs:documentation>
 				An assessment consist of an id and a idref to a lesson-objective.  This type is a work in practice and the criteria element is likely be reworked beyond a string in a future revision
-			</xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:all>
       <xs:element name="id" type="xs:string"/>
@@ -379,7 +375,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 				to properly elevate the training and make learning transfer possible. The breakdown can be as simple or complex as is needed for a narrative to be completed. 
         Various elements also have a fidelity field which is designed to allow additinal information to be encoded int he scenario that is ignored by lower fidelity
         implementations.
-			</xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:all>
       <xs:element name="id" type="xs:string"/>
@@ -389,9 +385,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
   </xs:complexType>
   <xs:complexType name="role-list">
     <xs:annotation>
-      <xs:documentation>
-				List of pfc:roles
-			</xs:documentation>
+      <xs:documentation>List of pfc:roles</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="role" type="role" minOccurs="0" maxOccurs="unbounded"/>
@@ -404,7 +398,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 				An additional description describes the role of the unit in human terms on the level of a cliff-note.
 				The short-name is a unique string to be use when parsing a training-script event to quickly refer to 
 				a role
-			</xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:all>
       <xs:element name="id" type="xs:string"/>
@@ -421,11 +415,8 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
   </xs:complexType>
 
   <xs:complexType name="item-list">
-    <xs:annotation>
-      <xs:documentation>
-				List of pfc:item  Which is a specific pfc:equipment item with its property values populatd
-			</xs:documentation>
-    </xs:annotation>
+    <xs:annotation><xs:documentation>List of pfc:item  Which is a specific pfc:equipment item with its property values populatd
+      </xs:documentation></xs:annotation>
     <xs:sequence>
       <xs:element name="item" type="item" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
@@ -437,7 +428,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 				An additional description describes the purpose of the prop in the training simulation in human terms on the level of a cliff-note
 				The short-name is a unique string to be use when parsing a training-script event to quickly refer to 
 				a prop
-			</xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:all>
       <xs:element name="short-name" type="xs:string"/>
@@ -447,11 +438,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
     </xs:all>
   </xs:complexType>
   <xs:complexType name="scene-list">
-    <xs:annotation>
-      <xs:documentation>
-				List of pfc:scene(s)
-			</xs:documentation>
-    </xs:annotation>
+    <xs:annotation><xs:documentation>List of pfc:scene(s)</xs:documentation></xs:annotation>
     <xs:sequence>
       <xs:element name="scene" type="scene" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
@@ -464,7 +451,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 				An additional description field allows a human readable synopsis to be added. It is likely most
 				training scenaros will be a single scene, but the format supports multiple scenes for mass casulaty events when training groups
 				with the hope of allowing teams to train communication of information learned indpedent of each other and practice medical handoff technquies.
-			</xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:all>
       <xs:element name="location-id" type="xs:string"/>
@@ -482,7 +469,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
     <xs:annotation>
       <xs:documentation>
 				List of pfc:event(s)
-			</xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="event" type="event" minOccurs="1" maxOccurs="unbounded"/>
@@ -500,9 +487,9 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 					event-movment-details
 					event-acoustic-details
 					event-environment-details
-					event-script-details <!--Complex max fidelity code scripting to be loaded by level creators -->
+					event-script-details                         <!--Complex max fidelity code scripting to be loaded by level creators -->
 				Each one with its own set of fields to be mainpulated
-			</xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:all>
       <xs:element name="id" type="xs:string"/>
@@ -573,7 +560,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
   <xs:complexType name="citation-list">
     <xs:annotation>
       <xs:documentation>List of Citation Information that a citation-ref-list refers to
-			</xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="citation" type="citation" minOccurs="0" maxOccurs="unbounded"/>
@@ -582,7 +569,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
   <xs:complexType name="citation">
     <xs:annotation>
       <xs:documentation>General Citation Information for a bib reference
-			</xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="uuid" type="xs:string" minOccurs="1" maxOccurs="1"/>
@@ -629,6 +616,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
       </xs:documentation>
     </xs:annotation>
     <xs:all>
+      <xs:element name="name" type="xs:string"/>
       <xs:element name="value" type="xs:string"/>
     </xs:all>
   </xs:complexType>

@@ -31,7 +31,6 @@ int main(int argc, char* argv[])
   QQuickStyle::setStyle("Material");
   QQmlApplicationEngine engine;
 
-
   //UI 0.1 Types
   qmlRegisterType<pfc::SQLite3Driver>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "SQLBackend");
   qmlRegisterType<pfc::Author>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Author");

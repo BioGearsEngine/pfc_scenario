@@ -288,6 +288,23 @@ namespace pfc
     class ScenarioSchema: public ::xml_schema::type
     {
       public:
+      // summary
+      //
+      typedef ::pfc::schema::summary summary_type;
+      typedef ::xsd::cxx::tree::traits< summary_type, char > summary_traits;
+
+      const summary_type&
+      summary () const;
+
+      summary_type&
+      summary ();
+
+      void
+      summary (const summary_type& x);
+
+      void
+      summary (::std::unique_ptr< summary_type > p);
+
       // author
       //
       typedef ::pfc::schema::author author_type;
@@ -424,44 +441,27 @@ namespace pfc
       void
       works_cited (::std::unique_ptr< works_cited_type > p);
 
-      // maps
-      //
-      typedef ::pfc::schema::maps maps_type;
-      typedef ::xsd::cxx::tree::traits< maps_type, char > maps_traits;
-
-      const maps_type&
-      maps () const;
-
-      maps_type&
-      maps ();
-
-      void
-      maps (const maps_type& x);
-
-      void
-      maps (::std::unique_ptr< maps_type > p);
-
       // Constructors.
       //
-      ScenarioSchema (const author_type&,
+      ScenarioSchema (const summary_type&,
+                      const author_type&,
                       const equipment_type&,
                       const trauma_definitions_type&,
                       const treatment_plans_type&,
                       const trauma_sets_type&,
                       const syllabus_type&,
                       const medical_scenario_type&,
-                      const works_cited_type&,
-                      const maps_type&);
+                      const works_cited_type&);
 
-      ScenarioSchema (::std::unique_ptr< author_type >,
+      ScenarioSchema (::std::unique_ptr< summary_type >,
+                      ::std::unique_ptr< author_type >,
                       ::std::unique_ptr< equipment_type >,
                       ::std::unique_ptr< trauma_definitions_type >,
                       ::std::unique_ptr< treatment_plans_type >,
                       ::std::unique_ptr< trauma_sets_type >,
                       ::std::unique_ptr< syllabus_type >,
                       ::std::unique_ptr< medical_scenario_type >,
-                      ::std::unique_ptr< works_cited_type >,
-                      ::std::unique_ptr< maps_type >);
+                      ::std::unique_ptr< works_cited_type >);
 
       ScenarioSchema (const ::xercesc::DOMElement& e,
                       ::xml_schema::flags f = 0,
@@ -489,6 +489,7 @@ namespace pfc
              ::xml_schema::flags);
 
       protected:
+      ::xsd::cxx::tree::one< summary_type > summary_;
       ::xsd::cxx::tree::one< author_type > author_;
       ::xsd::cxx::tree::one< equipment_type > equipment_;
       ::xsd::cxx::tree::one< trauma_definitions_type > trauma_definitions_;
@@ -497,7 +498,6 @@ namespace pfc
       ::xsd::cxx::tree::one< syllabus_type > syllabus_;
       ::xsd::cxx::tree::one< medical_scenario_type > medical_scenario_;
       ::xsd::cxx::tree::one< works_cited_type > works_cited_;
-      ::xsd::cxx::tree::one< maps_type > maps_;
     };
   }
 }

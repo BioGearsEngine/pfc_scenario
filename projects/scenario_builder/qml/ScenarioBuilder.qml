@@ -26,7 +26,7 @@ ApplicationWindow {
       MenuItem { 
         text: "New Scenario";
           onTriggered : {
-          create_scenario(scenario_model)
+          create_scenario()
         } 
       }
       MenuItem { 
@@ -111,7 +111,14 @@ ApplicationWindow {
         console.log("You choose: " + loadDialog.fileUrls)
         var archive = loadDialog.fileUrls.toString();
         archive = archive.replace(/file:\/{3}/,"")
-        scenario_serializer.load(archive)
+        if(scenario_serializer.load(archive)) {
+          if(mainView.depth > 1){
+            mainView.pop()
+          }
+          mainView.push(scenarioScreen, { backend : scenario_model} )
+        } else {
+          console.log("Failed to Load File: %1".arg(archive))
+        }
       }
       onRejected: {
         console.log("Canceled")
@@ -174,15 +181,15 @@ ApplicationWindow {
   }
 
   function save_scenario_as() {
-       saveOption.enabled = true
-       saveAsOption.enabled = true
-       closeOption.enabled = true
        saveDialog.open()
        var archive = saveDialog.fileUrls.toString();
        settings.previous_scenarios.push({"file": archive })
   }
 
   function load_scenario( file, backend) {
+    saveOption.enabled = true
+    saveAsOption.enabled = true
+    closeOption.enabled = true
     settings.previous_scenarios.push({"file": file })
     loadDialog.open()
   }

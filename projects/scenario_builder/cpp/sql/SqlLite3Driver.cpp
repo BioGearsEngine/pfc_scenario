@@ -91,8 +91,7 @@ void SQLite3Driver::close()
 bool SQLite3Driver::initialize_db()
 {
   bool creation_failure = false;
-  std::map<char const*, char const*> create_statments = 
-  {
+  std::map<char const*, char const*> create_statments = {
     { tables[AUTHORS], sqlite3::create_authors_table },
     { tables[ASSESSMENTS], sqlite3::create_assessments_table },
     { tables[CITATIONS], sqlite3::create_citations_table },
@@ -132,6 +131,7 @@ bool SQLite3Driver::initialize_db()
 //------------------------------------------------------------------------------
 bool SQLite3Driver::populate_db()
 {
+  Property default_property;
   Author default_author;
   Assessment default_assessment;
   Citation default_citation;
@@ -145,6 +145,24 @@ bool SQLite3Driver::populate_db()
   Scene default_scene;
   Treatment default_treatment;
   //---Author---
+
+  std::map<char const*, char const*> default_prop_values = {
+    { "scenario_title", "PFC Scenario" },
+    { "scenario_version", "0.1" },
+    { "scenario_security", "UnClassified" },
+    { "scenario_description", "" },
+    { "scenario_keywords", "" },
+    { "scenario_domain", "Medical Prolonged Field Care" },
+    { "scenario_limitations", "" }
+  };
+  for (auto& prop : default_prop_values) {
+    default_property.id = -1;
+    default_property.name = prop.first;
+    if (!select_property(&default_property)) {
+      default_property.value = prop.second;
+      update_property(&default_property);
+    }
+  }
   if (author_count() == 0) {
     default_author.first = "First_Name";
     default_author.last = "Last_Name";
@@ -172,10 +190,10 @@ bool SQLite3Driver::populate_db()
   }
   //---Citation---
   if (citation_count() == 0) {
-    default_citation.title = "Citation_1";
-    default_citation.key = "";
-    default_citation.authors = "";
-    default_citation.year = "";
+    default_citation.title = "Reference 1";
+    default_citation.key = "AuthorYear_1";
+    default_citation.authors = "Reference Authors";
+    default_citation.year = "Reference Year";
     default_citation.publisher = "";
     if (!update_citation(&default_citation)) {
       return false;
@@ -316,7 +334,6 @@ bool SQLite3Driver::clear_db()
     _db.exec("DROP TABLE IF EXISTS restriction_maps;");
     _db.exec("DROP TABLE IF EXISTS scenes;");
     _db.exec("DROP TABLE IF EXISTS treatments;");
-    
 
     return true;
   }
@@ -513,7 +530,7 @@ bool SQLite3Driver::select_assessment(Assessment* assessment) const
         return true;
       }
     } else {
-      qWarning() << query.lastError();
+      qWarning() <<  "select_assessment" << query.lastError();
     }
     return false;
   }
@@ -538,7 +555,7 @@ bool SQLite3Driver::update_assessment(Assessment* assessment)
     query.bindValue(":criteria", assessment->criteria);
 
     if (!query.exec()) {
-      qWarning() << query.lastError();
+      qWarning() <<  "updaate_assessment" << query.lastError();
       return false;
     }
     if (-1 == assessment->id) {
@@ -560,7 +577,7 @@ bool SQLite3Driver::remove_assessment(Assessment* assessment)
       query.prepare(sqlite3::delete_assessment_by_id);
       query.bindValue(":id", assessment->id);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_assessment" << query.lastError();
         return false;
       }
       assessmentRemoved(assessment->id);
@@ -666,7 +683,7 @@ bool SQLite3Driver::select_author(Author* author) const
         return true;
       }
     } else {
-      qWarning() << query.lastError();
+      qWarning() <<  "select_author" << query.lastError();
     }
     return false;
   }
@@ -693,7 +710,7 @@ bool SQLite3Driver::update_author(Author* author)
       query.bindValue(":phone", author->phone);
       query.bindValue(":organization", author->organization);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "update_author" << query.lastError();
         return false;
       }
       if (-1 == author->id) {
@@ -729,7 +746,7 @@ bool SQLite3Driver::update_first_author(Author* author)
       query.bindValue(":phone", author->phone);
       query.bindValue(":organization", author->organization);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "update_first_author" << query.lastError();
         return false;
       }
       authorUpdated(1);
@@ -749,7 +766,7 @@ bool SQLite3Driver::remove_author(Author* author)
       query.prepare(sqlite3::delete_author_by_id);
       query.bindValue(":id", author->id);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_author" << query.lastError();
         return false;
       }
       authorRemoved(author->id);
@@ -861,7 +878,7 @@ bool SQLite3Driver::select_citation(Citation* citation) const
         return true;
       }
     } else {
-      qWarning() << query.lastError();
+      qWarning() <<  "select_citation" << query.lastError();
     }
     return false;
   }
@@ -891,7 +908,7 @@ bool SQLite3Driver::update_citation(Citation* citation)
     query.bindValue(":publisher", citation->publisher);
 
     if (!query.exec()) {
-      qWarning() << query.lastError();
+      qWarning() <<  "update_citation" << query.lastError();
       return false;
     }
     if (-1 == citation->id) {
@@ -935,7 +952,7 @@ bool SQLite3Driver::remove_citation(Citation* citation)
       query.prepare(sqlite3::delete_citation_by_id);
       query.bindValue(":id", citation->id);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_citation" << query.lastError();
         return false;
       }
       citationRemoved(citation->id);
@@ -1044,7 +1061,7 @@ bool SQLite3Driver::select_injury(Injury* injury) const
         return true;
       }
     } else {
-      qWarning() << query.lastError();
+      qWarning() <<  "select_injury" << query.lastError();
     }
     return false;
   }
@@ -1073,7 +1090,7 @@ bool SQLite3Driver::update_injury(Injury* injury)
     query.bindValue(":max", injury->severity_max);
 
     if (!query.exec()) {
-      qWarning() << query.lastError();
+      qWarning() <<  "update_injury" << query.lastError();
       return false;
     }
     if (-1 == injury->id) {
@@ -1095,7 +1112,7 @@ bool SQLite3Driver::remove_injury(Injury* injury)
       query.prepare(sqlite3::delete_injury_by_id);
       query.bindValue(":id", injury->id);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_injury" << query.lastError();
         return false;
       }
       injuryRemoved(injury->id);
@@ -1186,7 +1203,7 @@ bool SQLite3Driver::select_injury_set(InjurySet* set) const
         return true;
       }
     } else {
-      qWarning() << query.lastError();
+      qWarning() <<  "select_injury_set" << query.lastError();
     }
     return false;
   }
@@ -1211,7 +1228,7 @@ bool SQLite3Driver::update_injury_set(InjurySet* injury_set)
     query.bindValue(":locations", injury_set->locations);
 
     if (!query.exec()) {
-      qWarning() << query.lastError();
+      qWarning() <<  "update_injury_set" << query.lastError();
       return false;
     }
     if (-1 == injury_set->id) {
@@ -1233,7 +1250,7 @@ bool SQLite3Driver::remove_injury_set(InjurySet* injury_set)
       query.prepare(sqlite3::delete_injury_set_by_id);
       query.bindValue(":id", injury_set->id);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_injury_set" << query.lastError();
         return false;
       }
       injurySetRemoved(injury_set->id);
@@ -1322,7 +1339,7 @@ bool SQLite3Driver::select_role_map(RoleMap* map) const
         return true;
       }
     } else {
-      qWarning() << query.lastError();
+      qWarning() <<  "select_role_map" << query.lastError();
     }
     return false;
   }
@@ -1343,7 +1360,7 @@ bool SQLite3Driver::update_role_map(RoleMap* map)
     query.bindValue(":fk_scene", map->fk_scene);
     query.bindValue(":fk_role", map->fk_role);
     if (!query.exec()) {
-      qWarning() << query.lastError();
+      qWarning() <<  "update_role_map" << query.lastError();
       return false;
     }
     if (-1 == map->id) {
@@ -1365,7 +1382,7 @@ bool SQLite3Driver::remove_role_map(RoleMap* map)
       query.prepare(sqlite3::delete_role_map_by_id);
       query.bindValue(":id", map->id);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_role_map" << query.lastError();
         return false;
       }
       mapRemoved(map->id);
@@ -1386,7 +1403,7 @@ bool SQLite3Driver::remove_role_map_by_fk(RoleMap* map)
       query.bindValue(":fk_scene", map->fk_scene);
       query.bindValue(":fk_role", map->fk_role);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_role_map_by_fk" << query.lastError();
         return false;
       }
       mapRemoved(map->id);
@@ -1475,7 +1492,7 @@ bool SQLite3Driver::select_event_map(EventMap* map) const
         return true;
       }
     } else {
-      qWarning() << query.lastError();
+      qWarning() <<  "select_event_map" << query.lastError();
     }
     return false;
   }
@@ -1496,7 +1513,7 @@ bool SQLite3Driver::update_event_map(EventMap* map)
     query.bindValue(":fk_scene", map->fk_scene);
     query.bindValue(":fk_event", map->fk_event);
     if (!query.exec()) {
-      qWarning() << query.lastError();
+      qWarning() <<  "update_event_map" << query.lastError();
       return false;
     }
     if (-1 == map->id) {
@@ -1518,7 +1535,7 @@ bool SQLite3Driver::remove_event_map(EventMap* map)
       query.prepare(sqlite3::delete_event_map_by_id);
       query.bindValue(":id", map->id);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_event_map" << query.lastError();
         return false;
       }
       eventMapRemoved(map->id);
@@ -1539,7 +1556,7 @@ bool SQLite3Driver::remove_event_map_by_fk(EventMap* map)
       query.bindValue(":fk_scene", map->fk_scene);
       query.bindValue(":fk_event", map->fk_event);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_event_map_by_fk" << query.lastError();
         return false;
       }
       eventMapRemoved(map->id);
@@ -1644,7 +1661,7 @@ bool SQLite3Driver::select_location_map(LocationMap* map) const
         return true;
       }
     } else {
-      qWarning() << query.lastError();
+      qWarning() <<  "select_location_map" << query.lastError();
     }
     return false;
   }
@@ -1665,7 +1682,7 @@ bool SQLite3Driver::update_location_map(LocationMap* map)
     query.bindValue(":fk_scene", map->fk_scene);
     query.bindValue(":fk_location", map->fk_location);
     if (!query.exec()) {
-      qWarning() << query.lastError();
+      qWarning() <<  "update_location_map" << query.lastError();
       return false;
     }
     if (-1 == map->id) {
@@ -1687,7 +1704,7 @@ bool SQLite3Driver::remove_location_map(LocationMap* map)
       query.prepare(sqlite3::delete_location_map_by_id);
       query.bindValue(":id", map->id);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_location_map" << query.lastError();
         return false;
       }
       locationMapRemoved(map->id);
@@ -1708,7 +1725,7 @@ bool SQLite3Driver::remove_location_map_by_fk(LocationMap* map)
       query.bindValue(":fk_scene", map->fk_scene);
       query.bindValue(":fk_location", map->fk_location);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_location_map_by_fk" << query.lastError();
         return false;
       }
       locationMapRemoved(map->id);
@@ -1797,7 +1814,7 @@ bool SQLite3Driver::select_citation_map(CitationMap* map) const
         return true;
       }
     } else {
-      qWarning() << query.lastError();
+      qWarning() <<  "select_citation_map" << query.lastError();
     }
     return false;
   }
@@ -1818,7 +1835,7 @@ bool SQLite3Driver::update_citation_map(CitationMap* map)
     query.bindValue(":fk_scene", map->fk_scene);
     query.bindValue(":fk_citation", map->fk_citation);
     if (!query.exec()) {
-      qWarning() << query.lastError();
+      qWarning() <<  "update_citation_map" << query.lastError();
       return false;
     }
     if (-1 == map->id) {
@@ -1840,7 +1857,7 @@ bool SQLite3Driver::remove_citation_map(CitationMap* map)
       query.prepare(sqlite3::delete_citation_map_by_id);
       query.bindValue(":id", map->id);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_citation_map" << query.lastError();
         return false;
       }
       citationMapRemoved(map->id);
@@ -1861,7 +1878,7 @@ bool SQLite3Driver::remove_citation_map_by_fk(CitationMap* map)
       query.bindValue(":fk_scene", map->fk_scene);
       query.bindValue(":fk_citation", map->fk_citation);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_citation_map_by_fk" << query.lastError();
         return false;
       }
       citationMapRemoved(map->id);
@@ -1885,12 +1902,19 @@ inline void assign_equipment_map(const QSqlRecord& record, EquipmentMap& map)
 }
 inline void assign_equipment_from_scene(const QSqlRecord& record, EquipmentMap& map)
 {
+  /*eq.id AS map_id
+   *eq.name AS name,
+    eq.properties AS prop_names,
+    map.short_name AS name_in_scene,
+    map.property_values,
+    map.notes*/
   map.id = record.value(0).toInt();
   map.fk_scene;
   map.fk_equipment;
-  map.name = record.value(6).toString();
-  map.property_values = record.value(7).toString();
-  map.notes = record.value(8).toString();
+  map.name = record.value(1).toString();
+  map.property_names = record.value(2).toString();
+  map.property_values = record.value(4).toString();
+  map.notes = record.value(5).toString();
 }
 int SQLite3Driver::equipment_map_count() const
 {
@@ -1965,7 +1989,7 @@ bool SQLite3Driver::select_equipment_map(EquipmentMap* map) const
         return true;
       }
     } else {
-      qWarning() << query.lastError();
+      qWarning() <<  "select_equipment_map" << query.lastError();
     }
     return false;
   }
@@ -1986,7 +2010,7 @@ bool SQLite3Driver::update_equipment_map(EquipmentMap* map)
     query.bindValue(":fk_scene", map->fk_scene);
     query.bindValue(":fk_equipment", map->fk_equipment);
     if (!query.exec()) {
-      qWarning() << query.lastError();
+      qWarning() <<  "update_equipment_map" << query.lastError();
       return false;
     }
     if (-1 == map->id) {
@@ -2008,7 +2032,7 @@ bool SQLite3Driver::remove_equipment_map(EquipmentMap* map)
       query.prepare(sqlite3::delete_equipment_map_by_id);
       query.bindValue(":id", map->id);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_equipment_map" << query.lastError();
         return false;
       }
       equipmentMapRemoved(map->id);
@@ -2029,7 +2053,7 @@ bool SQLite3Driver::remove_equipment_map_by_fk(EquipmentMap* map)
       query.bindValue(":fk_scene", map->fk_scene);
       query.bindValue(":fk_equipment", map->fk_equipment);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_equipment_map_by_fk" << query.lastError();
         return false;
       }
       equipmentMapRemoved(map->id);
@@ -2118,7 +2142,7 @@ bool SQLite3Driver::select_restriction_map(RestrictionMap* map) const
         return true;
       }
     } else {
-      qWarning() << query.lastError();
+      qWarning() <<  "select_restriction_map" << query.lastError();
     }
     return false;
   }
@@ -2139,7 +2163,7 @@ bool SQLite3Driver::update_restriction_map(RestrictionMap* map)
     query.bindValue(":fk_scene", map->fk_scene);
     query.bindValue(":fk_restriction", map->fk_restriction);
     if (!query.exec()) {
-      qWarning() << query.lastError();
+      qWarning() <<  "update_restriction_map" << query.lastError();
       return false;
     }
     if (-1 == map->id) {
@@ -2161,7 +2185,7 @@ bool SQLite3Driver::remove_restriction_map(RestrictionMap* map)
       query.prepare(sqlite3::delete_restriction_map_by_id);
       query.bindValue(":id", map->id);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_restriction_map" << query.lastError();
         return false;
       }
       restrictionMapRemoved(map->id);
@@ -2182,7 +2206,7 @@ bool SQLite3Driver::remove_restriction_map_by_fk(RestrictionMap* map)
       query.bindValue(":fk_scene", map->fk_scene);
       query.bindValue(":fk_restriction", map->fk_restriction);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_restriction_map_by_fk" << query.lastError();
         return false;
       }
       restrictionMapRemoved(map->id);
@@ -2313,7 +2337,7 @@ bool SQLite3Driver::select_event(Event* event) const
         return true;
       }
     } else {
-      qWarning() << query.lastError();
+      qWarning() <<  "select_event" << query.lastError();
     }
     return false;
   }
@@ -2340,7 +2364,7 @@ bool SQLite3Driver::update_event(Event* event)
     query.bindValue(":actor_2", event->fk_actor_2);
     query.bindValue(":details", event->details);
     if (!query.exec()) {
-      qWarning() << query.lastError();
+      qWarning() <<  "update_event" << query.lastError();
       return false;
     }
     if (-1 == event->id) {
@@ -2384,7 +2408,7 @@ bool SQLite3Driver::remove_event(Event* event)
       query.prepare(sqlite3::delete_event_by_id);
       query.bindValue(":id", event->id);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_event" << query.lastError();
         return false;
       }
       eventRemoved(event->id);
@@ -2488,7 +2512,7 @@ bool SQLite3Driver::select_location(Location* location) const
         return true;
       }
     } else {
-      qWarning() << query.lastError();
+      qWarning() <<  "select_locaton" << query.lastError();
     }
     return false;
   }
@@ -2512,7 +2536,7 @@ bool SQLite3Driver::update_location(Location* location)
     query.bindValue(":time_of_day", location->time_of_day);
     query.bindValue(":environment", location->environment);
     if (!query.exec()) {
-      qWarning() << query.lastError();
+      qWarning() <<  "update_location" << query.lastError();
       return false;
     }
     if (-1 == location->id) {
@@ -2621,7 +2645,7 @@ bool SQLite3Driver::remove_location(Location* location)
       query.prepare(sqlite3::delete_location_by_id);
       query.bindValue(":id", location->id);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_location" << query.lastError();
         return false;
       }
       locationRemoved(location->id);
@@ -2657,6 +2681,7 @@ inline void assign_equipment(const QSqlRecord& record, Equipment& equipment)
   equipment.description = record.value(EQUIPMENT_DESCRIPTION).toString();
   equipment.citations = record.value(EQUIPMENT_CITATIONS).toString();
   equipment.image = record.value(EQUIPMENT_IMAGE).toString();
+  equipment.properties = record.value(EQUIPMENT_PROPERTIES).toString();
 }
 int SQLite3Driver::equipment_count() const
 {
@@ -2776,7 +2801,7 @@ bool SQLite3Driver::select_equipment(Equipment* equipment) const
         return true;
       }
     } else {
-      qWarning() << query.lastError();
+      qWarning() <<  "select_equipment" << query.lastError();
     }
     return false;
   }
@@ -2799,9 +2824,10 @@ bool SQLite3Driver::update_equipment(Equipment* equipment)
     query.bindValue(":description", equipment->description);
     query.bindValue(":citations", equipment->citations);
     query.bindValue(":image", equipment->image);
+    query.bindValue(":properties", equipment->properties);
 
     if (!query.exec()) {
-      qWarning() << query.lastError();
+      qWarning() <<  "update_equipment" << query.lastError();
       return false;
     }
     if (-1 == equipment->id) {
@@ -2845,7 +2871,7 @@ bool SQLite3Driver::remove_equipment(Equipment* equipment)
       query.prepare(sqlite3::delete_equipment_by_id);
       query.bindValue(":id", equipment->id);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_equipment" << query.lastError();
         return false;
       }
       equipmentRemoved(equipment->id);
@@ -2949,7 +2975,7 @@ bool SQLite3Driver::select_objective(Objective* objective) const
         return true;
       }
     } else {
-      qWarning() << query.lastError();
+      qWarning() <<  "select_objective" << query.lastError();
     }
   } else {
     qWarning() << "No Database connection";
@@ -2973,7 +2999,7 @@ bool SQLite3Driver::update_objective(Objective* objective)
     query.bindValue(":citations", objective->citations);
 
     if (!query.exec()) {
-      qWarning() << query.lastError();
+      qWarning() <<  "update_objective" << query.lastError();
       return false;
     }
     if (-1 == objective->id) {
@@ -2995,7 +3021,7 @@ bool SQLite3Driver::remove_objective(Objective* objective)
       query.prepare(sqlite3::delete_objective_by_id);
       query.bindValue(":id", objective->id);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_objective" << query.lastError();
         return false;
       }
       objectiveRemoved(objective->id);
@@ -3084,7 +3110,7 @@ bool SQLite3Driver::select_property(Property* property) const
         return true;
       }
     } else {
-      qWarning() << query.lastError();
+      qWarning() <<  "select_property" << query.lastError();
     }
     return false;
   }
@@ -3101,7 +3127,7 @@ bool SQLite3Driver::update_property(Property* property)
       query.bindValue(":name", property->name);
       query.bindValue(":value", property->value);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "update_property" << query.lastError();
         return false;
       }
       if (-1 == property->id) {
@@ -3124,7 +3150,7 @@ bool SQLite3Driver::remove_property(Property* property)
       query.prepare(sqlite3::delete_property_by_id);
       query.bindValue(":id", property->id);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_property" << query.lastError();
         return false;
       }
       propertyRemoved(property->id);
@@ -3266,7 +3292,7 @@ bool SQLite3Driver::select_role(Role* role) const
       }
     } else {
 
-      qWarning() << query.lastError();
+      qWarning() <<  "select_role" << query.lastError();
     }
     return false;
   }
@@ -3287,7 +3313,7 @@ bool SQLite3Driver::update_role(Role* role)
     query.bindValue(":description", role->description);
     query.bindValue(":name", role->name);
     if (!query.exec()) {
-      qWarning() << query.lastError();
+      qWarning() <<  "update_role" << query.lastError();
       return false;
     }
     if (-1 == role->id) {
@@ -3331,7 +3357,7 @@ bool SQLite3Driver::remove_role(Role* role) // This deletes a role completely fr
       query.prepare(sqlite3::delete_role_by_id);
       query.bindValue(":id", role->id);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_role" << query.lastError();
         return false;
       }
       roleRemoved(role->id);
@@ -3450,7 +3476,7 @@ bool SQLite3Driver::select_restriction(Restriction* restriction) const
         return true;
       }
     } else {
-      qWarning() << query.lastError();
+      qWarning() <<  "select_restriction" << query.lastError();
     }
     return false;
   }
@@ -3472,7 +3498,7 @@ bool SQLite3Driver::update_restriction(Restriction* restriction)
     query.bindValue(":name", restriction->name);
     query.bindValue(":value", restriction->value);
     if (!query.exec()) {
-      qWarning() << query.lastError();
+      qWarning() <<  "update_restriction" << query.lastError();
       return false;
     }
     if (-1 == restriction->id) {
@@ -3516,7 +3542,7 @@ bool SQLite3Driver::remove_restriction(Restriction* restriction)
       query.prepare(sqlite3::delete_restriction_by_id);
       query.bindValue(":id", restriction->id);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_restriction" << query.lastError();
         return false;
       }
       restrictionRemoved(restriction->id);
@@ -3626,7 +3652,7 @@ bool SQLite3Driver::select_scene(Scene* scene) const
       }
     } else {
 
-      qWarning() << query.lastError();
+      qWarning() <<  "select_scene" << query.lastError();
     }
     return false;
   }
@@ -3654,7 +3680,7 @@ bool SQLite3Driver::update_scene(Scene* scene)
     query.bindValue(":roles", scene->roles);
     query.bindValue(":details", scene->details);
     if (!query.exec()) {
-      qWarning() << query.lastError();
+      qWarning() <<  "update_scene" << query.lastError();
       return false;
     }
     if (-1 == scene->id) {
@@ -3676,7 +3702,7 @@ bool SQLite3Driver::remove_scene(Scene* scene)
       query.prepare(sqlite3::delete_scene_by_id);
       query.bindValue(":id", scene->id);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_scene" << query.lastError();
         return false;
       }
       sceneRemoved(scene->id);
@@ -3812,7 +3838,7 @@ bool SQLite3Driver::select_treatment(Treatment* treatment) const
         return true;
       }
     } else {
-      qWarning() << query.lastError();
+      qWarning() <<  "select_treatment" << query.lastError();
     }
     return false;
   }
@@ -3839,7 +3865,7 @@ bool SQLite3Driver::update_treatment(Treatment* treatment)
     query.bindValue(":description", treatment->description);
 
     if (!query.exec()) {
-      qWarning() << query.lastError();
+      qWarning() <<  "update_treatment" << query.lastError();
       return false;
     }
     if (-1 == treatment->id) {
@@ -3861,7 +3887,7 @@ bool SQLite3Driver::remove_treatment(Treatment* treatment)
       query.prepare(sqlite3::delete_treatment_by_id);
       query.bindValue(":id", treatment->id);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_treatment" << query.lastError();
         return false;
       }
       treatmentRemoved(treatment->id);
@@ -4410,7 +4436,7 @@ bool SQLite3Driver::remove_equipment_from_treatments(std::string equipment_id)
       query.bindValue(":common_name", treatment->common_name);
       query.bindValue(":description", treatment->description);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_equipment_from_treatment" << query.lastError();
         return false;
       }
     }
@@ -4437,7 +4463,7 @@ bool SQLite3Driver::remove_citation_from_treatments(std::string citation_id)
       query.bindValue(":common_name", treatment->common_name);
       query.bindValue(":description", treatment->description);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_citation_from_treatments" << query.lastError();
         return false;
       }
     }
@@ -4465,7 +4491,7 @@ bool SQLite3Driver::remove_citation_from_injuries(std::string citation_id)
       query.bindValue(":min", injury->severity_min);
       query.bindValue(":max", injury->severity_max);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_citation_from_injuries" << query.lastError();
         return false;
       }
     }
@@ -4492,7 +4518,7 @@ bool SQLite3Driver::remove_citation_from_equipment(std::string citation_id)
       query.bindValue(":citations", citations.c_str());
       query.bindValue(":image", equipment->image);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_citation_from_equipment" << query.lastError();
         return false;
       }
     }
@@ -4517,7 +4543,7 @@ bool SQLite3Driver::remove_citation_from_objectives(std::string citation_id)
       query.bindValue(":description", objective->description);
       query.bindValue(":citations", citations.c_str());
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_citation_from_objectives" << query.lastError();
         return false;
       }
     }
@@ -4549,7 +4575,7 @@ bool SQLite3Driver::remove_injury_from_injury_sets(std::string injury_id)
       //query.bindValue(":physiology_file", injury_set->physiology_file);
       //query.bindValue(":treatment", injury_set->treatment);
       if (!query.exec()) {
-        qWarning() << query.lastError();
+        qWarning() <<  "remove_injury_from_injury_sets" << query.lastError();
         return false;
       }
     }

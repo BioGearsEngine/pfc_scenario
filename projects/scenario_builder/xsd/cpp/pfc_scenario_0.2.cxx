@@ -47,6 +47,30 @@ namespace pfc
     // ScenarioSchema
     // 
 
+    const ScenarioSchema::summary_type& ScenarioSchema::
+    summary () const
+    {
+      return this->summary_.get ();
+    }
+
+    ScenarioSchema::summary_type& ScenarioSchema::
+    summary ()
+    {
+      return this->summary_.get ();
+    }
+
+    void ScenarioSchema::
+    summary (const summary_type& x)
+    {
+      this->summary_.set (x);
+    }
+
+    void ScenarioSchema::
+    summary (::std::unique_ptr< summary_type > x)
+    {
+      this->summary_.set (std::move (x));
+    }
+
     const ScenarioSchema::author_type& ScenarioSchema::
     author () const
     {
@@ -238,30 +262,6 @@ namespace pfc
     {
       this->works_cited_.set (std::move (x));
     }
-
-    const ScenarioSchema::maps_type& ScenarioSchema::
-    maps () const
-    {
-      return this->maps_.get ();
-    }
-
-    ScenarioSchema::maps_type& ScenarioSchema::
-    maps ()
-    {
-      return this->maps_.get ();
-    }
-
-    void ScenarioSchema::
-    maps (const maps_type& x)
-    {
-      this->maps_.set (x);
-    }
-
-    void ScenarioSchema::
-    maps (::std::unique_ptr< maps_type > x)
-    {
-      this->maps_.set (std::move (x));
-    }
   }
 }
 
@@ -284,16 +284,17 @@ namespace pfc
     //
 
     ScenarioSchema::
-    ScenarioSchema (const author_type& author,
+    ScenarioSchema (const summary_type& summary,
+                    const author_type& author,
                     const equipment_type& equipment,
                     const trauma_definitions_type& trauma_definitions,
                     const treatment_plans_type& treatment_plans,
                     const trauma_sets_type& trauma_sets,
                     const syllabus_type& syllabus,
                     const medical_scenario_type& medical_scenario,
-                    const works_cited_type& works_cited,
-                    const maps_type& maps)
+                    const works_cited_type& works_cited)
     : ::xml_schema::type (),
+      summary_ (summary, this),
       author_ (author, this),
       equipment_ (equipment, this),
       trauma_definitions_ (trauma_definitions, this),
@@ -301,22 +302,22 @@ namespace pfc
       trauma_sets_ (trauma_sets, this),
       syllabus_ (syllabus, this),
       medical_scenario_ (medical_scenario, this),
-      works_cited_ (works_cited, this),
-      maps_ (maps, this)
+      works_cited_ (works_cited, this)
     {
     }
 
     ScenarioSchema::
-    ScenarioSchema (::std::unique_ptr< author_type > author,
+    ScenarioSchema (::std::unique_ptr< summary_type > summary,
+                    ::std::unique_ptr< author_type > author,
                     ::std::unique_ptr< equipment_type > equipment,
                     ::std::unique_ptr< trauma_definitions_type > trauma_definitions,
                     ::std::unique_ptr< treatment_plans_type > treatment_plans,
                     ::std::unique_ptr< trauma_sets_type > trauma_sets,
                     ::std::unique_ptr< syllabus_type > syllabus,
                     ::std::unique_ptr< medical_scenario_type > medical_scenario,
-                    ::std::unique_ptr< works_cited_type > works_cited,
-                    ::std::unique_ptr< maps_type > maps)
+                    ::std::unique_ptr< works_cited_type > works_cited)
     : ::xml_schema::type (),
+      summary_ (std::move (summary), this),
       author_ (std::move (author), this),
       equipment_ (std::move (equipment), this),
       trauma_definitions_ (std::move (trauma_definitions), this),
@@ -324,8 +325,7 @@ namespace pfc
       trauma_sets_ (std::move (trauma_sets), this),
       syllabus_ (std::move (syllabus), this),
       medical_scenario_ (std::move (medical_scenario), this),
-      works_cited_ (std::move (works_cited), this),
-      maps_ (std::move (maps), this)
+      works_cited_ (std::move (works_cited), this)
     {
     }
 
@@ -334,6 +334,7 @@ namespace pfc
                     ::xml_schema::flags f,
                     ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
+      summary_ (x.summary_, f, this),
       author_ (x.author_, f, this),
       equipment_ (x.equipment_, f, this),
       trauma_definitions_ (x.trauma_definitions_, f, this),
@@ -341,8 +342,7 @@ namespace pfc
       trauma_sets_ (x.trauma_sets_, f, this),
       syllabus_ (x.syllabus_, f, this),
       medical_scenario_ (x.medical_scenario_, f, this),
-      works_cited_ (x.works_cited_, f, this),
-      maps_ (x.maps_, f, this)
+      works_cited_ (x.works_cited_, f, this)
     {
     }
 
@@ -351,6 +351,7 @@ namespace pfc
                     ::xml_schema::flags f,
                     ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+      summary_ (this),
       author_ (this),
       equipment_ (this),
       trauma_definitions_ (this),
@@ -358,8 +359,7 @@ namespace pfc
       trauma_sets_ (this),
       syllabus_ (this),
       medical_scenario_ (this),
-      works_cited_ (this),
-      maps_ (this)
+      works_cited_ (this)
     {
       if ((f & ::xml_schema::flags::base) == 0)
       {
@@ -377,6 +377,34 @@ namespace pfc
         const ::xercesc::DOMElement& i (p.cur_element ());
         const ::xsd::cxx::xml::qualified_name< char > n (
           ::xsd::cxx::xml::dom::name< char > (i));
+
+        // summary
+        //
+        {
+          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
+            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
+              "summary",
+              "",
+              &::xsd::cxx::tree::factory_impl< summary_type >,
+              false, false, i, n, f, this));
+
+          if (tmp.get () != 0)
+          {
+            if (!summary_.present ())
+            {
+              ::std::unique_ptr< summary_type > r (
+                dynamic_cast< summary_type* > (tmp.get ()));
+
+              if (r.get ())
+                tmp.release ();
+              else
+                throw ::xsd::cxx::tree::not_derived< char > ();
+
+              this->summary_.set (::std::move (r));
+              continue;
+            }
+          }
+        }
 
         // author
         //
@@ -602,35 +630,14 @@ namespace pfc
           }
         }
 
-        // maps
-        //
-        {
-          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
-            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
-              "maps",
-              "",
-              &::xsd::cxx::tree::factory_impl< maps_type >,
-              false, false, i, n, f, this));
-
-          if (tmp.get () != 0)
-          {
-            if (!maps_.present ())
-            {
-              ::std::unique_ptr< maps_type > r (
-                dynamic_cast< maps_type* > (tmp.get ()));
-
-              if (r.get ())
-                tmp.release ();
-              else
-                throw ::xsd::cxx::tree::not_derived< char > ();
-
-              this->maps_.set (::std::move (r));
-              continue;
-            }
-          }
-        }
-
         break;
+      }
+
+      if (!summary_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "summary",
+          "");
       }
 
       if (!author_.present ())
@@ -688,13 +695,6 @@ namespace pfc
           "works-cited",
           "");
       }
-
-      if (!maps_.present ())
-      {
-        throw ::xsd::cxx::tree::expected_element< char > (
-          "maps",
-          "");
-      }
     }
 
     ScenarioSchema* ScenarioSchema::
@@ -710,6 +710,7 @@ namespace pfc
       if (this != &x)
       {
         static_cast< ::xml_schema::type& > (*this) = x;
+        this->summary_ = x.summary_;
         this->author_ = x.author_;
         this->equipment_ = x.equipment_;
         this->trauma_definitions_ = x.trauma_definitions_;
@@ -718,7 +719,6 @@ namespace pfc
         this->syllabus_ = x.syllabus_;
         this->medical_scenario_ = x.medical_scenario_;
         this->works_cited_ = x.works_cited_;
-        this->maps_ = x.maps_;
       }
 
       return *this;
@@ -755,6 +755,14 @@ namespace pfc
     ::std::ostream&
     operator<< (::std::ostream& o, const ScenarioSchema& i)
     {
+      {
+        ::xsd::cxx::tree::std_ostream_map< char >& om (
+          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
+
+        o << ::std::endl << "summary: ";
+        om.insert (o, i.summary ());
+      }
+
       {
         ::xsd::cxx::tree::std_ostream_map< char >& om (
           ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
@@ -817,14 +825,6 @@ namespace pfc
 
         o << ::std::endl << "works-cited: ";
         om.insert (o, i.works_cited ());
-      }
-
-      {
-        ::xsd::cxx::tree::std_ostream_map< char >& om (
-          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
-
-        o << ::std::endl << "maps: ";
-        om.insert (o, i.maps ());
       }
 
       return o;
@@ -1157,6 +1157,29 @@ namespace pfc
     {
       e << static_cast< const ::xml_schema::type& > (i);
 
+      // summary
+      //
+      {
+        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
+          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
+
+        const ScenarioSchema::summary_type& x (i.summary ());
+        if (typeid (ScenarioSchema::summary_type) == typeid (x))
+        {
+          ::xercesc::DOMElement& s (
+            ::xsd::cxx::xml::dom::create_element (
+              "summary",
+              e));
+
+          s << x;
+        }
+        else
+          tsm.serialize (
+            "summary",
+            "",
+            false, false, e, x);
+      }
+
       // author
       //
       {
@@ -1337,29 +1360,6 @@ namespace pfc
         else
           tsm.serialize (
             "works-cited",
-            "",
-            false, false, e, x);
-      }
-
-      // maps
-      //
-      {
-        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
-          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
-
-        const ScenarioSchema::maps_type& x (i.maps ());
-        if (typeid (ScenarioSchema::maps_type) == typeid (x))
-        {
-          ::xercesc::DOMElement& s (
-            ::xsd::cxx::xml::dom::create_element (
-              "maps",
-              e));
-
-          s << x;
-        }
-        else
-          tsm.serialize (
-            "maps",
             "",
             false, false, e, x);
       }

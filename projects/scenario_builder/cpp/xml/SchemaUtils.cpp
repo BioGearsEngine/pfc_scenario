@@ -103,29 +103,29 @@ namespace schema {
       return ::xml_schema::time{ components[0].toUShort(), components[1].toUShort(), components[2].toDouble() };
     }
   }
-
   //-------------------------------------------------------------------------------
   ScenarioSchema PFC::make_Scenario()
   {
-    return ScenarioSchema(make_author(),
-                          make_equipments(),
-                          make_trauma_definitions(),
-                          make_treatment_plans(),
-                          make_trauma_sets(),
-                          make_syllabus(),
-                          make_medical_scenario(),
-                          make_citation_list(),
-                          make_maps());
+    return ScenarioSchema(
+      make_summary(),
+      make_author(),
+      make_equipments(),
+      make_trauma_definitions(),
+      make_treatment_plans(),
+      make_trauma_sets(),
+      make_syllabus(),
+      make_medical_scenario(),
+      make_citation_list());
+  }
+  //-------------------------------------------------------------------------------
+  auto PFC::make_summary() -> std::unique_ptr<ScenarioSchema::summary_type>
+  {
+    return std::make_unique<schema::ScenarioSchema::summary_type>();
   }
   //-------------------------------------------------------------------------------
   auto PFC::make_author() -> std::unique_ptr<ScenarioSchema::author_type>
   {
     return std::make_unique<schema::ScenarioSchema::author_type>();
-  }
-  //-------------------------------------------------------------------------------
-  auto PFC::make_maps() -> std::unique_ptr<ScenarioSchema::maps_type>
-  {
-    return std::make_unique<schema::ScenarioSchema::maps_type>("", "", "", "", "");
   }
   //-------------------------------------------------------------------------------
   auto PFC::make_equipments() -> std::unique_ptr<ScenarioSchema::equipment_type>
@@ -329,18 +329,21 @@ namespace schema {
     return fidelity;
   }
   //-----------------------------------------------------------------------------
-  auto PFC::make_property_value_list(QString value_list) -> std::unique_ptr<schema::property_value_list>
+  auto PFC::make_property_value_list(QString name_list, QString value_list) -> std::unique_ptr<schema::property_value_list>
   {
+    //TODO: Get the names of each property
     auto list = std::make_unique<schema::property_value_list>();
-    auto vec = value_list.split(';');
-    for (auto value : vec) {
-      if (!value.isEmpty()) {
-        list->value().push_back(std::make_unique<schema::property_value>(value.toStdString()));
-      }
+    auto names = name_list.split(';');
+    auto values = value_list.split(';');
+
+    auto size = std::min(names.size(), values.size());
+    for (auto i = 0; i < size; ++i) {
+      auto name = (names[i].isEmpty() ? "" : names[i]);
+      auto value = (values[i].isEmpty() ? "" : values[i]);
+      list->value().push_back(std::make_unique<schema::property_value>(name.toStdString(), value.toStdString()));
     }
     return list;
   }
-
   //-----------------------------------------------------------------------------
   auto PFC::make_treatment_plan(::pfc::Treatment const* const input) -> std::unique_ptr<treatment_plan>
   {
@@ -451,13 +454,14 @@ namespace schema {
 
     return event;
   }
-
+  //-----------------------------------------------------------------------------
   auto PFC::make_item(::pfc::EquipmentMap const* const input) -> std::unique_ptr<schema::item>
   {
     auto item = std::make_unique<schema::item>(make_string(input->name.toStdString()),
                                                make_string("Equipment_" + std::to_string(input->id)),
                                                make_string(input->notes.toStdString()),
-                                               make_property_value_list(input->property_values));
+                                               make_property_value_list(input->property_names, input->property_values));
+
     return item;
   }
   //-----------------------------------------------------------------------------
@@ -465,7 +469,6 @@ namespace schema {
   {
     return std::make_unique<::xml_schema::string>("Role_" + std::to_string(input->id));
   }
-
   //-----------------------------------------------------------------------------
   auto PFC::make_medical_reference_list() -> std::unique_ptr<schema::medical_reference_list>
   {
@@ -473,7 +476,7 @@ namespace schema {
       std::make_unique<citation_ref_list>(),
       std::make_unique<cpg_ref_list>());
   }
-  //----------These will be filled in incremental commits-----------------------------------
+  //--------------------------------------------
   auto PFC::load_authors(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<::pfc::schema::ScenarioSchema>
   {
     auto author = scenario_schema->author();
@@ -492,6 +495,7 @@ namespace schema {
     wasSuccessful = true;
     return scenario_schema;
   }
+  //-----------------------------------------------------------------------------
   auto PFC::load_assessments(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<::pfc::schema::ScenarioSchema>
   {
     auto assessments = scenario_schema->syllabus().learning_assessments().assessment();
@@ -663,25 +667,7 @@ namespace schema {
   //-----------------------------------------------------------------------------
   auto PFC::load_locations(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<::pfc::schema::ScenarioSchema>
   {
-    auto locations = scenario_schema->medical_scenario().training_script().scene();
-    for (auto location : locations) {
-      pfc::Location temp;
-      temp.name = QString::fromStdString(std::string(location.name()) + " Location");
-      temp.scene_name = QString::fromStdString(location.name());
-      std::string hours = std::to_string(location.time_of_day().hours());
-      hours = (hours.length() == 1) ? ("0" + hours) : (hours);
-      std::string minutes = std::to_string(location.time_of_day().minutes());
-      minutes = (minutes.length() == 1) ? ("0" + minutes) : (minutes);
-      std::string seconds = std::to_string(location.time_of_day().seconds());
-      seconds = seconds.substr(0, seconds.find("."));
-      seconds = (seconds.length() == 1) ? ("0" + seconds) : (seconds);
-      temp.time_of_day = QString::fromStdString(hours + ":" + minutes + ":" + seconds);
-
-      if (!_db.update_location(&temp)) {
-        wasSuccessful = false;
-        return scenario_schema;
-      }
-    }
+    //TODO: Moved location to scenes due to current hiarchy in schema
     wasSuccessful = true;
     return scenario_schema;
   }
@@ -732,6 +718,7 @@ namespace schema {
     auto& scenes = scenario_schema->medical_scenario().training_script().scene();
     for (auto scene : scenes) {
       pfc::Scene temp;
+      temp.id = -1;
       temp.name = QString::fromStdString(scene.name());
       temp.description = QString::fromStdString(scene.description());
       std::string hours = std::to_string(scene.time_of_day().hours());
@@ -743,23 +730,82 @@ namespace schema {
       seconds = (seconds.length() == 1) ? ("0" + seconds) : (seconds);
       temp.time_of_day = QString::fromStdString(hours + ":" + minutes + ":" + seconds);
       temp.time_in_simulation = scene.time_in_simulation();
-      //temp.weather - where do I get this?
-      //temp.events - this is slightly more complicated to figure out
-      //temp.items - same with all of the fields remaining really
 
       if (!_db.update_scene(&temp)) {
         wasSuccessful = false;
         return scenario_schema;
       }
+
+      pfc::Location temp_location;
+      temp_location.id = -1;
+      temp_location.name = QString::fromStdString(std::string(scene.name()) + " Location");
+      temp_location.scene_name = QString::fromStdString(scene.name());
+      hours = std::to_string(scene.time_of_day().hours());
+      hours = (hours.length() == 1) ? ("0" + hours) : (hours);
+      minutes = std::to_string(scene.time_of_day().minutes());
+      minutes = (minutes.length() == 1) ? ("0" + minutes) : (minutes);
+      seconds = std::to_string(scene.time_of_day().seconds());
+      seconds = seconds.substr(0, seconds.find("."));
+      seconds = (seconds.length() == 1) ? ("0" + seconds) : (seconds);
+      temp_location.time_of_day = QString::fromStdString(hours + ":" + minutes + ":" + seconds);
+
+      if (!_db.update_location(&temp_location)) {
+        wasSuccessful = false;
+        return scenario_schema;
+      }
+
+      LocationMap dbLocationMap;
+      dbLocationMap.id = -1;
+      dbLocationMap.fk_scene = temp.id;
+      dbLocationMap.fk_location = temp_location.id;
+      _db.update_location_map(&dbLocationMap);
+
       auto& events = scene.events().event();
       for (auto& event : events) {
         Event dbEvent;
+        dbEvent.id = -1;
         dbEvent.name = event.name().c_str();
         if (_db.select_event(&dbEvent)) {
           EventMap map;
           map.fk_event = dbEvent.id;
           map.fk_scene = temp.id;
           _db.update_event_map(&map);
+        }
+      }
+
+      auto items = scene.items().item();
+      for (auto& item : items) {
+        for (auto& equipment : scenario_schema->equipment().equipment()) {
+          EquipmentMap eqMap;
+          if (equipment.id() == item.equipment_id()) {
+            Equipment eq;
+            eq.name = equipment.name().c_str();
+            if (_db.select_equipment(&eq)) {
+              eqMap.fk_scene = temp.id;
+              eqMap.fk_equipment = eq.id;
+              if (!_db.update_equipment_map(&eqMap)) {
+                qDebug() << "Error updating Equipment Map";
+              }
+            }
+          }
+        }
+      }
+
+      auto roles = scene.roles().role_ref();
+      for (auto& parts : roles) {
+        RoleMap rMap;
+        for (auto& role : scenario_schema->medical_scenario().roles().role()) {
+          if (role.id() == parts) {
+            Role dbPart;
+            dbPart.name = role.name().c_str();
+            if (_db.select_role(&dbPart)) {
+              rMap.fk_scene = temp.id;
+              rMap.fk_role = dbPart.id;
+              if (!_db.update_role_map(&rMap)) {
+                qDebug() << "Error updating Role Map";
+              }
+            }
+          }
         }
       }
     }
@@ -802,115 +848,6 @@ namespace schema {
     return scenario_schema;
   }
   //-----------------------------------------------------------------------------
-  auto PFC::load_citation_maps(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<::pfc::schema::ScenarioSchema>
-  {
-    std::string maps = scenario_schema->maps().citation_maps();
-    while (!maps.empty()) {
-      CitationMap temp;
-      size_t separator = maps.find_first_of(',');
-      size_t end = maps.find_first_of(')');
-      temp.fk_scene = std::stoi(maps.substr(1, separator));
-      temp.fk_citation = std::stoi(maps.substr(separator + 1, end - separator));
-      if (!_db.update_citation_map(&temp)) {
-        wasSuccessful = false;
-        return scenario_schema;
-      }
-      if (maps.find_last_of(')') == end) {
-        break;
-      }
-      maps = maps.substr(end + 1);
-    }
-    wasSuccessful = true;
-    return scenario_schema;
-  }
-  //-----------------------------------------------------------------------------
-  auto PFC::load_event_maps(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<::pfc::schema::ScenarioSchema>
-  {
-    std::string maps = scenario_schema->maps().event_maps();
-    while (!maps.empty()) {
-      EventMap temp;
-      size_t separator = maps.find_first_of(',');
-      size_t end = maps.find_first_of(')');
-      temp.fk_scene = std::stoi(maps.substr(1, separator));
-      temp.fk_event = std::stoi(maps.substr(separator + 1, end - separator));
-      if (!_db.update_event_map(&temp)) {
-        wasSuccessful = false;
-        return scenario_schema;
-      }
-      if (maps.find_last_of(')') == end) {
-        break;
-      }
-      maps = maps.substr(end + 1);
-    }
-    wasSuccessful = true;
-    return scenario_schema;
-  }
-  //-----------------------------------------------------------------------------
-  auto PFC::load_equipment_maps(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<::pfc::schema::ScenarioSchema>
-  {
-    std::string maps = scenario_schema->maps().equipment_maps();
-    while (!maps.empty()) {
-      EquipmentMap temp;
-      size_t separator = maps.find_first_of(',');
-      size_t end = maps.find_first_of(')');
-      temp.fk_scene = std::stoi(maps.substr(1, separator));
-      temp.fk_equipment = std::stoi(maps.substr(separator + 1, end - separator));
-      if (!_db.update_equipment_map(&temp)) {
-        wasSuccessful = false;
-        return scenario_schema;
-      }
-      if (maps.find_last_of(')') == end) {
-        break;
-      }
-      maps = maps.substr(end + 1);
-    }
-    wasSuccessful = true;
-    return scenario_schema;
-  }
-  //-----------------------------------------------------------------------------
-  auto PFC::load_location_maps(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<::pfc::schema::ScenarioSchema>
-  {
-    std::string maps = scenario_schema->maps().location_maps();
-    while (!maps.empty()) {
-      LocationMap temp;
-      size_t separator = maps.find_first_of(',');
-      size_t end = maps.find_first_of(')');
-      temp.fk_scene = std::stoi(maps.substr(1, separator));
-      temp.fk_location = std::stoi(maps.substr(separator + 1, end - separator));
-      if (!_db.update_location_map(&temp)) {
-        wasSuccessful = false;
-        return scenario_schema;
-      }
-      if (maps.find_last_of(')') == end) {
-        break;
-      }
-      maps = maps.substr(end + 1);
-    }
-    wasSuccessful = true;
-    return scenario_schema;
-  }
-  //-----------------------------------------------------------------------------
-  auto PFC::load_role_maps(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<::pfc::schema::ScenarioSchema>
-  {
-    std::string maps = scenario_schema->maps().role_maps();
-    while (!maps.empty()) {
-      RoleMap temp;
-      size_t separator = maps.find_first_of(',');
-      size_t end = maps.find_first_of(')');
-      temp.fk_scene = std::stoi(maps.substr(1, separator));
-      temp.fk_role = std::stoi(maps.substr(separator + 1, end - separator));
-      if (!_db.update_role_map(&temp)) {
-        wasSuccessful = false;
-        return scenario_schema;
-      }
-      if (maps.find_last_of(')') == end) {
-        break;
-      }
-      maps = maps.substr(end + 1);
-    }
-    wasSuccessful = true;
-    return scenario_schema;
-  }
 } //namespace schema
 
 } // namespace PFC

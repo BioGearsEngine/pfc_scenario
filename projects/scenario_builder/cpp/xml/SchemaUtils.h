@@ -33,8 +33,8 @@ namespace schema {
   class PFC {
   public:
     static ScenarioSchema make_Scenario();
+    static auto make_summary() -> std::unique_ptr<ScenarioSchema::summary_type>;
     static auto make_author() -> std::unique_ptr<ScenarioSchema::author_type>;
-    static auto make_maps() -> std::unique_ptr<ScenarioSchema::maps_type>;
     static auto make_equipments() -> std::unique_ptr<ScenarioSchema::equipment_type>;
     static auto make_trauma_definitions() -> std::unique_ptr<ScenarioSchema::trauma_definitions_type>;
     static auto make_treatment_plans() -> std::unique_ptr<ScenarioSchema::treatment_plans_type>;
@@ -67,7 +67,8 @@ namespace schema {
     static auto make_authors_list(QString name_list) -> schema::citation::authors_sequence;
     static auto make_event_category(QString cat) -> schema::event_category_enum;
     static auto make_event_fidelity(QString fed) -> schema::event_fidelity_enum;
-    static auto make_property_value_list(QString properties_list) -> std::unique_ptr<schema::property_value_list>;
+    static auto make_property_value_list(QString properties_name_list, QString properties_list) -> std::unique_ptr<schema::property_value_list>;
+
     static auto load_assessments(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<::pfc::schema::ScenarioSchema>;
     static auto load_authors(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<::pfc::schema::ScenarioSchema>;
     static auto load_citations(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<::pfc::schema::ScenarioSchema>;
@@ -82,11 +83,6 @@ namespace schema {
     static auto load_roles(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<::pfc::schema::ScenarioSchema>;
     static auto load_scenes(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<::pfc::schema::ScenarioSchema>;
     static auto load_treatments(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<::pfc::schema::ScenarioSchema>;
-    static auto load_citation_maps(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<::pfc::schema::ScenarioSchema>;
-    static auto load_event_maps(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<::pfc::schema::ScenarioSchema>;
-    static auto load_equipment_maps(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<::pfc::schema::ScenarioSchema>;
-    static auto load_location_maps(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<::pfc::schema::ScenarioSchema>;
-    static auto load_role_maps(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<::pfc::schema::ScenarioSchema>;
   };
 
   class MSDL {
