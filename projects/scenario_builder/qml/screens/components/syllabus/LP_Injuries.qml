@@ -115,7 +115,7 @@ ColumnLayout {
         id : injury
         color : 'transparent'
         border.color: "steelblue"
-        height : 30
+        height : injury_title_text.height + injury_value_text.height
         anchors { left : parent.left; right: parent.right ; margins : 5 }
 
         MouseArea {
@@ -140,7 +140,8 @@ ColumnLayout {
 
         Text {
           id : injury_value_text
-          anchors.left : injury_title_text.right
+          anchors.top : injury_title_text.bottom
+          anchors.left : parent.left
           anchors.right : parent.right
           anchors.leftMargin : 10
           font.pointSize: 10

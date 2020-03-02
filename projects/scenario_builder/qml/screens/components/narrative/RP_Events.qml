@@ -169,7 +169,7 @@ ColumnLayout {
           id : full_event
           color : 'transparent'
           border.color: "steelblue"
-          height : 30
+          height : full_event_title_text.height + full_event_value_text.height
           anchors { left : parent.left; right: parent.right ; margins : 5 }  
 
           MouseArea {
@@ -194,7 +194,8 @@ ColumnLayout {
 
           Text {
             id : full_event_value_text
-            anchors.left : full_event_title_text.right
+            anchors.top : full_event_title_text.bottom
+            anchors.left : parent.left
             anchors.right : parent.right
             anchors.leftMargin : 10
             font.pointSize: 10
@@ -322,7 +323,7 @@ ColumnLayout {
           id : event
           color : 'transparent'
           border.color: "steelblue"
-          height : 30
+          height : event_title_text.height + event_value_text.height
           anchors { left : parent.left; right: parent.right ; margins : 5 }  
 
           MouseArea {
@@ -354,7 +355,8 @@ ColumnLayout {
 
           Text {
             id : event_value_text
-            anchors.left : event_title_text.right
+            anchors.top : event_title_text.bottom
+            anchors.left : parent.left
             anchors.right : parent.right
             anchors.leftMargin : 10
             font.pointSize: 10

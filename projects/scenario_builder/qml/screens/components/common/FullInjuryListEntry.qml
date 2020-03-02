@@ -43,7 +43,7 @@ FullListEntry {
        id : injury_medical_name_text
        anchors.left : parent.left
        anchors.leftMargin : 5
-       anchors.verticalCenter  : parent.verticalCenter 
+       //anchors.verticalCenter  : parent.verticalCenter 
        width : 100 
        font.weight: Font.Bold
        font.pointSize: 8
@@ -54,7 +54,7 @@ FullListEntry {
     TextField {
       id : injury_description_entry
       anchors.left : parent.left
-      anchors.top : injury_medical_name_text.top
+      anchors.top : injury_medical_name_text.bottom
       anchors.topMargin : 5
       anchors.leftMargin : 5
       font.pointSize : 8

@@ -105,7 +105,7 @@ ColumnLayout {
         id : assessment
         color : 'transparent'
         border.color: "steelblue"
-        height : 30
+        height : assessment_title_text.height + assessment_value_text.height
         anchors { left : parent.left; right: parent.right ; margins : 5 }
 
         MouseArea {
@@ -130,7 +130,8 @@ ColumnLayout {
 
         Text {
           id : assessment_value_text
-          anchors.left : assessment_title_text.right
+          anchors.top : assessment_title_text.bottom
+          anchors.left : parent.left
           anchors.right : parent.right
           anchors.leftMargin : 10
           font.pointSize: 10

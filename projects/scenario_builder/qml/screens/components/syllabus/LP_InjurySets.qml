@@ -128,23 +128,23 @@ ColumnLayout {
           enabled : false
           color: enabled ? Material.primaryTextColor : Material.primaryTextColor
         }
-
-        Text {
-          id : injurySet_value_text
-          anchors.left : injurySet_title_text.right
-          anchors.right : parent.right
-          anchors.leftMargin : 10
-          font.pointSize: 10
-          text :  description
-          enabled : false
-          color: enabled ? Material.primaryTextColor : Material.primaryTextColor
-          elide: Text.ElideRight
-        }
+// This won't get deleted just yet because we haven't decided on how this bar should look
+//        Text { 
+//          id : injurySet_value_text
+//          anchors.left : injurySet_title_text.right
+//          anchors.right : parent.right
+//          anchors.leftMargin : 10
+//          font.pointSize: 10
+//          text :  description
+//          enabled : false
+//          color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+//          elide: Text.ElideRight
+//        }
 
         states: State {
           name : "Selected"
           PropertyChanges{ target : injurySet_title_text; enabled : true}
-          PropertyChanges{ target : injurySet_value_text; enabled  : true}
+          //PropertyChanges{ target : injurySet_value_text; enabled  : true}
         }
 
         onFocusChanged: {

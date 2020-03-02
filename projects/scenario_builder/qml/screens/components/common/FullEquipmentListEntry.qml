@@ -26,7 +26,7 @@ FullListEntry {
      id : equipment
      color : 'transparent'
      border.color: "steelblue"
-     height : 30
+     height : equipment_name_text.height + equipment_description_text.height
      anchors { left : parent.left; right: parent.right ; margins : 5 }
 
      MouseArea {
@@ -60,7 +60,8 @@ FullListEntry {
     }
     TextField {
        id : equipment_description_text
-       anchors.left : equipment_name_text.right
+       anchors.top : equipment_name_text.bottom
+       anchors.left : parent.left
        anchors.leftMargin : 10
        font.pointSize: 10
        text :  model.description

@@ -101,7 +101,7 @@ ColumnLayout {
         id : objective
         color : 'transparent'
         border.color: "steelblue"
-        height : 30
+        height : objective_title_text.height + objective_value_text.height
         anchors { left : parent.left; right: parent.right ; margins : 5 }
 
         MouseArea {
@@ -126,7 +126,8 @@ ColumnLayout {
 
         Text {
           id : objective_value_text
-          anchors.left : objective_title_text.right
+          anchors.top : objective_title_text.bottom
+          anchors.left : parent.left
           anchors.right : parent.right
           anchors.leftMargin : 10
           font.pointSize: 10

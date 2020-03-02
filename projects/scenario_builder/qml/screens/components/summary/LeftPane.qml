@@ -157,7 +157,7 @@ Rectangle {
           id : citation
           color : 'transparent'
           border.color: "steelblue"
-          height : 30
+          height : citation_title_text.height + citation_value_text.height
           anchors { left : parent.left; right: parent.right ; margins : 5 }  
 
           MouseArea {
@@ -168,10 +168,10 @@ Rectangle {
             }
             onDoubleClicked: {
 
-              citationEdit.name = listArea.model.get(index).name
-              citationEdit.description = listArea.model.get(index).description
-              citationEdit.citationID = listArea.model.get(index).citation_id
-              contentStack.currentIndex = 1
+//              citationEdit.name = listArea.model.get(index).name
+//              citationEdit.description = listArea.model.get(index).description
+//              citationEdit.citationID = listArea.model.get(index).citation_id
+//              contentStack.currentIndex = 1
             }
           }  
 
@@ -189,7 +189,8 @@ Rectangle {
 
           Text {
             id : citation_value_text
-            anchors.left : citation_title_text.right
+            anchors.top : citation_title_text.bottom
+            anchors.left : parent.left
             anchors.right : parent.right
             anchors.leftMargin : 10
             font.pointSize: 10
