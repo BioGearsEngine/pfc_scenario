@@ -27,7 +27,7 @@ RowLayout {
     backend : root.backend
     model : narrative_left.model
     index : narrative_left.index
-
+    count : narrative_left.count
     onIndexChanged : {
       
     } 

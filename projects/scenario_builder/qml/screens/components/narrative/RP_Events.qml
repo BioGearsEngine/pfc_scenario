@@ -13,6 +13,7 @@ ColumnLayout {
   property SQLBackend backend
   property ListModel model
   property int index // = events.index
+  property int count
 
   Event {
     id : self
@@ -252,6 +253,9 @@ ColumnLayout {
           thirdButtonText : "Remove"  
 
           onFirstButtonClicked :{
+            if (count == 0) {
+              return
+            }
             event_stack.currentIndex = 0
             full_listArea.model.clear()
             root.backend.events()
@@ -265,6 +269,9 @@ ColumnLayout {
             }
           }
           onSecondButtonClicked :{
+            if (count == 0) {
+              return
+            }
             if( next < listArea.model.count ) 
             { next = listArea.model.count +1}
             self.event_id = -1
@@ -292,6 +299,9 @@ ColumnLayout {
             ++next;
           }
           onThirdButtonClicked : {
+            if (count == 0) {
+              return
+            }
             self.event_id = listArea.model.get(listArea.currentIndex).event_id
             self.name = listArea.model.get(listArea.currentIndex).name
             self_scene.scene_id = root.model.get(root.index).id
@@ -445,5 +455,15 @@ ColumnLayout {
           });
         }
       }
+    }
+    onCountChanged : {
+      if(count == 0) {
+          contentStack.currentIndex = 0
+          while (listArea.count > 0) {
+            listArea.model.remove(0)
+          }
+        } else {
+          indexChanged()
+        }
     }
 }

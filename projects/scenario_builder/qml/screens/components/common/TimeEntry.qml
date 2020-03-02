@@ -6,6 +6,10 @@ import QtQuick.Controls 2.12
 Rectangle {
   id: root
   property alias label: name.text
+  property alias hours: hourTime.value
+  property alias minutes: minuteTime.value
+  property alias minutesEditable: minuteTime.editable
+  property alias hoursEditable: hourTime.editable
 
   Layout.preferredHeight : hourTime.up.implicitIndicatorHeight 
   Layout.rightMargin : 20

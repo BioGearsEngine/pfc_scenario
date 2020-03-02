@@ -12,6 +12,7 @@ Rectangle {
   property alias currentIndex : narrative_tabs.currentIndex
   property ListModel model
   property int index // creates new int, which is publicly assigned in ScenarioNarrative.qml
+  property int count
 
   property SQLBackend backend
   property ListElement modelData
@@ -61,6 +62,7 @@ Rectangle {
         backend : root.backend
         model : root.model
         index : root.index
+        count : root.count
     	}
     	RP_Roles {
         id: roles
@@ -69,6 +71,7 @@ Rectangle {
         backend : root.backend
         model : root.model
         index : root.index
+        count : root.count
     	}
     	RP_Events {
         id: events
@@ -77,6 +80,7 @@ Rectangle {
         backend : root.backend
         model : root.model
         index : root.index
+        count : root.count
     	}
     }
   }

@@ -12,6 +12,8 @@ Rectangle{
     property SQLBackend backend
     property ListModel model
     property int index
+    property int count
+
     Location {
       id : self
     }
@@ -85,5 +87,22 @@ Rectangle{
       if(values && model.count != 0) {
         nameEntry.text = root.model.get(root.index).name
       }
+    }
+    onCountChanged : {
+      if(count == 0) {
+          nameEntry.text = ""
+          locationNameEntry.text = ""
+          environmentEntry.text = ""
+          timeOfDayEntry.hours = 23
+          timeOfDayEntry.minutes = 59
+          nameEntry.text.readOnly = true
+          locationNameEntry.text.readOnly = true
+          timeScenarioEntry.text.readOnly = true
+        } else {
+          locationNameEntry.text.readOnly = false
+          nameEntry.text.readOnly = false
+          timeScenarioEntry.text.readOnly = false
+          indexChanged()
+        }
     }
 }

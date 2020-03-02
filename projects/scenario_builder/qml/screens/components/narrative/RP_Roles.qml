@@ -13,6 +13,7 @@ ColumnLayout {
   property SQLBackend backend
   property ListModel model
   property int index // = roles.index
+  property int count
 
   Role {
     id : self
@@ -244,6 +245,9 @@ ColumnLayout {
         thirdButtonText : "Remove"  
 
         onFirstButtonClicked :{
+          if (count == 0) {
+            return
+          }
           role_stack.currentIndex = 0
           full_listArea.model.clear()
           root.backend.roles()
@@ -257,6 +261,9 @@ ColumnLayout {
           }
         }
         onSecondButtonClicked :{
+          if (count == 0) {
+            return
+          }
           if( next < listArea.model.count ) 
           { next = listArea.model.count +1}
           self.role_id = -1
@@ -282,6 +289,9 @@ ColumnLayout {
           ++next;
         }
         onThirdButtonClicked : {
+          if (count == 0) {
+            return
+          }
           self.role_id = listArea.model.get(listArea.currentIndex).role_id
           self.name = listArea.model.get(listArea.currentIndex).name
           self_scene.scene_id = root.model.get(root.index).id
@@ -440,5 +450,15 @@ ColumnLayout {
           });
         }
       }
+    }
+    onCountChanged : {
+      if(count == 0) {
+          contentStack.currentIndex = 0
+          while (listArea.count > 0) {
+            listArea.model.remove(0)
+          }
+        } else {
+          indexChanged()
+        }
     }
 }

@@ -214,7 +214,7 @@ bool SQLite3Driver::populate_db()
     }
   }
   //---Equipment---
-  populate_default_equipment();
+  populate_equipment();
   //---Injury---
   if (injury_count() == 0) {
     default_injury.medical_name = "Injury_1_Medical_Name";
@@ -299,7 +299,7 @@ bool SQLite3Driver::populate_db()
   return true;
 }
 //------------------------------------------------------------------------------
-bool SQLite3Driver::populate_default_equipment()
+bool SQLite3Driver::populate_equipment()
 {
   Equipment temp;
   Equipment tourniquet
