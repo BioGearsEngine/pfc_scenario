@@ -216,17 +216,7 @@ bool SQLite3Driver::populate_db()
   //---Equipment---
   populate_equipment();
   //---Injury---
-  if (injury_count() == 0) {
-    default_injury.medical_name = "Injury_1_Medical_Name";
-    default_injury.common_name = "Injury_1_Common_Name";
-    default_injury.description = "Description of Injury_1";
-    default_injury.citations = "";
-    default_injury.severity_min = 0;
-    default_injury.severity_max = 1;
-    if (!update_injury(&default_injury)) {
-      return false;
-    }
-  }
+  populate_injuries();
   //---InjurySet---
   if (injury_set_count() == 0) {
     default_injury_set.name = "Injury_Set_1";
@@ -516,6 +506,87 @@ bool SQLite3Driver::populate_equipment()
   temp.assign(energy_gel);
   if (!select_equipment(&temp)) {
     if (!update_equipment(&energy_gel)) {
+      return false;
+    }
+  }
+  return true;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::populate_injuries()
+{
+  Injury temp;
+  Injury contusion
+         ,laceration
+         ,puncture
+         ,airway_injury
+         ,brain_injury
+         ,infection
+         ,burn_1
+         ,burn_2
+         ,burn_3
+         ,bone_break;
+  // TODO: These medical and common names need to be updated, they are not official at all
+  contusion.medical_name = "Contusion";
+  contusion.common_name = "Internal Bleeding";
+  temp.assign(contusion);
+  if (!select_injury(&temp)) {
+    if (!update_injury(&contusion)) {
+      return false;
+    }
+  }
+  laceration.medical_name = "Laceration";
+  laceration.common_name = "External Bleeding";
+  temp.assign(laceration);
+  if (!select_injury(&temp)) {
+    if (!update_injury(&laceration)) {
+      return false;
+    }
+  }
+  puncture.medical_name = "Puncture";
+  puncture.common_name = "Holes in body";
+  temp.assign(puncture);
+  if (!select_injury(&temp)) {
+    if (!update_injury(&puncture)) {
+      return false;
+    }
+  }
+  airway_injury.medical_name = "Airway Injury";
+  airway_injury.common_name = "Injury to airway";
+  temp.assign(airway_injury);
+  if (!select_injury(&temp)) {
+    if (!update_injury(&airway_injury)) {
+      return false;
+    }
+  }
+  infection.medical_name = "Infection";
+  infection.common_name = "Is infected";
+  temp.assign(infection);
+  if (!select_injury(&temp)) {
+    if (!update_injury(&infection)) {
+      return false;
+    }
+  }
+  burn_1.medical_name = "First Degree Burn";
+  burn_1.common_name = "Alright burn";
+  temp.assign(burn_1);
+  if (!select_injury(&temp)) {
+    if (!update_injury(&burn_1)) {
+      return false;
+    }
+  }
+  burn_2.medical_name = "Second Degree Burn";
+  burn_2.common_name = "Bad burn";
+  temp.assign(burn_2);
+  if (!select_injury(&temp)) {
+    if (!update_injury(&burn_2)) {
+      return false;
+    }
+  }
+  burn_3.medical_name = "Third Degree Burn";
+  burn_3.common_name = "Terrible burn";
+  temp.assign(burn_3);
+  if (!select_injury(&temp)) {
+    if (!update_injury(&burn_3)) {
       return false;
     }
   }

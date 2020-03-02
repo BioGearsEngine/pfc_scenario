@@ -455,8 +455,8 @@ public:
   QString common_name = "";
   QString description = "";
   QString citations;
-  float severity_min;
-  float severity_max;
+  float severity_min = 0;
+  float severity_max = 1;
   Injury(QObject* parent = nullptr)
     : QObject(parent)
   {
