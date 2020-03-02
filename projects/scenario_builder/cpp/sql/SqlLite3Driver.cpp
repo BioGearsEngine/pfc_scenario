@@ -528,6 +528,7 @@ bool SQLite3Driver::populate_injuries()
   // TODO: These medical and common names need to be updated, they are not official at all
   contusion.medical_name = "Contusion";
   contusion.common_name = "Internal Bleeding";
+  contusion.description = "Bleeding on the inside";
   temp.assign(contusion);
   if (!select_injury(&temp)) {
     if (!update_injury(&contusion)) {
@@ -536,6 +537,7 @@ bool SQLite3Driver::populate_injuries()
   }
   laceration.medical_name = "Laceration";
   laceration.common_name = "External Bleeding";
+  laceration.description = "Bleeding on the outside";
   temp.assign(laceration);
   if (!select_injury(&temp)) {
     if (!update_injury(&laceration)) {
@@ -544,6 +546,7 @@ bool SQLite3Driver::populate_injuries()
   }
   puncture.medical_name = "Puncture";
   puncture.common_name = "Holes in body";
+  puncture.description = "Big holes in your skin";
   temp.assign(puncture);
   if (!select_injury(&temp)) {
     if (!update_injury(&puncture)) {
@@ -552,6 +555,7 @@ bool SQLite3Driver::populate_injuries()
   }
   airway_injury.medical_name = "Airway Injury";
   airway_injury.common_name = "Injury to airway";
+  airway_injury.description = "Injured your airway";
   temp.assign(airway_injury);
   if (!select_injury(&temp)) {
     if (!update_injury(&airway_injury)) {
@@ -560,6 +564,7 @@ bool SQLite3Driver::populate_injuries()
   }
   infection.medical_name = "Infection";
   infection.common_name = "Is infected";
+  infection.description = "A bacterial infection";
   temp.assign(infection);
   if (!select_injury(&temp)) {
     if (!update_injury(&infection)) {
@@ -568,6 +573,7 @@ bool SQLite3Driver::populate_injuries()
   }
   burn_1.medical_name = "First Degree Burn";
   burn_1.common_name = "Alright burn";
+  burn_1.description = "A first degree burn";
   temp.assign(burn_1);
   if (!select_injury(&temp)) {
     if (!update_injury(&burn_1)) {
@@ -576,6 +582,7 @@ bool SQLite3Driver::populate_injuries()
   }
   burn_2.medical_name = "Second Degree Burn";
   burn_2.common_name = "Bad burn";
+  burn_2.description = "A second degree burn";
   temp.assign(burn_2);
   if (!select_injury(&temp)) {
     if (!update_injury(&burn_2)) {
@@ -584,6 +591,7 @@ bool SQLite3Driver::populate_injuries()
   }
   burn_3.medical_name = "Third Degree Burn";
   burn_3.common_name = "Terrible burn";
+  burn_3.description = "A third degree burn";
   temp.assign(burn_3);
   if (!select_injury(&temp)) {
     if (!update_injury(&burn_3)) {
