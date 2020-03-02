@@ -214,17 +214,7 @@ bool SQLite3Driver::populate_db()
     }
   }
   //---Equipment---
-  if (equipment_count() == 0) {
-    default_equipment.type = 1;
-    default_equipment.name = "Equipment_1";
-    default_equipment.description = "Description of Equipment_1";
-    default_equipment.citations = "";
-    default_equipment.image = "";
-    default_equipment.properties = "";
-    if (!update_equipment(&default_equipment)) {
-      return false;
-    }
-  }
+  populate_default_equipment();
   //---Injury---
   if (injury_count() == 0) {
     default_injury.medical_name = "Injury_1_Medical_Name";
@@ -303,6 +293,229 @@ bool SQLite3Driver::populate_db()
     default_treatment.citations = "";
     default_treatment.cpgs = "";
     if (!update_treatment(&default_treatment)) {
+      return false;
+    }
+  }
+  return true;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::populate_default_equipment()
+{
+  Equipment temp;
+  Equipment tourniquet
+            ,splint
+            ,tempus_pro_with_peripherals
+            ,nasal_cannula
+            ,simple_face_mask
+            ,IV_needle
+            ,blood_collection_bag
+            ,one_unit_O_negative_whole_blood
+            ,one_unit_A_negative_whole_blood
+            ,blood_transfusion_kit
+            ,space_blanket
+            ,syringe
+            ,antibiotics
+            ,epinephrine
+            ,fentanyl
+            ,ketamine
+            ,midazolam
+            ,morphine
+            ,narcan
+            ,saline_bag_1000ml
+            ,lactated_ringers_bag_500ml
+            ,urine_foley
+            ,urine_bottle
+            ,water
+            ,energy_gel;
+  tourniquet.name = "Tourniquet";
+  tourniquet.description = "A device which applies pressure to a limb or extremity in order to limit the flow of blood.";
+  temp.assign(tourniquet);
+  if(!select_equipment(&temp)) {
+    if(!update_equipment(&tourniquet)) {
+      return false;
+    }
+  }
+  tempus_pro_with_peripherals.name = "Tempus Pro with Peripherals";
+  tempus_pro_with_peripherals.description = "A small, lightweight vital signs monitor.";
+  temp.assign(tempus_pro_with_peripherals);
+  if (!select_equipment(&temp) && temp.name == tempus_pro_with_peripherals.name) {
+    if (!update_equipment(&tempus_pro_with_peripherals)) {
+      return false;
+    }
+  }
+  nasal_cannula.name = "Nasal Cannula";
+  nasal_cannula.description = "A device used to deliver increased airflow to a patient in need of respiratory help.";
+  temp.assign(nasal_cannula);
+  if (!select_equipment(&temp)) {
+    if (!update_equipment(&nasal_cannula)) {
+      return false;
+    }
+  }
+  simple_face_mask.name = "Simple Face Mask";
+  simple_face_mask.description = "Disposable clear plastic mask, used to provide oxygen therapy for patients requiring a higher oxygen concentration.";
+  temp.assign(simple_face_mask);
+  if (!select_equipment(&temp)) {
+    if (!update_equipment(&simple_face_mask)) {
+      return false;
+    }
+  }
+  IV_needle.name = "IV Needle";
+  IV_needle.description = "Intravenous needle used to inject fluids directly into a vein.";
+  temp.assign(IV_needle);
+  if (!select_equipment(&temp)) {
+    if (!update_equipment(&IV_needle)) {
+      return false;
+    }
+  }
+  blood_collection_bag.name = "Blood Collection Bag";
+  blood_collection_bag.description = "Clear plastic bag used to collect and store blood.";
+  temp.assign(blood_collection_bag);
+  if (!select_equipment(&temp)) {
+    if (!update_equipment(&blood_collection_bag)) {
+      return false;
+    }
+  }
+  one_unit_O_negative_whole_blood.name = "1 Unit O- Whole Blood";
+  one_unit_O_negative_whole_blood.description = "525 mL of O- blood, approximately the equivalent of one pint.";
+  temp.assign(one_unit_O_negative_whole_blood);
+  if (!select_equipment(&temp)) {
+    if (!update_equipment(&one_unit_O_negative_whole_blood)) {
+      return false;
+    }
+  }
+  one_unit_A_negative_whole_blood.name = "1 Unit A- Whole Blood";
+  one_unit_A_negative_whole_blood.description = "525 mL of A- blood, approximately the equivalent of one pint.";
+  temp.assign(one_unit_A_negative_whole_blood);
+  if (!select_equipment(&temp)) {
+    if (!update_equipment(&one_unit_A_negative_whole_blood)) {
+      return false;
+    }
+  }
+  blood_transfusion_kit.name = "Blood Transfusion Kit";
+  blood_transfusion_kit.description = "Kit used for in field blood transfusion.";
+  temp.assign(blood_transfusion_kit);
+  if (!select_equipment(&temp)) {
+    if (!update_equipment(&blood_transfusion_kit)) {
+      return false;
+    }
+  }
+  space_blanket.name = "Space Blanket";
+  space_blanket.description = "Low-weight, low-bulk blanket made of heat-reflective thin plastic sheeting.";
+  temp.assign(space_blanket);
+  if (!select_equipment(&temp)) {
+    if (!update_equipment(&space_blanket)) {
+      return false;
+    }
+  }
+  syringe.name = "Syringe";
+  syringe.description = "Simple reciprocating pump using plunger or piston to expel liquid or gas through a hypodermic needle.";
+  temp.assign(syringe);
+  if (!select_equipment(&temp)) {
+    if (!update_equipment(&syringe)) {
+      return false;
+    }
+  }
+  antibiotics.name = "Antibiotics";
+  antibiotics.description = "Antimicrobial substance active against bacteria, used in the treatment and prevention of bacterial infections.";
+  temp.assign(antibiotics);
+  if (!select_equipment(&temp)) {
+    if (!update_equipment(&antibiotics)) {
+      return false;
+    }
+  }
+  epinephrine.name = "Epinephrine";
+  epinephrine.description = "A chemical that narrows blood vessels and opens airways in the lungs.";
+  temp.assign(epinephrine);
+  if (!select_equipment(&temp)) {
+    if (!update_equipment(&epinephrine)) {
+      return false;
+    }
+  }
+  fentanyl.name = "Fentanyl";
+  fentanyl.description = "A synthetic opioid pain relieve, approved for treating severe pain.";
+  temp.assign(fentanyl);
+  if (!select_equipment(&temp)) {
+    if (!update_equipment(&fentanyl)) {
+      return false;
+    }
+  }
+  ketamine.name = "Ketamine";
+  ketamine.description = "A dissociative anesthetic used pain relief.";
+  temp.assign(ketamine);
+  if (!select_equipment(&temp)) {
+    if (!update_equipment(&ketamine)) {
+      return false;
+    }
+  }
+  midazolam.name = "Midazolam";
+  midazolam.description = "A short action sedative used for anesthesia, procedural sedation, trouble sleeping, and severe agitation.";
+  temp.assign(midazolam);
+  if (!select_equipment(&temp)) {
+    if (!update_equipment(&midazolam)) {
+      return false;
+    }
+  }
+  morphine.name = "Morphine";
+  morphine.description = "A narcotic pain reliever used to treat moderate to severe pain.";
+  temp.assign(morphine);
+  if (!select_equipment(&temp)) {
+    if (!update_equipment(&morphine)) {
+      return false;
+    }
+  }
+  narcan.name = "Narcan";
+  narcan.description = "Naloxone, a medication used to block the effects of opiods, commonly used for decreased breathing in opioid overdose.";
+  temp.assign(narcan);
+  if (!select_equipment(&temp)) {
+    if (!update_equipment(&narcan)) {
+      return false;
+    }
+  }
+  saline_bag_1000ml.name = "1000 mL Saline Bag";
+  saline_bag_1000ml.description = "1000 mL bag of saline solution.";
+  temp.assign(saline_bag_1000ml);
+  if (!select_equipment(&temp)) {
+    if (!update_equipment(&saline_bag_1000ml)) {
+      return false;
+    }
+  }
+  lactated_ringers_bag_500ml.name = "500 mL Lactated Ringers Bag";
+  lactated_ringers_bag_500ml.description = "500 mL bag of Lactated Ringers.";
+  temp.assign(lactated_ringers_bag_500ml);
+  if (!select_equipment(&temp)) {
+    if (!update_equipment(&lactated_ringers_bag_500ml)) {
+      return false;
+    }
+  }
+  urine_foley.name = "Urine Foley";
+  urine_foley.description = "Catheter used to drain urine.";
+  temp.assign(urine_foley);
+  if (!select_equipment(&temp)) {
+    if (!update_equipment(&urine_foley)) {
+      return false;
+    }
+  }
+  urine_bottle.name = "Urine Bag";
+  urine_bottle.description = "Bag used to catch and store drained urine.";
+  temp.assign(urine_bottle);
+  if (!select_equipment(&temp)) {
+    if (!update_equipment(&urine_bottle)) {
+      return false;
+    }
+  }
+  water.name = "Water";
+  water.description = "An inorganic, transparent, tasteless, odorless, and nearly colorless chemical substance.";
+  temp.assign(water);
+  if (!select_equipment(&temp)) {
+    if (!update_equipment(&water)) {
+      return false;
+    }
+  }
+  energy_gel.name = "Energy Gel";
+  energy_gel.description = "Carbohydrate gel used to provide energy and promote recovery.";
+  temp.assign(energy_gel);
+  if (!select_equipment(&temp)) {
+    if (!update_equipment(&energy_gel)) {
       return false;
     }
   }
