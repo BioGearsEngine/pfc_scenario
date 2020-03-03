@@ -93,7 +93,6 @@ ColumnLayout  {
                 return
               }
               var entry = root.model.get(root.index)
-              console.log(JSON.stringify(entry))
               entry.type = (index) ? "Scalar" : "Binary"
               update_assessment(entry)
           }

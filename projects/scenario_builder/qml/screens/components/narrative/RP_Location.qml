@@ -29,7 +29,6 @@ Rectangle{
       //obj.time_of_day = values.time_of_day
       obj.environment = environmentEntry.text
       //obj.fk_scene = values.fk_scene  
-      console.log(JSON.stringify(self))
       root.backend.update_location(obj)
     } 
     border.color: 'black'

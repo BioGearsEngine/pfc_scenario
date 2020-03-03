@@ -125,7 +125,6 @@ ColumnLayout  {
         backend : root.backend   
 
         onFullAdded : {
-          console.log(fullReferenceList.current)
           citation.citation_id = fullReferenceList.model.get(fullReferenceList.current).citation_id
           root.backend.select_citation(citation)
           var entry = root.model.get(root.index)

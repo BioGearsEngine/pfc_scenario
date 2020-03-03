@@ -85,7 +85,6 @@ ColumnLayout  {
 
         onSeverityChanged : {
            var entry = root.model.get(root.index)
-          console.log(JSON.stringify(entry))
            var severities = entry.severities.split(";").filter(item => item)
            severities.splice(index,1,severity)
            entry.severities = severities.join(";")
@@ -94,7 +93,6 @@ ColumnLayout  {
 
         onLocationChanged : {
           var entry = root.model.get(root.index)
-          console.log(JSON.stringify(entry))
           var locations = entry.locations.split(";").filter(item => item)
           locations.splice(index,1,location)
           entry.locations = locations.join(";")
@@ -106,7 +104,6 @@ ColumnLayout  {
           entry.injuries    = (entry.injuries) ? entry.injuries.concat(";"+injury_id) : entry.injuries.concat(injury_id)
           entry.severities  = (entry.severities) ? entry.severities.concat(";"+severity) : entry.severities.concat(severity)
           entry.locations   = (entry.locations) ? entry.locations.concat(";"+location) : entry.locations.concat(location)
-          console.log(JSON.stringify(injury))
           entry.description = (entry.description) ? entry.description.concat(";"+description) : entry.description.concat(description)
           update_injury_set(entry)
         }  

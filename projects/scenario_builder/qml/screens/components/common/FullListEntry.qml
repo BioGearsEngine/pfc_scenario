@@ -53,7 +53,6 @@ Rectangle {
         onClicked : {
           fullAdded(root.model.count)
         }
-        onComplete: console.log("Add Button works")
       }
       PFCButton {
         id : newListButton

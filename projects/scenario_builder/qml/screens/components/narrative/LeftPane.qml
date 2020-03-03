@@ -158,7 +158,6 @@ ColumnLayout {
       ScrollBar.vertical: ScrollBar { }
 
       Component.onCompleted : {
-        console.log("onCompleted")
         var r_count = backend.scene_count();
         root.backend.scenes()
         while ( root.backend.next_scene(self) ){
