@@ -80,7 +80,7 @@ ColumnLayout {
             while ( root.backend.next_role(self) ) {
               listArea.model.insert(listArea.model.count,
               {
-                "role_id" : self.role_id,
+                "id" : self.role_id,
                 "name" : "%1".arg(self.name),
                 "description" : "%1".arg(self.description)
               });
@@ -132,7 +132,7 @@ ColumnLayout {
             while ( root.backend.next_role(self) ) {
               listArea.model.insert(listArea.model.count,
               {
-                "role_id" : self.role_id,
+                "id" : self.role_id,
                 "name" : "%1".arg(self.name),
                 "description" : "%1".arg(self.description)
               });
@@ -254,7 +254,7 @@ ColumnLayout {
           while ( root.backend.next_role(self) ) {
             full_listArea.model.insert(full_listArea.model.count,
             {
-              "role_id" : self.role_id,
+              "id" : self.role_id,
               "name" : "%1".arg(self.name),
               "description" : "%1".arg(self.description)
               });
@@ -338,7 +338,7 @@ ColumnLayout {
             onDoubleClicked: {
               roleEdit.name = listArea.model.get(index).name
               roleEdit.description = listArea.model.get(index).description
-              roleEdit.roleID = listArea.model.get(index).role_id
+              roleEdit.roleID = listArea.model.get(index).id
               contentStack.currentIndex = 1
             }
           }  
@@ -422,7 +422,7 @@ ColumnLayout {
           while ( root.backend.next_role(self) ) {
             listArea.model.insert(listArea.model.count,
             {
-              "role_id" : self.role_id,
+              "id" : self.role_id,
               "name" : "%1".arg(self.name),
               "description" : "%1".arg(self.description)
             });
@@ -444,7 +444,7 @@ ColumnLayout {
         while ( root.backend.next_role(self) ) {
           listArea.model.insert(listArea.model.count,
           {
-            "role_id" : self.role_id,
+            "id" : self.role_id,
             "name" : "%1".arg(self.name),
             "description" : "%1".arg(self.description)
           });

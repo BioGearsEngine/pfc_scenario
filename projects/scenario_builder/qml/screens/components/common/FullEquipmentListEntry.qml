@@ -13,8 +13,9 @@ FullListEntry {
   signal equipmentAdded(int index, int equipment_id)
   signal equipmentRemoved(int index, int equipment_id)
 
-  label: "Reference"
-  
+  label: "Equipment"
+  labelPlural: "Equipment"
+
   Equipment {
     id: self
     equipment_id : -1
@@ -46,6 +47,7 @@ FullListEntry {
      TextField {
        id : equipment_name_text
        anchors.left : parent.left
+       anchors.right : parent.right
        anchors.leftMargin : 10
        font.pointSize: 10
        text :  model.name
@@ -62,6 +64,7 @@ FullListEntry {
        id : equipment_description_text
        anchors.top : equipment_name_text.bottom
        anchors.left : parent.left
+       anchors.right : parent.right
        anchors.leftMargin : 10
        font.pointSize: 10
        text :  model.description

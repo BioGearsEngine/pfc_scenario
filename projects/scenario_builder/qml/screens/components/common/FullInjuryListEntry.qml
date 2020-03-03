@@ -16,7 +16,7 @@ FullListEntry {
   signal severityChanged(int index, double severity)
 
   label: "Injury"
-  labelPlaural: "Injuries"
+  labelPlural: "Injuries"
   
   Injury {
     id: self

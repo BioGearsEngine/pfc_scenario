@@ -346,7 +346,7 @@ ColumnLayout {
 
               eventEdit.name = listArea.model.get(index).name
               eventEdit.description = listArea.model.get(index).description
-              eventEdit.eventID = listArea.model.get(index).event_id
+              eventEdit.eventID = listArea.model.get(index).id
               contentStack.currentIndex = 1
             }
           }  
@@ -427,7 +427,7 @@ ColumnLayout {
           while ( root.backend.next_event(self) ) {
             listArea.model.insert(listArea.model.count,
             {
-              "event_id" : self.event_id,
+              "id" : self.event_id,
               "name" : "%1".arg(self.name),
               "description" : "%1".arg(self.description)
             });
@@ -449,7 +449,7 @@ ColumnLayout {
         while ( root.backend.next_event(self) ) {
           listArea.model.insert(listArea.model.count,
           {
-            "event_id" : self.event_id,
+            "id" : self.event_id,
             "name" : "%1".arg(self.name),
             "description" : "%1".arg(self.description)
           });

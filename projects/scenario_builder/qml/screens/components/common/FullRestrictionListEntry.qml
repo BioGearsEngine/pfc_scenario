@@ -13,7 +13,7 @@ FullListEntry {
   signal restrictionAdded(int index, int restriction_id)
   signal restrictionRemoved(int index, int restriction_id)
 
-  label: "Reference"
+  label: "Restriction"
   
   Restriction {
     id: self

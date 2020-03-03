@@ -115,6 +115,7 @@ ScrollView {
         Layout.leftMargin: 5
         backend : column.backend  
         onList : {
+          fullEquipmentList.label = "Equipment" //Otherwise it would be Equipments
           var values = root.model.get(root.index)
           if(values) {
             fullEquipmentList.model.clear()

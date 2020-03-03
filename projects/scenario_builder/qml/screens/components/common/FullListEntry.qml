@@ -9,7 +9,7 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 Rectangle {
   id: root
   property string label : "Label"
-  property string labelPlaural : label + "s" 
+  property string labelPlural : label + "s" 
 
   property alias count : listArea.count
   property alias model : listArea.model
@@ -30,7 +30,7 @@ Rectangle {
   Label {
   id: name
   Layout.alignment : Qt.AlignTop
-   text: root.labelPlaural
+   text: root.labelPlural
    font.pointSize : 10
    color: "steelblue"
    width: 100
