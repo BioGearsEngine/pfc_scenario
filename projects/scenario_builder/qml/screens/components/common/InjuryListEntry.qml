@@ -155,7 +155,6 @@ ListEntry {
 
   onAdded : {
     //TODO; Model Box Popup with  a selection of known Injuries
-    console.log("INJURYADDED")
     var likely_id = root.backend.nextID(SQLBackend.INJURIES) + 1
     self.injury_id     = -1
     self.medical_name  = "New Injury %1".arg(likely_id)

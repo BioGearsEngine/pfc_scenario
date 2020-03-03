@@ -103,11 +103,10 @@ FullListEntry {
   //TODO: It would be cool if the delegate on state change added a description field which expanded it
 
   onFullAdded : {
-    console.log("FULLADDED")
+    
   }
   onFullNew : {
     //TODO; Model Box Popup with  a selection of known Injuries
-    console.log("!!!!")
     var likely_id = root.backend.nextID(SQLBackend.INJURIES) + 1
     self.injury_id     = -1
     self.medical_name  = "New Injury %1".arg(likely_id)
@@ -130,7 +129,7 @@ FullListEntry {
       , location: "Unknown"
       });
     root.injuryAdded(index, self.injury_id, self.min, "Unknown")
-    console.log("!!!!")
+
   }
 
   onFullDeleted : {

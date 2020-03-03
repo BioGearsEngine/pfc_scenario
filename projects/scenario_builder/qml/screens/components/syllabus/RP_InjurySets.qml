@@ -137,6 +137,10 @@ ColumnLayout  {
         onFullAdded : {
           injury.injury_id = fullInjuryList.model.get(current).injury_id
           root.backend.select_injury(injury)
+          var severity = injury.severity
+          var location = injury.location
+          var injuries = injury.injuries
+          var description = injury.description
           var entry = root.model.get(root.index)
           entry.severities  = (entry.severities) ? entry.severities.concat(";"+severity) : entry.severities.concat(severity)
           entry.locations   = (entry.locations) ? entry.locations.concat(";"+location) : entry.locations.concat(location)
