@@ -13,9 +13,13 @@ Rectangle{
     property ListModel model
     property int index
     property int count
+    property alias sceneName: nameEntry.text
 
     Location {
       id : self
+    }
+    Scene {
+      id : selfScene
     }
 
     function update_location() {
@@ -26,10 +30,15 @@ Rectangle{
       obj.location_id = -1
       obj.name = locationNameEntry.text
       obj.scene_name = nameEntry.text
-      //obj.time_of_day = values.time_of_day
       obj.environment = environmentEntry.text
-      //obj.fk_scene = values.fk_scene  
+      console.log("updating_location")
       root.backend.update_location(obj)
+      console.log("finished updating_location")
+      selfScene.name = root.model.get(index).name
+      root.backend.select_scene(selfScene)
+      selfScene.name = nameEntry.text
+      root.backend.update_scene(selfScene)
+      root.model.get(index).name = nameEntry.text
     } 
     border.color: 'black'
     border.width: 1

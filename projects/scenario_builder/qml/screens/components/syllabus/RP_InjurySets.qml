@@ -44,7 +44,7 @@ ColumnLayout  {
         var entry = model.get(index)
         if ( text != entry.name){
           entry.name = text
-          update_injurySet(entry)
+          update_injury_set(entry)
         }
       }
     }
