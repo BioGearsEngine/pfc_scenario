@@ -214,9 +214,13 @@ bool SQLite3Driver::populate_db()
     }
   }
   //---Equipment---
-  populate_equipment();
+  if(!populate_equipment()) {
+    return false;
+  }
   //---Injury---
-  populate_injuries();
+  if(!populate_injuries()) {
+    return false;
+  }
   //---InjurySet---
   if (injury_set_count() == 0) {
     default_injury_set.name = "Injury_Set_1";
@@ -275,16 +279,8 @@ bool SQLite3Driver::populate_db()
     }
   }
   //---Treatment---
-  if (treatment_count() == 0) {
-    default_treatment.medical_name = "Treatment_1_Medical_Name";
-    default_treatment.common_name = "Treatment_1_Common_Name";
-    default_treatment.description = "Description of Treatment_1";
-    default_treatment.equipment = "";
-    default_treatment.citations = "";
-    default_treatment.cpgs = "";
-    if (!update_treatment(&default_treatment)) {
-      return false;
-    }
+  if(!populate_treatments()){
+    return false; 
   }
   return true;
 }
@@ -595,6 +591,112 @@ bool SQLite3Driver::populate_injuries()
   temp.assign(burn_3);
   if (!select_injury(&temp)) {
     if (!update_injury(&burn_3)) {
+      return false;
+    }
+  }
+  return true;
+}
+//------------------------------------------------------------------------------
+bool SQLite3Driver::populate_treatments()
+{
+  Treatment temp;
+  Treatment chest_tube
+            ,needle_decompression
+            ,apply_burn_ointment
+            ,apply_bandage
+            ,apply_suture
+            ,administer_antibiotics
+            ,administer_fentanyl
+            ,administer_morphine
+            ,pack_wound
+            ,escharotomy;
+  chest_tube.medical_name = "Chest Tube";
+  chest_tube.common_name = "Chest Tube";
+  chest_tube.description = "Insertion of a hollow plastic tube between ribs and pleural space.";
+  temp.assign(chest_tube);
+  if (!select_treatment(&temp)) {
+    if (!update_treatment(&chest_tube)) {
+      return false;
+    }
+  }
+  needle_decompression.medical_name = "Needle Thoracostomy";
+  needle_decompression.common_name = "Needle Decompression";
+  needle_decompression.description = "Insertion of a needle into the pleural space to decompress a tension pneumothorax";
+  temp.assign(needle_decompression);
+  if (!select_treatment(&temp)) {
+    if (!update_treatment(&needle_decompression)) {
+      return false;
+    }
+  }
+  apply_burn_ointment.medical_name = "Burn Ointment";
+  apply_burn_ointment.common_name = "Burn Ointment";
+  apply_burn_ointment.description = "A topical ointment applied to burn areas to aid healing.";
+  temp.assign(apply_burn_ointment);
+  if (!select_treatment(&temp)) {
+    if (!update_treatment(&apply_burn_ointment)) {
+      return false;
+    }
+  }
+  apply_bandage.medical_name = "Bandage";
+  apply_bandage.common_name = "Bandage";
+  apply_bandage.description = "A cloth wrapping for wounds.";
+  temp.assign(apply_bandage);
+  if (!select_treatment(&temp)) {
+    if (!update_treatment(&apply_bandage)) {
+      return false;
+    }
+  }
+  apply_suture.medical_name = "Suture";
+  apply_suture.common_name = "Stitches";
+  apply_suture.description = "Suture an open wound to seal it.";
+  temp.assign(apply_suture);
+  if (!select_treatment(&temp)) {
+    if (!update_treatment(&apply_suture)) {
+      return false;
+    }
+  }
+  administer_antibiotics.medical_name = "Antibiotics";
+  administer_antibiotics.common_name = "Antibiotics";
+  administer_antibiotics.description = "Give does of antibiotics to patient.";
+  temp.assign(administer_antibiotics);
+  if (!select_treatment(&temp)) {
+    if (!update_treatment(&administer_antibiotics)) {
+      return false;
+    }
+  }
+  administer_fentanyl.medical_name = "Fentanyl";
+  administer_fentanyl.common_name = "Fentanyl";
+  administer_fentanyl.description = "Administer a dose of fentanyl.";
+  temp.assign(administer_fentanyl);
+  if (!select_treatment(&temp)) {
+    if (!update_treatment(&administer_fentanyl)) {
+      return false;
+    }
+  }
+  administer_morphine.medical_name = "Morphine";
+  administer_morphine.common_name = "Morphine";
+  administer_morphine.description = "Administer a dose of morphine.";
+  temp.assign(administer_morphine);
+  if (!select_treatment(&temp)) {
+    if (!update_treatment(&administer_morphine)) {
+      return false;
+    }
+  }
+  pack_wound.medical_name = "Pack Wound";
+  pack_wound.common_name = "Pack Wound";
+  pack_wound.description = "Pack wound with material to absorb discharge.";
+  temp.assign(pack_wound);
+  if (!select_treatment(&temp)) {
+    if (!update_treatment(&pack_wound)) {
+      return false;
+    }
+  }
+  escharotomy.medical_name = "Escharotomy";
+  escharotomy.common_name = "Escharotomy";
+  escharotomy.description = "A surgical procedure used to treat full-thickness circumferential burns.";
+  temp.assign(escharotomy);
+  if (!select_treatment(&temp)) {
+    if (!update_treatment(&escharotomy)) {
       return false;
     }
   }

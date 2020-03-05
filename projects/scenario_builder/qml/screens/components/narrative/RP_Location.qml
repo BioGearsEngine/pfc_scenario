@@ -31,9 +31,7 @@ Rectangle{
       obj.name = locationNameEntry.text
       obj.scene_name = nameEntry.text
       obj.environment = environmentEntry.text
-      console.log("updating_location")
       root.backend.update_location(obj)
-      console.log("finished updating_location")
       selfScene.name = root.model.get(index).name
       root.backend.select_scene(selfScene)
       selfScene.name = nameEntry.text
