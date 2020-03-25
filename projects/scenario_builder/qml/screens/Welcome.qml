@@ -88,10 +88,10 @@ Page {
 
                  model : ListModel {
                    ListElement {
-                     path :'C:/SomePath/Scenario.pfc'; name : 'Scenario'; last : '2019-07-04'
+                     path :'C:/PFC/GunShotWound.pfc'; name : 'Male-GSW-LG-Austire'; last : '2020-03-20'
                    }
                    ListElement {
-                     path :'C:/SomePath/Scenario2.pfc';  name : 'Scenario2'; last : '2019-01-31'
+                     path :'C:/PFC/BurnCare.pfc';  name : 'Male-Burn-TBI-BFT'; last : '2020-03-21'
                    }
                  }
 
@@ -104,17 +104,16 @@ Page {
                        text : model.index + 1
                      }
                      Label {
+                       Layout.preferredWidth : 150
                        text : model.name + ":"
                      }
                      Text {
+                       Layout.preferredWidth : 150
                        text : model.path
                      }
                      Text {
+                       Layout.preferredWidth : 50
                        text : model.last
-                     }
-                     Text {
-                      Layout.fillWidth : true
-                       text : "FillSPACE"
                      }
                    }
                    width : childrenRect.width
