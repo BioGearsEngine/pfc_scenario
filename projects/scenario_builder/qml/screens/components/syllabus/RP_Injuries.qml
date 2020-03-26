@@ -82,16 +82,15 @@ ColumnLayout  {
     }
   }
 
-    StackLayout {
+  StackLayout {
       id : listStack
-      Layout.fillWidth : true
-      Layout.fillHeight : true
       Layout.leftMargin: 5
+      Layout.fillWidth : true
+      Layout.minimumHeight : 300
       currentIndex : 0
       CitationListEntry {
         id : referenceList
         Layout.fillWidth : true
-        Layout.fillHeight : true
         backend : root.backend  
         onList : {
           var values = root.model.get(root.index)
@@ -130,7 +129,6 @@ ColumnLayout  {
       FullCitationListEntry {
         id : fullReferenceList
         Layout.fillWidth : true
-        Layout.fillHeight : true
         backend : root.backend   
 
         onFullAdded : {

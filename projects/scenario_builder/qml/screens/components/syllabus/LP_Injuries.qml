@@ -140,6 +140,8 @@ ColumnLayout {
 
         Text {
           id : injury_value_text
+          width : parent.width - 5
+          height : injury_title_text.height
           anchors.top : injury_title_text.bottom
           anchors.left : parent.left
           anchors.right : parent.right
@@ -149,6 +151,7 @@ ColumnLayout {
           enabled : false
           color: enabled ? Material.primaryTextColor : Material.primaryTextColor
           elide: Text.ElideRight
+          wrapMode : Text.WordWrap
         }
 
         states: State {

@@ -241,25 +241,30 @@ namespace schema {
     return treatment_plan_ref_list;
   }
   //-----------------------------------------------------------------------------
-  auto PFC::make_trauma_occurance_list(QString ref_list, QString occurance_list, QString severity_list) -> std::unique_ptr<schema::trauma_occurence_list>
+  auto PFC::make_trauma_occurance_list(QString ref_list, QString occurance_list, QString severity_list, QString description_list) -> std::unique_ptr<schema::trauma_occurence_list>
   {
     auto trauma_occurence_list = std::make_unique<schema::trauma_occurence_list>();
     auto refs = ref_list.split(';');
     auto occurences = occurance_list.split(';');
     auto severities = severity_list.split(';');
+    auto descriptions = description_list.split(';');
 
     auto ref_count = refs.size();
     auto occurence_count = occurences.size();
     auto severity_count = severities.size();
+    auto description_count = descriptions.size();
+    //NOTE: THis is unsafe when the database is confused and the indexes do not add up, but what are you going to do
+
     for (auto i = 0; i < refs.size(); ++i) {
-      if (!refs[i].isEmpty()) {
+      if (!refs.at(i).isEmpty()) {
         try {
           auto ref = refs.at(i);
           auto occurence = occurences.at(i);
           auto severity = severities.at(i);
-          trauma_occurence_list->trauma().push_back(std::make_unique<schema::trauma_occurence>(make_string("Trauma_" + ref.toStdString()),
+          auto description = descriptions.at(i);
+          trauma_occurence_list->trauma().push_back(std::make_unique<schema::trauma_occurence>(make_string("Injury_" + ref.toStdString()),
                                                                                                make_string(occurence.toStdString()),
-                                                                                               make_string(""),
+                                                                                               make_string(description.toStdString()),
                                                                                                make_string(severity.toStdString())));
         } catch (...) {
           std::cout << "Error index mismatch between refs,occurances, and severities";
@@ -268,7 +273,6 @@ namespace schema {
     }
     return trauma_occurence_list;
   }
-
   //-----------------------------------------------------------------------------
   auto PFC::make_properties_list(QString properties_list) -> std::unique_ptr<schema::properties_list>
   {
@@ -315,7 +319,7 @@ namespace schema {
     }
     return category;
   }
-
+  //-----------------------------------------------------------------------------
   auto PFC::make_event_fidelity(QString fed) -> schema::event_fidelity_enum
   {
     auto fidelity = schema::event_fidelity_enum::value::HIGH;
@@ -413,7 +417,7 @@ namespace schema {
 
     auto trauma = std::make_unique<schema::trauma_profile>(make_uuid("TraumaProfile_" + std::to_string(input->id)),
                                                            make_string(input->name.toStdString()),
-                                                           make_trauma_occurance_list(input->injuries, input->locations, input->severities),
+                                                           make_trauma_occurance_list(input->injuries, input->locations, input->severities, input->description),
                                                            make_treatment_plan_ref_list(input->treatments));
     trauma->physiology_state(input->physiology_file.toStdString());
     return trauma;
@@ -832,7 +836,7 @@ namespace schema {
       std::string equipments;
       for (auto equipment : treatment.required_equipment().equipment_refs()) {
         std::string equipment_id = find_equipment(equipment, scenario_schema, _db);
-        citations += equipment_id + ";";
+        equipments += equipment_id + ";";
       }
       if (!equipments.empty()) {
         equipments.pop_back();

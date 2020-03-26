@@ -131,7 +131,7 @@ ApplicationWindow {
       visible: false
       selectMultiple : false
       selectExisting : false
-      nameFilters: [ "Scenarios (*.pfc,*.zip)", "All files (*)" ]
+      nameFilters: [ "Scenarios (*.pfc;*.zip)", "All files (*)" ]
       folder: "./"// StandardPaths.writableLocation(StandardPaths.DesktopLocation)
       onAccepted: {
         console.log("You choose: " + saveDialog.fileUrls)

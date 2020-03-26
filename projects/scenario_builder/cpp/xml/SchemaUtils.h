@@ -62,7 +62,7 @@ namespace schema {
     static auto make_equipment_ref_list(QString ref_list) -> std::unique_ptr<schema::equipment_ref_list>;
     static auto make_trauma_set_ref_list(QString ref_list) -> std::unique_ptr<schema::trauma_profile_ref_list>;
     static auto make_treatment_plan_ref_list(QString ref_list) -> std::unique_ptr<schema::treatment_plan_ref_list>;
-    static auto make_trauma_occurance_list(QString ref_list, QString occurance_list, QString severity_list) -> std::unique_ptr<schema::trauma_occurence_list>;
+    static auto make_trauma_occurance_list(QString ref_list, QString occurance_list, QString severity_list, QString description_list) -> std::unique_ptr<schema::trauma_occurence_list>;
     static auto make_properties_list(QString properties_list) -> std::unique_ptr<schema::properties_list>;
     static auto make_authors_list(QString name_list) -> schema::citation::authors_sequence;
     static auto make_event_category(QString cat) -> schema::event_category_enum;
