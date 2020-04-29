@@ -7,10 +7,11 @@ import QtQuick.Controls 2.12
   import "../common"
   import com.ara.pfc.ScenarioModel.SQL 1.0
 
-Rectangle {
+ScrollView {
     id: root
     property SQLBackend backend
-
+    clip : true
+    
   ColumnLayout {
     id: summary_leftWindow
     anchors.fill : parent
@@ -63,7 +64,6 @@ Rectangle {
       default_value : 'Enter any Usage Limitations'
       required : false 
     }
-    
     Rectangle {
         Layout.fillHeight: true
         color : "Red"

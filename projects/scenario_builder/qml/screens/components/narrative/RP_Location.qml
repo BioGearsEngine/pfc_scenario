@@ -77,6 +77,12 @@ Rectangle{
           id: timeScenarioEntry
           label : "Time in Scenario"
           placeholderText: "Time Input Field (3H20M)"
+          onLabelWidthChanged : {
+            nameEntry.nameWidth         = timeScenarioEntry.nameWidth
+            locationNameEntry.nameWidth = timeScenarioEntry.nameWidth
+            timeOfDayEntry.nameWidth    = timeScenarioEntry.nameWidth
+            environmentEntry.nameWidth  = timeScenarioEntry.nameWidth
+          }
         }
         TextAreaEntry {
           Layout.fillWidth: true

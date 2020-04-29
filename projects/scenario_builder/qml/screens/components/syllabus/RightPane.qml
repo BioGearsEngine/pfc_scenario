@@ -52,11 +52,15 @@ Flickable {
         Layout.rightMargin: 5
         border.color: 'black'
         border.width: 1
-        RP_Injuries {
-          id : injuries
-          backend : root.backend
-          width: parent.width
-          height: parent.height
+        ScrollView {
+          anchors.fill : parent
+          clip : true
+          RP_Injuries {
+            id : injuries
+            backend : root.backend
+            width: parent.width
+            height: parent.height
+          }
         }
       }
       Rectangle {

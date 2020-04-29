@@ -41,6 +41,7 @@
         <file>screens/components/narrative/RP_Location.qml</file>
         <file>screens/components/narrative/RP_Props.qml</file>
         <file>screens/components/narrative/RP_Roles.qml</file>
+        <file>screens/components/narrative/RP_Scene.qml</file>
         <file>screens/components/summary/LeftPane.qml</file>
 
         <!-- Summary Tab Components -->

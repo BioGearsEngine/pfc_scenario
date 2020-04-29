@@ -5,6 +5,7 @@ import QtQuick.Controls 2.12
 
 Item {
   id: root
+  property alias nameWidth : name.width
   property alias label: name.text
   property alias text: textEntry.text
   property alias placeholderText: textEntry.placeholderText
@@ -13,6 +14,7 @@ Item {
   width  : childrenRect.width
 
   signal editingFinished()
+  signal labelWidthChanged()
   
   Layout.preferredHeight : textEntry.height 
   Layout.rightMargin : 20
@@ -35,6 +37,12 @@ Item {
     selectByMouse : true
     onEditingFinished : {
       root.editingFinished();
+    }
+  }
+  Component.onCompleted: {
+    if (name.width + 10 < name.contentWidth) {
+      name.width = name.contentWidth + 10
+      root.labelWidthChanged()
     }
   }
 }

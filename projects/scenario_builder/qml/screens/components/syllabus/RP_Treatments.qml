@@ -75,6 +75,9 @@ ScrollView {
           column.update_treatment(entry)
         }
       }
+      onLabelWidthChanged : {
+        medicalNameEntry.nameWidth = commonNameEntry.nameWidth
+      }
     }
 
     TextAreaEntry {

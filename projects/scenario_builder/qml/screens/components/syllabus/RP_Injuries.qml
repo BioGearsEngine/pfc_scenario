@@ -80,6 +80,9 @@ ColumnLayout  {
           update_injury(entry)
         }
     }
+    onLabelWidthChanged : {
+      medicalNameEntry.nameWidth = commonNameEntry.nameWidth
+    }
   }
 
   StackLayout {

@@ -8,6 +8,7 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 Rectangle {
   id: root
 
+  property alias nameWidth : label.width
   property alias label : label.text
   property alias placeholderText : input_area.placeholderText
   property alias text : input_area.text
@@ -15,6 +16,7 @@ Rectangle {
 
   height : childrenRect.height
   signal editingFinished()
+  //signal labelWidthChanged() This isn't currently necessary, but can be useful for standardizing label width across a pane
   signal completed()
 
   Layout.preferredHeight : flickable.height
@@ -38,7 +40,7 @@ Rectangle {
     text: 'Purpose'
     font.pointSize : 10
     color: "steelblue"
-    width: (text.width > 90 ) ? text.width + 10 : 100
+    width: 100
     Layout.alignment: Qt.AlignTop
   }
 
@@ -63,8 +65,12 @@ Rectangle {
       }
     }
     ScrollBar.vertical: ScrollBar { }
+  }
   Component.onCompleted : {
     root.completed();
-  }
+    if (label.contentWidth > label.width) {
+      console.log(label.text)
+      label.width = label.contentWidth + 10
+    }
   }
 }

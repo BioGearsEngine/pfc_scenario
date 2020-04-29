@@ -5,6 +5,7 @@ import QtQuick.Controls 2.12
 
 Rectangle {
   id: root
+  property alias nameWidth : name.width
   property alias label: name.text
   property alias hours: hourTime.value
   property alias minutes: minuteTime.value

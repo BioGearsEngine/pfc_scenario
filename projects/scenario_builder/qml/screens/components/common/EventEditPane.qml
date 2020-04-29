@@ -9,6 +9,7 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 
 ScrollView {
 	id: root
+	clip : true
 	Layout.fillWidth: true
 	Layout.fillHeight: true
 	property SQLBackend backend

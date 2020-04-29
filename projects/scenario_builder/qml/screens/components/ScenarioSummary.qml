@@ -34,14 +34,17 @@ GridLayout {
   }
 
   //TAB:SUMMARY_RIGHTWINDOW
-  RightPane{
-    id : summary_right
-    backend : root.backend
+  Rectangle{
     border.color: 'black'
     border.width: 1
     Layout.fillWidth: true
     Layout.fillHeight: true
-    Layout.rightMargin: 5
+    Layout.rightMargin: 5    
+    RightPane{
+      id : summary_right
+      backend : root.backend
+      anchors.fill : parent
+    }
   }
 }
 
