@@ -28735,7 +28735,10 @@ namespace oo_2_0
     static const char* const _xsd_ObjectTypeReferenceAssociationCategoryCode_literals_[7];
     static const value _xsd_ObjectTypeReferenceAssociationCategoryCode_indexes_[7];
   };
-
+  #ifdef SIGINT
+    #define OLD_SIGINT SIGINT
+    #undef  SIGINT
+  #endif
   class OperationalCapabilityCategoryCode: public ::xml_schema::token
   {
     public:
@@ -28841,6 +28844,10 @@ namespace oo_2_0
       UTILTY,
       WATER
     };
+    #ifdef OLD_SIGINT
+      #define SIGINT OLD_SIGINT
+      #undef  OLD_SIGINT
+    #endif
 
     OperationalCapabilityCategoryCode (value v);
 
@@ -34040,6 +34047,10 @@ namespace oo_2_0
     static const value _xsd_ReportingDataReliabilityCode_indexes_[6];
   };
 
+  #ifdef SIGINT
+    #define OLD_SIGINT SIGINT
+    #undef  SIGINT
+  #endif
   class ReportingDataSourceTypeCode: public ::xml_schema::token
   {
     public:
@@ -34081,6 +34092,10 @@ namespace oo_2_0
       UNSPEC,
       VARI
     };
+    #ifdef OLD_SIGINT
+      #define SIGINT OLD_SIGINT
+      #undef  OLD_SIGINT
+    #endif
 
     ReportingDataSourceTypeCode (value v);
 
