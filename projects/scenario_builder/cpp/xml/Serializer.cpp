@@ -174,7 +174,6 @@ bool Serializer::load(const QString& filename)
   int16_t level = 0;
   int32_t err = MZ_OK;
   const char* string_method = NULL;
-  char crypt = ' ';
   void* reader = NULL;
 
   mz_zip_reader_create(&reader);
@@ -191,35 +190,35 @@ bool Serializer::load(const QString& filename)
   //    //NOTE: At this point I want to pull all scenarios in to memory for parsing.  Then Close down the archive
   //    //At the time of this function being written the average size of an archive was < 1MB, but it is easy to invision a world
   //    //Where they grow to < 1GB.  However we would need to refactor a great many things reguarding file io to handle such an occurance.
-
+  //
   //    //If Scenarios grow beyond 50Mbs concider streamed reading and background loading to speed up launching of the application.
-
+  //
   //    std::vector<char> buffer;
   //    buffer.resize(file_info->uncompressed_size);
   //    auto bytes_read = mz_zip_reader_entry_read(reader, &buffer[0], file_info->uncompressed_size);
   //    vectorwrapbuf<char> schema_buffer{ buffer };
-
+  //
   //    std::istream i_stream(&schema_buffer);
   //    mz_zip_reader_entry_close(&reader);
   //    try { // If the parsing fails this prints out every error
   //      auto msdl_schema = msdl_1::MilitaryScenario(i_stream);
   //      auto scenario_id = msdl_schema->ScenarioID();
-
+  //
   //      auto name = scenario_id.name();
   //      auto domain = scenario_id.applicationDomain();
   //      auto version = scenario_id.version();
   //      auto security = scenario_id.securityClassification();
   //      auto description = scenario_id.description();
-
+  //
   //      auto success = update_property("scenario_title", name);
-
+  //
   //      if (domain.present()) {
   //        success &= update_property("scenario_domain", *domain);
   //      }
   //      success &= update_property("scenario_version", version);
   //      success &= update_property("scenario_security", security);
   //      success &= update_property("scenario_description", description);
-
+  //
   //    } catch (const xml_schema::exception& e) {
   //      std::cout << e << '\n';
   //      _db->refresh();

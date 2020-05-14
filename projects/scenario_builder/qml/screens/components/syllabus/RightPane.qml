@@ -47,6 +47,7 @@ Flickable {
         }
       }
       Rectangle {
+        id: blah
         Layout.fillHeight: true
         Layout.fillWidth: true
         Layout.rightMargin: 5
@@ -56,10 +57,12 @@ Flickable {
           anchors.fill : parent
           clip : true
           RP_Injuries {
+
+            width : Math.max(blah.width, implicitWidth)
+            height : Math.max(blah.height, implicitHeight)
             id : injuries
             backend : root.backend
-            width: parent.width
-            height: parent.height
+
           }
         }
       }

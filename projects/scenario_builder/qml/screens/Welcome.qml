@@ -16,10 +16,11 @@ Page {
         anchors.centerIn : parent
         anchors.top : parent.top
         anchors.bottom : parent.bottom
-        width : 450
-        height: 550 
+        width : mainColumnLayout.implicitWidth + 20
+        height: mainColumnLayout.implicitHeight+ 10
 
         ColumnLayout {
+            id: mainColumnLayout
             Layout.alignment : Qt.AlignCenter
             Layout.preferredWidth : 400
             Layout.preferredHeight :300
@@ -130,16 +131,14 @@ Page {
                  }
                  ScrollBar.vertical: ScrollBar { }
             }
-            Item {
-              Layout.fillWidth  : true
-              Button {
-                  anchors.right : parent.right
-                  text : "Load"
+            Button {
+                anchors.right : parent.right
+                text : "Load"
 
-                  onClicked : { root.loadClicked() }
+                onClicked : { root.loadClicked() }
 
-              }
             }
+            
         }
     }
 }
