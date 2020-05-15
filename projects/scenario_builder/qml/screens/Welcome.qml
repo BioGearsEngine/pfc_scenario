@@ -132,7 +132,7 @@ Page {
                  ScrollBar.vertical: ScrollBar { }
             }
             Button {
-                anchors.right : parent.right
+                Layout.alignment : Qt.AlignRight
                 text : "Load"
 
                 onClicked : { root.loadClicked() }
