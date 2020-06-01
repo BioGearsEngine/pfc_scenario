@@ -90,7 +90,7 @@ ApplicationWindow {
   XMLSeralizer {
     id : scenario_serializer
     db : scenario_model
-    file : "PFC_SCENARIO.pfc"
+    file : "PFC_SCENARIO.pfc.zip"
   }
   StackView {
     id: mainView

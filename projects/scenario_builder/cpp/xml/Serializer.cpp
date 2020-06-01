@@ -9,6 +9,7 @@
 #include <string>
 
 #include <QDebug>
+#include <QDir>
 
 #include "../xsd/cpp/military_scenario_1.0.0.hxx"
 #include "../xsd/cpp/pfc_scenario_0.2.hxx"
@@ -56,10 +57,10 @@ bool Serializer::save() const
   }
   filename = get_property("scenario_title");
   if (!filename.contains("_NOTFOUND", Qt::CaseSensitive)) {
-    filename = filename.replace(" ", "_") + ".pfc";
+    filename = filename.replace(" ", "_") + ".pfc.zip";
     return save_as(filename);
   }
-  filename = "PFC_SCENARIO.pfc";
+  filename = _sourceFile;
   return save_as(filename);
 }
 //-------------------------------------------------------------------------------
@@ -161,6 +162,9 @@ bool Serializer::save_as(const QString& filename) const
 //-------------------------------------------------------------------------------
 bool Serializer::load(const QString& filename)
 {
+  //TODO: Add a state machien for sucessful loading.
+  //TODO: Only refresh database IF the file loads well
+
   if (!_db) {
     return false;
   }
@@ -177,13 +181,52 @@ bool Serializer::load(const QString& filename)
   void* reader = NULL;
 
   mz_zip_reader_create(&reader);
-  err = mz_zip_reader_open_file(reader, filename.toStdString().c_str());
+  err |= mz_zip_reader_open_file(reader, filename.toStdString().c_str());
   if (err != MZ_OK) {
     qInfo() << QString("Error %1 opening archive %2\n").arg(err).arg(filename);
     mz_zip_reader_delete(&reader);
     _db->refresh();
     return err;
   }
+
+  // Note: What I really want to do here is find all archives ending in xsd/* and move them to tmp/xsd.  Minizip has a
+  // Function mz_zip_reader_save_all which would let me do this, but would also grab every image file. So instead I'm going to iterate over
+  // All contained files and store two list images and xsd. While I was writing this I ran in to a problem where saving files to disk invalidated future calls to mz_reader_close_entry.
+  // My quick solution was just to close/delete the reader and reopen it.  Loading xml files must be done after the xsd/ files are saved but the entries come after so not being able to rewind was a major issue.
+  std::string destination = "";
+  err = mz_zip_reader_goto_first_entry(reader);
+  do {
+    err = mz_zip_reader_entry_get_info(reader, &file_info);
+    if (strncmp(file_info->filename, "xsd/", 4) == 0) {
+      //NOTE: Might want to strip xsd:/
+      _known_schemas.push_back(file_info->filename);
+      destination = "tmp/";
+      destination += file_info->filename;
+      mz_zip_reader_entry_save_file(reader, destination.c_str());
+    } else if (strncmp(file_info->filename, "images/", 7) == 0) {
+      //NOTE: Might want to strip images:/
+      _known_images.push_back(file_info->filename);
+    }
+    err = mz_zip_reader_goto_next_entry(reader);
+  } while (err == MZ_OK);
+  mz_zip_reader_delete(&reader);
+
+
+  //Recreating Reader
+  reader = nullptr;
+  mz_zip_reader_create(&reader);
+  err = mz_zip_reader_open_file(reader, filename.toStdString().c_str());
+  if (err != MZ_OK) {
+    qInfo() << QString("Error %1 opening archive %2").arg(err).arg(filename);
+    mz_zip_reader_delete(&reader);
+    _db->refresh();
+    return err;
+  }
+
+  QString fallback = QDir::currentPath();
+  QDir::setCurrent(QStringLiteral("tmp/xsd"));
+    
+  //TODO: Restore MSDL Support
 
   //if (mz_zip_reader_locate_entry(reader, "Scenario.msdl.xml", 1) == MZ_OK) {
   //  if (mz_zip_reader_entry_get_info(reader, &file_info) == MZ_OK && mz_zip_reader_entry_open(reader) == MZ_OK) {
@@ -223,10 +266,18 @@ bool Serializer::load(const QString& filename)
   //      std::cout << e << '\n';
   //      _db->refresh();
   //      mz_zip_reader_delete(&reader); //Removing the Reader if this moves below the try remember you must always cal this function before leaving this function
+  //      QDir::setCurrent(fallback);
   //      return false;
   //    }
   //  }
+  //}  else {
+  //    mz_zip_reader_delete(&reader);
+  //    printf("Could not find %s in archive %s\n", "Scenario.pfc.xml", filename.toStdString().c_str());
+  //    _db->refresh();
+  //    QDir::setCurrent(fallback);
+  //    return false;
   //}
+
   if (mz_zip_reader_locate_entry(reader, "Scenario.pfc.xml", 1) == MZ_OK) {
     if (mz_zip_reader_entry_get_info(reader, &file_info) == MZ_OK && mz_zip_reader_entry_open(reader) == MZ_OK) {
       //NOTE: At this point I want to pull all scenarios in to memory for parsing.  Then Close down the archive
@@ -316,23 +367,29 @@ bool Serializer::load(const QString& filename)
         }
         mz_zip_reader_delete(&reader); //Removing the Reader if this moves below the try remember you must always cal this function before leaving this function
         _db->refresh();
+        QDir::setCurrent(fallback);
         return true;
       } catch (const xml_schema::exception& e) {
         std::cout << e << '\n';
         _db->refresh();
         mz_zip_reader_delete(&reader); //Removing the Reader if this moves below the try remember you must always cal this function before leaving this function
+        QDir::setCurrent(fallback);
         return false;
       }
       mz_zip_reader_delete(&reader); //Removing the Reader if this moves below the try remember you must always cal this function before leaving this function
+      QDir::setCurrent(fallback);
       return update_property("archive_file", filename.toStdString());
     }
   } else {
     mz_zip_reader_delete(&reader);
     printf("Could not find %s in archive %s\n", "Scenario.pfc.xml", filename.toStdString().c_str());
     _db->refresh();
+    QDir::setCurrent(fallback);
     return false;
   }
+
   _db->refresh();
+  QDir::setCurrent(fallback);
   return false;
 }
 //-------------------------------------------------------------------------------
@@ -393,7 +450,7 @@ auto Serializer::generate_msdl_stream() const -> std::stringstream
 
   xml_schema::namespace_infomap info;
   info[""].name = "urn:sisostds:scenario:military:data:draft:msdl:1";
-  info[""].schema = "xsd/military_scenario_1.0.0.xsd";
+  info[""].schema = "military_scenario_1.0.0.xsd";
 
   std::stringstream msdl_content;
   msdl_1::MilitaryScenario(msdl_content, msdl, info);
@@ -488,7 +545,7 @@ auto Serializer::generate_pfc_stream() const -> std::stringstream
 
   xml_schema::namespace_infomap info;
   info[""].name = "com:ara:pfc:training:1";
-  info[""].schema = "xsd/pfc_scenario_0.2.xsd";
+  info[""].schema = "pfc_scenario_0.2.xsd";
   QSqlDatabase _db;
   if (_db.isValid()) {
     _db = QSqlDatabase::addDatabase("QSQLITE");

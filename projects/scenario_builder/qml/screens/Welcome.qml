@@ -89,10 +89,10 @@ Page {
 
                  model : ListModel {
                    ListElement {
-                     path :'C:/PFC/GunShotWound.pfc'; name : 'Male-GSW-LG-Austire'; last : '2020-03-20'
+                     path :'C:/PFC/GunShotWound.pfc.zip'; name : 'Male-GSW-LG-Austire'; last : '2020-03-20'
                    }
                    ListElement {
-                     path :'C:/PFC/BurnCare.pfc';  name : 'Male-Burn-TBI-BFT'; last : '2020-03-21'
+                     path :'C:/PFC/BurnCare.pfc.zip';  name : 'Male-Burn-TBI-BFT'; last : '2020-03-21'
                    }
                  }
 

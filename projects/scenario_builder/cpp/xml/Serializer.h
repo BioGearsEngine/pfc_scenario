@@ -36,8 +36,11 @@ protected:
 
 private:
   SQLite3Driver* _db = nullptr;
-  QString _sourceFile = "PFC_SCENARIO.pfc";
+  QString _sourceFile = "PFC_SCENARIO.pfc.zip";
   std::map<std::string, std::string> _images; //Map of Image Keys,Paths
+  QList<QString> _known_images;
+  QList<QString> _known_schemas;
 };
+
 }
 #endif //PFC_VISUALIZER_XML_SERALIZER_H
