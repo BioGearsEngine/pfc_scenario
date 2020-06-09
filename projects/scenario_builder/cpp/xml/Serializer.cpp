@@ -3,9 +3,9 @@
 #include <chrono>
 #include <iomanip>
 #include <iostream>
-#include <streambuf>
 #include <ostream>
 #include <regex>
+#include <streambuf>
 #include <string>
 
 #include <QDebug>
@@ -51,11 +51,11 @@ Serializer::~Serializer()
 //-------------------------------------------------------------------------------
 bool Serializer::save() const
 {
-  QString filename = get_property("archive_file");
+  QString filename = get_property(_db, "archive_file");
   if (!filename.contains("_NOTFOUND", Qt::CaseSensitive)) {
     return save_as(filename);
   }
-  filename = get_property("scenario_title");
+  filename = get_property(_db, "scenario_title");
   if (!filename.contains("_NOTFOUND", Qt::CaseSensitive)) {
     filename = filename.replace(" ", "_") + ".pfc.zip";
     return save_as(filename);
@@ -157,22 +157,22 @@ bool Serializer::save_as(const QString& filename) const
   mz_zip_writer_close(writer);
   mz_zip_writer_delete(&writer);
 
-  return update_property("archive_file", filename.toStdString());
+  return update_property(_db, "archive_file", filename.toStdString());
 }
 //-------------------------------------------------------------------------------
 bool Serializer::load(const QString& filename)
 {
-  //TODO: Add a state machien for sucessful loading.
-  //TODO: Only refresh database IF the file loads well
 
-  if (!_db) {
+  if(!_db) {
+    //Short Circuit We do not have a valid database ptr
     return false;
   }
-  _db->open(_db->Name());
-  _db->clear_db();
-  _db->close();
-  _db->initialize_db();
 
+  SQLite3Driver scratch_db{ "loading.sqlite" };
+  scratch_db.open(scratch_db.Name());
+  scratch_db.clear_db();
+  scratch_db.initialize_db();
+  
   mz_zip_file* file_info = NULL;
   uint32_t ratio = 0;
   int16_t level = 0;
@@ -185,7 +185,7 @@ bool Serializer::load(const QString& filename)
   if (err != MZ_OK) {
     qInfo() << QString("Error %1 opening archive %2\n").arg(err).arg(filename);
     mz_zip_reader_delete(&reader);
-    _db->refresh();
+
     return err;
   }
 
@@ -211,7 +211,6 @@ bool Serializer::load(const QString& filename)
   } while (err == MZ_OK);
   mz_zip_reader_delete(&reader);
 
-
   //Recreating Reader
   reader = nullptr;
   mz_zip_reader_create(&reader);
@@ -219,13 +218,13 @@ bool Serializer::load(const QString& filename)
   if (err != MZ_OK) {
     qInfo() << QString("Error %1 opening archive %2").arg(err).arg(filename);
     mz_zip_reader_delete(&reader);
-    _db->refresh();
+
     return err;
   }
 
   QString fallback = QDir::currentPath();
   QDir::setCurrent(QStringLiteral("tmp/xsd"));
-    
+
   //TODO: Restore MSDL Support
 
   //if (mz_zip_reader_locate_entry(reader, "Scenario.msdl.xml", 1) == MZ_OK) {
@@ -264,7 +263,7 @@ bool Serializer::load(const QString& filename)
   //
   //    } catch (const xml_schema::exception& e) {
   //      std::cout << e << '\n';
-  //      _db->refresh();
+  //
   //      mz_zip_reader_delete(&reader); //Removing the Reader if this moves below the try remember you must always cal this function before leaving this function
   //      QDir::setCurrent(fallback);
   //      return false;
@@ -273,7 +272,7 @@ bool Serializer::load(const QString& filename)
   //}  else {
   //    mz_zip_reader_delete(&reader);
   //    printf("Could not find %s in archive %s\n", "Scenario.pfc.xml", filename.toStdString().c_str());
-  //    _db->refresh();
+  //
   //    QDir::setCurrent(fallback);
   //    return false;
   //}
@@ -297,103 +296,108 @@ bool Serializer::load(const QString& filename)
       try { // If the parsing fails this prints out every error
         auto scenario_schema = pfc::schema::Scenario(i_stream);
         bool successful = false;
-        scenario_schema = pfc::schema::PFC::load_authors(std::move(scenario_schema), *_db, successful);
+        scenario_schema = pfc::schema::PFC::load_authors(std::move(scenario_schema), scratch_db, successful);
         if (successful) {
-          update_property("scenario_title", scenario_schema->summary().title()->c_str());
-          update_property("scenario_version", scenario_schema->summary().version()->c_str());
-          update_property("scenario_security", scenario_schema->summary().classification()->c_str());
-          update_property("scenario_description", scenario_schema->summary().description()->c_str());
-          update_property("scenario_keywords", scenario_schema->summary().keywords()->c_str());
-          update_property("scenario_domain", scenario_schema->summary().domain()->c_str());
-          update_property("scenario_limitations", scenario_schema->summary().limitations()->c_str());
+          update_property(&scratch_db, "scenario_title", scenario_schema->summary().title()->c_str());
+          update_property(&scratch_db, "scenario_version", scenario_schema->summary().version()->c_str());
+          update_property(&scratch_db, "scenario_security", scenario_schema->summary().classification()->c_str());
+          update_property(&scratch_db, "scenario_description", scenario_schema->summary().description()->c_str());
+          update_property(&scratch_db, "scenario_keywords", scenario_schema->summary().keywords()->c_str());
+          update_property(&scratch_db, "scenario_domain", scenario_schema->summary().domain()->c_str());
+          update_property(&scratch_db, "scenario_limitations", scenario_schema->summary().limitations()->c_str());
         } else {
           throw std::runtime_error("Failed to load authors");
         }
         if (successful) {
-          scenario_schema = pfc::schema::PFC::load_assessments(std::move(scenario_schema), *_db, successful);
+          scenario_schema = pfc::schema::PFC::load_assessments(std::move(scenario_schema), scratch_db, successful);
         } else {
           throw std::runtime_error("Failed to load authors");
         }
         if (successful) {
-          scenario_schema = pfc::schema::PFC::load_citations(std::move(scenario_schema), *_db, successful);
+          scenario_schema = pfc::schema::PFC::load_citations(std::move(scenario_schema), scratch_db, successful);
         } else {
           throw std::runtime_error("Failed to load citations");
         }
         if (successful) {
-          scenario_schema = pfc::schema::PFC::load_equipment(std::move(scenario_schema), *_db, successful);
+          scenario_schema = pfc::schema::PFC::load_equipment(std::move(scenario_schema), scratch_db, successful);
         } else {
           throw std::runtime_error("Failed to load equipment");
         }
 
         if (successful) {
-          scenario_schema = pfc::schema::PFC::load_injuries(std::move(scenario_schema), *_db, successful);
+          scenario_schema = pfc::schema::PFC::load_injuries(std::move(scenario_schema), scratch_db, successful);
         } else {
           throw std::runtime_error("Failed to load injuries");
         }
         if (successful) {
-          scenario_schema = pfc::schema::PFC::load_injury_sets(std::move(scenario_schema), *_db, successful);
+          scenario_schema = pfc::schema::PFC::load_injury_sets(std::move(scenario_schema), scratch_db, successful);
         } else {
           throw std::runtime_error("Failed to load injury sets");
         }
         if (successful) {
-          scenario_schema = pfc::schema::PFC::load_objectives(std::move(scenario_schema), *_db, successful);
+          scenario_schema = pfc::schema::PFC::load_objectives(std::move(scenario_schema), scratch_db, successful);
         } else {
           throw std::runtime_error("Failed to load objectives");
         }
         if (successful) {
-          scenario_schema = pfc::schema::PFC::load_locations(std::move(scenario_schema), *_db, successful);
+          scenario_schema = pfc::schema::PFC::load_locations(std::move(scenario_schema), scratch_db, successful);
         } else {
           throw std::runtime_error("Failed to load locations");
         }
         if (successful) {
-          scenario_schema = pfc::schema::PFC::load_roles(std::move(scenario_schema), *_db, successful);
+          scenario_schema = pfc::schema::PFC::load_roles(std::move(scenario_schema), scratch_db, successful);
         } else {
           throw std::runtime_error("Failed to load roles");
         }
         if (successful) {
-          scenario_schema = pfc::schema::PFC::load_treatments(std::move(scenario_schema), *_db, successful);
+          scenario_schema = pfc::schema::PFC::load_treatments(std::move(scenario_schema), scratch_db, successful);
         } else {
           throw std::runtime_error("Failed to load treatments");
         }
         if (successful) {
-          scenario_schema = pfc::schema::PFC::load_events(std::move(scenario_schema), *_db, successful);
+          scenario_schema = pfc::schema::PFC::load_events(std::move(scenario_schema), scratch_db, successful);
         } else {
           throw std::runtime_error("Failed to load events");
         }
         if (successful) {
-          scenario_schema = pfc::schema::PFC::load_scenes(std::move(scenario_schema), *_db, successful);
+          scenario_schema = pfc::schema::PFC::load_scenes(std::move(scenario_schema), scratch_db, successful);
         } else {
           throw std::runtime_error("Failed to load scenes");
         }
         mz_zip_reader_delete(&reader); //Removing the Reader if this moves below the try remember you must always cal this function before leaving this function
-        _db->refresh();
+
         QDir::setCurrent(fallback);
+
+        scratch_db.close();
+        _db->close();
+        QFile::copy(scratch_db.Path() + "/" + scratch_db.Name(), _db->Path() + "/" + _db->Name());
+        _db->open();
+        _db->refresh();
         return true;
       } catch (const xml_schema::exception& e) {
         std::cout << e << '\n';
-        _db->refresh();
+
         mz_zip_reader_delete(&reader); //Removing the Reader if this moves below the try remember you must always cal this function before leaving this function
         QDir::setCurrent(fallback);
         return false;
       }
       mz_zip_reader_delete(&reader); //Removing the Reader if this moves below the try remember you must always cal this function before leaving this function
       QDir::setCurrent(fallback);
-      return update_property("archive_file", filename.toStdString());
+      return update_property(_db, "archive_file", filename.toStdString());
     }
   } else {
     mz_zip_reader_delete(&reader);
     printf("Could not find %s in archive %s\n", "Scenario.pfc.xml", filename.toStdString().c_str());
-    _db->refresh();
+
     QDir::setCurrent(fallback);
     return false;
   }
 
-  _db->refresh();
   QDir::setCurrent(fallback);
   return false;
 }
 //-------------------------------------------------------------------------------
-bool Serializer::update_property(const std::string& name, const std::string& value) const
+bool Serializer::update_property(SQLite3Driver* db, const std::string& name, const std::string& value) const
 {
   Property prop;
   prop.name = name.c_str();
@@ -404,7 +408,7 @@ bool Serializer::update_property(const std::string& name, const std::string& val
   return false;
 }
 //-------------------------------------------------------------------------------
-QString Serializer::get_property(const QString& name) const
+QString Serializer::get_property(SQLite3Driver* db, const QString& name) const
 {
   Property prop;
   prop.name = name;
@@ -474,13 +478,13 @@ auto Serializer::generate_pfc_stream() const -> std::stringstream
     pfc_scenario.author().country(author->country.toStdString());
   }
 
-  pfc_scenario.summary().title(get_property("scenario_title").toStdString());
-  pfc_scenario.summary().version(get_property("scenario_version").toStdString());
-  pfc_scenario.summary().classification(get_property("scenario_security").toStdString());
-  pfc_scenario.summary().description(get_property("scenario_description").toStdString());
-  pfc_scenario.summary().limitations(get_property("scenario_limitations").toStdString());
-  pfc_scenario.summary().domain(get_property("scenario_domain").toStdString().c_str());
-  pfc_scenario.summary().keywords(get_property("scenario_keywords").toStdString().c_str());
+  pfc_scenario.summary().title(get_property(_db, "scenario_title").toStdString());
+  pfc_scenario.summary().version(get_property(_db, "scenario_version").toStdString());
+  pfc_scenario.summary().classification(get_property(_db, "scenario_security").toStdString());
+  pfc_scenario.summary().description(get_property(_db, "scenario_description").toStdString());
+  pfc_scenario.summary().limitations(get_property(_db, "scenario_limitations").toStdString());
+  pfc_scenario.summary().domain(get_property(_db, "scenario_domain").toStdString().c_str());
+  pfc_scenario.summary().keywords(get_property(_db, "scenario_keywords").toStdString().c_str());
 
   //1. <Equipment>
   for (auto& equipment : _db->get_equipments()) {

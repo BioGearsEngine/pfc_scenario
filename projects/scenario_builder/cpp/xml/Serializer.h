@@ -29,10 +29,10 @@ signals:
   void dbChanged();
 
 protected:
-  QString get_property(const QString& name) const;
+  QString get_property(SQLite3Driver* db, const QString& name) const;
   auto generate_msdl_stream() const -> std::stringstream;
   auto generate_pfc_stream() const -> std::stringstream;
-  bool update_property(const std::string& name, const std::string& filepath) const;
+  bool update_property(SQLite3Driver* db, const std::string& name, const std::string& filepath) const;
 
 private:
   SQLite3Driver* _db = nullptr;
