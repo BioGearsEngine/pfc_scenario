@@ -14,7 +14,26 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
   <xs:import namespace="urn:sisostds:scenario:military:data:draft:msdl:1" schemaLocation="military_scenario_1.0.0.xsd"/>
   <xs:complexType name="summary">
     <xs:annotation>
-      <xs:documentation>General Information About the Scenario.</xs:documentation>
+      <xs:documentation>Summary stores all general information about the current scenario file.
+        
+        Fields:
+          Title: xs:string : The name of the scenario contained in the file 
+          Description: xs:string : A brief description of the contents of the scenario and its purpose. Can be multiple paragraphs in format.
+          Version:  xs:string : Internal version number of the current scenario file. Ideally this would be maintained over multiple official releases. 
+          Classification:  xs:string : Intended as away of marking the classified nature of the contents contained in the scenario file.  (e.g Non-Classified, Confidential, Secret, Top Secret, ...)
+          Keywords:   xs:string : Set of comma delimited keywords that can be used for organizing multiple scenario files in to organized sets.  
+          Domain: xs:string :  The area of study which is most relevant to the the training scenario 
+          Limitations: xs:string : Any known limitations in the scenario with regards to its use.
+        
+        Example: 
+          Title: Gun Shot Wound Treatment 
+          Description: Simple emergency training on treatment of clean GSW wounds.
+          Version: MIL-GSW-2019
+          Classification: NON-CLASSIFIED
+          Keywords: First Responder, Puncture Wounds, Gun Shot
+          Domain: Emergency Response, Trauma Ward
+          Limitations: Not Suited for resuscitation exercises. 
+      </xs:documentation>
     </xs:annotation>
     <xs:all>
       <xs:element name="title" type="xs:string" minOccurs="0"/>
@@ -28,7 +47,28 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
   </xs:complexType>
   <xs:complexType name="author">
     <xs:annotation>
-      <xs:documentation>Important data regarding a scenario's creator.</xs:documentation>
+      <xs:documentation>Important data regarding a scenario's creator.
+        
+        Fields:
+          First Name: xs:string : The author's first name.
+          Last Name: xs:string : The author's last name.
+          Organization: xs:string : The organization that the author belongs to.
+          Phone Number: xs:string : Preferred phone number for contact.
+          Email: xs:string : Preferred email for contact.
+          ZIP: xs:string : Author/organization's ZIP code.
+          State: xs:string : Author/organization's state of residence.
+          Country: xs:string : Author/organization's country of residence.
+        
+        Example:
+          First Name: John
+          Last Name: Smith
+          Organization: ARA
+          Phone Number: (123)456-7890
+          Email: johnsmith@ara.com
+          ZIP: 12345
+          State: North Carolina
+          Country: USA
+      </xs:documentation>
     </xs:annotation>
     <xs:all>
       <xs:element name="first_name" type="xs:string" minOccurs="0"/>
@@ -52,8 +92,20 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
   <xs:complexType name="equipment">
     <xs:annotation>
       <xs:documentation>
-        A PFC representation any equipment or inventory that might be used in the scenario. This could be a medical device or a
+        A PFC representation of any equipment or inventory that might be used in the scenario. This could be a medical device or a
         any common item which is of significance to the scenario narrative.
+        
+        Fields:
+          Name: xs:string : Name of the equipment
+          Description: xs:string : Brief summary of the equipment
+          Image: xs:string : Visual reference
+          References: citation-ref-list : List of reference material for additional information
+          
+        Example:
+          Name: Syringe
+          Description: A tube with a nozzle and piston or bulb for sucking in and ejecting liquid in a thin stream, used for cleaning wounds or body cavities, or fitted with a hollow needle for injecting or withdrawing fluids.
+          Image:
+          References:
       </xs:documentation>
     </xs:annotation>
     <xs:all>
@@ -80,6 +132,20 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 				A PFC representation of a simple trauma. Injuries are associated to a Injury-Profile where severity and trauma-site are applied.
 				An trauma must have a medical-name, but can also have a common-name for use in documentation. It is good to provide a list of citations 
 				which describe the trauma in more traditional terms in the references section, but is not required.
+				
+				Fields:
+				  Common Name: xs:string : Alternative name for trauma.
+				  Medical Name: xs:string : Formal name for trauma.
+				  References: citation-ref-list : List of reference material for additional information.
+				  Description: xs:string : Brief summary of the trauma in general.
+				  Severity Range: trauma-severity-range : Numerical range for mapping injury occurrence to a physiology engine.
+				  
+				Example:
+				  Common Name: Cut 
+				  Medical Name: Laceration wound
+				  References:
+				  Description: A small laceration located on the patient's left calf.
+				  Severity Range: 4
       </xs:documentation>
     </xs:annotation>
     <xs:all>
@@ -122,7 +188,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
   <xs:complexType name="token-range">
     <xs:annotation>
       <xs:documentation>
-				Some ranges are better described with english words [low,medium,high] token-range allows a trauma definition to specificy a 
+				Some ranges are better described with English words [low,medium,high] token-range allows a trauma definition to specificy a 
 				custom enummeration that a UI would then convert to a valid dropdown list when constructing a UI. trauma-profiles can not
 				validate against the trauma definition with out restricting the possible ranges so this is really for internal documentation.
       </xs:documentation>
@@ -152,9 +218,23 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
   <xs:complexType name="treatment-plan">
     <xs:annotation>
       <xs:documentation>
-				A Treatment Plan is intended to be a break down of a clinical practice guideline in to a series of descrete steps. The simplicty of 
+				A Treatment Plan is intended to be a break down of a clinical practice guideline in to a series of discrete steps. The simplicity of 
 				the treatment plan breakdown is matched to the intended training for the scenario and not the true complexity of the full CPG.
-				Future versions may allow logcial branching but currently the representation is a linear flow of steps.
+				Future versions may allow logical branching but currently the representation is a linear flow of steps.
+				
+				Fields:
+				  Common Name: xs:string : Alternative name for a treatment plan. 
+				  Medical Name: xs:string : Formal name for a treatment plan.
+				  Description: xs:string : Brief summary of the treatment plan.
+				  Equipment: equipment-ref-list : List of the equipment needed to carry out the treatment plan.
+				  References: medical-reference-list : List of references used to create the treatment plan.
+				  
+				Example:
+				  Common Name: 
+				  Medical Name:
+				  Description:
+				  Equipment: 
+				  References:
       </xs:documentation>
     </xs:annotation>
     <xs:all>
@@ -193,7 +273,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
   <xs:complexType name="cpg-ref-list">
     <xs:annotation>
       <xs:documentation>
-        List of CPG specific citations. This tag is differentatated from the citations tag in order to make it easier for user interfaces
+        List of CPG specific citations. This tag is differentiated from the citations tag in order to make it easier for user interfaces
         to parse out all associated CPGs and make mapping widgets.
       </xs:documentation>
     </xs:annotation>
@@ -257,9 +337,17 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
   <xs:complexType name="trauma-profile">
     <xs:annotation>
       <xs:documentation>
-				A collection of Injuries which is intended to act as a boot strap medical record for an acor in a medical-scenario.
+				A collection of Injuries which is intended to act as a boot strap medical record for an actor in a medical-scenario.
 				Injury profiles can be appended either to an actor initially or mid scenario to act like a contracted wound. Injury in this 
 				case may include medical conditions or diagnosis, but will generally be a combat casualty wound. 
+				
+				Fields:
+				  Name: xs:string : Name of the collection of injuries.
+				  Injuries: trauma-occurence-list : List of the injuries present in the profile.
+				  
+				Example:
+				  Name: 
+				  Injuries: 
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
@@ -298,6 +386,15 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
         annotated in the trauma description. It could be the flow rate for a hemorrhage or a general term like mild,severe for an infection
         Even first,second,third for a burn trauma. It is left to the implementation to interprete the meaning of the severity. Severity values are 
         mapped to a severity definition by the implementation as xml validation alone can not enforce these rules.
+        
+        Fields:
+          Description: xs:string : Brief summary of the simple trauma.
+          Severity Range: xs:string : Numeric value meant to be interpreted by a UI and then visualized in the scenario.
+          
+        Example:
+          Description: Gunshot wound to patient's right thigh.
+          Severity Range: 70
+          
       </xs:documentation>
     </xs:annotation>
     <xs:all>
@@ -365,15 +462,15 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
   <xs:complexType name="medical-scenario">
     <xs:annotation>
       <xs:documentation>
-				A PFC medical scenario is an exetension of the MSDL.  The purpose of this extension is to better document micro level sequence of events which are to
+				A PFC medical scenario is an extension of the MSDL.  The purpose of this extension is to better document micro level sequence of events which are to
         complex to be described in the original MSDL definition.
 
-				The best metephor for this extension is a stageplay script which requires a list of cast members, contains a description of the scenary and props 
-        to be used with int the narrative along with a timeline of events.
+				The best metaphor for this extension is a stageplay script which requires a list of cast members, contains a description of the scenery and props 
+        to be used within the narrative along with a timeline of events.
 
-				This metephor maps to the list of requirments needed to accurately simulate a medical training scenario to provide the immersion needed
+				This metaphor maps to the list of requirements needed to accurately simulate a medical training scenario to provide the immersion needed
 				to properly elevate the training and make learning transfer possible. The breakdown can be as simple or complex as is needed for a narrative to be completed. 
-        Various elements also have a fidelity field which is designed to allow additinal information to be encoded int he scenario that is ignored by lower fidelity
+        Various elements also have a fidelity field which is designed to allow additional information to be encoded in the scenario that is ignored by lower fidelity
         implementations.
       </xs:documentation>
     </xs:annotation>
@@ -394,7 +491,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
   <xs:complexType name="role">
     <xs:annotation>
       <xs:documentation>
-				A role is a refernce to a pfc:role with an optional pfc:trauma-profile reference.
+				A role is a reference to a pfc:role with an optional pfc:trauma-profile reference.
 				An additional description describes the role of the unit in human terms on the level of a cliff-note.
 				The short-name is a unique string to be use when parsing a training-script event to quickly refer to 
 				a role
@@ -415,7 +512,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
   </xs:complexType>
 
   <xs:complexType name="item-list">
-    <xs:annotation><xs:documentation>List of pfc:item  Which is a specific pfc:equipment item with its property values populatd
+    <xs:annotation><xs:documentation>List of pfc:item  Which is a specific pfc:equipment item with its property values populated
       </xs:documentation></xs:annotation>
     <xs:sequence>
       <xs:element name="item" type="item" minOccurs="0" maxOccurs="unbounded"/>
@@ -424,7 +521,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
   <xs:complexType name="item">
     <xs:annotation>
       <xs:documentation>
-				A prop is a refernce to a pfc:equipment
+				A prop is a reference to a pfc:equipment
 				An additional description describes the purpose of the prop in the training simulation in human terms on the level of a cliff-note
 				The short-name is a unique string to be use when parsing a training-script event to quickly refer to 
 				a prop
@@ -446,11 +543,11 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
   <xs:complexType name="scene">
     <xs:annotation>
       <xs:documentation>
-				A scene is a reference msdl:installation with its own independent metorlgoical data and time of day.
-				Each scene also has a time-in-simulation which represents the number of minutes since the start of the simulation this is used to sort scenes for complex trianing scenarios
+				A scene is a reference msdl:installation with its own independent meteorological data and time of day.
+				Each scene also has a time-in-simulation which represents the number of minutes since the start of the simulation this is used to sort scenes for complex training scenarios
 				An additional description field allows a human readable synopsis to be added. It is likely most
-				training scenaros will be a single scene, but the format supports multiple scenes for mass casulaty events when training groups
-				with the hope of allowing teams to train communication of information learned indpedent of each other and practice medical handoff technquies.
+				training scenarios will be a single scene, but the format supports multiple scenes for mass casualty events when training groups
+				with the hope of allowing teams to train communication of information learned independent of each other and practice medical handoff techniques.
       </xs:documentation>
     </xs:annotation>
     <xs:all>
@@ -488,7 +585,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 					event-acoustic-details
 					event-environment-details
 					event-script-details                         <!--Complex max fidelity code scripting to be loaded by level creators -->
-				Each one with its own set of fields to be mainpulated
+				Each one with its own set of fields to be manipulated
       </xs:documentation>
     </xs:annotation>
     <xs:all>
@@ -510,12 +607,12 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
     <xs:restriction base="xs:string">
       <xs:enumeration value="ACTION">
         <xs:annotation>
-          <xs:documentation>An Action is the result of a Role acting upon a peice of equipment or another Role. Can be detailed at all fidelity levels</xs:documentation>
+          <xs:documentation>An Action is the result of a Role acting upon a piece of equipment or another Role. Can be detailed at all fidelity levels</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value="DIALOG">
         <xs:annotation>
-          <xs:documentation>Dialog is anytime a Role or Object performs audiable dialog in the scene. Typically for Medium or Higher fidelity.</xs:documentation>
+          <xs:documentation>Dialog is anytime a Role or Object performs audible dialog in the scene. Typically for Medium or Higher fidelity.</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value="MOVMENT">
@@ -542,17 +639,17 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
     <xs:restriction base="xs:string">
       <xs:enumeration value="LOW">
         <xs:annotation>
-          <xs:documentation>Low fidelity implementations are intende for traditional medical simulators which use live actors are need only to know the high level details like initial injuries and placment of equipment in the scene.</xs:documentation>
+          <xs:documentation>Low fidelity implementations are intended for traditional medical simulators which use live actors are need only to know the high level details like initial injuries and placment of equipment in the scene.</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value="MEDIUM">
         <xs:annotation>
-          <xs:documentation>Medium fidelity implementations are higher level simulations which include some scripted dialog and movment. The details included at this  level  give non trainies instructions on how to act when not interacting directly with the trainee</xs:documentation>
+          <xs:documentation>Medium fidelity implementations are higher level simulations which include some scripted dialog and movment. The details included at this  level  give non trainees instructions on how to act when not interacting directly with the trainee</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value="HIGH">
         <xs:annotation>
-          <xs:documentation>High fidelity simulations are typically fully virtual simulations which must create atmosphereic ad background effects to enhance emerssian We are truly in the weeds at this level of scripting.</xs:documentation>
+          <xs:documentation>High fidelity simulations are typically fully virtual simulations which must create atmospheric ad background effects to enhance immersion We are truly in the weeds at this level of scripting.</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
     </xs:restriction>
@@ -592,7 +689,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
   </xs:complexType>
   <xs:complexType name="property">
     <xs:annotation>
-      <xs:documentation>A property is a configurable value of a peice of equipment. Each equipment can have any number of properties
+      <xs:documentation>A property is a configurable value of a piece of equipment. Each equipment can have any number of properties
                         The specific values of each property will be set when it is assigned to medical-scenario as a prop in a specific scene
       </xs:documentation>
     </xs:annotation>
@@ -612,7 +709,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
   </xs:complexType>
   <xs:complexType name="property-value">
     <xs:annotation>
-      <xs:documentation>The value for a property. They are broken in to two types because properties are generally defined in definition types while values appear in instance types;
+      <xs:documentation>The value for a property. They are broken into two types because properties are generally defined in definition types while values appear in instance types;
       </xs:documentation>
     </xs:annotation>
     <xs:all>

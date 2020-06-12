@@ -15,7 +15,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
     <xs:all>
       <xs:element name="summary" type="pfc:summary">
         <xs:annotation>
-          <xs:documentation>General Information on this scenario</xs:documentation>
+          <xs:documentation>General information on this scenario</xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name="author" type="pfc:author">
