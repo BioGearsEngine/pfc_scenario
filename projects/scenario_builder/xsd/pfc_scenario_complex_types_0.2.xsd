@@ -230,9 +230,9 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 				  References: medical-reference-list : List of references used to create the treatment plan.
 				  
 				Example:
-				  Common Name: 
-				  Medical Name:
-				  Description:
+				  Common Name: Tylenol
+				  Medical Name: Oral Medication: Acetaminophen
+				  Description: The drug acetaminophen was administered to the patient orally to reduce patient's fever.
 				  Equipment: 
 				  References:
       </xs:documentation>
