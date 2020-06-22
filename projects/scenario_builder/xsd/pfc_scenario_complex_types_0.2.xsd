@@ -343,7 +343,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 				
 				Fields:
 				  Name: xs:string : Name of the collection of injuries.
-				  Injuries: trauma-occurence-list : List of the injuries present in the profile.
+				  Injuries: trauma-occurence-list : trauma-occurence-list : List of the injuries present in the profile.
 				  
 				Example:
 				  Name: 
@@ -416,6 +416,21 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="learning-objective">
+    <xs:annotation>
+      <xs:documentation>
+        Objectives will be entered as goals to be met upon completion of a scenario.
+        
+        Fields:
+          Name: xs:string : Name for the learning objective being created.
+          Description: xs:string : Brief summary that defines the goal of the objective when taught through the scenario.
+          References: medical-reference-list : List of references used to create the learning objective.
+          
+        Example: 
+          Name: Burn Wound PFC
+          Description: Through the completion of the scenario, the player will be able to effectively treat a burn wound over a long period of time.
+          References:
+      </xs:documentation>
+    </xs:annotation>
     <xs:all>
       <xs:element name="id" type="xs:string"/>
       <xs:element name="name" type="xs:string"/>
@@ -446,6 +461,16 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
     <xs:annotation>
       <xs:documentation>
 				An assessment consist of an id and a idref to a lesson-objective.  This type is a work in practice and the criteria element is likely be reworked beyond a string in a future revision
+				
+				Fields:
+				  Name: xs:string : Name for the assessment.
+				  Description: xs:string : Brief summary of what the assessment evaluates.
+				  Criteria: xs:string : The standards at which a user will be evaluated by the assessment.
+				  
+				Example:
+				  Name: Burn Wound Assessment
+				  Description: This assessment evaluates the user's capability to treat a burn wound over a long period of time.
+				  Criteria: 
       </xs:documentation>
     </xs:annotation>
     <xs:all>
@@ -548,6 +573,18 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 				An additional description field allows a human readable synopsis to be added. It is likely most
 				training scenarios will be a single scene, but the format supports multiple scenes for mass casualty events when training groups
 				with the hope of allowing teams to train communication of information learned independent of each other and practice medical handoff techniques.
+				
+				Fields:
+				  Name: xs:string : Name of the scene.
+				  Description: xs:string : Brief summary of the scene.
+				  Time of day: xs:time : The time at which the scene takes place.
+				  Time in simulation: xs:integer : How much time has passed within the scene.
+				  
+				Example:
+				  Name: Patient and doctor dialogue
+				  Description: The injured patient and the doctor discuss plans for how to treat the wound.
+				  Time of day: 15:30
+				  Time in simulation: 2 hours
       </xs:documentation>
     </xs:annotation>
     <xs:all>
