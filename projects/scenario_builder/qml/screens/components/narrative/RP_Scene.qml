@@ -22,12 +22,12 @@ Rectangle{
       if (model.count == 0) {
         return
       }
-      self = root.model.get(root.index)
-      root.backend.select_scene(obj)
+      self.scene_id = values.id
       self.name = nameEntry.text
-      self.description = nameEntry.description
-      self.details = nameEntry.details
-      root.backend.update_scene(obj)
+      self.description = descriptionEntry.text
+      self.details = detailEntry.text
+      self.weather = weatherEntry.text
+      root.backend.update_scene(self)
     } 
     border.color: 'black'
     border.width: 1
@@ -42,7 +42,11 @@ Rectangle{
           label : "Scene Name"
           placeholderText: "String Field (128 Characters)"
           onEditingFinished : {
-            update_scene()
+            var entry = root.model.get(root.index)
+            if (text != entry.name) {
+              entry.name = text
+              update_scene(entry)
+            }
           }
         }   
         TextAreaEntry {
@@ -53,7 +57,8 @@ Rectangle{
           required: true
           placeholderText: "Scene Description"
           onEditingFinished : {
-            update_scene()
+            update_scene(root.model.get(root.index))
+          }
         }   
         TextAreaEntry {
           Layout.fillWidth: true
@@ -63,14 +68,40 @@ Rectangle{
           required: true
           placeholderText: "Scene Details"
           onEditingFinished : {
-            update_scene()
+            update_scene(root.model.get(root.index))
+          }  
+      }
+        TextAreaEntry {
+          Layout.fillWidth: true
+          Layout.leftMargin: 5
+          id: weatherEntry
+          label : "Weather"
+          required: true
+          placeholderText: "Weather Details"
+          onEditingFinished : {
+            update_scene(root.model.get(root.index))
+          }  
+      }
+        TextEntry {
+          Layout.fillWidth: true
+          Layout.leftMargin: 5
+          id: timeEntry
+          label : "Time in Scenario"
+          placeholderText: "Time Input Field (3H20M)"
+          onLabelWidthChanged : {
+            //nameEntry.nameWidth         = timeScenarioEntry.nameWidth
+            //locationNameEntry.nameWidth = timeScenarioEntry.nameWidth
+            //timeOfDayEntry.nameWidth    = timeScenarioEntry.nameWidth
+            //environmentEntry.nameWidth  = timeScenarioEntry.nameWidth
           }
-        }   
+        } 
     }
     onIndexChanged : {
       var values = model.get(root.index)
       if(values && model.count != 0) {
-        nameEntry.text = root.model.get(root.index).name
+        nameEntry.text = values.name
+        descriptionEntry.text = values.description
+        detailEntry.text = values.details
       }
     }
     onCountChanged : {

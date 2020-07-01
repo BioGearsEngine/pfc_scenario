@@ -1122,18 +1122,12 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Location)
   Location location_3;
 
   location_1.name = "My House";
-  location_1.scene_name = "Getting up for work";
-  location_1.time_of_day = "1:30PM";
   location_1.environment = "Bathroom floor";
 
   location_2.name = "Work Building";
-  location_2.scene_name = "Staying awake at work";
-  location_2.time_of_day = "2:30PM";
   location_2.environment = "Office Floor";
 
   location_3.name = "Restaurant";
-  location_3.scene_name = "Getting Dinner";
-  location_3.time_of_day = "3:00PM";
   location_3.environment = "Booth";
 
   EXPECT_EQ(0, _db.location_count());
@@ -1152,13 +1146,9 @@ TEST_F(TEST_FIXTURE_NAME, Select_Location)
   Location location_3;
 
   location_1.name = "My House";
-  location_1.scene_name = "Getting up for work";
-  location_1.time_of_day = "1:30PM";
   location_1.environment = "Bathroom floor";
 
   location_2.name = "Work Building";
-  location_2.scene_name = "Staying awake at work";
-  location_2.time_of_day = "2:30PM";
   location_2.environment = "Office Floor";
 
   EXPECT_EQ(0, _db.location_count());
@@ -1190,18 +1180,12 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Location)
   Location location_3;
 
   location_1.name = "My House";
-  location_1.scene_name = "Getting up for work";
-  location_1.time_of_day = "1:30PM";
   location_1.environment = "Bathroom floor";
 
   location_2.name = "Work Building";
-  location_2.scene_name = "Staying awake at work";
-  location_2.time_of_day = "2:30PM";
   location_2.environment = "Office Floor";
 
   location_3.name = "Restaurant";
-  location_3.scene_name = "Getting Dinner";
-  location_3.time_of_day = "3:00PM";
   location_3.environment = "Booth";
 
   EXPECT_TRUE(_db.update_location(&location_1));
@@ -1219,8 +1203,6 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Location)
   Location location_2;
 
   location_1.name = "My House";
-  location_1.scene_name = "Getting up for work";
-  location_1.time_of_day = "1:30PM";
   location_1.environment = "Bathroom floor";
 
   location_2.name = "My House";
@@ -3667,18 +3649,12 @@ TEST_F(TEST_FIXTURE_NAME, LocationMap_Test_Location_Insertion)
   _db.select_scene(&scene_3);
 
   location_1.name = "My House";
-  location_1.scene_name = "Getting up for work";
-  location_1.time_of_day = "1:30PM";
   location_1.environment = "Bathroom floor";
 
   location_2.name = "Work Building";
-  location_2.scene_name = "Staying awake at work";
-  location_2.time_of_day = "2:30PM";
   location_2.environment = "Office Floor";
 
   location_3.name = "Restaurant";
-  location_3.scene_name = "Getting Dinner";
-  location_3.time_of_day = "3:00PM";
   location_3.environment = "Booth";
 
   _db.update_location(&location_1);
@@ -3740,18 +3716,12 @@ TEST_F(TEST_FIXTURE_NAME, LocationMap_Test_Location_Removal)
   _db.select_scene(&scene_3);
 
   location_1.name = "My House";
-  location_1.scene_name = "Getting up for work";
-  location_1.time_of_day = "1:30PM";
   location_1.environment = "Bathroom floor";
 
   location_2.name = "Work Building";
-  location_2.scene_name = "Staying awake at work";
-  location_2.time_of_day = "2:30PM";
   location_2.environment = "Office Floor";
 
   location_3.name = "Restaurant";
-  location_3.scene_name = "Getting Dinner";
-  location_3.time_of_day = "3:00PM";
   location_3.environment = "Booth";
 
   _db.update_location(&location_1);
@@ -3837,18 +3807,12 @@ TEST_F(TEST_FIXTURE_NAME, LocationMap_Test_Location_Deletion)
   _db.select_scene(&scene_3);
 
   location_1.name = "My House";
-  location_1.scene_name = "Getting up for work";
-  location_1.time_of_day = "1:30PM";
   location_1.environment = "Bathroom floor";
 
   location_2.name = "Work Building";
-  location_2.scene_name = "Staying awake at work";
-  location_2.time_of_day = "2:30PM";
   location_2.environment = "Office Floor";
 
   location_3.name = "Restaurant";
-  location_3.scene_name = "Getting Dinner";
-  location_3.time_of_day = "3:00PM";
   location_3.environment = "Booth";
 
   _db.update_location(&location_1);
@@ -3920,18 +3884,12 @@ TEST_F(TEST_FIXTURE_NAME, LocationMap_Test_Scene_Deletion)
   _db.select_scene(&scene_3);
 
   location_1.name = "My House";
-  location_1.scene_name = "Getting up for work";
-  location_1.time_of_day = "1:30PM";
   location_1.environment = "Bathroom floor";
 
   location_2.name = "Work Building";
-  location_2.scene_name = "Staying awake at work";
-  location_2.time_of_day = "2:30PM";
   location_2.environment = "Office Floor";
 
   location_3.name = "Restaurant";
-  location_3.scene_name = "Getting Dinner";
-  location_3.time_of_day = "3:00PM";
   location_3.environment = "Booth";
 
   _db.update_location(&location_1);
@@ -4727,8 +4685,6 @@ TEST_F(DATABASE_LOADING_TEST, load_locations)
   EXPECT_EQ(1, _db.location_count());
   auto temp = _db.get_locations();
   EXPECT_EQ(0, temp[0]->name.compare("Scene_Name Location"));
-  EXPECT_EQ(0, temp[0]->scene_name.compare("Scene_Name"));
-  EXPECT_EQ(0, temp[0]->time_of_day.compare("00:00:00"));
 }
 TEST_F(DATABASE_LOADING_TEST, load_objectives)
 {

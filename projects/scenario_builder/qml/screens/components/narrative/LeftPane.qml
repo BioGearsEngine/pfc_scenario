@@ -54,19 +54,23 @@ ColumnLayout {
          next = next +1
          self.scene_id = -1; 
          self.name = "New Scene %1".arg(next);
+         self.description = "Scene Description";
+         self.details = "Scene Details";
         } 
         root.backend.update_scene(self)
         root.model.insert(root.model.count,
           {
            "id" : self.scene_id,
-           "name": "%1".arg(self.name)}
+           "name": "%1".arg(self.name),
+           "description" : self.description,
+           "details" : self.details}
         );
-        location.location_id = -1
-        location.name = "New Scene %1 Location".arg(next)
-        location.scene_name = "New Scene %1".arg(next)
-        location.time_of_day = "";
-        location.environment = "";
-        root.backend.update_location(location)
+//        location.location_id = -1
+//        location.name = "New Scene %1 Location".arg(next)
+//        location.scene_name = "New Scene %1".arg(next)
+//        location.time_of_day = "";
+//        location.environment = "";
+//        root.backend.update_location(location)
         ++next;
       }
       onSecondButtonClicked : {
@@ -89,7 +93,7 @@ ColumnLayout {
       spacing : 5
       clip: true
       highlightFollowsCurrentItem : true
-
+      highlightMoveDuration : 1
       highlight: Rectangle {
           color: '#1111110F'
           Layout.alignment: Qt.AlignTop
@@ -123,28 +127,9 @@ ColumnLayout {
             font.weight: Font.Bold
             font.pointSize: 10
            }
-           //readOnly : true
-           //activeFocusOnPress: false
-           //hoverEnabled : false
            enabled : false
            color: enabled ? Material.primaryTextColor : Material.primaryTextColor
-//           onEditingFinished : {
-//             self.scene_id = model.id
-//             self.name = text
-//             root.backend.update_scene(self)
-//             model.id = self.scene_id
-//          }
         }
-
-//        states: State {
-//          name : "Selected"
-//                PropertyChanges{ target : scene_title_text; readOnly : false}
-//                PropertyChanges{ target : scene_title_text; activeFocusOnPress : true}
-//                PropertyChanges{ target : scene_title_text; hoverEnabled : true}
-//                PropertyChanges{ target : scene_title_text; enabled : true}
-//                PropertyChanges{ target : scene_title_text; mouseSelectionMode  : TextInput.SelectCharacters }
-//        }
-
         onFocusChanged: {
           if(listArea.currentIndex == index){
             state = 'Selected';
@@ -166,6 +151,8 @@ ColumnLayout {
             {
              id  : self.scene_id,
              name: "%1".arg(self.name), 
+             description : self.description,
+             details : self.details
             });
         }
       }

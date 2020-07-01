@@ -47,6 +47,11 @@ Rectangle {
         text: "Events"
         width: implicitWidth
       }
+      TabButton {
+        id: scenes_tab
+        text: "Scenes"
+        width: implicitWidth
+      }
       currentIndex: 1
     }
     StackLayout {
@@ -82,6 +87,15 @@ Rectangle {
         index : root.index
         count : root.count
     	}
+      RP_Scene {
+        id: scenes  
+        Layout.fillHeight: true
+        Layout.fillWidth: true
+        backend : root.backend
+        model : root.model
+        index : root.index
+        count : root.count
+      }
     }
   }
 }

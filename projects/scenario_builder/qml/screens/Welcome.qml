@@ -2,13 +2,27 @@ import QtQuick 2.10
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.12
+import com.ara.pfc.ScenarioModel.SQL 1.0
+import com.ara.pfc.ScenarioModel.XML 1.0
 
 Page {
     id: root
+    property SQLBackend backend    
     signal loadClicked()
     signal createClicked()
+    signal listUpdated()
     signal recentClicked(string path)
-
+   onListUpdated : {
+      recentFileList.clear();
+      var recent_files = backend.get_recent_scenario_files();
+      var i = 0;
+      for (i = 0;i < 10;i++) {
+        console.log(recent_files[i])
+        if (recent_files[i] != "") {
+          recentFileList.append({'path':recent_files[i],'name':'NAME','last':'LAST'})
+        }
+      }
+    }
     Rectangle {
         id  : mainArea
         color : "transparent"
@@ -88,12 +102,10 @@ Page {
                  highlightFollowsCurrentItem : true
 
                  model : ListModel {
-                   ListElement {
-                     path :'C:/PFC/GunShotWound.pfc.zip'; name : 'Male-GSW-LG-Austire'; last : '2020-03-20'
-                   }
-                   ListElement {
-                     path :'C:/PFC/BurnCare.pfc.zip';  name : 'Male-Burn-TBI-BFT'; last : '2020-03-21'
-                   }
+                  id : recentFileList
+                  Component.onCompleted : {
+                    root.listUpdated()
+                  }
                  }
 
                  delegate : MouseArea {
@@ -104,24 +116,28 @@ Page {
                      Label {
                        text : model.index + 1
                      }
-                     Label {
-                       Layout.preferredWidth : 150
-                       text : model.name + ":"
-                     }
+//                     Label {
+//                       Layout.preferredWidth : 150
+//                       text : model.name + ":"
+//                     }
                      Text {
                        Layout.preferredWidth : 150
                        text : model.path
                      }
-                     Text {
-                       Layout.preferredWidth : 50
-                       text : model.last
-                     }
+//                     Text {
+//                       Layout.preferredWidth : 50
+//                       text : model.last
+//                     }
                    }
                    width : childrenRect.width
                    height: childrenRect.height
                    onClicked: {
                      listArea.currentIndex = index
-                     }
+                   }
+                   onDoubleClicked: {
+                     listArea.currentIndex = index
+                     recentClicked(recentFileList.get(listArea.currentIndex).path)
+                   }
                  }
 
                  highlight: Rectangle {

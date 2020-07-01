@@ -15,8 +15,8 @@ FullListEntry {
   signal locationChanged(int index, string location)
   signal severityChanged(int index, double severity)
 
-  label: "Injury"
-  labelPlural: "Injuries"
+  label: "Trauma"
+  labelPlural: "Traumas"
   
   Injury {
     id: self
@@ -98,7 +98,7 @@ FullListEntry {
 
   }
 
-  //TODO: Modifiy InjurySets to Store a Severity Value and A Location Value for each Entry
+  //TODO: Modifiy TraumaSets to Store a Severity Value and A Location Value for each Entry
   //TODO: Then Displa these values instead of the description.
   //TODO: It would be cool if the delegate on state change added a description field which expanded it
 
@@ -109,9 +109,9 @@ FullListEntry {
     //TODO; Model Box Popup with  a selection of known Injuries
     var likely_id = root.backend.nextID(SQLBackend.INJURIES) + 1
     self.injury_id     = -1
-    self.medical_name  = "New Injury %1".arg(likely_id)
-    self.common_name   = "New Injury %1".arg(likely_id)
-    self.description   = "New Injury %1".arg(likely_id)
+    self.medical_name  = "New Trauma %1".arg(likely_id)
+    self.common_name   = "New Trauma %1".arg(likely_id)
+    self.description   = "New Trauma %1".arg(likely_id)
     self.citations     = ""
     self.min         =  0.0
     self.max         =  0.0

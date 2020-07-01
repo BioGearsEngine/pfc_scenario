@@ -44,12 +44,12 @@ Rectangle {
       }
       TabButton {
         id: injury_tab
-        text: "Injuries"
+        text: "Traumas"
         width: implicitWidth
       }
       TabButton {
         id: injury_set_tab
-        text: "Injury Sets"
+        text: "Trauma Sets"
         width: implicitWidth
       }
       TabButton {

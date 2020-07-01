@@ -17,6 +17,7 @@ specific language governing permissions and limitations under the License.
 #include <QQuickStyle>
 #include <QSplashScreen>
 #include <QList>
+#include <QSettings>
 #include "sql/SqlLite3Driver.h"
 #include "xml/Serializer.h"
 

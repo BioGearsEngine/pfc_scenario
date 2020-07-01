@@ -21,6 +21,7 @@ specific language governing permissions and limitations under the License.
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QString>
+#include <QSettings>
 
 #include "SQLTables.h"
 namespace pfc {
@@ -301,6 +302,11 @@ public:
   Q_INVOKABLE bool remove_injury_from_injury_sets(int);
   Q_INVOKABLE bool remove_injury_from_injury_sets(std::string);
 
+  Q_INVOKABLE void establish_settings();
+  Q_INVOKABLE void log_scenario_file(std::string);
+  Q_INVOKABLE void log_scenario_file(QString);
+  Q_INVOKABLE QList<QString> get_recent_scenario_files();
+
   std::string list_remove(std::string, std::string) const;
   std::string list_remove_index(std::string, int) const;
   int list_find(std::string, std::string) const;
@@ -435,6 +441,8 @@ private:
 
   QList<Event*>::iterator _current_event;
   QList<Scene*>::iterator _current_scene;
+  
+  std::vector<std::string> recent_files;
 };
 }
 

@@ -15,8 +15,8 @@ ListEntry {
   signal locationChanged(int index, string location)
   signal severityChanged(int index, double severity)
 
-  label: "Injury"
-  labelPlaural: "Injuries"
+  label: "Trauma"
+  labelPlaural: "Traumas"
   
   Injury {
     id: self
@@ -157,9 +157,9 @@ ListEntry {
     //TODO; Model Box Popup with  a selection of known Injuries
     var likely_id = root.backend.nextID(SQLBackend.INJURIES) + 1
     self.injury_id     = -1
-    self.medical_name  = "New Injury %1".arg(likely_id)
-    self.common_name   = "New Injury %1".arg(likely_id)
-    self.description   = "New Injury %1".arg(likely_id)
+    self.medical_name  = "New Trauma %1".arg(likely_id)
+    self.common_name   = "New Trauma %1".arg(likely_id)
+    self.description   = "New Trauma %1".arg(likely_id)
     self.citations     = ""
     self.min         =  0.0
     self.max         =  0.0

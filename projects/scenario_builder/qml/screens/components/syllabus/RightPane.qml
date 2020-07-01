@@ -47,7 +47,7 @@ Flickable {
         }
       }
       Rectangle {
-        id: blah
+        id: injuriesPane
         Layout.fillHeight: true
         Layout.fillWidth: true
         Layout.rightMargin: 5
@@ -58,8 +58,8 @@ Flickable {
           clip : true
           RP_Injuries {
 
-            width : Math.max(blah.width, implicitWidth)
-            height : Math.max(blah.height, implicitHeight)
+            width : Math.max(injuriesPane.width, implicitWidth)
+            height :Math.max(injuriesPane.height, implicitHeight)
             id : injuries
             backend : root.backend
 

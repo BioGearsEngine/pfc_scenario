@@ -5,8 +5,9 @@
         <file>screens/Main.qml</file>
         <file>screens/Welcome.qml</file>
         <file>screens/components/ScenarioNarrative.qml</file>
-        <file>screens/components/ScenarioSummary.qml</file>
+        <file>screens/components/ScenarioGeneral.qml</file>
         <file>screens/components/ScenarioSyllabus.qml</file>
+        <file>screens/components/ScenarioSummary.qml</file>
         <file>screens/components/narrative/LeftPane.qml</file>
 
         <!--Shared Components -->
@@ -42,10 +43,12 @@
         <file>screens/components/narrative/RP_Props.qml</file>
         <file>screens/components/narrative/RP_Roles.qml</file>
         <file>screens/components/narrative/RP_Scene.qml</file>
+        <file>screens/components/general/LeftPane.qml</file>
         <file>screens/components/summary/LeftPane.qml</file>
 
         <!-- Summary Tab Components -->
         <file>screens/components/summary/RightPane.qml</file>
+        <file>screens/components/general/RightPane.qml</file>
         <file>screens/components/syllabus/LeftPane.qml</file>
         <file>screens/components/syllabus/RightPane.qml</file>
 

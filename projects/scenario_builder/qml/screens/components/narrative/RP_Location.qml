@@ -13,7 +13,7 @@ Rectangle{
     property ListModel model
     property int index
     property int count
-    property alias sceneName: nameEntry.text
+    //property alias sceneName: nameEntry.text
 
     Location {
       id : self
@@ -27,63 +27,44 @@ Rectangle{
         return
       }
       var obj = self
-      obj.location_id = -1
+      obj.location_id = self.location_id
       obj.name = locationNameEntry.text
-      obj.scene_name = nameEntry.text
       obj.environment = environmentEntry.text
       root.backend.update_location(obj)
-      selfScene.name = root.model.get(index).name
-      root.backend.select_scene(selfScene)
-      selfScene.name = nameEntry.text
-      root.backend.update_scene(selfScene)
-      root.model.get(index).name = nameEntry.text
     } 
     border.color: 'black'
     border.width: 1
     ColumnLayout  {
         width: parent.width
-
-
-        TextEntry {
-          Layout.fillWidth: true
-          Layout.leftMargin: 5
-          id: nameEntry
-          label : "Scene Name"
-          placeholderText: "String Field (128 Characters)"
-          onEditingFinished : {
-            var entry = root.model.get(root.index)
-            if ( text != entry.name){
-              update_location()
-            }
-          }
-        }   
-
         TextEntry {
           Layout.fillWidth: true
           Layout.leftMargin: 5
           id: locationNameEntry
           label : "Location Name"
           placeholderText: "String Field (128 Characters)"
-        }
-        TimeEntry {
-          Layout.fillWidth: true
-          Layout.leftMargin: 5
-          id: timeOfDayEntry
-          label : "Time of Day"
-        }
-        TextEntry {
-          Layout.fillWidth: true
-          Layout.leftMargin: 5
-          id: timeScenarioEntry
-          label : "Time in Scenario"
-          placeholderText: "Time Input Field (3H20M)"
-          onLabelWidthChanged : {
-            nameEntry.nameWidth         = timeScenarioEntry.nameWidth
-            locationNameEntry.nameWidth = timeScenarioEntry.nameWidth
-            timeOfDayEntry.nameWidth    = timeScenarioEntry.nameWidth
-            environmentEntry.nameWidth  = timeScenarioEntry.nameWidth
+          onEditingFinished : {
+            update_location()
           }
         }
+//        TimeEntry {
+//          Layout.fillWidth: true
+//          Layout.leftMargin: 5
+//          id: timeOfDayEntry
+//          label : "Time of Day"
+//        }
+//        TextEntry {
+//          Layout.fillWidth: true
+//          Layout.leftMargin: 5
+//          id: timeScenarioEntry
+//          label : "Time in Scenario"
+//          placeholderText: "Time Input Field (3H20M)"
+//          onLabelWidthChanged : {
+//            //nameEntry.nameWidth         = timeScenarioEntry.nameWidth
+//            locationNameEntry.nameWidth = timeScenarioEntry.nameWidth
+//            timeOfDayEntry.nameWidth    = timeScenarioEntry.nameWidth
+//            environmentEntry.nameWidth  = timeScenarioEntry.nameWidth
+//          }
+//        }
         TextAreaEntry {
           Layout.fillWidth: true
           Layout.leftMargin: 5
@@ -91,29 +72,34 @@ Rectangle{
           label : "Environments"
           required: true
           placeholderText: "Weather Input Area"
+          onEditingFinished : {
+            update_location()
+          }
         }   
 
     }
     onIndexChanged : {
       var values = model.get(root.index)
       if(values && model.count != 0) {
-        nameEntry.text = root.model.get(root.index).name
+        update_location()
+        //nameEntry.text = root.model.get(root.index).name
+        selfScene.scene_id = model.get(root.index).id
+        root.backend.locations_in_scene(selfScene)
+        while ( root.backend.next_location(self) ) {
+          locationNameEntry.text = self.name
+          environmentEntry.text = self.environment
+        }
       }
     }
     onCountChanged : {
       if(count == 0) {
-          nameEntry.text = ""
           locationNameEntry.text = ""
           environmentEntry.text = ""
-          timeOfDayEntry.hours = 23
-          timeOfDayEntry.minutes = 59
-          nameEntry.text.readOnly = true
           locationNameEntry.text.readOnly = true
-          timeScenarioEntry.text.readOnly = true
+          environmentEntry.text.readOnly = true
         } else {
           locationNameEntry.text.readOnly = false
-          nameEntry.text.readOnly = false
-          timeScenarioEntry.text.readOnly = false
+          environmentEntry.text.readOnly = false
           indexChanged()
         }
     }

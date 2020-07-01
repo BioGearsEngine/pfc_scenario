@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<Scenario xmlns="com:ara:pfc:training:1" xmlns:msdl="urn:sisostds:scenario:military:data:draft:msdl:1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="com:ara:pfc:training:1 pfc_scenario_0.2.xsd urn:sisostds:scenario:military:data:draft:msdl:1 military_scenario_1.0.0.xsd">
+<Scenario xmlns="com:ara:pfc:training:1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="com:ara:pfc:training:1 pfc_scenario_0.2.xsd">
+  <author xmlns="">
+    <first_name xmlns="">Rip</first_name>
+    <last_name xmlns="">Torn</last_name>
+    <phone_number xmlns="">7777777777</phone_number>
+    <email xmlns="">ffff@fffff.com</email>
+    <zip xmlns="">23333</zip>
+    <state xmlns="">asdf</state>
+    <country xmlns="">asdf</country>
+  </author>
   <equipment xmlns="">
     <equipment xmlns="">
       <id xmlns="">Equipment_2</id>
@@ -511,8 +520,8 @@
       <scene xmlns="">
         <location-id xmlns="">Location_1</location-id>
         <name xmlns="">New Scene 1</name>
-        <description xmlns=""/>
-        <time-of-day xmlns="">00:00:00</time-of-day>
+        <description xmlns="">Description of Scene 1</description>
+        <time-of-day xmlns="">11:11:11</time-of-day>
         <time-in-simulation xmlns="">0</time-in-simulation>
         <events xmlns="">
           <event xmlns="">

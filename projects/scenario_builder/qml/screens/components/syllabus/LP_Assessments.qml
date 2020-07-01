@@ -91,7 +91,7 @@ ColumnLayout {
       spacing : 5
       clip: true
       highlightFollowsCurrentItem : true
-
+      highlightMoveDuration : 1
       highlight: Rectangle {
           color: '#1111110F'
           Layout.alignment: Qt.AlignTop

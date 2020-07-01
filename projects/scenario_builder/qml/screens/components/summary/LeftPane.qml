@@ -8,142 +8,139 @@ import "../common"
 
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
-Rectangle {
+ColumnLayout {
+    Scene {
+      id : sce
+    }
+    Role {
+      id : rol
+    }
+    Objective {
+      id : obj
+    }
     id: root
     property SQLBackend backend
-    property string scenarioTitle
-    property int index
-    //readonly property alias index : citationList.currentIndex
-    readonly property alias model : listArea.model 
-
-    function update_citation(values) {
-      obj.citation_id = values.id
-      obj.key = values.key
-      obj.title = values.title
-      obj.authors = values.authors
-      obj.year = values.year
-      obj.publisher = values.publisher
-    }
-
-    Citation {
-      id : citation 
-    }
-  ColumnLayout {
-      id: summary_leftWindow
-      anchors.fill : parent
-      anchors.bottom : parent.bottom
-    PropertyEntry {
-        id: propertyEntry
-      Layout.fillWidth : true
-      Layout.alignment: Qt.AlignTop
-      Layout.leftMargin: 5
-      Layout.topMargin: 1
-      backend : root.backend
-      name : "scenario_title"
-      label : "Title"
-      default_value : 'New Scenario'
-      onTextChanged : {
-        root.scenarioTitle = text
+    clip : true
+    anchors.fill : parent
+    Label {
+      property int pointSize : 10
+      Text {
+        text: ' Scenes'
+        font.pointSize : 20
+        color: "steelblue"
       }
-    }
-
-    PropertyEntry {
+      font.pointSize : 20
       Layout.fillWidth : true
-      Layout.alignment: Qt.AlignTop
-      Layout.leftMargin: 5
-      backend : root.backend
-      name : "scenario_version"
-      label : "Version"
-      default_value : '0.0.1'
-    }
-
-    PropertyEntry {
-      Layout.fillWidth : true
-      Layout.alignment: Qt.AlignTop
-      Layout.leftMargin: 5
-      backend : root.backend
-      name : "scenario_security"
-      label : "Security"
-      default_value : 'UnClassified'
-    }
-
-    PropertyAreaEntry {
-      Layout.fillWidth : true
-      Layout.alignment: Qt.AlignTop
-      Layout.leftMargin: 5
-      backend : root.backend
-      name : "scenario_description"
-      label : "Description"
-      default_value : 'Enter the scenarios description.'
-      required : false
+      Layout.bottomMargin : 5
     }
     Rectangle {
-      Layout.fillWidth : true
+      id : sceList
+      //anchors { top : parent.top ; bottom : equList.top ; left : parent.left ; right : parent.right }
       Layout.fillHeight : true
-      Layout.margins : 5
-      //Layout.alignment : Qt.AlignTop
+      Layout.fillWidth : true
+      Layout.bottomMargin : 5
+      //height : parent.height / 2
       border.color : "black"
-      TwoButtonRow {
-        id : controls
-        anchors.top : parent.top
-        anchors.left : parent.left
-        anchors.right : parent.right
-        anchors.topMargin : 2
-        anchors.rightMargin : 5
-        anchors.leftMargin : 5
-        property int next : 1
-        label : "Reference"
-
-        onFirstButtonClicked : {
-          if ( next < listArea.model.count ) {
-            next = listArea.model.count+1
-          }
-          citation.citation_id = -1
-          citation.key = "AuthorYear_%1".arg(next)
-          citation.title = "Reference %1".arg(next)
-          citation.authors = "Reference Authors"
-          citation.year = "Reference Year"
-          citation.publisher = "Reference Publisher"  
-
-          while (root.backend.select_citation(citation))
-          {
-            next = next+1
-            citation.citation_id = -1
-            citation.key = "AuthorYear_%1".arg(next)
-            citation.title = "Reference %1".arg(next)
-            citation.authors = "Reference Authors"
-            citation.year = "Reference Year"
-            citation.publisher = "Reference Publisher"
-          }
-          root.backend.update_citation(citation)
-          listArea.model.insert(listArea.model.count,
-            {"id" : citation.citation_id,
-            "key" : citation.key,
-            "title" : citation.title,
-            "authors" : citation.authors,
-            "year" : citation.year,
-            "publisher" : citation.publisher});
-          ++next;
-        }
-        onSecondButtonClicked : {
-          if ( listArea.model.count == 0 ) {
-            return
-          }
-          citation.citation_id = -1
-          citation.key = listArea.model.get(listArea.currentIndex).key
-          root.backend.remove_citation(citation)
-          listArea.model.remove(listArea.currentIndex)
-          listArea.currentIndex = Math.max(0, listArea.currentIndex-1)
-        }
-      }
       ListView {
-        id : listArea
-        anchors { top : controls.bottom ; bottom : parent.bottom; 
+        id : sceListArea
+        anchors { top : parent.top ; bottom : parent.bottom; 
                      left : parent.left ; right : parent.right } 
+        height : parent.height
         spacing : 5
         clip: true
         highlightFollowsCurrentItem : true  
+        highlightMoveDuration : 1
+        highlight: Rectangle {
+            color: '#1111110F'
+            Layout.alignment: Qt.AlignTop
+            Layout.fillWidth: true
+            Layout.margins : 5
+        }  
 
+        model : ListModel {}  
+
+      delegate : Rectangle {
+        id : scene
+        color : 'transparent'
+        border.color: "steelblue"
+        height : 30
+        anchors { left : parent.left; right: parent.right ; margins : 5 }
+
+        MouseArea {
+          anchors.fill: parent
+          onClicked: {
+            sceListArea.currentIndex = index
+
+          }
+        }
+         Rectangle {
+           id : scene_title_text
+           anchors.left : scene.left
+           anchors.leftMargin : 5
+           width : 150
+           Text  {
+            text :  model.name 
+            font.weight: Font.Bold
+            font.pointSize: 10
+           }
+           enabled : false
+        }
+        onFocusChanged: {
+          if(sceListArea.currentIndex == index){
+            state = 'Selected';
+          }
+          else{
+            state = '';
+          }
+        }
+      } 
+
+        ScrollBar.vertical: ScrollBar { }  
+
+        Component.onCompleted : {
+          var r_count = backend.scene_count();
+          root.backend.scenes()
+          while ( root.backend.next_scene(sce) ){ 
+
+            sceListArea.model.insert(sceListArea.model.count,
+              {
+               id  : sce.scene_id,
+               name: "%1".arg(sce.name), 
+               description : sce.description,
+               details : sce.details
+              });
+          }
+        }
+      }
+    }
+    Label {
+      property int pointSize : 10
+      Text {
+        text: ' Roles'
+        font.pointSize : 20
+        color: "steelblue"
+      }
+      font.pointSize : 20
+      Layout.fillWidth : true
+      Layout.bottomMargin : 5
+    }
+    Rectangle {
+      id : eveList
+      //anchors { top : refList.bottom ; bottom : parent.bottom ; left : parent.left ; right : parent.right }
+      //height : parent.height / 2
+      Layout.fillHeight : true
+      Layout.fillWidth : true
+      Layout.bottomMargin : 5
+      border.color : "black"
+      ListView {
+        id : rolListArea
+        anchors { top : parent.top ; bottom : parent.bottom; 
+                     left : parent.left ; right : parent.right } 
+        height : parent.height
+        spacing : 5
+        clip: true
+        highlightFollowsCurrentItem : true  
+        highlightMoveDuration : 1
         highlight: Rectangle {
             color: '#1111110F'
             Layout.alignment: Qt.AlignTop
@@ -154,60 +151,57 @@ Rectangle {
         model : ListModel {}  
 
         delegate : Rectangle {
-          id : citation
+          id : role
           color : 'transparent'
           border.color: "steelblue"
-          height : citation_title_text.height + citation_value_text.height
+          height : role_title_text.height + role_value_text.height
           anchors { left : parent.left; right: parent.right ; margins : 5 }  
 
           MouseArea {
             anchors.fill: parent
             onClicked: {
-              listArea.currentIndex = index  
+              rolListArea.currentIndex = index  
 
             }
             onDoubleClicked: {
-
-//              citationEdit.name = listArea.model.get(index).name
-//              citationEdit.description = listArea.model.get(index).description
-//              citationEdit.citationID = listArea.model.get(index).citation_id
-//              contentStack.currentIndex = 1
+              roleEdit.name = rolListArea.model.get(index).name
+              roleEdit.description = rolListArea.model.get(index).description
+              roleEdit.roleID = rolListArea.model.get(index).id
+              contentStack.currentIndex = 1
             }
           }  
 
           Text {
-            id : citation_title_text
-            anchors.left : citation.left
+            id : role_title_text
+            anchors.left : role.left
             anchors.leftMargin : 5
-            text :  model.title
+            text :  model.name
             width : 150
             font.weight: Font.Bold
             font.pointSize: 10
             enabled : false
-            color: enabled ? Material.primaryTextColor : Material.primaryTextColor
           }  
 
           Text {
-            id : citation_value_text
-            anchors.top : citation_title_text.bottom
+            id : role_value_text
+            anchors.top : role_title_text.bottom
             anchors.left : parent.left
             anchors.right : parent.right
             anchors.leftMargin : 10
             font.pointSize: 10
-            text :  model.key
+            text :  description
             enabled : false
-            color: enabled ? Material.primaryTextColor : Material.primaryTextColor
             elide: Text.ElideRight
           }  
 
           states: State {
             name : "Selected"
-            PropertyChanges{ target : citation_title_text; enabled : true}
-            PropertyChanges{ target : citation_value_text; enabled  : true}
+            PropertyChanges{ target : role_title_text; enabled : true}
+            PropertyChanges{ target : role_value_text; enabled  : true}
           }  
 
           onFocusChanged: {
-            if(listArea.currentIndex == index){
+            if(rolListArea.currentIndex == index){
               state = 'Selected';
             }
             else{
@@ -216,47 +210,132 @@ Rectangle {
           }
         }  
 
+
         ScrollBar.vertical: ScrollBar { }  
-
         Component.onCompleted : {
-          var r_count = backend.citation_count();
-          root.backend.citations()
-          while ( root.backend.next_citation(citation) ){  
-
-            listArea.model.insert(listArea.model.count,
+          var r_count = backend.role_count();
+          root.backend.roles()
+          while ( root.backend.next_role(rol) ){  
+            rolListArea.model.insert(rolListArea.model.count,
               {
-               id  : citation.citation_id,
-               key: "%1".arg(citation.key), 
-               title: "%1".arg(citation.title),
-               authors: "%1".arg(citation.authors),
-               year: "%1".arg(citation.year),
-               publisher: "%1".arg(citation.publisher)
+               id  : rol.role_id,
+               name: "%1".arg(rol.name), 
+               description: "%1".arg(rol.description)
               });
           }
         }
       }
+    }
+
+    Label {
+      property int pointSize : 10
+      Text {
+        text: ' Objectives'
+        font.pointSize : 20
+        color: "steelblue"
       }
+      font.pointSize : 20
+      Layout.fillWidth : true
+      Layout.bottomMargin : 5
+    }
     Rectangle {
-        Layout.fillHeight: true
-        color : "Red"
-        border.color:"Red"
+      id : objList
+      //anchors { top : refList.bottom ; bottom : parent.bottom ; left : parent.left ; right : parent.right }
+      //height : parent.height / 2
+      Layout.fillHeight : true
+      Layout.fillWidth : true
+      Layout.bottomMargin : 5
+      border.color : "black"
+      ListView {
+        id : objListArea
+        anchors { top : parent.top ; bottom : parent.bottom; 
+                     left : parent.left ; right : parent.right } 
+        height : parent.height
+        spacing : 5
+        clip: true
+        highlightFollowsCurrentItem : true  
+        highlightMoveDuration : 1
+        highlight: Rectangle {
+            color: '#1111110F'
+            Layout.alignment: Qt.AlignTop
+            Layout.fillWidth: true
+            Layout.margins : 5
+        }  
+
+        model : ListModel {}  
+
+        delegate : Rectangle {
+          id : objective
+          color : 'transparent'
+          border.color: "steelblue"
+          height : objective_title_text.height + objective_value_text.height
+          anchors { left : parent.left; right: parent.right ; margins : 5 }  
+
+          MouseArea {
+            anchors.fill: parent
+            onClicked: {
+              objListArea.currentIndex = index  
+
+            }
+          }  
+
+          Text {
+            id : objective_title_text
+            anchors.left : objective.left
+            anchors.leftMargin : 5
+            text :  model.name
+            width : 150
+            font.weight: Font.Bold
+            font.pointSize: 10
+            enabled : false
+          }  
+
+          Text {
+            id : objective_value_text
+            anchors.top : objective_title_text.bottom
+            anchors.left : parent.left
+            anchors.right : parent.right
+            anchors.leftMargin : 10
+            font.pointSize: 10
+            text :  description
+            enabled : false
+            elide: Text.ElideRight
+          }  
+
+          states: State {
+            name : "Selected"
+            PropertyChanges{ target : objective_title_text; enabled : true}
+            PropertyChanges{ target : objective_value_text; enabled  : true}
+          }  
+
+          onFocusChanged: {
+            if(objListArea.currentIndex == index){
+              state = 'Selected';
+            }
+            else{
+              state = '';
+            }
+          }
+        }
+
+        ScrollBar.vertical: ScrollBar { }  
+
+        Component.onCompleted : {
+          var r_count = backend.objective_count();
+          root.backend.objectives()
+          while ( root.backend.next_objective(obj) ){
+            objListArea.model.insert(objListArea.model.count,
+              {
+               id  : obj.objective_id,
+               name: "%1".arg(obj.name), 
+               description: "%1".arg(obj.description),
+               citations : obj.citations
+              });
+          }
+        }
+      }
     }
-  }
-  onIndexChanged : {
-    listArea.model.clear()
-    root.backend.citations()
-    while(root.backend.next_citation(citation)){
-      listArea.model.insert(listArea.model.count,
-      {
-        citation_id : "%1".arg(citation.citation_id),
-        key : "%1".arg(citation.key),
-        title : "%1".arg(citation.title),
-        authors : "%1".arg(citation.authors),
-        year : "%1".arg(citation.year),
-        publisher : "%1".arg(citation.publisher)
-      });
-    }
-  }
+
 }
 
 

@@ -196,15 +196,14 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM equipments WHERE name = :name ORDER BY name;)";
   constexpr auto insert_or_update_equipments
     = R"( INSERT INTO equipments
-          (name,type,description,citations,image,properties)
-          VALUES (:name, :type, :description, :citations, :image, :properties)
+          (name,type,description,citations,image)
+          VALUES (:name, :type, :description, :citations, :image)
           ON CONFLICT (name)
           DO UPDATE SET name = excluded.name
                         , type = excluded.type
                         , description = excluded.description
                         , citations = excluded.citations
                         , image = excluded.image
-					              , properties = excluded.properties
           ;         
           )";
   //---------------------- EVENT STATMENTS ------------------------
@@ -395,8 +394,6 @@ inline namespace sqlite3 {
   enum LOCATION_COLUMNS {
     LOCATION_ID,
     LOCATION_NAME,
-    LOCATION_SCENE_NAME,
-    LOCATION_TIME_OF_DAY,
     LOCATION_ENVIRONMENT,
     LOCATION_COLUMN_COUNT
   };
@@ -405,23 +402,19 @@ inline namespace sqlite3 {
   CREATE TABLE IF NOT EXISTS locations (
     location_id INTEGER PRIMARY KEY,
     name Varchar(64) NOT NULL,
-    scene_name Varchar(64),
-    time_of_day TEXT,
     environment TEXT
   );
   )";
   constexpr auto drop_all_locations = R"( DELETE FROM locations; )";
   constexpr auto count_locations = R"( SELECT COUNT(location_id) FROM locations; )";
   constexpr auto count_locations_in_scene = R"( SELECT COUNT(location_map_id) FROM location_maps WHERE :id = fk_scene ; )";
-  constexpr auto select_all_locations = R"( SELECT location_id,name,scene_name,time_of_day,environment FROM locations ORDER BY name; )";
+  constexpr auto select_all_locations = R"( SELECT location_id,name,environment FROM locations ORDER BY name; )";
 
   constexpr auto select_location_by_id
     = R"( SELECT * FROM locations WHERE location_id = :id ; )";
   constexpr auto update_location_by_id
     = R"( UPDATE  locations
           SET name = :name
-              , scene_name = :scene_name
-              , time_of_day = :time_of_day
               , environment = :environment
           WHERE location_id = :id;
          )";
@@ -433,8 +426,8 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM locations WHERE name = :name ORDER BY name; )";
   constexpr auto insert_or_update_locations
     = R"( INSERT INTO locations
-          (name,scene_name,time_of_day,environment)
-          VALUES (:name, :scene_name, :time_of_day, :environment)
+          (name,environment)
+          VALUES (:name, :environment)
           ;
          )";
   //--------------------------- MAP STATEMENTS ------------------------

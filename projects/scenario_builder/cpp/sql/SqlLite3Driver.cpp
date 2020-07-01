@@ -35,6 +35,7 @@ SQLite3Driver::SQLite3Driver(QObject* parent)
   : QObject(parent)
   , _db(QSqlDatabase::database())
 {
+  establish_settings();
 }
 //------------------------------------------------------------------------------
 SQLite3Driver::SQLite3Driver(const std::string& dbName, const std::string& path, QObject* parent)
@@ -55,6 +56,68 @@ SQLite3Driver::SQLite3Driver(const std::string& dbName, const std::string& path,
 SQLite3Driver::~SQLite3Driver()
 {
   _db.close();
+}
+//------------------------------------------------------------------------------
+void SQLite3Driver::establish_settings()
+{
+  QSettings settings("LMARA", "TestSet");
+  recent_files.push_back(settings.value("firstFile").toString().toStdString());
+  recent_files.push_back(settings.value("secondFile").toString().toStdString());
+  recent_files.push_back(settings.value("thirdFile").toString().toStdString());
+  recent_files.push_back(settings.value("fourthFile").toString().toStdString());
+  recent_files.push_back(settings.value("fifthFile").toString().toStdString());
+  recent_files.push_back(settings.value("sixthFile").toString().toStdString());
+  recent_files.push_back(settings.value("seventhFile").toString().toStdString());
+  recent_files.push_back(settings.value("eighthFile").toString().toStdString());
+  recent_files.push_back(settings.value("ninthFile").toString().toStdString());
+  recent_files.push_back(settings.value("tenthFile").toString().toStdString());
+}
+//------------------------------------------------------------------------------
+void SQLite3Driver::log_scenario_file(QString file)
+{
+  log_scenario_file(file.toStdString());
+}
+//------------------------------------------------------------------------------
+void SQLite3Driver::log_scenario_file(std::string file)
+{
+  QSettings settings("LMARA", "TestSet");
+  int i = 0;
+  for (;i < 9;i++) { 
+    if (recent_files[i] == file) {
+      break;
+    }
+  }
+  for (;i > 0;i--) { 
+    recent_files[i] = recent_files[i-1];
+  }
+  recent_files[0] = file;
+  settings.setValue("firstFile", QString::fromStdString(recent_files[0]));
+  settings.setValue("secondFile", QString::fromStdString(recent_files[1]));
+  settings.setValue("thirdFile", QString::fromStdString(recent_files[2]));
+  settings.setValue("fourthFile", QString::fromStdString(recent_files[3]));
+  settings.setValue("fifthFile", QString::fromStdString(recent_files[4]));
+  settings.setValue("sixthFile", QString::fromStdString(recent_files[5]));
+  settings.setValue("seventhFile", QString::fromStdString(recent_files[6]));
+  settings.setValue("eighthFile", QString::fromStdString(recent_files[7]));
+  settings.setValue("ninthFile", QString::fromStdString(recent_files[8]));
+  settings.setValue("tenthFile", QString::fromStdString(recent_files[9]));
+}
+//------------------------------------------------------------------------------
+QList<QString> SQLite3Driver::get_recent_scenario_files()
+{
+  QList<QString> q_recent_files;
+  QSettings settings("LMARA", "TestSet");
+  q_recent_files.push_back(settings.value("firstFile").toString());
+  q_recent_files.push_back(settings.value("secondFile").toString());
+  q_recent_files.push_back(settings.value("thirdFile").toString());
+  q_recent_files.push_back(settings.value("fourthFile").toString());
+  q_recent_files.push_back(settings.value("fifthFile").toString());
+  q_recent_files.push_back(settings.value("sixthFile").toString());
+  q_recent_files.push_back(settings.value("seventhFile").toString());
+  q_recent_files.push_back(settings.value("eighthFile").toString());
+  q_recent_files.push_back(settings.value("ninthFile").toString());
+  q_recent_files.push_back(settings.value("tenthFile").toString());
+  return q_recent_files;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::ready()
@@ -231,15 +294,6 @@ bool SQLite3Driver::populate_db()
     default_injury_set.physiology_file = "";
     default_injury_set.treatments = "";
     if (!update_injury_set(&default_injury_set)) {
-      return false;
-    }
-  }
-  //---Location---
-  if (location_count() == 0) {
-    default_location.name = "Location_1";
-    default_location.time_of_day = "00:00:00";
-    default_location.environment = "Location_1 environment";
-    if (!update_location(&default_location)) {
       return false;
     }
   }
@@ -2833,8 +2887,6 @@ inline void assign_location(const QSqlRecord& record, Location& location)
 {
   location.id = record.value(LOCATION_ID).toInt();
   location.name = record.value(LOCATION_NAME).toString();
-  location.scene_name = record.value(LOCATION_SCENE_NAME).toString();
-  location.time_of_day = record.value(LOCATION_TIME_OF_DAY).toString();
   location.environment = record.value(LOCATION_ENVIRONMENT).toString();
 }
 int SQLite3Driver::location_count() const
@@ -2926,8 +2978,6 @@ bool SQLite3Driver::update_location(Location* location)
     }
 
     query.bindValue(":name", location->name);
-    query.bindValue(":scene_name", location->scene_name);
-    query.bindValue(":time_of_day", location->time_of_day);
     query.bindValue(":environment", location->environment);
     if (!query.exec()) {
       qWarning() <<  "update_location" << query.lastError();
@@ -3030,7 +3080,6 @@ bool SQLite3Driver::update_location_in_scene(Scene* scene, Location* location)
   qWarning() << "No Database connection";
   return false;
 }
-
 bool SQLite3Driver::remove_location(Location* location)
 {
   if (_db.isOpen()) {
@@ -3058,7 +3107,6 @@ bool SQLite3Driver::remove_location(Location* location)
   qWarning() << "No Database connection";
   return false;
 }
-
 bool SQLite3Driver::remove_location_from_scene(Location* location, Scene* scene)
 {
   pfc::LocationMap map;
@@ -3218,7 +3266,7 @@ bool SQLite3Driver::update_equipment(Equipment* equipment)
     query.bindValue(":description", equipment->description);
     query.bindValue(":citations", equipment->citations);
     query.bindValue(":image", equipment->image);
-    query.bindValue(":properties", equipment->properties);
+    //query.bindValue(":properties", equipment->properties);
 
     if (!query.exec()) {
       qWarning() <<  "update_equipment" << query.lastError();
@@ -4080,7 +4128,10 @@ bool SQLite3Driver::update_scene(Scene* scene)
     if (-1 == scene->id) {
       const auto r = select_scene(scene);
       sceneUpdated(scene->id);
-      return r;
+      Location location;
+      location.id = -1;
+      location.name = scene->name + " Location";
+      return r && update_location_in_scene(scene,&location);
     }
     sceneUpdated(scene->id);
     return true;

@@ -35,9 +35,8 @@ Page {
       id: tabs
       font.pointSize: 8
       height : 12
-
       TabButton {
-        text: "Summary"
+        text: "General"
         width: implicitWidth
       }
       TabButton {
@@ -48,7 +47,11 @@ Page {
         text: "Narrative"
         width: implicitWidth
       }
-      currentIndex : 0
+      TabButton {
+        text: "Summary"
+        width: implicitWidth
+      }
+      currentIndex : 1
 
     }
 
@@ -62,15 +65,14 @@ Page {
       height: parent.height - 10
       //TAB:SUMMARY
 
-      ScenarioSummary{
-        id: summary
+      ScenarioGeneral{
+        id: general
         index : tabs.currentIndex
         backend : root.backend
         onScenarioTitleChanged : {
-          titleCardText.text = summary.scenarioTitle
+          titleCardText.text = general.scenarioTitle
         }
       }
-
       //TAB:SYLLABUS
       ScenarioSyllabus {
          id: syllabus
@@ -79,6 +81,10 @@ Page {
       //TAB:NARRATIVE
       ScenarioNarrative{
         id: narrative
+        backend : root.backend
+      }
+      ScenarioSummary{
+        id: summary
         backend : root.backend
       }
     }

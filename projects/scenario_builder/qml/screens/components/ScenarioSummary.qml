@@ -18,18 +18,17 @@ GridLayout {
   columns : 2
 
   //TAB:SUMMARY_LEFTWINDOW
-  LeftPane{
-    id : summary_left
-    index : root.index
-    backend : root.backend
-    scenarioTitle : root.scenarioTitle
-    Layout.preferredWidth: parent.width / 2
-    Layout.fillHeight: true
-    Layout.leftMargin: 5
+  Rectangle {
     border.color: 'black'
     border.width: 1
-    onScenarioTitleChanged : {
-      root.scenarioTitle = scenarioTitle
+    Layout.preferredWidth : parent.width / 2
+    Layout.fillHeight: true
+    Layout.leftMargin: 5 
+    //Layout.rightMargin: 5 
+    LeftPane{
+      id : summary_left
+      backend : root.backend
+      anchors.fill : parent
     }
   }
 
@@ -47,9 +46,3 @@ GridLayout {
     }
   }
 }
-
-
-/*##^## Designer {
-    D{i:0;autoSize:true;height:480;width:640}
-}
- ##^##*/
