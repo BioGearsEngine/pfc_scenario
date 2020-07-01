@@ -18,7 +18,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
         
         Fields:
           Title: xs:string : The name of the scenario contained in the file 
-          Description: xs:string : A brief description of the contents of the scenario and its purpose. Can be multiple paragraphs in format.
+          Description: xs:string : A brief summary of the contents of the scenario and its purpose. Can be multiple paragraphs in format.
           Version:  xs:string : Internal version number of the current scenario file. Ideally this would be maintained over multiple official releases. 
           Classification:  xs:string : Intended as away of marking the classified nature of the contents contained in the scenario file.  (e.g Non-Classified, Confidential, Secret, Top Secret, ...)
           Keywords:   xs:string : Set of comma delimited keywords that can be used for organizing multiple scenario files in to organized sets.  
@@ -96,16 +96,22 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
         any common item which is of significance to the scenario narrative.
         
         Fields:
+          ID: xs:string : Identification
           Name: xs:string : Name of the equipment
+          Type: xs:integer :
           Description: xs:string : Brief summary of the equipment
+          Citations: citation-ref-list : List of reference material for additional information
           Image: xs:string : Visual reference
-          References: citation-ref-list : List of reference material for additional information
+          Properties: properties-list : Unique characteristics of the defined equipment
           
         Example:
+          ID: 0001
           Name: Syringe
+          Type: Medical Device
           Description: A tube with a nozzle and piston or bulb for sucking in and ejecting liquid in a thin stream, used for cleaning wounds or body cavities, or fitted with a hollow needle for injecting or withdrawing fluids.
+          Citations: https://en.wikipedia.org/wiki/Syringe
           Image:
-          References:
+          Properties: Essential - 8
       </xs:documentation>
     </xs:annotation>
     <xs:all>
@@ -134,16 +140,18 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 				which describe the trauma in more traditional terms in the references section, but is not required.
 				
 				Fields:
+				  ID: xs:string : Identification
 				  Common Name: xs:string : Alternative name for trauma.
 				  Medical Name: xs:string : Formal name for trauma.
-				  References: citation-ref-list : List of reference material for additional information.
+				  Citations: citation-ref-list : List of reference material for additional information.
 				  Description: xs:string : Brief summary of the trauma in general.
 				  Severity Range: trauma-severity-range : Numerical range for mapping injury occurrence to a physiology engine.
 				  
 				Example:
+				  ID: 0002
 				  Common Name: Cut 
 				  Medical Name: Laceration wound
-				  References:
+				  Citations: https://en.wikipedia.org/wiki/Wound#Open
 				  Description: A small laceration located on the patient's left calf.
 				  Severity Range: 4
       </xs:documentation>
@@ -223,18 +231,20 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 				Future versions may allow logical branching but currently the representation is a linear flow of steps.
 				
 				Fields:
+				  ID: xs:string : Identification
 				  Common Name: xs:string : Alternative name for a treatment plan. 
 				  Medical Name: xs:string : Formal name for a treatment plan.
 				  Description: xs:string : Brief summary of the treatment plan.
-				  Equipment: equipment-ref-list : List of the equipment needed to carry out the treatment plan.
+				  Required Equipment: equipment-ref-list : List of the equipment needed to carry out the treatment plan.
 				  References: medical-reference-list : List of references used to create the treatment plan.
 				  
 				Example:
+				  ID: 0003
 				  Common Name: Tylenol
-				  Medical Name: Oral Medication: Acetaminophen
+				  Medical Name: Acetaminophen
 				  Description: The drug acetaminophen was administered to the patient orally to reduce patient's fever.
-				  Equipment: 
-				  References:
+				  Required Equipment: One 500 mg Tylenol tablet
+				  References: https://en.wikipedia.org/wiki/Paracetamol
       </xs:documentation>
     </xs:annotation>
     <xs:all>
@@ -342,12 +352,18 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 				case may include medical conditions or diagnosis, but will generally be a combat casualty wound. 
 				
 				Fields:
+				  ID: xs:string : Identification
 				  Name: xs:string : Name of the collection of injuries.
-				  Injuries: trauma-occurence-list : trauma-occurence-list : List of the injuries present in the profile.
+				  Physiology State: xs:string : The condition or state of the body or bodily functions.
+				  Injuries: trauma-occurence-list : List of the injuries present in the profile.
+				  Treatments: treatment-plan-ref-list : Treatments that can be used to treat the trauma profile.
 				  
 				Example:
-				  Name: 
-				  Injuries: 
+				  ID: 0004
+				  Name: Blunt Force Trauma
+				  Physiology State: Awake and aware
+				  Injuries: Contusions, abrasions, lacerations, bone fractures, internal hemorrhages
+				  Treatments: Compression, disinfection, plaster cast, splint, intravenous injection
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
@@ -388,12 +404,16 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
         mapped to a severity definition by the implementation as xml validation alone can not enforce these rules.
         
         Fields:
+          ID: xs:string : Identification
+          Location: xs:string : Where the trauma is located on the body.
           Description: xs:string : Brief summary of the simple trauma.
-          Severity Range: xs:string : Numeric value meant to be interpreted by a UI and then visualized in the scenario.
+          Severity: xs:string : Numeric value meant to be interpreted by a UI and then visualized in the scenario.
           
         Example:
-          Description: Gunshot wound to patient's right thigh.
-          Severity Range: 70
+          ID: 0005
+          Location: Right thigh
+          Description: Gunshot wound 
+          Severity: 70
           
       </xs:documentation>
     </xs:annotation>
@@ -421,14 +441,16 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
         Objectives will be entered as goals to be met upon completion of a scenario.
         
         Fields:
+          ID: xs:string : Identification
           Name: xs:string : Name for the learning objective being created.
           Description: xs:string : Brief summary that defines the goal of the objective when taught through the scenario.
           References: medical-reference-list : List of references used to create the learning objective.
           
-        Example: 
+        Example:
+          ID: 0006
           Name: Burn Wound PFC
           Description: Through the completion of the scenario, the player will be able to effectively treat a burn wound over a long period of time.
-          References:
+          References: https://www.mayoclinic.org/diseases-conditions/burns/diagnosis-treatment/drc-20370545
       </xs:documentation>
     </xs:annotation>
     <xs:all>
@@ -460,17 +482,21 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
   <xs:complexType name="assessment">
     <xs:annotation>
       <xs:documentation>
-				An assessment consist of an id and a idref to a lesson-objective.  This type is a work in practice and the criteria element is likely be reworked beyond a string in a future revision
+				An assessment consists of an id and a idref to a lesson-objective.  This type is a work in practice and the criteria element is likely to be reworked beyond a string in a future revision
 				
 				Fields:
+				  ID: xs:string : Identification
 				  Name: xs:string : Name for the assessment.
 				  Description: xs:string : Brief summary of what the assessment evaluates.
+				  Points Available: xs:integer : How many total points are available for the player to earn through the scenario
 				  Criteria: xs:string : The standards at which a user will be evaluated by the assessment.
 				  
 				Example:
+				  ID: 0007
 				  Name: Burn Wound Assessment
 				  Description: This assessment evaluates the user's capability to treat a burn wound over a long period of time.
-				  Criteria: 
+				  Points Available: 200
+				  Criteria: The player must take the correct steps in the correct sequence to treat the patient's burn for a period of 48 in-game hours.
       </xs:documentation>
     </xs:annotation>
     <xs:all>
@@ -497,6 +523,16 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 				to properly elevate the training and make learning transfer possible. The breakdown can be as simple or complex as is needed for a narrative to be completed. 
         Various elements also have a fidelity field which is designed to allow additional information to be encoded in the scenario that is ignored by lower fidelity
         implementations.
+        
+        Fields: 
+          ID: xs:string : Identification
+          Roles: role-list : A list of the roles that are present in the scenario
+          Training Script: scene-list : A list of the scenes that are to be included in the scenario
+          
+        Example:
+          ID: 0008
+          Roles: Doctor, burn wound patient, assistant
+          Training Script: Burn Wound PFC, Burn Wound Aftercare
       </xs:documentation>
     </xs:annotation>
     <xs:all>
@@ -520,6 +556,18 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 				An additional description describes the role of the unit in human terms on the level of a cliff-note.
 				The short-name is a unique string to be use when parsing a training-script event to quickly refer to 
 				a role
+				
+				Fields:
+				  ID: xs:string : Identification
+				  Name: xs:string : Name for the role
+				  Short Name: xs:string : Unique string used when parsing a training-script event to quickly refer to a role
+				  Description: xs:string : A brief summary explaining the role
+				  
+				Example: 
+				  ID: 0009
+				  Name: Doctor
+				  Short Name: 8cxQ5
+				  Description: Doctor role that the player will fill to care for the wounded patient
       </xs:documentation>
     </xs:annotation>
     <xs:all>
@@ -550,6 +598,18 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 				An additional description describes the purpose of the prop in the training simulation in human terms on the level of a cliff-note
 				The short-name is a unique string to be use when parsing a training-script event to quickly refer to 
 				a prop
+				
+				Fields:
+				  Short Name: xs:string : Unique string to be used when parsing a training-script event to quickly refer to a prop
+				  Equipment ID: xs:string : Equipment identification
+				  Description: xs:string : Brief summary of the item
+				  Properties: property-value-list : Unique characteristics of the item
+				  
+				Example:
+				  Short Name: vYi4s
+				  Equipment ID: 01
+				  Description: A cot for the patient to lay on
+				  Properties: Where the patient lays to be treated
       </xs:documentation>
     </xs:annotation>
     <xs:all>
@@ -623,6 +683,28 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 					event-environment-details
 					event-script-details                         <!--Complex max fidelity code scripting to be loaded by level creators -->
 				Each one with its own set of fields to be manipulated
+				
+				Fields:
+				  ID: xs:string : Identification
+				  Name: xs:string : Name for the event
+				  Category: event-category-enum : Describes the type of action that occurs in the event
+				  Fidelity: event-fidelity-enum : Intended to be used as a guide by implementations on if the details of this event an be skipped over
+				  Actor 1: xs:string : Actor in the event
+				  Actor 2: xs:string : Actor in the event
+				  Equipment: xs:string : Equipment needed for the event
+				  Details: xs:string : Future update will define event-detail-type with own set of fields to be manipulated
+				  Description: xs:string : Brief summary of the event
+				  
+				Example:
+				  ID: 0010
+				  Name: Patient Briefing
+				  Category: Dialog
+				  Fidelity: Low
+				  Actor 1: Doctor
+				  Actor 2: Burn Wound Patient
+				  Equipment: N/A
+				  Details: event-script-details
+				  Description: The patient is briefed on their wounds and the plan to treat them.
       </xs:documentation>
     </xs:annotation>
     <xs:all>
@@ -703,6 +785,24 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
   <xs:complexType name="citation">
     <xs:annotation>
       <xs:documentation>General Citation Information for a bib reference
+        
+        Fields:
+          UUID: xs:string : A universally unique identifier (UUID) is a 128-bit number used to identify information in computer systems
+          Key: xs:string : Unique identifier for the given reference
+          Authors: xs:string : The authors of the given reference
+          Title: xs:string : The title of the reference
+          Date: xs:string : The date that the reference was published
+          Page: xs:string : The page number of the reference (if applicable)
+          Accessed: xs:string : When the reference was accessed by the user
+          
+        Example:
+           UUID: a313dc22-17e6-45fa-a3d5-0adf04993f10
+           Key: {citekey}
+           Authors: John Doe, Jane Smith
+           Title: Example Reference
+           Date: 01/01/2020
+           Page: 20-30
+           Accessed: 05/05/2020
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
