@@ -52,7 +52,7 @@ ApplicationWindow {
       MenuItem { 
         text: "New Scenario";
           onTriggered : {
-          create_scenario()
+          create_scenario(scenario_model)
         } 
       }
       MenuItem { 
