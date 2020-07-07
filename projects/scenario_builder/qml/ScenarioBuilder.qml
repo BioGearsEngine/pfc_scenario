@@ -202,6 +202,9 @@ ApplicationWindow {
           if(mainView.depth > 1){
             mainView.pop()
           }
+          saveOption.enabled = true
+          saveAsOption.enabled = true
+          closeOption.enabled = true
           mainView.push(scenarioScreen, { backend : scenario_model} )
         } else {
           console.log("Failed to Load File: %1".arg(archive))
@@ -216,6 +219,7 @@ ApplicationWindow {
         saveOption.enabled = true
         saveAsOption.enabled = true
         closeOption.enabled = true
+        model.clear_db();
         model.initialize_db();
         model.populate_db();
         mainView.push( scenarioScreen, { backend : model} )

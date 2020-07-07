@@ -311,10 +311,10 @@ public:
   std::string list_remove_index(std::string, int) const;
   int list_find(std::string, std::string) const;
 
-  Q_INVOKABLE int raw_error() const { return _db.lastError().type(); };
-  Q_INVOKABLE QString error_message() const { return _db.lastError().text(); }
+  Q_INVOKABLE int raw_error() const { return QSqlDatabase::database(_db_name).lastError().type(); };
+  Q_INVOKABLE QString error_message() const { return QSqlDatabase::database(_db_name).lastError().text(); }
   Q_INVOKABLE bool success() const { return !error(); }
-  Q_INVOKABLE bool error() const { return _db.lastError().isValid(); };
+  Q_INVOKABLE bool error() const { return QSqlDatabase::database(_db_name).lastError().isValid(); };
 
   QString Path() const { return _db_path; };
   QString Name() const { return _db_name; };
@@ -396,7 +396,6 @@ private:
 private:
   QString _db_name = "";
   QString _db_path = "./";
-  QSqlDatabase _db;
   mutable int _error_code = 0;
 
   QList<Author*> _authors;

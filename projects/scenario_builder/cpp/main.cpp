@@ -11,15 +11,17 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License.
 **************************************************************************************/
 
-#include <QApplication>
-#include <QDebug>
-#include <QQmlApplicationEngine>
-#include <QQuickStyle>
-#include <QSplashScreen>
-#include <QList>
-#include <QSettings>
 #include "sql/SqlLite3Driver.h"
 #include "xml/Serializer.h"
+
+#include <QApplication>
+#include <QDebug>
+#include <QFile>
+#include <QList>
+#include <QQmlApplicationEngine>
+#include <QQuickStyle>
+#include <QSettings>
+#include <QSplashScreen>
 
 int main(int argc, char* argv[])
 {
@@ -61,6 +63,8 @@ int main(int argc, char* argv[])
     return -1;
   splash.close();
 
+  QFile file("pfc_sb_working.sqlite");
+  file.remove();
+
   return app.exec();
 }
- 

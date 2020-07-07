@@ -163,7 +163,7 @@ bool Serializer::save_as(const QString& filename) const
 bool Serializer::load(const QString& filename)
 {
 
-  if(!_db) {
+  if (!_db) {
     //Short Circuit We do not have a valid database ptr
     return false;
   }
@@ -172,7 +172,7 @@ bool Serializer::load(const QString& filename)
   scratch_db.open(scratch_db.Name());
   scratch_db.clear_db();
   scratch_db.initialize_db();
-  
+
   mz_zip_file* file_info = NULL;
   uint32_t ratio = 0;
   int16_t level = 0;
@@ -224,60 +224,9 @@ bool Serializer::load(const QString& filename)
 
   QString fallback = QDir::currentPath();
   QDir::setCurrent(QStringLiteral("tmp/xsd"));
-
   //TODO: Restore MSDL Support
 
-  //if (mz_zip_reader_locate_entry(reader, "Scenario.msdl.xml", 1) == MZ_OK) {
-  //  if (mz_zip_reader_entry_get_info(reader, &file_info) == MZ_OK && mz_zip_reader_entry_open(reader) == MZ_OK) {
-  //    //NOTE: At this point I want to pull all scenarios in to memory for parsing.  Then Close down the archive
-  //    //At the time of this function being written the average size of an archive was < 1MB, but it is easy to invision a world
-  //    //Where they grow to < 1GB.  However we would need to refactor a great many things reguarding file io to handle such an occurance.
-  //
-  //    //If Scenarios grow beyond 50Mbs concider streamed reading and background loading to speed up launching of the application.
-  //
-  //    std::vector<char> buffer;
-  //    buffer.resize(file_info->uncompressed_size);
-  //    auto bytes_read = mz_zip_reader_entry_read(reader, &buffer[0], file_info->uncompressed_size);
-  //    vectorwrapbuf<char> schema_buffer{ buffer };
-  //
-  //    std::istream i_stream(&schema_buffer);
-  //    mz_zip_reader_entry_close(&reader);
-  //    try { // If the parsing fails this prints out every error
-  //      auto msdl_schema = msdl_1::MilitaryScenario(i_stream);
-  //      auto scenario_id = msdl_schema->ScenarioID();
-  //
-  //      auto name = scenario_id.name();
-  //      auto domain = scenario_id.applicationDomain();
-  //      auto version = scenario_id.version();
-  //      auto security = scenario_id.securityClassification();
-  //      auto description = scenario_id.description();
-  //
-  //      auto success = update_property("scenario_title", name);
-  //
-  //      if (domain.present()) {
-  //        success &= update_property("scenario_domain", *domain);
-  //      }
-  //      success &= update_property("scenario_version", version);
-  //      success &= update_property("scenario_security", security);
-  //      success &= update_property("scenario_description", description);
-  //
-  //    } catch (const xml_schema::exception& e) {
-  //      std::cout << e << '\n';
-  //
-  //      mz_zip_reader_delete(&reader); //Removing the Reader if this moves below the try remember you must always cal this function before leaving this function
-  //      QDir::setCurrent(fallback);
-  //      return false;
-  //    }
-  //  }
-  //}  else {
-  //    mz_zip_reader_delete(&reader);
-  //    printf("Could not find %s in archive %s\n", "Scenario.pfc.xml", filename.toStdString().c_str());
-  //
-  //    QDir::setCurrent(fallback);
-  //    return false;
-  //}
-
-  if (mz_zip_reader_locate_entry(reader, "Scenario.pfc.xml", 1) == MZ_OK) {
+  if (mz_zip_reader_locate_entry(reader, "Scenario.msdl.xml", 1) == MZ_OK) {
     if (mz_zip_reader_entry_get_info(reader, &file_info) == MZ_OK && mz_zip_reader_entry_open(reader) == MZ_OK) {
       //NOTE: At this point I want to pull all scenarios in to memory for parsing.  Then Close down the archive
       //At the time of this function being written the average size of an archive was < 1MB, but it is easy to invision a world
@@ -291,12 +240,69 @@ bool Serializer::load(const QString& filename)
       vectorwrapbuf<char> schema_buffer{ buffer };
 
       std::istream i_stream(&schema_buffer);
+      destination = std::string("../") + file_info->filename;
+      mz_zip_reader_entry_save_file(reader, destination.c_str());
+      mz_zip_reader_entry_close(&reader);
+      try { // If the parsing fails this prints out every error
+        //      auto msdl_schema = msdl_1::MilitaryScenario(i_stream);
+        //      auto scenario_id = msdl_schema->ScenarioID();
+        //
+        //      auto name = scenario_id.name();
+        //      auto domain = scenario_id.applicationDomain();
+        //      auto version = scenario_id.version();
+        //      auto security = scenario_id.securityClassification();
+        //      auto description = scenario_id.description();
+        //
+        //      auto success = update_property("scenario_title", name);
+        //
+        //      if (domain.present()) {
+        //        success &= update_property("scenario_domain", *domain);
+        //      }
+        //      success &= update_property("scenario_version", version);
+        //      success &= update_property("scenario_security", security);
+        //      success &= update_property("scenario_description", description);
+        //
+      } catch (const xml_schema::exception& e) {
+        std::cout << e << '\n';
+        //
+        mz_zip_reader_delete(&reader); //Removing the Reader if this moves below the try remember you must always cal this function before leaving this function
+        QDir::setCurrent(fallback);
+        return false;
+      }
+    }
+  } else {
+    mz_zip_reader_delete(&reader);
+    printf("Could not find %s in archive %s\n", "Scenario.pfc.xml", filename.toStdString().c_str());
 
+    QDir::setCurrent(fallback);
+    return false;
+  }
+
+  if (mz_zip_reader_locate_entry(reader, "Scenario.pfc.xml", 1) == MZ_OK) {
+    if (mz_zip_reader_entry_get_info(reader, &file_info) == MZ_OK && mz_zip_reader_entry_open(reader) == MZ_OK) {
+
+      //NOTE: At this point I want to pull all scenarios in to memory for parsing.  Then Close down the archive
+      //At the time of this function being written the average size of an archive was < 1MB, but it is easy to invision a world
+      //Where they grow to < 1GB.  However we would need to refactor a great many things reguarding file io to handle such an occurance.
+
+      //If Scenarios grow beyond 50Mbs concider streamed reading and background loading to speed up launching of the application.
+
+      std::vector<char> buffer;
+      buffer.resize(file_info->uncompressed_size);
+      auto bytes_read = mz_zip_reader_entry_read(reader, &buffer[0], file_info->uncompressed_size);
+      vectorwrapbuf<char> schema_buffer{ buffer };
+
+      std::istream i_stream(&schema_buffer);
+
+      destination = std::string("../") + file_info->filename;
+      mz_zip_reader_entry_save_file(reader, destination.c_str());
       mz_zip_reader_entry_close(&reader);
       try { // If the parsing fails this prints out every error
         auto scenario_schema = pfc::schema::Scenario(i_stream);
         bool successful = false;
+        scratch_db.ready();
         scenario_schema = pfc::schema::PFC::load_authors(std::move(scenario_schema), scratch_db, successful);
+        scratch_db.ready();
         if (successful) {
           update_property(&scratch_db, "scenario_title", scenario_schema->summary().title()->c_str());
           update_property(&scratch_db, "scenario_version", scenario_schema->summary().version()->c_str());
@@ -306,7 +312,7 @@ bool Serializer::load(const QString& filename)
           update_property(&scratch_db, "scenario_domain", scenario_schema->summary().domain()->c_str());
           update_property(&scratch_db, "scenario_limitations", scenario_schema->summary().limitations()->c_str());
         } else {
-          throw std::runtime_error("Failed to load authors");
+          throw std::runtime_error("Failed to load properties");
         }
         if (successful) {
           scenario_schema = pfc::schema::PFC::load_assessments(std::move(scenario_schema), scratch_db, successful);
@@ -370,10 +376,19 @@ bool Serializer::load(const QString& filename)
 
         scratch_db.close();
         _db->close();
-        QFile::copy(scratch_db.Path() + "/" + scratch_db.Name(), _db->Path() + "/" + _db->Name());
+
+        QFile target{ _db->Path() + "/" + _db->Name() };
+        QFile source{ scratch_db.Path() + "/" + scratch_db.Name() };
+
+        if (target.exists()) {
+          target.remove();
+        }
+        source.copy(target.fileName());
         _db->open();
         _db->refresh();
-        return true;
+        return  target.error() == QFile::NoError && source.error() == QFile::NoError;
+
+
       } catch (const xml_schema::exception& e) {
         std::cout << e << '\n';
 
@@ -402,8 +417,8 @@ bool Serializer::update_property(SQLite3Driver* db, const std::string& name, con
   Property prop;
   prop.name = name.c_str();
   prop.value = value.c_str();
-  if (_db) {
-    return _db->update_property(&prop);
+  if (db) {
+    return db->update_property(&prop);
   }
   return false;
 }
@@ -412,8 +427,8 @@ QString Serializer::get_property(SQLite3Driver* db, const QString& name) const
 {
   Property prop;
   prop.name = name;
-  if (_db) {
-    return (_db->select_property(&prop)) ? prop.value : QString("%1_NOTFOUND").arg(name);
+  if (db) {
+    return (db->select_property(&prop)) ? prop.value : QString("%1_NOTFOUND").arg(name);
   }
   return QString("%1_NOTFOUND").arg(name);
 }
@@ -550,10 +565,6 @@ auto Serializer::generate_pfc_stream() const -> std::stringstream
   xml_schema::namespace_infomap info;
   info[""].name = "com:ara:pfc:training:1";
   info[""].schema = "pfc_scenario_0.2.xsd";
-  QSqlDatabase _db;
-  if (_db.isValid()) {
-    _db = QSqlDatabase::addDatabase("QSQLITE");
-  }
   std::stringstream pfc_content;
   Scenario(pfc_content, pfc_scenario, info);
   return pfc_content;

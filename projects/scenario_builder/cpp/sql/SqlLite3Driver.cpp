@@ -33,7 +33,6 @@ namespace pfc {
 //------------------------------------------------------------------------------
 SQLite3Driver::SQLite3Driver(QObject* parent)
   : QObject(parent)
-  , _db(QSqlDatabase::database())
 {
   establish_settings();
 }
@@ -42,7 +41,6 @@ SQLite3Driver::SQLite3Driver(const std::string& dbName, const std::string& path,
   : QObject(parent)
   , _db_name(dbName.c_str())
   , _db_path(path.c_str())
-  , _db(QSqlDatabase::database())
 {
   if (!open()) {
     throw std::runtime_error("Database Creation Failure");
@@ -55,7 +53,7 @@ SQLite3Driver::SQLite3Driver(const std::string& dbName, const std::string& path,
 //------------------------------------------------------------------------------
 SQLite3Driver::~SQLite3Driver()
 {
-  _db.close();
+  close();
 }
 //------------------------------------------------------------------------------
 void SQLite3Driver::establish_settings()
@@ -122,25 +120,25 @@ QList<QString> SQLite3Driver::get_recent_scenario_files()
 //------------------------------------------------------------------------------
 bool SQLite3Driver::ready()
 {
-  return _db.isOpen();
+  return QSqlDatabase::database(_db_name).isOpen();
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::open(QString name)
 {
-  _db.close();
+  QSqlDatabase::database(_db_name).close();
   _db_name = name;
   return open();
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::open()
 {
-  if (!_db.isValid()) {
-    _db = QSqlDatabase::addDatabase("QSQLITE");
+  if (!QSqlDatabase::database(_db_name).isValid() ) {
+    QSqlDatabase::addDatabase("QSQLITE", _db_name);
   }
-  _db.setDatabaseName(_db_path + "/" + _db_name);
+  QSqlDatabase::database(_db_name).setDatabaseName(_db_path + "/" + _db_name);
 
-  if (!_db.open()) {
-    qDebug() << _db.lastError();
+  if (!QSqlDatabase::database(_db_name).open()) {
+    qDebug() << QSqlDatabase::database(_db_name).lastError();
     return false;
   }
   return true;
@@ -148,7 +146,9 @@ bool SQLite3Driver::open()
 //------------------------------------------------------------------------------
 void SQLite3Driver::close()
 {
-  _db.close();
+  QSqlDatabase::database(_db_name).commit();
+  QSqlDatabase::database(_db_name).close();
+  QSqlDatabase::removeDatabase(_db_name);
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::initialize_db()
@@ -178,7 +178,7 @@ bool SQLite3Driver::initialize_db()
   };
 
   if (open()) {
-    QSqlQuery query(_db);
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     for (auto pair : create_statments) {
       query.prepare(pair.second);
       if (!query.exec()) {
@@ -187,7 +187,7 @@ bool SQLite3Driver::initialize_db()
         continue;
       }
     }
-    return creation_failure;
+    return !creation_failure;
   }
   return false;
 }
@@ -759,29 +759,29 @@ bool SQLite3Driver::populate_treatments()
 //------------------------------------------------------------------------------
 bool SQLite3Driver::clear_db()
 {
-  QSqlQuery query(_db);
-  if (_db.isOpen()) {
+  QSqlQuery query(QSqlDatabase::database(_db_name));
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    _db.exec("DROP TABLE IF EXISTS authors;");
-    _db.exec("DROP TABLE IF EXISTS assessments;");
-    _db.exec("DROP TABLE IF EXISTS citations;");
-    _db.exec("DROP TABLE IF EXISTS citation_maps;");
-    _db.exec("DROP TABLE IF EXISTS events;");
-    _db.exec("DROP TABLE IF EXISTS event_maps;");
-    _db.exec("DROP TABLE IF EXISTS equipments;");
-    _db.exec("DROP TABLE IF EXISTS equipment_map;");
-    _db.exec("DROP TABLE IF EXISTS injuries;");
-    _db.exec("DROP TABLE IF EXISTS injury_sets;");
-    _db.exec("DROP TABLE IF EXISTS locations;");
-    _db.exec("DROP TABLE IF EXISTS location_maps;");
-    _db.exec("DROP TABLE IF EXISTS objectives;");
-    _db.exec("DROP TABLE IF EXISTS properties;");
-    _db.exec("DROP TABLE IF EXISTS roles;");
-    _db.exec("DROP TABLE IF EXISTS role_maps;");
-    _db.exec("DROP TABLE IF EXISTS restrictions;");
-    _db.exec("DROP TABLE IF EXISTS restriction_maps;");
-    _db.exec("DROP TABLE IF EXISTS scenes;");
-    _db.exec("DROP TABLE IF EXISTS treatments;");
+    QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS authors;");
+    QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS assessments;");
+    QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS citations;");
+    QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS citation_maps;");
+    QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS events;");
+    QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS event_maps;");
+    QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS equipments;");
+    QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS equipment_map;");
+    QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS injuries;");
+    QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS injury_sets;");
+    QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS locations;");
+    QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS location_maps;");
+    QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS objectives;");
+    QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS properties;");
+    QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS roles;");
+    QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS role_maps;");
+    QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS restrictions;");
+    QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS restriction_maps;");
+    QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS scenes;");
+    QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS treatments;");
 
     return true;
   }
@@ -791,9 +791,9 @@ bool SQLite3Driver::clear_db()
 bool SQLite3Driver::clear_table(enum SQLite3Driver::Sqlite3Table t)
 {
 
-  QSqlQuery query{ _db };
+  QSqlQuery query{ QSqlDatabase::database(_db_name) };
   query.prepare(sqlite3::drop_table);
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     switch (t) {
     case ASSESSMENTS:
       query.bindValue(":table", tables[ASSESSMENTS]);
@@ -841,9 +841,9 @@ bool SQLite3Driver::clear_table(enum SQLite3Driver::Sqlite3Table t)
 //-----------------------------------------------------------------------------
 int SQLite3Driver::nextID(Sqlite3Table table) const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     QString stmt = "SELECT MAX(%1_id) FROM %1s";
     switch (table) {
     case AUTHORS:
@@ -911,9 +911,9 @@ inline void assign_assessment(const QSqlRecord& record, Assessment& assessment)
 }
 int SQLite3Driver::assessment_count() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_assessments);
     query.exec();
     if (query.next()) {
@@ -929,9 +929,9 @@ void SQLite3Driver::assessments()
   qDeleteAll(_assessments);
   _assessments.clear();
 
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_all_assessments);
     query.exec();
     while (query.next()) {
@@ -958,8 +958,8 @@ bool SQLite3Driver::next_assessment(Assessment* assessment)
 bool SQLite3Driver::select_assessment(Assessment* assessment) const
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     QSqlRecord record;
     if (assessment->id != -1) {
       query.prepare(sqlite3::select_assessment_by_id);
@@ -988,8 +988,8 @@ bool SQLite3Driver::select_assessment(Assessment* assessment) const
 bool SQLite3Driver::update_assessment(Assessment* assessment)
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     if (-1 != assessment->id) {
       query.prepare(sqlite3::update_assessment_by_id);
       query.bindValue(":id", assessment->id);
@@ -1019,8 +1019,8 @@ bool SQLite3Driver::update_assessment(Assessment* assessment)
 }
 bool SQLite3Driver::remove_assessment(Assessment* assessment)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_assessment(assessment)) {
       query.prepare(sqlite3::delete_assessment_by_id);
       query.bindValue(":id", assessment->id);
@@ -1067,9 +1067,9 @@ inline void assign_author(const QSqlRecord& record, Author& author)
 }
 int SQLite3Driver::author_count() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_authors);
     query.exec();
     if (query.next()) {
@@ -1084,9 +1084,9 @@ void SQLite3Driver::authors()
 {
   qDeleteAll(_authors);
   _authors.clear();
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_all_authors);
     query.exec();
     while (query.next()) {
@@ -1111,8 +1111,8 @@ bool SQLite3Driver::next_author(Author* author)
 }
 bool SQLite3Driver::select_author(Author* author) const
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     QSqlRecord record;
     if (author->id != -1) {
       query.prepare(sqlite3::select_author_by_id);
@@ -1141,9 +1141,9 @@ bool SQLite3Driver::select_author(Author* author) const
 bool SQLite3Driver::update_author(Author* author)
 {
 
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     if (!author->email.isEmpty()) {
-      QSqlQuery query{ _db };
+      QSqlQuery query{ QSqlDatabase::database(_db_name) };
 
       query.prepare(sqlite3::insert_or_update_authors);
       query.bindValue(":name_first", author->first);
@@ -1178,9 +1178,9 @@ bool SQLite3Driver::update_author(Author* author)
 bool SQLite3Driver::update_first_author(Author* author)
 {
 
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     if (!author->email.isEmpty()) {
-      QSqlQuery query{ _db };
+      QSqlQuery query{ QSqlDatabase::database(_db_name) };
       query.prepare(sqlite3::insert_or_update_first_author);
       query.bindValue(":name_first", author->first);
       query.bindValue(":name_last", author->last);
@@ -1208,8 +1208,8 @@ bool SQLite3Driver::update_first_author(Author* author)
 }
 bool SQLite3Driver::remove_author(Author* author)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_author(author)) {
       query.prepare(sqlite3::delete_author_by_id);
       query.bindValue(":id", author->id);
@@ -1238,9 +1238,9 @@ inline void assign_citation(const QSqlRecord& record, Citation& citation)
 }
 int SQLite3Driver::citation_count() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_citations);
     query.exec();
     if (query.next()) {
@@ -1253,9 +1253,9 @@ int SQLite3Driver::citation_count() const
 }
 int SQLite3Driver::citation_count(Scene* scene) const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_citations_in_scene);
     query.bindValue(":id", scene->id);
     query.exec();
@@ -1272,9 +1272,9 @@ void SQLite3Driver::citations()
   qDeleteAll(_citations);
   _citations.clear();
 
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_all_citations);
     query.exec();
     while (query.next()) {
@@ -1303,8 +1303,8 @@ bool SQLite3Driver::select_citation(Citation* citation) const
   //TODO: Hitting the exact title is going to be pretty hard
   //TODO: Might want to add an alias or transform for the select where you remove all whitespace and downcase the title
 
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     QSqlRecord record;
     if (citation->id != -1) {
       query.prepare(sqlite3::select_citation_by_id);
@@ -1336,8 +1336,8 @@ bool SQLite3Driver::select_citation(Citation* citation) const
 bool SQLite3Driver::update_citation(Citation* citation)
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     if (-1 != citation->id) {
       query.prepare(sqlite3::update_citation_by_id);
       query.bindValue(":id", citation->id);
@@ -1372,8 +1372,8 @@ bool SQLite3Driver::update_citation(Citation* citation)
 }
 bool SQLite3Driver::update_citation_in_scene(Scene* scene, Citation* citation)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     if (select_scene(scene)) {
       if (!select_citation(citation)) {
         update_citation(citation);
@@ -1394,8 +1394,8 @@ bool SQLite3Driver::update_citation_in_scene(Scene* scene, Citation* citation)
 }
 bool SQLite3Driver::remove_citation(Citation* citation)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_citation(citation)) {
       query.prepare(sqlite3::delete_citation_by_id);
       query.bindValue(":id", citation->id);
@@ -1404,7 +1404,7 @@ bool SQLite3Driver::remove_citation(Citation* citation)
         return false;
       }
       citationRemoved(citation->id);
-      QSqlQuery query_map(_db);
+      QSqlQuery query_map(QSqlDatabase::database(_db_name));
       query_map.prepare(sqlite3::delete_citation_map_by_fk_citation);
       query_map.bindValue(":fk_citation", citation->id);
       if (!query_map.exec()) {
@@ -1439,9 +1439,9 @@ inline void assign_injury(const QSqlRecord& record, Injury& injury)
 }
 int SQLite3Driver::injury_count() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_injuries);
     query.exec();
     if (query.next()) {
@@ -1457,9 +1457,9 @@ void SQLite3Driver::injuries()
   qDeleteAll(_injuries);
   _injuries.clear();
 
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_all_injuries);
     query.exec();
     while (query.next()) {
@@ -1486,8 +1486,8 @@ bool SQLite3Driver::next_injury(Injury* injury)
 bool SQLite3Driver::select_injury(Injury* injury) const
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     QSqlRecord record;
     if (injury->id != -1) {
       query.prepare(sqlite3::select_injury_by_id);
@@ -1519,8 +1519,8 @@ bool SQLite3Driver::select_injury(Injury* injury) const
 bool SQLite3Driver::update_injury(Injury* injury)
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     if (-1 != injury->id) {
       query.prepare(sqlite3::update_injury_by_id);
       query.bindValue(":id", injury->id);
@@ -1554,8 +1554,8 @@ bool SQLite3Driver::update_injury(Injury* injury)
 }
 bool SQLite3Driver::remove_injury(Injury* injury)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_injury(injury)) {
       query.prepare(sqlite3::delete_injury_by_id);
       query.bindValue(":id", injury->id);
@@ -1584,9 +1584,9 @@ inline void assign_injury_set(const QSqlRecord& record, InjurySet& injury)
 }
 int SQLite3Driver::injury_set_count() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_injury_sets);
     query.exec();
     if (query.next()) {
@@ -1602,9 +1602,9 @@ void SQLite3Driver::injury_sets()
   qDeleteAll(_injury_sets);
   _injury_sets.clear();
 
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_all_injury_sets);
     query.exec();
     while (query.next()) {
@@ -1631,8 +1631,8 @@ bool SQLite3Driver::next_injury_set(InjurySet* injury_set)
 bool SQLite3Driver::select_injury_set(InjurySet* set) const
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     QSqlRecord record;
     if (set->id != -1) {
       query.prepare(sqlite3::select_injury_set_by_id);
@@ -1661,8 +1661,8 @@ bool SQLite3Driver::select_injury_set(InjurySet* set) const
 bool SQLite3Driver::update_injury_set(InjurySet* injury_set)
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     if (-1 != injury_set->id) {
       query.prepare(sqlite3::update_injury_set_by_id);
       query.bindValue(":id", injury_set->id);
@@ -1692,8 +1692,8 @@ bool SQLite3Driver::update_injury_set(InjurySet* injury_set)
 }
 bool SQLite3Driver::remove_injury_set(InjurySet* injury_set)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_injury_set(injury_set)) {
       query.prepare(sqlite3::delete_injury_set_by_id);
       query.bindValue(":id", injury_set->id);
@@ -1719,9 +1719,9 @@ inline void assign_role_map(const QSqlRecord& record, RoleMap& map)
 }
 int SQLite3Driver::role_map_count() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_role_maps);
     query.exec();
     if (query.next()) {
@@ -1737,9 +1737,9 @@ void SQLite3Driver::role_maps()
   qDeleteAll(_role_maps);
   _role_maps.clear();
 
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_all_role_maps);
     query.exec();
     while (query.next()) {
@@ -1766,8 +1766,8 @@ bool SQLite3Driver::next_role_map(RoleMap* map)
 bool SQLite3Driver::select_role_map(RoleMap* map) const
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     QSqlRecord record;
     if (map->id != -1) {
       query.prepare(sqlite3::select_role_map_by_id);
@@ -1797,8 +1797,8 @@ bool SQLite3Driver::select_role_map(RoleMap* map) const
 bool SQLite3Driver::update_role_map(RoleMap* map)
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     if (-1 != map->id) {
       query.prepare(sqlite3::update_role_map_by_id);
       query.bindValue(":id", map->id);
@@ -1824,8 +1824,8 @@ bool SQLite3Driver::update_role_map(RoleMap* map)
 }
 bool SQLite3Driver::remove_role_map(RoleMap* map)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_role_map(map)) {
       query.prepare(sqlite3::delete_role_map_by_id);
       query.bindValue(":id", map->id);
@@ -1844,8 +1844,8 @@ bool SQLite3Driver::remove_role_map(RoleMap* map)
 }
 bool SQLite3Driver::remove_role_map_by_fk(RoleMap* map)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_role_map(map)) {
       query.prepare(sqlite3::delete_role_map_by_fk);
       query.bindValue(":fk_scene", map->fk_scene);
@@ -1872,9 +1872,9 @@ inline void assign_event_map(const QSqlRecord& record, EventMap& map)
 }
 int SQLite3Driver::event_map_count() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_event_maps);
     query.exec();
     if (query.next()) {
@@ -1890,9 +1890,9 @@ void SQLite3Driver::event_maps()
   qDeleteAll(_event_maps);
   _event_maps.clear();
 
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_all_event_maps);
     query.exec();
     while (query.next()) {
@@ -1919,8 +1919,8 @@ bool SQLite3Driver::next_event_map(EventMap* map)
 bool SQLite3Driver::select_event_map(EventMap* map) const
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     QSqlRecord record;
     if (map->id != -1) {
       query.prepare(sqlite3::select_event_map_by_id);
@@ -1950,8 +1950,8 @@ bool SQLite3Driver::select_event_map(EventMap* map) const
 bool SQLite3Driver::update_event_map(EventMap* map)
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     if (-1 != map->id) {
       query.prepare(sqlite3::update_event_map_by_id);
       query.bindValue(":id", map->id);
@@ -1977,8 +1977,8 @@ bool SQLite3Driver::update_event_map(EventMap* map)
 }
 bool SQLite3Driver::remove_event_map(EventMap* map)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_event_map(map)) {
       query.prepare(sqlite3::delete_event_map_by_id);
       query.bindValue(":id", map->id);
@@ -1997,8 +1997,8 @@ bool SQLite3Driver::remove_event_map(EventMap* map)
 }
 bool SQLite3Driver::remove_event_map_by_fk(EventMap* map)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_event_map(map)) {
       query.prepare(sqlite3::delete_event_map_by_fk);
       query.bindValue(":fk_scene", map->fk_scene);
@@ -2025,9 +2025,9 @@ inline void assign_location_map(const QSqlRecord& record, LocationMap& map)
 }
 int SQLite3Driver::location_map_count() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_location_maps);
     query.exec();
     if (query.next()) {
@@ -2040,9 +2040,9 @@ int SQLite3Driver::location_map_count() const
 }
 int SQLite3Driver::location_map_count(Scene* scene) const //we currently only support a scene having one location, but this might change in the future
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_location_maps_in_scene);
     query.bindValue(":fk_scene", scene->id);
     query.exec();
@@ -2059,9 +2059,9 @@ void SQLite3Driver::location_maps()
   qDeleteAll(_location_maps);
   _location_maps.clear();
 
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_all_location_maps);
     query.exec();
     while (query.next()) {
@@ -2088,8 +2088,8 @@ bool SQLite3Driver::next_location_map(LocationMap* map)
 bool SQLite3Driver::select_location_map(LocationMap* map) const
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     QSqlRecord record;
     if (map->id != -1) {
       query.prepare(sqlite3::select_location_map_by_id);
@@ -2119,8 +2119,8 @@ bool SQLite3Driver::select_location_map(LocationMap* map) const
 bool SQLite3Driver::update_location_map(LocationMap* map)
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     if (-1 != map->id) {
       query.prepare(sqlite3::update_location_map_by_id);
       query.bindValue(":id", map->id);
@@ -2146,8 +2146,8 @@ bool SQLite3Driver::update_location_map(LocationMap* map)
 }
 bool SQLite3Driver::remove_location_map(LocationMap* map)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_location_map(map)) {
       query.prepare(sqlite3::delete_location_map_by_id);
       query.bindValue(":id", map->id);
@@ -2166,8 +2166,8 @@ bool SQLite3Driver::remove_location_map(LocationMap* map)
 }
 bool SQLite3Driver::remove_location_map_by_fk(LocationMap* map)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_location_map(map)) {
       query.prepare(sqlite3::delete_location_map_by_fk);
       query.bindValue(":fk_scene", map->fk_scene);
@@ -2194,9 +2194,9 @@ inline void assign_citation_map(const QSqlRecord& record, CitationMap& map)
 }
 int SQLite3Driver::citation_map_count() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_citation_maps);
     query.exec();
     if (query.next()) {
@@ -2212,9 +2212,9 @@ void SQLite3Driver::citation_maps()
   qDeleteAll(_citation_maps);
   _citation_maps.clear();
 
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_all_citation_maps);
     query.exec();
     while (query.next()) {
@@ -2241,8 +2241,8 @@ bool SQLite3Driver::next_citation_map(CitationMap* map)
 bool SQLite3Driver::select_citation_map(CitationMap* map) const
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     QSqlRecord record;
     if (map->id != -1) {
       query.prepare(sqlite3::select_citation_map_by_id);
@@ -2272,8 +2272,8 @@ bool SQLite3Driver::select_citation_map(CitationMap* map) const
 bool SQLite3Driver::update_citation_map(CitationMap* map)
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     if (-1 != map->id) {
       query.prepare(sqlite3::update_citation_map_by_id);
       query.bindValue(":id", map->id);
@@ -2299,8 +2299,8 @@ bool SQLite3Driver::update_citation_map(CitationMap* map)
 }
 bool SQLite3Driver::remove_citation_map(CitationMap* map)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_citation_map(map)) {
       query.prepare(sqlite3::delete_citation_map_by_id);
       query.bindValue(":id", map->id);
@@ -2319,8 +2319,8 @@ bool SQLite3Driver::remove_citation_map(CitationMap* map)
 }
 bool SQLite3Driver::remove_citation_map_by_fk(CitationMap* map)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_citation_map(map)) {
       query.prepare(sqlite3::delete_citation_map_by_fk);
       query.bindValue(":fk_scene", map->fk_scene);
@@ -2366,9 +2366,9 @@ inline void assign_equipment_from_scene(const QSqlRecord& record, EquipmentMap& 
 }
 int SQLite3Driver::equipment_map_count() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_equipment_map);
     query.exec();
     if (query.next()) {
@@ -2384,9 +2384,9 @@ void SQLite3Driver::equipment_maps()
   qDeleteAll(_equipment_maps);
   _equipment_maps.clear();
 
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_all_equipment_map);
     query.exec();
     while (query.next()) {
@@ -2413,8 +2413,8 @@ bool SQLite3Driver::next_equipment_map(EquipmentMap* map)
 bool SQLite3Driver::select_equipment_map(EquipmentMap* map) const
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     QSqlRecord record;
     if (map->id != -1) {
       query.prepare(sqlite3::select_equipment_map_by_id);
@@ -2447,8 +2447,8 @@ bool SQLite3Driver::select_equipment_map(EquipmentMap* map) const
 bool SQLite3Driver::update_equipment_map(EquipmentMap* map)
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     if (-1 != map->id) {
       query.prepare(sqlite3::update_equipment_map_by_id);
       query.bindValue(":id", map->id);
@@ -2474,8 +2474,8 @@ bool SQLite3Driver::update_equipment_map(EquipmentMap* map)
 }
 bool SQLite3Driver::remove_equipment_map(EquipmentMap* map)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_equipment_map(map)) {
       query.prepare(sqlite3::delete_equipment_map_by_id);
       query.bindValue(":id", map->id);
@@ -2494,8 +2494,8 @@ bool SQLite3Driver::remove_equipment_map(EquipmentMap* map)
 }
 bool SQLite3Driver::remove_equipment_map_by_fk(EquipmentMap* map)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_equipment_map(map)) {
       query.prepare(sqlite3::delete_equipment_map_by_fk);
       query.bindValue(":fk_scene", map->fk_scene);
@@ -2522,9 +2522,9 @@ inline void assign_restriction_map(const QSqlRecord& record, RestrictionMap& map
 }
 int SQLite3Driver::restriction_map_count() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_restriction_maps);
     query.exec();
     if (query.next()) {
@@ -2540,9 +2540,9 @@ void SQLite3Driver::restriction_maps()
   qDeleteAll(_restriction_maps);
   _restriction_maps.clear();
 
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_all_restriction_maps);
     query.exec();
     while (query.next()) {
@@ -2569,8 +2569,8 @@ bool SQLite3Driver::next_restriction_map(RestrictionMap* map)
 bool SQLite3Driver::select_restriction_map(RestrictionMap* map) const
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     QSqlRecord record;
     if (map->id != -1) {
       query.prepare(sqlite3::select_restriction_map_by_id);
@@ -2600,8 +2600,8 @@ bool SQLite3Driver::select_restriction_map(RestrictionMap* map) const
 bool SQLite3Driver::update_restriction_map(RestrictionMap* map)
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     if (-1 != map->id) {
       query.prepare(sqlite3::update_restriction_map_by_id);
       query.bindValue(":id", map->id);
@@ -2627,8 +2627,8 @@ bool SQLite3Driver::update_restriction_map(RestrictionMap* map)
 }
 bool SQLite3Driver::remove_restriction_map(RestrictionMap* map)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_restriction_map(map)) {
       query.prepare(sqlite3::delete_restriction_map_by_id);
       query.bindValue(":id", map->id);
@@ -2647,8 +2647,8 @@ bool SQLite3Driver::remove_restriction_map(RestrictionMap* map)
 }
 bool SQLite3Driver::remove_restriction_map_by_fk(RestrictionMap* map)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_restriction_map(map)) {
       query.prepare(sqlite3::delete_restriction_map_by_fk);
       query.bindValue(":fk_scene", map->fk_scene);
@@ -2681,9 +2681,9 @@ inline void assign_event(QSqlRecord& record, Event& event)
 }
 int SQLite3Driver::event_count() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_events);
     query.exec();
     if (query.next()) {
@@ -2696,9 +2696,9 @@ int SQLite3Driver::event_count() const
 }
 int SQLite3Driver::event_count(Scene* scene) const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_events_in_scene);
     query.bindValue(":id", scene->id);
     query.exec();
@@ -2715,9 +2715,9 @@ void SQLite3Driver::events()
   qDeleteAll(_events);
   _events.clear();
 
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_all_events);
     query.exec();
     while (query.next()) {
@@ -2736,8 +2736,8 @@ void SQLite3Driver::events_in_scene(Scene* scene)
   qDeleteAll(_events);
   _events.clear();
 
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_events_in_scene);
     query.bindValue(":scene_id", scene->id);
     query.exec();
@@ -2765,8 +2765,8 @@ bool SQLite3Driver::next_event(Event* event)
 bool SQLite3Driver::select_event(Event* event) const
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     QSqlRecord record;
     if (event->id != -1) {
       query.prepare(sqlite3::select_event_by_id);
@@ -2795,8 +2795,8 @@ bool SQLite3Driver::select_event(Event* event) const
 bool SQLite3Driver::update_event(Event* event)
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     if (-1 != event->id) {
       query.prepare(sqlite3::update_event_by_id);
       query.bindValue(":id", event->id);
@@ -2828,8 +2828,8 @@ bool SQLite3Driver::update_event(Event* event)
 }
 bool SQLite3Driver::update_event_in_scene(Scene* scene, Event* event)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     if (select_scene(scene)) {
       if (!select_event(event)) {
         update_event(event);
@@ -2850,8 +2850,8 @@ bool SQLite3Driver::update_event_in_scene(Scene* scene, Event* event)
 }
 bool SQLite3Driver::remove_event(Event* event)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_event(event)) {
       query.prepare(sqlite3::delete_event_by_id);
       query.bindValue(":id", event->id);
@@ -2860,7 +2860,7 @@ bool SQLite3Driver::remove_event(Event* event)
         return false;
       }
       eventRemoved(event->id);
-      QSqlQuery query_map(_db);
+      QSqlQuery query_map(QSqlDatabase::database(_db_name));
       query_map.prepare(sqlite3::delete_event_map_by_fk_event);
       query_map.bindValue(":fk_event", event->id);
       if (!query_map.exec()) {
@@ -2891,9 +2891,9 @@ inline void assign_location(const QSqlRecord& record, Location& location)
 }
 int SQLite3Driver::location_count() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_locations);
     query.exec();
     if (query.next()) {
@@ -2909,9 +2909,9 @@ void SQLite3Driver::locations()
   qDeleteAll(_locations);
   _locations.clear();
 
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_all_locations);
     query.exec();
     while (query.next()) {
@@ -2938,8 +2938,8 @@ bool SQLite3Driver::next_location(Location* location)
 bool SQLite3Driver::select_location(Location* location) const
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     QSqlRecord record;
     if (location->id != -1) {
       query.prepare(sqlite3::select_location_by_id);
@@ -2968,8 +2968,8 @@ bool SQLite3Driver::select_location(Location* location) const
 bool SQLite3Driver::update_location(Location* location)
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     if (-1 != location->id) {
       query.prepare(sqlite3::update_location_by_id);
       query.bindValue(":id", location->id);
@@ -2996,9 +2996,9 @@ bool SQLite3Driver::update_location(Location* location)
 }
 int SQLite3Driver::location_count(Scene* scene) const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_locations_in_scene);
     query.bindValue(":id", scene->id);
     query.exec();
@@ -3015,9 +3015,9 @@ void SQLite3Driver::locations_in_scene(Scene* scene)
   qDeleteAll(_locations);
   _locations.clear();
 
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<int32_t> fk_location;
-    QSqlQuery location_map_query{ _db };
+    QSqlQuery location_map_query{ QSqlDatabase::database(_db_name) };
     location_map_query.prepare(sqlite3::select_location_map_by_fk_scene);
     location_map_query.bindValue(":fk_scene", scene->id);
     location_map_query.exec();
@@ -3027,7 +3027,7 @@ void SQLite3Driver::locations_in_scene(Scene* scene)
       assign_location_map(location_map_record, *location_map);
       fk_location.push_back(location_map->fk_location);
     }
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_location_by_id);
     while (!fk_location.empty()) {
       query.bindValue(":id", fk_location.back());
@@ -3046,8 +3046,8 @@ void SQLite3Driver::locations_in_scene(Scene* scene)
 }
 bool SQLite3Driver::update_location_in_scene(Scene* scene, Location* location)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     if (select_scene(scene)) {
       if (!select_location(location)) {
         update_location(location);
@@ -3056,7 +3056,7 @@ bool SQLite3Driver::update_location_in_scene(Scene* scene, Location* location)
       map.fk_location = location->id;
       map.fk_scene = scene->id;
       if (location_map_count(scene) > 0) {
-        QSqlQuery query_location_map(_db);
+        QSqlQuery query_location_map(QSqlDatabase::database(_db_name));
         query_location_map.prepare(sqlite3::delete_location_map_by_fk_scene);
         query_location_map.bindValue(":fk_scene", scene->id);
         if (!query_location_map.exec()) {
@@ -3082,8 +3082,8 @@ bool SQLite3Driver::update_location_in_scene(Scene* scene, Location* location)
 }
 bool SQLite3Driver::remove_location(Location* location)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_location(location)) {
       query.prepare(sqlite3::delete_location_by_id);
       query.bindValue(":id", location->id);
@@ -3092,7 +3092,7 @@ bool SQLite3Driver::remove_location(Location* location)
         return false;
       }
       locationRemoved(location->id);
-      QSqlQuery query_map(_db);
+      QSqlQuery query_map(QSqlDatabase::database(_db_name));
       query_map.prepare(sqlite3::delete_location_map_by_fk_location);
       query_map.bindValue(":fk_location", location->id);
       if (!query_map.exec()) {
@@ -3127,9 +3127,9 @@ inline void assign_equipment(const QSqlRecord& record, Equipment& equipment)
 }
 int SQLite3Driver::equipment_count() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_equipments);
     query.exec();
     if (query.next()) {
@@ -3142,9 +3142,9 @@ int SQLite3Driver::equipment_count() const
 }
 int SQLite3Driver::equipment_count(Scene* scene) const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_equipments_in_scene);
     query.bindValue(":id", scene->id);
     query.exec();
@@ -3161,9 +3161,9 @@ void SQLite3Driver::equipments()
   qDeleteAll(_equipments);
   _equipments.clear();
 
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_all_equipments);
     query.exec();
     while (query.next()) {
@@ -3182,9 +3182,9 @@ void SQLite3Driver::equipment_in_scene(Scene* scene)
   qDeleteAll(_equipments);
   _equipments.clear();
 
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<int32_t> fk_equipment;
-    QSqlQuery equipment_map_query{ _db };
+    QSqlQuery equipment_map_query{ QSqlDatabase::database(_db_name) };
     equipment_map_query.prepare(sqlite3::select_equipment_map_by_fk_scene);
     equipment_map_query.bindValue(":fk_scene", scene->id);
     equipment_map_query.exec();
@@ -3194,7 +3194,7 @@ void SQLite3Driver::equipment_in_scene(Scene* scene)
       assign_equipment_map(equipment_map_record, *equipment_map);
       fk_equipment.push_back(equipment_map->fk_equipment);
     }
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_equipment_by_id);
     while (!fk_equipment.empty()) {
       query.bindValue(":id", fk_equipment.back());
@@ -3223,8 +3223,8 @@ bool SQLite3Driver::next_equipment(Equipment* equipment)
 }
 bool SQLite3Driver::select_equipment(Equipment* equipment) const
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     QSqlRecord record;
     if (equipment->id != -1) {
       query.prepare(sqlite3::select_equipment_by_id);
@@ -3253,8 +3253,8 @@ bool SQLite3Driver::select_equipment(Equipment* equipment) const
 bool SQLite3Driver::update_equipment(Equipment* equipment)
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     if (-1 != equipment->id) {
       query.prepare(sqlite3::update_equipment_by_id);
       query.bindValue(":id", equipment->id);
@@ -3285,8 +3285,8 @@ bool SQLite3Driver::update_equipment(Equipment* equipment)
 }
 bool SQLite3Driver::update_equipment_in_scene(Scene* scene, Equipment* equipment)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     if (select_scene(scene)) {
       if (!select_equipment(equipment)) {
         update_equipment(equipment);
@@ -3307,8 +3307,8 @@ bool SQLite3Driver::update_equipment_in_scene(Scene* scene, Equipment* equipment
 }
 bool SQLite3Driver::remove_equipment(Equipment* equipment)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_equipment(equipment)) {
       query.prepare(sqlite3::delete_equipment_by_id);
       query.bindValue(":id", equipment->id);
@@ -3317,7 +3317,7 @@ bool SQLite3Driver::remove_equipment(Equipment* equipment)
         return false;
       }
       equipmentRemoved(equipment->id);
-      QSqlQuery query_map(_db);
+      QSqlQuery query_map(QSqlDatabase::database(_db_name));
       query_map.prepare(sqlite3::delete_equipment_map_by_fk_equipment);
       query_map.bindValue(":fk_equipment", equipment->id);
       if (!query_map.exec()) {
@@ -3350,9 +3350,9 @@ inline void assign_objective(const QSqlRecord& record, Objective& objective)
 int SQLite3Driver::objective_count() const
 
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_objectives);
     query.exec();
     if (query.next()) {
@@ -3368,9 +3368,9 @@ void SQLite3Driver::objectives()
   qDeleteAll(_objectives);
   _objectives.clear();
 
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_all_objectives);
     query.exec();
     while (query.next()) {
@@ -3397,8 +3397,8 @@ bool SQLite3Driver::next_objective(Objective* objective)
 bool SQLite3Driver::select_objective(Objective* objective) const
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     QSqlRecord record;
     if (objective->id != -1) {
       query.prepare(sqlite3::select_objective_by_id);
@@ -3427,8 +3427,8 @@ bool SQLite3Driver::select_objective(Objective* objective) const
 bool SQLite3Driver::update_objective(Objective* objective)
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     if (-1 != objective->id) {
       query.prepare(sqlite3::update_objective_by_id);
       query.bindValue(":id", objective->id);
@@ -3457,8 +3457,8 @@ bool SQLite3Driver::update_objective(Objective* objective)
 }
 bool SQLite3Driver::remove_objective(Objective* objective)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_objective(objective)) {
       query.prepare(sqlite3::delete_objective_by_id);
       query.bindValue(":id", objective->id);
@@ -3484,9 +3484,9 @@ inline void assign_property(const QSqlRecord& record, Property& property)
 }
 int SQLite3Driver::property_count() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_properties);
     query.exec();
     if (query.next()) {
@@ -3502,9 +3502,9 @@ void SQLite3Driver::properties()
   qDeleteAll(_properties);
   _properties.clear();
 
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_all_properties);
     query.exec();
     while (query.next()) {
@@ -3531,8 +3531,8 @@ bool SQLite3Driver::next_property(Property* property)
 bool SQLite3Driver::select_property(Property* property) const
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     QSqlRecord record;
     if (property->id != -1) {
       query.prepare(sqlite3::select_property_by_id);
@@ -3562,9 +3562,9 @@ bool SQLite3Driver::select_property(Property* property) const
 bool SQLite3Driver::update_property(Property* property)
 {
 
-  if (_db.isOpen()) {
+  if ( ready() ) {
     if (!property->name.isEmpty()) {
-      QSqlQuery query{ _db };
+      QSqlQuery query{ QSqlDatabase::database(_db_name) };
       query.prepare(sqlite3::insert_or_update_properties);
       query.bindValue(":name", property->name);
       query.bindValue(":value", property->value);
@@ -3586,8 +3586,8 @@ bool SQLite3Driver::update_property(Property* property)
 }
 bool SQLite3Driver::remove_property(Property* property)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_property(property)) {
       query.prepare(sqlite3::delete_property_by_id);
       query.bindValue(":id", property->id);
@@ -3613,9 +3613,9 @@ inline void assign_role(QSqlRecord& record, Role& role)
 }
 int SQLite3Driver::role_count() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_roles);
     query.exec();
     if (query.next()) {
@@ -3628,9 +3628,9 @@ int SQLite3Driver::role_count() const
 }
 int SQLite3Driver::role_count(Scene* scene) const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_roles_in_scene);
     query.bindValue(":id", scene->id);
     query.exec();
@@ -3647,9 +3647,9 @@ void SQLite3Driver::roles()
   qDeleteAll(_roles);
   _roles.clear();
 
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_all_roles);
     query.exec();
     while (query.next()) {
@@ -3668,9 +3668,9 @@ void SQLite3Driver::roles_in_scene(Scene* scene)
   qDeleteAll(_roles);
   _roles.clear();
 
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<int32_t> fk_role;
-    QSqlQuery map_query{ _db };
+    QSqlQuery map_query{ QSqlDatabase::database(_db_name) };
     map_query.prepare(sqlite3::select_role_map_by_fk_scene);
     map_query.bindValue(":fk_scene", scene->id);
     map_query.exec();
@@ -3680,7 +3680,7 @@ void SQLite3Driver::roles_in_scene(Scene* scene)
       assign_role_map(map_record, *map);
       fk_role.push_back(map->fk_role);
     }
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_role_by_id);
     while (!fk_role.empty()) {
       query.bindValue(":id", fk_role.back());
@@ -3713,8 +3713,8 @@ bool SQLite3Driver::next_role(Role* role)
 bool SQLite3Driver::select_role(Role* role) const
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     QSqlRecord record;
     if (role->id != -1) {
       query.prepare(sqlite3::select_role_by_id);
@@ -3744,8 +3744,8 @@ bool SQLite3Driver::select_role(Role* role) const
 bool SQLite3Driver::update_role(Role* role)
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     if (-1 != role->id) {
       query.prepare(sqlite3::update_role_by_id);
       query.bindValue(":id", role->id);
@@ -3771,8 +3771,8 @@ bool SQLite3Driver::update_role(Role* role)
 }
 bool SQLite3Driver::update_role_in_scene(Scene* scene, Role* role)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     if (select_scene(scene)) {
       if (!select_role(role)) {
         update_role(role);
@@ -3793,8 +3793,8 @@ bool SQLite3Driver::update_role_in_scene(Scene* scene, Role* role)
 }
 bool SQLite3Driver::remove_role(Role* role) // This deletes a role completely from the database
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_role(role)) {
       query.prepare(sqlite3::delete_role_by_id);
       query.bindValue(":id", role->id);
@@ -3803,7 +3803,7 @@ bool SQLite3Driver::remove_role(Role* role) // This deletes a role completely fr
         return false;
       }
       roleRemoved(role->id);
-      QSqlQuery query_map(_db);
+      QSqlQuery query_map(QSqlDatabase::database(_db_name));
       query_map.prepare(sqlite3::delete_role_map_by_fk_role);
       query_map.bindValue(":fk_role", role->id);
       if (!query_map.exec()) {
@@ -3835,9 +3835,9 @@ inline void assign_restriction(const QSqlRecord& record, Restriction& restrictio
 int SQLite3Driver::restriction_count() const
 
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_restrictions);
     query.exec();
     if (query.next()) {
@@ -3850,9 +3850,9 @@ int SQLite3Driver::restriction_count() const
 }
 int SQLite3Driver::restriction_count(Scene* scene) const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_restrictions_in_scene);
     query.bindValue(":id", scene->id);
     query.exec();
@@ -3869,9 +3869,9 @@ void SQLite3Driver::restrictions()
   qDeleteAll(_restrictions);
   _restrictions.clear();
 
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_all_restrictions);
     query.exec();
     while (query.next()) {
@@ -3898,8 +3898,8 @@ bool SQLite3Driver::next_restriction(Restriction* restriction)
 bool SQLite3Driver::select_restriction(Restriction* restriction) const
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     QSqlRecord record;
     if (restriction->id != -1) {
       query.prepare(sqlite3::select_restriction_by_id);
@@ -3928,8 +3928,8 @@ bool SQLite3Driver::select_restriction(Restriction* restriction) const
 bool SQLite3Driver::update_restriction(Restriction* restriction)
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     if (-1 != restriction->id) {
       query.prepare(sqlite3::update_restriction_by_id);
       query.bindValue(":id", restriction->id);
@@ -3956,8 +3956,8 @@ bool SQLite3Driver::update_restriction(Restriction* restriction)
 }
 bool SQLite3Driver::update_restriction_in_scene(Scene* scene, Restriction* restriction)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     if (select_scene(scene)) {
       if (!select_restriction(restriction)) {
         update_restriction(restriction);
@@ -3978,8 +3978,8 @@ bool SQLite3Driver::update_restriction_in_scene(Scene* scene, Restriction* restr
 }
 bool SQLite3Driver::remove_restriction(Restriction* restriction)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_restriction(restriction)) {
       query.prepare(sqlite3::delete_restriction_by_id);
       query.bindValue(":id", restriction->id);
@@ -3988,7 +3988,7 @@ bool SQLite3Driver::remove_restriction(Restriction* restriction)
         return false;
       }
       restrictionRemoved(restriction->id);
-      QSqlQuery query_map(_db);
+      QSqlQuery query_map(QSqlDatabase::database(_db_name));
       query_map.prepare(sqlite3::delete_restriction_map_by_fk_restriction);
       query_map.bindValue(":fk_restriction", restriction->id);
       if (!query_map.exec()) {
@@ -4026,9 +4026,9 @@ inline void assign_scene(QSqlRecord& record, Scene& scene)
 }
 int SQLite3Driver::scene_count() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_scenes);
     query.exec();
     if (query.next()) {
@@ -4044,9 +4044,9 @@ void SQLite3Driver::scenes()
   qDeleteAll(_scenes);
   _scenes.clear();
 
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_all_scenes);
     query.exec();
     while (query.next()) {
@@ -4073,8 +4073,8 @@ bool SQLite3Driver::next_scene(Scene* scene)
 bool SQLite3Driver::select_scene(Scene* scene) const
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     QSqlRecord record;
     if (scene->id != -1) {
       query.prepare(sqlite3::select_scene_by_id);
@@ -4104,8 +4104,8 @@ bool SQLite3Driver::select_scene(Scene* scene) const
 bool SQLite3Driver::update_scene(Scene* scene)
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     if (-1 != scene->id) {
       query.prepare(sqlite3::update_scene_by_id);
       query.bindValue(":id", scene->id);
@@ -4141,8 +4141,8 @@ bool SQLite3Driver::update_scene(Scene* scene)
 }
 bool SQLite3Driver::remove_scene(Scene* scene)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_scene(scene)) {
       query.prepare(sqlite3::delete_scene_by_id);
       query.bindValue(":id", scene->id);
@@ -4151,42 +4151,42 @@ bool SQLite3Driver::remove_scene(Scene* scene)
         return false;
       }
       sceneRemoved(scene->id);
-      QSqlQuery query_map(_db);
+      QSqlQuery query_map(QSqlDatabase::database(_db_name));
       query_map.prepare(sqlite3::delete_role_map_by_fk_scene);
       query_map.bindValue(":fk_scene", scene->id);
       if (!query_map.exec()) {
         qWarning() << query_map.lastError();
         return false;
       }
-      QSqlQuery query_event_map(_db);
+      QSqlQuery query_event_map(QSqlDatabase::database(_db_name));
       query_event_map.prepare(sqlite3::delete_event_map_by_fk_scene);
       query_event_map.bindValue(":fk_scene", scene->id);
       if (!query_event_map.exec()) {
         qWarning() << query_event_map.lastError();
         return false;
       }
-      QSqlQuery query_restriction_map(_db);
+      QSqlQuery query_restriction_map(QSqlDatabase::database(_db_name));
       query_restriction_map.prepare(sqlite3::delete_restriction_map_by_fk_scene);
       query_restriction_map.bindValue(":fk_scene", scene->id);
       if (!query_restriction_map.exec()) {
         qWarning() << query_restriction_map.lastError();
         return false;
       }
-      QSqlQuery query_equipment_map(_db);
+      QSqlQuery query_equipment_map(QSqlDatabase::database(_db_name));
       query_equipment_map.prepare(sqlite3::delete_equipment_map_by_fk_scene);
       query_equipment_map.bindValue(":fk_scene", scene->id);
       if (!query_equipment_map.exec()) {
         qWarning() << query_equipment_map.lastError();
         return false;
       }
-      QSqlQuery query_citation_map(_db);
+      QSqlQuery query_citation_map(QSqlDatabase::database(_db_name));
       query_citation_map.prepare(sqlite3::delete_citation_map_by_fk_scene);
       query_citation_map.bindValue(":fk_scene", scene->id);
       if (!query_citation_map.exec()) {
         qWarning() << query_citation_map.lastError();
         return false;
       }
-      QSqlQuery query_location_map(_db);
+      QSqlQuery query_location_map(QSqlDatabase::database(_db_name));
       query_location_map.prepare(sqlite3::delete_location_map_by_fk_scene);
       query_location_map.bindValue(":fk_scene", scene->id);
       if (!query_location_map.exec()) {
@@ -4213,9 +4213,9 @@ inline void assign_treatment(const QSqlRecord& record, Treatment& treatment)
 }
 int SQLite3Driver::treatment_count() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::count_treatments);
     query.exec();
     if (query.next()) {
@@ -4231,9 +4231,9 @@ void SQLite3Driver::treatments()
   qDeleteAll(_treatments);
   _treatments.clear();
 
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_all_treatments);
     query.exec();
     while (query.next()) {
@@ -4260,8 +4260,8 @@ bool SQLite3Driver::next_treatment(Treatment* treatment)
 bool SQLite3Driver::select_treatment(Treatment* treatment) const
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     QSqlRecord record;
     if (treatment->id != -1) {
       query.prepare(sqlite3::select_treatment_by_id);
@@ -4293,8 +4293,8 @@ bool SQLite3Driver::select_treatment(Treatment* treatment) const
 bool SQLite3Driver::update_treatment(Treatment* treatment)
 {
 
-  if (_db.isOpen()) {
-    QSqlQuery query{ _db };
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     if (-1 != treatment->id) {
       query.prepare(sqlite3::update_treatment_by_id);
       query.bindValue(":id", treatment->id);
@@ -4326,8 +4326,8 @@ bool SQLite3Driver::update_treatment(Treatment* treatment)
 }
 bool SQLite3Driver::remove_treatment(Treatment* treatment)
 {
-  if (_db.isOpen()) {
-    QSqlQuery query(_db);
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
     if (select_treatment(treatment)) {
       query.prepare(sqlite3::delete_treatment_by_id);
       query.bindValue(":id", treatment->id);
@@ -4347,9 +4347,9 @@ bool SQLite3Driver::remove_treatment(Treatment* treatment)
 //-----------------------------BACK DOORS FOR NOW----------------------------------
 std::vector<std::unique_ptr<Author>> SQLite3Driver::get_authors() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<std::unique_ptr<Author>> author_list;
-    QSqlQuery author_query{ _db };
+    QSqlQuery author_query{ QSqlDatabase::database(_db_name) };
     author_query.prepare(select_all_authors);
     author_query.exec();
     while (author_query.next()) {
@@ -4372,9 +4372,9 @@ std::vector<std::unique_ptr<Author>> SQLite3Driver::get_authors() const
 }
 std::vector<std::unique_ptr<Assessment>> SQLite3Driver::get_assessments() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<std::unique_ptr<Assessment>> assessment_list;
-    QSqlQuery assessment_query{ _db };
+    QSqlQuery assessment_query{ QSqlDatabase::database(_db_name) };
     assessment_query.prepare(select_all_assessments);
     assessment_query.exec();
     while (assessment_query.next()) {
@@ -4394,9 +4394,9 @@ std::vector<std::unique_ptr<Assessment>> SQLite3Driver::get_assessments() const
 }
 std::vector<std::unique_ptr<Citation>> SQLite3Driver::get_citations() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<std::unique_ptr<Citation>> citation_list;
-    QSqlQuery citation_query{ _db };
+    QSqlQuery citation_query{ QSqlDatabase::database(_db_name) };
     citation_query.prepare(select_all_citations);
     citation_query.exec();
     while (citation_query.next()) {
@@ -4416,9 +4416,9 @@ std::vector<std::unique_ptr<Citation>> SQLite3Driver::get_citations() const
 }
 std::vector<std::unique_ptr<Event>> SQLite3Driver::get_events() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<std::unique_ptr<Event>> event_list;
-    QSqlQuery event_query{ _db };
+    QSqlQuery event_query{ QSqlDatabase::database(_db_name) };
     event_query.prepare(select_all_events);
     event_query.exec();
     while (event_query.next()) {
@@ -4441,9 +4441,9 @@ std::vector<std::unique_ptr<Event>> SQLite3Driver::get_events() const
 }
 std::vector<std::unique_ptr<Event>> SQLite3Driver::get_events_in_scene(Scene const* const scene) const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<std::unique_ptr<Event>> event_list;
-    QSqlQuery event_query{ _db };
+    QSqlQuery event_query{ QSqlDatabase::database(_db_name) };
     event_query.prepare(select_events_in_scene);
     event_query.bindValue(":scene_id", scene->id);
     event_query.exec();
@@ -4464,9 +4464,9 @@ std::vector<std::unique_ptr<Event>> SQLite3Driver::get_events_in_scene(Scene con
 }
 std::vector<std::unique_ptr<Equipment>> SQLite3Driver::get_equipments() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<std::unique_ptr<Equipment>> equipment_list;
-    QSqlQuery equipment_query{ _db };
+    QSqlQuery equipment_query{ QSqlDatabase::database(_db_name) };
     equipment_query.prepare(select_all_equipments);
     equipment_query.exec();
     while (equipment_query.next()) {
@@ -4486,9 +4486,9 @@ std::vector<std::unique_ptr<Equipment>> SQLite3Driver::get_equipments() const
 }
 std::vector<std::unique_ptr<EquipmentMap>> SQLite3Driver::get_equipment_in_scene(Scene const* const scene) const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<std::unique_ptr<EquipmentMap>> equipment_list;
-    QSqlQuery scene_query{ _db };
+    QSqlQuery scene_query{ QSqlDatabase::database(_db_name) };
     scene_query.prepare(select_equipment_in_scene);
     scene_query.bindValue(":scene_id", scene->id);
     scene_query.exec();
@@ -4504,9 +4504,9 @@ std::vector<std::unique_ptr<EquipmentMap>> SQLite3Driver::get_equipment_in_scene
 }
 std::vector<std::unique_ptr<Injury>> SQLite3Driver::get_injuries() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<std::unique_ptr<Injury>> injury_list;
-    QSqlQuery injury_query{ _db };
+    QSqlQuery injury_query{ QSqlDatabase::database(_db_name) };
     injury_query.prepare(select_all_injuries);
     injury_query.exec();
     while (injury_query.next()) {
@@ -4527,9 +4527,9 @@ std::vector<std::unique_ptr<Injury>> SQLite3Driver::get_injuries() const
 }
 std::vector<std::unique_ptr<InjurySet>> SQLite3Driver::get_injury_sets() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<std::unique_ptr<InjurySet>> injury_set_list;
-    QSqlQuery injury_set_query{ _db };
+    QSqlQuery injury_set_query{ QSqlDatabase::database(_db_name) };
     injury_set_query.prepare(select_all_injury_sets);
     injury_set_query.exec();
     while (injury_set_query.next()) {
@@ -4549,9 +4549,9 @@ std::vector<std::unique_ptr<InjurySet>> SQLite3Driver::get_injury_sets() const
 }
 std::vector<std::unique_ptr<RoleMap>> SQLite3Driver::get_role_maps() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<std::unique_ptr<RoleMap>> role_map_list;
-    QSqlQuery role_map_query{ _db };
+    QSqlQuery role_map_query{ QSqlDatabase::database(_db_name) };
     role_map_query.prepare(select_all_role_maps);
     role_map_query.exec();
     while (role_map_query.next()) {
@@ -4568,9 +4568,9 @@ std::vector<std::unique_ptr<RoleMap>> SQLite3Driver::get_role_maps() const
 }
 std::vector<std::unique_ptr<EventMap>> SQLite3Driver::get_event_maps() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<std::unique_ptr<EventMap>> event_map_list;
-    QSqlQuery event_map_query{ _db };
+    QSqlQuery event_map_query{ QSqlDatabase::database(_db_name) };
     event_map_query.prepare(select_all_event_maps);
     event_map_query.exec();
     while (event_map_query.next()) {
@@ -4587,9 +4587,9 @@ std::vector<std::unique_ptr<EventMap>> SQLite3Driver::get_event_maps() const
 }
 std::vector<std::unique_ptr<LocationMap>> SQLite3Driver::get_location_maps() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<std::unique_ptr<LocationMap>> location_map_list;
-    QSqlQuery location_map_query{ _db };
+    QSqlQuery location_map_query{ QSqlDatabase::database(_db_name) };
     location_map_query.prepare(select_all_location_maps);
     location_map_query.exec();
     while (location_map_query.next()) {
@@ -4606,9 +4606,9 @@ std::vector<std::unique_ptr<LocationMap>> SQLite3Driver::get_location_maps() con
 }
 std::vector<std::unique_ptr<CitationMap>> SQLite3Driver::get_citation_maps() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<std::unique_ptr<CitationMap>> citation_map_list;
-    QSqlQuery citation_map_query{ _db };
+    QSqlQuery citation_map_query{ QSqlDatabase::database(_db_name) };
     citation_map_query.prepare(select_all_citation_maps);
     citation_map_query.exec();
     while (citation_map_query.next()) {
@@ -4625,9 +4625,9 @@ std::vector<std::unique_ptr<CitationMap>> SQLite3Driver::get_citation_maps() con
 }
 std::vector<std::unique_ptr<EquipmentMap>> SQLite3Driver::get_equipment_maps() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<std::unique_ptr<EquipmentMap>> equipment_map_list;
-    QSqlQuery equipment_map_query{ _db };
+    QSqlQuery equipment_map_query{ QSqlDatabase::database(_db_name) };
     equipment_map_query.prepare(select_all_equipment_map);
     equipment_map_query.exec();
     while (equipment_map_query.next()) {
@@ -4644,9 +4644,9 @@ std::vector<std::unique_ptr<EquipmentMap>> SQLite3Driver::get_equipment_maps() c
 }
 std::vector<std::unique_ptr<RestrictionMap>> SQLite3Driver::get_restriction_maps() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<std::unique_ptr<RestrictionMap>> restriction_map_list;
-    QSqlQuery restriction_map_query{ _db };
+    QSqlQuery restriction_map_query{ QSqlDatabase::database(_db_name) };
     restriction_map_query.prepare(select_all_restriction_maps);
     restriction_map_query.exec();
     while (restriction_map_query.next()) {
@@ -4663,9 +4663,9 @@ std::vector<std::unique_ptr<RestrictionMap>> SQLite3Driver::get_restriction_maps
 }
 std::vector<std::unique_ptr<Objective>> SQLite3Driver::get_objectives() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<std::unique_ptr<Objective>> objective_list;
-    QSqlQuery objective_query{ _db };
+    QSqlQuery objective_query{ QSqlDatabase::database(_db_name) };
     objective_query.prepare(select_all_objectives);
     objective_query.exec();
     while (objective_query.next()) {
@@ -4683,9 +4683,9 @@ std::vector<std::unique_ptr<Objective>> SQLite3Driver::get_objectives() const
 }
 std::vector<std::unique_ptr<Location>> SQLite3Driver::get_locations() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<std::unique_ptr<Location>> location_list;
-    QSqlQuery location_query{ _db };
+    QSqlQuery location_query{ QSqlDatabase::database(_db_name) };
     location_query.prepare(select_all_locations);
     location_query.exec();
     while (location_query.next()) {
@@ -4704,10 +4704,10 @@ std::vector<std::unique_ptr<Location>> SQLite3Driver::get_locations() const
 }
 std::vector<std::unique_ptr<Location>> SQLite3Driver::get_locations_in_scene(Scene* scene) const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<std::unique_ptr<Location>> location_list;
     std::vector<int32_t> fk_locations;
-    QSqlQuery map_query{ _db };
+    QSqlQuery map_query{ QSqlDatabase::database(_db_name) };
     map_query.prepare(sqlite3::select_location_map_by_fk_scene);
     map_query.bindValue(":fk_scene", scene->id);
     map_query.exec();
@@ -4717,7 +4717,7 @@ std::vector<std::unique_ptr<Location>> SQLite3Driver::get_locations_in_scene(Sce
       assign_location_map(map_record, *map);
       fk_locations.push_back(map->fk_location);
     }
-    QSqlQuery query{ _db };
+    QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_location_by_id);
     for (auto& id : fk_locations) {
       query.bindValue(":id", id);
@@ -4738,9 +4738,9 @@ std::vector<std::unique_ptr<Location>> SQLite3Driver::get_locations_in_scene(Sce
 }
 std::vector<std::unique_ptr<Property>> SQLite3Driver::get_properties() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<std::unique_ptr<Property>> property_list;
-    QSqlQuery property_query{ _db };
+    QSqlQuery property_query{ QSqlDatabase::database(_db_name) };
     property_query.prepare(select_all_properties);
     property_query.exec();
     while (property_query.next()) {
@@ -4757,9 +4757,9 @@ std::vector<std::unique_ptr<Property>> SQLite3Driver::get_properties() const
 }
 std::vector<std::unique_ptr<Restriction>> SQLite3Driver::get_restrictions() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<std::unique_ptr<Restriction>> restriction_list;
-    QSqlQuery restriction_query{ _db };
+    QSqlQuery restriction_query{ QSqlDatabase::database(_db_name) };
     restriction_query.prepare(select_all_restrictions);
     restriction_query.exec();
     while (restriction_query.next()) {
@@ -4776,9 +4776,9 @@ std::vector<std::unique_ptr<Restriction>> SQLite3Driver::get_restrictions() cons
 }
 std::vector<std::unique_ptr<Role>> SQLite3Driver::get_roles() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<std::unique_ptr<Role>> role_list;
-    QSqlQuery role_query{ _db };
+    QSqlQuery role_query{ QSqlDatabase::database(_db_name) };
     role_query.prepare(select_all_roles);
     role_query.exec();
     while (role_query.next()) {
@@ -4795,9 +4795,9 @@ std::vector<std::unique_ptr<Role>> SQLite3Driver::get_roles() const
 }
 std::vector<std::unique_ptr<Role>> SQLite3Driver::get_roles_in_scene(Scene* scene) const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<std::unique_ptr<Role>> role_list;
-    QSqlQuery role_query{ _db };
+    QSqlQuery role_query{ QSqlDatabase::database(_db_name) };
     role_query.prepare(sqlite3::select_roles_in_scene);
     role_query.bindValue(":scene_id", scene->id);
     role_query.exec();
@@ -4815,9 +4815,9 @@ std::vector<std::unique_ptr<Role>> SQLite3Driver::get_roles_in_scene(Scene* scen
 }
 std::vector<std::unique_ptr<Treatment>> SQLite3Driver::get_treatments() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<std::unique_ptr<Treatment>> treatment_list;
-    QSqlQuery treatment_query{ _db };
+    QSqlQuery treatment_query{ QSqlDatabase::database(_db_name) };
     treatment_query.prepare(select_all_treatments);
     treatment_query.exec();
     while (treatment_query.next()) {
@@ -4837,9 +4837,9 @@ std::vector<std::unique_ptr<Treatment>> SQLite3Driver::get_treatments() const
 }
 std::vector<std::unique_ptr<Scene>> SQLite3Driver::get_scenes() const
 {
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     std::vector<std::unique_ptr<Scene>> scene_list;
-    QSqlQuery scene_query{ _db };
+    QSqlQuery scene_query{ QSqlDatabase::database(_db_name) };
     scene_query.prepare(select_all_scenes);
     scene_query.exec();
     while (scene_query.next()) {
@@ -4869,10 +4869,10 @@ bool SQLite3Driver::remove_equipment_from_treatments(int equipment_id)
 bool SQLite3Driver::remove_equipment_from_treatments(std::string equipment_id)
 {
   auto treatments = get_treatments();
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     for (auto& treatment : treatments) {
       std::string equipment = list_remove(treatment->equipment.toStdString(), equipment_id);
-      QSqlQuery query{ _db };
+      QSqlQuery query{ QSqlDatabase::database(_db_name) };
       query.prepare(update_treatment_by_id);
       query.bindValue(":id", treatment->id);
       query.bindValue(":citations", treatment->citations);
@@ -4896,10 +4896,10 @@ bool SQLite3Driver::remove_citation_from_treatments(int citation_id)
 bool SQLite3Driver::remove_citation_from_treatments(std::string citation_id)
 {
   auto treatments = get_treatments();
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     for (auto& treatment : treatments) {
       std::string citations = list_remove(treatment->citations.toStdString(), citation_id);
-      QSqlQuery query{ _db };
+      QSqlQuery query{ QSqlDatabase::database(_db_name) };
       query.prepare(update_treatment_by_id);
       query.bindValue(":id", treatment->id);
       query.bindValue(":citations", citations.c_str());
@@ -4923,10 +4923,10 @@ bool SQLite3Driver::remove_citation_from_injuries(int citation_id)
 bool SQLite3Driver::remove_citation_from_injuries(std::string citation_id)
 {
   auto injuries = get_injuries();
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     for (auto& injury : injuries) {
       std::string citations = list_remove(injury->citations.toStdString(), citation_id);
-      QSqlQuery query{ _db };
+      QSqlQuery query{ QSqlDatabase::database(_db_name) };
       query.prepare(update_injury_by_id);
       query.bindValue(":id", injury->id);
       query.bindValue(":citations", citations.c_str());
@@ -4951,10 +4951,10 @@ bool SQLite3Driver::remove_citation_from_equipment(int citation_id)
 bool SQLite3Driver::remove_citation_from_equipment(std::string citation_id)
 {
   auto equipments = get_equipments();
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     for (auto& equipment : equipments) {
       std::string citations = list_remove(equipment->citations.toStdString(), citation_id);
-      QSqlQuery query{ _db };
+      QSqlQuery query{ QSqlDatabase::database(_db_name) };
       query.prepare(update_equipment_by_id);
       query.bindValue(":id", equipment->id);
       query.bindValue(":name", equipment->name);
@@ -4978,10 +4978,10 @@ bool SQLite3Driver::remove_citation_from_objectives(int citation_id)
 bool SQLite3Driver::remove_citation_from_objectives(std::string citation_id)
 {
   auto objectives = get_objectives();
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     for (auto& objective : objectives) {
       std::string citations = list_remove(objective->citations.toStdString(), citation_id);
-      QSqlQuery query{ _db };
+      QSqlQuery query{ QSqlDatabase::database(_db_name) };
       query.prepare(update_objective_by_id);
       query.bindValue(":id", objective->id);
       query.bindValue(":name", objective->name);
@@ -5003,13 +5003,13 @@ bool SQLite3Driver::remove_injury_from_injury_sets(int injury_id)
 bool SQLite3Driver::remove_injury_from_injury_sets(std::string injury_id)
 {
   auto injury_sets = get_injury_sets();
-  if (_db.isOpen()) {
+  if (QSqlDatabase::database(_db_name).isOpen()) {
     for (auto& injury_set : injury_sets) {
       std::string descriptions = list_remove_index(injury_set->description.toStdString(), list_find(injury_set->injuries.toStdString(), injury_id));
       std::string severities = list_remove_index(injury_set->severities.toStdString(), list_find(injury_set->injuries.toStdString(), injury_id));
       std::string locations = list_remove_index(injury_set->locations.toStdString(), list_find(injury_set->injuries.toStdString(), injury_id));
       std::string injuries = list_remove(injury_set->injuries.toStdString(), injury_id);
-      QSqlQuery query{ _db };
+      QSqlQuery query{ QSqlDatabase::database(_db_name) };
       query.prepare(update_injury_set_by_id);
       query.bindValue(":id", injury_set->id);
       query.bindValue(":name", injury_set->name);
