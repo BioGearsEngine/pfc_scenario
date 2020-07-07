@@ -302,7 +302,7 @@ ColumnLayout {
             if (count == 0) {
               return
             }
-            self.event_id = listArea.model.get(listArea.currentIndex).event_id
+            self.event_id = listArea.model.get(listArea.currentIndex).id
             self.name = listArea.model.get(listArea.currentIndex).name
             self_scene.scene_id = root.model.get(root.index).id
             self_scene.name = root.model.get(root.index).name          

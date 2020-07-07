@@ -19,6 +19,7 @@ ColumnLayout {
     }
     id: root
     property SQLBackend backend
+    property int index
     clip : true
     anchors.fill : parent
     Label {
@@ -356,6 +357,24 @@ ColumnLayout {
               });
           }
         }
+      }
+    }
+    onIndexChanged : {
+      if (index == 3) {
+        citListArea.model.clear()
+        var c_count = backend.citation_count();
+        root.backend.citations()
+        while ( root.backend.next_citation(cit) ){  
+          citListArea.model.insert(citListArea.model.count,
+            {
+             id  : cit.citation_id,
+             key: "%1".arg(cit.key), 
+             title: "%1".arg(cit.title),
+             authors: "%1".arg(cit.authors),
+             year: "%1".arg(cit.year),
+             publisher: "%1".arg(cit.publisher)
+            });
+        }        
       }
     }
 }

@@ -11,7 +11,6 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 GridLayout {
   id: root
   property SQLBackend backend
-  property string scenarioTitle
   property int index
   width: parent.width
   height: parent.height
@@ -29,6 +28,7 @@ GridLayout {
       id : summary_left
       backend : root.backend
       anchors.fill : parent
+      index : root.index
     }
   }
 
@@ -43,6 +43,7 @@ GridLayout {
       id : summary_right
       backend : root.backend
       anchors.fill : parent
+      index : root.index
     }
   }
 }

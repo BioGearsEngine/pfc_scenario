@@ -86,6 +86,7 @@ Page {
       ScenarioSummary{
         id: summary
         backend : root.backend
+        index : tabs.currentIndex
       }
     }
   }

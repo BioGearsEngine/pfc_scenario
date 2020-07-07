@@ -20,6 +20,7 @@ ColumnLayout {
     }
     id: root
     property SQLBackend backend
+    property int index
     clip : true
     anchors.fill : parent
     Label {
@@ -125,7 +126,7 @@ ColumnLayout {
       Layout.bottomMargin : 5
     }
     Rectangle {
-      id : eveList
+      id : rolList
       //anchors { top : refList.bottom ; bottom : parent.bottom ; left : parent.left ; right : parent.right }
       //height : parent.height / 2
       Layout.fillHeight : true
@@ -335,7 +336,45 @@ ColumnLayout {
         }
       }
     }
-
+    onIndexChanged : {
+      if (index == 3) {
+        rolListArea.model.clear()
+        var r_count = backend.role_count();
+        root.backend.roles()
+        while ( root.backend.next_role(rol) ){  
+          rolListArea.model.insert(rolListArea.model.count,
+            {
+             id  : rol.role_id,
+             name: "%1".arg(rol.name), 
+             description: "%1".arg(rol.description)
+            });
+        }
+        objListArea.model.clear()
+        var o_count = backend.objective_count();
+        root.backend.objectives()
+        while ( root.backend.next_objective(obj) ){
+          objListArea.model.insert(objListArea.model.count,
+            {
+             id  : obj.objective_id,
+             name: "%1".arg(obj.name), 
+             description: "%1".arg(obj.description),
+             citations : obj.citations
+            });
+        }
+        sceListArea.model.clear()
+        var s_count = backend.scene_count();
+        root.backend.scenes()
+        while ( root.backend.next_scene(sce) ){ 
+          sceListArea.model.insert(sceListArea.model.count,
+            {
+             id  : sce.scene_id,
+             name: "%1".arg(sce.name), 
+             description : sce.description,
+             details : sce.details
+            });
+        }
+      }
+    }
 }
 
 
