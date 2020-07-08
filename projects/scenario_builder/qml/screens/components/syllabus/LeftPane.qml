@@ -30,7 +30,42 @@ Rectangle {
   ColumnLayout {
     anchors.fill : root
 
-
+    Shortcut {
+      sequence: "F1"
+      onActivated: {
+        syllabus_tabs.currentIndex = 0
+      }
+    }
+    Shortcut {
+      sequence: "F2"
+      onActivated: {
+        syllabus_tabs.currentIndex = 1
+      }
+    }
+    Shortcut {
+      sequence: "F3"
+      onActivated: {
+        syllabus_tabs.currentIndex = 2
+      }
+    }
+    Shortcut {
+      sequence: "F4"
+      onActivated: {
+        syllabus_tabs.currentIndex = 3
+      }
+    }
+    Shortcut {
+      sequence: "F5"
+      onActivated: {
+        syllabus_tabs.currentIndex = 4
+      }
+    }
+    Shortcut {
+      sequence: "F6"
+      onActivated: {
+        syllabus_tabs.currentIndex = 5
+      }
+    }
     TabBar {
       id: syllabus_tabs
       Layout.fillWidth: true
