@@ -132,21 +132,16 @@ Rectangle {
     }
   }
   onTopIndexChanged : {
-    console.log("111")
     if (topIndex == 2) {
       f1.enabled = true
       f2.enabled = true
       f3.enabled = true
       f4.enabled = true
-      f5.enabled = true
-      f6.enabled = true
     } else {
       f1.enabled = false
       f2.enabled = false
       f3.enabled = false
       f4.enabled = false
-      f5.enabled = false
-      f6.enabled = false
     }
   }
 }
