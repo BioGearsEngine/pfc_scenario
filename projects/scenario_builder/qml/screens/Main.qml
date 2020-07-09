@@ -52,9 +52,35 @@ Page {
         width: implicitWidth
       }
       currentIndex : 1
-
     }
-
+    Shortcut {
+      id: alt1
+      sequence: "ALT+1"
+      onActivated: {
+        tabs.currentIndex = 0
+      }
+    }
+    Shortcut {
+      id: alt2
+      sequence: "ALT+2"
+      onActivated: {
+        tabs.currentIndex = 1
+      }
+    }
+    Shortcut {
+      id: alt3
+      sequence: "ALT+3"
+      onActivated: {
+        tabs.currentIndex = 2
+      }
+    }
+    Shortcut {
+      id: alt4
+      sequence: "ALT+4"
+      onActivated: {
+        tabs.currentIndex = 3
+      }
+    }
     StackLayout {
       Layout.alignment: Qt.AlignHCenter
       Layout.fillHeight: true
@@ -77,11 +103,13 @@ Page {
       ScenarioSyllabus {
          id: syllabus
          backend : root.backend
+         topIndex : tabs.currentIndex
       }
       //TAB:NARRATIVE
       ScenarioNarrative{
         id: narrative
         backend : root.backend
+        topIndex : tabs.currentIndex
       }
       ScenarioSummary{
         id: summary

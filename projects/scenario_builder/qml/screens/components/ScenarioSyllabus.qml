@@ -11,6 +11,7 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 GridLayout {
   id: root
   property SQLBackend backend
+  property int topIndex
 
   width: parent.width
   height: parent.height
@@ -19,6 +20,7 @@ GridLayout {
   LeftPane{
     id: syllabus_leftPane
     backend : root.backend
+    topIndex : root.topIndex
     Layout.preferredWidth: parent.width / 2
     Layout.fillHeight: true
   }

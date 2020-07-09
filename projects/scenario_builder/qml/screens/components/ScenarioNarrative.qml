@@ -11,7 +11,8 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 RowLayout {
   id: root
   property SQLBackend backend
-  
+  property int topIndex 
+
   Layout.fillWidth : true
   Layout.fillHeight: true
   spacing: 5
@@ -28,6 +29,7 @@ RowLayout {
     model : narrative_left.model
     index : narrative_left.index
     count : narrative_left.count
+    topIndex : root.topIndex
     onIndexChanged : {
       
     } 

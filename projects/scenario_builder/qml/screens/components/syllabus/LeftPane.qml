@@ -26,41 +26,48 @@ Rectangle {
 
   property SQLBackend backend
   property ListElement modelData
+  property int topIndex
 
   ColumnLayout {
     anchors.fill : root
 
     Shortcut {
+      id: f1
       sequence: "F1"
       onActivated: {
         syllabus_tabs.currentIndex = 0
       }
     }
     Shortcut {
+      id: f2
       sequence: "F2"
       onActivated: {
         syllabus_tabs.currentIndex = 1
       }
     }
     Shortcut {
+      id: f3
       sequence: "F3"
       onActivated: {
         syllabus_tabs.currentIndex = 2
       }
     }
     Shortcut {
+      id: f4
       sequence: "F4"
       onActivated: {
         syllabus_tabs.currentIndex = 3
       }
     }
     Shortcut {
+      id: f5
       sequence: "F5"
       onActivated: {
         syllabus_tabs.currentIndex = 4
       }
     }
     Shortcut {
+      id: f6
       sequence: "F6"
       onActivated: {
         syllabus_tabs.currentIndex = 5
@@ -151,6 +158,23 @@ Rectangle {
           equipment.reloadEquipmentList()
         }
       }
+    }
+  }
+  onTopIndexChanged : {
+    if (topIndex == 1) {
+      f1.enabled = true
+      f2.enabled = true
+      f3.enabled = true
+      f4.enabled = true
+      f5.enabled = true
+      f6.enabled = true
+    } else {
+      f1.enabled = false
+      f2.enabled = false
+      f3.enabled = false
+      f4.enabled = false
+      f5.enabled = false
+      f6.enabled = false
     }
   }
 }

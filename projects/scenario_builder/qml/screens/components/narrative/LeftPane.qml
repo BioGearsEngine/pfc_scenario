@@ -14,7 +14,6 @@ ColumnLayout {
   readonly property alias model : listArea.model 
   readonly property alias index : listArea.currentIndex
   readonly property alias count : listArea.count
-
   Scene {
     id : self
   }

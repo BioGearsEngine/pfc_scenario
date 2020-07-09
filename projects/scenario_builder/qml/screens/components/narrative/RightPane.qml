@@ -13,6 +13,7 @@ Rectangle {
   property ListModel model
   property int index // creates new int, which is publicly assigned in ScenarioNarrative.qml
   property int count
+  property int topIndex
 
   property SQLBackend backend
   property ListElement modelData
@@ -23,6 +24,38 @@ Rectangle {
   Layout.margins: 5
   ColumnLayout {
     anchors.fill: root
+    Shortcut {
+      id: f1
+      sequence: "F1"
+      enabled : false
+      onActivated: {
+        narrative_tabs.currentIndex = 0
+      }
+    }
+    Shortcut {
+      id: f2
+      sequence: "F2"
+      enabled : false
+      onActivated: {
+        narrative_tabs.currentIndex = 1
+      }
+    }
+    Shortcut {
+      id: f3
+      sequence: "F3"
+      enabled : false
+      onActivated: {
+        narrative_tabs.currentIndex = 2
+      }
+    }
+    Shortcut {
+      id: f4
+      sequence: "F4"
+      enabled : false
+      onActivated: {
+        narrative_tabs.currentIndex = 3
+      }
+    }
     width: parent.width
     height: parent.height
     TabBar {
@@ -96,6 +129,24 @@ Rectangle {
         index : root.index
         count : root.count
       }
+    }
+  }
+  onTopIndexChanged : {
+    console.log("111")
+    if (topIndex == 2) {
+      f1.enabled = true
+      f2.enabled = true
+      f3.enabled = true
+      f4.enabled = true
+      f5.enabled = true
+      f6.enabled = true
+    } else {
+      f1.enabled = false
+      f2.enabled = false
+      f3.enabled = false
+      f4.enabled = false
+      f5.enabled = false
+      f6.enabled = false
     }
   }
 }
