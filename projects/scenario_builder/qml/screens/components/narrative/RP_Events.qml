@@ -89,7 +89,9 @@ ColumnLayout {
               {
              "id" : self.event_id,
              "name": "%1".arg(self.name), 
-             "description": "%1".arg(self.description)
+             "description": "%1".arg(self.description),
+               "actor_1": "%1".arg(self.actor_1),
+               "actor_2": "%1".arg(self.actor_2)
               });
             }
           }
@@ -115,7 +117,9 @@ ColumnLayout {
             {
              "id" : self.event_id,
              "name": "%1".arg(self.name), 
-             "description": "%1".arg(self.description)}
+             "description": "%1".arg(self.description),
+               "actor_1": "%1".arg(self.actor_1),
+               "actor_2": "%1".arg(self.actor_2)}
           );
           ++next;
         }
@@ -142,7 +146,9 @@ ColumnLayout {
               {
              "id" : self.event_id,
              "name": "%1".arg(self.name), 
-             "description": "%1".arg(self.description)
+             "description": "%1".arg(self.description),
+               "actor_1": "%1".arg(self.actor_1),
+               "actor_2": "%1".arg(self.actor_2)
               });
             }
           }
@@ -264,7 +270,9 @@ ColumnLayout {
               {
                "id" : self.event_id,
                "name": "%1".arg(self.name), 
-               "description": "%1".arg(self.description)
+               "description": "%1".arg(self.description),
+               "actor_1": "%1".arg(self.actor_1),
+               "actor_2": "%1".arg(self.actor_2)
                 });
             }
           }
@@ -294,7 +302,9 @@ ColumnLayout {
               {
                "id" : self.event_id,
                "name": "%1".arg(self.name), 
-               "description": "%1".arg(self.description)}
+               "description": "%1".arg(self.description),
+               "actor_1": "%1".arg(self.actor_1),
+               "actor_2": "%1".arg(self.actor_2)}
             );
             ++next;
           }
@@ -321,7 +331,6 @@ ColumnLayout {
         highlightMoveDuration : 1
         highlight: Rectangle {
             color: '#1111110F'
-
             Layout.alignment: Qt.AlignTop
             Layout.fillWidth: true
             Layout.margins : 5
@@ -347,6 +356,8 @@ ColumnLayout {
               eventEdit.name = listArea.model.get(index).name
               eventEdit.description = listArea.model.get(index).description
               eventEdit.eventID = listArea.model.get(index).id
+              eventEdit.actor_1 = listArea.model.get(index).actor_1
+              eventEdit.actor_2 = listArea.model.get(index).actor_2
               contentStack.currentIndex = 1
             }
           }  
@@ -404,6 +415,8 @@ ColumnLayout {
                id  : self.event_id,
                name: "%1".arg(self.name), 
                description: "%1".arg(self.description),
+               actor_1: "%1".arg(self.actor_1),
+               actor_2: "%1".arg(self.actor_2)//,
               });
           }
         }
@@ -429,7 +442,9 @@ ColumnLayout {
             {
               "id" : self.event_id,
               "name" : "%1".arg(self.name),
-              "description" : "%1".arg(self.description)
+              "description" : "%1".arg(self.description),
+               "actor_1": "%1".arg(self.actor_1),
+               "actor_2": "%1".arg(self.actor_2)
             });
           }
         }        
@@ -451,7 +466,9 @@ ColumnLayout {
           {
             "id" : self.event_id,
             "name" : "%1".arg(self.name),
-            "description" : "%1".arg(self.description)
+            "description" : "%1".arg(self.description),
+               "actor_1": "%1".arg(self.actor_1),
+               "actor_2": "%1".arg(self.actor_2)
           });
         }
       }
