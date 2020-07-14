@@ -91,7 +91,9 @@ ColumnLayout {
              "name": "%1".arg(self.name), 
              "description": "%1".arg(self.description),
                "actor_1": "%1".arg(self.actor_1),
-               "actor_2": "%1".arg(self.actor_2)
+               "actor_2": "%1".arg(self.actor_2),
+               "fidelity": "%1".arg(self.fidelity),
+               "details": "%1".arg(self.details)
               });
             }
           }
@@ -119,7 +121,9 @@ ColumnLayout {
              "name": "%1".arg(self.name), 
              "description": "%1".arg(self.description),
                "actor_1": "%1".arg(self.actor_1),
-               "actor_2": "%1".arg(self.actor_2)}
+               "actor_2": "%1".arg(self.actor_2),
+               "fidelity": "%1".arg(self.fidelity),
+               "details": "%1".arg(self.details)}
           );
           ++next;
         }
@@ -148,7 +152,9 @@ ColumnLayout {
              "name": "%1".arg(self.name), 
              "description": "%1".arg(self.description),
                "actor_1": "%1".arg(self.actor_1),
-               "actor_2": "%1".arg(self.actor_2)
+               "actor_2": "%1".arg(self.actor_2),
+               "fidelity": "%1".arg(self.fidelity),
+               "details": "%1".arg(self.details)
               });
             }
           }
@@ -272,7 +278,9 @@ ColumnLayout {
                "name": "%1".arg(self.name), 
                "description": "%1".arg(self.description),
                "actor_1": "%1".arg(self.actor_1),
-               "actor_2": "%1".arg(self.actor_2)
+               "actor_2": "%1".arg(self.actor_2),
+               "fidelity": "%1".arg(self.fidelity),
+               "details": "%1".arg(self.details)
                 });
             }
           }
@@ -304,7 +312,9 @@ ColumnLayout {
                "name": "%1".arg(self.name), 
                "description": "%1".arg(self.description),
                "actor_1": "%1".arg(self.actor_1),
-               "actor_2": "%1".arg(self.actor_2)}
+               "actor_2": "%1".arg(self.actor_2),
+               "fidelity": "%1".arg(self.fidelity),
+               "details": "%1".arg(self.details)}
             );
             ++next;
           }
@@ -358,6 +368,17 @@ ColumnLayout {
               eventEdit.eventID = listArea.model.get(index).id
               eventEdit.actor_1 = listArea.model.get(index).actor_1
               eventEdit.actor_2 = listArea.model.get(index).actor_2
+              eventEdit.details = listArea.model.get(index).details
+              var fid = listArea.model.get(index).fidelity
+              if (fid == "LOW") {
+                eventEdit.fidelityIndex = 0
+              } else if (fid == "MEDIUM") {
+                eventEdit.fidelityIndex = 1
+              } else if (fid == "HIGH") {
+                eventEdit.fidelityIndex = 2
+              } else {
+                eventEdit.fidelityIndex = 0
+              }
               contentStack.currentIndex = 1
             }
           }  
@@ -416,7 +437,9 @@ ColumnLayout {
                name: "%1".arg(self.name), 
                description: "%1".arg(self.description),
                actor_1: "%1".arg(self.actor_1),
-               actor_2: "%1".arg(self.actor_2)//,
+               actor_2: "%1".arg(self.actor_2),
+               "fidelity": "%1".arg(self.fidelity),
+               "details": "%1".arg(self.details)
               });
           }
         }
@@ -444,7 +467,9 @@ ColumnLayout {
               "name" : "%1".arg(self.name),
               "description" : "%1".arg(self.description),
                "actor_1": "%1".arg(self.actor_1),
-               "actor_2": "%1".arg(self.actor_2)
+               "actor_2": "%1".arg(self.actor_2),
+               "fidelity": "%1".arg(self.fidelity),
+               "details": "%1".arg(self.details)
             });
           }
         }        
@@ -468,7 +493,9 @@ ColumnLayout {
             "name" : "%1".arg(self.name),
             "description" : "%1".arg(self.description),
                "actor_1": "%1".arg(self.actor_1),
-               "actor_2": "%1".arg(self.actor_2)
+               "actor_2": "%1".arg(self.actor_2),
+               "fidelity": "%1".arg(self.fidelity),
+               "details": "%1".arg(self.details)
           });
         }
       }

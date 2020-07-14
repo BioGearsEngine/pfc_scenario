@@ -21,6 +21,7 @@ ScrollView {
 	property alias details : details.text
 	property alias fidelity : fidelitySelect.displayText
 	property alias type : typeSelect.displayText
+	property alias fidelityIndex : fidelitySelect.currentIndex
 	property int eventID
 	signal exit() 
 	onWidthChanged: {
