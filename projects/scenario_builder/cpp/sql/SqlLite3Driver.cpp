@@ -2673,6 +2673,7 @@ inline void assign_event(QSqlRecord& record, Event& event)
   event.name = record.value(EVENT_NAME).toString();
   event.description = record.value(EVENT_DESCRIPTION).toString();
   event.fidelity = record.value(EVENT_FIDELITY).toString();
+  event.type = record.value(EVENT_TYPE).toString();
   event.category = record.value(EVENT_CATEGORY).toString();
   event.fk_actor_1 = record.value(EVENT_ACTOR_1).toString();
   event.fk_actor_2 = record.value(EVENT_ACTOR_2).toString();
@@ -2808,6 +2809,7 @@ bool SQLite3Driver::update_event(Event* event)
     query.bindValue(":description", event->description);
     query.bindValue(":category", event->category);
     query.bindValue(":fidelity", event->fidelity);
+    query.bindValue(":type", event->type);
     query.bindValue(":actor_1", event->fk_actor_1);
     query.bindValue(":actor_2", event->fk_actor_2);
     query.bindValue(":details", event->details);

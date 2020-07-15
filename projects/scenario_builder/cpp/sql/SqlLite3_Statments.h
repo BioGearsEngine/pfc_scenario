@@ -213,6 +213,7 @@ inline namespace sqlite3 {
     EVENT_DESCRIPTION,
     EVENT_CATEGORY,
     EVENT_FIDELITY,
+    EVENT_TYPE,
     EVENT_ACTOR_1,
     EVENT_ACTOR_2,
     EVENT_EQUIPMENT,
@@ -227,6 +228,7 @@ inline namespace sqlite3 {
     description TEXT,
     category TEXT,
     fidelity TEXT,
+    type TEXT,
     actor_1 Varchar(64) NOT NULL,
     actor_2 Varchar(64),
     equipment TEXT,
@@ -236,7 +238,7 @@ inline namespace sqlite3 {
   constexpr auto drop_all_events = R"( DELETE FROM events; )";
   constexpr auto count_events = R"( SELECT COUNT(event_id) FROM events; )";
   constexpr auto count_events_in_scene = R"( SELECT COUNT(event_map_id) FROM event_maps WHERE :id = fk_scene ; )";
-  constexpr auto select_all_events = R"( SELECT event_id,name,description,category,fidelity,actor_1,actor_2, equipment, details FROM events ORDER BY name; )";
+  constexpr auto select_all_events = R"( SELECT event_id,name,description,category,fidelity,type,actor_1,actor_2, equipment, details FROM events ORDER BY name; )";
 
   constexpr auto select_event_by_id
     = R"( SELECT * FROM events WHERE event_id = :id ; )";
@@ -248,6 +250,7 @@ inline namespace sqlite3 {
                 , description = :description
                 , category = :category
                 , fidelity = :fidelity
+                , type = :type
                 , actor_1 = :actor_1
                 , actor_2 = :actor_2
                 , equipment = :equipment
@@ -258,13 +261,14 @@ inline namespace sqlite3 {
     = R"( DELETE FROM events WHERE event_id = :id; )";
   constexpr auto insert_or_update_events
     = R"( INSERT INTO events
-          (name, description, category, fidelity, actor_1, actor_2, equipment, details)
-          VALUES (:name, :description, :category, :fidelity, :actor_1, :actor_2, :equipment, :details)
+          (name, description, category, fidelity, type, actor_1, actor_2, equipment, details)
+          VALUES (:name, :description, :category, :fidelity, :type, :actor_1, :actor_2, :equipment, :details)
           ON CONFLICT (name)
           DO UPDATE SET name = excluded.name
                         , description = excluded.description
                         , category = excluded.category
                         , fidelity = excluded.fidelity
+                        , type = excluded.type
                         , actor_1 = excluded.actor_1
                         , actor_2 = excluded.actor_2
                         , equipment = excluded.equipment
