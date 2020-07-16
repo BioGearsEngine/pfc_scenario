@@ -118,8 +118,8 @@ Event {
 				self.actor_1 = root.actor_1
 				self.actor_2 = root.actor_2
 				self.details = root.details
-				self.fidelity = root.fidelity
-				self.category = root.type
+				self.fidelity = root.fidelity.toUpperCase()
+				self.category = root.type.toUpperCase()
 				root.backend.update_event(self)
 			}
 		}

@@ -93,6 +93,7 @@ ColumnLayout {
                "actor_1": "%1".arg(self.actor_1),
                "actor_2": "%1".arg(self.actor_2),
                "fidelity": "%1".arg(self.fidelity),
+               "category": "%1".arg(self.type),
                "details": "%1".arg(self.details)
               });
             }
@@ -123,6 +124,7 @@ ColumnLayout {
                "actor_1": "%1".arg(self.actor_1),
                "actor_2": "%1".arg(self.actor_2),
                "fidelity": "%1".arg(self.fidelity),
+               "category": "%1".arg(self.type),
                "details": "%1".arg(self.details)}
           );
           ++next;
@@ -154,6 +156,7 @@ ColumnLayout {
                "actor_1": "%1".arg(self.actor_1),
                "actor_2": "%1".arg(self.actor_2),
                "fidelity": "%1".arg(self.fidelity),
+               "category": "%1".arg(self.type),
                "details": "%1".arg(self.details)
               });
             }
@@ -280,6 +283,7 @@ ColumnLayout {
                "actor_1": "%1".arg(self.actor_1),
                "actor_2": "%1".arg(self.actor_2),
                "fidelity": "%1".arg(self.fidelity),
+               "category": "%1".arg(self.type),
                "details": "%1".arg(self.details)
                 });
             }
@@ -314,6 +318,7 @@ ColumnLayout {
                "actor_1": "%1".arg(self.actor_1),
                "actor_2": "%1".arg(self.actor_2),
                "fidelity": "%1".arg(self.fidelity),
+               "category": "%1".arg(self.type),
                "details": "%1".arg(self.details)}
             );
             ++next;
@@ -433,48 +438,56 @@ ColumnLayout {
 
             listArea.model.insert(listArea.model.count,
               {
-               id  : self.event_id,
-               name: "%1".arg(self.name), 
-               description: "%1".arg(self.description),
-               actor_1: "%1".arg(self.actor_1),
-               actor_2: "%1".arg(self.actor_2),
+               "id"  : self.event_id,
+               "name": "%1".arg(self.name), 
+               "description": "%1".arg(self.description),
+               "actor_1": "%1".arg(self.actor_1),
+               "actor_2": "%1".arg(self.actor_2),
                "fidelity": "%1".arg(self.fidelity),
+               "category": "%1".arg(self.type),
                "details": "%1".arg(self.details)
               });
           }
         }
       }
     }
-    EventEditPane {
-      id: eventEdit
+    Rectangle { 
       Layout.fillWidth : true
-      Layout.fillHeight: true
-      Layout.margins : 5  
-      backend: root.backend
-      onExit : {
-        contentStack.currentIndex = 0
-        event_stack.currentIndex = 1
-        var values = model.get(index)
-        if (values) {
-          listArea.model.clear()
-          self_scene.scene_id = root.model.get(root.index).id
-          self_scene.name = root.model.get(root.index).name
-          root.backend.events_in_scene(self_scene)
-          while ( root.backend.next_event(self) ) {
-            listArea.model.insert(listArea.model.count,
-            {
-              "id" : self.event_id,
-              "name" : "%1".arg(self.name),
-              "description" : "%1".arg(self.description),
-               "actor_1": "%1".arg(self.actor_1),
-               "actor_2": "%1".arg(self.actor_2),
-               "fidelity": "%1".arg(self.fidelity),
-               "details": "%1".arg(self.details)
-            });
-          }
-        }        
+      Layout.fillHeight : true
+      Layout.margins : 5
+      border.color : "black"
+      border.width : 1
+      EventEditPane {
+        id: eventEdit
+        anchors.fill : parent
+        anchors.margins : 2
+        backend: root.backend
+        onExit : {
+          contentStack.currentIndex = 0
+          event_stack.currentIndex = 1
+          var values = model.get(index)
+          if (values) {
+            listArea.model.clear()
+            self_scene.scene_id = root.model.get(root.index).id
+            self_scene.name = root.model.get(root.index).name
+            root.backend.events_in_scene(self_scene)
+            while ( root.backend.next_event(self) ) {
+              listArea.model.insert(listArea.model.count,
+              {
+                "id" : self.event_id,
+                "name" : "%1".arg(self.name),
+                "description" : "%1".arg(self.description),
+                 "actor_1": "%1".arg(self.actor_1),
+                 "actor_2": "%1".arg(self.actor_2),
+                 "fidelity": "%1".arg(self.fidelity),
+                 "category": "%1".arg(self.type),
+                 "details": "%1".arg(self.details)
+              });
+            }
+          }        
+        }
+        //border.color : "black"  
       }
-      //border.color : "black"  
     }
     }
   }
@@ -495,6 +508,7 @@ ColumnLayout {
                "actor_1": "%1".arg(self.actor_1),
                "actor_2": "%1".arg(self.actor_2),
                "fidelity": "%1".arg(self.fidelity),
+               "category": "%1".arg(self.type),
                "details": "%1".arg(self.details)
           });
         }

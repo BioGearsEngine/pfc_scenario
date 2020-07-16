@@ -237,7 +237,6 @@ struct Event : public QObject {
   Q_PROPERTY(QString description MEMBER description)
   Q_PROPERTY(QString category MEMBER category)
   Q_PROPERTY(QString fidelity MEMBER fidelity)
-  Q_PROPERTY(QString type MEMBER type)
   Q_PROPERTY(QString actor_1 MEMBER fk_actor_1)
   Q_PROPERTY(QString actor_2 MEMBER fk_actor_2)
   Q_PROPERTY(QString equipmet MEMBER equipment)
@@ -248,7 +247,6 @@ public:
   QString description = "";
   QString category = "";
   QString fidelity = "";
-  QString type = "";
   QString fk_actor_1 = "";
   QString fk_actor_2 = "";
   QString equipment;
@@ -271,7 +269,6 @@ public:
     && description == rhs.description
     && category == rhs.category
     && fidelity == rhs.fidelity
-    && type == rhs.type
     && fk_actor_1 == rhs.fk_actor_1
     && fk_actor_2 == rhs.fk_actor_2
     && equipment == rhs.equipment
@@ -288,7 +285,6 @@ public:
     description = rhs.description;
     category = rhs.category;
     fidelity = rhs.fidelity;
-    type = rhs.type;
     fk_actor_1 = rhs.fk_actor_1;
     fk_actor_2 = rhs.fk_actor_2;
     equipment = rhs.equipment;

@@ -264,14 +264,14 @@ bool SQLite3Driver::populate_db()
   }
   //---Event---
   if (event_count() == 0) {
-    default_event.name = "Event_1";
-    default_event.description = "Description of Event_1";
+    default_event.name = "New Event 1";
+    default_event.description = "Description of Event 1";
     default_event.category = "ACTION";
     default_event.fidelity = "LOW";
     default_event.fk_actor_1 = "";
     default_event.fk_actor_2 = "";
     default_event.equipment = "";
-    default_event.details = "Event_1 details";
+    default_event.details = "";
     if (!update_event(&default_event)) {
       return false;
     }
@@ -329,6 +329,9 @@ bool SQLite3Driver::populate_db()
     default_scene.roles = "";
     default_scene.details = "";
     if (!update_scene(&default_scene)) {
+      return false;
+    }
+    if (!update_event_in_scene(&default_scene, &default_event)) {
       return false;
     }
   }
@@ -2673,7 +2676,6 @@ inline void assign_event(QSqlRecord& record, Event& event)
   event.name = record.value(EVENT_NAME).toString();
   event.description = record.value(EVENT_DESCRIPTION).toString();
   event.fidelity = record.value(EVENT_FIDELITY).toString();
-  event.type = record.value(EVENT_TYPE).toString();
   event.category = record.value(EVENT_CATEGORY).toString();
   event.fk_actor_1 = record.value(EVENT_ACTOR_1).toString();
   event.fk_actor_2 = record.value(EVENT_ACTOR_2).toString();
@@ -2809,7 +2811,6 @@ bool SQLite3Driver::update_event(Event* event)
     query.bindValue(":description", event->description);
     query.bindValue(":category", event->category);
     query.bindValue(":fidelity", event->fidelity);
-    query.bindValue(":type", event->type);
     query.bindValue(":actor_1", event->fk_actor_1);
     query.bindValue(":actor_2", event->fk_actor_2);
     query.bindValue(":details", event->details);
