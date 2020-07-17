@@ -404,32 +404,38 @@ ColumnLayout {
         }
       }
     }
-    RoleEditPane {
-      id: roleEdit
+    Rectangle {
       Layout.fillWidth : true
-      Layout.fillHeight: true
-      Layout.margins : 5  
-      backend: root.backend
-      onExit : {
-        contentStack.currentIndex = 0
-        role_stack.currentIndex = 1
-        var values = model.get(index)
-        if (values) {
-          listArea.model.clear()
-          self_scene.scene_id = root.model.get(root.index).id
-          self_scene.name = root.model.get(root.index).name
-          root.backend.roles_in_scene(self_scene)
-          while ( root.backend.next_role(self) ) {
-            listArea.model.insert(listArea.model.count,
-            {
-              "id" : self.role_id,
-              "name" : "%1".arg(self.name),
-              "description" : "%1".arg(self.description)
-            });
-          }
-        }        
+      Layout.fillHeight : true
+      Layout.margins : 5
+      border.color : "black"
+      border.width : 1      
+      RoleEditPane {
+        id: roleEdit
+        anchors.fill : parent
+        anchors.margins : 2
+        backend: root.backend
+        onExit : {
+          contentStack.currentIndex = 0
+          role_stack.currentIndex = 1
+          var values = model.get(index)
+          if (values) {
+            listArea.model.clear()
+            self_scene.scene_id = root.model.get(root.index).id
+            self_scene.name = root.model.get(root.index).name
+            root.backend.roles_in_scene(self_scene)
+            while ( root.backend.next_role(self) ) {
+              listArea.model.insert(listArea.model.count,
+              {
+                "id" : self.role_id,
+                "name" : "%1".arg(self.name),
+                "description" : "%1".arg(self.description)
+              });
+            }
+          }        
+        }
+        //border.color : "black"  
       }
-      //border.color : "black"  
     }
     }
   }
