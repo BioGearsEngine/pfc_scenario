@@ -121,11 +121,11 @@ ColumnLayout {
              "id" : self.event_id,
              "name": "%1".arg(self.name), 
              "description": "%1".arg(self.description),
-               "actor_1": "%1".arg(self.actor_1),
-               "actor_2": "%1".arg(self.actor_2),
-               "fidelity": "%1".arg(self.fidelity),
-               "category": "%1".arg(self.type),
-               "details": "%1".arg(self.details)}
+             "actor_1": "%1".arg(self.actor_1),
+             "actor_2": "%1".arg(self.actor_2),
+             "fidelity": "%1".arg(self.fidelity),
+             "category": "%1".arg(self.type),
+             "details": "%1".arg(self.details)}
           );
           ++next;
         }
@@ -150,14 +150,14 @@ ColumnLayout {
             while ( root.backend.next_event(self) ) {
               listArea.model.insert(listArea.model.count,
               {
-             "id" : self.event_id,
-             "name": "%1".arg(self.name), 
-             "description": "%1".arg(self.description),
-               "actor_1": "%1".arg(self.actor_1),
-               "actor_2": "%1".arg(self.actor_2),
-               "fidelity": "%1".arg(self.fidelity),
-               "category": "%1".arg(self.type),
-               "details": "%1".arg(self.details)
+              "id" : self.event_id,
+              "name": "%1".arg(self.name), 
+              "description": "%1".arg(self.description),
+              "actor_1": "%1".arg(self.actor_1),
+              "actor_2": "%1".arg(self.actor_2),
+              "fidelity": "%1".arg(self.fidelity),
+              "category": "%1".arg(self.type),
+              "details": "%1".arg(self.details)
               });
             }
           }
@@ -477,11 +477,11 @@ ColumnLayout {
                 "id" : self.event_id,
                 "name" : "%1".arg(self.name),
                 "description" : "%1".arg(self.description),
-                 "actor_1": "%1".arg(self.actor_1),
-                 "actor_2": "%1".arg(self.actor_2),
-                 "fidelity": "%1".arg(self.fidelity),
-                 "category": "%1".arg(self.type),
-                 "details": "%1".arg(self.details)
+                "actor_1": "%1".arg(self.actor_1),
+                "actor_2": "%1".arg(self.actor_2),
+                "fidelity": "%1".arg(self.fidelity),
+                "category": "%1".arg(self.type),
+                "details": "%1".arg(self.details)
               });
             }
           }        
@@ -505,11 +505,11 @@ ColumnLayout {
             "id" : self.event_id,
             "name" : "%1".arg(self.name),
             "description" : "%1".arg(self.description),
-               "actor_1": "%1".arg(self.actor_1),
-               "actor_2": "%1".arg(self.actor_2),
-               "fidelity": "%1".arg(self.fidelity),
-               "category": "%1".arg(self.type),
-               "details": "%1".arg(self.details)
+            "actor_1": "%1".arg(self.actor_1),
+            "actor_2": "%1".arg(self.actor_2),
+            "fidelity": "%1".arg(self.fidelity),
+            "category": "%1".arg(self.type),
+            "details": "%1".arg(self.details)
           });
         }
       }
