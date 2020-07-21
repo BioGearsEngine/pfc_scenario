@@ -156,7 +156,6 @@ inline namespace sqlite3 {
     EQUIPMENT_DESCRIPTION,
     EQUIPMENT_CITATIONS,
     EQUIPMENT_IMAGE,
-    EQUIPMENT_PROPERTIES,
     EQUIPMENT_COLUMN_COUNT
   };
   // I know that the plural of equipment is 'equipment', but we've made it equipments to be less ambiguous
@@ -167,14 +166,13 @@ inline namespace sqlite3 {
     name Varchar(64) NOT NULL UNIQUE,
     description Varchar(64) NOT NULL,
     citations TEXT,
-    image TEXT,
-	  properties TEXT
+    image TEXT
   );
   )";
   constexpr auto drop_all_equipment = R"( DELETE FROM equipment; )";
   constexpr auto count_equipments = R"( SELECT COUNT(equipment_id) FROM equipments; )";
   constexpr auto count_equipments_in_scene = R"( SELECT COUNT(equipment_map_id) FROM equipment_map WHERE :id = fk_scene ; )";
-  constexpr auto select_all_equipments = R"( SELECT equipment_id,type,name,description,citations,image,properties FROM equipments ORDER BY name; )";
+  constexpr auto select_all_equipments = R"( SELECT equipment_id,type,name,description,citations,image FROM equipments ORDER BY name; )";
 
   constexpr auto select_equipment_by_id
     = R"( SELECT * FROM equipments WHERE equipment_id = :id ; )";
@@ -185,7 +183,6 @@ inline namespace sqlite3 {
               , description = :description
               , citations = :citations
               , image = :image
-			        , properties = :properties
           WHERE equipment_id = :id;
          )";
   constexpr auto delete_equipment_by_id

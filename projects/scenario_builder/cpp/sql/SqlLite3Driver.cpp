@@ -3126,7 +3126,6 @@ inline void assign_equipment(const QSqlRecord& record, Equipment& equipment)
   equipment.description = record.value(EQUIPMENT_DESCRIPTION).toString();
   equipment.citations = record.value(EQUIPMENT_CITATIONS).toString();
   equipment.image = record.value(EQUIPMENT_IMAGE).toString();
-  equipment.properties = record.value(EQUIPMENT_PROPERTIES).toString();
 }
 int SQLite3Driver::equipment_count() const
 {

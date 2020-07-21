@@ -895,42 +895,22 @@ namespace pfc
       void
       image (::std::unique_ptr< image_type > p);
 
-      // properties
-      //
-      typedef ::pfc::schema::properties_list properties_type;
-      typedef ::xsd::cxx::tree::traits< properties_type, char > properties_traits;
-
-      const properties_type&
-      properties () const;
-
-      properties_type&
-      properties ();
-
-      void
-      properties (const properties_type& x);
-
-      void
-      properties (::std::unique_ptr< properties_type > p);
-
       // Constructors.
       //
       equipment (const id_type&,
                  const name_type&,
                  const description_type&,
-                 const citations_type&,
-                 const properties_type&);
+                 const citations_type&);
 
       equipment (const id_type&,
                  const name_type&,
                  const description_type&,
-                 ::std::unique_ptr< citations_type >,
-                 ::std::unique_ptr< properties_type >);
+                 ::std::unique_ptr< citations_type >);
 
       equipment (::std::unique_ptr< id_type >,
                  ::std::unique_ptr< name_type >,
                  ::std::unique_ptr< description_type >,
-                 ::std::unique_ptr< citations_type >,
-                 ::std::unique_ptr< properties_type >);
+                 ::std::unique_ptr< citations_type >);
 
       equipment (const ::xercesc::DOMElement& e,
                  ::xml_schema::flags f = 0,
@@ -964,7 +944,6 @@ namespace pfc
       ::xsd::cxx::tree::one< description_type > description_;
       ::xsd::cxx::tree::one< citations_type > citations_;
       image_optional image_;
-      ::xsd::cxx::tree::one< properties_type > properties_;
     };
 
     class trauma_definition_list: public ::xml_schema::type

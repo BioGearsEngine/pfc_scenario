@@ -405,8 +405,7 @@ namespace schema {
     auto equipment = std::make_unique<pfc::schema::equipment>(schema::make_uuid("Equipment_" + std::to_string(input->id)),
                                                               schema::make_string(input->name.toStdString()),
                                                               schema::make_string(input->description.toStdString()),
-                                                              make_citation_ref_list(input->citations),
-                                                              make_properties_list(input->properties));
+                                                              make_citation_ref_list(input->citations));
     equipment->type(input->type);
     equipment->image(input->image.toStdString());
     return equipment;
@@ -743,15 +742,15 @@ namespace schema {
       pfc::Location temp_location;
       temp_location.id = -1;
       temp_location.name = QString::fromStdString(std::string(scene.name()) + " Location");
-      temp_location.scene_name = QString::fromStdString(scene.name());
-      hours = std::to_string(scene.time_of_day().hours());
-      hours = (hours.length() == 1) ? ("0" + hours) : (hours);
-      minutes = std::to_string(scene.time_of_day().minutes());
-      minutes = (minutes.length() == 1) ? ("0" + minutes) : (minutes);
-      seconds = std::to_string(scene.time_of_day().seconds());
-      seconds = seconds.substr(0, seconds.find("."));
-      seconds = (seconds.length() == 1) ? ("0" + seconds) : (seconds);
-      temp_location.time_of_day = QString::fromStdString(hours + ":" + minutes + ":" + seconds);
+      //temp_location.scene_name = QString::fromStdString(scene.name());
+      //hours = std::to_string(scene.time_of_day().hours());
+      //hours = (hours.length() == 1) ? ("0" + hours) : (hours);
+      //minutes = std::to_string(scene.time_of_day().minutes());
+      //minutes = (minutes.length() == 1) ? ("0" + minutes) : (minutes);
+      //seconds = std::to_string(scene.time_of_day().seconds());
+      //seconds = seconds.substr(0, seconds.find("."));
+      //seconds = (seconds.length() == 1) ? ("0" + seconds) : (seconds);
+      //temp_location.time_of_day = QString::fromStdString(hours + ":" + minutes + ":" + seconds);
 
       if (!_db.update_location(&temp_location)) {
         wasSuccessful = false;

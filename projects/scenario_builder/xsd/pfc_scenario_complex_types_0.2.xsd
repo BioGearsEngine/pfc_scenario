@@ -102,7 +102,6 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
           Description: xs:string : Brief summary of the equipment
           Citations: citation-ref-list : List of reference material for additional information
           Image: xs:string : Visual reference
-          Properties: properties-list : Unique characteristics of the defined equipment
           
         Example:
           ID: 0001
@@ -111,7 +110,6 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
           Description: A tube with a nozzle and piston or bulb for sucking in and ejecting liquid in a thin stream, used for cleaning wounds or body cavities, or fitted with a hollow needle for injecting or withdrawing fluids.
           Citations: https://en.wikipedia.org/wiki/Syringe
           Image:
-          Properties: Essential - 8
       </xs:documentation>
     </xs:annotation>
     <xs:all>
@@ -121,7 +119,6 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
       <xs:element name="description" type="xs:string" minOccurs="1"/>
       <xs:element name="citations" type="citation-ref-list" minOccurs="1"/>
       <xs:element name="image" type="xs:string" minOccurs="0"/>
-      <xs:element name="properties" type="properties-list" minOccurs="1"/>
     </xs:all>
   </xs:complexType>
   <xs:complexType name="trauma-definition-list">

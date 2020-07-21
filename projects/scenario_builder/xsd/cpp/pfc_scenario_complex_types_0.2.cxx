@@ -677,30 +677,6 @@ namespace pfc
       this->image_.set (std::move (x));
     }
 
-    const equipment::properties_type& equipment::
-    properties () const
-    {
-      return this->properties_.get ();
-    }
-
-    equipment::properties_type& equipment::
-    properties ()
-    {
-      return this->properties_.get ();
-    }
-
-    void equipment::
-    properties (const properties_type& x)
-    {
-      this->properties_.set (x);
-    }
-
-    void equipment::
-    properties (::std::unique_ptr< properties_type > x)
-    {
-      this->properties_.set (std::move (x));
-    }
-
 
     // trauma_definition_list
     // 
@@ -4255,16 +4231,14 @@ namespace pfc
     equipment (const id_type& id,
                const name_type& name,
                const description_type& description,
-               const citations_type& citations,
-               const properties_type& properties)
+               const citations_type& citations)
     : ::xml_schema::type (),
       id_ (id, this),
       name_ (name, this),
       type_ (this),
       description_ (description, this),
       citations_ (citations, this),
-      image_ (this),
-      properties_ (properties, this)
+      image_ (this)
     {
     }
 
@@ -4272,16 +4246,14 @@ namespace pfc
     equipment (const id_type& id,
                const name_type& name,
                const description_type& description,
-               ::std::unique_ptr< citations_type > citations,
-               ::std::unique_ptr< properties_type > properties)
+               ::std::unique_ptr< citations_type > citations)
     : ::xml_schema::type (),
       id_ (id, this),
       name_ (name, this),
       type_ (this),
       description_ (description, this),
       citations_ (std::move (citations), this),
-      image_ (this),
-      properties_ (std::move (properties), this)
+      image_ (this)
     {
     }
 
@@ -4289,16 +4261,14 @@ namespace pfc
     equipment (::std::unique_ptr< id_type > id,
                ::std::unique_ptr< name_type > name,
                ::std::unique_ptr< description_type > description,
-               ::std::unique_ptr< citations_type > citations,
-               ::std::unique_ptr< properties_type > properties)
+               ::std::unique_ptr< citations_type > citations)
     : ::xml_schema::type (),
       id_ (std::move (id), this),
       name_ (std::move (name), this),
       type_ (this),
       description_ (std::move (description), this),
       citations_ (std::move (citations), this),
-      image_ (this),
-      properties_ (std::move (properties), this)
+      image_ (this)
     {
     }
 
@@ -4312,8 +4282,7 @@ namespace pfc
       type_ (x.type_, f, this),
       description_ (x.description_, f, this),
       citations_ (x.citations_, f, this),
-      image_ (x.image_, f, this),
-      properties_ (x.properties_, f, this)
+      image_ (x.image_, f, this)
     {
     }
 
@@ -4327,8 +4296,7 @@ namespace pfc
       type_ (this),
       description_ (this),
       citations_ (this),
-      image_ (this),
-      properties_ (this)
+      image_ (this)
     {
       if ((f & ::xml_schema::flags::base) == 0)
       {
@@ -4498,34 +4466,6 @@ namespace pfc
           }
         }
 
-        // properties
-        //
-        {
-          ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
-            ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
-              "properties",
-              "",
-              &::xsd::cxx::tree::factory_impl< properties_type >,
-              false, false, i, n, f, this));
-
-          if (tmp.get () != 0)
-          {
-            if (!properties_.present ())
-            {
-              ::std::unique_ptr< properties_type > r (
-                dynamic_cast< properties_type* > (tmp.get ()));
-
-              if (r.get ())
-                tmp.release ();
-              else
-                throw ::xsd::cxx::tree::not_derived< char > ();
-
-              this->properties_.set (::std::move (r));
-              continue;
-            }
-          }
-        }
-
         break;
       }
 
@@ -4556,13 +4496,6 @@ namespace pfc
           "citations",
           "");
       }
-
-      if (!properties_.present ())
-      {
-        throw ::xsd::cxx::tree::expected_element< char > (
-          "properties",
-          "");
-      }
     }
 
     equipment* equipment::
@@ -4584,7 +4517,6 @@ namespace pfc
         this->description_ = x.description_;
         this->citations_ = x.citations_;
         this->image_ = x.image_;
-        this->properties_ = x.properties_;
       }
 
       return *this;
@@ -12360,14 +12292,6 @@ namespace pfc
         }
       }
 
-      {
-        ::xsd::cxx::tree::std_ostream_map< char >& om (
-          ::xsd::cxx::tree::std_ostream_map_instance< 0, char > ());
-
-        o << ::std::endl << "properties: ";
-        om.insert (o, i.properties ());
-      }
-
       return o;
     }
 
@@ -14425,29 +14349,6 @@ namespace pfc
               "",
               false, false, e, x);
         }
-      }
-
-      // properties
-      //
-      {
-        ::xsd::cxx::tree::type_serializer_map< char >& tsm (
-          ::xsd::cxx::tree::type_serializer_map_instance< 0, char > ());
-
-        const equipment::properties_type& x (i.properties ());
-        if (typeid (equipment::properties_type) == typeid (x))
-        {
-          ::xercesc::DOMElement& s (
-            ::xsd::cxx::xml::dom::create_element (
-              "properties",
-              e));
-
-          s << x;
-        }
-        else
-          tsm.serialize (
-            "properties",
-            "",
-            false, false, e, x);
       }
     }
 

@@ -300,7 +300,6 @@ struct Equipment : public QObject {
   Q_PROPERTY(QString description MEMBER description)
   Q_PROPERTY(QString citations MEMBER citations)
   Q_PROPERTY(QString image MEMBER image)
-  Q_PROPERTY(QString properties MEMBER properties)
 public:
   int32_t id = -1;
   int32_t type = 1;
@@ -308,7 +307,6 @@ public:
   QString description = "";
   QString citations;
   QString image = "";
-  QString properties = "";
   Equipment(QObject* parent = nullptr)
     : QObject(parent)
   {
@@ -326,8 +324,7 @@ public:
       && type == rhs.type
       && description == rhs.description
       && citations == rhs.citations
-      && image == rhs.image
-      && properties == rhs.properties;
+      && image == rhs.image;
   }
   bool operator!=(const Equipment& rhs) const
   {
@@ -341,7 +338,6 @@ public:
     description = rhs.description;
     citations = rhs.citations;
     image = rhs.image;
-    properties = rhs.properties;
   }
 };
 //----End Equipment
