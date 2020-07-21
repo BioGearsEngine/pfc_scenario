@@ -213,7 +213,6 @@ inline namespace sqlite3 {
     EVENT_DESCRIPTION,
     EVENT_CATEGORY,
     EVENT_FIDELITY,
-    EVENT_TYPE,
     EVENT_ACTOR_1,
     EVENT_ACTOR_2,
     EVENT_EQUIPMENT,

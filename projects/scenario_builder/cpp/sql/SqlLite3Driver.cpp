@@ -4189,10 +4189,30 @@ bool SQLite3Driver::remove_scene(Scene* scene)
         qWarning() << query_citation_map.lastError();
         return false;
       }
+      LocationMap location_map;
       QSqlQuery query_location_map(QSqlDatabase::database(_db_name));
-      query_location_map.prepare(sqlite3::delete_location_map_by_fk_scene);
+      query_location_map.prepare(sqlite3::select_location_map_by_fk_scene);
       query_location_map.bindValue(":fk_scene", scene->id);
-      if (!query_location_map.exec()) {
+      if (query_location_map.exec()) {
+        if (query_location_map.next()) {
+          QSqlRecord record = query_location_map.record();
+          assign_location_map(record,location_map);
+          QSqlQuery query_delete_location_map(QSqlDatabase::database(_db_name));
+          query_delete_location_map.prepare(sqlite3::delete_location_map_by_fk_scene);
+          query_delete_location_map.bindValue(":fk_scene", location_map.fk_scene);
+          if (!query_delete_location_map.exec()) {
+            qWarning() << query_delete_location_map.lastError();
+            return false;
+          }
+          QSqlQuery query_location(QSqlDatabase::database(_db_name));
+          query_location.prepare(sqlite3::delete_location_by_id);
+          query_location.bindValue(":id", location_map.fk_location);
+          if (!query_location.exec()) {
+            qWarning() << query_location.lastError();
+            return false;
+          }
+        } 
+      } else {
         qWarning() << query_location_map.lastError();
         return false;
       }

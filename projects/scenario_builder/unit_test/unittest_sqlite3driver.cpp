@@ -3602,10 +3602,8 @@ TEST_F(TEST_FIXTURE_NAME, get_events)
   event_1.fk_actor_2 = "3";
   event_1.equipment = "5;6;7";
   event_1.details = "People cooking and eating meat outdoors";
-
   EXPECT_EQ(0, _db.event_count());
   EXPECT_TRUE(_db.update_event(&event_1));
-
   auto list = _db.get_events();
 
   EXPECT_TRUE(list[0]->name.compare(event_1.name) == 0);
@@ -3639,51 +3637,12 @@ TEST_F(TEST_FIXTURE_NAME, LocationMap_Test_Location_Insertion)
   scene_1.name = "Opening";
   scene_2.name = "Middle";
   scene_3.name = "Ending";
-
-  _db.update_scene(&scene_1);
-  _db.update_scene(&scene_2);
-  _db.update_scene(&scene_3);
-
-  _db.select_scene(&scene_1);
-  _db.select_scene(&scene_2);
-  _db.select_scene(&scene_3);
-
-  location_1.name = "My House";
-  location_1.environment = "Bathroom floor";
-
-  location_2.name = "Work Building";
-  location_2.environment = "Office Floor";
-
-  location_3.name = "Restaurant";
-  location_3.environment = "Booth";
-
-  _db.update_location(&location_1);
-  _db.update_location(&location_2);
-  _db.update_location(&location_3);
-
-  _db.select_location(&location_1);
-  _db.select_location(&location_2);
-  _db.select_location(&location_3);
-
   EXPECT_EQ(0, _db.location_map_count());
-  _db.update_location_in_scene(&scene_1, &location_1);
+  _db.update_scene(&scene_1);
   EXPECT_EQ(1, _db.location_map_count());
-  _db.update_location_in_scene(&scene_1, &location_2);
-  EXPECT_EQ(1, _db.location_map_count());
-  _db.update_location_in_scene(&scene_1, &location_3);
-  EXPECT_EQ(1, _db.location_map_count());
-  _db.update_location_in_scene(&scene_2, &location_1);
+  _db.update_scene(&scene_2);
   EXPECT_EQ(2, _db.location_map_count());
-  _db.update_location_in_scene(&scene_2, &location_2);
-  EXPECT_EQ(2, _db.location_map_count());
-  _db.update_location_in_scene(&scene_2, &location_3);
-  EXPECT_EQ(2, _db.location_map_count());
-  _db.update_location_in_scene(&scene_3, &location_1);
-  EXPECT_EQ(3, _db.location_map_count());
-  _db.update_location_in_scene(&scene_3, &location_2);
-  EXPECT_EQ(3, _db.location_map_count());
-  _db.update_location_in_scene(&scene_3, &location_3);
-  EXPECT_EQ(3, _db.location_map_count());
+  _db.update_scene(&scene_3);
 }
 TEST_F(TEST_FIXTURE_NAME, LocationMap_Test_Location_Removal)
 {
@@ -3694,15 +3653,6 @@ TEST_F(TEST_FIXTURE_NAME, LocationMap_Test_Location_Removal)
   LocationMap map_1;
   LocationMap map_2;
   LocationMap map_3;
-  LocationMap map_4;
-  LocationMap map_5;
-  LocationMap map_6;
-  LocationMap map_7;
-  LocationMap map_8;
-  LocationMap map_9;
-  Location location_1;
-  Location location_2;
-  Location location_3;
   scene_1.name = "Opening";
   scene_2.name = "Middle";
   scene_3.name = "Ending";
@@ -3714,201 +3664,6 @@ TEST_F(TEST_FIXTURE_NAME, LocationMap_Test_Location_Removal)
   _db.select_scene(&scene_1);
   _db.select_scene(&scene_2);
   _db.select_scene(&scene_3);
-
-  location_1.name = "My House";
-  location_1.environment = "Bathroom floor";
-
-  location_2.name = "Work Building";
-  location_2.environment = "Office Floor";
-
-  location_3.name = "Restaurant";
-  location_3.environment = "Booth";
-
-  _db.update_location(&location_1);
-  _db.update_location(&location_2);
-  _db.update_location(&location_3);
-
-  _db.select_location(&location_1);
-  _db.select_location(&location_2);
-  _db.select_location(&location_3);
-
-  _db.update_location_in_scene(&scene_1, &location_1);
-  _db.update_location_in_scene(&scene_2, &location_2);
-  _db.update_location_in_scene(&scene_3, &location_3);
-
-  EXPECT_EQ(3, _db.location_map_count());
-  _db.remove_location_from_scene(&location_1, &scene_1);
-  EXPECT_EQ(2, _db.location_map_count());
-  _db.remove_location_from_scene(&location_2, &scene_2);
-  EXPECT_EQ(1, _db.location_map_count());
-  _db.remove_location_from_scene(&location_3, &scene_3);
-  EXPECT_EQ(0, _db.location_map_count());
-  EXPECT_EQ(3, _db.location_count());
-
-  _db.update_location_in_scene(&scene_1, &location_1);
-  _db.update_location_in_scene(&scene_1, &location_2);
-  _db.update_location_in_scene(&scene_1, &location_3);
-  _db.update_location_in_scene(&scene_2, &location_1);
-  _db.update_location_in_scene(&scene_2, &location_2);
-  _db.update_location_in_scene(&scene_2, &location_3);
-  _db.update_location_in_scene(&scene_3, &location_1);
-  _db.update_location_in_scene(&scene_3, &location_2);
-  _db.update_location_in_scene(&scene_3, &location_3);
-
-  EXPECT_EQ(3, _db.location_map_count());
-  _db.remove_location_from_scene(&location_1, &scene_1);
-  EXPECT_EQ(3, _db.location_map_count());
-  _db.remove_location_from_scene(&location_2, &scene_1);
-  EXPECT_EQ(3, _db.location_map_count());
-  _db.remove_location_from_scene(&location_3, &scene_1);
-  EXPECT_EQ(2, _db.location_map_count());
-  _db.remove_location_from_scene(&location_1, &scene_2);
-  EXPECT_EQ(2, _db.location_map_count());
-  _db.remove_location_from_scene(&location_2, &scene_2);
-  EXPECT_EQ(2, _db.location_map_count());
-  _db.remove_location_from_scene(&location_3, &scene_2);
-  EXPECT_EQ(1, _db.location_map_count());
-  _db.remove_location_from_scene(&location_1, &scene_3);
-  EXPECT_EQ(1, _db.location_map_count());
-  _db.remove_location_from_scene(&location_2, &scene_3);
-  EXPECT_EQ(1, _db.location_map_count());
-  _db.remove_location_from_scene(&location_3, &scene_3);
-  EXPECT_EQ(0, _db.location_map_count());
-  EXPECT_EQ(3, _db.location_count());
-}
-TEST_F(TEST_FIXTURE_NAME, LocationMap_Test_Location_Deletion)
-{
-  using namespace pfc;
-  Scene scene_1;
-  Scene scene_2;
-  Scene scene_3;
-  LocationMap map_1;
-  LocationMap map_2;
-  LocationMap map_3;
-  LocationMap map_4;
-  LocationMap map_5;
-  LocationMap map_6;
-  LocationMap map_7;
-  LocationMap map_8;
-  LocationMap map_9;
-  Location location_1;
-  Location location_2;
-  Location location_3;
-  scene_1.name = "Opening";
-  scene_2.name = "Middle";
-  scene_3.name = "Ending";
-
-  _db.update_scene(&scene_1);
-  _db.update_scene(&scene_2);
-  _db.update_scene(&scene_3);
-
-  _db.select_scene(&scene_1);
-  _db.select_scene(&scene_2);
-  _db.select_scene(&scene_3);
-
-  location_1.name = "My House";
-  location_1.environment = "Bathroom floor";
-
-  location_2.name = "Work Building";
-  location_2.environment = "Office Floor";
-
-  location_3.name = "Restaurant";
-  location_3.environment = "Booth";
-
-  _db.update_location(&location_1);
-  _db.update_location(&location_2);
-  _db.update_location(&location_3);
-
-  _db.select_location(&location_1);
-  _db.select_location(&location_2);
-  _db.select_location(&location_3);
-
-  _db.update_location_in_scene(&scene_1, &location_1);
-  _db.update_location_in_scene(&scene_1, &location_2);
-  _db.update_location_in_scene(&scene_1, &location_3);
-  _db.update_location_in_scene(&scene_2, &location_1);
-  _db.update_location_in_scene(&scene_2, &location_2);
-  _db.update_location_in_scene(&scene_2, &location_3);
-  _db.update_location_in_scene(&scene_3, &location_1);
-  _db.update_location_in_scene(&scene_3, &location_2);
-  _db.update_location_in_scene(&scene_3, &location_3);
-
-  EXPECT_EQ(3, _db.location_map_count());
-  EXPECT_EQ(1, _db.location_count(&scene_1));
-  EXPECT_EQ(1, _db.location_count(&scene_2));
-  EXPECT_EQ(1, _db.location_count(&scene_3));
-  _db.remove_location(&location_1);
-  EXPECT_EQ(3, _db.location_map_count());
-  EXPECT_EQ(1, _db.location_count(&scene_1));
-  EXPECT_EQ(1, _db.location_count(&scene_2));
-  EXPECT_EQ(1, _db.location_count(&scene_3));
-  _db.remove_location(&location_2);
-  EXPECT_EQ(3, _db.location_map_count());
-  EXPECT_EQ(1, _db.location_count(&scene_1));
-  EXPECT_EQ(1, _db.location_count(&scene_2));
-  EXPECT_EQ(1, _db.location_count(&scene_3));
-  _db.remove_location(&location_3);
-  EXPECT_EQ(0, _db.location_map_count());
-  EXPECT_EQ(0, _db.location_count(&scene_1));
-  EXPECT_EQ(0, _db.location_count(&scene_2));
-  EXPECT_EQ(0, _db.location_count(&scene_3));
-}
-TEST_F(TEST_FIXTURE_NAME, LocationMap_Test_Scene_Deletion)
-{
-  using namespace pfc;
-  Scene scene_1;
-  Scene scene_2;
-  Scene scene_3;
-  LocationMap map_1;
-  LocationMap map_2;
-  LocationMap map_3;
-  LocationMap map_4;
-  LocationMap map_5;
-  LocationMap map_6;
-  LocationMap map_7;
-  LocationMap map_8;
-  LocationMap map_9;
-  Location location_1;
-  Location location_2;
-  Location location_3;
-  scene_1.name = "Opening";
-  scene_2.name = "Middle";
-  scene_3.name = "Ending";
-
-  _db.update_scene(&scene_1);
-  _db.update_scene(&scene_2);
-  _db.update_scene(&scene_3);
-
-  _db.select_scene(&scene_1);
-  _db.select_scene(&scene_2);
-  _db.select_scene(&scene_3);
-
-  location_1.name = "My House";
-  location_1.environment = "Bathroom floor";
-
-  location_2.name = "Work Building";
-  location_2.environment = "Office Floor";
-
-  location_3.name = "Restaurant";
-  location_3.environment = "Booth";
-
-  _db.update_location(&location_1);
-  _db.update_location(&location_2);
-  _db.update_location(&location_3);
-
-  _db.select_location(&location_1);
-  _db.select_location(&location_2);
-  _db.select_location(&location_3);
-
-  _db.update_location_in_scene(&scene_1, &location_1);
-  _db.update_location_in_scene(&scene_1, &location_2);
-  _db.update_location_in_scene(&scene_1, &location_3);
-  _db.update_location_in_scene(&scene_2, &location_1);
-  _db.update_location_in_scene(&scene_2, &location_2);
-  _db.update_location_in_scene(&scene_2, &location_3);
-  _db.update_location_in_scene(&scene_3, &location_1);
-  _db.update_location_in_scene(&scene_3, &location_2);
-  _db.update_location_in_scene(&scene_3, &location_3);
 
   EXPECT_EQ(3, _db.location_map_count());
   _db.remove_scene(&scene_1);
@@ -3917,7 +3672,151 @@ TEST_F(TEST_FIXTURE_NAME, LocationMap_Test_Scene_Deletion)
   EXPECT_EQ(1, _db.location_map_count());
   _db.remove_scene(&scene_3);
   EXPECT_EQ(0, _db.location_map_count());
+  EXPECT_EQ(0, _db.location_count());
 }
+//TEST_F(TEST_FIXTURE_NAME, LocationMap_Test_Location_Deletion)
+//{ // We're no longer using this logic as part of the DB, locations<->scenes are 1-to-1, and users can only delete locations
+//  // Given that this relationship could be changed again down the line I'd like to leave these tests in, but there's no reason to be running them for now
+//  using namespace pfc;
+//  Scene scene_1;
+//  Scene scene_2;
+//  Scene scene_3;
+//  LocationMap map_1;
+//  LocationMap map_2;
+//  LocationMap map_3;
+//  LocationMap map_4;
+//  LocationMap map_5;
+//  LocationMap map_6;
+//  LocationMap map_7;
+//  LocationMap map_8;
+//  LocationMap map_9;
+//  Location location_1;
+//  Location location_2;
+//  Location location_3;
+//  scene_1.name = "Opening";
+//  scene_2.name = "Middle";
+//  scene_3.name = "Ending";
+//
+//  _db.update_scene(&scene_1);
+//  _db.update_scene(&scene_2);
+//  _db.update_scene(&scene_3);
+//
+//  _db.select_scene(&scene_1);
+//  _db.select_scene(&scene_2);
+//  _db.select_scene(&scene_3);
+//
+//  location_1.name = "My House";
+//  location_1.environment = "Bathroom floor";
+//
+//  location_2.name = "Work Building";
+//  location_2.environment = "Office Floor";
+//
+//  location_3.name = "Restaurant";
+//  location_3.environment = "Booth";
+//
+//  _db.update_location(&location_1);
+//  _db.update_location(&location_2);
+//  _db.update_location(&location_3);
+//
+//  _db.select_location(&location_1);
+//  _db.select_location(&location_2);
+//  _db.select_location(&location_3);
+//
+//  _db.update_location_in_scene(&scene_1, &location_1);
+//  _db.update_location_in_scene(&scene_1, &location_2);
+//  _db.update_location_in_scene(&scene_1, &location_3);
+//  _db.update_location_in_scene(&scene_2, &location_1);
+//  _db.update_location_in_scene(&scene_2, &location_2);
+//  _db.update_location_in_scene(&scene_2, &location_3);
+//  _db.update_location_in_scene(&scene_3, &location_1);
+//  _db.update_location_in_scene(&scene_3, &location_2);
+//  _db.update_location_in_scene(&scene_3, &location_3);
+//
+//  EXPECT_EQ(3, _db.location_map_count());
+//  EXPECT_EQ(1, _db.location_count(&scene_1));
+//  EXPECT_EQ(1, _db.location_count(&scene_2));
+//  EXPECT_EQ(1, _db.location_count(&scene_3));
+//  _db.remove_location(&location_1);
+//  EXPECT_EQ(3, _db.location_map_count());
+//  EXPECT_EQ(1, _db.location_count(&scene_1));
+//  EXPECT_EQ(1, _db.location_count(&scene_2));
+//  EXPECT_EQ(1, _db.location_count(&scene_3));
+//  _db.remove_location(&location_2);
+//  EXPECT_EQ(3, _db.location_map_count());
+//  EXPECT_EQ(1, _db.location_count(&scene_1));
+//  EXPECT_EQ(1, _db.location_count(&scene_2));
+//  EXPECT_EQ(1, _db.location_count(&scene_3));
+//  _db.remove_location(&location_3);
+//  EXPECT_EQ(0, _db.location_map_count());
+//  EXPECT_EQ(0, _db.location_count(&scene_1));
+//  EXPECT_EQ(0, _db.location_count(&scene_2));
+//  EXPECT_EQ(0, _db.location_count(&scene_3));
+//}
+//TEST_F(TEST_FIXTURE_NAME, LocationMap_Test_Scene_Deletion)
+//{
+//  using namespace pfc;
+//  Scene scene_1;
+//  Scene scene_2;
+//  Scene scene_3;
+//  LocationMap map_1;
+//  LocationMap map_2;
+//  LocationMap map_3;
+//  LocationMap map_4;
+//  LocationMap map_5;
+//  LocationMap map_6;
+//  LocationMap map_7;
+//  LocationMap map_8;
+//  LocationMap map_9;
+//  Location location_1;
+//  Location location_2;
+//  Location location_3;
+//  scene_1.name = "Opening";
+//  scene_2.name = "Middle";
+//  scene_3.name = "Ending";
+//
+//  _db.update_scene(&scene_1);
+//  _db.update_scene(&scene_2);
+//  _db.update_scene(&scene_3);
+//
+//  _db.select_scene(&scene_1);
+//  _db.select_scene(&scene_2);
+//  _db.select_scene(&scene_3);
+//
+//  location_1.name = "My House";
+//  location_1.environment = "Bathroom floor";
+//
+//  location_2.name = "Work Building";
+//  location_2.environment = "Office Floor";
+//
+//  location_3.name = "Restaurant";
+//  location_3.environment = "Booth";
+//
+//  _db.update_location(&location_1);
+//  _db.update_location(&location_2);
+//  _db.update_location(&location_3);
+//
+//  _db.select_location(&location_1);
+//  _db.select_location(&location_2);
+//  _db.select_location(&location_3);
+//
+//  _db.update_location_in_scene(&scene_1, &location_1);
+//  _db.update_location_in_scene(&scene_1, &location_2);
+//  _db.update_location_in_scene(&scene_1, &location_3);
+//  _db.update_location_in_scene(&scene_2, &location_1);
+//  _db.update_location_in_scene(&scene_2, &location_2);
+//  _db.update_location_in_scene(&scene_2, &location_3);
+//  _db.update_location_in_scene(&scene_3, &location_1);
+//  _db.update_location_in_scene(&scene_3, &location_2);
+//  _db.update_location_in_scene(&scene_3, &location_3);
+//
+//  EXPECT_EQ(3, _db.location_map_count());
+//  _db.remove_scene(&scene_1);
+//  EXPECT_EQ(2, _db.location_map_count());
+//  _db.remove_scene(&scene_2);
+//  EXPECT_EQ(1, _db.location_map_count());
+//  _db.remove_scene(&scene_3);
+//  EXPECT_EQ(0, _db.location_map_count());
+//}
 
 TEST_F(TEST_FIXTURE_NAME, get_equipments)
 {
@@ -4651,7 +4550,7 @@ TEST_F(DATABASE_LOADING_TEST, load_events)
   EXPECT_EQ(0, temp[0]->name.compare("Event_Name"));
   EXPECT_EQ(0, temp[0]->description.compare("Event_Description"));
   EXPECT_EQ(0, temp[0]->category.compare("ACTION"));
-  EXPECT_EQ(0, temp[0]->fidelity.compare("HIGH"));
+  EXPECT_EQ(0, temp[0]->fidelity.compare("LOW"));
   EXPECT_EQ(0, temp[0]->details.compare("Event_Details"));
   EXPECT_EQ(0, temp[0]->fk_actor_1.compare("Actor_1"));
   EXPECT_EQ(0, temp[0]->fk_actor_2.compare("Actor_2"));
