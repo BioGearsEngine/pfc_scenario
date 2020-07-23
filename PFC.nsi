@@ -3,7 +3,7 @@ Outfile "pfc_scenario_installer.exe"
  
 # define the directory to install to, the desktop in this case as specified  
 # by the predefined $DESKTOP variable
-InstallDir $EXEPATH
+InstallDir $PROGRAMFILES\PFC
  
 # default section
 Section "Install" #Installation info 
