@@ -334,6 +334,9 @@ bool SQLite3Driver::populate_db()
     if (!update_event_in_scene(&default_scene, &default_event)) {
       return false;
     }
+    if (!update_role_in_scene(&default_scene, &default_role)) {
+      return false;
+    }
   }
   //---Treatment---
   if(!populate_treatments()){

@@ -1,15 +1,11 @@
-# define the name of the installer
 Outfile "pfc_scenario_installer.exe"
- 
-# define the directory to install to, the desktop in this case as specified  
-# by the predefined $DESKTOP variable
+#In order to use this you need to:
+#	install NSIS compiler https://nsis.sourceforge.io/Download
+#	makensis PFC.nsi
+#And then you're good to go, it'll spit out a file called pfc_scenario_installer.exe
 InstallDir $PROGRAMFILES\PFC
- 
-# default section
-Section "Install" #Installation info 
-	# output path
+Section "Install" 
 	SetOutPath $INSTDIR
-	# define what to install and place it in the output path
 	File "README.md"
 	File "build\pfc_sb_working.sqlite"
 	File "build\outputs\Release\bin\audio\"
