@@ -72,6 +72,12 @@ Section "Install"
 	File "build\outputs\Release\lib\liblibminizip_st.lib"
 	File "build\outputs\Release\lib\liblibscenario_builder_st.lib"
 	File "build\outputs\Release\lib\libzlibstatic_st.lib"
+	writeUninstaller "$INSTDIR\uninstall.exe"
 SectionEnd
+
+Section "Uninstall"
+	delete "$INSTDIR\uninstall.exe"
+	RMDir /r "$INSTDIR"
+SectionEnd 
 
 # Change min required for events/roles in scene to 0
