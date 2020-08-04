@@ -45,12 +45,6 @@ GridLayout {
     treatmentIndex  : syllabus_leftPane.treatmentIndex
     equipmentIndex  : syllabus_leftPane.equipmentIndex
 
-    Layout.fillWidth: true
-    Layout.fillHeight: true
-    Layout.topMargin : 58
-    Layout.rightMargin: 5
-
-
     Component.onCompleted: {
       
     }

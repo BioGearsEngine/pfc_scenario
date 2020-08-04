@@ -25,7 +25,8 @@ Flickable {
   property alias treatmentIndex  : treatments.index
   property alias equipmentIndex  : equipment.index
 
-
+  Layout.fillHeight : true
+  Layout.fillWidth : true
   property SQLBackend backend
   ScrollBar.vertical: ScrollBar { }
   
