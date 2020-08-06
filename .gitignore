@@ -1,6 +1,8 @@
 build-*/
 build*/
 
+pfc_scenario_installer.exe
+
 #Sublime
 *.sublime-workspace
 CMakeLists.txt.user
