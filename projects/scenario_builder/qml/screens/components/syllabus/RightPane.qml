@@ -57,7 +57,7 @@ Flickable {
         ScrollView {
           anchors.fill : parent
           clip : true
-          RP_Injuries {
+          RP_Traumas {
 
             width : Math.max(injuriesPane.width, implicitWidth)
             height :Math.max(injuriesPane.height, implicitHeight)
@@ -73,7 +73,7 @@ Flickable {
         Layout.rightMargin: 5
         border.color: 'black'
         border.width: 1
-        RP_InjurySets {
+        RP_TraumaSets {
           id : injurySets
           backend : root.backend
           width: parent.width
