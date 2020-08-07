@@ -55,8 +55,8 @@
         <!-- Syllabus Tab Components -->
         <file>screens/components/syllabus/LP_Assessments.qml</file>
         <file>screens/components/syllabus/LP_Equipment.qml</file>
-        <file>screens/components/syllabus/LP_Injuries.qml</file>
-        <file>screens/components/syllabus/LP_InjurySets.qml</file>
+        <file>screens/components/syllabus/LP_Traumas.qml</file>
+        <file>screens/components/syllabus/LP_TraumaSets.qml</file>
         <file>screens/components/syllabus/LP_Objectives.qml</file>
         <file>screens/components/syllabus/LP_Treatments.qml</file>
         <file>screens/components/syllabus/RP_Assessments.qml</file>

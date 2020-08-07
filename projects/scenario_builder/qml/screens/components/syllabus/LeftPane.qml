@@ -123,13 +123,13 @@ Rectangle {
         Layout.fillWidth : true
         backend : root.backend
       }
-      LP_Injuries {
+      LP_Traumas {
         id : injuries
         Layout.fillHeight : true
         Layout.fillWidth : true
         backend : root.backend
       }
-      LP_InjurySets {
+      LP_TraumaSets {
         id : injurySets
         Layout.fillHeight : true
         Layout.fillWidth : true

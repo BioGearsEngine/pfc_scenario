@@ -286,7 +286,7 @@ bool SQLite3Driver::populate_db()
   }
   //---InjurySet---
   if (injury_set_count() == 0) {
-    default_injury_set.name = "Injury_Set_1";
+    default_injury_set.name = "Trauma Set 1";
     default_injury_set.description = "";
     default_injury_set.injuries = "";
     default_injury_set.locations = "";
@@ -609,9 +609,9 @@ bool SQLite3Driver::populate_injuries()
       return false;
     }
   }
-  airway_injury.medical_name = "Airway Injury";
-  airway_injury.common_name = "Injury to airway";
-  airway_injury.description = "Injured your airway";
+  airway_injury.medical_name = "Airway Trauma";
+  airway_injury.common_name = "Trauma to airway";
+  airway_injury.description = "Trauma to your airway";
   temp.assign(airway_injury);
   if (!select_injury(&temp)) {
     if (!update_injury(&airway_injury)) {
