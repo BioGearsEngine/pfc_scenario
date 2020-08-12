@@ -238,11 +238,9 @@ bool Serializer::load(const QString& filename)
       buffer.resize(file_info->uncompressed_size);
       auto bytes_read = mz_zip_reader_entry_read(reader, &buffer[0], file_info->uncompressed_size);
       vectorwrapbuf<char> schema_buffer{ buffer };
-
       std::istream i_stream(&schema_buffer);
-      destination = std::string("../") + file_info->filename;
-      mz_zip_reader_entry_save_file(reader, destination.c_str());
-      mz_zip_reader_entry_close(&reader);
+      mz_zip_reader_entry_close(reader);
+
       try { // If the parsing fails this prints out every error
         //      auto msdl_schema = msdl_1::MilitaryScenario(i_stream);
         //      auto scenario_id = msdl_schema->ScenarioID();
@@ -291,12 +289,10 @@ bool Serializer::load(const QString& filename)
       buffer.resize(file_info->uncompressed_size);
       auto bytes_read = mz_zip_reader_entry_read(reader, &buffer[0], file_info->uncompressed_size);
       vectorwrapbuf<char> schema_buffer{ buffer };
-
       std::istream i_stream(&schema_buffer);
+      mz_zip_reader_entry_close(reader);
 
-      destination = std::string("../") + file_info->filename;
-      mz_zip_reader_entry_save_file(reader, destination.c_str());
-      mz_zip_reader_entry_close(&reader);
+
       try { // If the parsing fails this prints out every error
         auto scenario_schema = pfc::schema::Scenario(i_stream);
         bool successful = false;
