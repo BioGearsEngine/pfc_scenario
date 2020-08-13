@@ -51,7 +51,6 @@ ColumnLayout {
         self.description = "Description of Equipment %1".arg(next)
         self.image = ""
         self.citations = ""
-        self.properties = ""
 
         while( root.backend.select_equipment(self) )
         { 
