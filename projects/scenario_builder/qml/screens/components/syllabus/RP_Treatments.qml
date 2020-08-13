@@ -20,7 +20,8 @@ ScrollView {
   property SQLBackend backend
   property ListModel model
   property int index
-
+  property int syllabusIndex
+  property int topIndex
   ColumnLayout  {
     id: column
     property alias backend : root.backend
@@ -113,6 +114,28 @@ ScrollView {
           obj.equipment = values.equipment
           obj.citations = values.citations
           column.backend.update_treatment(obj)
+        }
+        function refresh_equipment() {
+          var values = model.get(root.index)
+          if(values) {
+            equipmentList.model.clear()
+            var equipments = (values.equipment) ? values.equipment.split(";").filter(x => x) : "";  
+            for(var i = 0; i < equipments.length; ++i){
+               equipment.equipment_id = parseInt(equipments[i])
+               equipment.name = ""
+               column.backend.select_equipment(equipment)
+               equipmentList.model.insert(equipmentList.model.count,
+                   {
+                     "equipment_id" : "%1".arg(equipment.equipment_id),
+                     "name" : "%1".arg(equipment.name),
+                     "type" : "%1".arg(equipment.type), 
+                     "description":  "%1".arg(equipment.description),
+                     "citations" : "%1".arg(equipment.citations),
+                     "image" : "%1".arg(equipment.image)
+                  }
+               );
+            }
+          }
         }
         Layout.fillWidth: true
         Layout.leftMargin: 5
@@ -213,6 +236,29 @@ ScrollView {
           obj.citations = values.citations
           column.backend.update_treatment(obj)
         }
+        function refresh_citations() {
+          var values = model.get(root.index)
+          if(values) {
+            referenceList.model.clear()
+            var citations = (values.citations) ? values.citations.split(";").filter(x => x) : "";  
+            for(var i = 0; i < citations.length; ++i){
+               citation.citation_id = parseInt(citations[i])
+               citation.key = ""
+               citation.title  = ""
+               column.backend.select_citation(citation)
+               referenceList.model.insert(referenceList.model.count,
+                   {
+                     "citation_id" : "%1".arg(citation.citation_id),
+                     "key" : "%1".arg(citation.key),
+                     "title":  "%1".arg(citation.title),
+                     "authors" : "%1".arg(citation.authors),
+                     "year" : "%1".arg(citation.year),
+                     "publisher" : "%1".arg(citation.publisher)
+                  }
+               );
+            }
+          }
+        }
         Layout.fillWidth : true
         Layout.fillHeight : true
         backend : root.backend  
@@ -295,50 +341,25 @@ ScrollView {
       }
     }
   }
-
+  onSyllabusIndexChanged : {
+    if (syllabusIndex == 3) {
+      equipmentList.refresh_equipment()
+    }
+  }
+  onTopIndexChanged : {
+    if (topIndex == 1) { 
+      equipmentList.refresh_equipment()
+      referenceList.refresh_citations()
+    }
+  }
   onIndexChanged : {
     var values = model.get(root.index)
-    if(values) {
+    if (values) {
       medicalNameEntry.text = values.medical_name
       commonNameEntry.text = values.common_name
-      descriptionEntry.text = values.description
-
-      equipmentList.model.clear()
-      var equipments = (values.equipment) ? values.equipment.split(";").filter(x => x) : "";  
-      for(var i = 0; i < equipments.length; ++i){
-         equipment.equipment_id = parseInt(equipments[i])
-         equipment.name = ""
-         column.backend.select_equipment(equipment)
-         equipmentList.model.insert(equipmentList.model.count,
-             {
-               "equipment_id" : "%1".arg(equipment.equipment_id),
-               "name" : "%1".arg(equipment.name),
-               "type" : "%1".arg(equipment.type), 
-               "description":  "%1".arg(equipment.description),
-               "citations" : "%1".arg(equipment.citations),
-               "image" : "%1".arg(equipment.image)
-            }
-         );
-      }
-
-      referenceList.model.clear()
-      var citations = (values.citations) ? values.citations.split(";").filter(x => x) : "";  
-      for(var i = 0; i < citations.length; ++i){
-         citation.citation_id = parseInt(citations[i])
-         citation.key = ""
-         citation.title  = ""
-         column.backend.select_citation(citation)
-         referenceList.model.insert(referenceList.model.count,
-             {
-               "citation_id" : "%1".arg(citation.citation_id),
-               "key" : "%1".arg(citation.key),
-               "title":  "%1".arg(citation.title),
-               "authors" : "%1".arg(citation.authors),
-               "year" : "%1".arg(citation.year),
-               "publisher" : "%1".arg(citation.publisher)
-            }
-         );
-      }
+      descriptionEntry.text = values.description  
     }
+    equipmentList.refresh_equipment()
+    referenceList.refresh_citations()
   }
 }

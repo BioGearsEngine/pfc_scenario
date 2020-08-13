@@ -28,7 +28,8 @@ GridLayout {
   RightPane{
     id: syllabus_rightPane
     backend : root.backend
-
+    topIndex : root.topIndex 
+    syllabusIndex : syllabus_leftPane.syllabusIndex
     currentIndex : syllabus_leftPane.currentIndex
     
     objectiveModel  : syllabus_leftPane.objectiveModel

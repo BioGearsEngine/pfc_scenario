@@ -11,7 +11,8 @@ ColumnLayout  {
   id: root
   property SQLBackend backend
   property ListModel model
-  property int index
+  property int topIndex // topIndex is the index of the top set of 4 tabs
+  property int index 
   
   Layout.fillWidth: true
   Layout.fillHeight: true
@@ -23,7 +24,34 @@ ColumnLayout  {
   Citation {
     id : citation
   }
-
+  function refresh_citations() {
+    var values = root.model.get(index)
+    if(values) {
+      nameEntry.text = values.name
+      descriptionEntry.text = values.description
+      imageEntry.text = values.image
+      referenceList.model.clear()
+      var citations = (values.citations) ? values.citations.split(";").filter(x => x) : "";  
+      for(var i = 0; i < citations.length; ++i){
+         citation.citation_id = parseInt(citations[i])
+         citation.key = ""
+         citation.title  = ""
+         root.backend.select_citation(citation)
+         if (citation.title != "") { 
+           referenceList.model.insert(referenceList.model.count,
+               {
+                 "citation_id" : "%1".arg(citation.citation_id),
+                 "key" : "%1".arg(citation.key),
+                 "title":  "%1".arg(citation.title),
+                 "authors" : "%1".arg(citation.authors),
+                 "year" : "%1".arg(citation.year),
+                 "publisher" : "%1".arg(citation.publisher)
+              }
+            );
+         }
+      }
+    }
+  }
   function update_equipment(values) {
     obj.equipment_id = values.id
     obj.name         = values.name
@@ -173,31 +201,12 @@ ColumnLayout  {
         }    
       }
     }
-
-  onIndexChanged : {
-    var values = root.model.get(index)
-    if(values) {
-      nameEntry.text = values.name
-      descriptionEntry.text = values.description
-      imageEntry.text = values.image
-      referenceList.model.clear()
-      var citations = (values.citations) ? values.citations.split(";").filter(x => x) : "";  
-      for(var i = 0; i < citations.length; ++i){
-         citation.citation_id = parseInt(citations[i])
-         citation.key = ""
-         citation.title  = ""
-         root.backend.select_citation(citation)
-         referenceList.model.insert(referenceList.model.count,
-             {
-               "citation_id" : "%1".arg(citation.citation_id),
-               "key" : "%1".arg(citation.key),
-               "title":  "%1".arg(citation.title),
-               "authors" : "%1".arg(citation.authors),
-               "year" : "%1".arg(citation.year),
-               "publisher" : "%1".arg(citation.publisher)
-            }
-         );
-      }
+  onTopIndexChanged : {
+    if (topIndex == 1) {
+      refresh_citations()
     }
+  }
+  onIndexChanged : { 
+    refresh_citations()
   }
 }

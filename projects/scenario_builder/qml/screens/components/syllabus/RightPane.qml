@@ -28,6 +28,8 @@ Flickable {
   Layout.fillHeight : true
   Layout.fillWidth : true
   property SQLBackend backend
+  property int topIndex
+  property int syllabusIndex
   ScrollBar.vertical: ScrollBar { }
   
   StackLayout {
@@ -45,6 +47,7 @@ Flickable {
           backend : root.backend
           width: parent.width
           height: parent.height
+          topIndex : root.topIndex
         }
       }
       Rectangle {
@@ -91,6 +94,8 @@ Flickable {
           backend : root.backend
           width: parent.width
           height: parent.height
+          syllabusIndex : root.syllabusIndex
+          topIndex: root.topIndex
         }
       }
       Rectangle {
@@ -104,6 +109,7 @@ Flickable {
           backend : root.backend
           width: parent.width
           height: parent.height
+          topIndex : root.topIndex
         }
       }
       Rectangle {

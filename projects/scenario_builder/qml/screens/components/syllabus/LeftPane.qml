@@ -23,6 +23,7 @@ Rectangle {
   property alias injurySetIndex : injurySets.index
   property alias treatmentIndex : treatments.index
   property alias equipmentIndex : equipment.index
+  property alias syllabusIndex  : syllabus_tabs.currentIndex
 
   property SQLBackend backend
   property ListElement modelData
@@ -146,6 +147,7 @@ Rectangle {
         Layout.fillHeight : true
         Layout.fillWidth : true
         backend : root.backend
+        topIndex : root.topIndex
       }
       LP_Assessments{
         id : assessments

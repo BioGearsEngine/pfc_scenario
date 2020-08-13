@@ -11,6 +11,7 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 ColumnLayout {
   id: root
   property SQLBackend backend
+  property int topIndex
   readonly property alias model : listArea.model 
   readonly property alias index : listArea.currentIndex
 
@@ -19,7 +20,21 @@ ColumnLayout {
   Equipment {
     id : self
   }
-
+  function refresh_equipment() {
+    listArea.model.clear()
+    root.backend.equipments()
+    while (root.backend.next_equipment(self) ){
+      listArea.model.insert(listArea.model.count, 
+      {
+        id : self.equipment_id,
+        type : "%1".arg(self.type),
+        name: "%1".arg(self.name), 
+        description: "%1".arg(self.description), 
+        citations: "%1".arg(self.citations),
+        image: "%1".arg(self.image) 
+      });
+    }
+  }
   Rectangle {
     id : listRectangle
     Layout.fillWidth : true
@@ -178,20 +193,11 @@ ColumnLayout {
       }
     }
   }
+  onTopIndexChanged : {
+    refresh_equipment()
+  }
   onReloadEquipmentList : {
-    listArea.model.clear()
-    root.backend.equipments()
-    while (root.backend.next_equipment(self) ){
-      listArea.model.insert(listArea.model.count, 
-      {
-        id : self.equipment_id,
-        type : "%1".arg(self.type),
-        name: "%1".arg(self.name), 
-        description: "%1".arg(self.description), 
-        citations: self.citations,
-        image: "%1".arg(self.image) 
-      });
-    }
+    refresh_equipment()
   }
 }
 
