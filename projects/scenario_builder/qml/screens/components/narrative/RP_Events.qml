@@ -87,9 +87,9 @@ ColumnLayout {
 
               listArea.model.insert(listArea.model.count,
               {
-             "id" : self.event_id,
-             "name": "%1".arg(self.name), 
-             "description": "%1".arg(self.description),
+               "id" : self.event_id,
+               "name": "%1".arg(self.name), 
+               "description": "%1".arg(self.description),
                "actor_1": "%1".arg(self.actor_1),
                "actor_2": "%1".arg(self.actor_2),
                "fidelity": "%1".arg(self.fidelity),

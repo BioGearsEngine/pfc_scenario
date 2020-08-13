@@ -375,6 +375,36 @@ ColumnLayout {
              publisher: "%1".arg(cit.publisher)
             });
         }        
+        equListArea.model.clear()
+        var eq_count = backend.equipment_count()
+        root.backend.equipments()
+        while ( root.backend.next_equipment(equ) ){  //equ
+          equListArea.model.insert(equListArea.model.count,
+            {
+              id : equ.equipment_id,
+              type : "%1".arg(equ.type),
+              name: "%1".arg(equ.name), 
+              description: "%1".arg(equ.description), 
+              citations: equ.citations,
+              image: "%1".arg(equ.image) 
+            });
+        }  
+        eveListArea.model.clear()
+        var ev_count = backend.event_count()
+        root.backend.events()
+        while ( root.backend.next_event(eve) ){  //eve
+          eveListArea.model.insert(eveListArea.model.count,
+            {
+              id: eve.event_id,
+              name: "%1".arg(eve.name), 
+              description: "%1".arg(eve.description),
+              actor_1: "%1".arg(eve.actor_1),
+              actor_2: "%1".arg(eve.actor_2),
+              fidelity: "%1".arg(eve.fidelity),
+              category: "%1".arg(eve.type),
+              details: "%1".arg(eve.details)
+            });
+        }  
       }
     }
 }
