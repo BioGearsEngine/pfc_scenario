@@ -13,12 +13,29 @@ ColumnLayout {
   property SQLBackend backend
   readonly property alias model : listArea.model 
   readonly property alias index : listArea.currentIndex
-
+  property int topIndex
+  property int syllabusIndex
 
   Injury {
     id : self
   }
-
+  function refresh_traumas()
+  {
+    var r_count = backend.injury_count();
+    root.backend.injuries()
+    while ( root.backend.next_injury(self) ){
+      listArea.model.insert(listArea.model.count,
+        {
+         id : self.injury_id,
+         medical_name: "%1".arg(self.medical_name), 
+         common_name:  "%1".arg(self.common_name), 
+         description:  "%1".arg(self.description) , 
+         min: self.min,
+         max: self.max,
+         citations: self.citations,
+        });
+    }    
+  }
   Rectangle {
     id : listRectangle
     Layout.fillWidth : true
@@ -173,22 +190,18 @@ ColumnLayout {
       ScrollBar.vertical: ScrollBar { }
 
       Component.onCompleted : {
-        var r_count = backend.injury_count();
-        root.backend.injuries()
-        while ( root.backend.next_injury(self) ){
-          listArea.model.insert(listArea.model.count,
-            {
-             id : self.injury_id,
-             medical_name: "%1".arg(self.medical_name), 
-             common_name:  "%1".arg(self.common_name), 
-             description:  "%1".arg(self.description) , 
-             min: self.min,
-             max: self.max,
-             citations: self.citations,
-
-            });
-        }
+        refresh_traumas()
       }
+    }
+  }
+  onSyllabusIndexChanged : {
+    if (syllabusIndex == 1) {
+      refresh_traumas()
+    }
+  }
+  onTopIndexChanged : {
+    if (topIndex == 1) {
+      refresh_traumas()
     }
   }
 }

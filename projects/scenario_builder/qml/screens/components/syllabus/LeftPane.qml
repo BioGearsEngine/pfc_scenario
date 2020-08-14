@@ -129,6 +129,8 @@ Rectangle {
         Layout.fillHeight : true
         Layout.fillWidth : true
         backend : root.backend
+        topIndex : root.topIndex
+        syllabusIndex : root.syllabusIndex
       }
       LP_TraumaSets {
         id : injurySets
