@@ -81,6 +81,8 @@ Flickable {
           backend : root.backend
           width: parent.width
           height: parent.height
+          syllabusIndex : root.syllabusIndex
+          topIndex: root.topIndex
         }
       }
       Rectangle {

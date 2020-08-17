@@ -12,7 +12,8 @@ ColumnLayout  {
     property SQLBackend backend
     property ListModel model
     property int index
-    
+    property int topIndex
+    property int syllabusIndex
     Layout.fillWidth: true
     Layout.fillHeight: true
 
@@ -22,7 +23,38 @@ ColumnLayout  {
     Injury {
       id : injury
     }
+    function refresh_traumas(){
+      var values = model.get(index)
+      if(values) {
+        nameEntry.text = values.name
 
+        var injuries   = (values.injuries) ? values.injuries.split(";").filter(x => x)  : "";
+        var locations  = (values.locations) ? values.locations.split(";").filter(x => x) : "";
+        var severities = (values.severities) ? values.severities.split(";").filter(x => x): "";
+        injuryList.model.clear()
+        for(var i = 0; i < injuries.length; ++i){
+           injury.injury_id = injuries[i]
+           injury.medical_name = ""
+           injury.common_name  = ""
+           root.backend.select_injury(injury)
+           if (injury.medical_name == "" && injury.common_name == "") {
+            continue
+           }
+           injuryList.model.insert(injuryList.model.count,
+               {
+                 injury_id : injury.injury_id,
+                 medical_name : "%1".arg(injury.medical_name),
+                 common_name : "%1".arg(injury.common_name), 
+                 description:  "%1".arg(injury.description),
+                 citations : "%1".arg(injury.citations),
+                 min : "%1".arg(injury.min),
+                 max : "%1".arg(injury.max),
+                 location : (locations.length) ? locations[i] : "",
+                 severity : (severities.length) ?severities[i] : 0.5
+              });
+        }
+      }
+    }
     function update_injury_set(values){
     obj.injury_set_id = values.id
     obj.name  = values.name
@@ -180,33 +212,17 @@ ColumnLayout  {
         }
       }
     }
-    onIndexChanged : {
-      var values = model.get(index)
-      if(values) {
-        nameEntry.text = values.name
-
-        var injuries   = (values.injuries) ? values.injuries.split(";").filter(x => x)  : "";
-        var locations  = (values.locations) ? values.locations.split(";").filter(x => x) : "";
-        var severities = (values.severities) ? values.severities.split(";").filter(x => x): "";
-        injuryList.model.clear()
-        for(var i = 0; i < injuries.length; ++i){
-           injury.injury_id = injuries[i]
-           injury.medical_name = ""
-           injury.common_name  = ""
-           root.backend.select_injury(injury)
-           injuryList.model.insert(injuryList.model.count,
-               {
-                 injury_id : injury.injury_id,
-                 medical_name : "%1".arg(injury.medical_name),
-                 common_name : "%1".arg(injury.common_name), 
-                 description:  "%1".arg(injury.description),
-                 citations : "%1".arg(injury.citations),
-                 min : "%1".arg(injury.min),
-                 max : "%1".arg(injury.max),
-                 location : (locations.length) ? locations[i] : "",
-                 severity : (severities.length) ?severities[i] : 0.5
-              });
-        }
+    onTopIndexChanged : {
+      if (topIndex == 1) {
+        refresh_traumas()
       }
+    }
+    onSyllabusIndexChanged : {
+      if (syllabusIndex == 2) {
+        refresh_traumas()
+      }
+    }
+    onIndexChanged : {
+      refresh_traumas()
     }
   }
