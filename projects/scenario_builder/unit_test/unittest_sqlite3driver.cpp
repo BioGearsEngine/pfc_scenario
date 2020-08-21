@@ -4563,8 +4563,8 @@ TEST_F(DATABASE_LOADING_TEST, load_injuries)
   EXPECT_EQ(0, temp[0]->medical_name.compare("Injury_Medical_Name"));
   EXPECT_EQ(0, temp[0]->common_name.compare("Injury_Common_Name"));
   EXPECT_EQ(0, temp[0]->description.compare("Injury_Description"));
-  EXPECT_EQ(1, temp[0]->severity_min);
-  EXPECT_EQ(2, temp[0]->severity_max);
+  EXPECT_EQ(1, temp[0]->lower_bound);
+  EXPECT_EQ(2, temp[0]->upper_bound);
   EXPECT_EQ(0, temp[0]->citations.compare("0;1"));
 }
 TEST_F(DATABASE_LOADING_TEST, load_injury_sets)

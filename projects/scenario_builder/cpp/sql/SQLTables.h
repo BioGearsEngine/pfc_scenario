@@ -340,7 +340,7 @@ public:
     image = rhs.image;
   }
 };
-//----End Equipment
+//////----End Equipment
 struct EventMap : public QObject {
   Q_OBJECT
   Q_PROPERTY(int map_id MEMBER id)
@@ -443,16 +443,16 @@ struct Injury : public QObject {
   Q_PROPERTY(QString common_name MEMBER common_name)
   Q_PROPERTY(QString description MEMBER description)
   Q_PROPERTY(QString citations MEMBER citations)
-  Q_PROPERTY(float min MEMBER severity_min)
-  Q_PROPERTY(float max MEMBER severity_max)
+  Q_PROPERTY(float min MEMBER lower_bound)
+  Q_PROPERTY(float max MEMBER upper_bound)
 public:
   int32_t id = -1;
   QString medical_name = "";
   QString common_name = "";
   QString description = "";
   QString citations;
-  float severity_min = 0;
-  float severity_max = 1;
+  float lower_bound = 0;
+  float upper_bound = 1;
   Injury(QObject* parent = nullptr)
     : QObject(parent)
   {
@@ -470,8 +470,8 @@ public:
       && common_name == rhs.common_name
       && description == rhs.description
       && citations == rhs.citations
-      && severity_min == rhs.severity_min
-      && severity_max == rhs.severity_max;
+      && lower_bound == rhs.lower_bound
+      && upper_bound == rhs.upper_bound;
   }
   bool operator!=(const Injury& rhs) const
   {
@@ -483,8 +483,8 @@ public:
     medical_name = rhs.medical_name;
     common_name = rhs.common_name;
     description = rhs.description;
-    severity_min = rhs.severity_min;
-    severity_max = rhs.severity_max;
+    lower_bound = rhs.lower_bound;
+    upper_bound = rhs.upper_bound;
     citations = rhs.citations;
   }
 };

@@ -172,7 +172,7 @@ namespace schema {
   {
 
     auto num_range = pfc::schema::trauma_severity_range();
-    num_range.numeric_range(std::make_unique<pfc::schema::numeric_range>(input->severity_min, input->severity_max));
+    num_range.numeric_range(std::make_unique<pfc::schema::numeric_range>(input->lower_bound, input->upper_bound));
 
     auto trauma = std::make_unique<pfc::schema::trauma>(
       std::make_unique<pfc::schema::trauma::id_type>("Injury_" + std::to_string(input->id)),
@@ -602,8 +602,8 @@ namespace schema {
       temp.medical_name = QString::fromStdString(injury.medical_name());
       temp.common_name = QString::fromStdString(*injury.common_name()); // Why is this different from medical_name at all?
       temp.description = QString::fromStdString(injury.description());
-      temp.severity_min = injury.severity_range().numeric_range().get().min();
-      temp.severity_max = injury.severity_range().numeric_range().get().max();
+      temp.lower_bound = injury.severity_range().numeric_range().get().min();
+      temp.upper_bound = injury.severity_range().numeric_range().get().max();
       std::string citations;
       for (auto citation : injury.citations().citation_ref()) {
         std::string citation_id = find_citation(citation, scenario_schema, _db);

@@ -275,8 +275,8 @@ inline namespace sqlite3 {
     INJURY_COMMON_NAME,
     INJURY_DESCRIPTION,
     INJURY_CITATIONS,
-    INJURY_SEVERITY_MIN,
-    INJURY_SEVERITY_MAX,
+    INJURY_LOWER_BOUND,
+    INJURY_UPPER_BOUND,
     INJURY_COLUMN_COUNT
   };
 
@@ -287,14 +287,14 @@ inline namespace sqlite3 {
     common_name Varchar(64) NOT NULL UNIQUE,
     description TEXT,
     citations TEXT,
-    min REAL DEFAULT 0.0,
-    max REAL DEFAULT 1.0
+    lower_bound REAL DEFAULT 0.0,
+    upper_bound REAL DEFAULT 1.0
   );
   )";
 
   constexpr auto drop_all_injuries = R"( DELETE FROM injuries; )";
   constexpr auto count_injuries = R"( SELECT COUNT(injury_id) FROM injuries; )";
-  constexpr auto select_all_injuries = R"( SELECT injury_id,medical_name,common_name,description,citations,min,max FROM injuries ORDER BY medical_name; )";
+  constexpr auto select_all_injuries = R"( SELECT injury_id,medical_name,common_name,description,citations,lower_bound,upper_bound FROM injuries ORDER BY medical_name; )";
 
   constexpr auto select_injury_by_id
     = R"( SELECT * FROM injuries WHERE injury_id = :id ; )";
@@ -304,8 +304,8 @@ inline namespace sqlite3 {
               , common_name = :common_name
               , description = :description
               , citations = :citations
-              , min  = :min
-              , max  = :max
+              , lower_bound  = :lower_bound
+              , upper_bound  = :upper_bound
           WHERE injury_id = :id;
          )";
   constexpr auto delete_injury_by_id
@@ -320,14 +320,14 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM injuries WHERE common_name = :common_name ORDER BY common_name; )";
   constexpr auto insert_or_update_injuries
     = R"( INSERT INTO injuries
-          (medical_name,common_name,description,citations,min,max)
-          VALUES (:medical_name, :common_name, :description, :citations, :min, :max)
+          (medical_name,common_name,description,citations,lower_bound,upper_bound)
+          VALUES (:medical_name, :common_name, :description, :citations, :lower_bound, :upper_bound)
           ON CONFLICT (medical_name)
           DO UPDATE SET common_name = excluded.common_name
                         , description = excluded.description
                         , citations = excluded.citations
-                        , min= excluded.min
-                        , max= excluded.max
+                        , lower_bound= excluded.lower_bound
+                        , upper_bound= excluded.upper_bound
           ;          
           )";
   

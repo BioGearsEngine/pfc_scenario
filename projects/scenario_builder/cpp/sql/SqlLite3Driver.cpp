@@ -1439,8 +1439,8 @@ inline void assign_injury(const QSqlRecord& record, Injury& injury)
   injury.medical_name = record.value(INJURY_MEDICAL_NAME).toString();
   injury.common_name = record.value(INJURY_COMMON_NAME).toString();
   injury.description = record.value(INJURY_DESCRIPTION).toString();
-  injury.severity_min = record.value(INJURY_SEVERITY_MIN).toInt();
-  injury.severity_max = record.value(INJURY_SEVERITY_MAX).toInt();
+  injury.lower_bound = record.value(INJURY_LOWER_BOUND).toInt();
+  injury.upper_bound = record.value(INJURY_UPPER_BOUND).toInt();
   injury.citations = record.value(INJURY_CITATIONS).toString();
 }
 int SQLite3Driver::injury_count() const
@@ -1540,8 +1540,8 @@ bool SQLite3Driver::update_injury(Injury* injury)
     query.bindValue(":medical_name", injury->medical_name);
     query.bindValue(":common_name", injury->common_name);
     query.bindValue(":description", injury->description);
-    query.bindValue(":min", injury->severity_min);
-    query.bindValue(":max", injury->severity_max);
+    query.bindValue(":min", injury->lower_bound);
+    query.bindValue(":max", injury->upper_bound);
 
     if (!query.exec()) {
       qWarning() <<  "update_injury" << query.lastError();
@@ -4542,8 +4542,8 @@ std::vector<std::unique_ptr<Injury>> SQLite3Driver::get_injuries() const
       temp->common_name = record.value(2).toString();
       temp->description = record.value(3).toString();
       temp->citations = record.value(4).toString();
-      temp->severity_min = record.value(5).toFloat();
-      temp->severity_max = record.value(6).toFloat();
+      temp->lower_bound = record.value(5).toFloat();
+      temp->upper_bound = record.value(6).toFloat();
       injury_list.push_back(std::move(temp));
     }
     return injury_list;
@@ -4958,8 +4958,8 @@ bool SQLite3Driver::remove_citation_from_injuries(std::string citation_id)
       query.bindValue(":medical_name", injury->medical_name);
       query.bindValue(":common_name", injury->common_name);
       query.bindValue(":description", injury->description);
-      query.bindValue(":min", injury->severity_min);
-      query.bindValue(":max", injury->severity_max);
+      query.bindValue(":min", injury->lower_bound);
+      query.bindValue(":max", injury->upper_bound);
       if (!query.exec()) {
         qWarning() <<  "remove_citation_from_injuries" << query.lastError();
         return false;
