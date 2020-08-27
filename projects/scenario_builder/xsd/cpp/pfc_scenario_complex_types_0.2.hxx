@@ -326,8 +326,6 @@ namespace pfc
 
 #include <xsd/cxx/xml/dom/parsing-header.hxx>
 
-#include "military_scenario_1.0.0.hxx"
-
 namespace pfc
 {
   namespace schema
@@ -1244,33 +1242,33 @@ namespace pfc
     class numeric_range: public ::xml_schema::type
     {
       public:
-      // min
+      // lower_bound
       //
-      typedef ::xml_schema::double_ min_type;
-      typedef ::xsd::cxx::tree::traits< min_type, char, ::xsd::cxx::tree::schema_type::double_ > min_traits;
+      typedef ::xml_schema::double_ lower_bound_type;
+      typedef ::xsd::cxx::tree::traits< lower_bound_type, char, ::xsd::cxx::tree::schema_type::double_ > lower_bound_traits;
 
-      const min_type&
-      min () const;
+      const lower_bound_type&
+      lower_bound () const;
 
-      min_type&
-      min ();
+      lower_bound_type&
+      lower_bound ();
 
       void
-      min (const min_type& x);
+      lower_bound (const lower_bound_type& x);
 
-      // max
+      // upp_bound
       //
-      typedef ::xml_schema::double_ max_type;
-      typedef ::xsd::cxx::tree::traits< max_type, char, ::xsd::cxx::tree::schema_type::double_ > max_traits;
+      typedef ::xml_schema::double_ upp_bound_type;
+      typedef ::xsd::cxx::tree::traits< upp_bound_type, char, ::xsd::cxx::tree::schema_type::double_ > upp_bound_traits;
 
-      const max_type&
-      max () const;
+      const upp_bound_type&
+      upp_bound () const;
 
-      max_type&
-      max ();
+      upp_bound_type&
+      upp_bound ();
 
       void
-      max (const max_type& x);
+      upp_bound (const upp_bound_type& x);
 
       // median
       //
@@ -1313,8 +1311,8 @@ namespace pfc
 
       // Constructors.
       //
-      numeric_range (const min_type&,
-                     const max_type&);
+      numeric_range (const lower_bound_type&,
+                     const upp_bound_type&);
 
       numeric_range (const ::xercesc::DOMElement& e,
                      ::xml_schema::flags f = 0,
@@ -1342,8 +1340,8 @@ namespace pfc
              ::xml_schema::flags);
 
       protected:
-      ::xsd::cxx::tree::one< min_type > min_;
-      ::xsd::cxx::tree::one< max_type > max_;
+      ::xsd::cxx::tree::one< lower_bound_type > lower_bound_;
+      ::xsd::cxx::tree::one< upp_bound_type > upp_bound_;
       median_optional median_;
       unit_optional unit_;
     };

@@ -9,9 +9,9 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="com:ara:pfc:training:1" version="0.2" 
   xmlns="com:ara:pfc:training:1" 
   xmlns:pfc="com:ara:pfc:training:1" 
-  xmlns:msdl="urn:sisostds:scenario:military:data:draft:msdl:1" 
   xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning">
-  <xs:import namespace="urn:sisostds:scenario:military:data:draft:msdl:1" schemaLocation="military_scenario_1.0.0.xsd"/>
+<!-- xmlns:msdl="urn:sisostds:scenario:military:data:draft:msdl:1"  -->
+<!-- <xs:import namespace="urn:sisostds:scenario:military:data:draft:msdl:1" schemaLocation="military_scenario_1.0.0.xsd"/> -->
   <xs:complexType name="summary">
     <xs:annotation>
       <xs:documentation>Summary stores all general information about the current scenario file.
@@ -184,8 +184,8 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
       </xs:documentation>
     </xs:annotation>
     <xs:all>
-      <xs:element name="min" type="xs:double" minOccurs="0"/>
-      <xs:element name="max" type="xs:double" minOccurs="0"/>
+      <xs:element name="lower_bound" type="xs:double" minOccurs="1"/>
+      <xs:element name="upp_bound" type="xs:double" minOccurs="1"/>
       <xs:element name="median" type="xs:double" minOccurs="0"/>
       <xs:element name="unit" type="xs:string" minOccurs="0"/>
     </xs:all>

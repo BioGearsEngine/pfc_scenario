@@ -602,8 +602,8 @@ namespace schema {
       temp.medical_name = QString::fromStdString(injury.medical_name());
       temp.common_name = QString::fromStdString(*injury.common_name()); // Why is this different from medical_name at all?
       temp.description = QString::fromStdString(injury.description());
-      temp.lower_bound = injury.severity_range().numeric_range().get().min();
-      temp.upper_bound = injury.severity_range().numeric_range().get().max();
+      temp.lower_bound = injury.severity_range().numeric_range().get().lower_bound();
+      temp.upper_bound = injury.severity_range().numeric_range().get().upp_bound();
       std::string citations;
       for (auto citation : injury.citations().citation_ref()) {
         std::string citation_id = find_citation(citation, scenario_schema, _db);

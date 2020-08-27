@@ -71,14 +71,14 @@ add_source_files(UNIT_TEST LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/unit_test
 set ( XSD_FILES
     "xsd/pfc_scenario_0.2.xsd"
     "xsd/pfc_scenario_complex_types_0.2.xsd"
-    "xsd/msdl_simple_types_1.0.0.xsd"
-    "xsd/msdl_complex_types_1.0.0.xsd"
-    "xsd/msdl_complex_types_1.0.0.xsd"
-    "xsd/msdl_codes_1.0.0.xsd"
-    "xsd/military_scenario_1.0.0.xsd"
-    "xsd/extern/jc3iedm_meterological.xsd"
-    "xsd/extern/jc3iedm-3.1-codes-20061208.xsd"
-    "xsd/extern/model_id_v2006_final.xsd"
+    #"xsd/msdl_simple_types_1.0.0.xsd"
+    #"xsd/msdl_complex_types_1.0.0.xsd"
+    #"xsd/msdl_complex_types_1.0.0.xsd"
+    #"xsd/msdl_codes_1.0.0.xsd"
+    #"xsd/military_scenario_1.0.0.xsd"
+    #"xsd/extern/jc3iedm_meterological.xsd"
+    #"xsd/extern/jc3iedm-3.1-codes-20061208.xsd"
+    #"xsd/extern/model_id_v2006_final.xsd"
   )
   foreach(schema IN LISTS XSD_FILES)
       message(STATUS "Tracking ${schema}")

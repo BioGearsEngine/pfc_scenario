@@ -921,40 +921,40 @@ namespace pfc
     // numeric_range
     // 
 
-    const numeric_range::min_type& numeric_range::
-    min () const
+    const numeric_range::lower_bound_type& numeric_range::
+    lower_bound () const
     {
-      return this->min_.get ();
+      return this->lower_bound_.get ();
     }
 
-    numeric_range::min_type& numeric_range::
-    min ()
+    numeric_range::lower_bound_type& numeric_range::
+    lower_bound ()
     {
-      return this->min_.get ();
-    }
-
-    void numeric_range::
-    min (const min_type& x)
-    {
-      this->min_.set (x);
-    }
-
-    const numeric_range::max_type& numeric_range::
-    max () const
-    {
-      return this->max_.get ();
-    }
-
-    numeric_range::max_type& numeric_range::
-    max ()
-    {
-      return this->max_.get ();
+      return this->lower_bound_.get ();
     }
 
     void numeric_range::
-    max (const max_type& x)
+    lower_bound (const lower_bound_type& x)
     {
-      this->max_.set (x);
+      this->lower_bound_.set (x);
+    }
+
+    const numeric_range::upp_bound_type& numeric_range::
+    upp_bound () const
+    {
+      return this->upp_bound_.get ();
+    }
+
+    numeric_range::upp_bound_type& numeric_range::
+    upp_bound ()
+    {
+      return this->upp_bound_.get ();
+    }
+
+    void numeric_range::
+    upp_bound (const upp_bound_type& x)
+    {
+      this->upp_bound_.set (x);
     }
 
     const numeric_range::median_optional& numeric_range::
@@ -5112,11 +5112,11 @@ namespace pfc
     //
 
     numeric_range::
-    numeric_range (const min_type& min,
-                   const max_type& max)
+    numeric_range (const lower_bound_type& lower_bound,
+                   const upp_bound_type& upp_bound)
     : ::xml_schema::type (),
-      min_ (min, this),
-      max_ (max, this),
+      lower_bound_ (lower_bound, this),
+      upp_bound_ (upp_bound, this),
       median_ (this),
       unit_ (this)
     {
@@ -5127,8 +5127,8 @@ namespace pfc
                    ::xml_schema::flags f,
                    ::xml_schema::container* c)
     : ::xml_schema::type (x, f, c),
-      min_ (x.min_, f, this),
-      max_ (x.max_, f, this),
+      lower_bound_ (x.lower_bound_, f, this),
+      upp_bound_ (x.upp_bound_, f, this),
       median_ (x.median_, f, this),
       unit_ (x.unit_, f, this)
     {
@@ -5139,8 +5139,8 @@ namespace pfc
                    ::xml_schema::flags f,
                    ::xml_schema::container* c)
     : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
-      min_ (this),
-      max_ (this),
+      lower_bound_ (this),
+      upp_bound_ (this),
       median_ (this),
       unit_ (this)
     {
@@ -5161,24 +5161,24 @@ namespace pfc
         const ::xsd::cxx::xml::qualified_name< char > n (
           ::xsd::cxx::xml::dom::name< char > (i));
 
-        // min
+        // lower_bound
         //
-        if (n.name () == "min" && n.namespace_ ().empty ())
+        if (n.name () == "lower_bound" && n.namespace_ ().empty ())
         {
-          if (!min_.present ())
+          if (!lower_bound_.present ())
           {
-            this->min_.set (min_traits::create (i, f, this));
+            this->lower_bound_.set (lower_bound_traits::create (i, f, this));
             continue;
           }
         }
 
-        // max
+        // upp_bound
         //
-        if (n.name () == "max" && n.namespace_ ().empty ())
+        if (n.name () == "upp_bound" && n.namespace_ ().empty ())
         {
-          if (!max_.present ())
+          if (!upp_bound_.present ())
           {
-            this->max_.set (max_traits::create (i, f, this));
+            this->upp_bound_.set (upp_bound_traits::create (i, f, this));
             continue;
           }
         }
@@ -5225,17 +5225,17 @@ namespace pfc
         break;
       }
 
-      if (!min_.present ())
+      if (!lower_bound_.present ())
       {
         throw ::xsd::cxx::tree::expected_element< char > (
-          "min",
+          "lower_bound",
           "");
       }
 
-      if (!max_.present ())
+      if (!upp_bound_.present ())
       {
         throw ::xsd::cxx::tree::expected_element< char > (
-          "max",
+          "upp_bound",
           "");
       }
     }
@@ -5253,8 +5253,8 @@ namespace pfc
       if (this != &x)
       {
         static_cast< ::xml_schema::type& > (*this) = x;
-        this->min_ = x.min_;
-        this->max_ = x.max_;
+        this->lower_bound_ = x.lower_bound_;
+        this->upp_bound_ = x.upp_bound_;
         this->median_ = x.median_;
         this->unit_ = x.unit_;
       }
@@ -12418,8 +12418,8 @@ namespace pfc
     ::std::ostream&
     operator<< (::std::ostream& o, const numeric_range& i)
     {
-      o << ::std::endl << "min: " << i.min ();
-      o << ::std::endl << "max: " << i.max ();
+      o << ::std::endl << "lower_bound: " << i.lower_bound ();
+      o << ::std::endl << "upp_bound: " << i.upp_bound ();
       if (i.median ())
       {
         o << ::std::endl << "median: " << *i.median ();
@@ -14623,26 +14623,26 @@ namespace pfc
     {
       e << static_cast< const ::xml_schema::type& > (i);
 
-      // min
+      // lower_bound
       //
       {
         ::xercesc::DOMElement& s (
           ::xsd::cxx::xml::dom::create_element (
-            "min",
+            "lower_bound",
             e));
 
-        s << ::xml_schema::as_double(i.min ());
+        s << ::xml_schema::as_double(i.lower_bound ());
       }
 
-      // max
+      // upp_bound
       //
       {
         ::xercesc::DOMElement& s (
           ::xsd::cxx::xml::dom::create_element (
-            "max",
+            "upp_bound",
             e));
 
-        s << ::xml_schema::as_double(i.max ());
+        s << ::xml_schema::as_double(i.upp_bound ());
       }
 
       // median

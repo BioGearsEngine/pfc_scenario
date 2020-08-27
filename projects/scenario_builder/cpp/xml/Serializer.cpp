@@ -11,7 +11,7 @@
 #include <QDebug>
 #include <QDir>
 
-#include "../xsd/cpp/military_scenario_1.0.0.hxx"
+// #include "../xsd/cpp/military_scenario_1.0.0.hxx"
 #include "../xsd/cpp/pfc_scenario_0.2.hxx"
 #include "SchemaUtils.h"
 
@@ -129,14 +129,14 @@ bool Serializer::save_as(const QString& filename) const
   std::vector<char const*> schemas = {
     "xsd/pfc_scenario_0.2.xsd",
     "xsd/pfc_scenario_complex_types_0.2.xsd",
-    "xsd/msdl_simple_types_1.0.0.xsd",
-    "xsd/msdl_complex_types_1.0.0.xsd",
-    "xsd/msdl_complex_types_1.0.0.xsd",
-    "xsd/msdl_codes_1.0.0.xsd",
-    "xsd/military_scenario_1.0.0.xsd",
-    "xsd/extern/jc3iedm_meterological.xsd",
-    "xsd/extern/jc3iedm-3.1-codes-20061208.xsd",
-    "xsd/extern/model_id_v2006_final.xsd"
+    // "xsd/msdl_simple_types_1.0.0.xsd",
+    // "xsd/msdl_complex_types_1.0.0.xsd",
+    // "xsd/msdl_complex_types_1.0.0.xsd",
+    // "xsd/msdl_codes_1.0.0.xsd",
+    // "xsd/military_scenario_1.0.0.xsd",
+    // "xsd/extern/jc3iedm_meterological.xsd",
+    // "xsd/extern/jc3iedm-3.1-codes-20061208.xsd",
+    // "xsd/extern/model_id_v2006_final.xsd"
   };
   std::string file_contents;
   for (auto& schema : schemas) {
@@ -451,24 +451,24 @@ auto Serializer::generate_msdl_stream() const -> std::stringstream
   std::string security = securityProperty.value.toStdString();
   std::string description = descriptionProperty.value.toStdString();
 
-  auto scenarioID_nameType = msdl_1::MilitaryScenarioType::ScenarioID_type::name_type(name);
-  auto scenarioID_typeType = msdl_1::MilitaryScenarioType::ScenarioID_type::type_type(domain);
-  auto scenarioID_versionType = msdl_1::MilitaryScenarioType::ScenarioID_type::version_type(version);
-  auto scenarioID_modificationDateType = msdl_1::MilitaryScenarioType::ScenarioID_type::modificationDate_type(get_now());
-  auto scenarioID_securityClassificationType = msdl_1::MilitaryScenarioType::ScenarioID_type::securityClassification_type(security);
-  auto scenarioID_descriptionType = msdl_1::MilitaryScenarioType::ScenarioID_type::description_type(description);
-
-  auto msdl_scenario_id = std::make_unique<msdl_1::MilitaryScenarioType::ScenarioID_type>(scenarioID_nameType, scenarioID_typeType, scenarioID_versionType, scenarioID_modificationDateType, scenarioID_securityClassificationType, scenarioID_descriptionType);
-  auto msdl_military_version = std::make_unique<msdl_1::MilitaryScenarioType::Options_type>(msdl_1::MilitaryScenarioType::Options_type::MSDLVersion_type(""));
-  auto msdl_force_sides = std::make_unique<msdl_1::MilitaryScenarioType::ForceSides_type>();
-  auto msdl = msdl_1::MilitaryScenarioType(std::move(msdl_scenario_id), std::move(msdl_military_version), std::move(msdl_force_sides));
+  // auto scenarioID_nameType = msdl_1::MilitaryScenarioType::ScenarioID_type::name_type(name);
+  // auto scenarioID_typeType = msdl_1::MilitaryScenarioType::ScenarioID_type::type_type(domain);
+  // auto scenarioID_versionType = msdl_1::MilitaryScenarioType::ScenarioID_type::version_type(version);
+  // auto scenarioID_modificationDateType = msdl_1::MilitaryScenarioType::ScenarioID_type::modificationDate_type(get_now());
+  // auto scenarioID_securityClassificationType = msdl_1::MilitaryScenarioType::ScenarioID_type::securityClassification_type(security);
+  // auto scenarioID_descriptionType = msdl_1::MilitaryScenarioType::ScenarioID_type::description_type(description);
+  //
+  // auto msdl_scenario_id = std::make_unique<msdl_1::MilitaryScenarioType::ScenarioID_type>(scenarioID_nameType, scenarioID_typeType, scenarioID_versionType, scenarioID_modificationDateType, scenarioID_securityClassificationType, scenarioID_descriptionType);
+  // auto msdl_military_version = std::make_unique<msdl_1::MilitaryScenarioType::Options_type>(msdl_1::MilitaryScenarioType::Options_type::MSDLVersion_type(""));
+  // auto msdl_force_sides = std::make_unique<msdl_1::MilitaryScenarioType::ForceSides_type>();
+  // auto msdl = msdl_1::MilitaryScenarioType(std::move(msdl_scenario_id), std::move(msdl_military_version), std::move(msdl_force_sides));
 
   xml_schema::namespace_infomap info;
   info[""].name = "urn:sisostds:scenario:military:data:draft:msdl:1";
   info[""].schema = "military_scenario_1.0.0.xsd";
 
   std::stringstream msdl_content;
-  msdl_1::MilitaryScenario(msdl_content, msdl, info);
+  // msdl_1::MilitaryScenario(msdl_content, msdl, info);
   return msdl_content;
 }
 //-------------------------------------------------------------------------------
