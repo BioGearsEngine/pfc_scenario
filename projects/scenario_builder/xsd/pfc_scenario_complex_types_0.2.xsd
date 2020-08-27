@@ -184,8 +184,8 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
       </xs:documentation>
     </xs:annotation>
     <xs:all>
-      <xs:element name="min" type="xs:double" minOccurs="1"/>
-      <xs:element name="max" type="xs:double" minOccurs="1"/>
+      <xs:element name="min" type="xs:double" minOccurs="0"/>
+      <xs:element name="max" type="xs:double" minOccurs="0"/>
       <xs:element name="median" type="xs:double" minOccurs="0"/>
       <xs:element name="unit" type="xs:string" minOccurs="0"/>
     </xs:all>
