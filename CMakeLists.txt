@@ -30,7 +30,6 @@ include(cmake/UseGit.cmake)
 
  add_subdirectory(projects)
  
- set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT scenario_builder)
  
  ###############################################################################
 # Stage Code for IDE Testing
@@ -40,12 +39,13 @@ create_stage()
 add_custom_command(TARGET STAGE POST_BUILD COMMAND ${CMAKE_COMMAND} -E echo "Generating Runtime")
 foreach(dir IN LISTS CMAKE_PREFIX_PATH)
 if(EXISTS "${dir}\\plugins")
-add_custom_command(TARGET STAGE POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${dir}\\plugins" $<TARGET_FILE_DIR:scenario_builder>)
+  add_custom_command(TARGET STAGE POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${dir}\\plugins" $<TARGET_FILE_DIR:ScenarioBuilder>)
 endif()
 if(EXISTS "${dir}\\qml")
-add_custom_command(TARGET STAGE POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${dir}\\qml" $<TARGET_FILE_DIR:scenario_builder>)
+  add_custom_command(TARGET STAGE POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${dir}\\qml" $<TARGET_FILE_DIR:ScenarioBuilder>)
 endif()
 endforeach()
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ScenarioBuilder)
 ###############################################################################
 # Step 3:
 # Infrastructure Installation for each library

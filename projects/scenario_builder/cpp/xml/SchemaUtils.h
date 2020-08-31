@@ -5,7 +5,7 @@
 #include <memory>
 
 //#include "../xsd/cpp/military_scenario_1.0.0.hxx"
-#include "../xsd/cpp/pfc_scenario_0.2.hxx"
+#include "../xsd/cpp/pfc_scenario_0.3.hxx"
 #include "sql/SqlLite3Driver.h"
 
 namespace pfc {

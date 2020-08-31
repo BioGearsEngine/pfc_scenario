@@ -10,7 +10,7 @@
 #include "sql/SqlLite3Driver.h"
 #include "sql/SqlLite3_Statments.h"
 #include "xml/Serializer.h"
-#include "pfc_scenario_0.2.hxx"
+#include "pfc_scenario_0.3.hxx"
 #include "xml/SchemaUtils.h"
 
 #ifdef DISABLE_BIOGEARS_Path_TEST

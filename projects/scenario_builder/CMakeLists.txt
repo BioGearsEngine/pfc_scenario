@@ -8,14 +8,12 @@ cmake_policy(VERSION 3.12.0)
 ###############################################################################
 option(${ROOT_PROJECT_NAME}_BUILD_SCENARIO_BUILDER "Toggle building of cmd_bio tools" ON)
 if(${ROOT_PROJECT_NAME}_BUILD_SCENARIO_BUILDER)
- set(CMAKE_AUTOMOC ON)
  set(CMAKE_INCLUDE_CURRENT_DIR ON)
  set_property(GLOBAL PROPERTY USE_FOLDERS ON)
  set_property(GLOBAL PROPERTY AUTOGEN_TARGETS_FOLDER AutoMoc)
 ###############################################################################
 # Base Variables
 ###############################################################################
-set(PROJECT_NAME scenario_builder)
 set(PREFIX sb)
 
 set(${PREFIX}_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include" )
@@ -34,7 +32,7 @@ find_package(GTest REQUIRED)
 
 ###############################################################################
 message(STATUS "")
-message(STATUS "Configuring ${PROJECT_NAME}")
+message(STATUS "Configuring ScenarioBuilder ")
 
 #Scenario Driver
 
@@ -51,15 +49,6 @@ add_source_files(SRCS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp/xml
 add_source_files(HDRS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp/xml
                  REGEX "*.h" "*.hpp" SOURCE_GROUP  "Headers\\Private\\xml")
 
-add_source_files(SRCS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp/zip
-                REGEX "*.cpp" "*.c" SOURCE_GROUP  "Source Files\\zip")
-add_source_files(HDRS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp/zip/compression
-                 REGEX "*.h" SOURCE_GROUP  "Headers\\Private\\zip\\")
-
-add_source_files(HDRS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/xsd/cpp 
-                REGEX "*.hxx" SOURCE_GROUP  "Headers\\Private\\xsd")
-add_source_files(SRCS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/xsd/cpp 
-                REGEX "*.cxx" SOURCE_GROUP  "Source Files\\xsd")
 add_source_files(RESOURCES LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/qml 
                 REGEX "*.qrc"  SOURCE_GROUP  "Resources")
 add_source_files(QML_FILES LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/qml 
@@ -67,19 +56,25 @@ add_source_files(QML_FILES LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/qml
 add_source_files(UNIT_TEST LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/unit_test
                 REGEX "*.cpp" SOURCE_GROUP  "Tests")
 
+#XSD_HEADER_FILES
+add_source_files(XSD_HDRS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/xsd/cpp 
+                REGEX "*.hxx" SOURCE_GROUP  "Headers\\Private\\xsd")
+add_source_files(XSD_SRCS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/xsd/cpp 
+                REGEX "*.cxx" SOURCE_GROUP  "Source Files\\xsd")
 
 set ( XSD_FILES
     "xsd/pfc_scenario_0.2.xsd"
     "xsd/pfc_scenario_complex_types_0.2.xsd"
-    #"xsd/msdl_simple_types_1.0.0.xsd"
-    #"xsd/msdl_complex_types_1.0.0.xsd"
-    #"xsd/msdl_complex_types_1.0.0.xsd"
-    #"xsd/msdl_codes_1.0.0.xsd"
-    #"xsd/military_scenario_1.0.0.xsd"
-    #"xsd/extern/jc3iedm_meterological.xsd"
-    #"xsd/extern/jc3iedm-3.1-codes-20061208.xsd"
-    #"xsd/extern/model_id_v2006_final.xsd"
+    "xsd/msdl_simple_types_1.0.0.xsd"
+    "xsd/msdl_complex_types_1.0.0.xsd"
+    "xsd/msdl_complex_types_1.0.0.xsd"
+    "xsd/msdl_codes_1.0.0.xsd"
+    "xsd/military_scenario_1.0.0.xsd"
+    "xsd/extern/jc3iedm_meterological.xsd"
+    "xsd/extern/jc3iedm-3.1-codes-20061208.xsd"
+    "xsd/extern/model_id_v2006_final.xsd"
   )
+
   foreach(schema IN LISTS XSD_FILES)
       message(STATUS "Tracking ${schema}")
 	  add_custom_command(
@@ -89,6 +84,7 @@ set ( XSD_FILES
 		COMMAND ${CMAKE_COMMAND} -E echo ${CMAKE_CURRENT_SOURCE_DIR}/${schema} ${PROJECT_BINARY_DIR}/${schema}
 	  )	  
   endforeach()
+
   add_custom_target( prepare_runtime_dir
 	  DEPENDS ${XSD_FILES}
 	  COMMENT "Scanning for need to stage runtime dir"
@@ -120,112 +116,127 @@ if (${PREFIX}_BUILD_STATIC)
 endif()
 
 ###############################################################################
-# COMPILATION & LINKLINKAGE MODIFICATIONS
-###############################################################################
-
-list(APPEND ${PREFIX}_INCLUDES
-      PUBLIC ${${PREFIX}_INCLUDE_DIR}
-      PUBLIC ${${PREFIX}_PRIVATE_INCLUDE_DIR}
-      PUBLIC ${${PREFIX}_GENERATED_INCLUDE_DIR}
-      PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/xsd/cpp
-)
-
-
-
-set(${PREFIX}_LIBS
-     ${CMAKE_THREAD_LIBS_INIT}
-     ${CMAKE_DL_LIBS}
-   Xerces::xerces
-   Qt5::Core 
-   Qt5::Widgets 
-   Qt5::Gui 
-   Qt5::Sql 
-   Qt5::Quick 
-   Qt5::QuickControls2 
-   Qt5::Qml
-)
-
-set(${PREFIX}_LIBS ${${PREFIX}_LIBS} PARENT_SCOPE)
-###############################################################################
 # TARGETS
 ###############################################################################
-# LIBRARY
-###############################################################################
-add_library(lib${PROJECT_NAME} STATIC ${${PREFIX}_SOURCES} ${${PREFIX}_HEADERS})
-add_library( Builder::lib ALIAS lib${PROJECT_NAME} )
-target_link_libraries(lib${PROJECT_NAME} PUBLIC ${${PREFIX}_LIBS} Boost::filesystem Boost::disable_autolinking minizip::lib)
-set_target_properties(lib${PROJECT_NAME}
+
+# lib_pfc_xsd
+add_library(pfc_serialization STATIC ${XSD_HDRS} ${XSD_SRCS})
+target_link_libraries(pfc_serialization Xerces::xerces)
+add_library( Builder::serial ALIAS pfc_serialization )
+set_target_properties(pfc_serialization
   PROPERTIES
   DEFINE_SYMBOL "SUSTAIN_FRAMEWORK_EXPORTS"
   FOLDER "Libraries"
-  OUTPUT_NAME "lib${PROJECT_NAME}"
-  COMPILE_PDB_NAME "lib${PROJECT_NAME}"
-  PROJECT_LABEL "lib${PROJECT_NAME}"
+  OUTPUT_NAME "pfc_serialization"
+  COMPILE_PDB_NAME "pfc_serialization"
+  PROJECT_LABEL "pfc_serialization"
   DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX}
   CXX_STANDARD 14
   VS_DEBUGGER_WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-  )
-target_compile_definitions(lib${PROJECT_NAME} PUBLIC ${${PREFIX}_CPPFLAGS}    )
-target_compile_definitions(lib${PROJECT_NAME} PUBLIC $<$<PLATFORM_ID:Windows>:BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE> )
-target_compile_options(lib${PROJECT_NAME} PUBLIC $<$<PLATFORM_ID:Windows>:/bigobj>  PUBLIC $<$<PLATFORM_ID:Windows>:/MP>)
-target_include_directories(lib${PROJECT_NAME}
-      PUBLIC ${${PREFIX}_INCLUDE_DIR}
-      PUBLIC ${${PREFIX}_PRIVATE_INCLUDE_DIR}
-      PUBLIC ${${PREFIX}_GENERATED_INCLUDE_DIR}
-      PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/xsd/cpp"
+)
+target_compile_options(pfc_serialization PRIVATE $<$<PLATFORM_ID:Windows>:/bigobj>  PRIVATE $<$<PLATFORM_ID:Windows>:/MP>)
+
+# lib_pfc_builder
+add_library(libScenarioBuilder STATIC ${${PREFIX}_SOURCES} ${${PREFIX}_HEADERS})
+add_library(Builder::lib ALIAS libScenarioBuilder)
+target_link_libraries(libScenarioBuilder PUBLIC   
+  Qt5::Core 
+  Qt5::Widgets 
+  Qt5::Gui 
+  Qt5::Sql 
+  Qt5::Quick 
+  Qt5::QuickControls2 
+  Qt5::Qml
+  minizip::lib
+  Builder::serial
+)
+
+set_target_properties(libScenarioBuilder
+  PROPERTIES
+  DEFINE_SYMBOL "SUSTAIN_FRAMEWORK_EXPORTS"
+  FOLDER "Libraries"
+  OUTPUT_NAME "ScenarioBuilder"
+  COMPILE_PDB_NAME "libScenarioBuilder"
+  AUTOMOC ON
+  PROJECT_LABEL "pfc_builder"
+  DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX}
+  CXX_STANDARD 14
+  VS_DEBUGGER_WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+)
+target_compile_definitions(libScenarioBuilder PUBLIC ${${PREFIX}_CPPFLAGS} PUBLIC $<$<PLATFORM_ID:Windows>:BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE> )
+target_compile_options(libScenarioBuilder PUBLIC $<$<PLATFORM_ID:Windows>:/bigobj>  PUBLIC $<$<PLATFORM_ID:Windows>:/MP>)
+
+target_include_directories(libScenarioBuilder
+  PUBLIC ${${PREFIX}_INCLUDE_DIR}
+  PUBLIC ${${PREFIX}_PRIVATE_INCLUDE_DIR}
+  PUBLIC ${${PREFIX}_GENERATED_INCLUDE_DIR}
+  PUBLIC ${Xerces-c_INCLUDE_DIR}
+  PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/xsd/cpp"
 )
 
 if(CMAKE_COMPILER_IS_GNUCXX)
-    set_target_properties(lib${PROJECT_NAME} PROPERTIES LINK_FLAGS ${${PREFIX}_LDFLAGS})
+    set_target_properties(libScenarioBuilder PROPERTIES LINK_FLAGS ${${PREFIX}_LDFLAGS})
 endif()
 
-###############################################################################
-# GUI
-###############################################################################
-add_executable(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/cpp/main.cpp  ${qml_QRC}  ${QML_FILES})
-target_link_libraries(${PROJECT_NAME} Builder::lib Boost::disable_autolinking minizip::lib minizip::lib)
-set_target_properties(${PROJECT_NAME}
+# GUI Executable
+add_executable(ScenarioBuilder ${CMAKE_CURRENT_SOURCE_DIR}/cpp/main.cpp  ${qml_QRC}  ${QML_FILES})
+target_link_libraries(ScenarioBuilder 
+  Builder::lib 
+  Builder::serial
+  minizip::lib 
+  Boost::disable_autolinking 
+  Boost::filesystem
+  ${CMAKE_THREAD_LIBS_INIT}
+  ${CMAKE_DL_LIBS}
+  Xerces::xerces
+  Qt5::Core 
+  Qt5::Widgets 
+  Qt5::Gui 
+  Qt5::Sql 
+  Qt5::Quick 
+  Qt5::QuickControls2 
+  Qt5::Qml
+  )
+set_target_properties(ScenarioBuilder
   PROPERTIES
-  DEFINE_SYMBOL "SUSTAIN_FRAMEWORK_EXPORTS"
   FOLDER "Binaries"
-  OUTPUT_NAME "${PROJECT_NAME}"
-  COMPILE_PDB_NAME "${PROJECT_NAME}"
-  PROJECT_LABEL "${PROJECT_NAME}"
+  OUTPUT_NAME "ScenarioBuilder "
+  COMPILE_PDB_NAME "ScenarioBuilder "
+  PROJECT_LABEL "ScenarioBuilder "
   DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX}
   CXX_STANDARD 14
   VS_DEBUGGER_WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-  )
-target_compile_definitions(${PROJECT_NAME} PRIVATE ${${PREFIX}_CPPFLAGS}    )
-target_compile_definitions(${PROJECT_NAME} PRIVATE $<$<PLATFORM_ID:Windows>:BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE> )
-target_compile_options(${PROJECT_NAME} PRIVATE $<$<PLATFORM_ID:Windows>:/bigobj>  PRIVATE $<$<PLATFORM_ID:Windows>:/MP>)
+)
+target_compile_definitions(ScenarioBuilder PRIVATE ${${PREFIX}_CPPFLAGS} PRIVATE $<$<PLATFORM_ID:Windows>:BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE> )
+target_compile_options(ScenarioBuilder PRIVATE $<$<PLATFORM_ID:Windows>:/bigobj>  PRIVATE $<$<PLATFORM_ID:Windows>:/MP>)
+
 ###############################################################################
 # Unit Test
 ###############################################################################
-add_executable(unit_${PROJECT_NAME} ${UNIT_TEST})
-target_link_libraries(unit_${PROJECT_NAME} Builder::lib GTest::GTest GTest::Main Boost::disable_autolinking minizip::lib)
-set_target_properties(unit_${PROJECT_NAME}
+add_executable(unitScenarioBuilder ${UNIT_TEST})
+target_link_libraries(unitScenarioBuilder Builder::lib GTest::GTest GTest::Main Boost::disable_autolinking Boost::filesystem minizip::lib)
+set_target_properties(unitScenarioBuilder 
   PROPERTIES
   DEFINE_SYMBOL "SUSTAIN_FRAMEWORK_EXPORTS"
   FOLDER "Tests"
-  OUTPUT_NAME "unit_${PROJECT_NAME}"
-  COMPILE_PDB_NAME "unit_${PROJECT_NAME}"
-  PROJECT_LABEL "unit_${PROJECT_NAME}"
+  OUTPUT_NAME "unitScenarioBuilder "
+  COMPILE_PDB_NAME "unitScenarioBuilder "
+  PROJECT_LABEL "unitScenarioBuilder "
   DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX}
   CXX_STANDARD 14
   VS_DEBUGGER_WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-  )
-target_compile_definitions(unit_${PROJECT_NAME} PRIVATE ${${PREFIX}_CPPFLAGS}    )
-target_compile_definitions(unit_${PROJECT_NAME} PRIVATE $<$<PLATFORM_ID:Windows>:BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE> )
-target_compile_options(unit_${PROJECT_NAME} PRIVATE $<$<PLATFORM_ID:Windows>:/bigobj>  PRIVATE $<$<PLATFORM_ID:Windows>:/MP>)
+)
+target_compile_definitions(unitScenarioBuilder PRIVATE ${${PREFIX}_CPPFLAGS}  PRIVATE $<$<PLATFORM_ID:Windows>:BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE> )
+target_compile_options(unitScenarioBuilder PRIVATE $<$<PLATFORM_ID:Windows>:/bigobj>  PRIVATE $<$<PLATFORM_ID:Windows>:/MP>)
 
 ################################################################################
 # Install
 ################################################################################
- install(TARGETS ${PROJECT_NAME}
-     RUNTIME DESTINATION bin
-     LIBRARY DESTINATION ${LIBRARY_INSTALL_DIR}
-     ARCHIVE DESTINATION lib
-  )
+install(TARGETS ScenarioBuilder
+  RUNTIME DESTINATION bin
+  LIBRARY DESTINATION ${LIBRARY_INSTALL_DIR}
+  ARCHIVE DESTINATION lib
+)
 
 
 ################################################################################

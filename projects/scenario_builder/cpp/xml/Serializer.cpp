@@ -12,7 +12,7 @@
 #include <QDir>
 
 // #include "../xsd/cpp/military_scenario_1.0.0.hxx"
-#include "../xsd/cpp/pfc_scenario_0.2.hxx"
+#include "../xsd/cpp/pfc_scenario_0.3.hxx"
 #include "SchemaUtils.h"
 
 #include "mz.h"
