@@ -120,12 +120,12 @@ endif()
 ###############################################################################
 
 # lib_pfc_xsd
-add_library(pfc_serialization STATIC ${XSD_HDRS} ${XSD_SRCS})
+add_library(pfc_serialization SHARED ${XSD_HDRS} ${XSD_SRCS})
 target_link_libraries(pfc_serialization Xerces::xerces)
 add_library( Builder::serial ALIAS pfc_serialization )
 set_target_properties(pfc_serialization
   PROPERTIES
-  DEFINE_SYMBOL "SUSTAIN_FRAMEWORK_EXPORTS"
+  DEFINE_SYMBOL "SUSTAIN_XSD_EXPORTS"
   FOLDER "Libraries"
   OUTPUT_NAME "pfc_serialization"
   COMPILE_PDB_NAME "pfc_serialization"
@@ -200,9 +200,9 @@ target_link_libraries(ScenarioBuilder
 set_target_properties(ScenarioBuilder
   PROPERTIES
   FOLDER "Binaries"
-  OUTPUT_NAME "ScenarioBuilder "
-  COMPILE_PDB_NAME "ScenarioBuilder "
-  PROJECT_LABEL "ScenarioBuilder "
+  OUTPUT_NAME "ScenarioBuilder"
+  COMPILE_PDB_NAME "ScenarioBuilder"
+  PROJECT_LABEL "ScenarioBuilder"
   DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX}
   CXX_STANDARD 14
   VS_DEBUGGER_WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
@@ -219,9 +219,9 @@ set_target_properties(unitScenarioBuilder
   PROPERTIES
   DEFINE_SYMBOL "SUSTAIN_FRAMEWORK_EXPORTS"
   FOLDER "Tests"
-  OUTPUT_NAME "unitScenarioBuilder "
-  COMPILE_PDB_NAME "unitScenarioBuilder "
-  PROJECT_LABEL "unitScenarioBuilder "
+  OUTPUT_NAME "unitScenarioBuilder"
+  COMPILE_PDB_NAME "unitScenarioBuildOneer"
+  PROJECT_LABEL "unitScenarioBuilder"
   DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX}
   CXX_STANDARD 14
   VS_DEBUGGER_WORKING_DIRECTORY ${PROJECT_BINARY_DIR}

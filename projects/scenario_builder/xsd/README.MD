@@ -9,14 +9,15 @@ The following instructions require Codesynthesis XSD 4.0 which is avaliable as a
  1. Install XSD
  1. In a terminal perform the following
  ```shell
-xsd.exe  cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --output-dir cpp ver_0.3/military_scenario_1.0.0.xsd
-xsd.exe  cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --output-dir cpp ver_0.3/msdl_complex_types_1.0.0.xsd
-xsd.exe  cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --output-dir cpp ver_0.3/msdl_simple_types_1.0.0.xsd
-xsd.exe  cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --output-dir cpp ver_0.3/msdl_codes_1.0.0.xsd
-xsd.exe  cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --output-dir cpp/extern ver_0.3/extern/*.xsd
 
-xsd.exe cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --output-dir cpp  --namespace-map "com:ara:pfc:training:1"=pfc::schema ver_0.3/pfc_scenario_0.3.xsd
-xsd.exe cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --output-dir cpp  --namespace-map "com:ara:pfc:training:1"=pfc::schema ver_0.3/pfc_scenario_complex_types_0.3.xsd
+xsd.exe  cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --export-symbol SUSTAIN_XSD_API --prologue-file prologue.txt --output-dir cpp ver_0.3/military_scenario_1.0.0.xsd
+xsd.exe  cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --export-symbol SUSTAIN_XSD_API --prologue-file prologue.txt --output-dir cpp ver_0.3/msdl_complex_types_1.0.0.xsd
+xsd.exe  cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --export-symbol SUSTAIN_XSD_API --prologue-file prologue.txt --output-dir cpp ver_0.3/msdl_simple_types_1.0.0.xsd
+xsd.exe  cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --export-symbol SUSTAIN_XSD_API --prologue-file prologue.txt --output-dir cpp ver_0.3/msdl_codes_1.0.0.xsd
+xsd.exe  cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --export-symbol SUSTAIN_XSD_API --prologue-file prologue.txt --output-dir cpp/extern ver_0.3/extern/*.xsd
+
+xsd.exe cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --export-symbol SUSTAIN_XSD_API --prologue-file prologue.txt --output-dir cpp  --namespace-map "com:ara:pfc:training:1"=pfc::schema ver_0.3/pfc_scenario_0.3.xsd
+xsd.exe cxx-tree --root-element-all --generate-polymorphic --polymorphic-type-all --generate-serialization --generate-ostream --std c++11 --export-symbol SUSTAIN_XSD_API --prologue-file prologue.txt --output-dir cpp  --namespace-map "com:ara:pfc:training:1"=pfc::schema ver_0.3/pfc_scenario_complex_types_0.3.xsd
 ```
 
 ## Contents

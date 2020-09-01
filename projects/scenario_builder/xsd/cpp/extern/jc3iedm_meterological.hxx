@@ -48,6 +48,19 @@
 
 // Begin prologue.
 //
+#if defined(__clang__)
+  #define SUSTAIN_XSD_API
+#elif defined(__gnu_linux__) 
+  #define SUSTAIN_XSD_API __attribute__ ((visibility ("default")))
+#elif defined(_WIN32)
+ // ifdef SUSTAIN_XSD_EXPORTS
+    #define SUSTAIN_XSD_API __declspec(dllexport)
+ // #else
+ //   #define SUSTAIN_XSD_API __declspec(dllimport)
+ // #endif
+#else 
+  #define SUSTAIN_XSD_API
+#endif
 //
 // End prologue.
 
@@ -296,7 +309,7 @@ namespace oo_2_0
 
 namespace oo_2_0
 {
-  class AngleOptionalTypeRangeAngle7_4: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal >
+  class SUSTAIN_XSD_API AngleOptionalTypeRangeAngle7_4: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal >
   {
     public:
     // Constructors.
@@ -328,7 +341,7 @@ namespace oo_2_0
     ~AngleOptionalTypeRangeAngle7_4 ();
   };
 
-  class DatetimeOptionalTypeFix18: public ::xml_schema::string
+  class SUSTAIN_XSD_API DatetimeOptionalTypeFix18: public ::xml_schema::string
   {
     public:
     // Constructors.
@@ -366,7 +379,7 @@ namespace oo_2_0
     ~DatetimeOptionalTypeFix18 ();
   };
 
-  class DimensionOptionalType12_3: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal >
+  class SUSTAIN_XSD_API DimensionOptionalType12_3: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal >
   {
     public:
     // Constructors.
@@ -398,7 +411,7 @@ namespace oo_2_0
     ~DimensionOptionalType12_3 ();
   };
 
-  class DimensionMandatoryType12_3: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal >
+  class SUSTAIN_XSD_API DimensionMandatoryType12_3: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal >
   {
     public:
     // Constructors.
@@ -430,7 +443,7 @@ namespace oo_2_0
     ~DimensionMandatoryType12_3 ();
   };
 
-  class QuantityOptionalType8_4: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal >
+  class SUSTAIN_XSD_API QuantityOptionalType8_4: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal >
   {
     public:
     // Constructors.
@@ -462,7 +475,7 @@ namespace oo_2_0
     ~QuantityOptionalType8_4 ();
   };
 
-  class RateOptionalType4_1: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal >
+  class SUSTAIN_XSD_API RateOptionalType4_1: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal >
   {
     public:
     // Constructors.
@@ -494,7 +507,7 @@ namespace oo_2_0
     ~RateOptionalType4_1 ();
   };
 
-  class RateOptionalType8_4: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal >
+  class SUSTAIN_XSD_API RateOptionalType8_4: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal >
   {
     public:
     // Constructors.
@@ -526,7 +539,7 @@ namespace oo_2_0
     ~RateOptionalType8_4 ();
   };
 
-  class RatioOptionalTypeRangeRatio6_5: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal >
+  class SUSTAIN_XSD_API RatioOptionalTypeRangeRatio6_5: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal >
   {
     public:
     // Constructors.
@@ -558,7 +571,7 @@ namespace oo_2_0
     ~RatioOptionalTypeRangeRatio6_5 ();
   };
 
-  class RatioOptionalTypeRangeRatio7_6: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal >
+  class SUSTAIN_XSD_API RatioOptionalTypeRangeRatio7_6: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal >
   {
     public:
     // Constructors.
@@ -590,7 +603,7 @@ namespace oo_2_0
     ~RatioOptionalTypeRangeRatio7_6 ();
   };
 
-  class TemperatureTypeRangeTemperature5_1: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal >
+  class SUSTAIN_XSD_API TemperatureTypeRangeTemperature5_1: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::decimal, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::decimal >
   {
     public:
     // Constructors.
@@ -622,7 +635,7 @@ namespace oo_2_0
     ~TemperatureTypeRangeTemperature5_1 ();
   };
 
-  class Atmosphere: public ::xml_schema::type
+  class SUSTAIN_XSD_API Atmosphere: public ::xml_schema::type
   {
     public:
     // HumidityRatio
@@ -767,7 +780,7 @@ namespace oo_2_0
     TemperatureGradientCode_optional TemperatureGradientCode_;
   };
 
-  class CloudCover: public ::xml_schema::type
+  class SUSTAIN_XSD_API CloudCover: public ::xml_schema::type
   {
     public:
     // CategoryCode
@@ -910,7 +923,7 @@ namespace oo_2_0
     LightRefractionRatio_optional LightRefractionRatio_;
   };
 
-  class Icing: public ::xml_schema::type
+  class SUSTAIN_XSD_API Icing: public ::xml_schema::type
   {
     public:
     // CategoryCode
@@ -989,7 +1002,7 @@ namespace oo_2_0
     SeverityQualifierCode_optional SeverityQualifierCode_;
   };
 
-  class Light: public ::xml_schema::type
+  class SUSTAIN_XSD_API Light: public ::xml_schema::type
   {
     public:
     // CategoryCode
@@ -1112,7 +1125,7 @@ namespace oo_2_0
     MoonPhaseCode_optional MoonPhaseCode_;
   };
 
-  class Precipitation: public ::xml_schema::type
+  class SUSTAIN_XSD_API Precipitation: public ::xml_schema::type
   {
     public:
     // CategoryCode
@@ -1189,7 +1202,7 @@ namespace oo_2_0
     Rate_optional Rate_;
   };
 
-  class Visibility: public ::xml_schema::type
+  class SUSTAIN_XSD_API Visibility: public ::xml_schema::type
   {
     public:
     // CategoryCode
@@ -1266,7 +1279,7 @@ namespace oo_2_0
     ::xsd::cxx::tree::one< RangeDimension_type > RangeDimension_;
   };
 
-  class Wind: public ::xml_schema::type
+  class SUSTAIN_XSD_API Wind: public ::xml_schema::type
   {
     public:
     // CategoryCode
@@ -1460,54 +1473,71 @@ namespace oo_2_0
 
 namespace oo_2_0
 {
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AngleOptionalTypeRangeAngle7_4&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const DatetimeOptionalTypeFix18&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const DimensionOptionalType12_3&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const DimensionMandatoryType12_3&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const QuantityOptionalType8_4&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RateOptionalType4_1&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RateOptionalType8_4&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RatioOptionalTypeRangeRatio6_5&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RatioOptionalTypeRangeRatio7_6&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const TemperatureTypeRangeTemperature5_1&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const Atmosphere&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CloudCover&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const Icing&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const Light&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const Precipitation&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const Visibility&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const Wind&);
 }
@@ -1532,124 +1562,161 @@ namespace oo_2_0
 
 namespace oo_2_0
 {
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AngleOptionalTypeRangeAngle7_4&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AngleOptionalTypeRangeAngle7_4&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AngleOptionalTypeRangeAngle7_4&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const DatetimeOptionalTypeFix18&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const DatetimeOptionalTypeFix18&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const DatetimeOptionalTypeFix18&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const DimensionOptionalType12_3&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const DimensionOptionalType12_3&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const DimensionOptionalType12_3&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const DimensionMandatoryType12_3&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const DimensionMandatoryType12_3&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const DimensionMandatoryType12_3&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const QuantityOptionalType8_4&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const QuantityOptionalType8_4&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const QuantityOptionalType8_4&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RateOptionalType4_1&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RateOptionalType4_1&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RateOptionalType4_1&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RateOptionalType8_4&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RateOptionalType8_4&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RateOptionalType8_4&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RatioOptionalTypeRangeRatio6_5&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RatioOptionalTypeRangeRatio6_5&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RatioOptionalTypeRangeRatio6_5&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RatioOptionalTypeRangeRatio7_6&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RatioOptionalTypeRangeRatio7_6&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RatioOptionalTypeRangeRatio7_6&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const TemperatureTypeRangeTemperature5_1&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const TemperatureTypeRangeTemperature5_1&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const TemperatureTypeRangeTemperature5_1&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const Atmosphere&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CloudCover&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const Icing&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const Light&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const Precipitation&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const Visibility&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const Wind&);
 }

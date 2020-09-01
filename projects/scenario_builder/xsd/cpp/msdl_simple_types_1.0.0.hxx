@@ -48,6 +48,19 @@
 
 // Begin prologue.
 //
+#if defined(__clang__)
+  #define SUSTAIN_XSD_API
+#elif defined(__gnu_linux__) 
+  #define SUSTAIN_XSD_API __attribute__ ((visibility ("default")))
+#elif defined(_WIN32)
+ // ifdef SUSTAIN_XSD_EXPORTS
+    #define SUSTAIN_XSD_API __declspec(dllexport)
+ // #else
+ //   #define SUSTAIN_XSD_API __declspec(dllimport)
+ // #endif
+#else 
+  #define SUSTAIN_XSD_API
+#endif
 //
 // End prologue.
 
@@ -311,7 +324,7 @@ namespace msdl_1
 
 namespace msdl_1
 {
-  class boolean: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::boolean, char, ::xml_schema::simple_type >
+  class SUSTAIN_XSD_API boolean: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::boolean, char, ::xml_schema::simple_type >
   {
     public:
     // Constructors.
@@ -343,7 +356,7 @@ namespace msdl_1
     ~boolean ();
   };
 
-  class floatCartesianValue9_3: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::double_, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::double_ >
+  class SUSTAIN_XSD_API floatCartesianValue9_3: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::double_, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::double_ >
   {
     public:
     // Constructors.
@@ -375,7 +388,7 @@ namespace msdl_1
     ~floatCartesianValue9_3 ();
   };
 
-  class floatCompassDegrees3_3: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::float_, char, ::xml_schema::simple_type >
+  class SUSTAIN_XSD_API floatCompassDegrees3_3: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::float_, char, ::xml_schema::simple_type >
   {
     public:
     // Constructors.
@@ -407,7 +420,7 @@ namespace msdl_1
     ~floatCompassDegrees3_3 ();
   };
 
-  class floatElevationAGL6_2: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::float_, char, ::xml_schema::simple_type >
+  class SUSTAIN_XSD_API floatElevationAGL6_2: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::float_, char, ::xml_schema::simple_type >
   {
     public:
     // Constructors.
@@ -439,7 +452,7 @@ namespace msdl_1
     ~floatElevationAGL6_2 ();
   };
 
-  class floatLatitudeLongitude3_3: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::float_, char, ::xml_schema::simple_type >
+  class SUSTAIN_XSD_API floatLatitudeLongitude3_3: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::float_, char, ::xml_schema::simple_type >
   {
     public:
     // Constructors.
@@ -471,7 +484,7 @@ namespace msdl_1
     ~floatLatitudeLongitude3_3 ();
   };
 
-  class floatSpacing4_3: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::float_, char, ::xml_schema::simple_type >
+  class SUSTAIN_XSD_API floatSpacing4_3: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::float_, char, ::xml_schema::simple_type >
   {
     public:
     // Constructors.
@@ -503,7 +516,7 @@ namespace msdl_1
     ~floatSpacing4_3 ();
   };
 
-  class floatSpeed6_2: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::float_, char, ::xml_schema::simple_type >
+  class SUSTAIN_XSD_API floatSpeed6_2: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::float_, char, ::xml_schema::simple_type >
   {
     public:
     // Constructors.
@@ -535,7 +548,7 @@ namespace msdl_1
     ~floatSpeed6_2 ();
   };
 
-  class floatUTMEasting9_2: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::float_, char, ::xml_schema::simple_type >
+  class SUSTAIN_XSD_API floatUTMEasting9_2: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::float_, char, ::xml_schema::simple_type >
   {
     public:
     // Constructors.
@@ -567,7 +580,7 @@ namespace msdl_1
     ~floatUTMEasting9_2 ();
   };
 
-  class floatUTMNorthing9_2: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::float_, char, ::xml_schema::simple_type >
+  class SUSTAIN_XSD_API floatUTMNorthing9_2: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::float_, char, ::xml_schema::simple_type >
   {
     public:
     // Constructors.
@@ -599,7 +612,7 @@ namespace msdl_1
     ~floatUTMNorthing9_2 ();
   };
 
-  class integerMGRSEasting5: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::long_, char, ::xml_schema::simple_type >
+  class SUSTAIN_XSD_API integerMGRSEasting5: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::long_, char, ::xml_schema::simple_type >
   {
     public:
     // Constructors.
@@ -631,7 +644,7 @@ namespace msdl_1
     ~integerMGRSEasting5 ();
   };
 
-  class integerMGRSNorthing5: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::long_, char, ::xml_schema::simple_type >
+  class SUSTAIN_XSD_API integerMGRSNorthing5: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::long_, char, ::xml_schema::simple_type >
   {
     public:
     // Constructors.
@@ -663,7 +676,7 @@ namespace msdl_1
     ~integerMGRSNorthing5 ();
   };
 
-  class integerMGRSPrecision1: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::int_, char, ::xml_schema::simple_type >
+  class SUSTAIN_XSD_API integerMGRSPrecision1: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::int_, char, ::xml_schema::simple_type >
   {
     public:
     // Constructors.
@@ -695,7 +708,7 @@ namespace msdl_1
     ~integerMGRSPrecision1 ();
   };
 
-  class integerPriorityToSupport1: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::integer, char, ::xml_schema::simple_type >
+  class SUSTAIN_XSD_API integerPriorityToSupport1: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::integer, char, ::xml_schema::simple_type >
   {
     public:
     // Constructors.
@@ -727,7 +740,7 @@ namespace msdl_1
     ~integerPriorityToSupport1 ();
   };
 
-  class integerQuantity9: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::int_, char, ::xml_schema::simple_type >
+  class SUSTAIN_XSD_API integerQuantity9: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::int_, char, ::xml_schema::simple_type >
   {
     public:
     // Constructors.
@@ -759,7 +772,7 @@ namespace msdl_1
     ~integerQuantity9 ();
   };
 
-  class integerSequence6: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::integer, char, ::xml_schema::simple_type >
+  class SUSTAIN_XSD_API integerSequence6: public ::xsd::cxx::tree::fundamental_base< ::xml_schema::integer, char, ::xml_schema::simple_type >
   {
     public:
     // Constructors.
@@ -791,7 +804,7 @@ namespace msdl_1
     ~integerSequence6 ();
   };
 
-  class patternForceSymbolID15: public ::xml_schema::string
+  class SUSTAIN_XSD_API patternForceSymbolID15: public ::xml_schema::string
   {
     public:
     // Constructors.
@@ -829,7 +842,7 @@ namespace msdl_1
     ~patternForceSymbolID15 ();
   };
 
-  class patternInstallationSymbolID15: public ::xml_schema::string
+  class SUSTAIN_XSD_API patternInstallationSymbolID15: public ::xml_schema::string
   {
     public:
     // Constructors.
@@ -867,7 +880,7 @@ namespace msdl_1
     ~patternInstallationSymbolID15 ();
   };
 
-  class patternMETOCSymbolID15: public ::xml_schema::string
+  class SUSTAIN_XSD_API patternMETOCSymbolID15: public ::xml_schema::string
   {
     public:
     // Constructors.
@@ -905,7 +918,7 @@ namespace msdl_1
     ~patternMETOCSymbolID15 ();
   };
 
-  class patternMGRSGridSquare2: public ::xml_schema::string
+  class SUSTAIN_XSD_API patternMGRSGridSquare2: public ::xml_schema::string
   {
     public:
     // Constructors.
@@ -943,7 +956,7 @@ namespace msdl_1
     ~patternMGRSGridSquare2 ();
   };
 
-  class patternMOOTWSymbolID15: public ::xml_schema::string
+  class SUSTAIN_XSD_API patternMOOTWSymbolID15: public ::xml_schema::string
   {
     public:
     // Constructors.
@@ -981,7 +994,7 @@ namespace msdl_1
     ~patternMOOTWSymbolID15 ();
   };
 
-  class patternTacticalGraphicSymbolID15: public ::xml_schema::string
+  class SUSTAIN_XSD_API patternTacticalGraphicSymbolID15: public ::xml_schema::string
   {
     public:
     // Constructors.
@@ -1019,7 +1032,7 @@ namespace msdl_1
     ~patternTacticalGraphicSymbolID15 ();
   };
 
-  class patternTimeDTG20: public ::xml_schema::string
+  class SUSTAIN_XSD_API patternTimeDTG20: public ::xml_schema::string
   {
     public:
     // Constructors.
@@ -1057,7 +1070,7 @@ namespace msdl_1
     ~patternTimeDTG20 ();
   };
 
-  class patternTimeDTGRelative20: public ::xml_schema::string
+  class SUSTAIN_XSD_API patternTimeDTGRelative20: public ::xml_schema::string
   {
     public:
     // Constructors.
@@ -1095,7 +1108,7 @@ namespace msdl_1
     ~patternTimeDTGRelative20 ();
   };
 
-  class patternUTMGridZone3: public ::xml_schema::string
+  class SUSTAIN_XSD_API patternUTMGridZone3: public ::xml_schema::string
   {
     public:
     // Constructors.
@@ -1133,7 +1146,7 @@ namespace msdl_1
     ~patternUTMGridZone3 ();
   };
 
-  class patternUUID32: public ::xml_schema::string
+  class SUSTAIN_XSD_API patternUUID32: public ::xml_schema::string
   {
     public:
     // Constructors.
@@ -1171,7 +1184,7 @@ namespace msdl_1
     ~patternUUID32 ();
   };
 
-  class patternUUIDRef32: public ::xml_schema::string
+  class SUSTAIN_XSD_API patternUUIDRef32: public ::xml_schema::string
   {
     public:
     // Constructors.
@@ -1209,7 +1222,7 @@ namespace msdl_1
     ~patternUUIDRef32 ();
   };
 
-  class text20: public ::xml_schema::string
+  class SUSTAIN_XSD_API text20: public ::xml_schema::string
   {
     public:
     // Constructors.
@@ -1247,7 +1260,7 @@ namespace msdl_1
     ~text20 ();
   };
 
-  class text21: public ::xml_schema::string
+  class SUSTAIN_XSD_API text21: public ::xml_schema::string
   {
     public:
     // Constructors.
@@ -1285,7 +1298,7 @@ namespace msdl_1
     ~text21 ();
   };
 
-  class textDatum8: public ::xml_schema::string
+  class SUSTAIN_XSD_API textDatum8: public ::xml_schema::string
   {
     public:
     // Constructors.
@@ -1323,7 +1336,7 @@ namespace msdl_1
     ~textDatum8 ();
   };
 
-  class textEquipmentType24: public ::xml_schema::string
+  class SUSTAIN_XSD_API textEquipmentType24: public ::xml_schema::string
   {
     public:
     // Constructors.
@@ -1361,7 +1374,7 @@ namespace msdl_1
     ~textEquipmentType24 ();
   };
 
-  class textIdentifier64: public ::xml_schema::string
+  class SUSTAIN_XSD_API textIdentifier64: public ::xml_schema::string
   {
     public:
     // Constructors.
@@ -1399,7 +1412,7 @@ namespace msdl_1
     ~textIdentifier64 ();
   };
 
-  class textIFF5: public ::xml_schema::string
+  class SUSTAIN_XSD_API textIFF5: public ::xml_schema::string
   {
     public:
     // Constructors.
@@ -1437,7 +1450,7 @@ namespace msdl_1
     ~textIFF5 ();
   };
 
-  class textName255: public ::xml_schema::string
+  class SUSTAIN_XSD_API textName255: public ::xml_schema::string
   {
     public:
     // Constructors.
@@ -1475,7 +1488,7 @@ namespace msdl_1
     ~textName255 ();
   };
 
-  class textSpecialC2HQ9: public ::xml_schema::string
+  class SUSTAIN_XSD_API textSpecialC2HQ9: public ::xml_schema::string
   {
     public:
     // Constructors.
@@ -1518,105 +1531,139 @@ namespace msdl_1
 
 namespace msdl_1
 {
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const boolean&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const floatCartesianValue9_3&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const floatCompassDegrees3_3&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const floatElevationAGL6_2&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const floatLatitudeLongitude3_3&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const floatSpacing4_3&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const floatSpeed6_2&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const floatUTMEasting9_2&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const floatUTMNorthing9_2&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const integerMGRSEasting5&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const integerMGRSNorthing5&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const integerMGRSPrecision1&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const integerPriorityToSupport1&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const integerQuantity9&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const integerSequence6&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const patternForceSymbolID15&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const patternInstallationSymbolID15&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const patternMETOCSymbolID15&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const patternMGRSGridSquare2&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const patternMOOTWSymbolID15&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const patternTacticalGraphicSymbolID15&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const patternTimeDTG20&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const patternTimeDTGRelative20&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const patternUTMGridZone3&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const patternUUID32&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const patternUUIDRef32&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const text20&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const text21&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const textDatum8&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const textEquipmentType24&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const textIdentifier64&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const textIFF5&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const textName255&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const textSpecialC2HQ9&);
 }
@@ -1641,342 +1688,444 @@ namespace msdl_1
 
 namespace msdl_1
 {
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const boolean&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const boolean&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const boolean&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const floatCartesianValue9_3&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const floatCartesianValue9_3&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const floatCartesianValue9_3&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const floatCompassDegrees3_3&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const floatCompassDegrees3_3&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const floatCompassDegrees3_3&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const floatElevationAGL6_2&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const floatElevationAGL6_2&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const floatElevationAGL6_2&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const floatLatitudeLongitude3_3&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const floatLatitudeLongitude3_3&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const floatLatitudeLongitude3_3&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const floatSpacing4_3&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const floatSpacing4_3&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const floatSpacing4_3&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const floatSpeed6_2&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const floatSpeed6_2&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const floatSpeed6_2&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const floatUTMEasting9_2&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const floatUTMEasting9_2&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const floatUTMEasting9_2&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const floatUTMNorthing9_2&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const floatUTMNorthing9_2&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const floatUTMNorthing9_2&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const integerMGRSEasting5&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const integerMGRSEasting5&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const integerMGRSEasting5&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const integerMGRSNorthing5&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const integerMGRSNorthing5&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const integerMGRSNorthing5&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const integerMGRSPrecision1&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const integerMGRSPrecision1&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const integerMGRSPrecision1&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const integerPriorityToSupport1&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const integerPriorityToSupport1&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const integerPriorityToSupport1&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const integerQuantity9&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const integerQuantity9&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const integerQuantity9&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const integerSequence6&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const integerSequence6&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const integerSequence6&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const patternForceSymbolID15&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const patternForceSymbolID15&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const patternForceSymbolID15&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const patternInstallationSymbolID15&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const patternInstallationSymbolID15&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const patternInstallationSymbolID15&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const patternMETOCSymbolID15&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const patternMETOCSymbolID15&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const patternMETOCSymbolID15&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const patternMGRSGridSquare2&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const patternMGRSGridSquare2&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const patternMGRSGridSquare2&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const patternMOOTWSymbolID15&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const patternMOOTWSymbolID15&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const patternMOOTWSymbolID15&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const patternTacticalGraphicSymbolID15&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const patternTacticalGraphicSymbolID15&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const patternTacticalGraphicSymbolID15&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const patternTimeDTG20&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const patternTimeDTG20&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const patternTimeDTG20&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const patternTimeDTGRelative20&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const patternTimeDTGRelative20&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const patternTimeDTGRelative20&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const patternUTMGridZone3&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const patternUTMGridZone3&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const patternUTMGridZone3&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const patternUUID32&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const patternUUID32&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const patternUUID32&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const patternUUIDRef32&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const patternUUIDRef32&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const patternUUIDRef32&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const text20&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const text20&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const text20&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const text21&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const text21&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const text21&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const textDatum8&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const textDatum8&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const textDatum8&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const textEquipmentType24&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const textEquipmentType24&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const textEquipmentType24&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const textIdentifier64&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const textIdentifier64&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const textIdentifier64&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const textIFF5&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const textIFF5&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const textIFF5&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const textName255&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const textName255&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const textName255&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const textSpecialC2HQ9&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const textSpecialC2HQ9&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const textSpecialC2HQ9&);

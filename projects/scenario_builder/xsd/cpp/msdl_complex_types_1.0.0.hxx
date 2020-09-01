@@ -48,6 +48,19 @@
 
 // Begin prologue.
 //
+#if defined(__clang__)
+  #define SUSTAIN_XSD_API
+#elif defined(__gnu_linux__) 
+  #define SUSTAIN_XSD_API __attribute__ ((visibility ("default")))
+#elif defined(_WIN32)
+ // ifdef SUSTAIN_XSD_EXPORTS
+    #define SUSTAIN_XSD_API __declspec(dllexport)
+ // #else
+ //   #define SUSTAIN_XSD_API __declspec(dllimport)
+ // #endif
+#else 
+  #define SUSTAIN_XSD_API
+#endif
 //
 // End prologue.
 
@@ -364,7 +377,7 @@ namespace msdl_1
 
 namespace msdl_1
 {
-  class AnchorPointType: public ::xml_schema::type
+  class SUSTAIN_XSD_API AnchorPointType: public ::xml_schema::type
   {
     public:
     // AnchorChoice
@@ -442,7 +455,7 @@ namespace msdl_1
     ::xsd::cxx::tree::one< Anchor_type > Anchor_;
   };
 
-  class AnchorPointsType: public ::xml_schema::type
+  class SUSTAIN_XSD_API AnchorPointsType: public ::xml_schema::type
   {
     public:
     // AnchorPoint
@@ -495,7 +508,7 @@ namespace msdl_1
     AnchorPoint_sequence AnchorPoint_;
   };
 
-  class AnchorType: public ::xml_schema::type
+  class SUSTAIN_XSD_API AnchorType: public ::xml_schema::type
   {
     public:
     // Location
@@ -574,7 +587,7 @@ namespace msdl_1
     PointSymbolHandle_optional PointSymbolHandle_;
   };
 
-  class AreaSymbolModifiersType: public ::xml_schema::type
+  class SUSTAIN_XSD_API AreaSymbolModifiersType: public ::xml_schema::type
   {
     public:
     // Echelon
@@ -763,7 +776,7 @@ namespace msdl_1
     DateTimeGroup1_optional DateTimeGroup1_;
   };
 
-  class AssociatedOverlaysType: public ::xml_schema::type
+  class SUSTAIN_XSD_API AssociatedOverlaysType: public ::xml_schema::type
   {
     public:
     // OverlayHandles
@@ -840,7 +853,7 @@ namespace msdl_1
     SourceOverlayType_optional SourceOverlayType_;
   };
 
-  class AssociationsType: public ::xml_schema::type
+  class SUSTAIN_XSD_API AssociationsType: public ::xml_schema::type
   {
     public:
     // Association
@@ -893,7 +906,7 @@ namespace msdl_1
     Association_sequence Association_;
   };
 
-  class AssociationType: public ::xml_schema::type
+  class SUSTAIN_XSD_API AssociationType: public ::xml_schema::type
   {
     public:
     // AffiliateHandle
@@ -968,7 +981,7 @@ namespace msdl_1
     ::xsd::cxx::tree::one< Relationship_type > Relationship_;
   };
 
-  class BoundarySymbolModifiersType: public ::xml_schema::type
+  class SUSTAIN_XSD_API BoundarySymbolModifiersType: public ::xml_schema::type
   {
     public:
     // Echelon
@@ -1069,7 +1082,7 @@ namespace msdl_1
     UniqueDesignation1_optional UniqueDesignation1_;
   };
 
-  class CloudCoverItemsType: public ::xml_schema::type
+  class SUSTAIN_XSD_API CloudCoverItemsType: public ::xml_schema::type
   {
     public:
     // CloudCover
@@ -1122,7 +1135,7 @@ namespace msdl_1
     CloudCover_sequence CloudCover_;
   };
 
-  class CommandRelationType: public ::xml_schema::type
+  class SUSTAIN_XSD_API CommandRelationType: public ::xml_schema::type
   {
     public:
     // CommandingSuperiorHandle
@@ -1197,7 +1210,7 @@ namespace msdl_1
     ::xsd::cxx::tree::one< CommandRelationshipType_type > CommandRelationshipType_;
   };
 
-  class CommunicationNetInstancesType: public ::xml_schema::type
+  class SUSTAIN_XSD_API CommunicationNetInstancesType: public ::xml_schema::type
   {
     public:
     // CommunicationNetInstance
@@ -1250,7 +1263,7 @@ namespace msdl_1
     CommunicationNetInstance_sequence CommunicationNetInstance_;
   };
 
-  class CommunicationNetInstanceType: public ::xml_schema::type
+  class SUSTAIN_XSD_API CommunicationNetInstanceType: public ::xml_schema::type
   {
     public:
     // CommunicationNetType
@@ -1347,7 +1360,7 @@ namespace msdl_1
     ::xsd::cxx::tree::one< CommunicationService_type > CommunicationService_;
   };
 
-  class CommunicationNetReferencesType: public ::xml_schema::type
+  class SUSTAIN_XSD_API CommunicationNetReferencesType: public ::xml_schema::type
   {
     public:
     // CommunicationNetReference
@@ -1400,7 +1413,7 @@ namespace msdl_1
     CommunicationNetReference_sequence CommunicationNetReference_;
   };
 
-  class CommunicationNetReferenceType: public ::xml_schema::type
+  class SUSTAIN_XSD_API CommunicationNetReferenceType: public ::xml_schema::type
   {
     public:
     // CommunicationNetId
@@ -1475,7 +1488,7 @@ namespace msdl_1
     ::xsd::cxx::tree::one< UnitOwnerHandle_type > UnitOwnerHandle_;
   };
 
-  class CoordinateDataStandardType: public ::xml_schema::type
+  class SUSTAIN_XSD_API CoordinateDataStandardType: public ::xml_schema::type
   {
     public:
     // CoordinateSystemType
@@ -1550,7 +1563,7 @@ namespace msdl_1
     ::xsd::cxx::tree::one< CoordinateSystemDatum_type > CoordinateSystemDatum_;
   };
 
-  class CoordinatesType: public ::xml_schema::type
+  class SUSTAIN_XSD_API CoordinatesType: public ::xml_schema::type
   {
     public:
     // CoordinateChoice
@@ -1628,7 +1641,7 @@ namespace msdl_1
     ::xsd::cxx::tree::one< CoordinateData_type > CoordinateData_;
   };
 
-  class CoordinatePointType: public ::xml_schema::type
+  class SUSTAIN_XSD_API CoordinatePointType: public ::xml_schema::type
   {
     public:
     // MGRS
@@ -1751,7 +1764,7 @@ namespace msdl_1
     GCC_optional GCC_;
   };
 
-  class EnvironmentType: public ::xml_schema::type
+  class SUSTAIN_XSD_API EnvironmentType: public ::xml_schema::type
   {
     public:
     // ScenarioTime
@@ -1874,7 +1887,7 @@ namespace msdl_1
     METOC_optional METOC_;
   };
 
-  class EquipmentDispositionType: public ::xml_schema::type
+  class SUSTAIN_XSD_API EquipmentDispositionType: public ::xml_schema::type
   {
     public:
     // Location
@@ -1995,7 +2008,7 @@ namespace msdl_1
     FormationPosition_optional FormationPosition_;
   };
 
-  class EquipmentItemType: public ::xml_schema::type
+  class SUSTAIN_XSD_API EquipmentItemType: public ::xml_schema::type
   {
     public:
     // ObjectHandle
@@ -2203,7 +2216,7 @@ namespace msdl_1
     Model_optional Model_;
   };
 
-  class EquipmentModelType: public ::xml_schema::type
+  class SUSTAIN_XSD_API EquipmentModelType: public ::xml_schema::type
   {
     public:
     // Resolution
@@ -2258,7 +2271,7 @@ namespace msdl_1
     ::xsd::cxx::tree::one< Resolution_type > Resolution_;
   };
 
-  class EquipmentRelationsType: public ::xml_schema::type
+  class SUSTAIN_XSD_API EquipmentRelationsType: public ::xml_schema::type
   {
     public:
     // OrganicSuperiorHandle
@@ -2335,7 +2348,7 @@ namespace msdl_1
     ::xsd::cxx::tree::one< HoldingOrganization_type > HoldingOrganization_;
   };
 
-  class EquipmentSymbolModifiersType: public ::xml_schema::type
+  class SUSTAIN_XSD_API EquipmentSymbolModifiersType: public ::xml_schema::type
   {
     public:
     // Quantity
@@ -2544,7 +2557,7 @@ namespace msdl_1
     TowedSonarArray_optional TowedSonarArray_;
   };
 
-  class EquipmentType: public ::xml_schema::type
+  class SUSTAIN_XSD_API EquipmentType: public ::xml_schema::type
   {
     public:
     // EquipmentItem
@@ -2597,7 +2610,7 @@ namespace msdl_1
     EquipmentItem_sequence EquipmentItem_;
   };
 
-  class ForceRelationDataType: public ::xml_schema::type
+  class SUSTAIN_XSD_API ForceRelationDataType: public ::xml_schema::type
   {
     public:
     // CommandRelation
@@ -2676,7 +2689,7 @@ namespace msdl_1
     ForceSideHandle_optional ForceSideHandle_;
   };
 
-  class ForceRelationType: public ::xml_schema::type
+  class SUSTAIN_XSD_API ForceRelationType: public ::xml_schema::type
   {
     public:
     // ForceRelationChoice
@@ -2754,7 +2767,7 @@ namespace msdl_1
     ::xsd::cxx::tree::one< ForceRelationData_type > ForceRelationData_;
   };
 
-  class ForceSidesType: public ::xml_schema::type
+  class SUSTAIN_XSD_API ForceSidesType: public ::xml_schema::type
   {
     public:
     // ForceSide
@@ -2807,7 +2820,7 @@ namespace msdl_1
     ForceSide_sequence ForceSide_;
   };
 
-  class ForceSideType: public ::xml_schema::type
+  class SUSTAIN_XSD_API ForceSideType: public ::xml_schema::type
   {
     public:
     // ObjectHandle
@@ -2970,7 +2983,7 @@ namespace msdl_1
     Associations_optional Associations_;
   };
 
-  class FormationDataType: public ::xml_schema::type
+  class SUSTAIN_XSD_API FormationDataType: public ::xml_schema::type
   {
     public:
     // GroundFormationType
@@ -3093,7 +3106,7 @@ namespace msdl_1
     SubsurfaceFormationType_optional SubsurfaceFormationType_;
   };
 
-  class FormationPositionType: public ::xml_schema::type
+  class SUSTAIN_XSD_API FormationPositionType: public ::xml_schema::type
   {
     public:
     // OutOfFormation
@@ -3194,7 +3207,7 @@ namespace msdl_1
     SensorOrientation_optional SensorOrientation_;
   };
 
-  class GCCType: public ::xml_schema::type
+  class SUSTAIN_XSD_API GCCType: public ::xml_schema::type
   {
     public:
     // X
@@ -3289,7 +3302,7 @@ namespace msdl_1
     ::xsd::cxx::tree::one< Z_type > Z_;
   };
 
-  class GDCType: public ::xml_schema::type
+  class SUSTAIN_XSD_API GDCType: public ::xml_schema::type
   {
     public:
     // Latitude
@@ -3384,7 +3397,7 @@ namespace msdl_1
     ::xsd::cxx::tree::one< ElevationAGL_type > ElevationAGL_;
   };
 
-  class InstallationsType: public ::xml_schema::type
+  class SUSTAIN_XSD_API InstallationsType: public ::xml_schema::type
   {
     public:
     // Installation
@@ -3437,7 +3450,7 @@ namespace msdl_1
     Installation_sequence Installation_;
   };
 
-  class InstallationSymbolModifiersType: public ::xml_schema::type
+  class SUSTAIN_XSD_API InstallationSymbolModifiersType: public ::xml_schema::type
   {
     public:
     // FrameShapeModifier
@@ -3624,7 +3637,7 @@ namespace msdl_1
     DateTimeGroup_optional DateTimeGroup_;
   };
 
-  class InstallationType: public ::xml_schema::type
+  class SUSTAIN_XSD_API InstallationType: public ::xml_schema::type
   {
     public:
     // ObjectHandle
@@ -3853,7 +3866,7 @@ namespace msdl_1
     AssociatedOverlays_optional AssociatedOverlays_;
   };
 
-  class LightItemsType: public ::xml_schema::type
+  class SUSTAIN_XSD_API LightItemsType: public ::xml_schema::type
   {
     public:
     // Light
@@ -3906,7 +3919,7 @@ namespace msdl_1
     Light_sequence Light_;
   };
 
-  class LineSymbolModifiersType: public ::xml_schema::type
+  class SUSTAIN_XSD_API LineSymbolModifiersType: public ::xml_schema::type
   {
     public:
     // UniqueDesignation
@@ -4029,7 +4042,7 @@ namespace msdl_1
     DateTimeGroup1_optional DateTimeGroup1_;
   };
 
-  class METOCDispositionType: public ::xml_schema::type
+  class SUSTAIN_XSD_API METOCDispositionType: public ::xml_schema::type
   {
     public:
     // AnchorPoints
@@ -4128,7 +4141,7 @@ namespace msdl_1
     Speed_optional Speed_;
   };
 
-  class METOCGraphicType: public ::xml_schema::type
+  class SUSTAIN_XSD_API METOCGraphicType: public ::xml_schema::type
   {
     public:
     // ObjectHandle
@@ -4336,7 +4349,7 @@ namespace msdl_1
     ::xsd::cxx::tree::one< Disposition_type > Disposition_;
   };
 
-  class METOCType: public ::xml_schema::type
+  class SUSTAIN_XSD_API METOCType: public ::xml_schema::type
   {
     public:
     // METOCGraphic
@@ -4389,7 +4402,7 @@ namespace msdl_1
     METOCGraphic_sequence METOCGraphic_;
   };
 
-  class MilitaryScenarioType: public ::xml_schema::type
+  class SUSTAIN_XSD_API MilitaryScenarioType: public ::xml_schema::type
   {
     public:
     // ScenarioID
@@ -4616,7 +4629,7 @@ namespace msdl_1
     MOOTWGraphics_optional MOOTWGraphics_;
   };
 
-  class MGRSType: public ::xml_schema::type
+  class SUSTAIN_XSD_API MGRSType: public ::xml_schema::type
   {
     public:
     // MGRSGridZone
@@ -4773,7 +4786,7 @@ namespace msdl_1
     ElevationAGL_optional ElevationAGL_;
   };
 
-  class MOOTWDispositionType: public ::xml_schema::type
+  class SUSTAIN_XSD_API MOOTWDispositionType: public ::xml_schema::type
   {
     public:
     // Location
@@ -4872,7 +4885,7 @@ namespace msdl_1
     Speed_optional Speed_;
   };
 
-  class MOOTWGraphicsType: public ::xml_schema::type
+  class SUSTAIN_XSD_API MOOTWGraphicsType: public ::xml_schema::type
   {
     public:
     // MOOTWGraphic
@@ -4925,7 +4938,7 @@ namespace msdl_1
     MOOTWGraphic_sequence MOOTWGraphic_;
   };
 
-  class MOOTWGraphicType: public ::xml_schema::type
+  class SUSTAIN_XSD_API MOOTWGraphicType: public ::xml_schema::type
   {
     public:
     // ObjectHandle
@@ -5110,7 +5123,7 @@ namespace msdl_1
     ::xsd::cxx::tree::one< Disposition_type > Disposition_;
   };
 
-  class MOOTWSymbolModifiersType: public ::xml_schema::type
+  class SUSTAIN_XSD_API MOOTWSymbolModifiersType: public ::xml_schema::type
   {
     public:
     // Echelon
@@ -5363,7 +5376,7 @@ namespace msdl_1
     SpecialC2HQ_optional SpecialC2HQ_;
   };
 
-  class NBCEventSymbolModifiersType: public ::xml_schema::type
+  class SUSTAIN_XSD_API NBCEventSymbolModifiersType: public ::xml_schema::type
   {
     public:
     // Quantity
@@ -5548,7 +5561,7 @@ namespace msdl_1
     ::xsd::cxx::tree::one< DirectionOfMovement_type > DirectionOfMovement_;
   };
 
-  class OptionsType: public ::xml_schema::type
+  class SUSTAIN_XSD_API OptionsType: public ::xml_schema::type
   {
     public:
     // MSDLVersion
@@ -5647,7 +5660,7 @@ namespace msdl_1
     ScenarioDataStandards_optional ScenarioDataStandards_;
   };
 
-  class OrganicRelationDataType: public ::xml_schema::type
+  class SUSTAIN_XSD_API OrganicRelationDataType: public ::xml_schema::type
   {
     public:
     // OrganicForceSideHandle
@@ -5726,7 +5739,7 @@ namespace msdl_1
     OrganicSuperiorHandle_optional OrganicSuperiorHandle_;
   };
 
-  class OrganicRelationType: public ::xml_schema::type
+  class SUSTAIN_XSD_API OrganicRelationType: public ::xml_schema::type
   {
     public:
     // OrganicRelationData
@@ -5804,7 +5817,7 @@ namespace msdl_1
     ::xsd::cxx::tree::one< OrganicRelationChoice_type > OrganicRelationChoice_;
   };
 
-  class OrganizationDetailType: public ::xml_schema::type
+  class SUSTAIN_XSD_API OrganizationDetailType: public ::xml_schema::type
   {
     public:
     // AggregateBased
@@ -5881,7 +5894,7 @@ namespace msdl_1
     AggregateEchelon_optional AggregateEchelon_;
   };
 
-  class OrganizationsType: public ::xml_schema::type
+  class SUSTAIN_XSD_API OrganizationsType: public ::xml_schema::type
   {
     public:
     // Units
@@ -5958,7 +5971,7 @@ namespace msdl_1
     Equipment_optional Equipment_;
   };
 
-  class OverlayHandlesType: public ::xml_schema::type
+  class SUSTAIN_XSD_API OverlayHandlesType: public ::xml_schema::type
   {
     public:
     // OverlayHandle
@@ -6011,7 +6024,7 @@ namespace msdl_1
     OverlayHandle_sequence OverlayHandle_;
   };
 
-  class OverlaysType: public ::xml_schema::type
+  class SUSTAIN_XSD_API OverlaysType: public ::xml_schema::type
   {
     public:
     // Overlay
@@ -6064,7 +6077,7 @@ namespace msdl_1
     Overlay_sequence Overlay_;
   };
 
-  class OverlayType: public ::xml_schema::type
+  class SUSTAIN_XSD_API OverlayType: public ::xml_schema::type
   {
     public:
     // ObjectHandle
@@ -6159,7 +6172,7 @@ namespace msdl_1
     ::xsd::cxx::tree::one< OverlayName_type > OverlayName_;
   };
 
-  class OwnerType: public ::xml_schema::type
+  class SUSTAIN_XSD_API OwnerType: public ::xml_schema::type
   {
     public:
     // OwnerChoice
@@ -6237,7 +6250,7 @@ namespace msdl_1
     ::xsd::cxx::tree::one< OwnerData_type > OwnerData_;
   };
 
-  class OwnerDataType: public ::xml_schema::type
+  class SUSTAIN_XSD_API OwnerDataType: public ::xml_schema::type
   {
     public:
     // UnitOwnerHandle
@@ -6316,7 +6329,7 @@ namespace msdl_1
     ForceOwnerHandle_optional ForceOwnerHandle_;
   };
 
-  class OwnFormationType: public ::xml_schema::type
+  class SUSTAIN_XSD_API OwnFormationType: public ::xml_schema::type
   {
     public:
     // FormationLocationType
@@ -6459,7 +6472,7 @@ namespace msdl_1
     ::xsd::cxx::tree::one< FormationData_type > FormationData_;
   };
 
-  class PointSymbolModifiersType: public ::xml_schema::type
+  class SUSTAIN_XSD_API PointSymbolModifiersType: public ::xml_schema::type
   {
     public:
     // AdditionalInfo
@@ -6624,7 +6637,7 @@ namespace msdl_1
     Orientation_optional Orientation_;
   };
 
-  class RectangleAreaType: public ::xml_schema::type
+  class SUSTAIN_XSD_API RectangleAreaType: public ::xml_schema::type
   {
     public:
     // Name
@@ -6721,7 +6734,7 @@ namespace msdl_1
     ::xsd::cxx::tree::one< LowerLeft_type > LowerLeft_;
   };
 
-  class ScenarioDataStandardsType: public ::xml_schema::type
+  class SUSTAIN_XSD_API ScenarioDataStandardsType: public ::xml_schema::type
   {
     public:
     // SymbologyDataStandard
@@ -6796,7 +6809,7 @@ namespace msdl_1
     ::xsd::cxx::tree::one< CoordinateDataStandard_type > CoordinateDataStandard_;
   };
 
-  class ScenarioWeatherType: public ::xml_schema::type
+  class SUSTAIN_XSD_API ScenarioWeatherType: public ::xml_schema::type
   {
     public:
     // Atmosphere
@@ -6985,7 +6998,7 @@ namespace msdl_1
     WindItems_optional WindItems_;
   };
 
-  class StatusType: public ::xml_schema::type
+  class SUSTAIN_XSD_API StatusType: public ::xml_schema::type
   {
     public:
     // MOPPLevel
@@ -7064,7 +7077,7 @@ namespace msdl_1
     WeaponControlStatus_optional WeaponControlStatus_;
   };
 
-  class SupportRelationsType: public ::xml_schema::type
+  class SUSTAIN_XSD_API SupportRelationsType: public ::xml_schema::type
   {
     public:
     // SupportRelation
@@ -7117,7 +7130,7 @@ namespace msdl_1
     SupportRelation_sequence SupportRelation_;
   };
 
-  class SupportRelationType: public ::xml_schema::type
+  class SUSTAIN_XSD_API SupportRelationType: public ::xml_schema::type
   {
     public:
     // SupportedUnitHandle
@@ -7236,7 +7249,7 @@ namespace msdl_1
     SupportRoleType_optional SupportRoleType_;
   };
 
-  class SymbolClassModifiersType: public ::xml_schema::type
+  class SUSTAIN_XSD_API SymbolClassModifiersType: public ::xml_schema::type
   {
     public:
     // PointSymbolModifiers
@@ -7403,7 +7416,7 @@ namespace msdl_1
     TaskSymbolModifiers_optional TaskSymbolModifiers_;
   };
 
-  class SymbologyDataStandardType: public ::xml_schema::type
+  class SUSTAIN_XSD_API SymbologyDataStandardType: public ::xml_schema::type
   {
     public:
     // StandardName
@@ -7498,7 +7511,7 @@ namespace msdl_1
     ::xsd::cxx::tree::one< MinorVersion_type > MinorVersion_;
   };
 
-  class TacticalGraphicsType: public ::xml_schema::type
+  class SUSTAIN_XSD_API TacticalGraphicsType: public ::xml_schema::type
   {
     public:
     // TacticalGraphic
@@ -7551,7 +7564,7 @@ namespace msdl_1
     TacticalGraphic_sequence TacticalGraphic_;
   };
 
-  class TacticalGraphicType: public ::xml_schema::type
+  class SUSTAIN_XSD_API TacticalGraphicType: public ::xml_schema::type
   {
     public:
     // ObjectHandle
@@ -7757,7 +7770,7 @@ namespace msdl_1
     ::xsd::cxx::tree::one< SymbolClassChoice_type > SymbolClassChoice_;
   };
 
-  class TaskSymbolModifiersType: public ::xml_schema::type
+  class SUSTAIN_XSD_API TaskSymbolModifiersType: public ::xml_schema::type
   {
     public:
     // UniqueDesignation
@@ -7836,7 +7849,7 @@ namespace msdl_1
     DateTimeGroup_optional DateTimeGroup_;
   };
 
-  class UnitDispositionType: public ::xml_schema::type
+  class SUSTAIN_XSD_API UnitDispositionType: public ::xml_schema::type
   {
     public:
     // Location
@@ -7981,7 +7994,7 @@ namespace msdl_1
     OwnFormation_optional OwnFormation_;
   };
 
-  class UnitModelType: public ::xml_schema::type
+  class SUSTAIN_XSD_API UnitModelType: public ::xml_schema::type
   {
     public:
     // Resolution
@@ -8060,7 +8073,7 @@ namespace msdl_1
     AggregateBased_optional AggregateBased_;
   };
 
-  class UnitRelationsType: public ::xml_schema::type
+  class SUSTAIN_XSD_API UnitRelationsType: public ::xml_schema::type
   {
     public:
     // ForceRelation
@@ -8159,7 +8172,7 @@ namespace msdl_1
     OrganicRelation_optional OrganicRelation_;
   };
 
-  class UnitsType: public ::xml_schema::type
+  class SUSTAIN_XSD_API UnitsType: public ::xml_schema::type
   {
     public:
     // Unit
@@ -8212,7 +8225,7 @@ namespace msdl_1
     Unit_sequence Unit_;
   };
 
-  class UnitSymbolModifiersType: public ::xml_schema::type
+  class SUSTAIN_XSD_API UnitSymbolModifiersType: public ::xml_schema::type
   {
     public:
     // Echelon
@@ -8443,7 +8456,7 @@ namespace msdl_1
     SpecialC2HQ_optional SpecialC2HQ_;
   };
 
-  class UnitType: public ::xml_schema::type
+  class SUSTAIN_XSD_API UnitType: public ::xml_schema::type
   {
     public:
     // ObjectHandle
@@ -8674,7 +8687,7 @@ namespace msdl_1
     Model_optional Model_;
   };
 
-  class UTMType: public ::xml_schema::type
+  class SUSTAIN_XSD_API UTMType: public ::xml_schema::type
   {
     public:
     // UTMGridZone
@@ -8791,7 +8804,7 @@ namespace msdl_1
     ElevationAGL_optional ElevationAGL_;
   };
 
-  class VisibilityItemsType: public ::xml_schema::type
+  class SUSTAIN_XSD_API VisibilityItemsType: public ::xml_schema::type
   {
     public:
     // Visibility
@@ -8844,7 +8857,7 @@ namespace msdl_1
     Visibility_sequence Visibility_;
   };
 
-  class WindItemsType: public ::xml_schema::type
+  class SUSTAIN_XSD_API WindItemsType: public ::xml_schema::type
   {
     public:
     // Wind
@@ -8902,240 +8915,319 @@ namespace msdl_1
 
 namespace msdl_1
 {
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AnchorPointType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AnchorPointsType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AnchorType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AreaSymbolModifiersType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AssociatedOverlaysType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AssociationsType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AssociationType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const BoundarySymbolModifiersType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CloudCoverItemsType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CommandRelationType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CommunicationNetInstancesType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CommunicationNetInstanceType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CommunicationNetReferencesType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CommunicationNetReferenceType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CoordinateDataStandardType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CoordinatesType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CoordinatePointType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const EnvironmentType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const EquipmentDispositionType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const EquipmentItemType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const EquipmentModelType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const EquipmentRelationsType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const EquipmentSymbolModifiersType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const EquipmentType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ForceRelationDataType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ForceRelationType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ForceSidesType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ForceSideType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const FormationDataType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const FormationPositionType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const GCCType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const GDCType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const InstallationsType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const InstallationSymbolModifiersType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const InstallationType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const LightItemsType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const LineSymbolModifiersType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const METOCDispositionType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const METOCGraphicType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const METOCType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MilitaryScenarioType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MGRSType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MOOTWDispositionType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MOOTWGraphicsType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MOOTWGraphicType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MOOTWSymbolModifiersType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const NBCEventSymbolModifiersType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OptionsType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrganicRelationDataType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrganicRelationType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrganizationDetailType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrganizationsType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OverlayHandlesType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OverlaysType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OverlayType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OwnerType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OwnerDataType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OwnFormationType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PointSymbolModifiersType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RectangleAreaType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ScenarioDataStandardsType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ScenarioWeatherType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const StatusType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const SupportRelationsType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const SupportRelationType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const SymbolClassModifiersType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const SymbologyDataStandardType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const TacticalGraphicsType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const TacticalGraphicType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const TaskSymbolModifiersType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const UnitDispositionType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const UnitModelType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const UnitRelationsType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const UnitsType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const UnitSymbolModifiersType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const UnitType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const UTMType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const VisibilityItemsType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const WindItemsType&);
 }
@@ -9160,240 +9252,319 @@ namespace msdl_1
 
 namespace msdl_1
 {
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AnchorPointType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AnchorPointsType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AnchorType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AreaSymbolModifiersType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AssociatedOverlaysType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AssociationsType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AssociationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const BoundarySymbolModifiersType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CloudCoverItemsType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CommandRelationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CommunicationNetInstancesType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CommunicationNetInstanceType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CommunicationNetReferencesType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CommunicationNetReferenceType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CoordinateDataStandardType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CoordinatesType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CoordinatePointType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const EnvironmentType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const EquipmentDispositionType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const EquipmentItemType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const EquipmentModelType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const EquipmentRelationsType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const EquipmentSymbolModifiersType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const EquipmentType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ForceRelationDataType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ForceRelationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ForceSidesType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ForceSideType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const FormationDataType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const FormationPositionType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const GCCType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const GDCType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const InstallationsType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const InstallationSymbolModifiersType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const InstallationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const LightItemsType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const LineSymbolModifiersType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const METOCDispositionType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const METOCGraphicType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const METOCType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MilitaryScenarioType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MGRSType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MOOTWDispositionType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MOOTWGraphicsType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MOOTWGraphicType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MOOTWSymbolModifiersType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const NBCEventSymbolModifiersType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OptionsType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrganicRelationDataType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrganicRelationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrganizationDetailType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrganizationsType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OverlayHandlesType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OverlaysType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OverlayType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OwnerType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OwnerDataType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OwnFormationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PointSymbolModifiersType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RectangleAreaType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ScenarioDataStandardsType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ScenarioWeatherType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const StatusType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const SupportRelationsType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const SupportRelationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const SymbolClassModifiersType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const SymbologyDataStandardType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const TacticalGraphicsType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const TacticalGraphicType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const TaskSymbolModifiersType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const UnitDispositionType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const UnitModelType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const UnitRelationsType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const UnitsType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const UnitSymbolModifiersType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const UnitType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const UTMType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const VisibilityItemsType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const WindItemsType&);
 }

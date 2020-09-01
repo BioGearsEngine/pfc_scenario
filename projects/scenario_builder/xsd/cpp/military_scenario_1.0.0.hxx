@@ -48,6 +48,19 @@
 
 // Begin prologue.
 //
+#if defined(__clang__)
+  #define SUSTAIN_XSD_API
+#elif defined(__gnu_linux__) 
+  #define SUSTAIN_XSD_API __attribute__ ((visibility ("default")))
+#elif defined(_WIN32)
+ // ifdef SUSTAIN_XSD_EXPORTS
+    #define SUSTAIN_XSD_API __declspec(dllexport)
+ // #else
+ //   #define SUSTAIN_XSD_API __declspec(dllimport)
+ // #endif
+#else 
+  #define SUSTAIN_XSD_API
+#endif
 //
 // End prologue.
 
@@ -298,17 +311,20 @@ namespace msdl_1
   // Parse a URI or a local file.
   //
 
+  SUSTAIN_XSD_API
   ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (const ::std::string& uri,
                     ::xml_schema::flags f = 0,
                     const ::xml_schema::properties& p = ::xml_schema::properties ());
 
+  SUSTAIN_XSD_API
   ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (const ::std::string& uri,
                     ::xml_schema::error_handler& eh,
                     ::xml_schema::flags f = 0,
                     const ::xml_schema::properties& p = ::xml_schema::properties ());
 
+  SUSTAIN_XSD_API
   ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (const ::std::string& uri,
                     ::xercesc::DOMErrorHandler& eh,
@@ -318,29 +334,34 @@ namespace msdl_1
   // Parse std::istream.
   //
 
+  SUSTAIN_XSD_API
   ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (::std::istream& is,
                     ::xml_schema::flags f = 0,
                     const ::xml_schema::properties& p = ::xml_schema::properties ());
 
+  SUSTAIN_XSD_API
   ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (::std::istream& is,
                     ::xml_schema::error_handler& eh,
                     ::xml_schema::flags f = 0,
                     const ::xml_schema::properties& p = ::xml_schema::properties ());
 
+  SUSTAIN_XSD_API
   ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (::std::istream& is,
                     ::xercesc::DOMErrorHandler& eh,
                     ::xml_schema::flags f = 0,
                     const ::xml_schema::properties& p = ::xml_schema::properties ());
 
+  SUSTAIN_XSD_API
   ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (::std::istream& is,
                     const ::std::string& id,
                     ::xml_schema::flags f = 0,
                     const ::xml_schema::properties& p = ::xml_schema::properties ());
 
+  SUSTAIN_XSD_API
   ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (::std::istream& is,
                     const ::std::string& id,
@@ -348,6 +369,7 @@ namespace msdl_1
                     ::xml_schema::flags f = 0,
                     const ::xml_schema::properties& p = ::xml_schema::properties ());
 
+  SUSTAIN_XSD_API
   ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (::std::istream& is,
                     const ::std::string& id,
@@ -358,17 +380,20 @@ namespace msdl_1
   // Parse xercesc::InputSource.
   //
 
+  SUSTAIN_XSD_API
   ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (::xercesc::InputSource& is,
                     ::xml_schema::flags f = 0,
                     const ::xml_schema::properties& p = ::xml_schema::properties ());
 
+  SUSTAIN_XSD_API
   ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (::xercesc::InputSource& is,
                     ::xml_schema::error_handler& eh,
                     ::xml_schema::flags f = 0,
                     const ::xml_schema::properties& p = ::xml_schema::properties ());
 
+  SUSTAIN_XSD_API
   ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (::xercesc::InputSource& is,
                     ::xercesc::DOMErrorHandler& eh,
@@ -378,11 +403,13 @@ namespace msdl_1
   // Parse xercesc::DOMDocument.
   //
 
+  SUSTAIN_XSD_API
   ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (const ::xercesc::DOMDocument& d,
                     ::xml_schema::flags f = 0,
                     const ::xml_schema::properties& p = ::xml_schema::properties ());
 
+  SUSTAIN_XSD_API
   ::std::unique_ptr< ::msdl_1::MilitaryScenarioType >
   MilitaryScenario (::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument > d,
                     ::xml_schema::flags f = 0,
@@ -402,6 +429,7 @@ namespace msdl_1
   // Serialize to std::ostream.
   //
 
+  SUSTAIN_XSD_API
   void
   MilitaryScenario (::std::ostream& os,
                     const ::msdl_1::MilitaryScenarioType& x, 
@@ -409,6 +437,7 @@ namespace msdl_1
                     const ::std::string& e = "UTF-8",
                     ::xml_schema::flags f = 0);
 
+  SUSTAIN_XSD_API
   void
   MilitaryScenario (::std::ostream& os,
                     const ::msdl_1::MilitaryScenarioType& x, 
@@ -417,6 +446,7 @@ namespace msdl_1
                     const ::std::string& e = "UTF-8",
                     ::xml_schema::flags f = 0);
 
+  SUSTAIN_XSD_API
   void
   MilitaryScenario (::std::ostream& os,
                     const ::msdl_1::MilitaryScenarioType& x, 
@@ -428,6 +458,7 @@ namespace msdl_1
   // Serialize to xercesc::XMLFormatTarget.
   //
 
+  SUSTAIN_XSD_API
   void
   MilitaryScenario (::xercesc::XMLFormatTarget& ft,
                     const ::msdl_1::MilitaryScenarioType& x, 
@@ -435,6 +466,7 @@ namespace msdl_1
                     const ::std::string& e = "UTF-8",
                     ::xml_schema::flags f = 0);
 
+  SUSTAIN_XSD_API
   void
   MilitaryScenario (::xercesc::XMLFormatTarget& ft,
                     const ::msdl_1::MilitaryScenarioType& x, 
@@ -443,6 +475,7 @@ namespace msdl_1
                     const ::std::string& e = "UTF-8",
                     ::xml_schema::flags f = 0);
 
+  SUSTAIN_XSD_API
   void
   MilitaryScenario (::xercesc::XMLFormatTarget& ft,
                     const ::msdl_1::MilitaryScenarioType& x, 
@@ -454,6 +487,7 @@ namespace msdl_1
   // Serialize to an existing xercesc::DOMDocument.
   //
 
+  SUSTAIN_XSD_API
   void
   MilitaryScenario (::xercesc::DOMDocument& d,
                     const ::msdl_1::MilitaryScenarioType& x,
@@ -462,6 +496,7 @@ namespace msdl_1
   // Serialize to a new xercesc::DOMDocument.
   //
 
+  SUSTAIN_XSD_API
   ::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument >
   MilitaryScenario (const ::msdl_1::MilitaryScenarioType& x, 
                     const ::xml_schema::namespace_infomap& m = ::xml_schema::namespace_infomap (),

@@ -48,6 +48,19 @@
 
 // Begin prologue.
 //
+#if defined(__clang__)
+  #define SUSTAIN_XSD_API
+#elif defined(__gnu_linux__) 
+  #define SUSTAIN_XSD_API __attribute__ ((visibility ("default")))
+#elif defined(_WIN32)
+ // ifdef SUSTAIN_XSD_EXPORTS
+    #define SUSTAIN_XSD_API __declspec(dllexport)
+ // #else
+ //   #define SUSTAIN_XSD_API __declspec(dllimport)
+ // #endif
+#else 
+  #define SUSTAIN_XSD_API
+#endif
 //
 // End prologue.
 
@@ -285,7 +298,7 @@ namespace pfc
 {
   namespace schema
   {
-    class ScenarioSchema: public ::xml_schema::type
+    class SUSTAIN_XSD_API ScenarioSchema: public ::xml_schema::type
     {
       public:
       // summary
@@ -508,6 +521,7 @@ namespace pfc
 {
   namespace schema
   {
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const ScenarioSchema&);
   }
@@ -526,17 +540,20 @@ namespace pfc
     // Parse a URI or a local file.
     //
 
+    SUSTAIN_XSD_API
     ::std::unique_ptr< ::pfc::schema::ScenarioSchema >
     Scenario (const ::std::string& uri,
               ::xml_schema::flags f = 0,
               const ::xml_schema::properties& p = ::xml_schema::properties ());
 
+    SUSTAIN_XSD_API
     ::std::unique_ptr< ::pfc::schema::ScenarioSchema >
     Scenario (const ::std::string& uri,
               ::xml_schema::error_handler& eh,
               ::xml_schema::flags f = 0,
               const ::xml_schema::properties& p = ::xml_schema::properties ());
 
+    SUSTAIN_XSD_API
     ::std::unique_ptr< ::pfc::schema::ScenarioSchema >
     Scenario (const ::std::string& uri,
               ::xercesc::DOMErrorHandler& eh,
@@ -546,29 +563,34 @@ namespace pfc
     // Parse std::istream.
     //
 
+    SUSTAIN_XSD_API
     ::std::unique_ptr< ::pfc::schema::ScenarioSchema >
     Scenario (::std::istream& is,
               ::xml_schema::flags f = 0,
               const ::xml_schema::properties& p = ::xml_schema::properties ());
 
+    SUSTAIN_XSD_API
     ::std::unique_ptr< ::pfc::schema::ScenarioSchema >
     Scenario (::std::istream& is,
               ::xml_schema::error_handler& eh,
               ::xml_schema::flags f = 0,
               const ::xml_schema::properties& p = ::xml_schema::properties ());
 
+    SUSTAIN_XSD_API
     ::std::unique_ptr< ::pfc::schema::ScenarioSchema >
     Scenario (::std::istream& is,
               ::xercesc::DOMErrorHandler& eh,
               ::xml_schema::flags f = 0,
               const ::xml_schema::properties& p = ::xml_schema::properties ());
 
+    SUSTAIN_XSD_API
     ::std::unique_ptr< ::pfc::schema::ScenarioSchema >
     Scenario (::std::istream& is,
               const ::std::string& id,
               ::xml_schema::flags f = 0,
               const ::xml_schema::properties& p = ::xml_schema::properties ());
 
+    SUSTAIN_XSD_API
     ::std::unique_ptr< ::pfc::schema::ScenarioSchema >
     Scenario (::std::istream& is,
               const ::std::string& id,
@@ -576,6 +598,7 @@ namespace pfc
               ::xml_schema::flags f = 0,
               const ::xml_schema::properties& p = ::xml_schema::properties ());
 
+    SUSTAIN_XSD_API
     ::std::unique_ptr< ::pfc::schema::ScenarioSchema >
     Scenario (::std::istream& is,
               const ::std::string& id,
@@ -586,17 +609,20 @@ namespace pfc
     // Parse xercesc::InputSource.
     //
 
+    SUSTAIN_XSD_API
     ::std::unique_ptr< ::pfc::schema::ScenarioSchema >
     Scenario (::xercesc::InputSource& is,
               ::xml_schema::flags f = 0,
               const ::xml_schema::properties& p = ::xml_schema::properties ());
 
+    SUSTAIN_XSD_API
     ::std::unique_ptr< ::pfc::schema::ScenarioSchema >
     Scenario (::xercesc::InputSource& is,
               ::xml_schema::error_handler& eh,
               ::xml_schema::flags f = 0,
               const ::xml_schema::properties& p = ::xml_schema::properties ());
 
+    SUSTAIN_XSD_API
     ::std::unique_ptr< ::pfc::schema::ScenarioSchema >
     Scenario (::xercesc::InputSource& is,
               ::xercesc::DOMErrorHandler& eh,
@@ -606,11 +632,13 @@ namespace pfc
     // Parse xercesc::DOMDocument.
     //
 
+    SUSTAIN_XSD_API
     ::std::unique_ptr< ::pfc::schema::ScenarioSchema >
     Scenario (const ::xercesc::DOMDocument& d,
               ::xml_schema::flags f = 0,
               const ::xml_schema::properties& p = ::xml_schema::properties ());
 
+    SUSTAIN_XSD_API
     ::std::unique_ptr< ::pfc::schema::ScenarioSchema >
     Scenario (::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument > d,
               ::xml_schema::flags f = 0,
@@ -630,12 +658,14 @@ namespace pfc
 {
   namespace schema
   {
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const ScenarioSchema&);
 
     // Serialize to std::ostream.
     //
 
+    SUSTAIN_XSD_API
     void
     Scenario (::std::ostream& os,
               const ::pfc::schema::ScenarioSchema& x, 
@@ -643,6 +673,7 @@ namespace pfc
               const ::std::string& e = "UTF-8",
               ::xml_schema::flags f = 0);
 
+    SUSTAIN_XSD_API
     void
     Scenario (::std::ostream& os,
               const ::pfc::schema::ScenarioSchema& x, 
@@ -651,6 +682,7 @@ namespace pfc
               const ::std::string& e = "UTF-8",
               ::xml_schema::flags f = 0);
 
+    SUSTAIN_XSD_API
     void
     Scenario (::std::ostream& os,
               const ::pfc::schema::ScenarioSchema& x, 
@@ -662,6 +694,7 @@ namespace pfc
     // Serialize to xercesc::XMLFormatTarget.
     //
 
+    SUSTAIN_XSD_API
     void
     Scenario (::xercesc::XMLFormatTarget& ft,
               const ::pfc::schema::ScenarioSchema& x, 
@@ -669,6 +702,7 @@ namespace pfc
               const ::std::string& e = "UTF-8",
               ::xml_schema::flags f = 0);
 
+    SUSTAIN_XSD_API
     void
     Scenario (::xercesc::XMLFormatTarget& ft,
               const ::pfc::schema::ScenarioSchema& x, 
@@ -677,6 +711,7 @@ namespace pfc
               const ::std::string& e = "UTF-8",
               ::xml_schema::flags f = 0);
 
+    SUSTAIN_XSD_API
     void
     Scenario (::xercesc::XMLFormatTarget& ft,
               const ::pfc::schema::ScenarioSchema& x, 
@@ -688,6 +723,7 @@ namespace pfc
     // Serialize to an existing xercesc::DOMDocument.
     //
 
+    SUSTAIN_XSD_API
     void
     Scenario (::xercesc::DOMDocument& d,
               const ::pfc::schema::ScenarioSchema& x,
@@ -696,6 +732,7 @@ namespace pfc
     // Serialize to a new xercesc::DOMDocument.
     //
 
+    SUSTAIN_XSD_API
     ::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument >
     Scenario (const ::pfc::schema::ScenarioSchema& x, 
               const ::xml_schema::namespace_infomap& m = ::xml_schema::namespace_infomap (),

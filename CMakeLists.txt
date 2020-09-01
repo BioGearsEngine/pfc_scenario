@@ -19,7 +19,7 @@ include(cmake/cmake-common_logic.cmake)
 include(cmake/UseGit.cmake)
 
 
- list(APPEND CMAKE_MODULE_PATH   ${PROJECT_SOURCE_DIR}/cmake  ${PROJECT_SOURCE_DIR}/cmake/common )
+ list(APPEND CMAKE_MODULE_PATH   ${PROJECT_SOURCE_DIR}/cmake  ${PROJECT_SOURCE_DIR}/cmake/common )  
 
  message(STATUS "
     Using the following search paths

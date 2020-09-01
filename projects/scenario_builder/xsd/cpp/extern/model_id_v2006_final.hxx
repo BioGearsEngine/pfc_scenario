@@ -48,6 +48,19 @@
 
 // Begin prologue.
 //
+#if defined(__clang__)
+  #define SUSTAIN_XSD_API
+#elif defined(__gnu_linux__) 
+  #define SUSTAIN_XSD_API __attribute__ ((visibility ("default")))
+#elif defined(_WIN32)
+ // ifdef SUSTAIN_XSD_EXPORTS
+    #define SUSTAIN_XSD_API __declspec(dllexport)
+ // #else
+ //   #define SUSTAIN_XSD_API __declspec(dllimport)
+ // #endif
+#else 
+  #define SUSTAIN_XSD_API
+#endif
 //
 // End prologue.
 
@@ -312,7 +325,7 @@ namespace schemas
 {
   namespace modelID
   {
-    class String: public ::xml_schema::string
+    class SUSTAIN_XSD_API String: public ::xml_schema::string
     {
       public:
       // notes
@@ -397,7 +410,7 @@ namespace schemas
       idtag_optional idtag_;
     };
 
-    class IdentifierType: public ::xml_schema::ncname
+    class SUSTAIN_XSD_API IdentifierType: public ::xml_schema::ncname
     {
       public:
       // notes
@@ -480,7 +493,7 @@ namespace schemas
       idtag_optional idtag_;
     };
 
-    class nonEmptyString: public ::xml_schema::string
+    class SUSTAIN_XSD_API nonEmptyString: public ::xml_schema::string
     {
       public:
       // Constructors.
@@ -518,7 +531,7 @@ namespace schemas
       ~nonEmptyString ();
     };
 
-    class NonEmptyString: public ::schemas::modelID::nonEmptyString
+    class SUSTAIN_XSD_API NonEmptyString: public ::schemas::modelID::nonEmptyString
     {
       public:
       // notes
@@ -603,7 +616,7 @@ namespace schemas
       idtag_optional idtag_;
     };
 
-    class OMTypeEnumerations: public ::xml_schema::string
+    class SUSTAIN_XSD_API OMTypeEnumerations: public ::xml_schema::string
     {
       public:
       enum value
@@ -660,7 +673,7 @@ namespace schemas
       static const value _xsd_OMTypeEnumerations_indexes_[3];
     };
 
-    class OMTypeUnion: public ::xml_schema::string
+    class SUSTAIN_XSD_API OMTypeUnion: public ::xml_schema::string
     {
       public:
 
@@ -690,7 +703,7 @@ namespace schemas
               ::xml_schema::container* c = 0) const;
     };
 
-    class glyphTypeEnumerations: public ::xml_schema::string
+    class SUSTAIN_XSD_API glyphTypeEnumerations: public ::xml_schema::string
     {
       public:
       enum value
@@ -749,7 +762,7 @@ namespace schemas
       static const value _xsd_glyphTypeEnumerations_indexes_[5];
     };
 
-    class glyphTypeUnion: public ::xml_schema::string
+    class SUSTAIN_XSD_API glyphTypeUnion: public ::xml_schema::string
     {
       public:
 
@@ -779,7 +792,7 @@ namespace schemas
               ::xml_schema::container* c = 0) const;
     };
 
-    class glyphType: public ::xml_schema::base64_binary
+    class SUSTAIN_XSD_API glyphType: public ::xml_schema::base64_binary
     {
       public:
       // notes
@@ -939,7 +952,7 @@ namespace schemas
       alt_optional alt_;
     };
 
-    class pocType: public ::xml_schema::type
+    class SUSTAIN_XSD_API pocType: public ::xml_schema::type
     {
       public:
       // pocType
@@ -1074,7 +1087,7 @@ namespace schemas
       pocEmail_sequence pocEmail_;
     };
 
-    class SecurityClassificationEnumeration: public ::xml_schema::string
+    class SUSTAIN_XSD_API SecurityClassificationEnumeration: public ::xml_schema::string
     {
       public:
       enum value
@@ -1132,7 +1145,7 @@ namespace schemas
       static const value _xsd_SecurityClassificationEnumeration_indexes_[4];
     };
 
-    class SecurityClassificationUnion: public ::xml_schema::string
+    class SUSTAIN_XSD_API SecurityClassificationUnion: public ::xml_schema::string
     {
       public:
 
@@ -1162,7 +1175,7 @@ namespace schemas
               ::xml_schema::container* c = 0) const;
     };
 
-    class modelType: public ::schemas::modelID::OMTypeUnion
+    class SUSTAIN_XSD_API modelType: public ::schemas::modelID::OMTypeUnion
     {
       public:
       // notes
@@ -1245,7 +1258,7 @@ namespace schemas
       idtag_optional idtag_;
     };
 
-    class securityClassificationType: public ::schemas::modelID::SecurityClassificationUnion
+    class SUSTAIN_XSD_API securityClassificationType: public ::schemas::modelID::SecurityClassificationUnion
     {
       public:
       // notes
@@ -1328,7 +1341,7 @@ namespace schemas
       idtag_optional idtag_;
     };
 
-    class ApplicationDomainEnumerations: public ::xml_schema::string
+    class SUSTAIN_XSD_API ApplicationDomainEnumerations: public ::xml_schema::string
     {
       public:
       enum value
@@ -1387,7 +1400,7 @@ namespace schemas
       static const value _xsd_ApplicationDomainEnumerations_indexes_[5];
     };
 
-    class ApplicationDomainUnion: public ::xml_schema::string
+    class SUSTAIN_XSD_API ApplicationDomainUnion: public ::xml_schema::string
     {
       public:
 
@@ -1417,7 +1430,7 @@ namespace schemas
               ::xml_schema::container* c = 0) const;
     };
 
-    class applicationDomainType: public ::schemas::modelID::ApplicationDomainUnion
+    class SUSTAIN_XSD_API applicationDomainType: public ::schemas::modelID::ApplicationDomainUnion
     {
       public:
       // notes
@@ -1500,7 +1513,7 @@ namespace schemas
       idtag_optional idtag_;
     };
 
-    class POCTypeEnumeration: public ::xml_schema::string
+    class SUSTAIN_XSD_API POCTypeEnumeration: public ::xml_schema::string
     {
       public:
       enum value
@@ -1560,7 +1573,7 @@ namespace schemas
       static const value _xsd_POCTypeEnumeration_indexes_[6];
     };
 
-    class POCTypeUnion: public ::xml_schema::string
+    class SUSTAIN_XSD_API POCTypeUnion: public ::xml_schema::string
     {
       public:
 
@@ -1590,7 +1603,7 @@ namespace schemas
               ::xml_schema::container* c = 0) const;
     };
 
-    class pocTypeType: public ::schemas::modelID::POCTypeUnion
+    class SUSTAIN_XSD_API pocTypeType: public ::schemas::modelID::POCTypeUnion
     {
       public:
       // notes
@@ -1673,7 +1686,7 @@ namespace schemas
       idtag_optional idtag_;
     };
 
-    class referenceTypeEnumerations: public ::xml_schema::string
+    class SUSTAIN_XSD_API referenceTypeEnumerations: public ::xml_schema::string
     {
       public:
       enum value
@@ -1730,7 +1743,7 @@ namespace schemas
       static const value _xsd_referenceTypeEnumerations_indexes_[3];
     };
 
-    class referenceTypeUnion: public ::xml_schema::string
+    class SUSTAIN_XSD_API referenceTypeUnion: public ::xml_schema::string
     {
       public:
 
@@ -1760,7 +1773,7 @@ namespace schemas
               ::xml_schema::container* c = 0) const;
     };
 
-    class referenceType: public ::xml_schema::type
+    class SUSTAIN_XSD_API referenceType: public ::xml_schema::type
     {
       public:
       // type
@@ -1879,7 +1892,7 @@ namespace schemas
       idtag_optional idtag_;
     };
 
-    class keywordType: public ::xml_schema::type
+    class SUSTAIN_XSD_API keywordType: public ::xml_schema::type
     {
       public:
       // taxonomy
@@ -2000,7 +2013,7 @@ namespace schemas
       idtag_optional idtag_;
     };
 
-    class modelIdentificationType: public ::xml_schema::type
+    class SUSTAIN_XSD_API modelIdentificationType: public ::xml_schema::type
     {
       public:
       // name
@@ -2399,7 +2412,7 @@ namespace schemas
       idtag_optional idtag_;
     };
 
-    class type: public ::schemas::modelID::referenceTypeUnion
+    class SUSTAIN_XSD_API type: public ::schemas::modelID::referenceTypeUnion
     {
       public:
       // notes
@@ -2482,7 +2495,7 @@ namespace schemas
       idtag_optional idtag_;
     };
 
-    class identification: public ::xml_schema::uri
+    class SUSTAIN_XSD_API identification: public ::xml_schema::uri
     {
       public:
       // notes
@@ -2561,7 +2574,7 @@ namespace schemas
       idtag_optional idtag_;
     };
 
-    class modificationDate: public ::xml_schema::date
+    class SUSTAIN_XSD_API modificationDate: public ::xml_schema::date
     {
       public:
       // notes
@@ -2640,7 +2653,7 @@ namespace schemas
       idtag_optional idtag_;
     };
 
-    class poc: public ::schemas::modelID::pocType
+    class SUSTAIN_XSD_API poc: public ::schemas::modelID::pocType
     {
       public:
       // notes
@@ -2721,7 +2734,7 @@ namespace schemas
       idtag_optional idtag_;
     };
 
-    class glyph: public ::schemas::modelID::glyphType
+    class SUSTAIN_XSD_API glyph: public ::schemas::modelID::glyphType
     {
       public:
       // Constructors.
@@ -2755,111 +2768,147 @@ namespace schemas
 {
   namespace modelID
   {
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const String&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const IdentifierType&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const nonEmptyString&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const NonEmptyString&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, OMTypeEnumerations::value);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const OMTypeEnumerations&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const OMTypeUnion&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, glyphTypeEnumerations::value);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const glyphTypeEnumerations&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const glyphTypeUnion&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const glyphType&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const pocType&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, SecurityClassificationEnumeration::value);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const SecurityClassificationEnumeration&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const SecurityClassificationUnion&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const modelType&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const securityClassificationType&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, ApplicationDomainEnumerations::value);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const ApplicationDomainEnumerations&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const ApplicationDomainUnion&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const applicationDomainType&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, POCTypeEnumeration::value);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const POCTypeEnumeration&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const POCTypeUnion&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const pocTypeType&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, referenceTypeEnumerations::value);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const referenceTypeEnumerations&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const referenceTypeUnion&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const referenceType&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const keywordType&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const modelIdentificationType&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const type&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const identification&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const modificationDate&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const poc&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const glyph&);
   }
@@ -2890,184 +2939,240 @@ namespace schemas
 {
   namespace modelID
   {
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const String&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const IdentifierType&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const nonEmptyString&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMAttr&, const nonEmptyString&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xml_schema::list_stream&,
                 const nonEmptyString&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const NonEmptyString&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const OMTypeEnumerations&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMAttr&, const OMTypeEnumerations&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xml_schema::list_stream&,
                 const OMTypeEnumerations&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const OMTypeUnion&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMAttr&, const OMTypeUnion&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xml_schema::list_stream&,
                 const OMTypeUnion&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const glyphTypeEnumerations&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMAttr&, const glyphTypeEnumerations&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xml_schema::list_stream&,
                 const glyphTypeEnumerations&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const glyphTypeUnion&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMAttr&, const glyphTypeUnion&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xml_schema::list_stream&,
                 const glyphTypeUnion&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const glyphType&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const pocType&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const SecurityClassificationEnumeration&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMAttr&, const SecurityClassificationEnumeration&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xml_schema::list_stream&,
                 const SecurityClassificationEnumeration&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const SecurityClassificationUnion&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMAttr&, const SecurityClassificationUnion&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xml_schema::list_stream&,
                 const SecurityClassificationUnion&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const modelType&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const securityClassificationType&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const ApplicationDomainEnumerations&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMAttr&, const ApplicationDomainEnumerations&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xml_schema::list_stream&,
                 const ApplicationDomainEnumerations&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const ApplicationDomainUnion&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMAttr&, const ApplicationDomainUnion&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xml_schema::list_stream&,
                 const ApplicationDomainUnion&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const applicationDomainType&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const POCTypeEnumeration&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMAttr&, const POCTypeEnumeration&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xml_schema::list_stream&,
                 const POCTypeEnumeration&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const POCTypeUnion&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMAttr&, const POCTypeUnion&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xml_schema::list_stream&,
                 const POCTypeUnion&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const pocTypeType&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const referenceTypeEnumerations&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMAttr&, const referenceTypeEnumerations&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xml_schema::list_stream&,
                 const referenceTypeEnumerations&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const referenceTypeUnion&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMAttr&, const referenceTypeUnion&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xml_schema::list_stream&,
                 const referenceTypeUnion&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const referenceType&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const keywordType&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const modelIdentificationType&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const type&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const identification&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const modificationDate&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const poc&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const glyph&);
   }

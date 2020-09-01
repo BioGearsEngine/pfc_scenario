@@ -48,6 +48,19 @@
 
 // Begin prologue.
 //
+#if defined(__clang__)
+  #define SUSTAIN_XSD_API
+#elif defined(__gnu_linux__) 
+  #define SUSTAIN_XSD_API __attribute__ ((visibility ("default")))
+#elif defined(_WIN32)
+ // ifdef SUSTAIN_XSD_EXPORTS
+    #define SUSTAIN_XSD_API __declspec(dllexport)
+ // #else
+ //   #define SUSTAIN_XSD_API __declspec(dllimport)
+ // #endif
+#else 
+  #define SUSTAIN_XSD_API
+#endif
 //
 // End prologue.
 
@@ -330,7 +343,7 @@ namespace pfc
 {
   namespace schema
   {
-    class summary: public ::xml_schema::type
+    class SUSTAIN_XSD_API summary: public ::xml_schema::type
     {
       public:
       // title
@@ -519,7 +532,7 @@ namespace pfc
       limitations_optional limitations_;
     };
 
-    class author: public ::xml_schema::type
+    class SUSTAIN_XSD_API author: public ::xml_schema::type
     {
       public:
       // first_name
@@ -730,7 +743,7 @@ namespace pfc
       country_optional country_;
     };
 
-    class equipment_definition_list: public ::xml_schema::type
+    class SUSTAIN_XSD_API equipment_definition_list: public ::xml_schema::type
     {
       public:
       // equipment
@@ -783,7 +796,7 @@ namespace pfc
       equipment_sequence equipment_;
     };
 
-    class equipment: public ::xml_schema::type
+    class SUSTAIN_XSD_API equipment: public ::xml_schema::type
     {
       public:
       // id
@@ -944,7 +957,7 @@ namespace pfc
       image_optional image_;
     };
 
-    class trauma_definition_list: public ::xml_schema::type
+    class SUSTAIN_XSD_API trauma_definition_list: public ::xml_schema::type
     {
       public:
       // trauma
@@ -997,7 +1010,7 @@ namespace pfc
       trauma_sequence trauma_;
     };
 
-    class trauma: public ::xml_schema::type
+    class SUSTAIN_XSD_API trauma: public ::xml_schema::type
     {
       public:
       // id
@@ -1160,7 +1173,7 @@ namespace pfc
       ::xsd::cxx::tree::one< severity_range_type > severity_range_;
     };
 
-    class trauma_severity_range: public ::xml_schema::type
+    class SUSTAIN_XSD_API trauma_severity_range: public ::xml_schema::type
     {
       public:
       // numeric-range
@@ -1239,7 +1252,7 @@ namespace pfc
       token_range_optional token_range_;
     };
 
-    class numeric_range: public ::xml_schema::type
+    class SUSTAIN_XSD_API numeric_range: public ::xml_schema::type
     {
       public:
       // lower_bound
@@ -1346,7 +1359,7 @@ namespace pfc
       unit_optional unit_;
     };
 
-    class token_range: public ::xml_schema::type
+    class SUSTAIN_XSD_API token_range: public ::xml_schema::type
     {
       public:
       // token
@@ -1399,7 +1412,7 @@ namespace pfc
       token_sequence token_;
     };
 
-    class citation_ref_list: public ::xml_schema::type
+    class SUSTAIN_XSD_API citation_ref_list: public ::xml_schema::type
     {
       public:
       // citation-ref
@@ -1452,7 +1465,7 @@ namespace pfc
       citation_ref_sequence citation_ref_;
     };
 
-    class treatment_plan_definition_list: public ::xml_schema::type
+    class SUSTAIN_XSD_API treatment_plan_definition_list: public ::xml_schema::type
     {
       public:
       // treatment-plan
@@ -1505,7 +1518,7 @@ namespace pfc
       treatment_plan_sequence treatment_plan_;
     };
 
-    class treatment_plan: public ::xml_schema::type
+    class SUSTAIN_XSD_API treatment_plan: public ::xml_schema::type
     {
       public:
       // id
@@ -1669,7 +1682,7 @@ namespace pfc
       ::xsd::cxx::tree::one< references_type > references_;
     };
 
-    class equipment_ref_list: public ::xml_schema::type
+    class SUSTAIN_XSD_API equipment_ref_list: public ::xml_schema::type
     {
       public:
       // equipment-refs
@@ -1722,7 +1735,7 @@ namespace pfc
       equipment_refs_sequence equipment_refs_;
     };
 
-    class medical_reference_list: public ::xml_schema::type
+    class SUSTAIN_XSD_API medical_reference_list: public ::xml_schema::type
     {
       public:
       // citations
@@ -1797,7 +1810,7 @@ namespace pfc
       ::xsd::cxx::tree::one< cpgs_type > cpgs_;
     };
 
-    class cpg_ref_list: public ::xml_schema::type
+    class SUSTAIN_XSD_API cpg_ref_list: public ::xml_schema::type
     {
       public:
       // cpg-ref
@@ -1850,7 +1863,7 @@ namespace pfc
       cpg_ref_sequence cpg_ref_;
     };
 
-    class cpg_list: public ::xml_schema::type
+    class SUSTAIN_XSD_API cpg_list: public ::xml_schema::type
     {
       public:
       // cpg
@@ -1903,7 +1916,7 @@ namespace pfc
       cpg_sequence cpg_;
     };
 
-    class cpg: public ::xml_schema::type
+    class SUSTAIN_XSD_API cpg: public ::xml_schema::type
     {
       public:
       // name
@@ -1998,7 +2011,7 @@ namespace pfc
       ::xsd::cxx::tree::one< citation_ref_type > citation_ref_;
     };
 
-    class learning_objective_reference_list: public ::xml_schema::type
+    class SUSTAIN_XSD_API learning_objective_reference_list: public ::xml_schema::type
     {
       public:
       // objective
@@ -2051,7 +2064,7 @@ namespace pfc
       objective_sequence objective_;
     };
 
-    class treatment_plan_ref_list: public ::xml_schema::type
+    class SUSTAIN_XSD_API treatment_plan_ref_list: public ::xml_schema::type
     {
       public:
       // treatment-plan
@@ -2104,7 +2117,7 @@ namespace pfc
       treatment_plan_sequence treatment_plan_;
     };
 
-    class trauma_profile_list: public ::xml_schema::type
+    class SUSTAIN_XSD_API trauma_profile_list: public ::xml_schema::type
     {
       public:
       // trauma-profile
@@ -2157,7 +2170,7 @@ namespace pfc
       trauma_profile_sequence trauma_profile_;
     };
 
-    class trauma_profile: public ::xml_schema::type
+    class SUSTAIN_XSD_API trauma_profile: public ::xml_schema::type
     {
       public:
       // id
@@ -2299,7 +2312,7 @@ namespace pfc
       ::xsd::cxx::tree::one< treatments_type > treatments_;
     };
 
-    class trauma_profile_ref_list: public ::xml_schema::type
+    class SUSTAIN_XSD_API trauma_profile_ref_list: public ::xml_schema::type
     {
       public:
       // trauma-profile
@@ -2352,7 +2365,7 @@ namespace pfc
       trauma_profile_sequence trauma_profile_;
     };
 
-    class trauma_occurence_list: public ::xml_schema::type
+    class SUSTAIN_XSD_API trauma_occurence_list: public ::xml_schema::type
     {
       public:
       // trauma
@@ -2405,7 +2418,7 @@ namespace pfc
       trauma_sequence trauma_;
     };
 
-    class trauma_occurence: public ::xml_schema::type
+    class SUSTAIN_XSD_API trauma_occurence: public ::xml_schema::type
     {
       public:
       // id
@@ -2520,7 +2533,7 @@ namespace pfc
       ::xsd::cxx::tree::one< severity_type > severity_;
     };
 
-    class medical_scenario_syllabus: public ::xml_schema::type
+    class SUSTAIN_XSD_API medical_scenario_syllabus: public ::xml_schema::type
     {
       public:
       // learning-objectives
@@ -2595,7 +2608,7 @@ namespace pfc
       ::xsd::cxx::tree::one< learning_assessments_type > learning_assessments_;
     };
 
-    class learning_objective_list: public ::xml_schema::type
+    class SUSTAIN_XSD_API learning_objective_list: public ::xml_schema::type
     {
       public:
       // objective
@@ -2648,7 +2661,7 @@ namespace pfc
       objective_sequence objective_;
     };
 
-    class learning_objective: public ::xml_schema::type
+    class SUSTAIN_XSD_API learning_objective: public ::xml_schema::type
     {
       public:
       // id
@@ -2789,7 +2802,7 @@ namespace pfc
       ::xsd::cxx::tree::one< relates_to_type > relates_to_;
     };
 
-    class assessment_list: public ::xml_schema::type
+    class SUSTAIN_XSD_API assessment_list: public ::xml_schema::type
     {
       public:
       // total-points
@@ -2860,7 +2873,7 @@ namespace pfc
       assessment_sequence assessment_;
     };
 
-    class assessment: public ::xml_schema::type
+    class SUSTAIN_XSD_API assessment: public ::xml_schema::type
     {
       public:
       // id
@@ -3012,7 +3025,7 @@ namespace pfc
       ::xsd::cxx::tree::one< criteria_type > criteria_;
     };
 
-    class medical_scenario: public ::xml_schema::type
+    class SUSTAIN_XSD_API medical_scenario: public ::xml_schema::type
     {
       public:
       // id
@@ -3111,7 +3124,7 @@ namespace pfc
       ::xsd::cxx::tree::one< training_script_type > training_script_;
     };
 
-    class role_list: public ::xml_schema::type
+    class SUSTAIN_XSD_API role_list: public ::xml_schema::type
     {
       public:
       // role
@@ -3164,7 +3177,7 @@ namespace pfc
       role_sequence role_;
     };
 
-    class role: public ::xml_schema::type
+    class SUSTAIN_XSD_API role: public ::xml_schema::type
     {
       public:
       // id
@@ -3301,7 +3314,7 @@ namespace pfc
       ::xsd::cxx::tree::one< description_type > description_;
     };
 
-    class role_ref_list: public ::xml_schema::type
+    class SUSTAIN_XSD_API role_ref_list: public ::xml_schema::type
     {
       public:
       // role-ref
@@ -3354,7 +3367,7 @@ namespace pfc
       role_ref_sequence role_ref_;
     };
 
-    class item_list: public ::xml_schema::type
+    class SUSTAIN_XSD_API item_list: public ::xml_schema::type
     {
       public:
       // item
@@ -3407,7 +3420,7 @@ namespace pfc
       item_sequence item_;
     };
 
-    class item: public ::xml_schema::type
+    class SUSTAIN_XSD_API item: public ::xml_schema::type
     {
       public:
       // short-name
@@ -3527,7 +3540,7 @@ namespace pfc
       ::xsd::cxx::tree::one< properties_type > properties_;
     };
 
-    class scene_list: public ::xml_schema::type
+    class SUSTAIN_XSD_API scene_list: public ::xml_schema::type
     {
       public:
       // scene
@@ -3580,7 +3593,7 @@ namespace pfc
       scene_sequence scene_;
     };
 
-    class scene: public ::xml_schema::type
+    class SUSTAIN_XSD_API scene: public ::xml_schema::type
     {
       public:
       // location-id
@@ -3781,7 +3794,7 @@ namespace pfc
       ::xsd::cxx::tree::one< roles_type > roles_;
     };
 
-    class event_list: public ::xml_schema::type
+    class SUSTAIN_XSD_API event_list: public ::xml_schema::type
     {
       public:
       // event
@@ -3834,7 +3847,7 @@ namespace pfc
       event_sequence event_;
     };
 
-    class event: public ::xml_schema::type
+    class SUSTAIN_XSD_API event: public ::xml_schema::type
     {
       public:
       // id
@@ -4049,7 +4062,7 @@ namespace pfc
       ::xsd::cxx::tree::one< description_type > description_;
     };
 
-    class event_category_enum: public ::xml_schema::string
+    class SUSTAIN_XSD_API event_category_enum: public ::xml_schema::string
     {
       public:
       enum value
@@ -4108,7 +4121,7 @@ namespace pfc
       static const value _xsd_event_category_enum_indexes_[5];
     };
 
-    class event_fidelity_enum: public ::xml_schema::string
+    class SUSTAIN_XSD_API event_fidelity_enum: public ::xml_schema::string
     {
       public:
       enum value
@@ -4165,7 +4178,7 @@ namespace pfc
       static const value _xsd_event_fidelity_enum_indexes_[3];
     };
 
-    class citation_list: public ::xml_schema::type
+    class SUSTAIN_XSD_API citation_list: public ::xml_schema::type
     {
       public:
       // citation
@@ -4218,7 +4231,7 @@ namespace pfc
       citation_sequence citation_;
     };
 
-    class citation: public ::xml_schema::type
+    class SUSTAIN_XSD_API citation: public ::xml_schema::type
     {
       public:
       // uuid
@@ -4397,7 +4410,7 @@ namespace pfc
       accessed_optional accessed_;
     };
 
-    class properties_list: public ::xml_schema::type
+    class SUSTAIN_XSD_API properties_list: public ::xml_schema::type
     {
       public:
       // property
@@ -4450,7 +4463,7 @@ namespace pfc
       property_sequence property_;
     };
 
-    class property: public ::xml_schema::type
+    class SUSTAIN_XSD_API property: public ::xml_schema::type
     {
       public:
       // name
@@ -4525,7 +4538,7 @@ namespace pfc
       ::xsd::cxx::tree::one< type_type > type_;
     };
 
-    class property_value_list: public ::xml_schema::type
+    class SUSTAIN_XSD_API property_value_list: public ::xml_schema::type
     {
       public:
       // value
@@ -4578,7 +4591,7 @@ namespace pfc
       value_sequence value_;
     };
 
-    class property_value: public ::xml_schema::type
+    class SUSTAIN_XSD_API property_value: public ::xml_schema::type
     {
       public:
       // name
@@ -4653,7 +4666,7 @@ namespace pfc
       ::xsd::cxx::tree::one< value_type > value_;
     };
 
-    class relates_to: public ::xml_schema::type
+    class SUSTAIN_XSD_API relates_to: public ::xml_schema::type
     {
       public:
       // treatment-plans
@@ -4736,153 +4749,203 @@ namespace pfc
 {
   namespace schema
   {
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const summary&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const author&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const equipment_definition_list&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const equipment&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const trauma_definition_list&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const trauma&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const trauma_severity_range&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const numeric_range&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const token_range&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const citation_ref_list&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const treatment_plan_definition_list&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const treatment_plan&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const equipment_ref_list&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const medical_reference_list&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const cpg_ref_list&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const cpg_list&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const cpg&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const learning_objective_reference_list&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const treatment_plan_ref_list&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const trauma_profile_list&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const trauma_profile&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const trauma_profile_ref_list&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const trauma_occurence_list&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const trauma_occurence&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const medical_scenario_syllabus&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const learning_objective_list&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const learning_objective&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const assessment_list&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const assessment&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const medical_scenario&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const role_list&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const role&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const role_ref_list&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const item_list&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const item&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const scene_list&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const scene&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const event_list&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const event&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, event_category_enum::value);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const event_category_enum&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, event_fidelity_enum::value);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const event_fidelity_enum&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const citation_list&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const citation&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const properties_list&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const property&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const property_value_list&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const property_value&);
 
+    SUSTAIN_XSD_API
     ::std::ostream&
     operator<< (::std::ostream&, const relates_to&);
   }
@@ -4913,161 +4976,213 @@ namespace pfc
 {
   namespace schema
   {
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const summary&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const author&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const equipment_definition_list&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const equipment&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const trauma_definition_list&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const trauma&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const trauma_severity_range&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const numeric_range&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const token_range&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const citation_ref_list&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const treatment_plan_definition_list&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const treatment_plan&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const equipment_ref_list&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const medical_reference_list&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const cpg_ref_list&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const cpg_list&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const cpg&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const learning_objective_reference_list&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const treatment_plan_ref_list&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const trauma_profile_list&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const trauma_profile&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const trauma_profile_ref_list&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const trauma_occurence_list&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const trauma_occurence&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const medical_scenario_syllabus&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const learning_objective_list&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const learning_objective&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const assessment_list&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const assessment&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const medical_scenario&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const role_list&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const role&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const role_ref_list&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const item_list&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const item&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const scene_list&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const scene&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const event_list&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const event&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const event_category_enum&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMAttr&, const event_category_enum&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xml_schema::list_stream&,
                 const event_category_enum&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const event_fidelity_enum&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMAttr&, const event_fidelity_enum&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xml_schema::list_stream&,
                 const event_fidelity_enum&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const citation_list&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const citation&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const properties_list&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const property&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const property_value_list&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const property_value&);
 
+    SUSTAIN_XSD_API
     void
     operator<< (::xercesc::DOMElement&, const relates_to&);
   }

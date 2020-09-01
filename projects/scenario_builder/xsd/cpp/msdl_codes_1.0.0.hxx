@@ -48,6 +48,19 @@
 
 // Begin prologue.
 //
+#if defined(__clang__)
+  #define SUSTAIN_XSD_API
+#elif defined(__gnu_linux__) 
+  #define SUSTAIN_XSD_API __attribute__ ((visibility ("default")))
+#elif defined(_WIN32)
+ // ifdef SUSTAIN_XSD_EXPORTS
+    #define SUSTAIN_XSD_API __declspec(dllexport)
+ // #else
+ //   #define SUSTAIN_XSD_API __declspec(dllimport)
+ // #endif
+#else 
+  #define SUSTAIN_XSD_API
+#endif
 //
 // End prologue.
 
@@ -303,7 +316,7 @@ namespace msdl_1
 
 namespace msdl_1
 {
-  class enumAnchorPointType: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumAnchorPointType: public ::xml_schema::string
   {
     public:
     enum value
@@ -359,7 +372,7 @@ namespace msdl_1
     static const value _xsd_enumAnchorPointType_indexes_[2];
   };
 
-  class enumAirFormationType: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumAirFormationType: public ::xml_schema::string
   {
     public:
     enum value
@@ -414,7 +427,7 @@ namespace msdl_1
     static const value _xsd_enumAirFormationType_indexes_[1];
   };
 
-  class enumBaseAffiliation: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumBaseAffiliation: public ::xml_schema::string
   {
     public:
     enum value
@@ -472,7 +485,7 @@ namespace msdl_1
     static const value _xsd_enumBaseAffiliation_indexes_[4];
   };
 
-  class enumCombatEffectivenessType: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumCombatEffectivenessType: public ::xml_schema::string
   {
     public:
     enum value
@@ -531,7 +544,7 @@ namespace msdl_1
     static const value _xsd_enumCombatEffectivenessType_indexes_[5];
   };
 
-  class enumCommandRelationshipType: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumCommandRelationshipType: public ::xml_schema::string
   {
     public:
     enum value
@@ -591,7 +604,7 @@ namespace msdl_1
     static const value _xsd_enumCommandRelationshipType_indexes_[6];
   };
 
-  class enumCommunicationNetType: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumCommunicationNetType: public ::xml_schema::string
   {
     public:
     enum value
@@ -650,7 +663,7 @@ namespace msdl_1
     static const value _xsd_enumCommunicationNetType_indexes_[5];
   };
 
-  class enumCommunicationServiceType: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumCommunicationServiceType: public ::xml_schema::string
   {
     public:
     enum value
@@ -714,7 +727,7 @@ namespace msdl_1
     static const value _xsd_enumCommunicationServiceType_indexes_[10];
   };
 
-  class enumCoordinateSystemType: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumCoordinateSystemType: public ::xml_schema::string
   {
     public:
     enum value
@@ -772,7 +785,7 @@ namespace msdl_1
     static const value _xsd_enumCoordinateSystemType_indexes_[4];
   };
 
-  class enumEchelon: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumEchelon: public ::xml_schema::string
   {
     public:
     enum value
@@ -847,7 +860,7 @@ namespace msdl_1
     static const value _xsd_enumEchelon_indexes_[21];
   };
 
-  class enumForceOwnerType: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumForceOwnerType: public ::xml_schema::string
   {
     public:
     enum value
@@ -903,7 +916,7 @@ namespace msdl_1
     static const value _xsd_enumForceOwnerType_indexes_[2];
   };
 
-  class enumFormationLocationType: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumFormationLocationType: public ::xml_schema::string
   {
     public:
     enum value
@@ -959,7 +972,7 @@ namespace msdl_1
     static const value _xsd_enumFormationLocationType_indexes_[2];
   };
 
-  class enumFormationType: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumFormationType: public ::xml_schema::string
   {
     public:
     enum value
@@ -1017,7 +1030,7 @@ namespace msdl_1
     static const value _xsd_enumFormationType_indexes_[4];
   };
 
-  class enumGroundFormationType: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumGroundFormationType: public ::xml_schema::string
   {
     public:
     enum value
@@ -1082,7 +1095,7 @@ namespace msdl_1
     static const value _xsd_enumGroundFormationType_indexes_[11];
   };
 
-  class enumModelResolutionType: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumModelResolutionType: public ::xml_schema::string
   {
     public:
     enum value
@@ -1142,7 +1155,7 @@ namespace msdl_1
     static const value _xsd_enumModelResolutionType_indexes_[6];
   };
 
-  class enumMOPPLevelType: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumMOPPLevelType: public ::xml_schema::string
   {
     public:
     enum value
@@ -1201,7 +1214,7 @@ namespace msdl_1
     static const value _xsd_enumMOPPLevelType_indexes_[5];
   };
 
-  class enumOrientationType: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumOrientationType: public ::xml_schema::string
   {
     public:
     enum value
@@ -1257,7 +1270,7 @@ namespace msdl_1
     static const value _xsd_enumOrientationType_indexes_[2];
   };
 
-  class enumOverlayType: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumOverlayType: public ::xml_schema::string
   {
     public:
     enum value
@@ -1321,7 +1334,7 @@ namespace msdl_1
     static const value _xsd_enumOverlayType_indexes_[10];
   };
 
-  class enumReinforcedReducedType: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumReinforcedReducedType: public ::xml_schema::string
   {
     public:
     enum value
@@ -1378,7 +1391,7 @@ namespace msdl_1
     static const value _xsd_enumReinforcedReducedType_indexes_[3];
   };
 
-  class enumSubsurfaceFormationType: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumSubsurfaceFormationType: public ::xml_schema::string
   {
     public:
     enum value
@@ -1433,7 +1446,7 @@ namespace msdl_1
     static const value _xsd_enumSubsurfaceFormationType_indexes_[1];
   };
 
-  class enumSupportRelationType: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumSupportRelationType: public ::xml_schema::string
   {
     public:
     enum value
@@ -1492,7 +1505,7 @@ namespace msdl_1
     static const value _xsd_enumSupportRelationType_indexes_[5];
   };
 
-  class enumSupportRoleType: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumSupportRoleType: public ::xml_schema::string
   {
     public:
     enum value
@@ -1551,7 +1564,7 @@ namespace msdl_1
     static const value _xsd_enumSupportRoleType_indexes_[5];
   };
 
-  class enumSurfaceFormationType: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumSurfaceFormationType: public ::xml_schema::string
   {
     public:
     enum value
@@ -1606,7 +1619,7 @@ namespace msdl_1
     static const value _xsd_enumSurfaceFormationType_indexes_[1];
   };
 
-  class enumSymbolClassType: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumSymbolClassType: public ::xml_schema::string
   {
     public:
     enum value
@@ -1666,7 +1679,7 @@ namespace msdl_1
     static const value _xsd_enumSymbolClassType_indexes_[6];
   };
 
-  class enumSymbologyStandardType: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumSymbologyStandardType: public ::xml_schema::string
   {
     public:
     enum value
@@ -1722,7 +1735,7 @@ namespace msdl_1
     static const value _xsd_enumSymbologyStandardType_indexes_[2];
   };
 
-  class enumFrameShapeModifierType: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumFrameShapeModifierType: public ::xml_schema::string
   {
     public:
     enum value
@@ -1786,7 +1799,7 @@ namespace msdl_1
     static const value _xsd_enumFrameShapeModifierType_indexes_[10];
   };
 
-  class enumWeaponControlStatusType: public ::xml_schema::string
+  class SUSTAIN_XSD_API enumWeaponControlStatusType: public ::xml_schema::string
   {
     public:
     enum value
@@ -1848,159 +1861,211 @@ namespace msdl_1
 
 namespace msdl_1
 {
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumAnchorPointType::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumAnchorPointType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumAirFormationType::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumAirFormationType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumBaseAffiliation::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumBaseAffiliation&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumCombatEffectivenessType::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumCombatEffectivenessType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumCommandRelationshipType::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumCommandRelationshipType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumCommunicationNetType::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumCommunicationNetType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumCommunicationServiceType::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumCommunicationServiceType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumCoordinateSystemType::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumCoordinateSystemType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumEchelon::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumEchelon&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumForceOwnerType::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumForceOwnerType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumFormationLocationType::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumFormationLocationType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumFormationType::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumFormationType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumGroundFormationType::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumGroundFormationType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumModelResolutionType::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumModelResolutionType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumMOPPLevelType::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumMOPPLevelType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumOrientationType::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumOrientationType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumOverlayType::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumOverlayType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumReinforcedReducedType::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumReinforcedReducedType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumSubsurfaceFormationType::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumSubsurfaceFormationType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumSupportRelationType::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumSupportRelationType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumSupportRoleType::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumSupportRoleType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumSurfaceFormationType::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumSurfaceFormationType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumSymbolClassType::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumSymbolClassType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumSymbologyStandardType::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumSymbologyStandardType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumFrameShapeModifierType::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumFrameShapeModifierType&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, enumWeaponControlStatusType::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const enumWeaponControlStatusType&);
 }
@@ -2025,262 +2090,340 @@ namespace msdl_1
 
 namespace msdl_1
 {
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumAnchorPointType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumAnchorPointType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumAnchorPointType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumAirFormationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumAirFormationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumAirFormationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumBaseAffiliation&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumBaseAffiliation&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumBaseAffiliation&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumCombatEffectivenessType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumCombatEffectivenessType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumCombatEffectivenessType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumCommandRelationshipType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumCommandRelationshipType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumCommandRelationshipType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumCommunicationNetType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumCommunicationNetType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumCommunicationNetType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumCommunicationServiceType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumCommunicationServiceType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumCommunicationServiceType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumCoordinateSystemType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumCoordinateSystemType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumCoordinateSystemType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumEchelon&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumEchelon&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumEchelon&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumForceOwnerType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumForceOwnerType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumForceOwnerType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumFormationLocationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumFormationLocationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumFormationLocationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumFormationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumFormationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumFormationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumGroundFormationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumGroundFormationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumGroundFormationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumModelResolutionType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumModelResolutionType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumModelResolutionType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumMOPPLevelType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumMOPPLevelType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumMOPPLevelType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumOrientationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumOrientationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumOrientationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumOverlayType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumOverlayType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumOverlayType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumReinforcedReducedType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumReinforcedReducedType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumReinforcedReducedType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumSubsurfaceFormationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumSubsurfaceFormationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumSubsurfaceFormationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumSupportRelationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumSupportRelationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumSupportRelationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumSupportRoleType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumSupportRoleType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumSupportRoleType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumSurfaceFormationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumSurfaceFormationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumSurfaceFormationType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumSymbolClassType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumSymbolClassType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumSymbolClassType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumSymbologyStandardType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumSymbologyStandardType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumSymbologyStandardType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumFrameShapeModifierType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumFrameShapeModifierType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumFrameShapeModifierType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const enumWeaponControlStatusType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const enumWeaponControlStatusType&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const enumWeaponControlStatusType&);

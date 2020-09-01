@@ -48,6 +48,19 @@
 
 // Begin prologue.
 //
+#if defined(__clang__)
+  #define SUSTAIN_XSD_API
+#elif defined(__gnu_linux__) 
+  #define SUSTAIN_XSD_API __attribute__ ((visibility ("default")))
+#elif defined(_WIN32)
+ // ifdef SUSTAIN_XSD_EXPORTS
+    #define SUSTAIN_XSD_API __declspec(dllexport)
+ // #else
+ //   #define SUSTAIN_XSD_API __declspec(dllimport)
+ // #endif
+#else 
+  #define SUSTAIN_XSD_API
+#endif
 //
 // End prologue.
 
@@ -748,7 +761,7 @@ namespace oo_2_0
 
 namespace oo_2_0
 {
-  class AbsolutePointCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AbsolutePointCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -804,7 +817,7 @@ namespace oo_2_0
     static const value _xsd_AbsolutePointCategoryCode_indexes_[2];
   };
 
-  class ActionAircraftEmploymentApproachOffsetCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionAircraftEmploymentApproachOffsetCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -861,7 +874,7 @@ namespace oo_2_0
     static const value _xsd_ActionAircraftEmploymentApproachOffsetCode_indexes_[3];
   };
 
-  class ActionAircraftEmploymentCrewCompositionCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionAircraftEmploymentCrewCompositionCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -918,7 +931,7 @@ namespace oo_2_0
     static const value _xsd_ActionAircraftEmploymentCrewCompositionCode_indexes_[3];
   };
 
-  class ActionAircraftEmploymentDeplanementMethodCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionAircraftEmploymentDeplanementMethodCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -985,7 +998,7 @@ namespace oo_2_0
     static const value _xsd_ActionAircraftEmploymentDeplanementMethodCode_indexes_[13];
   };
 
-  class ActionAircraftEmploymentGeneralRoleCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionAircraftEmploymentGeneralRoleCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -1045,7 +1058,7 @@ namespace oo_2_0
     static const value _xsd_ActionAircraftEmploymentGeneralRoleCode_indexes_[6];
   };
 
-  class ActionAircraftEmploymentInflightReportRequirementIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionAircraftEmploymentInflightReportRequirementIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -1101,7 +1114,7 @@ namespace oo_2_0
     static const value _xsd_ActionAircraftEmploymentInflightReportRequirementIndicatorCode_indexes_[2];
   };
 
-  class ActionCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -1157,7 +1170,7 @@ namespace oo_2_0
     static const value _xsd_ActionCategoryCode_indexes_[2];
   };
 
-  class ActionContextCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionContextCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -1221,7 +1234,7 @@ namespace oo_2_0
     static const value _xsd_ActionContextCategoryCode_indexes_[10];
   };
 
-  class ActionEffectCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionEffectCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -1277,7 +1290,7 @@ namespace oo_2_0
     static const value _xsd_ActionEffectCategoryCode_indexes_[2];
   };
 
-  class ActionEffectDescriptionCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionEffectDescriptionCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -1356,7 +1369,7 @@ namespace oo_2_0
     static const value _xsd_ActionEffectDescriptionCode_indexes_[25];
   };
 
-  class ActionEffectSeverityCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionEffectSeverityCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -1415,7 +1428,7 @@ namespace oo_2_0
     static const value _xsd_ActionEffectSeverityCode_indexes_[5];
   };
 
-  class ActionElectronicWarfareEmploymentCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionElectronicWarfareEmploymentCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -1507,7 +1520,7 @@ namespace oo_2_0
     static const value _xsd_ActionElectronicWarfareEmploymentCategoryCode_indexes_[38];
   };
 
-  class ActionEventCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionEventCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -1908,7 +1921,7 @@ namespace oo_2_0
     static const value _xsd_ActionEventCategoryCode_indexes_[347];
   };
 
-  class ActionEventDetailClassificationCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionEventDetailClassificationCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -1972,7 +1985,7 @@ namespace oo_2_0
     static const value _xsd_ActionEventDetailClassificationCode_indexes_[10];
   };
 
-  class ActionEventDetailCrimeIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionEventDetailCrimeIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -2028,7 +2041,7 @@ namespace oo_2_0
     static const value _xsd_ActionEventDetailCrimeIndicatorCode_indexes_[2];
   };
 
-  class ActionFunctionalAssociationCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionFunctionalAssociationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -2093,7 +2106,7 @@ namespace oo_2_0
     static const value _xsd_ActionFunctionalAssociationCategoryCode_indexes_[11];
   };
 
-  class ActionMaritimeEmploymentCoordinatedAirSeaProcedureCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionMaritimeEmploymentCoordinatedAirSeaProcedureCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -2151,7 +2164,7 @@ namespace oo_2_0
     static const value _xsd_ActionMaritimeEmploymentCoordinatedAirSeaProcedureCode_indexes_[4];
   };
 
-  class ActionMaritimeEmploymentVesselTransitInstructionCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionMaritimeEmploymentVesselTransitInstructionCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -2208,7 +2221,7 @@ namespace oo_2_0
     static const value _xsd_ActionMaritimeEmploymentVesselTransitInstructionCode_indexes_[3];
   };
 
-  class ActionObjectiveCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionObjectiveCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -2265,7 +2278,7 @@ namespace oo_2_0
     static const value _xsd_ActionObjectiveCategoryCode_indexes_[3];
   };
 
-  class ActionObjectiveItemCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionObjectiveItemCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -2321,7 +2334,7 @@ namespace oo_2_0
     static const value _xsd_ActionObjectiveItemCategoryCode_indexes_[2];
   };
 
-  class ActionObjectiveItemMarkingMethodCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionObjectiveItemMarkingMethodCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -2389,7 +2402,7 @@ namespace oo_2_0
     static const value _xsd_ActionObjectiveItemMarkingMethodCode_indexes_[14];
   };
 
-  class ActionObjectiveItemMarkingPanelShapeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionObjectiveItemMarkingPanelShapeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -2449,7 +2462,7 @@ namespace oo_2_0
     static const value _xsd_ActionObjectiveItemMarkingPanelShapeCode_indexes_[6];
   };
 
-  class ActionObjectiveItemMarkingRecognitionSignalColourCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionObjectiveItemMarkingRecognitionSignalColourCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -2512,7 +2525,7 @@ namespace oo_2_0
     static const value _xsd_ActionObjectiveItemMarkingRecognitionSignalColourCode_indexes_[9];
   };
 
-  class ActionObjectiveItemPrimacyCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionObjectiveItemPrimacyCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -2569,7 +2582,7 @@ namespace oo_2_0
     static const value _xsd_ActionObjectiveItemPrimacyCode_indexes_[3];
   };
 
-  class ActionObjectiveQualifierCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionObjectiveQualifierCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -2634,7 +2647,7 @@ namespace oo_2_0
     static const value _xsd_ActionObjectiveQualifierCode_indexes_[11];
   };
 
-  class ActionObjectiveTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionObjectiveTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -2690,7 +2703,7 @@ namespace oo_2_0
     static const value _xsd_ActionObjectiveTypeCategoryCode_indexes_[2];
   };
 
-  class ActionObjectiveTypeImageryProductImageTypeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionObjectiveTypeImageryProductImageTypeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -2760,7 +2773,7 @@ namespace oo_2_0
     static const value _xsd_ActionObjectiveTypeImageryProductImageTypeCode_indexes_[16];
   };
 
-  class ActionReconnaissanceEmploymentImageCoverageModeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionReconnaissanceEmploymentImageCoverageModeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -2820,7 +2833,7 @@ namespace oo_2_0
     static const value _xsd_ActionReconnaissanceEmploymentImageCoverageModeCode_indexes_[6];
   };
 
-  class ActionReconnaissanceEmploymentImageViewQualifierCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionReconnaissanceEmploymentImageViewQualifierCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -2881,7 +2894,7 @@ namespace oo_2_0
     static const value _xsd_ActionReconnaissanceEmploymentImageViewQualifierCode_indexes_[7];
   };
 
-  class ActionReconnaissanceEmploymentTypeOfCoverageCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionReconnaissanceEmploymentTypeOfCoverageCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -2960,7 +2973,7 @@ namespace oo_2_0
     static const value _xsd_ActionReconnaissanceEmploymentTypeOfCoverageCode_indexes_[25];
   };
 
-  class ActionReferenceAssociationCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionReferenceAssociationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -3023,7 +3036,7 @@ namespace oo_2_0
     static const value _xsd_ActionReferenceAssociationCategoryCode_indexes_[9];
   };
 
-  class ActionResourceCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionResourceCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -3079,7 +3092,7 @@ namespace oo_2_0
     static const value _xsd_ActionResourceCategoryCode_indexes_[2];
   };
 
-  class ActionResourceCriticalityIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionResourceCriticalityIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -3135,7 +3148,7 @@ namespace oo_2_0
     static const value _xsd_ActionResourceCriticalityIndicatorCode_indexes_[2];
   };
 
-  class ActionResourceEmploymentCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionResourceEmploymentCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -3194,7 +3207,7 @@ namespace oo_2_0
     static const value _xsd_ActionResourceEmploymentCategoryCode_indexes_[5];
   };
 
-  class ActionResourceEmploymentMethodOfControlCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionResourceEmploymentMethodOfControlCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -3250,7 +3263,7 @@ namespace oo_2_0
     static const value _xsd_ActionResourceEmploymentMethodOfControlCode_indexes_[2];
   };
 
-  class ActionResourceEmploymentTrajectoryFireCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionResourceEmploymentTrajectoryFireCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -3306,7 +3319,7 @@ namespace oo_2_0
     static const value _xsd_ActionResourceEmploymentTrajectoryFireCode_indexes_[2];
   };
 
-  class ActionResourceQualifierCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionResourceQualifierCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -3372,7 +3385,7 @@ namespace oo_2_0
     static const value _xsd_ActionResourceQualifierCode_indexes_[12];
   };
 
-  class ActionTaskActivityCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionTaskActivityCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -3871,7 +3884,7 @@ namespace oo_2_0
     static const value _xsd_ActionTaskActivityCode_indexes_[445];
   };
 
-  class ActionTaskCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionTaskCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -3929,7 +3942,7 @@ namespace oo_2_0
     static const value _xsd_ActionTaskCategoryCode_indexes_[4];
   };
 
-  class ActionTaskEndQualifierCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionTaskEndQualifierCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -3995,7 +4008,7 @@ namespace oo_2_0
     static const value _xsd_ActionTaskEndQualifierCode_indexes_[12];
   };
 
-  class ActionTaskEntailedSafetyDegreeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionTaskEntailedSafetyDegreeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -4052,7 +4065,7 @@ namespace oo_2_0
     static const value _xsd_ActionTaskEntailedSafetyDegreeCode_indexes_[3];
   };
 
-  class ActionTaskMeteorologicalImpactCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionTaskMeteorologicalImpactCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -4109,7 +4122,7 @@ namespace oo_2_0
     static const value _xsd_ActionTaskMeteorologicalImpactCode_indexes_[3];
   };
 
-  class ActionTaskOperationalLevelCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionTaskOperationalLevelCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -4165,7 +4178,7 @@ namespace oo_2_0
     static const value _xsd_ActionTaskOperationalLevelCode_indexes_[2];
   };
 
-  class ActionTaskOvertCovertCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionTaskOvertCovertCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -4221,7 +4234,7 @@ namespace oo_2_0
     static const value _xsd_ActionTaskOvertCovertCode_indexes_[2];
   };
 
-  class ActionTaskPriorityCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionTaskPriorityCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -4302,7 +4315,7 @@ namespace oo_2_0
     static const value _xsd_ActionTaskPriorityCode_indexes_[27];
   };
 
-  class ActionTaskStartQualifierCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionTaskStartQualifierCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -4368,7 +4381,7 @@ namespace oo_2_0
     static const value _xsd_ActionTaskStartQualifierCode_indexes_[12];
   };
 
-  class ActionTaskStatusAmendTimingCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionTaskStatusAmendTimingCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -4426,7 +4439,7 @@ namespace oo_2_0
     static const value _xsd_ActionTaskStatusAmendTimingCode_indexes_[4];
   };
 
-  class ActionTaskStatusApprovalIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionTaskStatusApprovalIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -4482,7 +4495,7 @@ namespace oo_2_0
     static const value _xsd_ActionTaskStatusApprovalIndicatorCode_indexes_[2];
   };
 
-  class ActionTaskStatusCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionTaskStatusCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -4538,7 +4551,7 @@ namespace oo_2_0
     static const value _xsd_ActionTaskStatusCategoryCode_indexes_[2];
   };
 
-  class ActionTaskStatusPlanningIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionTaskStatusPlanningIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -4594,7 +4607,7 @@ namespace oo_2_0
     static const value _xsd_ActionTaskStatusPlanningIndicatorCode_indexes_[2];
   };
 
-  class ActionTaskStatusProgressCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionTaskStatusProgressCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -4668,7 +4681,7 @@ namespace oo_2_0
     static const value _xsd_ActionTaskStatusProgressCode_indexes_[20];
   };
 
-  class ActionTaskTimingDayCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionTaskTimingDayCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -4730,7 +4743,7 @@ namespace oo_2_0
     static const value _xsd_ActionTaskTimingDayCode_indexes_[8];
   };
 
-  class ActionTaskTimingHourCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionTaskTimingHourCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -4792,7 +4805,7 @@ namespace oo_2_0
     static const value _xsd_ActionTaskTimingHourCode_indexes_[8];
   };
 
-  class ActionTemporalAssociationCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ActionTemporalAssociationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -4864,7 +4877,7 @@ namespace oo_2_0
     static const value _xsd_ActionTemporalAssociationCategoryCode_indexes_[18];
   };
 
-  class AddressCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AddressCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -4921,7 +4934,7 @@ namespace oo_2_0
     static const value _xsd_AddressCategoryCode_indexes_[3];
   };
 
-  class AffiliationCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AffiliationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -4980,7 +4993,7 @@ namespace oo_2_0
     static const value _xsd_AffiliationCategoryCode_indexes_[5];
   };
 
-  class AffiliationEthnicGroupCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AffiliationEthnicGroupCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -5601,7 +5614,7 @@ namespace oo_2_0
     static const value _xsd_AffiliationEthnicGroupCode_indexes_[567];
   };
 
-  class AffiliationFunctionalGroupCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AffiliationFunctionalGroupCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -5661,7 +5674,7 @@ namespace oo_2_0
     static const value _xsd_AffiliationFunctionalGroupCode_indexes_[6];
   };
 
-  class AffiliationGeopoliticalCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AffiliationGeopoliticalCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -5960,7 +5973,7 @@ namespace oo_2_0
     static const value _xsd_AffiliationGeopoliticalCode_indexes_[245];
   };
 
-  class AffiliationReligionCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AffiliationReligionCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -6127,7 +6140,7 @@ namespace oo_2_0
     static const value _xsd_AffiliationReligionCode_indexes_[113];
   };
 
-  class AirRouteSegmentCivilMilitaryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AirRouteSegmentCivilMilitaryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -6184,7 +6197,7 @@ namespace oo_2_0
     static const value _xsd_AirRouteSegmentCivilMilitaryCode_indexes_[3];
   };
 
-  class AirRouteSegmentInternationalRouteCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AirRouteSegmentInternationalRouteCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -6240,7 +6253,7 @@ namespace oo_2_0
     static const value _xsd_AirRouteSegmentInternationalRouteCode_indexes_[2];
   };
 
-  class AirRouteSegmentRequiredNavigationPerformanceCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AirRouteSegmentRequiredNavigationPerformanceCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -6300,7 +6313,7 @@ namespace oo_2_0
     static const value _xsd_AirRouteSegmentRequiredNavigationPerformanceCode_indexes_[6];
   };
 
-  class AircraftTypeAirframeDesignCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AircraftTypeAirframeDesignCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -6365,7 +6378,7 @@ namespace oo_2_0
     static const value _xsd_AircraftTypeAirframeDesignCode_indexes_[11];
   };
 
-  class AircraftTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AircraftTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -6425,7 +6438,7 @@ namespace oo_2_0
     static const value _xsd_AircraftTypeCategoryCode_indexes_[6];
   };
 
-  class AircraftTypeDesignRangeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AircraftTypeDesignRangeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -6483,7 +6496,7 @@ namespace oo_2_0
     static const value _xsd_AircraftTypeDesignRangeCode_indexes_[4];
   };
 
-  class AircraftTypeDesignRoleCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AircraftTypeDesignRoleCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -6543,7 +6556,7 @@ namespace oo_2_0
     static const value _xsd_AircraftTypeDesignRoleCode_indexes_[6];
   };
 
-  class AircraftTypeLoadCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AircraftTypeLoadCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -6602,7 +6615,7 @@ namespace oo_2_0
     static const value _xsd_AircraftTypeLoadCategoryCode_indexes_[5];
   };
 
-  class AircraftTypeMainPurposeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AircraftTypeMainPurposeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -6717,7 +6730,7 @@ namespace oo_2_0
     static const value _xsd_AircraftTypeMainPurposeCode_indexes_[61];
   };
 
-  class AircraftTypeManningCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AircraftTypeManningCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -6776,7 +6789,7 @@ namespace oo_2_0
     static const value _xsd_AircraftTypeManningCode_indexes_[5];
   };
 
-  class AircraftTypeMilitaryCivilianCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AircraftTypeMilitaryCivilianCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -6833,7 +6846,7 @@ namespace oo_2_0
     static const value _xsd_AircraftTypeMilitaryCivilianCode_indexes_[3];
   };
 
-  class AircraftTypeModelCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AircraftTypeModelCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -11645,7 +11658,7 @@ namespace oo_2_0
     static const value _xsd_AircraftTypeModelCode_indexes_[4758];
   };
 
-  class AircraftTypeTakeoffAndLandingCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AircraftTypeTakeoffAndLandingCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -11704,7 +11717,7 @@ namespace oo_2_0
     static const value _xsd_AircraftTypeTakeoffAndLandingCode_indexes_[5];
   };
 
-  class AircraftTypeTrainingCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AircraftTypeTrainingCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -11761,7 +11774,7 @@ namespace oo_2_0
     static const value _xsd_AircraftTypeTrainingCategoryCode_indexes_[3];
   };
 
-  class AircraftTypeWeatherQualifierCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AircraftTypeWeatherQualifierCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -11818,7 +11831,7 @@ namespace oo_2_0
     static const value _xsd_AircraftTypeWeatherQualifierCode_indexes_[3];
   };
 
-  class AirfieldAirTrafficControlPresenceIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AirfieldAirTrafficControlPresenceIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -11874,7 +11887,7 @@ namespace oo_2_0
     static const value _xsd_AirfieldAirTrafficControlPresenceIndicatorCode_indexes_[2];
   };
 
-  class AirfieldInstrumentLandingSystemPresenceIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AirfieldInstrumentLandingSystemPresenceIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -11930,7 +11943,7 @@ namespace oo_2_0
     static const value _xsd_AirfieldInstrumentLandingSystemPresenceIndicatorCode_indexes_[2];
   };
 
-  class AirfieldStatusDayOperationsCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AirfieldStatusDayOperationsCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -11988,7 +12001,7 @@ namespace oo_2_0
     static const value _xsd_AirfieldStatusDayOperationsCode_indexes_[4];
   };
 
-  class AirfieldStatusEvaluationIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AirfieldStatusEvaluationIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -12044,7 +12057,7 @@ namespace oo_2_0
     static const value _xsd_AirfieldStatusEvaluationIndicatorCode_indexes_[2];
   };
 
-  class AirfieldStatusFlightSupportCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AirfieldStatusFlightSupportCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -12101,7 +12114,7 @@ namespace oo_2_0
     static const value _xsd_AirfieldStatusFlightSupportCategoryCode_indexes_[3];
   };
 
-  class AirfieldTypeUseCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AirfieldTypeUseCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -12159,7 +12172,7 @@ namespace oo_2_0
     static const value _xsd_AirfieldTypeUseCategoryCode_indexes_[4];
   };
 
-  class AirfieldVisualNavigationalAidIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AirfieldVisualNavigationalAidIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -12215,7 +12228,7 @@ namespace oo_2_0
     static const value _xsd_AirfieldVisualNavigationalAidIndicatorCode_indexes_[2];
   };
 
-  class AmmunitionTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AmmunitionTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -12317,7 +12330,7 @@ namespace oo_2_0
     static const value _xsd_AmmunitionTypeCategoryCode_indexes_[48];
   };
 
-  class AmmunitionTypeExerciseMineFlareColourCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AmmunitionTypeExerciseMineFlareColourCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -12376,7 +12389,7 @@ namespace oo_2_0
     static const value _xsd_AmmunitionTypeExerciseMineFlareColourCode_indexes_[5];
   };
 
-  class AmmunitionTypeMineMaritimeFiringCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AmmunitionTypeMineMaritimeFiringCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -12455,7 +12468,7 @@ namespace oo_2_0
     static const value _xsd_AmmunitionTypeMineMaritimeFiringCode_indexes_[25];
   };
 
-  class AnchorageBottomTypeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AnchorageBottomTypeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -12530,7 +12543,7 @@ namespace oo_2_0
     static const value _xsd_AnchorageBottomTypeCode_indexes_[21];
   };
 
-  class AnchorageMooringsTypeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AnchorageMooringsTypeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -12588,7 +12601,7 @@ namespace oo_2_0
     static const value _xsd_AnchorageMooringsTypeCode_indexes_[4];
   };
 
-  class AnglePrecisionCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AnglePrecisionCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -12652,7 +12665,7 @@ namespace oo_2_0
     static const value _xsd_AnglePrecisionCode_indexes_[10];
   };
 
-  class ApproachDirectionCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ApproachDirectionCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -12711,7 +12724,7 @@ namespace oo_2_0
     static const value _xsd_ApproachDirectionCategoryCode_indexes_[5];
   };
 
-  class AssociationStatusCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AssociationStatusCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -12767,7 +12780,7 @@ namespace oo_2_0
     static const value _xsd_AssociationStatusCategoryCode_indexes_[2];
   };
 
-  class AtmosphereInversionLayerCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AtmosphereInversionLayerCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -12824,7 +12837,7 @@ namespace oo_2_0
     static const value _xsd_AtmosphereInversionLayerCode_indexes_[3];
   };
 
-  class AtmospherePressureSystemCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AtmospherePressureSystemCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -12889,7 +12902,7 @@ namespace oo_2_0
     static const value _xsd_AtmospherePressureSystemCategoryCode_indexes_[11];
   };
 
-  class AtmosphereTemperatureGradientCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API AtmosphereTemperatureGradientCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -12947,7 +12960,7 @@ namespace oo_2_0
     static const value _xsd_AtmosphereTemperatureGradientCode_indexes_[4];
   };
 
-  class BerthMajorVesselClassCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API BerthMajorVesselClassCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -13006,7 +13019,7 @@ namespace oo_2_0
     static const value _xsd_BerthMajorVesselClassCode_indexes_[5];
   };
 
-  class BerthRailAvailabilityIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API BerthRailAvailabilityIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -13062,7 +13075,7 @@ namespace oo_2_0
     static const value _xsd_BerthRailAvailabilityIndicatorCode_indexes_[2];
   };
 
-  class BerthRollOnRollOffIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API BerthRollOnRollOffIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -13118,7 +13131,7 @@ namespace oo_2_0
     static const value _xsd_BerthRollOnRollOffIndicatorCode_indexes_[2];
   };
 
-  class BiologicalMaterielTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API BiologicalMaterielTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -13178,7 +13191,7 @@ namespace oo_2_0
     static const value _xsd_BiologicalMaterielTypeCategoryCode_indexes_[6];
   };
 
-  class BiologicalMaterielTypeSubcategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API BiologicalMaterielTypeSubcategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -13235,7 +13248,7 @@ namespace oo_2_0
     static const value _xsd_BiologicalMaterielTypeSubcategoryCode_indexes_[3];
   };
 
-  class BridgeTypeDesignTypeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API BridgeTypeDesignTypeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -13307,7 +13320,7 @@ namespace oo_2_0
     static const value _xsd_BridgeTypeDesignTypeCode_indexes_[18];
   };
 
-  class BridgeUsageCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API BridgeUsageCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -13368,7 +13381,7 @@ namespace oo_2_0
     static const value _xsd_BridgeUsageCode_indexes_[7];
   };
 
-  class CandidateTargetDetailAssociationCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API CandidateTargetDetailAssociationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -13424,7 +13437,7 @@ namespace oo_2_0
     static const value _xsd_CandidateTargetDetailAssociationCategoryCode_indexes_[2];
   };
 
-  class CandidateTargetDetailAuthorisationApprovalCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API CandidateTargetDetailAuthorisationApprovalCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -13481,7 +13494,7 @@ namespace oo_2_0
     static const value _xsd_CandidateTargetDetailAuthorisationApprovalCode_indexes_[3];
   };
 
-  class CandidateTargetDetailCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API CandidateTargetDetailCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -13537,7 +13550,7 @@ namespace oo_2_0
     static const value _xsd_CandidateTargetDetailCategoryCode_indexes_[2];
   };
 
-  class CandidateTargetDetailFocusTypeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API CandidateTargetDetailFocusTypeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -13608,7 +13621,7 @@ namespace oo_2_0
     static const value _xsd_CandidateTargetDetailFocusTypeCode_indexes_[17];
   };
 
-  class CandidateTargetDetailSchemeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API CandidateTargetDetailSchemeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -13667,7 +13680,7 @@ namespace oo_2_0
     static const value _xsd_CandidateTargetDetailSchemeCode_indexes_[5];
   };
 
-  class CandidateTargetListAssociationCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API CandidateTargetListAssociationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -13725,7 +13738,7 @@ namespace oo_2_0
     static const value _xsd_CandidateTargetListAssociationCategoryCode_indexes_[4];
   };
 
-  class CandidateTargetListAuthorisationIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API CandidateTargetListAuthorisationIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -13781,7 +13794,7 @@ namespace oo_2_0
     static const value _xsd_CandidateTargetListAuthorisationIndicatorCode_indexes_[2];
   };
 
-  class CapabilityCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API CapabilityCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -13845,7 +13858,7 @@ namespace oo_2_0
     static const value _xsd_CapabilityCategoryCode_indexes_[10];
   };
 
-  class CapabilityDayNightCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API CapabilityDayNightCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -13902,7 +13915,7 @@ namespace oo_2_0
     static const value _xsd_CapabilityDayNightCode_indexes_[3];
   };
 
-  class CapabilityReferenceAssociationCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API CapabilityReferenceAssociationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -13959,7 +13972,7 @@ namespace oo_2_0
     static const value _xsd_CapabilityReferenceAssociationCategoryCode_indexes_[3];
   };
 
-  class CapabilityUnitOfMeasureCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API CapabilityUnitOfMeasureCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -14048,7 +14061,7 @@ namespace oo_2_0
     static const value _xsd_CapabilityUnitOfMeasureCode_indexes_[35];
   };
 
-  class CargoCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API CargoCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -14141,7 +14154,7 @@ namespace oo_2_0
     static const value _xsd_CargoCategoryCode_indexes_[39];
   };
 
-  class CasualtyGroupCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API CasualtyGroupCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -14198,7 +14211,7 @@ namespace oo_2_0
     static const value _xsd_CasualtyGroupCode_indexes_[3];
   };
 
-  class CbrnEquipmentTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API CbrnEquipmentTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -14266,7 +14279,7 @@ namespace oo_2_0
     static const value _xsd_CbrnEquipmentTypeCategoryCode_indexes_[14];
   };
 
-  class CbrnEventAlarmResultIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API CbrnEventAlarmResultIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -14322,7 +14335,7 @@ namespace oo_2_0
     static const value _xsd_CbrnEventAlarmResultIndicatorCode_indexes_[2];
   };
 
-  class CbrnEventCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API CbrnEventCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -14380,7 +14393,7 @@ namespace oo_2_0
     static const value _xsd_CbrnEventCategoryCode_indexes_[4];
   };
 
-  class CbrnEventConfirmationTestIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API CbrnEventConfirmationTestIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -14436,7 +14449,7 @@ namespace oo_2_0
     static const value _xsd_CbrnEventConfirmationTestIndicatorCode_indexes_[2];
   };
 
-  class CbrnEventMaterielContainerTypeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API CbrnEventMaterielContainerTypeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -14508,7 +14521,7 @@ namespace oo_2_0
     static const value _xsd_CbrnEventMaterielContainerTypeCode_indexes_[18];
   };
 
-  class CbrnEventSubcategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API CbrnEventSubcategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -14580,7 +14593,7 @@ namespace oo_2_0
     static const value _xsd_CbrnEventSubcategoryCode_indexes_[18];
   };
 
-  class ChemicalBiologicalEventCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ChemicalBiologicalEventCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -14644,7 +14657,7 @@ namespace oo_2_0
     static const value _xsd_ChemicalBiologicalEventCategoryCode_indexes_[10];
   };
 
-  class ChemicalBiologicalEventSpillSizeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ChemicalBiologicalEventSpillSizeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -14702,7 +14715,7 @@ namespace oo_2_0
     static const value _xsd_ChemicalBiologicalEventSpillSizeCode_indexes_[4];
   };
 
-  class ChemicalMaterielTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ChemicalMaterielTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -14770,7 +14783,7 @@ namespace oo_2_0
     static const value _xsd_ChemicalMaterielTypeCategoryCode_indexes_[14];
   };
 
-  class ChemicalMaterielTypeSubcategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ChemicalMaterielTypeSubcategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -14845,7 +14858,7 @@ namespace oo_2_0
     static const value _xsd_ChemicalMaterielTypeSubcategoryCode_indexes_[21];
   };
 
-  class CivilianPostTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API CivilianPostTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -14912,7 +14925,7 @@ namespace oo_2_0
     static const value _xsd_CivilianPostTypeCategoryCode_indexes_[13];
   };
 
-  class CloudCoverAverageCoverageCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API CloudCoverAverageCoverageCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -14976,7 +14989,7 @@ namespace oo_2_0
     static const value _xsd_CloudCoverAverageCoverageCode_indexes_[10];
   };
 
-  class CloudCoverCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API CloudCoverCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -15033,7 +15046,7 @@ namespace oo_2_0
     static const value _xsd_CloudCoverCategoryCode_indexes_[3];
   };
 
-  class ConsumableMaterielTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ConsumableMaterielTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -15109,7 +15122,7 @@ namespace oo_2_0
     static const value _xsd_ConsumableMaterielTypeCategoryCode_indexes_[22];
   };
 
-  class ConsumableMaterielTypeHazardCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ConsumableMaterielTypeHazardCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -15172,7 +15185,7 @@ namespace oo_2_0
     static const value _xsd_ConsumableMaterielTypeHazardCode_indexes_[9];
   };
 
-  class ConsumableMaterielTypeIssuingElementCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ConsumableMaterielTypeIssuingElementCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -15242,7 +15255,7 @@ namespace oo_2_0
     static const value _xsd_ConsumableMaterielTypeIssuingElementCode_indexes_[16];
   };
 
-  class ConsumableMaterielTypeIssuingUnitOfMeasureCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ConsumableMaterielTypeIssuingUnitOfMeasureCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -15314,7 +15327,7 @@ namespace oo_2_0
     static const value _xsd_ConsumableMaterielTypeIssuingUnitOfMeasureCode_indexes_[18];
   };
 
-  class ConsumableMaterielTypePerishabilityIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ConsumableMaterielTypePerishabilityIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -15370,7 +15383,7 @@ namespace oo_2_0
     static const value _xsd_ConsumableMaterielTypePerishabilityIndicatorCode_indexes_[2];
   };
 
-  class ConsumableMaterielTypeSubcategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ConsumableMaterielTypeSubcategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -15498,7 +15511,7 @@ namespace oo_2_0
     static const value _xsd_ConsumableMaterielTypeSubcategoryCode_indexes_[74];
   };
 
-  class ConsumableMaterielTypeUnitedNationsNumberCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ConsumableMaterielTypeUnitedNationsNumberCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -15674,7 +15687,7 @@ namespace oo_2_0
     static const value _xsd_ConsumableMaterielTypeUnitedNationsNumberCode_indexes_[122];
   };
 
-  class ContextAssessmentLimitingFactorsCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ContextAssessmentLimitingFactorsCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -15741,7 +15754,7 @@ namespace oo_2_0
     static const value _xsd_ContextAssessmentLimitingFactorsCode_indexes_[13];
   };
 
-  class ContextAssociationCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ContextAssociationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -15799,7 +15812,7 @@ namespace oo_2_0
     static const value _xsd_ContextAssociationCategoryCode_indexes_[4];
   };
 
-  class ContextCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ContextCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -15861,7 +15874,7 @@ namespace oo_2_0
     static const value _xsd_ContextCategoryCode_indexes_[8];
   };
 
-  class ContextElementStatusCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ContextElementStatusCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -15917,7 +15930,7 @@ namespace oo_2_0
     static const value _xsd_ContextElementStatusCategoryCode_indexes_[2];
   };
 
-  class ContextObjectItemAssociationCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ContextObjectItemAssociationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -15973,7 +15986,7 @@ namespace oo_2_0
     static const value _xsd_ContextObjectItemAssociationCategoryCode_indexes_[2];
   };
 
-  class ContextReportingDataAssociationCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ContextReportingDataAssociationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -16033,7 +16046,7 @@ namespace oo_2_0
     static const value _xsd_ContextReportingDataAssociationCategoryCode_indexes_[6];
   };
 
-  class ControlFeatureCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ControlFeatureCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -16092,7 +16105,7 @@ namespace oo_2_0
     static const value _xsd_ControlFeatureCategoryCode_indexes_[5];
   };
 
-  class ControlFeatureStatusCbrnThreatLevelCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ControlFeatureStatusCbrnThreatLevelCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -16149,7 +16162,7 @@ namespace oo_2_0
     static const value _xsd_ControlFeatureStatusCbrnThreatLevelCode_indexes_[3];
   };
 
-  class ControlFeatureStatusInvestigationStatusCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ControlFeatureStatusInvestigationStatusCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -16209,7 +16222,7 @@ namespace oo_2_0
     static const value _xsd_ControlFeatureStatusInvestigationStatusCode_indexes_[6];
   };
 
-  class ControlFeatureStatusSecurityStatusCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ControlFeatureStatusSecurityStatusCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -16267,7 +16280,7 @@ namespace oo_2_0
     static const value _xsd_ControlFeatureStatusSecurityStatusCode_indexes_[4];
   };
 
-  class ControlFeatureTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ControlFeatureTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -16608,7 +16621,7 @@ namespace oo_2_0
     static const value _xsd_ControlFeatureTypeCategoryCode_indexes_[287];
   };
 
-  class DemolitionStatusCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API DemolitionStatusCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -16671,7 +16684,7 @@ namespace oo_2_0
     static const value _xsd_DemolitionStatusCode_indexes_[9];
   };
 
-  class DirectionCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API DirectionCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -16742,7 +16755,7 @@ namespace oo_2_0
     static const value _xsd_DirectionCode_indexes_[17];
   };
 
-  class DistancePrecisionCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API DistancePrecisionCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -16813,7 +16826,7 @@ namespace oo_2_0
     static const value _xsd_DistancePrecisionCode_indexes_[17];
   };
 
-  class DryDockMarineRailwaySizeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API DryDockMarineRailwaySizeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -16870,7 +16883,7 @@ namespace oo_2_0
     static const value _xsd_DryDockMarineRailwaySizeCode_indexes_[3];
   };
 
-  class ElectronicEquipmentTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ElectronicEquipmentTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -16936,7 +16949,7 @@ namespace oo_2_0
     static const value _xsd_ElectronicEquipmentTypeCategoryCode_indexes_[12];
   };
 
-  class ElectronicEquipmentTypeSubcategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ElectronicEquipmentTypeSubcategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -17108,7 +17121,7 @@ namespace oo_2_0
     static const value _xsd_ElectronicEquipmentTypeSubcategoryCode_indexes_[118];
   };
 
-  class EngineeringCapabilityCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API EngineeringCapabilityCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -17165,7 +17178,7 @@ namespace oo_2_0
     static const value _xsd_EngineeringCapabilityCategoryCode_indexes_[3];
   };
 
-  class EngineeringCapabilityDescriptorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API EngineeringCapabilityDescriptorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -17221,7 +17234,7 @@ namespace oo_2_0
     static const value _xsd_EngineeringCapabilityDescriptorCode_indexes_[2];
   };
 
-  class EngineeringEquipmentTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API EngineeringEquipmentTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -17300,7 +17313,7 @@ namespace oo_2_0
     static const value _xsd_EngineeringEquipmentTypeCategoryCode_indexes_[25];
   };
 
-  class EquipmentTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API EquipmentTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -17364,7 +17377,7 @@ namespace oo_2_0
     static const value _xsd_EquipmentTypeCategoryCode_indexes_[10];
   };
 
-  class EvacuationDestinationCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API EvacuationDestinationCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -17421,7 +17434,7 @@ namespace oo_2_0
     static const value _xsd_EvacuationDestinationCode_indexes_[3];
   };
 
-  class ExecutiveMilitaryOrganisationTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ExecutiveMilitaryOrganisationTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -17482,7 +17495,7 @@ namespace oo_2_0
     static const value _xsd_ExecutiveMilitaryOrganisationTypeCategoryCode_indexes_[7];
   };
 
-  class FacilityCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API FacilityCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -17553,7 +17566,7 @@ namespace oo_2_0
     static const value _xsd_FacilityCategoryCode_indexes_[17];
   };
 
-  class FacilityPrimaryConstructionMaterialCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API FacilityPrimaryConstructionMaterialCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -17640,7 +17653,7 @@ namespace oo_2_0
     static const value _xsd_FacilityPrimaryConstructionMaterialCode_indexes_[33];
   };
 
-  class FacilityStatusCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API FacilityStatusCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -17698,7 +17711,7 @@ namespace oo_2_0
     static const value _xsd_FacilityStatusCategoryCode_indexes_[4];
   };
 
-  class FacilityStatusEnemyActivityConditionCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API FacilityStatusEnemyActivityConditionCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -17754,7 +17767,7 @@ namespace oo_2_0
     static const value _xsd_FacilityStatusEnemyActivityConditionCode_indexes_[2];
   };
 
-  class FacilityStatusOccupationProgramIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API FacilityStatusOccupationProgramIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -17810,7 +17823,7 @@ namespace oo_2_0
     static const value _xsd_FacilityStatusOccupationProgramIndicatorCode_indexes_[2];
   };
 
-  class FacilityStatusOperationalStatusCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API FacilityStatusOperationalStatusCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -17870,7 +17883,7 @@ namespace oo_2_0
     static const value _xsd_FacilityStatusOperationalStatusCode_indexes_[6];
   };
 
-  class FacilityStatusOperationalStatusQualifierCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API FacilityStatusOperationalStatusQualifierCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -17943,7 +17956,7 @@ namespace oo_2_0
     static const value _xsd_FacilityStatusOperationalStatusQualifierCode_indexes_[19];
   };
 
-  class FacilityStatusReserveIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API FacilityStatusReserveIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -17999,7 +18012,7 @@ namespace oo_2_0
     static const value _xsd_FacilityStatusReserveIndicatorCode_indexes_[2];
   };
 
-  class FacilityStatusSecurityStatusCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API FacilityStatusSecurityStatusCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -18057,7 +18070,7 @@ namespace oo_2_0
     static const value _xsd_FacilityStatusSecurityStatusCode_indexes_[4];
   };
 
-  class FacilityTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API FacilityTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -18367,7 +18380,7 @@ namespace oo_2_0
     static const value _xsd_FacilityTypeCategoryCode_indexes_[256];
   };
 
-  class FeatureCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API FeatureCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -18425,7 +18438,7 @@ namespace oo_2_0
     static const value _xsd_FeatureCategoryCode_indexes_[4];
   };
 
-  class FeatureTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API FeatureTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -18483,7 +18496,7 @@ namespace oo_2_0
     static const value _xsd_FeatureTypeCategoryCode_indexes_[4];
   };
 
-  class FeintIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API FeintIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -18539,7 +18552,7 @@ namespace oo_2_0
     static const value _xsd_FeintIndicatorCode_indexes_[2];
   };
 
-  class FireCapabilityCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API FireCapabilityCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -18602,7 +18615,7 @@ namespace oo_2_0
     static const value _xsd_FireCapabilityCategoryCode_indexes_[9];
   };
 
-  class FireCapabilityDescriptorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API FireCapabilityDescriptorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -18662,7 +18675,7 @@ namespace oo_2_0
     static const value _xsd_FireCapabilityDescriptorCode_indexes_[6];
   };
 
-  class FireCapabilityWeaponTypeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API FireCapabilityWeaponTypeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -18722,7 +18735,7 @@ namespace oo_2_0
     static const value _xsd_FireCapabilityWeaponTypeCode_indexes_[6];
   };
 
-  class GenderCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API GenderCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -18779,7 +18792,7 @@ namespace oo_2_0
     static const value _xsd_GenderCode_indexes_[3];
   };
 
-  class GeographicFeatureBottomHardnessCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API GeographicFeatureBottomHardnessCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -18839,7 +18852,7 @@ namespace oo_2_0
     static const value _xsd_GeographicFeatureBottomHardnessCode_indexes_[6];
   };
 
-  class GeographicFeatureSolidSurfaceCompositionCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API GeographicFeatureSolidSurfaceCompositionCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -18900,7 +18913,7 @@ namespace oo_2_0
     static const value _xsd_GeographicFeatureSolidSurfaceCompositionCode_indexes_[7];
   };
 
-  class GeographicFeatureStatusCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API GeographicFeatureStatusCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -18957,7 +18970,7 @@ namespace oo_2_0
     static const value _xsd_GeographicFeatureStatusCategoryCode_indexes_[3];
   };
 
-  class GeographicFeatureStatusSurfaceRecirculationIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API GeographicFeatureStatusSurfaceRecirculationIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -19013,7 +19026,7 @@ namespace oo_2_0
     static const value _xsd_GeographicFeatureStatusSurfaceRecirculationIndicatorCode_indexes_[2];
   };
 
-  class GeographicFeatureSurfaceCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API GeographicFeatureSurfaceCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -19070,7 +19083,7 @@ namespace oo_2_0
     static const value _xsd_GeographicFeatureSurfaceCategoryCode_indexes_[3];
   };
 
-  class GeographicFeatureTerrainCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API GeographicFeatureTerrainCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -19131,7 +19144,7 @@ namespace oo_2_0
     static const value _xsd_GeographicFeatureTerrainCode_indexes_[7];
   };
 
-  class GeographicFeatureTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API GeographicFeatureTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -19193,7 +19206,7 @@ namespace oo_2_0
     static const value _xsd_GeographicFeatureTypeCategoryCode_indexes_[8];
   };
 
-  class GeographicFeatureTypeSubcategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API GeographicFeatureTypeSubcategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -19316,7 +19329,7 @@ namespace oo_2_0
     static const value _xsd_GeographicFeatureTypeSubcategoryCode_indexes_[69];
   };
 
-  class GeometricVolumeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API GeometricVolumeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -19373,7 +19386,7 @@ namespace oo_2_0
     static const value _xsd_GeometricVolumeCategoryCode_indexes_[3];
   };
 
-  class GovernmentOrganisationTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API GovernmentOrganisationTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -19432,7 +19445,7 @@ namespace oo_2_0
     static const value _xsd_GovernmentOrganisationTypeCategoryCode_indexes_[5];
   };
 
-  class GroupCharacteristicAgeGroupCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API GroupCharacteristicAgeGroupCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -19491,7 +19504,7 @@ namespace oo_2_0
     static const value _xsd_GroupCharacteristicAgeGroupCode_indexes_[5];
   };
 
-  class GroupCharacteristicMaladyCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API GroupCharacteristicMaladyCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -19652,7 +19665,7 @@ namespace oo_2_0
     static const value _xsd_GroupCharacteristicMaladyCode_indexes_[107];
   };
 
-  class GroupCharacteristicMaladyTransmissibilityIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API GroupCharacteristicMaladyTransmissibilityIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -19708,7 +19721,7 @@ namespace oo_2_0
     static const value _xsd_GroupCharacteristicMaladyTransmissibilityIndicatorCode_indexes_[2];
   };
 
-  class GroupCharacteristicTriageCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API GroupCharacteristicTriageCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -19766,7 +19779,7 @@ namespace oo_2_0
     static const value _xsd_GroupCharacteristicTriageCode_indexes_[4];
   };
 
-  class GroupOrganisationTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API GroupOrganisationTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -19841,7 +19854,7 @@ namespace oo_2_0
     static const value _xsd_GroupOrganisationTypeCategoryCode_indexes_[21];
   };
 
-  class HandlingCapabilityActionCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HandlingCapabilityActionCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -19899,7 +19912,7 @@ namespace oo_2_0
     static const value _xsd_HandlingCapabilityActionCode_indexes_[4];
   };
 
-  class HandlingCapabilityDescriptorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HandlingCapabilityDescriptorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -19961,7 +19974,7 @@ namespace oo_2_0
     static const value _xsd_HandlingCapabilityDescriptorCode_indexes_[8];
   };
 
-  class HarbourAirportNearIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourAirportNearIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -20017,7 +20030,7 @@ namespace oo_2_0
     static const value _xsd_HarbourAirportNearIndicatorCode_indexes_[2];
   };
 
-  class HarbourBiologicallySecureAvailabilityIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourBiologicallySecureAvailabilityIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -20073,7 +20086,7 @@ namespace oo_2_0
     static const value _xsd_HarbourBiologicallySecureAvailabilityIndicatorCode_indexes_[2];
   };
 
-  class HarbourConvoyMarshallingIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourConvoyMarshallingIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -20129,7 +20142,7 @@ namespace oo_2_0
     static const value _xsd_HarbourConvoyMarshallingIndicatorCode_indexes_[2];
   };
 
-  class HarbourDegaussingIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourDegaussingIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -20185,7 +20198,7 @@ namespace oo_2_0
     static const value _xsd_HarbourDegaussingIndicatorCode_indexes_[2];
   };
 
-  class HarbourDirtyBallastIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourDirtyBallastIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -20241,7 +20254,7 @@ namespace oo_2_0
     static const value _xsd_HarbourDirtyBallastIndicatorCode_indexes_[2];
   };
 
-  class HarbourEntranceRestrictionsIceIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourEntranceRestrictionsIceIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -20297,7 +20310,7 @@ namespace oo_2_0
     static const value _xsd_HarbourEntranceRestrictionsIceIndicatorCode_indexes_[2];
   };
 
-  class HarbourEntranceRestrictionsSwellIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourEntranceRestrictionsSwellIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -20353,7 +20366,7 @@ namespace oo_2_0
     static const value _xsd_HarbourEntranceRestrictionsSwellIndicatorCode_indexes_[2];
   };
 
-  class HarbourEstimatedTimeOfArrivalIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourEstimatedTimeOfArrivalIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -20409,7 +20422,7 @@ namespace oo_2_0
     static const value _xsd_HarbourEstimatedTimeOfArrivalIndicatorCode_indexes_[2];
   };
 
-  class HarbourFireFightingCapabilityCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourFireFightingCapabilityCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -20466,7 +20479,7 @@ namespace oo_2_0
     static const value _xsd_HarbourFireFightingCapabilityCode_indexes_[3];
   };
 
-  class HarbourFireFightingIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourFireFightingIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -20522,7 +20535,7 @@ namespace oo_2_0
     static const value _xsd_HarbourFireFightingIndicatorCode_indexes_[2];
   };
 
-  class HarbourFirstPortOfEntryIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourFirstPortOfEntryIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -20578,7 +20591,7 @@ namespace oo_2_0
     static const value _xsd_HarbourFirstPortOfEntryIndicatorCode_indexes_[2];
   };
 
-  class HarbourFreshWaterAvailabilityIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourFreshWaterAvailabilityIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -20634,7 +20647,7 @@ namespace oo_2_0
     static const value _xsd_HarbourFreshWaterAvailabilityIndicatorCode_indexes_[2];
   };
 
-  class HarbourLashIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourLashIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -20690,7 +20703,7 @@ namespace oo_2_0
     static const value _xsd_HarbourLashIndicatorCode_indexes_[2];
   };
 
-  class HarbourLighterageAvailabilityIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourLighterageAvailabilityIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -20746,7 +20759,7 @@ namespace oo_2_0
     static const value _xsd_HarbourLighterageAvailabilityIndicatorCode_indexes_[2];
   };
 
-  class HarbourOverheadLimitsIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourOverheadLimitsIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -20802,7 +20815,7 @@ namespace oo_2_0
     static const value _xsd_HarbourOverheadLimitsIndicatorCode_indexes_[2];
   };
 
-  class HarbourPassengerHandlingIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourPassengerHandlingIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -20858,7 +20871,7 @@ namespace oo_2_0
     static const value _xsd_HarbourPassengerHandlingIndicatorCode_indexes_[2];
   };
 
-  class HarbourPersistenceCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourPersistenceCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -20915,7 +20928,7 @@ namespace oo_2_0
     static const value _xsd_HarbourPersistenceCode_indexes_[3];
   };
 
-  class HarbourPilotageAvailabilityIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourPilotageAvailabilityIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -20971,7 +20984,7 @@ namespace oo_2_0
     static const value _xsd_HarbourPilotageAvailabilityIndicatorCode_indexes_[2];
   };
 
-  class HarbourPilotageRequirementIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourPilotageRequirementIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -21027,7 +21040,7 @@ namespace oo_2_0
     static const value _xsd_HarbourPilotageRequirementIndicatorCode_indexes_[2];
   };
 
-  class HarbourRefuellingAvailabilityIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourRefuellingAvailabilityIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -21083,7 +21096,7 @@ namespace oo_2_0
     static const value _xsd_HarbourRefuellingAvailabilityIndicatorCode_indexes_[2];
   };
 
-  class HarbourRefuellingTypeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourRefuellingTypeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -21141,7 +21154,7 @@ namespace oo_2_0
     static const value _xsd_HarbourRefuellingTypeCode_indexes_[4];
   };
 
-  class HarbourShelterQualityCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourShelterQualityCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -21199,7 +21212,7 @@ namespace oo_2_0
     static const value _xsd_HarbourShelterQualityCode_indexes_[4];
   };
 
-  class HarbourTankerFacilitiesIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourTankerFacilitiesIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -21255,7 +21268,7 @@ namespace oo_2_0
     static const value _xsd_HarbourTankerFacilitiesIndicatorCode_indexes_[2];
   };
 
-  class HarbourTransitAccommodationIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourTransitAccommodationIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -21311,7 +21324,7 @@ namespace oo_2_0
     static const value _xsd_HarbourTransitAccommodationIndicatorCode_indexes_[2];
   };
 
-  class HarbourTugAvailabilityIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourTugAvailabilityIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -21367,7 +21380,7 @@ namespace oo_2_0
     static const value _xsd_HarbourTugAvailabilityIndicatorCode_indexes_[2];
   };
 
-  class HarbourTurningAreaIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourTurningAreaIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -21423,7 +21436,7 @@ namespace oo_2_0
     static const value _xsd_HarbourTurningAreaIndicatorCode_indexes_[2];
   };
 
-  class HarbourTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -21486,7 +21499,7 @@ namespace oo_2_0
     static const value _xsd_HarbourTypeCategoryCode_indexes_[9];
   };
 
-  class HarbourVehicleHandlingTypeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HarbourVehicleHandlingTypeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -21545,7 +21558,7 @@ namespace oo_2_0
     static const value _xsd_HarbourVehicleHandlingTypeCode_indexes_[5];
   };
 
-  class HoldingRequiredCalculationMethodCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HoldingRequiredCalculationMethodCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -21601,7 +21614,7 @@ namespace oo_2_0
     static const value _xsd_HoldingRequiredCalculationMethodCode_indexes_[2];
   };
 
-  class HoldingTransferReasonCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API HoldingTransferReasonCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -21668,7 +21681,7 @@ namespace oo_2_0
     static const value _xsd_HoldingTransferReasonCode_indexes_[13];
   };
 
-  class IcingCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API IcingCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -21725,7 +21738,7 @@ namespace oo_2_0
     static const value _xsd_IcingCategoryCode_indexes_[3];
   };
 
-  class IcingSeverityQualifierCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API IcingSeverityQualifierCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -21782,7 +21795,7 @@ namespace oo_2_0
     static const value _xsd_IcingSeverityQualifierCode_indexes_[3];
   };
 
-  class JettyRailServedIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API JettyRailServedIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -21838,7 +21851,7 @@ namespace oo_2_0
     static const value _xsd_JettyRailServedIndicatorCode_indexes_[2];
   };
 
-  class LanguageCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API LanguageCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -22152,7 +22165,7 @@ namespace oo_2_0
     static const value _xsd_LanguageCategoryCode_indexes_[260];
   };
 
-  class LanguageSkillProficiencyCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API LanguageSkillProficiencyCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -22212,7 +22225,7 @@ namespace oo_2_0
     static const value _xsd_LanguageSkillProficiencyCode_indexes_[6];
   };
 
-  class LightCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API LightCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -22271,7 +22284,7 @@ namespace oo_2_0
     static const value _xsd_LightCategoryCode_indexes_[5];
   };
 
-  class LightMoonPhaseCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API LightMoonPhaseCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -22329,7 +22342,7 @@ namespace oo_2_0
     static const value _xsd_LightMoonPhaseCode_indexes_[4];
   };
 
-  class LiquidSurfaceStatusSeaStateCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API LiquidSurfaceStatusSeaStateCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -22393,7 +22406,7 @@ namespace oo_2_0
     static const value _xsd_LiquidSurfaceStatusSeaStateCode_indexes_[10];
   };
 
-  class LiquidSurfaceStatusSurfaceConditionCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API LiquidSurfaceStatusSurfaceConditionCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -22452,7 +22465,7 @@ namespace oo_2_0
     static const value _xsd_LiquidSurfaceStatusSurfaceConditionCode_indexes_[5];
   };
 
-  class LocationCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API LocationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -22511,7 +22524,7 @@ namespace oo_2_0
     static const value _xsd_LocationCategoryCode_indexes_[5];
   };
 
-  class MainActivityCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MainActivityCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -22572,7 +22585,7 @@ namespace oo_2_0
     static const value _xsd_MainActivityCode_indexes_[7];
   };
 
-  class MaintenanceCapabilityCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MaintenanceCapabilityCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -22636,7 +22649,7 @@ namespace oo_2_0
     static const value _xsd_MaintenanceCapabilityCategoryCode_indexes_[10];
   };
 
-  class MaintenanceCapabilityLevelCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MaintenanceCapabilityLevelCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -22694,7 +22707,7 @@ namespace oo_2_0
     static const value _xsd_MaintenanceCapabilityLevelCode_indexes_[4];
   };
 
-  class MaritimeEquipmentTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MaritimeEquipmentTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -22773,7 +22786,7 @@ namespace oo_2_0
     static const value _xsd_MaritimeEquipmentTypeCategoryCode_indexes_[25];
   };
 
-  class MaritimeEquipmentTypeSubcategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MaritimeEquipmentTypeSubcategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -22889,7 +22902,7 @@ namespace oo_2_0
     static const value _xsd_MaritimeEquipmentTypeSubcategoryCode_indexes_[62];
   };
 
-  class MaterielCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MaterielCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -22945,7 +22958,7 @@ namespace oo_2_0
     static const value _xsd_MaterielCategoryCode_indexes_[2];
   };
 
-  class MaterielStatusBodyColourCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MaterielStatusBodyColourCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -23032,7 +23045,7 @@ namespace oo_2_0
     static const value _xsd_MaterielStatusBodyColourCode_indexes_[33];
   };
 
-  class MaterielStatusBuoyMalfunctionCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MaterielStatusBuoyMalfunctionCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -23091,7 +23104,7 @@ namespace oo_2_0
     static const value _xsd_MaterielStatusBuoyMalfunctionCode_indexes_[5];
   };
 
-  class MaterielStatusCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MaterielStatusCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -23148,7 +23161,7 @@ namespace oo_2_0
     static const value _xsd_MaterielStatusCategoryCode_indexes_[3];
   };
 
-  class MaterielStatusImoCompliantIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MaterielStatusImoCompliantIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -23204,7 +23217,7 @@ namespace oo_2_0
     static const value _xsd_MaterielStatusImoCompliantIndicatorCode_indexes_[2];
   };
 
-  class MaterielStatusMarkingCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MaterielStatusMarkingCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -23265,7 +23278,7 @@ namespace oo_2_0
     static const value _xsd_MaterielStatusMarkingCode_indexes_[7];
   };
 
-  class MaterielStatusMarkingColourCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MaterielStatusMarkingColourCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -23333,7 +23346,7 @@ namespace oo_2_0
     static const value _xsd_MaterielStatusMarkingColourCode_indexes_[14];
   };
 
-  class MaterielStatusOperationalStatusCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MaterielStatusOperationalStatusCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -23393,7 +23406,7 @@ namespace oo_2_0
     static const value _xsd_MaterielStatusOperationalStatusCode_indexes_[6];
   };
 
-  class MaterielStatusOperationalStatusModeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MaterielStatusOperationalStatusModeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -23455,7 +23468,7 @@ namespace oo_2_0
     static const value _xsd_MaterielStatusOperationalStatusModeCode_indexes_[8];
   };
 
-  class MaterielStatusOperationalStatusQualifierCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MaterielStatusOperationalStatusQualifierCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -23525,7 +23538,7 @@ namespace oo_2_0
     static const value _xsd_MaterielStatusOperationalStatusQualifierCode_indexes_[16];
   };
 
-  class MaterielStatusReserveIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MaterielStatusReserveIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -23581,7 +23594,7 @@ namespace oo_2_0
     static const value _xsd_MaterielStatusReserveIndicatorCode_indexes_[2];
   };
 
-  class MaterielStatusSafetyStatusCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MaterielStatusSafetyStatusCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -23640,7 +23653,7 @@ namespace oo_2_0
     static const value _xsd_MaterielStatusSafetyStatusCode_indexes_[5];
   };
 
-  class MaterielTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MaterielTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -23697,7 +23710,7 @@ namespace oo_2_0
     static const value _xsd_MaterielTypeCategoryCode_indexes_[3];
   };
 
-  class MaterielTypeSupplyClassCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MaterielTypeSupplyClassCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -23757,7 +23770,7 @@ namespace oo_2_0
     static const value _xsd_MaterielTypeSupplyClassCode_indexes_[6];
   };
 
-  class MedicalFacilityStatusIntervalCasualtyTypeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MedicalFacilityStatusIntervalCasualtyTypeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -23815,7 +23828,7 @@ namespace oo_2_0
     static const value _xsd_MedicalFacilityStatusIntervalCasualtyTypeCode_indexes_[4];
   };
 
-  class MedicalFacilityStatusPendingSurgeryTriageCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MedicalFacilityStatusPendingSurgeryTriageCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -23872,7 +23885,7 @@ namespace oo_2_0
     static const value _xsd_MedicalFacilityStatusPendingSurgeryTriageCode_indexes_[3];
   };
 
-  class MeteorologicFeatureCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MeteorologicFeatureCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -23947,7 +23960,7 @@ namespace oo_2_0
     static const value _xsd_MeteorologicFeatureCategoryCode_indexes_[21];
   };
 
-  class MeteorologicFeatureInterpretationCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MeteorologicFeatureInterpretationCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -24006,7 +24019,7 @@ namespace oo_2_0
     static const value _xsd_MeteorologicFeatureInterpretationCode_indexes_[5];
   };
 
-  class MeteorologicFeatureSourceCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MeteorologicFeatureSourceCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -24062,7 +24075,7 @@ namespace oo_2_0
     static const value _xsd_MeteorologicFeatureSourceCode_indexes_[2];
   };
 
-  class MilitaryObstacleCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MilitaryObstacleCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -24118,7 +24131,7 @@ namespace oo_2_0
     static const value _xsd_MilitaryObstacleCategoryCode_indexes_[2];
   };
 
-  class MilitaryObstacleTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MilitaryObstacleTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -24204,7 +24217,7 @@ namespace oo_2_0
     static const value _xsd_MilitaryObstacleTypeCategoryCode_indexes_[32];
   };
 
-  class MilitaryObstacleTypeSubcategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MilitaryObstacleTypeSubcategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -24261,7 +24274,7 @@ namespace oo_2_0
     static const value _xsd_MilitaryObstacleTypeSubcategoryCode_indexes_[3];
   };
 
-  class MilitaryOrganisationTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MilitaryOrganisationTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -24320,7 +24333,7 @@ namespace oo_2_0
     static const value _xsd_MilitaryOrganisationTypeCategoryCode_indexes_[5];
   };
 
-  class MilitaryOrganisationTypeServiceCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MilitaryOrganisationTypeServiceCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -24391,7 +24404,7 @@ namespace oo_2_0
     static const value _xsd_MilitaryOrganisationTypeServiceCode_indexes_[17];
   };
 
-  class MilitaryPostTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MilitaryPostTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -24483,7 +24496,7 @@ namespace oo_2_0
     static const value _xsd_MilitaryPostTypeCategoryCode_indexes_[38];
   };
 
-  class MilitaryPostTypeRankCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MilitaryPostTypeRankCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -24561,7 +24574,7 @@ namespace oo_2_0
     static const value _xsd_MilitaryPostTypeRankCode_indexes_[24];
   };
 
-  class MinePresenceCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MinePresenceCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -24618,7 +24631,7 @@ namespace oo_2_0
     static const value _xsd_MinePresenceCode_indexes_[3];
   };
 
-  class MineStatusAirDropEffectCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MineStatusAirDropEffectCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -24686,7 +24699,7 @@ namespace oo_2_0
     static const value _xsd_MineStatusAirDropEffectCode_indexes_[14];
   };
 
-  class MineStatusCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MineStatusCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -24751,7 +24764,7 @@ namespace oo_2_0
     static const value _xsd_MineStatusCode_indexes_[11];
   };
 
-  class MineStatusMaritimeMineQualifierCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MineStatusMaritimeMineQualifierCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -24817,7 +24830,7 @@ namespace oo_2_0
     static const value _xsd_MineStatusMaritimeMineQualifierCode_indexes_[12];
   };
 
-  class MinefieldCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MinefieldCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -24873,7 +24886,7 @@ namespace oo_2_0
     static const value _xsd_MinefieldCategoryCode_indexes_[2];
   };
 
-  class MinefieldLandDepthPlacementCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MinefieldLandDepthPlacementCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -24931,7 +24944,7 @@ namespace oo_2_0
     static const value _xsd_MinefieldLandDepthPlacementCode_indexes_[4];
   };
 
-  class MinefieldLandFunctionCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MinefieldLandFunctionCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -24991,7 +25004,7 @@ namespace oo_2_0
     static const value _xsd_MinefieldLandFunctionCode_indexes_[6];
   };
 
-  class MinefieldLandPatternCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MinefieldLandPatternCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -25049,7 +25062,7 @@ namespace oo_2_0
     static const value _xsd_MinefieldLandPatternCode_indexes_[4];
   };
 
-  class MinefieldLandPersistenceCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MinefieldLandPersistenceCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -25107,7 +25120,7 @@ namespace oo_2_0
     static const value _xsd_MinefieldLandPersistenceCode_indexes_[4];
   };
 
-  class MinefieldLandStoppingPowerCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MinefieldLandStoppingPowerCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -25164,7 +25177,7 @@ namespace oo_2_0
     static const value _xsd_MinefieldLandStoppingPowerCode_indexes_[3];
   };
 
-  class MinefieldMaritimeBottomNaturalCamouflageCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MinefieldMaritimeBottomNaturalCamouflageCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -25226,7 +25239,7 @@ namespace oo_2_0
     static const value _xsd_MinefieldMaritimeBottomNaturalCamouflageCode_indexes_[8];
   };
 
-  class MinefieldMaritimeDepthPlacementCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MinefieldMaritimeDepthPlacementCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -25285,7 +25298,7 @@ namespace oo_2_0
     static const value _xsd_MinefieldMaritimeDepthPlacementCode_indexes_[5];
   };
 
-  class MinefieldMaritimeFunctionCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MinefieldMaritimeFunctionCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -25342,7 +25355,7 @@ namespace oo_2_0
     static const value _xsd_MinefieldMaritimeFunctionCode_indexes_[3];
   };
 
-  class MinefieldMaritimeStatusCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MinefieldMaritimeStatusCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -25398,7 +25411,7 @@ namespace oo_2_0
     static const value _xsd_MinefieldMaritimeStatusCode_indexes_[2];
   };
 
-  class MinefieldMaritimeStatusColourCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MinefieldMaritimeStatusColourCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -25455,7 +25468,7 @@ namespace oo_2_0
     static const value _xsd_MinefieldMaritimeStatusColourCode_indexes_[3];
   };
 
-  class MinefieldMaritimeStatusExpectedLevelMcmCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MinefieldMaritimeStatusExpectedLevelMcmCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -25513,7 +25526,7 @@ namespace oo_2_0
     static const value _xsd_MinefieldMaritimeStatusExpectedLevelMcmCode_indexes_[4];
   };
 
-  class MinefieldMaritimeStatusMineDetectionCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MinefieldMaritimeStatusMineDetectionCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -25595,7 +25608,7 @@ namespace oo_2_0
     static const value _xsd_MinefieldMaritimeStatusMineDetectionCode_indexes_[28];
   };
 
-  class MinefieldMaritimeStatusMineZoneRiskCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MinefieldMaritimeStatusMineZoneRiskCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -25652,7 +25665,7 @@ namespace oo_2_0
     static const value _xsd_MinefieldMaritimeStatusMineZoneRiskCode_indexes_[3];
   };
 
-  class MinefieldMaritimeStatusSeedingCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MinefieldMaritimeStatusSeedingCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -25716,7 +25729,7 @@ namespace oo_2_0
     static const value _xsd_MinefieldMaritimeStatusSeedingCode_indexes_[10];
   };
 
-  class MinefieldMaritimeSubfunctionCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MinefieldMaritimeSubfunctionCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -25780,7 +25793,7 @@ namespace oo_2_0
     static const value _xsd_MinefieldMaritimeSubfunctionCode_indexes_[10];
   };
 
-  class MiscellaneousEquipmentTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MiscellaneousEquipmentTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -25869,7 +25882,7 @@ namespace oo_2_0
     static const value _xsd_MiscellaneousEquipmentTypeCategoryCode_indexes_[35];
   };
 
-  class MiscellaneousEquipmentTypeSubcategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MiscellaneousEquipmentTypeSubcategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -25930,7 +25943,7 @@ namespace oo_2_0
     static const value _xsd_MiscellaneousEquipmentTypeSubcategoryCode_indexes_[7];
   };
 
-  class MissionPrimacyCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MissionPrimacyCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -25987,7 +26000,7 @@ namespace oo_2_0
     static const value _xsd_MissionPrimacyCode_indexes_[3];
   };
 
-  class MobilityCapabilityCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MobilityCapabilityCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -26070,7 +26083,7 @@ namespace oo_2_0
     static const value _xsd_MobilityCapabilityCategoryCode_indexes_[29];
   };
 
-  class MobilityCapabilityDescriptorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MobilityCapabilityDescriptorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -26145,7 +26158,7 @@ namespace oo_2_0
     static const value _xsd_MobilityCapabilityDescriptorCode_indexes_[21];
   };
 
-  class MobilityCapabilityTerrainTypeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MobilityCapabilityTerrainTypeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -26205,7 +26218,7 @@ namespace oo_2_0
     static const value _xsd_MobilityCapabilityTerrainTypeCode_indexes_[6];
   };
 
-  class MobilityCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API MobilityCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -26265,7 +26278,7 @@ namespace oo_2_0
     static const value _xsd_MobilityCode_indexes_[6];
   };
 
-  class ModeOfTransportationCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ModeOfTransportationCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -26327,7 +26340,7 @@ namespace oo_2_0
     static const value _xsd_ModeOfTransportationCode_indexes_[8];
   };
 
-  class NetworkArchitectureCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API NetworkArchitectureCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -26387,7 +26400,7 @@ namespace oo_2_0
     static const value _xsd_NetworkArchitectureCode_indexes_[6];
   };
 
-  class NetworkCapacityBandwidthCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API NetworkCapacityBandwidthCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -26459,7 +26472,7 @@ namespace oo_2_0
     static const value _xsd_NetworkCapacityBandwidthCode_indexes_[18];
   };
 
-  class NetworkCapacityProtocolCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API NetworkCapacityProtocolCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -26529,7 +26542,7 @@ namespace oo_2_0
     static const value _xsd_NetworkCapacityProtocolCode_indexes_[16];
   };
 
-  class NetworkCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API NetworkCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -26588,7 +26601,7 @@ namespace oo_2_0
     static const value _xsd_NetworkCategoryCode_indexes_[5];
   };
 
-  class NetworkFrequencyBandCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API NetworkFrequencyBandCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -26650,7 +26663,7 @@ namespace oo_2_0
     static const value _xsd_NetworkFrequencyBandCode_indexes_[8];
   };
 
-  class NetworkFrequencyModulationCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API NetworkFrequencyModulationCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -26710,7 +26723,7 @@ namespace oo_2_0
     static const value _xsd_NetworkFrequencyModulationCode_indexes_[6];
   };
 
-  class NetworkMeansCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API NetworkMeansCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -26782,7 +26795,7 @@ namespace oo_2_0
     static const value _xsd_NetworkMeansCode_indexes_[18];
   };
 
-  class NetworkServiceCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API NetworkServiceCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -26846,7 +26859,7 @@ namespace oo_2_0
     static const value _xsd_NetworkServiceCategoryCode_indexes_[10];
   };
 
-  class NetworkServiceCryptographicIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API NetworkServiceCryptographicIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -26902,7 +26915,7 @@ namespace oo_2_0
     static const value _xsd_NetworkServiceCryptographicIndicatorCode_indexes_[2];
   };
 
-  class NetworkServiceStatusIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API NetworkServiceStatusIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -26958,7 +26971,7 @@ namespace oo_2_0
     static const value _xsd_NetworkServiceStatusIndicatorCode_indexes_[2];
   };
 
-  class NetworkServiceSubcategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API NetworkServiceSubcategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -27042,7 +27055,7 @@ namespace oo_2_0
     static const value _xsd_NetworkServiceSubcategoryCode_indexes_[30];
   };
 
-  class NetworkSubcategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API NetworkSubcategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -27101,7 +27114,7 @@ namespace oo_2_0
     static const value _xsd_NetworkSubcategoryCode_indexes_[5];
   };
 
-  class NuclearEventCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API NuclearEventCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -27163,7 +27176,7 @@ namespace oo_2_0
     static const value _xsd_NuclearEventCategoryCode_indexes_[8];
   };
 
-  class NuclearWeaponEventCraterPresenceCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API NuclearWeaponEventCraterPresenceCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -27220,7 +27233,7 @@ namespace oo_2_0
     static const value _xsd_NuclearWeaponEventCraterPresenceCode_indexes_[3];
   };
 
-  class NuclearYieldGroupCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API NuclearYieldGroupCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -27283,7 +27296,7 @@ namespace oo_2_0
     static const value _xsd_NuclearYieldGroupCode_indexes_[9];
   };
 
-  class ObjectItemAddressAuthorisationIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ObjectItemAddressAuthorisationIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -27339,7 +27352,7 @@ namespace oo_2_0
     static const value _xsd_ObjectItemAddressAuthorisationIndicatorCode_indexes_[2];
   };
 
-  class ObjectItemAddressPrimacyCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ObjectItemAddressPrimacyCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -27396,7 +27409,7 @@ namespace oo_2_0
     static const value _xsd_ObjectItemAddressPrimacyCode_indexes_[3];
   };
 
-  class ObjectItemAddressTransmitReceiveCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ObjectItemAddressTransmitReceiveCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -27453,7 +27466,7 @@ namespace oo_2_0
     static const value _xsd_ObjectItemAddressTransmitReceiveCode_indexes_[3];
   };
 
-  class ObjectItemAliasCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ObjectItemAliasCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -27513,7 +27526,7 @@ namespace oo_2_0
     static const value _xsd_ObjectItemAliasCategoryCode_indexes_[6];
   };
 
-  class ObjectItemAssociationCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ObjectItemAssociationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -27666,7 +27679,7 @@ namespace oo_2_0
     static const value _xsd_ObjectItemAssociationCategoryCode_indexes_[99];
   };
 
-  class ObjectItemAssociationSubcategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ObjectItemAssociationSubcategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -27758,7 +27771,7 @@ namespace oo_2_0
     static const value _xsd_ObjectItemAssociationSubcategoryCode_indexes_[38];
   };
 
-  class ObjectItemCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ObjectItemCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -27818,7 +27831,7 @@ namespace oo_2_0
     static const value _xsd_ObjectItemCategoryCode_indexes_[6];
   };
 
-  class ObjectItemGroupAccountDetailQualifierCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ObjectItemGroupAccountDetailQualifierCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -27894,7 +27907,7 @@ namespace oo_2_0
     static const value _xsd_ObjectItemGroupAccountDetailQualifierCode_indexes_[22];
   };
 
-  class ObjectItemHostilityStatusCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ObjectItemHostilityStatusCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -27961,7 +27974,7 @@ namespace oo_2_0
     static const value _xsd_ObjectItemHostilityStatusCode_indexes_[13];
   };
 
-  class ObjectItemLocationMeaningCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ObjectItemLocationMeaningCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -28029,7 +28042,7 @@ namespace oo_2_0
     static const value _xsd_ObjectItemLocationMeaningCode_indexes_[14];
   };
 
-  class ObjectItemLocationRelativeSpeedCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ObjectItemLocationRelativeSpeedCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -28087,7 +28100,7 @@ namespace oo_2_0
     static const value _xsd_ObjectItemLocationRelativeSpeedCode_indexes_[4];
   };
 
-  class ObjectItemReferenceAssociationCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ObjectItemReferenceAssociationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -28149,7 +28162,7 @@ namespace oo_2_0
     static const value _xsd_ObjectItemReferenceAssociationCategoryCode_indexes_[8];
   };
 
-  class ObjectItemStatusBoobyTrapPresenceCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ObjectItemStatusBoobyTrapPresenceCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -28206,7 +28219,7 @@ namespace oo_2_0
     static const value _xsd_ObjectItemStatusBoobyTrapPresenceCode_indexes_[3];
   };
 
-  class ObjectItemStatusCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ObjectItemStatusCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -28267,7 +28280,7 @@ namespace oo_2_0
     static const value _xsd_ObjectItemStatusCategoryCode_indexes_[7];
   };
 
-  class ObjectItemStatusEmissionControlCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ObjectItemStatusEmissionControlCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -28324,7 +28337,7 @@ namespace oo_2_0
     static const value _xsd_ObjectItemStatusEmissionControlCode_indexes_[3];
   };
 
-  class ObjectTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ObjectTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -28384,7 +28397,7 @@ namespace oo_2_0
     static const value _xsd_ObjectTypeCategoryCode_indexes_[6];
   };
 
-  class ObjectTypeDecoyIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ObjectTypeDecoyIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -28440,7 +28453,7 @@ namespace oo_2_0
     static const value _xsd_ObjectTypeDecoyIndicatorCode_indexes_[2];
   };
 
-  class ObjectTypeEstablishmentCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ObjectTypeEstablishmentCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -28496,7 +28509,7 @@ namespace oo_2_0
     static const value _xsd_ObjectTypeEstablishmentCategoryCode_indexes_[2];
   };
 
-  class ObjectTypeEstablishmentEnvironmentConditionCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ObjectTypeEstablishmentEnvironmentConditionCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -28558,7 +28571,7 @@ namespace oo_2_0
     static const value _xsd_ObjectTypeEstablishmentEnvironmentConditionCode_indexes_[8];
   };
 
-  class ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -28614,7 +28627,7 @@ namespace oo_2_0
     static const value _xsd_ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode_indexes_[2];
   };
 
-  class ObjectTypeEstablishmentOperationalModeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ObjectTypeEstablishmentOperationalModeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -28675,7 +28688,7 @@ namespace oo_2_0
     static const value _xsd_ObjectTypeEstablishmentOperationalModeCode_indexes_[7];
   };
 
-  class ObjectTypeReferenceAssociationCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ObjectTypeReferenceAssociationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -28736,7 +28749,7 @@ namespace oo_2_0
     static const value _xsd_ObjectTypeReferenceAssociationCategoryCode_indexes_[7];
   };
 
-  class OperationalCapabilityCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OperationalCapabilityCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -28889,7 +28902,7 @@ namespace oo_2_0
     static const value _xsd_OperationalCapabilityCategoryCode_indexes_[99];
   };
 
-  class OperationalCapabilityLevelCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OperationalCapabilityLevelCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -28950,7 +28963,7 @@ namespace oo_2_0
     static const value _xsd_OperationalCapabilityLevelCode_indexes_[7];
   };
 
-  class OperationalCapabilityQualifierCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OperationalCapabilityQualifierCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -29007,7 +29020,7 @@ namespace oo_2_0
     static const value _xsd_OperationalCapabilityQualifierCode_indexes_[3];
   };
 
-  class OperationalInformationGroupCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OperationalInformationGroupCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -29067,7 +29080,7 @@ namespace oo_2_0
     static const value _xsd_OperationalInformationGroupCategoryCode_indexes_[6];
   };
 
-  class OperationalInformationGroupOrganisationAssociationCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OperationalInformationGroupOrganisationAssociationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -29123,7 +29136,7 @@ namespace oo_2_0
     static const value _xsd_OperationalInformationGroupOrganisationAssociationCategoryCode_indexes_[2];
   };
 
-  class OrbitAreaAlignmentCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OrbitAreaAlignmentCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -29180,7 +29193,7 @@ namespace oo_2_0
     static const value _xsd_OrbitAreaAlignmentCode_indexes_[3];
   };
 
-  class OrderCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OrderCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -29239,7 +29252,7 @@ namespace oo_2_0
     static const value _xsd_OrderCategoryCode_indexes_[5];
   };
 
-  class OrderStatusExecutionStateCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OrderStatusExecutionStateCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -29295,7 +29308,7 @@ namespace oo_2_0
     static const value _xsd_OrderStatusExecutionStateCode_indexes_[2];
   };
 
-  class OrganisationActionAssociationCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OrganisationActionAssociationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -29363,7 +29376,7 @@ namespace oo_2_0
     static const value _xsd_OrganisationActionAssociationCategoryCode_indexes_[14];
   };
 
-  class OrganisationActionTaskRuleOfEngagementStatusCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OrganisationActionTaskRuleOfEngagementStatusCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -29422,7 +29435,7 @@ namespace oo_2_0
     static const value _xsd_OrganisationActionTaskRuleOfEngagementStatusCategoryCode_indexes_[5];
   };
 
-  class OrganisationCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OrganisationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -29479,7 +29492,7 @@ namespace oo_2_0
     static const value _xsd_OrganisationCategoryCode_indexes_[3];
   };
 
-  class OrganisationMaterielTypeAssociationReportableTypeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OrganisationMaterielTypeAssociationReportableTypeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -29535,7 +29548,7 @@ namespace oo_2_0
     static const value _xsd_OrganisationMaterielTypeAssociationReportableTypeCode_indexes_[2];
   };
 
-  class OrganisationPlanOrderAssociationCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OrganisationPlanOrderAssociationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -29594,7 +29607,7 @@ namespace oo_2_0
     static const value _xsd_OrganisationPlanOrderAssociationCategoryCode_indexes_[5];
   };
 
-  class OrganisationReferenceAssociationCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OrganisationReferenceAssociationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -29654,7 +29667,7 @@ namespace oo_2_0
     static const value _xsd_OrganisationReferenceAssociationCategoryCode_indexes_[6];
   };
 
-  class OrganisationStatusAvailabilityCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OrganisationStatusAvailabilityCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -29714,7 +29727,7 @@ namespace oo_2_0
     static const value _xsd_OrganisationStatusAvailabilityCode_indexes_[6];
   };
 
-  class OrganisationStatusCbrnDressStateCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OrganisationStatusCbrnDressStateCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -29773,7 +29786,7 @@ namespace oo_2_0
     static const value _xsd_OrganisationStatusCbrnDressStateCode_indexes_[5];
   };
 
-  class OrganisationStatusCommandAndControlRoleCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OrganisationStatusCommandAndControlRoleCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -29847,7 +29860,7 @@ namespace oo_2_0
     static const value _xsd_OrganisationStatusCommandAndControlRoleCode_indexes_[20];
   };
 
-  class OrganisationStatusCommitmentStatusCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OrganisationStatusCommitmentStatusCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -29903,7 +29916,7 @@ namespace oo_2_0
     static const value _xsd_OrganisationStatusCommitmentStatusCode_indexes_[2];
   };
 
-  class OrganisationStatusFireModeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OrganisationStatusFireModeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -29961,7 +29974,7 @@ namespace oo_2_0
     static const value _xsd_OrganisationStatusFireModeCode_indexes_[4];
   };
 
-  class OrganisationStatusOperationalStatusCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OrganisationStatusOperationalStatusCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -30021,7 +30034,7 @@ namespace oo_2_0
     static const value _xsd_OrganisationStatusOperationalStatusCode_indexes_[6];
   };
 
-  class OrganisationStatusOperationalStatusQualifierCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OrganisationStatusOperationalStatusQualifierCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -30082,7 +30095,7 @@ namespace oo_2_0
     static const value _xsd_OrganisationStatusOperationalStatusQualifierCode_indexes_[7];
   };
 
-  class OrganisationStatusReadinessCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OrganisationStatusReadinessCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -30175,7 +30188,7 @@ namespace oo_2_0
     static const value _xsd_OrganisationStatusReadinessCode_indexes_[39];
   };
 
-  class OrganisationStatusReinforcementCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OrganisationStatusReinforcementCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -30234,7 +30247,7 @@ namespace oo_2_0
     static const value _xsd_OrganisationStatusReinforcementCode_indexes_[5];
   };
 
-  class OrganisationStatusReserveIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OrganisationStatusReserveIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -30290,7 +30303,7 @@ namespace oo_2_0
     static const value _xsd_OrganisationStatusReserveIndicatorCode_indexes_[2];
   };
 
-  class OrganisationStatusTrainingCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OrganisationStatusTrainingCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -30348,7 +30361,7 @@ namespace oo_2_0
     static const value _xsd_OrganisationStatusTrainingCode_indexes_[4];
   };
 
-  class OrganisationStatusUsageStatusCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OrganisationStatusUsageStatusCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -30405,7 +30418,7 @@ namespace oo_2_0
     static const value _xsd_OrganisationStatusUsageStatusCode_indexes_[3];
   };
 
-  class OrganisationTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OrganisationTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -30464,7 +30477,7 @@ namespace oo_2_0
     static const value _xsd_OrganisationTypeCategoryCode_indexes_[5];
   };
 
-  class OrganisationTypeCommandAndControlCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OrganisationTypeCommandAndControlCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -30545,7 +30558,7 @@ namespace oo_2_0
     static const value _xsd_OrganisationTypeCommandAndControlCategoryCode_indexes_[27];
   };
 
-  class OrganisationTypeCommandFunctionIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API OrganisationTypeCommandFunctionIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -30601,7 +30614,7 @@ namespace oo_2_0
     static const value _xsd_OrganisationTypeCommandFunctionIndicatorCode_indexes_[2];
   };
 
-  class PersistencyCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PersistencyCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -30659,7 +30672,7 @@ namespace oo_2_0
     static const value _xsd_PersistencyCode_indexes_[4];
   };
 
-  class PersonBloodTypeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PersonBloodTypeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -30722,7 +30735,7 @@ namespace oo_2_0
     static const value _xsd_PersonBloodTypeCode_indexes_[9];
   };
 
-  class PersonIdentificationDocumentCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PersonIdentificationDocumentCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -30781,7 +30794,7 @@ namespace oo_2_0
     static const value _xsd_PersonIdentificationDocumentCode_indexes_[5];
   };
 
-  class PersonLanguageSkillGeneralProficiencyCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PersonLanguageSkillGeneralProficiencyCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -30841,7 +30854,7 @@ namespace oo_2_0
     static const value _xsd_PersonLanguageSkillGeneralProficiencyCode_indexes_[6];
   };
 
-  class PersonProfessingIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PersonProfessingIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -30897,7 +30910,7 @@ namespace oo_2_0
     static const value _xsd_PersonProfessingIndicatorCode_indexes_[2];
   };
 
-  class PersonStatusDutyStatusCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PersonStatusDutyStatusCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -30963,7 +30976,7 @@ namespace oo_2_0
     static const value _xsd_PersonStatusDutyStatusCode_indexes_[12];
   };
 
-  class PersonStatusPhysicalStatusCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PersonStatusPhysicalStatusCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -31022,7 +31035,7 @@ namespace oo_2_0
     static const value _xsd_PersonStatusPhysicalStatusCode_indexes_[5];
   };
 
-  class PersonStatusPhysicalStatusQualifierCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PersonStatusPhysicalStatusQualifierCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -31083,7 +31096,7 @@ namespace oo_2_0
     static const value _xsd_PersonStatusPhysicalStatusQualifierCode_indexes_[7];
   };
 
-  class PersonStatusReserveIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PersonStatusReserveIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -31139,7 +31152,7 @@ namespace oo_2_0
     static const value _xsd_PersonStatusReserveIndicatorCode_indexes_[2];
   };
 
-  class PersonTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PersonTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -31198,7 +31211,7 @@ namespace oo_2_0
     static const value _xsd_PersonTypeCategoryCode_indexes_[5];
   };
 
-  class PersonTypeRankCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PersonTypeRankCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -31276,7 +31289,7 @@ namespace oo_2_0
     static const value _xsd_PersonTypeRankCode_indexes_[24];
   };
 
-  class PersonTypeSubcategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PersonTypeSubcategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -31366,7 +31379,7 @@ namespace oo_2_0
     static const value _xsd_PersonTypeSubcategoryCode_indexes_[36];
   };
 
-  class PhysicalAddressCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PhysicalAddressCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -31425,7 +31438,7 @@ namespace oo_2_0
     static const value _xsd_PhysicalAddressCategoryCode_indexes_[5];
   };
 
-  class PlanCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PlanCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -31481,7 +31494,7 @@ namespace oo_2_0
     static const value _xsd_PlanCategoryCode_indexes_[2];
   };
 
-  class PlanOrderAssociationCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PlanOrderAssociationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -31540,7 +31553,7 @@ namespace oo_2_0
     static const value _xsd_PlanOrderAssociationCategoryCode_indexes_[5];
   };
 
-  class PlanOrderCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PlanOrderCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -31596,7 +31609,7 @@ namespace oo_2_0
     static const value _xsd_PlanOrderCategoryCode_indexes_[2];
   };
 
-  class PlanOrderComponentContentReferenceCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PlanOrderComponentContentReferenceCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -31657,7 +31670,7 @@ namespace oo_2_0
     static const value _xsd_PlanOrderComponentContentReferenceCategoryCode_indexes_[7];
   };
 
-  class PlanOrderComponentStructureCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PlanOrderComponentStructureCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -31714,7 +31727,7 @@ namespace oo_2_0
     static const value _xsd_PlanOrderComponentStructureCategoryCode_indexes_[3];
   };
 
-  class PlanOrderDistributionAcknowledgementCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PlanOrderDistributionAcknowledgementCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -31771,7 +31784,7 @@ namespace oo_2_0
     static const value _xsd_PlanOrderDistributionAcknowledgementCode_indexes_[3];
   };
 
-  class PlanOrderDistributionCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PlanOrderDistributionCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -31827,7 +31840,7 @@ namespace oo_2_0
     static const value _xsd_PlanOrderDistributionCategoryCode_indexes_[2];
   };
 
-  class PlanOrderHeaderContentTimeZoneCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PlanOrderHeaderContentTimeZoneCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -31906,7 +31919,7 @@ namespace oo_2_0
     static const value _xsd_PlanOrderHeaderContentTimeZoneCode_indexes_[25];
   };
 
-  class PlanStatusDevelopmentStatusCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PlanStatusDevelopmentStatusCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -31962,7 +31975,7 @@ namespace oo_2_0
     static const value _xsd_PlanStatusDevelopmentStatusCode_indexes_[2];
   };
 
-  class PlanStatusStateCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PlanStatusStateCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -32019,7 +32032,7 @@ namespace oo_2_0
     static const value _xsd_PlanStatusStateCode_indexes_[3];
   };
 
-  class PointCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PointCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -32075,7 +32088,7 @@ namespace oo_2_0
     static const value _xsd_PointCategoryCode_indexes_[2];
   };
 
-  class PrecipitationCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PrecipitationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -32142,7 +32155,7 @@ namespace oo_2_0
     static const value _xsd_PrecipitationCategoryCode_indexes_[13];
   };
 
-  class PrivateSectorOrganisationTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API PrivateSectorOrganisationTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -32206,7 +32219,7 @@ namespace oo_2_0
     static const value _xsd_PrivateSectorOrganisationTypeCategoryCode_indexes_[10];
   };
 
-  class QuayContainerHandlingTypeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API QuayContainerHandlingTypeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -32267,7 +32280,7 @@ namespace oo_2_0
     static const value _xsd_QuayContainerHandlingTypeCode_indexes_[7];
   };
 
-  class QuayCraneOffloadingTypeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API QuayCraneOffloadingTypeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -32327,7 +32340,7 @@ namespace oo_2_0
     static const value _xsd_QuayCraneOffloadingTypeCode_indexes_[6];
   };
 
-  class QuayRailServedIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API QuayRailServedIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -32383,7 +32396,7 @@ namespace oo_2_0
     static const value _xsd_QuayRailServedIndicatorCode_indexes_[2];
   };
 
-  class QuayStorageCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API QuayStorageCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -32447,7 +32460,7 @@ namespace oo_2_0
     static const value _xsd_QuayStorageCode_indexes_[10];
   };
 
-  class RadioactiveEventCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RadioactiveEventCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -32505,7 +32518,7 @@ namespace oo_2_0
     static const value _xsd_RadioactiveEventCategoryCode_indexes_[4];
   };
 
-  class RadioactiveEventDoseRateTrendCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RadioactiveEventDoseRateTrendCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -32566,7 +32579,7 @@ namespace oo_2_0
     static const value _xsd_RadioactiveEventDoseRateTrendCode_indexes_[7];
   };
 
-  class RadioactiveEventRelativeDecayRateCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RadioactiveEventRelativeDecayRateCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -32623,7 +32636,7 @@ namespace oo_2_0
     static const value _xsd_RadioactiveEventRelativeDecayRateCode_indexes_[3];
   };
 
-  class RadioactiveMaterielTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RadioactiveMaterielTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -32688,7 +32701,7 @@ namespace oo_2_0
     static const value _xsd_RadioactiveMaterielTypeCategoryCode_indexes_[11];
   };
 
-  class RadioactiveMaterielTypePrimaryRadiationCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RadioactiveMaterielTypePrimaryRadiationCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -32747,7 +32760,7 @@ namespace oo_2_0
     static const value _xsd_RadioactiveMaterielTypePrimaryRadiationCode_indexes_[5];
   };
 
-  class RailcarTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RailcarTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -32808,7 +32821,7 @@ namespace oo_2_0
     static const value _xsd_RailcarTypeCategoryCode_indexes_[7];
   };
 
-  class RailcarTypeSubcategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RailcarTypeSubcategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -32888,7 +32901,7 @@ namespace oo_2_0
     static const value _xsd_RailcarTypeSubcategoryCode_indexes_[26];
   };
 
-  class RailwaySignalSystemCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RailwaySignalSystemCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -32949,7 +32962,7 @@ namespace oo_2_0
     static const value _xsd_RailwaySignalSystemCode_indexes_[7];
   };
 
-  class RailwaySignalSystemEfficiencyCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RailwaySignalSystemEfficiencyCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -33007,7 +33020,7 @@ namespace oo_2_0
     static const value _xsd_RailwaySignalSystemEfficiencyCode_indexes_[4];
   };
 
-  class RailwayTrackGaugeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RailwayTrackGaugeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -33063,7 +33076,7 @@ namespace oo_2_0
     static const value _xsd_RailwayTrackGaugeCode_indexes_[2];
   };
 
-  class RailwayTractionSystemCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RailwayTractionSystemCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -33119,7 +33132,7 @@ namespace oo_2_0
     static const value _xsd_RailwayTractionSystemCode_indexes_[2];
   };
 
-  class ReferenceAssociationCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ReferenceAssociationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -33184,7 +33197,7 @@ namespace oo_2_0
     static const value _xsd_ReferenceAssociationCategoryCode_indexes_[11];
   };
 
-  class ReferenceContentCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ReferenceContentCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -33258,7 +33271,7 @@ namespace oo_2_0
     static const value _xsd_ReferenceContentCategoryCode_indexes_[20];
   };
 
-  class ReferenceLifecycleCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ReferenceLifecycleCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -33315,7 +33328,7 @@ namespace oo_2_0
     static const value _xsd_ReferenceLifecycleCode_indexes_[3];
   };
 
-  class ReferenceMediumTypeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ReferenceMediumTypeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -33376,7 +33389,7 @@ namespace oo_2_0
     static const value _xsd_ReferenceMediumTypeCode_indexes_[7];
   };
 
-  class ReferenceTransmittalTypeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ReferenceTransmittalTypeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -33441,7 +33454,7 @@ namespace oo_2_0
     static const value _xsd_ReferenceTransmittalTypeCode_indexes_[11];
   };
 
-  class ReferenceVerificationCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ReferenceVerificationCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -33498,7 +33511,7 @@ namespace oo_2_0
     static const value _xsd_ReferenceVerificationCode_indexes_[3];
   };
 
-  class RelativeCoordinateSystemReferenceCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RelativeCoordinateSystemReferenceCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -33554,7 +33567,7 @@ namespace oo_2_0
     static const value _xsd_RelativeCoordinateSystemReferenceCategoryCode_indexes_[2];
   };
 
-  class ReleaseCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ReleaseCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -33613,7 +33626,7 @@ namespace oo_2_0
     static const value _xsd_ReleaseCategoryCode_indexes_[5];
   };
 
-  class ReportingDataAccuracyCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ReportingDataAccuracyCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -33673,7 +33686,7 @@ namespace oo_2_0
     static const value _xsd_ReportingDataAccuracyCode_indexes_[6];
   };
 
-  class ReportingDataCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ReportingDataCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -33733,7 +33746,7 @@ namespace oo_2_0
     static const value _xsd_ReportingDataCategoryCode_indexes_[6];
   };
 
-  class ReportingDataCountingIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ReportingDataCountingIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -33789,7 +33802,7 @@ namespace oo_2_0
     static const value _xsd_ReportingDataCountingIndicatorCode_indexes_[2];
   };
 
-  class ReportingDataCredibilityCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ReportingDataCredibilityCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -33847,7 +33860,7 @@ namespace oo_2_0
     static const value _xsd_ReportingDataCredibilityCode_indexes_[4];
   };
 
-  class ReportingDataEntityCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ReportingDataEntityCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -33925,7 +33938,7 @@ namespace oo_2_0
     static const value _xsd_ReportingDataEntityCategoryCode_indexes_[24];
   };
 
-  class ReportingDataRealDataExerciseUseOnlyCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ReportingDataRealDataExerciseUseOnlyCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -33980,7 +33993,7 @@ namespace oo_2_0
     static const value _xsd_ReportingDataRealDataExerciseUseOnlyCode_indexes_[1];
   };
 
-  class ReportingDataReliabilityCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ReportingDataReliabilityCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -34040,7 +34053,7 @@ namespace oo_2_0
     static const value _xsd_ReportingDataReliabilityCode_indexes_[6];
   };
 
-  class ReportingDataSourceTypeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ReportingDataSourceTypeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -34129,7 +34142,7 @@ namespace oo_2_0
     static const value _xsd_ReportingDataSourceTypeCode_indexes_[35];
   };
 
-  class ReportingDataTimingCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API ReportingDataTimingCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -34186,7 +34199,7 @@ namespace oo_2_0
     static const value _xsd_ReportingDataTimingCategoryCode_indexes_[3];
   };
 
-  class RequestAnswerCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RequestAnswerCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -34244,7 +34257,7 @@ namespace oo_2_0
     static const value _xsd_RequestAnswerCategoryCode_indexes_[4];
   };
 
-  class RequestCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RequestCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -34307,7 +34320,7 @@ namespace oo_2_0
     static const value _xsd_RequestCategoryCode_indexes_[9];
   };
 
-  class RequestImmediateInterestIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RequestImmediateInterestIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -34363,7 +34376,7 @@ namespace oo_2_0
     static const value _xsd_RequestImmediateInterestIndicatorCode_indexes_[2];
   };
 
-  class RoadCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RoadCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -34425,7 +34438,7 @@ namespace oo_2_0
     static const value _xsd_RoadCategoryCode_indexes_[8];
   };
 
-  class RoadQualityCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RoadQualityCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -34483,7 +34496,7 @@ namespace oo_2_0
     static const value _xsd_RoadQualityCode_indexes_[4];
   };
 
-  class RoadShoulderWidthCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RoadShoulderWidthCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -34540,7 +34553,7 @@ namespace oo_2_0
     static const value _xsd_RoadShoulderWidthCode_indexes_[3];
   };
 
-  class RoadWeatherConditionCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RoadWeatherConditionCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -34597,7 +34610,7 @@ namespace oo_2_0
     static const value _xsd_RoadWeatherConditionCategoryCode_indexes_[3];
   };
 
-  class RouteDirectionUsageCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RouteDirectionUsageCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -34654,7 +34667,7 @@ namespace oo_2_0
     static const value _xsd_RouteDirectionUsageCode_indexes_[3];
   };
 
-  class RouteSegmentCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RouteSegmentCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -34710,7 +34723,7 @@ namespace oo_2_0
     static const value _xsd_RouteSegmentCategoryCode_indexes_[2];
   };
 
-  class RouteTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RouteTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -34804,7 +34817,7 @@ namespace oo_2_0
     static const value _xsd_RouteTypeCategoryCode_indexes_[40];
   };
 
-  class RunwayLightingPresenceIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RunwayLightingPresenceIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -34860,7 +34873,7 @@ namespace oo_2_0
     static const value _xsd_RunwayLightingPresenceIndicatorCode_indexes_[2];
   };
 
-  class RunwayPavementEvaluationMethodCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RunwayPavementEvaluationMethodCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -34916,7 +34929,7 @@ namespace oo_2_0
     static const value _xsd_RunwayPavementEvaluationMethodCode_indexes_[2];
   };
 
-  class RunwayPavementMaximumTyrePressureCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RunwayPavementMaximumTyrePressureCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -34974,7 +34987,7 @@ namespace oo_2_0
     static const value _xsd_RunwayPavementMaximumTyrePressureCode_indexes_[4];
   };
 
-  class RunwayPavementSubgradeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RunwayPavementSubgradeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -35032,7 +35045,7 @@ namespace oo_2_0
     static const value _xsd_RunwayPavementSubgradeCategoryCode_indexes_[4];
   };
 
-  class RunwayPavementTypeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API RunwayPavementTypeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -35088,7 +35101,7 @@ namespace oo_2_0
     static const value _xsd_RunwayPavementTypeCode_indexes_[2];
   };
 
-  class SecurityClassificationLevelCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API SecurityClassificationLevelCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -35148,7 +35161,7 @@ namespace oo_2_0
     static const value _xsd_SecurityClassificationLevelCode_indexes_[6];
   };
 
-  class SolidSurfaceStatusCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API SolidSurfaceStatusCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -35210,7 +35223,7 @@ namespace oo_2_0
     static const value _xsd_SolidSurfaceStatusCode_indexes_[8];
   };
 
-  class SolidSurfaceStatusSurfaceConditionCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API SolidSurfaceStatusSurfaceConditionCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -35272,7 +35285,7 @@ namespace oo_2_0
     static const value _xsd_SolidSurfaceStatusSurfaceConditionCode_indexes_[8];
   };
 
-  class SolidSurfaceStatusSurfaceFirmnessCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API SolidSurfaceStatusSurfaceFirmnessCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -35330,7 +35343,7 @@ namespace oo_2_0
     static const value _xsd_SolidSurfaceStatusSurfaceFirmnessCode_indexes_[4];
   };
 
-  class SpeedPrecisionCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API SpeedPrecisionCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -35387,7 +35400,7 @@ namespace oo_2_0
     static const value _xsd_SpeedPrecisionCode_indexes_[3];
   };
 
-  class StorageCapabilityConditionCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API StorageCapabilityConditionCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -35445,7 +35458,7 @@ namespace oo_2_0
     static const value _xsd_StorageCapabilityConditionCode_indexes_[4];
   };
 
-  class StorageCapabilityDescriptorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API StorageCapabilityDescriptorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -35510,7 +35523,7 @@ namespace oo_2_0
     static const value _xsd_StorageCapabilityDescriptorCode_indexes_[11];
   };
 
-  class SubsurfaceVesselTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API SubsurfaceVesselTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -35588,7 +35601,7 @@ namespace oo_2_0
     static const value _xsd_SubsurfaceVesselTypeCategoryCode_indexes_[24];
   };
 
-  class SubsurfaceVesselTypeTorpedoLoadingGearIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API SubsurfaceVesselTypeTorpedoLoadingGearIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -35644,7 +35657,7 @@ namespace oo_2_0
     static const value _xsd_SubsurfaceVesselTypeTorpedoLoadingGearIndicatorCode_indexes_[2];
   };
 
-  class SupportCapabilityCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API SupportCapabilityCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -35725,7 +35738,7 @@ namespace oo_2_0
     static const value _xsd_SupportCapabilityCategoryCode_indexes_[27];
   };
 
-  class SupportCapabilityDescriptorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API SupportCapabilityDescriptorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -35784,7 +35797,7 @@ namespace oo_2_0
     static const value _xsd_SupportCapabilityDescriptorCode_indexes_[5];
   };
 
-  class SurfaceCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API SurfaceCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -35845,7 +35858,7 @@ namespace oo_2_0
     static const value _xsd_SurfaceCategoryCode_indexes_[7];
   };
 
-  class SurfaceVesselTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API SurfaceVesselTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -36323,7 +36336,7 @@ namespace oo_2_0
     static const value _xsd_SurfaceVesselTypeCategoryCode_indexes_[424];
   };
 
-  class SurveillanceCapabilityCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API SurveillanceCapabilityCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -36384,7 +36397,7 @@ namespace oo_2_0
     static const value _xsd_SurveillanceCapabilityCategoryCode_indexes_[7];
   };
 
-  class SurveillanceCapabilityDescriptorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API SurveillanceCapabilityDescriptorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -36440,7 +36453,7 @@ namespace oo_2_0
     static const value _xsd_SurveillanceCapabilityDescriptorCode_indexes_[2];
   };
 
-  class TargetEngagementAuthorityCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API TargetEngagementAuthorityCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -36498,7 +36511,7 @@ namespace oo_2_0
     static const value _xsd_TargetEngagementAuthorityCode_indexes_[4];
   };
 
-  class TargetPersonnelProtectionCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API TargetPersonnelProtectionCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -36558,7 +36571,7 @@ namespace oo_2_0
     static const value _xsd_TargetPersonnelProtectionCategoryCode_indexes_[6];
   };
 
-  class TaskFormationTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API TaskFormationTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -36633,7 +36646,7 @@ namespace oo_2_0
     static const value _xsd_TaskFormationTypeCategoryCode_indexes_[21];
   };
 
-  class TransmissionCapabilityCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API TransmissionCapabilityCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -36690,7 +36703,7 @@ namespace oo_2_0
     static const value _xsd_TransmissionCapabilityCategoryCode_indexes_[3];
   };
 
-  class TransmissionCapabilityDescriptorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API TransmissionCapabilityDescriptorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -36749,7 +36762,7 @@ namespace oo_2_0
     static const value _xsd_TransmissionCapabilityDescriptorCode_indexes_[5];
   };
 
-  class UnitTypeArmCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API UnitTypeArmCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -36841,7 +36854,7 @@ namespace oo_2_0
     static const value _xsd_UnitTypeArmCategoryCode_indexes_[38];
   };
 
-  class UnitTypeArmSpecialisationCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API UnitTypeArmSpecialisationCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -37025,7 +37038,7 @@ namespace oo_2_0
     static const value _xsd_UnitTypeArmSpecialisationCode_indexes_[130];
   };
 
-  class UnitTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API UnitTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -37084,7 +37097,7 @@ namespace oo_2_0
     static const value _xsd_UnitTypeCategoryCode_indexes_[5];
   };
 
-  class UnitTypeGeneralMobilityCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API UnitTypeGeneralMobilityCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -37151,7 +37164,7 @@ namespace oo_2_0
     static const value _xsd_UnitTypeGeneralMobilityCode_indexes_[13];
   };
 
-  class UnitTypeQualifierCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API UnitTypeQualifierCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -37220,7 +37233,7 @@ namespace oo_2_0
     static const value _xsd_UnitTypeQualifierCode_indexes_[15];
   };
 
-  class UnitTypeSizeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API UnitTypeSizeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -37302,7 +37315,7 @@ namespace oo_2_0
     static const value _xsd_UnitTypeSizeCode_indexes_[28];
   };
 
-  class UnitTypeSupplementarySpecialisationCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API UnitTypeSupplementarySpecialisationCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -37369,7 +37382,7 @@ namespace oo_2_0
     static const value _xsd_UnitTypeSupplementarySpecialisationCode_indexes_[13];
   };
 
-  class UsageStatusCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API UsageStatusCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -37426,7 +37439,7 @@ namespace oo_2_0
     static const value _xsd_UsageStatusCode_indexes_[3];
   };
 
-  class UxoStatusExposureCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API UxoStatusExposureCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -37489,7 +37502,7 @@ namespace oo_2_0
     static const value _xsd_UxoStatusExposureCode_indexes_[9];
   };
 
-  class UxoStatusQualifierCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API UxoStatusQualifierCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -37551,7 +37564,7 @@ namespace oo_2_0
     static const value _xsd_UxoStatusQualifierCode_indexes_[8];
   };
 
-  class VegetationCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API VegetationCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -37613,7 +37626,7 @@ namespace oo_2_0
     static const value _xsd_VegetationCategoryCode_indexes_[8];
   };
 
-  class VegetationSubcategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API VegetationSubcategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -37690,7 +37703,7 @@ namespace oo_2_0
     static const value _xsd_VegetationSubcategoryCode_indexes_[23];
   };
 
-  class VehicleTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API VehicleTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -37792,7 +37805,7 @@ namespace oo_2_0
     static const value _xsd_VehicleTypeCategoryCode_indexes_[48];
   };
 
-  class VerticalDistanceReferenceCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API VerticalDistanceReferenceCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -37856,7 +37869,7 @@ namespace oo_2_0
     static const value _xsd_VerticalDistanceReferenceCode_indexes_[10];
   };
 
-  class VesselTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API VesselTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -37914,7 +37927,7 @@ namespace oo_2_0
     static const value _xsd_VesselTypeCategoryCode_indexes_[4];
   };
 
-  class VesselTypePropulsionTypeCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API VesselTypePropulsionTypeCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -37989,7 +38002,7 @@ namespace oo_2_0
     static const value _xsd_VesselTypePropulsionTypeCode_indexes_[21];
   };
 
-  class VisibilityCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API VisibilityCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -38054,7 +38067,7 @@ namespace oo_2_0
     static const value _xsd_VisibilityCategoryCode_indexes_[11];
   };
 
-  class WeaponTypeCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API WeaponTypeCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -38120,7 +38133,7 @@ namespace oo_2_0
     static const value _xsd_WeaponTypeCategoryCode_indexes_[12];
   };
 
-  class WeaponTypeFireGuidanceIndicatorCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API WeaponTypeFireGuidanceIndicatorCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -38176,7 +38189,7 @@ namespace oo_2_0
     static const value _xsd_WeaponTypeFireGuidanceIndicatorCode_indexes_[2];
   };
 
-  class WeaponTypeSubcategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API WeaponTypeSubcategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -38326,7 +38339,7 @@ namespace oo_2_0
     static const value _xsd_WeaponTypeSubcategoryCode_indexes_[96];
   };
 
-  class WindAirStabilityCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API WindAirStabilityCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -38390,7 +38403,7 @@ namespace oo_2_0
     static const value _xsd_WindAirStabilityCategoryCode_indexes_[10];
   };
 
-  class WindAltitudeLayerCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API WindAltitudeLayerCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -38459,7 +38472,7 @@ namespace oo_2_0
     static const value _xsd_WindAltitudeLayerCode_indexes_[15];
   };
 
-  class WindCategoryCode: public ::xml_schema::token
+  class SUSTAIN_XSD_API WindCategoryCode: public ::xml_schema::token
   {
     public:
     enum value
@@ -38528,2829 +38541,3771 @@ namespace oo_2_0
 
 namespace oo_2_0
 {
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AbsolutePointCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AbsolutePointCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionAircraftEmploymentApproachOffsetCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionAircraftEmploymentApproachOffsetCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionAircraftEmploymentCrewCompositionCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionAircraftEmploymentCrewCompositionCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionAircraftEmploymentDeplanementMethodCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionAircraftEmploymentDeplanementMethodCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionAircraftEmploymentGeneralRoleCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionAircraftEmploymentGeneralRoleCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionAircraftEmploymentInflightReportRequirementIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionAircraftEmploymentInflightReportRequirementIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionContextCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionContextCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionEffectCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionEffectCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionEffectDescriptionCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionEffectDescriptionCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionEffectSeverityCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionEffectSeverityCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionElectronicWarfareEmploymentCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionElectronicWarfareEmploymentCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionEventCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionEventCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionEventDetailClassificationCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionEventDetailClassificationCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionEventDetailCrimeIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionEventDetailCrimeIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionFunctionalAssociationCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionFunctionalAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionMaritimeEmploymentCoordinatedAirSeaProcedureCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionMaritimeEmploymentCoordinatedAirSeaProcedureCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionMaritimeEmploymentVesselTransitInstructionCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionMaritimeEmploymentVesselTransitInstructionCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionObjectiveCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionObjectiveCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionObjectiveItemCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionObjectiveItemCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionObjectiveItemMarkingMethodCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionObjectiveItemMarkingMethodCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionObjectiveItemMarkingPanelShapeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionObjectiveItemMarkingPanelShapeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionObjectiveItemMarkingRecognitionSignalColourCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionObjectiveItemMarkingRecognitionSignalColourCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionObjectiveItemPrimacyCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionObjectiveItemPrimacyCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionObjectiveQualifierCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionObjectiveQualifierCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionObjectiveTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionObjectiveTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionObjectiveTypeImageryProductImageTypeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionObjectiveTypeImageryProductImageTypeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionReconnaissanceEmploymentImageCoverageModeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionReconnaissanceEmploymentImageCoverageModeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionReconnaissanceEmploymentImageViewQualifierCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionReconnaissanceEmploymentImageViewQualifierCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionReconnaissanceEmploymentTypeOfCoverageCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionReconnaissanceEmploymentTypeOfCoverageCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionReferenceAssociationCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionReferenceAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionResourceCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionResourceCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionResourceCriticalityIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionResourceCriticalityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionResourceEmploymentCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionResourceEmploymentCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionResourceEmploymentMethodOfControlCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionResourceEmploymentMethodOfControlCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionResourceEmploymentTrajectoryFireCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionResourceEmploymentTrajectoryFireCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionResourceQualifierCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionResourceQualifierCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionTaskActivityCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionTaskActivityCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionTaskCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionTaskCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionTaskEndQualifierCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionTaskEndQualifierCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionTaskEntailedSafetyDegreeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionTaskEntailedSafetyDegreeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionTaskMeteorologicalImpactCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionTaskMeteorologicalImpactCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionTaskOperationalLevelCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionTaskOperationalLevelCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionTaskOvertCovertCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionTaskOvertCovertCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionTaskPriorityCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionTaskPriorityCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionTaskStartQualifierCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionTaskStartQualifierCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionTaskStatusAmendTimingCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionTaskStatusAmendTimingCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionTaskStatusApprovalIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionTaskStatusApprovalIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionTaskStatusCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionTaskStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionTaskStatusPlanningIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionTaskStatusPlanningIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionTaskStatusProgressCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionTaskStatusProgressCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionTaskTimingDayCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionTaskTimingDayCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionTaskTimingHourCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionTaskTimingHourCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ActionTemporalAssociationCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ActionTemporalAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AddressCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AddressCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AffiliationCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AffiliationCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AffiliationEthnicGroupCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AffiliationEthnicGroupCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AffiliationFunctionalGroupCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AffiliationFunctionalGroupCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AffiliationGeopoliticalCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AffiliationGeopoliticalCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AffiliationReligionCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AffiliationReligionCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AirRouteSegmentCivilMilitaryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AirRouteSegmentCivilMilitaryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AirRouteSegmentInternationalRouteCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AirRouteSegmentInternationalRouteCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AirRouteSegmentRequiredNavigationPerformanceCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AirRouteSegmentRequiredNavigationPerformanceCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AircraftTypeAirframeDesignCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AircraftTypeAirframeDesignCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AircraftTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AircraftTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AircraftTypeDesignRangeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AircraftTypeDesignRangeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AircraftTypeDesignRoleCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AircraftTypeDesignRoleCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AircraftTypeLoadCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AircraftTypeLoadCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AircraftTypeMainPurposeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AircraftTypeMainPurposeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AircraftTypeManningCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AircraftTypeManningCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AircraftTypeMilitaryCivilianCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AircraftTypeMilitaryCivilianCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AircraftTypeModelCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AircraftTypeModelCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AircraftTypeTakeoffAndLandingCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AircraftTypeTakeoffAndLandingCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AircraftTypeTrainingCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AircraftTypeTrainingCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AircraftTypeWeatherQualifierCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AircraftTypeWeatherQualifierCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AirfieldAirTrafficControlPresenceIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AirfieldAirTrafficControlPresenceIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AirfieldInstrumentLandingSystemPresenceIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AirfieldInstrumentLandingSystemPresenceIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AirfieldStatusDayOperationsCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AirfieldStatusDayOperationsCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AirfieldStatusEvaluationIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AirfieldStatusEvaluationIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AirfieldStatusFlightSupportCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AirfieldStatusFlightSupportCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AirfieldTypeUseCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AirfieldTypeUseCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AirfieldVisualNavigationalAidIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AirfieldVisualNavigationalAidIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AmmunitionTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AmmunitionTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AmmunitionTypeExerciseMineFlareColourCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AmmunitionTypeExerciseMineFlareColourCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AmmunitionTypeMineMaritimeFiringCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AmmunitionTypeMineMaritimeFiringCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AnchorageBottomTypeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AnchorageBottomTypeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AnchorageMooringsTypeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AnchorageMooringsTypeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AnglePrecisionCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AnglePrecisionCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ApproachDirectionCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ApproachDirectionCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AssociationStatusCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AssociationStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AtmosphereInversionLayerCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AtmosphereInversionLayerCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AtmospherePressureSystemCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AtmospherePressureSystemCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, AtmosphereTemperatureGradientCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const AtmosphereTemperatureGradientCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, BerthMajorVesselClassCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const BerthMajorVesselClassCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, BerthRailAvailabilityIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const BerthRailAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, BerthRollOnRollOffIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const BerthRollOnRollOffIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, BiologicalMaterielTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const BiologicalMaterielTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, BiologicalMaterielTypeSubcategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const BiologicalMaterielTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, BridgeTypeDesignTypeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const BridgeTypeDesignTypeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, BridgeUsageCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const BridgeUsageCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, CandidateTargetDetailAssociationCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CandidateTargetDetailAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, CandidateTargetDetailAuthorisationApprovalCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CandidateTargetDetailAuthorisationApprovalCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, CandidateTargetDetailCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CandidateTargetDetailCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, CandidateTargetDetailFocusTypeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CandidateTargetDetailFocusTypeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, CandidateTargetDetailSchemeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CandidateTargetDetailSchemeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, CandidateTargetListAssociationCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CandidateTargetListAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, CandidateTargetListAuthorisationIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CandidateTargetListAuthorisationIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, CapabilityCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, CapabilityDayNightCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CapabilityDayNightCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, CapabilityReferenceAssociationCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CapabilityReferenceAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, CapabilityUnitOfMeasureCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CapabilityUnitOfMeasureCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, CargoCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CargoCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, CasualtyGroupCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CasualtyGroupCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, CbrnEquipmentTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CbrnEquipmentTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, CbrnEventAlarmResultIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CbrnEventAlarmResultIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, CbrnEventCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CbrnEventCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, CbrnEventConfirmationTestIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CbrnEventConfirmationTestIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, CbrnEventMaterielContainerTypeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CbrnEventMaterielContainerTypeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, CbrnEventSubcategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CbrnEventSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ChemicalBiologicalEventCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ChemicalBiologicalEventCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ChemicalBiologicalEventSpillSizeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ChemicalBiologicalEventSpillSizeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ChemicalMaterielTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ChemicalMaterielTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ChemicalMaterielTypeSubcategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ChemicalMaterielTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, CivilianPostTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CivilianPostTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, CloudCoverAverageCoverageCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CloudCoverAverageCoverageCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, CloudCoverCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const CloudCoverCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ConsumableMaterielTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ConsumableMaterielTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ConsumableMaterielTypeHazardCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ConsumableMaterielTypeHazardCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ConsumableMaterielTypeIssuingElementCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ConsumableMaterielTypeIssuingElementCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ConsumableMaterielTypeIssuingUnitOfMeasureCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ConsumableMaterielTypeIssuingUnitOfMeasureCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ConsumableMaterielTypePerishabilityIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ConsumableMaterielTypePerishabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ConsumableMaterielTypeSubcategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ConsumableMaterielTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ConsumableMaterielTypeUnitedNationsNumberCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ConsumableMaterielTypeUnitedNationsNumberCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ContextAssessmentLimitingFactorsCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ContextAssessmentLimitingFactorsCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ContextAssociationCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ContextAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ContextCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ContextCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ContextElementStatusCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ContextElementStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ContextObjectItemAssociationCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ContextObjectItemAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ContextReportingDataAssociationCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ContextReportingDataAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ControlFeatureCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ControlFeatureCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ControlFeatureStatusCbrnThreatLevelCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ControlFeatureStatusCbrnThreatLevelCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ControlFeatureStatusInvestigationStatusCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ControlFeatureStatusInvestigationStatusCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ControlFeatureStatusSecurityStatusCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ControlFeatureStatusSecurityStatusCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ControlFeatureTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ControlFeatureTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, DemolitionStatusCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const DemolitionStatusCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, DirectionCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const DirectionCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, DistancePrecisionCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const DistancePrecisionCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, DryDockMarineRailwaySizeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const DryDockMarineRailwaySizeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ElectronicEquipmentTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ElectronicEquipmentTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ElectronicEquipmentTypeSubcategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ElectronicEquipmentTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, EngineeringCapabilityCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const EngineeringCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, EngineeringCapabilityDescriptorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const EngineeringCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, EngineeringEquipmentTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const EngineeringEquipmentTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, EquipmentTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const EquipmentTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, EvacuationDestinationCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const EvacuationDestinationCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ExecutiveMilitaryOrganisationTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ExecutiveMilitaryOrganisationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, FacilityCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const FacilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, FacilityPrimaryConstructionMaterialCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const FacilityPrimaryConstructionMaterialCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, FacilityStatusCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const FacilityStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, FacilityStatusEnemyActivityConditionCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const FacilityStatusEnemyActivityConditionCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, FacilityStatusOccupationProgramIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const FacilityStatusOccupationProgramIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, FacilityStatusOperationalStatusCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const FacilityStatusOperationalStatusCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, FacilityStatusOperationalStatusQualifierCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const FacilityStatusOperationalStatusQualifierCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, FacilityStatusReserveIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const FacilityStatusReserveIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, FacilityStatusSecurityStatusCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const FacilityStatusSecurityStatusCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, FacilityTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const FacilityTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, FeatureCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const FeatureCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, FeatureTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const FeatureTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, FeintIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const FeintIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, FireCapabilityCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const FireCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, FireCapabilityDescriptorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const FireCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, FireCapabilityWeaponTypeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const FireCapabilityWeaponTypeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, GenderCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const GenderCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, GeographicFeatureBottomHardnessCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const GeographicFeatureBottomHardnessCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, GeographicFeatureSolidSurfaceCompositionCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const GeographicFeatureSolidSurfaceCompositionCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, GeographicFeatureStatusCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const GeographicFeatureStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, GeographicFeatureStatusSurfaceRecirculationIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const GeographicFeatureStatusSurfaceRecirculationIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, GeographicFeatureSurfaceCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const GeographicFeatureSurfaceCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, GeographicFeatureTerrainCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const GeographicFeatureTerrainCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, GeographicFeatureTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const GeographicFeatureTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, GeographicFeatureTypeSubcategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const GeographicFeatureTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, GeometricVolumeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const GeometricVolumeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, GovernmentOrganisationTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const GovernmentOrganisationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, GroupCharacteristicAgeGroupCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const GroupCharacteristicAgeGroupCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, GroupCharacteristicMaladyCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const GroupCharacteristicMaladyCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, GroupCharacteristicMaladyTransmissibilityIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const GroupCharacteristicMaladyTransmissibilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, GroupCharacteristicTriageCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const GroupCharacteristicTriageCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, GroupOrganisationTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const GroupOrganisationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HandlingCapabilityActionCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HandlingCapabilityActionCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HandlingCapabilityDescriptorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HandlingCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourAirportNearIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourAirportNearIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourBiologicallySecureAvailabilityIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourBiologicallySecureAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourConvoyMarshallingIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourConvoyMarshallingIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourDegaussingIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourDegaussingIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourDirtyBallastIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourDirtyBallastIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourEntranceRestrictionsIceIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourEntranceRestrictionsIceIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourEntranceRestrictionsSwellIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourEntranceRestrictionsSwellIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourEstimatedTimeOfArrivalIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourEstimatedTimeOfArrivalIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourFireFightingCapabilityCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourFireFightingCapabilityCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourFireFightingIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourFireFightingIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourFirstPortOfEntryIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourFirstPortOfEntryIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourFreshWaterAvailabilityIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourFreshWaterAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourLashIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourLashIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourLighterageAvailabilityIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourLighterageAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourOverheadLimitsIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourOverheadLimitsIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourPassengerHandlingIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourPassengerHandlingIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourPersistenceCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourPersistenceCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourPilotageAvailabilityIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourPilotageAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourPilotageRequirementIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourPilotageRequirementIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourRefuellingAvailabilityIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourRefuellingAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourRefuellingTypeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourRefuellingTypeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourShelterQualityCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourShelterQualityCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourTankerFacilitiesIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourTankerFacilitiesIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourTransitAccommodationIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourTransitAccommodationIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourTugAvailabilityIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourTugAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourTurningAreaIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourTurningAreaIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HarbourVehicleHandlingTypeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HarbourVehicleHandlingTypeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HoldingRequiredCalculationMethodCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HoldingRequiredCalculationMethodCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, HoldingTransferReasonCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const HoldingTransferReasonCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, IcingCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const IcingCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, IcingSeverityQualifierCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const IcingSeverityQualifierCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, JettyRailServedIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const JettyRailServedIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, LanguageCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const LanguageCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, LanguageSkillProficiencyCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const LanguageSkillProficiencyCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, LightCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const LightCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, LightMoonPhaseCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const LightMoonPhaseCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, LiquidSurfaceStatusSeaStateCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const LiquidSurfaceStatusSeaStateCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, LiquidSurfaceStatusSurfaceConditionCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const LiquidSurfaceStatusSurfaceConditionCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, LocationCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const LocationCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MainActivityCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MainActivityCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MaintenanceCapabilityCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MaintenanceCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MaintenanceCapabilityLevelCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MaintenanceCapabilityLevelCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MaritimeEquipmentTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MaritimeEquipmentTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MaritimeEquipmentTypeSubcategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MaritimeEquipmentTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MaterielCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MaterielCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MaterielStatusBodyColourCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MaterielStatusBodyColourCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MaterielStatusBuoyMalfunctionCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MaterielStatusBuoyMalfunctionCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MaterielStatusCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MaterielStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MaterielStatusImoCompliantIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MaterielStatusImoCompliantIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MaterielStatusMarkingCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MaterielStatusMarkingCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MaterielStatusMarkingColourCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MaterielStatusMarkingColourCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MaterielStatusOperationalStatusCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MaterielStatusOperationalStatusCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MaterielStatusOperationalStatusModeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MaterielStatusOperationalStatusModeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MaterielStatusOperationalStatusQualifierCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MaterielStatusOperationalStatusQualifierCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MaterielStatusReserveIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MaterielStatusReserveIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MaterielStatusSafetyStatusCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MaterielStatusSafetyStatusCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MaterielTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MaterielTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MaterielTypeSupplyClassCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MaterielTypeSupplyClassCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MedicalFacilityStatusIntervalCasualtyTypeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MedicalFacilityStatusIntervalCasualtyTypeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MedicalFacilityStatusPendingSurgeryTriageCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MedicalFacilityStatusPendingSurgeryTriageCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MeteorologicFeatureCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MeteorologicFeatureCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MeteorologicFeatureInterpretationCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MeteorologicFeatureInterpretationCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MeteorologicFeatureSourceCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MeteorologicFeatureSourceCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MilitaryObstacleCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MilitaryObstacleCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MilitaryObstacleTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MilitaryObstacleTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MilitaryObstacleTypeSubcategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MilitaryObstacleTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MilitaryOrganisationTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MilitaryOrganisationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MilitaryOrganisationTypeServiceCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MilitaryOrganisationTypeServiceCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MilitaryPostTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MilitaryPostTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MilitaryPostTypeRankCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MilitaryPostTypeRankCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MinePresenceCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MinePresenceCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MineStatusAirDropEffectCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MineStatusAirDropEffectCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MineStatusCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MineStatusCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MineStatusMaritimeMineQualifierCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MineStatusMaritimeMineQualifierCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MinefieldCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MinefieldCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MinefieldLandDepthPlacementCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MinefieldLandDepthPlacementCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MinefieldLandFunctionCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MinefieldLandFunctionCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MinefieldLandPatternCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MinefieldLandPatternCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MinefieldLandPersistenceCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MinefieldLandPersistenceCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MinefieldLandStoppingPowerCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MinefieldLandStoppingPowerCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MinefieldMaritimeBottomNaturalCamouflageCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MinefieldMaritimeBottomNaturalCamouflageCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MinefieldMaritimeDepthPlacementCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MinefieldMaritimeDepthPlacementCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MinefieldMaritimeFunctionCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MinefieldMaritimeFunctionCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MinefieldMaritimeStatusCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MinefieldMaritimeStatusCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MinefieldMaritimeStatusColourCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MinefieldMaritimeStatusColourCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MinefieldMaritimeStatusExpectedLevelMcmCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MinefieldMaritimeStatusExpectedLevelMcmCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MinefieldMaritimeStatusMineDetectionCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MinefieldMaritimeStatusMineDetectionCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MinefieldMaritimeStatusMineZoneRiskCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MinefieldMaritimeStatusMineZoneRiskCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MinefieldMaritimeStatusSeedingCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MinefieldMaritimeStatusSeedingCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MinefieldMaritimeSubfunctionCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MinefieldMaritimeSubfunctionCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MiscellaneousEquipmentTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MiscellaneousEquipmentTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MiscellaneousEquipmentTypeSubcategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MiscellaneousEquipmentTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MissionPrimacyCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MissionPrimacyCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MobilityCapabilityCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MobilityCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MobilityCapabilityDescriptorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MobilityCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MobilityCapabilityTerrainTypeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MobilityCapabilityTerrainTypeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, MobilityCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const MobilityCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ModeOfTransportationCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ModeOfTransportationCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, NetworkArchitectureCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const NetworkArchitectureCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, NetworkCapacityBandwidthCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const NetworkCapacityBandwidthCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, NetworkCapacityProtocolCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const NetworkCapacityProtocolCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, NetworkCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const NetworkCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, NetworkFrequencyBandCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const NetworkFrequencyBandCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, NetworkFrequencyModulationCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const NetworkFrequencyModulationCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, NetworkMeansCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const NetworkMeansCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, NetworkServiceCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const NetworkServiceCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, NetworkServiceCryptographicIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const NetworkServiceCryptographicIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, NetworkServiceStatusIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const NetworkServiceStatusIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, NetworkServiceSubcategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const NetworkServiceSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, NetworkSubcategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const NetworkSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, NuclearEventCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const NuclearEventCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, NuclearWeaponEventCraterPresenceCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const NuclearWeaponEventCraterPresenceCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, NuclearYieldGroupCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const NuclearYieldGroupCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ObjectItemAddressAuthorisationIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ObjectItemAddressAuthorisationIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ObjectItemAddressPrimacyCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ObjectItemAddressPrimacyCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ObjectItemAddressTransmitReceiveCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ObjectItemAddressTransmitReceiveCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ObjectItemAliasCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ObjectItemAliasCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ObjectItemAssociationCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ObjectItemAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ObjectItemAssociationSubcategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ObjectItemAssociationSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ObjectItemCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ObjectItemCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ObjectItemGroupAccountDetailQualifierCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ObjectItemGroupAccountDetailQualifierCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ObjectItemHostilityStatusCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ObjectItemHostilityStatusCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ObjectItemLocationMeaningCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ObjectItemLocationMeaningCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ObjectItemLocationRelativeSpeedCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ObjectItemLocationRelativeSpeedCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ObjectItemReferenceAssociationCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ObjectItemReferenceAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ObjectItemStatusBoobyTrapPresenceCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ObjectItemStatusBoobyTrapPresenceCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ObjectItemStatusCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ObjectItemStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ObjectItemStatusEmissionControlCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ObjectItemStatusEmissionControlCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ObjectTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ObjectTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ObjectTypeDecoyIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ObjectTypeDecoyIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ObjectTypeEstablishmentCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ObjectTypeEstablishmentCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ObjectTypeEstablishmentEnvironmentConditionCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ObjectTypeEstablishmentEnvironmentConditionCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ObjectTypeEstablishmentOperationalModeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ObjectTypeEstablishmentOperationalModeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ObjectTypeReferenceAssociationCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ObjectTypeReferenceAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OperationalCapabilityCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OperationalCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OperationalCapabilityLevelCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OperationalCapabilityLevelCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OperationalCapabilityQualifierCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OperationalCapabilityQualifierCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OperationalInformationGroupCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OperationalInformationGroupCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OperationalInformationGroupOrganisationAssociationCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OperationalInformationGroupOrganisationAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OrbitAreaAlignmentCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrbitAreaAlignmentCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OrderCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrderCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OrderStatusExecutionStateCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrderStatusExecutionStateCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OrganisationActionAssociationCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrganisationActionAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OrganisationActionTaskRuleOfEngagementStatusCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrganisationActionTaskRuleOfEngagementStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OrganisationCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrganisationCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OrganisationMaterielTypeAssociationReportableTypeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrganisationMaterielTypeAssociationReportableTypeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OrganisationPlanOrderAssociationCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrganisationPlanOrderAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OrganisationReferenceAssociationCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrganisationReferenceAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OrganisationStatusAvailabilityCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrganisationStatusAvailabilityCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OrganisationStatusCbrnDressStateCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrganisationStatusCbrnDressStateCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OrganisationStatusCommandAndControlRoleCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrganisationStatusCommandAndControlRoleCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OrganisationStatusCommitmentStatusCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrganisationStatusCommitmentStatusCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OrganisationStatusFireModeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrganisationStatusFireModeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OrganisationStatusOperationalStatusCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrganisationStatusOperationalStatusCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OrganisationStatusOperationalStatusQualifierCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrganisationStatusOperationalStatusQualifierCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OrganisationStatusReadinessCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrganisationStatusReadinessCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OrganisationStatusReinforcementCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrganisationStatusReinforcementCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OrganisationStatusReserveIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrganisationStatusReserveIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OrganisationStatusTrainingCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrganisationStatusTrainingCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OrganisationStatusUsageStatusCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrganisationStatusUsageStatusCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OrganisationTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrganisationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OrganisationTypeCommandAndControlCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrganisationTypeCommandAndControlCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, OrganisationTypeCommandFunctionIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const OrganisationTypeCommandFunctionIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PersistencyCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PersistencyCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PersonBloodTypeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PersonBloodTypeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PersonIdentificationDocumentCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PersonIdentificationDocumentCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PersonLanguageSkillGeneralProficiencyCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PersonLanguageSkillGeneralProficiencyCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PersonProfessingIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PersonProfessingIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PersonStatusDutyStatusCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PersonStatusDutyStatusCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PersonStatusPhysicalStatusCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PersonStatusPhysicalStatusCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PersonStatusPhysicalStatusQualifierCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PersonStatusPhysicalStatusQualifierCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PersonStatusReserveIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PersonStatusReserveIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PersonTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PersonTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PersonTypeRankCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PersonTypeRankCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PersonTypeSubcategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PersonTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PhysicalAddressCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PhysicalAddressCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PlanCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PlanCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PlanOrderAssociationCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PlanOrderAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PlanOrderCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PlanOrderCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PlanOrderComponentContentReferenceCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PlanOrderComponentContentReferenceCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PlanOrderComponentStructureCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PlanOrderComponentStructureCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PlanOrderDistributionAcknowledgementCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PlanOrderDistributionAcknowledgementCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PlanOrderDistributionCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PlanOrderDistributionCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PlanOrderHeaderContentTimeZoneCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PlanOrderHeaderContentTimeZoneCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PlanStatusDevelopmentStatusCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PlanStatusDevelopmentStatusCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PlanStatusStateCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PlanStatusStateCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PointCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PointCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PrecipitationCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PrecipitationCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, PrivateSectorOrganisationTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const PrivateSectorOrganisationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, QuayContainerHandlingTypeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const QuayContainerHandlingTypeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, QuayCraneOffloadingTypeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const QuayCraneOffloadingTypeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, QuayRailServedIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const QuayRailServedIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, QuayStorageCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const QuayStorageCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RadioactiveEventCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RadioactiveEventCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RadioactiveEventDoseRateTrendCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RadioactiveEventDoseRateTrendCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RadioactiveEventRelativeDecayRateCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RadioactiveEventRelativeDecayRateCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RadioactiveMaterielTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RadioactiveMaterielTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RadioactiveMaterielTypePrimaryRadiationCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RadioactiveMaterielTypePrimaryRadiationCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RailcarTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RailcarTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RailcarTypeSubcategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RailcarTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RailwaySignalSystemCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RailwaySignalSystemCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RailwaySignalSystemEfficiencyCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RailwaySignalSystemEfficiencyCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RailwayTrackGaugeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RailwayTrackGaugeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RailwayTractionSystemCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RailwayTractionSystemCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ReferenceAssociationCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ReferenceAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ReferenceContentCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ReferenceContentCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ReferenceLifecycleCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ReferenceLifecycleCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ReferenceMediumTypeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ReferenceMediumTypeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ReferenceTransmittalTypeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ReferenceTransmittalTypeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ReferenceVerificationCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ReferenceVerificationCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RelativeCoordinateSystemReferenceCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RelativeCoordinateSystemReferenceCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ReleaseCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ReleaseCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ReportingDataAccuracyCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ReportingDataAccuracyCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ReportingDataCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ReportingDataCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ReportingDataCountingIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ReportingDataCountingIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ReportingDataCredibilityCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ReportingDataCredibilityCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ReportingDataEntityCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ReportingDataEntityCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ReportingDataRealDataExerciseUseOnlyCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ReportingDataRealDataExerciseUseOnlyCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ReportingDataReliabilityCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ReportingDataReliabilityCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ReportingDataSourceTypeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ReportingDataSourceTypeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, ReportingDataTimingCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const ReportingDataTimingCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RequestAnswerCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RequestAnswerCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RequestCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RequestCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RequestImmediateInterestIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RequestImmediateInterestIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RoadCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RoadCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RoadQualityCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RoadQualityCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RoadShoulderWidthCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RoadShoulderWidthCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RoadWeatherConditionCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RoadWeatherConditionCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RouteDirectionUsageCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RouteDirectionUsageCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RouteSegmentCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RouteSegmentCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RouteTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RouteTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RunwayLightingPresenceIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RunwayLightingPresenceIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RunwayPavementEvaluationMethodCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RunwayPavementEvaluationMethodCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RunwayPavementMaximumTyrePressureCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RunwayPavementMaximumTyrePressureCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RunwayPavementSubgradeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RunwayPavementSubgradeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, RunwayPavementTypeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const RunwayPavementTypeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, SecurityClassificationLevelCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const SecurityClassificationLevelCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, SolidSurfaceStatusCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const SolidSurfaceStatusCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, SolidSurfaceStatusSurfaceConditionCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const SolidSurfaceStatusSurfaceConditionCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, SolidSurfaceStatusSurfaceFirmnessCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const SolidSurfaceStatusSurfaceFirmnessCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, SpeedPrecisionCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const SpeedPrecisionCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, StorageCapabilityConditionCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const StorageCapabilityConditionCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, StorageCapabilityDescriptorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const StorageCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, SubsurfaceVesselTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const SubsurfaceVesselTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, SubsurfaceVesselTypeTorpedoLoadingGearIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const SubsurfaceVesselTypeTorpedoLoadingGearIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, SupportCapabilityCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const SupportCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, SupportCapabilityDescriptorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const SupportCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, SurfaceCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const SurfaceCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, SurfaceVesselTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const SurfaceVesselTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, SurveillanceCapabilityCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const SurveillanceCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, SurveillanceCapabilityDescriptorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const SurveillanceCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, TargetEngagementAuthorityCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const TargetEngagementAuthorityCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, TargetPersonnelProtectionCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const TargetPersonnelProtectionCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, TaskFormationTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const TaskFormationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, TransmissionCapabilityCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const TransmissionCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, TransmissionCapabilityDescriptorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const TransmissionCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, UnitTypeArmCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const UnitTypeArmCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, UnitTypeArmSpecialisationCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const UnitTypeArmSpecialisationCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, UnitTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const UnitTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, UnitTypeGeneralMobilityCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const UnitTypeGeneralMobilityCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, UnitTypeQualifierCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const UnitTypeQualifierCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, UnitTypeSizeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const UnitTypeSizeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, UnitTypeSupplementarySpecialisationCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const UnitTypeSupplementarySpecialisationCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, UsageStatusCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const UsageStatusCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, UxoStatusExposureCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const UxoStatusExposureCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, UxoStatusQualifierCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const UxoStatusQualifierCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, VegetationCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const VegetationCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, VegetationSubcategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const VegetationSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, VehicleTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const VehicleTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, VerticalDistanceReferenceCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const VerticalDistanceReferenceCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, VesselTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const VesselTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, VesselTypePropulsionTypeCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const VesselTypePropulsionTypeCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, VisibilityCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const VisibilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, WeaponTypeCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const WeaponTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, WeaponTypeFireGuidanceIndicatorCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const WeaponTypeFireGuidanceIndicatorCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, WeaponTypeSubcategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const WeaponTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, WindAirStabilityCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const WindAirStabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, WindAltitudeLayerCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const WindAltitudeLayerCode&);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, WindCategoryCode::value);
 
+  SUSTAIN_XSD_API
   ::std::ostream&
   operator<< (::std::ostream&, const WindCategoryCode&);
 }
@@ -41375,4712 +42330,6125 @@ namespace oo_2_0
 
 namespace oo_2_0
 {
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AbsolutePointCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AbsolutePointCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AbsolutePointCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionAircraftEmploymentApproachOffsetCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionAircraftEmploymentApproachOffsetCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionAircraftEmploymentApproachOffsetCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionAircraftEmploymentCrewCompositionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionAircraftEmploymentCrewCompositionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionAircraftEmploymentCrewCompositionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionAircraftEmploymentDeplanementMethodCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionAircraftEmploymentDeplanementMethodCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionAircraftEmploymentDeplanementMethodCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionAircraftEmploymentGeneralRoleCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionAircraftEmploymentGeneralRoleCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionAircraftEmploymentGeneralRoleCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionAircraftEmploymentInflightReportRequirementIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionAircraftEmploymentInflightReportRequirementIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionAircraftEmploymentInflightReportRequirementIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionContextCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionContextCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionContextCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionEffectCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionEffectCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionEffectCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionEffectDescriptionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionEffectDescriptionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionEffectDescriptionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionEffectSeverityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionEffectSeverityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionEffectSeverityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionElectronicWarfareEmploymentCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionElectronicWarfareEmploymentCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionElectronicWarfareEmploymentCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionEventCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionEventCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionEventCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionEventDetailClassificationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionEventDetailClassificationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionEventDetailClassificationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionEventDetailCrimeIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionEventDetailCrimeIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionEventDetailCrimeIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionFunctionalAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionFunctionalAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionFunctionalAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionMaritimeEmploymentCoordinatedAirSeaProcedureCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionMaritimeEmploymentCoordinatedAirSeaProcedureCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionMaritimeEmploymentCoordinatedAirSeaProcedureCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionMaritimeEmploymentVesselTransitInstructionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionMaritimeEmploymentVesselTransitInstructionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionMaritimeEmploymentVesselTransitInstructionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionObjectiveCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionObjectiveCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionObjectiveCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionObjectiveItemCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionObjectiveItemCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionObjectiveItemCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionObjectiveItemMarkingMethodCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionObjectiveItemMarkingMethodCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionObjectiveItemMarkingMethodCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionObjectiveItemMarkingPanelShapeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionObjectiveItemMarkingPanelShapeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionObjectiveItemMarkingPanelShapeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionObjectiveItemMarkingRecognitionSignalColourCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionObjectiveItemMarkingRecognitionSignalColourCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionObjectiveItemMarkingRecognitionSignalColourCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionObjectiveItemPrimacyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionObjectiveItemPrimacyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionObjectiveItemPrimacyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionObjectiveQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionObjectiveQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionObjectiveQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionObjectiveTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionObjectiveTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionObjectiveTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionObjectiveTypeImageryProductImageTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionObjectiveTypeImageryProductImageTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionObjectiveTypeImageryProductImageTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionReconnaissanceEmploymentImageCoverageModeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionReconnaissanceEmploymentImageCoverageModeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionReconnaissanceEmploymentImageCoverageModeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionReconnaissanceEmploymentImageViewQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionReconnaissanceEmploymentImageViewQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionReconnaissanceEmploymentImageViewQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionReconnaissanceEmploymentTypeOfCoverageCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionReconnaissanceEmploymentTypeOfCoverageCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionReconnaissanceEmploymentTypeOfCoverageCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionReferenceAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionReferenceAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionReferenceAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionResourceCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionResourceCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionResourceCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionResourceCriticalityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionResourceCriticalityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionResourceCriticalityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionResourceEmploymentCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionResourceEmploymentCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionResourceEmploymentCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionResourceEmploymentMethodOfControlCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionResourceEmploymentMethodOfControlCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionResourceEmploymentMethodOfControlCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionResourceEmploymentTrajectoryFireCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionResourceEmploymentTrajectoryFireCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionResourceEmploymentTrajectoryFireCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionResourceQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionResourceQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionResourceQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionTaskActivityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionTaskActivityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionTaskActivityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionTaskCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionTaskCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionTaskCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionTaskEndQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionTaskEndQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionTaskEndQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionTaskEntailedSafetyDegreeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionTaskEntailedSafetyDegreeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionTaskEntailedSafetyDegreeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionTaskMeteorologicalImpactCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionTaskMeteorologicalImpactCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionTaskMeteorologicalImpactCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionTaskOperationalLevelCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionTaskOperationalLevelCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionTaskOperationalLevelCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionTaskOvertCovertCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionTaskOvertCovertCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionTaskOvertCovertCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionTaskPriorityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionTaskPriorityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionTaskPriorityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionTaskStartQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionTaskStartQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionTaskStartQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionTaskStatusAmendTimingCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionTaskStatusAmendTimingCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionTaskStatusAmendTimingCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionTaskStatusApprovalIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionTaskStatusApprovalIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionTaskStatusApprovalIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionTaskStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionTaskStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionTaskStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionTaskStatusPlanningIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionTaskStatusPlanningIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionTaskStatusPlanningIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionTaskStatusProgressCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionTaskStatusProgressCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionTaskStatusProgressCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionTaskTimingDayCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionTaskTimingDayCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionTaskTimingDayCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionTaskTimingHourCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionTaskTimingHourCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionTaskTimingHourCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ActionTemporalAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ActionTemporalAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ActionTemporalAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AddressCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AddressCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AddressCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AffiliationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AffiliationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AffiliationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AffiliationEthnicGroupCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AffiliationEthnicGroupCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AffiliationEthnicGroupCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AffiliationFunctionalGroupCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AffiliationFunctionalGroupCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AffiliationFunctionalGroupCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AffiliationGeopoliticalCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AffiliationGeopoliticalCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AffiliationGeopoliticalCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AffiliationReligionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AffiliationReligionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AffiliationReligionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AirRouteSegmentCivilMilitaryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AirRouteSegmentCivilMilitaryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AirRouteSegmentCivilMilitaryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AirRouteSegmentInternationalRouteCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AirRouteSegmentInternationalRouteCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AirRouteSegmentInternationalRouteCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AirRouteSegmentRequiredNavigationPerformanceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AirRouteSegmentRequiredNavigationPerformanceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AirRouteSegmentRequiredNavigationPerformanceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AircraftTypeAirframeDesignCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AircraftTypeAirframeDesignCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AircraftTypeAirframeDesignCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AircraftTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AircraftTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AircraftTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AircraftTypeDesignRangeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AircraftTypeDesignRangeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AircraftTypeDesignRangeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AircraftTypeDesignRoleCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AircraftTypeDesignRoleCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AircraftTypeDesignRoleCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AircraftTypeLoadCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AircraftTypeLoadCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AircraftTypeLoadCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AircraftTypeMainPurposeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AircraftTypeMainPurposeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AircraftTypeMainPurposeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AircraftTypeManningCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AircraftTypeManningCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AircraftTypeManningCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AircraftTypeMilitaryCivilianCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AircraftTypeMilitaryCivilianCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AircraftTypeMilitaryCivilianCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AircraftTypeModelCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AircraftTypeModelCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AircraftTypeModelCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AircraftTypeTakeoffAndLandingCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AircraftTypeTakeoffAndLandingCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AircraftTypeTakeoffAndLandingCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AircraftTypeTrainingCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AircraftTypeTrainingCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AircraftTypeTrainingCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AircraftTypeWeatherQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AircraftTypeWeatherQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AircraftTypeWeatherQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AirfieldAirTrafficControlPresenceIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AirfieldAirTrafficControlPresenceIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AirfieldAirTrafficControlPresenceIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AirfieldInstrumentLandingSystemPresenceIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AirfieldInstrumentLandingSystemPresenceIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AirfieldInstrumentLandingSystemPresenceIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AirfieldStatusDayOperationsCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AirfieldStatusDayOperationsCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AirfieldStatusDayOperationsCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AirfieldStatusEvaluationIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AirfieldStatusEvaluationIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AirfieldStatusEvaluationIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AirfieldStatusFlightSupportCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AirfieldStatusFlightSupportCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AirfieldStatusFlightSupportCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AirfieldTypeUseCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AirfieldTypeUseCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AirfieldTypeUseCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AirfieldVisualNavigationalAidIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AirfieldVisualNavigationalAidIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AirfieldVisualNavigationalAidIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AmmunitionTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AmmunitionTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AmmunitionTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AmmunitionTypeExerciseMineFlareColourCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AmmunitionTypeExerciseMineFlareColourCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AmmunitionTypeExerciseMineFlareColourCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AmmunitionTypeMineMaritimeFiringCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AmmunitionTypeMineMaritimeFiringCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AmmunitionTypeMineMaritimeFiringCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AnchorageBottomTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AnchorageBottomTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AnchorageBottomTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AnchorageMooringsTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AnchorageMooringsTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AnchorageMooringsTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AnglePrecisionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AnglePrecisionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AnglePrecisionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ApproachDirectionCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ApproachDirectionCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ApproachDirectionCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AssociationStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AssociationStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AssociationStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AtmosphereInversionLayerCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AtmosphereInversionLayerCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AtmosphereInversionLayerCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AtmospherePressureSystemCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AtmospherePressureSystemCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AtmospherePressureSystemCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const AtmosphereTemperatureGradientCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const AtmosphereTemperatureGradientCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const AtmosphereTemperatureGradientCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const BerthMajorVesselClassCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const BerthMajorVesselClassCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const BerthMajorVesselClassCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const BerthRailAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const BerthRailAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const BerthRailAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const BerthRollOnRollOffIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const BerthRollOnRollOffIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const BerthRollOnRollOffIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const BiologicalMaterielTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const BiologicalMaterielTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const BiologicalMaterielTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const BiologicalMaterielTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const BiologicalMaterielTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const BiologicalMaterielTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const BridgeTypeDesignTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const BridgeTypeDesignTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const BridgeTypeDesignTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const BridgeUsageCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const BridgeUsageCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const BridgeUsageCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CandidateTargetDetailAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const CandidateTargetDetailAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const CandidateTargetDetailAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CandidateTargetDetailAuthorisationApprovalCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const CandidateTargetDetailAuthorisationApprovalCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const CandidateTargetDetailAuthorisationApprovalCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CandidateTargetDetailCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const CandidateTargetDetailCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const CandidateTargetDetailCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CandidateTargetDetailFocusTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const CandidateTargetDetailFocusTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const CandidateTargetDetailFocusTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CandidateTargetDetailSchemeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const CandidateTargetDetailSchemeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const CandidateTargetDetailSchemeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CandidateTargetListAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const CandidateTargetListAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const CandidateTargetListAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CandidateTargetListAuthorisationIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const CandidateTargetListAuthorisationIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const CandidateTargetListAuthorisationIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const CapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const CapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CapabilityDayNightCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const CapabilityDayNightCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const CapabilityDayNightCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CapabilityReferenceAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const CapabilityReferenceAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const CapabilityReferenceAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CapabilityUnitOfMeasureCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const CapabilityUnitOfMeasureCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const CapabilityUnitOfMeasureCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CargoCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const CargoCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const CargoCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CasualtyGroupCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const CasualtyGroupCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const CasualtyGroupCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CbrnEquipmentTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const CbrnEquipmentTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const CbrnEquipmentTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CbrnEventAlarmResultIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const CbrnEventAlarmResultIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const CbrnEventAlarmResultIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CbrnEventCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const CbrnEventCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const CbrnEventCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CbrnEventConfirmationTestIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const CbrnEventConfirmationTestIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const CbrnEventConfirmationTestIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CbrnEventMaterielContainerTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const CbrnEventMaterielContainerTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const CbrnEventMaterielContainerTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CbrnEventSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const CbrnEventSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const CbrnEventSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ChemicalBiologicalEventCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ChemicalBiologicalEventCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ChemicalBiologicalEventCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ChemicalBiologicalEventSpillSizeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ChemicalBiologicalEventSpillSizeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ChemicalBiologicalEventSpillSizeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ChemicalMaterielTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ChemicalMaterielTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ChemicalMaterielTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ChemicalMaterielTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ChemicalMaterielTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ChemicalMaterielTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CivilianPostTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const CivilianPostTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const CivilianPostTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CloudCoverAverageCoverageCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const CloudCoverAverageCoverageCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const CloudCoverAverageCoverageCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const CloudCoverCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const CloudCoverCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const CloudCoverCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ConsumableMaterielTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ConsumableMaterielTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ConsumableMaterielTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ConsumableMaterielTypeHazardCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ConsumableMaterielTypeHazardCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ConsumableMaterielTypeHazardCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ConsumableMaterielTypeIssuingElementCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ConsumableMaterielTypeIssuingElementCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ConsumableMaterielTypeIssuingElementCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ConsumableMaterielTypeIssuingUnitOfMeasureCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ConsumableMaterielTypeIssuingUnitOfMeasureCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ConsumableMaterielTypeIssuingUnitOfMeasureCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ConsumableMaterielTypePerishabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ConsumableMaterielTypePerishabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ConsumableMaterielTypePerishabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ConsumableMaterielTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ConsumableMaterielTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ConsumableMaterielTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ConsumableMaterielTypeUnitedNationsNumberCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ConsumableMaterielTypeUnitedNationsNumberCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ConsumableMaterielTypeUnitedNationsNumberCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ContextAssessmentLimitingFactorsCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ContextAssessmentLimitingFactorsCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ContextAssessmentLimitingFactorsCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ContextAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ContextAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ContextAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ContextCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ContextCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ContextCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ContextElementStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ContextElementStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ContextElementStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ContextObjectItemAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ContextObjectItemAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ContextObjectItemAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ContextReportingDataAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ContextReportingDataAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ContextReportingDataAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ControlFeatureCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ControlFeatureCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ControlFeatureCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ControlFeatureStatusCbrnThreatLevelCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ControlFeatureStatusCbrnThreatLevelCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ControlFeatureStatusCbrnThreatLevelCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ControlFeatureStatusInvestigationStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ControlFeatureStatusInvestigationStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ControlFeatureStatusInvestigationStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ControlFeatureStatusSecurityStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ControlFeatureStatusSecurityStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ControlFeatureStatusSecurityStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ControlFeatureTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ControlFeatureTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ControlFeatureTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const DemolitionStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const DemolitionStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const DemolitionStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const DirectionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const DirectionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const DirectionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const DistancePrecisionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const DistancePrecisionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const DistancePrecisionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const DryDockMarineRailwaySizeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const DryDockMarineRailwaySizeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const DryDockMarineRailwaySizeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ElectronicEquipmentTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ElectronicEquipmentTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ElectronicEquipmentTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ElectronicEquipmentTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ElectronicEquipmentTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ElectronicEquipmentTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const EngineeringCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const EngineeringCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const EngineeringCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const EngineeringCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const EngineeringCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const EngineeringCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const EngineeringEquipmentTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const EngineeringEquipmentTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const EngineeringEquipmentTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const EquipmentTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const EquipmentTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const EquipmentTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const EvacuationDestinationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const EvacuationDestinationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const EvacuationDestinationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ExecutiveMilitaryOrganisationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ExecutiveMilitaryOrganisationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ExecutiveMilitaryOrganisationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const FacilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const FacilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const FacilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const FacilityPrimaryConstructionMaterialCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const FacilityPrimaryConstructionMaterialCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const FacilityPrimaryConstructionMaterialCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const FacilityStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const FacilityStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const FacilityStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const FacilityStatusEnemyActivityConditionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const FacilityStatusEnemyActivityConditionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const FacilityStatusEnemyActivityConditionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const FacilityStatusOccupationProgramIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const FacilityStatusOccupationProgramIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const FacilityStatusOccupationProgramIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const FacilityStatusOperationalStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const FacilityStatusOperationalStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const FacilityStatusOperationalStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const FacilityStatusOperationalStatusQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const FacilityStatusOperationalStatusQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const FacilityStatusOperationalStatusQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const FacilityStatusReserveIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const FacilityStatusReserveIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const FacilityStatusReserveIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const FacilityStatusSecurityStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const FacilityStatusSecurityStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const FacilityStatusSecurityStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const FacilityTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const FacilityTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const FacilityTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const FeatureCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const FeatureCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const FeatureCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const FeatureTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const FeatureTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const FeatureTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const FeintIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const FeintIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const FeintIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const FireCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const FireCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const FireCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const FireCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const FireCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const FireCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const FireCapabilityWeaponTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const FireCapabilityWeaponTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const FireCapabilityWeaponTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const GenderCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const GenderCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const GenderCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const GeographicFeatureBottomHardnessCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const GeographicFeatureBottomHardnessCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const GeographicFeatureBottomHardnessCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const GeographicFeatureSolidSurfaceCompositionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const GeographicFeatureSolidSurfaceCompositionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const GeographicFeatureSolidSurfaceCompositionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const GeographicFeatureStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const GeographicFeatureStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const GeographicFeatureStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const GeographicFeatureStatusSurfaceRecirculationIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const GeographicFeatureStatusSurfaceRecirculationIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const GeographicFeatureStatusSurfaceRecirculationIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const GeographicFeatureSurfaceCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const GeographicFeatureSurfaceCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const GeographicFeatureSurfaceCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const GeographicFeatureTerrainCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const GeographicFeatureTerrainCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const GeographicFeatureTerrainCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const GeographicFeatureTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const GeographicFeatureTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const GeographicFeatureTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const GeographicFeatureTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const GeographicFeatureTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const GeographicFeatureTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const GeometricVolumeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const GeometricVolumeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const GeometricVolumeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const GovernmentOrganisationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const GovernmentOrganisationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const GovernmentOrganisationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const GroupCharacteristicAgeGroupCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const GroupCharacteristicAgeGroupCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const GroupCharacteristicAgeGroupCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const GroupCharacteristicMaladyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const GroupCharacteristicMaladyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const GroupCharacteristicMaladyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const GroupCharacteristicMaladyTransmissibilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const GroupCharacteristicMaladyTransmissibilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const GroupCharacteristicMaladyTransmissibilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const GroupCharacteristicTriageCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const GroupCharacteristicTriageCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const GroupCharacteristicTriageCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const GroupOrganisationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const GroupOrganisationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const GroupOrganisationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HandlingCapabilityActionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HandlingCapabilityActionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HandlingCapabilityActionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HandlingCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HandlingCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HandlingCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourAirportNearIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourAirportNearIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourAirportNearIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourBiologicallySecureAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourBiologicallySecureAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourBiologicallySecureAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourConvoyMarshallingIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourConvoyMarshallingIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourConvoyMarshallingIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourDegaussingIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourDegaussingIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourDegaussingIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourDirtyBallastIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourDirtyBallastIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourDirtyBallastIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourEntranceRestrictionsIceIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourEntranceRestrictionsIceIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourEntranceRestrictionsIceIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourEntranceRestrictionsSwellIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourEntranceRestrictionsSwellIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourEntranceRestrictionsSwellIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourEstimatedTimeOfArrivalIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourEstimatedTimeOfArrivalIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourEstimatedTimeOfArrivalIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourFireFightingCapabilityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourFireFightingCapabilityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourFireFightingCapabilityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourFireFightingIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourFireFightingIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourFireFightingIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourFirstPortOfEntryIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourFirstPortOfEntryIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourFirstPortOfEntryIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourFreshWaterAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourFreshWaterAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourFreshWaterAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourLashIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourLashIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourLashIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourLighterageAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourLighterageAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourLighterageAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourOverheadLimitsIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourOverheadLimitsIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourOverheadLimitsIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourPassengerHandlingIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourPassengerHandlingIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourPassengerHandlingIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourPersistenceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourPersistenceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourPersistenceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourPilotageAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourPilotageAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourPilotageAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourPilotageRequirementIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourPilotageRequirementIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourPilotageRequirementIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourRefuellingAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourRefuellingAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourRefuellingAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourRefuellingTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourRefuellingTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourRefuellingTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourShelterQualityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourShelterQualityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourShelterQualityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourTankerFacilitiesIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourTankerFacilitiesIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourTankerFacilitiesIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourTransitAccommodationIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourTransitAccommodationIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourTransitAccommodationIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourTugAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourTugAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourTugAvailabilityIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourTurningAreaIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourTurningAreaIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourTurningAreaIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HarbourVehicleHandlingTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HarbourVehicleHandlingTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HarbourVehicleHandlingTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HoldingRequiredCalculationMethodCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HoldingRequiredCalculationMethodCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HoldingRequiredCalculationMethodCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const HoldingTransferReasonCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const HoldingTransferReasonCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const HoldingTransferReasonCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const IcingCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const IcingCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const IcingCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const IcingSeverityQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const IcingSeverityQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const IcingSeverityQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const JettyRailServedIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const JettyRailServedIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const JettyRailServedIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const LanguageCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const LanguageCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const LanguageCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const LanguageSkillProficiencyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const LanguageSkillProficiencyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const LanguageSkillProficiencyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const LightCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const LightCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const LightCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const LightMoonPhaseCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const LightMoonPhaseCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const LightMoonPhaseCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const LiquidSurfaceStatusSeaStateCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const LiquidSurfaceStatusSeaStateCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const LiquidSurfaceStatusSeaStateCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const LiquidSurfaceStatusSurfaceConditionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const LiquidSurfaceStatusSurfaceConditionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const LiquidSurfaceStatusSurfaceConditionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const LocationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const LocationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const LocationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MainActivityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MainActivityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MainActivityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MaintenanceCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MaintenanceCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MaintenanceCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MaintenanceCapabilityLevelCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MaintenanceCapabilityLevelCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MaintenanceCapabilityLevelCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MaritimeEquipmentTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MaritimeEquipmentTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MaritimeEquipmentTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MaritimeEquipmentTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MaritimeEquipmentTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MaritimeEquipmentTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MaterielCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MaterielCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MaterielCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MaterielStatusBodyColourCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MaterielStatusBodyColourCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MaterielStatusBodyColourCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MaterielStatusBuoyMalfunctionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MaterielStatusBuoyMalfunctionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MaterielStatusBuoyMalfunctionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MaterielStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MaterielStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MaterielStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MaterielStatusImoCompliantIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MaterielStatusImoCompliantIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MaterielStatusImoCompliantIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MaterielStatusMarkingCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MaterielStatusMarkingCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MaterielStatusMarkingCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MaterielStatusMarkingColourCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MaterielStatusMarkingColourCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MaterielStatusMarkingColourCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MaterielStatusOperationalStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MaterielStatusOperationalStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MaterielStatusOperationalStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MaterielStatusOperationalStatusModeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MaterielStatusOperationalStatusModeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MaterielStatusOperationalStatusModeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MaterielStatusOperationalStatusQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MaterielStatusOperationalStatusQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MaterielStatusOperationalStatusQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MaterielStatusReserveIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MaterielStatusReserveIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MaterielStatusReserveIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MaterielStatusSafetyStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MaterielStatusSafetyStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MaterielStatusSafetyStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MaterielTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MaterielTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MaterielTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MaterielTypeSupplyClassCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MaterielTypeSupplyClassCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MaterielTypeSupplyClassCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MedicalFacilityStatusIntervalCasualtyTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MedicalFacilityStatusIntervalCasualtyTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MedicalFacilityStatusIntervalCasualtyTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MedicalFacilityStatusPendingSurgeryTriageCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MedicalFacilityStatusPendingSurgeryTriageCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MedicalFacilityStatusPendingSurgeryTriageCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MeteorologicFeatureCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MeteorologicFeatureCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MeteorologicFeatureCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MeteorologicFeatureInterpretationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MeteorologicFeatureInterpretationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MeteorologicFeatureInterpretationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MeteorologicFeatureSourceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MeteorologicFeatureSourceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MeteorologicFeatureSourceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MilitaryObstacleCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MilitaryObstacleCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MilitaryObstacleCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MilitaryObstacleTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MilitaryObstacleTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MilitaryObstacleTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MilitaryObstacleTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MilitaryObstacleTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MilitaryObstacleTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MilitaryOrganisationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MilitaryOrganisationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MilitaryOrganisationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MilitaryOrganisationTypeServiceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MilitaryOrganisationTypeServiceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MilitaryOrganisationTypeServiceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MilitaryPostTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MilitaryPostTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MilitaryPostTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MilitaryPostTypeRankCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MilitaryPostTypeRankCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MilitaryPostTypeRankCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MinePresenceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MinePresenceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MinePresenceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MineStatusAirDropEffectCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MineStatusAirDropEffectCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MineStatusAirDropEffectCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MineStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MineStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MineStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MineStatusMaritimeMineQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MineStatusMaritimeMineQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MineStatusMaritimeMineQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MinefieldCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MinefieldCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MinefieldCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MinefieldLandDepthPlacementCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MinefieldLandDepthPlacementCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MinefieldLandDepthPlacementCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MinefieldLandFunctionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MinefieldLandFunctionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MinefieldLandFunctionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MinefieldLandPatternCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MinefieldLandPatternCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MinefieldLandPatternCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MinefieldLandPersistenceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MinefieldLandPersistenceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MinefieldLandPersistenceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MinefieldLandStoppingPowerCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MinefieldLandStoppingPowerCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MinefieldLandStoppingPowerCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MinefieldMaritimeBottomNaturalCamouflageCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MinefieldMaritimeBottomNaturalCamouflageCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MinefieldMaritimeBottomNaturalCamouflageCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MinefieldMaritimeDepthPlacementCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MinefieldMaritimeDepthPlacementCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MinefieldMaritimeDepthPlacementCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MinefieldMaritimeFunctionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MinefieldMaritimeFunctionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MinefieldMaritimeFunctionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MinefieldMaritimeStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MinefieldMaritimeStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MinefieldMaritimeStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MinefieldMaritimeStatusColourCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MinefieldMaritimeStatusColourCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MinefieldMaritimeStatusColourCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MinefieldMaritimeStatusExpectedLevelMcmCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MinefieldMaritimeStatusExpectedLevelMcmCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MinefieldMaritimeStatusExpectedLevelMcmCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MinefieldMaritimeStatusMineDetectionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MinefieldMaritimeStatusMineDetectionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MinefieldMaritimeStatusMineDetectionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MinefieldMaritimeStatusMineZoneRiskCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MinefieldMaritimeStatusMineZoneRiskCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MinefieldMaritimeStatusMineZoneRiskCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MinefieldMaritimeStatusSeedingCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MinefieldMaritimeStatusSeedingCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MinefieldMaritimeStatusSeedingCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MinefieldMaritimeSubfunctionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MinefieldMaritimeSubfunctionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MinefieldMaritimeSubfunctionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MiscellaneousEquipmentTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MiscellaneousEquipmentTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MiscellaneousEquipmentTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MiscellaneousEquipmentTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MiscellaneousEquipmentTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MiscellaneousEquipmentTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MissionPrimacyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MissionPrimacyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MissionPrimacyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MobilityCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MobilityCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MobilityCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MobilityCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MobilityCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MobilityCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MobilityCapabilityTerrainTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MobilityCapabilityTerrainTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MobilityCapabilityTerrainTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const MobilityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const MobilityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const MobilityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ModeOfTransportationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ModeOfTransportationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ModeOfTransportationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const NetworkArchitectureCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const NetworkArchitectureCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const NetworkArchitectureCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const NetworkCapacityBandwidthCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const NetworkCapacityBandwidthCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const NetworkCapacityBandwidthCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const NetworkCapacityProtocolCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const NetworkCapacityProtocolCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const NetworkCapacityProtocolCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const NetworkCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const NetworkCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const NetworkCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const NetworkFrequencyBandCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const NetworkFrequencyBandCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const NetworkFrequencyBandCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const NetworkFrequencyModulationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const NetworkFrequencyModulationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const NetworkFrequencyModulationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const NetworkMeansCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const NetworkMeansCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const NetworkMeansCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const NetworkServiceCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const NetworkServiceCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const NetworkServiceCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const NetworkServiceCryptographicIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const NetworkServiceCryptographicIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const NetworkServiceCryptographicIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const NetworkServiceStatusIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const NetworkServiceStatusIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const NetworkServiceStatusIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const NetworkServiceSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const NetworkServiceSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const NetworkServiceSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const NetworkSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const NetworkSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const NetworkSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const NuclearEventCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const NuclearEventCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const NuclearEventCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const NuclearWeaponEventCraterPresenceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const NuclearWeaponEventCraterPresenceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const NuclearWeaponEventCraterPresenceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const NuclearYieldGroupCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const NuclearYieldGroupCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const NuclearYieldGroupCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ObjectItemAddressAuthorisationIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ObjectItemAddressAuthorisationIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ObjectItemAddressAuthorisationIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ObjectItemAddressPrimacyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ObjectItemAddressPrimacyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ObjectItemAddressPrimacyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ObjectItemAddressTransmitReceiveCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ObjectItemAddressTransmitReceiveCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ObjectItemAddressTransmitReceiveCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ObjectItemAliasCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ObjectItemAliasCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ObjectItemAliasCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ObjectItemAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ObjectItemAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ObjectItemAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ObjectItemAssociationSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ObjectItemAssociationSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ObjectItemAssociationSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ObjectItemCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ObjectItemCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ObjectItemCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ObjectItemGroupAccountDetailQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ObjectItemGroupAccountDetailQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ObjectItemGroupAccountDetailQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ObjectItemHostilityStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ObjectItemHostilityStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ObjectItemHostilityStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ObjectItemLocationMeaningCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ObjectItemLocationMeaningCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ObjectItemLocationMeaningCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ObjectItemLocationRelativeSpeedCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ObjectItemLocationRelativeSpeedCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ObjectItemLocationRelativeSpeedCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ObjectItemReferenceAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ObjectItemReferenceAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ObjectItemReferenceAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ObjectItemStatusBoobyTrapPresenceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ObjectItemStatusBoobyTrapPresenceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ObjectItemStatusBoobyTrapPresenceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ObjectItemStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ObjectItemStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ObjectItemStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ObjectItemStatusEmissionControlCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ObjectItemStatusEmissionControlCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ObjectItemStatusEmissionControlCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ObjectTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ObjectTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ObjectTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ObjectTypeDecoyIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ObjectTypeDecoyIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ObjectTypeDecoyIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ObjectTypeEstablishmentCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ObjectTypeEstablishmentCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ObjectTypeEstablishmentCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ObjectTypeEstablishmentEnvironmentConditionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ObjectTypeEstablishmentEnvironmentConditionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ObjectTypeEstablishmentEnvironmentConditionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ObjectTypeEstablishmentObjectTypeDetailMajorPartIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ObjectTypeEstablishmentOperationalModeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ObjectTypeEstablishmentOperationalModeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ObjectTypeEstablishmentOperationalModeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ObjectTypeReferenceAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ObjectTypeReferenceAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ObjectTypeReferenceAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OperationalCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OperationalCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OperationalCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OperationalCapabilityLevelCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OperationalCapabilityLevelCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OperationalCapabilityLevelCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OperationalCapabilityQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OperationalCapabilityQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OperationalCapabilityQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OperationalInformationGroupCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OperationalInformationGroupCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OperationalInformationGroupCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OperationalInformationGroupOrganisationAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OperationalInformationGroupOrganisationAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OperationalInformationGroupOrganisationAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrbitAreaAlignmentCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OrbitAreaAlignmentCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OrbitAreaAlignmentCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrderCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OrderCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OrderCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrderStatusExecutionStateCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OrderStatusExecutionStateCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OrderStatusExecutionStateCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrganisationActionAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OrganisationActionAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OrganisationActionAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrganisationActionTaskRuleOfEngagementStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OrganisationActionTaskRuleOfEngagementStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OrganisationActionTaskRuleOfEngagementStatusCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrganisationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OrganisationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OrganisationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrganisationMaterielTypeAssociationReportableTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OrganisationMaterielTypeAssociationReportableTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OrganisationMaterielTypeAssociationReportableTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrganisationPlanOrderAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OrganisationPlanOrderAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OrganisationPlanOrderAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrganisationReferenceAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OrganisationReferenceAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OrganisationReferenceAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrganisationStatusAvailabilityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OrganisationStatusAvailabilityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OrganisationStatusAvailabilityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrganisationStatusCbrnDressStateCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OrganisationStatusCbrnDressStateCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OrganisationStatusCbrnDressStateCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrganisationStatusCommandAndControlRoleCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OrganisationStatusCommandAndControlRoleCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OrganisationStatusCommandAndControlRoleCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrganisationStatusCommitmentStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OrganisationStatusCommitmentStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OrganisationStatusCommitmentStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrganisationStatusFireModeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OrganisationStatusFireModeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OrganisationStatusFireModeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrganisationStatusOperationalStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OrganisationStatusOperationalStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OrganisationStatusOperationalStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrganisationStatusOperationalStatusQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OrganisationStatusOperationalStatusQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OrganisationStatusOperationalStatusQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrganisationStatusReadinessCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OrganisationStatusReadinessCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OrganisationStatusReadinessCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrganisationStatusReinforcementCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OrganisationStatusReinforcementCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OrganisationStatusReinforcementCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrganisationStatusReserveIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OrganisationStatusReserveIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OrganisationStatusReserveIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrganisationStatusTrainingCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OrganisationStatusTrainingCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OrganisationStatusTrainingCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrganisationStatusUsageStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OrganisationStatusUsageStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OrganisationStatusUsageStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrganisationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OrganisationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OrganisationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrganisationTypeCommandAndControlCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OrganisationTypeCommandAndControlCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OrganisationTypeCommandAndControlCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const OrganisationTypeCommandFunctionIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const OrganisationTypeCommandFunctionIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const OrganisationTypeCommandFunctionIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PersistencyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PersistencyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PersistencyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PersonBloodTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PersonBloodTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PersonBloodTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PersonIdentificationDocumentCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PersonIdentificationDocumentCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PersonIdentificationDocumentCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PersonLanguageSkillGeneralProficiencyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PersonLanguageSkillGeneralProficiencyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PersonLanguageSkillGeneralProficiencyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PersonProfessingIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PersonProfessingIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PersonProfessingIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PersonStatusDutyStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PersonStatusDutyStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PersonStatusDutyStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PersonStatusPhysicalStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PersonStatusPhysicalStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PersonStatusPhysicalStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PersonStatusPhysicalStatusQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PersonStatusPhysicalStatusQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PersonStatusPhysicalStatusQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PersonStatusReserveIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PersonStatusReserveIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PersonStatusReserveIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PersonTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PersonTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PersonTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PersonTypeRankCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PersonTypeRankCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PersonTypeRankCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PersonTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PersonTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PersonTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PhysicalAddressCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PhysicalAddressCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PhysicalAddressCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PlanCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PlanCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PlanCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PlanOrderAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PlanOrderAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PlanOrderAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PlanOrderCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PlanOrderCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PlanOrderCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PlanOrderComponentContentReferenceCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PlanOrderComponentContentReferenceCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PlanOrderComponentContentReferenceCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PlanOrderComponentStructureCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PlanOrderComponentStructureCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PlanOrderComponentStructureCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PlanOrderDistributionAcknowledgementCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PlanOrderDistributionAcknowledgementCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PlanOrderDistributionAcknowledgementCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PlanOrderDistributionCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PlanOrderDistributionCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PlanOrderDistributionCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PlanOrderHeaderContentTimeZoneCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PlanOrderHeaderContentTimeZoneCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PlanOrderHeaderContentTimeZoneCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PlanStatusDevelopmentStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PlanStatusDevelopmentStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PlanStatusDevelopmentStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PlanStatusStateCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PlanStatusStateCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PlanStatusStateCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PointCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PointCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PointCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PrecipitationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PrecipitationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PrecipitationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const PrivateSectorOrganisationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const PrivateSectorOrganisationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const PrivateSectorOrganisationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const QuayContainerHandlingTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const QuayContainerHandlingTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const QuayContainerHandlingTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const QuayCraneOffloadingTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const QuayCraneOffloadingTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const QuayCraneOffloadingTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const QuayRailServedIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const QuayRailServedIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const QuayRailServedIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const QuayStorageCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const QuayStorageCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const QuayStorageCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RadioactiveEventCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RadioactiveEventCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RadioactiveEventCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RadioactiveEventDoseRateTrendCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RadioactiveEventDoseRateTrendCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RadioactiveEventDoseRateTrendCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RadioactiveEventRelativeDecayRateCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RadioactiveEventRelativeDecayRateCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RadioactiveEventRelativeDecayRateCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RadioactiveMaterielTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RadioactiveMaterielTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RadioactiveMaterielTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RadioactiveMaterielTypePrimaryRadiationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RadioactiveMaterielTypePrimaryRadiationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RadioactiveMaterielTypePrimaryRadiationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RailcarTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RailcarTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RailcarTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RailcarTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RailcarTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RailcarTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RailwaySignalSystemCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RailwaySignalSystemCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RailwaySignalSystemCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RailwaySignalSystemEfficiencyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RailwaySignalSystemEfficiencyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RailwaySignalSystemEfficiencyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RailwayTrackGaugeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RailwayTrackGaugeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RailwayTrackGaugeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RailwayTractionSystemCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RailwayTractionSystemCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RailwayTractionSystemCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ReferenceAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ReferenceAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ReferenceAssociationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ReferenceContentCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ReferenceContentCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ReferenceContentCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ReferenceLifecycleCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ReferenceLifecycleCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ReferenceLifecycleCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ReferenceMediumTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ReferenceMediumTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ReferenceMediumTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ReferenceTransmittalTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ReferenceTransmittalTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ReferenceTransmittalTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ReferenceVerificationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ReferenceVerificationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ReferenceVerificationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RelativeCoordinateSystemReferenceCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RelativeCoordinateSystemReferenceCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RelativeCoordinateSystemReferenceCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ReleaseCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ReleaseCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ReleaseCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ReportingDataAccuracyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ReportingDataAccuracyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ReportingDataAccuracyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ReportingDataCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ReportingDataCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ReportingDataCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ReportingDataCountingIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ReportingDataCountingIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ReportingDataCountingIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ReportingDataCredibilityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ReportingDataCredibilityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ReportingDataCredibilityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ReportingDataEntityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ReportingDataEntityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ReportingDataEntityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ReportingDataRealDataExerciseUseOnlyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ReportingDataRealDataExerciseUseOnlyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ReportingDataRealDataExerciseUseOnlyCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ReportingDataReliabilityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ReportingDataReliabilityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ReportingDataReliabilityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ReportingDataSourceTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ReportingDataSourceTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ReportingDataSourceTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const ReportingDataTimingCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const ReportingDataTimingCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const ReportingDataTimingCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RequestAnswerCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RequestAnswerCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RequestAnswerCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RequestCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RequestCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RequestCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RequestImmediateInterestIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RequestImmediateInterestIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RequestImmediateInterestIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RoadCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RoadCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RoadCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RoadQualityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RoadQualityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RoadQualityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RoadShoulderWidthCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RoadShoulderWidthCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RoadShoulderWidthCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RoadWeatherConditionCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RoadWeatherConditionCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RoadWeatherConditionCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RouteDirectionUsageCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RouteDirectionUsageCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RouteDirectionUsageCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RouteSegmentCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RouteSegmentCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RouteSegmentCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RouteTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RouteTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RouteTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RunwayLightingPresenceIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RunwayLightingPresenceIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RunwayLightingPresenceIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RunwayPavementEvaluationMethodCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RunwayPavementEvaluationMethodCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RunwayPavementEvaluationMethodCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RunwayPavementMaximumTyrePressureCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RunwayPavementMaximumTyrePressureCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RunwayPavementMaximumTyrePressureCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RunwayPavementSubgradeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RunwayPavementSubgradeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RunwayPavementSubgradeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const RunwayPavementTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const RunwayPavementTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const RunwayPavementTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const SecurityClassificationLevelCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const SecurityClassificationLevelCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const SecurityClassificationLevelCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const SolidSurfaceStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const SolidSurfaceStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const SolidSurfaceStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const SolidSurfaceStatusSurfaceConditionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const SolidSurfaceStatusSurfaceConditionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const SolidSurfaceStatusSurfaceConditionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const SolidSurfaceStatusSurfaceFirmnessCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const SolidSurfaceStatusSurfaceFirmnessCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const SolidSurfaceStatusSurfaceFirmnessCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const SpeedPrecisionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const SpeedPrecisionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const SpeedPrecisionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const StorageCapabilityConditionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const StorageCapabilityConditionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const StorageCapabilityConditionCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const StorageCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const StorageCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const StorageCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const SubsurfaceVesselTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const SubsurfaceVesselTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const SubsurfaceVesselTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const SubsurfaceVesselTypeTorpedoLoadingGearIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const SubsurfaceVesselTypeTorpedoLoadingGearIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const SubsurfaceVesselTypeTorpedoLoadingGearIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const SupportCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const SupportCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const SupportCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const SupportCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const SupportCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const SupportCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const SurfaceCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const SurfaceCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const SurfaceCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const SurfaceVesselTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const SurfaceVesselTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const SurfaceVesselTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const SurveillanceCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const SurveillanceCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const SurveillanceCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const SurveillanceCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const SurveillanceCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const SurveillanceCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const TargetEngagementAuthorityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const TargetEngagementAuthorityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const TargetEngagementAuthorityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const TargetPersonnelProtectionCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const TargetPersonnelProtectionCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const TargetPersonnelProtectionCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const TaskFormationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const TaskFormationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const TaskFormationTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const TransmissionCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const TransmissionCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const TransmissionCapabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const TransmissionCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const TransmissionCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const TransmissionCapabilityDescriptorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const UnitTypeArmCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const UnitTypeArmCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const UnitTypeArmCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const UnitTypeArmSpecialisationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const UnitTypeArmSpecialisationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const UnitTypeArmSpecialisationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const UnitTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const UnitTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const UnitTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const UnitTypeGeneralMobilityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const UnitTypeGeneralMobilityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const UnitTypeGeneralMobilityCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const UnitTypeQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const UnitTypeQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const UnitTypeQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const UnitTypeSizeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const UnitTypeSizeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const UnitTypeSizeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const UnitTypeSupplementarySpecialisationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const UnitTypeSupplementarySpecialisationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const UnitTypeSupplementarySpecialisationCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const UsageStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const UsageStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const UsageStatusCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const UxoStatusExposureCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const UxoStatusExposureCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const UxoStatusExposureCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const UxoStatusQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const UxoStatusQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const UxoStatusQualifierCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const VegetationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const VegetationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const VegetationCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const VegetationSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const VegetationSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const VegetationSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const VehicleTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const VehicleTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const VehicleTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const VerticalDistanceReferenceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const VerticalDistanceReferenceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const VerticalDistanceReferenceCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const VesselTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const VesselTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const VesselTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const VesselTypePropulsionTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const VesselTypePropulsionTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const VesselTypePropulsionTypeCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const VisibilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const VisibilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const VisibilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const WeaponTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const WeaponTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const WeaponTypeCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const WeaponTypeFireGuidanceIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const WeaponTypeFireGuidanceIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const WeaponTypeFireGuidanceIndicatorCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const WeaponTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const WeaponTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const WeaponTypeSubcategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const WindAirStabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const WindAirStabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const WindAirStabilityCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const WindAltitudeLayerCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const WindAltitudeLayerCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const WindAltitudeLayerCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMElement&, const WindCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xercesc::DOMAttr&, const WindCategoryCode&);
 
+  SUSTAIN_XSD_API
   void
   operator<< (::xml_schema::list_stream&,
               const WindCategoryCode&);
