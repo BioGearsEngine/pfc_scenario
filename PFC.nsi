@@ -22,7 +22,7 @@ Section "Install"
 	File "${QTDIR}\bin\Qt5Widgets.dll"
 	File "${BUILDDIR}\outputs\Release\bin\xerces-c_3_2.dll"
 	File "C:\windows\system32\VCRUNTIME140.dll"
-	File /r "${BUILDDIR}\outputs\Release\bin\scenario_builder.exe"
+	File /r "${BUILDDIR}\outputs\Release\bin\ScenarioBuilder.exe"
 	SetOutPath $INSTDIR\plugins
 	File /r "${QTDIR}\plugins\imageformats"
 	File /r "${QTDIR}\plugins\platforms"

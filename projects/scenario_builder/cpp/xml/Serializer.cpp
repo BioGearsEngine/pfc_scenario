@@ -127,16 +127,16 @@ bool Serializer::save_as(const QString& filename) const
   mz_zip_writer_add_buffer(writer, (void*)text_ptr.c_str(), (int32_t)text_ptr.length(), &file_info);
 
   std::vector<char const*> schemas = {
-    "xsd/pfc_scenario_0.2.xsd",
-    "xsd/pfc_scenario_complex_types_0.2.xsd",
-    // "xsd/msdl_simple_types_1.0.0.xsd",
-    // "xsd/msdl_complex_types_1.0.0.xsd",
-    // "xsd/msdl_complex_types_1.0.0.xsd",
-    // "xsd/msdl_codes_1.0.0.xsd",
-    // "xsd/military_scenario_1.0.0.xsd",
-    // "xsd/extern/jc3iedm_meterological.xsd",
-    // "xsd/extern/jc3iedm-3.1-codes-20061208.xsd",
-    // "xsd/extern/model_id_v2006_final.xsd"
+    "xsd/ver_0.3/pfc_scenario_0.3.xsd",
+    "xsd/ver_0.3/pfc_scenario_complex_types_0.3.xsd",
+    "xsd/ver_0.3/msdl_simple_types_1.0.0.xsd",
+    "xsd/ver_0.3/msdl_complex_types_1.0.0.xsd",
+    "xsd/ver_0.3/msdl_complex_types_1.0.0.xsd",
+    "xsd/ver_0.3/msdl_codes_1.0.0.xsd",
+    "xsd/ver_0.3/military_scenario_1.0.0.xsd",
+    "xsd/ver_0.3/extern/jc3iedm_meterological.xsd",
+    "xsd/ver_0.3/extern/jc3iedm-3.1-codes-20061208.xsd",
+    "xsd/ver_0.3/extern/model_id_v2006_final.xsd"
   };
   std::string file_contents;
   for (auto& schema : schemas) {
@@ -560,7 +560,7 @@ auto Serializer::generate_pfc_stream() const -> std::stringstream
 
   xml_schema::namespace_infomap info;
   info[""].name = "com:ara:pfc:training:1";
-  info[""].schema = "pfc_scenario_0.2.xsd";
+  info[""].schema = "pfc_scenario_0.3.xsd";
   std::stringstream pfc_content;
   Scenario(pfc_content, pfc_scenario, info);
   return pfc_content;
