@@ -62,32 +62,67 @@ add_source_files(XSD_HDRS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/xsd/cpp
 add_source_files(XSD_SRCS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/xsd/cpp 
                 REGEX "*.cxx" SOURCE_GROUP  "Source Files\\xsd")
 
+set(PFC_SCHEMA_VERSION 0.3 CACHE STRING "Version of Scehema to compile against. DO_NOT_CHANGE")
+mark_as_advanced(PFC_SCHEMA_VERSION)
+
 set ( XSD_FILES
-    "xsd/pfc_scenario_0.2.xsd"
-    "xsd/pfc_scenario_complex_types_0.2.xsd"
-    "xsd/msdl_simple_types_1.0.0.xsd"
-    "xsd/msdl_complex_types_1.0.0.xsd"
-    "xsd/msdl_complex_types_1.0.0.xsd"
-    "xsd/msdl_codes_1.0.0.xsd"
-    "xsd/military_scenario_1.0.0.xsd"
-    "xsd/extern/jc3iedm_meterological.xsd"
-    "xsd/extern/jc3iedm-3.1-codes-20061208.xsd"
-    "xsd/extern/model_id_v2006_final.xsd"
+    "xsd/ver_${PFC_SCHEMA_VERSION}/pfc_scenario.xsd"
+    "xsd/ver_${PFC_SCHEMA_VERSION}/pfc_scenario_complex_types.xsd"
+    "xsd/ver_${PFC_SCHEMA_VERSION}/msdl_simple_types_1.0.0.xsd"
+    "xsd/ver_${PFC_SCHEMA_VERSION}/msdl_complex_types_1.0.0.xsd"
+    "xsd/ver_${PFC_SCHEMA_VERSION}/msdl_codes_1.0.0.xsd"
+    "xsd/ver_${PFC_SCHEMA_VERSION}/military_scenario_1.0.0.xsd"
+    "xsd/ver_${PFC_SCHEMA_VERSION}/extern/jc3iedm_meterological.xsd"
+    "xsd/ver_${PFC_SCHEMA_VERSION}/extern/jc3iedm-3.1-codes-20061208.xsd"
+    "xsd/ver_${PFC_SCHEMA_VERSION}/extern/model_id_v2006_final.xsd"
   )
+   
+  
+  function(generate_hex_header)
+    set(options )
+    set(oneValueArgs INPUT OUTPUT)
+    set(multiValueArgs NAMESPACE)
+    cmake_parse_arguments("" "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN} )
+
+    if (_INPUT AND _OUTPUT)
+      add_custom_command(
+        OUTPUT  ${_OUTPUT}
+        DEPENDS ${_INPUT}
+        COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_SOURCE_DIR}/c_encode_file.cmake -DIN="${_INPUT}" -DOUT="${_OUTPUT}" -DNS="${_NAMESPACE}"
+      )
+      get_filename_component( content_name ${_INPUT} NAME_WE)
+      message(STATUS generate_${content_name})
+      add_custom_target( generate_${content_name}
+        OUTPUT  ${PROJECT_BINARY_DIR}/schema/${_schema_we}_${PFC_SCHEMA_VERSION}.xsd
+        DEPENDS ${_OUTPUT}
+      )  
+      set_target_properties(generate_${content_name} PROPERTIES 
+        FOLDER "GENERATORS"
+      )
+    else()    
+      message(FATAL_ERROR "generate_hex_header requires arguments INPUT <file> and OUTPUT <file> ")
+    endif()
+  
+  endfunction(generate_hex_header)
 
   foreach(schema IN LISTS XSD_FILES)
       message(STATUS "Tracking ${schema}")
-	  add_custom_command(
-		OUTPUT  ${PROJECT_BINARY_DIR}/${schema}
-		DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${schema}
-		COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/${schema} ${PROJECT_BINARY_DIR}/${schema}
-		COMMAND ${CMAKE_COMMAND} -E echo ${CMAKE_CURRENT_SOURCE_DIR}/${schema} ${PROJECT_BINARY_DIR}/${schema}
-	  )	  
+
+      get_filename_component(_schema_we ${schema} NAME_WE )
+    add_custom_command(
+    OUTPUT  ${PROJECT_BINARY_DIR}/schema/${_schema_we}_${PFC_SCHEMA_VERSION}.xsd
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${schema}
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/${schema} ${PROJECT_BINARY_DIR}/schema/${_schema_we}_${PFC_SCHEMA_VERSION}.xsd
+    COMMAND ${CMAKE_COMMAND} -E echo ${CMAKE_CURRENT_SOURCE_DIR}/${schema} ${PROJECT_BINARY_DIR}/schema/${_schema_we}_${PFC_SCHEMA_VERSION}.xsd
+    )    
+
+      generate_hex_header( NAMESPACE pfc io
+      INPUT ${CMAKE_CURRENT_SOURCE_DIR}/${schema} OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/cpp/${schema}.h )
   endforeach()
 
   add_custom_target( prepare_runtime_dir
-	  DEPENDS ${XSD_FILES}
-	  COMMENT "Scanning for need to stage runtime dir"
+    DEPENDS ${XSD_FILES}
+    COMMENT "Scanning for need to stage runtime dir"
   )
 
 
