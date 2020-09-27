@@ -12,17 +12,20 @@
       string(REGEX REPLACE "(${TOUPLE_LIMIT})" "\\1\n\        " c_tuples "${_content}")
       string(REGEX REPLACE "([0-9a-f][0-9a-f])" "0x\\1, " c_tuples ${c_tuples})
       string(REGEX REPLACE ", " "," c_tuples ${c_tuples})
-      string(REGEX REPLACE ", $" "" c_tuples ${c_tuples})
+      string(REGEX REPLACE ",$" "" c_tuples ${c_tuples})
       file (WRITE ${_OUTPUT} "#pragma once\n")
       file (APPEND ${_OUTPUT} "\n\n" )
 
       foreach (_ns IN LISTS _NAMESPACE)
          file(APPEND ${_OUTPUT} "namespace ${_ns} { \n")
       endforeach()
-
-      file (APPEND ${_OUTPUT} "constexpr char  ${content_name}[]={\n        ") 
-      file (APPEND ${_OUTPUT} ${c_tuples})
-      file (APPEND ${_OUTPUT}  "\n};\n\n")
+      string(REGEX REPLACE "[- ]" "_" safe_content_name "${content_name}")
+      file (APPEND ${_OUTPUT} "  constexpr unsigned char  ${safe_content_name}_text[]={\n        "
+                   ${c_tuples}
+                    "\n};\n"
+                   "  constexpr size_t  size_of_${safe_content_name}=sizeof(${safe_content_name}_text);\n"
+                   "\n\n"
+      )
 
       foreach (_ns IN LISTS _NAMESPACE)
          file(APPEND ${_OUTPUT} "}\n")
@@ -33,5 +36,4 @@
     endif()
   endfunction(generate_hex_header)
 
-
-  generate_hex_header(INPUT ${IN} OUTPUT ${OUT} NAMESPACE ${NS})
+  generate_hex_header(INPUT "${IN}" OUTPUT "${OUT}" NAMESPACE "${NS}")

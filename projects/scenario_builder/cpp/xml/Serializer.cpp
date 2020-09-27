@@ -27,6 +27,19 @@
 #include <QSqlQuery>
 #include <fstream>
 
+
+//Include encoded header files.
+#include "ver_0.3/military_scenario_1.0.0.xsd.h"
+#include "ver_0.3/msdl_codes_1.0.0.xsd.h"
+#include "ver_0.3/msdl_complex_types_1.0.0.xsd.h"
+#include "ver_0.3/msdl_simple_types_1.0.0.xsd.h"
+#include "ver_0.3/pfc_scenario.xsd.h"
+#include "ver_0.3/pfc_scenario_complex_types.xsd.h"
+#include "ver_0.3/extern/jc3iedm-3.1-codes-20061208.xsd.h"
+#include "ver_0.3/extern/jc3iedm_meterological.xsd.h"
+#include "ver_0.3/extern/model_id_v2006_final.xsd.h"
+
+
 template <typename CharT, typename TraitsT = std::char_traits<CharT>>
 class vectorwrapbuf : public std::basic_streambuf<CharT, TraitsT> {
 public:
@@ -114,44 +127,30 @@ bool Serializer::save_as(const QString& filename) const
   file_info.compression_method = MZ_COMPRESS_METHOD_DEFLATE;
   file_info.filename = text_name.c_str();
   file_info.uncompressed_size = text_ptr.length();
-  std::cout << file_info.uncompressed_size << "\n";
-  std::cout << text_ptr << "\n";
   mz_zip_writer_add_buffer(writer, (void*)text_ptr.c_str(), (int32_t)text_ptr.length(), &file_info);
 
   text_name = "Scenario.pfc.xml";
   text_ptr = pfc_stream.str();
   file_info.filename = text_name.c_str();
   file_info.uncompressed_size = text_ptr.length();
-  std::cout << file_info.uncompressed_size << "\n";
-  std::cout << text_ptr << "\n";
   mz_zip_writer_add_buffer(writer, (void*)text_ptr.c_str(), (int32_t)text_ptr.length(), &file_info);
 
-  std::vector<char const*> schemas = {
-    "xsd/ver_0.3/pfc_scenario_0.3.xsd",
-    "xsd/ver_0.3/pfc_scenario_complex_types_0.3.xsd",
-    "xsd/ver_0.3/msdl_simple_types_1.0.0.xsd",
-    "xsd/ver_0.3/msdl_complex_types_1.0.0.xsd",
-    "xsd/ver_0.3/msdl_complex_types_1.0.0.xsd",
-    "xsd/ver_0.3/msdl_codes_1.0.0.xsd",
-    "xsd/ver_0.3/military_scenario_1.0.0.xsd",
-    "xsd/ver_0.3/extern/jc3iedm_meterological.xsd",
-    "xsd/ver_0.3/extern/jc3iedm-3.1-codes-20061208.xsd",
-    "xsd/ver_0.3/extern/model_id_v2006_final.xsd"
-  };
-  std::string file_contents;
-  for (auto& schema : schemas) {
-    std::fstream fileIO{ schema };
-    if (fileIO.is_open()) {
-      fileIO.seekg(0, std::ios::end);
-      file_contents.reserve(fileIO.tellg());
-      fileIO.seekg(0, std::ios::beg);
 
-      file_contents.assign(std::istreambuf_iterator<char>(fileIO),
-                           std::istreambuf_iterator<char>());
-      file_info.filename = schema;
-      file_info.uncompressed_size = file_contents.length();
-      mz_zip_writer_add_buffer(writer, (void*)file_contents.c_str(), (int32_t)file_contents.length(), &file_info);
-    }
+  std::vector<std::tuple<char const*,size_t,unsigned char const *>> schemas = {
+     {"xsd/pfc_scenario_0.3.xsd", io::size_of_pfc_scenario, io::pfc_scenario_text }
+    ,{"xsd/pfc_scenario_complex_types_0.3.xsd",   io::size_of_pfc_scenario_complex_types ,io::pfc_scenario_complex_types_text}
+    ,{"xsd/msdl_simple_types_1.0.0.xsd",          io::size_of_msdl_simple_types_1 ,io::msdl_simple_types_1_text}
+    ,{"xsd/msdl_complex_types_1.0.0.xsd",         io::size_of_msdl_complex_types_1 ,io::msdl_complex_types_1_text}
+    ,{"xsd/msdl_codes_1.0.0.xsd",                 io::size_of_msdl_codes_1 ,io::msdl_codes_1_text}
+    ,{"xsd/military_scenario_1.0.0.xsd",          io::size_of_military_scenario_1 ,io::military_scenario_1_text}
+    ,{"xsd/extern/jc3iedm_meterological.xsd",     io::size_of_jc3iedm_meterological , io::jc3iedm_meterological_text}
+    ,{"xsd/extern/jc3iedm-3.1-codes-20061208.xsd",io::size_of_jc3iedm_3 ,io::jc3iedm_3_text}
+    ,{"xsd/extern/model_id_v2006_final.xsd",      io::size_of_model_id_v2006_final ,io::model_id_v2006_final_text}
+  };
+  for (auto& tuple : schemas) {
+  file_info.filename = std::get<0>(tuple);
+    file_info.uncompressed_size = std::get<1>(tuple);
+    mz_zip_writer_add_buffer(writer, (void*)std::get<2>(tuple), (int32_t)std::get<1>(tuple), &file_info);
   }
 
   mz_zip_writer_close(writer);

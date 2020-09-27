@@ -17,7 +17,6 @@ Page {
       var recent_files = backend.get_recent_scenario_files();
       var i = 0;
       for (i = 0;i < 10;i++) {
-        console.log(recent_files[i])
         if (recent_files[i] != "") {
           recentFileList.append({'path':recent_files[i],'name':'NAME','last':'LAST'})
         }
