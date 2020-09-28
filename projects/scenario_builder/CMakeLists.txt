@@ -84,9 +84,12 @@ set ( XSD_FILES
     set(multiValueArgs NAMESPACE)
     cmake_parse_arguments("" "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN} )
     string (REPLACE ";" "\\;" _NS_SAFE "${_NAMESPACE}")
+
+    set(_header ${_OUTPUT}.hxx)
+    set(_source ${_OUTPUT}.cxx)
     if (_INPUT AND _OUTPUT)
-      if( NOT EXISTS ${_OUTPUT} )
-        message(STATUS "\tGenerating ${_OUTPUT}")
+      if( NOT EXISTS ${_header} OR NOT EXISTS ${_source} )
+        message(STATUS "\tGenerating \n\t\t${_header}\n\t\t${_source}")
         execute_process( WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/
         COMMAND ${CMAKE_COMMAND} -DIN=${_INPUT} -DOUT=${_OUTPUT} -DNS=${_NS_SAFE}  -P ${PROJECT_SOURCE_DIR}/cmake/common/c_encode_file.cmake
                          ERROR_VARIABLE CMAKE_ERROR
@@ -100,7 +103,7 @@ set ( XSD_FILES
         endif(CMAKE_ERROR)
      endif()
      add_custom_command(
-        OUTPUT  ${_OUTPUT}
+        OUTPUT  "${_OUTPUT}.hxx" "${_OUTPUT}.cxx"
         DEPENDS ${_INPUT} ${PROJECT_SOURCE_DIR}/cmake/common/c_encode_file.cmake
         COMMAND ${CMAKE_COMMAND} -DIN="${_INPUT}" -DOUT="${_OUTPUT}" -DNS="${_NS_SAFE}"  -P "${PROJECT_SOURCE_DIR}/cmake/common/c_encode_file.cmake"
       )
@@ -125,13 +128,15 @@ set ( XSD_FILES
       DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${XSD_FILE_PREFIX}${schema}
       COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}${XSD_FILE_PREFIX}${schema} ${PROJECT_BINARY_DIR}/schema/${_schema_we}_${PFC_SCHEMA_VERSION}.xsd
       COMMAND ${CMAKE_COMMAND} -E echo ${CMAKE_CURRENT_SOURCE_DIR}${XSD_FILE_PREFIX}${schema} ${PROJECT_BINARY_DIR}/schema/${_schema_we}_${PFC_SCHEMA_VERSION}.xsd
-    )    
+    )
 
-    generate_hex_header( NAMESPACE pfc io INPUT ${CMAKE_CURRENT_SOURCE_DIR}/${XSD_FILE_PREFIX}${schema} OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/generated/c_encoded/ver_${PFC_SCHEMA_VERSION}/${schema}.h )
+    generate_hex_header( NAMESPACE pfc io INPUT ${CMAKE_CURRENT_SOURCE_DIR}/${XSD_FILE_PREFIX}${schema} OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/generated/c_encoded/ver_${PFC_SCHEMA_VERSION}/${schema} )
   endforeach()
 
   add_source_files(GEN_HDRS LOCATION ${CMAKE_CURRENT_BINARY_DIR}/generated/c_encoded/ver_${PFC_SCHEMA_VERSION}/
-                REGEX "*.h" SOURCE_GROUP  "Headers\\Generated\\ver_${PFC_SCHEMA_VERSION}\\")
+                REGEX "*.hxx" SOURCE_GROUP  "Headers\\Generated\\ver_${PFC_SCHEMA_VERSION}\\")
+  add_source_files(GEN_HDRS LOCATION ${CMAKE_CURRENT_BINARY_DIR}/generated/c_encoded/ver_${PFC_SCHEMA_VERSION}/
+                REGEX "*.cxx" SOURCE_GROUP  "Sources\\Generated\\ver_${PFC_SCHEMA_VERSION}\\")
 
   add_custom_target( prepare_runtime_dir
     DEPENDS ${XSD_FILES}

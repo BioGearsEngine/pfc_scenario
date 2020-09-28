@@ -29,15 +29,15 @@
 
 
 //Include encoded header files.
-#include "ver_0.3/military_scenario_1.0.0.xsd.h"
-#include "ver_0.3/msdl_codes_1.0.0.xsd.h"
-#include "ver_0.3/msdl_complex_types_1.0.0.xsd.h"
-#include "ver_0.3/msdl_simple_types_1.0.0.xsd.h"
-#include "ver_0.3/pfc_scenario.xsd.h"
-#include "ver_0.3/pfc_scenario_complex_types.xsd.h"
-#include "ver_0.3/extern/jc3iedm-3.1-codes-20061208.xsd.h"
-#include "ver_0.3/extern/jc3iedm_meterological.xsd.h"
-#include "ver_0.3/extern/model_id_v2006_final.xsd.h"
+#include "ver_0.3/military_scenario_1.0.0.xsd.hxx"
+#include "ver_0.3/msdl_codes_1.0.0.xsd.hxx"
+#include "ver_0.3/msdl_complex_types_1.0.0.xsd.hxx"
+#include "ver_0.3/msdl_simple_types_1.0.0.xsd.hxx"
+#include "ver_0.3/pfc_scenario.xsd.hxx"
+#include "ver_0.3/pfc_scenario_complex_types.xsd.hxx"
+#include "ver_0.3/extern/jc3iedm-3.1-codes-20061208.xsd.hxx"
+#include "ver_0.3/extern/jc3iedm_meterological.xsd.hxx"
+#include "ver_0.3/extern/model_id_v2006_final.xsd.hxx"
 
 
 template <typename CharT, typename TraitsT = std::char_traits<CharT>>
@@ -52,6 +52,18 @@ public:
 namespace pfc {
 
 xml_schema::date get_now();
+
+std::vector<std::tuple<char const*,size_t,unsigned char const *>> schemas_v3 = {
+     {"xsd/pfc_scenario_0.3.xsd", io::pfc_scenario_text_size(), io::get_pfc_scenario_text() }
+    ,{"xsd/pfc_scenario_complex_types_0.3.xsd",   io::pfc_scenario_complex_types_text_size() ,io::get_pfc_scenario_complex_types_text()}
+    ,{"xsd/msdl_simple_types_1.0.0.xsd",          io::msdl_simple_types_1_text_size() ,io::get_msdl_simple_types_1_text()}
+    ,{"xsd/msdl_complex_types_1.0.0.xsd",         io::msdl_complex_types_1_text_size() ,io::get_msdl_complex_types_1_text()}
+    ,{"xsd/msdl_codes_1.0.0.xsd",                 io::msdl_codes_1_text_size() ,io::get_msdl_codes_1_text()}
+    ,{"xsd/military_scenario_1.0.0.xsd",          io::military_scenario_1_text_size() ,io::get_military_scenario_1_text()}
+    ,{"xsd/extern/jc3iedm_meterological.xsd",     io::jc3iedm_meterological_text_size() , io::get_jc3iedm_meterological_text()}
+    ,{"xsd/extern/jc3iedm-3.1-codes-20061208.xsd",io::jc3iedm_3_text_size() ,io::get_jc3iedm_3_text()}
+    ,{"xsd/extern/model_id_v2006_final.xsd",      io::model_id_v2006_final_text_size() ,io::get_model_id_v2006_final_text()}
+};
 
 Serializer::Serializer(QObject* parent)
   : QObject(parent)
@@ -136,18 +148,7 @@ bool Serializer::save_as(const QString& filename) const
   mz_zip_writer_add_buffer(writer, (void*)text_ptr.c_str(), (int32_t)text_ptr.length(), &file_info);
 
 
-  std::vector<std::tuple<char const*,size_t,unsigned char const *>> schemas = {
-     {"xsd/pfc_scenario_0.3.xsd", io::size_of_pfc_scenario, io::pfc_scenario_text }
-    ,{"xsd/pfc_scenario_complex_types_0.3.xsd",   io::size_of_pfc_scenario_complex_types ,io::pfc_scenario_complex_types_text}
-    ,{"xsd/msdl_simple_types_1.0.0.xsd",          io::size_of_msdl_simple_types_1 ,io::msdl_simple_types_1_text}
-    ,{"xsd/msdl_complex_types_1.0.0.xsd",         io::size_of_msdl_complex_types_1 ,io::msdl_complex_types_1_text}
-    ,{"xsd/msdl_codes_1.0.0.xsd",                 io::size_of_msdl_codes_1 ,io::msdl_codes_1_text}
-    ,{"xsd/military_scenario_1.0.0.xsd",          io::size_of_military_scenario_1 ,io::military_scenario_1_text}
-    ,{"xsd/extern/jc3iedm_meterological.xsd",     io::size_of_jc3iedm_meterological , io::jc3iedm_meterological_text}
-    ,{"xsd/extern/jc3iedm-3.1-codes-20061208.xsd",io::size_of_jc3iedm_3 ,io::jc3iedm_3_text}
-    ,{"xsd/extern/model_id_v2006_final.xsd",      io::size_of_model_id_v2006_final ,io::model_id_v2006_final_text}
-  };
-  for (auto& tuple : schemas) {
+  for (auto& tuple : schemas_v3) {
   file_info.filename = std::get<0>(tuple);
     file_info.uncompressed_size = std::get<1>(tuple);
     mz_zip_writer_add_buffer(writer, (void*)std::get<2>(tuple), (int32_t)std::get<1>(tuple), &file_info);
@@ -166,6 +167,9 @@ bool Serializer::load(const QString& filename)
     //Short Circuit We do not have a valid database ptr
     return false;
   }
+
+  _known_schemas.clear();
+  _known_images.clear();
 
   SQLite3Driver scratch_db{ "loading.sqlite" };
   scratch_db.open(scratch_db.Name());
@@ -210,6 +214,13 @@ bool Serializer::load(const QString& filename)
   } while (err == MZ_OK);
   mz_zip_reader_delete(&reader);
 
+  if ( _known_schemas.size() != schemas_v3.size()) {
+    for ( auto schema : schemas_v3) {
+      std::fstream schema_file { std::get<0>(schema) };
+      schema_file.write((char const*)std::get<2>(schema), std::get<1>(schema));
+    }
+  }
+
   //Recreating Reader
   reader = nullptr;
   mz_zip_reader_create(&reader);
@@ -234,7 +245,7 @@ bool Serializer::load(const QString& filename)
       //If Scenarios grow beyond 50Mbs concider streamed reading and background loading to speed up launching of the application.
 
       std::vector<char> buffer;
-      buffer.resize(file_info->uncompressed_size);
+      buffer.resize(file_info->uncompressed_size+1);
       auto bytes_read = mz_zip_reader_entry_read(reader, &buffer[0], file_info->uncompressed_size);
       vectorwrapbuf<char> schema_buffer{ buffer };
       std::istream i_stream(&schema_buffer);

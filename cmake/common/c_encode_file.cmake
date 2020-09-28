@@ -13,23 +13,51 @@
       string(REGEX REPLACE "([0-9a-f][0-9a-f])" "0x\\1, " c_tuples ${c_tuples})
       string(REGEX REPLACE ", " "," c_tuples ${c_tuples})
       string(REGEX REPLACE ",$" "" c_tuples ${c_tuples})
-      file (WRITE ${_OUTPUT} "#pragma once\n")
-      file (APPEND ${_OUTPUT} "\n\n" )
+      string(MAKE_C_IDENTIFIER  "${content_name}" safe_content_name)
+
+      #Header File
+      set(header_file "${_OUTPUT}.hxx")
+      file (WRITE ${header_file} "#pragma once\n")
+      file (APPEND ${header_file} "\n\n" )
+      foreach (_ns IN LISTS _NAMESPACE)
+         file(APPEND ${header_file} "namespace ${_ns} { \n")
+      endforeach()
+      file (APPEND ${header_file} 
+                   "  unsigned char const*  get_${safe_content_name}_text();\n"
+                   "  size_t  ${safe_content_name}_text_size();\n"
+      )
+      foreach (_ns IN LISTS _NAMESPACE)
+         file(APPEND ${header_file} "}\n")
+      endforeach()
+
+
+      #Source File
+      set(source_file "${_OUTPUT}.cxx")
+      get_filename_component( import_name ${_INPUT} NAME)
+      file (WRITE ${source_file} "#include \"${import_name}.hxx\"\n")
+      file (APPEND ${source_file} "\n\n" )
 
       foreach (_ns IN LISTS _NAMESPACE)
-         file(APPEND ${_OUTPUT} "namespace ${_ns} { \n")
+         file(APPEND ${source_file} "namespace ${_ns} { \n")
       endforeach()
-      string(REGEX REPLACE "[- ]" "_" safe_content_name "${content_name}")
-      file (APPEND ${_OUTPUT} "  constexpr unsigned char  ${safe_content_name}_text[]={\n        "
+      file (APPEND ${source_file} 
+                   "  constexpr unsigned char  ${safe_content_name}_text[]={\n        "
                    ${c_tuples}
                     "\n};\n"
                    "  constexpr size_t  size_of_${safe_content_name}=sizeof(${safe_content_name}_text);\n"
                    "\n\n"
+                   "  unsigned char const*  get_${safe_content_name}_text(){ \n"
+                   "    return ${safe_content_name}_text;\n"
+                   "  }\n\n"
+                   "  size_t ${safe_content_name}_text_size() {"
+                   "    return size_of_${safe_content_name};\n"
+                   "  }\n\n"
       )
-
       foreach (_ns IN LISTS _NAMESPACE)
-         file(APPEND ${_OUTPUT} "}\n")
+         file(APPEND ${source_file} "}\n")
       endforeach()
+
+
 
     else()    
       message(FATAL_ERROR "generate_hex_header requires arguments INPUT <file> and OUTPUT <file> ")
