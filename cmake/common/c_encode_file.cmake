@@ -35,13 +35,14 @@
       set(source_file "${_OUTPUT}.cxx")
       get_filename_component( import_name ${_INPUT} NAME)
       file (WRITE ${source_file} "#include \"${import_name}.hxx\"\n")
+	  file (APPEND ${source_file} "\n#include <cstddef>\n")
       file (APPEND ${source_file} "\n\n" )
 
       foreach (_ns IN LISTS _NAMESPACE)
          file(APPEND ${source_file} "namespace ${_ns} { \n")
       endforeach()
       file (APPEND ${source_file} 
-                   "  constexpr unsigned char  ${safe_content_name}_text[]={\n        "
+                   " unsigned char const ${safe_content_name}_text[]={\n        "
                    ${c_tuples}
                     "\n};\n"
                    "  constexpr size_t  size_of_${safe_content_name}=sizeof(${safe_content_name}_text);\n"

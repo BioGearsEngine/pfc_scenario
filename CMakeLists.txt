@@ -28,6 +28,15 @@ include(cmake/UseGit.cmake)
     CMAKE_FIND_ROOT_PATH = ${CMAKE_FIND_ROOT_PATH}
     ")
 
+find_package(Git QUIET)
+configure_version_information(GIT_SUCESS MAJOR 7 MINOR 3 PATCH 1 TWEAK "Source" )
+if(GIT_FOUND AND NOT GIT_SUCESS)
+  # Update these variables to ensure out of source build have some sane tags
+  message(WARNING "GIT_EXECUTABLE was not found or no corrisponding GIT_REPO is avaliable." 
+  "If you are building with in a git repo you should ensure GIT is in your current path." 
+	"If you are building outside of a repo ignore this message.")
+endif()
+
  add_subdirectory(projects)
  
  
@@ -36,13 +45,13 @@ include(cmake/UseGit.cmake)
 ###############################################################################
 create_cache_file()
 create_stage()
-add_custom_command(TARGET STAGE POST_BUILD COMMAND ${CMAKE_COMMAND} -E echo "Generating Runtime")
+add_custom_command(TARGET BUNDLE_DLLS POST_BUILD COMMAND ${CMAKE_COMMAND} -E echo "Generating Runtime")
 foreach(dir IN LISTS CMAKE_PREFIX_PATH)
 if(EXISTS "${dir}\\plugins")
-  add_custom_command(TARGET STAGE POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${dir}\\plugins" $<TARGET_FILE_DIR:ScenarioBuilder>)
+  add_custom_command(TARGET BUNDLE_DLLS POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${dir}\\plugins" $<TARGET_FILE_DIR:ScenarioBuilder>)
 endif()
 if(EXISTS "${dir}\\qml")
-  add_custom_command(TARGET STAGE POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${dir}\\qml" $<TARGET_FILE_DIR:ScenarioBuilder>)
+  add_custom_command(TARGET BUNDLE_DLLS POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${dir}\\qml" $<TARGET_FILE_DIR:ScenarioBuilder>)
 endif()
 endforeach()
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ScenarioBuilder)
@@ -80,3 +89,4 @@ write_basic_package_version_file(
    ${Packages}
    DESTINATION lib/cmake/${ROOT_PROJECT_NAME}
  )
+generate_project_suffix()
