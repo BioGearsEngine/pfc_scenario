@@ -54,15 +54,15 @@ namespace pfc {
 xml_schema::date get_now();
 
 std::vector<std::tuple<char const*,size_t,unsigned char const *>> schemas_v3 = {
-     {"xsd/pfc_scenario_0.3.xsd", io::pfc_scenario_text_size(), io::get_pfc_scenario_text() }
-    ,{"xsd/pfc_scenario_complex_types_0.3.xsd",   io::pfc_scenario_complex_types_text_size() ,io::get_pfc_scenario_complex_types_text()}
-    ,{"xsd/msdl_simple_types_1.0.0.xsd",          io::msdl_simple_types_1_text_size() ,io::get_msdl_simple_types_1_text()}
-    ,{"xsd/msdl_complex_types_1.0.0.xsd",         io::msdl_complex_types_1_text_size() ,io::get_msdl_complex_types_1_text()}
-    ,{"xsd/msdl_codes_1.0.0.xsd",                 io::msdl_codes_1_text_size() ,io::get_msdl_codes_1_text()}
-    ,{"xsd/military_scenario_1.0.0.xsd",          io::military_scenario_1_text_size() ,io::get_military_scenario_1_text()}
-    ,{"xsd/extern/jc3iedm_meterological.xsd",     io::jc3iedm_meterological_text_size() , io::get_jc3iedm_meterological_text()}
-    ,{"xsd/extern/jc3iedm-3.1-codes-20061208.xsd",io::jc3iedm_3_text_size() ,io::get_jc3iedm_3_text()}
-    ,{"xsd/extern/model_id_v2006_final.xsd",      io::model_id_v2006_final_text_size() ,io::get_model_id_v2006_final_text()}
+     std::tuple<char const*,size_t,unsigned char const *>{"xsd/pfc_scenario_0.3.xsd", io::pfc_scenario_text_size(), io::get_pfc_scenario_text() }
+    ,std::tuple<char const*,size_t,unsigned char const *>{"xsd/pfc_scenario_complex_types_0.3.xsd",   io::pfc_scenario_complex_types_text_size() ,io::get_pfc_scenario_complex_types_text()}
+    ,std::tuple<char const*,size_t,unsigned char const *>{"xsd/msdl_simple_types_1.0.0.xsd",          io::msdl_simple_types_1_text_size() ,io::get_msdl_simple_types_1_text()}
+    ,std::tuple<char const*,size_t,unsigned char const *>{"xsd/msdl_complex_types_1.0.0.xsd",         io::msdl_complex_types_1_text_size() ,io::get_msdl_complex_types_1_text()}
+    ,std::tuple<char const*,size_t,unsigned char const *>{"xsd/msdl_codes_1.0.0.xsd",                 io::msdl_codes_1_text_size() ,io::get_msdl_codes_1_text()}
+    ,std::tuple<char const*,size_t,unsigned char const *>{"xsd/military_scenario_1.0.0.xsd",          io::military_scenario_1_text_size() ,io::get_military_scenario_1_text()}
+    ,std::tuple<char const*,size_t,unsigned char const *>{"xsd/extern/jc3iedm_meterological.xsd",     io::jc3iedm_meterological_text_size() , io::get_jc3iedm_meterological_text()}
+    ,std::tuple<char const*,size_t,unsigned char const *>{"xsd/extern/jc3iedm-3.1-codes-20061208.xsd",io::jc3iedm_3_text_size() ,io::get_jc3iedm_3_text()}
+    ,std::tuple<char const*,size_t,unsigned char const *>{"xsd/extern/model_id_v2006_final.xsd",      io::model_id_v2006_final_text_size() ,io::get_model_id_v2006_final_text()}
 };
 
 Serializer::Serializer(QObject* parent)

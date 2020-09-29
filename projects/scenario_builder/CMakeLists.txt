@@ -202,6 +202,7 @@ target_link_libraries(libScenarioBuilder PUBLIC
   Qt5::Qml
   minizip::lib
   Builder::serial
+ ${CMAKE_DL_LIBS}
 )
 
 set_target_properties(libScenarioBuilder
