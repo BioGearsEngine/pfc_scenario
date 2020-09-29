@@ -18,13 +18,16 @@
       #Header File
       set(header_file "${_OUTPUT}.hxx")
       file (WRITE ${header_file} "#pragma once\n")
-      file (APPEND ${header_file} "\n\n" )
+      file (APPEND ${header_file} "\n" 
+	                               "#include <cstddef>" 
+	                              "\n"
+	  )
       foreach (_ns IN LISTS _NAMESPACE)
          file(APPEND ${header_file} "namespace ${_ns} { \n")
       endforeach()
       file (APPEND ${header_file} 
                    "  unsigned char const*  get_${safe_content_name}_text();\n"
-                   "  size_t  ${safe_content_name}_text_size();\n"
+                   "  std::size_t  ${safe_content_name}_text_size();\n"
       )
       foreach (_ns IN LISTS _NAMESPACE)
          file(APPEND ${header_file} "}\n")
@@ -45,12 +48,12 @@
                    " unsigned char const ${safe_content_name}_text[]={\n        "
                    ${c_tuples}
                     "\n};\n"
-                   "  constexpr size_t  size_of_${safe_content_name}=sizeof(${safe_content_name}_text);\n"
+                   "  constexpr std::size_t  size_of_${safe_content_name}=sizeof(${safe_content_name}_text);\n"
                    "\n\n"
                    "  unsigned char const*  get_${safe_content_name}_text(){ \n"
                    "    return ${safe_content_name}_text;\n"
                    "  }\n\n"
-                   "  size_t ${safe_content_name}_text_size() {"
+                   "  std::size_t ${safe_content_name}_text_size() {"
                    "    return size_of_${safe_content_name};\n"
                    "  }\n\n"
       )
