@@ -19,9 +19,9 @@
       set(header_file "${_OUTPUT}.hxx")
       file (WRITE ${header_file} "#pragma once\n")
       file (APPEND ${header_file} "\n" 
-	                               "#include <cstddef>" 
-	                              "\n"
-	  )
+                                  "#include <cstddef>" 
+                                  "\n"
+    )
       foreach (_ns IN LISTS _NAMESPACE)
          file(APPEND ${header_file} "namespace ${_ns} { \n")
       endforeach()
@@ -38,7 +38,7 @@
       set(source_file "${_OUTPUT}.cxx")
       get_filename_component( import_name ${_INPUT} NAME)
       file (WRITE ${source_file} "#include \"${import_name}.hxx\"\n")
-	  file (APPEND ${source_file} "\n#include <cstddef>\n")
+      file (APPEND ${source_file} "\n#include <cstddef>\n")
       file (APPEND ${source_file} "\n\n" )
 
       foreach (_ns IN LISTS _NAMESPACE)
@@ -60,7 +60,6 @@
       foreach (_ns IN LISTS _NAMESPACE)
          file(APPEND ${source_file} "}\n")
       endforeach()
-
 
 
     else()    
