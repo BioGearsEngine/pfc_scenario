@@ -25,7 +25,7 @@ specific language governing permissions and limitations under the License.
 
 #include "SQLTables.h"
 namespace pfc {
-    class Serializer;
+class Serializer;
 class SQLite3Driver : public QObject {
   friend Serializer;
 
