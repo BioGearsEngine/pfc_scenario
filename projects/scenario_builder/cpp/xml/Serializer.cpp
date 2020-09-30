@@ -12,8 +12,7 @@
 #include <QDir>
 #include <QtDebug>
 
-// #include "../xsd/cpp/military_scenario_1.0.0.hxx"
-#include "../xsd/cpp/pfc_scenario_0.3.hxx"
+#include <pfc/schema/pfc_scenario.hxx>
 #include "SchemaUtils.h"
 
 #include "mz.h"
@@ -29,15 +28,15 @@
 #include <fstream>
 
 //Include encoded header files.
-#include "ver_0.3/extern/jc3iedm-3.1-codes-20061208.xsd.hxx"
-#include "ver_0.3/extern/jc3iedm_meterological.xsd.hxx"
-#include "ver_0.3/extern/model_id_v2006_final.xsd.hxx"
-#include "ver_0.3/military_scenario_1.0.0.xsd.hxx"
-#include "ver_0.3/msdl_codes_1.0.0.xsd.hxx"
-#include "ver_0.3/msdl_complex_types_1.0.0.xsd.hxx"
-#include "ver_0.3/msdl_simple_types_1.0.0.xsd.hxx"
-#include "ver_0.3/pfc_scenario.xsd.hxx"
-#include "ver_0.3/pfc_scenario_complex_types.xsd.hxx"
+#include <pfc/c_encoded/ver_0.3/extern/jc3iedm-3.1-codes-20061208.xsd.hxx>
+#include <pfc/c_encoded/ver_0.3/extern/jc3iedm_meterological.xsd.hxx>
+#include <pfc/c_encoded/ver_0.3/extern/model_id_v2006_final.xsd.hxx>
+#include <pfc/c_encoded/ver_0.3/military_scenario_1.0.0.xsd.hxx>
+#include <pfc/c_encoded/ver_0.3/msdl_codes_1.0.0.xsd.hxx>
+#include <pfc/c_encoded/ver_0.3/msdl_complex_types_1.0.0.xsd.hxx>
+#include <pfc/c_encoded/ver_0.3/msdl_simple_types_1.0.0.xsd.hxx>
+#include <pfc/c_encoded/ver_0.3/pfc_scenario.xsd.hxx>
+#include <pfc/c_encoded/ver_0.3/pfc_scenario_complex_types.xsd.hxx>
 
 template <typename CharT, typename TraitsT = std::char_traits<CharT>>
 class vectorwrapbuf : public std::basic_streambuf<CharT, TraitsT> {
