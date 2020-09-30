@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?purpose description="This schema defines MSDL extensions for PFC Training" ?>
-<?version number="0.2" date="2020-01-28"?>
+<?version number="0.3" date="2020-06-01"?>
 <?copyright statement="Copyright (c) 2019 by the Applied Resaearch Associates, Inc.
 4300 San Mateo Blvd. NE, Suite A-220
 Albuquerque, NM 87110
 All rights reserved.
 ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="com:ara:pfc:training:1" version="0.2" 
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="com:ara:pfc:training:1" version="0.3" 
   xmlns="com:ara:pfc:training:1" 
   xmlns:pfc="com:ara:pfc:training:1" 
   xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning">

@@ -52,8 +52,8 @@ namespace pfc {
 xml_schema::date get_now();
 
 std::vector<std::tuple<char const*,size_t,unsigned char const *>> schemas_v3 = {
-     std::tuple<char const*,size_t,unsigned char const *>{"xsd/pfc_scenario_0.3.xsd", io::pfc_scenario_text_size(), io::get_pfc_scenario_text() }
-    ,std::tuple<char const*,size_t,unsigned char const *>{"xsd/pfc_scenario_complex_types_0.3.xsd",   io::pfc_scenario_complex_types_text_size() ,io::get_pfc_scenario_complex_types_text()}
+     std::tuple<char const*,size_t,unsigned char const *>{"xsd/pfc_scenario.xsd", io::pfc_scenario_text_size(), io::get_pfc_scenario_text() }
+    ,std::tuple<char const*,size_t,unsigned char const *>{"xsd/pfc_scenario_complex_types.xsd",   io::pfc_scenario_complex_types_text_size() ,io::get_pfc_scenario_complex_types_text()}
     ,std::tuple<char const*,size_t,unsigned char const *>{"xsd/msdl_simple_types_1.0.0.xsd",          io::msdl_simple_types_1_text_size() ,io::get_msdl_simple_types_1_text()}
     ,std::tuple<char const*,size_t,unsigned char const *>{"xsd/msdl_complex_types_1.0.0.xsd",         io::msdl_complex_types_1_text_size() ,io::get_msdl_complex_types_1_text()}
     ,std::tuple<char const*,size_t,unsigned char const *>{"xsd/msdl_codes_1.0.0.xsd",                 io::msdl_codes_1_text_size() ,io::get_msdl_codes_1_text()}
@@ -221,7 +221,6 @@ bool Serializer::load(const QString& filename)
      
       QFileInfo schemaPath{ QString("tmp/") + std::get<0>( schema ) };
       if (!schemaPath.dir().exists()) {
-        qWarning() << "Creating working path " << schemaPath.dir().path();
         schemaPath.dir().mkpath(".");
       }
 
