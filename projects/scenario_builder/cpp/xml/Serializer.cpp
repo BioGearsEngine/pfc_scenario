@@ -10,6 +10,7 @@
 
 #include <QDebug>
 #include <QDir>
+#include <QtDebug>
 
 // #include "../xsd/cpp/military_scenario_1.0.0.hxx"
 #include "../xsd/cpp/pfc_scenario_0.3.hxx"
@@ -27,18 +28,16 @@
 #include <QSqlQuery>
 #include <fstream>
 
-
 //Include encoded header files.
+#include "ver_0.3/extern/jc3iedm-3.1-codes-20061208.xsd.hxx"
+#include "ver_0.3/extern/jc3iedm_meterological.xsd.hxx"
+#include "ver_0.3/extern/model_id_v2006_final.xsd.hxx"
 #include "ver_0.3/military_scenario_1.0.0.xsd.hxx"
 #include "ver_0.3/msdl_codes_1.0.0.xsd.hxx"
 #include "ver_0.3/msdl_complex_types_1.0.0.xsd.hxx"
 #include "ver_0.3/msdl_simple_types_1.0.0.xsd.hxx"
 #include "ver_0.3/pfc_scenario.xsd.hxx"
 #include "ver_0.3/pfc_scenario_complex_types.xsd.hxx"
-#include "ver_0.3/extern/jc3iedm-3.1-codes-20061208.xsd.hxx"
-#include "ver_0.3/extern/jc3iedm_meterological.xsd.hxx"
-#include "ver_0.3/extern/model_id_v2006_final.xsd.hxx"
-
 
 template <typename CharT, typename TraitsT = std::char_traits<CharT>>
 class vectorwrapbuf : public std::basic_streambuf<CharT, TraitsT> {
@@ -147,9 +146,8 @@ bool Serializer::save_as(const QString& filename) const
   file_info.uncompressed_size = text_ptr.length();
   mz_zip_writer_add_buffer(writer, (void*)text_ptr.c_str(), (int32_t)text_ptr.length(), &file_info);
 
-
   for (auto& tuple : schemas_v3) {
-  file_info.filename = std::get<0>(tuple);
+    file_info.filename = std::get<0>(tuple);
     file_info.uncompressed_size = std::get<1>(tuple);
     mz_zip_writer_add_buffer(writer, (void*)std::get<2>(tuple), (int32_t)std::get<1>(tuple), &file_info);
   }
@@ -166,6 +164,13 @@ bool Serializer::load(const QString& filename)
   if (!_db) {
     //Short Circuit We do not have a valid database ptr
     return false;
+  }
+
+  if (QFileInfo::exists("tmp")) {
+    QDir temporary_dir("tmp");
+    if (!temporary_dir.removeRecursively()) {
+      qWarning() << " Unable to remove tmp/";
+    }
   }
 
   _known_schemas.clear();
@@ -200,24 +205,39 @@ bool Serializer::load(const QString& filename)
   err = mz_zip_reader_goto_first_entry(reader);
   do {
     err = mz_zip_reader_entry_get_info(reader, &file_info);
+    destination = "tmp/";
+    destination += file_info->filename;
     if (strncmp(file_info->filename, "xsd/", 4) == 0) {
-      //NOTE: Might want to strip xsd:/
       _known_schemas.push_back(file_info->filename);
-      destination = "tmp/";
-      destination += file_info->filename;
-      mz_zip_reader_entry_save_file(reader, destination.c_str());
-    } else if (strncmp(file_info->filename, "images/", 7) == 0) {
-      //NOTE: Might want to strip images:/
+    } else if (strncmp(file_info->filename, "images/", 7) == 0) { 
       _known_images.push_back(file_info->filename);
     }
+    mz_zip_reader_entry_save_file(reader, destination.c_str());
     err = mz_zip_reader_goto_next_entry(reader);
   } while (err == MZ_OK);
   mz_zip_reader_delete(&reader);
 
-  if ( _known_schemas.size() != schemas_v3.size()) {
-    for ( auto schema : schemas_v3) {
-      std::fstream schema_file { std::get<0>(schema) };
-      schema_file.write((char const*)std::get<2>(schema), std::get<1>(schema));
+  if (_known_schemas.size() != schemas_v3.size()) {
+    for (auto schema : schemas_v3) {
+     
+      QFileInfo schemaPath{ QString("tmp/") + std::get<0>( schema ) };
+      if (!schemaPath.dir().exists()) {
+        qWarning() << "Creating working path " << schemaPath.dir().path();
+        schemaPath.dir().mkpath(".");
+      }
+
+      QFile schemaFileIO{ schemaPath.absoluteFilePath() };
+      if (!schemaFileIO.open(QIODevice::WriteOnly) ){
+        qWarning() << "Unable to open file " <<  schemaFileIO.fileName();
+      }
+      if ( -1 == schemaFileIO.write((char const*)std::get<2>(schema), std::get<1>(schema))) {
+        qWarning() << "Unexpected write failure for " << std::get<0>(schema);
+      }
+      if (!schemaFileIO.exists()) {
+        qWarning() << "Setup operation failed and " << std::get<0>(schema) << " was not created. Aborting Load";
+        mz_zip_reader_delete(&reader);
+        return err;
+      }
     }
   }
 
@@ -245,7 +265,7 @@ bool Serializer::load(const QString& filename)
       //If Scenarios grow beyond 50Mbs concider streamed reading and background loading to speed up launching of the application.
 
       std::vector<char> buffer;
-      buffer.resize(file_info->uncompressed_size+1);
+      buffer.resize(file_info->uncompressed_size + 1);
       auto bytes_read = mz_zip_reader_entry_read(reader, &buffer[0], file_info->uncompressed_size);
       vectorwrapbuf<char> schema_buffer{ buffer };
       std::istream i_stream(&schema_buffer);
@@ -301,7 +321,6 @@ bool Serializer::load(const QString& filename)
       vectorwrapbuf<char> schema_buffer{ buffer };
       std::istream i_stream(&schema_buffer);
       mz_zip_reader_entry_close(reader);
-
 
       try { // If the parsing fails this prints out every error
         auto scenario_schema = pfc::schema::Scenario(i_stream);
@@ -392,8 +411,7 @@ bool Serializer::load(const QString& filename)
         source.copy(target.fileName());
         _db->open();
         _db->refresh();
-        return  target.error() == QFile::NoError && source.error() == QFile::NoError;
-
+        return target.error() == QFile::NoError && source.error() == QFile::NoError;
 
       } catch (const xml_schema::exception& e) {
         std::cout << e << '\n';
