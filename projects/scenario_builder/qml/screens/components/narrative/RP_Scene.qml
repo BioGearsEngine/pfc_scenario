@@ -7,110 +7,135 @@ import "../common"
 
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
-Rectangle{
-    id: root  
-    property SQLBackend backend
-    property ListModel model
-    property int index
-    property int count
+Rectangle {
+  id : root
+  property SQLBackend backend
+  property ListModel model
+  property int index
+  property int count
 
-    Scene {
-      id : self
+  Scene {
+    id : self
+  }
+
+  function update_scene(values) {
+
+    if (model.count == 0) {
+      return
     }
-
-    function update_scene(values) {
-      if (model.count == 0) {
-        return
-      }
-      self.scene_id = values.id
-      self.name = nameEntry.text
-      self.description = descriptionEntry.text
-      self.details = detailEntry.text
-      self.weather = weatherEntry.text
-      root.backend.update_scene(self)
-    } 
-    border.color: 'black'
-    border.width: 1
-    ColumnLayout  {
-        width: parent.width
+    self.scene_id = values.id
+    self.name = nameEntry.text
+    self.description = descriptionEntry.text
+    self.details = detailEntry.text
+    self.weather = weatherEntry.text
+    self.time_of_day = timeEntry.text
+    root.backend.update_scene(self)
+  }
+  border.color : 'black'
+  border.width : 1
+  ColumnLayout {
+    width : parent.width
 
 
-        TextEntry {
-          Layout.fillWidth: true
-          Layout.leftMargin: 5
-          id: nameEntry
-          label : "Scene Name"
-          placeholderText: "String Field (128 Characters)"
-          onEditingFinished : {
-            var entry = root.model.get(root.index)
-            if (text != entry.name) {
-              entry.name = text
-              update_scene(entry)
-            }
-          }
-        }   
-        TextAreaEntry {
-          Layout.fillWidth: true
-          Layout.leftMargin: 5
-          id: descriptionEntry
-          label : "Description"
-          required: true
-          placeholderText: "Scene Description"
-          onEditingFinished : {
-            update_scene(root.model.get(root.index))
-          }
-        }   
-        TextAreaEntry {
-          Layout.fillWidth: true
-          Layout.leftMargin: 5
-          id: detailEntry
-          label : "Details"
-          required: true
-          placeholderText: "Scene Details"
-          onEditingFinished : {
-            update_scene(root.model.get(root.index))
-          }  
-      }
-        TextAreaEntry {
-          Layout.fillWidth: true
-          Layout.leftMargin: 5
-          id: weatherEntry
-          label : "Weather"
-          required: true
-          placeholderText: "Weather Details"
-          onEditingFinished : {
-            update_scene(root.model.get(root.index))
-          }  
-      }
-        TextEntry {
-          Layout.fillWidth: true
-          Layout.leftMargin: 5
-          id: timeEntry
-          label : "Time in Scenario"
-          placeholderText: "Time Input Field (3H20M)"
-          onLabelWidthChanged : {
-            //nameEntry.nameWidth         = timeScenarioEntry.nameWidth
-            //locationNameEntry.nameWidth = timeScenarioEntry.nameWidth
-            //timeOfDayEntry.nameWidth    = timeScenarioEntry.nameWidth
-            //environmentEntry.nameWidth  = timeScenarioEntry.nameWidth
-          }
-        } 
-    }
-    onIndexChanged : {
-      var values = model.get(root.index)
-      if(values && model.count != 0) {
-        nameEntry.text = values.name
-        descriptionEntry.text = values.description
-        detailEntry.text = values.details
-      }
-    }
-    onCountChanged : {
-      if(count == 0) {
-          nameEntry.text = ""
-          descriptionEntry.text = ""
-          detailEntry.text = ""
-        } else {
-          indexChanged()
+    TextEntry {
+      Layout.fillWidth : true
+      Layout.leftMargin : 5
+      id : nameEntry
+      label : "Scene Name"
+      placeholderText : "String Field (128 Characters)"
+      onEditingFinished : {
+        var entry = root.model.get(root.index);
+        if (text != entry.name) {
+          entry.name = text
+          update_scene(entry)
         }
+      }
     }
+    TextAreaEntry {
+      Layout.fillWidth : true
+      Layout.leftMargin : 5
+      id : descriptionEntry
+      label : "Description"
+      required : true
+      placeholderText : "Scene Description"
+      onEditingFinished : {
+        var entry = root.model.get(root.index);
+        if (text != entry.description) {
+          entry.description = text;
+          update_scene(root.model.get(root.index))
+        }
+      }
+    }
+    TextAreaEntry {
+      Layout.fillWidth : true
+      Layout.leftMargin : 5
+      id : detailEntry
+      label : "Details"
+      required : true
+      placeholderText : "Scene Details"
+      onEditingFinished : {
+        var entry = root.model.get(root.index);
+        if (text != entry.details) {
+          entry.details = text;
+          update_scene(root.model.get(root.index))
+        }
+      }
+    }
+    TextAreaEntry {
+      Layout.fillWidth : true
+      Layout.leftMargin : 5
+      id : weatherEntry
+      label : "Weather"
+      required : true
+      placeholderText : "Weather Details"
+      onEditingFinished : {
+        var entry = root.model.get(root.index);
+        if (text != entry.weather) {
+          entry.weather = text;
+          update_scene(root.model.get(root.index))
+        }
+      }
+    }
+    TextEntry {
+      Layout.fillWidth : true
+      Layout.leftMargin : 5
+      id : timeEntry
+      label : "Time in Scenario"
+      placeholderText : "06:00"
+      inputMethodHints : Qt.ImhTime
+      onEditingFinished : {
+        console.log(text)
+      }
+    }
+  }
+  onIndexChanged : {
+    var values = model.get(root.index);
+    if (values && model.count != 0) {
+      nameEntry.text = values.name;
+      descriptionEntry.text = values.description;
+      detailEntry.text = values.details;
+      weatherEntry.text =  values.weather;
+      timeEntry.text =  values.time;
+
+      console.log(
+      "nameEntry.text = $1\n".arg(values.name),
+      "descriptionEntry.text = $1\n".arg(values.description),
+      "detailEntry.text = $1\n".arg(values.details),
+      "weatherEntry.text =  $1\n".arg(values.weather),
+      "timeEntry.text =  $1\n".arg(values.time)
+      )
+    }
+  }
+  onCountChanged : {
+    if (count == 0) {
+      nameEntry.text = ""
+      descriptionEntry.text = ""
+      detailEntry.text = ""
+      weatherEntry.text = ""
+      timeEntry.text = ""
+
+    } else {
+      indexChanged()
+    }
+  }
 }

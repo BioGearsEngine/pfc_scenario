@@ -9,29 +9,27 @@ import "common"
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
 RowLayout {
-  id: root
+  id : root
   property SQLBackend backend
-  property int topIndex 
+  property int topIndex
 
   Layout.fillWidth : true
-  Layout.fillHeight: true
-  spacing: 5
+  Layout.fillHeight : true
+  spacing : 5
 
-  //TAB:SUMMARY_LEFTWINDOW 
-  LeftPane{
+  // TAB:SUMMARY_LEFTWINDOW
+  LeftPane {
     id : narrative_left
     backend : root.backend
   }
-  //TAB:SUMMARY_RIGHTWINDOW
-  RightPane{
+  // TAB:SUMMARY_RIGHTWINDOW
+  RightPane {
     id : narrative_right
     backend : root.backend
     model : narrative_left.model
     index : narrative_left.index
     count : narrative_left.count
     topIndex : root.topIndex
-    onIndexChanged : {
-      
-    } 
+    onIndexChanged : {}
   }
 }

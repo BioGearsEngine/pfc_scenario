@@ -139,11 +139,19 @@ bool Serializer::save_as(const QString& filename) const
   file_info.uncompressed_size = text_ptr.length();
   mz_zip_writer_add_buffer(writer, (void*)text_ptr.c_str(), (int32_t)text_ptr.length(), &file_info);
 
+  QFile msdl_file(QString( "tmp/" ) + text_name.c_str());
+  msdl_file.open(QIODevice::WriteOnly);
+  msdl_file.write(text_ptr.c_str(), (int32_t)text_ptr.length());
+
   text_name = "Scenario.pfc.xml";
   text_ptr = pfc_stream.str();
   file_info.filename = text_name.c_str();
   file_info.uncompressed_size = text_ptr.length();
   mz_zip_writer_add_buffer(writer, (void*)text_ptr.c_str(), (int32_t)text_ptr.length(), &file_info);
+
+  QFile pfc_file(QString("tmp/") + text_name.c_str());
+  pfc_file.open(QIODevice::WriteOnly);
+  pfc_file.write(text_ptr.c_str(), (int32_t)text_ptr.length());
 
   for (auto& tuple : schemas_v3) {
     file_info.filename = std::get<0>(tuple);
@@ -586,7 +594,7 @@ auto Serializer::generate_pfc_stream() const -> std::stringstream
 
   xml_schema::namespace_infomap info;
   info[""].name = "com:ara:pfc:training:1";
-  info[""].schema = "pfc_scenario_0.3.xsd";
+  info[""].schema = "pfc_scenario.xsd";
   std::stringstream pfc_content;
   Scenario(pfc_content, pfc_scenario, info);
   return pfc_content;

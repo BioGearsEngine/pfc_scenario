@@ -8,111 +8,111 @@ import "components"
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
 Page {
-  id: root
+  id : root
   signal closed
   property var stack
   property SQLBackend backend
 
   ColumnLayout {
-    id: columns
+    id : columns
     spacing : 5
-    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.horizontalCenter : parent.horizontalCenter
     anchors.fill : parent
     Rectangle {
-      id: titleCard
-      radius: 10
-      Layout.alignment: Qt.AlignHCenter
-      Layout.fillWidth: true
-      Layout.minimumHeight: 50
+      id : titleCard
+      radius : 10
+      Layout.alignment : Qt.AlignHCenter
+      Layout.fillWidth : true
+      Layout.minimumHeight : 50
       Text {
-        id: titleCardText
-        anchors.centerIn: parent
-        text: 'SCENARIO TITLE'
-        font.pointSize: 18
+        id : titleCardText
+        anchors.centerIn : parent
+        text : 'SCENARIO TITLE'
+        font.pointSize : 18
       }
     }
     TabBar {
-      id: tabs
-      font.pointSize: 8
+      id : tabs
+      font.pointSize : 8
       height : 12
       TabButton {
-        text: "General"
-        width: implicitWidth
+        text : "General"
+        width : implicitWidth
       }
       TabButton {
-        text: "Syllabus"
-        width: implicitWidth
+        text : "Syllabus"
+        width : implicitWidth
       }
       TabButton {
-        text: "Narrative"
-        width: implicitWidth
+        text : "Narrative"
+        width : implicitWidth
       }
       TabButton {
-        text: "Summary"
-        width: implicitWidth
+        text : "Summary"
+        width : implicitWidth
       }
       currentIndex : 1
     }
     Shortcut {
-      id: alt1
-      sequence: "ALT+1"
-      onActivated: {
+      id : alt1
+      sequence : "ALT+1"
+      onActivated : {
         tabs.currentIndex = 0
       }
     }
     Shortcut {
-      id: alt2
-      sequence: "ALT+2"
-      onActivated: {
+      id : alt2
+      sequence : "ALT+2"
+      onActivated : {
         tabs.currentIndex = 1
       }
     }
     Shortcut {
-      id: alt3
-      sequence: "ALT+3"
-      onActivated: {
+      id : alt3
+      sequence : "ALT+3"
+      onActivated : {
         tabs.currentIndex = 2
       }
     }
     Shortcut {
-      id: alt4
-      sequence: "ALT+4"
-      onActivated: {
+      id : alt4
+      sequence : "ALT+4"
+      onActivated : {
         tabs.currentIndex = 3
       }
     }
     StackLayout {
-      Layout.alignment: Qt.AlignHCenter
-      Layout.fillHeight: true
-      Layout.fillWidth: true
+      Layout.alignment : Qt.AlignHCenter
+      Layout.fillHeight : true
+      Layout.fillWidth : true
 
-      currentIndex: tabs.currentIndex
-      width: parent.width
-      height: parent.height - 10
-      //TAB:SUMMARY
+      currentIndex : tabs.currentIndex
+      width : parent.width
+      height : parent.height - 10
+      // TAB:SUMMARY
 
-      ScenarioGeneral{
-        id: general
+      ScenarioGeneral {
+        id : general
         index : tabs.currentIndex
         backend : root.backend
         onScenarioTitleChanged : {
           titleCardText.text = general.scenarioTitle
         }
       }
-      //TAB:SYLLABUS
+      // TAB:SYLLABUS
       ScenarioSyllabus {
-         id: syllabus
-         backend : root.backend
-         topIndex : tabs.currentIndex
-      }
-      //TAB:NARRATIVE
-      ScenarioNarrative{
-        id: narrative
+        id : syllabus
         backend : root.backend
         topIndex : tabs.currentIndex
       }
-      ScenarioSummary{
-        id: summary
+      // TAB:NARRATIVE
+      ScenarioNarrative {
+        id : narrative
+        backend : root.backend
+        topIndex : tabs.currentIndex
+      }
+      ScenarioSummary {
+        id : summary
         backend : root.backend
         index : tabs.currentIndex
       }

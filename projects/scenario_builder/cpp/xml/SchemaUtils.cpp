@@ -390,7 +390,7 @@ namespace schema {
   //-----------------------------------------------------------------------------
   auto PFC::make_scene(::pfc::Scene const* const input) -> std::unique_ptr<schema::scene>
   {
-    return std::make_unique<pfc::schema::scene>(schema::make_uuid("Location_" + std::to_string(input->id)),
+    auto scene = std::make_unique<pfc::schema::scene>(schema::make_uuid("Location_" + std::to_string(input->id)),
                                                 schema::make_string(input->name.toStdString()),
                                                 schema::make_string(input->description.toStdString()),
                                                 schema::make_time(input->time_of_day),
@@ -398,6 +398,9 @@ namespace schema {
                                                 std::make_unique<pfc::schema::scene::events_type>(),
                                                 std::make_unique<pfc::schema::scene::items_type>(),
                                                 std::make_unique<pfc::schema::scene::roles_type>());
+    scene->weather(schema::make_string(input->weather.toStdString()) );
+    scene->details(schema::make_string(input->details.toStdString()) );
+    return scene;
   }
   //-----------------------------------------------------------------------------
   auto PFC::make_equipment(::pfc::Equipment const* const input) -> std::unique_ptr<schema::equipment>
@@ -733,6 +736,9 @@ namespace schema {
       seconds = (seconds.length() == 1) ? ("0" + seconds) : (seconds);
       temp.time_of_day = QString::fromStdString(hours + ":" + minutes + ":" + seconds);
       temp.time_in_simulation = scene.time_in_simulation();
+      
+      temp.details = scene.details().present() ? QString::fromStdString(scene.details().get()) : "";
+      temp.weather = scene.weather().present() ? QString::fromStdString(scene.weather().get()) : "";
 
       if (!_db.update_scene(&temp)) {
         wasSuccessful = false;
@@ -742,15 +748,7 @@ namespace schema {
       pfc::Location temp_location;
       temp_location.id = -1;
       temp_location.name = QString::fromStdString(std::string(scene.name()) + " Location");
-      //temp_location.scene_name = QString::fromStdString(scene.name());
-      //hours = std::to_string(scene.time_of_day().hours());
-      //hours = (hours.length() == 1) ? ("0" + hours) : (hours);
-      //minutes = std::to_string(scene.time_of_day().minutes());
-      //minutes = (minutes.length() == 1) ? ("0" + minutes) : (minutes);
-      //seconds = std::to_string(scene.time_of_day().seconds());
-      //seconds = seconds.substr(0, seconds.find("."));
-      //seconds = (seconds.length() == 1) ? ("0" + seconds) : (seconds);
-      //temp_location.time_of_day = QString::fromStdString(hours + ":" + minutes + ":" + seconds);
+
 
       if (!_db.update_location(&temp_location)) {
         wasSuccessful = false;

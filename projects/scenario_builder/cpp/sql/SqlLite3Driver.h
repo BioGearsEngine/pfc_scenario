@@ -26,6 +26,29 @@ specific language governing permissions and limitations under the License.
 #include "SQLTables.h"
 namespace pfc {
 class Serializer;
+
+
+//!  \class SQLite3Driver
+//!   
+//!  \brief  QtSql based Sqlite3 Driver for sotring working version of internal database
+//!          Each table has a series of functions designed to interact with the database
+//!          SQLTables has a series of structs designed to pass between this class and QML
+//!
+//!          For instance to interact with the table Scenss you will use
+//!          void scenes()
+//!          std::vector<std::unique_ptr<Scene>> get_scenes()
+//!          bool update_scene(scene);
+//!          bool remove_scene(scene);
+//!          bool select_scene(scene);
+//!          bool next_scene();
+
+//!          The idea is that when scenes prepopulates an interable list of scenes and resets the current scene to the begin();
+//!          Next scene changed an interal pointer to the current scene in the table and allows QML to iterate over each scene like a for loop
+//!
+
+//!          In adition to this a Scene can be constructed and pasted to select,update,remove   to interact with the specific scene by id or unique pair.
+//!          This is the primary way that QML currently uses this class.
+
 class SQLite3Driver : public QObject {
   friend Serializer;
 
@@ -135,6 +158,20 @@ public:
 
   Q_INVOKABLE int nextID(Sqlite3Table) const;
 
+
+  //!
+  //!  Calling a table function updates the QList of known cash hits
+  //!  This should allow us to convert the QSQL Database to a 
+  //!  QListModel using our structs;
+  //!
+  //!  A stronger refactor for 2.0 Would be to rewrite this entire class as a QSqlTableModel. Our Average UI screen
+  //!  Is really just a complex VIEW of no more then a 3 Table Join.
+  //!  Updating is more complicated, but can be derived from forign_key relations in the view  I strongly advise
+  //!  Removing this coding layer in the next refactor in favor of some AbstractDataModel which can automatically update
+  //!  fields in QML and hopefully signal element changes accordingly to all pages in the QML UI
+  //!
+  //!  https://wiki.qt.io/How_to_Use_a_QSqlQueryModel_in_QML
+
   Q_INVOKABLE void authors();
   Q_INVOKABLE void properties();
   Q_INVOKABLE void restrictions();
@@ -159,6 +196,12 @@ public:
   Q_INVOKABLE void locations_in_scene(Scene* scene);
   Q_INVOKABLE void equipment_in_scene(Scene* scene);
   Q_INVOKABLE void scenes();
+
+
+  //!
+  //!  These functions are intended for use in the Serializer.cpp class
+  //!  They should be debricated and instead replaced with begin(),end() and next() calls
+  //!  There really is no need for them.
 
   std::vector<std::unique_ptr<Author>> get_authors() const;
   std::vector<std::unique_ptr<Assessment>> get_assessments() const;
@@ -326,6 +369,11 @@ signals:
   void nameChanged();
   void pathChanged();
 
+
+  //Additional signal for any change to a table
+  //Possible used when you want to update secondary relations that might
+  //Invalidate your entire QML model
+  //
   void authorsChanged();
   void assessmentsChanged();
   void eventsChanged();
@@ -347,6 +395,8 @@ signals:
   void scenesChanged();
   void treatmentsChanged();
 
+  //Signals the removal of an author
+  //This is intended for QML to prune models when possible.
   void authorRemoved(int index);
   void assessmentRemoved(int index);
   void eventRemoved(int index);
@@ -368,6 +418,9 @@ signals:
   void sceneRemoved(int index);
   void treatmentRemoved(int index);
 
+
+  //Signals that a table was Updated and which index has changed
+  //This is intended for QML optimization of model cashes.
   void authorUpdated(int index);
   void assessmentUpdated(int index);
   void eventUpdated(int index);
@@ -398,6 +451,12 @@ private:
   QString _db_path = "./";
   mutable int _error_code = 0;
 
+  //Volitile This design assumes that QML is signle threaded and
+  //         no iteration of a table will occur at the same time.
+  //         If this was to occur several approaches would need improvment
+  //         Including verification of transactional updatees and better signal handeling.
+  //         An intermediate step would likely be a begin() and end() function and a invalidate_iterator() signal. for each table
+  //         This would allow const based interation provided no Update or Insert calls were made.
   QList<Author*> _authors;
   QList<Property*> _properties;
   QList<Restriction*> _restrictions;
@@ -419,6 +478,8 @@ private:
   QList<Event*> _events;
   QList<Scene*> _scenes;
 
+
+  //Current Pointers which are updated by the matching next_\w+ function
   QList<Author*>::iterator _current_author;
   QList<Property*>::iterator _current_property;
   QList<Restriction*>::iterator _current_restriction;

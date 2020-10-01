@@ -11,9 +11,9 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 ColumnLayout {
   id: root
   property SQLBackend backend
-  readonly property alias model : listArea.model 
-  readonly property alias index : listArea.currentIndex
-  readonly property alias count : listArea.count
+  readonly property alias model : sceneList.model 
+  readonly property alias index : sceneList.currentIndex
+  readonly property alias count : sceneList.count
   Scene {
     id : self
   }
@@ -73,7 +73,7 @@ ColumnLayout {
         ++next;
       }
       onSecondButtonClicked : {
-        if (listArea.model.count == 0) {
+        if (sceneList.model.count == 0) {
           return
         }
         self.scene_id = -1
@@ -81,12 +81,12 @@ ColumnLayout {
 
         root.backend.remove_scene(self)
         root.model.remove(root.index)
-        listArea.currentIndex = Math.max(0,root.index-1)
+        sceneList.currentIndex = Math.max(0,root.index-1)
       }
     }
 
     ListView {
-      id : listArea
+      id : sceneList
       anchors { top : controls.bottom ; bottom : parent.bottom; 
                    left : parent.left ; right : parent.right }  
       spacing : 5
@@ -112,7 +112,7 @@ ColumnLayout {
         MouseArea {
           anchors.fill: parent
           onClicked: {
-            listArea.currentIndex = index
+            sceneList.currentIndex = index
 
           }
         }
@@ -130,7 +130,7 @@ ColumnLayout {
            color: enabled ? Material.primaryTextColor : Material.primaryTextColor
         }
         onFocusChanged: {
-          if(listArea.currentIndex == index){
+          if(sceneList.currentIndex == index){
             state = 'Selected';
           }
           else{
@@ -145,13 +145,14 @@ ColumnLayout {
         var r_count = backend.scene_count();
         root.backend.scenes()
         while ( root.backend.next_scene(self) ){
-
-          listArea.model.insert(listArea.model.count,
+          sceneList.model.insert(sceneList.model.count,
             {
              id  : self.scene_id,
              name: "%1".arg(self.name), 
              description : self.description,
-             details : self.details
+             details : self.details,
+             weather : self.weather,
+             time : self.time_of_day
             });
         }
       }

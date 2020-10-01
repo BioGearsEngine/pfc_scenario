@@ -1,4 +1,5 @@
 import QtQuick 2.10
+
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.12
@@ -8,7 +9,7 @@ import "../common"
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
 Rectangle {
-  id: root
+  id : root
   property alias currentIndex : narrative_tabs.currentIndex
   property ListModel model
   property int index // creates new int, which is publicly assigned in ScenarioNarrative.qml
@@ -18,112 +19,112 @@ Rectangle {
   property SQLBackend backend
   property ListElement modelData
 
-  clip: true
-  Layout.fillWidth: true
-  Layout.fillHeight: true
-  Layout.margins: 5
+  clip : true
+  Layout.fillWidth : true
+  Layout.fillHeight : true
+  Layout.margins : 5
   ColumnLayout {
-    anchors.fill: root
+    anchors.fill : root
     Shortcut {
-      id: f1
-      sequence: "F1"
+      id : f1
+      sequence : "F1"
       enabled : false
-      onActivated: {
+      onActivated : {
         narrative_tabs.currentIndex = 0
       }
     }
     Shortcut {
-      id: f2
-      sequence: "F2"
+      id : f2
+      sequence : "F2"
       enabled : false
-      onActivated: {
+      onActivated : {
         narrative_tabs.currentIndex = 1
       }
     }
     Shortcut {
-      id: f3
-      sequence: "F3"
+      id : f3
+      sequence : "F3"
       enabled : false
-      onActivated: {
+      onActivated : {
         narrative_tabs.currentIndex = 2
       }
     }
     Shortcut {
-      id: f4
-      sequence: "F4"
+      id : f4
+      sequence : "F4"
       enabled : false
-      onActivated: {
+      onActivated : {
         narrative_tabs.currentIndex = 3
       }
     }
-    width: parent.width
-    height: parent.height
+    width : parent.width
+    height : parent.height
     TabBar {
-      id: narrative_tabs
-      Layout.fillWidth: true
-      font.pointSize: 8
+      id : narrative_tabs
+      Layout.fillWidth : true
+      font.pointSize : 8
       height : 12
-      width: parent.width
+      width : parent.width
 
       TabButton {
-        id: location_tab
-        text: "Location"
-        width: implicitWidth
+        id : location_tab
+        text : "Location"
+        width : implicitWidth
       }
       TabButton {
-        id: roles_tab
-        text: "Roles"
-        width: implicitWidth
+        id : roles_tab
+        text : "Roles"
+        width : implicitWidth
       }
       TabButton {
-        id: events_tab
-        text: "Events"
-        width: implicitWidth
+        id : events_tab
+        text : "Events"
+        width : implicitWidth
       }
       TabButton {
-        id: scenes_tab
-        text: "Scenes"
-        width: implicitWidth
+        id : scenes_tab
+        text : "Scenes"
+        width : implicitWidth
       }
-      currentIndex: 1
+      currentIndex : 1
     }
     StackLayout {
-    	id: narrative_stack_right
-    	Layout.fillHeight: true
-    	Layout.fillWidth: true
-    	currentIndex: narrative_tabs.currentIndex
+      id : narrative_stack_right
+      Layout.fillHeight : true
+      Layout.fillWidth : true
+      currentIndex : narrative_tabs.currentIndex
 
-    	RP_Location {
-        id: locations
-    		Layout.fillHeight: true
-    		Layout.fillWidth: true
+      RP_Location {
+        id : locations
+        Layout.fillHeight : true
+        Layout.fillWidth : true
         backend : root.backend
         model : root.model
         index : root.index
         count : root.count
-    	}
-    	RP_Roles {
-        id: roles
-    		Layout.fillHeight: true
-    		Layout.fillWidth: true
+      }
+      RP_Roles {
+        id : roles
+        Layout.fillHeight : true
+        Layout.fillWidth : true
         backend : root.backend
         model : root.model
         index : root.index
         count : root.count
-    	}
-    	RP_Events {
-        id: events
-    		Layout.fillHeight: true
-    		Layout.fillWidth: true
+      }
+      RP_Events {
+        id : events
+        Layout.fillHeight : true
+        Layout.fillWidth : true
         backend : root.backend
         model : root.model
         index : root.index
         count : root.count
-    	}
+      }
       RP_Scene {
-        id: scenes  
-        Layout.fillHeight: true
-        Layout.fillWidth: true
+        id : scenes
+        Layout.fillHeight : true
+        Layout.fillWidth : true
         backend : root.backend
         model : root.model
         index : root.index
