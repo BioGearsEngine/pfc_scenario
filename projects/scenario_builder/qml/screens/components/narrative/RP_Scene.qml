@@ -31,6 +31,7 @@ Rectangle {
     self.time_of_day = timeEntry.text
     root.backend.update_scene(self)
   }
+
   border.color : 'black'
   border.width : 1
   ColumnLayout {
@@ -81,6 +82,7 @@ Rectangle {
         }
       }
     }
+
     TextAreaEntry {
       Layout.fillWidth : true
       Layout.leftMargin : 5
@@ -107,35 +109,88 @@ Rectangle {
         console.log(text)
       }
     }
-  }
-  onIndexChanged : {
-    var values = model.get(root.index);
-    if (values && model.count != 0) {
-      nameEntry.text = values.name;
-      descriptionEntry.text = values.description;
-      detailEntry.text = values.details;
-      weatherEntry.text =  values.weather;
-      timeEntry.text =  values.time;
 
-      console.log(
-      "nameEntry.text = $1\n".arg(values.name),
-      "descriptionEntry.text = $1\n".arg(values.description),
-      "detailEntry.text = $1\n".arg(values.details),
-      "weatherEntry.text =  $1\n".arg(values.weather),
-      "timeEntry.text =  $1\n".arg(values.time)
-      )
-    }
-  }
-  onCountChanged : {
-    if (count == 0) {
-      nameEntry.text = ""
-      descriptionEntry.text = ""
-      detailEntry.text = ""
-      weatherEntry.text = ""
-      timeEntry.text = ""
+    // /////////////////////////////////////////////////////////////////
+    RowLayout {
+      id : dropDownArea
+      Layout.fillWidth : true
+      Layout.preferredHeight : flickable.height
+      Layout.leftMargin : 5
+      Layout.rightMargin : 20
 
-    } else {
-      indexChanged()
+      Label {
+        id : categoryLabel
+        text : 'Details:'
+        font.pointSize : root.pointSize
+        color : "steelblue"
+        width : (text.width > 90) ? text.width + 10 : 100
+      }
+      ComboBox {
+        id : typeBox
+        currentIndex : 0
+        editable : true
+
+        model : ["Interior", "Exterior"]
+        width : 200
+        onAccepted: {
+        if (find(editText) === -1)
+            currentIndex = 0
+        }
+      }
+      ComboBox {
+        id : kindBox
+
+        currentIndex : 0
+        editable : true
+        model : (typeBox.currentIndex)? ["Tundra", "Desert"] : ["Shack", "Urban"]
+        width : 200
+
+        onModelChanged : {
+          currentIndex = 0
+        }
+        onAccepted: {
+        if (find(editText) === -1)
+            currentIndex = 0
+        }
+      }
+      ComboBox {
+        id : styleBox
+
+        currentIndex : 0
+        editable : true
+        model : (typeBox.currentIndex)? ["Urban", "Rural"] : ["Prefab", "Shambles"]
+        width : 200
+        onAccepted: {
+        if (find(editText) === -1)
+            currentIndex = 0
+        }
+        onCurrentIndexChanged : console.debug(cbItems.get(currentIndex).text + ", " + cbItems.get(currentIndex).color)
+      }
     }
+    // /////////////////////////////////////////////////////////////////
   }
+    onIndexChanged : {
+      var values = model.get(root.index);
+      if (values && model.count != 0) {
+        nameEntry.text = values.name;
+        descriptionEntry.text = values.description;
+        detailEntry.text = values.details;
+        weatherEntry.text = values.weather;
+        timeEntry.text = values.time;
+
+        console.log("nameEntry.text = $1\n".arg(values.name), "descriptionEntry.text = $1\n".arg(values.description), "detailEntry.text = $1\n".arg(values.details), "weatherEntry.text =  $1\n".arg(values.weather), "timeEntry.text =  $1\n".arg(values.time))
+      }
+    }
+    onCountChanged : {
+      if (count == 0) {
+        nameEntry.text = ""
+        descriptionEntry.text = ""
+        detailEntry.text = ""
+        weatherEntry.text = ""
+        timeEntry.text = ""
+
+      } else {
+        indexChanged()
+      }
+    }
 }
