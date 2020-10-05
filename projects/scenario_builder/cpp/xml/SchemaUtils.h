@@ -4,8 +4,8 @@
 #include <QString>
 #include <memory>
 
-#include <pfc/schema/military_scenario_1.0.0.hxx>
 #include <pfc/schema/pfc_scenario.hxx>
+#include <pfc/schema/military_scenario_1.0.0.hxx>
 #include "sql/SqlLite3Driver.h"
 
 namespace pfc {

@@ -10,6 +10,7 @@ Item {
   property alias text: textEntry.text
   property alias placeholderText: textEntry.placeholderText
   property alias inputMethodHints : textEntry.inputMethodHints
+  property alias entryField : textEntry
   property int pointSize : 10
   height : childrenRect.height
   width  : childrenRect.width

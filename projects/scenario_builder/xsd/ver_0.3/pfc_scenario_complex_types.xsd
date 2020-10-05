@@ -642,16 +642,16 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
         Fields:
         Name: xs:string : Name of the scene.
         Description: xs:string : Brief summary of the scene.
-        Time of day: xs:time : The time at which the scene takes place.
-        Time in simulation: xs:integer : How much time has passed within the scene.
+        Time of day: xs:time : number of seconds from midnight.
+        Time in simulation: xs:integer : Number of seconds since the simulation happened.
         Weather: xs:string : Summary Information of the Weather
         Details: Technical Details intended for instructor review
 
         Example:
         Name: Patient and doctor dialogue
         Description: The injured patient and the doctor discuss plans for how to treat the wound.
-        Time of day: 15:30
-        Time in simulation: 2 hours
+        Time of day:  3600  -- 01:00
+        Time in simulation: 45 -- 00:00::45 second in to simulation
         Weather: xs:string : Summer;Heavy Rain;Wind
         Details:  Exterior:Desert:Tundra
       </xs:documentation>
@@ -662,7 +662,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
       <xs:element name="description" type="xs:string"/>
       <xs:element name="details" type="xs:string" minOccurs="0"/>
       <xs:element name="weather" type="xs:string" minOccurs="0"/>
-      <xs:element name="time-of-day" type="xs:time"/>
+      <xs:element name="time-of-day" type="xs:integer"/>
       <xs:element name="time-in-simulation" type="xs:integer"/>
       <!-- <xs:element name="weather" type="msdl:EnvironmentType" minOccurs="0"/> -->
       <xs:element name="events" type="event-list"/>

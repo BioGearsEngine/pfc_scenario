@@ -69,7 +69,6 @@ Rectangle {
   Component.onCompleted : {
     root.completed();
     if (label.contentWidth > label.width) {
-      console.log(label.text)
       label.width = label.contentWidth + 10
     }
   }

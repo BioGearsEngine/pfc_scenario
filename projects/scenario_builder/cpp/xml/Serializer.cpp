@@ -419,7 +419,7 @@ bool Serializer::load(const QString& filename)
         _db->refresh();
         return target.error() == QFile::NoError && source.error() == QFile::NoError;
 
-      } catch (const xml_schema::exception& e) {
+      } catch (const xml_schema::parsing& e) {
         std::cout << e << '\n';
 
         mz_zip_reader_delete(&reader); //Removing the Reader if this moves below the try remember you must always cal this function before leaving this function

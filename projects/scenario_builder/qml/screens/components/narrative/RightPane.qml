@@ -67,6 +67,11 @@ Rectangle {
       width : parent.width
 
       TabButton {
+        id : scenes_tab
+        text : "Details"
+        width : implicitWidth
+      }
+      TabButton {
         id : location_tab
         text : "Location"
         width : implicitWidth
@@ -81,9 +86,9 @@ Rectangle {
         text : "Events"
         width : implicitWidth
       }
-      TabButton {
-        id : scenes_tab
-        text : "Scenes"
+     TabButton {
+        id : objects_tab
+        text : "Objects"
         width : implicitWidth
       }
       currentIndex : 1
@@ -94,6 +99,15 @@ Rectangle {
       Layout.fillWidth : true
       currentIndex : narrative_tabs.currentIndex
 
+      RP_Scene {
+        id : scenes
+        Layout.fillHeight : true
+        Layout.fillWidth : true
+        backend : root.backend
+        model : root.model
+        index : root.index
+        count : root.count
+      }
       RP_Location {
         id : locations
         Layout.fillHeight : true
@@ -121,8 +135,8 @@ Rectangle {
         index : root.index
         count : root.count
       }
-      RP_Scene {
-        id : scenes
+      RP_Events {
+        id : objects
         Layout.fillHeight : true
         Layout.fillWidth : true
         backend : root.backend

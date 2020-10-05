@@ -393,7 +393,7 @@ namespace schema {
     auto scene = std::make_unique<pfc::schema::scene>(schema::make_uuid("Location_" + std::to_string(input->id)),
                                                 schema::make_string(input->name.toStdString()),
                                                 schema::make_string(input->description.toStdString()),
-                                                schema::make_time(input->time_of_day),
+                                                input->time_of_day.toInt(),
                                                 input->time_in_simulation,
                                                 std::make_unique<pfc::schema::scene::events_type>(),
                                                 std::make_unique<pfc::schema::scene::items_type>(),
@@ -722,19 +722,12 @@ namespace schema {
   auto PFC::load_scenes(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<::pfc::schema::ScenarioSchema>
   {
     auto& scenes = scenario_schema->medical_scenario().training_script().scene();
-    for (auto scene : scenes) {
+    for (auto& scene : scenes) {
       pfc::Scene temp;
       temp.id = -1;
       temp.name = QString::fromStdString(scene.name());
       temp.description = QString::fromStdString(scene.description());
-      std::string hours = std::to_string(scene.time_of_day().hours());
-      hours = (hours.length() == 1) ? ("0" + hours) : (hours);
-      std::string minutes = std::to_string(scene.time_of_day().minutes());
-      minutes = (minutes.length() == 1) ? ("0" + minutes) : (minutes);
-      std::string seconds = std::to_string(scene.time_of_day().seconds());
-      seconds = seconds.substr(0, seconds.find("."));
-      seconds = (seconds.length() == 1) ? ("0" + seconds) : (seconds);
-      temp.time_of_day = QString::fromStdString(hours + ":" + minutes + ":" + seconds);
+      temp.time_of_day = QString("%1").arg(scene.time_of_day());
       temp.time_in_simulation = scene.time_in_simulation();
       
       temp.details = scene.details().present() ? QString::fromStdString(scene.details().get()) : "";
