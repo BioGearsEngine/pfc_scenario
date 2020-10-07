@@ -13,29 +13,28 @@
 #include "xml/Serializer.h"
 #include <pfc/schema/pfc_scenario.hxx>
 
-
-#define DISABLE_ASSESSMENT_TEST   
-#define DISABLE_Author_TEST       
-#define DISABLE_Citation_TEST     
-#define DISABLE_Equipment_TEST    
-#define DISABLE_Event_TEST        
-#define DISABLE_Injury_TEST       
-#define DISABLE_InjurySet_TEST    
-#define DISABLE_Location_TEST     
-#define DISABLE_Objectives_TEST   
-#define DISABLE_Property_TEST     
-#define DISABLE_Restrictions_TEST 
-#define DISABLE_Role_TEST         
-#define DISABLE_Scene_TEST        
-#define DISABLE_Treatment_TEST    
-#define DISABLE_RoleMap_TEST      
-#define DISABLE_EventMap_TEST     
-#define DISABLE_SceneMap_TEST     
-#define DISABLE_EquipmentMap_TEST 
-#define DISABLE_CitationMap_TEST  
-#undef DISABLE_LocationMap_TEST  
-#undef DISABLE_Backdoor_TEST     
-#define DISABLE_REMOVAL_TEST      
+#undef DISABLE_ASSESSMENT_TEST
+#undef DISABLE_Author_TEST
+#undef DISABLE_Citation_TEST
+#undef DISABLE_Equipment_TEST
+#undef DISABLE_Event_TEST
+#undef DISABLE_Injury_TEST
+#undef DISABLE_InjurySet_TEST
+#undef DISABLE_Location_TEST
+#undef DISABLE_Objectives_TEST
+#undef DISABLE_Property_TEST
+#undef DISABLE_Restrictions_TEST
+#undef DISABLE_Role_TEST
+#undef DISABLE_Scene_TEST
+#undef DISABLE_Treatment_TEST
+#undef DISABLE_RoleMap_TEST
+#undef DISABLE_EventMap_TEST
+#undef DISABLE_SceneMap_TEST
+#undef DISABLE_EquipmentMap_TEST
+#undef DISABLE_CitationMap_TEST
+#undef DISABLE_LocationMap_TEST
+#undef DISABLE_Backdoor_TEST
+#undef DISABLE_REMOVAL_TEST
 #define DISABLE_Serialization_TEST
 
 // The fixture for testing class Foo.
@@ -4192,9 +4191,8 @@ TEST_F(SQLiteDriver, Backdoor_TEST(get_equipment_maps))
   EquipmentMap map_1;
   scene_1.name = "Opening";
 
-  _db.update_scene(&scene_1);
-
-  _db.select_scene(&scene_1);
+  ASSERT_TRUE(_db.update_scene(&scene_1));
+  ASSERT_TRUE(_db.select_scene(&scene_1));
 
   equipment_1.name = "Keytar";
   equipment_1.type = 1;
@@ -4202,11 +4200,11 @@ TEST_F(SQLiteDriver, Backdoor_TEST(get_equipment_maps))
   equipment_1.image = "music stand";
   equipment_1.citations = { 1 };
 
-  _db.update_equipment(&equipment_1);
-  _db.select_equipment(&equipment_1);
+  ASSERT_TRUE(_db.update_equipment(&equipment_1));
+  ASSERT_TRUE(_db.select_equipment(&equipment_1));
 
-  map_1.scene->assign(&scene_1);
-  map_1.equipment->assign(&equipment_1);
+  map_1.scene->assign(scene_1);
+  map_1.equipment->assign(equipment_1);
   _db.update_equipment_in_scene(&map_1);
 
   auto list = _db.get_equipment_maps();

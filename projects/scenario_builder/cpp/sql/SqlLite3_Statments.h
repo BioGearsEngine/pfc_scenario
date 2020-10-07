@@ -699,7 +699,7 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_equipment_map = R"( DELETE FROM equipment_map; )";
   constexpr auto count_equipment_map = R"( SELECT COUNT(equipment_map_id) FROM equipment_map; )";
-  constexpr auto select_all_equipment_map = R"( SELECT equipment_map_id,fk_scene,fk_equipment, name, values, notes FROM equipment_map; )";
+  constexpr auto select_all_equipment_map = R"( SELECT equipment_map_id,fk_scene,fk_equipment, name, property_values, notes FROM equipment_map; )";
 
   constexpr auto select_equipment_map_by_id
     = R"( SELECT * FROM equipment_map WHERE equipment_map_id = :id ; )";

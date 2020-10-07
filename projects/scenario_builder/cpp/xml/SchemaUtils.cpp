@@ -391,15 +391,15 @@ namespace schema {
   auto PFC::make_scene(::pfc::Scene const* const input) -> std::unique_ptr<schema::scene>
   {
     auto scene = std::make_unique<pfc::schema::scene>(schema::make_uuid("Location_" + std::to_string(input->id)),
-                                                schema::make_string(input->name.toStdString()),
-                                                schema::make_string(input->description.toStdString()),
-                                                input->time_of_day.toInt(),
-                                                input->time_in_simulation,
-                                                std::make_unique<pfc::schema::scene::events_type>(),
-                                                std::make_unique<pfc::schema::scene::items_type>(),
-                                                std::make_unique<pfc::schema::scene::roles_type>());
-    scene->weather(schema::make_string(input->weather.toStdString()) );
-    scene->details(schema::make_string(input->details.toStdString()) );
+                                                      schema::make_string(input->name.toStdString()),
+                                                      schema::make_string(input->description.toStdString()),
+                                                      input->time_of_day.toInt(),
+                                                      input->time_in_simulation,
+                                                      std::make_unique<pfc::schema::scene::events_type>(),
+                                                      std::make_unique<pfc::schema::scene::items_type>(),
+                                                      std::make_unique<pfc::schema::scene::roles_type>());
+    scene->weather(schema::make_string(input->weather.toStdString()));
+    scene->details(schema::make_string(input->details.toStdString()));
     return scene;
   }
   //-----------------------------------------------------------------------------
@@ -729,7 +729,7 @@ namespace schema {
       temp.description = QString::fromStdString(scene.description());
       temp.time_of_day = QString("%1").arg(scene.time_of_day());
       temp.time_in_simulation = scene.time_in_simulation();
-      
+
       temp.details = scene.details().present() ? QString::fromStdString(scene.details().get()) : "";
       temp.weather = scene.weather().present() ? QString::fromStdString(scene.weather().get()) : "";
 
@@ -742,9 +742,9 @@ namespace schema {
       temp_location.id = -1;
       temp_location.name = QString::fromStdString(std::string(scene.name()) + " Location");
 
-
-      if (!_db.update_location(&temp_location)) {
+      if (!_db.select_location(&temp_location)) {
         wasSuccessful = false;
+        return scenario_schema;
         return scenario_schema;
       }
 
@@ -752,7 +752,10 @@ namespace schema {
       dbLocationMap.id = -1;
       dbLocationMap.fk_scene = temp.id;
       dbLocationMap.fk_location = temp_location.id;
-      _db.update_location_map(&dbLocationMap);
+      if (!_db.select_location_map(&dbLocationMap)) {
+        wasSuccessful = false;
+        return scenario_schema;
+      }
 
       auto& events = scene.events().event();
       for (auto& event : events) {
@@ -775,8 +778,14 @@ namespace schema {
             Equipment eq;
             eq.name = equipment.name().c_str();
             if (_db.select_equipment(&eq)) {
-              eqMap.scene->id= temp.id;
+              eqMap.scene->id = temp.id;
               eqMap.equipment->id = eq.id;
+              eqMap.name = item.short_name().c_str();
+              eqMap.notes = item.description().c_str();
+              for (auto& property : item.properties().value()) {
+                eqMap.property_values.append(property.value().c_str()).append(";");
+              }
+
               if (!_db.update_equipment_map(&eqMap)) {
                 qDebug() << "Error updating Equipment Map";
               }

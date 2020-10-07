@@ -16,21 +16,23 @@ Rectangle{
     //property alias sceneName: nameEntry.text
 
     Location {
-      id : self
+      id : currentLocation
     }
     Scene {
-      id : selfScene
+      id : currentScene
     }
 
     function update_location() {
       if (model.count == 0) {
         return
       }
-      var obj = self
-      obj.location_id = self.location_id
-      obj.name = locationNameEntry.text
-      obj.environment = environmentEntry.text
-      root.backend.update_location(obj)
+
+      currentLocation
+      currentLocation.location_id
+      currentLocation.name = locationNameEntry.text
+      currentLocation.environment = environmentEntry.text
+      console.log("RP_Location updating_location on \"%1\"".arg(currentLocation.name))
+      root.backend.update_location(currentLocation)
     } 
     border.color: 'black'
     border.width: 1
@@ -43,6 +45,7 @@ Rectangle{
           label : "Location Name"
           placeholderText: "String Field (128 Characters)"
           onEditingFinished : {
+            console.log("locationNameEntry.onEditingFinished")
             update_location()
           }
         }
@@ -73,6 +76,7 @@ Rectangle{
           required: true
           placeholderText: "Weather Input Area"
           onEditingFinished : {
+            console.log("environmentEntry.onEditingFinished")
             update_location()
           }
         }   
@@ -81,13 +85,14 @@ Rectangle{
     onIndexChanged : {
       var values = model.get(root.index)
       if(values && model.count != 0) {
-        update_location()
-        //nameEntry.text = root.model.get(root.index).name
-        selfScene.scene_id = model.get(root.index).id
-        root.backend.locations_in_scene(selfScene)
-        while ( root.backend.next_location(self) ) {
-          locationNameEntry.text = self.name
-          environmentEntry.text = self.environment
+        //nameEntry.text = values.name
+        currentScene.scene_id = values.id
+        root.backend.locations_in_scene(currentScene)
+        if (root.backend.next_location(currentLocation)) {        
+          locationNameEntry.text = currentLocation.name
+          environmentEntry.text = currentLocation.environment
+        } else {
+          console.log("Unable to find Scenes \"%1\" location ".arg(currentScene.name))   
         }
       }
     }

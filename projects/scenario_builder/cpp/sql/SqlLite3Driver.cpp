@@ -2037,10 +2037,11 @@ void SQLite3Driver::locations_in_scene(Scene* scene)
     while (location_map_query.next()) {
       auto location_map = std::make_unique<pfc::LocationMap>();
       auto location_map_record = location_map_query.record();
-
-      (location_map_record, *location_map);
+      assign_location_map(location_map_record, *location_map);
       fk_location.push_back(location_map->fk_location);
     }
+    emit locationMapsChanged();
+
     QSqlQuery query{ QSqlDatabase::database(_db_name) };
     query.prepare(sqlite3::select_location_by_id);
     while (!fk_location.empty()) {
@@ -3128,14 +3129,23 @@ bool SQLite3Driver::update_scene(Scene* scene)
       return false;
     }
     if (-1 == scene->id) {
-      const auto r = select_scene(scene);
-      sceneUpdated(scene->id);
-      Location location;
-      location.id = -1;
-      location.name = scene->name + " Location";
-      return r && update_location_in_scene(scene, &location);
+      //!
+      //!  Logic may need to be maintained if
+      //!  we ever allow a location to be reused in multiple scenes.
+      //!
+      if (select_scene(scene)) {
+        sceneUpdated(scene->id);
+        Location location;
+        location.id = -1;
+        location.name = scene->name + " Location";
+        if (update_location_in_scene(scene, &location)) {
+          locationUpdated(location.id);
+          return true;
+        }
+      }
+      qWarning() << "Unable to update Location associated with Scene";
+      return false;
     }
-    sceneUpdated(scene->id);
     return true;
   }
   qWarning() << "No Database connection";
@@ -4054,7 +4064,7 @@ bool SQLite3Driver::next_equipment_map(EquipmentMap* map)
   if (_current_equipment_map == _equipment_maps.end() || _equipment_maps.empty()) {
     return false;
   }
-  map->assign(*(*_current_equipment_map));
+  map->assign(**_current_equipment_map);
   ++_current_equipment_map;
 
   return true;
