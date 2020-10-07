@@ -51,7 +51,7 @@ Page {
         text : "Summary"
         width : implicitWidth
       }
-      currentIndex : 1
+      currentIndex : 2
     }
     Shortcut {
       id : alt1

@@ -929,7 +929,7 @@ public:
   bool operator!=(const EquipmentMap& rhs) const
   {
     return !(*this == rhs);
-  }
+  } 
   void assign(const EquipmentMap& rhs)
   {
     //!

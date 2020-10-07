@@ -352,8 +352,38 @@ bool SQLite3Driver::populate_db()
 //------------------------------------------------------------------------------
 bool SQLite3Driver::populate_equipment()
 {
-  Equipment temp;
-  Equipment tourniquet, splint, tempus_pro_with_peripherals, nasal_cannula, simple_face_mask, IV_needle, blood_collection_bag, one_unit_O_negative_whole_blood, one_unit_A_negative_whole_blood, blood_transfusion_kit, space_blanket, syringe, antibiotics, epinephrine, fentanyl, ketamine, midazolam, morphine, narcan, saline_bag_1000ml, lactated_ringers_bag_500ml, urine_foley, urine_bottle, water, energy_gel;
+  Equipment temp; //Count
+  Equipment tourniquet, //Count
+    splint, //Count
+    tempus_pro_with_peripherals, //Count
+    nasal_cannula, //Count
+    simple_face_mask, //Count
+    IV_needle, //Count
+    blood_collection_bag, //Count
+    one_unit_whole_blood, //Type;lVolume;Count
+    one_unit_plasma, //Volume;Count
+    blood_transfusion_kit, //Quantity
+    space_blanket, //Quantity
+    syringe, //Quantity
+    saline, //Volume Avaliable;
+    antibiotics, //Volume Avaliable,Pill Avaliable;
+    epinephrine, //Volume Avaliable;
+    fentanyl, //Volume Avaliable;
+    ketamine, //Volume Avaliable;
+    midazolam, //Volume Avaliable;
+    morphine, //Volume Avaliable;
+    narcan, //Volume Avaliable;
+    saline_bag, //Volume Avaliable;number avaliable;
+    lactated_ringers_bag_500ml, //Volume Avaliable;number avaliable;
+    urine_foley, //Count
+    urine_bottle, //Count
+    water, //volume;quantity
+    energy_gel, //quantity
+    //Real Items We use in PFC
+    transfusion_supplies,
+    infusion_supplies,
+    catheter_supplies;
+    
   tourniquet.name = "Tourniquet";
   tourniquet.description = "A device which applies pressure to a limb or extremity in order to limit the flow of blood.";
   temp.assign(tourniquet);
@@ -402,19 +432,19 @@ bool SQLite3Driver::populate_equipment()
       return false;
     }
   }
-  one_unit_O_negative_whole_blood.name = "1 Unit O- Whole Blood";
-  one_unit_O_negative_whole_blood.description = "525 mL of O- blood, approximately the equivalent of one pint.";
-  temp.assign(one_unit_O_negative_whole_blood);
+  one_unit_whole_blood.name = "1 Unit O- Whole Blood";
+  one_unit_whole_blood.description = "525 mL of O- blood, approximately the equivalent of one pint.";
+  temp.assign(one_unit_whole_blood);
   if (!select_equipment(&temp)) {
-    if (!update_equipment(&one_unit_O_negative_whole_blood)) {
+    if (!update_equipment(&one_unit_whole_blood)) {
       return false;
     }
   }
-  one_unit_A_negative_whole_blood.name = "1 Unit A- Whole Blood";
-  one_unit_A_negative_whole_blood.description = "525 mL of A- blood, approximately the equivalent of one pint.";
-  temp.assign(one_unit_A_negative_whole_blood);
+  one_unit_plasma.name = "1 Unit A- Whole Blood";
+  one_unit_plasma.description = "525 mL of A- blood, approximately the equivalent of one pint.";
+  temp.assign(one_unit_plasma);
   if (!select_equipment(&temp)) {
-    if (!update_equipment(&one_unit_A_negative_whole_blood)) {
+    if (!update_equipment(&one_unit_plasma)) {
       return false;
     }
   }
@@ -498,11 +528,11 @@ bool SQLite3Driver::populate_equipment()
       return false;
     }
   }
-  saline_bag_1000ml.name = "1000 mL Saline Bag";
-  saline_bag_1000ml.description = "1000 mL bag of saline solution.";
-  temp.assign(saline_bag_1000ml);
+  saline_bag.name = "1000 mL Saline Bag";
+  saline_bag.description = "1000 mL bag of saline solution.";
+  temp.assign(saline_bag);
   if (!select_equipment(&temp)) {
-    if (!update_equipment(&saline_bag_1000ml)) {
+    if (!update_equipment(&saline_bag)) {
       return false;
     }
   }

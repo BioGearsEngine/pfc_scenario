@@ -36,6 +36,9 @@
         <file>screens/components/common/EventEditPane.qml</file>
         <file>screens/components/common/RoleEditPane.qml</file>
 
+        <!-- SQL Table Record Views -->
+        <file>screens/components/common/SceneProperty.qml</file>
+
         <!-- Narrative Tab Components -->
         <file>screens/components/narrative/RightPane.qml</file>
         <file>screens/components/narrative/RP_Events.qml</file>

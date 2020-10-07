@@ -91,7 +91,7 @@ Rectangle {
         text : "Objects"
         width : implicitWidth
       }
-      currentIndex : 1
+      currentIndex : 4
     }
     StackLayout {
       id : narrative_stack_right
@@ -143,6 +143,13 @@ Rectangle {
         model : root.model
         index : root.index
         count : root.count
+
+        Rectangle {
+          width: parent.width
+          height: parent.height
+          color: "transparent"
+          border.color: "cyan"
+        }
       }
     }
   }
