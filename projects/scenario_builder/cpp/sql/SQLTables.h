@@ -191,45 +191,7 @@ public:
   }
 };
 //----End Citation
-struct CitationMap : public QObject {
-  Q_OBJECT
-  Q_PROPERTY(int map_id MEMBER id)
-  Q_PROPERTY(int fk_scene MEMBER fk_scene)
-  Q_PROPERTY(int fk_citation MEMBER fk_citation)
 
-public:
-  int32_t id = -1;
-  int32_t fk_scene = -1;
-  int32_t fk_citation = -1;
-
-  CitationMap(QObject* parent = nullptr)
-    : QObject(parent)
-  {
-  }
-  CitationMap(const CitationMap&) = delete;
-  CitationMap(CitationMap&&) = delete;
-  CitationMap& operator=(const CitationMap&) = delete;
-  CitationMap& operator=(CitationMap&&) = delete;
-  virtual ~CitationMap() = default;
-
-  bool operator==(const CitationMap& rhs) const
-  {
-    return id == rhs.id
-      && fk_scene == rhs.fk_scene
-      && fk_citation == rhs.fk_citation;
-  }
-  bool operator!=(const CitationMap& rhs) const
-  {
-    return !(*this == rhs);
-  }
-  void assign(const CitationMap& rhs)
-  {
-    id = rhs.id;
-    fk_scene = rhs.fk_scene;
-    fk_citation = rhs.fk_citation;
-  }
-};
-//----End Citation_Map
 struct Event : public QObject {
   Q_OBJECT
   Q_PROPERTY(int event_id MEMBER id)
@@ -265,14 +227,14 @@ public:
   bool operator==(const Event& rhs) const
   {
     return id == rhs.id
-    && name == rhs.name
-    && description == rhs.description
-    && category == rhs.category
-    && fidelity == rhs.fidelity
-    && fk_actor_1 == rhs.fk_actor_1
-    && fk_actor_2 == rhs.fk_actor_2
-    && equipment == rhs.equipment
-    && details == rhs.details;
+      && name == rhs.name
+      && description == rhs.description
+      && category == rhs.category
+      && fidelity == rhs.fidelity
+      && fk_actor_1 == rhs.fk_actor_1
+      && fk_actor_2 == rhs.fk_actor_2
+      && equipment == rhs.equipment
+      && details == rhs.details;
   }
   bool operator!=(const Event& rhs) const
   {
@@ -300,6 +262,7 @@ struct Equipment : public QObject {
   Q_PROPERTY(QString description MEMBER description)
   Q_PROPERTY(QString citations MEMBER citations)
   Q_PROPERTY(QString image MEMBER image)
+  Q_PROPERTY(QString properties MEMBER properties)
 public:
   int32_t id = -1;
   int32_t type = 1;
@@ -307,6 +270,7 @@ public:
   QString description = "";
   QString citations;
   QString image = "";
+  QString properties = "";
   Equipment(QObject* parent = nullptr)
     : QObject(parent)
   {
@@ -324,7 +288,8 @@ public:
       && type == rhs.type
       && description == rhs.description
       && citations == rhs.citations
-      && image == rhs.image;
+      && image == rhs.image
+      && properties == rhs.properties;
   }
   bool operator!=(const Equipment& rhs) const
   {
@@ -338,104 +303,21 @@ public:
     description = rhs.description;
     citations = rhs.citations;
     image = rhs.image;
+    properties = rhs.properties;
+  }
+  void clear()
+  {
+    id = -1;
+    name.clear();
+    type = -1;
+    description.clear();
+    citations.clear();
+    image.clear();
+    properties.clear();
   }
 };
-//////----End Equipment
-struct EventMap : public QObject {
-  Q_OBJECT
-  Q_PROPERTY(int map_id MEMBER id)
-  Q_PROPERTY(int fk_scene MEMBER fk_scene)
-  Q_PROPERTY(int fk_event MEMBER fk_event)
+//----End Equipment
 
-public:
-  int32_t id = -1;
-  int32_t fk_scene = -1;
-  int32_t fk_event = -1;
-
-  EventMap(QObject* parent = nullptr)
-    : QObject(parent)
-  {
-  }
-  EventMap(const EventMap&) = delete;
-  EventMap(EventMap&&) = delete;
-  EventMap& operator=(const EventMap&) = delete;
-  EventMap& operator=(EventMap&&) = delete;
-  virtual ~EventMap() = default;
-
-  bool operator==(const EventMap& rhs) const
-  {
-    return id == rhs.id
-      && fk_scene == rhs.fk_scene
-      && fk_event == rhs.fk_event;
-  }
-  bool operator!=(const EventMap& rhs) const
-  {
-    return !(*this == rhs);
-  }
-  void assign(const EventMap& rhs)
-  {
-    id = rhs.id;
-    fk_scene = rhs.fk_scene;
-    fk_event = rhs.fk_event;
-  }
-};
-//----End Event_Map
-struct EquipmentMap : public QObject {
-  Q_OBJECT
-  Q_PROPERTY(int equipment_id MEMBER id)
-  Q_PROPERTY(int Scene MEMBER fk_scene)
-  Q_PROPERTY(int Equipment MEMBER fk_equipment)
-  Q_PROPERTY(QString name MEMBER name)
-  Q_PROPERTY(QString p_names MEMBER property_names)
-  Q_PROPERTY(QString values MEMBER property_values)
-  Q_PROPERTY(QString notes MEMBER notes)
-public:
-  int32_t id = -1;
-  int32_t fk_scene = 1;
-  int32_t fk_equipment = 1;
-  QString name = "";
-  QString property_names = "";
-  QString property_values = "";
-  QString notes;
-;
-  EquipmentMap(QObject* parent = nullptr)
-    : QObject(parent)
-  {
-  }
-  EquipmentMap(const EquipmentMap&) = delete;
-  EquipmentMap(EquipmentMap&&) = delete;
-  EquipmentMap& operator=(const EquipmentMap&) = delete;
-  EquipmentMap& operator=(EquipmentMap&&) = delete;
-  virtual ~EquipmentMap() = default;
-
-  bool operator==(const EquipmentMap& rhs) const
-  {
-    return id == rhs.id
-      && name == rhs.name
-      && fk_scene == rhs.fk_scene
-      && fk_equipment == rhs.fk_equipment
-      && name == rhs.name
-      && property_names == rhs.property_names
-      && property_values == rhs.property_values
-      && notes == rhs.notes;
-  }
-  bool operator!=(const EquipmentMap& rhs) const
-  {
-    return !(*this == rhs);
-  }
-  void assign(const EquipmentMap& rhs)
-  {
-    id = rhs.id;
-    name = rhs.name;
-    fk_scene = rhs.fk_scene;;
-    fk_equipment = rhs.fk_equipment;
-    name = rhs.name;
-    property_names = rhs.property_names;
-    property_values = rhs.property_values;
-    notes = rhs.notes;
-  }
-};
-//----End EquipmentMap
 struct Injury : public QObject {
   Q_OBJECT
   Q_PROPERTY(int injury_id MEMBER id)
@@ -595,162 +477,6 @@ public:
   }
 };
 //----End Location
-struct LocationMap : public QObject {
-  Q_OBJECT
-  Q_PROPERTY(int map_id MEMBER id)
-  Q_PROPERTY(int fk_scene MEMBER fk_scene)
-  Q_PROPERTY(int fk_location MEMBER fk_location)
-
-public:
-  int32_t id = -1;
-  int32_t fk_scene = -1;
-  int32_t fk_location = -1;
-
-  LocationMap(QObject* parent = nullptr)
-    : QObject(parent)
-  {
-  }
-  LocationMap(const LocationMap&) = delete;
-  LocationMap(LocationMap&&) = delete;
-  LocationMap& operator=(const LocationMap&) = delete;
-  LocationMap& operator=(LocationMap&&) = delete;
-  virtual ~LocationMap() = default;
-
-  bool operator==(const LocationMap& rhs) const
-  {
-    return id == rhs.id
-      && fk_scene == rhs.fk_scene
-      && fk_location == rhs.fk_location;
-  }
-  bool operator!=(const LocationMap& rhs) const
-  {
-    return !(*this == rhs);
-  }
-  void assign(const LocationMap& rhs)
-  {
-    id = rhs.id;
-    fk_scene = rhs.fk_scene;
-    fk_location = rhs.fk_location;
-  }
-};
-//----End Location_Map
-struct RoleMap : public QObject {
-  Q_OBJECT
-  Q_PROPERTY(int map_id MEMBER id)
-  Q_PROPERTY(int fk_scene MEMBER fk_scene)
-  Q_PROPERTY(int fk_role MEMBER fk_role)
-
-public:
-  int32_t id = -1;
-  int32_t fk_scene = -1;
-  int32_t fk_role = -1;
-
-  RoleMap(QObject* parent = nullptr)
-    : QObject(parent)
-  {
-  }
-  RoleMap(const RoleMap&) = delete;
-  RoleMap(RoleMap&&) = delete;
-  RoleMap& operator=(const RoleMap&) = delete;
-  RoleMap& operator=(RoleMap&&) = delete;
-  virtual ~RoleMap() = default;
-
-  bool operator==(const RoleMap& rhs) const
-  {
-    return id == rhs.id
-      && fk_scene == rhs.fk_scene
-      && fk_role == rhs.fk_role;
-  }
-  bool operator!=(const RoleMap& rhs) const
-  {
-    return !(*this == rhs);
-  }
-  void assign(const RoleMap& rhs)
-  {
-    id = rhs.id;
-    fk_scene = rhs.fk_scene;
-    fk_role = rhs.fk_role;
-  }
-};
-//----End Role Map
-struct PropMap : public QObject {
-  Q_OBJECT
-  Q_PROPERTY(int map_id MEMBER id)
-  Q_PROPERTY(int fk_scene MEMBER fk_scene)
-  Q_PROPERTY(int fk_prop MEMBER fk_prop)
-
-public:
-  int32_t id = -1;
-  int32_t fk_scene = -1;
-  int32_t fk_prop = -1;
-
-  PropMap(QObject* parent = nullptr)
-    : QObject(parent)
-  {
-  }
-  PropMap(const PropMap&) = delete;
-  PropMap(PropMap&&) = delete;
-  PropMap& operator=(const PropMap&) = delete;
-  PropMap& operator=(PropMap&&) = delete;
-  virtual ~PropMap() = default;
-
-  bool operator==(const PropMap& rhs) const
-  {
-    return id == rhs.id
-      && fk_scene == rhs.fk_scene
-      && fk_prop == rhs.fk_prop;
-  }
-  bool operator!=(const PropMap& rhs) const
-  {
-    return !(*this == rhs);
-  }
-  void assign(const PropMap& rhs)
-  {
-    id = rhs.id;
-    fk_scene = rhs.fk_scene;
-    fk_prop = rhs.fk_prop;
-  }
-};
-//----End Prop_Map
-struct RestrictionMap : public QObject {
-  Q_OBJECT
-  Q_PROPERTY(int map_id MEMBER id)
-  Q_PROPERTY(int fk_scene MEMBER fk_scene)
-  Q_PROPERTY(int fk_restriction MEMBER fk_restriction)
-
-public:
-  int32_t id = -1;
-  int32_t fk_scene = -1;
-  int32_t fk_restriction = -1;
-
-  RestrictionMap(QObject* parent = nullptr)
-    : QObject(parent)
-  {
-  }
-  RestrictionMap(const RestrictionMap&) = delete;
-  RestrictionMap(RestrictionMap&&) = delete;
-  RestrictionMap& operator=(const RestrictionMap&) = delete;
-  RestrictionMap& operator=(RestrictionMap&&) = delete;
-  virtual ~RestrictionMap() = default;
-
-  bool operator==(const RestrictionMap& rhs) const
-  {
-    return id == rhs.id
-      && fk_scene == rhs.fk_scene
-      && fk_restriction == rhs.fk_restriction;
-  }
-  bool operator!=(const RestrictionMap& rhs) const
-  {
-    return !(*this == rhs);
-  }
-  void assign(const RestrictionMap& rhs)
-  {
-    id = rhs.id;
-    fk_scene = rhs.fk_scene;
-    fk_restriction = rhs.fk_restriction;
-  }
-};
-//----End Restriction_Map
 struct Objective : public QObject {
   Q_OBJECT
   Q_PROPERTY(int objective_id MEMBER id)
@@ -991,6 +717,19 @@ public:
     roles = rhs.roles;
     details = rhs.details;
   }
+  void clear()
+  {
+    id = -1;
+    name.clear();
+    description.clear();
+    time_of_day.clear();
+    time_in_simulation = 0;
+    weather.clear();
+    events.clear();
+    items.clear();
+    roles.clear();
+    details.clear();
+  }
 };
 //----End Scene
 struct Treatment : public QObject {
@@ -1045,8 +784,332 @@ public:
     citations = rhs.citations;
     cpgs = rhs.cpgs;
   }
+  void clear()
+  {
+    id = -1;
+    medical_name.clear();
+    common_name.clear();
+    description.clear();
+    equipment.clear();
+    citations.clear();
+    cpgs.clear();
+  }
 };
 //----End Treatment
+
+//!
+//!  Map Types.
+//!  Version 2.0 Will contain Pointers to the
+//!  Classes they refer to
+//!  Allowing them to be used like join statments
+
+struct CitationMap : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int map_id MEMBER id)
+  Q_PROPERTY(int fk_scene MEMBER fk_scene)
+  Q_PROPERTY(int fk_citation MEMBER fk_citation)
+
+public:
+  int32_t id = -1;
+  int32_t fk_scene = -1;
+  int32_t fk_citation = -1;
+
+  CitationMap(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  CitationMap(const CitationMap&) = delete;
+  CitationMap(CitationMap&&) = delete;
+  CitationMap& operator=(const CitationMap&) = delete;
+  CitationMap& operator=(CitationMap&&) = delete;
+  virtual ~CitationMap() = default;
+
+  bool operator==(const CitationMap& rhs) const
+  {
+    return id == rhs.id
+      && fk_scene == rhs.fk_scene
+      && fk_citation == rhs.fk_citation;
+  }
+  bool operator!=(const CitationMap& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const CitationMap& rhs)
+  {
+    id = rhs.id;
+    fk_scene = rhs.fk_scene;
+    fk_citation = rhs.fk_citation;
+  }
+};
+//----End Citation_Map
+struct EventMap : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int map_id MEMBER id)
+  Q_PROPERTY(int fk_scene MEMBER fk_scene)
+  Q_PROPERTY(int fk_event MEMBER fk_event)
+
+public:
+  int32_t id = -1;
+  int32_t fk_scene = -1;
+  int32_t fk_event = -1;
+
+  EventMap(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  EventMap(const EventMap&) = delete;
+  EventMap(EventMap&&) = delete;
+  EventMap& operator=(const EventMap&) = delete;
+  EventMap& operator=(EventMap&&) = delete;
+  virtual ~EventMap() = default;
+
+  bool operator==(const EventMap& rhs) const
+  {
+    return id == rhs.id
+      && fk_scene == rhs.fk_scene
+      && fk_event == rhs.fk_event;
+  }
+  bool operator!=(const EventMap& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const EventMap& rhs)
+  {
+    id = rhs.id;
+    fk_scene = rhs.fk_scene;
+    fk_event = rhs.fk_event;
+  }
+};
+//----End Event_Map
+struct EquipmentMap : public QObject {
+
+  Q_OBJECT
+  Q_PROPERTY(int equipment_id MEMBER id)
+  Q_PROPERTY(Scene* scene MEMBER scene)
+  Q_PROPERTY(Equipment* equipment MEMBER equipment)
+  Q_PROPERTY(QString name MEMBER name)
+  Q_PROPERTY(QString values MEMBER property_values)
+  Q_PROPERTY(QString notes MEMBER notes)
+public:
+  int32_t id = -1;
+  Scene* scene = nullptr;
+  Equipment* equipment = nullptr;
+  QString name = "";
+  QString property_values = "";
+  QString notes;
+  ;
+  EquipmentMap(QObject* parent = nullptr)
+    : QObject(parent)
+    , scene(new Scene(this))
+    , equipment(new Equipment(this))
+  {
+  }
+  EquipmentMap(Scene* s, Equipment* e, QObject* parent = nullptr)
+    : QObject(parent)
+    , scene(s)
+    , equipment(e)
+  {
+  }
+
+  EquipmentMap(const EquipmentMap&) = delete;
+  EquipmentMap(EquipmentMap&&) = delete;
+  EquipmentMap& operator=(const EquipmentMap&) = delete;
+  EquipmentMap& operator=(EquipmentMap&&) = delete;
+  virtual ~EquipmentMap() = default;
+
+  bool operator==(const EquipmentMap& rhs) const
+  {
+    return id == rhs.id
+      && name == rhs.name
+      && *scene == *rhs.scene
+      && *equipment == *rhs.equipment
+      && property_values == rhs.property_values
+      && notes == rhs.notes;
+  }
+  bool operator!=(const EquipmentMap& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const EquipmentMap& rhs)
+  {
+    //!
+    //!  TODO: Clone Scene and Equipment if non null to avoid
+    //!        Garbage Collection
+
+    id = rhs.id;
+    name = rhs.name;
+    scene->assign(*rhs.scene);
+    equipment->assign(*rhs.equipment);
+    property_values = rhs.property_values;
+    notes = rhs.notes;
+  }
+  void clear()
+  {
+    id = -1;
+    name.clear();
+    scene->clear();
+    equipment->clear();
+    property_values.clear();
+    notes.clear();
+  }
+};
+//----End EquipmentMap
+struct LocationMap : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int map_id MEMBER id)
+  Q_PROPERTY(int fk_scene MEMBER fk_scene)
+  Q_PROPERTY(int fk_location MEMBER fk_location)
+
+public:
+  int32_t id = -1;
+  int32_t fk_scene = -1;
+  int32_t fk_location = -1;
+
+  LocationMap(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  LocationMap(const LocationMap&) = delete;
+  LocationMap(LocationMap&&) = delete;
+  LocationMap& operator=(const LocationMap&) = delete;
+  LocationMap& operator=(LocationMap&&) = delete;
+  virtual ~LocationMap() = default;
+
+  bool operator==(const LocationMap& rhs) const
+  {
+    return id == rhs.id
+      && fk_scene == rhs.fk_scene
+      && fk_location == rhs.fk_location;
+  }
+  bool operator!=(const LocationMap& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const LocationMap& rhs)
+  {
+    id = rhs.id;
+    fk_scene = rhs.fk_scene;
+    fk_location = rhs.fk_location;
+  }
+};
+//----End Location_Map
+struct RoleMap : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int map_id MEMBER id)
+  Q_PROPERTY(int fk_scene MEMBER fk_scene)
+  Q_PROPERTY(int fk_role MEMBER fk_role)
+
+public:
+  int32_t id = -1;
+  int32_t fk_scene = -1;
+  int32_t fk_role = -1;
+
+  RoleMap(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  RoleMap(const RoleMap&) = delete;
+  RoleMap(RoleMap&&) = delete;
+  RoleMap& operator=(const RoleMap&) = delete;
+  RoleMap& operator=(RoleMap&&) = delete;
+  virtual ~RoleMap() = default;
+
+  bool operator==(const RoleMap& rhs) const
+  {
+    return id == rhs.id
+      && fk_scene == rhs.fk_scene
+      && fk_role == rhs.fk_role;
+  }
+  bool operator!=(const RoleMap& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const RoleMap& rhs)
+  {
+    id = rhs.id;
+    fk_scene = rhs.fk_scene;
+    fk_role = rhs.fk_role;
+  }
+};
+//----End Role Map
+struct PropMap : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int map_id MEMBER id)
+  Q_PROPERTY(int fk_scene MEMBER fk_scene)
+  Q_PROPERTY(int fk_prop MEMBER fk_prop)
+
+public:
+  int32_t id = -1;
+  int32_t fk_scene = -1;
+  int32_t fk_prop = -1;
+
+  PropMap(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  PropMap(const PropMap&) = delete;
+  PropMap(PropMap&&) = delete;
+  PropMap& operator=(const PropMap&) = delete;
+  PropMap& operator=(PropMap&&) = delete;
+  virtual ~PropMap() = default;
+
+  bool operator==(const PropMap& rhs) const
+  {
+    return id == rhs.id
+      && fk_scene == rhs.fk_scene
+      && fk_prop == rhs.fk_prop;
+  }
+  bool operator!=(const PropMap& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const PropMap& rhs)
+  {
+    id = rhs.id;
+    fk_scene = rhs.fk_scene;
+    fk_prop = rhs.fk_prop;
+  }
+};
+//----End Prop_Map
+struct RestrictionMap : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(int map_id MEMBER id)
+  Q_PROPERTY(int fk_scene MEMBER fk_scene)
+  Q_PROPERTY(int fk_restriction MEMBER fk_restriction)
+
+public:
+  int32_t id = -1;
+  int32_t fk_scene = -1;
+  int32_t fk_restriction = -1;
+
+  RestrictionMap(QObject* parent = nullptr)
+    : QObject(parent)
+  {
+  }
+  RestrictionMap(const RestrictionMap&) = delete;
+  RestrictionMap(RestrictionMap&&) = delete;
+  RestrictionMap& operator=(const RestrictionMap&) = delete;
+  RestrictionMap& operator=(RestrictionMap&&) = delete;
+  virtual ~RestrictionMap() = default;
+
+  bool operator==(const RestrictionMap& rhs) const
+  {
+    return id == rhs.id
+      && fk_scene == rhs.fk_scene
+      && fk_restriction == rhs.fk_restriction;
+  }
+  bool operator!=(const RestrictionMap& rhs) const
+  {
+    return !(*this == rhs);
+  }
+  void assign(const RestrictionMap& rhs)
+  {
+    id = rhs.id;
+    fk_scene = rhs.fk_scene;
+    fk_restriction = rhs.fk_restriction;
+  }
+};
+//----End Restriction_Map
 }
 
 #endif

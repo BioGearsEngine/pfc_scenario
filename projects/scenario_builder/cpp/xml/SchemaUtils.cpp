@@ -466,7 +466,7 @@ namespace schema {
     auto item = std::make_unique<schema::item>(make_string(input->name.toStdString()),
                                                make_string("Equipment_" + std::to_string(input->id)),
                                                make_string(input->notes.toStdString()),
-                                               make_property_value_list(input->property_names, input->property_values));
+                                               make_property_value_list(input->equipment->properties, input->property_values));
 
     return item;
   }
@@ -775,8 +775,8 @@ namespace schema {
             Equipment eq;
             eq.name = equipment.name().c_str();
             if (_db.select_equipment(&eq)) {
-              eqMap.fk_scene = temp.id;
-              eqMap.fk_equipment = eq.id;
+              eqMap.scene->id= temp.id;
+              eqMap.equipment->id = eq.id;
               if (!_db.update_equipment_map(&eqMap)) {
                 qDebug() << "Error updating Equipment Map";
               }

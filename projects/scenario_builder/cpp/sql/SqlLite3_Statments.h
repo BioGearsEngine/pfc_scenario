@@ -156,6 +156,7 @@ inline namespace sqlite3 {
     EQUIPMENT_DESCRIPTION,
     EQUIPMENT_CITATIONS,
     EQUIPMENT_IMAGE,
+    EQUIPMENT_PROPERTIES,
     EQUIPMENT_COLUMN_COUNT
   };
   // I know that the plural of equipment is 'equipment', but we've made it equipments to be less ambiguous
@@ -166,13 +167,14 @@ inline namespace sqlite3 {
     name Varchar(64) NOT NULL UNIQUE,
     description Varchar(64) NOT NULL,
     citations TEXT,
-    image TEXT
+    image TEXT,
+    PROPERTIES TEXT
   );
   )";
   constexpr auto drop_all_equipment = R"( DELETE FROM equipment; )";
   constexpr auto count_equipments = R"( SELECT COUNT(equipment_id) FROM equipments; )";
   constexpr auto count_equipments_in_scene = R"( SELECT COUNT(equipment_map_id) FROM equipment_map WHERE :id = fk_scene ; )";
-  constexpr auto select_all_equipments = R"( SELECT equipment_id,type,name,description,citations,image FROM equipments ORDER BY name; )";
+  constexpr auto select_all_equipments = R"( SELECT equipment_id,type,name,description,citations,image,properties FROM equipments ORDER BY name; )";
 
   constexpr auto select_equipment_by_id
     = R"( SELECT * FROM equipments WHERE equipment_id = :id ; )";
@@ -183,6 +185,7 @@ inline namespace sqlite3 {
               , description = :description
               , citations = :citations
               , image = :image
+              , properties = :properties
           WHERE equipment_id = :id;
          )";
   constexpr auto delete_equipment_by_id
@@ -193,14 +196,15 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM equipments WHERE name = :name ORDER BY name;)";
   constexpr auto insert_or_update_equipments
     = R"( INSERT INTO equipments
-          (name,type,description,citations,image)
-          VALUES (:name, :type, :description, :citations, :image)
+          (name,type,description,citations,image,properties)
+          VALUES (:name, :type, :description, :citations, :image, :properties)
           ON CONFLICT (name)
           DO UPDATE SET name = excluded.name
                         , type = excluded.type
                         , description = excluded.description
                         , citations = excluded.citations
                         , image = excluded.image
+                        , properties = excluded.properties
           ;         
           )";
   //---------------------- EVENT STATMENTS ------------------------
@@ -677,7 +681,7 @@ inline namespace sqlite3 {
     EQUIPMENT_MAP_FK_SCENE,
     EQUIPMENT_MAP_FK_EQUIPMENT,
     EQUIPMENT_MAP_NAME,
-    EQUIPMENT_MAP_ROPERTY_VALUES,
+    EQUIPMENT_MAP_VALUES ,
     EQUIPMENT_MAP_NOTES,
     EQUIPMENT_MAP_COLUMN_COUNT
   };
@@ -689,12 +693,13 @@ inline namespace sqlite3 {
     fk_equipment INTEGER,
     name TEXT,
     property_values TEXT,
-    notes TEXT
+    notes TEXT,
+	  UNIQUE("fk_scene","fk_equipment","name")
   );
   )";
   constexpr auto drop_all_equipment_map = R"( DELETE FROM equipment_map; )";
   constexpr auto count_equipment_map = R"( SELECT COUNT(equipment_map_id) FROM equipment_map; )";
-  constexpr auto select_all_equipment_map = R"( SELECT equipment_map_id,fk_scene,fk_equipment FROM equipment_map; )";
+  constexpr auto select_all_equipment_map = R"( SELECT equipment_map_id,fk_scene,fk_equipment, name, values, notes FROM equipment_map; )";
 
   constexpr auto select_equipment_map_by_id
     = R"( SELECT * FROM equipment_map WHERE equipment_map_id = :id ; )";
@@ -703,23 +708,28 @@ inline namespace sqlite3 {
           SET fk_scene = :fk_scene
               , fk_equipment = :fk_equipment
               , name = :name
-              , property_value = :values
+              , property_values = :values
               , notes = :notes
           WHERE equipment_map_id = :id;
          )";
   constexpr auto delete_equipment_map_by_id
     = R"( DELETE FROM equipment_map WHERE equipment_map_id = :id; )";
-  constexpr auto delete_equipment_map_by_fk_scene
+  constexpr auto delete_all_equipment_from_a_scene
     = R"( DELETE FROM equipment_map WHERE fk_scene = :fk_scene; )";
-  constexpr auto delete_equipment_map_by_fk_equipment
+  constexpr auto delete_this_equipment_across_all_scenes
     = R"( DELETE FROM equipment_map WHERE fk_equipment = :fk_equipment; )";
-  constexpr auto delete_equipment_map_by_fk
+  constexpr auto delete_an_equipment_from_a_scene
+    = R"( DELETE FROM equipment_map WHERE fk_equipment = :fk_equipment AND fk_scene = :fk_scene AND name = :name )";
+  constexpr auto delete_all_occurrence_of_equipment_from_a_scene
     = R"( DELETE FROM equipment_map WHERE fk_equipment = :fk_equipment AND fk_scene = :fk_scene )";
-  constexpr auto select_equipment_map_by_fk_scene
+
+  constexpr auto select_all_equipment_in_a_scene
     = R"( SELECT * FROM equipment_map WHERE fk_scene = :fk_scene; )";
-  constexpr auto select_equipment_map_by_fk_equipment
+  constexpr auto select_this_equipment_across_all_scenes
     = R"( SELECT * FROM equipment_map WHERE fk_equipment = :fk_equipment; )";
-  constexpr auto select_equipment_map_by_fk
+  constexpr auto select_equipment_from_scene_with_name
+    = R"( SELECT * FROM equipment_map WHERE fk_equipment = :fk_equipment AND fk_scene = :fk_scene AND name = :name )";
+  constexpr auto select_all_occurrences_of_this_equipment_in_a_scene
     = R"( SELECT * FROM equipment_map WHERE fk_equipment = :fk_equipment AND fk_scene = :fk_scene )";
   constexpr auto insert_or_update_equipment_map
     = R"( INSERT INTO equipment_map

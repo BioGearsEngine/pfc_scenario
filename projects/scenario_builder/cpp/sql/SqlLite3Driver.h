@@ -293,7 +293,7 @@ public:
   Q_INVOKABLE bool update_citation_in_scene(Scene*, Citation*);
   Q_INVOKABLE bool update_treatment(Treatment*);
   Q_INVOKABLE bool update_equipment(Equipment*);
-  Q_INVOKABLE bool update_equipment_in_scene(Scene*, Equipment*);
+  Q_INVOKABLE bool update_equipment_in_scene(EquipmentMap*);
   Q_INVOKABLE bool update_injury(Injury*);
   Q_INVOKABLE bool update_injury_set(InjurySet*);
   Q_INVOKABLE bool update_assessment(Assessment*);

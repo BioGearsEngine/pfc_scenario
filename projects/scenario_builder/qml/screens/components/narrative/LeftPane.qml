@@ -64,13 +64,6 @@ ColumnLayout {
            "description" : self.description,
            "details" : self.details}
         );
-//        location.location_id = -1
-//        location.name = "New Scene %1 Location".arg(next)
-//        location.scene_name = "New Scene %1".arg(next)
-//        location.time_of_day = "";
-//        location.environment = "";
-//        root.backend.update_location(location)
-        ++next;
       }
       onSecondButtonClicked : {
         if (sceneList.model.count == 0) {

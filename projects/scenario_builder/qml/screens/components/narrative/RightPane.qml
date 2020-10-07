@@ -135,7 +135,7 @@ Rectangle {
         index : root.index
         count : root.count
       }
-      RP_Events {
+      RP_Props {
         id : objects
         Layout.fillHeight : true
         Layout.fillWidth : true

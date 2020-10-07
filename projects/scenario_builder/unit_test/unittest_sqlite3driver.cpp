@@ -1,5 +1,5 @@
-#include <QList>
 #include <QDebug>
+#include <QList>
 
 #include <boost/filesystem.hpp>
 #include <fstream>
@@ -9,24 +9,43 @@
 
 #include "sql/SqlLite3Driver.h"
 #include "sql/SqlLite3_Statments.h"
+#include "xml/SchemaUtils.h"
 #include "xml/Serializer.h"
 #include <pfc/schema/pfc_scenario.hxx>
-#include "xml/SchemaUtils.h"
 
-#ifdef DISABLE_BIOGEARS_Path_TEST
-#define TEST_FIXTURE_NAME DISABLED_SQLite3Driver
-#else
-#define TEST_FIXTURE_NAME SQLiteDriver
-#endif
+
+#define DISABLE_ASSESSMENT_TEST   
+#define DISABLE_Author_TEST       
+#define DISABLE_Citation_TEST     
+#define DISABLE_Equipment_TEST    
+#define DISABLE_Event_TEST        
+#define DISABLE_Injury_TEST       
+#define DISABLE_InjurySet_TEST    
+#define DISABLE_Location_TEST     
+#define DISABLE_Objectives_TEST   
+#define DISABLE_Property_TEST     
+#define DISABLE_Restrictions_TEST 
+#define DISABLE_Role_TEST         
+#define DISABLE_Scene_TEST        
+#define DISABLE_Treatment_TEST    
+#define DISABLE_RoleMap_TEST      
+#define DISABLE_EventMap_TEST     
+#define DISABLE_SceneMap_TEST     
+#define DISABLE_EquipmentMap_TEST 
+#define DISABLE_CitationMap_TEST  
+#undef DISABLE_LocationMap_TEST  
+#undef DISABLE_Backdoor_TEST     
+#define DISABLE_REMOVAL_TEST      
+#define DISABLE_Serialization_TEST
 
 // The fixture for testing class Foo.
-class TEST_FIXTURE_NAME : public ::testing::Test {
+class SQLiteDriver : public ::testing::Test {
 protected:
-  TEST_FIXTURE_NAME()
+  SQLiteDriver()
     : _db("unittest_db.sqlite"){
 
     };
-  ~TEST_FIXTURE_NAME()
+  ~SQLiteDriver()
   {
     _db.close();
     try {
@@ -43,13 +62,20 @@ public:
   pfc::SQLite3Driver _db;
 };
 
-class DATABASE_LOADING_TEST : public ::testing::Test
-{
+class SerializationTest : public ::testing::Test {
 protected:
-  DATABASE_LOADING_TEST(): _db("unittest_db.sqlite")
+  SerializationTest()
+    : _db("unittest_db.sqlite")
   {
+    _db.close();
+    try {
+      boost::filesystem::remove("unittest_db.sqlite");
+    } catch (boost::system::system_error e) {
+      std::cout << e.what() << std::endl;
+    }
+    _db.open("unittest_db.sqlite");
   };
-  ~DATABASE_LOADING_TEST()
+  ~SerializationTest()
   {
     _db.close();
     try {
@@ -69,41 +95,40 @@ public:
   bool load_result = false;
 };
 
-void TEST_FIXTURE_NAME::SetUp()
+void SQLiteDriver::SetUp()
 {
 }
 
-void TEST_FIXTURE_NAME::TearDown()
+void SQLiteDriver::TearDown()
 {
 }
 
-void DATABASE_LOADING_TEST::SetUp()
+void SerializationTest::SetUp()
 {
-  file_buf.open("TestScenario.pfc.xml", std::ios::in);
+  file_buf.open("Scenario.pfc.xml", std::ios::in);
   std::istream i_stream(&file_buf);
   try { // If the parsing fails this prints out every error
     scenario_schema = pfc::schema::Scenario(i_stream);
-  } catch (const xml_schema::exception& e) {
+  } catch (const xml_schema::parsing& e) {
     std::cout << e << '\n';
     FAIL();
   }
 }
 
-void DATABASE_LOADING_TEST::TearDown()
+void SerializationTest::TearDown()
 {
   scenario_schema.release();
   file_buf.close();
 }
 
-
-//TEST_F(TEST_FIXTURE_NAME, saving)
+//TEST_F(SQLiteDriver, DISABLED_saving)
 //{
 //  pfc::SQLite3Driver driver("pfc_sb_working.sqlite", "", nullptr);
 //  pfc::Serializer serializer(nullptr);
 //  serializer.save(&driver);
 //}
 
-TEST_F(TEST_FIXTURE_NAME, Constructor)
+TEST_F(SQLiteDriver, Constructor)
 {
   {
     pfc::SQLite3Driver driver("UnitScenario.sqlite");
@@ -122,8 +147,13 @@ TEST_F(TEST_FIXTURE_NAME, Constructor)
   EXPECT_FALSE(file2.is_open());
 }
 
-//ASSESSMENT TESTS--------------------------------------------------------------
-TEST_F(TEST_FIXTURE_NAME, Insert_Assessment)
+//ASSESSMENT TESTS----------------------un---------------------------------------
+#ifndef DISABLE_ASSESSMENT_TEST
+#define ASSESSMENT_TEST(X) X##_Assessment
+#else
+#define ASSESSMENT_TEST(X) DISABLED_##X##_Assessment
+#endif
+TEST_F(SQLiteDriver, ASSESSMENT_TEST(Insert))
 {
   using namespace pfc;
   Assessment assessment_1; //   Assessment* assessment_1 = new Assessment(NULLPTR);
@@ -156,7 +186,7 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Assessment)
   EXPECT_TRUE(_db.update_assessment(&assessment_3));
   EXPECT_EQ(3, _db.assessment_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Select_Assessment)
+TEST_F(SQLiteDriver, ASSESSMENT_TEST(Select))
 {
   using namespace pfc;
   Assessment assessment_1;
@@ -203,7 +233,7 @@ TEST_F(TEST_FIXTURE_NAME, Select_Assessment)
   assessment_3.id = 3;
   EXPECT_EQ(assessment_3, name);
 }
-TEST_F(TEST_FIXTURE_NAME, Remove_Assessment)
+TEST_F(SQLiteDriver, ASSESSMENT_TEST(Remove))
 {
   using namespace pfc;
   Assessment assessment_1;
@@ -236,7 +266,7 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Assessment)
   EXPECT_TRUE(_db.remove_assessment(&assessment_3));
   EXPECT_EQ(1, _db.assessment_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Equality_Assessment)
+TEST_F(SQLiteDriver, ASSESSMENT_TEST(Equality))
 {
   using namespace pfc;
   Assessment assessment_1;
@@ -255,7 +285,12 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Assessment)
   EXPECT_EQ(assessment_1, assessment_2);
 }
 //AUTHOR TESTS--------------------------------------------------------------
-TEST_F(TEST_FIXTURE_NAME, Insert_Author)
+#ifndef DISABLE_Author_TEST
+#define AUTHOR_TEST(X) X##_Author
+#else
+#define AUTHOR_TEST(X) DISABLED_##X##_Author
+#endif
+TEST_F(SQLiteDriver, AUTHOR_TEST(Insert))
 {
   using namespace pfc;
   Author author_1;
@@ -282,7 +317,7 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Author)
   EXPECT_TRUE(_db.update_author(&author_3));
   EXPECT_EQ(3, _db.author_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Insert_First_Author)
+TEST_F(SQLiteDriver, AUTHOR_TEST(Insert_First))
 {
   using namespace pfc;
   Author author_1;
@@ -309,13 +344,12 @@ TEST_F(TEST_FIXTURE_NAME, Insert_First_Author)
 
   author_3.email = "SolidSnake@MetalGear.com";
 
-
   EXPECT_EQ(0, _db.author_count());
   EXPECT_TRUE(_db.update_first_author(&author_1));
   author_1.id = 1;
   EXPECT_EQ(1, _db.author_count());
   _db.select_author(&author_3);
-  EXPECT_EQ(author_1,author_3);
+  EXPECT_EQ(author_1, author_3);
 
   author_3.first = "Rocky";
   author_3.last = "Balboa";
@@ -325,9 +359,9 @@ TEST_F(TEST_FIXTURE_NAME, Insert_First_Author)
   author_2.id = 1;
   EXPECT_EQ(1, _db.author_count());
   _db.select_author(&author_3);
-  EXPECT_EQ(author_2,author_3);
+  EXPECT_EQ(author_2, author_3);
 }
-TEST_F(TEST_FIXTURE_NAME, Select_Author)
+TEST_F(SQLiteDriver, AUTHOR_TEST(Select))
 {
   using namespace pfc;
   Author author_1;
@@ -370,7 +404,7 @@ TEST_F(TEST_FIXTURE_NAME, Select_Author)
   author_2.id = 2;
   EXPECT_EQ(author_2, email);
 }
-TEST_F(TEST_FIXTURE_NAME, Remove_Author)
+TEST_F(SQLiteDriver, AUTHOR_TEST(Remove))
 {
   using namespace pfc;
   Author author_1;
@@ -397,7 +431,7 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Author)
   EXPECT_TRUE(_db.remove_author(&author_2));
   EXPECT_EQ(1, _db.author_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Equality_Author)
+TEST_F(SQLiteDriver, AUTHOR_TEST(Equality))
 {
   using namespace pfc;
   Author author_1;
@@ -425,7 +459,12 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Author)
   EXPECT_EQ(author_1.organization, author_2.organization);
 }
 //CITATION TESTS--------------------------------------------------------------
-TEST_F(TEST_FIXTURE_NAME, Insert_Citation)
+#ifndef DISABLE_Citation_TEST
+#define Citation_TEST(X) X##_Citation
+#else
+#define Citation_TEST(X) DISABLED_##X##_Citation
+#endif
+TEST_F(SQLiteDriver, Citation_TEST(Insert))
 {
   using namespace pfc;
   Citation citation_1;
@@ -458,7 +497,7 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Citation)
   EXPECT_TRUE(_db.update_citation(&citation_3));
   EXPECT_EQ(3, _db.citation_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Select_Citation)
+TEST_F(SQLiteDriver, Citation_TEST(Select))
 {
   using namespace pfc;
   Citation citation_1;
@@ -505,7 +544,7 @@ TEST_F(TEST_FIXTURE_NAME, Select_Citation)
   citation_3.id = 3;
   EXPECT_EQ(citation_3, key);
 }
-TEST_F(TEST_FIXTURE_NAME, Remove_Citation)
+TEST_F(SQLiteDriver, Citation_TEST(Remove))
 {
   using namespace pfc;
   Citation citation_1;
@@ -538,7 +577,7 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Citation)
   EXPECT_TRUE(_db.remove_citation(&citation_3));
   EXPECT_EQ(1, _db.citation_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Equality_Citation)
+TEST_F(SQLiteDriver, Citation_TEST(Equality))
 {
   using namespace pfc;
   Citation citation_1;
@@ -557,7 +596,12 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Citation)
   EXPECT_EQ(citation_1, citation_2);
 }
 //EQUIPMENT TESTS--------------------------------------------------------------
-TEST_F(TEST_FIXTURE_NAME, Insert_Equipment)
+#ifndef DISABLE_Equipment_TEST
+#define Equipment_TEST(X) X##_Equipment
+#else
+#define Equipment_TEST(X) DISABLED_##X##_Equipment
+#endif
+TEST_F(SQLiteDriver, Equipment_TEST(Insert))
 {
   using namespace pfc;
   Equipment equipment_1;
@@ -590,7 +634,7 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Equipment)
   EXPECT_TRUE(_db.update_equipment(&equipment_3));
   EXPECT_EQ(3, _db.equipment_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Select_Equipment)
+TEST_F(SQLiteDriver, Equipment_TEST(Select))
 {
   using namespace pfc;
   Equipment equipment_1;
@@ -637,7 +681,7 @@ TEST_F(TEST_FIXTURE_NAME, Select_Equipment)
   equipment_3.id = 3;
   EXPECT_EQ(equipment_3, name);
 }
-TEST_F(TEST_FIXTURE_NAME, Remove_Equipment)
+TEST_F(SQLiteDriver, Equipment_TEST(Remove))
 {
   using namespace pfc;
   Equipment equipment_1;
@@ -670,7 +714,7 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Equipment)
   EXPECT_TRUE(_db.remove_equipment(&equipment_3));
   EXPECT_EQ(1, _db.equipment_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Equality_Equipment)
+TEST_F(SQLiteDriver, Equipment_TEST(Equality))
 {
   using namespace pfc;
   Equipment equipment_1;
@@ -689,7 +733,12 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Equipment)
   EXPECT_EQ(equipment_1, equipment_2);
 }
 //EVENT TESTS--------------------------------------------------------------
-TEST_F(TEST_FIXTURE_NAME, Insert_Event)
+#ifndef DISABLE_Event_TEST
+#define Event_TEST(X) X##_Event
+#else
+#define Event_TEST(X) DISABLED_##X##_Event
+#endif
+TEST_F(SQLiteDriver, Event_TEST(Insert))
 {
 
   //TODO: fill out the Event object and make this test work
@@ -735,7 +784,7 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Event)
   EXPECT_TRUE(_db.update_event(&event_3));
   EXPECT_EQ(3, _db.event_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Select_Event)
+TEST_F(SQLiteDriver, Event_TEST(Select))
 {
   using namespace pfc;
   Event event_1;
@@ -790,7 +839,7 @@ TEST_F(TEST_FIXTURE_NAME, Select_Event)
   EXPECT_EQ(event_1, id);
   EXPECT_EQ(event_3, name);
 }
-TEST_F(TEST_FIXTURE_NAME, Remove_Event)
+TEST_F(SQLiteDriver, Event_TEST(Remove))
 {
   using namespace pfc;
   Event event_1;
@@ -832,7 +881,7 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Event)
   EXPECT_TRUE(_db.remove_event(&event_3));
   EXPECT_EQ(1, _db.event_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Equality_Event)
+TEST_F(SQLiteDriver, Event_TEST(Equality))
 {
   using namespace pfc;
   Event event_1;
@@ -854,7 +903,12 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Event)
   EXPECT_EQ(event_1, event_2);
 }
 //INJURY TESTS--------------------------------------------------------------
-TEST_F(TEST_FIXTURE_NAME, Insert_Injury)
+#ifndef DISABLE_Injury_TEST
+#define Injury_TEST(X) X##_Injury
+#else
+#define Injury_TEST(X) DISABLED_##X##_Injury
+#endif
+TEST_F(SQLiteDriver, Injury_TEST(Insert))
 {
   using namespace pfc;
   Injury injury_1;
@@ -884,7 +938,7 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Injury)
   EXPECT_TRUE(_db.update_injury(&injury_3));
   EXPECT_EQ(3, _db.injury_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Select_Injury)
+TEST_F(SQLiteDriver, Injury_TEST(Select))
 {
   using namespace pfc;
   Injury injury_1;
@@ -933,7 +987,7 @@ TEST_F(TEST_FIXTURE_NAME, Select_Injury)
   injury_3.id = 3;
   EXPECT_EQ(injury_3, common_name);
 }
-TEST_F(TEST_FIXTURE_NAME, Remove_Injury)
+TEST_F(SQLiteDriver, Injury_TEST(Remove))
 {
   using namespace pfc;
   Injury injury_1;
@@ -963,7 +1017,7 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Injury)
   EXPECT_TRUE(_db.remove_injury(&injury_3));
   EXPECT_EQ(1, _db.injury_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Equality_Injury)
+TEST_F(SQLiteDriver, Injury_TEST(Equality))
 {
   using namespace pfc;
   Injury injury_1;
@@ -981,7 +1035,12 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Injury)
   EXPECT_EQ(injury_1, injury_2);
 }
 //INJURY SET TESTS--------------------------------------------------------------
-TEST_F(TEST_FIXTURE_NAME, Insert_InjurySet)
+#ifndef DISABLE_InjurySet_TEST
+#define InjurySet_TEST(X) X##_InjurySet
+#else
+#define InjurySet_TEST(X) DISABLED_##X##_InjurySet
+#endif
+TEST_F(SQLiteDriver, InjurySet_TEST(Insert))
 {
   using namespace pfc;
   InjurySet injury_set_1;
@@ -1014,7 +1073,7 @@ TEST_F(TEST_FIXTURE_NAME, Insert_InjurySet)
   EXPECT_TRUE(_db.update_injury_set(&injury_set_3));
   EXPECT_EQ(3, _db.injury_set_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Select_InjurySet)
+TEST_F(SQLiteDriver, InjurySet_TEST(Select))
 {
   using namespace pfc;
   InjurySet injury_set_1;
@@ -1062,7 +1121,7 @@ TEST_F(TEST_FIXTURE_NAME, Select_InjurySet)
   injury_set_2.id = 2;
   EXPECT_EQ(injury_set_2, name);
 }
-TEST_F(TEST_FIXTURE_NAME, Remove_InjurySet)
+TEST_F(SQLiteDriver, InjurySet_TEST(Remove))
 {
   using namespace pfc;
   InjurySet injury_set_1;
@@ -1095,7 +1154,7 @@ TEST_F(TEST_FIXTURE_NAME, Remove_InjurySet)
   EXPECT_TRUE(_db.remove_injury_set(&injury_set_3));
   EXPECT_EQ(1, _db.injury_set_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Equality_InjurySet)
+TEST_F(SQLiteDriver, InjurySet_TEST(Equality))
 {
   using namespace pfc;
   InjurySet injury_set_1;
@@ -1114,7 +1173,12 @@ TEST_F(TEST_FIXTURE_NAME, Equality_InjurySet)
   EXPECT_EQ(injury_set_1, injury_set_2);
 }
 //LOCATION TESTS--------------------------------------------------------------
-TEST_F(TEST_FIXTURE_NAME, Insert_Location)
+#ifndef DISABLE_Location_TEST
+#define Location_TEST(X) X##_Location
+#else
+#define Location_TEST(X) DISABLED_##X##_Location
+#endif
+TEST_F(SQLiteDriver, Location_TEST(Insert))
 {
   using namespace pfc;
   Location location_1;
@@ -1138,7 +1202,7 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Location)
   EXPECT_TRUE(_db.update_location(&location_3));
   EXPECT_EQ(3, _db.location_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Select_Location)
+TEST_F(SQLiteDriver, Location_TEST(Select))
 {
   using namespace pfc;
   Location location_1;
@@ -1172,7 +1236,7 @@ TEST_F(TEST_FIXTURE_NAME, Select_Location)
   location_2.id = 2;
   EXPECT_EQ(location_2, name);
 }
-TEST_F(TEST_FIXTURE_NAME, Remove_Location)
+TEST_F(SQLiteDriver, Location_TEST(Remove))
 {
   using namespace pfc;
   Location location_1;
@@ -1196,7 +1260,7 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Location)
   EXPECT_TRUE(_db.remove_location(&location_3));
   EXPECT_EQ(1, _db.location_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Equality_Location)
+TEST_F(SQLiteDriver, Location_TEST(Equality))
 {
   using namespace pfc;
   Location location_1;
@@ -1211,202 +1275,19 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Location)
   EXPECT_TRUE(_db.select_location(&location_2));
   EXPECT_EQ(location_1, location_2);
 }
-//MAP TESTS------------------------------------------------------------------
-TEST_F(TEST_FIXTURE_NAME, Insert_Map)
-{
-  using namespace pfc;
-  RoleMap map_1;
-  RoleMap map_2;
-  RoleMap map_3;
 
-  map_1.fk_scene = 1;
-  map_1.fk_role = 2;
+//!
+//!  Test for Relationship Map Tables
+//!
+//
 
-  map_2.fk_scene = 3;
-  map_2.fk_role = 4;
-
-  map_3.fk_scene = 5;
-  map_3.fk_role = 6;
-
-  EXPECT_EQ(0, _db.role_map_count());
-  EXPECT_TRUE(_db.update_role_map(&map_1));
-  EXPECT_EQ(1, _db.role_map_count());
-  EXPECT_TRUE(_db.update_role_map(&map_2));
-  EXPECT_EQ(2, _db.role_map_count());
-  EXPECT_TRUE(_db.update_role_map(&map_3));
-  EXPECT_EQ(3, _db.role_map_count());
-}
-TEST_F(TEST_FIXTURE_NAME, Select_RoleMap)
-{
-  using namespace pfc;
-  RoleMap map_1;
-  RoleMap map_2;
-
-  map_1.fk_scene = 1;
-  map_1.fk_role = 2;
-
-  map_2.fk_scene = 3;
-  map_2.fk_role = 4;
-
-  EXPECT_EQ(0, _db.role_map_count());
-  EXPECT_TRUE(_db.update_role_map(&map_1));
-  EXPECT_EQ(1, _db.role_map_count());
-  EXPECT_TRUE(_db.update_role_map(&map_2));
-  EXPECT_EQ(2, _db.role_map_count());
-
-  RoleMap id;
-  RoleMap fk;
-
-  id.id = 1;
-  fk.fk_scene = 3;
-  fk.fk_role = 4;
-
-  _db.select_role_map(&id);
-  _db.select_role_map(&fk);
-
-  map_1.id = 1;
-  EXPECT_EQ(map_1, id);
-  map_2.id = 2;
-  EXPECT_EQ(map_2, fk);
-}
-TEST_F(TEST_FIXTURE_NAME, Remove_RoleMap)
-{
-  using namespace pfc;
-  RoleMap map_1;
-  RoleMap map_2;
-  RoleMap map_3;
-
-  map_1.fk_scene = 1;
-  map_1.fk_role = 2;
-
-  map_2.fk_scene = 3;
-  map_2.fk_role = 4;
-
-  map_3.fk_scene = 5;
-  map_3.fk_role = 6;
-
-  EXPECT_TRUE(_db.update_role_map(&map_1));
-  EXPECT_TRUE(_db.update_role_map(&map_2));
-  EXPECT_TRUE(_db.update_role_map(&map_3));
-  EXPECT_EQ(3, _db.role_map_count());
-  EXPECT_TRUE(_db.remove_role_map(&map_1));
-  EXPECT_TRUE(_db.remove_role_map(&map_3));
-  EXPECT_EQ(1, _db.role_map_count());
-}
-TEST_F(TEST_FIXTURE_NAME, Equality_RoleMap)
-{
-  using namespace pfc;
-  RoleMap map_1;
-  RoleMap map_2;
-
-  map_1.fk_scene = 1;
-  map_1.fk_role = 2;
-
-  map_2.id = 1;
-
-  EXPECT_TRUE(_db.update_role_map(&map_1));
-  EXPECT_TRUE(_db.select_role_map(&map_2));
-  EXPECT_EQ(map_1, map_2);
-}
-//EVENT MAP TESTS------------------------------------------------------------------
-TEST_F(TEST_FIXTURE_NAME, Insert_EventMap)
-{
-  using namespace pfc;
-  EventMap event_map_1;
-  EventMap event_map_2;
-  EventMap event_map_3;
-
-  event_map_1.fk_scene = 1;
-  event_map_1.fk_event = 2;
-
-  event_map_2.fk_scene = 3;
-  event_map_2.fk_event = 4;
-
-  event_map_3.fk_scene = 5;
-  event_map_3.fk_event = 6;
-
-  EXPECT_EQ(0, _db.event_map_count());
-  EXPECT_TRUE(_db.update_event_map(&event_map_1));
-  EXPECT_EQ(1, _db.event_map_count());
-  EXPECT_TRUE(_db.update_event_map(&event_map_2));
-  EXPECT_EQ(2, _db.event_map_count());
-  EXPECT_TRUE(_db.update_event_map(&event_map_3));
-  EXPECT_EQ(3, _db.event_map_count());
-}
-TEST_F(TEST_FIXTURE_NAME, Select_EventMap)
-{
-  using namespace pfc;
-  EventMap event_map_1;
-  EventMap event_map_2;
-
-  event_map_1.fk_scene = 1;
-  event_map_1.fk_event = 2;
-
-  event_map_2.fk_scene = 3;
-  event_map_2.fk_event = 4;
-
-  EXPECT_EQ(0, _db.event_map_count());
-  EXPECT_TRUE(_db.update_event_map(&event_map_1));
-  EXPECT_EQ(1, _db.event_map_count());
-  EXPECT_TRUE(_db.update_event_map(&event_map_2));
-  EXPECT_EQ(2, _db.event_map_count());
-
-  EventMap id;
-  EventMap fk;
-
-  id.id = 1;
-  fk.fk_scene = 3;
-  fk.fk_event = 4;
-
-  _db.select_event_map(&id);
-  _db.select_event_map(&fk);
-
-  event_map_1.id = 1;
-  EXPECT_EQ(event_map_1, id);
-  event_map_2.id = 2;
-  EXPECT_EQ(event_map_2, fk);
-}
-TEST_F(TEST_FIXTURE_NAME, Remove_EventMap)
-{
-  using namespace pfc;
-  EventMap event_map_1;
-  EventMap event_map_2;
-  EventMap event_map_3;
-
-  event_map_1.fk_scene = 1;
-  event_map_1.fk_event = 2;
-
-  event_map_2.fk_scene = 3;
-  event_map_2.fk_event = 4;
-
-  event_map_3.fk_scene = 5;
-  event_map_3.fk_event = 6;
-
-  EXPECT_TRUE(_db.update_event_map(&event_map_1));
-  EXPECT_TRUE(_db.update_event_map(&event_map_2));
-  EXPECT_TRUE(_db.update_event_map(&event_map_3));
-  EXPECT_EQ(3, _db.event_map_count());
-  EXPECT_TRUE(_db.remove_event_map(&event_map_1));
-  EXPECT_TRUE(_db.remove_event_map(&event_map_3));
-  EXPECT_EQ(1, _db.event_map_count());
-}
-TEST_F(TEST_FIXTURE_NAME, Equality_EventMap)
-{
-  using namespace pfc;
-  EventMap event_map_1;
-  EventMap event_map_2;
-
-  event_map_1.fk_scene = 1;
-  event_map_1.fk_event = 2;
-
-  event_map_2.id = 1;
-
-  EXPECT_TRUE(_db.update_event_map(&event_map_1));
-  EXPECT_TRUE(_db.select_event_map(&event_map_2));
-  EXPECT_EQ(event_map_1, event_map_2);
-}
 //OBJECTIVE TESTS--------------------------------------------------------------
-TEST_F(TEST_FIXTURE_NAME, Insert_Objective)
+#ifndef DISABLE_Objectives_TEST
+#define Objectives_TEST(X) X##_Objectives
+#else
+#define Objectives_TEST(X) DISABLED_##X##_Objectives
+#endif
+TEST_F(SQLiteDriver, Objectives_TEST(Insert))
 {
   using namespace pfc;
   Objective objective_1;
@@ -1433,7 +1314,7 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Objective)
   EXPECT_TRUE(_db.update_objective(&objective_3));
   EXPECT_EQ(3, _db.objective_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Select_Objective)
+TEST_F(SQLiteDriver, Objectives_TEST(Select))
 {
   using namespace pfc;
   Objective objective_1;
@@ -1474,7 +1355,7 @@ TEST_F(TEST_FIXTURE_NAME, Select_Objective)
   objective_3.id = 3;
   EXPECT_EQ(objective_3, name);
 }
-TEST_F(TEST_FIXTURE_NAME, Remove_Objective)
+TEST_F(SQLiteDriver, Objectives_TEST(Remove))
 {
   using namespace pfc;
   Objective objective_1;
@@ -1501,7 +1382,7 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Objective)
   EXPECT_TRUE(_db.remove_objective(&objective_3));
   EXPECT_EQ(1, _db.objective_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Equality_Objective)
+TEST_F(SQLiteDriver, Objectives_TEST(Equality))
 {
   using namespace pfc;
   Objective objective_1;
@@ -1518,7 +1399,12 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Objective)
   EXPECT_EQ(objective_1, objective_2);
 }
 //PROPERTY TESTS--------------------------------------------------------------
-TEST_F(TEST_FIXTURE_NAME, Insert_Property)
+#ifndef DISABLE_Property_TEST
+#define Property_TEST(X) X##_Property
+#else
+#define Property_TEST(X) DISABLED_##X##_Property
+#endif
+TEST_F(SQLiteDriver, Property_TEST(Insert))
 {
   using namespace pfc;
   Property property_1;
@@ -1542,7 +1428,7 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Property)
   EXPECT_TRUE(_db.update_property(&property_3));
   EXPECT_EQ(3, _db.property_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Select_Property)
+TEST_F(SQLiteDriver, Property_TEST(Select))
 {
   using namespace pfc;
   Property property_1;
@@ -1570,7 +1456,7 @@ TEST_F(TEST_FIXTURE_NAME, Select_Property)
   property_2.id = 2;
   EXPECT_EQ(property_2, name);
 }
-TEST_F(TEST_FIXTURE_NAME, Remove_Property)
+TEST_F(SQLiteDriver, Property_TEST(Remove))
 {
   using namespace pfc;
   Property property_1;
@@ -1594,7 +1480,7 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Property)
   EXPECT_TRUE(_db.remove_property(&property_3));
   EXPECT_EQ(1, _db.property_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Equality_Property)
+TEST_F(SQLiteDriver, Property_TEST(Equality))
 {
   using namespace pfc;
   Property property_1;
@@ -1609,8 +1495,13 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Property)
   EXPECT_TRUE(_db.select_property(&property_2));
   EXPECT_EQ(property_1, property_2);
 }
-//RESTRICTION TESTS--------------------------------------------------------------
-TEST_F(TEST_FIXTURE_NAME, Insert_Restriction)
+//RESTRICTION TESTS------------------------------------------------------------
+#ifndef DISABLE_Restrictions_TEST
+#define Restrictions_TEST(X) X##_Restrictions
+#else
+#define Restrictions_TEST(X) DISABLED_##X##_Restrictions
+#endif
+TEST_F(SQLiteDriver, Restrictions_TEST(Insert))
 {
   using namespace pfc;
   Restriction restriction_1;
@@ -1634,7 +1525,7 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Restriction)
   EXPECT_TRUE(_db.update_restriction(&restriction_3));
   EXPECT_EQ(3, _db.restriction_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Select_Restriction)
+TEST_F(SQLiteDriver, Restrictions_TEST(Select))
 {
   using namespace pfc;
   Restriction restriction_1;
@@ -1662,7 +1553,7 @@ TEST_F(TEST_FIXTURE_NAME, Select_Restriction)
   restriction_2.id = 2;
   EXPECT_EQ(restriction_2, name);
 }
-TEST_F(TEST_FIXTURE_NAME, Remove_Restriction)
+TEST_F(SQLiteDriver, Restrictions_TEST(Remove))
 {
   using namespace pfc;
   Restriction restriction_1;
@@ -1686,7 +1577,7 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Restriction)
   EXPECT_TRUE(_db.remove_restriction(&restriction_3));
   EXPECT_EQ(1, _db.restriction_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Equality_Restriction)
+TEST_F(SQLiteDriver, Restrictions_TEST(Equality))
 {
   using namespace pfc;
   Restriction restriction_1;
@@ -1701,8 +1592,13 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Restriction)
   EXPECT_TRUE(_db.select_restriction(&restriction_2));
   EXPECT_EQ(restriction_1, restriction_2);
 }
-//ROLE TESTS--------------------------------------------------------------
-TEST_F(TEST_FIXTURE_NAME, Insert_Role)
+//ROLE TESTS------------------------------------------------------------------
+#ifndef DISABLE_Role_TEST
+#define Role_TEST(X) X##_Role
+#else
+#define Role_TEST(X) DISABLED_##X##_Role
+#endif
+TEST_F(SQLiteDriver, Role_TEST(Insert))
 {
   using namespace pfc;
   Role role_1;
@@ -1726,7 +1622,7 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Role)
   EXPECT_TRUE(_db.update_role(&role_3));
   EXPECT_EQ(3, _db.role_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Select_Role)
+TEST_F(SQLiteDriver, Role_TEST(Select))
 {
   using namespace pfc;
   Role role_1;
@@ -1764,7 +1660,7 @@ TEST_F(TEST_FIXTURE_NAME, Select_Role)
   role_3.id = 3;
   EXPECT_EQ(role_3, name);
 }
-TEST_F(TEST_FIXTURE_NAME, Remove_Role)
+TEST_F(SQLiteDriver, Role_TEST(Remove))
 {
   using namespace pfc;
   Role role_1;
@@ -1788,7 +1684,7 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Role)
   EXPECT_TRUE(_db.remove_role(&role_3));
   EXPECT_EQ(1, _db.role_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Equality_Role)
+TEST_F(SQLiteDriver, Role_TEST(Equality))
 {
   using namespace pfc;
   Role role_1;
@@ -1804,7 +1700,12 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Role)
   EXPECT_EQ(role_1, role_2);
 }
 //SCENE TESTS----------------------------------------------------------------
-TEST_F(TEST_FIXTURE_NAME, Insert_Scene)
+#ifndef DISABLE_Scene_TEST
+#define Scene_TEST(X) X##_Scene
+#else
+#define Scene_TEST(X) DISABLED_##X##_Scene
+#endif
+TEST_F(SQLiteDriver, Scene_TEST(Insert))
 {
   using namespace pfc;
   Scene scene_1;
@@ -1825,7 +1726,7 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Scene)
   EXPECT_TRUE(_db.update_scene(&scene_3));
   EXPECT_EQ(3, _db.scene_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Select_Scene)
+TEST_F(SQLiteDriver, Scene_TEST(Select))
 {
   using namespace pfc;
   Scene scene_1;
@@ -1860,7 +1761,7 @@ TEST_F(TEST_FIXTURE_NAME, Select_Scene)
   scene_2.id = 2;
   EXPECT_EQ(scene_2, name);
 }
-TEST_F(TEST_FIXTURE_NAME, Remove_Scene)
+TEST_F(SQLiteDriver, Scene_TEST(Remove))
 {
   using namespace pfc;
   Scene scene_1;
@@ -1881,7 +1782,7 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Scene)
   EXPECT_TRUE(_db.remove_scene(&scene_3));
   EXPECT_EQ(1, _db.scene_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Equality_Scene)
+TEST_F(SQLiteDriver, Scene_TEST(Equality))
 {
   using namespace pfc;
   Scene scene_1;
@@ -1902,7 +1803,12 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Scene)
   EXPECT_EQ(scene_1, scene_2);
 }
 //TREATMENT TESTS--------------------------------------------------------------
-TEST_F(TEST_FIXTURE_NAME, Insert_Treatment)
+#ifndef DISABLE_Treatment_TEST
+#define Treatment_TEST(X) X##_Treatment
+#else
+#define Treatment_TEST(X) DISABLED_##X##_Treatment
+#endif
+TEST_F(SQLiteDriver, Treatment_TEST(Insert))
 {
   using namespace pfc;
   Treatment treatment_1;
@@ -1935,7 +1841,7 @@ TEST_F(TEST_FIXTURE_NAME, Insert_Treatment)
   EXPECT_TRUE(_db.update_treatment(&treatment_3));
   EXPECT_EQ(3, _db.treatment_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Select_Treatment)
+TEST_F(SQLiteDriver, Treatment_TEST(Select))
 {
   using namespace pfc;
   Treatment treatment_1;
@@ -1987,7 +1893,7 @@ TEST_F(TEST_FIXTURE_NAME, Select_Treatment)
   treatment_3.id = 3;
   EXPECT_EQ(treatment_3, common_name);
 }
-TEST_F(TEST_FIXTURE_NAME, Remove_Treatment)
+TEST_F(SQLiteDriver, Treatment_TEST(Remove))
 {
   using namespace pfc;
   Treatment treatment_1;
@@ -2020,7 +1926,7 @@ TEST_F(TEST_FIXTURE_NAME, Remove_Treatment)
   EXPECT_TRUE(_db.remove_treatment(&treatment_3));
   EXPECT_EQ(1, _db.treatment_count());
 }
-TEST_F(TEST_FIXTURE_NAME, Equality_Treatment)
+TEST_F(SQLiteDriver, Treatment_TEST(Equality))
 {
   using namespace pfc;
   Treatment treatment_1;
@@ -2039,7 +1945,109 @@ TEST_F(TEST_FIXTURE_NAME, Equality_Treatment)
   EXPECT_EQ(treatment_1, treatment_2);
 }
 //SCENE_MAP_ROLE TESTS--------------------------------------------------------
-TEST_F(TEST_FIXTURE_NAME, Map_Test_Role_Insertion)
+#ifndef DISABLE_RoleMap_TEST
+#define RoleMap_TEST(X) RoleMap_Test_##X
+#else
+#define RoleMap_TEST(X) DISABLED_RoleMap_Test_##X
+#endif
+
+TEST_F(SQLiteDriver, RoleMap_TEST(Insert))
+{
+  using namespace pfc;
+  RoleMap map_1;
+  RoleMap map_2;
+  RoleMap map_3;
+
+  map_1.fk_scene = 1;
+  map_1.fk_role = 2;
+
+  map_2.fk_scene = 3;
+  map_2.fk_role = 4;
+
+  map_3.fk_scene = 5;
+  map_3.fk_role = 6;
+
+  EXPECT_EQ(0, _db.role_map_count());
+  EXPECT_TRUE(_db.update_role_map(&map_1));
+  EXPECT_EQ(1, _db.role_map_count());
+  EXPECT_TRUE(_db.update_role_map(&map_2));
+  EXPECT_EQ(2, _db.role_map_count());
+  EXPECT_TRUE(_db.update_role_map(&map_3));
+  EXPECT_EQ(3, _db.role_map_count());
+}
+TEST_F(SQLiteDriver, RoleMap_TEST(Select))
+{
+  using namespace pfc;
+  RoleMap map_1;
+  RoleMap map_2;
+
+  map_1.fk_scene = 1;
+  map_1.fk_role = 2;
+
+  map_2.fk_scene = 3;
+  map_2.fk_role = 4;
+
+  EXPECT_EQ(0, _db.role_map_count());
+  EXPECT_TRUE(_db.update_role_map(&map_1));
+  EXPECT_EQ(1, _db.role_map_count());
+  EXPECT_TRUE(_db.update_role_map(&map_2));
+  EXPECT_EQ(2, _db.role_map_count());
+
+  RoleMap id;
+  RoleMap fk;
+
+  id.id = 1;
+  fk.fk_scene = 3;
+  fk.fk_role = 4;
+
+  _db.select_role_map(&id);
+  _db.select_role_map(&fk);
+
+  map_1.id = 1;
+  EXPECT_EQ(map_1, id);
+  map_2.id = 2;
+  EXPECT_EQ(map_2, fk);
+}
+TEST_F(SQLiteDriver, RoleMap_TEST(Remove))
+{
+  using namespace pfc;
+  RoleMap map_1;
+  RoleMap map_2;
+  RoleMap map_3;
+
+  map_1.fk_scene = 1;
+  map_1.fk_role = 2;
+
+  map_2.fk_scene = 3;
+  map_2.fk_role = 4;
+
+  map_3.fk_scene = 5;
+  map_3.fk_role = 6;
+
+  EXPECT_TRUE(_db.update_role_map(&map_1));
+  EXPECT_TRUE(_db.update_role_map(&map_2));
+  EXPECT_TRUE(_db.update_role_map(&map_3));
+  EXPECT_EQ(3, _db.role_map_count());
+  EXPECT_TRUE(_db.remove_role_map(&map_1));
+  EXPECT_TRUE(_db.remove_role_map(&map_3));
+  EXPECT_EQ(1, _db.role_map_count());
+}
+TEST_F(SQLiteDriver, RoleMap_TEST(Equality))
+{
+  using namespace pfc;
+  RoleMap map_1;
+  RoleMap map_2;
+
+  map_1.fk_scene = 1;
+  map_1.fk_role = 2;
+
+  map_2.id = 1;
+
+  EXPECT_TRUE(_db.update_role_map(&map_1));
+  EXPECT_TRUE(_db.select_role_map(&map_2));
+  EXPECT_EQ(map_1, map_2);
+}
+TEST_F(SQLiteDriver, RoleMap_TEST(Role_Insertion))
 {
   using namespace pfc;
   Scene scene_1;
@@ -2104,7 +2112,7 @@ TEST_F(TEST_FIXTURE_NAME, Map_Test_Role_Insertion)
   _db.update_role_in_scene(&scene_3, &role_3);
   EXPECT_EQ(9, _db.role_map_count());
 }
-TEST_F(TEST_FIXTURE_NAME, RoleMap_Test_Role_Removal)
+TEST_F(SQLiteDriver, RoleMap_TEST(Role_Removal))
 {
   using namespace pfc;
   Scene scene_1;
@@ -2180,7 +2188,7 @@ TEST_F(TEST_FIXTURE_NAME, RoleMap_Test_Role_Removal)
   EXPECT_EQ(0, _db.role_map_count());
   EXPECT_EQ(3, _db.role_count());
 }
-TEST_F(TEST_FIXTURE_NAME, RoleMap_Test_Role_Deletion)
+TEST_F(SQLiteDriver, RoleMap_TEST(Role_Deletion))
 {
   using namespace pfc;
   Scene scene_1;
@@ -2255,7 +2263,7 @@ TEST_F(TEST_FIXTURE_NAME, RoleMap_Test_Role_Deletion)
   EXPECT_EQ(0, _db.role_count(&scene_2));
   EXPECT_EQ(0, _db.role_count(&scene_3));
 }
-TEST_F(TEST_FIXTURE_NAME, RoleMap_Test_Scene_Deletion)
+TEST_F(SQLiteDriver, RoleMap_TEST(Scene_Deletion))
 {
   using namespace pfc;
   Scene scene_1;
@@ -2319,7 +2327,108 @@ TEST_F(TEST_FIXTURE_NAME, RoleMap_Test_Scene_Deletion)
   EXPECT_EQ(0, _db.role_map_count());
 }
 //SCENE_MAP_EVENT TESTS------------------------------------------------------
-TEST_F(TEST_FIXTURE_NAME, EventMap_Test_Event_Insertion)
+#ifndef DISABLE_EventMap_TEST
+#define EventMap_TEST(X) EventMap_Test_##X
+#else
+#define EventMap_TEST(X) DISABLED_EventMap_Test_##X
+#endif
+TEST_F(SQLiteDriver, EventMap_TEST(Insert))
+{
+  using namespace pfc;
+  EventMap event_map_1;
+  EventMap event_map_2;
+  EventMap event_map_3;
+
+  event_map_1.fk_scene = 1;
+  event_map_1.fk_event = 2;
+
+  event_map_2.fk_scene = 3;
+  event_map_2.fk_event = 4;
+
+  event_map_3.fk_scene = 5;
+  event_map_3.fk_event = 6;
+
+  EXPECT_EQ(0, _db.event_map_count());
+  EXPECT_TRUE(_db.update_event_map(&event_map_1));
+  EXPECT_EQ(1, _db.event_map_count());
+  EXPECT_TRUE(_db.update_event_map(&event_map_2));
+  EXPECT_EQ(2, _db.event_map_count());
+  EXPECT_TRUE(_db.update_event_map(&event_map_3));
+  EXPECT_EQ(3, _db.event_map_count());
+}
+TEST_F(SQLiteDriver, EventMap_TEST(Select))
+{
+  using namespace pfc;
+  EventMap event_map_1;
+  EventMap event_map_2;
+
+  event_map_1.fk_scene = 1;
+  event_map_1.fk_event = 2;
+
+  event_map_2.fk_scene = 3;
+  event_map_2.fk_event = 4;
+
+  EXPECT_EQ(0, _db.event_map_count());
+  EXPECT_TRUE(_db.update_event_map(&event_map_1));
+  EXPECT_EQ(1, _db.event_map_count());
+  EXPECT_TRUE(_db.update_event_map(&event_map_2));
+  EXPECT_EQ(2, _db.event_map_count());
+
+  EventMap id;
+  EventMap fk;
+
+  id.id = 1;
+  fk.fk_scene = 3;
+  fk.fk_event = 4;
+
+  _db.select_event_map(&id);
+  _db.select_event_map(&fk);
+
+  event_map_1.id = 1;
+  EXPECT_EQ(event_map_1, id);
+  event_map_2.id = 2;
+  EXPECT_EQ(event_map_2, fk);
+}
+TEST_F(SQLiteDriver, EventMap_TEST(Remove))
+{
+  using namespace pfc;
+  EventMap event_map_1;
+  EventMap event_map_2;
+  EventMap event_map_3;
+
+  event_map_1.fk_scene = 1;
+  event_map_1.fk_event = 2;
+
+  event_map_2.fk_scene = 3;
+  event_map_2.fk_event = 4;
+
+  event_map_3.fk_scene = 5;
+  event_map_3.fk_event = 6;
+
+  EXPECT_TRUE(_db.update_event_map(&event_map_1));
+  EXPECT_TRUE(_db.update_event_map(&event_map_2));
+  EXPECT_TRUE(_db.update_event_map(&event_map_3));
+  EXPECT_EQ(3, _db.event_map_count());
+  EXPECT_TRUE(_db.remove_event_map(&event_map_1));
+  EXPECT_TRUE(_db.remove_event_map(&event_map_3));
+  EXPECT_EQ(1, _db.event_map_count());
+}
+TEST_F(SQLiteDriver, EventMap_TEST(Equality))
+{
+  using namespace pfc;
+  EventMap event_map_1;
+  EventMap event_map_2;
+
+  event_map_1.fk_scene = 1;
+  event_map_1.fk_event = 2;
+
+  event_map_2.id = 1;
+
+  EXPECT_TRUE(_db.update_event_map(&event_map_1));
+  EXPECT_TRUE(_db.select_event_map(&event_map_2));
+  EXPECT_EQ(event_map_1, event_map_2);
+}
+TEST_F(SQLiteDriver, EventMap_TEST(Event_Insertion))
 {
   using namespace pfc;
   Scene scene_1;
@@ -2384,7 +2493,7 @@ TEST_F(TEST_FIXTURE_NAME, EventMap_Test_Event_Insertion)
   _db.update_event_in_scene(&scene_3, &event_3);
   EXPECT_EQ(9, _db.event_map_count());
 }
-TEST_F(TEST_FIXTURE_NAME, EventMap_Test_Event_Removal)
+TEST_F(SQLiteDriver, EventMap_TEST(Event_Removal))
 {
   using namespace pfc;
   Scene scene_1;
@@ -2460,7 +2569,7 @@ TEST_F(TEST_FIXTURE_NAME, EventMap_Test_Event_Removal)
   EXPECT_EQ(0, _db.event_map_count());
   EXPECT_EQ(3, _db.event_count());
 }
-TEST_F(TEST_FIXTURE_NAME, EventMap_Test_Event_Deletion)
+TEST_F(SQLiteDriver, EventMap_TEST(Event_Deletion))
 {
   using namespace pfc;
   Scene scene_1;
@@ -2535,7 +2644,7 @@ TEST_F(TEST_FIXTURE_NAME, EventMap_Test_Event_Deletion)
   EXPECT_EQ(0, _db.event_count(&scene_2));
   EXPECT_EQ(0, _db.event_count(&scene_3));
 }
-TEST_F(TEST_FIXTURE_NAME, EventMap_Test_Scene_Deletion)
+TEST_F(SQLiteDriver, EventMap_TEST(Scene_Deletion))
 {
   using namespace pfc;
   Scene scene_1;
@@ -2599,7 +2708,12 @@ TEST_F(TEST_FIXTURE_NAME, EventMap_Test_Scene_Deletion)
   EXPECT_EQ(0, _db.event_map_count());
 }
 //SCENE_MAP_RESTRICTION TESTS----------------------------------------------
-TEST_F(TEST_FIXTURE_NAME, RestrictionMap_Test_Restriction_Insertion)
+#ifndef DISABLE_SceneMap_TEST
+#define SceneMap_TEST(X) SceneMap_Test_##X
+#else
+#define SceneMap_TEST(X) DISABLED_SceneMap_Test_##X
+#endif
+TEST_F(SQLiteDriver, SceneMap_TEST(Restriction_Insertion))
 {
   using namespace pfc;
   Scene scene_1;
@@ -2664,7 +2778,7 @@ TEST_F(TEST_FIXTURE_NAME, RestrictionMap_Test_Restriction_Insertion)
   _db.update_restriction_in_scene(&scene_3, &restriction_3);
   EXPECT_EQ(9, _db.restriction_map_count());
 }
-TEST_F(TEST_FIXTURE_NAME, RestrictionMap_Test_Restriction_Removal)
+TEST_F(SQLiteDriver, SceneMap_TEST(Restriction_Removal))
 {
   using namespace pfc;
   Scene scene_1;
@@ -2740,7 +2854,7 @@ TEST_F(TEST_FIXTURE_NAME, RestrictionMap_Test_Restriction_Removal)
   EXPECT_EQ(0, _db.restriction_map_count());
   EXPECT_EQ(3, _db.restriction_count());
 }
-TEST_F(TEST_FIXTURE_NAME, RestrictionMap_Test_Restriction_Deletion)
+TEST_F(SQLiteDriver, SceneMap_TEST(Restriction_Deletion))
 {
   using namespace pfc;
   Scene scene_1;
@@ -2815,7 +2929,7 @@ TEST_F(TEST_FIXTURE_NAME, RestrictionMap_Test_Restriction_Deletion)
   EXPECT_EQ(0, _db.restriction_count(&scene_2));
   EXPECT_EQ(0, _db.restriction_count(&scene_3));
 }
-TEST_F(TEST_FIXTURE_NAME, RestrictionMap_Test_Scene_Deletion)
+TEST_F(SQLiteDriver, SceneMap_TEST(Scene_Deletion))
 {
   using namespace pfc;
   Scene scene_1;
@@ -2879,24 +2993,21 @@ TEST_F(TEST_FIXTURE_NAME, RestrictionMap_Test_Scene_Deletion)
   EXPECT_EQ(0, _db.restriction_map_count());
 }
 //SCENE_MAP_EQUIPMENT TESTS-----------------------------------------------
-TEST_F(TEST_FIXTURE_NAME, EquipmentMap_Test_Equipment_Insertion)
+#ifndef DISABLE_EquipmentMap_TEST
+#define EquipmentMap_TEST(X) EquipmentMap_Test_##X
+#else
+#define EquipmentMap_TEST(X) DISABLED_EquipmentMap_Test_##X
+#endif
+TEST_F(SQLiteDriver, EquipmentMap_TEST(EquipmentMap_Insertion))
 {
   using namespace pfc;
   Scene scene_1;
   Scene scene_2;
   Scene scene_3;
-  EquipmentMap map_1;
-  EquipmentMap map_2;
-  EquipmentMap map_3;
-  EquipmentMap map_4;
-  EquipmentMap map_5;
-  EquipmentMap map_6;
-  EquipmentMap map_7;
-  EquipmentMap map_8;
-  EquipmentMap map_9;
-  Equipment equipment_1;
-  Equipment equipment_2;
-  Equipment equipment_3;
+
+  Equipment Equipment_1;
+  Equipment Equipment_2;
+  Equipment Equipment_3;
   scene_1.name = "Opening";
   scene_2.name = "Middle";
   scene_3.name = "Ending";
@@ -2909,67 +3020,97 @@ TEST_F(TEST_FIXTURE_NAME, EquipmentMap_Test_Equipment_Insertion)
   _db.select_scene(&scene_2);
   _db.select_scene(&scene_3);
 
-  equipment_1.name = "Keytar";
-  equipment_1.type = 1;
-  equipment_1.description = "Got a sick keytar solo later";
-  equipment_1.image = ("music stand");
-  equipment_1.citations = { 1 };
+  Equipment_1.name = "Keytar";
+  Equipment_1.type = 1;
+  Equipment_1.description = "Got a sick keytar solo later";
+  Equipment_1.image = ("music stand");
+  Equipment_1.citations = { 1 };
 
-  equipment_2.name = "piano";
-  equipment_2.type = 2;
-  equipment_2.description = "big instrument with keys";
-  equipment_2.image = ("piano bench");
-  equipment_2.citations = { 2 };
+  Equipment_2.name = "piano";
+  Equipment_2.type = 2;
+  Equipment_2.description = "big instrument with keys";
+  Equipment_2.image = ("piano bench");
+  Equipment_2.citations = { 2 };
 
-  equipment_3.name = "bagpipes";
-  equipment_3.type = 3;
-  equipment_3.description = "please stop playing the bagpipes";
-  equipment_3.image = ("a bladder");
-  equipment_3.citations = { 3 };
+  Equipment_3.name = "bagpipes";
+  Equipment_3.type = 3;
+  Equipment_3.description = "please stop playing the bagpipes";
+  Equipment_3.image = ("a bladder");
+  Equipment_3.citations = { 3 };
 
-  _db.update_equipment(&equipment_1);
-  _db.update_equipment(&equipment_2);
-  _db.update_equipment(&equipment_3);
+  _db.update_equipment(&Equipment_1);
+  _db.update_equipment(&Equipment_2);
+  _db.update_equipment(&Equipment_3);
 
-  _db.select_equipment(&equipment_1);
-  _db.select_equipment(&equipment_2);
-  _db.select_equipment(&equipment_3);
+  _db.select_equipment(&Equipment_1);
+  _db.select_equipment(&Equipment_2);
+  _db.select_equipment(&Equipment_3);
+
+  EquipmentMap map;
 
   EXPECT_EQ(0, _db.equipment_map_count());
-  _db.update_equipment_in_scene(&scene_1, &equipment_1);
+
+  map.clear();
+  map.scene->assign(scene_1);
+  map.equipment->assign(Equipment_1);
+  _db.update_equipment_in_scene(&map);
   EXPECT_EQ(1, _db.equipment_map_count());
-  _db.update_equipment_in_scene(&scene_1, &equipment_2);
+
+  map.clear();
+  map.scene->assign(scene_1);
+  map.equipment->assign(Equipment_2);
+  _db.update_equipment_in_scene(&map);
   EXPECT_EQ(2, _db.equipment_map_count());
-  _db.update_equipment_in_scene(&scene_1, &equipment_3);
+
+  map.clear();
+  map.scene->assign(scene_1);
+  map.equipment->assign(Equipment_3);
+  _db.update_equipment_in_scene(&map);
   EXPECT_EQ(3, _db.equipment_map_count());
-  _db.update_equipment_in_scene(&scene_2, &equipment_1);
+
+  map.clear();
+  map.scene->assign(scene_2);
+  map.equipment->assign(Equipment_1);
+  _db.update_equipment_in_scene(&map);
   EXPECT_EQ(4, _db.equipment_map_count());
-  _db.update_equipment_in_scene(&scene_2, &equipment_2);
+
+  map.clear();
+  map.scene->assign(scene_2);
+  map.equipment->assign(Equipment_2);
+  _db.update_equipment_in_scene(&map);
   EXPECT_EQ(5, _db.equipment_map_count());
-  _db.update_equipment_in_scene(&scene_2, &equipment_3);
+
+  map.clear();
+  map.scene->assign(scene_2);
+  map.equipment->assign(Equipment_3);
+  _db.update_equipment_in_scene(&map);
   EXPECT_EQ(6, _db.equipment_map_count());
-  _db.update_equipment_in_scene(&scene_3, &equipment_1);
+
+  map.clear();
+  map.scene->assign(scene_3);
+  map.equipment->assign(Equipment_1);
+  _db.update_equipment_in_scene(&map);
   EXPECT_EQ(7, _db.equipment_map_count());
-  _db.update_equipment_in_scene(&scene_3, &equipment_2);
+
+  map.clear();
+  map.scene->assign(scene_3);
+  map.equipment->assign(Equipment_2);
+  _db.update_equipment_in_scene(&map);
   EXPECT_EQ(8, _db.equipment_map_count());
-  _db.update_equipment_in_scene(&scene_3, &equipment_3);
+
+  map.clear();
+  map.scene->assign(scene_3);
+  map.equipment->assign(Equipment_3);
+  _db.update_equipment_in_scene(&map);
   EXPECT_EQ(9, _db.equipment_map_count());
 }
-TEST_F(TEST_FIXTURE_NAME, EquipmentMap_Test_Equipment_Removal)
+TEST_F(SQLiteDriver, EquipmentMap_TEST(EquipmentMap_Removal))
 {
   using namespace pfc;
   Scene scene_1;
   Scene scene_2;
   Scene scene_3;
-  EquipmentMap map_1;
-  EquipmentMap map_2;
-  EquipmentMap map_3;
-  EquipmentMap map_4;
-  EquipmentMap map_5;
-  EquipmentMap map_6;
-  EquipmentMap map_7;
-  EquipmentMap map_8;
-  EquipmentMap map_9;
+
   Equipment equipment_1;
   Equipment equipment_2;
   Equipment equipment_3;
@@ -3011,15 +3152,60 @@ TEST_F(TEST_FIXTURE_NAME, EquipmentMap_Test_Equipment_Removal)
   _db.select_equipment(&equipment_2);
   _db.select_equipment(&equipment_3);
 
-  _db.update_equipment_in_scene(&scene_1, &equipment_1);
-  _db.update_equipment_in_scene(&scene_1, &equipment_2);
-  _db.update_equipment_in_scene(&scene_1, &equipment_3);
-  _db.update_equipment_in_scene(&scene_2, &equipment_1);
-  _db.update_equipment_in_scene(&scene_2, &equipment_2);
-  _db.update_equipment_in_scene(&scene_2, &equipment_3);
-  _db.update_equipment_in_scene(&scene_3, &equipment_1);
-  _db.update_equipment_in_scene(&scene_3, &equipment_2);
-  _db.update_equipment_in_scene(&scene_3, &equipment_3);
+  EquipmentMap map_1;
+  map_1.clear();
+  map_1.scene->assign(scene_1);
+  map_1.equipment->assign(equipment_1);
+
+  EquipmentMap map_2;
+  map_2.clear();
+  map_2.scene->assign(scene_1);
+  map_2.equipment->assign(equipment_2);
+
+  EquipmentMap map_3;
+  map_3.clear();
+  map_3.scene->assign(scene_1);
+  map_3.equipment->assign(equipment_3);
+
+  EquipmentMap map_4;
+  map_4.clear();
+  map_4.scene->assign(scene_2);
+  map_4.equipment->assign(equipment_1);
+
+  EquipmentMap map_5;
+  map_5.clear();
+  map_5.scene->assign(scene_2);
+  map_5.equipment->assign(equipment_2);
+
+  EquipmentMap map_6;
+  map_6.clear();
+  map_6.scene->assign(scene_2);
+  map_6.equipment->assign(equipment_3);
+
+  EquipmentMap map_7;
+  map_7.clear();
+  map_7.scene->assign(scene_3);
+  map_7.equipment->assign(equipment_1);
+
+  EquipmentMap map_8;
+  map_8.clear();
+  map_8.scene->assign(scene_3);
+  map_8.equipment->assign(equipment_2);
+
+  EquipmentMap map_9;
+  map_9.clear();
+  map_9.scene->assign(scene_3);
+  map_9.equipment->assign(equipment_3);
+
+  _db.update_equipment_in_scene(&map_1);
+  _db.update_equipment_in_scene(&map_2);
+  _db.update_equipment_in_scene(&map_3);
+  _db.update_equipment_in_scene(&map_4);
+  _db.update_equipment_in_scene(&map_5);
+  _db.update_equipment_in_scene(&map_6);
+  _db.update_equipment_in_scene(&map_7);
+  _db.update_equipment_in_scene(&map_8);
+  _db.update_equipment_in_scene(&map_9);
 
   EXPECT_EQ(9, _db.equipment_map_count());
   _db.remove_equipment_from_scene(&equipment_1, &scene_1);
@@ -3042,21 +3228,13 @@ TEST_F(TEST_FIXTURE_NAME, EquipmentMap_Test_Equipment_Removal)
   EXPECT_EQ(0, _db.equipment_map_count());
   EXPECT_EQ(3, _db.equipment_count());
 }
-TEST_F(TEST_FIXTURE_NAME, EquipmentMap_Test_Equipment_Deletion)
+TEST_F(SQLiteDriver, EquipmentMap_TEST(EquipmentMap_Deletion))
 {
   using namespace pfc;
   Scene scene_1;
   Scene scene_2;
   Scene scene_3;
-  EquipmentMap map_1;
-  EquipmentMap map_2;
-  EquipmentMap map_3;
-  EquipmentMap map_4;
-  EquipmentMap map_5;
-  EquipmentMap map_6;
-  EquipmentMap map_7;
-  EquipmentMap map_8;
-  EquipmentMap map_9;
+
   Equipment equipment_1;
   Equipment equipment_2;
   Equipment equipment_3;
@@ -3098,15 +3276,51 @@ TEST_F(TEST_FIXTURE_NAME, EquipmentMap_Test_Equipment_Deletion)
   _db.select_equipment(&equipment_2);
   _db.select_equipment(&equipment_3);
 
-  _db.update_equipment_in_scene(&scene_1, &equipment_1);
-  _db.update_equipment_in_scene(&scene_1, &equipment_2);
-  _db.update_equipment_in_scene(&scene_1, &equipment_3);
-  _db.update_equipment_in_scene(&scene_2, &equipment_1);
-  _db.update_equipment_in_scene(&scene_2, &equipment_2);
-  _db.update_equipment_in_scene(&scene_2, &equipment_3);
-  _db.update_equipment_in_scene(&scene_3, &equipment_1);
-  _db.update_equipment_in_scene(&scene_3, &equipment_2);
-  _db.update_equipment_in_scene(&scene_3, &equipment_3);
+  EquipmentMap map;
+  map.clear();
+  map.scene->assign(scene_1);
+  map.equipment->assign(equipment_1);
+  _db.update_equipment_in_scene(&map);
+
+  map.clear();
+  map.scene->assign(scene_1);
+  map.equipment->assign(equipment_2);
+  _db.update_equipment_in_scene(&map);
+
+  map.clear();
+  map.scene->assign(scene_1);
+  map.equipment->assign(equipment_3);
+  _db.update_equipment_in_scene(&map);
+
+  map.clear();
+  map.scene->assign(scene_2);
+  map.equipment->assign(equipment_1);
+  _db.update_equipment_in_scene(&map);
+
+  map.clear();
+  map.scene->assign(scene_2);
+  map.equipment->assign(equipment_2);
+  _db.update_equipment_in_scene(&map);
+
+  map.clear();
+  map.scene->assign(scene_2);
+  map.equipment->assign(equipment_3);
+  _db.update_equipment_in_scene(&map);
+
+  map.clear();
+  map.scene->assign(scene_3);
+  map.equipment->assign(equipment_1);
+  _db.update_equipment_in_scene(&map);
+
+  map.clear();
+  map.scene->assign(scene_3);
+  map.equipment->assign(equipment_2);
+  _db.update_equipment_in_scene(&map);
+
+  map.clear();
+  map.scene->assign(scene_3);
+  map.equipment->assign(equipment_3);
+  _db.update_equipment_in_scene(&map);
 
   EXPECT_EQ(9, _db.equipment_map_count());
   EXPECT_EQ(3, _db.equipment_count(&scene_1));
@@ -3128,21 +3342,13 @@ TEST_F(TEST_FIXTURE_NAME, EquipmentMap_Test_Equipment_Deletion)
   EXPECT_EQ(0, _db.equipment_count(&scene_2));
   EXPECT_EQ(0, _db.equipment_count(&scene_3));
 }
-TEST_F(TEST_FIXTURE_NAME, EquipmentMap_Test_Scene_Deletion)
+TEST_F(SQLiteDriver, EquipmentMap_TEST(Scene_Deletion))
 {
   using namespace pfc;
   Scene scene_1;
   Scene scene_2;
   Scene scene_3;
-  EquipmentMap map_1;
-  EquipmentMap map_2;
-  EquipmentMap map_3;
-  EquipmentMap map_4;
-  EquipmentMap map_5;
-  EquipmentMap map_6;
-  EquipmentMap map_7;
-  EquipmentMap map_8;
-  EquipmentMap map_9;
+
   Equipment equipment_1;
   Equipment equipment_2;
   Equipment equipment_3;
@@ -3184,15 +3390,52 @@ TEST_F(TEST_FIXTURE_NAME, EquipmentMap_Test_Scene_Deletion)
   _db.select_equipment(&equipment_2);
   _db.select_equipment(&equipment_3);
 
-  _db.update_equipment_in_scene(&scene_1, &equipment_1);
-  _db.update_equipment_in_scene(&scene_1, &equipment_2);
-  _db.update_equipment_in_scene(&scene_1, &equipment_3);
-  _db.update_equipment_in_scene(&scene_2, &equipment_1);
-  _db.update_equipment_in_scene(&scene_2, &equipment_2);
-  _db.update_equipment_in_scene(&scene_2, &equipment_3);
-  _db.update_equipment_in_scene(&scene_3, &equipment_1);
-  _db.update_equipment_in_scene(&scene_3, &equipment_2);
-  _db.update_equipment_in_scene(&scene_3, &equipment_3);
+  EquipmentMap map;
+
+  map.clear();
+  map.scene->assign(scene_1);
+  map.equipment->assign(equipment_1);
+  _db.update_equipment_in_scene(&map);
+
+  map.clear();
+  map.scene->assign(scene_1);
+  map.equipment->assign(equipment_2);
+  _db.update_equipment_in_scene(&map);
+
+  map.clear();
+  map.scene->assign(scene_1);
+  map.equipment->assign(equipment_3);
+  _db.update_equipment_in_scene(&map);
+
+  map.clear();
+  map.scene->assign(scene_2);
+  map.equipment->assign(equipment_1);
+  _db.update_equipment_in_scene(&map);
+
+  map.clear();
+  map.scene->assign(scene_2);
+  map.equipment->assign(equipment_2);
+  _db.update_equipment_in_scene(&map);
+
+  map.clear();
+  map.scene->assign(scene_2);
+  map.equipment->assign(equipment_3);
+  _db.update_equipment_in_scene(&map);
+
+  map.clear();
+  map.scene->assign(scene_3);
+  map.equipment->assign(equipment_1);
+  _db.update_equipment_in_scene(&map);
+
+  map.clear();
+  map.scene->assign(scene_3);
+  map.equipment->assign(equipment_2);
+  _db.update_equipment_in_scene(&map);
+
+  map.clear();
+  map.scene->assign(scene_3);
+  map.equipment->assign(equipment_3);
+  _db.update_equipment_in_scene(&map);
 
   EXPECT_EQ(9, _db.equipment_map_count());
   _db.remove_scene(&scene_1);
@@ -3203,21 +3446,18 @@ TEST_F(TEST_FIXTURE_NAME, EquipmentMap_Test_Scene_Deletion)
   EXPECT_EQ(0, _db.equipment_map_count());
 }
 //SCENE_MAP_CITATION TESTS------------------------------------------------
-TEST_F(TEST_FIXTURE_NAME, CitationMap_Test_Citation_Insertion)
+#ifndef DISABLE_CitationMap_TEST
+#define CitationMap_TEST(X) CitationMap_Test_##X
+#else
+#define CitationMap_TEST(X) DISABLED_CitationMap_##X
+#endif
+TEST_F(SQLiteDriver, CitationMap_TEST(Citation_Insertion))
 {
   using namespace pfc;
   Scene scene_1;
   Scene scene_2;
   Scene scene_3;
-  CitationMap map_1;
-  CitationMap map_2;
-  CitationMap map_3;
-  CitationMap map_4;
-  CitationMap map_5;
-  CitationMap map_6;
-  CitationMap map_7;
-  CitationMap map_8;
-  CitationMap map_9;
+
   Citation citation_1;
   Citation citation_2;
   Citation citation_3;
@@ -3279,21 +3519,13 @@ TEST_F(TEST_FIXTURE_NAME, CitationMap_Test_Citation_Insertion)
   _db.update_citation_in_scene(&scene_3, &citation_3);
   EXPECT_EQ(9, _db.citation_map_count());
 }
-TEST_F(TEST_FIXTURE_NAME, CitationMap_Test_Citation_Removal)
+TEST_F(SQLiteDriver, CitationMap_TEST(Citation_Removal))
 {
   using namespace pfc;
   Scene scene_1;
   Scene scene_2;
   Scene scene_3;
-  CitationMap map_1;
-  CitationMap map_2;
-  CitationMap map_3;
-  CitationMap map_4;
-  CitationMap map_5;
-  CitationMap map_6;
-  CitationMap map_7;
-  CitationMap map_8;
-  CitationMap map_9;
+
   Citation citation_1;
   Citation citation_2;
   Citation citation_3;
@@ -3366,21 +3598,13 @@ TEST_F(TEST_FIXTURE_NAME, CitationMap_Test_Citation_Removal)
   EXPECT_EQ(0, _db.citation_map_count());
   EXPECT_EQ(3, _db.citation_count());
 }
-TEST_F(TEST_FIXTURE_NAME, CitationMap_Test_Citation_Deletion)
+TEST_F(SQLiteDriver, CitationMap_TEST(Citation_Deletion))
 {
   using namespace pfc;
   Scene scene_1;
   Scene scene_2;
   Scene scene_3;
-  CitationMap map_1;
-  CitationMap map_2;
-  CitationMap map_3;
-  CitationMap map_4;
-  CitationMap map_5;
-  CitationMap map_6;
-  CitationMap map_7;
-  CitationMap map_8;
-  CitationMap map_9;
+
   Citation citation_1;
   Citation citation_2;
   Citation citation_3;
@@ -3452,21 +3676,13 @@ TEST_F(TEST_FIXTURE_NAME, CitationMap_Test_Citation_Deletion)
   EXPECT_EQ(0, _db.citation_count(&scene_2));
   EXPECT_EQ(0, _db.citation_count(&scene_3));
 }
-TEST_F(TEST_FIXTURE_NAME, CitationMap_Test_Scene_Deletion)
+TEST_F(SQLiteDriver, CitationMap_TEST(Scene_Deletion))
 {
   using namespace pfc;
   Scene scene_1;
   Scene scene_2;
   Scene scene_3;
-  CitationMap map_1;
-  CitationMap map_2;
-  CitationMap map_3;
-  CitationMap map_4;
-  CitationMap map_5;
-  CitationMap map_6;
-  CitationMap map_7;
-  CitationMap map_8;
-  CitationMap map_9;
+
   Citation citation_1;
   Citation citation_2;
   Citation citation_3;
@@ -3526,97 +3742,13 @@ TEST_F(TEST_FIXTURE_NAME, CitationMap_Test_Scene_Deletion)
   _db.remove_scene(&scene_3);
   EXPECT_EQ(0, _db.citation_map_count());
 }
-
-TEST_F(TEST_FIXTURE_NAME, get_authors)
-{
-  using namespace pfc;
-  Author author_1;
-
-  author_1.first = "Solid";
-  author_1.last = "Snake";
-  author_1.email = "SolidSnake@MetalGear.com";
-
-  EXPECT_EQ(0, _db.author_count());
-  EXPECT_TRUE(_db.update_author(&author_1));
-
-  auto list = _db.get_authors();
-
-  EXPECT_TRUE(list[0]->first.compare(author_1.first) == 0);
-  EXPECT_TRUE(list[0]->last.compare(author_1.last) == 0);
-  EXPECT_TRUE(list[0]->email.compare(author_1.email) == 0);
-}
-TEST_F(TEST_FIXTURE_NAME, get_assessments)
-{
-  using namespace pfc;
-  Assessment assessment_1; //   Assessment* assessment_1 = new Assessment(NULLPTR);
-
-  assessment_1.name = "Math Test";
-  assessment_1.description = "Gotta do some math";
-  assessment_1.type = "Don't fail";
-  assessment_1.available_points = 100;
-  assessment_1.criteria = "what's 2+2";
-
-  EXPECT_EQ(0, _db.assessment_count());
-  EXPECT_TRUE(_db.update_assessment(&assessment_1));
-
-  auto list = _db.get_assessments();
-
-  EXPECT_TRUE(list[0]->name.compare(assessment_1.name) == 0);
-  EXPECT_TRUE(list[0]->description.compare(assessment_1.description) == 0);
-  EXPECT_TRUE(list[0]->type.compare(assessment_1.type) == 0);
-  EXPECT_TRUE(list[0]->available_points == assessment_1.available_points);
-  EXPECT_TRUE(list[0]->criteria.compare(assessment_1.criteria) == 0);
-}
-TEST_F(TEST_FIXTURE_NAME, get_citations)
-{
-  using namespace pfc;
-  Citation citation_1;
-
-  citation_1.key = "skeleton key";
-  citation_1.title = "Mr. Bones' Wild Ride";
-  citation_1.authors = "Nathan;Angel";
-  citation_1.year = "1000";
-  citation_1.publisher = "Boneland";
-
-  EXPECT_EQ(0, _db.citation_count());
-  EXPECT_TRUE(_db.update_citation(&citation_1));
-
-  auto list = _db.get_citations();
-
-  EXPECT_TRUE(list[0]->key.compare(citation_1.key) == 0);
-  EXPECT_TRUE(list[0]->title.compare(citation_1.title) == 0);
-  EXPECT_TRUE(list[0]->authors.compare(citation_1.authors) == 0);
-  EXPECT_TRUE(list[0]->year.compare(citation_1.year) == 0);
-  EXPECT_TRUE(list[0]->publisher.compare(citation_1.publisher) == 0);
-}
-TEST_F(TEST_FIXTURE_NAME, get_events)
-{
-  using namespace pfc;
-  Event event_1;
-
-  event_1.name = "Barbecue";
-  event_1.description = "Barbecue Barbecue";
-  event_1.category = "DIALOG";
-  event_1.fidelity = "ACTION";
-  event_1.fk_actor_1 = "2";
-  event_1.fk_actor_2 = "3";
-  event_1.equipment = "5;6;7";
-  event_1.details = "People cooking and eating meat outdoors";
-  EXPECT_EQ(0, _db.event_count());
-  EXPECT_TRUE(_db.update_event(&event_1));
-  auto list = _db.get_events();
-
-  EXPECT_TRUE(list[0]->name.compare(event_1.name) == 0);
-  EXPECT_TRUE(list[0]->description.compare(event_1.description) == 0);
-  EXPECT_TRUE(list[0]->equipment.compare(event_1.equipment) == 0);
-  EXPECT_TRUE(list[0]->category.compare(event_1.category) == 0);
-  EXPECT_TRUE(list[0]->fidelity.compare(event_1.fidelity) == 0);
-  EXPECT_TRUE(list[0]->fk_actor_1.compare(event_1.fk_actor_1) == 0);
-  EXPECT_TRUE(list[0]->fk_actor_2.compare(event_1.fk_actor_2) == 0);
-  EXPECT_TRUE(list[0]->details.compare(event_1.details) == 0);
-}
-
-TEST_F(TEST_FIXTURE_NAME, LocationMap_Test_Location_Insertion)
+//-------------------------------------------------------------------------------
+#ifndef DISABLE_LocationMap_TEST
+#define LocationMap_TEST(X) X##_LocationMap_Test
+#else
+#define LocationMap_TEST(X) DISABLED_##X##_LocationMap_Test
+#endif
+TEST_F(SQLiteDriver, LocationMap_TEST(Location_Insertion))
 {
   using namespace pfc;
   Scene scene_1;
@@ -3644,7 +3776,7 @@ TEST_F(TEST_FIXTURE_NAME, LocationMap_Test_Location_Insertion)
   EXPECT_EQ(2, _db.location_map_count());
   _db.update_scene(&scene_3);
 }
-TEST_F(TEST_FIXTURE_NAME, LocationMap_Test_Location_Removal)
+TEST_F(SQLiteDriver, LocationMap_TEST(Location_Removal))
 {
   using namespace pfc;
   Scene scene_1;
@@ -3674,151 +3806,245 @@ TEST_F(TEST_FIXTURE_NAME, LocationMap_Test_Location_Removal)
   EXPECT_EQ(0, _db.location_map_count());
   EXPECT_EQ(0, _db.location_count());
 }
-//TEST_F(TEST_FIXTURE_NAME, LocationMap_Test_Location_Deletion)
-//{ // We're no longer using this logic as part of the DB, locations<->scenes are 1-to-1, and users can only delete locations
-//  // Given that this relationship could be changed again down the line I'd like to leave these tests in, but there's no reason to be running them for now
-//  using namespace pfc;
-//  Scene scene_1;
-//  Scene scene_2;
-//  Scene scene_3;
-//  LocationMap map_1;
-//  LocationMap map_2;
-//  LocationMap map_3;
-//  LocationMap map_4;
-//  LocationMap map_5;
-//  LocationMap map_6;
-//  LocationMap map_7;
-//  LocationMap map_8;
-//  LocationMap map_9;
-//  Location location_1;
-//  Location location_2;
-//  Location location_3;
-//  scene_1.name = "Opening";
-//  scene_2.name = "Middle";
-//  scene_3.name = "Ending";
-//
-//  _db.update_scene(&scene_1);
-//  _db.update_scene(&scene_2);
-//  _db.update_scene(&scene_3);
-//
-//  _db.select_scene(&scene_1);
-//  _db.select_scene(&scene_2);
-//  _db.select_scene(&scene_3);
-//
-//  location_1.name = "My House";
-//  location_1.environment = "Bathroom floor";
-//
-//  location_2.name = "Work Building";
-//  location_2.environment = "Office Floor";
-//
-//  location_3.name = "Restaurant";
-//  location_3.environment = "Booth";
-//
-//  _db.update_location(&location_1);
-//  _db.update_location(&location_2);
-//  _db.update_location(&location_3);
-//
-//  _db.select_location(&location_1);
-//  _db.select_location(&location_2);
-//  _db.select_location(&location_3);
-//
-//  _db.update_location_in_scene(&scene_1, &location_1);
-//  _db.update_location_in_scene(&scene_1, &location_2);
-//  _db.update_location_in_scene(&scene_1, &location_3);
-//  _db.update_location_in_scene(&scene_2, &location_1);
-//  _db.update_location_in_scene(&scene_2, &location_2);
-//  _db.update_location_in_scene(&scene_2, &location_3);
-//  _db.update_location_in_scene(&scene_3, &location_1);
-//  _db.update_location_in_scene(&scene_3, &location_2);
-//  _db.update_location_in_scene(&scene_3, &location_3);
-//
-//  EXPECT_EQ(3, _db.location_map_count());
-//  EXPECT_EQ(1, _db.location_count(&scene_1));
-//  EXPECT_EQ(1, _db.location_count(&scene_2));
-//  EXPECT_EQ(1, _db.location_count(&scene_3));
-//  _db.remove_location(&location_1);
-//  EXPECT_EQ(3, _db.location_map_count());
-//  EXPECT_EQ(1, _db.location_count(&scene_1));
-//  EXPECT_EQ(1, _db.location_count(&scene_2));
-//  EXPECT_EQ(1, _db.location_count(&scene_3));
-//  _db.remove_location(&location_2);
-//  EXPECT_EQ(3, _db.location_map_count());
-//  EXPECT_EQ(1, _db.location_count(&scene_1));
-//  EXPECT_EQ(1, _db.location_count(&scene_2));
-//  EXPECT_EQ(1, _db.location_count(&scene_3));
-//  _db.remove_location(&location_3);
-//  EXPECT_EQ(0, _db.location_map_count());
-//  EXPECT_EQ(0, _db.location_count(&scene_1));
-//  EXPECT_EQ(0, _db.location_count(&scene_2));
-//  EXPECT_EQ(0, _db.location_count(&scene_3));
-//}
-//TEST_F(TEST_FIXTURE_NAME, LocationMap_Test_Scene_Deletion)
-//{
-//  using namespace pfc;
-//  Scene scene_1;
-//  Scene scene_2;
-//  Scene scene_3;
-//  LocationMap map_1;
-//  LocationMap map_2;
-//  LocationMap map_3;
-//  LocationMap map_4;
-//  LocationMap map_5;
-//  LocationMap map_6;
-//  LocationMap map_7;
-//  LocationMap map_8;
-//  LocationMap map_9;
-//  Location location_1;
-//  Location location_2;
-//  Location location_3;
-//  scene_1.name = "Opening";
-//  scene_2.name = "Middle";
-//  scene_3.name = "Ending";
-//
-//  _db.update_scene(&scene_1);
-//  _db.update_scene(&scene_2);
-//  _db.update_scene(&scene_3);
-//
-//  _db.select_scene(&scene_1);
-//  _db.select_scene(&scene_2);
-//  _db.select_scene(&scene_3);
-//
-//  location_1.name = "My House";
-//  location_1.environment = "Bathroom floor";
-//
-//  location_2.name = "Work Building";
-//  location_2.environment = "Office Floor";
-//
-//  location_3.name = "Restaurant";
-//  location_3.environment = "Booth";
-//
-//  _db.update_location(&location_1);
-//  _db.update_location(&location_2);
-//  _db.update_location(&location_3);
-//
-//  _db.select_location(&location_1);
-//  _db.select_location(&location_2);
-//  _db.select_location(&location_3);
-//
-//  _db.update_location_in_scene(&scene_1, &location_1);
-//  _db.update_location_in_scene(&scene_1, &location_2);
-//  _db.update_location_in_scene(&scene_1, &location_3);
-//  _db.update_location_in_scene(&scene_2, &location_1);
-//  _db.update_location_in_scene(&scene_2, &location_2);
-//  _db.update_location_in_scene(&scene_2, &location_3);
-//  _db.update_location_in_scene(&scene_3, &location_1);
-//  _db.update_location_in_scene(&scene_3, &location_2);
-//  _db.update_location_in_scene(&scene_3, &location_3);
-//
-//  EXPECT_EQ(3, _db.location_map_count());
-//  _db.remove_scene(&scene_1);
-//  EXPECT_EQ(2, _db.location_map_count());
-//  _db.remove_scene(&scene_2);
-//  EXPECT_EQ(1, _db.location_map_count());
-//  _db.remove_scene(&scene_3);
-//  EXPECT_EQ(0, _db.location_map_count());
-//}
+TEST_F(SQLiteDriver, DISABLED_Location_Deletion)
+{ // We're no longer using this logic as part of the DB, locations<->scenes are 1-to-1, and users can only delete locations
+  // Given that this relationship could be changed again down the line I'd like to leave these tests in, but there's no reason to be running them for now
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+  LocationMap map_1;
+  LocationMap map_2;
+  LocationMap map_3;
+  LocationMap map_4;
+  LocationMap map_5;
+  LocationMap map_6;
+  LocationMap map_7;
+  LocationMap map_8;
+  LocationMap map_9;
+  Location location_1;
+  Location location_2;
+  Location location_3;
+  scene_1.name = "Opening";
+  scene_2.name = "Middle";
+  scene_3.name = "Ending";
 
-TEST_F(TEST_FIXTURE_NAME, get_equipments)
+  _db.update_scene(&scene_1);
+  _db.update_scene(&scene_2);
+  _db.update_scene(&scene_3);
+
+  _db.select_scene(&scene_1);
+  _db.select_scene(&scene_2);
+  _db.select_scene(&scene_3);
+
+  location_1.name = "My House";
+  location_1.environment = "Bathroom floor";
+
+  location_2.name = "Work Building";
+  location_2.environment = "Office Floor";
+
+  location_3.name = "Restaurant";
+  location_3.environment = "Booth";
+
+  _db.update_location(&location_1);
+  _db.update_location(&location_2);
+  _db.update_location(&location_3);
+
+  _db.select_location(&location_1);
+  _db.select_location(&location_2);
+  _db.select_location(&location_3);
+
+  _db.update_location_in_scene(&scene_1, &location_1);
+  _db.update_location_in_scene(&scene_1, &location_2);
+  _db.update_location_in_scene(&scene_1, &location_3);
+  _db.update_location_in_scene(&scene_2, &location_1);
+  _db.update_location_in_scene(&scene_2, &location_2);
+  _db.update_location_in_scene(&scene_2, &location_3);
+  _db.update_location_in_scene(&scene_3, &location_1);
+  _db.update_location_in_scene(&scene_3, &location_2);
+  _db.update_location_in_scene(&scene_3, &location_3);
+
+  EXPECT_EQ(3, _db.location_map_count());
+  EXPECT_EQ(1, _db.location_count(&scene_1));
+  EXPECT_EQ(1, _db.location_count(&scene_2));
+  EXPECT_EQ(1, _db.location_count(&scene_3));
+  _db.remove_location(&location_1);
+  EXPECT_EQ(3, _db.location_map_count());
+  EXPECT_EQ(1, _db.location_count(&scene_1));
+  EXPECT_EQ(1, _db.location_count(&scene_2));
+  EXPECT_EQ(1, _db.location_count(&scene_3));
+  _db.remove_location(&location_2);
+  EXPECT_EQ(3, _db.location_map_count());
+  EXPECT_EQ(1, _db.location_count(&scene_1));
+  EXPECT_EQ(1, _db.location_count(&scene_2));
+  EXPECT_EQ(1, _db.location_count(&scene_3));
+  _db.remove_location(&location_3);
+  EXPECT_EQ(0, _db.location_map_count());
+  EXPECT_EQ(0, _db.location_count(&scene_1));
+  EXPECT_EQ(0, _db.location_count(&scene_2));
+  EXPECT_EQ(0, _db.location_count(&scene_3));
+}
+TEST_F(SQLiteDriver, LocationMap_TEST(Test_Scene_Deletion))
+{
+  using namespace pfc;
+  Scene scene_1;
+  Scene scene_2;
+  Scene scene_3;
+  LocationMap map_1;
+  LocationMap map_2;
+  LocationMap map_3;
+  LocationMap map_4;
+  LocationMap map_5;
+  LocationMap map_6;
+  LocationMap map_7;
+  LocationMap map_8;
+  LocationMap map_9;
+  Location location_1;
+  Location location_2;
+  Location location_3;
+  scene_1.name = "Opening";
+  scene_2.name = "Middle";
+  scene_3.name = "Ending";
+
+  _db.update_scene(&scene_1);
+  _db.update_scene(&scene_2);
+  _db.update_scene(&scene_3);
+
+  _db.select_scene(&scene_1);
+  _db.select_scene(&scene_2);
+  _db.select_scene(&scene_3);
+
+  location_1.name = "My House";
+  location_1.environment = "Bathroom floor";
+
+  location_2.name = "Work Building";
+  location_2.environment = "Office Floor";
+
+  location_3.name = "Restaurant";
+  location_3.environment = "Booth";
+
+  _db.update_location(&location_1);
+  _db.update_location(&location_2);
+  _db.update_location(&location_3);
+
+  _db.select_location(&location_1);
+  _db.select_location(&location_2);
+  _db.select_location(&location_3);
+
+  _db.update_location_in_scene(&scene_1, &location_1);
+  _db.update_location_in_scene(&scene_1, &location_2);
+  _db.update_location_in_scene(&scene_1, &location_3);
+  _db.update_location_in_scene(&scene_2, &location_1);
+  _db.update_location_in_scene(&scene_2, &location_2);
+  _db.update_location_in_scene(&scene_2, &location_3);
+  _db.update_location_in_scene(&scene_3, &location_1);
+  _db.update_location_in_scene(&scene_3, &location_2);
+  _db.update_location_in_scene(&scene_3, &location_3);
+
+  EXPECT_EQ(3, _db.location_map_count());
+  _db.remove_scene(&scene_1);
+  EXPECT_EQ(2, _db.location_map_count());
+  _db.remove_scene(&scene_2);
+  EXPECT_EQ(1, _db.location_map_count());
+  _db.remove_scene(&scene_3);
+  EXPECT_EQ(0, _db.location_map_count());
+}
+//-------------------------------------------------------------------------------
+#ifndef DISABLE_Backdoor_TEST
+#define Backdoor_TEST(X) X##_Backdoor
+#else
+#define Backdoor_TEST(X) DISABLED_##X##_Backdoor
+#endif
+TEST_F(SQLiteDriver, Backdoor_TEST(get_authors))
+{
+  using namespace pfc;
+  Author author_1;
+
+  author_1.first = "Solid";
+  author_1.last = "Snake";
+  author_1.email = "SolidSnake@MetalGear.com";
+
+  EXPECT_EQ(0, _db.author_count());
+  EXPECT_TRUE(_db.update_author(&author_1));
+
+  auto list = _db.get_authors();
+
+  EXPECT_TRUE(list[0]->first.compare(author_1.first) == 0);
+  EXPECT_TRUE(list[0]->last.compare(author_1.last) == 0);
+  EXPECT_TRUE(list[0]->email.compare(author_1.email) == 0);
+}
+TEST_F(SQLiteDriver, Backdoor_TEST(get_assessments))
+{
+  using namespace pfc;
+  Assessment assessment_1; //   Assessment* assessment_1 = new Assessment(NULLPTR);
+
+  assessment_1.name = "Math Test";
+  assessment_1.description = "Gotta do some math";
+  assessment_1.type = "Don't fail";
+  assessment_1.available_points = 100;
+  assessment_1.criteria = "what's 2+2";
+
+  EXPECT_EQ(0, _db.assessment_count());
+  EXPECT_TRUE(_db.update_assessment(&assessment_1));
+
+  auto list = _db.get_assessments();
+
+  EXPECT_TRUE(list[0]->name.compare(assessment_1.name) == 0);
+  EXPECT_TRUE(list[0]->description.compare(assessment_1.description) == 0);
+  EXPECT_TRUE(list[0]->type.compare(assessment_1.type) == 0);
+  EXPECT_TRUE(list[0]->available_points == assessment_1.available_points);
+  EXPECT_TRUE(list[0]->criteria.compare(assessment_1.criteria) == 0);
+}
+TEST_F(SQLiteDriver, Backdoor_TEST(get_citations))
+{
+  using namespace pfc;
+  Citation citation_1;
+
+  citation_1.key = "skeleton key";
+  citation_1.title = "Mr. Bones' Wild Ride";
+  citation_1.authors = "Nathan;Angel";
+  citation_1.year = "1000";
+  citation_1.publisher = "Boneland";
+
+  EXPECT_EQ(0, _db.citation_count());
+  EXPECT_TRUE(_db.update_citation(&citation_1));
+
+  auto list = _db.get_citations();
+
+  EXPECT_TRUE(list[0]->key.compare(citation_1.key) == 0);
+  EXPECT_TRUE(list[0]->title.compare(citation_1.title) == 0);
+  EXPECT_TRUE(list[0]->authors.compare(citation_1.authors) == 0);
+  EXPECT_TRUE(list[0]->year.compare(citation_1.year) == 0);
+  EXPECT_TRUE(list[0]->publisher.compare(citation_1.publisher) == 0);
+}
+TEST_F(SQLiteDriver, Backdoor_TEST(get_events))
+{
+  using namespace pfc;
+  Event event_1;
+
+  event_1.name = "Barbecue";
+  event_1.description = "Barbecue Barbecue";
+  event_1.category = "DIALOG";
+  event_1.fidelity = "ACTION";
+  event_1.fk_actor_1 = "2";
+  event_1.fk_actor_2 = "3";
+  event_1.equipment = "5;6;7";
+  event_1.details = "People cooking and eating meat outdoors";
+  EXPECT_EQ(0, _db.event_count());
+  EXPECT_TRUE(_db.update_event(&event_1));
+  auto list = _db.get_events();
+
+  EXPECT_TRUE(list[0]->name.compare(event_1.name) == 0);
+  EXPECT_TRUE(list[0]->description.compare(event_1.description) == 0);
+  EXPECT_TRUE(list[0]->equipment.compare(event_1.equipment) == 0);
+  EXPECT_TRUE(list[0]->category.compare(event_1.category) == 0);
+  EXPECT_TRUE(list[0]->fidelity.compare(event_1.fidelity) == 0);
+  EXPECT_TRUE(list[0]->fk_actor_1.compare(event_1.fk_actor_1) == 0);
+  EXPECT_TRUE(list[0]->fk_actor_2.compare(event_1.fk_actor_2) == 0);
+  EXPECT_TRUE(list[0]->details.compare(event_1.details) == 0);
+}
+
+TEST_F(SQLiteDriver, Backdoor_TEST(get_equipments))
 {
   using namespace pfc;
   Equipment equipment_1;
@@ -3840,7 +4066,7 @@ TEST_F(TEST_FIXTURE_NAME, get_equipments)
   EXPECT_TRUE(list[0]->image.compare(equipment_1.image) == 0);
   EXPECT_TRUE(list[0]->citations.compare(equipment_1.citations) == 0);
 }
-TEST_F(TEST_FIXTURE_NAME, get_injuries)
+TEST_F(SQLiteDriver, Backdoor_TEST(get_injuries))
 {
   using namespace pfc;
   Injury injury_1;
@@ -3860,7 +4086,7 @@ TEST_F(TEST_FIXTURE_NAME, get_injuries)
   EXPECT_TRUE(list[0]->common_name.compare(injury_1.common_name) == 0);
   EXPECT_TRUE(list[0]->citations.compare(injury_1.citations) == 0);
 }
-TEST_F(TEST_FIXTURE_NAME, get_injury_sets)
+TEST_F(SQLiteDriver, Backdoor_TEST(get_injury_sets))
 {
   using namespace pfc;
   InjurySet injury_set_1;
@@ -3882,7 +4108,7 @@ TEST_F(TEST_FIXTURE_NAME, get_injury_sets)
   EXPECT_TRUE(list[0]->locations.compare(injury_set_1.locations) == 0);
   EXPECT_TRUE(list[0]->severities.compare(injury_set_1.severities) == 0);
 }
-TEST_F(TEST_FIXTURE_NAME, get_role_maps)
+TEST_F(SQLiteDriver, Backdoor_TEST(get_role_maps))
 {
   using namespace pfc;
   Scene scene_1;
@@ -3906,7 +4132,7 @@ TEST_F(TEST_FIXTURE_NAME, get_role_maps)
   EXPECT_EQ(1, list[0]->fk_scene);
   EXPECT_EQ(1, list[0]->fk_role);
 }
-TEST_F(TEST_FIXTURE_NAME, get_event_maps)
+TEST_F(SQLiteDriver, Backdoor_TEST(get_event_maps))
 {
   using namespace pfc;
   Scene scene_1;
@@ -3930,8 +4156,8 @@ TEST_F(TEST_FIXTURE_NAME, get_event_maps)
   EXPECT_EQ(1, list[0]->fk_scene);
   EXPECT_EQ(1, list[0]->fk_event);
 }
-
-TEST_F(TEST_FIXTURE_NAME, get_citation_maps)
+//-------------------------------------------------------------------------------
+TEST_F(SQLiteDriver, Backdoor_TEST(get_citation_maps))
 {
   using namespace pfc;
   Scene scene_1;
@@ -3958,12 +4184,12 @@ TEST_F(TEST_FIXTURE_NAME, get_citation_maps)
   EXPECT_EQ(1, list[0]->fk_scene);
   EXPECT_EQ(1, list[0]->fk_citation);
 }
-TEST_F(TEST_FIXTURE_NAME, get_equipment_maps)
+TEST_F(SQLiteDriver, Backdoor_TEST(get_equipment_maps))
 {
   using namespace pfc;
   Scene scene_1;
-  EquipmentMap map_1;
   Equipment equipment_1;
+  EquipmentMap map_1;
   scene_1.name = "Opening";
 
   _db.update_scene(&scene_1);
@@ -3978,14 +4204,17 @@ TEST_F(TEST_FIXTURE_NAME, get_equipment_maps)
 
   _db.update_equipment(&equipment_1);
   _db.select_equipment(&equipment_1);
-  _db.update_equipment_in_scene(&scene_1, &equipment_1);
+
+  map_1.scene->assign(&scene_1);
+  map_1.equipment->assign(&equipment_1);
+  _db.update_equipment_in_scene(&map_1);
 
   auto list = _db.get_equipment_maps();
-
-  EXPECT_EQ(1, list[0]->fk_scene);
-  EXPECT_EQ(1, list[0]->fk_equipment);
+  EXPECT_EQ(1, list.size());
+  EXPECT_EQ(1, list[0]->scene->id);
+  EXPECT_EQ(1, list[0]->equipment->id);
 }
-TEST_F(TEST_FIXTURE_NAME, get_restriction_maps)
+TEST_F(SQLiteDriver, Backdoor_TEST(get_restriction_maps))
 {
   using namespace pfc;
   Scene scene_1;
@@ -4009,7 +4238,7 @@ TEST_F(TEST_FIXTURE_NAME, get_restriction_maps)
   EXPECT_EQ(1, list[0]->fk_scene);
   EXPECT_EQ(1, list[0]->fk_restriction);
 }
-TEST_F(TEST_FIXTURE_NAME, get_objectives)
+TEST_F(SQLiteDriver, Backdoor_TEST(get_objectives))
 {
   using namespace pfc;
   Objective objective_1;
@@ -4027,7 +4256,7 @@ TEST_F(TEST_FIXTURE_NAME, get_objectives)
   EXPECT_TRUE(list[0]->description.compare(objective_1.description) == 0);
   EXPECT_TRUE(list[0]->citations.compare(objective_1.citations) == 0);
 }
-TEST_F(TEST_FIXTURE_NAME, get_properties)
+TEST_F(SQLiteDriver, Backdoor_TEST(get_properties))
 {
   using namespace pfc;
   Property property_1;
@@ -4043,8 +4272,8 @@ TEST_F(TEST_FIXTURE_NAME, get_properties)
   EXPECT_TRUE(list[0]->name.compare(property_1.name) == 0);
   EXPECT_TRUE(list[0]->value.compare(property_1.value) == 0);
 }
-
-TEST_F(TEST_FIXTURE_NAME, get_restrictions)
+//-------------------------------------------------------------------------------
+TEST_F(SQLiteDriver, Backdoor_TEST(get_restrictions))
 {
   using namespace pfc;
   Restriction restriction_1;
@@ -4060,7 +4289,7 @@ TEST_F(TEST_FIXTURE_NAME, get_restrictions)
   EXPECT_TRUE(list[0]->name.compare(restriction_1.name) == 0);
   EXPECT_TRUE(list[0]->value.compare(restriction_1.value) == 0);
 }
-TEST_F(TEST_FIXTURE_NAME, get_roles)
+TEST_F(SQLiteDriver, Backdoor_TEST(get_roles))
 {
   using namespace pfc;
   Role role_1;
@@ -4076,7 +4305,7 @@ TEST_F(TEST_FIXTURE_NAME, get_roles)
   EXPECT_TRUE(list[0]->name.compare(role_1.name) == 0);
   EXPECT_TRUE(list[0]->description.compare(role_1.description) == 0);
 }
-TEST_F(TEST_FIXTURE_NAME, get_treatments)
+TEST_F(SQLiteDriver, Backdoor_TEST(get_treatments))
 {
   using namespace pfc;
   Treatment treatment_1;
@@ -4098,7 +4327,7 @@ TEST_F(TEST_FIXTURE_NAME, get_treatments)
   EXPECT_TRUE(list[0]->equipment.compare(treatment_1.equipment) == 0);
   EXPECT_TRUE(list[0]->citations.compare(treatment_1.citations) == 0);
 }
-TEST_F(TEST_FIXTURE_NAME, get_scenes)
+TEST_F(SQLiteDriver, Backdoor_TEST(get_scenes))
 {
   using namespace pfc;
   Scene scene_1;
@@ -4128,8 +4357,13 @@ TEST_F(TEST_FIXTURE_NAME, get_scenes)
   EXPECT_TRUE(list[0]->roles.compare(scene_1.roles) == 0);
   EXPECT_TRUE(list[0]->details.compare(scene_1.details) == 0);
 }
-
-TEST_F(TEST_FIXTURE_NAME, remove_equipment_from_treatments)
+//-------------------------------------------------------------------------------
+#ifndef DISABLE_REMOVAL_TEST
+#define REMOVAL_TEST(X) Remove_##X
+#else
+#define REMOVAL_TEST(X) DISABLED_Remove_##X
+#endif
+TEST_F(SQLiteDriver, REMOVAL_TEST(equipment_from_treatments))
 {
   using namespace pfc;
   Treatment treatment_1;
@@ -4149,7 +4383,7 @@ TEST_F(TEST_FIXTURE_NAME, remove_equipment_from_treatments)
   treatment_6.common_name = "Chicken Soup2";
   treatment_6.description = "Good for the soul";
   treatment_6.equipment = "1;2;3;4";
-  treatment_6.citations = { 1 };  
+  treatment_6.citations = { 1 };
 
   treatment_2.equipment = "1;3;4";
   treatment_3.equipment = "1;3";
@@ -4182,7 +4416,7 @@ TEST_F(TEST_FIXTURE_NAME, remove_equipment_from_treatments)
   EXPECT_EQ(treatment_5.equipment.toStdString(), treatment_1.equipment.toStdString());
   EXPECT_EQ(treatment_5.equipment.toStdString(), treatment_6.equipment.toStdString());
 }
-TEST_F(TEST_FIXTURE_NAME, remove_citation_from_treatments)
+TEST_F(SQLiteDriver, REMOVAL_TEST(citation_from_treatments))
 {
   using namespace pfc;
   Treatment treatment_1;
@@ -4235,7 +4469,7 @@ TEST_F(TEST_FIXTURE_NAME, remove_citation_from_treatments)
   EXPECT_EQ(treatment_5.citations.toStdString(), treatment_1.citations.toStdString());
   EXPECT_EQ(treatment_5.citations.toStdString(), treatment_6.citations.toStdString());
 }
-TEST_F(TEST_FIXTURE_NAME, remove_citation_from_injuries)
+TEST_F(SQLiteDriver, REMOVAL_TEST(citation_from_injuries))
 {
   using namespace pfc;
   Injury injury_1;
@@ -4286,7 +4520,7 @@ TEST_F(TEST_FIXTURE_NAME, remove_citation_from_injuries)
   EXPECT_EQ(injury_5.citations.toStdString(), injury_1.citations.toStdString());
   EXPECT_EQ(injury_5.citations.toStdString(), injury_6.citations.toStdString());
 }
-TEST_F(TEST_FIXTURE_NAME, remove_citation_from_equipment)
+TEST_F(SQLiteDriver, REMOVAL_TEST(citation_from_equipment))
 {
   using namespace pfc;
   Equipment equipment_1;
@@ -4339,7 +4573,7 @@ TEST_F(TEST_FIXTURE_NAME, remove_citation_from_equipment)
   EXPECT_EQ(equipment_5.citations.toStdString(), equipment_1.citations.toStdString());
   EXPECT_EQ(equipment_5.citations.toStdString(), equipment_6.citations.toStdString());
 }
-TEST_F(TEST_FIXTURE_NAME, remove_citation_from_objectives)
+TEST_F(SQLiteDriver, REMOVAL_TEST(citation_from_objectives))
 {
   using namespace pfc;
   Objective objective_1;
@@ -4388,7 +4622,7 @@ TEST_F(TEST_FIXTURE_NAME, remove_citation_from_objectives)
   EXPECT_EQ(objective_5.citations.toStdString(), objective_1.citations.toStdString());
   EXPECT_EQ(objective_5.citations.toStdString(), objective_6.citations.toStdString());
 }
-TEST_F(TEST_FIXTURE_NAME, remove_injury_from_injury_sets)
+TEST_F(SQLiteDriver, REMOVAL_TEST(injury_from_injury_sets))
 {
   using namespace pfc;
   InjurySet injury_set_1;
@@ -4497,8 +4731,13 @@ TEST_F(TEST_FIXTURE_NAME, remove_injury_from_injury_sets)
   EXPECT_EQ(injury_set_5.locations.toStdString(), injury_set_6.locations.toStdString());
   EXPECT_EQ(injury_set_5.severities.toStdString(), injury_set_6.severities.toStdString());
 }
-
-TEST_F(DATABASE_LOADING_TEST, load_authors)
+//-------------------------------------------------------------------------------
+#ifndef DISABLE_Serialization_TEST
+#define Serialization_TEST(X) Serialization_load_##X
+#else
+#define Serialization_TEST(X) DISABLED_Serialization_load_##X
+#endif
+TEST_F(SerializationTest, Serialization_TEST(Authors))
 {
   pfc::schema::PFC::load_authors(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.author_count());
@@ -4511,7 +4750,7 @@ TEST_F(DATABASE_LOADING_TEST, load_authors)
   EXPECT_EQ(0, temp[0]->state.compare("Test_State"));
   EXPECT_EQ(0, temp[0]->country.compare("Test_Country"));
 }
-TEST_F(DATABASE_LOADING_TEST, load_assessments)
+TEST_F(SerializationTest, Serialization_TEST(Assessment))
 {
   pfc::schema::PFC::load_assessments(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.assessment_count());
@@ -4522,7 +4761,7 @@ TEST_F(DATABASE_LOADING_TEST, load_assessments)
   EXPECT_EQ(1, temp[0]->available_points);
   EXPECT_EQ(0, temp[0]->criteria.compare("Assessment_Criteria"));
 }
-TEST_F(DATABASE_LOADING_TEST, load_citations)
+TEST_F(SerializationTest, Serialization_TEST(Citation))
 {
   pfc::schema::PFC::load_citations(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.citation_count());
@@ -4532,7 +4771,7 @@ TEST_F(DATABASE_LOADING_TEST, load_citations)
   EXPECT_EQ(0, temp[0]->authors.compare("Citation_Authors"));
   EXPECT_EQ(0, temp[0]->year.compare("Citation_Year"));
 }
-TEST_F(DATABASE_LOADING_TEST, load_equipment)
+TEST_F(SerializationTest, Serialization_TEST(Equipment))
 {
   pfc::schema::PFC::load_equipment(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.equipment_count());
@@ -4542,7 +4781,7 @@ TEST_F(DATABASE_LOADING_TEST, load_equipment)
   EXPECT_EQ(0, temp[0]->type);
   EXPECT_EQ(0, temp[0]->image.compare("Equipment_Image"));
 }
-TEST_F(DATABASE_LOADING_TEST, load_events)
+TEST_F(SerializationTest, Serialization_TEST(Event))
 {
   pfc::schema::PFC::load_events(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.event_count());
@@ -4555,7 +4794,7 @@ TEST_F(DATABASE_LOADING_TEST, load_events)
   EXPECT_EQ(0, temp[0]->fk_actor_1.compare("Actor_1"));
   EXPECT_EQ(0, temp[0]->fk_actor_2.compare("Actor_2"));
 }
-TEST_F(DATABASE_LOADING_TEST, load_injuries)
+TEST_F(SerializationTest, Serialization_TEST(Trauma))
 {
   pfc::schema::PFC::load_injuries(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.injury_count());
@@ -4567,7 +4806,7 @@ TEST_F(DATABASE_LOADING_TEST, load_injuries)
   EXPECT_EQ(2, temp[0]->upper_bound);
   EXPECT_EQ(0, temp[0]->citations.compare("0;1"));
 }
-TEST_F(DATABASE_LOADING_TEST, load_injury_sets)
+TEST_F(SerializationTest, Serialization_TEST(InjurySet))
 {
   pfc::schema::PFC::load_injury_sets(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.injury_set_count());
@@ -4578,14 +4817,14 @@ TEST_F(DATABASE_LOADING_TEST, load_injury_sets)
   EXPECT_EQ(0, temp[0]->locations.compare("Location_1;Location_2"));
   EXPECT_EQ(0, temp[0]->severities.compare("0;1"));
 }
-TEST_F(DATABASE_LOADING_TEST, load_locations)
+TEST_F(SerializationTest, Serialization_TEST(Locations))
 {
   pfc::schema::PFC::load_locations(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.location_count());
   auto temp = _db.get_locations();
   EXPECT_EQ(0, temp[0]->name.compare("Scene_Name Location"));
 }
-TEST_F(DATABASE_LOADING_TEST, load_objectives)
+TEST_F(SerializationTest, Serialization_TEST(Objective))
 {
   pfc::schema::PFC::load_objectives(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.objective_count());
@@ -4594,7 +4833,7 @@ TEST_F(DATABASE_LOADING_TEST, load_objectives)
   EXPECT_EQ(0, temp[0]->description.compare("Objective_Description"));
   EXPECT_EQ(0, temp[0]->citations.compare("0;1"));
 }
-TEST_F(DATABASE_LOADING_TEST, load_roles)
+TEST_F(SerializationTest, Serialization_TEST(Role))
 {
   pfc::schema::PFC::load_roles(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.role_count());
@@ -4602,7 +4841,7 @@ TEST_F(DATABASE_LOADING_TEST, load_roles)
   EXPECT_EQ(0, temp[0]->name.compare("Role_Name"));
   EXPECT_EQ(0, temp[0]->description.compare("Role_Description"));
 }
-TEST_F(DATABASE_LOADING_TEST, load_scenes)
+TEST_F(SerializationTest, Serialization_TEST(Scene))
 {
   pfc::schema::PFC::load_scenes(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.scene_count());
@@ -4612,7 +4851,7 @@ TEST_F(DATABASE_LOADING_TEST, load_scenes)
   EXPECT_EQ(0, temp[0]->time_of_day.compare("00:00:00"));
   EXPECT_EQ(0, temp[0]->time_in_simulation);
 }
-TEST_F(DATABASE_LOADING_TEST, load_treatments)
+TEST_F(SerializationTest, Serialization_TEST(Treatment))
 {
   pfc::schema::PFC::load_treatments(std::move(scenario_schema), _db, load_result);
   EXPECT_EQ(1, _db.treatment_count());
