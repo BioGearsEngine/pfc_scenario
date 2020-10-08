@@ -22,6 +22,7 @@ inline namespace sqlite3 {
   //---------------------- ASSESSMENTS STATMENTS ------------------------
   enum ASSESSMENT_COLUMNS {
     ASSESSMENT_ID,
+    ASSESSMENT_UUID,
     ASSESSMENT_NAME,
     ASSESSMENT_DESCRIPTION,
     ASSESSMENT_TYPE,
@@ -31,25 +32,30 @@ inline namespace sqlite3 {
   };
 
   constexpr auto create_assessments_table = R"(
-  CREATE TABLE IF NOT EXISTS assessments (
-    assessment_id INTEGER PRIMARY KEY,
-    name Varchar(64) NOT NULL UNIQUE,
-    description TEXT,
-    type TEXT,
-    available_points INTEGER,
-    criteria TEXT
-  );
+    CREATE TABLE IF NOT EXISTS "assessments" (
+	    "assessment_id"	INTEGER,
+	    "uuid"	TEXT,
+	    "name"	Varchar(64) NOT NULL UNIQUE,
+	    "description"	TEXT,
+	    "type"	TEXT,
+	    "available_points"	INTEGER,
+	    "criteria"	TEXT,
+	    PRIMARY KEY("assessment_id"),
+	    UNIQUE("uuid")
+    );
   )";
 
   constexpr auto drop_all_assessments = R"( DELETE FROM assessments; )";
   constexpr auto count_assessments = R"( SELECT COUNT(assessment_id) FROM assessments; )";
-  constexpr auto select_all_assessments = R"( SELECT assessment_id,name,description,type,available_points,criteria FROM assessments ORDER BY name; )";
+  constexpr auto select_all_assessments = R"( SELECT * FROM assessments ORDER BY name; )";
 
   constexpr auto select_assessment_by_id
     = R"( SELECT * FROM assessments WHERE assessment_id = :id; )";
   constexpr auto update_assessment_by_id
     = R"( UPDATE  assessments 
-          SET name = :name
+          SET
+                uuid = :uuid
+              , name = :name
               , description = :description
               , type = :type
               , available_points = :available_points
@@ -64,8 +70,8 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM assessments WHERE name = :name ORDER BY name; )";
   constexpr auto insert_or_update_assessments
     = R"( INSERT INTO assessments
-          (name,description,type,available_points,criteria)
-          VALUES (:name, :description, :type, :available_points, :criteria)
+          (name,uuid,description,type,available_points,criteria)
+          VALUES (:name, :uuid, :description, :type, :available_points, :criteria)
           ON CONFLICT (name)
           DO UPDATE SET name = excluded.name
                        , description = excluded.description
@@ -78,6 +84,7 @@ inline namespace sqlite3 {
   //---------------------- AUTHOR STATMENTS ------------------------
   enum AUTHOR_COLUMNS {
     AUTHOR_ID,
+    AUTHOR_UUID,
     AUTHOR_FIRST_NAME,
     AUTHOR_LAST_NAME,
     AUTHOR_EMAIL,
@@ -88,28 +95,34 @@ inline namespace sqlite3 {
     AUTHOR_ORGANIZATION,
     AUTHOR_COLUMN_COUNT
   };
+  
   constexpr auto create_authors_table = R"(
-  CREATE TABLE IF NOT EXISTS authors(
-    author_id INTEGER PRIMARY KEY,
-    name_first Varchar(25),
-    name_last Varchar(25) NOT NULL ,
-    email VarChar(45) NOT NULL UNIQUE,
-    zipcode Varchar(10),
-    state Varchar(64),
-    country Varchar(64),
-    phone Varchar(16),
-    organization Varchar(128)
-  );
+    CREATE TABLE IF NOT EXISTS "authors" (
+	    "author_id"	INTEGER,
+	    "uuid"	TEXT,
+	    "name_first"	Varchar(25),
+	    "name_last"	Varchar(25) NOT NULL,
+	    "email"	VarChar(45) NOT NULL UNIQUE,
+	    "zipcode"	Varchar(10),
+	    "state"	Varchar(64),
+	    "country"	Varchar(64),
+	    "phone"	Varchar(16),
+	    "organization"	Varchar(128),
+	    PRIMARY KEY("author_id"),
+	    UNIQUE("uuid")
+    );
   )";
   constexpr auto drop_all_authors = R"( DELETE FROM authors; )";
   constexpr auto count_authors = R"( SELECT COUNT(author_id) FROM authors; )";
-  constexpr auto select_all_authors = R"( SELECT author_id,name_first,name_last,email,zipcode,state,country,phone,organization FROM authors ORDER BY name_last; )";
+  constexpr auto select_all_authors = R"( SELECT * FROM authors ORDER BY name_last; )";
 
   constexpr auto select_author_by_id
     = R"( SELECT * FROM authors WHERE author_id = :id ; )";
   constexpr auto update_author_by_id
     = R"( UPDATE  authors 
-          SET name_first = :name_first
+          SET
+                uuid = :uuid
+              , name_first = :name_first
               , name_last = :name_last
               , email = :email
               , zipcode = :zipcode
@@ -124,16 +137,16 @@ inline namespace sqlite3 {
 
   constexpr auto insert_or_update_first_author
     = R"( INSERT  OR REPLACE INTO authors
-                 (  author_id, name_first,  name_last,  email,  zipcode,  state,  country,  phone,  organization)
-          VALUES (1, :name_first, :name_last, :email, :zipcode, :state, :country, :phone, :organization)
+                 (author_id,  uuid,  name_first,  name_last,  email,  zipcode,  state,  country,  phone,  organization)
+          VALUES (1, :uuid, :name_first, :name_last, :email, :zipcode, :state, :country, :phone, :organization)
         )";
 
   constexpr auto insert_or_update_authors
     = R"( INSERT  INTO authors
-                 (  name_first,  name_last,  email,  zipcode,  state,  country,  phone,  organization)
-          VALUES ( :name_first, :name_last, :email, :zipcode, :state, :country, :phone, :organization)
+                 (  name_first, uuid,  name_last,  email,  zipcode,  state,  country,  phone,  organization)
+          VALUES ( :name_first, :uuid, :name_last, :email, :zipcode, :state, :country, :phone, :organization)
           ON CONFLICT(email) 
-          DO UPDATE SET 
+          DO UPDATE SET
                      name_first = excluded.name_first
                     ,name_last  = excluded.name_last
                     ,zipcode    = excluded.zipcode  
@@ -151,6 +164,7 @@ inline namespace sqlite3 {
   //---------------------- EQUIPMENT STATMENTS ------------------------
   enum EQUIPMENT_COLUMNS {
     EQUIPMENT_ID,
+    EQUIPMENT_UUID,
     EQUIPMENT_TYPE,
     EQUIPMENT_NAME,
     EQUIPMENT_DESCRIPTION,
@@ -161,26 +175,31 @@ inline namespace sqlite3 {
   };
   // I know that the plural of equipment is 'equipment', but we've made it equipments to be less ambiguous
   constexpr auto create_equipment_table = R"(
-  CREATE TABLE IF NOT EXISTS equipments (
-    equipment_id INTEGER PRIMARY KEY,
-    type INTEGER NOT NULL DEFAULT 1,
-    name Varchar(64) NOT NULL UNIQUE,
-    description Varchar(64) NOT NULL,
-    citations TEXT,
-    image TEXT,
-    PROPERTIES TEXT
-  );
+    CREATE TABLE IF NOT EXISTS "equipments" (
+	    "equipment_id"	INTEGER,
+	    "uuid"	TEXT,
+	    "type"	INTEGER NOT NULL DEFAULT 1,
+	    "name"	Varchar(64) NOT NULL UNIQUE,
+	    "description"	Varchar(64) NOT NULL,
+	    "citations"	TEXT,
+	    "image"	TEXT,
+	    "PROPERTIES"	TEXT,
+	    PRIMARY KEY("equipment_id"),
+	    UNIQUE("uuid")
+    );
   )";
   constexpr auto drop_all_equipment = R"( DELETE FROM equipment; )";
   constexpr auto count_equipments = R"( SELECT COUNT(equipment_id) FROM equipments; )";
   constexpr auto count_equipments_in_scene = R"( SELECT COUNT(equipment_map_id) FROM equipment_map WHERE :id = fk_scene ; )";
-  constexpr auto select_all_equipments = R"( SELECT equipment_id,type,name,description,citations,image,properties FROM equipments ORDER BY name; )";
+  constexpr auto select_all_equipments = R"( SELECT *  FROM equipments ORDER BY name; )";
 
   constexpr auto select_equipment_by_id
     = R"( SELECT * FROM equipments WHERE equipment_id = :id ; )";
   constexpr auto update_equipment_by_id
     = R"( UPDATE  equipments
-          SET name = :name
+          SET
+                uuid = :uuid
+              , name = :name
               , type = :type
               , description = :description
               , citations = :citations
@@ -196,8 +215,8 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM equipments WHERE name = :name ORDER BY name;)";
   constexpr auto insert_or_update_equipments
     = R"( INSERT INTO equipments
-          (name,type,description,citations,image,properties)
-          VALUES (:name, :type, :description, :citations, :image, :properties)
+          (name,uuid, type,description,citations,image,properties)
+          VALUES (:name, :uuid, :type, :description, :citations, :image, :properties)
           ON CONFLICT (name)
           DO UPDATE SET name = excluded.name
                         , type = excluded.type
@@ -210,6 +229,7 @@ inline namespace sqlite3 {
   //---------------------- EVENT STATMENTS ------------------------
   enum EVENT_COLUMNS {
     EVENT_ID,
+    EVENT_UUID,
     EVENT_NAME,
     EVENT_DESCRIPTION,
     EVENT_CATEGORY,
@@ -222,22 +242,25 @@ inline namespace sqlite3 {
   };
 
   constexpr auto create_events_table = R"(
-  CREATE TABLE IF NOT EXISTS events (
-    event_id INTEGER PRIMARY KEY,
-    name Varchar(64) NOT NULL UNIQUE,
-    description TEXT,
-    category TEXT,
-    fidelity TEXT,
-    actor_1 Varchar(64) NOT NULL,
-    actor_2 Varchar(64),
-    equipment TEXT,
-    details INTEGER
-  );
+    CREATE TABLE IF NOT EXISTS "events" (
+	    "event_id"	INTEGER,
+	    "uuid"	TEXT,
+	    "name"	Varchar(64) NOT NULL UNIQUE,
+	    "description"	TEXT,
+	    "category"	TEXT,
+	    "fidelity"	TEXT,
+	    "actor_1"	Varchar(64) NOT NULL,
+	    "actor_2"	Varchar(64),
+	    "equipment"	TEXT,
+	    "details"	INTEGER,
+	    PRIMARY KEY("event_id"),
+	    UNIQUE("uuid")
+    );
   )";
   constexpr auto drop_all_events = R"( DELETE FROM events; )";
   constexpr auto count_events = R"( SELECT COUNT(event_id) FROM events; )";
   constexpr auto count_events_in_scene = R"( SELECT COUNT(event_map_id) FROM event_maps WHERE :id = fk_scene ; )";
-  constexpr auto select_all_events = R"( SELECT event_id,name,description,category,fidelity,actor_1,actor_2, equipment, details FROM events ORDER BY name; )";
+  constexpr auto select_all_events = R"( SELECT *  FROM events ORDER BY name; )";
 
   constexpr auto select_event_by_id
     = R"( SELECT * FROM events WHERE event_id = :id ; )";
@@ -245,7 +268,9 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM events WHERE name = :name ORDER BY name; )";
   constexpr auto update_event_by_id
     = R"( UPDATE  events
-            SET name = :name
+            SET
+                  uuid = :uuid
+                , name = :name
                 , description = :description
                 , category = :category
                 , fidelity = :fidelity
@@ -259,10 +284,10 @@ inline namespace sqlite3 {
     = R"( DELETE FROM events WHERE event_id = :id; )";
   constexpr auto insert_or_update_events
     = R"( INSERT INTO events
-          (name, description, category, fidelity, actor_1, actor_2, equipment, details)
-          VALUES (:name, :description, :category, :fidelity, :actor_1, :actor_2, :equipment, :details)
+          (name, uuid, description, category, fidelity, actor_1, actor_2, equipment, details)
+          VALUES (:name, :uuid, :description, :category, :fidelity, :actor_1, :actor_2, :equipment, :details)
           ON CONFLICT (name)
-          DO UPDATE SET name = excluded.name
+          DO UPDATE SET  name = excluded.name
                         , description = excluded.description
                         , category = excluded.category
                         , fidelity = excluded.fidelity
@@ -275,6 +300,7 @@ inline namespace sqlite3 {
   //---------------------- INJURY STATEMENTS ------------------------
   enum INJURY_COLUMNS {
     INJURY_ID,
+    INJURY_UUID,
     INJURY_MEDICAL_NAME,
     INJURY_COMMON_NAME,
     INJURY_DESCRIPTION,
@@ -285,26 +311,31 @@ inline namespace sqlite3 {
   };
 
   constexpr auto create_injuries_table = R"(
-  CREATE TABLE IF NOT EXISTS injuries ( 
-    injury_id INTEGER PRIMARY KEY,
-    medical_name Varchar(64) NOT NULL UNIQUE,
-    common_name Varchar(64) NOT NULL UNIQUE,
-    description TEXT,
-    citations TEXT,
-    lower_bound REAL DEFAULT 0.0,
-    upper_bound REAL DEFAULT 1.0
-  );
+    CREATE TABLE IF NOT EXISTS "injuries" (
+	    "injury_id"	INTEGER,
+	    "uuid"	TEXT,
+	    "medical_name"	Varchar(64) NOT NULL UNIQUE,
+	    "common_name"	Varchar(64) NOT NULL UNIQUE,
+	    "description"	TEXT,
+	    "citations"	TEXT,
+	    "lower_bound"	REAL DEFAULT 0.0,
+	    "upper_bound"	REAL DEFAULT 1.0,
+	    PRIMARY KEY("injury_id"),
+	    UNIQUE("uuid")
+    );
   )";
 
   constexpr auto drop_all_injuries = R"( DELETE FROM injuries; )";
   constexpr auto count_injuries = R"( SELECT COUNT(injury_id) FROM injuries; )";
-  constexpr auto select_all_injuries = R"( SELECT injury_id,medical_name,common_name,description,citations,lower_bound,upper_bound FROM injuries ORDER BY medical_name; )";
+  constexpr auto select_all_injuries = R"( SELECT * FROM injuries ORDER BY medical_name; )";
 
   constexpr auto select_injury_by_id
     = R"( SELECT * FROM injuries WHERE injury_id = :id ; )";
   constexpr auto update_injury_by_id
     = R"( UPDATE  injuries
-          SET medical_name = :medical_name
+          SET
+                uuid = :uuid
+              , medical_name = :medical_name
               , common_name = :common_name
               , description = :description
               , citations = :citations
@@ -324,10 +355,10 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM injuries WHERE common_name = :common_name ORDER BY common_name; )";
   constexpr auto insert_or_update_injuries
     = R"( INSERT INTO injuries
-          (medical_name,common_name,description,citations,lower_bound,upper_bound)
-          VALUES (:medical_name, :common_name, :description, :citations, :lower_bound, :upper_bound)
+          (medical_name, uuid, common_name, description, citations, lower_bound, upper_bound)
+          VALUES (:medical_name, :uuid, :common_name, :description, :citations, :lower_bound, :upper_bound)
           ON CONFLICT (medical_name)
-          DO UPDATE SET common_name = excluded.common_name
+          DO UPDATE SET  common_name = excluded.common_name
                         , description = excluded.description
                         , citations = excluded.citations
                         , lower_bound= excluded.lower_bound
@@ -338,6 +369,7 @@ inline namespace sqlite3 {
   //---------------------- Injury Set STATMENTS ------------------------
   enum INJURY_SET_COLUMNS {
     INJURY_SET_ID,
+    INJURY_SET_UUID,
     INJURY_SET_NAME,
     INJURY_SET_DESCRIPTION,
     INJURY_SET_INJURIES,
@@ -348,25 +380,30 @@ inline namespace sqlite3 {
   //TODO: ADD SUPPORT FOR LOCATION AND SEVERITIES (PRIMITIVE List in the same order as the injuries should do it)
 
   constexpr auto create_injury_sets_table = R"(
-  CREATE TABLE IF NOT EXISTS injury_sets ( 
-    injury_set_id INTEGER PRIMARY KEY,
-    name Varchar(64) NOT NULL UNIQUE,
-    description TEXT,
-    injuries TEXT,
-    locations TEXT,
-    severities TEXT
-  );
+    CREATE TABLE IF NOT EXISTS "injury_sets" (
+	    "injury_set_id"	INTEGER,
+	    "uuid"	TEXT,
+	    "name"	Varchar(64) NOT NULL UNIQUE,
+	    "description"	TEXT,
+	    "injuries"	TEXT,
+	    "locations"	TEXT,
+	    "severities"	TEXT,
+	    PRIMARY KEY("injury_set_id"),
+	    UNIQUE("uuid")
+    );
   )";
 
   constexpr auto drop_all_injury_sets = R"( DELETE FROM injury_sets; )";
   constexpr auto count_injury_sets = R"( SELECT COUNT(injury_set_id) FROM injury_sets; )";
-  constexpr auto select_all_injury_sets = R"( SELECT injury_set_id,name,description,injuries,locations,severities FROM injury_sets ORDER BY name; )";
+  constexpr auto select_all_injury_sets = R"( SELECT * FROM injury_sets ORDER BY name; )";
 
   constexpr auto select_injury_set_by_id
     = R"( SELECT * FROM injury_sets WHERE injury_set_id = :id ; )";
   constexpr auto update_injury_set_by_id
     = R"( UPDATE  injury_sets
-          SET name = :name
+          SET
+                uuid = :uuid
+              , name = :name
               , description = :description
               , injuries    = :injuries
               , locations   = :locations
@@ -381,10 +418,10 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM injury_sets WHERE name = :name ORDER BY name; )";
   constexpr auto insert_or_update_injury_sets
     = R"( INSERT INTO injury_sets
-          (name, description, injuries, locations, severities)
-          VALUES (:name, :description, :injuries, :locations, :severities)
+          (name, uuid, description, injuries, locations, severities)
+          VALUES (:name, :uuid, :description, :injuries, :locations, :severities)
           ON CONFLICT (name)
-          DO UPDATE SET name = excluded.name
+          DO UPDATE SET  name = excluded.name
                         , description = excluded.description
                         , injuries = excluded.injuries
                         , locations = excluded.locations
@@ -394,28 +431,34 @@ inline namespace sqlite3 {
   //---------------------- LOCATION STATMENTS ------------------------
   enum LOCATION_COLUMNS {
     LOCATION_ID,
+    LOCATION_UUID,
     LOCATION_NAME,
     LOCATION_ENVIRONMENT,
     LOCATION_COLUMN_COUNT
   };
 
   constexpr auto create_locations_table = R"(
-  CREATE TABLE IF NOT EXISTS locations (
-    location_id INTEGER PRIMARY KEY,
-    name Varchar(64) NOT NULL,
-    environment TEXT
-  );
+    CREATE TABLE IF NOT EXISTS "locations" (
+	    "location_id"	INTEGER,
+	    "uuid"	TEXT,
+	    "name"	Varchar(64) NOT NULL,
+	    "environment"	TEXT,
+	    PRIMARY KEY("location_id"),
+	    UNIQUE("uuid")
+    );
   )";
   constexpr auto drop_all_locations = R"( DELETE FROM locations; )";
   constexpr auto count_locations = R"( SELECT COUNT(location_id) FROM locations; )";
   constexpr auto count_locations_in_scene = R"( SELECT COUNT(location_map_id) FROM location_maps WHERE :id = fk_scene ; )";
-  constexpr auto select_all_locations = R"( SELECT location_id,name,environment FROM locations ORDER BY name; )";
+  constexpr auto select_all_locations = R"( SELECT * ORDER BY name; )";
 
   constexpr auto select_location_by_id
     = R"( SELECT * FROM locations WHERE location_id = :id ; )";
   constexpr auto update_location_by_id
     = R"( UPDATE  locations
-          SET name = :name
+          SET
+                uuid = :uuid
+              , name = :name
               , environment = :environment
           WHERE location_id = :id;
          )";
@@ -427,24 +470,19 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM locations WHERE name = :name ORDER BY name; )";
   constexpr auto insert_or_update_locations
     = R"( INSERT INTO locations
-          (name,environment)
-          VALUES (:name, :environment)
+          (uuid, name, environment)
+          VALUES (:uuid, :name, :environment)
           ;
          )";
   //--------------------------- MAP STATEMENTS ------------------------
-  enum MAP_COLUMNS {
-    MAP_ID,
-    MAP_FK_SCENE,
-    MAP_FK_ROLE,
-    MAP_COLUMN_COUNT
+  enum ROLE_MAP_COLUMNS {
+    ROLE_MAP_ID,
+    ROLE_MAP_FK_SCENE,
+    ROLE_MAP_FK_ROLE,
+    ROLE_MAP_COLUMN_COUNT
   };
 
-//SELECT* FROM MAP_Scene_Role AS role_map
-//    JOIN Roles
-//      ON Roles.role_id
-//    = role_map.role
-//        WHERE role_map.scene
-//    = 2;
+
 
   constexpr auto create_role_maps_table = R"(
   CREATE TABLE IF NOT EXISTS role_maps (
@@ -455,13 +493,13 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_role_maps = R"( DELETE FROM role_maps; )";
   constexpr auto count_role_maps = R"( SELECT COUNT(map_id) FROM role_maps; )";
-  constexpr auto select_all_role_maps = R"( SELECT map_id,fk_scene,fk_role FROM role_maps; )";
+  constexpr auto select_all_role_maps = R"( SELECT * FROM role_maps; )";
 
   constexpr auto select_role_map_by_id
     = R"( SELECT * FROM role_maps WHERE map_id = :id ; )";
   constexpr auto update_role_map_by_id
     = R"( UPDATE  role_maps
-          SET fk_scene = :fk_scene
+          SET   fk_scene = :fk_scene
               , fk_role = :fk_role
           WHERE map_id = :id;
          )";
@@ -514,13 +552,13 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_event_maps = R"( DELETE FROM event_maps; )";
   constexpr auto count_event_maps = R"( SELECT COUNT(event_map_id) FROM event_maps; )";
-  constexpr auto select_all_event_maps = R"( SELECT event_map_id,fk_scene,fk_event FROM event_maps; )";
+  constexpr auto select_all_event_maps = R"( SELECT * FROM event_maps; )";
 
   constexpr auto select_event_map_by_id
     = R"( SELECT * FROM event_maps WHERE event_map_id = :id ; )";
   constexpr auto update_event_map_by_id
     = R"( UPDATE  event_maps
-          SET fk_scene = :fk_scene
+          SET   fk_scene = :fk_scene
               , fk_event = :fk_event
           WHERE event_map_id = :id;
          )";
@@ -574,13 +612,13 @@ inline namespace sqlite3 {
   constexpr auto drop_all_location_maps = R"( DELETE FROM location_maps; )";
   constexpr auto count_location_maps = R"( SELECT COUNT(location_map_id) FROM location_maps; )";
   constexpr auto count_location_maps_in_scene = R"( SELECT COUNT(location_map_id) FROM location_maps WHERE fk_scene = :fk_scene; )";
-  constexpr auto select_all_location_maps = R"( SELECT location_map_id,fk_scene,fk_location FROM location_maps; )";
+  constexpr auto select_all_location_maps = R"( SELECT * FROM location_maps; )";
 
   constexpr auto select_location_map_by_id
     = R"( SELECT * FROM location_maps WHERE location_map_id = :id ; )";
   constexpr auto update_location_map_by_id
     = R"( UPDATE  location_maps
-          SET fk_scene = :fk_scene
+          SET   fk_scene = :fk_scene
               , fk_location = :fk_location
           WHERE location_map_id = :id;
          )";
@@ -633,13 +671,13 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_citation_maps = R"( DELETE FROM citation_maps; )";
   constexpr auto count_citation_maps = R"( SELECT COUNT(citation_map_id) FROM citation_maps; )";
-  constexpr auto select_all_citation_maps = R"( SELECT citation_map_id,fk_scene,fk_citation FROM citation_maps; )";
+  constexpr auto select_all_citation_maps = R"( SELECT * FROM citation_maps; )";
 
   constexpr auto select_citation_map_by_id
     = R"( SELECT * FROM citation_maps WHERE citation_map_id = :id ; )";
   constexpr auto update_citation_map_by_id
     = R"( UPDATE  citation_maps
-          SET fk_scene = :fk_scene
+          SET   fk_scene = :fk_scene
               , fk_citation = :fk_citation
           WHERE citation_map_id = :id;
          )";
@@ -699,13 +737,13 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_equipment_map = R"( DELETE FROM equipment_map; )";
   constexpr auto count_equipment_map = R"( SELECT COUNT(equipment_map_id) FROM equipment_map; )";
-  constexpr auto select_all_equipment_map = R"( SELECT equipment_map_id,fk_scene,fk_equipment, name, property_values, notes FROM equipment_map; )";
+  constexpr auto select_all_equipment_map = R"( SELECT * FROM equipment_map; )";
 
   constexpr auto select_equipment_map_by_id
     = R"( SELECT * FROM equipment_map WHERE equipment_map_id = :id ; )";
   constexpr auto update_equipment_map_by_id
     = R"( UPDATE  equipment_map
-          SET fk_scene = :fk_scene
+          SET   fk_scene = :fk_scene
               , fk_equipment = :fk_equipment
               , name = :name
               , property_values = :values
@@ -756,68 +794,11 @@ inline namespace sqlite3 {
           JOIN scenes AS scene
           ON scene.scene_id = map.fk_scene
           WHERE map.fk_equipment = :equipment_id;)";
-  //--------------------------- RESTRICTION MAP STATEMENTS ------------------
-  enum RESTRICTION_MAP_COLUMNS {
-    RESTRICTION_MAP_ID,
-    RESTRICTION_MAP_FK_SCENE,
-    RESTRICTION_MAP_FK_RESTRICTION,
-    RESTRICTION_MAP_COLUMN_COUNT
-  };
-
-  constexpr auto create_restriction_maps_table = R"(
-  CREATE TABLE IF NOT EXISTS restriction_maps (
-    restriction_map_id INTEGER PRIMARY KEY,
-    fk_scene INTEGER,
-    fk_restriction INTEGER
-  );
-  )";
-  constexpr auto drop_all_restriction_maps = R"( DELETE FROM restriction_maps; )";
-  constexpr auto count_restriction_maps = R"( SELECT COUNT(restriction_map_id) FROM restriction_maps; )";
-  constexpr auto select_all_restriction_maps = R"( SELECT restriction_map_id,fk_scene,fk_restriction FROM restriction_maps; )";
-
-  constexpr auto select_restriction_map_by_id
-    = R"( SELECT * FROM restriction_maps WHERE restriction_map_id = :id ; )";
-  constexpr auto update_restriction_map_by_id
-    = R"( UPDATE  restriction_maps
-          SET fk_scene = :fk_scene
-              , fk_restriction = :fk_restriction
-          WHERE restriction_map_id = :id;
-         )";
-  constexpr auto delete_restriction_map_by_id
-    = R"( DELETE FROM restriction_maps WHERE restriction_map_id = :id; )";
-  constexpr auto delete_restriction_map_by_fk_scene
-    = R"( DELETE FROM restriction_maps WHERE fk_scene = :fk_scene; )";
-  constexpr auto delete_restriction_map_by_fk_restriction
-    = R"( DELETE FROM restriction_maps WHERE fk_restriction = :fk_restriction; )";
-  constexpr auto delete_restriction_map_by_fk
-    = R"( DELETE FROM restriction_maps WHERE fk_restriction = :fk_restriction AND fk_scene = :fk_scene )";
-  constexpr auto select_restriction_map_by_fk_scene
-    = R"( SELECT * FROM restriction_maps WHERE fk_scene = :fk_scene; )";
-  constexpr auto select_restriction_map_by_fk_restriction
-    = R"( SELECT * FROM restriction_maps WHERE fk_restriction = :fk_restriction; )";
-  constexpr auto select_restriction_map_by_fk
-    = R"( SELECT * FROM restriction_maps WHERE fk_restriction = :fk_restriction AND fk_scene = :fk_scene )";
-  constexpr auto insert_or_update_restriction_maps
-    = R"( INSERT INTO restriction_maps
-          (fk_scene,fk_restriction)
-          VALUES (:fk_scene,:fk_restriction)
-          ;
-         )";
-
-  constexpr auto select_scene_restrictions_by_fk_scene
-    = R"( SELECT * FROM restriction_maps AS restriction_map 
-          JOIN roles
-          ON roles.role_id = restriction_map.role
-          WHERE restriction_map.fk_scene = :id;)";
-
-  constexpr auto select_restriction_scenes_by_fk_restriction
-    = R"( SELECT * FROM restriction_maps as restriction_map
-          JOIN scenes
-          ON scenes.scene_id = restriction_map.scene
-          WHERE restriction_map.fk_restriction = :id)";
-  //---------------------- OBJECTIVE STATMENTS ------------------------
+  
+  //---------------------- OBJECTIVE STATEMENTS ------------------------
   enum OBJECTIVE_COLUMNS {
     OBJECTIVE_ID,
+    OBJECTIVE_UUID,
     OBJECTIVE_NAME,
     OBJECTIVE_DESCRIPTION,
     OBJECTIVE_CITATIONS,
@@ -825,16 +806,19 @@ inline namespace sqlite3 {
   };
 
   constexpr auto create_objectives_table = R"(
-  CREATE TABLE IF NOT EXISTS objectives (
-    objective_id INTEGER PRIMARY KEY,
-    name Varchar(64) NOT NULL UNIQUE,
-    description TEXT,
-    citations TEXT
-  );
+    CREATE TABLE IF NOT EXISTS "objectives" (
+	    "objective_id"	INTEGER,
+	    "uuid"	TEXT,
+	    "name"	Varchar(64) NOT NULL UNIQUE,
+	    "description"	TEXT,
+	    "citations"	TEXT,
+	    UNIQUE("uuid"),
+	    PRIMARY KEY("objective_id")
+    );
   )";
   constexpr auto drop_all_objectives = R"( DELETE FROM objectives; )";
   constexpr auto count_objectives = R"( SELECT COUNT(objective_id) FROM objectives; )";
-  constexpr auto select_all_objectives = R"( SELECT objective_id,name,description,citations FROM objectives ORDER BY name; )";
+  constexpr auto select_all_objectives = R"( SELECT * FROM objectives ORDER BY name; )";
 
   constexpr auto select_objective_by_id
     = R"( SELECT * FROM objectives WHERE objective_id = :id ; )";
@@ -843,15 +827,16 @@ inline namespace sqlite3 {
 
   constexpr auto update_objective_by_id
     = R"( UPDATE  objectives 
-          SET name = :name
+          SET   uuid = :uuid
+              , name = :name
               , description = :description
               , citations = :citations
           WHERE objective_id = :id;
          )";
   constexpr auto insert_or_update_objective
     = R"( INSERT INTO objectives 
-          (name,description,citations)
-          VALUES (:name, :description, :citations)
+          (uuid, name,description,citations)
+          VALUES (:uuid, :name, :description, :citations)
           ON CONFLICT (name)
           DO UPDATE SET name = excluded.name
                        , description = excluded.description
@@ -880,13 +865,13 @@ inline namespace sqlite3 {
   )";
   constexpr auto drop_all_properties = R"( DELETE FROM properties; )";
   constexpr auto count_properties = R"( SELECT COUNT(property_id) FROM properties; )";
-  constexpr auto select_all_properties = R"( SELECT property_id,name,value FROM properties ORDER BY property_id; )";
+  constexpr auto select_all_properties = R"( SELECT * FROM properties ORDER BY property_id; )";
 
   constexpr auto select_property_by_id
     = R"( SELECT * FROM properties WHERE property_id = :id ; )";
   constexpr auto update_property_by_id
     = R"( UPDATE  properties
-          SET name = :name
+          SET   name = :name
               , value = :value
           WHERE property_id = :id;
          )";
@@ -911,6 +896,7 @@ inline namespace sqlite3 {
   //---------------------- CITATION STATEMENTS ------------------------
   enum CITATION_COLUMNS {
     CITATION_ID,
+    CITATION_UUID,
     CITATION_KEY,
     CITATION_TITLE,
     CITATION_AUTHORS,
@@ -920,19 +906,22 @@ inline namespace sqlite3 {
   };
 
   constexpr auto create_citations_table = R"(
-  CREATE TABLE IF NOT EXISTS citations (
-    citation_id INTEGER PRIMARY KEY,
-    key Varchar(64) NOT NULL UNIQUE,
-    title TEXT,
-    authors TEXT,
-    year TEXT,
-    publisher TEXT
-  );
+    CREATE TABLE IF NOT EXISTS "citations" (
+	    "citation_id"	INTEGER,
+	    "uuid"	TEXT,
+	    "key"	Varchar(64) NOT NULL UNIQUE,
+	    "title"	TEXT,
+	    "authors"	TEXT,
+	    "year"	TEXT,
+	    "publisher"	TEXT,
+	    PRIMARY KEY("citation_id"),
+	    UNIQUE("uuid")
+    );
   )";
   constexpr auto drop_all_citations = R"( DELETE FROM citations; )";
   constexpr auto count_citations = R"( SELECT COUNT(citation_id) FROM citations; )";
   constexpr auto count_citations_in_scene = R"( SELECT COUNT(citation_map_id) FROM citation_maps WHERE :id = fk_scene ; )";
-  constexpr auto select_all_citations = R"( SELECT citation_id,key,title,authors,year,publisher FROM citations ORDER BY title; )";
+  constexpr auto select_all_citations = R"( SELECT * FROM citations ORDER BY title; )";
 
   constexpr auto select_citation_by_id
     = R"( SELECT * FROM citations WHERE citation_id = :id ; )";
@@ -950,7 +939,9 @@ inline namespace sqlite3 {
 
   constexpr auto update_citation_by_id
     = R"( UPDATE  citations
-          SET key       = :key
+          SET
+              , uuid = :uuid
+              , key       = :key
               , title   = :title
               , authors = :authors
               , year    = :year
@@ -960,6 +951,7 @@ inline namespace sqlite3 {
   constexpr auto update_citation_by_key
     = R"( UPDATE  citations
           SET key = :key
+              , uuid = :uuid
               , title = :title
               , authors = :authors
               , year = :year
@@ -969,86 +961,49 @@ inline namespace sqlite3 {
 
   constexpr auto insert_or_update_citations
     = R"( INSERT INTO citations
-          (key, title, authors, year, publisher)
-          VALUES (:key, :title, :authors, :year, :publisher)
+          (uuid, key, title, authors, year, publisher)
+          VALUES (:uuid, :key, :title, :authors, :year, :publisher)
           ON CONFLICT (key)
-          DO UPDATE SET key = excluded.key
-                       , title = excluded.title
+          DO UPDATE SET
+                         title = excluded.title
                        , authors = excluded.authors
                        , year = excluded.year
                        , publisher = excluded.publisher
          ;
          )";
 
-
-  //---------------------- RESTRICTION STATMENTS ------------------------
-  enum RESTRICTION_COLUMNS {
-    RESTRICTION_ID,
-    RESTRICTION_NAME,
-    RESTRICTION_VALUE,
-    RESTRICTION_COLUMN_COUNT
-  };
-
-  constexpr auto create_restrictions_table = R"(
-  CREATE TABLE IF NOT EXISTS restrictions (
-    restriction_id INTEGER PRIMARY KEY,
-    name Varchar(64) NOT NULL UNIQUE,
-    value Varchar(255)
-  );
-  )";
-  constexpr auto drop_all_restrictions = R"( DELETE FROM restrictions; )";
-  constexpr auto count_restrictions = R"( SELECT COUNT(restriction_id) FROM restrictions; )";
-  constexpr auto count_restrictions_in_scene = R"( SELECT COUNT(restriction_map_id) FROM restriction_maps WHERE :id = fk_scene ; )";
-  constexpr auto select_all_restrictions = R"( SELECT restriction_id,name,value FROM restrictions ORDER BY name; )";
-
-  constexpr auto select_restriction_by_id
-    = R"( SELECT * FROM restrictions WHERE restriction_id = :id ; )";
-  constexpr auto update_restriction_by_id
-    = R"( UPDATE  restrictions
-          SET name = :name
-              , value = :value
-          WHERE restriction_id = :id;
-         )";
-  constexpr auto select_restriction_by_name
-    = R"( SELECT * FROM restrictions WHERE name = :name ORDER BY name; )";
-
-  constexpr auto insert_or_update_restrictions
-    = R"( INSERT INTO restrictions 
-          (name,value)
-          VALUES (:name, :value)
-          ON CONFLICT (name)
-          DO UPDATE SET value = excluded.value;
-         )";
-  constexpr auto delete_restriction_by_id
-    = R"( DELETE FROM restrictions WHERE restriction_id = :id; )";
-  constexpr auto delete_restriction_by_name
-    = R"( DELETE FROM restrictions WHERE name = :name; )";
   
-  //---------------------- ROLE STATMENTS ------------------------
+  //---------------------- ROLE STATEMENTS ------------------------
   enum ROLE_COLUMNS {
     ROLE_ID,
+    ROLE_UUID,
     ROLE_NAME,
     ROLE_DESCRIPTION,
     ROLE_COLUMN_COUNT
   };
 
   constexpr auto create_roles_table = R"(
-  CREATE TABLE IF NOT EXISTS roles (
-    role_id INTEGER PRIMARY KEY,
-    name Varchar(64) NOT NULL UNIQUE,
-    description TEXT
-  );
+    CREATE TABLE IF NOT EXISTS "roles" (
+	    "role_id"	INTEGER,
+	    "uuid"	TEXT,
+	    "name"	Varchar(64) NOT NULL UNIQUE,
+	    "description"	TEXT,
+	    PRIMARY KEY("role_id"),
+	    UNIQUE("uuid")
+    );
   )";
   constexpr auto drop_all_roles = R"( DELETE FROM roles; )";
   constexpr auto count_roles = R"( SELECT COUNT(role_id) FROM roles; )";
   constexpr auto count_roles_in_scene = R"( SELECT COUNT(map_id) FROM role_maps WHERE :id = fk_scene ; )";
-  constexpr auto select_all_roles = R"( SELECT role_id,name,description FROM roles ORDER BY name; )";
+  constexpr auto select_all_roles = R"( SELECT * FROM roles ORDER BY name; )";
 
   constexpr auto select_role_by_id
     = R"( SELECT * FROM roles WHERE role_id = :id ; )";
   constexpr auto update_role_by_id
     = R"( UPDATE  roles
-          SET description = :description 
+          SET
+                uuid = : uuid
+              , description = :description 
               , name = :name
           WHERE role_id = :id;
          )";
@@ -1059,18 +1014,18 @@ inline namespace sqlite3 {
   
   constexpr auto insert_or_update_roles
     = R"( INSERT INTO roles 
-          (name,description)
-          VALUES (:name, :description)
+          (uuid, name,description)
+          VALUES (:uuid, :name, :description)
           ON CONFLICT (name)
-          DO UPDATE SET name = excluded.name
+          DO UPDATE SET  name = excluded.name
                        , description = excluded.description
-         ;
          )";
 
 
   //---------------------- SCENE STATEMENTS ------------------------
   enum SCENE_COLUMNS {
     SCENE_ID,
+    SCENE_UUID,
     SCENE_NAME,
     SCENE_DESCRIPTION,
     SCENE_TIME_OF_DAY,
@@ -1084,32 +1039,25 @@ inline namespace sqlite3 {
   };
 
   constexpr auto create_scenes_table = R"(
-  CREATE TABLE IF NOT EXISTS scenes (
-    scene_id INTEGER PRIMARY KEY,
-    name Varchar(64) NOT NULL UNIQUE,
-    description TEXT NOT NULL,
-    time_of_day Varchar(64) NOT NULL,
-    time_in_simulation Varchar(64) NOT NULL,
-    weather Varchar(64),
-    events Varchar(64),
-    items Varchar(64),
-    roles Varchar(64),
-    details TEXT NOT NULL
-  );
+      CREATE TABLE IF NOT EXISTS "scenes" (
+	      "scene_id"	INTEGER,
+	      "uuid"	TEXT,
+	      "name"	Varchar(64) NOT NULL UNIQUE,
+	      "description"	TEXT NOT NULL,
+	      "time_of_day"	Varchar(64) NOT NULL,
+	      "time_in_simulation"	Varchar(64) NOT NULL,
+	      "weather"	Varchar(64),
+	      "events"	Varchar(64),
+	      "items"	Varchar(64),
+	      "roles"	Varchar(64),
+	      "details"	TEXT NOT NULL,
+	      UNIQUE("uuid"),
+	      PRIMARY KEY("scene_id")
+      );
   )";
   constexpr auto drop_all_scenes = R"( DELETE FROM scenes; )";
   constexpr auto count_scenes = R"( SELECT COUNT(scene_id) FROM scenes; )";
-  constexpr auto select_all_scenes = R"( SELECT scene_id,
-                                                name, 
-                                                description, 
-                                                time_of_day, 
-                                                time_in_simulation, 
-                                                weather, 
-                                                events, 
-                                                items, 
-                                                roles, 
-                                                details 
-                                                FROM scenes ORDER BY name; )";
+  constexpr auto select_all_scenes = R"( SELECT * FROM scenes ORDER BY name; )";
 
   constexpr auto select_scene_by_id
     = R"( SELECT * FROM scenes WHERE scene_id = :id ; )";
@@ -1117,7 +1065,9 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM scenes WHERE name = :name ORDER BY name; )";
   constexpr auto update_scene_by_id
     = R"( UPDATE  scenes
-            SET name = :name
+            SET
+                  uuid = :uuid
+                , name = :name
                 , description = :description
                 , time_of_day = :time_of_day
                 , time_in_simulation = :time_in_simulation
@@ -1132,8 +1082,8 @@ inline namespace sqlite3 {
     = R"( DELETE FROM scenes WHERE scene_id = :id; )";
   constexpr auto insert_or_update_scenes
     = R"( INSERT INTO scenes
-          (name, description, time_of_day, time_in_simulation, weather, events, items, roles, details)
-          VALUES (:name, :description, :time_of_day, :time_in_simulation, :weather, :events, :items, :roles, :details)
+          (name, uuid, description, time_of_day, time_in_simulation, weather, events, items, roles, details)
+          VALUES (:name, :uuid, :description, :time_of_day, :time_in_simulation, :weather, :events, :items, :roles, :details)
           ON CONFLICT (name)
           DO UPDATE SET name = :name
                         , description = excluded.description
@@ -1149,6 +1099,7 @@ inline namespace sqlite3 {
   //---------------------- TREATMENT STATEMENTS ------------------------
   enum TREATMENT_COLUMNS {
     TREATMENT_ID,
+    TREATMENT_UUID,
     TREATMENT_MEDICAL_NAME,
     TREATMENT_COMMON_NAME,
     TREATMENT_DESCRIPTION,
@@ -1158,19 +1109,22 @@ inline namespace sqlite3 {
   };
 
   constexpr auto create_treatments_table = R"(
-  CREATE TABLE IF NOT EXISTS treatments (
-    treatment_id INTEGER PRIMARY KEY,
-    medical_name Varchar(64) NOT NULL UNIQUE,
-    common_name Varchar(64) NOT NULL UNIQUE,
-    description TEXT,
-    equipment TEXT,
-    citations TEXT
-  );
+    CREATE TABLE IF NOT EXISTS "treatments" (
+	    "treatment_id"	INTEGER,
+	    "uuid"	TEXT,
+	    "medical_name"	Varchar(64) NOT NULL UNIQUE,
+	    "common_name"	Varchar(64) NOT NULL UNIQUE,
+	    "description"	TEXT,
+	    "equipment"	TEXT,
+	    "citations"	TEXT,
+	    PRIMARY KEY("treatment_id"),
+	    UNIQUE("uuid")
+    );
   )";
 
   constexpr auto drop_all_treatments = R"( DELETE FROM treatments; )";
   constexpr auto count_treatments = R"( SELECT COUNT(treatment_id) FROM treatments; )";
-  constexpr auto select_all_treatments = R"( SELECT treatment_id,medical_name,common_name,description,equipment,citations FROM treatments ORDER BY medical_name; )";
+  constexpr auto select_all_treatments = R"( SELECT * FROM treatments ORDER BY medical_name; )";
 
   constexpr auto select_treatment_by_medical_name
     = R"( SELECT * FROM treatments WHERE medical_name = :medical_name ORDER BY medical_name; )";
@@ -1181,7 +1135,8 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM treatments WHERE treatment_id = :id ; )";
   constexpr auto update_treatment_by_id
     = R"( UPDATE  treatments
-          SET medical_name = :medical_name
+          SET   uuid = :uuid
+              , medical_name = :medical_name
               , common_name = :common_name
               , description = :description
               , equipment = :equipment
@@ -1196,10 +1151,10 @@ inline namespace sqlite3 {
     = R"( DELETE FROM treatments WHERE common_name = :common_name; )";
   constexpr auto insert_or_update_treatments
     = R"( INSERT INTO treatments
-          (medical_name,common_name,description,equipment,citations)
-          VALUES (:medical_name, :common_name, :description, :equipment, :citations)
+          (medical_name, uuid, common_name,description,equipment,citations)
+          VALUES (:medical_name, :uuid, :common_name, :description, :equipment, :citations)
           ON CONFLICT (medical_name)
-          DO UPDATE SET medical_name = excluded.medical_name
+          DO UPDATE SET   medical_name = excluded.medical_name
                         , common_name = excluded.common_name
                         , description = excluded.description
                         , equipment = excluded.equipment

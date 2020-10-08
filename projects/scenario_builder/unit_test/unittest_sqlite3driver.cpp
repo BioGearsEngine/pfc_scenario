@@ -13,26 +13,26 @@
 #include "xml/Serializer.h"
 #include <pfc/schema/pfc_scenario.hxx>
 
-#undef DISABLE_ASSESSMENT_TEST
-#undef DISABLE_Author_TEST
-#undef DISABLE_Citation_TEST
-#undef DISABLE_Equipment_TEST
-#undef DISABLE_Event_TEST
-#undef DISABLE_Injury_TEST
-#undef DISABLE_InjurySet_TEST
-#undef DISABLE_Location_TEST
-#undef DISABLE_Objectives_TEST
-#undef DISABLE_Property_TEST
-#undef DISABLE_Restrictions_TEST
-#undef DISABLE_Role_TEST
+#define DISABLE_ASSESSMENT_TEST
+#define DISABLE_Author_TEST
+#define DISABLE_Citation_TEST
+#define DISABLE_Equipment_TEST
+#define DISABLE_Event_TEST
+#define DISABLE_Injury_TEST
+#define DISABLE_InjurySet_TEST
+#define DISABLE_Location_TEST
+#define DISABLE_Objectives_TEST
+#define DISABLE_Property_TEST
+#define DISABLE_Restrictions_TEST
+#define DISABLE_Role_TEST
 #undef DISABLE_Scene_TEST
-#undef DISABLE_Treatment_TEST
-#undef DISABLE_RoleMap_TEST
-#undef DISABLE_EventMap_TEST
-#undef DISABLE_SceneMap_TEST
-#undef DISABLE_EquipmentMap_TEST
-#undef DISABLE_CitationMap_TEST
-#undef DISABLE_LocationMap_TEST
+#define DISABLE_Treatment_TEST
+#define DISABLE_RoleMap_TEST
+#define DISABLE_EventMap_TEST
+#define DISABLE_SceneMap_TEST
+#define DISABLE_EquipmentMap_TEST
+#define DISABLE_CitationMap_TEST
+#define DISABLE_LocationMap_TEST
 #undef DISABLE_Backdoor_TEST
 #undef DISABLE_REMOVAL_TEST
 #define DISABLE_Serialization_TEST
@@ -228,9 +228,9 @@ TEST_F(SQLiteDriver, ASSESSMENT_TEST(Select))
   _db.select_assessment(&name);
 
   assessment_1.id = 1;
-  EXPECT_EQ(assessment_1, id);
+  EXPECT_TRUE(assessment_1 == id);
   assessment_3.id = 3;
-  EXPECT_EQ(assessment_3, name);
+  EXPECT_TRUE(assessment_3 == name);
 }
 TEST_F(SQLiteDriver, ASSESSMENT_TEST(Remove))
 {
@@ -281,7 +281,7 @@ TEST_F(SQLiteDriver, ASSESSMENT_TEST(Equality))
 
   EXPECT_TRUE(_db.update_assessment(&assessment_1));
   EXPECT_TRUE(_db.select_assessment(&assessment_2));
-  EXPECT_EQ(assessment_1, assessment_2);
+  EXPECT_TRUE(assessment_1 == assessment_2);
 }
 //AUTHOR TESTS--------------------------------------------------------------
 #ifndef DISABLE_Author_TEST
@@ -348,7 +348,7 @@ TEST_F(SQLiteDriver, AUTHOR_TEST(Insert_First))
   author_1.id = 1;
   EXPECT_EQ(1, _db.author_count());
   _db.select_author(&author_3);
-  EXPECT_EQ(author_1, author_3);
+  EXPECT_TRUE(author_1 == author_3);
 
   author_3.first = "Rocky";
   author_3.last = "Balboa";
@@ -358,7 +358,7 @@ TEST_F(SQLiteDriver, AUTHOR_TEST(Insert_First))
   author_2.id = 1;
   EXPECT_EQ(1, _db.author_count());
   _db.select_author(&author_3);
-  EXPECT_EQ(author_2, author_3);
+  EXPECT_TRUE(author_2 == author_3);
 }
 TEST_F(SQLiteDriver, AUTHOR_TEST(Select))
 {
@@ -399,9 +399,9 @@ TEST_F(SQLiteDriver, AUTHOR_TEST(Select))
   _db.select_author(&email);
 
   author_1.id = 1;
-  EXPECT_EQ(author_1, id);
+  EXPECT_TRUE(author_1 == id);
   author_2.id = 2;
-  EXPECT_EQ(author_2, email);
+  EXPECT_TRUE(author_2 == email);
 }
 TEST_F(SQLiteDriver, AUTHOR_TEST(Remove))
 {
@@ -444,7 +444,7 @@ TEST_F(SQLiteDriver, AUTHOR_TEST(Equality))
 
   EXPECT_TRUE(_db.update_author(&author_1));
   EXPECT_TRUE(_db.select_author(&author_2));
-  //EXPECT_EQ(author_1, author_2);
+  //EXPECT_TRUE( author_1 == author_2 );
   EXPECT_EQ(author_1.id, author_2.id);
   EXPECT_EQ(author_1.first, author_2.first);
   EXPECT_EQ(author_1.middle, author_2.middle);
@@ -539,9 +539,9 @@ TEST_F(SQLiteDriver, Citation_TEST(Select))
   _db.select_citation(&key);
 
   citation_1.id = 1;
-  EXPECT_EQ(citation_1, id);
+  EXPECT_TRUE(citation_1 == id);
   citation_3.id = 3;
-  EXPECT_EQ(citation_3, key);
+  EXPECT_TRUE(citation_3 == key);
 }
 TEST_F(SQLiteDriver, Citation_TEST(Remove))
 {
@@ -592,7 +592,7 @@ TEST_F(SQLiteDriver, Citation_TEST(Equality))
 
   EXPECT_TRUE(_db.update_citation(&citation_1));
   EXPECT_TRUE(_db.select_citation(&citation_2));
-  EXPECT_EQ(citation_1, citation_2);
+  EXPECT_TRUE(citation_1 == citation_2);
 }
 //EQUIPMENT TESTS--------------------------------------------------------------
 #ifndef DISABLE_Equipment_TEST
@@ -676,9 +676,9 @@ TEST_F(SQLiteDriver, Equipment_TEST(Select))
   _db.select_equipment(&name);
 
   equipment_1.id = 1;
-  EXPECT_EQ(equipment_1, id);
+  EXPECT_TRUE(equipment_1 == id);
   equipment_3.id = 3;
-  EXPECT_EQ(equipment_3, name);
+  EXPECT_TRUE(equipment_3 == name);
 }
 TEST_F(SQLiteDriver, Equipment_TEST(Remove))
 {
@@ -729,7 +729,7 @@ TEST_F(SQLiteDriver, Equipment_TEST(Equality))
 
   EXPECT_TRUE(_db.update_equipment(&equipment_1));
   EXPECT_TRUE(_db.select_equipment(&equipment_2));
-  EXPECT_EQ(equipment_1, equipment_2);
+  EXPECT_TRUE(equipment_1 == equipment_2);
 }
 //EVENT TESTS--------------------------------------------------------------
 #ifndef DISABLE_Event_TEST
@@ -835,8 +835,8 @@ TEST_F(SQLiteDriver, Event_TEST(Select))
   _db.select_event(&name);
   event_1.id = 1;
   event_3.id = 3;
-  EXPECT_EQ(event_1, id);
-  EXPECT_EQ(event_3, name);
+  EXPECT_TRUE(event_1 == id);
+  EXPECT_TRUE(event_3 == name);
 }
 TEST_F(SQLiteDriver, Event_TEST(Remove))
 {
@@ -899,7 +899,7 @@ TEST_F(SQLiteDriver, Event_TEST(Equality))
 
   EXPECT_TRUE(_db.update_event(&event_1));
   EXPECT_TRUE(_db.select_event(&event_2));
-  EXPECT_EQ(event_1, event_2);
+  EXPECT_TRUE(event_1 == event_2);
 }
 //INJURY TESTS--------------------------------------------------------------
 #ifndef DISABLE_Injury_TEST
@@ -980,11 +980,11 @@ TEST_F(SQLiteDriver, Injury_TEST(Select))
   _db.select_injury(&common_name);
 
   injury_1.id = 1;
-  EXPECT_EQ(injury_1, id);
+  EXPECT_TRUE(injury_1 == id);
   injury_2.id = 2;
-  EXPECT_EQ(injury_2, medical_name);
+  EXPECT_TRUE(injury_2 == medical_name);
   injury_3.id = 3;
-  EXPECT_EQ(injury_3, common_name);
+  EXPECT_TRUE(injury_3 == common_name);
 }
 TEST_F(SQLiteDriver, Injury_TEST(Remove))
 {
@@ -1031,7 +1031,7 @@ TEST_F(SQLiteDriver, Injury_TEST(Equality))
 
   EXPECT_TRUE(_db.update_injury(&injury_1));
   EXPECT_TRUE(_db.select_injury(&injury_2));
-  EXPECT_EQ(injury_1, injury_2);
+  EXPECT_TRUE(injury_1 == injury_2);
 }
 //INJURY SET TESTS--------------------------------------------------------------
 #ifndef DISABLE_InjurySet_TEST
@@ -1116,9 +1116,9 @@ TEST_F(SQLiteDriver, InjurySet_TEST(Select))
   _db.select_injury_set(&name);
 
   injury_set_1.id = 1;
-  EXPECT_EQ(injury_set_1, id);
+  EXPECT_TRUE(injury_set_1 == id);
   injury_set_2.id = 2;
-  EXPECT_EQ(injury_set_2, name);
+  EXPECT_TRUE(injury_set_2 == name);
 }
 TEST_F(SQLiteDriver, InjurySet_TEST(Remove))
 {
@@ -1169,7 +1169,7 @@ TEST_F(SQLiteDriver, InjurySet_TEST(Equality))
 
   EXPECT_TRUE(_db.update_injury_set(&injury_set_1));
   EXPECT_TRUE(_db.select_injury_set(&injury_set_2));
-  EXPECT_EQ(injury_set_1, injury_set_2);
+  EXPECT_TRUE(injury_set_1 == injury_set_2);
 }
 //LOCATION TESTS--------------------------------------------------------------
 #ifndef DISABLE_Location_TEST
@@ -1231,9 +1231,9 @@ TEST_F(SQLiteDriver, Location_TEST(Select))
   _db.select_location(&name);
 
   location_1.id = 1;
-  EXPECT_EQ(location_1, id);
+  EXPECT_TRUE(location_1 == id);
   location_2.id = 2;
-  EXPECT_EQ(location_2, name);
+  EXPECT_TRUE(location_2 == name);
 }
 TEST_F(SQLiteDriver, Location_TEST(Remove))
 {
@@ -1272,7 +1272,7 @@ TEST_F(SQLiteDriver, Location_TEST(Equality))
 
   EXPECT_TRUE(_db.update_location(&location_1));
   EXPECT_TRUE(_db.select_location(&location_2));
-  EXPECT_EQ(location_1, location_2);
+  EXPECT_TRUE(location_1 == location_2);
 }
 
 //!
@@ -1350,9 +1350,9 @@ TEST_F(SQLiteDriver, Objectives_TEST(Select))
   _db.select_objective(&name);
 
   objective_1.id = 1;
-  EXPECT_EQ(objective_1, id);
+  EXPECT_TRUE(objective_1 == id);
   objective_3.id = 3;
-  EXPECT_EQ(objective_3, name);
+  EXPECT_TRUE(objective_3 == name);
 }
 TEST_F(SQLiteDriver, Objectives_TEST(Remove))
 {
@@ -1395,7 +1395,7 @@ TEST_F(SQLiteDriver, Objectives_TEST(Equality))
 
   EXPECT_TRUE(_db.update_objective(&objective_1));
   EXPECT_TRUE(_db.select_objective(&objective_2));
-  EXPECT_EQ(objective_1, objective_2);
+  EXPECT_TRUE(objective_1 == objective_2);
 }
 //PROPERTY TESTS--------------------------------------------------------------
 #ifndef DISABLE_Property_TEST
@@ -1451,9 +1451,9 @@ TEST_F(SQLiteDriver, Property_TEST(Select))
   _db.select_property(&name);
 
   property_1.id = 1;
-  EXPECT_EQ(property_1, id);
+  EXPECT_TRUE(property_1 == id);
   property_2.id = 2;
-  EXPECT_EQ(property_2, name);
+  EXPECT_TRUE(property_2 == name);
 }
 TEST_F(SQLiteDriver, Property_TEST(Remove))
 {
@@ -1492,104 +1492,7 @@ TEST_F(SQLiteDriver, Property_TEST(Equality))
 
   EXPECT_TRUE(_db.update_property(&property_1));
   EXPECT_TRUE(_db.select_property(&property_2));
-  EXPECT_EQ(property_1, property_2);
-}
-//RESTRICTION TESTS------------------------------------------------------------
-#ifndef DISABLE_Restrictions_TEST
-#define Restrictions_TEST(X) X##_Restrictions
-#else
-#define Restrictions_TEST(X) DISABLED_##X##_Restrictions
-#endif
-TEST_F(SQLiteDriver, Restrictions_TEST(Insert))
-{
-  using namespace pfc;
-  Restriction restriction_1;
-  Restriction restriction_2;
-  Restriction restriction_3;
-
-  restriction_1.name = "Solid";
-  restriction_1.value = "Snake";
-
-  restriction_2.name = "Rocky";
-  restriction_2.value = "Balboa";
-
-  restriction_3.name = "James";
-  restriction_3.value = "Kirk";
-
-  EXPECT_EQ(0, _db.restriction_count());
-  EXPECT_TRUE(_db.update_restriction(&restriction_1));
-  EXPECT_EQ(1, _db.restriction_count());
-  EXPECT_TRUE(_db.update_restriction(&restriction_2));
-  EXPECT_EQ(2, _db.restriction_count());
-  EXPECT_TRUE(_db.update_restriction(&restriction_3));
-  EXPECT_EQ(3, _db.restriction_count());
-}
-TEST_F(SQLiteDriver, Restrictions_TEST(Select))
-{
-  using namespace pfc;
-  Restriction restriction_1;
-  Restriction restriction_2;
-
-  restriction_1.name = "Solid";
-  restriction_1.value = "Snake";
-  restriction_2.name = "Rocky";
-  restriction_2.value = "Balboa";
-
-  EXPECT_TRUE(_db.update_restriction(&restriction_1));
-  EXPECT_TRUE(_db.update_restriction(&restriction_2));
-
-  Restriction id;
-  Restriction name;
-
-  id.id = 1;
-  name.name = "Rocky";
-
-  _db.select_restriction(&id);
-  _db.select_restriction(&name);
-
-  restriction_1.id = 1;
-  EXPECT_EQ(restriction_1, id);
-  restriction_2.id = 2;
-  EXPECT_EQ(restriction_2, name);
-}
-TEST_F(SQLiteDriver, Restrictions_TEST(Remove))
-{
-  using namespace pfc;
-  Restriction restriction_1;
-  Restriction restriction_2;
-  Restriction restriction_3;
-
-  restriction_1.name = "Solid";
-  restriction_1.value = "Snake";
-
-  restriction_2.name = "Rocky";
-  restriction_2.value = "Balboa";
-
-  restriction_3.name = "James";
-  restriction_3.value = "Kirk";
-
-  EXPECT_TRUE(_db.update_restriction(&restriction_1));
-  EXPECT_TRUE(_db.update_restriction(&restriction_2));
-  EXPECT_TRUE(_db.update_restriction(&restriction_3));
-  EXPECT_EQ(3, _db.restriction_count());
-  EXPECT_TRUE(_db.remove_restriction(&restriction_1));
-  EXPECT_TRUE(_db.remove_restriction(&restriction_3));
-  EXPECT_EQ(1, _db.restriction_count());
-}
-TEST_F(SQLiteDriver, Restrictions_TEST(Equality))
-{
-  using namespace pfc;
-  Restriction restriction_1;
-  Restriction restriction_2;
-
-  restriction_1.name = "Solid";
-  restriction_1.value = "Snake";
-
-  restriction_2.name = "Solid";
-
-  EXPECT_TRUE(_db.update_restriction(&restriction_1));
-  EXPECT_TRUE(_db.select_restriction(&restriction_2));
-  EXPECT_EQ(restriction_1, restriction_2);
+  EXPECT_TRUE(property_1 == property_2);
 }
 //ROLE TESTS------------------------------------------------------------------
 #ifndef DISABLE_Role_TEST
@@ -1655,9 +1558,9 @@ TEST_F(SQLiteDriver, Role_TEST(Select))
   _db.select_role(&name);
 
   role_1.id = 1;
-  EXPECT_EQ(role_1, id);
+  EXPECT_TRUE(role_1 == id);
   role_3.id = 3;
-  EXPECT_EQ(role_3, name);
+  EXPECT_TRUE(role_3 == name);
 }
 TEST_F(SQLiteDriver, Role_TEST(Remove))
 {
@@ -1696,7 +1599,7 @@ TEST_F(SQLiteDriver, Role_TEST(Equality))
 
   EXPECT_TRUE(_db.update_role(&role_1));
   EXPECT_TRUE(_db.select_role(&role_2));
-  EXPECT_EQ(role_1, role_2);
+  EXPECT_TRUE(role_1 == role_2);
 }
 //SCENE TESTS----------------------------------------------------------------
 #ifndef DISABLE_Scene_TEST
@@ -1756,9 +1659,9 @@ TEST_F(SQLiteDriver, Scene_TEST(Select))
   _db.select_scene(&name);
 
   scene_1.id = 1;
-  EXPECT_EQ(scene_1, id);
+  EXPECT_TRUE(scene_1 == id);
   scene_2.id = 2;
-  EXPECT_EQ(scene_2, name);
+  EXPECT_TRUE(scene_2 == name);
 }
 TEST_F(SQLiteDriver, Scene_TEST(Remove))
 {
@@ -1799,7 +1702,7 @@ TEST_F(SQLiteDriver, Scene_TEST(Equality))
 
   EXPECT_TRUE(_db.update_scene(&scene_1));
   EXPECT_TRUE(_db.select_scene(&scene_2));
-  EXPECT_EQ(scene_1, scene_2);
+  EXPECT_TRUE(scene_1 == scene_2);
 }
 //TREATMENT TESTS--------------------------------------------------------------
 #ifndef DISABLE_Treatment_TEST
@@ -1886,11 +1789,11 @@ TEST_F(SQLiteDriver, Treatment_TEST(Select))
   _db.select_treatment(&common_name);
 
   treatment_1.id = 1;
-  EXPECT_EQ(treatment_1, id);
+  EXPECT_TRUE(treatment_1 == id);
   treatment_2.id = 2;
-  EXPECT_EQ(treatment_2, medical_name);
+  EXPECT_TRUE(treatment_2 == medical_name);
   treatment_3.id = 3;
-  EXPECT_EQ(treatment_3, common_name);
+  EXPECT_TRUE(treatment_3 == common_name);
 }
 TEST_F(SQLiteDriver, Treatment_TEST(Remove))
 {
@@ -1941,7 +1844,7 @@ TEST_F(SQLiteDriver, Treatment_TEST(Equality))
 
   EXPECT_TRUE(_db.update_treatment(&treatment_1));
   EXPECT_TRUE(_db.select_treatment(&treatment_2));
-  EXPECT_EQ(treatment_1, treatment_2);
+  EXPECT_TRUE(treatment_1 == treatment_2);
 }
 //SCENE_MAP_ROLE TESTS--------------------------------------------------------
 #ifndef DISABLE_RoleMap_TEST
@@ -2003,9 +1906,9 @@ TEST_F(SQLiteDriver, RoleMap_TEST(Select))
   _db.select_role_map(&fk);
 
   map_1.id = 1;
-  EXPECT_EQ(map_1, id);
+  EXPECT_TRUE(map_1 == id);
   map_2.id = 2;
-  EXPECT_EQ(map_2, fk);
+  EXPECT_TRUE(map_2 == fk);
 }
 TEST_F(SQLiteDriver, RoleMap_TEST(Remove))
 {
@@ -2044,7 +1947,7 @@ TEST_F(SQLiteDriver, RoleMap_TEST(Equality))
 
   EXPECT_TRUE(_db.update_role_map(&map_1));
   EXPECT_TRUE(_db.select_role_map(&map_2));
-  EXPECT_EQ(map_1, map_2);
+  EXPECT_TRUE(map_1 == map_2);
 }
 TEST_F(SQLiteDriver, RoleMap_TEST(Role_Insertion))
 {
@@ -2384,9 +2287,9 @@ TEST_F(SQLiteDriver, EventMap_TEST(Select))
   _db.select_event_map(&fk);
 
   event_map_1.id = 1;
-  EXPECT_EQ(event_map_1, id);
+  EXPECT_TRUE(event_map_1 == id);
   event_map_2.id = 2;
-  EXPECT_EQ(event_map_2, fk);
+  EXPECT_TRUE(event_map_2 == fk);
 }
 TEST_F(SQLiteDriver, EventMap_TEST(Remove))
 {
@@ -2425,7 +2328,7 @@ TEST_F(SQLiteDriver, EventMap_TEST(Equality))
 
   EXPECT_TRUE(_db.update_event_map(&event_map_1));
   EXPECT_TRUE(_db.select_event_map(&event_map_2));
-  EXPECT_EQ(event_map_1, event_map_2);
+  EXPECT_TRUE(event_map_1 == event_map_2);
 }
 TEST_F(SQLiteDriver, EventMap_TEST(Event_Insertion))
 {
@@ -2705,291 +2608,6 @@ TEST_F(SQLiteDriver, EventMap_TEST(Scene_Deletion))
   EXPECT_EQ(3, _db.event_map_count());
   _db.remove_scene(&scene_3);
   EXPECT_EQ(0, _db.event_map_count());
-}
-//SCENE_MAP_RESTRICTION TESTS----------------------------------------------
-#ifndef DISABLE_SceneMap_TEST
-#define SceneMap_TEST(X) SceneMap_Test_##X
-#else
-#define SceneMap_TEST(X) DISABLED_SceneMap_Test_##X
-#endif
-TEST_F(SQLiteDriver, SceneMap_TEST(Restriction_Insertion))
-{
-  using namespace pfc;
-  Scene scene_1;
-  Scene scene_2;
-  Scene scene_3;
-  RestrictionMap map_1;
-  RestrictionMap map_2;
-  RestrictionMap map_3;
-  RestrictionMap map_4;
-  RestrictionMap map_5;
-  RestrictionMap map_6;
-  RestrictionMap map_7;
-  RestrictionMap map_8;
-  RestrictionMap map_9;
-  Restriction restriction_1;
-  Restriction restriction_2;
-  Restriction restriction_3;
-  scene_1.name = "Opening";
-  scene_2.name = "Middle";
-  scene_3.name = "Ending";
-
-  _db.update_scene(&scene_1);
-  _db.update_scene(&scene_2);
-  _db.update_scene(&scene_3);
-
-  _db.select_scene(&scene_1);
-  _db.select_scene(&scene_2);
-  _db.select_scene(&scene_3);
-
-  restriction_1.name = "Software Developer";
-  restriction_1.value = "Bash your head against a wall for 8 hours a day";
-  restriction_2.name = "Exterminator";
-  restriction_2.value = "Look for bugs 8 hours a day";
-  restriction_3.name = "Tailor";
-  restriction_3.value = "Make quick patches 8 hours a day";
-
-  _db.update_restriction(&restriction_1);
-  _db.update_restriction(&restriction_2);
-  _db.update_restriction(&restriction_3);
-
-  _db.select_restriction(&restriction_1);
-  _db.select_restriction(&restriction_2);
-  _db.select_restriction(&restriction_3);
-
-  EXPECT_EQ(0, _db.restriction_map_count());
-  _db.update_restriction_in_scene(&scene_1, &restriction_1);
-  EXPECT_EQ(1, _db.restriction_map_count());
-  _db.update_restriction_in_scene(&scene_1, &restriction_2);
-  EXPECT_EQ(2, _db.restriction_map_count());
-  _db.update_restriction_in_scene(&scene_1, &restriction_3);
-  EXPECT_EQ(3, _db.restriction_map_count());
-  _db.update_restriction_in_scene(&scene_2, &restriction_1);
-  EXPECT_EQ(4, _db.restriction_map_count());
-  _db.update_restriction_in_scene(&scene_2, &restriction_2);
-  EXPECT_EQ(5, _db.restriction_map_count());
-  _db.update_restriction_in_scene(&scene_2, &restriction_3);
-  EXPECT_EQ(6, _db.restriction_map_count());
-  _db.update_restriction_in_scene(&scene_3, &restriction_1);
-  EXPECT_EQ(7, _db.restriction_map_count());
-  _db.update_restriction_in_scene(&scene_3, &restriction_2);
-  EXPECT_EQ(8, _db.restriction_map_count());
-  _db.update_restriction_in_scene(&scene_3, &restriction_3);
-  EXPECT_EQ(9, _db.restriction_map_count());
-}
-TEST_F(SQLiteDriver, SceneMap_TEST(Restriction_Removal))
-{
-  using namespace pfc;
-  Scene scene_1;
-  Scene scene_2;
-  Scene scene_3;
-  RestrictionMap map_1;
-  RestrictionMap map_2;
-  RestrictionMap map_3;
-  RestrictionMap map_4;
-  RestrictionMap map_5;
-  RestrictionMap map_6;
-  RestrictionMap map_7;
-  RestrictionMap map_8;
-  RestrictionMap map_9;
-  Restriction restriction_1;
-  Restriction restriction_2;
-  Restriction restriction_3;
-  scene_1.name = "Opening";
-  scene_2.name = "Middle";
-  scene_3.name = "Ending";
-
-  _db.update_scene(&scene_1);
-  _db.update_scene(&scene_2);
-  _db.update_scene(&scene_3);
-
-  _db.select_scene(&scene_1);
-  _db.select_scene(&scene_2);
-  _db.select_scene(&scene_3);
-
-  restriction_1.name = "Software Developer";
-  restriction_1.value = "Bash your head against a wall for 8 hours a day";
-  restriction_2.name = "Exterminator";
-  restriction_2.value = "Look for bugs 8 hours a day";
-  restriction_3.name = "Tailor";
-  restriction_3.value = "Make quick patches 8 hours a day";
-
-  _db.update_restriction(&restriction_1);
-  _db.update_restriction(&restriction_2);
-  _db.update_restriction(&restriction_3);
-
-  _db.select_restriction(&restriction_1);
-  _db.select_restriction(&restriction_2);
-  _db.select_restriction(&restriction_3);
-
-  _db.update_restriction_in_scene(&scene_1, &restriction_1);
-  _db.update_restriction_in_scene(&scene_1, &restriction_2);
-  _db.update_restriction_in_scene(&scene_1, &restriction_3);
-  _db.update_restriction_in_scene(&scene_2, &restriction_1);
-  _db.update_restriction_in_scene(&scene_2, &restriction_2);
-  _db.update_restriction_in_scene(&scene_2, &restriction_3);
-  _db.update_restriction_in_scene(&scene_3, &restriction_1);
-  _db.update_restriction_in_scene(&scene_3, &restriction_2);
-  _db.update_restriction_in_scene(&scene_3, &restriction_3);
-
-  EXPECT_EQ(9, _db.restriction_map_count());
-  _db.remove_restriction_from_scene(&restriction_1, &scene_1);
-  EXPECT_EQ(8, _db.restriction_map_count());
-  _db.remove_restriction_from_scene(&restriction_1, &scene_2);
-  EXPECT_EQ(7, _db.restriction_map_count());
-  _db.remove_restriction_from_scene(&restriction_1, &scene_3);
-  EXPECT_EQ(6, _db.restriction_map_count());
-  _db.remove_restriction_from_scene(&restriction_2, &scene_1);
-  EXPECT_EQ(5, _db.restriction_map_count());
-  _db.remove_restriction_from_scene(&restriction_2, &scene_2);
-  EXPECT_EQ(4, _db.restriction_map_count());
-  _db.remove_restriction_from_scene(&restriction_2, &scene_3);
-  EXPECT_EQ(3, _db.restriction_map_count());
-  _db.remove_restriction_from_scene(&restriction_3, &scene_1);
-  EXPECT_EQ(2, _db.restriction_map_count());
-  _db.remove_restriction_from_scene(&restriction_3, &scene_2);
-  EXPECT_EQ(1, _db.restriction_map_count());
-  _db.remove_restriction_from_scene(&restriction_3, &scene_3);
-  EXPECT_EQ(0, _db.restriction_map_count());
-  EXPECT_EQ(3, _db.restriction_count());
-}
-TEST_F(SQLiteDriver, SceneMap_TEST(Restriction_Deletion))
-{
-  using namespace pfc;
-  Scene scene_1;
-  Scene scene_2;
-  Scene scene_3;
-  RestrictionMap map_1;
-  RestrictionMap map_2;
-  RestrictionMap map_3;
-  RestrictionMap map_4;
-  RestrictionMap map_5;
-  RestrictionMap map_6;
-  RestrictionMap map_7;
-  RestrictionMap map_8;
-  RestrictionMap map_9;
-  Restriction restriction_1;
-  Restriction restriction_2;
-  Restriction restriction_3;
-  scene_1.name = "Opening";
-  scene_2.name = "Middle";
-  scene_3.name = "Ending";
-
-  _db.update_scene(&scene_1);
-  _db.update_scene(&scene_2);
-  _db.update_scene(&scene_3);
-
-  _db.select_scene(&scene_1);
-  _db.select_scene(&scene_2);
-  _db.select_scene(&scene_3);
-
-  restriction_1.name = "Software Developer";
-  restriction_1.value = "Bash your head against a wall for 8 hours a day";
-  restriction_2.name = "Exterminator";
-  restriction_2.value = "Look for bugs 8 hours a day";
-  restriction_3.name = "Tailor";
-  restriction_3.value = "Make quick patches 8 hours a day";
-
-  _db.update_restriction(&restriction_1);
-  _db.update_restriction(&restriction_2);
-  _db.update_restriction(&restriction_3);
-
-  _db.select_restriction(&restriction_1);
-  _db.select_restriction(&restriction_2);
-  _db.select_restriction(&restriction_3);
-
-  _db.update_restriction_in_scene(&scene_1, &restriction_1);
-  _db.update_restriction_in_scene(&scene_1, &restriction_2);
-  _db.update_restriction_in_scene(&scene_1, &restriction_3);
-  _db.update_restriction_in_scene(&scene_2, &restriction_1);
-  _db.update_restriction_in_scene(&scene_2, &restriction_2);
-  _db.update_restriction_in_scene(&scene_2, &restriction_3);
-  _db.update_restriction_in_scene(&scene_3, &restriction_1);
-  _db.update_restriction_in_scene(&scene_3, &restriction_2);
-  _db.update_restriction_in_scene(&scene_3, &restriction_3);
-
-  EXPECT_EQ(9, _db.restriction_map_count());
-  EXPECT_EQ(3, _db.restriction_count(&scene_1));
-  EXPECT_EQ(3, _db.restriction_count(&scene_2));
-  EXPECT_EQ(3, _db.restriction_count(&scene_3));
-  _db.remove_restriction(&restriction_1);
-  EXPECT_EQ(6, _db.restriction_map_count());
-  EXPECT_EQ(2, _db.restriction_count(&scene_1));
-  EXPECT_EQ(2, _db.restriction_count(&scene_2));
-  EXPECT_EQ(2, _db.restriction_count(&scene_3));
-  _db.remove_restriction(&restriction_2);
-  EXPECT_EQ(3, _db.restriction_map_count());
-  EXPECT_EQ(1, _db.restriction_count(&scene_1));
-  EXPECT_EQ(1, _db.restriction_count(&scene_2));
-  EXPECT_EQ(1, _db.restriction_count(&scene_3));
-  _db.remove_restriction(&restriction_3);
-  EXPECT_EQ(0, _db.restriction_map_count());
-  EXPECT_EQ(0, _db.restriction_count(&scene_1));
-  EXPECT_EQ(0, _db.restriction_count(&scene_2));
-  EXPECT_EQ(0, _db.restriction_count(&scene_3));
-}
-TEST_F(SQLiteDriver, SceneMap_TEST(Scene_Deletion))
-{
-  using namespace pfc;
-  Scene scene_1;
-  Scene scene_2;
-  Scene scene_3;
-  RestrictionMap map_1;
-  RestrictionMap map_2;
-  RestrictionMap map_3;
-  RestrictionMap map_4;
-  RestrictionMap map_5;
-  RestrictionMap map_6;
-  RestrictionMap map_7;
-  RestrictionMap map_8;
-  RestrictionMap map_9;
-  Restriction restriction_1;
-  Restriction restriction_2;
-  Restriction restriction_3;
-  scene_1.name = "Opening";
-  scene_2.name = "Middle";
-  scene_3.name = "Ending";
-
-  _db.update_scene(&scene_1);
-  _db.update_scene(&scene_2);
-  _db.update_scene(&scene_3);
-
-  _db.select_scene(&scene_1);
-  _db.select_scene(&scene_2);
-  _db.select_scene(&scene_3);
-
-  restriction_1.name = "Software Developer";
-  restriction_1.value = "Bash your head against a wall for 8 hours a day";
-  restriction_2.name = "Exterminator";
-  restriction_2.value = "Look for bugs 8 hours a day";
-  restriction_3.name = "Tailor";
-  restriction_3.value = "Make quick patches 8 hours a day";
-
-  _db.update_restriction(&restriction_1);
-  _db.update_restriction(&restriction_2);
-  _db.update_restriction(&restriction_3);
-
-  _db.select_restriction(&restriction_1);
-  _db.select_restriction(&restriction_2);
-  _db.select_restriction(&restriction_3);
-
-  _db.update_restriction_in_scene(&scene_1, &restriction_1);
-  _db.update_restriction_in_scene(&scene_1, &restriction_2);
-  _db.update_restriction_in_scene(&scene_1, &restriction_3);
-  _db.update_restriction_in_scene(&scene_2, &restriction_1);
-  _db.update_restriction_in_scene(&scene_2, &restriction_2);
-  _db.update_restriction_in_scene(&scene_2, &restriction_3);
-  _db.update_restriction_in_scene(&scene_3, &restriction_1);
-  _db.update_restriction_in_scene(&scene_3, &restriction_2);
-  _db.update_restriction_in_scene(&scene_3, &restriction_3);
-
-  EXPECT_EQ(9, _db.restriction_map_count());
-  _db.remove_scene(&scene_1);
-  EXPECT_EQ(6, _db.restriction_map_count());
-  _db.remove_scene(&scene_2);
-  EXPECT_EQ(3, _db.restriction_map_count());
-  _db.remove_scene(&scene_3);
-  EXPECT_EQ(0, _db.restriction_map_count());
 }
 //SCENE_MAP_EQUIPMENT TESTS-----------------------------------------------
 #ifndef DISABLE_EquipmentMap_TEST
@@ -4212,30 +3830,6 @@ TEST_F(SQLiteDriver, Backdoor_TEST(get_equipment_maps))
   EXPECT_EQ(1, list[0]->scene->id);
   EXPECT_EQ(1, list[0]->equipment->id);
 }
-TEST_F(SQLiteDriver, Backdoor_TEST(get_restriction_maps))
-{
-  using namespace pfc;
-  Scene scene_1;
-  RestrictionMap map_1;
-  Restriction restriction_1;
-  scene_1.name = "Opening";
-
-  _db.update_scene(&scene_1);
-
-  _db.select_scene(&scene_1);
-
-  restriction_1.name = "Software Developer";
-  restriction_1.value = "Bash your head against a wall for 8 hours a day";
-
-  _db.update_restriction(&restriction_1);
-  _db.select_restriction(&restriction_1);
-  _db.update_restriction_in_scene(&scene_1, &restriction_1);
-
-  auto list = _db.get_restriction_maps();
-
-  EXPECT_EQ(1, list[0]->fk_scene);
-  EXPECT_EQ(1, list[0]->fk_restriction);
-}
 TEST_F(SQLiteDriver, Backdoor_TEST(get_objectives))
 {
   using namespace pfc;
@@ -4271,22 +3865,6 @@ TEST_F(SQLiteDriver, Backdoor_TEST(get_properties))
   EXPECT_TRUE(list[0]->value.compare(property_1.value) == 0);
 }
 //-------------------------------------------------------------------------------
-TEST_F(SQLiteDriver, Backdoor_TEST(get_restrictions))
-{
-  using namespace pfc;
-  Restriction restriction_1;
-
-  restriction_1.name = "Solid";
-  restriction_1.value = "Snake";
-
-  EXPECT_EQ(0, _db.restriction_count());
-  EXPECT_TRUE(_db.update_restriction(&restriction_1));
-
-  auto list = _db.get_restrictions();
-
-  EXPECT_TRUE(list[0]->name.compare(restriction_1.name) == 0);
-  EXPECT_TRUE(list[0]->value.compare(restriction_1.value) == 0);
-}
 TEST_F(SQLiteDriver, Backdoor_TEST(get_roles))
 {
   using namespace pfc;

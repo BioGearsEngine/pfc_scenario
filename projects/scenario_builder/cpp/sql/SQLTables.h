@@ -22,6 +22,7 @@ struct Author : public QObject {
   Q_OBJECT
 public:
   int32_t id = -1;
+  QString uuid = "";
   QString first = "";
   QString middle = "";
   QString last = "";
@@ -33,6 +34,7 @@ public:
   QString phone = "";
   QString organization = "";
   Q_PROPERTY(int author_id MEMBER id)
+  Q_PROPERTY(QString uuid MEMBER uuid)
   Q_PROPERTY(QString first MEMBER first)
   Q_PROPERTY(QString middle MEMBER middle)
   Q_PROPERTY(QString last MEMBER last)
@@ -57,6 +59,7 @@ public:
   bool operator==(const Author& rhs) const
   {
     return id == rhs.id
+      
       && first == rhs.first
       && middle == rhs.middle
       && last == rhs.last
@@ -76,6 +79,7 @@ public:
   void assign(const Author& rhs)
   {
     id = rhs.id;
+    uuid = rhs.uuid;
     first = rhs.first;
     middle = rhs.middle;
     last = rhs.last;
@@ -92,6 +96,7 @@ public:
 struct Assessment : public QObject {
   Q_OBJECT
   Q_PROPERTY(int assessment_id MEMBER id)
+  Q_PROPERTY(QString uuid MEMBER uuid)
   Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString description MEMBER description)
   Q_PROPERTY(QString type MEMBER type)
@@ -100,6 +105,7 @@ struct Assessment : public QObject {
   Q_PROPERTY(QString criteria MEMBER criteria)
 public:
   int32_t id = -1;
+  QString uuid = "";
   QString name = "";
   QString description = "";
   QString type = "";
@@ -119,6 +125,7 @@ public:
   bool operator==(const Assessment& rhs) const
   {
     return id == rhs.id
+      
       && name == rhs.name
       && description == rhs.description
       && type == rhs.type
@@ -133,6 +140,7 @@ public:
   void assign(const Assessment& rhs)
   {
     id = rhs.id;
+    uuid = rhs.uuid;
     name = rhs.name;
     description = rhs.description;
     type = rhs.type;
@@ -145,6 +153,7 @@ public:
 struct Citation : public QObject {
   Q_OBJECT
   Q_PROPERTY(int citation_id MEMBER id)
+  Q_PROPERTY(QString uuid MEMBER uuid)
   Q_PROPERTY(QString key MEMBER key)
   Q_PROPERTY(QString title MEMBER title)
   Q_PROPERTY(QString authors MEMBER authors)
@@ -152,6 +161,7 @@ struct Citation : public QObject {
   Q_PROPERTY(QString publisher MEMBER publisher)
 public:
   int32_t id = -1;
+  QString uuid = "";
   QString key = "";
   QString title = "";
   QString authors;
@@ -170,6 +180,7 @@ public:
   bool operator==(const Citation& rhs) const
   {
     return id == rhs.id
+      
       && key == rhs.key
       && title == rhs.title
       && authors == rhs.authors
@@ -183,6 +194,7 @@ public:
   void assign(const Citation& rhs)
   {
     id = rhs.id;
+    uuid = rhs.uuid;
     key = rhs.key;
     title = rhs.title;
     authors = rhs.authors;
@@ -195,6 +207,7 @@ public:
 struct Event : public QObject {
   Q_OBJECT
   Q_PROPERTY(int event_id MEMBER id)
+  Q_PROPERTY(QString uuid MEMBER uuid)
   Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString description MEMBER description)
   Q_PROPERTY(QString category MEMBER category)
@@ -205,6 +218,7 @@ struct Event : public QObject {
   Q_PROPERTY(QString details MEMBER details)
 public:
   int32_t id = -1;
+  QString uuid = "";
   QString name = "";
   QString description = "";
   QString category = "";
@@ -226,8 +240,8 @@ public:
 
   bool operator==(const Event& rhs) const
   {
-    return id == rhs.id
-      && name == rhs.name
+    return 
+		     name == rhs.name
       && description == rhs.description
       && category == rhs.category
       && fidelity == rhs.fidelity
@@ -242,7 +256,7 @@ public:
   }
   void assign(const Event& rhs)
   {
-    id = rhs.id;
+    uuid = rhs.uuid;
     name = rhs.name;
     description = rhs.description;
     category = rhs.category;
@@ -257,6 +271,7 @@ public:
 struct Equipment : public QObject {
   Q_OBJECT
   Q_PROPERTY(int equipment_id MEMBER id)
+  Q_PROPERTY(QString uuid MEMBER uuid)
   Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(int type MEMBER type)
   Q_PROPERTY(QString description MEMBER description)
@@ -265,6 +280,7 @@ struct Equipment : public QObject {
   Q_PROPERTY(QString properties MEMBER properties)
 public:
   int32_t id = -1;
+  QString uuid = "";
   int32_t type = 1;
   QString name = "";
   QString description = "";
@@ -283,8 +299,7 @@ public:
 
   bool operator==(const Equipment& rhs) const
   {
-    return id == rhs.id
-      && name == rhs.name
+    return name == rhs.name
       && type == rhs.type
       && description == rhs.description
       && citations == rhs.citations
@@ -298,6 +313,7 @@ public:
   void assign(const Equipment& rhs)
   {
     id = rhs.id;
+    uuid = rhs.uuid;
     name = rhs.name;
     type = rhs.type;
     description = rhs.description;
@@ -320,7 +336,8 @@ public:
 
 struct Injury : public QObject {
   Q_OBJECT
-  Q_PROPERTY(int injury_id MEMBER id)
+  Q_PROPERTY(int injury_id MEMBER id);
+  Q_PROPERTY(QString uuid MEMBER uuid)
   Q_PROPERTY(QString medical_name MEMBER medical_name)
   Q_PROPERTY(QString common_name MEMBER common_name)
   Q_PROPERTY(QString description MEMBER description)
@@ -329,6 +346,7 @@ struct Injury : public QObject {
   Q_PROPERTY(float max MEMBER upper_bound)
 public:
   int32_t id = -1;
+  QString uuid = "";
   QString medical_name = "";
   QString common_name = "";
   QString description = "";
@@ -347,8 +365,7 @@ public:
 
   bool operator==(const Injury& rhs) const
   {
-    return id == rhs.id
-      && medical_name == rhs.medical_name
+    return medical_name == rhs.medical_name
       && common_name == rhs.common_name
       && description == rhs.description
       && citations == rhs.citations
@@ -362,6 +379,7 @@ public:
   void assign(const Injury& rhs)
   {
     id = rhs.id;
+    uuid = rhs.uuid;
     medical_name = rhs.medical_name;
     common_name = rhs.common_name;
     description = rhs.description;
@@ -374,6 +392,7 @@ public:
 struct InjurySet : public QObject {
   Q_OBJECT
   Q_PROPERTY(int injury_set_id MEMBER id)
+  Q_PROPERTY(QString uuid MEMBER uuid)
   Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString description MEMBER description)
   Q_PROPERTY(QString injuries MEMBER injuries)
@@ -384,6 +403,7 @@ struct InjurySet : public QObject {
 
 public:
   int32_t id = -1;
+  QString uuid = "";
   QString name = "";
   QString description = "";
   QString injuries = "";
@@ -404,8 +424,7 @@ public:
 
   bool operator==(const InjurySet& rhs) const
   {
-    return id == rhs.id
-      && name == rhs.name
+    return name == rhs.name
       && description == rhs.description
       && injuries == rhs.injuries
       && locations == rhs.locations
@@ -420,6 +439,7 @@ public:
   void assign(const InjurySet& rhs)
   {
     id = rhs.id;
+    uuid = rhs.uuid;
     name = rhs.name;
     description = rhs.description;
     injuries = rhs.injuries;
@@ -433,6 +453,7 @@ public:
 struct Location : public QObject {
   Q_OBJECT
   Q_PROPERTY(int location_id MEMBER id)
+  Q_PROPERTY(QString uuid MEMBER uuid)
   Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString scene_name MEMBER scene_name)
   Q_PROPERTY(QString time_of_day MEMBER time_of_day)
@@ -440,6 +461,7 @@ struct Location : public QObject {
 
 public:
   int32_t id = -1;
+  QString uuid = "";
   QString name = "";
   QString scene_name = "";
   QString time_of_day = "";
@@ -457,8 +479,7 @@ public:
 
   bool operator==(const Location& rhs) const
   {
-    return id == rhs.id
-      && name == rhs.name
+    return name == rhs.name
       && scene_name == rhs.scene_name
       && time_of_day == rhs.time_of_day
       && environment == rhs.environment;
@@ -470,6 +491,7 @@ public:
   void assign(const Location& rhs)
   {
     id = rhs.id;
+    uuid = rhs.uuid;
     name = rhs.name;
     scene_name = rhs.scene_name;
     time_of_day = rhs.time_of_day;
@@ -480,6 +502,7 @@ public:
 struct Objective : public QObject {
   Q_OBJECT
   Q_PROPERTY(int objective_id MEMBER id)
+  Q_PROPERTY(QString uuid MEMBER uuid)
   Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString description MEMBER description)
   Q_PROPERTY(QString citations MEMBER citations)
@@ -488,6 +511,7 @@ struct Objective : public QObject {
   Q_PROPERTY(QString injury_profiles MEMBER injury_profiles)
 public:
   int32_t id = -1;
+  QString uuid = "";
   QString name = "";
   QString description = "";
   QString citations;
@@ -507,8 +531,7 @@ public:
 
   bool operator==(const Objective& rhs) const
   {
-    return id == rhs.id
-      && name == rhs.name
+    return name == rhs.name
       && description == rhs.description
       && citations == rhs.citations
       && cpgs == rhs.cpgs
@@ -522,6 +545,7 @@ public:
   void assign(const Objective& rhs)
   {
     id = rhs.id;
+    uuid = rhs.uuid;
     name = rhs.name;
     description = rhs.description;
     citations = rhs.citations;
@@ -534,10 +558,12 @@ public:
 struct Property : public QObject {
   Q_OBJECT
   Q_PROPERTY(int property_id MEMBER id)
+  Q_PROPERTY(QString uuid MEMBER uuid)
   Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString value MEMBER value)
 public:
   int32_t id = -1;
+  QString uuid = "";
   QString name = "";
   QString value = "";
 
@@ -554,6 +580,7 @@ public:
   bool operator==(const Property& rhs) const
   {
     return id == rhs.id
+      
       && name == rhs.name
       && value == rhs.value;
   }
@@ -565,58 +592,23 @@ public:
   void assign(const Property& rhs)
   {
     id = rhs.id;
+    uuid = rhs.uuid;
     name = rhs.name;
     value = rhs.value;
   }
 };
 //----End Property
-struct Restriction : public QObject {
-  Q_OBJECT
-  Q_PROPERTY(int restriction_id MEMBER id)
-  Q_PROPERTY(QString name MEMBER name)
-  Q_PROPERTY(QString value MEMBER value)
-public:
-  int32_t id = -1;
-  QString name = "";
-  QString value = "";
-
-  Restriction(QObject* parent = nullptr)
-    : QObject(parent)
-  {
-  }
-  Restriction(const Restriction&) = delete;
-  Restriction(Restriction&&) = delete;
-  Restriction& operator=(const Restriction&) = delete;
-  Restriction& operator=(Restriction&&) = delete;
-  virtual ~Restriction() = default;
-
-  bool operator==(const Restriction& rhs) const
-  {
-    return id == rhs.id
-      && name == rhs.name
-      && value == rhs.value;
-  }
-  bool operator!=(const Restriction& rhs) const
-  {
-    return !(*this == rhs);
-  }
-  void assign(const Restriction& rhs)
-  {
-    id = rhs.id;
-    name = rhs.name;
-    value = rhs.value;
-  }
-};
-//----End Restriction
 struct Role : public QObject {
   Q_OBJECT
   Q_PROPERTY(int role_id MEMBER id)
+  Q_PROPERTY(QString uuid MEMBER uuid)
   Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString description MEMBER description)
   Q_PROPERTY(QString short_name MEMBER description)
   Q_PROPERTY(QString trauma_profile MEMBER trauma_profile)
 public:
   int32_t id = -1;
+  QString uuid = "";
   QString name = "";
   QString short_name = "";
   QString description = "";
@@ -633,8 +625,7 @@ public:
 
   bool operator==(const Role& rhs) const
   {
-    return id == rhs.id
-      && name == rhs.name
+    return  name == rhs.name
       && description == rhs.description
       && short_name == rhs.short_name
       && trauma_profile == rhs.trauma_profile;
@@ -646,6 +637,7 @@ public:
   void assign(const Role& rhs)
   {
     id = rhs.id;
+    uuid = rhs.uuid;
     name = rhs.name;
     description = rhs.description;
     short_name = rhs.short_name;
@@ -656,6 +648,7 @@ public:
 struct Scene : public QObject {
   Q_OBJECT
   Q_PROPERTY(int scene_id MEMBER id)
+  Q_PROPERTY(QString uuid MEMBER uuid)
   Q_PROPERTY(QString name MEMBER name)
   Q_PROPERTY(QString description MEMBER description)
   Q_PROPERTY(QString time_of_day MEMBER time_of_day)
@@ -667,6 +660,7 @@ struct Scene : public QObject {
   Q_PROPERTY(QString details MEMBER details)
 public:
   int32_t id = -1;
+  QString uuid = "";
   QString name = "";
   QString description = "";
   QString time_of_day = "";
@@ -689,8 +683,7 @@ public:
 
   bool operator==(const Scene& rhs) const
   {
-    return id == rhs.id
-      && name == rhs.name
+    return name == rhs.name
       && description == rhs.description
       && time_of_day == rhs.time_of_day
       && time_in_simulation == rhs.time_in_simulation
@@ -707,6 +700,7 @@ public:
   void assign(const Scene& rhs)
   {
     id = rhs.id;
+    uuid = rhs.uuid;
     name = rhs.name;
     description = rhs.description;
     time_of_day = rhs.time_of_day;
@@ -735,6 +729,7 @@ public:
 struct Treatment : public QObject {
   Q_OBJECT
   Q_PROPERTY(int treatment_id MEMBER id)
+  Q_PROPERTY(QString uuid MEMBER uuid)
   Q_PROPERTY(QString medical_name MEMBER medical_name)
   Q_PROPERTY(QString common_name MEMBER common_name)
   Q_PROPERTY(QString description MEMBER description)
@@ -743,6 +738,7 @@ struct Treatment : public QObject {
   Q_PROPERTY(QString cpgs MEMBER citations)
 public:
   int32_t id = -1;
+  QString uuid = "";
   QString medical_name = "";
   QString common_name = "";
   QString description = "";
@@ -762,8 +758,7 @@ public:
 
   bool operator==(const Treatment& rhs) const
   {
-    return id == rhs.id
-      && medical_name == rhs.medical_name
+    return medical_name == rhs.medical_name
       && common_name == rhs.common_name
       && description == rhs.description
       && equipment == rhs.equipment
@@ -777,6 +772,7 @@ public:
   void assign(const Treatment& rhs)
   {
     id = rhs.id;
+    uuid = rhs.uuid;
     medical_name = rhs.medical_name;
     common_name = rhs.common_name;
     description = rhs.description;
@@ -826,8 +822,7 @@ public:
 
   bool operator==(const CitationMap& rhs) const
   {
-    return id == rhs.id
-      && fk_scene == rhs.fk_scene
+    return  fk_scene == rhs.fk_scene
       && fk_citation == rhs.fk_citation;
   }
   bool operator!=(const CitationMap& rhs) const
@@ -865,8 +860,7 @@ public:
 
   bool operator==(const EventMap& rhs) const
   {
-    return id == rhs.id
-      && fk_scene == rhs.fk_scene
+    return fk_scene == rhs.fk_scene
       && fk_event == rhs.fk_event;
   }
   bool operator!=(const EventMap& rhs) const
@@ -919,8 +913,7 @@ public:
 
   bool operator==(const EquipmentMap& rhs) const
   {
-    return id == rhs.id
-      && name == rhs.name
+    return name == rhs.name
       && *scene == *rhs.scene
       && *equipment == *rhs.equipment
       && property_values == rhs.property_values
@@ -929,7 +922,7 @@ public:
   bool operator!=(const EquipmentMap& rhs) const
   {
     return !(*this == rhs);
-  } 
+  }
   void assign(const EquipmentMap& rhs)
   {
     //!
@@ -956,7 +949,6 @@ public:
 //----End EquipmentMap
 struct LocationMap : public QObject {
   Q_OBJECT
-  Q_PROPERTY(int map_id MEMBER id)
   Q_PROPERTY(int fk_scene MEMBER fk_scene)
   Q_PROPERTY(int fk_location MEMBER fk_location)
 
@@ -977,8 +969,7 @@ public:
 
   bool operator==(const LocationMap& rhs) const
   {
-    return id == rhs.id
-      && fk_scene == rhs.fk_scene
+    return fk_scene == rhs.fk_scene
       && fk_location == rhs.fk_location;
   }
   bool operator!=(const LocationMap& rhs) const
@@ -1016,8 +1007,7 @@ public:
 
   bool operator==(const RoleMap& rhs) const
   {
-    return id == rhs.id
-      && fk_scene == rhs.fk_scene
+    return  fk_scene == rhs.fk_scene
       && fk_role == rhs.fk_role;
   }
   bool operator!=(const RoleMap& rhs) const
@@ -1032,84 +1022,6 @@ public:
   }
 };
 //----End Role Map
-struct PropMap : public QObject {
-  Q_OBJECT
-  Q_PROPERTY(int map_id MEMBER id)
-  Q_PROPERTY(int fk_scene MEMBER fk_scene)
-  Q_PROPERTY(int fk_prop MEMBER fk_prop)
-
-public:
-  int32_t id = -1;
-  int32_t fk_scene = -1;
-  int32_t fk_prop = -1;
-
-  PropMap(QObject* parent = nullptr)
-    : QObject(parent)
-  {
-  }
-  PropMap(const PropMap&) = delete;
-  PropMap(PropMap&&) = delete;
-  PropMap& operator=(const PropMap&) = delete;
-  PropMap& operator=(PropMap&&) = delete;
-  virtual ~PropMap() = default;
-
-  bool operator==(const PropMap& rhs) const
-  {
-    return id == rhs.id
-      && fk_scene == rhs.fk_scene
-      && fk_prop == rhs.fk_prop;
-  }
-  bool operator!=(const PropMap& rhs) const
-  {
-    return !(*this == rhs);
-  }
-  void assign(const PropMap& rhs)
-  {
-    id = rhs.id;
-    fk_scene = rhs.fk_scene;
-    fk_prop = rhs.fk_prop;
-  }
 };
-//----End Prop_Map
-struct RestrictionMap : public QObject {
-  Q_OBJECT
-  Q_PROPERTY(int map_id MEMBER id)
-  Q_PROPERTY(int fk_scene MEMBER fk_scene)
-  Q_PROPERTY(int fk_restriction MEMBER fk_restriction)
-
-public:
-  int32_t id = -1;
-  int32_t fk_scene = -1;
-  int32_t fk_restriction = -1;
-
-  RestrictionMap(QObject* parent = nullptr)
-    : QObject(parent)
-  {
-  }
-  RestrictionMap(const RestrictionMap&) = delete;
-  RestrictionMap(RestrictionMap&&) = delete;
-  RestrictionMap& operator=(const RestrictionMap&) = delete;
-  RestrictionMap& operator=(RestrictionMap&&) = delete;
-  virtual ~RestrictionMap() = default;
-
-  bool operator==(const RestrictionMap& rhs) const
-  {
-    return id == rhs.id
-      && fk_scene == rhs.fk_scene
-      && fk_restriction == rhs.fk_restriction;
-  }
-  bool operator!=(const RestrictionMap& rhs) const
-  {
-    return !(*this == rhs);
-  }
-  void assign(const RestrictionMap& rhs)
-  {
-    id = rhs.id;
-    fk_scene = rhs.fk_scene;
-    fk_restriction = rhs.fk_restriction;
-  }
-};
-//----End Restriction_Map
-}
 
 #endif

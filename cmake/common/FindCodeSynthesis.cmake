@@ -189,7 +189,7 @@ function(REGISTER_XSD_FILE _filepath )
                       DEPENDS ${_filepath}
                       DEPENDS ${CodeSynthesis_EXECUTABLE} ${cfg_file}
                       DEPENDS ${_l_DEPENDS}
-                      COMMENT "Generating source code from XML" )
+                      COMMENT "Generating source code from XML ${_filepath}" )
 
   add_custom_target( xsd_gen${_safe_unique_name} DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${_project}/${_component}/${_schema}.hxx ${CMAKE_CURRENT_BINARY_DIR}/${_project}/${_component}/${_schema}.cxx
                      COMMENT "Checking if re-generation is required" )

@@ -15,7 +15,7 @@
         <file>screens/components/common/CitationListEntry.qml</file>
         <file>screens/components/common/FullCitationListEntry.qml</file>
         <file>screens/components/common/FullEquipmentListEntry.qml</file>
-        <file>screens/components/common/FullRestrictionListEntry.qml</file>
+        
         <file>screens/components/common/FullInjuryListEntry.qml</file>
         <file>screens/components/common/EquipmentListEntry.qml</file>
         <file>screens/components/common/FourButtonRow.qml</file>

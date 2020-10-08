@@ -7,10 +7,16 @@
 
 #include <QDebug>
 #include <QString>
+#include <QUuid>
 
 namespace pfc {
 
 namespace schema {
+  //-----------------------------------------------------------------------------
+  auto generate_location_name(std::string const scene_name) -> QString
+  {
+    return QString::fromStdString(scene_name + " Location");
+  }
   //-----------------------------------------------------------------------------
   auto find_actor(std::string UUID, std::unique_ptr<::pfc::schema::ScenarioSchema>& scenario_schema, pfc::SQLite3Driver& _db) -> std::string
   {
@@ -38,7 +44,8 @@ namespace schema {
       }
     }
     return "";
-  } //-----------------------------------------------------------------------------
+  }
+  //-----------------------------------------------------------------------------
   auto find_equipment(std::string UUID, std::unique_ptr<::pfc::schema::ScenarioSchema>& scenario_schema, pfc::SQLite3Driver& _db) -> std::string
   {
     auto& equipments = scenario_schema->equipment().equipment();
@@ -48,6 +55,7 @@ namespace schema {
         equipment.name = ref.name().c_str();
         _db.select_equipment(&equipment);
         return std::to_string(equipment.id);
+        ;
       }
     }
     return "";
@@ -66,25 +74,21 @@ namespace schema {
     }
     return "";
   }
+
   //-------------------------------------------------------------------------------
   auto make_uuid() -> ::xml_schema::string
   {
-    static int counter = 0;
-    static std::mutex mutex;
-
-    std::lock_guard<std::mutex> guard{ mutex };
-
-    return ::xml_schema::id(std::to_string(++counter));
+    return QUuid::createUuid().toString(QUuid::WithoutBraces).toStdString();
   }
   //-------------------------------------------------------------------------------
   auto make_uuid(std::string input) -> ::xml_schema::string
   {
-    return ::xml_schema::string(input);
+    return QUuid::createUuid().toString(QUuid::WithoutBraces).toStdString();
   }
   //--------------------------------------------------------------------------------
-  auto make_string(std::string input) -> ::xml_schema::string
+  auto make_string(QString input) -> ::xml_schema::string
   {
-    return ::xml_schema::string(input);
+    return ::xml_schema::string(input.toStdString());
   }
   //-------------------------------------------------------------------------------
   auto make_time(QString input) -> ::xml_schema::time
@@ -168,7 +172,7 @@ namespace schema {
     return std::make_unique<schema::ScenarioSchema::works_cited_type>();
   }
   //-------------------------------------------------------------------------------
-  auto PFC::make_trauma(::pfc::Injury const* const input) -> std::unique_ptr<schema::trauma>
+  auto PFC::make_trauma(::pfc::Injury const* const input, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::trauma>
   {
 
     auto num_range = pfc::schema::trauma_severity_range();
@@ -181,67 +185,77 @@ namespace schema {
       std::make_unique<pfc::schema::trauma::description_type>(input->description.toStdString()),
       std::make_unique<pfc::schema::trauma::severity_range_type>(num_range));
     trauma->common_name(input->common_name.toStdString());
-    trauma->citations(make_citation_ref_list(input->citations));
+    trauma->citations(make_citation_ref_list(input->citations,_db));
 
     return trauma;
   }
   //------------------------------------------------------------------------------
-  auto PFC::make_citation_ref_list(QString ref_list) -> std::unique_ptr<schema::citation_ref_list>
+  auto PFC::make_citation_ref_list(QString ref_list, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::citation_ref_list>
   {
     auto citation_ref_list = std::make_unique<schema::citation_ref_list>();
+    Citation currentCitation;
     for (auto& token : ref_list.split(';')) {
-      if (!token.isEmpty()) {
-        citation_ref_list->citation_ref().push_back(schema::make_string("Citation_" + token.toStdString()));
+        currentCitation.id = token.toInt();
+      if (_db->select_citation(&currentCitation)) {
+        citation_ref_list->citation_ref().push_back(schema::make_string(currentCitation.uuid));
       }
     }
     return citation_ref_list;
   }
   //-------------------------------------------------------------------------------
-  auto PFC::make_cpg_ref_list(QString ref_list) -> std::unique_ptr<schema::cpg_ref_list>
+  auto PFC::make_cpg_ref_list(QString ref_list, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::cpg_ref_list>
   {
     auto cpg_ref_list = std::make_unique<schema::cpg_ref_list>();
+    Citation currentCPG;
     for (auto& token : ref_list.split(';')) {
-      if (!token.isEmpty()) {
-        cpg_ref_list->cpg_ref().push_back("CPG_" + token.toStdString());
+      currentCPG.id = token.toInt();
+      if (_db->select_citation(&currentCPG)) {
+        cpg_ref_list->cpg_ref().push_back(schema::make_string(currentCPG.uuid));
       }
     }
     return cpg_ref_list;
   }
   //-----------------------------------------------------------------------------
-  auto PFC::make_equipment_ref_list(QString ref_list) -> std::unique_ptr<schema::equipment_ref_list>
+  auto PFC::make_equipment_ref_list(QString ref_list, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::equipment_ref_list>
   {
     auto equipment_ref_list = std::make_unique<schema::equipment_ref_list>();
+    Equipment currentItem;
     for (auto& token : ref_list.split(';')) {
-      if (!token.isEmpty()) {
-        equipment_ref_list->equipment_refs().push_back("Equipment_" + token.toStdString());
+      currentItem.id = token.toInt();
+      if (_db->select_equipment(&currentItem)) {
+        equipment_ref_list->equipment_refs().push_back(schema::make_string(currentItem.uuid));
       }
     }
     return equipment_ref_list;
   }
   //-----------------------------------------------------------------------------
-  auto PFC::make_trauma_set_ref_list(QString ref_list) -> std::unique_ptr<schema::trauma_profile_ref_list>
+  auto PFC::make_trauma_set_ref_list(QString ref_list, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::trauma_profile_ref_list>
   {
     auto trauma_profile_ref_list = std::make_unique<schema::trauma_profile_ref_list>();
+    InjurySet currentInjurySet;
     for (auto& token : ref_list.split(';')) {
-      if (!token.isEmpty()) {
-        trauma_profile_ref_list->trauma_profile().push_back("Profile_" + token.toStdString());
+      currentInjurySet.id = token.toInt();
+      if (_db->select_injury_set(&currentInjurySet)) {
+        trauma_profile_ref_list->trauma_profile().push_back(schema::make_string(currentInjurySet.uuid));
       }
     }
     return trauma_profile_ref_list;
   }
   //-----------------------------------------------------------------------------
-  auto PFC::make_treatment_plan_ref_list(QString ref_list) -> std::unique_ptr<schema::treatment_plan_ref_list>
+  auto PFC::make_treatment_plan_ref_list(QString ref_list, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::treatment_plan_ref_list>
   {
     auto treatment_plan_ref_list = std::make_unique<schema::treatment_plan_ref_list>();
+    Treatment currentTreatment;
     for (auto& token : ref_list.split(';')) {
-      if (!token.isEmpty()) {
-        treatment_plan_ref_list->treatment_plan().push_back("Treatment_" + token.toStdString());
+      currentTreatment.id = token.toInt();
+      if (_db->select_treatment(&currentTreatment)) {
+        treatment_plan_ref_list->treatment_plan().push_back(schema::make_string(currentTreatment.uuid));
       }
     }
     return treatment_plan_ref_list;
   }
   //-----------------------------------------------------------------------------
-  auto PFC::make_trauma_occurance_list(QString ref_list, QString occurance_list, QString severity_list, QString description_list) -> std::unique_ptr<schema::trauma_occurence_list>
+  auto PFC::make_trauma_occurance_list(QString ref_list, QString occurance_list, QString severity_list, QString description_list, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::trauma_occurence_list>
   {
     auto trauma_occurence_list = std::make_unique<schema::trauma_occurence_list>();
     auto refs = ref_list.split(';');
@@ -254,18 +268,18 @@ namespace schema {
     auto severity_count = severities.size();
     auto description_count = descriptions.size();
     //NOTE: THis is unsafe when the database is confused and the indexes do not add up, but what are you going to do
-
+    Injury currentInjury;
     for (auto i = 0; i < refs.size(); ++i) {
-      if (!refs.at(i).isEmpty()) {
+      currentInjury.id = refs.at(i).toInt();
+      if (_db->select_injury(&currentInjury)) {
         try {
-          auto ref = refs.at(i);
           auto occurence = occurences.at(i);
           auto severity = severities.at(i);
           auto description = descriptions.at(i);
-          trauma_occurence_list->trauma().push_back(std::make_unique<schema::trauma_occurence>(make_string("Injury_" + ref.toStdString()),
-                                                                                               make_string(occurence.toStdString()),
-                                                                                               make_string(description.toStdString()),
-                                                                                               make_string(severity.toStdString())));
+          trauma_occurence_list->trauma().push_back(std::make_unique<schema::trauma_occurence>(make_string(currentInjury.uuid),
+                                                                                               make_string(occurence),
+                                                                                               make_string(description),
+                                                                                               make_string(severity)));
         } catch (...) {
           std::cout << "Error index mismatch between refs,occurances, and severities";
         }
@@ -349,38 +363,38 @@ namespace schema {
     return list;
   }
   //-----------------------------------------------------------------------------
-  auto PFC::make_treatment_plan(::pfc::Treatment const* const input) -> std::unique_ptr<treatment_plan>
+  auto PFC::make_treatment_plan(::pfc::Treatment const* const input, pfc::SQLite3Driver* _db) -> std::unique_ptr<treatment_plan>
   {
     auto treatment_citation_list = std::make_unique<pfc::schema::citation_list>();
-    auto treatment = std::make_unique<pfc::schema::treatment_plan>(schema::make_string("Treatment_" + std::to_string(input->id)),
-                                                                   schema::make_string(input->description.toStdString()),
-                                                                   make_equipment_ref_list(input->equipment),
+    auto treatment = std::make_unique<pfc::schema::treatment_plan>(schema::make_string(input->uuid),
+                                                                   schema::make_string(input->description),
+                                                                   make_equipment_ref_list(input->equipment,_db),
                                                                    make_medical_reference_list());
 
     treatment->common_name(input->common_name.toStdString());
-    treatment->references().citations(make_citation_ref_list(input->citations));
-    treatment->references().cpgs(make_cpg_ref_list(input->cpgs));
+    treatment->references().citations(make_citation_ref_list(input->citations,_db));
+    treatment->references().cpgs(make_cpg_ref_list(input->cpgs,_db));
     treatment->medical_name(input->medical_name.toStdString());
 
     return treatment;
   }
   //------------------------------------------------------------------------------
-  auto PFC::make_learning_objective(::pfc::Objective const* const input) -> std::unique_ptr<schema::learning_objective>
+  auto PFC::make_learning_objective(::pfc::Objective const* const input, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::learning_objective>
   {
-    auto objective = std::make_unique<pfc::schema::learning_objective>(schema::make_uuid("Objective_" + std::to_string(input->id)),
-                                                                       schema::make_string(input->name.toStdString()),
-                                                                       schema::make_string(input->description.toStdString()),
-                                                                       std::make_unique<pfc::schema::learning_objective::references_type>(make_citation_ref_list(input->citations),
-                                                                                                                                          make_cpg_ref_list(input->cpgs)),
-                                                                       std::make_unique<pfc::schema::learning_objective::relates_to_type>(make_treatment_plan_ref_list(input->treatment_plans),
-                                                                                                                                          make_trauma_set_ref_list(input->injury_profiles)));
+    auto objective = std::make_unique<pfc::schema::learning_objective>(schema::make_string(input->uuid),
+                                                                       schema::make_string(input->name),
+                                                                       schema::make_string(input->description),
+                                                                       std::make_unique<pfc::schema::learning_objective::references_type>(make_citation_ref_list(input->citations,_db),
+                                                                                                                                          make_cpg_ref_list(input->cpgs, _db)),
+                                                                       std::make_unique<pfc::schema::learning_objective::relates_to_type>(make_treatment_plan_ref_list(input->treatment_plans, _db),
+                                                                                                                                          make_trauma_set_ref_list(input->injury_profiles, _db)));
     return objective;
   }
   //-----------------------------------------------------------------------------
   auto PFC::make_citation(::pfc::Citation const* const input) -> std::unique_ptr<schema::citation>
   {
 
-    auto citation = std::make_unique<pfc::schema::citation>(make_uuid("Citation_" + std::to_string(input->id)),
+    auto citation = std::make_unique<pfc::schema::citation>(make_string(input->uuid),
                                                             input->title.toStdString(),
                                                             input->year.toStdString());
     citation->authors(make_authors_list(input->authors));
@@ -388,84 +402,106 @@ namespace schema {
     return citation;
   }
   //-----------------------------------------------------------------------------
-  auto PFC::make_scene(::pfc::Scene const* const input) -> std::unique_ptr<schema::scene>
+  auto PFC::make_scene(::pfc::Scene const* const input, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::scene>
   {
-    auto scene = std::make_unique<pfc::schema::scene>(schema::make_uuid("Location_" + std::to_string(input->id)),
-                                                      schema::make_string(input->name.toStdString()),
-                                                      schema::make_string(input->description.toStdString()),
+
+    /*
+      <xs : element name = "id" type = "xs:string" />
+      <xs : element name = "location-id" type = "xs:string" />
+      <xs : element name = "name" type = "xs:string" />
+      <xs : element name = "description" type = "xs:string" />
+      <xs : element name = "details" type = "xs:string" minOccurs = "0" />
+      <xs : element name = "weather" type = "xs:string" minOccurs = "0" />
+      <xs : element name = "time-of-day" type = "xs:integer" />
+      <xs : element name = "time-in-simulation" type = "xs:integer" />
+      <xs:element name="events" type="event-list"/>
+      <xs : element name = "items" type = "item-list" />
+      <xs : element name = "roles" type = "role-ref-list" />
+*/
+    Location loc;
+    loc.name =  generate_location_name(input->name.toStdString());
+    _db->select_location(&loc);
+    auto scene = std::make_unique<pfc::schema::scene>(schema::make_string(input->uuid),
+                                                      schema::make_string(loc.uuid),
+                                                      schema::make_string(input->name),
+                                                      schema::make_string(input->description),
                                                       input->time_of_day.toInt(),
                                                       input->time_in_simulation,
                                                       std::make_unique<pfc::schema::scene::events_type>(),
                                                       std::make_unique<pfc::schema::scene::items_type>(),
                                                       std::make_unique<pfc::schema::scene::roles_type>());
-    scene->weather(schema::make_string(input->weather.toStdString()));
-    scene->details(schema::make_string(input->details.toStdString()));
+    scene->weather(schema::make_string(input->weather));
+    scene->details(schema::make_string(input->details));
     return scene;
   }
   //-----------------------------------------------------------------------------
-  auto PFC::make_equipment(::pfc::Equipment const* const input) -> std::unique_ptr<schema::equipment>
+  auto PFC::make_equipment(::pfc::Equipment const* const input, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::equipment>
   {
-    auto equipment = std::make_unique<pfc::schema::equipment>(schema::make_uuid("Equipment_" + std::to_string(input->id)),
-                                                              schema::make_string(input->name.toStdString()),
-                                                              schema::make_string(input->description.toStdString()),
-                                                              make_citation_ref_list(input->citations));
+    auto equipment = std::make_unique<pfc::schema::equipment>(schema::make_string(input->uuid),
+                                                              schema::make_string(input->name),
+                                                              schema::make_string(input->description),
+                                                              make_citation_ref_list(input->citations, _db));
     equipment->type(input->type);
     equipment->image(input->image.toStdString());
     return equipment;
   }
   //-----------------------------------------------------------------------------
-  auto PFC::make_trauma_profile(::pfc::InjurySet const* const input) -> std::unique_ptr<schema::trauma_profile>
+  auto PFC::make_trauma_profile(::pfc::InjurySet const* const input, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::trauma_profile>
   {
 
-    auto trauma = std::make_unique<schema::trauma_profile>(make_uuid("TraumaProfile_" + std::to_string(input->id)),
-                                                           make_string(input->name.toStdString()),
-                                                           make_trauma_occurance_list(input->injuries, input->locations, input->severities, input->description),
-                                                           make_treatment_plan_ref_list(input->treatments));
+    auto trauma = std::make_unique<schema::trauma_profile>(make_string(input->uuid),
+                                                           make_string(input->name),
+                                                           make_trauma_occurance_list(input->injuries, input->locations, input->severities, input->description, _db),
+                                                           make_treatment_plan_ref_list(input->treatments,_db));
     trauma->physiology_state(input->physiology_file.toStdString());
     return trauma;
   }
   //-----------------------------------------------------------------------------
-  auto PFC::make_assessment(::pfc::Assessment const* const input) -> std::unique_ptr<schema::assessment>
+  auto PFC::make_assessment(::pfc::Assessment const* const input, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::assessment>
   {
-    auto assessment = std::make_unique<schema::assessment>(make_uuid("Assessment_" + std::to_string(input->id)),
-                                                           make_uuid("Objective_" + input->objective.toStdString()),
-                                                           make_string(input->name.toStdString()),
-                                                           make_string(input->description.toStdString()),
+
+    Objective objRef;
+    objRef.id = input->objective.toInt();
+    _db->select_objective(&objRef);
+    auto assessment = std::make_unique<schema::assessment>(make_string(input->uuid),
+                                                           make_string(objRef.uuid),
+                                                           make_string(input->name),
+                                                           make_string(input->description),
                                                            input->available_points,
-                                                           make_string(input->criteria.toStdString()));
+                                                           make_string(input->criteria));
     return assessment;
   }
   //-----------------------------------------------------------------------------
   auto PFC::make_role(::pfc::Role const* const input) -> std::unique_ptr<schema::role>
   {
-    auto role = std::make_unique<schema::role>(make_uuid("Role_" + std::to_string(input->id)),
-                                               make_string(input->name.toStdString()),
-                                               make_string(input->short_name.toStdString()),
-                                               make_string(input->description.toStdString()));
-    role->trauma_profile_ref(make_string(input->trauma_profile.toStdString()));
+    auto role = std::make_unique<schema::role>(make_string(input->uuid),
+                                               make_string(input->name),
+                                               make_string(input->short_name),
+                                               make_string(input->description));
+    role->trauma_profile_ref(make_string(input->trauma_profile));
     return role;
   }
   //-----------------------------------------------------------------------------
   auto PFC::make_event(::pfc::Event const* const input) -> std::unique_ptr<schema::event>
   {
-    auto event = std::make_unique<schema::event>(make_uuid("Event_" + std::to_string(input->id)),
-                                                 make_string(input->name.toStdString()),
+    auto event = std::make_unique<schema::event>(make_string(input->uuid),
+                                                 make_string(input->name),
                                                  make_event_category(input->category),
                                                  make_event_fidelity(input->fidelity),
-                                                 make_string(input->fk_actor_1.toStdString()),
-                                                 make_string(input->fk_actor_2.toStdString()),
-                                                 make_string(input->equipment.toStdString()),
-                                                 make_string(input->details.toStdString()),
-                                                 make_string(input->description.toStdString()));
+                                                 make_string(input->fk_actor_1),
+                                                 make_string(input->fk_actor_2),
+                                                 make_string(input->equipment),
+                                                 make_string(input->details),
+                                                 make_string(input->description));
 
     return event;
   }
   //-----------------------------------------------------------------------------
   auto PFC::make_item(::pfc::EquipmentMap const* const input) -> std::unique_ptr<schema::item>
   {
-    auto item = std::make_unique<schema::item>(make_string(input->name.toStdString()),
-                                               make_string("Equipment_" + std::to_string(input->id)),
-                                               make_string(input->notes.toStdString()),
+    auto item = std::make_unique<schema::item>(make_string(input->name),
+                                               make_string(input->equipment->uuid),
+                                               make_string(input->notes),
                                                make_property_value_list(input->equipment->properties, input->property_values));
 
     return item;
@@ -473,7 +509,7 @@ namespace schema {
   //-----------------------------------------------------------------------------
   auto PFC::make_role_ref(::pfc::Role const* const input) -> std::unique_ptr<::xml_schema::string>
   {
-    return std::make_unique<::xml_schema::string>("Role_" + std::to_string(input->id));
+    return std::make_unique<::xml_schema::string>(schema::make_string(input->uuid));
   }
   //-----------------------------------------------------------------------------
   auto PFC::make_medical_reference_list() -> std::unique_ptr<schema::medical_reference_list>
@@ -487,6 +523,10 @@ namespace schema {
   {
     auto author = scenario_schema->author();
     pfc::Author temp;
+    
+    temp.uuid = (author.id().present())? QString::fromStdString(author.id().get())
+              :  QUuid::createUuid().toString(QUuid::WithoutBraces);
+    
     temp.first = QString::fromStdString(author.first_name().get());
     temp.last = QString::fromStdString(author.last_name().get());
     temp.phone = QString::fromStdString(author.phone_number().get());
@@ -507,6 +547,7 @@ namespace schema {
     auto assessments = scenario_schema->syllabus().learning_assessments().assessment();
     for (auto assessment : assessments) {
       pfc::Assessment temp;
+      temp.uuid = QString::fromStdString(assessment.id());
       temp.name = QString::fromStdString(assessment.name());
       temp.description = QString::fromStdString(assessment.description());
       temp.type = (assessment.points_avaiable() == 1) ? QString("binary") : QString("partial");
@@ -526,7 +567,7 @@ namespace schema {
     auto citations = scenario_schema->works_cited().citation();
     for (auto citation : citations) {
       pfc::Citation temp;
-      //temp.id = std::stoi(citation.uuid().substr(citation.uuid().find("_")+1));
+      temp.uuid = QString::fromStdString(citation.uuid());
       temp.title = QString::fromStdString(citation.title());
       temp.authors = QString::fromStdString(citation.authors().back());
       temp.year = QString::fromStdString(citation.date());
@@ -546,7 +587,7 @@ namespace schema {
     auto equipments = scenario_schema->equipment().equipment();
     for (auto equipment : equipments) {
       pfc::Equipment temp;
-      //temp.id = std::stoi(equipment.id().substr(equipment.id().find("_")+1));
+      temp.uuid = QString::fromStdString(equipment.id());
       temp.name = QString::fromStdString(equipment.name());
       temp.description = QString::fromStdString(equipment.description());
       temp.type = equipment.type().get();
@@ -587,6 +628,8 @@ namespace schema {
 
         temp.equipment = QString::fromStdString(event.equipment());
         temp.details = QString::fromStdString(event.details());
+
+        //TODO: Convert UUID to FK
         if (!_db.update_event(&temp)) {
           wasSuccessful = false;
           return scenario_schema;
@@ -602,6 +645,7 @@ namespace schema {
     auto injuries = scenario_schema->trauma_definitions().trauma();
     for (auto& injury : injuries) {
       pfc::Injury temp;
+      temp.uuid = QString::fromStdString(injury.id());
       temp.medical_name = QString::fromStdString(injury.medical_name());
       temp.common_name = QString::fromStdString(*injury.common_name()); // Why is this different from medical_name at all?
       temp.description = QString::fromStdString(injury.description());
@@ -631,6 +675,7 @@ namespace schema {
     auto trauma_profiles = trauma_sets.trauma_profile();
     for (auto trauma_profile : trauma_profiles) {
       pfc::InjurySet temp;
+      temp.uuid = QString::fromStdString(trauma_profile.id());
       temp.name = QString::fromStdString(trauma_profile.name());
       std::string injuries;
       std::string locations;
@@ -683,6 +728,7 @@ namespace schema {
     auto objectives = scenario_schema->syllabus().learning_objectives().objective();
     for (auto objective : objectives) {
       pfc::Objective temp;
+      temp.uuid = QString::fromStdString(objective.id());
       temp.name = QString::fromStdString(objective.name());
       temp.description = QString::fromStdString(objective.description());
       std::string citations;
@@ -708,6 +754,7 @@ namespace schema {
     auto roles = scenario_schema->medical_scenario().roles().role();
     for (auto role : roles) {
       pfc::Role temp;
+      temp.uuid = QString::fromStdString(role.id());
       temp.name = QString::fromStdString(role.name());
       temp.description = QString::fromStdString(role.description());
       if (!_db.update_role(&temp)) {
@@ -724,7 +771,7 @@ namespace schema {
     auto& scenes = scenario_schema->medical_scenario().training_script().scene();
     for (auto& scene : scenes) {
       pfc::Scene temp;
-      temp.id = -1;
+      temp.uuid = QString::fromStdString(scene.id());
       temp.name = QString::fromStdString(scene.name());
       temp.description = QString::fromStdString(scene.description());
       temp.time_of_day = QString("%1").arg(scene.time_of_day());
@@ -740,7 +787,7 @@ namespace schema {
 
       pfc::Location temp_location;
       temp_location.id = -1;
-      temp_location.name = QString::fromStdString(std::string(scene.name()) + " Location");
+      temp_location.name = generate_location_name(scene.name());
 
       if (!_db.select_location(&temp_location)) {
         wasSuccessful = false;
@@ -821,6 +868,7 @@ namespace schema {
     auto treatments = scenario_schema->treatment_plans().treatment_plan();
     for (auto treatment : treatments) {
       pfc::Treatment temp;
+      temp.uuid = QString::fromStdString(treatment.id());
       temp.medical_name = QString::fromStdString(treatment.medical_name().get());
       temp.common_name = QString::fromStdString(*treatment.common_name()); // Why is this different from medical_name at all?
       temp.description = QString::fromStdString(treatment.description());

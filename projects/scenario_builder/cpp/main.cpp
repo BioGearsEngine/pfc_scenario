@@ -48,7 +48,6 @@ int main(int argc, char* argv[])
   qmlRegisterType<pfc::RoleMap>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "RoleMap");
   qmlRegisterType<pfc::Objective>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Objective");
   qmlRegisterType<pfc::Property>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Property");
-  qmlRegisterType<pfc::Restriction>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Restriction");
   qmlRegisterType<pfc::Role>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Role");
   qmlRegisterType<pfc::Treatment>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Treatment");
   qmlRegisterType<pfc::Scene>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Scene");

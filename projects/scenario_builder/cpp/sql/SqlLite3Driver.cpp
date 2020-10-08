@@ -20,6 +20,7 @@ specific language governing permissions and limitations under the License.
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <QtGlobal>
+#include <QUuid>
 
 #include <fstream>
 #include <iostream>
@@ -173,10 +174,8 @@ bool SQLite3Driver::initialize_db()
     { tables[LOCATIONS], sqlite3::create_locations_table },
     { tables[LOCATION_MAPS], sqlite3::create_location_maps_table },
     { tables[ROLE_MAPS], sqlite3::create_role_maps_table },
-    { tables[RESTRICTION_MAPS], sqlite3::create_restriction_maps_table },
     { tables[OBJECTIVES], sqlite3::create_objectives_table },
     { tables[PROPERTIES], sqlite3::create_properties_table },
-    { tables[RESTRICTIONS], sqlite3::create_restrictions_table },
     { tables[ROLES], sqlite3::create_roles_table },
     { tables[SCENES], sqlite3::create_scenes_table },
     { tables[TREATMENTS], sqlite3::create_treatments_table }
@@ -383,7 +382,7 @@ bool SQLite3Driver::populate_equipment()
     transfusion_supplies,
     infusion_supplies,
     catheter_supplies;
-    
+
   tourniquet.name = "Tourniquet";
   tourniquet.description = "A device which applies pressure to a limb or extremity in order to limit the flow of blood.";
   temp.assign(tourniquet);
@@ -892,7 +891,7 @@ int SQLite3Driver::nextID(Sqlite3Table table) const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 1);
+      
       return record.value(0).toInt() + 1;
     }
   }
@@ -902,6 +901,7 @@ int SQLite3Driver::nextID(Sqlite3Table table) const
 inline void assign_assessment(const QSqlRecord& record, Assessment& assessment)
 {
   assessment.id = record.value(ASSESSMENT_ID).toInt();
+  assessment.uuid = record.value(ASSESSMENT_UUID).toString();
   assessment.name = record.value(ASSESSMENT_NAME).toString();
   assessment.description = record.value(ASSESSMENT_DESCRIPTION).toString();
   assessment.type = record.value(ASSESSMENT_TYPE).toString();
@@ -917,7 +917,7 @@ int SQLite3Driver::assessment_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 1);
+      
       return record.value(0).toInt();
     }
   }
@@ -936,7 +936,7 @@ void SQLite3Driver::assessments()
     while (query.next()) {
       auto assessment = std::make_unique<pfc::Assessment>();
       auto record = query.record();
-      assert(record.count() == 6);
+      
       assign_assessment(record, *assessment);
       _assessments.push_back(assessment.release());
     }
@@ -995,6 +995,10 @@ bool SQLite3Driver::update_assessment(Assessment* assessment)
     } else if (!assessment->name.isEmpty()) {
       query.prepare(sqlite3::insert_or_update_assessments);
     }
+    if (assessment->uuid == "") {
+      assessment->uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
+    }
+    query.bindValue(":uuid", assessment->uuid);
     query.bindValue(":name", assessment->name);
     query.bindValue(":description", assessment->description);
     query.bindValue(":type", assessment->type);
@@ -1040,6 +1044,7 @@ bool SQLite3Driver::remove_assessment(Assessment* assessment)
 inline void assign_author(const QSqlRecord& record, Author& author)
 {
   author.id = record.value(AUTHOR_ID).toInt();
+  author.uuid = record.value(AUTHOR_UUID).toString();
   author.first = record.value(AUTHOR_FIRST_NAME).toString();
   author.last = record.value(AUTHOR_LAST_NAME).toString();
   author.email = record.value(AUTHOR_EMAIL).toString();
@@ -1073,7 +1078,7 @@ int SQLite3Driver::author_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 1);
+      
       return record.value(0).toInt();
     }
   }
@@ -1091,7 +1096,7 @@ void SQLite3Driver::authors()
     while (query.next()) {
       auto author = std::make_unique<Author>();
       auto record = query.record();
-      assert(record.count() == 9);
+      
       assign_author(record, *author);
       _authors.push_back(author.release());
     }
@@ -1145,6 +1150,10 @@ bool SQLite3Driver::update_author(Author* author)
       QSqlQuery query{ QSqlDatabase::database(_db_name) };
 
       query.prepare(sqlite3::insert_or_update_authors);
+      if (author->uuid == "") {
+        author->uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
+      }
+      query.bindValue(":uuid", author->uuid);
       query.bindValue(":name_first", author->first);
       query.bindValue(":name_last", author->last);
       query.bindValue(":email", author->email);
@@ -1181,6 +1190,10 @@ bool SQLite3Driver::update_first_author(Author* author)
     if (!author->email.isEmpty()) {
       QSqlQuery query{ QSqlDatabase::database(_db_name) };
       query.prepare(sqlite3::insert_or_update_first_author);
+      if (author->uuid == "") {
+        author->uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
+      }
+      query.bindValue(":uuid", author->uuid);
       query.bindValue(":name_first", author->first);
       query.bindValue(":name_last", author->last);
       query.bindValue(":email", author->email);
@@ -1229,6 +1242,7 @@ bool SQLite3Driver::remove_author(Author* author)
 inline void assign_citation(const QSqlRecord& record, Citation& citation)
 {
   citation.id = record.value(CITATION_ID).toInt();
+  citation.uuid = record.value(CITATION_UUID).toString();
   citation.key = record.value(CITATION_KEY).toString();
   citation.title = record.value(CITATION_TITLE).toString();
   citation.authors = record.value(CITATION_AUTHORS).toString();
@@ -1244,7 +1258,7 @@ int SQLite3Driver::citation_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 1);
+      
       return record.value(0).toInt();
     }
   }
@@ -1260,7 +1274,7 @@ int SQLite3Driver::citation_count(Scene* scene) const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 1);
+      
       return record.value(0).toInt();
     }
   }
@@ -1279,7 +1293,6 @@ void SQLite3Driver::citations()
     while (query.next()) {
       auto citation = std::make_unique<pfc::Citation>();
       auto record = query.record();
-      assert(record.count() == 6);
       assign_citation(record, *citation);
       _citations.push_back(citation.release());
     }
@@ -1348,6 +1361,10 @@ bool SQLite3Driver::update_citation(Citation* citation)
       citation->key = (first_author.empty()) ? citation->title.toLower().simplified().remove(' ')
                                              : QString("%1%2").arg(first_author[0]).arg(citation->year);
     }
+    if (citation->uuid == "") {
+      citation->uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
+    }
+    query.bindValue(":uuid", citation->uuid);
     query.bindValue(":key", citation->key);
     query.bindValue(":title", citation->title);
     query.bindValue(":authors", citation->authors);
@@ -1410,7 +1427,10 @@ bool SQLite3Driver::remove_citation(Citation* citation)
         qWarning() << query_map.lastError();
         return false;
       }
-      return (remove_citation_from_equipment(citation->id) && remove_citation_from_treatments(citation->id) && remove_citation_from_injuries(citation->id) && remove_citation_from_objectives(citation->id));
+      return (remove_citation_from_equipment(citation->id) 
+		  && remove_citation_from_treatments(citation->id)
+		  && remove_citation_from_injuries(citation->id) 
+		  && remove_citation_from_objectives(citation->id));
     } else {
       return false;
     }
@@ -1429,6 +1449,7 @@ bool SQLite3Driver::remove_citation_from_scene(Citation* citation, Scene* scene)
 inline void assign_injury(const QSqlRecord& record, Injury& injury)
 {
   injury.id = record.value(INJURY_ID).toInt();
+  injury.uuid = record.value(INJURY_UUID).toString();
   injury.medical_name = record.value(INJURY_MEDICAL_NAME).toString();
   injury.common_name = record.value(INJURY_COMMON_NAME).toString();
   injury.description = record.value(INJURY_DESCRIPTION).toString();
@@ -1445,7 +1466,7 @@ int SQLite3Driver::injury_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 1);
+      
       return record.value(0).toInt();
     }
   }
@@ -1464,7 +1485,7 @@ void SQLite3Driver::injuries()
     while (query.next()) {
       auto injury = std::make_unique<pfc::Injury>();
       auto record = query.record();
-      assert(record.count() == INJURY_COLUMN_COUNT);
+      
       assign_injury(record, *injury);
       _injuries.push_back(injury.release());
     }
@@ -1528,7 +1549,10 @@ bool SQLite3Driver::update_injury(Injury* injury)
     } else if (!injury->common_name.isEmpty()) {
       query.prepare(sqlite3::insert_or_update_injuries);
     }
-
+    if (injury->uuid == "") {
+      injury->uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
+    }
+    query.bindValue(":uuid", injury->uuid);
     query.bindValue(":citations", injury->citations);
     query.bindValue(":medical_name", injury->medical_name);
     query.bindValue(":common_name", injury->common_name);
@@ -1575,6 +1599,7 @@ bool SQLite3Driver::remove_injury(Injury* injury)
 inline void assign_injury_set(const QSqlRecord& record, InjurySet& injury)
 {
   injury.id = record.value(INJURY_SET_ID).toInt();
+  injury.uuid = record.value(INJURY_SET_UUID).toString();
   injury.name = record.value(INJURY_SET_NAME).toString();
   injury.description = record.value(INJURY_SET_DESCRIPTION).toString();
   injury.injuries = record.value(INJURY_SET_INJURIES).toString();
@@ -1590,7 +1615,7 @@ int SQLite3Driver::injury_set_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 1);
+      
       return record.value(0).toInt();
     }
   }
@@ -1609,7 +1634,7 @@ void SQLite3Driver::injury_sets()
     while (query.next()) {
       auto set = std::make_unique<pfc::InjurySet>();
       auto record = query.record();
-      assert(record.count() == INJURY_SET_COLUMN_COUNT);
+      
       assign_injury_set(record, *set);
       _injury_sets.push_back(set.release());
     }
@@ -1668,6 +1693,10 @@ bool SQLite3Driver::update_injury_set(InjurySet* injury_set)
     } else if (!injury_set->name.isEmpty()) {
       query.prepare(sqlite3::insert_or_update_injury_sets);
     }
+    if (injury_set->uuid == "") {
+      injury_set->uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
+    }
+    query.bindValue(":uuid", injury_set->uuid);
     query.bindValue(":name", injury_set->name);
     query.bindValue(":description", injury_set->description);
     query.bindValue(":injuries", injury_set->injuries);
@@ -1713,6 +1742,7 @@ bool SQLite3Driver::remove_injury_set(InjurySet* injury_set)
 inline void assign_event(QSqlRecord& record, Event& event)
 {
   event.id = record.value(EVENT_ID).toInt();
+  event.uuid = record.value(EVENT_UUID).toString();
   event.name = record.value(EVENT_NAME).toString();
   event.description = record.value(EVENT_DESCRIPTION).toString();
   event.fidelity = record.value(EVENT_FIDELITY).toString();
@@ -1731,7 +1761,7 @@ int SQLite3Driver::event_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 1);
+      
       return record.value(0).toInt();
     }
   }
@@ -1747,7 +1777,7 @@ int SQLite3Driver::event_count(Scene* scene) const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 1);
+      
       return record.value(0).toInt();
     }
   }
@@ -1766,7 +1796,7 @@ void SQLite3Driver::events()
     while (query.next()) {
       auto event = std::make_unique<pfc::Event>();
       auto record = query.record();
-      assert(record.count() == EVENT_COLUMN_COUNT);
+      
       assign_event(record, *event);
       _events.push_back(event.release());
     }
@@ -1787,7 +1817,7 @@ void SQLite3Driver::events_in_scene(Scene* scene)
     while (query.next()) {
       auto event = std::make_unique<pfc::Event>();
       auto record = query.record();
-      assert(record.count() == EVENT_COLUMN_COUNT);
+      
       assign_event(record, *event);
       _events.push_back(event.release());
     }
@@ -1846,6 +1876,10 @@ bool SQLite3Driver::update_event(Event* event)
     } else if (!event->name.isEmpty()) {
       query.prepare(sqlite3::insert_or_update_events);
     }
+    if (event->uuid == "") {
+      event->uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
+    }
+    query.bindValue(":uuid", event->uuid);
     query.bindValue(":equipment", event->equipment);
     query.bindValue(":name", event->name);
     query.bindValue(":description", event->description);
@@ -1929,6 +1963,7 @@ bool SQLite3Driver::remove_event_from_scene(Event* event, Scene* scene)
 inline void assign_location(const QSqlRecord& record, Location& location)
 {
   location.id = record.value(LOCATION_ID).toInt();
+  location.uuid = record.value(LOCATION_UUID).toString();
   location.name = record.value(LOCATION_NAME).toString();
   location.environment = record.value(LOCATION_ENVIRONMENT).toString();
 }
@@ -1941,7 +1976,7 @@ int SQLite3Driver::location_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 1);
+      
       return record.value(0).toInt();
     }
   }
@@ -1960,7 +1995,7 @@ void SQLite3Driver::locations()
     while (query.next()) {
       auto location = std::make_unique<pfc::Location>();
       auto record = query.record();
-      assert(record.count() == LOCATION_COLUMN_COUNT);
+      
       assign_location(record, *location);
       _locations.push_back(location.release());
     }
@@ -2019,7 +2054,10 @@ bool SQLite3Driver::update_location(Location* location)
     } else if (!location->name.isEmpty()) {
       query.prepare(sqlite3::insert_or_update_locations);
     }
-
+    if (location->uuid == "") {
+      location->uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
+    }
+    query.bindValue(":uuid", location->uuid);
     query.bindValue(":name", location->name);
     query.bindValue(":environment", location->environment);
     if (!query.exec()) {
@@ -2047,7 +2085,7 @@ int SQLite3Driver::location_count(Scene* scene) const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 1);
+      
       return record.value(0).toInt();
     }
   }
@@ -2163,6 +2201,7 @@ bool SQLite3Driver::remove_location_from_scene(Location* location, Scene* scene)
 inline void assign_equipment(const QSqlRecord& record, Equipment& equipment)
 {
   equipment.id = record.value(EQUIPMENT_ID).toInt();
+  equipment.uuid = record.value(EQUIPMENT_UUID).toString();
   equipment.name = record.value(EQUIPMENT_NAME).toString();
   equipment.type = record.value(EQUIPMENT_TYPE).toInt();
   equipment.description = record.value(EQUIPMENT_DESCRIPTION).toString();
@@ -2179,7 +2218,7 @@ int SQLite3Driver::equipment_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 1);
+      
       return record.value(0).toInt();
     }
   }
@@ -2195,7 +2234,7 @@ int SQLite3Driver::equipment_count(Scene* scene) const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 1);
+      
       return record.value(0).toInt();
     }
   }
@@ -2214,7 +2253,7 @@ void SQLite3Driver::equipments()
     while (query.next()) {
       auto equipment = std::make_unique<pfc::Equipment>();
       auto record = query.record();
-      assert(record.count() == EQUIPMENT_COLUMN_COUNT);
+      
       assign_equipment(record, *equipment);
       _equipments.push_back(equipment.release());
     }
@@ -2293,6 +2332,10 @@ bool SQLite3Driver::update_equipment(Equipment* equipment)
     } else if (!equipment->name.isEmpty()) {
       query.prepare(sqlite3::insert_or_update_equipments);
     }
+    if (equipment->uuid == "") {
+      equipment->uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
+    }
+    query.bindValue(":uuid", equipment->uuid);
     query.bindValue(":name", equipment->name);
     query.bindValue(":type", equipment->type);
     query.bindValue(":description", equipment->description);
@@ -2376,6 +2419,7 @@ bool SQLite3Driver::remove_equipment_from_scene(Equipment* equipment, Scene* sce
 inline void assign_objective(const QSqlRecord& record, Objective& objective)
 {
   objective.id = record.value(OBJECTIVE_ID).toInt();
+  objective.uuid = record.value(OBJECTIVE_UUID).toString();
   objective.name = record.value(OBJECTIVE_NAME).toString();
   objective.description = record.value(OBJECTIVE_DESCRIPTION).toString();
   objective.citations = record.value(OBJECTIVE_CITATIONS).toString();
@@ -2390,7 +2434,7 @@ int SQLite3Driver::objective_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 1);
+      
       return record.value(0).toInt();
     }
   }
@@ -2409,7 +2453,7 @@ void SQLite3Driver::objectives()
     while (query.next()) {
       auto objective = std::make_unique<pfc::Objective>();
       auto record = query.record();
-      assert(record.count() == OBJECTIVE_COLUMN_COUNT);
+      
       assign_objective(record, *objective);
       _objectives.push_back(objective.release());
     }
@@ -2468,7 +2512,10 @@ bool SQLite3Driver::update_objective(Objective* objective)
     } else if (!objective->name.isEmpty()) {
       query.prepare(sqlite3::insert_or_update_objective);
     }
-
+    if (objective->uuid == "") {
+      objective->uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
+    }
+    query.bindValue(":uuid", objective->uuid);
     query.bindValue(":name", objective->name);
     query.bindValue(":description", objective->description);
     query.bindValue(":citations", objective->citations);
@@ -2524,7 +2571,7 @@ int SQLite3Driver::property_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 1);
+      
       return record.value(0).toInt();
     }
   }
@@ -2544,7 +2591,7 @@ void SQLite3Driver::properties()
       auto property = std::make_unique<pfc::Property>();
       auto record = query.record();
       int ct = record.count();
-      assert(record.count() == PROPERTY_COLUMN_COUNT);
+      
       assign_property(record, *property);
       _properties.push_back(property.release());
     }
@@ -2641,6 +2688,7 @@ bool SQLite3Driver::remove_property(Property* property)
 inline void assign_role(QSqlRecord& record, Role& role)
 {
   role.id = record.value(ROLE_ID).toInt();
+  role.uuid = record.value(ROLE_UUID).toString();
   role.name = record.value(ROLE_NAME).toString();
   role.description = record.value(ROLE_DESCRIPTION).toString();
 }
@@ -2653,7 +2701,7 @@ int SQLite3Driver::role_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 1);
+      
       return record.value(0).toInt();
     }
   }
@@ -2669,7 +2717,7 @@ int SQLite3Driver::role_count(Scene* scene) const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 1);
+      
       return record.value(0).toInt();
     }
   }
@@ -2688,7 +2736,7 @@ void SQLite3Driver::roles()
     while (query.next()) {
       auto role = std::make_unique<pfc::Role>();
       auto record = query.record();
-      assert(record.count() == ROLE_COLUMN_COUNT);
+      
       assign_role(record, *role);
       _roles.push_back(role.release());
     }
@@ -2785,6 +2833,10 @@ bool SQLite3Driver::update_role(Role* role)
     } else if (!role->name.isEmpty()) {
       query.prepare(sqlite3::insert_or_update_roles);
     }
+    if (role->uuid == "") {
+      role->uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
+    }
+    query.bindValue(":uuid", role->uuid);
     query.bindValue(":description", role->description);
     query.bindValue(":name", role->name);
     if (!query.exec()) {
@@ -2858,195 +2910,11 @@ bool SQLite3Driver::remove_role_from_scene(Role* role, Scene* scene)
   map.fk_role = role->id;
   return remove_role_map_by_fk(&map);
 }
-//-----------------------------RESTRICTION---------------------------------------
-inline void assign_restriction(const QSqlRecord& record, Restriction& restriction)
-{
-  restriction.id = record.value(RESTRICTION_ID).toInt();
-  restriction.name = record.value(RESTRICTION_NAME).toString();
-  restriction.value = record.value(RESTRICTION_VALUE).toString();
-}
-int SQLite3Driver::restriction_count() const
-
-{
-  if (QSqlDatabase::database(_db_name).isOpen()) {
-
-    QSqlQuery query{ QSqlDatabase::database(_db_name) };
-    query.prepare(sqlite3::count_restrictions);
-    query.exec();
-    if (query.next()) {
-      auto record = query.record();
-      assert(record.count() == 1);
-      return record.value(0).toInt();
-    }
-  }
-  return -1;
-}
-int SQLite3Driver::restriction_count(Scene* scene) const
-{
-  if (QSqlDatabase::database(_db_name).isOpen()) {
-
-    QSqlQuery query{ QSqlDatabase::database(_db_name) };
-    query.prepare(sqlite3::count_restrictions_in_scene);
-    query.bindValue(":id", scene->id);
-    query.exec();
-    if (query.next()) {
-      auto record = query.record();
-      assert(record.count() == 1);
-      return record.value(0).toInt();
-    }
-  }
-  return -1;
-}
-void SQLite3Driver::restrictions()
-{
-  qDeleteAll(_restrictions);
-  _restrictions.clear();
-
-  if (QSqlDatabase::database(_db_name).isOpen()) {
-
-    QSqlQuery query{ QSqlDatabase::database(_db_name) };
-    query.prepare(sqlite3::select_all_restrictions);
-    query.exec();
-    while (query.next()) {
-      auto restriction = std::make_unique<pfc::Restriction>();
-      auto record = query.record();
-      assert(record.count() == RESTRICTION_COLUMN_COUNT);
-      assign_restriction(record, *restriction);
-      _restrictions.push_back(restriction.release());
-    }
-    _current_restriction = _restrictions.begin();
-    emit restrictionsChanged();
-  }
-}
-bool SQLite3Driver::next_restriction(Restriction* restriction)
-{
-  if (_current_restriction == _restrictions.end() || _restrictions.empty()) {
-    return false;
-  }
-  restriction->assign(*(*_current_restriction));
-  ++_current_restriction;
-
-  return true;
-}
-bool SQLite3Driver::select_restriction(Restriction* restriction) const
-{
-
-  if (QSqlDatabase::database(_db_name).isOpen()) {
-    QSqlQuery query(QSqlDatabase::database(_db_name));
-    QSqlRecord record;
-    if (restriction->id != -1) {
-      query.prepare(sqlite3::select_restriction_by_id);
-      query.bindValue(":id", restriction->id);
-    } else if (!restriction->name.isEmpty()) {
-      query.prepare(sqlite3::select_restriction_by_name);
-      query.bindValue(":name", restriction->name);
-    } else {
-      qWarning() << "Provided Property has no id or name one is required";
-      return false;
-    }
-    if (query.exec()) {
-      while (query.next()) {
-        record = query.record();
-        assign_restriction(record, *restriction);
-        return true;
-      }
-    } else {
-      qWarning() << "select_restriction" << query.lastError();
-    }
-    return false;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-bool SQLite3Driver::update_restriction(Restriction* restriction)
-{
-
-  if (QSqlDatabase::database(_db_name).isOpen()) {
-    QSqlQuery query{ QSqlDatabase::database(_db_name) };
-    if (-1 != restriction->id) {
-      query.prepare(sqlite3::update_restriction_by_id);
-      query.bindValue(":id", restriction->id);
-    } else if (!restriction->name.isEmpty()) {
-      query.prepare(sqlite3::insert_or_update_restrictions);
-    }
-
-    query.bindValue(":name", restriction->name);
-    query.bindValue(":value", restriction->value);
-    if (!query.exec()) {
-      qWarning() << "update_restriction" << query.lastError();
-      return false;
-    }
-    if (-1 == restriction->id) {
-      const auto r = select_restriction(restriction);
-      restrictionUpdated(restriction->id);
-      return r;
-    }
-    restrictionUpdated(restriction->id);
-    return true;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-bool SQLite3Driver::update_restriction_in_scene(Scene* scene, Restriction* restriction)
-{
-  if (QSqlDatabase::database(_db_name).isOpen()) {
-    QSqlQuery query{ QSqlDatabase::database(_db_name) };
-    if (select_scene(scene)) {
-      if (!select_restriction(restriction)) {
-        update_restriction(restriction);
-      }
-      RestrictionMap map;
-      map.fk_restriction = restriction->id;
-      map.fk_scene = scene->id;
-      if (!select_restriction_map(&map)) {
-        update_restriction_map(&map);
-      }
-      return true;
-    }
-    qWarning() << "Scene not found";
-    return false;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-bool SQLite3Driver::remove_restriction(Restriction* restriction)
-{
-  if (QSqlDatabase::database(_db_name).isOpen()) {
-    QSqlQuery query(QSqlDatabase::database(_db_name));
-    if (select_restriction(restriction)) {
-      query.prepare(sqlite3::delete_restriction_by_id);
-      query.bindValue(":id", restriction->id);
-      if (!query.exec()) {
-        qWarning() << "remove_restriction" << query.lastError();
-        return false;
-      }
-      restrictionRemoved(restriction->id);
-      QSqlQuery query_map(QSqlDatabase::database(_db_name));
-      query_map.prepare(sqlite3::delete_restriction_map_by_fk_restriction);
-      query_map.bindValue(":fk_restriction", restriction->id);
-      if (!query_map.exec()) {
-        qWarning() << query_map.lastError();
-        return false;
-      }
-      return true;
-    } else {
-      return false;
-    }
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-bool SQLite3Driver::remove_restriction_from_scene(Restriction* restriction, Scene* scene)
-{
-  pfc::RestrictionMap map;
-  map.fk_scene = scene->id;
-  map.fk_restriction = restriction->id;
-  return remove_restriction_map_by_fk(&map);
-}
 //-----------------------------SCENE---------------------------------------------
 inline void assign_scene(QSqlRecord& record, Scene& scene)
 {
   scene.id = record.value(SCENE_ID).toInt();
+  scene.uuid = record.value(SCENE_UUID).toString();
   scene.name = record.value(SCENE_NAME).toString();
   scene.description = record.value(SCENE_DESCRIPTION).toString();
   scene.time_of_day = record.value(SCENE_TIME_OF_DAY).toString();
@@ -3066,7 +2934,7 @@ int SQLite3Driver::scene_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 1);
+      
       return record.value(0).toInt();
     }
   }
@@ -3085,7 +2953,7 @@ void SQLite3Driver::scenes()
     while (query.next()) {
       auto scene = std::make_unique<pfc::Scene>();
       auto record = query.record();
-      assert(record.count() == SCENE_COLUMN_COUNT);
+      
       assign_scene(record, *scene);
       _scenes.push_back(scene.release());
     }
@@ -3145,6 +3013,10 @@ bool SQLite3Driver::update_scene(Scene* scene)
     } else if (!scene->name.isEmpty()) {
       query.prepare(sqlite3::insert_or_update_scenes);
     }
+    if (scene->uuid == "") {
+      scene->uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
+    }
+    query.bindValue(":uuid", scene->uuid);
     query.bindValue(":name", scene->name);
     query.bindValue(":description", scene->description);
     query.bindValue(":time_of_day", scene->time_of_day);
@@ -3207,13 +3079,6 @@ bool SQLite3Driver::remove_scene(Scene* scene)
         qWarning() << query_event_map.lastError();
         return false;
       }
-      QSqlQuery query_restriction_map(QSqlDatabase::database(_db_name));
-      query_restriction_map.prepare(sqlite3::delete_restriction_map_by_fk_scene);
-      query_restriction_map.bindValue(":fk_scene", scene->id);
-      if (!query_restriction_map.exec()) {
-        qWarning() << query_restriction_map.lastError();
-        return false;
-      }
       QSqlQuery query_equipment_map(QSqlDatabase::database(_db_name));
       query_equipment_map.prepare(sqlite3::delete_all_equipment_from_a_scene);
       query_equipment_map.bindValue(":fk_scene", scene->id);
@@ -3267,6 +3132,7 @@ bool SQLite3Driver::remove_scene(Scene* scene)
 inline void assign_treatment(const QSqlRecord& record, Treatment& treatment)
 {
   treatment.id = record.value(TREATMENT_ID).toInt();
+  treatment.uuid = record.value(TREATMENT_UUID).toString();
   treatment.medical_name = record.value(TREATMENT_MEDICAL_NAME).toString();
   treatment.common_name = record.value(TREATMENT_COMMON_NAME).toString();
   treatment.description = record.value(TREATMENT_DESCRIPTION).toString();
@@ -3282,7 +3148,7 @@ int SQLite3Driver::treatment_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 1);
+      
       return record.value(0).toInt();
     }
   }
@@ -3301,7 +3167,7 @@ void SQLite3Driver::treatments()
     while (query.next()) {
       auto treatment = std::make_unique<pfc::Treatment>();
       auto record = query.record();
-      assert(record.count() == TREATMENT_COLUMN_COUNT);
+      
       assign_treatment(record, *treatment);
       _treatments.push_back(treatment.release());
     }
@@ -3365,6 +3231,10 @@ bool SQLite3Driver::update_treatment(Treatment* treatment)
     } else if (!treatment->common_name.isEmpty()) {
       query.prepare(sqlite3::insert_or_update_treatments);
     }
+    if (treatment->uuid == "") {
+      treatment->uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
+    }
+    query.bindValue(":uuid", treatment->uuid);
     query.bindValue(":citations", treatment->citations);
     query.bindValue(":equipment", treatment->equipment);
     query.bindValue(":medical_name", treatment->medical_name);
@@ -3409,9 +3279,9 @@ bool SQLite3Driver::remove_treatment(Treatment* treatment)
 //-----------------------------MAP------------------------------------------
 inline void assign_role_map(const QSqlRecord& record, RoleMap& map)
 {
-  map.id = record.value(MAP_ID).toInt();
-  map.fk_scene = record.value(MAP_FK_SCENE).toInt();
-  map.fk_role = record.value(MAP_FK_ROLE).toInt();
+  map.id = record.value(ROLE_MAP_ID).toInt();
+  map.fk_scene = record.value(ROLE_MAP_FK_SCENE).toInt();
+  map.fk_role = record.value(ROLE_MAP_FK_ROLE).toInt();
 }
 int SQLite3Driver::role_map_count() const
 {
@@ -3422,7 +3292,7 @@ int SQLite3Driver::role_map_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 1);
+      
       return record.value(0).toInt();
     }
   }
@@ -3441,7 +3311,7 @@ void SQLite3Driver::role_maps()
     while (query.next()) {
       auto map = std::make_unique<pfc::RoleMap>();
       auto record = query.record();
-      assert(record.count() == MAP_COLUMN_COUNT);
+      
       assign_role_map(record, *map);
       _role_maps.push_back(map.release());
     }
@@ -3575,7 +3445,7 @@ int SQLite3Driver::event_map_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 1);
+      
       return record.value(0).toInt();
     }
   }
@@ -3594,7 +3464,7 @@ void SQLite3Driver::event_maps()
     while (query.next()) {
       auto map = std::make_unique<pfc::EventMap>();
       auto record = query.record();
-      assert(record.count() == EVENT_MAP_COLUMN_COUNT);
+      
       assign_event_map(record, *map);
       _event_maps.push_back(map.release());
     }
@@ -3728,7 +3598,7 @@ int SQLite3Driver::location_map_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 1);
+      
       return record.value(0).toInt();
     }
   }
@@ -3744,7 +3614,7 @@ int SQLite3Driver::location_map_count(Scene* scene) const //we currently only su
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 1);
+      
       return record.value(0).toInt();
     }
   }
@@ -3763,7 +3633,7 @@ void SQLite3Driver::location_maps()
     while (query.next()) {
       auto map = std::make_unique<pfc::LocationMap>();
       auto record = query.record();
-      assert(record.count() == LOCATION_MAP_COLUMN_COUNT);
+      
       assign_location_map(record, *map);
       _location_maps.push_back(map.release());
     }
@@ -3897,7 +3767,7 @@ int SQLite3Driver::citation_map_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 1);
+      
       return record.value(0).toInt();
     }
   }
@@ -3916,7 +3786,7 @@ void SQLite3Driver::citation_maps()
     while (query.next()) {
       auto map = std::make_unique<pfc::CitationMap>();
       auto record = query.record();
-      assert(record.count() == CITATION_MAP_COLUMN_COUNT);
+      
       assign_citation_map(record, *map);
       _citation_maps.push_back(map.release());
     }
@@ -4062,7 +3932,7 @@ int SQLite3Driver::equipment_map_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      assert(record.count() == 1);
+      
       return record.value(0).toInt();
     }
   }
@@ -4081,7 +3951,7 @@ void SQLite3Driver::equipment_maps()
     while (query.next()) {
       auto map = std::make_unique<pfc::EquipmentMap>();
       auto record = query.record();
-      assert(record.count() == EQUIPMENT_MAP_COLUMN_COUNT);
+      
       assign_equipment_map(record, *map);
       _equipment_maps.push_back(map.release());
     }
@@ -4264,159 +4134,7 @@ bool SQLite3Driver::remove_equipment_map_by_fk(EquipmentMap* map)
   qWarning() << "No Database connection";
   return false;
 }
-//------------------------------RESTRICTION MAP---------------------------------------
-inline void assign_restriction_map(const QSqlRecord& record, RestrictionMap& map)
-{
-  map.id = record.value(RESTRICTION_MAP_ID).toInt();
-  map.fk_scene = record.value(RESTRICTION_MAP_FK_SCENE).toInt();
-  map.fk_restriction = record.value(RESTRICTION_MAP_FK_RESTRICTION).toInt();
-}
-int SQLite3Driver::restriction_map_count() const
-{
-  if (QSqlDatabase::database(_db_name).isOpen()) {
 
-    QSqlQuery query{ QSqlDatabase::database(_db_name) };
-    query.prepare(sqlite3::count_restriction_maps);
-    query.exec();
-    if (query.next()) {
-      auto record = query.record();
-      assert(record.count() == 1);
-      return record.value(0).toInt();
-    }
-  }
-  return -1;
-}
-void SQLite3Driver::restriction_maps()
-{
-  qDeleteAll(_restriction_maps);
-  _restriction_maps.clear();
-
-  if (QSqlDatabase::database(_db_name).isOpen()) {
-
-    QSqlQuery query{ QSqlDatabase::database(_db_name) };
-    query.prepare(sqlite3::select_all_restriction_maps);
-    query.exec();
-    while (query.next()) {
-      auto map = std::make_unique<pfc::RestrictionMap>();
-      auto record = query.record();
-      assert(record.count() == RESTRICTION_MAP_COLUMN_COUNT);
-      assign_restriction_map(record, *map);
-      _restriction_maps.push_back(map.release());
-    }
-    _current_restriction_map = _restriction_maps.begin();
-    emit restrictionMapChanged();
-  }
-}
-bool SQLite3Driver::next_restriction_map(RestrictionMap* map)
-{
-  if (_current_restriction_map == _restriction_maps.end() || _restriction_maps.empty()) {
-    return false;
-  }
-  map->assign(*(*_current_restriction_map));
-  ++_current_restriction_map;
-
-  return true;
-}
-bool SQLite3Driver::select_restriction_map(RestrictionMap* map) const
-{
-
-  if (QSqlDatabase::database(_db_name).isOpen()) {
-    QSqlQuery query(QSqlDatabase::database(_db_name));
-    QSqlRecord record;
-    if (map->id != -1) {
-      query.prepare(sqlite3::select_restriction_map_by_id);
-      query.bindValue(":id", map->id);
-    } else if (map->fk_scene != -1) {
-      query.prepare(sqlite3::select_restriction_map_by_fk);
-      query.bindValue(":fk_scene", map->fk_scene);
-      query.bindValue(":fk_restriction", map->fk_restriction);
-    } else {
-      qWarning() << "Provided Property has no id, fk_scene, or fk_restriction one is required";
-      return false;
-    }
-    if (query.exec()) {
-      while (query.next()) {
-        record = query.record();
-        assign_restriction_map(record, *map);
-        return true;
-      }
-    } else {
-      qWarning() << "select_restriction_map" << query.lastError();
-    }
-    return false;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-bool SQLite3Driver::update_restriction_map(RestrictionMap* map)
-{
-
-  if (QSqlDatabase::database(_db_name).isOpen()) {
-    QSqlQuery query{ QSqlDatabase::database(_db_name) };
-    if (-1 != map->id) {
-      query.prepare(sqlite3::update_restriction_map_by_id);
-      query.bindValue(":id", map->id);
-    } else {
-      query.prepare(sqlite3::insert_or_update_restriction_maps);
-    }
-    query.bindValue(":fk_scene", map->fk_scene);
-    query.bindValue(":fk_restriction", map->fk_restriction);
-    if (!query.exec()) {
-      qWarning() << "update_restriction_map" << query.lastError();
-      return false;
-    }
-    if (-1 == map->id) {
-      const auto r = select_restriction_map(map);
-      restrictionMapUpdated(map->id);
-      return r;
-    }
-    restrictionMapUpdated(map->id);
-    return true;
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-bool SQLite3Driver::remove_restriction_map(RestrictionMap* map)
-{
-  if (QSqlDatabase::database(_db_name).isOpen()) {
-    QSqlQuery query(QSqlDatabase::database(_db_name));
-    if (select_restriction_map(map)) {
-      query.prepare(sqlite3::delete_restriction_map_by_id);
-      query.bindValue(":id", map->id);
-      if (!query.exec()) {
-        qWarning() << "remove_restriction_map" << query.lastError();
-        return false;
-      }
-      restrictionMapRemoved(map->id);
-      return true;
-    } else {
-      return false;
-    }
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
-bool SQLite3Driver::remove_restriction_map_by_fk(RestrictionMap* map)
-{
-  if (QSqlDatabase::database(_db_name).isOpen()) {
-    QSqlQuery query(QSqlDatabase::database(_db_name));
-    if (select_restriction_map(map)) {
-      query.prepare(sqlite3::delete_restriction_map_by_fk);
-      query.bindValue(":fk_scene", map->fk_scene);
-      query.bindValue(":fk_restriction", map->fk_restriction);
-      if (!query.exec()) {
-        qWarning() << "remove_restriction_map_by_fk" << query.lastError();
-        return false;
-      }
-      restrictionMapRemoved(map->id);
-      return true;
-    } else {
-      return false;
-    }
-  }
-  qWarning() << "No Database connection";
-  return false;
-}
 //-----------------------------BACK DOORS FOR NOW----------------------------------
 std::vector<std::unique_ptr<Author>> SQLite3Driver::get_authors() const
 {
@@ -4428,15 +4146,7 @@ std::vector<std::unique_ptr<Author>> SQLite3Driver::get_authors() const
     while (author_query.next()) {
       auto temp = std::make_unique<Author>();
       auto record = author_query.record();
-      temp->id = record.value(0).toInt();
-      temp->first = record.value(1).toString();
-      temp->last = record.value(2).toString();
-      temp->email = record.value(3).toString();
-      temp->zip = record.value(4).toString();
-      temp->state = record.value(5).toString();
-      temp->country = record.value(6).toString();
-      temp->phone = record.value(7).toString();
-      temp->organization = record.value(8).toString();
+      assign_author(record, *temp);
       author_list.push_back(std::move(temp));
     }
     return author_list;
@@ -4453,12 +4163,7 @@ std::vector<std::unique_ptr<Assessment>> SQLite3Driver::get_assessments() const
     while (assessment_query.next()) {
       auto temp = std::make_unique<Assessment>();
       auto record = assessment_query.record();
-      temp->id = record.value(0).toInt();
-      temp->name = record.value(1).toString();
-      temp->description = record.value(2).toString();
-      temp->type = record.value(3).toString();
-      temp->available_points = record.value(4).toInt();
-      temp->criteria = record.value(5).toString();
+      assign_assessment(record, *temp);
       assessment_list.push_back(std::move(temp));
     }
     return assessment_list;
@@ -4475,12 +4180,7 @@ std::vector<std::unique_ptr<Citation>> SQLite3Driver::get_citations() const
     while (citation_query.next()) {
       auto temp = std::make_unique<Citation>();
       auto record = citation_query.record();
-      temp->id = record.value(0).toInt();
-      temp->key = record.value(1).toString();
-      temp->title = record.value(2).toString();
-      temp->authors = record.value(3).toString();
-      temp->year = record.value(4).toString();
-      temp->publisher = record.value(5).toString();
+      assign_citation(record, *temp);
       citation_list.push_back(std::move(temp));
     }
     return citation_list;
@@ -4497,15 +4197,7 @@ std::vector<std::unique_ptr<Event>> SQLite3Driver::get_events() const
     while (event_query.next()) {
       auto temp = std::make_unique<Event>();
       auto record = event_query.record();
-      temp->id = record.value(0).toInt();
-      temp->name = record.value(1).toString();
-      temp->description = record.value(2).toString();
-      temp->category = record.value(3).toString();
-      temp->fidelity = record.value(4).toString();
-      temp->fk_actor_1 = record.value(5).toString();
-      temp->fk_actor_2 = record.value(6).toString();
-      temp->equipment = record.value(7).toString();
-      temp->details = record.value(8).toString();
+      assign_event(record, *temp);
       event_list.push_back(std::move(temp));
     }
     return event_list;
@@ -4523,12 +4215,7 @@ std::vector<std::unique_ptr<Event>> SQLite3Driver::get_events_in_scene(Scene con
     while (event_query.next()) {
       auto temp = std::make_unique<Event>();
       auto record = event_query.record();
-      temp->id = record.value(EVENT_ID).toInt();
-      temp->name = record.value(EVENT_NAME).toString();
-      //temp->location = record.value(2).toInt();
-      //temp->actor = record.value(3).toInt();
-      temp->equipment = record.value(EVENT_EQUIPMENT).toString();
-      temp->details = record.value(EVENT_DETAILS).toString();
+      assign_event(record, *temp);
       event_list.push_back(std::move(temp));
     }
     return event_list;
@@ -4545,12 +4232,7 @@ std::vector<std::unique_ptr<Equipment>> SQLite3Driver::get_equipments() const
     while (equipment_query.next()) {
       auto temp = std::make_unique<Equipment>();
       auto record = equipment_query.record();
-      temp->id = record.value(EQUIPMENT_ID).toInt();
-      temp->type = record.value(EQUIPMENT_TYPE).toInt();
-      temp->name = record.value(EQUIPMENT_NAME).toString();
-      temp->description = record.value(EQUIPMENT_DESCRIPTION).toString();
-      temp->citations = record.value(EQUIPMENT_CITATIONS).toString();
-      temp->image = record.value(EQUIPMENT_IMAGE).toString();
+      assign_equipment(record, *temp);
       equipment_list.push_back(std::move(temp));
     }
     return equipment_list;
@@ -4585,13 +4267,7 @@ std::vector<std::unique_ptr<Injury>> SQLite3Driver::get_injuries() const
     while (injury_query.next()) {
       auto temp = std::make_unique<Injury>();
       auto record = injury_query.record();
-      temp->id = record.value(0).toInt();
-      temp->medical_name = record.value(1).toString();
-      temp->common_name = record.value(2).toString();
-      temp->description = record.value(3).toString();
-      temp->citations = record.value(4).toString();
-      temp->lower_bound = record.value(5).toFloat();
-      temp->upper_bound = record.value(6).toFloat();
+      assign_injury(record, *temp);
       injury_list.push_back(std::move(temp));
     }
     return injury_list;
@@ -4608,12 +4284,7 @@ std::vector<std::unique_ptr<InjurySet>> SQLite3Driver::get_injury_sets() const
     while (injury_set_query.next()) {
       auto temp = std::make_unique<InjurySet>();
       auto record = injury_set_query.record();
-      temp->id = record.value(0).toInt();
-      temp->name = record.value(1).toString();
-      temp->description = record.value(2).toString();
-      temp->injuries = record.value(3).toString();
-      temp->locations = record.value(4).toString();
-      temp->severities = record.value(5).toString();
+      assign_injury_set(record, *temp);
       injury_set_list.push_back(std::move(temp));
     }
     return injury_set_list;
@@ -4630,9 +4301,7 @@ std::vector<std::unique_ptr<RoleMap>> SQLite3Driver::get_role_maps() const
     while (role_map_query.next()) {
       auto temp = std::make_unique<RoleMap>();
       auto record = role_map_query.record();
-      temp->id = record.value(0).toInt();
-      temp->fk_scene = record.value(1).toInt();
-      temp->fk_role = record.value(2).toInt();
+      assign_role_map(record, *temp);
       role_map_list.push_back(std::move(temp));
     }
     return role_map_list;
@@ -4649,9 +4318,7 @@ std::vector<std::unique_ptr<EventMap>> SQLite3Driver::get_event_maps() const
     while (event_map_query.next()) {
       auto temp = std::make_unique<EventMap>();
       auto record = event_map_query.record();
-      temp->id = record.value(0).toInt();
-      temp->fk_scene = record.value(1).toInt();
-      temp->fk_event = record.value(2).toInt();
+      assign_event_map(record, *temp);
       event_map_list.push_back(std::move(temp));
     }
     return event_map_list;
@@ -4668,9 +4335,7 @@ std::vector<std::unique_ptr<LocationMap>> SQLite3Driver::get_location_maps() con
     while (location_map_query.next()) {
       auto temp = std::make_unique<LocationMap>();
       auto record = location_map_query.record();
-      temp->id = record.value(0).toInt();
-      temp->fk_scene = record.value(1).toInt();
-      temp->fk_location = record.value(2).toInt();
+      assign_location_map(record, *temp);
       location_map_list.push_back(std::move(temp));
     }
     return location_map_list;
@@ -4687,9 +4352,7 @@ std::vector<std::unique_ptr<CitationMap>> SQLite3Driver::get_citation_maps() con
     while (citation_map_query.next()) {
       auto temp = std::make_unique<CitationMap>();
       auto record = citation_map_query.record();
-      temp->id = record.value(0).toInt();
-      temp->fk_scene = record.value(1).toInt();
-      temp->fk_citation = record.value(2).toInt();
+      assign_citation_map(record, *temp);
       citation_map_list.push_back(std::move(temp));
     }
     return citation_map_list;
@@ -4706,34 +4369,14 @@ std::vector<std::unique_ptr<EquipmentMap>> SQLite3Driver::get_equipment_maps() c
     while (equipment_map_query.next()) {
       auto temp = std::make_unique<EquipmentMap>();
       auto record = equipment_map_query.record();
-      temp->id = record.value(0).toInt();
-      temp->scene->id = record.value(1).toInt();
-      temp->equipment->id = record.value(2).toInt();
+      assign_equipment_map(record, *temp);
       equipment_map_list.push_back(std::move(temp));
     }
     return equipment_map_list;
   }
   throw std::runtime_error("No db connection");
 }
-std::vector<std::unique_ptr<RestrictionMap>> SQLite3Driver::get_restriction_maps() const
-{
-  if (QSqlDatabase::database(_db_name).isOpen()) {
-    std::vector<std::unique_ptr<RestrictionMap>> restriction_map_list;
-    QSqlQuery restriction_map_query{ QSqlDatabase::database(_db_name) };
-    restriction_map_query.prepare(select_all_restriction_maps);
-    restriction_map_query.exec();
-    while (restriction_map_query.next()) {
-      auto temp = std::make_unique<RestrictionMap>();
-      auto record = restriction_map_query.record();
-      temp->id = record.value(0).toInt();
-      temp->fk_scene = record.value(1).toInt();
-      temp->fk_restriction = record.value(2).toInt();
-      restriction_map_list.push_back(std::move(temp));
-    }
-    return restriction_map_list;
-  }
-  throw std::runtime_error("No db connection");
-}
+
 std::vector<std::unique_ptr<Objective>> SQLite3Driver::get_objectives() const
 {
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -4744,10 +4387,7 @@ std::vector<std::unique_ptr<Objective>> SQLite3Driver::get_objectives() const
     while (objective_query.next()) {
       auto temp = std::make_unique<Objective>();
       auto record = objective_query.record();
-      temp->id = record.value(0).toInt();
-      temp->name = record.value(1).toString();
-      temp->description = record.value(2).toString();
-      temp->citations = record.value(3).toString();
+      assign_objective(record, *temp);
       objective_list.push_back(std::move(temp));
     }
     return objective_list;
@@ -4764,11 +4404,7 @@ std::vector<std::unique_ptr<Location>> SQLite3Driver::get_locations() const
     while (location_query.next()) {
       auto temp = std::make_unique<Location>();
       auto record = location_query.record();
-      temp->id = record.value(0).toInt();
-      temp->name = record.value(1).toString();
-      temp->scene_name = record.value(2).toString();
-      temp->time_of_day = record.value(3).toString();
-      temp->environment = record.value(4).toString();
+      assign_location(record, *temp);
       location_list.push_back(std::move(temp));
     }
     return location_list;
@@ -4795,14 +4431,10 @@ std::vector<std::unique_ptr<Location>> SQLite3Driver::get_locations_in_scene(Sce
     for (auto& id : fk_locations) {
       query.bindValue(":id", id);
       if (query.next()) {
-        auto location = std::make_unique<pfc::Location>();
+        auto temp = std::make_unique<pfc::Location>();
         auto record = query.record();
-        location->id = id;
-        location->name = record.value(1).toString();
-        location->scene_name = record.value(2).toString();
-        location->time_of_day = record.value(3).toString();
-        location->environment = record.value(4).toString();
-        location_list.push_back(std::move(location));
+        assign_location(record, *temp);
+        location_list.push_back(std::move(temp));
       }
     }
     return location_list;
@@ -4819,34 +4451,14 @@ std::vector<std::unique_ptr<Property>> SQLite3Driver::get_properties() const
     while (property_query.next()) {
       auto temp = std::make_unique<Property>();
       auto record = property_query.record();
-      temp->id = record.value(0).toInt();
-      temp->name = record.value(1).toString();
-      temp->value = record.value(2).toString();
+      assign_property(record, *temp);
       property_list.push_back(std::move(temp));
     }
     return property_list;
   }
   throw std::runtime_error("No db connection");
 }
-std::vector<std::unique_ptr<Restriction>> SQLite3Driver::get_restrictions() const
-{
-  if (QSqlDatabase::database(_db_name).isOpen()) {
-    std::vector<std::unique_ptr<Restriction>> restriction_list;
-    QSqlQuery restriction_query{ QSqlDatabase::database(_db_name) };
-    restriction_query.prepare(select_all_restrictions);
-    restriction_query.exec();
-    while (restriction_query.next()) {
-      auto temp = std::make_unique<Restriction>();
-      auto record = restriction_query.record();
-      temp->id = record.value(0).toInt();
-      temp->name = record.value(1).toString();
-      temp->value = record.value(2).toString();
-      restriction_list.push_back(std::move(temp));
-    }
-    return restriction_list;
-  }
-  throw std::runtime_error("No db connection");
-}
+
 std::vector<std::unique_ptr<Role>> SQLite3Driver::get_roles() const
 {
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -4857,9 +4469,7 @@ std::vector<std::unique_ptr<Role>> SQLite3Driver::get_roles() const
     while (role_query.next()) {
       auto temp = std::make_unique<Role>();
       auto record = role_query.record();
-      temp->id = record.value(0).toInt();
-      temp->name = record.value(1).toString();
-      temp->description = record.value(2).toString();
+      assign_role(record, *temp);
       role_list.push_back(std::move(temp));
     }
     return role_list;
@@ -4875,12 +4485,10 @@ std::vector<std::unique_ptr<Role>> SQLite3Driver::get_roles_in_scene(Scene* scen
     role_query.bindValue(":scene_id", scene->id);
     role_query.exec();
     while (role_query.next()) {
-      auto role = std::make_unique<pfc::Role>();
+      auto temp = std::make_unique<pfc::Role>();
       auto record = role_query.record();
-      role->id = record.value(ROLE_ID).toInt();
-      role->name = record.value(ROLE_NAME).toString();
-      role->description = record.value(ROLE_DESCRIPTION).toString();
-      role_list.push_back(std::move(role));
+      assign_role(record, *temp);
+      role_list.push_back(std::move(temp));
     }
     return role_list;
   }
@@ -4896,12 +4504,7 @@ std::vector<std::unique_ptr<Treatment>> SQLite3Driver::get_treatments() const
     while (treatment_query.next()) {
       auto temp = std::make_unique<Treatment>();
       auto record = treatment_query.record();
-      temp->id = record.value(0).toInt();
-      temp->medical_name = record.value(1).toString();
-      temp->common_name = record.value(2).toString();
-      temp->description = record.value(3).toString();
-      temp->equipment = record.value(4).toString();
-      temp->citations = record.value(5).toString();
+      assign_treatment(record, *temp);
       treatment_list.push_back(std::move(temp));
     }
     return treatment_list;
@@ -4918,16 +4521,7 @@ std::vector<std::unique_ptr<Scene>> SQLite3Driver::get_scenes() const
     while (scene_query.next()) {
       auto temp = std::make_unique<Scene>();
       auto record = scene_query.record();
-      temp->id = record.value(0).toInt();
-      temp->name = record.value(1).toString();
-      temp->description = record.value(2).toString();
-      temp->time_of_day = record.value(3).toString();
-      temp->time_in_simulation = record.value(4).toInt();
-      temp->weather = record.value(5).toString();
-      temp->events = record.value(6).toString();
-      temp->items = record.value(7).toString();
-      temp->roles = record.value(8).toString();
-      temp->details = record.value(9).toString();
+      assign_scene(record, *temp);
       scene_list.push_back(std::move(temp));
     }
     return scene_list;

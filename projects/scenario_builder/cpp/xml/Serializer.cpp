@@ -533,39 +533,39 @@ auto Serializer::generate_pfc_stream() const -> std::stringstream
 
   //1. <Equipment>
   for (auto& equipment : _db->get_equipments()) {
-    pfc_scenario.equipment().equipment().push_back(PFC::make_equipment(equipment.get()));
+    pfc_scenario.equipment().equipment().push_back(PFC::make_equipment(equipment.get(),_db));
   }
   //2. <conditions>
   for (auto& injury : _db->get_injuries()) {
-    pfc_scenario.trauma_definitions().trauma().push_back(PFC::make_trauma(injury.get()));
+    pfc_scenario.trauma_definitions().trauma().push_back(PFC::make_trauma(injury.get(), _db));
   }
 
   //3. <treatment_plans>
   for (auto& treatment : _db->get_treatments()) {
-    pfc_scenario.treatment_plans().treatment_plan().push_back(PFC::make_treatment_plan(treatment.get()));
+    pfc_scenario.treatment_plans().treatment_plan().push_back(PFC::make_treatment_plan(treatment.get(), _db));
   }
 
   //4. Populate <trauma_sets>
   for (auto& trauma : _db->get_injury_sets()) {
-    pfc_scenario.trauma_sets().trauma_profile().push_back(PFC::make_trauma_profile(trauma.get()));
+    pfc_scenario.trauma_sets().trauma_profile().push_back(PFC::make_trauma_profile(trauma.get(), _db));
   }
   //5. <syllabus>
   //5.1 <syllabus><learning_objective>
   for (auto& objective : _db->get_objectives()) {
-    pfc_scenario.syllabus().learning_objectives().objective().push_back(PFC::make_learning_objective(objective.get()));
+    pfc_scenario.syllabus().learning_objectives().objective().push_back(PFC::make_learning_objective(objective.get(), _db));
   }
   //5.2 <syllabus><assessment>
   int32_t total_points = 0;
   for (auto& assessment : _db->get_assessments()) {
     total_points += assessment->available_points;
-    pfc_scenario.syllabus().learning_assessments().assessment().push_back(PFC::make_assessment(assessment.get()));
+    pfc_scenario.syllabus().learning_assessments().assessment().push_back(PFC::make_assessment(assessment.get(), _db));
   }
   pfc_scenario.syllabus().learning_assessments().total_points(total_points);
 
   //6.  <medical-scenario>
   //6.1 <medical-scenario><scenes>
   for (auto& scene : _db->get_scenes()) {
-    auto scene_ptr = PFC::make_scene(scene.get());
+    auto scene_ptr = PFC::make_scene(scene.get(),_db);
     //6.1.1 <medical-scenario><scenes><events>
     for (auto& event : _db->get_events_in_scene(scene.get())) {
       scene_ptr->events().event().push_back(PFC::make_event(event.get()));

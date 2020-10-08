@@ -73,6 +73,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
       </xs:documentation>
     </xs:annotation>
     <xs:all>
+      <xs:element name="id" type="xs:string" minOccurs="0"/>
       <xs:element name="first_name" type="xs:string" minOccurs="0"/>
       <xs:element name="last_name" type="xs:string" minOccurs="0"/>
       <xs:element name="organization" type="xs:string" minOccurs="0"/>
@@ -657,6 +658,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
       </xs:documentation>
     </xs:annotation>
     <xs:all>
+      <xs:element name="id" type="xs:string"/>
       <xs:element name="location-id" type="xs:string"/>
       <xs:element name="name" type="xs:string"/>
       <xs:element name="description" type="xs:string"/>
