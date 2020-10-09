@@ -3,7 +3,7 @@ import QtQuick.Window 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.12
 
-import "components"
+import "tabs"
 
 import com.ara.pfc.ScenarioModel.SQL 1.0
 

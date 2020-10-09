@@ -4,71 +4,72 @@
         <file>ScenarioBuilder.qml</file>
         <file>screens/Main.qml</file>
         <file>screens/Welcome.qml</file>
-        <file>screens/components/ScenarioNarrative.qml</file>
-        <file>screens/components/ScenarioGeneral.qml</file>
-        <file>screens/components/ScenarioSyllabus.qml</file>
-        <file>screens/components/ScenarioSummary.qml</file>
-        <file>screens/components/narrative/LeftPane.qml</file>
 
-        <!--Shared Components -->
-        <file>screens/components/common/AuthorEntry.qml</file>
-        <file>screens/components/common/CitationListEntry.qml</file>
-        <file>screens/components/common/FullCitationListEntry.qml</file>
-        <file>screens/components/common/FullEquipmentListEntry.qml</file>
+        <!--Main Tabs -->
+        <file>screens/tabs/ScenarioNarrative.qml</file>
+        <file>screens/tabs/ScenarioGeneral.qml</file>
+        <file>screens/tabs/ScenarioSyllabus.qml</file>
+        <file>screens/tabs/ScenarioSummary.qml</file>
         
-        <file>screens/components/common/FullInjuryListEntry.qml</file>
-        <file>screens/components/common/EquipmentListEntry.qml</file>
-        <file>screens/components/common/FourButtonRow.qml</file>
-        <file>screens/components/common/ThreeButtonRow.qml</file>
-        <file>screens/components/common/TwoButtonRow.qml</file>
-        <file>screens/components/common/InjuryListEntry.qml</file>
-        <file>screens/components/common/ListEntry.qml</file>
-        <file>screens/components/common/FullListEntry.qml</file>
-        <file>screens/components/common/PFCButton.qml</file>
-        <file>screens/components/common/PFCLabel.qml</file>
-        <file>screens/components/common/PropertyAreaEntry.qml</file>
-        <file>screens/components/common/PropertyEntry.qml</file>
-        <file>screens/components/common/RangeEntry.qml</file>
-        <file>screens/components/common/RestrictionListEntry.qml</file>
-        <file>screens/components/common/TextAreaEntry.qml</file>
-        <file>screens/components/common/TextEntry.qml</file>
-        <file>screens/components/common/TimeEntry.qml</file>
-        <file>screens/components/common/EventEditPane.qml</file>
-        <file>screens/components/common/RoleEditPane.qml</file>
+        <!-- Narrative Tab Tabs -->
+        <file>screens/tabs/narrative/LeftPane.qml</file>
+        <file>screens/tabs/narrative/RightPane.qml</file>
+        <file>screens/tabs/narrative/right/TabEvents.qml</file>
+        <file>screens/tabs/narrative/right/TabLocation.qml</file>
+        <file>screens/tabs/narrative/right/TabEquipment.qml</file>
+        <file>screens/tabs/narrative/right/TabRoles.qml</file>
+        <file>screens/tabs/narrative/right/TabScene.qml</file>
 
-        <!-- SQL Table Record Views -->
-        <file>screens/components/common/SceneProperty.qml</file>
+        <!-- General Tab Tabs -->
+        <file>screens/tabs/general/LeftPane.qml</file>
+        <file>screens/tabs/general/RightPane.qml</file>
 
-        <!-- Narrative Tab Components -->
-        <file>screens/components/narrative/RightPane.qml</file>
-        <file>screens/components/narrative/RP_Events.qml</file>
-        <file>screens/components/narrative/RP_Location.qml</file>
-        <file>screens/components/narrative/RP_Props.qml</file>
-        <file>screens/components/narrative/RP_Roles.qml</file>
-        <file>screens/components/narrative/RP_Scene.qml</file>
-        <file>screens/components/general/LeftPane.qml</file>
-        <file>screens/components/summary/LeftPane.qml</file>
+        <!-- Syllabus Tab Tabs -->
+        <file>screens/tabs/syllabus/LeftPane.qml</file>
+        <file>screens/tabs/syllabus/RightPane.qml</file>
+        <file>screens/tabs/syllabus/left/TabAssessments.qml</file>
+        <file>screens/tabs/syllabus/left/TabEquipment.qml</file>
+        <file>screens/tabs/syllabus/left/TabTraumas.qml</file>
+        <file>screens/tabs/syllabus/left/TabTraumaSets.qml</file>
+        <file>screens/tabs/syllabus/left/TabObjectives.qml</file>
+        <file>screens/tabs/syllabus/left/TabTreatments.qml</file>
+        <file>screens/tabs/syllabus/right/TabAssessments.qml</file>
+        <file>screens/tabs/syllabus/right/TabEquipment.qml</file>
+        <file>screens/tabs/syllabus/right/TabTraumas.qml</file>
+        <file>screens/tabs/syllabus/right/TabTraumaSets.qml</file>
+        <file>screens/tabs/syllabus/right/TabObjectives.qml</file>
+        <file>screens/tabs/syllabus/right/TabTreatments.qml</file>
 
-        <!-- Summary Tab Components -->
-        <file>screens/components/summary/RightPane.qml</file>
-        <file>screens/components/general/RightPane.qml</file>
-        <file>screens/components/syllabus/LeftPane.qml</file>
-        <file>screens/components/syllabus/RightPane.qml</file>
+        <!-- Summary Tab Tabs -->
+        <file>screens/tabs/summary/LeftPane.qml</file>
+        <file>screens/tabs/summary/RightPane.qml</file>
 
-        <!-- Syllabus Tab Components -->
-        <file>screens/components/syllabus/LP_Assessments.qml</file>
-        <file>screens/components/syllabus/LP_Equipment.qml</file>
-        <file>screens/components/syllabus/LP_Traumas.qml</file>
-        <file>screens/components/syllabus/LP_TraumaSets.qml</file>
-        <file>screens/components/syllabus/LP_Objectives.qml</file>
-        <file>screens/components/syllabus/LP_Treatments.qml</file>
-        <file>screens/components/syllabus/RP_Assessments.qml</file>
-        <file>screens/components/syllabus/RP_Equipment.qml</file>
-        <file>screens/components/syllabus/RP_Traumas.qml</file>
-        <file>screens/components/syllabus/RP_TraumaSets.qml</file>
-        <file>screens/components/syllabus/RP_Objectives.qml</file>
-        <file>screens/components/syllabus/RP_Treatments.qml</file>
-
+        <!--Shared Tab Components -->
+        <file>screens/common/AuthorEntry.qml</file>
+        <file>screens/common/CitationListEntry.qml</file>
+        <file>screens/common/FullCitationListEntry.qml</file>
+        <file>screens/common/FullEquipmentListEntry.qml</file>        
+        <file>screens/common/FullInjuryListEntry.qml</file>
+        <file>screens/common/EquipmentListEntry.qml</file>
+        <file>screens/common/FourButtonRow.qml</file>
+        <file>screens/common/ThreeButtonRow.qml</file>
+        <file>screens/common/TwoButtonRow.qml</file>
+        <file>screens/common/InjuryListEntry.qml</file>
+        <file>screens/common/ListEntry.qml</file>
+        <file>screens/common/FullListEntry.qml</file>
+        <file>screens/common/PFCButton.qml</file>
+        <file>screens/common/PFCLabel.qml</file>
+        <file>screens/common/PropertyAreaEntry.qml</file>
+        <file>screens/common/PropertyEntry.qml</file>
+        <file>screens/common/RangeEntry.qml</file>
+        <file>screens/common/RestrictionListEntry.qml</file>
+        <file>screens/common/TextAreaEntry.qml</file>
+        <file>screens/common/TextEntry.qml</file>
+        <file>screens/common/TimeEntry.qml</file>
+        <file>screens/common/EventEditPane.qml</file>
+        <file>screens/common/RoleEditPane.qml</file>
+        <file>screens/common/SceneProperty.qml</file>
+        
         <!-- Images -->
         <file>img/sustain_splash.png</file>
     </qresource>

@@ -3148,7 +3148,7 @@ int SQLite3Driver::treatment_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      
+       
       return record.value(0).toInt();
     }
   }
