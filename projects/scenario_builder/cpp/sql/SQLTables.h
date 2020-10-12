@@ -17,7 +17,15 @@ specific language governing permissions and limitations under the License.
 #include <QObject>
 #include <QString>
 
-namespace pfc {
+
+enum class PropertyTypes {
+  INTEGRAL,
+  SCALAR,
+  BOOL,
+};
+
+
+
 struct Author : public QObject {
   Q_OBJECT
 public:
@@ -59,7 +67,7 @@ public:
   bool operator==(const Author& rhs) const
   {
     return id == rhs.id
-      
+
       && first == rhs.first
       && middle == rhs.middle
       && last == rhs.last
@@ -76,6 +84,13 @@ public:
     return !(*this == rhs);
   }
 
+  static Q_INVOKABLE Author* make();
+  Q_INVOKABLE void assign(Author* rhs)
+  {
+    if (rhs) {
+      assign(*rhs);
+    }
+  }
   void assign(const Author& rhs)
   {
     id = rhs.id;
@@ -125,7 +140,7 @@ public:
   bool operator==(const Assessment& rhs) const
   {
     return id == rhs.id
-      
+
       && name == rhs.name
       && description == rhs.description
       && type == rhs.type
@@ -136,6 +151,13 @@ public:
   bool operator!=(const Assessment& rhs) const
   {
     return !(*this == rhs);
+  }
+  static Q_INVOKABLE Assessment* make();
+  Q_INVOKABLE void assign(Assessment* rhs)
+  {
+    if (rhs) {
+      assign(*rhs);
+    }
   }
   void assign(const Assessment& rhs)
   {
@@ -180,7 +202,7 @@ public:
   bool operator==(const Citation& rhs) const
   {
     return id == rhs.id
-      
+
       && key == rhs.key
       && title == rhs.title
       && authors == rhs.authors
@@ -190,6 +212,13 @@ public:
   bool operator!=(const Citation& rhs) const
   {
     return !(*this == rhs);
+  }
+  static Q_INVOKABLE Citation* make();
+  Q_INVOKABLE void assign(Citation* rhs)
+  {
+    if (rhs) {
+      assign(*rhs);
+    }
   }
   void assign(const Citation& rhs)
   {
@@ -203,7 +232,6 @@ public:
   }
 };
 //----End Citation
-
 struct Event : public QObject {
   Q_OBJECT
   Q_PROPERTY(int event_id MEMBER id)
@@ -240,8 +268,7 @@ public:
 
   bool operator==(const Event& rhs) const
   {
-    return 
-		     name == rhs.name
+    return name == rhs.name
       && description == rhs.description
       && category == rhs.category
       && fidelity == rhs.fidelity
@@ -253,6 +280,13 @@ public:
   bool operator!=(const Event& rhs) const
   {
     return !(*this == rhs);
+  }
+  static Q_INVOKABLE Event* make();
+  Q_INVOKABLE void assign(Event* rhs)
+  {
+    if (rhs) {
+      assign(*rhs);
+    }
   }
   void assign(const Event& rhs)
   {
@@ -310,6 +344,13 @@ public:
   {
     return !(*this == rhs);
   }
+  static Q_INVOKABLE Equipment* make();
+  Q_INVOKABLE void assign(Equipment* rhs)
+  {
+    if (rhs) {
+      assign(*rhs);
+    }
+  }
   void assign(const Equipment& rhs)
   {
     id = rhs.id;
@@ -333,7 +374,6 @@ public:
   }
 };
 //----End Equipment
-
 struct Injury : public QObject {
   Q_OBJECT
   Q_PROPERTY(int injury_id MEMBER id);
@@ -375,6 +415,13 @@ public:
   bool operator!=(const Injury& rhs) const
   {
     return !(*this == rhs);
+  }
+  static Q_INVOKABLE Injury* make();
+  Q_INVOKABLE void assign(Injury* rhs)
+  {
+    if (rhs) {
+      assign(*rhs);
+    }
   }
   void assign(const Injury& rhs)
   {
@@ -436,6 +483,13 @@ public:
   {
     return !(*this == rhs);
   }
+  static Q_INVOKABLE InjurySet* make();
+  Q_INVOKABLE void assign(InjurySet* rhs)
+  {
+    if (rhs) {
+      assign(*rhs);
+    }
+  }
   void assign(const InjurySet& rhs)
   {
     id = rhs.id;
@@ -487,6 +541,13 @@ public:
   bool operator!=(const Location& rhs) const
   {
     return !(*this == rhs);
+  }
+  static Q_INVOKABLE Location* make();
+  Q_INVOKABLE void assign(Location* rhs)
+  {
+    if (rhs) {
+      assign(*rhs);
+    }
   }
   void assign(const Location& rhs)
   {
@@ -542,6 +603,13 @@ public:
   {
     return !(*this == rhs);
   }
+  static Q_INVOKABLE Objective* make();
+  Q_INVOKABLE void assign(Objective* rhs)
+  {
+    if (rhs) {
+      assign(*rhs);
+    }
+  }
   void assign(const Objective& rhs)
   {
     id = rhs.id;
@@ -580,7 +648,7 @@ public:
   bool operator==(const Property& rhs) const
   {
     return id == rhs.id
-      
+
       && name == rhs.name
       && value == rhs.value;
   }
@@ -589,6 +657,13 @@ public:
     return !(*this == rhs);
   }
 
+  static Q_INVOKABLE Property* make();
+  Q_INVOKABLE void assign(Property* rhs)
+  {
+    if (rhs) {
+      assign(*rhs);
+    }
+  }
   void assign(const Property& rhs)
   {
     id = rhs.id;
@@ -625,7 +700,7 @@ public:
 
   bool operator==(const Role& rhs) const
   {
-    return  name == rhs.name
+    return name == rhs.name
       && description == rhs.description
       && short_name == rhs.short_name
       && trauma_profile == rhs.trauma_profile;
@@ -633,6 +708,13 @@ public:
   bool operator!=(const Role& rhs) const
   {
     return !(*this == rhs);
+  }
+  static Q_INVOKABLE Role* make();
+  Q_INVOKABLE void assign(Role* rhs)
+  {
+    if (rhs) {
+      assign(*rhs);
+    }
   }
   void assign(const Role& rhs)
   {
@@ -696,6 +778,13 @@ public:
   bool operator!=(const Scene& rhs) const
   {
     return !(*this == rhs);
+  }
+  static Q_INVOKABLE Scene* make();
+  Q_INVOKABLE void assign(Scene* rhs)
+  {
+    if (rhs) {
+      assign(*rhs);
+    }
   }
   void assign(const Scene& rhs)
   {
@@ -769,6 +858,13 @@ public:
   {
     return !(*this == rhs);
   }
+  static Q_INVOKABLE Treatment* make();
+  Q_INVOKABLE void assign(Treatment* rhs)
+  {
+    if (rhs) {
+      assign(*rhs);
+    }
+  }
   void assign(const Treatment& rhs)
   {
     id = rhs.id;
@@ -792,7 +888,6 @@ public:
   }
 };
 //----End Treatment
-
 //!
 //!  Map Types.
 //!  Version 2.0 Will contain Pointers to the
@@ -822,12 +917,19 @@ public:
 
   bool operator==(const CitationMap& rhs) const
   {
-    return  fk_scene == rhs.fk_scene
+    return fk_scene == rhs.fk_scene
       && fk_citation == rhs.fk_citation;
   }
   bool operator!=(const CitationMap& rhs) const
   {
     return !(*this == rhs);
+  }
+  static Q_INVOKABLE CitationMap* make();
+  Q_INVOKABLE void assign(CitationMap* rhs)
+  {
+    if (rhs) {
+      assign(*rhs);
+    }
   }
   void assign(const CitationMap& rhs)
   {
@@ -867,6 +969,13 @@ public:
   {
     return !(*this == rhs);
   }
+  static Q_INVOKABLE EventMap* make();
+  Q_INVOKABLE void assign(EventMap* rhs)
+  {
+    if (rhs) {
+      assign(*rhs);
+    }
+  }
   void assign(const EventMap& rhs)
   {
     id = rhs.id;
@@ -878,12 +987,21 @@ public:
 struct EquipmentMap : public QObject {
 
   Q_OBJECT
-  Q_PROPERTY(int equipment_id MEMBER id)
-  Q_PROPERTY(Scene* scene MEMBER scene)
-  Q_PROPERTY(Equipment* equipment MEMBER equipment)
-  Q_PROPERTY(QString name MEMBER name)
-  Q_PROPERTY(QString values MEMBER property_values)
-  Q_PROPERTY(QString notes MEMBER notes)
+  Q_PROPERTY(int equipmentMap_id MEMBER id NOTIFY idChanged)
+  Q_PROPERTY(Scene* scene MEMBER scene NOTIFY sceneChanged)
+  Q_PROPERTY(Equipment* equipment MEMBER equipment NOTIFY equipmentChanged)
+  Q_PROPERTY(QString name MEMBER name NOTIFY nameChanged)
+  Q_PROPERTY(QString values MEMBER property_values NOTIFY valuesChanged)
+  Q_PROPERTY(QString notes MEMBER notes NOTIFY notesChanged)
+
+signals:
+  void idChanged(int);
+  void sceneChanged(Scene*);
+  void equipmentChanged(Equipment*);
+  void nameChanged(QString);
+  void valuesChanged(QString);
+  void notesChanged(QString);
+
 public:
   int32_t id = -1;
   Scene* scene = nullptr;
@@ -923,6 +1041,13 @@ public:
   {
     return !(*this == rhs);
   }
+  static Q_INVOKABLE EquipmentMap* make();
+  Q_INVOKABLE void assign(EquipmentMap* rhs)
+  {
+    if (rhs) {
+      assign(*rhs);
+    }
+  }
   void assign(const EquipmentMap& rhs)
   {
     //!
@@ -930,11 +1055,17 @@ public:
     //!        Garbage Collection
 
     id = rhs.id;
+    emit idChanged(id);
     name = rhs.name;
+    emit nameChanged(name);
     scene->assign(*rhs.scene);
+    emit sceneChanged(scene);
     equipment->assign(*rhs.equipment);
+    emit equipmentChanged(equipment);
     property_values = rhs.property_values;
+    emit valuesChanged(property_values);
     notes = rhs.notes;
+    emit notesChanged(notes);
   }
   void clear()
   {
@@ -976,6 +1107,13 @@ public:
   {
     return !(*this == rhs);
   }
+  static Q_INVOKABLE LocationMap* make();
+  Q_INVOKABLE void assign(LocationMap* rhs)
+  {
+    if (rhs) {
+      assign(*rhs);
+    }
+  }
   void assign(const LocationMap& rhs)
   {
     id = rhs.id;
@@ -1007,12 +1145,19 @@ public:
 
   bool operator==(const RoleMap& rhs) const
   {
-    return  fk_scene == rhs.fk_scene
+    return fk_scene == rhs.fk_scene
       && fk_role == rhs.fk_role;
   }
   bool operator!=(const RoleMap& rhs) const
   {
     return !(*this == rhs);
+  }
+  static Q_INVOKABLE RoleMap* make();
+  Q_INVOKABLE void assign(RoleMap* rhs)
+  {
+    if (rhs) {
+      assign(*rhs);
+    }
   }
   void assign(const RoleMap& rhs)
   {
@@ -1022,6 +1167,5 @@ public:
   }
 };
 //----End Role Map
-};
 
 #endif

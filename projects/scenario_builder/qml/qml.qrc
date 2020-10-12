@@ -19,7 +19,9 @@
         <file>screens/tabs/narrative/right/TabEquipment.qml</file>
         <file>screens/tabs/narrative/right/TabRoles.qml</file>
         <file>screens/tabs/narrative/right/TabScene.qml</file>
-
+        <file>screens/tabs/narrative/right/components/SceneProperty.qml</file>
+        <file>screens/tabs/narrative/right/components/ScenePropertySummary.qml</file>
+        <file>screens/tabs/narrative/right/components/ScenePropertyDetails.qml</file>
         <!-- General Tab Tabs -->
         <file>screens/tabs/general/LeftPane.qml</file>
         <file>screens/tabs/general/RightPane.qml</file>
@@ -68,8 +70,7 @@
         <file>screens/common/TimeEntry.qml</file>
         <file>screens/common/EventEditPane.qml</file>
         <file>screens/common/RoleEditPane.qml</file>
-        <file>screens/common/SceneProperty.qml</file>
-        
+                
         <!-- Images -->
         <file>img/sustain_splash.png</file>
     </qresource>

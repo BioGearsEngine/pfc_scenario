@@ -141,9 +141,8 @@ Rectangle {
         Layout.fillHeight : true
         Layout.fillWidth : true
         backend : root.backend
-        model : root.model
-        index : root.index
-        count : root.count
+        sceneList : root.model
+        sceneIndex :   root.index
 
         Rectangle {
           width: parent.width

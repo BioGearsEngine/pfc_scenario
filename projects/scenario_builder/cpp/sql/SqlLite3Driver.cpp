@@ -19,8 +19,8 @@ specific language governing permissions and limitations under the License.
 #include <QRegularExpression>
 #include <QSqlQuery>
 #include <QSqlRecord>
-#include <QtGlobal>
 #include <QUuid>
+#include <QtGlobal>
 
 #include <fstream>
 #include <iostream>
@@ -891,7 +891,7 @@ int SQLite3Driver::nextID(Sqlite3Table table) const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      
+
       return record.value(0).toInt() + 1;
     }
   }
@@ -917,7 +917,7 @@ int SQLite3Driver::assessment_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      
+
       return record.value(0).toInt();
     }
   }
@@ -934,9 +934,9 @@ void SQLite3Driver::assessments()
     query.prepare(sqlite3::select_all_assessments);
     query.exec();
     while (query.next()) {
-      auto assessment = std::make_unique<pfc::Assessment>();
+      auto assessment = std::make_unique<Assessment>();
       auto record = query.record();
-      
+
       assign_assessment(record, *assessment);
       _assessments.push_back(assessment.release());
     }
@@ -1078,7 +1078,7 @@ int SQLite3Driver::author_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      
+
       return record.value(0).toInt();
     }
   }
@@ -1096,7 +1096,7 @@ void SQLite3Driver::authors()
     while (query.next()) {
       auto author = std::make_unique<Author>();
       auto record = query.record();
-      
+
       assign_author(record, *author);
       _authors.push_back(author.release());
     }
@@ -1258,7 +1258,7 @@ int SQLite3Driver::citation_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      
+
       return record.value(0).toInt();
     }
   }
@@ -1274,7 +1274,7 @@ int SQLite3Driver::citation_count(Scene* scene) const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      
+
       return record.value(0).toInt();
     }
   }
@@ -1291,7 +1291,7 @@ void SQLite3Driver::citations()
     query.prepare(sqlite3::select_all_citations);
     query.exec();
     while (query.next()) {
-      auto citation = std::make_unique<pfc::Citation>();
+      auto citation = std::make_unique<Citation>();
       auto record = query.record();
       assign_citation(record, *citation);
       _citations.push_back(citation.release());
@@ -1427,10 +1427,10 @@ bool SQLite3Driver::remove_citation(Citation* citation)
         qWarning() << query_map.lastError();
         return false;
       }
-      return (remove_citation_from_equipment(citation->id) 
-		  && remove_citation_from_treatments(citation->id)
-		  && remove_citation_from_injuries(citation->id) 
-		  && remove_citation_from_objectives(citation->id));
+      return (remove_citation_from_equipment(citation->id)
+              && remove_citation_from_treatments(citation->id)
+              && remove_citation_from_injuries(citation->id)
+              && remove_citation_from_objectives(citation->id));
     } else {
       return false;
     }
@@ -1440,7 +1440,7 @@ bool SQLite3Driver::remove_citation(Citation* citation)
 }
 bool SQLite3Driver::remove_citation_from_scene(Citation* citation, Scene* scene)
 {
-  pfc::CitationMap map;
+  CitationMap map;
   map.fk_scene = scene->id;
   map.fk_citation = citation->id;
   return remove_citation_map_by_fk(&map);
@@ -1466,7 +1466,7 @@ int SQLite3Driver::injury_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      
+
       return record.value(0).toInt();
     }
   }
@@ -1483,9 +1483,9 @@ void SQLite3Driver::injuries()
     query.prepare(sqlite3::select_all_injuries);
     query.exec();
     while (query.next()) {
-      auto injury = std::make_unique<pfc::Injury>();
+      auto injury = std::make_unique<Injury>();
       auto record = query.record();
-      
+
       assign_injury(record, *injury);
       _injuries.push_back(injury.release());
     }
@@ -1615,7 +1615,7 @@ int SQLite3Driver::injury_set_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      
+
       return record.value(0).toInt();
     }
   }
@@ -1632,9 +1632,9 @@ void SQLite3Driver::injury_sets()
     query.prepare(sqlite3::select_all_injury_sets);
     query.exec();
     while (query.next()) {
-      auto set = std::make_unique<pfc::InjurySet>();
+      auto set = std::make_unique<InjurySet>();
       auto record = query.record();
-      
+
       assign_injury_set(record, *set);
       _injury_sets.push_back(set.release());
     }
@@ -1761,7 +1761,7 @@ int SQLite3Driver::event_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      
+
       return record.value(0).toInt();
     }
   }
@@ -1777,7 +1777,7 @@ int SQLite3Driver::event_count(Scene* scene) const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      
+
       return record.value(0).toInt();
     }
   }
@@ -1794,9 +1794,9 @@ void SQLite3Driver::events()
     query.prepare(sqlite3::select_all_events);
     query.exec();
     while (query.next()) {
-      auto event = std::make_unique<pfc::Event>();
+      auto event = std::make_unique<Event>();
       auto record = query.record();
-      
+
       assign_event(record, *event);
       _events.push_back(event.release());
     }
@@ -1815,9 +1815,9 @@ void SQLite3Driver::events_in_scene(Scene* scene)
     query.bindValue(":scene_id", scene->id);
     query.exec();
     while (query.next()) {
-      auto event = std::make_unique<pfc::Event>();
+      auto event = std::make_unique<Event>();
       auto record = query.record();
-      
+
       assign_event(record, *event);
       _events.push_back(event.release());
     }
@@ -1954,7 +1954,7 @@ bool SQLite3Driver::remove_event(Event* event)
 }
 bool SQLite3Driver::remove_event_from_scene(Event* event, Scene* scene)
 {
-  pfc::EventMap map;
+  EventMap map;
   map.fk_scene = scene->id;
   map.fk_event = event->id;
   return remove_event_map_by_fk(&map);
@@ -1976,7 +1976,7 @@ int SQLite3Driver::location_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      
+
       return record.value(0).toInt();
     }
   }
@@ -1993,9 +1993,9 @@ void SQLite3Driver::locations()
     query.prepare(sqlite3::select_all_locations);
     query.exec();
     while (query.next()) {
-      auto location = std::make_unique<pfc::Location>();
+      auto location = std::make_unique<Location>();
       auto record = query.record();
-      
+
       assign_location(record, *location);
       _locations.push_back(location.release());
     }
@@ -2085,7 +2085,7 @@ int SQLite3Driver::location_count(Scene* scene) const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      
+
       return record.value(0).toInt();
     }
   }
@@ -2103,7 +2103,7 @@ void SQLite3Driver::locations_in_scene(Scene* scene)
     location_map_query.bindValue(":fk_scene", scene->id);
     location_map_query.exec();
     while (location_map_query.next()) {
-      auto location_map = std::make_unique<pfc::LocationMap>();
+      auto location_map = std::make_unique<LocationMap>();
       auto location_map_record = location_map_query.record();
       assign_location_map(location_map_record, *location_map);
       fk_location.push_back(location_map->fk_location);
@@ -2117,7 +2117,7 @@ void SQLite3Driver::locations_in_scene(Scene* scene)
       bool huh = query.exec();
       fk_location.pop_back();
       if (query.next()) {
-        auto location = std::make_unique<pfc::Location>();
+        auto location = std::make_unique<Location>();
         auto record = query.record();
         assign_location(record, *location);
         _locations.push_back(location.release());
@@ -2192,7 +2192,7 @@ bool SQLite3Driver::remove_location(Location* location)
 }
 bool SQLite3Driver::remove_location_from_scene(Location* location, Scene* scene)
 {
-  pfc::LocationMap map;
+  LocationMap map;
   map.fk_scene = scene->id;
   map.fk_location = location->id;
   return remove_location_map_by_fk(&map);
@@ -2218,7 +2218,7 @@ int SQLite3Driver::equipment_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      
+
       return record.value(0).toInt();
     }
   }
@@ -2234,7 +2234,7 @@ int SQLite3Driver::equipment_count(Scene* scene) const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      
+
       return record.value(0).toInt();
     }
   }
@@ -2251,9 +2251,9 @@ void SQLite3Driver::equipments()
     query.prepare(sqlite3::select_all_equipments);
     query.exec();
     while (query.next()) {
-      auto equipment = std::make_unique<pfc::Equipment>();
+      auto equipment = std::make_unique<Equipment>();
       auto record = query.record();
-      
+
       assign_equipment(record, *equipment);
       _equipments.push_back(equipment.release());
     }
@@ -2263,6 +2263,7 @@ void SQLite3Driver::equipments()
 }
 void SQLite3Driver::equipment_in_scene(Scene* scene)
 {
+
   qDeleteAll(_equipment_maps);
   _equipment_maps.clear();
 
@@ -2273,7 +2274,7 @@ void SQLite3Driver::equipment_in_scene(Scene* scene)
     equipment_map_query.bindValue(":fk_scene", scene->id);
     equipment_map_query.exec();
     while (equipment_map_query.next()) {
-      auto equipment_map = std::make_unique<pfc::EquipmentMap>();
+      auto equipment_map = std::make_unique<EquipmentMap>();
       auto equipment_map_record = equipment_map_query.record();
       assign_equipment_map(equipment_map_record, *equipment_map, scene);
       _equipment_maps.push_back(equipment_map.release());
@@ -2410,7 +2411,7 @@ bool SQLite3Driver::remove_equipment(Equipment* equipment)
 }
 bool SQLite3Driver::remove_equipment_from_scene(Equipment* equipment, Scene* scene)
 {
-  pfc::EquipmentMap map;
+  EquipmentMap map;
   map.scene = scene;
   map.equipment = equipment;
   return remove_equipment_map_by_fk(&map);
@@ -2434,7 +2435,7 @@ int SQLite3Driver::objective_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      
+
       return record.value(0).toInt();
     }
   }
@@ -2451,9 +2452,9 @@ void SQLite3Driver::objectives()
     query.prepare(sqlite3::select_all_objectives);
     query.exec();
     while (query.next()) {
-      auto objective = std::make_unique<pfc::Objective>();
+      auto objective = std::make_unique<Objective>();
       auto record = query.record();
-      
+
       assign_objective(record, *objective);
       _objectives.push_back(objective.release());
     }
@@ -2571,7 +2572,7 @@ int SQLite3Driver::property_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      
+
       return record.value(0).toInt();
     }
   }
@@ -2588,10 +2589,10 @@ void SQLite3Driver::properties()
     query.prepare(sqlite3::select_all_properties);
     query.exec();
     while (query.next()) {
-      auto property = std::make_unique<pfc::Property>();
+      auto property = std::make_unique<Property>();
       auto record = query.record();
       int ct = record.count();
-      
+
       assign_property(record, *property);
       _properties.push_back(property.release());
     }
@@ -2701,7 +2702,7 @@ int SQLite3Driver::role_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      
+
       return record.value(0).toInt();
     }
   }
@@ -2717,7 +2718,7 @@ int SQLite3Driver::role_count(Scene* scene) const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      
+
       return record.value(0).toInt();
     }
   }
@@ -2734,9 +2735,9 @@ void SQLite3Driver::roles()
     query.prepare(sqlite3::select_all_roles);
     query.exec();
     while (query.next()) {
-      auto role = std::make_unique<pfc::Role>();
+      auto role = std::make_unique<Role>();
       auto record = query.record();
-      
+
       assign_role(record, *role);
       _roles.push_back(role.release());
     }
@@ -2756,7 +2757,7 @@ void SQLite3Driver::roles_in_scene(Scene* scene)
     map_query.bindValue(":fk_scene", scene->id);
     map_query.exec();
     while (map_query.next()) {
-      auto map = std::make_unique<pfc::RoleMap>();
+      auto map = std::make_unique<RoleMap>();
       auto map_record = map_query.record();
       assign_role_map(map_record, *map);
       fk_role.push_back(map->fk_role);
@@ -2768,7 +2769,7 @@ void SQLite3Driver::roles_in_scene(Scene* scene)
       bool huh = query.exec();
       fk_role.pop_back();
       if (query.next()) {
-        auto role = std::make_unique<pfc::Role>();
+        auto role = std::make_unique<Role>();
         auto record = query.record();
         assign_role(record, *role);
         int32_t iid = role->id;
@@ -2905,7 +2906,7 @@ bool SQLite3Driver::remove_role(Role* role) // This deletes a role completely fr
 }
 bool SQLite3Driver::remove_role_from_scene(Role* role, Scene* scene)
 {
-  pfc::RoleMap map;
+  RoleMap map;
   map.fk_scene = scene->id;
   map.fk_role = role->id;
   return remove_role_map_by_fk(&map);
@@ -2934,7 +2935,7 @@ int SQLite3Driver::scene_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      
+
       return record.value(0).toInt();
     }
   }
@@ -2951,9 +2952,9 @@ void SQLite3Driver::scenes()
     query.prepare(sqlite3::select_all_scenes);
     query.exec();
     while (query.next()) {
-      auto scene = std::make_unique<pfc::Scene>();
+      auto scene = std::make_unique<Scene>();
       auto record = query.record();
-      
+
       assign_scene(record, *scene);
       _scenes.push_back(scene.release());
     }
@@ -3148,7 +3149,7 @@ int SQLite3Driver::treatment_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-       
+
       return record.value(0).toInt();
     }
   }
@@ -3165,9 +3166,9 @@ void SQLite3Driver::treatments()
     query.prepare(sqlite3::select_all_treatments);
     query.exec();
     while (query.next()) {
-      auto treatment = std::make_unique<pfc::Treatment>();
+      auto treatment = std::make_unique<Treatment>();
       auto record = query.record();
-      
+
       assign_treatment(record, *treatment);
       _treatments.push_back(treatment.release());
     }
@@ -3292,7 +3293,7 @@ int SQLite3Driver::role_map_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      
+
       return record.value(0).toInt();
     }
   }
@@ -3309,9 +3310,9 @@ void SQLite3Driver::role_maps()
     query.prepare(sqlite3::select_all_role_maps);
     query.exec();
     while (query.next()) {
-      auto map = std::make_unique<pfc::RoleMap>();
+      auto map = std::make_unique<RoleMap>();
       auto record = query.record();
-      
+
       assign_role_map(record, *map);
       _role_maps.push_back(map.release());
     }
@@ -3445,7 +3446,7 @@ int SQLite3Driver::event_map_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      
+
       return record.value(0).toInt();
     }
   }
@@ -3462,9 +3463,9 @@ void SQLite3Driver::event_maps()
     query.prepare(sqlite3::select_all_event_maps);
     query.exec();
     while (query.next()) {
-      auto map = std::make_unique<pfc::EventMap>();
+      auto map = std::make_unique<EventMap>();
       auto record = query.record();
-      
+
       assign_event_map(record, *map);
       _event_maps.push_back(map.release());
     }
@@ -3598,7 +3599,7 @@ int SQLite3Driver::location_map_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      
+
       return record.value(0).toInt();
     }
   }
@@ -3614,7 +3615,7 @@ int SQLite3Driver::location_map_count(Scene* scene) const //we currently only su
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      
+
       return record.value(0).toInt();
     }
   }
@@ -3631,9 +3632,9 @@ void SQLite3Driver::location_maps()
     query.prepare(sqlite3::select_all_location_maps);
     query.exec();
     while (query.next()) {
-      auto map = std::make_unique<pfc::LocationMap>();
+      auto map = std::make_unique<LocationMap>();
       auto record = query.record();
-      
+
       assign_location_map(record, *map);
       _location_maps.push_back(map.release());
     }
@@ -3767,7 +3768,7 @@ int SQLite3Driver::citation_map_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      
+
       return record.value(0).toInt();
     }
   }
@@ -3784,9 +3785,9 @@ void SQLite3Driver::citation_maps()
     query.prepare(sqlite3::select_all_citation_maps);
     query.exec();
     while (query.next()) {
-      auto map = std::make_unique<pfc::CitationMap>();
+      auto map = std::make_unique<CitationMap>();
       auto record = query.record();
-      
+
       assign_citation_map(record, *map);
       _citation_maps.push_back(map.release());
     }
@@ -3908,19 +3909,27 @@ bool SQLite3Driver::remove_citation_map_by_fk(CitationMap* map)
 inline void assign_equipment_map(const QSqlRecord& record, EquipmentMap& map, Scene const* const scene, Equipment const* const equipment)
 {
   map.id = record.value(EQUIPMENT_MAP_ID).toInt();
+  emit map.idChanged(map.id);
   if (scene) {
     map.scene->assign(*scene);
   } else {
     map.scene->id = record.value(EQUIPMENT_MAP_FK_SCENE).toInt();
   }
+  emit map.sceneChanged(map.scene);
+
   if (equipment) {
     map.equipment->assign(*equipment);
+
   } else {
     map.equipment->id = record.value(EQUIPMENT_MAP_FK_EQUIPMENT).toInt();
   }
+  emit map.equipmentChanged(map.equipment);
   map.name = record.value(EQUIPMENT_MAP_NAME).toString();
+  emit map.nameChanged(map.name);
   map.property_values = record.value(EQUIPMENT_MAP_VALUES).toString();
+  emit map.valuesChanged(map.property_values);
   map.notes = record.value(EQUIPMENT_MAP_NOTES).toString();
+  emit map.notesChanged(map.notes);
 }
 
 int SQLite3Driver::equipment_map_count() const
@@ -3932,7 +3941,7 @@ int SQLite3Driver::equipment_map_count() const
     query.exec();
     if (query.next()) {
       auto record = query.record();
-      
+
       return record.value(0).toInt();
     }
   }
@@ -3949,9 +3958,9 @@ void SQLite3Driver::equipment_maps()
     query.prepare(sqlite3::select_all_equipment_map);
     query.exec();
     while (query.next()) {
-      auto map = std::make_unique<pfc::EquipmentMap>();
+      auto map = std::make_unique<EquipmentMap>();
       auto record = query.record();
-      
+
       assign_equipment_map(record, *map);
       _equipment_maps.push_back(map.release());
     }
@@ -3995,6 +4004,7 @@ bool SQLite3Driver::select_equipment_map(EquipmentMap* map) const
 
       if (map->name == "") {
         map->name = map->equipment->name;
+        emit map->nameChanged(map->name);
       }
 
       query.prepare(sqlite3::select_equipment_from_scene_with_name);
@@ -4421,7 +4431,7 @@ std::vector<std::unique_ptr<Location>> SQLite3Driver::get_locations_in_scene(Sce
     map_query.bindValue(":fk_scene", scene->id);
     map_query.exec();
     while (map_query.next()) {
-      auto map = std::make_unique<pfc::LocationMap>();
+      auto map = std::make_unique<LocationMap>();
       auto map_record = map_query.record();
       assign_location_map(map_record, *map);
       fk_locations.push_back(map->fk_location);
@@ -4431,7 +4441,7 @@ std::vector<std::unique_ptr<Location>> SQLite3Driver::get_locations_in_scene(Sce
     for (auto& id : fk_locations) {
       query.bindValue(":id", id);
       if (query.next()) {
-        auto temp = std::make_unique<pfc::Location>();
+        auto temp = std::make_unique<Location>();
         auto record = query.record();
         assign_location(record, *temp);
         location_list.push_back(std::move(temp));
@@ -4485,7 +4495,7 @@ std::vector<std::unique_ptr<Role>> SQLite3Driver::get_roles_in_scene(Scene* scen
     role_query.bindValue(":scene_id", scene->id);
     role_query.exec();
     while (role_query.next()) {
-      auto temp = std::make_unique<pfc::Role>();
+      auto temp = std::make_unique<Role>();
       auto record = role_query.record();
       assign_role(record, *temp);
       role_list.push_back(std::move(temp));

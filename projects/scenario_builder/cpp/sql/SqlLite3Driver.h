@@ -221,6 +221,13 @@ public:
   std::vector<std::unique_ptr<Treatment>> get_treatments() const;
   std::vector<std::unique_ptr<Scene>> get_scenes() const;
 
+
+  //!
+  //! I really wish Qt5 supported smart Pointers.
+  //! I don't trust this parent* concept when passing to QML
+  //! So all of these functions clone the current to the Pointer Passed
+  //! What we should do is return the whole list when we call the vector popuaotion functions
+  //!
   Q_INVOKABLE bool next_author(Author*);
   Q_INVOKABLE bool next_property(Property*);
   Q_INVOKABLE bool next_objective(Objective*);
