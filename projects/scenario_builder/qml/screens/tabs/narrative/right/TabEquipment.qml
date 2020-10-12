@@ -44,7 +44,6 @@ ColumnLayout {
       anchors.right : parent.right
 
       itemInScene : {
-        console.log(index,objectsInSceneView.equipmentInScene[index].name)
         objectsInSceneView.equipmentInScene[index]
       }
       backend : root.backend
@@ -56,14 +55,12 @@ ColumnLayout {
       x: 0
       y : 0
       z : -1
-      color : "grey"
       border.color : "yellow"
     }
   }
 
   onSceneIndexChanged : {
-    if (sceneList.count != 0 && sceneIndex < sceneList.count) {
-      console.log("TabEquipment on Index Changed %1".arg(sceneIndex));
+    if (sceneList.count != 0 && sceneIndex < sceneList.count) {      
       var values = sceneList.get(sceneIndex);
       objectsInSceneView.equipmentInScene = []
       currentEquipmentMap.scene.scene_id = root.sceneList.get(root.sceneIndex).id

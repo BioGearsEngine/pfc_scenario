@@ -17,7 +17,6 @@ Rectangle {
   property ListModel propertyModel : ListModel {}
 
   Component.onCompleted : {
-    console.log ("SceneProperty Complete with height=%1,width=%2".arg(height).arg(width))
   }
   color : "transparent"
   border.color : "red"
@@ -26,11 +25,13 @@ Rectangle {
 
   Loader {
     id : loader
-    // anchors.fill : parent
+    anchors.left : parent.left
+    anchors.right: parent.right
 
-    property string name : { console.log(root.itemInScene.name), root.itemInScene.name }
-    property string notes : { console.log(root.itemInScene.notes), root.itemInScene.notes}
-    property ListModel properties : { console.log(root.itemInScene.propertyModel), root.propertyModel}
+    property string name : root.itemInScene.name 
+    property string type : root.itemInScene.equipment.name 
+    property string notes :  root.itemInScene.notes
+    property ListModel properties : { console.log(root.propertyModel), root.propertyModel}
     source : "ScenePropertySummary.qml"
     state : "collapsed"
 
@@ -54,10 +55,13 @@ Rectangle {
     ]
   }
   onItemInSceneChanged : {
-    var property_array = itemInScene.equipment.properties.split(';');
-    var values_array = itemInScene.values.split(';');
 
-    // Properties from a Syllabus.Equipment are in the form of Name,Type[;Name,Type]
+    backend.select_equipment(itemInScene.equipment)
+    backend.select_scene(itemInScene.scene)
+    var item_properties = itemInScene.equipment.properties.split(';');
+    var item_values     = itemInScene.values.split(';');
+    // Properties from a Syllabus.Equipment are in the form of Name:Type[:fields][;Name:Type:[fields]]
+    //                                                         fields=name,type[:name,type]
     // The intiial split will give a list of Name,Type Pairs which needs to be split
 
     // Values are of the form value-list[;value-list] where a value list is based on the Type from Equipment
@@ -66,21 +70,32 @@ Rectangle {
     // Range   = #,min,max       -  min/max are integral types
 
     root.propertyModel.clear();
-    for (var ii = 0; ii < property_array.length; ++ ii) {
-      var details = property_array[ii].split(',');
-      var values = values_array[ii].split(',');
-      switch (details[1]) {
-        case "Boolean":
-          root.propertyModel.append({"name": details[0], "type": "Boolean", "value": values[0]})
+    console.log("Logging Key/Value Strings for ('%1', '%2')".arg(itemInScene.name).arg(itemInScene.notes))
+
+    for (var ii = 0; ii < item_properties.length; ++ ii) {
+      var property_details = item_properties[ii].split(':');
+      var property_values = item_values[ii].split(':');
+      console.log("Property String = %1".arg(property_details))
+      console.log("Value String = %1".arg(property_values))
+      switch (property_details[1].toLowerCase()) {
+        case "boolean":
+          root.propertyModel.append({"name": property_details[0], "type": "boolean", "value": property_values[0]})
           break;
-        case "Scalar":
-          root.propertyModel.append({"name": details[0], "type": "Scalar", "value": values[0]})
+        case "scalar":
+          root.propertyModel.append({"name": property_details[0], "type": "Scalar", "value": property_values[0], "unit" : property_values[1]})
           break
-        case "Range":
-          root.propertyModel.append({"name": details[0], "type": "Range", "value": values[0]})
+        case "integral":
+          root.propertyModel.append({"name": property_details[0], "type": "integral", "value": property_values[0]})
+          break
+        case "range":
+          root.propertyModel.append({"name": property_details[0], "type": "range", "value": property_values[0],
+                                     "min": property_values[1],"max": property_values[2],"step": property_values[3]})
+          break
+        case "string":
+          root.propertyModel.append({"name": property_details[0], "type": "string", "value": property_values[0]})
           break
         default:
-          root.propertyModel.append({"name": details[0], "type": "Default", "value": values[0]})
+          root.propertyModel.append({"name": property_details[0], "type": "Unsupported Type", "value": property_values[0]})
       }
     }
   }
