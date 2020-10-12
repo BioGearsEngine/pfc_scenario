@@ -56,6 +56,7 @@ ColumnLayout {
          self.description = "Scene Description";
          self.details = "Scene Details";
         } 
+        self.uuid = ""
         root.backend.update_scene(self)
         root.model.insert(root.model.count,
           {

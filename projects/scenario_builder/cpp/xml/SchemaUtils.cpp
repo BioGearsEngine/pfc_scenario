@@ -299,28 +299,26 @@ namespace schema {
     auto property_list = std::make_unique<schema::equipment_properties_list>();
 
     QString name = "";
-    int type = 0;
+    QString type = "";
     QString field = "";
     std::string field_name;
     std::string field_type;
     for (auto& property : properties_list.split(';')) {
       if (!property.isEmpty()) {
-        auto tokens = properties_list.split(':');
+        auto tokens = property.split(':');
         if (tokens.size() >= 1) {
           name = tokens.at(0);
-          type = tokens.at(1).toInt();
+          type = tokens.at(1);
 
-   
-          property_list->property().push_back( std::make_unique<::pfc::schema::equipment_property>(
-			                                make_string(name), 
-			                                std::string("UNKNOWN"), 
-			                                std::make_unique<::pfc::schema::property_field_list>())
-			    );
-          switch (tokens.at(1).toInt()) {
-          case PropertyTypes::INTEGRAL: //Integral
+          property_list->property().push_back(std::make_unique<::pfc::schema::equipment_property>(
+            make_string(name),
+            std::string("UNKNOWN"),
+            std::make_unique<::pfc::schema::property_field_list>()));
+
+          if (0 == type.compare("integral", Qt::CaseInsensitive)) {
             property_list->property().back().type("INTEGRAL");
-            break;
-          case PropertyTypes::SCALAR: //Scalar
+          } else if (0 == type.compare("scalar", Qt::CaseInsensitive)) {
+
             property_list->property().back().type("SCALAR");
             if (tokens.size() > 2) {
               field = tokens.at(2);
@@ -331,13 +329,10 @@ namespace schema {
                 property_list->property().back().fields().field().push_back(std::make_unique<::pfc::schema::field_type>(field_name, field_type));
               }
             }
-            break;
-          case PropertyTypes::BOOL: //Boolean
+          } else if (0 == type.compare("boolean", Qt::CaseInsensitive) || type.compare("bool", Qt::CaseInsensitive)) {
             property_list->property().back().type("BOOLEAN");
-            break;
-          default:
+          } else {
             property_list->property().pop_back();
-            continue;
           }
         }
       }

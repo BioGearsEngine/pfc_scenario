@@ -777,12 +777,7 @@ inline namespace sqlite3 {
          )";
 
   constexpr auto select_equipment_in_scene
-    = R"( SELECT map.equipment_map_id AS map_id,
-                 eq.name AS name,
-                 eq.properties AS prop_names,
-                 map.name AS name_in_scene,
-                 map.property_values,
-                 map.notes
+    = R"( SELECT *
           FROM equipment_map AS  map
           JOIN equipments AS eq
           ON eq.equipment_id = map.fk_equipment

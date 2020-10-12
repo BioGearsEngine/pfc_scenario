@@ -74,6 +74,7 @@ ColumnLayout {
          self.name = "New Equipment %1".arg(next);
          self.description = "Description of Equipment %1".arg(next)
         } 
+        self.uuid = ""
         root.backend.update_equipment(self)
         root.model.insert(root.model.count,
           {

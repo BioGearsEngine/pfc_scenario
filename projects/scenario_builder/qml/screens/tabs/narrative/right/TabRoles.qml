@@ -102,6 +102,7 @@ ColumnLayout {
             self.name = "New Role %1".arg(next)
             self.description = "Description of Role %1".arg(next)
           }
+          self.uuid = ""
           root.backend.update_role(self)
           full_listArea.model.insert(listArea.model.count,
             {
@@ -278,7 +279,7 @@ ColumnLayout {
            self.name = "New Role %1".arg(next);
            self.description = "Description of Role %1".arg(next)
           }   
-
+          self.uuid = ""
           root.backend.update_role_in_scene(self_scene, self)
           listArea.model.insert(listArea.model.count,
             {

@@ -115,6 +115,8 @@ Rectangle {
             citation.year = "Reference Year"
             citation.publisher = "Reference Publisher"
           }
+
+          citation.uuid = ""
           root.backend.update_citation(citation)
           listArea.model.insert(listArea.model.count,
             {"id" : citation.citation_id,

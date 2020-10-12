@@ -55,7 +55,7 @@ ColumnLayout {
          self.name = "New Objective %1".arg(next);
          self.description = "Description of Objective %1".arg(next)
         } 
-
+        self.uuid = 0
         root.backend.update_objective(self)
         root.model.insert(root.model.count,
           {

@@ -4261,6 +4261,7 @@ std::vector<std::unique_ptr<EquipmentMap>> SQLite3Driver::get_equipment_in_scene
       auto temp = std::make_unique<EquipmentMap>();
       auto record = scene_query.record();
       assign_equipment_map(record, *temp, scene);
+      select_equipment(temp->equipment);
       equipment_list.push_back(std::move(temp));
     }
     return equipment_list;

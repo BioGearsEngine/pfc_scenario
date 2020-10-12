@@ -58,7 +58,7 @@ ColumnLayout {
          self.name = "New TraumaSet %1".arg(next);
          self.description = ""
         } 
-
+        self.uuid=""
         root.backend.update_injury_set(self)
         root.model.insert(root.model.count,
           {

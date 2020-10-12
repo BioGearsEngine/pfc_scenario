@@ -59,7 +59,7 @@ ColumnLayout {
          self.common_name = "New Treatment %1".arg(next);
          self.description = "Description of Treatment %1".arg(next)
         } 
-
+        self.uuid = ""
         root.backend.update_treatment(self)
         root.model.insert(root.model.count,
           {

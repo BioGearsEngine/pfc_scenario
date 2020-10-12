@@ -58,7 +58,7 @@ ColumnLayout {
          self.name = "New Assessment %1".arg(next);
          self.description = "Description of Assessment %1".arg(next)
         } 
-
+        self.uuid = ""
         root.backend.update_assessment(self)
         root.model.insert(root.model.count,
           {

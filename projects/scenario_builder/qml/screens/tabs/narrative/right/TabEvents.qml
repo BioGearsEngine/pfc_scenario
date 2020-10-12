@@ -115,6 +115,7 @@ ColumnLayout {
             self.name = "New Event %1".arg(next)
             self.description = "Description of Event %1".arg(next)
           }
+          self.uuid = ""
           root.backend.update_event(self)
           full_listArea.model.insert(listArea.model.count,
             {
@@ -308,7 +309,7 @@ ColumnLayout {
              self.name = "New Event %1".arg(next);
              self.description = "Description of Event %1".arg(next)
             }     
-
+            self.uuid = ""
             root.backend.update_event_in_scene(self_scene, self)
             listArea.model.insert(listArea.model.count,
               {
