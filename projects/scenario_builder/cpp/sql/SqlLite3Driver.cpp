@@ -2342,7 +2342,7 @@ bool SQLite3Driver::update_equipment(Equipment* equipment)
     query.bindValue(":description", equipment->description);
     query.bindValue(":citations", equipment->citations);
     query.bindValue(":image", equipment->image);
-    //query.bindValue(":properties", equipment->properties);
+    query.bindValue(":properties", equipment->properties);
 
     if (!query.exec()) {
       qWarning() << "update_equipment" << query.lastError();

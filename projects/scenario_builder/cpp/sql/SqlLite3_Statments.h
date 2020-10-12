@@ -183,7 +183,7 @@ inline namespace sqlite3 {
 	    "description"	Varchar(64) NOT NULL,
 	    "citations"	TEXT,
 	    "image"	TEXT,
-	    "PROPERTIES"	TEXT,
+	    "properties"	TEXT,
 	    PRIMARY KEY("equipment_id"),
 	    UNIQUE("uuid")
     );
