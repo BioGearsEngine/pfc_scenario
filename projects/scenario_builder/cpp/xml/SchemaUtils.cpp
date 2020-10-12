@@ -290,8 +290,8 @@ namespace schema {
   //-----------------------------------------------------------------------------------------------
   //!
   //!   The Database encodes Properties as the following
-  //!   <Name>:<Type>:[<Detail>...][;[<Name>:<Type>:[<Detail>...]..]
-  //!
+  //!   Property-List = <Name>:<Type>:[<field>...][;[<Name>:<Type>:[<Detail>...]..]
+  //!   <field>       = <Name>,<Type>
   //!  Future subdivisions of fields can be comma delimited
   //!  Future support for quotes will allow the presence of delimiters in fields
   auto PFC::make_equipment_properties_list(QString properties_list) -> std::unique_ptr<schema::equipment_properties_list>
@@ -300,24 +300,36 @@ namespace schema {
 
     QString name = "";
     int type = 0;
-    QString value = "";
-    QString unit  = "";
-
+    QString field = "";
+    std::string field_name;
+    std::string field_type;
     for (auto& property : properties_list.split(';')) {
       if (!property.isEmpty()) {
         auto tokens = properties_list.split(':');
-        if (tokens.size() >= 3) {
+        if (tokens.size() >= 1) {
           name = tokens.at(0);
-          value = tokens.at(2);
-          property_list->property().push_back(std::make_unique<::pfc::schema::equipment_property>(name.toStdString(), "UNKNOWN", value.toStdString()));
+          type = tokens.at(1).toInt();
+
+   
+          property_list->property().push_back( std::make_unique<::pfc::schema::equipment_property>(
+			                                make_string(name), 
+			                                std::string("UNKNOWN"), 
+			                                std::make_unique<::pfc::schema::property_field_list>())
+			    );
           switch (tokens.at(1).toInt()) {
           case PropertyTypes::INTEGRAL: //Integral
             property_list->property().back().type("INTEGRAL");
-              break;
+            break;
           case PropertyTypes::SCALAR: //Scalar
             property_list->property().back().type("SCALAR");
-            if (tokens.size() > 3 ) {
-              property_list->property().back().unit(tokens[3].toStdString());
+            if (tokens.size() > 2) {
+              field = tokens.at(2);
+              auto field_values = field.split(",");
+              if (field_values.size() == 2) {
+                field_name = field_values.at(0).toStdString();
+                field_type = field_values.at(1).toStdString();
+                property_list->property().back().fields().field().push_back(std::make_unique<::pfc::schema::field_type>(field_name, field_type));
+              }
             }
             break;
           case PropertyTypes::BOOL: //Boolean
@@ -632,12 +644,11 @@ namespace schema {
       }
       temp.citations = QString::fromStdString(citations);
 
-
       std::string properties;
       for (auto& property : equipment.properties().property()) {
-        properties += property.name() + "," + property.type() +","+property.value();
-        if ( property.unit().present()) {
-          properties += "," + property.unit().get();
+        properties += property.name() + ":" + property.type();
+        for (auto field : property.fields().field()) {
+          properties += ":" + field.name() + "," + field.type();
         }
         properties += ";";
       }
@@ -645,7 +656,6 @@ namespace schema {
         properties.pop_back();
       }
       temp.properties = QString::fromStdString(properties);
-
 
       if (!_db.update_equipment(&temp)) {
         wasSuccessful = false;

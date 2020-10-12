@@ -139,15 +139,19 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
     <xs:annotation>
       <xs:documentation>
         A property is a configurable value of a piece of equipment. Each equipment can have any number of properties
-        The specific values of each property will be set when it is assigned to medical-scenario as a prop in a specific scene
+        The specific values of each property will be set when it is assigned to medical-scenario as a prop in a specific scen
+        Properties consist of a name,type pair with one or more fields. 
+
+        A field is a name,type pair an item in a scene should have corrisponding property-value list which contains the instance values for all fields of the type.
+        The default field is implied by the property type so a Scalar representing volume would have no Scalar field but would have unit field of type string. 
+        Future extensions of this spec will aim to standardize field types
       </xs:documentation>
     </xs:annotation>
-    <xs:all>
+    <xs:sequence>
       <xs:element name="name" type="xs:string" />
       <xs:element name="type" type="xs:string" />
-      <xs:element name="value" type="xs:string" />
-      <xs:element name="unit"  type="xs:string" minOccurs="0"/>
-    </xs:all>
+      <xs:element name="fields"  type="property-field-list"/>
+    </xs:sequence>
   </xs:complexType>
   <xs:complexType name="trauma-definition-list">
     <xs:annotation>
@@ -874,6 +878,27 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
     <xs:all>
       <xs:element name="name" type="xs:string"/>
       <xs:element name="value" type="xs:string"/>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="property-field-list">
+    <xs:annotation>
+      <xs:documentation>
+        List of property fields for defining the properties of equipment in the syllabus
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="field" type="field-type" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="field-type">
+    <xs:annotation>
+      <xs:documentation>
+        The value for a property. They are broken into two types because properties are generally defined in definition types while values appear in instance types;
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="type" type="xs:string"/>
     </xs:all>
   </xs:complexType>
 </xs:schema>
