@@ -365,6 +365,7 @@ public:
   void clear()
   {
     id = -1;
+    uuid = "";
     name.clear();
     type = -1;
     description.clear();
@@ -803,6 +804,7 @@ public:
   void clear()
   {
     id = -1;
+    uuid = "";
     name.clear();
     description.clear();
     time_of_day.clear();
@@ -879,6 +881,7 @@ public:
   void clear()
   {
     id = -1;
+    uuid = "";
     medical_name.clear();
     common_name.clear();
     description.clear();
@@ -1070,6 +1073,7 @@ public:
   void clear()
   {
     id = -1;
+    
     name.clear();
     scene->clear();
     equipment->clear();
