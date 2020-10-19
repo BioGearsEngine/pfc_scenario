@@ -143,7 +143,7 @@ set ( XSD_FILES
 
   add_source_files(GEN_HDRS LOCATION ${CMAKE_CURRENT_BINARY_DIR}/generated/pfc/c_encoded/ver_${PFC_SCHEMA_VERSION}/
                 REGEX "*.hxx" SOURCE_GROUP  "Headers\\Generated\\ver_${PFC_SCHEMA_VERSION}\\")
-  add_source_files(GEN_HDRS LOCATION ${CMAKE_CURRENT_BINARY_DIR}/generated/pfc/c_encoded/ver_${PFC_SCHEMA_VERSION}/
+  add_source_files(GEN_SRCS LOCATION ${CMAKE_CURRENT_BINARY_DIR}/generated/pfc/c_encoded/ver_${PFC_SCHEMA_VERSION}/
                 REGEX "*.cxx" SOURCE_GROUP  "Sources\\Generated\\ver_${PFC_SCHEMA_VERSION}\\")
 
   add_custom_target( prepare_runtime_dir
@@ -181,7 +181,7 @@ endif()
 ###############################################################################
 
 # lib_pfc_xsd
-add_library(pfc_serialization SHARED ${XSD_HDRS} ${XSD_SRCS})
+add_library(pfc_serialization SHARED  ${XSD_SRCS} ${XSD_HDRS})
 target_link_libraries(pfc_serialization Xerces::xerces)
 add_library( Builder::serial ALIAS pfc_serialization )
 set_target_properties(pfc_serialization
@@ -195,6 +195,7 @@ set_target_properties(pfc_serialization
   CXX_STANDARD 14
   VS_DEBUGGER_WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
 )
+
 target_compile_options(pfc_serialization PRIVATE $<$<PLATFORM_ID:Windows>:/bigobj>  PRIVATE $<$<PLATFORM_ID:Windows>:/MP>)
 
 # lib_pfc_builder
@@ -228,11 +229,13 @@ set_target_properties(libScenarioBuilder
 target_compile_definitions(libScenarioBuilder PUBLIC ${${PREFIX}_CPPFLAGS} PUBLIC $<$<PLATFORM_ID:Windows>:BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE> )
 target_compile_options(libScenarioBuilder PUBLIC $<$<PLATFORM_ID:Windows>:/bigobj>  PUBLIC $<$<PLATFORM_ID:Windows>:/MP>)
 
+
 target_include_directories(libScenarioBuilder
-  PUBLIC ${${PREFIX}_INCLUDE_DIR}
-  PUBLIC ${${PREFIX}_PRIVATE_INCLUDE_DIR}
-  PUBLIC ${${PREFIX}_GENERATED_INCLUDE_DIR}
-  PUBLIC ${Xerces-c_INCLUDE_DIR}
+      PUBLIC ${${PREFIX}_INCLUDE_DIR}
+                ${${PREFIX}_PRIVATE_INCLUDE_DIR}
+				${CMAKE_CURRENT_BINARY_DIR}/generated/
+				${Xerces-c_INCLUDE_DIR}
+                $<INSTALL_INTERFACE:include>
 )
 
 if(CMAKE_COMPILER_IS_GNUCXX)
@@ -293,12 +296,48 @@ target_compile_options(unitScenarioBuilder PRIVATE $<$<PLATFORM_ID:Windows>:/big
 ################################################################################
 # Install
 ################################################################################
-install(TARGETS ScenarioBuilder
+install(TARGETS ScenarioBuilder EXPORT ScenarioBuilder
   RUNTIME DESTINATION bin
   LIBRARY DESTINATION ${LIBRARY_INSTALL_DIR}
   ARCHIVE DESTINATION lib
 )
+install(TARGETS libScenarioBuilder
+  RUNTIME DESTINATION bin
+  LIBRARY DESTINATION ${LIBRARY_INSTALL_DIR}
+  ARCHIVE DESTINATION lib
+  PUBLIC_HEADER DESTINATION include
+  PRIVATE_HEADER  DESTINATION include
+)
+install(TARGETS  pfc_serialization EXPORT ScenarioBuilder
+  
+  RUNTIME DESTINATION bin
+  LIBRARY DESTINATION ${LIBRARY_INSTALL_DIR}
+  ARCHIVE DESTINATION lib
+  PUBLIC_HEADER DESTINATION include
+  PRIVATE_HEADER  DESTINATION include
+)
+install(DIRECTORY 
+    ${${PREFIX}_GENERATED_INCLUDE_DIR}/pfc/schema
+    DESTINATION include/pfc/
+    FILE_PERMISSIONS OWNER_READ GROUP_READ WORLD_READ
+    FILES_MATCHING 
+	  PATTERN "*.hxx"
+    )
+  
 
+  install(DIRECTORY 
+    "${CMAKE_CURRENT_SOURCE_DIR}/xsd/ver_${PFC_SCHEMA_VERSION}"
+    DESTINATION share/pfc/ScenarioBuilder/xsd
+    FILE_PERMISSIONS OWNER_READ GROUP_READ WORLD_READ
+    FILES_MATCHING 
+	  PATTERN "*.xsd"
+    )
+  
+install(DIRECTORY 
+    ${${PREFIX}_GENERATED_INCLUDE_DIR}/pfc/c_encoded
+    DESTINATION share/pfc/ScenarioBuilder/
+    FILE_PERMISSIONS OWNER_READ GROUP_READ WORLD_READ
+    )
 
 ################################################################################
 message(STATUS "")
