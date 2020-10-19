@@ -153,7 +153,18 @@ ColumnLayout {
           anchors.right : parent.right
           anchors.leftMargin : 10
           font.pointSize: 10
-          text :  description
+          wrapMode : Text.Wrap
+          text : {
+              if ( !enabled ) {
+                return description.split("\n")[0].trim()
+              } else {
+                var details = description.split("\n")
+                details.splice(0,1)
+                var  details_str = details.join('\n').trim()
+                return ( details_str === "") ? description.trim() : details_str
+
+              }
+          } 
           enabled : false
           color: enabled ? Material.primaryTextColor : Material.primaryTextColor
           elide: Text.ElideRight
