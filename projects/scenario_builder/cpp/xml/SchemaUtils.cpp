@@ -390,7 +390,7 @@ namespace schema {
 
     auto size = std::min(names.size(), values.size());
     for (auto i = 0; i < size; ++i) {
-      auto name = (names[i].isEmpty() ? "" : names[i]);
+      auto name = (names[i].isEmpty() ? "" : names[i].split(":").at(0));//TODO: Verify split doesn't need a guard
       auto value = (values[i].isEmpty() ? "" : values[i]);
       list->value().push_back(std::make_unique<schema::property_value>(name.toStdString(), value.toStdString()));
     }
