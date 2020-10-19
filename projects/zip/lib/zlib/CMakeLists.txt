@@ -187,6 +187,12 @@ add_library(zlibstatic STATIC ${ZLIB_SRCS} ${ZLIB_ASMS} ${ZLIB_PUBLIC_HDRS} ${ZL
 add_library(zlib::zlib ALIAS zlib)
 add_library(zlib::static ALIAS zlibstatic)
 
+install(TARGETS zlibstatic EXPORT ScenarioBuilder
+     RUNTIME DESTINATION bin
+     LIBRARY DESTINATION lib
+     ARCHIVE DESTINATION lib
+)
+
 set_target_properties(zlib PROPERTIES 
   FOLDER "Libraries/extern"
   DEFINE_SYMBOL ZLIB_DLL

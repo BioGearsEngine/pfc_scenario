@@ -537,6 +537,20 @@ set_target_properties(libminizip PROPERTIES
                         LINKER_LANGUAGE C
                         DEFINE_SYMBOL "MZ_EXPORTS")
 
+install(TARGETS libminizip EXPORT ScenarioBuilder
+     RUNTIME DESTINATION bin
+     LIBRARY DESTINATION lib
+     ARCHIVE DESTINATION lib
+)
+install(DIRECTORY 
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    DESTINATION include
+    FILE_PERMISSIONS OWNER_READ GROUP_READ WORLD_READ
+    FILES_MATCHING 
+	  PATTERN "*.h"
+    )
+  
+
 target_include_directories(libminizip PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
   $<INSTALL_INTERFACE:include/minizip> 

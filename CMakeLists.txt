@@ -62,31 +62,31 @@ set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT S
 # list them here. This will install them in your sysroot
 # so other projects can build off those libraries
 ###############################################################################
-# install(EXPORT lib${ROOT_PROJECT_NAME}
-#   NAMESPACE ${ROOT_PROJECT_NAME}::
-#   FILE ${ROOT_PROJECT_NAME}.cmake
-#   DESTINATION lib/cmake/${ROOT_PROJECT_NAME}
-# )
+ install(EXPORT ScenarioBuilder
+   NAMESPACE pfc::
+   FILE SustainScenarioBuilder.cmake
+   DESTINATION lib/cmake/SustainScenarioBuilder
+ )
 
 include(CMakePackageConfigHelpers)
 # generate the config file that is includes the exports
-configure_package_config_file(${PROJECT_SOURCE_DIR}/cmake/${ROOT_PROJECT_NAME}Config.cmake.in
-  "${CMAKE_CURRENT_BINARY_DIR}/${ROOT_PROJECT_NAME}Config.cmake"
-  INSTALL_DESTINATION "lib/cmake/${ROOT_PROJECT_NAME}"
+configure_package_config_file(${PROJECT_SOURCE_DIR}/cmake/SustainScenarioBuilderConfig.cmake.in
+  "${CMAKE_CURRENT_BINARY_DIR}/SustainScenarioBuilderConfig.cmake"
+  INSTALL_DESTINATION "lib/cmake/SustainScenarioBuilder"
   NO_SET_AND_CHECK_MACRO
   NO_CHECK_REQUIRED_COMPONENTS_MACRO
 )
 
 # generate the version file for the config file
 write_basic_package_version_file(
-  "${CMAKE_CURRENT_BINARY_DIR}/${ROOT_PROJECT_NAME}ConfigVersion.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/SustainScenarioBuilderConfigVersion.cmake"
   VERSION "${${ROOT_PROJECT_NAME}_VERSION_MAJOR}.${${ROOT_PROJECT_NAME}_VERSION_MINOR}"
   COMPATIBILITY AnyNewerVersion
 )
 
  install(FILES
-   ${CMAKE_CURRENT_BINARY_DIR}/${ROOT_PROJECT_NAME}Config.cmake
+   ${CMAKE_CURRENT_BINARY_DIR}/SustainScenarioBuilderConfig.cmake
    ${Packages}
-   DESTINATION lib/cmake/${ROOT_PROJECT_NAME}
+   DESTINATION lib/cmake/SustainScenarioBuilder
  )
 generate_project_suffix()
