@@ -157,6 +157,7 @@ ColumnLayout {
       Component.onCompleted : {
         var r_count = backend.objective_count();
         root.backend.objectives()
+        listArea.model.clear();
         while ( root.backend.next_objective(self) ){
           listArea.model.insert(listArea.model.count,
             {

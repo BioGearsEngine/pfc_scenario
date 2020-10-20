@@ -138,7 +138,6 @@ bool SQLite3Driver::open(QString name)
 //------------------------------------------------------------------------------
 bool SQLite3Driver::open()
 {
-  qInfo() << _db_name;
   if (!QSqlDatabase::database(_db_name).isValid()) {
     QSqlDatabase::addDatabase("QSQLITE", _db_name);
   }

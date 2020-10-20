@@ -162,6 +162,7 @@ ColumnLayout {
       Component.onCompleted : {
         var r_count = backend.injury_set_count();
         root.backend.injury_sets()
+        listArea.model.clear();
         while ( root.backend.next_injury_set(self) ){
           listArea.model.insert(listArea.model.count,
             {

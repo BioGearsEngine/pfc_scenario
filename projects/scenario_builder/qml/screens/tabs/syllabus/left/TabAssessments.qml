@@ -162,6 +162,7 @@ ColumnLayout {
       Component.onCompleted : {
         var r_count = backend.assessment_count();
         root.backend.assessments()
+        listArea.model.clear();
         while ( root.backend.next_assessment(self) ){
           
           var js_citations = []

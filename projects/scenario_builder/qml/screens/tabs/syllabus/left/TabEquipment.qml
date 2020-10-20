@@ -191,6 +191,7 @@ ColumnLayout {
       Component.onCompleted : {
         var r_count = backend.equipment_count();
         root.backend.equipments()
+        listArea.model.clear();
         while ( root.backend.next_equipment(self) ){
           listArea.model.insert(listArea.model.count,
             {
