@@ -122,12 +122,12 @@ function(REGISTER_XSD_DIR _directory)
         REGISTER_XSD_DIR(  ${_directory}/${_item}  CONFIG ${_config_file} 
               PROJECT ${_project} COMPONENT ${_component}/${_item} 
               RESOURCE_PATH ${_resource_path}/${_item} ${_flags} TARGETS ${_l_TARGETS} ${_verbose_Flag}
-              WORKING_DIR ${_working_directory} )
+              WORKING_DIR ${_working_directory} DEPENDS ${_DEPENDS} )
     elseif( _item MATCHES ".*\\.xsd")
         REGISTER_XSD_FILE(  ${_directory}/${_item} CONFIG ${_config_file} 
           PROJECT ${_project} COMPONENT ${_component}/
           RESOURCE_PATH ${_resource_path}/ ${_flags} TARGETS ${_l_TARGETS}
-          WORKING_DIR ${_working_directory} )
+          WORKING_DIR ${_working_directory} DEPENDS ${_DEPENDS} )
     endif()
   endforeach()
   set(${_l_TARGETS} ${${_l_TARGETS}} PARENT_SCOPE)
@@ -187,7 +187,7 @@ function(REGISTER_XSD_FILE _filepath )
                       WORKING_DIRECTORY ${_l_WORKING_DIR}
                       COMMAND ${CMAKE_COMMAND} -E env LD_LIBRARY_PATH=${${ROOT_PROJECT_NAME}_EXTERNAL}/lib ${CodeSynthesis_EXECUTABLE} cxx-tree --show-sloc ${CodeSynthesis_FLAGS} 
                       DEPENDS ${_filepath}
-                      DEPENDS ${CodeSynthesis_EXECUTABLE} ${cfg_file}
+                      DEPENDS ${CodeSynthesis_EXECUTABLE} ${_config_file}
                       DEPENDS ${_l_DEPENDS}
                       COMMENT "Generating source code from XML ${_filepath}" )
 
@@ -208,7 +208,7 @@ function(REGISTER_XSD_FILE _filepath )
                         WORKING_DIRECTORY ${_l_WORKING_DIR}
                         COMMAND ${CMAKE_COMMAND} -E copy ${_filepath} ${CMAKE_BINARY_DIR}/${_resource_path}/   
                         DEPENDS ${_filepath}
-                        DEPENDS ${_config_filen}
+                        DEPENDS ${_config_file}
                         COMMENT "Staging XSD Template for runtime" )
     
     set_target_properties(xsd_stage${_safe_unique_name}

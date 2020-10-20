@@ -61,6 +61,13 @@ add_source_files(UNIT_TEST LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/unit_test
 #XSD_HEADER_FILES
 set(PFC_SCHEMA_VERSION 0.3 CACHE STRING "Version of Scehema to compile against. DO_NOT_CHANGE")
 
+message(STATUS "
+ 67 REGISTER_XSD_DIR(  \"${CMAKE_CURRENT_SOURCE_DIR}/xsd/ver_${PFC_SCHEMA_VERSION}\"  
+ 68                     CONFIG \"${CMAKE_CURRENT_SOURCE_DIR}/xsd/ver_${PFC_SCHEMA_VERSION}/pfc_scenario.cfg\"
+ 69                     PROJECT \"generated/pfc\" COMPONENT \"schema\" RESOURCE_FOLDER \"resources/schema\"
+ 70                     TARGETS XSD_TARGETS VERBOSITY 1)
+
+")
 REGISTER_XSD_DIR(  "${CMAKE_CURRENT_SOURCE_DIR}/xsd/ver_${PFC_SCHEMA_VERSION}"  
                     CONFIG "${CMAKE_CURRENT_SOURCE_DIR}/xsd/ver_${PFC_SCHEMA_VERSION}/pfc_scenario.cfg"
                     PROJECT "generated/pfc" COMPONENT "schema" RESOURCE_FOLDER "resources/schema"
