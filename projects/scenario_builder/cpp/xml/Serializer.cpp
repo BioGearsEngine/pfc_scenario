@@ -194,7 +194,7 @@ bool Serializer::load(const QString& filename)
   _known_images.clear();
 
   SQLite3Driver scratch_db{ "loading.sqlite" };
-  qInfo() << "Opening loading.sqlite";
+  
   scratch_db.open(scratch_db.Name());
   scratch_db.clear_db();
   scratch_db.initialize_db();
@@ -219,7 +219,7 @@ bool Serializer::load(const QString& filename)
 
   err |= mz_zip_reader_open_file(reader, std_filename.c_str());
   if (err != MZ_OK) {
-    qInfo() << QString("255:Error %1 opening archive %2").arg(err).arg(std_filename.c_str());
+    qInfo() << QString("Error %1 opening archive %2").arg(err).arg(std_filename.c_str());
     mz_zip_reader_delete(&reader);
 
     return err;
@@ -272,10 +272,9 @@ bool Serializer::load(const QString& filename)
 
   reader = nullptr;
   mz_zip_reader_create(&reader);
-  qInfo() << filename;
   err = mz_zip_reader_open_file(reader, std_filename.c_str());
   if (err != MZ_OK) {
-    qInfo() << QString("280:Error %1 opening archive %2").arg(err).arg(std_filename.c_str());
+    qInfo() << QString("Error %1 opening archive %2").arg(err).arg(std_filename.c_str());
     mz_zip_reader_delete(&reader);
 
     return err;
