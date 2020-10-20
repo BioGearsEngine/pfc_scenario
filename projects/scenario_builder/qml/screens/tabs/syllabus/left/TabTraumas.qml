@@ -23,6 +23,7 @@ ColumnLayout {
   {
     var r_count = backend.injury_count();
     root.backend.injuries()
+    listArea.model.clear();
     while ( root.backend.next_injury(self) ){
       listArea.model.insert(listArea.model.count,
         {
