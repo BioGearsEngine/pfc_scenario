@@ -381,90 +381,44 @@ bool SQLite3Driver::populate_equipment()
   };
 
   Equipment temp; //Count
-  for ( auto& def : default_equipment ) {
+  for (auto& def : default_equipment) {
     temp.clear();
     temp.name = def.first.c_str();
     temp.description = def.second.c_str();
-    update_equipment(&temp);
+    if (!select_equipment(&temp)) {
+      update_equipment(&temp);
+    }
   }
-    return true;
+  return true;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::populate_injuries()
 {
+  struct sInjury {
+    std::string medical_name;
+    std::string common_name;
+    std::string description;
+  };
+
+  std::vector<sInjury> default_injuries = {
+    { "Contusion", "Internal Bleeding", "Bleeding on the inside" },
+    { "Laceration", "External Bleeding", "Bleeding on the outside" },
+    { "Puncture", "Holes in body", "Big holes in your skin" },
+    { "Airway Trauma", "Trauma to airway", "Trauma to your airway" },
+    { "Infection", "Is infected", "A bacterial infection" },
+    { "First Degree Burn", "Alright burn", "A first degree burn" },
+    { "Second Degree Burn", "Bad burn", "A second degree burn" },
+    { "Third Degree Burn", "Terrible burn", "A third degree burn" }
+  };
+
   Injury temp;
-  Injury contusion, laceration, puncture, airway_injury, brain_injury, infection, burn_1, burn_2, burn_3, bone_break;
-  // TODO: These medical and common names need to be updated, they are not official at all
-  contusion.medical_name = "Contusion";
-  contusion.common_name = "Internal Bleeding";
-  contusion.description = "Bleeding on the inside";
-  temp.assign(contusion);
-  if (!select_injury(&temp)) {
-    if (!update_injury(&contusion)) {
-      return false;
-    }
-  }
-  laceration.medical_name = "Laceration";
-  laceration.common_name = "External Bleeding";
-  laceration.description = "Bleeding on the outside";
-  temp.assign(laceration);
-  if (!select_injury(&temp)) {
-    if (!update_injury(&laceration)) {
-      return false;
-    }
-  }
-  puncture.medical_name = "Puncture";
-  puncture.common_name = "Holes in body";
-  puncture.description = "Big holes in your skin";
-  temp.assign(puncture);
-  if (!select_injury(&temp)) {
-    if (!update_injury(&puncture)) {
-      return false;
-    }
-  }
-  airway_injury.medical_name = "Airway Trauma";
-  airway_injury.common_name = "Trauma to airway";
-  airway_injury.description = "Trauma to your airway";
-  temp.assign(airway_injury);
-  if (!select_injury(&temp)) {
-    if (!update_injury(&airway_injury)) {
-      return false;
-    }
-  }
-  infection.medical_name = "Infection";
-  infection.common_name = "Is infected";
-  infection.description = "A bacterial infection";
-  temp.assign(infection);
-  if (!select_injury(&temp)) {
-    if (!update_injury(&infection)) {
-      return false;
-    }
-  }
-  burn_1.medical_name = "First Degree Burn";
-  burn_1.common_name = "Alright burn";
-  burn_1.description = "A first degree burn";
-  temp.assign(burn_1);
-  if (!select_injury(&temp)) {
-    if (!update_injury(&burn_1)) {
-      return false;
-    }
-  }
-  burn_2.medical_name = "Second Degree Burn";
-  burn_2.common_name = "Bad burn";
-  burn_2.description = "A second degree burn";
-  temp.assign(burn_2);
-  if (!select_injury(&temp)) {
-    if (!update_injury(&burn_2)) {
-      return false;
-    }
-  }
-  burn_3.medical_name = "Third Degree Burn";
-  burn_3.common_name = "Terrible burn";
-  burn_3.description = "A third degree burn";
-  temp.assign(burn_3);
-  if (!select_injury(&temp)) {
-    if (!update_injury(&burn_3)) {
-      return false;
+  for (auto& injuryDef : default_injuries) {
+    temp.clear();
+    temp.medical_name = injuryDef.medical_name.c_str();
+    temp.common_name = injuryDef.common_name.c_str();
+    temp.description = injuryDef.description.c_str();
+    if (!select_injury(&temp)) {
+      update_injury(&temp);
     }
   }
   return true;
@@ -472,96 +426,32 @@ bool SQLite3Driver::populate_injuries()
 //------------------------------------------------------------------------------
 bool SQLite3Driver::populate_treatments()
 {
+
+  struct sTreatment {
+    std::string medical_name;
+    std::string common_name;
+    std::string description;
+  };
+  std::vector<sTreatment> default_treatments = {
+    { "Chest Tube", "Chest Tube", "Insertion of a hollow plastic tube between ribs and pleural space." },
+    { "Needle Thoracostomy", "Needle Decompression", "Insertion of a needle into the pleural space to decompress a tension pneumothorax" },
+    { "Burn Ointment", "Burn Ointment", "A topical ointment applied to burn areas to aid healing." },
+    { "Bandage", "Bandage", "A cloth wrapping for wounds." },
+    { "Suture", "Stitches", "Suture an open wound to seal it." },
+    { "Antibiotics", "Antibiotics", "Give does of antibiotics to patient." },
+    { "Fentanyl", "Fentanyl", "Administer a dose of fentanyl." },
+    { "Morphine", "Morphine", "Administer a dose of morphine." },
+    { "Pack Wound", "Pack Wound", "Pack wound with material to absorb discharge." },
+    { "Escharotomy", "Escharotomy", "A surgical procedure used to treat full-thickness circumferential burns." }
+  };
   Treatment temp;
-  Treatment chest_tube, needle_decompression, apply_burn_ointment, apply_bandage, apply_suture, administer_antibiotics, administer_fentanyl, administer_morphine, pack_wound, escharotomy;
-  chest_tube.medical_name = "Chest Tube";
-  chest_tube.common_name = "Chest Tube";
-  chest_tube.description = "Insertion of a hollow plastic tube between ribs and pleural space.";
-  temp.assign(chest_tube);
-  if (!select_treatment(&temp)) {
-    if (!update_treatment(&chest_tube)) {
-      return false;
-    }
-  }
-  needle_decompression.medical_name = "Needle Thoracostomy";
-  needle_decompression.common_name = "Needle Decompression";
-  needle_decompression.description = "Insertion of a needle into the pleural space to decompress a tension pneumothorax";
-  temp.assign(needle_decompression);
-  if (!select_treatment(&temp)) {
-    if (!update_treatment(&needle_decompression)) {
-      return false;
-    }
-  }
-  apply_burn_ointment.medical_name = "Burn Ointment";
-  apply_burn_ointment.common_name = "Burn Ointment";
-  apply_burn_ointment.description = "A topical ointment applied to burn areas to aid healing.";
-  temp.assign(apply_burn_ointment);
-  if (!select_treatment(&temp)) {
-    if (!update_treatment(&apply_burn_ointment)) {
-      return false;
-    }
-  }
-  apply_bandage.medical_name = "Bandage";
-  apply_bandage.common_name = "Bandage";
-  apply_bandage.description = "A cloth wrapping for wounds.";
-  temp.assign(apply_bandage);
-  if (!select_treatment(&temp)) {
-    if (!update_treatment(&apply_bandage)) {
-      return false;
-    }
-  }
-  apply_suture.medical_name = "Suture";
-  apply_suture.common_name = "Stitches";
-  apply_suture.description = "Suture an open wound to seal it.";
-  temp.assign(apply_suture);
-  if (!select_treatment(&temp)) {
-    if (!update_treatment(&apply_suture)) {
-      return false;
-    }
-  }
-  administer_antibiotics.medical_name = "Antibiotics";
-  administer_antibiotics.common_name = "Antibiotics";
-  administer_antibiotics.description = "Give does of antibiotics to patient.";
-  temp.assign(administer_antibiotics);
-  if (!select_treatment(&temp)) {
-    if (!update_treatment(&administer_antibiotics)) {
-      return false;
-    }
-  }
-  administer_fentanyl.medical_name = "Fentanyl";
-  administer_fentanyl.common_name = "Fentanyl";
-  administer_fentanyl.description = "Administer a dose of fentanyl.";
-  temp.assign(administer_fentanyl);
-  if (!select_treatment(&temp)) {
-    if (!update_treatment(&administer_fentanyl)) {
-      return false;
-    }
-  }
-  administer_morphine.medical_name = "Morphine";
-  administer_morphine.common_name = "Morphine";
-  administer_morphine.description = "Administer a dose of morphine.";
-  temp.assign(administer_morphine);
-  if (!select_treatment(&temp)) {
-    if (!update_treatment(&administer_morphine)) {
-      return false;
-    }
-  }
-  pack_wound.medical_name = "Pack Wound";
-  pack_wound.common_name = "Pack Wound";
-  pack_wound.description = "Pack wound with material to absorb discharge.";
-  temp.assign(pack_wound);
-  if (!select_treatment(&temp)) {
-    if (!update_treatment(&pack_wound)) {
-      return false;
-    }
-  }
-  escharotomy.medical_name = "Escharotomy";
-  escharotomy.common_name = "Escharotomy";
-  escharotomy.description = "A surgical procedure used to treat full-thickness circumferential burns.";
-  temp.assign(escharotomy);
-  if (!select_treatment(&temp)) {
-    if (!update_treatment(&escharotomy)) {
-      return false;
+  for (auto& injuryDef : default_treatments) {
+    temp.clear();
+    temp.medical_name = injuryDef.medical_name.c_str();
+    temp.common_name = injuryDef.common_name.c_str();
+    temp.description = injuryDef.description.c_str();
+    if (!select_treatment(&temp)) {
+      update_treatment(&temp);
     }
   }
   return true;

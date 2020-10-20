@@ -17,14 +17,11 @@ specific language governing permissions and limitations under the License.
 #include <QObject>
 #include <QString>
 
-
 enum class PropertyTypes {
   INTEGRAL,
   SCALAR,
   BOOL,
 };
-
-
 
 struct Author : public QObject {
   Q_OBJECT
@@ -106,6 +103,21 @@ public:
     phone = rhs.phone;
     organization = rhs.organization;
   }
+  void clear()
+  {
+    id = -1;
+    uuid.clear();
+    first.clear();
+    middle.clear();
+    last.clear();
+    email.clear();
+    zip.clear();
+    plus_4.clear();
+    state.clear();
+    country.clear();
+    phone.clear();
+    organization.clear();
+  }
 };
 //----End Author
 struct Assessment : public QObject {
@@ -170,6 +182,17 @@ public:
     objective = rhs.objective;
     criteria = rhs.criteria;
   }
+  void clear()
+  {
+    id = -1;
+    uuid.clear();
+    name.clear();
+    description.clear();
+    type.clear();
+    objective.clear();
+    available_points = -1;
+    criteria.clear();
+  }
 };
 //----End Assessment
 struct Citation : public QObject {
@@ -229,6 +252,16 @@ public:
     authors = rhs.authors;
     year = rhs.year;
     publisher = rhs.publisher;
+  }
+  void clear()
+  {
+    id = -1;
+    uuid.clear();
+    key.clear();
+    title.clear();
+    authors.clear();
+    year.clear();
+    publisher.clear();
   }
 };
 //----End Citation
@@ -299,6 +332,19 @@ public:
     fk_actor_2 = rhs.fk_actor_2;
     equipment = rhs.equipment;
     details = rhs.details;
+  }
+  void clear()
+  {
+    id = -1;
+    uuid.clear();
+    name.clear();
+    description.clear();
+    category.clear();
+    fidelity.clear();
+    fk_actor_1.clear();
+    fk_actor_2.clear();
+    equipment.clear();
+    details.clear();
   }
 };
 //----End Event
@@ -435,6 +481,17 @@ public:
     upper_bound = rhs.upper_bound;
     citations = rhs.citations;
   }
+  void clear()
+  {
+    id = -1;
+    uuid.clear();
+    medical_name.clear();
+    common_name.clear();
+    description.clear();
+    citations.clear();
+    lower_bound = 0;
+    upper_bound = 1;
+  }
 };
 //----End Injury
 struct InjurySet : public QObject {
@@ -559,6 +616,15 @@ public:
     time_of_day = rhs.time_of_day;
     environment = rhs.environment;
   }
+  void clear()
+  {
+    id = -1;
+    uuid.clear();
+    name.clear();
+    scene_name.clear();
+    time_of_day.clear();
+    environment.clear();
+  }
 };
 //----End Location
 struct Objective : public QObject {
@@ -622,6 +688,17 @@ public:
     treatment_plans = rhs.treatment_plans;
     injury_profiles = rhs.injury_profiles;
   }
+  void clear()
+  {
+    id = -1;
+    uuid.clear();
+    name.clear();
+    description.clear();
+    citations.clear();
+    cpgs.clear();
+    treatment_plans.clear();
+    injury_profiles.clear();
+  }
 };
 //----End Objective
 struct Property : public QObject {
@@ -671,6 +748,13 @@ public:
     uuid = rhs.uuid;
     name = rhs.name;
     value = rhs.value;
+  }
+  void clear()
+  {
+    id = -1;
+    uuid.clear();
+    name.clear();
+    value.clear();
   }
 };
 //----End Property
@@ -725,6 +809,15 @@ public:
     description = rhs.description;
     short_name = rhs.short_name;
     trauma_profile = rhs.trauma_profile;
+  }
+  void clear()
+  {
+    id = -1;
+    uuid.clear();
+    name.clear();
+    short_name.clear();
+    description.clear();
+    trauma_profile.clear();
   }
 };
 //----End Role
@@ -1073,7 +1166,7 @@ public:
   void clear()
   {
     id = -1;
-    
+
     name.clear();
     scene->clear();
     equipment->clear();
