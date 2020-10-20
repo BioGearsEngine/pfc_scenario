@@ -308,16 +308,15 @@ namespace schema {
         auto tokens = property.split(':');
         if (tokens.size() >= 1) {
           name = tokens.at(0);
-          type = tokens.at(1);
-
+          type = tokens.at(1).toLower();
           property_list->property().push_back(std::make_unique<::pfc::schema::equipment_property>(
             make_string(name),
             std::string("UNKNOWN"),
             std::make_unique<::pfc::schema::property_field_list>()));
 
-          if (0 == type.compare("integral", Qt::CaseInsensitive)) {
+          if (0 == type.compare("integral")) {
             property_list->property().back().type("INTEGRAL");
-          } else if (0 == type.compare("scalar", Qt::CaseInsensitive)) {
+          } else if (0 == type.compare("scalar")) {
 
             property_list->property().back().type("SCALAR");
             if (tokens.size() > 2) {
@@ -329,7 +328,7 @@ namespace schema {
                 property_list->property().back().fields().field().push_back(std::make_unique<::pfc::schema::field_type>(field_name, field_type));
               }
             }
-          } else if (0 == type.compare("boolean", Qt::CaseInsensitive) || type.compare("bool", Qt::CaseInsensitive)) {
+          } else if (0 == type.compare("boolean") || type.compare("bool")) {
             property_list->property().back().type("BOOLEAN");
           } else {
             property_list->property().pop_back();

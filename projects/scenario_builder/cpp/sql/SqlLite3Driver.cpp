@@ -64,7 +64,7 @@ SQLite3Driver::~SQLite3Driver()
 //------------------------------------------------------------------------------
 void SQLite3Driver::establish_settings()
 {
-  QSettings settings("LMARA", "TestSet");
+  QSettings settings;
   recent_files.push_back(settings.value("firstFile").toString().toStdString());
   recent_files.push_back(settings.value("secondFile").toString().toStdString());
   recent_files.push_back(settings.value("thirdFile").toString().toStdString());
@@ -84,7 +84,7 @@ void SQLite3Driver::log_scenario_file(QString file)
 //------------------------------------------------------------------------------
 void SQLite3Driver::log_scenario_file(std::string file)
 {
-  QSettings settings("LMARA", "TestSet");
+  QSettings settings;
   int i = 0;
   for (; i < 9; i++) {
     if (recent_files[i] == file) {
@@ -110,7 +110,7 @@ void SQLite3Driver::log_scenario_file(std::string file)
 QList<QString> SQLite3Driver::get_recent_scenario_files()
 {
   QList<QString> q_recent_files;
-  QSettings settings("LMARA", "TestSet");
+  QSettings settings;
   q_recent_files.push_back(settings.value("firstFile").toString());
   q_recent_files.push_back(settings.value("secondFile").toString());
   q_recent_files.push_back(settings.value("thirdFile").toString());
@@ -138,6 +138,7 @@ bool SQLite3Driver::open(QString name)
 //------------------------------------------------------------------------------
 bool SQLite3Driver::open()
 {
+  qInfo() << _db_name;
   if (!QSqlDatabase::database(_db_name).isValid()) {
     QSqlDatabase::addDatabase("QSQLITE", _db_name);
   }

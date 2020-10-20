@@ -134,13 +134,11 @@ ApplicationWindow {
       visible: false
       selectMultiple : false
       selectExisting : true
-      nameFilters: [ "Scenarios (*.pfc;*.zip)", "All files (*)" ]
+      nameFilters: [ "Scenarios (*.pfc *.zip)", "All files (*)" ]
       folder: "./"//StandardPaths.writableLocation(StandardPaths.DesktopLocation)
       onAccepted: {
-        console.log("You choose: " + loadDialog.fileUrls)
         scenario_model.log_scenario_file(loadDialog.fileUrls)
-        var archive = loadDialog.fileUrls.toString();
-        archive = archive.replace(/file:\/{3}/,"")
+        var archive = loadDialog.fileUrls.toString();        
         if(scenario_serializer.load(archive)) {
           if(mainView.depth > 1){
             mainView.pop()
@@ -162,12 +160,10 @@ ApplicationWindow {
       visible: false
       selectMultiple : false
       selectExisting : false
-      nameFilters: [ "Scenarios (*.pfc;*.zip)", "All files (*)" ]
+      nameFilters: [ "Scenarios (*.pfc *.zip)", "All files (*)" ]
       folder: "./"// StandardPaths.writableLocation(StandardPaths.DesktopLocation)
       onAccepted: {
-        console.log("You choose: " + saveDialog.fileUrls)
         var archive = saveDialog.fileUrls.toString();
-        archive = archive.replace(/file:\/{3}/,"")
         scenario_serializer.save(archive, scenario_model)
       }
       onRejected: {
@@ -196,9 +192,7 @@ ApplicationWindow {
         console.log(path)
         scenario_model.log_scenario_file(path)
         listUpdated()
-        console.log("You choose: " + path)
-        var archive = path.replace(/file:\/{3}/,"")
-        if(scenario_serializer.load(archive)) {
+        if(scenario_serializer.load(path)) {
           if(mainView.depth > 1){
             mainView.pop()
           }
@@ -207,7 +201,7 @@ ApplicationWindow {
           closeOption.enabled = true
           mainView.push(scenarioScreen, { backend : scenario_model} )
         } else {
-          console.log("Failed to Load File: %1".arg(archive))
+          console.log("Failed to Load File: %1".arg(path))
         }
       }
     }

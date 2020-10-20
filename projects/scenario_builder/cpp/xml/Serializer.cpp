@@ -10,6 +10,7 @@
 
 #include <QDebug>
 #include <QDir>
+#include <QUrl>
 #include <QtDebug>
 
 #include <pfc/schema/pfc_scenario.hxx>
@@ -75,11 +76,11 @@ Serializer::~Serializer()
 bool Serializer::save() const
 {
   QString filename = get_property(_db, "archive_file");
-  if (!filename.contains("_NOTFOUND", Qt::CaseSensitive)) {
+  if (!filename.contains("_NOTFOUND")) {
     return save_as(filename);
   }
   filename = get_property(_db, "scenario_title");
-  if (!filename.contains("_NOTFOUND", Qt::CaseSensitive)) {
+  if (!filename.contains("_NOTFOUND")) {
     filename = filename.replace(" ", "_") + ".pfc.zip";
     return save_as(filename);
   }
@@ -89,9 +90,14 @@ bool Serializer::save() const
 //-------------------------------------------------------------------------------
 bool Serializer::save_as(const QString& filename) const
 {
+
   if (!_db) {
+    //Short Circuit We do not have a valid database ptr
     return false;
   }
+
+  QDir temporary_dir(".");
+  temporary_dir.mkdir("tmp");
 
   std::stringstream msdl_stream;
   std::stringstream pfc_stream;
@@ -138,7 +144,7 @@ bool Serializer::save_as(const QString& filename) const
   file_info.filename = text_name.c_str();
   file_info.uncompressed_size = text_ptr.length();
   mz_zip_writer_add_buffer(writer, (void*)text_ptr.c_str(), (int32_t)text_ptr.length(), &file_info);
-
+   
   QFile msdl_file(QString( "tmp/" ) + text_name.c_str());
   msdl_file.open(QIODevice::WriteOnly);
   msdl_file.write(text_ptr.c_str(), (int32_t)text_ptr.length());
@@ -173,17 +179,22 @@ bool Serializer::load(const QString& filename)
     return false;
   }
 
+
   if (QFileInfo::exists("tmp")) {
-    QDir temporary_dir("tmp");
+     QDir temporary_dir("tmp");
+     temporary_dir.cd("tmp");
     if (!temporary_dir.removeRecursively()) {
       qWarning() << " Unable to remove tmp/";
     }
   }
+  QDir temporary_dir("./");
+  temporary_dir.mkpath("tmp");
 
   _known_schemas.clear();
   _known_images.clear();
 
   SQLite3Driver scratch_db{ "loading.sqlite" };
+  qInfo() << "Opening loading.sqlite";
   scratch_db.open(scratch_db.Name());
   scratch_db.clear_db();
   scratch_db.initialize_db();
@@ -196,9 +207,19 @@ bool Serializer::load(const QString& filename)
   void* reader = NULL;
 
   mz_zip_reader_create(&reader);
-  err |= mz_zip_reader_open_file(reader, filename.toStdString().c_str());
+
+  const QUrl url(filename);
+  std::string std_filename;
+  if (url.isLocalFile()) {
+     std_filename = QDir::toNativeSeparators(url.toLocalFile()).toStdString();
+  } else {
+    std_filename = filename.toStdString();
+  }
+
+
+  err |= mz_zip_reader_open_file(reader, std_filename.c_str());
   if (err != MZ_OK) {
-    qInfo() << QString("Error %1 opening archive %2\n").arg(err).arg(filename);
+    qInfo() << QString("255:Error %1 opening archive %2").arg(err).arg(std_filename.c_str());
     mz_zip_reader_delete(&reader);
 
     return err;
@@ -218,10 +239,12 @@ bool Serializer::load(const QString& filename)
       _known_schemas.push_back(file_info->filename);
     } else if (strncmp(file_info->filename, "images/", 7) == 0) { 
       _known_images.push_back(file_info->filename);
-    }
+    }     
     mz_zip_reader_entry_save_file(reader, destination.c_str());
+    QFile(destination.c_str()).setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner);
     err = mz_zip_reader_goto_next_entry(reader);
   } while (err == MZ_OK);
+
   mz_zip_reader_delete(&reader);
 
   if (_known_schemas.size() != schemas_v3.size()) {
@@ -247,12 +270,12 @@ bool Serializer::load(const QString& filename)
     }
   }
 
-  //Recreating Reader
   reader = nullptr;
   mz_zip_reader_create(&reader);
-  err = mz_zip_reader_open_file(reader, filename.toStdString().c_str());
+  qInfo() << filename;
+  err = mz_zip_reader_open_file(reader, std_filename.c_str());
   if (err != MZ_OK) {
-    qInfo() << QString("Error %1 opening archive %2").arg(err).arg(filename);
+    qInfo() << QString("280:Error %1 opening archive %2").arg(err).arg(std_filename.c_str());
     mz_zip_reader_delete(&reader);
 
     return err;
