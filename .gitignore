@@ -4,6 +4,7 @@ build*/
 pfc_scenario_installer.exe
 
 #Sublime
+**.vscode
 *.sublime-workspace
 CMakeLists.txt.user
 #Linux
