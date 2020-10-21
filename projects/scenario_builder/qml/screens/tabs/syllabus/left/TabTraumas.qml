@@ -63,18 +63,18 @@ ColumnLayout {
           next = root.model.count + 1
         }
         self.injury_id = -1;
-        self.medical_name = "New Injury %1".arg(next);
-        self.common_name = "New Injury %1".arg(next);
-        self.description = "Description of Injury %1".arg(next);
+        self.medical_name = "New Trauma %1".arg(next);
+        self.common_name = "New Trauma %1".arg(next);
+        self.description = "Description of Trauma %1".arg(next);
         self.citations = "";
         self.min = 0.0;
         self.max = 1.0;
         while (root.backend.select_injury(self)) {
           next = next + 1
           self.injury_id = -1;
-          self.medical_name = "New Injury %1".arg(next);
-          self.common_name = "New Injury %1".arg(next);
-          self.description = "Description of Injury %1".arg(next)
+          self.medical_name = "New Trauma %1".arg(next);
+          self.common_name = "New Trauma %1".arg(next);
+          self.description = "Description of Trauma %1".arg(next)
         }
         self.uuid = "";
         root.backend.update_injury(self);
@@ -119,9 +119,6 @@ ColumnLayout {
       highlightMoveDuration : 1
       highlight : Rectangle {
         color : '#1111110F'
-        //          anchors.left : parent.left
-        //          anchors.right : parent.right
-        //          anchors.margins: 5
         Layout.alignment : Qt.AlignTop
         Layout.fillWidth : true
         Layout.margins : 5
@@ -130,10 +127,10 @@ ColumnLayout {
       model : ListModel {}
 
       delegate : Rectangle {
-        id : injury
+        id : trauma
         color : 'transparent'
         border.color : "steelblue"
-        height : injury_title_text.height + injury_value_text.height
+        height : trauma_title_text.height + trauma_value_text.height
         anchors {
           left : parent.left;
           right : parent.right;
@@ -149,10 +146,10 @@ ColumnLayout {
         }
 
         Text {
-          id : injury_title_text
-          anchors.left : injury.left
+          id : trauma_title_text
+          anchors.left : trauma.left
           anchors.leftMargin : 5
-          text : model.medical_name
+          text : model.name
           width : 150
           font.weight : Font.Bold
           font.pointSize : 10
@@ -161,8 +158,8 @@ ColumnLayout {
         }
 
         Text {
-          id : injury_value_text
-          anchors.top : injury_title_text.bottom
+          id : trauma_value_text
+          anchors.top :trauma_title_text.bottom
           anchors.left : parent.left
           anchors.right : parent.right
           anchors.leftMargin : 10
@@ -187,11 +184,11 @@ ColumnLayout {
         states : State {
           name : "Selected"
           PropertyChanges {
-            target : injury_title_text;
+            target : trauma_title_text;
             enabled : true
           }
           PropertyChanges {
-            target : injury_value_text;
+            target : trauma_value_text;
             enabled : true
           }
         }

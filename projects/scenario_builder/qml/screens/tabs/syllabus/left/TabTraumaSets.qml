@@ -106,7 +106,7 @@ ColumnLayout {
         id : injurySet
         color : 'transparent'
         border.color: "steelblue"
-        height : 30
+        height : objective_title_text.height + objective_value_text.height
         anchors { left : parent.left; right: parent.right ; margins : 5 }
 
         MouseArea {
