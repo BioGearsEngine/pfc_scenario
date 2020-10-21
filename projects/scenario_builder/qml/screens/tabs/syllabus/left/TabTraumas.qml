@@ -21,7 +21,7 @@ ColumnLayout {
   }
   function refresh_traumas() {
     var r_count = backend.injury_count();
-    root.backend.injuries()
+    root.backend.injuries();
     listArea.model.clear();
     while (root.backend.next_injury(self)) {
       listArea.model.insert(listArea.model.count, {
@@ -98,6 +98,9 @@ ColumnLayout {
         self.medical_name = root.model.get(root.index).medical_name;
         root.backend.remove_injury(self);
         root.model.remove(root.index);
+		if (listArea.currentIndex == 0) { // If the index was 0 this wasn't registering as an index change and the right pane wasn't reloading
+          listArea.currentIndex = 1
+        }
         listArea.currentIndex = Math.max(0, root.index - 1)
       }
     }
@@ -159,8 +162,8 @@ ColumnLayout {
 
         Text {
           id : injury_value_text
-          width : parent.width - 5
-          height : injury_title_text.height
+          //width : parent.width - 5
+          //height : injury_title_text.height
           anchors.top : injury_title_text.bottom
           anchors.left : parent.left
           anchors.right : parent.right
@@ -180,7 +183,7 @@ ColumnLayout {
           }
           enabled : false
           color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
-          //elide : Text.ElideRight
+          elide : Text.ElideRight
         }
 
         states : State {
