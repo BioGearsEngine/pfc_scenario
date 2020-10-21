@@ -353,31 +353,78 @@ bool SQLite3Driver::populate_equipment()
 {
 
   std::vector<std::pair<std::string, std::string>> default_equipment = {
-    { "Tourniquet", "A device which applies pressure to a limb or extremity in order to limit the flow of blood." },
+    { "Tourniquet", "A device which applies pressure to a limb or extremity in order to control the flow of blood.\n"
+                    "\n"
+                    "A tourniquet uses compression, typically on a limb, to constrict a vein or artery and limit blood flow as much as possible. This is typically done during hemorrhaging when limiting blood flow to the extremity also limits the blood lost. In a pinch, a cord or tie can be used.\n" },
     { "Tempus Pro with Peripherals", "A small, lightweight vital signs monitor.\n"
                                      "\n"
                                      "Light enough to carry and small enough to hold in one hand, it can easily be deployed in numerous clinical scenarios. While it does support additional attachments to allow for a wide range of measurements, some important included parameters the tempus pro measures includes pulse rate, impedance respiration, contact temperature, pulse oximetry, and noninvasive blood pressure.\n" },
-    { "Nasal Cannula", "A device used to deliver increased airflow to a patient in need of respiratory help." },
-    { "Simple Face Mask", "Disposable clear plastic mask, used to provide oxygen therapy for patients requiring a higher oxygen concentration." },
-    { "IV Needle", "Intravenous needle used to inject fluids directly into a vein." },
-    { "1 Unit O- Whole Blood", "525 mL of O- blood, approximately the equivalent of one pint." },
-    { "1 Unit A- Whole Blood", "525 mL of A- blood, approximately the equivalent of one pint." },
-    { "Blood Transfusion Kit", "Kit used for in field blood transfusion." },
-    { "Space Blanket", "Low-weight, low-bulk blanket made of heat-reflective thin plastic sheeting." },
-    { "Syringe", "Simple reciprocating pump using plunger or piston to expel liquid or gas through a hypodermic needle." },
-    { "Antibiotics", "Antimicrobial substance active against bacteria, used in the treatment and prevention of bacterial infections." },
-    { "Epinephrine", "A chemical that narrows blood vessels and opens airways in the lungs." },
-    { "Fentanyl", "A synthetic opioid pain relieve, approved for treating severe pain." },
-    { "Ketamine", "A dissociative anesthetic used pain relief." },
-    { "Midazolam", "A short action sedative used for anesthesia, procedural sedation, trouble sleeping, and severe agitation." },
-    { "Morphine", "A narcotic pain reliever used to treat moderate to severe pain." },
-    { "Narcan", "Naloxone, a medication used to block the effects of opiods, commonly used for decreased breathing in opioid overdose." },
-    { "1000 mL Saline Bag", "1000 mL bag of saline solution." },
-    { "500 mL Lactated Ringers Bag", "500 mL bag of Lactated Ringers." },
-    { "Urine Foley", "Catheter used to drain urine." },
-    { "Urine Bag", "Bag used to catch and store drained urine." },
-    { "Water", "An inorganic, transparent, tasteless, odorless, and nearly colorless chemical substance." },
-    { "Energy Gel", "Carbohydrate gel used to provide energy and promote recovery." }
+    { "Nasal Cannula", "A device used to deliver increased airflow to a patient in need of respiratory help.\n"
+                       "\n"
+                       "Tubing with two prongs that get inserted into a patient's nose, this equipment is attached to an oxygen source and mainly used to control oxygen flow to the patient. The advantages to this delivery method is that is less invasive than other oxygen masks and allows a patient to eat and speak normally.\n" },
+    { "Simple Face Mask", "Disposable clear plastic mask, used to provide oxygen therapy for patients requiring a higher oxygen concentration.\n"
+                          "\n"
+                          "A simple face mask covers a patient's mouth and nose and connects to an oxygen source to control oxygen delivery to the patient. While more invasive than a cannula, this method provides more inclusive coverage of both respiratory paths.\n" },
+    { "IV Needle", "Intravenous needle used to inject fluids directly into a vein.\n"
+                   "\n"
+                   "Length and thickness of iv needles can vary, though their function remains generally the same. A clean iv needle should be used on each patient.\n" },
+    { "1 Unit O- Whole Blood", "525 mL of O- blood, approximately the equivalent of one pint.\n"
+                               "\n"
+                               "Blood unit containing the A type antigen and no Rh factor.\n"},
+    { "1 Unit A- Whole Blood", "525 mL of A- blood, approximately the equivalent of one pint.\n"
+                               "\n"
+                               "Blood unit containing the no antigens or an Rh factor. This type is known as the universal donor as a result.\n" },
+    { "Blood Collection Bag", "Clear plastic bag used to collect and store blood.\n"
+                              "\n"
+                              "Bags are usually 500 mL in volume (referred to as one unit).\n" },
+    { "Blood Transfusion Kit", "Kit used for in field blood transfusion.\n"
+                               "\n"
+                               "Designed for field application, a transfusion kit contains supplies necessary to collect and transfuse fresh whole blood (FWB). The kit typically contains everything from safety supplies and equipment (gloves, blood type test kits, and swabsticks) to collection materials (tubing, needles, collection bag, etc.). Additionally, two sets of most safety materials are supplied to prevent multiple uses on both donor and recipient (i.e. two needles).\n" },
+    { "Space Blanket", "Low-weight, low-bulk blanket made of heat-reflective thin plastic sheeting.\n"
+                       "\n"
+                       "Also referred to as mylar, these are commonly used to prevent heat loss from a human body.\n" },
+    { "Syringe", "Simple reciprocating pump using plunger or piston to expel liquid or gas through a hypodermic needle.\n"
+                 "\n"
+                 "In medicine, these can be used to withdraw liquids, such as when cleaning wounds or body cavities, or to inject fluids, as is the case with some drug injections.\n" },
+    { "Antibiotics", "Antimicrobial substance active against bacteria, used in the treatment and prevention of bacterial infections.\n"
+                     "\n"
+                     "This medication usually comes in the form of a pill. There are different types of antibiotics for different applications.\n" },
+    { "Epinephrine", "A chemical that narrows blood vessels and opens airways in the lungs.\n"
+                     "\n"
+                     "\n" },
+    { "Fentanyl", "A synthetic opioid pain relieve, approved for treating severe pain.\n"
+                  "\n"
+                  "Fentanyl is a prescription drug that is also made and used illegally. Like morphine, it is a medicine that is typically used to treat patients with severe pain, especially after surgery. It is also sometimes used to treat patients with chronic pain who are physically tolerant to other opioids.\n" },
+    { "Ketamine", "A dissociative anesthetic used pain relief.\n"
+                  "\n"
+                  "Ketamine can provide pain relief and short-term memory loss (for example, amnesia of a medical procedure). In surgery, it is used an induction and maintenance agent for sedation and to provide general anesthesia. It has also been used for pain control in burn therapy, battlefield injuries, and in children who cannot use other anesthetics due to side effects or allergies. At normal doses, it is often preferred as an anesthetic in patients at risk of bronchospasm and respiratory depression.\n" },
+    { "Midazolam", "A short action sedative used for anesthesia, procedural sedation, trouble sleeping, and severe agitation.\n"
+                   "\n"
+                   "Midazolam injection is used before medical procedures and surgery to cause drowsiness, relieve anxiety, and prevent any memory of the event. It is also sometimes given as part of the anesthesia during surgery to produce a loss of consciousness.\n" },
+    { "Morphine", "A narcotic pain reliever used to treat moderate to severe pain.\n"
+                  "\n"
+                  "Morphine is an opioid medication used to treat severe chronic pain. It has a high rate of addiction, overdose, and death.\n" },
+    { "Narcan", "Naloxone, a medication used to block the effects of opioids, commonly used for decreased breathing in opioid overdose.\n"
+                "\n"
+                "Naloxone is a medicine that rapidly reverses an opioid overdose. It attaches to opioid receptors and reverses and blocks the effects of other opioids. Naloxone is a safe medicine. It only reverses overdoses in people with opioids in their systems.\n" },
+    { "1000 mL Saline Bag", "1000 mL bag of saline solution.\n"
+                            "\n"
+                            "A mixture of sodium chloride in water typically used to clean wounds or stabilize blood loss, though there are many other uses.\n" },
+    { "500 mL Lactated Ringers Bag", "500 mL bag of Lactated Ringers.\n"
+                                     "\n"
+                                     "Composed of sodium chloride, sodium lactate, potassium chloride, and calcium chloride in water, a patient would typically be given this intravenously if they are dehydrated, having surgery, or receiving IV medications.\n" },
+    { "Urine Foley", "Catheter used to drain urine.\n"
+                     "\n"
+                     "A soft plastic or rubber tube that is inserted through the urethra into the bladder. These are typically used when a patient has difficulties urinating on their own.\n" },
+    { "Urine Bag", "Bag used to catch and store drained urine.\n"
+                   "\n"
+                   "\n" },
+    { "Water", "An inorganic, transparent, tasteless, odorless, and nearly colorless chemical substance.\n"
+               "\n"
+               "It is also essential to and the primary component of living organic beings.\n" },
+    { "Energy Gel", "Carbohydrate gel used to provide energy and promote recovery.\n"
+                    "\n"
+                    "\n" }
   };
 
   Equipment temp; //Count
@@ -401,14 +448,14 @@ bool SQLite3Driver::populate_injuries()
   };
 
   std::vector<sInjury> default_injuries = {
-    { "Contusion", "Internal Bleeding", "Bleeding on the inside" },
-    { "Laceration", "External Bleeding", "Bleeding on the outside" },
-    { "Puncture", "Holes in body", "Big holes in your skin" },
-    { "Airway Trauma", "Trauma to airway", "Trauma to your airway" },
-    { "Infection", "Is infected", "A bacterial infection" },
-    { "First Degree Burn", "Alright burn", "A first degree burn" },
-    { "Second Degree Burn", "Bad burn", "A second degree burn" },
-    { "Third Degree Burn", "Terrible burn", "A third degree burn" }
+    { "Contusion", "Bruising", "Bleeding under the skin due to trauma to the blood capillaries can cause injured tissues. It usually darkens the skin to a black/blue color." },
+    { "Laceration", "External Bleeding", "External bleeding of the body produced by the tearing of soft body tissue." },
+    { "Puncture", "Puncture Wound", "An injury to the body cause by a piercing or penetrating object. Depth and severity can vary." },
+    { "Airway Trauma", "Trauma to airway", "Airway injuries are life threatening and often occur as a result of blunt and penetrating force to the neck and/or chest. Diagnosis can be challenging due to symptoms and signs that are nonspecific to this injury type." },
+    { "Infection", "Infection", "The invasion and growth of bacteria, viruses, yeast, or fungi in the body. Infections can begin at any point in the body and spread, causing fever and other health issues." },
+    { "First Degree Burn", "Superficial Burn", "A heat injury that affects the first layer of skin. Most commonly, it causes redness, pain, and swelling and will heal on its own, though larger burns can be uncomfortable and may require a doctor's opinion." },
+    { "Second Degree Burn", "Partial Thickness Burn", "A burn that affects the epidermis and dermis (lower layers of skin). In addition to the symptoms of a first degree, a second degree burn can also cause blistering." },
+    { "Third Degree Burn", "Full Thickness Burn", "A burn that goes through the dermis and affects deep skin tissue layers. The result is a white or blackened, charred skin that may lose some feeling." }
   };
 
   Injury temp;
@@ -433,16 +480,16 @@ bool SQLite3Driver::populate_treatments()
     std::string description;
   };
   std::vector<sTreatment> default_treatments = {
-    { "Chest Tube", "Chest Tube", "Insertion of a hollow plastic tube between ribs and pleural space." },
-    { "Needle Thoracostomy", "Needle Decompression", "Insertion of a needle into the pleural space to decompress a tension pneumothorax" },
-    { "Burn Ointment", "Burn Ointment", "A topical ointment applied to burn areas to aid healing." },
-    { "Bandage", "Bandage", "A cloth wrapping for wounds." },
-    { "Suture", "Stitches", "Suture an open wound to seal it." },
-    { "Antibiotics", "Antibiotics", "Give does of antibiotics to patient." },
-    { "Fentanyl", "Fentanyl", "Administer a dose of fentanyl." },
-    { "Morphine", "Morphine", "Administer a dose of morphine." },
-    { "Pack Wound", "Pack Wound", "Pack wound with material to absorb discharge." },
-    { "Escharotomy", "Escharotomy", "A surgical procedure used to treat full-thickness circumferential burns." }
+    { "Chest Tube", "Chest Tube", "A chest tube is a hollow, flexible tube placed into the chest. It acts as a drain for blood, fluid, or air from around the heart and lungs. " },
+    { "Needle Thoracostomy", "Needle Decompression", "A procedure performed to stabilize deteriorating patients in the life-threatening situation of a tension pneumothorax. The procedure involves inserting a large needle through the chest wall into the pleural cavity to allow air to escape. " },
+    { "Burn Ointment", "Burn Ointment", "Used to help in the prevention and treatment of infections during burn healing, burn ointment kills infectious microorganisms and reduces inflammation. " },
+    { "Bandage", "Bandage/Wrap", "A strip of fabric used especially to cover, dress, and bind up wounds." },
+    { "Suture", "Stitches", "A stitch or row of stitches holding together the edges of a wound or incision. They typically help hold tissue together during healing." },
+    { "Antibiotics", "Antibiotics", "Antimicrobial substance active against bacteria, used in the treatment and prevention of bacterial infections. This medication usually comes in the form of a pill. There are different types of antibiotics for different applications." },
+    { "Fentanyl", "Fentanyl", "Fentanyl is a prescription drug that is also made and used illegally. Like morphine, it is a medicine that is typically used to treat patients with severe pain, especially after surgery. It is also sometimes used to treat patients with chronic pain who are physically tolerant to other opioids." },
+    { "Morphine", "Morphine", "Morphine is an opioid medication used to treat severe chronic pain. It has a high rate of addiction, overdose, and death." },
+    { "Pack Wound", "Pack Wound", "When a wound is deep, or when it tunnels under the skin, packing the wound can help it heal. The packing material soaks up any drainage from the wound, which helps the tissues heal from the inside out." },
+    { "Escharotomy", "Escharotomy", "During treatment of a hazardous burn, an escharotomy is the surgical incision through the eschar into the subcutaneous tissues to allow the extremity to continue to swell without compressing underlying blood vessels." }
   };
   Treatment temp;
   for (auto& injuryDef : default_treatments) {
