@@ -181,7 +181,7 @@ Rectangle {
             font.weight: Font.Bold
             font.pointSize: 10
             enabled : false
-            color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+            color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
           }  
 
           Text {
@@ -193,7 +193,7 @@ Rectangle {
             font.pointSize: 10
             text :  model.key
             enabled : false
-            color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+            color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
             elide: Text.ElideRight
           }  
 

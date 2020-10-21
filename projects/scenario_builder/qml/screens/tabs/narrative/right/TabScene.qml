@@ -154,7 +154,6 @@ Rectangle {
         onCurrentIndexChanged : {
           var entry = root.model.get(root.index);
           if (detailEntry.text != entry.details && detailEntry.loadComplete) {
-            console.log(typeBox.model[typeBox.currentIndex], kindBox.model[kindBox.currentIndex], styleBox.model[styleBox.currentIndex])
             detailEntry.text = "%1:%2:%3".arg(typeBox.model[typeBox.currentIndex]).arg(kindBox.model[kindBox.currentIndex]).arg(styleBox.model[styleBox.currentIndex]);
             update_scene(entry)
           }
@@ -178,7 +177,6 @@ Rectangle {
         onCurrentIndexChanged : {
           var entry = root.model.get(root.index);
           if (detailEntry.text != entry.details && detailEntry.loadComplete) {
-            console.log(typeBox.model[typeBox.currentIndex], kindBox.model[kindBox.currentIndex], styleBox.model[styleBox.currentIndex])
             detailEntry.text = "%1:%2:%3".arg(typeBox.model[typeBox.currentIndex]).arg(kindBox.model[kindBox.currentIndex]).arg(styleBox.model[styleBox.currentIndex]);
             update_scene(entry)
           }
@@ -235,7 +233,6 @@ Rectangle {
         onCurrentIndexChanged : {
           var entry = root.model.get(root.index);
           if (detailEntry.text != entry.details && detailEntry.loadComplete) {
-            console.log(typeBox.model[typeBox.currentIndex], kindBox.model[kindBox.currentIndex], styleBox.model[styleBox.currentIndex])
             detailEntry.text = "%1:%2:%3".arg(typeBox.model[typeBox.currentIndex]).arg(kindBox.model[kindBox.currentIndex]).arg(styleBox.model[styleBox.currentIndex]);
             update_scene(entry)
           }

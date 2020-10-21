@@ -183,7 +183,7 @@ ColumnLayout {
             font.weight: Font.Bold
             font.pointSize: 10
             enabled : false
-            color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+            color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
           }  
 
           Text {
@@ -195,7 +195,7 @@ ColumnLayout {
             font.pointSize: 10
             text :  description
             enabled : false
-            color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+            color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
             elide: Text.ElideRight
           }  
 
@@ -353,7 +353,7 @@ ColumnLayout {
             font.weight: Font.Bold
             font.pointSize: 10
             enabled : false
-            color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+            color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
           }  
 
           Text {
@@ -365,7 +365,7 @@ ColumnLayout {
             font.pointSize: 10
             text :  description
             enabled : false
-            color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+            color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
             elide: Text.ElideRight
           }  
 

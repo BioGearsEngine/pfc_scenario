@@ -55,7 +55,7 @@ FullListEntry {
        activeFocusOnPress: false
        hoverEnabled : false
        enabled : false
-       color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+       color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
        onEditingFinished : {
          update_equipment(model.equipment_id)
       }
@@ -72,7 +72,7 @@ FullListEntry {
        activeFocusOnPress: false
        hoverEnabled : false
        enabled : false
-       color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+       color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
        onEditingFinished : {
          update_equipment(model.equipment_id)
        }

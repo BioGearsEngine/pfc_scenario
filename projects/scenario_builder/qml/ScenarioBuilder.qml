@@ -189,7 +189,6 @@ ApplicationWindow {
        create_scenario(scenario_model)
       }
       onRecentClicked : {
-        console.log(path)
         scenario_model.log_scenario_file(path)
         listUpdated()
         if(scenario_serializer.load(path)) {

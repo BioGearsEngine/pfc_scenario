@@ -121,7 +121,7 @@ ColumnLayout {
             font.pointSize: 10
            }
            enabled : false
-           color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+           color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
         }
         onFocusChanged: {
           if(sceneList.currentIndex == index){

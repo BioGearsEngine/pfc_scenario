@@ -125,8 +125,9 @@ ColumnLayout {
           width : 150
           font.weight: Font.Bold
           font.pointSize: 10
+          wrapMode : Text.Wrap
           enabled : false
-          color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+          color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
         }
 // This won't get deleted just yet because we haven't decided on how this bar should look
 //        Text { 
@@ -137,7 +138,7 @@ ColumnLayout {
 //          font.pointSize: 10
 //          text :  description
 //          enabled : false
-//          color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+//          color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
 //          elide: Text.ElideRight
 //        }
 

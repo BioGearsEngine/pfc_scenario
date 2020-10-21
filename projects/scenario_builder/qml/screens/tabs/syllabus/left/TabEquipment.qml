@@ -143,7 +143,7 @@ ColumnLayout {
           font.weight: Font.Bold
           font.pointSize: 10
           enabled : false
-          color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+          color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
         }
 
         Text {
@@ -166,7 +166,7 @@ ColumnLayout {
               }
           } 
           enabled : false
-          color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+          color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
           elide: Text.ElideRight
         }
 
@@ -190,7 +190,7 @@ ColumnLayout {
 
       Component.onCompleted : {
         var r_count = backend.equipment_count();
-        root.backend.equipments()
+        root.backend.equipments();
         listArea.model.clear();
         while ( root.backend.next_equipment(self) ){
           listArea.model.insert(listArea.model.count,

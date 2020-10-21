@@ -31,7 +31,7 @@ Rectangle {
     property string name : root.itemInScene.name 
     property string type : root.itemInScene.equipment.name 
     property string notes :  root.itemInScene.notes
-    property ListModel properties : { console.log(root.propertyModel), root.propertyModel}
+    property ListModel properties : root.propertyModel
     source : "ScenePropertySummary.qml"
     state : "collapsed"
 
@@ -70,13 +70,9 @@ Rectangle {
     // Range   = #,min,max       -  min/max are integral types
 
     root.propertyModel.clear();
-    console.log("Logging Key/Value Strings for ('%1', '%2')".arg(itemInScene.name).arg(itemInScene.notes))
-
     for (var ii = 0; ii < item_properties.length; ++ ii) {
       var property_details = item_properties[ii].split(':');
       var property_values = item_values[ii].split(':');
-      console.log("Property String = %1".arg(property_details))
-      console.log("Value String = %1".arg(property_values))
       switch (property_details[1].toLowerCase()) {
         case "boolean":
           root.propertyModel.append({"name": property_details[0], "type": "boolean", "value": property_values[0]})

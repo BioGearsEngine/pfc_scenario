@@ -31,7 +31,6 @@ Rectangle{
       currentLocation.location_id
       currentLocation.name = locationNameEntry.text
       currentLocation.environment = environmentEntry.text
-      console.log("RP_Location updating_location on \"%1\"".arg(currentLocation.name))
       root.backend.update_location(currentLocation)
     } 
     border.color: 'black'
@@ -45,7 +44,6 @@ Rectangle{
           label : "Location Name"
           placeholderText: "String Field (128 Characters)"
           onEditingFinished : {
-            console.log("locationNameEntry.onEditingFinished")
             update_location()
           }
         }
@@ -76,7 +74,6 @@ Rectangle{
           required: true
           placeholderText: "Weather Input Area"
           onEditingFinished : {
-            console.log("environmentEntry.onEditingFinished")
             update_location()
           }
         }   

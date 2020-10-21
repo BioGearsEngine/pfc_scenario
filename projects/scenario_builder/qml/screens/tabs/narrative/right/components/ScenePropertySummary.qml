@@ -147,6 +147,6 @@ GridLayout {
   }
 
   Component.onCompleted : {
-    console.log("ScenePropertySummary", properties)
+   
   }
 }

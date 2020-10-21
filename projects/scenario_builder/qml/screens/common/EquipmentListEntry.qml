@@ -43,7 +43,7 @@ ListEntry {
        anchors.leftMargin : 10
        font.pointSize: 10
        text :  model.name
-       color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+       color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
     }
 
     Text {
@@ -53,7 +53,7 @@ ListEntry {
        anchors.leftMargin : 10
        font.pointSize: 10
        text :  model.description
-       color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+       color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
        elide : Text.ElideRight
       }
 

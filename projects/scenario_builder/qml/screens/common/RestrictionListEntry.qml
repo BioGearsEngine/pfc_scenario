@@ -41,10 +41,6 @@ ListEntry {
          self.name    = restriction_name_text.text
          self.value   = restriction_value_text.text
 
-//         console.log("%1,%2,%3,%4,%5".arg(self.restriction_id)
-//          .arg(self.name)
-//          .arg(self.value))
-
          root.backend.update_restriction(self)
      }
     
@@ -60,7 +56,7 @@ ListEntry {
        activeFocusOnPress: false
        hoverEnabled : false
        enabled : false
-       color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+       color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
        onEditingFinished : {
          self.restriction_id = -1
          self.name = restriction_title_text.text
@@ -80,7 +76,7 @@ ListEntry {
        activeFocusOnPress: false
        hoverEnabled : false
        enabled : false
-       color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+       color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
        onEditingFinished : {
          self.restriction_id = -1
          self.name = restriction_title_text.text

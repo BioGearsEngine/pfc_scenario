@@ -9,9 +9,9 @@ import "../../../common"
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
 ColumnLayout {
-  id: root
+  id : root
   property SQLBackend backend
-  readonly property alias model : listArea.model 
+  readonly property alias model : listArea.model
   readonly property alias index : listArea.currentIndex
 
 
@@ -22,81 +22,82 @@ ColumnLayout {
   Rectangle {
     id : listRectangle
     Layout.fillWidth : true
-    Layout.fillHeight: true
+    Layout.fillHeight : true
     Layout.margins : 5
 
     border.color : "black"
 
     TwoButtonRow {
-      id: controls
+      id : controls
       anchors.top : listRectangle.top
       anchors.left : listRectangle.left
       anchors.right : listRectangle.right
       anchors.topMargin : 2
-      anchors.rightMargin  : 5
-      anchors.leftMargin  : 5
+      anchors.rightMargin : 5
+      anchors.leftMargin : 5
 
       property int next : 1
 
       firstButtonText : "Add"
       secondButtonText : "Remove"
 
-      onFirstButtonClicked :{
-        if( next < root.model.count ) 
-        { next = root.model.count +1}
-        self.assessment_id = -1
-        self.name = "New Assessment %1".arg(next)
-        self.description = "Description of Assessment %1".arg(next)
-        self.type = "binary" //vs assessment
-        self.available_points = "1"
-        self.criteria = "Unknown Criteria"
-
-        while( root.backend.select_assessment(self) )
-        { 
-         next = next +1
-         self.assessment_id = -1; 
-         self.name = "New Assessment %1".arg(next);
-         self.description = "Description of Assessment %1".arg(next)
-        } 
-        self.uuid = ""
-        root.backend.update_assessment(self)
-        root.model.insert(root.model.count,
-          {
-           "id" : self.assessment_id,
-           "name": "%1".arg(self.name), 
-           "description": "%1".arg(self.description) , 
-           "type": self.type,
-           "available_points": self.available_points,
-           "criteria": self.criteria
-          }
-        );
+      onFirstButtonClicked : {
+        if (next < root.model.count) {
+          next = root.model.count + 1
+        }
+        self.assessment_id = -1;
+        self.name = "New Assessment %1".arg(next);
+        self.description = "Description of Assessment %1".arg(next);
+        self.type = "binary" // vs assessment
+        self.available_points = "1";
+        self.criteria = "Unknown Criteria";
+        while (root.backend.select_assessment(self)) {
+          next = next + 1
+          self.assessment_id = -1;
+          self.name = "New Assessment %1".arg(next);
+          self.description = "Description of Assessment %1".arg(next)
+        }
+        self.uuid = "";
+        root.backend.update_assessment(self);
+        root.model.insert(root.model.count, {
+          "id": self.assessment_id,
+          "name": "%1".arg(self.name),
+          "description": "%1".arg(self.description),
+          "type": self.type,
+          "available_points": self.available_points,
+          "criteria": self.criteria
+        });
         ++next;
       }
       onSecondButtonClicked : {
         if (root.model.count == 0) {
           return
         }
-        self.assessment_id = -1
-        self.name = root.model.get(root.index).name
-        root.backend.remove_assessment(self)
-        root.model.remove(root.index)
-        listArea.currentIndex = Math.max(0,root.index-1)
+        self.assessment_id = -1;
+         self.name = root.model.get(root.index).name;
+          root.backend.remove_assessment(self);
+          root.model.remove(root.index);
+          listArea.currentIndex = Math.max(0, root.index - 1)
       }
     }
 
     ListView {
       id : listArea
-      anchors { top : controls.bottom ; bottom : parent.bottom; 
-                   left : parent.left ; right : parent.right }  
+      anchors {
+        top : controls.bottom;
+        bottom : parent.bottom;
+        left : parent.left;
+        right : parent.right
+      }
       spacing : 5
-      clip: true
+      clip : true
       highlightFollowsCurrentItem : true
       highlightMoveDuration : 1
-      highlight: Rectangle {
-          color: '#1111110F'
-          Layout.alignment: Qt.AlignTop
-          Layout.fillWidth: true
-          Layout.margins : 5
+      highlight : Rectangle {
+        color : '#1111110F'
+        Layout.alignment : Qt.AlignTop
+        Layout.fillWidth : true
+        Layout.margins : 5
       }
 
       model : ListModel {}
@@ -104,13 +105,17 @@ ColumnLayout {
       delegate : Rectangle {
         id : assessment
         color : 'transparent'
-        border.color: "steelblue"
+        border.color : "steelblue"
         height : assessment_title_text.height + assessment_value_text.height
-        anchors { left : parent.left; right: parent.right ; margins : 5 }
+        anchors {
+          left : parent.left;
+          right : parent.right;
+          margins : 5
+        }
 
         MouseArea {
-          anchors.fill: parent
-          onClicked: {
+          anchors.fill : parent
+          onClicked : {
             listArea.currentIndex = index
 
           }
@@ -120,12 +125,12 @@ ColumnLayout {
           id : assessment_title_text
           anchors.left : assessment.left
           anchors.leftMargin : 5
-          text :  model.name
+          text : model.name
           width : 150
-          font.weight: Font.Bold
-          font.pointSize: 10
+          font.weight : Font.Bold
+          font.pointSize : 10
           enabled : false
-          color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+          color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
         }
 
         Text {
@@ -134,50 +139,65 @@ ColumnLayout {
           anchors.left : parent.left
           anchors.right : parent.right
           anchors.leftMargin : 10
-          font.pointSize: 10
-          text :  description
-          enabled : false
-          color: enabled ? Material.primaryTextColor : Material.primaryTextColor
-          elide: Text.ElideRight
-        }
+          font.pointSize : 10
+          wrapMode : Text.Wrap
+          text : {
+            if (!enabled) {
+              return description.split("\n")[0].trim()
+            } else {
+              var details = description.split("\n")
+              details.splice(0, 1)
+              var details_str = details.join('\n').trim()
+              return(details_str === "") ? description.trim() : details_str
 
-        states: State {
-          name : "Selected"
-          PropertyChanges{ target : assessment_title_text; enabled : true}
-          PropertyChanges{ target : assessment_value_text; enabled  : true}
-        }
-
-        onFocusChanged: {
-          if(listArea.currentIndex == index){
-            state = 'Selected';
+            }
           }
-          else{
+          enabled : false
+          color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
+          elide : Text.ElideRight
+        }
+
+        states : State {
+          name : "Selected"
+          PropertyChanges {
+            target : assessment_title_text;
+            enabled : true
+          }
+          PropertyChanges {
+            target : assessment_value_text;
+            enabled : true
+          }
+        }
+
+        onFocusChanged : {
+          if (listArea.currentIndex == index) {
+            state = 'Selected';
+          } else {
             state = '';
           }
         }
       }
 
-      ScrollBar.vertical: ScrollBar { }
+      ScrollBar.vertical : ScrollBar {}
 
       Component.onCompleted : {
         var r_count = backend.assessment_count();
-        root.backend.assessments()
+        root.backend.assessments();
         listArea.model.clear();
-        while ( root.backend.next_assessment(self) ){
-          
+        while (root.backend.next_assessment(self)) {
+
           var js_citations = []
-          for ( var citation in self.citations ){
-            js_citations.push( citation )
+          for (var citation in self.citations) {
+            js_citations.push(citation)
           }
-          listArea.model.insert(listArea.model.count,
-            {
-             id :self.assessment_id,
-             name:"%1".arg(self.name), 
-             description:"%1".arg(self.description) , 
-             type:self.type,
-             available_points:self.available_points,
-             criteria:self.criteria
-            });
+          listArea.model.insert(listArea.model.count, {
+            id: self.assessment_id,
+            name: "%1".arg(self.name),
+            description: "%1".arg(self.description),
+            type: self.type,
+            available_points: self.available_points,
+            criteria: self.criteria
+          });
         }
       }
     }

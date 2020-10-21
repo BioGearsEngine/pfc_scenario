@@ -48,7 +48,7 @@ ListEntry {
        font.weight: Font.Bold
        font.pointSize: 8
        text :  model.medical_name
-       color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+       color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
     }
 
     PFCLabel {
@@ -73,7 +73,7 @@ ListEntry {
       activeFocusOnPress: false
       hoverEnabled : false
       enabled : false
-      color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+      color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
       onEditingFinished : {
         root.locationChanged(index , text)
         if(root.current != index){
@@ -108,7 +108,7 @@ ListEntry {
        activeFocusOnPress: false
        hoverEnabled : false
        enabled : false
-       color: enabled ? Material.primaryTextColor : Material.primaryTextColor
+       color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
        onEditingFinished : {
          root.severityChanged(index , text)
         if(root.current != index){
