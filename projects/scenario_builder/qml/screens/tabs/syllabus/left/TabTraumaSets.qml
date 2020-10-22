@@ -103,10 +103,10 @@ ColumnLayout {
       model : ListModel {}
 
       delegate : Rectangle {
-        id : injurySet
+        id : traumaSet
         color : 'transparent'
         border.color: "steelblue"
-        height : objective_title_text.height + objective_value_text.height
+        height : traumaSet_title_text.height + traumaSet_value_text.height
         anchors { left : parent.left; right: parent.right ; margins : 5 }
 
         MouseArea {
@@ -118,8 +118,8 @@ ColumnLayout {
         }
 
         Text {
-          id : injurySet_title_text
-          anchors.left : injurySet.left
+          id : traumaSet_title_text
+          anchors.left : traumaSet.left
           anchors.leftMargin : 5
           text :  model.name
           width : 150
@@ -130,22 +130,22 @@ ColumnLayout {
           color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
         }
 // This won't get deleted just yet because we haven't decided on how this bar should look
-//        Text { 
-//          id : injurySet_value_text
-//          anchors.left : injurySet_title_text.right
-//          anchors.right : parent.right
-//          anchors.leftMargin : 10
-//          font.pointSize: 10
-//          text :  description
-//          enabled : false
-//          color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
-//          elide: Text.ElideRight
-//        }
+       Text { 
+         id : traumaSet_value_text
+         anchors.left : traumaSet_title_text.right
+         anchors.right : parent.right
+         anchors.leftMargin : 10
+         font.pointSize: 10
+         text :  description
+         enabled : false
+         color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
+         elide: Text.ElideRight
+       }
 
         states: State {
           name : "Selected"
-          PropertyChanges{ target : injurySet_title_text; enabled : true}
-          //PropertyChanges{ target : injurySet_value_text; enabled  : true}
+          PropertyChanges{ target : traumaSet_title_text; enabled : true}
+          //PropertyChanges{ target : traumaSet_value_text; enabled  : true}
         }
 
         onFocusChanged: {

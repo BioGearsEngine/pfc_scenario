@@ -814,7 +814,7 @@ public:
   {
     id = -1;
     uuid.clear();
-    name.clear();
+     name.clear();
     short_name.clear();
     description.clear();
     trauma_profile.clear();

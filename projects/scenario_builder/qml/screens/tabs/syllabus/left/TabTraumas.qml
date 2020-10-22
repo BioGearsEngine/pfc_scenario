@@ -149,7 +149,7 @@ ColumnLayout {
           id : trauma_title_text
           anchors.left : trauma.left
           anchors.leftMargin : 5
-          text : model.name
+          text : model.medical_name
           width : 150
           font.weight : Font.Bold
           font.pointSize : 10
