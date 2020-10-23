@@ -55,19 +55,16 @@ add_source_files(RESOURCES LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/qml
                 REGEX "*.qrc"  SOURCE_GROUP  "Resources")
 add_source_files(QML_FILES LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/qml 
                 REGEX "*.qml" SOURCE_GROUP  "Resources")
+add_source_files(XSD_RESOURCES LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/xsd/ver_${PFC_SCHEMA_VERSION}/ 
+                 REGEX "*.xsd" SOURCE_GROUP "Resources")
+
 add_source_files(UNIT_TEST LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/unit_test
                 REGEX "*.cpp" SOURCE_GROUP  "Tests")
 
 #XSD_HEADER_FILES
 set(PFC_SCHEMA_VERSION 0.3 CACHE STRING "Version of Scehema to compile against. DO_NOT_CHANGE")
 
-message(STATUS "
- 67 REGISTER_XSD_DIR(  \"${CMAKE_CURRENT_SOURCE_DIR}/xsd/ver_${PFC_SCHEMA_VERSION}\"  
- 68                     CONFIG \"${CMAKE_CURRENT_SOURCE_DIR}/xsd/ver_${PFC_SCHEMA_VERSION}/pfc_scenario.cfg\"
- 69                     PROJECT \"generated/pfc\" COMPONENT \"schema\" RESOURCE_FOLDER \"resources/schema\"
- 70                     TARGETS XSD_TARGETS VERBOSITY 1)
 
-")
 REGISTER_XSD_DIR(  "${CMAKE_CURRENT_SOURCE_DIR}/xsd/ver_${PFC_SCHEMA_VERSION}"  
                     CONFIG "${CMAKE_CURRENT_SOURCE_DIR}/xsd/ver_${PFC_SCHEMA_VERSION}/pfc_scenario.cfg"
                     PROJECT "generated/pfc" COMPONENT "schema" RESOURCE_FOLDER "resources/schema"
@@ -91,7 +88,7 @@ set ( XSD_FILES
     "extern/jc3iedm-3.1-codes-20061208.xsd"
     "extern/model_id_v2006_final.xsd"
   )
-  
+
   function(generate_hex_header)
     set(options )
     set(oneValueArgs INPUT OUTPUT)
@@ -188,7 +185,7 @@ endif()
 ###############################################################################
 
 # lib_pfc_xsd
-add_library(pfc_serialization SHARED  ${XSD_SRCS} ${XSD_HDRS})
+add_library(pfc_serialization SHARED  ${XSD_SRCS} ${XSD_HDRS} ${XSD_RESOURCES})
 target_link_libraries(pfc_serialization Xerces::xerces)
 add_library( Builder::serial ALIAS pfc_serialization )
 set_target_properties(pfc_serialization
@@ -206,7 +203,7 @@ set_target_properties(pfc_serialization
 target_compile_options(pfc_serialization PRIVATE $<$<PLATFORM_ID:Windows>:/bigobj>  PRIVATE $<$<PLATFORM_ID:Windows>:/MP>)
 
 # lib_pfc_builder
-add_library(libScenarioBuilder STATIC ${${PREFIX}_SOURCES} ${${PREFIX}_HEADERS})
+add_library(libScenarioBuilder STATIC ${${PREFIX}_SOURCES} ${${PREFIX}_HEADERS} ${XSD_RESOURCES})
 add_library(Builder::lib ALIAS libScenarioBuilder)
 target_link_libraries(libScenarioBuilder PUBLIC   
   Qt5::Core 
@@ -250,7 +247,7 @@ if(CMAKE_COMPILER_IS_GNUCXX)
 endif()
 
 # GUI Executable
-add_executable(ScenarioBuilder ${CMAKE_CURRENT_SOURCE_DIR}/cpp/main.cpp  ${qml_QRC}  ${QML_FILES})
+add_executable(ScenarioBuilder ${CMAKE_CURRENT_SOURCE_DIR}/cpp/main.cpp  ${qml_QRC}  ${QML_FILES} )
 target_link_libraries(ScenarioBuilder 
   Builder::lib 
   Builder::serial
