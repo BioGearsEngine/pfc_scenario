@@ -53,9 +53,11 @@ int main(int argc, char* argv[])
   qmlRegisterType<Scene>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Scene");
 
   qmlRegisterType<pfc::Serializer>("com.ara.pfc.ScenarioModel.XML", 1, 0, "XMLSeralizer");
-  //qmlRegisterInterface<EquipmentMap>("EquipmentMap const&");
+
+
   qmlRegisterInterface<EquipmentMap>("const EquipmentMap*");
-  //qmlRegisterInterface<EquipmentMap>("EquipmentMap const*");
+  qmlRegisterInterface<Equipment>("const Equipment*");
+ 
 
   QPixmap pixmap("D:/biogears/pfc/scenario/build/img/sustain_splash.png");
   qDebug() << QString("%1,%2").arg(pixmap.height()).arg(pixmap.width()); //1280x768

@@ -479,6 +479,7 @@ bool SQLite3Driver::populate_treatments()
     std::string common_name;
     std::string description;
   };
+
   std::vector<sTreatment> default_treatments = {
     { "Chest Tube", "Chest Tube", "A chest tube is a hollow, flexible tube placed into the chest. It acts as a drain for blood, fluid, or air from around the heart and lungs. " },
     { "Needle Thoracostomy", "Needle Decompression", "A procedure performed to stabilize deteriorating patients in the life-threatening situation of a tension pneumothorax. The procedure involves inserting a large needle through the chest wall into the pleural cavity to allow air to escape. " },

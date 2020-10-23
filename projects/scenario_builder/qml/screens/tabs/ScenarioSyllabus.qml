@@ -37,14 +37,15 @@ GridLayout {
     injuryModel     : syllabus_leftPane.injuryModel
     injurySetModel  : syllabus_leftPane.injurySetModel
     treatmentModel  : syllabus_leftPane.treatmentModel
-    equipmentModel  : syllabus_leftPane.equipmentModel
+
 
     objectiveIndex  : syllabus_leftPane.objectiveIndex
     assessmentIndex : syllabus_leftPane.assessmentIndex
     injuryIndex     : syllabus_leftPane.injuryIndex
     injurySetIndex  : syllabus_leftPane.injurySetIndex
     treatmentIndex  : syllabus_leftPane.treatmentIndex
-    equipmentIndex  : syllabus_leftPane.equipmentIndex
+
+    currentEquipment  : syllabus_leftPane.currentEquipment
 
     Component.onCompleted: {
       

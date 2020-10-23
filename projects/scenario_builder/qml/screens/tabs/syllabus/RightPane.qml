@@ -17,14 +17,14 @@ Flickable {
   property alias injuryModel     : injuries.model
   property alias injurySetModel  : injurySets.model
   property alias treatmentModel  : treatments.model
-  property alias equipmentModel  : equipment.model
 
   property alias objectiveIndex  : objectives.index
   property alias assessmentIndex : assessments.index
   property alias injuryIndex     : injuries.index
   property alias injurySetIndex  : injurySets.index
   property alias treatmentIndex  : treatments.index
-  property alias equipmentIndex  : equipment.index
+
+  property alias currentEquipment  : equipment.currentEquipment
 
   Layout.fillHeight : true
   Layout.fillWidth : true

@@ -10,9 +10,9 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 ColumnLayout  {
   id: root
   property SQLBackend backend
-  property ListModel model
+  property Equipment currentEquipment
   property int topIndex // topIndex is the index of the top set of 4 tabs
-  property int index 
+  
   
   Layout.fillWidth: true
   Layout.fillHeight: true
@@ -25,13 +25,13 @@ ColumnLayout  {
     id : citation
   }
   function refresh_citations() {
-    var values = root.model.get(index)
-    if(values) {
-      nameEntry.text = values.name
-      descriptionEntry.text = values.description
-      imageEntry.text = values.image
+    currentEquipment
+    if(currentEquipment) {
+      nameEntry.text = currentEquipment.name
+      descriptionEntry.text = currentEquipment.description
+      imageEntry.text = currentEquipment.image
       referenceList.model.clear()
-      var citations = (values.citations) ? values.citations.split(";").filter(x => x) : "";  
+      var citations = (currentEquipment.citations) ? currentEquipment.citations.split(";").filter(x => x) : "";  
       for(var i = 0; i < citations.length; ++i){
          citation.citation_id = parseInt(citations[i])
          citation.key = ""
@@ -52,14 +52,8 @@ ColumnLayout  {
       }
     }
   }
-  function update_equipment(values) {
-    obj.equipment_id = values.id
-    obj.name         = values.name
-    obj.description  = values.description
-    obj.citations = values.citations
-    obj.image = values.image
-
-    root.backend.update_equipment(obj)
+  function update_equipment(equipment) {
+    root.backend.update_equipment(equipment)
   }
 
   TextEntry {
@@ -71,10 +65,9 @@ ColumnLayout  {
     placeholderText: "String Field (128 Characters)"
 
     onEditingFinished : {
-        var entry = model.get(root.index)
-        if ( text != entry.name) {
-          entry.name = text
-          update_equipment(entry)
+        if ( text != currentEquipment.name) {
+          currentEquipment.name = text
+          update_equipment(currentEquipment)
         }
       }
   }
@@ -87,10 +80,9 @@ ColumnLayout  {
     label : "Description"
     required: true
     onEditingFinished : {
-        var entry = model.get(root.index)
-        if ( text != entry.description) {
-          entry.description = text
-          update_equipment(entry)
+        if ( text != currentEquipment.description) {
+          currentEquipment.description = text
+          update_equipment(currentEquipment)
         }
       }
   }
@@ -104,10 +96,9 @@ ColumnLayout  {
     placeholderText: "String Field (128 Characters )"
 
     onEditingFinished : {
-        var entry = root.model.get(root.index)
-        if ( text != entry.image) {
-          entry.image = text
-          update_equipment(entry)
+        if ( text != currentEquipment.image) {
+          currentEquipment.image = text
+          update_equipment(currentEquipment)
         }
       }
   }
@@ -206,7 +197,8 @@ ColumnLayout  {
       refresh_citations()
     }
   }
-  onIndexChanged : { 
+  onCurrentEquipmentChanged : { 
+    console.log("Current Equipment %1".arg(currentEquipment.name))
     refresh_citations()
   }
 }

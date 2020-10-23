@@ -350,14 +350,14 @@ public:
 //----End Event
 struct Equipment : public QObject {
   Q_OBJECT
-  Q_PROPERTY(int equipment_id MEMBER id)
-  Q_PROPERTY(QString uuid MEMBER uuid)
-  Q_PROPERTY(QString name MEMBER name)
-  Q_PROPERTY(int type MEMBER type)
-  Q_PROPERTY(QString description MEMBER description)
-  Q_PROPERTY(QString citations MEMBER citations)
-  Q_PROPERTY(QString image MEMBER image)
-  Q_PROPERTY(QString properties MEMBER properties)
+  Q_PROPERTY(int equipment_id MEMBER id NOTIFY idChanged )
+  Q_PROPERTY(QString uuid MEMBER uuid NOTIFY uuidChanged)
+  Q_PROPERTY(QString name MEMBER name NOTIFY nameChanged)
+  Q_PROPERTY(int type MEMBER type NOTIFY typeChanged)
+  Q_PROPERTY(QString description MEMBER description NOTIFY descriptionChanged)
+  Q_PROPERTY(QString citations MEMBER citations NOTIFY citationsChanged)
+  Q_PROPERTY(QString image MEMBER image NOTIFY imageChanged)
+  Q_PROPERTY(QString properties MEMBER properties NOTIFY propertiesChanged)
 public:
   int32_t id = -1;
   QString uuid = "";
@@ -367,6 +367,18 @@ public:
   QString citations;
   QString image = "";
   QString properties = "";
+
+signals:
+  void idChanged(int);
+  void uuidChanged(QString);
+  void nameChanged(QString);
+  void typeChanged(int);
+  void descriptionChanged(QString);
+  void citationsChanged(QString);
+  void imageChanged(QString);
+  void propertiesChanged(QString);
+
+public:
   Equipment(QObject* parent = nullptr)
     : QObject(parent)
   {
