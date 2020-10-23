@@ -28,6 +28,7 @@ ColumnLayout  {
     currentEquipment
     if(currentEquipment) {
       nameEntry.text = currentEquipment.name
+	  summaryEntry.text = currentEquipment.summary
       descriptionEntry.text = currentEquipment.description
       imageEntry.text = currentEquipment.image
       referenceList.model.clear()
@@ -67,6 +68,21 @@ ColumnLayout  {
     onEditingFinished : {
         if ( text != currentEquipment.name) {
           currentEquipment.name = text
+          update_equipment(currentEquipment)
+        }
+      }
+  }
+  
+  TextAreaEntry {
+    Layout.fillWidth: true
+    Layout.leftMargin: 5
+
+    id: summaryEntry
+    label : "Summary"
+    required: true
+    onEditingFinished : {
+        if ( text != currentEquipment.summary) {
+          currentEquipment.summary = text
           update_equipment(currentEquipment)
         }
       }
@@ -168,6 +184,7 @@ ColumnLayout  {
           var values = root.model.get(root.index)
           if(values) {
             nameEntry.text = values.name
+			summaryEntry.text = values.summary
             descriptionEntry.text = values.description
             referenceList.model.clear()   
 

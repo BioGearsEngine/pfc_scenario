@@ -102,7 +102,8 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
         ID: xs:string : Identification
         Name: xs:string : Name of the equipment
         Type: xs:integer :
-        Description: xs:string : Brief summary of the equipment
+		Summary: xs:string : Brief summary of the equipment
+        Description: xs:string : More descript summary of the equipment
         Citations: citation-ref-list : List of reference material for additional information
         Image: xs:string : Visual reference
         Properties :  property-list : Name/Value Pair of Implementation Details
@@ -110,6 +111,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
         ID: 0001
         Name: Syringe
         Type: Medical Device
+		Summary: A tube for administering fluids
         Description: A tube with a nozzle and piston or bulb for sucking in and ejecting liquid in a thin stream, used for cleaning wounds or body cavities, or fitted with a hollow needle for injecting or withdrawing fluids.
         Citations: https://en.wikipedia.org/wiki/Syringe
         Image:
@@ -119,6 +121,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
       <xs:element name="id" type="xs:string"/>
       <xs:element name="name" type="xs:string" minOccurs="1"/>
       <xs:element name="type" type="xs:integer" minOccurs="0"/>
+	  <xs:element name="summary" type="xs:string" minOccurs="1"/>
       <xs:element name="description" type="xs:string" minOccurs="1"/>
       <xs:element name="citations" type="citation-ref-list" minOccurs="1"/>
       <xs:element name="image" type="xs:string" minOccurs="0"/>

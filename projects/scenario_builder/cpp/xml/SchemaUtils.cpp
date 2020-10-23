@@ -472,6 +472,7 @@ namespace schema {
   {
     auto equipment = std::make_unique<pfc::schema::equipment>(schema::make_string(input->uuid),
                                                               schema::make_string(input->name),
+                                                              schema::make_string(input->summary),
                                                               schema::make_string(input->description),
                                                               make_citation_ref_list(input->citations, _db),
                                                               make_equipment_properties_list(input->properties));
@@ -624,6 +625,7 @@ namespace schema {
       Equipment temp;
       temp.uuid = QString::fromStdString(equipment.id());
       temp.name = QString::fromStdString(equipment.name());
+      temp.summary = QString::fromStdString(equipment.summary());
       temp.description = QString::fromStdString(equipment.description());
       temp.type = equipment.type().get();
       temp.image = QString::fromStdString(*equipment.image());

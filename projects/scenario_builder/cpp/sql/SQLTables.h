@@ -375,6 +375,7 @@ signals:
   void uuidChanged(QString);
   void nameChanged(QString);
   void typeChanged(int);
+  void summaryChanged(QString);
   void descriptionChanged(QString);
   void citationsChanged(QString);
   void imageChanged(QString);
