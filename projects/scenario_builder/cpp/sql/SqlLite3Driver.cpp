@@ -352,91 +352,141 @@ bool SQLite3Driver::populate_db()
 bool SQLite3Driver::populate_equipment()
 {
 
-  std::vector<std::pair<std::string, std::string>> default_equipment = {
-    { "Tourniquet", "A device which applies pressure to a limb or extremity in order to control the flow of blood.\n"
-                    "\n"
-                    "A tourniquet uses compression, typically on a limb, to constrict a vein or artery and limit blood flow as much as possible. This is typically done during hemorrhaging when limiting blood flow to the extremity also limits the blood lost. In a pinch, a cord or tie can be used.\n" },
-    { "Tempus Pro with Peripherals", "A small, lightweight vital signs monitor.\n"
-                                     "\n"
-                                     "Light enough to carry and small enough to hold in one hand, it can easily be deployed in numerous clinical scenarios. While it does support additional attachments to allow for a wide range of measurements, some important included parameters the tempus pro measures includes pulse rate, impedance respiration, contact temperature, pulse oximetry, and noninvasive blood pressure.\n" },
-    { "Nasal Cannula", "A device used to deliver increased airflow to a patient in need of respiratory help.\n"
-                       "\n"
-                       "Tubing with two prongs that get inserted into a patient's nose, this equipment is attached to an oxygen source and mainly used to control oxygen flow to the patient. The advantages to this delivery method is that is less invasive than other oxygen masks and allows a patient to eat and speak normally.\n" },
-    { "Simple Face Mask", "Disposable clear plastic mask, used to provide oxygen therapy for patients requiring a higher oxygen concentration.\n"
-                          "\n"
-                          "A simple face mask covers a patient's mouth and nose and connects to an oxygen source to control oxygen delivery to the patient. While more invasive than a cannula, this method provides more inclusive coverage of both respiratory paths.\n" },
-    { "IV Needle", "Intravenous needle used to inject fluids directly into a vein.\n"
-                   "\n"
-                   "Length and thickness of iv needles can vary, though their function remains generally the same. A clean iv needle should be used on each patient.\n" },
-    { "1 Unit O- Whole Blood", "525 mL of O- blood, approximately the equivalent of one pint.\n"
-                               "\n"
-                               "Blood unit containing the A type antigen and no Rh factor.\n"},
-    { "1 Unit A- Whole Blood", "525 mL of A- blood, approximately the equivalent of one pint.\n"
-                               "\n"
-                               "Blood unit containing the no antigens or an Rh factor. This type is known as the universal donor as a result.\n" },
-    { "Blood Collection Bag", "Clear plastic bag used to collect and store blood.\n"
-                              "\n"
-                              "Bags are usually 500 mL in volume (referred to as one unit).\n" },
-    { "Blood Transfusion Kit", "Kit used for in field blood transfusion.\n"
-                               "\n"
-                               "Designed for field application, a transfusion kit contains supplies necessary to collect and transfuse fresh whole blood (FWB). The kit typically contains everything from safety supplies and equipment (gloves, blood type test kits, and swabsticks) to collection materials (tubing, needles, collection bag, etc.). Additionally, two sets of most safety materials are supplied to prevent multiple uses on both donor and recipient (i.e. two needles).\n" },
-    { "Space Blanket", "Low-weight, low-bulk blanket made of heat-reflective thin plastic sheeting.\n"
-                       "\n"
-                       "Also referred to as mylar, these are commonly used to prevent heat loss from a human body.\n" },
-    { "Syringe", "Simple reciprocating pump using plunger or piston to expel liquid or gas through a hypodermic needle.\n"
-                 "\n"
-                 "In medicine, these can be used to withdraw liquids, such as when cleaning wounds or body cavities, or to inject fluids, as is the case with some drug injections.\n" },
-    { "Antibiotics", "Antimicrobial substance active against bacteria, used in the treatment and prevention of bacterial infections.\n"
-                     "\n"
-                     "This medication usually comes in the form of a pill. There are different types of antibiotics for different applications.\n" },
-    { "Epinephrine", "A chemical that narrows blood vessels and opens airways in the lungs.\n"
-                     "\n"
-                     "\n" },
-    { "Fentanyl", "A synthetic opioid pain relieve, approved for treating severe pain.\n"
-                  "\n"
-                  "Fentanyl is a prescription drug that is also made and used illegally. Like morphine, it is a medicine that is typically used to treat patients with severe pain, especially after surgery. It is also sometimes used to treat patients with chronic pain who are physically tolerant to other opioids.\n" },
-    { "Ketamine", "A dissociative anesthetic used pain relief.\n"
-                  "\n"
-                  "Ketamine can provide pain relief and short-term memory loss (for example, amnesia of a medical procedure). In surgery, it is used an induction and maintenance agent for sedation and to provide general anesthesia. It has also been used for pain control in burn therapy, battlefield injuries, and in children who cannot use other anesthetics due to side effects or allergies. At normal doses, it is often preferred as an anesthetic in patients at risk of bronchospasm and respiratory depression.\n" },
-    { "Midazolam", "A short action sedative used for anesthesia, procedural sedation, trouble sleeping, and severe agitation.\n"
-                   "\n"
-                   "Midazolam injection is used before medical procedures and surgery to cause drowsiness, relieve anxiety, and prevent any memory of the event. It is also sometimes given as part of the anesthesia during surgery to produce a loss of consciousness.\n" },
-    { "Morphine", "A narcotic pain reliever used to treat moderate to severe pain.\n"
-                  "\n"
-                  "Morphine is an opioid medication used to treat severe chronic pain. It has a high rate of addiction, overdose, and death.\n" },
-    { "Narcan", "Naloxone, a medication used to block the effects of opioids, commonly used for decreased breathing in opioid overdose.\n"
-                "\n"
-                "Naloxone is a medicine that rapidly reverses an opioid overdose. It attaches to opioid receptors and reverses and blocks the effects of other opioids. Naloxone is a safe medicine. It only reverses overdoses in people with opioids in their systems.\n" },
-    { "1000 mL Saline Bag", "1000 mL bag of saline solution.\n"
-                            "\n"
-                            "A mixture of sodium chloride in water typically used to clean wounds or stabilize blood loss, though there are many other uses.\n" },
-    { "500 mL Lactated Ringers Bag", "500 mL bag of Lactated Ringers.\n"
-                                     "\n"
-                                     "Composed of sodium chloride, sodium lactate, potassium chloride, and calcium chloride in water, a patient would typically be given this intravenously if they are dehydrated, having surgery, or receiving IV medications.\n" },
-    { "Urine Foley", "Catheter used to drain urine.\n"
-                     "\n"
-                     "A soft plastic or rubber tube that is inserted through the urethra into the bladder. These are typically used when a patient has difficulties urinating on their own.\n" },
-    { "Urine Bag", "Bag used to catch and store drained urine.\n"
-                   "\n"
-                   "\n" },
-    { "Water", "An inorganic, transparent, tasteless, odorless, and nearly colorless chemical substance.\n"
-               "\n"
-               "It is also essential to and the primary component of living organic beings.\n" },
-    { "Energy Gel", "Carbohydrate gel used to provide energy and promote recovery.\n"
-                    "\n"
-                    "\n" }
+  struct sEquipment {
+    std::string name;
+    int type;
+    std::string summary;
+    std::string description;
+    std::string properties;
   };
 
-  Equipment temp; //Count
-  for (auto& def : default_equipment) {
+  std::vector<sEquipment> default_equipment = {
+    { "Tempus Pro with Peripherals", 2, "A small, lightweight vital signs monitor.,Light enough to carry and small enough to hold in one hand, it can easily be deployed in numerous clinical scenarios. While it does support additional attachments to allow for a wide range of measurements, some important included parameters the tempus pro measures includes pulse rate, impedance respiration, contact temperature, pulse oximetry, and noninvasive blood pressure.", "Available,BOOLEAN" },
+    { "Tourniquet", 2, "A device which applies pressure to a limb or extremity in order to control the flow of blood.", "A tourniquet uses compression, typically on a limb, to constrict a vein or artery and limit blood flow as much as possible. This is typically done during hemorrhaging when limiting blood flow to the extremity also limits the blood lost. In a pinch, a cord or tie can be used.", "Available,BOOLEAN" },
+    { "Nasal Cannula", 2, "A device used to deliver increased airflow to a patient in need of respiratory help.", "Tubing with two prongs that get inserted into a patient's nose, this equipment is attached to an oxygen source and mainly used to control oxygen flow to the patient. The advantages to this delivery method is that is less invasive than other oxygen masks and allows a patient to eat and speak normally.", "Available,BOOLEAN" },
+    { "Blood Collection Bag", 4, "Clear plastic bag used to collect and store blood.", "Bags are usually 500 mL in volume (referred to as one unit). Blood type is dependent on antigen presence (A/B) or absence (O) in addition to the presence or absence of Rh factor (+/-).", "Available,BOOLEAN; Count, INTEGER; Kind, ENUM{APos, ANeg, BPos, BNeg, ABPos, ABNeg, OPos, ONeg}"},
+    { "Blood Transfusion Kit", 1, "Kit used for in field blood transfusion.", "Designed for field application, a transfusion kit contains supplies necessary to collect and transfuse fresh whole blood (FWB). The kit typically contains everything from safety supplies and equipment (gloves, blood type test kits, and swabsticks) to collection materials (tubing, needles, collection bag, etc.). Additionally, two sets of most safety materials are supplied to prevent multiple uses on both donor and recipient (i.e. two needles).", "Available,BOOLEAN" },
+    { "Blanket", 2, "Low-weight, low-bulk blanket made of heat-reflective thin plastic sheeting.", "Also referred to as mylar, these are commonly used to prevent heat loss from a human body.", "Available, BOOLEAN" },
+    { "Syringe", 4, "Simple reciprocating pump using plunger or piston to expel liquid or gas through a hypodermic needle.", "In medicine, these can be used to withdraw liquids, such as when cleaning wounds or body cavities, or to inject fluids, as is the case with some drug injections.", "Available,BOOLEAN; Count, INTEGER" },
+    { "Antibiotics", 3, "Antimicrobial substance active against bacteria, used in the treatment and prevention of bacterial infections.", "This medication usually comes in the form of a pill. There are different types of antibiotics for different applications.", "Available, BOOLEAN; Volume, Integer" }, 
+    { "Epinephrine", 3, "A chemical that narrows blood vessels and opens airways in the lungs.", "Also referred to as adrenaline, this drug is used to treat life-threatening allergic reactions. Epinephrine acts quickly and works to improve breathing, stimulate the heart, raise a dropping blood pressure, reverse hives, and reduce swelling.", "Available, BOOLEAN; Volume, Integer" },
+    { "Fentanyl", 3, "A synthetic opioid pain reliever, approved for treating severe pain.", "Fentanyl is a prescription drug that is also made and used illegally. Like morphine, it is a medicine that is typically used to treat patients with severe pain, especially after surgery. It is also sometimes used to treat patients with chronic pain who are physically tolerant to other opioids.", "Available, BOOLEAN; Volume, Integer" },
+    { "Ketamine", 3, "A dissociative anesthetic used pain relief.", "Ketamine can provide pain relief and short-term memory loss (for example, amnesia of a medical procedure). In surgery, it is used an induction and maintenance agent for sedation and to provide general anesthesia. It has also been used for pain control in burn therapy, battlefield injuries, and in children who cannot use other anesthetics due to side effects or allergies. At normal doses, it is often preferred as an anesthetic in patients at risk of bronchospasm and respiratory depression.", "Available, BOOLEAN; Volume, Integer" },
+    { "Midazolam", 3, "A short action sedative used for anesthesia, procedural sedation, trouble sleeping, and severe agitation.", "Midazolam injection is used before medical procedures and surgery to cause drowsiness, relieve anxiety, and prevent any memory of the event. It is also sometimes given as part of the anesthesia during surgery to produce a loss of consciousness.", "Available, BOOLEAN; Volume, Integer" },
+    { "Morphine", 3, "A narcotic pain reliever used to treat moderate to severe pain.", "Morphine is an opioid medication used to treat severe chronic pain. It has a high rate of addiction, overdose, and death.", "Available, BOOLEAN; Volume, Integer" },
+    { "Narcan", 3, "Naloxone, a medication used to block the effects of opioids, commonly used for decreased breathing in opioid overdose.", "Naloxone is a medicine that rapidly reverses an opioid overdose. It attaches to opioid receptors and reverses and blocks the effects of other opioids. Naloxone is a safe medicine. It only reverses overdoses in people with opioids in their systems.", "Available, BOOLEAN; Volume, Integer" },
+    { "Urine Foley", 4, "Catheter used to drain urine.",  "A soft plastic or rubber tube that is inserted through the urethra into the bladder. These are typically used when a patient has difficulties urinating on their own.", "" },
+    { "Urine Bottle", 4, "Bag used to catch and store drained urine.", "", ""},
+    { "Water", 4, "An inorganic, transparent, tasteless, odorless, and nearly colorless chemical substance.", "It is also essential to and the primary component of living organic beings.", "Volume, INTEGER" },
+    { "Energy Gel", 4, "Carbohydrate gel used to provide energy and promote recovery.", "", "Count, INTEGER" },
+    { "Splint", 2, "a rigid or flexible device that maintains in position a displaced or injured part.", "Mostly used for broken bones, a splint is fastened along a injured length of a person's body in order to limit movement and further injury.", "Available, BOOLEAN" },
+    { "Peripheral IV", 2, "A peripheral intravenous line is a small, short plastic catheter that is placed through the skin into a vein.", "A peripheral intravenous line is used to give fluids and/or medications directly into the blood stream.", "Available, BOOLEAN" },
+    { "Wound Pack", 2, "Non-adherent and absorbent material used to control bleeding of an open wound.", "Wound fillers, such as non-adherent gauze, pads, ointments, sponges, and other materials designed to manage exudate.", "Available, BOOLEAN" },
+    { "Wound Wrap", 2, "A strip of fabric used especially to cover, dress, and bind up wounds.", "It can also be used to provide pressure to the bleeding.", "Available, BOOLEAN" },
+    { "Oxygen Tank", 1, "A tank of oxygen.", "In medicine, an oxygen tank provide controlled and therapeutic oxygen delivery to a patient.", "Available, BOOLEAN; Volume, INTEGER" },
+    { "IV Pole", 1, "The pole use to hang IV bags on.", "It provides patient mobility to move around a facility while keeping IV lines in.", "Available, BOOLEAN" },
+    { "IV Bag", 4, "Bag used to store and deliver fluids to a patient.", "", "Available, BOOLEAN; Count, INTEGER; Volume, INTEGER; Kind, ENUM{Saline, Lactated Ringers}" },
+    { "Catheter Supplies", 4, "Catheters and the products that are used to insert or remove a catheter, and maintain catheter function.", "", "" },
+  };
+
+  Equipment temp;
+  for (auto& equipmentDef : default_equipment) {
     temp.clear();
-    temp.name = def.first.c_str();
-    temp.description = def.second.c_str();
+    temp.name = equipmentDef.name.c_str();
+    temp.type = equipmentDef.type;
+    temp.summary = equipmentDef.summary.c_str();
+    temp.description = equipmentDef.description.c_str();
     if (!select_equipment(&temp)) {
-      update_equipment(&temp);
+      select_equipment(&temp);
     }
   }
   return true;
+
+  //std::vector<std::pair<std::string, std::string>> default_equipment = {
+  //  { "Tourniquet", "A device which applies pressure to a limb or extremity in order to control the flow of blood.\n"
+  //                  "\n"
+  //                  "A tourniquet uses compression, typically on a limb, to constrict a vein or artery and limit blood flow as much as possible. This is typically done during hemorrhaging when limiting blood flow to the extremity also limits the blood lost. In a pinch, a cord or tie can be used.\n" },
+  //  { "Tempus Pro with Peripherals", "A small, lightweight vital signs monitor.\n"
+  //                                   "\n"
+  //                                   "Light enough to carry and small enough to hold in one hand, it can easily be deployed in numerous clinical scenarios. While it does support additional attachments to allow for a wide range of measurements, some important included parameters the tempus pro measures includes pulse rate, impedance respiration, contact temperature, pulse oximetry, and noninvasive blood pressure.\n" },
+  //  { "Nasal Cannula", "A device used to deliver increased airflow to a patient in need of respiratory help.\n"
+  //                     "\n"
+  //                     "Tubing with two prongs that get inserted into a patient's nose, this equipment is attached to an oxygen source and mainly used to control oxygen flow to the patient. The advantages to this delivery method is that is less invasive than other oxygen masks and allows a patient to eat and speak normally.\n" },
+  //  { "Simple Face Mask", "Disposable clear plastic mask, used to provide oxygen therapy for patients requiring a higher oxygen concentration.\n"
+  //                        "\n"
+  //                        "A simple face mask covers a patient's mouth and nose and connects to an oxygen source to control oxygen delivery to the patient. While more invasive than a cannula, this method provides more inclusive coverage of both respiratory paths.\n" },
+  //  { "IV Needle", "Intravenous needle used to inject fluids directly into a vein.\n"
+  //                 "\n"
+  //                 "Length and thickness of iv needles can vary, though their function remains generally the same. A clean iv needle should be used on each patient.\n" },
+  //  { "1 Unit O- Whole Blood", "525 mL of O- blood, approximately the equivalent of one pint.\n"
+  //                             "\n"
+  //                             "Blood unit containing the A type antigen and no Rh factor.\n"},
+  //  { "1 Unit A- Whole Blood", "525 mL of A- blood, approximately the equivalent of one pint.\n"
+  //                             "\n"
+  //                             "Blood unit containing the no antigens or an Rh factor. This type is known as the universal donor as a result.\n" },
+  //  { "Blood Collection Bag", "Clear plastic bag used to collect and store blood.\n"
+  //                            "\n"
+  //                            "Bags are usually 500 mL in volume (referred to as one unit).\n" },
+  //  { "Blood Transfusion Kit", "Kit used for in field blood transfusion.\n"
+  //                             "\n"
+  //                             "Designed for field application, a transfusion kit contains supplies necessary to collect and transfuse fresh whole blood (FWB). The kit typically contains everything from safety supplies and equipment (gloves, blood type test kits, and swabsticks) to collection materials (tubing, needles, collection bag, etc.). Additionally, two sets of most safety materials are supplied to prevent multiple uses on both donor and recipient (i.e. two needles).\n" },
+  //  { "Space Blanket", "Low-weight, low-bulk blanket made of heat-reflective thin plastic sheeting.\n"
+  //                     "\n"
+  //                     "Also referred to as mylar, these are commonly used to prevent heat loss from a human body.\n" },
+  //  { "Syringe", "Simple reciprocating pump using plunger or piston to expel liquid or gas through a hypodermic needle.\n"
+  //               "\n"
+  //               "In medicine, these can be used to withdraw liquids, such as when cleaning wounds or body cavities, or to inject fluids, as is the case with some drug injections.\n" },
+  //  { "Antibiotics", "Antimicrobial substance active against bacteria, used in the treatment and prevention of bacterial infections.\n"
+  //                   "\n"
+  //                   "This medication usually comes in the form of a pill. There are different types of antibiotics for different applications.\n" },
+  //  { "Epinephrine", "A chemical that narrows blood vessels and opens airways in the lungs.\n"
+  //                   "\n"
+  //                   "\n" },
+  //  { "Fentanyl", "A synthetic opioid pain relieve, approved for treating severe pain.\n"
+  //                "\n"
+  //                "Fentanyl is a prescription drug that is also made and used illegally. Like morphine, it is a medicine that is typically used to treat patients with severe pain, especially after surgery. It is also sometimes used to treat patients with chronic pain who are physically tolerant to other opioids.\n" },
+  //  { "Ketamine", "A dissociative anesthetic used pain relief.\n"
+  //                "\n"
+  //                "Ketamine can provide pain relief and short-term memory loss (for example, amnesia of a medical procedure). In surgery, it is used an induction and maintenance agent for sedation and to provide general anesthesia. It has also been used for pain control in burn therapy, battlefield injuries, and in children who cannot use other anesthetics due to side effects or allergies. At normal doses, it is often preferred as an anesthetic in patients at risk of bronchospasm and respiratory depression.\n" },
+  //  { "Midazolam", "A short action sedative used for anesthesia, procedural sedation, trouble sleeping, and severe agitation.\n"
+  //                 "\n"
+  //                 "Midazolam injection is used before medical procedures and surgery to cause drowsiness, relieve anxiety, and prevent any memory of the event. It is also sometimes given as part of the anesthesia during surgery to produce a loss of consciousness.\n" },
+  //  { "Morphine", "A narcotic pain reliever used to treat moderate to severe pain.\n"
+  //                "\n"
+  //                "Morphine is an opioid medication used to treat severe chronic pain. It has a high rate of addiction, overdose, and death.\n" },
+  //  { "Narcan", "Naloxone, a medication used to block the effects of opioids, commonly used for decreased breathing in opioid overdose.\n"
+  //              "\n"
+  //              "Naloxone is a medicine that rapidly reverses an opioid overdose. It attaches to opioid receptors and reverses and blocks the effects of other opioids. Naloxone is a safe medicine. It only reverses overdoses in people with opioids in their systems.\n" },
+  //  { "1000 mL Saline Bag", "1000 mL bag of saline solution.\n"
+  //                          "\n"
+  //                          "A mixture of sodium chloride in water typically used to clean wounds or stabilize blood loss, though there are many other uses.\n" },
+  //  { "500 mL Lactated Ringers Bag", "500 mL bag of Lactated Ringers.\n"
+  //                                   "\n"
+  //                                   "Composed of sodium chloride, sodium lactate, potassium chloride, and calcium chloride in water, a patient would typically be given this intravenously if they are dehydrated, having surgery, or receiving IV medications.\n" },
+  //  { "Urine Foley", "Catheter used to drain urine.\n"
+  //                   "\n"
+  //                   "A soft plastic or rubber tube that is inserted through the urethra into the bladder. These are typically used when a patient has difficulties urinating on their own.\n" },
+  //  { "Urine Bag", "Bag used to catch and store drained urine.\n"
+  //                 "\n"
+  //                 "\n" },
+  //  { "Water", "An inorganic, transparent, tasteless, odorless, and nearly colorless chemical substance.\n"
+  //             "\n"
+  //             "It is also essential to and the primary component of living organic beings.\n" },
+  //  { "Energy Gel", "Carbohydrate gel used to provide energy and promote recovery.\n"
+  //                  "\n"
+  //                  "\n" }
+  //};
+
+  //Equipment temp; //Count
+  //for (auto& def : default_equipment) {
+  //  temp.clear();
+  //  temp.name = def.first.c_str();
+  //  temp.description = def.second.c_str();
+  //  if (!select_equipment(&temp)) {
+  //    update_equipment(&temp);
+  //  }
+  //}
+  //return true;
 }
 //------------------------------------------------------------------------------
 bool SQLite3Driver::populate_injuries()

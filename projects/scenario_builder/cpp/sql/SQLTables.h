@@ -354,6 +354,7 @@ struct Equipment : public QObject {
   Q_PROPERTY(QString uuid MEMBER uuid NOTIFY uuidChanged)
   Q_PROPERTY(QString name MEMBER name NOTIFY nameChanged)
   Q_PROPERTY(int type MEMBER type NOTIFY typeChanged)
+  Q_PROPERTY(QString summary MEMBER summary NOTIFY summaryChanged)
   Q_PROPERTY(QString description MEMBER description NOTIFY descriptionChanged)
   Q_PROPERTY(QString citations MEMBER citations NOTIFY citationsChanged)
   Q_PROPERTY(QString image MEMBER image NOTIFY imageChanged)
@@ -363,6 +364,7 @@ public:
   QString uuid = "";
   int32_t type = 1;
   QString name = "";
+  QString summary = "";
   QString description = "";
   QString citations;
   QString image = "";
@@ -393,6 +395,7 @@ public:
   {
     return name == rhs.name
       && type == rhs.type
+      && summary == rhs.summary
       && description == rhs.description
       && citations == rhs.citations
       && image == rhs.image
@@ -415,6 +418,7 @@ public:
     uuid = rhs.uuid;
     name = rhs.name;
     type = rhs.type;
+    summary = rhs.summary;
     description = rhs.description;
     citations = rhs.citations;
     image = rhs.image;
@@ -426,6 +430,7 @@ public:
     uuid = "";
     name.clear();
     type = -1;
+    summary.clear();
     description.clear();
     citations.clear();
     image.clear();
