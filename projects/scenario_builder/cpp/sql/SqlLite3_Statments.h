@@ -167,6 +167,7 @@ inline namespace sqlite3 {
     EQUIPMENT_UUID,
     EQUIPMENT_TYPE,
     EQUIPMENT_NAME,
+    EQUIPMENT_SUMMARY,
     EQUIPMENT_DESCRIPTION,
     EQUIPMENT_CITATIONS,
     EQUIPMENT_IMAGE,
@@ -180,6 +181,7 @@ inline namespace sqlite3 {
 	    "uuid"	TEXT,
 	    "type"	INTEGER NOT NULL DEFAULT 1,
 	    "name"	Varchar(64) NOT NULL UNIQUE,
+      "summary" Varchar(64) NOT NULL,
 	    "description"	Varchar(64) NOT NULL,
 	    "citations"	TEXT,
 	    "image"	TEXT,
@@ -199,8 +201,9 @@ inline namespace sqlite3 {
     = R"( UPDATE  equipments
           SET
                 uuid = :uuid
-              , name = :name
               , type = :type
+              , name = :name
+              , summary = :summary
               , description = :description
               , citations = :citations
               , image = :image
@@ -215,11 +218,12 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM equipments WHERE name = :name ORDER BY name;)";
   constexpr auto insert_or_update_equipments
     = R"( INSERT INTO equipments
-          (name,uuid, type,description,citations,image,properties)
-          VALUES (:name, :uuid, :type, :description, :citations, :image, :properties)
+          (name,uuid, type, summary, description,citations,image,properties)
+          VALUES (:name, :uuid, :type, :summary, :description, :citations, :image, :properties)
           ON CONFLICT (name)
           DO UPDATE SET name = excluded.name
                         , type = excluded.type
+                        , summary = excluded.summary
                         , description = excluded.description
                         , citations = excluded.citations
                         , image = excluded.image

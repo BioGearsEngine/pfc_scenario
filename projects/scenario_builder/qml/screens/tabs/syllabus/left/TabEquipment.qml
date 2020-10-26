@@ -161,12 +161,12 @@ ColumnLayout {
           text : {
             if (currentDef) {
             if (!enabled) {
-              return model.summary
+              return currentDef.summary
             } else {
-              if (description === "") {
-                return model.summary
+              if (currentDef.description === "") {
+                return currentDef.summary
               } else {
-                return description
+                return currentDef.description
               }
 
             }
