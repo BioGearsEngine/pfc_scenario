@@ -55,8 +55,9 @@ ColumnLayout {
           next = root.model.count + 1
         }
         currentEquipment.equipment_id = -1;
-        currentEquipment.type = 1;
+        currentEquipment.type = "Type %1".arg(next);
         currentEquipment.name = "New Equipment %1".arg(next);
+		currentEquipment.summary = "Summary of Equipment %1".arg(next);
         currentEquipment.description = "Description of Equipment %1".arg(next);
         currentEquipment.image = "";
         currentEquipment.citations = "";
@@ -70,8 +71,9 @@ ColumnLayout {
         root.backend.update_equipment(currentEquipment);
         root.model.insert(root.model.count, {
           "id": currentEquipment.equipment_id,
-          "type": "1", // Change this to not be default later
+          "type": currentEquipment.type, // Change this to not be default later
           "name": "%1".arg(currentEquipment.name),
+		  "summary": "%1".arg(currentEquipment.summary),
           "description": "%1".arg(currentEquipment.description),
           "citations": currentEquipment.citations,
           "image": currentEquipment.image
@@ -159,12 +161,13 @@ ColumnLayout {
           text : {
             if (currentDef) {
             if (!enabled) {
-              return currentDef.description.split("\n")[0].trim()
+              return model.summary
             } else {
-              var details = currentDef.description.split("\n")
-              details.splice(0, 1)
-              var details_str = details.join('\n').trim()
-              return(details_str === "") ? currentDef.description.trim() : details_str
+              if (description === "") {
+                return model.summary
+              } else {
+                return description
+              }
 
             }
           } else {

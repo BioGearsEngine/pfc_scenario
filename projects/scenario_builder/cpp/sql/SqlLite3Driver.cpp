@@ -361,7 +361,7 @@ bool SQLite3Driver::populate_equipment()
   };
 
   std::vector<sEquipment> default_equipment = {
-    { "Tempus Pro with Peripherals", 2, "A small, lightweight vital signs monitor.,Light enough to carry and small enough to hold in one hand, it can easily be deployed in numerous clinical scenarios. While it does support additional attachments to allow for a wide range of measurements, some important included parameters the tempus pro measures includes pulse rate, impedance respiration, contact temperature, pulse oximetry, and noninvasive blood pressure.", "Available,BOOLEAN" },
+    { "Tempus Pro with Peripherals", 2,"A small, lightweight vital signs monitor.","Light enough to carry and small enough to hold in one hand, it can easily be deployed in numerous clinical scenarios. While it does support additional attachments to allow for a wide range of measurements, some important included parameters the tempus pro measures includes pulse rate, impedance respiration, contact temperature, pulse oximetry, and noninvasive blood pressure.", "Available,BOOLEAN" },
     { "Tourniquet", 2, "A device which applies pressure to a limb or extremity in order to control the flow of blood.", "A tourniquet uses compression, typically on a limb, to constrict a vein or artery and limit blood flow as much as possible. This is typically done during hemorrhaging when limiting blood flow to the extremity also limits the blood lost. In a pinch, a cord or tie can be used.", "Available,BOOLEAN" },
     { "Nasal Cannula", 2, "A device used to deliver increased airflow to a patient in need of respiratory help.", "Tubing with two prongs that get inserted into a patient's nose, this equipment is attached to an oxygen source and mainly used to control oxygen flow to the patient. The advantages to this delivery method is that is less invasive than other oxygen masks and allows a patient to eat and speak normally.", "Available,BOOLEAN" },
     { "Blood Collection Bag", 4, "Clear plastic bag used to collect and store blood.", "Bags are usually 500 mL in volume (referred to as one unit). Blood type is dependent on antigen presence (A/B) or absence (O) in addition to the presence or absence of Rh factor (+/-).", "Available,BOOLEAN; Count, INTEGER; Kind, ENUM{APos, ANeg, BPos, BNeg, ABPos, ABNeg, OPos, ONeg}"},
@@ -386,7 +386,7 @@ bool SQLite3Driver::populate_equipment()
     { "Oxygen Tank", 1, "A tank of oxygen.", "In medicine, an oxygen tank provide controlled and therapeutic oxygen delivery to a patient.", "Available, BOOLEAN; Volume, INTEGER" },
     { "IV Pole", 1, "The pole use to hang IV bags on.", "It provides patient mobility to move around a facility while keeping IV lines in.", "Available, BOOLEAN" },
     { "IV Bag", 4, "Bag used to store and deliver fluids to a patient.", "", "Available, BOOLEAN; Count, INTEGER; Volume, INTEGER; Kind, ENUM{Saline, Lactated Ringers}" },
-    { "Catheter Supplies", 4, "Catheters and the products that are used to insert or remove a catheter, and maintain catheter function.", "", "" },
+    { "Catheter Supplies", 4, "Catheters and the products that are used to insert or remove a catheter, and maintain catheter function.", "", "" }
   };
 
   Equipment temp;
@@ -396,8 +396,9 @@ bool SQLite3Driver::populate_equipment()
     temp.type = equipmentDef.type;
     temp.summary = equipmentDef.summary.c_str();
     temp.description = equipmentDef.description.c_str();
+    temp.properties = equipmentDef.properties.c_str();
     if (!select_equipment(&temp)) {
-      select_equipment(&temp);
+      update_equipment(&temp);
     }
   }
   return true;
