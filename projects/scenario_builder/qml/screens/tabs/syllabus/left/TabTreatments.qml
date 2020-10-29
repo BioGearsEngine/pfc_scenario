@@ -16,7 +16,7 @@ ColumnLayout {
 
 
   Treatment {
-    id : self
+    id : currentTreatment
   }
 
   Rectangle {
@@ -45,28 +45,28 @@ ColumnLayout {
         if (next < root.model.count) {
           next = root.model.count + 1
         }
-        self.treatment_id = -1;
-        self.medical_name = "New Treatment %1".arg(next);
-        self.common_name = "New Treatment %1".arg(next);
-        self.description = "Description of Treatment %1".arg(next);
-        self.equipment = "";
-        self.citations = "";
-        while (root.backend.select_treatment(self)) {
+        currentTreatment.treatment_id = -1;
+        currentTreatment.medical_name = "New Treatment %1".arg(next);
+        currentTreatment.common_name = "New Treatment %1".arg(next);
+        currentTreatment.description = "Description of Treatment %1".arg(next);
+        currentTreatment.equipment = "";
+        currentTreatment.citations = "";
+        while (root.backend.select_treatment(currentTreatment)) {
           next = next + 1
-          self.treatment_id = -1;
-          self.medical_name = "New Treatment %1".arg(next);
-          self.common_name = "New Treatment %1".arg(next);
-          self.description = "Description of Treatment %1".arg(next)
+          currentTreatment.treatment_id = -1;
+          currentTreatment.medical_name = "New Treatment %1".arg(next);
+          currentTreatment.common_name = "New Treatment %1".arg(next);
+          currentTreatment.description = "Description of Treatment %1".arg(next)
         }
-        self.uuid = "";
-        root.backend.update_treatment(self);
+        currentTreatment.uuid = "";
+        root.backend.update_treatment(currentTreatment);
         root.model.insert(root.model.count, {
-          "id": self.treatment_id,
-          "medical_name": "%1".arg(self.medical_name),
-          "common_name": "%1".arg(self.common_name),
-          "description": "%1".arg(self.description),
-          "citations": self.citaitons,
-          "equipment": self.equipment
+          "id": currentTreatment.treatment_id,
+          "medical_name": "%1".arg(currentTreatment.medical_name),
+          "common_name": "%1".arg(currentTreatment.common_name),
+          "description": "%1".arg(currentTreatment.description),
+          "citations": currentTreatment.citaitons,
+          "equipment": currentTreatment.equipment
 
         });
         ++next;
@@ -75,9 +75,9 @@ ColumnLayout {
         if (root.model.count == 0) {
           return
         }
-        self.treatment_id = -1;
-        self.medical_name = root.model.get(root.index).medical_name;
-        root.backend.remove_treatment(self);
+        currentTreatment.treatment_id = -1;
+        currentTreatment.medical_name = root.model.get(root.index).medical_name;
+        root.backend.remove_treatment(currentTreatment);
         root.model.remove(root.index);
         if (listArea.currentIndex == 0) { // If the index was 0 this wasn't registering as an index change and the right pane wasn't reloading
           listArea.currentIndex = 1
@@ -189,14 +189,14 @@ ColumnLayout {
         var r_count = backend.treatment_count();
         root.backend.treatments();
         listArea.model.clear();
-        while (root.backend.next_treatment(self)) {
+        while (root.backend.next_treatment(currentTreatment)) {
           listArea.model.insert(listArea.model.count, {
-            id: self.treatment_id,
-            medical_name: "%1".arg(self.medical_name),
-            common_name: "%1".arg(self.common_name),
-            description: "%1".arg(self.description),
-            equipment: self.equipment,
-            citations: self.citations
+            id: currentTreatment.treatment_id,
+            medical_name: "%1".arg(currentTreatment.medical_name),
+            common_name: "%1".arg(currentTreatment.common_name),
+            description: "%1".arg(currentTreatment.description),
+            equipment: currentTreatment.equipment,
+            citations: currentTreatment.citations
 
           });
         }

@@ -124,7 +124,7 @@ ColumnLayout  {
       Layout.fillWidth : true
       Layout.fillHeight : true
       Layout.leftMargin: 5
-      Layout.rightMargin: 20
+	  Layout.rightMargin: 20
       currentIndex : 0
       CitationListEntry {
         id : referenceList

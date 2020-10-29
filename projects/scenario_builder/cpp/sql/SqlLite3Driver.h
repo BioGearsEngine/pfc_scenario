@@ -120,6 +120,7 @@ public:
 
   Q_INVOKABLE bool initialize_db();
 
+  Q_INVOKABLE bool populate_citations();
   Q_INVOKABLE bool populate_db();
   Q_INVOKABLE bool populate_equipment();
   Q_INVOKABLE bool populate_injuries();

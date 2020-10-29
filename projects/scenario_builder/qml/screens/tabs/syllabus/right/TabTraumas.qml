@@ -115,6 +115,7 @@ ColumnLayout  {
   StackLayout {
       id : listStack
       Layout.leftMargin: 5
+	  Layout.rightMargin: 20
       Layout.fillWidth : true
       Layout.minimumHeight : 300
       currentIndex : 0

@@ -256,16 +256,16 @@ bool SQLite3Driver::populate_db()
     }
   }
   //---Citation---
-  if (citation_count() == 0) {
-    default_citation.title = "Reference 1";
-    default_citation.key = "AuthorYear_1";
-    default_citation.authors = "Reference Authors";
-    default_citation.year = "Reference Year";
-    default_citation.publisher = "";
-    if (!update_citation(&default_citation)) {
-      return false;
-    }
+  //if (citation_count() == 0) {
+  //  default_citation.title = "Reference 1";
+  //  default_citation.key = "AuthorYear_1";
+  //  default_citation.authors = "Reference Authors";
+  //  default_citation.year = "Reference Year";
+  //  default_citation.publisher = "";
+  if (!populate_citations()) {
+    return false;
   }
+  //}
   //---Event---
   if (event_count() == 0) {
     default_event.name = "New Event 1";
@@ -349,44 +349,86 @@ bool SQLite3Driver::populate_db()
   return true;
 }
 //------------------------------------------------------------------------------
+bool SQLite3Driver::populate_citations()
+{
+  struct sCitation {
+    std::string key;
+    std::string title;
+    std::string authors;
+    std::string year;
+    std::string publisher;
+  };
+
+  //New additions must be added to the bottom in order to keep id numbering unchanged for existing citations
+  std::vector<sCitation> default_citations = {
+    { "Lawnick2013Combat", "Combat Injury Coding: A Review and Reconfiguration", "Mary M Lawnick, Howard R Champion, Thomas Gennarelli, Michael R Galarneau, Edwin D'Souza, Ross R Vickers, Vern Wing, Brian J Eastridge, Lee Ann Young, Judy Dye, and others", "2013", "Journal of Trauma and Acute Care" }, //hemorrhage paper
+    { "Rhoades2003Medical", "Medical Physiology", "Rodney Rhoades", "2003", "Lippincott-Raven Publishers" }, // physiology textbook
+    { "Legome2011Trauma", "Trauma: A Comprehensive Emergency Medicine Textbook", "Eric Legome", "2011", "Cambridge" }, //trauma textbook
+    { "Roy2005Unusual", "Unusual Foreign Body Airway Obstruction After Laryngeal Mask Insertion", "Ravishankar M Roy", "2005", "Anesth Analg." }, //airway obstruction paper
+    { "Army2017Official", "Official US Army Combat Medic Manual & Trainer's Guide", "US Army", "2017", "CreateSpace Independent Publishing Platform" }, //Combat medic handbook
+    { "Guyton2006Textbook", "Textbook of Medical Physiology", "Guyton and Hall", "2006", "Elsevier" }, //BioGears medical textbook hard copy
+    { "Boron2012Medical", "Medical Physiology", "Walter F Boron and Emile L Boulapep", "2012", "Elsevier" } // Secondary BioGears med textbook hard cover
+  };
+
+  Citation temp;
+  for (auto& citationDef : default_citations) {
+    temp.clear();
+    temp.key = citationDef.key.c_str();
+    temp.title = citationDef.title.c_str();
+    temp.authors = citationDef.authors.c_str();
+    temp.year = citationDef.year.c_str();
+    temp.publisher = citationDef.publisher.c_str();
+    if (!select_citation(&temp)) {
+      update_citation(&temp);
+    }
+  }
+  return true;
+}
+//------------------------------------------------------------------------------
 bool SQLite3Driver::populate_equipment()
 {
 
   struct sEquipment {
     std::string name;
     int type;
+      // Type Key
+      // 1 = Equipment
+      // 2 = Attachment
+      // 3 = Substance
+      // 4 = Consumable Item
     std::string summary;
     std::string description;
+    std::string citations;
     std::string properties;
   };
 
   std::vector<sEquipment> default_equipment = {
-    { "Tempus Pro with Peripherals", 2, "A small, lightweight vital signs monitor.", "Light enough to carry and small enough to hold in one hand, it can easily be deployed in numerous clinical scenarios. While it does support additional attachments to allow for a wide range of measurements, some important included parameters the tempus pro measures includes pulse rate, impedance respiration, contact temperature, pulse oximetry, and noninvasive blood pressure.", "Available,BOOLEAN" },
-    { "Tourniquet", 2, "A device which applies pressure to a limb or extremity in order to control the flow of blood.", "A tourniquet uses compression, typically on a limb, to constrict a vein or artery and limit blood flow as much as possible. This is typically done during hemorrhaging when limiting blood flow to the extremity also limits the blood lost. In a pinch, a cord or tie can be used.", "Available,BOOLEAN" },
-    { "Nasal Cannula", 2, "A device used to deliver increased airflow to a patient in need of respiratory help.", "Tubing with two prongs that get inserted into a patient's nose, this equipment is attached to an oxygen source and mainly used to control oxygen flow to the patient. The advantages to this delivery method is that is less invasive than other oxygen masks and allows a patient to eat and speak normally.", "Available,BOOLEAN" },
-    { "Blood Collection Bag", 4, "Clear plastic bag used to collect and store blood.", "Bags are usually 500 mL in volume (referred to as one unit). Blood type is dependent on antigen presence (A/B) or absence (O) in addition to the presence or absence of Rh factor (+/-).", "Available,BOOLEAN; Count, INTEGER; Kind, ENUM{APos, ANeg, BPos, BNeg, ABPos, ABNeg, OPos, ONeg}" },
-    { "Blood Transfusion Kit", 1, "Kit used for in field blood transfusion.", "Designed for field application, a transfusion kit contains supplies necessary to collect and transfuse fresh whole blood (FWB). The kit typically contains everything from safety supplies and equipment (gloves, blood type test kits, and swabsticks) to collection materials (tubing, needles, collection bag, etc.). Additionally, two sets of most safety materials are supplied to prevent multiple uses on both donor and recipient (i.e. two needles).", "Available,BOOLEAN" },
-    { "Blanket", 2, "Low-weight, low-bulk blanket made of heat-reflective thin plastic sheeting.", "Also referred to as mylar, these are commonly used to prevent heat loss from a human body.", "Available, BOOLEAN" },
-    { "Syringe", 4, "Simple reciprocating pump using plunger or piston to expel liquid or gas through a hypodermic needle.", "In medicine, these can be used to withdraw liquids, such as when cleaning wounds or body cavities, or to inject fluids, as is the case with some drug injections.", "Available,BOOLEAN; Count, INTEGER" },
-    { "Antibiotics", 3, "Antimicrobial substance active against bacteria, used in the treatment and prevention of bacterial infections.", "This medication usually comes in the form of a pill. There are different types of antibiotics for different applications.", "Available, BOOLEAN; Volume, Integer" },
-    { "Epinephrine", 3, "A chemical that narrows blood vessels and opens airways in the lungs.", "Also referred to as adrenaline, this drug is used to treat life-threatening allergic reactions. Epinephrine acts quickly and works to improve breathing, stimulate the heart, raise a dropping blood pressure, reverse hives, and reduce swelling.", "Available, BOOLEAN; Volume, Integer" },
-    { "Fentanyl", 3, "A synthetic opioid pain reliever, approved for treating severe pain.", "Fentanyl is a prescription drug that is also made and used illegally. Like morphine, it is a medicine that is typically used to treat patients with severe pain, especially after surgery. It is also sometimes used to treat patients with chronic pain who are physically tolerant to other opioids.", "Available, BOOLEAN; Volume, Integer" },
-    { "Ketamine", 3, "A dissociative anesthetic used pain relief.", "Ketamine can provide pain relief and short-term memory loss (for example, amnesia of a medical procedure). In surgery, it is used an induction and maintenance agent for sedation and to provide general anesthesia. It has also been used for pain control in burn therapy, battlefield injuries, and in children who cannot use other anesthetics due to side effects or allergies. At normal doses, it is often preferred as an anesthetic in patients at risk of bronchospasm and respiratory depression.", "Available, BOOLEAN; Volume, Integer" },
-    { "Midazolam", 3, "A short action sedative used for anesthesia, procedural sedation, trouble sleeping, and severe agitation.", "Midazolam injection is used before medical procedures and surgery to cause drowsiness, relieve anxiety, and prevent any memory of the event. It is also sometimes given as part of the anesthesia during surgery to produce a loss of consciousness.", "Available, BOOLEAN; Volume, Integer" },
-    { "Morphine", 3, "A narcotic pain reliever used to treat moderate to severe pain.", "Morphine is an opioid medication used to treat severe chronic pain. It has a high rate of addiction, overdose, and death.", "Available, BOOLEAN; Volume, Integer" },
-    { "Narcan", 3, "Naloxone, a medication used to block the effects of opioids, commonly used for decreased breathing in opioid overdose.", "Naloxone is a medicine that rapidly reverses an opioid overdose. It attaches to opioid receptors and reverses and blocks the effects of other opioids. Naloxone is a safe medicine. It only reverses overdoses in people with opioids in their systems.", "Available, BOOLEAN; Volume, Integer" },
-    { "Urine Foley", 4, "Catheter used to drain urine.", "A soft plastic or rubber tube that is inserted through the urethra into the bladder. These are typically used when a patient has difficulties urinating on their own.", "" },
-    { "Urine Bottle", 4, "Bag used to catch and store drained urine.", "", "" },
-    { "Water", 4, "An inorganic, transparent, tasteless, odorless, and nearly colorless chemical substance.", "It is also essential to and the primary component of living organic beings.", "Volume, INTEGER" },
-    { "Energy Gel", 4, "Carbohydrate gel used to provide energy and promote recovery.", "", "Count, INTEGER" },
-    { "Splint", 2, "a rigid or flexible device that maintains in position a displaced or injured part.", "Mostly used for broken bones, a splint is fastened along a injured length of a person's body in order to limit movement and further injury.", "Available, BOOLEAN" },
-    { "Peripheral IV", 2, "A peripheral intravenous line is a small, short plastic catheter that is placed through the skin into a vein.", "A peripheral intravenous line is used to give fluids and/or medications directly into the blood stream.", "Available, BOOLEAN" },
-    { "Wound Pack", 2, "Non-adherent and absorbent material used to control bleeding of an open wound.", "Wound fillers, such as non-adherent gauze, pads, ointments, sponges, and other materials designed to manage exudate.", "Available, BOOLEAN" },
-    { "Wound Wrap", 2, "A strip of fabric used especially to cover, dress, and bind up wounds.", "It can also be used to provide pressure to the bleeding.", "Available, BOOLEAN" },
-    { "Oxygen Tank", 1, "A tank of oxygen.", "In medicine, an oxygen tank provide controlled and therapeutic oxygen delivery to a patient.", "Available, BOOLEAN; Volume, INTEGER" },
-    { "IV Pole", 1, "The pole use to hang IV bags on.", "It provides patient mobility to move around a facility while keeping IV lines in.", "Available, BOOLEAN" },
-    { "IV Bag", 4, "Bag used to store and deliver fluids to a patient.", "", "Available, BOOLEAN; Count, INTEGER; Volume, INTEGER; Kind, ENUM{Saline, Lactated Ringers}" },
-    { "Catheter Supplies", 4, "Catheters and the products that are used to insert or remove a catheter, and maintain catheter function.", "", "" }
+    { "Tempus Pro with Peripherals", 2, "A small, lightweight vital signs monitor.", "Light enough to carry and small enough to hold in one hand, it can easily be deployed in numerous clinical scenarios. While it does support additional attachments to allow for a wide range of measurements, some important included parameters the tempus pro measures includes pulse rate, impedance respiration, contact temperature, pulse oximetry, and noninvasive blood pressure.", "2;5;6;7", "Available,BOOLEAN" },
+    { "Tourniquet", 2, "A device which applies pressure to a limb or extremity in order to control the flow of blood.", "A tourniquet uses compression, typically on a limb, to constrict a vein or artery and limit blood flow as much as possible. This is typically done during hemorrhaging when limiting blood flow to the extremity also limits the blood lost. In a pinch, a cord or tie can be used.", "2;5;6;7", "Available,BOOLEAN" },
+    { "Nasal Cannula", 2, "A device used to deliver increased airflow to a patient in need of respiratory help.", "Tubing with two prongs that get inserted into a patient's nose, this equipment is attached to an oxygen source and mainly used to control oxygen flow to the patient. The advantages to this delivery method is that is less invasive than other oxygen masks and allows a patient to eat and speak normally.", "2;5;6;7", "Available,BOOLEAN" },
+    { "Blood Collection Bag", 4, "Clear plastic bag used to collect and store blood.", "Bags are usually 500 mL in volume (referred to as one unit). Blood type is dependent on antigen presence (A/B) or absence (O) in addition to the presence or absence of Rh factor (+/-).", "2;5;6;7", "Available,BOOLEAN; Count, INTEGER; Kind, ENUM{APos, ANeg, BPos, BNeg, ABPos, ABNeg, OPos, ONeg}" },
+    { "Blood Transfusion Kit", 1, "Kit used for in field blood transfusion.", "Designed for field application, a transfusion kit contains supplies necessary to collect and transfuse fresh whole blood (FWB). The kit typically contains everything from safety supplies and equipment (gloves, blood type test kits, and swabsticks) to collection materials (tubing, needles, collection bag, etc.). Additionally, two sets of most safety materials are supplied to prevent multiple uses on both donor and recipient (i.e. two needles).", "2;5;6;7", "Available,BOOLEAN" },
+    { "Blanket", 2, "Low-weight, low-bulk blanket made of heat-reflective thin plastic sheeting.", "Also referred to as mylar, these are commonly used to prevent heat loss from a human body.", "2;5;6;7", "Available, BOOLEAN" },
+    { "Syringe", 4, "Simple reciprocating pump using plunger or piston to expel liquid or gas through a hypodermic needle.", "In medicine, these can be used to withdraw liquids, such as when cleaning wounds or body cavities, or to inject fluids, as is the case with some drug injections.", "2;5;6;7", "Available,BOOLEAN; Count, INTEGER" },
+    { "Antibiotics", 3, "Antimicrobial substance active against bacteria, used in the treatment and prevention of bacterial infections.", "This medication usually comes in the form of a pill. There are different types of antibiotics for different applications.", "2;5;6;7", "Available, BOOLEAN; Volume, Integer" },
+    { "Epinephrine", 3, "A chemical that narrows blood vessels and opens airways in the lungs.", "Also referred to as adrenaline, this drug is used to treat life-threatening allergic reactions. Epinephrine acts quickly and works to improve breathing, stimulate the heart, raise a dropping blood pressure, reverse hives, and reduce swelling.", "2;5;6;7", "Available, BOOLEAN; Volume, Integer" },
+    { "Fentanyl", 3, "A synthetic opioid pain reliever, approved for treating severe pain.", "Fentanyl is a prescription drug that is also made and used illegally. Like morphine, it is a medicine that is typically used to treat patients with severe pain, especially after surgery. It is also sometimes used to treat patients with chronic pain who are physically tolerant to other opioids.", "2;5;6;7", "Available, BOOLEAN; Volume, Integer" },
+    { "Ketamine", 3, "A dissociative anesthetic used pain relief.", "Ketamine can provide pain relief and short-term memory loss (for example, amnesia of a medical procedure). In surgery, it is used an induction and maintenance agent for sedation and to provide general anesthesia. It has also been used for pain control in burn therapy, battlefield injuries, and in children who cannot use other anesthetics due to side effects or allergies. At normal doses, it is often preferred as an anesthetic in patients at risk of bronchospasm and respiratory depression.", "2;5;6;7", "Available, BOOLEAN; Volume, Integer" },
+    { "Midazolam", 3, "A short action sedative used for anesthesia, procedural sedation, trouble sleeping, and severe agitation.", "Midazolam injection is used before medical procedures and surgery to cause drowsiness, relieve anxiety, and prevent any memory of the event. It is also sometimes given as part of the anesthesia during surgery to produce a loss of consciousness.", "2;5;6;7", "Available, BOOLEAN; Volume, Integer" },
+    { "Morphine", 3, "A narcotic pain reliever used to treat moderate to severe pain.", "Morphine is an opioid medication used to treat severe chronic pain. It has a high rate of addiction, overdose, and death.", "2;5;6;7", "Available, BOOLEAN; Volume, Integer" },
+    { "Narcan", 3, "Naloxone, a medication used to block the effects of opioids, commonly used for decreased breathing in opioid overdose.", "Naloxone is a medicine that rapidly reverses an opioid overdose. It attaches to opioid receptors and reverses and blocks the effects of other opioids. Naloxone is a safe medicine. It only reverses overdoses in people with opioids in their systems.", "2;5;6;7", "Available, BOOLEAN; Volume, Integer" },
+    { "Urine Foley", 4, "Catheter used to drain urine.", "A soft plastic or rubber tube that is inserted through the urethra into the bladder. These are typically used when a patient has difficulties urinating on their own.", "2;5;6;7", "" },
+    { "Urine Bottle", 4, "Bag used to catch and store drained urine.", "", "2;5;6;7", "" },
+    { "Water", 4, "An inorganic, transparent, tasteless, odorless, and nearly colorless chemical substance.", "It is also essential to and the primary component of living organic beings.", "2;5;6;7", "Volume, INTEGER" },
+    { "Energy Gel", 4, "Carbohydrate gel used to provide energy and promote recovery.", "", "2;5;6;7", "Count, INTEGER" },
+    { "Splint", 2, "a rigid or flexible device that maintains in position a displaced or injured part.", "Mostly used for broken bones, a splint is fastened along a injured length of a person's body in order to limit movement and further injury.", "2;5;6;7", "Available, BOOLEAN" },
+    { "Peripheral IV", 2, "A peripheral intravenous line is a small, short plastic catheter that is placed through the skin into a vein.", "A peripheral intravenous line is used to give fluids and/or medications directly into the blood stream.", "2;5;6;7", "Available, BOOLEAN" },
+    { "Wound Pack", 2, "Non-adherent and absorbent material used to control bleeding of an open wound.", "Wound fillers, such as non-adherent gauze, pads, ointments, sponges, and other materials designed to manage exudate.", "2;5;6;7", "Available, BOOLEAN" },
+    { "Wound Wrap", 2, "A strip of fabric used especially to cover, dress, and bind up wounds.", "It can also be used to provide pressure to the bleeding.", "2;5;6;7", "Available, BOOLEAN" },
+    { "Oxygen Tank", 1, "A tank of oxygen.", "In medicine, an oxygen tank provide controlled and therapeutic oxygen delivery to a patient.", "2;5;6;7", "Available, BOOLEAN; Volume, INTEGER" },
+    { "IV Pole", 1, "The pole use to hang IV bags on.", "It provides patient mobility to move around a facility while keeping IV lines in.", "2;5;6;7", "Available, BOOLEAN" },
+    { "IV Bag", 4, "Bag used to store and deliver fluids to a patient.", "", "2;5;6;7", "Available, BOOLEAN; Count, INTEGER; Volume, INTEGER; Kind, ENUM{Saline, Lactated Ringers}" },
+    { "Catheter Supplies", 4, "Catheters and the products that are used to insert or remove a catheter, and maintain catheter function.", "", "2;5;6;7", "" }
   };
 
   Equipment temp;
@@ -396,6 +438,7 @@ bool SQLite3Driver::populate_equipment()
     temp.type = equipmentDef.type;
     temp.summary = equipmentDef.summary.c_str();
     temp.description = equipmentDef.description.c_str();
+    temp.citations = equipmentDef.citations.c_str();
     temp.properties = equipmentDef.properties.c_str();
     if (!select_equipment(&temp)) {
       update_equipment(&temp);
@@ -410,20 +453,21 @@ bool SQLite3Driver::populate_injuries()
     std::string medical_name;
     std::string common_name;
     std::string description;
+    std::string citations;
     float lower_bound;
     float upper_bound;
   };
 
   std::vector<sInjury> default_injuries = {
-    { "Contusion", "Bruising", "Bleeding under the skin due to trauma to the blood capillaries can cause injured tissues. It usually darkens the skin to a black/blue color.",0.0,225 }, // linked to hemorrhage in mL/min
-    { "Laceration", "External Bleeding", "External bleeding of the body produced by the tearing of soft body tissue.",0.0,225 }, // linked to hemorrhage in mL/min
-    { "Puncture", "Puncture Wound", "An injury to the body cause by a piercing or penetrating object. Depth and severity can vary.", 0.0, 225 }, // linked to hemorrhage in mL/min
-    { "Airway Trauma", "Trauma to airway", "Airway injuries are life threatening and often occur as a result of blunt and penetrating force to the neck and/or chest. Diagnosis can be challenging due to symptoms and signs that are nonspecific to this injury type.", 0.0, 1.0 }, //airway obstruction in BG (severity, unitless)
-    { "Infection", "Infection", "The invasion and growth of bacteria, viruses, yeast, or fungi in the body. Infections can begin at any point in the body and spread, causing fever and other health issues.", 0.0, 0.0 }, //Infection (numerous inputs)
-    { "First Degree Burn", "Superficial Burn", "A heat injury that affects the first layer of skin. Most commonly, it causes redness, pain, and swelling and will heal on its own, though larger burns can be uncomfortable and may require a doctor's opinion.", 0.0, 0.33 }, //Burn Wound, first third (% surface area)
-    { "Second Degree Burn", "Partial Thickness Burn", "A burn that affects the epidermis and dermis (lower layers of skin). In addition to the symptoms of a first degree, a second degree burn can also cause blistering.", 0.34, 0.66 }, //Burn Wound, second third (% surface area)
-    { "Third Degree Burn", "Full Thickness Burn", "A burn that goes through the dermis and affects deep skin tissue layers. The result is a white or blackened, charred skin that may lose some feeling.", 0.67, 1.0 }, //Burn Wound, last third (% surface area)
-    { "Hemorrhage", "Bleeding", "Hemorrhaging is the release of blood from any blood vessel, either inside or outside of the body. When discussing hemorrhage, it is important to identify both severity (typically as a measure of blood loss rate) and location.", 0.0, 225 } //Hemorrhage in mL/min (150 considered massive blood loss, increase by 50% for extreme condition)
+    { "Contusion", "Bruising", "Bleeding under the skin due to trauma to the blood capillaries can cause injured tissues. It usually darkens the skin to a black/blue color.", "1;2;3", 0.0, 225 }, // linked to hemorrhage in mL/min
+    { "Laceration", "External Bleeding", "External bleeding of the body produced by the tearing of soft body tissue.", "1;2;3", 0.0, 225 }, // linked to hemorrhage in mL/min
+    { "Puncture", "Puncture Wound", "An injury to the body cause by a piercing or penetrating object. Depth and severity can vary.", "1;2;3", 0.0, 225 }, // linked to hemorrhage in mL/min
+    { "Airway Trauma", "Trauma to airway", "Airway injuries are life threatening and often occur as a result of blunt and penetrating force to the neck and/or chest. Diagnosis can be challenging due to symptoms and signs that are nonspecific to this injury type.", "2;3;4", 0.0, 1.0 }, //airway obstruction in BG (severity, unitless)
+    { "Infection", "Infection", "The invasion and growth of bacteria, viruses, yeast, or fungi in the body. Infections can begin at any point in the body and spread, causing fever and other health issues.", "2;3", 0.0, 0.0 }, //Infection (numerous inputs)
+    { "First Degree Burn", "Superficial Burn", "A heat injury that affects the first layer of skin. Most commonly, it causes redness, pain, and swelling and will heal on its own, though larger burns can be uncomfortable and may require a doctor's opinion.", "2;3", 0.0, 0.33 }, //Burn Wound, first third (% surface area)
+    { "Second Degree Burn", "Partial Thickness Burn", "A burn that affects the epidermis and dermis (lower layers of skin). In addition to the symptoms of a first degree, a second degree burn can also cause blistering.", "2;3", 0.34, 0.66 }, //Burn Wound, second third (% surface area)
+    { "Third Degree Burn", "Full Thickness Burn", "A burn that goes through the dermis and affects deep skin tissue layers. The result is a white or blackened, charred skin that may lose some feeling.", "2;3", 0.67, 1.0 }, //Burn Wound, last third (% surface area)
+    { "Hemorrhage", "Bleeding", "Hemorrhaging is the release of blood from any blood vessel, either inside or outside of the body. When discussing hemorrhage, it is important to identify both severity (typically as a measure of blood loss rate) and location.", "1;2;3", 0.0, 225 } //Hemorrhage in mL/min (150 considered massive blood loss, increase by 50% for extreme condition)
   };
 
   Injury temp;
@@ -432,8 +476,9 @@ bool SQLite3Driver::populate_injuries()
     temp.medical_name = injuryDef.medical_name.c_str();
     temp.common_name = injuryDef.common_name.c_str();
     temp.description = injuryDef.description.c_str();
-    temp.lower_bound = (100*injuryDef.lower_bound); //multiply by 100 so decimals do not get destroyed by int on qml side
-    temp.upper_bound = (100*injuryDef.upper_bound); //multiply by 100 so decimals do not get destroyed by int on qml side
+    temp.citations = injuryDef.citations.c_str();
+    temp.lower_bound = (100 * injuryDef.lower_bound); //multiply by 100 so decimals do not get destroyed by int on qml side
+    temp.upper_bound = (100 * injuryDef.upper_bound); //multiply by 100 so decimals do not get destroyed by int on qml side
     if (!select_injury(&temp)) {
       update_injury(&temp);
     }
@@ -448,26 +493,28 @@ bool SQLite3Driver::populate_treatments()
     std::string medical_name;
     std::string common_name;
     std::string description;
+    std::string citations;
   };
 
   std::vector<sTreatment> default_treatments = {
-    { "Chest Tube", "Chest Tube", "A chest tube is a hollow, flexible tube placed into the chest. It acts as a drain for blood, fluid, or air from around the heart and lungs. " },
-    { "Needle Thoracostomy", "Needle Decompression", "A procedure performed to stabilize deteriorating patients in the life-threatening situation of a tension pneumothorax. The procedure involves inserting a large needle through the chest wall into the pleural cavity to allow air to escape. " },
-    { "Burn Ointment", "Burn Ointment", "Used to help in the prevention and treatment of infections during burn healing, burn ointment kills infectious microorganisms and reduces inflammation. " },
-    { "Bandage", "Bandage/Wrap", "A strip of fabric used especially to cover, dress, and bind up wounds." },
-    { "Suture", "Stitches", "A stitch or row of stitches holding together the edges of a wound or incision. They typically help hold tissue together during healing." },
-    { "Antibiotics", "Antibiotics", "Antimicrobial substance active against bacteria, used in the treatment and prevention of bacterial infections. This medication usually comes in the form of a pill. There are different types of antibiotics for different applications." },
-    { "Fentanyl", "Fentanyl", "Fentanyl is a prescription drug that is also made and used illegally. Like morphine, it is a medicine that is typically used to treat patients with severe pain, especially after surgery. It is also sometimes used to treat patients with chronic pain who are physically tolerant to other opioids." },
-    { "Morphine", "Morphine", "Morphine is an opioid medication used to treat severe chronic pain. It has a high rate of addiction, overdose, and death." },
-    { "Pack Wound", "Pack Wound", "When a wound is deep, or when it tunnels under the skin, packing the wound can help it heal. The packing material soaks up any drainage from the wound, which helps the tissues heal from the inside out." },
-    { "Escharotomy", "Escharotomy", "During treatment of a hazardous burn, an escharotomy is the surgical incision through the eschar into the subcutaneous tissues to allow the extremity to continue to swell without compressing underlying blood vessels." }
+    { "Chest Tube", "Chest Tube", "A chest tube is a hollow, flexible tube placed into the chest. It acts as a drain for blood, fluid, or air from around the heart and lungs. ", "2;5;6;7" },
+    { "Needle Thoracostomy", "Needle Decompression", "A procedure performed to stabilize deteriorating patients in the life-threatening situation of a tension pneumothorax. The procedure involves inserting a large needle through the chest wall into the pleural cavity to allow air to escape. ", "2;5;6;7" },
+    { "Burn Ointment", "Burn Ointment", "Used to help in the prevention and treatment of infections during burn healing, burn ointment kills infectious microorganisms and reduces inflammation.", "2;5;6;7" },
+    { "Bandage", "Bandage/Wrap", "A strip of fabric used especially to cover, dress, and bind up wounds.", "2;5;6;7" },
+    { "Suture", "Stitches", "A stitch or row of stitches holding together the edges of a wound or incision. They typically help hold tissue together during healing.", "2;5;6;7" },
+    { "Antibiotics", "Antibiotics", "Antimicrobial substance active against bacteria, used in the treatment and prevention of bacterial infections. This medication usually comes in the form of a pill. There are different types of antibiotics for different applications.", "2;5;6;7" },
+    { "Fentanyl", "Fentanyl", "Fentanyl is a prescription drug that is also made and used illegally. Like morphine, it is a medicine that is typically used to treat patients with severe pain, especially after surgery. It is also sometimes used to treat patients with chronic pain who are physically tolerant to other opioids.", "2;5;6;7" },
+    { "Morphine", "Morphine", "Morphine is an opioid medication used to treat severe chronic pain. It has a high rate of addiction, overdose, and death.", "2;5;6;7" },
+    { "Pack Wound", "Pack Wound", "When a wound is deep, or when it tunnels under the skin, packing the wound can help it heal. The packing material soaks up any drainage from the wound, which helps the tissues heal from the inside out.", "2;5;6;7" },
+    { "Escharotomy", "Escharotomy", "During treatment of a hazardous burn, an escharotomy is the surgical incision through the eschar into the subcutaneous tissues to allow the extremity to continue to swell without compressing underlying blood vessels.", "2;5;6;7" }
   };
   Treatment temp;
-  for (auto& injuryDef : default_treatments) {
+  for (auto& treatmentDef : default_treatments) {
     temp.clear();
-    temp.medical_name = injuryDef.medical_name.c_str();
-    temp.common_name = injuryDef.common_name.c_str();
-    temp.description = injuryDef.description.c_str();
+    temp.medical_name = treatmentDef.medical_name.c_str();
+    temp.common_name = treatmentDef.common_name.c_str();
+    temp.description = treatmentDef.description.c_str();
+    temp.citations = treatmentDef.citations.c_str();
     if (!select_treatment(&temp)) {
       update_treatment(&temp);
     }
