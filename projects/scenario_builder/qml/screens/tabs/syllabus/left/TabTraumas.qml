@@ -17,21 +17,21 @@ ColumnLayout {
   property int syllabusIndex
 
   Injury {
-    id : self
+    id : currentInjury
   }
   function refresh_traumas() {
     var r_count = backend.injury_count();
     root.backend.injuries();
     listArea.model.clear();
-    while (root.backend.next_injury(self)) {
+    while (root.backend.next_injury(currentInjury)) {
       listArea.model.insert(listArea.model.count, {
-        id: self.injury_id,
-        medical_name: "%1".arg(self.medical_name),
-        common_name: "%1".arg(self.common_name),
-        description: "%1".arg(self.description),
-        min: self.min,
-        max: self.max,
-        citations: self.citations
+        id: currentInjury.injury_id,
+        medical_name: "%1".arg(currentInjury.medical_name),
+        common_name: "%1".arg(currentInjury.common_name),
+        description: "%1".arg(currentInjury.description),
+        min: currentInjury.min,
+        max: currentInjury.max,
+        citations: currentInjury.citations
       });
     }
   }
@@ -62,30 +62,30 @@ ColumnLayout {
         if (next < root.model.count) {
           next = root.model.count + 1
         }
-        self.injury_id = -1;
-        self.medical_name = "New Trauma %1".arg(next);
-        self.common_name = "New Trauma %1".arg(next);
-        self.description = "Description of Trauma %1".arg(next);
-        self.citations = "";
-        self.min = 0.0;
-        self.max = 1.0;
-        while (root.backend.select_injury(self)) {
+        currentInjury.injury_id = -1;
+        currentInjury.medical_name = "New Trauma %1".arg(next);
+        currentInjury.common_name = "New Trauma %1".arg(next);
+        currentInjury.description = "Description of Trauma %1".arg(next);
+        currentInjury.citations = "";
+        currentInjury.min = 0.0;
+        currentInjury.max = 1.0;
+        while (root.backend.select_injury(currentInjury)) {
           next = next + 1
-          self.injury_id = -1;
-          self.medical_name = "New Trauma %1".arg(next);
-          self.common_name = "New Trauma %1".arg(next);
-          self.description = "Description of Trauma %1".arg(next)
+          currentInjury.injury_id = -1;
+          currentInjury.medical_name = "New Trauma %1".arg(next);
+          currentInjury.common_name = "New Trauma %1".arg(next);
+          currentInjury.description = "Description of Trauma %1".arg(next)
         }
-        self.uuid = "";
-        root.backend.update_injury(self);
+        currentInjury.uuid = "";
+        root.backend.update_injury(currentInjury);
         root.model.insert(root.model.count, {
-          "id": self.injury_id,
-          "medical_name": "%1".arg(self.medical_name),
-          "common_name": "%1".arg(self.common_name),
-          "description": "%1".arg(self.description),
-          "citations": self.citations,
-          "min": self.min,
-          "max": self.max
+          "id": currentInjury.injury_id,
+          "medical_name": "%1".arg(currentInjury.medical_name),
+          "common_name": "%1".arg(currentInjury.common_name),
+          "description": "%1".arg(currentInjury.description),
+          "citations": currentInjury.citations,
+          "min": currentInjury.min,
+          "max": currentInjury.max
 
         });
         ++next;
@@ -94,9 +94,9 @@ ColumnLayout {
         if (root.model.count == 0) {
           return
         }
-        self.injury_id = -1;
-        self.medical_name = root.model.get(root.index).medical_name;
-        root.backend.remove_injury(self);
+        currentInjury.injury_id = -1;
+        currentInjury.medical_name = root.model.get(root.index).medical_name;
+        root.backend.remove_injury(currentInjury);
         root.model.remove(root.index);
 		if (listArea.currentIndex == 0) { // If the index was 0 this wasn't registering as an index change and the right pane wasn't reloading
           listArea.currentIndex = 1

@@ -6,7 +6,7 @@ import QtQuick.Controls 2.12
 RowLayout {
   id: root
   property int rangeMin : 0
-  property int rangeMax : 100
+  property int rangeMax : 1000
 
   property alias label: name.text
   property alias min : minEntry.value
@@ -32,6 +32,22 @@ RowLayout {
     height: parent.height
     leftPadding : down.implicitIndicatorWidth
     rightPadding: up.implicitIndicatorWidth
+	
+	property int decimals: 2
+    property real realValue: value / 100
+
+    validator: DoubleValidator {
+        bottom: Math.min(minEntry.from, minEntry.to)
+        top:  Math.max(minEntry.from, minEntry.to)
+    }
+
+    textFromValue: function(value, locale) {
+        return Number(value / 100).toLocaleString(locale, 'f', minEntry.decimals)
+    }
+
+    valueFromText: function(text, locale) {
+        return Number.fromLocaleString(locale, text) * 100
+    }
 
     onValueModified : {
         if ( maxEntry.value < value) {
@@ -51,10 +67,26 @@ RowLayout {
     height: parent.height
     leftPadding : down.implicitIndicatorWidth
     rightPadding: up.implicitIndicatorWidth
+	
+	property int decimals: 2
+    property real realValue: value / 100
+
+    validator: DoubleValidator {
+        bottom: Math.min(maxEntry.from, maxEntry.to)
+        top:  Math.max(maxEntry.from, maxEntry.to)
+    }
+
+    textFromValue: function(value, locale) {
+        return Number(value / 100).toLocaleString(locale, 'f', maxEntry.decimals)
+    }
+
+    valueFromText: function(text, locale) {
+        return Number.fromLocaleString(locale, text) * 100
+    }
 
     onValueModified : {
-        if ( minEntry.value > value) {
-          minEntry.value = value
+        if ( maxEntry.value > value) {
+          maxEntry.value = value
         }
         root.rangeModified()
     }
