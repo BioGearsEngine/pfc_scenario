@@ -100,9 +100,8 @@ ColumnLayout {
 
         Component.onCompleted : {
           var r_count = backend.scene_count();
-          root.backend.scenes()
-          while ( root.backend.next_scene(sce) ){ 
-
+          var scenes = root.backend.getScenes()
+          for (var ii = 0; ii < scenes.length; ++ii ){ 
             sceListArea.model.insert(sceListArea.model.count,
               {
                id  : sce.scene_id,
@@ -215,13 +214,14 @@ ColumnLayout {
         ScrollBar.vertical: ScrollBar { }  
         Component.onCompleted : {
           var r_count = backend.role_count();
-          root.backend.roles()
-          while ( root.backend.next_role(rol) ){  
+          var roles = root.backend.getRoles()
+          console.log(roles)
+          for (var ii = 0; ii < roles.length; ++ii ){  
             rolListArea.model.insert(rolListArea.model.count,
               {
-               id  : rol.role_id,
-               name: "%1".arg(rol.name), 
-               description: "%1".arg(rol.description)
+               id  : roles[ii].role_id,
+               name: "%1".arg(roles[ii].name), 
+               description: "%1".arg(roles[ii].description)
               });
           }
         }
@@ -323,8 +323,9 @@ ColumnLayout {
 
         Component.onCompleted : {
           var r_count = backend.objective_count();
-          root.backend.objectives()
-          while ( root.backend.next_objective(obj) ){
+          var objectives = root.backend.getObjectives()
+          for (var ii = 0; ii < objectives.length; ++ii ){
+            var obj = objectives[ii]
             objListArea.model.insert(objListArea.model.count,
               {
                id  : obj.objective_id,

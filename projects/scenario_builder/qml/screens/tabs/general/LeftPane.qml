@@ -9,35 +9,35 @@ import "../../common"
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
 Rectangle {
-    id: root
-    property SQLBackend backend
-    property string scenarioTitle
-    property int index
-    //readonly property alias index : citationList.currentIndex
-    readonly property alias model : listArea.model 
+  id : root
+  property SQLBackend backend
+  property string scenarioTitle
+  property int index
+  // readonly property alias index : citationList.currentIndex
+  readonly property alias model : listArea.model
 
-    function update_citation(values) {
-      obj.citation_id = values.id
-      obj.key = values.key
-      obj.title = values.title
-      obj.authors = values.authors
-      obj.year = values.year
-      obj.publisher = values.publisher
-    }
+  function update_citation(values) {
+    obj.citation_id = values.id
+    obj.key = values.key
+    obj.title = values.title
+    obj.authors = values.authors
+    obj.year = values.year
+    obj.publisher = values.publisher
+  }
 
-    Citation {
-      id : citation 
-    }
+  Citation {
+    id : citation
+  }
   ColumnLayout {
-      id: general_leftWindow
-      anchors.fill : parent
-      anchors.bottom : parent.bottom
+    id : general_leftWindow
+    anchors.fill : parent
+    anchors.bottom : parent.bottom
     PropertyEntry {
-        id: propertyEntry
+      id : propertyEntry
       Layout.fillWidth : true
-      Layout.alignment: Qt.AlignTop
-      Layout.leftMargin: 5
-      Layout.topMargin: 1
+      Layout.alignment : Qt.AlignTop
+      Layout.leftMargin : 5
+      Layout.topMargin : 1
       backend : root.backend
       name : "scenario_title"
       label : "Title"
@@ -49,8 +49,8 @@ Rectangle {
 
     PropertyEntry {
       Layout.fillWidth : true
-      Layout.alignment: Qt.AlignTop
-      Layout.leftMargin: 5
+      Layout.alignment : Qt.AlignTop
+      Layout.leftMargin : 5
       backend : root.backend
       name : "scenario_version"
       label : "Version"
@@ -59,8 +59,8 @@ Rectangle {
 
     PropertyEntry {
       Layout.fillWidth : true
-      Layout.alignment: Qt.AlignTop
-      Layout.leftMargin: 5
+      Layout.alignment : Qt.AlignTop
+      Layout.leftMargin : 5
       backend : root.backend
       name : "scenario_security"
       label : "Security"
@@ -69,8 +69,8 @@ Rectangle {
 
     PropertyAreaEntry {
       Layout.fillWidth : true
-      Layout.alignment: Qt.AlignTop
-      Layout.leftMargin: 5
+      Layout.alignment : Qt.AlignTop
+      Layout.leftMargin : 5
       backend : root.backend
       name : "scenario_description"
       label : "Description"
@@ -81,7 +81,7 @@ Rectangle {
       Layout.fillWidth : true
       Layout.fillHeight : true
       Layout.margins : 5
-      //Layout.alignment : Qt.AlignTop
+      // Layout.alignment : Qt.AlignTop
       border.color : "black"
       TwoButtonRow {
         id : controls
@@ -95,19 +95,17 @@ Rectangle {
         label : "Reference"
 
         onFirstButtonClicked : {
-          if ( next < listArea.model.count ) {
-            next = listArea.model.count+1
+          if (next < listArea.model.count) {
+            next = listArea.model.count + 1
           }
-          citation.citation_id = -1
-          citation.key = "AuthorYear_%1".arg(next)
-          citation.title = "Reference %1".arg(next)
-          citation.authors = "Reference Authors"
-          citation.year = "Reference Year"
-          citation.publisher = "Reference Publisher"  
-
-          while (root.backend.select_citation(citation))
-          {
-            next = next+1
+          citation.citation_id = -1;
+          citation.key = "AuthorYear_%1".arg(next);
+          citation.title = "Reference %1".arg(next);
+          citation.authors = "Reference Authors";
+          citation.year = "Reference Year";
+          citation.publisher = "Reference Publisher";
+          while (root.backend.select_citation(citation)) {
+            next = next + 1
             citation.citation_id = -1
             citation.key = "AuthorYear_%1".arg(next)
             citation.title = "Reference %1".arg(next)
@@ -116,73 +114,81 @@ Rectangle {
             citation.publisher = "Reference Publisher"
           }
 
-          citation.uuid = ""
-          root.backend.update_citation(citation)
-          listArea.model.insert(listArea.model.count,
-            {"id" : citation.citation_id,
-            "key" : citation.key,
-            "title" : citation.title,
-            "authors" : citation.authors,
-            "year" : citation.year,
-            "publisher" : citation.publisher});
+          citation.uuid = "";
+          root.backend.update_citation(citation);
+          listArea.model.insert(listArea.model.count, {
+            "id": citation.citation_id,
+            "key": citation.key,
+            "title": citation.title,
+            "authors": citation.authors,
+            "year": citation.year,
+            "publisher": citation.publisher
+          });
           ++next;
         }
         onSecondButtonClicked : {
-          if ( listArea.model.count == 0 ) {
+          if (listArea.model.count == 0) {
             return
           }
-          citation.citation_id = -1
-          citation.key = listArea.model.get(listArea.currentIndex).key
-          root.backend.remove_citation(citation)
-          listArea.model.remove(listArea.currentIndex)
-          listArea.currentIndex = Math.max(0, listArea.currentIndex-1)
+          citation.citation_id = -1;
+          citation.key = listArea.model.get(listArea.currentIndex).key;
+          root.backend.remove_citation(citation);
+          listArea.model.remove(listArea.currentIndex);
+          listArea.currentIndex = Math.max(0, listArea.currentIndex - 1)
         }
       }
       ListView {
         id : listArea
-        anchors { top : controls.bottom ; bottom : parent.bottom; 
-                     left : parent.left ; right : parent.right } 
+        anchors {
+          top : controls.bottom;
+          bottom : parent.bottom;
+          left : parent.left;
+          right : parent.right
+        }
         spacing : 5
-        clip: true
-        highlightFollowsCurrentItem : true  
+        clip : true
+        highlightFollowsCurrentItem : true
         highlightMoveDuration : 1
-        highlight: Rectangle {
-            color: '#1111110F'
-            Layout.alignment: Qt.AlignTop
-            Layout.fillWidth: true
-            Layout.margins : 5
-        }  
+        highlight : Rectangle {
+          color : '#1111110F'
+          Layout.alignment : Qt.AlignTop
+          Layout.fillWidth : true
+          Layout.margins : 5
+        }
 
-        model : ListModel {}  
+        model : ListModel {}
 
         delegate : Rectangle {
           id : citation
           color : 'transparent'
-          border.color: "steelblue"
+          border.color : "steelblue"
           height : citation_title_text.height + citation_value_text.height
-          anchors { left : parent.left; right: parent.right ; margins : 5 }  
+          anchors {
+            left : parent.left;
+            right : parent.right;
+            margins : 5
+          }
 
           MouseArea {
-            anchors.fill: parent
-            onClicked: {
-              listArea.currentIndex = index  
+            anchors.fill : parent
+            onClicked : {
+              listArea.currentIndex = index
 
             }
-            onDoubleClicked: {
-            }
-          }  
+            onDoubleClicked : {}
+          }
 
           Text {
             id : citation_title_text
             anchors.left : citation.left
             anchors.leftMargin : 5
-            text :  model.title
+            text : model.title
             width : 150
-            font.weight: Font.Bold
-            font.pointSize: 10
+            font.weight : Font.Bold
+            font.pointSize : 10
             enabled : false
-            color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
-          }  
+            color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
+          }
 
           Text {
             id : citation_value_text
@@ -190,72 +196,76 @@ Rectangle {
             anchors.left : parent.left
             anchors.right : parent.right
             anchors.leftMargin : 10
-            font.pointSize: 10
-            text :  model.key
+            font.pointSize : 10
+            text : model.key
             enabled : false
-            color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
-            elide: Text.ElideRight
-          }  
+            color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
+            elide : Text.ElideRight
+          }
 
-          states: State {
+          states : State {
             name : "Selected"
-            PropertyChanges{ target : citation_title_text; enabled : true}
-            PropertyChanges{ target : citation_value_text; enabled  : true}
-          }  
-
-          onFocusChanged: {
-            if(listArea.currentIndex == index){
-              state = 'Selected';
+            PropertyChanges {
+              target : citation_title_text;
+              enabled : true
             }
-            else{
+            PropertyChanges {
+              target : citation_value_text;
+              enabled : true
+            }
+          }
+
+          onFocusChanged : {
+            if (listArea.currentIndex == index) {
+              state = 'Selected';
+            } else {
               state = '';
             }
           }
-        }  
+        }
 
-        ScrollBar.vertical: ScrollBar { }  
+        ScrollBar.vertical : ScrollBar {}
 
         Component.onCompleted : {
           var r_count = backend.citation_count();
-          root.backend.citations()
-          while ( root.backend.next_citation(citation) ){  
+          var citations = root.backend.citations;
 
-            listArea.model.insert(listArea.model.count,
-              {
-               id  : citation.citation_id,
-               key: "%1".arg(citation.key), 
-               title: "%1".arg(citation.title),
-               authors: "%1".arg(citation.authors),
-               year: "%1".arg(citation.year),
-               publisher: "%1".arg(citation.publisher)
-              });
+          for (var ii = 0; ii < citations.length; ++ ii) {
+            let citation = citations[ii]
+            listArea.model.insert(listArea.model.count, {
+              id: citation.citation_id,
+              key: "%1".arg(citation.key),
+              title: "%1".arg(citation.title),
+              authors: "%1".arg(citation.authors),
+              year: "%1".arg(citation.year),
+              publisher: "%1".arg(citation.publisher)
+            });
           }
         }
       }
     }
     Rectangle {
-        Layout.fillHeight: true
-        color : "Red"
-        border.color:"Red"
+      Layout.fillHeight : true
+      color : "Red"
+      border.color : "Red"
     }
   }
   onIndexChanged : {
     listArea.model.clear()
-    root.backend.citations()
-    while(root.backend.next_citation(citation)){
-      listArea.model.insert(listArea.model.count,
-      {
-        citation_id : "%1".arg(citation.citation_id),
-        key : "%1".arg(citation.key),
-        title : "%1".arg(citation.title),
-        authors : "%1".arg(citation.authors),
-        year : "%1".arg(citation.year),
-        publisher : "%1".arg(citation.publisher)
+    var citations = root.backend.citations;
+    for (var ii = 0; ii < citations.count; ++ ii) {
+      console.log(citations[ii]);
+      listArea.model.insert(listArea.model.count, {
+        citation_id: "%1".arg(citation.citation_id),
+        key: "%1".arg(citation.key),
+        title: "%1".arg(citation.title),
+        authors: "%1".arg(citation.authors),
+        year: "%1".arg(citation.year),
+        publisher: "%1".arg(citation.publisher)
       });
     }
   }
 }
-
 
 
 /*##^## Designer {

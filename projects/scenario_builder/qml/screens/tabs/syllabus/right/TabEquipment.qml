@@ -7,15 +7,15 @@ import "../../../common"
 
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
-ColumnLayout  {
-  id: root
+ColumnLayout {
+  id : root
   property SQLBackend backend
   property Equipment currentEquipment
   property int topIndex // topIndex is the index of the top set of 4 tabs
-  
-  
-  Layout.fillWidth: true
-  Layout.fillHeight: true
+
+
+  Layout.fillWidth : true
+  Layout.fillHeight : true
 
   Equipment {
     id : obj
@@ -26,30 +26,28 @@ ColumnLayout  {
   }
   function refresh_citations() {
     currentEquipment
-    if(currentEquipment) {
-      nameEntry.text = currentEquipment.name
-	  summaryEntry.text = currentEquipment.summary
-      descriptionEntry.text = currentEquipment.description
-      imageEntry.text = currentEquipment.image
+    if (currentEquipment) {
+      nameEntry.text = currentEquipment.name;
+      summaryEntry.text = currentEquipment.summary;
+      descriptionEntry.text = currentEquipment.description;
+      imageEntry.text = currentEquipment.image;
       referenceList.model.clear()
-      var citations = (currentEquipment.citations) ? currentEquipment.citations.split(";").filter(x => x) : "";  
-      for(var i = 0; i < citations.length; ++i){
-         citation.citation_id = parseInt(citations[i])
-         citation.key = ""
-         citation.title  = ""
-         root.backend.select_citation(citation)
-         if (citation.title != "") { 
-           referenceList.model.insert(referenceList.model.count,
-               {
-                 "citation_id" : "%1".arg(citation.citation_id),
-                 "key" : "%1".arg(citation.key),
-                 "title":  "%1".arg(citation.title),
-                 "authors" : "%1".arg(citation.authors),
-                 "year" : "%1".arg(citation.year),
-                 "publisher" : "%1".arg(citation.publisher)
-              }
-            );
-         }
+      var citations = currentEquipment.citations;
+      for (var i = 0; i < citations.length; ++ i) {
+        citation.citation_id = parseInt(citations[i]);
+        citation.key = "";
+        citation.title = "";
+        root.backend.select_citation(citation);
+        if (citation.title != "") {
+          referenceList.model.insert(referenceList.model.count, {
+            "citation_id": "%1".arg(citation.citation_id),
+            "key": "%1".arg(citation.key),
+            "title": "%1".arg(citation.title),
+            "authors": "%1".arg(citation.authors),
+            "year": "%1".arg(citation.year),
+            "publisher": "%1".arg(citation.publisher)
+          });
+        }
       }
     }
   }
@@ -58,165 +56,161 @@ ColumnLayout  {
   }
 
   TextEntry {
-    Layout.fillWidth: true
-    Layout.leftMargin: 5
+    Layout.fillWidth : true
+    Layout.leftMargin : 5
 
-    id: nameEntry
+    id : nameEntry
     label : "Name"
-    placeholderText: "String Field (128 Characters)"
+    placeholderText : "String Field (128 Characters)"
 
     onEditingFinished : {
-        if ( text != currentEquipment.name) {
-          currentEquipment.name = text
-          update_equipment(currentEquipment)
-        }
+      if (text != currentEquipment.name) {
+        currentEquipment.name = text;
+        update_equipment(currentEquipment);
       }
+    }
   }
-  
-  TextAreaEntry {
-    Layout.fillWidth: true
-    Layout.leftMargin: 5
 
-    id: summaryEntry
+  TextAreaEntry {
+    Layout.fillWidth : true
+    Layout.leftMargin : 5
+
+    id : summaryEntry
     label : "Summary"
-    required: true
+    required : true
     onEditingFinished : {
-        if ( text != currentEquipment.summary) {
-          currentEquipment.summary = text
-          update_equipment(currentEquipment)
-        }
+      if (text != currentEquipment.summary) {
+        currentEquipment.summary = text;
+        update_equipment(currentEquipment);
       }
+    }
   }
 
   TextAreaEntry {
-    Layout.fillWidth: true
-    Layout.leftMargin: 5
+    Layout.fillWidth : true
+    Layout.leftMargin : 5
 
-    id: descriptionEntry
+    id : descriptionEntry
     label : "Description"
-    required: true
+    required : true
     onEditingFinished : {
-        if ( text != currentEquipment.description) {
-          currentEquipment.description = text
-          update_equipment(currentEquipment)
-        }
+      if (text != currentEquipment.description) {
+        currentEquipment.description = text;
+        update_equipment(currentEquipment);
       }
+    }
   }
 
   TextEntry {
-    Layout.fillWidth: true
-    Layout.leftMargin: 5
+    Layout.fillWidth : true
+    Layout.leftMargin : 5
 
-    id: imageEntry
+    id : imageEntry
     label : "Image"
-    placeholderText: "String Field (128 Characters )"
+    placeholderText : "String Field (128 Characters )"
 
     onEditingFinished : {
-        if ( text != currentEquipment.image) {
-          currentEquipment.image = text
-          update_equipment(currentEquipment)
-        }
+      if (text != currentEquipment.image) {
+        currentEquipment.image = text;
+        update_equipment(currentEquipment);
       }
+    }
   }
 
-    StackLayout {
-      id : listStack
+  StackLayout {
+    id : listStack
+    Layout.fillWidth : true
+    Layout.fillHeight : true
+    Layout.leftMargin : 5
+    Layout.rightMargin : 20
+    currentIndex : 0
+    CitationListEntry {
+      id : referenceList
       Layout.fillWidth : true
       Layout.fillHeight : true
-      Layout.leftMargin: 5
-	  Layout.rightMargin: 20
-      currentIndex : 0
-      CitationListEntry {
-        id : referenceList
-        Layout.fillWidth : true
-        Layout.fillHeight : true
-        backend : root.backend  
-        onList : {
-          var values = root.model.get(root.index)
-          if(values) {
-            fullReferenceList.model.clear()
-            var citations = values.citations.split(";").filter(x=>x);
-            root.backend.citations()
-            while(root.backend.next_citation(citation)){
-              fullReferenceList.model.insert(fullReferenceList.model.count,
-                  {
-                     citation_id : "%1".arg(citation.citation_id),
-                     key : "%1".arg(citation.key),
-                     title : "%1".arg(citation.title), 
-                     authors:  "%1".arg(citation.authors),
-                     year : "%1".arg(citation.year)
-                 }
-               );
-            };
-          }
-          listStack.currentIndex = 1
+      backend : root.backend
+      onList : {
+        var values = root.model.get(root.index);
+        if (values) {
+          fullReferenceList.model.clear();
+          var citations = values.citations.split(";").filter(x => x);
+          root.backend.citations();
+          while (root.backend.next_citation(citation)) {
+            fullReferenceList.model.insert(fullReferenceList.model.count, {
+              citation_id: "%1".arg(citation.citation_id),
+              key: "%1".arg(citation.key),
+              title: "%1".arg(citation.title),
+              authors: "%1".arg(citation.authors),
+              year: "%1".arg(citation.year)
+            });
+          };
         }
-
-        onCitationAdded : {
-          var entry = root.model.get(root.index)
-          entry.citations = (entry.citations) ? entry.citations.concat(";"+citation_id) : entry.citations.concat(citation_id)
-          update_equipment(entry)
-        } 
-
-        onCitationRemoved : {
-          var entry = root.model.get(root.index)
-          var citations = entry.citations.split(";").filter(item => item).filter(item => item != citation_id);
-          entry.citations = citations.join(";")
-          update_equipment(entry)
-        }
+        listStack.currentIndex = 1
       }
-      FullCitationListEntry {
-        id : fullReferenceList
-        Layout.fillWidth : true
-        Layout.fillHeight : true
-        backend : root.backend   
 
-        onFullAdded : {
-          citation.citation_id = fullReferenceList.model.get(current).citation_id
-          root.backend.select_citation(citation)
-          var entry = root.model.get(root.index)
-          entry.citations = (entry.citations) ? entry.citations.concat(";"+citation.citation_id) : entry.citations.concat(citation.citation_id)
-          update_equipment(entry)
-          fullExit()
-        }
+      onCitationAdded : {
+        var entry = root.model.get(root.index);
+        entry.citations = (entry.citations) ? entry.citations.concat(";" + citation_id) : entry.citations.concat(citation_id);
+        update_equipment(entry)
+      }
 
-        onFullExit : {
-          listStack.currentIndex = 0
-          var values = root.model.get(root.index)
-          if(values) {
-            nameEntry.text = values.name
-			summaryEntry.text = values.summary
-            descriptionEntry.text = values.description
-            referenceList.model.clear()   
-
-            var citations = values.citations.split(";").filter(x => x);  
-            for(var i = 0; i < citations.length; ++i){
-              citation.citation_id = parseInt(citations[i])
-              citation.key = ""
-              citation.title = ""
-              if(root.backend.select_citation(citation)){
-                referenceList.model.insert(referenceList.model.count,
-                    {
-                       citation_id : "%1".arg(citation.citation_id),
-                       key : "%1".arg(citation.key),
-                       title : "%1".arg(citation.title), 
-                       authors:  "%1".arg(citation.authors),
-                       year : "%1".arg(citation.year)
-                   }
-                 );
-              }
-            };
-          }
-        }    
+      onCitationRemoved : {
+        var entry = root.model.get(root.index);
+        var citations = entry.citations.split(";").filter(item => item).filter(item => item != citation_id);
+        entry.citations = citations.join(";");
+        update_equipment(entry);
       }
     }
-  onTopIndexChanged : {
-    if (topIndex == 1) {
-      refresh_citations()
+    FullCitationListEntry {
+      id : fullReferenceList
+      Layout.fillWidth : true
+      Layout.fillHeight : true
+      backend : root.backend
+
+      onFullAdded : {
+        citation.citation_id = fullReferenceList.model.get(current).citation_id;
+        root.backend.select_citation(citation);
+        var entry = root.model.get(root.index);
+        entry.citations = (entry.citations) ? entry.citations.concat(";" + citation.citation_id) : entry.citations.concat(citation.citation_id);
+        update_equipment(entry);
+        fullExit();
+      }
+
+      onFullExit : {
+        listStack.currentIndex = 0;
+        var values = root.model.get(root.index);
+        if (values) {
+          nameEntry.text = values.name
+          summaryEntry.text = values.summary
+          descriptionEntry.text = values.description
+          referenceList.model.clear()
+
+          var citations = values.citations.split(";").filter(x => x);
+          for (var i = 0; i < citations.length; ++ i) {
+            citation.citation_id = parseInt(citations[i]);
+            citation.key = "";
+            citation.title = "";
+            if (root.backend.select_citation(citation)) {
+              referenceList.model.insert(referenceList.model.count, {
+                citation_id: "%1".arg(citation.citation_id),
+                key: "%1".arg(citation.key),
+                title: "%1".arg(citation.title),
+                authors: "%1".arg(citation.authors),
+                year: "%1".arg(citation.year)
+              });
+            }
+          };
+        }
+      }
     }
   }
-  onCurrentEquipmentChanged : { 
-    console.log("Current Equipment %1".arg(currentEquipment.name))
+  onTopIndexChanged : {
+    if (topIndex == 1) {
+      refresh_citations();
+    }
+  }
+  onCurrentEquipmentChanged : {
+    console.log("Current Equipment %1".arg(currentEquipment.name));
     refresh_citations()
   }
 }

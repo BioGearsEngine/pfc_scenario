@@ -18,18 +18,19 @@ specific language governing permissions and limitations under the License.
 
 #include <QList>
 #include <QObject>
+#include <QQmlListProperty>
+#include <QSettings>
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QString>
-#include <QSettings>
+#include <QVariant>
 
 #include "SQLTables.h"
 namespace pfc {
 class Serializer;
 
-
 //!  \class SQLite3Driver
-//!   
+//!
 //!  \brief  QtSql based Sqlite3 Driver for sotring working version of internal database
 //!          Each table has a series of functions designed to interact with the database
 //!          SQLTables has a series of structs designed to pass between this class and QML
@@ -57,6 +58,25 @@ public:
 
   Q_PROPERTY(QString name READ Name WRITE Name NOTIFY nameChanged)
   Q_PROPERTY(QString path READ Path WRITE Path NOTIFY pathChanged)
+
+  Q_PROPERTY(QQmlListProperty<Author> authors READ getAuthors)
+  // Q_PROPERTY(QQmlListProperty<Property> READ getProperties)
+  // Q_PROPERTY(QQmlListProperty<Objective> READ getObjectives)
+  Q_PROPERTY(QQmlListProperty<Citation> citations READ getCitations)
+  // Q_PROPERTY(QQmlListProperty<Treatment> READ getTreatments)
+  // Q_PROPERTY(QQmlListProperty<Equipment> READ getEquipment)
+  // Q_PROPERTY(QQmlListProperty<Trauma> READ getTraumas)
+  // Q_PROPERTY(QQmlListProperty<TraumaProfile> READ getTraumaProfiles)
+  // Q_PROPERTY(QQmlListProperty<Assessment> READ getAssessments)
+  // Q_PROPERTY(QQmlListProperty<Location> READ getLocations)
+  // Q_PROPERTY(QQmlListProperty<RoleMap> READ getRoleMaps)
+  // Q_PROPERTY(QQmlListProperty<EventMap> READ getEventMaps)
+  // Q_PROPERTY(QQmlListProperty<LocationMap> READ getLocationMaps)
+  // Q_PROPERTY(QQmlListProperty<CitationMap> READ getCitationMaps)
+  // Q_PROPERTY(QQmlListProperty<EquipmentMap> READ getEquipmentMaps)
+  // Q_PROPERTY(QQmlListProperty<Roles> READ getRoles)
+  // Q_PROPERTY(QQmlListProperty<Events> READ getEvents)
+  // Q_PROPERTY(QQmlListProperty<Scenes> READ getScenes)
 
 public:
   enum Sqlite3Table {
@@ -156,10 +176,9 @@ public:
 
   Q_INVOKABLE int nextID(Sqlite3Table) const;
 
-
   //!
   //!  Calling a table function updates the QList of known cash hits
-  //!  This should allow us to convert the QSQL Database to a 
+  //!  This should allow us to convert the QSQL Database to a
   //!  QListModel using our structs;
   //!
   //!  A stronger refactor for 2.0 Would be to rewrite this entire class as a QSqlTableModel. Our Average UI screen
@@ -170,28 +189,177 @@ public:
   //!
   //!  https://wiki.qt.io/How_to_Use_a_QSqlQueryModel_in_QML
 
-  Q_INVOKABLE QList<Author*> authors();
-  Q_INVOKABLE QList<Property*> properties();
-  Q_INVOKABLE QList<Objective*> objectives();
-  Q_INVOKABLE QList<Citation*> citations();
-  Q_INVOKABLE QList<Treatment*> treatments();
-  Q_INVOKABLE QList<Equipment*> equipments();
-  Q_INVOKABLE QList<Trauma*> traumas();
-  Q_INVOKABLE QList<TraumaProfile*> trauma_profiles();
-  Q_INVOKABLE QList<Assessment*> assessments();
-  Q_INVOKABLE QList<Location*> locations();
-  Q_INVOKABLE QList<Role*> roles();
-  Q_INVOKABLE QList<Role*> roles_in_scene(Scene* scene);
-  Q_INVOKABLE QList<RoleMap*> role_maps();
-  Q_INVOKABLE QList<EventMap*> event_maps();
-  Q_INVOKABLE QList<LocationMap*> location_maps();
-  Q_INVOKABLE QList<CitationMap*> citation_maps();
-  Q_INVOKABLE QList<EquipmentMap*> equipment_maps();
-  Q_INVOKABLE QList<Event*> events();
-  Q_INVOKABLE QList<Event*> events_in_scene(Scene* scene);
-  Q_INVOKABLE QList<Location*> locations_in_scene(Scene* scene);
-  Q_INVOKABLE QList<EquipmentMap*> equipment_in_scene(Scene* scene);
-  Q_INVOKABLE QList<Scene*> scenes();
+  QList<Author*> authors() const;
+  QList<Property*> properties() const;
+  QList<Objective*> objectives() const;
+  QList<Citation*> citations() const;
+  QList<Treatment*> treatments() const;
+  QList<Equipment*> equipments() const;
+  QList<Trauma*> traumas() const;
+  QList<TraumaProfile*> trauma_profiles() const;
+  QList<Assessment*> assessments() const;
+  QList<Location*> locations() const;
+  QList<Role*> roles() const;
+  QList<Role*> roles_in_scene(Scene* scene);
+  QList<RoleMap*> role_maps() const;
+  QList<EventMap*> event_maps() const;
+  QList<LocationMap*> location_maps() const;
+  QList<CitationMap*> citation_maps() const;
+  QList<EquipmentMap*> equipment_maps() const;
+  QList<Event*> events() const;
+  QList<Event*> events_in_scene(Scene* scene) const;
+  QList<Location*> locations_in_scene(Scene* scene) const;
+  QList<EquipmentMap*> equipment_in_scene(Scene* scene) const;
+  QList<Scene*> scenes() const;
+
+  static auto CountAuthor(QQmlListProperty<Author>* list) -> int
+  {
+    auto authorList = reinterpret_cast<QList<Author*>*>(list->data);
+    if (authorList) {
+      return authorList->length();
+    }
+    return 0;
+  }
+  static auto AtAuthor(QQmlListProperty<Author>* list, int index) -> Author*
+  {
+    auto authorList = reinterpret_cast<QList<Author*>*>(list->data);
+    if (authorList) {
+      return authorList->at(index);
+    }
+    return nullptr;
+  }
+
+  Q_INVOKABLE QQmlListProperty<Author> getAuthors() const
+  {
+
+    return QQmlListProperty<Author>(nullptr, new QList<Author*>(authors()),
+                                    nullptr,
+                                    &SQLite3Driver::CountAuthor,
+                                    &SQLite3Driver::AtAuthor,
+                                    nullptr);
+  }
+  Q_INVOKABLE QVariant getProperties() const
+  {
+    auto var = QVariant();
+    var.setValue(properties());
+    return var;
+  }
+  Q_INVOKABLE QVariant getObjectives() const
+  {
+    auto var = QVariant();
+    var.setValue((objectives()));
+    return var;
+  }
+  static auto CountCitation(QQmlListProperty<Citation>* list) -> int
+  {
+    auto authorList = reinterpret_cast<QList<Citation*>*>(list->data);
+    if (authorList) {
+      return authorList->length();
+    }
+    return 0;
+  }
+  static auto AtCitation(QQmlListProperty<Citation>* list, int index) -> Citation*
+  {
+    auto authorList = reinterpret_cast<QList<Citation*>*>(list->data);
+    if (authorList) {
+      return authorList->at(index);
+    }
+    return nullptr;
+  }
+
+  Q_INVOKABLE QQmlListProperty<Citation> getCitations() const
+  {
+
+    return QQmlListProperty<Citation>(nullptr, new QList<Citation*>(citations()),
+                                    nullptr,
+                                    &SQLite3Driver::CountCitation,
+                                    &SQLite3Driver::AtCitation,
+                                    nullptr);
+  }
+  Q_INVOKABLE QVariant getTreatments() const
+  {
+    auto var = QVariant();
+    var.setValue((treatments()));
+    return var;
+  }
+  Q_INVOKABLE QVariant getEquipment() const
+  {
+    auto var = QVariant();
+    var.setValue(QList<Equipment*>(equipments()));
+    return var;
+  }
+  Q_INVOKABLE QVariant getTraumas() const
+  {
+    auto var = QVariant();
+    var.setValue((traumas()));
+    return var;
+  }
+  Q_INVOKABLE QVariant getTraumaProfiles() const
+  {
+    auto var = QVariant();
+    var.setValue((trauma_profiles()));
+    return var;
+  }
+  Q_INVOKABLE QVariant getAssessments() const
+  {
+    auto var = QVariant();
+    var.setValue((assessments()));
+    return var;
+  }
+  Q_INVOKABLE QVariant getLocations() const
+  {
+    auto var = QVariant();
+    var.setValue((locations()));
+    return var;
+  }
+  Q_INVOKABLE QVariant getRoleMaps() const
+  {
+    auto var = QVariant();
+    var.setValue((role_maps()));
+    return var;
+  }
+  Q_INVOKABLE QVariant getEventMaps() const
+  {
+    auto var = QVariant();
+    var.setValue((event_maps()));
+    return var;
+  }
+  Q_INVOKABLE QVariant getLocationMaps() const
+  {
+    auto var = QVariant();
+    var.setValue((location_maps()));
+    return var;
+  }
+  Q_INVOKABLE QVariant getCitationMaps() const
+  {
+    auto var = QVariant();
+    var.setValue((citation_maps()));
+    return var;
+  }
+  Q_INVOKABLE QVariant getEquipmentMaps() const
+  {
+    auto var = QVariant();
+    var.setValue((equipment_maps()));
+    return var;
+  }
+  Q_INVOKABLE QVariant getRoles() const
+  {
+    auto var = QVariant();
+    var.setValue((role_maps()));
+    return var;
+  }
+  Q_INVOKABLE QVariant getEvents() const
+  {
+    auto var = QVariant();
+    var.setValue((event_maps()));
+    return var;
+  }
+  Q_INVOKABLE QVariant getScenes() const
+  {
+    auto var = QVariant();
+    var.setValue((scenes()));
+    return var;
+  }
 
   Q_INVOKABLE bool select_author(Author*) const;
   Q_INVOKABLE bool select_property(Property*) const;
@@ -225,7 +393,6 @@ public:
   Q_INVOKABLE bool update_role(Role*);
   Q_INVOKABLE bool update_role_in_scene(Scene*, Role*);
   Q_INVOKABLE bool update_location_in_scene(Scene*, Location*);
-
 
   Q_INVOKABLE bool update_event(Event*);
   Q_INVOKABLE bool update_event_in_scene(Scene*, Event*);
@@ -305,7 +472,6 @@ signals:
   void nameChanged();
   void pathChanged();
 
-
   //Additional signal for any change to a table
   //Possible used when you want to update secondary relations that might
   //Invalidate your entire QML model
@@ -350,7 +516,6 @@ signals:
   void sceneRemoved(int index);
   void treatmentRemoved(int index);
 
-
   //Signals that a table was Updated and which index has changed
   //This is intended for QML optimization of model cashes.
   void authorUpdated(int index);
@@ -373,6 +538,7 @@ signals:
   void treatmentUpdated(int index);
 
   void refresh();
+
 private:
   bool open();
 
@@ -380,7 +546,7 @@ private:
   QString _db_name = "";
   QString _db_path = "./";
   mutable int _error_code = 0;
-  
+
   std::vector<std::string> recent_files;
 };
 }

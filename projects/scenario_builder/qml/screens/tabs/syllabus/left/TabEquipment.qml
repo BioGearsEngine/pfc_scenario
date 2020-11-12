@@ -20,13 +20,13 @@ ColumnLayout {
     id : currentEquipment
   }
   function refresh_equipment() {
-    equipmentList.equipmentDefinitions = []
-    root.backend.equipments()
-    while (root.backend.next_equipment(currentEquipment)) {
-      equipmentList.equipmentDefinitions.push(currentEquipment.make())
-      equipmentList.equipmentDefinitions[equipmentList.equipmentDefinitions.length - 1].assign(currentEquipment)
+
+    var list = root.backend.getEquipment()
+    for ( var ii = 0; ii < list.count; ++i) {
+      equipmentList.equipmentDefinitions.push(list[i].make())
+      equipmentList.equipmentDefinitions[equipmentList.equipmentDefinitions.length - 1].assign(list[i])
     }
-    equipmentList.model = equipmentList.equipmentDefinitions
+    equipmentList.model = list
   }
   Rectangle {
     id : listRectangle
@@ -57,7 +57,7 @@ ColumnLayout {
         currentEquipment.equipment_id = -1;
         currentEquipment.type = "Type %1".arg(next);
         currentEquipment.name = "New Equipment %1".arg(next);
-		currentEquipment.summary = "Summary of Equipment %1".arg(next);
+		    currentEquipment.summary = "Summary of Equipment %1".arg(next);
         currentEquipment.description = "Description of Equipment %1".arg(next);
         currentEquipment.image = "";
         currentEquipment.citations = "";
@@ -73,7 +73,7 @@ ColumnLayout {
           "id": currentEquipment.equipment_id,
           "type": currentEquipment.type, // Change this to not be default later
           "name": "%1".arg(currentEquipment.name),
-		  "summary": "%1".arg(currentEquipment.summary),
+		      "summary": "%1".arg(currentEquipment.summary),
           "description": "%1".arg(currentEquipment.description),
           "citations": currentEquipment.citations,
           "image": currentEquipment.image

@@ -716,7 +716,7 @@ int SQLite3Driver::assessment_count() const
   }
   return -1;
 }
-QList<Assessment*> SQLite3Driver::assessments()
+QList<Assessment*> SQLite3Driver::assessments() const
 {
   QList<Assessment*> _assessments;
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -862,7 +862,7 @@ int SQLite3Driver::author_count() const
   }
   return -1;
 }
-QList<Author*> SQLite3Driver::authors()
+QList<Author*> SQLite3Driver::authors() const
 {
   QList<Author*> _authors;
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -1048,7 +1048,7 @@ int SQLite3Driver::citation_count(Scene* scene) const
   }
   return -1;
 }
-QList<Citation*> SQLite3Driver::citations()
+QList<Citation*> SQLite3Driver::citations() const
 {
   QList<Citation*> _citations;
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -1234,7 +1234,7 @@ int SQLite3Driver::trauma_count() const
   }
   return -1;
 }
-QList<Trauma*> SQLite3Driver::traumas()
+QList<Trauma*> SQLite3Driver::traumas() const
 {
   QList<Trauma*> _traumas;
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -1384,7 +1384,7 @@ int SQLite3Driver::trauma_profile_count() const
   }
   return -1;
 }
-QList<TraumaProfile*> SQLite3Driver::trauma_profiles()
+QList<TraumaProfile*> SQLite3Driver::trauma_profiles() const
 {
   QList<TraumaProfile*> _trauma_profiles;
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -1546,7 +1546,7 @@ int SQLite3Driver::event_count(Scene* scene) const
   }
   return -1;
 }
-QList<Event*> SQLite3Driver::events()
+QList<Event*> SQLite3Driver::events() const
 {
   QList<Event*> _events;
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -1564,7 +1564,7 @@ QList<Event*> SQLite3Driver::events()
   }
   return _events;
 }
-QList<Event*> SQLite3Driver::events_in_scene(Scene* scene)
+QList<Event*> SQLite3Driver::events_in_scene(Scene* scene) const
 {
   QList<Event*> _events;
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -1730,7 +1730,7 @@ int SQLite3Driver::location_count() const
   }
   return -1;
 }
-QList<Location*> SQLite3Driver::locations()
+QList<Location*> SQLite3Driver::locations() const
 {
   QList<Location*> _locations;
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -1827,7 +1827,7 @@ int SQLite3Driver::location_count(Scene* scene) const
   }
   return -1;
 }
-QList<Location*> SQLite3Driver::locations_in_scene(Scene* scene)
+QList<Location*> SQLite3Driver::locations_in_scene(Scene* scene) const
 {
   //TODO: Remove second loop as location_map should include an inflated fk_lcoation
 
@@ -1980,7 +1980,7 @@ int SQLite3Driver::equipment_count(Scene* scene) const
   }
   return -1;
 }
-QList<Equipment*> SQLite3Driver::equipments()
+QList<Equipment*> SQLite3Driver::equipments() const
 {
   QList<Equipment*> _equipments;
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -1998,7 +1998,7 @@ QList<Equipment*> SQLite3Driver::equipments()
   }
   return _equipments;
 }
-QList<EquipmentMap*> SQLite3Driver::equipment_in_scene(Scene* scene)
+QList<EquipmentMap*> SQLite3Driver::equipment_in_scene(Scene* scene) const
 {
   QList<EquipmentMap*> _equipment_maps;
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -2178,7 +2178,7 @@ int SQLite3Driver::objective_count() const
   }
   return -1;
 }
-QList<Objective*> SQLite3Driver::objectives()
+QList<Objective*> SQLite3Driver::objectives() const
 {
   QList<Objective*> _objectives;
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -2308,7 +2308,7 @@ int SQLite3Driver::property_count() const
   }
   return -1;
 }
-QList<Property*> SQLite3Driver::properties()
+QList<Property*> SQLite3Driver::properties() const
 {
   QList<Property*> _properties;
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -2443,7 +2443,7 @@ int SQLite3Driver::role_count(Scene* scene) const
   }
   return -1;
 }
-QList<Role*> SQLite3Driver::roles()
+QList<Role*> SQLite3Driver::roles() const
 {
   QList<Role*> _roles;
 
@@ -2645,7 +2645,7 @@ int SQLite3Driver::scene_count() const
   }
   return -1;
 }
-QList<Scene*> SQLite3Driver::scenes()
+QList<Scene*> SQLite3Driver::scenes() const
 {
   QList<Scene*> _scenes;
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -2876,7 +2876,7 @@ int SQLite3Driver::treatment_count() const
   }
   return -1;
 }
-QList<Treatment*> SQLite3Driver::treatments()
+QList<Treatment*> SQLite3Driver::treatments() const
 {
   QList<Treatment*> _treatments;
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -3019,7 +3019,7 @@ int SQLite3Driver::role_map_count() const
   }
   return -1;
 }
-QList<RoleMap*> SQLite3Driver::role_maps()
+QList<RoleMap*> SQLite3Driver::role_maps() const
 {
   QList<RoleMap*> _role_maps;
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -3160,7 +3160,7 @@ int SQLite3Driver::event_map_count() const
   }
   return -1;
 }
-QList<EventMap*> SQLite3Driver::event_maps()
+QList<EventMap*> SQLite3Driver::event_maps() const
 {
   QList<EventMap*> _event_maps;
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -3317,7 +3317,7 @@ int SQLite3Driver::location_map_count(Scene* scene) const //we currently only su
   }
   return -1;
 }
-QList<LocationMap*> SQLite3Driver::location_maps()
+QList<LocationMap*> SQLite3Driver::location_maps() const
 {
   QList<LocationMap*> _location_maps;
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -3458,7 +3458,7 @@ int SQLite3Driver::citation_map_count() const
   }
   return -1;
 }
-QList<CitationMap*> SQLite3Driver::citation_maps()
+QList<CitationMap*> SQLite3Driver::citation_maps() const
 {
   QList<CitationMap*> _citation_maps;
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -3619,7 +3619,7 @@ int SQLite3Driver::equipment_map_count() const
   }
   return -1;
 }
-QList<EquipmentMap*> SQLite3Driver::equipment_maps()
+QList<EquipmentMap*> SQLite3Driver::equipment_maps() const
 {
   QList<EquipmentMap*> _equipment_maps;
   if (QSqlDatabase::database(_db_name).isOpen()) {

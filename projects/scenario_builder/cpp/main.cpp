@@ -58,7 +58,9 @@ int main(int argc, char* argv[])
   qmlRegisterInterface<Author>("const Author*");
   qmlRegisterInterface<Citation>("const Citation*");
   qmlRegisterInterface<CitationMap>("const CitationMap*");
+
   qmlRegisterInterface<Equipment>("const Equipment*");
+  
   qmlRegisterInterface<EquipmentMap>("const EquipmentMap*");
   qmlRegisterInterface<Event>("const Event*");
   qmlRegisterInterface<EventMap>("const EventMap*");
