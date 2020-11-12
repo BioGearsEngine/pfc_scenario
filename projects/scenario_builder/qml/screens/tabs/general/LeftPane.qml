@@ -14,7 +14,7 @@ Rectangle {
   property string scenarioTitle
   property int index
   // readonly property alias index : citationList.currentIndex
-  readonly property alias model : listArea.model
+  readonly property alias model : citationList.model
 
   function update_citation(values) {
     obj.citation_id = values.id
@@ -95,50 +95,51 @@ Rectangle {
         label : "Reference"
 
         onFirstButtonClicked : {
-          if (next < listArea.model.count) {
-            next = listArea.model.count + 1
-          }
-          citation.citation_id = -1;
-          citation.key = "AuthorYear_%1".arg(next);
-          citation.title = "Reference %1".arg(next);
-          citation.authors = "Reference Authors";
-          citation.year = "Reference Year";
-          citation.publisher = "Reference Publisher";
-          while (root.backend.select_citation(citation)) {
-            next = next + 1
-            citation.citation_id = -1
-            citation.key = "AuthorYear_%1".arg(next)
-            citation.title = "Reference %1".arg(next)
-            citation.authors = "Reference Authors"
-            citation.year = "Reference Year"
-            citation.publisher = "Reference Publisher"
-          }
+          // if (next < citationList.model.count) {
+          //   next = citationList.model.count + 1
+          // }
+          // citation.citation_id = -1;
+          // citation.key = "AuthorYear_%1".arg(next);
+          // citation.title = "Reference %1".arg(next);
+          // citation.authors = "Reference Authors";
+          // citation.year = "Reference Year";
+          // citation.publisher = "Reference Publisher";
+          // while (root.backend.select_citation(citation)) {
+          //   next = next + 1
+          //   citation.citation_id = -1
+          //   citation.key = "AuthorYear_%1".arg(next)
+          //   citation.title = "Reference %1".arg(next)
+          //   citation.authors = "Reference Authors"
+          //   citation.year = "Reference Year"
+          //   citation.publisher = "Reference Publisher"
+          // }
 
-          citation.uuid = "";
-          root.backend.update_citation(citation);
-          listArea.model.insert(listArea.model.count, {
-            "id": citation.citation_id,
-            "key": citation.key,
-            "title": citation.title,
-            "authors": citation.authors,
-            "year": citation.year,
-            "publisher": citation.publisher
-          });
-          ++next;
+          // citation.uuid = "";
+          // root.backend.update_citation(citation);
+          // citationList.model.insert(citationList.model.count, {
+          //   "id": citation.citation_id,
+          //   "key": citation.key,
+          //   "title": citation.title,
+          //   "authors": citation.authors,
+          //   "year": citation.year,
+          //   "publisher": citation.publisher
+          // });
+          // ++next;
         }
         onSecondButtonClicked : {
-          if (listArea.model.count == 0) {
-            return
-          }
-          citation.citation_id = -1;
-          citation.key = listArea.model.get(listArea.currentIndex).key;
-          root.backend.remove_citation(citation);
-          listArea.model.remove(listArea.currentIndex);
-          listArea.currentIndex = Math.max(0, listArea.currentIndex - 1)
+          // if (citationList.model.count == 0) {
+          //   return
+          // }
+          // citation.citation_id = -1;
+          // citation.key = citationList.model.get(citationList.currentIndex).key;
+          // root.backend.remove_citation(citation);
+          // citationList.model.remove(citationList.currentIndex);
+          // citationList.currentIndex = Math.max(0, citationList.currentIndex - 1)
         }
       }
       ListView {
-        id : listArea
+        id : citationList
+        property var citations
         anchors {
           top : controls.bottom;
           bottom : parent.bottom;
@@ -156,7 +157,6 @@ Rectangle {
           Layout.margins : 5
         }
 
-        model : ListModel {}
 
         delegate : Rectangle {
           id : citation
@@ -172,7 +172,7 @@ Rectangle {
           MouseArea {
             anchors.fill : parent
             onClicked : {
-              listArea.currentIndex = index
+              citationList.currentIndex = index
 
             }
             onDoubleClicked : {}
@@ -182,7 +182,7 @@ Rectangle {
             id : citation_title_text
             anchors.left : citation.left
             anchors.leftMargin : 5
-            text : model.title
+            text : citationList.citations[index].title
             width : 150
             font.weight : Font.Bold
             font.pointSize : 10
@@ -197,7 +197,7 @@ Rectangle {
             anchors.right : parent.right
             anchors.leftMargin : 10
             font.pointSize : 10
-            text : model.key
+            text : citationList.citations[index].key
             enabled : false
             color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
             elide : Text.ElideRight
@@ -216,7 +216,7 @@ Rectangle {
           }
 
           onFocusChanged : {
-            if (listArea.currentIndex == index) {
+            if (citationList.currentIndex == index) {
               state = 'Selected';
             } else {
               state = '';
@@ -227,20 +227,14 @@ Rectangle {
         ScrollBar.vertical : ScrollBar {}
 
         Component.onCompleted : {
-          var r_count = backend.citation_count();
-          var citations = root.backend.citations;
-
+          citationList.citations = []
+          let citations = root.backend.citations;
           for (var ii = 0; ii < citations.length; ++ ii) {
-            let citation = citations[ii]
-            listArea.model.insert(listArea.model.count, {
-              id: citation.citation_id,
-              key: "%1".arg(citation.key),
-              title: "%1".arg(citation.title),
-              authors: "%1".arg(citation.authors),
-              year: "%1".arg(citation.year),
-              publisher: "%1".arg(citation.publisher)
-            });
+            citationList.citations.push(citation.make());
+            citationList.citations[citationList.citations.length - 1].assign(citations[ii]);
           }
+          citationList.model = citationList.citations;
+          citationList.model.map(x => console.log(x.title))
         }
       }
     }
@@ -251,24 +245,16 @@ Rectangle {
     }
   }
   onIndexChanged : {
-    listArea.model.clear()
-    var citations = root.backend.citations;
-    for (var ii = 0; ii < citations.count; ++ ii) {
-      console.log(citations[ii]);
-      listArea.model.insert(listArea.model.count, {
-        citation_id: "%1".arg(citation.citation_id),
-        key: "%1".arg(citation.key),
-        title: "%1".arg(citation.title),
-        authors: "%1".arg(citation.authors),
-        year: "%1".arg(citation.year),
-        publisher: "%1".arg(citation.publisher)
-      });
+    citationList.citations = []
+    let citations = root.backend.citations;
+    for (var ii = 0; ii < citations.length; ++ ii) {
+      citationList.citations.push(citation.make());
+      citationList.citations[citationList.citations.length - 1].assign(citations[ii]);
     }
+    citationList.model = citationList.citations;
+    citationList.model.map(x => console.log(x.title))
   }
-}
-
-
-/*##^## Designer {
+} /*##^## Designer {
     D{i:0;autoSize:true;height:480;width:640}
 }
  ##^##*/
