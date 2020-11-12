@@ -314,9 +314,9 @@ inline namespace sqlite3 {
     INJURY_COLUMN_COUNT
   };
 
-  constexpr auto create_injuries_table = R"(
-    CREATE TABLE IF NOT EXISTS "injuries" (
-	    "injury_id"	INTEGER,
+  constexpr auto create_traumas_table = R"(
+    CREATE TABLE IF NOT EXISTS "traumas" (
+	    "trauma_id"	INTEGER,
 	    "uuid"	TEXT,
 	    "medical_name"	Varchar(64) NOT NULL UNIQUE,
 	    "common_name"	Varchar(64) NOT NULL UNIQUE,
@@ -324,19 +324,19 @@ inline namespace sqlite3 {
 	    "citations"	TEXT,
 	    "lower_bound"	REAL DEFAULT 0.0,
 	    "upper_bound"	REAL DEFAULT 1.0,
-	    PRIMARY KEY("injury_id"),
+	    PRIMARY KEY("trauma_id"),
 	    UNIQUE("uuid")
     );
   )";
 
-  constexpr auto drop_all_injuries = R"( DELETE FROM injuries; )";
-  constexpr auto count_injuries = R"( SELECT COUNT(injury_id) FROM injuries; )";
-  constexpr auto select_all_injuries = R"( SELECT * FROM injuries ORDER BY medical_name; )";
+  constexpr auto drop_all_traumas = R"( DELETE FROM traumas; )";
+  constexpr auto count_traumas = R"( SELECT COUNT(trauma_id) FROM traumas; )";
+  constexpr auto select_all_traumas = R"( SELECT * FROM traumas ORDER BY medical_name; )";
 
-  constexpr auto select_injury_by_id
-    = R"( SELECT * FROM injuries WHERE injury_id = :id ; )";
-  constexpr auto update_injury_by_id
-    = R"( UPDATE  injuries
+  constexpr auto select_trauma_by_id
+    = R"( SELECT * FROM traumas WHERE trauma_id = :id ; )";
+  constexpr auto update_trauma_by_id
+    = R"( UPDATE  traumas
           SET
                 uuid = :uuid
               , medical_name = :medical_name
@@ -345,20 +345,20 @@ inline namespace sqlite3 {
               , citations = :citations
               , lower_bound  = :lower_bound
               , upper_bound  = :upper_bound
-          WHERE injury_id = :id;
+          WHERE trauma_id = :id;
          )";
-  constexpr auto delete_injury_by_id
-    = R"( DELETE FROM injuries WHERE injury_id = :id; )";
-  constexpr auto delete_injury_by_medical_name
-    = R"( DELETE FROM injuries WHERE medical_name = :medical_name; )";
-  constexpr auto delete_injury_by_common_name
-    = R"( DELETE FROM injuries WHERE common_name = :common_name; )";
-  constexpr auto select_injury_by_medical_name
-    = R"( SELECT * FROM injuries WHERE medical_name = :medical_name ORDER BY medical_name; )";
-  constexpr auto select_injury_by_common_name
-    = R"( SELECT * FROM injuries WHERE common_name = :common_name ORDER BY common_name; )";
-  constexpr auto insert_or_update_injuries
-    = R"( INSERT INTO injuries
+  constexpr auto delete_trauma_by_id
+    = R"( DELETE FROM traumas WHERE trauma_id = :id; )";
+  constexpr auto delete_trauma_by_medical_name
+    = R"( DELETE FROM traumas WHERE medical_name = :medical_name; )";
+  constexpr auto delete_trauma_by_common_name
+    = R"( DELETE FROM traumas WHERE common_name = :common_name; )";
+  constexpr auto select_trauma_by_medical_name
+    = R"( SELECT * FROM traumas WHERE medical_name = :medical_name ORDER BY medical_name; )";
+  constexpr auto select_trauma_by_common_name
+    = R"( SELECT * FROM traumas WHERE common_name = :common_name ORDER BY common_name; )";
+  constexpr auto insert_or_update_traumas
+    = R"( INSERT INTO traumas
           (medical_name, uuid, common_name, description, citations, lower_bound, upper_bound)
           VALUES (:medical_name, :uuid, :common_name, :description, :citations, :lower_bound, :upper_bound)
           ON CONFLICT (medical_name)
@@ -381,53 +381,53 @@ inline namespace sqlite3 {
     INJURY_SET_SEVERITIES,
     INJURY_SET_COLUMN_COUNT
   };
-  //TODO: ADD SUPPORT FOR LOCATION AND SEVERITIES (PRIMITIVE List in the same order as the injuries should do it)
+  //TODO: ADD SUPPORT FOR LOCATION AND SEVERITIES (PRIMITIVE List in the same order as the traumas should do it)
 
-  constexpr auto create_injury_sets_table = R"(
-    CREATE TABLE IF NOT EXISTS "injury_sets" (
-	    "injury_set_id"	INTEGER,
+  constexpr auto create_trauma_profiles_table = R"(
+    CREATE TABLE IF NOT EXISTS "trauma_profiles" (
+	    "trauma_profile_id"	INTEGER,
 	    "uuid"	TEXT,
 	    "name"	Varchar(64) NOT NULL UNIQUE,
 	    "description"	TEXT,
-	    "injuries"	TEXT,
+	    "traumas"	TEXT,
 	    "locations"	TEXT,
 	    "severities"	TEXT,
-	    PRIMARY KEY("injury_set_id"),
+	    PRIMARY KEY("trauma_profile_id"),
 	    UNIQUE("uuid")
     );
   )";
 
-  constexpr auto drop_all_injury_sets = R"( DELETE FROM injury_sets; )";
-  constexpr auto count_injury_sets = R"( SELECT COUNT(injury_set_id) FROM injury_sets; )";
-  constexpr auto select_all_injury_sets = R"( SELECT * FROM injury_sets ORDER BY name; )";
+  constexpr auto drop_all_trauma_profile = R"( DELETE FROM trauma_profiles; )";
+  constexpr auto count_trauma_profiles = R"( SELECT COUNT(trauma_profile_id) FROM trauma_profiles; )";
+  constexpr auto select_all_trauma_profiles = R"( SELECT * FROM trauma_profiles ORDER BY name; )";
 
-  constexpr auto select_injury_set_by_id
-    = R"( SELECT * FROM injury_sets WHERE injury_set_id = :id ; )";
-  constexpr auto update_injury_set_by_id
-    = R"( UPDATE  injury_sets
+  constexpr auto select_trauma_profile_by_id
+    = R"( SELECT * FROM trauma_profiles WHERE trauma_profile_id = :id ; )";
+  constexpr auto update_trauma_profile_by_id
+    = R"( UPDATE  trauma_profiles
           SET
                 uuid = :uuid
               , name = :name
               , description = :description
-              , injuries    = :injuries
+              , traumas    = :traumas
               , locations   = :locations
               , severities  = :severities
-          WHERE injury_set_id = :id;
+          WHERE trauma_profile_id = :id;
          )";
-  constexpr auto delete_injury_set_by_id
-    = R"( DELETE FROM injury_sets WHERE injury_set_id = :id; )";
-  constexpr auto delete_injury_set_by_name
-    = R"( DELETE FROM injury_sets WHERE name = :name; )";
-  constexpr auto select_injury_set_by_name
-    = R"( SELECT * FROM injury_sets WHERE name = :name ORDER BY name; )";
-  constexpr auto insert_or_update_injury_sets
-    = R"( INSERT INTO injury_sets
-          (name, uuid, description, injuries, locations, severities)
-          VALUES (:name, :uuid, :description, :injuries, :locations, :severities)
+  constexpr auto delete_trauma_profile_by_id
+    = R"( DELETE FROM trauma_profiles WHERE trauma_profile_id = :id; )";
+  constexpr auto delete_trauma_profile_by_name
+    = R"( DELETE FROM trauma_profiles WHERE name = :name; )";
+  constexpr auto select_trauma_profile_by_name
+    = R"( SELECT * FROM trauma_profiles WHERE name = :name ORDER BY name; )";
+  constexpr auto insert_or_update_trauma_profiles
+    = R"( INSERT INTO trauma_profiles
+          (name, uuid, description, traumas, locations, severities)
+          VALUES (:name, :uuid, :description, :traumas, :locations, :severities)
           ON CONFLICT (name)
           DO UPDATE SET  name = excluded.name
                         , description = excluded.description
-                        , injuries = excluded.injuries
+                        , traumas = excluded.traumas
                         , locations = excluded.locations
                         , severities = excluded.severities
           ;
@@ -1104,6 +1104,7 @@ inline namespace sqlite3 {
     TREATMENT_DESCRIPTION,
     TREATMENT_EQUIPMENT,
     TREATMENT_CITATIONS,
+    TREATMENT_CPGS,
     TREATMENT_COLUMN_COUNT
   };
 
@@ -1116,6 +1117,7 @@ inline namespace sqlite3 {
 	    "description"	TEXT,
 	    "equipment"	TEXT,
 	    "citations"	TEXT,
+      "cpgs"	TEXT,
 	    PRIMARY KEY("treatment_id"),
 	    UNIQUE("uuid")
     );
@@ -1140,6 +1142,7 @@ inline namespace sqlite3 {
               , description = :description
               , equipment = :equipment
               , citations = :citations
+              , cpgs = :cpgs
           WHERE treatment_id = :id;
          )";
   constexpr auto delete_treatment_by_id
@@ -1150,14 +1153,15 @@ inline namespace sqlite3 {
     = R"( DELETE FROM treatments WHERE common_name = :common_name; )";
   constexpr auto insert_or_update_treatments
     = R"( INSERT INTO treatments
-          (medical_name, uuid, common_name,description,equipment,citations)
-          VALUES (:medical_name, :uuid, :common_name, :description, :equipment, :citations)
+          (medical_name, uuid, common_name,description,equipment,citations,cpgs)
+          VALUES (:medical_name, :uuid, :common_name, :description, :equipment, :citations, :cpgs)
           ON CONFLICT (medical_name)
           DO UPDATE SET   medical_name = excluded.medical_name
                         , common_name = excluded.common_name
                         , description = excluded.description
                         , equipment = excluded.equipment
                         , citations = excluded.citations
+                        , cpgs = excluded.cpgs
           ;          
           )";
   

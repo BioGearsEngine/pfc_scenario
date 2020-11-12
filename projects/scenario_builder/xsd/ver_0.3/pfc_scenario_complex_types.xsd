@@ -195,6 +195,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
       <xs:element name="citations" type="citation-ref-list" minOccurs="1"/>
       <xs:element name="description" type="xs:string" minOccurs="1"/>
       <xs:element name="severity-range" type="trauma-severity-range" minOccurs="1"/>
+      <xs:element name="treatments" type="treatment-plan-ref-list" minOccurs="1"/>
     </xs:all>
   </xs:complexType>
   <xs:complexType name="trauma-severity-range">
@@ -404,7 +405,6 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
       <xs:element name="name" type="xs:string" minOccurs="1"/>
       <xs:element name="physiology-state" type="xs:string" minOccurs="0"/>
       <xs:element name="injuries" type="trauma-occurence-list" minOccurs="1"/>
-      <xs:element name="treatments" type="treatment-plan-ref-list"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="trauma-profile-ref-list">

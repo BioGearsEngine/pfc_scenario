@@ -384,12 +384,12 @@ bool Serializer::load(const QString& filename)
         }
 
         if (successful) {
-          scenario_schema = pfc::schema::PFC::load_injuries(std::move(scenario_schema), scratch_db, successful);
+          scenario_schema = pfc::schema::PFC::load_trauma(std::move(scenario_schema), scratch_db, successful);
         } else {
           throw std::runtime_error("Failed to load injuries");
         }
         if (successful) {
-          scenario_schema = pfc::schema::PFC::load_injury_sets(std::move(scenario_schema), scratch_db, successful);
+          scenario_schema = pfc::schema::PFC::load_trauma_profiles(std::move(scenario_schema), scratch_db, successful);
         } else {
           throw std::runtime_error("Failed to load injury sets");
         }
@@ -535,7 +535,7 @@ auto Serializer::generate_pfc_stream() const -> std::stringstream
   auto pfc_scenario = PFC::make_Scenario();
 
   //0. <Author>
-  for (auto& author : _db->get_authors()) { // For now there should only ever be one author
+  for (auto& author : _db->authors()) { // For now there should only ever be one author
     pfc_scenario.author().email(author->email.toStdString());
     pfc_scenario.author().first_name(author->first.toStdString());
     pfc_scenario.author().last_name(author->last.toStdString());
@@ -543,6 +543,7 @@ auto Serializer::generate_pfc_stream() const -> std::stringstream
     pfc_scenario.author().zip(author->zip.toStdString());
     pfc_scenario.author().state(author->state.toStdString());
     pfc_scenario.author().country(author->country.toStdString());
+    break;
   }
 
   pfc_scenario.summary().title(get_property(_db, "scenario_title").toStdString());
@@ -554,64 +555,64 @@ auto Serializer::generate_pfc_stream() const -> std::stringstream
   pfc_scenario.summary().keywords(get_property(_db, "scenario_keywords").toStdString().c_str());
 
   //1. <Equipment>
-  for (auto& equipment : _db->get_equipments()) {
-    pfc_scenario.equipment().equipment().push_back(PFC::make_equipment(equipment.get(),_db));
+  for (auto& equipment : _db->equipments()) {
+    pfc_scenario.equipment().equipment().push_back(PFC::make_equipment(equipment,_db));
   }
   //2. <conditions>
-  for (auto& injury : _db->get_injuries()) {
-    pfc_scenario.trauma_definitions().trauma().push_back(PFC::make_trauma(injury.get(), _db));
+  for (auto& trauma : _db->traumas()) {
+    pfc_scenario.trauma_definitions().trauma().push_back(PFC::make_trauma(trauma, _db));
   }
 
   //3. <treatment_plans>
-  for (auto& treatment : _db->get_treatments()) {
-    pfc_scenario.treatment_plans().treatment_plan().push_back(PFC::make_treatment_plan(treatment.get(), _db));
+  for (auto treatment : _db->treatments()) {
+    pfc_scenario.treatment_plans().treatment_plan().push_back(PFC::make_treatment_plan(treatment, _db));
   }
 
   //4. Populate <trauma_sets>
-  for (auto& trauma : _db->get_injury_sets()) {
-    pfc_scenario.trauma_sets().trauma_profile().push_back(PFC::make_trauma_profile(trauma.get(), _db));
+  for (auto profiles : _db->trauma_profiles()) {
+    pfc_scenario.trauma_sets().trauma_profile().push_back(PFC::make_trauma_profile(profiles, _db));
   }
   //5. <syllabus>
   //5.1 <syllabus><learning_objective>
-  for (auto& objective : _db->get_objectives()) {
-    pfc_scenario.syllabus().learning_objectives().objective().push_back(PFC::make_learning_objective(objective.get(), _db));
+  for (auto objective : _db->objectives()) {
+    pfc_scenario.syllabus().learning_objectives().objective().push_back(PFC::make_learning_objective(objective, _db));
   }
   //5.2 <syllabus><assessment>
   int32_t total_points = 0;
-  for (auto& assessment : _db->get_assessments()) {
+  for (auto assessment : _db->assessments()) {
     total_points += assessment->available_points;
-    pfc_scenario.syllabus().learning_assessments().assessment().push_back(PFC::make_assessment(assessment.get(), _db));
+    pfc_scenario.syllabus().learning_assessments().assessment().push_back(PFC::make_assessment(assessment, _db));
   }
   pfc_scenario.syllabus().learning_assessments().total_points(total_points);
 
   //6.  <medical-scenario>
   //6.1 <medical-scenario><scenes>
-  for (auto& scene : _db->get_scenes()) {
-    auto scene_ptr = PFC::make_scene(scene.get(),_db);
+  for (auto scene : _db->scenes()) {
+    auto scene_ptr = PFC::make_scene(scene,_db);
     //6.1.1 <medical-scenario><scenes><events>
-    for (auto& event : _db->get_events_in_scene(scene.get())) {
-      scene_ptr->events().event().push_back(PFC::make_event(event.get()));
+    for (auto event : _db->events_in_scene(scene)) {
+      scene_ptr->events().event().push_back(PFC::make_event(event));
     }
     //6.1.2 <medical-scenario><scenes><items>
-    for (auto& item : _db->get_equipment_in_scene(scene.get())) {
-      scene_ptr->items().item().push_back(PFC::make_item(item.get()));
+    for (auto item : _db->equipment_in_scene(scene)) {
+      scene_ptr->items().item().push_back(PFC::make_item(item));
     }
     ////6.1.3 <medical-scenario><scenes><roles>
-    for (auto& role : _db->get_roles_in_scene(scene.get())) {
+    for (auto role : _db->roles_in_scene(scene)) {
       if (role->id != -1) {
-        scene_ptr->roles().role_ref().push_back(PFC::make_role_ref(role.get()));
+        scene_ptr->roles().role_ref().push_back(PFC::make_role_ref(role));
       }
     }
     pfc_scenario.medical_scenario().training_script().scene().push_back(std::move(scene_ptr));
   }
   //6.2 <medical-scenario><roles>
-  for (auto& role : _db->get_roles()) {
-    pfc_scenario.medical_scenario().roles().role().push_back(PFC::make_role(role.get()));
+  for (auto role : _db->roles()) {
+    pfc_scenario.medical_scenario().roles().role().push_back(PFC::make_role(role));
   }
 
   //7. <works-cited>
-  for (auto& citation : _db->get_citations()) {
-    pfc_scenario.works_cited().citation().push_back(PFC::make_citation(citation.get()));
+  for (auto citation : _db->citations()) {
+    pfc_scenario.works_cited().citation().push_back(PFC::make_citation(citation));
   }
 
   xml_schema::namespace_infomap info;

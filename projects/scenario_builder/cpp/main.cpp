@@ -42,8 +42,8 @@ int main(int argc, char* argv[])
   qmlRegisterType<Equipment>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Equipment");
   qmlRegisterType<EquipmentMap>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "EquipmentMap");
   qmlRegisterType<Event>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Event");
-  qmlRegisterType<Injury>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Injury");
-  qmlRegisterType<InjurySet>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "InjurySet");
+  qmlRegisterType<Trauma>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Injury");
+  qmlRegisterType<TraumaProfile>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "InjurySet");
   qmlRegisterType<Location>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Location");
   qmlRegisterType<RoleMap>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "RoleMap");
   qmlRegisterType<Objective>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Objective");
@@ -54,10 +54,24 @@ int main(int argc, char* argv[])
 
   qmlRegisterType<pfc::Serializer>("com.ara.pfc.ScenarioModel.XML", 1, 0, "XMLSeralizer");
 
-
-  qmlRegisterInterface<EquipmentMap>("const EquipmentMap*");
+  qmlRegisterInterface<Assessment>("const Assessment*");
+  qmlRegisterInterface<Author>("const Author*");
+  qmlRegisterInterface<Citation>("const Citation*");
+  qmlRegisterInterface<CitationMap>("const CitationMap*");
   qmlRegisterInterface<Equipment>("const Equipment*");
- 
+  qmlRegisterInterface<EquipmentMap>("const EquipmentMap*");
+  qmlRegisterInterface<Event>("const Event*");
+  qmlRegisterInterface<EventMap>("const EventMap*");
+  qmlRegisterInterface<Location>("const Location*");
+  qmlRegisterInterface<LocationMap>("const LocationMap*");
+  qmlRegisterInterface<Objective>("const Objective*");
+  qmlRegisterInterface<Property>("const Property*");
+  qmlRegisterInterface<Role>("const Role*");
+  qmlRegisterInterface<RoleMap>("const RoleMap*");
+  qmlRegisterInterface<Scene>("const Scene*");
+  qmlRegisterInterface<Trauma>("const Trauma*");
+  qmlRegisterInterface<TraumaProfile>("const TraumaProfile*");
+  qmlRegisterInterface<Treatment>("const Treatment*");
 
   QPixmap pixmap("D:/biogears/pfc/scenario/build/img/sustain_splash.png");
   qDebug() << QString("%1,%2").arg(pixmap.height()).arg(pixmap.width()); //1280x768

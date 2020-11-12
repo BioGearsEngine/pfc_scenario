@@ -92,8 +92,8 @@ public:
     { EVENT_MAPS, "event_maps" },
     { EQUIPMENTS, "equipments" },
     { EQUIPMENT_MAPS, "equipment_map" },
-    { INJURIES, "injuries" },
-    { INJURY_SETS, "injury_sets" },
+    { INJURIES, "traumas" },
+    { INJURY_SETS, "trauma_profiles" },
     { LOCATIONS, "locations" },
     { LOCATION_MAPS, "location_maps" },
     { OBJECTIVES, "objectives" },
@@ -123,7 +123,7 @@ public:
   Q_INVOKABLE bool populate_citations();
   Q_INVOKABLE bool populate_db();
   Q_INVOKABLE bool populate_equipment();
-  Q_INVOKABLE bool populate_injuries();
+  Q_INVOKABLE bool populate_traumas();
   Q_INVOKABLE bool populate_treatments();
 
   Q_INVOKABLE bool clear_db();
@@ -136,8 +136,8 @@ public:
   Q_INVOKABLE int treatment_count() const;
   Q_INVOKABLE int equipment_count() const;
   Q_INVOKABLE int equipment_count(Scene*) const;
-  Q_INVOKABLE int injury_count() const;
-  Q_INVOKABLE int injury_set_count() const;
+  Q_INVOKABLE int trauma_count() const;
+  Q_INVOKABLE int trauma_profile_count() const;
   Q_INVOKABLE int assessment_count() const;
   Q_INVOKABLE int location_count() const;
   Q_INVOKABLE int location_count(Scene*) const;
@@ -170,83 +170,28 @@ public:
   //!
   //!  https://wiki.qt.io/How_to_Use_a_QSqlQueryModel_in_QML
 
-  Q_INVOKABLE void authors();
-  Q_INVOKABLE void properties();
-  Q_INVOKABLE void objectives();
-  Q_INVOKABLE void citations();
-  Q_INVOKABLE void treatments();
-  Q_INVOKABLE void equipments();
-  Q_INVOKABLE void injuries();
-  Q_INVOKABLE void injury_sets();
-  Q_INVOKABLE void assessments();
-  Q_INVOKABLE void locations();
-  Q_INVOKABLE void roles();
-  Q_INVOKABLE void roles_in_scene(Scene* scene);
-  Q_INVOKABLE void role_maps();
-  Q_INVOKABLE void event_maps();
-  Q_INVOKABLE void location_maps();
-  Q_INVOKABLE void citation_maps();
-  Q_INVOKABLE void equipment_maps();
-  Q_INVOKABLE void events();
-  Q_INVOKABLE void events_in_scene(Scene* scene);
-  Q_INVOKABLE void locations_in_scene(Scene* scene);
-  Q_INVOKABLE void equipment_in_scene(Scene* scene);
-  Q_INVOKABLE void scenes();
-
-
-  //!
-  //!  These functions are intended for use in the Serializer.cpp class
-  //!  They should be debricated and instead replaced with begin(),end() and next() calls
-  //!  There really is no need for them.
-
-  std::vector<std::unique_ptr<Author>> get_authors() const;
-  std::vector<std::unique_ptr<Assessment>> get_assessments() const;
-  std::vector<std::unique_ptr<Citation>> get_citations() const;
-  std::vector<std::unique_ptr<Event>> get_events() const;
-  std::vector<std::unique_ptr<Event>> get_events_in_scene(Scene const* const) const;
-  std::vector<std::unique_ptr<Equipment>> get_equipments() const;
-  std::vector<std::unique_ptr<EquipmentMap>> get_equipment_in_scene(Scene const* const) const;
-  std::vector<std::unique_ptr<Injury>> get_injuries() const;
-  std::vector<std::unique_ptr<InjurySet>> get_injury_sets() const;
-  std::vector<std::unique_ptr<RoleMap>> get_role_maps() const;
-  std::vector<std::unique_ptr<EventMap>> get_event_maps() const;
-  std::vector<std::unique_ptr<LocationMap>> get_location_maps() const;
-  std::vector<std::unique_ptr<CitationMap>> get_citation_maps() const;
-  std::vector<std::unique_ptr<EquipmentMap>> get_equipment_maps() const;
-  std::vector<std::unique_ptr<Objective>> get_objectives() const;
-  std::vector<std::unique_ptr<Location>> get_locations() const;
-  std::vector<std::unique_ptr<Location>> get_locations_in_scene(Scene*) const;
-  std::vector<std::unique_ptr<Property>> get_properties() const;
-  std::vector<std::unique_ptr<Role>> get_roles() const;
-  std::vector<std::unique_ptr<Role>> get_roles_in_scene(Scene*) const;
-  std::vector<std::unique_ptr<Treatment>> get_treatments() const;
-  std::vector<std::unique_ptr<Scene>> get_scenes() const;
-
-
-  //!
-  //! I really wish Qt5 supported smart Pointers.
-  //! I don't trust this parent* concept when passing to QML
-  //! So all of these functions clone the current to the Pointer Passed
-  //! What we should do is return the whole list when we call the vector popuaotion functions
-  //!
-  Q_INVOKABLE bool next_author(Author*);
-  Q_INVOKABLE bool next_property(Property*);
-  Q_INVOKABLE bool next_objective(Objective*);
-  Q_INVOKABLE bool next_citation(Citation*);
-  Q_INVOKABLE bool next_treatment(Treatment*);
-  Q_INVOKABLE bool next_equipment(Equipment*);
-  Q_INVOKABLE bool next_injury(Injury*);
-  Q_INVOKABLE bool next_injury_set(InjurySet*);
-  Q_INVOKABLE bool next_assessment(Assessment*);
-  Q_INVOKABLE bool next_location(Location*);
-  Q_INVOKABLE bool next_role_map(RoleMap*);
-  Q_INVOKABLE bool next_event_map(EventMap*);
-  Q_INVOKABLE bool next_location_map(LocationMap*);
-  Q_INVOKABLE bool next_citation_map(CitationMap*);
-  Q_INVOKABLE bool next_equipment_map(EquipmentMap*);
-  Q_INVOKABLE bool next_role(Role*);
-  Q_INVOKABLE bool next_event(Event*);
-  Q_INVOKABLE bool next_scene(Scene*);
+  Q_INVOKABLE QList<Author*> authors();
+  Q_INVOKABLE QList<Property*> properties();
+  Q_INVOKABLE QList<Objective*> objectives();
+  Q_INVOKABLE QList<Citation*> citations();
+  Q_INVOKABLE QList<Treatment*> treatments();
+  Q_INVOKABLE QList<Equipment*> equipments();
+  Q_INVOKABLE QList<Trauma*> traumas();
+  Q_INVOKABLE QList<TraumaProfile*> trauma_profiles();
+  Q_INVOKABLE QList<Assessment*> assessments();
+  Q_INVOKABLE QList<Location*> locations();
+  Q_INVOKABLE QList<Role*> roles();
+  Q_INVOKABLE QList<Role*> roles_in_scene(Scene* scene);
+  Q_INVOKABLE QList<RoleMap*> role_maps();
+  Q_INVOKABLE QList<EventMap*> event_maps();
+  Q_INVOKABLE QList<LocationMap*> location_maps();
+  Q_INVOKABLE QList<CitationMap*> citation_maps();
+  Q_INVOKABLE QList<EquipmentMap*> equipment_maps();
+  Q_INVOKABLE QList<Event*> events();
+  Q_INVOKABLE QList<Event*> events_in_scene(Scene* scene);
+  Q_INVOKABLE QList<Location*> locations_in_scene(Scene* scene);
+  Q_INVOKABLE QList<EquipmentMap*> equipment_in_scene(Scene* scene);
+  Q_INVOKABLE QList<Scene*> scenes();
 
   Q_INVOKABLE bool select_author(Author*) const;
   Q_INVOKABLE bool select_property(Property*) const;
@@ -254,8 +199,8 @@ public:
   Q_INVOKABLE bool select_citation(Citation*) const;
   Q_INVOKABLE bool select_treatment(Treatment*) const;
   Q_INVOKABLE bool select_equipment(Equipment*) const;
-  Q_INVOKABLE bool select_injury(Injury*) const;
-  Q_INVOKABLE bool select_injury_set(InjurySet*) const;
+  Q_INVOKABLE bool select_trauma(Trauma*) const;
+  Q_INVOKABLE bool select_trauma_profile(TraumaProfile*) const;
   Q_INVOKABLE bool select_assessment(Assessment*) const;
   Q_INVOKABLE bool select_location(Location*) const;
   Q_INVOKABLE bool select_role_map(RoleMap*) const;
@@ -289,8 +234,8 @@ public:
   Q_INVOKABLE bool update_treatment(Treatment*);
   Q_INVOKABLE bool update_equipment(Equipment*);
   Q_INVOKABLE bool update_equipment_in_scene(EquipmentMap*);
-  Q_INVOKABLE bool update_injury(Injury*);
-  Q_INVOKABLE bool update_injury_set(InjurySet*);
+  Q_INVOKABLE bool update_trauma(Trauma*);
+  Q_INVOKABLE bool update_trauma_profile(TraumaProfile*);
   Q_INVOKABLE bool update_assessment(Assessment*);
   Q_INVOKABLE bool update_scene(Scene*);
 
@@ -302,8 +247,8 @@ public:
   Q_INVOKABLE bool remove_treatment(Treatment*);
   Q_INVOKABLE bool remove_equipment(Equipment*);
   Q_INVOKABLE bool remove_equipment_from_scene(Equipment*, Scene*);
-  Q_INVOKABLE bool remove_injury(Injury*);
-  Q_INVOKABLE bool remove_injury_set(InjurySet*);
+  Q_INVOKABLE bool remove_trauma(Trauma*);
+  Q_INVOKABLE bool remove_trauma_profile(TraumaProfile*);
   Q_INVOKABLE bool remove_assessment(Assessment*);
   Q_INVOKABLE bool remove_location(Location*);
   Q_INVOKABLE bool remove_location_from_scene(Location*, Scene*);
@@ -327,14 +272,14 @@ public:
   Q_INVOKABLE bool remove_equipment_from_treatments(std::string);
   Q_INVOKABLE bool remove_citation_from_treatments(int);
   Q_INVOKABLE bool remove_citation_from_treatments(std::string);
-  Q_INVOKABLE bool remove_citation_from_injuries(int);
-  Q_INVOKABLE bool remove_citation_from_injuries(std::string);
+  Q_INVOKABLE bool remove_citation_from_traumas(int);
+  Q_INVOKABLE bool remove_citation_from_traumas(std::string);
   Q_INVOKABLE bool remove_citation_from_equipment(int);
   Q_INVOKABLE bool remove_citation_from_equipment(std::string);
   Q_INVOKABLE bool remove_citation_from_objectives(int);
   Q_INVOKABLE bool remove_citation_from_objectives(std::string);
-  Q_INVOKABLE bool remove_injury_from_injury_sets(int);
-  Q_INVOKABLE bool remove_injury_from_injury_sets(std::string);
+  Q_INVOKABLE bool remove_trauma_from_trauma_profiles(int);
+  Q_INVOKABLE bool remove_trauma_from_trauma_profiles(std::string);
 
   Q_INVOKABLE void establish_settings();
   Q_INVOKABLE void log_scenario_file(std::string);
@@ -369,8 +314,8 @@ signals:
   void assessmentsChanged();
   void eventsChanged();
   void equipmentsChanged();
-  void injuriesChanged();
-  void injurySetsChanged();
+  void traumasChanged();
+  void traumaProfilesChanged();
   void locationsChanged();
   void mapsChanged();
   void eventMapsChanged();
@@ -390,8 +335,8 @@ signals:
   void assessmentRemoved(int index);
   void eventRemoved(int index);
   void equipmentRemoved(int index);
-  void injuryRemoved(int index);
-  void injurySetRemoved(int index);
+  void traumaRemoved(int index);
+  void traumaProfileRemoved(int index);
   void locationRemoved(int index);
   void mapRemoved(int index);
   void eventMapRemoved(int index);
@@ -412,8 +357,8 @@ signals:
   void assessmentUpdated(int index);
   void eventUpdated(int index);
   void equipmentUpdated(int index);
-  void injuryUpdated(int index);
-  void injurySetUpdated(int index);
+  void traumaUpdated(int index);
+  void traumaProfileUpdated(int index);
   void locationUpdated(int index);
   void mapUpdated(int index);
   void eventMapUpdated(int index);
@@ -435,53 +380,6 @@ private:
   QString _db_name = "";
   QString _db_path = "./";
   mutable int _error_code = 0;
-
-  //Volitile This design assumes that QML is signle threaded and
-  //         no iteration of a table will occur at the same time.
-  //         If this was to occur several approaches would need improvment
-  //         Including verification of transactional updatees and better signal handeling.
-  //         An intermediate step would likely be a begin() and end() function and a invalidate_iterator() signal. for each table
-  //         This would allow const based interation provided no Update or Insert calls were made.
-  QList<Author*> _authors;
-  QList<Property*> _properties;
-  QList<Objective*> _objectives;
-  QList<Citation*> _citations;
-  QList<Treatment*> _treatments;
-  QList<Equipment*> _equipments;
-  QList<Injury*> _injuries;
-  QList<InjurySet*> _injury_sets;
-  QList<Assessment*> _assessments;
-  QList<Location*> _locations;
-  QList<RoleMap*> _role_maps;
-  QList<EventMap*> _event_maps;
-  QList<LocationMap*> _location_maps;
-  QList<CitationMap*> _citation_maps;
-  QList<EquipmentMap*> _equipment_maps;
-  QList<Role*> _roles;
-  QList<Event*> _events;
-  QList<Scene*> _scenes;
-
-
-  //Current Pointers which are updated by the matching next_\w+ function
-  QList<Author*>::iterator _current_author;
-  QList<Property*>::iterator _current_property;
-  QList<Objective*>::iterator _current_objective;
-  QList<Citation*>::iterator _current_citation;
-  QList<Treatment*>::iterator _current_treatment;
-  QList<Equipment*>::iterator _current_equipment;
-  QList<Injury*>::iterator _current_injury;
-  QList<InjurySet*>::iterator _current_injury_set;
-  QList<Assessment*>::iterator _current_assessment;
-  QList<Location*>::iterator _current_location;
-  QList<RoleMap*>::iterator _current_role_map;
-  QList<EventMap*>::iterator _current_event_map;
-  QList<LocationMap*>::iterator _current_location_map;
-  QList<CitationMap*>::iterator _current_citation_map;
-  QList<EquipmentMap*>::iterator _current_equipment_map;
-  QList<Role*>::iterator _current_role;
-
-  QList<Event*>::iterator _current_event;
-  QList<Scene*>::iterator _current_scene;
   
   std::vector<std::string> recent_files;
 };
