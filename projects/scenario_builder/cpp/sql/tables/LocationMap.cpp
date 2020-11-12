@@ -1,10 +1,19 @@
 #include "LocationMap.h"
 
-#include "Scene.h"
 #include "Location.h"
+#include "Scene.h"
 
 LocationMap::LocationMap(QObject* parent)
   : QObject(parent)
+  , fk_scene(new Scene)
+  , fk_location(new Location)
+{
+}
+//--------------------------------------------------------------------------------------------
+LocationMap::LocationMap(Scene* scene, Location* location, QObject* parent)
+  : QObject(parent)
+  , fk_scene(scene)
+  , fk_location(location)
 {
 }
 //--------------------------------------------------------------------------------------------

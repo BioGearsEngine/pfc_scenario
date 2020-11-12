@@ -47,6 +47,7 @@ public:
   QString details = "";
 
   Event(QObject* parent = nullptr);
+  Event(Role* source, Role* target, Equipment* equipment, QObject* parent = nullptr);
   Event(const Event&) = delete;
   Event(Event&&) = delete;
   Event& operator=(const Event&) = delete;

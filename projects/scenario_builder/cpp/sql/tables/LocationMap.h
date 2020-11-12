@@ -31,6 +31,7 @@ public:
   Location* fk_location = nullptr;
 
   LocationMap(QObject* parent = nullptr);
+  LocationMap(Scene* scene, Location* location, QObject* parent = nullptr);
   LocationMap(const LocationMap&) = delete;
   LocationMap(LocationMap&&) = delete;
   LocationMap& operator=(const LocationMap&) = delete;

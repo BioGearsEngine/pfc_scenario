@@ -5,7 +5,17 @@
 
 RoleMap::RoleMap(QObject* parent)
   : QObject(parent)
+  , fk_scene(new Scene(this))
+  , fk_role(new Role(this))
 {
+}
+//-------------------------------------------------------------------------------
+RoleMap::RoleMap(Scene* scene, Role* role, QObject* parent)
+  : QObject(parent)
+  , fk_scene(scene)
+  , fk_role(role)
+{
+  
 }
 //-------------------------------------------------------------------------------
 bool RoleMap::operator==(const RoleMap& rhs) const

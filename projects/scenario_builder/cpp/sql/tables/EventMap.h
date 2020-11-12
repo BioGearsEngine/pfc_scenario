@@ -32,6 +32,8 @@ public:
   Event* fk_event = nullptr;
 
   EventMap(QObject* parent = nullptr);
+  EventMap(Scene* scene, Event* event, QObject* parent = nullptr);
+
   EventMap(const EventMap&) = delete;
   EventMap(EventMap&&) = delete;
   EventMap& operator=(const EventMap&) = delete;

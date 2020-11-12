@@ -32,6 +32,7 @@ public:
   Role* fk_role = nullptr;
 
   RoleMap(QObject* parent = nullptr);
+  RoleMap(Scene* scene, Role* role, QObject* parent = nullptr);
   RoleMap(const RoleMap&) = delete;
   RoleMap(RoleMap&&) = delete;
   RoleMap& operator=(const RoleMap&) = delete;

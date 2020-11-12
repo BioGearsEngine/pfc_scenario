@@ -36,6 +36,7 @@ public:
   TraumaProfile* trauma_profile = nullptr;
 
   Role(QObject* parent = nullptr);
+  Role(TraumaProfile* profile, QObject* parent = nullptr);
   Role(const Role&) = delete;
   Role(Role&&) = delete;
   Role& operator=(const Role&) = delete;

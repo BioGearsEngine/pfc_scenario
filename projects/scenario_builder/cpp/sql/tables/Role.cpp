@@ -2,8 +2,15 @@
 
 #include "TraumaProfile.h"
 
-Role::Role(QObject* parent )
+Role::Role(QObject* parent)
   : QObject(parent)
+  , trauma_profile(new TraumaProfile(this))
+{
+}
+//--------------------------------------------------------------------------------------------
+Role::Role(TraumaProfile* profile, QObject* parent)
+  : QObject(parent)
+  , trauma_profile(profile)
 {
 }
 //--------------------------------------------------------------------------------------------

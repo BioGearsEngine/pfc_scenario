@@ -1,13 +1,22 @@
 #include "EventMap.h"
 
-#include "Scene.h"
 #include "Event.h"
+#include "Scene.h"
 
 EventMap::EventMap(QObject* parent)
   : QObject(parent)
+  , fk_scene(new Scene(this))
+  , fk_event(new Event(this))
 {
 }
 //--------------------------------------------------------------------------------------------
+EventMap::EventMap(Scene* scene, Event* event, QObject* parent)
+  : QObject(parent)
+  , fk_scene(scene)
+  , fk_event(event)
+{
+  
+}
 bool EventMap::operator==(const EventMap& rhs) const
 {
   return fk_scene == rhs.fk_scene
@@ -24,7 +33,7 @@ EventMap* EventMap::make()
   return new EventMap();
 }
 //--------------------------------------------------------------------------------------------
- void EventMap::assign(EventMap* rhs)
+void EventMap::assign(EventMap* rhs)
 {
   if (rhs) {
     assign(*rhs);

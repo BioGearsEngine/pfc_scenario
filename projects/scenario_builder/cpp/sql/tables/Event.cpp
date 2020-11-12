@@ -5,6 +5,17 @@
 
 Event::Event(QObject* parent)
   : QObject(parent)
+  , fk_actor_1(new Role(this))
+  , fk_actor_2(new Role(this))
+  , fk_equipment(new Equipment(this))
+{
+}
+//--------------------------------------------------------------------------------------------
+Event::Event(Role* source, Role* target, Equipment* equipment, QObject* parent)
+  : QObject(parent)
+  , fk_actor_1(source)
+  , fk_actor_2(target)
+  , fk_equipment(equipment)
 {
 }
 //--------------------------------------------------------------------------------------------
