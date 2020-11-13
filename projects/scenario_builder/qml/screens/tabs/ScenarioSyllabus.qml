@@ -38,7 +38,7 @@ GridLayout {
 
     backend : root.backend
     topIndex : root.topIndex
-
+    currentIndex : syllabus_leftPane.currentIndex
     currentAssessment : syllabus_leftPane.currentAssessment
     currentEquipment : syllabus_leftPane.currentEquipment
     currentObjective : syllabus_leftPane.currentObjective

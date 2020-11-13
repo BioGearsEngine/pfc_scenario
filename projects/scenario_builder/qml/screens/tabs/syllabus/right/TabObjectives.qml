@@ -92,18 +92,19 @@ ColumnLayout {
       }
     }
   }
-  StackLayout {
-    id : listStack
-    Layout.fillWidth : true
-    Layout.leftMargin : 5
-    Layout.rightMargin : 20
-    Layout.preferredHeight : 300
+   StackLayout {
+     id : listStack
+     Layout.fillWidth : true
+     Layout.fillHeight : false
+     Layout.leftMargin : 5
+     Layout.rightMargin : 20
 
 
-    currentIndex : 0
+     currentIndex : 0
     CitationListEntry {
       id : referenceList
       Layout.fillWidth : true
+
       backend : root.backend
       onList : {
         var values = root.model.get(root.index);
@@ -180,7 +181,7 @@ ColumnLayout {
         listStack.currentIndex = 0
       }
     }
-  }
+   }
   onTopIndexChanged : {
     if (topIndex == 1) {
       refresh_citations()

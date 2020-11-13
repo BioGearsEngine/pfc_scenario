@@ -83,12 +83,12 @@ ColumnLayout {
   StackLayout {
     id : listStack
     Layout.fillWidth : true
-    Layout.fillHeight : true
+    Layout.fillHeight : false
     Layout.leftMargin : 5
+    Layout.rightMargin : 20
     currentIndex : 0
     InjuryListEntry {
       id : traumaList
-      Layout.fillWidth : true
       Layout.leftMargin : 5
       backend : root.backend
 
@@ -155,8 +155,6 @@ ColumnLayout {
     }
     FullInjuryListEntry {
       id : fullInjuryList
-      Layout.fillWidth : true
-      Layout.fillHeight : true
       backend : root.backend
 
       onFullAdded : {

@@ -98,7 +98,7 @@ ScrollView {
     StackLayout {
       id : equipmentListStack
       Layout.fillWidth : true
-      Layout.fillHeight : true
+      Layout.fillHeight : false
       Layout.leftMargin : 5
       Layout.rightMargin : 20
       currentIndex : 0
@@ -214,9 +214,10 @@ ScrollView {
     StackLayout {
       id : listStack
       Layout.fillWidth : true
-      Layout.fillHeight : true
+      Layout.fillHeight : false
       Layout.leftMargin : 5
       Layout.rightMargin : 20
+      Layout.bottomMargin : 5
       currentIndex : 0
       CitationListEntry {
         id : referenceList
@@ -250,8 +251,6 @@ ScrollView {
             }
           }
         }
-        Layout.fillWidth : true
-        Layout.fillHeight : true
         backend : root.backend
         onList : {
           var values = root.model.get(root.index);
@@ -287,8 +286,6 @@ ScrollView {
       }
       FullCitationListEntry {
         id : fullReferenceList
-        Layout.fillWidth : true
-        Layout.fillHeight : true
         Layout.leftMargin : 5
         backend : root.backend
 
@@ -303,7 +300,7 @@ ScrollView {
 
         onFullExit : {
           listStack.currentIndex = 0;
-           var values = root.model.get(root.index);
+          var values = root.model.get(root.index);
           if (values) {
             descriptionEntry.text = values.description;
             referenceList.model.clear();
@@ -327,6 +324,8 @@ ScrollView {
         }
       }
     }
+
+    
   }
 
   onTopIndexChanged : {

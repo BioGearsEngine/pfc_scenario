@@ -31,7 +31,7 @@ Flickable {
     anchors.fill : parent
 
     Rectangle {
-      Layout.fillHeight : true
+ 
       Layout.fillWidth : true
       Layout.rightMargin : 5
       border.color : 'black'
@@ -45,26 +45,26 @@ Flickable {
       }
     }
     Rectangle {
-      id : injuriesPane
-      Layout.fillHeight : true
+      id : traumaPane
+      
       Layout.fillWidth : true
       Layout.rightMargin : 5
       border.color : 'black'
       border.width : 1
       ScrollView {
         anchors.fill : parent
-        clip : true
+        //clip : true
         TabTraumas {
           id : traumas
-          width : Math.max(injuriesPane.width, implicitWidth)
-          height : Math.max(injuriesPane.height, implicitHeight)
+          width : Math.max(traumaPane.width, implicitWidth)
+          height : Math.max(traumaPane.height, implicitHeight)
           backend : root.backend
 
         }
       }
     }
     Rectangle {
-      Layout.fillHeight : true
+      
       Layout.fillWidth : true
       Layout.rightMargin : 5
       border.color : 'black'
@@ -79,7 +79,7 @@ Flickable {
       }
     }
     Rectangle {
-      Layout.fillHeight : true
+ 
       Layout.fillWidth : true
       Layout.rightMargin : 5
       border.color : 'black'
@@ -94,7 +94,7 @@ Flickable {
       }
     }
     Rectangle {
-      Layout.fillHeight : true
+
       Layout.fillWidth : true
       Layout.rightMargin : 5
       border.color : 'black'
@@ -108,7 +108,7 @@ Flickable {
       }
     }
     Rectangle {
-      Layout.fillHeight : true
+
       Layout.fillWidth : true
       Layout.rightMargin : 5
       border.color : 'black'

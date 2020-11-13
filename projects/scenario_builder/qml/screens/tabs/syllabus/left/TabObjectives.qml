@@ -18,6 +18,7 @@ ColumnLayout {
     id : objective
   }
 
+
   Rectangle {
     id : listRectangle
     Layout.fillWidth : true

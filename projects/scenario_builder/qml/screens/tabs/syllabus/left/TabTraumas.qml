@@ -17,22 +17,7 @@ ColumnLayout {
   Trauma {
     id : currentTrauma
   }
-  function refresh_traumas() {
-    var r_count = backend.injury_count();
-    root.backend.injuries();
-    listArea.model.clear();
-    while (root.backend.next_injury(currentTrauma)) {
-      listArea.model.insert(listArea.model.count, {
-        id: currentTrauma.injury_id,
-        medical_name: "%1".arg(currentTrauma.medical_name),
-        common_name: "%1".arg(currentTrauma.common_name),
-        description: "%1".arg(currentTrauma.description),
-        min: currentTrauma.min,
-        max: currentTrauma.max,
-        citations: currentTrauma.citations
-      });
-    }
-  }
+  
   Rectangle {
     id : listRectangle
     Layout.fillWidth : true
