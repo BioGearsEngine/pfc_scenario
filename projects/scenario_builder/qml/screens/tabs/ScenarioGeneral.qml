@@ -26,6 +26,7 @@ GridLayout {
     Layout.preferredWidth: parent.width / 2
     Layout.fillHeight: true
     Layout.leftMargin: 5
+    Layout.bottomMargin : 5
     border.color: 'black'
     border.width: 1
     onScenarioTitleChanged : {
@@ -39,12 +40,14 @@ GridLayout {
     border.width: 1
     Layout.fillWidth: true
     Layout.fillHeight: true
-    Layout.rightMargin: 5    
+    Layout.rightMargin: 5  
+    Layout.bottomMargin : 5  
     RightPane{
       id : general_right
       backend : root.backend
       anchors.fill : parent
     }
+
   }
 }
 

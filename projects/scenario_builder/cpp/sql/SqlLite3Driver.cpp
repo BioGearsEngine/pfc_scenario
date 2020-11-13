@@ -745,7 +745,7 @@ bool SQLite3Driver::select_assessment(Assessment* assessment) const
       query.prepare(sqlite3::select_assessment_by_name);
       query.bindValue(":name", assessment->name);
     } else {
-      qWarning() << "Provided Property has no id or name one is required";
+      qWarning() << "Provided Asseessement has no id or name one is required";
       return false;
     }
     if (query.exec()) {
@@ -1084,7 +1084,7 @@ bool SQLite3Driver::select_citation(Citation* citation) const
       query.prepare(sqlite3::select_citation_by_title);
       query.bindValue(":title", citation->title);
     } else {
-      qWarning() << "Provided Property has no id, key, or title one is required";
+      qWarning() << "Provided Cittaion has no id, key, or title one is required";
       return false;
     }
     if (query.exec()) {
@@ -1183,6 +1183,7 @@ bool SQLite3Driver::remove_citation(Citation* citation)
         qWarning() << query_map.lastError();
         return false;
       }
+      emit citationsChanged();
       return (remove_citation_from_equipment(citation->id)
               && remove_citation_from_treatments(citation->id)
               && remove_citation_from_traumas(citation->id)
@@ -1269,7 +1270,7 @@ bool SQLite3Driver::select_trauma(Trauma* trauma) const
       query.prepare(sqlite3::select_trauma_by_common_name);
       query.bindValue(":common_name", trauma->common_name);
     } else {
-      qWarning() << "Provided Property has no id or name one is required";
+      qWarning() << "Provided Trauma has no id or name one is required";
       return false;
     }
     if (query.exec()) {
@@ -1416,7 +1417,7 @@ bool SQLite3Driver::select_trauma_profile(TraumaProfile* set) const
       query.prepare(sqlite3::select_trauma_profile_by_name);
       query.bindValue(":name", set->name);
     } else {
-      qWarning() << "Provided Property has no id or name one is required";
+      qWarning() << "Provided Trauma Profile has no id or name one is required";
       return false;
     }
     if (query.exec()) {
@@ -1762,7 +1763,7 @@ bool SQLite3Driver::select_location(Location* location) const
       query.prepare(sqlite3::select_location_by_name);
       query.bindValue(":name", location->name);
     } else {
-      qWarning() << "Provided Property has no id or name one is required";
+      qWarning() << "Provided Location has no id or name one is required";
       return false;
     }
     if (query.exec()) {
@@ -2029,7 +2030,7 @@ bool SQLite3Driver::select_equipment(Equipment* equipment) const
       query.prepare(sqlite3::select_equipment_by_name);
       query.bindValue(":name", equipment->name);
     } else {
-      qWarning() << "Provided Property has no id or name one is required";
+      qWarning() << "Provided Equipment has no id or name one is required";
       return false;
     }
     if (query.exec()) {
@@ -2210,7 +2211,7 @@ bool SQLite3Driver::select_objective(Objective* objective) const
       query.prepare(sqlite3::select_objective_by_name);
       query.bindValue(":name", objective->name);
     } else {
-      qWarning() << "Provided Property has no id or name one is required";
+      qWarning() << "Provided Objective has no id or name one is required";
       return false;
     }
     if (query.exec()) {
@@ -2497,7 +2498,7 @@ bool SQLite3Driver::select_role(Role* role) const
       query.prepare(sqlite3::select_role_by_name);
       query.bindValue(":name", role->name);
     } else {
-      qWarning() << "Provided Property has no id or name one is required";
+      qWarning() << "Provided Role has no id or name one is required";
       return false;
     }
     if (query.exec()) {
@@ -2615,7 +2616,7 @@ inline void assign_scene(QSqlRecord& record, Scene& scene)
   scene.weather = record.value(SCENE_WEATHER).toString();
 
   Event* event;
-  for (auto event_id : record.value(SCENE_EVENTS).toString().split(';') ) {
+  for (auto event_id : record.value(SCENE_EVENTS).toString().split(';')) {
     event = new Event(&scene);
     event->id = event_id.toInt();
     scene.events.push_back(event);
@@ -2677,7 +2678,7 @@ bool SQLite3Driver::select_scene(Scene* scene) const
       query.prepare(sqlite3::select_scene_by_name);
       query.bindValue(":name", scene->name);
     } else {
-      qWarning() << "Provided Property has no id or name one is required";
+      qWarning() << "Provided Scene has no id or name one is required";
       return false;
     }
     if (query.exec()) {
@@ -2717,7 +2718,7 @@ bool SQLite3Driver::update_scene(Scene* scene)
     query.bindValue(":weather", scene->weather);
 
     QString events;
-    for ( auto event : scene->events) {
+    for (auto event : scene->events) {
       events += QString("%1;").arg(event->id);
     }
     query.bindValue(":events", events);
@@ -2845,7 +2846,7 @@ inline void assign_treatment(const QSqlRecord& record, Treatment& treatment)
     equipment = new Equipment(&treatment);
     equipment->id = equipment_id.toInt();
     treatment.equipment.push_back(equipment);
-  }   
+  }
 
   Citation* citation;
   for (auto citation_id : record.value(TREATMENT_CITATIONS).toString().split(';')) {
@@ -2911,7 +2912,7 @@ bool SQLite3Driver::select_treatment(Treatment* treatment) const
       query.prepare(sqlite3::select_treatment_by_common_name);
       query.bindValue(":common_name", treatment->common_name);
     } else {
-      qWarning() << "Provided Property has no id or name one is required";
+      qWarning() << "Provided Teretment has no id or name one is required";
       return false;
     }
     if (query.exec()) {
@@ -3052,7 +3053,7 @@ bool SQLite3Driver::select_role_map(RoleMap* map) const
       query.bindValue(":fk_scene", map->fk_scene->id);
       query.bindValue(":fk_role", map->fk_role->id);
     } else {
-      qWarning() << "Provided Property has no id, fk_scene, or fk_role one is required";
+      qWarning() << "Provided RoleMap has no id, fk_scene, or fk_role one is required";
       return false;
     }
     if (query.exec()) {
@@ -3193,7 +3194,7 @@ bool SQLite3Driver::select_event_map(EventMap* map) const
       query.bindValue(":fk_scene", map->fk_scene->id);
       query.bindValue(":fk_event", map->fk_event->id);
     } else {
-      qWarning() << "Provided Property has no id, fk_scene, or fk_event one is required";
+      qWarning() << "Provided EventMap has no id, fk_scene, or fk_event one is required";
       return false;
     }
     if (query.exec()) {
@@ -3350,7 +3351,7 @@ bool SQLite3Driver::select_location_map(LocationMap* map) const
       query.bindValue(":fk_scene", map->fk_scene->id);
       query.bindValue(":fk_location", map->fk_location->id);
     } else {
-      qWarning() << "Provided Property has no id, fk_scene, or fk_location one is required";
+      qWarning() << "Provided LocationMap has no id, fk_scene, or fk_location one is required";
       return false;
     }
     if (query.exec()) {
@@ -3491,7 +3492,7 @@ bool SQLite3Driver::select_citation_map(CitationMap* map) const
       query.bindValue(":fk_scene", map->fk_scene->id);
       query.bindValue(":fk_citation", map->fk_citation->id);
     } else {
-      qWarning() << "Provided Property has no id, fk_scene, or fk_citation one is required";
+      qWarning() << "Provided CitationMap has no id, fk_scene, or fk_citation one is required";
       return false;
     }
     if (query.exec()) {
@@ -3672,7 +3673,7 @@ bool SQLite3Driver::select_equipment_map(EquipmentMap* map) const
       query.bindValue(":name", map->name);
 
     } else {
-      qWarning() << "Provided Property has no id, fk_scene, or fk_equipment one is required";
+      qWarning() << "Provided EquipmentMap has no id, fk_scene, or fk_equipment one is required";
       return false;
     }
     if (query.exec()) {
@@ -3814,12 +3815,11 @@ bool SQLite3Driver::remove_equipment_from_treatments(int equipment_id)
 bool SQLite3Driver::remove_equipment_from_treatments(std::string equipment_id)
 {
 
-  
   if (QSqlDatabase::database(_db_name).isOpen()) {
     for (auto& treatment : treatments()) {
       auto equipment = treatment->equipment.begin();
-      while ( equipment != treatment->equipment.end() ) {
-        if ( (*equipment)->id == std::stoi(equipment_id)) {
+      while (equipment != treatment->equipment.end()) {
+        if ((*equipment)->id == std::stoi(equipment_id)) {
           treatment->equipment.erase(equipment);
         }
         if (equipment != treatment->equipment.end()) {
@@ -3891,13 +3891,13 @@ bool SQLite3Driver::remove_citation_from_equipment(std::string citation_id)
     for (auto& equipment : eqs) {
       auto citation = equipment->citations.begin();
       while (citation != equipment->citations.end()) {
-          if ((*citation)->id == std::stoi(citation_id)) {
+        if ((*citation)->id == std::stoi(citation_id)) {
           equipment->citations.erase(citation);
-          }
-          if (citation != equipment->citations.end()) {
-            ++citation;
-          }
         }
+        if (citation != equipment->citations.end()) {
+          ++citation;
+        }
+      }
       update_equipment(equipment);
     }
     return true;
@@ -3952,7 +3952,7 @@ bool SQLite3Driver::remove_trauma_from_trauma_profiles(std::string trauma_id)
   }
   return false;
 }
-
+//-------------------------------------------------------------------------------
 std::string SQLite3Driver::list_remove(std::string list, std::string id) const
 {
   std::string result;
@@ -3975,7 +3975,7 @@ std::string SQLite3Driver::list_remove(std::string list, std::string id) const
   }
   return result;
 }
-
+//-------------------------------------------------------------------------------
 std::string SQLite3Driver::list_remove_index(std::string list, int index) const
 {
   std::vector<std::string> tokenized_list;
@@ -4001,7 +4001,7 @@ std::string SQLite3Driver::list_remove_index(std::string list, int index) const
   }
   return result;
 }
-
+//-------------------------------------------------------------------------------
 int SQLite3Driver::list_find(std::string list, std::string id) const
 {
   int result = 0;
@@ -4019,4 +4019,478 @@ int SQLite3Driver::list_find(std::string list, std::string id) const
   }
   return -1;
 }
+//-------------------------------------------------------------------------------
+//------------------------- QQmlListProperty Interfaces--------------------------
+//! As of Qt5.12 it appears to be complicated to pass a QList<QObject*> to QML
+//  And retain the ability to refer to  Q_INVOKABLE.  In reality this entire
+//  interface should be rewritten using QSQLModel  and  QSQLQueryModels
+//  That way each page of the UI can have its own custom code.
+//-------------------------------------------------------------------------------
+auto CountAuthor(QQmlListProperty<Author>* list) -> int
+{
+  auto authorList = reinterpret_cast<QList<Author*>*>(list->data);
+  if (authorList) {
+    return authorList->length();
+  }
+  return 0;
+}
+auto AtAuthor(QQmlListProperty<Author>* list, int index) -> Author*
+{
+  auto authorList = reinterpret_cast<QList<Author*>*>(list->data);
+  if (authorList) {
+    return authorList->at(index);
+  }
+  return nullptr;
+}
+QQmlListProperty<Author> SQLite3Driver::getAuthors() const
+{
+
+  return QQmlListProperty<Author>(nullptr, new QList<Author*>(authors()),
+                                  nullptr,
+                                  &CountAuthor,
+                                  &AtAuthor,
+                                  nullptr);
+}
+//-------------------------------------------------------------------------------
+auto CountProperty(QQmlListProperty<Property>* list) -> int
+{
+  auto propertyList = reinterpret_cast<QList<Property*>*>(list->data);
+  if (propertyList) {
+    return propertyList->length();
+  }
+  return 0;
+}
+auto AtProperty(QQmlListProperty<Property>* list, int index) -> Property*
+{
+  auto propertyList = reinterpret_cast<QList<Property*>*>(list->data);
+  if (propertyList) {
+    return propertyList->at(index);
+  }
+  return nullptr;
+}
+QQmlListProperty<Property> SQLite3Driver::getProperties() const
+{
+  return QQmlListProperty<Property>(nullptr, new QList<Property*>(properties()),
+                                    nullptr,
+                                    &CountProperty,
+                                    &AtProperty,
+                                    nullptr);
+}
+//-------------------------------------------------------------------------------
+auto CountObjective(QQmlListProperty<Objective>* list) -> int
+{
+  auto objectiveList = reinterpret_cast<QList<Objective*>*>(list->data);
+  if (objectiveList) {
+    return objectiveList->length();
+  }
+  return 0;
+}
+auto AtObjective(QQmlListProperty<Objective>* list, int index) -> Objective*
+{
+  auto objectiveList = reinterpret_cast<QList<Objective*>*>(list->data);
+  if (objectiveList) {
+    return objectiveList->at(index);
+  }
+  return nullptr;
+}
+QQmlListProperty<Objective> SQLite3Driver::getObjectives() const
+{
+
+  return QQmlListProperty<Objective>(nullptr, new QList<Objective*>(objectives()),
+                                     nullptr,
+                                     &CountObjective,
+                                     &AtObjective,
+                                     nullptr);
+}
+//-------------------------------------------------------------------------------
+auto CountCitation(QQmlListProperty<Citation>* list) -> int
+{
+  auto citationList = reinterpret_cast<QList<Citation*>*>(list->data);
+  if (citationList) {
+    return citationList->length();
+  }
+  return 0;
+}
+auto AtCitation(QQmlListProperty<Citation>* list, int index) -> Citation*
+{
+  auto citationList = reinterpret_cast<QList<Citation*>*>(list->data);
+  if (citationList) {
+    return citationList->at(index);
+  }
+  return nullptr;
+}
+QQmlListProperty<Citation> SQLite3Driver::getCitations() const
+{
+
+  return QQmlListProperty<Citation>(nullptr, new QList<Citation*>(citations()),
+                                    nullptr,
+                                    &CountCitation,
+                                    &AtCitation,
+                                    nullptr);
+}
+//-------------------------------------------------------------------------------
+auto CountTreatment(QQmlListProperty<Treatment>* list) -> int
+{
+  auto treatmentList = reinterpret_cast<QList<Treatment*>*>(list->data);
+  if (treatmentList) {
+    return treatmentList->length();
+  }
+  return 0;
+}
+auto AtTreatment(QQmlListProperty<Treatment>* list, int index) -> Treatment*
+{
+  auto treatmentList = reinterpret_cast<QList<Treatment*>*>(list->data);
+  if (treatmentList) {
+    return treatmentList->at(index);
+  }
+  return nullptr;
+}
+QQmlListProperty<Treatment> SQLite3Driver::getTreatments() const
+{
+
+  return QQmlListProperty<Treatment>(nullptr, new QList<Treatment*>(treatments()),
+                                     nullptr,
+                                     &CountTreatment,
+                                     &AtTreatment,
+                                     nullptr);
+}
+//-------------------------------------------------------------------------------
+auto CountEquipment(QQmlListProperty<Equipment>* list) -> int
+{
+  auto equipmentList = reinterpret_cast<QList<Equipment*>*>(list->data);
+  if (equipmentList) {
+    return equipmentList->length();
+  }
+  return 0;
+}
+auto AtEquipment(QQmlListProperty<Equipment>* list, int index) -> Equipment*
+{
+  auto equipmentList = reinterpret_cast<QList<Equipment*>*>(list->data);
+  if (equipmentList) {
+    return equipmentList->at(index);
+  }
+  return nullptr;
+}
+QQmlListProperty<Equipment> SQLite3Driver::getEquipment() const
+{
+
+  return QQmlListProperty<Equipment>(nullptr, new QList<Equipment*>(equipments()),
+                                     nullptr,
+                                     &CountEquipment,
+                                     &AtEquipment,
+                                     nullptr);
+}
+//-------------------------------------------------------------------------------
+auto CountTrauma(QQmlListProperty<Trauma>* list) -> int
+{
+  auto traumaList = reinterpret_cast<QList<Trauma*>*>(list->data);
+  if (traumaList) {
+    return traumaList->length();
+  }
+  return 0;
+}
+auto AtTrauma(QQmlListProperty<Trauma>* list, int index) -> Trauma*
+{
+  auto traumaList = reinterpret_cast<QList<Trauma*>*>(list->data);
+  if (traumaList) {
+    return traumaList->at(index);
+  }
+  return nullptr;
+}
+QQmlListProperty<Trauma> SQLite3Driver::getTraumas() const
+{
+
+  return QQmlListProperty<Trauma>(nullptr, new QList<Trauma*>(traumas()),
+                                  nullptr,
+                                  &CountTrauma,
+                                  &AtTrauma,
+                                  nullptr);
+}
+//-------------------------------------------------------------------------------
+auto CountTraumaProfiles(QQmlListProperty<TraumaProfile>* list) -> int
+{
+  auto traumaProfilesList = reinterpret_cast<QList<TraumaProfile*>*>(list->data);
+  if (traumaProfilesList) {
+    return traumaProfilesList->length();
+  }
+  return 0;
+}
+auto AtTraumaProfiles(QQmlListProperty<TraumaProfile>* list, int index) -> TraumaProfile*
+{
+  auto traumaProfilesList = reinterpret_cast<QList<TraumaProfile*>*>(list->data);
+  if (traumaProfilesList) {
+    return traumaProfilesList->at(index);
+  }
+  return nullptr;
+}
+QQmlListProperty<TraumaProfile> SQLite3Driver::getTraumaProfiles() const
+{
+
+  return QQmlListProperty<TraumaProfile>(nullptr, new QList<TraumaProfile*>(trauma_profiles()),
+                                         nullptr,
+                                         &CountTraumaProfiles,
+                                         &AtTraumaProfiles,
+                                         nullptr);
+}
+//-------------------------------------------------------------------------------
+auto CountAssessment(QQmlListProperty<Assessment>* list) -> int
+{
+  auto assessmentList = reinterpret_cast<QList<Assessment*>*>(list->data);
+  if (assessmentList) {
+    return assessmentList->length();
+  }
+  return 0;
+}
+auto AtAssessment(QQmlListProperty<Assessment>* list, int index) -> Assessment*
+{
+  auto assessmentList = reinterpret_cast<QList<Assessment*>*>(list->data);
+  if (assessmentList) {
+    return assessmentList->at(index);
+  }
+  return nullptr;
+}
+QQmlListProperty<Assessment> SQLite3Driver::getAssessments() const
+{
+
+  return QQmlListProperty<Assessment>(nullptr, new QList<Assessment*>(assessments()),
+                                  nullptr,
+                                  &CountAssessment,
+                                  &AtAssessment,
+                                  nullptr);
+}
+//-------------------------------------------------------------------------------
+auto CountLocation(QQmlListProperty<Location>* list) -> int
+{
+  auto locationList = reinterpret_cast<QList<Location*>*>(list->data);
+  if (locationList) {
+    return locationList->length();
+  }
+  return 0;
+}
+auto AtLocation(QQmlListProperty<Location>* list, int index) -> Location*
+{
+  auto locationList = reinterpret_cast<QList<Location*>*>(list->data);
+  if (locationList) {
+    return locationList->at(index);
+  }
+  return nullptr;
+}
+QQmlListProperty<Location> SQLite3Driver::getLocations() const
+{
+
+  return QQmlListProperty<Location>(nullptr, new QList<Location*>(locations()),
+                                  nullptr,
+                                  &CountLocation,
+                                  &AtLocation,
+                                  nullptr);
+}
+//-------------------------------------------------------------------------------
+auto CountRoleMap(QQmlListProperty<RoleMap>* list) -> int
+{
+  auto roleMapList = reinterpret_cast<QList<RoleMap*>*>(list->data);
+  if (roleMapList) {
+    return roleMapList->length();
+  }
+  return 0;
+}
+auto AtRoleMap(QQmlListProperty<RoleMap>* list, int index) -> RoleMap*
+{
+  auto roleMapList = reinterpret_cast<QList<RoleMap*>*>(list->data);
+  if (roleMapList) {
+    return roleMapList->at(index);
+  }
+  return nullptr;
+}
+QQmlListProperty<RoleMap> SQLite3Driver::getRoleMaps() const
+{
+
+  return QQmlListProperty<RoleMap>(nullptr, new QList<RoleMap*>(role_maps()),
+                                  nullptr,
+                                  &CountRoleMap,
+                                  &AtRoleMap,
+                                  nullptr);
+}
+//-------------------------------------------------------------------------------
+auto CountEventMap(QQmlListProperty<EventMap>* list) -> int
+{
+  auto eventMapList = reinterpret_cast<QList<EventMap*>*>(list->data);
+  if (eventMapList) {
+    return eventMapList->length();
+  }
+  return 0;
+}
+auto AtEventMap(QQmlListProperty<EventMap>* list, int index) -> EventMap*
+{
+  auto eventMapList = reinterpret_cast<QList<EventMap*>*>(list->data);
+  if (eventMapList) {
+    return eventMapList->at(index);
+  }
+  return nullptr;
+}
+QQmlListProperty<EventMap> SQLite3Driver::getEventMaps() const
+{
+
+  return QQmlListProperty<EventMap>(nullptr, new QList<EventMap*>(event_maps()),
+                                  nullptr,
+                                  &CountEventMap,
+                                  &AtEventMap,
+                                  nullptr);
+}
+//-------------------------------------------------------------------------------
+auto CountLocationMap(QQmlListProperty<LocationMap>* list) -> int
+{
+  auto locationMapList = reinterpret_cast<QList<LocationMap*>*>(list->data);
+  if (locationMapList) {
+    return locationMapList->length();
+  }
+  return 0;
+}
+auto AtLocationMap(QQmlListProperty<LocationMap>* list, int index) -> LocationMap*
+{
+  auto locationMapList = reinterpret_cast<QList<LocationMap*>*>(list->data);
+  if (locationMapList) {
+    return locationMapList->at(index);
+  }
+  return nullptr;
+}
+QQmlListProperty<LocationMap> SQLite3Driver::getLocationMaps() const
+{
+
+  return QQmlListProperty<LocationMap>(nullptr, new QList<LocationMap*>(location_maps()),
+                                  nullptr,
+                                  &CountLocationMap,
+                                  &AtLocationMap,
+                                  nullptr);
+}
+//-------------------------------------------------------------------------------
+auto CountCitationMap(QQmlListProperty<CitationMap>* list) -> int
+{
+  auto citationMapList = reinterpret_cast<QList<CitationMap*>*>(list->data);
+  if (citationMapList) {
+    return citationMapList->length();
+  }
+  return 0;
+}
+auto AtCitationMap(QQmlListProperty<CitationMap>* list, int index) -> CitationMap*
+{
+  auto citationMapList = reinterpret_cast<QList<CitationMap*>*>(list->data);
+  if (citationMapList) {
+    return citationMapList->at(index);
+  }
+  return nullptr;
+}
+QQmlListProperty<CitationMap> SQLite3Driver::getCitationMaps() const
+{
+
+  return QQmlListProperty<CitationMap>(nullptr, new QList<CitationMap*>(citation_maps()),
+                                  nullptr,
+                                  &CountCitationMap,
+                                  &AtCitationMap,
+                                  nullptr);
+}
+//-------------------------------------------------------------------------------
+auto CountEquipmentMap(QQmlListProperty<EquipmentMap>* list) -> int
+{
+  auto equipmentMapList = reinterpret_cast<QList<EquipmentMap*>*>(list->data);
+  if (equipmentMapList) {
+    return equipmentMapList->length();
+  }
+  return 0;
+}
+auto AtEquipmentMap(QQmlListProperty<EquipmentMap>* list, int index) -> EquipmentMap*
+{
+  auto equipmentMapList = reinterpret_cast<QList<EquipmentMap*>*>(list->data);
+  if (equipmentMapList) {
+    return equipmentMapList->at(index);
+  }
+  return nullptr;
+}
+QQmlListProperty<EquipmentMap> SQLite3Driver::getEquipmentMaps() const
+{
+
+  return QQmlListProperty<EquipmentMap>(nullptr, new QList<EquipmentMap*>(equipment_maps()),
+                                  nullptr,
+                                  &CountEquipmentMap,
+                                  &AtEquipmentMap,
+                                  nullptr);
+}
+//-------------------------------------------------------------------------------
+auto CountRole(QQmlListProperty<Role>* list) -> int
+{
+  auto roleMapList = reinterpret_cast<QList<Role*>*>(list->data);
+  if (roleMapList) {
+    return roleMapList->length();
+  }
+  return 0;
+}
+auto AtRole(QQmlListProperty<Role>* list, int index) -> Role*
+{
+  auto roleMapList = reinterpret_cast<QList<Role*>*>(list->data);
+  if (roleMapList) {
+    return roleMapList->at(index);
+  }
+  return nullptr;
+}
+QQmlListProperty<Role> SQLite3Driver::getRoles() const
+{
+
+  return QQmlListProperty<Role>(nullptr, new QList<Role*>(roles()),
+                                  nullptr,
+                                  &CountRole,
+                                  &AtRole,
+                                  nullptr);
+}
+//-------------------------------------------------------------------------------
+auto CountEvent(QQmlListProperty<Event>* list) -> int
+{
+  auto eventList = reinterpret_cast<QList<Event*>*>(list->data);
+  if (eventList) {
+    return eventList->length();
+  }
+  return 0;
+}
+auto AtEvent(QQmlListProperty<Event>* list, int index) -> Event*
+{
+  auto eventList = reinterpret_cast<QList<Event*>*>(list->data);
+  if (eventList) {
+    return eventList->at(index);
+  }
+  return nullptr;
+}
+QQmlListProperty<Event> SQLite3Driver::getEvents() const
+{
+
+  return QQmlListProperty<Event>(nullptr, new QList<Event*>(events()),
+                                  nullptr,
+                                  &CountEvent,
+                                  &AtEvent,
+                                  nullptr);
+}
+//-------------------------------------------------------------------------------
+auto CountScene(QQmlListProperty<Scene>* list) -> int
+{
+  auto sceneList = reinterpret_cast<QList<Scene*>*>(list->data);
+  if (sceneList) {
+    return sceneList->length();
+  }
+  return 0;
+}
+auto AtScene(QQmlListProperty<Scene>* list, int index) -> Scene*
+{
+  auto sceneList = reinterpret_cast<QList<Scene*>*>(list->data);
+  if (sceneList) {
+    return sceneList->at(index);
+  }
+  return nullptr;
+}
+QQmlListProperty<Scene> SQLite3Driver::getScenes() const
+{
+
+  return QQmlListProperty<Scene>(nullptr, new QList<Scene*>(scenes()),
+                                  nullptr,
+                                  &CountScene,
+                                  &AtScene,
+                                  nullptr);
+}
+//-------------------------------------------------------------------------------
 }

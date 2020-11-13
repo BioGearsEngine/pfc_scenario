@@ -80,6 +80,7 @@ Rectangle {
       id: syllabus_tabs
       Layout.fillWidth: true
       font.pointSize: 8
+      currentIndex : 0
       height : 12
 
       TabButton {

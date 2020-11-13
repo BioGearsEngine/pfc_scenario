@@ -26,6 +26,7 @@ specific language governing permissions and limitations under the License.
 #include <QVariant>
 
 #include "SQLTables.h"
+
 namespace pfc {
 class Serializer;
 
@@ -59,24 +60,24 @@ public:
   Q_PROPERTY(QString name READ Name WRITE Name NOTIFY nameChanged)
   Q_PROPERTY(QString path READ Path WRITE Path NOTIFY pathChanged)
 
-  Q_PROPERTY(QQmlListProperty<Author> authors READ getAuthors)
-  // Q_PROPERTY(QQmlListProperty<Property> READ getProperties)
-  // Q_PROPERTY(QQmlListProperty<Objective> READ getObjectives)
-  Q_PROPERTY(QQmlListProperty<Citation> citations READ getCitations)
-  // Q_PROPERTY(QQmlListProperty<Treatment> READ getTreatments)
-  // Q_PROPERTY(QQmlListProperty<Equipment> READ getEquipment)
-  // Q_PROPERTY(QQmlListProperty<Trauma> READ getTraumas)
-  // Q_PROPERTY(QQmlListProperty<TraumaProfile> READ getTraumaProfiles)
-  // Q_PROPERTY(QQmlListProperty<Assessment> READ getAssessments)
-  // Q_PROPERTY(QQmlListProperty<Location> READ getLocations)
-  // Q_PROPERTY(QQmlListProperty<RoleMap> READ getRoleMaps)
-  // Q_PROPERTY(QQmlListProperty<EventMap> READ getEventMaps)
-  // Q_PROPERTY(QQmlListProperty<LocationMap> READ getLocationMaps)
-  // Q_PROPERTY(QQmlListProperty<CitationMap> READ getCitationMaps)
-  // Q_PROPERTY(QQmlListProperty<EquipmentMap> READ getEquipmentMaps)
-  // Q_PROPERTY(QQmlListProperty<Roles> READ getRoles)
-  // Q_PROPERTY(QQmlListProperty<Events> READ getEvents)
-  // Q_PROPERTY(QQmlListProperty<Scenes> READ getScenes)
+  Q_PROPERTY(QQmlListProperty<Author>       authors       READ getAuthors    NOTIFY authorsChanged)
+  Q_PROPERTY(QQmlListProperty<Property>     properties    READ getProperties NOTIFY propertiesChanged)
+  Q_PROPERTY(QQmlListProperty<Objective>    objectives    READ getObjectives NOTIFY objectivesChanged)
+  Q_PROPERTY(QQmlListProperty<Citation>     citations     READ getCitations  NOTIFY citationsChanged)
+  Q_PROPERTY(QQmlListProperty<Treatment>    treatments    READ getTreatments NOTIFY treatmentsChanged)
+  Q_PROPERTY(QQmlListProperty<Equipment>    equipment     READ getEquipment  NOTIFY equipmentsChanged)
+  Q_PROPERTY(QQmlListProperty<Trauma>       traumas       READ getTraumas    NOTIFY traumasChanged)
+  Q_PROPERTY(QQmlListProperty<TraumaProfile> traumaProfiles READ getTraumaProfiles NOTIFY traumaProfilesChanged)
+  Q_PROPERTY(QQmlListProperty<Assessment>   assessments   READ getAssessments NOTIFY assessmentsChanged)
+  Q_PROPERTY(QQmlListProperty<Location>     locations     READ getLocations   NOTIFY locationsChanged)
+  Q_PROPERTY(QQmlListProperty<RoleMap>      roleMaps      READ getRoleMaps    NOTIFY roleMapsChanged)
+  Q_PROPERTY(QQmlListProperty<EventMap>     eventMaps     READ getEventMaps   NOTIFY eventMapsChanged)
+  Q_PROPERTY(QQmlListProperty<LocationMap>  locationMaps  READ getLocationMaps  NOTIFY locationMapsChanged)
+  Q_PROPERTY(QQmlListProperty<CitationMap>  citationMaps  READ getCitationMaps  NOTIFY citationMapsChanged)
+  Q_PROPERTY(QQmlListProperty<EquipmentMap> equipmentMaps READ getEquipmentMaps NOTIFY equipmentMapsChanged)
+  Q_PROPERTY(QQmlListProperty<Role>         roles         READ getRoles  NOTIFY rolesChanged)
+  Q_PROPERTY(QQmlListProperty<Event>        events        READ getEvents NOTIFY eventsChanged)
+  Q_PROPERTY(QQmlListProperty<Scene>        scenes        READ getScenes NOTIFY scenesChanged)
 
 public:
   enum Sqlite3Table {
@@ -212,154 +213,24 @@ public:
   QList<EquipmentMap*> equipment_in_scene(Scene* scene) const;
   QList<Scene*> scenes() const;
 
-  static auto CountAuthor(QQmlListProperty<Author>* list) -> int
-  {
-    auto authorList = reinterpret_cast<QList<Author*>*>(list->data);
-    if (authorList) {
-      return authorList->length();
-    }
-    return 0;
-  }
-  static auto AtAuthor(QQmlListProperty<Author>* list, int index) -> Author*
-  {
-    auto authorList = reinterpret_cast<QList<Author*>*>(list->data);
-    if (authorList) {
-      return authorList->at(index);
-    }
-    return nullptr;
-  }
-
-  Q_INVOKABLE QQmlListProperty<Author> getAuthors() const
-  {
-
-    return QQmlListProperty<Author>(nullptr, new QList<Author*>(authors()),
-                                    nullptr,
-                                    &SQLite3Driver::CountAuthor,
-                                    &SQLite3Driver::AtAuthor,
-                                    nullptr);
-  }
-  Q_INVOKABLE QVariant getProperties() const
-  {
-    auto var = QVariant();
-    var.setValue(properties());
-    return var;
-  }
-  Q_INVOKABLE QVariant getObjectives() const
-  {
-    auto var = QVariant();
-    var.setValue((objectives()));
-    return var;
-  }
-  static auto CountCitation(QQmlListProperty<Citation>* list) -> int
-  {
-    auto authorList = reinterpret_cast<QList<Citation*>*>(list->data);
-    if (authorList) {
-      return authorList->length();
-    }
-    return 0;
-  }
-  static auto AtCitation(QQmlListProperty<Citation>* list, int index) -> Citation*
-  {
-    auto authorList = reinterpret_cast<QList<Citation*>*>(list->data);
-    if (authorList) {
-      return authorList->at(index);
-    }
-    return nullptr;
-  }
-
-  Q_INVOKABLE QQmlListProperty<Citation> getCitations() const
-  {
-
-    return QQmlListProperty<Citation>(nullptr, new QList<Citation*>(citations()),
-                                    nullptr,
-                                    &SQLite3Driver::CountCitation,
-                                    &SQLite3Driver::AtCitation,
-                                    nullptr);
-  }
-  Q_INVOKABLE QVariant getTreatments() const
-  {
-    auto var = QVariant();
-    var.setValue((treatments()));
-    return var;
-  }
-  Q_INVOKABLE QVariant getEquipment() const
-  {
-    auto var = QVariant();
-    var.setValue(QList<Equipment*>(equipments()));
-    return var;
-  }
-  Q_INVOKABLE QVariant getTraumas() const
-  {
-    auto var = QVariant();
-    var.setValue((traumas()));
-    return var;
-  }
-  Q_INVOKABLE QVariant getTraumaProfiles() const
-  {
-    auto var = QVariant();
-    var.setValue((trauma_profiles()));
-    return var;
-  }
-  Q_INVOKABLE QVariant getAssessments() const
-  {
-    auto var = QVariant();
-    var.setValue((assessments()));
-    return var;
-  }
-  Q_INVOKABLE QVariant getLocations() const
-  {
-    auto var = QVariant();
-    var.setValue((locations()));
-    return var;
-  }
-  Q_INVOKABLE QVariant getRoleMaps() const
-  {
-    auto var = QVariant();
-    var.setValue((role_maps()));
-    return var;
-  }
-  Q_INVOKABLE QVariant getEventMaps() const
-  {
-    auto var = QVariant();
-    var.setValue((event_maps()));
-    return var;
-  }
-  Q_INVOKABLE QVariant getLocationMaps() const
-  {
-    auto var = QVariant();
-    var.setValue((location_maps()));
-    return var;
-  }
-  Q_INVOKABLE QVariant getCitationMaps() const
-  {
-    auto var = QVariant();
-    var.setValue((citation_maps()));
-    return var;
-  }
-  Q_INVOKABLE QVariant getEquipmentMaps() const
-  {
-    auto var = QVariant();
-    var.setValue((equipment_maps()));
-    return var;
-  }
-  Q_INVOKABLE QVariant getRoles() const
-  {
-    auto var = QVariant();
-    var.setValue((role_maps()));
-    return var;
-  }
-  Q_INVOKABLE QVariant getEvents() const
-  {
-    auto var = QVariant();
-    var.setValue((event_maps()));
-    return var;
-  }
-  Q_INVOKABLE QVariant getScenes() const
-  {
-    auto var = QVariant();
-    var.setValue((scenes()));
-    return var;
-  }
+  Q_INVOKABLE QQmlListProperty<Author> getAuthors() const;
+  Q_INVOKABLE QQmlListProperty<Property> getProperties() const;
+  Q_INVOKABLE QQmlListProperty<Objective> getObjectives() const;
+  Q_INVOKABLE QQmlListProperty<Citation> getCitations() const;
+  Q_INVOKABLE QQmlListProperty<Treatment> getTreatments() const;
+  Q_INVOKABLE QQmlListProperty<Equipment> getEquipment() const;
+  Q_INVOKABLE QQmlListProperty<Trauma> getTraumas() const;
+  Q_INVOKABLE QQmlListProperty<TraumaProfile> getTraumaProfiles() const;
+  Q_INVOKABLE QQmlListProperty<Assessment> getAssessments() const;
+  Q_INVOKABLE QQmlListProperty<Location> getLocations() const;
+  Q_INVOKABLE QQmlListProperty<RoleMap> getRoleMaps() const;
+  Q_INVOKABLE QQmlListProperty<EventMap> getEventMaps() const;
+  Q_INVOKABLE QQmlListProperty<LocationMap> getLocationMaps() const;
+  Q_INVOKABLE QQmlListProperty<CitationMap> getCitationMaps() const;
+  Q_INVOKABLE QQmlListProperty<EquipmentMap> getEquipmentMaps() const;
+  Q_INVOKABLE QQmlListProperty<Role> getRoles() const;
+  Q_INVOKABLE QQmlListProperty<Event> getEvents() const;
+  Q_INVOKABLE QQmlListProperty<Scene> getScenes() const;
 
   Q_INVOKABLE bool select_author(Author*) const;
   Q_INVOKABLE bool select_property(Property*) const;
@@ -482,19 +353,19 @@ signals:
   void equipmentsChanged();
   void traumasChanged();
   void traumaProfilesChanged();
+  void treatmentsChanged();;
   void locationsChanged();
-  void mapsChanged();
-  void eventMapsChanged();
-  void locationMapsChanged();
-  void citationMapsChanged();
-  void equipmentMapsChanged();
   void objectivesChanged();
   void propertiesChanged();
   void citationsChanged();
   void rolesChanged();
   void scenesChanged();
-  void treatmentsChanged();
-
+  void roleMapsChanged();
+  void eventMapsChanged();
+  void locationMapsChanged();
+  void citationMapsChanged();
+  void equipmentMapsChanged();
+  
   //Signals the removal of an author
   //This is intended for QML to prune models when possible.
   void authorRemoved(int index);

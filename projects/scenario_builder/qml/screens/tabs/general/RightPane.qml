@@ -11,10 +11,19 @@ ScrollView {
     id: root
     property SQLBackend backend
     clip : true
-    
+
+  Rectangle {
+    //This fixes a resizing issue for some reason
+    anchors.fill : parent
+    border.color : 'transparent'
+    border.width  : 5
+  }    
+
   ColumnLayout {
     id: summary_leftWindow
-    anchors.fill : parent
+    anchors.top  : parent.top
+    anchors.left : parent.left
+    anchors.right : parent.right
 
     Author {
       id: main_author
@@ -26,11 +35,6 @@ ScrollView {
       Layout.alignment: Qt.AlignTop
       author : main_author
       backend : root.backend
-    }
-
-    Rectangle {
-        height : 25
-        color : "Red"
     }
 
     PropertyEntry {

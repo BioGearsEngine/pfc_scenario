@@ -41,3 +41,11 @@ All MSDL files are from the [Simulation Interoperability Standards Organization]
 MSDL can be obtained [here](https://www.sisostds.org/DigitalLibrary.aspx?Command=Core_Download&EntryId=46997) [2019-06-01]
 
 set PATH=%PATH%;D:\remotes\sed-stash\biogears\external\windows-vc15-amd64\bin\
+
+# BUGS
+- Syllabus Tabs do not save after first addition.
+- Resave might be broken
+- SaveAs Works
+- Might want to ask on save if they want to rename
+- TraumaInstances Doesn't work at all
+- 
