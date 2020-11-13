@@ -9,9 +9,9 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 
 ColumnLayout  {
     id: root
-    property SQLBackend backend
-    property ListModel model
-    property int index
+  property SQLBackend backend
+  property Assessment currentAssessment
+  property int topIndex // topIndex is the index of the top set of 4 tabs
 
     Layout.fillWidth: true
     Layout.fillHeight: true
@@ -23,8 +23,7 @@ ColumnLayout  {
     Connections {
       target : backend
 
-    }
-    
+    }    
 
     function update_assessment(values) 
     {
@@ -45,10 +44,10 @@ ColumnLayout  {
       placeholderText: "String Field (128 Characters)"
 
        onEditingFinished : {
-        var entry = model.get(root.index)
+        var entry = model.get(root.index);
         if ( text != entry.name){
-          entry.name = text
-          update_assessment(entry)
+          entry.name = text;
+          update_assessment(entry);
         }
       }
     }
@@ -63,10 +62,10 @@ ColumnLayout  {
       placeholderText: "Text Area (5-15 Lines)"
 
       onEditingFinished : {
-        var entry = model.get(root.index)
+        var entry = model.get(root.index);
         if ( text != entry.description){
-          entry.description = text
-          update_assessment(entry)
+          entry.description = text;
+          update_assessment(entry);
         }
       }
     }
@@ -88,13 +87,13 @@ ColumnLayout  {
               elide: Text.ElideRight
           }
           onActivated: {
-              optionalArea.currentIndex = index
+              optionalArea.currentIndex = index;
               if (root.model.count == 0) {
                 return
               }
-              var entry = root.model.get(root.index)
-              entry.type = (index) ? "Scalar" : "Binary"
-              update_assessment(entry)
+              var entry = root.model.get(root.index);
+              entry.type = (index) ? "Scalar" : "Binary";
+              update_assessment(entry);
           }
       }
     }
@@ -124,11 +123,11 @@ ColumnLayout  {
             placeholderText: "String Field (128 Characters)"
 
              onEditingFinished : {
-              partialCriteriaEntry.text = text
-              var entry = model.get(root.index)
+              partialCriteriaEntry.text = text;
+              var entry = model.get(root.index);
               if ( text != entry.criteria){
-                entry.criteria = text
-                update_assessment(entry)
+                entry.criteria = text;
+                update_assessment(entry);
               }
             }
           }
@@ -151,10 +150,10 @@ ColumnLayout  {
             placeholderText: "String Field (128 Characters)"
 
              onEditingFinished : {
-              var entry = model.get(root.index)
+              var entry = model.get(root.index);
               if ( text != entry.available_points){
-                entry.available_points = parseInt(text)
-                update_assessment(entry)
+                entry.available_points = parseInt(text);
+                update_assessment(entry);
               }
             }
           }
@@ -169,33 +168,14 @@ ColumnLayout  {
             placeholderText: "String Field (128 Characters)"
 
              onEditingFinished : {
-              binaryCriteriaEntry.text = text
-              var entry = model.get(root.index)
+              binaryCriteriaEntry.text = text;
+              var entry = model.get(root.index);
               if ( text != entry.criteria){
-                entry.criteria = text
-                update_assessment(entry)
+                entry.criteria = text;
+                update_assessment(entry);
               }
             }
           }
         }
-    }
-
-    onIndexChanged : {
-      var values = model.get(index)
-      if(values) {
-        nameEntry.text = values.name
-        descriptionEntry.text = values.description
-        if (values.type === "Binary") {
-          optionalArea.currentIndex =  0
-          typeSelect.currentIndex =  0
-
-        } else {
-          optionalArea.currentIndex =  1
-          typeSelect.currentIndex =  1
-          partialPointsEntry.text   = "%1".arg(values.available_points)
-        }
-          partialCriteriaEntry.text = values.criteria
-          binaryCriteriaEntry.text = values.criteria
-      }
     }
 }

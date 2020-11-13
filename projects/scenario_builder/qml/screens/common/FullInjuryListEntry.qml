@@ -18,7 +18,7 @@ FullListEntry {
   label: "Trauma"
   labelPlural: "Traumas"
   
-  Injury {
+  Trauma {
     id: self
     injury_id : -1
   }

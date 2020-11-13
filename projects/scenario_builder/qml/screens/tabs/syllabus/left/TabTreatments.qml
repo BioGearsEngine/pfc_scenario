@@ -11,9 +11,8 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 ColumnLayout {
   id : root
   property SQLBackend backend
-  readonly property alias model : listArea.model
-  readonly property alias index : listArea.currentIndex
-
+  property int topIndex
+  property Treatment currentTreatment : (treatmentList.TreatmentDefinitions[treatmentList.currentIndex]) ? treatmentList.TreatmentDefinitions[treatmentList.currentIndex] : currentTreatment
 
   Treatment {
     id : currentTreatment
@@ -23,7 +22,6 @@ ColumnLayout {
     id : listRectangle
     Layout.fillWidth : true
     Layout.fillHeight : true
-    Layout.margins : 5
 
     border.color : "black"
 
@@ -135,7 +133,7 @@ ColumnLayout {
           font.weight : Font.Bold
           font.pointSize : 10
           enabled : false
-          color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
+          color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
         }
 
         Text {
@@ -158,7 +156,7 @@ ColumnLayout {
             }
           }
           enabled : false
-          color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
+          color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
           elide : Text.ElideRight
         }
 
@@ -201,6 +199,25 @@ ColumnLayout {
           });
         }
       }
+    }
+  }
+  function rebuildTreatments() {
+    treatmentList.treatments = []
+    let treatments = root.backend.treatments;
+    for (var ii = 0; ii < treatments.length; ++ ii) {
+      treatmentList.treatments.push(treatment.make());
+      treatmentList.treatments[treatmentList.treatments.length - 1].assign(treatments[ii]);
+    }
+    treatmentList.model = treatmentList.treatments;
+  }
+
+  Component.onCompleted : {
+    rebuildTreatments()
+  }
+
+  onBackendChanged : {
+    if (backend) {
+      backend.treatmentsChanged.connect(rebuildTreatments)
     }
   }
 }

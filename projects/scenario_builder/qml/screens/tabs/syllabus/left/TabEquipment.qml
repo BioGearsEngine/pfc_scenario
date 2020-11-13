@@ -12,7 +12,7 @@ ColumnLayout {
   id : root
   property SQLBackend backend
   property int topIndex
-  property Equipment currentEquipment : ( equipmentList.equipmentDefinitions[equipmentList.currentIndex] ) ? equipmentList.equipmentDefinitions[equipmentList.currentIndex] : currentEquipment
+  property Equipment currentEquipment : (equipmentList.equipmentDefinitions[equipmentList.currentIndex]) ? equipmentList.equipmentDefinitions[equipmentList.currentIndex] : currentEquipment
 
   signal reloadEquipmentList();
 
@@ -22,7 +22,7 @@ ColumnLayout {
   function refresh_equipment() {
 
     var list = root.backend.getEquipment()
-    for ( var ii = 0; ii < list.count; ++i) {
+    for (var ii = 0; ii < list.count; ++i) {
       equipmentList.equipmentDefinitions.push(list[i].make())
       equipmentList.equipmentDefinitions[equipmentList.equipmentDefinitions.length - 1].assign(list[i])
     }
@@ -32,7 +32,6 @@ ColumnLayout {
     id : listRectangle
     Layout.fillWidth : true
     Layout.fillHeight : true
-    Layout.margins : 5
 
     border.color : "black"
 
@@ -57,7 +56,7 @@ ColumnLayout {
         currentEquipment.equipment_id = -1;
         currentEquipment.type = "Type %1".arg(next);
         currentEquipment.name = "New Equipment %1".arg(next);
-		    currentEquipment.summary = "Summary of Equipment %1".arg(next);
+        currentEquipment.summary = "Summary of Equipment %1".arg(next);
         currentEquipment.description = "Description of Equipment %1".arg(next);
         currentEquipment.image = "";
         currentEquipment.citations = "";
@@ -73,7 +72,7 @@ ColumnLayout {
           "id": currentEquipment.equipment_id,
           "type": currentEquipment.type, // Change this to not be default later
           "name": "%1".arg(currentEquipment.name),
-		      "summary": "%1".arg(currentEquipment.summary),
+          "summary": "%1".arg(currentEquipment.summary),
           "description": "%1".arg(currentEquipment.description),
           "citations": currentEquipment.citations,
           "image": currentEquipment.image
@@ -141,7 +140,7 @@ ColumnLayout {
           anchors.left : equipment.left
           anchors.leftMargin : 5
           text : (currentDef) ? currentDef.name : ""
-            
+
 
           width : 150
           font.weight : Font.Bold
@@ -160,66 +159,83 @@ ColumnLayout {
           wrapMode : Text.Wrap
           text : {
             if (currentDef) {
-            if (!enabled) {
-              return currentDef.summary
-            } else {
-              if (currentDef.description === "") {
+              if (!enabled) {
                 return currentDef.summary
               } else {
-                return currentDef.description
-              }
+                if (currentDef.description === "") {
+                  return currentDef.summary
+                } else {
+                  return currentDef.description
+                }
 
+              }
+            } else {
+              return ""
             }
-          } else {
-            return ""
+          }
+          enabled : false
+          color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
+          elide : Text.ElideRight
+        }
+
+        states : State {
+          name : "Selected"
+          PropertyChanges {
+            target : equipment_title_text;
+            enabled : true
+          }
+          PropertyChanges {
+            target : equipment_value_text;
+            enabled : true
           }
         }
-        enabled : false
-        color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
-        elide : Text.ElideRight
-      }
 
-      states : State {
-        name : "Selected"
-        PropertyChanges {
-          target : equipment_title_text;
-          enabled : true
-        }
-        PropertyChanges {
-          target : equipment_value_text;
-          enabled : true
+        onFocusChanged : {
+          if (equipmentList.currentIndex == index) {
+            state = 'Selected';
+          } else {
+            state = '';
+          }
         }
       }
 
-      onFocusChanged : {
-        if (equipmentList.currentIndex == index) {
-          state = 'Selected';
-        } else {
-          state = '';
+      ScrollBar.vertical : ScrollBar {}
+
+      Component.onCompleted : {
+        var r_count = backend.equipment_count();
+        root.backend.equipments();
+        equipmentList.equipmentDefinitions = [];
+        while (root.backend.next_equipment(currentEquipment)) {
+          equipmentList.equipmentDefinitions.push(currentEquipment.make())
+          equipmentList.equipmentDefinitions[equipmentList.equipmentDefinitions.length - 1].assign(currentEquipment)
         }
+        equipmentList.model = equipmentList.equipmentDefinitions
       }
     }
+  }
+  onTopIndexChanged : {
+    refresh_equipment()
+  }
+  onReloadEquipmentList : {
+    refresh_equipment()
+  }
+  function rebuildEquipments() {
+    equipmentList.equipments = []
+    let equipments = root.backend.equipments;
+    for (var ii = 0; ii < equipments.length; ++ ii) {
+      equipmentList.equipments.push(equipment.make());
+      equipmentList.equipments[equipmentList.equipments.length - 1].assign(equipments[ii]);
+    }
+    equipmentList.model = equipmentList.equipments;
+  }
 
-    ScrollBar.vertical : ScrollBar {}
+  Component.onCompleted : {
+    rebuildEquipments()
+  }
 
-    Component.onCompleted : {
-      var r_count = backend.equipment_count();
-      root.backend.equipments();
-      equipmentList.equipmentDefinitions = [];
-      while (root.backend.next_equipment(currentEquipment)) {
-        equipmentList.equipmentDefinitions.push(currentEquipment.make())
-        equipmentList.equipmentDefinitions[equipmentList.equipmentDefinitions.length - 1].assign(currentEquipment)
-      }
-      equipmentList.model = equipmentList.equipmentDefinitions
+  onBackendChanged : {
+    if (backend) {
+      backend.equipmentsChanged.connect(rebuildEquipments)
     }
   }
 }
-onTopIndexChanged : {
-  refresh_equipment()
-}
-onReloadEquipmentList : {
-  refresh_equipment()
-}}/*##^## Designer {
-    D{i:0;autoSize:true;height:480;width:640}
-}
- ##^##*/

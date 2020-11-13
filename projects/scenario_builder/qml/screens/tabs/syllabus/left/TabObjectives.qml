@@ -11,18 +11,17 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 ColumnLayout {
   id : root
   property SQLBackend backend
-  readonly property alias model : listArea.model
-  readonly property alias index : listArea.currentIndex
+  property int topIndex
+  property Objective currentObjective : ( objectiveList.objectiveDefinitions[objectiveList.currentIndex] ) ? objectiveList.objectiveDefinitions[objectiveList.currentIndex] : currentObjective
 
   Objective {
-    id : self
+    id : objective
   }
 
   Rectangle {
     id : listRectangle
     Layout.fillWidth : true
     Layout.fillHeight : true
-    Layout.margins : 5
 
     border.color : "black"
 
@@ -44,23 +43,23 @@ ColumnLayout {
         if (next < root.model.count) {
           next = root.model.count + 1
         }
-        self.objective_id = -1;
-        self.name = "New Objective %1".arg(next);
-        self.description = "Description of Objective %1".arg(next);
-        self.citations = "";
-        while (root.backend.select_objective(self)) {
+        objective.objective_id = -1;
+        objective.name = "New Objective %1".arg(next);
+        objective.description = "Description of Objective %1".arg(next);
+        objective.citations = "";
+        while (root.backend.select_objective(objective)) {
           next = next + 1
-          self.objective_id = -1;
-          self.name = "New Objective %1".arg(next);
-          self.description = "Description of Objective %1".arg(next)
+          objective.objective_id = -1;
+          objective.name = "New Objective %1".arg(next);
+          objective.description = "Description of Objective %1".arg(next)
         }
-        self.uuid = 0;
-        root.backend.update_objective(self);
+        objective.uuid = 0;
+        root.backend.update_objective(objective);
         root.model.insert(root.model.count, {
-          "id": self.objective_id,
-          "name": "%1".arg(self.name),
-          "description": "%1".arg(self.description),
-          "citations": self.citations
+          "id": objective.objective_id,
+          "name": "%1".arg(objective.name),
+          "description": "%1".arg(objective.description),
+          "citations": objective.citations
         });
         ++next;
       }
@@ -68,16 +67,18 @@ ColumnLayout {
         if (root.model.count == 0) {
           return
         }
-        self.objective_id = -1;
-        self.name = root.model.get(root.index).name;
-        root.backend.remove_objective(self);
+        objective.objective_id = -1;
+        objective.name = root.model.get(root.index).name;
+        root.backend.remove_objective(objective);
         root.model.remove(root.index);
-        listArea.currentIndex = Math.max(0, root.index - 1)
+        objectiveList.currentIndex = Math.max(0, root.index - 1)
       }
     }
 
     ListView {
-      id : listArea
+      id : objectiveList
+      property var objectives
+
       anchors {
         top : controls.bottom;
         bottom : parent.bottom;
@@ -111,7 +112,7 @@ ColumnLayout {
         MouseArea {
           anchors.fill : parent
           onClicked : {
-            listArea.currentIndex = index
+            objectiveList.currentIndex = index
 
           }
         }
@@ -120,12 +121,12 @@ ColumnLayout {
           id : objective_title_text
           anchors.left : objective.left
           anchors.leftMargin : 5
-          text : model.name
+          text : (objectiveList.objectives[index]) ? objectiveList.objectives[index].name : ""
           width : 150
           font.weight : Font.Bold
           font.pointSize : 10
           enabled : false
-          color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
+          color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
         }
 
         Text {
@@ -137,18 +138,19 @@ ColumnLayout {
           font.pointSize : 10
           wrapMode : Text.Wrap
           text : {
+            let l_description = (objectiveList.objectives[index]) ? objectiveList.objectives[index].description : ""
             if (!enabled) {
-              return description.split("\n")[0].trim()
+              return l_description.split("\n")[0].trim()
             } else {
-              var details = description.split("\n")
+              var details = l_description.split("\n")
               details.splice(0, 1)
               var details_str = details.join('\n').trim()
-              return(details_str === "") ? description.trim() : details_str
+              return(details_str === "") ? l_description.trim() : details_str
 
             }
           }
           enabled : false
-          color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
+          color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
           elide : Text.ElideRight
         }
 
@@ -165,7 +167,7 @@ ColumnLayout {
         }
 
         onFocusChanged : {
-          if (listArea.currentIndex == index) {
+          if (objectiveList.currentIndex == index) {
             state = 'Selected';
           } else {
             state = '';
@@ -173,25 +175,26 @@ ColumnLayout {
         }
       }
       ScrollBar.vertical : ScrollBar {}
+    }
+  }
 
-      Component.onCompleted : {
-        var r_count = backend.objective_count();
-        root.backend.objectives();
-        listArea.model.clear();
-        while (root.backend.next_objective(self)) {
-          listArea.model.insert(listArea.model.count, {
-            id: self.objective_id,
-            name: "%1".arg(self.name),
-            description: "%1".arg(self.description),
-            citations: self.citations
-          });
-        }
-      }
+  function rebuildObjectives() {
+    objectiveList.objectives = []
+    let objectives = root.backend.objectives;
+    for (var ii = 0; ii < objectives.length; ++ ii) {
+      objectiveList.objectives.push(objective.make());
+      objectiveList.objectives[objectiveList.objectives.length - 1].assign(objectives[ii]);
+    }
+    objectiveList.model = objectiveList.objectives;
+  }
+
+  Component.onCompleted : {
+    rebuildObjectives()
+  }
+
+  onBackendChanged : {
+    if (backend) {
+      backend.objectivesChanged.connect(rebuildObjectives)
     }
   }
 }
-
-/*##^## Designer {
-    D{i:0;autoSize:true;height:480;width:640}
-}
- ##^##*/

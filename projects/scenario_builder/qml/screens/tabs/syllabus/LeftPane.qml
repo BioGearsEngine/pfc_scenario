@@ -9,24 +9,15 @@ import "left"
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
 Rectangle {
-  id: root
-  property alias currentIndex : syllabus_tabs.currentIndex
-  property alias objectiveModel  : objectives.model
-  property alias assessmentModel : assessments.model
-  property alias injuryModel     : injuries.model
-  property alias injurySetModel  : injurySets.model
-  property alias treatmentModel  : treatments.model
+  id : root
 
-  property alias objectiveIndex : objectives.index
-  property alias assessmentIndex: assessments.index
-  property alias injuryIndex    : injuries.index
-  property alias injurySetIndex : injurySets.index
-  property alias treatmentIndex : treatments.index
-  property alias syllabusIndex  : syllabus_tabs.currentIndex
-
-
+  property alias currentObjective : objectives.currentObjective
+  property alias currentAssessment : assessments.currentAssessment
+  property alias currentTrauma : traumas.currentTrauma
+  property alias currentProfile : traumaProfiles.currentProfile
+  property alias currentTreatment : treatments.currentTreatment
   property alias currentEquipment : equipment.currentEquipment
-  
+
   property SQLBackend backend
   property ListElement modelData
   property int topIndex
@@ -35,108 +26,107 @@ Rectangle {
     anchors.fill : root
 
     Shortcut {
-      id: f1
-      sequence: "F1"
-      onActivated: {
+      id : f1
+      sequence : "F1"
+      onActivated : {
         syllabus_tabs.currentIndex = 0
       }
     }
     Shortcut {
-      id: f2
-      sequence: "F2"
-      onActivated: {
+      id : f2
+      sequence : "F2"
+      onActivated : {
         syllabus_tabs.currentIndex = 1
       }
     }
     Shortcut {
-      id: f3
-      sequence: "F3"
-      onActivated: {
+      id : f3
+      sequence : "F3"
+      onActivated : {
         syllabus_tabs.currentIndex = 2
       }
     }
     Shortcut {
-      id: f4
-      sequence: "F4"
-      onActivated: {
+      id : f4
+      sequence : "F4"
+      onActivated : {
         syllabus_tabs.currentIndex = 3
       }
     }
     Shortcut {
-      id: f5
-      sequence: "F5"
-      onActivated: {
+      id : f5
+      sequence : "F5"
+      onActivated : {
         syllabus_tabs.currentIndex = 4
       }
     }
     Shortcut {
-      id: f6
-      sequence: "F6"
-      onActivated: {
+      id : f6
+      sequence : "F6"
+      onActivated : {
         syllabus_tabs.currentIndex = 5
       }
     }
     TabBar {
-      id: syllabus_tabs
-      Layout.fillWidth: true
-      font.pointSize: 8
+      id : syllabus_tabs
+      Layout.fillWidth : true
+      font.pointSize : 8
       currentIndex : 0
       height : 12
 
       TabButton {
-        id: objective_tab
-        text: "Objectives"
-        width: implicitWidth
+        id : objective_tab
+        text : "Objectives"
+        width : implicitWidth
       }
       TabButton {
-        id: injury_tab
-        text: "Traumas"
-        width: implicitWidth
+        id : trauma_tab
+        text : "Traumas"
+        width : implicitWidth
       }
       TabButton {
-        id: injury_set_tab
-        text: "Trauma Sets"
-        width: implicitWidth
+        id : trauma_set_tab
+        text : "Trauma Sets"
+        width : implicitWidth
       }
       TabButton {
-          id: treatment_tab
-        text: "Treatments"
-        width: implicitWidth
+        id : treatment_tab
+        text : "Treatments"
+        width : implicitWidth
       }
       TabButton {
-          id: equipment_tab
-        text: "Equipment"
-        width: implicitWidth
+        id : equipment_tab
+        text : "Equipment"
+        width : implicitWidth
       }
       TabButton {
-        id: assessment_tab
-        text: "Assessments"
-        width: implicitWidth
+        id : assessment_tab
+        text : "Assessments"
+        width : implicitWidth
       }
     }
 
     StackLayout {
-      id: syllabus_stack_left
-      Layout.fillHeight: true
-      Layout.fillWidth: true
-      currentIndex: syllabus_tabs.currentIndex
+      id : syllabus_stack_left
+      Layout.fillHeight : true
+      Layout.fillWidth : true
+      currentIndex : syllabus_tabs.currentIndex
 
-      TabObjectives{
+      TabObjectives {
         id : objectives
         Layout.fillHeight : true
         Layout.fillWidth : true
         backend : root.backend
       }
       TabTraumas {
-        id : injuries
+        id : traumas
         Layout.fillHeight : true
         Layout.fillWidth : true
         backend : root.backend
         topIndex : root.topIndex
-        syllabusIndex : root.syllabusIndex
       }
-      TabTraumaSets {
-        id : injurySets
+      TabTraumaProfiles {
+        id : traumaProfiles
         Layout.fillHeight : true
         Layout.fillWidth : true
         backend : root.backend
@@ -154,7 +144,7 @@ Rectangle {
         backend : root.backend
         topIndex : root.topIndex
       }
-      TabAssessments{
+      TabAssessments {
         id : assessments
         Layout.fillHeight : true
         Layout.fillWidth : true

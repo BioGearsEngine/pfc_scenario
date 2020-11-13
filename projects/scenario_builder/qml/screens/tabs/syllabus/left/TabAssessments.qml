@@ -11,8 +11,8 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 ColumnLayout {
   id : root
   property SQLBackend backend
-  readonly property alias model : listArea.model
-  readonly property alias index : listArea.currentIndex
+  property int topIndex
+  property Assessment currentAssessment : ( assessmentList.assessmentDefinitions[assessmentList.currentIndex] ) ? assessmentList.assessmentDefinitions[assessmentList.currentIndex] : currentAssessment
 
 
   Assessment {
@@ -23,8 +23,7 @@ ColumnLayout {
     id : listRectangle
     Layout.fillWidth : true
     Layout.fillHeight : true
-    Layout.margins : 5
-
+    
     border.color : "black"
 
     TwoButtonRow {
@@ -179,27 +178,25 @@ ColumnLayout {
       }
 
       ScrollBar.vertical : ScrollBar {}
+    }
+  }
+    function rebuildAssessments() {
+    assessmentList.assessments = []
+    let assessments = root.backend.assessments;
+    for (var ii = 0; ii < assessments.length; ++ ii) {
+      assessmentList.assessments.push(assessment.make());
+      assessmentList.assessments[assessmentList.assessments.length - 1].assign(assessments[ii]);
+    }
+    assessmentList.model = assessmentList.assessments;
+  }
 
-      Component.onCompleted : {
-        var r_count = backend.assessment_count();
-        root.backend.assessments();
-        listArea.model.clear();
-        while (root.backend.next_assessment(self)) {
+  Component.onCompleted : {
+    rebuildAssessments()
+  }
 
-          var js_citations = []
-          for (var citation in self.citations) {
-            js_citations.push(citation)
-          }
-          listArea.model.insert(listArea.model.count, {
-            id: self.assessment_id,
-            name: "%1".arg(self.name),
-            description: "%1".arg(self.description),
-            type: self.type,
-            available_points: self.available_points,
-            criteria: self.criteria
-          });
-        }
-      }
+  onBackendChanged : {
+    if (backend) {
+      backend.assessmentsChanged.connect(rebuildAssessments)
     }
   }
 }

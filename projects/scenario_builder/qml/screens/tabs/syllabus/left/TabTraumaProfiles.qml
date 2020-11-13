@@ -11,20 +11,19 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 ColumnLayout {
   id: root
   property SQLBackend backend
-  readonly property alias model : listArea.model 
-  readonly property alias index : listArea.currentIndex
+  property int topIndex
+  property TraumaProfile currentProfile : ( traumaSetsList.traumaSetsDefinitions[traumaSetsList.currentIndex] ) ? traumaSetsList.traumaSetsDefinitions[traumaSetsList.currentIndex] : currentTraumaProfiles
 
 
-  InjurySet {
-    id : self
+  TraumaProfile {
+    id : traumaProfile
   }
 
   Rectangle {
     id : listRectangle
     Layout.fillWidth : true
     Layout.fillHeight: true
-    Layout.margins : 5
-
+    
     border.color : "black"
 
     TwoButtonRow {
@@ -44,30 +43,30 @@ ColumnLayout {
       onFirstButtonClicked :{
         if( next < root.model.count ) 
         { next = root.model.count +1}
-        self.injury_set_id = -1
-        self.name = "New TraumaSet %1".arg(next)
-        self.description = ""
-        self.injuries = ""
-        self.severities = ""
-        self.locations = ""
+        traumaProfile.injury_set_id = -1
+        traumaProfile.name = "New TraumaSet %1".arg(next)
+        traumaProfile.description = ""
+        traumaProfile.injuries = ""
+        traumaProfile.severities = ""
+        traumaProfile.locations = ""
 
-        while( root.backend.select_injury_set(self) )
+        while( root.backend.select_injury_set(traumaProfile) )
         { 
          next = next +1
-         self.injury_set_id = -1; 
-         self.name = "New TraumaSet %1".arg(next);
-         self.description = ""
+         traumaProfile.injury_set_id = -1; 
+         traumaProfile.name = "New TraumaSet %1".arg(next);
+         traumaProfile.description = ""
         } 
-        self.uuid=""
-        root.backend.update_injury_set(self)
+        traumaProfile.uuid=""
+        root.backend.update_injury_set(traumaProfile)
         root.model.insert(root.model.count,
           {
-           "id" : self.injury_set_id,
-           "name": "%1".arg(self.name), 
-           "description": "%1".arg(self.description) , 
-           "injuries": self.injuries,
-           "severities": self.severities,
-           "locations": self.locations,
+           "id" : traumaProfile.injury_set_id,
+           "name": "%1".arg(traumaProfile.name), 
+           "description": "%1".arg(traumaProfile.description) , 
+           "injuries": traumaProfile.injuries,
+           "severities": traumaProfile.severities,
+           "locations": traumaProfile.locations,
           }
         );
         ++next;
@@ -76,10 +75,10 @@ ColumnLayout {
         if (root.model.count == 0) {
           return
         }
-        self.injury_set_id = -1
-        self.name = root.model.get(root.index).name
+        traumaProfile.injury_set_id = -1
+        traumaProfile.name = root.model.get(root.index).name
 
-        root.backend.remove_injury_set(self)
+        root.backend.remove_injury_set(traumaProfile)
         root.model.remove(root.index)
         listArea.currentIndex = Math.max(0,root.index-1)
       }
@@ -164,23 +163,38 @@ ColumnLayout {
         var r_count = backend.injury_set_count();
         root.backend.injury_sets()
         listArea.model.clear();
-        while ( root.backend.next_injury_set(self) ){
+        while ( root.backend.next_injury_set(traumaProfile) ){
           listArea.model.insert(listArea.model.count,
             {
-             id : self.injury_set_id,
-             name: "%1".arg(self.name),
-             description: "%1".arg(self.description) , 
-             injuries: self.injuries,
-             locations: self.locations,
-             severities: self.severities,
+             id : traumaProfile.injury_set_id,
+             name: "%1".arg(traumaProfile.name),
+             description: "%1".arg(traumaProfile.description) , 
+             injuries: traumaProfile.injuries,
+             locations: traumaProfile.locations,
+             severities: traumaProfile.severities,
             });
         }
       }
     }
   }
+    function rebuildTraumaProfiless() {
+    traumaProfilesList.traumaProfiless = []
+    let traumaProfiless = root.backend.traumaProfiless;
+    for (var ii = 0; ii < traumaProfiless.length; ++ ii) {
+      traumaProfilesList.traumaProfiless.push(traumaProfiles.make());
+      traumaProfilesList.traumaProfiless[traumaProfilesList.traumaProfiless.length - 1].assign(traumaProfiless[ii]);
+    }
+    traumaProfilesList.model = traumaProfilesList.traumaProfiless;
+  }
+
+  Component.onCompleted : {
+    rebuildTraumaProfiless()
+  }
+
+  onBackendChanged : {
+    if (backend) {
+      backend.traumaProfilessChanged.connect(rebuildTraumaProfiless)
+    }
+  }
 }
 
-/*##^## Designer {
-    D{i:0;autoSize:true;height:480;width:640}
-}
- ##^##*/

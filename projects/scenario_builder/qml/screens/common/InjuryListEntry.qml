@@ -18,7 +18,7 @@ ListEntry {
   label: "Trauma"
   labelPlaural: "Traumas"
   
-  Injury {
+  Trauma {
     id: self
     injury_id : -1
   }

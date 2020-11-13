@@ -11,27 +11,25 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 ColumnLayout {
   id : root
   property SQLBackend backend
-  readonly property alias model : listArea.model
-  readonly property alias index : listArea.currentIndex
   property int topIndex
-  property int syllabusIndex
+  property Trauma currentTrauma : (traumaList.traumaDefinitions[traumaList.currentIndex]) ? traumaList.traumaDefinitions[traumaList.currentIndex] : currentTrauma
 
-  Injury {
-    id : currentInjury
+  Trauma {
+    id : currentTrauma
   }
   function refresh_traumas() {
     var r_count = backend.injury_count();
     root.backend.injuries();
     listArea.model.clear();
-    while (root.backend.next_injury(currentInjury)) {
+    while (root.backend.next_injury(currentTrauma)) {
       listArea.model.insert(listArea.model.count, {
-        id: currentInjury.injury_id,
-        medical_name: "%1".arg(currentInjury.medical_name),
-        common_name: "%1".arg(currentInjury.common_name),
-        description: "%1".arg(currentInjury.description),
-        min: currentInjury.min,
-        max: currentInjury.max,
-        citations: currentInjury.citations
+        id: currentTrauma.injury_id,
+        medical_name: "%1".arg(currentTrauma.medical_name),
+        common_name: "%1".arg(currentTrauma.common_name),
+        description: "%1".arg(currentTrauma.description),
+        min: currentTrauma.min,
+        max: currentTrauma.max,
+        citations: currentTrauma.citations
       });
     }
   }
@@ -39,7 +37,6 @@ ColumnLayout {
     id : listRectangle
     Layout.fillWidth : true
     Layout.fillHeight : true
-    Layout.margins : 5
 
     border.color : "black"
 
@@ -62,30 +59,30 @@ ColumnLayout {
         if (next < root.model.count) {
           next = root.model.count + 1
         }
-        currentInjury.injury_id = -1;
-        currentInjury.medical_name = "New Trauma %1".arg(next);
-        currentInjury.common_name = "New Trauma %1".arg(next);
-        currentInjury.description = "Description of Trauma %1".arg(next);
-        currentInjury.citations = "";
-        currentInjury.min = 0.0;
-        currentInjury.max = 1.0;
-        while (root.backend.select_injury(currentInjury)) {
+        currentTrauma.injury_id = -1;
+        currentTrauma.medical_name = "New Trauma %1".arg(next);
+        currentTrauma.common_name = "New Trauma %1".arg(next);
+        currentTrauma.description = "Description of Trauma %1".arg(next);
+        currentTrauma.citations = "";
+        currentTrauma.min = 0.0;
+        currentTrauma.max = 1.0;
+        while (root.backend.select_injury(currentTrauma)) {
           next = next + 1
-          currentInjury.injury_id = -1;
-          currentInjury.medical_name = "New Trauma %1".arg(next);
-          currentInjury.common_name = "New Trauma %1".arg(next);
-          currentInjury.description = "Description of Trauma %1".arg(next)
+          currentTrauma.injury_id = -1;
+          currentTrauma.medical_name = "New Trauma %1".arg(next);
+          currentTrauma.common_name = "New Trauma %1".arg(next);
+          currentTrauma.description = "Description of Trauma %1".arg(next)
         }
-        currentInjury.uuid = "";
-        root.backend.update_injury(currentInjury);
+        currentTrauma.uuid = "";
+        root.backend.update_injury(currentTrauma);
         root.model.insert(root.model.count, {
-          "id": currentInjury.injury_id,
-          "medical_name": "%1".arg(currentInjury.medical_name),
-          "common_name": "%1".arg(currentInjury.common_name),
-          "description": "%1".arg(currentInjury.description),
-          "citations": currentInjury.citations,
-          "min": currentInjury.min,
-          "max": currentInjury.max
+          "id": currentTrauma.injury_id,
+          "medical_name": "%1".arg(currentTrauma.medical_name),
+          "common_name": "%1".arg(currentTrauma.common_name),
+          "description": "%1".arg(currentTrauma.description),
+          "citations": currentTrauma.citations,
+          "min": currentTrauma.min,
+          "max": currentTrauma.max
 
         });
         ++next;
@@ -94,11 +91,11 @@ ColumnLayout {
         if (root.model.count == 0) {
           return
         }
-        currentInjury.injury_id = -1;
-        currentInjury.medical_name = root.model.get(root.index).medical_name;
-        root.backend.remove_injury(currentInjury);
+        currentTrauma.injury_id = -1;
+        currentTrauma.medical_name = root.model.get(root.index).medical_name;
+        root.backend.remove_injury(currentTrauma);
         root.model.remove(root.index);
-		if (listArea.currentIndex == 0) { // If the index was 0 this wasn't registering as an index change and the right pane wasn't reloading
+        if (listArea.currentIndex == 0) { // If the index was 0 this wasn't registering as an index change and the right pane wasn't reloading
           listArea.currentIndex = 1
         }
         listArea.currentIndex = Math.max(0, root.index - 1)
@@ -154,12 +151,12 @@ ColumnLayout {
           font.weight : Font.Bold
           font.pointSize : 10
           enabled : false
-          color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
+          color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
         }
 
         Text {
           id : trauma_value_text
-          anchors.top :trauma_title_text.bottom
+          anchors.top : trauma_title_text.bottom
           anchors.left : parent.left
           anchors.right : parent.right
           anchors.leftMargin : 10
@@ -177,7 +174,7 @@ ColumnLayout {
             }
           }
           enabled : false
-          color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
+          color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
           elide : Text.ElideRight
         }
 
@@ -203,25 +200,27 @@ ColumnLayout {
       }
 
       ScrollBar.vertical : ScrollBar {}
+      
+    }
+  }
 
-      Component.onCompleted : {
-        refresh_traumas()
-      }
+  function rebuildTraumas() {
+    traumaList.traumas = []
+    let traumas = root.backend.traumas;
+    for (var ii = 0; ii < traumas.length; ++ ii) {
+      traumaList.traumas.push(trauma.make());
+      traumaList.traumas[traumaList.traumas.length - 1].assign(traumas[ii]);
     }
+    traumaList.model = traumaList.traumas;
   }
-  onSyllabusIndexChanged : {
-    if (syllabusIndex == 1) {
-      refresh_traumas()
-    }
+
+  Component.onCompleted : {
+    rebuildTraumas()
   }
-  onTopIndexChanged : {
-    if (topIndex == 1) {
-      refresh_traumas()
+
+  onBackendChanged : {
+    if (backend) {
+      backend.traumasChanged.connect(rebuildTraumas)
     }
   }
 }
-
-/*##^## Designer {
-    D{i:0;autoSize:true;height:480;width:640}
-}
- ##^##*/

@@ -150,7 +150,7 @@ bool SQLite3Driver::open(QString name)
   _db_name = name;
   return open();
 }
-//------------------------------------------------------------------------------
+//------------------------------------------------  ------------------------------
 bool SQLite3Driver::open()
 {
   if (!QSqlDatabase::database(_db_name).isValid()) {

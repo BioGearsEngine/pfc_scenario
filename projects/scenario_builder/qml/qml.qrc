@@ -32,13 +32,13 @@
         <file>screens/tabs/syllabus/left/TabAssessments.qml</file>
         <file>screens/tabs/syllabus/left/TabEquipment.qml</file>
         <file>screens/tabs/syllabus/left/TabTraumas.qml</file>
-        <file>screens/tabs/syllabus/left/TabTraumaSets.qml</file>
+        <file>screens/tabs/syllabus/left/TabTraumaProfiles.qml</file>
         <file>screens/tabs/syllabus/left/TabObjectives.qml</file>
         <file>screens/tabs/syllabus/left/TabTreatments.qml</file>
         <file>screens/tabs/syllabus/right/TabAssessments.qml</file>
         <file>screens/tabs/syllabus/right/TabEquipment.qml</file>
         <file>screens/tabs/syllabus/right/TabTraumas.qml</file>
-        <file>screens/tabs/syllabus/right/TabTraumaSets.qml</file>
+        <file>screens/tabs/syllabus/right/TabTraumaProfiles.qml</file>
         <file>screens/tabs/syllabus/right/TabObjectives.qml</file>
         <file>screens/tabs/syllabus/right/TabTreatments.qml</file>
 

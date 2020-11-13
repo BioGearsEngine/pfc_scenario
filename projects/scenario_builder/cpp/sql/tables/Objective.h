@@ -24,10 +24,10 @@ struct Citation;
 
 struct Objective : public QObject {
   Q_OBJECT
-  Q_PROPERTY(int objective_id MEMBER id)
-  Q_PROPERTY(QString uuid MEMBER uuid)
-  Q_PROPERTY(QString name MEMBER name)
-  Q_PROPERTY(QString description MEMBER description)
+  Q_PROPERTY(int objective_id MEMBER id NOTIFY idChanged)
+  Q_PROPERTY(QString uuid MEMBER uuid NOTIFY uuidCHanged)
+  Q_PROPERTY(QString name MEMBER name NOTIFY nameChanged)
+  Q_PROPERTY(QString description MEMBER description NOTIFY descriptionChanged)
 
   Q_PROPERTY(QQmlListProperty<Citation> citations READ getCitations NOTIFY citationsChanged)
   Q_PROPERTY(QQmlListProperty<Citation> cpgs READ getCPGS NOTIFY cpgsChanged)
@@ -61,6 +61,10 @@ public:
 
   void clear();
 signals:
+  void idChanged();
+  void uuidCHanged();
+  void nameChanged();
+  void descriptionChanged();
   void citationsChanged();
   void cpgsChanged();
   void treatmentsChanged();

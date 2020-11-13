@@ -25,6 +25,10 @@ RowLayout {
   // TAB:SUMMARY_RIGHTWINDOW
   RightPane {
     id : narrative_right
+    
+    Layout.bottomMargin : 5 
+    Layout.rightMargin : 5 
+
     backend : root.backend
     model : narrative_left.model
     index : narrative_left.index

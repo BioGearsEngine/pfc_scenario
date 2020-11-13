@@ -9,46 +9,42 @@ import "../common"
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
 GridLayout {
-  id: root
+  id : root
   property SQLBackend backend
   property int topIndex
 
-  width: parent.width
-  height: parent.height
-  columns: 2
-  
-  LeftPane{
-    id: syllabus_leftPane
+
+  width : parent.width
+  height : parent.height
+  columns : 2
+
+  LeftPane {
+    id : syllabus_leftPane
+
+    Layout.leftMargin : 5
+    Layout.bottomMargin : 5
+
     backend : root.backend
     topIndex : root.topIndex
-    Layout.preferredWidth: parent.width / 2
-    Layout.fillHeight: true
+    Layout.preferredWidth : parent.width / 2
+    Layout.fillHeight : true
   }
 
-  RightPane{
-    id: syllabus_rightPane
+  RightPane {
+    id : syllabus_rightPane
+
+    Layout.rightMargin : 5
+    Layout.bottomMargin : 5
+
     backend : root.backend
-    topIndex : root.topIndex 
-    syllabusIndex : syllabus_leftPane.syllabusIndex
-    currentIndex : syllabus_leftPane.currentIndex
-    
-    objectiveModel  : syllabus_leftPane.objectiveModel
-    assessmentModel : syllabus_leftPane.assessmentModel
-    injuryModel     : syllabus_leftPane.injuryModel
-    injurySetModel  : syllabus_leftPane.injurySetModel
-    treatmentModel  : syllabus_leftPane.treatmentModel
+    topIndex : root.topIndex
 
+    currentAssessment : syllabus_leftPane.currentAssessment
+    currentEquipment : syllabus_leftPane.currentEquipment
+    currentObjective : syllabus_leftPane.currentObjective
+    currentTrauma : syllabus_leftPane.currentTrauma
+    currentProfile : syllabus_leftPane.currentProfile
 
-    objectiveIndex  : syllabus_leftPane.objectiveIndex
-    assessmentIndex : syllabus_leftPane.assessmentIndex
-    injuryIndex     : syllabus_leftPane.injuryIndex
-    injurySetIndex  : syllabus_leftPane.injurySetIndex
-    treatmentIndex  : syllabus_leftPane.treatmentIndex
-
-    currentEquipment  : syllabus_leftPane.currentEquipment
-
-    Component.onCompleted: {
-      
-    }
+    Component.onCompleted : {}
   }
 }
