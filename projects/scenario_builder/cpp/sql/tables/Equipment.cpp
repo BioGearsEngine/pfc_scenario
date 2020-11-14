@@ -66,7 +66,7 @@ void Equipment::clear(int index)
   name = QString("New Equipment:%1").arg(index);
   description = QString("Undefined equipment %1.").arg(index);
   type = -1;
-  summary.clear();
+  summary = QString("summary for equipment %1.").arg(index);
   citations.clear();
   image.clear();
   properties.clear();

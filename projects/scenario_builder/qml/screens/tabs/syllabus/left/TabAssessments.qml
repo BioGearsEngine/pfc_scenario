@@ -12,19 +12,28 @@ ColumnLayout {
   id : root
   property SQLBackend backend
   property int topIndex
-  property Assessment currentAssessment : ( assessmentList.assessmentDefinitions[assessmentList.currentIndex] ) ? 
-                                            assessmentList.assessmentDefinitions[assessmentList.currentIndex] : currentAssessment
+  property Assessment currentAssessment : (assessmentList.assessmentDefinitions[assessmentList.currentIndex]) ? assessmentList.assessmentDefinitions[assessmentList.currentIndex] : currentAssessment
 
 
   Assessment {
     id : currentAssessment
   }
 
+  function update_assessments() {
+    assessmentList.assessmentDefinitions = []
+    let assessments = root.backend.assessments;
+    for (var ii = 0; ii < assessments.length; ++ ii) {
+      assessmentList.assessmentDefinitions.push(currentAssessment.make());
+      assessmentList.assessmentDefinitions[assessmentList.assessmentDefinitions.length - 1].assign(assessments[ii]);
+    }
+    assessmentList.model = assessmentList.assessmentDefinitions;
+  }
+
   Rectangle {
     id : listRectangle
     Layout.fillWidth : true
     Layout.fillHeight : true
-    
+
     border.color : "black"
 
     TwoButtonRow {
@@ -51,13 +60,13 @@ ColumnLayout {
         assessmentList.currentIndex = assessmentList.assessmentDefinitions.length - 1
       }
       onSecondButtonClicked : {
-        if (root.model.count == 0) {
+        if (!assessmentList.assessmentDefinitions || assessmentList.assessmentDefinitions.length < 2) {
           return
         }
-        currentAssessment.clear()
-        currentAssessment.name = root.model.get(root.index).name;
+        currentAssessment.clear();
+        currentAssessment.assign(assessmentList.assessmentDefinitions[assessmentList.currentIndex]);
         root.backend.remove_assessment(currentAssessment);
-        rebuildObjectives()
+        update_assessments();
         assessmentList.currentIndex = Math.max(0, root.index - 1)
       }
     }
@@ -87,7 +96,7 @@ ColumnLayout {
 
       delegate : Rectangle {
         id : assessment
-        property var currentDef : assessmentList.assessmentDefinitions[index]
+        property var currentDef: assessmentList.assessmentDefinitions[index]
         color : 'transparent'
         border.color : "steelblue"
         height : assessment_title_text.height + assessment_value_text.height
@@ -114,7 +123,7 @@ ColumnLayout {
           font.weight : Font.Bold
           font.pointSize : 10
           enabled : false
-          color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
+          color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
         }
 
         Text {
@@ -126,7 +135,7 @@ ColumnLayout {
           font.pointSize : 10
           wrapMode : Text.Wrap
           text : {
-            let l_description = (currentDef) ? currentDef.description : ""
+            let l_description = (currentDef) ? currentDef.description : "";
             if (!enabled) {
               return l_description.split("\n")[0].trim()
             } else {
@@ -138,7 +147,7 @@ ColumnLayout {
             }
           }
           enabled : false
-          color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
+          color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
           elide : Text.ElideRight
         }
 
@@ -166,23 +175,15 @@ ColumnLayout {
       ScrollBar.vertical : ScrollBar {}
     }
   }
-    function rebuildAssessments() {
-    assessmentList.assessmentDefinitions = []
-    let assessments = root.backend.assessments;
-    for (var ii = 0; ii < assessments.length; ++ ii) {
-      assessmentList.assessmentDefinitions.push(currentAssessment.make());
-      assessmentList.assessmentDefinitions[assessmentList.assessmentDefinitions.length - 1].assign(assessments[ii]);
-    }
-    assessmentList.model = assessmentList.assessmentDefinitions;
-  }
+
 
   Component.onCompleted : {
-    rebuildAssessments()
+    update_assessments()
   }
 
   onBackendChanged : {
     if (backend) {
-      backend.assessmentsChanged.connect(rebuildAssessments)
+      backend.assessmentsChanged.connect(update_assessments)
     }
   }
 }

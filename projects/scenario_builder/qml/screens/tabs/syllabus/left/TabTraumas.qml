@@ -18,6 +18,16 @@ ColumnLayout {
     id : currentTrauma
   }
 
+  function update_traumas() {
+    traumaList.traumaDefinitions = [];
+    let traumas = root.backend.traumas;
+    for (var ii = 0; ii < traumas.length; ++ ii) {
+      traumaList.traumaDefinitions.push(currentTrauma.make());
+      traumaList.traumaDefinitions[traumaList.traumaDefinitions.length - 1].assign(traumas[ii]);
+    }
+    traumaList.model = traumaList.traumaDefinitions;
+  }
+
   Rectangle {
     id : listRectangle
     Layout.fillWidth : true
@@ -55,7 +65,7 @@ ColumnLayout {
         currentTrauma.clear();
         currentTrauma.assign(traumaList.traumaDefinitions[traumaList.currentIndex]);
         root.backend.remove_trauma(currentTrauma);
-        rebuildTraumas();
+        update_traumas();
         traumaList.currentIndex = Math.max(0, root.index - 1)
       }
     }
@@ -104,7 +114,7 @@ ColumnLayout {
           id : trauma_title_text
           anchors.left : trauma.left
           anchors.leftMargin : 5
-          text : (traumaList.traumaDefinitions[index]) ? traumaList.traumaDefinitions[index].medical_name : ""
+          text : (traumaList.traumaDefinitions[index]) ? traumaList.traumaDefinitions[index].medicalName : ""
           width : 150
           font.weight : Font.Bold
           font.pointSize : 10
@@ -123,10 +133,10 @@ ColumnLayout {
           text : {
             if (traumaList.traumaDefinitions[index]) {
               if (!enabled) {
-                return traumaList.traumaDefinitions[index].common_name;
+                return traumaList.traumaDefinitions[index].commonName;
               } else {
                 if (traumaList.traumaDefinitions[index].description === "") {
-                  return traumaList.traumaDefinitions[index].common_name;
+                  return traumaList.traumaDefinitions[index].commonName;
                 } else {
                   return traumaList.traumaDefinitions[index].description;
                 }
@@ -166,23 +176,13 @@ ColumnLayout {
     }
   }
 
-  function rebuildTraumas() {
-    traumaList.traumaDefinitions = [];
-    let traumas = root.backend.traumas;
-    for (var ii = 0; ii < traumas.length; ++ ii) {
-      traumaList.traumaDefinitions.push(currentTrauma.make());
-      traumaList.traumaDefinitions[traumaList.traumaDefinitions.length - 1].assign(traumas[ii]);
-    }
-    traumaList.model = traumaList.traumaDefinitions;
-  }
-
   Component.onCompleted : {
-    rebuildTraumas()
+    update_traumas()
   }
 
   onBackendChanged : {
     if (backend) {
-      backend.traumasChanged.connect(rebuildTraumas)
+      backend.traumasChanged.connect(update_traumas)
     }
   }
 }

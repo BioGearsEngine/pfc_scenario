@@ -18,6 +18,16 @@ ColumnLayout {
     id : currentTreatment
   }
 
+  function update_treatments() {
+    treatmentList.treatmentDefinitions = []
+    let treatments = root.backend.treatments;
+    for (var ii = 0; ii < treatments.length; ++ ii) {
+      treatmentList.treatmentDefinitions.push(currentTreatment.make());
+      treatmentList.treatmentDefinitions[treatmentList.treatmentDefinitions.length - 1].assign(treatments[ii]);
+    }
+    treatmentList.model = treatmentList.treatmentDefinitions;
+  }
+
   Rectangle {
     id : listRectangle
     Layout.fillWidth : true
@@ -41,22 +51,22 @@ ColumnLayout {
 
       onFirstButtonClicked : {
         var likely_id = root.backend.nextID(SQLBackend.TREATMENTS);
-        currentTreatments.clear(likely_id);
-        root.backend.update_treatments(currentTreatments);
-        treatmentsList.treatmentsDefinitions.push(currentTreatments.make());
-        treatmentsList.treatmentsDefinitions[treatmentsList.treatmentsDefinitions.length - 1].assign(currentTreatments);
-        treatmentsList.model = treatmentsList.treatmentsDefinitions;
-        treatmentsList.currentIndex = treatmentsList.treatmentsDefinitions.length - 1
+        currentTreatment.clear(likely_id);
+        root.backend.update_treatment(currentTreatment);
+        treatmentList.treatmentDefinitions.push(currentTreatment.make());
+        treatmentList.treatmentDefinitions[treatmentList.treatmentDefinitions.length - 1].assign(currentTreatment);
+        treatmentList.model = treatmentList.treatmentDefinitions;
+        treatmentList.currentIndex = treatmentList.treatmentDefinitions.length - 1
       }
       onSecondButtonClicked : {
-        if (root.model.count == 0) {
+        if ( ! treatmentList.treatmentDefinitions || treatmentList.treatmentDefinitions.length < 2) {
           return
         }
-        currentTreatments.clear();
-        currentTreatments.name = root.model.get(root.index).name;
-        root.backend.remove_treatments(currentTreatments);
-        rebuildObjectives();
-        treatmentsList.currentIndex = Math.max(0, root.index - 1)
+        currentTreatment.clear();
+        currentTreatment.assign(treatmentList.treatmentDefinitions[treatmentList.currentIndex]);
+        root.backend.remove_treatment(currentTreatment);
+        update_treatments();
+        treatmentList.currentIndex = Math.max(0, root.index - 1)
       }
     }
 
@@ -163,23 +173,14 @@ ColumnLayout {
       ScrollBar.vertical : ScrollBar {}
     }
   }
-  function rebuildTreatments() {
-    treatmentList.treatmentDefinitions = []
-    let treatments = root.backend.treatments;
-    for (var ii = 0; ii < treatments.length; ++ ii) {
-      treatmentList.treatmentDefinitions.push(currentTreatment.make());
-      treatmentList.treatmentDefinitions[treatmentList.treatmentDefinitions.length - 1].assign(treatments[ii]);
-    }
-    treatmentList.model = treatmentList.treatmentDefinitions;
-  }
 
   Component.onCompleted : {
-    rebuildTreatments()
+    update_treatments()
   }
 
   onBackendChanged : {
     if (backend) {
-      backend.treatmentsChanged.connect(rebuildTreatments)
+      backend.treatmentsChanged.connect(update_treatments)
     }
   }
 }

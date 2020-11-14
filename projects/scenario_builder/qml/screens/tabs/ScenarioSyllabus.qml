@@ -42,6 +42,7 @@ GridLayout {
     currentAssessment : syllabus_leftPane.currentAssessment
     currentEquipment : syllabus_leftPane.currentEquipment
     currentObjective : syllabus_leftPane.currentObjective
+    currentTreatment : syllabus_leftPane.currentTreatment
     currentTrauma : syllabus_leftPane.currentTrauma
     currentProfile : syllabus_leftPane.currentProfile
 

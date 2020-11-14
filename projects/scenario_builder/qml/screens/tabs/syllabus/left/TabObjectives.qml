@@ -18,7 +18,7 @@ ColumnLayout {
     id : currentObjective
   }
 
-  function rebuildObjectives() {
+  function update_objectives() {
     objectiveList.objectiveDefinitions = []
     let objectives = root.backend.objectives;
     for (var ii = 0; ii < objectives.length; ++ ii) {
@@ -65,7 +65,7 @@ ColumnLayout {
         currentObjective.clear();
         currentObjective.assign(objectiveList.objectiveDefinitions[objectiveList.currentIndex]);
         root.backend.remove_objective(currentObjective);
-        rebuildObjectives();
+        update_objectives();
         objectiveList.currentIndex = Math.max(0, root.index - 1)
       }
     }
@@ -173,12 +173,12 @@ ColumnLayout {
   }
 
   Component.onCompleted : {
-    rebuildObjectives()
+    update_objectives()
   }
 
   onBackendChanged : {
     if (backend) {
-      backend.objectivesChanged.connect(rebuildObjectives)
+      backend.objectivesChanged.connect(update_objectives)
     }
   }
 }

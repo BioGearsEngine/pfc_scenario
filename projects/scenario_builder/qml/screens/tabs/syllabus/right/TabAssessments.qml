@@ -16,10 +16,6 @@ ColumnLayout {
   Layout.fillWidth : true
   Layout.fillHeight : true
 
-  Assessment {
-    id : currentAssessment
-  }
-
   Connections {
     target : backend
 
@@ -139,7 +135,7 @@ ColumnLayout {
         id : partialPointsEntry
         label : "Total Points"
         placeholderText : "String Field (128 Characters)"
-        text : (currentAssessment) ? currentAssessment.avaliablePoints : ""
+        text : (currentAssessment) ? "%1".arg(currentAssessment.availablePoints) : ""
         onEditingFinished : {
           if (text != currentAssessment.avaliablePoints) {
             currentAssessment.avaliablePoints = parseInt(text);

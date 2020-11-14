@@ -18,6 +18,16 @@ ColumnLayout {
     id : currentTraumaProfile
   }
 
+  function update_truamaProfiles() {
+    profileList.traumaProfiles = []
+    let traumaProfiles = root.backend.traumaProfiles;
+    for (var ii = 0; ii < traumaProfiles.length; ++ ii) {
+      profileList.traumaProfiles.push(currentTraumaProfile.make());
+      profileList.traumaProfiles[profileList.traumaProfiles.length - 1].assign(traumaProfiles[ii]);
+    }
+    profileList.model = profileList.traumaProfiles;
+  }
+
   Rectangle {
     id : listRectangle
     Layout.fillWidth : true
@@ -42,21 +52,21 @@ ColumnLayout {
       onFirstButtonClicked : {
         var likely_id = root.backend.nextID(SQLBackend.TRAUMA_PROFILES);
         currentTraumaProfile.clear(likely_id);
-        root.backend.update_traumaProfile(currentTraumaProfile);
-        traumaProfileList.traumaProfileDefinitions.push(currentTraumaProfile.make());
-        traumaProfileList.traumaProfileDefinitions[traumaProfileList.traumaProfileDefinitions.length - 1].assign(currentTraumaProfile);
-        traumaProfileList.model = traumaProfileList.traumaProfileDefinitions;
-        traumaProfileList.currentIndex = traumaProfileList.traumaProfileDefinitions.length - 1
+        root.backend.update_trauma_profile(currentTraumaProfile);
+        profileList.traumaProfiles.push(currentTraumaProfile.make());
+        profileList.traumaProfiles[profileList.traumaProfiles.length - 1].assign(currentTraumaProfile);
+        profileList.model = profileList.traumaProfiles;
+        profileList.currentIndex = profileList.traumaProfiles.length - 1
       }
       onSecondButtonClicked : {
-        if ( ! traumaProfilesList.traumaProfilesDefinitions || traumaProfilesList.traumaProfilesDefinitions.length < 2) {
+        if (!profileList.traumaProfiles || profileList.traumaProfiles.length < 2) {
           return
         }
-        currentTraumaProfiles.clear();
-        currentTraumaProfiles.assign(traumaProfilesList.traumaProfilesDefinitions[traumaProfilesList.currentIndex]);
-        root.backend.remove_traumaProfiles(currentTraumaProfiles);
-        rebuildTraumaProfiless();
-        traumaProfilesList.currentIndex = Math.max(0, root.index - 1)
+        currentTraumaProfile.clear();
+        currentTraumaProfile.assign(profileList.traumaProfiles[profileList.currentIndex]);
+        root.backend.remove_trauma_profile(currentTraumaProfile);
+        update_truamaProfiles();
+        profileList.currentIndex = Math.max(0, root.index - 1)
       }
     }
 
@@ -148,23 +158,14 @@ ColumnLayout {
       ScrollBar.vertical : ScrollBar {}
     }
   }
-  function rebuildtraumaProfiles() {
-    profileList.traumaProfiles = []
-    let traumaProfiles = root.backend.traumaProfiles;
-    for (var ii = 0; ii < traumaProfiles.length; ++ ii) {
-      profileList.traumaProfiles.push(currentTraumaProfile.make());
-      profileList.traumaProfiles[profileList.traumaProfiles.length - 1].assign(traumaProfiles[ii]);
-    }
-    profileList.model = profileList.traumaProfiles;
-  }
 
   Component.onCompleted : {
-    rebuildtraumaProfiles()
+    update_truamaProfiles()
   }
 
   onBackendChanged : {
     if (backend) {
-      backend.traumaProfilesChanged.connect(rebuildtraumaProfiles)
+      backend.traumaProfilesChanged.connect(update_truamaProfiles)
     }
   }
 }

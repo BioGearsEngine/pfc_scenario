@@ -64,7 +64,9 @@ signals:
   static Q_INVOKABLE Treatment* make();
   Q_INVOKABLE void assign(Treatment* rhs);
   void assign(const Treatment& rhs);
-  void clear();
+
+  Q_INVOKABLE void clear();
+  Q_INVOKABLE void clear(int index);
 
 
 private:

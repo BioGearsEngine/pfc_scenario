@@ -26,13 +26,13 @@ struct Trauma : public QObject {
   Q_OBJECT
   Q_PROPERTY(int injury_id MEMBER id NOTIFY idChanged);
   Q_PROPERTY(QString uuid MEMBER uuid NOTIFY uuidChanged)
-  Q_PROPERTY(QString medical_name MEMBER medical_name NOTIFY medicalNameChanged)
-  Q_PROPERTY(QString common_name MEMBER common_name NOTIFY commonNameChanged)
+  Q_PROPERTY(QString medicalName MEMBER medical_name NOTIFY medicalNameChanged)
+  Q_PROPERTY(QString commonName MEMBER common_name NOTIFY commonNameChanged)
   Q_PROPERTY(QString description MEMBER description NOTIFY descriptionChanged)
   Q_PROPERTY(QQmlListProperty<Citation> citations READ getCitations NOTIFY citationsChanged)
   Q_PROPERTY(float min MEMBER lower_bound NOTIFY lowerBoundChanged)
   Q_PROPERTY(float max MEMBER upper_bound NOTIFY upperBoundChanged)
-  Q_PROPERTY(Treatment* fk_treatment MEMBER fk_treatment NOTIFY treatmentChanged)
+  Q_PROPERTY(Treatment* treatment MEMBER fk_treatment NOTIFY treatmentChanged)
 
 signals:
   void idChanged();

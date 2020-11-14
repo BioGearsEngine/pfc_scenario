@@ -55,6 +55,18 @@ void Treatment::clear()
   citations.clear();
   cpgs.clear();
 }
+//-------------------------------------------------------------------------------
+void Treatment::clear(int index)
+{
+  id = -1;
+  uuid = "";
+  medical_name = QString("New Treatment:%1").arg(index);
+  common_name = QString("New Treatment:%1").arg(index);
+  description = QString("Undefined treatment %1.").arg(index);
+  equipment.clear();
+  citations.clear();
+  cpgs.clear();
+}
 //--------------------------------------------------------------------------------------------
 QQmlListProperty<Citation> Treatment::getCitations()
 {

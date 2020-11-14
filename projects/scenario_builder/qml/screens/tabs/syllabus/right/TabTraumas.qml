@@ -16,11 +16,6 @@ ColumnLayout {
   Layout.fillWidth : true
   Layout.fillHeight : true
 
-
-  Trauma {
-    id : obj
-  }
-
   Citation {
     id : citation
   }
@@ -28,46 +23,13 @@ ColumnLayout {
   Connections {
     target : backend
     onCitationRemoved : {}
-
     onEquipmentRemoved : {}
   }
 
 
-  function update_injury(values) {
-    obj.injury_id = values.id
-    obj.medical_name = values.medical_name
-    obj.common_name = values.common_name
-    obj.description = values.description
-    obj.citations = values.citations
-    obj.min = values.min
-    obj.max = values.max
-
-    root.backend.update_injury(obj)
-  }
-  function refresh_citations() {
-    var values = model.get(index)
-    if (values) {
-      medicalNameEntry.text = values.medical_name
-      commonNameEntry.text = values.common_name
-      descriptionEntry.text = values.description
-      severityEntry.min = values.min
-      severityEntry.max = values.max
-      referenceList.model.clear()
-
-      var citations = values.citations.split(";").filter(x => x);
-      for (var i = 0; i < citations.length; ++ i) {
-        citation.citation_id = parseInt(citations[i])
-        citation.key = ""
-        citation.title = ""
-        root.backend.select_citation(citation)
-        referenceList.model.insert(referenceList.model.count, {
-          "citation_id": "%1".arg(citation.citation_id),
-          "key": "%1".arg(citation.key),
-          "title": "%1".arg(citation.title),
-          "authors": "%1".arg(citation.authors),
-          "year": "%1".arg(citation.year)
-        });
-      }
+  function update_injury(citation) {
+    if (citation) {
+      root.backend.update_injury(citation)
     }
   }
 
@@ -78,12 +40,11 @@ ColumnLayout {
     id : medicalNameEntry
     label : "Medical Name"
     placeholderText : "String Field (128 Characters)"
-
+    text : (currentTrauma) ? currentTrauma.medicalName : ""
     onEditingFinished : {
-      var entry = model.get(root.index);
-      if (text != entry.medical_name) {
-        entry.medical_name = text
-        update_injury(entry)
+      if (text != currentTrauma.medicalName) {
+        currentTrauma.medicalName = text
+        update_injury(currentTrauma)
       }
     }
   }
@@ -95,12 +56,11 @@ ColumnLayout {
     id : commonNameEntry
     label : "Common Name"
     placeholderText : "String Field (128 Characters)"
-
+    text : (currentTrauma) ? currentTrauma.commonName : ""
     onEditingFinished : {
-      var entry = model.get(root.index);
-      if (text != entry.common_name) {
-        entry.common_name = text
-        update_injury(entry)
+      if (text != currentTrauma.commonName) {
+        currentTrauma.commonName = text
+        update_injury(currentTrauma)
       }
     }
     onLabelWidthChanged : {
@@ -118,78 +78,16 @@ ColumnLayout {
     CitationListEntry {
       id : referenceList
       backend : root.backend
-      onList : {
-        var values = root.model.get(root.index);
-        if (values) {
-          fullReferenceList.model.clear();
-          var citations = values.citations.split(";").filter(x => x);
-          root.backend.citations();
-          while (root.backend.next_citation(citation)) {
-            fullReferenceList.model.insert(fullReferenceList.model.count, {
-              citation_id: "%1".arg(citation.citation_id),
-              key: "%1".arg(citation.key),
-              title: "%1".arg(citation.title),
-              authors: "%1".arg(citation.authors),
-              year: "%1".arg(citation.year)
-            });
-          };
-        }
-        listStack.currentIndex = 1
-      }
-
-      onCitationAdded : {
-        var entry = root.model.get(root.index);
-        entry.citations = (entry.citations) ? entry.citations.concat(";" + citation_id) : entry.citations.concat(citation_id);
-        update_injury(entry)
-      }
-
-      onCitationRemoved : {
-        var entry = root.model.get(root.index)
-        var citations = entry.citations.split(";").filter(item => item).filter(item => item != citation_id);
-        entry.citations = citations.join(";");
-        update_injury(entry)
-      }
+      onList : {}
+      onCitationAdded : {}
+      onCitationRemoved : {}
     }
     FullCitationListEntry {
       id : fullReferenceList
       Layout.fillWidth : true
       backend : root.backend
-
-      onFullAdded : {
-        citation.citation_id = fullReferenceList.model.get(fullReferenceList.current).citation_id;
-        root.backend.select_citation(citation);
-        var entry = root.model.get(root.index);
-        entry.citations = (entry.citations) ? entry.citations.concat(";" + citation.citation_id) : entry.citations.concat(citation.citation_id);
-        update_injury(entry);
-        fullExit();
-      }
-
-      onFullExit : {
-        listStack.currentIndex = 0;
-        var values = root.model.get(root.index);
-        if (values) {
-          commonNameEntry.text = values.common_name;
-          medicalNameEntry.text = values.medical_name;
-          descriptionEntry.text = values.description;
-          referenceList.model.clear();
-
-          var citations = values.citations.split(";").filter(x => x);
-          for (var i = 0; i < citations.length; ++ i) {
-            citation.citation_id = parseInt(citations[i]);
-            citation.key = "";
-            citation.title = "";
-            if (root.backend.select_citation(citation)) {
-              referenceList.model.insert(referenceList.model.count, {
-                citation_id: "%1".arg(citation.citation_id),
-                key: "%1".arg(citation.key),
-                title: "%1".arg(citation.title),
-                authors: "%1".arg(citation.authors),
-                year: "%1".arg(citation.year)
-              });
-            }
-          };
-        }
-      }
+      onFullAdded : {}
+      onFullExit : {}
     }
   }
 
@@ -200,12 +98,11 @@ ColumnLayout {
     label : "Description"
     required : true
     placeholderText : "Text Area (5-15 Lines)"
-
+    text : (currentTrauma) ? currentTrauma.description : ""
     onEditingFinished : {
-      var entry = model.get(root.index);
-      if (text != entry.description) {
-        entry.description = text;
-        update_injury(entry);
+      if (text != currentTrauma.description) {
+        currentTrauma.description = text;
+        update_injury(currentTrauma);
       }
     }
   }
@@ -216,17 +113,12 @@ ColumnLayout {
 
     id : severityEntry
     label : "Severity Range"
-
+    min : (currentTrauma) ? currentTrauma.min : 0
+    max : (currentTrauma) ? currentTrauma.max : 1
     onRangeModified : {
-      var entry = model.get(root.index);
-      entry.min = min;
-      entry.max = max;
-      update_injury(entry)
-    }
-  }
-  onTopIndexChanged : {
-    if (topIndex == 1) {
-      refresh_citations()
+      currentTrauma.min = min;
+      currentTrauma.max = max;
+      update_injury(currentTrauma)
     }
   }
 }

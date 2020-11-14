@@ -20,6 +20,16 @@ ColumnLayout {
     id : currentEquipment
   }
 
+  function update_equipment() {
+    equipmentList.equipmentDefinitions = []
+    let equipments = root.backend.equipment;
+    for (var ii = 0; ii < equipments.length; ++ ii) {
+      equipmentList.equipmentDefinitions.push(currentEquipment.make());
+      equipmentList.equipmentDefinitions[equipmentList.equipmentDefinitions.length - 1].assign(equipments[ii]);
+    }
+    equipmentList.model = equipmentList.equipmentDefinitions;
+  }
+
   Rectangle {
     id : listRectangle
     Layout.fillWidth : true
@@ -51,13 +61,13 @@ ColumnLayout {
         equipmentList.currentIndex = equipmentList.equipmentDefinitions.length - 1
       }
       onSecondButtonClicked : {
-        if (root.model.count == 0) {
+        if (!equipmentList.equipmentDefinitions || equipmentList.equipmentDefinitions.length < 2) {
           return
         }
         currentEquipment.clear();
-        currentEquipment.name = root.model.get(root.index).name;
+        currentEquipment.assign(equipmentList.equipmentDefinitions[equipmentList.currentIndex]);
         root.backend.remove_equipment(currentEquipment);
-        rebuildObjectives();
+        update_equipment();
         equipmentList.currentIndex = Math.max(0, root.index - 1)
       }
 
@@ -138,7 +148,6 @@ ColumnLayout {
                 } else {
                   return currentDef.description
                 }
-
               }
             } else {
               return ""
@@ -175,23 +184,13 @@ ColumnLayout {
     }
   }
 
-  function rebuildEquipments() {
-    equipmentList.equipmentDefinitions = []
-    let equipments = root.backend.equipment;
-    for (var ii = 0; ii < equipments.length; ++ ii) {
-      equipmentList.equipmentDefinitions.push(currentEquipment.make());
-      equipmentList.equipmentDefinitions[equipmentList.equipmentDefinitions.length - 1].assign(equipments[ii]);
-    }
-    equipmentList.model = equipmentList.equipmentDefinitions;
-  }
-
   Component.onCompleted : {
-    rebuildEquipments()
+    update_equipment()
   }
 
   onBackendChanged : {
     if (backend) {
-      backend.equipmentsChanged.connect(rebuildEquipments)
+      backend.equipmentsChanged.connect(update_equipment)
     }
   }
 }

@@ -16,50 +16,17 @@ ColumnLayout {
   Layout.fillWidth : true
   Layout.fillHeight : true
 
-  TraumaProfile {
-    id : obj
-    physiologyTree : ["StandardMale@0s.xml"]
-  }
+
   Trauma {
     id : trauma
   }
-  function refresh_traumas() {
-    var values = model.get(index)
-    if (values) {
-      nameEntry.text = values.name
+  function refresh_traumas() {}
 
-      var injuries = (values.injuries) ? values.injuries.split(";").filter(x => x) : "";
-      var locations = (values.locations) ? values.locations.split(";").filter(x => x) : "";
-      var severities = (values.severities) ? values.severities.split(";").filter(x => x) : "";
-      traumaList.model.clear()
-      for (var i = 0; i < injuries.length; ++ i) {
-        trauma.trauma_id = injuries[i];
-        trauma.medical_name = "";
-        trauma.common_name = "";
-        root.backend.select_trauma(trauma);
-        if (trauma.medical_name == "" && trauma.common_name == "") {
-          continue
-        }
-        traumaList.model.insert(traumaList.model.count, {
-          trauma_id: trauma.trauma_id,
-          medical_name: "%1".arg(trauma.medical_name),
-          common_name: "%1".arg(trauma.common_name),
-          description: "%1".arg(trauma.description),
-          citations: "%1".arg(trauma.citations),
-          min: "%1".arg(trauma.min),
-          max: "%1".arg(trauma.max),
-          location: (locations.length) ? locations[i] : "",
-          severity: (severities.length) ? severities[i] : 0.5
-        });
-      }
-    }
-  }
-
-  function update_trauma_set(values) {
-    if ( values.physiologyTree.length == 0 ){
+  function update_traumaProfile(traumaProfile) {
+    if (values.physiologyTree.length == 0) {
       values.physiologyTree.push("StandardMale@0s.xml");
     }
-    root.backend.update_trauma_set(values)
+    root.backend.update_traumaProfile(traumaProfile)
   }
 
   TextEntry {
@@ -67,12 +34,12 @@ ColumnLayout {
     Layout.leftMargin : 5
     id : nameEntry
     label : "Name"
-
+    placeholderText : "String Field (128 Characters)"
+    text : (currentProfile) ? currentProfile.name : ""
     onEditingFinished : {
-      var entry = model.get(index);
-      if (text != entry.name) {
-        entry.name = text;
-        update_trauma_set(entry);
+      if (text != currentProfile.name) {
+        currentProfile.name = text;
+        update_traumaProfile(currentProfile);
       }
     }
   }
@@ -82,12 +49,12 @@ ColumnLayout {
     Layout.leftMargin : 5
     id : descriptionEntry
     label : "Description"
-
+    placeholderText : "String Field (128 Characters)"
+    text : (currentProfile) ? currentProfile.description : ""
     onEditingFinished : {
-      var entry = model.get(index);
-      if (text != entry.description) {
-        entry.description = text;
-        update_trauma_set(entry);
+      if (text != currentProfile.description) {
+        currentProfile.description = text;
+        update_traumaProfile(currentProfile);
       }
     }
   }
@@ -105,136 +72,41 @@ ColumnLayout {
       backend : root.backend
 
       onList : {
-        var values = root.model.get(root.index);
-        if (values) {
-          fullInjuryList.model.clear();
-          root.backend.injuries();
-          while (root.backend.next_trauma(trauma)) {
-            fullInjuryList.model.insert(fullInjuryList.model.count, {
-              trauma_id: "%1".arg(trauma.trauma_id),
-              medical_name: "%1".arg(trauma.medical_name),
-              common_name: "%1".arg(trauma.common_name),
-              description: "%1".arg(trauma.description),
-              citations: "%1".arg(trauma.citations),
-              min: "%1".arg(trauma.min),
-              max: "%1".arg(trauma.max)
-            });
-          };
-        }
         listStack.currentIndex = 1
       }
 
-      onSeverityChanged : {
-        var entry = root.model.get(root.index);
-        var severities = entry.severities.split(";").filter(item => item);
-        severities.splice(index, 1, severity);
-        entry.severities = severities.join(";");
-        update_trauma_set(entry)
-      }
-
-      onLocationChanged : {
-        var entry = root.model.get(root.index)
-        var locations = entry.locations.split(";").filter(item => item);
-        locations.splice(index, 1, location);
-        entry.locations = locations.join(";");
-        update_trauma_set(entry)
-      }
-
-      onInjuryAdded : {
-        var entry = root.model.get(root.index);
-        entry.injuries = (entry.injuries) ? entry.injuries.concat(";" + trauma_id) : entry.injuries.concat(trauma_id);
-        entry.severities = (entry.severities) ? entry.severities.concat(";" + severity) : entry.severities.concat(severity);
-        entry.locations = (entry.locations) ? entry.locations.concat(";" + location) : entry.locations.concat(location);
-        entry.description = (entry.description) ? entry.description.concat(";" + description) : entry.description.concat(description);
-        update_trauma_set(entry);
-      }
-
-      onInjuryRemoved : {
-        var entry = root.model.get(root.index);
-        var injuries = entry.injuries.split(";").filter(item => item);
-        var severities = entry.severities.split(";").filter(item => item);
-        var locations = entry.locations.split(";").filter(item => item);
-        var description = entry.description.split(";").filter(item => item);
-        injuries.splice(index, 1);
-        severities.splice(index, 1);
-        locations.splice(index, 1);
-        entry.injuries = injuries.join(";");
-        entry.severities = severities.join(";");
-        entry.locations = locations.join(";");
-        entry.description = description.join(";");
-        update_trauma_set(entry)
-      }
+      onSeverityChanged : {}
+      onLocationChanged : {}
+      onInjuryAdded : {}
+      onInjuryRemoved : {}
     }
     FullInjuryListEntry {
       id : fullInjuryList
       backend : root.backend
 
-      onFullAdded : {
-        trauma.trauma_id = fullInjuryList.model.get(current).trauma_id;
-        root.backend.select_trauma(trauma);
-        var severity = trauma.severity;
-        var location = trauma.location;
-        var injuries = trauma.injuries;
-        var description = trauma.description;
-        var entry = root.model.get(root.index);
-        entry.severities = (entry.severities) ? entry.severities.concat(";" + severity) : entry.severities.concat(severity);
-        entry.locations = (entry.locations) ? entry.locations.concat(";" + location) : entry.locations.concat(location);
-        entry.injuries = (entry.injuries) ? entry.injuries.concat(";" + trauma.trauma_id) : entry.injuries.concat(trauma.trauma_id);
-        entry.description = (entry.description) ? entry.description.concat(";" + description) : entry.description.concat(description);
-        update_trauma_set(entry);
-        fullExit();
-      }
+      onFullAdded : {}
 
       onFullExit : {
-        var values = root.model.get(root.index);
-        if (values) {
-          nameEntry.text = values.name;
-          traumaList.model.clear();
-          var injuries = values.injuries.split(";").filter(x => x)
-          var locations = (values.locations) ? values.locations.split(";").filter(x => x) : "";
-          var severities = (values.severities) ? values.severities.split(";").filter(x => x) : "";
-          for (var i = 0; i < injuries.length; ++ i) {
-            trauma.trauma_id = injuries[i];
-            trauma.medical_name = "";
-            trauma.common_name = "";
-            if (root.backend.select_trauma(trauma)) {
-              traumaList.model.insert(traumaList.model.count, {
-                trauma_id: trauma.trauma_id,
-                medical_name: "%1".arg(trauma.medical_name),
-                common_name: "%1".arg(trauma.common_name),
-                description: "%1".arg(trauma.description),
-                citations: "%1".arg(trauma.citations),
-                min: "%1".arg(trauma.min),
-                max: "%1".arg(trauma.max),
-                location: (locations.length) ? locations[i] : "",
-                severity: (severities.length) ? severities[i] : 0.5
-              });
-            }
-          };
-        }
         listStack.currentIndex = 0
       }
     }
   }
 
-    TextEntry {
+  TextEntry {
     Layout.fillWidth : true
     Layout.leftMargin : 5
     id : physiologyEntry
     label : "Physiology File"
-
+    placeholderText : "String Field (128 Characters)"
+    text : (currentProfile && currentProfile.physiologyTree.length > 1) ? currentProfile.physiologyTree[0] : ""
     onEditingFinished : {
-      var entry = model.get(index);
-      if (text != entry.traumasChanged[0]) {
-        entry.traumasChanged[0] = text;
-        update_trauma_set(entry);
+      if (currentProfile.physiologyTree.length == 0) {
+        currentProfile.physiologyTree.push("")
       }
-    }
-  }
-
-  onTopIndexChanged : {
-    if (topIndex == 1) {
-      refresh_traumas()
+      if (text != currentProfile.physiologyTree[0]) {
+        currentProfile.physiologyTree[0] = text;
+        update_traumaProfile(currentProfile);
+      }
     }
   }
 }
