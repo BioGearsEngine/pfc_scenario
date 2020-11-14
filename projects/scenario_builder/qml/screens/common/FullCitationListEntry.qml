@@ -40,13 +40,8 @@ FullListEntry {
       }
     }
 
-    function update_citation(id) {
-      self.citation_id = id
-      self.key = citation_key_text.text
-      self.title = citation_title_text.text
-      self.authors = citation_authors_text.text
-      self.year = citation_year_text.text
-      root.backend.update_citation(self)
+    function update_citation(citation) {
+      root.backend.update_citation(citation)
     }
 
     TextField {
@@ -54,14 +49,14 @@ FullListEntry {
       anchors.left : parent.left
       anchors.leftMargin : 10
       font.pointSize : 10
-      text : model.key
+      text : (root.model) ? root.model[index].key : ""
       readOnly : true
       activeFocusOnPress : false
       hoverEnabled : false
       enabled : false
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       onEditingFinished : {
-        update_citation(model.citation_id)
+        update_citation(root.model[index])
       }
     }
     TextField {
@@ -69,14 +64,14 @@ FullListEntry {
       anchors.left : citation_key_text.right
       anchors.leftMargin : 10
       font.pointSize : 10
-      text : model.authors
+      text : (root.model) ? root.model[index].authors : ""
       readOnly : true
       activeFocusOnPress : false
       hoverEnabled : false
       enabled : false
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       onEditingFinished : {
-        update_citation(model.citation_id)
+        update_citation(root.model[index])
       }
     }
 
@@ -85,14 +80,14 @@ FullListEntry {
       anchors.left : citation_authors_text.right
       anchors.leftMargin : 10
       font.pointSize : 10
-      text : model.year
+      text : (root.model) ? root.model[index].year : ""
       readOnly : true
       activeFocusOnPress : false
       hoverEnabled : false
       enabled : false
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       onEditingFinished : {
-        update_citation(model.citation_id)
+        update_citation(root.model[index])
       }
     }
     TextField {
@@ -100,7 +95,7 @@ FullListEntry {
       anchors.left : citation_year_text.right
       anchors.right : parent.right
       anchors.leftMargin : 5
-      text : model.title
+      text : (root.model) ? root.model[index].title : ""
       width : 150
       font.weight : Font.Bold
       font.pointSize : 10
@@ -110,7 +105,7 @@ FullListEntry {
       enabled : false
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       onEditingFinished : {
-        update_citation(model.citation_id)
+        update_citation(root.model[index])
       }
     }
 
@@ -211,24 +206,7 @@ FullListEntry {
   }
 
   onFullAdded : {}
-  onFullNew : {
-    var likely_id = root.backend.nextID(SQLBackend.CITATIONS) + 1;
-    self.citation_id = -1;
-    self.key = "REF%1".arg(likely_id);
-    self.title = "New Reference %1".arg(likely_id);
-    self.authors = "Unknown Author";
-    self.year = 2018;
-    self.key = "AuthorYear_%1".arg(likely_id);
-    root.backend.update_citation(self);
-    root.model.insert(root.model.count, {
-      citation_id: "%1".arg(self.citation_id),
-      key: "%1".arg(self.key),
-      title: "%1".arg(self.title),
-      authors: "%1".arg(self.authors),
-      year: "%1".arg(self.year)
-    });
-    root.citationAdded(root.model.count, self.citation_id)
-  }
+  onFullNew   : {}
   onFullDeleted : {}
-  onFullExit : {}
+  onFullExit  : {}
 }

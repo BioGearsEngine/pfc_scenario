@@ -92,93 +92,31 @@ ColumnLayout {
       }
     }
   }
-   StackLayout {
-     id : listStack
-     Layout.fillWidth : true
-     Layout.fillHeight : false
-     Layout.leftMargin : 5
-     Layout.rightMargin : 20
+  StackLayout {
+    id : listStack
+    Layout.fillWidth : true
+    Layout.fillHeight : false
+    Layout.leftMargin : 5
+    Layout.rightMargin : 20
 
-
-     currentIndex : 0
+    currentIndex : 0
     CitationListEntry {
       id : referenceList
       backend : root.backend
       onList : {
-        var values = root.model.get(root.index);
-        if (values) {
-          fullReferenceList.model.clear();
-          var citations = values.citations.split(";").filter(x => x);
-          root.backend.citations();
-          while (root.backend.next_citation(citation)) {
-            fullReferenceList.model.insert(fullReferenceList.model.count, {
-              citation_id: "%1".arg(citation.citation_id),
-              key: "%1".arg(citation.key),
-              title: "%1".arg(citation.title),
-              authors: "%1".arg(citation.authors),
-              year: "%1".arg(citation.year)
-            });
-          };
-        }
         listStack.currentIndex = 1
       }
-
-      onCitationAdded : {
-        if (root.model.count == 0) {
-          return
-        }
-        var entry = root.model.get(root.index);
-        entry.citations = (entry.citations) ? entry.citations.concat(";" + citation_id) : entry.citations.concat(citation_id);
-        update_objective(entry)
-      }
-
-      onCitationRemoved : {
-        var entry = root.model.get(root.index)
-        var citations = entry.citations.split(";").filter(item => item).filter(item => item != citation_id);
-        entry.citations = citations.join(";");
-        update_objective(entry)
-      }
+      onCitationAdded : {}
+      onCitationRemoved : {}
     }
     FullCitationListEntry {
       id : fullReferenceList
       backend : root.backend
 
-      onFullAdded : {
-        citation.citation_id = fullReferenceList.model.get(fullReferenceList.current).citation_id;
-        root.backend.select_citation(citation);
-        var entry = root.model.get(root.index);
-        entry.citations = (entry.citations) ? entry.citations.concat(";" + citation.citation_id) : entry.citations.concat(citation.citation_id);
-        update_objective(entry);
-        fullExit()
-      }
-
-      onFullExit : {
-        var values = root.model.get(root.index);
-        if (values) {
-          nameEntry.text = values.name;
-          descriptionEntry.text = values.description;
-          referenceList.model.clear();
-
-          var citations = values.citations.split(";").filter(x => x);
-          for (var i = 0; i < citations.length; ++ i) {
-            citation.citation_id = parseInt(citations[i])
-            citation.key = "";
-            citation.title = "";
-            if (root.backend.select_citation(citation)) {
-              referenceList.model.insert(referenceList.model.count, {
-                citation_id: "%1".arg(citation.citation_id),
-                key: "%1".arg(citation.key),
-                title: "%1".arg(citation.title),
-                authors: "%1".arg(citation.authors),
-                year: "%1".arg(citation.year)
-              });
-            }
-          };
-        }
-        listStack.currentIndex = 0
-      }
+      onFullAdded : {}
+      onFullExit : { listStack.currentIndex = 0 }
     }
-   }
+  }
   onTopIndexChanged : {
     if (topIndex == 1) {
       refresh_citations()
