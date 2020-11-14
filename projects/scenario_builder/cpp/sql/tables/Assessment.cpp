@@ -5,6 +5,13 @@
 
 Assessment::Assessment(QObject* parent)
   : QObject(parent)
+  , fk_objective(new Objective)
+{
+}
+//--------------------------------------------------------------------------------------------
+Assessment::Assessment(Objective* objective, QObject* parent)
+  : QObject(parent)
+  , fk_objective(objective)
 {
 }
 //--------------------------------------------------------------------------------------------
@@ -61,3 +68,14 @@ void Assessment::clear()
   criteria.clear();
 }
 //--------------------------------------------------------------------------------------------
+void Assessment::clear(int index)
+{
+  id = -1;
+  uuid.clear();
+  name = QString("New Assessment:%1").arg(index);
+  description = QString("Undefined assessment criteria %1.").arg(index);
+  type.clear();
+  fk_objective->clear();
+  available_points = -1;
+  criteria.clear();
+}

@@ -12,8 +12,7 @@ ColumnLayout {
   id : root
   property SQLBackend backend
   property int topIndex
-  property TraumaProfile currentProfile : (profileList.traumaProfiles[profileList.currentIndex]) ? 
-                                           profileList.traumaProfiles[profileList.currentIndex] : currentTraumaProfile
+  property TraumaProfile currentProfile : (profileList.traumaProfiles[profileList.currentIndex]) ? profileList.traumaProfiles[profileList.currentIndex] : currentTraumaProfile
 
   TraumaProfile {
     id : currentTraumaProfile
@@ -41,42 +40,23 @@ ColumnLayout {
       secondButtonText : "Remove"
 
       onFirstButtonClicked : {
-        if (next < root.model.count) {
-          next = root.model.count + 1
-        }
-        traumaProfile.trauma_profiles_id = -1;
-        traumaProfile.name = "New traumaProfile %1".arg(next);
-        traumaProfile.description = "";
-        traumaProfile.injuries = "";
-        traumaProfile.severities = "";
-        traumaProfile.locations = "";
-        while (root.backend.select_trauma_profiles(traumaProfile)) {
-          next = next + 1
-          traumaProfile.trauma_profiles_id = -1;
-          traumaProfile.name = "New traumaProfile %1".arg(next);
-          traumaProfile.description = ""
-        }
-        traumaProfile.uuid = "";
-         root.backend.update_trauma_profiles(traumaProfile);
-         root.model.insert(root.model.count, {
-          "id": traumaProfile.trauma_profiles_id,
-          "name": "%1".arg(traumaProfile.name),
-          "description": "%1".arg(traumaProfile.description),
-          "injuries": traumaProfile.injuries,
-          "severities": traumaProfile.severities,
-          "locations": traumaProfile.locations
-        });
-        ++next;
+        var likely_id = root.backend.nextID(SQLBackend.TRAUMA_PROFILES);
+        currentTraumaProfile.clear(likely_id);
+        root.backend.update_traumaProfile(currentTraumaProfile);
+        traumaProfileList.traumaProfileDefinitions.push(currentTraumaProfile.make());
+        traumaProfileList.traumaProfileDefinitions[traumaProfileList.traumaProfileDefinitions.length - 1].assign(currentTraumaProfile);
+        traumaProfileList.model = traumaProfileList.traumaProfileDefinitions;
+        traumaProfileList.currentIndex = traumaProfileList.traumaProfileDefinitions.length - 1
       }
       onSecondButtonClicked : {
-        if (root.model.count == 0) {
+        if ( ! traumaProfilesList.traumaProfilesDefinitions || traumaProfilesList.traumaProfilesDefinitions.length < 2) {
           return
         }
-        traumaProfile.trauma_profiles_id = -1;
-        traumaProfile.name = root.model.get(root.index).name;
-        root.backend.remove_trauma_profiles(traumaProfile);
-        root.model.remove(root.index);
-        profileList.currentIndex = Math.max(0, root.index - 1)
+        currentTraumaProfiles.clear();
+        currentTraumaProfiles.assign(traumaProfilesList.traumaProfilesDefinitions[traumaProfilesList.currentIndex]);
+        root.backend.remove_traumaProfiles(currentTraumaProfiles);
+        rebuildTraumaProfiless();
+        traumaProfilesList.currentIndex = Math.max(0, root.index - 1)
       }
     }
 

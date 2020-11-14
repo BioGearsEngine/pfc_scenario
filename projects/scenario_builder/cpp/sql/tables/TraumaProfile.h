@@ -89,8 +89,9 @@ public:
   static Q_INVOKABLE TraumaProfile* make();
   Q_INVOKABLE void assign(TraumaProfile* rhs);
   void assign(const TraumaProfile& rhs);
-  void clear();
-signals:
+  Q_INVOKABLE void clear();
+  Q_INVOKABLE void clear(int);
+    signals:
   void idChanged();
   void uuidChanged();
   void nameChanged();

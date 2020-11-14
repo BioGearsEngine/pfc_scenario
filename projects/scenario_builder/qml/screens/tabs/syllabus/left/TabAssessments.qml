@@ -42,42 +42,23 @@ ColumnLayout {
       secondButtonText : "Remove"
 
       onFirstButtonClicked : {
-        if (next < root.model.count) {
-          next = root.model.count + 1
-        }
-        currentAssessment.assessment_id = -1;
-        currentAssessment.name = "New Assessment %1".arg(next);
-        currentAssessment.description = "Description of Assessment %1".arg(next);
-        currentAssessment.type = "binary" // vs assessment
-        currentAssessment.available_points = "1";
-        currentAssessment.criteria = "Unknown Criteria";
-        while (root.backend.select_assessment(currentAssessment)) {
-          next = next + 1
-          currentAssessment.assessment_id = -1;
-          currentAssessment.name = "New Assessment %1".arg(next);
-          currentAssessment.description = "Description of Assessment %1".arg(next)
-        }
-        currentAssessment.uuid = "";
+        var likely_id = root.backend.nextID(SQLBackend.ASSESSMENTS);
+        currentAssessment.clear(likely_id);
         root.backend.update_assessment(currentAssessment);
-        root.model.insert(root.model.count, {
-          "id": currentAssessment.assessment_id,
-          "name": "%1".arg(currentAssessment.name),
-          "description": "%1".arg(currentAssessment.description),
-          "type": currentAssessment.type,
-          "available_points": currentAssessment.available_points,
-          "criteria": currentAssessment.criteria
-        });
-        ++next;
+        assessmentList.assessmentDefinitions.push(currentAssessment.make());
+        assessmentList.assessmentDefinitions[assessmentList.assessmentDefinitions.length - 1].assign(currentAssessment);
+        assessmentList.model = assessmentList.assessmentDefinitions;
+        assessmentList.currentIndex = assessmentList.assessmentDefinitions.length - 1
       }
       onSecondButtonClicked : {
         if (root.model.count == 0) {
           return
         }
-        currentAssessment.assessment_id = -1;
-         currentAssessment.name = root.model.get(root.index).name;
-          root.backend.remove_assessment(currentAssessment);
-          root.model.remove(root.index);
-          assessmentList.currentIndex = Math.max(0, root.index - 1)
+        currentAssessment.clear()
+        currentAssessment.name = root.model.get(root.index).name;
+        root.backend.remove_assessment(currentAssessment);
+        rebuildObjectives()
+        assessmentList.currentIndex = Math.max(0, root.index - 1)
       }
     }
 

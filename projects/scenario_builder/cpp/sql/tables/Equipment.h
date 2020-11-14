@@ -70,7 +70,8 @@ public:
   Q_INVOKABLE void assign(Equipment* rhs);
   void assign(const Equipment& rhs);
 
-  void clear();
+  Q_INVOKABLE void clear();
+  Q_INVOKABLE void clear(int index);
 
 private:
   //! Helper functions for Traumas

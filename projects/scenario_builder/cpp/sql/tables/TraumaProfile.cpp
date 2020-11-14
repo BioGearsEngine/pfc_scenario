@@ -119,6 +119,17 @@ void TraumaProfile::clear()
   physiologyTree.clear();
 }
 //-------------------------------------------------------------------------------
+void TraumaProfile::clear(int index)
+{
+  id = -1;
+  uuid.clear();
+  name = QString("New Trauma Profile:%1").arg(index);
+  description = QString("Undefined trauma profile %1.").arg(index);
+  qDeleteAll(traumas);
+  traumas.clear();
+  physiologyTree.clear();
+}
+//-------------------------------------------------------------------------------
 QQmlListProperty<TraumaOccurance> TraumaProfile::get_traumas()
 {
   return QQmlListProperty<TraumaOccurance> ( nullptr, this,

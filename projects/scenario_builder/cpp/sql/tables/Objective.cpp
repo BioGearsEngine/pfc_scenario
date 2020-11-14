@@ -60,6 +60,20 @@ void Objective::clear()
   _trauma_profiles.clear();
 }
 //--------------------------------------------------------------------------------------------
+void Objective::clear(int index)
+{
+  id = -1;
+  uuid.clear();
+  _citations.clear();
+  _citations.clear();
+  _cpgs.clear();
+  _treatment_plans.clear();
+  _trauma_profiles.clear();
+
+  name = QString("New Objective:%1").arg(index);
+  description = QString("Undefined learning objective %1.").arg(index);
+}
+//--------------------------------------------------------------------------------------------
 QQmlListProperty<Citation> Objective::getCitations()
 {
   return QQmlListProperty<Citation>(this, this,

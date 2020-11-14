@@ -24,7 +24,9 @@ ColumnLayout {
   }
 
   function update_objective(objective) {
-    root.backend.update_objective(objective)
+    if (objective) {
+      root.backend.update_objective(objective)
+    }
   }
 
   function refresh_citations() {
@@ -109,7 +111,7 @@ ColumnLayout {
       id : fullReferenceList
       backend : root.backend
 
-      onCitationCreated: {
+      onCitationCreated : {
         refresh_all_citations()
       }
       onCitationAdded : {

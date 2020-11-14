@@ -184,8 +184,8 @@ bool SQLite3Driver::initialize_db()
     { tables[EVENT_MAPS], sqlite3::create_event_maps_table },
     { tables[EQUIPMENTS], sqlite3::create_equipment_table },
     { tables[EQUIPMENT_MAPS], sqlite3::create_equipment_map_table },
-    { tables[INJURIES], sqlite3::create_traumas_table },
-    { tables[INJURY_SETS], sqlite3::create_trauma_profiles_table },
+    { tables[TRAUMAS], sqlite3::create_traumas_table },
+    { tables[TRAUMA_PROFILES], sqlite3::create_trauma_profiles_table },
     { tables[LOCATIONS], sqlite3::create_locations_table },
     { tables[LOCATION_MAPS], sqlite3::create_location_maps_table },
     { tables[ROLE_MAPS], sqlite3::create_role_maps_table },
@@ -601,8 +601,8 @@ bool SQLite3Driver::clear_table(enum SQLite3Driver::Sqlite3Table t)
     case EVENTS:
       query.bindValue(":table", tables[EVENTS]);
       break;
-    case INJURIES:
-      query.bindValue(":table", tables[INJURIES]);
+    case TRAUMAS:
+      query.bindValue(":table", tables[TRAUMAS]);
       break;
     case LOCATIONS:
       query.bindValue(":table", tables[LOCATIONS]);
@@ -651,10 +651,10 @@ int SQLite3Driver::nextID(Sqlite3Table table) const
     case EQUIPMENTS:
       query.prepare(stmt.arg("equipment"));
       break;
-    case INJURIES:
+    case TRAUMAS:
       query.prepare("SELECT MAX(trauma_id) FROM traumas");
       break;
-    case INJURY_SETS:
+    case TRAUMA_PROFILES:
       query.prepare(stmt.arg("trauma_profile"));
       break;
     case LOCATIONS:

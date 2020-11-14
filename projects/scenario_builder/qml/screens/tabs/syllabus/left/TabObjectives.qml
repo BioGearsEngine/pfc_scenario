@@ -18,6 +18,16 @@ ColumnLayout {
     id : currentObjective
   }
 
+  function rebuildObjectives() {
+    objectiveList.objectiveDefinitions = []
+    let objectives = root.backend.objectives;
+    for (var ii = 0; ii < objectives.length; ++ ii) {
+      objectiveList.objectiveDefinitions.push(currentObjective.make());
+      objectiveList.objectiveDefinitions[objectiveList.objectiveDefinitions.length - 1].assign(objectives[ii]);
+    }
+    objectiveList.model = objectiveList.objectiveDefinitions;
+  }
+
   Rectangle {
     id : listRectangle
     Layout.fillWidth : true
@@ -40,37 +50,22 @@ ColumnLayout {
       secondButtonText : "Remove"
 
       onFirstButtonClicked : {
-        if (next < root.model.count) {
-          next = root.model.count + 1
-        }
-        objective.objective_id = -1;
-        objective.name = "New Objective %1".arg(next);
-        objective.description = "Description of Objective %1".arg(next);
-        objective.citations = "";
-        while (root.backend.select_objective(objective)) {
-          next = next + 1
-          objective.objective_id = -1;
-          objective.name = "New Objective %1".arg(next);
-          objective.description = "Description of Objective %1".arg(next)
-        }
-        objective.uuid = 0;
-        root.backend.update_objective(objective);
-        root.model.insert(root.model.count, {
-          "id": objective.objective_id,
-          "name": "%1".arg(objective.name),
-          "description": "%1".arg(objective.description),
-          "citations": objective.citations
-        });
-        ++next;
+        var likely_id = root.backend.nextID(SQLBackend.OBJECTIVES);
+        currentObjective.clear(likely_id);
+        root.backend.update_objective(currentObjective);
+        objectiveList.objectiveDefinitions.push(currentObjective.make());
+        objectiveList.objectiveDefinitions[objectiveList.objectiveDefinitions.length - 1].assign(currentObjective);
+        objectiveList.model = objectiveList.objectiveDefinitions;
+        objectiveList.currentIndex = objectiveList.objectiveDefinitions.length - 1
       }
       onSecondButtonClicked : {
-        if (root.model.count == 0) {
+        if ( ! objectiveList.objectiveDefinitions || objectiveList.objectiveDefinitions.length < 2) {
           return
         }
-        objective.objective_id = -1;
-        objective.name = root.model.get(root.index).name;
-        root.backend.remove_objective(objective);
-        root.model.remove(root.index);
+        currentObjective.clear();
+        currentObjective.assign(objectiveList.objectiveDefinitions[objectiveList.currentIndex]);
+        root.backend.remove_objective(currentObjective);
+        rebuildObjectives();
         objectiveList.currentIndex = Math.max(0, root.index - 1)
       }
     }
@@ -138,9 +133,8 @@ ColumnLayout {
           font.pointSize : 10
           wrapMode : Text.Wrap
           text : {
-            let l_description = (objectiveList.objectiveDefinitions[index]) ? 
-                                objectiveList.objectiveDefinitions[index].description : "";
-             if (!enabled) {
+            let l_description = (objectiveList.objectiveDefinitions[index]) ? objectiveList.objectiveDefinitions[index].description : "";
+            if (!enabled) {
               return l_description.split("\n")[0].trim()
             } else {
               var details = l_description.split("\n")
@@ -176,16 +170,6 @@ ColumnLayout {
       }
       ScrollBar.vertical : ScrollBar {}
     }
-  }
-
-  function rebuildObjectives() {
-    objectiveList.objectiveDefinitions = []
-    let objectives = root.backend.objectives;
-    for (var ii = 0; ii < objectives.length; ++ ii) {
-      objectiveList.objectiveDefinitions.push(currentObjective.make());
-      objectiveList.objectiveDefinitions[objectiveList.objectiveDefinitions.length - 1].assign(objectives[ii]);
-    }
-    objectiveList.model = objectiveList.objectiveDefinitions;
   }
 
   Component.onCompleted : {

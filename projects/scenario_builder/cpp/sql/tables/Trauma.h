@@ -72,7 +72,8 @@ public:
   Q_INVOKABLE void assign(Trauma* rhs);
   void assign(const Trauma& rhs);
 
-  void clear();
+  Q_INVOKABLE void clear();
+  Q_INVOKABLE void clear(int index);
 
 private:
   //! Helper functions for Citations

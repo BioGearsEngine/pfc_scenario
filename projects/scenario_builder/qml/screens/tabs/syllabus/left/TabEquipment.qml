@@ -12,15 +12,14 @@ ColumnLayout {
   id : root
   property SQLBackend backend
   property int topIndex
-  property Equipment currentEquipment : (equipmentList.equipmentDefinitions[equipmentList.currentIndex]) ? 
-                                         equipmentList.equipmentDefinitions[equipmentList.currentIndex] : currentEquipment
+  property Equipment currentEquipment : (equipmentList.equipmentDefinitions[equipmentList.currentIndex]) ? equipmentList.equipmentDefinitions[equipmentList.currentIndex] : currentEquipment
 
   signal reloadEquipmentList();
 
   Equipment {
     id : currentEquipment
   }
-  
+
   Rectangle {
     id : listRectangle
     Layout.fillWidth : true
@@ -43,46 +42,25 @@ ColumnLayout {
       secondButtonText : "Remove"
 
       onFirstButtonClicked : {
-        if (next < root.model.count) {
-          next = root.model.count + 1
-        }
-        currentEquipment.equipment_id = -1;
-        currentEquipment.type = "Type %1".arg(next);
-        currentEquipment.name = "New Equipment %1".arg(next);
-        currentEquipment.summary = "Summary of Equipment %1".arg(next);
-        currentEquipment.description = "Description of Equipment %1".arg(next);
-        currentEquipment.image = "";
-        currentEquipment.citations = "";
-        while (root.backend.select_equipment(currentEquipment)) {
-          next = next + 1
-          currentEquipment.equipment_id = -1;
-          currentEquipment.name = "New Equipment %1".arg(next);
-          currentEquipment.description = "Description of Equipment %1".arg(next)
-        }
-        currentEquipment.uuid = "";
+        var likely_id = root.backend.nextID(SQLBackend.EQUIPMENTS);
+        currentEquipment.clear(likely_id);
         root.backend.update_equipment(currentEquipment);
-        root.model.insert(root.model.count, {
-          "id": currentEquipment.equipment_id,
-          "type": currentEquipment.type, // Change this to not be default later
-          "name": "%1".arg(currentEquipment.name),
-          "summary": "%1".arg(currentEquipment.summary),
-          "description": "%1".arg(currentEquipment.description),
-          "citations": currentEquipment.citations,
-          "image": currentEquipment.image
-
-        });
-        ++next;
+        equipmentList.equipmentDefinitions.push(currentEquipment.make());
+        equipmentList.equipmentDefinitions[equipmentList.equipmentDefinitions.length - 1].assign(currentEquipment);
+        equipmentList.model = equipmentList.equipmentDefinitions;
+        equipmentList.currentIndex = equipmentList.equipmentDefinitions.length - 1
       }
       onSecondButtonClicked : {
         if (root.model.count == 0) {
           return
         }
-        currentEquipment.equipment_id = -1;
+        currentEquipment.clear();
         currentEquipment.name = root.model.get(root.index).name;
         root.backend.remove_equipment(currentEquipment);
-        root.model.remove(root.index);
+        rebuildObjectives();
         equipmentList.currentIndex = Math.max(0, root.index - 1)
       }
+
     }
 
     ListView {
@@ -109,7 +87,7 @@ ColumnLayout {
 
       delegate : Rectangle {
 
-        property var currentDef : equipmentList.equipmentDefinitions[index]
+        property var currentDef: equipmentList.equipmentDefinitions[index]
         id : equipment
         color : 'transparent'
         border.color : "steelblue"

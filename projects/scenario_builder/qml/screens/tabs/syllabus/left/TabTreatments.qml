@@ -12,8 +12,7 @@ ColumnLayout {
   id : root
   property SQLBackend backend
   property int topIndex
-  property Treatment currentTreatment : (treatmentList.treatmentDefinitions[treatmentList.currentIndex]) ? 
-                                         treatmentList.treatmentDefinitions[treatmentList.currentIndex] : currentTreatment
+  property Treatment currentTreatment : (treatmentList.treatmentDefinitions[treatmentList.currentIndex]) ? treatmentList.treatmentDefinitions[treatmentList.currentIndex] : currentTreatment
 
   Treatment {
     id : currentTreatment
@@ -41,53 +40,29 @@ ColumnLayout {
       secondButtonText : "Remove"
 
       onFirstButtonClicked : {
-        if (next < root.model.count) {
-          next = root.model.count + 1
-        }
-        currentTreatment.treatment_id = -1;
-        currentTreatment.medicalName = "New Treatment %1".arg(next);
-        currentTreatment.commonName = "New Treatment %1".arg(next);
-        currentTreatment.description = "Description of Treatment %1".arg(next);
-        currentTreatment.equipment = "";
-        currentTreatment.citations = "";
-        while (root.backend.select_treatment(currentTreatment)) {
-          next = next + 1
-          currentTreatment.treatment_id = -1;
-          currentTreatment.medicalName = "New Treatment %1".arg(next);
-          currentTreatment.commonName = "New Treatment %1".arg(next);
-          currentTreatment.description = "Description of Treatment %1".arg(next)
-        }
-        currentTreatment.uuid = "";
-        root.backend.update_treatment(currentTreatment);
-        root.model.insert(root.model.count, {
-          "id": currentTreatment.treatment_id,
-          "medicalName": "%1".arg(currentTreatment.medicalName),
-          "commonName": "%1".arg(currentTreatment.commonName),
-          "description": "%1".arg(currentTreatment.description),
-          "citations": currentTreatment.citaitons,
-          "equipment": currentTreatment.equipment
-
-        });
-        ++next;
+        var likely_id = root.backend.nextID(SQLBackend.TREATMENTS);
+        currentTreatments.clear(likely_id);
+        root.backend.update_treatments(currentTreatments);
+        treatmentsList.treatmentsDefinitions.push(currentTreatments.make());
+        treatmentsList.treatmentsDefinitions[treatmentsList.treatmentsDefinitions.length - 1].assign(currentTreatments);
+        treatmentsList.model = treatmentsList.treatmentsDefinitions;
+        treatmentsList.currentIndex = treatmentsList.treatmentsDefinitions.length - 1
       }
       onSecondButtonClicked : {
         if (root.model.count == 0) {
           return
         }
-        currentTreatment.treatment_id = -1;
-        currentTreatment.medicalName = root.model.get(root.index).medicalName;
-        root.backend.remove_treatment(currentTreatment);
-        root.model.remove(root.index);
-        if (treatmentList.currentIndex == 0) { // If the index was 0 this wasn't registering as an index change and the right pane wasn't reloading
-          treatmentList.currentIndex = 1
-        }
-        treatmentList.currentIndex = Math.max(0, root.index - 1)
+        currentTreatments.clear();
+        currentTreatments.name = root.model.get(root.index).name;
+        root.backend.remove_treatments(currentTreatments);
+        rebuildObjectives();
+        treatmentsList.currentIndex = Math.max(0, root.index - 1)
       }
     }
 
     ListView {
       id : treatmentList
-      property var treatmentDefinitions 
+      property var treatmentDefinitions
 
       anchors {
         top : controls.bottom;
@@ -110,7 +85,7 @@ ColumnLayout {
 
       delegate : Rectangle {
         id : treatment
-        property var currentDef : treatmentList.treatmentDefinitions[index]
+        property var currentDef: treatmentList.treatmentDefinitions[index]
         color : 'transparent'
         border.color : "steelblue"
         height : treatment_title_text.height + treatment_value_text.height
@@ -148,8 +123,8 @@ ColumnLayout {
           font.pointSize : 10
           wrapMode : Text.Wrap
           text : {
-             let l_commonName  = (currentDef) ? currentDef.commonName : ""
-             let l_description = (currentDef) ? currentDef.description : ""
+            let l_commonName = (currentDef) ? currentDef.commonName : "";
+            let l_description = (currentDef) ? currentDef.description : "";
             if (!enabled) {
               return l_commonName
             } else {

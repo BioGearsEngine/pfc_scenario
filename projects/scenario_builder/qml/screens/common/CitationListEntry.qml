@@ -56,7 +56,7 @@ ListEntry {
       enabled : false
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       onEditingFinished : {
-        update_citation(model.citation_id)
+        update_citation(root.model[index])
       }
     }
     TextField {
@@ -71,7 +71,7 @@ ListEntry {
       enabled : false
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       onEditingFinished : {
-        update_citation(model.citation_id)
+        update_citation(root.model[index])
       }
     }
 
@@ -87,7 +87,7 @@ ListEntry {
       enabled : false
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       onEditingFinished : {
-        update_citation(model.citation_id)
+        update_citation(root.model[index])
       }
     }
     TextField {
@@ -105,7 +105,7 @@ ListEntry {
       enabled : false
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       onEditingFinished : {
-        update_citation(model.citation_id)
+        update_citation(root.model[index])
       }
     }
 

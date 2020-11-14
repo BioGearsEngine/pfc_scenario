@@ -59,7 +59,8 @@ public:
   Q_INVOKABLE void assign(Objective* rhs);
   void assign(const Objective& rhs);
 
-  void clear();
+  Q_INVOKABLE void clear();
+  Q_INVOKABLE void clear(int index);
 
   Q_INVOKABLE void removeCitation(int index);
   Q_INVOKABLE void replaceCitation(int index, Citation* value);
@@ -80,7 +81,6 @@ signals:
   void traumaProfilesChanged();
 
 private:
-
   //! Helper functions for Citations
   QQmlListProperty<Citation> getCitations();
   static void AppendCitation(QQmlListProperty<Citation>* list, Citation* value);

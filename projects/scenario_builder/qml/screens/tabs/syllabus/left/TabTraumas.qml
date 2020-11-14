@@ -39,50 +39,23 @@ ColumnLayout {
       firstButtonText : "Add"
       secondButtonText : "Remove"
 
-
       onFirstButtonClicked : {
-        if (next < root.model.count) {
-          next = root.model.count + 1
-        }
-        currentTrauma.injury_id = -1;
-        currentTrauma.medical_name = "New Trauma %1".arg(next);
-        currentTrauma.common_name = "New Trauma %1".arg(next);
-        currentTrauma.description = "Description of Trauma %1".arg(next);
-        currentTrauma.citations = "";
-        currentTrauma.min = 0.0;
-        currentTrauma.max = 1.0;
-        while (root.backend.select_injury(currentTrauma)) {
-          next = next + 1
-          currentTrauma.injury_id = -1;
-          currentTrauma.medical_name = "New Trauma %1".arg(next);
-          currentTrauma.common_name = "New Trauma %1".arg(next);
-          currentTrauma.description = "Description of Trauma %1".arg(next)
-        }
-        currentTrauma.uuid = "";
-        root.backend.update_injury(currentTrauma);
-        root.model.insert(root.model.count, {
-          "id": currentTrauma.injury_id,
-          "medical_name": "%1".arg(currentTrauma.medical_name),
-          "common_name": "%1".arg(currentTrauma.common_name),
-          "description": "%1".arg(currentTrauma.description),
-          "citations": currentTrauma.citations,
-          "min": currentTrauma.min,
-          "max": currentTrauma.max
-
-        });
-        ++next;
+        var likely_id = root.backend.nextID(SQLBackend.TRAUMAS);
+        currentTrauma.clear(likely_id);
+        root.backend.update_trauma(currentTrauma);
+        traumaList.traumaDefinitions.push(currentTrauma.make());
+        traumaList.traumaDefinitions[traumaList.traumaDefinitions.length - 1].assign(currentTrauma);
+        traumaList.model = traumaList.traumaDefinitions;
+        traumaList.currentIndex = traumaList.traumaDefinitions.length - 1
       }
       onSecondButtonClicked : {
-        if (root.model.count == 0) {
+        if ( ! traumaList.traumaDefinitions || traumaList.traumaDefinitions.length < 2) {
           return
         }
-        currentTrauma.injury_id = -1;
-        currentTrauma.medical_name = root.model.get(root.index).medical_name;
-        root.backend.remove_injury(currentTrauma);
-        root.model.remove(root.index);
-        if (traumaList.currentIndex == 0) { // If the index was 0 this wasn't registering as an index change and the right pane wasn't reloading
-          traumaList.currentIndex = 1
-        }
+        currentTrauma.clear();
+        currentTrauma.assign(traumaList.traumaDefinitions[traumaList.currentIndex]);
+        root.backend.remove_trauma(currentTrauma);
+        rebuildTraumas();
         traumaList.currentIndex = Math.max(0, root.index - 1)
       }
     }

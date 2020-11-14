@@ -50,6 +50,7 @@ public:
   QString criteria = "";
 
   Assessment(QObject* parent = nullptr);
+  Assessment(Objective* objective, QObject* parent);
   Assessment(const Assessment&) = delete;
   Assessment(Assessment&&) = delete;
   Assessment& operator=(const Assessment&) = delete;
@@ -64,7 +65,8 @@ public:
   Q_INVOKABLE void assign(Assessment* rhs);
   void assign(const Assessment& rhs);
 
-  void clear();
+  Q_INVOKABLE void clear();
+  Q_INVOKABLE void clear(int index);
 };
 //----End Assessment
 

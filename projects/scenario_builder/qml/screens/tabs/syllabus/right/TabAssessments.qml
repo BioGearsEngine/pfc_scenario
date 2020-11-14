@@ -17,7 +17,7 @@ ColumnLayout {
   Layout.fillHeight : true
 
   Assessment {
-    id : obj
+    id : currentAssessment
   }
 
   Connections {
@@ -25,14 +25,10 @@ ColumnLayout {
 
   }
 
-  function update_assessment(values) {
-    obj.assessment_id = values.id
-    obj.name = values.name
-    obj.description = values.description
-    obj.type = values.type
-    obj.available_points = values.available_points
-    obj.criteria = values.criteria
-    root.backend.update_assessment(obj)
+  function update_assessment(assessment) {
+    if (assessment) {
+      root.backend.update_assessment(assessment)
+    }
   }
 
   TextEntry {
@@ -41,12 +37,11 @@ ColumnLayout {
     id : nameEntry
     label : "Name"
     placeholderText : "String Field (128 Characters)"
-
+    text : (currentAssessment) ? currentAssessment.name : ""
     onEditingFinished : {
-      var entry = model.get(root.index);
-      if (text != entry.name) {
-        entry.name = text;
-        update_assessment(entry);
+      if (text != currentAssessment.name) {
+        currentAssessment.name = text;
+        update_assessment(currentAssessment);
       }
     }
   }
@@ -59,12 +54,11 @@ ColumnLayout {
     label : "Description"
     required : true
     placeholderText : "Text Area (5-15 Lines)"
-
+    text : (currentAssessment) ? currentAssessment.description : ""
     onEditingFinished : {
-      var entry = model.get(root.index);
-      if (text != entry.description) {
-        entry.description = text;
-        update_assessment(entry);
+      if (text != currentAssessment.description) {
+        currentAssessment.description = text;
+        update_assessment(currentAssessment);
       }
     }
   }
@@ -79,7 +73,6 @@ ColumnLayout {
       model : ["Pass/Fail", "Partial"]
 
       contentItem : Text {
-
         text : typeSelect.displayText
         font.pointSize : 8
         verticalAlignment : Text.AlignVCenter
@@ -120,13 +113,12 @@ ColumnLayout {
         id : binaryCriteriaEntry
         label : "Criteria"
         placeholderText : "String Field (128 Characters)"
-
+        text : (currentAssessment) ? currentAssessment.criteria : ""
         onEditingFinished : {
           partialCriteriaEntry.text = text;
-          var entry = model.get(root.index);
-          if (text != entry.criteria) {
-            entry.criteria = text;
-            update_assessment(entry);
+          if (text != currentAssessment.criteria) {
+            currentAssessment.criteria = text;
+            update_assessment(currentAssessment);
           }
         }
       }
@@ -147,12 +139,11 @@ ColumnLayout {
         id : partialPointsEntry
         label : "Total Points"
         placeholderText : "String Field (128 Characters)"
-
+        text : (currentAssessment) ? currentAssessment.avaliablePoints : ""
         onEditingFinished : {
-          var entry = model.get(root.index);
-          if (text != entry.available_points) {
-            entry.available_points = parseInt(text);
-            update_assessment(entry);
+          if (text != currentAssessment.avaliablePoints) {
+            currentAssessment.avaliablePoints = parseInt(text);
+            update_assessment(currentAssessment);
           }
         }
       }
@@ -165,13 +156,12 @@ ColumnLayout {
         id : partialCriteriaEntry
         label : "Criteria"
         placeholderText : "String Field (128 Characters)"
-
+        text : (currentAssessment) ? currentAssessment.criteria : ""
         onEditingFinished : {
           binaryCriteriaEntry.text = text;
-          var entry = model.get(root.index);
-          if (text != entry.criteria) {
-            entry.criteria = text;
-            update_assessment(entry);
+          if (text != currentAssessment.criteria) {
+            currentAssessment.criteria = text;
+            update_assessment(currentAssessment);
           }
         }
       }

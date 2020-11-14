@@ -59,6 +59,19 @@ void Equipment::clear()
   properties.clear();
 }
 //--------------------------------------------------------------------------------------------
+void Equipment::clear(int index)
+{
+  id = -1;
+  uuid = "";
+  name = QString("New Equipment:%1").arg(index);
+  description = QString("Undefined equipment %1.").arg(index);
+  type = -1;
+  summary.clear();
+  citations.clear();
+  image.clear();
+  properties.clear();
+}
+//--------------------------------------------------------------------------------------------
 QQmlListProperty<Citation> Equipment::getCitations()
 {
   return QQmlListProperty<Citation> ( this, this,
