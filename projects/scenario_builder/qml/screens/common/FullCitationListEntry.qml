@@ -10,9 +10,9 @@ FullListEntry {
   id : root
   property SQLBackend backend
 
-  signal citationAdded(int index, int citation_id)
-  signal citationRemoved(int index, int citation_id)
-
+  signal citationAdded(int index, Citation citation)
+  signal citationRemoved(int index, Citation citation)
+  signal citationCreated()
   label : "Reference"
 
   Citation {
@@ -41,7 +41,9 @@ FullListEntry {
     }
 
     function update_citation(citation) {
-      root.backend.update_citation(citation)
+      if (citation) {
+        root.backend.update_citation(citation)
+      }
     }
 
     TextField {
@@ -205,8 +207,22 @@ FullListEntry {
     }
   }
 
-  onFullAdded : {}
-  onFullNew   : {}
-  onFullDeleted : {}
-  onFullExit  : {}
+  onFullAdded : {
+    self.assign(root.model[root.current])
+    root.citationAdded(root.current, self)
+  }
+  onFullNew : {
+    var likely_id = root.backend.nextID(SQLBackend.CITATIONS);
+    self.clear(likely_id);
+    root.backend.update_citation(self);
+    root.citationCreated();
+  }
+  onFullDeleted : {
+    self.assign(root.model[index]);
+    root.model.splice(index);
+    current = Math.max(0, index - 1);
+    root.backend.remove_citation(self);
+    root.citationRemoved(index, self);
+  }
+  onFullExit : {}
 }

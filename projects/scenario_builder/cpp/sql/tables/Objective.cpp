@@ -1,8 +1,8 @@
 #include "Objective.h"
 
+#include "Citation.h"
 #include "TraumaProfile.h"
 #include "Treatment.h"
-#include "Citation.h"
 
 Objective::Objective(QObject* parent)
   : QObject(parent)
@@ -75,6 +75,7 @@ void Objective::AppendCitation(QQmlListProperty<Citation>* list, Citation* value
   Objective* TraumaOccurance = qobject_cast<Objective*>(list->object);
   if (TraumaOccurance) {
     TraumaOccurance->_citations.append(value);
+    TraumaOccurance->citationsChanged();
   }
 }
 //-------------------------------------------------------------------------------
@@ -91,7 +92,7 @@ void Objective::ClearCitations(QQmlListProperty<Citation>* list)
 {
   Objective* TraumaOccurance = qobject_cast<Objective*>(list->object);
   if (TraumaOccurance) {
-    return TraumaOccurance->_citations.clear();
+    TraumaOccurance->_citations.clear();
   }
 }
 //-------------------------------------------------------------------------------
@@ -104,20 +105,15 @@ int Objective::CountCitations(QQmlListProperty<Citation>* list)
   return 0;
 }
 //-------------------------------------------------------------------------------
-void Objective::RemoveLastCitation(QQmlListProperty<Citation>* list)
+void Objective::removeCitation(int index)
 {
-  Objective* TraumaOccurance = qobject_cast<Objective*>(list->object);
-  if (TraumaOccurance) {
-    return TraumaOccurance->_citations.removeLast();
-  }
+  _citations.removeAt(index);
+  citationsChanged();
 }
 //-------------------------------------------------------------------------------
-void Objective::ReplaceCitation(QQmlListProperty<Citation>* list, int index, Citation* value)
+void Objective::replaceCitation(int index, Citation* value)
 {
-  Objective* TraumaOccurance = qobject_cast<Objective*>(list->object);
-  if (TraumaOccurance) {
-    return TraumaOccurance->_citations.replace(index, value);
-  }
+  _citations.replace(index, value);
 }
 //-------------------------------------------------------------------------------
 //! Helper functions for Traumas
@@ -165,30 +161,24 @@ int Objective::CountCPGs(QQmlListProperty<Citation>* list)
   return 0;
 }
 //-------------------------------------------------------------------------------
-void Objective::RemoveLastCPG(QQmlListProperty<Citation>* list)
+void Objective::removeCPG(int index)
 {
-  Objective* TraumaOccurance = qobject_cast<Objective*>(list->object);
-  if (TraumaOccurance) {
-    return TraumaOccurance->_cpgs.removeLast();
-  }
+  _cpgs.removeAt(index);
 }
 //-------------------------------------------------------------------------------
-void Objective::ReplaceCPG(QQmlListProperty<Citation>* list, int index, Citation* value)
+void Objective::replaceCPG(int index, Citation* value)
 {
-  Objective* TraumaOccurance = qobject_cast<Objective*>(list->object);
-  if (TraumaOccurance) {
-    return TraumaOccurance->_cpgs.replace(index, value);
-  }
+  return _cpgs.replace(index, value);
 }
 //-------------------------------------------------------------------------------
 //! Helper functions for Traumas
 QQmlListProperty<Treatment> Objective::getTreatments()
 {
   return QQmlListProperty<Treatment>(this, this,
-                                    &Objective::AppendTreatment,
-                                    &Objective::CountTreatments,
-                                    &Objective::GetTreatment,
-                                    &Objective::ClearTreatments);
+                                     &Objective::AppendTreatment,
+                                     &Objective::CountTreatments,
+                                     &Objective::GetTreatment,
+                                     &Objective::ClearTreatments);
 }
 //-------------------------------------------------------------------------------
 void Objective::AppendTreatment(QQmlListProperty<Treatment>* list, Treatment* value)
@@ -225,30 +215,24 @@ int Objective::CountTreatments(QQmlListProperty<Treatment>* list)
   return 0;
 }
 //-------------------------------------------------------------------------------
-void Objective::RemoveLastTreatment(QQmlListProperty<Treatment>* list)
+void Objective::removeTreatment(int index)
 {
-  Objective* TraumaOccurance = qobject_cast<Objective*>(list->object);
-  if (TraumaOccurance) {
-    return TraumaOccurance->_treatment_plans.removeLast();
-  }
+  _treatment_plans.removeAt(index);
 }
 //-------------------------------------------------------------------------------
-void Objective::ReplaceTreatment(QQmlListProperty<Treatment>* list, int index, Treatment* value)
+void Objective::replaceTreatment(int index, Treatment* value)
 {
-  Objective* TraumaOccurance = qobject_cast<Objective*>(list->object);
-  if (TraumaOccurance) {
-    return TraumaOccurance->_treatment_plans.replace(index, value);
-  }
+  _treatment_plans.replace(index, value);
 }
 //-------------------------------------------------------------------------------
 //! Helper functions for Traumas
 QQmlListProperty<TraumaProfile> Objective::getTraumaProfiles()
 {
   return QQmlListProperty<TraumaProfile>(this, this,
-                                     &Objective::AppendTraumaProfile,
-                                     &Objective::CountTraumaProfiles,
-                                     &Objective::GetTraumaProfile,
-                                     &Objective::ClearTraumaProfiles);
+                                         &Objective::AppendTraumaProfile,
+                                         &Objective::CountTraumaProfiles,
+                                         &Objective::GetTraumaProfile,
+                                         &Objective::ClearTraumaProfiles);
 }
 //-------------------------------------------------------------------------------
 void Objective::AppendTraumaProfile(QQmlListProperty<TraumaProfile>* list, TraumaProfile* value)
@@ -285,18 +269,12 @@ int Objective::CountTraumaProfiles(QQmlListProperty<TraumaProfile>* list)
   return 0;
 }
 //-------------------------------------------------------------------------------
-void Objective::RemoveLastTraumaProfile(QQmlListProperty<TraumaProfile>* list)
+void Objective::removeTraumaProfile(int index)
 {
-  Objective* TraumaOccurance = qobject_cast<Objective*>(list->object);
-  if (TraumaOccurance) {
-    return TraumaOccurance->_trauma_profiles.removeLast();
-  }
+  _trauma_profiles.removeAt(index);
 }
 //-------------------------------------------------------------------------------
-void Objective::ReplaceTraumaProfile(QQmlListProperty<TraumaProfile>* list, int index, TraumaProfile* value)
+void Objective::replaceTraumaProfile(int index, TraumaProfile* value)
 {
-  Objective* TraumaOccurance = qobject_cast<Objective*>(list->object);
-  if (TraumaOccurance) {
-    return TraumaOccurance->_trauma_profiles.replace(index, value);
-  }
+  _trauma_profiles.replace(index, value);
 }

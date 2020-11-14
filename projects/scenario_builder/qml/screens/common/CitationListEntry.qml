@@ -10,8 +10,8 @@ ListEntry {
   id : root
   property SQLBackend backend
 
-  signal citationAdded(int index, int citation_id)
-  signal citationRemoved(int index, int citation_id)
+  signal citationAdded(int index, Citation citation)
+  signal citationRemoved(int index, Citation citation)
 
   label : "Reference"
 
@@ -19,8 +19,6 @@ ListEntry {
     id : self
     citation_id : -1
   }
-
-  model : ListModel {}
 
   delegate : Rectangle {
     id : citation
@@ -41,7 +39,9 @@ ListEntry {
     }
 
     function update_citation(citation) {
-      root.backend.update_citation(citation)
+      if (citation) {
+        root.backend.update_citation(citation)
+      }
     }
 
     TextField {
@@ -56,7 +56,7 @@ ListEntry {
       enabled : false
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       onEditingFinished : {
-        update_citation(root.model[index])
+        update_citation(model.citation_id)
       }
     }
     TextField {
@@ -71,9 +71,10 @@ ListEntry {
       enabled : false
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       onEditingFinished : {
-        update_citation(root.model[index])
+        update_citation(model.citation_id)
       }
     }
+
     TextField {
       id : citation_year_text
       anchors.left : citation_authors_text.right
@@ -86,7 +87,7 @@ ListEntry {
       enabled : false
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       onEditingFinished : {
-        update_citation(root.model[index])
+        update_citation(model.citation_id)
       }
     }
     TextField {
@@ -104,7 +105,7 @@ ListEntry {
       enabled : false
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       onEditingFinished : {
-        update_citation(root.model[index])
+        update_citation(model.citation_id)
       }
     }
 
@@ -205,6 +206,18 @@ ListEntry {
   }
 
   onList : {}
-  onAdded : {}
-  onRemoved : {}
+  onAdded : {
+    var likely_id = root.backend.nextID(SQLBackend.CITATIONS) + 1;
+    self.clear(likely_id);
+    root.backend.update_citation(self);
+    root.citationAdded(root.model.length, self)
+  }
+  onRemoved : {
+    if (root.model[index]) {
+      self.assign(root.model[index]);
+      root.model.splice(index);
+      current = Math.max(0, index - 1);
+      root.citationRemoved(index, self)
+    }
+  }
 }

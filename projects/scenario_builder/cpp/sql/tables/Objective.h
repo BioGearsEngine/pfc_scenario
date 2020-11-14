@@ -60,6 +60,15 @@ public:
   void assign(const Objective& rhs);
 
   void clear();
+
+  Q_INVOKABLE void removeCitation(int index);
+  Q_INVOKABLE void replaceCitation(int index, Citation* value);
+  Q_INVOKABLE void removeCPG(int index);
+  Q_INVOKABLE void replaceCPG(int index, Citation* value);
+  Q_INVOKABLE void removeTreatment(int index);
+  Q_INVOKABLE void replaceTreatment(int index, Treatment* value);
+  Q_INVOKABLE void removeTraumaProfile(int index);
+  Q_INVOKABLE void replaceTraumaProfile(int index, TraumaProfile* value);
 signals:
   void idChanged();
   void uuidCHanged();
@@ -78,8 +87,6 @@ private:
   static auto GetCitation(QQmlListProperty<Citation>* list, int index) -> Citation*;
   static void ClearCitations(QQmlListProperty<Citation>* list);
   static auto CountCitations(QQmlListProperty<Citation>* list) -> int;
-  static void RemoveLastCitation(QQmlListProperty<Citation>* list);
-  static void ReplaceCitation(QQmlListProperty<Citation>* list, int index, Citation* value);
 
   //! Helper functions for CPGs
   QQmlListProperty<Citation> getCPGS();
@@ -87,8 +94,6 @@ private:
   static auto GetCPG(QQmlListProperty<Citation>* list, int index) -> Citation*;
   static void ClearCPGs(QQmlListProperty<Citation>* list);
   static auto CountCPGs(QQmlListProperty<Citation>* list) -> int;
-  static void RemoveLastCPG(QQmlListProperty<Citation>* list);
-  static void ReplaceCPG(QQmlListProperty<Citation>* list, int index, Citation* value);
 
   //! Helper functions for Treatments
   QQmlListProperty<Treatment> getTreatments();
@@ -96,8 +101,6 @@ private:
   static auto GetTreatment(QQmlListProperty<Treatment>* list, int index) -> Treatment*;
   static void ClearTreatments(QQmlListProperty<Treatment>* list);
   static auto CountTreatments(QQmlListProperty<Treatment>* list) -> int;
-  static void RemoveLastTreatment(QQmlListProperty<Treatment>* list);
-  static void ReplaceTreatment(QQmlListProperty<Treatment>* list, int index, Treatment* value);
 
   //! Helper functions for TraumaProfiles
   QQmlListProperty<TraumaProfile> getTraumaProfiles();
@@ -105,8 +108,6 @@ private:
   static auto GetTraumaProfile(QQmlListProperty<TraumaProfile>* list, int index) -> TraumaProfile*;
   static void ClearTraumaProfiles(QQmlListProperty<TraumaProfile>* list);
   static auto CountTraumaProfiles(QQmlListProperty<TraumaProfile>* list) -> int;
-  static void RemoveLastTraumaProfile(QQmlListProperty<TraumaProfile>* list);
-  static void ReplaceTraumaProfile(QQmlListProperty<TraumaProfile>* list, int index, TraumaProfile* value);
 };
 
 #endif

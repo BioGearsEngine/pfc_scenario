@@ -15,63 +15,47 @@ ColumnLayout {
 
   Layout.fillWidth : true
 
-  Objective {
-    id : obj
-  }
   Citation {
-    id : citation
+    id : citation_g
   }
   Connections {
     target : backend
     onCitationRemoved : {}
   }
 
-  function update_objective(values) {
-    obj.objective_id = values.id
-    obj.name = values.name
-    obj.description = values.description
-    obj.citations = values.citations
-
-    root.backend.update_objective(obj)
+  function update_objective(objective) {
+    root.backend.update_objective(objective)
   }
 
   function refresh_citations() {
-    var values = root.model.get(root.index)
-    if (values) {
-      nameEntry.text = values.name
-      descriptionEntry.text = values.description
-      referenceList.model.clear()
-      var citations = values.citations.split(";").filter(x => x);
-      for (var i = 0; i < citations.length; ++ i) {
-        citation.citation_id = parseInt(citations[i])
-        citation.key = ""
-        citation.title = ""
-        if (root.backend.select_citation(citation)) {
-          referenceList.model.insert(referenceList.model.count, {
-            citation_id: "%1".arg(citation.citation_id),
-            key: "%1".arg(citation.key),
-            title: "%1".arg(citation.title),
-            authors: "%1".arg(citation.authors),
-            year: "%1".arg(citation.year),
-            publisher: "%1".arg(citation.publisher)
-          });
-        }
-      };
+    citationStack.objectiveCitations = []
+    let citations = currentObjective.citations;
+    for (var ii = 0; ii < citations.length; ++ ii) {
+      citationStack.objectiveCitations.push(citation_g.make());
+      citationStack.objectiveCitations[citationStack.objectiveCitations.length - 1].assign(citations[ii]);
     }
+    referenceList.model = citationStack.objectiveCitations;
   }
-
+  function refresh_all_citations() {
+    citationStack.allCitations = [];
+    let citations = root.backend.citations;
+    for (var ii = 0; ii < citations.length; ++ ii) {
+      citationStack.allCitations.push(citation_g.make());
+      citationStack.allCitations[citationStack.allCitations.length - 1].assign(citations[ii]);
+    }
+    fullReferenceList.model = citationStack.allCitations;
+  }
   TextEntry {
     Layout.fillWidth : true
     Layout.leftMargin : 5
     id : nameEntry
     label : "Name"
     placeholderText : "String Field (128 Characters)"
-
+    text : (currentObjective) ? currentObjective.name : ""
     onEditingFinished : {
-      var entry = root.model.get(root.index);
-      if (text != entry.name) {
-        entry.name = text
-        update_objective(entry)
+      if (text != currentObjective.name) {
+        currentObjective.name = text
+        update_objective(currentObjective)
       }
     }
   }
@@ -83,43 +67,65 @@ ColumnLayout {
     label : "Description"
     required : true
     placeholderText : "Text Area (5-15 Lines)"
-
+    text : (currentObjective) ? currentObjective.description : ""
     onEditingFinished : {
-      var entry = root.model.get(root.index);
-      if (text != entry.description) {
-        entry.description = text
-        update_objective(entry)
+      if (text != currentObjective.description) {
+        currentObjective.description = text
+        update_objective(currentObjective)
       }
     }
   }
+
   StackLayout {
-    id : listStack
+    id : citationStack
     Layout.fillWidth : true
     Layout.fillHeight : false
     Layout.leftMargin : 5
     Layout.rightMargin : 20
+
+    property var objectiveCitations: []
+    property var allCitations: []
 
     currentIndex : 0
     CitationListEntry {
       id : referenceList
       backend : root.backend
       onList : {
-        listStack.currentIndex = 1
+        citationStack.currentIndex = 1;
+        refresh_all_citations()
       }
-      onCitationAdded : {}
-      onCitationRemoved : {}
+      onCitationAdded : {
+        currentObjective.citations.push(citation_g.make());
+        currentObjective.citations[currentObjective.citations.length - 1].assign(citation);
+        update_objective(currentObjective);
+        refresh_citations()
+      }
+      onCitationRemoved : {
+        currentObjective.removeCitation(index);
+        refresh_citations()
+      }
     }
     FullCitationListEntry {
       id : fullReferenceList
       backend : root.backend
 
-      onFullAdded : {}
-      onFullExit : { listStack.currentIndex = 0 }
+      onCitationCreated: {
+        refresh_all_citations()
+      }
+      onCitationAdded : {
+        currentObjective.citations.push(citation_g.make());
+        currentObjective.citations[currentObjective.citations.length - 1].assign(citation);
+        update_objective(currentObjective);
+        refresh_citations();
+        citationStack.currentIndex = 0;
+      }
+      onFullExit : {
+        refresh_citations();
+        citationStack.currentIndex = 0;
+      }
     }
   }
-  onTopIndexChanged : {
-    if (topIndex == 1) {
-      refresh_citations()
-    }
+  onCurrentObjectiveChanged : {
+    refresh_citations()
   }
 }

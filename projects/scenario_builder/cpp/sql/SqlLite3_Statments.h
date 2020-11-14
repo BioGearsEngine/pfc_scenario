@@ -939,8 +939,8 @@ inline namespace sqlite3 {
   constexpr auto update_citation_by_id
     = R"( UPDATE  citations
           SET
-              , uuid = :uuid
-              , key       = :key
+              uuid    = :uuid
+              , key     = :key
               , title   = :title
               , authors = :authors
               , year    = :year

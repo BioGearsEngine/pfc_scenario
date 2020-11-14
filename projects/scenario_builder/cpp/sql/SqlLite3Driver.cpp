@@ -685,7 +685,8 @@ int SQLite3Driver::nextID(Sqlite3Table table) const
     if (query.next()) {
       auto record = query.record();
 
-      return record.value(0).toInt() + 1;
+      auto nextID = record.value(0).toInt() + 1;
+      return nextID;
     }
   }
   return -1;

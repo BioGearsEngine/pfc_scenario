@@ -89,11 +89,9 @@ Rectangle {
           if (next < citationList.citations.length) {
             next = citationList.citations.length + 1
           }
-          citation.clear(next);
-          while (root.backend.select_citation(citation)) {
-            next = next + 1;
-            citation.clear(next);
-          }
+          
+          var likely_id = root.backend.nextID(SQLBackend.CITATIONS) + 1;
+          self.clear(likely_id);
 
           citation.uuid = "";
           root.backend.update_citation(citation);
@@ -109,9 +107,9 @@ Rectangle {
           citation.citation_id = -1;
           citation.key = citationList.citations[citationList.currentIndex].key;
           root.backend.remove_citation(citation);
-          
+
           citationList.currentIndex = Math.max(0, citationList.currentIndex - 1);
-          
+
         }
       }
       ListView {
@@ -235,8 +233,9 @@ Rectangle {
 
 
   onBackendChanged : {
-    if(backend)
-    {  backend.citationsChanged.connect(rebuildCitations) }
+    if (backend) {
+      backend.citationsChanged.connect(rebuildCitations)
+    }
   }
 
 } /*##^## Designer {
