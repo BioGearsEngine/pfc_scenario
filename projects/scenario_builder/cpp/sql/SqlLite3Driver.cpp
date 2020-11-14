@@ -691,7 +691,7 @@ int SQLite3Driver::nextID(Sqlite3Table table) const
   return -1;
 }
 //----------------------------ASSESSMENT-----------------------------------------
-inline void assign_assessment(const QSqlRecord& record, Assessment& assessment)
+inline void SQLite3Driver::assign_assessment(const QSqlRecord& record, Assessment& assessment) const
 {
   assessment.id = record.value(ASSESSMENT_ID).toInt();
   assessment.uuid = record.value(ASSESSMENT_UUID).toString();
@@ -819,7 +819,7 @@ bool SQLite3Driver::remove_assessment(Assessment* assessment)
   return false;
 }
 //----------------------------AUTHOR---------------------------------------------
-inline void assign_author(const QSqlRecord& record, Author& author)
+inline void SQLite3Driver::assign_author(const QSqlRecord& record, Author& author) const
 {
   author.id = record.value(AUTHOR_ID).toInt();
   author.uuid = record.value(AUTHOR_UUID).toString();
@@ -1007,7 +1007,7 @@ bool SQLite3Driver::remove_author(Author* author)
   return false;
 }
 //----------------------------CITATION--------------------------------------------
-inline void assign_citation(const QSqlRecord& record, Citation& citation)
+inline void SQLite3Driver::assign_citation(const QSqlRecord& record, Citation& citation) const
 {
   citation.id = record.value(CITATION_ID).toInt();
   citation.uuid = record.value(CITATION_UUID).toString();
@@ -1203,7 +1203,7 @@ bool SQLite3Driver::remove_citation_from_scene(Citation* citation, Scene* scene)
   return remove_citation_map_by_fk(&map);
 }
 //----------------------------INJURY-------------------------------------------------
-inline void assign_trauma(const QSqlRecord& record, Trauma& trauma)
+inline void SQLite3Driver::assign_trauma(const QSqlRecord& record, Trauma& trauma) const
 {
   trauma.id = record.value(INJURY_ID).toInt();
   trauma.uuid = record.value(INJURY_UUID).toString();
@@ -1352,7 +1352,7 @@ bool SQLite3Driver::remove_trauma(Trauma* trauma)
   return false;
 }
 //-----------------------------INJURY_SET----------------------------------------
-inline void assign_trauma_profile(const QSqlRecord& record, TraumaProfile& trauma)
+inline void SQLite3Driver::assign_trauma_profile(const QSqlRecord& record, TraumaProfile& trauma) const
 {
   trauma.id = record.value(INJURY_SET_ID).toInt();
   trauma.uuid = record.value(INJURY_SET_UUID).toString();
@@ -1500,7 +1500,7 @@ bool SQLite3Driver::remove_trauma_profile(TraumaProfile* trauma_profile)
   return false;
 }
 //----------------------------EVENT-------------------------------------------------
-inline void assign_event(QSqlRecord& record, Event& event)
+inline void SQLite3Driver::assign_event(QSqlRecord& record, Event& event) const
 {
   event.id = record.value(EVENT_ID).toInt();
   event.uuid = record.value(EVENT_UUID).toString();
@@ -1709,7 +1709,7 @@ bool SQLite3Driver::remove_event_from_scene(Event* event, Scene* scene)
   return remove_event_map_by_fk(&map);
 }
 //-----------------------------LOCATION------------------------------------------
-inline void assign_location(const QSqlRecord& record, Location& location)
+inline void SQLite3Driver::assign_location(const QSqlRecord& record, Location& location) const
 {
   location.id = record.value(LOCATION_ID).toInt();
   location.uuid = record.value(LOCATION_UUID).toString();
@@ -1932,7 +1932,7 @@ bool SQLite3Driver::remove_location_from_scene(Location* location, Scene* scene)
   return remove_location_map_by_fk(&map);
 }
 //----------------------------EQUIPMENT------------------------------------------
-inline void assign_equipment(const QSqlRecord& record, Equipment& equipment)
+inline void SQLite3Driver::assign_equipment(const QSqlRecord& record, Equipment& equipment) const
 {
   equipment.id = record.value(EQUIPMENT_ID).toInt();
   equipment.uuid = record.value(EQUIPMENT_UUID).toString();
@@ -2149,7 +2149,7 @@ bool SQLite3Driver::remove_equipment_from_scene(Equipment* equipment, Scene* sce
   return remove_equipment_map_by_fk(&map);
 }
 //-----------------------------OBJECTIVE-----------------------------------------
-inline void assign_objective(const QSqlRecord& record, Objective& objective)
+inline void SQLite3Driver::assign_objective(const QSqlRecord& record, Objective& objective) const
 {
   objective.id = record.value(OBJECTIVE_ID).toInt();
   objective.uuid = record.value(OBJECTIVE_UUID).toString();
@@ -2158,9 +2158,13 @@ inline void assign_objective(const QSqlRecord& record, Objective& objective)
 
   Citation* citation;
   for (auto citation_id : record.value(OBJECTIVE_CITATIONS).toString().split(';')) {
-    citation = new Citation(&objective);
-    citation->id = citation_id.toInt();
-    objective._citations.push_back(citation);
+    if (!citation_id.isEmpty()) {
+      citation = new Citation(&objective);
+      citation->id = citation_id.toInt();
+      if (select_citation(citation)) {
+        objective._citations.push_back(citation);
+      }
+    }
   }
 }
 int SQLite3Driver::objective_count() const
@@ -2288,7 +2292,7 @@ bool SQLite3Driver::remove_objective(Objective* objective)
   return false;
 }
 //-----------------------------PROPERTY------------------------------------------
-inline void assign_property(const QSqlRecord& record, Property& property)
+inline void SQLite3Driver::assign_property(const QSqlRecord& record, Property& property) const
 {
   property.id = record.value(PROPERTY_ID).toInt();
   property.name = record.value(PROPERTY_NAME).toString();
@@ -2406,7 +2410,7 @@ bool SQLite3Driver::remove_property(Property* property)
   return false;
 }
 //-----------------------------ROLE----------------------------------------------
-inline void assign_role(QSqlRecord& record, Role& role)
+inline void SQLite3Driver::assign_role(QSqlRecord& record, Role& role) const
 {
   role.id = record.value(ROLE_ID).toInt();
   role.uuid = record.value(ROLE_UUID).toString();
@@ -2605,7 +2609,7 @@ bool SQLite3Driver::remove_role_from_scene(Role* role, Scene* scene)
   return remove_role_map_by_fk(&map);
 }
 //-----------------------------SCENE---------------------------------------------
-inline void assign_scene(QSqlRecord& record, Scene& scene)
+inline void SQLite3Driver::assign_scene(QSqlRecord& record, Scene& scene) const
 {
   scene.id = record.value(SCENE_ID).toInt();
   scene.uuid = record.value(SCENE_UUID).toString();
@@ -2833,7 +2837,7 @@ bool SQLite3Driver::remove_scene(Scene* scene)
   return false;
 }
 //-----------------------------TREATMENT-----------------------------------------
-inline void assign_treatment(const QSqlRecord& record, Treatment& treatment)
+inline void SQLite3Driver::assign_treatment(const QSqlRecord& record, Treatment& treatment) const
 {
   treatment.id = record.value(TREATMENT_ID).toInt();
   treatment.uuid = record.value(TREATMENT_UUID).toString();
@@ -2999,7 +3003,7 @@ bool SQLite3Driver::remove_treatment(Treatment* treatment)
   return false;
 }
 //-----------------------------MAP------------------------------------------
-inline void assign_role_map(const QSqlRecord& record, RoleMap& map)
+inline void SQLite3Driver::assign_role_map(const QSqlRecord& record, RoleMap& map) const
 {
   map.id = record.value(ROLE_MAP_ID).toInt();
   map.fk_scene->id = record.value(ROLE_MAP_FK_SCENE).toInt();
@@ -3140,7 +3144,7 @@ bool SQLite3Driver::remove_role_map_by_fk(RoleMap* map)
   return false;
 }
 //-----------------------------EVENT MAP------------------------------------------
-inline void assign_event_map(const QSqlRecord& record, EventMap& map)
+inline void SQLite3Driver::assign_event_map(const QSqlRecord& record, EventMap& map) const
 {
   map.id = record.value(EVENT_MAP_ID).toInt();
   map.fk_scene->id = record.value(EVENT_MAP_FK_SCENE).toInt();
@@ -3281,7 +3285,7 @@ bool SQLite3Driver::remove_event_map_by_fk(EventMap* map)
   return false;
 }
 //-----------------------------LOCATION MAP------------------------------------------
-inline void assign_location_map(const QSqlRecord& record, LocationMap& map)
+inline void SQLite3Driver::assign_location_map(const QSqlRecord& record, LocationMap& map) const
 {
   map.id = record.value(LOCATION_MAP_ID).toInt();
   map.fk_scene->id = record.value(LOCATION_MAP_FK_SCENE).toInt();
@@ -3438,7 +3442,7 @@ bool SQLite3Driver::remove_location_map_by_fk(LocationMap* map)
   return false;
 }
 //-----------------------------CITATION MAP-----------------------------------------
-inline void assign_citation_map(const QSqlRecord& record, CitationMap& map)
+inline void SQLite3Driver::assign_citation_map(const QSqlRecord& record, CitationMap& map) const
 {
   map.id = record.value(CITATION_MAP_ID).toInt();
   map.fk_scene->id = record.value(CITATION_MAP_FK_SCENE).toInt();
@@ -3579,7 +3583,7 @@ bool SQLite3Driver::remove_citation_map_by_fk(CitationMap* map)
   return false;
 }
 //------------------------------EQUIPMENT MAP----------------------------------------
-inline void assign_equipment_map(const QSqlRecord& record, EquipmentMap& map, Scene const* const scene, Equipment const* const equipment)
+inline void SQLite3Driver::assign_equipment_map(const QSqlRecord& record, EquipmentMap& map, Scene const* const scene, Equipment const* const equipment) const
 {
   map.id = record.value(EQUIPMENT_MAP_ID).toInt();
   emit map.idChanged(map.id);
@@ -4253,10 +4257,10 @@ QQmlListProperty<Assessment> SQLite3Driver::getAssessments() const
 {
 
   return QQmlListProperty<Assessment>(nullptr, new QList<Assessment*>(assessments()),
-                                  nullptr,
-                                  &CountAssessment,
-                                  &AtAssessment,
-                                  nullptr);
+                                      nullptr,
+                                      &CountAssessment,
+                                      &AtAssessment,
+                                      nullptr);
 }
 //-------------------------------------------------------------------------------
 auto CountLocation(QQmlListProperty<Location>* list) -> int
@@ -4279,10 +4283,10 @@ QQmlListProperty<Location> SQLite3Driver::getLocations() const
 {
 
   return QQmlListProperty<Location>(nullptr, new QList<Location*>(locations()),
-                                  nullptr,
-                                  &CountLocation,
-                                  &AtLocation,
-                                  nullptr);
+                                    nullptr,
+                                    &CountLocation,
+                                    &AtLocation,
+                                    nullptr);
 }
 //-------------------------------------------------------------------------------
 auto CountRoleMap(QQmlListProperty<RoleMap>* list) -> int
@@ -4305,10 +4309,10 @@ QQmlListProperty<RoleMap> SQLite3Driver::getRoleMaps() const
 {
 
   return QQmlListProperty<RoleMap>(nullptr, new QList<RoleMap*>(role_maps()),
-                                  nullptr,
-                                  &CountRoleMap,
-                                  &AtRoleMap,
-                                  nullptr);
+                                   nullptr,
+                                   &CountRoleMap,
+                                   &AtRoleMap,
+                                   nullptr);
 }
 //-------------------------------------------------------------------------------
 auto CountEventMap(QQmlListProperty<EventMap>* list) -> int
@@ -4331,10 +4335,10 @@ QQmlListProperty<EventMap> SQLite3Driver::getEventMaps() const
 {
 
   return QQmlListProperty<EventMap>(nullptr, new QList<EventMap*>(event_maps()),
-                                  nullptr,
-                                  &CountEventMap,
-                                  &AtEventMap,
-                                  nullptr);
+                                    nullptr,
+                                    &CountEventMap,
+                                    &AtEventMap,
+                                    nullptr);
 }
 //-------------------------------------------------------------------------------
 auto CountLocationMap(QQmlListProperty<LocationMap>* list) -> int
@@ -4357,10 +4361,10 @@ QQmlListProperty<LocationMap> SQLite3Driver::getLocationMaps() const
 {
 
   return QQmlListProperty<LocationMap>(nullptr, new QList<LocationMap*>(location_maps()),
-                                  nullptr,
-                                  &CountLocationMap,
-                                  &AtLocationMap,
-                                  nullptr);
+                                       nullptr,
+                                       &CountLocationMap,
+                                       &AtLocationMap,
+                                       nullptr);
 }
 //-------------------------------------------------------------------------------
 auto CountCitationMap(QQmlListProperty<CitationMap>* list) -> int
@@ -4383,10 +4387,10 @@ QQmlListProperty<CitationMap> SQLite3Driver::getCitationMaps() const
 {
 
   return QQmlListProperty<CitationMap>(nullptr, new QList<CitationMap*>(citation_maps()),
-                                  nullptr,
-                                  &CountCitationMap,
-                                  &AtCitationMap,
-                                  nullptr);
+                                       nullptr,
+                                       &CountCitationMap,
+                                       &AtCitationMap,
+                                       nullptr);
 }
 //-------------------------------------------------------------------------------
 auto CountEquipmentMap(QQmlListProperty<EquipmentMap>* list) -> int
@@ -4409,10 +4413,10 @@ QQmlListProperty<EquipmentMap> SQLite3Driver::getEquipmentMaps() const
 {
 
   return QQmlListProperty<EquipmentMap>(nullptr, new QList<EquipmentMap*>(equipment_maps()),
-                                  nullptr,
-                                  &CountEquipmentMap,
-                                  &AtEquipmentMap,
-                                  nullptr);
+                                        nullptr,
+                                        &CountEquipmentMap,
+                                        &AtEquipmentMap,
+                                        nullptr);
 }
 //-------------------------------------------------------------------------------
 auto CountRole(QQmlListProperty<Role>* list) -> int
@@ -4435,10 +4439,10 @@ QQmlListProperty<Role> SQLite3Driver::getRoles() const
 {
 
   return QQmlListProperty<Role>(nullptr, new QList<Role*>(roles()),
-                                  nullptr,
-                                  &CountRole,
-                                  &AtRole,
-                                  nullptr);
+                                nullptr,
+                                &CountRole,
+                                &AtRole,
+                                nullptr);
 }
 //-------------------------------------------------------------------------------
 auto CountEvent(QQmlListProperty<Event>* list) -> int
@@ -4461,10 +4465,10 @@ QQmlListProperty<Event> SQLite3Driver::getEvents() const
 {
 
   return QQmlListProperty<Event>(nullptr, new QList<Event*>(events()),
-                                  nullptr,
-                                  &CountEvent,
-                                  &AtEvent,
-                                  nullptr);
+                                 nullptr,
+                                 &CountEvent,
+                                 &AtEvent,
+                                 nullptr);
 }
 //-------------------------------------------------------------------------------
 auto CountScene(QQmlListProperty<Scene>* list) -> int
@@ -4487,10 +4491,10 @@ QQmlListProperty<Scene> SQLite3Driver::getScenes() const
 {
 
   return QQmlListProperty<Scene>(nullptr, new QList<Scene*>(scenes()),
-                                  nullptr,
-                                  &CountScene,
-                                  &AtScene,
-                                  nullptr);
+                                 nullptr,
+                                 &CountScene,
+                                 &AtScene,
+                                 nullptr);
 }
 //-------------------------------------------------------------------------------
 }

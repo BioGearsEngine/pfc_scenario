@@ -215,7 +215,7 @@ ColumnLayout {
         Component.onCompleted : {
           var r_count = backend.role_count();
           var roles = root.backend.getRoles()
-          console.log(roles)
+
           for (var ii = 0; ii < roles.length; ++ii ){  
             rolListArea.model.insert(rolListArea.model.count,
               {

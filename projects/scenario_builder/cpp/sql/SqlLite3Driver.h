@@ -176,6 +176,7 @@ public:
   Q_INVOKABLE int scene_count() const;
 
   Q_INVOKABLE int nextID(Sqlite3Table) const;
+  
 
   //!
   //!  Calling a table function updates the QList of known cash hits
@@ -299,13 +300,14 @@ public:
   Q_INVOKABLE bool remove_event_map_by_fk(EventMap*);
   Q_INVOKABLE bool remove_location_map_by_fk(LocationMap*);
   Q_INVOKABLE bool remove_citation_map_by_fk(CitationMap*);
+  
   Q_INVOKABLE bool remove_equipment_map_by_fk(EquipmentMap*);
   Q_INVOKABLE bool remove_role(Role*);
   Q_INVOKABLE bool remove_role_from_scene(Role*, Scene*);
   Q_INVOKABLE bool remove_event(Event*);
   Q_INVOKABLE bool remove_event_from_scene(Event*, Scene*);
   Q_INVOKABLE bool remove_scene(Scene*);
-
+  
   Q_INVOKABLE bool remove_equipment_from_treatments(int);
   Q_INVOKABLE bool remove_equipment_from_treatments(std::string);
   Q_INVOKABLE bool remove_citation_from_treatments(int);
@@ -412,6 +414,25 @@ signals:
 
 private:
   bool open();
+
+  void assign_assessment(const QSqlRecord& record, Assessment& assessment) const;
+  void assign_author(const QSqlRecord& record, Author& author) const;
+  void assign_citation(const QSqlRecord& record, Citation& citation) const;
+  void assign_citation_map(const QSqlRecord& record, CitationMap& map) const;
+  void assign_equipment(const QSqlRecord& record, Equipment& equipment) const;
+  void assign_equipment_map(const QSqlRecord& record, EquipmentMap& map, Scene const* scene = nullptr, Equipment const* equipment = nullptr) const;
+  void assign_event(QSqlRecord& record, Event& event) const;
+  void assign_event_map(const QSqlRecord& record, EventMap& map) const;
+  void assign_location(const QSqlRecord& record, Location& location) const;
+  void assign_location_map(const QSqlRecord& record, LocationMap& map) const;
+  void assign_objective(const QSqlRecord& record, Objective& objective) const;
+  void assign_property(const QSqlRecord& record, Property& property) const;
+  void assign_trauma(const QSqlRecord& record, Trauma& trauma) const;
+  void assign_trauma_profile(const QSqlRecord& record, TraumaProfile& trauma) const;
+  void assign_treatment(const QSqlRecord& record, Treatment& treatment) const;
+  void assign_scene(QSqlRecord& record, Scene& scene) const;
+  void assign_role(QSqlRecord& record, Role& role) const;
+  void assign_role_map(const QSqlRecord& record, RoleMap& map) const;
 
 private:
   QString _db_name = "";
