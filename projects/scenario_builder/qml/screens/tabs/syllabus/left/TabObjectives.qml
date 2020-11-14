@@ -12,8 +12,7 @@ ColumnLayout {
   id : root
   property SQLBackend backend
   property int topIndex
-  property Objective currentObjective : ( objectiveList.objectiveDefinitions[objectiveList.currentIndex] ) ?
-                                          objectiveList.objectiveDefinitions[objectiveList.currentIndex] : currentObjective
+  property Objective currentObjective : (objectiveList.objectiveDefinitions[objectiveList.currentIndex]) ? objectiveList.objectiveDefinitions[objectiveList.currentIndex] : currentObjective
 
   Objective {
     id : currentObjective
@@ -139,8 +138,9 @@ ColumnLayout {
           font.pointSize : 10
           wrapMode : Text.Wrap
           text : {
-            let l_description = (objectiveList.objectiveDefinitions[index]) ? objectiveList.objectiveDefinitions[index].description : ""
-            if (!enabled) {
+            let l_description = (objectiveList.objectiveDefinitions[index]) ? 
+                                objectiveList.objectiveDefinitions[index].description : "";
+             if (!enabled) {
               return l_description.split("\n")[0].trim()
             } else {
               var details = l_description.split("\n")

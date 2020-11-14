@@ -7,9 +7,9 @@ import QtQuick.Controls.Material 2.0
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
 Rectangle {
-  id: root
+  id : root
   property string label : "Label"
-  property string labelPlaural : label + "s" 
+  property string labelPlaural : label + "s"
 
   property alias count : listArea.count
   property alias model : listArea.model
@@ -22,89 +22,89 @@ Rectangle {
   signal removed(int index)
 
   height : content.height
-  
+
   Layout.rightMargin : 20
   Layout.alignment : Qt.AlignTop
 
   Label {
-  id: name
-  Layout.alignment : Qt.AlignTop
-   text: root.labelPlaural
-   font.pointSize : 10
-   color: "steelblue"
-   width: 100
+    id : name
+    Layout.alignment : Qt.AlignTop
+    text : root.labelPlaural
+    font.pointSize : 10
+    color : "steelblue"
+    width : 100
   }
 
   Rectangle {
     id : content
-    color: "transparent"
-    border.color: "grey"
-    radius: 2
+    color : "transparent"
+    border.color : "grey"
+    radius : 2
     height : 300
-    anchors { left : name.right; right: parent.right ; }
+    anchors {
+      left : name.right;
+      right : parent.right;
+    }
 
-   PFCButton {
+    PFCButton {
       id : listButton
-      text : "List " + root.label +"s"
+      text : "List " + root.label + "s"
       anchors.left : content.left
       anchors.leftMargin : 5
-  
+
       onClicked : {
         root.list()
       }
-      onComplete: {
-        
-      }
+      onComplete : {}
     }
-   PFCButton {
+    PFCButton {
       id : addButton
       text : "Add " + root.label
       anchors.left : listButton.right
       anchors.right : removeButton.left
       anchors.leftMargin : 5
       anchors.rightMargin : 5
-  
+
       onClicked : {
         root.added(root.model.count)
       }
-      onComplete: {
-        
-      }
+      onComplete : {}
     }
     PFCButton {
-      id: removeButton
+      id : removeButton
       text : "Remove " + root.label
       anchors.right : content.right
       anchors.rightMargin : 5
 
-      
+
       onClicked : {
         root.removed(root.current)
       }
-      onComplete: {
-        
-      }
+      onComplete : {}
     }
 
     ListView {
       id : listArea
-      anchors { left : parent.left; right: parent.right ; 
-                top   : addButton.bottom ; topMargin : 5
-                bottom : content.bottom
-              }
+      anchors {
+        left : parent.left;
+        right : parent.right;
+        top : addButton.bottom;
+        topMargin : 5
+        bottom : content.bottom
+      }
       spacing : 5
-      clip: true
+      clip : true
       highlightFollowsCurrentItem : true
       highlightMoveDuration : 1
-      highlight: Rectangle {
-          color: '#1111110F'
-          anchors.left   : (parent)? parent.left : undefined
-          anchors.right  : (parent)? parent.right: undefined
-          anchors.margins : 5
-          
+      highlight : Rectangle {
+        color : '#1111110F'
+        anchors.left : (parent) ? parent.left : undefined
+        anchors.right : (parent) ? parent.right : undefined
+        anchors.margins : 5
+
       }
 
-      ScrollBar.vertical: ScrollBar { }
+      ScrollBar.vertical : ScrollBar {}
     }
   }
 }

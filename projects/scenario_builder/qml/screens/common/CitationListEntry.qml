@@ -61,7 +61,7 @@ ListEntry {
       activeFocusOnPress : false
       hoverEnabled : false
       enabled : false
-      color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
+      color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       onEditingFinished : {
         update_citation(model.citation_id)
       }
@@ -76,7 +76,7 @@ ListEntry {
       activeFocusOnPress : false
       hoverEnabled : false
       enabled : false
-      color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
+      color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       onEditingFinished : {
         update_citation(model.citation_id)
       }
@@ -92,7 +92,7 @@ ListEntry {
       activeFocusOnPress : false
       hoverEnabled : false
       enabled : false
-      color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
+      color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       onEditingFinished : {
         update_citation(model.citation_id)
       }
@@ -110,7 +110,7 @@ ListEntry {
       activeFocusOnPress : false
       hoverEnabled : false
       enabled : false
-      color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
+      color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       onEditingFinished : {
         update_citation(model.citation_id)
       }
@@ -219,7 +219,7 @@ ListEntry {
     self.key = "REF%1".arg(likely_id);
     self.title = "New Reference %1".arg(likely_id);
     self.authors = "Unknown Author";
-     self.year = 2018;
+    self.year = 2018;
     self.key = "AuthorYear_%1".arg(likely_id);
     root.backend.update_citation(self);
     root.model.insert(root.model.count, {
