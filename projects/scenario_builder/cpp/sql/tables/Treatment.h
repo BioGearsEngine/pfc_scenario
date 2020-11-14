@@ -23,15 +23,26 @@ struct Citation;
 
 struct Treatment : public QObject {
   Q_OBJECT
-  Q_PROPERTY(int treatment_id MEMBER id)
-  Q_PROPERTY(QString uuid MEMBER uuid)
-  Q_PROPERTY(QString medical_name MEMBER medical_name)
-  Q_PROPERTY(QString common_name MEMBER common_name)
-  Q_PROPERTY(QString description MEMBER description)
+  Q_PROPERTY(int treatment_id MEMBER id NOTIFY idChanged)
+  Q_PROPERTY(QString uuid MEMBER uuid NOTIFY uuidChanged)
+  Q_PROPERTY(QString medicalName MEMBER medical_name NOTIFY medicalNameChanged)
+  Q_PROPERTY(QString commonName MEMBER common_name NOTIFY commonNameChanged)
+  Q_PROPERTY(QString description MEMBER description NOTIFY descriptionChanged)
   Q_PROPERTY(QQmlListProperty<Equipment> equipment READ getEquipment NOTIFY equipmentChanged)
-  Q_PROPERTY(QQmlListProperty<Citation> citations READ getCitations NOTIFY citationsChanged)
-  Q_PROPERTY(QQmlListProperty<Citation> cpgs READ getCPGS NOTIFY cpgsChanged)
-public:
+  Q_PROPERTY(QQmlListProperty<Citation>  citations READ getCitations NOTIFY citationsChanged)
+  Q_PROPERTY(QQmlListProperty<Citation>  cpgs READ getCPGS NOTIFY cpgsChanged)
+
+signals:
+  void idChanged();
+  void uuidChanged();
+  void medicalNameChanged();
+  void commonNameChanged();
+  void descriptionChanged();
+  void equipmentChanged();
+  void citationsChanged();
+  void cpgsChanged();
+
+  public:
   int32_t id = -1;
   QString uuid = "";
   QString medical_name = "";
@@ -55,10 +66,6 @@ public:
   void assign(const Treatment& rhs);
   void clear();
 
-signals:
-  void equipmentChanged();
-  void citationsChanged();
-  void cpgsChanged();
 
 private:
   //! Helper functions for Citations

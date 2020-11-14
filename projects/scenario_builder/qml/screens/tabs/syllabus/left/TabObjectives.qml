@@ -12,12 +12,12 @@ ColumnLayout {
   id : root
   property SQLBackend backend
   property int topIndex
-  property Objective currentObjective : ( objectiveList.objectiveDefinitions[objectiveList.currentIndex] ) ? objectiveList.objectiveDefinitions[objectiveList.currentIndex] : currentObjective
+  property Objective currentObjective : ( objectiveList.objectiveDefinitions[objectiveList.currentIndex] ) ?
+                                          objectiveList.objectiveDefinitions[objectiveList.currentIndex] : currentObjective
 
   Objective {
-    id : objective
+    id : currentObjective
   }
-
 
   Rectangle {
     id : listRectangle
@@ -78,7 +78,7 @@ ColumnLayout {
 
     ListView {
       id : objectiveList
-      property var objectives
+      property var objectiveDefinitions
 
       anchors {
         top : controls.bottom;
@@ -122,7 +122,7 @@ ColumnLayout {
           id : objective_title_text
           anchors.left : objective.left
           anchors.leftMargin : 5
-          text : (objectiveList.objectives[index]) ? objectiveList.objectives[index].name : ""
+          text : (objectiveList.objectiveDefinitions[index]) ? objectiveList.objectiveDefinitions[index].name : ""
           width : 150
           font.weight : Font.Bold
           font.pointSize : 10
@@ -139,7 +139,7 @@ ColumnLayout {
           font.pointSize : 10
           wrapMode : Text.Wrap
           text : {
-            let l_description = (objectiveList.objectives[index]) ? objectiveList.objectives[index].description : ""
+            let l_description = (objectiveList.objectiveDefinitions[index]) ? objectiveList.objectiveDefinitions[index].description : ""
             if (!enabled) {
               return l_description.split("\n")[0].trim()
             } else {
@@ -147,7 +147,6 @@ ColumnLayout {
               details.splice(0, 1)
               var details_str = details.join('\n').trim()
               return(details_str === "") ? l_description.trim() : details_str
-
             }
           }
           enabled : false
@@ -180,13 +179,13 @@ ColumnLayout {
   }
 
   function rebuildObjectives() {
-    objectiveList.objectives = []
+    objectiveList.objectiveDefinitions = []
     let objectives = root.backend.objectives;
     for (var ii = 0; ii < objectives.length; ++ ii) {
-      objectiveList.objectives.push(objective.make());
-      objectiveList.objectives[objectiveList.objectives.length - 1].assign(objectives[ii]);
+      objectiveList.objectiveDefinitions.push(currentObjective.make());
+      objectiveList.objectiveDefinitions[objectiveList.objectiveDefinitions.length - 1].assign(objectives[ii]);
     }
-    objectiveList.model = objectiveList.objectives;
+    objectiveList.model = objectiveList.objectiveDefinitions;
   }
 
   Component.onCompleted : {

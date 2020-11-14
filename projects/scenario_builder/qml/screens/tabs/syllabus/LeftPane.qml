@@ -87,7 +87,7 @@ Rectangle {
       }
       TabButton {
         id : trauma_set_tab
-        text : "Trauma Sets"
+        text : "Trauma Profiles"
         width : implicitWidth
       }
       TabButton {

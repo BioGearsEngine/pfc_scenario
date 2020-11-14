@@ -12,22 +12,15 @@ ColumnLayout {
   id : root
   property SQLBackend backend
   property int topIndex
-  property Equipment currentEquipment : (equipmentList.equipmentDefinitions[equipmentList.currentIndex]) ? equipmentList.equipmentDefinitions[equipmentList.currentIndex] : currentEquipment
+  property Equipment currentEquipment : (equipmentList.equipmentDefinitions[equipmentList.currentIndex]) ? 
+                                         equipmentList.equipmentDefinitions[equipmentList.currentIndex] : currentEquipment
 
   signal reloadEquipmentList();
 
   Equipment {
     id : currentEquipment
   }
-  function refresh_equipment() {
-
-    var list = root.backend.getEquipment()
-    for (var ii = 0; ii < list.count; ++i) {
-      equipmentList.equipmentDefinitions.push(list[i].make())
-      equipmentList.equipmentDefinitions[equipmentList.equipmentDefinitions.length - 1].assign(list[i])
-    }
-    equipmentList.model = list
-  }
+  
   Rectangle {
     id : listRectangle
     Layout.fillWidth : true
@@ -116,7 +109,7 @@ ColumnLayout {
 
       delegate : Rectangle {
 
-        property var currentDef: equipmentList.equipmentDefinitions[index]
+        property var currentDef : equipmentList.equipmentDefinitions[index]
         id : equipment
         color : 'transparent'
         border.color : "steelblue"
@@ -201,32 +194,17 @@ ColumnLayout {
 
       ScrollBar.vertical : ScrollBar {}
 
-      Component.onCompleted : {
-        var r_count = backend.equipment_count();
-        root.backend.equipments();
-        equipmentList.equipmentDefinitions = [];
-        while (root.backend.next_equipment(currentEquipment)) {
-          equipmentList.equipmentDefinitions.push(currentEquipment.make())
-          equipmentList.equipmentDefinitions[equipmentList.equipmentDefinitions.length - 1].assign(currentEquipment)
-        }
-        equipmentList.model = equipmentList.equipmentDefinitions
-      }
     }
   }
-  onTopIndexChanged : {
-    refresh_equipment()
-  }
-  onReloadEquipmentList : {
-    refresh_equipment()
-  }
+
   function rebuildEquipments() {
-    equipmentList.equipments = []
-    let equipments = root.backend.equipments;
+    equipmentList.equipmentDefinitions = []
+    let equipments = root.backend.equipment;
     for (var ii = 0; ii < equipments.length; ++ ii) {
-      equipmentList.equipments.push(equipment.make());
-      equipmentList.equipments[equipmentList.equipments.length - 1].assign(equipments[ii]);
+      equipmentList.equipmentDefinitions.push(currentEquipment.make());
+      equipmentList.equipmentDefinitions[equipmentList.equipmentDefinitions.length - 1].assign(equipments[ii]);
     }
-    equipmentList.model = equipmentList.equipments;
+    equipmentList.model = equipmentList.equipmentDefinitions;
   }
 
   Component.onCompleted : {

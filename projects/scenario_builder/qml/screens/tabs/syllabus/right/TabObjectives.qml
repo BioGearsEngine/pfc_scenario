@@ -103,8 +103,6 @@ ColumnLayout {
      currentIndex : 0
     CitationListEntry {
       id : referenceList
-      Layout.fillWidth : true
-
       backend : root.backend
       onList : {
         var values = root.model.get(root.index);
@@ -143,7 +141,6 @@ ColumnLayout {
     }
     FullCitationListEntry {
       id : fullReferenceList
-      Layout.fillWidth : true
       backend : root.backend
 
       onFullAdded : {

@@ -12,11 +12,12 @@ ColumnLayout {
   id : root
   property SQLBackend backend
   property int topIndex
-  property Assessment currentAssessment : ( assessmentList.assessmentDefinitions[assessmentList.currentIndex] ) ? assessmentList.assessmentDefinitions[assessmentList.currentIndex] : currentAssessment
+  property Assessment currentAssessment : ( assessmentList.assessmentDefinitions[assessmentList.currentIndex] ) ? 
+                                            assessmentList.assessmentDefinitions[assessmentList.currentIndex] : currentAssessment
 
 
   Assessment {
-    id : self
+    id : currentAssessment
   }
 
   Rectangle {
@@ -44,27 +45,27 @@ ColumnLayout {
         if (next < root.model.count) {
           next = root.model.count + 1
         }
-        self.assessment_id = -1;
-        self.name = "New Assessment %1".arg(next);
-        self.description = "Description of Assessment %1".arg(next);
-        self.type = "binary" // vs assessment
-        self.available_points = "1";
-        self.criteria = "Unknown Criteria";
-        while (root.backend.select_assessment(self)) {
+        currentAssessment.assessment_id = -1;
+        currentAssessment.name = "New Assessment %1".arg(next);
+        currentAssessment.description = "Description of Assessment %1".arg(next);
+        currentAssessment.type = "binary" // vs assessment
+        currentAssessment.available_points = "1";
+        currentAssessment.criteria = "Unknown Criteria";
+        while (root.backend.select_assessment(currentAssessment)) {
           next = next + 1
-          self.assessment_id = -1;
-          self.name = "New Assessment %1".arg(next);
-          self.description = "Description of Assessment %1".arg(next)
+          currentAssessment.assessment_id = -1;
+          currentAssessment.name = "New Assessment %1".arg(next);
+          currentAssessment.description = "Description of Assessment %1".arg(next)
         }
-        self.uuid = "";
-        root.backend.update_assessment(self);
+        currentAssessment.uuid = "";
+        root.backend.update_assessment(currentAssessment);
         root.model.insert(root.model.count, {
-          "id": self.assessment_id,
-          "name": "%1".arg(self.name),
-          "description": "%1".arg(self.description),
-          "type": self.type,
-          "available_points": self.available_points,
-          "criteria": self.criteria
+          "id": currentAssessment.assessment_id,
+          "name": "%1".arg(currentAssessment.name),
+          "description": "%1".arg(currentAssessment.description),
+          "type": currentAssessment.type,
+          "available_points": currentAssessment.available_points,
+          "criteria": currentAssessment.criteria
         });
         ++next;
       }
@@ -72,16 +73,18 @@ ColumnLayout {
         if (root.model.count == 0) {
           return
         }
-        self.assessment_id = -1;
-         self.name = root.model.get(root.index).name;
-          root.backend.remove_assessment(self);
+        currentAssessment.assessment_id = -1;
+         currentAssessment.name = root.model.get(root.index).name;
+          root.backend.remove_assessment(currentAssessment);
           root.model.remove(root.index);
-          listArea.currentIndex = Math.max(0, root.index - 1)
+          assessmentList.currentIndex = Math.max(0, root.index - 1)
       }
     }
 
     ListView {
-      id : listArea
+      id : assessmentList
+      property var assessmentDefinitions;
+
       anchors {
         top : controls.bottom;
         bottom : parent.bottom;
@@ -103,6 +106,7 @@ ColumnLayout {
 
       delegate : Rectangle {
         id : assessment
+        property var currentDef : assessmentList.assessmentDefinitions[index]
         color : 'transparent'
         border.color : "steelblue"
         height : assessment_title_text.height + assessment_value_text.height
@@ -115,7 +119,7 @@ ColumnLayout {
         MouseArea {
           anchors.fill : parent
           onClicked : {
-            listArea.currentIndex = index
+            assessmentList.currentIndex = index
 
           }
         }
@@ -124,7 +128,7 @@ ColumnLayout {
           id : assessment_title_text
           anchors.left : assessment.left
           anchors.leftMargin : 5
-          text : model.name
+          text : (currentDef) ? currentDef.name : ""
           width : 150
           font.weight : Font.Bold
           font.pointSize : 10
@@ -141,13 +145,14 @@ ColumnLayout {
           font.pointSize : 10
           wrapMode : Text.Wrap
           text : {
+            let l_description = (currentDef) ? currentDef.description : ""
             if (!enabled) {
-              return description.split("\n")[0].trim()
+              return l_description.split("\n")[0].trim()
             } else {
-              var details = description.split("\n")
+              var details = l_description.split("\n")
               details.splice(0, 1)
               var details_str = details.join('\n').trim()
-              return(details_str === "") ? description.trim() : details_str
+              return(details_str === "") ? l_description.trim() : details_str
 
             }
           }
@@ -169,7 +174,7 @@ ColumnLayout {
         }
 
         onFocusChanged : {
-          if (listArea.currentIndex == index) {
+          if (assessmentList.currentIndex == index) {
             state = 'Selected';
           } else {
             state = '';
@@ -181,13 +186,13 @@ ColumnLayout {
     }
   }
     function rebuildAssessments() {
-    assessmentList.assessments = []
+    assessmentList.assessmentDefinitions = []
     let assessments = root.backend.assessments;
     for (var ii = 0; ii < assessments.length; ++ ii) {
-      assessmentList.assessments.push(assessment.make());
-      assessmentList.assessments[assessmentList.assessments.length - 1].assign(assessments[ii]);
+      assessmentList.assessmentDefinitions.push(currentAssessment.make());
+      assessmentList.assessmentDefinitions[assessmentList.assessmentDefinitions.length - 1].assign(assessments[ii]);
     }
-    assessmentList.model = assessmentList.assessments;
+    assessmentList.model = assessmentList.assessmentDefinitions;
   }
 
   Component.onCompleted : {

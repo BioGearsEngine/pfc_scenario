@@ -301,8 +301,8 @@ bool SQLite3Driver::populate_db()
   }
   //---TraumaProfile---
   if (trauma_profile_count() == 0) {
-    default_trauma_profile.name = "Trauma Set 1";
-    default_trauma_profile.description = "";
+    default_trauma_profile.name = "Trauma Profile 1";
+    default_trauma_profile.description = "Simple Multitrauma Profile";
     if (!update_trauma_profile(&default_trauma_profile)) {
       return false;
     }

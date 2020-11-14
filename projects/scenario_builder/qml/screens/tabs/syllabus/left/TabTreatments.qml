@@ -12,7 +12,8 @@ ColumnLayout {
   id : root
   property SQLBackend backend
   property int topIndex
-  property Treatment currentTreatment : (treatmentList.TreatmentDefinitions[treatmentList.currentIndex]) ? treatmentList.TreatmentDefinitions[treatmentList.currentIndex] : currentTreatment
+  property Treatment currentTreatment : (treatmentList.treatmentDefinitions[treatmentList.currentIndex]) ? 
+                                         treatmentList.treatmentDefinitions[treatmentList.currentIndex] : currentTreatment
 
   Treatment {
     id : currentTreatment
@@ -44,24 +45,24 @@ ColumnLayout {
           next = root.model.count + 1
         }
         currentTreatment.treatment_id = -1;
-        currentTreatment.medical_name = "New Treatment %1".arg(next);
-        currentTreatment.common_name = "New Treatment %1".arg(next);
+        currentTreatment.medicalName = "New Treatment %1".arg(next);
+        currentTreatment.commonName = "New Treatment %1".arg(next);
         currentTreatment.description = "Description of Treatment %1".arg(next);
         currentTreatment.equipment = "";
         currentTreatment.citations = "";
         while (root.backend.select_treatment(currentTreatment)) {
           next = next + 1
           currentTreatment.treatment_id = -1;
-          currentTreatment.medical_name = "New Treatment %1".arg(next);
-          currentTreatment.common_name = "New Treatment %1".arg(next);
+          currentTreatment.medicalName = "New Treatment %1".arg(next);
+          currentTreatment.commonName = "New Treatment %1".arg(next);
           currentTreatment.description = "Description of Treatment %1".arg(next)
         }
         currentTreatment.uuid = "";
         root.backend.update_treatment(currentTreatment);
         root.model.insert(root.model.count, {
           "id": currentTreatment.treatment_id,
-          "medical_name": "%1".arg(currentTreatment.medical_name),
-          "common_name": "%1".arg(currentTreatment.common_name),
+          "medicalName": "%1".arg(currentTreatment.medicalName),
+          "commonName": "%1".arg(currentTreatment.commonName),
           "description": "%1".arg(currentTreatment.description),
           "citations": currentTreatment.citaitons,
           "equipment": currentTreatment.equipment
@@ -74,18 +75,20 @@ ColumnLayout {
           return
         }
         currentTreatment.treatment_id = -1;
-        currentTreatment.medical_name = root.model.get(root.index).medical_name;
+        currentTreatment.medicalName = root.model.get(root.index).medicalName;
         root.backend.remove_treatment(currentTreatment);
         root.model.remove(root.index);
-        if (listArea.currentIndex == 0) { // If the index was 0 this wasn't registering as an index change and the right pane wasn't reloading
-          listArea.currentIndex = 1
+        if (treatmentList.currentIndex == 0) { // If the index was 0 this wasn't registering as an index change and the right pane wasn't reloading
+          treatmentList.currentIndex = 1
         }
-        listArea.currentIndex = Math.max(0, root.index - 1)
+        treatmentList.currentIndex = Math.max(0, root.index - 1)
       }
     }
 
     ListView {
-      id : listArea
+      id : treatmentList
+      property var treatmentDefinitions 
+
       anchors {
         top : controls.bottom;
         bottom : parent.bottom;
@@ -107,6 +110,7 @@ ColumnLayout {
 
       delegate : Rectangle {
         id : treatment
+        property var currentDef : treatmentList.treatmentDefinitions[index]
         color : 'transparent'
         border.color : "steelblue"
         height : treatment_title_text.height + treatment_value_text.height
@@ -119,8 +123,7 @@ ColumnLayout {
         MouseArea {
           anchors.fill : parent
           onClicked : {
-            listArea.currentIndex = index
-
+            treatmentList.currentIndex = index
           }
         }
 
@@ -128,7 +131,7 @@ ColumnLayout {
           id : treatment_title_text
           anchors.left : treatment.left
           anchors.leftMargin : 5
-          text : model.medical_name
+          text : (currentDef) ? currentDef.medicalName : ""
           width : 150
           font.weight : Font.Bold
           font.pointSize : 10
@@ -145,13 +148,15 @@ ColumnLayout {
           font.pointSize : 10
           wrapMode : Text.Wrap
           text : {
+             let l_commonName  = (currentDef) ? currentDef.commonName : ""
+             let l_description = (currentDef) ? currentDef.description : ""
             if (!enabled) {
-              return model.common_name
+              return l_commonName
             } else {
-              if (description === "") {
-                return model.common_name
+              if (l_description === "") {
+                return l_commonName
               } else {
-                return description
+                return l_description
               }
             }
           }
@@ -173,42 +178,24 @@ ColumnLayout {
         }
 
         onFocusChanged : {
-          if (listArea.currentIndex == index) {
+          if (treatmentList.currentIndex == index) {
             state = 'Selected';
           } else {
             state = '';
           }
         }
       }
-
       ScrollBar.vertical : ScrollBar {}
-
-      Component.onCompleted : {
-        var r_count = backend.treatment_count();
-        root.backend.treatments();
-        listArea.model.clear();
-        while (root.backend.next_treatment(currentTreatment)) {
-          listArea.model.insert(listArea.model.count, {
-            id: currentTreatment.treatment_id,
-            medical_name: "%1".arg(currentTreatment.medical_name),
-            common_name: "%1".arg(currentTreatment.common_name),
-            description: "%1".arg(currentTreatment.description),
-            equipment: currentTreatment.equipment,
-            citations: currentTreatment.citations
-
-          });
-        }
-      }
     }
   }
   function rebuildTreatments() {
-    treatmentList.treatments = []
+    treatmentList.treatmentDefinitions = []
     let treatments = root.backend.treatments;
     for (var ii = 0; ii < treatments.length; ++ ii) {
-      treatmentList.treatments.push(treatment.make());
-      treatmentList.treatments[treatmentList.treatments.length - 1].assign(treatments[ii]);
+      treatmentList.treatmentDefinitions.push(currentTreatment.make());
+      treatmentList.treatmentDefinitions[treatmentList.treatmentDefinitions.length - 1].assign(treatments[ii]);
     }
-    treatmentList.model = treatmentList.treatments;
+    treatmentList.model = treatmentList.treatmentDefinitions;
   }
 
   Component.onCompleted : {

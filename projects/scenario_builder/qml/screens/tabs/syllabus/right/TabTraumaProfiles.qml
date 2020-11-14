@@ -18,6 +18,7 @@ ColumnLayout {
 
   TraumaProfile {
     id : obj
+    physiologyTree : ["StandardMale@0s.xml"]
   }
   Trauma {
     id : trauma
@@ -55,14 +56,10 @@ ColumnLayout {
   }
 
   function update_trauma_set(values) {
-    obj.trauma_set_id = values.id;
-    obj.name = values.name;
-    obj.description = values.description
-    obj.injuries = values.injuries;
-    obj.locations = values.locations;
-    obj.severities = values.severities;
-
-    root.backend.update_trauma_set(obj)
+    if ( values.physiologyTree.length == 0 ){
+      values.physiologyTree.push("StandardMale@0s.xml");
+    }
+    root.backend.update_trauma_set(values)
   }
 
   TextEntry {
@@ -75,6 +72,21 @@ ColumnLayout {
       var entry = model.get(index);
       if (text != entry.name) {
         entry.name = text;
+        update_trauma_set(entry);
+      }
+    }
+  }
+
+  TextEntry {
+    Layout.fillWidth : true
+    Layout.leftMargin : 5
+    id : descriptionEntry
+    label : "Description"
+
+    onEditingFinished : {
+      var entry = model.get(index);
+      if (text != entry.description) {
+        entry.description = text;
         update_trauma_set(entry);
       }
     }
@@ -204,6 +216,22 @@ ColumnLayout {
       }
     }
   }
+
+    TextEntry {
+    Layout.fillWidth : true
+    Layout.leftMargin : 5
+    id : physiologyEntry
+    label : "Physiology File"
+
+    onEditingFinished : {
+      var entry = model.get(index);
+      if (text != entry.traumasChanged[0]) {
+        entry.traumasChanged[0] = text;
+        update_trauma_set(entry);
+      }
+    }
+  }
+
   onTopIndexChanged : {
     if (topIndex == 1) {
       refresh_traumas()

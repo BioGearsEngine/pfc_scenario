@@ -24,11 +24,18 @@ struct Trauma;
 
 struct TraumaOccurance : public QObject {
   Q_OBJECT
-  Q_PROPERTY(int trauma_instance_id MEMBER id)
-  Q_PROPERTY(Trauma* fk_trauma MEMBER fk_trauma)
-  Q_PROPERTY(QString description MEMBER description)
-  Q_PROPERTY(QString location MEMBER location)
-  Q_PROPERTY(QString severity MEMBER severity)
+  Q_PROPERTY(int trauma_instance_id MEMBER id NOTIFY idChanged)
+  Q_PROPERTY(Trauma* fk_trauma MEMBER fk_trauma NOTIFY traumaChanged)
+  Q_PROPERTY(QString description MEMBER description NOTIFY descriptionChanged)
+  Q_PROPERTY(QString location MEMBER location NOTIFY locationChanged)
+  Q_PROPERTY(QString severity MEMBER severity NOTIFY severityChanged)
+
+signals:
+  void idChanged();
+  void traumaChanged();
+  void descriptionChanged();
+  void locationChanged();
+  void severityChanged();
 
 public:
   int32_t id = -1;
@@ -55,12 +62,12 @@ public:
 
 struct TraumaProfile : public QObject {
   Q_OBJECT
-  Q_PROPERTY(int trauma_profile_id MEMBER id)
-  Q_PROPERTY(QString uuid MEMBER uuid)
-  Q_PROPERTY(QString name MEMBER name)
-  Q_PROPERTY(QString description MEMBER description)
+  Q_PROPERTY(int trauma_profile_id MEMBER id NOTIFY idChanged)
+  Q_PROPERTY(QString uuid MEMBER uuid NOTIFY uuidChanged)
+  Q_PROPERTY(QString name MEMBER name NOTIFY nameChanged)
+  Q_PROPERTY(QString description MEMBER description NOTIFY descriptionChanged)
   Q_PROPERTY(QQmlListProperty<TraumaOccurance> traumas READ get_traumas NOTIFY traumasChanged);
-  Q_PROPERTY(QQmlListProperty<QString> physiologyTree READ get_physiology_tree NOTIFY physiologyTreeChanged)
+  Q_PROPERTY(QStringList physiologyTree MEMBER physiologyTree NOTIFY physiologyTreeChanged)
 
 public:
   int32_t id = -1;
@@ -68,7 +75,7 @@ public:
   QString name = "";
   QString description = "";
   QList<TraumaOccurance*> traumas;
-  QList<QString> physiologyTree;
+  QStringList physiologyTree;
 
   TraumaProfile(QObject* parent = nullptr);
   TraumaProfile(const TraumaProfile&) = delete;
@@ -84,11 +91,16 @@ public:
   void assign(const TraumaProfile& rhs);
   void clear();
 signals:
+  void idChanged();
+  void uuidChanged();
+  void nameChanged();
+  void descriptionChanged();
   void traumasChanged();
   void physiologyTreeChanged();
+
 private:
   QQmlListProperty<TraumaOccurance> get_traumas();
-  QQmlListProperty<QString> get_physiology_tree();
+  // QQmlListProperty<QString> get_physiology_tree();
   //! Helper functions for Traumas
   static void AppendTrauma(QQmlListProperty<TraumaOccurance>* list, TraumaOccurance* value);
   static auto GetTrauma(QQmlListProperty<TraumaOccurance>* list, int index) -> TraumaOccurance*;
@@ -98,12 +110,12 @@ private:
   static void ReplaceTrauma(QQmlListProperty<TraumaOccurance>* list, int index, TraumaOccurance* value);
 
   //! Helper functions for Traumas
-  static void AppendPhysiologyState(QQmlListProperty<QString>* list, QString* value);
-  static auto GetPhysiologyState(QQmlListProperty<QString>* list, int index) -> QString*;
-  static void ClearPhysiologyStates(QQmlListProperty<QString>* list);
-  static auto CountPhysiologyStates(QQmlListProperty<QString>* list) -> int;
-  static void RemoveLastPhysiologyState(QQmlListProperty<QString>* list);
-  static void ReplacePhysiologyState(QQmlListProperty<QString>* list, int index, QString* value);
+  // static void AppendPhysiologyState(QQmlListProperty<QString>* list, QString* value);
+  // static auto GetPhysiologyState(QQmlListProperty<QString>* list, int index) -> QString*;
+  // static void ClearPhysiologyStates(QQmlListProperty<QString>* list);
+  // static auto CountPhysiologyStates(QQmlListProperty<QString>* list) -> int;
+  // static void RemoveLastPhysiologyState(QQmlListProperty<QString>* list);
+  // static void ReplacePhysiologyState(QQmlListProperty<QString>* list, int index, QString* value);
 };
 
 #endif

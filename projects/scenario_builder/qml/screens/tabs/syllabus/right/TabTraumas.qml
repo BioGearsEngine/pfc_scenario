@@ -113,11 +113,10 @@ ColumnLayout {
     Layout.leftMargin : 5
     Layout.rightMargin : 20
     Layout.fillWidth : true
-    Layout.minimumHeight : 300
+    Layout.fillHeight : false
     currentIndex : 0
     CitationListEntry {
       id : referenceList
-      Layout.fillWidth : true
       backend : root.backend
       onList : {
         var values = root.model.get(root.index);
@@ -195,7 +194,6 @@ ColumnLayout {
   }
 
   TextAreaEntry {
-    Layout.fillWidth : true
     Layout.leftMargin : 5
 
     id : descriptionEntry

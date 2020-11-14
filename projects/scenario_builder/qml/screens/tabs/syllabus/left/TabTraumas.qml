@@ -17,7 +17,7 @@ ColumnLayout {
   Trauma {
     id : currentTrauma
   }
-  
+
   Rectangle {
     id : listRectangle
     Layout.fillWidth : true
@@ -80,15 +80,16 @@ ColumnLayout {
         currentTrauma.medical_name = root.model.get(root.index).medical_name;
         root.backend.remove_injury(currentTrauma);
         root.model.remove(root.index);
-        if (listArea.currentIndex == 0) { // If the index was 0 this wasn't registering as an index change and the right pane wasn't reloading
-          listArea.currentIndex = 1
+        if (traumaList.currentIndex == 0) { // If the index was 0 this wasn't registering as an index change and the right pane wasn't reloading
+          traumaList.currentIndex = 1
         }
-        listArea.currentIndex = Math.max(0, root.index - 1)
+        traumaList.currentIndex = Math.max(0, root.index - 1)
       }
     }
 
     ListView {
-      id : listArea
+      id : traumaList
+      property var traumaDefinitions
       anchors {
         top : controls.bottom;
         bottom : parent.bottom;
@@ -122,8 +123,7 @@ ColumnLayout {
         MouseArea {
           anchors.fill : parent
           onClicked : {
-            listArea.currentIndex = index
-
+            traumaList.currentIndex = index
           }
         }
 
@@ -131,7 +131,7 @@ ColumnLayout {
           id : trauma_title_text
           anchors.left : trauma.left
           anchors.leftMargin : 5
-          text : model.medical_name
+          text : (traumaList.traumaDefinitions[index]) ? traumaList.traumaDefinitions[index].medical_name : ""
           width : 150
           font.weight : Font.Bold
           font.pointSize : 10
@@ -148,14 +148,18 @@ ColumnLayout {
           font.pointSize : 10
           wrapMode : Text.Wrap
           text : {
-            if (!enabled) {
-              return model.common_name
-            } else {
-              if (description === "") {
-                return model.common_name
+            if (traumaList.traumaDefinitions[index]) {
+              if (!enabled) {
+                return traumaList.traumaDefinitions[index].common_name;
               } else {
-                return description
+                if (traumaList.traumaDefinitions[index].description === "") {
+                  return traumaList.traumaDefinitions[index].common_name;
+                } else {
+                  return traumaList.traumaDefinitions[index].description;
+                }
               }
+            } else {
+              return "";
             }
           }
           enabled : false
@@ -176,7 +180,7 @@ ColumnLayout {
         }
 
         onFocusChanged : {
-          if (listArea.currentIndex == index) {
+          if (traumaList.currentIndex == index) {
             state = 'Selected';
           } else {
             state = '';
@@ -185,18 +189,18 @@ ColumnLayout {
       }
 
       ScrollBar.vertical : ScrollBar {}
-      
+
     }
   }
 
   function rebuildTraumas() {
-    traumaList.traumas = []
+    traumaList.traumaDefinitions = [];
     let traumas = root.backend.traumas;
     for (var ii = 0; ii < traumas.length; ++ ii) {
-      traumaList.traumas.push(trauma.make());
-      traumaList.traumas[traumaList.traumas.length - 1].assign(traumas[ii]);
+      traumaList.traumaDefinitions.push(currentTrauma.make());
+      traumaList.traumaDefinitions[traumaList.traumaDefinitions.length - 1].assign(traumas[ii]);
     }
-    traumaList.model = traumaList.traumas;
+    traumaList.model = traumaList.traumaDefinitions;
   }
 
   Component.onCompleted : {

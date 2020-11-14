@@ -75,6 +75,7 @@ int main(int argc, char* argv[])
   qmlRegisterInterface<TraumaProfile>("const TraumaProfile*");
   qmlRegisterInterface<Treatment>("const Treatment*");
 
+
   QPixmap pixmap("D:/biogears/pfc/scenario/build/img/sustain_splash.png");
   qDebug() << QString("%1,%2").arg(pixmap.height()).arg(pixmap.width()); //1280x768
   QSplashScreen splash(pixmap);

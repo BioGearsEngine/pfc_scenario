@@ -21,14 +21,23 @@ struct Objective;
 
 struct Assessment : public QObject {
   Q_OBJECT
-  Q_PROPERTY(int assessment_id MEMBER id)
-  Q_PROPERTY(QString uuid MEMBER uuid)
-  Q_PROPERTY(QString name MEMBER name)
-  Q_PROPERTY(QString description MEMBER description)
-  Q_PROPERTY(QString type MEMBER type)
-  Q_PROPERTY(Objective* objective MEMBER fk_objective)
-  Q_PROPERTY(int available_points MEMBER available_points)
-  Q_PROPERTY(QString criteria MEMBER criteria)
+  Q_PROPERTY(int assessment_id MEMBER id NOTIFY idChanged)
+  Q_PROPERTY(QString uuid MEMBER uuid NOTIFY uuidChanged)
+  Q_PROPERTY(QString name MEMBER name NOTIFY nameChanged)
+  Q_PROPERTY(QString description MEMBER description NOTIFY descriptionChanged)
+  Q_PROPERTY(QString type MEMBER type NOTIFY typeChanged)
+  Q_PROPERTY(Objective* objective MEMBER fk_objective NOTIFY objectiveChanged)
+  Q_PROPERTY(int availablePoints MEMBER available_points NOTIFY avaliablePointsChanged)
+  Q_PROPERTY(QString criteria MEMBER criteria NOTIFY criteriaChanged)
+signals:
+  void idChanged();
+  void uuidChanged();
+  void nameChanged();
+  void descriptionChanged();
+  void typeChanged();
+  void objectiveChanged();
+  void avaliablePointsChanged();
+  void criteriaChanged();
 
 public:
   int32_t id = -1;
@@ -56,7 +65,6 @@ public:
   void assign(const Assessment& rhs);
 
   void clear();
-
 };
 //----End Assessment
 
