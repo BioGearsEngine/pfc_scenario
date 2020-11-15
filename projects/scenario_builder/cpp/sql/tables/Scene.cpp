@@ -106,20 +106,14 @@ int Scene::CountEvents(QQmlListProperty<Event>* list)
   return 0;
 }
 //-------------------------------------------------------------------------------
-void Scene::RemoveLastEvent(QQmlListProperty<Event>* list)
+void Scene::RemoveEvent(int index)
 {
-  Scene* TraumaOccurance = qobject_cast<Scene*>(list->object);
-  if (TraumaOccurance) {
-    return TraumaOccurance->events.removeLast();
-  }
+  events.removeAt(index);
 }
 //-------------------------------------------------------------------------------
-void Scene::ReplaceEvent(QQmlListProperty<Event>* list, int index, Event* value)
+void Scene::ReplaceEvent(int index, Event* value)
 {
-  Scene* TraumaOccurance = qobject_cast<Scene*>(list->object);
-  if (TraumaOccurance) {
-    return TraumaOccurance->events.replace(index, value);
-  }
+  events.replace(index, value);
 }
 //-------------------------------------------------------------------------------
 
@@ -167,19 +161,13 @@ int Scene::CountRoles(QQmlListProperty<Role>* list)
   return 0;
 }
 //-------------------------------------------------------------------------------
-void Scene::RemoveLastRole(QQmlListProperty<Role>* list)
+void Scene::RemoveRole(int index)
 {
-  Scene* TraumaOccurance = qobject_cast<Scene*>(list->object);
-  if (TraumaOccurance) {
-    return TraumaOccurance->roles.removeLast();
-  }
-}
+   roles.removeAt(index);
+ }
 //-------------------------------------------------------------------------------
-void Scene::ReplaceRole(QQmlListProperty<Role>* list, int index, Role* value)
+void Scene::ReplaceRole( int index, Role* value)
 {
-  Scene* TraumaOccurance = qobject_cast<Scene*>(list->object);
-  if (TraumaOccurance) {
-    return TraumaOccurance->roles.replace(index, value);
-  }
+   roles.replace(index, value);
 }
 //-------------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 #include "Treatment.h"
 
-  Treatment::Treatment(QObject* parent)
+Treatment::Treatment(QObject* parent)
   : QObject(parent)
 {
 }
@@ -112,20 +112,14 @@ int Treatment::CountCitations(QQmlListProperty<Citation>* list)
   return 0;
 }
 //-------------------------------------------------------------------------------
-void Treatment::RemoveLastCitation(QQmlListProperty<Citation>* list)
+void Treatment::RemoveCitation(int index)
 {
-  Treatment* TraumaOccurance = qobject_cast<Treatment*>(list->object);
-  if (TraumaOccurance) {
-    return TraumaOccurance->citations.removeLast();
-  }
+  citations.removeAt(index);
 }
 //-------------------------------------------------------------------------------
-void Treatment::ReplaceCitation(QQmlListProperty<Citation>* list, int index, Citation* value)
+void Treatment::ReplaceCitation(int index, Citation* value)
 {
-  Treatment* TraumaOccurance = qobject_cast<Treatment*>(list->object);
-  if (TraumaOccurance) {
-    return TraumaOccurance->citations.replace(index, value);
-  }
+  citations.replace(index, value);
 }
 //-------------------------------------------------------------------------------
 
@@ -173,29 +167,23 @@ int Treatment::CountCPGs(QQmlListProperty<Citation>* list)
   return 0;
 }
 //-------------------------------------------------------------------------------
-void Treatment::RemoveLastCPG(QQmlListProperty<Citation>* list)
+void Treatment::RemoveCPG(int index)
 {
-  Treatment* TraumaOccurance = qobject_cast<Treatment*>(list->object);
-  if (TraumaOccurance) {
-    return TraumaOccurance->cpgs.removeLast();
-  }
+  cpgs.removeLast();
 }
 //-------------------------------------------------------------------------------
-void Treatment::ReplaceCPG(QQmlListProperty<Citation>* list, int index, Citation* value)
+void Treatment::ReplaceCPG(int index, Citation* value)
 {
-  Treatment* TraumaOccurance = qobject_cast<Treatment*>(list->object);
-  if (TraumaOccurance) {
-    return TraumaOccurance->cpgs.replace(index, value);
-  }
+  cpgs.replace(index, value);
 }
 //-------------------------------------------------------------------------------
 QQmlListProperty<Equipment> Treatment::getEquipment()
 {
   return QQmlListProperty<Equipment>(this, this,
-                                    &Treatment::AppendEquipment,
-                                    &Treatment::CountEquipments,
-                                    &Treatment::GetEquipment,
-                                    &Treatment::ClearEquipments);
+                                     &Treatment::AppendEquipment,
+                                     &Treatment::CountEquipments,
+                                     &Treatment::GetEquipment,
+                                     &Treatment::ClearEquipments);
 }
 //-------------------------------------------------------------------------------
 //! Helper functions for Traumas
@@ -233,19 +221,13 @@ int Treatment::CountEquipments(QQmlListProperty<Equipment>* list)
   return 0;
 }
 //-------------------------------------------------------------------------------
-void Treatment::RemoveLastEquipment(QQmlListProperty<Equipment>* list)
+void Treatment::RemoveEquipment(int index)
 {
-  Treatment* TraumaOccurance = qobject_cast<Treatment*>(list->object);
-  if (TraumaOccurance) {
-    return TraumaOccurance->equipment.removeLast();
-  }
+  equipment.removeLast();
 }
 //-------------------------------------------------------------------------------
-void Treatment::ReplaceEquipment(QQmlListProperty<Equipment>* list, int index, Equipment* value)
+void Treatment::ReplaceEquipment(int index, Equipment* value)
 {
-  Treatment* TraumaOccurance = qobject_cast<Treatment*>(list->object);
-  if (TraumaOccurance) {
-    return TraumaOccurance->equipment.replace(index, value);
-  }
+  equipment.replace(index, value);
 }
 //-------------------------------------------------------------------------------

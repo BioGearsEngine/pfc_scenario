@@ -2,9 +2,9 @@
 
 #include "Citation.h"
 
-Trauma::Trauma(QObject* parent )
+Trauma::Trauma(QObject* parent)
   : QObject(parent)
-, fk_treatment(new Treatment())
+  , fk_treatment(new Treatment())
 {
 }
 //-------------------------------------------------------------------------------
@@ -24,12 +24,12 @@ bool Trauma::operator!=(const Trauma& rhs) const
   return !(*this == rhs);
 }
 //-------------------------------------------------------------------------------
-  Trauma* Trauma::make()
+Trauma* Trauma::make()
 {
-    return new Trauma();
-  }
+  return new Trauma();
+}
 //-------------------------------------------------------------------------------
- void Trauma::assign(Trauma* rhs)
+void Trauma::assign(Trauma* rhs)
 {
   if (rhs) {
     assign(*rhs);
@@ -47,12 +47,11 @@ void Trauma::assign(const Trauma& rhs)
   upper_bound = rhs.upper_bound;
   qDeleteAll(citations);
   citations.clear();
-  for ( auto citation : rhs.citations) {
+  for (auto citation : rhs.citations) {
     citations.push_back(new Citation(this));
     citations.back()->assign(citation);
   }
   fk_treatment->assign(rhs.fk_treatment);
-
 }
 //-------------------------------------------------------------------------------
 void Trauma::clear()
@@ -74,7 +73,7 @@ void Trauma::clear(int index)
   id = -1;
   uuid.clear();
   common_name = QString("New Trauma:%1").arg(index);
-  medical_name= QString("New Trauma:%1").arg(index);
+  medical_name = QString("New Trauma:%1").arg(index);
   description = QString("Undefined trauma %1.").arg(index);
   qDeleteAll(citations);
   citations.clear();
@@ -127,19 +126,13 @@ int Trauma::CountCitations(QQmlListProperty<Citation>* list)
   return 0;
 }
 //-------------------------------------------------------------------------------
-void Trauma::RemoveLastCitation(QQmlListProperty<Citation>* list)
+void Trauma::RemoveCitation(int index)
 {
-  Trauma* TraumaOccurance = qobject_cast<Trauma*>(list->object);
-  if (TraumaOccurance) {
-    return TraumaOccurance->citations.removeLast();
-  }
+  citations.removeLast();
 }
 //-------------------------------------------------------------------------------
-void Trauma::ReplaceCitation(QQmlListProperty<Citation>* list, int index, Citation* value)
+void Trauma::ReplaceCitation(int index, Citation* value)
 {
-  Trauma* TraumaOccurance = qobject_cast<Trauma*>(list->object);
-  if (TraumaOccurance) {
-    return TraumaOccurance->citations.replace(index, value);
-  }
+  citations.replace(index, value);
 }
 //

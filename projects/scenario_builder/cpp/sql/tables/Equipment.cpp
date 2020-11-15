@@ -74,12 +74,11 @@ void Equipment::clear(int index)
 //--------------------------------------------------------------------------------------------
 QQmlListProperty<Citation> Equipment::getCitations()
 {
-  return QQmlListProperty<Citation> ( this, this,
-           &Equipment::AppendCitation,
-           &Equipment::CountCitations,
-           &Equipment::GetCitation,
-           &Equipment::ClearCitations
-   );
+  return QQmlListProperty<Citation>(this, this,
+                                    &Equipment::AppendCitation,
+                                    &Equipment::CountCitations,
+                                    &Equipment::GetCitation,
+                                    &Equipment::ClearCitations);
 }
 //-------------------------------------------------------------------------------
 //! Helper functions for Equipments
@@ -117,19 +116,13 @@ int Equipment::CountCitations(QQmlListProperty<Citation>* list)
   return 0;
 }
 //-------------------------------------------------------------------------------
-void Equipment::RemoveLastCitation(QQmlListProperty<Citation>* list)
+void Equipment::removeCitation(int index)
 {
-  Equipment* EquipmentOccurance = qobject_cast<Equipment*>(list->object);
-  if (EquipmentOccurance) {
-    return EquipmentOccurance->citations.removeLast();
-  }
+  citations.removeAt(index);
 }
 //-------------------------------------------------------------------------------
-void Equipment::ReplaceCitation(QQmlListProperty<Citation>* list, int index, Citation* value)
+void Equipment::replaceCitation(int index, Citation* value)
 {
-  Equipment* EquipmentOccurance = qobject_cast<Equipment*>(list->object);
-  if (EquipmentOccurance) {
-    return EquipmentOccurance->citations.replace(index, value);
-  }
+  citations.replace(index, value);
 }
 //-------------------------------------------------------------------------------

@@ -132,11 +132,11 @@ void TraumaProfile::clear(int index)
 //-------------------------------------------------------------------------------
 QQmlListProperty<TraumaOccurance> TraumaProfile::get_traumas()
 {
-  return QQmlListProperty<TraumaOccurance> ( nullptr, this,
-                                             &TraumaProfile::AppendTrauma,
-                                             &TraumaProfile::CountTraumas,
-                                             &TraumaProfile::GetTrauma,
-                                             &TraumaProfile::ClearTraumas );
+  return QQmlListProperty<TraumaOccurance>(nullptr, this,
+                                           &TraumaProfile::AppendTrauma,
+                                           &TraumaProfile::CountTraumas,
+                                           &TraumaProfile::GetTrauma,
+                                           &TraumaProfile::ClearTraumas);
 }
 //-------------------------------------------------------------------------------
 
@@ -175,20 +175,14 @@ auto TraumaProfile::CountTraumas(QQmlListProperty<TraumaOccurance>* list) -> int
   return 0;
 }
 //-------------------------------------------------------------------------------
-void TraumaProfile::RemoveLastTrauma(QQmlListProperty<TraumaOccurance>* list)
+void TraumaProfile::RemoveTrauma(int index)
 {
-  auto profile = qobject_cast<TraumaProfile*>(list->object);
-  if (profile) {
-    profile->traumas.removeLast();
-  }
+  traumas.removeAt(index);
 }
 //-------------------------------------------------------------------------------
-void TraumaProfile::ReplaceTrauma(QQmlListProperty<TraumaOccurance>* list, int index, TraumaOccurance* value)
+void TraumaProfile::ReplaceTrauma(int index, TraumaOccurance* value)
 {
-  auto profile = qobject_cast<TraumaProfile*>(list->object);
-  if (profile) {
-    profile->traumas.replace(index, value);
-  }
+  traumas.replace(index, value);
 }
 // //-------------------------------------------------------------------------------
 // //! Helper functions for Traumas
@@ -237,20 +231,14 @@ void TraumaProfile::ReplaceTrauma(QQmlListProperty<TraumaOccurance>* list, int i
 //   return 0;
 // }
 // //-------------------------------------------------------------------------------
-// void TraumaProfile::RemoveLastPhysiologyState(QQmlListProperty<QString>* list)
+// void TraumaProfile::RemoveLastPhysiologyState(int index)
 // {
-//   TraumaProfile* TraumaOccurance = qobject_cast<TraumaProfile*>(list->object);
-//   if (TraumaOccurance) {
-//     return TraumaOccurance->physiologyTree.removeLast();
-//   }
+//     >physiologyTree.removeAt(index);
 // }
 // //-------------------------------------------------------------------------------
-// void TraumaProfile::ReplacePhysiologyState(QQmlListProperty<QString>* list, int index, QString* value)
+// void TraumaProfile::ReplacePhysiologyState( int index, QString* value)
 // {
-//   TraumaProfile* TraumaOccurance = qobject_cast<TraumaProfile*>(list->object);
-//   if (TraumaOccurance) {
-//     return TraumaOccurance->physiologyTree.replace(index, *value);
-//   }
+//     return physiologyTree.replace(index, *value);
 // }
 // //-------------------------------------------------------------------------------
 ;

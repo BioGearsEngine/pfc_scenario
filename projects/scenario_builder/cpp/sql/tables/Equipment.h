@@ -73,6 +73,9 @@ public:
   Q_INVOKABLE void clear();
   Q_INVOKABLE void clear(int index);
 
+  Q_INVOKABLE void replaceCitation(int index, Citation* value);
+  Q_INVOKABLE void removeCitation(int index);
+
 private:
   //! Helper functions for Traumas
   QQmlListProperty<Citation> getCitations();
@@ -80,8 +83,6 @@ private:
   static auto CountCitations(QQmlListProperty<Citation>* list) -> int;
   static auto GetCitation(QQmlListProperty<Citation>* list, int index) -> Citation*;
   static void ClearCitations(QQmlListProperty<Citation>* list);
-  static void ReplaceCitation(QQmlListProperty<Citation>* list, int index, Citation* value);
-  static void RemoveLastCitation(QQmlListProperty<Citation>* list);
 };
 
 #endif

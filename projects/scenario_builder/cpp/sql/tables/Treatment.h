@@ -68,6 +68,12 @@ signals:
   Q_INVOKABLE void clear();
   Q_INVOKABLE void clear(int index);
 
+  Q_INVOKABLE void RemoveCitation(int index);
+  Q_INVOKABLE void ReplaceCitation(int index, Citation* value);
+  Q_INVOKABLE void RemoveCPG(int index);
+  Q_INVOKABLE void ReplaceCPG(int index, Citation* value);
+  Q_INVOKABLE void RemoveEquipment(int index);
+  Q_INVOKABLE void ReplaceEquipment(int index, Equipment* value);
 
 private:
   //! Helper functions for Citations
@@ -76,8 +82,6 @@ private:
   static auto GetCitation(QQmlListProperty<Citation>* list, int index) -> Citation*;
   static void ClearCitations(QQmlListProperty<Citation>* list);
   static auto CountCitations(QQmlListProperty<Citation>* list) -> int;
-  static void RemoveLastCitation(QQmlListProperty<Citation>* list);
-  static void ReplaceCitation(QQmlListProperty<Citation>* list, int index, Citation* value);
 
   //! Helper functions for CPGs
   QQmlListProperty<Citation> getCPGS();
@@ -85,8 +89,6 @@ private:
   static auto GetCPG(QQmlListProperty<Citation>* list, int index) -> Citation*;
   static void ClearCPGs(QQmlListProperty<Citation>* list);
   static auto CountCPGs(QQmlListProperty<Citation>* list) -> int;
-  static void RemoveLastCPG(QQmlListProperty<Citation>* list);
-  static void ReplaceCPG(QQmlListProperty<Citation>* list, int index, Citation* value);
 
   //! Helper functions for Equipments
   QQmlListProperty<Equipment> getEquipment();
@@ -94,8 +96,6 @@ private:
   static auto GetEquipment(QQmlListProperty<Equipment>* list, int index) -> Equipment*;
   static void ClearEquipments(QQmlListProperty<Equipment>* list);
   static auto CountEquipments(QQmlListProperty<Equipment>* list) -> int;
-  static void RemoveLastEquipment(QQmlListProperty<Equipment>* list);
-  static void ReplaceEquipment(QQmlListProperty<Equipment>* list, int index, Equipment* value);
 };
 
 #endif

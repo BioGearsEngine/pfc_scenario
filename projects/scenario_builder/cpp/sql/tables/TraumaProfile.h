@@ -91,7 +91,13 @@ public:
   void assign(const TraumaProfile& rhs);
   Q_INVOKABLE void clear();
   Q_INVOKABLE void clear(int);
-    signals:
+
+  Q_INVOKABLE void RemoveTrauma(int index);
+  Q_INVOKABLE void ReplaceTrauma(int index, TraumaOccurance* value);
+  // Q_INVOKABLE void RemoveLastPhysiologyState(int index);
+  // Q_INVOKABLE void ReplacePhysiologyState(int index, QString* value);
+
+signals:
   void idChanged();
   void uuidChanged();
   void nameChanged();
@@ -107,16 +113,12 @@ private:
   static auto GetTrauma(QQmlListProperty<TraumaOccurance>* list, int index) -> TraumaOccurance*;
   static void ClearTraumas(QQmlListProperty<TraumaOccurance>* list);
   static auto CountTraumas(QQmlListProperty<TraumaOccurance>* list) -> int;
-  static void RemoveLastTrauma(QQmlListProperty<TraumaOccurance>* list);
-  static void ReplaceTrauma(QQmlListProperty<TraumaOccurance>* list, int index, TraumaOccurance* value);
 
   //! Helper functions for Traumas
   // static void AppendPhysiologyState(QQmlListProperty<QString>* list, QString* value);
   // static auto GetPhysiologyState(QQmlListProperty<QString>* list, int index) -> QString*;
   // static void ClearPhysiologyStates(QQmlListProperty<QString>* list);
   // static auto CountPhysiologyStates(QQmlListProperty<QString>* list) -> int;
-  // static void RemoveLastPhysiologyState(QQmlListProperty<QString>* list);
-  // static void ReplacePhysiologyState(QQmlListProperty<QString>* list, int index, QString* value);
 };
 
 #endif

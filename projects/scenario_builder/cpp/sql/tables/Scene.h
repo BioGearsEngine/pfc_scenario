@@ -62,6 +62,11 @@ public:
   void assign(const Scene& rhs);
 
   void clear();
+
+  Q_INVOKABLE void RemoveEvent(int index);
+  Q_INVOKABLE void ReplaceEvent(int index, Event* value);
+  Q_INVOKABLE void RemoveRole(int index);
+  Q_INVOKABLE void ReplaceRole(int index, Role* value);
 signals:
   void eventsChanged();
   void rolesChanged();
@@ -73,8 +78,6 @@ private:
   static auto GetEvent(QQmlListProperty<Event>* list, int index) -> Event*;
   static void ClearEvents(QQmlListProperty<Event>* list);
   static auto CountEvents(QQmlListProperty<Event>* list) -> int;
-  static void RemoveLastEvent(QQmlListProperty<Event>* list);
-  static void ReplaceEvent(QQmlListProperty<Event>* list, int index, Event* value);
 
   //! Helper functions for Roles
   QQmlListProperty<Role> getRoles();
@@ -82,8 +85,6 @@ private:
   static auto GetRole(QQmlListProperty<Role>* list, int index) -> Role*;
   static void ClearRoles(QQmlListProperty<Role>* list);
   static auto CountRoles(QQmlListProperty<Role>* list) -> int;
-  static void RemoveLastRole(QQmlListProperty<Role>* list);
-  static void ReplaceRole(QQmlListProperty<Role>* list, int index, Role* value);
 };
 
 #endif

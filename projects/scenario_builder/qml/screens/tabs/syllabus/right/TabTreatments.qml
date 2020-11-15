@@ -26,7 +26,7 @@ ScrollView {
   }
   function refresh_equipment() {
     equipmentStack.treatmentCitations = []
-    let equipment = currentObjective.equipment;
+    let equipment = currentTreatment.equipment;
     for (var ii = 0; ii < equipment.length; ++ ii) {
       equipmentStack.treatmentCitations.push(equipment_g.make());
       equipmentStack.treatmentCitations[equipmentStack.treatmentCitations.length - 1].assign(equipments[ii]);
@@ -44,7 +44,7 @@ ScrollView {
   }
   function refresh_citations() {
     citationStack.treatmentCitations = []
-    let citations = currentObjective.citations;
+    let citations = currentTreatment.citations;
     for (var ii = 0; ii < citations.length; ++ ii) {
       citationStack.treatmentCitations.push(citation_g.make());
       citationStack.treatmentCitations[citationStack.treatmentCitations.length - 1].assign(citations[ii]);
@@ -60,17 +60,18 @@ ScrollView {
     }
     fullReferenceList.model = citationStack.allCitations;
   }
+
+  Equipment {
+    id : equipment_g
+  }
+  Citation {
+    id : citation_g
+  }
+
   ColumnLayout {
     id : column
     property alias backend : root.backend
     width : root.width
-
-    Equipment {
-      id : equipment
-    }
-    Citation {
-      id : citation
-    }
 
 
     TextEntry {
@@ -142,14 +143,14 @@ ScrollView {
           refresh_all_equipment()
         }
         // onEquipmentAdded : {
-        //   currentObjective.equipment.push(equipment_g.make());
-        //   currentObjective.equipment[currentObjective.equipment.length - 1].assign(equipment);
-        //   update_treatment(currentObjective);
-        //   refresh_equipment()
+        // currentTreatment.equipment.push(equipment_g.make());
+        // currentTreatment.equipment[currentTreatment.equipment.length - 1].assign(equipment);
+        // update_treatment(currentTreatment);
+        // refresh_equipment()
         // }
         // onEquipmentRemoved : {
-        //   currentObjective.removeEquipment(index);
-        //   refresh_equipment()
+        // currentTreatment.removeEquipment(index);
+        // refresh_equipment()
         // }
       }
       ListOfAllEquipment {
@@ -160,14 +161,14 @@ ScrollView {
         backend : root.backend
 
         // onEquipmentCreated : {
-        //   refresh_all_equipment()
+        // refresh_all_equipment()
         // }
         // onEquipmentAdded : {
-        //   currentObjective.equipment.push(equipment_g.make());
-        //   currentObjective.equipment[currentObjective.equipment.length - 1].assign(equipment);
-        //   update_treatment(currentObjective);
-        //   refresh_equipment();
-        //   equipmentStack.currentIndex = 0;
+        // currentTreatment.equipment.push(equipment_g.make());
+        // currentTreatment.equipment[currentTreatment.equipment.length - 1].assign(equipment);
+        // update_treatment(currentTreatment);
+        // refresh_equipment();
+        // equipmentStack.currentIndex = 0;
         // }
         onFullExit : {
           refresh_equipment();
@@ -194,13 +195,13 @@ ScrollView {
           refresh_all_citations()
         }
         onCitationAdded : {
-          currentObjective.citations.push(citation_g.make());
-          currentObjective.citations[currentObjective.citations.length - 1].assign(citation);
-          update_treatment(currentObjective);
+          currentTreatment.citations.push(citation_g.make());
+          currentTreatment.citations[currentTreatment.citations.length - 1].assign(citation);
+          update_treatment(currentTreatment);
           refresh_citations()
         }
         onCitationRemoved : {
-          currentObjective.removeCitation(index);
+          currentTreatment.removeCitation(index);
           refresh_citations()
         }
       }
@@ -213,9 +214,9 @@ ScrollView {
           refresh_all_citations()
         }
         onCitationAdded : {
-          currentObjective.citations.push(citation_g.make());
-          currentObjective.citations[currentObjective.citations.length - 1].assign(citation);
-          update_treatment(currentObjective);
+          currentTreatment.citations.push(citation_g.make());
+          currentTreatment.citations[currentTreatment.citations.length - 1].assign(citation);
+          update_treatment(currentTreatment);
           refresh_citations();
           citationStack.currentIndex = 0;
         }
