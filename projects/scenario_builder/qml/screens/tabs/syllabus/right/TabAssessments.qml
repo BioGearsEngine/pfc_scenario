@@ -76,12 +76,8 @@ ColumnLayout {
       }
       onActivated : {
         optionalArea.currentIndex = index;
-        if (root.model.count == 0) {
-          return
-        }
-        var entry = root.model.get(root.index);
-        entry.type = (index) ? "Scalar" : "Binary";
-        update_assessment(entry);
+        currentAssessment.type = (index) ? "Scalar" : "Binary";
+        update_assessment(currentAssessment);
       }
     }
   }

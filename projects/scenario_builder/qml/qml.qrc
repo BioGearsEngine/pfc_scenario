@@ -47,24 +47,26 @@
         <file>screens/tabs/summary/RightPane.qml</file>
 
         <!--Shared Tab Components -->
-        <file>screens/common/AuthorEntry.qml</file>
-        <file>screens/common/CitationListEntry.qml</file>
-        <file>screens/common/FullCitationListEntry.qml</file>
-        <file>screens/common/FullEquipmentListEntry.qml</file>        
-        <file>screens/common/FullInjuryListEntry.qml</file>
-        <file>screens/common/EquipmentListEntry.qml</file>
         <file>screens/common/FourButtonRow.qml</file>
         <file>screens/common/ThreeButtonRow.qml</file>
         <file>screens/common/TwoButtonRow.qml</file>
-        <file>screens/common/InjuryListEntry.qml</file>
-        <file>screens/common/ListEntry.qml</file>
-        <file>screens/common/FullListEntry.qml</file>
+        <file>screens/common/AuthorEntry.qml</file>
+        
+        <file>screens/common/ListOfForm.ui.qml</file>
+        <file>screens/common/ListOfAllForm.ui.qml</file>
+        <file>screens/common/ListOfAllCitations.qml</file>
+        <file>screens/common/ListOfCitations.qml</file>
+        <file>screens/common/ListOfAllEquipment.qml</file>        
+        <file>screens/common/ListOfEquipment.qml</file>
+        <file>screens/common/ListOfAllTraumas.qml</file>
+        <file>screens/common/ListOfTraumas.qml</file>
+        <file>screens/common/ListOfRestrictions.qml</file>
+        
         <file>screens/common/PFCButton.qml</file>
         <file>screens/common/PFCLabel.qml</file>
         <file>screens/common/PropertyAreaEntry.qml</file>
         <file>screens/common/PropertyEntry.qml</file>
         <file>screens/common/RangeEntry.qml</file>
-        <file>screens/common/RestrictionListEntry.qml</file>
         <file>screens/common/TextAreaEntry.qml</file>
         <file>screens/common/TextEntry.qml</file>
         <file>screens/common/TimeEntry.qml</file>

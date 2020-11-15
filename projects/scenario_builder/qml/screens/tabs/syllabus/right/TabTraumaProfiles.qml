@@ -20,13 +20,31 @@ ColumnLayout {
   Trauma {
     id : trauma
   }
-  function refresh_traumas() {}
 
   function update_traumaProfile(traumaProfile) {
     if (values.physiologyTree.length == 0) {
       values.physiologyTree.push("StandardMale@0s.xml");
     }
     root.backend.update_traumaProfile(traumaProfile)
+  }
+
+  function refresh_traumas() {
+    traumaStack.treatmentTraumas = []
+    let traumas = currentProfile.traumas;
+    for (var ii = 0; ii < traumas.length; ++ ii) {
+      traumaStack.treatmentTraumas.push(trauma_g.make());
+      traumaStack.treatmentTraumas[traumaStack.treatmentTraumas.length - 1].assign(traumas[ii]);
+    }
+    referenceList.model = traumaStack.treatmentTraumas;
+  }
+  function refresh_all_traumas() {
+    traumaStack.allTraumas = [];
+    let traumas = root.backend.traumas;
+    for (var ii = 0; ii < traumas.length; ++ ii) {
+      traumaStack.allTraumas.push(trauma_g.make());
+      traumaStack.allTraumas[traumaStack.allTraumas.length - 1].assign(traumas[ii]);
+    }
+    fullReferenceList.model = traumaStack.allTraumas;
   }
 
   TextEntry {
@@ -66,7 +84,7 @@ ColumnLayout {
     Layout.leftMargin : 5
     Layout.rightMargin : 20
     currentIndex : 0
-    InjuryListEntry {
+    ListOfTraumas {
       id : traumaList
       Layout.leftMargin : 5
       backend : root.backend
@@ -74,18 +92,14 @@ ColumnLayout {
       onList : {
         listStack.currentIndex = 1
       }
-
-      onSeverityChanged : {}
-      onLocationChanged : {}
-      onInjuryAdded : {}
-      onInjuryRemoved : {}
+      // onTraumaAdded : {}
+      // onTraumaRemoved : {}
     }
-    FullInjuryListEntry {
-      id : fullInjuryList
+    ListOfAllTraumas {
+      id : fullTraumaList
       backend : root.backend
 
       onFullAdded : {}
-
       onFullExit : {
         listStack.currentIndex = 0
       }

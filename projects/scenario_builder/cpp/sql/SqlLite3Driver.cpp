@@ -440,10 +440,13 @@ bool SQLite3Driver::populate_equipment()
     temp.description = equipmentDef.description.c_str();
 
     for (auto citation_id : string_split(equipmentDef.citations, ";")) {
-      citation = new Citation(&temp);
-      citation->id = std::stoi(citation_id);
-      select_citation(citation);
-      temp.citations.push_back(citation);
+      if (!citation_id.empty()) {
+        citation = new Citation(&temp);
+        citation->id = std::stoi(citation_id);
+        if (select_citation(citation)) {
+          temp.citations.push_back(citation);
+        }
+      }
     }
 
     temp.properties = equipmentDef.properties.c_str();
@@ -487,10 +490,13 @@ bool SQLite3Driver::populate_traumas()
     temp.description = traumaDef.description.c_str();
 
     for (auto citation_id : string_split(traumaDef.citations, ";")) {
-      citation = new Citation(&temp);
-      citation->id = std::stoi(citation_id);
-      select_citation(citation);
-      temp.citations.push_back(citation);
+      if (!citation_id.empty()) {
+        citation = new Citation(&temp);
+        citation->id = std::stoi(citation_id);
+        if (select_citation(citation)) {
+          temp.citations.push_back(citation);
+        }
+      }
     }
 
     temp.lower_bound = (100 * traumaDef.lower_bound); //multiply by 100 so decimals do not get destroyed by int on qml side
@@ -535,12 +541,14 @@ bool SQLite3Driver::populate_treatments()
     temp.description = treatmentDef.description.c_str();
 
     for (auto citation_id : string_split(treatmentDef.citations, ";")) {
-      citation = new Citation(&temp);
-      citation->id = std::stoi(citation_id);
-      select_citation(citation);
-      temp.citations.push_back(citation);
+      if (!citation_id.empty()) {
+        citation = new Citation(&temp);
+        citation->id = std::stoi(citation_id);
+        if (select_citation(citation)) {
+          temp.citations.push_back(citation);
+        }
+      }
     }
-
     if (!select_treatment(&temp)) {
       update_treatment(&temp);
     }
@@ -1216,9 +1224,13 @@ inline void SQLite3Driver::assign_trauma(const QSqlRecord& record, Trauma& traum
 
   Citation* citation;
   for (auto citation_id : record.value(INJURY_CITATIONS).toString().split(';')) {
-    citation = new Citation(&trauma);
-    citation->id = citation_id.toInt();
-    trauma.citations.push_back(citation);
+    if (!citation_id.isEmpty()) {
+      citation = new Citation(&trauma);
+      citation->id = citation_id.toInt();
+      if (select_citation(citation)) {
+        trauma.citations.push_back(citation);
+      }
+    }
   }
 }
 int SQLite3Driver::trauma_count() const
@@ -1944,9 +1956,13 @@ inline void SQLite3Driver::assign_equipment(const QSqlRecord& record, Equipment&
 
   Citation* citation;
   for (auto citation_id : record.value(EQUIPMENT_CITATIONS).toString().split(';')) {
-    citation = new Citation(&equipment);
-    equipment.id += citation_id.toInt();
-    equipment.citations.push_back(citation);
+    if (!citation_id.isEmpty()) {
+      citation = new Citation(&equipment);
+      citation->id += citation_id.toInt();
+      if (select_citation(citation)) {
+        equipment.citations.push_back(citation);
+      }
+    }
   }
   equipment.image = record.value(EQUIPMENT_IMAGE).toString();
   equipment.properties = record.value(EQUIPMENT_PROPERTIES).toString();
@@ -2855,9 +2871,13 @@ inline void SQLite3Driver::assign_treatment(const QSqlRecord& record, Treatment&
 
   Citation* citation;
   for (auto citation_id : record.value(TREATMENT_CITATIONS).toString().split(';')) {
-    citation = new Citation(&treatment);
-    citation->id = citation_id.toInt();
-    treatment.citations.push_back(citation);
+    if (!citation_id.isEmpty()) {
+      citation = new Citation(&treatment);
+      citation->id = citation_id.toInt();
+      if (select_citation(citation)) {
+        treatment.citations.push_back(citation);
+      }
+    }
   }
 
   Citation* cpg;

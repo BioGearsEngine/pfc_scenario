@@ -6,16 +6,16 @@ import QtQuick.Controls.Material 2.0
 
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
-FullListEntry {
+ListOfForm {
   id: root
   property SQLBackend backend
 
   signal equipmentAdded(int index, int equipment_id)
   signal equipmentRemoved(int index, int equipment_id)
 
-  label: "Equipment"
-  labelPlural: "Equipment"
-
+  label : "Equipment"
+  labelPlaural : "Equipment"
+  
   Equipment {
     id: self
     equipment_id : -1
@@ -37,76 +37,33 @@ FullListEntry {
        }
      }
 
-     function update_equipment(id) {
-         self.equipment_id = id
-         self.name     = equipment_name_text.text
-         self.description   = equipment_description_text.text
-         root.backend.update_equipment(self)
-     }
-
-     TextField {
+     Text {
        id : equipment_name_text
        anchors.left : parent.left
-       anchors.right : parent.right
        anchors.leftMargin : 10
        font.pointSize: 10
        text :  model.name
-       readOnly : true
-       activeFocusOnPress: false
-       hoverEnabled : false
-       enabled : false
        color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
-       onEditingFinished : {
-         update_equipment(model.equipment_id)
-      }
     }
-    TextField {
+
+    Text {
        id : equipment_description_text
        anchors.top : equipment_name_text.bottom
-       anchors.left : parent.left
-       anchors.right : parent.right
+       anchors.left : parent.left 
        anchors.leftMargin : 10
        font.pointSize: 10
        text :  model.description
-       readOnly : true
-       activeFocusOnPress: false
-       hoverEnabled : false
-       enabled : false
        color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
-       onEditingFinished : {
-         update_equipment(model.equipment_id)
-       }
-    }
-
-    states: State {
-      name : "Selected"
-      PropertyChanges{ target : equipment_name_text; readOnly : false}
-      PropertyChanges{ target : equipment_name_text; activeFocusOnPress : true}
-      PropertyChanges{ target : equipment_name_text; hoverEnabled : true}
-      PropertyChanges{ target : equipment_name_text; enabled : true}
-      PropertyChanges{ target : equipment_name_text; mouseSelectionMode  : TextInput.SelectCharacters }
-
-      PropertyChanges{ target : equipment_description_text; readOnly : false}
-      PropertyChanges{ target : equipment_description_text; activeFocusOnPress : true}
-      PropertyChanges{ target : equipment_description_text; hoverEnabled : true}
-      PropertyChanges{ target : equipment_description_text; enabled  : true}
-      PropertyChanges{ target : equipment_description_text; mouseSelectionMode  : TextInput.SelectCharacters }
-    }
-
-    onFocusChanged: {
-      if(root.current == index){
-        state = 'Selected';
+       elide : Text.ElideRight
       }
-      else{
-        state = '';
-      }
+
     }
-  }
 
-  onFullAdded : {
+    //TODO: Modifiy InjurySets to Store a Severity Value and A Location Value for each Entry
+    //TODO: Then Displa these values instead of the description.
+    //TODO: It would be cool if the delegate on state change added a description field which expanded it
 
-  }
-  onFullNew : {
+  onAdded : {
     var likely_id = root.backend.nextID(SQLBackend.EQUIPMENTS) + 1
     self.equipment_id = -1
     self.type = "1"
@@ -126,10 +83,11 @@ FullListEntry {
       });
     root.equipmentAdded (root.model.count, self.equipment_id)
   }
-  onFullDeleted : {
 
-  }
-  onFullExit : {
-
+  onRemoved : {
+    self.equipment_id =  root.model.get(index).equipment_id
+    root.model.remove(index)
+    current = Math.max(0,index-1)
+    root.equipmentRemoved(index,self.equipment_id)
   }
 }

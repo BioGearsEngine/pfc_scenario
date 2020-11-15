@@ -24,7 +24,42 @@ ScrollView {
       root.backend.update_treatment(treatment)
     }
   }
-
+  function refresh_equipment() {
+    equipmentStack.treatmentCitations = []
+    let equipment = currentObjective.equipment;
+    for (var ii = 0; ii < equipment.length; ++ ii) {
+      equipmentStack.treatmentCitations.push(equipment_g.make());
+      equipmentStack.treatmentCitations[equipmentStack.treatmentCitations.length - 1].assign(equipments[ii]);
+    }
+    referenceList.model = equipmentStack.treatmentCitations;
+  }
+  function refresh_all_equipments() {
+    equipmentStack.allCitations = [];
+    let equipment = root.backend.equipment;
+    for (var ii = 0; ii < equipment.length; ++ ii) {
+      equipmentStack.allCitations.push(equipment_g.make());
+      equipmentStack.allCitations[equipmentStack.allCitations.length - 1].assign(equipment[ii]);
+    }
+    fullReferenceList.model = equipmentStack.allCitations;
+  }
+  function refresh_citations() {
+    citationStack.treatmentCitations = []
+    let citations = currentObjective.citations;
+    for (var ii = 0; ii < citations.length; ++ ii) {
+      citationStack.treatmentCitations.push(citation_g.make());
+      citationStack.treatmentCitations[citationStack.treatmentCitations.length - 1].assign(citations[ii]);
+    }
+    referenceList.model = citationStack.treatmentCitations;
+  }
+  function refresh_all_citations() {
+    citationStack.allCitations = [];
+    let citations = root.backend.citations;
+    for (var ii = 0; ii < citations.length; ++ ii) {
+      citationStack.allCitations.push(citation_g.make());
+      citationStack.allCitations[citationStack.allCitations.length - 1].assign(citations[ii]);
+    }
+    fullReferenceList.model = citationStack.allCitations;
+  }
   ColumnLayout {
     id : column
     property alias backend : root.backend
@@ -94,55 +129,104 @@ ScrollView {
       Layout.leftMargin : 5
       Layout.rightMargin : 20
       currentIndex : 0
-      EquipmentListEntry {
+      property var treatmentEquipment: []
+      property var allEquipment: []
+      ListOfEquipment {
         id : equipmentList
 
         Layout.fillWidth : true
         Layout.leftMargin : 5
         backend : column.backend
         onList : {
-          equipmentListStack.currentIndex = 1;
+          equipmentStack.currentIndex = 1;
+          refresh_all_equipment()
         }
-        onEquipmentAdded : {}
-        onEquipmentRemoved : {}
+        // onEquipmentAdded : {
+        //   currentObjective.equipment.push(equipment_g.make());
+        //   currentObjective.equipment[currentObjective.equipment.length - 1].assign(equipment);
+        //   update_treatment(currentObjective);
+        //   refresh_equipment()
+        // }
+        // onEquipmentRemoved : {
+        //   currentObjective.removeEquipment(index);
+        //   refresh_equipment()
+        // }
       }
-      FullEquipmentListEntry {
+      ListOfAllEquipment {
         id : fullEquipmentList
         Layout.fillWidth : true
         Layout.fillHeight : true
         Layout.leftMargin : 5
         backend : root.backend
 
-        onFullAdded : {}
-        onFullExit : {}
+        // onEquipmentCreated : {
+        //   refresh_all_equipment()
+        // }
+        // onEquipmentAdded : {
+        //   currentObjective.equipment.push(equipment_g.make());
+        //   currentObjective.equipment[currentObjective.equipment.length - 1].assign(equipment);
+        //   update_treatment(currentObjective);
+        //   refresh_equipment();
+        //   equipmentStack.currentIndex = 0;
+        // }
+        onFullExit : {
+          refresh_equipment();
+          equipmentStack.currentIndex = 0;
+        }
       }
     }
     StackLayout {
-      id : listStack
+      id : citationStack
       Layout.fillWidth : true
       Layout.fillHeight : false
       Layout.leftMargin : 5
       Layout.rightMargin : 20
       Layout.bottomMargin : 5
+      property var treatmentCitations: []
+      property var allCitations: []
       currentIndex : 0
-      CitationListEntry {
+      ListOfCitations {
         id : referenceList
 
         backend : root.backend
         onList : {
-          listStack.currentIndex = 1
+          citationStack.currentIndex = 1;
+          refresh_all_citations()
         }
-        onCitationAdded : {}
-        onCitationRemoved : {}
+        onCitationAdded : {
+          currentObjective.citations.push(citation_g.make());
+          currentObjective.citations[currentObjective.citations.length - 1].assign(citation);
+          update_treatment(currentObjective);
+          refresh_citations()
+        }
+        onCitationRemoved : {
+          currentObjective.removeCitation(index);
+          refresh_citations()
+        }
       }
-      FullCitationListEntry {
+      ListOfAllCitations {
         id : fullReferenceList
         Layout.leftMargin : 5
         backend : root.backend
 
-        onFullAdded : {}
-        onFullExit : {}
+        onCitationCreated : {
+          refresh_all_citations()
+        }
+        onCitationAdded : {
+          currentObjective.citations.push(citation_g.make());
+          currentObjective.citations[currentObjective.citations.length - 1].assign(citation);
+          update_treatment(currentObjective);
+          refresh_citations();
+          citationStack.currentIndex = 0;
+        }
+        onFullExit : {
+          refresh_citations();
+          citationStack.currentIndex = 0;
+        }
       }
     }
+  }
+  onCurrentTreatmentChanged : {
+    refresh_citations()
   }
 }

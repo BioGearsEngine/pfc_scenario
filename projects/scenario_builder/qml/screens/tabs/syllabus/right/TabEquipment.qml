@@ -17,20 +17,46 @@ ScrollView {
   contentHeight : column.height
   clip : true
 
+  Citation {
+    id : citation_g
+  }
+
+  Connections {
+    target : backend
+    onCitationsChanged : {
+      refresh_citations()
+    }
+  }
+
+  function update_equipment(equipment) {
+    if (equipment) {
+      root.backend.update_equipment(equipment)
+    }
+  }
+  function refresh_citations() {
+    citationStack.equipmentCitations = []
+    let citations = currentEquipment.citations;
+    for (var ii = 0; ii < citations.length; ++ ii) {
+      citationStack.equipmentCitations.push(citation_g.make());
+      citationStack.equipmentCitations[citationStack.equipmentCitations.length - 1].assign(citations[ii]);
+    }
+    referenceList.model = citationStack.equipmentCitations;
+  }
+  function refresh_all_citations() {
+    citationStack.allCitations = [];
+    let citations = root.backend.citations;
+    for (var ii = 0; ii < citations.length; ++ ii) {
+      citationStack.allCitations.push(citation_g.make());
+      citationStack.allCitations[citationStack.allCitations.length - 1].assign(citations[ii]);
+    }
+    fullReferenceList.model = citationStack.allCitations;
+  }
+
   ColumnLayout {
     id : column
     property alias backend : root.backend
     width : root.width
 
-    Citation {
-      id : citation
-    }
-
-    function update_equipment(equipment) {
-      if (equipment) {
-        root.backend.update_equipment(equipment)
-      }
-    }
 
     TextEntry {
       Layout.fillWidth : true
@@ -99,34 +125,60 @@ ScrollView {
     }
 
     StackLayout {
-      id : listStack
+      id : citationStack
       Layout.fillWidth : true
       Layout.fillHeight : false
       Layout.leftMargin : 5
       Layout.rightMargin : 20
       Layout.bottomMargin : 5
+
+      property var equipmentCitations: []
+      property var allCitations: []
       currentIndex : 0
-      CitationListEntry {
+      ListOfCitations {
         id : referenceList
         backend : root.backend
-        onList : {}
+        onList : {
+          citationStack.currentIndex = 1;
+          refresh_all_citations()
+        }
 
-        onCitationAdded : {}
+        onCitationAdded : {
+          currentEquipment.citations.push(citation_g.make());
+          currentEquipment.citations[currentEquipment.citations.length - 1].assign(citation);
+          update_equipment(currentEquipment);
+          refresh_citations()
+        }
 
-        onCitationRemoved : {}
+        onCitationRemoved : {
+          currentEquipment.removeCitation(index);
+          refresh_citations()
+        }
       }
-      FullCitationListEntry {
+      ListOfAllCitations {
         id : fullReferenceList
         backend : root.backend
 
-        onFullAdded : {}
+        onCitationCreated : {
+          refresh_all_citations()
+        }
+        onCitationAdded : {
+          currentEquipment.citations.push(citation_g.make());
+          currentEquipment.citations[currentEquipment.citations.length - 1].assign(citation);
+          update_equipment(currentEquipment);
+          refresh_citations();
+          citationStack.currentIndex = 0;
+        }
 
-        onFullExit : {}
+        onFullExit : {
+          refresh_citations();
+          citationStack.currentIndex = 0;
+        }
       }
     }
   }
-  onTopIndexChanged : {
-    if (topIndex == 1) {}
+
+  onCurrentEquipmentChanged : {
+    refresh_citations()
   }
-  onCurrentEquipmentChanged : {}
 }

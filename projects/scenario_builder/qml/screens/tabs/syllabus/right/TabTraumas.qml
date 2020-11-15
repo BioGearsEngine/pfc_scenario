@@ -26,11 +26,29 @@ ColumnLayout {
     onEquipmentRemoved : {}
   }
 
-
-  function update_injury(citation) {
+  function update_trauma(citation) {
     if (citation) {
-      root.backend.update_injury(citation)
+      root.backend.update_trauma(citation)
     }
+  }
+
+  function refresh_citations() {
+    citationStack.treatmentCitations = []
+    let citations = currentTrauma.citations;
+    for (var ii = 0; ii < citations.length; ++ ii) {
+      citationStack.treatmentCitations.push(citation_g.make());
+      citationStack.treatmentCitations[citationStack.treatmentCitations.length - 1].assign(citations[ii]);
+    }
+    referenceList.model = citationStack.treatmentCitations;
+  }
+  function refresh_all_citations() {
+    citationStack.allCitations = [];
+    let citations = root.backend.citations;
+    for (var ii = 0; ii < citations.length; ++ ii) {
+      citationStack.allCitations.push(citation_g.make());
+      citationStack.allCitations[citationStack.allCitations.length - 1].assign(citations[ii]);
+    }
+    fullReferenceList.model = citationStack.allCitations;
   }
 
   TextEntry {
@@ -44,7 +62,7 @@ ColumnLayout {
     onEditingFinished : {
       if (text != currentTrauma.medicalName) {
         currentTrauma.medicalName = text
-        update_injury(currentTrauma)
+        update_trauma(currentTrauma)
       }
     }
   }
@@ -60,7 +78,7 @@ ColumnLayout {
     onEditingFinished : {
       if (text != currentTrauma.commonName) {
         currentTrauma.commonName = text
-        update_injury(currentTrauma)
+        update_trauma(currentTrauma)
       }
     }
     onLabelWidthChanged : {
@@ -75,14 +93,14 @@ ColumnLayout {
     Layout.fillWidth : true
     Layout.fillHeight : false
     currentIndex : 0
-    CitationListEntry {
+    ListOfCitations {
       id : referenceList
       backend : root.backend
       onList : {}
       onCitationAdded : {}
       onCitationRemoved : {}
     }
-    FullCitationListEntry {
+    ListOfAllCitations {
       id : fullReferenceList
       Layout.fillWidth : true
       backend : root.backend
@@ -102,7 +120,7 @@ ColumnLayout {
     onEditingFinished : {
       if (text != currentTrauma.description) {
         currentTrauma.description = text;
-        update_injury(currentTrauma);
+        update_trauma(currentTrauma);
       }
     }
   }
@@ -118,7 +136,7 @@ ColumnLayout {
     onRangeModified : {
       currentTrauma.min = min;
       currentTrauma.max = max;
-      update_injury(currentTrauma)
+      update_trauma(currentTrauma)
     }
   }
 }

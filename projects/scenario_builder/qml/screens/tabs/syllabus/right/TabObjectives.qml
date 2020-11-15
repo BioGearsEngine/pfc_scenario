@@ -20,7 +20,9 @@ ColumnLayout {
   }
   Connections {
     target : backend
-    onCitationRemoved : {}
+    onCitationsChanged : {
+      refresh_citations()
+    }
   }
 
   function update_objective(objective) {
@@ -89,7 +91,7 @@ ColumnLayout {
     property var allCitations: []
 
     currentIndex : 0
-    CitationListEntry {
+    ListOfCitations {
       id : referenceList
       backend : root.backend
       onList : {
@@ -107,7 +109,7 @@ ColumnLayout {
         refresh_citations()
       }
     }
-    FullCitationListEntry {
+    ListOfAllCitations {
       id : fullReferenceList
       backend : root.backend
 
