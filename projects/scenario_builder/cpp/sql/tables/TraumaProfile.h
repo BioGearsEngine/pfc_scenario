@@ -22,7 +22,7 @@ struct TraumaProfile;
 struct Treatment;
 struct Trauma;
 
-struct TraumaOccurance : public QObject {
+struct TraumaOccurence : public QObject {
   Q_OBJECT
   Q_PROPERTY(int trauma_instance_id MEMBER id NOTIFY idChanged)
   Q_PROPERTY(Trauma* fk_trauma MEMBER fk_trauma NOTIFY traumaChanged)
@@ -44,19 +44,19 @@ public:
   QString location = "";
   QString severity = "";
 
-  TraumaOccurance(QObject* parent = nullptr);
-  TraumaOccurance(Trauma* trauma, Treatment* treatment, QObject* parent = nullptr);
-  TraumaOccurance(const TraumaOccurance&) = delete;
-  TraumaOccurance(TraumaOccurance&&) = delete;
-  TraumaOccurance& operator=(const TraumaOccurance&) = delete;
-  TraumaOccurance& operator=(TraumaOccurance&&) = delete;
-  virtual ~TraumaOccurance() = default;
+  TraumaOccurence(QObject* parent = nullptr);
+  TraumaOccurence(Trauma* trauma, Treatment* treatment, QObject* parent = nullptr);
+  TraumaOccurence(const TraumaOccurence&) = delete;
+  TraumaOccurence(TraumaOccurence&&) = delete;
+  TraumaOccurence& operator=(const TraumaOccurence&) = delete;
+  TraumaOccurence& operator=(TraumaOccurence&&) = delete;
+  virtual ~TraumaOccurence() = default;
 
-  bool operator==(const TraumaOccurance& rhs) const;
-  bool operator!=(const TraumaOccurance& rhs) const;
-  static Q_INVOKABLE TraumaOccurance* make();
-  Q_INVOKABLE void assign(TraumaOccurance* rhs);
-  void assign(const TraumaOccurance& rhs);
+  bool operator==(const TraumaOccurence& rhs) const;
+  bool operator!=(const TraumaOccurence& rhs) const;
+  static Q_INVOKABLE TraumaOccurence* make();
+  Q_INVOKABLE void assign(TraumaOccurence* rhs);
+  void assign(const TraumaOccurence& rhs);
   void clear();
 };
 
@@ -66,7 +66,7 @@ struct TraumaProfile : public QObject {
   Q_PROPERTY(QString uuid MEMBER uuid NOTIFY uuidChanged)
   Q_PROPERTY(QString name MEMBER name NOTIFY nameChanged)
   Q_PROPERTY(QString description MEMBER description NOTIFY descriptionChanged)
-  Q_PROPERTY(QQmlListProperty<TraumaOccurance> traumas READ get_traumas NOTIFY traumasChanged);
+  Q_PROPERTY(QQmlListProperty<TraumaOccurence> traumas READ get_traumas NOTIFY traumasChanged);
   Q_PROPERTY(QStringList physiologyTree MEMBER physiologyTree NOTIFY physiologyTreeChanged)
 
 public:
@@ -74,7 +74,7 @@ public:
   QString uuid = "";
   QString name = "";
   QString description = "";
-  QList<TraumaOccurance*> traumas;
+  QList<TraumaOccurence*> traumas;
   QStringList physiologyTree;
 
   TraumaProfile(QObject* parent = nullptr);
@@ -93,7 +93,7 @@ public:
   Q_INVOKABLE void clear(int);
 
   Q_INVOKABLE void RemoveTrauma(int index);
-  Q_INVOKABLE void ReplaceTrauma(int index, TraumaOccurance* value);
+  Q_INVOKABLE void ReplaceTrauma(int index, TraumaOccurence* value);
   // Q_INVOKABLE void RemoveLastPhysiologyState(int index);
   // Q_INVOKABLE void ReplacePhysiologyState(int index, QString* value);
 
@@ -106,13 +106,13 @@ signals:
   void physiologyTreeChanged();
 
 private:
-  QQmlListProperty<TraumaOccurance> get_traumas();
+  QQmlListProperty<TraumaOccurence> get_traumas();
   // QQmlListProperty<QString> get_physiology_tree();
   //! Helper functions for Traumas
-  static void AppendTrauma(QQmlListProperty<TraumaOccurance>* list, TraumaOccurance* value);
-  static auto GetTrauma(QQmlListProperty<TraumaOccurance>* list, int index) -> TraumaOccurance*;
-  static void ClearTraumas(QQmlListProperty<TraumaOccurance>* list);
-  static auto CountTraumas(QQmlListProperty<TraumaOccurance>* list) -> int;
+  static void AppendTrauma(QQmlListProperty<TraumaOccurence>* list, TraumaOccurence* value);
+  static auto GetTrauma(QQmlListProperty<TraumaOccurence>* list, int index) -> TraumaOccurence*;
+  static void ClearTraumas(QQmlListProperty<TraumaOccurence>* list);
+  static auto CountTraumas(QQmlListProperty<TraumaOccurence>* list) -> int;
 
   //! Helper functions for Traumas
   // static void AppendPhysiologyState(QQmlListProperty<QString>* list, QString* value);

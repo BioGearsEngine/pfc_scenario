@@ -66,7 +66,7 @@ namespace schema {
     static auto make_equipment_ref_list(QList<Equipment*> ref_list, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::equipment_ref_list>;
     static auto make_trauma_set_ref_list(QList<TraumaProfile*> ref_list, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::trauma_profile_ref_list>;
     static auto make_treatment_plan_ref_list(QList<Treatment*> ref_list, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::treatment_plan_ref_list>;
-    static auto make_trauma_occurance_list(QList<TraumaOccurance*> ref_list, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::trauma_occurence_list>;
+    static auto make_trauma_occurance_list(QList<TraumaOccurence*> ref_list, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::trauma_occurence_list>;
 
     static auto make_equipment_properties_list(QString properties_list) -> std::unique_ptr<schema::equipment_properties_list>;
     static auto make_authors_list(QString name_list) -> schema::citation::authors_sequence;

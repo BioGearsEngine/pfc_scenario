@@ -111,89 +111,29 @@ ListOfForm {
 
     states : State {
       name : "Selected"
-      PropertyChanges {
-        target : citation_title_text;
-        readOnly : false
-      }
-      PropertyChanges {
-        target : citation_title_text;
-        activeFocusOnPress : true
-      }
-      PropertyChanges {
-        target : citation_title_text;
-        hoverEnabled : true
-      }
-      PropertyChanges {
-        target : citation_title_text;
-        enabled : true
-      }
-      PropertyChanges {
-        target : citation_title_text;
-        mouseSelectionMode : TextInput.SelectCharacters
-      }
+      PropertyChanges { target : citation_title_text; readOnly : false }
+      PropertyChanges { target : citation_title_text; activeFocusOnPress : true }
+      PropertyChanges { target : citation_title_text; hoverEnabled : true }
+      PropertyChanges { target : citation_title_text; enabled : true }
+      PropertyChanges { target : citation_title_text; mouseSelectionMode : TextInput.SelectCharacters }
 
-      PropertyChanges {
-        target : citation_key_text;
-        readOnly : false
-      }
-      PropertyChanges {
-        target : citation_key_text;
-        activeFocusOnPress : true
-      }
-      PropertyChanges {
-        target : citation_key_text;
-        hoverEnabled : true
-      }
-      PropertyChanges {
-        target : citation_key_text;
-        enabled : true
-      }
-      PropertyChanges {
-        target : citation_key_text;
-        mouseSelectionMode : TextInput.SelectCharacters
-      }
+      PropertyChanges { target : citation_key_text; readOnly : false }
+      PropertyChanges { target : citation_key_text; activeFocusOnPress : true }
+      PropertyChanges { target : citation_key_text; hoverEnabled : true }
+      PropertyChanges { target : citation_key_text; enabled : true }
+      PropertyChanges { target : citation_key_text; mouseSelectionMode : TextInput.SelectCharacters }
 
-      PropertyChanges {
-        target : citation_authors_text;
-        readOnly : false
-      }
-      PropertyChanges {
-        target : citation_authors_text;
-        activeFocusOnPress : true
-      }
-      PropertyChanges {
-        target : citation_authors_text;
-        hoverEnabled : true
-      }
-      PropertyChanges {
-        target : citation_authors_text;
-        enabled : true
-      }
-      PropertyChanges {
-        target : citation_authors_text;
-        mouseSelectionMode : TextInput.SelectCharacters
-      }
+      PropertyChanges { target : citation_authors_text; readOnly : false }
+      PropertyChanges { target : citation_authors_text; activeFocusOnPress : true }
+      PropertyChanges { target : citation_authors_text; hoverEnabled : true }
+      PropertyChanges { target : citation_authors_text; enabled : true }
+      PropertyChanges { target : citation_authors_text; mouseSelectionMode : TextInput.SelectCharacters }
 
-      PropertyChanges {
-        target : citation_year_text;
-        readOnly : false
-      }
-      PropertyChanges {
-        target : citation_year_text;
-        activeFocusOnPress : true
-      }
-      PropertyChanges {
-        target : citation_year_text;
-        hoverEnabled : true
-      }
-      PropertyChanges {
-        target : citation_year_text;
-        enabled : true
-      }
-      PropertyChanges {
-        target : citation_year_text;
-        mouseSelectionMode : TextInput.SelectCharacters
-      }
+      PropertyChanges { target : citation_year_text; readOnly : false }
+      PropertyChanges { target : citation_year_text; activeFocusOnPress : true }
+      PropertyChanges { target : citation_year_text; hoverEnabled : true }
+      PropertyChanges { target : citation_year_text; enabled : true }
+      PropertyChanges { target : citation_year_text; mouseSelectionMode : TextInput.SelectCharacters }
     }
 
     onFocusChanged : {

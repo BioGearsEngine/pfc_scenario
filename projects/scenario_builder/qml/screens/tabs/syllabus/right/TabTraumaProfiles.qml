@@ -78,7 +78,7 @@ ColumnLayout {
   }
 
   StackLayout {
-    id : listStack
+    id : traumaStack
     Layout.fillWidth : true
     Layout.fillHeight : false
     Layout.leftMargin : 5
@@ -90,18 +90,37 @@ ColumnLayout {
       backend : root.backend
 
       onList : {
-        listStack.currentIndex = 1
+        traumaStack.currentIndex = 1;
+        refresh_all_traumas()
       }
-      // onTraumaAdded : {}
-      // onTraumaRemoved : {}
+      onTraumaAdded : {
+        currentProfile.traumas.push(trauma_g.make());
+        currentProfile.traumas[currentProfile.traumas.length - 1].assign(trauma);
+        update_objective(currentProfile);
+        refresh_traumas()
+      }
+      onTraumaRemoved : {
+        currentProfile.removeTrauma(index);
+        refresh_traumas()
+      }
     }
     ListOfAllTraumas {
       id : fullTraumaList
       backend : root.backend
 
-      onFullAdded : {}
+      onTraumaCreated : {
+        refresh_all_traumas()
+      }
+      onTraumaAdded : {
+        currentProfile.traumas.push(trauma_g.make());
+        currentProfile.traumas[currentProfile.traumas.length - 1].assign(trauma);
+        update_objective(currentProfile);
+        refresh_traumas();
+        traumaStack.currentIndex = 0;
+      }
       onFullExit : {
-        listStack.currentIndex = 0
+        refresh_traumas();
+        traumaStack.currentIndex = 0;
       }
     }
   }

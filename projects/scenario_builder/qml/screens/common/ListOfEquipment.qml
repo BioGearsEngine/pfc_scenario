@@ -7,87 +7,113 @@ import QtQuick.Controls.Material 2.0
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
 ListOfForm {
-  id: root
+  id : root
   property SQLBackend backend
 
-  signal equipmentAdded(int index, int equipment_id)
-  signal equipmentRemoved(int index, int equipment_id)
+  signal equipmentAdded(int index, Equipment equipment)
+  signal equipmentRemoved(int index, Equipment equipment)
 
   label : "Equipment"
   labelPlaural : "Equipment"
-  
+
   Equipment {
-    id: self
+    id : self
     equipment_id : -1
   }
 
-  model : ListModel{}
+  model : ListModel {}
 
   delegate : Rectangle {
-     id : equipment
-     color : 'transparent'
-     border.color: "steelblue"
-     height : equipment_name_text.height + equipment_description_text.height
-     anchors { left : parent.left; right: parent.right ; margins : 5 }
+    id : equipment
+    color : 'transparent'
+    border.color : "steelblue"
+    height : equipment_name_text.height + equipment_description_text.height
+    anchors {
+      left : parent.left;
+      right : parent.right;
+      margins : 5
+    }
 
-     MouseArea {
-       anchors.fill: parent
-       onClicked: {
+    MouseArea {
+      anchors.fill : parent
+      onClicked : {
         root.current = index
-       }
-     }
+      }
+    }
 
-     Text {
-       id : equipment_name_text
-       anchors.left : parent.left
-       anchors.leftMargin : 10
-       font.pointSize: 10
-       text :  model.name
-       color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
+    function update_equipment(equipment) {
+      if (equipment) {
+        root.backend.update_equipment(equipment)
+      }
     }
 
     Text {
-       id : equipment_description_text
-       anchors.top : equipment_name_text.bottom
-       anchors.left : parent.left 
-       anchors.leftMargin : 10
-       font.pointSize: 10
-       text :  model.description
-       color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
-       elide : Text.ElideRight
-      }
-
+      id : equipment_name_text
+      anchors.left : parent.left
+      anchors.leftMargin : 10
+      font.pointSize : 10
+      text : (root.model) ? root.model[index].name : ""
+      color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
     }
 
-    //TODO: Modifiy InjurySets to Store a Severity Value and A Location Value for each Entry
-    //TODO: Then Displa these values instead of the description.
-    //TODO: It would be cool if the delegate on state change added a description field which expanded it
+    Text {
+      id : equipment_description_text
+      anchors.top : equipment_name_text.bottom
+      anchors.left : parent.left
+      anchors.leftMargin : 10
+      font.pointSize : 10
+      text : {
+        if (root.model[index]) {
+          if (!enabled) {
+            return root.model[index].summary
+          } else {
+            if (root.model[index].description === "") {
+              return root.model[index].summary
+            } else {
+              return root.model[index].description
+            }
+          }
+        } else {
+          return ""
+        }
+      }
+      color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
+    }
 
-  onAdded : {
-    var likely_id = root.backend.nextID(SQLBackend.EQUIPMENTS) + 1
-    self.equipment_id = -1
-    self.type = "1"
-    self.name  = "New Equipment %1".arg(likely_id)
-    self.description = "New Equipment %1".arg(likely_id)
-    self.citations   = ""
-    self.image    = ""
-    root.backend.update_equipment(self)
-    root.model.insert(root.model.count,
-      {
-        equipment_id: "%1".arg(self.equipment_id)
-      , type: "%1".arg(self.type)
-      , name : "%1".arg(self.name)
-      , description: "%1".arg(self.description)
-      , citations: "%1".arg(self.citations)
-      , image: "%1".arg(self.image)
-      });
-    root.equipmentAdded (root.model.count, self.equipment_id)
+    states : State {
+      name : "Selected"
+      PropertyChanges {
+        target : equipment_name_text;
+        enabled : true
+      }
+      PropertyChanges {
+        target : equipment_description_text;
+        enabled : true
+      }
+    }
+
+    onFocusChanged : {
+      if (current.current == index) {
+        state = 'Selected';
+      } else {
+        state = '';
+      }
+    }
+
   }
-
+  onList : {}
+  onAdded : {
+    var likely_id = root.backend.nextID(SQLBackend.EQUIPMENT) + 1;
+    self.clear(likely_id);
+    root.backend.update_equipment(self);
+    root.equipmentAdded(root.model.length, self)
+  }
   onRemoved : {
-    self.equipment_id =  root.model.get(index).equipment_id
-    root.model.remove(index)
-    current = Math.max(0,index-1)
-    root.equipmentRemoved(index,self.equipment_id)
+    if (root.model[index]) {
+      self.assign(root.model[index]);
+      root.model.splice(index);
+      current = Math.max(0, index - 1);
+      root.equipmentRemoved(index, self)
+    }
   }
 }

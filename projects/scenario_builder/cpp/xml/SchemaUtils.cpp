@@ -251,23 +251,20 @@ namespace schema {
     return treatment_plan_ref_list;
   }
   //-----------------------------------------------------------------------------
-  auto PFC::make_trauma_occurance_list(QList<TraumaOccurance*> ref_list, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::trauma_occurence_list>
+  auto PFC::make_trauma_occurance_list(QList<TraumaOccurence*> ref_list, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::trauma_occurence_list>
   {
     auto trauma_occurence_list = std::make_unique<schema::trauma_occurence_list>();
 
-    for (auto occurance : ref_list) {
-      if (_db->select_trauma(occurance->fk_trauma)) {
+    for (auto occurence : ref_list) {
+      if (_db->select_trauma(occurence->fk_trauma)) {
 
-        auto trauma = occurance->fk_trauma;
-        auto description = occurance->description;
-        auto location = occurance->location;
-        auto severity = occurance->severity;
-
+        auto const trauma = occurence->fk_trauma;
+      
         trauma_occurence_list->trauma().push_back(std::make_unique<schema::trauma_occurence>(
           make_string(trauma->uuid),
-          make_string(location),
-          make_string(description),
-          make_string(severity))
+          make_string(occurence->location),
+          make_string(occurence->description),
+          make_string(occurence->severity))
 
         );
       }
@@ -716,9 +713,9 @@ namespace schema {
       TraumaProfile temp;
       temp.uuid = QString::fromStdString(trauma_profile.id());
       temp.name = QString::fromStdString(trauma_profile.name());
-      TraumaOccurance* trauma;
+      TraumaOccurence* trauma;
       for (auto& current_trauma : trauma_profile.injuries().trauma()) {
-        trauma = new TraumaOccurance(&temp);
+        trauma = new TraumaOccurence(&temp);
         trauma->fk_trauma->uuid;
         _db.select_trauma(trauma->fk_trauma);
         trauma->location = current_trauma.location().c_str();

@@ -44,6 +44,7 @@ int main(int argc, char* argv[])
   qmlRegisterType<Event>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Event");
   qmlRegisterType<Trauma>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Trauma");
   qmlRegisterType<TraumaProfile>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "TraumaProfile");
+  qmlRegisterType<TraumaOccurence>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "TraumaOccurence");
   qmlRegisterType<Location>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Location");
   qmlRegisterType<RoleMap>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "RoleMap");
   qmlRegisterType<Objective>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Objective");
@@ -58,9 +59,7 @@ int main(int argc, char* argv[])
   qmlRegisterInterface<Author>("const Author*");
   qmlRegisterInterface<Citation>("const Citation*");
   qmlRegisterInterface<CitationMap>("const CitationMap*");
-
-  qmlRegisterInterface<Equipment>("const Equipment*");
-  
+  qmlRegisterInterface<Equipment>("const Equipment*");      
   qmlRegisterInterface<EquipmentMap>("const EquipmentMap*");
   qmlRegisterInterface<Event>("const Event*");
   qmlRegisterInterface<EventMap>("const EventMap*");
@@ -73,6 +72,7 @@ int main(int argc, char* argv[])
   qmlRegisterInterface<Scene>("const Scene*");
   qmlRegisterInterface<Trauma>("const Trauma*");
   qmlRegisterInterface<TraumaProfile>("const TraumaProfile*");
+  qmlRegisterInterface<TraumaOccurence>("const TraumaOccurence*");
   qmlRegisterInterface<Treatment>("const Treatment*");
 
 

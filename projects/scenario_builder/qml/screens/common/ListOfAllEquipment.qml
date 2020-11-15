@@ -7,129 +7,151 @@ import QtQuick.Controls.Material 2.0
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
 ListOfAllForm {
-  id: root
+  id : root
   property SQLBackend backend
 
-  signal equipmentAdded(int index, int equipment_id)
-  signal equipmentRemoved(int index, int equipment_id)
+  signal equipmentAdded(int index, Equipment equipment)
+  signal equipmentRemoved(int index, Equipment equipment)
+  signal equipmentCreated()
 
-  label: "Equipment"
-  labelPlural: "Equipment"
+  label : "Equipment"
+  labelPlural : "Equipment"
 
   Equipment {
-    id: self
+    id : self
     equipment_id : -1
   }
 
-  model : ListModel{}
+  model : ListModel {}
 
   delegate : Rectangle {
-     id : equipment
-     color : 'transparent'
-     border.color: "steelblue"
-     height : equipment_name_text.height + equipment_description_text.height
-     anchors { left : parent.left; right: parent.right ; margins : 5 }
+    id : equipment
+    color : 'transparent'
+    border.color : "steelblue"
+    height : equipment_name_text.height + equipment_description_text.height
+    anchors {
+      left : parent.left;
+      right : parent.right;
+      margins : 5
+    }
 
-     MouseArea {
-       anchors.fill: parent
-       onClicked: {
+    MouseArea {
+      anchors.fill : parent
+      onClicked : {
         root.current = index
-       }
-     }
+      }
+    }
 
-     function update_equipment(id) {
-         self.equipment_id = id
-         self.name     = equipment_name_text.text
-         self.description   = equipment_description_text.text
-         root.backend.update_equipment(self)
-     }
+    function update_equipment(equipment) {
+      if (equipment) {
+        root.backend.update_equipment(equipment)
+      }
+    }
 
-     TextField {
-       id : equipment_name_text
-       anchors.left : parent.left
-       anchors.right : parent.right
-       anchors.leftMargin : 10
-       font.pointSize: 10
-       text :  model.name
-       readOnly : true
-       activeFocusOnPress: false
-       hoverEnabled : false
-       enabled : false
-       color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
-       onEditingFinished : {
-         update_equipment(model.equipment_id)
+    TextField {
+      id : equipment_name_text
+      anchors.left : parent.left
+      anchors.right : parent.right
+      anchors.leftMargin : 10
+      font.pointSize : 10
+      text : (root.model) ? root.model[index].name : ""
+      readOnly : true
+      activeFocusOnPress : false
+      hoverEnabled : false
+      enabled : false
+      color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
+      onEditingFinished : {
+        update_equipment(root.model[index])
       }
     }
     TextField {
-       id : equipment_description_text
-       anchors.top : equipment_name_text.bottom
-       anchors.left : parent.left
-       anchors.right : parent.right
-       anchors.leftMargin : 10
-       font.pointSize: 10
-       text :  model.description
-       readOnly : true
-       activeFocusOnPress: false
-       hoverEnabled : false
-       enabled : false
-       color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
-       onEditingFinished : {
-         update_equipment(model.equipment_id)
-       }
-    }
-
-    states: State {
-      name : "Selected"
-      PropertyChanges{ target : equipment_name_text; readOnly : false}
-      PropertyChanges{ target : equipment_name_text; activeFocusOnPress : true}
-      PropertyChanges{ target : equipment_name_text; hoverEnabled : true}
-      PropertyChanges{ target : equipment_name_text; enabled : true}
-      PropertyChanges{ target : equipment_name_text; mouseSelectionMode  : TextInput.SelectCharacters }
-
-      PropertyChanges{ target : equipment_description_text; readOnly : false}
-      PropertyChanges{ target : equipment_description_text; activeFocusOnPress : true}
-      PropertyChanges{ target : equipment_description_text; hoverEnabled : true}
-      PropertyChanges{ target : equipment_description_text; enabled  : true}
-      PropertyChanges{ target : equipment_description_text; mouseSelectionMode  : TextInput.SelectCharacters }
-    }
-
-    onFocusChanged: {
-      if(root.current == index){
-        state = 'Selected';
+      id : equipment_description_text
+      anchors.top : equipment_name_text.bottom
+      anchors.left : parent.left
+      anchors.right : parent.right
+      anchors.leftMargin : 10
+      font.pointSize : 10
+      text : (root.model) ? root.model[index].description : ""
+      readOnly : true
+      activeFocusOnPress : false
+      hoverEnabled : false
+      enabled : false
+      color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
+      onEditingFinished : {
+        update_equipment(root.model[index])
       }
-      else{
+    }
+
+    states : State {
+      name : "Selected"
+      PropertyChanges {
+        target : equipment_name_text;
+        readOnly : false
+      }
+      PropertyChanges {
+        target : equipment_name_text;
+        activeFocusOnPress : true
+      }
+      PropertyChanges {
+        target : equipment_name_text;
+        hoverEnabled : true
+      }
+      PropertyChanges {
+        target : equipment_name_text;
+        enabled : true
+      }
+      PropertyChanges {
+        target : equipment_name_text;
+        mouseSelectionMode : TextInput.SelectCharacters
+      }
+
+      PropertyChanges {
+        target : equipment_description_text;
+        readOnly : false
+      }
+      PropertyChanges {
+        target : equipment_description_text;
+        activeFocusOnPress : true
+      }
+      PropertyChanges {
+        target : equipment_description_text;
+        hoverEnabled : true
+      }
+      PropertyChanges {
+        target : equipment_description_text;
+        enabled : true
+      }
+      PropertyChanges {
+        target : equipment_description_text;
+        mouseSelectionMode : TextInput.SelectCharacters
+      }
+    }
+
+    onFocusChanged : {
+      if (root.current == index) {
+        state = 'Selected';
+      } else {
         state = '';
       }
     }
   }
 
   onFullAdded : {
-
+    self.assign(root.model[root.current]);
+    root.equipmentAdded(root.current, self);
   }
   onFullNew : {
-    var likely_id = root.backend.nextID(SQLBackend.EQUIPMENTS) + 1
-    self.equipment_id = -1
-    self.type = "1"
-    self.name  = "New Equipment %1".arg(likely_id)
-    self.description = "New Equipment %1".arg(likely_id)
-    self.citations   = ""
-    self.image    = ""
-    root.backend.update_equipment(self)
-    root.model.insert(root.model.count,
-      {
-        equipment_id: "%1".arg(self.equipment_id)
-      , type: "%1".arg(self.type)
-      , name : "%1".arg(self.name)
-      , description: "%1".arg(self.description)
-      , citations: "%1".arg(self.citations)
-      , image: "%1".arg(self.image)
-      });
-    root.equipmentAdded (root.model.count, self.equipment_id)
+    var likely_id = root.backend.nextID(SQLBackend.EQUIPMENTS);
+    self.clear(likely_id);
+    root.backend.update_equipment(self);
+    root.equipmentCreated();
   }
   onFullDeleted : {
-
+    self.assign(root.model[index]);
+    root.model.splice(index);
+    current = Math.max(0, index - 1);
+    root.backend.remove_equipment(self);
+    root.equipmentRemoved(index, self);
   }
-  onFullExit : {
-
-  }
+  onFullExit : {}
 }

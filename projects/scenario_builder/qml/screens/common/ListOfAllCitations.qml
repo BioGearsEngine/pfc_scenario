@@ -208,8 +208,8 @@ ListOfAllForm {
   }
 
   onFullAdded : {
-    self.assign(root.model[root.current])
-    root.citationAdded(root.current, self)
+    self.assign(root.model[root.current]);
+    root.citationAdded(root.current, self);
   }
   onFullNew : {
     var likely_id = root.backend.nextID(SQLBackend.CITATIONS);

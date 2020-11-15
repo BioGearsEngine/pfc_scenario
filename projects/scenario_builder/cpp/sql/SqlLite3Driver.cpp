@@ -1365,21 +1365,26 @@ bool SQLite3Driver::remove_trauma(Trauma* trauma)
   return false;
 }
 //-----------------------------INJURY_SET----------------------------------------
-inline void SQLite3Driver::assign_trauma_profile(const QSqlRecord& record, TraumaProfile& trauma) const
+inline void SQLite3Driver::assign_trauma_profile(const QSqlRecord& record, TraumaProfile& profile) const
 {
-  trauma.id = record.value(INJURY_SET_ID).toInt();
-  trauma.uuid = record.value(INJURY_SET_UUID).toString();
-  trauma.name = record.value(INJURY_SET_NAME).toString();
-  trauma.description = record.value(INJURY_SET_DESCRIPTION).toString();
+  profile.id = record.value(INJURY_SET_ID).toInt();
+  profile.uuid = record.value(INJURY_SET_UUID).toString();
+  profile.name = record.value(INJURY_SET_NAME).toString();
+  profile.description = record.value(INJURY_SET_DESCRIPTION).toString();
 
-  TraumaOccurance* instance;
+  TraumaOccurence* instance;
   auto injury_ids = record.value(INJURY_SET_INJURIES).toString().split(';');
   auto severity_values = record.value(INJURY_SET_SEVERITIES).toString().split(';');
   auto location_values = record.value(INJURY_SET_LOCATIONS).toString().split(';');
   for (auto i = 0; i < injury_ids.size(); ++i) {
-    instance = new TraumaOccurance(&trauma);
+    instance = new TraumaOccurence();
     instance->id = -1;
     instance->fk_trauma->id = injury_ids[i].toInt();
+    if (select_trauma(instance->fk_trauma)) {
+      instance->severity = severity_values[i];
+      instance->location = location_values[i];
+      profile.traumas.push_back(instance);
+    }
   }
 }
 
@@ -2864,9 +2869,13 @@ inline void SQLite3Driver::assign_treatment(const QSqlRecord& record, Treatment&
 
   Equipment* equipment;
   for (auto equipment_id : record.value(TREATMENT_EQUIPMENT).toString().split(';')) {
-    equipment = new Equipment(&treatment);
-    equipment->id = equipment_id.toInt();
-    treatment.equipment.push_back(equipment);
+    if (!equipment_id.isEmpty()) {
+      equipment = new Equipment(&treatment);
+      equipment->id = equipment_id.toInt();
+      if (select_equipment(equipment)) {
+        treatment.equipment.push_back(equipment);
+      }
+    }
   }
 
   Citation* citation;

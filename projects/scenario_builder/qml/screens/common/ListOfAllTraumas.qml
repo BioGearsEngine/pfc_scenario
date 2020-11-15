@@ -7,136 +7,135 @@ import QtQuick.Controls.Material 2.0
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
 ListOfAllForm {
-  id: root
+  id : root
   property SQLBackend backend
 
-  signal injuryAdded(int index, int injury_id, double severity, string location)
-  signal injuryRemoved(int index, int injury_id, double severity, string location)
-  signal locationChanged(int index, string location)
-  signal severityChanged(int index, double severity)
+  signal traumaAdded(int index, Trauma trauma)
+  signal traumaRemoved(int index, Trauma trauma)
+  signal traumaCreated()
 
-  label: "Trauma"
-  labelPlural: "Traumas"
-  
+  label : "Trauma"
+  labelPlural : "Traumas"
+
   Trauma {
-    id: self
-    injury_id : -1
+    id : self
+    trauma_id : -1
   }
 
-  model : ListModel{}
+  model : ListModel {}
 
   delegate : Rectangle {
-     id : injury
-     color : 'transparent'
-     border.color: "steelblue"
-     height : injury_medical_name_text.height + injury_description_entry.height
-     anchors { left : parent.left; right: parent.right ; margins : 5 }
+    id : trauma
+    color : 'transparent'
+    border.color : "steelblue"
+    height : trauma_medical_name_text.height + trauma_description_entry.height
+    anchors {
+      left : parent.left;
+      right : parent.right;
+      margins : 5
+    }
 
     MouseArea {
-      anchors.fill: parent
-      onClicked: {
+      anchors.fill : parent
+      onClicked : {
         root.current = index
       }
     }
 
+    function update_trauma(trauma) {
+      if (trauma) {
+        root.backend.update_trauma(trauma)
+      }
+    }
+
+
     Text {
-       id : injury_medical_name_text
-       anchors.left : parent.left
-       anchors.leftMargin : 5
-       //anchors.verticalCenter  : parent.verticalCenter 
-       width : 100 
-       font.weight: Font.Bold
-       font.pointSize: 8
-       text :  model.medical_name
-       color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
+      id : trauma_medical_name_text
+      anchors.left : parent.left
+      anchors.leftMargin : 5
+      // anchors.verticalCenter  : parent.verticalCenter
+      width : 100
+      font.weight : Font.Bold
+      font.pointSize : 8
+      text : (root.model) ? root.model[index].medicalName : ""
+      color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
     }
 
     TextField {
-      id : injury_description_entry
+      id : trauma_description_entry
       anchors.left : parent.left
-      anchors.top : injury_medical_name_text.bottom
+      anchors.top : trauma_medical_name_text.bottom
       anchors.topMargin : 5
       anchors.leftMargin : 5
       font.pointSize : 8
 
-      text: model.description
+      text : (root.model) ? root.model[index].description : ""
       placeholderText : "Unknown"
 
       readOnly : false
-      activeFocusOnPress: false
+      activeFocusOnPress : false
       hoverEnabled : false
       enabled : false
-      color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
+      color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       onEditingFinished : {
-        root.locationChanged(index , text)
-        if(root.current != index){
-          injury.state = "";
-        }
+        update_trauma(root.model[index])
       }
     }
 
-    states: [
-      State {
+    states : [State {
         name : "Selected"
 
-        PropertyChanges{ target : injury_description_entry; readOnly : false}
-        PropertyChanges{ target : injury_description_entry; activeFocusOnPress : true}
-        PropertyChanges{ target : injury_description_entry; hoverEnabled : true}
-        PropertyChanges{ target : injury_description_entry; enabled  : true}
-        PropertyChanges{ target : injury_description_entry; mouseSelectionMode  : TextInput.SelectCharacters }
+        PropertyChanges {
+          target : trauma_description_entry;
+          readOnly : false
+        }
+        PropertyChanges {
+          target : trauma_description_entry;
+          activeFocusOnPress : true
+        }
+        PropertyChanges {
+          target : trauma_description_entry;
+          hoverEnabled : true
+        }
+        PropertyChanges {
+          target : trauma_description_entry;
+          enabled : true
+        }
+        PropertyChanges {
+          target : trauma_description_entry;
+          mouseSelectionMode : TextInput.SelectCharacters
+        }
       }
     ]
 
-    onFocusChanged: {
-      if(root.current == index){
+    onFocusChanged : {
+      if (root.current == index) {
         state = 'Selected';
-      }
-      else{
+      } else {
         state = "";
       }
     }
 
   }
 
-  //TODO: Modifiy TraumaSets to Store a Severity Value and A Location Value for each Entry
-  //TODO: Then Displa these values instead of the description.
-  //TODO: It would be cool if the delegate on state change added a description field which expanded it
-
   onFullAdded : {
-    
+    self.assign(root.model[root.current]);
+    root.traumaAdded(root.current, self);
   }
   onFullNew : {
-    //TODO; Model Box Popup with  a selection of known Injuries
-    var likely_id = root.backend.nextID(SQLBackend.INJURIES) + 1
-    self.injury_id     = -1
-    self.medical_name  = "New Trauma %1".arg(likely_id)
-    self.common_name   = "New Trauma %1".arg(likely_id)
-    self.description   = "New Trauma %1".arg(likely_id)
-    self.citations     = ""
-    self.min         =  0.0
-    self.max         =  0.0
-    root.backend.update_injury(self)
-    root.model.insert(root.model.count,
-      {
-        injury_id: "%1".arg(self.injury_id)
-      , medical_name: self.medical_name
-      , common_name : self.common_name
-      , description: self.description
-      , citations: self.citations
-      , min: "%1".arg(self.min)
-      , max: "%1".arg(self.max)
-      , severity: "%1".arg(self.min)
-      , location: "Unknown"
-      });
-    root.injuryAdded(index, self.injury_id, self.min, "Unknown")
-
+    var likely_id = root.backend.nextID(SQLBackend.TRAUMAS);
+    self.clear(likely_id);
+    root.backend.update_trauma(self);
+    root.traumaCreated();
   }
 
   onFullDeleted : {
-
+    self.assign(root.model[index]);
+    root.model.splice(index);
+    current = Math.max(0, index - 1);
+    root.backend.remove_trauma(self);
+    root.traumaRemoved(index, self);
   }
 
-  onFullExit : {
-
-  }
+  onFullExit : {}
 }

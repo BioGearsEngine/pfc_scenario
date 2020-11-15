@@ -60,7 +60,6 @@
         <file>screens/common/ListOfEquipment.qml</file>
         <file>screens/common/ListOfAllTraumas.qml</file>
         <file>screens/common/ListOfTraumas.qml</file>
-        <file>screens/common/ListOfRestrictions.qml</file>
         
         <file>screens/common/PFCButton.qml</file>
         <file>screens/common/PFCLabel.qml</file>

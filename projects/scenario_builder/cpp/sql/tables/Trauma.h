@@ -24,7 +24,7 @@ struct Treatment;
 
 struct Trauma : public QObject {
   Q_OBJECT
-  Q_PROPERTY(int injury_id MEMBER id NOTIFY idChanged);
+  Q_PROPERTY(int trauma_id MEMBER id NOTIFY idChanged);
   Q_PROPERTY(QString uuid MEMBER uuid NOTIFY uuidChanged)
   Q_PROPERTY(QString medicalName MEMBER medical_name NOTIFY medicalNameChanged)
   Q_PROPERTY(QString commonName MEMBER common_name NOTIFY commonNameChanged)

@@ -17,7 +17,7 @@ ColumnLayout {
   Layout.fillHeight : true
 
   Citation {
-    id : citation
+    id : citation_g
   }
 
   Connections {
@@ -87,25 +87,52 @@ ColumnLayout {
   }
 
   StackLayout {
-    id : listStack
+    id : citationStack
     Layout.leftMargin : 5
     Layout.rightMargin : 20
     Layout.fillWidth : true
     Layout.fillHeight : false
+
+    property var treatmentCitations: []
+    property var allCitations: []
+
     currentIndex : 0
     ListOfCitations {
       id : referenceList
       backend : root.backend
-      onList : {}
-      onCitationAdded : {}
-      onCitationRemoved : {}
+      onList : {
+        citationStack.currentIndex = 1;
+        refresh_all_citations()
+      }
+      onCitationAdded : {
+        currentObjective.citations.push(citation_g.make());
+        currentObjective.citations[currentObjective.citations.length - 1].assign(citation);
+        update_trauma(currentObjective);
+        refresh_citations()
+      }
+      onCitationRemoved : {
+        currentObjective.removeCitation(index);
+        refresh_citations()
+      }
     }
     ListOfAllCitations {
       id : fullReferenceList
       Layout.fillWidth : true
       backend : root.backend
-      onFullAdded : {}
-      onFullExit : {}
+      onCitationCreated : {
+        refresh_all_citations()
+      }
+      onCitationAdded : {
+        currentObjective.citations.push(citation_g.make());
+        currentObjective.citations[currentObjective.citations.length - 1].assign(citation);
+        update_trauma(currentObjective);
+        refresh_citations();
+        citationStack.currentIndex = 0;
+      }
+      onFullExit : {
+        refresh_citations();
+        citationStack.currentIndex = 0;
+      }
     }
   }
 
@@ -138,5 +165,8 @@ ColumnLayout {
       currentTrauma.max = max;
       update_trauma(currentTrauma)
     }
+  }
+  onCurrentTraumaChanged : {
+    refresh_citations()
   }
 }

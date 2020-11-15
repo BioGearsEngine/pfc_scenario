@@ -26,6 +26,7 @@ Rectangle {
   Layout.rightMargin : 20
   Layout.alignment : Qt.AlignTop
 
+
   Label {
     id : name
     Layout.alignment : Qt.AlignTop
@@ -92,6 +93,7 @@ Rectangle {
         topMargin : 5
         bottom : content.bottom
       }
+
       spacing : 5
       clip : true
       highlightFollowsCurrentItem : true

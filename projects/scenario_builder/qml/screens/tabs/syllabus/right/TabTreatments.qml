@@ -25,22 +25,24 @@ ScrollView {
     }
   }
   function refresh_equipment() {
-    equipmentStack.treatmentCitations = []
+    equipmentStack.treatmentEquipment = []
     let equipment = currentTreatment.equipment;
+    console.log(equipment.length)
     for (var ii = 0; ii < equipment.length; ++ ii) {
-      equipmentStack.treatmentCitations.push(equipment_g.make());
-      equipmentStack.treatmentCitations[equipmentStack.treatmentCitations.length - 1].assign(equipments[ii]);
+      equipmentStack.treatmentEquipment.push(equipment_g.make());
+      console.log(equipment[ii].name)
+      equipmentStack.treatmentEquipment[equipmentStack.treatmentEquipment.length - 1].assign(equipment[ii]);
     }
-    referenceList.model = equipmentStack.treatmentCitations;
+    equipmentList.model = equipmentStack.treatmentEquipment;
   }
-  function refresh_all_equipments() {
-    equipmentStack.allCitations = [];
+  function refresh_all_equipment() {
+    equipmentStack.allEquipment = [];
     let equipment = root.backend.equipment;
     for (var ii = 0; ii < equipment.length; ++ ii) {
-      equipmentStack.allCitations.push(equipment_g.make());
-      equipmentStack.allCitations[equipmentStack.allCitations.length - 1].assign(equipment[ii]);
+      equipmentStack.allEquipment.push(equipment_g.make());
+      equipmentStack.allEquipment[equipmentStack.allEquipment.length - 1].assign(equipment[ii]);
     }
-    fullReferenceList.model = equipmentStack.allCitations;
+    fullEquipmentList.model = equipmentStack.allEquipment;
   }
   function refresh_citations() {
     citationStack.treatmentCitations = []
@@ -124,7 +126,7 @@ ScrollView {
       }
     }
     StackLayout {
-      id : equipmentListStack
+      id : equipmentStack
       Layout.fillWidth : true
       Layout.fillHeight : false
       Layout.leftMargin : 5
@@ -142,16 +144,16 @@ ScrollView {
           equipmentStack.currentIndex = 1;
           refresh_all_equipment()
         }
-        // onEquipmentAdded : {
-        // currentTreatment.equipment.push(equipment_g.make());
-        // currentTreatment.equipment[currentTreatment.equipment.length - 1].assign(equipment);
-        // update_treatment(currentTreatment);
-        // refresh_equipment()
-        // }
-        // onEquipmentRemoved : {
-        // currentTreatment.removeEquipment(index);
-        // refresh_equipment()
-        // }
+        onEquipmentAdded : {
+          currentTreatment.equipment.push(equipment_g.make());
+          currentTreatment.equipment[currentTreatment.equipment.length - 1].assign(equipment);
+          update_treatment(currentTreatment);
+          refresh_equipment()
+        }
+        onEquipmentRemoved : {
+          currentTreatment.removeEquipment(index);
+          refresh_equipment()
+        }
       }
       ListOfAllEquipment {
         id : fullEquipmentList
@@ -160,16 +162,16 @@ ScrollView {
         Layout.leftMargin : 5
         backend : root.backend
 
-        // onEquipmentCreated : {
-        // refresh_all_equipment()
-        // }
-        // onEquipmentAdded : {
-        // currentTreatment.equipment.push(equipment_g.make());
-        // currentTreatment.equipment[currentTreatment.equipment.length - 1].assign(equipment);
-        // update_treatment(currentTreatment);
-        // refresh_equipment();
-        // equipmentStack.currentIndex = 0;
-        // }
+        onEquipmentCreated : {
+          refresh_all_equipment()
+        }
+        onEquipmentAdded : {
+          currentTreatment.equipment.push(equipment_g.make());
+          currentTreatment.equipment[currentTreatment.equipment.length - 1].assign(equipment);
+          update_treatment(currentTreatment);
+          refresh_equipment();
+          equipmentStack.currentIndex = 0;
+        }
         onFullExit : {
           refresh_equipment();
           equipmentStack.currentIndex = 0;
@@ -228,6 +230,7 @@ ScrollView {
     }
   }
   onCurrentTreatmentChanged : {
-    refresh_citations()
+    refresh_citations();
+    refresh_equipment();
   }
 }

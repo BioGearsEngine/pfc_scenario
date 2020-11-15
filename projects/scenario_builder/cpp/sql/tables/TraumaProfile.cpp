@@ -7,20 +7,20 @@
 /// Trauma Instance Functions
 ///
 
-TraumaOccurance::TraumaOccurance(QObject* parent)
+TraumaOccurence::TraumaOccurence(QObject* parent)
   : QObject(parent)
   , fk_trauma(new Trauma(this))
 
 {
 }
 //-------------------------------------------------------------------------------
-TraumaOccurance::TraumaOccurance(Trauma* trauma, Treatment* treatment, QObject* parent)
+TraumaOccurence::TraumaOccurence(Trauma* trauma, Treatment* treatment, QObject* parent)
   : QObject(parent)
   , fk_trauma(trauma)
 {
 }
 //-------------------------------------------------------------------------------
-bool TraumaOccurance::operator==(const TraumaOccurance& rhs) const
+bool TraumaOccurence::operator==(const TraumaOccurence& rhs) const
 {
   return id == rhs.id
     && fk_trauma == rhs.fk_trauma
@@ -29,24 +29,24 @@ bool TraumaOccurance::operator==(const TraumaOccurance& rhs) const
     && severity == rhs.severity;
 }
 //-------------------------------------------------------------------------------
-bool TraumaOccurance::operator!=(const TraumaOccurance& rhs) const
+bool TraumaOccurence::operator!=(const TraumaOccurence& rhs) const
 {
   return !(*this == rhs);
 }
 //-------------------------------------------------------------------------------
-TraumaOccurance* TraumaOccurance::make()
+TraumaOccurence* TraumaOccurence::make()
 {
-  return new TraumaOccurance();
+  return new TraumaOccurence();
 }
 //-------------------------------------------------------------------------------
-void TraumaOccurance::assign(TraumaOccurance* rhs)
+void TraumaOccurence::assign(TraumaOccurence* rhs)
 {
   if (rhs) {
     assign(*rhs);
   }
 }
 //-------------------------------------------------------------------------------
-void TraumaOccurance::assign(const TraumaOccurance& rhs)
+void TraumaOccurence::assign(const TraumaOccurence& rhs)
 {
   id = rhs.id;
   fk_trauma = rhs.fk_trauma;
@@ -55,7 +55,7 @@ void TraumaOccurance::assign(const TraumaOccurance& rhs)
   severity = rhs.severity;
 }
 //-------------------------------------------------------------------------------
-void TraumaOccurance::clear()
+void TraumaOccurence::clear()
 {
   id = -1;
   fk_trauma->clear();
@@ -130,9 +130,9 @@ void TraumaProfile::clear(int index)
   physiologyTree.clear();
 }
 //-------------------------------------------------------------------------------
-QQmlListProperty<TraumaOccurance> TraumaProfile::get_traumas()
+QQmlListProperty<TraumaOccurence> TraumaProfile::get_traumas()
 {
-  return QQmlListProperty<TraumaOccurance>(nullptr, this,
+  return QQmlListProperty<TraumaOccurence>(nullptr, this,
                                            &TraumaProfile::AppendTrauma,
                                            &TraumaProfile::CountTraumas,
                                            &TraumaProfile::GetTrauma,
@@ -141,7 +141,7 @@ QQmlListProperty<TraumaOccurance> TraumaProfile::get_traumas()
 //-------------------------------------------------------------------------------
 
 //! Helper functions for Traumas
-void TraumaProfile::AppendTrauma(QQmlListProperty<TraumaOccurance>* list, TraumaOccurance* value)
+void TraumaProfile::AppendTrauma(QQmlListProperty<TraumaOccurence>* list, TraumaOccurence* value)
 {
   auto profile = qobject_cast<TraumaProfile*>(list->object);
   if (profile) {
@@ -149,7 +149,7 @@ void TraumaProfile::AppendTrauma(QQmlListProperty<TraumaOccurance>* list, Trauma
   }
 }
 //-------------------------------------------------------------------------------
-auto TraumaProfile::GetTrauma(QQmlListProperty<TraumaOccurance>* list, int index) -> TraumaOccurance*
+auto TraumaProfile::GetTrauma(QQmlListProperty<TraumaOccurence>* list, int index) -> TraumaOccurence*
 {
   auto profile = qobject_cast<TraumaProfile*>(list->object);
   if (profile) {
@@ -158,7 +158,7 @@ auto TraumaProfile::GetTrauma(QQmlListProperty<TraumaOccurance>* list, int index
   return nullptr;
 }
 //-------------------------------------------------------------------------------
-void TraumaProfile::ClearTraumas(QQmlListProperty<TraumaOccurance>* list)
+void TraumaProfile::ClearTraumas(QQmlListProperty<TraumaOccurence>* list)
 {
   auto profile = qobject_cast<TraumaProfile*>(list->object);
   if (profile) {
@@ -166,7 +166,7 @@ void TraumaProfile::ClearTraumas(QQmlListProperty<TraumaOccurance>* list)
   }
 }
 //-------------------------------------------------------------------------------
-auto TraumaProfile::CountTraumas(QQmlListProperty<TraumaOccurance>* list) -> int
+auto TraumaProfile::CountTraumas(QQmlListProperty<TraumaOccurence>* list) -> int
 {
   auto profile = qobject_cast<TraumaProfile*>(list->object);
   if (profile) {
@@ -180,7 +180,7 @@ void TraumaProfile::RemoveTrauma(int index)
   traumas.removeAt(index);
 }
 //-------------------------------------------------------------------------------
-void TraumaProfile::ReplaceTrauma(int index, TraumaOccurance* value)
+void TraumaProfile::ReplaceTrauma(int index, TraumaOccurence* value)
 {
   traumas.replace(index, value);
 }
@@ -199,34 +199,34 @@ void TraumaProfile::ReplaceTrauma(int index, TraumaOccurance* value)
 // //-------------------------------------------------------------------------------
 // void TraumaProfile::AppendPhysiologyState(QQmlListProperty<QString>* list, QString* value)
 // {
-//   TraumaProfile* TraumaOccurance = qobject_cast<TraumaProfile*>(list->object);
-//   if (TraumaOccurance) {
-//     TraumaOccurance->physiologyTree.append(*value);
+//   TraumaProfile* TraumaOccurence = qobject_cast<TraumaProfile*>(list->object);
+//   if (TraumaOccurence) {
+//     TraumaOccurence->physiologyTree.append(*value);
 //   }
 // }
 // //-------------------------------------------------------------------------------
 // QString* TraumaProfile::GetPhysiologyState(QQmlListProperty<QString>* list, int index)
 // {
-//   TraumaProfile* TraumaOccurance = qobject_cast<TraumaProfile*>(list->object);
-//   if (TraumaOccurance) {
-//     return &(TraumaOccurance->physiologyTree[index]);
+//   TraumaProfile* TraumaOccurence = qobject_cast<TraumaProfile*>(list->object);
+//   if (TraumaOccurence) {
+//     return &(TraumaOccurence->physiologyTree[index]);
 //   }
 //   return nullptr;
 // }
 // //-------------------------------------------------------------------------------
 // void TraumaProfile::ClearPhysiologyStates(QQmlListProperty<QString>* list)
 // {
-//   TraumaProfile* TraumaOccurance = qobject_cast<TraumaProfile*>(list->object);
-//   if (TraumaOccurance) {
-//     return TraumaOccurance->physiologyTree.clear();
+//   TraumaProfile* TraumaOccurence = qobject_cast<TraumaProfile*>(list->object);
+//   if (TraumaOccurence) {
+//     return TraumaOccurence->physiologyTree.clear();
 //   }
 // }
 // //-------------------------------------------------------------------------------
 // int TraumaProfile::CountPhysiologyStates(QQmlListProperty<QString>* list)
 // {
-//   TraumaProfile* TraumaOccurance = qobject_cast<TraumaProfile*>(list->object);
-//   if (TraumaOccurance) {
-//     return TraumaOccurance->physiologyTree.count();
+//   TraumaProfile* TraumaOccurence = qobject_cast<TraumaProfile*>(list->object);
+//   if (TraumaOccurence) {
+//     return TraumaOccurence->physiologyTree.count();
 //   }
 //   return 0;
 // }
