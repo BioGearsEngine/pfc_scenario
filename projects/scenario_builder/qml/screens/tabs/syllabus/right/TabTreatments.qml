@@ -27,10 +27,8 @@ ScrollView {
   function refresh_equipment() {
     equipmentStack.treatmentEquipment = []
     let equipment = currentTreatment.equipment;
-    console.log(equipment.length)
     for (var ii = 0; ii < equipment.length; ++ ii) {
       equipmentStack.treatmentEquipment.push(equipment_g.make());
-      console.log(equipment[ii].name)
       equipmentStack.treatmentEquipment[equipmentStack.treatmentEquipment.length - 1].assign(equipment[ii]);
     }
     equipmentList.model = equipmentStack.treatmentEquipment;

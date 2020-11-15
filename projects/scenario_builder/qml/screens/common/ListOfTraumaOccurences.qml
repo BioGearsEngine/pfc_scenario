@@ -10,10 +10,10 @@ ListOfForm {
   id : root
   property SQLBackend backend
   property TraumaProfile profile
-  signal traumaAdded(int index, int trauma_id, double severity, string location, string description)
-  signal traumaRemoved(int index, int trauma_id, double severity, string location, string description)
-  signal locationChanged(int index, string location)
-  signal severityChanged(int index, double severity)
+
+  signal traumaModified(int index, TraumaOccurence occurence)
+  signal traumaAdded(int index, TraumaOccurence occurence)
+  signal traumaRemoved(int index, TraumaOccurence occurence)
 
   label : "Trauma"
   labelPlaural : "Traumas"
@@ -26,7 +26,7 @@ ListOfForm {
   model : ListModel {}
 
   delegate : Rectangle {
-    id : trauma
+    id : occurence
     color : 'transparent'
     border.color : "steelblue"
     height : 30
@@ -43,13 +43,6 @@ ListOfForm {
       }
     }
 
-    function update_trauma_occurences(occurence) {
-      if (citation) {
-        profile.traumas = root.model
-        root.backend.update_trauma_profile(profile)
-      }
-    }
-
     Text {
       id : trauma_medical_name_text
       anchors.left : parent.left
@@ -58,7 +51,7 @@ ListOfForm {
       width : 100
       font.weight : Font.Bold
       font.pointSize : 8
-      text : (root.model) ? root.model[index].medicalName : ""
+      text : (root.model) ? root.model[index].trauma.medicalName : ""
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
     }
 
@@ -77,7 +70,7 @@ ListOfForm {
       anchors.leftMargin : -5
       font.pointSize : 8
 
-      text : (root.model) ? root.model[index].locations : ""
+      text : (root.model) ? root.model[index].location : "Unknown"
       placeholderText : "Unknown"
 
       readOnly : false
@@ -86,7 +79,8 @@ ListOfForm {
       enabled : false
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       onEditingFinished : {
-        update_trauma_occurences(root.model[index])
+        root.model[index].location = text
+        traumaModified(index, root.model[index])
       }
     }
 
@@ -105,11 +99,11 @@ ListOfForm {
       anchors.leftMargin : -5
       font.pointSize : 8
 
-      text : (root.model) ? root.model[index].severity : ""
+      text : (root.model) ? root.model[index].severity : "0.0"
       placeholderText : "Severity Value"
       validator : DoubleValidator {
-        bottom : model.min
-        top : model.max
+        bottom : (root.model) ? root.model[index].trauma.min : 0.0
+        top : (root.model) ? root.model[index].trauma.max : 1.0
       }
 
       readOnly : false
@@ -118,7 +112,8 @@ ListOfForm {
       enabled : false
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       onEditingFinished : {
-        update_trauma_occurences(root.model[index])
+        root.model[index].severity = "%1".arg(text)
+        traumaModified(index, root.model[index])
       }
     }
 
@@ -190,7 +185,7 @@ ListOfForm {
       self.assign(root.model[index]);
       root.model.splice(index);
       current = Math.max(0, index - 1);
-      root.traumaRemoved(index, self)
+      root.traumaremoved(index, self)
     }
   }
 }

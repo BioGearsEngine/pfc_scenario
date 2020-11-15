@@ -24,8 +24,7 @@ struct Trauma;
 
 struct TraumaOccurence : public QObject {
   Q_OBJECT
-  Q_PROPERTY(int trauma_instance_id MEMBER id NOTIFY idChanged)
-  Q_PROPERTY(Trauma* fk_trauma MEMBER fk_trauma NOTIFY traumaChanged)
+  Q_PROPERTY(Trauma* trauma MEMBER fk_trauma NOTIFY traumaChanged)
   Q_PROPERTY(QString description MEMBER description NOTIFY descriptionChanged)
   Q_PROPERTY(QString location MEMBER location NOTIFY locationChanged)
   Q_PROPERTY(QString severity MEMBER severity NOTIFY severityChanged)
@@ -38,7 +37,6 @@ signals:
   void severityChanged();
 
 public:
-  int32_t id = -1;
   Trauma* fk_trauma;
   QString description = "";
   QString location = "";

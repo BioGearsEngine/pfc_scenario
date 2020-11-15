@@ -426,7 +426,10 @@ bool SQLite3Driver::populate_equipment()
     { "Oxygen Tank", 1, "A tank of oxygen.", "In medicine, an oxygen tank provide controlled and therapeutic oxygen delivery to a patient.", "2;5;6;7", "Available, BOOLEAN; Volume, INTEGER" },
     { "IV Pole", 1, "The pole use to hang IV bags on.", "It provides patient mobility to move around a facility while keeping IV lines in.", "2;5;6;7", "Available, BOOLEAN" },
     { "IV Bag", 4, "Bag used to store and deliver fluids to a patient.", "", "2;5;6;7", "Available, BOOLEAN; Count, INTEGER; Volume, INTEGER; Kind, ENUM{Saline, Lactated Ringers}" },
-    { "Catheter Supplies", 4, "Catheters and the products that are used to insert or remove a catheter, and maintain catheter function.", "", "2;5;6;7", "" }
+    { "Catheter Supplies", 4, "Catheters and the products that are used to insert or remove a catheter, and maintain catheter function.", "", "2;5;6;7", "Available, BOOLEAN; Count, INTEGER" },
+    { "Chest Tube", 4, "A chest tube is a hollow, flexible tube placed into the chest.", "Acts as a drain. Chest tubes drain blood, fluid, or air from around your lungs, heart, or esophagus. The tube around your lung is placed between your ribs and into the space between the inner lining and the outer lining of your chest cavity", "2;5;6;7", "Avaliable,BOOLEAN;Count,INTEGER" },
+    { "Needle Decompression Kits", 4, "14 guage by 3.25 inch needle and catheter", "This is a 14 gauge by 3.25 inch needle and catheter for use in the management of combat casualties who present with the signs and symptoms of a tension pneumothorax. This device meets 100% of the requirements for fit, form and function that is listed for NSN 6515-01-541-0635. The hard plastic case protects the needle and catheter from bending or damage and harsh environmental conditions while in your kit. ", "2;5;6;7", "Avaliable,BOOLEAN;Count,INTEGER" } ,
+    { "Burn Ointments", 4, "Neosporin Burn Relief & First-Aid Antibiotic Ointment, .5 OZ", "NEOSPORIN + Burn Relief Dual Action Ointment is an antibiotic ointment that provides infection protection and helps soothe minor burn pain. Formulated for first aid wound treatment, it contains bacitracin zinc, neomycin sulfate, and polymyxin B sulfate for antibiotic care of minor burns and wounds. The topical analgesic ointment is also formulated with pramoxine hydrochloride to help soothe and reduce burn pain for maximum-strength relief. From the #1 doctor-recommended brand, this antibiotic and pain relief ointment provides maximum strength relief without any sting forburn treatment, including cooking burns. Neosporin + Burn Relief Dual Action Ointment is a wound care essential to include in any burn care first-aid kit. ", "2;5;6;7", "Avaliable,BOOLEAN;Count,INTEGER" }
   };
 
   Equipment temp;
@@ -515,24 +518,54 @@ bool SQLite3Driver::populate_treatments()
     std::string medical_name;
     std::string common_name;
     std::string description;
+    std::string equipment;
     std::string citations;
   };
 
   std::vector<sTreatment> default_treatments = {
-    { "Chest Tube", "Chest Tube", "A chest tube is a hollow, flexible tube placed into the chest. It acts as a drain for blood, fluid, or air from around the heart and lungs. ", "2;5;6;7" },
-    { "Needle Thoracostomy", "Needle Decompression", "A procedure performed to stabilize deteriorating patients in the life-threatening situation of a tension pneumothorax. The procedure involves inserting a large needle through the chest wall into the pleural cavity to allow air to escape. ", "2;5;6;7" },
-    { "Burn Ointment", "Burn Ointment", "Used to help in the prevention and treatment of infections during burn healing, burn ointment kills infectious microorganisms and reduces inflammation.", "2;5;6;7" },
-    { "Bandage", "Bandage/Wrap", "A strip of fabric used especially to cover, dress, and bind up wounds.", "2;5;6;7" },
-    { "Suture", "Stitches", "A stitch or row of stitches holding together the edges of a wound or incision. They typically help hold tissue together during healing.", "2;5;6;7" },
-    { "Antibiotics", "Antibiotics", "Antimicrobial substance active against bacteria, used in the treatment and prevention of bacterial infections. This medication usually comes in the form of a pill. There are different types of antibiotics for different applications.", "2;5;6;7" },
-    { "Fentanyl", "Fentanyl", "Fentanyl is a prescription drug that is also made and used illegally. Like morphine, it is a medicine that is typically used to treat patients with severe pain, especially after surgery. It is also sometimes used to treat patients with chronic pain who are physically tolerant to other opioids.", "2;5;6;7" },
-    { "Morphine", "Morphine", "Morphine is an opioid medication used to treat severe chronic pain. It has a high rate of addiction, overdose, and death.", "2;5;6;7" },
-    { "Pack Wound", "Pack Wound", "When a wound is deep, or when it tunnels under the skin, packing the wound can help it heal. The packing material soaks up any drainage from the wound, which helps the tissues heal from the inside out.", "2;5;6;7" },
-    { "Escharotomy", "Escharotomy", "During treatment of a hazardous burn, an escharotomy is the surgical incision through the eschar into the subcutaneous tissues to allow the extremity to continue to swell without compressing underlying blood vessels.", "2;5;6;7" }
+    { "Chest Tube", "Chest Tube",
+      "A chest tube is a hollow, flexible tube placed into the chest."
+      " It acts as a drain for blood, fluid, or air from around the heart and lungs. ",
+      "26", "2;5;6;7" },
+    { "Needle Thoracostomy", "Needle Decompression",
+      "A procedure performed to stabilize deteriorating patients in the life-threatening situation of a tension pneumothorax."
+      " The procedure involves inserting a large needle through the chest wall into the pleural cavity to allow air to escape. ",
+      "27", "2;5;6;7" },
+    { "Burn Ointment", "Burn Ointment",
+      "Used to help in the prevention and treatment of infections during burn healing, burn ointment kills infectious microorganisms and reduces inflammation.",
+      "28", "2;5;6;7" },
+    { "Bandage", "Bandage/Wrap",
+      "A strip of fabric used especially to cover, dress, and bind up wounds.",
+      "22", "2;5;6;7" },
+    { "Suture", "Stitches",
+      "A stitch or row of stitches holding together the edges of a wound or incision. They typically help hold tissue together during healing.",
+      "17;22", "2;5;6;7" },
+    { "Antibiotics", "Antibiotics",
+      "Antimicrobial substance active against bacteria, used in the treatment and prevention of bacterial infections."
+      " This medication usually comes in the form of a pill."
+      " There are different types of antibiotics for different applications.",
+      "8;25;20", "2;5;6;7" },
+    { "Fentanyl", "Fentanyl",
+      "Fentanyl is a prescription drug that is also made and used illegally."
+      " Like morphine, it is a medicine that is typically used to treat patients with severe pain, especially after surgery."
+      " It is also sometimes used to treat patients with chronic pain who are physically tolerant to other opioids.",
+      "10;25;20", "2;5;6;7" },
+    { "Morphine", "Morphine",
+      "Morphine is an opioid medication used to treat severe chronic pain. It has a high rate of addiction, overdose, and death.",
+      "13;25;20", "2;5;6;7" },
+    { "Pack Wound", "Pack Wound",
+      "When a wound is deep, or when it tunnels under the skin, packing the wound can help it heal."
+      " The packing material soaks up any drainage from the wound, which helps the tissues heal from the inside out.",
+      "17;22;23", "2;5;6;7" },
+    { "Escharotomy", "Escharotomy",
+      "During treatment of a hazardous burn, an escharotomy is the surgical incision through the eschar into the subcutaneous tissues"
+      " to allow the extremity to continue to swell without compressing underlying blood vessels.",
+      "2;3;", "2;5;6;7" }
   };
 
   Treatment temp;
   Citation* citation;
+  Equipment* equipment;
 
   for (auto& treatmentDef : default_treatments) {
     temp.clear();
@@ -546,6 +579,16 @@ bool SQLite3Driver::populate_treatments()
         citation->id = std::stoi(citation_id);
         if (select_citation(citation)) {
           temp.citations.push_back(citation);
+        }
+      }
+    }
+
+    for (auto equipment_id : string_split(treatmentDef.equipment, ";")) {
+      if (!equipment_id.empty()) {
+        equipment = new Equipment(&temp);
+        equipment->id = std::stoi(equipment_id);
+        if (select_equipment(equipment)) {
+          temp.equipment.push_back(equipment);
         }
       }
     }
@@ -1373,12 +1416,11 @@ inline void SQLite3Driver::assign_trauma_profile(const QSqlRecord& record, Traum
   profile.description = record.value(INJURY_SET_DESCRIPTION).toString();
 
   TraumaOccurence* instance;
-  auto injury_ids = record.value(INJURY_SET_INJURIES).toString().split(';');
+  auto injury_ids = record.value(INJURY_SET_TRAUMAS).toString().split(';');
   auto severity_values = record.value(INJURY_SET_SEVERITIES).toString().split(';');
   auto location_values = record.value(INJURY_SET_LOCATIONS).toString().split(';');
   for (auto i = 0; i < injury_ids.size(); ++i) {
     instance = new TraumaOccurence();
-    instance->id = -1;
     instance->fk_trauma->id = injury_ids[i].toInt();
     if (select_trauma(instance->fk_trauma)) {
       instance->severity = severity_values[i];
@@ -1473,10 +1515,10 @@ bool SQLite3Driver::update_trauma_profile(TraumaProfile* trauma_profile)
     QString traumas;
     QString severities;
     QString locations;
-    for (auto trauma : trauma_profile->traumas) {
-      traumas += QString("%1;").arg(trauma->id);
-      severities += QString("%1;").arg(trauma->severity);
-      locations += QString("%1;").arg(trauma->location);
+    for (auto occurence : trauma_profile->traumas) {
+      traumas += QString("%1;").arg(occurence->fk_trauma->id);
+      severities += QString("%1;").arg(occurence->severity);
+      locations += QString("%1;").arg(occurence->location);
     }
     query.bindValue(":traumas", traumas);
     query.bindValue(":severities", severities);
@@ -3973,7 +4015,7 @@ bool SQLite3Driver::remove_trauma_from_trauma_profiles(std::string trauma_id)
     for (auto& trauma_profile : tps) {
       auto trauma = trauma_profile->traumas.begin();
       while (trauma != trauma_profile->traumas.end()) {
-        if ((*trauma)->id == std::stoi(trauma_id)) {
+        if ((*trauma)->fk_trauma->id == std::stoi(trauma_id)) {
           trauma_profile->traumas.erase(trauma);
         }
         if (trauma != trauma_profile->traumas.end()) {

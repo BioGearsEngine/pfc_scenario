@@ -16,35 +16,37 @@ ColumnLayout {
   Layout.fillWidth : true
   Layout.fillHeight : true
 
-
   Trauma {
-    id : trauma
+    id : trauma_g
+  }
+  TraumaOccurence {
+    id : occurence_g
   }
 
-  function update_traumaProfile(traumaProfile) {
-    if (values.physiologyTree.length == 0) {
-      values.physiologyTree.push("StandardMale@0s.xml");
+  function update_trauma_profile(traumaProfile) {
+    if (traumaProfile.physiologyTree.length == 0) {
+      traumaProfile.physiologyTree.push("StandardMale@0s.xml");
     }
-    root.backend.update_traumaProfile(traumaProfile)
+    root.backend.update_trauma_profile(traumaProfile)
   }
 
   function refresh_traumas() {
-    traumaStack.treatmentTraumas = []
+    occurenceStack.occurences = []
     let traumas = currentProfile.traumas;
     for (var ii = 0; ii < traumas.length; ++ ii) {
-      traumaStack.treatmentTraumas.push(trauma_g.make());
-      traumaStack.treatmentTraumas[traumaStack.treatmentTraumas.length - 1].assign(traumas[ii]);
+      occurenceStack.occurences.push(occurence_g.make());
+      occurenceStack.occurences[occurenceStack.occurences.length - 1].assign(traumas[ii]);
     }
-    referenceList.model = traumaStack.treatmentTraumas;
+    occurenceList.model = occurenceStack.occurences;
   }
   function refresh_all_traumas() {
-    traumaStack.allTraumas = [];
+    occurenceStack.allTraumas = [];
     let traumas = root.backend.traumas;
     for (var ii = 0; ii < traumas.length; ++ ii) {
-      traumaStack.allTraumas.push(trauma_g.make());
-      traumaStack.allTraumas[traumaStack.allTraumas.length - 1].assign(traumas[ii]);
+      occurenceStack.allTraumas.push(trauma_g.make());
+      occurenceStack.allTraumas[occurenceStack.allTraumas.length - 1].assign(traumas[ii]);
     }
-    fullReferenceList.model = traumaStack.allTraumas;
+    fullTraumaList.model = occurenceStack.allTraumas;
   }
 
   TextEntry {
@@ -57,7 +59,7 @@ ColumnLayout {
     onEditingFinished : {
       if (text != currentProfile.name) {
         currentProfile.name = text;
-        update_traumaProfile(currentProfile);
+        update_trauma_profile(currentProfile);
       }
     }
   }
@@ -72,36 +74,46 @@ ColumnLayout {
     onEditingFinished : {
       if (text != currentProfile.description) {
         currentProfile.description = text;
-        update_traumaProfile(currentProfile);
+        update_trauma_profile(currentProfile);
       }
     }
   }
 
   StackLayout {
-    id : traumaStack
+    id : occurenceStack
     Layout.fillWidth : true
     Layout.fillHeight : false
     Layout.leftMargin : 5
     Layout.rightMargin : 20
+
+    property var occurences: []
+    property var allTraumas: []
+
     currentIndex : 0
-    ListOfTraumas {
-      id : traumaList
+    ListOfTraumaOccurences {
+      id : occurenceList
       Layout.leftMargin : 5
       backend : root.backend
 
       onList : {
-        traumaStack.currentIndex = 1;
+        occurenceStack.currentIndex = 1;
         refresh_all_traumas()
       }
       onTraumaAdded : {
-        currentProfile.traumas.push(trauma_g.make());
-        currentProfile.traumas[currentProfile.traumas.length - 1].assign(trauma);
-        update_objective(currentProfile);
+        currentProfile.traumas.push(occurence_g.make());
+        currentProfile.traumas[currentProfile.traumas.length - 1].assign(occurence);
+        update_trauma_profile(currentProfile);
         refresh_traumas()
       }
       onTraumaRemoved : {
         currentProfile.removeTrauma(index);
+        update_trauma_profile(currentProfile);
         refresh_traumas()
+      }
+      onTraumaModified : {
+        currentProfile.traumas[index].assign(occurence);
+        update_trauma_profile(currentProfile);
+        refresh_traumas();
       }
     }
     ListOfAllTraumas {
@@ -112,15 +124,16 @@ ColumnLayout {
         refresh_all_traumas()
       }
       onTraumaAdded : {
-        currentProfile.traumas.push(trauma_g.make());
-        currentProfile.traumas[currentProfile.traumas.length - 1].assign(trauma);
-        update_objective(currentProfile);
+        currentProfile.traumas.push(occurence_g.make());
+        console.log(currentProfile.traumas, currentProfile.traumas.length);
+        currentProfile.traumas[currentProfile.traumas.length - 1].trauma = trauma;
+        update_trauma_profile(currentProfile);
         refresh_traumas();
-        traumaStack.currentIndex = 0;
+        occurenceStack.currentIndex = 0;
       }
       onFullExit : {
         refresh_traumas();
-        traumaStack.currentIndex = 0;
+        occurenceStack.currentIndex = 0;
       }
     }
   }
@@ -138,7 +151,7 @@ ColumnLayout {
       }
       if (text != currentProfile.physiologyTree[0]) {
         currentProfile.physiologyTree[0] = text;
-        update_traumaProfile(currentProfile);
+        update_trauma_profile(currentProfile);
       }
     }
   }

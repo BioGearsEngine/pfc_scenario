@@ -134,9 +134,7 @@ ColumnLayout {
         text : (currentAssessment) ? "%1".arg(currentAssessment.availablePoints) : ""
         onEditingFinished : {
           if (text != "%1".arg(currentAssessment.availablePoints)) {
-            console.log(currentAssessment.availablePoints)
-            console.log(parseInt(text))
-            currentAssessment.availablePoints = parseInt(text);
+             currentAssessment.availablePoints = parseInt(text);
             update_assessment(currentAssessment);
           }
         }

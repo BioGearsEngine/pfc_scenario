@@ -22,8 +22,7 @@ TraumaOccurence::TraumaOccurence(Trauma* trauma, Treatment* treatment, QObject* 
 //-------------------------------------------------------------------------------
 bool TraumaOccurence::operator==(const TraumaOccurence& rhs) const
 {
-  return id == rhs.id
-    && fk_trauma == rhs.fk_trauma
+  return *fk_trauma == *rhs.fk_trauma
     && description == rhs.description
     && location == rhs.location
     && severity == rhs.severity;
@@ -48,8 +47,8 @@ void TraumaOccurence::assign(TraumaOccurence* rhs)
 //-------------------------------------------------------------------------------
 void TraumaOccurence::assign(const TraumaOccurence& rhs)
 {
-  id = rhs.id;
-  fk_trauma = rhs.fk_trauma;
+
+  fk_trauma->assign(rhs.fk_trauma);
   description = rhs.description;
   location = rhs.location;
   severity = rhs.severity;
@@ -57,7 +56,7 @@ void TraumaOccurence::assign(const TraumaOccurence& rhs)
 //-------------------------------------------------------------------------------
 void TraumaOccurence::clear()
 {
-  id = -1;
+
   fk_trauma->clear();
   description.clear();
   location.clear();
@@ -132,7 +131,7 @@ void TraumaProfile::clear(int index)
 //-------------------------------------------------------------------------------
 QQmlListProperty<TraumaOccurence> TraumaProfile::get_traumas()
 {
-  return QQmlListProperty<TraumaOccurence>(nullptr, this,
+  return QQmlListProperty<TraumaOccurence>(this, this,
                                            &TraumaProfile::AppendTrauma,
                                            &TraumaProfile::CountTraumas,
                                            &TraumaProfile::GetTrauma,
