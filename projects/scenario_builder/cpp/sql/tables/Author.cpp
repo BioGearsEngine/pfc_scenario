@@ -70,4 +70,19 @@ void Author::clear()
   phone.clear();
   organization.clear();
 }
+void Author::clear(int index)
+{
+  id = -1;
+  uuid.clear();
+  first = QString("Author %1").arg(index);
+  middle.clear();
+  last = QString("Author %1").arg(index);
+  email = QString("Email@Author%1.com").arg(index);
+  zip.clear();
+  plus_4.clear();
+  state.clear();
+  country.clear();
+  phone.clear();
+  organization.clear();
+}
 //--------------------------------------------------------------------------------------------

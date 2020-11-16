@@ -2573,7 +2573,8 @@ QList<Role*> SQLite3Driver::roles_in_scene(Scene const* scene)
 
       assign_role_map(map_record, *map);
       if (select_role(map->fk_role)) {
-        _roles.push_back(map->fk_role);
+        _roles.push_back(Role::make());
+        _roles.back()->assign(map->fk_role);
       }
     }
   }
@@ -4205,6 +4206,13 @@ auto AtProperty(QQmlListProperty<Property>* list, int index) -> Property*
     return propertyList->at(index);
   }
   return nullptr;
+}
+QString SQLite3Driver::getProperty(QString name) const
+{
+  Property property;
+  property.name = name;
+  select_property(&property);
+  return property.value;
 }
 QQmlListProperty<Property> SQLite3Driver::getProperties() const
 {

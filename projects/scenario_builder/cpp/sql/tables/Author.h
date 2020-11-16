@@ -62,7 +62,8 @@ public:
   Q_INVOKABLE void assign(Author* rhs);
   void assign(const Author& rhs);
 
-  void clear();
+  Q_INVOKABLE void clear();
+  Q_INVOKABLE void clear(int index);
 };
 
 #endif

@@ -215,6 +215,7 @@ public:
   QList<Scene*> scenes() const;
 
   Q_INVOKABLE QQmlListProperty<Author> getAuthors() const;
+  Q_INVOKABLE QString getProperty(QString name) const;
   Q_INVOKABLE QQmlListProperty<Property> getProperties() const;
   Q_INVOKABLE QQmlListProperty<Objective> getObjectives() const;
   Q_INVOKABLE QQmlListProperty<Citation> getCitations() const;

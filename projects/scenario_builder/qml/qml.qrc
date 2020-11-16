@@ -42,10 +42,6 @@
         <file>screens/tabs/syllabus/right/TabObjectives.qml</file>
         <file>screens/tabs/syllabus/right/TabTreatments.qml</file>
 
-        <!-- Summary Tab Tabs -->
-        <file>screens/tabs/summary/LeftPane.qml</file>
-        <file>screens/tabs/summary/RightPane.qml</file>
-
         <!--Shared Tab Components -->
         <file>screens/common/FourButtonRow.qml</file>
         <file>screens/common/ThreeButtonRow.qml</file>
