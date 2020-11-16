@@ -424,10 +424,18 @@ namespace schema {
     return citation;
   }
   //-----------------------------------------------------------------------------
+  auto PFC::make_location(Location const* const input, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::location>
+  {
+    auto location = std::make_unique<pfc::schema::location>(  schema::make_string(input->uuid),
+                                                              schema::make_string(input->name),
+                                                              schema::make_string(input->description),
+                                                              schema::make_string(input->environment));
+    return location;
+  }
+  //-----------------------------------------------------------------------------
   auto PFC::make_scene(Scene const* const input, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::scene>
   {
 
-    
     Location* location = _db->getLocationOfScene(const_cast<Scene*>(input));
     auto scene = std::make_unique<pfc::schema::scene>(schema::make_string(input->uuid),
                                                       schema::make_string(location->uuid),
@@ -645,6 +653,7 @@ namespace schema {
       for (auto event : scene.events().event()) {
         Event temp;
         temp.name = QString::fromStdString(event.name());
+        temp.uuid = QString::fromStdString(event.id());
         temp.description = QString::fromStdString(event.description());
         temp.category = QString::fromStdString(event.category());
         temp.fidelity = QString::fromStdString(event.fidelity());
@@ -657,7 +666,6 @@ namespace schema {
         temp.fk_equipment->uuid = QString::fromStdString(event.equipment());
         temp.details = QString::fromStdString(event.details());
 
-        //TODO: Convert UUID to FK
         if (!_db.update_event(&temp)) {
           wasSuccessful = false;
           return scenario_schema;
@@ -728,10 +736,11 @@ namespace schema {
   auto PFC::load_locations(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<::pfc::schema::ScenarioSchema>
   {
     auto locations = scenario_schema->medical_scenario().locations();
-    for ( auto location : locations.location()) {
+    for (auto location : locations.location()) {
       Location temp;
       temp.uuid = location.id().c_str();
       temp.name = location.name().c_str();
+      temp.environment = location.environment().c_str();
       temp.description = location.description().c_str();
       if (!_db.update_location(&temp)) {
         wasSuccessful = false;
@@ -798,7 +807,7 @@ namespace schema {
 
       temp.weather = scene.weather().present() ? QString::fromStdString(scene.weather().get()) : "";
 
-      if (!_db.update_scene(&temp)) {
+      if (!_db.update_scene(&temp, false)) {
         wasSuccessful = false;
         return scenario_schema;
       }
@@ -812,10 +821,7 @@ namespace schema {
       }
 
       LocationMap dbLocationMap;
-      dbLocationMap.id = -1;
-      dbLocationMap.fk_scene->id = temp.id;
-      dbLocationMap.fk_location->id = temp_location.id;
-      if (!_db.update_location_map(&dbLocationMap)) {
+      if (!_db.update_location_in_scene(&temp,&temp_location)) {
         wasSuccessful = false;
         return scenario_schema;
       }
@@ -824,11 +830,11 @@ namespace schema {
       for (auto& event : events) {
         Event dbEvent;
         dbEvent.id = -1;
-        dbEvent.name = event.name().c_str();
+        dbEvent.uuid = event.id().c_str();
         if (_db.select_event(&dbEvent)) {
           EventMap map;
-          map.fk_event->id = dbEvent.id;
-          map.fk_scene->id = temp.id;
+          map.fk_event->assign(dbEvent);
+          map.fk_scene->assign(temp);
           _db.update_event_map(&map);
         }
       }
@@ -841,8 +847,8 @@ namespace schema {
             Equipment eq;
             eq.name = equipment.name().c_str();
             if (_db.select_equipment(&eq)) {
-              eqMap.scene->id = temp.id;
-              eqMap.equipment->id = eq.id;
+              eqMap.scene->assign(temp);
+              eqMap.equipment->assign(eq);
               eqMap.name = item.short_name().c_str();
               eqMap.notes = item.description().c_str();
               for (auto& property : item.properties().value()) {
@@ -865,8 +871,8 @@ namespace schema {
             Role dbPart;
             dbPart.name = role.name().c_str();
             if (_db.select_role(&dbPart)) {
-              rMap.fk_scene->id = temp.id;
-              rMap.fk_role->id = dbPart.id;
+              rMap.fk_scene->assign(temp);
+              rMap.fk_role->assign(dbPart);
               if (!_db.update_role_map(&rMap)) {
                 qDebug() << "Error updating Role Map";
               }

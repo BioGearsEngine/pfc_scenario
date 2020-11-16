@@ -48,6 +48,7 @@ namespace schema {
     static auto make_treatment_plan(Treatment const* const, pfc::SQLite3Driver* _db) -> std::unique_ptr<treatment_plan>;
     static auto make_learning_objective(Objective const* const, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::learning_objective>;
     static auto make_citation(Citation const* const) -> std::unique_ptr<schema::citation>;
+    static auto make_location(Location const* const, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::location>;
     static auto make_scene(Scene const* const, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::scene>;
     static auto make_equipment(Equipment const* const, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::equipment>;
     static auto make_trauma_profile(TraumaProfile const* const, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::trauma_profile>;

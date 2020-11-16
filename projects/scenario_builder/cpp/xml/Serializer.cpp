@@ -587,6 +587,9 @@ auto Serializer::generate_pfc_stream() const -> std::stringstream
 
   //6.  <medical-scenario>
   //6.1 <medical-scenario><scenes>
+  for (auto location : _db->locations()) {
+    pfc_scenario.medical_scenario().locations().location().push_back(PFC::make_location(location, _db));
+  }
   for (auto scene : _db->scenes()) {
     auto scene_ptr = PFC::make_scene(scene,_db);
     //6.1.1 <medical-scenario><scenes><events>

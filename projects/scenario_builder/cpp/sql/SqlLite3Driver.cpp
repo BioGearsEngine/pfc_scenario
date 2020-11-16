@@ -440,7 +440,7 @@ bool SQLite3Driver::populate_equipment()
     { "IV Bag", 4, "Bag used to store and deliver fluids to a patient.", "", "2;5;6;7", "Available, BOOLEAN; Count, INTEGER; Volume, INTEGER; Kind, ENUM{Saline, Lactated Ringers}" },
     { "Catheter Supplies", 4, "Catheters and the products that are used to insert or remove a catheter, and maintain catheter function.", "", "2;5;6;7", "Available, BOOLEAN; Count, INTEGER" },
     { "Chest Tube", 4, "A chest tube is a hollow, flexible tube placed into the chest.", "Acts as a drain. Chest tubes drain blood, fluid, or air from around your lungs, heart, or esophagus. The tube around your lung is placed between your ribs and into the space between the inner lining and the outer lining of your chest cavity", "2;5;6;7", "Avaliable,BOOLEAN;Count,INTEGER" },
-    { "Needle Decompression Kits", 4, "14 guage by 3.25 inch needle and catheter", "This is a 14 gauge by 3.25 inch needle and catheter for use in the management of combat casualties who present with the signs and symptoms of a tension pneumothorax. This device meets 100% of the requirements for fit, form and function that is listed for NSN 6515-01-541-0635. The hard plastic case protects the needle and catheter from bending or damage and harsh environmental conditions while in your kit. ", "2;5;6;7", "Avaliable,BOOLEAN;Count,INTEGER" } ,
+    { "Needle Decompression Kits", 4, "14 guage by 3.25 inch needle and catheter", "This is a 14 gauge by 3.25 inch needle and catheter for use in the management of combat casualties who present with the signs and symptoms of a tension pneumothorax. This device meets 100% of the requirements for fit, form and function that is listed for NSN 6515-01-541-0635. The hard plastic case protects the needle and catheter from bending or damage and harsh environmental conditions while in your kit. ", "2;5;6;7", "Avaliable,BOOLEAN;Count,INTEGER" },
     { "Burn Ointments", 4, "Neosporin Burn Relief & First-Aid Antibiotic Ointment, .5 OZ", "NEOSPORIN + Burn Relief Dual Action Ointment is an antibiotic ointment that provides infection protection and helps soothe minor burn pain. Formulated for first aid wound treatment, it contains bacitracin zinc, neomycin sulfate, and polymyxin B sulfate for antibiotic care of minor burns and wounds. The topical analgesic ointment is also formulated with pramoxine hydrochloride to help soothe and reduce burn pain for maximum-strength relief. From the #1 doctor-recommended brand, this antibiotic and pain relief ointment provides maximum strength relief without any sting forburn treatment, including cooking burns. Neosporin + Burn Relief Dual Action Ointment is a wound care essential to include in any burn care first-aid kit. ", "2;5;6;7", "Avaliable,BOOLEAN;Count,INTEGER" }
   };
 
@@ -1685,6 +1685,9 @@ bool SQLite3Driver::select_event(Event* event) const
     } else if (!event->name.isEmpty()) {
       query.prepare(sqlite3::select_event_by_name);
       query.bindValue(":name", event->name);
+    } else if (!event->uuid.isEmpty()) {
+      query.prepare(sqlite3::select_event_by_uuid);
+      query.bindValue(":uuid", event->uuid);
     } else {
       qWarning() << "Provided Event has no id or name one is required";
       return false;
@@ -1930,7 +1933,6 @@ int SQLite3Driver::location_count(Scene const* scene) const
 Location* SQLite3Driver::getLocationOfScene(Scene* scene) const
 {
   //TODO: Remove second loop as location_map should include an inflated fk_lcoation
-
 
   if (QSqlDatabase::database(_db_name).isOpen()) {
     QSqlQuery location_map_query { QSqlDatabase::database(_db_name) };
@@ -2309,8 +2311,11 @@ bool SQLite3Driver::select_objective(Objective* objective) const
     } else if (!objective->name.isEmpty()) {
       query.prepare(sqlite3::select_objective_by_name);
       query.bindValue(":name", objective->name);
+    } else if (!objective->uuid.isEmpty()) {
+      query.prepare(sqlite3::select_objective_by_uuid);
+      query.bindValue(":uuid", objective->uuid);
     } else {
-      qWarning() << "Provided Objective has no id or name one is required";
+      qWarning() << "Provided Objective has no id, name or uuid one is required";
       return false;
     }
     if (query.exec()) {
@@ -2802,7 +2807,7 @@ bool SQLite3Driver::select_scene(Scene* scene) const
   qWarning() << "No Database connection";
   return false;
 }
-bool SQLite3Driver::update_scene(Scene* scene)
+bool SQLite3Driver::update_scene(Scene* scene, bool createLocationIfMissing)
 {
 
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -2846,25 +2851,30 @@ bool SQLite3Driver::update_scene(Scene* scene)
       //!  Future updates will allow us to remove this
       if (select_scene(scene)) {
         sceneUpdated(scene->id);
-        Location location;
-        location.id = 1;
-        QSqlQuery locations_in_scene_query { QSqlDatabase::database(_db_name) };
-        locations_in_scene_query.prepare(select_scene_locations_by_fk_scene);
-        locations_in_scene_query.bindValue(":scene_id", scene->id);
-        if (!locations_in_scene_query.exec() ) {
-          qWarning() << "update_scene:locations_in_scene_query: " << locations_in_scene_query.lastError();
-          return false;
-        }
-        if (query.next()) {
-          QSqlRecord location_record = query.record();
-          assign_location(location_record, location); 
-        } else {
-          location.clear(nextID(LOCATIONS));
-          update_location(&location);
-        }
-        if (update_location_in_scene(scene, &location)) {
-          emit locationUpdated(location.id);
-          emit locationsChanged();
+        if (createLocationIfMissing) {
+          Location location;
+          location.id = 1;
+
+          QSqlQuery locations_in_scene_query { QSqlDatabase::database(_db_name) };
+          locations_in_scene_query.prepare(select_scene_locations_by_fk_scene);
+          locations_in_scene_query.bindValue(":scene_id", scene->id);
+          if (!locations_in_scene_query.exec()) {
+            qWarning() << "update_scene:locations_in_scene_query: " << locations_in_scene_query.lastError();
+            return false;
+          }
+          if (query.next()) {
+            QSqlRecord location_record = query.record();
+            assign_location(location_record, location);
+          } else {
+            location.clear(nextID(LOCATIONS));
+            update_location(&location);
+          }
+          if (update_location_in_scene(scene, &location)) {
+            emit locationUpdated(location.id);
+            emit locationsChanged();
+            return true;
+          }
+        }   else {
           return true;
         }
       }
@@ -4598,7 +4608,7 @@ QQmlListProperty<Role> SQLite3Driver::getRoles() const
 QList<Role*> SQLite3Driver::getRolesInScene(Scene* scene) const
 {
   QList<Role*> list;
-  for (Role* role : roles() ) {
+  for (Role* role : roles()) {
     list.push_back(role);
   }
   return list;

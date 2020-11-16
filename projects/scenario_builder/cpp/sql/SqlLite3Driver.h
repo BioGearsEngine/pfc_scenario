@@ -279,7 +279,7 @@ public:
   Q_INVOKABLE bool update_trauma(Trauma*);
   Q_INVOKABLE bool update_trauma_profile(TraumaProfile*);
   Q_INVOKABLE bool update_assessment(Assessment*);
-  Q_INVOKABLE bool update_scene(Scene*);
+  Q_INVOKABLE bool update_scene(Scene*, bool createLocationIfMissing = true);
 
   Q_INVOKABLE bool remove_author(Author*);
   Q_INVOKABLE bool remove_property(Property*);

@@ -273,6 +273,8 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM events WHERE event_id = :id ; )";
   constexpr auto select_event_by_name
     = R"( SELECT * FROM events WHERE name = :name ORDER BY name; )";
+  constexpr auto select_event_by_uuid
+    = R"( SELECT * FROM events WHERE uuid = :uuid ORDER BY name; )";
   constexpr auto update_event_by_id
     = R"( UPDATE  events
             SET
@@ -834,7 +836,8 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM objectives WHERE objective_id = :id ; )";
   constexpr auto select_objective_by_name
     = R"( SELECT * FROM objectives WHERE name = :name ORDER BY name; )";
-
+  constexpr auto select_objective_by_uuid
+    = R"( SELECT * FROM objectives WHERE uuid = :uuid ORDER BY name; )";
   constexpr auto update_objective_by_id
     = R"( UPDATE  objectives 
           SET   uuid = :uuid
