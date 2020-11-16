@@ -426,11 +426,11 @@ namespace schema {
   //-----------------------------------------------------------------------------
   auto PFC::make_scene(Scene const* const input, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::scene>
   {
-    Location loc;
-    loc.name = generate_location_name(input->name.toStdString());
-    _db->select_location(&loc);
+
+    
+    Location* location = _db->getLocationOfScene(const_cast<Scene*>(input));
     auto scene = std::make_unique<pfc::schema::scene>(schema::make_string(input->uuid),
-                                                      schema::make_string(loc.uuid),
+                                                      schema::make_string(location->uuid),
                                                       schema::make_string(input->name),
                                                       schema::make_string(input->description),
                                                       input->time_of_day,
@@ -438,6 +438,7 @@ namespace schema {
                                                       std::make_unique<pfc::schema::scene::events_type>(),
                                                       std::make_unique<pfc::schema::scene::items_type>(),
                                                       std::make_unique<pfc::schema::scene::roles_type>());
+
     scene->weather(schema::make_string(input->weather));
     //scene->details(schema::make_string(input->details));
     return scene;
