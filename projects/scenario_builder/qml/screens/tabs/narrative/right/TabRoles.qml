@@ -55,12 +55,10 @@ ColumnLayout {
     currentIndex : 1
     Rectangle {
       id : full_listRectangle
-      width : root.width
-      height : root.height
       Layout.fillWidth : true
       Layout.fillHeight : true
       Layout.margins : 5
-
+      color : "transparent"
       border.color : "black"
 
       FourButtonRow {
@@ -95,6 +93,7 @@ ColumnLayout {
         }
         onThirdButtonClicked : {
           root.backend.remove_role(full_rolesInSceneList.roles[full_rolesInSceneList.currentIndex])
+          refresh_full_role_list();
         }
         onFourthButtonClicked : {
           role_stack.currentIndex = 1

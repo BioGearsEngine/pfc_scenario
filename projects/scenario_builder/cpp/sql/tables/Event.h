@@ -22,18 +22,18 @@ struct Equipment;
 
 struct Event : public QObject {
   Q_OBJECT
-  Q_PROPERTY(int event_id MEMBER id)
-  Q_PROPERTY(QString uuid MEMBER uuid)
-  Q_PROPERTY(QString name MEMBER name)
-  Q_PROPERTY(QString description MEMBER description)
-  Q_PROPERTY(QString category MEMBER category)
-  Q_PROPERTY(QString fidelity MEMBER fidelity)
+  Q_PROPERTY(int event_id MEMBER id NOTIFY idChanged)
+  Q_PROPERTY(QString uuid MEMBER uuid NOTIFY uuidChanged)
+  Q_PROPERTY(QString name MEMBER name NOTIFY nameChanged)
+  Q_PROPERTY(QString description MEMBER description NOTIFY descriptionChanged)
+  Q_PROPERTY(QString category MEMBER category NOTIFY categoryChanged)
+  Q_PROPERTY(QString fidelity MEMBER fidelity NOTIFY fidelityChanged)
 
-  Q_PROPERTY(Role* actor_1 MEMBER fk_actor_1)
-  Q_PROPERTY(Role* actor_2 MEMBER fk_actor_2)
-  Q_PROPERTY(Equipment* fk_equipmet MEMBER fk_equipment)
+  Q_PROPERTY(Role* actorOne MEMBER fk_actor_1 NOTIFY actorOneChanged)
+  Q_PROPERTY(Role* actorTwo MEMBER fk_actor_2 NOTIFY actorTwoChanged)
+  Q_PROPERTY(Equipment* fk_equipment MEMBER fk_equipment NOTIFY equipmentChanged)
 
-  Q_PROPERTY(QString details MEMBER details)
+  Q_PROPERTY(QString details MEMBER details NOTIFY detailsChanged)
 public:
   int32_t id = -1;
   QString uuid = "";
@@ -46,6 +46,19 @@ public:
   Equipment* fk_equipment;
   QString details = "";
 
+signals:
+  void idChanged();
+  void uuidChanged();
+  void nameChanged();
+  void descriptionChanged();
+  void categoryChanged();
+  void fidelityChanged();
+  void actorOneChanged();
+  void actorTwoChanged();
+  void equipmentChanged();
+  void detailsChanged();
+
+public:
   Event(QObject* parent = nullptr);
   Event(Role* source, Role* target, Equipment* equipment, QObject* parent = nullptr);
   Event(const Event&) = delete;
@@ -62,7 +75,8 @@ public:
   Q_INVOKABLE void assign(Event* rhs);
   void assign(const Event& rhs);
 
-  void clear();
+  Q_INVOKABLE void clear();
+  Q_INVOKABLE void clear(int index);
 };
 
 #endif

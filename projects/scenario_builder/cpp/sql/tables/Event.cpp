@@ -50,6 +50,7 @@ void Event::assign(Event* rhs)
 //--------------------------------------------------------------------------------------------
 void Event::assign(const Event& rhs)
 {
+  id = rhs.id;
   uuid = rhs.uuid;
   name = rhs.name;
   description = rhs.description;
@@ -69,6 +70,20 @@ void Event::clear()
   description.clear();
   category.clear();
   fidelity.clear();
+  fk_actor_1->clear();
+  fk_actor_2->clear();
+  fk_equipment->clear();
+  details.clear();
+}
+//--------------------------------------------------------------------------------------------
+void Event::clear(int index)
+{
+  id = -1;
+  uuid.clear();
+  name = QString("Event %1").arg(index);
+  description = QString("Unknown Event %1").arg(index);
+  category = "ACTION";
+  fidelity = "LOW";
   fk_actor_1->clear();
   fk_actor_2->clear();
   fk_equipment->clear();

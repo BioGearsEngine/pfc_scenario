@@ -43,8 +43,8 @@ void EventMap::assign(EventMap* rhs)
 void EventMap::assign(const EventMap& rhs)
 {
   id = rhs.id;
-  fk_scene = rhs.fk_scene;
-  fk_event = rhs.fk_event;
+  fk_scene->assign(rhs.fk_scene);
+  fk_event->assign(rhs.fk_event);
 }
 //--------------------------------------------------------------------------------------------
 void EventMap::clear()

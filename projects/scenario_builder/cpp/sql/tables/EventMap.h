@@ -22,15 +22,21 @@ struct Event;
 
 struct EventMap : public QObject {
   Q_OBJECT
-  Q_PROPERTY(int map_id MEMBER id)
-  Q_PROPERTY(Scene* fk_scene MEMBER fk_scene)
-  Q_PROPERTY(Event* fk_event MEMBER fk_event)
+  Q_PROPERTY(int map_id MEMBER id NOTIFY idChanged)
+  Q_PROPERTY(Scene* scene MEMBER fk_scene NOTIFY sceneChanged)
+  Q_PROPERTY(Event* event MEMBER fk_event NOTIFY eventChanged)
 
 public:
   int32_t id = -1;
   Scene* fk_scene = nullptr;
   Event* fk_event = nullptr;
 
+signals:
+  void idChanged();
+  void sceneChanged();
+  void eventChanged();
+
+public:
   EventMap(QObject* parent = nullptr);
   EventMap(Scene* scene, Event* event, QObject* parent = nullptr);
 
@@ -48,7 +54,7 @@ public:
   Q_INVOKABLE void assign(EventMap* rhs);
   void assign(const EventMap& rhs);
 
-  void clear();
+  Q_INVOKABLE void clear();
 };
 
 #endif

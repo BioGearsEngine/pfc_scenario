@@ -3269,7 +3269,9 @@ inline void SQLite3Driver::assign_event_map(const QSqlRecord& record, EventMap& 
 {
   map.id = record.value(EVENT_MAP_ID).toInt();
   map.fk_scene->id = record.value(EVENT_MAP_FK_SCENE).toInt();
+  select_scene(map.fk_scene);
   map.fk_event->id = record.value(EVENT_MAP_FK_EVENT).toInt();
+  select_event(map.fk_event);
 }
 int SQLite3Driver::event_map_count() const
 {
@@ -3347,6 +3349,7 @@ bool SQLite3Driver::update_event_map(EventMap* map)
     } else {
       query.prepare(sqlite3::insert_or_update_event_maps);
     }
+
     query.bindValue(":fk_scene", map->fk_scene->id);
     query.bindValue(":fk_event", map->fk_event->id);
     if (!query.exec()) {

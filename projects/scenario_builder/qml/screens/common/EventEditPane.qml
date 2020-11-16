@@ -6,139 +6,146 @@ import QtQuick.Controls.Material 2.0
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
 
-
 ScrollView {
-	id: root
-	clip : true
-	Layout.fillWidth: true
-	Layout.fillHeight: true
-	property SQLBackend backend
-	property ListElement modelData
-	property alias name : name.text
-	property alias description : description.text
-	property alias actor_1 : actor_1.text
-	property alias actor_2 : actor_2.text
-	property alias details : details.text
-	property alias fidelity : fidelitySelect.displayText
-	property alias type : typeSelect.displayText
-	property alias fidelityIndex : fidelitySelect.currentIndex
-	property int eventID
-	signal exit() 
-	onWidthChanged: {
-		eventColumn.width = width
-	}
-	ColumnLayout {
-		id: eventColumn
-		Event {
-			id: self
-		}
-		//anchors.fill : parent
-		Layout.fillWidth: true
-		TextEntry {
-			id: name
-			Layout.fillWidth : true
-			label: "Name"
-			placeholderText: "String Field"
-		}
-		TextAreaEntry {
-			id: description
-			Layout.fillWidth : true
-			label: "Description"
-			placeholderText: "String Field"
-		}
-		TextAreaEntry {
-			id: actor_1
-			Layout.fillWidth : true
-			label : "Actor 1"
-			placeholderText : "String Field"
-		}
-		TextAreaEntry {
-			id: actor_2
-			Layout.fillWidth : true
-			label : "Actor 2"
-			placeholderText : "String Field"
-		}
-		TextAreaEntry {
-			id: details
-			Layout.fillWidth : true
-			label : "Details"
-			placeholderText : "String Field"
-		}
-	    RowLayout {
-	      id : fidelity
-	      Layout.leftMargin: 5
-	      Label {
-	        text : "Fidelity"
-	      }
-	      ComboBox {
-	          id : fidelitySelect
-	          width: 200
-	          model: [ "Low", "Medium", "High"]	
+  id : root
+  Event {
+    id : self
+  }
 
-	          contentItem: Text {
-	              text: fidelitySelect.displayText
-	              font.pointSize: 8
-	              verticalAlignment: Text.AlignVCenter
-	              elide: Text.ElideRight
-	          }
-	      }
-	    }	
-	    RowLayout {
-	      id : type
-	      Layout.leftMargin: 5
-	      Label {
-	        text : "Type"
-	      }
-	      ComboBox {
-	          id : typeSelect
-	          width: 200
-	          model: [ "Action", "Dialogue", "Movement", "Sound", "Environment"]	
-
-	          contentItem: Text {
-	              text: typeSelect.displayText
-	              font.pointSize: 8
-	              verticalAlignment: Text.AlignVCenter
-	              elide: Text.ElideRight
-	          }
-	      }
-	    }
-		Rectangle {
-			id: section_1
-			width: 300
-			height: description.height
-			color: 'transparent'
-			PFCButton {
-				id: saveButton
-				anchors.right : section_1.right
-				text : 'Save'
-				onClicked : {
-					self.event_id = root.eventID
-					self.name = root.name
-					self.description = root.description
-					self.actor_1 = root.actor_1
-					self.actor_2 = root.actor_2
-					self.details = root.details
-					self.fidelity = root.fidelity.toUpperCase()
-					self.category = root.type.toUpperCase()
-					root.backend.update_event(self)
-				}
-			}
-		}
-		Rectangle {
-			id: section_2
-			width: 300
-			height: description.height
-			color: 'transparent'
-			PFCButton {
-				id: exitButton
-				anchors.right : section_2.right
-				text : 'Exit'
-				onClicked : {
-					root.exit()
-				}
-			}
-		}
-
-	}
-
+  property SQLBackend backend
+  property Event currentEvent
+  property int returnTo
+  signal exit()
+  onWidthChanged : {
+    eventColumn.width = width
+  }
+  ColumnLayout {
+    id : eventColumn
+    // anchors.fill : parent
+    Layout.fillWidth : true
+    TextEntry {
+      id : name
+      Layout.fillWidth : true
+      label : "Name"
+      text : (currentEvent) ?currentEvent.name: "unknown"
+      placeholderText : "String Field"
+    }
+    TextAreaEntry {
+      id : description
+      Layout.fillWidth : true
+      label : "Description"
+      text : (currentEvent) ?currentEvent.description: "unknown"
+      placeholderText : "String Field"
+    }
+    TextAreaEntry {
+      id : actor_1
+      Layout.fillWidth : true
+      label : "Choose Who Acts"
+      text : (currentEvent) ?currentEvent.actorOne.name: "unknown"
+      placeholderText : "String Field"
+    }
+    TextAreaEntry {
+      id : actor_2
+      Layout.fillWidth : true
+      label : "Choose Target"
+      text : (currentEvent) ?  currentEvent.actorTwo.name: "unknown"
+      placeholderText : "String Field"
+    }
+    TextAreaEntry {
+      id : details
+      Layout.fillWidth : true
+      label : "Details"
+       text : (currentEvent) ?currentEvent.details: "unknown"
+      placeholderText : "String Field"
+    }
+    RowLayout {
+      id : fidelity
+      Layout.leftMargin : 5
+      Label {
+        text : "Fidelity"
+      }
+      ComboBox {
+        id : fidelitySelect
+        width : 200
+        model : ["Low", "Medium", "High"]
+        currentIndex :{
+          let index =  (currentEvent) ? fidelitySelect.find(currentEvent.fidelity) : 0
+          fidelitySelect.currentIndex = (index === -1) ? 0 : index
+        } 
+        contentItem : Text {
+          text : fidelitySelect.displayText
+          font.pointSize : 8
+          verticalAlignment : Text.AlignVCenter
+          elide : Text.ElideRight
+        }
+      }
+    }
+    RowLayout {
+      id : type
+      Layout.leftMargin : 5
+      Label {
+        text : "Type"
+      }
+      ComboBox {
+        id : typeSelect
+        width : 200
+        model : [
+          "Action",
+          "Dialogue",
+          "Movement",
+          "Sound",
+          "Environment"
+        ]
+        currentIndex :{
+          let index = (currentEvent) ?  typeSelect.find(currentEvent.category) : 0
+          typeSelect.currentIndex = (index === -1) ? 0 : index
+        } 
+        contentItem : Text {
+          text : typeSelect.displayText
+          font.pointSize : 8
+          verticalAlignment : Text.AlignVCenter
+          elide : Text.ElideRight
+        }
+      }
+    }
+    Row {
+      Layout.fillWidth : true
+      Rectangle {
+        id : section_1
+        width : 300
+        height : description.height
+        color : 'transparent'
+        PFCButton {
+          id : saveButton
+          anchors.right : section_1.right
+          text : 'Save'
+          onClicked : {
+            currentEvent.name = name.text;
+            currentEvent.description = description.text;
+            currentEvent.actor_1.name = actor_1.text;
+            currentEvent.actor_2.name = actor_2.text;
+            currentEvent.details = details.text;
+            currentEvent.fidelity = fidelity.model[fidelity.currentIndex].toUpperCase();
+            currentEvent.category = type.model[fidelity.currentIndex].toUpperCase();
+            root.backend.update_event(currentEvent)
+            exit()
+          }
+        }
+      }
+      Rectangle {
+        id : section_2
+        width : 300
+        height : description.height
+        color : 'transparent'
+        PFCButton {
+          id : exitButton
+          anchors.right : section_2.right
+          text : 'Exit'
+          onClicked : {
+            root.exit()
+          }
+        }
+      }
+    }
+  }
 }
