@@ -189,7 +189,7 @@ ColumnLayout {
 
   onBackendChanged : {
     if (backend) {
-      backend.equipmentsChanged.connect(update_equipment)
+      backend.equipmentChanged.connect(update_equipment)
     }
   }
 }

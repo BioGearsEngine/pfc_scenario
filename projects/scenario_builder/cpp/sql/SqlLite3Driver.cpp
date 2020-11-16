@@ -2506,6 +2506,7 @@ inline void SQLite3Driver::assign_role(QSqlRecord& record, Role& role) const
   role.uuid = record.value(ROLE_UUID).toString();
   role.name = record.value(ROLE_NAME).toString();
   role.description = record.value(ROLE_DESCRIPTION).toString();
+  role.code_name = record.value(ROLE_CODENAME).toString();
 }
 int SQLite3Driver::role_count() const
 {
@@ -2626,6 +2627,7 @@ bool SQLite3Driver::update_role(Role* role)
     }
     query.bindValue(":uuid", role->uuid);
     query.bindValue(":description", role->description);
+    query.bindValue(":code_name", role->code_name);
     query.bindValue(":name", role->name);
     if (!query.exec()) {
       qWarning() << "update_role" << query.lastError();
@@ -3122,7 +3124,9 @@ inline void SQLite3Driver::assign_role_map(const QSqlRecord& record, RoleMap& ma
 {
   map.id = record.value(ROLE_MAP_ID).toInt();
   map.fk_scene->id = record.value(ROLE_MAP_FK_SCENE).toInt();
+  select_scene(map.fk_scene);
   map.fk_role->id = record.value(ROLE_MAP_FK_ROLE).toInt();
+  select_role(map.fk_role);
 }
 int SQLite3Driver::role_map_count() const
 {

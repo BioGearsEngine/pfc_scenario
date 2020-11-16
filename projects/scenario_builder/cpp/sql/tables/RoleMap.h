@@ -23,8 +23,8 @@ struct Scene;
 struct RoleMap : public QObject {
   Q_OBJECT
   Q_PROPERTY(int map_id MEMBER id)
-  Q_PROPERTY(Scene* fk_scene MEMBER fk_scene)
-  Q_PROPERTY(Role* fk_role MEMBER fk_role)
+  Q_PROPERTY(Scene* scene MEMBER fk_scene)
+  Q_PROPERTY(Role* role MEMBER fk_role)
 
 public:
   int32_t id = -1;

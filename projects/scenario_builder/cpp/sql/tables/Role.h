@@ -21,20 +21,30 @@ struct TraumaProfile;
 
 struct Role : public QObject {
   Q_OBJECT
-  Q_PROPERTY(int role_id MEMBER id)
-  Q_PROPERTY(QString uuid MEMBER uuid)
-  Q_PROPERTY(QString name MEMBER name)
-  Q_PROPERTY(QString description MEMBER description)
-  Q_PROPERTY(QString short_name MEMBER description)
-  Q_PROPERTY(TraumaProfile* trauma_profile MEMBER trauma_profile)
+  Q_PROPERTY(int role_id MEMBER id NOTIFY idChanged)
+  Q_PROPERTY(QString uuid MEMBER uuid NOTIFY uuidChanged)
+  Q_PROPERTY(QString name MEMBER name NOTIFY nameChanged)
+  Q_PROPERTY(QString description MEMBER description NOTIFY descriptionChanged)
+  Q_PROPERTY(QString codeName MEMBER code_name NOTIFY codeNameChanged)
+  Q_PROPERTY(TraumaProfile* traumaProfile MEMBER trauma_profile NOTIFY traumaProfileChanged)
+
 public:
   int32_t id = -1;
   QString uuid = "";
   QString name = "";
-  QString short_name = "";
+  QString code_name = "";
   QString description = "";
   TraumaProfile* trauma_profile = nullptr;
 
+signals:
+  void idChanged();
+  void uuidChanged();
+  void nameChanged();
+  void descriptionChanged();
+  void codeNameChanged();
+  void traumaProfileChanged();
+
+public:
   Role(QObject* parent = nullptr);
   Role(TraumaProfile* profile, QObject* parent = nullptr);
   Role(const Role&) = delete;
@@ -51,7 +61,8 @@ public:
   Q_INVOKABLE void assign(Role* rhs);
   void assign(const Role& rhs);
 
-  void clear();
+  Q_INVOKABLE void clear();
+  Q_INVOKABLE void clear(int index);
 };
 
 #endif

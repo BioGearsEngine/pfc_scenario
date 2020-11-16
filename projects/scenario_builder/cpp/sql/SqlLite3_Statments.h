@@ -982,6 +982,7 @@ inline namespace sqlite3 {
     ROLE_UUID,
     ROLE_NAME,
     ROLE_DESCRIPTION,
+    ROLE_CODENAME,
     ROLE_COLUMN_COUNT
   };
 
@@ -991,6 +992,7 @@ inline namespace sqlite3 {
       "uuid"  TEXT,
       "name"  Varchar(64) NOT NULL UNIQUE,
       "description"  TEXT,
+      "code_name"  TEXT,
       PRIMARY KEY("role_id"),
       UNIQUE("uuid")
     );
@@ -1005,8 +1007,9 @@ inline namespace sqlite3 {
   constexpr auto update_role_by_id
     = R"( UPDATE  roles
           SET
-                uuid = : uuid
-              , description = :description 
+                uuid = :uuid
+              , description = :description
+              , code_name = :code_name
               , name = :name
           WHERE role_id = :id;
          )";
@@ -1017,11 +1020,12 @@ inline namespace sqlite3 {
   
   constexpr auto insert_or_update_roles
     = R"( INSERT INTO roles 
-          (uuid, name,description)
-          VALUES (:uuid, :name, :description)
+          (uuid, name, description, code_name)
+          VALUES (:uuid, :name, :description, :code_name)
           ON CONFLICT (name)
           DO UPDATE SET  name = excluded.name
                        , description = excluded.description
+                       , code_name= excluded.code_name
          )";
 
 

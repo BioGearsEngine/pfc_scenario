@@ -488,7 +488,7 @@ namespace schema {
   {
     auto role = std::make_unique<schema::role>(make_string(input->uuid),
                                                make_string(input->name),
-                                               make_string(input->short_name),
+                                               make_string(input->code_name),
                                                make_string(input->description));
     role->trauma_profile_ref(make_string(input->trauma_profile->uuid));
     return role;
