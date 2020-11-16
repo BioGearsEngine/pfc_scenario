@@ -13,8 +13,8 @@
 #include <QUrl>
 #include <QtDebug>
 
-#include <pfc/schema/pfc_scenario.hxx>
 #include "SchemaUtils.h"
+#include <pfc/schema/pfc_scenario.hxx>
 
 #include "mz.h"
 #include "mz_os.h"
@@ -52,16 +52,8 @@ namespace pfc {
 
 xml_schema::date get_now();
 
-std::vector<std::tuple<char const*,size_t,unsigned char const *>> schemas_v3 = {
-     std::tuple<char const*,size_t,unsigned char const *>{"xsd/pfc_scenario.xsd", io::pfc_scenario_text_size(), io::get_pfc_scenario_text() }
-    ,std::tuple<char const*,size_t,unsigned char const *>{"xsd/pfc_scenario_complex_types.xsd",   io::pfc_scenario_complex_types_text_size() ,io::get_pfc_scenario_complex_types_text()}
-    ,std::tuple<char const*,size_t,unsigned char const *>{"xsd/msdl_simple_types_1.0.0.xsd",          io::msdl_simple_types_1_text_size() ,io::get_msdl_simple_types_1_text()}
-    ,std::tuple<char const*,size_t,unsigned char const *>{"xsd/msdl_complex_types_1.0.0.xsd",         io::msdl_complex_types_1_text_size() ,io::get_msdl_complex_types_1_text()}
-    ,std::tuple<char const*,size_t,unsigned char const *>{"xsd/msdl_codes_1.0.0.xsd",                 io::msdl_codes_1_text_size() ,io::get_msdl_codes_1_text()}
-    ,std::tuple<char const*,size_t,unsigned char const *>{"xsd/military_scenario_1.0.0.xsd",          io::military_scenario_1_text_size() ,io::get_military_scenario_1_text()}
-    ,std::tuple<char const*,size_t,unsigned char const *>{"xsd/extern/jc3iedm_meterological.xsd",     io::jc3iedm_meterological_text_size() , io::get_jc3iedm_meterological_text()}
-    ,std::tuple<char const*,size_t,unsigned char const *>{"xsd/extern/jc3iedm-3.1-codes-20061208.xsd",io::jc3iedm_3_text_size() ,io::get_jc3iedm_3_text()}
-    ,std::tuple<char const*,size_t,unsigned char const *>{"xsd/extern/model_id_v2006_final.xsd",      io::model_id_v2006_final_text_size() ,io::get_model_id_v2006_final_text()}
+std::vector<std::tuple<char const*, size_t, unsigned char const*>> schemas_v3 = {
+  std::tuple<char const*, size_t, unsigned char const*> { "xsd/pfc_scenario.xsd", io::pfc_scenario_text_size(), io::get_pfc_scenario_text() }, std::tuple<char const*, size_t, unsigned char const*> { "xsd/pfc_scenario_complex_types.xsd", io::pfc_scenario_complex_types_text_size(), io::get_pfc_scenario_complex_types_text() }, std::tuple<char const*, size_t, unsigned char const*> { "xsd/msdl_simple_types_1.0.0.xsd", io::msdl_simple_types_1_text_size(), io::get_msdl_simple_types_1_text() }, std::tuple<char const*, size_t, unsigned char const*> { "xsd/msdl_complex_types_1.0.0.xsd", io::msdl_complex_types_1_text_size(), io::get_msdl_complex_types_1_text() }, std::tuple<char const*, size_t, unsigned char const*> { "xsd/msdl_codes_1.0.0.xsd", io::msdl_codes_1_text_size(), io::get_msdl_codes_1_text() }, std::tuple<char const*, size_t, unsigned char const*> { "xsd/military_scenario_1.0.0.xsd", io::military_scenario_1_text_size(), io::get_military_scenario_1_text() }, std::tuple<char const*, size_t, unsigned char const*> { "xsd/extern/jc3iedm_meterological.xsd", io::jc3iedm_meterological_text_size(), io::get_jc3iedm_meterological_text() }, std::tuple<char const*, size_t, unsigned char const*> { "xsd/extern/jc3iedm-3.1-codes-20061208.xsd", io::jc3iedm_3_text_size(), io::get_jc3iedm_3_text() }, std::tuple<char const*, size_t, unsigned char const*> { "xsd/extern/model_id_v2006_final.xsd", io::model_id_v2006_final_text_size(), io::get_model_id_v2006_final_text() }
 };
 
 Serializer::Serializer(QObject* parent)
@@ -90,6 +82,14 @@ bool Serializer::save() const
 //-------------------------------------------------------------------------------
 bool Serializer::save_as(const QString& filename) const
 {
+
+  const QUrl fileURL(filename);
+  std::string std_filename;
+  if (fileURL.isLocalFile()) {
+    std_filename = QDir::toNativeSeparators(fileURL.toLocalFile()).toStdString();
+  } else {
+    std_filename = filename.toStdString();
+  }
 
   if (!_db) {
     //Short Circuit We do not have a valid database ptr
@@ -135,7 +135,7 @@ bool Serializer::save_as(const QString& filename) const
 
   void* writer = nullptr;
   mz_zip_writer_create(&writer);
-  mz_zip_writer_open_file(writer, filename.toStdString().c_str(), 0, false);
+  mz_zip_writer_open_file(writer, std_filename.c_str(), 0, false);
 
   text_name = "Scenario.msdl.xml";
   text_ptr = msdl_stream.str();
@@ -144,8 +144,8 @@ bool Serializer::save_as(const QString& filename) const
   file_info.filename = text_name.c_str();
   file_info.uncompressed_size = text_ptr.length();
   mz_zip_writer_add_buffer(writer, (void*)text_ptr.c_str(), (int32_t)text_ptr.length(), &file_info);
-   
-  QFile msdl_file(QString( "tmp/" ) + text_name.c_str());
+
+  QFile msdl_file(QString("tmp/") + text_name.c_str());
   msdl_file.open(QIODevice::WriteOnly);
   msdl_file.write(text_ptr.c_str(), (int32_t)text_ptr.length());
 
@@ -168,7 +168,7 @@ bool Serializer::save_as(const QString& filename) const
   mz_zip_writer_close(writer);
   mz_zip_writer_delete(&writer);
 
-  return update_property(_db, "archive_file", filename.toStdString());
+  return update_property(_db, "archive_file", std_filename);
 }
 //-------------------------------------------------------------------------------
 bool Serializer::load(const QString& filename)
@@ -179,10 +179,9 @@ bool Serializer::load(const QString& filename)
     return false;
   }
 
-
   if (QFileInfo::exists("tmp")) {
-     QDir temporary_dir("tmp");
-     temporary_dir.cd("tmp");
+    QDir temporary_dir("tmp");
+    temporary_dir.cd("tmp");
     if (!temporary_dir.removeRecursively()) {
       qWarning() << " Unable to remove tmp/";
     }
@@ -193,8 +192,8 @@ bool Serializer::load(const QString& filename)
   _known_schemas.clear();
   _known_images.clear();
 
-  SQLite3Driver scratch_db{ "loading.sqlite" };
-  
+  SQLite3Driver scratch_db { "loading.sqlite" };
+
   scratch_db.open(scratch_db.Name());
   scratch_db.clear_db();
   scratch_db.initialize_db();
@@ -211,11 +210,11 @@ bool Serializer::load(const QString& filename)
   const QUrl url(filename);
   std::string std_filename;
   if (url.isLocalFile()) {
-     std_filename = QDir::toNativeSeparators(url.toLocalFile()).toStdString();
+    std_filename = QDir::toNativeSeparators(url.toLocalFile()).toStdString();
   } else {
     std_filename = filename.toStdString();
   }
-
+  update_property(&scratch_db, "archive_file", std_filename);
 
   err |= mz_zip_reader_open_file(reader, std_filename.c_str());
   if (err != MZ_OK) {
@@ -237,9 +236,9 @@ bool Serializer::load(const QString& filename)
     destination += file_info->filename;
     if (strncmp(file_info->filename, "xsd/", 4) == 0) {
       _known_schemas.push_back(file_info->filename);
-    } else if (strncmp(file_info->filename, "images/", 7) == 0) { 
+    } else if (strncmp(file_info->filename, "images/", 7) == 0) {
       _known_images.push_back(file_info->filename);
-    }     
+    }
     mz_zip_reader_entry_save_file(reader, destination.c_str());
     QFile(destination.c_str()).setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner);
     err = mz_zip_reader_goto_next_entry(reader);
@@ -249,17 +248,17 @@ bool Serializer::load(const QString& filename)
 
   if (_known_schemas.size() != schemas_v3.size()) {
     for (auto schema : schemas_v3) {
-     
-      QFileInfo schemaPath{ QString("tmp/") + std::get<0>( schema ) };
+
+      QFileInfo schemaPath { QString("tmp/") + std::get<0>(schema) };
       if (!schemaPath.dir().exists()) {
         schemaPath.dir().mkpath(".");
       }
 
-      QFile schemaFileIO{ schemaPath.absoluteFilePath() };
-      if (!schemaFileIO.open(QIODevice::WriteOnly) ){
-        qWarning() << "Unable to open file " <<  schemaFileIO.fileName();
+      QFile schemaFileIO { schemaPath.absoluteFilePath() };
+      if (!schemaFileIO.open(QIODevice::WriteOnly)) {
+        qWarning() << "Unable to open file " << schemaFileIO.fileName();
       }
-      if ( -1 == schemaFileIO.write((char const*)std::get<2>(schema), std::get<1>(schema))) {
+      if (-1 == schemaFileIO.write((char const*)std::get<2>(schema), std::get<1>(schema))) {
         qWarning() << "Unexpected write failure for " << std::get<0>(schema);
       }
       if (!schemaFileIO.exists()) {
@@ -295,7 +294,7 @@ bool Serializer::load(const QString& filename)
       std::vector<char> buffer;
       buffer.resize(file_info->uncompressed_size + 1);
       auto bytes_read = mz_zip_reader_entry_read(reader, &buffer[0], file_info->uncompressed_size);
-      vectorwrapbuf<char> schema_buffer{ buffer };
+      vectorwrapbuf<char> schema_buffer { buffer };
       std::istream i_stream(&schema_buffer);
       mz_zip_reader_entry_close(reader);
 
@@ -346,7 +345,7 @@ bool Serializer::load(const QString& filename)
       std::vector<char> buffer;
       buffer.resize(file_info->uncompressed_size);
       auto bytes_read = mz_zip_reader_entry_read(reader, &buffer[0], file_info->uncompressed_size);
-      vectorwrapbuf<char> schema_buffer{ buffer };
+      vectorwrapbuf<char> schema_buffer { buffer };
       std::istream i_stream(&schema_buffer);
       mz_zip_reader_entry_close(reader);
 
@@ -430,8 +429,8 @@ bool Serializer::load(const QString& filename)
         scratch_db.close();
         _db->close();
 
-        QFile target{ _db->Path() + "/" + _db->Name() };
-        QFile source{ scratch_db.Path() + "/" + scratch_db.Name() };
+        QFile target { _db->Path() + "/" + _db->Name() };
+        QFile source { scratch_db.Path() + "/" + scratch_db.Name() };
 
         if (target.exists()) {
           target.remove();
@@ -448,9 +447,10 @@ bool Serializer::load(const QString& filename)
         QDir::setCurrent(fallback);
         return false;
       }
+
       mz_zip_reader_delete(&reader); //Removing the Reader if this moves below the try remember you must always cal this function before leaving this function
       QDir::setCurrent(fallback);
-      return update_property(_db, "archive_file", filename.toStdString());
+      
     }
   } else {
     mz_zip_reader_delete(&reader);
@@ -556,7 +556,7 @@ auto Serializer::generate_pfc_stream() const -> std::stringstream
 
   //1. <Equipment>
   for (auto& equipment : _db->equipments()) {
-    pfc_scenario.equipment().equipment().push_back(PFC::make_equipment(equipment,_db));
+    pfc_scenario.equipment().equipment().push_back(PFC::make_equipment(equipment, _db));
   }
   //2. <conditions>
   for (auto& trauma : _db->traumas()) {
@@ -591,7 +591,7 @@ auto Serializer::generate_pfc_stream() const -> std::stringstream
     pfc_scenario.medical_scenario().locations().location().push_back(PFC::make_location(location, _db));
   }
   for (auto scene : _db->scenes()) {
-    auto scene_ptr = PFC::make_scene(scene,_db);
+    auto scene_ptr = PFC::make_scene(scene, _db);
     //6.1.1 <medical-scenario><scenes><events>
     for (auto event : _db->events_in_scene(scene)) {
       scene_ptr->events().event().push_back(PFC::make_event(event));
@@ -631,11 +631,11 @@ xml_schema::date get_now()
   std::time_t t = std::time(nullptr);
   auto tm = std::localtime(&t);
 
-  return xml_schema::date{ static_cast<int>(tm->tm_year),
-                           static_cast<unsigned short>(tm->tm_mon),
-                           static_cast<unsigned short>(tm->tm_yday),
-                           static_cast<short>(tm->tm_hour),
-                           static_cast<short>(tm->tm_min) };
+  return xml_schema::date { static_cast<int>(tm->tm_year),
+                            static_cast<unsigned short>(tm->tm_mon),
+                            static_cast<unsigned short>(tm->tm_yday),
+                            static_cast<short>(tm->tm_hour),
+                            static_cast<short>(tm->tm_min) };
 }
 //-------------------------------------------------------------------------------
 }
