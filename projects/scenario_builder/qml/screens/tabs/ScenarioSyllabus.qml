@@ -12,6 +12,7 @@ GridLayout {
   id : root
   property SQLBackend backend
   property int topIndex
+  property int currentIndex : 0
 
 
   width : parent.width
@@ -26,6 +27,7 @@ GridLayout {
 
     backend : root.backend
     topIndex : root.topIndex
+    currentIndex : root.currentIndex
     Layout.preferredWidth : parent.width / 2
     Layout.fillHeight : true
   }
