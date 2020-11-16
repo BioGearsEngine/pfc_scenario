@@ -10,10 +10,12 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 Rectangle {
   id : root
   property SQLBackend backend
-  property ListModel model
-  property int index
-  property int count
+  property Scene currentScene
+  property Location currentLocation
 
+  Scene {
+    id : scene_g
+  }
   /***Helper function to convert length of time to clock time for display purposes***/
   function seconds_to_clock_time(time_s) {
 
@@ -59,23 +61,13 @@ Rectangle {
 
   }
 
-
-  Scene {
-    id : self
+  function update_scene(scene) {
+    scene_g.timeOfDay = clock_time_to_seconds(timeEntry.text);
+    root.backend.update_scene(scene)
   }
-
-  function update_scene(values) {
-
-    if (model.count == 0) {
-      return
-    }
-    self.scene_id = values.id;
-    self.name = nameEntry.text;
-    self.description = descriptionEntry.text;
-    self.details = detailEntry.text;
-    self.weather = weatherEntry.text;
-    self.time_of_day = clock_time_to_seconds(timeEntry.text);
-    root.backend.update_scene(self)
+    function update_location(location) {
+    
+    root.backend.update_location(location)
   }
 
   border.color : 'black'
@@ -83,18 +75,19 @@ Rectangle {
   ColumnLayout {
     width : parent.width
 
-
     TextEntry {
       Layout.fillWidth : true
       Layout.leftMargin : 5
       id : nameEntry
       label : "Scene Name"
       placeholderText : "String Field (128 Characters)"
+      text : (currentScene) ? currentScene.name : ""
       onEditingFinished : {
-        var entry = root.model.get(root.index);
-        if (text != entry.name) {
-          entry.name = text
-          update_scene(entry)
+        if (text != currentScene.name) {
+          currentScene.name = text
+          console.log(currentScene)
+          console.log(currentScene.name)
+          update_scene(currentScene)
         }
       }
     }
@@ -105,17 +98,17 @@ Rectangle {
       label : "Description"
       required : true
       placeholderText : "Scene Description"
+      text : (currentScene) ? currentScene.description : ""
       onEditingFinished : {
-        var entry = root.model.get(root.index);
-        if (text != entry.description) {
-          entry.description = text;
-          update_scene(root.model.get(root.index))
+        if (text != currentScene.description) {
+          currentScene.description = text
+          update_scene(currentScene)
         }
       }
     }
 
-    // /////////////////////////////////////////////////////////////////
-    RowLayout {
+    // -----------------------Begin Category Selection -------------------------------------//
+    Item {
       id : detailEntry
 
       property alias typeBox : typeBox
@@ -131,7 +124,7 @@ Rectangle {
 
       Label {
         id : categoryLabel
-        text : "Details:"
+        text : "Category:"
         font.pointSize : timeEntry.pointSize
         color : "steelblue"
         width : (text.width > 90) ? text.width + 10 : 100
@@ -140,9 +133,11 @@ Rectangle {
         id : typeBox
         currentIndex : 0
         editable : true
-
+        anchors {
+          left : categoryLabel.right
+        }
         model : ["Exterior", "Interior"]
-        width : 200
+        width : 100
         onModelChanged : {
           currentIndex = 0;
         }
@@ -152,10 +147,12 @@ Rectangle {
           }
         }
         onCurrentIndexChanged : {
-          var entry = root.model.get(root.index);
-          if (detailEntry.text != entry.details && detailEntry.loadComplete) {
-            detailEntry.text = "%1:%2:%3".arg(typeBox.model[typeBox.currentIndex]).arg(kindBox.model[kindBox.currentIndex]).arg(styleBox.model[styleBox.currentIndex]);
-            update_scene(entry)
+          if (currentLocation && detailEntry.loadComplete) {
+            var environmentStr = "%1:%2:%3".arg(typeBox.model[typeBox.currentIndex]).arg(kindBox.model[kindBox.currentIndex]).arg(styleBox.model[styleBox.currentIndex]);
+            if (environmentStr != currentLocation.environment ) {              
+              currentLocation.environment = environmentStr
+              update_location(currentLocation)
+            }
           }
         }
       }
@@ -163,8 +160,11 @@ Rectangle {
         id : kindBox
         currentIndex : 0
         editable : true
-        model : (typeBox.currentIndex == 0) ? ["Tesstrial", "Marine"] : ["Temporary", "Perminate"]
-        width : 200
+        anchors {
+          left : typeBox.right
+        }
+        model : (typeBox.currentIndex == 0) ? ["Terrestrial", "Marine"] : ["Temporary", "Perminate"]
+        width : 120
 
         onModelChanged : {
           currentIndex = 0;
@@ -175,10 +175,12 @@ Rectangle {
           }
         }
         onCurrentIndexChanged : {
-          var entry = root.model.get(root.index);
-          if (detailEntry.text != entry.details && detailEntry.loadComplete) {
-            detailEntry.text = "%1:%2:%3".arg(typeBox.model[typeBox.currentIndex]).arg(kindBox.model[kindBox.currentIndex]).arg(styleBox.model[styleBox.currentIndex]);
-            update_scene(entry)
+          if (currentLocation && detailEntry.loadComplete) {
+            var environmentStr = "%1:%2:%3".arg(typeBox.model[typeBox.currentIndex]).arg(kindBox.model[kindBox.currentIndex]).arg(styleBox.model[styleBox.currentIndex]);
+            if (environmentStr != currentLocation.environment ) {              
+              currentLocation.environment = environmentStr
+              update_location(currentLocation)
+            }
           }
         }
       }
@@ -186,6 +188,10 @@ Rectangle {
         id : styleBox
         currentIndex : 0
         editable : true
+        anchors {
+          left : kindBox.right
+          right : parent.right
+        }
         model : {
           if (typeBox.currentIndex == 0) {
             switch (kindBox.currentIndex) {
@@ -220,8 +226,6 @@ Rectangle {
             }
           }
         }
-
-        width : 200
         onModelChanged : {
           currentIndex = 0;
         }
@@ -230,16 +234,18 @@ Rectangle {
             currentIndex = 0;
           }
         }
-        onCurrentIndexChanged : {
-          var entry = root.model.get(root.index);
-          if (detailEntry.text != entry.details && detailEntry.loadComplete) {
-            detailEntry.text = "%1:%2:%3".arg(typeBox.model[typeBox.currentIndex]).arg(kindBox.model[kindBox.currentIndex]).arg(styleBox.model[styleBox.currentIndex]);
-            update_scene(entry)
+         onCurrentIndexChanged : {
+          if (currentLocation && detailEntry.loadComplete) {
+            var environmentStr = "%1:%2:%3".arg(typeBox.model[typeBox.currentIndex]).arg(kindBox.model[kindBox.currentIndex]).arg(styleBox.model[styleBox.currentIndex]);
+            if (environmentStr != currentLocation.environment ) {              
+              currentLocation.environment = environmentStr
+              update_location(currentLocation)
+            }
           }
         }
       }
     }
-    // /////////////////////////////////////////////////////////////////
+    // -----------------------END Category Selection -------------------------------------//
     TextAreaEntry {
       Layout.fillWidth : true
       Layout.leftMargin : 5
@@ -247,11 +253,11 @@ Rectangle {
       label : "Weather"
       required : true
       placeholderText : "Weather Details"
+      text : (currentScene) ? currentScene.weather : ""
       onEditingFinished : {
-        var entry = root.model.get(root.index);
-        if (text != entry.weather) {
-          entry.weather = text;
-          update_scene(root.model.get(root.index))
+        if (text != currentScene.weather) {
+          currentScene.weather = text
+          update_scene(currentScene)
         }
       }
     }
@@ -263,15 +269,16 @@ Rectangle {
       placeholderText : "06:00"
       inputMethodHints : Qt.ImhTime
       entryField.inputMask : "99:99:99"
-      entryField.validator : RegExpValidator {
-        regExp : /^([0-1\s]?[0-9\s]|2[0-3\s]):([0-5\s][0-9\s]):([0-5\s][0-9\s])$ /
-      }
+      // entryField.validator : RegExpValidator {
+      //   regExp : /^([0-1\s]?[0-9\s]|2[0-3\s]):([0-5\s][0-9\s]):([0-5\s][0-9\s])$ /
+      // }
+      text : (currentScene) ? seconds_to_clock_time(currentScene.timeOfDay) : "06:00:00"
       onEditingFinished : {
-        var seconds = clock_time_to_seconds(text)
-        var entry = root.model.get(root.index);
-        if (seconds != entry.time_of_day) {
-          entry.time_of_day = seconds
-          update_scene(entry)
+        var secondsInDay = clock_time_to_seconds(text);
+          console.log ("saving %1".arg(secondsInDay))
+        if (secondsInDay != currentScene.timeOfDay) {
+          currentScene.timeOfDay = secondsInDay;
+          update_scene(currentScene);
         }
       }
       Keys.onBackPressed : {
@@ -283,34 +290,15 @@ Rectangle {
       }
     }
   }
-  onIndexChanged : {
-    var values = model.get(root.index);
-    if (values && model.count != 0) {
-      detailEntry.loadComplete = false
-      nameEntry.text = values.name;
-      descriptionEntry.text = values.description;
-      setup_details(values.details)
 
-      weatherEntry.text = values.weather;
-      if (Number.isInteger(Number(values.time))) {
-        timeEntry.text = seconds_to_clock_time(values.time);
-      } else {
-
-        timeEntry.text = "06:00:00"
-      }
-      detailEntry.loadComplete = true
-    }
+  onCurrentLocationChanged : {
+    setup_details(currentLocation.environment)
   }
-  onCountChanged : {
-    if (count == 0) {
-      nameEntry.text = ""
-      descriptionEntry.text = ""
-      detailEntry.text = ""
-      weatherEntry.text = ""
-      timeEntry.text = ""
-
-    } else {
-      indexChanged()
+  Component.onCompleted : {
+    scene_g.clear()
+    if(currentLocation){
+      setup_details(currentLocation.environment)
     }
+    detailEntry.loadComplete = true
   }
 }

@@ -12,8 +12,8 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 ColumnLayout {
   id : root
   property SQLBackend backend
-  property ListModel sceneList
-  property int sceneIndex
+  property Scene currentScene
+  property Location currentLocation
 
   EquipmentMap {
     id : currentEquipmentMap
@@ -51,27 +51,11 @@ ColumnLayout {
 
     Rectangle {
       height : parent.height
-      width  : parent.width
-      x: 0
+      width : parent.width
+      x : 0
       y : 0
       z : -1
       border.color : "yellow"
     }
-  }
-
-  onSceneIndexChanged : {
-    if (sceneList.count != 0 && sceneIndex < sceneList.count) {      
-      var values = sceneList.get(sceneIndex);
-      objectsInSceneView.equipmentInScene = []
-      currentEquipmentMap.scene.scene_id = root.sceneList.get(root.sceneIndex).id
-      currentEquipmentMap.scene.name = root.sceneList.get(root.sceneIndex).name
-      root.backend.equipment_in_scene(currentEquipmentMap.scene)
-
-      while (root.backend.next_equipment_map(currentEquipmentMap)) {
-        objectsInSceneView.equipmentInScene.push(currentEquipmentMap.make())
-        objectsInSceneView.equipmentInScene[objectsInSceneView.equipmentInScene.length-1].assign(currentEquipmentMap)
-      }
-      objectsInSceneView.model = objectsInSceneView.equipmentInScene
-    } else {  objectsInSceneView.model = [] }
   }
 }

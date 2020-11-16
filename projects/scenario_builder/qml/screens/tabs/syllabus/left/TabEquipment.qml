@@ -12,12 +12,12 @@ ColumnLayout {
   id : root
   property SQLBackend backend
   property int topIndex
-  property Equipment currentEquipment : (equipmentList.equipmentDefinitions[equipmentList.currentIndex]) ? equipmentList.equipmentDefinitions[equipmentList.currentIndex] : currentEquipment
+  property Equipment currentEquipment : (equipmentList.equipmentDefinitions[equipmentList.currentIndex]) ? equipmentList.equipmentDefinitions[equipmentList.currentIndex] : equipment_g
 
   signal reloadEquipmentList();
 
   Equipment {
-    id : currentEquipment
+    id : equipment_g
   }
 
   function update_equipment() {
@@ -53,10 +53,10 @@ ColumnLayout {
 
       onFirstButtonClicked : {
         var likely_id = root.backend.nextID(SQLBackend.EQUIPMENTS);
-        currentEquipment.clear(likely_id);
-        root.backend.update_equipment(currentEquipment);
-        equipmentList.equipmentDefinitions.push(currentEquipment.make());
-        equipmentList.equipmentDefinitions[equipmentList.equipmentDefinitions.length - 1].assign(currentEquipment);
+        equipment_g.clear(likely_id);
+        root.backend.update_equipment(equipment_g);
+        equipmentList.equipmentDefinitions.push(equipment_g.make());
+        equipmentList.equipmentDefinitions[equipmentList.equipmentDefinitions.length - 1].assign(equipment_g);
         equipmentList.model = equipmentList.equipmentDefinitions;
         equipmentList.currentIndex = equipmentList.equipmentDefinitions.length - 1
       }
@@ -64,9 +64,9 @@ ColumnLayout {
         if (!equipmentList.equipmentDefinitions || equipmentList.equipmentDefinitions.length < 2) {
           return
         }
-        currentEquipment.clear();
-        currentEquipment.assign(equipmentList.equipmentDefinitions[equipmentList.currentIndex]);
-        root.backend.remove_equipment(currentEquipment);
+        equipment_g.clear();
+        equipment_g.assign(equipmentList.equipmentDefinitions[equipmentList.currentIndex]);
+        root.backend.remove_equipment(equipment_g);
         update_equipment();
         equipmentList.currentIndex = Math.max(0, root.index - 1)
       }
@@ -93,12 +93,11 @@ ColumnLayout {
         Layout.margins : 5
       }
 
-      model : []
+      model : ListModel {}
 
       delegate : Rectangle {
-
-        property var currentDef: equipmentList.equipmentDefinitions[index]
         id : equipment
+        property var currentDef: equipmentList.equipmentDefinitions[index]
         color : 'transparent'
         border.color : "steelblue"
         height : equipment_title_text.height + equipment_value_text.height

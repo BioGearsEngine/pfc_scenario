@@ -65,7 +65,7 @@ public:
   Q_PROPERTY(QQmlListProperty<Objective>    objectives    READ getObjectives NOTIFY objectivesChanged)
   Q_PROPERTY(QQmlListProperty<Citation>     citations     READ getCitations  NOTIFY citationsChanged)
   Q_PROPERTY(QQmlListProperty<Treatment>    treatments    READ getTreatments NOTIFY treatmentsChanged)
-  Q_PROPERTY(QQmlListProperty<Equipment>    equipment     READ getEquipment  NOTIFY equipmentsChanged)
+  Q_PROPERTY(QQmlListProperty<Equipment>    equipment     READ getEquipment  NOTIFY equipmentChanged)
   Q_PROPERTY(QQmlListProperty<Trauma>       traumas       READ getTraumas    NOTIFY traumasChanged)
   Q_PROPERTY(QQmlListProperty<TraumaProfile> traumaProfiles READ getTraumaProfiles NOTIFY traumaProfilesChanged)
   Q_PROPERTY(QQmlListProperty<Assessment>   assessments   READ getAssessments NOTIFY assessmentsChanged)
@@ -156,23 +156,23 @@ public:
   Q_INVOKABLE int citation_count() const;
   Q_INVOKABLE int treatment_count() const;
   Q_INVOKABLE int equipment_count() const;
-  Q_INVOKABLE int equipment_count(Scene*) const;
+  Q_INVOKABLE int equipment_count(Scene const*) const;
   Q_INVOKABLE int trauma_count() const;
   Q_INVOKABLE int trauma_profile_count() const;
   Q_INVOKABLE int assessment_count() const;
   Q_INVOKABLE int location_count() const;
-  Q_INVOKABLE int location_count(Scene*) const;
+  Q_INVOKABLE int location_count(Scene const*) const;
   Q_INVOKABLE int role_map_count() const;
   Q_INVOKABLE int event_map_count() const;
   Q_INVOKABLE int location_map_count() const;
-  Q_INVOKABLE int location_map_count(Scene*) const;
+  Q_INVOKABLE int location_map_count(Scene const*) const;
   Q_INVOKABLE int citation_map_count() const;
   Q_INVOKABLE int equipment_map_count() const;
   Q_INVOKABLE int role_count() const;
-  Q_INVOKABLE int role_count(Scene*) const;
+  Q_INVOKABLE int role_count(Scene const*) const;
   Q_INVOKABLE int event_count() const;
-  Q_INVOKABLE int event_count(Scene*) const;
-  Q_INVOKABLE int citation_count(Scene*) const;
+  Q_INVOKABLE int event_count(Scene const*) const;
+  Q_INVOKABLE int citation_count(Scene const*) const;
   Q_INVOKABLE int scene_count() const;
 
   Q_INVOKABLE int nextID(Sqlite3Table) const;
@@ -202,16 +202,16 @@ public:
   QList<Assessment*> assessments() const;
   QList<Location*> locations() const;
   QList<Role*> roles() const;
-  QList<Role*> roles_in_scene(Scene* scene);
+  QList<Role*> roles_in_scene(Scene const* scene);
   QList<RoleMap*> role_maps() const;
   QList<EventMap*> event_maps() const;
   QList<LocationMap*> location_maps() const;
   QList<CitationMap*> citation_maps() const;
   QList<EquipmentMap*> equipment_maps() const;
   QList<Event*> events() const;
-  QList<Event*> events_in_scene(Scene* scene) const;
-  QList<Location*> locations_in_scene(Scene* scene) const;
-  QList<EquipmentMap*> equipment_in_scene(Scene* scene) const;
+  QList<Event*> events_in_scene(Scene const* scene) const;
+  
+  QList<EquipmentMap*> equipment_in_scene(Scene const* scene) const;
   QList<Scene*> scenes() const;
 
   Q_INVOKABLE QQmlListProperty<Author> getAuthors() const;
@@ -224,12 +224,14 @@ public:
   Q_INVOKABLE QQmlListProperty<TraumaProfile> getTraumaProfiles() const;
   Q_INVOKABLE QQmlListProperty<Assessment> getAssessments() const;
   Q_INVOKABLE QQmlListProperty<Location> getLocations() const;
+  Q_INVOKABLE Location* getLocationOfScene(Scene* scene) const;
   Q_INVOKABLE QQmlListProperty<RoleMap> getRoleMaps() const;
   Q_INVOKABLE QQmlListProperty<EventMap> getEventMaps() const;
   Q_INVOKABLE QQmlListProperty<LocationMap> getLocationMaps() const;
   Q_INVOKABLE QQmlListProperty<CitationMap> getCitationMaps() const;
   Q_INVOKABLE QQmlListProperty<EquipmentMap> getEquipmentMaps() const;
   Q_INVOKABLE QQmlListProperty<Role> getRoles() const;
+  Q_INVOKABLE QList<Role*> getRolesInScene(Scene* scene) const;
   Q_INVOKABLE QQmlListProperty<Event> getEvents() const;
   Q_INVOKABLE QQmlListProperty<Scene> getScenes() const;
 
@@ -349,10 +351,10 @@ signals:
   //Possible used when you want to update secondary relations that might
   //Invalidate your entire QML model
   //
-  void authorsChanged();
+   void authorsChanged();
   void assessmentsChanged();
   void eventsChanged();
-  void equipmentsChanged();
+  void equipmentChanged();
   void traumasChanged();
   void traumaProfilesChanged();
   void treatmentsChanged();;

@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <mutex>
+#include <string>
 
 #include <QDebug>
 #include <QString>
@@ -164,7 +165,11 @@ namespace schema {
     auto id = ::xml_schema::string("Medical Scenario 1");
     auto med_sc_roles = std::make_unique<schema::medical_scenario::roles_type>();
     auto med_sc_script = std::make_unique<schema::medical_scenario::training_script_type>();
-    return std::make_unique<schema::ScenarioSchema::medical_scenario_type>(std::move(id), std::move(med_sc_roles), std::move(med_sc_script));
+    auto med_sc_locations = std::make_unique<schema::medical_scenario::locations_type>();
+    return std::make_unique<schema::ScenarioSchema::medical_scenario_type>(std::move(id),
+                                                                           std::move(med_sc_roles),
+                                                                           std::move(med_sc_locations),
+                                                                           std::move(med_sc_script));
   }
   //-------------------------------------------------------------------------------
   auto PFC::make_citation_list() -> std::unique_ptr<ScenarioSchema::works_cited_type>
@@ -259,7 +264,7 @@ namespace schema {
       if (_db->select_trauma(occurence->fk_trauma)) {
 
         auto const trauma = occurence->fk_trauma;
-      
+
         trauma_occurence_list->trauma().push_back(std::make_unique<schema::trauma_occurence>(
           make_string(trauma->uuid),
           make_string(occurence->location),
@@ -421,20 +426,6 @@ namespace schema {
   //-----------------------------------------------------------------------------
   auto PFC::make_scene(Scene const* const input, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::scene>
   {
-
-    /*
-      <xs : element name = "id" type = "xs:string" />
-      <xs : element name = "location-id" type = "xs:string" />
-      <xs : element name = "name" type = "xs:string" />
-      <xs : element name = "description" type = "xs:string" />
-      <xs : element name = "details" type = "xs:string" minOccurs = "0" />
-      <xs : element name = "weather" type = "xs:string" minOccurs = "0" />
-      <xs : element name = "time-of-day" type = "xs:integer" />
-      <xs : element name = "time-in-simulation" type = "xs:integer" />
-      <xs:element name="events" type="event-list"/>
-      <xs : element name = "items" type = "item-list" />
-      <xs : element name = "roles" type = "role-ref-list" />
-*/
     Location loc;
     loc.name = generate_location_name(input->name.toStdString());
     _db->select_location(&loc);
@@ -442,13 +433,13 @@ namespace schema {
                                                       schema::make_string(loc.uuid),
                                                       schema::make_string(input->name),
                                                       schema::make_string(input->description),
-                                                      input->time_of_day.toInt(),
+                                                      input->time_of_day,
                                                       input->time_in_simulation,
                                                       std::make_unique<pfc::schema::scene::events_type>(),
                                                       std::make_unique<pfc::schema::scene::items_type>(),
                                                       std::make_unique<pfc::schema::scene::roles_type>());
     scene->weather(schema::make_string(input->weather));
-    scene->details(schema::make_string(input->details));
+    //scene->details(schema::make_string(input->details));
     return scene;
   }
   //-----------------------------------------------------------------------------
@@ -735,7 +726,17 @@ namespace schema {
   //-----------------------------------------------------------------------------
   auto PFC::load_locations(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<::pfc::schema::ScenarioSchema>
   {
-    //TODO: Moved location to scenes due to current hiarchy in schema
+    auto locations = scenario_schema->medical_scenario().locations();
+    for ( auto location : locations.location()) {
+      Location temp;
+      temp.uuid = location.id().c_str();
+      temp.name = location.name().c_str();
+      temp.description = location.description().c_str();
+      if (!_db.update_location(&temp)) {
+        wasSuccessful = false;
+        return scenario_schema;
+      }
+    }
     wasSuccessful = true;
     return scenario_schema;
   }
@@ -791,10 +792,9 @@ namespace schema {
       temp.uuid = QString::fromStdString(scene.id());
       temp.name = QString::fromStdString(scene.name());
       temp.description = QString::fromStdString(scene.description());
-      temp.time_of_day = QString("%1").arg(scene.time_of_day());
+      temp.time_of_day = scene.time_of_day();
       temp.time_in_simulation = scene.time_in_simulation();
 
-      temp.details = scene.details().present() ? QString::fromStdString(scene.details().get()) : "";
       temp.weather = scene.weather().present() ? QString::fromStdString(scene.weather().get()) : "";
 
       if (!_db.update_scene(&temp)) {
@@ -804,11 +804,9 @@ namespace schema {
 
       Location temp_location;
       temp_location.id = -1;
-      temp_location.name = generate_location_name(scene.name());
-
+      temp_location.uuid = scene.location_id().c_str();
       if (!_db.select_location(&temp_location)) {
         wasSuccessful = false;
-        return scenario_schema;
         return scenario_schema;
       }
 
@@ -816,7 +814,7 @@ namespace schema {
       dbLocationMap.id = -1;
       dbLocationMap.fk_scene->id = temp.id;
       dbLocationMap.fk_location->id = temp_location.id;
-      if (!_db.select_location_map(&dbLocationMap)) {
+      if (!_db.update_location_map(&dbLocationMap)) {
         wasSuccessful = false;
         return scenario_schema;
       }

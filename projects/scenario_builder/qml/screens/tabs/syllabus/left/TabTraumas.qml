@@ -12,10 +12,10 @@ ColumnLayout {
   id : root
   property SQLBackend backend
   property int topIndex
-  property Trauma currentTrauma : (traumaList.traumaDefinitions[traumaList.currentIndex]) ? traumaList.traumaDefinitions[traumaList.currentIndex] : currentTrauma
+  property Trauma currentTrauma : (traumaList.traumaDefinitions[traumaList.currentIndex]) ? traumaList.traumaDefinitions[traumaList.currentIndex] : trauma_g
 
   Trauma {
-    id : currentTrauma
+    id : trauma_g
   }
 
   function update_traumas() {
@@ -51,10 +51,10 @@ ColumnLayout {
 
       onFirstButtonClicked : {
         var likely_id = root.backend.nextID(SQLBackend.TRAUMAS);
-        currentTrauma.clear(likely_id);
-        root.backend.update_trauma(currentTrauma);
-        traumaList.traumaDefinitions.push(currentTrauma.make());
-        traumaList.traumaDefinitions[traumaList.traumaDefinitions.length - 1].assign(currentTrauma);
+        trauma_g.clear(likely_id);
+        root.backend.update_trauma(trauma_g);
+        traumaList.traumaDefinitions.push(trauma_g.make());
+        traumaList.traumaDefinitions[traumaList.traumaDefinitions.length - 1].assign(trauma_g);
         traumaList.model = traumaList.traumaDefinitions;
         traumaList.currentIndex = traumaList.traumaDefinitions.length - 1
       }
@@ -62,9 +62,9 @@ ColumnLayout {
         if ( ! traumaList.traumaDefinitions || traumaList.traumaDefinitions.length < 2) {
           return
         }
-        currentTrauma.clear();
-        currentTrauma.assign(traumaList.traumaDefinitions[traumaList.currentIndex]);
-        root.backend.remove_trauma(currentTrauma);
+        trauma_g.clear();
+        trauma_g.assign(traumaList.traumaDefinitions[traumaList.currentIndex]);
+        root.backend.remove_trauma(trauma_g);
         update_traumas();
         traumaList.currentIndex = Math.max(0, root.index - 1)
       }

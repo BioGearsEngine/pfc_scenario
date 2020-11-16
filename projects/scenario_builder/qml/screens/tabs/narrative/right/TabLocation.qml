@@ -7,102 +7,60 @@ import "../../../common"
 
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
-Rectangle{
-    id: root  
-    property SQLBackend backend
-    property ListModel model
-    property int index
-    property int count
-    //property alias sceneName: nameEntry.text
+Rectangle {
+  id : root
+  property SQLBackend backend
+  property Scene currentScene
+  property Location currentLocation
 
-    Location {
-      id : currentLocation
-    }
-    Scene {
-      id : currentScene
-    }
+  Location {
+    id : location_g
+  }
+  Scene {
+    id : scene_g
+  }
 
-    function update_location() {
-      if (model.count == 0) {
-        return
-      }
-
-      currentLocation
-      currentLocation.location_id
-      currentLocation.name = locationNameEntry.text
-      currentLocation.environment = environmentEntry.text
-      root.backend.update_location(currentLocation)
-    } 
-    border.color: 'black'
-    border.width: 1
-    ColumnLayout  {
-        width: parent.width
-        TextEntry {
-          Layout.fillWidth: true
-          Layout.leftMargin: 5
-          id: locationNameEntry
-          label : "Location Name"
-          placeholderText: "String Field (128 Characters)"
-          onEditingFinished : {
-            update_location()
+  function update_location(location) {
+    backend.update_location(location)
+  }
+  border.color : 'black'
+  border.width : 1
+  ColumnLayout {
+    width : parent.width
+    TextEntry {
+      Layout.fillWidth : true
+      Layout.leftMargin : 5
+      id : locationNameEntry
+      label : "Location Name"
+      placeholderText : "String Field (128 Characters)"
+      text : (currentLocation) ? currentLocation.name : "unknown"
+      onEditingFinished : {
+        if (currentLocation) {
+          if (text != currentLocation.name) {
+            update_location(currentLocation);
+            currentLocation.name = text
           }
-        }
-//        TimeEntry {
-//          Layout.fillWidth: true
-//          Layout.leftMargin: 5
-//          id: timeOfDayEntry
-//          label : "Time of Day"
-//        }
-//        TextEntry {
-//          Layout.fillWidth: true
-//          Layout.leftMargin: 5
-//          id: timeScenarioEntry
-//          label : "Time in Scenario"
-//          placeholderText: "Time Input Field (3H20M)"
-//          onLabelWidthChanged : {
-//            //nameEntry.nameWidth         = timeScenarioEntry.nameWidth
-//            locationNameEntry.nameWidth = timeScenarioEntry.nameWidth
-//            timeOfDayEntry.nameWidth    = timeScenarioEntry.nameWidth
-//            environmentEntry.nameWidth  = timeScenarioEntry.nameWidth
-//          }
-//        }
-        TextAreaEntry {
-          Layout.fillWidth: true
-          Layout.leftMargin: 5
-          id: environmentEntry
-          label : "Environments"
-          required: true
-          placeholderText: "Weather Input Area"
-          onEditingFinished : {
-            update_location()
-          }
-        }   
-
-    }
-    onIndexChanged : {
-      var values = model.get(root.index)
-      if(values && model.count != 0) {
-        //nameEntry.text = values.name
-        currentScene.scene_id = values.id
-        root.backend.locations_in_scene(currentScene)
-        if (root.backend.next_location(currentLocation)) {        
-          locationNameEntry.text = currentLocation.name
-          environmentEntry.text = currentLocation.environment
-        } else {
-          console.log("Unable to find Scenes \"%1\" location ".arg(currentScene.name))   
         }
       }
     }
-    onCountChanged : {
-      if(count == 0) {
-          locationNameEntry.text = ""
-          environmentEntry.text = ""
-          locationNameEntry.text.readOnly = true
-          environmentEntry.text.readOnly = true
-        } else {
-          locationNameEntry.text.readOnly = false
-          environmentEntry.text.readOnly = false
-          indexChanged()
+
+    TextAreaEntry {
+      Layout.fillWidth : true
+      Layout.leftMargin : 5
+      id : environmentEntry
+      label : "Description"
+      required : true
+      placeholderText : "Weather Input Area"
+      text : (currentLocation) ? currentLocation.description : "unknown"
+      onEditingFinished : {
+        if (currentLocation) {
+          if (text != currentLocation.description) {
+            update_location(currentLocation);
+            currentLocation.description = text
+          }
         }
+      }
     }
+
+  }
 }

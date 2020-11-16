@@ -571,6 +571,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
     <xs:all>
       <xs:element name="id" type="xs:string"/>
       <xs:element name="roles" type="role-list"/>
+      <xs:element name="locations" type="location-list"/>
       <xs:element name="training-script" type="scene-list"/>
     </xs:all>
   </xs:complexType>
@@ -660,8 +661,27 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
       <xs:documentation>List of pfc:scene(s)</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="scene" type="scene" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="scene" type="scene" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="location-list">
+    <xs:annotation>
+      <xs:documentation>List of pfc:location(s)</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="location" type="location" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="location">
+    <xs:annotation>
+      <xs:documentation>A Location for a Scene to occur that may be reused multiple times</xs:documentation>
+    </xs:annotation>
+      <xs:all>
+        <xs:element name="id" type="xs:string"/>
+        <xs:element name="name" type="xs:string"/>
+        <xs:element name="description" type="xs:string"/>
+        <xs:element name="environment" type="xs:string"/>
+      </xs:all>
   </xs:complexType>
   <xs:complexType name="scene">
     <xs:annotation>

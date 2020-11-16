@@ -13,8 +13,8 @@ bool Scene::operator==(const Scene& rhs) const
     && time_in_simulation == rhs.time_in_simulation
     && weather == rhs.weather
     && events == rhs.events
-    && roles == rhs.roles
-    && details == rhs.details;
+    && roles == rhs.roles;
+
 }
 //--------------------------------------------------------------------------------------------
 bool Scene::operator!=(const Scene& rhs) const
@@ -45,7 +45,7 @@ void Scene::assign(const Scene& rhs)
   weather = rhs.weather;
   events = rhs.events;
   roles = rhs.roles;
-  details = rhs.details;
+
 }
 //--------------------------------------------------------------------------------------------
 void Scene::clear()
@@ -54,12 +54,26 @@ void Scene::clear()
   uuid = "";
   name.clear();
   description.clear();
-  time_of_day.clear();
+  time_of_day = 0;
   time_in_simulation = 0;
   weather.clear();
   events.clear();
   roles.clear();
-  details.clear();
+
+}
+//--------------------------------------------------------------------------------------------
+void Scene::clear(int index)
+{
+  id = -1;
+  uuid = "";
+  name = QString("Scene %1").arg(index);
+  description = QString("Undefined Scene %1").arg(index);
+  time_of_day = 0;
+  time_in_simulation = 0;
+  weather.clear();
+  events.clear();
+  roles.clear();
+
 }
 //--------------------------------------------------------------------------------------------
  QQmlListProperty<Event> Scene::getEvents()

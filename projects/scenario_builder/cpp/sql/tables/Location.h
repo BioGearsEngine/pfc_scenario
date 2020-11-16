@@ -19,21 +19,27 @@ specific language governing permissions and limitations under the License.
 
 struct Location : public QObject {
   Q_OBJECT
-  Q_PROPERTY(int location_id MEMBER id)
-  Q_PROPERTY(QString uuid MEMBER uuid)
-  Q_PROPERTY(QString name MEMBER name)
-  Q_PROPERTY(QString scene_name MEMBER scene_name)
-  Q_PROPERTY(QString time_of_day MEMBER time_of_day)
-  Q_PROPERTY(QString environment MEMBER environment)
+  Q_PROPERTY(int location_id MEMBER id NOTIFY idChanged)
+  Q_PROPERTY(QString uuid MEMBER uuid NOTIFY uuidChanged)
+  Q_PROPERTY(QString name MEMBER name NOTIFY nameChanged)
+  Q_PROPERTY(QString description MEMBER description NOTIFY descriptionChanged)
+  Q_PROPERTY(QString environment MEMBER environment NOTIFY environmentChanged)
 
 public:
   int32_t id = -1;
   QString uuid = "";
   QString name = "";
-  QString scene_name = "";
-  QString time_of_day = "";
+  QString description = "";
   QString environment = "";
 
+signals:
+  void idChanged();
+  void uuidChanged();
+  void nameChanged();
+  void descriptionChanged();
+  void environmentChanged();
+
+public:
   Location(QObject* parent = nullptr);
   Location(const Location&) = delete;
   Location(Location&&) = delete;
@@ -50,6 +56,7 @@ public:
   void assign(const Location& rhs);
 
   void clear();
+  void clear(int index);
 };
 
 #endif

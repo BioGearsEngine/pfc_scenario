@@ -125,7 +125,6 @@ ColumnLayout {
       }
       onTraumaAdded : {
         currentProfile.traumas.push(occurence_g.make());
-        console.log(currentProfile.traumas, currentProfile.traumas.length);
         currentProfile.traumas[currentProfile.traumas.length - 1].trauma = trauma;
         update_trauma_profile(currentProfile);
         refresh_traumas();

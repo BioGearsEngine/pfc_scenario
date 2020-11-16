@@ -12,11 +12,11 @@ ColumnLayout {
   id : root
   property SQLBackend backend
   property int topIndex
-  property Assessment currentAssessment : (assessmentList.assessmentDefinitions[assessmentList.currentIndex]) ? assessmentList.assessmentDefinitions[assessmentList.currentIndex] : currentAssessment
+  property Assessment currentAssessment : (assessmentList.assessmentDefinitions[assessmentList.currentIndex]) ? assessmentList.assessmentDefinitions[assessmentList.currentIndex] : assessment_g
 
 
   Assessment {
-    id : currentAssessment
+    id : assessment_g
   }
 
   function update_assessments() {
@@ -52,10 +52,10 @@ ColumnLayout {
 
       onFirstButtonClicked : {
         var likely_id = root.backend.nextID(SQLBackend.ASSESSMENTS);
-        currentAssessment.clear(likely_id);
-        root.backend.update_assessment(currentAssessment);
-        assessmentList.assessmentDefinitions.push(currentAssessment.make());
-        assessmentList.assessmentDefinitions[assessmentList.assessmentDefinitions.length - 1].assign(currentAssessment);
+        assessment_g.clear(likely_id);
+        root.backend.update_assessment(assessment_g);
+        assessmentList.assessmentDefinitions.push(assessment_g.make());
+        assessmentList.assessmentDefinitions[assessmentList.assessmentDefinitions.length - 1].assign(assessment_g);
         assessmentList.model = assessmentList.assessmentDefinitions;
         assessmentList.currentIndex = assessmentList.assessmentDefinitions.length - 1
       }
@@ -63,9 +63,9 @@ ColumnLayout {
         if (!assessmentList.assessmentDefinitions || assessmentList.assessmentDefinitions.length < 2) {
           return
         }
-        currentAssessment.clear();
-        currentAssessment.assign(assessmentList.assessmentDefinitions[assessmentList.currentIndex]);
-        root.backend.remove_assessment(currentAssessment);
+        assessment_g.clear();
+        assessment_g.assign(assessmentList.assessmentDefinitions[assessmentList.currentIndex]);
+        root.backend.remove_assessment(assessment_g);
         update_assessments();
         assessmentList.currentIndex = Math.max(0, root.index - 1)
       }

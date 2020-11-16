@@ -83,8 +83,7 @@ namespace schema {
     static auto load_trauma_profiles(std::unique_ptr<schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<schema::ScenarioSchema>;
     static auto load_locations(std::unique_ptr<schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<schema::ScenarioSchema>;
     static auto load_objectives(std::unique_ptr<schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<schema::ScenarioSchema>;
-    static auto load_properties(std::unique_ptr<schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<schema::ScenarioSchema>;
-    static auto load_restrictions(std::unique_ptr<schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<schema::ScenarioSchema>;
+    //static auto load_properties(std::unique_ptr<schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<schema::ScenarioSchema>;
     static auto load_roles(std::unique_ptr<schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<schema::ScenarioSchema>;
     static auto load_scenes(std::unique_ptr<schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<schema::ScenarioSchema>;
     static auto load_treatments(std::unique_ptr<schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<schema::ScenarioSchema>;

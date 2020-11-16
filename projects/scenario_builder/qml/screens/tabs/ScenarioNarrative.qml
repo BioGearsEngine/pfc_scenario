@@ -12,6 +12,7 @@ RowLayout {
   id : root
   property SQLBackend backend
   property int topIndex
+  property int currentRightIndex : 0
 
   Layout.fillWidth : true
   Layout.fillHeight : true
@@ -25,15 +26,14 @@ RowLayout {
   // TAB:SUMMARY_RIGHTWINDOW
   RightPane {
     id : narrative_right
-    
-    Layout.bottomMargin : 5 
-    Layout.rightMargin : 5 
 
-    backend : root.backend
-    model : narrative_left.model
-    index : narrative_left.index
-    count : narrative_left.count
+    Layout.bottomMargin : 5
+    Layout.rightMargin : 5
+
     topIndex : root.topIndex
-    onIndexChanged : {}
+    currentIndex : root.currentRightIndex
+    backend : root.backend
+    currentScene : narrative_left.currentScene
+    currentLocation : narrative_left.currentLocation
   }
 }

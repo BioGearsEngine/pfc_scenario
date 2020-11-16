@@ -12,7 +12,7 @@ Page {
   signal closed
   property var stack
   property SQLBackend backend
-
+  property int currentTab : 2
   ColumnLayout {
     id : columns
     spacing : 5
@@ -51,7 +51,7 @@ Page {
         text : "Summary"
         width : implicitWidth
       }
-      currentIndex : 1
+      currentIndex : root.currentTab
     }
     Shortcut {
       id : alt1

@@ -323,11 +323,20 @@ bool SQLite3Driver::populate_db()
       return false;
     }
   }
+  // //---Locations---
+  // if (location_count() == 0) {
+  //   default_location.name = "Location_1";
+  //   default_location.description = "Description of Location_1";
+  //   default_location.environment = "External:Tesstrial:Dessert";
+  //   if (!update_location(&default_location)) {
+  //     return false;
+  //   }
+  // }
   //---Scene---
   if (scene_count() == 0) {
     default_scene.name = "Scene_1";
     default_scene.description = "Description of Scene_1";
-    default_scene.time_of_day = "00:00:00";
+    default_scene.time_of_day = 0;
     default_scene.time_in_simulation = 0;
     default_scene.weather = "";
     if (!update_scene(&default_scene)) {
@@ -339,6 +348,9 @@ bool SQLite3Driver::populate_db()
     if (!update_role_in_scene(&default_scene, &default_role)) {
       return false;
     }
+    // if (!update_location_in_scene(&default_scene, &default_location)) {
+    //   return false;
+    // }
   }
   //---Treatment---
   if (!populate_treatments()) {
@@ -729,6 +741,9 @@ int SQLite3Driver::nextID(Sqlite3Table table) const
     case TREATMENTS:
       query.prepare(stmt.arg("treatment"));
       break;
+    case SCENES:
+      query.prepare(stmt.arg("scene"));
+      break;
     default:
       return -1;
     }
@@ -841,10 +856,12 @@ bool SQLite3Driver::update_assessment(Assessment* assessment)
     }
     if (-1 == assessment->id) {
       const auto r = select_assessment(assessment);
-      assessmentUpdated(assessment->id);
+      emit assessmentUpdated(assessment->id);
+      emit assessmentsChanged();
       return r;
     }
-    assessmentUpdated(assessment->id);
+    emit assessmentUpdated(assessment->id);
+    emit assessmentsChanged();
     return true;
   }
   qWarning() << "No Database connection";
@@ -991,10 +1008,12 @@ bool SQLite3Driver::update_author(Author* author)
       }
       if (-1 == author->id) {
         const auto r = select_author(author);
-        authorUpdated(author->id);
+        emit authorUpdated(author->id);
+        emit authorsChanged();
         return r;
       }
-      authorUpdated(author->id);
+      emit authorUpdated(author->id);
+      emit authorsChanged();
       return true;
     }
     qWarning() << "Author Requires an Email Value";
@@ -1029,7 +1048,8 @@ bool SQLite3Driver::update_first_author(Author* author)
         qWarning() << "update_first_author" << query.lastError();
         return false;
       }
-      authorUpdated(1);
+      emit authorUpdated(1);
+      emit authorsChanged();
       return true;
     }
     qWarning() << "Author Requires an Email Value";
@@ -1084,7 +1104,7 @@ int SQLite3Driver::citation_count() const
   }
   return -1;
 }
-int SQLite3Driver::citation_count(Scene* scene) const
+int SQLite3Driver::citation_count(Scene const* scene) const
 {
   if (QSqlDatabase::database(_db_name).isOpen()) {
 
@@ -1185,10 +1205,12 @@ bool SQLite3Driver::update_citation(Citation* citation)
     }
     if (-1 == citation->id) {
       auto r = select_citation(citation);
-      citationUpdated(citation->id);
+      emit citationUpdated(citation->id);
+      emit emit citationsChanged();
       return r;
     }
     citationUpdated(citation->id);
+    emit emit citationsChanged();
     return true;
   }
   qWarning() << "No Database connection";
@@ -1378,10 +1400,12 @@ bool SQLite3Driver::update_trauma(Trauma* trauma)
     }
     if (-1 == trauma->id) {
       const auto r = select_trauma(trauma);
-      traumaUpdated(trauma->id);
+      emit traumaUpdated(trauma->id);
+      emit emit traumasChanged();
       return r;
     }
-    traumaUpdated(trauma->id);
+    emit traumaUpdated(trauma->id);
+    emit emit traumasChanged();
     return true;
   }
   qWarning() << "No Database connection";
@@ -1530,10 +1554,12 @@ bool SQLite3Driver::update_trauma_profile(TraumaProfile* trauma_profile)
     }
     if (-1 == trauma_profile->id) {
       const auto r = select_trauma_profile(trauma_profile);
-      traumaProfileUpdated(trauma_profile->id);
+      emit traumaProfileUpdated(trauma_profile->id);
+      emit traumaProfilesChanged();
       return r;
     }
-    traumaProfileUpdated(trauma_profile->id);
+    emit traumaProfileUpdated(trauma_profile->id);
+    emit traumaProfilesChanged();
     return true;
   }
   qWarning() << "No Database connection";
@@ -1591,7 +1617,7 @@ int SQLite3Driver::event_count() const
   }
   return -1;
 }
-int SQLite3Driver::event_count(Scene* scene) const
+int SQLite3Driver::event_count(Scene const* scene) const
 {
   if (QSqlDatabase::database(_db_name).isOpen()) {
 
@@ -1625,7 +1651,7 @@ QList<Event*> SQLite3Driver::events() const
   }
   return _events;
 }
-QList<Event*> SQLite3Driver::events_in_scene(Scene* scene) const
+QList<Event*> SQLite3Driver::events_in_scene(Scene const* scene) const
 {
   QList<Event*> _events;
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -1703,10 +1729,12 @@ bool SQLite3Driver::update_event(Event* event)
     }
     if (-1 == event->id) {
       const auto r = select_event(event);
-      eventUpdated(event->id);
+      emit eventUpdated(event->id);
+      emit eventsChanged();
       return r;
     }
-    eventUpdated(event->id);
+    emit eventUpdated(event->id);
+    emit eventsChanged();
     return true;
   }
   qWarning() << "No Database connection";
@@ -1774,6 +1802,7 @@ inline void SQLite3Driver::assign_location(const QSqlRecord& record, Location& l
   location.id = record.value(LOCATION_ID).toInt();
   location.uuid = record.value(LOCATION_UUID).toString();
   location.name = record.value(LOCATION_NAME).toString();
+  location.description = record.value(LOCATION_DESCRIPTION).toString();
   location.environment = record.value(LOCATION_ENVIRONMENT).toString();
 }
 int SQLite3Driver::location_count() const
@@ -1856,6 +1885,7 @@ bool SQLite3Driver::update_location(Location* location)
     }
     query.bindValue(":uuid", location->uuid);
     query.bindValue(":name", location->name);
+    query.bindValue(":description", location->description);
     query.bindValue(":environment", location->environment);
     if (!query.exec()) {
       qWarning() << "update_location" << query.lastError();
@@ -1863,16 +1893,19 @@ bool SQLite3Driver::update_location(Location* location)
     }
     if (-1 == location->id) {
       const auto r = select_location(location);
-      locationUpdated(location->id);
+      emit locationUpdated(location->id);
+      emit locationsChanged();
+
       return r;
     }
-    locationUpdated(location->id);
+    emit locationUpdated(location->id);
+    emit locationsChanged();
     return true;
   }
   qWarning() << "No Database connection";
   return false;
 }
-int SQLite3Driver::location_count(Scene* scene) const
+int SQLite3Driver::location_count(Scene const* scene) const
 {
   if (QSqlDatabase::database(_db_name).isOpen()) {
 
@@ -1888,40 +1921,26 @@ int SQLite3Driver::location_count(Scene* scene) const
   }
   return -1;
 }
-QList<Location*> SQLite3Driver::locations_in_scene(Scene* scene) const
+Location* SQLite3Driver::getLocationOfScene(Scene* scene) const
 {
   //TODO: Remove second loop as location_map should include an inflated fk_lcoation
 
-  QList<Location*> _locations;
-  QList<Scene*> _scene;
+
   if (QSqlDatabase::database(_db_name).isOpen()) {
-    std::vector<int32_t> fk_location;
     QSqlQuery location_map_query { QSqlDatabase::database(_db_name) };
     location_map_query.prepare(sqlite3::select_location_map_by_fk_scene);
     location_map_query.bindValue(":fk_scene", scene->id);
     location_map_query.exec();
     while (location_map_query.next()) {
+      auto location = Location::make();
       auto location_map = std::make_unique<LocationMap>();
       auto location_map_record = location_map_query.record();
       assign_location_map(location_map_record, *location_map);
-      fk_location.push_back(location_map->fk_location->id);
+      location->assign(location_map->fk_location);
+      return location;
     };
-
-    QSqlQuery query { QSqlDatabase::database(_db_name) };
-    query.prepare(sqlite3::select_location_by_id);
-    while (!fk_location.empty()) {
-      query.bindValue(":id", fk_location.back());
-      bool huh = query.exec();
-      fk_location.pop_back();
-      if (query.next()) {
-        auto location = std::make_unique<Location>();
-        auto record = query.record();
-        assign_location(record, *location);
-        _locations.push_back(location.release());
-      }
-    }
   }
-  return _locations;
+  return nullptr;
 }
 bool SQLite3Driver::update_location_in_scene(Scene* scene, Location* location)
 {
@@ -2029,7 +2048,7 @@ int SQLite3Driver::equipment_count() const
   }
   return -1;
 }
-int SQLite3Driver::equipment_count(Scene* scene) const
+int SQLite3Driver::equipment_count(Scene const* scene) const
 {
   if (QSqlDatabase::database(_db_name).isOpen()) {
 
@@ -2063,7 +2082,7 @@ QList<Equipment*> SQLite3Driver::equipments() const
   }
   return _equipments;
 }
-QList<EquipmentMap*> SQLite3Driver::equipment_in_scene(Scene* scene) const
+QList<EquipmentMap*> SQLite3Driver::equipment_in_scene(Scene const* scene) const
 {
   QList<EquipmentMap*> _equipment_maps;
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -2146,10 +2165,13 @@ bool SQLite3Driver::update_equipment(Equipment* equipment)
     }
     if (-1 == equipment->id) {
       const auto r = select_equipment(equipment);
-      equipmentUpdated(equipment->id);
+      emit equipmentUpdated(equipment->id);
+      emit equipmentChanged();
       return r;
     }
-    equipmentUpdated(equipment->id);
+    emit equipmentUpdated(equipment->id);
+    emit equipmentChanged();
+
     return true;
   }
   qWarning() << "No Database connection";
@@ -2326,10 +2348,12 @@ bool SQLite3Driver::update_objective(Objective* objective)
     }
     if (-1 == objective->id) {
       auto r = select_objective(objective);
-      objectiveUpdated(objective->id);
+      emit objectiveUpdated(objective->id);
+      emit objectivesChanged();
       return r;
     }
-    objectiveUpdated(objective->id);
+    emit objectiveUpdated(objective->id);
+    emit objectivesChanged();
     return true;
   }
   qWarning() << "No Database connection";
@@ -2443,10 +2467,12 @@ bool SQLite3Driver::update_property(Property* property)
       }
       if (-1 == property->id) {
         const auto r = select_property(property);
-        propertyUpdated(property->id);
+        emit propertyUpdated(property->id);
+        emit propertiesChanged();
         return r;
       }
-      propertyUpdated(property->id);
+      emit propertyUpdated(property->id);
+      emit propertiesChanged();
       return true;
     }
   }
@@ -2496,7 +2522,7 @@ int SQLite3Driver::role_count() const
   }
   return -1;
 }
-int SQLite3Driver::role_count(Scene* scene) const
+int SQLite3Driver::role_count(Scene const* scene) const
 {
   if (QSqlDatabase::database(_db_name).isOpen()) {
 
@@ -2531,7 +2557,7 @@ QList<Role*> SQLite3Driver::roles() const
   }
   return _roles;
 }
-QList<Role*> SQLite3Driver::roles_in_scene(Scene* scene)
+QList<Role*> SQLite3Driver::roles_in_scene(Scene const* scene)
 {
   QList<Role*> _roles;
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -2607,10 +2633,12 @@ bool SQLite3Driver::update_role(Role* role)
     }
     if (-1 == role->id) {
       const auto r = select_role(role);
-      roleUpdated(role->id);
+      emit roleUpdated(role->id);
+      emit rolesChanged();
       return r;
     }
-    roleUpdated(role->id);
+    emit roleUpdated(role->id);
+    emit rolesChanged();
     return true;
   }
   qWarning() << "No Database connection";
@@ -2679,7 +2707,7 @@ inline void SQLite3Driver::assign_scene(QSqlRecord& record, Scene& scene) const
   scene.uuid = record.value(SCENE_UUID).toString();
   scene.name = record.value(SCENE_NAME).toString();
   scene.description = record.value(SCENE_DESCRIPTION).toString();
-  scene.time_of_day = record.value(SCENE_TIME_OF_DAY).toString();
+  scene.time_of_day = record.value(SCENE_TIME_OF_DAY).toInt();
   scene.time_in_simulation = record.value(SCENE_TIME_IN_SIMULATION).toInt();
   scene.weather = record.value(SCENE_WEATHER).toString();
 
@@ -2696,8 +2724,6 @@ inline void SQLite3Driver::assign_scene(QSqlRecord& record, Scene& scene) const
     role->id = role_id.toInt();
     scene.roles.push_back(role);
   }
-
-  scene.details = record.value(SCENE_DETAILS).toString();
 }
 int SQLite3Driver::scene_count() const
 {
@@ -2797,29 +2823,44 @@ bool SQLite3Driver::update_scene(Scene* scene)
     }
     query.bindValue(":roles", roles);
 
-    query.bindValue(":details", scene->details);
     if (!query.exec()) {
       qWarning() << "update_scene" << query.lastError();
       return false;
     }
     if (-1 == scene->id) {
       //!
-      //!  Logic may need to be maintained if
-      //!  we ever allow a location to be reused in multiple scenes.
-      //!
+      //!  This logic ensures there is always one location for each new scene
+      //!  The current UI doesn't allow location selection for a scene so this must be true.
+      //!  Future updates will allow us to remove this
       if (select_scene(scene)) {
         sceneUpdated(scene->id);
         Location location;
-        location.id = -1;
-        location.name = scene->name + " Location";
+        location.id = 1;
+        QSqlQuery locations_in_scene_query { QSqlDatabase::database(_db_name) };
+        locations_in_scene_query.prepare(select_scene_locations_by_fk_scene);
+        locations_in_scene_query.bindValue(":scene_id", scene->id);
+        if (!locations_in_scene_query.exec() ) {
+          qWarning() << "update_scene:locations_in_scene_query: " << locations_in_scene_query.lastError();
+          return false;
+        }
+        if (query.next()) {
+          QSqlRecord location_record = query.record();
+          assign_location(location_record, location); 
+        } else {
+          location.clear(nextID(LOCATIONS));
+          update_location(&location);
+        }
         if (update_location_in_scene(scene, &location)) {
-          locationUpdated(location.id);
+          emit locationUpdated(location.id);
+          emit locationsChanged();
           return true;
         }
       }
       qWarning() << "Unable to update Location associated with Scene";
       return false;
     }
+    emit sceneUpdated(scene->id);
+    emit scenesChanged();
     return true;
   }
   qWarning() << "No Database connection";
@@ -3045,10 +3086,12 @@ bool SQLite3Driver::update_treatment(Treatment* treatment)
     }
     if (-1 == treatment->id) {
       const auto r = select_treatment(treatment);
-      treatmentUpdated(treatment->id);
+      emit treatmentUpdated(treatment->id);
+      emit treatmentsChanged();
       return r;
     }
-    treatmentUpdated(treatment->id);
+    emit treatmentUpdated(treatment->id);
+    emit treatmentsChanged();
     return true;
   }
   qWarning() << "No Database connection";
@@ -3165,10 +3208,12 @@ bool SQLite3Driver::update_role_map(RoleMap* map)
     }
     if (-1 == map->id) {
       const auto r = select_role_map(map);
-      mapUpdated(map->id);
+      emit mapUpdated(map->id);
+      emit roleMapsChanged();
       return r;
     }
-    mapUpdated(map->id);
+    emit mapUpdated(map->id);
+    emit roleMapsChanged();
     return true;
   }
   qWarning() << "No Database connection";
@@ -3306,10 +3351,12 @@ bool SQLite3Driver::update_event_map(EventMap* map)
     }
     if (-1 == map->id) {
       const auto r = select_event_map(map);
-      eventMapUpdated(map->id);
+      emit eventMapUpdated(map->id);
+      emit eventMapsChanged();
       return r;
     }
-    eventMapUpdated(map->id);
+    emit eventMapUpdated(map->id);
+    emit eventMapsChanged();
     return true;
   }
   qWarning() << "No Database connection";
@@ -3361,7 +3408,9 @@ inline void SQLite3Driver::assign_location_map(const QSqlRecord& record, Locatio
 {
   map.id = record.value(LOCATION_MAP_ID).toInt();
   map.fk_scene->id = record.value(LOCATION_MAP_FK_SCENE).toInt();
+  select_scene(map.fk_scene);
   map.fk_location->id = record.value(LOCATION_MAP_FK_LOCATION).toInt();
+  select_location(map.fk_location);
 }
 int SQLite3Driver::location_map_count() const
 {
@@ -3378,7 +3427,7 @@ int SQLite3Driver::location_map_count() const
   }
   return -1;
 }
-int SQLite3Driver::location_map_count(Scene* scene) const //we currently only support a scene having one location, but this might change in the future
+int SQLite3Driver::location_map_count(Scene const* scene) const //we currently only support a scene having one location, but this might change in the future
 {
   if (QSqlDatabase::database(_db_name).isOpen()) {
 
@@ -3463,10 +3512,12 @@ bool SQLite3Driver::update_location_map(LocationMap* map)
     }
     if (-1 == map->id) {
       const auto r = select_location_map(map);
-      locationMapUpdated(map->id);
+      emit locationMapUpdated(map->id);
+      emit locationMapsChanged();
       return r;
     }
-    locationMapUpdated(map->id);
+    emit locationMapUpdated(map->id);
+    emit locationMapsChanged();
     return true;
   }
   qWarning() << "No Database connection";
@@ -3604,10 +3655,12 @@ bool SQLite3Driver::update_citation_map(CitationMap* map)
     }
     if (-1 == map->id) {
       const auto r = select_citation_map(map);
-      citationMapUpdated(map->id);
+      emit citationMapUpdated(map->id);
+      emit citationMapsChanged();
       return r;
     }
-    citationMapUpdated(map->id);
+    emit citationMapUpdated(map->id);
+    emit citationMapsChanged();
     return true;
   }
   qWarning() << "No Database connection";
@@ -3801,10 +3854,12 @@ bool SQLite3Driver::update_equipment_map(EquipmentMap* map)
     }
     if (-1 == map->id) {
       const auto r = select_equipment_map(map);
-      equipmentMapUpdated(map->id);
+      emit equipmentMapUpdated(map->id);
+      emit equipmentMapsChanged();
       return r;
     }
-    equipmentMapUpdated(map->id);
+    emit equipmentMapUpdated(map->id);
+    emit equipmentMapsChanged();
     return true;
   }
   qWarning() << "No Database connection";
@@ -4515,6 +4570,14 @@ QQmlListProperty<Role> SQLite3Driver::getRoles() const
                                 &CountRole,
                                 &AtRole,
                                 nullptr);
+}
+QList<Role*> SQLite3Driver::getRolesInScene(Scene* scene) const
+{
+  QList<Role*> list;
+  for (Role* role : roles() ) {
+    list.push_back(role);
+  }
+  return list;
 }
 //-------------------------------------------------------------------------------
 auto CountEvent(QQmlListProperty<Event>* list) -> int

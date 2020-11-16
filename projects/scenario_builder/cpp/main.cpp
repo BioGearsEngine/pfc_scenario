@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
   QQuickStyle::setStyle("Material");
   QQmlApplicationEngine engine;
 
-  //UI 0.1 Types
+  //UI Types
   qmlRegisterType<pfc::SQLite3Driver>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "SQLBackend");
   qmlRegisterType<Author>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Author");
   qmlRegisterType<Assessment>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Assessment");
@@ -46,38 +46,17 @@ int main(int argc, char* argv[])
   qmlRegisterType<TraumaProfile>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "TraumaProfile");
   qmlRegisterType<TraumaOccurence>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "TraumaOccurence");
   qmlRegisterType<Location>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Location");
-  qmlRegisterType<RoleMap>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "RoleMap");
+  qmlRegisterType<LocationMap>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "LocationMap");
   qmlRegisterType<Objective>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Objective");
   qmlRegisterType<Property>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Property");
   qmlRegisterType<Role>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Role");
-  qmlRegisterType<Treatment>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Treatment");
+  qmlRegisterType<RoleMap>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "RoleMap");
   qmlRegisterType<Scene>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Scene");
+  qmlRegisterType<Treatment>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Treatment");
 
   qmlRegisterType<pfc::Serializer>("com.ara.pfc.ScenarioModel.XML", 1, 0, "XMLSeralizer");
 
-  qmlRegisterInterface<Assessment>("const Assessment*");
-  qmlRegisterInterface<Author>("const Author*");
-  qmlRegisterInterface<Citation>("const Citation*");
-  qmlRegisterInterface<CitationMap>("const CitationMap*");
-  qmlRegisterInterface<Equipment>("const Equipment*");      
-  qmlRegisterInterface<EquipmentMap>("const EquipmentMap*");
-  qmlRegisterInterface<Event>("const Event*");
-  qmlRegisterInterface<EventMap>("const EventMap*");
-  qmlRegisterInterface<Location>("const Location*");
-  qmlRegisterInterface<LocationMap>("const LocationMap*");
-  qmlRegisterInterface<Objective>("const Objective*");
-  qmlRegisterInterface<Property>("const Property*");
-  qmlRegisterInterface<Role>("const Role*");
-  qmlRegisterInterface<RoleMap>("const RoleMap*");
-  qmlRegisterInterface<Scene>("const Scene*");
-  qmlRegisterInterface<Trauma>("const Trauma*");
-  qmlRegisterInterface<TraumaProfile>("const TraumaProfile*");
-  qmlRegisterInterface<TraumaOccurence>("const TraumaOccurence*");
-  qmlRegisterInterface<Treatment>("const Treatment*");
-
-
   QPixmap pixmap("D:/biogears/pfc/scenario/build/img/sustain_splash.png");
-  qDebug() << QString("%1,%2").arg(pixmap.height()).arg(pixmap.width()); //1280x768
   QSplashScreen splash(pixmap);
   splash.show();
   engine.load(QUrl(QLatin1String("qrc:/ScenarioBuilder.qml")));

@@ -99,7 +99,7 @@ ListOfForm {
       anchors.leftMargin : -5
       font.pointSize : 8
 
-      text : (root.model) ? root.model[index].severity : "0.0"
+      text : (root.model) ? "%1".arg(root.model[index].severity) : "0.0"
       placeholderText : "Severity Value"
       validator : DoubleValidator {
         bottom : (root.model) ? root.model[index].trauma.min : 0.0

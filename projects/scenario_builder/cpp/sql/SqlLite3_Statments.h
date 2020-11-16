@@ -33,15 +33,15 @@ inline namespace sqlite3 {
 
   constexpr auto create_assessments_table = R"(
     CREATE TABLE IF NOT EXISTS "assessments" (
-	    "assessment_id"	INTEGER,
-	    "uuid"	TEXT,
-	    "name"	Varchar(64) NOT NULL UNIQUE,
-	    "description"	TEXT,
-	    "type"	TEXT,
-	    "available_points"	INTEGER,
-	    "criteria"	TEXT,
-	    PRIMARY KEY("assessment_id"),
-	    UNIQUE("uuid")
+      "assessment_id"  INTEGER,
+      "uuid"  TEXT,
+      "name"  Varchar(64) NOT NULL UNIQUE,
+      "description"  TEXT,
+      "type"  TEXT,
+      "available_points"  INTEGER,
+      "criteria"  TEXT,
+      PRIMARY KEY("assessment_id"),
+      UNIQUE("uuid")
     );
   )";
 
@@ -98,18 +98,18 @@ inline namespace sqlite3 {
   
   constexpr auto create_authors_table = R"(
     CREATE TABLE IF NOT EXISTS "authors" (
-	    "author_id"	INTEGER,
-	    "uuid"	TEXT,
-	    "name_first"	Varchar(25),
-	    "name_last"	Varchar(25) NOT NULL,
-	    "email"	VarChar(45) NOT NULL UNIQUE,
-	    "zipcode"	Varchar(10),
-	    "state"	Varchar(64),
-	    "country"	Varchar(64),
-	    "phone"	Varchar(16),
-	    "organization"	Varchar(128),
-	    PRIMARY KEY("author_id"),
-	    UNIQUE("uuid")
+      "author_id"  INTEGER,
+      "uuid"  TEXT,
+      "name_first"  Varchar(25),
+      "name_last"  Varchar(25) NOT NULL,
+      "email"  VarChar(45) NOT NULL UNIQUE,
+      "zipcode"  Varchar(10),
+      "state"  Varchar(64),
+      "country"  Varchar(64),
+      "phone"  Varchar(16),
+      "organization"  Varchar(128),
+      PRIMARY KEY("author_id"),
+      UNIQUE("uuid")
     );
   )";
   constexpr auto drop_all_authors = R"( DELETE FROM authors; )";
@@ -177,17 +177,17 @@ inline namespace sqlite3 {
   // I know that the plural of equipment is 'equipment', but we've made it equipments to be less ambiguous
   constexpr auto create_equipment_table = R"(
     CREATE TABLE IF NOT EXISTS "equipments" (
-	    "equipment_id"	INTEGER,
-	    "uuid"	TEXT,
-	    "type"	INTEGER NOT NULL DEFAULT 1,
-	    "name"	Varchar(64) NOT NULL UNIQUE,
+      "equipment_id"  INTEGER,
+      "uuid"  TEXT,
+      "type"  INTEGER NOT NULL DEFAULT 1,
+      "name"  Varchar(64) NOT NULL UNIQUE,
       "summary" Varchar(64) NOT NULL,
-	    "description"	Varchar(64) NOT NULL,
-	    "citations"	TEXT,
-	    "image"	TEXT,
-	    "properties"	TEXT,
-	    PRIMARY KEY("equipment_id"),
-	    UNIQUE("uuid")
+      "description"  Varchar(64) NOT NULL,
+      "citations"  TEXT,
+      "image"  TEXT,
+      "properties"  TEXT,
+      PRIMARY KEY("equipment_id"),
+      UNIQUE("uuid")
     );
   )";
   constexpr auto drop_all_equipment = R"( DELETE FROM equipment; )";
@@ -247,18 +247,18 @@ inline namespace sqlite3 {
 
   constexpr auto create_events_table = R"(
     CREATE TABLE IF NOT EXISTS "events" (
-	    "event_id"	INTEGER,
-	    "uuid"	TEXT,
-	    "name"	Varchar(64) NOT NULL UNIQUE,
-	    "description"	TEXT,
-	    "category"	TEXT,
-	    "fidelity"	TEXT,
-	    "actor_1"	Varchar(64) NOT NULL,
-	    "actor_2"	Varchar(64),
-	    "equipment"	TEXT,
-	    "details"	INTEGER,
-	    PRIMARY KEY("event_id"),
-	    UNIQUE("uuid")
+      "event_id"  INTEGER,
+      "uuid"  TEXT,
+      "name"  Varchar(64) NOT NULL UNIQUE,
+      "description"  TEXT,
+      "category"  TEXT,
+      "fidelity"  TEXT,
+      "actor_1"  Varchar(64) NOT NULL,
+      "actor_2"  Varchar(64),
+      "equipment"  TEXT,
+      "details"  INTEGER,
+      PRIMARY KEY("event_id"),
+      UNIQUE("uuid")
     );
   )";
   constexpr auto drop_all_events = R"( DELETE FROM events; )";
@@ -316,16 +316,16 @@ inline namespace sqlite3 {
 
   constexpr auto create_traumas_table = R"(
     CREATE TABLE IF NOT EXISTS "traumas" (
-	    "trauma_id"	INTEGER,
-	    "uuid"	TEXT,
-	    "medical_name"	Varchar(64) NOT NULL UNIQUE,
-	    "common_name"	Varchar(64) NOT NULL UNIQUE,
-	    "description"	TEXT,
-	    "citations"	TEXT,
-	    "lower_bound"	REAL DEFAULT 0.0,
-	    "upper_bound"	REAL DEFAULT 1.0,
-	    PRIMARY KEY("trauma_id"),
-	    UNIQUE("uuid")
+      "trauma_id"  INTEGER,
+      "uuid"  TEXT,
+      "medical_name"  Varchar(64) NOT NULL UNIQUE,
+      "common_name"  Varchar(64) NOT NULL UNIQUE,
+      "description"  TEXT,
+      "citations"  TEXT,
+      "lower_bound"  REAL DEFAULT 0.0,
+      "upper_bound"  REAL DEFAULT 1.0,
+      PRIMARY KEY("trauma_id"),
+      UNIQUE("uuid")
     );
   )";
 
@@ -385,15 +385,15 @@ inline namespace sqlite3 {
 
   constexpr auto create_trauma_profiles_table = R"(
     CREATE TABLE IF NOT EXISTS "trauma_profiles" (
-	    "trauma_profile_id"	INTEGER,
-	    "uuid"	TEXT,
-	    "name"	Varchar(64) NOT NULL UNIQUE,
-	    "description"	TEXT,
-	    "traumas"	TEXT,
-	    "locations"	TEXT,
-	    "severities"	TEXT,
-	    PRIMARY KEY("trauma_profile_id"),
-	    UNIQUE("uuid")
+      "trauma_profile_id"  INTEGER,
+      "uuid"  TEXT,
+      "name"  Varchar(64) NOT NULL UNIQUE,
+      "description"  TEXT,
+      "traumas"  TEXT,
+      "locations"  TEXT,
+      "severities"  TEXT,
+      PRIMARY KEY("trauma_profile_id"),
+      UNIQUE("uuid")
     );
   )";
 
@@ -437,24 +437,26 @@ inline namespace sqlite3 {
     LOCATION_ID,
     LOCATION_UUID,
     LOCATION_NAME,
+    LOCATION_DESCRIPTION,
     LOCATION_ENVIRONMENT,
     LOCATION_COLUMN_COUNT
   };
 
   constexpr auto create_locations_table = R"(
     CREATE TABLE IF NOT EXISTS "locations" (
-	    "location_id"	INTEGER,
-	    "uuid"	TEXT,
-	    "name"	Varchar(64) NOT NULL,
-	    "environment"	TEXT,
-	    PRIMARY KEY("location_id"),
-	    UNIQUE("uuid")
+      "location_id"  INTEGER,
+      "uuid"  TEXT,
+      "name"  Varchar(64) NOT NULL,
+      "description"  TEXT,
+      "environment"  TEXT,
+      PRIMARY KEY("location_id"),
+      UNIQUE("uuid")
     );
   )";
   constexpr auto drop_all_locations = R"( DELETE FROM locations; )";
   constexpr auto count_locations = R"( SELECT COUNT(location_id) FROM locations; )";
   constexpr auto count_locations_in_scene = R"( SELECT COUNT(location_map_id) FROM location_maps WHERE :id = fk_scene ; )";
-  constexpr auto select_all_locations = R"( SELECT * ORDER BY name; )";
+  constexpr auto select_all_locations = R"( SELECT * FROM locations ORDER BY name; )";
 
   constexpr auto select_location_by_id
     = R"( SELECT * FROM locations WHERE location_id = :id ; )";
@@ -463,6 +465,7 @@ inline namespace sqlite3 {
           SET
                 uuid = :uuid
               , name = :name
+              , description = :description
               , environment = :environment
           WHERE location_id = :id;
          )";
@@ -474,8 +477,8 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM locations WHERE name = :name ORDER BY name; )";
   constexpr auto insert_or_update_locations
     = R"( INSERT INTO locations
-          (uuid, name, environment)
-          VALUES (:uuid, :name, :environment)
+          (uuid, name, description, environment)
+          VALUES (:uuid, :name, :description, :environment)
           ;
          )";
   //--------------------------- MAP STATEMENTS ------------------------
@@ -648,16 +651,17 @@ inline namespace sqlite3 {
          )";
 
   constexpr auto select_scene_locations_by_fk_scene
-    = R"( SELECT * FROM location_maps AS location_map 
-          JOIN roles
-          ON roles.role_id = location_map.role
-          WHERE location_map.fk_scene = :id;)";
+    = R"( SELECT locations.* FROM location_maps
+          JOIN locations
+          ON locations.location_id = location_maps.fk_scene
+          WHERE location_maps.fk_scene = :scene_id;)";
 
   constexpr auto select_location_scenes_by_fk_location
-    = R"( SELECT * FROM location_maps as location_map
+    = R"( SELECT scenes.* FROM location_maps
           JOIN scenes
-          ON scenes.scene_id = location_map.scene
-          WHERE location_map.fk_location = :id)";
+          ON scenes.scene_id = location_maps.scene
+          WHERE location_maps.fk_location = :location_id)";
+
   //--------------------------- CITATION MAP STATEMENTS ------------------
   enum CITATION_MAP_COLUMNS {
     CITATION_MAP_ID,
@@ -736,7 +740,7 @@ inline namespace sqlite3 {
     name TEXT,
     property_values TEXT,
     notes TEXT,
-	  UNIQUE("fk_scene","fk_equipment","name")
+    UNIQUE("fk_scene","fk_equipment","name")
   );
   )";
   constexpr auto drop_all_equipment_map = R"( DELETE FROM equipment_map; )";
@@ -806,13 +810,13 @@ inline namespace sqlite3 {
 
   constexpr auto create_objectives_table = R"(
     CREATE TABLE IF NOT EXISTS "objectives" (
-	    "objective_id"	INTEGER,
-	    "uuid"	TEXT,
-	    "name"	Varchar(64) NOT NULL UNIQUE,
-	    "description"	TEXT,
-	    "citations"	TEXT,
-	    UNIQUE("uuid"),
-	    PRIMARY KEY("objective_id")
+      "objective_id"  INTEGER,
+      "uuid"  TEXT,
+      "name"  Varchar(64) NOT NULL UNIQUE,
+      "description"  TEXT,
+      "citations"  TEXT,
+      UNIQUE("uuid"),
+      PRIMARY KEY("objective_id")
     );
   )";
   constexpr auto drop_all_objectives = R"( DELETE FROM objectives; )";
@@ -906,15 +910,15 @@ inline namespace sqlite3 {
 
   constexpr auto create_citations_table = R"(
     CREATE TABLE IF NOT EXISTS "citations" (
-	    "citation_id"	INTEGER,
-	    "uuid"	TEXT,
-	    "key"	Varchar(64) NOT NULL UNIQUE,
-	    "title"	TEXT,
-	    "authors"	TEXT,
-	    "year"	TEXT,
-	    "publisher"	TEXT,
-	    PRIMARY KEY("citation_id"),
-	    UNIQUE("uuid")
+      "citation_id"  INTEGER,
+      "uuid"  TEXT,
+      "key"  Varchar(64) NOT NULL UNIQUE,
+      "title"  TEXT,
+      "authors"  TEXT,
+      "year"  TEXT,
+      "publisher"  TEXT,
+      PRIMARY KEY("citation_id"),
+      UNIQUE("uuid")
     );
   )";
   constexpr auto drop_all_citations = R"( DELETE FROM citations; )";
@@ -983,12 +987,12 @@ inline namespace sqlite3 {
 
   constexpr auto create_roles_table = R"(
     CREATE TABLE IF NOT EXISTS "roles" (
-	    "role_id"	INTEGER,
-	    "uuid"	TEXT,
-	    "name"	Varchar(64) NOT NULL UNIQUE,
-	    "description"	TEXT,
-	    PRIMARY KEY("role_id"),
-	    UNIQUE("uuid")
+      "role_id"  INTEGER,
+      "uuid"  TEXT,
+      "name"  Varchar(64) NOT NULL UNIQUE,
+      "description"  TEXT,
+      PRIMARY KEY("role_id"),
+      UNIQUE("uuid")
     );
   )";
   constexpr auto drop_all_roles = R"( DELETE FROM roles; )";
@@ -1039,19 +1043,18 @@ inline namespace sqlite3 {
 
   constexpr auto create_scenes_table = R"(
       CREATE TABLE IF NOT EXISTS "scenes" (
-	      "scene_id"	INTEGER,
-	      "uuid"	TEXT,
-	      "name"	Varchar(64) NOT NULL UNIQUE,
-	      "description"	TEXT NOT NULL,
-	      "time_of_day"	Varchar(64) NOT NULL,
-	      "time_in_simulation"	Varchar(64) NOT NULL,
-	      "weather"	Varchar(64),
-	      "events"	Varchar(64),
-	      "items"	Varchar(64),
-	      "roles"	Varchar(64),
-	      "details"	TEXT NOT NULL,
-	      UNIQUE("uuid"),
-	      PRIMARY KEY("scene_id")
+        "scene_id"  INTEGER,
+        "uuid"  TEXT,
+        "name"  Varchar(64) NOT NULL UNIQUE,
+        "description"  TEXT NOT NULL,
+        "time_of_day"  Varchar(64) NOT NULL,
+        "time_in_simulation"  Varchar(64) NOT NULL,
+        "weather"  Varchar(64),
+        "events"  Varchar(64),
+        "items"  Varchar(64),
+        "roles"  Varchar(64),
+        UNIQUE("uuid"),
+        PRIMARY KEY("scene_id")
       );
   )";
   constexpr auto drop_all_scenes = R"( DELETE FROM scenes; )";
@@ -1074,15 +1077,14 @@ inline namespace sqlite3 {
                 , events = :events
                 , items = :items
                 , roles = :roles
-                , details = :details
           WHERE scene_id = :id;
          )";
   constexpr auto delete_scene_by_id
     = R"( DELETE FROM scenes WHERE scene_id = :id; )";
   constexpr auto insert_or_update_scenes
     = R"( INSERT INTO scenes
-          (name, uuid, description, time_of_day, time_in_simulation, weather, events, items, roles, details)
-          VALUES (:name, :uuid, :description, :time_of_day, :time_in_simulation, :weather, :events, :items, :roles, :details)
+          (name, uuid, description, time_of_day, time_in_simulation, weather, events, items, roles)
+          VALUES (:name, :uuid, :description, :time_of_day, :time_in_simulation, :weather, :events, :items, :roles)
           ON CONFLICT (name)
           DO UPDATE SET name = :name
                         , description = excluded.description
@@ -1092,7 +1094,7 @@ inline namespace sqlite3 {
                         , events = excluded.events
                         , items = excluded.items
                         , roles = excluded.roles
-                        , details = excluded.details
+ 
           ;          
           )";
   //---------------------- TREATMENT STATEMENTS ------------------------
@@ -1110,16 +1112,16 @@ inline namespace sqlite3 {
 
   constexpr auto create_treatments_table = R"(
     CREATE TABLE IF NOT EXISTS "treatments" (
-	    "treatment_id"	INTEGER,
-	    "uuid"	TEXT,
-	    "medical_name"	Varchar(64) NOT NULL UNIQUE,
-	    "common_name"	Varchar(64) NOT NULL UNIQUE,
-	    "description"	TEXT,
-	    "equipment"	TEXT,
-	    "citations"	TEXT,
-      "cpgs"	TEXT,
-	    PRIMARY KEY("treatment_id"),
-	    UNIQUE("uuid")
+      "treatment_id"  INTEGER,
+      "uuid"  TEXT,
+      "medical_name"  Varchar(64) NOT NULL UNIQUE,
+      "common_name"  Varchar(64) NOT NULL UNIQUE,
+      "description"  TEXT,
+      "equipment"  TEXT,
+      "citations"  TEXT,
+      "cpgs"  TEXT,
+      PRIMARY KEY("treatment_id"),
+      UNIQUE("uuid")
     );
   )";
 

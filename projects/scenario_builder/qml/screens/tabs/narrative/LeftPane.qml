@@ -9,147 +9,214 @@ import "../../common"
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
 ColumnLayout {
-  id: root
+  id : root
   property SQLBackend backend
-  readonly property alias model : sceneList.model 
-  readonly property alias index : sceneList.currentIndex
-  readonly property alias count : sceneList.count
+  property Scene currentScene : sceneList.scenes[sceneList.currentIndex]
+  property Location currentLocation :  sceneList.locations[sceneList.currentIndex]
   Scene {
-    id : self
+    id : scene_g
   }
   Location {
-    id : location
+    id : location_g
+    name: "location_g"
   }
+
+  function update_scenes() {
+    sceneList.scenes = []
+    sceneList.locations = []
+    let scenes = root.backend.scenes;
+    for (var ii = 0; ii < scenes.length; ++ ii) {
+      sceneList.scenes.push(scene_g.make());
+      sceneList.locations.push(location_g.make());
+      sceneList.scenes[sceneList.scenes.length - 1].assign(scenes[ii]);
+      sceneList.locations[sceneList.locations.length - 1].assign(root.backend.getLocationOfScene(scenes[ii]));
+    }
+     sceneList.model = sceneList.scenes;
+  }
+
+
+  function seconds_to_clock_time(time_s) {
+
+    var v_seconds = time_s % 60;
+    var v_minutes = Math.floor(time_s / 60) % 60;
+    var v_hours = Math.floor(time_s / 3600);
+    v_seconds = (v_seconds < 10) ? "0%1".arg(v_seconds) : "%1".arg(v_seconds);
+    v_minutes = (v_minutes < 10) ? "0%1".arg(v_minutes) : "%1".arg(v_minutes);
+    v_hours = (v_hours < 10) ? "0%1".arg(v_hours) : "%1".arg(v_hours);
+    return "%1:%2:%3".arg(v_hours).arg(v_minutes).arg(v_seconds);
+  }
+  
   Rectangle {
     id : listRectangle
     Layout.fillWidth : true
-    Layout.fillHeight: true
+    Layout.fillHeight : true
     Layout.margins : 5
 
     border.color : "black"
 
     TwoButtonRow {
-      id: controls
+      id : controls
       anchors.top : listRectangle.top
       anchors.left : listRectangle.left
       anchors.right : listRectangle.right
       anchors.topMargin : 2
-      anchors.rightMargin  : 5
-      anchors.leftMargin  : 5
+      anchors.rightMargin : 5
+      anchors.leftMargin : 5
 
       property int next : 1
 
       firstButtonText : "Add"
       secondButtonText : "Remove"
 
-      onFirstButtonClicked :{
-        if( next < root.model.count ) 
-        { next = root.model.count +1}
-        self.scene_id = -1
-        self.name = "New Scene %1".arg(next)
-
-        while( root.backend.select_scene(self) )
-        { 
-         next = next +1
-         self.scene_id = -1; 
-         self.name = "New Scene %1".arg(next);
-         self.description = "Scene Description";
-         self.details = "Scene Details";
-        } 
-        self.uuid = ""
-        root.backend.update_scene(self)
-        root.model.insert(root.model.count,
-          {
-           "id" : self.scene_id,
-           "name": "%1".arg(self.name),
-           "description" : self.description,
-           "details" : self.details}
-        );
+      onFirstButtonClicked : {
+        var likely_id = root.backend.nextID(SQLBackend.SCENES);
+        scene_g.clear(likely_id);
+        root.backend.update_scene(scene_g);
       }
       onSecondButtonClicked : {
-        if (sceneList.model.count == 0) {
+        if (!sceneList.scenes || sceneList.scenes.length < 2) {
           return
         }
-        self.scene_id = -1
-        self.name = root.model.get(root.index).name
-
-        root.backend.remove_scene(self)
-        root.model.remove(root.index)
-        sceneList.currentIndex = Math.max(0,root.index-1)
+        scene_g.clear();
+        scene_g.assign(sceneList.scenes[sceneList.currentIndex]);
+        root.backend.remove_scene(scene_g);
+        sceneList.currentIndex = Math.max(0, sceneList.currentIndex - 1)
       }
     }
 
     ListView {
       id : sceneList
-      anchors { top : controls.bottom ; bottom : parent.bottom; 
-                   left : parent.left ; right : parent.right }  
+      property var scenes: []
+      property var locations: []
+      anchors {
+        top : controls.bottom;
+        bottom : parent.bottom;
+        left : parent.left;
+        right : parent.right
+      }
       spacing : 5
-      clip: true
+      clip : true
       highlightFollowsCurrentItem : true
       highlightMoveDuration : 1
-      highlight: Rectangle {
-          color: '#1111110F'
-          Layout.alignment: Qt.AlignTop
-          Layout.fillWidth: true
-          Layout.margins : 5
+      highlight : Rectangle {
+        color : '#1111110F'
+        Layout.alignment : Qt.AlignTop
+        Layout.fillWidth : true
+        Layout.margins : 5
       }
 
       model : ListModel {}
 
       delegate : Rectangle {
         id : scene
+        property var currentDef: (sceneList.scenes[index]) ? sceneList.scenes[index] : undefined
+        property var currentLocationDef: (sceneList.locations[index]) ? sceneList.locations[index] : undefined
         color : 'transparent'
-        border.color: "steelblue"
-        height : 30
-        anchors { left : parent.left; right: parent.right ; margins : 5 }
-
+        border.color : "steelblue"
+        height : scene_name_text.height + scene_location_label.height
+        anchors {
+          left : parent.left;
+          right : parent.right;
+          margins : 5
+        }
         MouseArea {
-          anchors.fill: parent
-          onClicked: {
+          anchors.fill : parent
+          onClicked : {
             sceneList.currentIndex = index
+          }
+        }
+        Label {
+          id : scene_name_text
+          text : (currentDef) ? currentDef.name : ""
+          font.weight : Font.Bold
+          font.pointSize : 10
+          enabled : false
+          color : enabled ? Material.accentColor : Material.secondaryTextColor
+          elide : Text.ElideRight
+        }
+        Label {
+          id : scene_location_label
+          text : "Location:"
+          anchors.top : scene_name_text.bottom
+          anchors.left : parent.left
+          font.weight : Font.Bold
+          anchors.leftMargin : 5
+          font.pointSize : 10
+          enabled : false
+          color : enabled ?  Material.accentColor : Material.secondaryTextColor
+          elide : Text.ElideRight
+        }
+        Text {
+          id : scene_location_text
+          text : (currentLocationDef) ? currentLocationDef.name : "unknown"
+          anchors.top : scene_name_text.bottom
+          anchors.left : scene_location_label.right
+          anchors.leftMargin : 5
+          width : Math.max(contentWidth, 100)
+          font.weight : Font.Bold
+          font.pointSize : 10
+          enabled : false
+          color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
+          elide : Text.ElideRight
+        }
+        Label {
+          id : scene_time_label
+          text : "Time:"
+          anchors.top : scene_name_text.bottom
+          anchors.left : scene_location_text.right
+          anchors.leftMargin : 5
+          font.weight : Font.Bold
+          font.pointSize : 10
+          enabled : false
+          color : enabled ?  Material.accentColor : Material.secondaryTextColor
+          elide : Text.ElideRight
+        }
+        Text {
+          id : scene_time_text
+          text : (currentDef) ?  seconds_to_clock_time(currentDef.timeOfDay) : "unknown"
+          anchors.top : scene_name_text.bottom
+          anchors.left : scene_time_label.right
+          anchors.right : parent.right
+          anchors.leftMargin : 5
+          width : Math.max(contentWidth, 100)
+          font.weight : Font.Bold
+          font.pointSize : 10
+          enabled : false
+          color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
+          elide : Text.ElideRight
+        }
 
-          }
+        states : State {
+          name : "Selected"
+          PropertyChanges { target : scene_name_text; enabled : true }
+          PropertyChanges { target : scene_location_label; enabled : true }
+          PropertyChanges { target : scene_location_text; enabled : true }
+          PropertyChanges { target : scene_time_label; enabled : true }
+          PropertyChanges { target : scene_time_text; enabled : true }
         }
-         Rectangle {
-           id : scene_title_text
-           anchors.left : scene.left
-           anchors.leftMargin : 5
-           width : 150
-           Text  {
-            text :  model.name 
-            font.weight: Font.Bold
-            font.pointSize: 10
-           }
-           enabled : false
-           color : enabled ?   Material.primaryTextColor : Material.secondaryTextColor
-        }
-        onFocusChanged: {
-          if(sceneList.currentIndex == index){
+
+        onFocusChanged : {
+          if (sceneList.currentIndex == index) {
             state = 'Selected';
-          }
-          else{
+          } else {
             state = '';
           }
         }
       }
 
-      ScrollBar.vertical: ScrollBar { }
+      ScrollBar.vertical : ScrollBar {}
 
-      Component.onCompleted : {
-        var r_count = backend.scene_count();
-        root.backend.scenes()
-        while ( root.backend.next_scene(self) ){
-          sceneList.model.insert(sceneList.model.count,
-            {
-             id  : self.scene_id,
-             name: "%1".arg(self.name), 
-             description : self.description,
-             details : self.details,
-             weather : self.weather,
-             time : self.time_of_day
-            });
-        }
+      onCurrentIndexChanged : {
       }
+    }
+  }
+  Component.onCompleted : {
+    update_scenes()
+  }
+  onBackendChanged : {
+    if (backend) {
+      backend.scenesChanged.connect(update_scenes)
+      backend.locationsChanged.connect(update_scenes)
     }
   }
 }

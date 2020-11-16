@@ -12,13 +12,11 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 Rectangle {
   id : root
   property alias currentIndex : narrative_tabs.currentIndex
-  property ListModel model
-  property int index // creates new int, which is publicly assigned in ScenarioNarrative.qml
-  property int count
-  property int topIndex
-
+  property int topIndex : 0
   property SQLBackend backend
-  property ListElement modelData
+  property Scene currentScene
+  property Location currentLocation
+
 
   clip : true
   Layout.fillWidth : true
@@ -87,12 +85,12 @@ Rectangle {
         text : "Events"
         width : implicitWidth
       }
-     TabButton {
+      TabButton {
         id : objects_tab
         text : "Objects"
         width : implicitWidth
       }
-      currentIndex : 4
+      currentIndex : 0
     }
     StackLayout {
       id : narrative_stack_right
@@ -105,50 +103,45 @@ Rectangle {
         Layout.fillHeight : true
         Layout.fillWidth : true
         backend : root.backend
-        model : root.model
-        index : root.index
-        count : root.count
+        currentScene : root.currentScene
+        currentLocation : root.currentLocation
       }
       TabLocation {
         id : locations
         Layout.fillHeight : true
         Layout.fillWidth : true
         backend : root.backend
-        model : root.model
-        index : root.index
-        count : root.count
+        currentScene : root.currentScene
+        currentLocation : root.currentLocation
       }
       TabRoles {
         id : roles
         Layout.fillHeight : true
         Layout.fillWidth : true
         backend : root.backend
-        model : root.model
-        index : root.index
-        count : root.count
+        currentScene : root.currentScene
+        currentLocation : root.currentLocation
       }
       TabEvents {
         id : events
         Layout.fillHeight : true
         Layout.fillWidth : true
         backend : root.backend
-        model : root.model
-        index : root.index
-        count : root.count
+        currentScene : root.currentScene
+        currentLocation : root.currentLocation
       }
       TabEquipment {
         id : objects
         Layout.fillHeight : true
         Layout.fillWidth : true
         backend : root.backend
-        sceneList : root.model
-        sceneIndex :   root.index
-
+        currentScene : root.currentScene
+        currentLocation : root.currentLocation
         Rectangle {
-          width: parent.width
-          height: parent.height
-          color: "transparent"
-          border.color: "cyan"
+          width : parent.width
+          height : parent.height
+          color : "transparent"
+          border.color : "cyan"
         }
       }
     }

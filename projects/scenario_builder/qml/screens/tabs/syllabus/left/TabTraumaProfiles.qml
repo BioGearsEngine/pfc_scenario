@@ -12,17 +12,17 @@ ColumnLayout {
   id : root
   property SQLBackend backend
   property int topIndex
-  property TraumaProfile currentProfile : (profileList.traumaProfiles[profileList.currentIndex]) ? profileList.traumaProfiles[profileList.currentIndex] : currentTraumaProfile
+  property TraumaProfile currentProfile : (profileList.traumaProfiles[profileList.currentIndex]) ? profileList.traumaProfiles[profileList.currentIndex] : traumaProfile_g
 
   TraumaProfile {
-    id : currentTraumaProfile
+    id : traumaProfile_g
   }
 
   function update_truamaProfiles() {
     profileList.traumaProfiles = []
     let traumaProfiles = root.backend.traumaProfiles;
     for (var ii = 0; ii < traumaProfiles.length; ++ ii) {
-      profileList.traumaProfiles.push(currentTraumaProfile.make());
+      profileList.traumaProfiles.push(currentProfile.make());
       profileList.traumaProfiles[profileList.traumaProfiles.length - 1].assign(traumaProfiles[ii]);
     }
     profileList.model = profileList.traumaProfiles;
@@ -51,10 +51,10 @@ ColumnLayout {
 
       onFirstButtonClicked : {
         var likely_id = root.backend.nextID(SQLBackend.TRAUMA_PROFILES);
-        currentTraumaProfile.clear(likely_id);
-        root.backend.update_trauma_profile(currentTraumaProfile);
-        profileList.traumaProfiles.push(currentTraumaProfile.make());
-        profileList.traumaProfiles[profileList.traumaProfiles.length - 1].assign(currentTraumaProfile);
+        traumaProfile_g.clear(likely_id);
+        root.backend.update_trauma_profile(traumaProfile_g);
+        profileList.traumaProfiles.push(traumaProfile_g.make());
+        profileList.traumaProfiles[profileList.traumaProfiles.length - 1].assign(traumaProfile_g);
         profileList.model = profileList.traumaProfiles;
         profileList.currentIndex = profileList.traumaProfiles.length - 1
       }
@@ -62,9 +62,9 @@ ColumnLayout {
         if (!profileList.traumaProfiles || profileList.traumaProfiles.length < 2) {
           return
         }
-        currentTraumaProfile.clear();
-        currentTraumaProfile.assign(profileList.traumaProfiles[profileList.currentIndex]);
-        root.backend.remove_trauma_profile(currentTraumaProfile);
+        traumaProfile_g.clear();
+        traumaProfile_g.assign(profileList.traumaProfiles[profileList.currentIndex]);
+        root.backend.remove_trauma_profile(traumaProfile_g);
         update_truamaProfiles();
         profileList.currentIndex = Math.max(0, root.index - 1)
       }

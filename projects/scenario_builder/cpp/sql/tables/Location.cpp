@@ -8,8 +8,7 @@ Location::Location(QObject* parent)
 bool Location::operator==(const Location& rhs) const
 {
   return name == rhs.name
-    && scene_name == rhs.scene_name
-    && time_of_day == rhs.time_of_day
+    && description == rhs.description
     && environment == rhs.environment;
 }
 //--------------------------------------------------------------------------------------------
@@ -35,8 +34,7 @@ void Location::assign(const Location& rhs)
   id = rhs.id;
   uuid = rhs.uuid;
   name = rhs.name;
-  scene_name = rhs.scene_name;
-  time_of_day = rhs.time_of_day;
+  description = rhs.description;
   environment = rhs.environment;
 }
 //--------------------------------------------------------------------------------------------
@@ -45,8 +43,15 @@ void Location::clear()
   id = -1;
   uuid.clear();
   name.clear();
-  scene_name.clear();
-  time_of_day.clear();
-  environment.clear();
+  environment = "Exterior:Terrestrial:Desert";
 }
 //--------------------------------------------------------------------------------------------
+void Location::clear(int index)
+{
+  id = -1;
+  uuid.clear();
+  name = QString("Location %1").arg(index);
+  description = QString("Undefined location %1").arg(index);
+  environment = "Exterior:Terrestrial:Desert";
+}
+  //--------------------------------------------------------------------------------------------

@@ -12,10 +12,10 @@ ColumnLayout {
   id : root
   property SQLBackend backend
   property int topIndex
-  property Objective currentObjective : (objectiveList.objectiveDefinitions[objectiveList.currentIndex]) ? objectiveList.objectiveDefinitions[objectiveList.currentIndex] : currentObjective
+  property Objective currentObjective : (objectiveList.objectiveDefinitions[objectiveList.currentIndex]) ? objectiveList.objectiveDefinitions[objectiveList.currentIndex] : objective_g
 
   Objective {
-    id : currentObjective
+    id : objective_g
   }
 
   function update_objectives() {
@@ -51,10 +51,10 @@ ColumnLayout {
 
       onFirstButtonClicked : {
         var likely_id = root.backend.nextID(SQLBackend.OBJECTIVES);
-        currentObjective.clear(likely_id);
-        root.backend.update_objective(currentObjective);
-        objectiveList.objectiveDefinitions.push(currentObjective.make());
-        objectiveList.objectiveDefinitions[objectiveList.objectiveDefinitions.length - 1].assign(currentObjective);
+        objective_g.clear(likely_id);
+        root.backend.update_objective(objective_g);
+        objectiveList.objectiveDefinitions.push(objective_g.make());
+        objectiveList.objectiveDefinitions[objectiveList.objectiveDefinitions.length - 1].assign(objective_g);
         objectiveList.model = objectiveList.objectiveDefinitions;
         objectiveList.currentIndex = objectiveList.objectiveDefinitions.length - 1
       }
@@ -62,9 +62,9 @@ ColumnLayout {
         if ( ! objectiveList.objectiveDefinitions || objectiveList.objectiveDefinitions.length < 2) {
           return
         }
-        currentObjective.clear();
-        currentObjective.assign(objectiveList.objectiveDefinitions[objectiveList.currentIndex]);
-        root.backend.remove_objective(currentObjective);
+        objective_g.clear();
+        objective_g.assign(objectiveList.objectiveDefinitions[objectiveList.currentIndex]);
+        root.backend.remove_objective(objective_g);
         update_objectives();
         objectiveList.currentIndex = Math.max(0, root.index - 1)
       }

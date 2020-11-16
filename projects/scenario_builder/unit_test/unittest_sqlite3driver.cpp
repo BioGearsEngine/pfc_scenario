@@ -1661,10 +1661,8 @@ TEST_F(SQLiteDriver, Scene_TEST(Equality))
 
   scene_1.name = "Opening";
   scene_1.description = "Opening";
-  scene_1.time_of_day = "Opening";
+  scene_1.time_of_day = 0;
   scene_1.time_in_simulation = 60;
-
-  scene_1.details = "Opening";
 
   scene_2.name = "Opening";
 
@@ -3787,11 +3785,10 @@ TEST_F(SQLiteDriver, Backdoor_TEST(get_scenes))
 
   scene_1.name = "Opening";
   scene_1.description = "Desc";
-  scene_1.time_of_day = "00:00:00";
+  scene_1.time_of_day = 60;
   scene_1.time_in_simulation = 0;
   scene_1.weather = "Overcast";
-;
-  scene_1.details = "Dets";
+
 
   EXPECT_EQ(0, _db.scene_count());
   EXPECT_TRUE(_db.update_scene(&scene_1));
@@ -3800,13 +3797,13 @@ TEST_F(SQLiteDriver, Backdoor_TEST(get_scenes))
 
   EXPECT_TRUE(list[0]->name.compare(scene_1.name) == 0);
   EXPECT_TRUE(list[0]->description.compare(scene_1.description) == 0);
-  EXPECT_TRUE(list[0]->time_of_day.compare(scene_1.time_of_day) == 0);
+  EXPECT_TRUE(list[0]->time_of_day == scene_1.time_of_day);
   EXPECT_TRUE(list[0]->time_in_simulation == scene_1.time_in_simulation);
   EXPECT_TRUE(list[0]->weather.compare(scene_1.weather) == 0);
   // EXPECT_TRUE(list[0]->events.compare(scene_1.events) == 0);
   // EXPECT_TRUE(list[0]->items.compare(scene_1.items) == 0);
   // EXPECT_TRUE(list[0]->roles.compare(scene_1.roles) == 0);
-  EXPECT_TRUE(list[0]->details.compare(scene_1.details) == 0);
+
 }
 //-------------------------------------------------------------------------------
 #ifndef DISABLE_REMOVAL_TEST
@@ -4257,7 +4254,7 @@ TEST_F(SerializationTest, Serialization_TEST(Scene))
   auto temp = _db.scenes();
   EXPECT_EQ(0, temp[0]->name.compare("Scene_Name"));
   EXPECT_EQ(0, temp[0]->description.compare("Scene_Description"));
-  EXPECT_EQ(0, temp[0]->time_of_day.compare("00:00:00"));
+  EXPECT_EQ(0, temp[0]->time_of_day );
   EXPECT_EQ(0, temp[0]->time_in_simulation);
 }
 TEST_F(SerializationTest, Serialization_TEST(Treatment))

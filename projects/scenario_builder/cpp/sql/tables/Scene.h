@@ -24,28 +24,40 @@ struct EquipmentMap;
 
 struct Scene : public QObject {
   Q_OBJECT
-  Q_PROPERTY(int scene_id MEMBER id)
-  Q_PROPERTY(QString uuid MEMBER uuid)
-  Q_PROPERTY(QString name MEMBER name)
-  Q_PROPERTY(QString description MEMBER description)
-  Q_PROPERTY(QString time_of_day MEMBER time_of_day)
-  Q_PROPERTY(int time_in_simulation MEMBER time_in_simulation)
-  Q_PROPERTY(QString weather MEMBER weather)
-  Q_PROPERTY(QQmlListProperty<Event> events READ getEvents NOTIFY eventsChanged)
-  Q_PROPERTY(QQmlListProperty<Role> roles READ getRoles NOTIFY rolesChanged)
-  Q_PROPERTY(QString details MEMBER details)
+  Q_PROPERTY(int scene_id MEMBER id NOTIFY idChanged)
+  Q_PROPERTY(QString uuid MEMBER uuid NOTIFY uuidChanged)
+  Q_PROPERTY(QString name MEMBER name NOTIFY nameChanged)
+  Q_PROPERTY(QString description MEMBER description NOTIFY descriptionChanged)
+  Q_PROPERTY(int  timeOfDay MEMBER time_of_day NOTIFY timeOfDayChanged)
+  Q_PROPERTY(int timeInSimulation MEMBER time_in_simulation NOTIFY timeInSimulationChanged)
+  Q_PROPERTY(QString weather MEMBER weather NOTIFY weatherChanged)
+  Q_PROPERTY(QQmlListProperty<Event> events READ getEvents  NOTIFY eventsChanged)
+  Q_PROPERTY(QQmlListProperty<Role> roles READ getRoles  NOTIFY rolesChanged)
+
 public:
   int32_t id = -1;
   QString uuid = "";
   QString name = "";
   QString description = "";
-  QString time_of_day = "";
+  int32_t time_of_day = 0;
   int32_t time_in_simulation = 0;
   QString weather = "";
   QList<Event*> events;
   QList<Role*> roles;
-  QString details = "";
+;
+signals:
+  void idChanged();
+  void uuidChanged();
+  void nameChanged();
+  void descriptionChanged();
+  void timeOfDayChanged();
+  void timeInSimulationChanged();
+  void weatherChanged();
+  void eventsChanged();
+  void rolesChanged();
 
+
+public:
   Scene(QObject* parent = nullptr);
   Scene(const Scene&) = delete;
   Scene(Scene&&) = delete;
@@ -61,15 +73,13 @@ public:
   Q_INVOKABLE void assign(Scene* rhs);
   void assign(const Scene& rhs);
 
-  void clear();
+  Q_INVOKABLE void clear();
+  Q_INVOKABLE void clear(int index);
 
   Q_INVOKABLE void RemoveEvent(int index);
   Q_INVOKABLE void ReplaceEvent(int index, Event* value);
   Q_INVOKABLE void RemoveRole(int index);
   Q_INVOKABLE void ReplaceRole(int index, Role* value);
-signals:
-  void eventsChanged();
-  void rolesChanged();
 
 private:
   //! Helper functions for Events

@@ -12,10 +12,10 @@ ColumnLayout {
   id : root
   property SQLBackend backend
   property int topIndex
-  property Treatment currentTreatment : (treatmentList.treatmentDefinitions[treatmentList.currentIndex]) ? treatmentList.treatmentDefinitions[treatmentList.currentIndex] : currentTreatment
+  property Treatment currentTreatment : (treatmentList.treatmentDefinitions[treatmentList.currentIndex]) ? treatmentList.treatmentDefinitions[treatmentList.currentIndex] : treatment_g
 
   Treatment {
-    id : currentTreatment
+    id : treatment_g
   }
 
   function update_treatments() {
@@ -51,10 +51,10 @@ ColumnLayout {
 
       onFirstButtonClicked : {
         var likely_id = root.backend.nextID(SQLBackend.TREATMENTS);
-        currentTreatment.clear(likely_id);
-        root.backend.update_treatment(currentTreatment);
-        treatmentList.treatmentDefinitions.push(currentTreatment.make());
-        treatmentList.treatmentDefinitions[treatmentList.treatmentDefinitions.length - 1].assign(currentTreatment);
+        treatment_g.clear(likely_id);
+        root.backend.update_treatment(treatment_g);
+        treatmentList.treatmentDefinitions.push(treatment_g.make());
+        treatmentList.treatmentDefinitions[treatmentList.treatmentDefinitions.length - 1].assign(treatment_g);
         treatmentList.model = treatmentList.treatmentDefinitions;
         treatmentList.currentIndex = treatmentList.treatmentDefinitions.length - 1
       }
@@ -62,9 +62,9 @@ ColumnLayout {
         if ( ! treatmentList.treatmentDefinitions || treatmentList.treatmentDefinitions.length < 2) {
           return
         }
-        currentTreatment.clear();
-        currentTreatment.assign(treatmentList.treatmentDefinitions[treatmentList.currentIndex]);
-        root.backend.remove_treatment(currentTreatment);
+        treatment_g.clear();
+        treatment_g.assign(treatmentList.treatmentDefinitions[treatmentList.currentIndex]);
+        root.backend.remove_treatment(treatment_g);
         update_treatments();
         treatmentList.currentIndex = Math.max(0, root.index - 1)
       }
