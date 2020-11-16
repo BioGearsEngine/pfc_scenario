@@ -179,6 +179,10 @@ ScrollView {
   }
 
   onCurrentEquipmentChanged : {
-    refresh_citations()
+    refresh_citations();
   }
-}
+  onBackendChanged : {
+    if (backend) {
+      backend.citationsChanged.connect(refresh_citations);
+    }
+  }

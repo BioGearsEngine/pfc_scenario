@@ -159,4 +159,9 @@ ColumnLayout {
       }
     }
   }
+  onBackendChanged : {
+    if (backend) {
+      //TODO: If we have a problem with stale elements this is where to connect handlers
+    }
+  }
 }

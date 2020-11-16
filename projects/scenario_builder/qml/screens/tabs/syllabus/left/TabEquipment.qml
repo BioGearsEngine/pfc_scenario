@@ -55,10 +55,6 @@ ColumnLayout {
         var likely_id = root.backend.nextID(SQLBackend.EQUIPMENTS);
         equipment_g.clear(likely_id);
         root.backend.update_equipment(equipment_g);
-        equipmentList.equipmentDefinitions.push(equipment_g.make());
-        equipmentList.equipmentDefinitions[equipmentList.equipmentDefinitions.length - 1].assign(equipment_g);
-        equipmentList.model = equipmentList.equipmentDefinitions;
-        equipmentList.currentIndex = equipmentList.equipmentDefinitions.length - 1
       }
       onSecondButtonClicked : {
         if (!equipmentList.equipmentDefinitions || equipmentList.equipmentDefinitions.length < 2) {

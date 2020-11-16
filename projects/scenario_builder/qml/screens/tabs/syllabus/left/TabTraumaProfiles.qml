@@ -53,10 +53,6 @@ ColumnLayout {
         var likely_id = root.backend.nextID(SQLBackend.TRAUMA_PROFILES);
         traumaProfile_g.clear(likely_id);
         root.backend.update_trauma_profile(traumaProfile_g);
-        profileList.traumaProfiles.push(traumaProfile_g.make());
-        profileList.traumaProfiles[profileList.traumaProfiles.length - 1].assign(traumaProfile_g);
-        profileList.model = profileList.traumaProfiles;
-        profileList.currentIndex = profileList.traumaProfiles.length - 1
       }
       onSecondButtonClicked : {
         if (!profileList.traumaProfiles || profileList.traumaProfiles.length < 2) {

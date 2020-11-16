@@ -154,4 +154,10 @@ ColumnLayout {
       }
     }
   }
+    onBackendChanged : {
+    if (backend) {
+      backend.traumaMapsChanged.connect(refresh_traumas);
+      backend.onTraumasChanged.connect(refresh_traumas);
+      backend.onTraumaProfileChanged.connect(refresh_traumas);
+    }
 }

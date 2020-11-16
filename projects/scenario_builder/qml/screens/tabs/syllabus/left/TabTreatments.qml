@@ -53,10 +53,6 @@ ColumnLayout {
         var likely_id = root.backend.nextID(SQLBackend.TREATMENTS);
         treatment_g.clear(likely_id);
         root.backend.update_treatment(treatment_g);
-        treatmentList.treatmentDefinitions.push(treatment_g.make());
-        treatmentList.treatmentDefinitions[treatmentList.treatmentDefinitions.length - 1].assign(treatment_g);
-        treatmentList.model = treatmentList.treatmentDefinitions;
-        treatmentList.currentIndex = treatmentList.treatmentDefinitions.length - 1
       }
       onSecondButtonClicked : {
         if ( ! treatmentList.treatmentDefinitions || treatmentList.treatmentDefinitions.length < 2) {

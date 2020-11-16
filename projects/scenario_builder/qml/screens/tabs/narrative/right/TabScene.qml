@@ -85,8 +85,6 @@ Rectangle {
       onEditingFinished : {
         if (text != currentScene.name) {
           currentScene.name = text
-          console.log(currentScene)
-          console.log(currentScene.name)
           update_scene(currentScene)
         }
       }
@@ -275,7 +273,6 @@ Rectangle {
       text : (currentScene) ? seconds_to_clock_time(currentScene.timeOfDay) : "06:00:00"
       onEditingFinished : {
         var secondsInDay = clock_time_to_seconds(text);
-          console.log ("saving %1".arg(secondsInDay))
         if (secondsInDay != currentScene.timeOfDay) {
           currentScene.timeOfDay = secondsInDay;
           update_scene(currentScene);
@@ -301,4 +298,10 @@ Rectangle {
     }
     detailEntry.loadComplete = true
   }
+  //   onBackendChanged : {
+  //   if (backend) {
+  //     backend.citationsChanged.connect(refresh_citations);
+  //     backend.equipmentChanged.connect(refresh_equipment);
+  //   }
+  // }
 }

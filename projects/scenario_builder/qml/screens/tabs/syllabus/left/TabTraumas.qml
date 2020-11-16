@@ -53,10 +53,6 @@ ColumnLayout {
         var likely_id = root.backend.nextID(SQLBackend.TRAUMAS);
         trauma_g.clear(likely_id);
         root.backend.update_trauma(trauma_g);
-        traumaList.traumaDefinitions.push(trauma_g.make());
-        traumaList.traumaDefinitions[traumaList.traumaDefinitions.length - 1].assign(trauma_g);
-        traumaList.model = traumaList.traumaDefinitions;
-        traumaList.currentIndex = traumaList.traumaDefinitions.length - 1
       }
       onSecondButtonClicked : {
         if ( ! traumaList.traumaDefinitions || traumaList.traumaDefinitions.length < 2) {
