@@ -63,7 +63,7 @@ inline namespace sqlite3 {
           WHERE assessment_id = :id;
          )";
   constexpr auto delete_assessment_by_id
-      = R"( DELETE FROM assessments WHERE assessment_id = :id; )";
+    = R"( DELETE FROM assessments WHERE assessment_id = :id; )";
   constexpr auto delete_assessment_by_name
     = R"( DELETE FROM assessments WHERE name = :name; )";
   constexpr auto select_assessment_by_name
@@ -80,7 +80,7 @@ inline namespace sqlite3 {
                        , criteria = excluded.criteria
          ;
          )";
-  
+
   //---------------------- AUTHOR STATMENTS ------------------------
   enum AUTHOR_COLUMNS {
     AUTHOR_ID,
@@ -95,7 +95,7 @@ inline namespace sqlite3 {
     AUTHOR_ORGANIZATION,
     AUTHOR_COLUMN_COUNT
   };
-  
+
   constexpr auto create_authors_table = R"(
     CREATE TABLE IF NOT EXISTS "authors" (
       "author_id"  INTEGER,
@@ -197,6 +197,9 @@ inline namespace sqlite3 {
 
   constexpr auto select_equipment_by_id
     = R"( SELECT * FROM equipments WHERE equipment_id = :id ; )";
+  constexpr auto select_equipment_by_uuid
+    = R"( SELECT * FROM equipments WHERE uuid = :uuid ORDER BY name; )";
+
   constexpr auto update_equipment_by_id
     = R"( UPDATE  equipments
           SET
@@ -369,7 +372,7 @@ inline namespace sqlite3 {
                         , upper_bound= excluded.upper_bound
           ;          
           )";
-  
+
   //---------------------- Injury Set STATMENTS ------------------------
   enum INJURY_SET_COLUMNS {
     INJURY_SET_ID,
@@ -460,6 +463,9 @@ inline namespace sqlite3 {
 
   constexpr auto select_location_by_id
     = R"( SELECT * FROM locations WHERE location_id = :id ; )";
+  constexpr auto select_location_by_uuid
+    = R"( SELECT * FROM locations WHERE uuid = :uuid ORDER BY name; )";
+
   constexpr auto update_location_by_id
     = R"( UPDATE  locations
           SET
@@ -488,8 +494,6 @@ inline namespace sqlite3 {
     ROLE_MAP_FK_ROLE,
     ROLE_MAP_COLUMN_COUNT
   };
-
-
 
   constexpr auto create_role_maps_table = R"(
   CREATE TABLE IF NOT EXISTS role_maps (
@@ -727,7 +731,7 @@ inline namespace sqlite3 {
     EQUIPMENT_MAP_FK_SCENE,
     EQUIPMENT_MAP_FK_EQUIPMENT,
     EQUIPMENT_MAP_NAME,
-    EQUIPMENT_MAP_VALUES ,
+    EQUIPMENT_MAP_VALUES,
     EQUIPMENT_MAP_NOTES,
     EQUIPMENT_MAP_COLUMN_COUNT
   };
@@ -749,6 +753,9 @@ inline namespace sqlite3 {
 
   constexpr auto select_equipment_map_by_id
     = R"( SELECT * FROM equipment_map WHERE equipment_map_id = :id ; )";
+  constexpr auto select_equipment_map_by_uuid
+    = R"( SELECT * FROM equipment_map WHERE uuid = :uuid ; )";
+
   constexpr auto update_equipment_map_by_id
     = R"( UPDATE  equipment_map
           SET   fk_scene = :fk_scene
@@ -797,7 +804,7 @@ inline namespace sqlite3 {
           JOIN scenes AS scene
           ON scene.scene_id = map.fk_scene
           WHERE map.fk_equipment = :equipment_id;)";
-  
+
   //---------------------- OBJECTIVE STATEMENTS ------------------------
   enum OBJECTIVE_COLUMNS {
     OBJECTIVE_ID,
@@ -892,10 +899,9 @@ inline namespace sqlite3 {
   constexpr auto delete_property_by_id
     = R"( DELETE FROM properties WHERE property_id = :id; )";
 
-  
   constexpr auto delete_property_by_name
     = R"( DELETE FROM properties WHERE name = :name; )";
-  
+
   //---------------------- CITATION STATEMENTS ------------------------
   enum CITATION_COLUMNS {
     CITATION_ID,
@@ -932,6 +938,8 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM citations WHERE key = :key ORDER BY title; )";
   constexpr auto select_citation_by_title
     = R"( SELECT * FROM citations WHERE title = :title ORDER BY title; )";
+  constexpr auto select_citation_by_uuid
+    = R"( SELECT * FROM citations WHERE uuid = :uuid ORDER BY title; )";
 
   constexpr auto delete_citation_by_id
     = R"( DELETE FROM citations WHERE citation_id = :id; )";
@@ -975,7 +983,6 @@ inline namespace sqlite3 {
          ;
          )";
 
-  
   //---------------------- ROLE STATEMENTS ------------------------
   enum ROLE_COLUMNS {
     ROLE_ID,
@@ -1017,7 +1024,7 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM roles WHERE name = :name ORDER BY name; )";
   constexpr auto delete_role_by_id
     = R"( DELETE FROM roles WHERE role_id = :id; )";
-  
+
   constexpr auto insert_or_update_roles
     = R"( INSERT INTO roles 
           (uuid, name, description, code_name)
@@ -1027,7 +1034,6 @@ inline namespace sqlite3 {
                        , description = excluded.description
                        , code_name= excluded.code_name
          )";
-
 
   //---------------------- SCENE STATEMENTS ------------------------
   enum SCENE_COLUMNS {
@@ -1170,9 +1176,8 @@ inline namespace sqlite3 {
                         , cpgs = excluded.cpgs
           ;          
           )";
-  
-  //-------------------------------------------------------------------
 
+  //-------------------------------------------------------------------
 
 }
 }

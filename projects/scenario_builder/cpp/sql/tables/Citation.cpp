@@ -8,7 +8,6 @@ Citation::Citation(QObject* parent)
 bool Citation::operator==(const Citation& rhs) const
 {
   return id == rhs.id
-
     && key == rhs.key
     && title == rhs.title
     && authors == rhs.authors

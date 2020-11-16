@@ -53,10 +53,6 @@ ColumnLayout {
         var likely_id = root.backend.nextID(SQLBackend.OBJECTIVES);
         objective_g.clear(likely_id);
         root.backend.update_objective(objective_g);
-        objectiveList.objectiveDefinitions.push(objective_g.make());
-        objectiveList.objectiveDefinitions[objectiveList.objectiveDefinitions.length - 1].assign(objective_g);
-        objectiveList.model = objectiveList.objectiveDefinitions;
-        objectiveList.currentIndex = objectiveList.objectiveDefinitions.length - 1
       }
       onSecondButtonClicked : {
         if ( ! objectiveList.objectiveDefinitions || objectiveList.objectiveDefinitions.length < 2) {

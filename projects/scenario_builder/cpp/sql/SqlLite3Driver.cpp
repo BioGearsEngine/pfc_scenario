@@ -1155,8 +1155,11 @@ bool SQLite3Driver::select_citation(Citation* citation) const
     } else if (!citation->title.isEmpty()) {
       query.prepare(sqlite3::select_citation_by_title);
       query.bindValue(":title", citation->title);
+    } else if (!citation->uuid.isEmpty()) {
+      query.prepare(sqlite3::select_citation_by_uuid);
+      query.bindValue(":uuid", citation->uuid);
     } else {
-      qWarning() << "Provided Cittaion has no id, key, or title one is required";
+      qWarning() << "Provided Citaion has no id, key, title, or uuid one is required";
       return false;
     }
     if (query.exec()) {
@@ -1851,8 +1854,11 @@ bool SQLite3Driver::select_location(Location* location) const
     } else if (!location->name.isEmpty()) {
       query.prepare(sqlite3::select_location_by_name);
       query.bindValue(":name", location->name);
+    } else if (!location->uuid.isEmpty()) {
+      query.prepare(sqlite3::select_location_by_uuid);
+      query.bindValue(":uuid", location->uuid);
     } else {
-      qWarning() << "Provided Location has no id or name one is required";
+      qWarning() << "Provided Location has no id, name, or uuid one is required";
       return false;
     }
     if (query.exec()) {
@@ -2112,8 +2118,11 @@ bool SQLite3Driver::select_equipment(Equipment* equipment) const
     } else if (!equipment->name.isEmpty()) {
       query.prepare(sqlite3::select_equipment_by_name);
       query.bindValue(":name", equipment->name);
+    } else if (!equipment->uuid.isEmpty()) {
+      query.prepare(sqlite3::select_equipment_by_uuid);
+      query.bindValue(":uuid", equipment->uuid);
     } else {
-      qWarning() << "Provided Equipment has no id or name one is required";
+      qWarning() << "Provided Equipment has no id, name, or uuid one is required";
       return false;
     }
     if (query.exec()) {
