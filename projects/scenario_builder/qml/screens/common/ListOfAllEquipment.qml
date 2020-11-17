@@ -26,7 +26,7 @@ ListOfAllForm {
 
   delegate : Rectangle {
     id : equipment
-    color : 'transparent'
+    color : Material.color(Material.Grey, Material.Shade200)
     border.color : "steelblue"
     height : equipment_name_text.height + equipment_description_text.height
     anchors {
@@ -59,7 +59,7 @@ ListOfAllForm {
       activeFocusOnPress : false
       hoverEnabled : false
       enabled : false
-      color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
+      color : enabled ? Material.color(Material.Indigo, Material.Shade900) : Material.secondaryTextColor
       onEditingFinished : {
         update_equipment(root.model[index])
       }
@@ -76,7 +76,7 @@ ListOfAllForm {
       activeFocusOnPress : false
       hoverEnabled : false
       enabled : false
-      color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
+      color : enabled ? Material.color(Material.Indigo, Material.Shade900) : Material.secondaryTextColor
       onEditingFinished : {
         update_equipment(root.model[index])
       }

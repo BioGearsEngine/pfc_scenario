@@ -6,7 +6,7 @@ import QtQuick.Controls 2.12
 RowLayout {
   id: root
   property int rangeMin : 0
-  property int rangeMax : 1000
+  property int rangeMax : 100000
 
   property alias label: name.text
   property alias min : minEntry.value
