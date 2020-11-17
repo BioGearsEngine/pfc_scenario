@@ -186,3 +186,4 @@ ScrollView {
       backend.citationsChanged.connect(refresh_citations);
     }
   }
+}
