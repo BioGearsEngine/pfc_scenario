@@ -14,6 +14,7 @@ specific language governing permissions and limitations under the License.
 #include "sql/SqlLite3Driver.h"
 #include "xml/Serializer.h"
 
+#include <QFileSelector>
 #include <QApplication>
 #include <QDebug>
 #include <QFile>
@@ -57,7 +58,7 @@ int main(int argc, char* argv[])
 
   qmlRegisterType<pfc::Serializer>("com.ara.pfc.ScenarioModel.XML", 1, 0, "XMLSeralizer");
 
-  QPixmap pixmap("D:/biogears/pfc/scenario/build/img/sustain_splash.png");
+  QPixmap pixmap("qrc://img/sustain_splash.png");
   QSplashScreen splash(pixmap);
   splash.show();
   engine.load(QUrl(QLatin1String("qrc:/ScenarioBuilder.qml")));
@@ -68,5 +69,9 @@ int main(int argc, char* argv[])
   QFile file("pfc_sb_working.sqlite");
   file.remove();
 
+  QFileSelector selector;
+  QFile defaultsFile(selector.select("SustainScenarioBuilder.conf"));
+
   return app.exec();
 }
+                                                                                                                                                                                                                                                      

@@ -1,6 +1,8 @@
-<RCC>
+<!DOCTYPE RCC>
+<RCC version="1.0">
     <!-- Try to keep the entries sorted -->
     <qresource prefix="/">
+        <file>SustainScenarioBuilder.conf</file>
         <file>ScenarioBuilder.qml</file>
         <file>screens/Main.qml</file>
         <file>screens/Welcome.qml</file>
@@ -70,5 +72,7 @@
                 
         <!-- Images -->
         <file>img/sustain_splash.png</file>
+        <file>img/equipment_placeholder.png</file>
+        <file>img/logo.png</file>
     </qresource>
 </RCC>

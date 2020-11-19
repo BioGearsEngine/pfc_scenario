@@ -14,7 +14,7 @@ ScrollView {
   property int topIndex // topIndex is the index of the top set of 4 tabs
 
   contentWidth : column.width
-  contentHeight : column.height
+  contentHeight : column.height + grid.height
   clip : true
 
   Citation {
@@ -52,16 +52,17 @@ ScrollView {
     fullReferenceList.model = citationStack.allCitations;
   }
 
-  ColumnLayout {
-    id : column
+  GridLayout {
+    id : grid
     property alias backend : root.backend
-    width : root.width
-
-
+    width : column.width
+    height : childrenRect.height
+    columns : 2
+    rows : 3
     TextEntry {
       Layout.fillWidth : true
       Layout.leftMargin : 5
-
+      Layout.column : 0
       id : nameEntry
       label : "Name"
       placeholderText : "String Field (128 Characters)"
@@ -77,7 +78,7 @@ ScrollView {
     TextAreaEntry {
       Layout.fillWidth : true
       Layout.leftMargin : 5
-
+      Layout.column : 0
       id : summaryEntry
       label : "Summary"
       required : true
@@ -94,7 +95,7 @@ ScrollView {
     TextAreaEntry {
       Layout.fillWidth : true
       Layout.leftMargin : 5
-
+      Layout.column : 0
       id : descriptionEntry
       label : "Description"
       placeholderText : "Text Area (5-15 Lines)"
@@ -108,22 +109,35 @@ ScrollView {
       }
     }
 
-    TextEntry {
+    // TextEntry {
+    // Layout.fillWidth : true
+    // Layout.leftMargin : 5
+    // Layout.column : 1
+    // Layout.row : 0
+    // Layout.rowSpan : 3
+    // id : imageEntry
+    // label : "Image"
+    // placeholderText : "String Field (128 Characters )"
+    // text : (currentEquipment) ? currentEquipment.image : ""
+    // onEditingFinished : {
+    //     if (text != currentEquipment.image) {
+    //       currentEquipment.image = text;
+    //       update_equipment(currentEquipment);
+    //     }
+    // }
+    // }
+    Image {
       Layout.fillWidth : true
       Layout.leftMargin : 5
-
-      id : imageEntry
-      label : "Image"
-      placeholderText : "String Field (128 Characters )"
-      text : (currentEquipment) ? currentEquipment.image : ""
-      onEditingFinished : {
-        if (text != currentEquipment.image) {
-          currentEquipment.image = text;
-          update_equipment(currentEquipment);
-        }
-      }
+      Layout.column : 1
+      Layout.row : 0
+      Layout.rowSpan : 3
+      id : imageView
+      source : "qrc:/img/equipment_placeholder.png"
     }
-
+  }
+  ColumnLayout {
+    id : column
     StackLayout {
       id : citationStack
       Layout.fillWidth : true

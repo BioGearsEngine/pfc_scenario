@@ -2,6 +2,7 @@ import QtQuick 2.10
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.12
+import QtQuick.Controls.Material 2.0
 import com.ara.pfc.ScenarioModel.SQL 1.0
 import com.ara.pfc.ScenarioModel.XML 1.0
 
@@ -12,6 +13,7 @@ Page {
   signal createClicked()
   signal listUpdated()
   signal recentClicked(string path)
+
   onListUpdated : {
     recentFileList.clear();
     var recent_files = backend.get_recent_scenario_files();
@@ -22,49 +24,67 @@ Page {
       }
     }
   }
+
   Rectangle {
     id : mainArea
     color : "transparent"
     border.color : "steelblue"
+    width : parent.width * .75
+    height : parent.height * .75
     anchors.centerIn : parent
-    anchors.top : parent.top
-    anchors.bottom : parent.bottom
-    width : mainColumnLayout.implicitWidth + 20
-    height : mainColumnLayout.implicitHeight + 10
 
     ColumnLayout {
       id : mainColumnLayout
-      Layout.alignment : Qt.AlignCenter
-      Layout.preferredWidth : 400
-      Layout.preferredHeight : 300
+      anchors.fill : parent
       anchors.centerIn : parent
+      anchors.margins : 25
       spacing : 15
-      RowLayout {
-        Layout.alignment : Qt.AlignTop
-        Layout.fillWidth : true
-        spacing : 10
-        Text {
-          color : "#df4949"
-          text : "SUSTAIN Scenario Builder"
-          font.italic : true
-          font.bold : true
-          font.underline : true
-          font.pointSize : 24
+
+      Text {
+        Layout.alignment : Qt.AlignTop | Qt.AlignHCenter
+
+        color : "#df4949"
+        text : "Sustain"
+        font.italic : true
+        font.bold : true
+        font.underline : false
+        font.pointSize : 24
+
+        Image {
+          anchors.verticalCenter : parent.verticalCenter
+          anchors.right : parent.left
+          width : 100
+          fillMode : Image.PreserveAspectFit 
+          clip : false
+          source : 'qrc:/img/logo.png'
         }
       }
-      Rectangle {
-        Layout.fillWidth : true
-        Layout.alignment : Qt.AlignTop
-        Layout.preferredHeight : childrenRect.height
-        Layout.preferredWidth : childrenRect.width
 
+      Text {
+        Layout.alignment : Qt.AlignTop | Qt.AlignHCenter
+
+        color : "#df4949"
+        text : "Scenario Builder"
+        font.italic : true
+        font.bold : true
+        font.underline : true
+        font.pointSize : 24
+      }
+
+      Rectangle {
+        id : getting_started_rect
+        Layout.alignment : Qt.AlignTop | Qt.AlignHCenter
+        Layout.preferredHeight : childrenRect.height
+        Layout.preferredWidth : 600
         color : "transparent"
+
         Label {
+          id : getting_started_text
           text : "Getting Started:"
           font.pointSize : 12
           font.bold : true
           color : 'steelblue'
-          anchors.left : parent.left
+
         }
 
         Button {
@@ -86,23 +106,29 @@ Page {
             root.createClicked()
           }
         }
+        Label {
+          text : "Recent:"
+          anchors.left : getting_started_text.left
+          anchors.top : newButton.bottom
+          anchors.topMargin : 10
+          font.pointSize : 12
+          font.bold : true
+          color : 'steelblue'
+        }
       }
-      Label {
-        text : "Recent:"
-        font.pointSize : 12
-        font.bold : true
-        color : 'steelblue'
-      }
+
+
       ListView {
         id : listArea
-        Layout.alignment : Qt.AlignTop | Qt.AllignCenter
-        Layout.fillWidth : true
-        Layout.preferredHeight : 300
-        Layout.preferredWidth : 400
+        Layout.alignment : Qt.AlignTop | Qt.AlignHCenter
+        Layout.minimumHeight : 100
+        Layout.minimumWidth : 600
+        Layout.preferredHeight : childrenRect.height
         Layout.leftMargin : 20
         spacing : 5
         clip : true
         highlightFollowsCurrentItem : true
+
 
         model : ListModel {
           id : recentFileList
@@ -120,8 +146,8 @@ Page {
               text : model.index + 1
             }
             Text {
-              Layout.preferredWidth : 150
               text : model.path
+              color : (index == listArea.currentIndex) ? Material.accentColor : Material.secondaryTextColor
             }
           }
           width : childrenRect.width
@@ -131,33 +157,25 @@ Page {
           }
           onDoubleClicked : {
             listArea.currentIndex = index;
-             recentClicked(recentFileList.get(listArea.currentIndex).path)
+            recentClicked(recentFileList.get(listArea.currentIndex).path)
           }
-        }
-
-        highlight : Rectangle {
-          color : 'red'
-          Layout.fillWidth : true
-          anchors.margins : 5
         }
         ScrollBar.vertical : ScrollBar {}
       }
-      Button {
-        Layout.alignment : Qt.AlignRight
-        text : "Load"
 
-        onClicked : {
-          root.loadClicked()
+      Rectangle {
+        Layout.alignment : Qt.AlignHCenter
+        Layout.minimumWidth : 600
+        Layout.minimumHeight : childrenRect.height
+        color : 'transparent'
+        Button {
+          anchors.right : parent.right
+          text : "Load"
+          onClicked : {
+            root.loadClicked()
+          }
         }
-
       }
-
     }
   }
 }
-
-
-/*##^## Designer {
-    D{i:0;autoSize:true;height:600;width:800}
-}
- ##^##*/

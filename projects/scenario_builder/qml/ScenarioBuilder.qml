@@ -14,8 +14,8 @@ import com.ara.pfc.ScenarioModel.XML 1.0
 
 ApplicationWindow {
   title : qsTr("Test")
-  width : 1280;
-  height : 768
+  minimumWidth : 1280
+  minimumHeight : 768
   visible : true
   Shortcut {
     sequence : "Ctrl+1"
@@ -237,13 +237,11 @@ ApplicationWindow {
   function save_scenario() {
     scenario_serializer.save()
   }
-
   function save_scenario_as() {
     saveDialog.open()
     var archive = saveDialog.fileUrls.toString();
     settings.previous_scenarios.push({"file": archive})
   }
-
   function load_scenario(file, backend) {
     saveOption.enabled = true
     saveAsOption.enabled = true
