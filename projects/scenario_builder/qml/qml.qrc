@@ -73,6 +73,8 @@
         <!-- Images -->
         <file>img/sustain_splash.png</file>
         <file>img/equipment_placeholder.png</file>
+        <file>img/trauma_placeholder.png</file>
+        <file>img/treatment_placeholder.png</file>
         <file>img/logo.png</file>
     </qresource>
 </RCC>

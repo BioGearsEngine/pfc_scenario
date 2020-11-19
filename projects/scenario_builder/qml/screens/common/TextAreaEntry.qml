@@ -13,6 +13,8 @@ Rectangle {
   property alias placeholderText : input_area.placeholderText
   property alias text : input_area.text
   property bool required : false
+  property int maximumRows : 12
+  property int minimumRows : 7
 
   height : childrenRect.height
   signal editingFinished()
@@ -46,7 +48,7 @@ Rectangle {
 
   Flickable {
     id: flickable
-    height : Math.min( Math.max(contentHeight,font_metrics.height * 7) ,font_metrics.height * 12)
+    height : Math.min( Math.max(contentHeight,font_metrics.height * minimumRows) ,font_metrics.height * root.maximumRows)
     rightMargin : 20
     contentWidth: width
     clip: true

@@ -30,7 +30,7 @@ Page {
     color : "transparent"
     border.color : "steelblue"
     width : parent.width * .75
-    height : parent.height * .75
+    height : parent.height * .90
     anchors.centerIn : parent
 
     ColumnLayout {

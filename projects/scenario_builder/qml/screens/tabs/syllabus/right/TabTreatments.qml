@@ -19,48 +19,6 @@ ScrollView {
   contentHeight : column.height
   clip : true
 
-  function update_treatment(treatment) {
-    if (root.backend && treatment) {
-      root.backend.update_treatment(treatment)
-    }
-  }
-  function refresh_equipment() {
-    equipmentStack.treatmentEquipment = []
-    let equipment = currentTreatment.equipment;
-    for (var ii = 0; ii < equipment.length; ++ ii) {
-      equipmentStack.treatmentEquipment.push(equipment_g.make());
-      equipmentStack.treatmentEquipment[equipmentStack.treatmentEquipment.length - 1].assign(equipment[ii]);
-    }
-    equipmentList.model = equipmentStack.treatmentEquipment;
-  }
-  function refresh_all_equipment() {
-    equipmentStack.allEquipment = [];
-    let equipment = root.backend.equipment;
-    for (var ii = 0; ii < equipment.length; ++ ii) {
-      equipmentStack.allEquipment.push(equipment_g.make());
-      equipmentStack.allEquipment[equipmentStack.allEquipment.length - 1].assign(equipment[ii]);
-    }
-    fullEquipmentList.model = equipmentStack.allEquipment;
-  }
-  function refresh_citations() {
-    citationStack.treatmentCitations = []
-    let citations = currentTreatment.citations;
-    for (var ii = 0; ii < citations.length; ++ ii) {
-      citationStack.treatmentCitations.push(citation_g.make());
-      citationStack.treatmentCitations[citationStack.treatmentCitations.length - 1].assign(citations[ii]);
-    }
-    referenceList.model = citationStack.treatmentCitations;
-  }
-  function refresh_all_citations() {
-    citationStack.allCitations = [];
-    let citations = root.backend.citations;
-    for (var ii = 0; ii < citations.length; ++ ii) {
-      citationStack.allCitations.push(citation_g.make());
-      citationStack.allCitations[citationStack.allCitations.length - 1].assign(citations[ii]);
-    }
-    fullReferenceList.model = citationStack.allCitations;
-  }
-
   Equipment {
     id : equipment_g
   }
@@ -68,45 +26,76 @@ ScrollView {
     id : citation_g
   }
 
+
   ColumnLayout {
     id : column
-    property alias backend : root.backend
     width : root.width
 
-
-    TextEntry {
+    GridLayout {
+      id : grid
       Layout.fillWidth : true
-      Layout.leftMargin : 5
-      id : medicalNameEntry
-      label : "Medical Name"
-      placeholderText : "String Field (128 Characters)"
-      text : (currentTreatment) ? currentTreatment.medicalName : ""
-      onEditingFinished : {
-        if (text != currentTreatment.medicalName) {
-          currentTreatment.medicalName = text;
-          update_treatment(currentTreatment);
+      columns : 2
+      TextEntry {
+        Layout.minimumWidth : 2 * root.width / 3
+        Layout.fillWidth : true
+        Layout.leftMargin : 5
+        Layout.column : 0
+        Layout.row : 0
+
+        id : medicalNameEntry
+        label : "Medical Name"
+        placeholderText : "String Field (128 Characters)"
+        text : (currentTreatment) ? currentTreatment.medicalName : ""
+        onEditingFinished : {
+          if (text != currentTreatment.medicalName) {
+            currentTreatment.medicalName = text;
+            update_treatment(currentTreatment);
+          }
+        }
+      }
+      TextEntry {
+        Layout.fillWidth : true
+        Layout.leftMargin : 5
+        Layout.column : 0
+        Layout.row : 1
+        Layout.alignment : Qt.AlignTop
+        id : commonNameEntry
+        label : "Common Name"
+        placeholderText : "String Field (128 Characters)"
+        text : (currentTreatment) ? currentTreatment.commonName : ""
+        onEditingFinished : {
+          if (text != currentTreatment.commonName) {
+            currentTreatment.commonName = text;
+            update_treatment(currentTreatment);
+          }
+        }
+        onLabelWidthChanged : {
+          medicalNameEntry.nameWidth = commonNameEntry.nameWidth;
+        }
+      }
+      Image {
+        id : imageView
+        Layout.alignment : Qt.AlignHCenter | Qt.AlignTop
+        Layout.fillWidth : true
+        Layout.fillHeight : false
+        Layout.preferredHeight : 150
+        Layout.leftMargin : 5
+        Layout.column : 1
+        Layout.row : 0
+        Layout.rowSpan : 2
+        fillMode : Image.PreserveAspectFit
+        source : "qrc:/img/treatment_placeholder.png"
+      }
+      Button {
+        Layout.alignment : Qt.AlignHCenter | Qt.AlignTop
+        text : "Browse"
+        Layout.column : 1
+        Layout.row : 2
+        onClicked : { // TODO: Image Logic
+
         }
       }
     }
-
-    TextEntry {
-      Layout.fillWidth : true
-      Layout.leftMargin : 5
-      id : commonNameEntry
-      label : "Common Name"
-      placeholderText : "String Field (128 Characters)"
-      text : (currentTreatment) ? currentTreatment.commonName : ""
-      onEditingFinished : {
-        if (text != currentTreatment.commonName) {
-          currentTreatment.commonName = text;
-          update_treatment(currentTreatment);
-        }
-      }
-      onLabelWidthChanged : {
-        medicalNameEntry.nameWidth = commonNameEntry.nameWidth;
-      }
-    }
-
     TextAreaEntry {
       Layout.fillWidth : true
       Layout.leftMargin : 5
@@ -116,6 +105,8 @@ ScrollView {
       required : true
       placeholderText : "Text Area (5-15 Lines)"
       text : currentTreatment ? currentTreatment.description : ""
+      maximumRows : 15
+      minimumRows : 10
       onEditingFinished : {
         if (text != currentTreatment.description) {
           currentTreatment.description = text;
@@ -132,12 +123,13 @@ ScrollView {
       currentIndex : 0
       property var treatmentEquipment: []
       property var allEquipment: []
+      
       ListOfEquipment {
         id : equipmentList
 
         Layout.fillWidth : true
         Layout.leftMargin : 5
-        backend : column.backend
+        backend : root.backend
         onList : {
           equipmentStack.currentIndex = 1;
           refresh_all_equipment()
@@ -236,5 +228,46 @@ ScrollView {
       backend.citationsChanged.connect(refresh_citations);
       backend.equipmentChanged.connect(refresh_equipment);
     }
+  }
+  function update_treatment(treatment) {
+    if (root.backend && treatment) {
+      root.backend.update_treatment(treatment)
+    }
+  }
+  function refresh_equipment() {
+    equipmentStack.treatmentEquipment = []
+    let equipment = currentTreatment.equipment;
+    for (var ii = 0; ii < equipment.length; ++ ii) {
+      equipmentStack.treatmentEquipment.push(equipment_g.make());
+      equipmentStack.treatmentEquipment[equipmentStack.treatmentEquipment.length - 1].assign(equipment[ii]);
+    }
+    equipmentList.model = equipmentStack.treatmentEquipment;
+  }
+  function refresh_all_equipment() {
+    equipmentStack.allEquipment = [];
+    let equipment = root.backend.equipment;
+    for (var ii = 0; ii < equipment.length; ++ ii) {
+      equipmentStack.allEquipment.push(equipment_g.make());
+      equipmentStack.allEquipment[equipmentStack.allEquipment.length - 1].assign(equipment[ii]);
+    }
+    fullEquipmentList.model = equipmentStack.allEquipment;
+  }
+  function refresh_citations() {
+    citationStack.treatmentCitations = []
+    let citations = currentTreatment.citations;
+    for (var ii = 0; ii < citations.length; ++ ii) {
+      citationStack.treatmentCitations.push(citation_g.make());
+      citationStack.treatmentCitations[citationStack.treatmentCitations.length - 1].assign(citations[ii]);
+    }
+    referenceList.model = citationStack.treatmentCitations;
+  }
+  function refresh_all_citations() {
+    citationStack.allCitations = [];
+    let citations = root.backend.citations;
+    for (var ii = 0; ii < citations.length; ++ ii) {
+      citationStack.allCitations.push(citation_g.make());
+      citationStack.allCitations[citationStack.allCitations.length - 1].assign(citations[ii]);
+    }
+    fullReferenceList.model = citationStack.allCitations;
   }
 }

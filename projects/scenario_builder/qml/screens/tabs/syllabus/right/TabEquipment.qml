@@ -14,7 +14,7 @@ ScrollView {
   property int topIndex // topIndex is the index of the top set of 4 tabs
 
   contentWidth : column.width
-  contentHeight : column.height + grid.height
+  contentHeight : column.height
   clip : true
 
   Citation {
@@ -28,57 +28,79 @@ ScrollView {
     }
   }
 
-  function update_equipment(equipment) {
-    if (equipment) {
-      root.backend.update_equipment(equipment)
-    }
-  }
-  function refresh_citations() {
-    citationStack.equipmentCitations = []
-    let citations = currentEquipment.citations;
-    for (var ii = 0; ii < citations.length; ++ ii) {
-      citationStack.equipmentCitations.push(citation_g.make());
-      citationStack.equipmentCitations[citationStack.equipmentCitations.length - 1].assign(citations[ii]);
-    }
-    referenceList.model = citationStack.equipmentCitations;
-  }
-  function refresh_all_citations() {
-    citationStack.allCitations = [];
-    let citations = root.backend.citations;
-    for (var ii = 0; ii < citations.length; ++ ii) {
-      citationStack.allCitations.push(citation_g.make());
-      citationStack.allCitations[citationStack.allCitations.length - 1].assign(citations[ii]);
-    }
-    fullReferenceList.model = citationStack.allCitations;
-  }
-
-  GridLayout {
-    id : grid
-    property alias backend : root.backend
-    width : column.width
-    height : childrenRect.height
-    columns : 2
-    rows : 3
-    TextEntry {
+  ColumnLayout {
+    id : column
+    width : root.width
+    GridLayout {
+      id : grid
       Layout.fillWidth : true
-      Layout.leftMargin : 5
-      Layout.column : 0
-      id : nameEntry
-      label : "Name"
-      placeholderText : "String Field (128 Characters)"
-      text : (currentEquipment) ? currentEquipment.name : ""
-      onEditingFinished : {
-        if (text != currentEquipment.name) {
-          currentEquipment.name = text;
-          update_equipment(currentEquipment);
+      columns : 2
+      TextEntry {
+        Layout.minimumWidth : 2 * root.width / 3
+        Layout.fillWidth : true
+        Layout.leftMargin : 5
+        Layout.column : 0
+        Layout.row : 0
+        id : nameEntry
+        label : "Name"
+        placeholderText : "String Field (128 Characters)"
+        text : (currentEquipment) ? currentEquipment.name : ""
+        onEditingFinished : {
+          if (text != currentEquipment.name) {
+            currentEquipment.name = text;
+            update_equipment(currentEquipment);
+          }
+        }
+      }
+
+      TextAreaEntry {
+        Layout.fillWidth : true
+        Layout.fillHeight : true
+        Layout.leftMargin : 5
+        Layout.column : 0
+        Layout.row : 1
+        // Layout.rowSpan : 2
+        maximumRows : 20
+        minimumRows : 12
+        id : descriptionEntry
+        label : "Description"
+        placeholderText : "Text Area (5-15 Lines)"
+        text : (currentEquipment) ? currentEquipment.description : ""
+        required : true
+        onEditingFinished : {
+          if (text != currentEquipment.description) {
+            currentEquipment.description = text;
+            update_equipment(currentEquipment);
+          }
+        }
+      }
+
+      Image {
+        id : imageView
+        Layout.alignment : Qt.AlignHCenter | Qt.AlignVCenter
+        Layout.fillWidth : true
+        Layout.fillHeight : false
+        Layout.preferredHeight : 150
+        Layout.leftMargin : 5
+        Layout.column : 1
+        Layout.row : 0
+        Layout.rowSpan : 2
+        fillMode : Image.PreserveAspectFit
+        source : "qrc:/img/equipment_placeholder.png"
+      }
+
+      Button {
+        Layout.alignment : Qt.AlignHCenter
+        text : "Browse"
+        Layout.column : 1
+        Layout.row : 2
+        onClicked : { // TODO: Image Logic
         }
       }
     }
-
     TextAreaEntry {
       Layout.fillWidth : true
       Layout.leftMargin : 5
-      Layout.column : 0
       id : summaryEntry
       label : "Summary"
       required : true
@@ -91,53 +113,6 @@ ScrollView {
         }
       }
     }
-
-    TextAreaEntry {
-      Layout.fillWidth : true
-      Layout.leftMargin : 5
-      Layout.column : 0
-      id : descriptionEntry
-      label : "Description"
-      placeholderText : "Text Area (5-15 Lines)"
-      text : (currentEquipment) ? currentEquipment.description : ""
-      required : true
-      onEditingFinished : {
-        if (text != currentEquipment.description) {
-          currentEquipment.description = text;
-          update_equipment(currentEquipment);
-        }
-      }
-    }
-
-    // TextEntry {
-    // Layout.fillWidth : true
-    // Layout.leftMargin : 5
-    // Layout.column : 1
-    // Layout.row : 0
-    // Layout.rowSpan : 3
-    // id : imageEntry
-    // label : "Image"
-    // placeholderText : "String Field (128 Characters )"
-    // text : (currentEquipment) ? currentEquipment.image : ""
-    // onEditingFinished : {
-    //     if (text != currentEquipment.image) {
-    //       currentEquipment.image = text;
-    //       update_equipment(currentEquipment);
-    //     }
-    // }
-    // }
-    Image {
-      Layout.fillWidth : true
-      Layout.leftMargin : 5
-      Layout.column : 1
-      Layout.row : 0
-      Layout.rowSpan : 3
-      id : imageView
-      source : "qrc:/img/equipment_placeholder.png"
-    }
-  }
-  ColumnLayout {
-    id : column
     StackLayout {
       id : citationStack
       Layout.fillWidth : true
@@ -191,7 +166,6 @@ ScrollView {
       }
     }
   }
-
   onCurrentEquipmentChanged : {
     refresh_citations();
   }
@@ -199,5 +173,28 @@ ScrollView {
     if (backend) {
       backend.citationsChanged.connect(refresh_citations);
     }
+  }
+  function update_equipment(equipment) {
+    if (equipment) {
+      root.backend.update_equipment(equipment)
+    }
+  }
+  function refresh_citations() {
+    citationStack.equipmentCitations = []
+    let citations = currentEquipment.citations;
+    for (var ii = 0; ii < citations.length; ++ ii) {
+      citationStack.equipmentCitations.push(citation_g.make());
+      citationStack.equipmentCitations[citationStack.equipmentCitations.length - 1].assign(citations[ii]);
+    }
+    referenceList.model = citationStack.equipmentCitations;
+  }
+  function refresh_all_citations() {
+    citationStack.allCitations = [];
+    let citations = root.backend.citations;
+    for (var ii = 0; ii < citations.length; ++ ii) {
+      citationStack.allCitations.push(citation_g.make());
+      citationStack.allCitations[citationStack.allCitations.length - 1].assign(citations[ii]);
+    }
+    fullReferenceList.model = citationStack.allCitations;
   }
 }

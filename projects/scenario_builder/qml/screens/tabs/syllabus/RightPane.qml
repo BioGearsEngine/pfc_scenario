@@ -31,7 +31,7 @@ Flickable {
     anchors.fill : parent
 
     Rectangle {
- 
+
       Layout.fillWidth : true
       Layout.rightMargin : 5
       border.color : 'black'
@@ -46,25 +46,21 @@ Flickable {
     }
     Rectangle {
       id : traumaPane
-      
+
       Layout.fillWidth : true
       Layout.rightMargin : 5
       border.color : 'black'
       border.width : 1
-      ScrollView {
-        anchors.fill : parent
-        //clip : true
-        TabTraumas {
-          id : traumas
-          width : Math.max(traumaPane.width, implicitWidth)
-          height : Math.max(traumaPane.height, implicitHeight)
-          backend : root.backend
-
-        }
+      TabTraumas {
+        id : traumas
+        backend : root.backend
+        width : parent.width
+        height : parent.height
+        topIndex : root.topIndex
       }
     }
     Rectangle {
-      
+
       Layout.fillWidth : true
       Layout.rightMargin : 5
       border.color : 'black'
@@ -74,12 +70,12 @@ Flickable {
         backend : root.backend
         width : parent.width
         height : parent.height
-        
+
         topIndex : root.topIndex
       }
     }
     Rectangle {
- 
+
       Layout.fillWidth : true
       Layout.rightMargin : 5
       border.color : 'black'
@@ -89,7 +85,7 @@ Flickable {
         backend : root.backend
         width : parent.width
         height : parent.height
-       
+
         topIndex : root.topIndex
       }
     }

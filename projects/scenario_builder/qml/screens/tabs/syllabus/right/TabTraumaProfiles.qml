@@ -156,9 +156,9 @@ ColumnLayout {
   }
   onBackendChanged : {
     if (backend) {
-      backend.traumaMapsChanged.connect(refresh_traumas);
-      backend.onTraumasChanged.connect(refresh_traumas);
-      backend.onTraumaProfileChanged.connect(refresh_traumas);
+      backend.traumaProfilesChanged.connect(refresh_traumas);
+      backend.traumasChanged.connect(refresh_traumas);
+      backend.equipmentChanged.connect(refresh_traumas);
     }
   }
 }
