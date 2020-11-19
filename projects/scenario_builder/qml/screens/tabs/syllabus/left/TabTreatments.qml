@@ -55,7 +55,7 @@ ColumnLayout {
         root.backend.update_treatment(treatment_g);
       }
       onSecondButtonClicked : {
-        if ( ! treatmentList.treatmentDefinitions || treatmentList.treatmentDefinitions.length < 2) {
+        if (!treatmentList.treatmentDefinitions || treatmentList.treatmentDefinitions.length < 2) {
           return
         }
         treatment_g.clear();

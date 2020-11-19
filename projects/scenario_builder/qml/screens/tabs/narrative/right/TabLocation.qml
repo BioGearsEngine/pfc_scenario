@@ -63,10 +63,10 @@ Rectangle {
     }
 
   }
- //   onBackendChanged : {
-  //   if (backend) {
+  // onBackendChanged : {
+  // if (backend) {
   //     backend.citationsChanged.connect(refresh_citations);
   //     backend.equipmentChanged.connect(refresh_equipment);
-  //   }
-  // } 
+  // }
+  // }
 }
