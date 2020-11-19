@@ -362,6 +362,8 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM traumas WHERE medical_name = :medical_name ORDER BY medical_name; )";
   constexpr auto select_trauma_by_common_name
     = R"( SELECT * FROM traumas WHERE common_name = :common_name ORDER BY common_name; )";
+  constexpr auto select_trauma_by_uuid
+    = R"( SELECT * FROM traumas WHERE uuid = :uuid ORDER BY medical_name; )";
   constexpr auto insert_or_update_traumas
     = R"( INSERT INTO traumas
           (medical_name, uuid, common_name, description, citations, lower_bound, upper_bound)
@@ -425,6 +427,8 @@ inline namespace sqlite3 {
     = R"( DELETE FROM trauma_profiles WHERE name = :name; )";
   constexpr auto select_trauma_profile_by_name
     = R"( SELECT * FROM trauma_profiles WHERE name = :name ORDER BY name; )";
+  constexpr auto select_trauma_profile_by_uuid
+    = R"( SELECT * FROM trauma_profiles WHERE uuid = :uuid ORDER BY name; )";
   constexpr auto insert_or_update_trauma_profiles
     = R"( INSERT INTO trauma_profiles
           (name, uuid, description, traumas, locations, severities)

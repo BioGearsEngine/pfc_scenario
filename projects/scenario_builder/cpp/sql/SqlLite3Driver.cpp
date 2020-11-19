@@ -1352,8 +1352,11 @@ bool SQLite3Driver::select_trauma(Trauma* trauma) const
     } else if (!trauma->common_name.isEmpty()) {
       query.prepare(sqlite3::select_trauma_by_common_name);
       query.bindValue(":common_name", trauma->common_name);
+    } else if (!trauma->uuid.isEmpty()) {
+      query.prepare(sqlite3::select_trauma_by_uuid);
+      query.bindValue(":uuid", trauma->uuid);
     } else {
-      qWarning() << "Provided Trauma has no id or name one is required";
+      qWarning() << "Provided Trauma has no id, name, or uuid and one is required";
       return false;
     }
     if (query.exec()) {
@@ -1505,8 +1508,11 @@ bool SQLite3Driver::select_trauma_profile(TraumaProfile* set) const
     } else if (!set->name.isEmpty()) {
       query.prepare(sqlite3::select_trauma_profile_by_name);
       query.bindValue(":name", set->name);
+    } else if (!set->uuid.isEmpty()) {
+      query.prepare(sqlite3::select_trauma_profile_by_uuid);
+      query.bindValue(":uuid", set->uuid);
     } else {
-      qWarning() << "Provided Trauma Profile has no id or name one is required";
+      qWarning() << "Provided Trauma Profile has no id, name, or uuid and one is required";
       return false;
     }
     if (query.exec()) {

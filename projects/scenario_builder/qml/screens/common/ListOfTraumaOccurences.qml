@@ -12,7 +12,7 @@ ListOfForm {
   property TraumaProfile profile
 
   signal traumaModified(int index, TraumaOccurence occurence)
-  signal traumaAdded(int index, TraumaOccurence occurence)
+  signal traumaAdded(int index, Trauma newTrauma)
   signal traumaRemoved(int index, TraumaOccurence occurence)
 
   label : "Trauma"
@@ -182,10 +182,10 @@ ListOfForm {
   }
   onRemoved : {
     if (root.model[index]) {
-      self.assign(root.model[index]);
+      //self.assign(root.model[index]);
       root.model.splice(index);
       current = Math.max(0, index - 1);
-      root.traumaremoved(index, self);
+      root.traumaRemoved(index, root.model[index]);
     }
   }
 }

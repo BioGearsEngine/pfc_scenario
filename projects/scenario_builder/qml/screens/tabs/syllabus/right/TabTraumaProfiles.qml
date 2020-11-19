@@ -101,12 +101,12 @@ ColumnLayout {
       }
       onTraumaAdded : {
         currentProfile.traumas.push(occurence_g.make());
-        currentProfile.traumas[currentProfile.traumas.length - 1].assign(occurence);
+        currentProfile.traumas[currentProfile.traumas.length - 1].trauma.assign(traumaAdded);
         update_trauma_profile(currentProfile);
         refresh_traumas()
       }
       onTraumaRemoved : {
-        currentProfile.removeTrauma(index);
+        currentProfile.RemoveTrauma(index);
         update_trauma_profile(currentProfile);
         refresh_traumas()
       }

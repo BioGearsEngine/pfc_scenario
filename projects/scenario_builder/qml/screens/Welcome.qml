@@ -28,7 +28,7 @@ Page {
   Rectangle {
     id : mainArea
     color : "transparent"
-    border.color : "steelblue"
+    border.color : "#34495e"
     width : parent.width * .75
     height : parent.height * .90
     anchors.centerIn : parent
@@ -37,39 +37,48 @@ Page {
       id : mainColumnLayout
       anchors.fill : parent
       anchors.centerIn : parent
-      anchors.margins : 25
+      anchors.margins : 10
       spacing : 15
 
-      Text {
-        Layout.alignment : Qt.AlignTop | Qt.AlignHCenter
-
-        color : "#df4949"
-        text : "Sustain"
-        font.italic : true
-        font.bold : true
-        font.underline : false
-        font.pointSize : 24
-
-        Image {
-          anchors.verticalCenter : parent.verticalCenter
-          anchors.right : parent.left
-          width : 100
+	  Image {
+		  id : logoBackground
+          Layout.alignment : Qt.AlignTop | Qt.AlignHCenter
+		  opacity : 0.85
+		  //anchors.verticalCenter : parent.verticalCenter
+          //anchors.right : parent.left
+          width : 500
           fillMode : Image.PreserveAspectFit 
           clip : false
           source : 'qrc:/img/logo.png'
-        }
-      }
+        
+		Text {
+			id : sustainText
+			//Layout.alignment : Qt.AlignTop | Qt.AlignHCenter
+			anchors.horizontalCenter : logoBackground.horizontalCenter
+			anchors.bottom : scenarioBuilderText.top
+			color : "#34495e"
+			text : "Sustain"
+			font.italic : true
+			font.bold : true
+			font.underline : false
+			font.pointSize : 24
 
-      Text {
-        Layout.alignment : Qt.AlignTop | Qt.AlignHCenter
+			
+		  }
 
-        color : "#df4949"
-        text : "Scenario Builder"
-        font.italic : true
-        font.bold : true
-        font.underline : true
-        font.pointSize : 24
-      }
+		  Text {
+			id : scenarioBuilderText
+			//Layout.alignment : Qt.AlignTop | Qt.AlignHCenter
+			anchors.centerIn : logoBackground
+			//anchors.top : sustainText.bottom
+			color : "#34495e"
+			text : "Scenario Builder"
+			font.italic : true
+			font.bold : true
+			font.underline : true
+			font.pointSize : 24
+		  }
+	  }
 
       Rectangle {
         id : getting_started_rect

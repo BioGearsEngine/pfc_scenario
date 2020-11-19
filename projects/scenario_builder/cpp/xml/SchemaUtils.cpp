@@ -717,10 +717,11 @@ namespace schema {
       for (auto& current_trauma : trauma_profile.injuries().trauma()) {
         trauma = new TraumaOccurence(&temp);
         trauma->fk_trauma->uuid;
-        _db.select_trauma(trauma->fk_trauma);
+        //trauma->fk_trauma->uuid = current_trauma->id();
         trauma->location = current_trauma.location().c_str();
         trauma->severity = current_trauma.severity().c_str();
         trauma->description = current_trauma.description().c_str();
+        _db.select_trauma(trauma->fk_trauma);
         temp.traumas.push_back(trauma);
       }
 
