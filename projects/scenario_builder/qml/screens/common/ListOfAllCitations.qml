@@ -24,7 +24,7 @@ ListOfAllForm {
 
   delegate : Rectangle {
     id : citation
-    color : 'transparent'
+    color : Material.color(Material.LightGreen, Material.Shade100)
     border.color : "steelblue"
     height : 30
     anchors {
@@ -56,7 +56,7 @@ ListOfAllForm {
       activeFocusOnPress : false
       hoverEnabled : false
       enabled : false
-      color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
+      color : enabled ? Material.color(Material.BlueGrey, Material.Shade900) : Material.color(Material.BlueGrey, Material.Shade500)
       onEditingFinished : {
         update_citation(root.model[index])
       }
@@ -71,7 +71,7 @@ ListOfAllForm {
       activeFocusOnPress : false
       hoverEnabled : false
       enabled : false
-      color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
+      color : enabled ? Material.color(Material.BlueGrey, Material.Shade900) : Material.color(Material.BlueGrey, Material.Shade500)
       onEditingFinished : {
         update_citation(root.model[index])
       }
@@ -87,7 +87,7 @@ ListOfAllForm {
       activeFocusOnPress : false
       hoverEnabled : false
       enabled : false
-      color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
+      color : enabled ? Material.color(Material.BlueGrey, Material.Shade900) : Material.color(Material.BlueGrey, Material.Shade500)
       onEditingFinished : {
         update_citation(root.model[index])
       }
@@ -105,7 +105,7 @@ ListOfAllForm {
       activeFocusOnPress : false
       hoverEnabled : false
       enabled : false
-      color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
+      color : enabled ? Material.color(Material.BlueGrey, Material.Shade900) : Material.color(Material.BlueGrey, Material.Shade500)
       onEditingFinished : {
         update_citation(root.model[index])
       }

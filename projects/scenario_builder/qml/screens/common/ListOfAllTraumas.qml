@@ -26,7 +26,7 @@ ListOfAllForm {
 
   delegate : Rectangle {
     id : trauma
-    color : 'transparent'
+    color : Material.color(Material.Pink, Material.Shade100)
     border.color : "steelblue"
     height : trauma_medical_name_text.height + trauma_description_entry.height
     anchors {
@@ -49,25 +49,35 @@ ListOfAllForm {
     }
 
 
-    Text {
+    TextField {
       id : trauma_medical_name_text
       anchors.left : parent.left
-      anchors.leftMargin : 5
+	  anchors.right : parent.right
+      anchors.leftMargin : 10
       // anchors.verticalCenter  : parent.verticalCenter
       width : 100
       font.weight : Font.Bold
-      font.pointSize : 8
+      font.pointSize : 10
+	  readOnly : true
+      activeFocusOnPress : false
+      hoverEnabled : false
+      enabled : false
       text : (root.model) ? root.model[index].medicalName : ""
-      color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
+      color : enabled ? Material.color(Material.BlueGrey, Material.Shade900) : Material.color(Material.BlueGrey, Material.Shade500)
+	  
+	  onEditingFinished : {
+        update_trauma(root.model[index])
+      }
     }
 
     TextField {
       id : trauma_description_entry
       anchors.left : parent.left
+	  anchors.right : parent.right
       anchors.top : trauma_medical_name_text.bottom
       anchors.topMargin : 5
-      anchors.leftMargin : 5
-      font.pointSize : 8
+      anchors.leftMargin : 10
+      font.pointSize : 10
 
       text : (root.model) ? root.model[index].description : ""
       placeholderText : "Unknown"
@@ -76,7 +86,7 @@ ListOfAllForm {
       activeFocusOnPress : false
       hoverEnabled : false
       enabled : false
-      color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
+      color : enabled ? Material.color(Material.BlueGrey, Material.Shade900) : Material.color(Material.BlueGrey, Material.Shade500)
       onEditingFinished : {
         update_trauma(root.model[index])
       }
@@ -84,7 +94,28 @@ ListOfAllForm {
 
     states : [State {
         name : "Selected"
-
+		
+		PropertyChanges {
+        target : trauma_medical_name_text;
+        readOnly : false
+      }
+      PropertyChanges {
+        target : trauma_medical_name_text;
+        activeFocusOnPress : true
+      }
+      PropertyChanges {
+        target : trauma_medical_name_text;
+        hoverEnabled : true
+      }
+      PropertyChanges {
+        target : trauma_medical_name_text;
+        enabled : true
+      }
+      PropertyChanges {
+        target : trauma_medical_name_text;
+        mouseSelectionMode : TextInput.SelectCharacters
+      }
+		
         PropertyChanges {
           target : trauma_description_entry;
           readOnly : false

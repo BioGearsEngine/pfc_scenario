@@ -178,14 +178,14 @@ ListOfForm {
     var likely_id = root.backend.nextID(SQLBackend.TRAUMAS) + 1;
     self.clear(likely_id);
     root.backend.update_trauma(self);
-    root.traumaAdded(root.model.length, self)
+    root.traumaAdded(root.model.length, self);
   }
   onRemoved : {
     if (root.model[index]) {
       self.assign(root.model[index]);
       root.model.splice(index);
       current = Math.max(0, index - 1);
-      root.traumaremoved(index, self)
+      root.traumaremoved(index, self);
     }
   }
 }
