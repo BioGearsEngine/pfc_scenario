@@ -64,7 +64,7 @@ ColumnLayout {
     }
   }
 
-  TextEntry {
+  TextAreaEntry {
     Layout.fillWidth : true
     Layout.leftMargin : 5
     id : descriptionEntry
@@ -136,22 +136,30 @@ ColumnLayout {
       }
     }
   }
-
-  TextEntry {
+  RowLayout {
+    id : physiologyEntryRow
     Layout.fillWidth : true
     Layout.leftMargin : 5
-    id : physiologyEntry
-    label : "Physiology File"
-    placeholderText : "String Field (128 Characters)"
-    text : (currentProfile && currentProfile.physiologyTree.length > 1) ? currentProfile.physiologyTree[0] : ""
-    onEditingFinished : {
-      if (currentProfile.physiologyTree.length == 0) {
-        currentProfile.physiologyTree.push("")
+
+    TextEntry {
+      Layout.preferredWidth : 4 * root.width / 5.0
+      id : physiologyEntry
+      label : "Physiology File"
+      placeholderText : "String Field (128 Characters)"
+      text : (currentProfile && currentProfile.physiologyTree.length > 1) ? currentProfile.physiologyTree[0] : ""
+      onEditingFinished : {
+        if (currentProfile.physiologyTree.length == 0) {
+          currentProfile.physiologyTree.push("")
+        }
+        if (text != currentProfile.physiologyTree[0]) {
+          currentProfile.physiologyTree[0] = text;
+          update_trauma_profile(currentProfile);
+        }
       }
-      if (text != currentProfile.physiologyTree[0]) {
-        currentProfile.physiologyTree[0] = text;
-        update_trauma_profile(currentProfile);
-      }
+    }
+    Button {
+      id : physiologyButton
+      text : "Browse"
     }
   }
   onBackendChanged : {
@@ -160,5 +168,8 @@ ColumnLayout {
       backend.traumasChanged.connect(refresh_traumas);
       backend.equipmentChanged.connect(refresh_traumas);
     }
+  }
+  onCurrentProfileChanged : {
+    refresh_traumas()
   }
 }

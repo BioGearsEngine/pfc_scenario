@@ -570,7 +570,7 @@ auto Serializer::generate_pfc_stream() const -> std::stringstream
 
   //4. Populate <trauma_sets>
   for (auto profiles : _db->trauma_profiles()) {
-    pfc_scenario.trauma_sets().trauma_profile().push_back(PFC::make_trauma_profile(profiles, _db));
+    pfc_scenario.trauma_profiles().trauma_profile().push_back(PFC::make_trauma_profile(profiles, _db));
   }
   //5. <syllabus>
   //5.1 <syllabus><learning_objective>

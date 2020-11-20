@@ -167,7 +167,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
   <xs:complexType name="trauma">
     <xs:annotation>
       <xs:documentation>
-        A PFC representation of a simple trauma. Injuries are associated to a Injury-Profile where severity and trauma-site are applied.
+        A PFC representation of a simple trauma. traumas are associated to a Injury-Profile where severity and trauma-site are applied.
         An trauma must have a medical-name, but can also have a common-name for use in documentation. It is good to provide a list of citations
         which describe the trauma in more traditional terms in the references section, but is not required.
 
@@ -216,7 +216,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
       <xs:documentation>
         Numerical range of two doubles with an optional median value and unit type. The trauma definition mostly uses this for documentation.
         Scenario UIs may try to use it for visualization of trauma sets, but that is implementation defined. A physiology engine might use
-        severity to set its own internal insults/injuries where valid values may be [0.0,1.0], [0.0, .5 l/s]
+        severity to set its own internal insults/traumas where valid values may be [0.0,1.0], [0.0, .5 l/s]
       </xs:documentation>
     </xs:annotation>
     <xs:all>
@@ -381,22 +381,22 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
   <xs:complexType name="trauma-profile">
     <xs:annotation>
       <xs:documentation>
-        A collection of Injuries which is intended to act as a boot strap medical record for an actor in a medical-scenario.
+        A collection of traumas which is intended to act as a boot strap medical record for an actor in a medical-scenario.
         Injury profiles can be appended either to an actor initially or mid scenario to act like a contracted wound. Injury in this
         case may include medical conditions or diagnosis, but will generally be a combat casualty wound.
 
         Fields:
         ID: xs:string : Identification
-        Name: xs:string : Name of the collection of injuries.
+        Name: xs:string : Name of the collection of traumas.
         Physiology State: xs:string : The condition or state of the body or bodily functions.
-        Injuries: trauma-occurence-list : List of the injuries present in the profile.
+        traumas: trauma-occurence-list : List of the traumas present in the profile.
         Treatments: treatment-plan-ref-list : Treatments that can be used to treat the trauma profile.
 
         Example:
         ID: 0004
         Name: Blunt Force Trauma
         Physiology State: Awake and aware
-        Injuries: Contusions, abrasions, lacerations, bone fractures, internal hemorrhages
+        traumas: Contusions, abrasions, lacerations, bone fractures, internal hemorrhages
         Treatments: Compression, disinfection, plaster cast, splint, intravenous injection
       </xs:documentation>
     </xs:annotation>
@@ -404,7 +404,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
       <xs:element name="id" type="xs:string" minOccurs="1"/>
       <xs:element name="name" type="xs:string" minOccurs="1"/>
       <xs:element name="physiology-state" type="xs:string" minOccurs="0"/>
-      <xs:element name="injuries" type="trauma-occurence-list" minOccurs="1"/>
+      <xs:element name="traumas" type="trauma-occurence-list" minOccurs="1"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="trauma-profile-ref-list">
@@ -451,7 +451,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
       </xs:documentation>
     </xs:annotation>
     <xs:all>
-      <xs:element name="id" type="xs:string" minOccurs="1"/>
+      <xs:element name="trauma-ref" type="xs:string" minOccurs="1"/>
       <xs:element name="location" type="xs:string" minOccurs="1"/>
       <xs:element name="description" type="xs:string" minOccurs="1"/>
       <xs:element name="severity" type="xs:string" minOccurs="1"/>
@@ -823,7 +823,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
     <xs:restriction base="xs:string">
       <xs:enumeration value="LOW">
         <xs:annotation>
-          <xs:documentation>Low fidelity implementations are intended for traditional medical simulators which use live actors are need only to know the high level details like initial injuries and placment of equipment in the scene.</xs:documentation>
+          <xs:documentation>Low fidelity implementations are intended for traditional medical simulators which use live actors are need only to know the high level details like initial traumas and placment of equipment in the scene.</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value="MEDIUM">

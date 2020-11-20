@@ -64,8 +64,8 @@ namespace schema {
   //-----------------------------------------------------------------------------
   auto find_injury(std::string UUID, std::unique_ptr<::pfc::schema::ScenarioSchema>& scenario_schema, pfc::SQLite3Driver& _db) -> std::string
   {
-    auto& injuries = scenario_schema->trauma_definitions().trauma();
-    for (auto& ref : injuries) {
+    auto& traumas = scenario_schema->trauma_definitions().trauma();
+    for (auto& ref : traumas) {
       if (ref.id() == UUID) { //ref.uuid() == UUID) {
         Trauma trauma;
         trauma.medical_name = ref.medical_name().c_str();
@@ -148,9 +148,9 @@ namespace schema {
     return std::make_unique<schema::ScenarioSchema::treatment_plans_type>();
   }
   //-------------------------------------------------------------------------------
-  auto PFC::make_trauma_sets() -> std::unique_ptr<ScenarioSchema::trauma_sets_type>
+  auto PFC::make_trauma_sets() -> std::unique_ptr<ScenarioSchema::trauma_profiles_type>
   {
-    return std::make_unique<schema::ScenarioSchema::trauma_sets_type>();
+    return std::make_unique<schema::ScenarioSchema::trauma_profiles_type>();
   }
   //-------------------------------------------------------------------------------
   auto PFC::make_syllabus() -> std::unique_ptr<ScenarioSchema::syllabus_type>
@@ -184,16 +184,16 @@ namespace schema {
     num_range.numeric_range(std::make_unique<pfc::schema::numeric_range>(input->lower_bound, input->upper_bound));
 
     auto trauma = std::make_unique<pfc::schema::trauma>(
-      std::make_unique<pfc::schema::trauma::id_type>("Injury_" + std::to_string(input->id)),
-      std::make_unique<pfc::schema::trauma::medical_name_type>(input->medical_name.toStdString()),
+      std::make_unique<pfc::schema::trauma::id_type>(make_string(input->uuid)),
+      std::make_unique<pfc::schema::trauma::medical_name_type>(make_string(input->medical_name)),
       std::make_unique<pfc::schema::citation_ref_list>(),
-      std::make_unique<pfc::schema::trauma::description_type>(input->description.toStdString()),
+      std::make_unique<pfc::schema::trauma::description_type>(make_string(input->description)),
       std::make_unique<pfc::schema::trauma::severity_range_type>(num_range),
       std::make_unique<pfc::schema::trauma::treatments_type>());
-    trauma->common_name(input->common_name.toStdString());
+    trauma->common_name(make_string(input->common_name));
 
     for (auto citation : input->citations) {
-      trauma->citations().citation_ref().push_back(citation->uuid.toStdString());
+      trauma->citations().citation_ref().push_back(make_string(citation->uuid));
     }
 
     return trauma;
@@ -333,7 +333,7 @@ namespace schema {
     auto author_list = schema::citation::authors_sequence {};
     for (auto& token : name_list.split(';')) {
       if (!token.isEmpty()) {
-        author_list.push_back(token.toStdString());
+        author_list.push_back(make_string(token));
       }
     }
     return author_list;
@@ -380,7 +380,7 @@ namespace schema {
     for (auto i = 0; i < size; ++i) {
       auto name = (names[i].isEmpty() ? "" : names[i].split(":").at(0)); //TODO: Verify split doesn't need a guard
       auto value = (values[i].isEmpty() ? "" : values[i]);
-      list->value().push_back(std::make_unique<schema::property_value>(name.toStdString(), value.toStdString()));
+      list->value().push_back(std::make_unique<schema::property_value>(make_string(name), make_string(value)));
     }
     return list;
   }
@@ -393,10 +393,10 @@ namespace schema {
                                                                    make_equipment_ref_list(input->equipment, _db),
                                                                    make_medical_reference_list());
 
-    treatment->common_name(input->common_name.toStdString());
+    treatment->common_name(make_string(input->common_name));
     treatment->references().citations(make_citation_ref_list(input->citations, _db));
     treatment->references().cpgs(make_cpg_ref_list(input->cpgs, _db));
-    treatment->medical_name(input->medical_name.toStdString());
+    treatment->medical_name(make_string(input->medical_name));
 
     return treatment;
   }
@@ -417,19 +417,19 @@ namespace schema {
   {
 
     auto citation = std::make_unique<pfc::schema::citation>(make_string(input->uuid),
-                                                            input->title.toStdString(),
-                                                            input->year.toStdString());
+                                                            make_string(input->title),
+                                                            make_string(input->year));
     citation->authors(make_authors_list(input->authors));
-    citation->key().set(input->key.toStdString());
+    citation->key().set(make_string(input->key));
     return citation;
   }
   //-----------------------------------------------------------------------------
   auto PFC::make_location(Location const* const input, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::location>
   {
-    auto location = std::make_unique<pfc::schema::location>(  schema::make_string(input->uuid),
-                                                              schema::make_string(input->name),
-                                                              schema::make_string(input->description),
-                                                              schema::make_string(input->environment));
+    auto location = std::make_unique<pfc::schema::location>(schema::make_string(input->uuid),
+                                                            schema::make_string(input->name),
+                                                            schema::make_string(input->description),
+                                                            schema::make_string(input->environment));
     return location;
   }
   //-----------------------------------------------------------------------------
@@ -461,7 +461,7 @@ namespace schema {
                                                               make_citation_ref_list(input->citations, _db),
                                                               make_equipment_properties_list(input->properties));
     equipment->type(input->type);
-    equipment->image(input->image.toStdString());
+    equipment->image(make_string(input->image));
 
     return equipment;
   }
@@ -473,7 +473,7 @@ namespace schema {
                                                             make_string(input->name),
                                                             make_trauma_occurance_list(input->traumas, _db));
     if (input->physiologyTree.size() > 0) {
-      profile->physiology_state(input->physiologyTree[0].toStdString());
+      profile->physiology_state(make_string(input->physiologyTree[0]));
     }
     return profile;
   }
@@ -482,8 +482,11 @@ namespace schema {
   {
 
     Objective objRef;
-    objRef.id = input->fk_objective->id;
-    _db->select_objective(&objRef);
+
+    if (! (input->fk_objective->id == -1)) {
+      objRef.id = input->fk_objective->id;
+      _db->select_objective(&objRef);
+    }
     auto assessment = std::make_unique<schema::assessment>(make_string(input->uuid),
                                                            make_string(objRef.uuid),
                                                            make_string(input->name),
@@ -707,17 +710,16 @@ namespace schema {
   //-----------------------------------------------------------------------------
   auto PFC::load_trauma_profiles(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<::pfc::schema::ScenarioSchema>
   {
-    auto trauma_sets = scenario_schema->trauma_sets();
+    auto trauma_sets = scenario_schema->trauma_profiles();
     auto trauma_profiles = trauma_sets.trauma_profile();
     for (auto trauma_profile : trauma_profiles) {
       TraumaProfile temp;
       temp.uuid = QString::fromStdString(trauma_profile.id());
       temp.name = QString::fromStdString(trauma_profile.name());
       TraumaOccurence* trauma;
-      for (auto& current_trauma : trauma_profile.injuries().trauma()) {
+      for (auto& current_trauma : trauma_profile.traumas().trauma()) {
         trauma = new TraumaOccurence(&temp);
-        trauma->fk_trauma->uuid;
-        //trauma->fk_trauma->uuid = current_trauma->id();
+        trauma->fk_trauma->uuid = current_trauma.trauma_ref().c_str();
         trauma->location = current_trauma.location().c_str();
         trauma->severity = current_trauma.severity().c_str();
         trauma->description = current_trauma.description().c_str();
@@ -822,7 +824,7 @@ namespace schema {
       }
 
       LocationMap dbLocationMap;
-      if (!_db.update_location_in_scene(&temp,&temp_location)) {
+      if (!_db.update_location_in_scene(&temp, &temp_location)) {
         wasSuccessful = false;
         return scenario_schema;
       }

@@ -24,6 +24,49 @@ CrossReferenceForm {
     trauma_id : -1
   }
 
+  property var notification :     Component {
+    id : notifierComponent
+    Rectangle {
+      id: notifierRect
+      property string message 
+      property string header : "Error" 
+      height : 100
+      width :  body.width + 50
+      color : "lightslategrey"
+      opacity: 1.0
+      visible: false;
+      radius : 5
+      Rectangle {
+        color : "white"
+        anchors.left : parent.left
+        anchors.right : parent.right
+        height : title.height
+        Text {
+          id: title
+          text : header
+          font.bold: true
+          font.pixelSize : 15
+        }
+      }
+      Text {
+        id : body
+        text : message
+        anchors.centerIn : parent
+        font.pixelSize : 25
+      }
+      Timer {
+        id: opacityTimer
+        interval: 250; running: true; repeat: true
+        onTriggered: {
+          parent.opacity = parent.opacity - .1
+          if ( parent.opacity < 0.1 ) {
+            parent.destroy()
+          }
+        }
+      }
+    }
+  }
+
   model : ListModel {}
 
   delegate : Rectangle {
@@ -52,7 +95,7 @@ CrossReferenceForm {
       width : 100
       font.weight : Font.Bold
       font.pointSize : 8
-      text : (root.model) ? root.model[index].trauma.medicalName : ""
+      text : (root.model[index]) ? root.model[index].trauma.medicalName : ""
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
     }
 
@@ -71,7 +114,7 @@ CrossReferenceForm {
       anchors.leftMargin : -5
       font.pointSize : 8
 
-      text : (root.model) ? root.model[index].location : "Unknown"
+      text : (root.model[index]) ? root.model[index].location : "Unknown"
       placeholderText : "Unknown"
 
       readOnly : false
@@ -80,7 +123,7 @@ CrossReferenceForm {
       enabled : false
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       onEditingFinished : {
-        root.model[index].location = text
+        root.model[index].location = text ;
         traumaModified(index, root.model[index])
       }
     }
@@ -100,67 +143,43 @@ CrossReferenceForm {
       anchors.leftMargin : -5
       font.pointSize : 8
 
-      text : (root.model) ? "%1".arg(root.model[index].severity) : "0.0"
+      text : (root.model[index]) ? "%1".arg(root.model[index].severity) : "0.0"
       placeholderText : "Severity Value"
       validator : DoubleValidator {
-        bottom : (root.model) ? root.model[index].trauma.min : 0.0
-        top : (root.model) ? root.model[index].trauma.max : 1.0
+        bottom : (root.model[index]) ? root.model[index].trauma.min : 0.0
+        top : (root.model[index]) ? root.model[index].trauma.max : 1.0
       }
 
+      onTextChanged : {
+       if (root.model[index] && !acceptableInput) {
+          showReasonForFailure(parent, "Severity must be between %1 and %2".arg(root.model[index].trauma.min).arg(root.model[index].trauma.max))
+        } 
+      }
       readOnly : false
       activeFocusOnPress : false
       hoverEnabled : false
       enabled : false
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       onEditingFinished : {
-        root.model[index].severity = "%1".arg(text)
-        traumaModified(index, root.model[index])
+          root.model[index].severity = "%1".arg(text);
+          traumaModified(index, root.model[index])        
       }
     }
 
+
     states : [State {
         name : "Selected"
-        PropertyChanges {
-          target : trauma_severity_entry;
-          readOnly : false
-        }
-        PropertyChanges {
-          target : trauma_severity_entry;
-          activeFocusOnPress : true
-        }
-        PropertyChanges {
-          target : trauma_severity_entry;
-          hoverEnabled : true
-        }
-        PropertyChanges {
-          target : trauma_severity_entry;
-          enabled : true
-        }
-        PropertyChanges {
-          target : trauma_severity_entry;
-          mouseSelectionMode : TextInput.SelectCharacters
-        }
+        PropertyChanges { target : trauma_severity_entry; readOnly : false }
+        PropertyChanges { target : trauma_severity_entry; activeFocusOnPress : true }
+        PropertyChanges { target : trauma_severity_entry; hoverEnabled : true }
+        PropertyChanges { target : trauma_severity_entry; enabled : true }
+        PropertyChanges { target : trauma_severity_entry; mouseSelectionMode : TextInput.SelectCharacters }
 
-        PropertyChanges {
-          target : trauma_location_entry;
-          readOnly : false
-        }
-        PropertyChanges {
-          target : trauma_location_entry;
-          activeFocusOnPress : true
-        }
-        PropertyChanges {
-          target : trauma_location_entry;
-          hoverEnabled : true
-        }
-        PropertyChanges {
-          target : trauma_location_entry;
-          enabled : true
-        }
-        PropertyChanges {
-          target : trauma_location_entry;
-          mouseSelectionMode : TextInput.SelectCharacters
-        }
+        PropertyChanges { target : trauma_location_entry; readOnly : false }
+        PropertyChanges { target : trauma_location_entry; activeFocusOnPress : true }
+        PropertyChanges { target : trauma_location_entry; hoverEnabled : true }
+        PropertyChanges { target : trauma_location_entry; enabled : true }
+        PropertyChanges { target : trauma_location_entry; mouseSelectionMode : TextInput.SelectCharacters }
       }
     ]
 
@@ -182,11 +201,13 @@ CrossReferenceForm {
     root.traumaAdded(root.model.length, self);
   }
   onRemoved : {
-    if (root.model[index]) {
-      //self.assign(root.model[index]);
+    if (root.model[index]) { // self.assign(root.model[index]);
       root.model.splice(index);
       current = Math.max(0, index - 1);
       root.traumaRemoved(index, root.model[index]);
     }
+  }
+  function showReasonForFailure(anchor, message){
+     notifierComponent.createObject(anchor, { "visible" : true , "anchors.top" : anchor.bottom  , "message" : message, z : 200, dim: false})
   }
 }
