@@ -72,8 +72,8 @@ void Trauma::clear(int index)
 {
   id = -1;
   uuid.clear();
-  common_name = QString("New Trauma:%1").arg(index);
-  medical_name = QString("New Trauma:%1").arg(index);
+  common_name = QString(" New Trauma:%1").arg(index);
+  medical_name = QString(" New Trauma:%1").arg(index);
   description = QString("Undefined trauma %1.").arg(index);
   qDeleteAll(citations);
   citations.clear();

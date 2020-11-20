@@ -70,7 +70,7 @@ void Objective::clear(int index)
   _treatment_plans.clear();
   _trauma_profiles.clear();
 
-  name = QString("New Objective:%1").arg(index);
+  name = QString(" New Objective:%1").arg(index);
   description = QString("Undefined learning objective %1.").arg(index);
 }
 //--------------------------------------------------------------------------------------------

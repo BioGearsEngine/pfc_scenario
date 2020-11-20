@@ -71,9 +71,9 @@ void Citation::clear(int index, bool isCPG)
   address.clear();
   if (isCPG) {
     key = QString("CPG:%1").arg(index);
-    title = QString("CPG %1").arg(index);
+    title = QString(" CPG %1").arg(index);
   } else {
     key = QString("AuthorYear_%1").arg(index);
-    title = QString("Reference %1").arg(index);
+    title = QString(" Reference %1").arg(index);
   }
 }

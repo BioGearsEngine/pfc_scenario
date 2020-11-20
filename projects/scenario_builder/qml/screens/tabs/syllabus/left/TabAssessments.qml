@@ -54,9 +54,6 @@ ColumnLayout {
         var likely_id = root.backend.nextID(SQLBackend.ASSESSMENTS);
         assessment_g.clear(likely_id);
         root.backend.update_assessment(assessment_g);
-        assessmentList.assessmentDefinitions.push(assessment_g.make());
-        assessmentList.assessmentDefinitions[assessmentList.assessmentDefinitions.length - 1].assign(assessment_g);
-        assessmentList.model = assessmentList.assessmentDefinitions;
         assessmentList.currentIndex = assessmentList.assessmentDefinitions.length - 1
       }
       onSecondButtonClicked : {

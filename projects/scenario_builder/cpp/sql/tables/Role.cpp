@@ -63,8 +63,8 @@ void Role::clear(int index)
 {
   id = -1;
   uuid.clear();
-  name = QString("Role %1").arg(index);
-  code_name = QString("Role %1").arg(index);     
+  name = QString(" Role %1").arg(index);
+  code_name = QString(" Role %1").arg(index);     
   description = QString("Undefined role %1").arg(index);   ;
   trauma_profile->clear();
 }

@@ -80,7 +80,7 @@ void Event::clear(int index)
 {
   id = -1;
   uuid.clear();
-  name = QString("Event %1").arg(index);
+  name = QString(" Event %1").arg(index);
   description = QString("Unknown Event %1").arg(index);
   category = "ACTION";
   fidelity = "LOW";

@@ -72,7 +72,7 @@ void Assessment::clear(int index)
 {
   id = -1;
   uuid.clear();
-  name = QString("New Assessment:%1").arg(index);
+  name = QString(" New Assessment:%1").arg(index);
   description = QString("Undefined assessment criteria %1.").arg(index);
   type.clear();
   fk_objective->clear();

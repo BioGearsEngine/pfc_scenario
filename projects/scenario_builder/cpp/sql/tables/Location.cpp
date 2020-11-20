@@ -50,7 +50,7 @@ void Location::clear(int index)
 {
   id = -1;
   uuid.clear();
-  name = QString("Location %1").arg(index);
+  name = QString(" Location %1").arg(index);
   description = QString("Undefined location %1").arg(index);
   environment = "Exterior:Terrestrial:Desert";
 }

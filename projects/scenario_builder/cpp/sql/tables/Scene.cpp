@@ -66,7 +66,7 @@ void Scene::clear(int index)
 {
   id = -1;
   uuid = "";
-  name = QString("Scene %1").arg(index);
+  name = QString(" Scene %1").arg(index);
   description = QString("Undefined Scene %1").arg(index);
   time_of_day = 0;
   time_in_simulation = 0;
