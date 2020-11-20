@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
 
 import "../../../common"
+import "components"
 
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
@@ -31,6 +32,7 @@ ScrollView {
   ColumnLayout {
     id : column
     width : root.width
+    spacing : 5
     GridLayout {
       id : grid
       Layout.fillWidth : true
@@ -59,7 +61,7 @@ ScrollView {
         Layout.leftMargin : 5
         Layout.column : 0
         Layout.row : 1
-        // Layout.rowSpan : 2
+
         maximumRows : 20
         minimumRows : 12
         id : descriptionEntry
@@ -113,6 +115,16 @@ ScrollView {
         }
       }
     }
+    EquipmentParameterList {
+      id : parameterLists
+      Layout.fillWidth : true
+      Layout.alignment : Qt.AlignTop
+      Layout.leftMargin : 5
+      Layout.bottomMargin : 5
+      Layout.rightMargin : 20
+      Layout.minimumHeight : 300
+    }
+
     StackLayout {
       id : citationStack
       Layout.fillWidth : true

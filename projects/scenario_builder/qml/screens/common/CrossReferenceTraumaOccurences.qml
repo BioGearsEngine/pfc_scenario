@@ -143,16 +143,16 @@ CrossReferenceForm {
       anchors.leftMargin : -5
       font.pointSize : 8
 
-      text : (root.model[index]) ? "%1".arg(root.model[index].severity) : "0.0"
+      text : (root.model[index]) ? "%1".arg(root.model[index].severity / 100.0) : "0.0"
       placeholderText : "Severity Value"
       validator : DoubleValidator {
-        bottom : (root.model[index]) ? root.model[index].trauma.min : 0.0
-        top : (root.model[index]) ? root.model[index].trauma.max : 1.0
+        bottom : (root.model[index]) ? root.model[index].trauma.min / 100.0: 0.0
+        top : (root.model[index]) ? root.model[index].trauma.max / 100.0 : 1.0
       }
 
       onTextChanged : {
        if (root.model[index] && !acceptableInput) {
-          showReasonForFailure(parent, "Severity must be between %1 and %2".arg(root.model[index].trauma.min).arg(root.model[index].trauma.max))
+          showReasonForFailure(parent, "Severity must be between %1 and %2".arg(root.model[index].trauma.min / 100.0).arg(root.model[index].trauma.max / 100.0))
         } 
       }
       readOnly : false
@@ -161,7 +161,7 @@ CrossReferenceForm {
       enabled : false
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       onEditingFinished : {
-          root.model[index].severity = "%1".arg(text);
+          root.model[index].severity = parseFloat(text) * 100.0;
           traumaModified(index, root.model[index])        
       }
     }

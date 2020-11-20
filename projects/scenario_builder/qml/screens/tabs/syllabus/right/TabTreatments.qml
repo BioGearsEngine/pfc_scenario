@@ -26,11 +26,10 @@ ScrollView {
     id : citation_g
   }
 
-
   ColumnLayout {
     id : column
     width : root.width
-
+    spacing : 5
     GridLayout {
       id : grid
       Layout.fillWidth : true

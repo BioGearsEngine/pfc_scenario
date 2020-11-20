@@ -20,6 +20,45 @@ specific language governing permissions and limitations under the License.
 
 struct Citation;
 
+enum EquipmentTypeEnum {
+  
+};
+Q_ENUMS(EquipmentTypeEnum)
+
+// struct EquipmentParameter : public QObject {
+//   Q_OBJECT
+//   Q_PROPERTY(EquipmentParameter type MEMBER description NOTIFY descriptionChanged)
+//   Q_PROPERTY(QString location MEMBER location NOTIFY locationChanged)
+//   Q_PROPERTY(QString severity MEMBER severity NOTIFY severityChanged)
+//
+// signals:
+//   void idChanged();
+//   void traumaChanged();
+//   void descriptionChanged();
+//   void locationChanged();
+//   void severityChanged();
+//
+// public:
+//
+//   QString description = "";
+//   QString location = "";
+//   QString severity = "";
+//
+//   EquipmentParameter(QObject* parent = nullptr);
+//     EquipmentParameter(const EquipmentParameter&) = delete;
+//   EquipmentParameter(EquipmentParameter&&) = delete;
+//   EquipmentParameter& operator=(const EquipmentParameter&) = delete;
+//   EquipmentParameter& operator=(EquipmentParameter&&) = delete;
+//   virtual ~EquipmentParameter() = default;
+//
+//   bool operator==(const EquipmentParameter& rhs) const;
+//   bool operator!=(const EquipmentParameter& rhs) const;
+//   static Q_INVOKABLE EquipmentParameter* make();
+//   Q_INVOKABLE void assign(EquipmentParameter* rhs);
+//   void assign(const EquipmentParameter& rhs);
+//   void clear();
+// };
+
 //----End Event
 struct Equipment : public QObject {
   Q_OBJECT
@@ -77,12 +116,19 @@ public:
   Q_INVOKABLE void removeCitation(int index);
 
 private:
-  //! Helper functions for Traumas
+  //! Helper functions for Citations
   QQmlListProperty<Citation> getCitations();
   static void AppendCitation(QQmlListProperty<Citation>* list, Citation* value);
   static auto CountCitations(QQmlListProperty<Citation>* list) -> int;
   static auto GetCitation(QQmlListProperty<Citation>* list, int index) -> Citation*;
   static void ClearCitations(QQmlListProperty<Citation>* list);
+
+  //   //! Helper functions for Traumas
+  // QQmlListProperty<Parameter> getParameters();
+  // static void AppendParameter(QQmlListProperty<Parameter>* list, Parameter* value);
+  // static auto CountParameters(QQmlListProperty<Parameter>* list) -> int;
+  // static auto GetParameter(QQmlListProperty<Parameter>* list, int index) -> Parameter*;
+  // static void ClearParameters(QQmlListProperty<Parameter>* list);
 };
 
 #endif

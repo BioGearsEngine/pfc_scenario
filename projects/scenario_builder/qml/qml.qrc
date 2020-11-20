@@ -43,6 +43,7 @@
         <file>screens/tabs/syllabus/right/TabTraumaProfiles.qml</file>
         <file>screens/tabs/syllabus/right/TabObjectives.qml</file>
         <file>screens/tabs/syllabus/right/TabTreatments.qml</file>
+        <file>screens/tabs/syllabus/right/components/EquipmentParameterList.qml</file>
 
         <!--Shared Tab Components -->
         <file>screens/common/FourButtonRow.qml</file>

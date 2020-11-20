@@ -26,9 +26,9 @@ ScrollView {
   ColumnLayout {
     id : column
     width : root.width
-
+    spacing : 5
     GridLayout {
-      id: grid
+      id : grid
       Layout.fillWidth : true
       columns : 2
       TextEntry {
@@ -37,7 +37,7 @@ ScrollView {
         Layout.leftMargin : 5
         Layout.column : 0
         Layout.row : 0
-        
+
         id : medicalNameEntry
         label : "Medical Name"
         placeholderText : "String Field (128 Characters)"
