@@ -37,14 +37,14 @@ ColumnLayout {
   }
 
   function refresh_full_role_list() {
-    full_rolesInSceneList.roles = []
+    allRolesList.roles = []
     var roles = root.backend.roles;
     for (var ii = 0; ii < roles.length; ++ ii) {
-      var index = full_rolesInSceneList.roles.length;
-      full_rolesInSceneList.roles.push(role_g.make());
-      full_rolesInSceneList.roles[index].assign(roles[ii]);
+      var index = allRolesList.roles.length;
+      allRolesList.roles.push(role_g.make());
+      allRolesList.roles[index].assign(roles[ii]);
     }
-    full_rolesInSceneList.model = full_rolesInSceneList.roles
+    allRolesList.model = allRolesList.roles
   }
 
   function update_role(role) {
@@ -79,20 +79,20 @@ ColumnLayout {
 
         onFirstButtonClicked : {
           root.backend.update_role_in_scene(currentScene, 
-                                           full_rolesInSceneList.roles[full_rolesInSceneList.currentIndex]);
+                                           allRolesList.roles[allRolesList.currentIndex]);
           role_stack.currentIndex = 1
         }
         onSecondButtonClicked : {
           var likely_id = root.backend.nextID(SQLBackend.ROLES);
           role_g.clear(likely_id);
           root.backend.update_role(role_g);
-          full_rolesInSceneList.roles.push(role_g.make());
-          full_rolesInSceneList.roles[full_rolesInSceneList.roles.length - 1].assign(role_g);
-          full_rolesInSceneList.model = full_rolesInSceneList.roles;
-          full_rolesInSceneList.currentIndex = full_rolesInSceneList.roles.length - 1
+          allRolesList.roles.push(role_g.make());
+          allRolesList.roles[allRolesList.roles.length - 1].assign(role_g);
+          allRolesList.model = allRolesList.roles;
+          allRolesList.currentIndex = allRolesList.roles.length - 1
         }
         onThirdButtonClicked : {
-          root.backend.remove_role(full_rolesInSceneList.roles[full_rolesInSceneList.currentIndex])
+          root.backend.remove_role(allRolesList.roles[allRolesList.currentIndex])
           refresh_full_role_list();
         }
         onFourthButtonClicked : {
@@ -101,7 +101,7 @@ ColumnLayout {
       }
 
       ListView {
-        id : full_rolesInSceneList
+        id : allRolesList
         property var roles: []
         anchors {
           top : full_controls.bottom;
@@ -136,12 +136,12 @@ ColumnLayout {
           MouseArea {
             anchors.fill : parent
             onClicked : {
-              full_rolesInSceneList.currentIndex = index
+              allRolesList.currentIndex = index
             }
             onDoubleClicked : {
-              roleEdit.returnTo = 0;
-              roleEdit.currentRole = full_rolesInSceneList.roles[full_rolesInSceneList.currentIndex];
-              role_stack.currentIndex = 2;
+              root.backend.update_role_in_scene(currentScene, 
+                                                allRolesList.roles[allRolesList.currentIndex]);
+              role_stack.currentIndex = 1;
             }
           }
 
@@ -160,7 +160,7 @@ ColumnLayout {
             id : full_role_title_text
             anchors.left : full_role_title_label.right
             anchors.leftMargin : 5
-            text : (full_rolesInSceneList.roles[index]) ? full_rolesInSceneList.roles[index].name : "Undefined"
+            text : (allRolesList.roles[index]) ? allRolesList.roles[index].name : "Undefined"
 
             font.weight : Font.Bold
             font.pointSize : 10
@@ -189,7 +189,7 @@ ColumnLayout {
 
             anchors.leftMargin : 2
             font.pointSize : 10
-            text : (full_rolesInSceneList.roles[index]) ? full_rolesInSceneList.roles[index].description : "Undefined"
+            text : (allRolesList.roles[index]) ? allRolesList.roles[index].description : "Undefined"
             enabled : false
             color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
             elide : Text.ElideRight
@@ -216,7 +216,7 @@ ColumnLayout {
           }
 
           onFocusChanged : {
-            if (full_rolesInSceneList.currentIndex == index) {
+            if (allRolesList.currentIndex == index) {
               state = 'Selected';
             } else {
               state = '';
@@ -359,7 +359,6 @@ ColumnLayout {
             color : enabled ? Material.accentColor : Material.secondaryTextColor
             elide : Text.ElideRight
           }
-
           Text {
             id : role_value_text
             anchors.top : role_title_text.bottom

@@ -38,6 +38,10 @@ ListOfAllForm {
       onClicked : {
         root.current = index
       }
+      onDoubleClicked : {
+        self.assign(root.model[root.current]);
+        root.citationAdded(root.current, self);
+      }
     }
 
     function update_citation(citation) {

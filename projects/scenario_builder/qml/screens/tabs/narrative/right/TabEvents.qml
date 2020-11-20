@@ -37,14 +37,14 @@ ColumnLayout {
   }
 
   function refresh_full_event_list() {
-    full_eventsInSceneList.events = []
+    allEventsList.events = []
     var events = root.backend.events;
     for (var ii = 0; ii < events.length; ++ ii) {
-      var index = full_eventsInSceneList.events.length;
-      full_eventsInSceneList.events.push(event_g.make());
-      full_eventsInSceneList.events[index].assign(events[ii]);
+      var index = allEventsList.events.length;
+      allEventsList.events.push(event_g.make());
+      allEventsList.events[index].assign(events[ii]);
     }
-    full_eventsInSceneList.model = full_eventsInSceneList.events
+    allEventsList.model = allEventsList.events
   }
 
   function update_event(event) {
@@ -80,20 +80,20 @@ ColumnLayout {
 
 
         onFirstButtonClicked : {
-          root.backend.update_event_in_scene(currentScene, full_eventsInSceneList.events[full_eventsInSceneList.currentIndex]);
+          root.backend.update_event_in_scene(currentScene, allEventsList.events[allEventsList.currentIndex]);
           event_stack.currentIndex = 1
         }
         onSecondButtonClicked : {
           var likely_id = root.backend.nextID(SQLBackend.EVENTS);
           event_g.clear(likely_id);
           root.backend.update_event(event_g);
-          full_eventsInSceneList.events.push(event_g.make());
-          full_eventsInSceneList.events[full_eventsInSceneList.events.length - 1].assign(event_g);
-          full_eventsInSceneList.model = full_eventsInSceneList.events;
-          full_eventsInSceneList.currentIndex = full_eventsInSceneList.events.length - 1
+          allEventsList.events.push(event_g.make());
+          allEventsList.events[allEventsList.events.length - 1].assign(event_g);
+          allEventsList.model = allEventsList.events;
+          allEventsList.currentIndex = allEventsList.events.length - 1
         }
         onThirdButtonClicked : {
-          root.backend.remove_event(full_eventsInSceneList.events[full_eventsInSceneList.currentIndex])
+          root.backend.remove_event(allEventsList.events[allEventsList.currentIndex]);
           refresh_full_event_list();
         }
         onFourthButtonClicked : {
@@ -101,8 +101,8 @@ ColumnLayout {
         }
       }
       ListView {
-        id : full_eventsInSceneList
-         property var events: []
+        id : allEventsList
+        property var events: []
         anchors {
           top : full_controls.bottom;
           bottom : parent.bottom;
@@ -133,12 +133,11 @@ ColumnLayout {
           MouseArea {
             anchors.fill : parent
             onClicked : {
-              full_eventsInSceneList.currentIndex = index
+              allEventsList.currentIndex = index
             }
             onDoubleClicked : {
-              eventEdit.returnTo = 0;
-              eventEdit.currentEvent = full_eventsInSceneList.events[full_eventsInSceneList.currentIndex];
-              event_stack.currentIndex = 2;
+              root.backend.update_event_in_scene(currentScene, allEventsList.events[allEventsList.currentIndex]);
+              event_stack.currentIndex = 1
             }
           }
           Label {
@@ -156,7 +155,7 @@ ColumnLayout {
             id : full_event_title_text
             anchors.left : full_event_title_label.right
             anchors.leftMargin : 5
-            text : (full_eventsInSceneList.events[index]) ? full_eventsInSceneList.events[index].name : "Undefined"
+            text : (allEventsList.events[index]) ? allEventsList.events[index].name : "Undefined"
 
             font.weight : Font.Bold
             font.pointSize : 10
@@ -176,7 +175,6 @@ ColumnLayout {
             color : enabled ? Material.color(Material.Grey) : Material.secondaryTextColor
             elide : Text.ElideRight
           }
-
           Text {
             id : full_event_value_text
             anchors.top : full_event_title_text.bottom
@@ -185,7 +183,7 @@ ColumnLayout {
 
             anchors.leftMargin : 2
             font.pointSize : 10
-            text : (full_eventsInSceneList.events[index]) ? full_eventsInSceneList.events[index].description : "Undefined"
+            text : (allEventsList.events[index]) ? allEventsList.events[index].description : "Undefined"
             enabled : false
             color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
             elide : Text.ElideRight
@@ -211,7 +209,7 @@ ColumnLayout {
             }
           }
           onFocusChanged : {
-            if (full_eventsInSceneList.currentIndex == index) {
+            if (allEventsList.currentIndex == index) {
               state = 'Selected';
             } else {
               state = '';
@@ -273,7 +271,7 @@ ColumnLayout {
       }
       ListView {
         id : eventsInSceneList
-         property var events: []
+        property var events: []
 
         anchors {
           top : controls.bottom;
@@ -430,10 +428,4 @@ ColumnLayout {
       backend.eventMapsChanged.connect(refresh_event_list)
     }
   }
-  //   onBackendChanged : {
-  //   if (backend) {
-  //     backend.citationsChanged.connect(refresh_citations);
-  //     backend.equipmentChanged.connect(refresh_equipment);
-  //   }
-  // }
 }

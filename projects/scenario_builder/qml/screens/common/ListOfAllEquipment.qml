@@ -40,6 +40,10 @@ ListOfAllForm {
       onClicked : {
         root.current = index
       }
+      onDoubleClicked : {
+        self.assign(root.model[root.current]);
+        root.equipmentAdded(root.current, self);
+      }
     }
 
     function update_equipment(equipment) {

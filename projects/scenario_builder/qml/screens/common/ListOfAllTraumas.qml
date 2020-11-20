@@ -40,6 +40,10 @@ ListOfAllForm {
       onClicked : {
         root.current = index
       }
+      onDoubleClicked : {
+        self.assign(root.model[root.current]);
+        root.traumaAdded(root.current, self);
+      }
     }
 
     function update_trauma(trauma) {
