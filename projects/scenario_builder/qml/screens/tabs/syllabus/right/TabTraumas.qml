@@ -103,7 +103,7 @@ ScrollView {
       property var treatmentCitations: []
       property var allCitations: []
 
-      ListOfCitations {
+      CrossReferenceCitations {
         id : referenceList
 
         Layout.fillWidth : true

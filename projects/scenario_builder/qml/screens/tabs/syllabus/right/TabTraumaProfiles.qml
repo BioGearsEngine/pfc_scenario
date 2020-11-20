@@ -90,7 +90,7 @@ ColumnLayout {
     property var allTraumas: []
 
     currentIndex : 0
-    ListOfTraumaOccurences {
+    CrossReferenceTraumaOccurences {
       id : occurenceList
       Layout.leftMargin : 5
       backend : root.backend

@@ -124,7 +124,7 @@ ScrollView {
       property var treatmentEquipment: []
       property var allEquipment: []
       
-      ListOfEquipment {
+      CrossReferenceEquipment {
         id : equipmentList
 
         Layout.fillWidth : true
@@ -178,7 +178,7 @@ ScrollView {
       property var treatmentCitations: []
       property var allCitations: []
       currentIndex : 0
-      ListOfCitations {
+      CrossReferenceCitations {
         id : referenceList
 
         backend : root.backend

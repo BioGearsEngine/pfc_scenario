@@ -17,6 +17,10 @@ Rectangle {
   property alias current : listArea.currentIndex
   property alias highlight : listArea.highlight
 
+  property bool buttonOneVisible : true
+  property bool buttonTwoVisible : true
+  property bool buttonThreeVisible : true
+
   signal list()
   signal added(int index)
   signal removed(int index)
@@ -52,7 +56,7 @@ Rectangle {
       text : "List " + root.label + "s"
       anchors.left : content.left
       anchors.leftMargin : 5
-
+      visible  : root.buttonOneVisible
       onClicked : {
         root.list()
       }
@@ -65,7 +69,7 @@ Rectangle {
       anchors.right : removeButton.left
       anchors.leftMargin : 5
       anchors.rightMargin : 5
-
+      visible  : root.buttonTwoVisible
       onClicked : {
         root.added(root.model.count)
       }
@@ -76,8 +80,7 @@ Rectangle {
       text : "Remove " + root.label
       anchors.right : content.right
       anchors.rightMargin : 5
-
-
+      visible  : root.buttonThreeVisible
       onClicked : {
         root.removed(root.current)
       }

@@ -6,7 +6,7 @@ import QtQuick.Controls.Material 2.0
 
 import com.ara.pfc.ScenarioModel.SQL 1.0
 
-ListOfForm {
+CrossReferenceForm {
   id : root
   property SQLBackend backend
 

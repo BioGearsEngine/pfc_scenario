@@ -50,14 +50,14 @@
         <file>screens/common/TwoButtonRow.qml</file>
         <file>screens/common/AuthorEntry.qml</file>
         
-        <file>screens/common/ListOfForm.ui.qml</file>
+        <file>screens/common/CrossReferenceForm.ui.qml</file>
+        <file>screens/common/CrossReferenceCitations.qml</file>
+        <file>screens/common/CrossReferenceEquipment.qml</file>
+        <file>screens/common/CrossReferenceTraumaOccurences.qml</file>
         <file>screens/common/ListOfAllForm.ui.qml</file>
         <file>screens/common/ListOfAllCitations.qml</file>
-        <file>screens/common/ListOfCitations.qml</file>
         <file>screens/common/ListOfAllEquipment.qml</file>        
-        <file>screens/common/ListOfEquipment.qml</file>
         <file>screens/common/ListOfAllTraumas.qml</file>
-        <file>screens/common/ListOfTraumaOccurences.qml</file>
         
         <file>screens/common/PFCButton.qml</file>
         <file>screens/common/PFCLabel.qml</file>

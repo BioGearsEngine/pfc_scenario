@@ -124,7 +124,7 @@ ScrollView {
       property var equipmentCitations: []
       property var allCitations: []
       currentIndex : 0
-      ListOfCitations {
+      CrossReferenceCitations {
         id : referenceList
         backend : root.backend
         onList : {
