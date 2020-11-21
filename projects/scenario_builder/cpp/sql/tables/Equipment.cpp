@@ -1,8 +1,326 @@
 #include "Equipment.h"
+#include "Citation.h"
 
+QString ParameterTypeEnumToString(ParameterTypeEnum value)
+{
+  if (value == ParameterTypeEnum::STRING) {
+    return "STRING";
+  }
+  if (value == ParameterTypeEnum::BOOLEAN) {
+    return "BOOLEAN";
+  }
+  if (value == ParameterTypeEnum::INTEGRAL) {
+    return "INTEGRAL";
+  }
+  if (value == ParameterTypeEnum::RANGE) {
+    return "RANGE";
+  }
+  if (value == ParameterTypeEnum::SCALAR) {
+    return "SCALAR";
+  }
+  if (value == ParameterTypeEnum::ENUM) {
+    return "ENUM";
+  } else {
+    return "UNKOWN";
+  }
+}
+//--------------------------------------------------------------------------------------------
+ParameterTypeEnum ParameterTypeEnumFromString(QString value)
+{
+  if (value == "STRING") {
+    return ParameterTypeEnum::STRING;
+  }
+  if (value == "BOOLEAN") {
+    return ParameterTypeEnum::BOOLEAN;
+  }
+  if (value == "INTEGRAL") {
+    return ParameterTypeEnum::INTEGRAL;
+  }
+  if (value == "RANGE") {
+    return ParameterTypeEnum::RANGE;
+  }
+  if (value == "SCALAR") {
+    return ParameterTypeEnum::SCALAR;
+  }
+  if (value == "ENUM") {
+    return ParameterTypeEnum::ENUM;
+  } else {
+    return ParameterTypeEnum::UNKOWN;
+  }
+}
+//--------------------------------------------------------------------------------------------
+ParameterTypeEnum ParameterTypeEnumFromString(std::string value)
+{
+  if (value == "STRING") {
+    return ParameterTypeEnum::STRING;
+  }
+  if (value == "BOOLEAN") {
+    return ParameterTypeEnum::BOOLEAN;
+  }
+  if (value == "INTEGRAL") {
+    return ParameterTypeEnum::INTEGRAL;
+  }
+  if (value == "RANGE") {
+    return ParameterTypeEnum::RANGE;
+  }
+  if (value == "SCALAR") {
+    return ParameterTypeEnum::SCALAR;
+  }
+  if (value == "ENUM") {
+    return ParameterTypeEnum::ENUM;
+  } else {
+    return ParameterTypeEnum::UNKOWN;
+  }
+}
+//--------------------------------------------------------------------------------------------
+//!
+//!  Parameter Field Members
+//!
+//--------------------------------------------------------------------------------------------
+ParameterField::ParameterField(QObject* parent)
+  : QObject(parent)
+{
+}
+ParameterField::ParameterField(QString n, ParameterTypeEnum t, QObject* parent)
+  : QObject(parent)
+  , name(n)
+  , eType(t)
+{
+}
+//--------------------------------------------------------------------------------------------
+bool ParameterField::operator==(const ParameterField& rhs) const
+{
+  return name == rhs.name
+    && eType == rhs.eType;
+}
+//--------------------------------------------------------------------------------------------
+bool ParameterField::operator!=(const ParameterField& rhs) const
+{
+  return !(*this == rhs);
+}
+//--------------------------------------------------------------------------------------------
+ParameterField* ParameterField::make(QObject* parent)
+{
+  return new ParameterField(parent);
+}
+//--------------------------------------------------------------------------------------------
+ParameterField* ParameterField::make(QString name, ParameterTypeEnum type, QObject* parent )
+{
+  return new ParameterField(name, type, parent);
+}
+//--------------------------------------------------------------------------------------------
+QString ParameterField::toString()
+{
+  return QString("%1:%2").arg(name).arg(ParameterTypeEnumToString(eType));
+}
+//--------------------------------------------------------------------------------------------
+void ParameterField::assign(ParameterField* rhs)
+{
+  assign(*rhs);
+}
+//--------------------------------------------------------------------------------------------
+void ParameterField::assign(const ParameterField& rhs)
+{
+  name = rhs.name;
+  eType = rhs.eType;
+}
+//--------------------------------------------------------------------------------------------
+void ParameterField::clear()
+{
+  name = "Unknown";
+  eType = ParameterTypeEnum::SCALAR;
+}
+
+//!
+//!  Equipment Parameter Members
+//!
+EquipmentParameter::EquipmentParameter(QObject* parent)
+  : QObject(parent)
+{
+}
+//--------------------------------------------------------------------------------------------
+EquipmentParameter::EquipmentParameter(QString parameter_string, QObject* parent)
+  : QObject(parent)
+  , name("")
+  , eType(ParameterTypeEnum::UNKOWN)
+{
+
+  //This constructor needs to properly report errors loading text files
+  //means we could run in to any number of exceptions.
+
+  //Error 1: General Parse Error
+  //Error 2: First Name:Type does not resovle to a known eType
+  //Error 3: Any Param that doesn't properly parse
+
+  for (auto param : parameter_string.split(',')) {
+    auto parts = param.split(':');
+    if (eType == ParameterTypeEnum::UNKOWN) {
+      name = parts[0];
+      eType = ParameterTypeEnumFromString(parts[1]);
+    } else {
+      fields.push_back(ParameterField::make(parts[0], ParameterTypeEnumFromString(parts[1]), this));
+    }
+  }
+}
+//--------------------------------------------------------------------------------------------
+EquipmentParameter::EquipmentParameter(QString n, ParameterTypeEnum t, QList<QString> eo, QObject* parent)
+  : QObject(parent)
+  , name(n)
+  , eType(t)
+  , enumOptions(eo)
+{
+}
+EquipmentParameter::~EquipmentParameter()
+{
+  clear();
+}
+//--------------------------------------------------------------------------------------------
+bool EquipmentParameter::operator==(const EquipmentParameter& rhs) const
+{
+  bool equality = true;
+  equality &= name == rhs.name;
+  equality &= eType == rhs.eType;
+  equality &= enumOptions == rhs.enumOptions;
+  equality &= fields.count() == rhs.fields.count();
+  if (equality) {
+    for (auto ii = 0; ii > fields.count(); ++ii) {
+      equality &= fields[ii] == rhs.fields[ii];
+    }
+  }
+  return equality;
+}
+//--------------------------------------------------------------------------------------------
+bool EquipmentParameter::operator!=(const EquipmentParameter& rhs) const
+{
+  return !(*this == rhs);
+}
+//--------------------------------------------------------------------------------------------
+EquipmentParameter* EquipmentParameter::make(QObject* parent)
+{
+  return new EquipmentParameter(parent);
+}
+//--------------------------------------------------------------------------------------------
+EquipmentParameter* EquipmentParameter::make(QString name, ParameterTypeEnum type, QList<QString> enumOptions, QObject* make)
+{
+  return new EquipmentParameter(name, type, std::move(enumOptions));
+}
+//--------------------------------------------------------------------------------------------
+void EquipmentParameter::appendField(QString name, ParameterTypeEnum type)
+{
+  fields.append(ParameterField::make(name, type));
+}
+//--------------------------------------------------------------------------------------------
+void EquipmentParameter::appendField(std::string name, ParameterTypeEnum type)
+{
+  fields.append(ParameterField::make(name.c_str(), type));
+}
+//--------------------------------------------------------------------------------------------
+void EquipmentParameter::assign(EquipmentParameter* rhs)
+{
+  assign(*rhs);
+}
+//--------------------------------------------------------------------------------------------
+void EquipmentParameter::assign(const EquipmentParameter& rhs)
+{
+  eType = rhs.eType;
+  name = rhs.name;
+  enumOptions = rhs.enumOptions;
+  fields.clear();
+  for (auto field : rhs.fields) {
+    fields.push_back(ParameterField::make());
+    fields.back()->assign(field);
+  }
+}
+//--------------------------------------------------------------------------------------------
+void EquipmentParameter::clear()
+{
+  name.clear();
+  eType = ParameterTypeEnum::UNKOWN;
+  qDeleteAll(fields);
+  fields.clear();
+  enumOptions.clear();
+}
+//-------------------------------------------------------------------------------
+//! Equipment Parameter helper functions for Parameters
+QQmlListProperty<ParameterField> EquipmentParameter::getParameterFields()
+{
+  return QQmlListProperty<ParameterField>(this, this,
+                                          &EquipmentParameter::AppendParameterField,
+                                          &EquipmentParameter::CountParameterFields,
+                                          &EquipmentParameter::GetParameterField,
+                                          &EquipmentParameter::ClearParameterFields);
+}
+//--------------------------------------------------------------------------------------------
+void EquipmentParameter::AppendParameterField(QQmlListProperty<ParameterField>* list, ParameterField* value)
+{
+  EquipmentParameter* parameter = qobject_cast<EquipmentParameter*>(list->object);
+  if (parameter) {
+    parameter->fields.append(value);
+  }
+}
+//--------------------------------------------------------------------------------------------
+auto EquipmentParameter::CountParameterFields(QQmlListProperty<ParameterField>* list) -> int
+{
+  EquipmentParameter* parameter = qobject_cast<EquipmentParameter*>(list->object);
+  if (parameter) {
+    return parameter->fields.count();
+  }
+  return 0;
+}
+//--------------------------------------------------------------------------------------------
+auto EquipmentParameter::GetParameterField(QQmlListProperty<ParameterField>* list, int index) -> ParameterField*
+{
+  EquipmentParameter* parameter = qobject_cast<EquipmentParameter*>(list->object);
+  if (parameter) {
+    return parameter->fields[index];
+  }
+  return nullptr;
+}
+//--------------------------------------------------------------------------------------------
+void EquipmentParameter::ClearParameterFields(QQmlListProperty<ParameterField>* list)
+{
+  EquipmentParameter* parameter = qobject_cast<EquipmentParameter*>(list->object);
+  if (parameter) {
+    parameter->fields.clear();
+  }
+}
+//--------------------------------------------------------------------------------------------
+void EquipmentParameter::replaceField(int index, ParameterField* value)
+{
+  return fields.replace(index, value);
+}
+//--------------------------------------------------------------------------------------------
+void EquipmentParameter::removeField(int index)
+{
+  fields.removeAt(index);
+}
+//--------------------------------------------------------------------------------------------
+QString EquipmentParameter::toString()
+{
+  QString value = QString("%1:%2").arg(name).arg(ParameterTypeEnumToString(eType));
+  for (auto field : fields) {
+    value += QString(",%1").arg(field->toString());
+  }
+  return value;
+}
+//--------------------------------------------------------------------------------------------
+EquipmentParameter* EquipmentParameter::fromString(QString parameter_string, QObject* parent)
+{
+  return new EquipmentParameter(parameter_string, parent);
+}
+//--------------------------------------------------------------------------------------------
+
+//!
+//! Equipment Members
+//!
 Equipment::Equipment(QObject* parent)
   : QObject(parent)
 {
+}
+//--------------------------------------------------------------------------------------------
+Equipment::~Equipment()
+{
+  clear();
 }
 //--------------------------------------------------------------------------------------------
 bool Equipment::operator==(const Equipment& rhs) const
@@ -13,7 +331,7 @@ bool Equipment::operator==(const Equipment& rhs) const
     && description == rhs.description
     && citations == rhs.citations
     && image == rhs.image
-    && properties == rhs.properties;
+    && parameters == rhs.parameters; //TODO: We should iterate over each one and do a comparison.
 }
 //--------------------------------------------------------------------------------------------
 bool Equipment::operator!=(const Equipment& rhs) const
@@ -21,9 +339,19 @@ bool Equipment::operator!=(const Equipment& rhs) const
   return !(*this == rhs);
 }
 //--------------------------------------------------------------------------------------------
-Equipment* Equipment::make()
+Equipment* Equipment::make(QObject* parent)
 {
-  return new Equipment();
+  return new Equipment(parent);
+}
+//--------------------------------------------------------------------------------------------
+void Equipment::appendParameter(QString name, ParameterTypeEnum type, QList<QString> enumOptions)
+{
+  parameters.push_back(EquipmentParameter::make(name, type, std::move(enumOptions)));
+}
+//--------------------------------------------------------------------------------------------
+void Equipment::appendParameter(std::string name, ParameterTypeEnum type, QList<QString> enumOptions)
+{
+  parameters.push_back(EquipmentParameter::make(name.c_str(), type, std::move(enumOptions)));
 }
 //--------------------------------------------------------------------------------------------
 void Equipment::assign(Equipment* rhs)
@@ -43,7 +371,7 @@ void Equipment::assign(const Equipment& rhs)
   description = rhs.description;
   citations = rhs.citations;
   image = rhs.image;
-  properties = rhs.properties;
+  parameters = rhs.parameters;
 }
 //--------------------------------------------------------------------------------------------
 void Equipment::clear()
@@ -54,9 +382,11 @@ void Equipment::clear()
   type = -1;
   summary.clear();
   description.clear();
+  qDeleteAll(citations);
   citations.clear();
   image.clear();
-  properties.clear();
+  qDeleteAll(parameters);
+  parameters.clear();
 }
 //--------------------------------------------------------------------------------------------
 void Equipment::clear(int index)
@@ -69,7 +399,7 @@ void Equipment::clear(int index)
   summary = QString("summary for equipment %1.").arg(index);
   citations.clear();
   image.clear();
-  properties.clear();
+  parameters.clear();
 }
 //--------------------------------------------------------------------------------------------
 QQmlListProperty<Citation> Equipment::getCitations()
@@ -80,8 +410,9 @@ QQmlListProperty<Citation> Equipment::getCitations()
                                     &Equipment::GetCitation,
                                     &Equipment::ClearCitations);
 }
+
 //-------------------------------------------------------------------------------
-//! Helper functions for Equipments
+//! Equipment helper functions for Equipments
 void Equipment::AppendCitation(QQmlListProperty<Citation>* list, Citation* value)
 {
   Equipment* EquipmentOccurance = qobject_cast<Equipment*>(list->object);
@@ -125,4 +456,74 @@ void Equipment::replaceCitation(int index, Citation* value)
 {
   citations.replace(index, value);
 }
+
 //-------------------------------------------------------------------------------
+//! Equipment helper functions for Traumas
+QQmlListProperty<EquipmentParameter> Equipment::getParameters()
+{
+  return QQmlListProperty<EquipmentParameter>(this, this,
+                                              &Equipment::AppendParameter,
+                                              &Equipment::CountParameters,
+                                              &Equipment::GetParameter,
+                                              &Equipment::ClearParameters);
+}
+//-------------------------------------------------------------------------------
+void Equipment::AppendParameter(QQmlListProperty<EquipmentParameter>* list, EquipmentParameter* value)
+{
+  Equipment* EquipmentOccurance = qobject_cast<Equipment*>(list->object);
+  if (EquipmentOccurance) {
+    EquipmentOccurance->parameters.append(value);
+  }
+}
+//-------------------------------------------------------------------------------
+auto Equipment::CountParameters(QQmlListProperty<EquipmentParameter>* list) -> int
+{
+  Equipment* EquipmentOccurance = qobject_cast<Equipment*>(list->object);
+  if (EquipmentOccurance) {
+    return EquipmentOccurance->parameters.count();
+  }
+  return 0;
+}
+//-------------------------------------------------------------------------------
+auto Equipment::GetParameter(QQmlListProperty<EquipmentParameter>* list, int index) -> EquipmentParameter*
+{
+  Equipment* EquipmentOccurance = qobject_cast<Equipment*>(list->object);
+  if (EquipmentOccurance) {
+    return EquipmentOccurance->parameters[index];
+  }
+  return nullptr;
+}
+//-------------------------------------------------------------------------------
+void Equipment::ClearParameters(QQmlListProperty<EquipmentParameter>* list)
+{
+  Equipment* EquipmentOccurance = qobject_cast<Equipment*>(list->object);
+  if (EquipmentOccurance) {
+    return EquipmentOccurance->parameters.clear();
+  }
+}
+//-------------------------------------------------------------------------------
+void Equipment::replaceParameter(int index, EquipmentParameter* value)
+{
+  parameters.replace(index, value);
+}
+//-------------------------------------------------------------------------------
+void Equipment::removeParameter(int index)
+{
+  parameters.removeAt(index);
+}
+//-------------------------------------------------------------------------------
+QString Equipment::parametersToString()
+{
+  QString result;
+  for (auto parm : parameters) {
+    result += parm->toString();
+  }
+  return result;
+}
+//-------------------------------------------------------------------------------
+void Equipment::parametersFromString(QString parameter_string)
+{
+  for (auto parameter : parameter_string.split(';')) {
+    parameters.push_back(EquipmentParameter::fromString(parameter, this));
+  }
+}

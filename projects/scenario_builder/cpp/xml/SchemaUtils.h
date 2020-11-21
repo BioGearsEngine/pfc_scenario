@@ -69,11 +69,12 @@ namespace schema {
     static auto make_treatment_plan_ref_list(QList<Treatment*> ref_list, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::treatment_plan_ref_list>;
     static auto make_trauma_occurance_list(QList<TraumaOccurence*> ref_list, pfc::SQLite3Driver* _db) -> std::unique_ptr<schema::trauma_occurence_list>;
 
-    static auto make_equipment_properties_list(QString properties_list) -> std::unique_ptr<schema::equipment_properties_list>;
+    static auto make_equipment_properties_list(QList<EquipmentParameter*> properties_list) -> std::unique_ptr<schema::equipment_properties_list>;
+    static auto make_property_field_list(QList<ParameterField*> properties_list) -> std::unique_ptr<schema::property_field_list>;
     static auto make_authors_list(QString name_list) -> schema::citation::authors_sequence;
     static auto make_event_category(QString cat) -> schema::event_category_enum;
     static auto make_event_fidelity(QString fed) -> schema::event_fidelity_enum;
-    static auto make_property_value_list(QString properties_name_list, QString properties_list) -> std::unique_ptr<schema::property_value_list>;
+    static auto make_property_value_list(QList<EquipmentParameter*> property_name_list, QString property_value_list) -> std::unique_ptr<schema::property_value_list>;
 
     static auto load_assessments(std::unique_ptr<schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<schema::ScenarioSchema>;
     static auto load_authors(std::unique_ptr<schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<schema::ScenarioSchema>;

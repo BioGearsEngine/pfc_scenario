@@ -283,49 +283,28 @@ namespace schema {
   //!   <field>       = <Name>,<Type>
   //!  Future subdivisions of fields can be comma delimited
   //!  Future support for quotes will allow the presence of delimiters in fields
-  auto PFC::make_equipment_properties_list(QString properties_list) -> std::unique_ptr<schema::equipment_properties_list>
+  auto PFC::make_equipment_properties_list(QList<EquipmentParameter*> properties_list) -> std::unique_ptr<schema::equipment_properties_list>
   {
     auto property_list = std::make_unique<schema::equipment_properties_list>();
 
-    QString name = "";
-    QString type = "";
-    QString field = "";
-    std::string field_name;
-    std::string field_type;
-    for (auto& property : properties_list.split(';')) {
-      if (!property.isEmpty()) {
-        auto tokens = property.split(',');
-        if (tokens.size() > 1) {
-          name = tokens.at(0);
-          type = tokens.at(1).toLower();
-          property_list->property().push_back(std::make_unique<::pfc::schema::equipment_property>(
-            make_string(name),
-            std::string("UNKNOWN"),
-            std::make_unique<::pfc::schema::property_field_list>()));
-
-          if (0 == type.compare("integral")) {
-            property_list->property().back().type("INTEGRAL");
-          } else if (0 == type.compare("scalar")) {
-
-            property_list->property().back().type("SCALAR");
-            if (tokens.size() > 2) {
-              field = tokens.at(2);
-              auto field_values = field.split(",");
-              if (field_values.size() == 2) {
-                field_name = field_values.at(0).toStdString();
-                field_type = field_values.at(1).toStdString();
-                property_list->property().back().fields().field().push_back(std::make_unique<::pfc::schema::field_type>(field_name, field_type));
-              }
-            }
-          } else if (0 == type.compare("boolean") || type.compare("bool")) {
-            property_list->property().back().type("BOOLEAN");
-          } else {
-            property_list->property().pop_back();
-          }
-        }
-      }
+    for (auto& property : properties_list) {
+      property_list->property().push_back(
+        std::make_unique<equipment_property>(schema::make_string(property->name),
+                                             schema::make_string(ParameterTypeEnumToString(property->eType)),
+                                             make_property_field_list(property->fields)));
     }
     return property_list;
+  }
+  //-----------------------------------------------------------------------------
+  auto PFC::make_property_field_list(QList<ParameterField*> parameter_field_list) -> std::unique_ptr<schema::property_field_list>
+  {
+    auto property_field_list = std::make_unique<schema::property_field_list>();
+    for (auto field : parameter_field_list) {
+      property_field_list->field().push_back(std::make_unique<schema::field_type>(
+                           schema::make_string(field->name), 
+                           schema::make_string(ParameterTypeEnumToString(field->eType))));
+    }
+    return property_field_list;
   }
   //-----------------------------------------------------------------------------
   auto PFC::make_authors_list(QString name_list) -> schema::citation::authors_sequence
@@ -369,18 +348,17 @@ namespace schema {
     return fidelity;
   }
   //-----------------------------------------------------------------------------
-  auto PFC::make_property_value_list(QString name_list, QString value_list) -> std::unique_ptr<schema::property_value_list>
+  auto PFC::make_property_value_list(QList<EquipmentParameter*> name_list, QString value_list) -> std::unique_ptr<schema::property_value_list>
   {
     //TODO: Get the names of each property
     auto list = std::make_unique<schema::property_value_list>();
-    auto names = name_list.split(';');
+    
     auto values = value_list.split(';');
 
-    auto size = std::min(names.size(), values.size());
+    auto size = std::min(name_list.size(), values.size());
     for (auto i = 0; i < size; ++i) {
-      auto name = (names[i].isEmpty() ? "" : names[i].split(":").at(0)); //TODO: Verify split doesn't need a guard
       auto value = (values[i].isEmpty() ? "" : values[i]);
-      list->value().push_back(std::make_unique<schema::property_value>(make_string(name), make_string(value)));
+      list->value().push_back(std::make_unique<schema::property_value>(make_string(name_list[i]->name), make_string(value)));
     }
     return list;
   }
@@ -459,7 +437,7 @@ namespace schema {
                                                               schema::make_string(input->summary),
                                                               schema::make_string(input->description),
                                                               make_citation_ref_list(input->citations, _db),
-                                                              make_equipment_properties_list(input->properties));
+                                                              make_equipment_properties_list(input->parameters));
     equipment->type(input->type);
     equipment->image(make_string(input->image));
 
@@ -483,7 +461,7 @@ namespace schema {
 
     Objective objRef;
 
-    if (! (input->fk_objective->id == -1)) {
+    if (!(input->fk_objective->id == -1)) {
       objRef.id = input->fk_objective->id;
       _db->select_objective(&objRef);
     }
@@ -526,7 +504,7 @@ namespace schema {
     auto item = std::make_unique<schema::item>(make_string(input->name),
                                                make_string(input->equipment->uuid),
                                                make_string(input->notes),
-                                               make_property_value_list(input->equipment->properties, input->property_values));
+                                               make_property_value_list(input->equipment->parameters, input->property_values));
 
     return item;
   }
@@ -626,19 +604,12 @@ namespace schema {
         temp.citations.push_back(citation);
       }
 
-      std::string properties;
       for (auto& property : equipment.properties().property()) {
-        properties += property.name() + ":" + property.type();
-        for (auto field : property.fields().field()) {
-          properties += ":" + field.name() + "," + field.type();
+        temp.appendParameter(QString::fromStdString(property.name()), ParameterTypeEnumFromString(property.type()));
+        for (auto field_info : property.fields().field()) {
+          temp.parameters.back()->appendField(field_info.name(), ParameterTypeEnumFromString(field_info.type()));
         }
-        properties += ";";
       }
-
-      if (!properties.empty()) {
-        properties.pop_back();
-      }
-      temp.properties = QString::fromStdString(properties);
 
       if (!_db.update_equipment(&temp)) {
         wasSuccessful = false;

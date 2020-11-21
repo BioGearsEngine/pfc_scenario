@@ -399,50 +399,50 @@ bool SQLite3Driver::populate_equipment()
 {
 
   struct sEquipment {
-    std::string name;
+    QString name;
     int type;
     // Type Key
     // 1 = Equipment
     // 2 = Attachment
     // 3 = Substance
     // 4 = Consumable Item
-    std::string summary;
-    std::string description;
-    std::string citations;
-    std::string properties;
+    QString summary;
+    QString description;
+    QString citations;
+    QString parameters;
   };
 
   std::vector<sEquipment> default_equipment = {
-    { "Vitals Monitor", 2, "A small, lightweight vital signs monitor.", "A basic level vitals monitor with many uses depending on available attacthments.", "2;5;6;7", "Available,BOOLEAN" },
-    { "Tempus Pro Kit", 2, "Attatchment kit for the vitals sign monitor.", "Light enough to carry and small enough to hold in one hand, it allows the vitals monitor to easily be deployed in numerous clinical scenarios. While it does support many attachments to allow for a wide range of measurements, some important parameters the tempus pro kit measures includes pulse rate, impedance respiration, contact temperature, pulse oximetry, and noninvasive blood pressure.", "2;5;6;7", "Available,BOOLEAN" },
-    { "Tourniquet", 2, "A device which applies pressure to a limb or extremity in order to control the flow of blood.", "A tourniquet uses compression, typically on a limb, to constrict a vein or artery and limit blood flow as much as possible. This is typically done during hemorrhaging when limiting blood flow to the extremity also limits the blood lost. In a pinch, a cord or tie can be used.", "2;5;6;7", "Available,BOOLEAN" },
-    { "Nasal Cannula", 2, "A device used to deliver increased airflow to a patient in need of respiratory help.", "Tubing with two prongs that get inserted into a patient's nose, this equipment is attached to an oxygen source and mainly used to control oxygen flow to the patient. The advantages to this delivery method is that is less invasive than other oxygen masks and allows a patient to eat and speak normally.", "2;5;6;7", "Available,BOOLEAN" },
-    { "Blood Collection Bag", 4, "Clear plastic bag used to collect and store blood.", "Bags are usually 500 mL in volume (referred to as one unit). Blood type is dependent on antigen presence (A/B) or absence (O) in addition to the presence or absence of Rh factor (+/-).", "2;5;6;7", "Available,BOOLEAN; Count, INTEGER; Kind, ENUM{APos, ANeg, BPos, BNeg, ABPos, ABNeg, OPos, ONeg}" },
-    { "Blood Transfusion Kit", 1, "Kit used for in field blood transfusion.", "Designed for field application, a transfusion kit contains supplies necessary to collect and transfuse fresh whole blood (FWB). The kit typically contains everything from safety supplies and equipment (gloves, blood type test kits, and swabsticks) to collection materials (tubing, needles, collection bag, etc.). Additionally, two sets of most safety materials are supplied to prevent multiple uses on both donor and recipient (i.e. two needles).", "2;5;6;7", "Available,BOOLEAN" },
-    { "Blanket", 2, "Low-weight, low-bulk blanket made of heat-reflective thin plastic sheeting.", "Also referred to as mylar, these are commonly used to prevent heat loss from a human body.", "2;5;6;7", "Available, BOOLEAN" },
-    { "Syringe", 4, "Simple reciprocating pump using plunger or piston to expel liquid or gas through a hypodermic needle.", "In medicine, these can be used to withdraw liquids, such as when cleaning wounds or body cavities, or to inject fluids, as is the case with some drug injections.", "2;5;6;7", "Available,BOOLEAN; Count, INTEGER" },
-    { "Antibiotics", 3, "Antimicrobial substance active against bacteria, used in the treatment and prevention of bacterial infections.", "This medication usually comes in the form of a pill. There are different types of antibiotics for different applications.", "2;5;6;7", "Available, BOOLEAN; Volume, Integer" },
-    { "Epinephrine", 3, "A chemical that narrows blood vessels and opens airways in the lungs.", "Also referred to as adrenaline, this drug is used to treat life-threatening allergic reactions. Epinephrine acts quickly and works to improve breathing, stimulate the heart, raise a dropping blood pressure, reverse hives, and reduce swelling.", "2;5;6;7", "Available, BOOLEAN; Volume, Integer" },
-    { "Fentanyl", 3, "A synthetic opioid pain reliever, approved for treating severe pain.", "Fentanyl is a prescription drug that is also made and used illegally. Like morphine, it is a medicine that is typically used to treat patients with severe pain, especially after surgery. It is also sometimes used to treat patients with chronic pain who are physically tolerant to other opioids.", "2;5;6;7", "Available, BOOLEAN; Volume, Integer" },
-    { "Ketamine", 3, "A dissociative anesthetic used pain relief.", "Ketamine can provide pain relief and short-term memory loss (for example, amnesia of a medical procedure). In surgery, it is used an induction and maintenance agent for sedation and to provide general anesthesia. It has also been used for pain control in burn therapy, battlefield traumas, and in children who cannot use other anesthetics due to side effects or allergies. At normal doses, it is often preferred as an anesthetic in patients at risk of bronchospasm and respiratory depression.", "2;5;6;7", "Available, BOOLEAN; Volume, Integer" },
-    { "Midazolam", 3, "A short action sedative used for anesthesia, procedural sedation, trouble sleeping, and severe agitation.", "Midazolam injection is used before medical procedures and surgery to cause drowsiness, relieve anxiety, and prevent any memory of the event. It is also sometimes given as part of the anesthesia during surgery to produce a loss of consciousness.", "2;5;6;7", "Available, BOOLEAN; Volume, Integer" },
-    { "Morphine", 3, "A narcotic pain reliever used to treat moderate to severe pain.", "Morphine is an opioid medication used to treat severe chronic pain. It has a high rate of addiction, overdose, and death.", "2;5;6;7", "Available, BOOLEAN; Volume, Integer" },
-    { "Narcan", 3, "Naloxone, a medication used to block the effects of opioids, commonly used for decreased breathing in opioid overdose.", "Naloxone is a medicine that rapidly reverses an opioid overdose. It attaches to opioid receptors and reverses and blocks the effects of other opioids. Naloxone is a safe medicine. It only reverses overdoses in people with opioids in their systems.", "2;5;6;7", "Available, BOOLEAN; Volume, Integer" },
-    { "Urine Foley", 4, "Catheter used to drain urine.", "A soft plastic or rubber tube that is inserted through the urethra into the bladder. These are typically used when a patient has difficulties urinating on their own.", "2;5;6;7", "" },
-    { "Urine Bottle", 4, "Bag used to catch and store drained urine.", "", "2;5;6;7", "" },
-    { "Water", 4, "An inorganic, transparent, tasteless, odorless, and nearly colorless chemical substance.", "It is also essential to and the primary component of living organic beings.", "2;5;6;7", "Volume, INTEGER" },
-    { "Energy Gel", 4, "Carbohydrate gel used to provide energy and promote recovery.", "", "2;5;6;7", "Count, INTEGER" },
-    { "Splint", 2, "a rigid or flexible device that maintains in position a displaced or injured part.", "Mostly used for broken bones, a splint is fastened along a injured length of a person's body in order to limit movement and further trauma.", "2;5;6;7", "Available, BOOLEAN" },
-    { "Peripheral IV", 2, "A peripheral intravenous line is a small, short plastic catheter that is placed through the skin into a vein.", "A peripheral intravenous line is used to give fluids and/or medications directly into the blood stream.", "2;5;6;7", "Available, BOOLEAN" },
-    { "Wound Pack", 2, "Non-adherent and absorbent material used to control bleeding of an open wound.", "Wound fillers, such as non-adherent gauze, pads, ointments, sponges, and other materials designed to manage exudate.", "2;5;6;7", "Available, BOOLEAN" },
-    { "Wound Wrap", 2, "A strip of fabric used especially to cover, dress, and bind up wounds.", "It can also be used to provide pressure to the bleeding.", "2;5;6;7", "Available, BOOLEAN" },
-    { "Oxygen Tank", 1, "A tank of oxygen.", "In medicine, an oxygen tank provide controlled and therapeutic oxygen delivery to a patient.", "2;5;6;7", "Available, BOOLEAN; Volume, INTEGER" },
-    { "IV Pole", 1, "The pole use to hang IV bags on.", "It provides patient mobility to move around a facility while keeping IV lines in.", "2;5;6;7", "Available, BOOLEAN" },
-    { "IV Bag", 4, "Bag used to store and deliver fluids to a patient.", "", "2;5;6;7", "Available, BOOLEAN; Count, INTEGER; Volume, INTEGER; Kind, ENUM{Saline, Lactated Ringers}" },
-    { "Catheter Supplies", 4, "Catheters and the products that are used to insert or remove a catheter, and maintain catheter function.", "", "2;5;6;7", "Available, BOOLEAN; Count, INTEGER" },
-    { "Chest Tube", 4, "A chest tube is a hollow, flexible tube placed into the chest.", "Acts as a drain. Chest tubes drain blood, fluid, or air from around your lungs, heart, or esophagus. The tube around your lung is placed between your ribs and into the space between the inner lining and the outer lining of your chest cavity", "2;5;6;7", "Avaliable,BOOLEAN;Count,INTEGER" },
-    { "Needle Decompression Kits", 4, "14 guage by 3.25 inch needle and catheter", "This is a 14 gauge by 3.25 inch needle and catheter for use in the management of combat casualties who present with the signs and symptoms of a tension pneumothorax. This device meets 100% of the requirements for fit, form and function that is listed for NSN 6515-01-541-0635. The hard plastic case protects the needle and catheter from bending or damage and harsh environmental conditions while in your kit. ", "2;5;6;7", "Avaliable,BOOLEAN;Count,INTEGER" },
-    { "Burn Ointments", 4, "Neosporin Burn Relief & First-Aid Antibiotic Ointment, .5 OZ", "NEOSPORIN + Burn Relief Dual Action Ointment is an antibiotic ointment that provides infection protection and helps soothe minor burn pain. Formulated for first aid wound treatment, it contains bacitracin zinc, neomycin sulfate, and polymyxin B sulfate for antibiotic care of minor burns and wounds. The topical analgesic ointment is also formulated with pramoxine hydrochloride to help soothe and reduce burn pain for maximum-strength relief. From the #1 doctor-recommended brand, this antibiotic and pain relief ointment provides maximum strength relief without any sting forburn treatment, including cooking burns. Neosporin + Burn Relief Dual Action Ointment is a wound care essential to include in any burn care first-aid kit. ", "2;5;6;7", "Avaliable,BOOLEAN;Count,INTEGER" }
+    { "Vitals Monitor", 2, "A small, lightweight vital signs monitor.", "A basic level vitals monitor with many uses depending on available attacthments.", "2;5;6;7", "Available:BOOLEAN" },
+    { "Tempus Pro Kit", 2, "Attatchment kit for the vitals sign monitor.", "Light enough to carry and small enough to hold in one hand, it allows the vitals monitor to easily be deployed in numerous clinical scenarios. While it does support many attachments to allow for a wide range of measurements, some important parameters the tempus pro kit measures includes pulse rate, impedance respiration, contact temperature, pulse oximetry, and noninvasive blood pressure.", "2;5;6;7", "Available:BOOLEAN" },
+    { "Tourniquet", 2, "A device which applies pressure to a limb or extremity in order to control the flow of blood.", "A tourniquet uses compression, typically on a limb, to constrict a vein or artery and limit blood flow as much as possible. This is typically done during hemorrhaging when limiting blood flow to the extremity also limits the blood lost. In a pinch, a cord or tie can be used.", "2;5;6;7", "Available:BOOLEAN" },
+    { "Nasal Cannula", 2, "A device used to deliver increased airflow to a patient in need of respiratory help.", "Tubing with two prongs that get inserted into a patient's nose, this equipment is attached to an oxygen source and mainly used to control oxygen flow to the patient. The advantages to this delivery method is that is less invasive than other oxygen masks and allows a patient to eat and speak normally.", "2;5;6;7", "Available:BOOLEAN" },
+    { "Blood Collection Bag", 4, "Clear plastic bag used to collect and store blood.", "Bags are usually 500 mL in volume (referred to as one unit). Blood type is dependent on antigen presence (A/B) or absence (O) in addition to the presence or absence of Rh factor (+/-).", "2;5;6;7", "Available:BOOLEAN;Count,INTEGER;Kind:ENUM{APos, ANeg, BPos, BNeg, ABPos, ABNeg, OPos, ONeg}" },
+    { "Blood Transfusion Kit", 1, "Kit used for in field blood transfusion.", "Designed for field application, a transfusion kit contains supplies necessary to collect and transfuse fresh whole blood (FWB). The kit typically contains everything from safety supplies and equipment (gloves, blood type test kits, and swabsticks) to collection materials (tubing, needles, collection bag, etc.). Additionally, two sets of most safety materials are supplied to prevent multiple uses on both donor and recipient (i.e. two needles).", "2;5;6;7", "Available:BOOLEAN" },
+    { "Blanket", 2, "Low-weight, low-bulk blanket made of heat-reflective thin plastic sheeting.", "Also referred to as mylar, these are commonly used to prevent heat loss from a human body.", "2;5;6;7", "Available:BOOLEAN" },
+    { "Syringe", 4, "Simple reciprocating pump using plunger or piston to expel liquid or gas through a hypodermic needle.", "In medicine, these can be used to withdraw liquids, such as when cleaning wounds or body cavities, or to inject fluids, as is the case with some drug injections.", "2;5;6;7", "Available:BOOLEAN;Count:INTEGER" },
+    { "Antibiotics", 3, "Antimicrobial substance active against bacteria, used in the treatment and prevention of bacterial infections.", "This medication usually comes in the form of a pill. There are different types of antibiotics for different applications.", "2;5;6;7", "Available,BOOLEAN;Volume:Integer" },
+    { "Epinephrine", 3, "A chemical that narrows blood vessels and opens airways in the lungs.", "Also referred to as adrenaline, this drug is used to treat life-threatening allergic reactions. Epinephrine acts quickly and works to improve breathing, stimulate the heart, raise a dropping blood pressure, reverse hives, and reduce swelling.", "2;5;6;7", "Available:BOOLEAN;Volume:Integer" },
+    { "Fentanyl", 3, "A synthetic opioid pain reliever, approved for treating severe pain.", "Fentanyl is a prescription drug that is also made and used illegally. Like morphine, it is a medicine that is typically used to treat patients with severe pain, especially after surgery. It is also sometimes used to treat patients with chronic pain who are physically tolerant to other opioids.", "2;5;6;7", "Available:BOOLEAN;Volume:Integer" },
+    { "Ketamine", 3, "A dissociative anesthetic used pain relief.", "Ketamine can provide pain relief and short-term memory loss (for example, amnesia of a medical procedure). In surgery, it is used an induction and maintenance agent for sedation and to provide general anesthesia. It has also been used for pain control in burn therapy, battlefield traumas, and in children who cannot use other anesthetics due to side effects or allergies. At normal doses, it is often preferred as an anesthetic in patients at risk of bronchospasm and respiratory depression.", "2;5;6;7", "Available:BOOLEAN;Volume:Integer" },
+    { "Midazolam", 3, "A short action sedative used for anesthesia, procedural sedation, trouble sleeping, and severe agitation.", "Midazolam injection is used before medical procedures and surgery to cause drowsiness, relieve anxiety, and prevent any memory of the event. It is also sometimes given as part of the anesthesia during surgery to produce a loss of consciousness.", "2;5;6;7", "Available:BOOLEAN;Volume:Integer" },
+    { "Morphine", 3, "A narcotic pain reliever used to treat moderate to severe pain.", "Morphine is an opioid medication used to treat severe chronic pain. It has a high rate of addiction, overdose, and death.", "2;5;6;7", "Available:BOOLEAN;Volume:Integer" },
+    { "Narcan", 3, "Naloxone, a medication used to block the effects of opioids, commonly used for decreased breathing in opioid overdose.", "Naloxone is a medicine that rapidly reverses an opioid overdose. It attaches to opioid receptors and reverses and blocks the effects of other opioids. Naloxone is a safe medicine. It only reverses overdoses in people with opioids in their systems.", "2;5;6;7", "Available:BOOLEAN;Volume:Integer" },
+    { "Urine Foley", 4, "Catheter used to drain urine.", "A soft plastic or rubber tube that is inserted through the urethra into the bladder. These are typically used when a patient has difficulties urinating on their own.", "2;5;6;7", "Available,BOOLEAN" },
+    { "Urine Bottle", 4, "Bag used to catch and store drained urine.", "", "2;5;6;7", "Available:BOOLEAN" },
+    { "Water", 4, "An inorganic, transparent, tasteless, odorless, and nearly colorless chemical substance.", "It is also essential to and the primary component of living organic beings.", "2;5;6;7", "Volume:INTEGER" },
+    { "Energy Gel", 4, "Carbohydrate gel used to provide energy and promote recovery.", "", "2;5;6;7", "Count:INTEGER" },
+    { "Splint", 2, "a rigid or flexible device that maintains in position a displaced or injured part.", "Mostly used for broken bones, a splint is fastened along a injured length of a person's body in order to limit movement and further trauma.", "2;5;6;7", "Available:BOOLEAN" },
+    { "Peripheral IV", 2, "A peripheral intravenous line is a small, short plastic catheter that is placed through the skin into a vein.", "A peripheral intravenous line is used to give fluids and/or medications directly into the blood stream.", "2;5;6;7", "Available:BOOLEAN" },
+    { "Wound Pack", 2, "Non-adherent and absorbent material used to control bleeding of an open wound.", "Wound fillers, such as non-adherent gauze, pads, ointments, sponges, and other materials designed to manage exudate.", "2;5;6;7", "Available:BOOLEAN" },
+    { "Wound Wrap", 2, "A strip of fabric used especially to cover, dress, and bind up wounds.", "It can also be used to provide pressure to the bleeding.", "2;5;6;7", "Available:BOOLEAN" },
+    { "Oxygen Tank", 1, "A tank of oxygen.", "In medicine, an oxygen tank provide controlled and therapeutic oxygen delivery to a patient.", "2;5;6;7", "Available,BOOLEAN;Volume:INTEGER" },
+    { "IV Pole", 1, "The pole use to hang IV bags on.", "It provides patient mobility to move around a facility while keeping IV lines in.", "2;5;6;7", "Available:BOOLEAN" },
+    { "IV Bag", 4, "Bag used to store and deliver fluids to a patient.", "", "2;5;6;7", "Available:BOOLEAN;Count:INTEGER;Volume:INTEGER;Kind:ENUM{Saline,Lactated Ringers}" },
+    { "Catheter Supplies", 4, "Catheters and the products that are used to insert or remove a catheter, and maintain catheter function.", "", "2;5;6;7", "Available:BOOLEAN;Count:INTEGER" },
+    { "Chest Tube", 4, "A chest tube is a hollow, flexible tube placed into the chest.", "Acts as a drain. Chest tubes drain blood, fluid, or air from around your lungs, heart, or esophagus. The tube around your lung is placed between your ribs and into the space between the inner lining and the outer lining of your chest cavity", "2;5;6;7", "Available:BOOLEAN;Count:INTEGER" },
+    { "Needle Decompression Kits", 4, "14 guage by 3.25 inch needle and catheter", "This is a 14 gauge by 3.25 inch needle and catheter for use in the management of combat casualties who present with the signs and symptoms of a tension pneumothorax. This device meets 100% of the requirements for fit, form and function that is listed for NSN 6515-01-541-0635. The hard plastic case protects the needle and catheter from bending or damage and harsh environmental conditions while in your kit. ", "2;5;6;7", "Available:BOOLEAN;Count:INTEGER" },
+    { "Burn Ointments", 4, "Neosporin Burn Relief & First-Aid Antibiotic Ointment, .5 OZ", "NEOSPORIN + Burn Relief Dual Action Ointment is an antibiotic ointment that provides infection protection and helps soothe minor burn pain. Formulated for first aid wound treatment, it contains bacitracin zinc, neomycin sulfate, and polymyxin B sulfate for antibiotic care of minor burns and wounds. The topical analgesic ointment is also formulated with pramoxine hydrochloride to help soothe and reduce burn pain for maximum-strength relief. From the #1 doctor-recommended brand, this antibiotic and pain relief ointment provides maximum strength relief without any sting forburn treatment, including cooking burns. Neosporin + Burn Relief Dual Action Ointment is a wound care essential to include in any burn care first-aid kit. ", "2;5;6;7", "Available:BOOLEAN;Count:INTEGER" }
   };
 
   Equipment temp;
@@ -450,22 +450,23 @@ bool SQLite3Driver::populate_equipment()
 
   for (auto& equipmentDef : default_equipment) {
     temp.clear();
-    temp.name = equipmentDef.name.c_str();
+    temp.name = equipmentDef.name;
     temp.type = equipmentDef.type;
-    temp.summary = equipmentDef.summary.c_str();
-    temp.description = equipmentDef.description.c_str();
+    temp.summary = equipmentDef.summary;
+    temp.description = equipmentDef.description;
 
-    for (auto citation_id : string_split(equipmentDef.citations, ";")) {
-      if (!citation_id.empty()) {
+    for (auto citation_id : equipmentDef.citations.split(";")) {
+      if (!citation_id.isEmpty()) {
         citation = new Citation(&temp);
-        citation->id = std::stoi(citation_id);
+        citation->id = citation_id.toInt();
         if (select_citation(citation)) {
           temp.citations.push_back(citation);
         }
       }
     }
 
-    temp.properties = equipmentDef.properties.c_str();
+    temp.parametersFromString(equipmentDef.parameters);
+
     if (!select_equipment(&temp)) {
       update_equipment(&temp);
     }
@@ -494,7 +495,7 @@ bool SQLite3Driver::populate_traumas()
     { "Second Degree Burn", "Partial Thickness Burn", "A burn that affects the epidermis and dermis (lower layers of skin). In addition to the symptoms of a first degree, a second degree burn can also cause blistering.", "2;3", 0.34, 0.66 }, //Burn Wound, second third (% surface area)
     { "Third Degree Burn", "Full Thickness Burn", "A burn that goes through the dermis and affects deep skin tissue layers. The result is a white or blackened, charred skin that may lose some feeling.", "2;3", 0.67, 1.0 }, //Burn Wound, last third (% surface area)
     { "Hemorrhage", "Bleeding", "Hemorrhaging is the release of blood from any blood vessel, either inside or outside of the body. When discussing hemorrhage, it is important to identify both severity (typically as a measure of blood loss rate) and location.", "1;2;3", 0.0, 225 }, //Hemorrhage in mL/min (150 considered massive blood loss, increase by 50% for extreme condition)
-    { "Tension Pneumothorax", "Collapsed Lung", "A tension pneumothorax is when air leaks into the pleural space between the lungs and chest wall. It typically occurs as a result of blunt or penetrating trauma and can be classified as either open or closed.", "2;3", 0.0, 1.0 } //Tension Pneumothorax is a 
+    { "Tension Pneumothorax", "Collapsed Lung", "A tension pneumothorax is when air leaks into the pleural space between the lungs and chest wall. It typically occurs as a result of blunt or penetrating trauma and can be classified as either open or closed.", "2;3", 0.0, 1.0 } //Tension Pneumothorax is a
   };
 
   Trauma temp;
@@ -2047,7 +2048,7 @@ inline void SQLite3Driver::assign_equipment(const QSqlRecord& record, Equipment&
     }
   }
   equipment.image = record.value(EQUIPMENT_IMAGE).toString();
-  equipment.properties = record.value(EQUIPMENT_PROPERTIES).toString();
+  equipment.parametersFromString(record.value(EQUIPMENT_PROPERTIES).toString());
 }
 int SQLite3Driver::equipment_count() const
 {
@@ -2176,7 +2177,7 @@ bool SQLite3Driver::update_equipment(Equipment* equipment)
 
     query.bindValue(":citations", citations);
     query.bindValue(":image", equipment->image);
-    query.bindValue(":properties", equipment->properties);
+    query.bindValue(":properties", equipment->parametersToString());
 
     if (!query.exec()) {
       qWarning() << "update_equipment" << query.lastError();
@@ -2882,7 +2883,7 @@ bool SQLite3Driver::update_scene(Scene* scene, bool createLocationIfMissing)
             emit locationsChanged();
             return true;
           }
-        }   else {
+        } else {
           return true;
         }
       }
