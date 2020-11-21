@@ -288,10 +288,18 @@ namespace schema {
     auto property_list = std::make_unique<schema::equipment_properties_list>();
 
     for (auto& property : properties_list) {
-      property_list->property().push_back(
-        std::make_unique<equipment_property>(schema::make_string(property->name),
-                                             schema::make_string(ParameterTypeEnumToString(property->eType)),
-                                             make_property_field_list(property->fields)));
+      if (property->eType == ParameterTypeEnum::ENUM) {
+        property_list->property().push_back(
+          std::make_unique<equipment_property>(schema::make_string(property->name),
+                                               schema::make_string(ParameterTypeEnumToString(property->eType)),
+                                               make_property_field_list(property->enumOptions)));
+      } else {
+
+        property_list->property().push_back(
+          std::make_unique<equipment_property>(schema::make_string(property->name),
+                                               schema::make_string(ParameterTypeEnumToString(property->eType)),
+                                               make_property_field_list(property->fields)));
+      }
     }
     return property_list;
   }
@@ -301,8 +309,18 @@ namespace schema {
     auto property_field_list = std::make_unique<schema::property_field_list>();
     for (auto field : parameter_field_list) {
       property_field_list->field().push_back(std::make_unique<schema::field_type>(
-                           schema::make_string(field->name), 
-                           schema::make_string(ParameterTypeEnumToString(field->eType))));
+        schema::make_string(field->name),
+        schema::make_string(ParameterTypeEnumToString(field->eType))));
+    }
+    return property_field_list;
+  }
+  auto PFC::make_property_field_list(QList<QString> parameter_field_list) -> std::unique_ptr<schema::property_field_list>
+  {
+    auto property_field_list = std::make_unique<schema::property_field_list>();
+    for (auto field : parameter_field_list) {
+      property_field_list->field().push_back(std::make_unique<schema::field_type>(
+        schema::make_string(field),
+        schema::make_string("OPTION")));
     }
     return property_field_list;
   }
@@ -352,7 +370,7 @@ namespace schema {
   {
     //TODO: Get the names of each property
     auto list = std::make_unique<schema::property_value_list>();
-    
+
     auto values = value_list.split(';');
 
     auto size = std::min(name_list.size(), values.size());
@@ -607,7 +625,11 @@ namespace schema {
       for (auto& property : equipment.properties().property()) {
         temp.appendParameter(QString::fromStdString(property.name()), ParameterTypeEnumFromString(property.type()));
         for (auto field_info : property.fields().field()) {
-          temp.parameters.back()->appendField(field_info.name(), ParameterTypeEnumFromString(field_info.type()));
+          if (temp.parameters.back()->eType == ParameterTypeEnum::ENUM) {
+            temp.parameters.back()->enumOptions.push_back(QString::fromStdString(field_info.name()));
+          } else {
+            temp.parameters.back()->appendField(field_info.name(), ParameterTypeEnumFromString(field_info.type()));
+          }
         }
       }
 

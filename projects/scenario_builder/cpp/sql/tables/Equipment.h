@@ -27,7 +27,8 @@ enum class ParameterTypeEnum {
   INTEGRAL,
   RANGE,
   SCALAR,
-  ENUM
+  ENUM,
+  eOPTION
 };
 
 QString ParameterTypeEnumToString(ParameterTypeEnum value);

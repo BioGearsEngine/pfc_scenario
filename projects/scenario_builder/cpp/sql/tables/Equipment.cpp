@@ -1,25 +1,25 @@
 #include "Equipment.h"
 #include "Citation.h"
 
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
+
 QString ParameterTypeEnumToString(ParameterTypeEnum value)
 {
   if (value == ParameterTypeEnum::STRING) {
     return "STRING";
-  }
-  if (value == ParameterTypeEnum::BOOLEAN) {
+  } else if (value == ParameterTypeEnum::BOOLEAN) {
     return "BOOLEAN";
-  }
-  if (value == ParameterTypeEnum::INTEGRAL) {
+  } else if (value == ParameterTypeEnum::INTEGRAL) {
     return "INTEGRAL";
-  }
-  if (value == ParameterTypeEnum::RANGE) {
+  } else if (value == ParameterTypeEnum::RANGE) {
     return "RANGE";
-  }
-  if (value == ParameterTypeEnum::SCALAR) {
+  } else if (value == ParameterTypeEnum::SCALAR) {
     return "SCALAR";
-  }
-  if (value == ParameterTypeEnum::ENUM) {
+  } else if (value == ParameterTypeEnum::ENUM) {
     return "ENUM";
+  } else if (value == ParameterTypeEnum::eOPTION) {
+    return "OPTION";
   } else {
     return "UNKOWN";
   }
@@ -29,20 +29,24 @@ ParameterTypeEnum ParameterTypeEnumFromString(QString value)
 {
   if (value == "STRING") {
     return ParameterTypeEnum::STRING;
-  }
-  if (value == "BOOLEAN") {
+  } else if (value == "BOOLEAN") {
     return ParameterTypeEnum::BOOLEAN;
-  }
-  if (value == "INTEGRAL") {
+  } else if (value == "INTEGRAL" || value == "INTEGER") {
     return ParameterTypeEnum::INTEGRAL;
-  }
-  if (value == "RANGE") {
+  } else if (value == "RANGE") {
     return ParameterTypeEnum::RANGE;
-  }
-  if (value == "SCALAR") {
+  } else if (value == "SCALAR") {
     return ParameterTypeEnum::SCALAR;
+  } else if (value == "ENUM") {
+    return ParameterTypeEnum::ENUM;
+  } else if (value == "OPTION") {
+    return ParameterTypeEnum::eOPTION;
   }
-  if (value == "ENUM") {
+
+  QRegularExpression enumRegxp { R"(\s*ENUM\s*{\s*(.*)\s*}\s*)" };
+  QRegularExpressionMatch enumMatches;
+  enumMatches = enumRegxp.match(value);
+  if (enumMatches.hasMatch()) {
     return ParameterTypeEnum::ENUM;
   } else {
     return ParameterTypeEnum::UNKOWN;
@@ -51,26 +55,7 @@ ParameterTypeEnum ParameterTypeEnumFromString(QString value)
 //--------------------------------------------------------------------------------------------
 ParameterTypeEnum ParameterTypeEnumFromString(std::string value)
 {
-  if (value == "STRING") {
-    return ParameterTypeEnum::STRING;
-  }
-  if (value == "BOOLEAN") {
-    return ParameterTypeEnum::BOOLEAN;
-  }
-  if (value == "INTEGRAL") {
-    return ParameterTypeEnum::INTEGRAL;
-  }
-  if (value == "RANGE") {
-    return ParameterTypeEnum::RANGE;
-  }
-  if (value == "SCALAR") {
-    return ParameterTypeEnum::SCALAR;
-  }
-  if (value == "ENUM") {
-    return ParameterTypeEnum::ENUM;
-  } else {
-    return ParameterTypeEnum::UNKOWN;
-  }
+  return ParameterTypeEnumFromString(QString(value.c_str()));
 }
 //--------------------------------------------------------------------------------------------
 //!
@@ -104,7 +89,7 @@ ParameterField* ParameterField::make(QObject* parent)
   return new ParameterField(parent);
 }
 //--------------------------------------------------------------------------------------------
-ParameterField* ParameterField::make(QString name, ParameterTypeEnum type, QObject* parent )
+ParameterField* ParameterField::make(QString name, ParameterTypeEnum type, QObject* parent)
 {
   return new ParameterField(name, type, parent);
 }
@@ -156,9 +141,11 @@ EquipmentParameter::EquipmentParameter(QString parameter_string, QObject* parent
     auto parts = param.split(':');
     if (eType == ParameterTypeEnum::UNKOWN) {
       name = parts[0];
-      eType = ParameterTypeEnumFromString(parts[1]);
+      eType = ParameterTypeEnumFromString(parts[1].trimmed());
+    } else if (eType == ParameterTypeEnum::ENUM) {
+      enumOptions.push_back(param.trimmed());
     } else {
-      fields.push_back(ParameterField::make(parts[0], ParameterTypeEnumFromString(parts[1]), this));
+      fields.push_back(ParameterField::make(parts[0].trimmed(), ParameterTypeEnumFromString(parts[1].trimmed()), this));
     }
   }
 }
@@ -298,6 +285,9 @@ void EquipmentParameter::removeField(int index)
 QString EquipmentParameter::toString()
 {
   QString value = QString("%1:%2").arg(name).arg(ParameterTypeEnumToString(eType));
+  for (auto options : enumOptions) {
+    value += QString(",%1").arg(options);
+  }
   for (auto field : fields) {
     value += QString(",%1").arg(field->toString());
   }
@@ -516,7 +506,10 @@ QString Equipment::parametersToString()
 {
   QString result;
   for (auto parm : parameters) {
-    result += parm->toString();
+    result += QString("%1;").arg(parm->toString());
+  }
+  if (!result.isEmpty()) {
+    result.remove(result.size() - 1, 1);
   }
   return result;
 }
@@ -524,6 +517,8 @@ QString Equipment::parametersToString()
 void Equipment::parametersFromString(QString parameter_string)
 {
   for (auto parameter : parameter_string.split(';')) {
-    parameters.push_back(EquipmentParameter::fromString(parameter, this));
+    if (!parameter.isEmpty()) {
+      parameters.push_back(EquipmentParameter::fromString(parameter, this));
+    }
   }
 }

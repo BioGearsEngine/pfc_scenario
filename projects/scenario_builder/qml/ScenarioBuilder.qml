@@ -144,7 +144,7 @@ ApplicationWindow {
     visible : false
     selectMultiple : false
     selectExisting : true
-    nameFilters : ["Scenarios (*pfc.zip *.pfc *.zip)", "All files (*)"]
+    nameFilters : ["Scenarios (*.pfc.zip *.pfc *.zip)", "All files (*)"]
     folder : "./" // StandardPaths.writableLocation(StandardPaths.DesktopLocation)
     onAccepted : {
       scenario_model.log_scenario_file(loadDialog.fileUrls);
@@ -170,7 +170,7 @@ ApplicationWindow {
     visible : false
     selectMultiple : false
     selectExisting : false
-    nameFilters : ["Scenarios (*pfc.zip *.pfc *.zip)", "All files (*)"]
+    nameFilters : ["Scenarios (*.pfc.zip *.pfc *.zip)", "All files (*)"]
     folder : "./" // StandardPaths.writableLocation(StandardPaths.DesktopLocation)
     onAccepted : {
       property_g.name = "archive_file";

@@ -71,6 +71,7 @@ namespace schema {
 
     static auto make_equipment_properties_list(QList<EquipmentParameter*> properties_list) -> std::unique_ptr<schema::equipment_properties_list>;
     static auto make_property_field_list(QList<ParameterField*> properties_list) -> std::unique_ptr<schema::property_field_list>;
+    static auto make_property_field_list(QList<QString> properties_list) -> std::unique_ptr<schema::property_field_list>;
     static auto make_authors_list(QString name_list) -> schema::citation::authors_sequence;
     static auto make_event_category(QString cat) -> schema::event_category_enum;
     static auto make_event_fidelity(QString fed) -> schema::event_fidelity_enum;
