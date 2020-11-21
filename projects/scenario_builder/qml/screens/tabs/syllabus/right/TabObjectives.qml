@@ -132,9 +132,11 @@ ColumnLayout {
   onCurrentObjectiveChanged : {
     refresh_citations()
   }
-  onBackendChanged : {
-    if (backend) {
-      backend.citationsChanged.connect(refresh_citations);
+
+  Connections {
+    target : backend
+    onCitationsChanged : {
+      refresh_citations()
     }
   }
 }

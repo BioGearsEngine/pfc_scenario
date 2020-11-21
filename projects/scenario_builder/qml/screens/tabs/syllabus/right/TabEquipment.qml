@@ -187,18 +187,20 @@ ScrollView {
     }
   }
   function update_equipment(equipment) {
-    if (equipment) {
+    if (equipment && equipment) {
       root.backend.update_equipment(equipment)
     }
   }
   function refresh_citations() {
-    citationStack.equipmentCitations = []
-    let citations = currentEquipment.citations;
-    for (var ii = 0; ii < citations.length; ++ ii) {
-      citationStack.equipmentCitations.push(citation_g.make());
-      citationStack.equipmentCitations[citationStack.equipmentCitations.length - 1].assign(citations[ii]);
+    if(backend && currentEquipment) {
+      citationStack.equipmentCitations = []
+      let citations = currentEquipment.citations;
+      for (var ii = 0; ii < citations.length; ++ ii) {
+        citationStack.equipmentCitations.push(citation_g.make());
+        citationStack.equipmentCitations[citationStack.equipmentCitations.length - 1].assign(citations[ii]);
+      }
+      referenceList.model = citationStack.equipmentCitations;
     }
-    referenceList.model = citationStack.equipmentCitations;
   }
   function refresh_all_citations() {
     citationStack.allCitations = [];

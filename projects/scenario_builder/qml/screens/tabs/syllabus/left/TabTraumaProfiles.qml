@@ -158,10 +158,11 @@ ColumnLayout {
   Component.onCompleted : {
     update_truamaProfiles()
   }
-
-  onBackendChanged : {
-    if (backend) {
-      backend.traumaProfilesChanged.connect(update_truamaProfiles)
+  
+  Connections {
+    target : backend
+    onTraumaProfilesChanged : {
+      update_truamaProfiles()
     }
   }
 }

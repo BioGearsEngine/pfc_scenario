@@ -183,9 +183,10 @@ ColumnLayout {
     update_equipment()
   }
 
-  onBackendChanged : {
-    if (backend) {
-      backend.equipmentChanged.connect(update_equipment)
+  Connections {
+    target : backend
+    onEquipmentChanged : {
+      update_equipment()
     }
   }
 }

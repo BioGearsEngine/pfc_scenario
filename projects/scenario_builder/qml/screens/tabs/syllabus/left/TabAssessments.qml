@@ -178,9 +178,10 @@ ColumnLayout {
     update_assessments()
   }
 
-  onBackendChanged : {
-    if (backend) {
-      backend.assessmentsChanged.connect(update_assessments)
+  Connections {
+    target : backend
+    onAssessmentsChanged : {
+      update_assessments()
     }
   }
 }

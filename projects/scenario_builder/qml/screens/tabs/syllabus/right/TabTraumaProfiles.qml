@@ -162,14 +162,21 @@ ColumnLayout {
       text : "Browse"
     }
   }
-  onBackendChanged : {
-    if (backend) {
-      backend.traumaProfilesChanged.connect(refresh_traumas);
-      backend.traumasChanged.connect(refresh_traumas);
-      backend.equipmentChanged.connect(refresh_traumas);
-    }
-  }
+
   onCurrentProfileChanged : {
     refresh_traumas()
+  }
+    
+  Connections {
+    target : backend
+    onTraumaProfilesChanged : {
+      update_truamaProfiles()
+    }
+    onTraumasChanged : {
+      update_truamaProfiles()
+    }
+    onEquipmentChanged : {
+      update_truamaProfiles()
+    }
   }
 }

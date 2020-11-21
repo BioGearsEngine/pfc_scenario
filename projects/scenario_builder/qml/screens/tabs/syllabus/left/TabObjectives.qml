@@ -171,10 +171,11 @@ ColumnLayout {
   Component.onCompleted : {
     update_objectives()
   }
-
-  onBackendChanged : {
-    if (backend) {
-      backend.objectivesChanged.connect(update_objectives)
+  
+  Connections {
+    target : backend
+    onObjectivesChanged : {
+      update_objectives()
     }
   }
 }

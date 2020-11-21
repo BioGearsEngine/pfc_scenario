@@ -19,13 +19,13 @@ ColumnLayout {
   }
 
   function update_treatments() {
-    treatmentList.treatmentDefinitions = []
-    let treatments = root.backend.treatments;
-    for (var ii = 0; ii < treatments.length; ++ ii) {
-      treatmentList.treatmentDefinitions.push(currentTreatment.make());
-      treatmentList.treatmentDefinitions[treatmentList.treatmentDefinitions.length - 1].assign(treatments[ii]);
-    }
-    treatmentList.model = treatmentList.treatmentDefinitions;
+      treatmentList.treatmentDefinitions = []
+      let treatments = root.backend.treatments;
+      for (var ii = 0; ii < treatments.length; ++ ii) {
+        treatmentList.treatmentDefinitions.push(currentTreatment.make());
+        treatmentList.treatmentDefinitions[treatmentList.treatmentDefinitions.length - 1].assign(treatments[ii]);
+      }
+      treatmentList.model = treatmentList.treatmentDefinitions;
   }
 
   Rectangle {
@@ -174,14 +174,10 @@ ColumnLayout {
     update_treatments()
   }
 
-  onBackendChanged : {
-    if (backend) {
-      backend.treatmentsChanged.connect(update_treatments)
+  Connections {
+    target : backend
+    onTreatmentsChanged : {
+      update_treatments()
     }
   }
 }
-
-/*##^## Designer {
-    D{i:0;autoSize:true;height:480;width:640}
-}
- ##^##*/

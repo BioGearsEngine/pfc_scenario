@@ -176,9 +176,10 @@ ColumnLayout {
     update_traumas()
   }
 
-  onBackendChanged : {
-    if (backend) {
-      backend.traumasChanged.connect(update_traumas)
+  Connections {
+    target : backend
+    onTraumasChanged : {
+      update_traumas()
     }
   }
 }

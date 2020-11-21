@@ -86,7 +86,7 @@ ApplicationWindow {
           saveOption.enabled = false;
           saveAsOption.enabled = false;
           closeOption.enabled = false;
-          mainView.push(welcomeScreen);
+          //mainView.push(welcomeScreen);
         }
       }
     }
