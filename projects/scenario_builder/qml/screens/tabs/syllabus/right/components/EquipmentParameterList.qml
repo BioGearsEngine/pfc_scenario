@@ -15,6 +15,7 @@ CrossReferenceForm {
   signal parameterAdded(int index, EquipmentParameter parameter)
   signal parameterRemoved(int index, EquipmentParameter parameter)
 
+  focus : true
   label : "Parameter"
   labelPlaural : "Parameters"
   spacing : 0
@@ -44,7 +45,7 @@ CrossReferenceForm {
       Rectangle {
         id: parameterHeader
         Layout.fillWidth : true
-        height : childrenRect.height
+        Layout.minimumHeight : childrenRect.height
         color : (enabled) ? Material.primary : Material.color(Material.BlueGrey, Material.Shade100)
         enabled : false
         Label {
@@ -69,7 +70,7 @@ CrossReferenceForm {
             topMargin : 2
           }
           font.pointSize : (enabled) ? 12 : 10
-          text : "commonDelegate"
+          text : root.model[selfID].name 
           color : (enabled) ? "White" : Material.primaryTextColor 
           enabled : false
           readOnly : true
@@ -145,7 +146,7 @@ CrossReferenceForm {
       Rectangle {
         id : parameterBody
         Layout.fillWidth : true
-        height : parameterBodyLoader.height
+        Layout.minimumHeight : childrenRect.height
         color : Material.backgroundColor
         border.color : Material.color(Material.Blue)
         
@@ -158,19 +159,20 @@ CrossReferenceForm {
             top : parameterBody.top;
           }
           height : (item !== null && typeof(item)!== 'undefined')? item.height: 0
-          
+          onSourceComponentChanged : {
+ 
+          }
           property EquipmentParameter curParam : (root.model) ? root.model[index] : undefined
           
           property Component rangeDelegate : Component {
             RowLayout {
               anchors.left : parent.left
               anchors.right : parent.right
-                      
-              height : minLabel.height
+              height : 50      
               Label {
                 id: minLabel
                 text : "min"
-                height : 50
+                Layout.preferredHeight : height
               }
               TextField {
                 id: minField
@@ -193,22 +195,19 @@ CrossReferenceForm {
               Label {
                 id: unitLabel
                 text : "Unit:"
-                Layout.minimumWidth : 100
+                Layout.minimumWidth : 10
               }
               ComboBox {
                 id : unitBox
                 focus : true
                 Layout.leftMargin : 10
                 textRole : "text"
-                currentIndex : root.model[index].type
-                enabled : false
-                onActivated : {
-                  if (root.model[selfID]) {
-                    root.model[selfID].type = unitBox.model.get(currentIndex).enumValue
-                  }
-                }
+                currentIndex : (root.model[index].fields[0]) ? root.model[index].fields[0].value : 0
+                enabled : true
+                onActivated : {}
                 onHoveredChanged : {}
                 onPressedChanged : {}
+                
                 flat : true
                 model : ListModel {
                   ListElement {
@@ -236,37 +235,28 @@ CrossReferenceForm {
             }
           }
           property Component enumDelegate : Component {
-            ColumnLayout {
-              anchors {
-                fill : parent
+            RowLayout{      
+              anchors.left : parent.left
+              anchors.right : parent.right
+                      
+              height : 125    
+              Label {
+                height : 25
+                id: optionLabel
+                text : "Options:"
+                Layout.minimumWidth : 10
               }
-              TwoButtonRow {
-                id : enumButtonRow
+              TextArea {
+                id: optionField
+                height : 100
                 Layout.fillWidth : true
-                firstButtonText : "Add"
-                secondButtonText : "Remove"
-
-                onFirstButtonClicked : {
-                  enumList.model.push("VALUE_%1".arg(enumList.model.length))
-                }
-
-                onSecondButtonClicked : {
-                  enumList.model.splice(enumList.currentIndex, 1)
-                }
-              }
-              ListView {
-                id : enumList
-                model : []
-                Layout.fillWidth : true
-                delegate : Rectangle {
-                  TextField {
-                    text : model.text
-                  }
-                }
-                ScrollBar.vertical : ScrollBar {}
+                wrapMode: Text.Wrap
+                
+                placeholderText: "Comma delimited list of enum values"
               }
             }
           }
+
           property Component commonDelegate : Component {
             Text {
               text : "No additional fields"
@@ -308,7 +298,7 @@ CrossReferenceForm {
       PropertyChanges { target : nameField; mouseSelectionMode : TextInput.SelectCharacters      }
       
       PropertyChanges { target : typeBox; enabled : true }
-      
+
       PropertyChanges { target : parameterBody; visible : true }
       // PropertyChanges { target : parameterBodyLoader; enabled : true }
       PropertyChanges { target : parameterMouseArea; enabled : false }
