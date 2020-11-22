@@ -20,27 +20,36 @@ specific language governing permissions and limitations under the License.
 
 struct Citation;
 
-enum class ParameterTypeEnum {
-  UNKOWN,
+
+class Sustain : public QObject {
+Q_OBJECT
+public:
+Sustain(QObject* parent = nullptr);
+
+  enum Type {
+  UNKNOWN,
   STRING,
   BOOLEAN,
   INTEGRAL,
   RANGE,
   SCALAR,
   ENUM,
-  eOPTION
+  eOPTION  
+  };
+  Q_ENUM(Type)
+
 };
 
-QString ParameterTypeEnumToString(ParameterTypeEnum value);
-ParameterTypeEnum ParameterTypeEnumFromString(QString value);
-ParameterTypeEnum ParameterTypeEnumFromString(std::string value);
 
-Q_ENUMS(ParameterTypeEnum)
+QString TypeToString(Sustain::Type value);
+Sustain::Type TypeFromString(QString value);
+Sustain::Type TypeFromString(std::string value);
+                                                                                                                                                                                                                                      
 
 struct ParameterField : public QObject {
   Q_OBJECT
   Q_PROPERTY(QString name MEMBER name NOTIFY nameChanged)
-  Q_PROPERTY(ParameterTypeEnum type MEMBER eType NOTIFY typeChanged)
+  Q_PROPERTY(Sustain::Type type MEMBER eType NOTIFY typeChanged)
 
 signals:
   void nameChanged();
@@ -48,10 +57,10 @@ signals:
 
 public:
   QString name;
-  ParameterTypeEnum eType;
+  Sustain::Type eType;
 
   ParameterField(QObject* parent = nullptr);
-  ParameterField(QString n, ParameterTypeEnum t, QObject* parent = nullptr);
+  ParameterField(QString n, Sustain::Type t, QObject* parent = nullptr);
   ParameterField(const ParameterField&) = delete;
   ParameterField(ParameterField&&) = delete;
   ParameterField& operator=(const ParameterField&) = delete;
@@ -62,7 +71,7 @@ public:
   bool operator!=(const ParameterField& rhs) const;
 
   static Q_INVOKABLE ParameterField* make(QObject* parent = nullptr);
-  static Q_INVOKABLE ParameterField* make(QString name, ParameterTypeEnum type, QObject* parent = nullptr);
+  static Q_INVOKABLE ParameterField* make(QString name, Sustain::Type type, QObject* parent = nullptr);
 
   Q_INVOKABLE QString toString();
 
@@ -75,7 +84,7 @@ public:
 struct EquipmentParameter : public QObject {
   Q_OBJECT
   Q_PROPERTY(QString name MEMBER name NOTIFY nameChanged)
-  Q_PROPERTY(ParameterTypeEnum type MEMBER eType NOTIFY typeChanged)
+  Q_PROPERTY(Sustain::Type type MEMBER eType NOTIFY typeChanged)
   Q_PROPERTY(QQmlListProperty<ParameterField> field READ getParameterFields NOTIFY fieldsChanged)
   Q_PROPERTY(QList<QString> enumOptions MEMBER enumOptions NOTIFY enumOptionsChanged)
 
@@ -87,13 +96,13 @@ signals:
 
 public:
   QString name = "";
-  ParameterTypeEnum eType = ParameterTypeEnum::UNKOWN;
+  Sustain::Type eType = Sustain::UNKNOWN;
   QList<ParameterField*> fields;
   QList<QString> enumOptions;
 
   EquipmentParameter(QObject* parent = nullptr);
   EquipmentParameter(QString parameter_string, QObject* parent);
-  EquipmentParameter(QString n, ParameterTypeEnum t, QList<QString> enumOptions = {}, QObject* parent = nullptr);
+  EquipmentParameter(QString n, Sustain::Type t, QList<QString> enumOptions = {}, QObject* parent = nullptr);
   EquipmentParameter(const EquipmentParameter&) = delete;
   EquipmentParameter(EquipmentParameter&&) = delete;
   EquipmentParameter& operator=(const EquipmentParameter&) = delete;
@@ -104,10 +113,10 @@ public:
   bool operator!=(const EquipmentParameter& rhs) const;
 
   static Q_INVOKABLE EquipmentParameter* make(QObject* make = nullptr);
-  static Q_INVOKABLE EquipmentParameter* make(QString name, ParameterTypeEnum type, QList<QString> enumOptions = {}, QObject* make = nullptr);
+  static Q_INVOKABLE EquipmentParameter* make(QString name, Sustain::Type type, QList<QString> enumOptions = {}, QObject* make = nullptr);
 
-  Q_INVOKABLE void appendField(QString name, ParameterTypeEnum type);
-  Q_INVOKABLE void appendField(std::string name, ParameterTypeEnum type);
+  Q_INVOKABLE void appendField(QString name, Sustain::Type type);
+  Q_INVOKABLE void appendField(std::string name, Sustain::Type type);
 
   Q_INVOKABLE void assign(EquipmentParameter* rhs);
   void assign(const EquipmentParameter& rhs);
@@ -176,8 +185,8 @@ public:
 
   static Q_INVOKABLE Equipment* make(QObject* parent = nullptr);
 
-  Q_INVOKABLE void appendParameter(QString name, ParameterTypeEnum type, QList<QString> enumOptions = {});
-  Q_INVOKABLE void appendParameter(std::string name, ParameterTypeEnum type, QList<QString> enumOptions = {});
+  Q_INVOKABLE void appendParameter(QString name, Sustain::Type type, QList<QString> enumOptions = {});
+  Q_INVOKABLE void appendParameter(std::string name, Sustain::Type type, QList<QString> enumOptions = {});
 
   Q_INVOKABLE void assign(Equipment* rhs);
   void assign(const Equipment& rhs);

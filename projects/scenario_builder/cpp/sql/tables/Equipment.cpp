@@ -4,58 +4,64 @@
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 
-QString ParameterTypeEnumToString(ParameterTypeEnum value)
+Sustain::Sustain(QObject* parent)
+  : QObject(parent)
 {
-  if (value == ParameterTypeEnum::STRING) {
+  
+}
+//--------------------------------------------------------------------------------------------
+QString TypeToString(Sustain::Type value)
+{
+  if (value == Sustain::STRING) {
     return "STRING";
-  } else if (value == ParameterTypeEnum::BOOLEAN) {
+  } else if (value == Sustain::BOOLEAN) {
     return "BOOLEAN";
-  } else if (value == ParameterTypeEnum::INTEGRAL) {
+  } else if (value == Sustain::INTEGRAL) {
     return "INTEGRAL";
-  } else if (value == ParameterTypeEnum::RANGE) {
+  } else if (value == Sustain::RANGE) {
     return "RANGE";
-  } else if (value == ParameterTypeEnum::SCALAR) {
+  } else if (value == Sustain::SCALAR) {
     return "SCALAR";
-  } else if (value == ParameterTypeEnum::ENUM) {
+  } else if (value == Sustain::ENUM) {
     return "ENUM";
-  } else if (value == ParameterTypeEnum::eOPTION) {
+  } else if (value == Sustain::eOPTION) {
     return "OPTION";
   } else {
-    return "UNKOWN";
+    return "UNKNOWN";
   }
 }
 //--------------------------------------------------------------------------------------------
-ParameterTypeEnum ParameterTypeEnumFromString(QString value)
+Sustain::Type TypeFromString(QString value)
 {
   if (value == "STRING") {
-    return ParameterTypeEnum::STRING;
+    return Sustain::STRING;
   } else if (value == "BOOLEAN") {
-    return ParameterTypeEnum::BOOLEAN;
+    return Sustain::BOOLEAN;
   } else if (value == "INTEGRAL" || value == "INTEGER") {
-    return ParameterTypeEnum::INTEGRAL;
+    return Sustain::INTEGRAL;
   } else if (value == "RANGE") {
-    return ParameterTypeEnum::RANGE;
+    return Sustain::RANGE;
   } else if (value == "SCALAR") {
-    return ParameterTypeEnum::SCALAR;
+    return Sustain::SCALAR;
   } else if (value == "ENUM") {
-    return ParameterTypeEnum::ENUM;
+    return Sustain::ENUM;
   } else if (value == "OPTION") {
-    return ParameterTypeEnum::eOPTION;
+    return Sustain::eOPTION;
   }
 
   QRegularExpression enumRegxp { R"(\s*ENUM\s*{\s*(.*)\s*}\s*)" };
   QRegularExpressionMatch enumMatches;
   enumMatches = enumRegxp.match(value);
   if (enumMatches.hasMatch()) {
-    return ParameterTypeEnum::ENUM;
+    return Sustain::ENUM;
   } else {
-    return ParameterTypeEnum::UNKOWN;
+    return Sustain::UNKNOWN;
   }
 }
 //--------------------------------------------------------------------------------------------
-ParameterTypeEnum ParameterTypeEnumFromString(std::string value)
+Sustain::Type TypeFromString(std::string value)
 {
-  return ParameterTypeEnumFromString(QString(value.c_str()));
+  return TypeFromString(QString(value.c_str()));
 }
 //--------------------------------------------------------------------------------------------
 //!
@@ -66,7 +72,7 @@ ParameterField::ParameterField(QObject* parent)
   : QObject(parent)
 {
 }
-ParameterField::ParameterField(QString n, ParameterTypeEnum t, QObject* parent)
+ParameterField::ParameterField(QString n, Sustain::Type t, QObject* parent)
   : QObject(parent)
   , name(n)
   , eType(t)
@@ -89,14 +95,14 @@ ParameterField* ParameterField::make(QObject* parent)
   return new ParameterField(parent);
 }
 //--------------------------------------------------------------------------------------------
-ParameterField* ParameterField::make(QString name, ParameterTypeEnum type, QObject* parent)
+ParameterField* ParameterField::make(QString name, Sustain::Type type, QObject* parent)
 {
   return new ParameterField(name, type, parent);
 }
 //--------------------------------------------------------------------------------------------
 QString ParameterField::toString()
 {
-  return QString("%1:%2").arg(name).arg(ParameterTypeEnumToString(eType));
+  return QString("%1:%2").arg(name).arg(TypeToString(eType));
 }
 //--------------------------------------------------------------------------------------------
 void ParameterField::assign(ParameterField* rhs)
@@ -113,7 +119,7 @@ void ParameterField::assign(const ParameterField& rhs)
 void ParameterField::clear()
 {
   name = "Unknown";
-  eType = ParameterTypeEnum::SCALAR;
+  eType = Sustain::SCALAR;
 }
 
 //!
@@ -127,7 +133,7 @@ EquipmentParameter::EquipmentParameter(QObject* parent)
 EquipmentParameter::EquipmentParameter(QString parameter_string, QObject* parent)
   : QObject(parent)
   , name("")
-  , eType(ParameterTypeEnum::UNKOWN)
+  , eType(Sustain::UNKNOWN)
 {
 
   //This constructor needs to properly report errors loading text files
@@ -139,18 +145,18 @@ EquipmentParameter::EquipmentParameter(QString parameter_string, QObject* parent
 
   for (auto param : parameter_string.split(',')) {
     auto parts = param.split(':');
-    if (eType == ParameterTypeEnum::UNKOWN) {
+    if (eType == Sustain::UNKNOWN) {
       name = parts[0];
-      eType = ParameterTypeEnumFromString(parts[1].trimmed());
-    } else if (eType == ParameterTypeEnum::ENUM) {
+      eType = TypeFromString(parts[1].trimmed());
+    } else if (eType == Sustain::ENUM) {
       enumOptions.push_back(param.trimmed());
     } else {
-      fields.push_back(ParameterField::make(parts[0].trimmed(), ParameterTypeEnumFromString(parts[1].trimmed()), this));
+      fields.push_back(ParameterField::make(parts[0].trimmed(), TypeFromString(parts[1].trimmed()), this));
     }
   }
 }
 //--------------------------------------------------------------------------------------------
-EquipmentParameter::EquipmentParameter(QString n, ParameterTypeEnum t, QList<QString> eo, QObject* parent)
+EquipmentParameter::EquipmentParameter(QString n, Sustain::Type t, QList<QString> eo, QObject* parent)
   : QObject(parent)
   , name(n)
   , eType(t)
@@ -187,17 +193,17 @@ EquipmentParameter* EquipmentParameter::make(QObject* parent)
   return new EquipmentParameter(parent);
 }
 //--------------------------------------------------------------------------------------------
-EquipmentParameter* EquipmentParameter::make(QString name, ParameterTypeEnum type, QList<QString> enumOptions, QObject* make)
+EquipmentParameter* EquipmentParameter::make(QString name, Sustain::Type type, QList<QString> enumOptions, QObject* make)
 {
   return new EquipmentParameter(name, type, std::move(enumOptions));
 }
 //--------------------------------------------------------------------------------------------
-void EquipmentParameter::appendField(QString name, ParameterTypeEnum type)
+void EquipmentParameter::appendField(QString name, Sustain::Type type)
 {
   fields.append(ParameterField::make(name, type));
 }
 //--------------------------------------------------------------------------------------------
-void EquipmentParameter::appendField(std::string name, ParameterTypeEnum type)
+void EquipmentParameter::appendField(std::string name, Sustain::Type type)
 {
   fields.append(ParameterField::make(name.c_str(), type));
 }
@@ -222,7 +228,7 @@ void EquipmentParameter::assign(const EquipmentParameter& rhs)
 void EquipmentParameter::clear()
 {
   name.clear();
-  eType = ParameterTypeEnum::UNKOWN;
+  eType = Sustain::UNKNOWN;
   qDeleteAll(fields);
   fields.clear();
   enumOptions.clear();
@@ -284,7 +290,7 @@ void EquipmentParameter::removeField(int index)
 //--------------------------------------------------------------------------------------------
 QString EquipmentParameter::toString()
 {
-  QString value = QString("%1:%2").arg(name).arg(ParameterTypeEnumToString(eType));
+  QString value = QString("%1:%2").arg(name).arg(TypeToString(eType));
   for (auto options : enumOptions) {
     value += QString(",%1").arg(options);
   }
@@ -334,12 +340,12 @@ Equipment* Equipment::make(QObject* parent)
   return new Equipment(parent);
 }
 //--------------------------------------------------------------------------------------------
-void Equipment::appendParameter(QString name, ParameterTypeEnum type, QList<QString> enumOptions)
+void Equipment::appendParameter(QString name, Sustain::Type type, QList<QString> enumOptions)
 {
   parameters.push_back(EquipmentParameter::make(name, type, std::move(enumOptions)));
 }
 //--------------------------------------------------------------------------------------------
-void Equipment::appendParameter(std::string name, ParameterTypeEnum type, QList<QString> enumOptions)
+void Equipment::appendParameter(std::string name, Sustain::Type type, QList<QString> enumOptions)
 {
   parameters.push_back(EquipmentParameter::make(name.c_str(), type, std::move(enumOptions)));
 }
@@ -372,10 +378,10 @@ void Equipment::clear()
   type = -1;
   summary.clear();
   description.clear();
-  qDeleteAll(citations);
+  // qDeleteAll(citations);
   citations.clear();
   image.clear();
-  qDeleteAll(parameters);
+  // qDeleteAll(parameters);
   parameters.clear();
 }
 //--------------------------------------------------------------------------------------------

@@ -42,8 +42,9 @@ int main(int argc, char* argv[])
   qmlRegisterType<Citation>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Citation");
   qmlRegisterType<Equipment>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Equipment");
   qmlRegisterType<EquipmentParameter>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "EquipmentParameter");
-  qmlRegisterType<EquipmentMap>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "EquipmentMap");
   qmlRegisterType<ParameterField>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "ParameterField");
+  qmlRegisterType<Sustain>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Sustain");
+  qmlRegisterType<EquipmentMap>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "EquipmentMap");
   qmlRegisterType<Event>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Event");
   qmlRegisterType<EventMap>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "EventMap");
   qmlRegisterType<Trauma>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Trauma");
@@ -60,6 +61,7 @@ int main(int argc, char* argv[])
 
   qmlRegisterType<pfc::Serializer>("com.ara.pfc.ScenarioModel.XML", 1, 0, "XMLSeralizer");
 
+
   QPixmap pixmap("qrc://img/sustain_splash.png");
   QSplashScreen splash(pixmap);
   splash.show();
@@ -72,7 +74,7 @@ int main(int argc, char* argv[])
   file.remove();
 
   QFileSelector selector;
-  QFile defaultsFile(selector.select("SustainScenarioBuilder.conf"));
+  //QFile defaultsFile(selector.select("SustainScenarioBuilder.conf"));
 
   return app.exec();
 }

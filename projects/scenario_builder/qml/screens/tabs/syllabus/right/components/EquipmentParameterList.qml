@@ -2,120 +2,218 @@ import QtQuick 2.0
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
+import QtQuick.Controls.Material 2.0
 
 import "../../../../common/"
-Item {
-  id : parameterPane
 
-  Label {
-    id : parameterLabel
-    text : 'Parameters:'
-    font.pointSize : 10
-    color : "steelblue"
-    width : (text.width > 90) ? text.width + 10 : 100
-  }
-  Rectangle {
-    id : parameterRect
-    border.color : "grey"
-    radius : 2
-    height : parameterList.height + parameterControls.height
+import com.ara.pfc.ScenarioModel.SQL 1.0
+
+CrossReferenceForm {
+  id : root
+  property SQLBackend backend
+
+  signal parameterAdded(int index, EquipmentParameter parameter)
+  signal parameterRemoved(int index, EquipmentParameter parameter)
+
+  label : "Parameter"
+  labelPlaural : "Parameters"
+
+  buttonTwoVisible : false
+
+  delegate : Rectangle {
+    id : parameter
+    
+    property int selfID : index
+
+    color : 'transparent'
+    border.color : "transparent"
+    height : childrenRect.height
     anchors {
-      left : parameterLabel.right;
-      right : parent.right
-      leftMargin : 5
+      left : parent.left;
+      right : parent.right;
+      margins : 5
     }
 
-    TwoButtonRow {
-      id : parameterControls
-      anchors.top : parameterRect.top
-      anchors.left : parameterRect.left
-      anchors.right : parameterRect.right
-      anchors.topMargin : 2
-      anchors.rightMargin : 5
-      anchors.leftMargin : 5
-
-      firstButtonText : "Add"
-      secondButtonText : "Remove"
-
-      onFirstButtonClicked : {}
-      onSecondButtonClicked : {}
-    }
-    ListView {
-      id : parameterList
-      property var fields: []
-      anchors {
-        top : parameterControls.bottom
-        left : parent.left
-        right : parent.right
-        topMargin : 5
-      }
+    Rectangle {
+      id : parameterHeader
+      color : (enabled) ? Material.primary : Material.color(Material.BlueGrey, Material.Shade100)
+      enabled : false
       height : childrenRect.height
-      spacing : 5
-      clip : true
-      highlightFollowsCurrentItem : true
-      highlightMoveDuration : 1
-      highlight : Rectangle {
-        color : '#1111110F'
-        Layout.alignment : Qt.AlignTop
-        Layout.fillWidth : true
-        Layout.margins : 5
+      anchors {
+        left : parent.left;
+        right : parent.right;
+
       }
-      model : ListModel {}
-
-
-      delegate : Rectangle {
-        id : prop
-        color : 'transparent'
-        border.color : 'steelblue'
-        height : 30
-        clip : true
+      Label {
+        id : nameLabel
         anchors {
-          left : parent.left;
-          right : parent.right;
-          margins : 5
+          left : parameterHeader.left
+          top : parameterHeader.top
+          topMargin : 2
         }
-        MouseArea {
-          anchors.fill : parent
-          onClicked : {
-            parameterList.currentIndex = index
+        font.pointSize : (enabled) ? 12 : 10
+        text : "Name"
+        color : 'white'
+
+      }
+      TextField {
+        id : nameField
+        anchors {
+          left : nameLabel.right
+          top : parameterHeader.top
+          leftMargin : 50
+          topMargin : 2
+        }
+        font.pointSize : (enabled) ? 12 : 10
+        text : "commonDelegate"
+        color : 'white'
+        enabled : false
+        readOnly : true
+        activeFocusOnPress : false
+        hoverEnabled : false
+      }
+      Label {
+        id : typeLabel
+        anchors {
+          right : typeBox.left
+          rightMargin : 50
+          top : parameterHeader.top
+          topMargin : 2
+        }
+        font.pointSize : (enabled) ? 12 : 10
+        text : "Type"
+        color : 'white'
+        enabled : false
+      }
+      ComboBox {
+        id : typeBox
+        focus : true
+        anchors {
+          right : parameterHeader.right
+          top : parameterHeader.top
+          rightMargin : 50
+          topMargin : 2
+        }
+        textRole : "text"
+        currentIndex : root.model[index].type
+        enabled : false
+        onActivated : {
+          if ( root.model[selfID] ){
+            root.model[selfID].type = typeBox.model.get(currentIndex).enumValue
           }
         }
-        Label {
-          id : paramNameLabel
-          text : "Name:"
-        }
-        Text {
-          id : paramNameText
-          anchors.left : paramNameLabel.right
-          anchors.leftMargin : 10
-        }
-        Label {
-          id : paramTypeLabel
-          text : "Type:"
-          anchors.left : paramNameText.right
-          anchors.leftMargin : 10
-        }
-        Text {
-          id : paramTypeText
-          anchors.left : paramTypeLabel.right
-          anchors.leftMargin : 10
-        }
-        Label {
-          id : paramValuesLabel
-          anchors.left : paramTypeText.right
-          anchors.leftMargin : 10
-          text : "Values:"
-        }
-        Text {
-          id : paramValuesText
-          anchors.left : paramValuesLabel.right
-          anchors.leftMargin : 10
-        }
-        Component.onCompleted : {
-          console.log(index)
+        onHoveredChanged : {        }
+        onPressedChanged : {        }
+        flat : true
+        model : ListModel {
+          ListElement { text : "UNKNOWN"; enumValue : Sustain.UNKNOWN }
+          ListElement { text : "STRING"; enumValue : Sustain.STRING }
+          ListElement { text : "BOOLEAN"; enumValue : Sustain.BOOLEAN }
+          ListElement { text : "INTEGRAL"; enumValue : Sustain.INTEGRAL }
+          ListElement { text : "RANGE"; enumValue : Sustain.RANGE }
+          ListElement { text : "SCALAR"; enumValue : Sustain.SCALAR }
+          ListElement { text : "ENUM"; enumValue : Sustain.ENUM }
         }
       }
-      ScrollBar.vertical : ScrollBar {}
+    }
+
+    Rectangle {
+      id : parameterBody
+      anchors.top : parameterHeader.bottom
+      anchors.left : parent.left
+      anchors.right : parent.right
+      height : childrenRect.height
+      color : Material.backgroundColor
+      border.color : Material.color(Material.Blue)
+      Loader {
+        id: parameterBodyLoader
+        property EquipmentParameter curParam : (root.model) ? root.model[index] : undefined
+        sourceComponent : {
+          switch (curParam.type) {
+            case Sustain.RANGE:
+              return rangeDelegate
+            case Sustain.SCALAR:
+              return scalarDelegate
+            case Sustain.ENUM:
+              return enumDelegate
+            case Sustain.STRING:
+            case Sustain.BOOLEAN:
+            case Sustain.INTEGRAL:
+            default:
+              return commonDelegate
+          }
+        }
+      }
+    }
+
+    MouseArea {
+      id: mouseArea
+      anchors.fill : parent
+      enabled : true
+      propagateComposedEvents: true
+      onClicked : {
+        root.current = index
+      }
+    }
+
+    property Component rangeDelegate : Component {
+      Text {
+        text : "rangeDelegate"
+        font.pointSize : 12
+      }
+    }
+    property Component scalarDelegate : Component {
+      Text {
+        text : "scalarDelegate"
+        font.pointSize : 12
+      }
+    }
+    property Component enumDelegate : Component {
+      Text {
+        text : "enumDelegate"
+        font.pointSize : 12
+      }
+    }
+    property Component commonDelegate : Component {
+      Text {
+        text : "commonDelegate"
+        font.pointSize : 12
+      }
+    }
+
+    states : State {
+      name : "Selected"
+      PropertyChanges { target : parameterHeader; enabled : true }
+      PropertyChanges { target : nameLabel; enabled : true }
+      PropertyChanges { target : typeLabel; enabled : true }
+      
+      PropertyChanges { target : typeBox; enabled : true }
+      PropertyChanges { target : typeBox; enabled : true }
+      
+      PropertyChanges { target : parameterBody; enabled : true }
+      PropertyChanges { target : parameterBodyLoader; enabled : true }
+      PropertyChanges { target : mouseArea; enabled : false }
+
+      PropertyChanges { target : nameField; readOnly : false }
+      PropertyChanges { target : nameField; activeFocusOnPress : true }
+      PropertyChanges { target : nameField; hoverEnabled : true }
+      PropertyChanges { target : nameField; enabled : true }
+      PropertyChanges { target : nameField; mouseSelectionMode : TextInput.SelectCharacters }
+    }
+
+    Connections {
+      target : root
+      onCurrentChanged :  {
+        if (root.current == index) {
+          state = 'Selected';
+        } else {
+          state = '';
+        }
+      }
     }
   }
+
+  onList : {}
+  onAdded : {}
+  onRemoved : {}
 }

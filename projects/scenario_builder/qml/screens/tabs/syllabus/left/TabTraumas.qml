@@ -18,16 +18,6 @@ ColumnLayout {
     id : trauma_g
   }
 
-  function update_traumas() {
-    traumaList.traumaDefinitions = [];
-    let traumas = root.backend.traumas;
-    for (var ii = 0; ii < traumas.length; ++ ii) {
-      traumaList.traumaDefinitions.push(currentTrauma.make());
-      traumaList.traumaDefinitions[traumaList.traumaDefinitions.length - 1].assign(traumas[ii]);
-    }
-    traumaList.model = traumaList.traumaDefinitions;
-  }
-
   Rectangle {
     id : listRectangle
     Layout.fillWidth : true
@@ -181,5 +171,29 @@ ColumnLayout {
     onTraumasChanged : {
       update_traumas()
     }
+    onCitationsChanged : {
+      update_traumas()
+    }
+  }
+
+  function set_current_index( uuid ) {
+    for (var ii = 0; ii < traumaList.traumaDefinitions.length; ++ ii) {
+      if ( traumaList.traumaDefinitions[ii].uuid == uuid ){
+        traumaList.currentIndex = ii
+      }
+    }
+  }
+
+  function update_traumas() {
+    var index = ( traumaList.currentIndex >= 0) ? traumaList.currentIndex : 0
+    traumaList.traumaDefinitions = [];
+    let traumas = root.backend.traumas;
+    for (var ii = 0; ii < traumas.length; ++ ii) {
+      traumaList.traumaDefinitions.push(currentTrauma.make());
+      traumaList.traumaDefinitions[traumaList.traumaDefinitions.length - 1].assign(traumas[ii]);
+      set_current_index(trauma_g.uuid)
+    }
+    traumaList.model = traumaList.traumaDefinitions;
+    traumaList.currentIndex = index
   }
 }

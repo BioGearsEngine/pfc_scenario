@@ -19,16 +19,6 @@ ColumnLayout {
     id : assessment_g
   }
 
-  function update_assessments() {
-    assessmentList.assessmentDefinitions = []
-    let assessments = root.backend.assessments;
-    for (var ii = 0; ii < assessments.length; ++ ii) {
-      assessmentList.assessmentDefinitions.push(currentAssessment.make());
-      assessmentList.assessmentDefinitions[assessmentList.assessmentDefinitions.length - 1].assign(assessments[ii]);
-    }
-    assessmentList.model = assessmentList.assessmentDefinitions;
-  }
-
   Rectangle {
     id : listRectangle
     Layout.fillWidth : true
@@ -55,6 +45,7 @@ ColumnLayout {
         assessment_g.clear(likely_id);
         root.backend.update_assessment(assessment_g);
         assessmentList.currentIndex = assessmentList.assessmentDefinitions.length - 1
+        set_current_index(assessment_g.uuid)
       }
       onSecondButtonClicked : {
         if (!assessmentList.assessmentDefinitions || assessmentList.assessmentDefinitions.length < 2) {
@@ -173,7 +164,6 @@ ColumnLayout {
     }
   }
 
-
   Component.onCompleted : {
     update_assessments()
   }
@@ -183,5 +173,24 @@ ColumnLayout {
     onAssessmentsChanged : {
       update_assessments()
     }
+  }
+
+  function set_current_index( uuid ) {
+    for (var ii = 0; ii < assessmentList.assessmentDefinitions.length; ++ ii) {
+      if ( assessmentList.assessmentDefinitions[ii].uuid == uuid ){
+        assessmentList.currentIndex = ii
+      }
+    }
+  }
+  function update_assessments() {
+    var index = ( assessmentList.currentIndex >= 0) ? assessmentList.currentIndex : 0
+    assessmentList.assessmentDefinitions = []
+    let assessments = root.backend.assessments;
+    for (var ii = 0; ii < assessments.length; ++ ii) {
+      assessmentList.assessmentDefinitions.push(currentAssessment.make());
+      assessmentList.assessmentDefinitions[assessmentList.assessmentDefinitions.length - 1].assign(assessments[ii]);
+    }
+    assessmentList.model = assessmentList.assessmentDefinitions;
+    assessmentList.currentIndex = index
   }
 }

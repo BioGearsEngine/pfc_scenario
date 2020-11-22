@@ -18,16 +18,6 @@ ColumnLayout {
     id : objective_g
   }
 
-  function update_objectives() {
-    objectiveList.objectiveDefinitions = []
-    let objectives = root.backend.objectives;
-    for (var ii = 0; ii < objectives.length; ++ ii) {
-      objectiveList.objectiveDefinitions.push(currentObjective.make());
-      objectiveList.objectiveDefinitions[objectiveList.objectiveDefinitions.length - 1].assign(objectives[ii]);
-    }
-    objectiveList.model = objectiveList.objectiveDefinitions;
-  }
-
   Rectangle {
     id : listRectangle
     Layout.fillWidth : true
@@ -53,6 +43,7 @@ ColumnLayout {
         var likely_id = root.backend.nextID(SQLBackend.OBJECTIVES);
         objective_g.clear(likely_id);
         root.backend.update_objective(objective_g);
+        set_current_index(objective_g.uuid)
       }
       onSecondButtonClicked : {
         if ( ! objectiveList.objectiveDefinitions || objectiveList.objectiveDefinitions.length < 2) {
@@ -177,5 +168,27 @@ ColumnLayout {
     onObjectivesChanged : {
       update_objectives()
     }
+    onCitationsChanged : {
+      update_objectives()
+    }
+  }
+
+  function set_current_index( uuid ) {
+    for (var ii = 0; ii < objectiveList.objectiveDefinitions.length; ++ ii) {
+      if ( objectiveList.objectiveDefinitions[ii].uuid == uuid ){
+        objectiveList.currentIndex = ii
+      }
+    }
+  }
+  function update_objectives() {
+    var index = ( objectiveList.currentIndex >= 0) ? objectiveList.currentIndex : 0
+    objectiveList.objectiveDefinitions = []
+    let objectives = root.backend.objectives;
+    for (var ii = 0; ii < objectives.length; ++ ii) {
+      objectiveList.objectiveDefinitions.push(currentObjective.make());
+      objectiveList.objectiveDefinitions[objectiveList.objectiveDefinitions.length - 1].assign(objectives[ii]);
+    }
+    objectiveList.model = objectiveList.objectiveDefinitions;
+    objectiveList.currentIndex = index
   }
 }

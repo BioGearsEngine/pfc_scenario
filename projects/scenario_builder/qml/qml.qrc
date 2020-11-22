@@ -2,7 +2,7 @@
 <RCC version="1.0">
     <!-- Try to keep the entries sorted -->
     <qresource prefix="/">
-        <file>SustainScenarioBuilder.conf</file>
+        <file>qtquickcontrols2.conf</file>
         <file>ScenarioBuilder.qml</file>
         <file>screens/Main.qml</file>
         <file>screens/Welcome.qml</file>

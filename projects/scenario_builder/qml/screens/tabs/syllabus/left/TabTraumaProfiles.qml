@@ -18,16 +18,6 @@ ColumnLayout {
     id : traumaProfile_g
   }
 
-  function update_truamaProfiles() {
-    profileList.traumaProfiles = []
-    let traumaProfiles = root.backend.traumaProfiles;
-    for (var ii = 0; ii < traumaProfiles.length; ++ ii) {
-      profileList.traumaProfiles.push(currentProfile.make());
-      profileList.traumaProfiles[profileList.traumaProfiles.length - 1].assign(traumaProfiles[ii]);
-    }
-    profileList.model = profileList.traumaProfiles;
-  }
-
   Rectangle {
     id : listRectangle
     Layout.fillWidth : true
@@ -53,6 +43,7 @@ ColumnLayout {
         var likely_id = root.backend.nextID(SQLBackend.TRAUMA_PROFILES);
         traumaProfile_g.clear(likely_id);
         root.backend.update_trauma_profile(traumaProfile_g);
+        set_current_index(traumaProfile_g.uuid)
       }
       onSecondButtonClicked : {
         if (!profileList.traumaProfiles || profileList.traumaProfiles.length < 2) {
@@ -164,5 +155,29 @@ ColumnLayout {
     onTraumaProfilesChanged : {
       update_truamaProfiles()
     }
+
+    onTraumasChanged : {
+      update_truamaProfiles()
+    }
+  }
+
+  function set_current_index( uuid ) {
+    for (var ii = 0; ii < profileList.traumaProfiles.length; ++ ii) {
+      if ( profileList.traumaProfiles[ii].uuid == uuid ){
+        profileList.currentIndex = ii
+      }
+    }
+  }
+
+  function update_truamaProfiles() {
+    var index = ( profileList.currentIndex >= 0) ? profileList.currentIndex : 0
+    profileList.traumaProfiles = []
+    let traumaProfiles = root.backend.traumaProfiles;
+    for (var ii = 0; ii < traumaProfiles.length; ++ ii) {
+      profileList.traumaProfiles.push(currentProfile.make());
+      profileList.traumaProfiles[profileList.traumaProfiles.length - 1].assign(traumaProfiles[ii]);
+    }
+    profileList.model = profileList.traumaProfiles;
+    profileList.currentIndex = index
   }
 }

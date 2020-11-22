@@ -10,7 +10,7 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 
 Rectangle {
   id : root
-
+ 
   property alias currentIndex : syllabus_tabs.currentIndex
   property alias currentObjective : objectives.currentObjective
   property alias currentAssessment : assessments.currentAssessment

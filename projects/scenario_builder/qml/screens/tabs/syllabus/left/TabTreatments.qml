@@ -18,16 +18,6 @@ ColumnLayout {
     id : treatment_g
   }
 
-  function update_treatments() {
-      treatmentList.treatmentDefinitions = []
-      let treatments = root.backend.treatments;
-      for (var ii = 0; ii < treatments.length; ++ ii) {
-        treatmentList.treatmentDefinitions.push(currentTreatment.make());
-        treatmentList.treatmentDefinitions[treatmentList.treatmentDefinitions.length - 1].assign(treatments[ii]);
-      }
-      treatmentList.model = treatmentList.treatmentDefinitions;
-  }
-
   Rectangle {
     id : listRectangle
     Layout.fillWidth : true
@@ -53,6 +43,7 @@ ColumnLayout {
         var likely_id = root.backend.nextID(SQLBackend.TREATMENTS);
         treatment_g.clear(likely_id);
         root.backend.update_treatment(treatment_g);
+        set_current_index(treatment_g.uuid)
       }
       onSecondButtonClicked : {
         if (!treatmentList.treatmentDefinitions || treatmentList.treatmentDefinitions.length < 2) {
@@ -179,5 +170,31 @@ ColumnLayout {
     onTreatmentsChanged : {
       update_treatments()
     }
+    onEquipmentChanged : {
+      update_treatments()
+    }
+    onCitationsChanged : {
+      update_treatments()
+    }
+    
+  }
+
+  function set_current_index( uuid ) {
+    for (var ii = 0; ii < treatmentList.treatmentDefinitions.length; ++ ii) {
+      if ( treatmentList.treatmentDefinitions[ii].uuid == uuid ){
+        treatmentList.currentIndex = ii
+      }
+    }
+  }
+  function update_treatments() {
+      var index = ( treatmentList.currentIndex >= 0) ? treatmentList.currentIndex : 0
+      treatmentList.treatmentDefinitions = []
+      let treatments = root.backend.treatments;
+      for (var ii = 0; ii < treatments.length; ++ ii) {
+        treatmentList.treatmentDefinitions.push(currentTreatment.make());
+        treatmentList.treatmentDefinitions[treatmentList.treatmentDefinitions.length - 1].assign(treatments[ii]);
+      }
+      treatmentList.model = treatmentList.treatmentDefinitions;
+      treatmentList.currentIndex = index;
   }
 }

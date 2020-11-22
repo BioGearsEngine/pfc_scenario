@@ -23,31 +23,6 @@ ColumnLayout {
     id : occurence_g
   }
 
-  function update_trauma_profile(traumaProfile) {
-    if (traumaProfile.physiologyTree.length == 0) {
-      traumaProfile.physiologyTree.push("StandardMale@0s.xml");
-    }
-    root.backend.update_trauma_profile(traumaProfile)
-  }
-
-  function refresh_traumas() {
-    occurenceStack.occurences = []
-    let traumas = currentProfile.traumas;
-    for (var ii = 0; ii < traumas.length; ++ ii) {
-      occurenceStack.occurences.push(occurence_g.make());
-      occurenceStack.occurences[occurenceStack.occurences.length - 1].assign(traumas[ii]);
-    }
-    occurenceList.model = occurenceStack.occurences;
-  }
-  function refresh_all_traumas() {
-    occurenceStack.allTraumas = [];
-    let traumas = root.backend.traumas;
-    for (var ii = 0; ii < traumas.length; ++ ii) {
-      occurenceStack.allTraumas.push(trauma_g.make());
-      occurenceStack.allTraumas[occurenceStack.allTraumas.length - 1].assign(traumas[ii]);
-    }
-    fullTraumaList.model = occurenceStack.allTraumas;
-  }
 
   TextEntry {
     Layout.fillWidth : true
@@ -169,14 +144,32 @@ ColumnLayout {
     
   Connections {
     target : backend
-    onTraumaProfilesChanged : {
-      update_truamaProfiles()
+  }
+
+  function update_trauma_profile(traumaProfile) {
+    if (traumaProfile.physiologyTree.length == 0) {
+      traumaProfile.physiologyTree.push("StandardMale@0s.xml");
     }
-    onTraumasChanged : {
-      update_truamaProfiles()
+    root.backend.update_trauma_profile(traumaProfile)
+  }
+
+  function refresh_traumas() {
+    occurenceStack.occurences = []
+    let traumas = currentProfile.traumas;
+    for (var ii = 0; ii < traumas.length; ++ ii) {
+      occurenceStack.occurences.push(occurence_g.make());
+      occurenceStack.occurences[occurenceStack.occurences.length - 1].assign(traumas[ii]);
     }
-    onEquipmentChanged : {
-      update_truamaProfiles()
+    occurenceList.model = occurenceStack.occurences;
+  }
+
+  function refresh_all_traumas() {
+    occurenceStack.allTraumas = [];
+    let traumas = root.backend.traumas;
+    for (var ii = 0; ii < traumas.length; ++ ii) {
+      occurenceStack.allTraumas.push(trauma_g.make());
+      occurenceStack.allTraumas[occurenceStack.allTraumas.length - 1].assign(traumas[ii]);
     }
+    fullTraumaList.model = occurenceStack.allTraumas;
   }
 }

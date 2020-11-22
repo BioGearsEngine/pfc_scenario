@@ -123,6 +123,8 @@ ScrollView {
       Layout.bottomMargin : 5
       Layout.rightMargin : 20
       Layout.minimumHeight : 300
+
+      model : (currentEquipment) ? currentEquipment.parameters : []
     }
 
     StackLayout {
@@ -181,13 +183,14 @@ ScrollView {
   onCurrentEquipmentChanged : {
     refresh_citations();
   }
-  onBackendChanged : {
-    if (backend) {
-      backend.citationsChanged.connect(refresh_citations);
-    }
+
+  Connections {
+    target : backend
+
   }
+
   function update_equipment(equipment) {
-    if (equipment && equipment) {
+    if (equipment) {
       root.backend.update_equipment(equipment)
     }
   }

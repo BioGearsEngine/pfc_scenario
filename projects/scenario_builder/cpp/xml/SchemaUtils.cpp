@@ -288,16 +288,16 @@ namespace schema {
     auto property_list = std::make_unique<schema::equipment_properties_list>();
 
     for (auto& property : properties_list) {
-      if (property->eType == ParameterTypeEnum::ENUM) {
+      if (property->eType == Sustain::ENUM) {
         property_list->property().push_back(
           std::make_unique<equipment_property>(schema::make_string(property->name),
-                                               schema::make_string(ParameterTypeEnumToString(property->eType)),
+                                               schema::make_string(TypeToString(property->eType)),
                                                make_property_field_list(property->enumOptions)));
       } else {
 
         property_list->property().push_back(
           std::make_unique<equipment_property>(schema::make_string(property->name),
-                                               schema::make_string(ParameterTypeEnumToString(property->eType)),
+                                               schema::make_string(TypeToString(property->eType)),
                                                make_property_field_list(property->fields)));
       }
     }
@@ -310,7 +310,7 @@ namespace schema {
     for (auto field : parameter_field_list) {
       property_field_list->field().push_back(std::make_unique<schema::field_type>(
         schema::make_string(field->name),
-        schema::make_string(ParameterTypeEnumToString(field->eType))));
+        schema::make_string(TypeToString(field->eType))));
     }
     return property_field_list;
   }
@@ -623,12 +623,12 @@ namespace schema {
       }
 
       for (auto& property : equipment.properties().property()) {
-        temp.appendParameter(QString::fromStdString(property.name()), ParameterTypeEnumFromString(property.type()));
+        temp.appendParameter(QString::fromStdString(property.name()), TypeFromString(property.type()));
         for (auto field_info : property.fields().field()) {
-          if (temp.parameters.back()->eType == ParameterTypeEnum::ENUM) {
+          if (temp.parameters.back()->eType == Sustain::ENUM) {
             temp.parameters.back()->enumOptions.push_back(QString::fromStdString(field_info.name()));
           } else {
-            temp.parameters.back()->appendField(field_info.name(), ParameterTypeEnumFromString(field_info.type()));
+            temp.parameters.back()->appendField(field_info.name(), TypeFromString(field_info.type()));
           }
         }
       }

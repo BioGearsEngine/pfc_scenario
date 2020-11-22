@@ -25,30 +25,6 @@ ColumnLayout {
     }
   }
 
-  function update_objective(objective) {
-    if (objective) {
-      root.backend.update_objective(objective)
-    }
-  }
-
-  function refresh_citations() {
-    citationStack.objectiveCitations = []
-    let citations = currentObjective.citations;
-    for (var ii = 0; ii < citations.length; ++ ii) {
-      citationStack.objectiveCitations.push(citation_g.make());
-      citationStack.objectiveCitations[citationStack.objectiveCitations.length - 1].assign(citations[ii]);
-    }
-    referenceList.model = citationStack.objectiveCitations;
-  }
-  function refresh_all_citations() {
-    citationStack.allCitations = [];
-    let citations = root.backend.citations;
-    for (var ii = 0; ii < citations.length; ++ ii) {
-      citationStack.allCitations.push(citation_g.make());
-      citationStack.allCitations[citationStack.allCitations.length - 1].assign(citations[ii]);
-    }
-    fullReferenceList.model = citationStack.allCitations;
-  }
   TextEntry {
     Layout.fillWidth : true
     Layout.leftMargin : 5
@@ -135,8 +111,31 @@ ColumnLayout {
 
   Connections {
     target : backend
-    onCitationsChanged : {
-      refresh_citations()
+    
+  }
+
+  function update_objective(objective) {
+    if (objective) {
+      root.backend.update_objective(objective)
     }
+  }
+
+  function refresh_citations() {
+    citationStack.objectiveCitations = []
+    let citations = currentObjective.citations;
+    for (var ii = 0; ii < citations.length; ++ ii) {
+      citationStack.objectiveCitations.push(citation_g.make());
+      citationStack.objectiveCitations[citationStack.objectiveCitations.length - 1].assign(citations[ii]);
+    }
+    referenceList.model = citationStack.objectiveCitations;
+  }
+  function refresh_all_citations() {
+    citationStack.allCitations = [];
+    let citations = root.backend.citations;
+    for (var ii = 0; ii < citations.length; ++ ii) {
+      citationStack.allCitations.push(citation_g.make());
+      citationStack.allCitations[citationStack.allCitations.length - 1].assign(citations[ii]);
+    }
+    fullReferenceList.model = citationStack.allCitations;
   }
 }

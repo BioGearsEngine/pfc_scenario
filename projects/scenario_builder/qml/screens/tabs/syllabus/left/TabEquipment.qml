@@ -20,16 +20,6 @@ ColumnLayout {
     id : equipment_g
   }
 
-  function update_equipment() {
-    equipmentList.equipmentDefinitions = []
-    let equipments = root.backend.equipment;
-    for (var ii = 0; ii < equipments.length; ++ ii) {
-      equipmentList.equipmentDefinitions.push(currentEquipment.make());
-      equipmentList.equipmentDefinitions[equipmentList.equipmentDefinitions.length - 1].assign(equipments[ii]);
-    }
-    equipmentList.model = equipmentList.equipmentDefinitions;
-  }
-
   Rectangle {
     id : listRectangle
     Layout.fillWidth : true
@@ -55,6 +45,7 @@ ColumnLayout {
         var likely_id = root.backend.nextID(SQLBackend.EQUIPMENTS);
         equipment_g.clear(likely_id);
         root.backend.update_equipment(equipment_g);
+        set_current_index(equipment_g.uuid)
       }
       onSecondButtonClicked : {
         if (!equipmentList.equipmentDefinitions || equipmentList.equipmentDefinitions.length < 2) {
@@ -188,5 +179,27 @@ ColumnLayout {
     onEquipmentChanged : {
       update_equipment()
     }
+    onCitationsChanged : {
+      update_equipment()
+    }
+  }
+
+  function set_current_index(uuid) {
+    for (var ii = 0; ii < equipmentList.equipmentDefinitions.length; ++ ii) {
+      if (equipmentList.equipmentDefinitions[ii].uuid == uuid) {
+        equipmentList.currentIndex = ii
+      }
+    }
+  }
+  function update_equipment() {
+    var index = (equipmentList.currentIndex >= 0) ? equipmentList.currentIndex : 0
+    equipmentList.equipmentDefinitions = []
+    let equipments = root.backend.equipment;
+    for (var ii = 0; ii < equipments.length; ++ ii) {
+      equipmentList.equipmentDefinitions.push(currentEquipment.make());
+      equipmentList.equipmentDefinitions[equipmentList.equipmentDefinitions.length - 1].assign(equipments[ii]);
+    }
+    equipmentList.model = equipmentList.equipmentDefinitions;
+    equipmentList.currentIndex = index
   }
 }

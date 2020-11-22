@@ -218,6 +218,7 @@ ScrollView {
       }
     }
   }
+
   onCurrentTreatmentChanged : {
     refresh_citations();
     refresh_equipment();
@@ -225,13 +226,8 @@ ScrollView {
 
   Connections {
     target : backend
-    onCitationsChanged : {
-      refresh_citations()
-    }
-    onEquipmentChanged : {
-      refresh_equipment()
-    }
   }
+  
   function update_treatment(treatment) {
     if (root.backend && treatment) {
       root.backend.update_treatment(treatment)

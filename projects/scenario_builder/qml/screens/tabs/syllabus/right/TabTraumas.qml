@@ -181,10 +181,8 @@ ScrollView {
   
   Connections {
     target : backend
-    onCitationsChanged : {
-      refresh_citations()
-    }
   }
+  
   function update_trauma(citation) {
     if (citation) {
       root.backend.update_trauma(citation)

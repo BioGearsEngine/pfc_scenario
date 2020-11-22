@@ -16,17 +16,6 @@ ColumnLayout {
   Layout.fillWidth : true
   Layout.fillHeight : true
 
-  Connections {
-    target : backend
-
-  }
-
-  function update_assessment(assessment) {
-    if (assessment) {
-      root.backend.update_assessment(assessment)
-    }
-  }
-
   TextEntry {
     Layout.fillWidth : true
     Layout.leftMargin : 5
@@ -160,7 +149,19 @@ ColumnLayout {
     }
   }
   
+  onCurrentAssessmentChanged : {
+
+  }
+  
   Connections {
     target : backend  
   }
+
+
+  function update_assessment(assessment) {
+    if (assessment) {
+      root.backend.update_assessment(assessment)
+    }
+  }
+
 }

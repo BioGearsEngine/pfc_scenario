@@ -53,7 +53,6 @@ Page {
         
 		Text {
 			id : sustainText
-			//Layout.alignment : Qt.AlignTop | Qt.AlignHCenter
 			anchors.horizontalCenter : logoBackground.horizontalCenter
 			anchors.bottom : scenarioBuilderText.top
 			color : "#34495e"
@@ -68,7 +67,6 @@ Page {
 
 		  Text {
 			id : scenarioBuilderText
-			//Layout.alignment : Qt.AlignTop | Qt.AlignHCenter
 			anchors.centerIn : logoBackground
 			//anchors.top : sustainText.bottom
 			color : "#34495e"
