@@ -16,7 +16,7 @@ Rectangle {
   property alias delegate : listArea.delegate
   property alias current : listArea.currentIndex
   property alias highlight : listArea.highlight
-
+  property alias spacing  : listArea.spacing
   property bool buttonOneVisible : true
   property bool buttonTwoVisible : true
   property bool buttonThreeVisible : true
