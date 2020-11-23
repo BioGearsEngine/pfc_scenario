@@ -12,7 +12,7 @@ Page {
   signal closed
   property var stack
   property SQLBackend backend
-  property int currentTab : 1
+  property int currentTab : 2
   ColumnLayout {
     id : columns
     spacing : 5

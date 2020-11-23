@@ -12,7 +12,7 @@ RowLayout {
   id : root
   property SQLBackend backend
   property int topIndex
-  property int currentRightIndex : 0
+  property int currentRightIndex : 4
 
   Layout.fillWidth : true
   Layout.fillHeight : true

@@ -12,7 +12,7 @@ GridLayout {
   id : root
   property SQLBackend backend
   property int topIndex
-  property int currentIndex : 4
+  property int currentIndex : 0
 
 
   width : parent.width

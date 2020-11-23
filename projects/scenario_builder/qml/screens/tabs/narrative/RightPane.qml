@@ -56,6 +56,14 @@ Rectangle {
         narrative_tabs.currentIndex = 3
       }
     }
+    Shortcut {
+      id : f5
+      sequence : "F5"
+      enabled : false
+      onActivated : {
+        narrative_tabs.currentIndex = 4
+      }
+    }
     width : parent.width
     height : parent.height
     TabBar {
