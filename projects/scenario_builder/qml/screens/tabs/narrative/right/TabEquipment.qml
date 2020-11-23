@@ -182,12 +182,12 @@ ColumnLayout {
             }
             onDoubleClicked : {
               if( currentScene && knownEquipmentList.equipment[knownEquipmentList.currentIndex])
-              console.log("Current Scene".arg(currentScene.name))
-              console.log("Known Equipment".arg(knownEquipmentList.equipment[knownEquipmentList.currentIndex]))
-              equipmentMap.clear()
-              equipmentMap.scene.assign(currentScene)
-              equipmentMap.equipment.assign(knownEquipmentList.equipment[knownEquipmentList.currentIndex])
-              root.backend.update_equipment_in_scene(equipmentMap);
+              console.log("Current Scene = %1".arg(currentScene.name))
+              console.log("Known Equipment = %1".arg(knownEquipmentList.equipment[knownEquipmentList.currentIndex]))
+              equipmentMap_g.clear()
+              equipmentMap_g.scene.assign(currentScene)
+              equipmentMap_g.equipment.assign(knownEquipmentList.equipment[knownEquipmentList.currentIndex])
+              root.backend.update_equipment_in_scene(equipmentMap_g);
               equipment_stack.currentIndex = 1
             }
           }
@@ -275,7 +275,7 @@ ColumnLayout {
           id : equipment
           color : 'transparent'
           border.color : "steelblue"
-          height : equipment_title_text.height + equipment_value_text.height
+          height : 30
           anchors {
             left : parent.left;
             right : parent.right;
@@ -316,8 +316,26 @@ ColumnLayout {
     onEquipmentChanged : {
       refresh_knownEquipment_list()
     }
+    onEquipmentMapsChanged : {
+      refresh_equipment_list()
+    }
   }
-  function refresh_equipment_list() {}
+  function refresh_equipment_list() {
+    var index = equipmentInSceneList.currentIndex
+    equipmentInSceneList  .equipment = []
+    var equipmentMaps = root.backend.equipmentMaps;
+    for (var ii = 0; ii < equipmentMaps.length; ++ ii) {
+      if (equipmentMaps[ii].scene.id == currentScene.id) {
+        equipmentInSceneList.equipment.push(equipment_g.make());
+        var index = equipmentInSceneList.equipment.length - 1;
+        equipmentInSceneList.equipment[index].assign(equipmentMaps[ii].equipment);
+      }
+    }
+    equipmentInSceneList.model = equipmentInSceneList.equipment
+
+
+    equipmentInSceneList.currentIndex = index
+  }
   function refresh_knownEquipment_list() {
     knownEquipmentList.equipment = []
     let equipments = root.backend.equipment;
@@ -326,6 +344,5 @@ ColumnLayout {
       knownEquipmentList.equipment[knownEquipmentList.equipment.length - 1].assign(equipments[ii]);
     }
     knownEquipmentList.equipment.model = knownEquipmentList.equipment;
-    console.log("knownEquipmentList.equipment.model = %1".arg(knownEquipmentList.equipment.model.length));
   }
 }

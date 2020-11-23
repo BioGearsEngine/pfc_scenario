@@ -64,7 +64,7 @@ public:
   Q_INVOKABLE void assign(EquipmentMap* rhs);
   void assign(const EquipmentMap& rhs);
 
-  void clear();
+  Q_INVOKABLE void clear();
 };
 
 #endif
