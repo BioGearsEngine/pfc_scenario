@@ -21,6 +21,9 @@ CrossReferenceForm {
   spacing : 0
   buttonTwoVisible : false
 
+   listButton.text : "Add"
+   removeButton.text : "Remove"
+
   delegate : MouseArea {
     id : parameterMouseArea
     property int selfID : index

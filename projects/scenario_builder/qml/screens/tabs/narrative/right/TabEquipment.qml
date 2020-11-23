@@ -33,7 +33,7 @@ ColumnLayout {
       Layout.margins : 5
       color : "transparent"
       border.color : "black"
-      
+
       PFCButton {
         id : knownExitButton
         text : "Exit"
@@ -41,7 +41,7 @@ ColumnLayout {
           top : knownListRectangle.top
           horizontalCenter : knownListRectangle.horizontalCenter
         }
-  
+
         onClicked : {
           equipment_stack.currentIndex = 1
         }
@@ -52,9 +52,9 @@ ColumnLayout {
         property var equipment: (backend) ? backend.equipment : []
         anchors {
           top : knownExitButton.bottom
-          left: knownListRectangle.left
-          right: knownListRectangle.right
-          bottom: knownListRectangle.bottom
+          left : knownListRectangle.left
+          right : knownListRectangle.right
+          bottom : knownListRectangle.bottom
         }
         spacing : 5
         clip : true
@@ -115,7 +115,7 @@ ColumnLayout {
             width : 100
             text : "Description: "
             enabled : false
-            color : enabled ? "white"  : Material.secondaryTextColor
+            color : enabled ? "white" : Material.secondaryTextColor
             elide : Text.ElideRight
           }
           Text {
@@ -159,7 +159,7 @@ ColumnLayout {
             width : 100
             text : "Parameters: "
             enabled : false
-            color : enabled ? "white"  : Material.secondaryTextColor
+            color : enabled ? "white" : Material.secondaryTextColor
             elide : Text.ElideRight
           }
           Text {
@@ -181,17 +181,15 @@ ColumnLayout {
               knownEquipmentList.currentIndex = index
             }
             onDoubleClicked : {
-              if( currentScene && knownEquipmentList.equipment[knownEquipmentList.currentIndex])
-              console.log("Current Scene = %1".arg(currentScene.name))
-              console.log("Known Equipment = %1".arg(knownEquipmentList.equipment[knownEquipmentList.currentIndex]))
-              equipmentMap_g.clear()
-              equipmentMap_g.scene.assign(currentScene)
-              equipmentMap_g.equipment.assign(knownEquipmentList.equipment[knownEquipmentList.currentIndex])
-              root.backend.update_equipment_in_scene(equipmentMap_g);
-              equipment_stack.currentIndex = 1
+              if (currentScene && knownEquipmentList.equipment[knownEquipmentList.currentIndex]) {
+                equipmentMap_g.clear()
+                equipmentMap_g.scene.assign(currentScene);
+                equipmentMap_g.equipment.assign(knownEquipmentList.equipment[knownEquipmentList.currentIndex]);
+                root.backend.update_equipment_in_scene(equipmentMap_g);
+                equipment_stack.currentIndex = 1
+              }
             }
           }
-
           states : State {
             name : "Selected"
             PropertyChanges { target : fullequipment; selected : true }
@@ -240,17 +238,16 @@ ColumnLayout {
           equipment_stack.currentIndex = 0;
         }
         onSecondButtonClicked : {
-          equipment_g.clear();
-          equipment_g.assign(eventsInSceneList.events[eventsInSceneList.currentIndex]);
-          root.backend.remove_equipment_from_scene(equipment_g, currentScene);
-          var prevIndex = eventsInSceneList.currentIndex;
-          refresh_equipment_list();
-          eventsInSceneList.currentIndex = Math.max(0, prevIndex);
+          equipmentMap_g.clear();
+          equipmentMap_g.assign(equipmentInSceneList.equipmentMaps[equipmentInSceneList.currentIndex]);
+          var prevIndex = equipmentInSceneList.currentIndex;
+          root.backend.remove_equipment_map(equipmentMap_g);
+          equipmentInSceneList.currentIndex = Math.max(0, prevIndex);
         }
       }
       ListView {
         id : equipmentInSceneList
-        property var equipment: []
+        property var equipmentMaps: []
 
         anchors {
           top : controls.bottom;
@@ -269,48 +266,191 @@ ColumnLayout {
           Layout.margins : 5
         }
 
-        model : ListModel {}
+        delegate : MouseArea {
+          id : equipmentMouseArea
 
-        delegate : Rectangle {
-          id : equipment
-          color : 'transparent'
-          border.color : "steelblue"
-          height : 30
+          property int selfID : index
+          property var currentMap       : (equipmentInSceneList.equipmentMaps[index]) ? equipmentInSceneList.equipmentMaps[index] : null
+          property var currentEquipment : (equipmentInSceneList.equipmentMaps[index]) ? equipmentInSceneList.equipmentMaps[index].equipment : null
+          property var parameters       : (equipmentInSceneList.equipmentMaps[index]) ? equipmentInSceneList.equipmentMaps[index].equipment.parameters : null
+
           anchors {
             left : parent.left;
             right : parent.right;
             margins : 5
           }
 
-          MouseArea {
-            anchors.fill : parent
-            onClicked : {
-              equipmentInSceneList.currentIndex = index
-            }
+          height : childrenRect.height
+          enabled : true
+          propagateComposedEvents : true
+          onClicked : {
+            equipmentInSceneList.currentIndex = index
           }
 
           states : State {
             name : "Selected"
+            PropertyChanges { target : instanceHeader; enabled : true }
+            PropertyChanges { target : instanceNameLabel; enabled : true }
+            PropertyChanges { target : instanceTypeLabel; enabled : true }
+            
+            PropertyChanges { target : instanceNameField; enabled : true }
+            PropertyChanges { target : instanceNameField; readOnly : false }
+            PropertyChanges { target : instanceNameField; activeFocusOnPress : true }
+            PropertyChanges { target : instanceNameField; hoverEnabled : true }
+            PropertyChanges { target : instanceNameField; mouseSelectionMode : TextInput.SelectCharacters      }
+
+            PropertyChanges { target : instanceBody; enabled : true }
+            PropertyChanges { target : instanceBody; visible : true }
           }
 
-          onFocusChanged : {
-            if (equipmentInSceneList.currentIndex == index) {
-              state = 'Selected';
-            } else {
-              state = '';
+          Connections {
+            target : equipmentInSceneList
+            onCurrentIndexChanged : {
+              if (equipmentInSceneList.currentIndex == index) {
+                state = 'Selected';
+              } else {
+                state = '';
+              }
+            }
+          }
+
+          ColumnLayout {
+            id : equipmentColumn
+            anchors.left : parent.left
+            anchors.right : parent.right
+            spacing : 0
+            Rectangle {
+              id : instanceHeader
+              Layout.fillWidth : true
+              Layout.minimumHeight : childrenRect.height
+              color : (enabled) ? Material.color(Material.Cyan, Material.Shade500) : Material.color(Material.Cyan, Material.Shade100)
+              enabled : false
+
+              Label {
+                id : instanceTypeLabel
+                anchors {
+                  left : instanceHeader.left
+                  top : instanceHeader.top
+                  leftMargin : 5
+                  topMargin : 2
+                }
+                font.pointSize : (enabled) ? 12 : 10
+                text : (currentEquipment) ? "Type: %1".arg(currentEquipment.name) : "Type: Unknown"
+                color : (enabled) ? "White" : Material.primaryTextColor
+              }
+              Label {
+                id : instanceNameLabel
+                anchors {
+                  left : instanceHeader.left
+                  top : instanceTypeLabel.bottom
+                  leftMargin : 5
+                  topMargin : 2
+                }
+                font.pointSize : (enabled) ? 12 : 10
+                text : "Name:"
+                color : (enabled) ? "White" : Material.primaryTextColor
+              }
+              TextField {
+                id : instanceNameField
+                anchors {
+                  left : instanceTypeLabel.right
+                  right : parent.right
+                  top : instanceHeader.top
+                  leftMargin : 50
+                  topMargin : 2
+                }
+                font.pointSize : (enabled) ? 12 : 10
+                text : (currentMap) ? currentMap.name : "Unknown"
+                color : (enabled) ? "White" : Material.primaryTextColor
+                enabled : false
+                readOnly : true
+                activeFocusOnPress : false
+                hoverEnabled : false
+              }
+            }
+            Rectangle {
+              id : instanceBody
+              
+              Layout.fillWidth : true
+              Layout.minimumHeight : childrenRect.height
+              color : Material.color(Material.Grey, Material.Shade100)
+              enabled : false
+              visible : false
+              ListView {
+                id : parameter
+                anchors {
+                  left : parent.left
+                  right : parent.right
+                  top : instanceBody.top
+                }
+                spacing : 0
+                model : equipmentMouseArea.parameters
+                height : childrenRect.height
+                delegate : Rectangle {
+                  id: parameterHeader
+
+                  property int paramID : index
+                  property var currentParameter : equipmentMouseArea.parameters[index]
+
+                  Layout.fillWidth : true
+                  Layout.minimumHeight : 25
+                  height : childrenRect.height
+                  color : (enabled) ? Material.primary : Material.color(Material.BlueGrey, Material.Shade100)
+                  enabled : false
+                  Label {
+                    id : parameterNameLabel
+                    anchors {
+                      left : parameterHeader.left
+                      top : parameterHeader.top
+                      leftMargin : 5
+                      topMargin : 2
+                    }
+                    font.pointSize : (enabled) ? 12 : 10
+                    text : currentParameter.name
+                    color : (enabled) ? "White" : Material.primaryTextColor 
+                  }
+                  Text {
+                    id : parameterNameText
+                    anchors {
+                      left : parameterNameLabel.right
+                      top : parameterHeader.top
+                      leftMargin : 5
+                      topMargin : 2
+                    }
+                    font.pointSize : (enabled) ? 12 : 10
+                    text : currentParameter.typeString
+                    color : (enabled) ? "White" : Material.primaryTextColor 
+                  }
+                  ListView {
+                    id : fieldView
+                    anchors {
+                      top : parameterNameText.bottom
+                      left : parent.left
+                      right : parent.right
+                    }
+                    model : parameters[selfID].fields
+                    delegate : Rectangle {
+                       height : 50
+                       width : 100
+                       color : 'steelblue'
+                    }
+                  }
+                }
+              }
             }
           }
         }
         ScrollBar.vertical : ScrollBar {}
-        Component.onCompleted : {}
       }
     }
   }
+
   onCurrentSceneChanged : {}
 
   onBackendChanged : {
     refresh_knownEquipment_list()
   }
+
   Connections {
     target : backend
     onEquipmentChanged : {
@@ -320,21 +460,20 @@ ColumnLayout {
       refresh_equipment_list()
     }
   }
+
   function refresh_equipment_list() {
-    var index = equipmentInSceneList.currentIndex
-    equipmentInSceneList  .equipment = []
+    var lastIndex = equipmentInSceneList.currentIndex
+    equipmentInSceneList.equipmentMaps = []
     var equipmentMaps = root.backend.equipmentMaps;
     for (var ii = 0; ii < equipmentMaps.length; ++ ii) {
       if (equipmentMaps[ii].scene.id == currentScene.id) {
-        equipmentInSceneList.equipment.push(equipment_g.make());
-        var index = equipmentInSceneList.equipment.length - 1;
-        equipmentInSceneList.equipment[index].assign(equipmentMaps[ii].equipment);
+        equipmentInSceneList.equipmentMaps.push(equipmentMap_g.make());
+        var index = equipmentInSceneList.equipmentMaps.length - 1
+        equipmentInSceneList.equipmentMaps[index].assign(equipmentMaps[ii]);
       }
     }
-    equipmentInSceneList.model = equipmentInSceneList.equipment
-
-
-    equipmentInSceneList.currentIndex = index
+    equipmentInSceneList.model = equipmentInSceneList.equipmentMaps
+    equipmentInSceneList.currentIndex = lastIndex
   }
   function refresh_knownEquipment_list() {
     knownEquipmentList.equipment = []

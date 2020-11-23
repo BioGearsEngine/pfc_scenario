@@ -50,16 +50,16 @@ void EquipmentMap::assign(const EquipmentMap& rhs)
   //!        Garbage Collection
 
   id = rhs.id;
-  emit idChanged(id);
   name = rhs.name;
-  emit nameChanged(name);
   scene->assign(*rhs.scene);
-  emit sceneChanged(scene);
   equipment->assign(*rhs.equipment);
-  emit equipmentChanged(equipment);
   property_values = rhs.property_values;
-  emit valuesChanged(property_values);
   notes = rhs.notes;
+  emit idChanged(id);
+  emit nameChanged(name);
+  emit sceneChanged(scene);
+  emit equipmentChanged(equipment);
+  emit valuesChanged(property_values);
   emit notesChanged(notes);
 }
 //--------------------------------------------------------------------------------------------

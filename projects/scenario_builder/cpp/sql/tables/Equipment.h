@@ -40,7 +40,7 @@ Sustain(QObject* parent = nullptr);
 
 };
 
-
+                                                                                                        
 QString TypeToString(Sustain::Type value);
 Sustain::Type TypeFromString(QString value);
 Sustain::Type TypeFromString(std::string value);
@@ -50,7 +50,7 @@ struct ParameterField : public QObject {
   Q_OBJECT
   Q_PROPERTY(QString name MEMBER name NOTIFY nameChanged)
   Q_PROPERTY(Sustain::Type type MEMBER eType NOTIFY typeChanged)
-
+  Q_PROPERTY(QString typeString READ typeString NOTIFY typeChanged)
 signals:
   void nameChanged();
   void typeChanged();
@@ -73,7 +73,8 @@ public:
   static Q_INVOKABLE ParameterField* make(QObject* parent = nullptr);
   static Q_INVOKABLE ParameterField* make(QString name, Sustain::Type type, QObject* parent = nullptr);
 
-  Q_INVOKABLE QString toString();
+  Q_INVOKABLE QString toString() const;
+  Q_INVOKABLE QString typeString() const;
 
   Q_INVOKABLE void assign(ParameterField* rhs);
   void assign(const ParameterField& rhs);
@@ -87,6 +88,7 @@ struct EquipmentParameter : public QObject {
   Q_PROPERTY(Sustain::Type type MEMBER eType NOTIFY typeChanged)
   Q_PROPERTY(QQmlListProperty<ParameterField> field READ getParameterFields NOTIFY fieldsChanged)
   Q_PROPERTY(QList<QString> enumOptions MEMBER enumOptions NOTIFY enumOptionsChanged)
+  Q_PROPERTY(QString typeString READ typeString NOTIFY typeChanged)
 
 signals:
   void nameChanged();
@@ -126,7 +128,8 @@ public:
   Q_INVOKABLE void replaceField(int index, ParameterField* value);
   Q_INVOKABLE void removeField(int index);
 
-  Q_INVOKABLE QString toString();
+  Q_INVOKABLE QString toString() const;
+  Q_INVOKABLE QString typeString() const;
 
   static EquipmentParameter* fromString(QString paramater_string, QObject* parent = nullptr);
 

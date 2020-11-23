@@ -100,9 +100,14 @@ ParameterField* ParameterField::make(QString name, Sustain::Type type, QObject* 
   return new ParameterField(name, type, parent);
 }
 //--------------------------------------------------------------------------------------------
-QString ParameterField::toString()
+QString ParameterField::toString() const
 {
   return QString("%1:%2").arg(name).arg(TypeToString(eType));
+}
+//--------------------------------------------------------------------------------------------
+QString ParameterField::typeString()  const
+{
+  return TypeToString(eType);
 }
 //--------------------------------------------------------------------------------------------
 void ParameterField::assign(ParameterField* rhs)
@@ -288,7 +293,7 @@ void EquipmentParameter::removeField(int index)
   fields.removeAt(index);
 }
 //--------------------------------------------------------------------------------------------
-QString EquipmentParameter::toString()
+QString EquipmentParameter::toString() const
 {
   QString value = QString("%1:%2").arg(name).arg(TypeToString(eType));
   for (auto options : enumOptions) {
@@ -300,6 +305,10 @@ QString EquipmentParameter::toString()
   return value;
 }
 //--------------------------------------------------------------------------------------------
+QString EquipmentParameter::typeString() const
+{
+  return TypeToString(eType);
+}
 EquipmentParameter* EquipmentParameter::fromString(QString parameter_string, QObject* parent)
 {
   return new EquipmentParameter(parameter_string, parent);

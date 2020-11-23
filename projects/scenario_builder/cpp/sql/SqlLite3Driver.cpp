@@ -3752,14 +3752,15 @@ inline void SQLite3Driver::assign_equipment_map(const QSqlRecord& record, Equipm
     map.scene->assign(*scene);
   } else {
     map.scene->id = record.value(EQUIPMENT_MAP_FK_SCENE).toInt();
+    select_scene(map.scene);
   }
   emit map.sceneChanged(map.scene);
 
   if (equipment) {
     map.equipment->assign(*equipment);
-
   } else {
     map.equipment->id = record.value(EQUIPMENT_MAP_FK_EQUIPMENT).toInt();
+    select_equipment(map.equipment);
   }
   emit map.equipmentChanged(map.equipment);
   map.name = record.value(EQUIPMENT_MAP_NAME).toString();
@@ -3912,7 +3913,8 @@ bool SQLite3Driver::remove_equipment_map(EquipmentMap* map)
         qWarning() << "remove_equipment_map" << query.lastError();
         return false;
       }
-      equipmentMapRemoved(map->id);
+      emit equipmentMapRemoved(map->id);
+      emit equipmentMapsChanged();
       return true;
     } else {
       return false;

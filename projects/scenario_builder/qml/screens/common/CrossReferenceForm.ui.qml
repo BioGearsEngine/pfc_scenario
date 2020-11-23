@@ -17,6 +17,11 @@ Rectangle {
   property alias current : listArea.currentIndex
   property alias highlight : listArea.highlight
   property alias spacing  : listArea.spacing
+
+  property alias listButton : listButton
+  property alias addButton : addButton
+  property alias removeButton : removeButton
+
   property bool buttonOneVisible : true
   property bool buttonTwoVisible : true
   property bool buttonThreeVisible : true
