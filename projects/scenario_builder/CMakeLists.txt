@@ -248,6 +248,9 @@ endif()
 
 # GUI Executable
 add_executable(ScenarioBuilder ${CMAKE_CURRENT_SOURCE_DIR}/cpp/main.cpp  ${qml_QRC}  ${QML_FILES} )
+if(WIN32)
+  target_sources(ScenarioBuilder  PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Sustain.rc)
+endif()
 target_link_libraries(ScenarioBuilder 
   Builder::lib 
   Builder::serial
@@ -282,6 +285,7 @@ target_compile_options(ScenarioBuilder PRIVATE $<$<PLATFORM_ID:Windows>:/bigobj>
 # Unit Test
 ###############################################################################
 add_executable(unitScenarioBuilder ${UNIT_TEST})
+
 target_link_libraries(unitScenarioBuilder Builder::lib GTest::GTest GTest::Main Boost::disable_autolinking Boost::filesystem minizip::lib)
 set_target_properties(unitScenarioBuilder 
   PROPERTIES
