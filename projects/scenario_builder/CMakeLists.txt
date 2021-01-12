@@ -26,7 +26,7 @@ set(${PREFIX}_UNIT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/unit" PARENT_SCOPE)
 ###############################################################################
 # Requirments
 ###############################################################################
-find_package(GTest REQUIRED)
+find_package(GTest)
 find_package(CodeSynthesis REQUIRED)
 ###############################################################################
 #Code Generation
@@ -284,6 +284,11 @@ target_compile_options(ScenarioBuilder PRIVATE $<$<PLATFORM_ID:Windows>:/bigobj>
 ###############################################################################
 # Unit Test
 ###############################################################################
+option(BUILD_UNIT_TEST "Toogle the building of unit test GTest Suite required" ${GTest_Found})
+if(BUILD_UNIT_TEST)
+  find_package(GTest REQUIRED)
+endif()
+if (GTest_FOUND)
 add_executable(unitScenarioBuilder ${UNIT_TEST})
 
 target_link_libraries(unitScenarioBuilder Builder::lib GTest::GTest GTest::Main Boost::disable_autolinking Boost::filesystem minizip::lib)
@@ -300,7 +305,7 @@ set_target_properties(unitScenarioBuilder
 )
 target_compile_definitions(unitScenarioBuilder PRIVATE ${${PREFIX}_CPPFLAGS}  PRIVATE $<$<PLATFORM_ID:Windows>:BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE> )
 target_compile_options(unitScenarioBuilder PRIVATE $<$<PLATFORM_ID:Windows>:/bigobj>  PRIVATE $<$<PLATFORM_ID:Windows>:/MP>)
-
+endif()
 ################################################################################
 # Install
 ################################################################################

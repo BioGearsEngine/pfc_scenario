@@ -29,7 +29,7 @@ else()
     endforeach(OUTPUTCONFIG)
 endif()
 
-set(Boost_USE_STATIC_LIBS OFF)
+set(Boost_USE_STATIC_LIBS OFF CACHE BOOL "Set to true to support Boost DLLs instead of static libraries" )
 find_package(Boost COMPONENTS system thread program_options filesystem log REQUIRED)
 find_package(Qt5 COMPONENTS Core Widgets Gui Sql Quick QuickControls2 Qml REQUIRED)
 ###############################################################################
