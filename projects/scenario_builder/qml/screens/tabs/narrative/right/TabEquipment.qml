@@ -183,6 +183,7 @@ ColumnLayout {
             onDoubleClicked : {
               if (currentScene && knownEquipmentList.equipment[knownEquipmentList.currentIndex]) {
                 equipmentMap_g.clear()
+                equipmentMap_g.name = "%1 [%2]".arg(knownEquipmentList.equipment[knownEquipmentList.currentIndex].name).arg(makeid(4))
                 equipmentMap_g.scene.assign(currentScene);
                 equipmentMap_g.equipment.assign(knownEquipmentList.equipment[knownEquipmentList.currentIndex]);
                 root.backend.update_equipment_in_scene(equipmentMap_g);
@@ -464,6 +465,16 @@ ColumnLayout {
     onEquipmentMapsChanged : {
       refresh_equipment_in_scene_list()
     }
+  }
+
+  function makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
   }
 
   function refresh_equipment_in_scene_list() {
