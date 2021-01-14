@@ -26,7 +26,7 @@ Rectangle {
   property bool buttonTwoVisible : true
   property bool buttonThreeVisible : true
 
-  signal list()
+  signal list(int index)
   signal added(int index)
   signal removed(int index)
 
@@ -63,7 +63,7 @@ Rectangle {
       anchors.leftMargin : 5
       visible  : root.buttonOneVisible
       onClicked : {
-        root.list()
+        root.list(root.current)
       }
       onComplete : {}
     }

@@ -12,8 +12,13 @@ CrossReferenceForm {
   id : root
   property SQLBackend backend
 
+  signal paramaterModified(int index, EquipmentParameter parameter)
   signal parameterAdded(int index, EquipmentParameter parameter)
   signal parameterRemoved(int index, EquipmentParameter parameter)
+
+  EquipmentParameter {
+    id : equipment_parameter_g
+  }
 
   focus : true
   label : "Parameter"
@@ -254,7 +259,14 @@ CrossReferenceForm {
                 height : 100
                 Layout.fillWidth : true
                 wrapMode: Text.Wrap
-                
+                text : {
+                  var str = "";
+                  var options = root.model[index].enumOptions;
+                  for ( var ii = 0; ii < options.length; ii++ ){
+                    str += "%1;".arg(options[ii])
+                  }
+                  return str;
+                }
                 placeholderText: "Comma delimited list of enum values"
               }
             }
@@ -318,7 +330,14 @@ CrossReferenceForm {
       }
     }  
   }
-  onList : {}
-  onAdded : {}
-  onRemoved : {}
+  onList : { //Using List Button as the New Parameter Button
+     console.log("Parameter Added")
+     root.model.push(equipment_parameter_g.make());
+     root.model[root.model.length-1].name = "field %1".arg(root.model.length)
+     parameterAdded(index, root.model[index])
+  }
+  onRemoved : {
+    console.log("Parameter Removed")
+     parameterRemoved(index, root.model[index])
+  }
 }

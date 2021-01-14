@@ -156,12 +156,10 @@ Rectangle {
 		result += "<ul>";
 		for (var jj = 0; jj < equipmentMaps.length; ++jj) {
 		  if (equipmentMaps[jj].scene.id == ii.id) {
-			result += "<li>";
-			result += "%1".arg(equipmentMaps[jj].equipment.name);
-			result += "</li>";
+			result += "<li>%1</li>".arg(equipmentMaps[jj].equipment.name);
 		  }
-		  result += "</ul>";
 		}
+		result += "</ul>";
 	}
 	result += "</p>";
 	return result

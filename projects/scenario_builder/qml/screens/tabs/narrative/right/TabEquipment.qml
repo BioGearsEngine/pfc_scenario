@@ -431,7 +431,7 @@ ColumnLayout {
                       left : parent.left
                       right : parent.right
                     }
-                    model : parameters[selfID].fields
+                    model : currentParameter.fields
                     delegate : Rectangle {
                        height : 50
                        width : 100

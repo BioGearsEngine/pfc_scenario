@@ -125,6 +125,17 @@ ScrollView {
       Layout.minimumHeight : 300
 
       model : (currentEquipment) ? currentEquipment.parameters : []
+
+      onParamaterModified: {
+        update_equipment(currentEquipment);
+      }
+      onParameterAdded: {
+        update_equipment(currentEquipment);
+      }
+      onParameterRemoved: {
+        currentEquipment.removeParameter(index);
+        update_equipment(currentEquipment);
+      }
     }
 
     StackLayout {
