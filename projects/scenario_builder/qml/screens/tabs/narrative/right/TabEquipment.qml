@@ -450,7 +450,10 @@ ColumnLayout {
   }
 
   onBackendChanged : {
-    refresh_equipment_in_scene_list()
+    refresh_equipment_definition_list()
+    if(currentScene){
+      refresh_equipment_in_scene_list()
+    }
   }
 
   Connections {
@@ -467,10 +470,8 @@ ColumnLayout {
     var lastIndex = equipmentInSceneList.currentIndex
     equipmentInSceneList.equipmentMaps = []
     var equipmentMaps = root.backend.equipmentMaps;
-    for (var ii = 0; ii < equipmentMaps.length; ++ ii) {
-      console.log("Refeshing EquipmentMap %1".arg(ii))
-      if (equipmentMaps[ii].scene.id == currentScene.id) {
-        console.log("equipmentMaps[%1].scene.id == currentScene.id".arg(ii))
+    for (var ii = 0; ii < equipmentMaps.length; ++ ii) {      
+      if (equipmentMaps[ii].scene.id == currentScene.id) {        
         equipmentInSceneList.equipmentMaps.push(equipmentMap_g.make());
         var index = equipmentInSceneList.equipmentMaps.length - 1
         equipmentInSceneList.equipmentMaps[index].assign(equipmentMaps[ii]);
