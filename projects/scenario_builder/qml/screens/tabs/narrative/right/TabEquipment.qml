@@ -183,7 +183,7 @@ ColumnLayout {
             onDoubleClicked : {
               if (currentScene && knownEquipmentList.equipment[knownEquipmentList.currentIndex]) {
                 equipmentMap_g.clear()
-                equipmentMap_g.name = "%1 [%2]".arg(knownEquipmentList.equipment[knownEquipmentList.currentIndex].name).arg(makeid(4))
+                equipmentMap_g.name = "[%2] %1".arg(knownEquipmentList.equipment[knownEquipmentList.currentIndex].name).arg(makeid(4))
                 equipmentMap_g.scene.assign(currentScene);
                 equipmentMap_g.equipment.assign(knownEquipmentList.equipment[knownEquipmentList.currentIndex]);
                 root.backend.update_equipment_in_scene(equipmentMap_g);
@@ -338,6 +338,7 @@ ColumnLayout {
                 font.pointSize : (enabled) ? 12 : 10
                 text : (currentEquipment) ? "Type: %1".arg(currentEquipment.name) : "Type: Unknown"
                 color : (enabled) ? "White" : Material.primaryTextColor
+                width : (contentWidth < 130 ) ? 130 : contentWidth
               }
               Label {
                 id : instanceNameLabel
@@ -350,6 +351,7 @@ ColumnLayout {
                 font.pointSize : (enabled) ? 12 : 10
                 text : "Name:"
                 color : (enabled) ? "White" : Material.primaryTextColor
+                width : (contentWidth < 130 ) ? 130 : contentWidth
               }
               TextField {
                 id : instanceNameField

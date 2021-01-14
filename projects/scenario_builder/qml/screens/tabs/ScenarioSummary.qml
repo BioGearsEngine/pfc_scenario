@@ -157,7 +157,7 @@ Rectangle {
 		for (var jj = 0; jj < equipmentMaps.length; ++jj) {
 		  if (equipmentMaps[jj].scene.id == ii.id) {
 			result += "<li>";
-			result += "%1".arg(equipmentMaps[jj].equipment[jj].name);
+			result += "%1".arg(equipmentMaps[jj].equipment.name);
 			result += "</li>";
 		  }
 		  result += "</ul>";
