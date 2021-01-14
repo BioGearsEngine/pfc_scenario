@@ -445,28 +445,32 @@ ColumnLayout {
     }
   }
 
-  onCurrentSceneChanged : {}
+  onCurrentSceneChanged : {
+    refresh_equipment_in_scene_list()
+  }
 
   onBackendChanged : {
-    refresh_knownEquipment_list()
+    refresh_equipment_in_scene_list()
   }
 
   Connections {
     target : backend
     onEquipmentChanged : {
-      refresh_knownEquipment_list()
+      refresh_equipment_definition_list()
     }
     onEquipmentMapsChanged : {
-      refresh_equipment_list()
+      refresh_equipment_in_scene_list()
     }
   }
 
-  function refresh_equipment_list() {
+  function refresh_equipment_in_scene_list() {
     var lastIndex = equipmentInSceneList.currentIndex
     equipmentInSceneList.equipmentMaps = []
     var equipmentMaps = root.backend.equipmentMaps;
     for (var ii = 0; ii < equipmentMaps.length; ++ ii) {
+      console.log("Refeshing EquipmentMap %1".arg(ii))
       if (equipmentMaps[ii].scene.id == currentScene.id) {
+        console.log("equipmentMaps[%1].scene.id == currentScene.id".arg(ii))
         equipmentInSceneList.equipmentMaps.push(equipmentMap_g.make());
         var index = equipmentInSceneList.equipmentMaps.length - 1
         equipmentInSceneList.equipmentMaps[index].assign(equipmentMaps[ii]);
@@ -475,7 +479,7 @@ ColumnLayout {
     equipmentInSceneList.model = equipmentInSceneList.equipmentMaps
     equipmentInSceneList.currentIndex = lastIndex
   }
-  function refresh_knownEquipment_list() {
+  function refresh_equipment_definition_list() {
     knownEquipmentList.equipment = []
     let equipments = root.backend.equipment;
     for (var ii = 0; ii < equipments.length; ++ ii) {
