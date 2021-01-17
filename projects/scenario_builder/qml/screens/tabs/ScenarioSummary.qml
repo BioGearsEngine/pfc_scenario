@@ -169,12 +169,12 @@ Rectangle {
     var summary = "BEGIN SUMMARY<br>";
     summary += generate_title();
     summary += generate_authorship();
-	summary += generate_scene();
-	summary += generate_roles();
-	summary += generate_events();
-	summary += generate_objectives();
-	summary += generate_trauma_profiles();
-	summary += generate_works_cited();
+	  summary += generate_scene();
+	  summary += generate_roles();
+	  summary += generate_events();
+	  summary += generate_objectives();
+	  summary += generate_trauma_profiles();
+	  summary += generate_works_cited();
     summary += "<br>END SUMMARY";
 
     summaryText.text = summary;

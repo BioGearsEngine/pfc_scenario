@@ -7,7 +7,6 @@
 Sustain::Sustain(QObject* parent)
   : QObject(parent)
 {
-  
 }
 //--------------------------------------------------------------------------------------------
 QString TypeToString(Sustain::Type value)
@@ -18,6 +17,8 @@ QString TypeToString(Sustain::Type value)
     return "BOOLEAN";
   } else if (value == Sustain::INTEGRAL) {
     return "INTEGRAL";
+  } else if (value == Sustain::REAL) {
+    return "REAL";
   } else if (value == Sustain::RANGE) {
     return "RANGE";
   } else if (value == Sustain::SCALAR) {
@@ -26,6 +27,8 @@ QString TypeToString(Sustain::Type value)
     return "ENUM";
   } else if (value == Sustain::eOPTION) {
     return "OPTION";
+  } else if (value == Sustain::CONST) {
+    return "CONST";
   } else {
     return "UNKNOWN";
   }
@@ -39,6 +42,8 @@ Sustain::Type TypeFromString(QString value)
     return Sustain::BOOLEAN;
   } else if (value == "INTEGRAL" || value == "INTEGER") {
     return Sustain::INTEGRAL;
+  } else if (value == "REAL" || value == "FLOAT") {
+    return Sustain::INTEGRAL;
   } else if (value == "RANGE") {
     return Sustain::RANGE;
   } else if (value == "SCALAR") {
@@ -47,6 +52,8 @@ Sustain::Type TypeFromString(QString value)
     return Sustain::ENUM;
   } else if (value == "OPTION") {
     return Sustain::eOPTION;
+  } else if (value == "CONST") {
+    return Sustain::CONST;
   }
 
   QRegularExpression enumRegxp { R"(\s*ENUM\s*{\s*(.*)\s*}\s*)" };
@@ -72,13 +79,23 @@ ParameterField::ParameterField(QObject* parent)
   : QObject(parent)
 {
 }
-ParameterField::ParameterField(QString n, Sustain::Type t, QObject* parent)
+ParameterField::ParameterField(QString n, Sustain::Type t, QVariant v, QObject* parent)
   : QObject(parent)
   , name(n)
+  , _value(v)
   , eType(t)
 {
 }
-//--------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
+  Sustain::Type ParameterField::type() const {
+    return eType;
+  }
+  //-------------------------------------------------------------------------------------------
+  void ParameterField::type(Sustain::Type type) {
+        eType = type;
+        typeChanged();
+  }
+//-------------------------------------------------------------------------------------------
 bool ParameterField::operator==(const ParameterField& rhs) const
 {
   return name == rhs.name
@@ -97,15 +114,31 @@ ParameterField* ParameterField::make(QObject* parent)
 //--------------------------------------------------------------------------------------------
 ParameterField* ParameterField::make(QString name, Sustain::Type type, QObject* parent)
 {
-  return new ParameterField(name, type, parent);
+  return new ParameterField(name, type, QVariant(""), parent);
 }
+//--------------------------------------------------------------------------------------------
+ParameterField* ParameterField::make(QString name, Sustain::Type type,  QVariant value, QObject* parent)
+{
+  return new ParameterField(name, type, value, parent);
+}
+//--------------------------------------------------------------------------------------------
+QVariant ParameterField::value() const
+{
+  return _value;
+}
+//--------------------------------------------------------------------------------------------
+void ParameterField::value(QVariant value)
+{
+  _value = value;
+}
+
 //--------------------------------------------------------------------------------------------
 QString ParameterField::toString() const
 {
   return QString("%1:%2").arg(name).arg(TypeToString(eType));
 }
 //--------------------------------------------------------------------------------------------
-QString ParameterField::typeString()  const
+QString ParameterField::typeString() const
 {
   return TypeToString(eType);
 }
@@ -148,15 +181,23 @@ EquipmentParameter::EquipmentParameter(QString parameter_string, QObject* parent
   //Error 2: First Name:Type does not resovle to a known eType
   //Error 3: Any Param that doesn't properly parse
 
+  //Examples
+  //NAME:STRING
+  //SEVERITY:RANGE,MIN:INTEGRAL:6,MAX:INTEGRAL:6
+  //TYPE:ENUM,STRING,INTEGRAL,ENUM
+  //VOLUME:SCALAR,UNIT:ENUM,ml:eOption,l:eOption,gal:eoption - VOLUME:SCALAR,UNIT:ENUM:ml|l|gal (Second form needs patching to be supported)
+
   for (auto param : parameter_string.split(',')) {
     auto parts = param.split(':');
     if (eType == Sustain::UNKNOWN) {
       name = parts[0];
       eType = TypeFromString(parts[1].trimmed());
+
     } else if (eType == Sustain::ENUM) {
       enumOptions.push_back(param.trimmed());
     } else {
-      fields.push_back(ParameterField::make(parts[0].trimmed(), TypeFromString(parts[1].trimmed()), this));
+      //Tokenization is currently broken.  
+      fields.push_back(ParameterField::make(parts[0].trimmed(), TypeFromString(parts[1].trimmed()), (parts.size() > 2) ? parts[2] : 0 , this));
     }
   }
 }
@@ -201,6 +242,47 @@ EquipmentParameter* EquipmentParameter::make(QObject* parent)
 EquipmentParameter* EquipmentParameter::make(QString name, Sustain::Type type, QList<QString> enumOptions, QObject* make)
 {
   return new EquipmentParameter(name, type, std::move(enumOptions));
+}
+//--------------------------------------------------------------------------------------------
+Sustain::Type EquipmentParameter::Type() const
+{
+  return eType;
+}
+//--------------------------------------------------------------------------------------------
+void EquipmentParameter::Type(Sustain::Type type)
+{
+  eType = type;
+  fields.clear();
+  enumOptions.clear();
+
+  switch (type) {
+  case Sustain::Type::BOOLEAN: //{0,1}
+  case Sustain::Type::CONST: //{ANY VLALUE CAN NOT BE CHANGED}
+  case Sustain::Type::INTEGRAL: //{int64_t}
+  case Sustain::Type::STRING: //{char const*}
+    fields.append(ParameterField::make("VALUE", Sustain::Type::UNKNOWN));
+    //NOTE: It is a point of debate as to if the value of a type should have a type
+    //NOTE: On one hand you could use he ParameterField:Type for validation, but its also redundent
+    //NOTE: I thought about having an additional enum value ANY, but UNKNOWN seems to be fine.
+    break;
+  case Sustain::Type::RANGE:
+    fields.append(ParameterField::make("MIN", Sustain::Type::REAL, 0.));
+    fields.append(ParameterField::make("MAX", Sustain::Type::REAL, 1.));
+    break;
+  case Sustain::Type::SCALAR:
+    fields.append(ParameterField::make("VALUE", Sustain::Type::REAL));
+    fields.append(ParameterField::make("UNIT", Sustain::Type::ENUM));
+    //NOTE: All additional fields are of type eOption are represent valid unit demensions
+    //      Abence of any eOption field means the scalar is without a demension
+  case Sustain::Type::ENUM:
+    break;
+
+  case Sustain::Type::UNKNOWN:
+  default:
+    break;
+  }
+
+  typeChanged();
 }
 //--------------------------------------------------------------------------------------------
 void EquipmentParameter::appendField(QString name, Sustain::Type type)

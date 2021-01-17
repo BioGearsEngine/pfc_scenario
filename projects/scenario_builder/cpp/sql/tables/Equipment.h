@@ -31,10 +31,12 @@ Sustain(QObject* parent = nullptr);
   STRING,
   BOOLEAN,
   INTEGRAL,
+  REAL,
   RANGE,
   SCALAR,
   ENUM,
-  eOPTION  
+  eOPTION,  
+  CONST
   };
   Q_ENUM(Type)
 
@@ -49,8 +51,9 @@ Sustain::Type TypeFromString(std::string value);
 struct ParameterField : public QObject {
   Q_OBJECT
   Q_PROPERTY(QString name MEMBER name NOTIFY nameChanged)
-  Q_PROPERTY(Sustain::Type type MEMBER eType NOTIFY typeChanged)
+  Q_PROPERTY(Sustain::Type type READ type WRITE type NOTIFY typeChanged)
   Q_PROPERTY(QString typeString READ typeString NOTIFY typeChanged)
+  Q_PROPERTY(QVariant value READ value WRITE value NOTIFY variantValueChanged)
 signals:
   void nameChanged();
   void typeChanged();
@@ -58,20 +61,28 @@ signals:
 public:
   QString name;
   Sustain::Type eType;
+  QVariant _value;
 
   ParameterField(QObject* parent = nullptr);
-  ParameterField(QString n, Sustain::Type t, QObject* parent = nullptr);
+  ParameterField(QString n, Sustain::Type t, QVariant value = "", QObject* parent = nullptr);
   ParameterField(const ParameterField&) = delete;
   ParameterField(ParameterField&&) = delete;
   ParameterField& operator=(const ParameterField&) = delete;
   ParameterField& operator=(ParameterField&&) = delete;
   virtual ~ParameterField() = default;
 
+  Sustain::Type type() const;
+  void type(Sustain::Type type);
+
   bool operator==(const ParameterField& rhs) const;
   bool operator!=(const ParameterField& rhs) const;
 
   static Q_INVOKABLE ParameterField* make(QObject* parent = nullptr);
   static Q_INVOKABLE ParameterField* make(QString name, Sustain::Type type, QObject* parent = nullptr);
+  static Q_INVOKABLE ParameterField* make(QString name, Sustain::Type type, QVariant value, QObject* parent = nullptr);
+
+  QVariant value() const;
+  void value(QVariant);
 
   Q_INVOKABLE QString toString() const;
   Q_INVOKABLE QString typeString() const;
@@ -80,12 +91,36 @@ public:
   void assign(const ParameterField& rhs);
 
   void clear();
+
+signals:
+    void variantValueChanged(QVariant value);
 };
+
+
+//!
+//!   Equipment Parmaters are fields for storing values that can be changed when an equipment is instanced
+//!
+//!   While EquipmentParameter is designed to be generic allowing custom types with arbitary subfields
+//!   Currently the underlying type is limited to the following 
+//!    UNKNOWN,
+//!    STRING,  0 Subfields  1 Implict Field Value  [Any Arbitary Char String]
+//!    BOOLEAN, 0 Subfields  1 Implict Field Value  [0=False 1=True]
+//!    INTEGRAL 0 Subfields  1 Implict Field Value  [64bit integer]
+//!    RANGE,   0 Subfields [MIN,MAX] 1 Implicit Field Value   [ITEEE double 734]
+//!    SCALAR,
+//!    ENUM     N subfields (stored internally as enumOptions)  Values Enum can be turned in to
+//!    eOPTION  Enum Value used only programatically for subfields of an enum
+//!    REAL     Subtype for ParameterFields for the numerical component of a SCALAR. For demensional SCALARS  use SCALAR and set the enum component to None
+//!    
+//!    Currently setting the type using the constructor or Type(Sustain::Type) functions will erase the curent fields and enum options
+//!    To create a properly formed paramater of that type.  Additiona/Fields can be created and removed once this is done for the creation of 
+//!    CUSTOM parameters but it is best left to leave the SUSTAIN::TYPE to UNKNOWN when this occurs and the UI currently will not reflect these p
+//!    parameters correctly. Or Range from -Inf , +Inf
 
 struct EquipmentParameter : public QObject {
   Q_OBJECT
   Q_PROPERTY(QString name MEMBER name NOTIFY nameChanged)
-  Q_PROPERTY(Sustain::Type type MEMBER eType NOTIFY typeChanged)
+  Q_PROPERTY(Sustain::Type type READ Type WRITE Type NOTIFY typeChanged)
   Q_PROPERTY(QQmlListProperty<ParameterField> field READ getParameterFields NOTIFY fieldsChanged)
   Q_PROPERTY(QList<QString> enumOptions MEMBER enumOptions NOTIFY enumOptionsChanged)
   Q_PROPERTY(QString typeString READ typeString NOTIFY typeChanged)
@@ -116,6 +151,9 @@ public:
 
   static Q_INVOKABLE EquipmentParameter* make(QObject* make = nullptr);
   static Q_INVOKABLE EquipmentParameter* make(QString name, Sustain::Type type, QList<QString> enumOptions = {}, QObject* make = nullptr);
+
+  Sustain::Type Type() const;
+  void Type(Sustain::Type type);
 
   Q_INVOKABLE void appendField(QString name, Sustain::Type type);
   Q_INVOKABLE void appendField(std::string name, Sustain::Type type);

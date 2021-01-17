@@ -112,7 +112,9 @@ CrossReferenceForm {
           enabled : false
           onActivated : {
             if (root.model[selfID]) {
+              console.log("Equipment Parameter - %1 to %2".arg(selfID).arg(typeBox.model.get(currentIndex).enumValue))
               root.model[selfID].type = typeBox.model.get(currentIndex).enumValue
+              
             }
           }
           onHoveredChanged : {}
@@ -184,6 +186,11 @@ CrossReferenceForm {
               }
               TextField {
                 id: minField
+                inputMethodHints: Qt.ImhDigitsOnly
+                onAccepted: {
+                  root.model[index].fields[0].value = text
+                  paramaterModified(index, root.model[index])
+                }
               }
               Label {
                 id: maxLable
@@ -191,6 +198,12 @@ CrossReferenceForm {
               }
               TextField {
                 id: maxField
+                inputMethodHints: Qt.ImhDigitsOnly
+                onAccepted: {
+                  
+                  root.model[index].fields[1].value = text
+                  paramaterModified(index, root.model[index])
+                }
               }
             }
           }
@@ -212,7 +225,11 @@ CrossReferenceForm {
                 textRole : "text"
                 currentIndex : (root.model[index].fields[0]) ? root.model[index].fields[0].value : 0
                 enabled : true
-                onActivated : {}
+                onActivated : {
+                  root.model[index].fields[0].name = model.text
+                  root.model[index].fields[0].value = currentIndex
+                  paramaterModified(index, root.model[index])
+                }
                 onHoveredChanged : {}
                 onPressedChanged : {}
                 
@@ -268,10 +285,12 @@ CrossReferenceForm {
                   return str;
                 }
                 placeholderText: "Comma delimited list of enum values"
+                onFocusChanged : {
+                  paramaterModified(index, root.model[index]);
+                }
               }
             }
           }
-
           property Component commonDelegate : Component {
             Text {
               text : "No additional fields"
@@ -283,10 +302,13 @@ CrossReferenceForm {
           sourceComponent : {
             switch (curParam.type) {
               case Sustain.RANGE:
+                console.log("rangeDelegate")
                 return rangeDelegate
               case Sustain.SCALAR:
+                console.log("scalarDelegate")
                 return scalarDelegate
               case Sustain.ENUM:
+                console.log("enumDelegate")
                 return enumDelegate
               case Sustain.STRING:
               case Sustain.BOOLEAN:
