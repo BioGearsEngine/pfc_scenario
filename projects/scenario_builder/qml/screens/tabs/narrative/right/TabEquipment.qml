@@ -159,7 +159,7 @@ ColumnLayout {
             width : 100
             text : "Parameters: "
             enabled : false
-            color : enabled ? "white" : Material.secondaryTextColor
+            color : enabled ? Material.secondaryTextColor : "white" 
             elide : Text.ElideRight
           }
           Text {
@@ -171,7 +171,7 @@ ColumnLayout {
             font.pointSize : 10
             text : (knownEquipmentList.equipment[index]) ? knownEquipmentList.equipment[index].parameters.length : "0"
             enabled : false
-            color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
+            color : enabled ? Material.secondaryTextColor : Material.primaryTextColor
             elide : Text.ElideRight
           }
 
@@ -200,6 +200,7 @@ ColumnLayout {
             PropertyChanges { target : equipment_value_text; enabled : true }
             PropertyChanges { target : equipment_parameter_label; enabled : true }
             PropertyChanges { target : equipment_parameter_text; enabled : true }
+
           }
           onFocusChanged : {
             if (knownEquipmentList.currentIndex == index) {
@@ -398,8 +399,8 @@ ColumnLayout {
                   Layout.fillWidth : true
                   Layout.minimumHeight : 25
                   height : childrenRect.height
-                  color : (enabled) ? Material.primary : Material.color(Material.BlueGrey, Material.Shade100)
-                  enabled : false
+                  color : (!enabled) ? Material.primary : Material.color(Material.BlueGrey, Material.Shade100)
+                  enabled : instanceBody.enabled
                   Label {
                     id : parameterNameLabel
                     anchors {
@@ -410,32 +411,77 @@ ColumnLayout {
                     }
                     font.pointSize : (enabled) ? 12 : 10
                     text : currentParameter.name
-                    color : (enabled) ? "White" : Material.primaryTextColor 
+                    color : (!enabled) ? "White" : Material.primaryTextColor 
                   }
 
                   Loader {
-                    id : paramaterEntryLoader
+                    id : equipment_parameter_loader
+
+                    enabled : instanceBody.enabled 
                     anchors {
                          left : parameterNameLabel.right
                          top : parameterHeader.top
                          leftMargin : 5
                          topMargin : 2
-                     }
-                     sourceComponent : unknownType
+                    }
+                    sourceComponent : {
+                       switch (currentParameter.type) {
+                         case Sustain.BOOLEAN:
+                           return booleanType;
+                         
+                         case Sustain.INTEGRAL:
+                          return integralType;
+                         
+                         case Sustain.SCALAR:
+                          return scalarType;
+                         
+                         case Sustain.ENUM:
+                          return enumType;
+                         
+                       }
+                    }
                      
                      
-                     property Component unknownType : Text {
-                       id : parameterNameText
+                    property Component unknownType : Text {
+                       
                        font.pointSize : (enabled) ? 12 : 10
-                       text : currentParameter.typeString
+                       text : "UNKNOWN"
                        color : (enabled) ? "White" : Material.primaryTextColor 
                     }  
+
+                    property Component booleanType : CheckBox {
+                      checked: true
+                      focus : true
+                      enabled : equipment_parameter_loader.enabled
+                      
+                    }
+
+                    property Component integralType : TextField {
+                      focus: true
+                      inputMethodHints: Qt.ImhDigitsOnly
+                      text: "1"
+                      onAccepted: {
+                         //ADD TO MAP
+                      }
+                    }                    
+
+                    property Component scalarType : RowLayout {
+                       Label {
+                        font.pointSize : (enabled) ? 12 : 10
+                        text : currentParameter.value
+                        color : (!enabled) ? "White" : Material.primaryTextColor 
+                       }
+                    }  
+
+                    property Component enumType : ComboBox {
+                      model  : currentParameter.enumOptions
+                    }
                   }
                   
                   ListView {
                     id : fieldView
                     anchors {
-                      top : paramaterEntryLoader.bottom
+                      top : equipment_parameter_loader.bottom
                       left : parent.left
                       right : parent.right
                     }

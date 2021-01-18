@@ -17,7 +17,7 @@ Rectangle {
   property alias currentTrauma : traumas.currentTrauma
   property alias currentProfile : traumaProfiles.currentProfile
   property alias currentTreatment : treatments.currentTreatment
-  property alias currentEquipment : equipment.currentEquipment
+  property var currentEquipment : equipment.currentEquipment
 
   property SQLBackend backend
   property ListElement modelData
@@ -144,6 +144,10 @@ Rectangle {
         Layout.fillWidth : true
         backend : root.backend
         topIndex : root.topIndex
+
+        onCurrentEquipmentChanged : {
+          root.currentEquipment = equipment.currentEquipment
+        }
       }
       TabAssessments {
         id : assessments

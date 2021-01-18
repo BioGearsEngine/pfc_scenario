@@ -2191,7 +2191,7 @@ bool SQLite3Driver::update_equipment(Equipment* equipment)
       return r;
     }
     emit equipmentUpdated(equipment->id);
-    emit equipmentChanged();
+
 
     return true;
   }

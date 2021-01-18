@@ -129,8 +129,10 @@ CrossReferenceForm {
               }
             }
           }
-          onHoveredChanged : {}
-          onPressedChanged : {}
+
+          onFocusChanged : {
+            paramaterModified(index, root.model[index])
+          }
           flat : true
           model : ListModel {
             ListElement {
@@ -246,11 +248,15 @@ CrossReferenceForm {
                 focus : true
                 Layout.leftMargin : 10
                 textRole : "text"
-                currentIndex : (root.model[index].fields[0]) ? root.model[index].fields[0].value : 0
+                currentIndex : (root.model[selfID].fields[1] && root.model[selfID].fields[1].value ) ? root.model[selfID].fields[1].value : 0
                 enabled : true
                 onActivated : {
-                  root.model[index].fields[0].name = model.text
-                  root.model[index].fields[0].value = currentIndex
+                  if ( root.model[selfID].fields[0].value != unitBox.model.get(unitBox.currentIndex).text) {
+                    root.model[selfID].fields[0].value = unitBox.model.get(unitBox.currentIndex).text
+                    root.model[selfID].fields[1].value = currentIndex
+                  }
+                }
+                onFocusChanged : {
                   paramaterModified(index, root.model[index])
                 }
                 onHoveredChanged : {}
@@ -260,7 +266,7 @@ CrossReferenceForm {
                 model : ListModel {
                   ListElement {
                     text : "Volume";
-                    umit : "ml"
+                    unit : "ml"
                   }
                   ListElement {
                     text : "Area";

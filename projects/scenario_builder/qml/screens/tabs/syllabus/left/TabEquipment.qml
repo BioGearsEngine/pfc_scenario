@@ -12,9 +12,7 @@ ColumnLayout {
   id : root
   property SQLBackend backend
   property int topIndex
-  property Equipment currentEquipment : (equipmentList.equipmentDefinitions[equipmentList.currentIndex]) ?
-                                         equipmentList.equipmentDefinitions[equipmentList.currentIndex] :
-                                         equipment_g
+  property Equipment currentEquipment : equipment_g
 
   signal reloadEquipmentList();
 
@@ -168,18 +166,28 @@ ColumnLayout {
       }
 
       ScrollBar.vertical : ScrollBar {}
-
+      
+      onCurrentIndexChanged : {
+        if ( equipmentList.equipmentDefinitions[ currentIndex ] ) {
+          root.currentEquipment = equipmentList.equipmentDefinitions[equipmentList.currentIndex];        
+        } else {
+          root.currentEquipment =  equipment_g;
+        }
+      }
     }
   }
 
   Component.onCompleted : {
-    update_equipment()
+    update_equipments()
   }
 
   Connections {
     target : backend
     onEquipmentChanged : {
-      update_equipment()
+      update_equipments()
+    }
+    onEquipmentUpdated : {
+      update_equipment(index)
     }
     onCitationsChanged : {
       update_equipment()
@@ -193,7 +201,7 @@ ColumnLayout {
       }
     }
   }
-  function update_equipment() {
+  function update_equipments() {
     var index = (equipmentList.currentIndex >= 0) ? equipmentList.currentIndex : 0
     equipmentList.equipmentDefinitions = []
     let equipments = root.backend.equipment;
@@ -203,5 +211,13 @@ ColumnLayout {
     }
     equipmentList.model = equipmentList.equipmentDefinitions;
     equipmentList.currentIndex = index
+  }
+    function update_equipment( id ) {
+    for (var ii = 0; ii < equipmentList.equipmentDefinitions.length; ++ ii) {
+      if( equipmentList.equipmentDefinitions[ii].equipmnent_id == id ) {
+         console.log ( "Updating Equipment" );
+         backend.select_equipment( equipmentList.equipmentDefinitions[ii] );
+      }
+    }
   }
 }

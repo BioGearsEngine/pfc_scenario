@@ -16,7 +16,7 @@ Flickable {
   property alias currentTrauma : traumas.currentTrauma
   property alias currentProfile : traumaProfiles.currentProfile
   property alias currentObjective : objectives.currentObjective
-  property alias currentEquipment : equipment.currentEquipment
+  property Equipment currentEquipment 
   property alias currentAssessment : assessments.currentAssessment
 
   Layout.fillHeight : true
@@ -95,12 +95,15 @@ Flickable {
       Layout.rightMargin : 5
       border.color : 'black'
       border.width : 1
+
+
       TabEquipment {
         id : equipment
         backend : root.backend
         width : parent.width
         height : parent.height
         topIndex : root.topIndex
+        currentEquipment : root.currentEquipment
       }
     }
     Rectangle {
