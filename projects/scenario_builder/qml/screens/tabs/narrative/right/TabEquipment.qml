@@ -474,7 +474,20 @@ ColumnLayout {
                     }  
 
                     property Component enumType : ComboBox {
-                      model  : currentParameter.enumOptions
+                      id : enumTypeComponent
+                      model  : {
+                        var options = [];
+                        var list = currentParameter.enumOptions;
+                        for ( var ii = 0; ii < list.length; ii++ ){                          
+                          options.push(list[ii]);
+                        }
+
+                        return options;
+                      }
+
+                      onModelChanged : {
+                        console.log (  ["1","2","3"] )
+                      }
                     }
                   }
                   
@@ -518,6 +531,12 @@ ColumnLayout {
     onEquipmentChanged : {
       refresh_equipment_definition_list()
     }
+
+    onEquipmentUpdated : {
+       refresh_an_equipment_definition( index )
+       refresh_an_equipment_in_scene( index )
+    }
+
     onEquipmentMapsChanged : {
       refresh_equipment_in_scene_list()
     }
@@ -547,6 +566,7 @@ ColumnLayout {
     equipmentInSceneList.model = equipmentInSceneList.equipmentMaps
     equipmentInSceneList.currentIndex = lastIndex
   }
+  
   function refresh_equipment_definition_list() {
     knownEquipmentList.equipment = []
     let equipments = root.backend.equipment;
@@ -555,5 +575,22 @@ ColumnLayout {
       knownEquipmentList.equipment[knownEquipmentList.equipment.length - 1].assign(equipments[ii]);
     }
     knownEquipmentList.equipment.model = knownEquipmentList.equipment;
+  }
+
+  function refresh_an_equipment_in_scene( id ) {
+
+    for (var ii = 0; ii <  equipmentInSceneList.equipmentMaps.length; ++ ii) {      
+      if (id==  equipmentInSceneList.equipmentMaps[ii].id) {        
+        root.backend.select_equipment( equipmentInSceneList.equipmentMaps[ii] );     
+      }
+    }
+  }
+
+  function refresh_an_equipment_definition( id ) {
+    for (var ii = 0; ii <  knownEquipmentList.equipment.length; ++ ii) {      
+      if (id==  knownEquipmentList.equipment[ii].id) {        
+        root.backend.select_equipment( knownEquipmentList.equipment[ii] );     
+      }
+    }
   }
 }
