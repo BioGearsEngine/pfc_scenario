@@ -412,22 +412,30 @@ ColumnLayout {
                     text : currentParameter.name
                     color : (enabled) ? "White" : Material.primaryTextColor 
                   }
-                  Text {
-                    id : parameterNameText
+
+                  Loader {
+                    id : paramaterEntryLoader
                     anchors {
-                      left : parameterNameLabel.right
-                      top : parameterHeader.top
-                      leftMargin : 5
-                      topMargin : 2
-                    }
-                    font.pointSize : (enabled) ? 12 : 10
-                    text : currentParameter.typeString
-                    color : (enabled) ? "White" : Material.primaryTextColor 
+                         left : parameterNameLabel.right
+                         top : parameterHeader.top
+                         leftMargin : 5
+                         topMargin : 2
+                     }
+                     sourceComponent : unknownType
+                     
+                     
+                     property Component unknownType : Text {
+                       id : parameterNameText
+                       font.pointSize : (enabled) ? 12 : 10
+                       text : currentParameter.typeString
+                       color : (enabled) ? "White" : Material.primaryTextColor 
+                    }  
                   }
+                  
                   ListView {
                     id : fieldView
                     anchors {
-                      top : parameterNameText.bottom
+                      top : paramaterEntryLoader.bottom
                       left : parent.left
                       right : parent.right
                     }

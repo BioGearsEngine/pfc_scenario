@@ -27,7 +27,7 @@ public:
 Sustain(QObject* parent = nullptr);
 
   enum Type {
-  UNKNOWN,
+  UNKNOWN = 0,
   STRING,
   BOOLEAN,
   INTEGRAL,
@@ -64,7 +64,7 @@ public:
   QVariant _value;
 
   ParameterField(QObject* parent = nullptr);
-  ParameterField(QString n, Sustain::Type t, QVariant value = "", QObject* parent = nullptr);
+  ParameterField(QString n, Sustain::Type t, QVariant value = QVariant(), QObject* parent = nullptr);
   ParameterField(const ParameterField&) = delete;
   ParameterField(ParameterField&&) = delete;
   ParameterField& operator=(const ParameterField&) = delete;
@@ -121,7 +121,7 @@ struct EquipmentParameter : public QObject {
   Q_OBJECT
   Q_PROPERTY(QString name MEMBER name NOTIFY nameChanged)
   Q_PROPERTY(Sustain::Type type READ Type WRITE Type NOTIFY typeChanged)
-  Q_PROPERTY(QQmlListProperty<ParameterField> field READ getParameterFields NOTIFY fieldsChanged)
+  Q_PROPERTY(QQmlListProperty<ParameterField> fields READ getParameterFields NOTIFY fieldsChanged)
   Q_PROPERTY(QList<QString> enumOptions MEMBER enumOptions NOTIFY enumOptionsChanged)
   Q_PROPERTY(QString typeString READ typeString NOTIFY typeChanged)
 

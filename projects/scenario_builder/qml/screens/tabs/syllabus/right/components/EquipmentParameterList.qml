@@ -32,7 +32,7 @@ CrossReferenceForm {
   delegate : MouseArea {
     id : parameterMouseArea
     property int selfID : index
-
+    
     anchors {
       left : parent.left
       right : parent.right
@@ -84,6 +84,12 @@ CrossReferenceForm {
           readOnly : true
           activeFocusOnPress : false
           hoverEnabled : false
+          onAccepted: {     
+            if( root.model[selfID] ){
+              root.model[selfID].name  = text
+              paramaterModified(selfID, root.model[selfID].name )
+            }   
+          }
         }
         Label {
           id : typeLabel
@@ -108,13 +114,19 @@ CrossReferenceForm {
             topMargin : 2
           }
           textRole : "text"
-          currentIndex : root.model[index].type
+          currentIndex :  root.model[selfID].type 
           enabled : false
+          
           onActivated : {
+            console.log(currentIndex)
+            console.log("Equipment Parameter - %1 to %2".arg(typeBox.model.get(root.model[selfID].type).text).arg(typeBox.model.get(currentIndex).text))
             if (root.model[selfID]) {
-              console.log("Equipment Parameter - %1 to %2".arg(selfID).arg(typeBox.model.get(currentIndex).enumValue))
-              root.model[selfID].type = typeBox.model.get(currentIndex).enumValue
-              
+              //NOTE : I'm putting this aside for now. We have a problem Calling Equipment update here
+              //       Causes a recursive call stack. Something wrong with combobox. We need to find away to guard against this
+                       
+              if(root.model[selfID].type != typeBox.model.get(currentIndex).enumValue){
+                 root.model[selfID].type = typeBox.model.get(currentIndex).enumValue
+              }
             }
           }
           onHoveredChanged : {}
@@ -136,6 +148,10 @@ CrossReferenceForm {
             ListElement {
               text : "INTEGRAL";
               enumValue : Sustain.INTEGRAL
+            }
+            ListElement {
+              text : "REAL";
+              enumValue : Sustain.REAL
             }
             ListElement {
               text : "RANGE";
@@ -186,10 +202,14 @@ CrossReferenceForm {
               }
               TextField {
                 id: minField
+                focus: true
                 inputMethodHints: Qt.ImhDigitsOnly
+                text: root.model[index].fields[0].value
                 onAccepted: {
-                  root.model[index].fields[0].value = text
-                  paramaterModified(index, root.model[index])
+                  if ( text != root.model[index].fields[0].value) {
+                    root.model[index].fields[0].value = text
+                    paramaterModified(index, root.model[index])
+                  }
                 }
               }
               Label {
@@ -198,11 +218,14 @@ CrossReferenceForm {
               }
               TextField {
                 id: maxField
+                focus: true
                 inputMethodHints: Qt.ImhDigitsOnly
+                text: root.model[index].fields[1].value
                 onAccepted: {
-                  
-                  root.model[index].fields[1].value = text
-                  paramaterModified(index, root.model[index])
+                  if ( text != root.model[index].fields[1].value) {
+                    root.model[index].fields[1].value = text
+                    paramaterModified(index, root.model[index])
+                  }
                 }
               }
             }
@@ -300,6 +323,9 @@ CrossReferenceForm {
           }
 
           sourceComponent : {
+            if(!curParam){
+              return commonDelegate
+            }
             switch (curParam.type) {
               case Sustain.RANGE:
                 console.log("rangeDelegate")

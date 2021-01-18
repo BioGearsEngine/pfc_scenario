@@ -43,7 +43,7 @@ Sustain::Type TypeFromString(QString value)
   } else if (value == "INTEGRAL" || value == "INTEGER") {
     return Sustain::INTEGRAL;
   } else if (value == "REAL" || value == "FLOAT") {
-    return Sustain::INTEGRAL;
+    return Sustain::REAL;
   } else if (value == "RANGE") {
     return Sustain::RANGE;
   } else if (value == "SCALAR") {
@@ -87,14 +87,16 @@ ParameterField::ParameterField(QString n, Sustain::Type t, QVariant v, QObject* 
 {
 }
 //-------------------------------------------------------------------------------------------
-  Sustain::Type ParameterField::type() const {
-    return eType;
-  }
-  //-------------------------------------------------------------------------------------------
-  void ParameterField::type(Sustain::Type type) {
-        eType = type;
-        typeChanged();
-  }
+Sustain::Type ParameterField::type() const
+{
+  return eType;
+}
+//-------------------------------------------------------------------------------------------
+void ParameterField::type(Sustain::Type type)
+{
+  eType = type;
+  typeChanged();
+}
 //-------------------------------------------------------------------------------------------
 bool ParameterField::operator==(const ParameterField& rhs) const
 {
@@ -117,7 +119,7 @@ ParameterField* ParameterField::make(QString name, Sustain::Type type, QObject* 
   return new ParameterField(name, type, QVariant(""), parent);
 }
 //--------------------------------------------------------------------------------------------
-ParameterField* ParameterField::make(QString name, Sustain::Type type,  QVariant value, QObject* parent)
+ParameterField* ParameterField::make(QString name, Sustain::Type type, QVariant value, QObject* parent)
 {
   return new ParameterField(name, type, value, parent);
 }
@@ -135,6 +137,17 @@ void ParameterField::value(QVariant value)
 //--------------------------------------------------------------------------------------------
 QString ParameterField::toString() const
 {
+  if (_value.isValid()) {
+    if (_value.type() == QMetaType::Int) {
+      return QString("%1:%2:%3").arg(name).arg(TypeToString(eType)).arg(_value.toInt());
+    }
+    if (_value.type() == QMetaType::Double) {
+      return QString("%1:%2:%3").arg(name).arg(TypeToString(eType)).arg(_value.toDouble());
+    }
+    if (_value.type() == QMetaType::QString) {
+      return QString("%1:%2:%3").arg(name).arg(TypeToString(eType)).arg(_value.toString());
+    }
+  }
   return QString("%1:%2").arg(name).arg(TypeToString(eType));
 }
 //--------------------------------------------------------------------------------------------
@@ -196,8 +209,8 @@ EquipmentParameter::EquipmentParameter(QString parameter_string, QObject* parent
     } else if (eType == Sustain::ENUM) {
       enumOptions.push_back(param.trimmed());
     } else {
-      //Tokenization is currently broken.  
-      fields.push_back(ParameterField::make(parts[0].trimmed(), TypeFromString(parts[1].trimmed()), (parts.size() > 2) ? parts[2] : 0 , this));
+      //Tokenization is currently broken.
+      fields.push_back(ParameterField::make(parts[0].trimmed(), TypeFromString(parts[1].trimmed()), (parts.size() > 2) ? parts[2] : 0, this));
     }
   }
 }
@@ -256,27 +269,27 @@ void EquipmentParameter::Type(Sustain::Type type)
   enumOptions.clear();
 
   switch (type) {
-  case Sustain::Type::BOOLEAN: //{0,1}
   case Sustain::Type::CONST: //{ANY VLALUE CAN NOT BE CHANGED}
-  case Sustain::Type::INTEGRAL: //{int64_t}
-  case Sustain::Type::STRING: //{char const*}
-    fields.append(ParameterField::make("VALUE", Sustain::Type::UNKNOWN));
+    fields.append(ParameterField::make("Value", Sustain::Type::UNKNOWN, QVariant(),this));
     //NOTE: It is a point of debate as to if the value of a type should have a type
     //NOTE: On one hand you could use he ParameterField:Type for validation, but its also redundent
     //NOTE: I thought about having an additional enum value ANY, but UNKNOWN seems to be fine.
     break;
+    break;
   case Sustain::Type::RANGE:
-    fields.append(ParameterField::make("MIN", Sustain::Type::REAL, 0.));
-    fields.append(ParameterField::make("MAX", Sustain::Type::REAL, 1.));
+    fields.append(ParameterField::make("Min", Sustain::Type::REAL, 0., this));
+    fields.append(ParameterField::make("Max", Sustain::Type::REAL, 1., this));
     break;
   case Sustain::Type::SCALAR:
-    fields.append(ParameterField::make("VALUE", Sustain::Type::REAL));
-    fields.append(ParameterField::make("UNIT", Sustain::Type::ENUM));
+    fields.append(ParameterField::make("Type", Sustain::Type::STRING, QVariant(),this));
+    fields.append(ParameterField::make("Unit", Sustain::Type::INTEGRAL,QVariant(), this));
     //NOTE: All additional fields are of type eOption are represent valid unit demensions
     //      Abence of any eOption field means the scalar is without a demension
-  case Sustain::Type::ENUM:
     break;
-
+  case Sustain::Type::BOOLEAN: //{0,1}
+  case Sustain::Type::INTEGRAL: //{int64_t}
+  case Sustain::Type::STRING: //{char const*}
+  case Sustain::Type::ENUM:
   case Sustain::Type::UNKNOWN:
   default:
     break;

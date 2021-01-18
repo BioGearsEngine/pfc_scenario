@@ -12,7 +12,9 @@ ColumnLayout {
   id : root
   property SQLBackend backend
   property int topIndex
-  property Equipment currentEquipment : (equipmentList.equipmentDefinitions[equipmentList.currentIndex]) ? equipmentList.equipmentDefinitions[equipmentList.currentIndex] : equipment_g
+  property Equipment currentEquipment : (equipmentList.equipmentDefinitions[equipmentList.currentIndex]) ?
+                                         equipmentList.equipmentDefinitions[equipmentList.currentIndex] :
+                                         equipment_g
 
   signal reloadEquipmentList();
 
