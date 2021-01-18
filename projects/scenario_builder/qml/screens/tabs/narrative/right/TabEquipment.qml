@@ -13,6 +13,7 @@ ColumnLayout {
   property SQLBackend backend
   property Scene currentScene
   property Location currentLocation
+  focus : true
   Equipment {
     id : equipment_g
   }
@@ -177,6 +178,7 @@ ColumnLayout {
 
           MouseArea {
             anchors.fill : parent
+            focus: true
             onClicked : {
               knownEquipmentList.currentIndex = index
             }
@@ -382,6 +384,20 @@ ColumnLayout {
               visible : false
               ListView {
                 id : parameter
+
+                property var values : {
+                  if ( equipmentMouseArea.currentMap ){
+                    var v = ( equipmentMouseArea.currentMap.values ) ? equipmentMouseArea.currentMap.values.split(";") : []
+                    var delta = v.length - equipmentMouseArea.currentEquipment.parameters.length;
+  
+                    while (delta-- > 0) { v.pop(); }
+                    while (delta++ < 0) { v.push(""); }
+                    
+                    return v;
+                  } else {
+                    return [];
+                  }
+                }
                 anchors {
                   left : parent.left
                   right : parent.right
@@ -394,7 +410,7 @@ ColumnLayout {
                   id: parameterHeader
 
                   property int paramID : index
-                  property var currentParameter : equipmentMouseArea.parameters[index]
+                  property var currentParameter : (index >= 0 && index < equipmentMouseArea.parameters.length) ? equipmentMouseArea.parameters[index] : undefined
 
                   Layout.fillWidth : true
                   Layout.minimumHeight : 25
@@ -410,13 +426,13 @@ ColumnLayout {
                       topMargin : 2
                     }
                     font.pointSize : (enabled) ? 12 : 10
-                    text : currentParameter.name
+                    text : (currentParameter) ? currentParameter.name : ""
                     color : (!enabled) ? "White" : Material.primaryTextColor 
                   }
 
                   Loader {
                     id : equipment_parameter_loader
-
+                    focus: true
                     enabled : instanceBody.enabled 
                     anchors {
                          left : parameterNameLabel.right
@@ -425,7 +441,10 @@ ColumnLayout {
                          topMargin : 2
                     }
                     sourceComponent : {
-                       switch (currentParameter.type) {
+                      if ( !currentParameter ){
+                        return undefined
+                      }
+                      switch (currentParameter.type) {
                          case Sustain.BOOLEAN:
                            return booleanType;
                          
@@ -442,67 +461,149 @@ ColumnLayout {
                     }
                      
                      
-                    property Component unknownType : Text {
-                       
+                    property Component unknownType : Text {                       
                        font.pointSize : (enabled) ? 12 : 10
                        text : "UNKNOWN"
                        color : (enabled) ? "White" : Material.primaryTextColor 
                     }  
 
                     property Component booleanType : CheckBox {
-                      checked: true
+                      id: checkBoxComponent
                       focus : true
                       enabled : equipment_parameter_loader.enabled
                       
+                      onCheckedChanged : {                        
+                        if ( parameter.values ) {
+                          var value = "%1".arg(checked) 
+                          if ( value != parameter.values[paramID] ) {
+                            parameter.values[paramID] = value;                          
+                            equipmentMouseArea.currentMap.values = parameter.values.join(";");
+                            backend.update_equipment_in_scene( equipmentMouseArea.currentMap )
+                          }
+                        }
+                      }
+                      Component.onCompleted : {                        
+                        if ( "%1".arg(checked ) != parameter.values[paramID] ){
+                          if ( parameter.values[paramID] ) {
+                            checkBoxComponent.checked = parameter.values[paramID];
+                          } else {                            
+                            parameter.values[paramID] = checked;
+                          }
+                        } else {
+                          parameter.values[paramID] = "%1".arg(checked);
+                        }
+                      }
                     }
 
                     property Component integralType : TextField {
+                      id: integralTypeComponent
                       focus: true
                       inputMethodHints: Qt.ImhDigitsOnly
+                      anchors.rightMargin : 25
                       text: "1"
-                      onAccepted: {
-                         //ADD TO MAP
+                      onAccepted : {                        
+                        if ( parameter.values ) {
+                          if ( text != parameter.values[paramID] ) {
+                            parameter.values[paramID] = text;                          
+                            equipmentMouseArea.currentMap.values = parameter.values.join(";");
+                            backend.update_equipment_in_scene( equipmentMouseArea.currentMap )
+                          }
+                        }
+                      }
+                      Component.onCompleted : {                        
+                        if ( integralTypeComponent.text != parameter.values[paramID] ){
+                          if ( parameter.values[paramID] ) {
+                            integralTypeComponent.text = parameter.values[paramID];
+                          } else {                            
+                            parameter.values[paramID] = integralTypeComponent.text;
+                          }
+                        } else {
+                          parameter.values[paramID] = integralTypeComponent.text;
+                        }
                       }
                     }                    
 
                     property Component scalarType : RowLayout {
+
                        Label {
-                        font.pointSize : (enabled) ? 12 : 10
-                        text : currentParameter.value
-                        color : (!enabled) ? "White" : Material.primaryTextColor 
+                         font.pointSize : (enabled) ? 12 : 10
+                         enabled : equipment_parameter_loader.enabled
+                         text :  ( currentParameter.value ) ? currentParameter.value[paramID] : ""
+                         color : (!enabled) ? "White" : Material.primaryTextColor 
                        }
+
+                       TextField {
+                         id: integralTypeComponent
+                         focus: true
+                         inputMethodHints: Qt.ImhDigitsOnly
+                         anchors.rightMargin : 25
+                         text: "1"
+                         onAccepted : {                        
+                            if ( parameter.values ) {
+                              if ( text != parameter.values[paramID] ) {
+                                parameter.values[paramID] = text;                          
+                                equipmentMouseArea.currentMap.values = parameter.values.join(";");
+                                backend.update_equipment_in_scene( equipmentMouseArea.currentMap )
+                              }
+                            }
+                         }
+                         Component.onCompleted : {                        
+                           if ( integralTypeComponent.text != parameter.values[paramID] ){
+                              if ( parameter.values[paramID] ) {
+                                integralTypeComponent.text = parameter.values[paramID];
+                              } else {                            
+                                parameter.values[paramID] = integralTypeComponent.text;
+                              }
+                           } else {
+                              parameter.values[paramID] = integralTypeComponent.text;
+                           }
+                         }
+                       }  
                     }  
 
                     property Component enumType : ComboBox {
                       id : enumTypeComponent
+                      enabled : equipment_parameter_loader.enabled
+
+                      property bool dirty : false
+
                       model  : {
                         var options = [];
                         var list = currentParameter.enumOptions;
                         for ( var ii = 0; ii < list.length; ii++ ){                          
                           options.push(list[ii]);
                         }
-
                         return options;
                       }
 
-                      onModelChanged : {
-                        console.log (  ["1","2","3"] )
+                      onActiveFocusChanged : {               
+                        if(dirty){          
+                          backend.update_equipment_in_scene( equipmentMouseArea.currentMap );
+                        }
                       }
-                    }
-                  }
-                  
-                  ListView {
-                    id : fieldView
-                    anchors {
-                      top : equipment_parameter_loader.bottom
-                      left : parent.left
-                      right : parent.right
-                    }
-                    model : currentParameter.fields
-                    delegate : Rectangle {
-                       height : 50
-                       width : 100
-                       color : 'steelblue'
+
+                      onActivated : {
+                        if ( parameter.values ) {
+                          if ( currentIndex != parameter.values[paramID] ) {
+                            dirty = true
+                            console.log("onActivated")
+                            parameter.values[paramID] = currentIndex;                          
+                            equipmentMouseArea.currentMap.values = parameter.values.join(";");
+                          }
+                        }
+                      }
+
+                      Component.onCompleted : {                        
+                        if ( enumTypeComponent.currentIndex != parameter.values[paramID] ){
+                          if ( parameter.values[paramID] ) {
+                            enumTypeComponent.currentIndex = parameter.values[paramID];
+                          } else {                            
+                            parameter.values[paramID] = enumTypeComponent.currentIndex;
+                          }
+                        } else {
+                          parameter.values[paramID] = enumTypeComponent.currentIndex;
+                        }
+                      }                      
                     }
                   }
                 }

@@ -334,13 +334,13 @@ CrossReferenceForm {
             }
             switch (curParam.type) {
               case Sustain.RANGE:
-                console.log("rangeDelegate")
+                //console.log("rangeDelegate")
                 return rangeDelegate
               case Sustain.SCALAR:
-                console.log("scalarDelegate")
+                //console.log("scalarDelegate")
                 return scalarDelegate
               case Sustain.ENUM:
-                console.log("enumDelegate")
+                //console.log("enumDelegate")
                 return enumDelegate
               case Sustain.STRING:
               case Sustain.BOOLEAN:
