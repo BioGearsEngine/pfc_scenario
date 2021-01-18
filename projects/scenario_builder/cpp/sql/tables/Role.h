@@ -25,14 +25,14 @@ struct Role : public QObject {
   Q_PROPERTY(QString uuid MEMBER uuid NOTIFY uuidChanged)
   Q_PROPERTY(QString name MEMBER name NOTIFY nameChanged)
   Q_PROPERTY(QString description MEMBER description NOTIFY descriptionChanged)
-  Q_PROPERTY(QString codeName MEMBER code_name NOTIFY codeNameChanged)
+  Q_PROPERTY(QString category MEMBER category NOTIFY categoryChanged)
   Q_PROPERTY(TraumaProfile* traumaProfile MEMBER trauma_profile NOTIFY traumaProfileChanged)
 
 public:
   int32_t id = -1;
   QString uuid = "";
   QString name = "";
-  QString code_name = "";
+  QString category = "";
   QString description = "";
   TraumaProfile* trauma_profile = nullptr;
 
@@ -41,7 +41,7 @@ signals:
   void uuidChanged();
   void nameChanged();
   void descriptionChanged();
-  void codeNameChanged();
+  void categoryChanged();
   void traumaProfileChanged();
 
 public:

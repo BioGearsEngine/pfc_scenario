@@ -202,7 +202,7 @@ public:
   QList<Assessment*> assessments() const;
   QList<Location*> locations() const;
   QList<Role*> roles() const;
-  QList<Role*> roles_in_scene(Scene const* scene);
+  QList<RoleMap*> roles_in_scene(Scene const* scene);
   QList<RoleMap*> role_maps() const;
   QList<EventMap*> event_maps() const;
   QList<LocationMap*> location_maps() const;

@@ -498,6 +498,7 @@ inline namespace sqlite3 {
     ROLE_MAP_ID,
     ROLE_MAP_FK_SCENE,
     ROLE_MAP_FK_ROLE,
+    ROLE_MAP_CATEGORY,
     ROLE_MAP_COLUMN_COUNT
   };
 
@@ -505,7 +506,8 @@ inline namespace sqlite3 {
   CREATE TABLE IF NOT EXISTS role_maps (
     map_id INTEGER PRIMARY KEY,
     fk_scene INTEGER,
-    fk_role INTEGER
+    fk_role INTEGER,
+    category Varchar(64)
   );
   )";
   constexpr auto drop_all_role_maps = R"( DELETE FROM role_maps; )";
@@ -518,6 +520,7 @@ inline namespace sqlite3 {
     = R"( UPDATE  role_maps
           SET   fk_scene = :fk_scene
               , fk_role = :fk_role
+              , category = :category
           WHERE map_id = :id;
          )";
   constexpr auto delete_role_map_by_id
@@ -536,8 +539,8 @@ inline namespace sqlite3 {
     = R"( SELECT * FROM role_maps WHERE fk_role = :fk_role AND fk_scene = :fk_scene )";
   constexpr auto insert_or_update_role_maps
     = R"( INSERT INTO role_maps
-          (fk_scene,fk_role)
-          VALUES (:fk_scene,:fk_role)
+          (fk_scene,fk_role, category)
+          VALUES (:fk_scene,:fk_role, :category)
           ;
          )";
 
@@ -996,7 +999,7 @@ inline namespace sqlite3 {
     ROLE_UUID,
     ROLE_NAME,
     ROLE_DESCRIPTION,
-    ROLE_CODENAME,
+    ROLE_CATEGORY,
     ROLE_COLUMN_COUNT
   };
 
@@ -1006,7 +1009,7 @@ inline namespace sqlite3 {
       "uuid"  TEXT,
       "name"  Varchar(64) NOT NULL UNIQUE,
       "description"  TEXT,
-      "code_name"  TEXT,
+      "category"  TEXT,
       PRIMARY KEY("role_id"),
       UNIQUE("uuid")
     );
@@ -1023,7 +1026,7 @@ inline namespace sqlite3 {
           SET
                 uuid = :uuid
               , description = :description
-              , code_name = :code_name
+              , category = :category
               , name = :name
           WHERE role_id = :id;
          )";
@@ -1034,12 +1037,12 @@ inline namespace sqlite3 {
 
   constexpr auto insert_or_update_roles
     = R"( INSERT INTO roles 
-          (uuid, name, description, code_name)
-          VALUES (:uuid, :name, :description, :code_name)
+          (uuid, name, description, category)
+          VALUES (:uuid, :name, :description, :category)
           ON CONFLICT (name)
           DO UPDATE SET  name = excluded.name
                        , description = excluded.description
-                       , code_name= excluded.code_name
+                       , category= excluded.category
          )";
 
   //---------------------- SCENE STATEMENTS ------------------------

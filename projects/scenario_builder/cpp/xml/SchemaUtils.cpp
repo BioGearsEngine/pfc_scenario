@@ -496,7 +496,7 @@ namespace schema {
   {
     auto role = std::make_unique<schema::role>(make_string(input->uuid),
                                                make_string(input->name),
-                                               make_string(input->code_name),
+                                               make_string(input->category),
                                                make_string(input->description));
     role->trauma_profile_ref(make_string(input->trauma_profile->uuid));
     return role;
@@ -527,9 +527,13 @@ namespace schema {
     return item;
   }
   //-----------------------------------------------------------------------------
-  auto PFC::make_role_ref(Role const* const input) -> std::unique_ptr<::xml_schema::string>
+  auto PFC::make_role_ref(RoleMap const* const input) -> std::unique_ptr<::pfc::schema::role_ref>
   {
-    return std::make_unique<::xml_schema::string>(schema::make_string(input->uuid));
+    auto role_ref =  std::make_unique<::pfc::schema::role_ref>(schema::make_string(input->fk_role->uuid));
+    if ( !input->category.isEmpty() ) {
+      role_ref->category(make_string(input->category)) ;
+    }
+    return role_ref;
   }
   //-----------------------------------------------------------------------------
   auto PFC::make_medical_reference_list() -> std::unique_ptr<schema::medical_reference_list>
@@ -869,6 +873,7 @@ namespace schema {
             if (_db.select_role(&dbPart)) {
               rMap.fk_scene->assign(temp);
               rMap.fk_role->assign(dbPart);
+              rMap.category = ( parts.category().present() )? parts.category().get().c_str() : "";
               if (!_db.update_role_map(&rMap)) {
                 qDebug() << "Error updating Role Map";
               }

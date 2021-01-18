@@ -121,7 +121,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
       <xs:element name="id" type="xs:string"/>
       <xs:element name="name" type="xs:string" minOccurs="1"/>
       <xs:element name="type" type="xs:integer" minOccurs="0"/>
-	  <xs:element name="summary" type="xs:string" minOccurs="1"/>
+      <xs:element name="summary" type="xs:string" minOccurs="1"/>
       <xs:element name="description" type="xs:string" minOccurs="1"/>
       <xs:element name="citations" type="citation-ref-list" minOccurs="1"/>
       <xs:element name="image" type="xs:string" minOccurs="0"/>
@@ -614,7 +614,15 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
   </xs:complexType>
   <xs:complexType name ="role-ref-list">
     <xs:sequence>
-      <xs:element name="role-ref" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="role-ref" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="category" type="xs:string" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
     </xs:sequence>
   </xs:complexType>
 
@@ -676,12 +684,12 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
     <xs:annotation>
       <xs:documentation>A Location for a Scene to occur that may be reused multiple times</xs:documentation>
     </xs:annotation>
-      <xs:all>
-        <xs:element name="id" type="xs:string"/>
-        <xs:element name="name" type="xs:string"/>
-        <xs:element name="description" type="xs:string"/>
-        <xs:element name="environment" type="xs:string"/>
-      </xs:all>
+    <xs:all>
+      <xs:element name="id" type="xs:string"/>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="description" type="xs:string"/>
+      <xs:element name="environment" type="xs:string"/>
+    </xs:all>
   </xs:complexType>
   <xs:complexType name="scene">
     <xs:annotation>
@@ -800,7 +808,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value="MOVMENT">
-         <xs:annotation>
+        <xs:annotation>
           <xs:documentation>Any time a Role or Object changes location in the scene .</xs:documentation>
         </xs:annotation>
       </xs:enumeration>

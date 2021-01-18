@@ -601,9 +601,9 @@ auto Serializer::generate_pfc_stream() const -> std::stringstream
       scene_ptr->items().item().push_back(PFC::make_item(item));
     }
     ////6.1.3 <medical-scenario><scenes><roles>
-    for (auto role : _db->roles_in_scene(scene)) {
-      if (role->id != -1) {
-        scene_ptr->roles().role_ref().push_back(PFC::make_role_ref(role));
+    for (auto roleMap : _db->roles_in_scene(scene)) {
+      if (roleMap->fk_role && roleMap->fk_role->id != -1) {
+        scene_ptr->roles().role_ref().push_back(PFC::make_role_ref(roleMap));
       }
     }
     pfc_scenario.medical_scenario().training_script().scene().push_back(std::move(scene_ptr));

@@ -13,7 +13,7 @@ ColumnLayout {
     id : self
   }
   property SQLBackend backend
-  property Role currentRole
+  property RoleMap currentRoleMap
   property int returnTo
 
   signal exit()
@@ -24,23 +24,32 @@ ColumnLayout {
     id : name
     Layout.fillWidth : true
     label : "Name"
-    text : (currentRole) ? currentRole.name : "unknown"
+    text : (currentRoleMap && currentRoleMap.role) ? currentRoleMap.role.name : "unknown"
     placeholderText : "String Field"
   }
-  TextEntry {
-    id : codeName
+
+  ComboBoxEntry {
+    id : category
     Layout.fillWidth : true
-    label : "Identifier"
-    text : (currentRole) ?currentRole.codeName: "unknown"
-    placeholderText : "String Field"
+    label : "Category"
+    currentIndex : (currentRoleMap) ? category.model.find(currentRoleMap.category) : undefined
+    model : [
+      "UNKNOWN",
+      "PATIENT",
+      "LEARNER",
+      "WHITNESS",
+      "ASSISTANT"
+    ]
   }
+
   TextAreaEntry {
     id : description
     Layout.fillWidth : true
     label : "Description"
-    text : (currentRole) ?currentRole.description: "unknown"
+    text : (currentRoleMap && currentRoleMap.role) ? currentRoleMap.role.description : "unknown"
     placeholderText : "String Field"
   }
+
   Row {
     Layout.fillWidth : true
     Rectangle {
@@ -53,10 +62,10 @@ ColumnLayout {
         anchors.right : section_1.right
         text : 'Save'
         onClicked : {
-          currentRole.name = name.text
-          currentRole.codeName = codeName.text
-          currentRole.description = description.text
-          root.backend.update_role(currentRole);
+          currentRoleMap.role.name = name.text;
+          currentRoleMap.category = category.model[category.currentIndex];
+          currentRoleMap.role.description = description.text;
+          root.backend.update_role_map(currentRoleMap);
           exit()
         }
       }

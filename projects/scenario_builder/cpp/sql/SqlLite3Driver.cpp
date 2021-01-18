@@ -2530,7 +2530,7 @@ inline void SQLite3Driver::assign_role(QSqlRecord& record, Role& role) const
   role.uuid = record.value(ROLE_UUID).toString();
   role.name = record.value(ROLE_NAME).toString();
   role.description = record.value(ROLE_DESCRIPTION).toString();
-  role.code_name = record.value(ROLE_CODENAME).toString();
+  role.category = record.value(ROLE_CATEGORY).toString();
 }
 int SQLite3Driver::role_count() const
 {
@@ -2582,9 +2582,9 @@ QList<Role*> SQLite3Driver::roles() const
   }
   return _roles;
 }
-QList<Role*> SQLite3Driver::roles_in_scene(Scene const* scene)
+QList<RoleMap*> SQLite3Driver::roles_in_scene(Scene const* scene)
 {
-  QList<Role*> _roles;
+  QList<RoleMap*> _roleMaps;
   if (QSqlDatabase::database(_db_name).isOpen()) {
 
     QSqlQuery map_query { QSqlDatabase::database(_db_name) };
@@ -2596,13 +2596,13 @@ QList<Role*> SQLite3Driver::roles_in_scene(Scene const* scene)
       auto map_record = map_query.record();
 
       assign_role_map(map_record, *map);
-      if (select_role(map->fk_role)) {
-        _roles.push_back(Role::make());
-        _roles.back()->assign(map->fk_role);
+      if (select_role(map->fk_role) && select_scene(map->fk_scene)) {
+        _roleMaps.push_back(RoleMap::make());
+        _roleMaps.back()->assign(map.release());
       }
     }
   }
-  return _roles;
+  return _roleMaps;
 }
 
 bool SQLite3Driver::select_role(Role* role) const
@@ -2652,7 +2652,7 @@ bool SQLite3Driver::update_role(Role* role)
     }
     query.bindValue(":uuid", role->uuid);
     query.bindValue(":description", role->description);
-    query.bindValue(":code_name", role->code_name);
+    query.bindValue(":category", role->category);
     query.bindValue(":name", role->name);
     if (!query.exec()) {
       qWarning() << "update_role" << query.lastError();
@@ -3157,6 +3157,7 @@ inline void SQLite3Driver::assign_role_map(const QSqlRecord& record, RoleMap& ma
   select_scene(map.fk_scene);
   map.fk_role->id = record.value(ROLE_MAP_FK_ROLE).toInt();
   select_role(map.fk_role);
+  map.category = record.value(ROLE_MAP_CATEGORY).toString();
 }
 int SQLite3Driver::role_map_count() const
 {
@@ -3236,6 +3237,7 @@ bool SQLite3Driver::update_role_map(RoleMap* map)
     }
     query.bindValue(":fk_scene", map->fk_scene->id);
     query.bindValue(":fk_role", map->fk_role->id);
+    query.bindValue(":category", map->category);
     if (!query.exec()) {
       qWarning() << "update_role_map" << query.lastError();
       return false;

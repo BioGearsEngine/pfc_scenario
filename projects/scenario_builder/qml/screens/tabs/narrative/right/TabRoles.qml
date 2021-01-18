@@ -24,16 +24,18 @@ ColumnLayout {
   }
 
   function refresh_role_list() {
-    rolesInSceneList.roles = []
-    var roleMaps = root.backend.roleMaps;
-    for (var ii = 0; ii < roleMaps.length; ++ ii) {
-      if (roleMaps[ii].scene.id == currentScene.id) {
-        rolesInSceneList.roles.push(role_g.make());
-        var index = rolesInSceneList.roles.length - 1;
-        rolesInSceneList.roles[index].assign(roleMaps[ii].role);
+    rolesInSceneList.rolesMap = []
+    let l_maps = root.backend.roleMaps;
+
+    for (var ii = 0; ii < l_maps.length; ii++ ) {
+      if (l_maps[ii].scene.scene_id == currentScene.scene_id) {      
+        rolesInSceneList.rolesMap.push(roleMap_g.make());
+
+        var index = rolesInSceneList.rolesMap.length - 1;
+        rolesInSceneList.rolesMap[index].assign(l_maps[ii]);
       }
     }
-    rolesInSceneList.model = rolesInSceneList.roles
+    rolesInSceneList.model = rolesInSceneList.rolesMap
   }
 
   function refresh_full_role_list() {
@@ -85,13 +87,14 @@ ColumnLayout {
         onSecondButtonClicked : {
           var likely_id = root.backend.nextID(SQLBackend.ROLES);
           role_g.clear(likely_id);
+          var index = allRolesList.roles.length
           root.backend.update_role(role_g);
-          allRolesList.roles.push(role_g.make());
-          allRolesList.roles[allRolesList.roles.length - 1].assign(role_g);
-          allRolesList.model = allRolesList.roles;
-          allRolesList.currentIndex = allRolesList.roles.length - 1
+          allRolesList.currentIndex = index
         }
         onThirdButtonClicked : {
+          if (!allRolesList.roles || allRolesList.roles.length < 2) {
+            return
+          }
           root.backend.remove_role(allRolesList.roles[allRolesList.currentIndex])
           refresh_full_role_list();
         }
@@ -160,7 +163,7 @@ ColumnLayout {
             id : full_role_title_text
             anchors.left : full_role_title_label.right
             anchors.leftMargin : 5
-            text : (allRolesList.roles[index]) ? allRolesList.roles[index].name : "Undefined"
+            text : (allRolesList.roles[index]) ? allRolesList.roles[index].name : "Name of the Role"
 
             font.weight : Font.Bold
             font.pointSize : 10
@@ -180,19 +183,16 @@ ColumnLayout {
             color : enabled ? Material.color(Material.Grey) : Material.secondaryTextColor
             elide : Text.ElideRight
           }
-
           Text {
             id : full_role_value_text
-            anchors.top : full_role_title_text.bottom
             anchors.left : full_role_value_label.right
-            anchors.right : parent.right
+            anchors.leftMargin : 5
+            text : (allRolesList.roles[index]) ? allRolesList.roles[index].description : "Description of the role"
 
-            anchors.leftMargin : 2
+            font.weight : Font.Bold
             font.pointSize : 10
-            text : (allRolesList.roles[index]) ? allRolesList.roles[index].description : "Undefined"
             enabled : false
             color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
-            elide : Text.ElideRight
           }
 
           states : State {
@@ -254,21 +254,26 @@ ColumnLayout {
           role_stack.currentIndex = 0
         }
         onSecondButtonClicked : {
+          var index = rolesInSceneList.rolesMap.length 
           var likely_id = root.backend.nextID(SQLBackend.ROLES);
           role_g.clear(likely_id);
           root.backend.update_role(role_g);
-          rolesInSceneList.roles.push(role_g.make());
-          rolesInSceneList.roles[rolesInSceneList.roles.length - 1].assign(role_g);
-          rolesInSceneList.model = rolesInSceneList.roles;
-          rolesInSceneList.currentIndex = rolesInSceneList.roles.length - 1;
           root.backend.update_role_in_scene(currentScene, role_g)
+          
+          roleMap_g.clear();
+          roleMap_g.role.assign(role_g); 
+          roleMap_g.scene.assign(currentScene);
+
+          root.backend.select_role_map(roleMap_g)
+          rolesInSceneList.currentIndex = index
+
         }
         onThirdButtonClicked : {
-          if (!rolesInSceneList.roles || rolesInSceneList.roles.length < 2) {
+          if (!rolesInSceneList.rolesMap || rolesInSceneList.rolesMap.length < 2) {
             return
           }
           role_g.clear();
-          role_g.assign(rolesInSceneList.roles[rolesInSceneList.currentIndex]);
+          role_g.assign(rolesInSceneList.rolesMap[rolesInSceneList.currentIndex].role);
           root.backend.remove_role_from_scene(role_g, currentScene);
           var prevIndex = rolesInSceneList.currentIndex;
           refresh_role_list();
@@ -278,7 +283,7 @@ ColumnLayout {
 
       ListView {
         id : rolesInSceneList
-        property var roles: []
+        property var rolesMap: []
         anchors {
           top : controls.bottom;
           bottom : parent.bottom;
@@ -320,7 +325,7 @@ ColumnLayout {
             }
             onDoubleClicked : {
               roleEdit.returnTo = 1;
-              roleEdit.currentRole = rolesInSceneList.roles[rolesInSceneList.currentIndex];
+              roleEdit.currentRoleMap = rolesInSceneList.rolesMap[rolesInSceneList.currentIndex];
               role_stack.currentIndex = 2;
             }
           }
@@ -339,7 +344,7 @@ ColumnLayout {
             id : role_title_text
             anchors.left : role_title_label.right
             anchors.leftMargin : 5
-            text : (rolesInSceneList.roles[index]) ? rolesInSceneList.roles[index].name : "Undefined"
+            text : (rolesInSceneList.rolesMap[index]) ? rolesInSceneList.rolesMap[index].role.name : "Undefined"
 
             font.weight : Font.Bold
             font.pointSize : 10
@@ -367,7 +372,7 @@ ColumnLayout {
 
             anchors.leftMargin : 2
             font.pointSize : 10
-            text : (rolesInSceneList.roles[index]) ? rolesInSceneList.roles[index].description : "Undefined"
+            text : (rolesInSceneList.rolesMap[index]) ? rolesInSceneList.rolesMap[index].role.description : "Undefined"
             enabled : false
             color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
             elide : Text.ElideRight
@@ -430,10 +435,15 @@ ColumnLayout {
     refresh_role_list()
   }
 
-   onBackendChanged : {
-    if (backend) {
-      backend.rolesChanged.connect(refresh_role_list)
-      backend.roleMapsChanged.connect(refresh_role_list)
+  Connections {
+    target : backend
+    onRolesChanged : {
+       refresh_role_list()
+       refresh_full_role_list()
+    }
+
+    onRoleMapsChanged : {
+       refresh_role_list()
     }
   }
 }

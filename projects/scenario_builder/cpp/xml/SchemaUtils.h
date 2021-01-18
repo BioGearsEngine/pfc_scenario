@@ -56,7 +56,7 @@ namespace schema {
     static auto make_role(Role const* const) -> std::unique_ptr<schema::role>;
     static auto make_event(Event const* const) -> std::unique_ptr<schema::event>;
     static auto make_item(EquipmentMap const* const) -> std::unique_ptr<schema::item>;
-    static auto make_role_ref(Role const* const) -> std::unique_ptr<::xml_schema::string>;
+    static auto make_role_ref(RoleMap const* const) -> std::unique_ptr<::pfc::schema::role_ref>;
 
     //!
     //!  All references in the XML file are by UUID but in the database they are by FK
