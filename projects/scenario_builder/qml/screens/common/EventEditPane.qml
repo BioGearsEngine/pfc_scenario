@@ -122,8 +122,8 @@ ScrollView {
           onClicked : {
             currentEvent.name = name.text;
             currentEvent.description = description.text;
-            currentEvent.actor_1.name = actor_1.text;
-            currentEvent.actor_2.name = actor_2.text;
+            currentEvent.actorOne.name = actor_1.text;
+            currentEvent.actorTwo.name = actor_2.text;
             currentEvent.details = details.text;
             currentEvent.fidelity = fidelity.model[fidelity.currentIndex].toUpperCase();
             currentEvent.category = type.model[fidelity.currentIndex].toUpperCase();

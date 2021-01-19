@@ -32,7 +32,13 @@ ColumnLayout {
     id : category
     Layout.fillWidth : true
     label : "Category"
-    currentIndex : (currentRoleMap) ? category.model.find(currentRoleMap.category) : undefined
+    currentIndex : {
+      if (currentRoleMap) {
+       var index =  category.model.find(currentRoleMap.category)
+       return ( index ) ? index : 0
+      }
+      return 0
+    }
     model : [
       "UNKNOWN",
       "PATIENT",
