@@ -11,8 +11,9 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 ColumnLayout {
   id : root
   property SQLBackend backend
-  property Scene currentScene : sceneList.scenes[sceneList.currentIndex]
-  property Location currentLocation :  sceneList.locations[sceneList.currentIndex]
+  property Scene currentScene : (sceneList.model && sceneList.model[sceneList.currentIndex] ) ? sceneList.model[sceneList.currentIndex] : scene_g
+  property Location currentLocation :  (sceneList.locations && sceneList.locations[sceneList.currentIndex]) ? sceneList.locations[sceneList.currentIndex] : null
+ 
   Scene {
     id : scene_g
   }
@@ -24,7 +25,7 @@ ColumnLayout {
   function update_scenes() {
     sceneList.scenes = []
     sceneList.locations = []
-    let scenes = root.backend.scenes;
+    var scenes = root.backend.scenes;
     for (var ii = 0; ii < scenes.length; ++ ii) {
       sceneList.scenes.push(scene_g.make());
       sceneList.locations.push(location_g.make());
@@ -33,7 +34,6 @@ ColumnLayout {
     }
      sceneList.model = sceneList.scenes;
   }
-
 
   function seconds_to_clock_time(time_s) {
 
@@ -210,13 +210,21 @@ ColumnLayout {
       }
     }
   }
+
+  Connections {
+    target : backend
+    onScenesChanged: {
+      update_scenes()
+    }
+    onSceneRemoved: {
+      //TODO: Only remove the scene that was removed by the backend
+      update_scenes()
+    }
+    onLocationsChanged: {
+      update_scenes()
+    }
+  }
   Component.onCompleted : {
     update_scenes()
-  }
-  onBackendChanged : {
-    if (backend) {
-      backend.scenesChanged.connect(update_scenes)
-      backend.locationsChanged.connect(update_scenes)
-    }
   }
 }

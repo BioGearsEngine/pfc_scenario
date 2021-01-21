@@ -419,13 +419,24 @@ ColumnLayout {
 
   }
   onCurrentSceneChanged : {
-    refresh_event_list()
+    if (backend) {
+      refresh_event_list()
+    }
+  }
+  Component.onCompleted : {
+    if (backend) {
+      refresh_event_list()
+    }
   }
 
-  onBackendChanged : {
-    if (backend) {
-      backend.eventsChanged.connect(refresh_event_list)
-      backend.eventMapsChanged.connect(refresh_event_list)
+  Connections {
+    target : backend
+
+    onEventsChanged : {
+      refresh_event_list()
+    }
+    onEventMapsChanged : {
+      refresh_event_list()
     }
   }
 }

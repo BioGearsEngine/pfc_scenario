@@ -179,6 +179,17 @@ private:
   static void ClearParameterFields(QQmlListProperty<ParameterField>* list);
 };
 
+//!
+//!  Equipment is any item that cna be used in a scenario 
+//!
+//!
+//! 
+//! Type is defined as the following categories
+    //0: OTHER
+    //1: Equipment (IV Pole, Monitor, Oxygen Tank)
+    //2: Attachment (Tempus Pro, Splint)
+    //3:Substance (Drugs)
+    //4:Consumable Equipment (IV Bags, Syringes)
 struct Equipment : public QObject {
   Q_OBJECT
   Q_PROPERTY(int equipment_id MEMBER id NOTIFY idChanged)

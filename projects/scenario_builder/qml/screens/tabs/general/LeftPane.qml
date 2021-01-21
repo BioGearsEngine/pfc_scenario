@@ -114,7 +114,7 @@ Rectangle {
       }
       ListView {
         id : citationList
-        property var citations
+        property var citations : []
         anchors {
           top : controls.bottom;
           bottom : parent.bottom;
@@ -218,7 +218,7 @@ Rectangle {
       border.color : "Red"
     }
   }
-  function rebuildCitations() {
+  function rebuild_citations() {
     citationList.citations = []
     let citations = root.backend.citations;
     for (var ii = 0; ii < citations.length; ++ ii) {
@@ -227,18 +227,23 @@ Rectangle {
     }
     citationList.model = citationList.citations;
   }
-  onIndexChanged : {
-    rebuildCitations()
+
+  Component.onCompleted : {
+    if (backend){
+      rebuild_citations()
+    }
   }
-
-
-  onBackendChanged : {
+  onIndexChanged : {
     if (backend) {
-      backend.citationsChanged.connect(rebuildCitations)
+      rebuild_citations()
     }
   }
 
-} /*##^## Designer {
-    D{i:0;autoSize:true;height:480;width:640}
+
+  Connections {
+    target : backend
+    onCitationsChanged : {
+      rebuild_citations()
+    }
+  }
 }
- ##^##*/

@@ -23,6 +23,7 @@ Rectangle {
   function update_location(location) {
     backend.update_location(location)
   }
+
   border.color : 'black'
   border.width : 1
   ColumnLayout {
@@ -37,8 +38,8 @@ Rectangle {
       onEditingFinished : {
         if (currentLocation) {
           if (text != currentLocation.name) {
-            update_location(currentLocation);
             currentLocation.name = text
+            update_location(currentLocation);
           }
         }
       }
@@ -55,18 +56,11 @@ Rectangle {
       onEditingFinished : {
         if (currentLocation) {
           if (text != currentLocation.description) {
-            update_location(currentLocation);
             currentLocation.description = text
+            update_location(currentLocation);
           }
         }
       }
     }
-
   }
-  // onBackendChanged : {
-  // if (backend) {
-  //     backend.citationsChanged.connect(refresh_citations);
-  //     backend.equipmentChanged.connect(refresh_equipment);
-  // }
-  // }
 }

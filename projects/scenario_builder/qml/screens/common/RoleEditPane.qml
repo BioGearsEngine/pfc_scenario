@@ -33,9 +33,15 @@ ColumnLayout {
     Layout.fillWidth : true
     label : "Category"
     currentIndex : {
+      var index = 0;
       if (currentRoleMap) {
-       var index =  category.model.find(currentRoleMap.category)
-       return ( index ) ? index : 0
+        if (currentRoleMap.category && category.model) {
+          for (var ii = 0; ii < category.model.length; ii++) {
+            if (category.model[ii] == currentRoleMap.category) {
+              return ii;
+            }
+          }
+        }
       }
       return 0
     }
@@ -68,10 +74,15 @@ ColumnLayout {
         anchors.right : section_1.right
         text : 'Save'
         onClicked : {
-          currentRoleMap.role.name = name.text;
-          currentRoleMap.category = category.model[category.currentIndex];
-          currentRoleMap.role.description = description.text;
-          root.backend.update_role_map(currentRoleMap);
+          if ( currentRoleMap.role.name != name.text || currentRoleMap.role.description != description.text){
+            currentRoleMap.role.name = name.text;
+            currentRoleMap.role.description = description.text;
+            root.backend.update_role(currentRoleMap.role);
+          }
+          if ( currentRoleMap.category != category.model[category.currentIndex] ){
+            currentRoleMap.category = category.model[category.currentIndex];
+            root.backend.update_role_map(currentRoleMap);
+          } 
           exit()
         }
       }

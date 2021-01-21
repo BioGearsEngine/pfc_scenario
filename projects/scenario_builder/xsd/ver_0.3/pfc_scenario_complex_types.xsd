@@ -596,7 +596,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
         Name: xs:string : Name for the role
         Short Name: xs:string : Unique string used when parsing a training-script event to quickly refer to a role
         Description: xs:string : A brief summary explaining the role
-
+        Category : xs:string : PATIENT;LEARNER;ASSISTANT;WHITNESS;OTHER
         Example:
         ID: 0009
         Name: Doctor
@@ -607,7 +607,8 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
     <xs:all>
       <xs:element name="id" type="xs:string"/>
       <xs:element name="name" type="xs:string"/>
-      <xs:element name="short-name" type="xs:string"/>
+      <!-- <xs:element name="short-name" type="xs:string"/> -->
+      <xs:element name="category" type="xs:string"/>
       <xs:element name="trauma-profile-ref" type="xs:string" minOccurs="0" maxOccurs="1"/>
       <xs:element name="description" type="xs:string"/>
     </xs:all>

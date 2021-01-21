@@ -100,6 +100,33 @@ ScrollView {
         }
       }
     }
+
+    // 0: OTHER
+    // 1: Equipment (IV Pole, Monitor, Oxygen Tank)
+    // 2: Attachment (Tempus Pro, Splint)
+    // 3:Substance (Drugs)
+    // 4:Consumable Equipment (IV Bags, Syringes)
+
+    ComboBoxEntry {
+      Layout.fillWidth : true
+      Layout.leftMargin : 5
+      id : categoryEntry
+      label : "Category"
+      model : [
+        "Other",
+        "Equipment",
+        "Attchment",
+        "Substance",
+        "Consumable Equipment"
+      ]
+      currentIndex : (currentEquipment) ? currentEquipment.type : 0
+      onEditingFinished : {
+        if (currentIndex != currentEquipment.type) {
+          currentEquipment.type = currentIndex;
+          update_equipment(currentEquipment);
+        }
+      }
+    }
     TextAreaEntry {
       Layout.fillWidth : true
       Layout.leftMargin : 5
@@ -126,13 +153,13 @@ ScrollView {
 
       model : (currentEquipment) ? currentEquipment.parameters : []
 
-      onParamaterModified: {
+      onParamaterModified : {
         update_equipment(currentEquipment);
       }
-      onParameterAdded: {
+      onParameterAdded : {
         update_equipment(currentEquipment);
       }
-      onParameterRemoved: {
+      onParameterRemoved : {
         currentEquipment.removeParameter(index);
         update_equipment(currentEquipment);
       }
@@ -206,7 +233,7 @@ ScrollView {
     }
   }
   function refresh_citations() {
-    if(backend && currentEquipment) {
+    if (backend && currentEquipment) {
       citationStack.equipmentCitations = []
       let citations = currentEquipment.citations;
       for (var ii = 0; ii < citations.length; ++ ii) {

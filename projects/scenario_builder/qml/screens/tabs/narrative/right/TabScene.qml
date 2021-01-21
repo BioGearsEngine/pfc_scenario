@@ -289,19 +289,17 @@ Rectangle {
   }
 
   onCurrentLocationChanged : {
-    setup_details(currentLocation.environment)
+    if(currentLocation){
+      setup_details(currentLocation.environment)
+    }
   }
+
   Component.onCompleted : {
     scene_g.clear()
     if(currentLocation){
       setup_details(currentLocation.environment)
     }
+
     detailEntry.loadComplete = true
   }
-  //   onBackendChanged : {
-  //   if (backend) {
-  //     backend.citationsChanged.connect(refresh_citations);
-  //     backend.equipmentChanged.connect(refresh_equipment);
-  //   }
-  // }
 }

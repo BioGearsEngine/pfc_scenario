@@ -26,8 +26,8 @@ struct Role : public QObject {
   Q_PROPERTY(int role_id MEMBER id NOTIFY idChanged)
   Q_PROPERTY(QString uuid MEMBER uuid NOTIFY uuidChanged)
   Q_PROPERTY(QString name MEMBER name NOTIFY nameChanged)
-  Q_PROPERTY(QString description MEMBER description NOTIFY descriptionChanged)
   Q_PROPERTY(QString category MEMBER category NOTIFY categoryChanged)
+  Q_PROPERTY(QString description MEMBER description NOTIFY descriptionChanged)
   Q_PROPERTY(TraumaProfile* traumaProfile MEMBER trauma_profile NOTIFY traumaProfileChanged)
 
 public:
