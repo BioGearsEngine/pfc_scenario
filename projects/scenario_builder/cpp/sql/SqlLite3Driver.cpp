@@ -2583,7 +2583,7 @@ QList<Role*> SQLite3Driver::roles() const
   }
   return _roles;
 }
-QList<RoleMap*> SQLite3Driver::roles_in_scene(Scene const* scene)
+QList<RoleMap*> SQLite3Driver::roles_in_scene(Scene const* scene) const
 {
   QList<RoleMap*> _roleMaps;
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -4623,13 +4623,14 @@ QQmlListProperty<Role> SQLite3Driver::getRoles() const
                                 &AtRole,
                                 nullptr);
 }
-QList<Role*> SQLite3Driver::getRolesInScene(Scene* scene) const
+QQmlListProperty<RoleMap>  SQLite3Driver::getRolesInScene(Scene* scene) const
 {
-  QList<Role*> list;
-  for (Role* role : roles()) {
-    list.push_back(role);
-  }
-  return list;
+     
+  return QQmlListProperty<RoleMap>(nullptr, new QList<RoleMap*>(roles_in_scene(scene)),
+                                nullptr,
+                                &CountRoleMap,
+                                &AtRoleMap,
+                                nullptr);
 }
 //-------------------------------------------------------------------------------
 auto CountEvent(QQmlListProperty<Event>* list) -> int

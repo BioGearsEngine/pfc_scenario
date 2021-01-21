@@ -202,7 +202,7 @@ public:
   QList<Assessment*> assessments() const;
   QList<Location*> locations() const;
   QList<Role*> roles() const;
-  QList<RoleMap*> roles_in_scene(Scene const* scene);
+  QList<RoleMap*> roles_in_scene(Scene const* scene) const;
   QList<RoleMap*> role_maps() const;
   QList<EventMap*> event_maps() const;
   QList<LocationMap*> location_maps() const;
@@ -232,7 +232,7 @@ public:
   Q_INVOKABLE QQmlListProperty<CitationMap> getCitationMaps() const;
   Q_INVOKABLE QQmlListProperty<EquipmentMap> getEquipmentMaps() const;
   Q_INVOKABLE QQmlListProperty<Role> getRoles() const;
-  Q_INVOKABLE QList<Role*> getRolesInScene(Scene* scene) const;
+  Q_INVOKABLE QQmlListProperty<RoleMap> getRolesInScene(Scene* scene) const;
   Q_INVOKABLE QQmlListProperty<Event> getEvents() const;
   Q_INVOKABLE QQmlListProperty<Scene> getScenes() const;
 

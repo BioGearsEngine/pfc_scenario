@@ -13,14 +13,13 @@ ColumnLayout {
   property SQLBackend backend
   property Scene currentScene
   property Location currentLocation
+
   Event {
     id : event_g
   }
-  Event {
-    id : self
-  }
+
   Scene {
-    id : self_scene
+    id : scene_g
   }
 
   function refresh_event_list() {
@@ -407,9 +406,10 @@ ColumnLayout {
       border.width : 1
       EventEditPane {
         id : eventEdit
+        backend: root.backend
+        currentScene : root.currentScene
         anchors.fill : parent
         anchors.margins : 2
-        backend : root.backend
         onExit : {
           event_stack.currentIndex = eventEdit.returnTo
         }

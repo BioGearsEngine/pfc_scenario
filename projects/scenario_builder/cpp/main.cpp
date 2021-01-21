@@ -62,6 +62,7 @@ int main(int argc, char* argv[])
   qmlRegisterType<pfc::Serializer>("com.ara.pfc.ScenarioModel.XML", 1, 0, "XMLSeralizer");
 
 
+
   QPixmap pixmap("qrc://img/sustain_splash.png");
   QSplashScreen splash(pixmap);
   splash.show();

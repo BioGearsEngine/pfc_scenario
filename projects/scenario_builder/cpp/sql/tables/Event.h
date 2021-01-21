@@ -39,6 +39,7 @@ public:
   QString uuid = "";
   QString name = "";
   QString description = "";
+
   QString category = "";
   QString fidelity = "";
   Role* fk_actor_1;

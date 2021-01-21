@@ -8,14 +8,19 @@ import com.ara.pfc.ScenarioModel.SQL 1.0
 
 ScrollView {
   id : root
-  Event {
-    id : self
-  }
 
   property SQLBackend backend
   property Event currentEvent
+  property Scene currentScene
+
   property int returnTo
+  property var knownRoles
+
+  Role {
+    id : role_g
+  }
   signal exit()
+
   onWidthChanged : {
     eventColumn.width = width
   }
@@ -23,39 +28,85 @@ ScrollView {
     id : eventColumn
     // anchors.fill : parent
     Layout.fillWidth : true
+
     TextEntry {
       id : name
       Layout.fillWidth : true
       label : "Name"
-      text : (currentEvent) ?currentEvent.name: "unknown"
+      text : (currentEvent) ? currentEvent.name : "unknown"
       placeholderText : "String Field"
     }
+
     TextAreaEntry {
       id : description
       Layout.fillWidth : true
       label : "Description"
-      text : (currentEvent) ?currentEvent.description: "unknown"
+      text : (currentEvent) ? currentEvent.description : "unknown"
       placeholderText : "String Field"
     }
-    TextAreaEntry {
-      id : actor_1
-      Layout.fillWidth : true
-      label : "Choose Who Acts"
-      text : (currentEvent) ?currentEvent.actorOne.name: "unknown"
-      placeholderText : "String Field"
+
+
+    RowLayout {
+      id : actor_one
+      Layout.leftMargin : 5
+      Label {
+        text : "Who Acts"
+        font.pointSize : 10
+        color : "steelblue"
+        Layout.minimumWidth : (text.width > 90) ? text.width + 10 : 100
+      }
+      ComboBox {
+        id : actor_one_select
+        width : 200
+        textRole : "name"
+        model : ListModel {
+          ListElement {
+            name : "No Actors Defined"
+            role_id : 0
+          }
+        }
+        contentItem : Text {
+          text : parent.displayText
+          font.pointSize : 8
+          verticalAlignment : Text.AlignVCenter
+          elide : Text.ElideRight
+        }
+      }
     }
-    TextAreaEntry {
-      id : actor_2
-      Layout.fillWidth : true
-      label : "Choose Target"
-      text : (currentEvent) ?  currentEvent.actorTwo.name: "unknown"
-      placeholderText : "String Field"
+
+    RowLayout {
+      id : actor_two
+      Layout.leftMargin : 5
+      Label {
+        text : "Target"
+        font.pointSize : 10
+        color : "steelblue"
+        Layout.minimumWidth : (text.width > 90) ? text.width + 10 : 100
+      }
+      ComboBox {
+        id : actor_two_select
+        width : 200
+        textRole : "name"
+        model : ListModel {
+          ListElement {
+            name : "No Actors Defined"
+            role_id : 0
+          }
+        }
+        contentItem : Text {
+          text : parent.displayText
+          font.pointSize : 8
+          verticalAlignment : Text.AlignVCenter
+          elide : Text.ElideRight
+        }
+      }
     }
+
     TextAreaEntry {
       id : details
       Layout.fillWidth : true
       label : "Details"
-       text : (currentEvent) ?currentEvent.details: "unknown"
+      text : (currentEvent) ? currentEvent.details : "unknown"
       placeholderText : "String Field"
     }
     RowLayout {
@@ -63,15 +114,18 @@ ScrollView {
       Layout.leftMargin : 5
       Label {
         text : "Fidelity"
+        font.pointSize : 10
+        color : "steelblue"
+        Layout.minimumWidth : (text.width > 90) ? text.width + 10 : 100
       }
       ComboBox {
         id : fidelitySelect
         width : 200
         model : ["Low", "Medium", "High"]
-        currentIndex :{
-          let index =  (currentEvent) ? fidelitySelect.find(currentEvent.fidelity) : 0
-          fidelitySelect.currentIndex = (index === -1) ? 0 : index
-        } 
+        currentIndex : {
+          let index = (currentEvent) ? fidelitySelect.find(currentEvent.fidelity) : 0;
+          fidelitySelect.currentIndex = (index === -1) ? 0 : index;
+        }
         contentItem : Text {
           text : fidelitySelect.displayText
           font.pointSize : 8
@@ -85,6 +139,10 @@ ScrollView {
       Layout.leftMargin : 5
       Label {
         text : "Type"
+        font.pointSize : 10
+        color : "steelblue"
+        width : (text.width > 90) ? text.width + 10 : 100
+        Layout.minimumWidth : (text.width > 90) ? text.width + 10 : 100
       }
       ComboBox {
         id : typeSelect
@@ -96,10 +154,10 @@ ScrollView {
           "Sound",
           "Environment"
         ]
-        currentIndex :{
-          let index = (currentEvent) ?  typeSelect.find(currentEvent.category) : 0
-          typeSelect.currentIndex = (index === -1) ? 0 : index
-        } 
+        currentIndex : {
+          let index = (currentEvent) ? typeSelect.find(currentEvent.category) : 0;
+          typeSelect.currentIndex = (index === -1) ? 0 : index;
+        }
         contentItem : Text {
           text : typeSelect.displayText
           font.pointSize : 8
@@ -122,13 +180,13 @@ ScrollView {
           onClicked : {
             currentEvent.name = name.text;
             currentEvent.description = description.text;
-            currentEvent.actorOne.name = actor_1.text;
-            currentEvent.actorTwo.name = actor_2.text;
+            currentEvent.actorOne.assign(root.knownRoles[actor_one_select.currentIndex]);
+            currentEvent.actorTwo.assign(root.knownRoles[actor_two_select.currentIndex]);
             currentEvent.details = details.text;
-            currentEvent.fidelity = fidelity.model[fidelity.currentIndex].toUpperCase();
-            currentEvent.category = type.model[fidelity.currentIndex].toUpperCase();
-            root.backend.update_event(currentEvent)
-            exit()
+            currentEvent.fidelity = fidelitySelect.model[fidelitySelect.currentIndex].toUpperCase();
+            currentEvent.category = typeSelect.model[typeSelect.currentIndex].toUpperCase();
+            root.backend.update_event(currentEvent);
+            exit();
           }
         }
       }
@@ -145,6 +203,56 @@ ScrollView {
             root.exit()
           }
         }
+      }
+    }
+  }
+
+  Connections {
+    target : backend
+
+    onRolesChanged : {
+      if (backend && currentScene && currentEvent) {
+        refresh_roles()
+
+      }
+    }
+    onScenesChanged : {
+      if (backend && currentScene && currentEvent) {
+        refresh_roles()
+      }
+    }
+
+  }
+
+  onCurrentEventChanged : {
+    if (backend && currentScene && currentEvent) {
+      refresh_roles()
+    }
+  }
+
+  function refresh_roles() {
+    root.knownRoles = []
+    var roleMaps = root.backend.roleMaps;
+
+    for (var ii = 0; ii < roleMaps.length; ++ ii) {
+      if (roleMaps[ii].scene.scene_id == currentScene.scene_id) {
+        root.knownRoles.push(role_g.make());
+        var index = root.knownRoles.length - 1;
+        root.knownRoles[index].assign(roleMaps[ii].role);
+      }
+    }
+    actor_one_select.model = root.knownRoles;
+    actor_two_select.model = root.knownRoles;
+
+    for (var ii = 0; ii < root.knownRoles.length; ++ ii) {
+      console.log(root.knownRoles[ii].role_id)
+      if (root.knownRoles[ii].role_id == currentEvent.actorOne.role_id) {
+        console.log("Actor 1 set to %1".arg(ii))
+        actor_one_select.currentIndex = ii;
+      }
+      if (root.knownRoles[ii].role_id == currentEvent.actorTwo.role_id) {
+        console.log("Actor 1 set to %2".arg(ii))
+        actor_two_select.currentIndex = ii;
       }
     }
   }
