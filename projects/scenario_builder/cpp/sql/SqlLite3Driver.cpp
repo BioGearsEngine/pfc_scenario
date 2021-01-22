@@ -319,6 +319,7 @@ bool SQLite3Driver::populate_db()
   if (role_count() == 0) {
     default_role.name = "Role_1";
     default_role.description = "Description of Role_1";
+    default_role.trauma_profile->assign(default_trauma_profile);
     if (!update_role(&default_role)) {
       return false;
     }
@@ -1550,6 +1551,7 @@ bool SQLite3Driver::update_trauma_profile(TraumaProfile* trauma_profile)
     query.bindValue(":name", trauma_profile->name);
     query.bindValue(":description", trauma_profile->description);
 
+
     QString traumas;
     QString severities;
     QString locations;
@@ -2531,6 +2533,10 @@ inline void SQLite3Driver::assign_role(QSqlRecord& record, Role& role) const
   role.uuid = record.value(ROLE_UUID).toString();
   role.name = record.value(ROLE_NAME).toString();
   role.description = record.value(ROLE_DESCRIPTION).toString();
+  
+  role.trauma_profile->id = record.value(ROLE_TRAUMA_PROFILE).toInt();
+  select_trauma_profile(role.trauma_profile);
+  
   role.category = record.value(ROLE_CATEGORY).toString();
 }
 int SQLite3Driver::role_count() const
@@ -2587,7 +2593,6 @@ QList<RoleMap*> SQLite3Driver::roles_in_scene(Scene const* scene) const
 {
   QList<RoleMap*> _roleMaps;
   if (QSqlDatabase::database(_db_name).isOpen()) {
-
     QSqlQuery map_query { QSqlDatabase::database(_db_name) };
     map_query.prepare(sqlite3::select_role_map_by_fk_scene);
     map_query.bindValue(":fk_scene", scene->id);
@@ -2629,7 +2634,6 @@ bool SQLite3Driver::select_role(Role* role) const
         return true;
       }
     } else {
-
       qWarning() << "select_role" << query.lastError();
     }
     return false;
@@ -2655,6 +2659,8 @@ bool SQLite3Driver::update_role(Role* role)
     query.bindValue(":description", role->description);
     query.bindValue(":category", role->category);
     query.bindValue(":name", role->name);
+    query.bindValue(":trauma_profile", role->trauma_profile->id);
+
     if (!query.exec()) {
       qWarning() << "update_role" << query.lastError();
       return false;
@@ -2694,7 +2700,6 @@ bool SQLite3Driver::update_role_in_scene(Scene* scene, Role* role)
   qWarning() << "No Database connection";
   return false;
 }
-
 bool SQLite3Driver::remove_role(Role* role) // This deletes a role completely from the database
 {
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -2722,7 +2727,6 @@ bool SQLite3Driver::remove_role(Role* role) // This deletes a role completely fr
   qWarning() << "No Database connection";
   return false;
 }
-
 bool SQLite3Driver::remove_role_from_scene(Role* role, Scene* scene)
 {
   RoleMap map;

@@ -9,6 +9,8 @@ Item {
   property alias label: name.text
   property alias model: comboBox.model
   property alias currentIndex : comboBox.currentIndex
+  property alias contentItem : comboBox.contentItem
+  property alias textRole : comboBox.textRole
 
   property int pointSize : 10
   height : childrenRect.height

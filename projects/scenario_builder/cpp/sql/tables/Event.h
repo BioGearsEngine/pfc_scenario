@@ -80,4 +80,4 @@ public:
   Q_INVOKABLE void clear(int index);
 };
 
-#endif
+#endif                                                                                                       O

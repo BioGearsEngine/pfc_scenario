@@ -1000,6 +1000,7 @@ inline namespace sqlite3 {
     ROLE_NAME,
     ROLE_DESCRIPTION,
     ROLE_CATEGORY,
+    ROLE_TRAUMA_PROFILE,
     ROLE_COLUMN_COUNT
   };
 
@@ -1010,6 +1011,7 @@ inline namespace sqlite3 {
       "name"  Varchar(64) NOT NULL UNIQUE,
       "description"  TEXT,
       "category"  TEXT,
+      "fk_trauma_profile" INTEGER,
       PRIMARY KEY("role_id"),
       UNIQUE("uuid")
     );
@@ -1028,6 +1030,7 @@ inline namespace sqlite3 {
               , description = :description
               , category = :category
               , name = :name
+              , fk_trauma_profile = :trauma_profile
           WHERE role_id = :id;
          )";
   constexpr auto select_role_by_name
@@ -1037,12 +1040,13 @@ inline namespace sqlite3 {
 
   constexpr auto insert_or_update_roles
     = R"( INSERT INTO roles 
-          (uuid, name, description, category)
-          VALUES (:uuid, :name, :description, :category)
+          (uuid, name, description, category, fk_trauma_profile)
+          VALUES (:uuid, :name, :description, :category, :trauma_profile)
           ON CONFLICT (name)
           DO UPDATE SET  name = excluded.name
                        , description = excluded.description
                        , category= excluded.category
+                       , fk_trauma_profile = excluded.fk_trauma_profile;
          )";
 
   //---------------------- SCENE STATEMENTS ------------------------

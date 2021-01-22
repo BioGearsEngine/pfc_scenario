@@ -230,6 +230,10 @@ ScrollView {
     }
   }
 
+  //You will see this pattern several times in the codebase
+  //I could not come up with a thread safe way
+  //TO request a subset list so I have to get all the roles and iterate over them 
+  //By Relevance.  I tired a few Q_INVOKABLES but returning a Q_LIST was beyond my skill
   function refresh_roles() {
     root.knownRoles = []
     var roleMaps = root.backend.roleMaps;
@@ -245,13 +249,10 @@ ScrollView {
     actor_two_select.model = root.knownRoles;
 
     for (var ii = 0; ii < root.knownRoles.length; ++ ii) {
-      console.log(root.knownRoles[ii].role_id)
       if (root.knownRoles[ii].role_id == currentEvent.actorOne.role_id) {
-        console.log("Actor 1 set to %1".arg(ii))
         actor_one_select.currentIndex = ii;
       }
       if (root.knownRoles[ii].role_id == currentEvent.actorTwo.role_id) {
-        console.log("Actor 1 set to %2".arg(ii))
         actor_two_select.currentIndex = ii;
       }
     }
