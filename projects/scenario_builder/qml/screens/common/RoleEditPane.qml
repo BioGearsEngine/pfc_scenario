@@ -173,7 +173,7 @@ ColumnLayout {
         root.knownTraumaProfiles[index].assign(traumaProfiles[ii]);
     }
     traumaProfile.model = root.knownTraumaProfiles;
-    if ( currentRolMap) {
+    if ( currentRoleMap) {
       for (var ii = 0; ii < root.knownTraumaProfiles.length; ++ ii && currentRoleMap ) {
         if (root.knownTraumaProfiles[ii].role_id == currentRoleMap.role.traumaProfile.trauma_profile_id) {
           trauma_profile_select.currentIndex = ii;

@@ -11,13 +11,14 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License.
 **************************************************************************************/
 
+#include "PlatformHelper.h"
 #include "sql/SqlLite3Driver.h"
 #include "xml/Serializer.h"
 
-#include <QFileSelector>
 #include <QApplication>
 #include <QDebug>
 #include <QFile>
+#include <QFileSelector>
 #include <QList>
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
@@ -60,8 +61,7 @@ int main(int argc, char* argv[])
   qmlRegisterType<Treatment>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Treatment");
 
   qmlRegisterType<pfc::Serializer>("com.ara.pfc.ScenarioModel.XML", 1, 0, "XMLSeralizer");
-
-
+  qmlRegisterType<pfc::PlatformHelper>("com.ara.pfc.ScenarioModel", 1, 0, "SustainUtils");
 
   QPixmap pixmap("qrc://img/sustain_splash.png");
   QSplashScreen splash(pixmap);
@@ -79,4 +79,3 @@ int main(int argc, char* argv[])
 
   return app.exec();
 }
-                                                                                                                                                                                                                                                      

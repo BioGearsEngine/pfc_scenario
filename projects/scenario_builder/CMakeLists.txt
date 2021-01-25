@@ -41,6 +41,9 @@ message(STATUS "Configuring ScenarioBuilder ")
 
 add_source_files(SRCS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp
                 REGEX "main.cpp" SOURCE_GROUP  "Sources")
+add_source_files(SRCS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp
+                REGEX "PlatformHelper.cpp" SOURCE_GROUP  "Sources")
+
 add_source_files(SRCS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp/sql
                 REGEX "*.c" "*.cpp" SOURCE_GROUP  "Sources\\sql")
 add_source_files(HDRS LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/cpp/sql

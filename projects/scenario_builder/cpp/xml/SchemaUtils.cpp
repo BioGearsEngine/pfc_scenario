@@ -529,9 +529,9 @@ namespace schema {
   //-----------------------------------------------------------------------------
   auto PFC::make_role_ref(RoleMap const* const input) -> std::unique_ptr<::pfc::schema::role_ref>
   {
-    auto role_ref =  std::make_unique<::pfc::schema::role_ref>(schema::make_string(input->fk_role->uuid));
-    if ( !input->category.isEmpty() ) {
-      role_ref->category(make_string(input->category)) ;
+    auto role_ref = std::make_unique<::pfc::schema::role_ref>(schema::make_string(input->fk_role->uuid));
+    if (!input->category.isEmpty()) {
+      role_ref->category(make_string(input->category));
     }
     return role_ref;
   }
@@ -782,9 +782,19 @@ namespace schema {
     auto roles = scenario_schema->medical_scenario().roles().role();
     for (auto role : roles) {
       Role temp;
+      TraumaProfile profile;
       temp.uuid = QString::fromStdString(role.id());
       temp.name = QString::fromStdString(role.name());
       temp.description = QString::fromStdString(role.description());
+      if ( role.trauma_profile_ref().present()){
+        profile.uuid = role.trauma_profile_ref()->c_str();
+        _db.select_trauma_profile(&profile);
+        temp.trauma_profile->assign(&profile);
+      }  else {
+        profile.id = 0;
+        _db.select_trauma_profile(&profile);
+        temp.trauma_profile->assign(&profile);
+      }
       if (!_db.update_role(&temp)) {
         wasSuccessful = false;
         return scenario_schema;
@@ -873,7 +883,7 @@ namespace schema {
             if (_db.select_role(&dbPart)) {
               rMap.fk_scene->assign(temp);
               rMap.fk_role->assign(dbPart);
-              rMap.category = ( parts.category().present() )? parts.category().get().c_str() : "";
+              rMap.category = (parts.category().present()) ? parts.category().get().c_str() : "";
               if (!_db.update_role_map(&rMap)) {
                 qDebug() << "Error updating Role Map";
               }

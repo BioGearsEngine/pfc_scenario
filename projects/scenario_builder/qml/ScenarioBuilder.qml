@@ -4,10 +4,12 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Styles 1.3
 import QtQuick.Dialogs 1.3
-import Qt.labs.settings 1.0
+import Qt.labs.settings 1.1
+import Qt.labs.platform 1.1  as Labs
 
 import "screens"
 
+import com.ara.pfc.ScenarioModel 1.0
 import com.ara.pfc.ScenarioModel.SQL 1.0
 import com.ara.pfc.ScenarioModel.XML 1.0
 
@@ -145,7 +147,7 @@ ApplicationWindow {
     selectMultiple : false
     selectExisting : true
     nameFilters : ["Scenarios (*.pfc.zip *.pfc *.zip)", "All files (*)"]
-    folder : "./" // StandardPaths.writableLocation(StandardPaths.DesktopLocation)
+    folder : Labs.StandardPaths.writableLocation(Labs.StandardPaths.DocumentsLocation) + "/Sustain/Scenarios"
     onAccepted : {
       scenario_model.log_scenario_file(loadDialog.fileUrls);
       var archive = loadDialog.fileUrls.toString();
@@ -171,7 +173,7 @@ ApplicationWindow {
     selectMultiple : false
     selectExisting : false
     nameFilters : ["Scenarios (*.pfc.zip *.pfc *.zip)", "All files (*)"]
-    folder : "./" // StandardPaths.writableLocation(StandardPaths.DesktopLocation)
+    folder : Labs.StandardPaths.writableLocation(Labs.StandardPaths.DocumentsLocation)+ "/Sustain/Scenarios"
     onAccepted : {
       property_g.name = "archive_file";
       property_g.value = saveDialog.fileUrls.toString();
@@ -248,5 +250,12 @@ ApplicationWindow {
     closeOption.enabled = true
     settings.previous_scenarios.push({"file": file})
     loadDialog.open()
+  }
+
+  SustainUtils {
+    id : utils
+  }
+  Component.onCompleted : {
+    utils.make_directory(Labs.StandardPaths.writableLocation(Labs.StandardPaths.DocumentsLocation)+ "/Sustain/Scenarios")
   }
 }
