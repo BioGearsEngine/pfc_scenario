@@ -25,7 +25,14 @@ TextAreaEntry {
     }
   }
 
-  onCompleted : {
+ onActiveFocusChanged : {
+   if ( text != self.value){
+      self.value = text
+      root.backend.update_property(self)
+    }
+ }
+
+ onCompleted : {
     root.backend.select_property(self);
     if(self.value === ""){
       self.value = root.placeholderText;

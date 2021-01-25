@@ -61,6 +61,9 @@ ListOfAllForm {
       hoverEnabled : false
       enabled : false
       color : enabled ? Material.color(Material.BlueGrey, Material.Shade900) : Material.color(Material.BlueGrey, Material.Shade500)
+      onActiveFocusChanged : {
+        update_citation(root.model[index])
+      }
       onEditingFinished : {
         update_citation(root.model[index])
       }
@@ -76,6 +79,9 @@ ListOfAllForm {
       hoverEnabled : false
       enabled : false
       color : enabled ? Material.color(Material.BlueGrey, Material.Shade900) : Material.color(Material.BlueGrey, Material.Shade500)
+     onActiveFocusChanged : {
+        update_citation(root.model[index])
+      }
       onEditingFinished : {
         update_citation(root.model[index])
       }
@@ -92,6 +98,9 @@ ListOfAllForm {
       hoverEnabled : false
       enabled : false
       color : enabled ? Material.color(Material.BlueGrey, Material.Shade900) : Material.color(Material.BlueGrey, Material.Shade500)
+      onActiveFocusChanged : {
+        update_citation(root.model[index])
+      }
       onEditingFinished : {
         update_citation(root.model[index])
       }
@@ -110,9 +119,16 @@ ListOfAllForm {
       hoverEnabled : false
       enabled : false
       color : enabled ? Material.color(Material.BlueGrey, Material.Shade900) : Material.color(Material.BlueGrey, Material.Shade500)
+      onActiveFocusChanged : {
+        update_citation(root.model[index])
+      }
       onEditingFinished : {
         update_citation(root.model[index])
       }
+    }
+
+    onActiveFocusChanged : {
+        update_citation(root.model[index])
     }
 
     states : State {

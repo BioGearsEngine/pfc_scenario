@@ -215,7 +215,6 @@ ColumnLayout {
     function update_equipment( id ) {
     for (var ii = 0; ii < equipmentList.equipmentDefinitions.length; ++ ii) {
       if( equipmentList.equipmentDefinitions[ii].equipmnent_id == id ) {
-         console.log ( "Updating Equipment" );
          backend.select_equipment( equipmentList.equipmentDefinitions[ii] );
       }
     }

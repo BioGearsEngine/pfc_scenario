@@ -117,4 +117,9 @@ Rectangle {
       ScrollBar.vertical : ScrollBar {}
     }
   }
+  
+  function forceLayout() {
+    listArea.forceLayout()
+  }
+
 }

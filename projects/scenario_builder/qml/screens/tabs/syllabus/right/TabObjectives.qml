@@ -12,7 +12,7 @@ ColumnLayout {
   property SQLBackend backend
   property Objective currentObjective
   property int topIndex // topIndex is the index of the top set of 4 tabs
-
+  focus: true
   Layout.fillWidth : true
 
   Citation {
@@ -28,10 +28,17 @@ ColumnLayout {
   TextEntry {
     Layout.fillWidth : true
     Layout.leftMargin : 5
+    focus: true
     id : nameEntry
     label : "Name"
     placeholderText : "String Field (128 Characters)"
     text : (currentObjective) ? currentObjective.name : ""
+    onActiveFocusChanged : {
+      if (text != currentObjective.name) {
+        currentObjective.name = text
+        update_objective(currentObjective)
+      }
+    }
     onEditingFinished : {
       if (text != currentObjective.name) {
         currentObjective.name = text
@@ -43,11 +50,18 @@ ColumnLayout {
   TextAreaEntry {
     Layout.fillWidth : true
     Layout.leftMargin : 5
+    focus: true
     id : descriptionEntry
     label : "Description"
     required : true
     placeholderText : "Text Area (5-15 Lines)"
     text : (currentObjective) ? currentObjective.description : ""
+    onActiveFocusChanged : {
+      if (text != currentObjective.description) {
+        currentObjective.description = text
+        update_objective(currentObjective)
+      }
+    }
     onEditingFinished : {
       if (text != currentObjective.description) {
         currentObjective.description = text
@@ -113,7 +127,7 @@ ColumnLayout {
     target : backend
     
   }
-
+  
   function update_objective(objective) {
     if (objective) {
       root.backend.update_objective(objective)

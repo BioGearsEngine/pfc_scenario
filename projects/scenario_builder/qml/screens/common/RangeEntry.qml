@@ -49,6 +49,13 @@ RowLayout {
         return Number.fromLocaleString(locale, text) * 100
     }
 
+    onActiveFocusChanged : {
+        if ( maxEntry.value < value) {
+          maxEntry.value = value
+        }
+        root.rangeModified()
+    }
+
     onValueModified : {
         if ( maxEntry.value < value) {
           maxEntry.value = value
@@ -82,6 +89,13 @@ RowLayout {
 
     valueFromText: function(text, locale) {
         return Number.fromLocaleString(locale, text) * 100
+    }
+
+    onActiveFocusChanged : {
+        if ( maxEntry.value > value) {
+          maxEntry.value = value
+        }
+        root.rangeModified()
     }
 
     onValueModified : {

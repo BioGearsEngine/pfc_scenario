@@ -22,6 +22,10 @@ ScrollView {
     id : citation_g
   }
 
+  EquipmentParameter {
+    id : equipment_parameter_g
+  }
+
   Connections {
     target : backend
     onCitationsChanged : {
@@ -157,11 +161,16 @@ ScrollView {
         update_equipment(currentEquipment);
       }
       onParameterAdded : {
+        var parms = currentEquipment.parameters;
+        parms.push(equipment_parameter_g.make());
+        parms[parms.length-1].name = "field %1".arg(parms.length)
         update_equipment(currentEquipment);
+        model = currentEquipment.parameters;
       }
       onParameterRemoved : {
         currentEquipment.removeParameter(index);
         update_equipment(currentEquipment);
+        model = currentEquipment.parameters;
       }
     }
 

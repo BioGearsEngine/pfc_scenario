@@ -66,6 +66,14 @@ Rectangle {
         root.editingFinished();
     }
 
+    onActiveFocusChanged : {
+        if ( entryField.text != self.value){
+          self.value = entryField.text
+          root.backend.update_property(self)
+        }
+        root.editingFinished();
+    }
+
     Component.onCompleted : {
         update()
     }

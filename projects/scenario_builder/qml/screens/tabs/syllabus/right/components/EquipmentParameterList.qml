@@ -90,6 +90,12 @@ CrossReferenceForm {
               paramaterModified(selfID, root.model[selfID].name )
             }   
           }
+          onFocusChanged : {
+            if( root.model[selfID] ){
+              root.model[selfID].name  = text
+              paramaterModified(selfID, root.model[selfID].name )
+            } 
+          }
         }
         Label {
           id : typeLabel
@@ -118,8 +124,6 @@ CrossReferenceForm {
           enabled : false
           
           onActivated : {
-            console.log(currentIndex)
-            console.log("Equipment Parameter - %1 to %2".arg(typeBox.model.get(root.model[selfID].type).text).arg(typeBox.model.get(currentIndex).text))
             if (root.model[selfID]) {
               //NOTE : I'm putting this aside for now. We have a problem Calling Equipment update here
               //       Causes a recursive call stack. Something wrong with combobox. We need to find away to guard against this
@@ -309,12 +313,20 @@ CrossReferenceForm {
                   var str = "";
                   var options = root.model[index].enumOptions;
                   for ( var ii = 0; ii < options.length; ii++ ){
-                    str += "%1;".arg(options[ii])
+                    if( options[ii] ){
+                      str += ",%1".arg( options[ii] )
+                    }
                   }
+                  str = str.substr(1,str.length)
                   return str;
                 }
                 placeholderText: "Comma delimited list of enum values"
+                onActiveFocusChanged: {
+                   root.model[index].enumOptions = text.split(",")
+                  paramaterModified(index, root.model[index]);
+                }
                 onFocusChanged : {
+                   root.model[index].enumOptions = text.split(",")
                   paramaterModified(index, root.model[index]);
                 }
               }
@@ -334,13 +346,10 @@ CrossReferenceForm {
             }
             switch (curParam.type) {
               case Sustain.RANGE:
-                //console.log("rangeDelegate")
                 return rangeDelegate
               case Sustain.SCALAR:
-                //console.log("scalarDelegate")
                 return scalarDelegate
               case Sustain.ENUM:
-                //console.log("enumDelegate")
                 return enumDelegate
               case Sustain.STRING:
               case Sustain.BOOLEAN:
@@ -385,13 +394,9 @@ CrossReferenceForm {
     }  
   }
   onList : { //Using List Button as the New Parameter Button
-     console.log("Parameter Added")
-     root.model.push(equipment_parameter_g.make());
-     root.model[root.model.length-1].name = "field %1".arg(root.model.length)
      parameterAdded(index, root.model[index])
   }
   onRemoved : {
-    console.log("Parameter Removed")
      parameterRemoved(index, root.model[index])
   }
 }
