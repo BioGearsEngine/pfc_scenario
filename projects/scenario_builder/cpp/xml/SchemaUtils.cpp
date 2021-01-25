@@ -117,7 +117,7 @@ namespace schema {
       make_equipments(),
       make_trauma_definitions(),
       make_treatment_plans(),
-      make_trauma_sets(),
+      make_truama_profiles(),
       make_syllabus(),
       make_medical_scenario(),
       make_citation_list());
@@ -148,7 +148,7 @@ namespace schema {
     return std::make_unique<schema::ScenarioSchema::treatment_plans_type>();
   }
   //-------------------------------------------------------------------------------
-  auto PFC::make_trauma_sets() -> std::unique_ptr<ScenarioSchema::trauma_profiles_type>
+  auto PFC::make_truama_profiles() -> std::unique_ptr<ScenarioSchema::trauma_profiles_type>
   {
     return std::make_unique<schema::ScenarioSchema::trauma_profiles_type>();
   }
@@ -467,6 +467,7 @@ namespace schema {
 
     auto profile = std::make_unique<schema::trauma_profile>(make_string(input->uuid),
                                                             make_string(input->name),
+                                                            make_string(input->description),
                                                             make_trauma_occurance_list(input->traumas, _db));
     if (input->physiologyTree.size() > 0) {
       profile->physiology_state(make_string(input->physiologyTree[0]));
@@ -713,6 +714,7 @@ namespace schema {
       TraumaProfile temp;
       temp.uuid = QString::fromStdString(trauma_profile.id());
       temp.name = QString::fromStdString(trauma_profile.name());
+      temp.description = QString::fromStdString(trauma_profile.description());
       TraumaOccurence* trauma;
       for (auto& current_trauma : trauma_profile.traumas().trauma()) {
         trauma = new TraumaOccurence(&temp);

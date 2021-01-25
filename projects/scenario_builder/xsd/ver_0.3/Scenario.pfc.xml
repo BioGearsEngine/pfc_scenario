@@ -1,0 +1,1757 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<Scenario xmlns="com:ara:pfc:training:1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="com:ara:pfc:training:1 pfc_scenario.xsd">
+  <summary xmlns="">
+    <title xmlns="">PFC Burn Multitrauma</title>
+    <description xmlns="">In this scenario, a soldier was in transport via humvee when it drove over a mine. The patient suffered several burns accounting for approximately one third of his body surface area, mild lacerations, and critical airway trauma. At the start of the scenario, the patient has just arrived in a temporary bunker that has been set up for medical care as best it could given the limited supplies. Basic medical tools, mild pain management substances, and first aid equipment is available. Another solider is available to step in as the medical assistant; however, all decisions must be made by the participating caretaker. No medical treatment has been given at this point and a helicopter will not be available to evacuate the patient for at least several hours. Thus, the patient needs to be stabilized and kept alive until then. </description>
+    <version xmlns="">1.0</version>
+    <classification xmlns="">UnClassified</classification>
+    <keywords xmlns="">Burn, Airway Trauma, Hemorrhage, Multitrauma, First Degree, Second Degree</keywords>
+    <domain xmlns="">Medical Prolonged Field Care</domain>
+    <limitations xmlns="">Burn severity is tracked by percent surface area as opposed to tissue depth. </limitations>
+  </summary>
+  <author xmlns="">
+    <first_name xmlns="">Steven</first_name>
+    <last_name xmlns="">White</last_name>
+    <phone_number xmlns="">(919)582-3300</phone_number>
+    <email xmlns="">swhite@ara.com</email>
+    <zip xmlns="">27615</zip>
+    <state xmlns="">NC</state>
+    <country xmlns="">United States</country>
+  </author>
+  <equipment xmlns="">
+    <equipment xmlns="">
+      <id xmlns="">d9b489cf-0d3d-4507-b97e-bedba1ee7df7</id>
+      <name xmlns="">Antibiotics</name>
+      <type xmlns="">3</type>
+      <summary xmlns="">Antimicrobial substance active against bacteria, used in the treatment and prevention of bacterial infections.</summary>
+      <description xmlns="">This medication usually comes in the form of a pill. There are different types of antibiotics for different applications.</description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Available</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+        <property xmlns="">
+          <name xmlns="">Volume</name>
+          <type xmlns="">INTEGRAL</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">0c25fdb4-0bf4-4585-b84b-fb47925e14bc</id>
+      <name xmlns="">Blanket</name>
+      <type xmlns="">2</type>
+      <summary xmlns="">Low-weight, low-bulk blanket made of heat-reflective thin plastic sheeting.</summary>
+      <description xmlns="">Also referred to as mylar, these are commonly used to prevent heat loss from a human body.</description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Avaliable</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">7a228e5e-1853-44e0-b06b-f33ef129e00e</id>
+      <name xmlns="">Blood Bag  [Type O]</name>
+      <type xmlns="">4</type>
+      <summary xmlns="">summary for equipment 31.</summary>
+      <description xmlns="">This bag represents one unit of Type O blood which is roughly 450 ml in volume.</description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Avaliable</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+        <property xmlns="">
+          <name xmlns="">Count</name>
+          <type xmlns="">INTEGRAL</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">c0c80947-c354-4c88-a1c0-d5727730714d</id>
+      <name xmlns="">Blood Collection Bag</name>
+      <type xmlns="">4</type>
+      <summary xmlns="">Clear plastic bag used to collect and store blood.</summary>
+      <description xmlns="">Bags are usually 500 mL in volume (referred to as one unit). Blood type is dependent on antigen presence (A/B) or absence (O) in addition to the presence or absence of Rh factor (+/-).</description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Available</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+        <property xmlns="">
+          <name xmlns="">Count</name>
+          <type xmlns="">INTEGRAL</type>
+          <fields xmlns=""/>
+        </property>
+        <property xmlns="">
+          <name xmlns="">Kind</name>
+          <type xmlns="">ENUM</type>
+          <fields xmlns="">
+            <field xmlns="">
+              <name xmlns="">APos</name>
+              <type xmlns="">OPTION</type>
+            </field>
+            <field xmlns="">
+              <name xmlns="">ANeg</name>
+              <type xmlns="">OPTION</type>
+            </field>
+            <field xmlns="">
+              <name xmlns="">BPos</name>
+              <type xmlns="">OPTION</type>
+            </field>
+            <field xmlns="">
+              <name xmlns="">BNeg</name>
+              <type xmlns="">OPTION</type>
+            </field>
+            <field xmlns="">
+              <name xmlns="">ABPos</name>
+              <type xmlns="">OPTION</type>
+            </field>
+            <field xmlns="">
+              <name xmlns="">ABNeg</name>
+              <type xmlns="">OPTION</type>
+            </field>
+            <field xmlns="">
+              <name xmlns="">OPos</name>
+              <type xmlns="">OPTION</type>
+            </field>
+            <field xmlns="">
+              <name xmlns="">ONeg</name>
+              <type xmlns="">OPTION</type>
+            </field>
+          </fields>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">d9c68a93-30ee-41d6-9cf7-58e5f30fe162</id>
+      <name xmlns="">Blood Transfusion Kit</name>
+      <type xmlns="">1</type>
+      <summary xmlns="">Kit used for in field blood transfusion.</summary>
+      <description xmlns="">Designed for field application, a transfusion kit contains supplies necessary to collect and transfuse fresh whole blood (FWB). The kit typically contains everything from safety supplies and equipment (gloves, blood type test kits, and swabsticks) to collection materials (tubing, needles, collection bag, etc.). Additionally, two sets of most safety materials are supplied to prevent multiple uses on both donor and recipient (i.e. two needles).</description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Available</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">aa6ad6d5-808b-4dff-8235-6aa05a9d4326</id>
+      <name xmlns="">Burn Ointments</name>
+      <type xmlns="">4</type>
+      <summary xmlns="">Neosporin Burn Relief &amp; First-Aid Antibiotic Ointment, .5 OZ</summary>
+      <description xmlns="">NEOSPORIN + Burn Relief Dual Action Ointment is an antibiotic ointment that provides infection protection and helps soothe minor burn pain. Formulated for first aid wound treatment, it contains bacitracin zinc, neomycin sulfate, and polymyxin B sulfate for antibiotic care of minor burns and wounds. The topical analgesic ointment is also formulated with pramoxine hydrochloride to help soothe and reduce burn pain for maximum-strength relief. From the #1 doctor-recommended brand, this antibiotic and pain relief ointment provides maximum strength relief without any sting forburn treatment, including cooking burns. Neosporin + Burn Relief Dual Action Ointment is a wound care essential to include in any burn care first-aid kit. </description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Available</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+        <property xmlns="">
+          <name xmlns="">Count</name>
+          <type xmlns="">INTEGRAL</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">2154001a-d66a-43e1-ba9a-74c0b4a2a7c7</id>
+      <name xmlns="">Catheter Supplies</name>
+      <type xmlns="">4</type>
+      <summary xmlns="">Catheters and the products that are used to insert or remove a catheter, and maintain catheter function.</summary>
+      <description xmlns=""/>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Available</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+        <property xmlns="">
+          <name xmlns="">Count</name>
+          <type xmlns="">INTEGRAL</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">7056c404-2436-4d2d-a78e-7b129ea6fd17</id>
+      <name xmlns="">Chest Tube</name>
+      <type xmlns="">4</type>
+      <summary xmlns="">A chest tube is a hollow, flexible tube placed into the chest.</summary>
+      <description xmlns="">Acts as a drain. Chest tubes drain blood, fluid, or air from around your lungs, heart, or esophagus. The tube around your lung is placed between your ribs and into the space between the inner lining and the outer lining of your chest cavity</description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Count</name>
+          <type xmlns="">INTEGRAL</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">2053d825-5da1-4d7d-acb4-074c0c528a21</id>
+      <name xmlns="">Energy Gel</name>
+      <type xmlns="">4</type>
+      <summary xmlns="">Carbohydrate gel used to provide energy and promote recovery.</summary>
+      <description xmlns=""/>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Available</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+        <property xmlns="">
+          <name xmlns="">Volume</name>
+          <type xmlns="">INTEGRAL</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">31c1dd21-4141-40ac-bb20-5824d6125141</id>
+      <name xmlns="">Epinephrine</name>
+      <type xmlns="">3</type>
+      <summary xmlns="">A chemical that narrows blood vessels and opens airways in the lungs.</summary>
+      <description xmlns="">Also referred to as adrenaline, this drug is used to treat life-threatening allergic reactions. Epinephrine acts quickly and works to improve breathing, stimulate the heart, raise a dropping blood pressure, reverse hives, and reduce swelling.</description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Available</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+        <property xmlns="">
+          <name xmlns="">Volume</name>
+          <type xmlns="">INTEGRAL</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">d8543da7-f9c6-4991-a18a-566a0f59c153</id>
+      <name xmlns="">Fentanyl</name>
+      <type xmlns="">3</type>
+      <summary xmlns="">A synthetic opioid pain reliever, approved for treating severe pain.</summary>
+      <description xmlns="">Fentanyl is a prescription drug that is also made and used illegally. Like morphine, it is a medicine that is typically used to treat patients with severe pain, especially after surgery. It is also sometimes used to treat patients with chronic pain who are physically tolerant to other opioids.</description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Available</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+        <property xmlns="">
+          <name xmlns="">Volume</name>
+          <type xmlns="">INTEGRAL</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">d2530694-b680-4727-b160-f3c36dc111a4</id>
+      <name xmlns="">IV Bag</name>
+      <type xmlns="">4</type>
+      <summary xmlns="">Bag used to store and deliver fluids to a patient.</summary>
+      <description xmlns=""/>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Available</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+        <property xmlns="">
+          <name xmlns="">Count</name>
+          <type xmlns="">INTEGRAL</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">a8080c3b-d7d9-4b26-a5be-902ba18ade37</id>
+      <name xmlns="">IV Pole</name>
+      <type xmlns="">1</type>
+      <summary xmlns="">The pole use to hang IV bags on.</summary>
+      <description xmlns="">It provides patient mobility to move around a facility while keeping IV lines in.</description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Available</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">fa2da20b-02d9-4771-85d9-5a04a3bf1fdc</id>
+      <name xmlns="">Ketamine</name>
+      <type xmlns="">3</type>
+      <summary xmlns="">A dissociative anesthetic used pain relief.</summary>
+      <description xmlns="">Ketamine can provide pain relief and short-term memory loss (for example, amnesia of a medical procedure). In surgery, it is used an induction and maintenance agent for sedation and to provide general anesthesia. It has also been used for pain control in burn therapy, battlefield traumas, and in children who cannot use other anesthetics due to side effects or allergies. At normal doses, it is often preferred as an anesthetic in patients at risk of bronchospasm and respiratory depression.</description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Available</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+        <property xmlns="">
+          <name xmlns="">Volume</name>
+          <type xmlns="">INTEGRAL</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">a3857c07-7fc5-42bf-aa8e-9e34488b9509</id>
+      <name xmlns="">Midazolam</name>
+      <type xmlns="">3</type>
+      <summary xmlns="">A short action sedative used for anesthesia, procedural sedation, trouble sleeping, and severe agitation.</summary>
+      <description xmlns="">Midazolam injection is used before medical procedures and surgery to cause drowsiness, relieve anxiety, and prevent any memory of the event. It is also sometimes given as part of the anesthesia during surgery to produce a loss of consciousness.</description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Available</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+        <property xmlns="">
+          <name xmlns="">Volume</name>
+          <type xmlns="">INTEGRAL</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">cffdb3c0-1a27-4e2c-8af1-82bea15b052d</id>
+      <name xmlns="">Morphine</name>
+      <type xmlns="">3</type>
+      <summary xmlns="">A narcotic pain reliever used to treat moderate to severe pain.</summary>
+      <description xmlns="">Morphine is an opioid medication used to treat severe chronic pain. It has a high rate of addiction, overdose, and death.</description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Available</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+        <property xmlns="">
+          <name xmlns="">Volume</name>
+          <type xmlns="">INTEGRAL</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">a3708e16-af9b-4e47-b204-830759b2028e</id>
+      <name xmlns="">Narcan</name>
+      <type xmlns="">3</type>
+      <summary xmlns="">Naloxone, a medication used to block the effects of opioids, commonly used for decreased breathing in opioid overdose.</summary>
+      <description xmlns="">Naloxone is a medicine that rapidly reverses an opioid overdose. It attaches to opioid receptors and reverses and blocks the effects of other opioids. Naloxone is a safe medicine. It only reverses overdoses in people with opioids in their systems.</description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Available</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+        <property xmlns="">
+          <name xmlns="">Volume</name>
+          <type xmlns="">INTEGRAL</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">7c7a4d4d-3f6e-4603-a378-ab4d62cea3ab</id>
+      <name xmlns="">Nasal Cannula</name>
+      <type xmlns="">2</type>
+      <summary xmlns="">A device used to deliver increased airflow to a patient in need of respiratory help.</summary>
+      <description xmlns="">Tubing with two prongs that get inserted into a patient's nose, this equipment is attached to an oxygen source and mainly used to control oxygen flow to the patient. The advantages to this delivery method is that is less invasive than other oxygen masks and allows a patient to eat and speak normally.</description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Available</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">07704a22-13e2-4c38-9d5c-81026fbd331f</id>
+      <name xmlns="">Needle Decompression Kits</name>
+      <type xmlns="">4</type>
+      <summary xmlns="">14 guage by 3.25 inch needle and catheter</summary>
+      <description xmlns="">This is a 14 gauge by 3.25 inch needle and catheter for use in the management of combat casualties who present with the signs and symptoms of a tension pneumothorax. This device meets 100% of the requirements for fit, form and function that is listed for NSN 6515-01-541-0635. The hard plastic case protects the needle and catheter from bending or damage and harsh environmental conditions while in your kit. </description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Avaliable</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">19acfb9c-53c9-474d-82f2-20b1785ddfd9</id>
+      <name xmlns="">Oxygen Tank</name>
+      <type xmlns="">1</type>
+      <summary xmlns="">A tank of oxygen.</summary>
+      <description xmlns="">In medicine, an oxygen tank provide controlled and therapeutic oxygen delivery to a patient.</description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Available</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+        <property xmlns="">
+          <name xmlns="">Volume</name>
+          <type xmlns="">INTEGRAL</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">7c295a55-e514-4e93-86bd-4ff94f2e88aa</id>
+      <name xmlns="">Peripheral IV</name>
+      <type xmlns="">2</type>
+      <summary xmlns="">A peripheral intravenous line is a small, short plastic catheter that is placed through the skin into a vein.</summary>
+      <description xmlns="">A peripheral intravenous line is used to give fluids and/or medications directly into the blood stream.</description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Avaliable</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">7c632ab7-b845-471f-94ae-2ee9257b1835</id>
+      <name xmlns="">Splint</name>
+      <type xmlns="">2</type>
+      <summary xmlns="">a rigid or flexible device that maintains in position a displaced or injured part.</summary>
+      <description xmlns="">Mostly used for broken bones, a splint is fastened along a injured length of a person's body in order to limit movement and further trauma.</description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Avaliable</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">db250dae-5de2-4e2a-ae5c-5ac67014b1c6</id>
+      <name xmlns="">Syringe</name>
+      <type xmlns="">4</type>
+      <summary xmlns="">Simple reciprocating pump using plunger or piston to expel liquid or gas through a hypodermic needle.</summary>
+      <description xmlns="">In medicine, these can be used to withdraw liquids, such as when cleaning wounds or body cavities, or to inject fluids, as is the case with some drug injections.</description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Available</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+        <property xmlns="">
+          <name xmlns="">Count</name>
+          <type xmlns="">INTEGRAL</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">9a07005c-92f0-4312-8232-750bd13fef60</id>
+      <name xmlns="">Tempus Pro Kit</name>
+      <type xmlns="">2</type>
+      <summary xmlns="">Attatchment kit for the vitals sign monitor.</summary>
+      <description xmlns="">Light enough to carry and small enough to hold in one hand, it allows the vitals monitor to easily be deployed in numerous clinical scenarios. While it does support many attachments to allow for a wide range of measurements, some important parameters the tempus pro kit measures includes pulse rate, impedance respiration, contact temperature, pulse oximetry, and noninvasive blood pressure.</description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Available</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">d37ad649-c673-4f2a-9407-1c91606cf6c0</id>
+      <name xmlns="">Tourniquet</name>
+      <type xmlns="">2</type>
+      <summary xmlns="">A device which applies pressure to a limb or extremity in order to control the flow of blood.</summary>
+      <description xmlns="">A tourniquet uses compression, typically on a limb, to constrict a vein or artery and limit blood flow as much as possible. This is typically done during hemorrhaging when limiting blood flow to the extremity also limits the blood lost. In a pinch, a cord or tie can be used.</description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Avaliable</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">551bc437-8eef-4eb2-9a1c-63256bc00822</id>
+      <name xmlns="">Urine Bottle</name>
+      <type xmlns="">4</type>
+      <summary xmlns="">Bag used to catch and store drained urine.</summary>
+      <description xmlns=""/>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Avaliable</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">755e80ee-ef4c-42cb-8f71-eadf39cd10f8</id>
+      <name xmlns="">Urine Foley</name>
+      <type xmlns="">4</type>
+      <summary xmlns="">Catheter used to drain urine.</summary>
+      <description xmlns="">A soft plastic or rubber tube that is inserted through the urethra into the bladder. These are typically used when a patient has difficulties urinating on their own.</description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Avaliable</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">7b896c74-0626-480e-9138-21a936c175af</id>
+      <name xmlns="">Vitals Monitor</name>
+      <type xmlns="">2</type>
+      <summary xmlns="">A small, lightweight vital signs monitor.</summary>
+      <description xmlns="">A basic level vitals monitor with many uses depending on available attacthments.</description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Avaliable</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">3457bbce-edad-4466-a263-fcd52405da73</id>
+      <name xmlns="">Water</name>
+      <type xmlns="">4</type>
+      <summary xmlns="">An inorganic, transparent, tasteless, odorless, and nearly colorless chemical substance.</summary>
+      <description xmlns="">It is also essential to and the primary component of living organic beings.</description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Volume</name>
+          <type xmlns="">INTEGRAL</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">aa183936-e9c3-427e-a74c-cd6dd5bd87e9</id>
+      <name xmlns="">Wound Pack</name>
+      <type xmlns="">2</type>
+      <summary xmlns="">Non-adherent and absorbent material used to control bleeding of an open wound.</summary>
+      <description xmlns="">Wound fillers, such as non-adherent gauze, pads, ointments, sponges, and other materials designed to manage exudate.</description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Avaliable</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+    <equipment xmlns="">
+      <id xmlns="">c0893f5e-d4be-49e5-83b3-b77ed84cac30</id>
+      <name xmlns="">Wound Wrap</name>
+      <type xmlns="">2</type>
+      <summary xmlns="">A strip of fabric used especially to cover, dress, and bind up wounds.</summary>
+      <description xmlns="">It can also be used to provide pressure to the bleeding.</description>
+      <citations xmlns=""/>
+      <image xmlns=""/>
+      <properties xmlns="">
+        <property xmlns="">
+          <name xmlns="">Avaliable</name>
+          <type xmlns="">BOOLEAN</type>
+          <fields xmlns=""/>
+        </property>
+      </properties>
+    </equipment>
+  </equipment>
+  <trauma-definitions xmlns="">
+    <trauma xmlns="">
+      <id xmlns="">Injury_1</id>
+      <common-name xmlns="">Trauma to airway</common-name>
+      <medical-name xmlns="">Airway Trauma</medical-name>
+      <citations xmlns="">
+        <citation-ref xmlns="">f9bb23e6-3064-470a-b3f6-ba3d1ab44b33</citation-ref>
+        <citation-ref xmlns="">51ebd589-b9e3-477d-8d69-eff5d4baa110</citation-ref>
+        <citation-ref xmlns="">d19f5a38-e21f-4f85-9c40-cba96c54f9a7</citation-ref>
+      </citations>
+      <description xmlns="">Airway traumas are life threatening and often occur as a result of blunt and penetrating force to the neck and/or chest. Diagnosis can be challenging due to symptoms and signs that are nonspecific to this trauma type.</description>
+      <severity-range xmlns="">
+        <numeric-range xmlns="">
+          <lower_bound xmlns="">0</lower_bound>
+          <upper_bound xmlns="">100</upper_bound>
+        </numeric-range>
+      </severity-range>
+      <treatments xmlns=""/>
+    </trauma>
+    <trauma xmlns="">
+      <id xmlns="">Injury_2</id>
+      <common-name xmlns="">Bruising</common-name>
+      <medical-name xmlns="">Contusion</medical-name>
+      <citations xmlns="">
+        <citation-ref xmlns="">f3f87e6b-8479-47c6-bffd-63c336cdbe24</citation-ref>
+        <citation-ref xmlns="">f9bb23e6-3064-470a-b3f6-ba3d1ab44b33</citation-ref>
+        <citation-ref xmlns="">51ebd589-b9e3-477d-8d69-eff5d4baa110</citation-ref>
+      </citations>
+      <description xmlns="">Bleeding under the skin due to trauma to the blood capillaries can cause injured tissues. It usually darkens the skin to a black/blue color.</description>
+      <severity-range xmlns="">
+        <numeric-range xmlns="">
+          <lower_bound xmlns="">0</lower_bound>
+          <upper_bound xmlns="">22500</upper_bound>
+        </numeric-range>
+      </severity-range>
+      <treatments xmlns=""/>
+    </trauma>
+    <trauma xmlns="">
+      <id xmlns="">Injury_3</id>
+      <common-name xmlns="">Superficial Burn</common-name>
+      <medical-name xmlns="">First Degree Burn</medical-name>
+      <citations xmlns="">
+        <citation-ref xmlns="">f9bb23e6-3064-470a-b3f6-ba3d1ab44b33</citation-ref>
+        <citation-ref xmlns="">51ebd589-b9e3-477d-8d69-eff5d4baa110</citation-ref>
+      </citations>
+      <description xmlns="">A heat trauma that affects the first layer of skin. Most commonly, it causes redness, pain, and swelling and will heal on its own, though larger burns can be uncomfortable and may require a doctor's opinion.</description>
+      <severity-range xmlns="">
+        <numeric-range xmlns="">
+          <lower_bound xmlns="">0</lower_bound>
+          <upper_bound xmlns="">33</upper_bound>
+        </numeric-range>
+      </severity-range>
+      <treatments xmlns=""/>
+    </trauma>
+    <trauma xmlns="">
+      <id xmlns="">Injury_4</id>
+      <common-name xmlns="">Bleeding</common-name>
+      <medical-name xmlns="">Hemorrhage</medical-name>
+      <citations xmlns="">
+        <citation-ref xmlns="">f3f87e6b-8479-47c6-bffd-63c336cdbe24</citation-ref>
+        <citation-ref xmlns="">f9bb23e6-3064-470a-b3f6-ba3d1ab44b33</citation-ref>
+        <citation-ref xmlns="">51ebd589-b9e3-477d-8d69-eff5d4baa110</citation-ref>
+      </citations>
+      <description xmlns="">Hemorrhaging is the release of blood from any blood vessel, either inside or outside of the body. When discussing hemorrhage, it is important to identify both severity (typically as a measure of blood loss rate) and location.</description>
+      <severity-range xmlns="">
+        <numeric-range xmlns="">
+          <lower_bound xmlns="">0</lower_bound>
+          <upper_bound xmlns="">22500</upper_bound>
+        </numeric-range>
+      </severity-range>
+      <treatments xmlns=""/>
+    </trauma>
+    <trauma xmlns="">
+      <id xmlns="">Injury_5</id>
+      <common-name xmlns="">Infection</common-name>
+      <medical-name xmlns="">Infection</medical-name>
+      <citations xmlns="">
+        <citation-ref xmlns="">f9bb23e6-3064-470a-b3f6-ba3d1ab44b33</citation-ref>
+        <citation-ref xmlns="">51ebd589-b9e3-477d-8d69-eff5d4baa110</citation-ref>
+      </citations>
+      <description xmlns="">The invasion and growth of bacteria, viruses, yeast, or fungi in the body. Infections can begin at any point in the body and spread, causing fever and other health issues.</description>
+      <severity-range xmlns="">
+        <numeric-range xmlns="">
+          <lower_bound xmlns="">0</lower_bound>
+          <upper_bound xmlns="">0</upper_bound>
+        </numeric-range>
+      </severity-range>
+      <treatments xmlns=""/>
+    </trauma>
+    <trauma xmlns="">
+      <id xmlns="">Injury_6</id>
+      <common-name xmlns="">External Bleeding</common-name>
+      <medical-name xmlns="">Laceration</medical-name>
+      <citations xmlns="">
+        <citation-ref xmlns="">f3f87e6b-8479-47c6-bffd-63c336cdbe24</citation-ref>
+        <citation-ref xmlns="">f9bb23e6-3064-470a-b3f6-ba3d1ab44b33</citation-ref>
+        <citation-ref xmlns="">51ebd589-b9e3-477d-8d69-eff5d4baa110</citation-ref>
+      </citations>
+      <description xmlns="">External bleeding of the body produced by the tearing of soft body tissue.</description>
+      <severity-range xmlns="">
+        <numeric-range xmlns="">
+          <lower_bound xmlns="">0</lower_bound>
+          <upper_bound xmlns="">22500</upper_bound>
+        </numeric-range>
+      </severity-range>
+      <treatments xmlns=""/>
+    </trauma>
+    <trauma xmlns="">
+      <id xmlns="">Injury_7</id>
+      <common-name xmlns="">Puncture Wound</common-name>
+      <medical-name xmlns="">Puncture</medical-name>
+      <citations xmlns="">
+        <citation-ref xmlns="">f3f87e6b-8479-47c6-bffd-63c336cdbe24</citation-ref>
+        <citation-ref xmlns="">f9bb23e6-3064-470a-b3f6-ba3d1ab44b33</citation-ref>
+        <citation-ref xmlns="">51ebd589-b9e3-477d-8d69-eff5d4baa110</citation-ref>
+      </citations>
+      <description xmlns="">An trauma to the body cause by a piercing or penetrating object. Depth and severity can vary.</description>
+      <severity-range xmlns="">
+        <numeric-range xmlns="">
+          <lower_bound xmlns="">0</lower_bound>
+          <upper_bound xmlns="">22500</upper_bound>
+        </numeric-range>
+      </severity-range>
+      <treatments xmlns=""/>
+    </trauma>
+    <trauma xmlns="">
+      <id xmlns="">Injury_8</id>
+      <common-name xmlns="">Partial Thickness Burn</common-name>
+      <medical-name xmlns="">Second Degree Burn</medical-name>
+      <citations xmlns="">
+        <citation-ref xmlns="">f9bb23e6-3064-470a-b3f6-ba3d1ab44b33</citation-ref>
+        <citation-ref xmlns="">51ebd589-b9e3-477d-8d69-eff5d4baa110</citation-ref>
+      </citations>
+      <description xmlns="">A burn that affects the epidermis and dermis (lower layers of skin). In addition to the symptoms of a first degree, a second degree burn can also cause blistering.</description>
+      <severity-range xmlns="">
+        <numeric-range xmlns="">
+          <lower_bound xmlns="">34</lower_bound>
+          <upper_bound xmlns="">66</upper_bound>
+        </numeric-range>
+      </severity-range>
+      <treatments xmlns=""/>
+    </trauma>
+    <trauma xmlns="">
+      <id xmlns="">Injury_9</id>
+      <common-name xmlns="">Collapsed Lung</common-name>
+      <medical-name xmlns="">Tension Pneumothorax</medical-name>
+      <citations xmlns="">
+        <citation-ref xmlns="">f9bb23e6-3064-470a-b3f6-ba3d1ab44b33</citation-ref>
+        <citation-ref xmlns="">51ebd589-b9e3-477d-8d69-eff5d4baa110</citation-ref>
+      </citations>
+      <description xmlns="">A tension pneumothorax is when air leaks into the pleural space between the lungs and chest wall. It typically occurs as a result of blunt or penetrating trauma and can be classified as either open or closed.</description>
+      <severity-range xmlns="">
+        <numeric-range xmlns="">
+          <lower_bound xmlns="">0</lower_bound>
+          <upper_bound xmlns="">100</upper_bound>
+        </numeric-range>
+      </severity-range>
+      <treatments xmlns=""/>
+    </trauma>
+    <trauma xmlns="">
+      <id xmlns="">Injury_10</id>
+      <common-name xmlns="">Full Thickness Burn</common-name>
+      <medical-name xmlns="">Third Degree Burn</medical-name>
+      <citations xmlns="">
+        <citation-ref xmlns="">f9bb23e6-3064-470a-b3f6-ba3d1ab44b33</citation-ref>
+        <citation-ref xmlns="">51ebd589-b9e3-477d-8d69-eff5d4baa110</citation-ref>
+      </citations>
+      <description xmlns="">A burn that goes through the dermis and affects deep skin tissue layers. The result is a white or blackened, charred skin that may lose some feeling.</description>
+      <severity-range xmlns="">
+        <numeric-range xmlns="">
+          <lower_bound xmlns="">67</lower_bound>
+          <upper_bound xmlns="">100</upper_bound>
+        </numeric-range>
+      </severity-range>
+      <treatments xmlns=""/>
+    </trauma>
+  </trauma-definitions>
+  <treatment-plans xmlns="">
+    <treatment-plan xmlns="">
+      <id xmlns="">f115cf23-b270-4540-8480-a13e0c5b428d</id>
+      <common-name xmlns="">Antibiotics</common-name>
+      <medical-name xmlns="">Antibiotics</medical-name>
+      <description xmlns="">Antimicrobial substance active against bacteria, used in the treatment and prevention of bacterial infections. This medication usually comes in the form of a pill. There are different types of antibiotics for different applications.</description>
+      <required-equipment xmlns="">
+        <equipment-refs xmlns="">db250dae-5de2-4e2a-ae5c-5ac67014b1c6</equipment-refs>
+        <equipment-refs xmlns="">a8080c3b-d7d9-4b26-a5be-902ba18ade37</equipment-refs>
+        <equipment-refs xmlns="">7c632ab7-b845-471f-94ae-2ee9257b1835</equipment-refs>
+      </required-equipment>
+      <references xmlns="">
+        <citations xmlns="">
+          <citation-ref xmlns="">f9bb23e6-3064-470a-b3f6-ba3d1ab44b33</citation-ref>
+          <citation-ref xmlns="">3ece2d8a-df1b-403a-a610-2592054929bc</citation-ref>
+          <citation-ref xmlns="">09726daf-50a9-4c34-aedc-7102805927f3</citation-ref>
+          <citation-ref xmlns="">bd71b020-f1db-4ff2-8ac3-95205e5efdcf</citation-ref>
+        </citations>
+        <cpgs xmlns=""/>
+      </references>
+    </treatment-plan>
+    <treatment-plan xmlns="">
+      <id xmlns="">9f52b6cc-9c30-47e5-9079-45f1fe3142ba</id>
+      <common-name xmlns="">Bandage/Wrap</common-name>
+      <medical-name xmlns="">Bandage</medical-name>
+      <description xmlns="">A strip of fabric used especially to cover, dress, and bind up wounds.</description>
+      <required-equipment xmlns="">
+        <equipment-refs xmlns="">aa183936-e9c3-427e-a74c-cd6dd5bd87e9</equipment-refs>
+      </required-equipment>
+      <references xmlns="">
+        <citations xmlns="">
+          <citation-ref xmlns="">f9bb23e6-3064-470a-b3f6-ba3d1ab44b33</citation-ref>
+          <citation-ref xmlns="">3ece2d8a-df1b-403a-a610-2592054929bc</citation-ref>
+          <citation-ref xmlns="">09726daf-50a9-4c34-aedc-7102805927f3</citation-ref>
+          <citation-ref xmlns="">bd71b020-f1db-4ff2-8ac3-95205e5efdcf</citation-ref>
+        </citations>
+        <cpgs xmlns=""/>
+      </references>
+    </treatment-plan>
+    <treatment-plan xmlns="">
+      <id xmlns="">37415e45-da70-4afb-94be-bb823f6ccf1f</id>
+      <common-name xmlns="">Burn Ointment</common-name>
+      <medical-name xmlns="">Burn Ointment</medical-name>
+      <description xmlns="">Used to help in the prevention and treatment of infections during burn healing, burn ointment kills infectious microorganisms and reduces inflammation.</description>
+      <required-equipment xmlns="">
+        <equipment-refs xmlns="">7056c404-2436-4d2d-a78e-7b129ea6fd17</equipment-refs>
+      </required-equipment>
+      <references xmlns="">
+        <citations xmlns="">
+          <citation-ref xmlns="">f9bb23e6-3064-470a-b3f6-ba3d1ab44b33</citation-ref>
+          <citation-ref xmlns="">3ece2d8a-df1b-403a-a610-2592054929bc</citation-ref>
+          <citation-ref xmlns="">09726daf-50a9-4c34-aedc-7102805927f3</citation-ref>
+          <citation-ref xmlns="">bd71b020-f1db-4ff2-8ac3-95205e5efdcf</citation-ref>
+        </citations>
+        <cpgs xmlns=""/>
+      </references>
+    </treatment-plan>
+    <treatment-plan xmlns="">
+      <id xmlns="">d1c816f5-ffe7-4939-ad8d-34410cc8a117</id>
+      <common-name xmlns="">Chest Tube</common-name>
+      <medical-name xmlns="">Chest Tube</medical-name>
+      <description xmlns="">A chest tube is a hollow, flexible tube placed into the chest. It acts as a drain for blood, fluid, or air from around the heart and lungs. </description>
+      <required-equipment xmlns="">
+        <equipment-refs xmlns="">d2530694-b680-4727-b160-f3c36dc111a4</equipment-refs>
+      </required-equipment>
+      <references xmlns="">
+        <citations xmlns="">
+          <citation-ref xmlns="">f9bb23e6-3064-470a-b3f6-ba3d1ab44b33</citation-ref>
+          <citation-ref xmlns="">3ece2d8a-df1b-403a-a610-2592054929bc</citation-ref>
+          <citation-ref xmlns="">09726daf-50a9-4c34-aedc-7102805927f3</citation-ref>
+          <citation-ref xmlns="">bd71b020-f1db-4ff2-8ac3-95205e5efdcf</citation-ref>
+        </citations>
+        <cpgs xmlns=""/>
+      </references>
+    </treatment-plan>
+    <treatment-plan xmlns="">
+      <id xmlns="">104f67a8-9431-4eb2-8df4-0bd73366584e</id>
+      <common-name xmlns="">Escharotomy</common-name>
+      <medical-name xmlns="">Escharotomy</medical-name>
+      <description xmlns="">During treatment of a hazardous burn, an escharotomy is the surgical incision through the eschar into the subcutaneous tissues to allow the extremity to continue to swell without compressing underlying blood vessels.</description>
+      <required-equipment xmlns="">
+        <equipment-refs xmlns="">9a07005c-92f0-4312-8232-750bd13fef60</equipment-refs>
+        <equipment-refs xmlns="">d37ad649-c673-4f2a-9407-1c91606cf6c0</equipment-refs>
+      </required-equipment>
+      <references xmlns="">
+        <citations xmlns="">
+          <citation-ref xmlns="">f9bb23e6-3064-470a-b3f6-ba3d1ab44b33</citation-ref>
+          <citation-ref xmlns="">3ece2d8a-df1b-403a-a610-2592054929bc</citation-ref>
+          <citation-ref xmlns="">09726daf-50a9-4c34-aedc-7102805927f3</citation-ref>
+          <citation-ref xmlns="">bd71b020-f1db-4ff2-8ac3-95205e5efdcf</citation-ref>
+        </citations>
+        <cpgs xmlns=""/>
+      </references>
+    </treatment-plan>
+    <treatment-plan xmlns="">
+      <id xmlns="">bb297b77-d590-4134-9d31-276747b44764</id>
+      <common-name xmlns="">Fentanyl</common-name>
+      <medical-name xmlns="">Fentanyl</medical-name>
+      <description xmlns="">Fentanyl is a prescription drug that is also made and used illegally. Like morphine, it is a medicine that is typically used to treat patients with severe pain, especially after surgery. It is also sometimes used to treat patients with chronic pain who are physically tolerant to other opioids.</description>
+      <required-equipment xmlns="">
+        <equipment-refs xmlns="">31c1dd21-4141-40ac-bb20-5824d6125141</equipment-refs>
+        <equipment-refs xmlns="">a8080c3b-d7d9-4b26-a5be-902ba18ade37</equipment-refs>
+        <equipment-refs xmlns="">7c632ab7-b845-471f-94ae-2ee9257b1835</equipment-refs>
+      </required-equipment>
+      <references xmlns="">
+        <citations xmlns="">
+          <citation-ref xmlns="">f9bb23e6-3064-470a-b3f6-ba3d1ab44b33</citation-ref>
+          <citation-ref xmlns="">3ece2d8a-df1b-403a-a610-2592054929bc</citation-ref>
+          <citation-ref xmlns="">09726daf-50a9-4c34-aedc-7102805927f3</citation-ref>
+          <citation-ref xmlns="">bd71b020-f1db-4ff2-8ac3-95205e5efdcf</citation-ref>
+        </citations>
+        <cpgs xmlns=""/>
+      </references>
+    </treatment-plan>
+    <treatment-plan xmlns="">
+      <id xmlns="">009a8583-c3e1-42ab-858f-7e2f4b9f55df</id>
+      <common-name xmlns="">Morphine</common-name>
+      <medical-name xmlns="">Morphine</medical-name>
+      <description xmlns="">Morphine is an opioid medication used to treat severe chronic pain. It has a high rate of addiction, overdose, and death.</description>
+      <required-equipment xmlns="">
+        <equipment-refs xmlns="">a3857c07-7fc5-42bf-aa8e-9e34488b9509</equipment-refs>
+        <equipment-refs xmlns="">a8080c3b-d7d9-4b26-a5be-902ba18ade37</equipment-refs>
+        <equipment-refs xmlns="">7c632ab7-b845-471f-94ae-2ee9257b1835</equipment-refs>
+      </required-equipment>
+      <references xmlns="">
+        <citations xmlns="">
+          <citation-ref xmlns="">f9bb23e6-3064-470a-b3f6-ba3d1ab44b33</citation-ref>
+          <citation-ref xmlns="">3ece2d8a-df1b-403a-a610-2592054929bc</citation-ref>
+          <citation-ref xmlns="">09726daf-50a9-4c34-aedc-7102805927f3</citation-ref>
+          <citation-ref xmlns="">bd71b020-f1db-4ff2-8ac3-95205e5efdcf</citation-ref>
+        </citations>
+        <cpgs xmlns=""/>
+      </references>
+    </treatment-plan>
+    <treatment-plan xmlns="">
+      <id xmlns="">eed46ad2-1840-4cbe-b365-fc6dc9a94fc2</id>
+      <common-name xmlns="">Needle Decompression</common-name>
+      <medical-name xmlns="">Needle Thoracostomy</medical-name>
+      <description xmlns="">A procedure performed to stabilize deteriorating patients in the life-threatening situation of a tension pneumothorax. The procedure involves inserting a large needle through the chest wall into the pleural cavity to allow air to escape. </description>
+      <required-equipment xmlns="">
+        <equipment-refs xmlns="">2154001a-d66a-43e1-ba9a-74c0b4a2a7c7</equipment-refs>
+      </required-equipment>
+      <references xmlns="">
+        <citations xmlns="">
+          <citation-ref xmlns="">f9bb23e6-3064-470a-b3f6-ba3d1ab44b33</citation-ref>
+          <citation-ref xmlns="">3ece2d8a-df1b-403a-a610-2592054929bc</citation-ref>
+          <citation-ref xmlns="">09726daf-50a9-4c34-aedc-7102805927f3</citation-ref>
+          <citation-ref xmlns="">bd71b020-f1db-4ff2-8ac3-95205e5efdcf</citation-ref>
+        </citations>
+        <cpgs xmlns=""/>
+      </references>
+    </treatment-plan>
+    <treatment-plan xmlns="">
+      <id xmlns="">8f1cd510-71ba-4287-a2a3-15cbcc0c68ae</id>
+      <common-name xmlns="">Pack Wound</common-name>
+      <medical-name xmlns="">Pack Wound</medical-name>
+      <description xmlns="">When a wound is deep, or when it tunnels under the skin, packing the wound can help it heal. The packing material soaks up any drainage from the wound, which helps the tissues heal from the inside out.</description>
+      <required-equipment xmlns="">
+        <equipment-refs xmlns="">551bc437-8eef-4eb2-9a1c-63256bc00822</equipment-refs>
+        <equipment-refs xmlns="">aa183936-e9c3-427e-a74c-cd6dd5bd87e9</equipment-refs>
+        <equipment-refs xmlns="">c0893f5e-d4be-49e5-83b3-b77ed84cac30</equipment-refs>
+      </required-equipment>
+      <references xmlns="">
+        <citations xmlns="">
+          <citation-ref xmlns="">f9bb23e6-3064-470a-b3f6-ba3d1ab44b33</citation-ref>
+          <citation-ref xmlns="">3ece2d8a-df1b-403a-a610-2592054929bc</citation-ref>
+          <citation-ref xmlns="">09726daf-50a9-4c34-aedc-7102805927f3</citation-ref>
+          <citation-ref xmlns="">bd71b020-f1db-4ff2-8ac3-95205e5efdcf</citation-ref>
+        </citations>
+        <cpgs xmlns=""/>
+      </references>
+    </treatment-plan>
+    <treatment-plan xmlns="">
+      <id xmlns="">6ec6f4e8-d1fe-432c-a2b3-af1e221f3abc</id>
+      <common-name xmlns="">Stitches</common-name>
+      <medical-name xmlns="">Suture</medical-name>
+      <description xmlns="">A stitch or row of stitches holding together the edges of a wound or incision. They typically help hold tissue together during healing.</description>
+      <required-equipment xmlns="">
+        <equipment-refs xmlns="">551bc437-8eef-4eb2-9a1c-63256bc00822</equipment-refs>
+        <equipment-refs xmlns="">aa183936-e9c3-427e-a74c-cd6dd5bd87e9</equipment-refs>
+      </required-equipment>
+      <references xmlns="">
+        <citations xmlns="">
+          <citation-ref xmlns="">f9bb23e6-3064-470a-b3f6-ba3d1ab44b33</citation-ref>
+          <citation-ref xmlns="">3ece2d8a-df1b-403a-a610-2592054929bc</citation-ref>
+          <citation-ref xmlns="">09726daf-50a9-4c34-aedc-7102805927f3</citation-ref>
+          <citation-ref xmlns="">bd71b020-f1db-4ff2-8ac3-95205e5efdcf</citation-ref>
+        </citations>
+        <cpgs xmlns=""/>
+      </references>
+    </treatment-plan>
+  </treatment-plans>
+  <trauma-profiles xmlns="">
+    <trauma-profile xmlns="">
+      <id xmlns="">7e60a704-4b4b-47bc-a07f-a54cbb40f36e</id>
+      <name xmlns="">Burn</name>
+      <description xmlns="">Burn</description>
+      <traumas xmlns="">
+        <trauma xmlns="">
+          <trauma-ref xmlns="">Injury_10</trauma-ref>
+          <location xmlns="">Body</location>
+          <description xmlns=""/>
+          <severity xmlns="">68</severity>
+        </trauma>
+        <trauma xmlns="">
+          <trauma-ref xmlns="">Injury_8</trauma-ref>
+          <location xmlns="">Body</location>
+          <description xmlns=""/>
+          <severity xmlns="">34</severity>
+        </trauma>
+      </traumas>
+    </trauma-profile>
+    <trauma-profile xmlns="">
+      <id xmlns="">3a1e52da-3452-4637-a748-6229e815f786</id>
+      <name xmlns="">Burn with Airway Trauma</name>
+      <description xmlns="">Burn</description>
+      <traumas xmlns="">
+        <trauma xmlns="">
+          <trauma-ref xmlns="">Injury_1</trauma-ref>
+          <location xmlns="">Closed tension pnehumothorax on Right Side</location>
+          <description xmlns=""/>
+          <severity xmlns="">30</severity>
+        </trauma>
+        <trauma xmlns="">
+          <trauma-ref xmlns="">Injury_3</trauma-ref>
+          <location xmlns="">Body</location>
+          <description xmlns=""/>
+          <severity xmlns="">10</severity>
+        </trauma>
+        <trauma xmlns="">
+          <trauma-ref xmlns="">Injury_8</trauma-ref>
+          <location xmlns="">Body</location>
+          <description xmlns=""/>
+          <severity xmlns=""/>
+        </trauma>
+      </traumas>
+    </trauma-profile>
+    <trauma-profile xmlns="">
+      <id xmlns="">0ebf6511-1abf-4890-8029-275c71128341</id>
+      <name xmlns="">Healthy</name>
+      <description xmlns="">Burn</description>
+      <traumas xmlns=""/>
+    </trauma-profile>
+  </trauma-profiles>
+  <syllabus xmlns="">
+    <learning-objectives xmlns="">
+      <objective xmlns="">
+        <id xmlns="">7ed0f5f1-e7e9-47d9-90fc-d13fb9a6fcea</id>
+        <name xmlns="">1. Planning for the event or deployment</name>
+        <description xmlns="">Actively identify evacuation precedence and any life threatening conditions. Planning makes the user aware of injuries and treatment options in order to better determine a course of action to yield the best possible outcome for your patient. </description>
+        <references xmlns="">
+          <citations xmlns=""/>
+          <cpgs xmlns=""/>
+        </references>
+        <relates-to xmlns="">
+          <treatment-plans xmlns=""/>
+          <trauma-profiles xmlns=""/>
+        </relates-to>
+      </objective>
+      <objective xmlns="">
+        <id xmlns="">87213945-4308-49cd-a70d-42a4178eb123</id>
+        <name xmlns="">2. Efficiently control pain and side effects</name>
+        <description xmlns="">Working with pharmaceuticals comes down to knowing both what drugs are available, what their intended effect is, and potential side effects. Certain preexisting conditions can increase or decrease these effects as well, so planning ahead is a must.</description>
+        <references xmlns="">
+          <citations xmlns=""/>
+          <cpgs xmlns=""/>
+        </references>
+        <relates-to xmlns="">
+          <treatment-plans xmlns=""/>
+          <trauma-profiles xmlns=""/>
+        </relates-to>
+      </objective>
+      <objective xmlns="">
+        <id xmlns="">0848a240-0a03-4b86-b191-e32e48095ace</id>
+        <name xmlns="">3. Monitoring and trending vitals</name>
+        <description xmlns="">When executing a plan, visual and graphical vital signs markers help determine the success of each step. Noticing deviations in expected changes early allow for more time to correct them and keep your patient safe. Additionally, serial exams and urine output measurements should be used.</description>
+        <references xmlns="">
+          <citations xmlns=""/>
+          <cpgs xmlns=""/>
+        </references>
+        <relates-to xmlns="">
+          <treatment-plans xmlns=""/>
+          <trauma-profiles xmlns=""/>
+        </relates-to>
+      </objective>
+      <objective xmlns="">
+        <id xmlns="">0bdf0427-42b2-4804-8f14-30012d3db9f2</id>
+        <name xmlns="">4. Set treatment plan based on threat to patient</name>
+        <description xmlns="">In this scenario there are multiple sources of trauma/injury to the patient. While some may be more life threatening than others, it is your job as the care provider to identify all sources of trauma and determine how and when to address them or their symptoms.</description>
+        <references xmlns="">
+          <citations xmlns=""/>
+          <cpgs xmlns=""/>
+        </references>
+        <relates-to xmlns="">
+          <treatment-plans xmlns=""/>
+          <trauma-profiles xmlns=""/>
+        </relates-to>
+      </objective>
+      <objective xmlns="">
+        <id xmlns="">03a3ca6d-2693-45b3-a8da-e4e2f9b63c5d</id>
+        <name xmlns="">5. Restore breathing to patient</name>
+        <description xmlns="">Whether assisted or independent, the respiratory capability of the patient is a crucial component of TCCC guidelines. Recognize whether any deficiencies in breathing are due to pathophysiology, obstruction, or something else and control it. </description>
+        <references xmlns="">
+          <citations xmlns=""/>
+          <cpgs xmlns=""/>
+        </references>
+        <relates-to xmlns="">
+          <treatment-plans xmlns=""/>
+          <trauma-profiles xmlns=""/>
+        </relates-to>
+      </objective>
+      <objective xmlns="">
+        <id xmlns="">5fdc24ab-0681-48fd-9847-b87b35c377aa</id>
+        <name xmlns="">6. Prevent iatrogenesis while providing aggressive nursing care</name>
+        <description xmlns="">Do not cause further harm to the patient through mismanaged treatment.</description>
+        <references xmlns="">
+          <citations xmlns=""/>
+          <cpgs xmlns=""/>
+        </references>
+        <relates-to xmlns="">
+          <treatment-plans xmlns=""/>
+          <trauma-profiles xmlns=""/>
+        </relates-to>
+      </objective>
+    </learning-objectives>
+    <learning-assessments xmlns="">
+      <total-points xmlns="">200</total-points>
+      <assessment xmlns="">
+        <id xmlns="">22957862-64e2-4290-a277-84627d87b307</id>
+        <objective-id xmlns=""/>
+        <name xmlns="">Control of the Airway</name>
+        <description xmlns="">The patient develops a collapsed lung by tension pneumothroax on the right side with in 1 hour of the simuaton. The occurance of this event is done by a  poison distribution </description>
+        <points-avaiable xmlns="">50</points-avaiable>
+        <criteria xmlns="">The patient must resolve the  lung collapse with in the first few minutes of its occurance and resolve it properly by needle decompresison to pass this assessment.</criteria>
+      </assessment>
+      <assessment xmlns="">
+        <id xmlns="">73904818-d00a-4663-b226-c3be84dd13f2</id>
+        <objective-id xmlns=""/>
+        <name xmlns="">Manage Infection Area</name>
+        <description xmlns="">It is important to manage the possibility of infection by wrapping the wounds and applying bandages with ointment to each location.  Once this is done antibioitics should be introduced as part of the fluid resuscitation regement. </description>
+        <points-avaiable xmlns="">50</points-avaiable>
+        <criteria xmlns=""/>
+      </assessment>
+      <assessment xmlns="">
+        <id xmlns="">c2e3a205-d1ae-46aa-8e02-e481fac71da0</id>
+        <objective-id xmlns=""/>
+        <name xmlns="">Pain Managment</name>
+        <description xmlns="">Ensure the patient is properly sedated over the treatment while minimizing application of opoid based sedatives to avoid development of chemical dependence. </description>
+        <points-avaiable xmlns="">100</points-avaiable>
+        <criteria xmlns="">&lt; 50 cc of Morphone delivered over the 48 hour period
+&gt; 15 cc of Morphine delivered over 48 hour periuod
+&lt; 12 hours of patient restlessness</criteria>
+      </assessment>
+    </learning-assessments>
+  </syllabus>
+  <medical-scenario xmlns="">
+    <id xmlns="">Medical Scenario 1</id>
+    <roles xmlns="">
+      <role xmlns="">
+        <id xmlns="">7fc2c956-b36e-481e-8244-358cd129eddf</id>
+        <name xmlns="">Assistant</name>
+        <category xmlns="">ASSISTANT</category>
+        <trauma-profile-ref xmlns="">0ebf6511-1abf-4890-8029-275c71128341</trauma-profile-ref>
+        <description xmlns="">The medical assistant standing by to assist in any two-person tasks. This character cannot make decisions and is strictly standing by to assist. 
+
+Healthy</description>
+      </role>
+      <role xmlns="">
+        <id xmlns="">bfef7586-2b92-46ca-a22b-1adf97b6febc</id>
+        <name xmlns="">Burn Patient</name>
+        <category xmlns="">PATIENT</category>
+        <trauma-profile-ref xmlns="">3a1e52da-3452-4637-a748-6229e815f786</trauma-profile-ref>
+        <description xmlns="">The character having suffered from burns and other traumas, thus causing a need for medical attention.
+
+Burn with Airway Trauma</description>
+      </role>
+      <role xmlns="">
+        <id xmlns="">9630382f-26ea-4ce5-b360-20f19018af92</id>
+        <name xmlns="">Caretaker</name>
+        <category xmlns="">LEARNER</category>
+        <trauma-profile-ref xmlns="">0ebf6511-1abf-4890-8029-275c71128341</trauma-profile-ref>
+        <description xmlns="">The decision maker in the scenaro tasked with caring for the injured patient. 
+
+Healthy</description>
+      </role>
+      <role xmlns="">
+        <id xmlns="">f9faa994-563c-4671-9199-41c036d548b7</id>
+        <name xmlns="">GSW Patient</name>
+        <category xmlns="">PATIENT</category>
+        <trauma-profile-ref xmlns="">7e60a704-4b4b-47bc-a07f-a54cbb40f36e</trauma-profile-ref>
+        <description xmlns="">Burn Patient</description>
+      </role>
+    </roles>
+    <locations xmlns="">
+      <location xmlns="">
+        <id xmlns="">8ac73680-da25-4068-a66b-545cc56e710b</id>
+        <name xmlns="">Base Camp</name>
+        <description xmlns="">Temporary building with plywood sheeting for walls. Setup at basecamp to act as a temporary operating room while the unit is deployed.</description>
+        <environment xmlns="">Interior:Terrestrial:Temperate deciduous forest</environment>
+      </location>
+    </locations>
+    <training-script xmlns="">
+      <scene xmlns="">
+        <id xmlns="">6bf73f21-e0b1-4a5c-8e55-511fe0c1ad3b</id>
+        <location-id xmlns="">8ac73680-da25-4068-a66b-545cc56e710b</location-id>
+        <name xmlns="">Temporary Bunker</name>
+        <description xmlns="">During operation Iraqi Freedom, a group of US military soldiers were stationed in a bunker at an undiscloded location. A soldier was running surveillance via humvee around some nearby rocky terrain when it drove over a mine. The driver got lucky and was thrown out of the vehicle with minor bruising and bleeding. However, the passenger was ended up pinned by the seat during the blast. The initial explosion left an array of burns across approximately one third of the victim's bodyin addition to lacerations and external bleeding. As scrap metal and debris fell, a piece of metal got lodged in the soldier's neck causing significant airwat trauma. The driver managed to get his comrade to the team's nearby safety bunkner, but the victim is in bad shape and the temporary bunker holds limited medical supplies.</description>
+        <weather xmlns="">Windy</weather>
+        <time-of-day xmlns="">0</time-of-day>
+        <time-in-simulation xmlns="">0</time-in-simulation>
+        <events xmlns="">
+          <event xmlns="">
+            <id xmlns="">40ad864a-eb16-4fdb-a07b-eb1d8f88f393</id>
+            <name xmlns="">01 Patient Arrival</name>
+            <category xmlns="">ACTION</category>
+            <fidelity xmlns="">LOW</fidelity>
+            <actor_1 xmlns=""/>
+            <actor_2 xmlns=""/>
+            <equipment xmlns=""/>
+            <details xmlns=""/>
+            <description xmlns="">Patient arrived shortly after injuries begain. The learner has been in the process of cleaning the ptient while awaiting feedback from the Tele-medicine team. The patient currently has no fluids being infused and his sedation medicaiton is wearing off.</description>
+          </event>
+          <event xmlns="">
+            <id xmlns="">1d72356e-358f-41fc-8336-1abe246d81d3</id>
+            <name xmlns="">02 Patient Stirs</name>
+            <category xmlns="">ACTION</category>
+            <fidelity xmlns="">LOW</fidelity>
+            <actor_1 xmlns=""/>
+            <actor_2 xmlns=""/>
+            <equipment xmlns=""/>
+            <details xmlns=""/>
+            <description xmlns="">Once the learner begins to act the patient will begin to become frustrated due to pain caused by the wounds. Management of the patient is an intiial priority so proper cleaning can be finished.</description>
+          </event>
+          <event xmlns="">
+            <id xmlns="">9f73a70b-4906-4f4e-bff6-e8bf8928b283</id>
+            <name xmlns="">03 Telecommunication Event</name>
+            <category xmlns="">ACTION</category>
+            <fidelity xmlns="">LOW</fidelity>
+            <actor_1 xmlns=""/>
+            <actor_2 xmlns=""/>
+            <equipment xmlns=""/>
+            <details xmlns="">Use Script 1 BURN CARE for this.</details>
+            <description xmlns="">After managing the patients pain the Telemedicine team can be reached.</description>
+          </event>
+          <event xmlns="">
+            <id xmlns="">c6cbbfeb-d938-412a-b7c0-3a9bd3dbdcaf</id>
+            <name xmlns="">04 Tension Penumothraox Occurance</name>
+            <category xmlns="">ACTION</category>
+            <fidelity xmlns="">MEDIUM</fidelity>
+            <actor_1 xmlns=""/>
+            <actor_2 xmlns=""/>
+            <equipment xmlns=""/>
+            <details xmlns="">Patient develops a Tension Pnenumothorax at 30 minutes in to the simulation. </details>
+            <description xmlns="">Tension Pneumothorax</description>
+          </event>
+          <event xmlns="">
+            <id xmlns="">14618d23-5a0d-4681-9bd4-8e4728971fed</id>
+            <name xmlns="">05 Escharotomy </name>
+            <category xmlns="">ACTION</category>
+            <fidelity xmlns="">MEDIUM</fidelity>
+            <actor_1 xmlns=""/>
+            <actor_2 xmlns=""/>
+            <equipment xmlns=""/>
+            <details xmlns="">The learning objectives do not focus on Escharotomy technique. It is ok for this to be a action event with minimal user feedback. Once this is done correctly the severity of the inflmation on the patients physiology should be appropriately reduced.</details>
+            <description xmlns="">The Telemedicine - Team will ask toe learned to perform escaharotomy incessions to releave swelling based on teh TBSA assessment. </description>
+          </event>
+        </events>
+        <items xmlns="">
+          <item xmlns="">
+            <short-name xmlns="">[zsLD] Antibiotics</short-name>
+            <equipment-id xmlns="">d9b489cf-0d3d-4507-b97e-bedba1ee7df7</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Available</name>
+                <value xmlns="">1</value>
+              </value>
+              <value xmlns="">
+                <name xmlns="">Volume</name>
+                <value xmlns="">1</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[cFbv] Blanket</short-name>
+            <equipment-id xmlns="">0c25fdb4-0bf4-4585-b84b-fb47925e14bc</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Avaliable</name>
+                <value xmlns="">1</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[b57F] Blood Bag  [Type O]</short-name>
+            <equipment-id xmlns="">7a228e5e-1853-44e0-b06b-f33ef129e00e</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Avaliable</name>
+                <value xmlns="">1</value>
+              </value>
+              <value xmlns="">
+                <name xmlns="">Count</name>
+                <value xmlns="">5</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[q6YJ] Blood Collection Bag</short-name>
+            <equipment-id xmlns="">c0c80947-c354-4c88-a1c0-d5727730714d</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Available</name>
+                <value xmlns="">1</value>
+              </value>
+              <value xmlns="">
+                <name xmlns="">Count</name>
+                <value xmlns="">100</value>
+              </value>
+              <value xmlns="">
+                <name xmlns="">Kind</name>
+                <value xmlns="">0</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[NpSY] Blood Transfusion Kit</short-name>
+            <equipment-id xmlns="">d9c68a93-30ee-41d6-9cf7-58e5f30fe162</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Available</name>
+                <value xmlns="">1</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[KjPJ] Burn Ointments</short-name>
+            <equipment-id xmlns="">aa6ad6d5-808b-4dff-8235-6aa05a9d4326</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Available</name>
+                <value xmlns="">1</value>
+              </value>
+              <value xmlns="">
+                <name xmlns="">Count</name>
+                <value xmlns="">100</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[ReNR] Catheter Supplies</short-name>
+            <equipment-id xmlns="">2154001a-d66a-43e1-ba9a-74c0b4a2a7c7</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Available</name>
+                <value xmlns="">1</value>
+              </value>
+              <value xmlns="">
+                <name xmlns="">Count</name>
+                <value xmlns="">2</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[UdcT] Chest Tube</short-name>
+            <equipment-id xmlns="">7056c404-2436-4d2d-a78e-7b129ea6fd17</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Count</name>
+                <value xmlns="">5</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[LXld] Energy Gel</short-name>
+            <equipment-id xmlns="">2053d825-5da1-4d7d-acb4-074c0c528a21</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Available</name>
+                <value xmlns="">1</value>
+              </value>
+              <value xmlns="">
+                <name xmlns="">Volume</name>
+                <value xmlns="">1000</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[pWVP] Energy Gel</short-name>
+            <equipment-id xmlns="">2053d825-5da1-4d7d-acb4-074c0c528a21</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Available</name>
+                <value xmlns="">1</value>
+              </value>
+              <value xmlns="">
+                <name xmlns="">Volume</name>
+                <value xmlns="">50</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[ifgC] Epinephrine</short-name>
+            <equipment-id xmlns="">31c1dd21-4141-40ac-bb20-5824d6125141</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Available</name>
+                <value xmlns="">1</value>
+              </value>
+              <value xmlns="">
+                <name xmlns="">Volume</name>
+                <value xmlns="">1000</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[grhd] Fentanyl</short-name>
+            <equipment-id xmlns="">d8543da7-f9c6-4991-a18a-566a0f59c153</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Available</name>
+                <value xmlns="">1</value>
+              </value>
+              <value xmlns="">
+                <name xmlns="">Volume</name>
+                <value xmlns="">1000</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[GH1D] IV Bag</short-name>
+            <equipment-id xmlns="">d2530694-b680-4727-b160-f3c36dc111a4</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Available</name>
+                <value xmlns="">1</value>
+              </value>
+              <value xmlns="">
+                <name xmlns="">Count</name>
+                <value xmlns="">25</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[PlkF] IV Pole</short-name>
+            <equipment-id xmlns="">a8080c3b-d7d9-4b26-a5be-902ba18ade37</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Available</name>
+                <value xmlns="">1</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[M87t] Ketamine</short-name>
+            <equipment-id xmlns="">fa2da20b-02d9-4771-85d9-5a04a3bf1fdc</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Available</name>
+                <value xmlns="">1</value>
+              </value>
+              <value xmlns="">
+                <name xmlns="">Volume</name>
+                <value xmlns="">1000</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[14OS] Midazolam</short-name>
+            <equipment-id xmlns="">a3857c07-7fc5-42bf-aa8e-9e34488b9509</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Available</name>
+                <value xmlns="">1</value>
+              </value>
+              <value xmlns="">
+                <name xmlns="">Volume</name>
+                <value xmlns="">1000</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[Rbly] Morphine</short-name>
+            <equipment-id xmlns="">cffdb3c0-1a27-4e2c-8af1-82bea15b052d</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Available</name>
+                <value xmlns="">1</value>
+              </value>
+              <value xmlns="">
+                <name xmlns="">Volume</name>
+                <value xmlns="">100</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[K1Ru] Narcan</short-name>
+            <equipment-id xmlns="">a3708e16-af9b-4e47-b204-830759b2028e</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Available</name>
+                <value xmlns="">1</value>
+              </value>
+              <value xmlns="">
+                <name xmlns="">Volume</name>
+                <value xmlns="">100</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[OgQp] Nasal Cannula</short-name>
+            <equipment-id xmlns="">7c7a4d4d-3f6e-4603-a378-ab4d62cea3ab</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Available</name>
+                <value xmlns="">1</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[oDJY] Needle Decompression Kits</short-name>
+            <equipment-id xmlns="">07704a22-13e2-4c38-9d5c-81026fbd331f</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Avaliable</name>
+                <value xmlns="">1</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[DJg5] Oxygen Tank</short-name>
+            <equipment-id xmlns="">19acfb9c-53c9-474d-82f2-20b1785ddfd9</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Available</name>
+                <value xmlns="">1</value>
+              </value>
+              <value xmlns="">
+                <name xmlns="">Volume</name>
+                <value xmlns="">2000</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[DKoM] Peripheral IV</short-name>
+            <equipment-id xmlns="">7c295a55-e514-4e93-86bd-4ff94f2e88aa</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Avaliable</name>
+                <value xmlns="">1</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[mtsi] Splint</short-name>
+            <equipment-id xmlns="">7c632ab7-b845-471f-94ae-2ee9257b1835</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Avaliable</name>
+                <value xmlns="">1</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[HW4s] Syringe</short-name>
+            <equipment-id xmlns="">db250dae-5de2-4e2a-ae5c-5ac67014b1c6</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Available</name>
+                <value xmlns="">1</value>
+              </value>
+              <value xmlns="">
+                <name xmlns="">Count</name>
+                <value xmlns="">50</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[9lUi] Tempus Pro Kit</short-name>
+            <equipment-id xmlns="">9a07005c-92f0-4312-8232-750bd13fef60</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Available</name>
+                <value xmlns="">1</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[fkKg] Tourniquet</short-name>
+            <equipment-id xmlns="">d37ad649-c673-4f2a-9407-1c91606cf6c0</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Avaliable</name>
+                <value xmlns="">1</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[HXUX] Urine Bottle</short-name>
+            <equipment-id xmlns="">551bc437-8eef-4eb2-9a1c-63256bc00822</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Avaliable</name>
+                <value xmlns="">1</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[YMDS] Urine Foley</short-name>
+            <equipment-id xmlns="">755e80ee-ef4c-42cb-8f71-eadf39cd10f8</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Avaliable</name>
+                <value xmlns="">1</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[n6K2] Vitals Monitor</short-name>
+            <equipment-id xmlns="">7b896c74-0626-480e-9138-21a936c175af</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Avaliable</name>
+                <value xmlns="">1</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[d6v8] Water</short-name>
+            <equipment-id xmlns="">3457bbce-edad-4466-a263-fcd52405da73</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Volume</name>
+                <value xmlns="">1</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[95ml] Wound Pack</short-name>
+            <equipment-id xmlns="">aa183936-e9c3-427e-a74c-cd6dd5bd87e9</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Avaliable</name>
+                <value xmlns="">1</value>
+              </value>
+            </properties>
+          </item>
+          <item xmlns="">
+            <short-name xmlns="">[1oN4] Wound Wrap</short-name>
+            <equipment-id xmlns="">c0893f5e-d4be-49e5-83b3-b77ed84cac30</equipment-id>
+            <description xmlns=""/>
+            <properties xmlns="">
+              <value xmlns="">
+                <name xmlns="">Avaliable</name>
+                <value xmlns="">1</value>
+              </value>
+            </properties>
+          </item>
+        </items>
+        <roles xmlns="">
+          <role-ref xmlns="" category="LEARNER">9630382f-26ea-4ce5-b360-20f19018af92</role-ref>
+          <role-ref xmlns="" category="PATIENT">bfef7586-2b92-46ca-a22b-1adf97b6febc</role-ref>
+          <role-ref xmlns="" category="ASSISTANT">7fc2c956-b36e-481e-8244-358cd129eddf</role-ref>
+        </roles>
+      </scene>
+    </training-script>
+  </medical-scenario>
+  <works-cited xmlns="">
+    <citation xmlns="">
+      <uuid xmlns="">f3f87e6b-8479-47c6-bffd-63c336cdbe24</uuid>
+      <key xmlns="">Lawnick2013Combat</key>
+      <authors xmlns="">Mary M Lawnick, Howard R Champion, Thomas Gennarelli, Michael R Galarneau, Edwin D'Souza, Ross R Vickers, Vern Wing, Brian J Eastridge, Lee Ann Young, Judy Dye, and others</authors>
+      <title xmlns="">Combat Trauma Coding: A Review and Reconfiguration</title>
+      <date xmlns="">2013</date>
+    </citation>
+    <citation xmlns="">
+      <uuid xmlns="">f9bb23e6-3064-470a-b3f6-ba3d1ab44b33</uuid>
+      <key xmlns="">Rhoades2003Medical</key>
+      <authors xmlns="">Rodney Rhoades</authors>
+      <title xmlns="">Medical Physiology</title>
+      <date xmlns="">2003</date>
+    </citation>
+    <citation xmlns="">
+      <uuid xmlns="">bd71b020-f1db-4ff2-8ac3-95205e5efdcf</uuid>
+      <key xmlns="">Boron2012Medical</key>
+      <authors xmlns="">Walter F Boron and Emile L Boulapep</authors>
+      <title xmlns="">Medical Physiology</title>
+      <date xmlns="">2012</date>
+    </citation>
+    <citation xmlns="">
+      <uuid xmlns="">3ece2d8a-df1b-403a-a610-2592054929bc</uuid>
+      <key xmlns="">Army2017Official</key>
+      <authors xmlns="">US Army</authors>
+      <title xmlns="">Official US Army Combat Medic Manual &amp; Trainer's Guide</title>
+      <date xmlns="">2017</date>
+    </citation>
+    <citation xmlns="">
+      <uuid xmlns="">09726daf-50a9-4c34-aedc-7102805927f3</uuid>
+      <key xmlns="">Guyton2006Textbook</key>
+      <authors xmlns="">Guyton and Hall</authors>
+      <title xmlns="">Textbook of Medical Physiology</title>
+      <date xmlns="">2006</date>
+    </citation>
+    <citation xmlns="">
+      <uuid xmlns="">51ebd589-b9e3-477d-8d69-eff5d4baa110</uuid>
+      <key xmlns="">Legome2011Trauma</key>
+      <authors xmlns="">Eric Legome</authors>
+      <title xmlns="">Trauma: A Comprehensive Emergency Medicine Textbook</title>
+      <date xmlns="">2011</date>
+    </citation>
+    <citation xmlns="">
+      <uuid xmlns="">d19f5a38-e21f-4f85-9c40-cba96c54f9a7</uuid>
+      <key xmlns="">Roy2005Unusual</key>
+      <authors xmlns="">Ravishankar M Roy</authors>
+      <title xmlns="">Unusual Foreign Body Airway Obstruction After Laryngeal Mask Insertion</title>
+      <date xmlns="">2005</date>
+    </citation>
+  </works-cited>
+</Scenario>

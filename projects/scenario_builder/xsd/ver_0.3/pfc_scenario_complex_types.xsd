@@ -403,6 +403,7 @@ ARA Licenses use of this material under the Apache 2.0 LICENSE"?>
     <xs:sequence>
       <xs:element name="id" type="xs:string" minOccurs="1"/>
       <xs:element name="name" type="xs:string" minOccurs="1"/>
+      <xs:element name="description" type="xs:string" minOccurs="1"/>
       <xs:element name="physiology-state" type="xs:string" minOccurs="0"/>
       <xs:element name="traumas" type="trauma-occurence-list" minOccurs="1"/>
     </xs:sequence>

@@ -118,7 +118,20 @@ ColumnLayout {
           anchors.right : parent.right
           anchors.leftMargin : 10
           font.pointSize : 10
-          text : (profileList.traumaProfiles[index]) ? profileList.traumaProfiles[index].description : ""
+          wrapMode : Text.Wrap
+          text : {
+            if (profileList.traumaProfiles[index]) {
+                var description = profileList.traumaProfiles[index].description.substr(0, 100);
+                var traumaCount = profileList.traumaProfiles[index].traumas.length
+              if (!enabled) {
+                return "Traumas %1: %3...".arg(traumaCount).arg(description);
+              } else {
+                return "%1".arg(profileList.traumaProfiles[index].description);
+              }
+            } else {
+              return "";
+            }
+          }
           enabled : false
           color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
           elide : Text.ElideRight
@@ -130,7 +143,10 @@ ColumnLayout {
             target : traumaProfile_title_text;
             enabled : true
           }
-          // PropertyChanges{ target : traumaProfile_value_text; enabled  : true}
+          PropertyChanges{ 
+            target : traumaProfile_value_text; 
+            enabled  : true
+          }
         }
 
         onFocusChanged : {

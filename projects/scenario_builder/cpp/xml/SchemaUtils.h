@@ -38,7 +38,7 @@ namespace schema {
     static auto make_equipments() -> std::unique_ptr<ScenarioSchema::equipment_type>;
     static auto make_trauma_definitions() -> std::unique_ptr<ScenarioSchema::trauma_definitions_type>;
     static auto make_treatment_plans() -> std::unique_ptr<ScenarioSchema::treatment_plans_type>;
-    static auto make_trauma_sets() -> std::unique_ptr<ScenarioSchema::trauma_profiles_type>;
+    static auto make_truama_profiles() -> std::unique_ptr<ScenarioSchema::trauma_profiles_type>;
     static auto make_syllabus() -> std::unique_ptr<ScenarioSchema::syllabus_type>;
     static auto make_medical_scenario() -> std::unique_ptr<ScenarioSchema::medical_scenario_type>;
     static auto make_citation_list() -> std::unique_ptr<ScenarioSchema::works_cited_type>;
