@@ -19,19 +19,33 @@ specific language governing permissions and limitations under the License.
 
 struct Author : public QObject {
   Q_OBJECT
-  Q_PROPERTY(int author_id MEMBER id)
-  Q_PROPERTY(QString uuid MEMBER uuid)
-  Q_PROPERTY(QString first MEMBER first)
-  Q_PROPERTY(QString middle MEMBER middle)
-  Q_PROPERTY(QString last MEMBER last)
-  Q_PROPERTY(QString email MEMBER email)
-  Q_PROPERTY(QString zip MEMBER zip)
-  Q_PROPERTY(QString plus_4 MEMBER plus_4)
-  Q_PROPERTY(QString state MEMBER state)
-  Q_PROPERTY(QString country MEMBER country)
-  Q_PROPERTY(QString phone MEMBER phone)
-  Q_PROPERTY(QString organization MEMBER organization)
+  Q_PROPERTY(int author_id MEMBER id NOTIFY idChanged)
+  Q_PROPERTY(QString uuid MEMBER uuid NOTIFY uuidChanged)
+  Q_PROPERTY(QString first MEMBER first NOTIFY firstChanged)
+  Q_PROPERTY(QString middle MEMBER middle NOTIFY middleChanged)
+  Q_PROPERTY(QString last MEMBER last NOTIFY lastChanged)
+  Q_PROPERTY(QString email MEMBER email NOTIFY emailChanged)
+  Q_PROPERTY(QString zip MEMBER zip NOTIFY zipChanged)
+  Q_PROPERTY(QString plus_4 MEMBER plus_4 NOTIFY plus4Changed)
+  Q_PROPERTY(QString state MEMBER state NOTIFY stateChanged)
+  Q_PROPERTY(QString country MEMBER country NOTIFY countryChanged)
+  Q_PROPERTY(QString phone MEMBER phone NOTIFY phoneChanged)
+  Q_PROPERTY(QString organization MEMBER organization NOTIFY organizationChanged)
 
+signals:
+  void idChanged();
+  void uuidChanged();
+  void firstChanged();
+  void middleChanged();
+  void lastChanged();
+  void emailChanged();
+  void zipChanged();
+  void plus4Changed();
+  void stateChanged();
+  void countryChanged();
+  void phoneChanged();
+  void organizationChanged();
+  void refreshed();
 public:
   int32_t id = -1;
   QString uuid = "";
@@ -45,7 +59,6 @@ public:
   QString country = "";
   QString phone = "";
   QString organization = "";
-
 
   Author(QObject* parent = nullptr);
   Author(const Author&) = delete;

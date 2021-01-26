@@ -352,7 +352,7 @@ signals:
   //Possible used when you want to update secondary relations that might
   //Invalidate your entire QML model
   //
-   void authorsChanged();
+  void authorsChanged();
   void assessmentsChanged();
   void eventsChanged();
   void equipmentChanged();

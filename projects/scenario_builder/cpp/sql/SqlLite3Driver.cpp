@@ -422,7 +422,7 @@ bool SQLite3Driver::populate_equipment()
     { "Burn Ointments", 4, "Neosporin Burn Relief & First-Aid Antibiotic Ointment, .5 OZ", "NEOSPORIN + Burn Relief Dual Action Ointment is an antibiotic ointment that provides infection protection and helps soothe minor burn pain. Formulated for first aid wound treatment, it contains bacitracin zinc, neomycin sulfate, and polymyxin B sulfate for antibiotic care of minor burns and wounds. The topical analgesic ointment is also formulated with pramoxine hydrochloride to help soothe and reduce burn pain for maximum-strength relief. From the #1 doctor-recommended brand, this antibiotic and pain relief ointment provides maximum strength relief without any sting forburn treatment, including cooking burns. Neosporin + Burn Relief Dual Action Ointment is a wound care essential to include in any burn care first-aid kit. ", "2;5;6;7", "Available:BOOLEAN;Count:INTEGER" },
     { "Catheter Supplies", 4, "Catheters and the products that are used to insert or remove a catheter, and maintain catheter function.", "", "2;5;6;7", "Available:BOOLEAN;Count:INTEGER" },
     { "Chest Tube", 4, "A chest tube is a hollow, flexible tube placed into the chest.", "Acts as a drain. Chest tubes drain blood, fluid, or air from around your lungs, heart, or esophagus. The tube around your lung is placed between your ribs and into the space between the inner lining and the outer lining of your chest cavity", "2;5;6;7", "Available:BOOLEAN;Count:INTEGER" },
-    { "Decompression Needle", 2, "The physical needle used for treating tension pneumothorax", "Typically a 14 gauge by 3.25 inch needle, this needle is a component of the needle decompression kit and is considered an attachment. This needle is used to reestablish the pleural space. ", "2;5;6;7", "Available:BOOLEAN;Count:INTEGER" },    
+    { "Decompression Needle", 2, "The physical needle used for treating tension pneumothorax", "Typically a 14 gauge by 3.25 inch needle, this needle is a component of the needle decompression kit and is considered an attachment. This needle is used to reestablish the pleural space. ", "2;5;6;7", "Available:BOOLEAN;Count:INTEGER" },
     { "Energy Gel", 4, "Carbohydrate gel used to provide energy and promote recovery.", "", "2;5;6;7", "Count:INTEGER" },
     { "Epinephrine", 3, "A chemical that narrows blood vessels and opens airways in the lungs.", "Also referred to as adrenaline, this drug is used to treat life-threatening allergic reactions. Epinephrine acts quickly and works to improve breathing, stimulate the heart, raise a dropping blood pressure, reverse hives, and reduce swelling.", "2;5;6;7", "Available:BOOLEAN;Volume:INTEGER" },
     { "Fentanyl", 3, "A synthetic opioid pain reliever, approved for treating severe pain.", "Fentanyl is a prescription drug that is also made and used illegally. Like morphine, it is a medicine that is typically used to treat patients with severe pain, especially after surgery. It is also sometimes used to treat patients with chronic pain who are physically tolerant to other opioids.", "2;5;6;7", "Available:BOOLEAN;Volume:INTEGER" },
@@ -922,7 +922,19 @@ inline void SQLite3Driver::assign_author(const QSqlRecord& record, Author& autho
   author.country = record.value(AUTHOR_COUNTRY).toString();
   author.phone = record.value(AUTHOR_PHONE).toString();
   author.organization = record.value(AUTHOR_ORGANIZATION).toString();
+
+  author.firstChanged();
+  author.middleChanged();
+  author.lastChanged();
+  author.emailChanged();
+  author.zipChanged();
+  author.stateChanged();
+  author.countryChanged();
+  author.phoneChanged();
+  author.organizationChanged();
+  author.refreshed();
 }
+
 int SQLite3Driver::author_count() const
 {
   if (QSqlDatabase::database(_db_name).isOpen()) {
@@ -1553,7 +1565,6 @@ bool SQLite3Driver::update_trauma_profile(TraumaProfile* trauma_profile)
     query.bindValue(":uuid", trauma_profile->uuid);
     query.bindValue(":name", trauma_profile->name);
     query.bindValue(":description", trauma_profile->description);
-
 
     QString traumas;
     QString severities;
@@ -2198,7 +2209,6 @@ bool SQLite3Driver::update_equipment(Equipment* equipment)
     }
     emit equipmentUpdated(equipment->id);
 
-
     return true;
   }
   qWarning() << "No Database connection";
@@ -2536,10 +2546,10 @@ inline void SQLite3Driver::assign_role(QSqlRecord& record, Role& role) const
   role.uuid = record.value(ROLE_UUID).toString();
   role.name = record.value(ROLE_NAME).toString();
   role.description = record.value(ROLE_DESCRIPTION).toString();
-  
+
   role.trauma_profile->id = record.value(ROLE_TRAUMA_PROFILE).toInt();
   select_trauma_profile(role.trauma_profile);
-  
+
   role.category = record.value(ROLE_CATEGORY).toString();
 }
 int SQLite3Driver::role_count() const
@@ -4630,14 +4640,14 @@ QQmlListProperty<Role> SQLite3Driver::getRoles() const
                                 &AtRole,
                                 nullptr);
 }
-QQmlListProperty<RoleMap>  SQLite3Driver::getRolesInScene(Scene* scene) const
+QQmlListProperty<RoleMap> SQLite3Driver::getRolesInScene(Scene* scene) const
 {
-     
+
   return QQmlListProperty<RoleMap>(nullptr, new QList<RoleMap*>(roles_in_scene(scene)),
-                                nullptr,
-                                &CountRoleMap,
-                                &AtRoleMap,
-                                nullptr);
+                                   nullptr,
+                                   &CountRoleMap,
+                                   &AtRoleMap,
+                                   nullptr);
 }
 //-------------------------------------------------------------------------------
 auto CountEvent(QQmlListProperty<Event>* list) -> int
