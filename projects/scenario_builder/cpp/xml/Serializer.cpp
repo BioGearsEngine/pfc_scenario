@@ -537,7 +537,7 @@ auto Serializer::generate_pfc_stream() const -> std::stringstream
   //0. <Author>
   for (auto& author : _db->authors()) { // For now there should only ever be one author
     pfc_scenario.author().first_name(author->first.toStdString());
-    pfc_scenario.author().middle_name(author->middle.toStdString());
+    pfc_scenario.author().other_names(author->middle.toStdString());
     pfc_scenario.author().last_name(author->last.toStdString());
     pfc_scenario.author().full_name(QString("%1 %2 %3").arg(author->first).arg(author->middle).arg(author->last).toStdString());
     pfc_scenario.author().email(author->email.toStdString());

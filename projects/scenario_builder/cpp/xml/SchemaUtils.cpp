@@ -553,7 +553,7 @@ namespace schema {
                                         : QUuid::createUuid().toString(QUuid::WithoutBraces);
 
     temp.first = QString::fromStdString(author.first_name().get());
-    temp.middle = QString::fromStdString(author.middle_name().get());
+    temp.middle = QString::fromStdString(author.other_names().get());
     temp.last = QString::fromStdString(author.last_name().get());
     temp.email = QString::fromStdString(author.email().get());
     QString  zip= author.zip()->c_str();
