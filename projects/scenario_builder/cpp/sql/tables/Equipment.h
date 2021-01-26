@@ -220,9 +220,10 @@ signals:
   void typeChanged(int);
   void summaryChanged(QString);
   void descriptionChanged(QString);
-  void citationsChanged(QString);
+  void citationsChanged();
   void imageChanged(QString);
-  void propertiesChanged(QString);
+  void propertiesChanged();
+  void refreshed();
 
 public:
   Equipment(QObject* parent = nullptr);

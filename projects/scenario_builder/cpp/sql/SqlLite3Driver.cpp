@@ -2067,6 +2067,17 @@ inline void SQLite3Driver::assign_equipment(const QSqlRecord& record, Equipment&
   }
   equipment.image = record.value(EQUIPMENT_IMAGE).toString();
   equipment.parametersFromString(record.value(EQUIPMENT_PROPERTIES).toString());
+
+  equipment.idChanged(equipment.id );
+  equipment.uuidChanged(equipment.uuid );
+  equipment.nameChanged(equipment.name );
+  equipment.typeChanged(equipment.type);
+  equipment.summaryChanged(equipment.summary );
+  equipment.descriptionChanged(equipment.description );
+  equipment.citationsChanged();
+  equipment.imageChanged(equipment.image );
+  equipment.propertiesChanged();
+  equipment.refreshed();
 }
 int SQLite3Driver::equipment_count() const
 {
