@@ -86,6 +86,7 @@ inline namespace sqlite3 {
     AUTHOR_ID,
     AUTHOR_UUID,
     AUTHOR_FIRST_NAME,
+    AUTHOR_OTHER_NAMES,
     AUTHOR_LAST_NAME,
     AUTHOR_EMAIL,
     AUTHOR_ZIPCODE,
@@ -101,6 +102,7 @@ inline namespace sqlite3 {
       "author_id"  INTEGER,
       "uuid"  TEXT,
       "name_first"  Varchar(25),
+      "name_others"  TEXT,
       "name_last"  Varchar(25) NOT NULL,
       "email"  VarChar(45) NOT NULL UNIQUE,
       "zipcode"  Varchar(10),
@@ -123,6 +125,7 @@ inline namespace sqlite3 {
           SET
                 uuid = :uuid
               , name_first = :name_first
+              , name_others = :name_others
               , name_last = :name_last
               , email = :email
               , zipcode = :zipcode
@@ -137,17 +140,18 @@ inline namespace sqlite3 {
 
   constexpr auto insert_or_update_first_author
     = R"( INSERT  OR REPLACE INTO authors
-                 (author_id,  uuid,  name_first,  name_last,  email,  zipcode,  state,  country,  phone,  organization)
-          VALUES (1, :uuid, :name_first, :name_last, :email, :zipcode, :state, :country, :phone, :organization)
+                 (author_id,  uuid,  name_first,  name_others, name_last,  email,  zipcode,  state,  country,  phone,  organization)
+          VALUES (1, :uuid, :name_first, :name_others, :name_last, :email, :zipcode, :state, :country, :phone, :organization)
         )";
 
   constexpr auto insert_or_update_authors
     = R"( INSERT  INTO authors
-                 (  name_first, uuid,  name_last,  email,  zipcode,  state,  country,  phone,  organization)
-          VALUES ( :name_first, :uuid, :name_last, :email, :zipcode, :state, :country, :phone, :organization)
+                 (  name_first, uuid,  name_others,  name_last,  email,  zipcode,  state,  country,  phone,  organization)
+          VALUES ( :name_first, :uuid, :name_others, :name_last, :email, :zipcode, :state, :country, :phone, :organization)
           ON CONFLICT(email) 
           DO UPDATE SET
                      name_first = excluded.name_first
+                    ,name_others = excluded.name_others
                     ,name_last  = excluded.name_last
                     ,zipcode    = excluded.zipcode  
                     ,state      = excluded.state

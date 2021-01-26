@@ -899,6 +899,7 @@ inline void SQLite3Driver::assign_author(const QSqlRecord& record, Author& autho
   author.id = record.value(AUTHOR_ID).toInt();
   author.uuid = record.value(AUTHOR_UUID).toString();
   author.first = record.value(AUTHOR_FIRST_NAME).toString();
+  author.middle = record.value(AUTHOR_OTHER_NAMES).toString();
   author.last = record.value(AUTHOR_LAST_NAME).toString();
   author.email = record.value(AUTHOR_EMAIL).toString();
 
@@ -998,6 +999,7 @@ bool SQLite3Driver::update_author(Author* author)
       }
       query.bindValue(":uuid", author->uuid);
       query.bindValue(":name_first", author->first);
+      query.bindValue(":name_others", author->middle);
       query.bindValue(":name_last", author->last);
       query.bindValue(":email", author->email);
 
@@ -1040,6 +1042,7 @@ bool SQLite3Driver::update_first_author(Author* author)
       }
       query.bindValue(":uuid", author->uuid);
       query.bindValue(":name_first", author->first);
+      query.bindValue(":name_others", author->middle);
       query.bindValue(":name_last", author->last);
       query.bindValue(":email", author->email);
 

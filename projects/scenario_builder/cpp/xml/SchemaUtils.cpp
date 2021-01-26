@@ -546,6 +546,7 @@ namespace schema {
   //--------------------------------------------
   auto PFC::load_authors(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<::pfc::schema::ScenarioSchema>
   {
+    //NOTE: all of these fields are optional we really should gaurd check them all
     auto author = scenario_schema->author();
     Author temp;
 
@@ -553,11 +554,14 @@ namespace schema {
                                         : QUuid::createUuid().toString(QUuid::WithoutBraces);
 
     temp.first = QString::fromStdString(author.first_name().get());
-    temp.middle = QString::fromStdString(author.other_names().get());
+    if (author.other_names().present()){
+      temp.middle = QString::fromStdString(author.other_names().get());
+    }
+    
     temp.last = QString::fromStdString(author.last_name().get());
     temp.email = QString::fromStdString(author.email().get());
     QString  zip= author.zip()->c_str();
-    auto     zip_array = zip.split("+");
+    auto     zip_array = zip.split("-");
     temp.zip = zip_array[0];
     if(zip_array.size() > 1){
       temp.plus_4 = zip_array[1];
@@ -565,7 +569,9 @@ namespace schema {
     temp.state = QString::fromStdString(author.state().get());
     temp.country = QString::fromStdString(author.country().get());
     temp.phone = QString::fromStdString(author.phone_number().get());
-    temp.organization = QString::fromStdString(author.organization().get());
+    if( author.organization().present()){
+      temp.organization = QString::fromStdString(author.organization().get());
+    }
     if (!_db.update_author(&temp)) {
       wasSuccessful = false;
       return scenario_schema;
