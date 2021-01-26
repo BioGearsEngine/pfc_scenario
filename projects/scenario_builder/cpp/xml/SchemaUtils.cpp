@@ -553,12 +553,19 @@ namespace schema {
                                         : QUuid::createUuid().toString(QUuid::WithoutBraces);
 
     temp.first = QString::fromStdString(author.first_name().get());
+    temp.middle = QString::fromStdString(author.middle_name().get());
     temp.last = QString::fromStdString(author.last_name().get());
-    temp.phone = QString::fromStdString(author.phone_number().get());
     temp.email = QString::fromStdString(author.email().get());
-    temp.zip = QString::fromStdString(author.zip().get());
+    QString  zip= author.zip()->c_str();
+    auto     zip_array = zip.split("+");
+    temp.zip = zip_array[0];
+    if(zip_array.size() > 1){
+      temp.plus_4 = zip_array[1];
+    }
     temp.state = QString::fromStdString(author.state().get());
     temp.country = QString::fromStdString(author.country().get());
+    temp.phone = QString::fromStdString(author.phone_number().get());
+    temp.organization = QString::fromStdString(author.organization().get());
     if (!_db.update_author(&temp)) {
       wasSuccessful = false;
       return scenario_schema;

@@ -124,8 +124,7 @@ ColumnLayout {
   }
 
   Connections {
-    target : backend
-    
+    target : backend 
   }
   
   function update_objective(objective) {
