@@ -3931,7 +3931,7 @@ bool SQLite3Driver::update_equipment_map(EquipmentMap* map)
       return r;
     }
     emit equipmentMapUpdated(map->id);
-    emit equipmentMapsChanged();
+    //emit equipmentMapsChanged();
     return true;
   }
   qWarning() << "No Database connection";

@@ -160,7 +160,7 @@ ColumnLayout {
             width : 100
             text : "Parameters: "
             enabled : false
-            color : enabled ? Material.secondaryTextColor : "white" 
+            color : enabled ? Material.secondaryTextColor : "white"
             elide : Text.ElideRight
           }
           Text {
@@ -178,7 +178,7 @@ ColumnLayout {
 
           MouseArea {
             anchors.fill : parent
-            focus: true
+            focus : true
             onClicked : {
               knownEquipmentList.currentIndex = index
             }
@@ -195,13 +195,34 @@ ColumnLayout {
           }
           states : State {
             name : "Selected"
-            PropertyChanges { target : fullequipment; selected : true }
-            PropertyChanges { target : equipment_title_label; enabled : true }
-            PropertyChanges { target : equipment_title_text; enabled : true }
-            PropertyChanges { target : equipment_value_label; enabled : true }
-            PropertyChanges { target : equipment_value_text; enabled : true }
-            PropertyChanges { target : equipment_parameter_label; enabled : true }
-            PropertyChanges { target : equipment_parameter_text; enabled : true }
+            PropertyChanges {
+              target : fullequipment;
+              selected : true
+            }
+            PropertyChanges {
+              target : equipment_title_label;
+              enabled : true
+            }
+            PropertyChanges {
+              target : equipment_title_text;
+              enabled : true
+            }
+            PropertyChanges {
+              target : equipment_value_label;
+              enabled : true
+            }
+            PropertyChanges {
+              target : equipment_value_text;
+              enabled : true
+            }
+            PropertyChanges {
+              target : equipment_parameter_label;
+              enabled : true
+            }
+            PropertyChanges {
+              target : equipment_parameter_text;
+              enabled : true
+            }
 
           }
           onFocusChanged : {
@@ -274,9 +295,9 @@ ColumnLayout {
           id : equipmentMouseArea
 
           property int selfID : index
-          property var currentMap       : (equipmentInSceneList.equipmentMaps[index]) ? equipmentInSceneList.equipmentMaps[index] : null
-          property var currentEquipment : (currentMap) ? currentMap.equipment : null
-          property var parameters       : (currentEquipment) ? currentEquipment.parameters : null
+          property var currentMap: (equipmentInSceneList.equipmentMaps[index]) ? equipmentInSceneList.equipmentMaps[index] : null
+          property var currentEquipment: (currentMap) ? currentMap.equipment : null
+          property var currentParameters: (currentEquipment) ? currentEquipment.parameters : null
 
           anchors {
             left : parent.left;
@@ -293,18 +314,48 @@ ColumnLayout {
 
           states : State {
             name : "Selected"
-            PropertyChanges { target : instanceHeader; enabled : true }
-            PropertyChanges { target : instanceNameLabel; enabled : true }
-            PropertyChanges { target : instanceTypeLabel; enabled : true }
-            
-            PropertyChanges { target : instanceNameField; enabled : true }
-            PropertyChanges { target : instanceNameField; readOnly : false }
-            PropertyChanges { target : instanceNameField; activeFocusOnPress : true }
-            PropertyChanges { target : instanceNameField; hoverEnabled : true }
-            PropertyChanges { target : instanceNameField; mouseSelectionMode : TextInput.SelectCharacters      }
+            PropertyChanges {
+              target : instanceHeader;
+              enabled : true
+            }
+            PropertyChanges {
+              target : instanceNameLabel;
+              enabled : true
+            }
+            PropertyChanges {
+              target : instanceTypeLabel;
+              enabled : true
+            }
 
-            PropertyChanges { target : instanceBody; enabled : true }
-            PropertyChanges { target : instanceBody; visible : true }
+            PropertyChanges {
+              target : instanceNameField;
+              enabled : true
+            }
+            PropertyChanges {
+              target : instanceNameField;
+              readOnly : false
+            }
+            PropertyChanges {
+              target : instanceNameField;
+              activeFocusOnPress : true
+            }
+            PropertyChanges {
+              target : instanceNameField;
+              hoverEnabled : true
+            }
+            PropertyChanges {
+              target : instanceNameField;
+              mouseSelectionMode : TextInput.SelectCharacters
+            }
+
+            PropertyChanges {
+              target : instanceBody;
+              enabled : true
+            }
+            PropertyChanges {
+              target : instanceBody;
+              visible : true
+            }
           }
 
           Connections {
@@ -341,7 +392,7 @@ ColumnLayout {
                 font.pointSize : (enabled) ? 12 : 10
                 text : (currentEquipment) ? "Type: %1".arg(currentEquipment.name) : "Type: Unknown"
                 color : (enabled) ? "White" : Material.primaryTextColor
-                width : (contentWidth < 130 ) ? 130 : contentWidth
+                width : (contentWidth < 130) ? 130 : contentWidth
               }
               Label {
                 id : instanceNameLabel
@@ -354,7 +405,7 @@ ColumnLayout {
                 font.pointSize : (enabled) ? 12 : 10
                 text : "Name:"
                 color : (enabled) ? "White" : Material.primaryTextColor
-                width : (contentWidth < 130 ) ? 130 : contentWidth
+                width : (contentWidth < 130) ? 130 : contentWidth
               }
               TextField {
                 id : instanceNameField
@@ -376,42 +427,41 @@ ColumnLayout {
             }
             Rectangle {
               id : instanceBody
-              
+
               Layout.fillWidth : true
               Layout.minimumHeight : childrenRect.height
               color : Material.color(Material.Grey, Material.Shade100)
               enabled : false
               visible : false
               ListView {
-                id : parameter
+                id : parameterListView
 
-                property var values : {
-                  if ( equipmentMouseArea.currentMap ){
-                    var v = ( equipmentMouseArea.currentMap.values ) ? equipmentMouseArea.currentMap.values.split(";") : []
-                    var delta = v.length - equipmentMouseArea.parameters.length;
-  
+                property var valueArray: {
+                  if(equipmentMouseArea.currentMap) {
+                    var v = (equipmentMouseArea.currentMap.values) ? equipmentMouseArea.currentMap.values.split(";") : []
+                    var delta = v.length - equipmentMouseArea.currentParameters.length;
+
                     while (delta-- > 0) { v.pop(); }
-                    while (delta++ < 0) { v.push(""); }
-                    
+                    while (delta++ < 0) { v.push(""); }    
                     return v;
                   } else {
-                    return [];
+                    return[];
                   }
                 }
-                
+
                 anchors {
                   left : parent.left
                   right : parent.right
                   top : instanceBody.top
                 }
                 spacing : 0
-                model : equipmentMouseArea.parameters
+                model : equipmentMouseArea.currentParameters
                 height : childrenRect.height
                 delegate : Rectangle {
-                  id: parameterHeader
+                  id : parameterHeader
 
                   property int paramID : index
-                  property var currentParameter : (index >= 0 && index < equipmentMouseArea.parameters.length) ? equipmentMouseArea.parameters[index] : undefined
+                  property var currentParameter: (index >= 0 &&index <equipmentMouseArea.currentParameters.length) ? equipmentMouseArea.currentParameters[index] : undefined
 
                   Layout.fillWidth : true
                   Layout.minimumHeight : 25
@@ -428,139 +478,146 @@ ColumnLayout {
                     }
                     font.pointSize : (enabled) ? 12 : 10
                     text : (currentParameter) ? currentParameter.name : ""
-                    color : (!enabled) ? "White" : Material.primaryTextColor 
+                    color : (!enabled) ? "White" : Material.primaryTextColor
                   }
 
                   Loader {
                     id : equipment_parameter_loader
-                    focus: true
-                    enabled : instanceBody.enabled 
+                    focus : true
+                    enabled : instanceBody.enabled
                     anchors {
-                         left : parameterNameLabel.right
-                         top : parameterHeader.top
-                         leftMargin : 5
-                         topMargin : 2
+                      left : parameterNameLabel.right
+                      top : parameterHeader.top
+                      leftMargin : 5
+                      topMargin : 2
                     }
                     sourceComponent : {
-                      if ( !currentParameter ){
+                      if (! currentParameter) {
                         return undefined
                       }
+
                       switch (currentParameter.type) {
-                         case Sustain.BOOLEAN:
-                           return booleanType;
-                         
-                         case Sustain.INTEGRAL:
+                        case Sustain.BOOLEAN:
+                          return booleanType;
+
+                        case Sustain.INTEGRAL:
                           return integralType;
-                         
-                         case Sustain.SCALAR:
+
+                        case Sustain.SCALAR:
                           return scalarType;
-                         
-                         case Sustain.ENUM:
+
+                        case Sustain.ENUM:
                           return enumType;
-                         
-                       }
+
+                      }
                     }
-                     
-                     
-                    property Component unknownType : Text {                       
-                       font.pointSize : (enabled) ? 12 : 10
-                       text : "UNKNOWN"
-                       color : (enabled) ? "White" : Material.primaryTextColor 
-                    }  
+
+
+                    property Component unknownType : Text {
+                      font.pointSize : (enabled) ? 12 : 10
+                      text : "UNKNOWN"
+                      color : (enabled) ? "White" : Material.primaryTextColor
+                    }
 
                     property Component booleanType : CheckBox {
-                      id: checkBoxComponent
+                      id : checkBoxComponent
                       focus : true
                       enabled : equipment_parameter_loader.enabled
-                      
-                      onCheckedChanged : {                        
-                        if ( parameter.values ) {
-                          var value = "%1".arg(checked) 
-                          if ( value != parameter.values[paramID] ) {
-                            parameter.values[paramID] = value;                          
-                            equipmentMouseArea.currentMap.values = parameter.values.join(";");
-                            backend.update_equipment_in_scene( equipmentMouseArea.currentMap )
-                          }
+
+                      property bool dirty : false
+
+                      onActiveFocusChanged : {
+                        if (dirty) {
+                          equipmentMouseArea.currentMap.values = parameterListView.valueArray.join(";");
+                          backend.update_equipment_in_scene(equipmentMouseArea.currentMap);
                         }
                       }
-                      Component.onCompleted : {                        
-                        if ( "%1".arg(checked ) != parameter.values[paramID] ){
-                          if ( parameter.values[paramID] ) {
-                            checkBoxComponent.checked = parameter.values[paramID];
-                          } else {                            
-                            parameter.values[paramID] = checked;
+
+                      onPressed : {
+                        if (parameterListView.valueArray) {                       
+                            parameterListView.valueArray[paramID] = "%1".arg(!checked);
+                            dirty = true
+                        }
+                      }
+
+                      Component.onCompleted : {
+                        if (parameterListView.valueArray) {                          
+                          if (parameterListView.valueArray[paramID] != checkBoxComponent.checked) {
+                            checkBoxComponent.checked = parameterListView.valueArray[paramID];
                           }
-                        } else {
-                          parameter.values[paramID] = "%1".arg(checked);
                         }
                       }
                     }
 
                     property Component integralType : TextField {
-                      id: integralTypeComponent
-                      focus: true
-                      inputMethodHints: Qt.ImhDigitsOnly
+                      id : integralTypeComponent
+                      focus : true
+                      inputMethodHints : Qt.ImhDigitsOnly
                       anchors.rightMargin : 25
-                      text: "1"
-                      onAccepted : {                        
-                        if ( parameter.values ) {
-                          if ( text != parameter.values[paramID] ) {
-                            parameter.values[paramID] = text;                          
-                            equipmentMouseArea.currentMap.values = parameter.values.join(";");
-                            backend.update_equipment_in_scene( equipmentMouseArea.currentMap )
+                      text : "1"
+
+                      onAccepted : {
+                        if (parameterListView.valueArray) {
+                          if (text != parameterListView.valueArray[paramID]) {
+                            parameterListView.valueArray[paramID] = text;
+                            equipmentMouseArea.currentMap.values = parameterListView.valueArray.join(";");
+                            backend.update_equipment_in_scene(equipmentMouseArea.currentMap)
                           }
                         }
                       }
-                      Component.onCompleted : {                        
-                        if ( integralTypeComponent.text != parameter.values[paramID] ){
-                          if ( parameter.values[paramID] ) {
-                            integralTypeComponent.text = parameter.values[paramID];
-                          } else {                            
-                            parameter.values[paramID] = integralTypeComponent.text;
+
+                      Component.onCompleted : {
+                        if (parameterListView.valueArray) {
+                          if (integralTypeComponent.text != parameterListView.valueArray[paramID]) {
+                            if (parameterListView.valueArray[paramID] !== "") {
+                              integralTypeComponent.text = parameterListView.valueArray[paramID];
+                            } else {
+                              parameterListView.valueArray[paramID] = integralTypeComponent.text;
+                            }
                           }
-                        } else {
-                          parameter.values[paramID] = integralTypeComponent.text;
                         }
                       }
-                    }                    
+                    }
 
                     property Component scalarType : RowLayout {
 
-                       Label {
-                         font.pointSize : (enabled) ? 12 : 10
-                         enabled : equipment_parameter_loader.enabled
-                         text :  ( currentParameter.value ) ? currentParameter.value[paramID] : ""
-                         color : (!enabled) ? "White" : Material.primaryTextColor 
-                       }
+                      Label {
+                        font.pointSize : (enabled) ? 12 : 10
+                        enabled : equipment_parameter_loader.enabled
+                        text : (currentParameter.value) ? currentParameter.value[paramID] : ""
+                        color : (!enabled) ? "White" : Material.primaryTextColor
+                      }
 
-                       TextField {
-                         id: integralTypeComponent
-                         focus: true
-                         inputMethodHints: Qt.ImhDigitsOnly
-                         anchors.rightMargin : 25
-                         text: "1"
-                         onAccepted : {                        
-                            if ( parameter.values ) {
-                              if ( text != parameter.values[paramID] ) {
-                                parameter.values[paramID] = text;                          
-                                equipmentMouseArea.currentMap.values = parameter.values.join(";");
-                                backend.update_equipment_in_scene( equipmentMouseArea.currentMap )
+                      TextField {
+                        id : integralTypeComponent
+                        focus : true
+                        inputMethodHints : Qt.ImhDigitsOnly
+                        anchors.rightMargin : 25
+                        text : "1"
+
+                        onAccepted : {
+                          if (parameterListView.valueArray) {
+                            if (text != parameterListView.valueArray[paramID]) {
+                              parameterListView.valueArray[paramID] = text;
+                              equipmentMouseArea.currentMap.values = parameterListView.valueArray.join(";");
+                              backend.update_equipment_in_scene(equipmentMouseArea.currentMap)
+                            }
+                          }
+                        }
+
+                        Component.onCompleted : {
+                          if (parameterListView.valueArray) {
+                            if (integralTypeComponent.text != parameterListView.valueArray[paramID]) {
+                              if (parameterListView.valueArray[paramID] !== "") {
+                                integralTypeComponent.text = parameterListView.valueArray[paramID];
+                              } else {
+                                parameterListView.valueArray[paramID] = integralTypeComponent.text;
                               }
                             }
-                         }
-                         Component.onCompleted : {                        
-                           if ( integralTypeComponent.text != parameter.values[paramID] ){
-                              if ( parameter.values[paramID] ) {
-                                integralTypeComponent.text = parameter.values[paramID];
-                              } else {                            
-                                parameter.values[paramID] = integralTypeComponent.text;
-                              }
-                           } else {
-                              parameter.values[paramID] = integralTypeComponent.text;
-                           }
-                         }
-                       }  
-                    }  
+                          }
+                        }
+                      }
+                    }
 
                     property Component enumType : ComboBox {
                       id : enumTypeComponent
@@ -568,43 +625,45 @@ ColumnLayout {
 
                       property bool dirty : false
 
-                      model  : {
+                      model : {
                         var options = [];
                         var list = currentParameter.enumOptions;
-                        for ( var ii = 0; ii < list.length; ii++ ){                          
+                        for (var ii = 0; ii < list.length; ii++) {
                           options.push(list[ii]);
                         }
                         return options;
                       }
 
-                      onActiveFocusChanged : {               
-                        if(dirty){          
-                          backend.update_equipment_in_scene( equipmentMouseArea.currentMap );
+                      onActiveFocusChanged : {
+                        if (dirty) {
+                          backend.update_equipment_in_scene(equipmentMouseArea.currentMap);
                         }
                       }
 
                       onActivated : {
-                        if ( parameter.values ) {
-                          if ( currentIndex != parameter.values[paramID] ) {
+                        if (parameterListView.valueArray) {
+                          if (currentParameter.enumOptions[currentIndex] != parameterListView.valueArray[paramID]) {
                             dirty = true
-                            console.log("onActivated")
-                            parameter.values[paramID] = currentIndex;                          
-                            equipmentMouseArea.currentMap.values = parameter.values.join(";");
+                            parameterListView.valueArray[paramID] = currentParameter.enumOptions[currentIndex];
+                            equipmentMouseArea.currentMap.values = parameterListView.valueArray.join(";");
                           }
                         }
                       }
 
-                      Component.onCompleted : {                        
-                        if ( enumTypeComponent.currentIndex != parameter.values[paramID] ){
-                          if ( parameter.values[paramID] ) {
-                            enumTypeComponent.currentIndex = parameter.values[paramID];
-                          } else {                            
-                            parameter.values[paramID] = enumTypeComponent.currentIndex;
-                          }
-                        } else {
-                          parameter.values[paramID] = enumTypeComponent.currentIndex;
+                      Component.onCompleted : {
+                        if (parameterListView.valueArray) {
+                          if ( parameterListView.valueArray[paramID] && currentParameter.enumOptions ){                            
+                            let lambda = (value) => { return parameterListView.valueArray[paramID] == value; }
+                            var suggestedIndex = currentParameter.enumOptions.findIndex(lambda);
+                            if ( 0 <= suggestedIndex && suggestedIndex < currentParameter.enumOptions.length) {
+                              enumTypeComponent.currentIndex = suggestedIndex;
+                            } else {
+                              enumTypeComponent.currentIndex = 0;
+                              parameterListView.valueArray[paramID] = currentParameter.enumOptions[0];
+                            }                            
+                          }                          
                         }
-                      }                      
+                      }
                     }
                   }
                 }
@@ -616,50 +675,48 @@ ColumnLayout {
       }
     }
   }
-
   onCurrentSceneChanged : {
     refresh_equipment_in_scene_list()
   }
-
   onBackendChanged : {
-    refresh_equipment_definition_list()
-    if(currentScene){
-      refresh_equipment_in_scene_list()
+    refresh_equipment_definition_list();
+    if (currentScene) {
+      refresh_equipment_in_scene_list();
     }
   }
-
   Connections {
     target : backend
     onEquipmentChanged : {
-      refresh_equipment_definition_list()
+      refresh_equipment_definition_list();
     }
 
     onEquipmentUpdated : {
-       refresh_an_equipment_definition( index )
-       refresh_an_equipment_in_scene( index )
+      refresh_an_equipment_definition(index);
+      refresh_an_equipment_in_scene(index);
     }
 
+    onEquipmentMapUpdated : {
+      refresh_an_equipment_in_scene(index);
+    }
     onEquipmentMapsChanged : {
-      refresh_equipment_in_scene_list()
+      refresh_equipment_in_scene_list();
     }
   }
-
   function makeid(length) {
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
   }
-
   function refresh_equipment_in_scene_list() {
     var lastIndex = equipmentInSceneList.currentIndex
     equipmentInSceneList.equipmentMaps = []
     var equipmentMaps = root.backend.equipmentMaps;
-    for (var ii = 0; ii < equipmentMaps.length; ++ii) {      
-      if (equipmentMaps[ii].scene.scene_id == currentScene.scene_id) {        
+    for (var ii = 0; ii < equipmentMaps.length; ++ ii) {
+      if (equipmentMaps[ii].scene.scene_id == currentScene.scene_id) {
         equipmentInSceneList.equipmentMaps.push(equipmentMap_g.make());
         var index = equipmentInSceneList.equipmentMaps.length - 1
         equipmentInSceneList.equipmentMaps[index].assign(equipmentMaps[ii]);
@@ -668,33 +725,30 @@ ColumnLayout {
     equipmentInSceneList.model = equipmentInSceneList.equipmentMaps
     equipmentInSceneList.currentIndex = lastIndex
   }
-  
   function refresh_equipment_definition_list() {
     knownEquipmentList.equipment = []
     let equipments = root.backend.equipment;
-    for (var ii = 0; ii < equipments.length; ++ii) {
+    for (var ii = 0; ii < equipments.length; ++ ii) {
       knownEquipmentList.equipment.push(equipment_g.make());
       knownEquipmentList.equipment[knownEquipmentList.equipment.length - 1].assign(equipments[ii]);
     }
     knownEquipmentList.equipment.model = knownEquipmentList.equipment;
   }
-
-  function refresh_an_equipment_in_scene( equipment_id ) {
+  function refresh_an_equipment_in_scene(equipment_id) {
     var lastIndex = equipmentInSceneList.currentIndex
-    for (var ii = 0; ii <  equipmentInSceneList.equipmentMaps.length; ++ii) {      
-      if (equipment_id ==  equipmentInSceneList.equipmentMaps[ii].equipment.equipment_id) {        
-        root.backend.select_equipment( equipmentInSceneList.equipmentMaps[ii].equipment );     
+    for (var ii = 0; ii < equipmentInSceneList.equipmentMaps.length; ++ ii) {
+      if (equipment_id == equipmentInSceneList.equipmentMaps[ii].equipment.equipment_id) {
+        root.backend.select_equipment(equipmentInSceneList.equipmentMaps[ii].equipment);
       }
     }
     equipmentInSceneList.model = equipmentInSceneList.equipmentMaps
     equipmentInSceneList.currentIndex = lastIndex
   }
-
-  function refresh_an_equipment_definition( equipment_id ) {
-    for (var ii = 0; ii <  knownEquipmentList.equipment.length; ++ii) {      
-      if (equipment_id ==  knownEquipmentList.equipment[ii].equipment_id) {  
-        root.backend.select_equipment( knownEquipmentList.equipment[ii] );   
-        return;  
+  function refresh_an_equipment_definition(equipment_id) {
+    for (var ii = 0; ii < knownEquipmentList.equipment.length; ++ ii) {
+      if (equipment_id == knownEquipmentList.equipment[ii].equipment_id) {
+        root.backend.select_equipment(knownEquipmentList.equipment[ii]);
+        return;
       }
     }
     knownEquipmentList.equipment.model = knownEquipmentList.equipment;

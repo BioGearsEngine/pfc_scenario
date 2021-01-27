@@ -1,3 +1,5 @@
+cmake_policy(SET CMP0087 NEW)
+
 include(InstallRequiredSystemLibraries)
 set(CPACK_PACKAGE_NAME "Sustain Scenario Builder")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Interface for developing Sustain Scenario Files")
@@ -13,6 +15,7 @@ set(CPACK_PACKAGE_VERSION_MINOR ${${ROOT_PROJECT_NAME}_VERSION_MINOR} )
 set(CPACK_PACKAGE_VERSION_PATCH ${${ROOT_PROJECT_NAME}_VERSION_PATCH} )
 set(CPACK_PACKAGE_VERSION_TWEAK ${${ROOT_PROJECT_NAME}_VERSION_TWEAK} )
 
+set(CPACK_PACKAGE_DIRECTORY ${CMAKE_BINARY_DIR}/packaging/)
 
 if(WIN32 AND NOT UNIX)
   # There is a bug in NSI that does not handle full UNIX paths properly.
@@ -36,20 +39,10 @@ if(WIN32 AND NOT UNIX)
   set(CPACK_WIX_PROPERTY_ARPHELPLINK  "https://TheSustainTrainer.com")
   set(ARPURLINFOABOUT  "https://TheSustainTrainer.com")
 
+  get_filename_component(Qt5_ROOT_DIR "${Qt5_DIR}/../../../" ABSOLUTE  )
+
   install(CODE "
     include(BundleUtilities)
-
-    function(EXELIST result curdir)
-      file(GLOB children RELATIVE \${curdir} \${curdir}/*)
-      set(artifactList \"\")
-      foreach(child \${children})
-        if(NOT IS_DIRECTORY \${curdir}/\${child} AND \${child} MATCHES \".*${CMAKE_EXECUTABLE_SUFFIX}\" )
-          list(APPEND artifactList \${curdir}/\${child})
-        set(\${result} \${artifactList} PARENT_SCOPE)
-        return()
-        endif()
-      endforeach()
-    endfunction()
 
     string(TOUPPER \${CMAKE_INSTALL_CONFIG_NAME} CONFIG)
     if( NOT UNIX )
@@ -66,26 +59,32 @@ if(WIN32 AND NOT UNIX)
       list(APPEND THIRD_PARTY_LIB \"\${_dir}/lib\")
       list(APPEND THIRD_PARTY_BIN \"\${_dir}/bin\")
     endforeach()
-    
-    EXELIST(artifacts \${CMAKE_INSTALL_PREFIX}/bin )
-    
-    foreach( artifact IN LISTS artifacts)
-      fixup_bundle(\${artifact}
-                      \"\"
-                    \"\${THIRD_PARTY_LIB};\${THIRD_PARTY_BIN}\"
+
+    message(\" Generating Bundle for \${CMAKE_INSTALL_PREFIX}/bin/ScenarioBuilder.exe\")
+    fixup_bundle(\${CMAKE_INSTALL_PREFIX}/bin/$<TARGET_FILE_NAME:ScenarioBuilder>
+                    \"\"
+                \"\${THIRD_PARTY_LIB};\${THIRD_PARTY_BIN}\"
+    )
+    if(WIN32)
+        message(\" Running windeployqt for \${CMAKE_INSTALL_PREFIX}/bin/ScenarioBuilder.exe\")
+        execute_process(
+            COMMAND ${CMAKE_COMMAND} -E env \"${Qt5_ROOT_DIR}/bin/windeployqt\" --no-compiler-runtime --list mapping \"\${CMAKE_INSTALL_PREFIX}/bin/$<TARGET_FILE_NAME:ScenarioBuilder>\"
+            WORKING_DIRECTORY  \"\${CMAKE_INSTALL_PREFIX}/bin/\"
+            OUTPUT_VARIABLE _output
+            ERROR_VARIABLE  _error
+            OUTPUT_STRIP_TRAILING_WHITESPACE
         )
-    endforeach()
+        if(_output)
+          message(\"windeployqt OUTPUT : \${_output}\")
+        endif()
+        if( _error )
+          message(\"windeployqt ERROR : \${_error}\")
+        endif()
+    endif()
   "         
   )
 
-  get_filename_component(Qt5_ROOT_DIR "${Qt5_DIR}/../../../" ABSOLUTE  )
-  install(DIRECTORY 
-      ${Qt5_ROOT_DIR}/bin/
-      DESTINATION bin/
-      FILE_PERMISSIONS OWNER_READ GROUP_READ WORLD_READ
-      FILES_MATCHING 
-      PATTERN "*.dll"
-      )
+\
   install(DIRECTORY 
       ${Qt5_ROOT_DIR}/plugins/
       DESTINATION bin/
@@ -93,22 +92,18 @@ if(WIN32 AND NOT UNIX)
       FILES_MATCHING 
       PATTERN "*.dll"
       )   
-  install(DIRECTORY 
-      ${Qt5_ROOT_DIR}/qml/
-      DESTINATION bin/
-      FILE_PERMISSIONS OWNER_READ GROUP_READ WORLD_READ
-      FILES_MATCHING 
-      PATTERN "*.dll"
-      PATTERN "*.qml"
-      PATTERN "*.qmlc"
-      )  
-  install(DIRECTORY 
-      ${Qt5_ROOT_DIR}/translations/
-      DESTINATION bin/
-      FILE_PERMISSIONS OWNER_READ GROUP_READ WORLD_READ
-      FILES_MATCHING 
-      PATTERN "*.qm"
-      )   
+install(DIRECTORY 
+    ${Qt5_ROOT_DIR}/qml/Qt 
+    ${Qt5_ROOT_DIR}/qml/QtCanvas3D
+    ${Qt5_ROOT_DIR}/qml/QtCharts 
+    ${Qt5_ROOT_DIR}/qml/QtDataVisualization
+    ${Qt5_ROOT_DIR}/qml/QtGraphicalEffects
+    ${Qt5_ROOT_DIR}/qml/QtQuick 
+    ${Qt5_ROOT_DIR}/qml/QtQuick.2 
+    ${Qt5_ROOT_DIR}/qml/QtQMl 
+    DESTINATION bin/
+    FILE_PERMISSIONS OWNER_READ GROUP_READ WORLD_READ
+    )   
 
 else()
   set(CPACK_STRIP_FILES "")
