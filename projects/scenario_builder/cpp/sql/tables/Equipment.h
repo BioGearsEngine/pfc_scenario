@@ -163,6 +163,7 @@ public:
 
   Q_INVOKABLE void clear();
 
+
   Q_INVOKABLE void replaceField(int index, ParameterField* value);
   Q_INVOKABLE void removeField(int index);
 

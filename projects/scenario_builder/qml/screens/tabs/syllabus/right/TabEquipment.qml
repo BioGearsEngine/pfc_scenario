@@ -229,6 +229,7 @@ ScrollView {
   }
   onCurrentEquipmentChanged : {
     refresh_citations();
+    (currentEquipment) ? currentEquipment.parameters : []
   }
 
   Connections {

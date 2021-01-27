@@ -270,7 +270,7 @@ void EquipmentParameter::Type(Sustain::Type type)
 
   switch (type) {
   case Sustain::Type::CONST: //{ANY VLALUE CAN NOT BE CHANGED}
-    fields.append(ParameterField::make("Value", Sustain::Type::UNKNOWN, QVariant(),this));
+    fields.append(ParameterField::make("Value", Sustain::Type::UNKNOWN, QVariant(), this));
     //NOTE: It is a point of debate as to if the value of a type should have a type
     //NOTE: On one hand you could use he ParameterField:Type for validation, but its also redundent
     //NOTE: I thought about having an additional enum value ANY, but UNKNOWN seems to be fine.
@@ -281,8 +281,8 @@ void EquipmentParameter::Type(Sustain::Type type)
     fields.append(ParameterField::make("Max", Sustain::Type::REAL, 1., this));
     break;
   case Sustain::Type::SCALAR:
-    fields.append(ParameterField::make("Type", Sustain::Type::STRING, QVariant(),this));
-    fields.append(ParameterField::make("Unit", Sustain::Type::INTEGRAL,QVariant(), this));
+    fields.append(ParameterField::make("Type", Sustain::Type::STRING, QVariant(), this));
+    fields.append(ParameterField::make("Unit", Sustain::Type::INTEGRAL, QVariant(), this));
     //NOTE: All additional fields are of type eOption are represent valid unit demensions
     //      Abence of any eOption field means the scalar is without a demension
     break;
@@ -318,6 +318,7 @@ void EquipmentParameter::assign(const EquipmentParameter& rhs)
   eType = rhs.eType;
   name = rhs.name;
   enumOptions = rhs.enumOptions;
+  qDeleteAll(fields);
   fields.clear();
   for (auto field : rhs.fields) {
     fields.push_back(ParameterField::make());
@@ -469,9 +470,18 @@ void Equipment::assign(const Equipment& rhs)
   type = rhs.type;
   summary = rhs.summary;
   description = rhs.description;
-  citations = rhs.citations;
+
+  qDeleteAll(citations);
+  citations.clear();
+  for (auto citation : rhs.citations) {
+    citations.push_back(Citation::make());
+    citations.back()->assign(citation);
+  }
   image = rhs.image;
-  parameters = rhs.parameters;
+  for (auto parameter : rhs.parameters) {
+    parameters.push_back(EquipmentParameter::make());
+    parameters.back()->assign(parameter);
+  }
 }
 //--------------------------------------------------------------------------------------------
 void Equipment::clear()
@@ -482,10 +492,10 @@ void Equipment::clear()
   type = -1;
   summary.clear();
   description.clear();
-  // qDeleteAll(citations);
+  qDeleteAll(citations);
   citations.clear();
   image.clear();
-  // qDeleteAll(parameters);
+  qDeleteAll(parameters);
   parameters.clear();
 }
 //--------------------------------------------------------------------------------------------
@@ -626,6 +636,8 @@ QString Equipment::parametersToString()
 //-------------------------------------------------------------------------------
 void Equipment::parametersFromString(QString parameter_string)
 {
+  qDeleteAll(parameters);
+  parameters.clear();
   for (auto parameter : parameter_string.split(';')) {
     if (!parameter.isEmpty()) {
       parameters.push_back(EquipmentParameter::fromString(parameter, this));

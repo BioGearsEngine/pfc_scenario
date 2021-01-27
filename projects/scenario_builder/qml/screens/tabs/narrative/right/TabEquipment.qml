@@ -275,8 +275,8 @@ ColumnLayout {
 
           property int selfID : index
           property var currentMap       : (equipmentInSceneList.equipmentMaps[index]) ? equipmentInSceneList.equipmentMaps[index] : null
-          property var currentEquipment : (equipmentInSceneList.equipmentMaps[index]) ? equipmentInSceneList.equipmentMaps[index].equipment : null
-          property var parameters       : (equipmentInSceneList.equipmentMaps[index]) ? equipmentInSceneList.equipmentMaps[index].equipment.parameters : null
+          property var currentEquipment : (currentMap) ? currentMap.equipment : null
+          property var parameters       : (currentEquipment) ? currentEquipment.parameters : null
 
           anchors {
             left : parent.left;
@@ -388,7 +388,7 @@ ColumnLayout {
                 property var values : {
                   if ( equipmentMouseArea.currentMap ){
                     var v = ( equipmentMouseArea.currentMap.values ) ? equipmentMouseArea.currentMap.values.split(";") : []
-                    var delta = v.length - equipmentMouseArea.currentEquipment.parameters.length;
+                    var delta = v.length - equipmentMouseArea.parameters.length;
   
                     while (delta-- > 0) { v.pop(); }
                     while (delta++ < 0) { v.push(""); }
@@ -398,6 +398,7 @@ ColumnLayout {
                     return [];
                   }
                 }
+                
                 anchors {
                   left : parent.left
                   right : parent.right
@@ -634,7 +635,6 @@ ColumnLayout {
     }
 
     onEquipmentUpdated : {
-       console.log("Equipment was updated")
        refresh_an_equipment_definition( index )
        refresh_an_equipment_in_scene( index )
     }
