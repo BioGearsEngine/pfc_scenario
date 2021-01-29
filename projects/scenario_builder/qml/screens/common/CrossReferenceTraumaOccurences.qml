@@ -122,6 +122,7 @@ CrossReferenceForm {
       hoverEnabled : false
       enabled : false
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
+      selectByMouse : true
       onEditingFinished : {
         root.model[index].location = text ;
         traumaModified(index, root.model[index])
@@ -142,7 +143,7 @@ CrossReferenceForm {
       anchors.top : parent.top
       anchors.leftMargin : -5
       font.pointSize : 8
-
+      selectByMouse : true
       text : (root.model[index]) ? "%1".arg(root.model[index].severity / 100.0) : "0.0"
       placeholderText : "Severity Value"
       validator : DoubleValidator {

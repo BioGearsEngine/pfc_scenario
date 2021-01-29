@@ -12,7 +12,8 @@ ColumnLayout {
   id : root
   property SQLBackend backend
   property int topIndex
-  property TraumaProfile currentProfile : (profileList.traumaProfiles[profileList.currentIndex]) ? profileList.traumaProfiles[profileList.currentIndex] : traumaProfile_g
+  property TraumaProfile currentProfile : (profileList.traumaProfiles[profileList.currentIndex]) ? 
+                                           profileList.traumaProfiles[profileList.currentIndex] : traumaProfile_g
 
   TraumaProfile {
     id : traumaProfile_g

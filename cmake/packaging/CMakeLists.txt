@@ -84,7 +84,6 @@ if(WIN32 AND NOT UNIX)
   "         
   )
 
-\
   install(DIRECTORY 
       ${Qt5_ROOT_DIR}/plugins/
       DESTINATION bin/

@@ -60,6 +60,7 @@ ListOfAllForm {
       activeFocusOnPress : false
       hoverEnabled : false
       enabled : false
+      selectByMouse : true
       color : enabled ? Material.color(Material.BlueGrey, Material.Shade900) : Material.color(Material.BlueGrey, Material.Shade500)
       onActiveFocusChanged : {
         update_citation(root.model[index])
@@ -78,6 +79,7 @@ ListOfAllForm {
       activeFocusOnPress : false
       hoverEnabled : false
       enabled : false
+      selectByMouse : true
       color : enabled ? Material.color(Material.BlueGrey, Material.Shade900) : Material.color(Material.BlueGrey, Material.Shade500)
      onActiveFocusChanged : {
         update_citation(root.model[index])
@@ -97,6 +99,7 @@ ListOfAllForm {
       activeFocusOnPress : false
       hoverEnabled : false
       enabled : false
+      selectByMouse : true
       color : enabled ? Material.color(Material.BlueGrey, Material.Shade900) : Material.color(Material.BlueGrey, Material.Shade500)
       onActiveFocusChanged : {
         update_citation(root.model[index])
@@ -118,6 +121,7 @@ ListOfAllForm {
       activeFocusOnPress : false
       hoverEnabled : false
       enabled : false
+      selectByMouse : true
       color : enabled ? Material.color(Material.BlueGrey, Material.Shade900) : Material.color(Material.BlueGrey, Material.Shade500)
       onActiveFocusChanged : {
         update_citation(root.model[index])
@@ -133,10 +137,7 @@ ListOfAllForm {
 
     states : State {
       name : "Selected"
-      PropertyChanges {
-        target : citation_title_text;
-        readOnly : false
-      }
+
       PropertyChanges {
         target : citation_title_text;
         activeFocusOnPress : true
@@ -154,10 +155,7 @@ ListOfAllForm {
         mouseSelectionMode : TextInput.SelectCharacters
       }
 
-      PropertyChanges {
-        target : citation_key_text;
-        readOnly : false
-      }
+
       PropertyChanges {
         target : citation_key_text;
         activeFocusOnPress : true
@@ -175,10 +173,7 @@ ListOfAllForm {
         mouseSelectionMode : TextInput.SelectCharacters
       }
 
-      PropertyChanges {
-        target : citation_authors_text;
-        readOnly : false
-      }
+
       PropertyChanges {
         target : citation_authors_text;
         activeFocusOnPress : true
@@ -196,10 +191,7 @@ ListOfAllForm {
         mouseSelectionMode : TextInput.SelectCharacters
       }
 
-      PropertyChanges {
-        target : citation_year_text;
-        readOnly : false
-      }
+
       PropertyChanges {
         target : citation_year_text;
         activeFocusOnPress : true

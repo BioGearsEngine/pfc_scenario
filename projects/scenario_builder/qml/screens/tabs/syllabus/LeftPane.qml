@@ -68,6 +68,7 @@ Rectangle {
         syllabus_tabs.currentIndex = 5
       }
     }
+
     TabBar {
       id : syllabus_tabs
       Layout.fillWidth : true
@@ -108,6 +109,7 @@ Rectangle {
     }
 
     StackLayout {
+      focus:true
       id : syllabus_stack_left
       Layout.fillHeight : true
       Layout.fillWidth : true
@@ -150,6 +152,7 @@ Rectangle {
         }
       }
       TabAssessments {
+        focus:true
         id : assessments
         Layout.fillHeight : true
         Layout.fillWidth : true

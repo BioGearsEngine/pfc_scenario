@@ -33,6 +33,7 @@ ColumnLayout {
       text : author.first
       leftPadding : 5
       rightPadding : 5
+      selectByMouse : true
       onEditingFinished : {
         if (text != author.first) {
           author.first = text
@@ -50,6 +51,7 @@ ColumnLayout {
       text : author.middle
       leftPadding : 5
       rightPadding : 5
+      selectByMouse : true
       onEditingFinished : {
         if (text != author.first) {
           author.middle = text
@@ -67,6 +69,7 @@ ColumnLayout {
       text : author.last
       leftPadding : 5
       rightPadding : 5
+      selectByMouse : true
       onEditingFinished : {
         if (text != author.last) {
           author.last = text

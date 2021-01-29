@@ -423,6 +423,20 @@ ColumnLayout {
                 readOnly : true
                 activeFocusOnPress : false
                 hoverEnabled : false
+                selectByMouse : true
+                onActiveFocusChanged : {
+                  if ( equipmentMouseArea.currentMap.name != instanceNameField.text) {
+                    equipmentMouseArea.currentMap.name = instanceNameField.text;
+                    backend.update_equipment_in_scene(equipmentMouseArea.currentMap);
+                  }
+                }
+
+                onAccepted : {
+                  if ( equipmentMouseArea.currentMap.name != instanceNameField.text) {
+                    equipmentMouseArea.currentMap.name = instanceNameField.text;
+                    backend.update_equipment_in_scene(equipmentMouseArea.currentMap);
+                  }
+                }
               }
             }
             Rectangle {
@@ -555,7 +569,8 @@ ColumnLayout {
                       inputMethodHints : Qt.ImhDigitsOnly
                       anchors.rightMargin : 25
                       text : "1"
-
+                      property bool dirty : false
+                      selectByMouse : true
                       onAccepted : {
                         if (parameterListView.valueArray) {
                           if (text != parameterListView.valueArray[paramID]) {
@@ -566,16 +581,24 @@ ColumnLayout {
                         }
                       }
 
-                      Component.onCompleted : {
+                      onActiveFocusChanged : {
                         if (parameterListView.valueArray) {
-                          if (integralTypeComponent.text != parameterListView.valueArray[paramID]) {
-                            if (parameterListView.valueArray[paramID] !== "") {
-                              integralTypeComponent.text = parameterListView.valueArray[paramID];
-                            } else {
-                              parameterListView.valueArray[paramID] = integralTypeComponent.text;
-                            }
+                          if (text != parameterListView.valueArray[paramID]) {
+                            parameterListView.valueArray[paramID] = text;
+                            equipmentMouseArea.currentMap.values = parameterListView.valueArray.join(";");
+                            backend.update_equipment_in_scene(equipmentMouseArea.currentMap)
                           }
                         }
+                      }
+
+                      Component.onCompleted : {                        
+                        if (integralTypeComponent.text != parameterListView.valueArray[paramID]) {
+                          if (parameterListView.valueArray[paramID] !== "") {
+                            integralTypeComponent.text = parameterListView.valueArray[paramID];
+                          } else {
+                            parameterListView.valueArray[paramID] = integralTypeComponent.text;
+                          }
+                        }                        
                       }
                     }
 

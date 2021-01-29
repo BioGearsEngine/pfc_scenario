@@ -63,6 +63,7 @@ ListOfAllForm {
       activeFocusOnPress : false
       hoverEnabled : false
       enabled : false
+      selectByMouse : true
       color : enabled ? Material.color(Material.BlueGrey, Material.Shade900) : Material.color(Material.BlueGrey, Material.Shade500)
       onEditingFinished : {
         update_equipment(root.model[index])
@@ -80,6 +81,7 @@ ListOfAllForm {
       activeFocusOnPress : false
       hoverEnabled : false
       enabled : false
+      selectByMouse : true
       color : enabled ? Material.color(Material.BlueGrey, Material.Shade900) : Material.color(Material.BlueGrey, Material.Shade500)
       onEditingFinished : {
         update_equipment(root.model[index])
@@ -88,10 +90,7 @@ ListOfAllForm {
 
     states : State {
       name : "Selected"
-      PropertyChanges {
-        target : equipment_name_text;
-        readOnly : false
-      }
+
       PropertyChanges {
         target : equipment_name_text;
         activeFocusOnPress : true
@@ -109,10 +108,7 @@ ListOfAllForm {
         mouseSelectionMode : TextInput.SelectCharacters
       }
 
-      PropertyChanges {
-        target : equipment_description_text;
-        readOnly : false
-      }
+
       PropertyChanges {
         target : equipment_description_text;
         activeFocusOnPress : true

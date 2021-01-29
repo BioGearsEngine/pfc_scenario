@@ -37,6 +37,7 @@ Item {
     leftPadding : 5
     rightPadding: 5
     selectByMouse : true
+
     onEditingFinished : {
       root.editingFinished();
     }

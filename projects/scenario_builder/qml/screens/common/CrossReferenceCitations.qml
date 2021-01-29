@@ -55,6 +55,7 @@ CrossReferenceForm {
       hoverEnabled : false
       enabled : false
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
+      selectByMouse : true
       onEditingFinished : {
         update_citation(root.model[index])
       }
@@ -70,6 +71,7 @@ CrossReferenceForm {
       hoverEnabled : false
       enabled : false
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
+      selectByMouse : true
       onEditingFinished : {
         update_citation(root.model[index])
       }
@@ -86,6 +88,7 @@ CrossReferenceForm {
       hoverEnabled : false
       enabled : false
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
+      selectByMouse : true
       onEditingFinished : {
         update_citation(root.model[index])
       }
@@ -104,6 +107,7 @@ CrossReferenceForm {
       hoverEnabled : false
       enabled : false
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
+      selectByMouse : true
       onEditingFinished : {
         update_citation(root.model[index])
       }

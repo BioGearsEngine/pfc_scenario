@@ -1,4 +1,4 @@
-import QtQuick 2.4
+import QtQuick 2.12
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.12
@@ -44,8 +44,8 @@ ColumnLayout {
         var likely_id = root.backend.nextID(SQLBackend.ASSESSMENTS);
         assessment_g.clear(likely_id);
         root.backend.update_assessment(assessment_g);
-        assessmentList.currentIndex = assessmentList.assessmentDefinitions.length - 1
-        set_current_index(assessment_g.uuid)
+        assessmentList.currentIndex = assessmentList.assessmentDefinitions.length - 1;
+        set_current_index(assessment_g.uuid);
       }
       onSecondButtonClicked : {
         if (!assessmentList.assessmentDefinitions || assessmentList.assessmentDefinitions.length < 2) {
@@ -55,13 +55,14 @@ ColumnLayout {
         assessment_g.assign(assessmentList.assessmentDefinitions[assessmentList.currentIndex]);
         root.backend.remove_assessment(assessment_g);
         update_assessments();
-        assessmentList.currentIndex = Math.max(0, root.index - 1)
+        assessmentList.currentIndex = Math.max(0, root.index - 1);
       }
     }
 
     ListView {
       id : assessmentList
       property var assessmentDefinitions;
+      focus:true
 
       anchors {
         top : controls.bottom;
@@ -82,7 +83,7 @@ ColumnLayout {
 
       model : ListModel {}
 
-      delegate : Rectangle {
+      delegate : Rectangle {     
         id : assessment
         property var currentDef: assessmentList.assessmentDefinitions[index]
         color : 'transparent'
@@ -175,15 +176,15 @@ ColumnLayout {
     }
   }
 
-  function set_current_index( uuid ) {
+  function set_current_index(uuid) {
     for (var ii = 0; ii < assessmentList.assessmentDefinitions.length; ++ ii) {
-      if ( assessmentList.assessmentDefinitions[ii].uuid == uuid ){
+      if (assessmentList.assessmentDefinitions[ii].uuid == uuid) {
         assessmentList.currentIndex = ii
       }
     }
   }
   function update_assessments() {
-    var index = ( assessmentList.currentIndex >= 0) ? assessmentList.currentIndex : 0
+    var index = (assessmentList.currentIndex >= 0) ? assessmentList.currentIndex : 0
     assessmentList.assessmentDefinitions = []
     let assessments = root.backend.assessments;
     for (var ii = 0; ii < assessments.length; ++ ii) {

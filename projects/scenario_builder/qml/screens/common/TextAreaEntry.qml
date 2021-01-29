@@ -62,6 +62,13 @@ Rectangle {
       background : Rectangle { color: "transparent"}
       selectByMouse:true
       wrapMode: TextArea.Wrap
+
+      MouseArea {
+        anchors.fill: parent
+        cursorShape: Qt.IBeamCursor
+        acceptedButtons: Qt.NoButton
+      }
+
       onEditingFinished :{
         root.editingFinished();
       }

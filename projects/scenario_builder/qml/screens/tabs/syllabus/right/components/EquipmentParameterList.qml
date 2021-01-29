@@ -84,6 +84,7 @@ CrossReferenceForm {
           readOnly : true
           activeFocusOnPress : false
           hoverEnabled : false
+          selectByMouse : true
           onAccepted: {     
             if( root.model[selfID] ){
               root.model[selfID].name  = text
@@ -211,6 +212,7 @@ CrossReferenceForm {
                 focus: true
                 inputMethodHints: Qt.ImhDigitsOnly
                 text: root.model[index].fields[0].value
+                selectByMouse : true
                 onAccepted: {
                   if ( text != root.model[index].fields[0].value) {
                     root.model[index].fields[0].value = text
@@ -227,6 +229,7 @@ CrossReferenceForm {
                 focus: true
                 inputMethodHints: Qt.ImhDigitsOnly
                 text: root.model[index].fields[1].value
+                selectByMouse : true
                 onAccepted: {
                   if ( text != root.model[index].fields[1].value) {
                     root.model[index].fields[1].value = text
@@ -309,6 +312,7 @@ CrossReferenceForm {
                 height : 100
                 Layout.fillWidth : true
                 wrapMode: Text.Wrap
+                selectByMouse : true
                 text : {
                   var str = "";
                   var options = root.model[index].enumOptions;

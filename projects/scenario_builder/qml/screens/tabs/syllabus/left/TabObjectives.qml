@@ -12,7 +12,8 @@ ColumnLayout {
   id : root
   property SQLBackend backend
   property int topIndex
-  property Objective currentObjective : (objectiveList.objectiveDefinitions[objectiveList.currentIndex]) ? objectiveList.objectiveDefinitions[objectiveList.currentIndex] : objective_g
+  property Objective currentObjective : (objectiveList.objectiveDefinitions[objectiveList.currentIndex]) ? 
+                                         objectiveList.objectiveDefinitions[objectiveList.currentIndex] : objective_g
   focus : true
   Objective {
     id : objective_g

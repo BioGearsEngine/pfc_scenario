@@ -12,7 +12,8 @@ ColumnLayout {
   id : root
   property SQLBackend backend
   property int topIndex
-  property Treatment currentTreatment : (treatmentList.treatmentDefinitions[treatmentList.currentIndex]) ? treatmentList.treatmentDefinitions[treatmentList.currentIndex] : treatment_g
+  property Treatment currentTreatment : (treatmentList.treatmentDefinitions[treatmentList.currentIndex]) ? 
+                                         treatmentList.treatmentDefinitions[treatmentList.currentIndex] : treatment_g
 
   Treatment {
     id : treatment_g
