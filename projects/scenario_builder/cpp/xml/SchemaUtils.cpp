@@ -801,6 +801,7 @@ namespace schema {
       temp.uuid = QString::fromStdString(role.id());
       temp.name = QString::fromStdString(role.name());
       temp.description = QString::fromStdString(role.description());
+      temp.category = QString::fromStdString(role.category());
       if ( role.trauma_profile_ref().present()){
         profile.uuid = role.trauma_profile_ref()->c_str();
         _db.select_trauma_profile(&profile);
