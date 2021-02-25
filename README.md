@@ -11,7 +11,7 @@ Build Status
 | Platform | Compiler | Architecture | Status |
 |----------|----------|--------------|--------|
 | Windows  |  msvc15  | amd64        | ![Windows msvc15 Build  Status](https://biogearsengine.com/content/badges/pfc_windows_msvc15.png) |
-| Linux  |  gcc5.4  | amd64 | ![Linux-gcc5.4-amd64 Build Status](https://biogearsengine.com/content/badges/pfc_linux-gcc5.4-core2_64.png) |
+| Linux  |  gcc9  | amd64 | ![Linux-gcc9-amd64 Build Status](https://biogearsengine.com/content/badges/pfc_linux-gcc9-amd64.png) |
 
 Folder structure 
 =====================
