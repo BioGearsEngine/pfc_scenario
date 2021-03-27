@@ -49,7 +49,7 @@ CrossReferenceForm {
       anchors.left : parent.left
       anchors.leftMargin : 10
       font.pointSize : 10
-      text : (root.model) ? root.model[index].key : ""
+      text : (root.model && root.model[index]) ? root.model[index].key : ""
       readOnly : true
       activeFocusOnPress : false
       hoverEnabled : false
@@ -57,7 +57,10 @@ CrossReferenceForm {
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       selectByMouse : true
       onEditingFinished : {
-        update_citation(root.model[index])
+        if (root.model[index].key != text) {
+          root.model[index].key = text
+          update_citation(root.model[index])
+        }
       }
     }
     TextField {
@@ -65,7 +68,7 @@ CrossReferenceForm {
       anchors.left : citation_key_text.right
       anchors.leftMargin : 10
       font.pointSize : 10
-      text : (root.model) ? root.model[index].authors : ""
+      text : (root.model && root.model[index]) ? root.model[index].authors : ""
       readOnly : true
       activeFocusOnPress : false
       hoverEnabled : false
@@ -73,7 +76,10 @@ CrossReferenceForm {
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       selectByMouse : true
       onEditingFinished : {
-        update_citation(root.model[index])
+        if (root.model[index].authors != text) {
+          root.model[index].authors = text
+          update_citation(root.model[index])
+        }
       }
     }
 
@@ -82,7 +88,7 @@ CrossReferenceForm {
       anchors.left : citation_authors_text.right
       anchors.leftMargin : 10
       font.pointSize : 10
-      text : (root.model) ? root.model[index].year : ""
+      text : (root.model && root.model[index]) ? root.model[index].year : ""
       readOnly : true
       activeFocusOnPress : false
       hoverEnabled : false
@@ -90,7 +96,10 @@ CrossReferenceForm {
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       selectByMouse : true
       onEditingFinished : {
-        update_citation(root.model[index])
+        if (root.model[index].year != text) {
+          root.model[index].kyearey = text
+          update_citation(root.model[index])
+        }
       }
     }
     TextField {
@@ -98,7 +107,7 @@ CrossReferenceForm {
       anchors.left : citation_year_text.right
       anchors.right : parent.right
       anchors.leftMargin : 5
-      text : (root.model) ? root.model[index].title : ""
+      text : (root.model && root.model[index]) ? root.model[index].title : ""
       width : 150
       font.weight : Font.Bold
       font.pointSize : 10
@@ -109,35 +118,98 @@ CrossReferenceForm {
       color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
       selectByMouse : true
       onEditingFinished : {
-        update_citation(root.model[index])
+        if (root.model[index].title != text) {
+          root.model[index].title = text
+          update_citation(root.model[index])
+        }
       }
     }
 
     states : State {
       name : "Selected"
-      PropertyChanges { target : citation_title_text; readOnly : false }
-      PropertyChanges { target : citation_title_text; activeFocusOnPress : true }
-      PropertyChanges { target : citation_title_text; hoverEnabled : true }
-      PropertyChanges { target : citation_title_text; enabled : true }
-      PropertyChanges { target : citation_title_text; mouseSelectionMode : TextInput.SelectCharacters }
+      PropertyChanges {
+        target : citation_title_text;
+        readOnly : false
+      }
+      PropertyChanges {
+        target : citation_title_text;
+        activeFocusOnPress : true
+      }
+      PropertyChanges {
+        target : citation_title_text;
+        hoverEnabled : true
+      }
+      PropertyChanges {
+        target : citation_title_text;
+        enabled : true
+      }
+      PropertyChanges {
+        target : citation_title_text;
+        mouseSelectionMode : TextInput.SelectCharacters
+      }
 
-      PropertyChanges { target : citation_key_text; readOnly : false }
-      PropertyChanges { target : citation_key_text; activeFocusOnPress : true }
-      PropertyChanges { target : citation_key_text; hoverEnabled : true }
-      PropertyChanges { target : citation_key_text; enabled : true }
-      PropertyChanges { target : citation_key_text; mouseSelectionMode : TextInput.SelectCharacters }
+      PropertyChanges {
+        target : citation_key_text;
+        readOnly : false
+      }
+      PropertyChanges {
+        target : citation_key_text;
+        activeFocusOnPress : true
+      }
+      PropertyChanges {
+        target : citation_key_text;
+        hoverEnabled : true
+      }
+      PropertyChanges {
+        target : citation_key_text;
+        enabled : true
+      }
+      PropertyChanges {
+        target : citation_key_text;
+        mouseSelectionMode : TextInput.SelectCharacters
+      }
 
-      PropertyChanges { target : citation_authors_text; readOnly : false }
-      PropertyChanges { target : citation_authors_text; activeFocusOnPress : true }
-      PropertyChanges { target : citation_authors_text; hoverEnabled : true }
-      PropertyChanges { target : citation_authors_text; enabled : true }
-      PropertyChanges { target : citation_authors_text; mouseSelectionMode : TextInput.SelectCharacters }
+      PropertyChanges {
+        target : citation_authors_text;
+        readOnly : false
+      }
+      PropertyChanges {
+        target : citation_authors_text;
+        activeFocusOnPress : true
+      }
+      PropertyChanges {
+        target : citation_authors_text;
+        hoverEnabled : true
+      }
+      PropertyChanges {
+        target : citation_authors_text;
+        enabled : true
+      }
+      PropertyChanges {
+        target : citation_authors_text;
+        mouseSelectionMode : TextInput.SelectCharacters
+      }
 
-      PropertyChanges { target : citation_year_text; readOnly : false }
-      PropertyChanges { target : citation_year_text; activeFocusOnPress : true }
-      PropertyChanges { target : citation_year_text; hoverEnabled : true }
-      PropertyChanges { target : citation_year_text; enabled : true }
-      PropertyChanges { target : citation_year_text; mouseSelectionMode : TextInput.SelectCharacters }
+      PropertyChanges {
+        target : citation_year_text;
+        readOnly : false
+      }
+      PropertyChanges {
+        target : citation_year_text;
+        activeFocusOnPress : true
+      }
+      PropertyChanges {
+        target : citation_year_text;
+        hoverEnabled : true
+      }
+      PropertyChanges {
+        target : citation_year_text;
+        enabled : true
+      }
+      PropertyChanges {
+        target : citation_year_text;
+        mouseSelectionMode : TextInput.SelectCharacters
+      }
     }
 
     onFocusChanged : {
