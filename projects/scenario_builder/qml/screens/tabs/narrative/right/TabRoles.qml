@@ -129,7 +129,7 @@ ColumnLayout {
           id : full_role
           color : Material.color(Material.BlueGrey)
           border.color : "steelblue"
-          height : full_role_title_text.height + full_role_value_text.height
+          height : full_role_title_text.height + full_role_value_text.height + full_role_trauma_text.height
           anchors {
             left : parent.left;
             right : parent.right;
@@ -186,9 +186,36 @@ ColumnLayout {
           Text {
             id : full_role_value_text
             anchors.left : full_role_value_label.right
+            anchors.right : parent.right
+            anchors.top : full_role_value_label.top
             anchors.leftMargin : 5
             text : (allRolesList.roles[index]) ? allRolesList.roles[index].description : "Description of the role"
-
+            wrapMode : Text.WordWrap
+            font.weight : Font.Bold
+            font.pointSize : 10
+            enabled : false
+            color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
+          }
+          Label {
+            id : full_role_trauma_label
+            anchors.top : full_role_value_text.bottom
+            anchors.left : parent.left
+            anchors.leftMargin : 5
+            font.weight : Font.Bold
+            font.pointSize : 10
+            width : 100
+            text : "Trauma Profile: "
+            enabled : false
+            color : enabled ? Material.color(Material.Grey) : Material.secondaryTextColor
+            elide : Text.ElideRight
+          }
+          Text {
+            id : full_role_trauma_text
+            anchors.left : full_role_trauma_label.right
+            anchors.top : full_role_trauma_label.top
+            anchors.leftMargin : 5
+            text : (allRolesList.roles[index]) ? allRolesList.roles[index].trauma_profile.name : "Description of the role"
+            wrapMode : Text.WordWrap
             font.weight : Font.Bold
             font.pointSize : 10
             enabled : false
@@ -206,11 +233,19 @@ ColumnLayout {
               enabled : true
             }
             PropertyChanges {
+              target : full_role_trauma_text;
+              enabled : true
+            }
+            PropertyChanges {
               target : full_role_title_label;
               enabled : true
             }
             PropertyChanges {
               target : full_role_value_label;
+              enabled : true
+            }
+            PropertyChanges {
+              target : full_role_trauma_label;
               enabled : true
             }
           }
