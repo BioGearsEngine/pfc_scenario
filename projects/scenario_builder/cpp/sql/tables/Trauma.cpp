@@ -4,7 +4,8 @@
 
 Trauma::Trauma(QObject* parent)
   : QObject(parent)
-  , fk_treatment(new Treatment())
+  , fk_treatment(new Treatment(this))
+  , fk_image(new Image(this))
 {
 }
 //-------------------------------------------------------------------------------
@@ -16,7 +17,9 @@ bool Trauma::operator==(const Trauma& rhs) const
     && citations == rhs.citations
     && lower_bound == rhs.lower_bound
     && upper_bound == rhs.upper_bound
-    && fk_treatment == rhs.fk_treatment;
+    && *fk_treatment == *rhs.fk_treatment
+    && *fk_image == *rhs.fk_image
+    ;
 }
 //-------------------------------------------------------------------------------
 bool Trauma::operator!=(const Trauma& rhs) const
@@ -52,6 +55,7 @@ void Trauma::assign(const Trauma& rhs)
     citations.back()->assign(citation);
   }
   fk_treatment->assign(rhs.fk_treatment);
+  fk_image->assign(rhs.fk_image);
 }
 //-------------------------------------------------------------------------------
 void Trauma::clear()
@@ -66,6 +70,7 @@ void Trauma::clear()
   lower_bound = 0;
   upper_bound = 1;
   fk_treatment->clear();
+  fk_image->clear();
 }
 //-------------------------------------------------------------------------------
 void Trauma::clear(int index)
@@ -80,6 +85,7 @@ void Trauma::clear(int index)
   lower_bound = 0;
   upper_bound = 1;
   fk_treatment->clear();
+  fk_image->clear();
 }
 //-------------------------------------------------------------------------------
 QQmlListProperty<Citation> Trauma::getCitations()

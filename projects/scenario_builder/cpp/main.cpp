@@ -48,6 +48,7 @@ int main(int argc, char* argv[])
   qmlRegisterType<EquipmentMap>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "EquipmentMap");
   qmlRegisterType<Event>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Event");
   qmlRegisterType<EventMap>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "EventMap");
+  qmlRegisterType<Image>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Image");
   qmlRegisterType<Trauma>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "Trauma");
   qmlRegisterType<TraumaProfile>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "TraumaProfile");
   qmlRegisterType<TraumaOccurence>("com.ara.pfc.ScenarioModel.SQL", 1, 0, "TraumaOccurence");

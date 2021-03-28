@@ -3,6 +3,7 @@
 #include "tables/Citation.h"
 #include "tables/Equipment.h"
 #include "tables/Event.h"
+#include "tables/Image.h"
 #include "tables/Location.h"
 #include "tables/Objective.h"
 #include "tables/Property.h"

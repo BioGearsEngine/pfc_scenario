@@ -18,6 +18,8 @@ specific language governing permissions and limitations under the License.
 #include <QQmlListProperty>
 #include <QString>
 
+#include "Image.h"
+
 struct TraumaProfile;
 struct Treatment;
 struct Trauma;
@@ -66,6 +68,7 @@ struct TraumaProfile : public QObject {
   Q_PROPERTY(QString description MEMBER description NOTIFY descriptionChanged)
   Q_PROPERTY(QQmlListProperty<TraumaOccurence> traumas READ get_traumas NOTIFY traumasChanged);
   Q_PROPERTY(QStringList physiologyTree MEMBER physiologyTree NOTIFY physiologyTreeChanged)
+  Q_PROPERTY(Image* treatment MEMBER fk_image NOTIFY imageChanged)
 
 public:
   int32_t id = -1;
@@ -74,6 +77,7 @@ public:
   QString description = "";
   QList<TraumaOccurence*> traumas;
   QStringList physiologyTree;
+  Image* fk_image;
 
   TraumaProfile(QObject* parent = nullptr);
   TraumaProfile(const TraumaProfile&) = delete;
@@ -102,6 +106,7 @@ signals:
   void descriptionChanged();
   void traumasChanged();
   void physiologyTreeChanged();
+  void imageChanged();
 
 private:
   QQmlListProperty<TraumaOccurence> get_traumas();

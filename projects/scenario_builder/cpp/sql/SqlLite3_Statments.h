@@ -333,6 +333,7 @@ inline namespace sqlite3 {
       "citations"  TEXT,
       "lower_bound"  REAL DEFAULT 0.0,
       "upper_bound"  REAL DEFAULT 1.0,
+      "fk_image" INTEGER,
       PRIMARY KEY("trauma_id"),
       UNIQUE("uuid")
     );
@@ -403,6 +404,7 @@ inline namespace sqlite3 {
       "traumas"  TEXT,
       "locations"  TEXT,
       "severities"  TEXT,
+      "fk_image" INTEGER,
       PRIMARY KEY("trauma_profile_id"),
       UNIQUE("uuid")
     );
@@ -445,6 +447,66 @@ inline namespace sqlite3 {
                         , severities = excluded.severities
           ;
           )";
+
+//---------------------- IMAGES STATMENTS ------------------------
+  enum IMAGES_COLUMNS {
+    IMAGES_ID,
+    IMAGES_UUID,
+    IMAGES_URI,
+    IMAGES_WIDTH,
+    IMAGES_HEIGHT,
+    IMAGES_FORMAT,
+    IMAGES_COLUMN_COUNT
+  };
+
+  constexpr auto create_images_table = R"(
+    CREATE TABLE IF NOT EXISTS "images" (
+      "image_id"  INTEGER,
+      "uuid"  TEXT,
+      "uri"  Varchar(64) NOT NULL UNIQUE,
+      "width"  INTEGER,
+      "height"  INTEGER,
+      "format"  Varchar(64) NOT NULL,
+      PRIMARY KEY("image_id"),
+      UNIQUE("uuid")
+    );
+  )";
+
+  constexpr auto drop_all_images = R"( DELETE FROM images; )";
+  constexpr auto count_images = R"( SELECT COUNT(image_id) FROM images; )";
+  constexpr auto select_all_images = R"( SELECT * FROM images ORDER BY uri; )";
+
+  constexpr auto select_image_by_id
+    = R"( SELECT * FROM images WHERE image_id = :id; )";
+  constexpr auto update_image_by_id
+    = R"( UPDATE  images 
+          SET
+                uri = :uri
+              , uuid = :uuid
+              , width = :width
+              , height = :height
+              , format = :format
+          WHERE image_id = :id;
+         )";
+  constexpr auto delete_image_by_id
+    = R"( DELETE FROM images WHERE image_id = :id; )";
+  constexpr auto delete_image_by_uri
+    = R"( DELETE FROM images WHERE uri = :uri; )";
+  constexpr auto select_image_by_uri
+    = R"( SELECT * FROM images WHERE uri = :uri ORDER BY image_id; )";
+  constexpr auto insert_or_update_images
+    = R"( INSERT INTO images
+          (uri,uuid,width,height,format)
+          VALUES (:uri, :uuid, :width, :height, :format)
+          ON CONFLICT (uri)
+          DO UPDATE SET uri = excluded.uri
+                       , uuid= excluded.uuid
+                       , width = excluded.width
+                       , height = excluded.height
+                       , format= excluded.format
+         ;
+         )";
+
   //---------------------- LOCATION STATMENTS ------------------------
   enum LOCATION_COLUMNS {
     LOCATION_ID,
@@ -757,6 +819,7 @@ inline namespace sqlite3 {
     name TEXT,
     property_values TEXT,
     notes TEXT,
+    "fk_image" INTEGER,
     UNIQUE("fk_scene","fk_equipment","name")
   );
   )";
@@ -1148,6 +1211,7 @@ inline namespace sqlite3 {
       "equipment"  TEXT,
       "citations"  TEXT,
       "cpgs"  TEXT,
+      "fk_image" INTEGER,
       PRIMARY KEY("treatment_id"),
       UNIQUE("uuid")
     );

@@ -18,6 +18,8 @@ specific language governing permissions and limitations under the License.
 #include <QQmlListProperty>
 #include <QString>
 
+#include "Image.h"
+
 struct Equipment;
 struct Citation;
 
@@ -28,9 +30,10 @@ struct Treatment : public QObject {
   Q_PROPERTY(QString medicalName MEMBER medical_name NOTIFY medicalNameChanged)
   Q_PROPERTY(QString commonName MEMBER common_name NOTIFY commonNameChanged)
   Q_PROPERTY(QString description MEMBER description NOTIFY descriptionChanged)
+  Q_PROPERTY(Image* image MEMBER fk_image NOTIFY imageChanged)
   Q_PROPERTY(QQmlListProperty<Equipment> equipment READ getEquipment NOTIFY equipmentChanged)
-  Q_PROPERTY(QQmlListProperty<Citation>  citations READ getCitations NOTIFY citationsChanged)
-  Q_PROPERTY(QQmlListProperty<Citation>  cpgs READ getCPGS NOTIFY cpgsChanged)
+  Q_PROPERTY(QQmlListProperty<Citation> citations READ getCitations NOTIFY citationsChanged)
+  Q_PROPERTY(QQmlListProperty<Citation> cpgs READ getCPGS NOTIFY cpgsChanged)
 
 signals:
   void idChanged();
@@ -41,8 +44,9 @@ signals:
   void equipmentChanged();
   void citationsChanged();
   void cpgsChanged();
+  void imageChanged();
 
-  public:
+public:
   int32_t id = -1;
   QString uuid = "";
   QString medical_name = "";
@@ -51,6 +55,7 @@ signals:
   QList<Equipment*> equipment;
   QList<Citation*> citations;
   QList<Citation*> cpgs;
+  Image* fk_image;
 
   Treatment(QObject* parent = nullptr);
   Treatment(const Treatment&) = delete;

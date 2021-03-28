@@ -3,12 +3,12 @@ import QtQuick.Window 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.12
 import QtQuick.Controls.Material 2.0
-import com.ara.pfc.ScenarioModel.SQL 1.0
+import com.ara.pfc.ScenarioModel.SQL 1.0 as PFC
 import com.ara.pfc.ScenarioModel.XML 1.0
 
 Page {
   id : root
-  property SQLBackend backend
+  property PFC.SQLBackend backend
   signal loadClicked()
   signal createClicked()
   signal listUpdated()

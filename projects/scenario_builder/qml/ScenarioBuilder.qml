@@ -9,8 +9,8 @@ import Qt.labs.platform 1.1  as Labs
 
 import "screens"
 
-import com.ara.pfc.ScenarioModel 1.0
-import com.ara.pfc.ScenarioModel.SQL 1.0
+import com.ara.pfc.ScenarioModel 1.0 
+import com.ara.pfc.ScenarioModel.SQL 1.0 as PFC
 import com.ara.pfc.ScenarioModel.XML 1.0
 
 
@@ -124,7 +124,7 @@ ApplicationWindow {
     }
   }
 
-  SQLBackend {
+  PFC.SQLBackend {
     id : scenario_model
     name : "pfc_sb_working.sqlite"
   }
@@ -233,7 +233,7 @@ ApplicationWindow {
     mainView.push(scenarioScreen, {backend: model})
   }
 
-  Property {
+  PFC.Property {
     id : property_g
   }
   function save_scenario() {

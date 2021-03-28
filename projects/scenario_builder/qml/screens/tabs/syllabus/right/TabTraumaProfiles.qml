@@ -2,24 +2,26 @@ import QtQuick 2.0
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
-
+import QtQuick.Dialogs 1.3
+import Qt.labs.settings 1.1
+import Qt.labs.platform 1.1 as Labs
 import "../../../common"
 
-import com.ara.pfc.ScenarioModel.SQL 1.0
+import com.ara.pfc.ScenarioModel.SQL 1.0 as PFC
 
 ColumnLayout {
   id : root
-  property SQLBackend backend
-  property TraumaProfile currentProfile
+  property PFC.SQLBackend backend
+  property PFC.TraumaProfile currentProfile
   property int topIndex // topIndex is the index of the top set of 4 tabs
 
   Layout.fillWidth : true
   Layout.fillHeight : true
 
-  Trauma {
+  PFC.Trauma {
     id : trauma_g
   }
-  TraumaOccurence {
+  PFC.TraumaOccurence {
     id : occurence_g
   }
 
@@ -135,13 +137,37 @@ ColumnLayout {
     Button {
       id : physiologyButton
       text : "Browse"
+
+      FileDialog {
+        id : browseDialog
+        title : "Please Choose a File:"
+        visible : false
+        selectMultiple : false
+        selectExisting : true
+        nameFilters : ["Images (*.jpg *.png *.bmp)", "All files (*)"]
+        folder : Labs.StandardPaths.writableLocation(Labs.StandardPaths.PicturesLocation)
+        onAccepted : {
+          console.log("Selected %1".arg(browseDialog.fileUrls.toString()));
+          currentProfile.image.clear();
+          currentProfile.image.uri = browseDialog.fileUrls.toString();
+          currentProfile.image.cache(currentProfile.uuid);
+          update_trauma_profile(currentProfile);
+        }
+        onRejected : {
+          console.log("Canceled")
+        }
+      }
+
+      onClicked : {
+        browseDialog.open()
+      }
     }
   }
 
   onCurrentProfileChanged : {
     refresh_traumas()
   }
-    
+
   Connections {
     target : backend
   }

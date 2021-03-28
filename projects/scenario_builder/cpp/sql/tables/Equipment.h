@@ -18,35 +18,33 @@ specific language governing permissions and limitations under the License.
 #include <QQmlListProperty>
 #include <QString>
 
+#include "Image.h"
+
 struct Citation;
 
-
 class Sustain : public QObject {
-Q_OBJECT
+  Q_OBJECT
 public:
-Sustain(QObject* parent = nullptr);
+  Sustain(QObject* parent = nullptr);
 
   enum Type {
-  UNKNOWN = 0,
-  STRING,
-  BOOLEAN,
-  INTEGRAL,
-  REAL,
-  RANGE,
-  SCALAR,
-  ENUM,
-  eOPTION,  
-  CONST
+    UNKNOWN = 0,
+    STRING,
+    BOOLEAN,
+    INTEGRAL,
+    REAL,
+    RANGE,
+    SCALAR,
+    ENUM,
+    eOPTION,
+    CONST
   };
   Q_ENUM(Type)
-
 };
 
-                                                                                                        
 QString TypeToString(Sustain::Type value);
 Sustain::Type TypeFromString(QString value);
 Sustain::Type TypeFromString(std::string value);
-                                                                                                                                                                                                                                      
 
 struct ParameterField : public QObject {
   Q_OBJECT
@@ -93,15 +91,14 @@ public:
   void clear();
 
 signals:
-    void variantValueChanged(QVariant value);
+  void variantValueChanged(QVariant value);
 };
-
 
 //!
 //!   Equipment Parmaters are fields for storing values that can be changed when an equipment is instanced
 //!
 //!   While EquipmentParameter is designed to be generic allowing custom types with arbitary subfields
-//!   Currently the underlying type is limited to the following 
+//!   Currently the underlying type is limited to the following
 //!    UNKNOWN,
 //!    STRING,  0 Subfields  1 Implict Field Value  [Any Arbitary Char String]
 //!    BOOLEAN, 0 Subfields  1 Implict Field Value  [0=False 1=True]
@@ -111,9 +108,9 @@ signals:
 //!    ENUM     N subfields (stored internally as enumOptions)  Values Enum can be turned in to
 //!    eOPTION  Enum Value used only programatically for subfields of an enum
 //!    REAL     Subtype for ParameterFields for the numerical component of a SCALAR. For demensional SCALARS  use SCALAR and set the enum component to None
-//!    
+//!
 //!    Currently setting the type using the constructor or Type(Sustain::Type) functions will erase the curent fields and enum options
-//!    To create a properly formed paramater of that type.  Additiona/Fields can be created and removed once this is done for the creation of 
+//!    To create a properly formed paramater of that type.  Additiona/Fields can be created and removed once this is done for the creation of
 //!    CUSTOM parameters but it is best left to leave the SUSTAIN::TYPE to UNKNOWN when this occurs and the UI currently will not reflect these p
 //!    parameters correctly. Or Range from -Inf , +Inf
 
@@ -163,7 +160,6 @@ public:
 
   Q_INVOKABLE void clear();
 
-
   Q_INVOKABLE void replaceField(int index, ParameterField* value);
   Q_INVOKABLE void removeField(int index);
 
@@ -181,16 +177,16 @@ private:
 };
 
 //!
-//!  Equipment is any item that cna be used in a scenario 
+//!  Equipment is any item that cna be used in a scenario
 //!
 //!
-//! 
+//!
 //! Type is defined as the following categories
-    //0: OTHER
-    //1: Equipment (IV Pole, Monitor, Oxygen Tank)
-    //2: Attachment (Tempus Pro, Splint)
-    //3:Substance (Drugs)
-    //4:Consumable Equipment (IV Bags, Syringes)
+//0: OTHER
+//1: Equipment (IV Pole, Monitor, Oxygen Tank)
+//2: Attachment (Tempus Pro, Splint)
+//3:Substance (Drugs)
+//4:Consumable Equipment (IV Bags, Syringes)
 struct Equipment : public QObject {
   Q_OBJECT
   Q_PROPERTY(int equipment_id MEMBER id NOTIFY idChanged)
@@ -200,9 +196,8 @@ struct Equipment : public QObject {
   Q_PROPERTY(QString summary MEMBER summary NOTIFY summaryChanged)
   Q_PROPERTY(QString description MEMBER description NOTIFY descriptionChanged)
   Q_PROPERTY(QQmlListProperty<Citation> citations READ getCitations NOTIFY citationsChanged)
-  Q_PROPERTY(QString image MEMBER image NOTIFY imageChanged)
+  Q_PROPERTY(Image* image MEMBER fk_image NOTIFY imageChanged)
   Q_PROPERTY(QQmlListProperty<EquipmentParameter> parameters READ getParameters NOTIFY propertiesChanged)
-
 public:
   int32_t id = -1;
   QString uuid = "";
@@ -211,9 +206,8 @@ public:
   QString summary = "";
   QString description = "";
   QList<Citation*> citations;
-  QString image = "";
+  Image* fk_image;
   QList<EquipmentParameter*> parameters;
-
 signals:
   void idChanged(int);
   void uuidChanged(QString);
@@ -222,8 +216,9 @@ signals:
   void summaryChanged(QString);
   void descriptionChanged(QString);
   void citationsChanged();
-  void imageChanged(QString);
+  void imageChanged();
   void propertiesChanged();
+  
   void refreshed();
 
 public:

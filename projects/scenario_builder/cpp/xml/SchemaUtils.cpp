@@ -9,6 +9,9 @@
 #include <QDebug>
 #include <QString>
 #include <QUuid>
+#include <QImage>
+#include <QRegularExpression>
+
 
 namespace pfc {
 
@@ -457,7 +460,7 @@ namespace schema {
                                                               make_citation_ref_list(input->citations, _db),
                                                               make_equipment_properties_list(input->parameters));
     equipment->type(input->type);
-    equipment->image(make_string(input->image));
+    equipment->image(make_string(input->fk_image->uri));
 
     return equipment;
   }
@@ -554,22 +557,22 @@ namespace schema {
                                         : QUuid::createUuid().toString(QUuid::WithoutBraces);
 
     temp.first = QString::fromStdString(author.first_name().get());
-    if (author.other_names().present()){
+    if (author.other_names().present()) {
       temp.middle = QString::fromStdString(author.other_names().get());
     }
-    
+
     temp.last = QString::fromStdString(author.last_name().get());
     temp.email = QString::fromStdString(author.email().get());
-    QString  zip= author.zip()->c_str();
-    auto     zip_array = zip.split("-");
+    QString zip = author.zip()->c_str();
+    auto zip_array = zip.split("-");
     temp.zip = zip_array[0];
-    if(zip_array.size() > 1){
+    if (zip_array.size() > 1) {
       temp.plus_4 = zip_array[1];
     }
     temp.state = QString::fromStdString(author.state().get());
     temp.country = QString::fromStdString(author.country().get());
     temp.phone = QString::fromStdString(author.phone_number().get());
-    if( author.organization().present()){
+    if (author.organization().present()) {
       temp.organization = QString::fromStdString(author.organization().get());
     }
     if (!_db.update_author(&temp)) {
@@ -630,7 +633,21 @@ namespace schema {
       temp.summary = QString::fromStdString(equipment.summary());
       temp.description = QString::fromStdString(equipment.description());
       temp.type = equipment.type().get();
-      temp.image = QString::fromStdString(*equipment.image());
+      if (equipment.image().present() && !equipment.image().get().empty()) {
+        temp.fk_image->uri = equipment.image().get().c_str();
+        if (!_db.select_image(temp.fk_image)) {
+          _db.update_image(temp.fk_image);
+        } 
+      } else {    
+        QImage qimage { ":/img/equipment_placeholder.png" };
+        temp.fk_image->uri = "qrc:/img/equipment_placeholder.png";
+        temp.fk_image->format= "png";
+        temp.fk_image->width = qimage.width();
+        temp.fk_image->height = qimage.height();
+        if (!_db.select_image(temp.fk_image)) {
+          _db.update_image(temp.fk_image);
+        }
+      }
 
       Citation* citation;
       for (auto& citation_uuid : equipment.citations().citation_ref()) {
@@ -688,6 +705,30 @@ namespace schema {
     }
     wasSuccessful = true;
     return scenario_schema;
+  }
+  //-----------------------------------------------------------------------------
+  auto PFC::load_images(QList<QString>&& uris,  pfc::SQLite3Driver& _db, bool& wasSuccessful) -> void{
+    for ( auto& uri : uris){
+      
+      Image image;
+      QImage qimage { uri };
+      QRegularExpression rx(R"(.*\.(.*))");
+      QRegularExpressionMatch match;
+
+      QStringList list;
+      if ( !qimage.isNull() ) {
+        image.uri = uri;
+        image.width = qimage.width();
+        image.height = qimage.height();
+        match = rx.match(uri);
+        if ( match.hasMatch() ) {
+          image.format = match.captured(1);
+        } else {
+          image.format = "UNKNOWN";
+        }
+        _db.update_image(&image);
+      }
+    }
   }
   //-----------------------------------------------------------------------------
   auto PFC::load_trauma(std::unique_ptr<::pfc::schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<::pfc::schema::ScenarioSchema>
@@ -802,11 +843,11 @@ namespace schema {
       temp.name = QString::fromStdString(role.name());
       temp.description = QString::fromStdString(role.description());
       temp.category = QString::fromStdString(role.category());
-      if ( role.trauma_profile_ref().present()){
+      if (role.trauma_profile_ref().present()) {
         profile.uuid = role.trauma_profile_ref()->c_str();
         _db.select_trauma_profile(&profile);
         temp.trauma_profile->assign(&profile);
-      }  else {
+      } else {
         profile.id = 0;
         _db.select_trauma_profile(&profile);
         temp.trauma_profile->assign(&profile);

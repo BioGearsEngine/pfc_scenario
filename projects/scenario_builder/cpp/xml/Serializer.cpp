@@ -10,6 +10,7 @@
 
 #include <QDebug>
 #include <QDir>
+#include <QDirIterator>
 #include <QUrl>
 #include <QtDebug>
 
@@ -165,6 +166,27 @@ bool Serializer::save_as(const QString& filename) const
     mz_zip_writer_add_buffer(writer, (void*)std::get<2>(tuple), (int32_t)std::get<1>(tuple), &file_info);
   }
 
+  QDirIterator images("/tmp/images", QDirIterator::NoIteratorFlags);
+  while (images.hasNext()) {
+    QFile file(images.next());
+    QFileInfo info { file };
+    file_info.filename = file.fileName().toStdString().c_str();
+    file_info.uncompressed_size = info.size();
+    QByteArray data = file.readAll();
+    mz_zip_writer_add_buffer(writer, (void*)data.data(), (int32_t)data.size(), &file_info);
+  }
+
+  QDirIterator physiolgoy ("/temp/physiology/", QDirIterator::NoIteratorFlags);
+  while (physiolgoy.hasNext()) {
+    QFile file(physiolgoy.next());
+    QFileInfo info { file };
+
+    file_info.filename = file.fileName().toStdString().c_str();
+    file_info.uncompressed_size = info.size();
+    QByteArray data = file.readAll();
+    mz_zip_writer_add_buffer(writer, (void*)data.data(), (int32_t)data.size(), &file_info);
+  }
+
   mz_zip_writer_close(writer);
   mz_zip_writer_delete(&writer);
 
@@ -248,7 +270,6 @@ bool Serializer::load(const QString& filename)
 
   if (_known_schemas.size() != schemas_v3.size()) {
     for (auto schema : schemas_v3) {
-
       QFileInfo schemaPath { QString("tmp/") + std::get<0>(schema) };
       if (!schemaPath.dir().exists()) {
         schemaPath.dir().mkpath(".");
@@ -367,6 +388,9 @@ bool Serializer::load(const QString& filename)
           throw std::runtime_error("Failed to load properties");
         }
         if (successful) {
+          pfc::schema::PFC::load_images(std::move(_known_images), scratch_db, successful);
+        }
+        if (successful) {
           scenario_schema = pfc::schema::PFC::load_assessments(std::move(scenario_schema), scratch_db, successful);
         } else {
           throw std::runtime_error("Failed to load authors");
@@ -450,7 +474,6 @@ bool Serializer::load(const QString& filename)
 
       mz_zip_reader_delete(&reader); //Removing the Reader if this moves below the try remember you must always cal this function before leaving this function
       QDir::setCurrent(fallback);
-      
     }
   } else {
     mz_zip_reader_delete(&reader);

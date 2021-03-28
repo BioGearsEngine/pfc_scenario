@@ -78,6 +78,7 @@ public:
   Q_PROPERTY(QQmlListProperty<Role>         roles         READ getRoles  NOTIFY rolesChanged)
   Q_PROPERTY(QQmlListProperty<Event>        events        READ getEvents NOTIFY eventsChanged)
   Q_PROPERTY(QQmlListProperty<Scene>        scenes        READ getScenes NOTIFY scenesChanged)
+  Q_PROPERTY(QQmlListProperty<Image>        images        READ getImages NOTIFY imagesChanged)
 
 public:
   enum Sqlite3Table {
@@ -89,6 +90,7 @@ public:
     EVENT_MAPS,
     EQUIPMENTS,
     EQUIPMENT_MAPS,
+    IMAGES,
     TRAUMAS,
     TRAUMA_PROFILES,
     LOCATIONS,
@@ -113,6 +115,7 @@ public:
     { EVENT_MAPS, "event_maps" },
     { EQUIPMENTS, "equipments" },
     { EQUIPMENT_MAPS, "equipment_map" },
+    { IMAGES, "images" },
     { TRAUMAS, "traumas" },
     { TRAUMA_PROFILES, "trauma_profiles" },
     { LOCATIONS, "locations" },
@@ -174,6 +177,7 @@ public:
   Q_INVOKABLE int event_count(Scene const*) const;
   Q_INVOKABLE int citation_count(Scene const*) const;
   Q_INVOKABLE int scene_count() const;
+  Q_INVOKABLE int image_count() const;
 
   Q_INVOKABLE int nextID(Sqlite3Table) const;
   
@@ -209,10 +213,10 @@ public:
   QList<CitationMap*> citation_maps() const;
   QList<EquipmentMap*> equipment_maps() const;
   QList<Event*> events() const;
-  QList<Event*> events_in_scene(Scene const* scene) const;
-  
+  QList<Event*> events_in_scene(Scene const* scene) const;  
   QList<EquipmentMap*> equipment_in_scene(Scene const* scene) const;
   QList<Scene*> scenes() const;
+  QList<Image*> images() const;
 
   Q_INVOKABLE QQmlListProperty<Author> getAuthors() const;
   Q_INVOKABLE QString getProperty(QString name) const;
@@ -235,6 +239,7 @@ public:
   Q_INVOKABLE QQmlListProperty<RoleMap> getRolesInScene(Scene* scene) const;
   Q_INVOKABLE QQmlListProperty<Event> getEvents() const;
   Q_INVOKABLE QQmlListProperty<Scene> getScenes() const;
+  Q_INVOKABLE QQmlListProperty<Image> getImages() const;
 
   Q_INVOKABLE bool select_author(Author*) const;
   Q_INVOKABLE bool select_property(Property*) const;
@@ -254,6 +259,7 @@ public:
   Q_INVOKABLE bool select_role(Role*) const;
   Q_INVOKABLE bool select_event(Event*) const;
   Q_INVOKABLE bool select_scene(Scene*) const;
+  Q_INVOKABLE bool select_image(Image*) const;
 
   Q_INVOKABLE bool update_author(Author*);
   Q_INVOKABLE bool update_first_author(Author*);
@@ -266,9 +272,9 @@ public:
   Q_INVOKABLE bool update_citation_map(CitationMap*);
   Q_INVOKABLE bool update_equipment_map(EquipmentMap*);
   Q_INVOKABLE bool update_role(Role*);
+  Q_INVOKABLE bool update_image(Image*);
   Q_INVOKABLE bool update_role_in_scene(Scene*, Role*);
   Q_INVOKABLE bool update_location_in_scene(Scene*, Location*);
-
   Q_INVOKABLE bool update_event(Event*);
   Q_INVOKABLE bool update_event_in_scene(Scene*, Event*);
   Q_INVOKABLE bool update_citation(Citation*);
@@ -289,6 +295,7 @@ public:
   Q_INVOKABLE bool remove_treatment(Treatment*);
   Q_INVOKABLE bool remove_equipment(Equipment*);
   Q_INVOKABLE bool remove_equipment_from_scene(Equipment*, Scene*);
+  Q_INVOKABLE bool remove_image(Image*);
   Q_INVOKABLE bool remove_trauma(Trauma*);
   Q_INVOKABLE bool remove_trauma_profile(TraumaProfile*);
   Q_INVOKABLE bool remove_assessment(Assessment*);
@@ -370,6 +377,7 @@ signals:
   void locationMapsChanged();
   void citationMapsChanged();
   void equipmentMapsChanged();
+  void imagesChanged();
   
   //Signals the removal of an author
   //This is intended for QML to prune models when possible.
@@ -391,6 +399,7 @@ signals:
   void roleRemoved(int index);
   void sceneRemoved(int index);
   void treatmentRemoved(int index);
+  void imageRemoved(int index);
 
   //Signals that a table was Updated and which index has changed
   //This is intended for QML optimization of model cashes.
@@ -412,6 +421,7 @@ signals:
   void roleUpdated(int index);
   void sceneUpdated(int index);
   void treatmentUpdated(int index);
+  void imageUpdated(int index);
 
   void refresh();
 
@@ -436,6 +446,7 @@ private:
   void assign_scene(QSqlRecord& record, Scene& scene) const;
   void assign_role(QSqlRecord& record, Role& role) const;
   void assign_role_map(const QSqlRecord& record, RoleMap& map) const;
+  void assign_image(const QSqlRecord& record, Image& image) const;
 
 private:
   QString _db_name = "";

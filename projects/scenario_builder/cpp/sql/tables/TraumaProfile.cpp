@@ -69,6 +69,7 @@ void TraumaOccurence::clear()
 ///
 TraumaProfile::TraumaProfile(QObject* parent)
   : QObject(parent)
+  , fk_image( new Image(this))
 {
 }
 //-------------------------------------------------------------------------------
@@ -77,7 +78,8 @@ bool TraumaProfile::operator==(const TraumaProfile& rhs) const
   return name == rhs.name
     && description == rhs.description
     && traumas == rhs.traumas
-    && physiologyTree == rhs.physiologyTree;
+    && physiologyTree == rhs.physiologyTree
+    && *fk_image == *rhs.fk_image;
 }
 //-------------------------------------------------------------------------------
 bool TraumaProfile::operator!=(const TraumaProfile& rhs) const
@@ -105,6 +107,7 @@ void TraumaProfile::assign(const TraumaProfile& rhs)
   description = rhs.description;
   traumas = rhs.traumas;
   physiologyTree = rhs.physiologyTree;
+  fk_image->assign(rhs.fk_image);
 }
 //-------------------------------------------------------------------------------
 void TraumaProfile::clear()
@@ -116,6 +119,7 @@ void TraumaProfile::clear()
   qDeleteAll(traumas);
   traumas.clear();
   physiologyTree.clear();
+  fk_image->clear();
 }
 //-------------------------------------------------------------------------------
 void TraumaProfile::clear(int index)
@@ -127,6 +131,7 @@ void TraumaProfile::clear(int index)
   qDeleteAll(traumas);
   traumas.clear();
   physiologyTree.clear();
+  fk_image->clear();
 }
 //-------------------------------------------------------------------------------
 QQmlListProperty<TraumaOccurence> TraumaProfile::get_traumas()

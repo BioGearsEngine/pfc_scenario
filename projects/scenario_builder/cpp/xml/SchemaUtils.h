@@ -82,6 +82,7 @@ namespace schema {
     static auto load_citations(std::unique_ptr<schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<schema::ScenarioSchema>;
     static auto load_equipment(std::unique_ptr<schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<schema::ScenarioSchema>;
     static auto load_events(std::unique_ptr<schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<schema::ScenarioSchema>;
+    static auto load_images(QList<QString>&& known_images,  pfc::SQLite3Driver& _db, bool& wasSuccessful) -> void;
     static auto load_trauma(std::unique_ptr<schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<schema::ScenarioSchema>;
     static auto load_trauma_profiles(std::unique_ptr<schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<schema::ScenarioSchema>;
     static auto load_locations(std::unique_ptr<schema::ScenarioSchema> scenario_schema, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> std::unique_ptr<schema::ScenarioSchema>;

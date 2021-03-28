@@ -2,6 +2,7 @@
 
 Treatment::Treatment(QObject* parent)
   : QObject(parent)
+  , fk_image( new Image(this) )
 {
 }
 //-------------------------------------------------------------------------------
@@ -12,7 +13,8 @@ bool Treatment::operator==(const Treatment& rhs) const
     && description == rhs.description
     && equipment == rhs.equipment
     && citations == rhs.citations
-    && cpgs == rhs.cpgs;
+    && cpgs == rhs.cpgs
+    && *fk_image == *rhs.fk_image;
 }
 //-------------------------------------------------------------------------------
 bool Treatment::operator!=(const Treatment& rhs) const
@@ -42,6 +44,7 @@ void Treatment::assign(const Treatment& rhs)
   equipment = rhs.equipment;
   citations = rhs.citations;
   cpgs = rhs.cpgs;
+  fk_image->assign(rhs.fk_image);
 }
 //-------------------------------------------------------------------------------
 void Treatment::clear()
@@ -54,6 +57,7 @@ void Treatment::clear()
   equipment.clear();
   citations.clear();
   cpgs.clear();
+  fk_image->clear();
 }
 //-------------------------------------------------------------------------------
 void Treatment::clear(int index)
@@ -66,6 +70,7 @@ void Treatment::clear(int index)
   equipment.clear();
   citations.clear();
   cpgs.clear();
+  fk_image->clear();
 }
 //--------------------------------------------------------------------------------------------
 QQmlListProperty<Citation> Treatment::getCitations()

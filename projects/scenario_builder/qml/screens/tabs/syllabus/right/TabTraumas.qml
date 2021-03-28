@@ -2,15 +2,17 @@ import QtQuick 2.0
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
-
+import QtQuick.Dialogs 1.3
+import Qt.labs.settings 1.1
+import Qt.labs.platform 1.1 as Labs
 import "../../../common"
 
-import com.ara.pfc.ScenarioModel.SQL 1.0
+import com.ara.pfc.ScenarioModel.SQL 1.0 as PFC
 
 ScrollView {
   id : root
-  property SQLBackend backend
-  property Trauma currentTrauma
+  property PFC.SQLBackend backend
+  property PFC.Trauma currentTrauma
   property int topIndex // topIndex is the index of the top set of 4 tabs
   Layout.fillWidth : true
   Layout.fillHeight : true
@@ -19,7 +21,7 @@ ScrollView {
   contentHeight : column.height
   clip : true
 
-  Citation {
+  PFC.Citation {
     id : citation_g
   }
 
@@ -88,8 +90,28 @@ ScrollView {
         text : "Browse"
         Layout.column : 1
         Layout.row : 2
-        onClicked : { // TODO: Image Logic
+        FileDialog {
+          id : browseDialog
+          title : "Please Choose a File:"
+          visible : false
+          selectMultiple : false
+          selectExisting : true
+          nameFilters : ["Images (*.jpg *.png *.bmp)", "All files (*)"]
+          folder : Labs.StandardPaths.writableLocation(Labs.StandardPaths.PicturesLocation)
+          onAccepted : {
+            console.log("Selected %1".arg(browseDialog.fileUrls.toString()));
+            currentTrauma.image.clear();
+            currentTrauma.image.uri = browseDialog.fileUrls.toString();
+            currentTrauma.image.cache(currentTrauma.uuid);
+            update_trauma(currentTrauma);
+          }
+          onRejected : {
+            console.log("Canceled")
+          }
+        }
 
+        onClicked : {
+          browseDialog.open()
         }
       }
     }
@@ -178,11 +200,11 @@ ScrollView {
   onCurrentTraumaChanged : {
     refresh_citations()
   }
-  
+
   Connections {
     target : backend
   }
-  
+
   function update_trauma(citation) {
     if (citation) {
       root.backend.update_trauma(citation)

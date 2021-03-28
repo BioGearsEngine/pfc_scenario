@@ -41,7 +41,7 @@
 class SQLiteDriver : public ::testing::Test {
 protected:
   SQLiteDriver()
-    : _db("unittest_db.sqlite"){
+    : _db("unittest_db.sqlite") {
 
     };
   ~SQLiteDriver()
@@ -457,6 +457,121 @@ TEST_F(SQLiteDriver, AUTHOR_TEST(Equality))
   EXPECT_EQ(author_1.phone, author_2.phone);
   EXPECT_EQ(author_1.organization, author_2.organization);
 }
+//IMAGE TESTS--------------------------------------------------------------
+#ifndef DISABLE_Image_TEST
+#define IMAGE_TEST(X) X##_Image
+#else
+#define IMAGE_TEST(X) DISABLED_##X##_Image
+#endif
+TEST_F(SQLiteDriver, IMAGE_TEST(Insert))
+{
+  using namespace pfc;
+  Image image_1;
+  Image image_2;
+  Image image_3;
+
+  image_1.uri = "Solid";
+  image_1.height = 400;
+  image_1.width = 300;
+
+  image_2.uri = "Rocky";
+  image_2.height = 100;
+  image_2.width = 1080;
+
+  image_3.uri = "James";
+  image_3.height = 1920;
+  image_3.width = 3140;
+
+  EXPECT_EQ(0, _db.image_count());
+  EXPECT_TRUE(_db.update_image(&image_1));
+  EXPECT_EQ(1, _db.image_count());
+  EXPECT_TRUE(_db.update_image(&image_2));
+  EXPECT_EQ(2, _db.image_count());
+  EXPECT_TRUE(_db.update_image(&image_3));
+  EXPECT_EQ(3, _db.image_count());
+}
+
+TEST_F(SQLiteDriver, IMAGE_TEST(Select))
+{
+  using namespace pfc;
+  Image image_1;
+  Image image_2;
+
+  image_1.uri = "Solid";
+  image_1.height = 400;
+  image_1.width = 300;
+
+  image_2.uri = "Rocky";
+  image_2.height = 100;
+  image_2.width = 1080;
+
+  EXPECT_TRUE(_db.update_image(&image_1));
+  EXPECT_TRUE(_db.update_image(&image_2));
+
+  Image id;
+  Image name;
+
+  id.id = 1;
+  name.uri = "Rocky";
+
+  _db.select_image(&id);
+  _db.select_image(&name);
+
+  image_1.id = 1;
+  EXPECT_TRUE(image_1 == id);
+  image_2.id = 2;
+  EXPECT_TRUE(image_2 == name);
+}
+TEST_F(SQLiteDriver, IMAGE_TEST(Remove))
+{
+  using namespace pfc;
+  Image image_1;
+  Image image_2;
+  Image image_3;
+
+  image_1.uri = "Solid";
+  image_1.height = 400;
+  image_1.width = 300;
+
+  image_2.uri = "Rocky";
+  image_2.height = 100;
+  image_2.width = 1080;
+
+  image_3.uri = "James";
+  image_3.height = 1920;
+  image_3.width = 3140;
+
+  EXPECT_TRUE(_db.update_image(&image_1));
+  EXPECT_TRUE(_db.update_image(&image_2));
+  EXPECT_TRUE(_db.update_image(&image_3));
+  EXPECT_EQ(3, _db.image_count());
+  EXPECT_TRUE(_db.remove_image(&image_1));
+  EXPECT_TRUE(_db.remove_image(&image_2));
+  EXPECT_EQ(1, _db.image_count());
+}
+TEST_F(SQLiteDriver, IMAGE_TEST(Equality))
+{
+  using namespace pfc;
+  Image image_1;
+  Image image_2;
+
+  image_1.uri = "Solid";
+  image_1.height = 400;
+  image_1.width = 300;
+
+  image_2.uri = "Rocky";
+  image_2.height = 100;
+  image_2.width = 1080;
+
+  EXPECT_TRUE(_db.update_image(&image_1));
+  EXPECT_TRUE(_db.select_image(&image_2));
+  //EXPECT_TRUE( image_1 == image_2 );
+  EXPECT_EQ(image_1.id, image_2.id);
+  EXPECT_EQ(image_1.uri, image_2.uri);
+  EXPECT_EQ(image_1.width, image_2.width);
+  EXPECT_EQ(image_1.height, image_2.height);
+  EXPECT_EQ(image_1.format, image_2.format);
+}
 //CITATION TESTS--------------------------------------------------------------
 #ifndef DISABLE_Citation_TEST
 #define Citation_TEST(X) X##_Citation
@@ -610,20 +725,17 @@ TEST_F(SQLiteDriver, Equipment_TEST(Insert))
   equipment_1.name = "Keytar";
   equipment_1.type = 1;
   equipment_1.description = "Got a sick keytar solo later";
-  equipment_1.image = ("music stand");
-
+  equipment_1.fk_image->uri =("music stand");
 
   equipment_2.name = "piano";
   equipment_2.type = 2;
   equipment_2.description = "big instrument with keys";
-  equipment_2.image = ("piano bench");
-
+  equipment_2.fk_image->uri =("piano bench");
 
   equipment_3.name = "bagpipes";
   equipment_3.type = 3;
   equipment_3.description = "please stop playing the bagpipes";
-  equipment_3.image = ("a bladder");
-
+  equipment_3.fk_image->uri =("a bladder");
 
   EXPECT_EQ(0, _db.equipment_count());
   EXPECT_TRUE(_db.update_equipment(&equipment_1));
@@ -643,20 +755,17 @@ TEST_F(SQLiteDriver, Equipment_TEST(Select))
   equipment_1.name = "Keytar";
   equipment_1.type = 1;
   equipment_1.description = "Got a sick keytar solo later";
-  equipment_1.image = ("music stand");
-
+  equipment_1.fk_image->uri =("music stand");
 
   equipment_2.name = "piano";
   equipment_2.type = 2;
   equipment_2.description = "big instrument with keys";
-  equipment_2.image = ("piano bench");
-
+  equipment_2.fk_image->uri =("piano bench");
 
   equipment_3.name = "bagpipes";
   equipment_3.type = 3;
   equipment_3.description = "please stop playing the bagpipes";
-  equipment_3.image = ("a bladder");
-
+  equipment_3.fk_image->uri =("a bladder");
 
   EXPECT_EQ(0, _db.equipment_count());
   EXPECT_TRUE(_db.update_equipment(&equipment_1));
@@ -690,20 +799,17 @@ TEST_F(SQLiteDriver, Equipment_TEST(Remove))
   equipment_1.name = "Keytar";
   equipment_1.type = 1;
   equipment_1.description = "Got a sick keytar solo later";
-  equipment_1.image = ("music stand");
-
+  equipment_1.fk_image->uri =("music stand");
 
   equipment_2.name = "piano";
   equipment_2.type = 2;
   equipment_2.description = "big instrument with keys";
-  equipment_2.image = ("piano bench");
-
+  equipment_2.fk_image->uri =("piano bench");
 
   equipment_3.name = "bagpipes";
   equipment_3.type = 3;
   equipment_3.description = "please stop playing the bagpipes";
-  equipment_3.image = ("a bladder");
-
+  equipment_3.fk_image->uri =("a bladder");
 
   EXPECT_TRUE(_db.update_equipment(&equipment_1));
   EXPECT_TRUE(_db.update_equipment(&equipment_2));
@@ -722,8 +828,7 @@ TEST_F(SQLiteDriver, Equipment_TEST(Equality))
   equipment_1.name = "Keytar";
   equipment_1.type = 1;
   equipment_1.description = "Got a sick keytar solo later";
-  equipment_1.image = ("music stand");
- 
+  equipment_1.fk_image->uri =("music stand");
 
   equipment_2.name = "Keytar";
 
@@ -753,7 +858,6 @@ TEST_F(SQLiteDriver, Event_TEST(Insert))
   event_1.category = "DIALOG";
   event_1.fidelity = "ACTION";
 
-
   event_1.details = "People cooking and eating meat outdoors";
 
   event_2.name = "Wedding";
@@ -761,14 +865,12 @@ TEST_F(SQLiteDriver, Event_TEST(Insert))
   event_2.category = "DIALOG";
   event_2.fidelity = "ACTION";
 
-
   event_2.details = "Two people getting married";
 
   event_3.name = "Funeral";
   event_3.description = "Funeral Barbecue";
   event_3.category = "DIALOG";
   event_3.fidelity = "ACTION";
-
 
   event_3.details = "Burying a dead person";
 
@@ -792,7 +894,6 @@ TEST_F(SQLiteDriver, Event_TEST(Select))
   event_1.category = "DIALOG";
   event_1.fidelity = "ACTION";
 
-
   event_1.details = "People cooking and eating meat outdoors";
 
   event_2.name = "Wedding";
@@ -800,14 +901,12 @@ TEST_F(SQLiteDriver, Event_TEST(Select))
   event_2.category = "DIALOG";
   event_2.fidelity = "ACTION";
 
-
   event_2.details = "Two people getting married";
 
   event_3.name = "Funeral";
   event_3.description = "Funeral Barbecue";
   event_3.category = "DIALOG";
   event_3.fidelity = "ACTION";
-
 
   event_3.details = "Burying a dead person";
 
@@ -844,7 +943,6 @@ TEST_F(SQLiteDriver, Event_TEST(Remove))
   event_1.category = "DIALOG";
   event_1.fidelity = "ACTION";
 
-
   event_1.details = "People cooking and eating meat outdoors";
 
   event_2.name = "Wedding";
@@ -858,7 +956,6 @@ TEST_F(SQLiteDriver, Event_TEST(Remove))
   event_3.description = "Funeral Barbecue";
   event_3.category = "DIALOG";
   event_3.fidelity = "ACTION";
-
 
   event_3.details = "Burying a dead person";
 
@@ -880,7 +977,6 @@ TEST_F(SQLiteDriver, Event_TEST(Equality))
   event_1.description = "Barbecue Barbecue";
   event_1.category = "DIALOG";
   event_1.fidelity = "ACTION";
-
 
   event_1.details = "People cooking and eating meat outdoors";
 
@@ -906,17 +1002,14 @@ TEST_F(SQLiteDriver, Trauma_TEST(Insert))
   trauma_1.medical_name = "Keyboardus Faceus";
   trauma_1.common_name = "Keyboard Face";
   trauma_1.description = "Looks like you took a nap on your keyboard";
- 
 
   trauma_2.medical_name = "Hangnailus";
   trauma_2.common_name = "Hangnail";
   trauma_2.description = "Ouch, really stings";
-  
 
   trauma_3.medical_name = "Stubbedus Toeus";
   trauma_3.common_name = "Stubbed toe";
   trauma_3.description = "ouchie";
-
 
   EXPECT_EQ(0, _db.trauma_count());
   EXPECT_TRUE(_db.update_trauma(&trauma_1));
@@ -937,16 +1030,13 @@ TEST_F(SQLiteDriver, Trauma_TEST(Select))
   trauma_1.common_name = "Keyboard Face";
   trauma_1.description = "Looks like you took a nap on your keyboard";
 
-
   trauma_2.medical_name = "Hangnailus";
   trauma_2.common_name = "Hangnail";
   trauma_2.description = "Ouch, really stings";
 
-
   trauma_3.medical_name = "Stubbedus Toeus";
   trauma_3.common_name = "Stubbed toe";
   trauma_3.description = "ouchie";
-
 
   EXPECT_EQ(0, _db.trauma_count());
   EXPECT_TRUE(_db.update_trauma(&trauma_1));
@@ -986,16 +1076,13 @@ TEST_F(SQLiteDriver, Trauma_TEST(Remove))
   trauma_1.common_name = "Keyboard Face";
   trauma_1.description = "Looks like you took a nap on your keyboard";
 
-
   trauma_2.medical_name = "Hangnailus";
   trauma_2.common_name = "Hangnail";
   trauma_2.description = "Ouch, really stings";
 
-
   trauma_3.medical_name = "Stubbedus Toeus";
   trauma_3.common_name = "Stubbed toe";
   trauma_3.description = "ouchie";
-
 
   EXPECT_TRUE(_db.update_trauma(&trauma_1));
   EXPECT_TRUE(_db.update_trauma(&trauma_2));
@@ -1014,7 +1101,6 @@ TEST_F(SQLiteDriver, Trauma_TEST(Equality))
   trauma_1.medical_name = "Keyboardus Faceus";
   trauma_1.common_name = "Keyboard Face";
   trauma_1.description = "Looks like you took a nap on your keyboard";
-
 
   trauma_2.medical_name = "Keyboardus Faceus";
 
@@ -1038,14 +1124,11 @@ TEST_F(SQLiteDriver, TraumaProfile_TEST(Insert))
   trauma_profile_1.name = "Keyboardus Faceus";
   trauma_profile_1.description = "Looks like you took a nap on your keyboard";
 
-
   trauma_profile_2.name = "Hangnailus";
   trauma_profile_2.description = "Ouch, really stings";
 
-
   trauma_profile_3.name = "Stubbedus Toeus";
   trauma_profile_3.description = "ouchie";
-
 
   EXPECT_EQ(0, _db.trauma_profile_count());
   EXPECT_TRUE(_db.update_trauma_profile(&trauma_profile_1));
@@ -1065,14 +1148,11 @@ TEST_F(SQLiteDriver, TraumaProfile_TEST(Select))
   trauma_profile_1.name = "Keyboardus Faceus";
   trauma_profile_1.description = "Looks like you took a nap on your keyboard";
 
-
   trauma_profile_2.name = "Hangnailus";
   trauma_profile_2.description = "Ouch, really stings";
 
-
   trauma_profile_3.name = "Stubbedus Toeus";
   trauma_profile_3.description = "ouchie";
-
 
   EXPECT_EQ(0, _db.trauma_profile_count());
   EXPECT_TRUE(_db.update_trauma_profile(&trauma_profile_1));
@@ -1107,14 +1187,11 @@ TEST_F(SQLiteDriver, TraumaProfile_TEST(Remove))
   trauma_profile_1.name = "Keyboardus Faceus";
   trauma_profile_1.description = "Looks like you took a nap on your keyboard";
 
-
   trauma_profile_2.name = "Hangnailus";
   trauma_profile_2.description = "Ouch, really stings";
 
-
   trauma_profile_3.name = "Stubbedus Toeus";
   trauma_profile_3.description = "ouchie";
-
 
   EXPECT_TRUE(_db.update_trauma_profile(&trauma_profile_1));
   EXPECT_TRUE(_db.update_trauma_profile(&trauma_profile_2));
@@ -1132,7 +1209,6 @@ TEST_F(SQLiteDriver, TraumaProfile_TEST(Equality))
 
   trauma_profile_1.name = "Keyboardus Faceus";
   trauma_profile_1.description = "Looks like you took a nap on your keyboard";
-
 
   trauma_profile_2.name = "Keyboardus Faceus";
 
@@ -1265,14 +1341,11 @@ TEST_F(SQLiteDriver, Objectives_TEST(Insert))
   objective_1.name = "Kill the Troll";
   objective_1.description = "There is a troll in the forest in a great big whole who has some gold. Kill it";
 
-
   objective_2.name = "Steal the Trolls Gold";
   objective_2.description = "Gold is really dense. Its like crazy heavy bring a levetation spell.";
 
-
   objective_3.name = "Return the Gold to the Quest Giver. Kill the Quest Giver";
   objective_3.description = "If we want to keep the gold we need to steal from the quest giver, but he will need to die before we can do that.";
-
 
   EXPECT_EQ(0, _db.objective_count());
   EXPECT_TRUE(_db.update_objective(&objective_1));
@@ -1292,10 +1365,8 @@ TEST_F(SQLiteDriver, Objectives_TEST(Select))
   objective_1.name = "Kill the Troll";
   objective_1.description = "There is a troll in the forest in a great big whole who has some gold. Kill it";
 
-
   objective_2.name = "Steal the Trolls Gold";
   objective_2.description = "Gold is really dense. Its like crazy heavy bring a levetation spell.";
-
 
   objective_3.name = "Return the Gold to the Quest Giver. Kill the Quest Giver";
   objective_3.description = "If we want to keep the gold we need to steal from the quest giver, but he will need to die before we can do that.";
@@ -1332,14 +1403,12 @@ TEST_F(SQLiteDriver, Objectives_TEST(Remove))
   objective_1.name = "Kill the Troll";
   objective_1.description = "There is a troll in the forest in a great big whole who has some gold. Kill it";
 
-
   objective_2.name = "Steal the Trolls Gold";
   objective_2.description = "Gold is really dense. Its like crazy heavy bring a levetation spell.";
-;
+  ;
 
   objective_3.name = "Return the Gold to the Quest Giver. Kill the Quest Giver";
   objective_3.description = "If we want to keep the gold we need to steal from the quest giver, but he will need to die before we can do that.";
-
 
   EXPECT_TRUE(_db.update_objective(&objective_1));
   EXPECT_TRUE(_db.update_objective(&objective_2));
@@ -1357,7 +1426,6 @@ TEST_F(SQLiteDriver, Objectives_TEST(Equality))
 
   objective_1.name = "Kill the Troll";
   objective_1.description = "There is a troll in the forest in a great big whole who has some gold. Kill it";
-
 
   objective_2.name = "Kill the Troll";
 
@@ -1687,16 +1755,13 @@ TEST_F(SQLiteDriver, Treatment_TEST(Insert))
   treatment_1.common_name = "Chicken Soup";
   treatment_1.description = "Good for the soul";
 
-
   treatment_2.medical_name = "Massageus";
   treatment_2.common_name = "Massage";
   treatment_2.description = "Back rub";
 
-
   treatment_3.medical_name = "Bashus Headus againstus Wallus";
   treatment_3.common_name = "Bashing Head Against A Wall";
   treatment_3.description = "Oddly Satisfying";
- 
 
   EXPECT_EQ(0, _db.treatment_count());
   EXPECT_TRUE(_db.update_treatment(&treatment_1));
@@ -1717,16 +1782,13 @@ TEST_F(SQLiteDriver, Treatment_TEST(Select))
   treatment_1.common_name = "Chicken Soup";
   treatment_1.description = "Good for the soul";
 
-
   treatment_2.medical_name = "Massageus";
   treatment_2.common_name = "Massage";
   treatment_2.description = "Back rub";
 
-
   treatment_3.medical_name = "Bashus Headus againstus Wallus";
   treatment_3.common_name = "Bashing Head Against A Wall";
   treatment_3.description = "Oddly Satisfying";
-
 
   EXPECT_EQ(0, _db.treatment_count());
   EXPECT_TRUE(_db.update_treatment(&treatment_1));
@@ -1774,7 +1836,6 @@ TEST_F(SQLiteDriver, Treatment_TEST(Remove))
   treatment_3.common_name = "Bashing Head Against A Wall";
   treatment_3.description = "Oddly Satisfying";
 
-
   EXPECT_TRUE(_db.update_treatment(&treatment_1));
   EXPECT_TRUE(_db.update_treatment(&treatment_2));
   EXPECT_TRUE(_db.update_treatment(&treatment_3));
@@ -1792,7 +1853,6 @@ TEST_F(SQLiteDriver, Treatment_TEST(Equality))
   treatment_1.medical_name = "Soupus De Gallinus";
   treatment_1.common_name = "Chicken Soup";
   treatment_1.description = "Good for the soul";
-
 
   treatment_2.medical_name = "Soupus De Gallinus";
 
@@ -1853,8 +1913,6 @@ TEST_F(SQLiteDriver, RoleMap_TEST(Remove))
   RoleMap map_1;
   RoleMap map_2;
   RoleMap map_3;
-
-
 
   EXPECT_TRUE(_db.update_role_map(&map_1));
   EXPECT_TRUE(_db.update_role_map(&map_2));
@@ -2538,18 +2596,17 @@ TEST_F(SQLiteDriver, EquipmentMap_TEST(EquipmentMap_Insertion))
   Equipment_1.name = "Keytar";
   Equipment_1.type = 1;
   Equipment_1.description = "Got a sick keytar solo later";
-  Equipment_1.image = ("music stand");
- 
+  Equipment_1.fk_image->uri =("music stand");
+
   Equipment_2.name = "piano";
   Equipment_2.type = 2;
   Equipment_2.description = "big instrument with keys";
-  Equipment_2.image = ("piano bench");
+  Equipment_2.fk_image->uri =("piano bench");
 
   Equipment_3.name = "bagpipes";
   Equipment_3.type = 3;
   Equipment_3.description = "please stop playing the bagpipes";
-  Equipment_3.image = ("a bladder");
-
+  Equipment_3.fk_image->uri =("a bladder");
 
   _db.update_equipment(&Equipment_1);
   _db.update_equipment(&Equipment_2);
@@ -2642,17 +2699,17 @@ TEST_F(SQLiteDriver, EquipmentMap_TEST(EquipmentMap_Removal))
   equipment_1.name = "Keytar";
   equipment_1.type = 1;
   equipment_1.description = "Got a sick keytar solo later";
-  equipment_1.image = ("music stand");
+  equipment_1.fk_image->uri =("music stand");
 
   equipment_2.name = "piano";
   equipment_2.type = 2;
   equipment_2.description = "big instrument with keys";
-  equipment_2.image = ("piano bench");
+  equipment_2.fk_image->uri =("piano bench");
 
   equipment_3.name = "bagpipes";
   equipment_3.type = 3;
   equipment_3.description = "please stop playing the bagpipes";
-  equipment_3.image = ("a bladder");
+  equipment_3.fk_image->uri =("a bladder");
 
   _db.update_equipment(&equipment_1);
   _db.update_equipment(&equipment_2);
@@ -2763,17 +2820,17 @@ TEST_F(SQLiteDriver, EquipmentMap_TEST(EquipmentMap_Deletion))
   equipment_1.name = "Keytar";
   equipment_1.type = 1;
   equipment_1.description = "Got a sick keytar solo later";
-  equipment_1.image = ("music stand");
+  equipment_1.fk_image->uri =("music stand");
 
   equipment_2.name = "piano";
   equipment_2.type = 2;
   equipment_2.description = "big instrument with keys";
-  equipment_2.image = ("piano bench");
+  equipment_2.fk_image->uri =("piano bench");
 
   equipment_3.name = "bagpipes";
   equipment_3.type = 3;
   equipment_3.description = "please stop playing the bagpipes";
-  equipment_3.image = ("a bladder");
+  equipment_3.fk_image->uri =("a bladder");
 
   _db.update_equipment(&equipment_1);
   _db.update_equipment(&equipment_2);
@@ -2874,17 +2931,17 @@ TEST_F(SQLiteDriver, EquipmentMap_TEST(Scene_Deletion))
   equipment_1.name = "Keytar";
   equipment_1.type = 1;
   equipment_1.description = "Got a sick keytar solo later";
-  equipment_1.image = ("music stand");
+  equipment_1.fk_image->uri =("music stand");
 
   equipment_2.name = "piano";
   equipment_2.type = 2;
   equipment_2.description = "big instrument with keys";
-  equipment_2.image = ("piano bench");
+  equipment_2.fk_image->uri =("piano bench");
 
   equipment_3.name = "bagpipes";
   equipment_3.type = 3;
   equipment_3.description = "please stop playing the bagpipes";
-  equipment_3.image = ("a bladder");
+  equipment_3.fk_image->uri =("a bladder");
 
   _db.update_equipment(&equipment_1);
   _db.update_equipment(&equipment_2);
@@ -3453,6 +3510,7 @@ TEST_F(SQLiteDriver, LocationMap_TEST(Test_Scene_Deletion))
   _db.remove_scene(&scene_3);
   EXPECT_EQ(0, _db.location_map_count());
 }
+
 //-------------------------------------------------------------------------------
 #ifndef DISABLE_Backdoor_TEST
 #define Backdoor_TEST(X) X##_Backdoor
@@ -3525,7 +3583,6 @@ TEST_F(SQLiteDriver, Backdoor_TEST(get_events))
   event_1.category = "DIALOG";
   event_1.fidelity = "ACTION";
 
-
   event_1.details = "People cooking and eating meat outdoors";
   EXPECT_EQ(0, _db.event_count());
   EXPECT_TRUE(_db.update_event(&event_1));
@@ -3549,7 +3606,7 @@ TEST_F(SQLiteDriver, Backdoor_TEST(get_equipments))
   equipment_1.name = "Keytar";
   equipment_1.type = 1;
   equipment_1.description = "Got a sick keytar solo later";
-  equipment_1.image = "music stand";
+  equipment_1.fk_image->uri ="music stand";
 
   EXPECT_EQ(0, _db.equipment_count());
   EXPECT_TRUE(_db.update_equipment(&equipment_1));
@@ -3559,7 +3616,7 @@ TEST_F(SQLiteDriver, Backdoor_TEST(get_equipments))
   // EXPECT_TRUE(list[0]->name.compare(equipment_1.name) == 0);
   // EXPECT_TRUE(list[0]->description.compare(equipment_1.description) == 0);
   // EXPECT_TRUE(list[0]->type == equipment_1.type);
-  // EXPECT_TRUE(list[0]->image.compare(equipment_1.image) == 0);
+  // EXPECT_TRUE(list[0]->image.compare(equipment_1.fk_image) == 0);
   // EXPECT_TRUE(list[0]->citations.compare(equipment_1.citations) == 0);
 }
 TEST_F(SQLiteDriver, Backdoor_TEST(get_traumas))
@@ -3570,7 +3627,6 @@ TEST_F(SQLiteDriver, Backdoor_TEST(get_traumas))
   trauma_1.medical_name = "Keyboardus Faceus";
   trauma_1.common_name = "Keyboard Face";
   trauma_1.description = "Looks like you took a nap on your keyboard";
-
 
   EXPECT_EQ(0, _db.trauma_count());
   EXPECT_TRUE(_db.update_trauma(&trauma_1));
@@ -3589,7 +3645,7 @@ TEST_F(SQLiteDriver, Backdoor_TEST(get_trauma_profiles))
 
   trauma_profile_1.name = "Keyboardus Faceus";
   trauma_profile_1.description = "Looks like you took a nap on your keyboard";
-;
+  ;
 
   EXPECT_EQ(0, _db.trauma_profile_count());
   EXPECT_TRUE(_db.update_trauma_profile(&trauma_profile_1));
@@ -3692,8 +3748,7 @@ TEST_F(SQLiteDriver, Backdoor_TEST(get_equipment_maps))
   equipment_1.name = "Keytar";
   equipment_1.type = 1;
   equipment_1.description = "Got a sick keytar solo later";
-  equipment_1.image = "music stand";
-
+  equipment_1.fk_image->uri ="music stand";
 
   ASSERT_TRUE(_db.update_equipment(&equipment_1));
   ASSERT_TRUE(_db.select_equipment(&equipment_1));
@@ -3715,7 +3770,6 @@ TEST_F(SQLiteDriver, Backdoor_TEST(get_objectives))
   objective_1.name = "Kill the Troll";
   objective_1.description = "There is a troll in the forest in a great big whole who has some gold. Kill it";
 
-
   EXPECT_EQ(0, _db.objective_count());
   EXPECT_TRUE(_db.update_objective(&objective_1));
 
@@ -3723,7 +3777,6 @@ TEST_F(SQLiteDriver, Backdoor_TEST(get_objectives))
 
   EXPECT_TRUE(list[0]->name.compare(objective_1.name) == 0);
   EXPECT_TRUE(list[0]->description.compare(objective_1.description) == 0);
-
 }
 TEST_F(SQLiteDriver, Backdoor_TEST(get_properties))
 {
@@ -3767,7 +3820,6 @@ TEST_F(SQLiteDriver, Backdoor_TEST(get_treatments))
   treatment_1.common_name = "Chicken Soup";
   treatment_1.description = "Good for the soul";
 
-
   EXPECT_EQ(0, _db.treatment_count());
   EXPECT_TRUE(_db.update_treatment(&treatment_1));
 
@@ -3776,7 +3828,6 @@ TEST_F(SQLiteDriver, Backdoor_TEST(get_treatments))
   EXPECT_TRUE(list[0]->medical_name.compare(treatment_1.medical_name) == 0);
   EXPECT_TRUE(list[0]->description.compare(treatment_1.description) == 0);
   EXPECT_TRUE(list[0]->common_name.compare(treatment_1.common_name) == 0);
-
 }
 TEST_F(SQLiteDriver, Backdoor_TEST(get_scenes))
 {
@@ -3788,7 +3839,6 @@ TEST_F(SQLiteDriver, Backdoor_TEST(get_scenes))
   scene_1.time_of_day = 60;
   scene_1.time_in_simulation = 0;
   scene_1.weather = "Overcast";
-
 
   EXPECT_EQ(0, _db.scene_count());
   EXPECT_TRUE(_db.update_scene(&scene_1));
@@ -3803,7 +3853,6 @@ TEST_F(SQLiteDriver, Backdoor_TEST(get_scenes))
   // EXPECT_TRUE(list[0]->events.compare(scene_1.events) == 0);
   // EXPECT_TRUE(list[0]->items.compare(scene_1.items) == 0);
   // EXPECT_TRUE(list[0]->roles.compare(scene_1.roles) == 0);
-
 }
 //-------------------------------------------------------------------------------
 #ifndef DISABLE_REMOVAL_TEST
@@ -3825,13 +3874,9 @@ TEST_F(SQLiteDriver, REMOVAL_TEST(equipment_from_treatments))
   treatment_1.common_name = "Chicken Soup";
   treatment_1.description = "Good for the soul";
 
-
   treatment_6.medical_name = "Soupus De Gallinus2";
   treatment_6.common_name = "Chicken Soup2";
   treatment_6.description = "Good for the soul";
-
-
-
 
   _db.update_treatment(&treatment_1);
   _db.update_treatment(&treatment_6);
@@ -3873,11 +3918,9 @@ TEST_F(SQLiteDriver, REMOVAL_TEST(citation_from_treatments))
   treatment_1.common_name = "Chicken Soup";
   treatment_1.description = "Good for the soul";
 
-
   treatment_6.medical_name = "Soupus De Gallinus2";
   treatment_6.common_name = "Chicken Soup2";
   treatment_6.description = "Good for the soul";
-
 
   _db.update_treatment(&treatment_1);
   _db.update_treatment(&treatment_6);
@@ -3918,12 +3961,10 @@ TEST_F(SQLiteDriver, REMOVAL_TEST(citation_from_traumas))
   trauma_1.medical_name = "Keyboardus Faceus";
   trauma_1.common_name = "Keyboard Face";
   trauma_1.description = "Looks like you took a nap on your keyboard";
- 
 
   trauma_6.medical_name = "Keyboardus Faceus2";
   trauma_6.common_name = "Keyboard Face2";
   trauma_6.description = "Looks like you took a nap on your keyboard";
-
 
   _db.update_trauma(&trauma_1);
   _db.update_trauma(&trauma_6);
@@ -3964,14 +4005,12 @@ TEST_F(SQLiteDriver, REMOVAL_TEST(citation_from_equipment))
   equipment_1.name = "Keytar";
   equipment_1.type = 1;
   equipment_1.description = "Got a sick keytar solo later";
-  equipment_1.image = ("music stand");
-
+  equipment_1.fk_image->uri =("music stand");
 
   equipment_6.name = "Keytar2";
   equipment_6.type = 1;
   equipment_6.description = "Got a sick keytar solo later";
-  equipment_6.image = ("music stand");
-
+  equipment_6.fk_image->uri =("music stand");
 
   _db.update_equipment(&equipment_1);
   _db.update_equipment(&equipment_6);
@@ -4012,10 +4051,8 @@ TEST_F(SQLiteDriver, REMOVAL_TEST(citation_from_objectives))
   objective_1.name = "Kill the Troll";
   objective_1.description = "There is a troll in the forest in a great big whole who has some gold. Kill it";
 
-
   objective_6.name = "Kill the Troll2";
   objective_6.description = "There is a troll in the forest in a great big whole who has some gold. Kill it";
-
 
   _db.update_objective(&objective_1);
   _db.update_objective(&objective_6);
@@ -4056,10 +4093,8 @@ TEST_F(SQLiteDriver, REMOVAL_TEST(trauma_from_trauma_profiles))
   trauma_profile_1.name = "Keyboardus Faceus";
   trauma_profile_1.description = "Punch;Kick;Stomp;Tear";
 
-
   trauma_profile_6.name = "Keyboardus Faceus";
   trauma_profile_6.description = "Punch;Kick;Stomp;Tear";
-
 
   trauma_profile_2.description = "Punch;Stomp;Tear";
 
@@ -4068,7 +4103,6 @@ TEST_F(SQLiteDriver, REMOVAL_TEST(trauma_from_trauma_profiles))
   trauma_profile_4.description = "Stomp";
 
   trauma_profile_5.description = "";
-
 
   _db.update_trauma_profile(&trauma_profile_1);
   _db.update_trauma_profile(&trauma_profile_6);
@@ -4188,7 +4222,7 @@ TEST_F(SerializationTest, Serialization_TEST(Equipment))
   EXPECT_EQ(0, temp[0]->name.compare("Equipment_Name"));
   EXPECT_EQ(0, temp[0]->description.compare("Equipment_Description"));
   EXPECT_EQ(0, temp[0]->type);
-  EXPECT_EQ(0, temp[0]->image.compare("Equipment_Image"));
+  EXPECT_EQ(0, temp[0]->fk_image->uri.compare("Equipment_Image"));
 }
 TEST_F(SerializationTest, Serialization_TEST(Event))
 {
@@ -4200,7 +4234,6 @@ TEST_F(SerializationTest, Serialization_TEST(Event))
   EXPECT_EQ(0, temp[0]->category.compare("ACTION"));
   EXPECT_EQ(0, temp[0]->fidelity.compare("LOW"));
   EXPECT_EQ(0, temp[0]->details.compare("Event_Details"));
-
 }
 TEST_F(SerializationTest, Serialization_TEST(Trauma))
 {
@@ -4212,7 +4245,6 @@ TEST_F(SerializationTest, Serialization_TEST(Trauma))
   EXPECT_EQ(0, temp[0]->description.compare("Trauma_Description"));
   EXPECT_EQ(1, temp[0]->lower_bound);
   EXPECT_EQ(2, temp[0]->upper_bound);
-  
 }
 TEST_F(SerializationTest, Serialization_TEST(TraumaProfile))
 {
@@ -4220,8 +4252,6 @@ TEST_F(SerializationTest, Serialization_TEST(TraumaProfile))
   EXPECT_EQ(1, _db.trauma_profile_count());
   auto temp = _db.trauma_profiles();
   EXPECT_EQ(0, temp[0]->name.compare("Trauma_Set_Name"));
-
-
 }
 TEST_F(SerializationTest, Serialization_TEST(Locations))
 {
@@ -4237,7 +4267,6 @@ TEST_F(SerializationTest, Serialization_TEST(Objective))
   auto temp = _db.objectives();
   EXPECT_EQ(0, temp[0]->name.compare("Objective_Name"));
   EXPECT_EQ(0, temp[0]->description.compare("Objective_Description"));
-
 }
 TEST_F(SerializationTest, Serialization_TEST(Role))
 {
@@ -4254,7 +4283,7 @@ TEST_F(SerializationTest, Serialization_TEST(Scene))
   auto temp = _db.scenes();
   EXPECT_EQ(0, temp[0]->name.compare("Scene_Name"));
   EXPECT_EQ(0, temp[0]->description.compare("Scene_Description"));
-  EXPECT_EQ(0, temp[0]->time_of_day );
+  EXPECT_EQ(0, temp[0]->time_of_day);
   EXPECT_EQ(0, temp[0]->time_in_simulation);
 }
 TEST_F(SerializationTest, Serialization_TEST(Treatment))
@@ -4265,5 +4294,4 @@ TEST_F(SerializationTest, Serialization_TEST(Treatment))
   EXPECT_EQ(0, temp[0]->medical_name.compare("Treatment_Medical_Name"));
   EXPECT_EQ(0, temp[0]->common_name.compare("Treatment_Common_Name"));
   EXPECT_EQ(0, temp[0]->description.compare("Treatment_Description"));
-
 }

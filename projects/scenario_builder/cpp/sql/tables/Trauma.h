@@ -33,6 +33,7 @@ struct Trauma : public QObject {
   Q_PROPERTY(float min MEMBER lower_bound NOTIFY lowerBoundChanged)
   Q_PROPERTY(float max MEMBER upper_bound NOTIFY upperBoundChanged)
   Q_PROPERTY(Treatment* treatment MEMBER fk_treatment NOTIFY treatmentChanged)
+  Q_PROPERTY(Image* treatment MEMBER fk_image NOTIFY imageChanged)
 
 signals:
   void idChanged();
@@ -44,6 +45,7 @@ signals:
   void lowerBoundChanged();
   void upperBoundChanged();
   void treatmentChanged();
+  void imageChanged();
 
 public:
   int32_t id = -1;
@@ -55,6 +57,7 @@ public:
   float lower_bound = 0;
   float upper_bound = 1;
   Treatment* fk_treatment;
+  Image* fk_image ;
 
   Trauma(QObject* parent = nullptr);
 

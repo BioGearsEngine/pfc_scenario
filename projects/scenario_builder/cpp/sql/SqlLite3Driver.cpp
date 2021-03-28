@@ -184,6 +184,7 @@ bool SQLite3Driver::initialize_db()
     { tables[EVENT_MAPS], sqlite3::create_event_maps_table },
     { tables[EQUIPMENTS], sqlite3::create_equipment_table },
     { tables[EQUIPMENT_MAPS], sqlite3::create_equipment_map_table },
+    { tables[IMAGES], sqlite3::create_images_table},
     { tables[TRAUMAS], sqlite3::create_traumas_table },
     { tables[TRAUMA_PROFILES], sqlite3::create_trauma_profiles_table },
     { tables[LOCATIONS], sqlite3::create_locations_table },
@@ -1300,6 +1301,137 @@ bool SQLite3Driver::remove_citation_from_scene(Citation* citation, Scene* scene)
   map.fk_citation->id = citation->id;
   return remove_citation_map_by_fk(&map);
 }
+//----------------------------IMAGE-------------------------------------------------
+inline void SQLite3Driver::assign_image(const QSqlRecord& record, Image& image) const
+{
+  image.id = record.value(IMAGES_ID).toInt();
+  image.uuid = record.value(IMAGES_UUID).toString();
+  image.uri = record.value(IMAGES_URI).toString();
+  image.width = record.value(IMAGES_WIDTH).toInt();
+  image.height = record.value(IMAGES_HEIGHT).toInt();
+  image.format = record.value(IMAGES_FORMAT).toString();
+}
+
+int SQLite3Driver::image_count() const
+{
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+
+    QSqlQuery query { QSqlDatabase::database(_db_name) };
+    query.prepare(sqlite3::count_images);
+    query.exec();
+    if (query.next()) {
+      auto record = query.record();
+
+      return record.value(0).toInt();
+    }
+  }
+  return -1;
+}
+QList<Image*> SQLite3Driver::images() const
+{
+  QList<Image*> _images;
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+
+    QSqlQuery query { QSqlDatabase::database(_db_name) };
+    query.prepare(sqlite3::select_all_images);
+    query.exec();
+    while (query.next()) {
+      auto image = std::make_unique<Image>();
+      auto record = query.record();
+
+      assign_image(record, *image);
+      _images.push_back(image.release());
+    }
+  }
+  return _images;
+}
+
+bool SQLite3Driver::select_image(Image* image) const
+{
+
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
+    QSqlRecord record;
+    if (image->id != -1) {
+      query.prepare(sqlite3::select_image_by_id);
+      query.bindValue(":id", image->id);
+    } else if (!image->uri.isEmpty()) {
+      query.prepare(sqlite3::select_image_by_uri);
+      query.bindValue(":uri", image->uri);
+    } else {
+      qWarning() << "Provided Image has no id, name, or uuid and one is required";
+      return false;
+    }
+    if (query.exec()) {
+      while (query.next()) {
+        record = query.record();
+        assign_image(record, *image);
+        return true;
+      }
+    } else {
+      qWarning() << "select_image" << query.lastError();
+    }
+    return false;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::update_image(Image* image)
+{
+
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query { QSqlDatabase::database(_db_name) };
+    if (-1 != image->id) {
+      query.prepare(sqlite3::update_image_by_id);
+      query.bindValue(":id", image->id);
+    } else if (!image->uri.isEmpty()) {
+      query.prepare(sqlite3::insert_or_update_images);
+    }
+    if (image->uuid == "") {
+      image->uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
+    }
+    query.bindValue(":uuid", image->uuid);
+    query.bindValue(":uri", image->uri);
+    query.bindValue(":width", image->width);
+    query.bindValue(":height", image->height);
+    query.bindValue(":format", image->format);
+
+    if (!query.exec()) {
+      qWarning() << "update_image" << query.lastError();
+      return false;
+    }
+    if (-1 == image->id) {
+      const auto r = select_image(image);
+      emit imageUpdated(image->id);
+      emit emit imagesChanged();
+      return r;
+    }
+    emit imageUpdated(image->id);
+    emit emit imagesChanged();
+    return true;
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
+bool SQLite3Driver::remove_image(Image* image)
+{
+  if (QSqlDatabase::database(_db_name).isOpen()) {
+    QSqlQuery query(QSqlDatabase::database(_db_name));
+    if (select_image(image)) {
+      query.prepare(sqlite3::delete_image_by_id);
+      query.bindValue(":id", image->id);
+      if (!query.exec()) {
+        qWarning() << "remove_image" << query.lastError();
+        return false;
+      }
+      imageRemoved(image->id);
+    } else {
+      return false;
+    }
+  }
+  qWarning() << "No Database connection";
+  return false;
+}
 //----------------------------INJURY-------------------------------------------------
 inline void SQLite3Driver::assign_trauma(const QSqlRecord& record, Trauma& trauma) const
 {
@@ -2059,23 +2191,31 @@ inline void SQLite3Driver::assign_equipment(const QSqlRecord& record, Equipment&
   for (auto citation_id : record.value(EQUIPMENT_CITATIONS).toString().split(';')) {
     if (!citation_id.isEmpty()) {
       citation = new Citation(&equipment);
-      citation->id += citation_id.toInt();
+      citation->id = citation_id.toInt();
       if (select_citation(citation)) {
         equipment.citations.push_back(citation);
       }
     }
   }
-  equipment.image = record.value(EQUIPMENT_IMAGE).toString();
+
+  if (!record.value(EQUIPMENT_IMAGE).toString().isEmpty()) {
+    auto image = new Image(&equipment);
+    image->id = record.value(EQUIPMENT_IMAGE).toInt();
+    if (select_image(image)) {
+      equipment.fk_image->assign(image);
+    }
+  }
+
   equipment.parametersFromString(record.value(EQUIPMENT_PROPERTIES).toString());
 
-  equipment.idChanged(equipment.id );
-  equipment.uuidChanged(equipment.uuid );
-  equipment.nameChanged(equipment.name );
+  equipment.idChanged(equipment.id);
+  equipment.uuidChanged(equipment.uuid);
+  equipment.nameChanged(equipment.name);
   equipment.typeChanged(equipment.type);
-  equipment.summaryChanged(equipment.summary );
-  equipment.descriptionChanged(equipment.description );
+  equipment.summaryChanged(equipment.summary);
+  equipment.descriptionChanged(equipment.description);
   equipment.citationsChanged();
-  equipment.imageChanged(equipment.image );
+  equipment.imageChanged();
   equipment.propertiesChanged();
   equipment.refreshed();
 }
@@ -2205,7 +2345,7 @@ bool SQLite3Driver::update_equipment(Equipment* equipment)
     }
 
     query.bindValue(":citations", citations);
-    query.bindValue(":image", equipment->image);
+    query.bindValue(":image", equipment->fk_image->id);
     query.bindValue(":properties", equipment->parametersToString());
 
     if (!query.exec()) {
@@ -4710,6 +4850,32 @@ QQmlListProperty<Scene> SQLite3Driver::getScenes() const
                                  nullptr,
                                  &CountScene,
                                  &AtScene,
+                                 nullptr);
+}
+//-------------------------------------------------------------------------------
+auto CountImage(QQmlListProperty<Image>* list) -> int
+{
+  auto sceneList = reinterpret_cast<QList<Image*>*>(list->data);
+  if (sceneList) {
+    return sceneList->length();
+  }
+  return 0;
+}
+auto AtImage(QQmlListProperty<Image>* list, int index) -> Image*
+{
+  auto sceneList = reinterpret_cast<QList<Image*>*>(list->data);
+  if (sceneList) {
+    return sceneList->at(index);
+  }
+  return nullptr;
+}
+QQmlListProperty<Image> SQLite3Driver::getImages() const
+{
+
+  return QQmlListProperty<Image>(nullptr, new QList<Image*>(images()),
+                                 nullptr,
+                                 &CountImage,
+                                 &AtImage,
                                  nullptr);
 }
 //-------------------------------------------------------------------------------

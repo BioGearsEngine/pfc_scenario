@@ -2,15 +2,17 @@ import QtQuick 2.0
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
-
+import QtQuick.Dialogs 1.3
+import Qt.labs.settings 1.1
+import Qt.labs.platform 1.1 as Labs
 import "../../../common"
 
-import com.ara.pfc.ScenarioModel.SQL 1.0
+import com.ara.pfc.ScenarioModel.SQL 1.0 as PFC
 
 ScrollView {
   id : root
-  property SQLBackend backend
-  property Treatment currentTreatment
+  property PFC.SQLBackend backend
+  property PFC.Treatment currentTreatment
   property int topIndex // topIndex is the index of the top set of 4 tabs
   Layout.fillWidth : true
   Layout.fillHeight : true
@@ -19,10 +21,10 @@ ScrollView {
   contentHeight : column.height
   clip : true
 
-  Equipment {
+  PFC.Equipment {
     id : equipment_g
   }
-  Citation {
+  PFC.Citation {
     id : citation_g
   }
 
@@ -90,8 +92,28 @@ ScrollView {
         text : "Browse"
         Layout.column : 1
         Layout.row : 2
-        onClicked : { // TODO: Image Logic
+        FileDialog {
+          id : browseDialog
+          title : "Please Choose a File:"
+          visible : false
+          selectMultiple : false
+          selectExisting : true
+          nameFilters : ["Images (*.jpg *.png *.bmp)", "All files (*)"]
+          folder : Labs.StandardPaths.writableLocation(Labs.StandardPaths.PicturesLocation)
+          onAccepted : {
+            console.log("Selected %1".arg(browseDialog.fileUrls.toString()));
+            currentTreatment.image.clear();
+            currentTreatment.image.uri = browseDialog.fileUrls.toString();
+            currentTreatment.image.cache(currentTreatment.uuid);
+            update_treatment(currentTreatment);
+          }
+          onRejected : {
+            console.log("Canceled")
+          }
+        }
 
+        onClicked : {
+          browseDialog.open()
         }
       }
     }
@@ -122,7 +144,7 @@ ScrollView {
       currentIndex : 0
       property var treatmentEquipment: []
       property var allEquipment: []
-      
+
       CrossReferenceEquipment {
         id : equipmentList
 
@@ -227,7 +249,7 @@ ScrollView {
   Connections {
     target : backend
   }
-  
+
   function update_treatment(treatment) {
     if (root.backend && treatment) {
       root.backend.update_treatment(treatment)

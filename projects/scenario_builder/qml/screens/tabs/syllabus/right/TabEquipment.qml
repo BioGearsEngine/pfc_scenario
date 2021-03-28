@@ -2,27 +2,29 @@ import QtQuick 2.0
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
-
+import QtQuick.Dialogs 1.3
+import Qt.labs.settings 1.1
+import Qt.labs.platform 1.1 as Labs
 import "../../../common"
 import "components"
 
-import com.ara.pfc.ScenarioModel.SQL 1.0
+import com.ara.pfc.ScenarioModel.SQL 1.0 as PFC
 
 ScrollView {
   id : root
-  property SQLBackend backend
-  property Equipment currentEquipment
+  property PFC.SQLBackend backend
+  property PFC.Equipment currentEquipment
   property int topIndex // topIndex is the index of the top set of 4 tabs
 
   contentWidth : column.width
   contentHeight : column.height
   clip : true
 
-  Citation {
+  PFC.Citation {
     id : citation_g
   }
 
-  EquipmentParameter {
+  PFC.EquipmentParameter {
     id : equipment_parameter_g
   }
 
@@ -84,6 +86,7 @@ ScrollView {
       Image {
         id : imageView
         Layout.alignment : Qt.AlignHCenter | Qt.AlignVCenter
+        property int updateCounter : 0
         Layout.fillWidth : true
         Layout.fillHeight : false
         Layout.preferredHeight : 150
@@ -92,7 +95,7 @@ ScrollView {
         Layout.row : 0
         Layout.rowSpan : 2
         fillMode : Image.PreserveAspectFit
-        source : "qrc:/img/equipment_placeholder.png"
+        source : updateCounter, (currentEquipment) ? currentEquipment.image.uri :"qrc:/img/equipment_placeholder.png"
       }
 
       Button {
@@ -100,7 +103,31 @@ ScrollView {
         text : "Browse"
         Layout.column : 1
         Layout.row : 2
-        onClicked : { // TODO: Image Logic
+        FileDialog {
+          id : browseDialog
+          title : "Please Choose a File:"
+          visible : false
+          selectMultiple : false
+          selectExisting : true
+          nameFilters : ["Images (*.jpg *.png *.bmp)", "All files (*)"]
+          folder : Labs.StandardPaths.writableLocation(Labs.StandardPaths.PicturesLocation)
+          onAccepted : {
+            console.log("Selected %1".arg(browseDialog.fileUrls.toString()));
+            currentEquipment.image.clear();
+            currentEquipment.image.uri = browseDialog.fileUrls.toString();
+            currentEquipment.image.cache(currentEquipment.uuid);
+            backend.update_image(currentEquipment.image);
+            update_equipment(currentEquipment);
+            imageView.updateCounter++
+            
+          }
+          onRejected : {
+            console.log("Canceled")
+          }
+        }
+
+        onClicked : {
+          browseDialog.open()
         }
       }
     }
@@ -163,7 +190,7 @@ ScrollView {
       onParameterAdded : {
         var parms = currentEquipment.parameters;
         parms.push(equipment_parameter_g.make());
-        parms[parms.length-1].name = "field %1".arg(parms.length)
+        parms[parms.length - 1].name = "field %1".arg(parms.length);
         update_equipment(currentEquipment);
         model = currentEquipment.parameters;
       }

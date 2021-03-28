@@ -416,6 +416,7 @@ EquipmentParameter* EquipmentParameter::fromString(QString parameter_string, QOb
 //!
 Equipment::Equipment(QObject* parent)
   : QObject(parent)
+  , fk_image( new Image(this) )
 {
 }
 //--------------------------------------------------------------------------------------------
@@ -431,7 +432,7 @@ bool Equipment::operator==(const Equipment& rhs) const
     && summary == rhs.summary
     && description == rhs.description
     && citations == rhs.citations
-    && image == rhs.image
+    && *fk_image == *rhs.fk_image
     && parameters == rhs.parameters; //TODO: We should iterate over each one and do a comparison.
 }
 //--------------------------------------------------------------------------------------------
@@ -477,7 +478,10 @@ void Equipment::assign(const Equipment& rhs)
     citations.push_back(Citation::make());
     citations.back()->assign(citation);
   }
-  image = rhs.image;
+  fk_image->assign(rhs.fk_image);
+
+  qDeleteAll(parameters);
+  parameters.clear();
   for (auto parameter : rhs.parameters) {
     parameters.push_back(EquipmentParameter::make());
     parameters.back()->assign(parameter);
@@ -494,7 +498,7 @@ void Equipment::clear()
   description.clear();
   qDeleteAll(citations);
   citations.clear();
-  image.clear();
+  fk_image->clear();
   qDeleteAll(parameters);
   parameters.clear();
 }
@@ -508,7 +512,7 @@ void Equipment::clear(int index)
   type = -1;
   summary = QString("summary for equipment %1.").arg(index);
   citations.clear();
-  image.clear();
+  fk_image->clear();
   parameters.clear();
 }
 //--------------------------------------------------------------------------------------------
