@@ -184,7 +184,7 @@ bool SQLite3Driver::initialize_db()
     { tables[EVENT_MAPS], sqlite3::create_event_maps_table },
     { tables[EQUIPMENTS], sqlite3::create_equipment_table },
     { tables[EQUIPMENT_MAPS], sqlite3::create_equipment_map_table },
-    { tables[IMAGES], sqlite3::create_images_table},
+    { tables[IMAGES], sqlite3::create_images_table },
     { tables[TRAUMAS], sqlite3::create_traumas_table },
     { tables[TRAUMA_PROFILES], sqlite3::create_trauma_profiles_table },
     { tables[LOCATIONS], sqlite3::create_locations_table },
@@ -631,6 +631,7 @@ bool SQLite3Driver::clear_db()
     QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS event_maps;");
     QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS equipments;");
     QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS equipment_map;");
+    QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS images;");
     QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS traumas;");
     QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS trauma_profiles;");
     QSqlDatabase::database(_db_name).exec("DROP TABLE IF EXISTS locations;");
@@ -670,6 +671,9 @@ bool SQLite3Driver::clear_table(enum SQLite3Driver::Sqlite3Table t)
       break;
     case EVENTS:
       query.bindValue(":table", tables[EVENTS]);
+      break;
+    case IMAGES:
+      query.bindValue(":table", tables[IMAGES]);
       break;
     case TRAUMAS:
       query.bindValue(":table", tables[TRAUMAS]);

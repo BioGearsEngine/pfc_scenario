@@ -7,11 +7,12 @@
 #include <string>
 
 #include <QDebug>
-#include <QString>
-#include <QUuid>
+#include <QDir>
 #include <QImage>
 #include <QRegularExpression>
-
+#include <QString>
+#include <QUrl>
+#include <QUuid>
 
 namespace pfc {
 
@@ -460,7 +461,9 @@ namespace schema {
                                                               make_citation_ref_list(input->citations, _db),
                                                               make_equipment_properties_list(input->parameters));
     equipment->type(input->type);
-    equipment->image(make_string(input->fk_image->uri));
+    QDir baseDir("tmp");
+    QString localFile = QUrl(input->fk_image->uri).toLocalFile();
+    equipment->image(make_string(baseDir.relativeFilePath(localFile)));
 
     return equipment;
   }
@@ -634,14 +637,16 @@ namespace schema {
       temp.description = QString::fromStdString(equipment.description());
       temp.type = equipment.type().get();
       if (equipment.image().present() && !equipment.image().get().empty()) {
-        temp.fk_image->uri = equipment.image().get().c_str();
+        QDir cwd("../");
+        QString equipment_image = QUrl::fromLocalFile(cwd.absoluteFilePath(equipment.image().get().c_str())).toString();
+        temp.fk_image->uri = equipment_image;
         if (!_db.select_image(temp.fk_image)) {
           _db.update_image(temp.fk_image);
-        } 
-      } else {    
+        }
+      } else {
         QImage qimage { ":/img/equipment_placeholder.png" };
         temp.fk_image->uri = "qrc:/img/equipment_placeholder.png";
-        temp.fk_image->format= "png";
+        temp.fk_image->format = "png";
         temp.fk_image->width = qimage.width();
         temp.fk_image->height = qimage.height();
         if (!_db.select_image(temp.fk_image)) {
@@ -707,26 +712,31 @@ namespace schema {
     return scenario_schema;
   }
   //-----------------------------------------------------------------------------
-  auto PFC::load_images(QList<QString>&& uris,  pfc::SQLite3Driver& _db, bool& wasSuccessful) -> void{
-    for ( auto& uri : uris){
-      
+  auto PFC::load_images(QList<QString>&& uris, pfc::SQLite3Driver& _db, bool& wasSuccessful) -> void
+  {
+    QRegularExpression rx(R"(.*\.(.*))");
+    for (auto uri : uris) {
+
+      QDir cwd(".");
+      uri = "tmp/" + uri;
+
       Image image;
-      QImage qimage { uri };
-      QRegularExpression rx(R"(.*\.(.*))");
+      QImage qimage;
       QRegularExpressionMatch match;
 
-      QStringList list;
-      if ( !qimage.isNull() ) {
-        image.uri = uri;
+      qDebug() << uri;
+      qDebug() << QUrl::fromLocalFile(cwd.absoluteFilePath(uri)).toString();
+      if (qimage.load(uri) && !qimage.isNull()) {
+        image.uri = QUrl::fromLocalFile(cwd.absoluteFilePath(uri)).toString();
         image.width = qimage.width();
         image.height = qimage.height();
         match = rx.match(uri);
-        if ( match.hasMatch() ) {
+        if (match.hasMatch()) {
           image.format = match.captured(1);
         } else {
           image.format = "UNKNOWN";
         }
-        _db.update_image(&image);
+        wasSuccessful &= _db.update_image(&image);
       }
     }
   }

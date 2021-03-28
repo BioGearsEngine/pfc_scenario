@@ -166,25 +166,30 @@ bool Serializer::save_as(const QString& filename) const
     mz_zip_writer_add_buffer(writer, (void*)std::get<2>(tuple), (int32_t)std::get<1>(tuple), &file_info);
   }
 
-  QDirIterator images("/tmp/images", QDirIterator::NoIteratorFlags);
+  QDirIterator images("tmp/images", QDirIterator::NoIteratorFlags);
+  QDir baseDir { "tmp" };
   while (images.hasNext()) {
     QFile file(images.next());
     QFileInfo info { file };
-    file_info.filename = file.fileName().toStdString().c_str();
-    file_info.uncompressed_size = info.size();
-    QByteArray data = file.readAll();
-    mz_zip_writer_add_buffer(writer, (void*)data.data(), (int32_t)data.size(), &file_info);
+    file_info.filename = baseDir.relativeFilePath(info.absoluteFilePath()).toStdString().c_str();
+    file.open(QIODevice::ReadOnly);
+    if (std::string("") != file_info.filename && file.isOpen()) {
+      file_info.uncompressed_size = info.size();
+      QByteArray data = file.readAll();
+      mz_zip_writer_add_buffer(writer, (void*)data.data(), (int32_t)data.size(), &file_info);
+    }
   }
 
-  QDirIterator physiolgoy ("/temp/physiology/", QDirIterator::NoIteratorFlags);
+  QDirIterator physiolgoy("temp/physiology/", QDirIterator::NoIteratorFlags);
   while (physiolgoy.hasNext()) {
     QFile file(physiolgoy.next());
     QFileInfo info { file };
-
-    file_info.filename = file.fileName().toStdString().c_str();
-    file_info.uncompressed_size = info.size();
-    QByteArray data = file.readAll();
-    mz_zip_writer_add_buffer(writer, (void*)data.data(), (int32_t)data.size(), &file_info);
+    file.open(QIODevice::ReadOnly);
+    if (std::string("") != file_info.filename && file.isOpen()) {
+      file_info.uncompressed_size = info.size();
+      QByteArray data = file.readAll();
+      mz_zip_writer_add_buffer(writer, (void*)data.data(), (int32_t)data.size(), &file_info);
+    }
   }
 
   mz_zip_writer_close(writer);
@@ -300,6 +305,9 @@ bool Serializer::load(const QString& filename)
     return err;
   }
 
+  bool imagesLoadded = true; 
+  pfc::schema::PFC::load_images(std::move(_known_images), scratch_db, imagesLoadded);
+
   QString fallback = QDir::currentPath();
   QDir::setCurrent(QStringLiteral("tmp/xsd"));
   //TODO: Restore MSDL Support
@@ -372,7 +380,7 @@ bool Serializer::load(const QString& filename)
 
       try { // If the parsing fails this prints out every error
         auto scenario_schema = pfc::schema::Scenario(i_stream);
-        bool successful = false;
+        bool successful = imagesLoadded;
         scratch_db.ready();
         scenario_schema = pfc::schema::PFC::load_authors(std::move(scenario_schema), scratch_db, successful);
         scratch_db.ready();
@@ -386,9 +394,6 @@ bool Serializer::load(const QString& filename)
           update_property(&scratch_db, "scenario_limitations", scenario_schema->summary().limitations()->c_str());
         } else {
           throw std::runtime_error("Failed to load properties");
-        }
-        if (successful) {
-          pfc::schema::PFC::load_images(std::move(_known_images), scratch_db, successful);
         }
         if (successful) {
           scenario_schema = pfc::schema::PFC::load_assessments(std::move(scenario_schema), scratch_db, successful);
