@@ -1,4 +1,4 @@
-#ifndef PFC_SCENARIO_BUILDER_SQL_SQLLITE3_TABLES_ROLEMAP_H
+ #ifndef PFC_SCENARIO_BUILDER_SQL_SQLLITE3_TABLES_ROLEMAP_H
 #define PFC_SCENARIO_BUILDER_SQL_SQLLITE3_TABLES_ROLEMAP_H
 
 /**************************************************************************************

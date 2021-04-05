@@ -88,7 +88,7 @@ bool TraumaProfile::operator!=(const TraumaProfile& rhs) const
 }
 //-------------------------------------------------------------------------------
 TraumaProfile* TraumaProfile::make()
-{
+{                                 
   return new TraumaProfile();
 }
 //-------------------------------------------------------------------------------

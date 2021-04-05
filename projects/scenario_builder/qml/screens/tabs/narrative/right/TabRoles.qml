@@ -52,6 +52,7 @@ ColumnLayout {
   function update_role(role) {
     root.backend.update_role(role)
   }
+
   StackLayout {
     id : role_stack
     currentIndex : 1
@@ -129,7 +130,7 @@ ColumnLayout {
           id : full_role
           color : Material.color(Material.BlueGrey)
           border.color : "steelblue"
-          height : full_role_title_text.height + full_role_value_text.height + full_role_trauma_text.height
+          height : full_role_title_text.height + full_role_description_text.height + full_role_trauma_text.height
           anchors {
             left : parent.left;
             right : parent.right;
@@ -171,7 +172,7 @@ ColumnLayout {
             color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
           }
           Label {
-            id : full_role_value_label
+            id : full_role_description_label
             anchors.top : full_role_title_text.bottom
             anchors.left : parent.left
             anchors.leftMargin : 5
@@ -184,13 +185,14 @@ ColumnLayout {
             elide : Text.ElideRight
           }
           Text {
-            id : full_role_value_text
-            anchors.left : full_role_value_label.right
+            id : full_role_description_text
+            anchors.left : full_role_description_label.right
             anchors.right : parent.right
-            anchors.top : full_role_value_label.top
+            anchors.top : full_role_description_label.top
             anchors.leftMargin : 5
             text : (allRolesList.roles[index]) ? allRolesList.roles[index].description : "Description of the role"
-            wrapMode : Text.WordWrap
+            wrapMode : (enabled) ?Text.WordWrap : Text.NoWrap 
+            elide    : (!enabled)? Text.ElideRight : Text.ElideNone
             font.weight : Font.Bold
             font.pointSize : 10
             enabled : false
@@ -198,7 +200,7 @@ ColumnLayout {
           }
           Label {
             id : full_role_trauma_label
-            anchors.top : full_role_value_text.bottom
+            anchors.top : full_role_description_text.bottom
             anchors.left : parent.left
             anchors.leftMargin : 5
             font.weight : Font.Bold
@@ -214,7 +216,7 @@ ColumnLayout {
             anchors.left : full_role_trauma_label.right
             anchors.top : full_role_trauma_label.top
             anchors.leftMargin : 5
-            text : (allRolesList.roles[index]) ? allRolesList.roles[index].trauma_profile.name : "Description of the role"
+            text : (allRolesList.roles[index]) ? allRolesList.roles[index].traumaProfile.name : "Description of the profile"
             wrapMode : Text.WordWrap
             font.weight : Font.Bold
             font.pointSize : 10
@@ -229,7 +231,7 @@ ColumnLayout {
               enabled : true
             }
             PropertyChanges {
-              target : full_role_value_text;
+              target : full_role_description_text;
               enabled : true
             }
             PropertyChanges {
@@ -241,7 +243,7 @@ ColumnLayout {
               enabled : true
             }
             PropertyChanges {
-              target : full_role_value_label;
+              target : full_role_description_label;
               enabled : true
             }
             PropertyChanges {
@@ -345,7 +347,7 @@ ColumnLayout {
           id : role
           color : 'transparent'
           border.color : "steelblue"
-          height : role_title_text.height + role_value_text.height
+          height : role_title_text.height + role_description_text.height + role_physiology_text.height
           anchors {
             left : parent.left;
             right : parent.right;
@@ -387,7 +389,7 @@ ColumnLayout {
             color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
           }
           Label {
-            id : role_value_label
+            id : role_description_label
             anchors.top : role_title_text.bottom
             anchors.left : parent.left
             anchors.leftMargin : 5
@@ -400,35 +402,69 @@ ColumnLayout {
             elide : Text.ElideRight
           }
           Text {
-            id : role_value_text
+            id : role_description_text
             anchors.top : role_title_text.bottom
-            anchors.left : role_value_label.right
+            anchors.left : role_description_label.right
             anchors.right : parent.right
-
+            wrapMode : (enabled) ? Text.WordWrap   : Text.NoWrap 
+            elide    : (!enabled)? Text.ElideRight : Text.ElideNone
             anchors.leftMargin : 2
             font.pointSize : 10
             text : (rolesInSceneList.rolesMap[index]) ? rolesInSceneList.rolesMap[index].role.description : "Undefined"
             enabled : false
             color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
+
+          }
+          Label {
+            id : role_physiology_label
+            anchors.top : role_description_text.bottom
+            anchors.left : parent.left
+            anchors.leftMargin : 5
+            font.weight : Font.Bold
+            font.pointSize : 10
+            width : 100
+            text : "Trauma Profile: "
+            enabled : false
+            color : enabled ? Material.accentColor : Material.secondaryTextColor
             elide : Text.ElideRight
           }
-
+          Text {
+            id : role_physiology_text
+            anchors.left : role_physiology_label.right
+            anchors.top : role_physiology_label.top
+            anchors.leftMargin : 5
+            
+            text : (rolesInSceneList.rolesMap[index]) ? rolesInSceneList.rolesMap[index].role.traumaProfile.name : "Undefined"
+            wrapMode : Text.WordWrap
+            font.weight : Font.Bold
+            font.pointSize : 10
+            enabled : false
+            color : enabled ? Material.primaryTextColor : Material.secondaryTextColor
+          }
           states : State {
             name : "Selected"
-            PropertyChanges {
-              target : role_title_text;
-              enabled : true
-            }
-            PropertyChanges {
-              target : role_value_text;
-              enabled : true
-            }
             PropertyChanges {
               target : role_title_label;
               enabled : true
             }
             PropertyChanges {
-              target : role_value_label;
+              target : role_title_text;
+              enabled : true
+            }
+            PropertyChanges {
+              target : role_description_label;
+              enabled : true
+            }
+            PropertyChanges {
+              target : role_description_text;
+              enabled : true
+            }
+           PropertyChanges {
+              target : role_physiology_label;
+              enabled : true
+            }
+            PropertyChanges {
+              target : role_physiology_text;
               enabled : true
             }
           }

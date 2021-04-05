@@ -67,18 +67,25 @@ ColumnLayout {
     label : "Trauma Profile"
     textRole : "name"
     currentIndex : {
-      var index = 0;
       if (currentRoleMap) {
-        if (currentRoleMap.category && category.model) {
-          for (var ii = 0; ii < category.model.length; ii++) {
-            if (category.model[ii] == currentRoleMap.category) {
+        console.log( "Finding TruamaProfile for %1".arg(currentRoleMap.role.name))
+        console.log( "  %1 = %2".arg(currentRoleMap.role.traumaProfile.name).arg(currentRoleMap.role.traumaProfile.trauma_profile_id))
+        
+        if (currentRoleMap.role.traumaProfile.trauma_profile_id && traumaProfile.model) {
+          for (var ii = 0; ii < traumaProfile.model.length; ii++) {
+            console.log( "    Is it %1:%2".arg(traumaProfile.model[ii].name).arg(traumaProfile.model[ii].trauma_profile_id))
+            if (traumaProfile.model[ii].trauma_profile_id == currentRoleMap.role.traumaProfile.trauma_profile_id) {
+              console.log( "    Yes")
               return ii;
+            } else {
+              console.log( "    No")
             }
           }
         }
       }
       return 0
     }
+    //|| currentRoleMap.role.traumaProfile.trauma_profile_id != traumaProfile.model[traumaProfile.currentIndex].trauma_profile_id
     model : ListModel {
       ListElement {
             name : "No Profiles Defined"
@@ -107,6 +114,7 @@ ColumnLayout {
         anchors.right : section_1.right
         text : 'Save'
         onClicked : {
+          console.log("%1 %2".arg(currentRoleMap.role.traumaProfile.trauma_profile_id).arg(traumaProfile.model[traumaProfile.currentIndex].trauma_profile_id))
           if ( currentRoleMap.role.name != name.text 
           || currentRoleMap.role.description != description.text
           || currentRoleMap.role.traumaProfile.trauma_profile_id != traumaProfile.model[traumaProfile.currentIndex].trauma_profile_id
