@@ -195,7 +195,7 @@ EquipmentParameter::EquipmentParameter(QString parameter_string, QObject* parent
   //Error 3: Any Param that doesn't properly parse
 
   //Examples
-  //NAME:STRING
+  //NAME: eType = TypeFromString(parts[1].trimmed());
   //SEVERITY:RANGE,MIN:INTEGRAL:6,MAX:INTEGRAL:6
   //TYPE:ENUM,STRING,INTEGRAL,ENUM
   //VOLUME:SCALAR,UNIT:ENUM,ml:eOption,l:eOption,gal:eoption - VOLUME:SCALAR,UNIT:ENUM:ml|l|gal (Second form needs patching to be supported)
@@ -204,7 +204,11 @@ EquipmentParameter::EquipmentParameter(QString parameter_string, QObject* parent
     auto parts = param.split(':');
     if (eType == Sustain::UNKNOWN) {
       name = parts[0];
-      eType = TypeFromString(parts[1].trimmed());
+      if ( parts.size() > 0){
+        eType = TypeFromString(parts[1].trimmed());
+      } else {
+        eType = Sustain::STRING;
+      }
 
     } else if (eType == Sustain::ENUM) {
       enumOptions.push_back(param.trimmed());
@@ -483,7 +487,7 @@ void Equipment::assign(const Equipment& rhs)
   qDeleteAll(parameters);
   parameters.clear();
   for (auto parameter : rhs.parameters) {
-    parameters.push_back(EquipmentParameter::make());
+    parameters.push_back(EquipmentParameter::make(this));
     parameters.back()->assign(parameter);
   }
 }
@@ -556,7 +560,7 @@ int Equipment::CountCitations(QQmlListProperty<Citation>* list)
 {
   Equipment* EquipmentOccurance = qobject_cast<Equipment*>(list->object);
   if (EquipmentOccurance) {
-    return EquipmentOccurance->citations.count();
+    return EquipmentOccurance->citations.count();                                                                               
   }
   return 0;
 }

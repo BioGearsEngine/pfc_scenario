@@ -153,7 +153,7 @@ Page {
               text : model.index + 1
             }
             Text {
-              text : model.path
+              text :  model.path.replace(/file:\/\/(\/(\w:)){0,1}/i, '$2');
               color : (index == listArea.currentIndex) ? Material.accentColor : Material.secondaryTextColor
             }
           }
