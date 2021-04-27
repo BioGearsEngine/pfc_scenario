@@ -135,13 +135,13 @@ ScrollView {
           refresh_all_citations()
         }
         onCitationAdded : {
-          currentObjective.citations.push(citation_g.make());
-          currentObjective.citations[currentObjective.citations.length - 1].assign(citation);
-          update_trauma(currentObjective);
+          currentTrauma.citations.push(citation_g.make());
+          currentTrauma.citations[currentTrauma.citations.length - 1].assign(citation);
+          update_trauma(currentTrauma);
           refresh_citations()
         }
         onCitationRemoved : {
-          currentObjective.removeCitation(index);
+          currentTrauma.removeCitation(index);
           refresh_citations()
         }
       }
@@ -153,9 +153,9 @@ ScrollView {
           refresh_all_citations()
         }
         onCitationAdded : {
-          currentObjective.citations.push(citation_g.make());
-          currentObjective.citations[currentObjective.citations.length - 1].assign(citation);
-          update_trauma(currentObjective);
+          currentTrauma.citations.push(citation_g.make());
+          currentTrauma.citations[currentTrauma.citations.length - 1].assign(citation);
+          update_trauma(currentTrauma);
           refresh_citations();
           citationStack.currentIndex = 0;
         }
