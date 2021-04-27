@@ -69,7 +69,7 @@ if(WIN32 AND NOT UNIX)
         message(\" Running windeployqt for \${CMAKE_INSTALL_PREFIX}/bin/ScenarioBuilder.exe\")
         execute_process(
             COMMAND ${CMAKE_COMMAND} -E env \"${Qt5_ROOT_DIR}/bin/windeployqt\" --no-compiler-runtime --list mapping \"\${CMAKE_INSTALL_PREFIX}/bin/$<TARGET_FILE_NAME:ScenarioBuilder>\"
-            WORKING_DIRECTORY  \"\${CMAKE_INSTALL_PREFIX}/bin/\"
+            WORKING_DIRECTORY  \"\${CMAKE_INSTALL_PREFIX}/\"
             OUTPUT_VARIABLE _output
             ERROR_VARIABLE  _error
             OUTPUT_STRIP_TRAILING_WHITESPACE
@@ -86,23 +86,22 @@ if(WIN32 AND NOT UNIX)
 
   install(DIRECTORY 
       ${Qt5_ROOT_DIR}/plugins/
-      DESTINATION bin/
+      DESTINATION plugins/
       FILE_PERMISSIONS OWNER_READ GROUP_READ WORLD_READ
       FILES_MATCHING 
       PATTERN "*.dll"
       )   
 install(DIRECTORY 
-    ${Qt5_ROOT_DIR}/qml/Qt 
-    ${Qt5_ROOT_DIR}/qml/QtCanvas3D
-    ${Qt5_ROOT_DIR}/qml/QtCharts 
-    ${Qt5_ROOT_DIR}/qml/QtDataVisualization
-    ${Qt5_ROOT_DIR}/qml/QtGraphicalEffects
-    ${Qt5_ROOT_DIR}/qml/QtQuick 
-    ${Qt5_ROOT_DIR}/qml/QtQuick.2 
-    ${Qt5_ROOT_DIR}/qml/QtQMl 
-    DESTINATION bin/
+    ${Qt5_ROOT_DIR}/qml/
+    DESTINATION qml/
     FILE_PERMISSIONS OWNER_READ GROUP_READ WORLD_READ
-    )   
+    )
+
+    install( FILES
+    ${Qt5_ROOT_DIR}/bin/qt.conf
+    DESTINATION bin/
+    PERMISSIONS OWNER_READ GROUP_READ WORLD_READ
+    )  
 
 else()
   set(CPACK_STRIP_FILES "")
